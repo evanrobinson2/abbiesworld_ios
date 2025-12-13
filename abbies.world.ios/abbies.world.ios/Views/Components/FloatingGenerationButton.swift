@@ -17,34 +17,41 @@ struct FloatingGenerationButton: View {
             HStack {
                 Spacer()
                 Button(action: action) {
-                    Image(systemName: "sparkles")
-                        .font(.system(size: 24, weight: .bold))
-                        .foregroundColor(.white)
-                        .frame(width: 64, height: 64)
-                        .background(buttonColor)
-                        .clipShape(Circle())
-                        .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
-                        .overlay(
-                            Circle()
-                                .stroke(Color.black, lineWidth: 2)
-                        )
+                    ZStack {
+                        // White circle background
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: 128, height: 128)
+                        
+                        // Video player
+                        VideoPlayerView(videoName: videoName, isLooping: true)
+                            .frame(width: 128, height: 128)
+                            .clipShape(Circle())
+                        
+                        // Thick black outline
+                        Circle()
+                            .stroke(Color.black, lineWidth: 4)
+                            .frame(width: 128, height: 128)
+                    }
+                    .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
                 }
                 .disabled(!isReady)
                 .opacity(isReady ? 1.0 : 0.6)
+                .frame(width: 128, height: 128, alignment: .bottomTrailing)
                 .padding(.trailing, 24)
                 .padding(.bottom, 24)
             }
         }
     }
     
-    private var buttonColor: Color {
+    private var videoName: String {
         switch state {
         case .notReady:
-            return Color(red: 1.0, green: 0.7, blue: 0.2) // Orange
+            return "robot_waving_white_background"
         case .ready:
-            return Color(red: 0.2, green: 0.8, blue: 0.3) // Green
+            return "robot_paint_brush_waving"
         case .generating:
-            return Color(red: 0.4, green: 0.5, blue: 0.9) // Blue
+            return "robot_running_treadmill"
         }
     }
     
