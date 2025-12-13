@@ -57,7 +57,7 @@ class MainViewModel: ObservableObject {
     @Published var errorMessage: String?
     
     // Image generation error state
-    @Published var showImageGenerationError = false
+    @Published var imageGenerationError: String? = nil
     
     // Toast notifications
     @Published var toastMessage: ToastMessage?
@@ -69,6 +69,8 @@ class MainViewModel: ObservableObject {
         setupCategoryMapping()
         setupSSEConnection()
         setupButtonStateObserver()
+        // Initialize music service (loads playlist on init)
+        _ = MusicService.shared
     }
     
     // Computed property to check if all selections are ready
@@ -472,6 +474,9 @@ class MainViewModel: ObservableObject {
             return
         }
         
+        // Clear any previous error state
+        clearImageGenerationError()
+        
         // Get selected ingredients
         let friend = friendItems[friendIndex]
         let outfit = outfitItems[outfitIndex]
@@ -738,6 +743,8 @@ class MainViewModel: ObservableObject {
                     if let url = URL(string: fullURL),
                        let image = try? await ImageCache.shared.loadImage(from: url) {
                         await MainActor.run {
+                            // Clear any error state when we get a successful image
+                            self.imageGenerationError = nil
                             self.previewImage = image
                             print("✅ Preview image updated: \(status)")
                             
@@ -839,11 +846,17 @@ class MainViewModel: ObservableObject {
             print("   Error: \(error.localizedDescription)")
         }
         
-        // Show error dialog (non-blocking)
-        showImageGenerationError = true
+        // Show error in preview panel
+        imageGenerationError = error.localizedDescription
+        
+        // Load broken.png as preview image
+        if let brokenImage = UIImage(named: "broken") {
+            previewImage = brokenImage
+        }
     }
     
-    func dismissImageGenerationError() {
-        showImageGenerationError = false
+    func clearImageGenerationError() {
+        imageGenerationError = nil
+        previewImage = nil
     }
 }

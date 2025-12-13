@@ -12,6 +12,7 @@ struct MainView: View {
     @State private var showGamesDialog = false
     @State private var showWaypointGame = false
     @State private var showSettings = false
+    @State private var isDrawerOpen = false
     
     var body: some View {
         GeometryReader { geometry in
@@ -29,9 +30,9 @@ struct MainView: View {
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .clipped()
                 
-                // Main Content - Two Column Layout (header removed, UI re-centered)
-                HStack(spacing: 0) {
-                    // Column 1 (~55%) - Expanded carousel rows
+                // Main Content - Full-width carousels with overlay drawer
+                ZStack(alignment: .trailing) {
+                    // Carousels - Full width
                     CombinedColumnView(
                         friendIndex: $viewModel.friendIndex,
                         outfitIndex: $viewModel.outfitIndex,
@@ -43,25 +44,59 @@ struct MainView: View {
                         onOutfitSelected: { viewModel.selectOutfit($0) },
                         onPlaceSelected: { viewModel.selectPlace($0) }
                     )
-                    .frame(width: geometry.size.width * 0.55)
+                    .frame(width: geometry.size.width)
+                    .opacity(isDrawerOpen ? 0.7 : 1.0)
+                    .blur(radius: isDrawerOpen ? 2 : 0)
+                    .animation(.spring(response: 0.3, dampingFraction: 0.8), value: isDrawerOpen)
                     
-                    // Column 2 (~45%) - Preview & History
-                    RightColumnView(
-                        viewModel: viewModel,
-                        historyImages: viewModel.historyImages,
-                        isLoading: viewModel.isLoadingHistory
-                    )
-                    .frame(width: geometry.size.width * 0.45)
+                    // Backdrop dimming overlay
+                    if isDrawerOpen {
+                        Color.black.opacity(0.2)
+                            .ignoresSafeArea()
+                            .onTapGesture {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                    isDrawerOpen = false
+                                }
+                            }
+                    }
+                    
+                    // Drawer - Overlay from right
+                    DrawerView(
+                        isOpen: $isDrawerOpen,
+                        width: geometry.size.width * 0.45
+                    ) {
+                        RightColumnView(
+                            viewModel: viewModel,
+                            historyImages: viewModel.historyImages,
+                            isLoading: viewModel.isLoadingHistory
+                        )
+                    }
+                    
+                    // Drawer handle - Always visible
+                    DrawerHandle(isOpen: $isDrawerOpen)
+                        .position(
+                            x: geometry.size.width - 20,
+                            y: geometry.size.height / 2
+                        )
+                        .zIndex(isDrawerOpen ? 1 : 2)
+                    
+                    // Floating generation button - Visible when drawer closed
+                    if !isDrawerOpen {
+                        FloatingGenerationButton(
+                            state: viewModel.buttonState,
+                            action: {
+                                viewModel.startImageGeneration()
+                                // Auto-open drawer when generation starts
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                                    isDrawerOpen = true
+                                }
+                            }
+                        )
+                        .zIndex(1)
+                    }
                 }
             }
             .overlay {
-                // Image generation error dialog
-                if viewModel.showImageGenerationError {
-                    ImageGenerationErrorView {
-                        viewModel.dismissImageGenerationError()
-                    }
-                }
-                
                 // Other error messages (for non-image-generation errors)
                 if let errorMessage = viewModel.errorMessage {
                     VStack {
@@ -138,11 +173,42 @@ struct MainView: View {
                     }
                 )
             }
+            .onChange(of: showWaypointGame) { oldValue, newValue in
+                // Coordinate music with game lifecycle
+                MusicService.shared.setGameActive(newValue)
+            }
         }
         .ignoresSafeArea()
         .toast($viewModel.toastMessage)
         .onAppear {
             viewModel.loadData()
+        }
+        .gesture(
+            // Right-edge swipe to open drawer
+            DragGesture(minimumDistance: 20)
+                .onEnded { value in
+                    // Only trigger if swiping from right edge (within 30px)
+                    let startX = value.startLocation.x
+                    let screenWidth = UIScreen.main.bounds.width
+                    
+                    if startX > screenWidth - 30 && value.translation.width < -50 {
+                        // Swipe from right edge leftward - open drawer
+                        withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                            isDrawerOpen = true
+                        }
+                    }
+                }
+        )
+        .onChange(of: viewModel.buttonState) { oldValue, newValue in
+            // Auto-open drawer when generation completes (transitions from generating to ready)
+            if case .generating = oldValue, case .ready = newValue {
+                // Check if we have a new preview image
+                if viewModel.previewImage != nil {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.8)) {
+                        isDrawerOpen = true
+                    }
+                }
+            }
         }
     }
 }
@@ -272,6 +338,7 @@ struct CombinedColumnView: View {
                 )
             }
             .padding(.leading, 16)
+            .padding(.trailing, 16)
             .padding(.top, 16)
             .padding(.bottom, 16)
         }
@@ -388,11 +455,50 @@ struct RightColumnCalculations {
             VStack(spacing: 16) {
                 // Preview Image and Generation Button with rounded container
                 VStack(spacing: 16) {
-                    ZStack {
+                    ZStack(alignment: .topTrailing) {
                         if let image = viewModel.previewImage {
-                            Image(uiImage: image)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
+                            // Show image or error state
+                            if viewModel.imageGenerationError != nil {
+                                // Error state: show broken image with message
+                                VStack(spacing: 16) {
+                                    Image(uiImage: image)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .frame(maxWidth: 200, maxHeight: 200)
+                                        .overlay(
+                                            RoundedRectangle(cornerRadius: 12)
+                                                .stroke(Color.black, lineWidth: 4)
+                                        )
+                                        .cornerRadius(12)
+                                    
+                                    VStack(spacing: 8) {
+                                        Text("Something went wrong.")
+                                            .font(.system(size: 18, weight: .bold))
+                                            .foregroundColor(.primary)
+                                        
+                                        Text("Try again later")
+                                            .font(.system(size: 14))
+                                            .foregroundColor(.secondary)
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                                
+                                // Red X in top right corner
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.system(size: 28))
+                                    .foregroundColor(.red)
+                                    .background(
+                                        Circle()
+                                            .fill(Color.white)
+                                            .frame(width: 32, height: 32)
+                                    )
+                                    .padding(8)
+                            } else {
+                                // Normal preview image
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            }
                         } else {
                             Text("Preview Image")
                                 .foregroundColor(.gray)

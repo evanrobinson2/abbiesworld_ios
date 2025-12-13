@@ -28,9 +28,9 @@ struct WaypointNavigationView: View {
             
             VStack(spacing: 0) {
                 // Destination Banner
-                if let bannerImage = viewModel.gameState.destinationBannerImage {
+                if let moonbaseIcon = viewModel.gameState.moonbaseImage {
                     ZStack {
-                        Image(uiImage: bannerImage)
+                        Image(uiImage: moonbaseIcon)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 150)

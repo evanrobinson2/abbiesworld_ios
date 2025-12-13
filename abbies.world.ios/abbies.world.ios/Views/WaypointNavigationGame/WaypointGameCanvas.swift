@@ -191,16 +191,16 @@ class WaypointGameScene: SKScene {
         
         guard let moonbaseImage = viewModel.gameState.moonbaseImage else { return }
         
+        // Find the final waypoint (BASE) position
+        let finalWaypoint = viewModel.gameState.waypoints.first { $0.label == "BASE" && $0.isTraversable }
+        guard let basePosition = finalWaypoint?.position else { return }
+        
         let texture = SKTexture(image: moonbaseImage)
         moonbaseNode = SKSpriteNode(texture: texture)
         moonbaseNode?.setScale(0.08)
-        // Position in upper right corner (matches original HTML: x = canvas.width - w - 5, y = 5)
-        // In SpriteKit, position is center of node, so we need to account for that
-        let scaledWidth = moonbaseNode!.size.width
-        let scaledHeight = moonbaseNode!.size.height
-        moonbaseNode?.position = CGPoint(x: size.width - scaledWidth/2 - 5,
-                                         y: scaledHeight/2 + 5)
-        moonbaseNode?.zPosition = 2
+        // Position at the final waypoint (BASE) location on the map
+        moonbaseNode?.position = basePosition
+        moonbaseNode?.zPosition = 3 // Above waypoints but below buggy
         addChild(moonbaseNode!)
     }
     
