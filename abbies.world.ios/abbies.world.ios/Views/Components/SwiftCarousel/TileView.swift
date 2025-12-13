@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct TileView: View {
     let item: CarouselItem
@@ -109,8 +110,8 @@ struct TileView: View {
             
             Task {
                 do {
-                    let (data, _) = try await URLSession.shared.data(from: url)
-                    if let image = UIImage(data: data) {
+                    // Use ImageCache instead of direct URLSession - it handles API keys automatically
+                    if let image = try await ImageCache.shared.loadImage(from: url) {
                         await MainActor.run {
                             self.loadedImage = image
                             self.isLoading = false
@@ -121,8 +122,16 @@ struct TileView: View {
                             self.isLoading = false
                             self.loadError = true
                         }
+                        // Fall back to bundle loading if URL fails
+                        if let bundleImage = loadBundleImage() {
+                            await MainActor.run {
+                                self.loadedImage = bundleImage
+                                self.loadError = false
+                            }
+                        }
                     }
                 } catch {
+                    print("❌ TileView: Error loading '\(item.displayName)': \(error.localizedDescription)")
                     await MainActor.run {
                         self.isLoading = false
                         self.loadError = true

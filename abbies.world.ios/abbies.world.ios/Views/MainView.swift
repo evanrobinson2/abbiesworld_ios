@@ -15,7 +15,6 @@ struct MainView: View {
     
     var body: some View {
         GeometryReader { geometry in
-            let _ = print("MainView rendering - size: \(geometry.size)")
             ZStack {
                 // Background Image - loads from Flask server with caching, fallback to bundled
                 Group {
@@ -56,7 +55,14 @@ struct MainView: View {
                 }
             }
             .overlay {
-                // Error message
+                // Image generation error dialog
+                if viewModel.showImageGenerationError {
+                    ImageGenerationErrorView {
+                        viewModel.dismissImageGenerationError()
+                    }
+                }
+                
+                // Other error messages (for non-image-generation errors)
                 if let errorMessage = viewModel.errorMessage {
                     VStack {
                         Text(errorMessage)
@@ -136,7 +142,6 @@ struct MainView: View {
         .ignoresSafeArea()
         .toast($viewModel.toastMessage)
         .onAppear {
-            print("MainView: onAppear called")
             viewModel.loadData()
         }
     }
@@ -203,24 +208,8 @@ struct LeftColumnCalculations {
         }
         
         func printDebug() {
-            print("=== LEFT COLUMN CALCULATIONS ===")
-            print("Total Height: \(totalHeight)")
-            print("Outer Top Padding: \(outerTopPadding)")
-            print("Outer Bottom Padding: \(outerBottomPadding)")
-            print("Outer Padding Total: \(outerPaddingTotal)")
-            print("Spacing Between Carousels: \(spacingBetweenCarousels)")
-            print("Number of Spacings: \(numberOfSpacings)")
-            print("Total Spacing: \(totalSpacing)")
-            print("Carousel Padding (per carousel): \(carouselPadding)")
-            print("Number of Carousels: \(numberOfCarousels)")
-            print("Total Carousel Padding: \(totalCarouselPadding)")
-            print("Total Reserved: \(totalReserved)")
-            print("Available for Frames: \(availableForFrames)")
-            print("Carousel Frame Height: \(carouselFrameHeight)")
-            print("Carousel Total Height (frame + padding): \(carouselTotalHeight)")
-            print("Calculated Total Height: \(calculatedTotalHeight)")
-            print("================================")
-    }
+            // Debug calculations removed - uncomment if needed for debugging
+        }
 }
 
 struct CombinedColumnView: View {
@@ -285,9 +274,6 @@ struct CombinedColumnView: View {
             .padding(.leading, 16)
             .padding(.top, 16)
             .padding(.bottom, 16)
-            .onAppear {
-                calculations.printDebug()
-            }
         }
     }
 }
@@ -386,22 +372,7 @@ struct RightColumnCalculations {
         }
         
         func printDebug() {
-            print("=== RIGHT COLUMN CALCULATIONS ===")
-            print("Total Height: \(totalHeight)")
-            print("Outer Padding (top + bottom): \(outerPadding * 2)")
-            print("Spacing Between Sections: \(spacingBetweenSections)")
-            print("Section Padding (per section): \(sectionPadding)")
-            print("Number of Sections: \(numberOfSections)")
-            print("Total Section Padding: \(totalSectionPadding)")
-            print("Total Reserved: \(totalReserved)")
-            print("Carousel Frame Height (from left): \(carouselFrameHeight)")
-            print("History Frame Height: \(historyFrameHeight)")
-            print("History Total Height (frame + padding): \(historyTotalHeight)")
-            print("Available for Preview: \(availableForPreview)")
-            print("Preview Frame Height: \(previewFrameHeight)")
-            print("Preview Total Height (frame + padding): \(previewTotalHeight)")
-            print("Calculated Total Height: \(calculatedTotalHeight)")
-            print("=================================")
+            // Debug calculations removed - uncomment if needed for debugging
         }
     }
     
@@ -462,7 +433,6 @@ struct RightColumnCalculations {
                             config: historyCarouselConfig,
                             onSelect: { carouselItem in
                                 // Handle history item selection if needed
-                                print("History item selected: \(carouselItem.displayName)")
                             }
                         )
                     }
@@ -475,10 +445,6 @@ struct RightColumnCalculations {
                 )
             }
             .padding(16)
-            .onAppear {
-                print("🔍 RightColumnView appeared - printing right column calculations...")
-                rightCalculations.printDebug()
-            }
         }
     }
 }

@@ -93,14 +93,31 @@ class ImageCache {
     // MARK: - Private Methods
     
     private func downloadAndCache(url: URL) async throws -> UIImage? {
-        let (data, response) = try await URLSession.shared.data(from: url)
+        var request = URLRequest(url: url)
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
+        let (data, response) = try await URLSession.shared.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
             throw URLError(.badServerResponse)
         }
         
+        guard httpResponse.statusCode == 200 else {
+            // Provide more specific error information
+            if httpResponse.statusCode == 404 {
+                print("⚠️ ImageCache: File not found (404): \(url.absoluteString)")
+                throw URLError(.fileDoesNotExist)
+            } else if httpResponse.statusCode == 401 {
+                print("⚠️ ImageCache: Unauthorized (401): \(url.absoluteString) - Check API key")
+                throw URLError(.userAuthenticationRequired)
+            } else {
+                print("⚠️ ImageCache: Server error (\(httpResponse.statusCode)): \(url.absoluteString)")
+                throw URLError(.badServerResponse)
+            }
+        }
+        
         guard let image = UIImage(data: data) else {
+            print("⚠️ ImageCache: Invalid image data: \(url.absoluteString)")
             throw URLError(.cannotDecodeContentData)
         }
         

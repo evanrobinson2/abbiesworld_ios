@@ -87,6 +87,7 @@ class AssetsService: ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
@@ -104,6 +105,7 @@ class AssetsService: ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
@@ -123,6 +125,7 @@ class AssetsService: ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
@@ -142,6 +145,7 @@ class AssetsService: ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
         
         return URLSession.shared.dataTaskPublisher(for: request)
             .map(\.data)
@@ -179,10 +183,8 @@ class AssetsService: ObservableObject {
                 },
                 receiveValue: { [weak self] assets in
                     self?.assetsByType = assets
-                    print("✅ AssetsService: Loaded \(assets.values.reduce(0) { $0 + $1.count }) assets across \(assets.count) types")
-                    for (type, typeAssets) in assets {
-                        print("   \(type): \(typeAssets.count) assets")
-                    }
+                    let total = assets.values.reduce(0) { $0 + $1.count }
+                    print("✅ AssetsService: Loaded \(total) assets across \(assets.count) types")
                 }
             )
             .store(in: &cancellables)

@@ -128,7 +128,9 @@ struct WaypointNavigationView: View {
             viewModel.cleanup()
         }
         .onChange(of: viewModel.gameState.gameComplete) { oldValue, newValue in
+            print("🎉 WaypointNavigationView: gameComplete changed from \(oldValue) to \(newValue)")
             if newValue {
+                print("   ✅ Showing victory sequence")
                 showVictory = true
                 onComplete?()
             }

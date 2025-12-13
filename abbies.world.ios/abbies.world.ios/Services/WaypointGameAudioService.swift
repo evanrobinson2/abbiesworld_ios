@@ -17,9 +17,10 @@ class WaypointGameAudioService: NSObject, ObservableObject, AVAudioPlayerDelegat
     private var fadeOutTimer: Timer?
     
     // Asset base URL - uses centralized ServerConfig
+    // Uses Assets API route for nested directory structure
     private var assetBaseURL: String {
         let base = ServerConfig.shared.baseURL
-        return "\(base)/static/minigame_waypoint"
+        return "\(base)/static/assets/minigames/waypoint"
     }
     
     override init() {
@@ -52,7 +53,36 @@ class WaypointGameAudioService: NSObject, ObservableObject, AVAudioPlayerDelegat
         
         Task {
             do {
-                let (data, _) = try await URLSession.shared.data(from: musicURL)
+                var request = URLRequest(url: musicURL)
+                ServerConfig.shared.addAPIKeyHeader(to: &request)
+                
+                let (data, response) = try await URLSession.shared.data(for: request)
+                
+                // Validate response is actually audio
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("❌ Invalid response type for background music")
+                    return
+                }
+                
+                guard httpResponse.statusCode == 200 else {
+                    print("❌ Server returned status \(httpResponse.statusCode) for background music")
+                    if let errorBody = String(data: data, encoding: .utf8) {
+                        print("   Response body: \(errorBody.prefix(200))")
+                    }
+                    return
+                }
+                
+                // Check content type is audio
+                let contentType = httpResponse.value(forHTTPHeaderField: "Content-Type") ?? ""
+                if !contentType.hasPrefix("audio/") && !contentType.isEmpty {
+                    print("⚠️ Warning: Content-Type is '\(contentType)', expected audio/*")
+                }
+                
+                // Validate data size (audio files should be substantial)
+                guard data.count > 1024 else {
+                    print("❌ Audio data too small (\(data.count) bytes), likely an error response")
+                    return
+                }
                 
                 await MainActor.run {
                     do {
@@ -61,10 +91,16 @@ class WaypointGameAudioService: NSObject, ObservableObject, AVAudioPlayerDelegat
                         self.backgroundMusicPlayer?.volume = 0.5
                         self.backgroundMusicPlayer?.prepareToPlay()
                         self.backgroundMusicPlayer?.play()
-                        print("✅ Background music started")
+                        print("✅ Background music started (size: \(data.count) bytes)")
                     } catch {
                         print("⚠️ Failed to create audio player: \(error)")
                         print("⚠️ Error code: \((error as NSError).code)")
+                        print("⚠️ Error domain: \((error as NSError).domain)")
+                        print("⚠️ Data size: \(data.count) bytes")
+                        // Log first few bytes to see if it's HTML/JSON error
+                        if let preview = String(data: data.prefix(100), encoding: .utf8) {
+                            print("⚠️ Data preview: \(preview)")
+                        }
                     }
                 }
             } catch {
@@ -117,7 +153,36 @@ class WaypointGameAudioService: NSObject, ObservableObject, AVAudioPlayerDelegat
         
         Task {
             do {
-                let (data, _) = try await URLSession.shared.data(from: musicURL)
+                var request = URLRequest(url: musicURL)
+                ServerConfig.shared.addAPIKeyHeader(to: &request)
+                
+                let (data, response) = try await URLSession.shared.data(for: request)
+                
+                // Validate response is actually audio
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("❌ Invalid response type for victory music")
+                    return
+                }
+                
+                guard httpResponse.statusCode == 200 else {
+                    print("❌ Server returned status \(httpResponse.statusCode) for victory music")
+                    if let errorBody = String(data: data, encoding: .utf8) {
+                        print("   Response body: \(errorBody.prefix(200))")
+                    }
+                    return
+                }
+                
+                // Check content type is audio
+                let contentType = httpResponse.value(forHTTPHeaderField: "Content-Type") ?? ""
+                if !contentType.hasPrefix("audio/") && !contentType.isEmpty {
+                    print("⚠️ Warning: Content-Type is '\(contentType)', expected audio/*")
+                }
+                
+                // Validate data size
+                guard data.count > 1024 else {
+                    print("❌ Audio data too small (\(data.count) bytes), likely an error response")
+                    return
+                }
                 
                 await MainActor.run {
                     do {
@@ -135,9 +200,14 @@ class WaypointGameAudioService: NSObject, ObservableObject, AVAudioPlayerDelegat
                             self.victoryMusicPlayer2 = player
                         }
                         
-                        print("✅ Victory music track \(trackNumber) started")
+                        print("✅ Victory music track \(trackNumber) started (size: \(data.count) bytes)")
                     } catch {
                         print("⚠️ Failed to create victory music player: \(error)")
+                        print("⚠️ Error code: \((error as NSError).code)")
+                        print("⚠️ Data size: \(data.count) bytes")
+                        if let preview = String(data: data.prefix(100), encoding: .utf8) {
+                            print("⚠️ Data preview: \(preview)")
+                        }
                     }
                 }
             } catch {

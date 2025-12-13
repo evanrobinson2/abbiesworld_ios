@@ -16,7 +16,7 @@ struct CarouselView: View {
     
     // Convert Ingredient to CarouselItem for SwiftCarousel
     private var carouselItems: [CarouselItem] {
-        items.map { ingredient in
+        return items.map { ingredient in
             CarouselItem(
                 id: ingredient.id,
                 imageURL: ingredient.imageURL,

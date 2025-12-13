@@ -56,6 +56,9 @@ class MainViewModel: ObservableObject {
     @Published var isCreatingImage = false
     @Published var errorMessage: String?
     
+    // Image generation error state
+    @Published var showImageGenerationError = false
+    
     // Toast notifications
     @Published var toastMessage: ToastMessage?
     
@@ -130,7 +133,6 @@ class MainViewModel: ObservableObject {
             .receive(on: DispatchQueue.main)
             .sink { _ in
                 // Config updated - could reload relevant data if needed
-                print("📥 MainViewModel: Config updated notification received")
             }
             .store(in: &cancellables)
     }
@@ -138,24 +140,20 @@ class MainViewModel: ObservableObject {
     private func handleSSEEvent(_ event: SSEEvent) {
         switch event.type {
         case .connected:
-            print("✅ MainViewModel: SSE connected")
             showToast("Connected to server", type: .success)
             
         case .reloadCache:
-            print("🔄 MainViewModel: Cache reload requested")
             showToast("Cache cleared", type: .info)
             // Cache is already cleared by SSEService
             // Reload images that might be cached
             self.loadBackgroundImage()
             
         case .refreshIngredients:
-            print("🔄 MainViewModel: Ingredients refresh requested")
             showToast("Refreshing ingredients...", type: .info)
             loadIngredients()
             
         case .backgroundChanged:
             if let backgroundURL = event.data["background_url"] as? String {
-                print("🖼️ MainViewModel: Background changed to: \(backgroundURL)")
                 showToast("Background updated", type: .success)
                 loadBackgroundFromURL(backgroundURL)
             }
@@ -163,7 +161,6 @@ class MainViewModel: ObservableObject {
         case .maintenance:
             let enabled = event.data["enabled"] as? Bool ?? true
             let message = event.data["message"] as? String ?? "Maintenance mode"
-            print("🔧 MainViewModel: Maintenance mode: \(enabled) - \(message)")
             if enabled {
                 showToast(message, type: .warning, duration: 5.0)
                 errorMessage = "Maintenance mode: \(message)"
@@ -181,15 +178,10 @@ class MainViewModel: ObservableObject {
             // Parse custom color (hex string like "#FF5733")
             var customColor: Color? = nil
             if let colorHex = event.data["color"] as? String {
-                print("🎨 MainViewModel: Attempting to parse color hex: '\(colorHex)'")
                 customColor = Color(hex: colorHex)
                 if customColor == nil {
-                    print("⚠️ MainViewModel: Failed to parse color hex: '\(colorHex)' - Color(hex:) returned nil")
-                } else {
-                    print("✅ MainViewModel: Successfully parsed custom color: '\(colorHex)'")
+                    print("⚠️ MainViewModel: Failed to parse color hex: '\(colorHex)'")
                 }
-            } else {
-                print("ℹ️ MainViewModel: No color provided in toast event")
             }
             
             // Parse custom icon (emoji string)
@@ -200,16 +192,7 @@ class MainViewModel: ObservableObject {
             
             // Parse position (top or bottom_right)
             let positionString = event.data["position"] as? String ?? "top"
-            print("📍 MainViewModel: Parsing toast position: '\(positionString)'")
             let position: ToastView.ToastPosition = positionString.lowercased() == "bottom_right" || positionString.lowercased() == "bottomright" ? .bottomRight : .top
-            print("📍 MainViewModel: Toast position set to: \(position == .bottomRight ? "bottomRight" : "top")")
-            
-            // Debug image URL
-            if let imageURL = imageURL {
-                print("🖼️ MainViewModel: Toast image URL: \(imageURL)")
-            } else {
-                print("ℹ️ MainViewModel: No image URL provided in toast")
-            }
             
             let toastType: ToastView.ToastType
             switch toastTypeString.lowercased() {
@@ -270,7 +253,6 @@ class MainViewModel: ObservableObject {
                 if let image = try await ImageCache.shared.loadImage(from: url) {
                     await MainActor.run {
                         self.backgroundImage = image
-                        print("✅ Background image updated from: \(fullURL)")
                     }
                 }
             } catch {
@@ -280,8 +262,6 @@ class MainViewModel: ObservableObject {
     }
     
     func loadData() {
-        print("🚀 MainViewModel: loadData() called")
-        print("📱 App starting - loading all data...")
         loadBackgroundImage()
         loadIngredients()
         loadHistory()
@@ -291,28 +271,13 @@ class MainViewModel: ObservableObject {
     }
     
     private func loadBackgroundImage() {
-        print("🖼️ MainViewModel: loadBackgroundImage() called")
-        // Use Assets API to find and load background
-        let baseURL = apiClient.baseURL
-        print("   Base URL: \(baseURL)")
-        
         // Use Combine to get backgrounds from Assets API
         assetsService.getAssets(type: "backgrounds")
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
                     if case .failure(let error) = completion {
-                        print("❌ Error loading background from Assets API: \(error)")
-                        if let nsError = error as NSError? {
-                            print("   Error code: \(nsError.code)")
-                            print("   Error domain: \(nsError.domain)")
-                            print("   Error description: \(error.localizedDescription)")
-                            if nsError.code == -1011 {
-                                print("   ⚠️ Error -1011: Request timeout or connection refused")
-                                print("   💡 Check if server is running on \(baseURL)")
-                                print("   💡 Check mDNS resolution for abbiesworld.local")
-                            }
-                        }
+                        print("❌ Error loading background: \(error.localizedDescription)")
                         // Fallback to bundled
                         self?.loadBundledBackground()
                     }
@@ -322,30 +287,25 @@ class MainViewModel: ObservableObject {
                     
                     if let firstBackground = backgrounds.first,
                        let assetURL = self.assetsService.assetURL(for: firstBackground) {
-                        print("🌐 Attempting to load background from Assets API: \(assetURL.absoluteString)")
-                        
                         Task {
                             do {
                                 if let image = try await ImageCache.shared.loadImage(from: assetURL) {
                                     await MainActor.run {
                                         self.backgroundImage = image
-                                        print("✅ Background image loaded successfully from Assets API")
                                     }
                                 } else {
-                                    print("⚠️ Background image download returned nil, using bundled fallback")
                                     await MainActor.run {
                                         self.loadBundledBackground()
                                     }
                                 }
                             } catch {
-                                print("❌ Error loading background image: \(error)")
+                                print("❌ Error loading background image: \(error.localizedDescription)")
                                 await MainActor.run {
                                     self.loadBundledBackground()
                                 }
                             }
                         }
                     } else {
-                        print("⚠️ No backgrounds found in Assets API, using bundled fallback")
                         self.loadBundledBackground()
                     }
                 }
@@ -354,7 +314,6 @@ class MainViewModel: ObservableObject {
     }
     
     private func loadBundledBackground() {
-        print("📦 Attempting to load bundled background image")
         // Try bundled images as fallback
         if let imagePath = Bundle.main.path(forResource: "background", ofType: "png") ??
                           Bundle.main.path(forResource: "background", ofType: "jpg") ??
@@ -362,17 +321,12 @@ class MainViewModel: ObservableObject {
                           Bundle.main.path(forResource: "2", ofType: "png"),
            let image = UIImage(contentsOfFile: imagePath) {
             self.backgroundImage = image
-            print("✅ Background image loaded from bundle: \(imagePath)")
         } else {
-            // Final fallback to white
-            print("❌ Could not load background image from bundle")
-            print("   Searched for: background.png, background.jpg, 1.png, 2.png in Resources/")
             self.backgroundImage = nil
         }
     }
     
     private func loadIngredients() {
-        print("📦 MainViewModel: loadIngredients() called")
         // Load carousel items directly from Assets API
         isLoadingIngredients = true
         errorMessage = nil
@@ -385,8 +339,6 @@ class MainViewModel: ObservableObject {
     }
     
     private func loadCarouselItems() {
-        print("🎠 Loading carousel items from Assets API")
-        
         var completed = 0
         let total = 3
         
@@ -396,20 +348,17 @@ class MainViewModel: ObservableObject {
             .sink(
                 receiveCompletion: { [weak self] completion in
                     if case .failure(let error) = completion {
-                        print("❌ Error loading friends assets: \(error)")
+                        print("❌ Error loading friends: \(error.localizedDescription)")
                     }
                     completed += 1
                     if completed == total {
                         self?.isLoadingIngredients = false
-                        print("✅ All carousel items loaded")
                     }
                 },
                 receiveValue: { [weak self] assets in
                     guard let self = self else { return }
-                    print("📥 Received \(assets.count) friends assets")
                     let ingredients = self.createIngredientsFromAssets(assets, category: "character_style", assetType: "friends")
                     self.friendItems = ingredients
-                    print("👥 Friend items: \(ingredients.count)")
                 }
             )
             .store(in: &cancellables)
@@ -420,20 +369,17 @@ class MainViewModel: ObservableObject {
             .sink(
                 receiveCompletion: { [weak self] completion in
                     if case .failure(let error) = completion {
-                        print("❌ Error loading outfits assets: \(error)")
+                        print("❌ Error loading outfits: \(error.localizedDescription)")
                     }
                     completed += 1
                     if completed == total {
                         self?.isLoadingIngredients = false
-                        print("✅ All carousel items loaded")
                     }
                 },
                 receiveValue: { [weak self] assets in
                     guard let self = self else { return }
-                    print("📥 Received \(assets.count) outfits assets")
                     let ingredients = self.createIngredientsFromAssets(assets, category: "color_palette", assetType: "outfits")
                     self.outfitItems = ingredients
-                    print("👗 Outfit items: \(ingredients.count)")
                 }
             )
             .store(in: &cancellables)
@@ -444,20 +390,17 @@ class MainViewModel: ObservableObject {
             .sink(
                 receiveCompletion: { [weak self] completion in
                     if case .failure(let error) = completion {
-                        print("❌ Error loading places assets: \(error)")
+                        print("❌ Error loading places: \(error.localizedDescription)")
                     }
                     completed += 1
                     if completed == total {
                         self?.isLoadingIngredients = false
-                        print("✅ All carousel items loaded")
                     }
                 },
                 receiveValue: { [weak self] assets in
                     guard let self = self else { return }
-                    print("📥 Received \(assets.count) places assets")
                     let ingredients = self.createIngredientsFromAssets(assets, category: "world_setting", assetType: "places")
                     self.placeItems = ingredients
-                    print("📍 Place items: \(ingredients.count)")
                 }
             )
             .store(in: &cancellables)
@@ -467,6 +410,7 @@ class MainViewModel: ObservableObject {
         return assets.map { asset -> Ingredient in
             let assetURL = assetsService.assetURL(for: asset)?.absoluteString ?? ""
             let name = asset.name.replacingOccurrences(of: ".png", with: "").replacingOccurrences(of: "_", with: " ").capitalized
+            
             return Ingredient(
                 id: "\(assetType)_\(asset.name)",
                 name: name,
@@ -478,8 +422,6 @@ class MainViewModel: ObservableObject {
     }
     
     private func loadHistory() {
-        print("📚 MainViewModel: loadHistory() called")
-        print("   API URL: \(apiClient.baseURL)/api/generated-images")
         isLoadingHistory = true
         
         apiClient.getGeneratedImages()
@@ -488,20 +430,8 @@ class MainViewModel: ObservableObject {
                 receiveCompletion: { [weak self] completion in
                     self?.isLoadingHistory = false
                     if case .failure(let error) = completion {
-                        print("❌ Error loading history: \(error)")
-                        if let nsError = error as NSError? {
-                            print("   Error code: \(nsError.code)")
-                            print("   Error domain: \(nsError.domain)")
-                            print("   Error description: \(error.localizedDescription)")
-                            if nsError.code == -1011 {
-                                print("   ⚠️ Error -1011: Request timeout or connection refused")
-                                print("   💡 Check if server is running on \(self?.apiClient.baseURL ?? "unknown")")
-                            }
-                        }
-                        // Show error to user
+                        print("❌ Error loading history: \(error.localizedDescription)")
                         self?.errorMessage = "Failed to load history: \(error.localizedDescription)"
-                    } else {
-                        print("✅ History loading completed successfully")
                     }
                 },
                 receiveValue: { [weak self] images in
@@ -509,7 +439,6 @@ class MainViewModel: ObservableObject {
                     let filtered = images.filter { $0.deleted != true }
                     // Sort by createdAt descending (newest first) for LIFO
                     let sorted = filtered.sorted { $0.createdAt > $1.createdAt }
-                    print("📥 Received \(images.count) total images, \(filtered.count) after filtering deleted, \(sorted.count) after sorting")
                     self.historyImages = sorted
                 }
             )
@@ -525,17 +454,14 @@ class MainViewModel: ObservableObject {
     
     func selectFriend(_ ingredient: Ingredient) {
         // Selection tracking - can be used for future functionality
-        print("Friend selected: \(ingredient.name)")
     }
     
     func selectOutfit(_ ingredient: Ingredient) {
         // Selection tracking - can be used for future functionality
-        print("Outfit selected: \(ingredient.name)")
     }
     
     func selectPlace(_ ingredient: Ingredient) {
         // Selection tracking - can be used for future functionality
-        print("Place selected: \(ingredient.name)")
     }
     
     // MARK: - Image Generation
@@ -551,13 +477,55 @@ class MainViewModel: ObservableObject {
         let outfit = outfitItems[outfitIndex]
         let place = placeItems[placeIndex]
         
-        print("🎨 Starting image generation with:")
-        print("   Friend: \(friend.name)")
-        print("   Outfit: \(outfit.name)")
-        print("   Place: \(place.name)")
-        
         isCreatingImage = true
         buttonState = .generating
+        
+        // Extract reference image URLs from selected ingredients
+        // Server expects asset paths like /static/assets/friends/01_star_puppy.png
+        // The imageURL in ingredients is a full URL, so we need to extract the path
+        var referenceImageIds: [String] = []
+        
+        func extractAssetPath(from urlString: String?) -> String? {
+            guard let urlString = urlString, !urlString.isEmpty else { return nil }
+            
+            // If it's already a path starting with /static/assets/, use it as-is
+            if urlString.hasPrefix("/static/assets/") {
+                return urlString
+            }
+            
+            // If it's a full URL (http://...), extract the path
+            if urlString.hasPrefix("http://") || urlString.hasPrefix("https://") {
+                if let url = URL(string: urlString) {
+                    return url.path
+                }
+            }
+            
+            // If it doesn't start with /, it's probably a relative path - add prefix
+            if !urlString.hasPrefix("/") {
+                return "/static/assets/\(urlString)"
+            }
+            
+            return urlString
+        }
+        
+        // Extract asset paths from each selected ingredient
+        if let friendPath = extractAssetPath(from: friend.imageURL) {
+            referenceImageIds.append(friendPath)
+        } else {
+            print("⚠️ WARNING: Could not extract asset path from friend imageURL: \(friend.imageURL ?? "nil")")
+        }
+        
+        if let outfitPath = extractAssetPath(from: outfit.imageURL) {
+            referenceImageIds.append(outfitPath)
+        } else {
+            print("⚠️ WARNING: Could not extract asset path from outfit imageURL: \(outfit.imageURL ?? "nil")")
+        }
+        
+        if let placePath = extractAssetPath(from: place.imageURL) {
+            referenceImageIds.append(placePath)
+        } else {
+            print("⚠️ WARNING: Could not extract asset path from place imageURL: \(place.imageURL ?? "nil")")
+        }
         
         // Create request
         let recipeItems = [
@@ -569,8 +537,59 @@ class MainViewModel: ObservableObject {
         let request = CreateRequest(
             recipeItems: recipeItems,
             freeTextDescription: nil,
-            referenceImageIds: nil
+            referenceImageIds: referenceImageIds.isEmpty ? nil : referenceImageIds
         )
+        
+        // DEBUG: Log full API request details
+        let separator = String(repeating: "=", count: 80)
+        print(separator)
+        print("🚀 API REQUEST DEBUG - Image Generation")
+        print(separator)
+        print("📍 Endpoint: \(apiClient.baseURL)/api/create")
+        print("📋 Request Method: POST")
+        
+        // Log selected ingredients
+        print("\n📝 Selected Ingredients:")
+        print("   Friend: '\(friend.name)' (id: \(friend.id))")
+        print("      Image URL: \(friend.imageURL ?? "nil")")
+        print("   Outfit: '\(outfit.name)' (id: \(outfit.id))")
+        print("      Image URL: \(outfit.imageURL ?? "nil")")
+        print("   Place: '\(place.name)' (id: \(place.id))")
+        print("      Image URL: \(place.imageURL ?? "nil")")
+        
+        // Log request components
+        print("\n📦 Request Components:")
+        print("   Recipe Items (\(recipeItems.count)):")
+        for (index, item) in recipeItems.enumerated() {
+            print("      [\(index)] id: '\(item.id)', slotIndex: \(item.slotIndex?.description ?? "nil")")
+        }
+        print("   Free Text Description: \(request.freeTextDescription ?? "nil")")
+        print("   Reference Image IDs: \(request.referenceImageIds?.count ?? 0) images")
+        if let refImages = request.referenceImageIds, !refImages.isEmpty {
+            print("      Reference Images (\(refImages.count)):")
+            for (index, refId) in refImages.enumerated() {
+                print("         [\(index)] \(refId)")
+            }
+        } else {
+            print("      ⚠️ WARNING: No reference images provided!")
+        }
+        
+        // Log full JSON body
+        print("\n📄 Full JSON Request Body:")
+        do {
+            let encoder = JSONEncoder()
+            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
+            let jsonData = try encoder.encode(request)
+            if let jsonString = String(data: jsonData, encoding: .utf8) {
+                print(jsonString)
+            } else {
+                print("   ⚠️ Failed to convert request to JSON string")
+            }
+        } catch {
+            print("   ❌ Failed to encode request: \(error)")
+        }
+        
+        print(separator)
         
         // Start SSE stream for image generation
         imageGenerationTask = Task { [weak self] in
@@ -592,14 +611,40 @@ class MainViewModel: ObservableObject {
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("text/event-stream", forHTTPHeaderField: "Accept")
+        ServerConfig.shared.addAPIKeyHeader(to: &urlRequest)
         
         do {
             urlRequest.httpBody = try JSONEncoder().encode(request)
+            
+            // DEBUG: Log actual HTTP request being sent
+            print("\n📤 SENDING HTTP REQUEST:")
+            print("   URL: \(url.absoluteString)")
+            print("   Method: \(urlRequest.httpMethod ?? "unknown")")
+            print("   Headers:")
+            if let headers = urlRequest.allHTTPHeaderFields {
+                for (key, value) in headers.sorted(by: { $0.key < $1.key }) {
+                    if key == "Authorization" {
+                        let preview = String(value.prefix(20)) + "..."
+                        print("      \(key): \(preview)")
+                    } else {
+                        print("      \(key): \(value)")
+                    }
+                }
+            }
+            if let body = urlRequest.httpBody {
+                print("   Body Size: \(body.count) bytes")
+                if let bodyString = String(data: body, encoding: .utf8) {
+                    print("   Body Preview (first 500 chars):")
+                    let preview = bodyString.count > 500 ? String(bodyString.prefix(500)) + "..." : bodyString
+                    print("      \(preview.replacingOccurrences(of: "\n", with: "\\n"))")
+                }
+            }
+            print("")
+            
         } catch {
+            print("❌ Failed to encode request: \(error)")
             await MainActor.run {
-                self.isCreatingImage = false
-                self.buttonState = .notReady
-                self.errorMessage = "Failed to encode request: \(error.localizedDescription)"
+                self.handleImageGenerationError(error)
             }
             return
         }
@@ -607,40 +652,65 @@ class MainViewModel: ObservableObject {
         do {
             let (asyncBytes, response) = try await URLSession.shared.bytes(for: urlRequest)
             
-            guard let httpResponse = response as? HTTPURLResponse,
-                  httpResponse.statusCode == 200 else {
+            // DEBUG: Log server response
+            if let httpResponse = response as? HTTPURLResponse {
+                print("📥 SERVER RESPONSE:")
+                print("   Status Code: \(httpResponse.statusCode)")
+                print("   Headers:")
+                for (key, value) in httpResponse.allHeaderFields.sorted(by: { "\($0.key)" < "\($1.key)" }) {
+                    print("      \(key): \(value)")
+                }
+                print("")
+                
+                guard httpResponse.statusCode == 200 else {
+                    print("❌ Server returned error status: \(httpResponse.statusCode)")
+                    await MainActor.run {
+                        let error = NSError(domain: "ImageGeneration", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Server error: HTTP \(httpResponse.statusCode)"])
+                        self.handleImageGenerationError(error)
+                    }
+                    return
+                }
+            } else {
+                print("❌ Invalid response type: \(type(of: response))")
                 await MainActor.run {
-                    self.isCreatingImage = false
-                    self.buttonState = .notReady
-                    self.errorMessage = "Server error: \(response)"
+                    let error = NSError(domain: "ImageGeneration", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response type"])
+                    self.handleImageGenerationError(error)
                 }
                 return
             }
             
             var buffer = ""
-            for try await byte in asyncBytes {
-                if let char = String(data: Data([byte]), encoding: .utf8) {
-                    buffer += char
-                    
-                    // Process complete lines
-                    while let newlineIndex = buffer.firstIndex(of: "\n") {
-                        let line = String(buffer[..<newlineIndex])
-                        buffer = String(buffer[buffer.index(after: newlineIndex)...])
+            do {
+                for try await byte in asyncBytes {
+                    if let char = String(data: Data([byte]), encoding: .utf8) {
+                        buffer += char
                         
-                        if line.hasPrefix("data: ") {
-                            let jsonString = String(line.dropFirst(6))
-                            await processImageGenerationEvent(jsonString: jsonString)
+                        // Process complete lines
+                        while let newlineIndex = buffer.firstIndex(of: "\n") {
+                            let line = String(buffer[..<newlineIndex])
+                            buffer = String(buffer[buffer.index(after: newlineIndex)...])
+                            
+                            if line.hasPrefix("data: ") {
+                                let jsonString = String(line.dropFirst(6))
+                                await processImageGenerationEvent(jsonString: jsonString)
+                            }
                         }
                     }
                 }
+            } catch {
+                // Stream reading error (timeout, connection lost, etc.)
+                print("❌ Image generation stream reading error: \(error)")
+                await MainActor.run {
+                    self.handleImageGenerationError(error)
+                }
+                return
             }
         } catch {
+            // Request/connection error
+            print("❌ Image generation request error: \(error)")
             await MainActor.run {
-                self.isCreatingImage = false
-                self.buttonState = .notReady
-                self.errorMessage = "Image generation error: \(error.localizedDescription)"
+                self.handleImageGenerationError(error)
             }
-            print("❌ Image generation stream error: \(error)")
         }
     }
     
@@ -695,9 +765,8 @@ class MainViewModel: ObservableObject {
                 self.finishImageGeneration()
             } else if status == "error" {
                 let message = json["message"] as? String ?? "Unknown error"
-                self.errorMessage = "Image generation failed: \(message)"
-                self.isCreatingImage = false
-                self.buttonState = .notReady
+                print("❌ Image generation error from server: \(message)")
+                self.handleImageGenerationError(NSError(domain: "ImageGeneration", code: -1, userInfo: [NSLocalizedDescriptionKey: message]))
             }
         }
     }
@@ -737,5 +806,44 @@ class MainViewModel: ObservableObject {
         placeIndex = -1
         
         print("🎉 Image generation complete, carousels reset")
+    }
+    
+    // MARK: - Error Handling
+    
+    private func handleImageGenerationError(_ error: Error) {
+        // Reset generation state
+        isCreatingImage = false
+        buttonState = .notReady
+        
+        // Log error details
+        if let nsError = error as NSError? {
+            print("❌ Image generation error:")
+            print("   Domain: \(nsError.domain)")
+            print("   Code: \(nsError.code)")
+            print("   Description: \(nsError.localizedDescription)")
+            
+            // Check for specific error types
+            if nsError.domain == NSURLErrorDomain {
+                switch nsError.code {
+                case NSURLErrorTimedOut:
+                    print("   Type: Request timeout")
+                case NSURLErrorNotConnectedToInternet:
+                    print("   Type: No internet connection")
+                case NSURLErrorNetworkConnectionLost:
+                    print("   Type: Network connection lost")
+                default:
+                    print("   Type: Network error")
+                }
+            }
+        } else {
+            print("   Error: \(error.localizedDescription)")
+        }
+        
+        // Show error dialog (non-blocking)
+        showImageGenerationError = true
+    }
+    
+    func dismissImageGenerationError() {
+        showImageGenerationError = false
     }
 }

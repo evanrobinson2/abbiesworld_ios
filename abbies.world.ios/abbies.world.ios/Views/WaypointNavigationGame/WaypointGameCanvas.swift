@@ -93,6 +93,8 @@ class WaypointGameScene: SKScene {
         updateWaypoints()
         updateBuggy()
         updatePath()
+        // Update moonbase when image loads (it might not be loaded when setupScene runs)
+        updateMoonbase()
     }
     
     private func updateWaypoints() {
@@ -192,8 +194,12 @@ class WaypointGameScene: SKScene {
         let texture = SKTexture(image: moonbaseImage)
         moonbaseNode = SKSpriteNode(texture: texture)
         moonbaseNode?.setScale(0.08)
-        moonbaseNode?.position = CGPoint(x: size.width - moonbaseNode!.size.width/2 - 5,
-                                         y: size.height - moonbaseNode!.size.height/2 - 5)
+        // Position in upper right corner (matches original HTML: x = canvas.width - w - 5, y = 5)
+        // In SpriteKit, position is center of node, so we need to account for that
+        let scaledWidth = moonbaseNode!.size.width
+        let scaledHeight = moonbaseNode!.size.height
+        moonbaseNode?.position = CGPoint(x: size.width - scaledWidth/2 - 5,
+                                         y: scaledHeight/2 + 5)
         moonbaseNode?.zPosition = 2
         addChild(moonbaseNode!)
     }

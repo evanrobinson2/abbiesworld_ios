@@ -64,21 +64,17 @@ class SSEService: ObservableObject {
     
     /// Start SSE connection to /api/events
     func connect() {
-        guard !isConnected else {
-            print("⚠️ SSEService: Already connected")
-            return
-        }
+        guard !isConnected else { return }
         
         guard let url = URL(string: "\(baseURL)/api/events") else {
-            print("❌ SSEService: Invalid URL: \(baseURL)/api/events")
+            print("❌ SSEService: Invalid URL")
             return
         }
-        
-        print("🔌 SSEService: Connecting to \(url.absoluteString)")
         
         var request = URLRequest(url: url)
         request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
         request.timeoutInterval = 0 // No timeout for SSE
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
         
         let configuration = URLSessionConfiguration.default
         configuration.timeoutIntervalForRequest = 0
@@ -110,6 +106,12 @@ class SSEService: ObservableObject {
                 }
             } else {
                 print("❌ SSEService: Connection failed with status: \(httpResponse.statusCode)")
+                // Log response body if available to see what the server expects
+                if let data = data, let responseBody = String(data: data, encoding: .utf8) {
+                    print("   Server response: \(responseBody)")
+                }
+                // Log response headers
+                print("   Response headers: \(httpResponse.allHeaderFields)")
                 DispatchQueue.main.async {
                     self?.isConnected = false
                 }
@@ -144,6 +146,7 @@ class SSEService: ObservableObject {
         var request = URLRequest(url: url)
         request.setValue("text/event-stream", forHTTPHeaderField: "Accept")
         request.timeoutInterval = 0 // No timeout for SSE
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
         
         // Use async/await with URLSession bytes API (iOS 15+)
         Task {
@@ -153,13 +156,21 @@ class SSEService: ObservableObject {
                 guard let httpResponse = response as? HTTPURLResponse,
                       httpResponse.statusCode == 200 else {
                     print("❌ SSEService: Invalid response: \(response)")
+                    if let httpResponse = response as? HTTPURLResponse {
+                        print("   Status code: \(httpResponse.statusCode)")
+                        print("   Response headers: \(httpResponse.allHeaderFields)")
+                        // Try to read response body if available
+                        if httpResponse.statusCode == 401 {
+                            print("   ⚠️ 401 Unauthorized - API key may be missing or incorrect")
+                            print("   Check if server expects different header name or format")
+                        }
+                    }
                     await MainActor.run {
                         self.isConnected = false
                     }
                     return
                 }
                 
-                print("✅ SSEService: Stream connected")
                 await MainActor.run {
                     self.isConnected = true
                 }
@@ -201,7 +212,6 @@ class SSEService: ObservableObject {
                 }
                 
                 // Stream ended
-                print("⚠️ SSEService: Stream ended")
                 await MainActor.run {
                     self.isConnected = false
                 }
@@ -251,8 +261,6 @@ class SSEService: ObservableObject {
         
         let event = SSEEvent(type: eventType, data: eventData)
         
-        print("📥 SSEService: Received event: \(eventType.rawValue)")
-        
         await MainActor.run {
             self.lastEvent = event
             self.eventSubject.send(event)
@@ -263,23 +271,18 @@ class SSEService: ObservableObject {
     private func handleEvent(_ event: SSEEvent) {
         switch event.type {
         case .connected:
-            print("✅ SSEService: Connection confirmed")
+            break
             
         case .reloadCache:
-            print("🔄 SSEService: Reloading cache")
             ImageCache.shared.clearCache()
             
         case .configUpdate:
-            print("⚙️ SSEService: Config updated")
-            // Could trigger a config reload in MainViewModel
             NotificationCenter.default.post(name: NSNotification.Name("ConfigUpdated"), object: nil)
             
         case .refreshIngredients:
-            print("🔄 SSEService: Refreshing ingredients")
             NotificationCenter.default.post(name: NSNotification.Name("RefreshIngredients"), object: nil)
             
         case .backgroundChanged:
-            print("🖼️ SSEService: Background changed")
             if let backgroundURL = event.data["background_url"] as? String {
                 NotificationCenter.default.post(
                     name: NSNotification.Name("BackgroundChanged"),
@@ -288,7 +291,6 @@ class SSEService: ObservableObject {
             }
             
         case .maintenance:
-            print("🔧 SSEService: Maintenance mode")
             let enabled = event.data["enabled"] as? Bool ?? true
             NotificationCenter.default.post(
                 name: NSNotification.Name("MaintenanceMode"),
@@ -296,11 +298,9 @@ class SSEService: ObservableObject {
             )
             
         case .fetchLogs:
-            print("📋 SSEService: Fetch logs requested")
             uploadLogs()
             
         case .toast:
-            print("🔔 SSEService: Toast notification received")
             // Toast is handled by MainViewModel via eventSubject
             break
             
@@ -339,6 +339,7 @@ class SSEService: ObservableObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
         request.httpBody = jsonData
         
         URLSession.shared.dataTask(with: request) { data, response, error in

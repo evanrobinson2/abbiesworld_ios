@@ -59,6 +59,51 @@ class ServerConfig {
         UserDefaults.standard.synchronize()
     }
     
+    /// API Key for server authentication
+    /// Priority: UserDefaults > Info.plist > Environment variable > nil
+    var apiKey: String? {
+        // 1. Check UserDefaults first (runtime override)
+        if let userDefaultsKey = UserDefaults.standard.string(forKey: "ServerAPIKey"), !userDefaultsKey.isEmpty {
+            return userDefaultsKey
+        }
+        
+        // 2. Check Info.plist (build-time configuration)
+        if let infoPlistKey = Bundle.main.object(forInfoDictionaryKey: "ServerAPIKey") as? String, !infoPlistKey.isEmpty {
+            return infoPlistKey
+        }
+        
+        // 3. Check environment variable (for development)
+        if let envKey = ProcessInfo.processInfo.environment["ABBIES_WORLD_SERVER_API_KEY"], !envKey.isEmpty {
+            return envKey
+        }
+        
+        // 4. No API key found
+        print("⚠️ ServerConfig: No API key found")
+        return nil
+    }
+    
+    /// Set API key at runtime (stores in UserDefaults)
+    func setAPIKey(_ key: String) {
+        UserDefaults.standard.set(key, forKey: "ServerAPIKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    /// Reset API key to default (removes UserDefaults override)
+    func resetAPIKey() {
+        UserDefaults.standard.removeObject(forKey: "ServerAPIKey")
+        UserDefaults.standard.synchronize()
+    }
+    
+    /// Add API key header to a URLRequest if available
+    /// Uses Authorization header with Bearer format: "Bearer {key}"
+    func addAPIKeyHeader(to request: inout URLRequest) {
+        if let apiKey = apiKey {
+            request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+        } else {
+            print("⚠️ ServerConfig: No API key available")
+        }
+    }
+    
     private init() {
         // Private initializer for singleton
     }

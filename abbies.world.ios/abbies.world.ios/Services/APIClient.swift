@@ -53,6 +53,9 @@ class APIClient: ObservableObject {
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
+        // Add API key header if available
+        ServerConfig.shared.addAPIKeyHeader(to: &urlRequest)
+        
         do {
             urlRequest.httpBody = try JSONEncoder().encode(request)
         } catch {
@@ -75,6 +78,9 @@ class APIClient: ObservableObject {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = method
+        
+        // Add API key header if available
+        ServerConfig.shared.addAPIKeyHeader(to: &urlRequest)
         
         return URLSession.shared.dataTaskPublisher(for: urlRequest)
             .map(\.data)

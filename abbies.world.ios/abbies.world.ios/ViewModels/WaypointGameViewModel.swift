@@ -16,12 +16,13 @@ class WaypointGameViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private var buggyAnimationTimer: Timer?
     private var pulseTimer: Timer?
-    private let audioService = WaypointGameAudioService()
+    let audioService = WaypointGameAudioService()
     
     // Asset base URL - uses centralized ServerConfig
+    // Uses Assets API route for nested directory structure
     private var assetBaseURL: String {
         let base = ServerConfig.shared.baseURL
-        return "\(base)/static/minigame_waypoint"
+        return "\(base)/static/assets/minigames/waypoint"
     }
     
     // MARK: - Initialization
@@ -82,7 +83,13 @@ class WaypointGameViewModel: ObservableObject {
                     print("⚠️ Failed to load buggy sprite: ImageCache returned nil")
                 }
             } catch {
-                print("❌ Error loading buggy sprite: \(error)")
+                let nsError = error as NSError
+                if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorFileDoesNotExist {
+                    print("❌ Buggy sprite not found - file may have been moved or deleted")
+                } else {
+                    print("❌ Error loading buggy sprite: \(error)")
+                }
+                // Continue gracefully - game can still work without buggy sprite
             }
         } else {
             print("❌ Invalid URL for buggy sprite: \(buggyURLString)")
@@ -92,17 +99,30 @@ class WaypointGameViewModel: ObservableObject {
         let moonbaseURLString = "\(assetBaseURL)/moonbase.png"
         print("🖼️ Loading moonbase from: \(moonbaseURLString)")
         if let url = URL(string: moonbaseURLString) {
+            print("   URL: \(url.absoluteString)")
             do {
                 if let image = try await ImageCache.shared.loadImage(from: url) {
                     await MainActor.run {
                         gameState.moonbaseImage = image
-                        print("✅ Moonbase loaded successfully")
+                        print("✅ Moonbase loaded successfully (\(image.size.width)x\(image.size.height))")
                     }
                 } else {
                     print("⚠️ Failed to load moonbase: ImageCache returned nil")
                 }
             } catch {
-                print("❌ Error loading moonbase: \(error)")
+                let nsError = error as NSError
+                if nsError.domain == NSURLErrorDomain {
+                    if nsError.code == NSURLErrorFileDoesNotExist {
+                        print("❌ Moonbase image not found (404) - file may have been moved or deleted")
+                    } else if nsError.code == NSURLErrorUserAuthenticationRequired {
+                        print("❌ Moonbase authentication failed (401) - check API key")
+                    } else {
+                        print("❌ Error loading moonbase: \(error) (code: \(nsError.code))")
+                    }
+                } else {
+                    print("❌ Error loading moonbase: \(error)")
+                }
+                // Continue gracefully - game can still work without moonbase image
             }
         } else {
             print("❌ Invalid URL for moonbase: \(moonbaseURLString)")
@@ -112,17 +132,30 @@ class WaypointGameViewModel: ObservableObject {
         let bannerURLString = "\(assetBaseURL)/trio_at_base_pixel.png"
         print("🖼️ Loading destination banner from: \(bannerURLString)")
         if let url = URL(string: bannerURLString) {
+            print("   URL: \(url.absoluteString)")
             do {
                 if let image = try await ImageCache.shared.loadImage(from: url) {
                     await MainActor.run {
                         gameState.destinationBannerImage = image
-                        print("✅ Destination banner loaded successfully")
+                        print("✅ Destination banner loaded successfully (\(image.size.width)x\(image.size.height))")
                     }
                 } else {
                     print("⚠️ Failed to load destination banner: ImageCache returned nil")
                 }
             } catch {
-                print("❌ Error loading destination banner: \(error)")
+                let nsError = error as NSError
+                if nsError.domain == NSURLErrorDomain {
+                    if nsError.code == NSURLErrorFileDoesNotExist {
+                        print("❌ Destination banner not found (404) - file may have been moved or deleted")
+                    } else if nsError.code == NSURLErrorUserAuthenticationRequired {
+                        print("❌ Destination banner authentication failed (401) - check API key")
+                    } else {
+                        print("❌ Error loading destination banner: \(error) (code: \(nsError.code))")
+                    }
+                } else {
+                    print("❌ Error loading destination banner: \(error)")
+                }
+                // Continue gracefully - game can still work without banner
             }
         } else {
             print("❌ Invalid URL for destination banner: \(bannerURLString)")
@@ -130,35 +163,71 @@ class WaypointGameViewModel: ObservableObject {
     }
     
     private func loadVictoryAssets() async {
+        print("🎉 Starting victory assets loading...")
+        
         // Load victory image (filename has space, need URL encoding)
         let victoryFilename = "abbie star child.png"
+        print("🖼️ Loading victory image: \(victoryFilename)")
         if let encodedFilename = victoryFilename.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
            let url = URL(string: "\(assetBaseURL)/\(encodedFilename)") {
-            if let image = try? await ImageCache.shared.loadImage(from: url) {
-                await MainActor.run {
-                    gameState.victoryImage = image
+            print("   URL: \(url.absoluteString)")
+            do {
+                if let image = try await ImageCache.shared.loadImage(from: url) {
+                    await MainActor.run {
+                        gameState.victoryImage = image
+                        print("✅ Victory image loaded successfully")
+                    }
+                } else {
+                    print("⚠️ Victory image: ImageCache returned nil")
                 }
+            } catch {
+                print("❌ Error loading victory image: \(error)")
             }
+        } else {
+            print("❌ Invalid URL for victory image")
         }
         
         // Load cutscene
-        if let url = URL(string: "\(assetBaseURL)/cinematic_01_moonbase_wide.png") {
-            if let image = try? await ImageCache.shared.loadImage(from: url) {
-                await MainActor.run {
-                    gameState.cutsceneImage = image
+        let cutsceneFilename = "cinematic_01_moonbase_wide.png"
+        print("🖼️ Loading cutscene: \(cutsceneFilename)")
+        if let url = URL(string: "\(assetBaseURL)/\(cutsceneFilename)") {
+            print("   URL: \(url.absoluteString)")
+            do {
+                if let image = try await ImageCache.shared.loadImage(from: url) {
+                    await MainActor.run {
+                        gameState.cutsceneImage = image
+                        print("✅ Cutscene image loaded successfully")
+                    }
+                } else {
+                    print("⚠️ Cutscene image: ImageCache returned nil")
                 }
+            } catch {
+                print("❌ Error loading cutscene image: \(error)")
             }
+        } else {
+            print("❌ Invalid URL for cutscene")
         }
         
         // Load cover (filename has spaces, need URL encoding)
         let coverFilename = "moon mission 1.png"
+        print("🖼️ Loading cover: \(coverFilename)")
         if let encodedFilename = coverFilename.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
            let url = URL(string: "\(assetBaseURL)/\(encodedFilename)") {
-            if let image = try? await ImageCache.shared.loadImage(from: url) {
-                await MainActor.run {
-                    gameState.coverImage = image
+            print("   URL: \(url.absoluteString)")
+            do {
+                if let image = try await ImageCache.shared.loadImage(from: url) {
+                    await MainActor.run {
+                        gameState.coverImage = image
+                        print("✅ Cover image loaded successfully")
+                    }
+                } else {
+                    print("⚠️ Cover image: ImageCache returned nil")
                 }
+            } catch {
+                print("❌ Error loading cover image: \(error)")
             }
+        } else {
+            print("❌ Invalid URL for cover image")
         }
         
         // Load polaroids
@@ -175,17 +244,28 @@ class WaypointGameViewModel: ObservableObject {
             "polaroid_10_window_view.png"
         ]
         
+        print("🖼️ Loading \(polaroidFilenames.count) polaroid images...")
         var loadedPolaroids: [UIImage] = []
-        for filename in polaroidFilenames {
+        for (index, filename) in polaroidFilenames.enumerated() {
             if let url = URL(string: "\(assetBaseURL)/\(filename)") {
-                if let image = try? await ImageCache.shared.loadImage(from: url) {
-                    loadedPolaroids.append(image)
+                do {
+                    if let image = try await ImageCache.shared.loadImage(from: url) {
+                        loadedPolaroids.append(image)
+                        print("   ✅ [\(index + 1)/\(polaroidFilenames.count)] \(filename)")
+                    } else {
+                        print("   ⚠️ [\(index + 1)/\(polaroidFilenames.count)] \(filename) - ImageCache returned nil")
+                    }
+                } catch {
+                    print("   ❌ [\(index + 1)/\(polaroidFilenames.count)] \(filename) - Error: \(error)")
                 }
+            } else {
+                print("   ❌ [\(index + 1)/\(polaroidFilenames.count)] \(filename) - Invalid URL")
             }
         }
         
         await MainActor.run {
             gameState.polaroidImages = loadedPolaroids
+            print("🎉 Victory assets loading complete: \(loadedPolaroids.count)/\(polaroidFilenames.count) polaroids loaded")
         }
     }
     
@@ -364,14 +444,22 @@ class WaypointGameViewModel: ObservableObject {
         if gameState.clickedGoodNodes == 0 {
             gameState.statusMessage = "Click any waypoint to begin discovering the safe path!"
         } else {
-            gameState.statusMessage = "Find the first safe waypoint! (0/\(gameState.totalGoodNodes))"
+            gameState.statusMessage = "Find the next safe waypoint! (\(gameState.clickedGoodNodes)/\(gameState.totalGoodNodes))"
         }
     }
     
     // MARK: - Game Completion
     
     private func completeGame() {
+        print("🎉 WaypointGameViewModel: Game completed!")
+        print("   Victory image loaded: \(gameState.victoryImage != nil)")
+        print("   Cutscene image loaded: \(gameState.cutsceneImage != nil)")
+        print("   Polaroid images loaded: \(gameState.polaroidImages.count)")
+        print("   Cover image loaded: \(gameState.coverImage != nil)")
+        
         gameState.gameComplete = true
+        print("   ✅ gameComplete set to true")
+        
         // Fade out background music and start victory music
         audioService.fadeOutBackgroundMusic {
             self.audioService.startVictoryMusic()
