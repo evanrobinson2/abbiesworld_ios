@@ -15,34 +15,34 @@ struct FloatingGenerationButton: View {
     var body: some View {
         // Hide button when not ready and no preview image (suppress waving robot)
         if shouldShowButton {
-            VStack {
+        VStack {
+            Spacer()
+            HStack {
                 Spacer()
-                HStack {
-                    Spacer()
-                    Button(action: action) {
-                        ZStack {
-                            // White circle background
-                            Circle()
-                                .fill(Color.white)
-                                .frame(width: 128, height: 128)
-                            
-                            // Video player
-                            VideoPlayerView(videoName: videoName, isLooping: true)
-                                .frame(width: 128, height: 128)
-                                .clipShape(Circle())
-                            
-                            // Thick black outline
-                            Circle()
-                                .stroke(Color.black, lineWidth: 4)
-                                .frame(width: 128, height: 128)
-                        }
-                        .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+                Button(action: action) {
+                    ZStack {
+                        // White circle background
+                        Circle()
+                            .fill(Color.white)
+                            .frame(width: 128, height: 128)
+                        
+                        // Video player
+                        VideoPlayerView(videoName: videoName, isLooping: true)
+                            .frame(width: 128, height: 128)
+                            .clipShape(Circle())
+                        
+                        // Thick black outline
+                        Circle()
+                            .stroke(Color.black, lineWidth: 4)
+                            .frame(width: 128, height: 128)
                     }
-                    .disabled(!isReady)
-                    .opacity(isReady ? 1.0 : 0.6)
-                    .frame(width: 128, height: 128, alignment: .bottomTrailing)
-                    .padding(.trailing, 24)
-                    .padding(.bottom, 24)
+                    .shadow(color: .black.opacity(0.3), radius: 8, x: 0, y: 4)
+                }
+                .disabled(!isReady)
+                .opacity(isReady ? 1.0 : 0.6)
+                .frame(width: 128, height: 128, alignment: .bottomTrailing)
+                .padding(.trailing, 24)
+                .padding(.bottom, 24)
                 }
             }
         }

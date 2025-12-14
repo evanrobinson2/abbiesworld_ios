@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RecipeItem: Codable, Identifiable {
+struct RecipeItem: Codable, Identifiable, Equatable {
     let id: String
     let slotIndex: Int?  // Optional to match API (can be null)
     

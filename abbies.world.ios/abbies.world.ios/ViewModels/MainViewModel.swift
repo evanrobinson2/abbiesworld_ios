@@ -58,6 +58,7 @@ class MainViewModel: ObservableObject {
     // Preview and history
     @Published var previewImage: UIImage?
     @Published var historyImages: [GeneratedImage] = []
+    @Published var showFavoritesOnly: Bool = false
     
     // Background image
     @Published var backgroundImage: UIImage?
@@ -462,7 +463,11 @@ class MainViewModel: ObservableObject {
     private func loadHistory() {
         isLoadingHistory = true
         
-        apiClient.getGeneratedImages()
+        let endpoint = showFavoritesOnly 
+            ? apiClient.getFavorites()
+            : apiClient.getGeneratedImages()
+        
+        endpoint
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -482,6 +487,56 @@ class MainViewModel: ObservableObject {
                     let sorted = filtered.sorted { $0.createdAt > $1.createdAt }
                     self.historyImages = sorted
                     print("📸 Loaded \(sorted.count) final images (filtered out \(images.count - sorted.count) partials/deleted)")
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    // Computed property for filtered history (client-side filter if needed)
+    var filteredHistoryImages: [GeneratedImage] {
+        if showFavoritesOnly {
+            return historyImages.filter { $0.isFavorite == true }
+        }
+        return historyImages
+    }
+    
+    // Toggle favorite for an image
+    func toggleFavorite(for image: GeneratedImage) {
+        let newFavoriteStatus = !(image.isFavorite ?? false)
+        
+        apiClient.toggleFavorite(filename: image.filename, isFavorite: newFavoriteStatus)
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        print("❌ Error toggling favorite: \(error.localizedDescription)")
+                        self?.errorMessage = "Failed to update favorite: \(error.localizedDescription)"
+                    }
+                },
+                receiveValue: { [weak self] response in
+                    guard let self = self else { return }
+                    print("✅ Favorite toggled: \(image.filename) -> \(response.favorite)")
+                    
+                    // Update the image in place to avoid reloading and resetting carousel index
+                    if let index = self.historyImages.firstIndex(where: { $0.id == image.id }) {
+                        // Create a new GeneratedImage with updated favorite status
+                        let updatedImage = GeneratedImage(
+                            url: self.historyImages[index].url,
+                            filename: self.historyImages[index].filename,
+                            createdAt: self.historyImages[index].createdAt,
+                            prompt: self.historyImages[index].prompt,
+                            recipeItems: self.historyImages[index].recipeItems,
+                            deleted: self.historyImages[index].deleted,
+                            isFavorite: response.favorite
+                        )
+                        self.historyImages[index] = updatedImage
+                        print("✅ Updated favorite status locally (preserving carousel selection)")
+                    } else {
+                        // If image not found in current list, reload from server
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                            self.loadHistory()
+                        }
+                    }
                 }
             )
             .store(in: &cancellables)
@@ -1026,7 +1081,8 @@ class MainViewModel: ObservableObject {
             createdAt: Date().timeIntervalSince1970,
             prompt: prompt,
             recipeItems: nil,
-            deleted: false
+            deleted: false,
+            isFavorite: nil // Will be set by server when we reload history
         )
         
         // Prepend to history (LIFO - newest first)

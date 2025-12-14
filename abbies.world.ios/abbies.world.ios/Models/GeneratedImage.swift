@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct GeneratedImage: Codable, Identifiable {
+struct GeneratedImage: Codable, Identifiable, Equatable {
     let url: String
     let filename: String
     let createdAt: TimeInterval
     let prompt: String?
     let recipeItems: [RecipeItem]?
     let deleted: Bool?
+    let isFavorite: Bool? // Server-provided favorite status
     
     // Computed property to determine if this is a partial image
     // Partial images have "_partial.png" in filename, null prompt, or empty recipeItems
@@ -31,6 +32,7 @@ struct GeneratedImage: Codable, Identifiable {
         case prompt
         case recipeItems = "recipe_items"
         case deleted
+        case isFavorite = "favorite" // Server uses "favorite" field
     }
 }
 

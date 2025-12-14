@@ -116,6 +116,16 @@ class ImageCache {
             }
         }
         
+        // Validate content type is actually an image (not audio/video/etc)
+        let contentType = httpResponse.value(forHTTPHeaderField: "Content-Type") ?? ""
+        if !contentType.isEmpty && !contentType.hasPrefix("image/") {
+            // Skip MP3s and other non-image files silently
+            if contentType.hasPrefix("audio/") || url.pathExtension.lowercased() == "mp3" {
+                print("⚠️ ImageCache: Skipping non-image file (audio): \(url.absoluteString)")
+                throw URLError(.cannotDecodeContentData)
+            }
+        }
+        
         guard let image = UIImage(data: data) else {
             print("⚠️ ImageCache: Invalid image data: \(url.absoluteString)")
             throw URLError(.cannotDecodeContentData)

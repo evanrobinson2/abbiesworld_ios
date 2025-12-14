@@ -12,6 +12,8 @@ struct TileView: View {
     let item: CarouselItem
     let config: CarouselConfig
     let isSelected: Bool
+    var isFavorite: Bool? = nil // Optional: for showing heart icon
+    var onFavoriteTap: (() -> Void)? = nil // Optional: callback for heart tap
     
     @State private var pulseScale: CGFloat = 1.0
     @State private var loadedImage: UIImage? = nil
@@ -22,6 +24,7 @@ struct TileView: View {
         Group {
             if let image = loadedImage {
                 // Successfully loaded image
+                ZStack(alignment: .topTrailing) {
                 Image(uiImage: image)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -38,6 +41,24 @@ struct TileView: View {
                     )
                     .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
                     .animation(.easeOut(duration: 0.15), value: isSelected)
+                    
+                    // Heart icon overlay (if isFavorite is provided)
+                    if let favorite = isFavorite, onFavoriteTap != nil {
+                        Button(action: {
+                            onFavoriteTap?()
+                        }) {
+                            Image(systemName: favorite ? "heart.fill" : "heart")
+                                .font(.system(size: 16))
+                                .foregroundColor(favorite ? .red : .white)
+                                .padding(6)
+                                .background(
+                                    Circle()
+                                        .fill(Color.black.opacity(0.5))
+                                )
+                        }
+                        .padding(6)
+                    }
+                }
             } else if item.imageURL == nil {
                 // Style placeholder tile (no image URL) - use custom placeholder
                 // TEMPORARY: Passing shortDescription for overlay until we have actual assets

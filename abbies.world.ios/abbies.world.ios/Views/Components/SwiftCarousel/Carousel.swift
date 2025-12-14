@@ -12,6 +12,7 @@ struct Carousel: View {
     @Binding var selectedIndex: Int?
     let config: CarouselConfig
     var onSelect: ((CarouselItem) -> Void)? = nil
+    var itemExtras: ((CarouselItem) -> (isFavorite: Bool?, onFavoriteTap: (() -> Void)?))? = nil
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -22,13 +23,17 @@ struct Carousel: View {
                 
                 // Tiles
                 ForEach(Array(items.enumerated()), id: \.element.id) { index, item in
+                    let extras = itemExtras?(item) ?? (isFavorite: nil, onFavoriteTap: nil)
+                    
                     Button(action: {
                         handleTap(at: index, item: item)
                     }) {
                         TileView(
                             item: item,
                             config: config,
-                            isSelected: selectedIndex == index
+                            isSelected: selectedIndex == index,
+                            isFavorite: extras.isFavorite,
+                            onFavoriteTap: extras.onFavoriteTap
                         )
                     }
                     .buttonStyle(PlainButtonStyle())

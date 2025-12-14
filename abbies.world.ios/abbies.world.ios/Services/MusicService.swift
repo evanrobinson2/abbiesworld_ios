@@ -24,6 +24,8 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     @Published var isMusicEnabled: Bool = true
     @Published var repeatMode: RepeatMode = .all
     @Published var isLoading: Bool = false
+    @Published var currentSongArtwork: UIImage? = nil // Album art from MP3 metadata
+    @Published var isMuted: Bool = false
     
     // Playback state
     private var audioPlayer: AVAudioPlayer?
@@ -136,6 +138,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             isMusicEnabled = settings.isMusicEnabled
             repeatMode = settings.repeatMode
             currentIndex = settings.currentIndex
+            isMuted = settings.isMuted
         }
     }
     
@@ -144,7 +147,8 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             isShuffleEnabled: isShuffleEnabled,
             isMusicEnabled: isMusicEnabled,
             repeatMode: repeatMode,
-            currentIndex: currentIndex
+            currentIndex: currentIndex,
+            isMuted: isMuted
         )
         if let data = try? JSONEncoder().encode(settings) {
             UserDefaults.standard.set(data, forKey: settingsKey)
@@ -155,14 +159,20 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func loadPlaylist() {
         // Check cache first
-        if let cachedPlaylist = loadCachedPlaylist(), isCacheFresh() {
+        if let cachedPlaylist = loadCachedPlaylist(), isCacheFresh(), !cachedPlaylist.isEmpty {
             print("✅ MusicService: Using cached playlist (\(cachedPlaylist.count) songs)")
             playlist = cachedPlaylist
             restorePlaybackState()
             return
         }
         
-        // Fetch from server
+        // If cache is empty or stale, clear it and fetch fresh
+        if let cachedPlaylist = loadCachedPlaylist(), cachedPlaylist.isEmpty {
+            print("⚠️ MusicService: Cached playlist is empty, clearing cache and fetching fresh")
+            clearCache()
+        }
+        
+        // Fetch from server - filter to only main playlist tracks, not game-specific music
         isLoading = true
         assetsService.getAssets(type: "music")
             .receive(on: DispatchQueue.main)
@@ -180,10 +190,12 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
                 },
                 receiveValue: { [weak self] assets in
                     guard let self = self else { return }
-                    let tracks = assets.map { MusicTrack(from: $0) }
+                    // Filter to only main playlist tracks (exclude game-specific music like goonpopper)
+                    let mainAssets = assets.filter { $0.type == "music/main" }
+                    let tracks = mainAssets.map { MusicTrack(from: $0) }
                     self.playlist = tracks
                     self.cachePlaylist(tracks)
-                    print("✅ MusicService: Loaded \(tracks.count) songs from server")
+                    print("✅ MusicService: Loaded \(tracks.count) main playlist songs from server (filtered from \(assets.count) total music tracks)")
                     
                     // Auto-start if music is enabled
                     if self.isMusicEnabled && !self.isPlaying && !tracks.isEmpty {
@@ -215,6 +227,11 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         let cacheDate = Date(timeIntervalSince1970: timestamp)
         let hoursSinceCache = Date().timeIntervalSince(cacheDate) / 3600
         return hoursSinceCache < 24 // Cache valid for 24 hours
+    }
+    
+    private func clearCache() {
+        UserDefaults.standard.removeObject(forKey: playlistCacheKey)
+        UserDefaults.standard.removeObject(forKey: playlistTimestampKey)
     }
     
     private func restorePlaybackState() {
@@ -268,6 +285,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         audioPlayer?.delegate = nil // Remove delegate to prevent callbacks
         audioPlayer = nil
         isPlaying = false
+        currentSongArtwork = nil // Clear artwork when stopping
         // Don't clear currentSong here - we might want to know what was playing
         saveSettings()
     }
@@ -291,6 +309,12 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         if isShuffleEnabled {
             generateShuffleQueue()
         }
+    }
+    
+    func toggleMute() {
+        isMuted.toggle()
+        audioPlayer?.volume = isMuted ? 0.0 : 0.5
+        saveSettings()
     }
     
     func playSong(_ track: MusicTrack) {
@@ -365,7 +389,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         return nil // No more songs
     }
     
-    private func playNext() {
+    func playNext() {
         guard let nextIndex = getNextIndex() else {
             // No more songs
             stop()
@@ -379,6 +403,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
         audioPlayer = nil
         isPlaying = false
+        currentSongArtwork = nil // Clear artwork when switching
         
         currentIndex = nextIndex
         currentSong = playlist[nextIndex]
@@ -387,6 +412,64 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
             self?.loadAndPlayCurrentSong()
         }
+    }
+    
+    func playPrevious() {
+        guard let previousIndex = getPreviousIndex() else {
+            // No previous song, restart current
+            if let player = audioPlayer {
+                player.currentTime = 0
+                if !player.isPlaying {
+                    player.play()
+                    isPlaying = true
+                }
+            }
+            return
+        }
+        
+        // Clean up current player before switching
+        if let player = audioPlayer {
+            player.stop()
+            player.delegate = nil
+        }
+        audioPlayer = nil
+        isPlaying = false
+        currentSongArtwork = nil // Clear artwork when switching
+        
+        currentIndex = previousIndex
+        currentSong = playlist[previousIndex]
+        
+        // Small delay to ensure audio system is ready
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
+            self?.loadAndPlayCurrentSong()
+        }
+    }
+    
+    private func getPreviousIndex() -> Int? {
+        guard !playlist.isEmpty else { return nil }
+        
+        if isShuffleEnabled {
+            // Find current position in shuffle queue
+            if let currentPos = shuffledQueue.firstIndex(of: currentIndex) {
+                let previousPos = currentPos - 1
+                if previousPos >= 0 {
+                    return shuffledQueue[previousPos]
+                } else if repeatMode == .all {
+                    // Loop to end of shuffle queue
+                    return shuffledQueue.last
+                }
+            }
+        } else {
+            // Normal order
+            let previousIndex = currentIndex - 1
+            if previousIndex >= 0 {
+                return previousIndex
+            } else if repeatMode == .all {
+                return playlist.count - 1 // Loop to end
+            }
+        }
+        
+        return nil // No previous song
     }
     
     // MARK: - Audio Loading & Playback
@@ -449,6 +532,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             playNext()
             return
         }
+        // Extract artwork and play
         playAudioData(data)
     }
     
@@ -465,7 +549,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             let player = try AVAudioPlayer(data: data)
             player.delegate = self
             player.numberOfLoops = (repeatMode == .one) ? -1 : 0
-            player.volume = 0.5
+            player.volume = isMuted ? 0.0 : 0.5
             
             // Prepare before playing to reduce audio system load
             guard player.prepareToPlay() else {
@@ -518,5 +602,19 @@ private struct MusicSettings: Codable {
     let isMusicEnabled: Bool
     let repeatMode: RepeatMode
     let currentIndex: Int
+    let isMuted: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case isShuffleEnabled, isMusicEnabled, repeatMode, currentIndex, isMuted
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        isShuffleEnabled = try container.decode(Bool.self, forKey: .isShuffleEnabled)
+        isMusicEnabled = try container.decode(Bool.self, forKey: .isMusicEnabled)
+        repeatMode = try container.decode(RepeatMode.self, forKey: .repeatMode)
+        currentIndex = try container.decode(Int.self, forKey: .currentIndex)
+        isMuted = try container.decodeIfPresent(Bool.self, forKey: .isMuted) ?? false
+    }
 }
 

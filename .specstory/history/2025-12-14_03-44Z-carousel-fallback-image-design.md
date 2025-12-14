@@ -11125,3 +11125,15 @@ The implementation is complete and ready to use. The fallback image will automat
 
 ---
 
+_**User (2025-12-13 13:31Z)**_
+
+can you make the large format image viewer even bigger? like keep only a small padding from the top and bottom? also can you make the close button on the top right? it should match the position of the close buttons for the rest of the app, and then lastly can you make all the close buttons have an X instead of "Close" so that they are consistent.
+
+---
+
+_**Agent (model default, mode Agent)**_
+
+
+
+---
+

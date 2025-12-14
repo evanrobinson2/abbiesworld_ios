@@ -237,7 +237,7 @@ struct VictorySequenceView: View {
     }
     
     private var finalCoverView: some View {
-        VStack {
+        ZStack {
             if let coverImage = viewModel.gameState.coverImage {
                 Image(uiImage: coverImage)
                     .resizable()
@@ -248,14 +248,21 @@ struct VictorySequenceView: View {
                     .animation(.easeIn(duration: 3), value: showFinalCover)
             }
             
-            Button("Close") {
-                onDismiss?()
+            // Close button (top right)
+            VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                        onDismiss?()
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white.opacity(0.8))
+                    }
+                    .padding()
+                }
+                Spacer()
             }
-            .padding()
-            .background(Color.blue)
-            .foregroundColor(.white)
-            .cornerRadius(8)
-            .padding(.bottom, 50)
         }
     }
     

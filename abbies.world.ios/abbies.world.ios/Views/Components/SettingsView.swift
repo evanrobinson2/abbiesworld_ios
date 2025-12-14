@@ -11,8 +11,6 @@ struct SettingsView: View {
     var onDismiss: () -> Void
     @ObservedObject var viewModel: MainViewModel
     
-    @StateObject private var musicService = MusicService.shared
-    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -24,9 +22,6 @@ struct SettingsView: View {
                     
                     // View Mode Section
                     ViewModeSection(viewModel: viewModel)
-                    
-                    // Music Controls Section
-                    MusicControlsSection(musicService: musicService)
                     
                     // Other settings sections can go here
                     VStack(alignment: .leading, spacing: 16) {
@@ -45,136 +40,16 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Close") {
+                    Button(action: {
                         onDismiss()
+                    }) {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 30))
+                            .foregroundColor(.white.opacity(0.8))
                     }
                 }
             }
         }
-    }
-}
-
-struct MusicControlsSection: View {
-    @ObservedObject var musicService: MusicService
-    
-    var body: some View {
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Music Controls")
-                .font(.headline)
-                .padding(.horizontal)
-            
-            VStack(spacing: 12) {
-                // Music On/Off Toggle
-                HStack {
-                    Image(systemName: "music.note")
-                        .font(.system(size: 20))
-                        .foregroundColor(.blue)
-                        .frame(width: 30)
-                    
-                    Text("Music")
-                        .foregroundColor(.primary)
-                    
-                    Spacer()
-                    
-                    Toggle("", isOn: Binding(
-                        get: { musicService.isMusicEnabled },
-                        set: { _ in musicService.toggleMusic() }
-                    ))
-                }
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(8)
-                
-                // Shuffle Toggle
-                HStack {
-                    Image(systemName: "shuffle")
-                        .font(.system(size: 20))
-                        .foregroundColor(.blue)
-                        .frame(width: 30)
-                    
-                    Text("Shuffle")
-                        .foregroundColor(.primary)
-                    
-                    Spacer()
-                    
-                    Toggle("", isOn: Binding(
-                        get: { musicService.isShuffleEnabled },
-                        set: { _ in musicService.toggleShuffle() }
-                    ))
-                }
-                .padding()
-                .background(Color.gray.opacity(0.1))
-                .cornerRadius(8)
-            }
-            .padding(.horizontal)
-            
-            // Song Selector
-            if !musicService.playlist.isEmpty {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("Select Song")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                        .padding(.horizontal)
-                    
-                    ForEach(musicService.playlist) { track in
-                        SongRow(
-                            track: track,
-                            isCurrentlyPlaying: musicService.currentSong?.id == track.id,
-                            isPlaying: musicService.isPlaying && musicService.currentSong?.id == track.id,
-                            onSelect: {
-                                musicService.playSong(track)
-                            }
-                        )
-                    }
-                }
-            } else if musicService.isLoading {
-                HStack {
-                    Spacer()
-                    ProgressView()
-                        .padding()
-                    Spacer()
-                }
-            } else {
-                Text("No songs available")
-                    .foregroundColor(.secondary)
-                    .padding()
-            }
-        }
-    }
-}
-
-struct SongRow: View {
-    let track: MusicTrack
-    let isCurrentlyPlaying: Bool
-    let isPlaying: Bool
-    let onSelect: () -> Void
-    
-    var body: some View {
-        Button(action: onSelect) {
-            HStack {
-                // Play indicator
-                if isCurrentlyPlaying {
-                    Image(systemName: isPlaying ? "play.circle.fill" : "pause.circle.fill")
-                        .foregroundColor(.blue)
-                        .font(.system(size: 20))
-                } else {
-                    Image(systemName: "music.note")
-                        .foregroundColor(.gray)
-                        .font(.system(size: 16))
-                }
-                
-                Text(track.displayName)
-                    .foregroundColor(isCurrentlyPlaying ? .blue : .primary)
-                    .fontWeight(isCurrentlyPlaying ? .semibold : .regular)
-                
-                Spacer()
-            }
-            .padding()
-            .background(isCurrentlyPlaying ? Color.blue.opacity(0.1) : Color.gray.opacity(0.05))
-            .cornerRadius(8)
-        }
-        .buttonStyle(PlainButtonStyle())
-        .padding(.horizontal)
     }
 }
 

@@ -18,8 +18,8 @@ class GoonPopperAudioService: BaseGameAudioService {
         return "\(base)/static/assets/music/goonpopper"
     }
     
-    // Music filename - change this if your file has a different name
+    // Music filename - using actual filename from server
     override var musicFilename: String {
-        return "background.mp3"
+        return "The Land of Lollipops.mp3"
     }
 }

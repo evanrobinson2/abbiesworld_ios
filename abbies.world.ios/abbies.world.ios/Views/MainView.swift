@@ -15,6 +15,7 @@ struct MainView: View {
     // @State private var showMemoryGame = false
     // @State private var showGoonPopper = false
     @State private var showSettings = false
+    @State private var showMusicPlayer = false
     @State private var isDrawerOpen = false
     
     var body: some View {
@@ -163,6 +164,21 @@ struct MainView: View {
                         .padding(.top, 16)
                         .padding(.trailing, 8)
                         
+                        // Music button
+                        Button(action: {
+                            showMusicPlayer = true
+                        }) {
+                            Image(systemName: "music.note")
+                                .font(.system(size: 24))
+                                .foregroundColor(.white)
+                                .padding(12)
+                                .background(Color.purple.opacity(0.8))
+                                .clipShape(Circle())
+                                .shadow(radius: 5)
+                        }
+                        .padding(.top, 16)
+                        .padding(.trailing, 8)
+                        
                         // Games button
                         Button(action: {
                             showGamesDialog = true
@@ -185,6 +201,11 @@ struct MainView: View {
                 SettingsView(onDismiss: {
                     showSettings = false
                 }, viewModel: viewModel)
+            }
+            .sheet(isPresented: $showMusicPlayer) {
+                MusicPlayerView(onDismiss: {
+                    showMusicPlayer = false
+                })
             }
             .sheet(isPresented: $showGamesDialog) {
                 GamesDialogView(
@@ -410,10 +431,23 @@ struct RightColumnView: View {
     let isLoading: Bool
     
     @State private var selectedHistoryIndex: Int? = nil
+    @State private var selectedHistoryId: String? = nil // Track by ID to preserve selection
+    @State private var showInspectionView: Bool = false
+    @State private var inspectionStartIndex: Int = 0
+    
+    // Use filtered images from viewModel
+    private var filteredImages: [GeneratedImage] {
+        viewModel.filteredHistoryImages
+    }
+    
+    // Mapping from image ID to GeneratedImage for heart icon handling
+    private var imageLookup: [String: GeneratedImage] {
+        Dictionary(uniqueKeysWithValues: filteredImages.map { ($0.id, $0) })
+    }
     
     // Convert GeneratedImage to CarouselItem for SwiftCarousel
     private var historyCarouselItems: [CarouselItem] {
-        historyImages.prefix(20).map { image in
+        filteredImages.prefix(20).map { image in
             // Construct full URL from relative URL
             let baseURL = APIClient.shared.baseURL
             let imageURLString = image.url.hasPrefix("http") ? image.url : "\(baseURL)\(image.url)"
@@ -582,11 +616,29 @@ struct RightColumnCalculations {
                 
                 // History with rounded container
                 VStack(alignment: .leading, spacing: 8) {
+                    // Filter toggle button
+                    HStack {
+                        Text("History")
+                            .font(.headline)
+                            .foregroundColor(.primary)
+                        
+                        Spacer()
+                        
+                        Button(action: {
+                            viewModel.showFavoritesOnly.toggle()
+                        }) {
+                            Image(systemName: viewModel.showFavoritesOnly ? "heart.fill" : "heart")
+                                .font(.system(size: 18))
+                                .foregroundColor(viewModel.showFavoritesOnly ? .red : .gray)
+                        }
+                    }
+                    .padding(.horizontal, 8)
+                    
                     if isLoading {
                         ProgressView()
                             .frame(maxWidth: .infinity)
-                    } else if historyImages.isEmpty {
-                        Text("No images yet")
+                    } else if filteredImages.isEmpty {
+                        Text(viewModel.showFavoritesOnly ? "No favorites yet" : "No images yet")
                             .font(.system(size: 10))
                             .foregroundColor(.gray)
                             .frame(maxWidth: .infinity)
@@ -594,10 +646,45 @@ struct RightColumnCalculations {
                     } else {
                         Carousel(
                             items: historyCarouselItems,
-                            selectedIndex: $selectedHistoryIndex,
+                            selectedIndex: Binding(
+                                get: {
+                                    // Find index by ID to preserve selection when array changes
+                                    if let selectedId = selectedHistoryId,
+                                       let index = historyCarouselItems.firstIndex(where: { $0.id == selectedId }) {
+                                        return index
+                                    }
+                                    return selectedHistoryIndex
+                                },
+                                set: { newIndex in
+                                    selectedHistoryIndex = newIndex
+                                    if let index = newIndex, index < historyCarouselItems.count {
+                                        selectedHistoryId = historyCarouselItems[index].id
+                                    } else {
+                                        selectedHistoryId = nil
+                                    }
+                                }
+                            ),
                             config: historyCarouselConfig,
                             onSelect: { carouselItem in
-                                // Handle history item selection if needed
+                                // Find the index of the tapped image
+                                if let index = filteredImages.firstIndex(where: { $0.id == carouselItem.id }) {
+                                    inspectionStartIndex = index
+                                    showInspectionView = true
+                                }
+                                // Update selected ID
+                                selectedHistoryId = carouselItem.id
+                            },
+                            itemExtras: { carouselItem in
+                                // Provide favorite status and tap handler for heart icon
+                                if let image = imageLookup[carouselItem.id] {
+                                    return (
+                                        isFavorite: image.isFavorite,
+                                        onFavoriteTap: {
+                                            viewModel.toggleFavorite(for: image)
+                                        }
+                                    )
+                                }
+                                return (isFavorite: nil, onFavoriteTap: nil)
                             }
                         )
                     }
@@ -608,6 +695,12 @@ struct RightColumnCalculations {
                     RoundedRectangle(cornerRadius: 16)
                         .fill(Color.white.opacity(0.3))
                 )
+                .sheet(isPresented: $showInspectionView) {
+                    ImageInspectionView(
+                        startImageId: inspectionStartIndex < filteredImages.count ? filteredImages[inspectionStartIndex].id : "",
+                        viewModel: viewModel
+                    )
+                }
             }
             .padding(16)
         }
