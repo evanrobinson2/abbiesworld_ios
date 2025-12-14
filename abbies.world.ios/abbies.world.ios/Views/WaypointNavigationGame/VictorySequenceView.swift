@@ -24,21 +24,39 @@ struct VictorySequenceView: View {
     @State private var showViewAllButton = false
     @State private var carouselHintOpacity: Double = 0.0
     
+    // Track async operations for cleanup (using a class to allow mutation in struct)
+    private class AsyncOperationTracker {
+        var operations: [DispatchWorkItem] = []
+    }
+    private let asyncTracker = AsyncOperationTracker()
+    
     var body: some View {
         ZStack {
             Color.black.opacity(0.95)
                 .ignoresSafeArea()
             
-            switch currentPhase {
-            case .initialImage:
+            // Initial victory image
+            if currentPhase == .initialImage {
                 initialVictoryView
-            case .cutscene:
-                cutsceneView
-            case .polaroidEntrance, .carousel:
+            }
+            
+            // Cutscene (overlays on top when active)
+            cutsceneView
+                .opacity(cutsceneOpacity)
+                .allowsHitTesting(cutsceneOpacity > 0)
+            
+            // Polaroid carousel
+            if currentPhase == .polaroidEntrance || currentPhase == .carousel {
                 polaroidCarouselView
-            case .gridView:
+            }
+            
+            // Grid view
+            if currentPhase == .gridView {
                 gridView
-            case .finalCover:
+            }
+            
+            // Final cover
+            if currentPhase == .finalCover {
                 finalCoverView
             }
         }
@@ -46,7 +64,14 @@ struct VictorySequenceView: View {
             startVictorySequence()
         }
         .onDisappear {
+            // Cleanup all timers and async operations when view disappears
             cleanup()
+        }
+        .onChange(of: viewModel.gameState.gameComplete) { oldValue, newValue in
+            // If game completion is reset (shouldn't happen, but safety check)
+            if !newValue && currentPhase != .finalCover {
+                cleanup()
+            }
         }
     }
     
@@ -114,7 +139,6 @@ struct VictorySequenceView: View {
                     .padding(.bottom, 100)
             }
         }
-        .opacity(cutsceneOpacity)
     }
     
     private var polaroidCarouselView: some View {
@@ -244,26 +268,47 @@ struct VictorySequenceView: View {
         print("   Cutscene image loaded: \(viewModel.gameState.cutsceneImage != nil)")
         print("   Polaroid images loaded: \(viewModel.gameState.polaroidImages.count)")
         
+        // Clear any existing operations
+        cancelAllAsyncOperations()
+        
         // Phase 1: Initial image (4 seconds)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
+        let initialWorkItem = DispatchWorkItem {
+            // Check if view is still active before executing
+            guard self.currentPhase == .initialImage else { return }
             print("🎉 VictorySequenceView: Transitioning to cutscene")
             self.transitionToCutscene()
         }
+        asyncTracker.operations.append(initialWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: initialWorkItem)
     }
     
     private func transitionToCutscene() {
-        currentPhase = .cutscene
+        print("🎬 [CUTSCENE] Transitioning to cutscene phase")
+        print("🎬 [CUTSCENE] Cutscene image loaded: \(viewModel.gameState.cutsceneImage != nil)")
         showBanner = false
         
-        // Fade in cutscene
-        withAnimation(.easeIn(duration: 1.5)) {
-            cutsceneOpacity = 1.0
+        // Small delay before showing cutscene (like HTML's 50ms)
+        let fadeWorkItem = DispatchWorkItem {
+            // Check if view is still active before executing
+            guard self.currentPhase == .cutscene || self.currentPhase == .initialImage else { return }
+            // Fade in cutscene
+            withAnimation(.easeIn(duration: 1.5)) {
+                self.cutsceneOpacity = 1.0
+            }
+            print("🎬 [CUTSCENE] Cutscene opacity set to 1.0")
         }
+        asyncTracker.operations.append(fadeWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.05, execute: fadeWorkItem)
         
         // Phase 2: Cutscene (4 seconds)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 4) {
-            transitionToPolaroids()
+        let transitionWorkItem = DispatchWorkItem {
+            // Check if view is still active before executing
+            guard self.currentPhase == .cutscene else { return }
+            print("🎬 [CUTSCENE] Cutscene phase complete, transitioning to polaroids")
+            self.transitionToPolaroids()
         }
+        asyncTracker.operations.append(transitionWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4, execute: transitionWorkItem)
     }
     
     private func transitionToPolaroids() {
@@ -272,17 +317,21 @@ struct VictorySequenceView: View {
             cutsceneOpacity = 0.0
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-            currentPhase = .polaroidEntrance
-            showBanner = true
-            bannerOpacity = 1.0
+        let polaroidWorkItem = DispatchWorkItem {
+            // Check if view is still active before executing
+            guard self.currentPhase == .cutscene || self.currentPhase == .polaroidEntrance else { return }
+            self.currentPhase = .polaroidEntrance
+            self.showBanner = true
+            self.bannerOpacity = 1.0
             
             // Start victory music
-            viewModel.audioService.startVictoryMusic()
+            self.viewModel.audioService.startVictoryMusic()
             
             // Start polaroid entrance sequence
-            startPolaroidEntrance()
+            self.startPolaroidEntrance()
         }
+        asyncTracker.operations.append(polaroidWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: polaroidWorkItem)
     }
     
     private func startPolaroidEntrance() {
@@ -296,26 +345,43 @@ struct VictorySequenceView: View {
             return
         }
         
+        // Clear any existing operations
+        cancelAllAsyncOperations()
+        
         // Each polaroid appears 6.2s after the previous (5s pause + 1.2s animation)
         for index in 0..<polaroidCount {
             let delay = Double(index) * 6.2
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            let workItem = DispatchWorkItem { [weak viewModel] in
+                // Check if view is still active before executing
+                guard self.currentPhase == .polaroidEntrance || self.currentPhase == .carousel else { return }
                 print("🎉 VictorySequenceView: Showing polaroid \(index + 1)/\(polaroidCount)")
                 withAnimation(.spring(response: 1.2, dampingFraction: 0.6)) {
-                    polaroidEntranceStates[index] = true
+                    self.polaroidEntranceStates[index] = true
                 }
             }
+            asyncTracker.operations.append(workItem)
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: workItem)
         }
         
         // After all polaroids have entered, enable carousel
         let totalEntranceTime = Double(polaroidCount) * 6.2 + 1.2
-        DispatchQueue.main.asyncAfter(deadline: .now() + totalEntranceTime) {
+        let carouselWorkItem = DispatchWorkItem { [weak viewModel] in
+            // Check if view is still active before executing
+            guard self.currentPhase == .polaroidEntrance || self.currentPhase == .carousel else { return }
             print("🎉 VictorySequenceView: All polaroids entered, starting carousel")
-            currentPhase = .carousel
-            startAutoAdvance()
-            showCarouselHint()
+            self.currentPhase = .carousel
+            self.startAutoAdvance()
+            self.showCarouselHint()
         }
+        asyncTracker.operations.append(carouselWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + totalEntranceTime, execute: carouselWorkItem)
+    }
+    
+    private func cancelAllAsyncOperations() {
+        for workItem in asyncTracker.operations {
+            workItem.cancel()
+        }
+        asyncTracker.operations.removeAll()
     }
     
     private func startAutoAdvance() {
@@ -374,9 +440,13 @@ struct VictorySequenceView: View {
         }
         
         // After 8 seconds, show final cover
-        DispatchQueue.main.asyncAfter(deadline: .now() + 8) {
-            transitionToFinalCover()
+        let finalCoverWorkItem = DispatchWorkItem {
+            // Check if view is still active before executing
+            guard self.currentPhase == .gridView else { return }
+            self.transitionToFinalCover()
         }
+        asyncTracker.operations.append(finalCoverWorkItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 8, execute: finalCoverWorkItem)
     }
     
     private func transitionToFinalCover() {
@@ -389,8 +459,19 @@ struct VictorySequenceView: View {
     }
     
     private func cleanup() {
+        // Cancel all timers
         autoAdvanceTimer?.invalidate()
         gridViewTimer?.invalidate()
+        autoAdvanceTimer = nil
+        gridViewTimer = nil
+        
+        // Cancel all pending async operations
+        cancelAllAsyncOperations()
+        
+        // Stop victory music
+        viewModel.audioService.stopAllAudio()
+        
+        print("🧹 VictorySequenceView: Cleanup complete")
     }
 }
 

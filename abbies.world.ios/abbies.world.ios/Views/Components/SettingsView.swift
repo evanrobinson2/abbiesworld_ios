@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SettingsView: View {
     var onDismiss: () -> Void
+    @ObservedObject var viewModel: MainViewModel
     
     @StateObject private var musicService = MusicService.shared
     
@@ -20,6 +21,9 @@ struct SettingsView: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.top)
+                    
+                    // View Mode Section
+                    ViewModeSection(viewModel: viewModel)
                     
                     // Music Controls Section
                     MusicControlsSection(musicService: musicService)
@@ -204,7 +208,41 @@ struct SettingsRow: View {
     }
 }
 
+struct ViewModeSection: View {
+    @ObservedObject var viewModel: MainViewModel
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("View Mode")
+                .font(.headline)
+                .padding(.horizontal)
+            
+            VStack(spacing: 12) {
+                // View mode picker
+                Picker("View Mode", selection: Binding(
+                    get: { viewModel.viewMode },
+                    set: { viewModel.setViewMode($0) }
+                )) {
+                    Text("Default").tag(ViewMode.default)
+                    Text("4 Carousels").tag(ViewMode.fourCarousel)
+                }
+                .pickerStyle(SegmentedPickerStyle())
+                .padding(.horizontal)
+                
+                // Description text
+                Text(viewModel.viewMode == .default 
+                     ? "Standard 3-carousel layout"
+                     : "Extended layout with style selection")
+                    .font(.caption)
+                    .foregroundColor(.secondary)
+                    .padding(.horizontal)
+            }
+        }
+    }
+}
+
 #Preview {
-    SettingsView(onDismiss: {})
+    // Note: Preview needs a MainViewModel instance
+    SettingsView(onDismiss: {}, viewModel: MainViewModel())
 }
 

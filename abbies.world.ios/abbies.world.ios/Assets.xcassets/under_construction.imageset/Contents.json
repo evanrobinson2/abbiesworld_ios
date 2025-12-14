@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "under_construction.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

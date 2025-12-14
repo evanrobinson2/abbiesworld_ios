@@ -14,13 +14,28 @@ struct CarouselView: View {
     @Binding var selectedIndex: Int
     let onItemSelected: (Ingredient) -> Void
     
+    // TEMPORARY: Optional mapping for style short descriptions
+    // Remove this parameter when we have actual style assets
+    var styleShortDescriptions: [String: String]? = nil
+    
+    // Optional custom tile size (for 4-carousel view to fit on screen)
+    var customTileSize: CGFloat? = nil
+    
     // Convert Ingredient to CarouselItem for SwiftCarousel
     private var carouselItems: [CarouselItem] {
         return items.map { ingredient in
-            CarouselItem(
+            // TEMPORARY: For style items (art_style category), include short description
+            // This is for placeholder tile overlays until we have actual assets
+            // Remove the shortDescription parameter when assets are available
+            let shortDesc: String? = (ingredient.category == "art_style") 
+                ? styleShortDescriptions?[ingredient.id] 
+                : nil
+            
+            return CarouselItem(
                 id: ingredient.id,
                 imageURL: ingredient.imageURL,
-                displayName: ingredient.name
+                displayName: ingredient.name,
+                shortDescription: shortDesc
             )
         }
     }
@@ -40,10 +55,12 @@ struct CarouselView: View {
     }
     
     // Carousel configuration - larger tiles for expanded rows
+    // Use custom size if provided (for 4-carousel view), otherwise default to 280
     private var carouselConfig: CarouselConfig {
         var config = CarouselConfig.default()
-        config.tileWidth = 280
-        config.tileHeight = 280
+        let tileSize = customTileSize ?? 280 // Default 280, smaller for 4-carousel view
+        config.tileWidth = tileSize
+        config.tileHeight = tileSize
         config.tileSpacing = 16
         config.horizontalPadding = 20
         return config

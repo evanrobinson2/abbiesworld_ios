@@ -38,28 +38,14 @@ struct TileView: View {
                     )
                     .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
                     .animation(.easeOut(duration: 0.15), value: isSelected)
-            } else {
-                // Loading state or placeholder
-                RoundedRectangle(cornerRadius: config.cornerRadius)
-                    .fill(Color.gray.opacity(0.3))
+            } else if item.imageURL == nil {
+                // Style placeholder tile (no image URL) - use custom placeholder
+                // TEMPORARY: Passing shortDescription for overlay until we have actual assets
+                StylePlaceholderTile(
+                    styleName: item.displayName,
+                    shortDescription: item.shortDescription
+                )
                     .frame(width: config.tileWidth, height: config.tileHeight)
-                    .overlay(
-                        VStack(spacing: 8) {
-                            if isLoading {
-                                ProgressView()
-                                    .progressViewStyle(CircularProgressViewStyle())
-                            } else {
-                                Image(systemName: loadError ? "exclamationmark.triangle" : "photo")
-                                    .font(.largeTitle)
-                                    .foregroundColor(loadError ? .orange : .gray)
-                            }
-                            Text(item.displayName)
-                                .font(.caption)
-                                .lineLimit(2)
-                                .multilineTextAlignment(.center)
-                        }
-                        .padding()
-                    )
                     .overlay(
                         RoundedRectangle(cornerRadius: config.cornerRadius)
                             .stroke(
@@ -69,6 +55,145 @@ struct TileView: View {
                     )
                     .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
                     .animation(.easeOut(duration: 0.15), value: isSelected)
+            } else {
+                // Loading state or error state (has imageURL but not loaded yet)
+                if loadError {
+                    // Show "under construction" fallback image with overlay text
+                    if let fallbackImage = UIImage(named: "under_construction") {
+                        Image(uiImage: fallbackImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: config.tileWidth, height: config.tileHeight)
+                            .clipped()
+                            .cornerRadius(config.cornerRadius)
+                            .overlay(
+                                // Gradient overlay at bottom for text readability
+                                LinearGradient(
+                                    gradient: Gradient(colors: [
+                                        Color.clear,
+                                        Color.black.opacity(0.7)
+                                    ]),
+                                    startPoint: .center,
+                                    endPoint: .bottom
+                                )
+                                .frame(height: config.tileHeight * 0.35)
+                                .offset(y: config.tileHeight * 0.325)
+                            )
+                            .overlay(
+                                // "UNDER CONSTRUCTION" text with better styling
+                                VStack {
+                                    Spacer()
+                                    Text("UNDER CONSTRUCTION")
+                                        .font(.system(size: min(config.tileWidth * 0.12, 14), weight: .bold, design: .rounded))
+                                        .foregroundColor(.white)
+                                        .shadow(color: .black.opacity(0.9), radius: 3, x: 0, y: 2)
+                                        .padding(.horizontal, 4)
+                                        .padding(.bottom, max(config.tileHeight * 0.08, 6))
+                                }
+                            )
+                            .overlay(
+                                // Selection border
+                                RoundedRectangle(cornerRadius: config.cornerRadius)
+                                    .stroke(
+                                        config.selectionBorderColor,
+                                        lineWidth: isSelected ? config.selectionBorderWidth : 0
+                                    )
+                            )
+                            .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
+                            .animation(.easeOut(duration: 0.15), value: isSelected)
+                    } else {
+                        // Fallback if image asset not found
+                        RoundedRectangle(cornerRadius: config.cornerRadius)
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: config.tileWidth, height: config.tileHeight)
+                            .overlay(
+                                VStack(spacing: 8) {
+                                    Image(systemName: "exclamationmark.triangle")
+                                        .font(.largeTitle)
+                                        .foregroundColor(.orange)
+                                    Text("UNDER CONSTRUCTION")
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .foregroundColor(.orange)
+                                }
+                                .padding()
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: config.cornerRadius)
+                                    .stroke(
+                                        config.selectionBorderColor,
+                                        lineWidth: isSelected ? config.selectionBorderWidth : 0
+                                    )
+                            )
+                            .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
+                            .animation(.easeOut(duration: 0.15), value: isSelected)
+                    }
+                } else {
+                    // Loading state - use under construction image as background with spinner
+                    if let loadingImage = UIImage(named: "under_construction") {
+                        Image(uiImage: loadingImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: config.tileWidth, height: config.tileHeight)
+                            .clipped()
+                            .cornerRadius(config.cornerRadius)
+                            .overlay(
+                                // Semi-transparent overlay to make spinner more visible
+                                Color.black.opacity(0.3)
+                            )
+                            .overlay(
+                                // Spinner and item name
+                                VStack(spacing: 8) {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                        .scaleEffect(1.2)
+                                    Text(item.displayName)
+                                        .font(.caption)
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.white)
+                                        .lineLimit(2)
+                                        .multilineTextAlignment(.center)
+                                        .shadow(color: .black.opacity(0.8), radius: 2, x: 0, y: 1)
+                                }
+                                .padding()
+                            )
+                            .overlay(
+                                // Selection border
+                                RoundedRectangle(cornerRadius: config.cornerRadius)
+                                    .stroke(
+                                        config.selectionBorderColor,
+                                        lineWidth: isSelected ? config.selectionBorderWidth : 0
+                                    )
+                            )
+                            .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
+                            .animation(.easeOut(duration: 0.15), value: isSelected)
+                    } else {
+                        // Fallback if image asset not found
+                        RoundedRectangle(cornerRadius: config.cornerRadius)
+                            .fill(Color.gray.opacity(0.3))
+                            .frame(width: config.tileWidth, height: config.tileHeight)
+                            .overlay(
+                                VStack(spacing: 8) {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                    Text(item.displayName)
+                                        .font(.caption)
+                                        .lineLimit(2)
+                                        .multilineTextAlignment(.center)
+                                }
+                                .padding()
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: config.cornerRadius)
+                                    .stroke(
+                                        config.selectionBorderColor,
+                                        lineWidth: isSelected ? config.selectionBorderWidth : 0
+                                    )
+                            )
+                            .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
+                            .animation(.easeOut(duration: 0.15), value: isSelected)
+                    }
+                }
             }
         }
         .onAppear {

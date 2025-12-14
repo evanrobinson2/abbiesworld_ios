@@ -10,31 +10,35 @@ import SwiftUI
 struct CarouselItem: Identifiable {
     let id: String
     let imageName: String?      // Optional: for bundle-based images
-    let imageURL: String?        // Optional: for URL-based images
+    let imageURL: String?       // Optional: for URL-based images
     let displayName: String
+    let shortDescription: String? // Optional: short description (1-4 words) for placeholder tiles
     
     // Convenience initializer for bundle-based images (backward compatible)
-    init(id: String, imageName: String, displayName: String) {
+    init(id: String, imageName: String, displayName: String, shortDescription: String? = nil) {
         self.id = id
         self.imageName = imageName
         self.imageURL = nil
         self.displayName = displayName
+        self.shortDescription = shortDescription
     }
     
     // Initializer for URL-based images
-    init(id: String, imageURL: String, displayName: String) {
+    init(id: String, imageURL: String, displayName: String, shortDescription: String? = nil) {
         self.id = id
         self.imageName = nil
         self.imageURL = imageURL
         self.displayName = displayName
+        self.shortDescription = shortDescription
     }
     
     // Full initializer for both (URL takes precedence)
-    init(id: String, imageName: String? = nil, imageURL: String? = nil, displayName: String) {
+    init(id: String, imageName: String? = nil, imageURL: String? = nil, displayName: String, shortDescription: String? = nil) {
         self.id = id
         self.imageName = imageName
         self.imageURL = imageURL
         self.displayName = displayName
+        self.shortDescription = shortDescription
     }
     
     static func sampleItems(count: Int = 15) -> [CarouselItem] {

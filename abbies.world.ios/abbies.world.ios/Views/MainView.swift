@@ -11,6 +11,9 @@ struct MainView: View {
     @StateObject private var viewModel = MainViewModel()
     @State private var showGamesDialog = false
     @State private var showWaypointGame = false
+    // Memory Game and Goon Popper temporarily disabled
+    // @State private var showMemoryGame = false
+    // @State private var showGoonPopper = false
     @State private var showSettings = false
     @State private var isDrawerOpen = false
     
@@ -32,18 +35,42 @@ struct MainView: View {
                 
                 // Main Content - Full-width carousels with overlay drawer
                 ZStack(alignment: .trailing) {
-                    // Carousels - Full width
-                    CombinedColumnView(
-                        friendIndex: $viewModel.friendIndex,
-                        outfitIndex: $viewModel.outfitIndex,
-                        placeIndex: $viewModel.placeIndex,
-                        friendItems: viewModel.friendItems,
-                        outfitItems: viewModel.outfitItems,
-                        placeItems: viewModel.placeItems,
-                        onFriendSelected: { viewModel.selectFriend($0) },
-                        onOutfitSelected: { viewModel.selectOutfit($0) },
-                        onPlaceSelected: { viewModel.selectPlace($0) }
-                    )
+                    // Carousels - Full width (conditional based on view mode)
+                    Group {
+                        if viewModel.viewMode == .default {
+                            // Default 3-carousel view
+                            CombinedColumnView(
+                                friendIndex: $viewModel.friendIndex,
+                                outfitIndex: $viewModel.outfitIndex,
+                                placeIndex: $viewModel.placeIndex,
+                                friendItems: viewModel.friendItems,
+                                outfitItems: viewModel.outfitItems,
+                                placeItems: viewModel.placeItems,
+                                onFriendSelected: { viewModel.selectFriend($0) },
+                                onOutfitSelected: { viewModel.selectOutfit($0) },
+                                onPlaceSelected: { viewModel.selectPlace($0) }
+                            )
+                        } else {
+                            // Four-carousel view with style selection
+                            // TEMPORARY: Pass styleShortDescriptions for placeholder overlays
+                            // Remove this parameter when we have actual style assets
+                            FourCarouselView(
+                                friendIndex: $viewModel.friendIndex,
+                                outfitIndex: $viewModel.outfitIndex,
+                                placeIndex: $viewModel.placeIndex,
+                                styleIndex: $viewModel.styleIndex,
+                                friendItems: viewModel.friendItems,
+                                outfitItems: viewModel.outfitItems,
+                                placeItems: viewModel.placeItems,
+                                styleItems: viewModel.styleItems,
+                                onFriendSelected: { viewModel.selectFriend($0) },
+                                onOutfitSelected: { viewModel.selectOutfit($0) },
+                                onPlaceSelected: { viewModel.selectPlace($0) },
+                                onStyleSelected: { viewModel.selectStyle($0) },
+                                styleShortDescriptions: viewModel.styleShortDescriptions.isEmpty ? nil : viewModel.styleShortDescriptions
+                            )
+                        }
+                    }
                     .frame(width: geometry.size.width)
                     .opacity(isDrawerOpen ? 0.7 : 1.0)
                     .blur(radius: isDrawerOpen ? 2 : 0)
@@ -84,6 +111,7 @@ struct MainView: View {
                     if !isDrawerOpen {
                         FloatingGenerationButton(
                             state: viewModel.buttonState,
+                            hasPreviewImage: viewModel.previewImage != nil,
                             action: {
                                 viewModel.startImageGeneration()
                                 // Auto-open drawer when generation starts
@@ -156,12 +184,17 @@ struct MainView: View {
             .sheet(isPresented: $showSettings) {
                 SettingsView(onDismiss: {
                     showSettings = false
-                })
+                }, viewModel: viewModel)
             }
             .sheet(isPresented: $showGamesDialog) {
-                GamesDialogView(showWaypointGame: $showWaypointGame, onDismiss: {
-                    showGamesDialog = false
-                })
+                GamesDialogView(
+                    showWaypointGame: $showWaypointGame,
+                    // showMemoryGame: $showMemoryGame,
+                    // showGoonPopper: $showGoonPopper,
+                    onDismiss: {
+                        showGamesDialog = false
+                    }
+                )
             }
             .fullScreenCover(isPresented: $showWaypointGame) {
                 WaypointNavigationView(
@@ -173,10 +206,36 @@ struct MainView: View {
                     }
                 )
             }
+            // Memory Game and Goon Popper temporarily disabled
+            // .fullScreenCover(isPresented: $showMemoryGame) {
+            //     MemoryGameView(
+            //         onDismiss: {
+            //             showMemoryGame = false
+            //         },
+            //         onComplete: {
+            //             showMemoryGame = false
+            //         }
+            //     )
+            // }
+            // .fullScreenCover(isPresented: $showGoonPopper) {
+            //     GoonPopperView(
+            //         onDismiss: {
+            //             showGoonPopper = false
+            //         },
+            //         onComplete: {
+            //             showGoonPopper = false
+            //         }
+            //     )
+            // }
             .onChange(of: showWaypointGame) { oldValue, newValue in
                 // Coordinate music with game lifecycle
                 MusicService.shared.setGameActive(newValue)
             }
+            // Memory Game and Goon Popper temporarily disabled
+            // .onChange(of: showGoonPopper) { oldValue, newValue in
+            //     // Coordinate music with game lifecycle
+            //     MusicService.shared.setGameActive(newValue)
+            // }
         }
         .ignoresSafeArea()
         .toast($viewModel.toastMessage)

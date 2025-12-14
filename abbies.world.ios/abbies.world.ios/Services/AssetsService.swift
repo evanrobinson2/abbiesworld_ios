@@ -16,8 +16,12 @@ struct Asset: Codable, Identifiable {
     let size: Int
     let mimeType: String
     let modified: String
+    let assetId: String? // Server-provided id field (filename without extension) - renamed to avoid conflict with Identifiable
     
-    var id: String { "\(type)/\(name)" }
+    // Computed id for Identifiable protocol (use provided assetId if available, otherwise fallback)
+    var id: String {
+        return assetId ?? "\(type)/\(name)"
+    }
     
     enum CodingKeys: String, CodingKey {
         case name
@@ -26,6 +30,7 @@ struct Asset: Codable, Identifiable {
         case size
         case mimeType = "mime_type"
         case modified
+        case assetId = "id" // Map server's "id" field to assetId property
     }
 }
 

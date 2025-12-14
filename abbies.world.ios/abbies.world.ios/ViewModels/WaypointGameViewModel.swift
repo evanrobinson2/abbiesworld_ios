@@ -130,35 +130,40 @@ class WaypointGameViewModel: ObservableObject {
         
         // Load destination banner
         let bannerURLString = "\(assetBaseURL)/trio_at_base_pixel.png"
-        print("🖼️ Loading destination banner from: \(bannerURLString)")
+        print("🖼️ [BANNER] Loading destination banner from: \(bannerURLString)")
+        print("🖼️ [BANNER] Asset base URL: \(assetBaseURL)")
         if let url = URL(string: bannerURLString) {
-            print("   URL: \(url.absoluteString)")
+            print("🖼️ [BANNER] URL constructed: \(url.absoluteString)")
             do {
+                print("🖼️ [BANNER] Attempting to load image via ImageCache...")
                 if let image = try await ImageCache.shared.loadImage(from: url) {
                     await MainActor.run {
+                        print("🖼️ [BANNER] Image loaded! Size: \(image.size.width)x\(image.size.height)")
+                        print("🖼️ [BANNER] Setting destinationBannerImage in gameState...")
                         gameState.destinationBannerImage = image
-                        print("✅ Destination banner loaded successfully (\(image.size.width)x\(image.size.height))")
+                        print("🖼️ [BANNER] ✅ Destination banner set! Current value: \(gameState.destinationBannerImage != nil ? "NOT NIL" : "NIL")")
                     }
                 } else {
-                    print("⚠️ Failed to load destination banner: ImageCache returned nil")
+                    print("🖼️ [BANNER] ⚠️ ImageCache returned nil - image not found or failed to decode")
                 }
             } catch {
                 let nsError = error as NSError
+                print("🖼️ [BANNER] ❌ Exception caught: \(error)")
                 if nsError.domain == NSURLErrorDomain {
                     if nsError.code == NSURLErrorFileDoesNotExist {
-                        print("❌ Destination banner not found (404) - file may have been moved or deleted")
+                        print("🖼️ [BANNER] ❌ Destination banner not found (404) - file may have been moved or deleted")
                     } else if nsError.code == NSURLErrorUserAuthenticationRequired {
-                        print("❌ Destination banner authentication failed (401) - check API key")
+                        print("🖼️ [BANNER] ❌ Destination banner authentication failed (401) - check API key")
                     } else {
-                        print("❌ Error loading destination banner: \(error) (code: \(nsError.code))")
+                        print("🖼️ [BANNER] ❌ Error loading destination banner: \(error) (code: \(nsError.code))")
                     }
                 } else {
-                    print("❌ Error loading destination banner: \(error)")
+                    print("🖼️ [BANNER] ❌ Error loading destination banner: \(error)")
                 }
                 // Continue gracefully - game can still work without banner
             }
         } else {
-            print("❌ Invalid URL for destination banner: \(bannerURLString)")
+            print("🖼️ [BANNER] ❌ Invalid URL for destination banner: \(bannerURLString)")
         }
     }
     
@@ -244,14 +249,12 @@ class WaypointGameViewModel: ObservableObject {
             "polaroid_10_window_view.png"
         ]
         
-        print("🖼️ Loading \(polaroidFilenames.count) polaroid images...")
         var loadedPolaroids: [UIImage] = []
         for (index, filename) in polaroidFilenames.enumerated() {
             if let url = URL(string: "\(assetBaseURL)/\(filename)") {
                 do {
                     if let image = try await ImageCache.shared.loadImage(from: url) {
                         loadedPolaroids.append(image)
-                        print("   ✅ [\(index + 1)/\(polaroidFilenames.count)] \(filename)")
                     } else {
                         print("   ⚠️ [\(index + 1)/\(polaroidFilenames.count)] \(filename) - ImageCache returned nil")
                     }
@@ -265,7 +268,6 @@ class WaypointGameViewModel: ObservableObject {
         
         await MainActor.run {
             gameState.polaroidImages = loadedPolaroids
-            print("🎉 Victory assets loading complete: \(loadedPolaroids.count)/\(polaroidFilenames.count) polaroids loaded")
         }
     }
     

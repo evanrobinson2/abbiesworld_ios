@@ -69,13 +69,13 @@ class WaypointGameState: ObservableObject {
     @Published var statusMessage: String = "Click any waypoint to begin discovering the safe path!"
     
     // Asset URLs (loaded from server)
-    var buggyImage: UIImage?
-    var moonbaseImage: UIImage?
-    var destinationBannerImage: UIImage?
-    var victoryImage: UIImage?
-    var cutsceneImage: UIImage?
-    var coverImage: UIImage?
-    var polaroidImages: [UIImage] = []
+    @Published var buggyImage: UIImage?
+    @Published var moonbaseImage: UIImage?
+    @Published var destinationBannerImage: UIImage?
+    @Published var victoryImage: UIImage?
+    @Published var cutsceneImage: UIImage?
+    @Published var coverImage: UIImage?
+    @Published var polaroidImages: [UIImage] = []
     
     // Victory state
     @Published var victoryPhase: VictoryPhase = .initialImage

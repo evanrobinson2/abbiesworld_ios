@@ -9,6 +9,9 @@ import SwiftUI
 
 struct GamesDialogView: View {
     @Binding var showWaypointGame: Bool
+    // Memory Game and Goon Popper temporarily disabled
+    // @Binding var showMemoryGame: Bool
+    // @Binding var showGoonPopper: Bool
     var onDismiss: () -> Void
     
     var body: some View {
@@ -19,10 +22,8 @@ struct GamesDialogView: View {
                     .fontWeight(.bold)
                     .padding(.top)
                 
-                // Grid of game icons
+                // Grid of game icons - 1 column for the 1 active game
                 LazyVGrid(columns: [
-                    GridItem(.flexible()),
-                    GridItem(.flexible()),
                     GridItem(.flexible())
                 ], spacing: 20) {
                     // Waypoint Navigation Game
@@ -35,50 +36,25 @@ struct GamesDialogView: View {
                         onDismiss()
                     }
                     
-                    // Placeholder game 1
-                    GameIconButton(
-                        icon: "puzzlepiece.fill",
-                        title: "Coming Soon",
-                        color: .purple
-                    ) {
-                        // Placeholder action
-                    }
+                    // Memory Game - temporarily disabled
+                    // GameIconButton(
+                    //     icon: "square.grid.2x2.fill",
+                    //     title: "Memory Game",
+                    //     color: .purple
+                    // ) {
+                    //     showMemoryGame = true
+                    //     onDismiss()
+                    // }
                     
-                    // Placeholder game 2
-                    GameIconButton(
-                        icon: "star.fill",
-                        title: "Coming Soon",
-                        color: .orange
-                    ) {
-                        // Placeholder action
-                    }
-                    
-                    // Placeholder game 3
-                    GameIconButton(
-                        icon: "sparkles",
-                        title: "Coming Soon",
-                        color: .pink
-                    ) {
-                        // Placeholder action
-                    }
-                    
-                    // Placeholder game 4
-                    GameIconButton(
-                        icon: "heart.fill",
-                        title: "Coming Soon",
-                        color: .red
-                    ) {
-                        // Placeholder action
-                    }
-                    
-                    // Placeholder game 5
-                    GameIconButton(
-                        icon: "moon.fill",
-                        title: "Coming Soon",
-                        color: .indigo
-                    ) {
-                        // Placeholder action
-                    }
+                    // Goon Popper Game - temporarily disabled
+                    // GameIconButton(
+                    //     icon: "hand.tap.fill",
+                    //     title: "Goon Popper",
+                    //     color: .orange
+                    // ) {
+                    //     showGoonPopper = true
+                    //     onDismiss()
+                    // }
                 }
                 .padding()
                 
@@ -132,6 +108,11 @@ struct GameIconButton: View {
 }
 
 #Preview {
-    GamesDialogView(showWaypointGame: .constant(false), onDismiss: {})
+    GamesDialogView(
+        showWaypointGame: .constant(false),
+        // showMemoryGame: .constant(false),
+        // showGoonPopper: .constant(false),
+        onDismiss: {}
+    )
 }
 

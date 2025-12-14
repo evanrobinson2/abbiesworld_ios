@@ -30,15 +30,30 @@ class MainViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private var imageGenerationTask: Task<Void, Never>?
     
+    // View mode - controls which layout is displayed
+    @Published var viewMode: ViewMode = .default {
+        didSet {
+            // Persist view mode selection
+            UserDefaults.standard.set(viewMode.rawValue, forKey: "viewMode")
+            // Load style items when switching to fourCarousel mode
+            // Always reload to ensure styles are available (they're lightweight placeholders)
+            if viewMode == .fourCarousel {
+                loadStyleItems()
+            }
+        }
+    }
+    
     // Carousel indices
     @Published var friendIndex = -1
     @Published var outfitIndex = -1
     @Published var placeIndex = -1
+    @Published var styleIndex = -1 // For 4th carousel (style/medium)
     
     // Ingredients by category (filtered from API)
     @Published var friendItems: [Ingredient] = []
     @Published var outfitItems: [Ingredient] = []
     @Published var placeItems: [Ingredient] = []
+    @Published var styleItems: [Ingredient] = [] // Placeholder style items
     
     // Preview and history
     @Published var previewImage: UIImage?
@@ -71,25 +86,46 @@ class MainViewModel: ObservableObject {
         setupButtonStateObserver()
         // Initialize music service (loads playlist on init)
         _ = MusicService.shared
+        
+        // Load persisted view mode
+        if let savedMode = UserDefaults.standard.string(forKey: "viewMode"),
+           let mode = ViewMode(rawValue: savedMode) {
+            viewMode = mode
+            // Load style items if in fourCarousel mode
+            if mode == .fourCarousel {
+                loadStyleItems()
+            }
+        }
     }
     
     // Computed property to check if all selections are ready
+    // NOTE: Different requirements based on view mode:
+    // - Default mode: requires friend, outfit, place (3 selections)
+    // - FourCarousel mode: requires friend, outfit, place, style (4 selections)
     var allSelectionsReady: Bool {
-        friendIndex >= 0 && outfitIndex >= 0 && placeIndex >= 0 &&
-        friendIndex < friendItems.count &&
-        outfitIndex < outfitItems.count &&
-        placeIndex < placeItems.count
+        let baseReady = friendIndex >= 0 && outfitIndex >= 0 && placeIndex >= 0 &&
+            friendIndex < friendItems.count &&
+            outfitIndex < outfitItems.count &&
+            placeIndex < placeItems.count
+        
+        // In fourCarousel mode, also require style selection
+        if viewMode == .fourCarousel {
+            return baseReady && styleIndex >= 0 && styleIndex < styleItems.count
+        }
+        
+        return baseReady
     }
     
     // Observe carousel index changes to update button state
     private func setupButtonStateObserver() {
-        Publishers.CombineLatest3(
+        Publishers.CombineLatest4(
             $friendIndex,
             $outfitIndex,
-            $placeIndex
+            $placeIndex,
+            $styleIndex
         )
         .receive(on: DispatchQueue.main)
-        .sink { [weak self] _, _, _ in
+        .sink { [weak self] _, _, _, _ in
             self?.updateButtonState()
         }
         .store(in: &cancellables)
@@ -438,10 +474,14 @@ class MainViewModel: ObservableObject {
                 },
                 receiveValue: { [weak self] images in
                     guard let self = self else { return }
-                    let filtered = images.filter { $0.deleted != true }
+                    // Filter out deleted images and partial images
+                    let filtered = images.filter { 
+                        $0.deleted != true && !$0.isPartial 
+                    }
                     // Sort by createdAt descending (newest first) for LIFO
                     let sorted = filtered.sorted { $0.createdAt > $1.createdAt }
                     self.historyImages = sorted
+                    print("📸 Loaded \(sorted.count) final images (filtered out \(images.count - sorted.count) partials/deleted)")
                 }
             )
             .store(in: &cancellables)
@@ -466,6 +506,234 @@ class MainViewModel: ObservableObject {
         // Selection tracking - can be used for future functionality
     }
     
+    func selectStyle(_ ingredient: Ingredient) {
+        // Selection tracking for style/medium carousel
+    }
+    
+    // MARK: - Style Items
+    
+    /// Load style items from API or fallback to hardcoded placeholders
+    /// Styles use special ID format: "style_{idSuffix}" to match stylePrompts dictionary
+    private func loadStyleItems() {
+        // First, load the hardcoded style definitions (for prompts and display names)
+        // These will be used to match against API assets
+        let styles: [(String, String, String)] = [
+            // Traditional Drawing Media
+            ("Crayon", "crayon", "Crayon drawing with bold, vibrant colors, childlike simplicity, and visible texture from the waxy medium"),
+            ("Charcoal", "charcoal", "Charcoal sketch with rich blacks, soft grays, smudged edges, and dramatic contrast"),
+            ("Pencil", "pencil", "Pencil sketch with fine lines, cross-hatching, detailed shading, and graphite texture"),
+            ("Ink Wash", "ink_wash", "Ink wash painting with flowing brushstrokes, varying opacity, and elegant simplicity"),
+            ("Pen & Ink", "pen_ink", "Pen and ink illustration with precise lines, stippling, and intricate detail"),
+            ("Pastel", "pastel", "Soft pastel drawing with velvety texture, vibrant colors, and delicate blending"),
+            ("Chalk", "chalk", "Chalk drawing with powdery texture, vibrant colors, and soft, blendable strokes"),
+            ("Marker", "marker", "Marker illustration with bold, saturated colors, clean lines, and graphic style"),
+            
+            // Traditional Painting Media
+            ("Watercolor", "watercolor", "Watercolor painting with soft, flowing colors, translucent washes, and organic blending"),
+            ("Oil Painting", "oil_painting", "Oil painting with rich, saturated colors, visible brushstrokes, and classical painting technique"),
+            ("Acrylic", "acrylic", "Acrylic painting with bold, opaque colors, thick impasto texture, and modern vibrancy"),
+            ("Gouache", "gouache", "Gouache painting with matte finish, opaque colors, and smooth, flat application"),
+            ("Tempera", "tempera", "Tempera painting with egg-based medium, bright colors, and fine detail"),
+            ("Fresco", "fresco", "Fresco painting with earthy tones, wall texture, and classical mural technique"),
+            
+            // Digital & Modern Media
+            ("Pixel Art", "pixel_art", "Pixel art with blocky, retro aesthetic, limited color palette, and 8-bit charm"),
+            ("Vector Art", "vector_art", "Vector illustration with clean lines, flat colors, and scalable graphic design"),
+            ("3D Render", "3d_render", "3D rendered image with realistic lighting, depth, and computer-generated precision"),
+            ("Digital Painting", "digital_painting", "Digital painting with smooth blending, vibrant colors, and modern artistic technique"),
+            ("Glitch Art", "glitch_art", "Glitch art with digital artifacts, color shifts, and intentional data corruption aesthetic"),
+            ("Holographic", "holographic", "Holographic effect with iridescent colors, rainbow shimmer, and futuristic appearance"),
+            
+            // Artistic Movements & Periods
+            ("Impressionist", "impressionist", "Impressionist painting with loose brushstrokes, light effects, and visible texture"),
+            ("Cubist", "cubist", "Cubist art with geometric shapes, fragmented forms, and multiple perspectives"),
+            ("Surrealist", "surrealist", "Surrealist art with dreamlike imagery, impossible scenes, and symbolic elements"),
+            ("Pop Art", "pop_art", "Pop art with bold colors, commercial aesthetic, and graphic design elements"),
+            ("Art Nouveau", "art_nouveau", "Art Nouveau with flowing lines, organic forms, and decorative elegance"),
+            ("Art Deco", "art_deco", "Art Deco with geometric patterns, luxurious materials, and 1920s glamour"),
+            ("Expressionist", "expressionist", "Expressionist art with emotional intensity, distorted forms, and bold colors"),
+            ("Minimalist", "minimalist", "Minimalist art with simple forms, limited palette, and essential elements only"),
+            ("Abstract", "abstract", "Abstract art with non-representational forms, colors, and shapes"),
+            ("Renaissance", "renaissance", "Renaissance painting with classical composition, realistic detail, and harmonious colors"),
+            ("Baroque", "baroque", "Baroque art with dramatic lighting, rich colors, and dynamic movement"),
+            
+            // Cultural & Regional Styles
+            ("Japanese Woodblock", "japanese_woodblock", "Japanese woodblock print with flat colors, bold outlines, and traditional ukiyo-e style"),
+            ("Chinese Ink", "chinese_ink", "Chinese ink painting with flowing brushwork, monochrome elegance, and calligraphic strokes"),
+            ("Aboriginal Dot", "aboriginal_dot", "Aboriginal dot painting with intricate patterns, earthy colors, and traditional symbolism"),
+            ("Mexican Mural", "mexican_mural", "Mexican mural art with bold colors, social themes, and monumental scale"),
+            ("African Textile", "african_textile", "African textile pattern with geometric designs, vibrant colors, and cultural motifs"),
+            ("Scandinavian Folk", "scandinavian_folk", "Scandinavian folk art with floral patterns, bright colors, and traditional design"),
+            ("Islamic Geometric", "islamic_geometric", "Islamic geometric art with intricate patterns, symmetry, and mathematical precision"),
+            
+            // Textures & Surfaces
+            ("Mosaic", "mosaic", "Mosaic art with tiled pieces, vibrant colors, and textured surface"),
+            ("Stained Glass", "stained_glass", "Stained glass with bold outlines, jewel tones, and luminous transparency"),
+            ("Embroidery", "embroidery", "Embroidery with thread texture, decorative stitches, and textile artistry"),
+            ("Collage", "collage", "Collage with layered paper, mixed media, and textured composition"),
+            ("Wood Grain", "wood_grain", "Wood grain texture with natural patterns, warm tones, and organic lines"),
+            ("Marble", "marble", "Marble texture with veined patterns, polished surface, and classical elegance"),
+            ("Fabric", "fabric", "Fabric texture with woven patterns, soft folds, and textile quality"),
+            ("Metal", "metal", "Metallic surface with reflective shine, industrial aesthetic, and cool tones"),
+            
+            // Moods & Atmospheres
+            ("Dreamy", "dreamy", "Dreamy atmosphere with soft focus, pastel colors, and ethereal quality"),
+            ("Dramatic", "dramatic", "Dramatic lighting with high contrast, shadows, and cinematic intensity"),
+            ("Ethereal", "ethereal", "Ethereal quality with glowing light, translucent forms, and otherworldly beauty"),
+            ("Nostalgic", "nostalgic", "Nostalgic mood with warm tones, vintage aesthetic, and sentimental atmosphere"),
+            ("Whimsical", "whimsical", "Whimsical style with playful elements, bright colors, and lighthearted charm"),
+            ("Mysterious", "mysterious", "Mysterious atmosphere with dark tones, shadows, and enigmatic mood"),
+            ("Serene", "serene", "Serene mood with calm colors, peaceful composition, and tranquil atmosphere"),
+            ("Energetic", "energetic", "Energetic style with dynamic movement, vibrant colors, and lively composition"),
+            
+            // Blended & Hybrid Styles
+            ("Watercolor + Ink", "watercolor_ink", "Watercolor painting combined with ink outlines, creating both soft washes and precise definition"),
+            ("Charcoal + Pastel", "charcoal_pastel", "Charcoal and pastel blend with rich blacks, vibrant colors, and mixed media texture"),
+            ("Digital + Traditional", "digital_traditional", "Digital art with traditional painting techniques, combining modern tools with classical aesthetics"),
+            ("Photorealistic", "photorealistic", "Photorealistic rendering with camera-like precision, lifelike detail, and photographic quality"),
+            ("Painterly Photo", "painterly_photo", "Painterly photograph with artistic brushstrokes applied to photographic realism"),
+            
+            // Special Effects & Techniques
+            ("Double Exposure", "double_exposure", "Double exposure effect with layered images, transparency, and dreamlike merging"),
+            ("Silhouette", "silhouette", "Silhouette with dark forms against light background, dramatic contrast, and simple elegance"),
+            ("High Contrast", "high_contrast", "High contrast image with stark blacks and whites, bold definition, and graphic impact"),
+            ("Sepia Tone", "sepia_tone", "Sepia toned image with warm browns, vintage aesthetic, and nostalgic quality"),
+            ("Black & White", "black_white", "Black and white photography with grayscale tones, timeless elegance, and classic composition"),
+            ("Vintage", "vintage", "Vintage aesthetic with aged colors, film grain, and retro charm"),
+            ("Neon", "neon", "Neon aesthetic with glowing colors, dark backgrounds, and electric vibrancy"),
+            ("Grunge", "grunge", "Grunge style with distressed textures, muted colors, and raw, edgy aesthetic"),
+            ("Vaporwave", "vaporwave", "Vaporwave aesthetic with retro-futuristic colors, geometric shapes, and nostalgic digital art"),
+            ("Cyberpunk", "cyberpunk", "Cyberpunk style with neon lights, dark urban atmosphere, and futuristic technology"),
+            
+            // Nature-Inspired
+            ("Botanical", "botanical", "Botanical illustration with scientific detail, natural colors, and precise rendering"),
+            ("Underwater", "underwater", "Underwater scene with blue-green tones, light refraction, and aquatic atmosphere"),
+            ("Forest", "forest", "Forest atmosphere with dappled light, green tones, and natural textures"),
+            ("Ocean", "ocean", "Ocean scene with blues, movement, and vast horizon"),
+            
+            // Abstract Concepts
+            ("Liquid", "liquid", "Liquid forms with flowing shapes, transparency, and organic movement"),
+            ("Crystalline", "crystalline", "Crystalline structure with geometric facets, refraction, and prismatic colors"),
+            ("Smoke", "smoke", "Smoke effect with wispy forms, ethereal quality, and atmospheric texture"),
+            ("Fire", "fire", "Fire with warm colors, dynamic movement, and luminous intensity"),
+            ("Ice", "ice", "Ice with cool tones, crystalline structure, and frozen translucency"),
+            
+            // Artistic Flair & Unique Styles
+            ("Sketchy", "sketchy", "Sketchy style with loose lines, visible construction marks, and unfinished quality"),
+            ("Polished", "polished", "Polished finish with smooth surfaces, refined detail, and professional quality"),
+            ("Textured", "textured", "Textured surface with visible material quality, tactile appearance, and rich detail"),
+            ("Flat Design", "flat_design", "Flat design with simple shapes, bold colors, and minimal depth"),
+            ("Isometric", "isometric", "Isometric perspective with 3D forms, geometric precision, and technical illustration"),
+            ("Low Poly", "low_poly", "Low poly art with geometric shapes, faceted surfaces, and modern minimalist aesthetic")
+        ]
+        
+        // Store style prompts for use in generation (always needed, even with API assets)
+        // Map style ID to detailed prompt
+        stylePrompts = Dictionary(uniqueKeysWithValues: styles.map { (_, idSuffix, prompt) in
+            ("style_\(idSuffix)", prompt)
+        })
+        
+        // Create lookup dictionary: idSuffix -> (displayName, prompt)
+        let styleLookup = Dictionary(uniqueKeysWithValues: styles.map { (displayName, idSuffix, prompt) in
+            (idSuffix, (displayName, prompt))
+        })
+        
+        // TEMPORARY: Store short descriptions (1-4 words) for placeholder tile overlays
+        // Extract first 1-4 words from detailed prompt for display
+        // Remove this when we have actual style assets
+        styleShortDescriptions = Dictionary(uniqueKeysWithValues: styles.map { (_, idSuffix, prompt) in
+            let words = prompt.components(separatedBy: " ").prefix(4)
+            let shortDesc = words.joined(separator: " ")
+            return ("style_\(idSuffix)", shortDesc)
+        })
+        
+        // Try to load from API first, fallback to placeholders if API fails
+        assetsService.getAssets(type: "styles")
+            .receive(on: DispatchQueue.main)
+            .sink(
+                receiveCompletion: { [weak self] completion in
+                    if case .failure(let error) = completion {
+                        print("⚠️ Error loading styles from API: \(error.localizedDescription)")
+                        print("   Falling back to placeholder styles")
+                        // Fallback to placeholders
+                        self?.loadStylePlaceholders(styles: styles)
+                    }
+                },
+                receiveValue: { [weak self] assets in
+                    guard let self = self else { return }
+                    // Create ingredients from API assets, matching to hardcoded style definitions
+                    let ingredients = self.createStyleIngredientsFromAssets(assets, styleLookup: styleLookup)
+                    self.styleItems = ingredients
+                    print("✅ MainViewModel: Loaded \(ingredients.count) style items from API")
+                }
+            )
+            .store(in: &cancellables)
+    }
+    
+    /// Create style ingredients from API assets, matching to hardcoded style definitions
+    /// Uses special ID format: "style_{idSuffix}" to match stylePrompts dictionary
+    /// Server provides `id` field (filename without extension) for easier matching
+    private func createStyleIngredientsFromAssets(_ assets: [Asset], styleLookup: [String: (String, String)]) -> [Ingredient] {
+        return assets.compactMap { asset -> Ingredient? in
+            // Use server-provided assetId field if available, otherwise extract from filename
+            let idSuffix: String
+            if let serverId = asset.assetId, !serverId.isEmpty {
+                // Server provides id field (filename without extension)
+                idSuffix = serverId
+            } else {
+                // Fallback: extract from filename (e.g., "crayon.png" -> "crayon")
+                let filename = asset.name
+                guard filename.hasSuffix(".png") else { return nil }
+                idSuffix = String(filename.dropLast(4)) // Remove ".png"
+            }
+            
+            // Look up display name and prompt from hardcoded definitions
+            guard let (displayName, _) = styleLookup[idSuffix] else {
+                print("⚠️ Style asset '\(asset.name)' (id: '\(idSuffix)') not found in style definitions, skipping")
+                return nil
+            }
+            
+            // Build image URL
+            let assetURL = assetsService.assetURL(for: asset)?.absoluteString ?? ""
+            
+            // Create ingredient with special ID format: "style_{idSuffix}"
+            return Ingredient(
+                id: "style_\(idSuffix)",
+                name: displayName,
+                category: "art_style",
+                styleInjection: "", // Not used for styles
+                imageURL: assetURL.isEmpty ? nil : assetURL
+            )
+        }
+    }
+    
+    /// Load placeholder style items (fallback when API is unavailable)
+    private func loadStylePlaceholders(styles: [(String, String, String)]) {
+        styleItems = styles.map { (displayName, idSuffix, _) in
+            Ingredient(
+                id: "style_\(idSuffix)",
+                name: displayName,
+                category: "art_style",
+                styleInjection: "", // Not used for styles
+                imageURL: nil // No image - will use placeholder tile
+            )
+        }
+        print("✅ MainViewModel: Loaded \(styleItems.count) placeholder style items")
+    }
+    
+    // Style prompt mapping: style ID -> detailed prompt for GPT
+    private var stylePrompts: [String: String] = [:]
+    
+    // TEMPORARY: Style short description mapping for placeholder tile overlays
+    // Remove this when we have actual style assets
+    // Made internal (not private) so views can access it
+    var styleShortDescriptions: [String: String] = [:]
+    
+    /// Set view mode (public method for Settings)
+    func setViewMode(_ mode: ViewMode) {
+        viewMode = mode
+    }
+    
     // MARK: - Image Generation
     
     func startImageGeneration() {
@@ -482,12 +750,34 @@ class MainViewModel: ObservableObject {
         let outfit = outfitItems[outfitIndex]
         let place = placeItems[placeIndex]
         
+        // Get style ingredient if in fourCarousel mode
+        // NOTE: Style uses TEXT DESCRIPTION modality (not reference image)
+        // This is different from friend/outfit/place which use REFERENCE IMAGE modality
+        var styleIngredient: Ingredient? = nil
+        var styleDescription: String? = nil
+        if viewMode == .fourCarousel {
+            guard styleIndex >= 0 && styleIndex < styleItems.count else {
+                print("⚠️ Cannot start image generation: style not selected in fourCarousel mode")
+                return
+            }
+            styleIngredient = styleItems[styleIndex]
+            // Style is passed as text description, not reference image
+            // Use detailed prompt if available, otherwise fall back to simple name
+            if let detailedPrompt = stylePrompts[styleIngredient!.id] {
+                styleDescription = "Style: \(detailedPrompt)"
+            } else {
+                // Fallback to simple name if prompt not found
+                styleDescription = "Style: \(styleIngredient!.name)"
+            }
+        }
+        
         isCreatingImage = true
         buttonState = .generating
         
         // Extract reference image URLs from selected ingredients
         // Server expects asset paths like /static/assets/friends/01_star_puppy.png
         // The imageURL in ingredients is a full URL, so we need to extract the path
+        // MODALITY 1: REFERENCE IMAGES (friend, outfit, place)
         var referenceImageIds: [String] = []
         
         func extractAssetPath(from urlString: String?) -> String? {
@@ -539,62 +829,34 @@ class MainViewModel: ObservableObject {
             RecipeItem(id: place.id, slotIndex: 2)
         ]
         
+        // MODALITY 2: TEXT DESCRIPTION (style)
+        // Style is passed via freeTextDescription, not as a reference image
+        // This is a different modality - we're being cautious here as this is new
+        let freeTextDescription: String?
+        if let styleDesc = styleDescription {
+            // In fourCarousel mode, include style in freeTextDescription
+            freeTextDescription = styleDesc
+        } else {
+            // Default mode - no style description
+            freeTextDescription = nil
+        }
+        
         let request = CreateRequest(
             recipeItems: recipeItems,
-            freeTextDescription: nil,
+            freeTextDescription: freeTextDescription,
             referenceImageIds: referenceImageIds.isEmpty ? nil : referenceImageIds
         )
         
-        // DEBUG: Log full API request details
-        let separator = String(repeating: "=", count: 80)
-        print(separator)
-        print("🚀 API REQUEST DEBUG - Image Generation")
-        print(separator)
-        print("📍 Endpoint: \(apiClient.baseURL)/api/create")
-        print("📋 Request Method: POST")
-        
-        // Log selected ingredients
-        print("\n📝 Selected Ingredients:")
-        print("   Friend: '\(friend.name)' (id: \(friend.id))")
-        print("      Image URL: \(friend.imageURL ?? "nil")")
-        print("   Outfit: '\(outfit.name)' (id: \(outfit.id))")
-        print("      Image URL: \(outfit.imageURL ?? "nil")")
-        print("   Place: '\(place.name)' (id: \(place.id))")
-        print("      Image URL: \(place.imageURL ?? "nil")")
-        
-        // Log request components
-        print("\n📦 Request Components:")
-        print("   Recipe Items (\(recipeItems.count)):")
-        for (index, item) in recipeItems.enumerated() {
-            print("      [\(index)] id: '\(item.id)', slotIndex: \(item.slotIndex?.description ?? "nil")")
+        // DEBUG: Log condensed API request summary
+        print("\n🎨 Image Generation Request:")
+        print("   Friend: \(friend.name) | Outfit: \(outfit.name) | Place: \(place.name)")
+        if let style = styleIngredient {
+            print("   Style: \(style.name) (text description)")
         }
-        print("   Free Text Description: \(request.freeTextDescription ?? "nil")")
-        print("   Reference Image IDs: \(request.referenceImageIds?.count ?? 0) images")
-        if let refImages = request.referenceImageIds, !refImages.isEmpty {
-            print("      Reference Images (\(refImages.count)):")
-            for (index, refId) in refImages.enumerated() {
-                print("         [\(index)] \(refId)")
-            }
-        } else {
-            print("      ⚠️ WARNING: No reference images provided!")
+        if let prompt = request.freeTextDescription {
+            print("   Prompt: \(prompt)")
         }
-        
-        // Log full JSON body
-        print("\n📄 Full JSON Request Body:")
-        do {
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-            let jsonData = try encoder.encode(request)
-            if let jsonString = String(data: jsonData, encoding: .utf8) {
-                print(jsonString)
-            } else {
-                print("   ⚠️ Failed to convert request to JSON string")
-            }
-        } catch {
-            print("   ❌ Failed to encode request: \(error)")
-        }
-        
-        print(separator)
+        print("   Reference Images: \(request.referenceImageIds?.count ?? 0) | Recipe Items: \(recipeItems.count)")
         
         // Start SSE stream for image generation
         imageGenerationTask = Task { [weak self] in
@@ -621,30 +883,8 @@ class MainViewModel: ObservableObject {
         do {
             urlRequest.httpBody = try JSONEncoder().encode(request)
             
-            // DEBUG: Log actual HTTP request being sent
-            print("\n📤 SENDING HTTP REQUEST:")
-            print("   URL: \(url.absoluteString)")
-            print("   Method: \(urlRequest.httpMethod ?? "unknown")")
-            print("   Headers:")
-            if let headers = urlRequest.allHTTPHeaderFields {
-                for (key, value) in headers.sorted(by: { $0.key < $1.key }) {
-                    if key == "Authorization" {
-                        let preview = String(value.prefix(20)) + "..."
-                        print("      \(key): \(preview)")
-                    } else {
-                        print("      \(key): \(value)")
-                    }
-                }
-            }
-            if let body = urlRequest.httpBody {
-                print("   Body Size: \(body.count) bytes")
-                if let bodyString = String(data: body, encoding: .utf8) {
-                    print("   Body Preview (first 500 chars):")
-                    let preview = bodyString.count > 500 ? String(bodyString.prefix(500)) + "..." : bodyString
-                    print("      \(preview.replacingOccurrences(of: "\n", with: "\\n"))")
-                }
-            }
-            print("")
+            // DEBUG: Log condensed HTTP request
+            print("   → POST \(url.absoluteString)")
             
         } catch {
             print("❌ Failed to encode request: \(error)")
@@ -659,13 +899,7 @@ class MainViewModel: ObservableObject {
             
             // DEBUG: Log server response
             if let httpResponse = response as? HTTPURLResponse {
-                print("📥 SERVER RESPONSE:")
-                print("   Status Code: \(httpResponse.statusCode)")
-                print("   Headers:")
-                for (key, value) in httpResponse.allHeaderFields.sorted(by: { "\($0.key)" < "\($1.key)" }) {
-                    print("      \(key): \(value)")
-                }
-                print("")
+                print("   ← \(httpResponse.statusCode)")
                 
                 guard httpResponse.statusCode == 200 else {
                     print("❌ Server returned error status: \(httpResponse.statusCode)")
@@ -731,7 +965,10 @@ class MainViewModel: ObservableObject {
         let isFinal = json["is_final"] as? Bool ?? false
         let type = json["type"] as? String ?? ""
         
-        print("📥 Image generation event: status=\(status), type=\(type), isFinal=\(isFinal), imageURL=\(imageURL ?? "nil")")
+        // Only log significant events (not every generating_prompt update)
+        if status == "complete" || status == "error" || (imageURL != nil) {
+            print("   📥 \(status)\(imageURL != nil ? " → image ready" : "")")
+        }
         
         await MainActor.run {
             if let imageURL = imageURL {

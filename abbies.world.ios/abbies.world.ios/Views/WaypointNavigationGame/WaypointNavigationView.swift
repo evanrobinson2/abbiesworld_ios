@@ -28,9 +28,9 @@ struct WaypointNavigationView: View {
             
             VStack(spacing: 0) {
                 // Destination Banner
-                if let moonbaseIcon = viewModel.gameState.moonbaseImage {
+                if let bannerImage = viewModel.gameState.destinationBannerImage {
                     ZStack {
-                        Image(uiImage: moonbaseIcon)
+                        Image(uiImage: bannerImage)
                             .resizable()
                             .aspectRatio(contentMode: .fit)
                             .frame(height: 150)
@@ -50,14 +50,22 @@ struct WaypointNavigationView: View {
                     }
                     .frame(height: 150)
                     .padding(.bottom, 20)
+                    .onAppear {
+                        print("🖼️ [VIEW] Banner image displayed in view")
+                    }
                 } else {
                     // Placeholder while loading
                     Rectangle()
                         .fill(Color.gray.opacity(0.3))
                         .frame(height: 150)
                         .overlay(
-                            Text("Loading destination...")
-                                .foregroundColor(.gray)
+                            VStack {
+                                Text("Loading destination...")
+                                    .foregroundColor(.gray)
+                                Text("Banner image: \(viewModel.gameState.destinationBannerImage != nil ? "LOADED" : "NOT LOADED")")
+                                    .font(.caption)
+                                    .foregroundColor(.red)
+                            }
                         )
                         .padding(.bottom, 20)
                 }
@@ -132,14 +140,22 @@ struct WaypointNavigationView: View {
             if newValue {
                 print("   ✅ Showing victory sequence")
                 showVictory = true
-                onComplete?()
+                // Don't call onComplete() here - wait until victory sequence finishes
             }
         }
         .fullScreenCover(isPresented: $showVictory) {
             VictorySequenceView(viewModel: viewModel, onDismiss: {
                 showVictory = false
+                // Call onComplete when victory sequence is dismissed
+                onComplete?()
                 onDismiss?()
             })
+        }
+        .onDisappear {
+            // If view disappears while victory is showing, dismiss it
+            if showVictory {
+                showVictory = false
+            }
         }
     }
 }

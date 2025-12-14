@@ -15,6 +15,13 @@ struct GeneratedImage: Codable, Identifiable {
     let recipeItems: [RecipeItem]?
     let deleted: Bool?
     
+    // Computed property to determine if this is a partial image
+    // Partial images have "_partial.png" in filename, null prompt, or empty recipeItems
+    var isPartial: Bool {
+        return filename.contains("_partial.png") || 
+               (prompt == nil && (recipeItems == nil || recipeItems?.isEmpty == true))
+    }
+    
     var id: String { filename }
     
     enum CodingKeys: String, CodingKey {
