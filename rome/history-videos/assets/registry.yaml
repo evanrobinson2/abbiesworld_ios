@@ -121,6 +121,16 @@ style_tests:
     result: PASS — strongest grime solution; palette collapsed toward monochrome, acceptable
     status: reference_only
 
+  # OpenAI gpt-image-2 via scripts/generate_image.py (production pipeline)
+  - id: GPT-IMAGE-02-HANDS
+    register_candidate: R1
+    style: layered cut-paper via gpt-image-2
+    file: assets/style-tests/gpt-image-02-hands.png
+    model: gpt-image-2
+    size: 3840x2160
+    subject: benchmark 12 — hands (OpenAI pipeline proof)
+    status: reference_only
+
 # Known defects in the style tests, kept as examples of the failure modes:
 #   STYLE-D: invented star-boss shield device, unsourced. Illustrates why prop
 #            boards must precede dramatic frames.

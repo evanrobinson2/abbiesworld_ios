@@ -4,7 +4,8 @@ A narrated, historically grounded illustrated drama about the Gothic crossing of
 Danube (376 CE) and the road to Adrianople (378 CE). Delivered as video: composed
 still images with controlled moves, spoken narration, captions, and dubs.
 
-**Current state:** Phase 2 complete in skeleton. Phase 3 not started.
+**Current state:** Phase 2 complete in skeleton. Phase 3 not started. Image pipeline:
+**OpenAI `gpt-image-2`** via `scripts/generate_image.py` (not Cursor `GenerateImage`).
 **Current scope:** Marcianople only, ~90 seconds. Everything else is deferred.
 
 ---
@@ -18,6 +19,8 @@ prompts/        The brief to hand Claude for each fill pass.
 assets/         Character sheets, location plans, boards, and images.
   registry.yaml Single source of truth for what exists and what is approved.
 research/       Source excerpts and material-culture notes.
+scripts/        Image generation (`generate_image.py` → OpenAI gpt-image-2).
+docs/           Cloud agent setup and secrets.
 ```
 
 ## Read in this order
@@ -26,6 +29,7 @@ research/       Source excerpts and material-culture notes.
 2. `bible/01-creative-principles.md` — the ten principles, non-negotiable
 3. `bible/02-style-bible.md` — the three-register system
 4. `prompts/claude-brief.md` — how to get the details filled in
+5. `docs/CLOUD-SETUP.md` — **required** for cloud agents (`OPENAI_API_KEY`)
 
 ## The one-paragraph version
 
@@ -56,10 +60,9 @@ stopping to say so.
 
 ## Open decisions
 
-1. R1 base register: painterly realism or gouache limited palette. Resolve with an
-   intimate-scale test, not another wide.
+1. Mood presets — define the nine variables per mood in `bible/07-moods.md`.
 2. Whether the 90-second pilot needs all three registers or just R1 and R3.
-3. Whether R3 reads as "unknowable" or merely "unfinished" to a cold viewer.
+3. Whether R3 (uncut paper) reads as "unknowable" or merely "unfinished".
 
 ## The test
 
