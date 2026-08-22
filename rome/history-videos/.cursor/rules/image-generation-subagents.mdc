@@ -1,0 +1,48 @@
+---
+description: Always generate images via background subagents so the main thread never blocks
+alwaysApply: true
+---
+
+# Image generation runs in subagents
+
+Never call `GenerateImage` directly on the main thread. Image generation is slow and
+blocks everything behind it.
+
+Delegate every image to a background subagent, then keep working.
+
+## How
+
+```
+Task(
+  subagent_type: "generalPurpose",
+  run_in_background: true,
+  description: "Generate <short name>",
+  prompt: "<full image description>
+           Save to: /absolute/path/to/output.png
+           Use the GenerateImage tool. Aspect ratio: 16:9.
+           Return the absolute path of the file you created."
+)
+```
+
+Then continue with other work or end the turn. The completion notification arrives
+on its own — do not poll with `AwaitShell`.
+
+## Rules
+
+- **One subagent per image** when generating a set, launched in a single message so
+  they run in parallel. Do not serialize a batch through one subagent.
+- **Always specify the absolute output path and filename** in the prompt. Otherwise
+  the file lands somewhere unpredictable and has to be hunted down.
+- **Always ask the subagent to return the absolute path** it wrote.
+- **Carry the full spec into the prompt.** The subagent cannot see this conversation,
+  the project bible, or any prior context. Style constraints, negative constraints,
+  and resolution requirements must all be restated in the prompt text.
+- **After completion, verify then display.** Read the returned path and embed it with
+  `![alt](/absolute/path.png)` so the result is visible in chat.
+
+## Project-specific
+
+For this project, every generation prompt must also carry the standing constraints
+from `bible/00-scope-and-decisions.md`: no text of any kind in the image, late-antique
+376 CE material culture only, no invented ornament, and ~3× final linear resolution
+with crop headroom for the intended move.

@@ -1,0 +1,128 @@
+# Asset registry — single source of truth for what exists and what is approved.
+#
+# Every asset ID referenced by a frame card must appear here with status APPROVED
+# before that frame can be generated. This file is deliberately machine-readable so
+# continuity can be checked by inspection rather than by memory.
+#
+# status: planned | draft | proposed | APPROVED | superseded
+
+id_scheme:
+  characters: "<TAG>-<nnn>"                    # FRI-001
+  character_states: "<TAG>-<year>-<letter>"    # YOUNG-WARRIOR-376-C
+  locations: "MAR-<AREA>-<VIEW>-<nn>"          # MAR-GATE-INT-01
+  boards: "BOARD-<TAG>-<nnn>"                  # BOARD-GOTH-ELITE-001
+  comps: "COMP-<AREA>-<nnn>"
+  frames: "FRAME-<SEQ>-<nnn>"
+
+registers:
+  R1: realised          # attested; frame may enter the moment
+  R2: reconstructed     # inferred; observational
+  R3: unrecoverable     # record fails; image cannot complete itself
+
+base_register: papercut    # layered cut-paper, silhouette figures — adopted after 4-subject screen
+
+characters: []
+  # - id: FRI-001
+  #   name: Fritigern
+  #   status: planned
+  #   sheet: assets/characters/FRI-001.md
+  #   states: []
+
+locations: []
+  # - id: MAR-GATE-INT-01
+  #   name: Gate interior looking out
+  #   status: planned
+  #   plan: assets/locations/MAR.md
+  #   parallax: true
+  #   planes: { fg: roman guards, mg: gate arch, bg: gothic host }
+
+boards: []
+
+comps: []
+
+frames: []
+
+style_tests:
+  - id: STYLE-A
+    register_candidate: R1
+    style: painterly historical realism
+    file: assets/style-tests/style-a-painterly-realism.png
+    subject: MAR-GATE-INT-01
+    status: reference_only
+  - id: STYLE-B
+    register_candidate: R2
+    style: ink and wash
+    file: assets/style-tests/style-b-ink-and-wash.png
+    subject: MAR-GATE-INT-01
+    status: reference_only
+  - id: STYLE-C
+    register_candidate: R3
+    style: charcoal on toned paper
+    file: assets/style-tests/style-c-charcoal.png
+    subject: MAR-GATE-INT-01
+    status: reference_only
+  - id: STYLE-D
+    register_candidate: R1
+    style: gouache limited palette
+    file: assets/style-tests/style-d-gouache-limited-palette.png
+    subject: MAR-GATE-INT-01
+    status: reference_only
+
+  # Intimate-scale bake-off. The wide tests above cannot settle the R1 base
+  # register, because the question is whether flat shapes can carry a small human
+  # moment (Principle 3). Same subject, both candidate treatments.
+  - id: STYLE-A2
+    register_candidate: R1
+    style: painterly historical realism
+    file: assets/style-tests/style-a2-painterly-intimate.png
+    subject: intimate — hands breaking bread between two children
+    status: reference_only
+  - id: STYLE-D2
+    register_candidate: R1
+    style: gouache limited palette
+    file: assets/style-tests/style-d2-gouache-intimate.png
+    subject: intimate — hands breaking bread between two children
+    status: reference_only
+
+  # Layered cut-paper candidate, derived from the reference reel analysed in
+  # research/reference-video/style-analysis.md. Palette shifted off the source's
+  # devotional navy/gold to indigo, bone, iron grey and rationed dull gold.
+  # Screened against four subjects from prompts/style-benchmark.md.
+  - id: PAPERCUT-01
+    register_candidate: R1
+    style: layered cut-paper, silhouette figures
+    file: assets/style-tests/papercut-01-crowd.png
+    subject: benchmark 3 — the Gothic host (crowd scale)
+    tests: does a multitude read as layered bands or collapse into mush
+    result: PASS — legible to the horizon; defect: meaningless gold in foreground earth
+    status: reference_only
+  - id: PAPERCUT-02
+    register_candidate: R1
+    style: layered cut-paper, silhouette figures
+    file: assets/style-tests/papercut-02-hands.png
+    subject: benchmark 12 — hands breaking bread (intimate)
+    tests: does the moment carry emotion without faces
+    result: PASS on emotion — but composition inherited devotional Madonna grammar; see symmetry rule
+    status: reference_only
+  - id: PAPERCUT-03
+    register_candidate: R1
+    style: layered cut-paper, silhouette figures
+    file: assets/style-tests/papercut-03-firelight.png
+    subject: benchmark 7 — firelight at night
+    tests: does light read as flat cut shape rather than rendered glow
+    result: PASS — but radial star composition reads diagrammatic; break symmetry
+    status: reference_only
+  - id: PAPERCUT-04
+    register_candidate: R1
+    style: layered cut-paper, silhouette figures
+    file: assets/style-tests/papercut-04-aftermath.png
+    subject: benchmark 11 — aftermath (grime and hard content)
+    tests: can torn deckle edges carry dirt, damage and wear
+    result: PASS — strongest grime solution; palette collapsed toward monochrome, acceptable
+    status: reference_only
+
+# Known defects in the style tests, kept as examples of the failure modes:
+#   STYLE-D: invented star-boss shield device, unsourced. Illustrates why prop
+#            boards must precede dramatic frames.
+#   ALL:     generated at 16:9 delivery framing, not at 3x with crop headroom.
+#            None is usable as a production asset.

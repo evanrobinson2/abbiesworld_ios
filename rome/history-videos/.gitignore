@@ -1,0 +1,14 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets — never commit
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+
+# Editor / local tooling
+*.swp
+*~
