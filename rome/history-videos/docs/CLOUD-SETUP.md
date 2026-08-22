@@ -48,3 +48,21 @@ python3 scripts/generate_image.py --help
 ## Repo
 
 GitHub: `git@github.com:evanrobinson2/rome_history_videos.git`
+
+## What else the cloud agent needs
+
+| Item | Status |
+| --- | --- |
+| `OPENAI_API_KEY` in dashboard Secrets | You added this ✓ |
+| Repo cloned from GitHub | Automatic when agent starts |
+| `pip install -r requirements.txt` | Runs from `.cursor/environment.json` on build |
+| Project context | Read `sessions/session_1.md` first, then `README.md` and `bible/` |
+| Midjourney / LegNext | Not used — OpenAI only |
+| This chat history | Not automatic — use `sessions/session_1.md` |
+
+## Handoff for session 2
+
+Start by reading `sessions/session_1.md` (summary at top). Likely next work:
+1. Fix `prompts/claude-brief.md` — silhouettes, not faces; cut-paper register locked
+2. Define mood presets in `bible/07-moods.md` and generate proofs via `generate_image.py`
+3. Begin Phase 3 — silhouette sheets and Marcianople location plans
