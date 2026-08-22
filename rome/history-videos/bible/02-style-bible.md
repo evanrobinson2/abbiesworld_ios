@@ -1,6 +1,6 @@
 # Style Bible — The Tiered Register System
 
-Status: **Direction locked. Base register pending final selection from style tests.**
+Status: **Direction locked. R1 = layered cut-paper. Principals get faces; everyone else is silhouette.**
 
 ---
 
@@ -29,9 +29,22 @@ deliberately diverged from the source.
 
 Flat digital illustration imitating layered cut paper: stacked planes with soft drop
 shadows, visible handmade paper fibre throughout, hard scissor-cut edges, torn
-deckle edges for anything damaged or organic. **Figures are featureless
-silhouettes.** Light is drawn as flat translucent shape, never rendered
-illumination. No brushwork anywhere.
+deckle edges for anything damaged or organic. Light is drawn as flat translucent
+shape, never rendered illumination. No brushwork anywhere.
+
+### Who gets a face
+
+| Tier | Who | How they are drawn |
+| --- | --- | --- |
+| **Principals** | Characters listed as principals in `bible/03-cast.md` | Simplified cut-paper faces — enough to read expression and hold identity, not photoreal. Locked via approved character sheets before any dramatic frame. |
+| **Everyone else** | Crowds, soldiers, witnesses, children, animals, unnamed figures | Featureless dark silhouettes. Identity from posture, profile and costume shape only. |
+
+The reference reel (`research/reference-video/`) uses silhouettes for everyone. We
+**diverge** for principals only — Fritigern must be recognisable across hundreds of
+frames. Crowds stay silhouette so multitudes remain cheap and legible.
+
+Intimate moments involving non-principals (e.g. anonymous hands breaking bread) may
+show no faces at all — gesture and object carry the beat.
 
 Palette, four colours, rigidly held: deep indigo, bone, iron grey, tarnished gold.
 
@@ -46,9 +59,9 @@ Screened against four benchmark subjects and passed all four:
 
 ### Why this register solves three standing problems
 
-1. **Character continuity.** No faces means no face to keep consistent across
-   hundreds of generations. Identity is silhouette, posture and costume shape —
-   specifiable, inspectable, stable. Character sheets become silhouette sheets.
+1. **Character continuity.** Principals get locked face sheets; everyone else stays
+   silhouette so crowds do not multiply the consistency problem. Two tiers, not one
+   rule for the whole world.
 2. **Parallax.** The style is made of separated planes. The aesthetic and the
    delivery constraint in `00-scope-and-decisions.md` §4.2 are the same thing.
 3. **Epistemic honesty.** Nothing here pretends to be a photograph, so the work
@@ -72,6 +85,9 @@ arriving alongside its craft.
   and radiant framing read as sacred art. Suppress explicitly in prompts.
 - **Same hand for both peoples.** Gothic and Roman subjects get identical treatment:
   same cut quality, same detail budget, same dignity. Verify in matched pairs.
+- **Principal faces are invented, not attested.** We choose a plausible face and lock
+  it. We never imply the likeness is historical. Faces of non-principals are never
+  shown.
 
 ## R2 — Reconstructed
 

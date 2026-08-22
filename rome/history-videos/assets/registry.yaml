@@ -19,7 +19,7 @@ registers:
   R2: reconstructed     # inferred; observational
   R3: unrecoverable     # record fails; image cannot complete itself
 
-base_register: papercut    # layered cut-paper, silhouette figures — adopted after 4-subject screen
+base_register: papercut    # layered cut-paper; principals=get faces, others=silhouette
 
 characters: []
   # - id: FRI-001

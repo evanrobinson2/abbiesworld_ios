@@ -8,7 +8,10 @@ options where the history permits latitude, and with sourcing where it does not.
 
 ---
 
-## Principals
+## Principals — **faces required**
+
+These characters get simplified cut-paper faces, locked via character sheets before
+any dramatic frame. See `02-style-bible.md` § "Who gets a face".
 
 ### FRI — Fritigern
 Gothic leader (Thervingi). Intelligent, politically capable, later conducts a
@@ -38,11 +41,11 @@ not to be drawn as a villain. At the banquet he may be genuinely convivial.
 - Costume: Roman command dress, Thrace 376: `[ ]`
 - Explicit anti-caricature note for prompts: `[ ]`
 
-## Recurring witnesses
+## Recurring witnesses — **silhouettes only**
 
 Three Gothic retainers who accompany Fritigern to Marcianople. They wait in the
-courtyard. The audience must recognise them across frames — this is what makes the
-courtyard/banquet geography work (Principle 6).
+courtyard. The audience must recognise them across frames by **silhouette and
+costume**, not face — they are not principals.
 
 | ID | Working name | Function | Sheet |
 | --- | --- | --- | --- |
@@ -54,13 +57,13 @@ At least one of these should be the young warrior who acquires a Roman shield at
 Marcianople and carries it, progressively battered, to Adrianople. See
 `05-continuity-and-state.md`.
 
-### ROM-MSG — Roman messenger / officer
+### ROM-MSG — Roman messenger / officer — **silhouette only**
 The man who brings news of the skirmish into the banquet. On screen briefly, but
 his run through the courtyard past the retainers is a load-bearing continuity beat.
 
 - Sheet: `[ ]`
 
-## Crowds
+## Crowds — **silhouettes only**
 
 Crowds are assets too, and drift badly if unspecified.
 
@@ -70,7 +73,7 @@ Crowds are assets too, and drift badly if unspecified.
 
 ## Fill checklist
 
-- [ ] Every principal has an approved neutral identity sheet before any dramatic frame
-- [ ] Each principal is distinguishable in silhouette alone
+- [ ] Every principal has an approved identity sheet with **face** views before any dramatic frame
+- [ ] Each principal is distinguishable in silhouette alone (for wide shots where faces are small)
 - [ ] No character is rendered with a heavier or uglier hand than another
 - [ ] Every invented detail is logged in `06-uncertainty-ledger.md`

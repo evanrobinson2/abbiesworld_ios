@@ -8,6 +8,10 @@ supersedes:
 
 # [Name] — Identity Sheet
 
+**Principals only.** This template is for characters who receive cut-paper faces.
+Witnesses, crowds, and unnamed figures are silhouette-only — no face sheet required;
+use a single silhouette reference image instead.
+
 ## Identity
 
 | Field | Value |

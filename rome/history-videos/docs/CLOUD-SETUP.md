@@ -63,6 +63,5 @@ GitHub: `git@github.com:evanrobinson2/rome_history_videos.git`
 ## Handoff for session 2
 
 Start by reading `sessions/session_1.md` (summary at top). Likely next work:
-1. Fix `prompts/claude-brief.md` — silhouettes, not faces; cut-paper register locked
-2. Define mood presets in `bible/07-moods.md` and generate proofs via `generate_image.py`
-3. Begin Phase 3 — silhouette sheets and Marcianople location plans
+1. Define mood presets in `bible/07-moods.md` and generate proofs via `generate_image.py`
+2. Begin Phase 3 — **principal face sheets** (Fritigern, Alavivus, Lupicinus) + Marcianople location plans; witnesses stay silhouette
