@@ -69,7 +69,6 @@ export function ImageLightbox({ src, alt, onClose }: ImageLightboxProps) {
           src={src}
           alt={alt}
           className="max-h-[90vh] max-w-[95vw] object-contain"
-          style={{ imageRendering: "high-quality" }}
         />
       </div>
 
