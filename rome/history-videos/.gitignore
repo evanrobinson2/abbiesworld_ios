@@ -12,3 +12,13 @@ credentials.json
 # Editor / local tooling
 *.swp
 *~
+
+# Node / Next (root viewer entry)
+node_modules/
+.next/
+out/
+next-env.d.ts
+.vercel/
+
+# Generated asset link/copy under viewer public
+viewer/public/assets

@@ -1,0 +1,32 @@
+{
+  "name": "rome-history-videos",
+  "private": true,
+  "description": "Root Next.js entry so Vercel can build with Root Directory unset. App source lives in viewer/.",
+  "scripts": {
+    "predev": "node viewer/scripts/prebuild.mjs",
+    "dev": "next dev",
+    "prebuild": "node viewer/scripts/prebuild.mjs",
+    "build": "next build",
+    "start": "next start",
+    "manifest": "node viewer/scripts/build-manifest.mjs",
+    "blob:seed": "node viewer/scripts/seed-blob.mjs",
+    "blob:add": "node viewer/scripts/add-frame.mjs"
+  },
+  "dependencies": {
+    "@vercel/blob": "^0.27.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.468.0",
+    "next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.0",
+    "vercel": "^59.5.0"
+  }
+}

@@ -20,6 +20,7 @@ assets/         Character sheets, location plans, boards, and images.
   registry.yaml Single source of truth for what exists and what is approved.
 research/       Source excerpts and material-culture notes.
 scripts/        Image generation (`generate_image.py` → OpenAI gpt-image-2).
+viewer/         Next.js frame review app (keep / discard / reroll) — deploy to Vercel.
 docs/           Cloud agent setup and secrets.
 ```
 

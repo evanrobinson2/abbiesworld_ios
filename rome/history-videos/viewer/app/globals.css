@@ -1,0 +1,68 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bone: #e8e2d6;
+  --color-bone-muted: #cfc8ba;
+  --color-indigo-deep: #1a2238;
+  --color-indigo-mid: #2d3a5c;
+  --color-iron: #6b7280;
+  --color-gold-warm: #c4a35a;
+  --color-keep: #3d6b4f;
+  --color-discard: #8b3a3a;
+  --color-reroll: #6b5a3d;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-sans: "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-indigo-deep);
+  color: var(--color-bone);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-gold-warm) 40%, transparent);
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-indigo-mid) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--color-indigo-mid);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Horizontal filmstrip: hide scrollbar, keep swipe */
+.thumb-scroller {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.thumb-scroller::-webkit-scrollbar {
+  display: none;
+}

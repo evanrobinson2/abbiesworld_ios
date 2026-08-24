@@ -1,0 +1,25 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# next.js
+.next/
+out/
+
+# production
+build/
+
+# misc
+.DS_Store
+*.pem
+.env*
+
+# debug
+npm-debug.log*
+
+# typescript
+next-env.d.ts
+
+# symlinked assets (generated at build)
+public/assets

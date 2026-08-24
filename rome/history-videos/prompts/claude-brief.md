@@ -35,21 +35,18 @@ contract for one pass at a time.
 >    composed with its crop move in mind.
 > 3. Late-antique 376 CE material culture only. No medieval plate, no mail
 >    hauberks, no fantasy, no invented ornament.
-> 4. **Face rule:** Principals (listed in `bible/03-cast.md`) get simplified
->    cut-paper faces, locked via character sheets. Everyone else is a featureless
->    silhouette. Do not give faces to crowds, soldiers, witnesses, or children.
-> 5. No character is rendered with a heavier, uglier, or more caricatured hand than
+> 4. No character is rendered with a heavier, uglier, or more caricatured hand than
 >    another. This applies hardest to Lupicinus.
-> 6. Nothing is designed twice. Once an asset is approved, later work inherits it.
-> 7. Sound is out of scope right now. Do not add sound fields to anything.
+> 5. Nothing is designed twice. Once an asset is approved, later work inherits it.
+> 6. Sound is out of scope right now. Do not add sound fields to anything.
 >
-> **Where you have latitude:** principal face designs and builds; costume and
+> **Where you have latitude:** character faces, builds and silhouettes; costume and
 > prop specifics with sourcing; blocking within an established set; the beat
 > breakdown; and every first draft. Offer options where the history permits them and
 > let me choose. State your confidence.
 >
-> **Where you have none:** the ten principles, the register system, the scope, the
-> face tier rule, the ID scheme, and the seven constraints above.
+> **Where you have none:** the ten principles, the register system, the scope, the ID
+> scheme, and the six constraints above.
 >
 > **Output contract for this pass — do exactly this and stop:**
 >
@@ -57,10 +54,8 @@ contract for one pass at a time.
 >    A/I/P/U with reasoning, and each mapped to a register. Flag anything where you
 >    are working from memory rather than a source you can cite, explicitly.
 > 2. Complete `bible/03-cast.md` and produce one filled `templates/character-sheet.md`
->    per **principal** in `assets/characters/`, using the ID scheme. Principals get
->    face exploration (three to six options each, described in words). Witnesses and
->    crowds are silhouette-only — no face sheets for them. Do not pick principal
->    faces; offer options.
+>    per principal in `assets/characters/`, using the ID scheme. For faces and
+>    builds, give me three to six options each, described in words. Do not pick.
 > 3. Complete `bible/04-locations.md` and produce filled location plans for the four
 >    pilot sets in `assets/locations/`. Research first; say plainly where the
 >    archaeology does not support a claim.
