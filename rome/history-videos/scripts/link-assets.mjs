@@ -8,10 +8,9 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const VIEWER_ROOT = path.resolve(__dirname, "..");
-const REPO_ROOT = path.resolve(__dirname, "../..");
-const PUBLIC_ASSETS = path.join(VIEWER_ROOT, "public/assets");
-const REPO_ASSETS = path.join(REPO_ROOT, "assets");
+const ROOT = path.resolve(__dirname, "..");
+const PUBLIC_ASSETS = path.join(ROOT, "public/assets");
+const REPO_ASSETS = path.join(ROOT, "assets");
 const forceCopy = process.env.VERCEL === "1" || process.argv.includes("--copy");
 
 function rm(dest) {

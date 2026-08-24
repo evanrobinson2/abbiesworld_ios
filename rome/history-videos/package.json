@@ -1,16 +1,18 @@
 {
   "name": "rome-history-videos",
   "private": true,
-  "description": "Root Next.js entry so Vercel can build with Root Directory unset. App source lives in viewer/.",
+  "description": "Gothic Invasion video project — frame viewer + image generation",
   "scripts": {
-    "predev": "node viewer/scripts/prebuild.mjs",
+    "predev": "node scripts/prebuild.mjs",
     "dev": "next dev",
-    "prebuild": "node viewer/scripts/prebuild.mjs",
+    "prebuild": "node scripts/prebuild.mjs",
     "build": "next build",
     "start": "next start",
-    "manifest": "node viewer/scripts/build-manifest.mjs",
-    "blob:seed": "node viewer/scripts/seed-blob.mjs",
-    "blob:add": "node viewer/scripts/add-frame.mjs"
+    "manifest": "node scripts/build-manifest.mjs",
+    "blob:seed": "node scripts/seed-blob.mjs",
+    "blob:add": "node scripts/add-frame.mjs",
+    "cdn:upload": "bash scripts/upload-to-r2.sh",
+    "cdn:manifest": "node scripts/update-manifest-cdn.mjs"
   },
   "dependencies": {
     "@vercel/blob": "^0.27.0",

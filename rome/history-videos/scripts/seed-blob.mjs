@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 import { spawnSync } from "node:child_process";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, "../..");
+const ROOT = path.resolve(__dirname, "..");
 const MANIFEST = path.resolve(__dirname, "../public/data/manifest.json");
 const CATALOG_PATHNAME = "catalog/frames.json";
 

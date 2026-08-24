@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 import { createHash } from "node:crypto";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ROOT = path.resolve(__dirname, "../..");
+const ROOT = path.resolve(__dirname, "..");
 const OUT = path.resolve(__dirname, "../public/data/manifest.json");
 
 const STYLE_SUFFIX =
