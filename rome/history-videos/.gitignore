@@ -24,3 +24,9 @@ next-env.d.ts
 viewer/public/assets
 .vercel
 .env*
+
+# Reference media — large binaries stay local (analysis docs + *.info.json are tracked)
+research/**/*.mp4
+research/**/*.mp3
+research/**/*.m4a
+research/**/*.wav
