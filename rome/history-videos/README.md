@@ -19,8 +19,8 @@ prompts/        The brief to hand Claude for each fill pass.
 assets/         Character sheets, location plans, boards, and images.
   registry.yaml Single source of truth for what exists and what is approved.
 research/       Source excerpts and material-culture notes.
-scripts/        Image generation (`generate_image.py` → OpenAI gpt-image-2).
-viewer/         Next.js frame review app (keep / discard / reroll) — deploy to Vercel.
+scripts/        Image generation + CDN upload scripts.
+app/            Next.js frame review app (keep / discard / reroll).
 docs/           Cloud agent setup and secrets.
 ```
 
@@ -58,6 +58,20 @@ stopping to say so.
 - **Nothing gets designed twice.** Approved assets are inherited, not reinterpreted.
 - **State, not just identity.** Reference `YOUNG-WARRIOR-376-C`, never
   `YOUNG-WARRIOR`.
+
+## CDN
+
+Images are served from Cloudflare R2:
+- **Public URL:** `https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/`
+- **Bucket:** `rome-history-assets`
+
+To upload new images:
+```bash
+npm run cdn:upload   # Upload all assets/* to R2
+npm run cdn:manifest # Update manifest.json with CDN URLs
+```
+
+Requires `CLOUDFLARE_API_KEY` with R2 Storage:Edit permission.
 
 ## Open decisions
 

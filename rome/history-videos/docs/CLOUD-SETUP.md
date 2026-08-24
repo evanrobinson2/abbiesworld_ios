@@ -3,9 +3,9 @@
 This project generates images through **OpenAI's Image API** (`gpt-image-2`), not
 Cursor's built-in `GenerateImage` tool.
 
-## Required secret
+## Required secrets
 
-Add this in the Cursor dashboard before starting a cloud agent on this repo:
+Add these in the Cursor dashboard before starting a cloud agent on this repo:
 
 1. Open [cursor.com/dashboard/cloud-agents](https://cursor.com/dashboard/cloud-agents)
 2. Go to **Secrets**
@@ -13,7 +13,18 @@ Add this in the Cursor dashboard before starting a cloud agent on this repo:
    - **Name:** `OPENAI_API_KEY`
    - **Type:** **Runtime Secret** (recommended — redacted from transcripts/commits)
    - **Value:** your OpenAI API key (`sk-...`)
-4. Restart the cloud agent after adding or changing the secret
+   
+   - **Name:** `CLOUDFLARE_API_KEY`
+   - **Type:** **Runtime Secret**
+   - **Value:** Cloudflare API token with **R2 Storage: Edit** permission
+4. Restart the cloud agent after adding or changing secrets
+
+### Cloudflare R2 setup (one-time)
+
+1. Enable R2 on your Cloudflare account at `dash.cloudflare.com/[account]/r2`
+2. Create an API token at `dash.cloudflare.com/profile/api-tokens` with:
+   - **Account** → **Workers R2 Storage** → **Edit**
+3. The bucket `rome-history-assets` and public URL are already configured
 
 Optional overrides (not required):
 
@@ -53,12 +64,12 @@ GitHub: `git@github.com:evanrobinson2/rome_history_videos.git`
 
 | Item | Status |
 | --- | --- |
-| `OPENAI_API_KEY` in dashboard Secrets | You added this ✓ |
+| `OPENAI_API_KEY` in dashboard Secrets | Required for image generation |
+| `CLOUDFLARE_API_KEY` in dashboard Secrets | Required for CDN uploads |
 | Repo cloned from GitHub | Automatic when agent starts |
 | `pip install -r requirements.txt` | Runs from `.cursor/environment.json` on build |
 | Project context | Read `sessions/session_1.md` first, then `README.md` and `bible/` |
 | Midjourney / LegNext | Not used — OpenAI only |
-| This chat history | Not automatic — use `sessions/session_1.md` |
 
 ## Handoff for session 2
 
