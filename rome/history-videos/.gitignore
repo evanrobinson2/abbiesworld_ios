@@ -25,8 +25,7 @@ viewer/public/assets
 .vercel
 .env*
 
-# Reference media — large binaries stay local (analysis docs + *.info.json are tracked)
+# Reference media — source video stays local (too large); extracted audio is tracked
 research/**/*.mp4
-research/**/*.mp3
 research/**/*.m4a
 research/**/*.wav
