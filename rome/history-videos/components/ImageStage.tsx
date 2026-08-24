@@ -1,10 +1,11 @@
 "use client";
 
 import Image from "next/image";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import type { ShotItem } from "@/lib/types";
 import { moodLabel, shotUrl } from "@/lib/types";
+import { ImageLightbox } from "./ImageLightbox";
 
 interface ImageStageProps {
   item: ShotItem;
@@ -24,6 +25,7 @@ export function ImageStage({
   const touchX = useRef<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
+  const [showLightbox, setShowLightbox] = useState(false);
 
   const url = shotUrl(item);
 
@@ -83,27 +85,49 @@ export function ImageStage({
         )}
 
         {url && !loadError ? (
-          <Image
-            key={url}
-            src={url}
-            alt={item.description || item.id}
-            fill
-            className={`object-contain transition-opacity duration-300 ${
-              isLoading ? "opacity-0" : "opacity-100"
-            }`}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-            priority={index < 3}
-            draggable={false}
-            onLoad={() => setIsLoading(false)}
-            onError={() => {
-              setIsLoading(false);
-              setLoadError(true);
-            }}
-          />
+          <>
+            <Image
+              key={url}
+              src={url}
+              alt={item.description || item.id}
+              fill
+              className={`object-contain transition-opacity duration-300 cursor-pointer ${
+                isLoading ? "opacity-0" : "opacity-100"
+              }`}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              priority={index < 3}
+              draggable={false}
+              onClick={() => setShowLightbox(true)}
+              onLoad={() => setIsLoading(false)}
+              onError={() => {
+                setIsLoading(false);
+                setLoadError(true);
+              }}
+            />
+            {/* Expand button */}
+            {!isLoading && (
+              <button
+                onClick={() => setShowLightbox(true)}
+                className="absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-black/50 text-white/80 hover:bg-black/70 hover:text-white transition-colors"
+                aria-label="Expand image"
+              >
+                <Expand size={16} />
+              </button>
+            )}
+          </>
         ) : (
           <div className="flex h-full min-h-[200px] items-center justify-center text-sm text-bone-muted">
             {loadError ? `Failed to load: ${item.id}` : `Missing: ${item.filename || item.id}`}
           </div>
+        )}
+        
+        {/* Lightbox */}
+        {showLightbox && url && (
+          <ImageLightbox
+            src={url}
+            alt={item.description || item.id}
+            onClose={() => setShowLightbox(false)}
+          />
         )}
       </div>
 
