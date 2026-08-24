@@ -11,3 +11,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+// Deployment trigger: 20260824090401
