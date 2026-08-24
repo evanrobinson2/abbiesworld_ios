@@ -130,9 +130,9 @@ export function ViewerShell({ initialManifest }: ViewerShellProps) {
   }, [filtered.length]);
 
   const handleAction = useCallback(
-    (action: FeedbackAction) => {
+    (action: FeedbackAction, note?: string) => {
       if (!item) return;
-      const next = setFeedback(feedback, item.id, action);
+      const next = setFeedback(feedback, item.id, action, note);
       setFeedbackState(next);
       if (action === "reroll" && item.prompt) {
         copyPrompt(item.prompt);
@@ -300,6 +300,8 @@ export function ViewerShell({ initialManifest }: ViewerShellProps) {
           total={filtered.length}
           onPrev={goPrev}
           onNext={goNext}
+          feedback={feedback[item.id] ?? null}
+          onFeedback={handleAction}
         />
 
         <ThumbnailStrip

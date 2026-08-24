@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Expand } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
-import type { ShotItem } from "@/lib/types";
+import type { FeedbackAction, FeedbackEntry, ShotItem } from "@/lib/types";
 import { moodLabel, shotUrl } from "@/lib/types";
 import { ImageLightbox } from "./ImageLightbox";
 
@@ -13,6 +13,8 @@ interface ImageStageProps {
   total: number;
   onPrev: () => void;
   onNext: () => void;
+  feedback?: FeedbackEntry | null;
+  onFeedback?: (action: FeedbackAction, note?: string) => void;
 }
 
 export function ImageStage({
@@ -21,6 +23,8 @@ export function ImageStage({
   total,
   onPrev,
   onNext,
+  feedback,
+  onFeedback,
 }: ImageStageProps) {
   const touchX = useRef<number | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -126,6 +130,9 @@ export function ImageStage({
           <ImageLightbox
             src={url}
             alt={item.description || item.id}
+            itemId={item.id}
+            feedback={feedback}
+            onFeedback={onFeedback}
             onClose={() => setShowLightbox(false)}
           />
         )}
