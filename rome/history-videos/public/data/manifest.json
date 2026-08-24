@@ -1,10 +1,10 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-08-24T08:53:52.595Z",
+  "generatedAt": "2026-08-24T10:32:44.966Z",
   "title": "Gothic Invasion — Frame Review",
   "styleSuffix": "Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
   "totalShots": 54,
-  "source": "cloudflare-r2",
+  "source": "local",
   "items": [
     {
       "shotNumber": 1,
@@ -29,8 +29,8 @@
         "reference"
       ],
       "prompt": "Fritigern Gothic nobleman four-view turnaround cut-paper faces all views. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/FRI-001-turnaround.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/FRI-001-turnaround.png",
+      "url": "/assets/characters/FRI-001-turnaround.png",
+      "imagePath": "/assets/characters/FRI-001-turnaround.png",
       "version": "v1",
       "versions": [
         {
@@ -38,8 +38,7 @@
           "status": "current",
           "path": "assets/characters/FRI-001-turnaround.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/FRI-001-turnaround.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -105,8 +104,8 @@
         "reference"
       ],
       "prompt": "Alavivus Gothic co-leader four-view turnaround cut-paper faces. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/ALA-001-turnaround.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/ALA-001-turnaround.png",
+      "url": "/assets/characters/ALA-001-turnaround.png",
+      "imagePath": "/assets/characters/ALA-001-turnaround.png",
       "version": "v1",
       "versions": [
         {
@@ -114,8 +113,7 @@
           "status": "current",
           "path": "assets/characters/ALA-001-turnaround.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/ALA-001-turnaround.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -180,8 +178,8 @@
         "reference"
       ],
       "prompt": "Lupicinus Roman commander four-view turnaround cut-paper faces. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/LUP-001-turnaround.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/LUP-001-turnaround.png",
+      "url": "/assets/characters/LUP-001-turnaround.png",
+      "imagePath": "/assets/characters/LUP-001-turnaround.png",
       "version": "v1",
       "versions": [
         {
@@ -189,8 +187,7 @@
           "status": "current",
           "path": "assets/characters/LUP-001-turnaround.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/LUP-001-turnaround.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -256,8 +253,8 @@
         "reference"
       ],
       "prompt": "Fritigern and Alavivus paired cut-paper reference same dignity. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/BANQUET-PAIR-001.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/BANQUET-PAIR-001.png",
+      "url": "/assets/characters/BANQUET-PAIR-001.png",
+      "imagePath": "/assets/characters/BANQUET-PAIR-001.png",
       "version": "v1",
       "versions": [
         {
@@ -265,8 +262,7 @@
           "status": "current",
           "path": "assets/characters/BANQUET-PAIR-001.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/BANQUET-PAIR-001.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -324,8 +320,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Four-view turnaround, COURT costume, faces all views",
       "prompt": "Four-view character turnaround sheet on bone background: Eastern Roman emperor Valens late 40s stylized cut-paper face all views, court paludamentum deeper indigo purple plane simple diadem. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-turnaround.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-turnaround.png",
+      "url": "/assets/characters/VAL-001-turnaround.png",
+      "imagePath": "/assets/characters/VAL-001-turnaround.png",
       "version": "v1",
       "versions": [
         {
@@ -333,8 +329,7 @@
           "status": "current",
           "path": "assets/characters/VAL-001-turnaround.png",
           "notes": "Lock as Valens identity reference",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-turnaround.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -400,8 +395,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Full body front ¾, imperial court",
       "prompt": "Emperor Valens full body front three-quarter imperial court costume Hubris mood wide gold sun wedge. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-COSTUME-COURT.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-COSTUME-COURT.png",
+      "url": "/assets/characters/VAL-001-COSTUME-COURT.png",
+      "imagePath": "/assets/characters/VAL-001-COSTUME-COURT.png",
       "version": "v2",
       "versions": [
         {
@@ -409,8 +404,7 @@
           "status": "flagged",
           "path": "assets/characters/VAL-001-COSTUME-COURT.png",
           "notes": "gold embroidery on cloak hem",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-COSTUME-COURT.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -418,8 +412,7 @@
           "path": "assets/rejected/v1/VAL-001-COSTUME-COURT.png",
           "rejectReason": "Painterly not cut-paper",
           "notes": "v2 fix: Match turnaround; reference image",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-COSTUME-COURT.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -466,8 +459,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 6,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-COSTUME-COURT.png"
+      "catalogOrder": 6
     },
     {
       "shotNumber": 3,
@@ -486,8 +478,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Full body, armour under paludamentum, campaign",
       "prompt": "Emperor Valens full body field campaign scale armour paludamentum harsh sun. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-COSTUME-FIELD.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-COSTUME-FIELD.png",
+      "url": "/assets/characters/VAL-001-COSTUME-FIELD.png",
+      "imagePath": "/assets/characters/VAL-001-COSTUME-FIELD.png",
       "version": "v2",
       "versions": [
         {
@@ -495,8 +487,7 @@
           "status": "flagged",
           "path": "assets/characters/VAL-001-COSTUME-FIELD.png",
           "notes": "purple/red tunic drift (reference helped face, not palette)",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-COSTUME-FIELD.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -504,8 +495,7 @@
           "path": "assets/rejected/v1/VAL-001-COSTUME-FIELD.png",
           "rejectReason": "Painterly face",
           "notes": "v2 fix: Reference turnaround",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-COSTUME-FIELD.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -552,8 +542,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 7,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-COSTUME-FIELD.png"
+      "catalogOrder": 7
     },
     {
       "shotNumber": 4,
@@ -572,8 +561,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Seated on campaign stool, maps ignored, wide gold wedge sun",
       "prompt": "Valens seated ignoring maps at feet dismissive Hubris. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-13-HUBRIS-A.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-13-HUBRIS-A.png",
+      "url": "/assets/characters/VAL-001-MOOD-13-HUBRIS-A.png",
+      "imagePath": "/assets/characters/VAL-001-MOOD-13-HUBRIS-A.png",
       "version": "v2",
       "versions": [
         {
@@ -581,8 +570,7 @@
           "status": "current",
           "path": "assets/characters/VAL-001-MOOD-13-HUBRIS-A.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-13-HUBRIS-A.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -590,8 +578,7 @@
           "path": "assets/rejected/v1/VAL-001-MOOD-13-HUBRIS-A.png",
           "rejectReason": "Painterly + Chi-Rho + decorative gold",
           "notes": "v2 fix: Cut-paper; no sacred symbols",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-13-HUBRIS-A.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -636,8 +623,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 8,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-13-HUBRIS-A.png"
+      "catalogOrder": 8
     },
     {
       "shotNumber": 5,
@@ -656,8 +642,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Dismissing scout with raised hand, arrogant patience",
       "prompt": "Valens dismissing scout with raised hand arrogant. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-13-HUBRIS-B.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-13-HUBRIS-B.png",
+      "url": "/assets/characters/VAL-001-MOOD-13-HUBRIS-B.png",
+      "imagePath": "/assets/characters/VAL-001-MOOD-13-HUBRIS-B.png",
       "version": "v2",
       "versions": [
         {
@@ -665,8 +651,7 @@
           "status": "current",
           "path": "assets/characters/VAL-001-MOOD-13-HUBRIS-B.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-13-HUBRIS-B.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -674,8 +659,7 @@
           "path": "assets/rejected/v1/VAL-001-MOOD-13-HUBRIS-B.png",
           "rejectReason": "Decorative gold on regalia",
           "notes": "v2 fix: Gold wedge sun only",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-13-HUBRIS-B.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -720,8 +704,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 9,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-13-HUBRIS-B.png"
+      "catalogOrder": 9
     },
     {
       "shotNumber": 6,
@@ -740,8 +723,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Encircled on foot, dust shards, no escape visible",
       "prompt": "Valens encircled on foot Adrianople dust Terror mood. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-14-TERROR-A.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-14-TERROR-A.png",
+      "url": "/assets/characters/VAL-001-MOOD-14-TERROR-A.png",
+      "imagePath": "/assets/characters/VAL-001-MOOD-14-TERROR-A.png",
       "version": "v2",
       "versions": [
         {
@@ -749,8 +732,7 @@
           "status": "current",
           "path": "assets/characters/VAL-001-MOOD-14-TERROR-A.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-14-TERROR-A.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -758,8 +740,7 @@
           "path": "assets/rejected/v1/VAL-001-MOOD-14-TERROR-A.png",
           "rejectReason": "Shield heraldry",
           "notes": "v2 fix: Plain oval shields",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-14-TERROR-A.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -804,8 +785,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 10,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-14-TERROR-A.png"
+      "catalogOrder": 10
     },
     {
       "shotNumber": 7,
@@ -824,8 +804,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Close bust, heat exhaustion, cracked lips, fear dawning",
       "prompt": "Valens bust close heat exhaustion fear dawning. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-14-TERROR-B.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-14-TERROR-B.png",
+      "url": "/assets/characters/VAL-001-MOOD-14-TERROR-B.png",
+      "imagePath": "/assets/characters/VAL-001-MOOD-14-TERROR-B.png",
       "version": "v2",
       "versions": [
         {
@@ -833,8 +813,7 @@
           "status": "current",
           "path": "assets/characters/VAL-001-MOOD-14-TERROR-B.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-14-TERROR-B.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -842,8 +821,7 @@
           "path": "assets/rejected/v1/VAL-001-MOOD-14-TERROR-B.png",
           "rejectReason": "Decorative gold brooch",
           "notes": "v2 fix: Gold = sun/dust only",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-14-TERROR-B.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -888,8 +866,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 11,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-14-TERROR-B.png"
+      "catalogOrder": 11
     },
     {
       "shotNumber": 8,
@@ -908,8 +885,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Empty imperial camp stool and abandoned diadem on ground",
       "prompt": "Empty imperial camp stool abandoned diadem Ruin mood. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-15-RUIN-A.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-15-RUIN-A.png",
+      "url": "/assets/characters/VAL-001-MOOD-15-RUIN-A.png",
+      "imagePath": "/assets/characters/VAL-001-MOOD-15-RUIN-A.png",
       "version": "v2",
       "versions": [
         {
@@ -917,8 +894,7 @@
           "status": "current",
           "path": "assets/characters/VAL-001-MOOD-15-RUIN-A.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-15-RUIN-A.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -926,8 +902,7 @@
           "path": "assets/rejected/v1/VAL-001-MOOD-15-RUIN-A.png",
           "rejectReason": "No indigo/grey at all",
           "notes": "v2 fix: Bone-dominant but keep grey/indigo traces",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-15-RUIN-A.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -972,8 +947,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 12,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-15-RUIN-A.png"
+      "catalogOrder": 12
     },
     {
       "shotNumber": 9,
@@ -992,8 +966,8 @@
       "storyPart": "A. Valens — boss arc (9)",
       "storyBeat": "Abandoned paludamentum draped over empty armour stand",
       "prompt": "Abandoned paludamentum over empty armour stand Ruin. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-15-RUIN-B.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-15-RUIN-B.png",
+      "url": "/assets/characters/VAL-001-MOOD-15-RUIN-B.png",
+      "imagePath": "/assets/characters/VAL-001-MOOD-15-RUIN-B.png",
       "version": "v2",
       "versions": [
         {
@@ -1001,8 +975,7 @@
           "status": "current",
           "path": "assets/characters/VAL-001-MOOD-15-RUIN-B.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/VAL-001-MOOD-15-RUIN-B.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -1010,8 +983,7 @@
           "path": "assets/rejected/v1/VAL-001-MOOD-15-RUIN-B.png",
           "rejectReason": "Painterly atmospheric",
           "notes": "v2 fix: Cut-paper layers",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-15-RUIN-B.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1056,8 +1028,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 13,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-15-RUIN-B.png"
+      "catalogOrder": 13
     },
     {
       "shotNumber": 10,
@@ -1076,8 +1047,8 @@
       "storyPart": "B. Humiliation — Danube processing (8)",
       "storyBeat": "Wide: Gothic families in corral, Roman soldiers with tall poles forming lanes, bone washed palette harsh overhead light",
       "prompt": "Wide Gothic refugee families corralled Roman soldiers with poles harsh overhead Humiliation. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-01.png",
+      "url": "/assets/scenes/SCENE-05-HUMILIATION-01.png",
+      "imagePath": "/assets/scenes/SCENE-05-HUMILIATION-01.png",
       "version": "v2",
       "versions": [
         {
@@ -1085,8 +1056,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-05-HUMILIATION-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -1094,8 +1064,7 @@
           "path": "assets/rejected/v1/SCENE-05-HUMILIATION-01.png",
           "rejectReason": "Painterly civilian faces",
           "notes": "v2 fix: Silhouette crowd + stylized principals only",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-05-HUMILIATION-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1140,8 +1109,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 14,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-05-HUMILIATION-01.png"
+      "catalogOrder": 14
     },
     {
       "shotNumber": 11,
@@ -1160,8 +1128,8 @@
       "storyPart": "B. Humiliation — Danube processing (8)",
       "storyBeat": "Roman officer on raised platform gesturing down at kneeling Gothic men, power imbalance clear",
       "prompt": "Roman officer on platform gesturing at kneeling Gothic men. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-02.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-02.png",
+      "url": "/assets/scenes/SCENE-05-HUMILIATION-02.png",
+      "imagePath": "/assets/scenes/SCENE-05-HUMILIATION-02.png",
       "version": "v1",
       "versions": [
         {
@@ -1169,8 +1137,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-05-HUMILIATION-02.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-02.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1231,8 +1198,8 @@
       "storyPart": "B. Humiliation — Danube processing (8)",
       "storyBeat": "Gothic weapons piled and taken by Roman hands, disarmament",
       "prompt": "Gothic weapons pile confiscated by Roman hands. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-03.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-03.png",
+      "url": "/assets/scenes/SCENE-05-HUMILIATION-03.png",
+      "imagePath": "/assets/scenes/SCENE-05-HUMILIATION-03.png",
       "version": "v1",
       "versions": [
         {
@@ -1240,8 +1207,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-05-HUMILIATION-03.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-03.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1302,8 +1268,8 @@
       "storyPart": "B. Humiliation — Danube processing (8)",
       "storyBeat": "Children pulled from parent by Roman soldier silhouettes, parent reaching — faces on principals only",
       "prompt": "Child separated from Gothic parent reaching Roman soldiers. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-04.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-04.png",
+      "url": "/assets/scenes/SCENE-05-HUMILIATION-04.png",
+      "imagePath": "/assets/scenes/SCENE-05-HUMILIATION-04.png",
       "version": "v1",
       "versions": [
         {
@@ -1311,8 +1277,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-05-HUMILIATION-04.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-04.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1374,8 +1339,8 @@
       "storyPart": "B. Humiliation — Danube processing (8)",
       "storyBeat": "Gothic nobles forced to wait in mud while Roman clerk counts on wax tablet (no visible text)",
       "prompt": "Gothic nobles waiting in mud Roman clerk counting wax tablet. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-05.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-05.png",
+      "url": "/assets/scenes/SCENE-05-HUMILIATION-05.png",
+      "imagePath": "/assets/scenes/SCENE-05-HUMILIATION-05.png",
       "version": "v2",
       "versions": [
         {
@@ -1383,8 +1348,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-05-HUMILIATION-05.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-05.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -1392,8 +1356,7 @@
           "path": "assets/rejected/v1/SCENE-05-HUMILIATION-05.png",
           "rejectReason": "Red/rust cloaks",
           "notes": "v2 fix: Indigo/bone/grey only",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-05-HUMILIATION-05.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1438,8 +1401,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 18,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-05-HUMILIATION-05.png"
+      "catalogOrder": 18
     },
     {
       "shotNumber": 15,
@@ -1458,8 +1420,8 @@
       "storyPart": "B. Humiliation — Danube processing (8)",
       "storyBeat": "Close: Gothic hands bound with rope, Roman sandal in foreground",
       "prompt": "Close bound Gothic hands rope Roman sandal foreground. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-06.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-06.png",
+      "url": "/assets/scenes/SCENE-05-HUMILIATION-06.png",
+      "imagePath": "/assets/scenes/SCENE-05-HUMILIATION-06.png",
       "version": "v1",
       "versions": [
         {
@@ -1467,8 +1429,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-05-HUMILIATION-06.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-06.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1529,8 +1490,8 @@
       "storyPart": "B. Humiliation — Danube processing (8)",
       "storyBeat": "Danube bank: Gothic host packed tight, Roman boats controlling crossing",
       "prompt": "Danube bank Gothic host packed Roman boats control crossing. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-07.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-07.png",
+      "url": "/assets/scenes/SCENE-05-HUMILIATION-07.png",
+      "imagePath": "/assets/scenes/SCENE-05-HUMILIATION-07.png",
       "version": "v1",
       "versions": [
         {
@@ -1538,8 +1499,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-05-HUMILIATION-07.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-05-HUMILIATION-07.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1600,8 +1560,8 @@
       "storyPart": "B. Humiliation — Danube processing (8)",
       "storyBeat": "Roman soldier withholding bread loaf from reaching Gothic hands",
       "prompt": "Roman soldier withholding bread from reaching Gothic hands. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-06-HUNGER-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-06-HUNGER-01.png",
+      "url": "/assets/scenes/SCENE-06-HUNGER-01.png",
+      "imagePath": "/assets/scenes/SCENE-06-HUNGER-01.png",
       "version": "v1",
       "versions": [
         {
@@ -1609,8 +1569,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-06-HUNGER-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-06-HUNGER-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1671,8 +1630,8 @@
       "storyPart": "C. Flight and petition (4)",
       "storyBeat": "Ox wagons and families fleeing, looking back, torn deckle edges",
       "prompt": "Ox wagons families fleeing looking back Uprooting mood. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-02-UPROOTING-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-02-UPROOTING-01.png",
+      "url": "/assets/scenes/SCENE-02-UPROOTING-01.png",
+      "imagePath": "/assets/scenes/SCENE-02-UPROOTING-01.png",
       "version": "v1",
       "versions": [
         {
@@ -1680,8 +1639,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-02-UPROOTING-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-02-UPROOTING-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1744,8 +1702,8 @@
       "storyPart": "C. Flight and petition (4)",
       "storyBeat": "Fritigern and Alavivus with bowed heads, empty hands out, Roman official elevated",
       "prompt": "Fritigern Alavivus bowed empty hands Roman official elevated Petition. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-03-PETITION-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-03-PETITION-01.png",
+      "url": "/assets/scenes/SCENE-03-PETITION-01.png",
+      "imagePath": "/assets/scenes/SCENE-03-PETITION-01.png",
       "version": "v1",
       "versions": [
         {
@@ -1753,8 +1711,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-03-PETITION-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-03-PETITION-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1817,8 +1774,8 @@
       "storyPart": "C. Flight and petition (4)",
       "storyBeat": "Gothic camp waiting in rain, horizontal paper bands",
       "prompt": "Gothic camp waiting rain horizontal bands Endurance. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-04-ENDURANCE-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-04-ENDURANCE-01.png",
+      "url": "/assets/scenes/SCENE-04-ENDURANCE-01.png",
+      "imagePath": "/assets/scenes/SCENE-04-ENDURANCE-01.png",
       "version": "v1",
       "versions": [
         {
@@ -1826,8 +1783,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-04-ENDURANCE-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-04-ENDURANCE-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1890,8 +1846,8 @@
       "storyPart": "C. Flight and petition (4)",
       "storyBeat": "Mother breaking small bread for child inside wagon shelter, soft wedge light",
       "prompt": "Mother breaking bread for child wagon shelter soft light. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-07-TENDERNESS-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-07-TENDERNESS-01.png",
+      "url": "/assets/scenes/SCENE-07-TENDERNESS-01.png",
+      "imagePath": "/assets/scenes/SCENE-07-TENDERNESS-01.png",
       "version": "v1",
       "versions": [
         {
@@ -1899,8 +1855,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-07-TENDERNESS-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-07-TENDERNESS-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -1965,8 +1920,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Lupicinus convivial with cup, Fritigern and Alavivus seated, genuine warmth",
       "prompt": "Marcianople banquet Lupicinus convivial cup Fritigern Alavivus seated genuine warmth. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-08-LEVITY-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-08-LEVITY-01.png",
+      "url": "/assets/scenes/SCENE-08-LEVITY-01.png",
+      "imagePath": "/assets/scenes/SCENE-08-LEVITY-01.png",
       "version": "v1",
       "versions": [
         {
@@ -1974,8 +1929,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-08-LEVITY-01.png",
           "notes": "Lock banquet look",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-08-LEVITY-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2042,8 +1996,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Fritigern leaning forward listening, door crack of light behind",
       "prompt": "Fritigern leaning listening door crack light behind Unease. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-01.png",
+      "url": "/assets/scenes/SCENE-09-UNEASE-01.png",
+      "imagePath": "/assets/scenes/SCENE-09-UNEASE-01.png",
       "version": "v2",
       "versions": [
         {
@@ -2051,8 +2005,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-09-UNEASE-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -2060,8 +2013,7 @@
           "path": "assets/rejected/v1/SCENE-09-UNEASE-01.png",
           "rejectReason": "Wrong beat + palette",
           "notes": "v2 fix: Fritigern listening, door crack, indigo only",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-09-UNEASE-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2110,8 +2062,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 27,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-09-UNEASE-01.png"
+      "catalogOrder": 27
     },
     {
       "shotNumber": 24,
@@ -2130,8 +2081,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Three Gothic retainers in courtyard, heads turning toward distant sound",
       "prompt": "Three Gothic retainers courtyard turning toward sound. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-02.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-02.png",
+      "url": "/assets/scenes/SCENE-09-UNEASE-02.png",
+      "imagePath": "/assets/scenes/SCENE-09-UNEASE-02.png",
       "version": "v1",
       "versions": [
         {
@@ -2139,8 +2090,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-09-UNEASE-02.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-02.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2205,8 +2155,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Roman messenger running through courtyard toward banquet door",
       "prompt": "Roman messenger running courtyard toward banquet door. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-03.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-03.png",
+      "url": "/assets/scenes/SCENE-09-UNEASE-03.png",
+      "imagePath": "/assets/scenes/SCENE-09-UNEASE-03.png",
       "version": "v2",
       "versions": [
         {
@@ -2214,8 +2164,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-09-UNEASE-03.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-09-UNEASE-03.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -2223,8 +2172,7 @@
           "path": "assets/rejected/v1/SCENE-09-UNEASE-03.png",
           "rejectReason": "Purple/red palette",
           "notes": "v2 fix: Match LEVITY-01 palette",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-09-UNEASE-03.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2273,8 +2221,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 29,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-09-UNEASE-03.png"
+      "catalogOrder": 29
     },
     {
       "shotNumber": 26,
@@ -2293,8 +2240,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Fritigern rising from bench, hand on table, Alavivus half-rising",
       "prompt": "Fritigern rising from bench Alavivus half-rising Betrayal. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-01.png",
+      "url": "/assets/scenes/SCENE-10-BETRAYAL-01.png",
+      "imagePath": "/assets/scenes/SCENE-10-BETRAYAL-01.png",
       "version": "v1",
       "versions": [
         {
@@ -2302,8 +2249,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-10-BETRAYAL-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2368,8 +2314,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Lupicinus still seated but face changed — cup lowered, betrayal dawning",
       "prompt": "Lupicinus seated cup lowered face changed betrayal dawning. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-02.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-02.png",
+      "url": "/assets/scenes/SCENE-10-BETRAYAL-02.png",
+      "imagePath": "/assets/scenes/SCENE-10-BETRAYAL-02.png",
       "version": "v2",
       "versions": [
         {
@@ -2377,8 +2323,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-10-BETRAYAL-02.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-02.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -2386,8 +2331,7 @@
           "path": "assets/rejected/v1/SCENE-10-BETRAYAL-02.png",
           "rejectReason": "Brown sandals palette",
           "notes": "v2 fix: Calcei in bone/grey",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-10-BETRAYAL-02.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2435,8 +2379,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 31,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-10-BETRAYAL-02.png"
+      "catalogOrder": 31
     },
     {
       "shotNumber": 28,
@@ -2455,8 +2398,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "R3 charcoal: banquet door from outside, violent movement shadow through gap, door closing — unknowable interior",
       "prompt": "Charcoal and graphite on toned paper smudged unfinished: Marcianople banquet door outside violent shadow through gap door closing dissolving to bare paper. No text. 16:9.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-03-R3.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-03-R3.png",
+      "url": "/assets/scenes/SCENE-10-BETRAYAL-03-R3.png",
+      "imagePath": "/assets/scenes/SCENE-10-BETRAYAL-03-R3.png",
       "version": "v1",
       "versions": [
         {
@@ -2464,8 +2407,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-10-BETRAYAL-03-R3.png",
           "notes": "**Intentional R3 register** — keep register, may refine later",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-03-R3.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2531,8 +2473,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Alavivus last appearance, face half in indigo shadow, doorway behind",
       "prompt": "Alavivus face half shadow doorway last appearance. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-04.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-04.png",
+      "url": "/assets/scenes/SCENE-10-BETRAYAL-04.png",
+      "imagePath": "/assets/scenes/SCENE-10-BETRAYAL-04.png",
       "version": "v1",
       "versions": [
         {
@@ -2540,8 +2482,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-10-BETRAYAL-04.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-04.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2605,8 +2546,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Courtyard POV: banquet door burst open, Gothic retainers rushing toward it",
       "prompt": "Courtyard banquet door burst open Gothic retainers rushing. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-05.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-05.png",
+      "url": "/assets/scenes/SCENE-10-BETRAYAL-05.png",
+      "imagePath": "/assets/scenes/SCENE-10-BETRAYAL-05.png",
       "version": "v1",
       "versions": [
         {
@@ -2614,8 +2555,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-10-BETRAYAL-05.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-10-BETRAYAL-05.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2680,8 +2620,8 @@
       "storyPart": "D. Marcianople banquet and murder (10)",
       "storyBeat": "Gothic warriors surging at Marcianople gate, Roman shield wall",
       "prompt": "Gothic warriors surging Marcianople gate Roman shield wall. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-11-FURY-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-11-FURY-01.png",
+      "url": "/assets/scenes/SCENE-11-FURY-01.png",
+      "imagePath": "/assets/scenes/SCENE-11-FURY-01.png",
       "version": "v2",
       "versions": [
         {
@@ -2689,8 +2629,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-11-FURY-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-11-FURY-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -2698,8 +2637,7 @@
           "path": "assets/rejected/v1/SCENE-11-FURY-01.png",
           "rejectReason": "Segmentata + burgundy",
           "notes": "v2 fix: Scale armour, indigo paludamentum",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-11-FURY-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2748,8 +2686,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 35,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-11-FURY-01.png"
+      "catalogOrder": 35
     },
     {
       "shotNumber": 32,
@@ -2768,8 +2705,8 @@
       "storyPart": "E. Wagon circle — real battle (8)",
       "storyBeat": "Aerial ¾: wagons in tight circle, warriors with spears outward, Roman infantry surrounding",
       "prompt": "Aerial ¾: wagons in tight circle, warriors with spears outward, Roman infantry surrounding. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-01.png",
+      "url": "/assets/scenes/SCENE-BATTLE-LAAGER-01.png",
+      "imagePath": "/assets/scenes/SCENE-BATTLE-LAAGER-01.png",
       "version": "v2",
       "versions": [
         {
@@ -2777,8 +2714,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-BATTLE-LAAGER-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -2786,8 +2722,7 @@
           "path": "assets/rejected/v1/SCENE-BATTLE-LAAGER-01.png",
           "rejectReason": "Segmentata aerial",
           "notes": "v2 fix: Scale/mail Romans",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2832,8 +2767,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 36,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-01.png"
+      "catalogOrder": 36
     },
     {
       "shotNumber": 33,
@@ -2852,8 +2786,8 @@
       "storyPart": "E. Wagon circle — real battle (8)",
       "storyBeat": "Ground level inside laager: warriors braced behind wagon wheels, faces visible",
       "prompt": "Ground level inside laager: warriors braced behind wagon wheels, faces visible. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-02.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-02.png",
+      "url": "/assets/scenes/SCENE-BATTLE-LAAGER-02.png",
+      "imagePath": "/assets/scenes/SCENE-BATTLE-LAAGER-02.png",
       "version": "v1",
       "versions": [
         {
@@ -2861,8 +2795,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-BATTLE-LAAGER-02.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-02.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2923,8 +2856,8 @@
       "storyPart": "E. Wagon circle — real battle (8)",
       "storyBeat": "Roman infantry charging laager gap, shields up, javelins in air",
       "prompt": "Roman infantry charging laager gap, shields up, javelins in air. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-03.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-03.png",
+      "url": "/assets/scenes/SCENE-BATTLE-LAAGER-03.png",
+      "imagePath": "/assets/scenes/SCENE-BATTLE-LAAGER-03.png",
       "version": "v2",
       "versions": [
         {
@@ -2932,8 +2865,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-BATTLE-LAAGER-03.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-03.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -2941,8 +2873,7 @@
           "path": "assets/rejected/v1/SCENE-BATTLE-LAAGER-03.png",
           "rejectReason": "Segmentata + shield bosses",
           "notes": "v2 fix: Plain shields",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-03.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -2987,8 +2918,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 38,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-03.png"
+      "catalogOrder": 38
     },
     {
       "shotNumber": 35,
@@ -3007,8 +2937,8 @@
       "storyPart": "E. Wagon circle — real battle (8)",
       "storyBeat": "Gothic warrior on wagon fighting downward, spear at Roman climber",
       "prompt": "Gothic warrior on wagon fighting downward, spear at Roman climber. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-04.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-04.png",
+      "url": "/assets/scenes/SCENE-BATTLE-LAAGER-04.png",
+      "imagePath": "/assets/scenes/SCENE-BATTLE-LAAGER-04.png",
       "version": "v2",
       "versions": [
         {
@@ -3016,8 +2946,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-BATTLE-LAAGER-04.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-04.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3025,8 +2954,7 @@
           "path": "assets/rejected/v1/SCENE-BATTLE-LAAGER-04.png",
           "rejectReason": "Red/brown palette",
           "notes": "v2 fix: Four-colour only",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-04.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3071,8 +2999,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 39,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-04.png"
+      "catalogOrder": 39
     },
     {
       "shotNumber": 36,
@@ -3091,8 +3018,8 @@
       "storyPart": "E. Wagon circle — real battle (8)",
       "storyBeat": "Women and elders inside circle passing arrows, not passive",
       "prompt": "Women and elders inside circle passing arrows, not passive. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-05.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-05.png",
+      "url": "/assets/scenes/SCENE-BATTLE-LAAGER-05.png",
+      "imagePath": "/assets/scenes/SCENE-BATTLE-LAAGER-05.png",
       "version": "v1",
       "versions": [
         {
@@ -3100,8 +3027,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-BATTLE-LAAGER-05.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-05.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3162,8 +3088,8 @@
       "storyPart": "E. Wagon circle — real battle (8)",
       "storyBeat": "Horses rearing at laager edge, Romans trying to break circle",
       "prompt": "Horses rearing at laager edge, Romans trying to break circle. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-06.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-06.png",
+      "url": "/assets/scenes/SCENE-BATTLE-LAAGER-06.png",
+      "imagePath": "/assets/scenes/SCENE-BATTLE-LAAGER-06.png",
       "version": "v2",
       "versions": [
         {
@@ -3171,8 +3097,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-BATTLE-LAAGER-06.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-06.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3180,8 +3105,7 @@
           "path": "assets/rejected/v1/SCENE-BATTLE-LAAGER-06.png",
           "rejectReason": "Red horses + segmentata",
           "notes": "v2 fix: Indigo/grey horses, scale armour",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-06.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3226,8 +3150,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 41,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-06.png"
+      "catalogOrder": 41
     },
     {
       "shotNumber": 38,
@@ -3246,8 +3169,8 @@
       "storyPart": "E. Wagon circle — real battle (8)",
       "storyBeat": "Night variant: fire gold wedges, laager holding, smoke layers",
       "prompt": "Night variant: fire gold wedges, laager holding, smoke layers. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-07.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-07.png",
+      "url": "/assets/scenes/SCENE-BATTLE-LAAGER-07.png",
+      "imagePath": "/assets/scenes/SCENE-BATTLE-LAAGER-07.png",
       "version": "v1",
       "versions": [
         {
@@ -3255,8 +3178,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-BATTLE-LAAGER-07.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-07.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3317,8 +3239,8 @@
       "storyPart": "E. Wagon circle — real battle (8)",
       "storyBeat": "Aftermath: broken wagons, laager breached, cost visible",
       "prompt": "Aftermath: broken wagons, laager breached, cost visible. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-08.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-08.png",
+      "url": "/assets/scenes/SCENE-BATTLE-LAAGER-08.png",
+      "imagePath": "/assets/scenes/SCENE-BATTLE-LAAGER-08.png",
       "version": "v1",
       "versions": [
         {
@@ -3326,8 +3248,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-BATTLE-LAAGER-08.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-BATTLE-LAAGER-08.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3388,8 +3309,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Roman legions waiting in brutal noon heat, dust, thirst",
       "prompt": "Roman legions waiting in brutal noon heat, dust, thirst. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-01.png",
+      "url": "/assets/scenes/SCENE-ADV-01.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-01.png",
       "version": "v2",
       "versions": [
         {
@@ -3397,8 +3318,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-01.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3406,8 +3326,7 @@
           "path": "assets/rejected/v1/SCENE-ADV-01.png",
           "rejectReason": "Segmentata",
           "notes": "v2 fix: Scale/mail legionaries",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3452,8 +3371,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 44,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-01.png"
+      "catalogOrder": 44
     },
     {
       "shotNumber": 41,
@@ -3472,8 +3390,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Valens on horseback amid ranks, confident before collapse",
       "prompt": "Valens on horseback amid ranks, confident before collapse. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-02.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-02.png",
+      "url": "/assets/scenes/SCENE-ADV-02.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-02.png",
       "version": "v2",
       "versions": [
         {
@@ -3481,8 +3399,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-02.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-02.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3490,8 +3407,7 @@
           "path": "assets/rejected/v1/SCENE-ADV-02.png",
           "rejectReason": "Painterly Valens + gold circlet",
           "notes": "v2 fix: Reference turnaround",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-02.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3539,8 +3455,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 45,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-02.png"
+      "catalogOrder": 45
     },
     {
       "shotNumber": 42,
@@ -3559,8 +3474,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Dust cloud rising on flank — something coming, soldiers turning",
       "prompt": "Dust cloud rising on flank — something coming, soldiers turning. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-03.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-03.png",
+      "url": "/assets/scenes/SCENE-ADV-03.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-03.png",
       "version": "v2",
       "versions": [
         {
@@ -3568,8 +3483,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-03.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-03.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3577,8 +3491,7 @@
           "path": "assets/rejected/v1/SCENE-ADV-03.png",
           "rejectReason": "Segmentata",
           "notes": "v2 fix: Scale/mail",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-03.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3623,8 +3536,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 46,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-03.png"
+      "catalogOrder": 46
     },
     {
       "shotNumber": 43,
@@ -3643,8 +3555,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Gothic heavy cavalry bursting from dust, spears level, rescue charge",
       "prompt": "Gothic heavy cavalry bursting from dust, spears level, rescue charge. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-04.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-04.png",
+      "url": "/assets/scenes/SCENE-ADV-04.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-04.png",
       "version": "v1",
       "versions": [
         {
@@ -3652,8 +3564,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-04.png",
           "notes": "Cavalry charge — lock",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-04.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3718,8 +3629,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Cavalry slamming Roman flank, ranks buckling, chaos",
       "prompt": "Cavalry slamming Roman flank, ranks buckling, chaos. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-05.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-05.png",
+      "url": "/assets/scenes/SCENE-ADV-05.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-05.png",
       "version": "v2",
       "versions": [
         {
@@ -3727,8 +3638,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-05.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-05.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3736,8 +3646,7 @@
           "path": "assets/rejected/v1/SCENE-ADV-05.png",
           "rejectReason": "Decorative gold trim",
           "notes": "v2 fix: Gold dust wedges only",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-05.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3782,8 +3691,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 48,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-05.png"
+      "catalogOrder": 48
     },
     {
       "shotNumber": 45,
@@ -3802,8 +3710,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Fritigern visible leading charge, battle-worn armour",
       "prompt": "Fritigern visible leading charge, battle-worn armour. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-06.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-06.png",
+      "url": "/assets/scenes/SCENE-ADV-06.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-06.png",
       "version": "v2",
       "versions": [
         {
@@ -3811,8 +3719,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-06.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-06.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3820,8 +3727,7 @@
           "path": "assets/rejected/v1/SCENE-ADV-06.png",
           "rejectReason": "Red tunics + Fury not Terror",
           "notes": "v2 fix: Terror palette; Fritigern ref",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-06.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3869,8 +3775,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 49,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-06.png"
+      "catalogOrder": 49
     },
     {
       "shotNumber": 46,
@@ -3889,8 +3794,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Roman soldiers fleeing, shields discarded",
       "prompt": "Roman soldiers fleeing, shields discarded. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-07.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-07.png",
+      "url": "/assets/scenes/SCENE-ADV-07.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-07.png",
       "version": "v2",
       "versions": [
         {
@@ -3898,8 +3803,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-07.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-07.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3907,8 +3811,7 @@
           "path": "assets/rejected/v1/SCENE-ADV-07.png",
           "rejectReason": "Shield heraldry",
           "notes": "v2 fix: Plain shields",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-07.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -3953,8 +3856,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 50,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-07.png"
+      "catalogOrder": 50
     },
     {
       "shotNumber": 47,
@@ -3973,8 +3875,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Wide stillness: field after battle, scattered equipment, no living figures",
       "prompt": "Wide stillness: field after battle, scattered equipment, no living figures. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-08.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-08.png",
+      "url": "/assets/scenes/SCENE-ADV-08.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-08.png",
       "version": "v2",
       "versions": [
         {
@@ -3982,8 +3884,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-08.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-08.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -3991,8 +3892,7 @@
           "path": "assets/rejected/v1/SCENE-ADV-08.png",
           "rejectReason": "Heraldry + segmentata scraps",
           "notes": "v2 fix: Clean ruin field",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-08.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -4037,8 +3937,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 51,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-08.png"
+      "catalogOrder": 51
     },
     {
       "shotNumber": 48,
@@ -4057,8 +3956,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Empty emperor's horse without rider",
       "prompt": "Empty emperor's horse without rider. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-09.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-09.png",
+      "url": "/assets/scenes/SCENE-ADV-09.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-09.png",
       "version": "v1",
       "versions": [
         {
@@ -4066,8 +3965,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-09.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-09.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -4128,8 +4026,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Sunset over Adrianople field, vast low horizon, bone monochrome",
       "prompt": "Sunset over Adrianople field, vast low horizon, bone monochrome. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-10.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-10.png",
+      "url": "/assets/scenes/SCENE-ADV-10.png",
+      "imagePath": "/assets/scenes/SCENE-ADV-10.png",
       "version": "v1",
       "versions": [
         {
@@ -4137,8 +4035,7 @@
           "status": "current",
           "path": "assets/scenes/SCENE-ADV-10.png",
           "notes": "Current production version",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-ADV-10.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -4199,8 +4096,8 @@
       "storyPart": "F. Adrianople — terror and cavalry (11)",
       "storyBeat": "Split composition: Fritigern restrained petition left, Valens imperial dismissive right — same paper dignity, moral contrast",
       "prompt": "Split composition Fritigern petition left Valens dismissive right same dignity. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-PAIR-HUBRIS-01.png",
-      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-PAIR-HUBRIS-01.png",
+      "url": "/assets/scenes/SCENE-PAIR-HUBRIS-01.png",
+      "imagePath": "/assets/scenes/SCENE-PAIR-HUBRIS-01.png",
       "version": "v2",
       "versions": [
         {
@@ -4208,8 +4105,7 @@
           "status": "flagged",
           "path": "assets/scenes/SCENE-PAIR-HUBRIS-01.png",
           "notes": "laurel panel on throne (minor heraldry)",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/scenes/SCENE-PAIR-HUBRIS-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         },
         {
           "label": "v1",
@@ -4217,8 +4113,7 @@
           "path": "assets/rejected/v1/SCENE-PAIR-HUBRIS-01.png",
           "rejectReason": "Purple imperial robe",
           "notes": "v2 fix: Purple as deeper indigo plane",
-          "createdAt": "1970-01-01T00:00:00.000Z",
-          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-PAIR-HUBRIS-01.png"
+          "createdAt": "1970-01-01T00:00:00.000Z"
         }
       ],
       "physical": {
@@ -4270,9 +4165,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 54,
-      "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-PAIR-HUBRIS-01.png"
+      "catalogOrder": 54
     }
-  ],
-  "cdnBase": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev"
+  ]
 }

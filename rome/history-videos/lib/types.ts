@@ -44,6 +44,11 @@ export interface PhysicalMeta {
   medium?: string;
   palette?: string;
   orientation?: string;
+  contentHash?: string;
+  mtime?: string;
+  generator?: string;
+  generatorModel?: string;
+  generatorPipeline?: string;
 }
 
 export interface ContextMeta {
