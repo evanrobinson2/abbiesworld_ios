@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-08-24T07:56:21.723Z",
+  "generatedAt": "2026-08-24T08:53:52.595Z",
   "title": "Gothic Invasion — Frame Review",
   "styleSuffix": "Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
   "totalShots": 54,
@@ -52,7 +52,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -125,7 +128,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -197,7 +203,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -270,7 +279,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -335,7 +347,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -417,7 +432,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -500,7 +518,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -583,7 +604,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -664,7 +688,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -745,7 +772,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -826,7 +856,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -907,7 +940,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -988,7 +1024,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1069,7 +1108,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1141,7 +1183,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1209,7 +1254,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1277,7 +1325,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1355,7 +1406,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1427,7 +1481,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1495,7 +1552,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1563,7 +1623,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1631,7 +1694,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1701,7 +1767,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1771,7 +1840,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1841,7 +1913,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1913,7 +1988,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -1996,7 +2074,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2072,7 +2153,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2153,7 +2237,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2229,7 +2316,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2310,7 +2400,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2385,7 +2478,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "charcoal / graphite on toned paper (R3)",
         "palette": "charcoal / graphite greys",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2458,7 +2554,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2529,7 +2628,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2610,7 +2712,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2695,7 +2800,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2767,7 +2875,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2844,7 +2955,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2925,7 +3039,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -2997,7 +3114,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3074,7 +3194,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3146,7 +3269,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3214,7 +3340,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3291,7 +3420,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3372,7 +3504,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3456,7 +3591,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3528,7 +3666,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3609,7 +3750,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3690,7 +3834,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3774,7 +3921,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3855,7 +4005,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3927,7 +4080,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -3995,7 +4151,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",
@@ -4072,7 +4231,10 @@
         "mtime": "1970-01-01T00:00:00.000Z",
         "medium": "layered cut-paper (R1)",
         "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
-        "orientation": "landscape"
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
       },
       "context": {
         "era": "Late Antiquity",

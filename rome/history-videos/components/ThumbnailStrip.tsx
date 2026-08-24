@@ -111,6 +111,7 @@ export function ThumbnailStrip({
                       fill
                       className="object-cover"
                       sizes={sizeMeta.sizesAttr}
+                      loading={index < 10 ? "eager" : "lazy"}
                     />
                   ) : null}
                 </div>

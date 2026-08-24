@@ -376,6 +376,9 @@ function physicalFor(absPath, register) {
     medium: register === "R3" ? MEDIUM_R3 : MEDIUM_R1,
     palette: register === "R3" ? "charcoal / graphite greys" : PALETTE_R1,
     orientation: "landscape",
+    generator: "OpenAI gpt-image-2",
+    generatorModel: "gpt-image-2",
+    generatorPipeline: "scripts/generate_image.py → OpenAI Images API",
   };
 }
 
