@@ -61,6 +61,14 @@ export function HiveBoard({ initial }: { initial: HiveStatus }) {
         chats in <code className="text-gold-warm">mind/workers/</code>.
       </p>
       <p className="mt-2 text-sm text-bone-muted">{status.unified}</p>
+      {status.attention ? (
+        <p className="mt-2 text-sm text-bone">
+          <span className="text-xs tracking-wide text-bone-muted uppercase">
+            Thread{" "}
+          </span>
+          {status.attention}
+        </p>
+      ) : null}
       <p className="mt-1 font-mono text-xs text-iron">
         STATE {status.stateUpdated}
         {status.deployedSha ? ` · sha ${status.deployedSha.slice(0, 7)}` : ""}

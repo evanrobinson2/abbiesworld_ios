@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-08-26 02:22 UTC (luna-local — memory eval in MEMORY.md)
+Last updated: 2026-08-26 02:30 UTC (luna-local — mail + compiled pack live)
 
 ## Now
 
@@ -21,8 +21,8 @@ Last updated: 2026-08-26 02:22 UTC (luna-local — memory eval in MEMORY.md)
   On `/hive` it sits on cloth as a lapel pin (not a table dump). Room: `/hive/luna-ux`.
 - **Context pack:** Attention-first. `mind/ATTENTION.md` + Evan’s last
   prompts inject before GOALS/STATE. Inspect: `python3 scripts/mind-pack.py`.
-- **Memory eval:** `mind/MEMORY.md` — keep GitHub; `/hive` is a board not
-  the bus; next shape is append-only mail + compiled pack.
+- **Memory:** mail + compiled pack is live. `scripts/mind-mail.py`,
+  `scripts/mind-pack.py`, `mind/pack.md`. New facts do not go in this file.
 - **Subjective-experience observer:** the live voice/chat body is responsible for
   catching Evan’s meta-thoughts about what the work feels like, separating report,
   observation, hypothesis, and design implication without interrupting immersion.

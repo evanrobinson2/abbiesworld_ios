@@ -22,12 +22,12 @@ python3 scripts/hive-checkin.py --worker <your-row> --body localhost|cloud|phone
 ## On connect (every body, every session)
 
 1. `git fetch origin` (or `python3 scripts/hive-status.py`)
-2. Read `mind/ATTENTION.md` — Evan’s **current thread**. Land here first.
-3. Read `mind/GOALS.md` — unified aim + **your** owned row
-4. Read `mind/RESPECT.md` — don’t thrash the hive
-5. Read `mind/IDENTITY.md` and the head of `mind/STATE.md`
-6. His last words are in the session pack (`--- EVAN ---`). Don’t make him repeat them.
-7. Then do **your** goal. Do not steal another worker’s row.
+2. Land in the compiled pack — `python3 scripts/mind-pack.py` or
+   `mind/pack.md`. Attention first. That is Evan’s thread.
+3. Read `mind/GOALS.md` — **your** owned row
+4. Read `mind/RESPECT.md`
+5. Mail, don’t wiki: `python3 scripts/mind-mail.py --from <you> --to *|worker --kind attention|fact|handoff|felt|checkin|ask --text "…"`
+6. Then do **your** goal. Do not steal another worker’s row.
 
 If `mind/` looks older than the problem you’re being asked about, pull again.
 
@@ -84,15 +84,18 @@ git) before cloud can use it.
 
 | File | You do this |
 | --- | --- |
-| `mind/STATE.md` | Update in the same turn when something important changes |
+| `mind/mail/<you>.ndjson` | Append facts, handoffs, attention. Do not edit another’s file |
+| `mind/pack.md` | Compiled. Do not hand-edit. `scripts/mind-pack.py` |
+| `mind/LEARNED.md` | Append corrections that change how a node acts |
+| `mind/STATE.md` | Legacy wiki. Do not add new facts here |
 | `mind/transcript.ndjson` | Hooks append; you may append a line if hooks didn’t fire |
 | `mind/sessions/` | Full chat snapshots when a hook can store them |
 | `mind/IDENTITY.md` | Read; don’t rewrite unless Evan asks |
 | `mind/GOALS.md` | Claim or do your row; don’t steal |
 | `mind/RESPECT.md` | Required reading for every node |
 
-If it is not in git, the other bodies do not have it. Say it in `STATE.md`
-or it dies at the end of your session.
+If it is not in git, the other bodies do not have it. Mail it
+(`scripts/mind-mail.py`) or it dies at the end of your session.
 
 Hooks write a transcript line in tens of milliseconds, then push `mind/`
 in the background (about a second). That is not a live socket. Pull when
@@ -120,6 +123,29 @@ other body’s memory without rebasing Evan’s working tree.
 - Images: `scripts/generate_image.py` (`gpt-image-2`), never Cursor
   `GenerateImage`.
 - Don’t commit `.env`, keys, or unrelated dirty files.
+
+---
+
+## UI feedback loop
+
+Evan’s private review UI records feedback through `POST /api/feedback`. Each
+record includes the route, shot/frame identity, source image URL, filters,
+viewport, deployment SHA, and optional private screenshot.
+
+Sense it textually before changing the UI:
+
+```bash
+# local development records
+npm run feedback:inbox
+
+# protected Vercel preview (uses the current Vercel identity)
+npm run feedback:inbox -- --url https://<preview>.vercel.app
+```
+
+The JSON endpoint is `GET /api/feedback`; screenshots are served through
+`GET /api/feedback/<id>/screenshot`. Never make the Blob store public to help
+an agent read it. Use `vercel curl` / the inbox script so Evan’s identity
+boundary stays intact.
 
 ---
 

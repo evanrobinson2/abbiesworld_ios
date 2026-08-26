@@ -17,6 +17,15 @@ export type HiveCheckin = {
   note?: string;
 };
 
+export type HiveMail = {
+  ts: string;
+  from: string;
+  to: string;
+  kind: string;
+  text: string;
+  ref?: string;
+};
+
 export type HiveStatus = {
   ok: true;
   unified: string;
@@ -33,6 +42,8 @@ export type HiveStatus = {
   >;
   open: string[];
   recentCheckins: HiveCheckin[];
+  attention: string | null;
+  recentMail: HiveMail[];
 };
 
 function workerFileUrl(
@@ -131,6 +142,31 @@ export function readCheckinsFile(): HiveCheckin[] {
   return rows;
 }
 
+export function appendMailFile(row: HiveMail): void {
+  const id = (row.from || "unknown").toLowerCase().replace(/[^a-z0-9-]/g, "") || "unknown";
+  const dir = join(HIVE_ROOT, "mind/mail");
+  mkdirSync(dir, { recursive: true });
+  appendFileSync(join(dir, `${id}.ndjson`), `${JSON.stringify(row)}\n`, "utf8");
+}
+
+export function readMailFile(): HiveMail[] {
+  const dir = join(HIVE_ROOT, "mind/mail");
+  const rows: HiveMail[] = [];
+  if (!existsSync(dir)) return rows;
+  for (const name of readdirSync(dir)) {
+    if (!name.endsWith(".ndjson")) continue;
+    for (const line of read(join("mind/mail", name)).split("\n")) {
+      if (!line.trim()) continue;
+      try {
+        rows.push(JSON.parse(line) as HiveMail);
+      } catch {
+        /* skip */
+      }
+    }
+  }
+  return rows.sort((a, b) => a.ts.localeCompare(b.ts));
+}
+
 export function appendCheckinFile(row: HiveCheckin): void {
   const dir = join(HIVE_ROOT, "mind");
   mkdirSync(dir, { recursive: true });
@@ -171,6 +207,8 @@ export function buildStatus(extraCheckins: HiveCheckin[] = []): HiveStatus {
         workerFileUrl(w.id, "badge.png") ?? workerFileUrl(w.id, "asic.png"),
     };
   });
+  const mail = readMailFile();
+  const lastAttention = [...mail].reverse().find((m) => m.kind === "attention");
   return {
     ok: true,
     unified: parseUnified(goals),
@@ -179,5 +217,7 @@ export function buildStatus(extraCheckins: HiveCheckin[] = []): HiveStatus {
     workers,
     open: parseOpen(goals),
     recentCheckins: checkins.slice(-20).reverse(),
+    attention: lastAttention?.text ?? null,
+    recentMail: mail.slice(-8).reverse(),
   };
 }

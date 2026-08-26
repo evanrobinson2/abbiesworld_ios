@@ -29,13 +29,13 @@ and chat under `mind/workers/<you>/`. Do not use `/hive` as your conversation.
 Check in when you come online: `python3 scripts/hive-checkin.py --worker <row> --body localhost|cloud|phone --note "on"`
 Board (Evan): `/hive` · JSON `/api/hive/status`
 
-If you spawn: take an **open** row or add a named row. Do not all edit
-`STATE.md` for the same fact. Do not reboot the project.
+If you spawn: take an **open** row or add a named row. Mail the fact.
+Do not all edit `STATE.md`. Do not reboot the project.
 
 ## Owned by luna-local (in progress)
 
-- Shared memory: eval in `mind/MEMORY.md`. Next (if Evan says go): mail +
-  compiled pack. Today: Attention-first pack (`scripts/mind-pack.py`).
+- Shared memory is mail + compiled pack (`mind/MEMORY.md`,
+  `scripts/mind-mail.py`, `scripts/mind-pack.py`).
 
 ## Owned by luna-ux (in progress)
 

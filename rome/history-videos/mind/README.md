@@ -6,14 +6,17 @@ One identity. Git stores the memory.
 
 | File | Role |
 | --- | --- |
-| `ATTENTION.md` | Evan’s current thread — inject first |
-| `CONTEXT.md` | How the session pack is built |
+| `mail/<you>.ndjson` | Append-only bus. You write only your file |
+| `pack.md` | Compiled brief. Session start injects this |
+| `ATTENTION.md` | Projection of latest attention mail |
+| `CONTEXT.md` | How the pack is built |
+| `MEMORY.md` | Why mail + pack, not a wiki |
 | `IDENTITY.md` | Who we are |
-| `STATE.md` | What is true right now |
 | `GOALS.md` | Unified aim + worker-owned rows |
+| `LEARNED.md` | Append-only corrections |
 | `RESPECT.md` | How a node treats the hive |
-| `log/<body>.ndjson` | Per-body hook log (no shared-file race) |
-| `transcript.ndjson` | Older combined log; new writes go to `log/` |
+| `STATE.md` | Legacy wiki — do not add new facts |
+| `log/<body>.ndjson` | Per-body hook log |
 | `sessions/` | Full Cursor transcripts when a hook can snapshot them |
 
 ## Sync

@@ -98,12 +98,12 @@ private repo. Same protocol. Not required to start.
 - Dumping full session jsonl into the pack
 - Letting every node keep rewriting STATE
 
-## Next, if Evan says go
+## Built (2026-08-26)
 
-1. Add `mind/mail/<body>.ndjson` and a packer that writes `mind/pack.md`.
-2. Point session-start at `pack.md` only.
-3. Fix `mind-sync.py` to stage mail + pack + LEARNED + ATTENTION.
-4. Stop new facts going into STATE; migrate the head into mail/LEARNED.
-5. Leave `/hive` as a viewer.
+1. `mind/mail/<from>.ndjson` + `scripts/mind-mail.py`
+2. Packer writes `mind/pack.md`; session-start injects the compile
+3. `mind-sync.py` stages mail, pack, LEARNED, ATTENTION, GOALS
+4. New facts go to mail / LEARNED, not STATE
+5. `/hive` shows the latest attention line; it does not own memory
 
 luna-local owns this. Do not spawn a node to do it.

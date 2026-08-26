@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { appendCheckinFile, buildStatus, type HiveCheckin } from "@/lib/hive";
+import {
+  appendCheckinFile,
+  appendMailFile,
+  buildStatus,
+  type HiveCheckin,
+} from "@/lib/hive";
 
 export const dynamic = "force-dynamic";
 
@@ -38,6 +43,13 @@ export async function POST(req: Request) {
 
   try {
     appendCheckinFile(row);
+    appendMailFile({
+      ts: row.ts,
+      from: worker,
+      to: "*",
+      kind: "checkin",
+      text: note || "on",
+    });
   } catch {
     return NextResponse.json(
       { ok: false, error: "could not persist checkin", row },

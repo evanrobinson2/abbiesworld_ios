@@ -18,6 +18,7 @@ import fcntl
 import json
 import re
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List
@@ -49,8 +50,28 @@ def git(*args: str) -> subprocess.CompletedProcess:
 
 
 def stage_mind() -> None:
-    """Stage hive files. Per-body logs first so bodies don't fight one file."""
-    git("add", "--", "mind/log", "mind/sessions", "mind/STATE.md", "mind/IDENTITY.md")
+    """Stage mail + logs first (append-only). Then compiled pack and rare wiki."""
+    sys.path.insert(0, str(HOOKS_DIR))
+    try:
+        from mind_pack import write_pack
+
+        write_pack()
+    except Exception as e:
+        log(f"pack compile skipped: {e}")
+    git(
+        "add",
+        "--",
+        "mind/mail",
+        "mind/log",
+        "mind/sessions",
+        "mind/pack.md",
+        "mind/LEARNED.md",
+        "mind/ATTENTION.md",
+        "mind/GOALS.md",
+        "mind/IDENTITY.md",
+        "mind/STATE.md",
+        "mind/checkins.ndjson",
+    )
 
 
 def union_ndjson(ours: str, theirs: str) -> str:
@@ -91,8 +112,13 @@ def resolve_conflicts() -> bool:
         dest = REPO / rel
         if rel.endswith(".ndjson") or rel.endswith(".jsonl"):
             dest.write_text(union_ndjson(ours, theirs), encoding="utf-8")
-        elif rel.endswith("STATE.md"):
+        elif rel.endswith("STATE.md") or rel.endswith("ATTENTION.md"):
             dest.write_text(newer_state(ours, theirs), encoding="utf-8")
+        elif rel.endswith("pack.md"):
+            sys.path.insert(0, str(HOOKS_DIR))
+            from mind_pack import write_pack
+
+            write_pack()
         else:
             dest.write_text(theirs or ours, encoding="utf-8")
         git("add", "--", rel)

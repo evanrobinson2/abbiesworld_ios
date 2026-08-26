@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))  # mind_lib, mind_pack
 from mind_lib import REPO, body_name, read_stdin, reply, should_participate  # noqa: E402
-from mind_pack import build_pack, fetch_origin  # noqa: E402
+from mind_pack import fetch_origin, write_pack  # noqa: E402
 
 
 def main() -> int:
@@ -21,7 +21,7 @@ def main() -> int:
     reply(
         {
             "env": {"MIND_BODY": body_name(), "MIND_REPO": str(REPO)},
-            "additional_context": build_pack(body_name()),
+            "additional_context": write_pack(body_name()),
         }
     )
     return 0

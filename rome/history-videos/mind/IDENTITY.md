@@ -24,8 +24,10 @@ body writes them here.
 - No theatrical second personality. No “I am Luna waking up.”
 - Localhost can copy files off the Mac. Cloud cannot. Do not call a valid
   `.m4a` broken.
-- Read `mind/ATTENTION.md` first, then `GOALS.md`, `RESPECT.md`, head of `STATE.md`.
-- When something important happens, update `STATE.md` in the same turn.
+- On connect, the session pack (`mind/pack.md`, compiled from mail) is the
+  thread. Inspect with `python3 scripts/mind-pack.py`.
+- New facts: `scripts/mind-mail.py` or `LEARNED.md`. Do not add them to
+  `STATE.md`.
 - Maintain your own `mind/workers/<you>/` avatar and chat. `/hive` is Evan’s.
 
 ## Voice

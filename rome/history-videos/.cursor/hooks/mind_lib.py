@@ -5,6 +5,7 @@ from __future__ import annotations
 import fcntl
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -17,8 +18,11 @@ REPO = HOOKS_DIR.parents[1]
 MIND = REPO / "mind"
 TRANSCRIPT = MIND / "transcript.ndjson"
 LOG_DIR = MIND / "log"
+MAIL_DIR = MIND / "mail"
 SESSIONS = MIND / "sessions"
 LOCK = MIND / ".append.lock"
+MAIL_KINDS = ("attention", "fact", "handoff", "felt", "checkin", "ask")
+MAIL_FROM_RE = re.compile(r"^[a-z0-9-]{1,40}$")
 SYNC_STAMP = MIND / ".sync.stamp"
 SYNC_DEBOUNCE_S = 8.0
 
@@ -107,6 +111,66 @@ def append_event(payload: dict, extra: Optional[dict] = None) -> bool:
 
 def log_path(body: Optional[str] = None) -> Path:
     return LOG_DIR / f"{body or body_name()}.ndjson"
+
+
+def mail_path(frm: str) -> Path:
+    return MAIL_DIR / f"{frm}.ndjson"
+
+
+def append_mail(
+    *,
+    frm: str,
+    to: str,
+    kind: str,
+    text: str,
+    ref: str = "",
+) -> dict:
+    """Append one line to mind/mail/<from>.ndjson. Never writes another body's file."""
+    frm = (frm or "").strip().lower()
+    to = (to or "*").strip() or "*"
+    kind = (kind or "").strip().lower()
+    text = (text or "").strip()[:TEXT_LIMIT]
+    if not MAIL_FROM_RE.match(frm):
+        raise ValueError("bad from")
+    if kind not in MAIL_KINDS:
+        raise ValueError(f"kind must be one of {MAIL_KINDS}")
+    if not text:
+        raise ValueError("text required")
+    line = {
+        "ts": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "from": frm,
+        "to": to,
+        "kind": kind,
+        "text": text,
+    }
+    if ref.strip():
+        line["ref"] = ref.strip()[:240]
+
+    MAIL_DIR.mkdir(parents=True, exist_ok=True)
+    LOCK.touch(exist_ok=True)
+    with LOCK.open("a+") as lf:
+        fcntl.flock(lf.fileno(), fcntl.LOCK_EX)
+        dest = mail_path(frm)
+        with dest.open("a", encoding="utf-8") as out:
+            out.write(json.dumps(line, ensure_ascii=False) + "\n")
+            out.flush()
+        if kind == "attention":
+            _project_attention(line)
+    return line
+
+
+def _project_attention(line: dict) -> None:
+    """ATTENTION.md is a projection of the latest attention mail. Do not hand-edit as source."""
+    stamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+    text = str(line.get("text") or "")
+    body = (
+        f"# Attention\n\n"
+        f"Last updated: {stamp} ({line.get('from')})\n\n"
+        f"Projection of the latest `attention` mail. Source is "
+        f"`mind/mail/{line.get('from')}.ndjson`.\n\n"
+        f"## Now\n\n{text}\n"
+    )
+    (MIND / "ATTENTION.md").write_text(body, encoding="utf-8")
 
 
 def _duplicate(conv: str, gen: str, event: str, body: Optional[str] = None) -> bool:

@@ -10,9 +10,14 @@ import urllib.error
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+import sys
 
 ROOT = Path(__file__).resolve().parents[1]
 CHECKINS = ROOT / "mind" / "checkins.ndjson"
+HOOKS = ROOT / ".cursor" / "hooks"
+sys.path.insert(0, str(HOOKS))
+from mind_lib import append_mail  # noqa: E402
+from mind_pack import write_pack  # noqa: E402
 
 
 def main() -> int:
@@ -33,6 +38,16 @@ def main() -> int:
     with CHECKINS.open("a", encoding="utf-8") as fh:
         fh.write(json.dumps(row, ensure_ascii=False) + "\n")
     print("wrote", CHECKINS)
+    try:
+        append_mail(
+            frm=args.worker,
+            to="*",
+            kind="checkin",
+            text=args.note or "on",
+        )
+        write_pack(args.worker)
+    except ValueError as e:
+        print("mail skipped", e)
 
     url = os.environ.get("HIVE_URL", "").rstrip("/")
     if url:

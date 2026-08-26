@@ -2,19 +2,24 @@
 
 How a body follows Evan without a briefing.
 
-Session start (`mind-session-start.py`) injects a small pack, **in this
-order**. If the budget clips, it clips the tail — never Attention.
+**Source is mail.** `python3 scripts/mind-mail.py --from <you> --to *|worker --kind … --text "…"`
+appends one line to `mind/mail/<you>.ndjson`. Never edit another body’s file.
 
-1. **ATTENTION** — `mind/ATTENTION.md`. His current thread.
-2. **EVAN** — last few `beforeSubmitPrompt` lines. His words, not ours.
-3. **GOALS** — unified aim + worker rows.
-4. **STATE head** — facts, short.
-5. **Felt** — last quoted REPORT lines from `EXPERIENCE.md` (observer
-   owns that file; we only echo).
+Session start compiles `mind/pack.md` and injects it. If the budget clips,
+it clips the tail — never Attention.
 
-We do **not** inject the film bible, session jsonl, or agent monologues.
-Those drown the thread.
+Order inside the pack:
 
-`python3 scripts/mind-pack.py` prints the pack so you can inspect it.
+1. **ATTENTION** — latest `kind=attention` mail (Evan’s thread)
+2. **EVAN** — last few of his prompts
+3. **GOALS** — worker table only
+4. **MAIL** — last lines to `*` or to this body
+5. **LEARNED** — recent correction titles
+6. **DO NOT LOSE** — fact/handoff lines that say so
 
-When the thread moves, overwrite `ATTENTION.md` in the same turn.
+Inspect: `python3 scripts/mind-pack.py`
+
+Kinds: `attention` | `fact` | `handoff` | `felt` | `checkin` | `ask`.
+
+New facts go to mail or `LEARNED.md`. Not `STATE.md`.
+`/hive` is Evan’s board. It reads the pack; it does not own memory.
