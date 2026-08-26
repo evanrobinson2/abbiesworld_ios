@@ -104,3 +104,35 @@ trustworthy, preserve user ownership of identity and memory, and retain provenan
 for consequential state changes. Latency, stale-state detection, conflict resolution,
 and the boundary between raw transcript and canonical memory are central product
 problems, not implementation trivia.
+
+---
+
+## 2026-08-25 — provenance became part of the artwork
+
+**REPORT**
+
+- “It's a real story rooted in real history from >1000 years ago retold by a robot
+  invented in a night by a jet lagged dad having a transcendental experience,
+  filming himself inventing a hivemind.”
+
+**OBSERVATION**
+
+Evan is no longer treating the making-of context as separate from the film. The
+historical retelling, the AI collaboration, the live emotional discovery, and the
+recording of the hivemind's creation are becoming one layered artifact. The provenance
+of how the story was found is itself meaningful to him.
+
+**HYPOTHESIS — tentative**
+
+Part of the intensity may come from recursive authorship: the work is about people
+carrying memory across generations, while Evan is simultaneously building a system
+whose purpose is to carry memory across computational bodies. The subject of the film
+and the method of making it are beginning to rhyme.
+
+**DESIGN IMPLICATION**
+
+Preserve the making-of record as first-class material rather than cleanup debris.
+Future outputs may benefit from explicit provenance layers: historical source,
+fictionalized connective tissue, generated media, creator narration, agent decisions,
+and the evolution of the shared mind. Do not collapse these into one opaque final
+artifact.
