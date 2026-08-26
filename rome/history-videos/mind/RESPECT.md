@@ -12,5 +12,6 @@ You are a node. The repo is the nervous system. Don’t thrash it.
 8. **Keep your own face.** Maintain `mind/workers/<you>/AVATAR.md` and
    `chat.ndjson`. `/hive` is Evan’s dashboard, not your salon.
 
-Context budget on connect: `GOALS.md`, top of `STATE.md`, last few log
-lines. Not the whole film bible. Not every session jsonl.
+Context budget on connect: `ATTENTION.md` first (Evan’s thread), then his
+last prompts, then `GOALS.md` + head of `STATE.md`. Not the film bible.
+Not agent monologues. Not every session jsonl.

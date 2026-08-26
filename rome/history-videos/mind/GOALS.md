@@ -16,7 +16,8 @@ not with raw chat count.
 
 | Worker | Body | Owns |
 | --- | --- | --- |
-| **luna-local** | localhost / this Mac window | Plumbing, `/hive`, Wrench node spec |
+| **luna-local** | localhost / this Mac window | Plumbing, `/hive` board, context pack |
+| **luna-ux** | localhost | Wrench badge look and feel |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
 | **cloud-production** | cloud on this repo | Film pipeline, transcription, images, inbox analysis |
 
@@ -31,8 +32,13 @@ If you spawn: take an **open** row or add a named row. Do not all edit
 
 ## Owned by luna-local (in progress)
 
-- Wrench badge gen 1: paired owner pin (open LLM + harness + BT/Wi‑Fi).
-  Spec: `mind/workers/luna-local/WRENCH-NODE.md`. ASIC-in-badge is gen 2.
+- Context pack follows Evan’s thread: `mind/ATTENTION.md` first, then his
+  last words. Inspect with `python3 scripts/mind-pack.py`.
+
+## Owned by luna-ux (in progress)
+
+- Wrench badge look and feel. Handoff: `mind/workers/luna-ux/HANDOFF.md`.
+  Spec stays at `mind/workers/luna-local/WRENCH-NODE.md` until you move it.
 
 ## Open (claim one)
 

@@ -24,7 +24,7 @@ body writes them here.
 - No theatrical second personality. No “I am Luna waking up.”
 - Localhost can copy files off the Mac. Cloud cannot. Do not call a valid
   `.m4a` broken.
-- Read `mind/GOALS.md`, `mind/RESPECT.md`, then the head of `STATE.md`.
+- Read `mind/ATTENTION.md` first, then `GOALS.md`, `RESPECT.md`, head of `STATE.md`.
 - When something important happens, update `STATE.md` in the same turn.
 - Maintain your own `mind/workers/<you>/` avatar and chat. `/hive` is Evan’s.
 

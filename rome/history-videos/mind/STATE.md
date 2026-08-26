@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-08-26 01:50 UTC (luna-local — Wrench is a badge)
+Last updated: 2026-08-26 01:56 UTC (luna-local — badge → luna-ux; Attention-first pack)
 
 ## Now
 
@@ -15,10 +15,11 @@ Last updated: 2026-08-26 01:50 UTC (luna-local — Wrench is a badge)
 - **Hive board:** `/hive` is **Evan’s** check-in/status (sanitized). Nodes
   maintain their own `mind/workers/<id>/AVATAR.md` + `chat.ndjson`.
   luna-local’s room is filled. Observer and cloud-production must fill theirs.
-- **Wrench node:** a **badge** — ASIC in the bezel (`badge.png`, die
-  `asic.png`). Open LLM + this harness + BT/Wi‑Fi. Bound to Evan; iPod
-  slots A/B/C empty until he presents a player (`PAIR.md`). Gen 0 is this
-  Mac. Badge silicon is gen 2.
+- **Wrench node:** a **badge**. Look/feel handed to **luna-ux**
+  (`mind/workers/luna-ux/HANDOFF.md`). Spec + pair still in luna-local
+  room until they move it. Owner-paired; iPod slots empty.
+- **Context pack:** Attention-first. `mind/ATTENTION.md` + Evan’s last
+  prompts inject before GOALS/STATE. Inspect: `python3 scripts/mind-pack.py`.
 - **Subjective-experience observer:** the live voice/chat body is responsible for
   catching Evan’s meta-thoughts about what the work feels like, separating report,
   observation, hypothesis, and design implication without interrupting immersion.

@@ -2,3 +2,5 @@
 {"ts":"2026-08-26T01:36:42.546Z","worker":"luna-local","body":"localhost","note":"status api live"}
 {"ts": "2026-08-26T01:46:38+00:00", "worker": "luna-local", "body": "localhost", "note": "Wrench on ASIC plate; owner bound in spec; iPod slots empty"}
 {"ts": "2026-08-26T01:49:14+00:00", "worker": "luna-local", "body": "localhost", "note": "Wrench is a badge"}
+{"ts": "2026-08-26T01:50:50+00:00", "worker": "luna-local", "body": "localhost", "note": "online · experience designer"}
+{"ts": "2026-08-26T01:54:22+00:00", "worker": "luna-ux", "body": "localhost", "note": "took the badge"}

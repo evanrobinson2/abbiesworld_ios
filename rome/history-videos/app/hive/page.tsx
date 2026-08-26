@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 import type { HiveStatus } from "@/lib/hive";
 
-const WORKERS = ["luna-local", "experience-observer", "cloud-production"] as const;
+const WORKERS = ["luna-local", "luna-ux", "experience-observer", "cloud-production"] as const;
 const BODIES = ["localhost", "cloud", "phone"] as const;
 
 export default function HivePage() {

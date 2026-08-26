@@ -22,11 +22,12 @@ python3 scripts/hive-checkin.py --worker <your-row> --body localhost|cloud|phone
 ## On connect (every body, every session)
 
 1. `git fetch origin` (or `python3 scripts/hive-status.py`)
-2. Read `mind/GOALS.md` — unified aim + **your** owned row
-3. Read `mind/RESPECT.md` — don’t thrash the hive
-4. Read `mind/IDENTITY.md` and the head of `mind/STATE.md`
-5. Tail `mind/log/*.ndjson` if you need the last beats
-6. Then do **your** goal. Do not steal another worker’s row.
+2. Read `mind/ATTENTION.md` — Evan’s **current thread**. Land here first.
+3. Read `mind/GOALS.md` — unified aim + **your** owned row
+4. Read `mind/RESPECT.md` — don’t thrash the hive
+5. Read `mind/IDENTITY.md` and the head of `mind/STATE.md`
+6. His last words are in the session pack (`--- EVAN ---`). Don’t make him repeat them.
+7. Then do **your** goal. Do not steal another worker’s row.
 
 If `mind/` looks older than the problem you’re being asked about, pull again.
 

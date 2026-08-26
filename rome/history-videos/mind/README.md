@@ -6,6 +6,8 @@ One identity. Git stores the memory.
 
 | File | Role |
 | --- | --- |
+| `ATTENTION.md` | Evan’s current thread — inject first |
+| `CONTEXT.md` | How the session pack is built |
 | `IDENTITY.md` | Who we are |
 | `STATE.md` | What is true right now |
 | `GOALS.md` | Unified aim + worker-owned rows |
