@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
 from pathlib import Path
 
@@ -10,12 +11,28 @@ from mind_lib import LOG_DIR, MAIL_DIR, MIND, REPO
 
 CTX_LIMIT = 5500
 PACK_PATH = MIND / "pack.md"
+HIVE_REMOTE = os.environ.get(
+    "HIVE_MIND_REMOTE",
+    "https://github.com/evanrobinson2/hive_mind.git",
+)
+HIVE_BRANCH = os.environ.get("HIVE_MIND_BRANCH", "main")
+MIND_REF = f"refs/remotes/hive-mind/{HIVE_BRANCH}"
+
+
+def shared_ref() -> str:
+    result = subprocess.run(
+        ["git", "rev-parse", "--verify", "--quiet", MIND_REF],
+        cwd=str(REPO),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    )
+    return MIND_REF if result.returncode == 0 else "origin/main"
 
 
 def show_origin(rel: str) -> str:
     try:
         return subprocess.check_output(
-            ["git", "show", f"origin/main:{rel}"],
+            ["git", "show", f"{shared_ref()}:{rel}"],
             cwd=str(REPO),
             text=True,
             stderr=subprocess.DEVNULL,
@@ -26,23 +43,34 @@ def show_origin(rel: str) -> str:
 
 
 def fetch_origin() -> None:
-    try:
-        subprocess.run(
-            ["git", "fetch", "origin", "--quiet"],
-            cwd=str(REPO),
-            timeout=20,
-            check=False,
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-    except (OSError, subprocess.TimeoutExpired):
-        return
+    commands = (
+        ["git", "fetch", "origin", "--quiet"],
+        [
+            "git",
+            "fetch",
+            "--quiet",
+            HIVE_REMOTE,
+            f"+refs/heads/{HIVE_BRANCH}:{MIND_REF}",
+        ],
+    )
+    for command in commands:
+        try:
+            subprocess.run(
+                command,
+                cwd=str(REPO),
+                timeout=20,
+                check=False,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+        except (OSError, subprocess.TimeoutExpired):
+            continue
 
 
 def _origin_tree(prefix: str) -> list[str]:
     try:
         return subprocess.check_output(
-            ["git", "ls-tree", "--name-only", "origin/main", prefix],
+            ["git", "ls-tree", "-r", "--name-only", shared_ref(), prefix],
             cwd=str(REPO),
             text=True,
             stderr=subprocess.DEVNULL,

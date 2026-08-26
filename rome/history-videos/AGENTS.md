@@ -21,7 +21,8 @@ python3 scripts/hive-checkin.py --worker <your-row> --body localhost|cloud|phone
 
 ## On connect (every body, every session)
 
-1. `git fetch origin` (or `python3 scripts/hive-status.py`)
+1. Run `python3 scripts/hive-status.py`. Shared memory comes from
+   `evanrobinson2/hive_mind`; app code and releases stay in this repository.
 2. Land in the compiled pack — `python3 scripts/mind-pack.py` or
    `mind/pack.md`. Attention first. That is Evan’s thread.
 3. Read `mind/GOALS.md` — **your** owned row
@@ -98,16 +99,18 @@ If it is not in git, the other bodies do not have it. Mail it
 (`scripts/mind-mail.py`) or it dies at the end of your session.
 
 Hooks write a transcript line in tens of milliseconds, then push `mind/`
-in the background (about a second). That is not a live socket. Pull when
-you need the others.
+to the separate `evanrobinson2/hive_mind` repository in the background (about
+a second). That is not a live socket. Fetch when you need the others. Never
+move routine memory traffic back into the Vercel-connected app repository.
 
 **Races:** two bodies committing `mind/` at once used to fail the push.
 Overcome it by writing **per-body logs** (`mind/log/localhost.ndjson`,
-`mind/log/cloud.ndjson`) so appends never touch the same file, then
-`git pull --rebase` before push. If `STATE.md` still collides, keep the
-side with the newer `Last updated` line. Session start **fetches and
-reads `origin/main`** even if the local branch is behind — you get the
-other body’s memory without rebasing Evan’s working tree.
+`mind/log/cloud.ndjson`) so appends never touch the same file. The sync hook
+merges append-only files and creates a memory-only commit through a temporary
+index, without moving HEAD or touching the user's staged app work. Session
+start fetches and reads `hive_mind/main` (falling back to this repository's
+`origin/main` before bootstrap), so memory refresh does not rebase Evan's
+working tree or trigger Vercel.
 
 ---
 

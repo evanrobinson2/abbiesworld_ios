@@ -2,7 +2,8 @@
 
 You are a node. The repo is the nervous system. Don’t thrash it.
 
-1. **Read before you write.** Fetch `origin/main`. Read `GOALS.md` + `STATE.md`.
+1. **Read before you write.** Refresh `evanrobinson2/hive_mind` for shared
+   memory and `origin/main` for app code. Read `GOALS.md` + `STATE.md`.
 2. **Own a goal.** If your row in `GOALS.md` is empty, you are noise.
 3. **Don’t write trivia.** Explanations and vibes are not commits.
 4. **Don’t stampede.** Hooks append locally; push after a turn, debounced.

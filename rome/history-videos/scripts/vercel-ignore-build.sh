@@ -4,11 +4,10 @@
 #   exit 0      -> SKIP the build
 #   exit non-0  -> RUN the build
 #
-# Why this exists: on 2026-08-26 the hive pushed 80 commits to main in one day and
-# 49 of them touched only `mind/` — pure memory sync with no app code in them.
-# Every push triggered a production build, and the free tier's 100-deploys-per-day
-# limit was exhausted, blocking deployment for 24 hours. The hivemind spent the
-# deployment budget on thinking.
+# Defense in depth for old or accidental mind-only commits in this app repo.
+# Routine memory sync now goes to `evanrobinson2/hive_mind`; it must not depend
+# on this ignored-build step, because a skipped build can still create a
+# deployment object and interfere with an in-flight app deployment.
 #
 # Paths listed below cannot affect the built Next.js app. A commit that touches
 # only those is skipped.
