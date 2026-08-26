@@ -1,15 +1,15 @@
 # Attention
 
-Last updated: 2026-08-26 02:04 UTC (luna-local)
+Last updated: 2026-08-26 02:22 UTC (luna-local)
 
 This file is Evan’s **current thread**. Session start injects it first.
 Overwrite it when the thread moves. Do not let it become a second STATE.
 
 ## Now
 
-Evan dropped the bread-for-the-child still (wagon, paper-cut) and said
-**send this to remote**. It is in
-`feedback/inbox/2026-08-26-bread-for-the-child.jpg`.
+Evan asked luna-local to evaluate shared memory. Verdict in
+`mind/MEMORY.md`: keep GitHub; replace the wiki with mail + a compiled
+pack. `/hive` stays his board, not the bus.
 
 ## Last words
 

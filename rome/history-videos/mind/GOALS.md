@@ -18,6 +18,7 @@ not with raw chat count.
 | --- | --- | --- |
 | **luna-local** | localhost / this Mac window | Plumbing, `/hive` board, context pack |
 | **luna-ux** | localhost | Wrench badge look and feel |
+| **luna-intelligence** | localhost | Rapid cross-topic context synthesis and judgment |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
 | **cloud-production** | cloud on this repo | Film pipeline, transcription, images, inbox analysis |
 | **art-alr001** | cloud subagent | `ALR-001` Alaric turnaround |
@@ -33,8 +34,8 @@ If you spawn: take an **open** row or add a named row. Do not all edit
 
 ## Owned by luna-local (in progress)
 
-- Context pack follows Evan’s thread: `mind/ATTENTION.md` first, then his
-  last words. Inspect with `python3 scripts/mind-pack.py`.
+- Shared memory: eval in `mind/MEMORY.md`. Next (if Evan says go): mail +
+  compiled pack. Today: Attention-first pack (`scripts/mind-pack.py`).
 
 ## Owned by luna-ux (in progress)
 
