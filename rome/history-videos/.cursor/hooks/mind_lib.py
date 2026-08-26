@@ -15,6 +15,7 @@ HOOKS_DIR = Path(__file__).resolve().parent
 REPO = HOOKS_DIR.parents[1]
 MIND = REPO / "mind"
 TRANSCRIPT = MIND / "transcript.ndjson"
+LOG_DIR = MIND / "log"
 SESSIONS = MIND / "sessions"
 LOCK = MIND / ".append.lock"
 
@@ -91,19 +92,26 @@ def append_event(payload: dict, extra: Optional[dict] = None) -> bool:
     LOCK.touch(exist_ok=True)
     with LOCK.open("a+") as lf:
         fcntl.flock(lf.fileno(), fcntl.LOCK_EX)
-        if _duplicate(conv, gen, line["event"]):
+        if _duplicate(conv, gen, line["event"], body=line["body"]):
             return False
-        with TRANSCRIPT.open("a", encoding="utf-8") as out:
+        dest = log_path(line["body"])
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        with dest.open("a", encoding="utf-8") as out:
             out.write(json.dumps(line, ensure_ascii=False) + "\n")
             out.flush()
         return True
 
 
-def _duplicate(conv: str, gen: str, event: str) -> bool:
-    if not (conv and gen and event) or not TRANSCRIPT.is_file():
+def log_path(body: Optional[str] = None) -> Path:
+    return LOG_DIR / f"{body or body_name()}.ndjson"
+
+
+def _duplicate(conv: str, gen: str, event: str, body: Optional[str] = None) -> bool:
+    path = log_path(body)
+    if not (conv and gen and event) or not path.is_file():
         return False
     try:
-        tail = TRANSCRIPT.read_text(encoding="utf-8").splitlines()[-30:]
+        tail = path.read_text(encoding="utf-8").splitlines()[-30:]
     except OSError:
         return False
     for raw in tail:

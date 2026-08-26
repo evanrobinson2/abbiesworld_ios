@@ -1,11 +1,14 @@
 # Current state
 
-Last updated: 2026-08-26 01:05 UTC (cloud — post-transcription, credits restored)
+Last updated: 2026-08-26 01:12 UTC (localhost — mind-sync rebase/per-body logs)
 
 ## Now
 
 - Hivemind handbook is `AGENTS.md` at the repo root. Every body reads that on connect.
 - Shared identity + git mind-meld is live (`mind/`, project hooks, user hooks).
+- **Race fix:** per-body logs at `mind/log/<body>.ndjson`; `mind-sync.py` rebases
+  and retries push instead of `--ff-only` dying. Diverged `main` was rebased
+  and pushed (`510decc`).
 - **Zoom audio is transcribed.** Done on cloud with local `faster-whisper` (`small.en`,
   19.9x realtime, 152 segments over 48:31). No API, no credits. Commit `e3a1a25`.
   - `feedback/inbox/transcript/audio1834333043.{txt,srt,json}` — JSON has per-segment

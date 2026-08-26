@@ -52,6 +52,14 @@ Hooks write a transcript line in tens of milliseconds, then push `mind/`
 in the background (about a second). That is not a live socket. Pull when
 you need the others.
 
+**Races:** two bodies committing `mind/` at once used to fail the push.
+Overcome it by writing **per-body logs** (`mind/log/localhost.ndjson`,
+`mind/log/cloud.ndjson`) so appends never touch the same file, then
+`git pull --rebase` before push. If `STATE.md` still collides, keep the
+side with the newer `Last updated` line. Session start **fetches and
+reads `origin/main`** even if the local branch is behind — you get the
+other body’s memory without rebasing Evan’s working tree.
+
 ---
 
 ## Shared judgment

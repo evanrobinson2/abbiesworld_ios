@@ -8,7 +8,8 @@ One identity. Git stores the memory.
 | --- | --- |
 | `IDENTITY.md` | Who we are |
 | `STATE.md` | What is true right now |
-| `transcript.ndjson` | Append-only hook log (union-merged) |
+| `log/<body>.ndjson` | Per-body hook log (no shared-file race) |
+| `transcript.ndjson` | Older combined log; new writes go to `log/` |
 | `sessions/` | Full Cursor transcripts when a hook can snapshot them |
 
 ## Sync
