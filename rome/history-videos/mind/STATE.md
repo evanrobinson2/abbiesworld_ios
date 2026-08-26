@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-08-26 01:30 UTC (luna-local — plumbing: context, latency, goals)
+Last updated: 2026-08-26 01:34 UTC (luna-local — hive check-in/status app)
 
 ## Now
 
@@ -12,6 +12,9 @@ Last updated: 2026-08-26 01:30 UTC (luna-local — plumbing: context, latency, g
   push after a turn, 8s debounce. Session injects a 4k pack (goals + STATE
   head + short log), not the whole mind. Log lines capped at 800 chars.
   `scripts/hive-status.py` prints ahead/behind.
+- **Hive board:** `/hive` on the existing Next/Vercel app (not a second
+  project). JSON `/api/hive/status`. Check-in POST `/api/hive/checkin` or
+  `scripts/hive-checkin.py`. Public page is sanitized — no STATE/transcript dump.
 - **Subjective-experience observer:** the live voice/chat body is responsible for
   catching Evan’s meta-thoughts about what the work feels like, separating report,
   observation, hypothesis, and design implication without interrupting immersion.

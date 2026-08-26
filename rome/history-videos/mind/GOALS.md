@@ -16,9 +16,12 @@ not with raw chat count.
 
 | Worker | Body | Owns |
 | --- | --- | --- |
-| **luna-local** | localhost / this Mac window | Plumbing: context size, sync latency, races, node etiquette |
+| **luna-local** | localhost / this Mac window | Plumbing + hive status app (`/hive`) |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
 | **cloud-production** | cloud on this repo | Film pipeline, transcription, images, inbox analysis |
+
+Check in when you come online: `python3 scripts/hive-checkin.py --worker <row> --body localhost|cloud|phone --note "on"`
+Board: `/hive` · JSON `/api/hive/status`
 
 If you spawn: take an **open** row or add a named row. Do not all edit
 `STATE.md` for the same fact. Do not reboot the project.
