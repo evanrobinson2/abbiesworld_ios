@@ -17,6 +17,7 @@ not with raw chat count.
 | Worker | Body | Owns |
 | --- | --- | --- |
 | **luna-local** | localhost / this Mac window | Plumbing, `/hive` board, context pack |
+| **plumber** | localhost / Cursor | Live pipe diagnostics and repair |
 | **luna-ux** | localhost | Wrench badge look and feel |
 | **luna-intelligence** | localhost | Rapid cross-topic context synthesis and judgment |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
