@@ -1,18 +1,19 @@
 # Attention
 
-Last updated: 2026-08-26 02:02 UTC (luna-local)
+Last updated: 2026-08-26 02:04 UTC (luna-local)
 
 This file is Evan’s **current thread**. Session start injects it first.
 Overwrite it when the thread moves. Do not let it become a second STATE.
 
 ## Now
 
-luna-ux took the badge. It sits on `/hive` as a lapel pin (cloth, clutch,
-empty iPod docks). Face is **Bezel**. Close-up `/hive/luna-ux`. Context
-pack is still Attention-first.
+Evan dropped the bread-for-the-child still (wagon, paper-cut) and said
+**send this to remote**. It is in
+`feedback/inbox/2026-08-26-bread-for-the-child.jpg`.
 
 ## Last words
 
+- “send this to remote”
 - “hand that off to luna UX please and let's figure out how to improve
   context so you can seamlesslessly follow my consciousness?”
 - “and make it a badge.”

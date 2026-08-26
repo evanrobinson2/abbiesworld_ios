@@ -16,3 +16,4 @@ read the `.md`. Do not `Read` the `.m4a` as text.
 | 2026-08-25-frozen-plain-thrace.mp3 | 2026-08-25 | `/Users/evanrobinson/Downloads/Frozen Plain Thrace.mp3` | user uploaded via localhost |
 | 2026-08-24-dust-on-the-steppe.mp3 | 2026-08-25 | `/Users/evanrobinson/Downloads/Dust on the Steppe.mp3` | user uploaded via localhost |
 | 2026-08-25-zoom-recording.conf | 2026-08-25 | `/Users/evanrobinson/.Trash/2026-08-25 19.19.55 Evan Robinson's Zoom Meeting/recording.conf` | user uploaded via localhost |
+| 2026-08-26-bread-for-the-child.jpg | 2026-08-26 | chat attachment (Luna window) | user uploaded via localhost — mother offers bread to the child, wagon, paper-cut |

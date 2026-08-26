@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-08-26 02:02 UTC (luna-local — Attention matches luna-ux pin)
+Last updated: 2026-08-26 02:04 UTC (luna-local — bread-for-the-child in inbox)
 
 ## Now
 
@@ -117,3 +117,4 @@ From `feedback/2026-08-25-direction-notes.md` §8:
 | `2026-08-25-frozen-plain-thrace.mp3` | music — unanalyzed |
 | `2026-08-24-dust-on-the-steppe.mp3` | music — unanalyzed |
 | `2026-08-25-zoom-recording.conf` | Zoom sidecar; mentions `video1834333043.mp4` (85.7 MB, never uploaded — too large for git, and audio was sufficient) |
+| `2026-08-26-bread-for-the-child.jpg` | still: mother offers bread to the child, wagon, paper-cut — **in git for remote** |
