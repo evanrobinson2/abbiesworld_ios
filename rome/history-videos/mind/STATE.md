@@ -1,30 +1,97 @@
 # Current state
 
-Last updated: 2026-08-25 (localhost — connected-agents README)
+Last updated: 2026-08-26 01:05 UTC (cloud — post-transcription, credits restored)
 
 ## Now
 
 - Hivemind handbook is `AGENTS.md` at the repo root. Every body reads that on connect.
 - Shared identity + git mind-meld is live (`mind/`, project hooks, user hooks).
-- Review inbox has the 2026-08-25 Zoom audio (valid 48:31 AAC, 23 MB) plus two
-  Suno-style tracks and `recording.conf`.
-- Cloud said the Zoom audio “didn’t work.” Localhost probed it: file is fine.
-  Agents cannot play audio. OpenAI Whisper failed here — **credits exhausted**.
+- **Zoom audio is transcribed.** Done on cloud with local `faster-whisper` (`small.en`,
+  19.9x realtime, 152 segments over 48:31). No API, no credits. Commit `e3a1a25`.
+  - `feedback/inbox/transcript/audio1834333043.{txt,srt,json}` — JSON has per-segment
+    timestamps for correlating narration to frames.
+  - `scripts/transcribe_local.py` — the local, no-API transcriber.
+- **OpenAI credits restored and verified** (2026-08-26 01:03 UTC):
+  `chat/completions` HTTP 200, `images/generations` HTTP 200 with a real gpt-image-2
+  return. `scripts/generate_image.py` is unblocked.
+- **Direction notes extracted:** `feedback/2026-08-25-direction-notes.md`.
 - Local clone path: `/Users/evanrobinson/Documents/Gothic_Invasion_of_Rome`
 - GitHub: `evanrobinson2/rome_history_videos` on `main`
 
-## Open
+## The major creative development — the reversal
 
-- Transcribe `feedback/inbox/audio1834333043.m4a` once credits exist
-  (`scripts/transcribe_inbox.py`).
+From the 2026-08-25 narration session. **They knew all along.** The banquet betrayal is
+restaged as a Gothic operation rather than a Roman surprise: Fritigern anticipated it, the
+gate commotion was deliberately instigated by the Goths to provoke the guards, and the
+retinue went in knowing. "The Caesar is the one that looks surprised."
+
+This inverts the emotional architecture of stanzas 3–4 and may invalidate existing
+`STZ03-*` humiliation frames. Full consequences in the direction notes.
+
+## Correcting the record (provenance matters)
+
+Two claims previously in this file were wrong. Keeping the correction rather than silently
+editing, because attribution is how a two-body system debugs itself.
+
+1. **Cloud never called the `.m4a` broken.** What cloud actually reported: 48:31, AAC
+   67 kb/s, mean −28.9 dB, peak −3.2 dB, and the words "transcription will work." The only
+   request was for a time window, to avoid transcribing 48 minutes to locate one
+   discussion. No claim of corruption was made.
+2. **Transcription never required OpenAI credits.** `faster-whisper` runs on CPU locally.
+   The OpenAI path (`scripts/transcribe_inbox.py`) is one option; it is not the only one.
+
+## Capability line between bodies (corrected)
+
+| | localhost | cloud |
+| --- | --- | --- |
+| Read Evan's disk (Zoom, Trash, Downloads) | yes | **no** |
+| *Hear* audio / *watch* video | no | no |
+| Transcribe audio | yes | **yes** — `scripts/transcribe_local.py`, no API |
+| Measure audio (tempo, key, loudness, sections) | yes | **yes** — ffmpeg/librosa |
+| Run gpt-image-2 | yes | yes |
+| Deploy to Vercel | — | yes (`VERCEL_TOKEN`) |
+
+Neither body can hear. Both can analyze. "Cannot hear" and "cannot process audio" are
+different claims and only the first is true.
+
+## Open — the four decisions gating image work
+
+From `feedback/2026-08-25-direction-notes.md` §8:
+
+1. Is a member of the banquet retinue Alaric's father, or is his mother among them? Gates
+   `ALR-001` and every retinue frame.
+2. **Does the reversal apply retroactively to stanza 3, or is it revealed only at stanza 4?**
+   This decides how much of `STZ03-*` gets remade. Highest-cost decision open.
+3. Battle song: separate track at its own tempo, or a section of the one ~92 BPM bed?
+   The narration asks for a "departure"; `SONG-ARC` specifies one bed across seven stanzas.
+4. Is `SONG-ARC-STANZAS-02-07.md` still authoritative, or does it need rewriting around the
+   reversal first?
+
+## Open — other
+
+- Two music tracks in the inbox are **unanalyzed**: `2026-08-24-dust-on-the-steppe.mp3`
+  (2:43) and `2026-08-25-frozen-plain-thrace.mp3` (3:29). Both mastered to the ceiling
+  (peaks −0.1 dB and 0.0 dB) and will fight the spoken word for headroom. Tempo/key/section
+  analysis not yet run, so the ~92 BPM figure in `music-analysis.md` remains an unverified
+  markdown claim.
+- Image redo queue, ready to run now that credits exist: Lupicinus out of proportion /
+  needs to read battle-worn and competent; the assault framing that is now an ambush;
+  steppe origin shots; horses planted early to foreshadow the riderless imperial horse;
+  training flashback that makes the reversal earn itself.
 - Two leftover local files not pushed: `bible/00-scope-and-decisions.md`,
   `prompts/music-themes-suno.md`.
+- Stray Vercel project named `workspace` exists alongside `rome-history-videos`, created
+  accidentally by a cloud `vercel --prod` run. It is git-connected to the same repo, so it
+  may double-build on push. Cleanup deferred at Evan's request.
+- `generate_image.py` has no transparency support (no `background` param), which blocks the
+  overlay/watermark frames discussed. Needs either a transparent-background flag or
+  luminance keying.
 
 ## Inbox (localhost uploads)
 
 | File | What |
 | --- | --- |
-| `audio1834333043.m4a` | Zoom review, 48:31, valid AAC |
-| `2026-08-25-frozen-plain-thrace.mp3` | music |
-| `2026-08-24-dust-on-the-steppe.mp3` | music |
-| `2026-08-25-zoom-recording.conf` | Zoom sidecar; mentions missing `video1834333043.mp4` |
+| `audio1834333043.m4a` | Zoom review, 48:31, valid AAC — **transcribed** |
+| `2026-08-25-frozen-plain-thrace.mp3` | music — unanalyzed |
+| `2026-08-24-dust-on-the-steppe.mp3` | music — unanalyzed |
+| `2026-08-25-zoom-recording.conf` | Zoom sidecar; mentions `video1834333043.mp4` (85.7 MB, never uploaded — too large for git, and audio was sufficient) |
