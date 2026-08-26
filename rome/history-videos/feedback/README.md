@@ -19,9 +19,10 @@ local). Files under `feedback/` are **not** ignored, so they commit normally.
 | Zoom folder, and screen content matters | also `video*.mp4` | Needed only to see *which frame* was on screen |
 | Loom | the share URL | `yt-dlp` has a native Loom extractor — no upload needed |
 
-Agents cannot hear or watch anything directly. Audio is transcribed via the OpenAI API
-(`OPENAI_API_KEY`); video frames are described by a vision model. So audio is the
-high-value file and video is only for correlation.
+Agents cannot hear or watch anything directly. A playable `.m4a` is not “broken.”
+Transcribe with `scripts/transcribe_inbox.py` (`OPENAI_API_KEY`), then read the
+markdown. Do not `Read` the audio file as text. Video frames are only for
+correlation if screen content matters.
 
 ### Skip the video entirely
 
