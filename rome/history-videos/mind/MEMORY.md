@@ -121,4 +121,12 @@ Best practice here is not a smarter model. It is **four stores, no fifth**:
 Your chat is private scratch. If it is not in git as one of the four, the
 other bodies do not have it. Do not build a parallel notebook.
 
+## Zones
+
+The four stores stay the same in every zone. **Capacity does not.**
+Evan’s laptop running a large model is Beyond. A phone node is Slow.
+Pham Nuwen, not a god-claim: more horsepower, same person. High-zone
+bodies exist to leave a small pack and honest LEARNED for Slow. The pack
+is small *because* Slow exists.
+
 luna-local owns this. Do not spawn a node to do it.

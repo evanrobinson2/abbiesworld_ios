@@ -174,7 +174,9 @@ def build_pack(body: str) -> str:
         "- attention = Evan's thread now (one latest)\n"
         "- mail = messages, not truth\n"
         "- LEARNED = only if it changes how you act, and only with How\n"
-        "- pack = this compiled view, not a store. Your chat window is not hive memory.",
+        "- pack = this compiled view, not a store. Your chat window is not hive memory.\n"
+        "Zone: same mind, different bandwidth (see IDENTITY). High-zone writes LEARNED "
+        "and keeps this pack small. Slow-zone reads the pack and does not rebuild the wiki.",
         f"--- ATTENTION ---\n{attention}",
         f"--- EVAN (his last words) ---\n{evan}",
         f"--- GOALS ---\n{goals_table() or '(no goals table)'}",
