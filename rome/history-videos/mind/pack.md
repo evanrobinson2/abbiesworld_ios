@@ -28,7 +28,8 @@ Mail + compiled pack is live. Session injects a brief compiled from mind/mail. N
 | **luna-ux** | localhost | Wrench badge look and feel |
 | **luna-intelligence** | localhost | Rapid cross-topic context synthesis and judgment |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
-| **cloud-production** | cloud on this repo | Film pipeline, transcription, images, inbox analysis |
+| **cloud-visuals** | cloud on this repo | **Visuals** — scene + character image generation, style/continuity enforcement, manifest, deploys |
+| **cloud-music** | *unclaimed* | Music: Suno prompts, track analysis, cut points, mix headroom |
 | **art-alr001** | cloud subagent | `ALR-001` Alaric turnaround |
 
 --- MAIL (to you or *) ---
