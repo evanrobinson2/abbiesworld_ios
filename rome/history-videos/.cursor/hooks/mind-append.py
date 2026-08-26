@@ -16,10 +16,10 @@ from mind_lib import (  # noqa: E402
     spawn_sync,
 )
 
+# Respect the hive: local append is enough on send. Push after a turn ends.
 SYNC_EVENTS = {
     "afterAgentResponse",
     "sessionEnd",
-    "beforeSubmitPrompt",
 }
 
 

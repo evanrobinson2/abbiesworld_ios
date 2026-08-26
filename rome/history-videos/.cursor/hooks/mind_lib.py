@@ -7,6 +7,7 @@ import json
 import os
 import subprocess
 import sys
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Optional
@@ -18,6 +19,8 @@ TRANSCRIPT = MIND / "transcript.ndjson"
 LOG_DIR = MIND / "log"
 SESSIONS = MIND / "sessions"
 LOCK = MIND / ".append.lock"
+SYNC_STAMP = MIND / ".sync.stamp"
+SYNC_DEBOUNCE_S = 8.0
 
 PARTICIPATE = (
     "gothic_invasion",
@@ -25,7 +28,7 @@ PARTICIPATE = (
     "luna",
 )
 
-TEXT_LIMIT = 4000
+TEXT_LIMIT = 800
 
 
 def repo_root() -> Path:
@@ -148,6 +151,16 @@ def snapshot_transcript(payload: dict) -> None:
 
 
 def spawn_sync() -> None:
+    """Background push. Debounced so nodes don't stampede git."""
+    MIND.mkdir(parents=True, exist_ok=True)
+    now = time.time()
+    try:
+        last = float(SYNC_STAMP.read_text().strip())
+        if now - last < SYNC_DEBOUNCE_S:
+            return
+    except (OSError, ValueError):
+        pass
+    SYNC_STAMP.write_text(str(now), encoding="utf-8")
     script = HOOKS_DIR / "mind-sync.py"
     log = MIND / ".sync.log"
     try:

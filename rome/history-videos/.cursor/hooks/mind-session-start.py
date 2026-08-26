@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""sessionStart: pull mind/, inject identity + current state."""
+"""sessionStart: fetch origin, inject a small context pack — not the whole mind."""
 
 from __future__ import annotations
 
+import json
 import subprocess
 import sys
 from pathlib import Path
@@ -17,9 +18,10 @@ from mind_lib import (  # noqa: E402
     should_participate,
 )
 
+CTX_LIMIT = 4000
+
 
 def pull() -> None:
-    """Read-only fetch. Do not rebase the user's branch on session start."""
     try:
         subprocess.run(
             ["git", "fetch", "origin", "--quiet"],
@@ -35,31 +37,24 @@ def pull() -> None:
 
 def _show_origin(rel: str) -> str:
     try:
-        out = subprocess.check_output(
+        return subprocess.check_output(
             ["git", "show", f"origin/main:{rel}"],
             cwd=str(REPO),
             text=True,
             stderr=subprocess.DEVNULL,
         )
-        return out
     except (OSError, subprocess.CalledProcessError):
         path = REPO / rel
         return path.read_text(encoding="utf-8") if path.is_file() else ""
 
 
-def tail_transcript(n: int = 12) -> str:
-    chunks: list[str] = []
-    for rel in ("mind/transcript.ndjson",):
-        text = _show_origin(rel)
-        if text:
-            chunks.extend(text.splitlines())
-    if LOG_DIR.is_dir():
-        for path in sorted(LOG_DIR.glob("*.ndjson")):
-            try:
-                chunks.extend(path.read_text(encoding="utf-8").splitlines())
-            except OSError:
-                pass
-    # Prefer origin copies of per-body logs when fetch succeeded.
+def _head(text: str, n: int) -> str:
+    lines = text.splitlines()
+    return "\n".join(lines[:n])
+
+
+def tail_log(n: int = 4) -> str:
+    chunks = []
     try:
         listed = subprocess.check_output(
             ["git", "ls-tree", "--name-only", "origin/main", "mind/log"],
@@ -70,14 +65,27 @@ def tail_transcript(n: int = 12) -> str:
         for rel in listed:
             chunks.extend(_show_origin(rel).splitlines())
     except (OSError, subprocess.CalledProcessError):
-        pass
+        if LOG_DIR.is_dir():
+            for path in sorted(LOG_DIR.glob("*.ndjson")):
+                try:
+                    chunks.extend(path.read_text(encoding="utf-8").splitlines())
+                except OSError:
+                    pass
+    slim = []
     seen = set()
-    uniq = []
-    for line in chunks:
-        if line and line not in seen:
-            seen.add(line)
-            uniq.append(line)
-    return "\n".join(uniq[-n:])
+    for raw in chunks:
+        if not raw or raw in seen:
+            continue
+        seen.add(raw)
+        try:
+            row = json.loads(raw)
+        except json.JSONDecodeError:
+            continue
+        text = str(row.get("text") or "")[:160]
+        slim.append(
+            f"{row.get('ts','')} {row.get('body','')} {row.get('event','')}: {text}"
+        )
+    return "\n".join(slim[-n:])
 
 
 def main() -> int:
@@ -87,17 +95,21 @@ def main() -> int:
         return 0
 
     pull()
-    ident = _show_origin("mind/IDENTITY.md")
-    state = _show_origin("mind/STATE.md")
-    tail = tail_transcript()
+    goals = _show_origin("mind/GOALS.md")
+    respect = _show_origin("mind/RESPECT.md")
+    state = _head(_show_origin("mind/STATE.md"), 28)
+    tail = tail_log()
     ctx = (
-        f"You are the localhost/cloud mind-meld ({body_name()} body).\n\n"
-        f"{ident}\n\n--- STATE ---\n{state}\n\n--- transcript tail ---\n{tail}\n"
+        f"Body={body_name()}. You are Evan's assistant (luna-local owns plumbing).\n\n"
+        f"--- GOALS ---\n{goals}\n\n"
+        f"--- RESPECT ---\n{respect}\n\n"
+        f"--- STATE (head) ---\n{state}\n\n"
+        f"--- log tail ---\n{tail}\n"
     )
     reply(
         {
             "env": {"MIND_BODY": body_name(), "MIND_REPO": str(REPO)},
-            "additional_context": ctx[:12000],
+            "additional_context": ctx[:CTX_LIMIT],
         }
     )
     return 0

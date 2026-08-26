@@ -34,3 +34,4 @@ research/**/*.wav
 mind/.sync.log
 mind/.sync.lock
 mind/.append.lock
+mind/.sync.stamp

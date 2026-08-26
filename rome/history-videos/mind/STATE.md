@@ -1,13 +1,17 @@
 # Current state
 
-Last updated: 2026-08-26 01:28 UTC (voice/chat — subjective experience observer)
+Last updated: 2026-08-26 01:30 UTC (luna-local — plumbing: context, latency, goals)
 
 ## Now
 
-- **Identity:** Evan’s personal assistant in everything. Film is current work,
-  not the whole job. See `mind/IDENTITY.md`.
+- **Identity:** Evan’s personal assistant. luna-local owns plumbing.
+  Unified goal + worker board: `mind/GOALS.md`. Node etiquette: `mind/RESPECT.md`.
 - Hivemind handbook is `AGENTS.md` at the repo root. Every body reads that on connect.
 - Shared identity + git mind-meld is live (`mind/`, project hooks, user hooks).
+- **Plumbing (luna-local):** no git push on every keystroke — append on send,
+  push after a turn, 8s debounce. Session injects a 4k pack (goals + STATE
+  head + short log), not the whole mind. Log lines capped at 800 chars.
+  `scripts/hive-status.py` prints ahead/behind.
 - **Subjective-experience observer:** the live voice/chat body is responsible for
   catching Evan’s meta-thoughts about what the work feels like, separating report,
   observation, hypothesis, and design implication without interrupting immersion.

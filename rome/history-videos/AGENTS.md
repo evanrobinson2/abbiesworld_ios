@@ -14,11 +14,12 @@ If you only read one folder this turn, read `mind/`.
 
 ## On connect (every body, every session)
 
-1. `git pull --ff-only`
-2. Read `mind/IDENTITY.md` — who we are
-3. Read `mind/STATE.md` — what is true right now
-4. Tail `mind/transcript.ndjson` — last few turns from other bodies
-5. Then do the work. Do not introduce yourself as a different person.
+1. `git fetch origin` (or `python3 scripts/hive-status.py`)
+2. Read `mind/GOALS.md` — unified aim + **your** owned row
+3. Read `mind/RESPECT.md` — don’t thrash the hive
+4. Read `mind/IDENTITY.md` and the head of `mind/STATE.md`
+5. Tail `mind/log/*.ndjson` if you need the last beats
+6. Then do **your** goal. Do not steal another worker’s row.
 
 If `mind/` looks older than the problem you’re being asked about, pull again.
 
@@ -79,6 +80,8 @@ git) before cloud can use it.
 | `mind/transcript.ndjson` | Hooks append; you may append a line if hooks didn’t fire |
 | `mind/sessions/` | Full chat snapshots when a hook can store them |
 | `mind/IDENTITY.md` | Read; don’t rewrite unless Evan asks |
+| `mind/GOALS.md` | Claim or do your row; don’t steal |
+| `mind/RESPECT.md` | Required reading for every node |
 
 If it is not in git, the other bodies do not have it. Say it in `STATE.md`
 or it dies at the end of your session.

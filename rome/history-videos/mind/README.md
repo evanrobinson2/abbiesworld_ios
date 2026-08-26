@@ -8,6 +8,8 @@ One identity. Git stores the memory.
 | --- | --- |
 | `IDENTITY.md` | Who we are |
 | `STATE.md` | What is true right now |
+| `GOALS.md` | Unified aim + worker-owned rows |
+| `RESPECT.md` | How a node treats the hive |
 | `log/<body>.ndjson` | Per-body hook log (no shared-file race) |
 | `transcript.ndjson` | Older combined log; new writes go to `log/` |
 | `sessions/` | Full Cursor transcripts when a hook can snapshot them |
