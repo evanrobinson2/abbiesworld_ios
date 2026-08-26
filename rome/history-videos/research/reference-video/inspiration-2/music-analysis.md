@@ -34,13 +34,20 @@ No single genre label — closest stack:
 
 **Not:** musical theatre (first reference reel), folk ballad, rock, trap, choral, epic cinematic.
 
-Think **90 BPM pocket** where the bass riff carries the ear and the voice rhythms on top.
+Think **103 BPM pocket** (measured) where the bass riff carries the ear and the voice rhythms on top.
 
 ---
 
 ## Tempo and feel
 
-- **~90–95 BPM**, mid-tempo
+> **CORRECTED 2026-08-26 (measured, not estimated).** This track is **103.4 BPM**, key
+> **A# / B♭ minor**. The ~90–95 figure below was an ear estimate and it is wrong by about
+> eleven BPM. Measured with `scripts/analyze_audio.py` (librosa beat tracking, cross-checked
+> against median inter-beat interval — both agree at 103.4). Sidecar:
+> `feedback/inbox/analysis/reel-audio.analysis.json`. Peak −2.9 dBFS, crest factor 13.4 dB.
+> Any Suno prompt derived from this template should say **103 BPM**.
+
+- ~~**~90–95 BPM**, mid-tempo~~ → **103.4 BPM measured**, mid-tempo
 - Slight lo-fi swing on hats
 - Kick punchy; snare dry and crisp
 - Vocals **on-grid**, syncopated against bass — clear consonants, not floating behind the beat
@@ -60,7 +67,7 @@ Think **90 BPM pocket** where the bass riff carries the ear and the voice rhythm
 Use as **Style of Music** or instrumental bed; add your lyrics in Custom mode separately:
 
 ```
-Mid-tempo lo-fi hip-hop instrumental, 92 BPM. Punchy syncopated electric bass
+Mid-tempo lo-fi hip-hop instrumental, 103 BPM. Punchy syncopated electric bass
 ostinato as the main melodic hook. Tight dry drum machine: kick, crisp snare on
 2 and 4, steady closed hi-hats. Subtle warm Rhodes or synth pad chords low in
 mix. Clean punchy intimate production. Minimal — drums, bass, pads only. No
@@ -83,7 +90,7 @@ vocals, no choir, no autotune
 | --- | --- | --- |
 | Vocal | Spoken → fast theatrical patter / sung | Steady rhythmic **spoken word on a groove** |
 | Bed | More theatrical / varied | **Drums + bass riff + sparse pads** |
-| BPM | Faster sections | **~92 BPM throughout** |
+| BPM | Faster sections | **103.4 BPM throughout (measured)** |
 | Best for your project | Lyric delivery, emphasis, enunciation | **Backing track architecture** |
 
 **Recommendation:** Use **this track** as the **instrumental template** for your 4-minute Gothic song; use the **first reel** for **how to deliver lines** when the story intensifies.

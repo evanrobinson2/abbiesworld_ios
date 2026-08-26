@@ -2,7 +2,7 @@
 
 Status: **PLAN**  
 Companion: `STANZA-01-NORTH.md`  
-Musical bed: **~92 BPM** spoken word over bass ostinato (Peter's Barque template)  
+Musical bed: **~103 BPM** spoken word over bass ostinato (Peter's Barque template — **measured 103.4, not the ~92 previously asserted here**)  
 Total song target: **~4–5 minutes** (7 stanzas + interlude hooks)
 
 **Scope note:** Original bible pilot ended at Adrianople (378). This arc **extends to the sack of Rome (410)** per creative direction. Alaric is **not** at Marcianople (376); he enters as a **child in the crossing stanza** and returns as **king** in stanza 6.
