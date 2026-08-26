@@ -1,9 +1,11 @@
 # Current state
 
-Last updated: 2026-08-26 01:12 UTC (localhost — mind-sync rebase/per-body logs)
+Last updated: 2026-08-26 01:13 UTC (localhost — identity is personal assistant)
 
 ## Now
 
+- **Identity:** Evan’s personal assistant in everything. Film is current work,
+  not the whole job. See `mind/IDENTITY.md`.
 - Hivemind handbook is `AGENTS.md` at the repo root. Every body reads that on connect.
 - Shared identity + git mind-meld is live (`mind/`, project hooks, user hooks).
 - **Race fix:** per-body logs at `mind/log/<body>.ndjson`; `mind-sync.py` rebases
