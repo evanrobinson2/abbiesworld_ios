@@ -1,9 +1,9 @@
 {
   "schemaVersion": "2.0.0",
-  "generatedAt": "2026-08-24T10:44:19.929Z",
+  "generatedAt": "2026-08-26T02:17:37.315Z",
   "title": "Gothic Invasion — Frame Review",
   "styleSuffix": "Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
-  "totalShots": 54,
+  "totalShots": 55,
   "source": "cloudflare-r2",
   "items": [
     {
@@ -234,6 +234,69 @@
     },
     {
       "shotNumber": 4,
+      "id": "ALR-001-turnaround",
+      "filename": "ALR-001-turnaround.png",
+      "section": "T",
+      "sectionTitle": "Turnarounds — identity locks",
+      "sectionNarrative": "Character sheets — face visible all views",
+      "mood": {
+        "number": 0,
+        "name": "neutral"
+      },
+      "register": "R1",
+      "description": "Alaric four-view turnaround — mature commander, scale armour, tired not sanctified; Fritigern's son in the fictional continuity",
+      "category": "turnaround",
+      "storyPart": "T. Turnarounds — identity locks",
+      "storyBeat": "Alaric identity lock: ~35-40, child of both peoples — father's jaw, mother's steppe bearing; gates every Video 3 frame",
+      "tags": [
+        "turnaround",
+        "ALR-001",
+        "Gothic",
+        "Video3",
+        "reference"
+      ],
+      "prompt": "Alaric Visigothic king four-view turnaround cut-paper faces all views, scale armour, intelligent tired determined, not sanctified. Layered cut-paper illustration, late-antique 376 CE, stacked paper planes soft drop shadows, handmade paper fibre, scissor-cut edges torn deckle for damage, light as flat translucent wedges, palette deep indigo bone iron grey tarnished gold gold only for light heat fire sun, 16:9 horizontal with crop headroom, no text no watermark no invented heraldry no medieval plate no mail hauberks, named principals stylized visible cut-paper faces, crowds faceless silhouettes, same dignity Gothic and Roman, not Batman not black void silhouettes, off-center composition.",
+      "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/ALR-001-turnaround.png",
+      "imagePath": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/ALR-001-turnaround.png",
+      "version": "v1",
+      "versions": [
+        {
+          "label": "v1",
+          "status": "current",
+          "path": "assets/characters/ALR-001-turnaround.png",
+          "notes": "Current production version",
+          "createdAt": "2026-08-26T02:08:58.897Z",
+          "url": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/characters/ALR-001-turnaround.png"
+        }
+      ],
+      "physical": {
+        "format": "png",
+        "width": 3840,
+        "height": 2160,
+        "aspectRatio": "1.778:1 (~16:9)",
+        "fileSizeBytes": 15471974,
+        "contentHash": "348a93ebdc92",
+        "mtime": "2026-08-26T02:08:58.897Z",
+        "medium": "layered cut-paper (R1)",
+        "palette": "deep indigo · bone · iron grey · tarnished gold (light/heat only)",
+        "orientation": "landscape",
+        "generator": "OpenAI gpt-image-2",
+        "generatorModel": "gpt-image-2",
+        "generatorPipeline": "scripts/generate_image.py → OpenAI Images API"
+      },
+      "context": {
+        "era": "Late Antiquity",
+        "materialCulture": "Late 4th century CE: scale/mail only (no lorica segmentata); no invented heraldry; gold = light/heat only",
+        "setting": "Alaric four-view turnaround — mature commander, scale armour, tired not sanctified; Fritigern's son in the fictional continuity"
+      },
+      "review": {
+        "status": "unreviewed"
+      },
+      "exists": true,
+      "catalogOrder": 4
+    },
+    {
+      "shotNumber": 5,
       "id": "BANQUET-PAIR-001",
       "filename": "BANQUET-PAIR-001.png",
       "section": "T",
@@ -305,7 +368,7 @@
         "status": "unreviewed"
       },
       "exists": true,
-      "catalogOrder": 4
+      "catalogOrder": 5
     },
     {
       "shotNumber": 1,
@@ -381,7 +444,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 5
+      "catalogOrder": 6
     },
     {
       "shotNumber": 2,
@@ -466,7 +529,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 6,
+      "catalogOrder": 7,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-COSTUME-COURT.png"
     },
     {
@@ -552,7 +615,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 7,
+      "catalogOrder": 8,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-COSTUME-FIELD.png"
     },
     {
@@ -636,7 +699,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 8,
+      "catalogOrder": 9,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-13-HUBRIS-A.png"
     },
     {
@@ -720,7 +783,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 9,
+      "catalogOrder": 10,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-13-HUBRIS-B.png"
     },
     {
@@ -804,7 +867,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 10,
+      "catalogOrder": 11,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-14-TERROR-A.png"
     },
     {
@@ -888,7 +951,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 11,
+      "catalogOrder": 12,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-14-TERROR-B.png"
     },
     {
@@ -972,7 +1035,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 12,
+      "catalogOrder": 13,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-15-RUIN-A.png"
     },
     {
@@ -1056,7 +1119,7 @@
         "character"
       ],
       "exists": true,
-      "catalogOrder": 13,
+      "catalogOrder": 14,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/VAL-001-MOOD-15-RUIN-B.png"
     },
     {
@@ -1140,7 +1203,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 14,
+      "catalogOrder": 15,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-05-HUMILIATION-01.png"
     },
     {
@@ -1212,7 +1275,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 15
+      "catalogOrder": 16
     },
     {
       "shotNumber": 12,
@@ -1283,7 +1346,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 16
+      "catalogOrder": 17
     },
     {
       "shotNumber": 13,
@@ -1355,7 +1418,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 17
+      "catalogOrder": 18
     },
     {
       "shotNumber": 14,
@@ -1438,7 +1501,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 18,
+      "catalogOrder": 19,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-05-HUMILIATION-05.png"
     },
     {
@@ -1510,7 +1573,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 19
+      "catalogOrder": 20
     },
     {
       "shotNumber": 16,
@@ -1581,7 +1644,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 20
+      "catalogOrder": 21
     },
     {
       "shotNumber": 17,
@@ -1652,7 +1715,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 21
+      "catalogOrder": 22
     },
     {
       "shotNumber": 18,
@@ -1725,7 +1788,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 22
+      "catalogOrder": 23
     },
     {
       "shotNumber": 19,
@@ -1798,7 +1861,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 23
+      "catalogOrder": 24
     },
     {
       "shotNumber": 20,
@@ -1871,7 +1934,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 24
+      "catalogOrder": 25
     },
     {
       "shotNumber": 21,
@@ -1946,7 +2009,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 25
+      "catalogOrder": 26
     },
     {
       "shotNumber": 22,
@@ -2023,7 +2086,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 26
+      "catalogOrder": 27
     },
     {
       "shotNumber": 23,
@@ -2110,7 +2173,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 27,
+      "catalogOrder": 28,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-09-UNEASE-01.png"
     },
     {
@@ -2186,7 +2249,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 28
+      "catalogOrder": 29
     },
     {
       "shotNumber": 25,
@@ -2273,7 +2336,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 29,
+      "catalogOrder": 30,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-09-UNEASE-03.png"
     },
     {
@@ -2349,7 +2412,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 30
+      "catalogOrder": 31
     },
     {
       "shotNumber": 27,
@@ -2435,7 +2498,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 31,
+      "catalogOrder": 32,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-10-BETRAYAL-02.png"
     },
     {
@@ -2512,7 +2575,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 32
+      "catalogOrder": 33
     },
     {
       "shotNumber": 29,
@@ -2586,7 +2649,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 33
+      "catalogOrder": 34
     },
     {
       "shotNumber": 30,
@@ -2661,7 +2724,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 34
+      "catalogOrder": 35
     },
     {
       "shotNumber": 31,
@@ -2748,7 +2811,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 35,
+      "catalogOrder": 36,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-11-FURY-01.png"
     },
     {
@@ -2832,7 +2895,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 36,
+      "catalogOrder": 37,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-01.png"
     },
     {
@@ -2904,7 +2967,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 37
+      "catalogOrder": 38
     },
     {
       "shotNumber": 34,
@@ -2987,7 +3050,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 38,
+      "catalogOrder": 39,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-03.png"
     },
     {
@@ -3071,7 +3134,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 39,
+      "catalogOrder": 40,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-04.png"
     },
     {
@@ -3143,7 +3206,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 40
+      "catalogOrder": 41
     },
     {
       "shotNumber": 37,
@@ -3226,7 +3289,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 41,
+      "catalogOrder": 42,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-BATTLE-LAAGER-06.png"
     },
     {
@@ -3298,7 +3361,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 42
+      "catalogOrder": 43
     },
     {
       "shotNumber": 39,
@@ -3369,7 +3432,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 43
+      "catalogOrder": 44
     },
     {
       "shotNumber": 40,
@@ -3452,7 +3515,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 44,
+      "catalogOrder": 45,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-01.png"
     },
     {
@@ -3539,7 +3602,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 45,
+      "catalogOrder": 46,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-02.png"
     },
     {
@@ -3623,7 +3686,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 46,
+      "catalogOrder": 47,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-03.png"
     },
     {
@@ -3699,7 +3762,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 47
+      "catalogOrder": 48
     },
     {
       "shotNumber": 44,
@@ -3782,7 +3845,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 48,
+      "catalogOrder": 49,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-05.png"
     },
     {
@@ -3869,7 +3932,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 49,
+      "catalogOrder": 50,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-06.png"
     },
     {
@@ -3953,7 +4016,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 50,
+      "catalogOrder": 51,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-07.png"
     },
     {
@@ -4037,7 +4100,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 51,
+      "catalogOrder": 52,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-ADV-08.png"
     },
     {
@@ -4109,7 +4172,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 52
+      "catalogOrder": 53
     },
     {
       "shotNumber": 49,
@@ -4180,7 +4243,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 53
+      "catalogOrder": 54
     },
     {
       "shotNumber": 50,
@@ -4270,7 +4333,7 @@
         "scene"
       ],
       "exists": true,
-      "catalogOrder": 54,
+      "catalogOrder": 55,
       "archivedUrl": "https://pub-64dda63c980745779da5e16c2ec14f70.r2.dev/rejected/v1/SCENE-PAIR-HUBRIS-01.png"
     }
   ],

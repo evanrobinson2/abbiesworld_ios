@@ -478,6 +478,26 @@ function buildTurnaroundExtras(prompts) {
     },
     {
       shotNumber: 0,
+      id: "ALR-001-turnaround",
+      filename: "ALR-001-turnaround.png",
+      section: "T",
+      sectionTitle: "Turnarounds — identity locks",
+      sectionNarrative: "Character sheets — face visible all views",
+      mood: { number: 0, name: "neutral" },
+      register: "R1",
+      description:
+        "Alaric four-view turnaround — mature commander, scale armour, tired not sanctified; Fritigern's son in the fictional continuity",
+      category: "turnaround",
+      storyPart: "T. Turnarounds — identity locks",
+      storyBeat:
+        "Alaric identity lock: ~35-40, child of both peoples — father's jaw, mother's steppe bearing; gates every Video 3 frame",
+      tags: ["turnaround", "ALR-001", "Gothic", "Video3"],
+      prompt:
+        "Alaric Visigothic king four-view turnaround cut-paper faces all views, scale armour, intelligent tired determined, not sanctified. " +
+        STYLE_SUFFIX,
+    },
+    {
+      shotNumber: 0,
       id: "BANQUET-PAIR-001",
       filename: "BANQUET-PAIR-001.png",
       section: "T",
@@ -505,6 +525,7 @@ function enrich(shot, reviewMap, prompts) {
     filename.startsWith("VAL-") ||
     filename.startsWith("FRI-") ||
     filename.startsWith("ALA-") ||
+    filename.startsWith("ALR-") ||
     filename.startsWith("LUP-") ||
     filename.startsWith("BANQUET-");
 
