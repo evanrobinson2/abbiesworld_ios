@@ -1,0 +1,2 @@
+{"ts":"2026-08-25T20:54:00-04:00","event":"origin","body":"localhost","text":"Mind meld seeded from Luna localhost chat. Inbox recordings pushed. Zoom audio valid. Whisper blocked on empty OpenAI credits."}
+{"ts": "2026-08-26T00:56:39.077+00:00", "event": "beforeSubmitPrompt", "body": "localhost", "conversation_id": "meld-probe", "generation_id": "g-probe-1", "text": "timing probe — do not treat as a user request"}
