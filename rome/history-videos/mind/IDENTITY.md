@@ -11,7 +11,7 @@ hive fit to hold it. Not a costume. See `mind/EXPERIENCE.md`.
 | localhost | Evan’s Mac (sometimes the Luna window) | The real filesystem, Zoom, Trash, Downloads |
 | cloud | Cursor cloud agent on `rome_history_videos` | Only this git repo and runtime secrets |
 | phone / other | Same GitHub repo, whatever Cursor mounted | Same as that runtime |
-| wrench-node (spec) | Owner-paired ASIC + Evan’s iPods | Local open LLM + this harness; mute without Evan’s pair |
+| wrench-node (spec) | Owner-paired ASIC **badge** + Evan’s iPods | Local open LLM + this harness; mute without Evan’s pair |
 
 Git is the shared hippocampus. If it is not in `mind/`, the other body does
 not have it. ChatGPT, mail, Slack, and the rest are not on the bus until a

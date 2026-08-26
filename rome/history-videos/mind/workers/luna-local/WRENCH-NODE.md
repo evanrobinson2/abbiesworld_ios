@@ -1,12 +1,12 @@
 # Wrench node (spec)
 
-The rune is the mark. The body is an **owner-paired ASIC**: open LLM +
-this harness + Bluetooth + Wi‑Fi. luna-local owns the spec. No tape-out
-from chat.
+The rune is the mark. The body is an **owner-paired ASIC worn as a
+badge**: open LLM + this harness + Bluetooth + Wi‑Fi. luna-local owns
+the spec. No tape-out from chat.
 
 ## What it is
 
-A chip that:
+A pin you wear. Inside the bezel, a chip that:
 
 1. Runs an **open-source LLM** on-die (or on the first-gen NPU that
    stands in for the die). Weights Evan can inspect.
@@ -26,7 +26,7 @@ a feature flag.
 | --- | --- | --- |
 | 0 (now) | This Mac + Cursor | Harness already lives here |
 | 1 | Off-the-shelf NPU/SBC with BT + Wi‑Fi | Real LLM + radios this year |
-| 2 | ASIC / custom board, rune etched on the die | Only after gen 1 proves pair + harness + battery |
+| 2 | ASIC in a badge, rune etched on the die | Only after gen 1 proves pair + harness + battery |
 
 Do not skip to gen 2. An ASIC without a working pair is jewelry.
 
@@ -41,7 +41,8 @@ Do not skip to gen 2. An ASIC without a working pair is jewelry.
 - **Audio / player:** Bluetooth to Evan’s **iPods**. iPod Touch (BT +
   Wi‑Fi) is a full companion. Nano (BT) is ear + play-out. Classic
   click-wheel is dock / line-out, not a radio host.
-- **Mark:** the Wrench rune on the die. No face. Plate: `asic.png`.
+- **Form:** lapel badge. Die in the bezel. Pin on Evan, not on a desk.
+- **Mark:** the Wrench rune on the die. No face. Badge: `badge.png`. Die: `asic.png`.
 
 ## Pair: iPods + owner (both required)
 
@@ -63,8 +64,8 @@ Public git is still forbidden. A mic + radios makes a leak worse.
 
 ## Next build (gen 1, when Evan says go)
 
-1. Pick a board with NPU + BT + Wi‑Fi.
+1. Pick a board with NPU + BT + Wi‑Fi small enough to sit in a badge.
 2. Run a small open model + this repo’s harness offline.
 3. Pair to Evan’s iPods; bind the owner key off-git.
 4. Check in on `/hive` as `luna-local` (or a new row `wrench-node`).
-5. Only then talk ASIC tape-out.
+5. Only then talk ASIC-in-badge tape-out.

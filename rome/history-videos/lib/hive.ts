@@ -35,7 +35,10 @@ export type HiveStatus = {
   recentCheckins: HiveCheckin[];
 };
 
-function workerFileUrl(id: string, name: "avatar.png" | "asic.png"): string | null {
+function workerFileUrl(
+  id: string,
+  name: "avatar.png" | "asic.png" | "badge.png",
+): string | null {
   const path = join(HIVE_ROOT, "mind/workers", id, name);
   return existsSync(path) ? `/api/hive/worker/${id}/file?name=${name}` : null;
 }
@@ -164,7 +167,8 @@ export function buildStatus(extraCheckins: HiveCheckin[] = []): HiveStatus {
       freshness: freshness(lastSeen),
       lastNote: mine?.note ?? null,
       avatarUrl: workerFileUrl(w.id, "avatar.png"),
-      plateUrl: workerFileUrl(w.id, "asic.png"),
+      plateUrl:
+        workerFileUrl(w.id, "badge.png") ?? workerFileUrl(w.id, "asic.png"),
     };
   });
   return {

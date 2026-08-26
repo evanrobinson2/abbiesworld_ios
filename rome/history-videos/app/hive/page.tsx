@@ -90,7 +90,7 @@ export default function HivePage() {
                           alt={w.id}
                           width={40}
                           height={40}
-                          className="h-10 w-10 rounded-md border border-indigo-mid object-cover"
+                          className="h-10 w-10 rounded-full border border-indigo-mid object-cover"
                         />
                       ) : null}
                       <div>
@@ -179,14 +179,14 @@ export default function HivePage() {
       {status?.workers.some((w) => w.plateUrl) ? (
         <section className="mt-8">
           <h2 className="text-sm tracking-wide text-bone-muted uppercase">
-            Wrench plate
+            Wrench badge
           </h2>
           <p className="mt-2 text-sm text-bone-muted">
-            Rune on an owner-paired ASIC. Open LLM + this harness. Bluetooth
-            and Wi‑Fi. Bound to Evan; iPod slots empty until he presents a
-            player.
+            A pin you wear. ASIC in the bezel — open LLM + this harness +
+            Bluetooth + Wi‑Fi. Bound to Evan. iPod slots empty until he
+            presents a player.
           </p>
-          <div className="mt-3 overflow-hidden rounded-xl border border-indigo-mid">
+          <div className="mt-3 flex justify-center rounded-xl border border-indigo-mid bg-indigo-deep/40 p-6">
             {status.workers
               .filter((w) => w.plateUrl)
               .map((w) => (
@@ -194,8 +194,8 @@ export default function HivePage() {
                 <img
                   key={w.id}
                   src={w.plateUrl ?? ""}
-                  alt={`${w.id} ASIC plate`}
-                  className="w-full max-w-md"
+                  alt={`${w.id} badge`}
+                  className="w-full max-w-xs rounded-full"
                 />
               ))}
           </div>

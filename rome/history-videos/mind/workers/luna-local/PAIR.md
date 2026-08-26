@@ -10,6 +10,7 @@ Owner and players. Secrets stay off git.
 | Hive identity | `mind/IDENTITY.md` |
 | Worker | `luna-local` (Wrench) |
 | Owner key | Device secure store only. Never committed. |
+| Form | Badge (pin). The node is on Evan, not on a desk. |
 | Status | **Bound in spec, unbound in silicon.** Gen 0 is this Mac. |
 
 If the owner key is absent, the node does not speak, sync, or accept a

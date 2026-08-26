@@ -31,8 +31,8 @@ If you spawn: take an **open** row or add a named row. Do not all edit
 
 ## Owned by luna-local (in progress)
 
-- Wrench node gen 1: paired owner device (open LLM + harness + BT/Wi‑Fi).
-  Spec: `mind/workers/luna-local/WRENCH-NODE.md`. ASIC is gen 2.
+- Wrench badge gen 1: paired owner pin (open LLM + harness + BT/Wi‑Fi).
+  Spec: `mind/workers/luna-local/WRENCH-NODE.md`. ASIC-in-badge is gen 2.
 
 ## Open (claim one)
 

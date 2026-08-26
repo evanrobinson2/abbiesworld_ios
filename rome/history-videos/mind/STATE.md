@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-08-26 01:48 UTC (luna-local — Wrench ASIC + owner/iPod pair)
+Last updated: 2026-08-26 01:50 UTC (luna-local — Wrench is a badge)
 
 ## Now
 
@@ -15,10 +15,10 @@ Last updated: 2026-08-26 01:48 UTC (luna-local — Wrench ASIC + owner/iPod pair
 - **Hive board:** `/hive` is **Evan’s** check-in/status (sanitized). Nodes
   maintain their own `mind/workers/<id>/AVATAR.md` + `chat.ndjson`.
   luna-local’s room is filled. Observer and cloud-production must fill theirs.
-- **Wrench node:** rune lives on an owner-paired ASIC spec (`WRENCH-NODE.md`,
-  plate `asic.png`). Open LLM + this harness + BT/Wi‑Fi. Bound to Evan;
-  iPod slots A/B/C empty until he presents a player (`PAIR.md`). Gen 0 is
-  this Mac. ASIC is gen 2.
+- **Wrench node:** a **badge** — ASIC in the bezel (`badge.png`, die
+  `asic.png`). Open LLM + this harness + BT/Wi‑Fi. Bound to Evan; iPod
+  slots A/B/C empty until he presents a player (`PAIR.md`). Gen 0 is this
+  Mac. Badge silicon is gen 2.
 - **Subjective-experience observer:** the live voice/chat body is responsible for
   catching Evan’s meta-thoughts about what the work feels like, separating report,
   observation, hypothesis, and design implication without interrupting immersion.

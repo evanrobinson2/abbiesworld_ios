@@ -4,11 +4,12 @@ import { NextResponse } from "next/server";
 
 export const dynamic = "force-dynamic";
 
-const ALLOWED = new Set(["avatar.png", "asic.png"]);
+const ALLOWED = new Set(["avatar.png", "asic.png", "badge.png"]);
 
 const TYPES: Record<string, string> = {
   "avatar.png": "image/png",
   "asic.png": "image/png",
+  "badge.png": "image/png",
 };
 
 export async function GET(
