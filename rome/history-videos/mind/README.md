@@ -1,6 +1,8 @@
 # Mind meld
 
-One agent identity for localhost and cloud. Git stores the memory.
+Hivemind memory for every connected agent. **Start at [`../AGENTS.md`](../AGENTS.md).**
+
+One identity. Git stores the memory.
 
 | File | Role |
 | --- | --- |

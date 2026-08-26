@@ -26,6 +26,7 @@ docs/           Cloud agent setup and secrets.
 
 ## Read in this order
 
+0. `AGENTS.md` — **connected agents / hivemind** (do this first if you are an agent)
 1. `bible/00-scope-and-decisions.md` — what this is, what's locked, what's deferred
 2. `bible/01-creative-principles.md` — the ten principles, non-negotiable
 3. `bible/02-style-bible.md` — the three-register system

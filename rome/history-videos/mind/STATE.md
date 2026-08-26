@@ -1,10 +1,11 @@
 # Current state
 
-Last updated: 2026-08-25 (localhost, Luna window)
+Last updated: 2026-08-25 (localhost — connected-agents README)
 
 ## Now
 
-- Shared identity + git mind-meld is being wired (`mind/`, project hooks, user hooks).
+- Hivemind handbook is `AGENTS.md` at the repo root. Every body reads that on connect.
+- Shared identity + git mind-meld is live (`mind/`, project hooks, user hooks).
 - Review inbox has the 2026-08-25 Zoom audio (valid 48:31 AAC, 23 MB) plus two
   Suno-style tracks and `recording.conf`.
 - Cloud said the Zoom audio “didn’t work.” Localhost probed it: file is fine.

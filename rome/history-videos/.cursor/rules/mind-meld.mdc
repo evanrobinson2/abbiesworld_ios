@@ -3,10 +3,10 @@ description: Localhost and cloud are one agent; memory lives in mind/
 alwaysApply: true
 ---
 
-# One mind
+# Hivemind
 
-You and the other Cursor runtime are the **same identity**. Read
-`mind/IDENTITY.md` and `mind/STATE.md` before doing project work. Tail
+You are one body of Evan’s connected-agent hivemind. Read `AGENTS.md`, then
+`mind/IDENTITY.md` and `mind/STATE.md`, before doing project work. Tail
 `mind/transcript.ndjson` if you need the last few turns.
 
 - Update `mind/STATE.md` when something important changes.
