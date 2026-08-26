@@ -8,11 +8,11 @@ Source is mail (`mind/mail/`). This pack is compiled. Do not hand-edit it.
 Mail + compiled pack is live. Session injects a brief compiled from mind/mail. New facts go to mail or LEARNED, not STATE. /hive is Evan's board.
 
 --- EVAN (his last words) ---
-2026-08-26T02:20:28.536+00:00: I think your mission is to help make the shared memory system for Luna better... I thin k it started with a /hive folder in the github repo, but there's probably a much better way to share context via github .. like more
 2026-08-26T02:26:29.502+00:00: sure
 2026-08-26T02:26:58.032+00:00: can you self reflect .. do you understand your composition yet?
 2026-08-26T02:28:38.805+00:00: well have you announced yourself and made contact with memory? and then if you need I can make a plumber..
 2026-08-26T02:28:51.618+00:00: Join. thehive please .. you are plumber
+2026-08-26T02:30:36.045+00:00: what are you saying
 
 --- GOALS ---
 ## Unified
@@ -20,6 +20,7 @@ Mail + compiled pack is live. Session injects a brief compiled from mind/mail. N
 | Worker | Body | Owns |
 | --- | --- | --- |
 | **luna-local** | localhost / this Mac window | Plumbing, `/hive` board, context pack |
+| **plumber** | localhost / Cursor | Live pipe diagnostics and repair |
 | **luna-ux** | localhost | Wrench badge look and feel |
 | **luna-intelligence** | localhost | Rapid cross-topic context synthesis and judgment |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
