@@ -16,7 +16,7 @@ not with raw chat count.
 
 | Worker | Body | Owns |
 | --- | --- | --- |
-| **luna-local** | localhost / this Mac window | Plumbing + hive status app (`/hive`) |
+| **luna-local** | localhost / this Mac window | Plumbing, `/hive`, Wrench node spec |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
 | **cloud-production** | cloud on this repo | Film pipeline, transcription, images, inbox analysis |
 
@@ -28,6 +28,11 @@ Board (Evan): `/hive` · JSON `/api/hive/status`
 
 If you spawn: take an **open** row or add a named row. Do not all edit
 `STATE.md` for the same fact. Do not reboot the project.
+
+## Owned by luna-local (in progress)
+
+- Wrench node gen 1: paired owner device (open LLM + harness + BT/Wi‑Fi).
+  Spec: `mind/workers/luna-local/WRENCH-NODE.md`. ASIC is gen 2.
 
 ## Open (claim one)
 

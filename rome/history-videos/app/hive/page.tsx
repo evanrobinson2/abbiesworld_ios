@@ -82,19 +82,33 @@ export default function HivePage() {
               {status?.workers.map((w) => (
                 <tr key={w.id} className="border-t border-indigo-mid/60">
                   <td className="px-3 py-2">
-                    <span
-                      className={
-                        w.freshness === "online"
-                          ? "text-keep"
-                          : w.freshness === "stale"
-                            ? "text-gold-warm"
-                            : "text-iron"
-                      }
-                    >
-                      {w.freshness}
-                    </span>{" "}
-                    <span className="font-medium">{w.id}</span>
-                    <div className="text-xs text-iron">{w.body}</div>
+                    <div className="flex items-center gap-3">
+                      {w.plateUrl || w.avatarUrl ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img
+                          src={w.plateUrl ?? w.avatarUrl ?? ""}
+                          alt={w.id}
+                          width={40}
+                          height={40}
+                          className="h-10 w-10 rounded-md border border-indigo-mid object-cover"
+                        />
+                      ) : null}
+                      <div>
+                        <span
+                          className={
+                            w.freshness === "online"
+                              ? "text-keep"
+                              : w.freshness === "stale"
+                                ? "text-gold-warm"
+                                : "text-iron"
+                          }
+                        >
+                          {w.freshness}
+                        </span>{" "}
+                        <span className="font-medium">{w.id}</span>
+                        <div className="text-xs text-iron">{w.body}</div>
+                      </div>
+                    </div>
                   </td>
                   <td className="px-3 py-2 font-mono text-xs">
                     {w.lastSeen ?? "—"}
@@ -161,6 +175,32 @@ export default function HivePage() {
           {sending ? "Checking in…" : "Check in"}
         </button>
       </section>
+
+      {status?.workers.some((w) => w.plateUrl) ? (
+        <section className="mt-8">
+          <h2 className="text-sm tracking-wide text-bone-muted uppercase">
+            Wrench plate
+          </h2>
+          <p className="mt-2 text-sm text-bone-muted">
+            Rune on an owner-paired ASIC. Open LLM + this harness. Bluetooth
+            and Wi‑Fi. Bound to Evan; iPod slots empty until he presents a
+            player.
+          </p>
+          <div className="mt-3 overflow-hidden rounded-xl border border-indigo-mid">
+            {status.workers
+              .filter((w) => w.plateUrl)
+              .map((w) => (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  key={w.id}
+                  src={w.plateUrl ?? ""}
+                  alt={`${w.id} ASIC plate`}
+                  className="w-full max-w-md"
+                />
+              ))}
+          </div>
+        </section>
+      ) : null}
 
       {status && status.open.length > 0 ? (
         <section className="mt-8">

@@ -27,11 +27,18 @@ export type HiveStatus = {
       lastSeen: string | null;
       freshness: "online" | "stale" | "silent";
       lastNote: string | null;
+      avatarUrl: string | null;
+      plateUrl: string | null;
     }
   >;
   open: string[];
   recentCheckins: HiveCheckin[];
 };
+
+function workerFileUrl(id: string, name: "avatar.png" | "asic.png"): string | null {
+  const path = join(HIVE_ROOT, "mind/workers", id, name);
+  return existsSync(path) ? `/api/hive/worker/${id}/file?name=${name}` : null;
+}
 
 function read(rel: string): string {
   const path = join(HIVE_ROOT, rel);
@@ -156,6 +163,8 @@ export function buildStatus(extraCheckins: HiveCheckin[] = []): HiveStatus {
       lastSeen,
       freshness: freshness(lastSeen),
       lastNote: mine?.note ?? null,
+      avatarUrl: workerFileUrl(w.id, "avatar.png"),
+      plateUrl: workerFileUrl(w.id, "asic.png"),
     };
   });
   return {
