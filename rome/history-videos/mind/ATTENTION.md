@@ -1,14 +1,15 @@
 # Attention
 
-Last updated: 2026-08-26 01:55 UTC (luna-local)
+Last updated: 2026-08-26 02:02 UTC (luna-local)
 
 This file is Evan’s **current thread**. Session start injects it first.
 Overwrite it when the thread moves. Do not let it become a second STATE.
 
 ## Now
 
-Badge is **luna-ux**. Context pack is Attention-first plus Evan’s last
-words. Next body should continue *this* thread, not restart.
+luna-ux took the badge. It sits on `/hive` as a lapel pin (cloth, clutch,
+empty iPod docks). Face is **Bezel**. Close-up `/hive/luna-ux`. Context
+pack is still Attention-first.
 
 ## Last words
 

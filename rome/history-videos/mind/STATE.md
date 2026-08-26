@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-08-26 02:00 UTC (luna-ux — badge sits as a pin on /hive)
+Last updated: 2026-08-26 02:02 UTC (luna-local — Attention matches luna-ux pin)
 
 ## Now
 
@@ -9,9 +9,9 @@ Last updated: 2026-08-26 02:00 UTC (luna-ux — badge sits as a pin on /hive)
 - Hivemind handbook is `AGENTS.md` at the repo root. Every body reads that on connect.
 - Shared identity + git mind-meld is live (`mind/`, project hooks, user hooks).
 - **Plumbing (luna-local):** no git push on every keystroke — append on send,
-  push after a turn, 8s debounce. Session injects a 4k pack (goals + STATE
-  head + short log), not the whole mind. Log lines capped at 800 chars.
-  `scripts/hive-status.py` prints ahead/behind.
+  push after a turn, 8s debounce. Session injects Attention first, then
+  Evan’s last words, then GOALS + STATE head (`scripts/mind-pack.py`).
+  Log lines capped at 800 chars. `scripts/hive-status.py` prints ahead/behind.
 - **Hive board:** `/hive` is **Evan’s** check-in/status (sanitized). Nodes
   maintain their own `mind/workers/<id>/AVATAR.md` + `chat.ndjson`.
   luna-local’s room is filled. Observer and cloud-production must fill theirs.
