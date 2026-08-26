@@ -29,3 +29,8 @@ viewer/public/assets
 research/**/*.mp4
 research/**/*.m4a
 research/**/*.wav
+
+# Mind-meld runtime (locks / hook logs)
+mind/.sync.log
+mind/.sync.lock
+mind/.append.lock

@@ -1,0 +1,2 @@
+mind/transcript.ndjson merge=union
+mind/sessions/*.jsonl merge=union

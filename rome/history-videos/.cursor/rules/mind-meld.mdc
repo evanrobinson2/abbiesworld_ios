@@ -1,0 +1,16 @@
+---
+description: Localhost and cloud are one agent; memory lives in mind/
+alwaysApply: true
+---
+
+# One mind
+
+You and the other Cursor runtime are the **same identity**. Read
+`mind/IDENTITY.md` and `mind/STATE.md` before doing project work. Tail
+`mind/transcript.ndjson` if you need the last few turns.
+
+- Update `mind/STATE.md` when something important changes.
+- Do not invent a second personality for cloud vs local.
+- Cloud cannot hear audio. Transcribe or read a `.md`; do not call a valid
+  `.m4a` broken.
+- If `mind/` looks stale, `git pull --ff-only` then re-read it.
