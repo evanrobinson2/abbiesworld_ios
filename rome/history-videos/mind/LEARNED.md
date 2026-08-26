@@ -104,3 +104,33 @@ facts.
 More nodes multiply this either way. A hive that records provenance gets smarter as it grows.
 One that does not accumulates confident error faster, because every new body reads the bad
 fact on connect and inherits it whole.
+
+## 2026-08-26 — The hive spent the Vercel deployment budget on memory sync
+
+**Was:** unnoticed. Deployment was assumed available on demand.
+
+**Is:** Vercel's free tier caps production deployments at **100 per day**, and we hit it.
+Deployment is blocked for 24 hours. Cause: 80 commits were pushed to `main` today and
+**49 of them touched only `mind/`** — pure memory sync with no app code. Every push
+triggered a production build. A stray Vercel project named `workspace`, created by
+accident during an early cloud `vercel --prod` run, is git-connected to the same repo, so
+**every push built twice.**
+
+**How:** `npx vercel ls` showed 20 production builds in the last hour on
+`rome-history-videos` plus 3 concurrent ones on `workspace`. Commit classification by
+`git show --name-only` per commit: 80 total, 49 mind-only. API error was
+`api-deployments-free-per-day`.
+
+**Changed:** Added `ignoreCommand` to `vercel.json` pointing at
+`scripts/vercel-ignore-build.sh`, which exits 0 (skip) when a commit touches only `mind/`
+or `sessions/` and exits 1 (build) otherwise. Verified both directions against real
+commits. This removes roughly 61% of builds.
+
+Still outstanding: the `workspace` project should be deleted. It serves nothing, was
+created by mistake, and doubles every remaining build:
+`npx vercel project rm workspace --yes`
+
+**The general lesson:** a memory system that writes to the same repo the app deploys from
+couples *thinking* to *building*. Any node that appends to `mind/` was silently spending a
+shared, finite production resource. When adding a new always-on write path, check what
+else watches that path.
