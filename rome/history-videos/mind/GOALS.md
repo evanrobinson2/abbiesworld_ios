@@ -20,6 +20,7 @@ not with raw chat count.
 | **luna-ux** | localhost | Wrench badge look and feel |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
 | **cloud-production** | cloud on this repo | Film pipeline, transcription, images, inbox analysis |
+| **art-alr001** | cloud subagent | `ALR-001` Alaric turnaround |
 
 `/hive` is **Evan’s** check-in/status board. You maintain your own avatar
 and chat under `mind/workers/<you>/`. Do not use `/hive` as your conversation.
