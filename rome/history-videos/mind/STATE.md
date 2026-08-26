@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-08-26 01:56 UTC (luna-local — badge → luna-ux; Attention-first pack)
+Last updated: 2026-08-26 02:00 UTC (luna-ux — badge sits as a pin on /hive)
 
 ## Now
 
@@ -18,6 +18,7 @@ Last updated: 2026-08-26 01:56 UTC (luna-local — badge → luna-ux; Attention-
 - **Wrench node:** a **badge**. Look/feel handed to **luna-ux**
   (`mind/workers/luna-ux/HANDOFF.md`). Spec + pair still in luna-local
   room until they move it. Owner-paired; iPod slots empty.
+  On `/hive` it sits on cloth as a lapel pin (not a table dump). Room: `/hive/luna-ux`.
 - **Context pack:** Attention-first. `mind/ATTENTION.md` + Evan’s last
   prompts inject before GOALS/STATE. Inspect: `python3 scripts/mind-pack.py`.
 - **Subjective-experience observer:** the live voice/chat body is responsible for

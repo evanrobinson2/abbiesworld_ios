@@ -66,3 +66,129 @@ body {
 .thumb-scroller::-webkit-scrollbar {
   display: none;
 }
+
+/* Wrench badge — lapel, not a table dump */
+.badge-wear {
+  display: grid;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+@media (min-width: 640px) {
+  .badge-wear {
+    grid-template-columns: minmax(13rem, 16rem) 1fr;
+    gap: 1.75rem;
+  }
+
+  .badge-wear-room {
+    grid-template-columns: minmax(16rem, 20rem) 1fr;
+  }
+}
+
+.badge-lapel {
+  position: relative;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 0.35rem;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(196, 163, 90, 0.12), transparent 52%),
+    repeating-linear-gradient(
+      0deg,
+      #141c2e 0px,
+      #171f34 1px,
+      #121a2c 2px
+    );
+  box-shadow:
+    inset 0 0 48px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(196, 163, 90, 0.12);
+  overflow: hidden;
+}
+
+.badge-pin {
+  width: 62%;
+  height: auto;
+  filter:
+    drop-shadow(0 16px 20px rgba(0, 0, 0, 0.62))
+    drop-shadow(0 2px 0 rgba(196, 163, 90, 0.2));
+}
+
+.badge-wear-room .badge-pin {
+  width: 70%;
+}
+
+.badge-clutch {
+  position: absolute;
+  bottom: 0.65rem;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--color-gold-warm) 70%, var(--color-iron));
+}
+
+.badge-card {
+  margin: 0;
+}
+
+.badge-kicker {
+  margin: 0;
+  font-size: 0.7rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold-warm);
+}
+
+.badge-title {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  font-weight: 500;
+  color: var(--color-bone);
+}
+
+.badge-lede {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  color: var(--color-bone-muted);
+}
+
+.badge-slots {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.badge-slots li {
+  display: grid;
+  grid-template-columns: 3.4rem 1fr auto;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-size: 0.8rem;
+}
+
+.badge-dock {
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-iron);
+}
+
+.badge-what {
+  color: var(--color-bone);
+}
+
+.badge-bound {
+  font-style: normal;
+  color: var(--color-keep);
+}
+
+.badge-empty {
+  font-style: normal;
+  color: var(--color-iron);
+}
