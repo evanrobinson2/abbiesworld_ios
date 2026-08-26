@@ -88,7 +88,29 @@ if ! git pull --ff-only; then
 fi
 
 cp "$SRC" "$DEST"
-git add -- "$DEST"
+
+abs_src="$(cd "$(dirname "$SRC")" && pwd)/$(basename "$SRC")"
+if [[ "$ROOT" == /Users/* ]]; then
+  via="user uploaded via localhost"
+else
+  via="user uploaded via cloud"
+fi
+
+log="feedback/inbox/README.md"
+if [[ ! -f "$log" ]]; then
+  cat > "$log" <<'EOF'
+# Inbox log
+
+Where each file came from. A Mac path here is provenance only — cloud agents
+cannot open it. Use the file in this folder.
+
+| File | Landed | Original path | How |
+| --- | --- | --- | --- |
+EOF
+fi
+printf '| %s | %s | `%s` | %s |\n' "$NAME" "$today" "$abs_src" "$via" >> "$log"
+
+git add -- "$DEST" "$log"
 
 if git diff --cached --quiet -- "$DEST"; then
   echo "Nothing new to commit (already in repo?)"
