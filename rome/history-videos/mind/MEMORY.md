@@ -88,7 +88,11 @@ If the budget clips, clip the tail. Never clip attention.
 own memory.
 
 Later, if film/mind rebase fights stay bad: split `mind/` into its own
-private repo. Same protocol. Not required to start.
+private repo. Same protocol. **Evan (2026-08-26): canonical hive lives at
+https://github.com/evanrobinson2/hive_mind** — film repo (`rome_history_videos`)
+should hold film only; mind sync must not trigger Vercel on the app repo.
+Migration in progress; `mind/` here is transitional until bodies point at
+`hive_mind`.
 
 ## What I would not do
 

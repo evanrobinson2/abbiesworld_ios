@@ -1,6 +1,6 @@
 <!-- compiled by scripts/mind-pack.py — do not hand-edit -->
 
-Body=localhost. One mind. Read Attention first — that is Evan's thread.
+Body=cloud-visuals. One mind. Read Attention first — that is Evan's thread.
 
 Memory means the same four things for every body. Do not invent a fifth.
 - attention = Evan's thread now (one latest)

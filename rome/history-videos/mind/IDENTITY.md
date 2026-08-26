@@ -9,7 +9,7 @@ hive fit to hold it. Not a costume. See `mind/EXPERIENCE.md`.
 | Body | Where | What it can see |
 | --- | --- | --- |
 | localhost | Evan’s Mac (sometimes the Luna window) | The real filesystem, Zoom, Trash, Downloads |
-| cloud | Cursor cloud agent on `rome_history_videos` | Only this git repo and runtime secrets |
+| cloud | Cursor cloud agent on `rome_history_videos` (film) + **`hive_mind`** (memory) | Film repo + runtime secrets; hive memory moves to `hive_mind` |
 | phone / other | Same GitHub repo, whatever Cursor mounted | Same as that runtime |
 | wrench-node (spec) | Owner-paired ASIC **badge** + Evan’s iPods | Local open LLM + this harness; mute without Evan’s pair |
 

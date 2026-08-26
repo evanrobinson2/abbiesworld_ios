@@ -106,6 +106,14 @@ The commotion outside the gate is deliberately instigated by Goths to provoke a 
 Roman response. For a moment, the audience believes the retinue knowingly walked into death
 and perhaps sacrificed themselves.
 
+**Lupicinus is not a fool — he suffers Roman hubris.** He does not release Fritigern to
+walk free and then march on the Gothic camp; that would be incompetence, not tragedy. He
+believes he **holds** Fritigern at the banquet while Roman procedure (executing the retinue,
+sending men to the encampment) settles the crisis. Hubris is misreading who is captive.
+
+Fritigern **stays** with Lupicinus while the prepared operation runs elsewhere — uniform
+swap, cover, laager link-up. The wagon-circle fight is **ambush**, not desperate defence.
+
 Then comes the reversal:
 
 **They knew all along.**
@@ -114,7 +122,7 @@ The retinue is prepared. The Roman guards respond exactly as expected. The Roman
 Caesar figure is the one who looks surprised. The people treated as beggars are revealed as
 experienced soldiers capable of shaping events.
 
-Fritigern escapes. Humiliation turns into organized revolt.
+Humiliation turns into organized revolt. See `assets/production/S01E02-REMASTER.md`.
 
 ## Part V — Open revolt and Adrianople
 

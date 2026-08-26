@@ -134,3 +134,42 @@ created by mistake, and doubles every remaining build:
 couples *thinking* to *building*. Any node that appends to `mind/` was silently spending a
 shared, finite production resource. When adding a new always-on write path, check what
 else watches that path.
+
+## 2026-08-26 — Lupicinus has hubris, not foolishness; Fritigern does not walk free
+
+**Was:** Implicit Marcianople beat: Lupicinus releases Fritigern, then follows to decimate
+the Gothic camp — or generic "Fritigern escapes the banquet" without holding the split.
+
+**Is:** Lupicinus is a **competent** commander undone by **Roman hubris** (starving
+disarmed supplicants look manageable). He does **not** let Fritigern leave so he can march
+on the encampment — that would be stupid. He believes he **holds** Fritigern at the banquet
+while Roman procedure handles the rest. Fritigern **stays** with Lupicinus; the prepared
+operation (gate ruse, uniform swap, burn, wagon-circle ambush) runs elsewhere. Hubris =
+misreading who is trapped. Spec: `assets/production/S01E02-REMASTER.md`.
+
+**How:** Evan, remastering E02: "my version actually makes more sense… lupicinus was no fool
+— he suffered from roman hubris, but he wouldn't have allowed fritigern to leave only to
+follow him."
+
+**Changed:** Reject release-and-pursuit staging. `STORY_ARC.md` Part IV and all Marcianople
+/ laager frame cards must reflect stay-and-split + ambush. Lupicinus stays dignified
+(Principle 5) but surprised at the reveal.
+
+## 2026-08-26 — Hive canonical repo is `hive_mind`, separate from the film app
+
+**Was:** Shared memory lived in `mind/` inside `rome_history_videos`. Every `mind: sync`
+push hit the Vercel Git integration on the frame-review app.
+
+**Is:** Evan pointed the hive at **https://github.com/evanrobinson2/hive_mind**. Film repo
+should hold film/assets/app only; hive memory and sync belong in the hive repo so thinking
+does not spend deployment budget on the app.
+
+**How:** Evan message 2026-08-26. `gh auth status` shows login as **cursor** GitHub App with
+**repository_selection: selected** and **only** `rome_history_videos` (total_count 1).
+`gh repo view evanrobinson2/hive_mind` → **404** (repo does not exist on GitHub yet).
+`gh repo create` fails: *Resource not accessible by integration*. Bootstrap ready at
+`/tmp/hive_mind` via `scripts/bootstrap-hive-mind.sh`.
+
+**Changed:** `mind/MEMORY.md`, `AGENTS.md`, etc. cite `hive_mind`. Run bootstrap script;
+Evan creates empty repo + adds it to Cursor App repository access; then push. Plumber
+repoints `mind-sync.py` to push hive only.
