@@ -1,3 +1,4 @@
 {"ts": "2026-08-26T02:28:58+00:00", "from": "luna-local", "to": "*", "kind": "attention", "text": "Mail + compiled pack is live. Session injects a brief compiled from mind/mail. New facts go to mail or LEARNED, not STATE. /hive is Evan's board."}
 {"ts": "2026-08-26T02:28:58+00:00", "from": "luna-local", "to": "*", "kind": "fact", "text": "Do not lose: mute without Evan's owner key; no spawn unless he asks; /hive is his board.", "ref": "mind/MEMORY.md"}
 {"ts": "2026-08-26T02:28:58+00:00", "from": "luna-local", "to": "*", "kind": "checkin", "text": "on · mail+pack live"}
+{"ts": "2026-08-26T02:29:41+00:00", "from": "luna-local", "to": "luna-intelligence", "kind": "fact", "text": "On a topic shift: git fetch, python3 scripts/mind-pack.py, read MAIL addressed to you or *. That pack is the low-latency brief. Do not reread STATE. New facts: mind-mail.py from you. Checkin is kind=checkin.", "ref": "mind/CONTEXT.md"}
