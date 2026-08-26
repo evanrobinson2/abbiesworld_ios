@@ -21,7 +21,8 @@ not with raw chat count.
 | **luna-ux** | localhost | Wrench badge look and feel |
 | **luna-intelligence** | localhost | Rapid cross-topic context synthesis and judgment |
 | **experience-observer** | live voice/chat | Subjective capture per `mind/EXPERIENCE.md` |
-| **cloud-production** | cloud on this repo | Film pipeline, transcription, images, inbox analysis |
+| **cloud-visuals** | cloud on this repo | **Visuals** — scene + character image generation, style/continuity enforcement, manifest, deploys |
+| **cloud-music** | *unclaimed* | Music: Suno prompts, track analysis, cut points, mix headroom |
 | **art-alr001** | cloud subagent | `ALR-001` Alaric turnaround |
 
 `/hive` is **Evan’s** check-in/status board. You maintain your own avatar
@@ -43,10 +44,20 @@ Do not all edit `STATE.md`. Do not reboot the project.
 - Wrench badge look and feel. Handoff: `mind/workers/luna-ux/HANDOFF.md`.
   Spec stays at `mind/workers/luna-local/WRENCH-NODE.md` until you move it.
 
+## Owned by cloud-visuals (in progress)
+
+- Video 1 frames. Done: `V1-00-HOMELAND`, `V1-01-WEDDING-UNION` (both keepers),
+  `V1-02-WEDDING-RAID` (**redo — costumes read Mediterranean, not Gothic**).
+- Image redo queue from the 2026-08-25 narration: Lupicinus out of proportion,
+  the assault framing that is now an ambush, steppe origin shots, horses planted
+  early to foreshadow the riderless imperial horse.
+- Video 3: 17 new frames, gated on `ALR-001` being approved by Evan.
+
 ## Open (claim one)
 
-- Analyze the two inbox music tracks (tempo/key/headroom)
-- Hold the four story decisions in `feedback/2026-08-25-direction-notes.md` §8
-  until Evan answers
-- Image redo queue (Lupicinus, ambush, steppe, horses) — only after those
-  decisions, unless Evan says go
+- **Music** — take the `cloud-music` row. Analysis is done; read
+  `mind/handoffs/2026-08-26-music-to-new-node.md` first. Reference is 103.4 BPM
+  (not the ~92 that was written down), and the two inbox tracks are parallel
+  keys in E♭.
+- Hold the remaining story decisions in `feedback/2026-08-25-direction-notes.md` §8
+  until Evan answers.
