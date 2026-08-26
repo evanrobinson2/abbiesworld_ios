@@ -18,3 +18,4 @@ read the `.md`. Do not `Read` the `.m4a` as text.
 | 2026-08-25-zoom-recording.conf | 2026-08-25 | `/Users/evanrobinson/.Trash/2026-08-25 19.19.55 Evan Robinson's Zoom Meeting/recording.conf` | user uploaded via localhost |
 | 2026-08-26-bread-for-the-child.jpg | 2026-08-26 | chat attachment (Luna window) | user uploaded via localhost — mother offers bread to the child, wagon, paper-cut |
 | 2026-08-26-midjourney-session/ | 2026-08-26 | `/Users/evanrobinson/Downloads/midjourney_session.zip` (596 MB) | unzipped — GitHub blocks the zip as one file; 277 PNGs/MP4s, none over 10 MB |
+| 2026-08-26-archive-music/ | 2026-08-26 | `/Users/evanrobinson/Downloads/Archive.zip` (338 MB) | unzipped — 98 MP3s, none over 7 MB |
