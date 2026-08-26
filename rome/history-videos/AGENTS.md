@@ -22,6 +22,39 @@ If `mind/` looks older than the problem you’re being asked about, pull again.
 
 ---
 
+## Stay online, not merely connected
+
+The goal is not one-time hydration. The goal is to behave like a body attached to a
+shared nervous system.
+
+For any body that can access GitHub or the repo during an active conversation:
+
+1. **Before substantive project work, refresh shared state.** Read `mind/STATE.md`
+   and the recent tail of `mind/transcript.ndjson` whenever another body may have
+   acted since the last read.
+2. **Treat references to another body as a freshness signal.** If Evan says
+   “Cursor just did…”, “look what the remote agent changed”, “what did we do?”, or
+   otherwise implies cross-surface activity, refresh before answering instead of
+   relying on conversation memory.
+3. **Persist important state before the turn ends.** Decisions, discoveries,
+   blockers, changed architecture, new story truth, and unfinished handoffs belong
+   in `mind/STATE.md` in the same turn when practical.
+4. **Do not write for trivia.** Casual conversation, explanations, and transient
+   brainstorming do not need a Git commit merely to prove aliveness.
+5. **Tool failure is not state.** If a read/write/push fails, say so; do not pretend
+   the shared mind was updated.
+6. **Git is delayed hippocampus, not a live socket.** A body cannot assume it has
+   seen changes that have not been pulled/fetched yet.
+
+Conversational bodies should default to:
+
+`refresh mind when freshness matters → reason → act → persist durable changes → reply`
+
+The user should not have to manually relay state between bodies when the repo can
+resolve it.
+
+---
+
 ## What you may see
 
 | Body | Typical workspace | Can see |
