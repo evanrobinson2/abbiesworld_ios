@@ -113,3 +113,15 @@ Laager defense as full battle composition, not symbolic.
 - Characters: `assets/characters/`
 - Scenes: `assets/scenes/`
 - Artifacts mirror: `/opt/cursor/artifacts/scenes/` and `/opt/cursor/artifacts/characters/`
+
+---
+
+## G. Video 1 — the wedding and the wound (3)
+
+**Narrative framing:** Part I of `mind/STORY_ARC.md`. The Huns are never characters — only a mounted silhouette language on the ridge (per `STANZA-01-NORTH.md`). The wedding raid c.370 is the first touch, six years before the flight; see `assets/production/TIMELINE-CONTINUITY.md`.
+
+| # | File | Mood | Description |
+| --- | --- | --- | --- |
+| 51 | `V1-00-HOMELAND.png` | 7 Tenderness | Settled Gothic homeland c.370 — barley, timber village, cattle, river glint, deep parallax planes; the world they lose |
+| 52 | `V1-01-WEDDING-UNION.png` | 8 Levity | Two peoples joined: wanderers left with wagon, steppe horsemen right with horses; bride and groom the only visible faces |
+| 53 | `V1-02-WEDDING-RAID.png` | 14 Terror | Hunnic raid breaks the wedding — ridge silhouettes only, elders fallen, crowd splitting two ways, couple pulled clear looking back |

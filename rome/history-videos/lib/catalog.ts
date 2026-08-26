@@ -24,7 +24,7 @@ export function normalizeManifest(data: Manifest): Manifest {
 
 export function uniqueFacets(
   items: ShotItem[],
-  key: "storyPart" | "mood" | "category" | "stanza" | "version"
+  key: "storyPart" | "mood" | "category" | "stanza" | "version" | "arc"
 ): string[] {
   const set = new Set<string>();
   for (const item of items) {
@@ -33,6 +33,7 @@ export function uniqueFacets(
     else if (key === "category" && item.category) set.add(item.category);
     else if (key === "stanza" && item.stanza) set.add(item.stanza);
     else if (key === "version" && item.version) set.add(item.version);
+    else if (key === "arc" && item.arc) set.add(item.arc);
   }
   return [...set].filter((v) => v && v !== "—").sort((a, b) => a.localeCompare(b));
 }
@@ -40,7 +41,7 @@ export function uniqueFacets(
 export function filterItems(
   items: ShotItem[],
   filters: Partial<
-    Record<"storyPart" | "mood" | "category" | "stanza" | "version", string>
+    Record<"storyPart" | "mood" | "category" | "stanza" | "version" | "arc", string>
   >
 ): ShotItem[] {
   return items.filter((item) => {
@@ -49,6 +50,7 @@ export function filterItems(
     if (filters.category && item.category !== filters.category) return false;
     if (filters.stanza && item.stanza !== filters.stanza) return false;
     if (filters.version && item.version !== filters.version) return false;
+    if (filters.arc && item.arc !== filters.arc) return false;
     return true;
   });
 }

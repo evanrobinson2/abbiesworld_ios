@@ -43,10 +43,7 @@ export function ViewerShell({ initialManifest }: ViewerShellProps) {
   const [copied, setCopied] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [thumbSize, setThumbSize] = useState<ThumbSize>("M");
-  const [partFilter, setPartFilter] = useState<string>();
-  const [moodFilter, setMoodFilter] = useState<string>();
-  const [categoryFilter, setCategoryFilter] = useState<string>();
-  const [versionFilter, setVersionFilter] = useState<string>();
+  const [arcFilter, setArcFilter] = useState<string>();
 
   useEffect(() => {
     setFeedbackState(loadFeedback());
@@ -70,37 +67,20 @@ export function ViewerShell({ initialManifest }: ViewerShellProps) {
 
   const filtered = useMemo(
     () =>
-      filterItems(manifest.items, {
-        storyPart: partFilter,
-        mood: moodFilter,
-        category: categoryFilter,
-        version: versionFilter,
-      }),
-    [manifest.items, partFilter, moodFilter, categoryFilter, versionFilter]
+      filterItems(manifest.items, { arc: arcFilter }),
+    [manifest.items, arcFilter]
   );
 
   // Clamp index when filters change
   useEffect(() => {
     setIndex(0);
-  }, [partFilter, moodFilter, categoryFilter, versionFilter]);
+  }, [arcFilter]);
 
   const item = filtered[index];
   const currentAction = item ? feedback[item.id]?.action ?? null : null;
 
-  const partOptions = useMemo(
-    () => uniqueFacets(manifest.items, "storyPart"),
-    [manifest.items]
-  );
-  const moodOptions = useMemo(
-    () => uniqueFacets(manifest.items, "mood"),
-    [manifest.items]
-  );
-  const categoryOptions = useMemo(
-    () => uniqueFacets(manifest.items, "category"),
-    [manifest.items]
-  );
-  const versionOptions = useMemo(
-    () => uniqueFacets(manifest.items, "version"),
+  const arcOptions = useMemo(
+    () => uniqueFacets(manifest.items, "arc"),
     [manifest.items]
   );
 
@@ -184,12 +164,7 @@ export function ViewerShell({ initialManifest }: ViewerShellProps) {
         <button
           type="button"
           className="ml-3 text-gold-warm"
-          onClick={() => {
-            setPartFilter(undefined);
-            setMoodFilter(undefined);
-            setCategoryFilter(undefined);
-            setVersionFilter(undefined);
-          }}
+          onClick={() => setArcFilter(undefined)}
         >
           Clear
         </button>
@@ -267,32 +242,12 @@ export function ViewerShell({ initialManifest }: ViewerShellProps) {
           </p>
         </header>
 
-        <div className="flex flex-col gap-2">
-          <FacetBar
-            label="Part"
-            options={partOptions}
-            value={partFilter}
-            onChange={setPartFilter}
-          />
-          <FacetBar
-            label="Mood"
-            options={moodOptions}
-            value={moodFilter}
-            onChange={setMoodFilter}
-          />
-          <FacetBar
-            label="Type"
-            options={categoryOptions}
-            value={categoryFilter}
-            onChange={setCategoryFilter}
-          />
-          <FacetBar
-            label="Ver"
-            options={versionOptions}
-            value={versionFilter}
-            onChange={setVersionFilter}
-          />
-        </div>
+        <FacetBar
+          label="Arc"
+          options={arcOptions}
+          value={arcFilter}
+          onChange={setArcFilter}
+        />
 
         <ImageStage
           item={viewItem}

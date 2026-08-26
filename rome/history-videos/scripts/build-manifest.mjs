@@ -56,7 +56,8 @@ function parseShotList(md) {
   let sectionNarrative = "";
 
   for (const line of md.split("\n")) {
-    const sec = line.match(/^## ([A-F])\.\s+(.+)$/);
+    // Section letters: originally A-F, widened to A-Z for Video 1 material.
+    const sec = line.match(/^## ([A-Z])\.\s+(.+)$/);
     if (sec) {
       section = sec[1];
       sectionTitle = sec[2].trim();
@@ -89,9 +90,24 @@ function parseShotList(md) {
       register,
       description,
       category: filename.startsWith("VAL-") ? "character" : "scene",
+      arc: arcForSection(section),
     });
   }
   return shots;
+}
+
+/**
+ * Which of the three films a shot belongs to, per mind/STORY_ARC.md.
+ *   G          -> Video 1 (Parts I-II: the wedding, the wound, Alaric's birth)
+ *   A-F        -> Video 2 (Parts III-V: flight, Rome, humiliation, banquet, Adrianople)
+ *   T          -> Reference sheets, not in any film
+ * Video 3 (Parts VI-VII + final movement) has no frames generated yet.
+ */
+function arcForSection(section) {
+  if (section === "G") return "Video 1 — The Making of Alaric";
+  if (section === "T") return "Reference";
+  if ("ABCDEF".includes(section)) return "Video 2 — Flight to Adrianople";
+  return "Unassigned";
 }
 
 function parseReview(md) {
@@ -430,6 +446,7 @@ function buildTurnaroundExtras(prompts) {
         "Fritigern four-view turnaround — tallest Gothic principal, cleaner jaw, fur-trim cloak",
       category: "turnaround",
       storyPart: "T. Turnarounds — identity locks",
+      arc: "Reference",
       storyBeat:
         "Fritigern identity lock: four views, face visible, travelling cloak, sword at hip",
       tags: ["turnaround", "FRI-001", "Gothic"],
@@ -451,6 +468,7 @@ function buildTurnaroundExtras(prompts) {
         "Alavivus four-view turnaround — leaner, fuller beard, one-shoulder cloak (not Alaric)",
       category: "turnaround",
       storyPart: "T. Turnarounds — identity locks",
+      arc: "Reference",
       storyBeat:
         "Alavivus identity lock: mid-30s, medium beard, asymmetric cloak pin — not Alaric",
       tags: ["turnaround", "ALA-001", "Gothic"],
@@ -470,6 +488,7 @@ function buildTurnaroundExtras(prompts) {
         "Lupicinus four-view turnaround — Roman host, convivial, calcei, no gold trim",
       category: "turnaround",
       storyPart: "T. Turnarounds — identity locks",
+      arc: "Reference",
       storyBeat:
         "Lupicinus identity lock: Roman commander, Principle 5 dignity, columnar tunic",
       tags: ["turnaround", "LUP-001", "Roman"],
@@ -489,6 +508,7 @@ function buildTurnaroundExtras(prompts) {
         "Alaric four-view turnaround — mature commander, scale armour, tired not sanctified; Fritigern's son in the fictional continuity",
       category: "turnaround",
       storyPart: "T. Turnarounds — identity locks",
+      arc: "Reference",
       storyBeat:
         "Alaric identity lock: ~35-40, child of both peoples — father's jaw, mother's steppe bearing; gates every Video 3 frame",
       tags: ["turnaround", "ALR-001", "Gothic", "Video3"],
@@ -508,6 +528,7 @@ function buildTurnaroundExtras(prompts) {
       description: "Fritigern + Alavivus paired reference for relative scale and costume",
       category: "character",
       storyPart: "T. Turnarounds — identity locks",
+      arc: "Reference",
       storyBeat: "Gothic banquet pair — height and cloak contrast lock",
       tags: ["pair", "FRI-001", "ALA-001", "Gothic"],
       prompt:
@@ -544,6 +565,7 @@ function enrich(shot, reviewMap, prompts) {
   return {
     ...shot,
     storyPart: shot.storyPart || `${shot.section}. ${shot.sectionTitle}`,
+    arc: shot.arc || arcForSection(shot.section),
     storyBeat: shot.storyBeat || shot.description,
     prompt: shot.prompt || prompts[filename] || `${shot.description}. ${STYLE_SUFFIX}`,
     url: imagePath,

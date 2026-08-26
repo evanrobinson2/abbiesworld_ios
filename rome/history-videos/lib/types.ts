@@ -81,6 +81,8 @@ export interface ShotItem {
   mood?: Mood | string;
   register?: string;
   category?: string;
+  /** Which film this frame belongs to, e.g. "Video 1 — The Making of Alaric". */
+  arc?: string;
   description?: string;
   prompt?: string;
   tags?: string[];
