@@ -33,18 +33,17 @@ problem to solve. This is the cheapest workflow by a wide margin.
 
 ## How to send
 
+Drop the file on the agent (or paste a path / Zoom folder). It runs:
+
 ```bash
-cd /path/to/rome_history_videos
-mkdir -p feedback/inbox
-
-# audio only (recommended)
-cp "/Users/evanrobinson/Documents/Zoom/2026-08-25 19.19.55 Evan Robinson's Zoom Meeting/audio1834333043.m4a" \
-   feedback/inbox/
-
-git add feedback/inbox && git commit -m "Add review recording 2026-08-25" && git push
+scripts/inbox-recording.sh "/path/to/audio.m4a"
+# or a Zoom meeting folder — picks audio*.m4a
+scripts/inbox-recording.sh "/Users/…/Evan Robinson's Zoom Meeting"
 ```
 
-Then tell the agent it has landed.
+The script pulls, copies into `feedback/inbox/`, commits only that file, and pushes.
+
+Then tell the agent it has landed — or just drop the file; that is enough.
 
 ---
 
