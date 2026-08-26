@@ -13,6 +13,9 @@ You are a node. The repo is the nervous system. Don’t thrash it.
 7. **Fail honestly.** If pull/push dies, say so.
 8. **Keep your own face.** Maintain `mind/workers/<you>/AVATAR.md` and
    `chat.ndjson`. `/hive` is Evan’s dashboard, not your salon.
+9. **Same memory words.** Attention = his thread now. Mail = messages,
+   not truth. LEARNED = a correction with How that changes how you act.
+   Pack = a view. Your window is not the hive. Do not invent a fifth store.
 
 Context budget on connect: the compiled pack (`mind/pack.md`). Attention
 first. Not the film bible. Not agent monologues. Not every session jsonl.

@@ -19,6 +19,16 @@ Order inside the pack:
 
 Inspect: `python3 scripts/mind-pack.py`
 
+These words mean the **same thing** on every node. A node that uses
+“memory” to mean its chat history is wrong.
+
+| Word | Means | Does not mean |
+| --- | --- | --- |
+| attention | Latest thread Evan is in | A diary of the day |
+| mail | Addressed message | Proven fact |
+| LEARNED | Correction with How that changes action | A vibe, a recap, a theory |
+| pack | Compiled view of the above | A place you write |
+
 Kinds: `attention` | `fact` | `handoff` | `felt` | `checkin` | `ask`.
 
 New facts go to mail or `LEARNED.md`. Not `STATE.md`.

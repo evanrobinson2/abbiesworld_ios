@@ -170,7 +170,11 @@ def build_pack(body: str) -> str:
     dontlose = [r for r in facts if "do not lose" in str(r.get("text") or "").lower()]
     parts = [
         f"Body={body}. One mind. Read Attention first — that is Evan's thread.",
-        "Source is mail (`mind/mail/`). This pack is compiled. Do not hand-edit it.",
+        "Memory means the same four things for every body. Do not invent a fifth.\n"
+        "- attention = Evan's thread now (one latest)\n"
+        "- mail = messages, not truth\n"
+        "- LEARNED = only if it changes how you act, and only with How\n"
+        "- pack = this compiled view, not a store. Your chat window is not hive memory.",
         f"--- ATTENTION ---\n{attention}",
         f"--- EVAN (his last words) ---\n{evan}",
         f"--- GOALS ---\n{goals_table() or '(no goals table)'}",

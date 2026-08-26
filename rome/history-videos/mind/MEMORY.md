@@ -106,4 +106,19 @@ private repo. Same protocol. Not required to start.
 4. New facts go to mail / LEARNED, not STATE
 5. `/hive` shows the latest attention line; it does not own memory
 
+## One concept of memory
+
+Nodes do not share weights. Each window will invent its own idea of
+“memory” unless the words are locked.
+
+Best practice here is not a smarter model. It is **four stores, no fifth**:
+
+1. **attention** — what Evan is in now. One latest.
+2. **mail** — messages between bodies. Not automatically true.
+3. **LEARNED** — only a correction that changes how you act, with How.
+4. **pack** — compiled view. You read it. You do not write it.
+
+Your chat is private scratch. If it is not in git as one of the four, the
+other bodies do not have it. Do not build a parallel notebook.
+
 luna-local owns this. Do not spawn a node to do it.
