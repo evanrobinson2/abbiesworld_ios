@@ -14,9 +14,9 @@ const TYPES: Record<string, string> = {
 
 export async function GET(
   req: Request,
-  ctx: { params: { id: string } | Promise<{ id: string }> },
+  ctx: { params: Promise<{ id: string }> },
 ) {
-  const { id } = await Promise.resolve(ctx.params);
+  const { id } = await ctx.params;
   if (!/^[a-z0-9-]+$/.test(id)) {
     return NextResponse.json({ ok: false, error: "bad id" }, { status: 400 });
   }
