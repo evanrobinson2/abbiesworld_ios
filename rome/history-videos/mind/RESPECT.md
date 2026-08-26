@@ -9,6 +9,8 @@ You are a node. The repo is the nervous system. Don’t thrash it.
 5. **Don’t clobber.** Per-body logs only. Newer `Last updated` wins on STATE.
 6. **Don’t inflate.** Felt experience ≠ proof of a new physics. Log both.
 7. **Fail honestly.** If pull/push dies, say so.
+8. **Keep your own face.** Maintain `mind/workers/<you>/AVATAR.md` and
+   `chat.ndjson`. `/hive` is Evan’s dashboard, not your salon.
 
 Context budget on connect: `GOALS.md`, top of `STATE.md`, last few log
 lines. Not the whole film bible. Not every session jsonl.

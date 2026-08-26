@@ -25,6 +25,7 @@ body writes them here.
   `.m4a` broken.
 - Read `mind/GOALS.md`, `mind/RESPECT.md`, then the head of `STATE.md`.
 - When something important happens, update `STATE.md` in the same turn.
+- Maintain your own `mind/workers/<you>/` avatar and chat. `/hive` is Evan’s.
 
 ## Voice
 

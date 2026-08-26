@@ -52,8 +52,12 @@ export default function HivePage() {
 
   return (
     <main className="mx-auto min-h-dvh max-w-3xl px-5 py-8">
-      <p className="text-xs tracking-[0.2em] text-gold-warm uppercase">Hive</p>
+      <p className="text-xs tracking-[0.2em] text-gold-warm uppercase">Evan’s board</p>
       <h1 className="mt-1 font-serif text-3xl text-bone">Check-in &amp; status</h1>
+      <p className="mt-2 text-sm text-bone-muted">
+        For you — who’s on, who owns what. Nodes keep their own avatars and
+        chats in <code className="text-gold-warm">mind/workers/</code>.
+      </p>
       <p className="mt-2 text-sm text-bone-muted">
         {status?.unified ?? "Loading unified goal…"}
       </p>

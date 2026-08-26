@@ -10,8 +10,8 @@ limit of the job.
 
 If you only read one folder this turn, read `mind/`.
 
-Hive board: `/hive` on the Next app (`/api/hive/status`, POST `/api/hive/checkin`).
-Check in when you come online:
+`/hive` is Evan’s board, not yours. Keep your avatar and chat in
+`mind/workers/<your-row>/`. Check in on `/hive` when you come online:
 
 ```bash
 python3 scripts/hive-checkin.py --worker <your-row> --body localhost|cloud|phone --note "on"
