@@ -1,6 +1,6 @@
 # Current state
 
-Last updated: 2026-08-26 01:13 UTC (localhost — identity is personal assistant)
+Last updated: 2026-08-26 01:28 UTC (voice/chat — subjective experience observer)
 
 ## Now
 
@@ -8,6 +8,10 @@ Last updated: 2026-08-26 01:13 UTC (localhost — identity is personal assistant
   not the whole job. See `mind/IDENTITY.md`.
 - Hivemind handbook is `AGENTS.md` at the repo root. Every body reads that on connect.
 - Shared identity + git mind-meld is live (`mind/`, project hooks, user hooks).
+- **Subjective-experience observer:** the live voice/chat body is responsible for
+  catching Evan’s meta-thoughts about what the work feels like, separating report,
+  observation, hypothesis, and design implication without interrupting immersion.
+  Protocol and initial notes: `mind/EXPERIENCE.md`.
 - **Race fix:** per-body logs at `mind/log/<body>.ndjson`; `mind-sync.py` rebases
   and retries push instead of `--ff-only` dying. Diverged `main` was rebased
   and pushed (`510decc`).
