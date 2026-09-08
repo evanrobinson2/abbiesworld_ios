@@ -10,6 +10,7 @@ import SwiftUI
 struct FloatingGenerationButton: View {
     let state: GenerationButtonState
     let hasPreviewImage: Bool
+    let isGenerationComplete: Bool
     let action: () -> Void
     
     var body: some View {
@@ -48,23 +49,28 @@ struct FloatingGenerationButton: View {
         }
     }
     
-    // Show button if: generating, ready, or has preview image
-    // Hide button if: not ready AND no preview image (suppress waving robot)
+    // Show button if: generating, ready, or has preview image (but not if generation just completed)
+    // Hide button if: not ready AND (no preview image OR generation just completed)
     private var shouldShowButton: Bool {
         switch state {
         case .generating, .ready:
             return true
         case .notReady:
-            return hasPreviewImage // Only show if we have a preview image
+            // Hide button if generation just completed (even if preview image exists)
+            // This stops the painter animation while keeping preview in drawer
+            if isGenerationComplete {
+                return false
+            }
+            return hasPreviewImage // Only show if we have a preview image and generation hasn't completed
         }
     }
     
     private var videoName: String {
-        // Priority: generating > preview image > ready state
+        // Priority: generating > preview image (if not complete) > ready state
         if state == .generating {
             return "robot_running_treadmill"
-        } else if hasPreviewImage {
-            // Show paintbrush robot when image is ready
+        } else if hasPreviewImage && !isGenerationComplete {
+            // Show paintbrush robot when image is ready but generation not complete
             return "robot_paint_brush_waving"
         } else {
             // Ready state (shouldn't happen if we hide notReady, but fallback)
@@ -88,6 +94,7 @@ struct FloatingGenerationButton: View {
         FloatingGenerationButton(
             state: .ready,
             hasPreviewImage: false,
+            isGenerationComplete: false,
             action: {}
         )
     }

@@ -9,9 +9,9 @@ import SwiftUI
 
 struct GamesDialogView: View {
     @Binding var showWaypointGame: Bool
-    // Memory Game and Goon Popper temporarily disabled
+    @Binding var showGoonPopper: Bool
+    // Memory Game temporarily disabled
     // @Binding var showMemoryGame: Bool
-    // @Binding var showGoonPopper: Bool
     var onDismiss: () -> Void
     
     var body: some View {
@@ -22,8 +22,9 @@ struct GamesDialogView: View {
                     .fontWeight(.bold)
                     .padding(.top)
                 
-                // Grid of game icons - 1 column for the 1 active game
+                // Two simple choices sized for young players.
                 LazyVGrid(columns: [
+                    GridItem(.flexible()),
                     GridItem(.flexible())
                 ], spacing: 20) {
                     // Waypoint Navigation Game
@@ -46,15 +47,14 @@ struct GamesDialogView: View {
                     //     onDismiss()
                     // }
                     
-                    // Goon Popper Game - temporarily disabled
-                    // GameIconButton(
-                    //     icon: "hand.tap.fill",
-                    //     title: "Goon Popper",
-                    //     color: .orange
-                    // ) {
-                    //     showGoonPopper = true
-                    //     onDismiss()
-                    // }
+                    GameIconButton(
+                        icon: "balloon.2.fill",
+                        title: "Balloon Pop",
+                        color: .pink
+                    ) {
+                        showGoonPopper = true
+                        onDismiss()
+                    }
                 }
                 .padding()
                 
@@ -63,12 +63,8 @@ struct GamesDialogView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
+                    CloseButton.black() {
                         onDismiss()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white.opacity(0.8))
                     }
                 }
             }
@@ -114,8 +110,8 @@ struct GameIconButton: View {
 #Preview {
     GamesDialogView(
         showWaypointGame: .constant(false),
+        showGoonPopper: .constant(false),
         // showMemoryGame: .constant(false),
-        // showGoonPopper: .constant(false),
         onDismiss: {}
     )
 }

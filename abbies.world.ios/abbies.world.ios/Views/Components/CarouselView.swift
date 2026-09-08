@@ -73,7 +73,7 @@ struct CarouselView: View {
                 selectedIndex: selectedIndexBinding,
                 config: carouselConfig,
                 onSelect: { carouselItem in
-                    // Find the corresponding Ingredient and call the callback
+                    // Find the corresponding Ingredient in items and call the callback
                     if let index = items.firstIndex(where: { $0.id == carouselItem.id }) {
                         selectedIndex = index
                         onItemSelected(items[index])

@@ -21,6 +21,19 @@ class MemoryGameViewModel: ObservableObject {
         // Default difficulty is already set in gameState
     }
     
+    deinit {
+        // Release all card images to free memory
+        clearImages()
+    }
+    
+    /// Release all card images from memory
+    private func clearImages() {
+        // Clear images from all cards
+        for i in 0..<gameState.cards.count {
+            gameState.cards[i].image = nil
+        }
+    }
+    
     // MARK: - Game Setup
     
     func startNewGame(difficulty: GameDifficulty) async {
@@ -246,6 +259,8 @@ class MemoryGameViewModel: ObservableObject {
     
     func cleanup() {
         cancellables.removeAll()
+        // Release all card images to free memory
+        clearImages()
     }
 }
 

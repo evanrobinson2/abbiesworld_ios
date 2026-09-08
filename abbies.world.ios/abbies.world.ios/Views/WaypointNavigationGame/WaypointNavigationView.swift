@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct WaypointNavigationView: View {
     @StateObject private var viewModel = WaypointGameViewModel()
@@ -15,6 +16,11 @@ struct WaypointNavigationView: View {
     var onComplete: (() -> Void)? = nil
     
     @State private var showVictory = false
+    
+    // Computed property to access gameState - ensures we're using the same instance
+    private var gameState: WaypointGameState {
+        viewModel.gameState
+    }
     
     var body: some View {
         ZStack {
@@ -27,48 +33,9 @@ struct WaypointNavigationView: View {
             .ignoresSafeArea()
             
             VStack(spacing: 0) {
-                // Destination Banner
-                if let bannerImage = viewModel.gameState.destinationBannerImage {
-                    ZStack {
-                        Image(uiImage: bannerImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 150)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 5)
-                                    .stroke(Color(hex: "#00ff00") ?? .green, lineWidth: 2)
-                            )
-                        
-                        Text("DESTINATION: MOONBASE")
-                            .font(.system(size: 14, weight: .bold))
-                            .foregroundColor(.black)
-                            .padding(.horizontal, 15)
-                            .padding(.vertical, 5)
-                            .background((Color(hex: "#00ff00") ?? .green).opacity(0.8))
-                            .cornerRadius(5)
-                            .offset(y: -60)
-                    }
-                    .frame(height: 150)
-                    .padding(.bottom, 20)
-                    .onAppear {
-                        print("🖼️ [VIEW] Banner image displayed in view")
-                    }
-                } else {
-                    // Placeholder while loading
-                    Rectangle()
-                        .fill(Color.gray.opacity(0.3))
-                        .frame(height: 150)
-                        .overlay(
-                            VStack {
-                                Text("Loading destination...")
-                                    .foregroundColor(.gray)
-                                Text("Banner image: \(viewModel.gameState.destinationBannerImage != nil ? "LOADED" : "NOT LOADED")")
-                                    .font(.caption)
-                                    .foregroundColor(.red)
-                            }
-                        )
-                        .padding(.bottom, 20)
-                }
+                // Trio at Base Image (banner location)
+                // Observe gameState directly to ensure nested @Published properties trigger updates
+                TrioBannerView(gameState: viewModel.gameState)
                 
                 // Instructions
                 Text("Discover the safe waypoints to chart the path home!\nSafe waypoints must be found IN ORDER. Bad waypoints can be clicked anytime.")
@@ -111,16 +78,12 @@ struct WaypointNavigationView: View {
             )
             .padding()
             
-            // Dismiss button (top right)
+            // Dismiss button (top right) - high contrast white on dark background
             VStack {
                 HStack {
                     Spacer()
-                    Button(action: {
+                    CloseButton.white() {
                         onDismiss?()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white.opacity(0.8))
                     }
                     .padding()
                 }
@@ -135,9 +98,11 @@ struct WaypointNavigationView: View {
         .onDisappear {
             viewModel.cleanup()
         }
-        .onChange(of: viewModel.gameState.gameComplete) { oldValue, newValue in
-            print("🎉 WaypointNavigationView: gameComplete changed from \(oldValue) to \(newValue)")
-            if newValue {
+        // Use Combine publisher to observe nested @Published property
+        // This works because we're directly observing the gameState's gameComplete publisher
+        .onReceive(viewModel.gameState.$gameComplete) { gameComplete in
+            print("🎉 WaypointNavigationView: gameComplete changed to \(gameComplete)")
+            if gameComplete {
                 print("   ✅ Showing victory sequence")
                 showVictory = true
                 // Don't call onComplete() here - wait until victory sequence finishes
@@ -182,6 +147,48 @@ struct ShakeEffect: GeometryEffect {
 extension View {
     func shake(offset: CGFloat) -> some View {
         modifier(ShakeEffect(offset: offset))
+    }
+}
+
+// MARK: - Trio Banner View (separate view to ensure proper observation)
+
+struct TrioBannerView: View {
+    @ObservedObject var gameState: WaypointGameState
+    
+    var body: some View {
+        if let trioImage = gameState.trioAtBaseImage {
+            ZStack {
+                Image(uiImage: trioImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 150)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5)
+                            .stroke(Color(hex: "#00ff00") ?? .green, lineWidth: 2)
+                    )
+                
+                Text("DESTINATION: MOONBASE")
+                    .font(.system(size: 14, weight: .bold))
+                    .foregroundColor(.black)
+                    .padding(.horizontal, 15)
+                    .padding(.vertical, 5)
+                    .background((Color(hex: "#00ff00") ?? .green).opacity(0.8))
+                    .cornerRadius(5)
+                    .offset(y: -60)
+            }
+            .frame(height: 150)
+            .padding(.bottom, 20)
+        } else {
+            // Placeholder while loading
+            Rectangle()
+                .fill(Color.gray.opacity(0.3))
+                .frame(height: 150)
+                .overlay(
+                    Text("Loading destination...")
+                        .foregroundColor(.gray)
+                )
+                .padding(.bottom, 20)
+        }
     }
 }
 

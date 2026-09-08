@@ -71,7 +71,7 @@ class WaypointGameState: ObservableObject {
     // Asset URLs (loaded from server)
     @Published var buggyImage: UIImage?
     @Published var moonbaseImage: UIImage?
-    @Published var destinationBannerImage: UIImage?
+    @Published var trioAtBaseImage: UIImage? // Trio at base image displayed at top (banner location)
     @Published var victoryImage: UIImage?
     @Published var cutsceneImage: UIImage?
     @Published var coverImage: UIImage?

@@ -35,6 +35,8 @@ class WaypointGameViewModel: ObservableObject {
     deinit {
         buggyAnimationTimer?.invalidate()
         pulseTimer?.invalidate()
+        // Release all images to free memory
+        clearImages()
     }
     
     // MARK: - Game Setup
@@ -69,7 +71,21 @@ class WaypointGameViewModel: ObservableObject {
     }
     
     private func loadCriticalAssets() async {
-        // Load buggy sprite
+        // Load all critical assets in parallel so they publish as soon as each completes
+        // This ensures the banner image (displayed at top) publishes on time like the others
+        
+        await withTaskGroup(of: Void.self) { group in
+            // Start all image loads simultaneously
+            group.addTask { await self.loadBuggyImage() }
+            group.addTask { await self.loadMoonbaseImage() }
+            group.addTask { await self.loadTrioAtBaseImage() }
+            
+            // Wait for all to complete (they publish individually as they finish)
+            for await _ in group {}
+        }
+    }
+    
+    private func loadBuggyImage() async {
         let buggyURLString = "\(assetBaseURL)/moon_buggy_sprite.png"
         print("🖼️ Loading buggy sprite from: \(buggyURLString)")
         if let url = URL(string: buggyURLString) {
@@ -94,8 +110,9 @@ class WaypointGameViewModel: ObservableObject {
         } else {
             print("❌ Invalid URL for buggy sprite: \(buggyURLString)")
         }
+        }
         
-        // Load moonbase icon
+    private func loadMoonbaseImage() async {
         let moonbaseURLString = "\(assetBaseURL)/moonbase.png"
         print("🖼️ Loading moonbase from: \(moonbaseURLString)")
         if let url = URL(string: moonbaseURLString) {
@@ -127,43 +144,32 @@ class WaypointGameViewModel: ObservableObject {
         } else {
             print("❌ Invalid URL for moonbase: \(moonbaseURLString)")
         }
-        
-        // Load destination banner
-        let bannerURLString = "\(assetBaseURL)/trio_at_base_pixel.png"
-        print("🖼️ [BANNER] Loading destination banner from: \(bannerURLString)")
-        print("🖼️ [BANNER] Asset base URL: \(assetBaseURL)")
-        if let url = URL(string: bannerURLString) {
-            print("🖼️ [BANNER] URL constructed: \(url.absoluteString)")
+    }
+    
+    private func loadTrioAtBaseImage() async {
+        let trioURLString = "\(assetBaseURL)/trio_at_base_pixel.png"
+        print("🖼️ Loading trio at base image from: \(trioURLString)")
+        if let url = URL(string: trioURLString) {
             do {
-                print("🖼️ [BANNER] Attempting to load image via ImageCache...")
                 if let image = try await ImageCache.shared.loadImage(from: url) {
                     await MainActor.run {
-                        print("🖼️ [BANNER] Image loaded! Size: \(image.size.width)x\(image.size.height)")
-                        print("🖼️ [BANNER] Setting destinationBannerImage in gameState...")
-                        gameState.destinationBannerImage = image
-                        print("🖼️ [BANNER] ✅ Destination banner set! Current value: \(gameState.destinationBannerImage != nil ? "NOT NIL" : "NIL")")
+                        gameState.trioAtBaseImage = image
+                        print("✅ Trio at base image loaded successfully")
                     }
                 } else {
-                    print("🖼️ [BANNER] ⚠️ ImageCache returned nil - image not found or failed to decode")
+                    print("⚠️ Failed to load trio at base image: ImageCache returned nil")
                 }
             } catch {
                 let nsError = error as NSError
-                print("🖼️ [BANNER] ❌ Exception caught: \(error)")
-                if nsError.domain == NSURLErrorDomain {
-                    if nsError.code == NSURLErrorFileDoesNotExist {
-                        print("🖼️ [BANNER] ❌ Destination banner not found (404) - file may have been moved or deleted")
-                    } else if nsError.code == NSURLErrorUserAuthenticationRequired {
-                        print("🖼️ [BANNER] ❌ Destination banner authentication failed (401) - check API key")
-                    } else {
-                        print("🖼️ [BANNER] ❌ Error loading destination banner: \(error) (code: \(nsError.code))")
-                    }
+                if nsError.domain == NSURLErrorDomain && nsError.code == NSURLErrorFileDoesNotExist {
+                    print("❌ Trio at base image not found - file may have been moved or deleted")
                 } else {
-                    print("🖼️ [BANNER] ❌ Error loading destination banner: \(error)")
+                    print("❌ Error loading trio at base image: \(error)")
                 }
-                // Continue gracefully - game can still work without banner
+                // Continue gracefully - game can still work without trio at base image
             }
         } else {
-            print("🖼️ [BANNER] ❌ Invalid URL for destination banner: \(bannerURLString)")
+            print("❌ Invalid URL for trio at base image: \(trioURLString)")
         }
     }
     
@@ -484,6 +490,19 @@ class WaypointGameViewModel: ObservableObject {
         audioService.stopAllAudio()
         buggyAnimationTimer?.invalidate()
         pulseTimer?.invalidate()
+        // Release all images to free memory
+        clearImages()
+    }
+    
+    /// Release all game images from memory
+    private func clearImages() {
+        gameState.buggyImage = nil
+        gameState.moonbaseImage = nil
+        gameState.trioAtBaseImage = nil
+        gameState.victoryImage = nil
+        gameState.cutsceneImage = nil
+        gameState.coverImage = nil
+        gameState.polaroidImages = []
     }
 }
 

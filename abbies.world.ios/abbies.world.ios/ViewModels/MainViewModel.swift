@@ -58,13 +58,21 @@ class MainViewModel: ObservableObject {
     // Preview and history
     @Published var previewImage: UIImage?
     @Published var historyImages: [GeneratedImage] = []
-    @Published var showFavoritesOnly: Bool = false
+    @Published var showFavoritesOnly: Bool = false {
+        didSet {
+            // Reload history when filter state changes to ensure correct data is loaded
+            loadHistory()
+        }
+    }
     
     // Background image
     @Published var backgroundImage: UIImage?
     
     // Button state
     @Published var buttonState: GenerationButtonState = .notReady
+    
+    // Track if generation just completed (to hide floating button animation)
+    @Published var isGenerationComplete: Bool = false
     
     // Loading states
     @Published var isLoadingIngredients = false
@@ -800,6 +808,9 @@ class MainViewModel: ObservableObject {
         // Clear any previous error state
         clearImageGenerationError()
         
+        // Reset generation complete flag when starting new generation
+        isGenerationComplete = false
+        
         // Get selected ingredients
         let friend = friendItems[friendIndex]
         let outfit = outfitItems[outfitIndex]
@@ -1099,6 +1110,7 @@ class MainViewModel: ObservableObject {
         // Reset state
         isCreatingImage = false
         buttonState = .notReady
+        isGenerationComplete = true // Mark generation as complete to hide floating button animation
         
         // Deselect all carousels
         friendIndex = -1
@@ -1114,6 +1126,7 @@ class MainViewModel: ObservableObject {
         // Reset generation state
         isCreatingImage = false
         buttonState = .notReady
+        isGenerationComplete = false // Reset flag on error
         
         // Log error details
         if let nsError = error as NSError? {

@@ -11,12 +11,46 @@ struct MainView: View {
     @StateObject private var viewModel = MainViewModel()
     @State private var showGamesDialog = false
     @State private var showWaypointGame = false
-    // Memory Game and Goon Popper temporarily disabled
+    // Text-friendly test hook: pass -launchBalloonPop to open the game directly.
+    @State private var showGoonPopper =
+        ProcessInfo.processInfo.arguments.contains("-launchBalloonPop") ||
+        ProcessInfo.processInfo.arguments.contains("-autoPlayBalloonPop")
+    // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
-    // @State private var showGoonPopper = false
     @State private var showSettings = false
     @State private var showMusicPlayer = false
     @State private var isDrawerOpen = false
+    
+    private var mainMessage: String {
+        if viewModel.isCreatingImage {
+            return "Abbie is making your new picture…"
+        }
+        if let generationError = viewModel.imageGenerationError, !generationError.isEmpty {
+            return "That picture did not work. Try again when you’re ready."
+        }
+        if viewModel.isGenerationComplete {
+            return "Your new picture is ready in the drawer!"
+        }
+        if viewModel.isLoadingIngredients {
+            return "Loading Abbie’s choices…"
+        }
+        if viewModel.allSelectionsReady {
+            return "Everything is ready—tap Abbie to make the picture!"
+        }
+        
+        var missing: [String] = []
+        if viewModel.friendIndex < 0 { missing.append("friend") }
+        if viewModel.outfitIndex < 0 { missing.append("outfit") }
+        if viewModel.placeIndex < 0 { missing.append("place") }
+        if viewModel.viewMode == .fourCarousel, viewModel.styleIndex < 0 {
+            missing.append("style")
+        }
+        
+        if missing.isEmpty {
+            return "Choose one picture from each row."
+        }
+        return "Still needed: \(missing.joined(separator: ", "))."
+    }
     
     var body: some View {
         GeometryReader { geometry in
@@ -113,6 +147,7 @@ struct MainView: View {
                         FloatingGenerationButton(
                             state: viewModel.buttonState,
                             hasPreviewImage: viewModel.previewImage != nil,
+                            isGenerationComplete: viewModel.isGenerationComplete,
                             action: {
                                 viewModel.startImageGeneration()
                                 // Auto-open drawer when generation starts
@@ -197,6 +232,12 @@ struct MainView: View {
                     Spacer()
                 }
             }
+            .overlay(alignment: .bottom) {
+                MainMessageBar(message: mainMessage)
+                    .padding(.horizontal, 72)
+                    .padding(.bottom, 10)
+                    .allowsHitTesting(false)
+            }
             .sheet(isPresented: $showSettings) {
                 SettingsView(onDismiss: {
                     showSettings = false
@@ -210,8 +251,8 @@ struct MainView: View {
             .sheet(isPresented: $showGamesDialog) {
                 GamesDialogView(
                     showWaypointGame: $showWaypointGame,
+                    showGoonPopper: $showGoonPopper,
                     // showMemoryGame: $showMemoryGame,
-                    // showGoonPopper: $showGoonPopper,
                     onDismiss: {
                         showGamesDialog = false
                     }
@@ -227,7 +268,17 @@ struct MainView: View {
                     }
                 )
             }
-            // Memory Game and Goon Popper temporarily disabled
+            .fullScreenCover(isPresented: $showGoonPopper) {
+                GoonPopperView(
+                    onDismiss: {
+                        showGoonPopper = false
+                    },
+                    onComplete: {
+                        // Keep the game open so Abbie can celebrate or replay.
+                    }
+                )
+            }
+            // Memory Game temporarily disabled
             // .fullScreenCover(isPresented: $showMemoryGame) {
             //     MemoryGameView(
             //         onDismiss: {
@@ -238,25 +289,13 @@ struct MainView: View {
             //         }
             //     )
             // }
-            // .fullScreenCover(isPresented: $showGoonPopper) {
-            //     GoonPopperView(
-            //         onDismiss: {
-            //             showGoonPopper = false
-            //         },
-            //         onComplete: {
-            //             showGoonPopper = false
-            //         }
-            //     )
-            // }
             .onChange(of: showWaypointGame) { oldValue, newValue in
                 // Coordinate music with game lifecycle
                 MusicService.shared.setGameActive(newValue)
             }
-            // Memory Game and Goon Popper temporarily disabled
-            // .onChange(of: showGoonPopper) { oldValue, newValue in
-            //     // Coordinate music with game lifecycle
-            //     MusicService.shared.setGameActive(newValue)
-            // }
+            .onChange(of: showGoonPopper) { oldValue, newValue in
+                MusicService.shared.setGameActive(newValue)
+            }
         }
         .ignoresSafeArea()
         .toast($viewModel.toastMessage)
@@ -290,6 +329,33 @@ struct MainView: View {
                 }
             }
         }
+    }
+}
+
+private struct MainMessageBar: View {
+    let message: String
+    
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "bubble.left.fill")
+                .foregroundColor(.yellow)
+            
+            Text(message)
+                .font(.system(size: 17, weight: .bold, design: .rounded))
+                .foregroundColor(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+        }
+        .padding(.horizontal, 18)
+        .padding(.vertical, 11)
+        .frame(maxWidth: 680)
+        .background(Color.black.opacity(0.78))
+        .clipShape(Capsule())
+        .overlay(
+            Capsule()
+                .stroke(Color.white.opacity(0.8), lineWidth: 2)
+        )
+        .shadow(color: .black.opacity(0.35), radius: 8, y: 3)
     }
 }
 
@@ -440,14 +506,28 @@ struct RightColumnView: View {
         viewModel.filteredHistoryImages
     }
     
+    // Displayed images (just filtered images, no shuffle)
+    private var displayedImages: [GeneratedImage] {
+        return filteredImages
+    }
+    
     // Mapping from image ID to GeneratedImage for heart icon handling
+    // Uses reduce to handle duplicate IDs gracefully (keeps first occurrence)
     private var imageLookup: [String: GeneratedImage] {
-        Dictionary(uniqueKeysWithValues: filteredImages.map { ($0.id, $0) })
+        displayedImages.reduce(into: [String: GeneratedImage]()) { dict, image in
+            // Only add if not already present (handles duplicates gracefully)
+            if dict[image.id] == nil {
+                dict[image.id] = image
+            } else {
+                // Log duplicate for debugging
+                print("⚠️ Duplicate image ID detected: \(image.id) - keeping first occurrence")
+            }
+        }
     }
     
     // Convert GeneratedImage to CarouselItem for SwiftCarousel
     private var historyCarouselItems: [CarouselItem] {
-        filteredImages.prefix(20).map { image in
+        displayedImages.prefix(20).map { image in
             // Construct full URL from relative URL
             let baseURL = APIClient.shared.baseURL
             let imageURLString = image.url.hasPrefix("http") ? image.url : "\(baseURL)\(image.url)"
@@ -587,10 +667,19 @@ struct RightColumnCalculations {
                                     )
                                     .padding(8)
                             } else {
-                                // Normal preview image
+                                // Normal preview image - make it tappable to open inspection view
                                 Image(uiImage: image)
                                     .resizable()
                                     .aspectRatio(contentMode: .fit)
+                                    .contentShape(Rectangle()) // Make entire image area tappable
+                                    .onTapGesture {
+                                    // Find the preview image in history (should be the most recent)
+                                    // The preview image is added to history when generation completes
+                                    if displayedImages.first != nil {
+                                        inspectionStartIndex = 0
+                                        showInspectionView = true
+                                    }
+                                    }
                             }
                         } else {
                             Text("Preview Image")
@@ -616,7 +705,7 @@ struct RightColumnCalculations {
                 
                 // History with rounded container
                 VStack(alignment: .leading, spacing: 8) {
-                    // Filter toggle button
+                    // Filter toggle button and shuffle toggle
                     HStack {
                         Text("History")
                             .font(.headline)
@@ -624,6 +713,7 @@ struct RightColumnCalculations {
                         
                         Spacer()
                         
+                        // Favorites filter button
                         Button(action: {
                             viewModel.showFavoritesOnly.toggle()
                         }) {
@@ -637,7 +727,7 @@ struct RightColumnCalculations {
                     if isLoading {
                         ProgressView()
                             .frame(maxWidth: .infinity)
-                    } else if filteredImages.isEmpty {
+                    } else if displayedImages.isEmpty {
                         Text(viewModel.showFavoritesOnly ? "No favorites yet" : "No images yet")
                             .font(.system(size: 10))
                             .foregroundColor(.gray)
@@ -666,8 +756,8 @@ struct RightColumnCalculations {
                             ),
                             config: historyCarouselConfig,
                             onSelect: { carouselItem in
-                                // Find the index of the tapped image
-                                if let index = filteredImages.firstIndex(where: { $0.id == carouselItem.id }) {
+                                // Find the index of the tapped image in displayed images
+                                if let index = displayedImages.firstIndex(where: { $0.id == carouselItem.id }) {
                                     inspectionStartIndex = index
                                     showInspectionView = true
                                 }
@@ -697,7 +787,7 @@ struct RightColumnCalculations {
                 )
                 .sheet(isPresented: $showInspectionView) {
                     ImageInspectionView(
-                        startImageId: inspectionStartIndex < filteredImages.count ? filteredImages[inspectionStartIndex].id : "",
+                        startImageId: inspectionStartIndex < displayedImages.count ? displayedImages[inspectionStartIndex].id : "",
                         viewModel: viewModel
                     )
                 }

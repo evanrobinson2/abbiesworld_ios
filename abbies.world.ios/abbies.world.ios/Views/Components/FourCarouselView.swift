@@ -44,67 +44,67 @@ struct FourCarouselView: View {
             
             VStack(spacing: spacing) {
                 // Row 1: Friends carousel (smaller tiles)
-                CarouselView(
-                    title: "Friend",
-                    items: friendItems,
-                    selectedIndex: $friendIndex,
-                    onItemSelected: onFriendSelected,
+                    CarouselView(
+                        title: "Friend",
+                        items: friendItems,
+                        selectedIndex: $friendIndex,
+                        onItemSelected: onFriendSelected,
                     customTileSize: tileSize
-                )
-                .frame(height: carouselFrameHeight)
-                .padding(4)  // Reduced from 8 to maximize tile space
-                .background(
-                    RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
-                        .fill(Color.white.opacity(0.3))
-                )
+                    )
+                    .frame(height: carouselFrameHeight)
+                    .padding(4)  // Reduced from 8 to maximize tile space
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
+                            .fill(Color.white.opacity(0.3))
+                    )
                 
                 // Row 2: Outfits carousel (smaller tiles)
-                CarouselView(
-                    title: "Outfit",
-                    items: outfitItems,
-                    selectedIndex: $outfitIndex,
-                    onItemSelected: onOutfitSelected,
+                    CarouselView(
+                        title: "Outfit",
+                        items: outfitItems,
+                        selectedIndex: $outfitIndex,
+                        onItemSelected: onOutfitSelected,
                     customTileSize: tileSize
-                )
-                .frame(height: carouselFrameHeight)
-                .padding(4)  // Reduced from 8 to maximize tile space
-                .background(
-                    RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
-                        .fill(Color.white.opacity(0.3))
-                )
+                    )
+                    .frame(height: carouselFrameHeight)
+                    .padding(4)  // Reduced from 8 to maximize tile space
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
+                            .fill(Color.white.opacity(0.3))
+                    )
                 
                 // Row 3: Places carousel (smaller tiles)
-                CarouselView(
-                    title: "Place",
-                    items: placeItems,
-                    selectedIndex: $placeIndex,
-                    onItemSelected: onPlaceSelected,
+                    CarouselView(
+                        title: "Place",
+                        items: placeItems,
+                        selectedIndex: $placeIndex,
+                        onItemSelected: onPlaceSelected,
                     customTileSize: tileSize
-                )
-                .frame(height: carouselFrameHeight)
-                .padding(4)  // Reduced from 8 to maximize tile space
-                .background(
-                    RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
-                        .fill(Color.white.opacity(0.3))
-                )
+                    )
+                    .frame(height: carouselFrameHeight)
+                    .padding(4)  // Reduced from 8 to maximize tile space
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
+                            .fill(Color.white.opacity(0.3))
+                    )
                 
                 // Row 4: Style carousel (bottom-aligned with preview drawer, smaller tiles)
                 // TEMPORARY: Pass styleShortDescriptions for placeholder overlays
                 // Remove this parameter when we have actual style assets
-                CarouselView(
-                    title: "Style",
-                    items: styleItems,
-                    selectedIndex: $styleIndex,
-                    onItemSelected: onStyleSelected,
-                    styleShortDescriptions: styleShortDescriptions,
+                    CarouselView(
+                        title: "Style",
+                        items: styleItems,
+                        selectedIndex: $styleIndex,
+                        onItemSelected: onStyleSelected,
+                        styleShortDescriptions: styleShortDescriptions,
                     customTileSize: tileSize
-                )
-                .frame(height: carouselFrameHeight)
-                .padding(4)  // Reduced from 8 to maximize tile space
-                .background(
-                    RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
-                        .fill(Color.white.opacity(0.3))
-                )
+                    )
+                    .frame(height: carouselFrameHeight)
+                    .padding(4)  // Reduced from 8 to maximize tile space
+                    .background(
+                        RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
+                            .fill(Color.white.opacity(0.3))
+                    )
             }
             .padding(.leading, 16)
             .padding(.trailing, 16)

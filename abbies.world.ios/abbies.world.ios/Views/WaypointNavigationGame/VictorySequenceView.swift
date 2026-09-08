@@ -9,9 +9,17 @@ import SwiftUI
 
 struct VictorySequenceView: View {
     @ObservedObject var viewModel: WaypointGameViewModel
+    @ObservedObject private var gameState: WaypointGameState // Direct observation of nested ObservableObject
     var onDismiss: (() -> Void)?
     
     @State private var currentPhase: VictoryPhase = .initialImage
+    
+    init(viewModel: WaypointGameViewModel, onDismiss: (() -> Void)? = nil) {
+        self.viewModel = viewModel
+        self.onDismiss = onDismiss
+        // Observe gameState directly to detect changes to nested @Published properties
+        _gameState = ObservedObject(wrappedValue: viewModel.gameState)
+    }
     @State private var showBanner = true
     @State private var showCutscene = false
     @State private var showPolaroids = false
@@ -59,6 +67,20 @@ struct VictorySequenceView: View {
             if currentPhase == .finalCover {
                 finalCoverView
             }
+            
+            // Dismiss button - always visible in top right
+            // User can dismiss at any time (even during initial image if they want to skip)
+            VStack {
+                HStack {
+                    Spacer()
+                    CloseButton.white() {
+                        print("❌ VictorySequenceView: User dismissed victory sequence")
+                        onDismiss?()
+                    }
+                    .padding()
+                }
+                Spacer()
+            }
         }
         .onAppear {
             startVictorySequence()
@@ -67,7 +89,7 @@ struct VictorySequenceView: View {
             // Cleanup all timers and async operations when view disappears
             cleanup()
         }
-        .onChange(of: viewModel.gameState.gameComplete) { oldValue, newValue in
+        .onChange(of: gameState.gameComplete) { oldValue, newValue in
             // If game completion is reset (shouldn't happen, but safety check)
             if !newValue && currentPhase != .finalCover {
                 cleanup()
@@ -91,7 +113,7 @@ struct VictorySequenceView: View {
             
             Spacer()
             
-            if let victoryImage = viewModel.gameState.victoryImage {
+            if let victoryImage = gameState.victoryImage {
                 Image(uiImage: victoryImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -115,7 +137,7 @@ struct VictorySequenceView: View {
             Color.black.opacity(0.95)
                 .ignoresSafeArea()
             
-            if let cutsceneImage = viewModel.gameState.cutsceneImage {
+            if let cutsceneImage = gameState.cutsceneImage {
                 Image(uiImage: cutsceneImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -142,7 +164,7 @@ struct VictorySequenceView: View {
     }
     
     private var polaroidCarouselView: some View {
-        VStack {
+        VStack(spacing: 0) {
             // Banner (fades out during cutscene, back in for carousel)
             if showBanner {
                 Text("YOU SAVED STAR CHILD!")
@@ -155,30 +177,42 @@ struct VictorySequenceView: View {
                     .opacity(bannerOpacity)
             }
             
-            Spacer()
-            
-            // Polaroid Carousel
-            ZStack {
-                ForEach(0..<viewModel.gameState.polaroidImages.count, id: \.self) { index in
-                    if viewModel.gameState.polaroidImages.indices.contains(index) {
-                        PolaroidView(
-                            image: viewModel.gameState.polaroidImages[index],
-                            index: index,
-                            isVisible: polaroidEntranceStates[index],
-                            currentIndex: viewModel.gameState.currentPolaroidIndex,
-                            totalCount: viewModel.gameState.polaroidImages.count
-                        )
+            // Polaroid Grid - Simple tile layout
+            ScrollView {
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 15), count: 3), spacing: 15) {
+                    ForEach(0..<gameState.polaroidImages.count, id: \.self) { index in
+                        if gameState.polaroidImages.indices.contains(index) {
+                            Image(uiImage: gameState.polaroidImages[index])
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 180, height: 220)
+                                .border(index == gameState.currentPolaroidIndex ? Color.yellow : Color.white, width: index == gameState.currentPolaroidIndex ? 4 : 2)
+                                .background(Color.white)
+                                .opacity(polaroidEntranceStates[index] ? 1.0 : 0.0)
+                                .animation(.easeIn(duration: 0.3), value: polaroidEntranceStates[index])
+                                .onTapGesture {
+                                    print("🔍 [TAP] User tapped polaroid \(index), currentIndex: \(gameState.currentPolaroidIndex)")
+                                    if index != gameState.currentPolaroidIndex {
+                                        print("🔍 [TAP] Setting currentPolaroidIndex to \(index)")
+                                        gameState.currentPolaroidIndex = index
+                                    } else {
+                                        print("🔍 [TAP] Tapped current polaroid, advancing")
+                                        advancePolaroid()
+                                    }
+                                }
                     }
                 }
             }
-            .frame(width: 600, height: 650)
-            .onTapGesture {
-                if !viewModel.gameState.isGridView {
-                    advancePolaroid()
-                }
+                .padding(.horizontal)
+                .padding(.top, 20)
+                .padding(.bottom, 60) // Extra bottom padding to prevent cutoff
+            }
+            .frame(maxWidth: 600)
+            .onChange(of: gameState.currentPolaroidIndex) { oldValue, newValue in
+                print("🔍 [GRID] currentPolaroidIndex changed from \(oldValue) to \(newValue)")
             }
             
-            Spacer()
+            Spacer(minLength: 20)
             
             // Carousel hint and View All button
             VStack(spacing: 12) {
@@ -217,9 +251,9 @@ struct VictorySequenceView: View {
             
             ScrollView {
                 LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 20), count: 5), spacing: 20) {
-                    ForEach(0..<viewModel.gameState.polaroidImages.count, id: \.self) { index in
-                        if viewModel.gameState.polaroidImages.indices.contains(index) {
-                            Image(uiImage: viewModel.gameState.polaroidImages[index])
+                    ForEach(0..<gameState.polaroidImages.count, id: \.self) { index in
+                        if gameState.polaroidImages.indices.contains(index) {
+                            Image(uiImage: gameState.polaroidImages[index])
                                 .resizable()
                                 .aspectRatio(contentMode: .fit)
                                 .frame(width: 200, height: 250)
@@ -238,7 +272,7 @@ struct VictorySequenceView: View {
     
     private var finalCoverView: some View {
         ZStack {
-            if let coverImage = viewModel.gameState.coverImage {
+            if let coverImage = gameState.coverImage {
                 Image(uiImage: coverImage)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -247,22 +281,7 @@ struct VictorySequenceView: View {
                     .opacity(showFinalCover ? 1 : 0)
                     .animation(.easeIn(duration: 3), value: showFinalCover)
             }
-            
-            // Close button (top right)
-            VStack {
-                HStack {
-                    Spacer()
-                    Button(action: {
-                        onDismiss?()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white.opacity(0.8))
-                    }
-                    .padding()
-                }
-                Spacer()
-            }
+            // Note: Dismiss button is now always visible (handled in main body)
         }
     }
     
@@ -292,6 +311,9 @@ struct VictorySequenceView: View {
     private func transitionToCutscene() {
         print("🎬 [CUTSCENE] Transitioning to cutscene phase")
         print("🎬 [CUTSCENE] Cutscene image loaded: \(viewModel.gameState.cutsceneImage != nil)")
+        
+        // Set phase to cutscene FIRST so subsequent guards pass
+        currentPhase = .cutscene
         showBanner = false
         
         // Small delay before showing cutscene (like HTML's 50ms)
@@ -319,15 +341,18 @@ struct VictorySequenceView: View {
     }
     
     private func transitionToPolaroids() {
+        print("🎉 VictorySequenceView: Transitioning to polaroids")
+        
         // Fade out cutscene
         withAnimation(.easeOut(duration: 1.5)) {
             cutsceneOpacity = 0.0
         }
         
+        // Set phase BEFORE scheduling work item so view can render correctly
+        // The work item will still guard check, but phase is set for view rendering
         let polaroidWorkItem = DispatchWorkItem {
             // Check if view is still active before executing
             guard self.currentPhase == .cutscene || self.currentPhase == .polaroidEntrance else { return }
-            self.currentPhase = .polaroidEntrance
             self.showBanner = true
             self.bannerOpacity = 1.0
             
@@ -338,11 +363,15 @@ struct VictorySequenceView: View {
             self.startPolaroidEntrance()
         }
         asyncTracker.operations.append(polaroidWorkItem)
+        
+        // Set phase immediately so view can start rendering polaroidCarouselView
+        currentPhase = .polaroidEntrance
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: polaroidWorkItem)
     }
     
     private func startPolaroidEntrance() {
-        let polaroidCount = viewModel.gameState.polaroidImages.count
+        let polaroidCount = gameState.polaroidImages.count
         print("🎉 VictorySequenceView: Starting polaroid entrance with \(polaroidCount) polaroids")
         
         if polaroidCount == 0 {
@@ -358,7 +387,7 @@ struct VictorySequenceView: View {
         // Each polaroid appears 6.2s after the previous (5s pause + 1.2s animation)
         for index in 0..<polaroidCount {
             let delay = Double(index) * 6.2
-            let workItem = DispatchWorkItem { [weak viewModel] in
+            let workItem = DispatchWorkItem {
                 // Check if view is still active before executing
                 guard self.currentPhase == .polaroidEntrance || self.currentPhase == .carousel else { return }
                 print("🎉 VictorySequenceView: Showing polaroid \(index + 1)/\(polaroidCount)")
@@ -372,7 +401,7 @@ struct VictorySequenceView: View {
         
         // After all polaroids have entered, enable carousel
         let totalEntranceTime = Double(polaroidCount) * 6.2 + 1.2
-        let carouselWorkItem = DispatchWorkItem { [weak viewModel] in
+        let carouselWorkItem = DispatchWorkItem {
             // Check if view is still active before executing
             guard self.currentPhase == .polaroidEntrance || self.currentPhase == .carousel else { return }
             print("🎉 VictorySequenceView: All polaroids entered, starting carousel")
@@ -394,7 +423,7 @@ struct VictorySequenceView: View {
     private func startAutoAdvance() {
         autoAdvanceTimer?.invalidate()
         autoAdvanceTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { _ in
-            guard !self.viewModel.gameState.isGridView else {
+            guard !self.gameState.isGridView else {
                 self.autoAdvanceTimer?.invalidate()
                 return
             }
@@ -402,9 +431,9 @@ struct VictorySequenceView: View {
         }
         
         // Auto-show grid view after 2 full cycles
-        let cycleTime = Double(viewModel.gameState.polaroidImages.count) * 5.0
+        let cycleTime = Double(gameState.polaroidImages.count) * 5.0
         gridViewTimer = Timer.scheduledTimer(withTimeInterval: cycleTime * 2, repeats: false) { _ in
-            guard !self.viewModel.gameState.isGridView else { return }
+            guard !self.gameState.isGridView else { return }
             self.showGridView()
         }
     }
@@ -416,15 +445,19 @@ struct VictorySequenceView: View {
     }
     
     private func advancePolaroid() {
-        viewModel.gameState.currentPolaroidIndex = (viewModel.gameState.currentPolaroidIndex + 1) % viewModel.gameState.polaroidImages.count
-        viewModel.gameState.polaroidClicks += 1
+        let oldIndex = gameState.currentPolaroidIndex
+        let newIndex = (gameState.currentPolaroidIndex + 1) % gameState.polaroidImages.count
+        print("🔍 [ADVANCE] Advancing from \(oldIndex) to \(newIndex) (total: \(gameState.polaroidImages.count))")
+        gameState.currentPolaroidIndex = newIndex
+        print("🔍 [ADVANCE] currentPolaroidIndex is now: \(gameState.currentPolaroidIndex)")
+        gameState.polaroidClicks += 1
         
         // Reset auto-advance timer
         autoAdvanceTimer?.invalidate()
         startAutoAdvance()
         
         // Show "View All" button after 3 clicks or after viewing all photos once
-        if viewModel.gameState.polaroidClicks >= 3 || (viewModel.gameState.currentPolaroidIndex == 0 && viewModel.gameState.polaroidClicks > 0) {
+        if gameState.polaroidClicks >= 3 || (gameState.currentPolaroidIndex == 0 && gameState.polaroidClicks > 0) {
             if !showViewAllButton {
                 withAnimation {
                     showViewAllButton = true
@@ -437,7 +470,7 @@ struct VictorySequenceView: View {
         autoAdvanceTimer?.invalidate()
         gridViewTimer?.invalidate()
         
-        viewModel.gameState.isGridView = true
+        gameState.isGridView = true
         currentPhase = .gridView
         
         // Fade out banner and hint
@@ -482,58 +515,3 @@ struct VictorySequenceView: View {
     }
 }
 
-// MARK: - Polaroid View
-
-struct PolaroidView: View {
-    let image: UIImage
-    let index: Int
-    let isVisible: Bool
-    let currentIndex: Int
-    let totalCount: Int
-    
-    private var offset: PolaroidOffset {
-        let polaroidOffset = (index - currentIndex + totalCount) % totalCount
-        let stackOffset = min(polaroidOffset, 5)
-        
-        return PolaroidOffset(
-            x: Double(stackOffset * 5),
-            y: Double(stackOffset * 3),
-            scale: 1.0 - Double(stackOffset) * 0.05,
-            rotation: Double(stackOffset * 2),
-            opacity: max(0.3, 1.0 - Double(stackOffset) * 0.15),
-            zIndex: 100 - Double(polaroidOffset)
-        )
-    }
-    
-    var body: some View {
-        Image(uiImage: image)
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 600, height: 600)
-            .border(Color.white, width: 8)
-            .background(Color.white)
-            .padding(.bottom, 40) // Polaroid frame effect
-            .shadow(color: .black.opacity(0.8), radius: 16)
-            .offset(x: isVisible ? offset.x : 0, y: isVisible ? offset.y : -100)
-            .scaleEffect(isVisible ? offset.scale : 0.3)
-            .rotationEffect(.degrees(isVisible ? offset.rotation : 180))
-            .opacity(isVisible ? offset.opacity : 0)
-            .zIndex(offset.zIndex)
-            .animation(isVisible ? .spring(response: 1.2, dampingFraction: 0.4) : nil, value: isVisible)
-            .animation(.spring(response: 0.5, dampingFraction: 0.8), value: currentIndex)
-    }
-}
-
-struct PolaroidOffset: Equatable {
-    let x: Double
-    let y: Double
-    let scale: Double
-    let rotation: Double
-    let opacity: Double
-    let zIndex: Double
-    
-    static func == (lhs: PolaroidOffset, rhs: PolaroidOffset) -> Bool {
-        lhs.x == rhs.x && lhs.y == rhs.y && lhs.scale == rhs.scale &&
-        lhs.rotation == rhs.rotation && lhs.opacity == rhs.opacity && lhs.zIndex == rhs.zIndex
-    }
-}

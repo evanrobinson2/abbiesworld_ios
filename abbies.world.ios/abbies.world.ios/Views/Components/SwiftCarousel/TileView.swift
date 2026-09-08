@@ -223,6 +223,11 @@ struct TileView: View {
                 startPulse()
             }
         }
+        .onDisappear {
+            // Release image from memory when tile scrolls off-screen
+            // Image will reload from disk cache if needed (fast SSD read)
+            loadedImage = nil
+        }
         .onChange(of: isSelected) { oldValue, newValue in
             if newValue {
                 startPulse()

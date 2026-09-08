@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 import AVFoundation
 import Combine
 
@@ -192,7 +193,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
                     guard let self = self else { return }
                     // Filter to only main playlist tracks (exclude game-specific music like goonpopper)
                     let mainAssets = assets.filter { $0.type == "music/main" }
-                    let tracks = mainAssets.map { MusicTrack(from: $0) }
+                    let tracks = mainAssets.map { asset in MusicTrack(from: asset) }
                     self.playlist = tracks
                     self.cachePlaylist(tracks)
                     print("✅ MusicService: Loaded \(tracks.count) main playlist songs from server (filtered from \(assets.count) total music tracks)")
@@ -606,6 +607,15 @@ private struct MusicSettings: Codable {
     
     enum CodingKeys: String, CodingKey {
         case isShuffleEnabled, isMusicEnabled, repeatMode, currentIndex, isMuted
+    }
+    
+    // Regular initializer for creating instances
+    init(isShuffleEnabled: Bool, isMusicEnabled: Bool, repeatMode: RepeatMode, currentIndex: Int, isMuted: Bool) {
+        self.isShuffleEnabled = isShuffleEnabled
+        self.isMusicEnabled = isMusicEnabled
+        self.repeatMode = repeatMode
+        self.currentIndex = currentIndex
+        self.isMuted = isMuted
     }
     
     init(from decoder: Decoder) throws {

@@ -31,6 +31,15 @@ struct SettingsView: View {
                             .padding(.horizontal)
                         
                         SettingsRow(icon: "info.circle.fill", title: "About", action: {})
+                        
+                        SettingsRow(
+                            icon: "power",
+                            title: "Quit App",
+                            action: {
+                                // Quit the app
+                                exit(0)
+                            }
+                        )
                     }
                     
                     Spacer()
@@ -40,12 +49,8 @@ struct SettingsView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
+                    CloseButton.black() {
                         onDismiss()
-                    }) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 30))
-                            .foregroundColor(.white.opacity(0.8))
                     }
                 }
             }

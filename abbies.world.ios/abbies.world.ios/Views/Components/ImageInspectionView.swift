@@ -97,13 +97,9 @@ struct ImageInspectionView: View {
                             }
                             .padding(.trailing, 8)
                             
-                            // Close button (top right)
-                            Button(action: {
+                            // Close button (top right) - high contrast white on black
+                            CloseButton.white() {
                                 dismiss()
-                            }) {
-                                Image(systemName: "xmark.circle.fill")
-                                    .font(.system(size: 30))
-                                    .foregroundColor(.white.opacity(0.8))
                             }
                             .padding()
                         }
@@ -169,6 +165,9 @@ struct ImageInspectionView: View {
                 loadImage(for: images[newValue + 1])
             }
             loadImage(for: images[newValue])
+            
+            // Cleanup: Keep only current + adjacent images (max 5 images)
+            cleanupImages(keepIndex: newValue)
         }
     }
     
@@ -191,6 +190,32 @@ struct ImageInspectionView: View {
             } catch {
                 print("❌ Error loading image for inspection: \(error.localizedDescription)")
             }
+        }
+    }
+    
+    /// Cleanup loaded images dictionary - keep only current + adjacent images
+    /// This prevents unbounded memory growth when scrolling through many images
+    private func cleanupImages(keepIndex: Int) {
+        guard !images.isEmpty else { return }
+        
+        // Keep current image + 2 adjacent on each side (max 5 images)
+        let bufferSize = 2
+        let startIndex = max(0, keepIndex - bufferSize)
+        let endIndex = min(images.count - 1, keepIndex + bufferSize)
+        
+        // Collect IDs to keep
+        var keepIds = Set<String>()
+        for i in startIndex...endIndex {
+            keepIds.insert(images[i].id)
+        }
+        
+        // Remove images outside the buffer zone
+        let beforeCount = loadedImages.count
+        loadedImages = loadedImages.filter { keepIds.contains($0.key) }
+        let removedCount = beforeCount - loadedImages.count
+        
+        if removedCount > 0 {
+            print("🧹 ImageInspectionView: Cleaned up \(removedCount) images (kept \(loadedImages.count) in buffer)")
         }
     }
 }

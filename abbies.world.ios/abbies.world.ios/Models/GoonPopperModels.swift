@@ -40,9 +40,12 @@ class GoonNode: SKSpriteNode {
 class GoonPopperGameState: ObservableObject {
     @Published var gameStarted: Bool = false
     @Published var gameOver: Bool = false
+    @Published var statusMessage: String = "Tap a balloon to start!"
     @Published var elapsedTime: TimeInterval = 0
     @Published var startTime: Date?
     @Published var goonsPopped: Int = 0
+    @Published var score: Int = 0
+    @Published var bombsHit: Int = 0
     @Published var totalGoons: Int = 13
     
     // Asset images

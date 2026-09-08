@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct GoonPopperView: View {
     @StateObject private var viewModel = GoonPopperViewModel()
@@ -16,7 +17,6 @@ struct GoonPopperView: View {
     
     var body: some View {
         ZStack {
-            // Background gradient
             LinearGradient(
                 colors: [
                     Color(hex: "#1a0033") ?? Color(red: 0.1, green: 0, blue: 0.2),
@@ -27,47 +27,54 @@ struct GoonPopperView: View {
             )
             .ignoresSafeArea()
             
-            VStack(spacing: 0) {
-                // Timer display
-                if viewModel.gameState.gameStarted {
-                    HStack {
-                        Text("Time: \(viewModel.gameState.formattedTime)")
-                            .font(.system(size: 24, weight: .bold))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 20)
-                            .padding(.vertical, 10)
-                            .background(
-                                RoundedRectangle(cornerRadius: 8)
-                                    .fill(Color.black.opacity(0.6))
-                            )
+            GeometryReader { geometry in
+                VStack(spacing: 10) {
+                    HStack(spacing: 12) {
+                        Text("Balloon Pop")
+                            .font(.system(size: min(32, geometry.size.height * 0.05), weight: .heavy, design: .rounded))
                         
                         Spacer()
+                        
+                        Text("Score \(viewModel.gameState.score)")
+                        Text("\(viewModel.gameState.goonsPopped) / \(viewModel.gameState.totalGoons)")
+                        Text(viewModel.gameState.formattedTime)
                     }
-                    .padding()
-                }
-                
-                // Game canvas
-                GoonPopperCanvas(viewModel: viewModel)
-                    .frame(width: 1232, height: 928)
-                    .border(Color.gray, width: 2)
-                    .background(Color(hex: "#f0f0f0") ?? .gray)
-                    .cornerRadius(5)
-                
-                // Dismiss button (top right)
-                VStack {
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                            onDismiss?()
-                        }) {
-                            Image(systemName: "xmark.circle.fill")
-                                .font(.system(size: 30))
-                                .foregroundColor(.white.opacity(0.8))
-                        }
-                        .padding()
+                    .font(.system(size: min(24, geometry.size.height * 0.035), weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(Color.black.opacity(0.55))
+                    .clipShape(RoundedRectangle(cornerRadius: 14))
+                    
+                    GoonPopperCanvas(viewModel: viewModel)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .background(Color(hex: "#f0f0f0") ?? .gray)
+                        .clipShape(RoundedRectangle(cornerRadius: 18))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 18)
+                                .stroke(Color.white.opacity(0.75), lineWidth: 3)
+                        )
+                    
+                    Text(viewModel.gameState.statusMessage)
+                        .font(.system(size: min(22, geometry.size.height * 0.032), weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                        .frame(maxWidth: .infinity)
                     }
+                .padding(.horizontal, max(12, geometry.size.width * 0.02))
+                .padding(.vertical, max(8, geometry.size.height * 0.015))
+            }
+            
+            VStack {
+                HStack {
                     Spacer()
+                    CloseButton.white() {
+                        onDismiss?()
+                    }
+                    .padding(18)
                 }
+                Spacer()
             }
         }
         .onAppear {
@@ -77,6 +84,11 @@ struct GoonPopperView: View {
         }
         .onDisappear {
             viewModel.cleanup()
+        }
+        .onReceive(viewModel.gameState.$gameOver.dropFirst()) { gameOver in
+            if gameOver {
+                onComplete?()
+            }
         }
     }
 }
