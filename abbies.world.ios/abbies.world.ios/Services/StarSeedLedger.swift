@@ -29,6 +29,7 @@ final class StarSeedLedger: ObservableObject {
 
     private init() {
         isTestMode = ProcessInfo.processInfo.arguments.contains("-autoPlayDinoPicnic")
+            || ProcessInfo.processInfo.arguments.contains("-autoPlayWhizbang")
         ledgerURL = isTestMode ? nil : Self.makeLedgerURL()
         load()
     }

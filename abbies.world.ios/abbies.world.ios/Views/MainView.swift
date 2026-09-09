@@ -23,6 +23,9 @@ struct MainView: View {
     @State private var showDinoPicnic =
         ProcessInfo.processInfo.arguments.contains("-launchDinoPicnic") ||
         ProcessInfo.processInfo.arguments.contains("-autoPlayDinoPicnic")
+    @State private var showWhizbang =
+        ProcessInfo.processInfo.arguments.contains("-launchWhizbang") ||
+        ProcessInfo.processInfo.arguments.contains("-autoPlayWhizbang")
     // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
     @State private var showSettings = false
@@ -308,6 +311,7 @@ struct MainView: View {
                     showGoonPopper: $showGoonPopper,
                     showPictureCarver: $showPictureCarver,
                     showDinoPicnic: $showDinoPicnic,
+                    showWhizbang: $showWhizbang,
                     // showMemoryGame: $showMemoryGame,
                     onDismiss: {
                         showGamesDialog = false
@@ -344,6 +348,11 @@ struct MainView: View {
             .fullScreenCover(isPresented: $showDinoPicnic) {
                 DinoPicnicView()
             }
+            .fullScreenCover(isPresented: $showWhizbang) {
+                IncredimachineView(
+                    onDismiss: { showWhizbang = false }
+                )
+            }
             // Memory Game temporarily disabled
             // .fullScreenCover(isPresented: $showMemoryGame) {
             //     MemoryGameView(
@@ -366,6 +375,9 @@ struct MainView: View {
                 MusicService.shared.setGameActive(newValue)
             }
             .onChange(of: showDinoPicnic) { oldValue, newValue in
+                MusicService.shared.setGameActive(newValue)
+            }
+            .onChange(of: showWhizbang) { oldValue, newValue in
                 MusicService.shared.setGameActive(newValue)
             }
         }
