@@ -8,6 +8,23 @@
 import Foundation
 import Combine
 
+enum APIClientError: LocalizedError {
+    case invalidResponse
+    case unauthorized
+    case httpStatus(Int)
+
+    var errorDescription: String? {
+        switch self {
+        case .invalidResponse:
+            return "The server sent an invalid response."
+        case .unauthorized:
+            return "Couldn’t load Abbie’s pictures because server access is not configured."
+        case .httpStatus(let statusCode):
+            return "The server returned HTTP \(statusCode)."
+        }
+    }
+}
+
 class APIClient: ObservableObject {
     static let shared = APIClient()
     
@@ -72,8 +89,7 @@ class APIClient: ObservableObject {
                 .eraseToAnyPublisher()
         }
         
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
+        return validatedDataPublisher(for: request)
             .decode(type: FavoriteResponse.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
@@ -106,6 +122,25 @@ class APIClient: ObservableObject {
     }
     
     // MARK: - Helper
+
+    func validatedDataPublisher(for request: URLRequest) -> AnyPublisher<Data, Error> {
+        URLSession.shared.dataTaskPublisher(for: request)
+            .tryMap { output in
+                guard let response = output.response as? HTTPURLResponse else {
+                    throw APIClientError.invalidResponse
+                }
+
+                guard (200..<300).contains(response.statusCode) else {
+                    if response.statusCode == 401 || response.statusCode == 403 {
+                        throw APIClientError.unauthorized
+                    }
+                    throw APIClientError.httpStatus(response.statusCode)
+                }
+
+                return output.data
+            }
+            .eraseToAnyPublisher()
+    }
     
     private func request<T: Decodable>(url: String, method: String) -> AnyPublisher<T, Error> {
         guard let url = URL(string: url) else {
@@ -119,8 +154,7 @@ class APIClient: ObservableObject {
         // Add API key header if available
         ServerConfig.shared.addAPIKeyHeader(to: &urlRequest)
         
-        return URLSession.shared.dataTaskPublisher(for: urlRequest)
-            .map(\.data)
+        return validatedDataPublisher(for: urlRequest)
             .decode(type: T.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }

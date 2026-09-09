@@ -14,7 +14,7 @@ struct ToastView: View {
     let customIcon: String?
     let imageURL: String?
     let position: ToastPosition
-    @Binding var isShowing: Bool
+    let onDismiss: () -> Void
     @State private var toastImage: UIImage?
     
     enum ToastPosition {
@@ -63,8 +63,7 @@ struct ToastView: View {
     }
     
     var body: some View {
-        if isShowing {
-            HStack(spacing: 12) {
+        HStack(spacing: 12) {
                 // Show image if available (for asset notifications)
                 if let image = toastImage {
                     Image(uiImage: image)
@@ -85,18 +84,38 @@ struct ToastView: View {
                 if position == .top {
                     Spacer()
                 }
+
+                Button(action: onDismiss) {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 16, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(width: 44, height: 44)
+                        .background(Color.black.opacity(0.18))
+                        .clipShape(Circle())
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Dismiss message")
             }
-            .padding(.horizontal, 16)
-            .padding(.vertical, 12)
+            .padding(.leading, 16)
+            .padding(.trailing, 8)
+            .padding(.vertical, 6)
             .background(displayColor.opacity(0.9))
             .foregroundColor(.white)
             .cornerRadius(12)
             .shadow(color: Color.black.opacity(0.2), radius: 8, x: 0, y: 4)
-            .frame(maxWidth: position == .bottomRight ? 280 : nil)
+            .frame(maxWidth: position == .bottomRight ? 320 : nil)
             .padding(.horizontal, position == .top ? 20 : 0)
             .padding(.top, position == .top ? 60 : 0)
             .transition(position == .top ? .move(edge: .top).combined(with: .opacity) : .move(edge: .bottom).combined(with: .opacity))
-            .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isShowing)
+            .gesture(
+                DragGesture(minimumDistance: 20)
+                    .onEnded { value in
+                        if abs(value.translation.width) > 40 ||
+                            abs(value.translation.height) > 40 {
+                            onDismiss()
+                        }
+                    }
+            )
             .onAppear {
                 // Load image if URL provided
                 if let imageURLString = imageURL, let url = URL(string: imageURLString) {
@@ -112,7 +131,6 @@ struct ToastView: View {
                         }
                     }
                 }
-            }
         }
     }
 }
@@ -135,7 +153,11 @@ struct ToastModifier: ViewModifier {
                                 customIcon: toast.customIcon,
                                 imageURL: toast.imageURL,
                                 position: toast.position,
-                                isShowing: .constant(true)
+                                onDismiss: {
+                                    withAnimation {
+                                        self.toast = nil
+                                    }
+                                }
                             )
                             Spacer()
                         }
@@ -151,7 +173,11 @@ struct ToastModifier: ViewModifier {
                                     customIcon: toast.customIcon,
                                     imageURL: toast.imageURL,
                                     position: toast.position,
-                                    isShowing: .constant(true)
+                                    onDismiss: {
+                                        withAnimation {
+                                            self.toast = nil
+                                        }
+                                    }
                                 )
                                 .padding(.trailing, 16)
                                 .padding(.bottom, 60)
@@ -161,8 +187,13 @@ struct ToastModifier: ViewModifier {
                 }
                 .onAppear {
                     // Auto-dismiss
+                    let toastID = toast.id
                     DispatchQueue.main.asyncAfter(deadline: .now() + Double(toast.duration)) {
-                        self.toast = nil
+                        if self.toast?.id == toastID {
+                            withAnimation {
+                                self.toast = nil
+                            }
+                        }
                     }
                 }
             }

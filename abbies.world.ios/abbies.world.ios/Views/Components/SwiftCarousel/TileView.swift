@@ -71,7 +71,7 @@ struct TileView: View {
     }
     
     @ViewBuilder
-    private func framedTile<Inner: View>(@ViewBuilder inner: () -> Inner) -> some View {
+    private func framedTile<Inner: View>(@ViewBuilder inner: @escaping () -> Inner) -> some View {
         let size = CGSize(width: config.tileWidth, height: config.tileHeight)
         if config.tileChrome == .halloweenSticker {
             HalloweenTileChrome(

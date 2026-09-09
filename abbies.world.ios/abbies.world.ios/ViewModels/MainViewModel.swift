@@ -93,14 +93,6 @@ class MainViewModel: ObservableObject {
         setupCategoryMapping()
         setupSSEConnection()
         setupButtonStateObserver()
-        // Initialize music service (loads playlist on init)
-        _ = MusicService.shared
-        
-        // Load persisted view mode
-        if let savedMode = UserDefaults.standard.string(forKey: "viewMode"),
-           let mode = ViewMode(rawValue: savedMode) {
-            viewMode = mode
-        }
         
         if ProcessInfo.processInfo.arguments.contains("-mediaPackHalloween") {
             mediaPack = .halloween
@@ -108,12 +100,21 @@ class MainViewModel: ObservableObject {
                   let pack = MediaPack(rawValue: savedPack) {
             mediaPack = pack
         }
+
+        // Resolve the pack before restoring view mode so a persisted four-row
+        // layout cannot start an Everyday style request during Halloween launch.
+        if let savedMode = UserDefaults.standard.string(forKey: "viewMode"),
+           let mode = ViewMode(rawValue: savedMode) {
+            viewMode = mode
+        }
         
         if mediaPack == .halloween {
             viewMode = .fourCarousel
         } else if viewMode == .fourCarousel {
             loadStyleItems()
         }
+
+        MusicService.shared.setMediaPack(mediaPack)
     }
     
     // Computed property to check if all selections are ready
@@ -288,6 +289,8 @@ class MainViewModel: ObservableObject {
     }
     
     private func loadBackgroundFromURL(_ urlString: String) {
+        guard mediaPack == .classic else { return }
+
         let baseURL = apiClient.baseURL
         let fullURL: String
         
@@ -308,7 +311,9 @@ class MainViewModel: ObservableObject {
             do {
                 if let image = try await ImageCache.shared.loadImage(from: url) {
                     await MainActor.run {
-                        self.backgroundImage = image
+                        if self.mediaPack == .classic {
+                            self.backgroundImage = image
+                        }
                     }
                 }
             } catch {
@@ -343,7 +348,7 @@ class MainViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] backgrounds in
-                    guard let self = self else { return }
+                    guard let self = self, self.mediaPack == .classic else { return }
                     
                     if let firstBackground = backgrounds.first,
                        let assetURL = self.assetsService.assetURL(for: firstBackground) {
@@ -351,7 +356,9 @@ class MainViewModel: ObservableObject {
                             do {
                                 if let image = try await ImageCache.shared.loadImage(from: assetURL) {
                                     await MainActor.run {
-                                        self.backgroundImage = image
+                                        if self.mediaPack == .classic {
+                                            self.backgroundImage = image
+                                        }
                                     }
                                 } else {
                                     await MainActor.run {
@@ -374,6 +381,8 @@ class MainViewModel: ObservableObject {
     }
     
     private func loadBundledBackground() {
+        guard mediaPack == .classic else { return }
+
         // Try bundled images as fallback
         if let imagePath = Bundle.main.path(forResource: "background", ofType: "png") ??
                           Bundle.main.path(forResource: "background", ofType: "jpg") ??
@@ -409,6 +418,7 @@ class MainViewModel: ObservableObject {
                 receiveCompletion: { [weak self] completion in
                     if case .failure(let error) = completion {
                         print("❌ Error loading friends: \(error.localizedDescription)")
+                        self?.handleMediaLoadFailure(error)
                     }
                     completed += 1
                     if completed == total {
@@ -416,7 +426,7 @@ class MainViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] assets in
-                    guard let self = self else { return }
+                    guard let self = self, self.mediaPack == .classic else { return }
                     let ingredients = self.createIngredientsFromAssets(assets, category: "character_style", assetType: "friends")
                     self.friendItems = ingredients
                 }
@@ -430,6 +440,7 @@ class MainViewModel: ObservableObject {
                 receiveCompletion: { [weak self] completion in
                     if case .failure(let error) = completion {
                         print("❌ Error loading outfits: \(error.localizedDescription)")
+                        self?.handleMediaLoadFailure(error)
                     }
                     completed += 1
                     if completed == total {
@@ -437,7 +448,7 @@ class MainViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] assets in
-                    guard let self = self else { return }
+                    guard let self = self, self.mediaPack == .classic else { return }
                     let ingredients = self.createIngredientsFromAssets(assets, category: "color_palette", assetType: "outfits")
                     self.outfitItems = ingredients
                 }
@@ -451,6 +462,7 @@ class MainViewModel: ObservableObject {
                 receiveCompletion: { [weak self] completion in
                     if case .failure(let error) = completion {
                         print("❌ Error loading places: \(error.localizedDescription)")
+                        self?.handleMediaLoadFailure(error)
                     }
                     completed += 1
                     if completed == total {
@@ -458,12 +470,20 @@ class MainViewModel: ObservableObject {
                     }
                 },
                 receiveValue: { [weak self] assets in
-                    guard let self = self else { return }
+                    guard let self = self, self.mediaPack == .classic else { return }
                     let ingredients = self.createIngredientsFromAssets(assets, category: "world_setting", assetType: "places")
                     self.placeItems = ingredients
                 }
             )
             .store(in: &cancellables)
+    }
+
+    private func handleMediaLoadFailure(_ error: Error) {
+        if error is APIClientError {
+            errorMessage = error.localizedDescription
+        } else {
+            errorMessage = "Couldn’t load Abbie’s pictures. Ask a grown-up to check the connection."
+        }
     }
     
     private func createIngredientsFromAssets(_ assets: [Asset], category: String, assetType: String) -> [Ingredient] {
@@ -732,11 +752,13 @@ class MainViewModel: ObservableObject {
                         print("⚠️ Error loading styles from API: \(error.localizedDescription)")
                         print("   Falling back to placeholder styles")
                         // Fallback to placeholders
-                        self?.loadStylePlaceholders(styles: styles)
+                        if self?.mediaPack == .classic {
+                            self?.loadStylePlaceholders(styles: styles)
+                        }
                     }
                 },
                 receiveValue: { [weak self] assets in
-                    guard let self = self else { return }
+                    guard let self = self, self.mediaPack == .classic else { return }
                     // Create ingredients from API assets, matching to hardcoded style definitions
                     let ingredients = self.createStyleIngredientsFromAssets(assets, styleLookup: styleLookup)
                     self.styleItems = ingredients
@@ -826,6 +848,7 @@ class MainViewModel: ObservableObject {
             }
             mediaPack = pack
             UserDefaults.standard.set(pack.rawValue, forKey: "mediaPack")
+            MusicService.shared.setMediaPack(pack)
             viewMode = .fourCarousel
             resetCarouselSelections()
             applyHalloweenPack()
@@ -835,6 +858,7 @@ class MainViewModel: ObservableObject {
         
         mediaPack = pack
         UserDefaults.standard.set(pack.rawValue, forKey: "mediaPack")
+        MusicService.shared.setMediaPack(pack)
         if let previous = viewModeBeforeHalloween {
             viewMode = previous
             viewModeBeforeHalloween = nil
@@ -967,11 +991,14 @@ class MainViewModel: ObservableObject {
         }
         
         // Create request
-        let recipeItems = [
+        let selectedRecipeItems = [
             RecipeItem(id: friend.id, slotIndex: 0),
             RecipeItem(id: outfit.id, slotIndex: 1),
             RecipeItem(id: place.id, slotIndex: 2)
         ]
+        // Bundled pack IDs do not exist in the server ingredient catalog.
+        // Keep the required array in the request, but make Halloween text-only.
+        let recipeItems = mediaPack == .halloween ? [] : selectedRecipeItems
         
         // MODALITY 2: TEXT DESCRIPTION (style)
         // Style is passed via freeTextDescription, not as a reference image

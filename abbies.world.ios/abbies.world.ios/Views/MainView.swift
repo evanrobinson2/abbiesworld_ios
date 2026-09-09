@@ -29,40 +29,66 @@ struct MainView: View {
     @State private var showMusicPlayer = false
     @State private var isDrawerOpen = false
     
-    private var mainMessage: String {
+    private var creationStatusSteps: [CreationStatusStep] {
+        var steps = [
+            CreationStatusStep(
+                id: "friend",
+                title: viewModel.mediaPack.friendRowTitle,
+                systemImage: "person.2.fill",
+                isComplete: viewModel.friendIndex >= 0
+            ),
+            CreationStatusStep(
+                id: "outfit",
+                title: viewModel.mediaPack.outfitRowTitle,
+                systemImage: "tshirt.fill",
+                isComplete: viewModel.outfitIndex >= 0
+            ),
+            CreationStatusStep(
+                id: "place",
+                title: viewModel.mediaPack.placeRowTitle,
+                systemImage: "map.fill",
+                isComplete: viewModel.placeIndex >= 0
+            )
+        ]
+
+        if viewModel.mediaPack == .halloween || viewModel.viewMode == .fourCarousel {
+            steps.append(
+                CreationStatusStep(
+                    id: "style",
+                    title: viewModel.mediaPack.styleRowTitle,
+                    systemImage: "paintpalette.fill",
+                    isComplete: viewModel.styleIndex >= 0
+                )
+            )
+        }
+
+        return steps
+    }
+
+    private var creationStatus: MainCreationStatusBar.Status {
         if viewModel.isCreatingImage {
-            return "Abbie is making your new picture…"
+            return .creating
         }
         if let generationError = viewModel.imageGenerationError, !generationError.isEmpty {
-            return "That picture did not work. Try again when you’re ready."
+            return .error
         }
         if viewModel.isGenerationComplete {
-            return "Your new picture is ready in the drawer!"
+            return .complete
         }
         if viewModel.isLoadingIngredients {
-            return "Loading Abbie’s choices…"
+            return .loading
         }
         if viewModel.allSelectionsReady {
-            return "Everything is ready—tap Abbie to make the picture!"
+            return .ready
         }
-        
-        var missing: [String] = []
-        if viewModel.friendIndex < 0 { missing.append(viewModel.mediaPack.friendRowTitle.lowercased()) }
-        if viewModel.outfitIndex < 0 { missing.append(viewModel.mediaPack.outfitRowTitle.lowercased()) }
-        if viewModel.placeIndex < 0 { missing.append(viewModel.mediaPack.placeRowTitle.lowercased()) }
-        if (viewModel.mediaPack == .halloween || viewModel.viewMode == .fourCarousel),
-           viewModel.styleIndex < 0 {
-            missing.append(viewModel.mediaPack.styleRowTitle.lowercased())
-        }
-        
-        if missing.isEmpty {
-            return "Choose one picture from each row."
-        }
-        return "Still needed: \(missing.joined(separator: ", "))."
+        return .choosing
     }
     
     var body: some View {
         GeometryReader { geometry in
+            let topSafeArea = max(geometry.safeAreaInsets.top, 24)
+            let topChromeHeight = topSafeArea + 60
+
             ZStack {
                 // Background Image - loads from Flask server with caching, fallback to bundled
                 Group {
@@ -113,7 +139,11 @@ struct MainView: View {
                             )
                         }
                     }
-                    .frame(width: geometry.size.width)
+                    .frame(
+                        width: geometry.size.width,
+                        height: max(0, geometry.size.height - topChromeHeight)
+                    )
+                    .offset(y: topChromeHeight / 2)
                     .opacity(isDrawerOpen ? 0.7 : 1.0)
                     .blur(radius: isDrawerOpen ? 2 : 0)
                     .animation(.spring(response: 0.3, dampingFraction: 0.8), value: isDrawerOpen)
@@ -186,89 +216,81 @@ struct MainView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(Color.black.opacity(0.3))
                 }
-                
-                // Top right buttons (Settings and Games)
-                VStack {
-                    HStack {
-                        Button(action: {
-                            viewModel.toggleMediaPack()
-                        }) {
-                            HStack(spacing: 8) {
-                                Image(systemName: viewModel.mediaPack.symbolName)
-                                    .font(.system(size: 20, weight: .bold))
-                                Text(viewModel.mediaPack.kidLabel)
-                                    .font(.system(size: 16, weight: .heavy, design: .rounded))
-                            }
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 10)
-                            .background(
-                                Capsule()
-                                    .fill(viewModel.mediaPack == .halloween
-                                          ? Color(red: 0.72, green: 0.28, blue: 0.12).opacity(0.92)
-                                          : Color.gray.opacity(0.8))
-                            )
-                            .shadow(radius: 5)
-                        }
-                        .accessibilityLabel("Switch world skin")
-                        .accessibilityValue(viewModel.mediaPack.displayName)
-                        .padding(.top, 16)
-                        .padding(.leading, 16)
-                        
-                        Spacer()
-                        // Settings button
-                        Button(action: {
-                            showSettings = true
-                        }) {
-                            Image(systemName: "gearshape.fill")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                                .padding(12)
-                                .background(Color.gray.opacity(0.8))
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-                        }
-                        .padding(.top, 16)
-                        .padding(.trailing, 8)
-                        
-                        // Music button
-                        Button(action: {
-                            showMusicPlayer = true
-                        }) {
-                            Image(systemName: "music.note")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                                .padding(12)
-                                .background(Color.purple.opacity(0.8))
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-                        }
-                        .padding(.top, 16)
-                        .padding(.trailing, 8)
-                        
-                        // Games button
-                        Button(action: {
-                            showGamesDialog = true
-                        }) {
-                            Image(systemName: "gamecontroller.fill")
-                                .font(.system(size: 24))
-                                .foregroundColor(.white)
-                                .padding(12)
-                                .background(Color.blue.opacity(0.8))
-                                .clipShape(Circle())
-                                .shadow(radius: 5)
-                        }
-                        .padding(.top, 16)
-                        .padding(.trailing, 16)
-                    }
-                    Spacer()
-                }
             }
-            .overlay(alignment: .bottom) {
-                MainMessageBar(message: mainMessage)
-                    .padding(.horizontal, 72)
-                    .padding(.bottom, 10)
+            .overlay(alignment: .top) {
+                HStack(spacing: 10) {
+                    Button(action: {
+                        viewModel.toggleMediaPack()
+                    }) {
+                        HStack(spacing: 8) {
+                            Image(systemName: viewModel.mediaPack.symbolName)
+                                .font(.system(size: 20, weight: .bold))
+                            Text(viewModel.mediaPack.kidLabel)
+                                .font(.system(size: 16, weight: .heavy, design: .rounded))
+                        }
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 14)
+                        .padding(.vertical, 10)
+                        .background(
+                            Capsule()
+                                .fill(viewModel.mediaPack == .halloween
+                                      ? Color(red: 0.72, green: 0.28, blue: 0.12).opacity(0.92)
+                                      : Color.gray.opacity(0.82))
+                        )
+                        .shadow(radius: 5)
+                    }
+                    .accessibilityLabel("Switch world skin")
+                    .accessibilityValue(viewModel.mediaPack.kidLabel)
+
+                    MainCreationStatusBar(
+                        steps: creationStatusSteps,
+                        status: creationStatus
+                    )
                     .allowsHitTesting(false)
+
+                    Spacer(minLength: 4)
+
+                    Button(action: {
+                        showSettings = true
+                    }) {
+                        Image(systemName: "gearshape.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
+                            .padding(12)
+                            .background(Color.gray.opacity(0.82))
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
+                    }
+                    .accessibilityLabel("Settings")
+
+                    Button(action: {
+                        showMusicPlayer = true
+                    }) {
+                        Image(systemName: "music.note")
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
+                            .padding(12)
+                            .background(Color.purple.opacity(0.82))
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
+                    }
+                    .accessibilityLabel("Music")
+
+                    Button(action: {
+                        showGamesDialog = true
+                    }) {
+                        Image(systemName: "gamecontroller.fill")
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
+                            .padding(12)
+                            .background(Color.blue.opacity(0.82))
+                            .clipShape(Circle())
+                            .shadow(radius: 5)
+                    }
+                    .accessibilityLabel("Games")
+                }
+                .padding(.top, topSafeArea + 4)
+                .padding(.horizontal, 16)
             }
             .sheet(isPresented: $showSettings) {
                 SettingsView(onDismiss: {
@@ -382,30 +404,95 @@ struct MainView: View {
     }
 }
 
-private struct MainMessageBar: View {
-    let message: String
+private struct CreationStatusStep: Identifiable {
+    let id: String
+    let title: String
+    let systemImage: String
+    let isComplete: Bool
+}
+
+private struct MainCreationStatusBar: View {
+    enum Status: Equatable {
+        case loading
+        case choosing
+        case ready
+        case creating
+        case complete
+        case error
+
+        var summary: String {
+            switch self {
+            case .loading: return "LOADING CHOICES"
+            case .choosing: return "BUILD YOUR RECIPE"
+            case .ready: return "READY TO CREATE"
+            case .creating: return "MAKING YOUR PICTURE"
+            case .complete: return "PICTURE READY"
+            case .error: return "READY TO TRY AGAIN"
+            }
+        }
+
+        var accentColor: Color {
+            switch self {
+            case .loading: return .blue
+            case .choosing: return .purple
+            case .ready: return .green
+            case .creating: return .orange
+            case .complete: return .cyan
+            case .error: return .red
+            }
+        }
+    }
+
+    let steps: [CreationStatusStep]
+    let status: Status
+
+    private var completedCount: Int {
+        steps.filter(\.isComplete).count
+    }
     
     var body: some View {
-        HStack(spacing: 10) {
-            Image(systemName: "bubble.left.fill")
-                .foregroundColor(.yellow)
-            
-            Text(message)
-                .font(.system(size: 17, weight: .bold, design: .rounded))
-                .foregroundColor(.white)
-                .lineLimit(1)
-                .minimumScaleFactor(0.75)
+        HStack(spacing: 8) {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("ABBIE'S PICTURE QUEST")
+                    .font(.system(size: 16, weight: .heavy, design: .rounded))
+                    .foregroundColor(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
+                    .shadow(color: .black.opacity(0.5), radius: 2, y: 1)
+
+                Text(status == .choosing
+                     ? "\(completedCount) OF \(steps.count) READY"
+                     : status.summary)
+                    .font(.system(size: 11, weight: .heavy, design: .rounded))
+                    .foregroundColor(.white.opacity(0.9))
+                    .contentTransition(.numericText())
+                    .shadow(color: .black.opacity(0.5), radius: 2, y: 1)
+            }
+            .frame(width: 225, alignment: .leading)
+
+            HStack(spacing: 8) {
+                ForEach(steps) { step in
+                    let isFilled = step.isComplete || status == .complete
+
+                    Image(systemName: isFilled ? "checkmark" : step.systemImage)
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.white)
+                        .frame(width: 48, height: 48)
+                        .background(
+                            isFilled
+                                ? status.accentColor.opacity(0.82)
+                                : Color.gray.opacity(0.8)
+                        )
+                        .clipShape(Circle())
+                        .shadow(radius: 5)
+                        .accessibilityLabel(
+                            "\(step.title): \(isFilled ? "ready" : "not selected")"
+                        )
+                }
+            }
         }
-        .padding(.horizontal, 18)
-        .padding(.vertical, 11)
-        .frame(maxWidth: 680)
-        .background(Color.black.opacity(0.78))
-        .clipShape(Capsule())
-        .overlay(
-            Capsule()
-                .stroke(Color.white.opacity(0.8), lineWidth: 2)
-        )
-        .shadow(color: .black.opacity(0.35), radius: 8, y: 3)
+        .animation(.spring(response: 0.3, dampingFraction: 0.8), value: completedCount)
+        .animation(.easeInOut(duration: 0.25), value: status)
     }
 }
 
