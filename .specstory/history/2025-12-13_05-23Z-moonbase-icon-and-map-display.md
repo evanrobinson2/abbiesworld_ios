@@ -3745,7 +3745,7 @@ Lines added: 159, lines removed: 1
 + 
 + # Configuration
 + BASE_URL="${BASE_URL:-http://abbies.world:8000}"
-+ API_KEY="${ABBIES_WORLD_SERVER_API_KEY:-S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc}"
++ API_KEY="${ABBIES_WORLD_SERVER_API_KEY:-[REDACTED_REVOKED_KEY]}"
 + 
 + # Colors for output
 + GREEN='\033[0;32m'
@@ -3915,16 +3915,16 @@ chmod +x /Users/evanrobinson/abbies.world.ios/scripts/enumerate_waypoint_assets.
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc" && ./scripts/enumerate_waypoint_assets.sh</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="[REDACTED_REVOKED_KEY]" && ./scripts/enumerate_waypoint_assets.sh</summary>
 
 ```bash
-cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc" && ./scripts/enumerate_waypoint_assets.sh
+cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="[REDACTED_REVOKED_KEY]" && ./scripts/enumerate_waypoint_assets.sh
 ```
 
 ```
 [0;34m=== Waypoint Navigation Game Asset Enumerator ===[0m
 Server: http://abbies.world:8000
-API Key: S-4sWsMrIE...[0m
+API Key: [REDACTED_REVOKED_KEY]...[0m
 
 [0;34m1. Checking Assets API endpoints...[0m
 
@@ -4065,16 +4065,16 @@ Lines added: 7, lines removed: 1
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc" && ./scripts/enumerate_waypoint_assets.sh 2>&1 | head -100</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="[REDACTED_REVOKED_KEY]" && ./scripts/enumerate_waypoint_assets.sh 2>&1 | head -100</summary>
 
 ```bash
-cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc" && ./scripts/enumerate_waypoint_assets.sh 2>&1 | head -100
+cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="[REDACTED_REVOKED_KEY]" && ./scripts/enumerate_waypoint_assets.sh 2>&1 | head -100
 ```
 
 ```
 [0;34m=== Waypoint Navigation Game Asset Enumerator ===[0m
 Server: http://abbies.world:8000
-API Key: S-4sWsMrIE...[0m
+API Key: [REDACTED_REVOKED_KEY]...[0m
 
 [0;34m1. Checking Assets API endpoints...[0m
 
@@ -4148,16 +4148,16 @@ Running the script again to see the full output:
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc" && ./scripts/enumerate_waypoint_assets.sh</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="[REDACTED_REVOKED_KEY]" && ./scripts/enumerate_waypoint_assets.sh</summary>
 
 ```bash
-cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc" && ./scripts/enumerate_waypoint_assets.sh
+cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="[REDACTED_REVOKED_KEY]" && ./scripts/enumerate_waypoint_assets.sh
 ```
 
 ```
 [0;34m=== Waypoint Navigation Game Asset Enumerator ===[0m
 Server: http://abbies.world:8000
-API Key: S-4sWsMrIE...[0m
+API Key: [REDACTED_REVOKED_KEY]...[0m
 
 [0;34m1. Checking Assets API endpoints...[0m
 
@@ -4255,10 +4255,10 @@ Lines added: 2, lines removed: 1
 ---
 
 <tool-use data-tool-type="shell" data-tool-name="run_terminal_cmd">
-<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc" && ./scripts/enumerate_waypoint_assets.sh 2>&1 | tail -20</summary>
+<details><summary>Tool use: **run_terminal_cmd** • Run command: cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="[REDACTED_REVOKED_KEY]" && ./scripts/enumerate_waypoint_assets.sh 2>&1 | tail -20</summary>
 
 ```bash
-cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc" && ./scripts/enumerate_waypoint_assets.sh 2>&1 | tail -20
+cd /Users/evanrobinson/abbies.world.ios && export ABBIES_WORLD_SERVER_API_KEY="[REDACTED_REVOKED_KEY]" && ./scripts/enumerate_waypoint_assets.sh 2>&1 | tail -20
 ```
 
 ```

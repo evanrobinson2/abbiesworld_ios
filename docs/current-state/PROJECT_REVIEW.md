@@ -80,7 +80,7 @@ Services/
 **Location:** `Info.plist:60-61`
 ```xml
 <key>ServerAPIKey</key>
-<string>S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc</string>
+<string>[REDACTED_REVOKED_KEY]</string>
 ```
 
 **Issue:** API keys stored in Info.plist are **visible in the app bundle** and can be extracted by anyone who downloads the app.

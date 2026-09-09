@@ -7695,7 +7695,7 @@ Add the API key to your HTTP requests using the `Authorization` header.
 
 ```swift
 
-let apiKey = "S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc"
+let apiKey = "[REDACTED_REVOKED_KEY]"
 
 let url = URL(string: "https://abbies.world:8000/api/assets")!
 
@@ -7729,7 +7729,7 @@ extension URLRequest {
 
 var request = URLRequest(url: url)
 
-request.setAPIKey("S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc")
+request.setAPIKey("[REDACTED_REVOKED_KEY]")
 
 ```
 
@@ -7749,7 +7749,7 @@ The server accepts these formats:
 
 func fetchAssets() {
 
-    let apiKey = "S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc"
+    let apiKey = "[REDACTED_REVOKED_KEY]"
 
     guard let url = URL(string: "https://abbies.world:8000/api/assets") else { return }
 
@@ -7879,7 +7879,7 @@ Updated the code to use the `Authorization` header with the `Bearer` format, as 
 **The fix:**
 All services (`APIClient`, `SSEService`, `AssetsService`, `MainViewModel`, etc.) will now send:
 ```
-Authorization: Bearer S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc
+Authorization: Bearer [REDACTED_REVOKED_KEY]
 ```
 
 Rebuild and run the app. The 401 errors should be resolved, and the API should authenticate correctly.

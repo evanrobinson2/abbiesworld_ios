@@ -8,7 +8,13 @@ set +e
 
 # Configuration
 BASE_URL="${BASE_URL:-http://abbies.world:8000}"
-API_KEY="${ABBIES_WORLD_SERVER_API_KEY:-S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc}"
+API_KEY="${ABBIES_WORLD_SERVER_API_KEY:-}"
+
+if [[ -z "$API_KEY" ]]; then
+    echo "ABBIES_WORLD_SERVER_API_KEY is required." >&2
+    echo "Load it from a local, gitignored environment file." >&2
+    exit 2
+fi
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -19,7 +25,7 @@ NC='\033[0m' # No Color
 
 echo -e "${BLUE}=== Waypoint Navigation Game Asset Enumerator ===${NC}"
 echo -e "Server: ${BASE_URL}"
-echo -e "API Key: ${API_KEY:0:10}...${NC}\n"
+echo -e "API key: provided via environment${NC}\n"
 
 # Function to make API request
 api_request() {

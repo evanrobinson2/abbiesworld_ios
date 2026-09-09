@@ -752,7 +752,7 @@ most of the startup sequence is working now .. so can you look through these deb
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 MainView rendering - size: (1376.0, 1032.0)
 
@@ -776,7 +776,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/backgrounds
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 📦 MainViewModel: loadIngredients() called
 
@@ -784,7 +784,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🎠 Loading carousel items from Assets API
 
@@ -792,19 +792,19 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/friends
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/outfits
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/places
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 📚 MainViewModel: loadHistory() called
 
@@ -814,7 +814,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/generated-images
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔌 SSEService: Connecting to http://abbies.world:8000/api/events
 
@@ -822,13 +822,13 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/events
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/events
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔍 RightColumnView appeared - printing right column calculations...
 

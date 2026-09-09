@@ -59,25 +59,28 @@ class ServerConfig {
         UserDefaults.standard.synchronize()
     }
     
-    /// API Key for server authentication
-    /// Priority: UserDefaults > Info.plist > Environment variable > nil
+    /// API key for local development.
+    /// Never place the shared server key in source control or a distributed app bundle.
+    /// Priority: environment variable > UserDefaults > expanded Info.plist value > nil
     var apiKey: String? {
-        // 1. Check UserDefaults first (runtime override)
+        // 1. Let a local Xcode launch environment override stale device settings.
+        if let envKey = ProcessInfo.processInfo.environment["ABBIES_WORLD_SERVER_API_KEY"], !envKey.isEmpty {
+            return envKey
+        }
+
+        // 2. Check UserDefaults (runtime override).
         if let userDefaultsKey = UserDefaults.standard.string(forKey: "ServerAPIKey"), !userDefaultsKey.isEmpty {
             return userDefaultsKey
         }
         
-        // 2. Check Info.plist (build-time configuration)
-        if let infoPlistKey = Bundle.main.object(forInfoDictionaryKey: "ServerAPIKey") as? String, !infoPlistKey.isEmpty {
+        // 3. Accept only an expanded local build setting, never the literal placeholder.
+        if let infoPlistKey = Bundle.main.object(forInfoDictionaryKey: "ServerAPIKey") as? String,
+           !infoPlistKey.isEmpty,
+           !infoPlistKey.contains("$(") {
             return infoPlistKey
         }
-        
-        // 3. Check environment variable (for development)
-        if let envKey = ProcessInfo.processInfo.environment["ABBIES_WORLD_SERVER_API_KEY"], !envKey.isEmpty {
-            return envKey
-        }
-        
-        // 4. No API key found
+
+        // 4. No API key found.
         print("⚠️ ServerConfig: No API key found")
         return nil
     }

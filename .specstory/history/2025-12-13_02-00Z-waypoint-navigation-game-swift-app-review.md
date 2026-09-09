@@ -1574,7 +1574,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/moon_buggy_sprite.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/moon_buggy_sprite.png
 
@@ -1586,7 +1586,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/moonbase.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/moonbase.png
 
@@ -1598,7 +1598,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/trio_at_base_pixel.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/trio_at_base_pixel.png
 
@@ -1608,13 +1608,13 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/abbie%20star%20child.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/moon_base_return.mp3
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ❌ Server returned status 404 for background music
 
@@ -1626,7 +1626,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/cinematic_01_moonbase_wide.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/cinematic_01_moonbase_wide.png
 
@@ -1634,7 +1634,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/moon%20mission%201.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/moon%20mission%201.png
 
@@ -1642,7 +1642,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_01_ice_cream_party.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_01_ice_cream_party.png
 
@@ -1650,7 +1650,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_02_chase_scene.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_02_chase_scene.png
 
@@ -1658,7 +1658,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_03_beard_bows.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_03_beard_bows.png
 
@@ -1666,7 +1666,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_04_tea_party.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_04_tea_party.png
 
@@ -1674,7 +1674,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_05_story_time.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_05_story_time.png
 
@@ -1682,7 +1682,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_06_silly_faces.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_06_silly_faces.png
 
@@ -1690,7 +1690,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_07_game_night.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_07_game_night.png
 
@@ -1698,7 +1698,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_08_art_lesson.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_08_art_lesson.png
 
@@ -1706,7 +1706,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_09_group_hug.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_09_group_hug.png
 
@@ -1714,7 +1714,7 @@ SKView implements focusItemsInRect: - caching for linear focus movement is limit
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_10_window_view.png
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 ⚠️ ImageCache: File not found (404): http://abbies.world:8000/static/assets/minigames/waypoint/polaroid_10_window_view.png
 
@@ -2826,7 +2826,7 @@ okay, I was monkeying around with server , and now none of the images are loadin
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 MainView rendering - size: (1376.0, 1032.0)
 
@@ -2844,7 +2844,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/backgrounds
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 📦 MainViewModel: loadIngredients() called
 
@@ -2852,7 +2852,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🎠 Loading carousel items from Assets API
 
@@ -2860,19 +2860,19 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/friends
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/outfits
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/places
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 📚 MainViewModel: loadHistory() called
 
@@ -2882,7 +2882,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/generated-images
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔌 SSEService: Connecting to http://abbies.world:8000/api/events
 
@@ -2890,13 +2890,13 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/events
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/events
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔍 RightColumnView appeared - printing right column calculations...
 
@@ -3118,7 +3118,7 @@ _**User (2025-12-13 00:00Z)**_
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 MainView rendering - size: (1032.0, 1376.0)
 
@@ -3136,7 +3136,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/backgrounds
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 📦 MainViewModel: loadIngredients() called
 
@@ -3144,7 +3144,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🎠 Loading carousel items from Assets API
 
@@ -3152,19 +3152,19 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/friends
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/outfits
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/places
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 📚 MainViewModel: loadHistory() called
 
@@ -3174,7 +3174,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/generated-images
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔌 SSEService: Connecting to http://abbies.world:8000/api/events
 
@@ -3182,13 +3182,13 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/events
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/events
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔍 RightColumnView appeared - printing right column calculations...
 
@@ -3779,7 +3779,7 @@ _**User (2025-12-13 00:00Z)**_
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 MainView rendering - size: (1376.0, 1032.0)
 
@@ -3803,7 +3803,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/backgrounds
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 📦 MainViewModel: loadIngredients() called
 
@@ -3811,7 +3811,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🎠 Loading carousel items from Assets API
 
@@ -3819,19 +3819,19 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/friends
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/outfits
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/assets/places
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 📚 MainViewModel: loadHistory() called
 
@@ -3841,7 +3841,7 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/generated-images
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔌 SSEService: Connecting to http://abbies.world:8000/api/events
 
@@ -3849,13 +3849,13 @@ MainView: onAppear called
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/events
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔑 ServerConfig: Using API key from Info.plist (length: 43)
 
 🔑 ServerConfig: Added Authorization header (Bearer) to request for http://abbies.world:8000/api/events
 
-   API key preview: S-4sWsMrIE...
+   API key preview: [REDACTED_REVOKED_KEY]...
 
 🔍 RightColumnView appeared - printing right column calculations...
 

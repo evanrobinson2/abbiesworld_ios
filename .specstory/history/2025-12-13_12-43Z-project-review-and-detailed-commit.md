@@ -778,7 +778,7 @@ nothing to commit, working tree clean
 - UI: Drawer migration with floating generation button
 
 ### Security note
-- API key found in `Info.plist` (line 61): `S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc`
+- API key found in `Info.plist` (line 61): `[REDACTED_REVOKED_KEY]`
 - Already tracked in git and documented in `PROJECT_REVIEW.md`
 - For production, consider moving to iOS Keychain
 - `.gitignore` includes patterns for sensitive files

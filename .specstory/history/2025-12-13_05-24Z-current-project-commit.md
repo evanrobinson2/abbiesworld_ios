@@ -217,7 +217,7 @@ Found a hardcoded API key in `Info.plist`:
 
 ```60:61:abbies.world.ios/abbies.world.ios/Info.plist
 	<key>ServerAPIKey</key>
-	<string>S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc</string>
+	<string>[REDACTED_REVOKED_KEY]</string>
 ```
 
 This is sensitive and shouldn't be committed. Checking if this file is already tracked in git:

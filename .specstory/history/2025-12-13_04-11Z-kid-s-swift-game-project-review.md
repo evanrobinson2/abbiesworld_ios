@@ -471,7 +471,7 @@ Lines added: 440, lines removed: 1
 + **Location:** &#96;Info.plist:60-61&#96;
 + &#96;&#96;&#96;xml
 + &lt;key&gt;ServerAPIKey&lt;/key&gt;
-+ &lt;string&gt;S-4sWsMrIE5TEiMSZlCyeN9ns6xmGqzpcn-InUvWJoc&lt;/string&gt;
++ &lt;string&gt;[REDACTED_REVOKED_KEY]&lt;/string&gt;
 + &#96;&#96;&#96;
 + 
 + **Issue:** API keys stored in Info.plist are **visible in the app bundle** and can be extracted by anyone who downloads the app.
