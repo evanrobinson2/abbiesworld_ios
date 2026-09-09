@@ -19,6 +19,8 @@ struct SettingsView: View {
                         .font(.title)
                         .fontWeight(.bold)
                         .padding(.top)
+
+                    WorldSkinSection(viewModel: viewModel)
                     
                     // View Mode Section
                     ViewModeSection(viewModel: viewModel)
@@ -54,6 +56,43 @@ struct SettingsView: View {
                     }
                 }
             }
+        }
+    }
+}
+
+struct WorldSkinSection: View {
+    @ObservedObject var viewModel: MainViewModel
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("World Skin")
+                .font(.headline)
+                .padding(.horizontal)
+
+            Picker(
+                "World Skin",
+                selection: Binding(
+                    get: { viewModel.mediaPack },
+                    set: { viewModel.setMediaPack($0) }
+                )
+            ) {
+                ForEach(MediaPack.allCases) { pack in
+                    Label(pack.kidLabel, systemImage: pack.symbolName)
+                        .tag(pack)
+                }
+            }
+            .pickerStyle(.segmented)
+            .padding(.horizontal)
+            .accessibilityLabel("World skin")
+
+            Text(
+                viewModel.mediaPack == .halloween
+                    ? "Halloween uses the bundled spooky pictures and music, even after restarting."
+                    : "Everyday uses the classic server pictures and playlist."
+            )
+            .font(.caption)
+            .foregroundColor(.secondary)
+            .padding(.horizontal)
         }
     }
 }
@@ -108,11 +147,16 @@ struct ViewModeSection: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
+                .disabled(viewModel.mediaPack == .halloween)
                 
                 // Description text
-                Text(viewModel.viewMode == .default 
-                     ? "Standard 3-carousel layout"
-                     : "Extended layout with style selection")
+                Text(
+                    viewModel.mediaPack == .halloween
+                        ? "Halloween always uses four rows."
+                        : (viewModel.viewMode == .default
+                           ? "Standard 3-carousel layout"
+                           : "Extended layout with style selection")
+                )
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .padding(.horizontal)

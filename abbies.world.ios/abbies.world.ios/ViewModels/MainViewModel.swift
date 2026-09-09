@@ -96,6 +96,7 @@ class MainViewModel: ObservableObject {
         
         if ProcessInfo.processInfo.arguments.contains("-mediaPackHalloween") {
             mediaPack = .halloween
+            UserDefaults.standard.set(MediaPack.halloween.rawValue, forKey: "mediaPack")
         } else if let savedPack = UserDefaults.standard.string(forKey: "mediaPack"),
                   let pack = MediaPack(rawValue: savedPack) {
             mediaPack = pack

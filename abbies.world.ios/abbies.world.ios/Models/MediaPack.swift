@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-enum MediaPack: String, CaseIterable, Identifiable {
+enum MediaPack: String, CaseIterable, Identifiable, Hashable {
     case classic
     case halloween
 
