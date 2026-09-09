@@ -48,3 +48,8 @@ Art list: `docs/media-packs/HALLOWEEN_PACK.md`
 - Gym Halloween Dance should be crowded with animal party-goers
 
 Tone: childish, spooky, silly. Nothing scary.
+
+## Later: Whizbang (Incredimachine)
+
+New minigame on `cursor/incredimachine-minigame-bc3d`. Read `docs/minigames/INCREDIMACHINE.md`.
+Heads go through Evan’s `OpenAIClient` (`reason` then crop, or draw-only `generate_image`). iPad never talks to OpenAI.
