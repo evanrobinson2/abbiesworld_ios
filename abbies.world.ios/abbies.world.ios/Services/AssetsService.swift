@@ -94,8 +94,7 @@ class AssetsService: ObservableObject {
         request.httpMethod = "GET"
         ServerConfig.shared.addAPIKeyHeader(to: &request)
         
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
+        return apiClient.validatedDataPublisher(for: request)
             .decode(type: AssetTypesResponse.self, decoder: JSONDecoder())
             .map { $0.types }
             .eraseToAnyPublisher()
@@ -112,8 +111,7 @@ class AssetsService: ObservableObject {
         request.httpMethod = "GET"
         ServerConfig.shared.addAPIKeyHeader(to: &request)
         
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
+        return apiClient.validatedDataPublisher(for: request)
             .decode(type: AllAssetsResponse.self, decoder: JSONDecoder())
             .map { $0.assets }
             .eraseToAnyPublisher()
@@ -132,8 +130,7 @@ class AssetsService: ObservableObject {
         request.httpMethod = "GET"
         ServerConfig.shared.addAPIKeyHeader(to: &request)
         
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
+        return apiClient.validatedDataPublisher(for: request)
             .decode(type: AssetsByTypeResponse.self, decoder: JSONDecoder())
             .map { $0.assets }
             .eraseToAnyPublisher()
@@ -152,8 +149,7 @@ class AssetsService: ObservableObject {
         request.httpMethod = "GET"
         ServerConfig.shared.addAPIKeyHeader(to: &request)
         
-        return URLSession.shared.dataTaskPublisher(for: request)
-            .map(\.data)
+        return apiClient.validatedDataPublisher(for: request)
             .decode(type: Asset.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }

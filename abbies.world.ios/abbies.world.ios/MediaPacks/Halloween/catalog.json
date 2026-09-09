@@ -1,0 +1,75 @@
+{
+  "packId": "halloween",
+  "displayName": "Spooky",
+  "background": "background.png",
+  "music": [
+    {
+      "id": "midnight_monster_groove",
+      "name": "Midnight Monster Groove",
+      "file": "music/midnight_monster_groove.mp3",
+      "durationSeconds": 90
+    },
+    {
+      "id": "glass_chapel_waltz",
+      "name": "Glass Chapel Waltz",
+      "file": "music/glass_chapel_waltz.mp3",
+      "durationSeconds": 284
+    },
+    {
+      "id": "late_train_glow",
+      "name": "Late Train Glow",
+      "file": "music/late_train_glow.mp3",
+      "durationSeconds": 59
+    }
+  ],
+  "rows": {
+    "monsters": [
+      {"id": "boo_blob", "name": "Boo Blob", "file": "monsters/boo_blob.png"},
+      {"id": "count_snackula", "name": "Count Snackula", "file": "monsters/count_snackula.png"},
+      {"id": "witchlet_pip", "name": "Witchlet Pip", "file": "monsters/witchlet_pip.png"},
+      {"id": "franky_stitch", "name": "Franky Stitch", "file": "monsters/franky_stitch.png"},
+      {"id": "howlbert", "name": "Howlbert", "file": "monsters/howlbert.png"},
+      {"id": "mummy_mallow", "name": "Mummy Mallow", "file": "monsters/mummy_mallow.png"},
+      {"id": "pumpkin_pal", "name": "Pumpkin Pal", "file": "monsters/pumpkin_pal.png"},
+      {"id": "skelly_giggles", "name": "Skelly Giggles", "file": "monsters/skelly_giggles.png"},
+      {"id": "batty_mcflap", "name": "Batty McFlap", "file": "monsters/batty_mcflap.png"},
+      {"id": "zom_bean", "name": "Zom-Bean", "file": "monsters/zom_bean.png"}
+    ],
+    "outfits": [
+      {"id": "candy_corn_tutu", "name": "Candy Corn Tutu", "file": "outfits/candy_corn_tutu.png"},
+      {"id": "spiderweb_onesie", "name": "Spiderweb Onesie", "file": "outfits/spiderweb_onesie.png"},
+      {"id": "juicebox_cape", "name": "Juice-Box Cape", "file": "outfits/juicebox_cape.png"},
+      {"id": "star_raincoat", "name": "Star Raincoat", "file": "outfits/star_raincoat.png"},
+      {"id": "bone_pajamas", "name": "Bone Pajamas", "file": "outfits/bone_pajamas.png"},
+      {"id": "pumpkin_overalls", "name": "Pumpkin Overalls", "file": "outfits/pumpkin_overalls.png"},
+      {"id": "peekaboo_sheet", "name": "Peekaboo Sheet", "file": "outfits/peekaboo_sheet.png"},
+      {"id": "monster_slippers", "name": "Monster Slippers", "file": "outfits/monster_slippers.png"},
+      {"id": "bat_bowtie", "name": "Bat Bowtie", "file": "outfits/bat_bowtie.png"},
+      {"id": "haunted_hoodie", "name": "Haunted Hoodie", "file": "outfits/haunted_hoodie.png"}
+    ],
+    "places": [
+      {"id": "lollipop_graveyard", "name": "Lollipop Graveyard", "file": "places/lollipop_graveyard.png"},
+      {"id": "haunted_treehouse", "name": "Haunted Treehouse", "file": "places/haunted_treehouse.png"},
+      {"id": "moonlit_pumpkin_patch", "name": "Moonlit Pumpkin Patch", "file": "places/moonlit_pumpkin_patch.png"},
+      {"id": "gym_halloween_dance", "name": "Gym Halloween Dance", "file": "places/gym_halloween_dance.png"},
+      {"id": "bat_cave_playhouse", "name": "Bat Cave Playhouse", "file": "places/bat_cave_playhouse.png"},
+      {"id": "maccheese_cauldron", "name": "Mac & Cheese Cauldron", "file": "places/maccheese_cauldron.png"},
+      {"id": "spiderweb_playground", "name": "Spiderweb Playground", "file": "places/spiderweb_playground.png"},
+      {"id": "glow_library", "name": "Glow Library", "file": "places/glow_library.png"},
+      {"id": "silly_corn_maze", "name": "Silly Corn Maze", "file": "places/silly_corn_maze.png"},
+      {"id": "underbed_fort", "name": "Under-the-Bed Fort", "file": "places/underbed_fort.png"}
+    ],
+    "styles": [
+      {"id": "glowstick_scribble", "name": "Glow Stick Scribble", "file": "styles/glowstick_scribble.png"},
+      {"id": "candy_wrapper", "name": "Candy Wrapper Collage", "file": "styles/candy_wrapper.png"},
+      {"id": "midnight_crayon", "name": "Midnight Crayon", "file": "styles/midnight_crayon.png"},
+      {"id": "jackolantern_glow", "name": "Jack-o’ Glow", "file": "styles/jackolantern_glow.png"},
+      {"id": "shadow_puppet", "name": "Shadow Puppets", "file": "styles/shadow_puppet.png"},
+      {"id": "spiderweb_lace", "name": "Spiderweb Lace", "file": "styles/spiderweb_lace.png"},
+      {"id": "bat_stamp", "name": "Bat Stamp", "file": "styles/bat_stamp.png"},
+      {"id": "potion_splash", "name": "Potion Splash", "file": "styles/potion_splash.png"},
+      {"id": "halloween_comic", "name": "Halloween Comic", "file": "styles/halloween_comic.png"},
+      {"id": "flashlight_fog", "name": "Flashlight Fog", "file": "styles/flashlight_fog.png"}
+    ]
+  }
+}

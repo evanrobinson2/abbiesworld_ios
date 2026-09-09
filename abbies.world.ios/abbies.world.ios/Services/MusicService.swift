@@ -15,7 +15,8 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     private let apiClient = APIClient.shared
     private let assetsService = AssetsService.shared
-    private var cancellables = Set<AnyCancellable>()
+    private var playlistLoadCancellable: AnyCancellable?
+    private var activeMediaPack: MediaPack = .classic
     
     // Published state
     @Published var isPlaying: Bool = false
@@ -51,10 +52,20 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     override init() {
         super.init()
+        if ProcessInfo.processInfo.arguments.contains("-mediaPackHalloween") {
+            activeMediaPack = .halloween
+        } else if let savedPack = UserDefaults.standard.string(forKey: "mediaPack"),
+                  let mediaPack = MediaPack(rawValue: savedPack) {
+            activeMediaPack = mediaPack
+        }
         setupAudioSession()
         loadSettings()
         setupInterruptionHandling()
-        loadPlaylist()
+        if activeMediaPack == .halloween {
+            loadHalloweenPlaylist()
+        } else {
+            loadPlaylist()
+        }
     }
     
     deinit {
@@ -157,8 +168,32 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
     
     // MARK: - Playlist Loading
+
+    func setMediaPack(_ mediaPack: MediaPack) {
+        guard mediaPack != activeMediaPack else { return }
+
+        playlistLoadCancellable?.cancel()
+        playlistLoadCancellable = nil
+        stop()
+        currentSong = nil
+        playlist = []
+        currentIndex = 0
+        shuffledQueue = []
+        activeMediaPack = mediaPack
+
+        if mediaPack == .halloween {
+            loadHalloweenPlaylist()
+        } else {
+            loadPlaylist()
+        }
+    }
     
     func loadPlaylist() {
+        guard activeMediaPack == .classic else {
+            loadHalloweenPlaylist()
+            return
+        }
+
         // Check cache first
         if let cachedPlaylist = loadCachedPlaylist(), isCacheFresh(), !cachedPlaylist.isEmpty {
             print("✅ MusicService: Using cached playlist (\(cachedPlaylist.count) songs)")
@@ -175,7 +210,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         
         // Fetch from server - filter to only main playlist tracks, not game-specific music
         isLoading = true
-        assetsService.getAssets(type: "music")
+        playlistLoadCancellable = assetsService.getAssets(type: "music")
             .receive(on: DispatchQueue.main)
             .sink(
                 receiveCompletion: { [weak self] completion in
@@ -190,7 +225,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
                     }
                 },
                 receiveValue: { [weak self] assets in
-                    guard let self = self else { return }
+                    guard let self = self, self.activeMediaPack == .classic else { return }
                     // Filter to only main playlist tracks (exclude game-specific music like goonpopper)
                     let mainAssets = assets.filter { $0.type == "music/main" }
                     let tracks = mainAssets.map { asset in MusicTrack(from: asset) }
@@ -204,7 +239,47 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
                     }
                 }
             )
-            .store(in: &cancellables)
+    }
+
+    private func loadHalloweenPlaylist() {
+        guard activeMediaPack == .halloween else { return }
+
+        let definitions = [
+            ("midnight_monster_groove", "Midnight Monster Groove"),
+            ("glass_chapel_waltz", "Glass Chapel Waltz"),
+            ("late_train_glow", "Late Train Glow")
+        ]
+
+        let tracks = definitions.compactMap { id, name -> MusicTrack? in
+            guard let url =
+                Bundle.main.url(
+                    forResource: id,
+                    withExtension: "mp3",
+                    subdirectory: "MediaPacks/Halloween/music"
+                ) ??
+                Bundle.main.url(forResource: id, withExtension: "mp3") else {
+                print("❌ MusicService: Missing bundled Halloween track: \(id).mp3")
+                return nil
+            }
+
+            let size = (try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
+            return MusicTrack(
+                id: "halloween_\(id)",
+                name: name,
+                url: url.absoluteString,
+                size: size,
+                mimeType: "audio/mpeg"
+            )
+        }
+
+        playlist = tracks
+        currentIndex = 0
+        currentSong = tracks.first
+        print("🎃 MusicService: Loaded \(tracks.count) bundled Halloween tracks")
+
+        if isMusicEnabled && !tracks.isEmpty {
+            play()
+        }
     }
     
     private func loadCachedPlaylist() -> [MusicTrack]? {
@@ -477,6 +552,11 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     private func loadAndPlayCurrentSong() {
         guard let song = currentSong else { return }
+
+        if let bundledURL = URL(string: song.url), bundledURL.isFileURL {
+            loadBundledTrack(bundledURL)
+            return
+        }
         
         // Build full URL
         let baseURL = apiClient.baseURL
@@ -526,6 +606,16 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             }
         }
     }
+
+    private func loadBundledTrack(_ url: URL) {
+        do {
+            let player = try AVAudioPlayer(contentsOf: url)
+            prepareAndPlay(player)
+        } catch {
+            print("❌ MusicService: Failed to load bundled track \(url.lastPathComponent): \(error)")
+            playNext()
+        }
+    }
     
     private func loadFromCache(_ path: URL) {
         guard let data = try? Data(contentsOf: path) else {
@@ -538,42 +628,34 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
     
     private func playAudioData(_ data: Data) {
-        // Ensure we're not creating multiple players
-        if audioPlayer != nil {
-            print("⚠️ MusicService: Audio player already exists, cleaning up first")
-            audioPlayer?.stop()
-            audioPlayer?.delegate = nil
-            audioPlayer = nil
-        }
-        
         do {
             let player = try AVAudioPlayer(data: data)
-            player.delegate = self
-            player.numberOfLoops = (repeatMode == .one) ? -1 : 0
-            player.volume = isMuted ? 0.0 : 0.5
-            
-            // Prepare before playing to reduce audio system load
-            guard player.prepareToPlay() else {
-                print("❌ MusicService: Failed to prepare audio player")
-                playNext()
-                return
-            }
-            
-            guard player.play() else {
-                print("❌ MusicService: Failed to start audio playback")
-                playNext()
-                return
-            }
-            
-            audioPlayer = player
-            isPlaying = true
-            saveSettings()
-            
-            print("✅ MusicService: Now playing: \(currentSong?.displayName ?? "Unknown")")
+            prepareAndPlay(player)
         } catch {
             print("❌ MusicService: Failed to create audio player: \(error)")
             playNext() // Skip to next
         }
+    }
+
+    private func prepareAndPlay(_ player: AVAudioPlayer) {
+        audioPlayer?.stop()
+        audioPlayer?.delegate = nil
+        audioPlayer = nil
+
+        player.delegate = self
+        player.numberOfLoops = (repeatMode == .one) ? -1 : 0
+        player.volume = isMuted ? 0.0 : 0.5
+
+        guard player.prepareToPlay(), player.play() else {
+            print("❌ MusicService: Failed to prepare or start audio player")
+            playNext()
+            return
+        }
+
+        audioPlayer = player
+        isPlaying = true
+        saveSettings()
+        print("✅ MusicService: Now playing: \(currentSong?.displayName ?? "Unknown")")
     }
     
     // MARK: - AVAudioPlayerDelegate

@@ -22,6 +22,12 @@ struct CarouselConfig {
     var selectionScaleFactor: CGFloat = 1.05
     var pulseAmplitude: CGFloat = 0.05  // Increased from 0.02 for more visible pulse
     var pulseDuration: TimeInterval = 0.8  // Decreased from 1.5 for faster pulse
+    var tileChrome: TileChrome = .plain
+    
+    enum TileChrome {
+        case plain
+        case halloweenSticker
+    }
     
     static func `default`() -> CarouselConfig {
         CarouselConfig()
