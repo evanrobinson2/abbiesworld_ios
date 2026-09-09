@@ -1,0 +1,15 @@
+---
+description: Privacy and truth boundaries for games inspired by real-life events
+alwaysApply: true
+---
+
+# Real-Life Event Privacy Rule
+
+- Keep raw family notes, names, addresses, schools, providers, health details, photos, and dates local by default.
+- Convert an event into a minimal brief containing only the play theme, relevant feeling or skill, known facts, and content to avoid.
+- Send cloud agents only that sanitized brief. Never upload the raw source note as convenience context.
+- Do not invent personal facts, motivations, emotions, diagnoses, or outcomes.
+- Use real events for preparation, imaginative practice, connection, or reflection—not surveillance or behavioral scoring.
+- Store observations as session-level product feedback such as “requested replay” or “left after first round,” not identity labels.
+- Parent review is required before event-derived dialogue, art, or pedagogy reaches the iPad.
+- If sensitive data appears in a tracked file or Git history, stop cloud handoff, remove it, rotate affected credentials, and report the exposure.

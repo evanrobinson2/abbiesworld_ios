@@ -1,0 +1,20 @@
+---
+description: Required architecture and verification practices for iOS minigames
+globs: "**/*.swift"
+alwaysApply: false
+---
+
+# Minigame Verification Rule
+
+For every new or materially changed minigame:
+
+- Use the shared game catalog, lifecycle coordinator, audio handoff, asset loader, and delight primitives when available.
+- Support the connected iPad’s current dimensions; do not assume a fixed canvas size.
+- Bundle enough art and audio for one complete offline round. CDN packs are optional expansion content.
+- Release heavy images, textures, audio, timers, and observers when the game closes.
+- Emit concise structured events for meaningful transitions, including launch, first action, assist, completion, replay, exit, and errors.
+- Add deterministic launch arguments and an automated success path for textual AI inspection.
+- Verify compilation, deterministic simulator completion, visual layout, cleanup, and physical-iPad play.
+- A passing autoplay test proves mechanics, not engagement. Expansion still requires observing Abbie voluntarily replay.
+- Preserve gentle assistance: enlarge hit targets, apply snapping or magnetic collision, and offer idle hints before introducing failure.
+- Record asset provenance and optimize animation frames, atlases, dimensions, and memory before bundling.
