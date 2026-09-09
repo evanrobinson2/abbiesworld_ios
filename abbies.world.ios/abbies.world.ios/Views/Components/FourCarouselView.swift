@@ -24,6 +24,7 @@ struct FourCarouselView: View {
     // TEMPORARY: Style short descriptions for placeholder tile overlays
     // Remove this parameter when we have actual style assets
     var styleShortDescriptions: [String: String]? = nil
+    var mediaPack: MediaPack = .classic
     
     var body: some View {
         GeometryReader { geometry in
@@ -43,74 +44,72 @@ struct FourCarouselView: View {
             let tileSize: CGFloat = 180
             
             VStack(spacing: spacing) {
-                // Row 1: Friends carousel (smaller tiles)
-                    CarouselView(
-                        title: "Friend",
-                        items: friendItems,
-                        selectedIndex: $friendIndex,
-                        onItemSelected: onFriendSelected,
-                    customTileSize: tileSize
-                    )
-                    .frame(height: carouselFrameHeight)
-                    .padding(4)  // Reduced from 8 to maximize tile space
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
-                            .fill(Color.white.opacity(0.3))
-                    )
+                carouselRow(
+                    title: mediaPack.friendRowTitle,
+                    items: friendItems,
+                    selectedIndex: $friendIndex,
+                    onItemSelected: onFriendSelected,
+                    tileSize: tileSize,
+                    height: carouselFrameHeight
+                )
                 
-                // Row 2: Outfits carousel (smaller tiles)
-                    CarouselView(
-                        title: "Outfit",
-                        items: outfitItems,
-                        selectedIndex: $outfitIndex,
-                        onItemSelected: onOutfitSelected,
-                    customTileSize: tileSize
-                    )
-                    .frame(height: carouselFrameHeight)
-                    .padding(4)  // Reduced from 8 to maximize tile space
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
-                            .fill(Color.white.opacity(0.3))
-                    )
+                carouselRow(
+                    title: mediaPack.outfitRowTitle,
+                    items: outfitItems,
+                    selectedIndex: $outfitIndex,
+                    onItemSelected: onOutfitSelected,
+                    tileSize: tileSize,
+                    height: carouselFrameHeight
+                )
                 
-                // Row 3: Places carousel (smaller tiles)
-                    CarouselView(
-                        title: "Place",
-                        items: placeItems,
-                        selectedIndex: $placeIndex,
-                        onItemSelected: onPlaceSelected,
-                    customTileSize: tileSize
-                    )
-                    .frame(height: carouselFrameHeight)
-                    .padding(4)  // Reduced from 8 to maximize tile space
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
-                            .fill(Color.white.opacity(0.3))
-                    )
+                carouselRow(
+                    title: mediaPack.placeRowTitle,
+                    items: placeItems,
+                    selectedIndex: $placeIndex,
+                    onItemSelected: onPlaceSelected,
+                    tileSize: tileSize,
+                    height: carouselFrameHeight
+                )
                 
-                // Row 4: Style carousel (bottom-aligned with preview drawer, smaller tiles)
-                // TEMPORARY: Pass styleShortDescriptions for placeholder overlays
-                // Remove this parameter when we have actual style assets
-                    CarouselView(
-                        title: "Style",
-                        items: styleItems,
-                        selectedIndex: $styleIndex,
-                        onItemSelected: onStyleSelected,
-                        styleShortDescriptions: styleShortDescriptions,
-                    customTileSize: tileSize
-                    )
-                    .frame(height: carouselFrameHeight)
-                    .padding(4)  // Reduced from 8 to maximize tile space
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)  // Slightly smaller radius
-                            .fill(Color.white.opacity(0.3))
-                    )
+                carouselRow(
+                    title: mediaPack.styleRowTitle,
+                    items: styleItems,
+                    selectedIndex: $styleIndex,
+                    onItemSelected: onStyleSelected,
+                    tileSize: tileSize,
+                    height: carouselFrameHeight,
+                    styleShortDescriptions: styleShortDescriptions
+                )
             }
             .padding(.leading, 16)
             .padding(.trailing, 16)
             .padding(.top, padding)
             .padding(.bottom, padding)
         }
+    }
+    
+    private func carouselRow(
+        title: String,
+        items: [Ingredient],
+        selectedIndex: Binding<Int>,
+        onItemSelected: @escaping (Ingredient) -> Void,
+        tileSize: CGFloat,
+        height: CGFloat,
+        styleShortDescriptions: [String: String]? = nil
+    ) -> some View {
+        CarouselCarveout(mediaPack: mediaPack) {
+            CarouselView(
+                title: title,
+                items: items,
+                selectedIndex: selectedIndex,
+                onItemSelected: onItemSelected,
+                styleShortDescriptions: styleShortDescriptions,
+                customTileSize: tileSize,
+                mediaPack: mediaPack
+            )
+        }
+        .frame(height: height)
+        .accessibilityLabel(title)
     }
 }
 

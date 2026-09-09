@@ -20,6 +20,7 @@ struct CarouselView: View {
     
     // Optional custom tile size (for 4-carousel view to fit on screen)
     var customTileSize: CGFloat? = nil
+    var mediaPack: MediaPack = .classic
     
     // Convert Ingredient to CarouselItem for SwiftCarousel
     private var carouselItems: [CarouselItem] {
@@ -33,6 +34,7 @@ struct CarouselView: View {
             
             return CarouselItem(
                 id: ingredient.id,
+                imageName: ingredient.imageName,
                 imageURL: ingredient.imageURL,
                 displayName: ingredient.name,
                 shortDescription: shortDesc
@@ -61,8 +63,13 @@ struct CarouselView: View {
         let tileSize = customTileSize ?? 280 // Default 280, smaller for 4-carousel view
         config.tileWidth = tileSize
         config.tileHeight = tileSize
-        config.tileSpacing = 16
+        config.tileSpacing = mediaPack == .halloween ? 18 : 16
         config.horizontalPadding = 20
+        config.cornerRadius = mediaPack == .halloween ? 22 : 8
+        config.selectionBorderColor = mediaPack == .halloween
+            ? Color(red: 0.98, green: 0.52, blue: 0.16)
+            : .blue
+        config.tileChrome = mediaPack == .halloween ? .halloweenSticker : .plain
         return config
     }
     

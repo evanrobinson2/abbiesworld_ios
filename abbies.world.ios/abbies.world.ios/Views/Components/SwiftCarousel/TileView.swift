@@ -23,200 +23,31 @@ struct TileView: View {
     var body: some View {
         Group {
             if let image = loadedImage {
-                // Successfully loaded image
-                ZStack(alignment: .topTrailing) {
-                Image(uiImage: image)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: config.tileWidth, height: config.tileHeight)
-                    .clipped()
-                    .cornerRadius(config.cornerRadius)
-                    .overlay(
-                        // Selection border
-                        RoundedRectangle(cornerRadius: config.cornerRadius)
-                            .stroke(
-                                config.selectionBorderColor,
-                                lineWidth: isSelected ? config.selectionBorderWidth : 0
-                            )
-                    )
-                    .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
-                    .animation(.easeOut(duration: 0.15), value: isSelected)
-                    
-                    // Heart icon overlay (if isFavorite is provided)
-                    if let favorite = isFavorite, onFavoriteTap != nil {
-                        Button(action: {
-                            onFavoriteTap?()
-                        }) {
-                            Image(systemName: favorite ? "heart.fill" : "heart")
-                                .font(.system(size: 16))
-                                .foregroundColor(favorite ? .red : .white)
-                                .padding(6)
-                                .background(
-                                    Circle()
-                                        .fill(Color.black.opacity(0.5))
-                                )
-                        }
-                        .padding(6)
-                    }
+                framedTile {
+                    Image(uiImage: image)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
                 }
-            } else if item.imageURL == nil {
-                // Style placeholder tile (no image URL) - use custom placeholder
-                // TEMPORARY: Passing shortDescription for overlay until we have actual assets
-                StylePlaceholderTile(
-                    styleName: item.displayName,
-                    shortDescription: item.shortDescription
-                )
-                    .frame(width: config.tileWidth, height: config.tileHeight)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: config.cornerRadius)
-                            .stroke(
-                                config.selectionBorderColor,
-                                lineWidth: isSelected ? config.selectionBorderWidth : 0
-                            )
+            } else if item.imageURL == nil && item.imageName == nil {
+                framedTile {
+                    StylePlaceholderTile(
+                        styleName: item.displayName,
+                        shortDescription: item.shortDescription
                     )
-                    .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
-                    .animation(.easeOut(duration: 0.15), value: isSelected)
+                }
+            } else if loadError {
+                framedTile {
+                    fallbackTile
+                }
             } else {
-                // Loading state or error state (has imageURL but not loaded yet)
-                if loadError {
-                    // Show "under construction" fallback image with overlay text
-                    if let fallbackImage = UIImage(named: "under_construction") {
-                        Image(uiImage: fallbackImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: config.tileWidth, height: config.tileHeight)
-                            .clipped()
-                            .cornerRadius(config.cornerRadius)
-                            .overlay(
-                                // Gradient overlay at bottom for text readability
-                                LinearGradient(
-                                    gradient: Gradient(colors: [
-                                        Color.clear,
-                                        Color.black.opacity(0.7)
-                                    ]),
-                                    startPoint: .center,
-                                    endPoint: .bottom
-                                )
-                                .frame(height: config.tileHeight * 0.35)
-                                .offset(y: config.tileHeight * 0.325)
-                            )
-                            .overlay(
-                                // "UNDER CONSTRUCTION" text with better styling
-                                VStack {
-                                    Spacer()
-                                    Text("UNDER CONSTRUCTION")
-                                        .font(.system(size: min(config.tileWidth * 0.12, 14), weight: .bold, design: .rounded))
-                                        .foregroundColor(.white)
-                                        .shadow(color: .black.opacity(0.9), radius: 3, x: 0, y: 2)
-                                        .padding(.horizontal, 4)
-                                        .padding(.bottom, max(config.tileHeight * 0.08, 6))
-                                }
-                            )
-                            .overlay(
-                                // Selection border
-                                RoundedRectangle(cornerRadius: config.cornerRadius)
-                                    .stroke(
-                                        config.selectionBorderColor,
-                                        lineWidth: isSelected ? config.selectionBorderWidth : 0
-                                    )
-                            )
-                            .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
-                            .animation(.easeOut(duration: 0.15), value: isSelected)
-                    } else {
-                        // Fallback if image asset not found
-                        RoundedRectangle(cornerRadius: config.cornerRadius)
-                            .fill(Color.gray.opacity(0.3))
-                            .frame(width: config.tileWidth, height: config.tileHeight)
-                            .overlay(
-                                VStack(spacing: 8) {
-                                    Image(systemName: "exclamationmark.triangle")
-                                        .font(.largeTitle)
-                                        .foregroundColor(.orange)
-                                    Text("UNDER CONSTRUCTION")
-                                        .font(.caption)
-                                        .fontWeight(.bold)
-                                        .foregroundColor(.orange)
-                                }
-                                .padding()
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: config.cornerRadius)
-                                    .stroke(
-                                        config.selectionBorderColor,
-                                        lineWidth: isSelected ? config.selectionBorderWidth : 0
-                                    )
-                            )
-                            .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
-                            .animation(.easeOut(duration: 0.15), value: isSelected)
-                    }
-                } else {
-                    // Loading state - use under construction image as background with spinner
-                    if let loadingImage = UIImage(named: "under_construction") {
-                        Image(uiImage: loadingImage)
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: config.tileWidth, height: config.tileHeight)
-                            .clipped()
-                            .cornerRadius(config.cornerRadius)
-                            .overlay(
-                                // Semi-transparent overlay to make spinner more visible
-                                Color.black.opacity(0.3)
-                            )
-                            .overlay(
-                                // Spinner and item name
-                                VStack(spacing: 8) {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                                        .scaleEffect(1.2)
-                                    Text(item.displayName)
-                                        .font(.caption)
-                                        .fontWeight(.medium)
-                                        .foregroundColor(.white)
-                                        .lineLimit(2)
-                                        .multilineTextAlignment(.center)
-                                        .shadow(color: .black.opacity(0.8), radius: 2, x: 0, y: 1)
-                                }
-                                .padding()
-                            )
-                            .overlay(
-                                // Selection border
-                                RoundedRectangle(cornerRadius: config.cornerRadius)
-                                    .stroke(
-                                        config.selectionBorderColor,
-                                        lineWidth: isSelected ? config.selectionBorderWidth : 0
-                                    )
-                            )
-                            .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
-                            .animation(.easeOut(duration: 0.15), value: isSelected)
-                    } else {
-                        // Fallback if image asset not found
-                        RoundedRectangle(cornerRadius: config.cornerRadius)
-                            .fill(Color.gray.opacity(0.3))
-                            .frame(width: config.tileWidth, height: config.tileHeight)
-                            .overlay(
-                                VStack(spacing: 8) {
-                                    ProgressView()
-                                        .progressViewStyle(CircularProgressViewStyle())
-                                    Text(item.displayName)
-                                        .font(.caption)
-                                        .lineLimit(2)
-                                        .multilineTextAlignment(.center)
-                                }
-                                .padding()
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: config.cornerRadius)
-                                    .stroke(
-                                        config.selectionBorderColor,
-                                        lineWidth: isSelected ? config.selectionBorderWidth : 0
-                                    )
-                            )
-                            .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
-                            .animation(.easeOut(duration: 0.15), value: isSelected)
-                    }
+                framedTile {
+                    loadingTile
                 }
             }
         }
+        .frame(width: config.tileWidth, height: config.tileHeight)
+        .scaleEffect(isSelected ? config.selectionScaleFactor * pulseScale : 1.0)
+        .animation(.easeOut(duration: 0.15), value: isSelected)
         .onAppear {
             loadImage()
             if isSelected {
@@ -224,8 +55,6 @@ struct TileView: View {
             }
         }
         .onDisappear {
-            // Release image from memory when tile scrolls off-screen
-            // Image will reload from disk cache if needed (fast SSD read)
             loadedImage = nil
         }
         .onChange(of: isSelected) { oldValue, newValue in
@@ -233,6 +62,99 @@ struct TileView: View {
                 startPulse()
             } else {
                 stopPulse()
+            }
+        }
+        .onChange(of: item.id) { _, _ in
+            loadedImage = nil
+            loadImage()
+        }
+    }
+    
+    @ViewBuilder
+    private func framedTile<Inner: View>(@ViewBuilder inner: () -> Inner) -> some View {
+        let size = CGSize(width: config.tileWidth, height: config.tileHeight)
+        if config.tileChrome == .halloweenSticker {
+            HalloweenTileChrome(
+                title: item.displayName,
+                isSelected: isSelected,
+                size: size,
+                cornerRadius: config.cornerRadius
+            ) {
+                inner()
+            }
+        } else {
+            inner()
+                .frame(width: config.tileWidth, height: config.tileHeight)
+                .clipped()
+                .cornerRadius(config.cornerRadius)
+                .overlay(
+                    RoundedRectangle(cornerRadius: config.cornerRadius)
+                        .stroke(
+                            config.selectionBorderColor,
+                            lineWidth: isSelected ? config.selectionBorderWidth : 0
+                        )
+                )
+                .overlay(alignment: .topTrailing) {
+                    if let favorite = isFavorite, onFavoriteTap != nil {
+                        Button(action: { onFavoriteTap?() }) {
+                            Image(systemName: favorite ? "heart.fill" : "heart")
+                                .font(.system(size: 16))
+                                .foregroundColor(favorite ? .red : .white)
+                                .padding(6)
+                                .background(Circle().fill(Color.black.opacity(0.5)))
+                        }
+                        .padding(6)
+                    }
+                }
+        }
+    }
+    
+    private var loadingTile: some View {
+        ZStack {
+            if let loadingImage = UIImage(named: "under_construction") {
+                Image(uiImage: loadingImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                Color.gray.opacity(0.3)
+            }
+            Color.black.opacity(0.3)
+            VStack(spacing: 8) {
+                ProgressView()
+                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                    .scaleEffect(1.2)
+                Text(item.displayName)
+                    .font(.caption)
+                    .fontWeight(.medium)
+                    .foregroundColor(.white)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+            }
+            .padding()
+        }
+    }
+    
+    private var fallbackTile: some View {
+        ZStack {
+            if let fallbackImage = UIImage(named: "under_construction") {
+                Image(uiImage: fallbackImage)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                Color.gray.opacity(0.3)
+            }
+            LinearGradient(
+                gradient: Gradient(colors: [Color.clear, Color.black.opacity(0.7)]),
+                startPoint: .center,
+                endPoint: .bottom
+            )
+            VStack {
+                Spacer()
+                Text("UNDER CONSTRUCTION")
+                    .font(.system(size: min(config.tileWidth * 0.12, 14), weight: .bold, design: .rounded))
+                    .foregroundColor(.white)
+                    .shadow(color: .black.opacity(0.9), radius: 3, x: 0, y: 2)
+                    .padding(.bottom, 8)
             }
         }
     }
@@ -254,6 +176,13 @@ struct TileView: View {
     }
     
     private func loadImage() {
+        if let bundleImage = loadBundleImage() {
+            loadedImage = bundleImage
+            isLoading = false
+            loadError = false
+            return
+        }
+        
         // Priority 1: Load from URL if provided
         if let imageURLString = item.imageURL, let url = URL(string: imageURLString) {
             isLoading = true
@@ -310,7 +239,15 @@ struct TileView: View {
     }
     
     private func loadBundleImage() -> UIImage? {
-        guard let imageName = item.imageName else { return nil }
+        guard let imageName = item.imageName, !imageName.isEmpty else { return nil }
+        
+        if imageName.contains("/"), let packed = MediaPackImageLoader.image(named: imageName) {
+            return packed
+        }
+        
+        if let packed = MediaPackImageLoader.image(subdirectory: "", stem: imageName) {
+            return packed
+        }
         
         // Try loading from SampleTiles folder in bundle
         if let imagePath = Bundle.main.path(forResource: imageName, ofType: "png", inDirectory: "SampleTiles"),
@@ -320,12 +257,6 @@ struct TileView: View {
         
         // Try loading directly from main bundle
         if let image = UIImage(named: imageName) {
-            return image
-        }
-        
-        // Try with full path including directory
-        if let imagePath = Bundle.main.path(forResource: "SampleTiles/\(imageName)", ofType: "png"),
-           let image = UIImage(contentsOfFile: imagePath) {
             return image
         }
         

@@ -47,11 +47,12 @@ struct MainView: View {
         }
         
         var missing: [String] = []
-        if viewModel.friendIndex < 0 { missing.append("friend") }
-        if viewModel.outfitIndex < 0 { missing.append("outfit") }
-        if viewModel.placeIndex < 0 { missing.append("place") }
-        if viewModel.viewMode == .fourCarousel, viewModel.styleIndex < 0 {
-            missing.append("style")
+        if viewModel.friendIndex < 0 { missing.append(viewModel.mediaPack.friendRowTitle.lowercased()) }
+        if viewModel.outfitIndex < 0 { missing.append(viewModel.mediaPack.outfitRowTitle.lowercased()) }
+        if viewModel.placeIndex < 0 { missing.append(viewModel.mediaPack.placeRowTitle.lowercased()) }
+        if (viewModel.mediaPack == .halloween || viewModel.viewMode == .fourCarousel),
+           viewModel.styleIndex < 0 {
+            missing.append(viewModel.mediaPack.styleRowTitle.lowercased())
         }
         
         if missing.isEmpty {
@@ -80,23 +81,7 @@ struct MainView: View {
                 ZStack(alignment: .trailing) {
                     // Carousels - Full width (conditional based on view mode)
                     Group {
-                        if viewModel.viewMode == .default {
-                            // Default 3-carousel view
-                            CombinedColumnView(
-                                friendIndex: $viewModel.friendIndex,
-                                outfitIndex: $viewModel.outfitIndex,
-                                placeIndex: $viewModel.placeIndex,
-                                friendItems: viewModel.friendItems,
-                                outfitItems: viewModel.outfitItems,
-                                placeItems: viewModel.placeItems,
-                                onFriendSelected: { viewModel.selectFriend($0) },
-                                onOutfitSelected: { viewModel.selectOutfit($0) },
-                                onPlaceSelected: { viewModel.selectPlace($0) }
-                            )
-                        } else {
-                            // Four-carousel view with style selection
-                            // TEMPORARY: Pass styleShortDescriptions for placeholder overlays
-                            // Remove this parameter when we have actual style assets
+                        if viewModel.mediaPack == .halloween || viewModel.viewMode == .fourCarousel {
                             FourCarouselView(
                                 friendIndex: $viewModel.friendIndex,
                                 outfitIndex: $viewModel.outfitIndex,
@@ -110,7 +95,21 @@ struct MainView: View {
                                 onOutfitSelected: { viewModel.selectOutfit($0) },
                                 onPlaceSelected: { viewModel.selectPlace($0) },
                                 onStyleSelected: { viewModel.selectStyle($0) },
-                                styleShortDescriptions: viewModel.styleShortDescriptions.isEmpty ? nil : viewModel.styleShortDescriptions
+                                styleShortDescriptions: viewModel.styleShortDescriptions.isEmpty ? nil : viewModel.styleShortDescriptions,
+                                mediaPack: viewModel.mediaPack
+                            )
+                        } else {
+                            CombinedColumnView(
+                                friendIndex: $viewModel.friendIndex,
+                                outfitIndex: $viewModel.outfitIndex,
+                                placeIndex: $viewModel.placeIndex,
+                                friendItems: viewModel.friendItems,
+                                outfitItems: viewModel.outfitItems,
+                                placeItems: viewModel.placeItems,
+                                onFriendSelected: { viewModel.selectFriend($0) },
+                                onOutfitSelected: { viewModel.selectOutfit($0) },
+                                onPlaceSelected: { viewModel.selectPlace($0) },
+                                mediaPack: viewModel.mediaPack
                             )
                         }
                     }
@@ -191,6 +190,31 @@ struct MainView: View {
                 // Top right buttons (Settings and Games)
                 VStack {
                     HStack {
+                        Button(action: {
+                            viewModel.toggleMediaPack()
+                        }) {
+                            HStack(spacing: 8) {
+                                Image(systemName: viewModel.mediaPack.symbolName)
+                                    .font(.system(size: 20, weight: .bold))
+                                Text(viewModel.mediaPack.kidLabel)
+                                    .font(.system(size: 16, weight: .heavy, design: .rounded))
+                            }
+                            .foregroundColor(.white)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                            .background(
+                                Capsule()
+                                    .fill(viewModel.mediaPack == .halloween
+                                          ? Color(red: 0.72, green: 0.28, blue: 0.12).opacity(0.92)
+                                          : Color.gray.opacity(0.8))
+                            )
+                            .shadow(radius: 5)
+                        }
+                        .accessibilityLabel("Switch world skin")
+                        .accessibilityValue(viewModel.mediaPack.displayName)
+                        .padding(.top, 16)
+                        .padding(.leading, 16)
+                        
                         Spacer()
                         // Settings button
                         Button(action: {
@@ -460,6 +484,7 @@ struct CombinedColumnView: View {
     let onFriendSelected: (Ingredient) -> Void
     let onOutfitSelected: (Ingredient) -> Void
     let onPlaceSelected: (Ingredient) -> Void
+    var mediaPack: MediaPack = .classic
     
     var body: some View {
         GeometryReader { geometry in
@@ -467,47 +492,38 @@ struct CombinedColumnView: View {
             let carouselFrameHeight = calculations.carouselFrameHeight
             
             VStack(spacing: 16) {
-                // Row 1: Friends carousel (expanded) with rounded container
-                CarouselView(
-                    title: "Friend",
-                    items: friendItems,
-                    selectedIndex: $friendIndex,
-                    onItemSelected: onFriendSelected
-                )
+                CarouselCarveout(mediaPack: mediaPack) {
+                    CarouselView(
+                        title: mediaPack.friendRowTitle,
+                        items: friendItems,
+                        selectedIndex: $friendIndex,
+                        onItemSelected: onFriendSelected,
+                        mediaPack: mediaPack
+                    )
+                }
                 .frame(height: carouselFrameHeight)
-                .padding(8)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.white.opacity(0.3))
-                )
                 
-                // Row 2: Outfits carousel (expanded) with rounded container
-                CarouselView(
-                    title: "Outfit",
-                    items: outfitItems,
-                    selectedIndex: $outfitIndex,
-                    onItemSelected: onOutfitSelected
-                )
+                CarouselCarveout(mediaPack: mediaPack) {
+                    CarouselView(
+                        title: mediaPack.outfitRowTitle,
+                        items: outfitItems,
+                        selectedIndex: $outfitIndex,
+                        onItemSelected: onOutfitSelected,
+                        mediaPack: mediaPack
+                    )
+                }
                 .frame(height: carouselFrameHeight)
-                .padding(8)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.white.opacity(0.3))
-                )
                 
-                // Row 3: Places carousel (expanded) with rounded container
-                CarouselView(
-                    title: "Place",
-                    items: placeItems,
-                    selectedIndex: $placeIndex,
-                    onItemSelected: onPlaceSelected
-                )
+                CarouselCarveout(mediaPack: mediaPack) {
+                    CarouselView(
+                        title: mediaPack.placeRowTitle,
+                        items: placeItems,
+                        selectedIndex: $placeIndex,
+                        onItemSelected: onPlaceSelected,
+                        mediaPack: mediaPack
+                    )
+                }
                 .frame(height: carouselFrameHeight)
-                .padding(8)
-                .background(
-                    RoundedRectangle(cornerRadius: 16)
-                        .fill(Color.white.opacity(0.3))
-                )
             }
             .padding(.leading, 16)
             .padding(.trailing, 16)
