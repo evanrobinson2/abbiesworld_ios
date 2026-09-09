@@ -15,6 +15,14 @@ struct MainView: View {
     @State private var showGoonPopper =
         ProcessInfo.processInfo.arguments.contains("-launchBalloonPop") ||
         ProcessInfo.processInfo.arguments.contains("-autoPlayBalloonPop")
+    // Text-friendly test hook: pass -launchPictureCarver to open it directly.
+    @State private var showPictureCarver =
+        ProcessInfo.processInfo.arguments.contains("-launchPictureCarver") ||
+        ProcessInfo.processInfo.arguments.contains("-autoCarvePicture")
+    // Text-friendly test hooks for the Dino Picnic vertical slice.
+    @State private var showDinoPicnic =
+        ProcessInfo.processInfo.arguments.contains("-launchDinoPicnic") ||
+        ProcessInfo.processInfo.arguments.contains("-autoPlayDinoPicnic")
     // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
     @State private var showSettings = false
@@ -252,6 +260,8 @@ struct MainView: View {
                 GamesDialogView(
                     showWaypointGame: $showWaypointGame,
                     showGoonPopper: $showGoonPopper,
+                    showPictureCarver: $showPictureCarver,
+                    showDinoPicnic: $showDinoPicnic,
                     // showMemoryGame: $showMemoryGame,
                     onDismiss: {
                         showGamesDialog = false
@@ -278,6 +288,16 @@ struct MainView: View {
                     }
                 )
             }
+            .fullScreenCover(isPresented: $showPictureCarver) {
+                PictureCarverView(
+                    onDismiss: {
+                        showPictureCarver = false
+                    }
+                )
+            }
+            .fullScreenCover(isPresented: $showDinoPicnic) {
+                DinoPicnicView()
+            }
             // Memory Game temporarily disabled
             // .fullScreenCover(isPresented: $showMemoryGame) {
             //     MemoryGameView(
@@ -294,6 +314,12 @@ struct MainView: View {
                 MusicService.shared.setGameActive(newValue)
             }
             .onChange(of: showGoonPopper) { oldValue, newValue in
+                MusicService.shared.setGameActive(newValue)
+            }
+            .onChange(of: showPictureCarver) { oldValue, newValue in
+                MusicService.shared.setGameActive(newValue)
+            }
+            .onChange(of: showDinoPicnic) { oldValue, newValue in
                 MusicService.shared.setGameActive(newValue)
             }
         }

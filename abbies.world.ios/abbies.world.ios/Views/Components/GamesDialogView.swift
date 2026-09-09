@@ -10,6 +10,8 @@ import SwiftUI
 struct GamesDialogView: View {
     @Binding var showWaypointGame: Bool
     @Binding var showGoonPopper: Bool
+    @Binding var showPictureCarver: Bool
+    @Binding var showDinoPicnic: Bool
     // Memory Game temporarily disabled
     // @Binding var showMemoryGame: Bool
     var onDismiss: () -> Void
@@ -25,8 +27,18 @@ struct GamesDialogView: View {
                 // Two simple choices sized for young players.
                 LazyVGrid(columns: [
                     GridItem(.flexible()),
+                    GridItem(.flexible()),
                     GridItem(.flexible())
                 ], spacing: 20) {
+                    GameIconButton(
+                        icon: "leaf.fill",
+                        title: "Dino Picnic",
+                        color: .green
+                    ) {
+                        showDinoPicnic = true
+                        onDismiss()
+                    }
+
                     // Waypoint Navigation Game
                     GameIconButton(
                         icon: "location.fill",
@@ -53,6 +65,15 @@ struct GamesDialogView: View {
                         color: .pink
                     ) {
                         showGoonPopper = true
+                        onDismiss()
+                    }
+                    
+                    GameIconButton(
+                        icon: "scribble.variable",
+                        title: "Picture Carver",
+                        color: .purple
+                    ) {
+                        showPictureCarver = true
                         onDismiss()
                     }
                 }
@@ -111,6 +132,8 @@ struct GameIconButton: View {
     GamesDialogView(
         showWaypointGame: .constant(false),
         showGoonPopper: .constant(false),
+        showPictureCarver: .constant(false),
+        showDinoPicnic: .constant(false),
         // showMemoryGame: .constant(false),
         onDismiss: {}
     )
