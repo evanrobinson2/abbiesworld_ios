@@ -219,29 +219,6 @@ struct MainView: View {
             }
             .overlay(alignment: .top) {
                 HStack(spacing: 10) {
-                    Button(action: {
-                        viewModel.toggleMediaPack()
-                    }) {
-                        HStack(spacing: 8) {
-                            Image(systemName: viewModel.mediaPack.symbolName)
-                                .font(.system(size: 20, weight: .bold))
-                            Text(viewModel.mediaPack.kidLabel)
-                                .font(.system(size: 16, weight: .heavy, design: .rounded))
-                        }
-                        .foregroundColor(.white)
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 10)
-                        .background(
-                            Capsule()
-                                .fill(viewModel.mediaPack == .halloween
-                                      ? Color(red: 0.72, green: 0.28, blue: 0.12).opacity(0.92)
-                                      : Color.gray.opacity(0.82))
-                        )
-                        .shadow(radius: 5)
-                    }
-                    .accessibilityLabel("Switch world skin")
-                    .accessibilityValue(viewModel.mediaPack.kidLabel)
-
                     MainCreationStatusBar(
                         steps: creationStatusSteps,
                         status: creationStatus
