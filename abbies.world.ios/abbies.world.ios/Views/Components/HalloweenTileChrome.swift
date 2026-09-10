@@ -157,6 +157,27 @@ struct CarouselCarveout<Content: View>: View {
                         .foregroundColor(Color(red: 0.95, green: 0.55, blue: 0.18).opacity(0.90))
                         .padding(8)
                     }
+                } else if mediaPack == .adventure {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .fill(Color(red: 0.05, green: 0.38, blue: 0.46).opacity(0.66))
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .strokeBorder(
+                                Color(red: 0.98, green: 0.65, blue: 0.14).opacity(0.94),
+                                style: StrokeStyle(lineWidth: 3, dash: [9, 4, 2, 4])
+                            )
+                        VStack {
+                            HStack {
+                                Image(systemName: "safari.fill")
+                                Spacer()
+                                Image(systemName: "map.fill")
+                            }
+                            Spacer()
+                        }
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundColor(Color(red: 1.0, green: 0.76, blue: 0.25).opacity(0.94))
+                        .padding(8)
+                    }
                 } else {
                     RoundedRectangle(cornerRadius: 16)
                         .fill(Color.white.opacity(0.3))

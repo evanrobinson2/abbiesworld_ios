@@ -71,6 +71,8 @@ struct WorldSkinSection: View {
             return "Halloween uses bundled spooky pictures and music, even after restarting."
         case .animalAvenue:
             return "Animals uses bundled Animal Avenue pictures with the Everyday playlist."
+        case .adventure:
+            return "Adventure uses bundled explorers, gear, destinations, and styles with the Everyday playlist."
         }
     }
 
@@ -136,6 +138,15 @@ struct SettingsRow: View {
 
 struct ViewModeSection: View {
     @ObservedObject var viewModel: MainViewModel
+
+    private var description: String {
+        if viewModel.mediaPack.usesFourCarousels {
+            return "\(viewModel.mediaPack.displayName) always uses four rows."
+        }
+        return viewModel.viewMode == .default
+            ? "Standard 3-carousel layout"
+            : "Extended layout with style selection"
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -157,15 +168,7 @@ struct ViewModeSection: View {
                 .disabled(viewModel.mediaPack != .classic)
                 
                 // Description text
-                Text(
-                    viewModel.mediaPack == .halloween
-                        ? "Halloween always uses four rows."
-                        : (viewModel.mediaPack == .animalAvenue
-                           ? "Animal Avenue always uses four rows."
-                           : (viewModel.viewMode == .default
-                           ? "Standard 3-carousel layout"
-                           : "Extended layout with style selection"))
-                )
+                Text(description)
                     .font(.caption)
                     .foregroundColor(.secondary)
                     .padding(.horizontal)

@@ -11,6 +11,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
     case classic
     case halloween
     case animalAvenue
+    case adventure
 
     var id: String { rawValue }
 
@@ -19,6 +20,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         case .classic: return "Normal"
         case .halloween: return "Spooky"
         case .animalAvenue: return "Animal Avenue"
+        case .adventure: return "Adventure"
         }
     }
 
@@ -27,6 +29,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         case .classic: return "Everyday"
         case .halloween: return "Halloween"
         case .animalAvenue: return "Animals"
+        case .adventure: return "Adventure"
         }
     }
 
@@ -35,6 +38,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         case .classic: return "sun.max.fill"
         case .halloween: return "theatermasks.fill"
         case .animalAvenue: return "pawprint.fill"
+        case .adventure: return "safari.fill"
         }
     }
 
@@ -47,11 +51,16 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         case .classic: return "Friend"
         case .halloween: return "Monster"
         case .animalAvenue: return "Animal"
+        case .adventure: return "Adventurer"
         }
     }
 
     var outfitRowTitle: String {
-        self == .halloween ? "Costume" : "Outfit"
+        switch self {
+        case .classic, .animalAvenue: return "Outfit"
+        case .halloween: return "Costume"
+        case .adventure: return "Adventure Gear"
+        }
     }
 
     var placeRowTitle: String {
@@ -59,6 +68,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         case .classic: return "Place"
         case .halloween: return "Haunt"
         case .animalAvenue: return "Neighborhood"
+        case .adventure: return "Destination"
         }
     }
 
@@ -67,6 +77,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         case .classic: return "Style"
         case .halloween: return "Spooky Style"
         case .animalAvenue: return "Art Style"
+        case .adventure: return "Adventure Style"
         }
     }
 
@@ -328,6 +339,105 @@ enum AnimalAvenueCatalog {
     ) -> MediaPackItem {
         MediaPackItem(
             id: "animal_\(folder.dropLast())_\(stem)",
+            name: name,
+            category: category,
+            styleInjection: prompt,
+            bundleSubdirectory: "\(bundleRoot)/\(folder)",
+            fileStem: stem
+        )
+    }
+}
+
+enum AdventureCatalog {
+    static let bundleRoot = "MediaPacks/Adventure"
+
+    static let adventurers: [MediaPackItem] = [
+        item("adventure_explorer_one", "Abbie", "adventurers", "character_style",
+             "Abbie, a real six-year-old child with natural youthful proportions, long strawberry-blonde curly-to-wavy hair reaching from her shoulders toward her back, blue eyes, and a bright expressive face"),
+        item("adventure_explorer_two", "Ani", "adventurers", "character_style",
+             "Ani, an expressive naturally proportioned school-age child with dark brown hair and confirmed dark brown eyes; do not assert a precise age or canonical hairstyle"),
+        item("adventure_bunny_stuffie", "Bunny Stuffie", "adventurers", "character_style",
+             "a soft cream-and-caramel handmade stuffed bunny with visible stitching and a friendly face"),
+        item("adventure_golden_puppy", "Golden Puppy", "adventurers", "character_style",
+             "a friendly real golden retriever puppy with warm golden fur and lively curious eyes"),
+        item("adventure_fox_kit", "Fox Kit", "adventurers", "character_style",
+             "a playful real red fox kit with bright orange fur, dark paws, and a fluffy white-tipped tail")
+    ]
+
+    static let costumes: [MediaPackItem] = [
+        item("adventure_utility_vest", "Explorer Vest", "costumes", "color_palette",
+             "wearing a practical khaki explorer utility vest with roomy pockets"),
+        item("adventure_rain_poncho", "Rain Poncho", "costumes", "color_palette",
+             "wearing a bright yellow weatherproof adventure rain poncho"),
+        item("adventure_space_suit", "Bubble Space Suit", "costumes", "color_palette",
+             "wearing a rounded white child-friendly space suit with colorful control details"),
+        item("adventure_diving_suit", "Deep-Sea Suit", "costumes", "color_palette",
+             "wearing a copper-and-teal fantastical deep-sea diving suit"),
+        item("adventure_jungle_jacket", "Jungle Jacket", "costumes", "color_palette",
+             "wearing a leafy green jungle field jacket with embroidered vines and useful pockets"),
+        item("adventure_mountain_parka", "Mountain Parka", "costumes", "color_palette",
+             "wearing a cozy blue mountain parka with a warm soft collar"),
+        item("adventure_desert_cloak", "Desert Sun Cloak", "costumes", "color_palette",
+             "wearing a lightweight amber desert sun cloak with layered flowing fabric"),
+        item("adventure_sky_captain_coat", "Sky Captain Coat", "costumes", "color_palette",
+             "wearing a navy sky-captain coat with simple brass buttons and no insignia"),
+        item("adventure_archaeologist_overalls", "Dig-Site Overalls", "costumes", "color_palette",
+             "wearing rust-colored archaeologist overalls with reinforced knees and practical pockets"),
+        item("adventure_navigator_cape", "Navigator Cape", "costumes", "color_palette",
+             "wearing a midnight-blue navigator cape patterned with tiny golden stars")
+    ]
+
+    static let places: [MediaPackItem] = [
+        item("adventure_treehouse_base", "Treehouse Base", "places", "world_setting",
+             "at a secret but welcoming treehouse base nestled among enormous sunlit jungle leaves"),
+        item("adventure_crystal_cave", "Crystal Cave", "places", "world_setting",
+             "inside a friendly sparkling crystal cave with broad safe paths and glowing blue and purple crystals"),
+        item("adventure_cloudtop_ruins", "Cloudtop Ruins", "places", "world_setting",
+             "among sunny cloudtop ruins on floating islands with wide paths and golden stone arches"),
+        item("adventure_jungle_temple", "Jungle Temple", "places", "world_setting",
+             "in a lush ancient jungle temple courtyard with waterfalls, vines, flowers, and open safe steps"),
+        item("adventure_coral_observatory", "Coral Observatory", "places", "world_setting",
+             "inside a colorful coral-reef observatory with a huge round window looking into clear blue water")
+    ]
+
+    static let styles: [MediaPackItem] = [
+        item("adventure_storybook_gouache", "Golden Storybook", "styles", "art_style",
+             "golden cinematic storybook gouache with clean expressive outlines, soft painted texture, and adventurous light"),
+        item("adventure_field_journal_ink", "Field Journal Ink", "styles", "art_style",
+             "loose explorer field-journal pen-and-ink with lively crosshatching and restrained warm watercolor washes, with no writing"),
+        item("adventure_cut_paper", "Cut-Paper Quest", "styles", "art_style",
+             "layered cut-paper expedition collage with crisp torn shapes, tactile fibers, and gentle paper shadows"),
+        item("adventure_clay_miniature", "Clay Adventure", "styles", "art_style",
+             "colorful handcrafted clay miniature relief with rounded forms, tiny fingerprints, and soft studio lighting"),
+        item("adventure_watercolor", "Watercolor Wonder", "styles", "art_style",
+             "luminous watercolor wonder with transparent jewel-toned washes, soft edges, and bright paper highlights"),
+        item("adventure_colored_pencil", "Explorer Pencil", "styles", "art_style",
+             "textured colored-pencil illustration with layered strokes, natural paper grain, and rich adventurous color"),
+        item("adventure_graphic", "Graphic Adventure", "styles", "art_style",
+             "bold graphic adventure art with clean navy outlines, flat energetic color shapes, and no comic text"),
+        item("adventure_felt", "Felt Expedition", "styles", "art_style",
+             "soft handmade felt appliqué with visible fibers, simple stitched edges, and cozy expedition colors"),
+        item("adventure_diorama", "Tiny Diorama", "styles", "art_style",
+             "handcrafted miniature diorama with painted model textures, shallow depth of field, and warm theatrical light"),
+        item("adventure_dreamlight", "Dreamlight Quest", "styles", "art_style",
+             "dreamy glowing fantasy paint with luminous turquoise, violet, and gold light, magical but never scary")
+    ]
+
+    static let backgroundFileStem = "adventure_background"
+
+    static func loadBackground() -> UIImage? {
+        MediaPackImageLoader.image(subdirectory: bundleRoot, stem: backgroundFileStem)
+    }
+
+    private static func item(
+        _ stem: String,
+        _ name: String,
+        _ folder: String,
+        _ category: String,
+        _ prompt: String
+    ) -> MediaPackItem {
+        MediaPackItem(
+            id: "adventure_\(folder.dropLast())_\(stem)",
             name: name,
             category: category,
             styleInjection: prompt,
