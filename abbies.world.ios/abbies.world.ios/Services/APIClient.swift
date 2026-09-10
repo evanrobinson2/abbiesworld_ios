@@ -121,6 +121,33 @@ class APIClient: ObservableObject {
             .eraseToAnyPublisher()
     }
     
+    // MARK: - Create Image with Server-Managed Pack
+    
+    func createImageWithPack(request: PackGenerationRequest) -> AnyPublisher<URLSession.DataTaskPublisher.Output, Error> {
+        guard let url = URL(string: "\(baseURL)/api/create") else {
+            return Fail(error: URLError(.badURL))
+                .eraseToAnyPublisher()
+        }
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "POST"
+        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        // Add API key header if available
+        ServerConfig.shared.addAPIKeyHeader(to: &urlRequest)
+        
+        do {
+            urlRequest.httpBody = try JSONEncoder().encode(request)
+        } catch {
+            return Fail(error: error)
+                .eraseToAnyPublisher()
+        }
+        
+        return URLSession.shared.dataTaskPublisher(for: urlRequest)
+            .mapError { $0 as Error }
+            .eraseToAnyPublisher()
+    }
+    
     // MARK: - Helper
 
     func validatedDataPublisher(for request: URLRequest) -> AnyPublisher<Data, Error> {
