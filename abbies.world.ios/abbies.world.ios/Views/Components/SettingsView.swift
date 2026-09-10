@@ -161,7 +161,7 @@ struct ViewModeSection: View {
                     viewModel.mediaPack == .halloween
                         ? "Halloween always uses four rows."
                         : (viewModel.mediaPack == .animalAvenue
-                           ? "Animal Avenue always uses three rows."
+                           ? "Animal Avenue always uses four rows."
                            : (viewModel.viewMode == .default
                            ? "Standard 3-carousel layout"
                            : "Extended layout with style selection"))

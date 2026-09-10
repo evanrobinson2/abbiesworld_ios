@@ -39,7 +39,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
     }
 
     var usesFourCarousels: Bool {
-        self == .halloween
+        self != .classic
     }
 
     var friendRowTitle: String {
@@ -63,7 +63,11 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
     }
 
     var styleRowTitle: String {
-        self == .halloween ? "Spooky Style" : "Style"
+        switch self {
+        case .classic: return "Style"
+        case .halloween: return "Spooky Style"
+        case .animalAvenue: return "Art Style"
+        }
     }
 
     var usesBundledPrompt: Bool {
@@ -284,6 +288,29 @@ enum AnimalAvenueCatalog {
              "inside a joyful community art studio with easels, paint splashes, brushes, and craft tables"),
         item("animal_avenue_block_party", "Animal Avenue Party", "places", "world_setting",
              "at a crowded Animal Avenue block party with bunting, balloons, music, dancing, and many animal neighbors")
+    ]
+
+    static let styles: [MediaPackItem] = [
+        item("sunny_storybook", "Sunny Storybook", "styles", "art_style",
+             "polished sunny storybook gouache, thick dark-indigo outlines, soft painted texture, rounded shapes, and cheerful neighborhood colors"),
+        item("crayon_club", "Crayon Club", "styles", "art_style",
+             "chunky wax-crayon drawing on warm paper, visible colorful strokes, wobbly friendly outlines, and childlike energy"),
+        item("paper_collage", "Paper Collage", "styles", "art_style",
+             "layered cut-paper collage with torn edges, softly raised paper shadows, simple shapes, and tactile craft-table charm"),
+        item("sidewalk_chalk", "Sidewalk Chalk", "styles", "art_style",
+             "vivid sidewalk-chalk art on deep navy pavement, dusty edges, broad hand-drawn marks, and bright playful color"),
+        item("cozy_felt", "Cozy Felt", "styles", "art_style",
+             "handmade felt appliqué with soft fuzzy fibers, rounded sewn edges, tiny stitches, and warm cozy colors"),
+        item("bubble_paint", "Bubble Paint", "styles", "art_style",
+             "bubbly translucent watercolor paint, soft overlapping washes, rounded splashes, bright highlights, and airy white paper"),
+        item("picture_book_ink", "Picture-Book Ink", "styles", "art_style",
+             "expressive picture-book pen-and-ink lines with loose light watercolor washes, lively marks, and lots of warmth"),
+        item("sticker_sparkle", "Sticker Sparkle", "styles", "art_style",
+             "glossy die-cut sticker art, bold clean outline, bright flat colors, tiny harmless sparkles, and crisp playful shapes"),
+        item("patchwork_quilt", "Patchwork Quilt", "styles", "art_style",
+             "fabric patchwork quilt illustration with cotton textures, stitched seams, appliqué shapes, and a cozy handmade palette"),
+        item("bedtime_glow", "Bedtime Glow", "styles", "art_style",
+             "gentle moonlit bedtime picture-book art in blue and lavender with warm window lights, soft stars, and a calm magical glow")
     ]
 
     static let backgroundFileStem = "animal_avenue_background"
