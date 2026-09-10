@@ -27,6 +27,7 @@ struct CarouselConfig {
     enum TileChrome {
         case plain
         case halloweenSticker
+        case animalSticker
     }
     
     static func `default`() -> CarouselConfig {

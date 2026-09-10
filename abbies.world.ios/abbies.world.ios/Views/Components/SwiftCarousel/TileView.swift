@@ -82,6 +82,15 @@ struct TileView: View {
             ) {
                 inner()
             }
+        } else if config.tileChrome == .animalSticker {
+            AnimalTileChrome(
+                title: item.displayName,
+                isSelected: isSelected,
+                size: size,
+                cornerRadius: config.cornerRadius
+            ) {
+                inner()
+            }
         } else {
             inner()
                 .frame(width: config.tileWidth, height: config.tileHeight)

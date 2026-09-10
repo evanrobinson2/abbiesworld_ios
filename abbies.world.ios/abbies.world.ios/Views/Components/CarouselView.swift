@@ -63,13 +63,24 @@ struct CarouselView: View {
         let tileSize = customTileSize ?? 280 // Default 280, smaller for 4-carousel view
         config.tileWidth = tileSize
         config.tileHeight = tileSize
-        config.tileSpacing = mediaPack == .halloween ? 18 : 16
         config.horizontalPadding = 20
-        config.cornerRadius = mediaPack == .halloween ? 22 : 8
-        config.selectionBorderColor = mediaPack == .halloween
-            ? Color(red: 0.98, green: 0.52, blue: 0.16)
-            : .blue
-        config.tileChrome = mediaPack == .halloween ? .halloweenSticker : .plain
+        switch mediaPack {
+        case .classic:
+            config.tileSpacing = 16
+            config.cornerRadius = 8
+            config.selectionBorderColor = .blue
+            config.tileChrome = .plain
+        case .halloween:
+            config.tileSpacing = 18
+            config.cornerRadius = 22
+            config.selectionBorderColor = Color(red: 0.98, green: 0.52, blue: 0.16)
+            config.tileChrome = .halloweenSticker
+        case .animalAvenue:
+            config.tileSpacing = 18
+            config.cornerRadius = 22
+            config.selectionBorderColor = Color(red: 0.12, green: 0.62, blue: 0.42)
+            config.tileChrome = .animalSticker
+        }
         return config
     }
     

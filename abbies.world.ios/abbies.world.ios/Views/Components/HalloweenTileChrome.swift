@@ -112,7 +112,7 @@ struct CarouselCarveout<Content: View>: View {
 
     var body: some View {
         content()
-            .padding(mediaPack == .halloween ? 6 : 8)
+            .padding(mediaPack == .classic ? 8 : 6)
             .background {
                 if mediaPack == .halloween {
                     ZStack {
@@ -134,6 +134,27 @@ struct CarouselCarveout<Content: View>: View {
                             Spacer()
                         }
                         .foregroundColor(Color(red: 1.0, green: 0.72, blue: 0.22).opacity(0.85))
+                        .padding(8)
+                    }
+                } else if mediaPack == .animalAvenue {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .fill(Color(red: 0.88, green: 0.97, blue: 0.89).opacity(0.70))
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .strokeBorder(
+                                Color(red: 0.10, green: 0.58, blue: 0.40).opacity(0.92),
+                                style: StrokeStyle(lineWidth: 3, dash: [6, 5])
+                            )
+                        VStack {
+                            HStack {
+                                Image(systemName: "pawprint.fill")
+                                Spacer()
+                                Image(systemName: "leaf.fill")
+                            }
+                            Spacer()
+                        }
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundColor(Color(red: 0.95, green: 0.55, blue: 0.18).opacity(0.90))
                         .padding(8)
                     }
                 } else {
