@@ -38,10 +38,15 @@ struct FourCarouselView: View {
             // Calculate carousel frame height to fit 4 rows
             let carouselFrameHeight = (totalHeight - totalSpacing) / 4
             
-            // Calculate optimal tile size to fit 4 carousels on screen
-            // Based on calculations: 180pt fits with reduced spacing
-            // Accounts for: tile size + selection scale (1.05x) + pulse (0.05) + border (3pt)
-            let tileSize: CGFloat = 180
+            // Fit each tile inside its row after accounting for the selected
+            // tile's 1.05 scale, 5% pulse, border padding, and carveout insets.
+            // This keeps the 180pt portrait size while reducing landscape
+            // tiles to about 140pt on an 11-inch iPad.
+            let maximumSelectedScale: CGFloat = 1.05 * 1.05
+            let borderPadding: CGFloat = 6
+            let carveoutInsets: CGFloat = mediaPack == .classic ? 16 : 12
+            let availableTileHeight = max(0, carouselFrameHeight - borderPadding - carveoutInsets)
+            let tileSize = min(180, max(72, availableTileHeight / maximumSelectedScale))
             
             VStack(spacing: spacing) {
                 carouselRow(
