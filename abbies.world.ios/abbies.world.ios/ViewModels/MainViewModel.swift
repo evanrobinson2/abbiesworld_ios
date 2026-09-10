@@ -100,6 +100,9 @@ class MainViewModel: ObservableObject {
         } else if ProcessInfo.processInfo.arguments.contains("-mediaPackAnimals") {
             mediaPack = .animalAvenue
             UserDefaults.standard.set(MediaPack.animalAvenue.rawValue, forKey: "mediaPack")
+        } else if ProcessInfo.processInfo.arguments.contains("-mediaPackAdventure") {
+            mediaPack = .adventure
+            UserDefaults.standard.set(MediaPack.adventure.rawValue, forKey: "mediaPack")
         } else if let savedPack = UserDefaults.standard.string(forKey: "mediaPack"),
                   let pack = MediaPack(rawValue: savedPack) {
             mediaPack = pack
@@ -332,6 +335,8 @@ class MainViewModel: ObservableObject {
             applyHalloweenPack()
         case .animalAvenue:
             applyAnimalAvenuePack()
+        case .adventure:
+            applyAdventurePack()
         case .classic:
             loadBackgroundImage()
             loadIngredients()
@@ -861,6 +866,10 @@ class MainViewModel: ObservableObject {
             viewMode = .fourCarousel
             applyAnimalAvenuePack()
             showToast("Animal Avenue is open!", type: .success)
+        case .adventure:
+            viewMode = .fourCarousel
+            applyAdventurePack()
+            showToast("Adventure awaits!", type: .success)
         case .classic:
             if let previous = viewModeBeforeThemedPack {
                 viewMode = previous
@@ -917,6 +926,23 @@ class MainViewModel: ObservableObject {
         })
         backgroundImage = AnimalAvenueCatalog.loadBackground()
         print("🐾 MainViewModel: Loaded Animal Avenue pack (\(friendItems.count) animals, \(outfitItems.count) outfits, \(placeItems.count) neighborhood places, \(styleItems.count) styles)")
+    }
+
+    private func applyAdventurePack() {
+        isLoadingIngredients = false
+        friendItems = AdventureCatalog.adventurers.map { $0.asIngredient() }
+        outfitItems = AdventureCatalog.costumes.map { $0.asIngredient() }
+        placeItems = AdventureCatalog.places.map { $0.asIngredient() }
+        styleItems = AdventureCatalog.styles.map { $0.asIngredient() }
+        stylePrompts = Dictionary(uniqueKeysWithValues: AdventureCatalog.styles.map {
+            ($0.id, $0.styleInjection)
+        })
+        styleShortDescriptions = Dictionary(uniqueKeysWithValues: AdventureCatalog.styles.map { item in
+            let words = item.styleInjection.split(separator: " ").prefix(4).joined(separator: " ")
+            return (item.id, String(words))
+        })
+        backgroundImage = AdventureCatalog.loadBackground()
+        print("🧭 MainViewModel: Loaded Adventure pack (\(friendItems.count) adventurers, \(outfitItems.count) costumes, \(placeItems.count) destinations, \(styleItems.count) styles)")
     }
     
     // MARK: - Image Generation
@@ -1044,6 +1070,19 @@ class MainViewModel: ObservableObject {
                 "Animal: \(friend.styleInjection).",
                 "Outfit: \(outfit.styleInjection).",
                 "Neighborhood place: \(place.styleInjection)."
+            ]
+            if let styleIngredient {
+                let styleText = stylePrompts[styleIngredient.id] ?? styleIngredient.styleInjection
+                sentences.append("Art style: \(styleText).")
+            }
+            freeTextDescription = sentences.joined(separator: " ")
+        } else if mediaPack == .adventure {
+            var sentences = [
+                "Exciting kid-friendly adventure picture about curiosity and exploration, playful and completely safe.",
+                "Adventurer: \(friend.styleInjection).",
+                "Adventure gear: \(outfit.styleInjection).",
+                "Destination: \(place.styleInjection).",
+                "No weapons, peril, frightening creatures, or scary imagery."
             ]
             if let styleIngredient {
                 let styleText = stylePrompts[styleIngredient.id] ?? styleIngredient.styleInjection

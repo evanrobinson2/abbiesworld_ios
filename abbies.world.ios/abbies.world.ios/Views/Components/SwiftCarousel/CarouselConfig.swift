@@ -28,6 +28,7 @@ struct CarouselConfig {
         case plain
         case halloweenSticker
         case animalSticker
+        case adventureSticker
     }
     
     static func `default`() -> CarouselConfig {

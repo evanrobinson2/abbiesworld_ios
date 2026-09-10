@@ -56,6 +56,8 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             activeMediaPack = .halloween
         } else if ProcessInfo.processInfo.arguments.contains("-mediaPackAnimals") {
             activeMediaPack = .animalAvenue
+        } else if ProcessInfo.processInfo.arguments.contains("-mediaPackAdventure") {
+            activeMediaPack = .adventure
         } else if let savedPack = UserDefaults.standard.string(forKey: "mediaPack"),
                   let mediaPack = MediaPack(rawValue: savedPack) {
             activeMediaPack = mediaPack

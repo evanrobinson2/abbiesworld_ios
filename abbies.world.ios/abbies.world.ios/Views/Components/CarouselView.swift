@@ -80,6 +80,11 @@ struct CarouselView: View {
             config.cornerRadius = 22
             config.selectionBorderColor = Color(red: 0.12, green: 0.62, blue: 0.42)
             config.tileChrome = .animalSticker
+        case .adventure:
+            config.tileSpacing = 18
+            config.cornerRadius = 20
+            config.selectionBorderColor = Color(red: 0.96, green: 0.64, blue: 0.13)
+            config.tileChrome = .adventureSticker
         }
         return config
     }

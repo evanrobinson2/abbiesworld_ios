@@ -1,0 +1,45 @@
+{
+  "packId": "adventure",
+  "displayName": "Adventure",
+  "background": "adventure_background.png",
+  "rows": {
+    "adventurers": [
+      {"id": "explorer_one", "name": "Abbie", "file": "adventurers/adventure_explorer_one.png"},
+      {"id": "explorer_two", "name": "Ani", "file": "adventurers/adventure_explorer_two.png"},
+      {"id": "bunny_stuffie", "name": "Bunny Stuffie", "file": "adventurers/adventure_bunny_stuffie.png"},
+      {"id": "golden_puppy", "name": "Golden Puppy", "file": "adventurers/adventure_golden_puppy.png"},
+      {"id": "fox_kit", "name": "Fox Kit", "file": "adventurers/adventure_fox_kit.png"}
+    ],
+    "costumes": [
+      {"id": "utility_vest", "name": "Explorer Vest", "file": "costumes/adventure_utility_vest.png"},
+      {"id": "rain_poncho", "name": "Rain Poncho", "file": "costumes/adventure_rain_poncho.png"},
+      {"id": "space_suit", "name": "Bubble Space Suit", "file": "costumes/adventure_space_suit.png"},
+      {"id": "diving_suit", "name": "Deep-Sea Suit", "file": "costumes/adventure_diving_suit.png"},
+      {"id": "jungle_jacket", "name": "Jungle Jacket", "file": "costumes/adventure_jungle_jacket.png"},
+      {"id": "mountain_parka", "name": "Mountain Parka", "file": "costumes/adventure_mountain_parka.png"},
+      {"id": "desert_cloak", "name": "Desert Sun Cloak", "file": "costumes/adventure_desert_cloak.png"},
+      {"id": "sky_captain_coat", "name": "Sky Captain Coat", "file": "costumes/adventure_sky_captain_coat.png"},
+      {"id": "archaeologist_overalls", "name": "Dig-Site Overalls", "file": "costumes/adventure_archaeologist_overalls.png"},
+      {"id": "navigator_cape", "name": "Navigator Cape", "file": "costumes/adventure_navigator_cape.png"}
+    ],
+    "places": [
+      {"id": "treehouse_base", "name": "Treehouse Base", "file": "places/adventure_treehouse_base.png"},
+      {"id": "crystal_cave", "name": "Crystal Cave", "file": "places/adventure_crystal_cave.png"},
+      {"id": "cloudtop_ruins", "name": "Cloudtop Ruins", "file": "places/adventure_cloudtop_ruins.png"},
+      {"id": "jungle_temple", "name": "Jungle Temple", "file": "places/adventure_jungle_temple.png"},
+      {"id": "coral_observatory", "name": "Coral Observatory", "file": "places/adventure_coral_observatory.png"}
+    ],
+    "styles": [
+      {"id": "storybook_gouache", "name": "Golden Storybook", "file": "styles/adventure_storybook_gouache.png"},
+      {"id": "field_journal_ink", "name": "Field Journal Ink", "file": "styles/adventure_field_journal_ink.png"},
+      {"id": "cut_paper", "name": "Cut-Paper Quest", "file": "styles/adventure_cut_paper.png"},
+      {"id": "clay_miniature", "name": "Clay Adventure", "file": "styles/adventure_clay_miniature.png"},
+      {"id": "watercolor", "name": "Watercolor Wonder", "file": "styles/adventure_watercolor.png"},
+      {"id": "colored_pencil", "name": "Explorer Pencil", "file": "styles/adventure_colored_pencil.png"},
+      {"id": "graphic", "name": "Graphic Adventure", "file": "styles/adventure_graphic.png"},
+      {"id": "felt", "name": "Felt Expedition", "file": "styles/adventure_felt.png"},
+      {"id": "diorama", "name": "Tiny Diorama", "file": "styles/adventure_diorama.png"},
+      {"id": "dreamlight", "name": "Dreamlight Quest", "file": "styles/adventure_dreamlight.png"}
+    ]
+  }
+}
