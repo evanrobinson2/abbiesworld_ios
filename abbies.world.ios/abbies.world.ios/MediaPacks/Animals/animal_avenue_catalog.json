@@ -38,6 +38,18 @@
       {"id": "school_bus_stop", "name": "School Bus Stop", "file": "places/school_bus_stop.png"},
       {"id": "community_art_studio", "name": "Community Art Studio", "file": "places/community_art_studio.png"},
       {"id": "animal_avenue_block_party", "name": "Animal Avenue Party", "file": "places/animal_avenue_block_party.png"}
+    ],
+    "styles": [
+      {"id": "sunny_storybook", "name": "Sunny Storybook", "file": "styles/sunny_storybook.png"},
+      {"id": "crayon_club", "name": "Crayon Club", "file": "styles/crayon_club.png"},
+      {"id": "paper_collage", "name": "Paper Collage", "file": "styles/paper_collage.png"},
+      {"id": "sidewalk_chalk", "name": "Sidewalk Chalk", "file": "styles/sidewalk_chalk.png"},
+      {"id": "cozy_felt", "name": "Cozy Felt", "file": "styles/cozy_felt.png"},
+      {"id": "bubble_paint", "name": "Bubble Paint", "file": "styles/bubble_paint.png"},
+      {"id": "picture_book_ink", "name": "Picture-Book Ink", "file": "styles/picture_book_ink.png"},
+      {"id": "sticker_sparkle", "name": "Sticker Sparkle", "file": "styles/sticker_sparkle.png"},
+      {"id": "patchwork_quilt", "name": "Patchwork Quilt", "file": "styles/patchwork_quilt.png"},
+      {"id": "bedtime_glow", "name": "Bedtime Glow", "file": "styles/bedtime_glow.png"}
     ]
   }
 }

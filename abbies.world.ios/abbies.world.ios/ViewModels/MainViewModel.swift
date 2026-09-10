@@ -112,10 +112,8 @@ class MainViewModel: ObservableObject {
             viewMode = mode
         }
         
-        if mediaPack == .halloween {
+        if mediaPack.usesFourCarousels {
             viewMode = .fourCarousel
-        } else if mediaPack == .animalAvenue {
-            viewMode = .default
         } else if viewMode == .fourCarousel {
             loadStyleItems()
         }
@@ -133,8 +131,8 @@ class MainViewModel: ObservableObject {
             outfitIndex < outfitItems.count &&
             placeIndex < placeItems.count
         
-        // In fourCarousel mode or the Halloween pack, also require style selection
-        if viewMode == .fourCarousel || mediaPack == .halloween {
+        // Four-row skins also require a style selection.
+        if viewMode == .fourCarousel || mediaPack.usesFourCarousels {
             return baseReady && styleIndex >= 0 && styleIndex < styleItems.count
         }
         
@@ -860,7 +858,7 @@ class MainViewModel: ObservableObject {
             applyHalloweenPack()
             showToast("Spooky world on!", type: .success)
         case .animalAvenue:
-            viewMode = .default
+            viewMode = .fourCarousel
             applyAnimalAvenuePack()
             showToast("Animal Avenue is open!", type: .success)
         case .classic:
@@ -909,11 +907,16 @@ class MainViewModel: ObservableObject {
         friendItems = AnimalAvenueCatalog.animals.map { $0.asIngredient() }
         outfitItems = AnimalAvenueCatalog.outfits.map { $0.asIngredient() }
         placeItems = AnimalAvenueCatalog.places.map { $0.asIngredient() }
-        styleItems = []
-        stylePrompts = [:]
-        styleShortDescriptions = [:]
+        styleItems = AnimalAvenueCatalog.styles.map { $0.asIngredient() }
+        stylePrompts = Dictionary(uniqueKeysWithValues: AnimalAvenueCatalog.styles.map {
+            ($0.id, $0.styleInjection)
+        })
+        styleShortDescriptions = Dictionary(uniqueKeysWithValues: AnimalAvenueCatalog.styles.map { item in
+            let words = item.styleInjection.split(separator: " ").prefix(4).joined(separator: " ")
+            return (item.id, String(words))
+        })
         backgroundImage = AnimalAvenueCatalog.loadBackground()
-        print("🐾 MainViewModel: Loaded Animal Avenue pack (\(friendItems.count) animals, \(outfitItems.count) outfits, \(placeItems.count) neighborhood places)")
+        print("🐾 MainViewModel: Loaded Animal Avenue pack (\(friendItems.count) animals, \(outfitItems.count) outfits, \(placeItems.count) neighborhood places, \(styleItems.count) styles)")
     }
     
     // MARK: - Image Generation
@@ -1036,13 +1039,17 @@ class MainViewModel: ObservableObject {
             }
             freeTextDescription = sentences.joined(separator: " ")
         } else if mediaPack == .animalAvenue {
-            freeTextDescription = [
+            var sentences = [
                 "Cheerful kid-friendly Animal Avenue neighborhood picture, warm, playful, and safe.",
                 "Animal: \(friend.styleInjection).",
                 "Outfit: \(outfit.styleInjection).",
-                "Neighborhood place: \(place.styleInjection).",
-                "Whimsical children's game illustration with thick dark-indigo outlines, soft digital gouache texture, rounded shapes, and bright sunny colors."
-            ].joined(separator: " ")
+                "Neighborhood place: \(place.styleInjection)."
+            ]
+            if let styleIngredient {
+                let styleText = stylePrompts[styleIngredient.id] ?? styleIngredient.styleInjection
+                sentences.append("Art style: \(styleText).")
+            }
+            freeTextDescription = sentences.joined(separator: " ")
         } else if let styleDesc = styleDescription {
             freeTextDescription = styleDesc
         } else {
