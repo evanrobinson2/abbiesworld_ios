@@ -63,6 +63,17 @@ struct SettingsView: View {
 struct WorldSkinSection: View {
     @ObservedObject var viewModel: MainViewModel
 
+    private var description: String {
+        switch viewModel.mediaPack {
+        case .classic:
+            return "Everyday uses the classic server pictures and playlist."
+        case .halloween:
+            return "Halloween uses bundled spooky pictures and music, even after restarting."
+        case .animalAvenue:
+            return "Animals uses bundled Animal Avenue pictures with the Everyday playlist."
+        }
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("World Skin")
@@ -85,11 +96,7 @@ struct WorldSkinSection: View {
             .padding(.horizontal)
             .accessibilityLabel("World skin")
 
-            Text(
-                viewModel.mediaPack == .halloween
-                    ? "Halloween uses the bundled spooky pictures and music, even after restarting."
-                    : "Everyday uses the classic server pictures and playlist."
-            )
+            Text(description)
             .font(.caption)
             .foregroundColor(.secondary)
             .padding(.horizontal)
@@ -147,15 +154,17 @@ struct ViewModeSection: View {
                 }
                 .pickerStyle(SegmentedPickerStyle())
                 .padding(.horizontal)
-                .disabled(viewModel.mediaPack == .halloween)
+                .disabled(viewModel.mediaPack != .classic)
                 
                 // Description text
                 Text(
                     viewModel.mediaPack == .halloween
                         ? "Halloween always uses four rows."
-                        : (viewModel.viewMode == .default
+                        : (viewModel.mediaPack == .animalAvenue
+                           ? "Animal Avenue always uses three rows."
+                           : (viewModel.viewMode == .default
                            ? "Standard 3-carousel layout"
-                           : "Extended layout with style selection")
+                           : "Extended layout with style selection"))
                 )
                     .font(.caption)
                     .foregroundColor(.secondary)

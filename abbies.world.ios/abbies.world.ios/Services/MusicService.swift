@@ -54,6 +54,8 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         super.init()
         if ProcessInfo.processInfo.arguments.contains("-mediaPackHalloween") {
             activeMediaPack = .halloween
+        } else if ProcessInfo.processInfo.arguments.contains("-mediaPackAnimals") {
+            activeMediaPack = .animalAvenue
         } else if let savedPack = UserDefaults.standard.string(forKey: "mediaPack"),
                   let mediaPack = MediaPack(rawValue: savedPack) {
             activeMediaPack = mediaPack
@@ -189,7 +191,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
     
     func loadPlaylist() {
-        guard activeMediaPack == .classic else {
+        guard activeMediaPack != .halloween else {
             loadHalloweenPlaylist()
             return
         }
@@ -225,7 +227,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
                     }
                 },
                 receiveValue: { [weak self] assets in
-                    guard let self = self, self.activeMediaPack == .classic else { return }
+                    guard let self = self, self.activeMediaPack != .halloween else { return }
                     // Filter to only main playlist tracks (exclude game-specific music like goonpopper)
                     let mainAssets = assets.filter { $0.type == "music/main" }
                     let tracks = mainAssets.map { asset in MusicTrack(from: asset) }

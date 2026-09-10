@@ -1,0 +1,43 @@
+{
+  "packId": "animalAvenue",
+  "displayName": "Animal Avenue",
+  "background": "animal_avenue_background.png",
+  "rows": {
+    "animals": [
+      {"id": "red_panda", "name": "Red Panda", "file": "animals/red_panda.png"},
+      {"id": "elephant_calf", "name": "Elephant Calf", "file": "animals/elephant_calf.png"},
+      {"id": "emperor_penguin", "name": "Emperor Penguin", "file": "animals/emperor_penguin.png"},
+      {"id": "giraffe_calf", "name": "Giraffe Calf", "file": "animals/giraffe_calf.png"},
+      {"id": "capybara", "name": "Capybara", "file": "animals/capybara.png"},
+      {"id": "sea_otter", "name": "Sea Otter", "file": "animals/sea_otter.png"},
+      {"id": "axolotl", "name": "Axolotl", "file": "animals/axolotl.png"},
+      {"id": "chameleon", "name": "Chameleon", "file": "animals/chameleon.png"},
+      {"id": "bumblebee", "name": "Bumblebee", "file": "animals/bumblebee.png"},
+      {"id": "giant_pacific_octopus", "name": "Pacific Octopus", "file": "animals/giant_pacific_octopus.png"}
+    ],
+    "outfits": [
+      {"id": "rainbow_raincoat", "name": "Rainbow Raincoat", "file": "outfits/rainbow_raincoat.png"},
+      {"id": "sunflower_overalls", "name": "Sunflower Overalls", "file": "outfits/sunflower_overalls.png"},
+      {"id": "starry_pajamas", "name": "Starry Pajamas", "file": "outfits/starry_pajamas.png"},
+      {"id": "junior_chef", "name": "Junior Chef", "file": "outfits/junior_chef.png"},
+      {"id": "towel_superhero_cape", "name": "Towel Hero Cape", "file": "outfits/towel_superhero_cape.png"},
+      {"id": "bubble_astronaut", "name": "Bubble Astronaut", "file": "outfits/bubble_astronaut.png"},
+      {"id": "neighborhood_soccer", "name": "Soccer Kit", "file": "outfits/neighborhood_soccer.png"},
+      {"id": "polkadot_tutu", "name": "Polka-Dot Tutu", "file": "outfits/polkadot_tutu.png"},
+      {"id": "cozy_hoodie_backpack", "name": "Hoodie & Backpack", "file": "outfits/cozy_hoodie_backpack.png"},
+      {"id": "friendly_firefighter", "name": "Firefighter Gear", "file": "outfits/friendly_firefighter.png"}
+    ],
+    "places": [
+      {"id": "corner_bakery", "name": "Corner Bakery", "file": "places/corner_bakery.png"},
+      {"id": "treehouse_library", "name": "Treehouse Library", "file": "places/treehouse_library.png"},
+      {"id": "pocket_park_playground", "name": "Pocket-Park Playground", "file": "places/pocket_park_playground.png"},
+      {"id": "community_garden", "name": "Community Garden", "file": "places/community_garden.png"},
+      {"id": "neighborhood_firehouse", "name": "Neighborhood Firehouse", "file": "places/neighborhood_firehouse.png"},
+      {"id": "saturday_street_market", "name": "Saturday Street Market", "file": "places/saturday_street_market.png"},
+      {"id": "rainbow_splash_pad", "name": "Rainbow Splash Pad", "file": "places/rainbow_splash_pad.png"},
+      {"id": "school_bus_stop", "name": "School Bus Stop", "file": "places/school_bus_stop.png"},
+      {"id": "community_art_studio", "name": "Community Art Studio", "file": "places/community_art_studio.png"},
+      {"id": "animal_avenue_block_party", "name": "Animal Avenue Party", "file": "places/animal_avenue_block_party.png"}
+    ]
+  }
+}

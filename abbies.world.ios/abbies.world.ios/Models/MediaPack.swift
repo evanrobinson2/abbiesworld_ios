@@ -10,6 +10,7 @@ import SwiftUI
 enum MediaPack: String, CaseIterable, Identifiable, Hashable {
     case classic
     case halloween
+    case animalAvenue
 
     var id: String { rawValue }
 
@@ -17,6 +18,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .classic: return "Normal"
         case .halloween: return "Spooky"
+        case .animalAvenue: return "Animal Avenue"
         }
     }
 
@@ -24,6 +26,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .classic: return "Everyday"
         case .halloween: return "Halloween"
+        case .animalAvenue: return "Animals"
         }
     }
 
@@ -31,6 +34,7 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
         switch self {
         case .classic: return "sun.max.fill"
         case .halloween: return "theatermasks.fill"
+        case .animalAvenue: return "pawprint.fill"
         }
     }
 
@@ -39,7 +43,11 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
     }
 
     var friendRowTitle: String {
-        self == .halloween ? "Monster" : "Friend"
+        switch self {
+        case .classic: return "Friend"
+        case .halloween: return "Monster"
+        case .animalAvenue: return "Animal"
+        }
     }
 
     var outfitRowTitle: String {
@@ -47,11 +55,19 @@ enum MediaPack: String, CaseIterable, Identifiable, Hashable {
     }
 
     var placeRowTitle: String {
-        self == .halloween ? "Haunt" : "Place"
+        switch self {
+        case .classic: return "Place"
+        case .halloween: return "Haunt"
+        case .animalAvenue: return "Neighborhood"
+        }
     }
 
     var styleRowTitle: String {
         self == .halloween ? "Spooky Style" : "Style"
+    }
+
+    var usesBundledPrompt: Bool {
+        self != .classic
     }
 }
 
@@ -189,6 +205,102 @@ enum HalloweenCatalog {
     ) -> MediaPackItem {
         MediaPackItem(
             id: "halloween_\(folder.dropLast())_\(stem)",
+            name: name,
+            category: category,
+            styleInjection: prompt,
+            bundleSubdirectory: "\(bundleRoot)/\(folder)",
+            fileStem: stem
+        )
+    }
+}
+
+enum AnimalAvenueCatalog {
+    static let bundleRoot = "MediaPacks/Animals"
+
+    static let animals: [MediaPackItem] = [
+        item("red_panda", "Red Panda", "animals", "character_style",
+             "a cheerful red panda with a fluffy striped tail, warm orange fur, and a curious smile"),
+        item("elephant_calf", "Elephant Calf", "animals", "character_style",
+             "a gentle gray elephant calf with big pink-lined ears and a playfully curled trunk"),
+        item("emperor_penguin", "Emperor Penguin", "animals", "character_style",
+             "a round emperor penguin with a glossy black coat, cream belly, and tiny orange feet"),
+        item("giraffe_calf", "Giraffe Calf", "animals", "character_style",
+             "a lanky giraffe calf with golden spots, small ossicones, and a friendly face"),
+        item("capybara", "Capybara", "animals", "character_style",
+             "a calm cinnamon-brown capybara with tiny round ears and a contented smile"),
+        item("sea_otter", "Sea Otter", "animals", "character_style",
+             "a playful sea otter with soft brown fur, bright whiskers, and waving paws"),
+        item("axolotl", "Axolotl", "animals", "character_style",
+             "a smiling pink axolotl with feathery coral gills and a gently curled tail"),
+        item("chameleon", "Chameleon", "animals", "character_style",
+             "a bright green chameleon with a spiral tail, bumpy scales, and curious swiveling eyes"),
+        item("bumblebee", "Bumblebee", "animals", "character_style",
+             "a round fuzzy bumblebee with golden stripes, tiny wings, and friendly antennae"),
+        item("giant_pacific_octopus", "Pacific Octopus", "animals", "character_style",
+             "a friendly purple giant Pacific octopus with eight curly arms and a warm smile")
+    ]
+
+    static let outfits: [MediaPackItem] = [
+        item("rainbow_raincoat", "Rainbow Raincoat", "outfits", "color_palette",
+             "wearing a bright rainbow raincoat with mismatched colorful rain boots"),
+        item("sunflower_overalls", "Sunflower Overalls", "outfits", "color_palette",
+             "wearing blue denim overalls covered with sunny yellow sunflower patches"),
+        item("starry_pajamas", "Starry Pajamas", "outfits", "color_palette",
+             "wearing cozy navy pajamas sprinkled with tiny white and yellow stars"),
+        item("junior_chef", "Junior Chef", "outfits", "color_palette",
+             "wearing a soft white chef hat and a simple cream cooking apron"),
+        item("towel_superhero_cape", "Towel Hero Cape", "outfits", "color_palette",
+             "wearing a playful red towel superhero cape tied in a safe loose bow"),
+        item("bubble_astronaut", "Bubble Astronaut", "outfits", "color_palette",
+             "wearing a rounded white astronaut suit with a glossy bubble helmet and colorful buttons"),
+        item("neighborhood_soccer", "Soccer Kit", "outfits", "color_palette",
+             "wearing a rainbow-striped neighborhood soccer jersey, navy shorts, socks, and sneakers"),
+        item("polkadot_tutu", "Polka-Dot Tutu", "outfits", "color_palette",
+             "wearing a fluffy yellow tutu covered in cheerful rainbow polka dots"),
+        item("cozy_hoodie_backpack", "Hoodie & Backpack", "outfits", "color_palette",
+             "wearing a cozy teal hoodie with a small sunflower-yellow backpack"),
+        item("friendly_firefighter", "Firefighter Gear", "outfits", "color_palette",
+             "wearing friendly red firefighter gear with yellow safety stripes, helmet, and boots")
+    ]
+
+    static let places: [MediaPackItem] = [
+        item("corner_bakery", "Corner Bakery", "places", "world_setting",
+             "at a colorful neighborhood corner bakery with cupcakes, striped awnings, and flower pots"),
+        item("treehouse_library", "Treehouse Library", "places", "world_setting",
+             "inside a leafy treehouse library filled with picture books and cozy reading nooks"),
+        item("pocket_park_playground", "Pocket-Park Playground", "places", "world_setting",
+             "at a sunny pocket-park playground with a slide, swings, seesaw, and shady trees"),
+        item("community_garden", "Community Garden", "places", "world_setting",
+             "in a blooming community garden full of sunflowers, vegetables, watering cans, and butterflies"),
+        item("neighborhood_firehouse", "Neighborhood Firehouse", "places", "world_setting",
+             "at a welcoming red neighborhood firehouse with open garage doors and a tiny fire truck"),
+        item("saturday_street_market", "Saturday Street Market", "places", "world_setting",
+             "at a bustling Saturday street market with striped stalls, fruit baskets, and friendly neighbors"),
+        item("rainbow_splash_pad", "Rainbow Splash Pad", "places", "world_setting",
+             "at a rainbow splash pad with colorful fountains, sparkling puddles, and sunny trees"),
+        item("school_bus_stop", "School Bus Stop", "places", "world_setting",
+             "at a friendly neighborhood bus stop beside a bright yellow school bus and leafy sidewalk"),
+        item("community_art_studio", "Community Art Studio", "places", "world_setting",
+             "inside a joyful community art studio with easels, paint splashes, brushes, and craft tables"),
+        item("animal_avenue_block_party", "Animal Avenue Party", "places", "world_setting",
+             "at a crowded Animal Avenue block party with bunting, balloons, music, dancing, and many animal neighbors")
+    ]
+
+    static let backgroundFileStem = "animal_avenue_background"
+
+    static func loadBackground() -> UIImage? {
+        MediaPackImageLoader.image(subdirectory: bundleRoot, stem: backgroundFileStem)
+    }
+
+    private static func item(
+        _ stem: String,
+        _ name: String,
+        _ folder: String,
+        _ category: String,
+        _ prompt: String
+    ) -> MediaPackItem {
+        MediaPackItem(
+            id: "animal_\(folder.dropLast())_\(stem)",
             name: name,
             category: category,
             styleInjection: prompt,

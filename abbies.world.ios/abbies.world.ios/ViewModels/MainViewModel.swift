@@ -34,14 +34,14 @@ class MainViewModel: ObservableObject {
     @Published var viewMode: ViewMode = .default {
         didSet {
             UserDefaults.standard.set(viewMode.rawValue, forKey: "viewMode")
-            if viewMode == .fourCarousel && mediaPack != .halloween {
+            if viewMode == .fourCarousel && mediaPack == .classic {
                 loadStyleItems()
             }
         }
     }
     
     @Published var mediaPack: MediaPack = .classic
-    private var viewModeBeforeHalloween: ViewMode?
+    private var viewModeBeforeThemedPack: ViewMode?
     
     // Carousel indices
     @Published var friendIndex = -1
@@ -97,6 +97,9 @@ class MainViewModel: ObservableObject {
         if ProcessInfo.processInfo.arguments.contains("-mediaPackHalloween") {
             mediaPack = .halloween
             UserDefaults.standard.set(MediaPack.halloween.rawValue, forKey: "mediaPack")
+        } else if ProcessInfo.processInfo.arguments.contains("-mediaPackAnimals") {
+            mediaPack = .animalAvenue
+            UserDefaults.standard.set(MediaPack.animalAvenue.rawValue, forKey: "mediaPack")
         } else if let savedPack = UserDefaults.standard.string(forKey: "mediaPack"),
                   let pack = MediaPack(rawValue: savedPack) {
             mediaPack = pack
@@ -111,6 +114,8 @@ class MainViewModel: ObservableObject {
         
         if mediaPack == .halloween {
             viewMode = .fourCarousel
+        } else if mediaPack == .animalAvenue {
+            viewMode = .default
         } else if viewMode == .fourCarousel {
             loadStyleItems()
         }
@@ -324,9 +329,12 @@ class MainViewModel: ObservableObject {
     }
     
     func loadData() {
-        if mediaPack == .halloween {
+        switch mediaPack {
+        case .halloween:
             applyHalloweenPack()
-        } else {
+        case .animalAvenue:
+            applyAnimalAvenuePack()
+        case .classic:
             loadBackgroundImage()
             loadIngredients()
         }
@@ -830,47 +838,45 @@ class MainViewModel: ObservableObject {
     
     /// Set view mode (public method for Settings)
     func setViewMode(_ mode: ViewMode) {
-        if mediaPack == .halloween && mode != .fourCarousel {
-            return
-        }
+        guard mediaPack == .classic else { return }
         viewMode = mode
-    }
-    
-    func toggleMediaPack() {
-        setMediaPack(mediaPack == .classic ? .halloween : .classic)
     }
     
     func setMediaPack(_ pack: MediaPack) {
         guard pack != mediaPack else { return }
-        
-        if pack == .halloween {
-            if viewMode != .fourCarousel {
-                viewModeBeforeHalloween = viewMode
-            }
-            mediaPack = pack
-            UserDefaults.standard.set(pack.rawValue, forKey: "mediaPack")
-            MusicService.shared.setMediaPack(pack)
-            viewMode = .fourCarousel
-            resetCarouselSelections()
-            applyHalloweenPack()
-            showToast("Spooky world on!", type: .success)
-            return
+
+        if mediaPack == .classic {
+            viewModeBeforeThemedPack = viewMode
         }
-        
+
         mediaPack = pack
         UserDefaults.standard.set(pack.rawValue, forKey: "mediaPack")
         MusicService.shared.setMediaPack(pack)
-        if let previous = viewModeBeforeHalloween {
-            viewMode = previous
-            viewModeBeforeHalloween = nil
-        }
         resetCarouselSelections()
-        loadBackgroundImage()
-        loadIngredients()
-        if viewMode == .fourCarousel {
-            loadStyleItems()
+
+        switch pack {
+        case .halloween:
+            viewMode = .fourCarousel
+            applyHalloweenPack()
+            showToast("Spooky world on!", type: .success)
+        case .animalAvenue:
+            viewMode = .default
+            applyAnimalAvenuePack()
+            showToast("Animal Avenue is open!", type: .success)
+        case .classic:
+            if let previous = viewModeBeforeThemedPack {
+                viewMode = previous
+            } else {
+                viewMode = .default
+            }
+            viewModeBeforeThemedPack = nil
+            loadBackgroundImage()
+            loadIngredients()
+            if viewMode == .fourCarousel {
+                loadStyleItems()
+            }
+            showToast("Everyday world on!", type: .info)
         }
-        showToast("Everyday world on!", type: .info)
     }
     
     private func resetCarouselSelections() {
@@ -896,6 +902,18 @@ class MainViewModel: ObservableObject {
         })
         backgroundImage = HalloweenCatalog.loadBackground()
         print("🎃 MainViewModel: Loaded Halloween pack (\(friendItems.count) monsters, \(outfitItems.count) costumes, \(placeItems.count) haunts, \(styleItems.count) styles)")
+    }
+
+    private func applyAnimalAvenuePack() {
+        isLoadingIngredients = false
+        friendItems = AnimalAvenueCatalog.animals.map { $0.asIngredient() }
+        outfitItems = AnimalAvenueCatalog.outfits.map { $0.asIngredient() }
+        placeItems = AnimalAvenueCatalog.places.map { $0.asIngredient() }
+        styleItems = []
+        stylePrompts = [:]
+        styleShortDescriptions = [:]
+        backgroundImage = AnimalAvenueCatalog.loadBackground()
+        print("🐾 MainViewModel: Loaded Animal Avenue pack (\(friendItems.count) animals, \(outfitItems.count) outfits, \(placeItems.count) neighborhood places)")
     }
     
     // MARK: - Image Generation
@@ -971,7 +989,7 @@ class MainViewModel: ObservableObject {
         }
         
         // Extract asset paths from each selected ingredient unless this is a bundled pack
-        if mediaPack != .halloween {
+        if !mediaPack.usesBundledPrompt {
             if let friendPath = extractAssetPath(from: friend.imageURL) {
                 referenceImageIds.append(friendPath)
             } else {
@@ -998,8 +1016,8 @@ class MainViewModel: ObservableObject {
             RecipeItem(id: place.id, slotIndex: 2)
         ]
         // Bundled pack IDs do not exist in the server ingredient catalog.
-        // Keep the required array in the request, but make Halloween text-only.
-        let recipeItems = mediaPack == .halloween ? [] : selectedRecipeItems
+        // Keep the required array in the request, but make bundled skins text-only.
+        let recipeItems = mediaPack.usesBundledPrompt ? [] : selectedRecipeItems
         
         // MODALITY 2: TEXT DESCRIPTION (style)
         // Style is passed via freeTextDescription, not as a reference image
@@ -1017,6 +1035,14 @@ class MainViewModel: ObservableObject {
                 sentences.append("Art style: \(styleText).")
             }
             freeTextDescription = sentences.joined(separator: " ")
+        } else if mediaPack == .animalAvenue {
+            freeTextDescription = [
+                "Cheerful kid-friendly Animal Avenue neighborhood picture, warm, playful, and safe.",
+                "Animal: \(friend.styleInjection).",
+                "Outfit: \(outfit.styleInjection).",
+                "Neighborhood place: \(place.styleInjection).",
+                "Whimsical children's game illustration with thick dark-indigo outlines, soft digital gouache texture, rounded shapes, and bright sunny colors."
+            ].joined(separator: " ")
         } else if let styleDesc = styleDescription {
             freeTextDescription = styleDesc
         } else {
