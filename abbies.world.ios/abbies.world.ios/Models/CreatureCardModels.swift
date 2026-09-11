@@ -38,7 +38,6 @@ enum GenerationStatus: String, Codable {
     case generating
     case assembling
     case ready
-    case revealed
     case failed
 }
 
@@ -56,6 +55,12 @@ struct GenerationJob: Identifiable, Codable {
     var recipe: CreatureRecipe {
         CreatureRecipe(creatureId: creatureId, outfitId: outfitId, buddyId: buddyId)
     }
+}
+
+struct ConcurrencyInfo: Codable {
+    let scope: String
+    let activeLimit: Int
+    let queuedLimit: Int
 }
 
 struct CreatureRecipe: Codable, Hashable {
@@ -86,13 +91,20 @@ struct CreatureCard: Identifiable, Codable {
 // MARK: - Game State (Server Response)
 
 struct CreatureBuilderState: Codable {
+    let catalogVersion: String?
     let active: [GenerationJob]
     let queued: [GenerationJob]
+    let failed: [GenerationJob]?
     let readyToReveal: [CreatureCard]
     let collection: [CreatureCard]
+    let concurrency: ConcurrencyInfo?
     
     var allJobs: [GenerationJob] {
         active + queued
+    }
+    
+    var failedJobs: [GenerationJob] {
+        failed ?? []
     }
     
     var readyCount: Int {
@@ -102,6 +114,10 @@ struct CreatureBuilderState: Codable {
     var isGenerating: Bool {
         !active.isEmpty
     }
+    
+    var shouldPoll: Bool {
+        !active.isEmpty || !queued.isEmpty
+    }
 }
 
 // MARK: - API Request/Response
@@ -110,6 +126,7 @@ struct CreateCreatureRequest: Codable {
     let creatureId: String
     let outfitId: String
     let buddyId: String
+    let requestId: String?
 }
 
 struct CreateCreatureResponse: Codable {
@@ -120,6 +137,16 @@ struct CreateCreatureResponse: Codable {
 
 struct RevealCardResponse: Codable {
     let card: CreatureCard
+}
+
+struct FavoriteCardResponse: Codable {
+    let success: Bool?
+    let favorite: Bool
+}
+
+struct ServerError: Codable {
+    let error: String
+    let code: String
 }
 
 // MARK: - Initial Content

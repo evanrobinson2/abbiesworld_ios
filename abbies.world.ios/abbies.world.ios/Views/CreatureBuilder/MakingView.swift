@@ -17,6 +17,10 @@ struct MakingView: View {
                     readySection
                 }
                 
+                if !viewModel.failedJobs.isEmpty {
+                    failedSection
+                }
+                
                 if !viewModel.activeJobs.isEmpty {
                     makingSection
                 }
@@ -25,13 +29,29 @@ struct MakingView: View {
                     queuedSection
                 }
                 
-                if viewModel.activeJobs.isEmpty && viewModel.queuedJobs.isEmpty && viewModel.readyToReveal.isEmpty {
+                if viewModel.activeJobs.isEmpty && viewModel.queuedJobs.isEmpty && viewModel.readyToReveal.isEmpty && viewModel.failedJobs.isEmpty {
                     emptyState
                 }
                 
                 Spacer(minLength: 40)
             }
             .padding(.vertical)
+        }
+    }
+    
+    private var failedSection: some View {
+        VStack(spacing: 16) {
+            Text("😢 OOPS!")
+                .font(.headline)
+                .foregroundColor(.red)
+            
+            ForEach(viewModel.failedJobs) { job in
+                FailedJobCard(job: job,
+                    onRetry: { viewModel.retryFailedJob(job) },
+                    onDismiss: { viewModel.dismissFailedJob(job) }
+                )
+            }
+            .padding(.horizontal)
         }
     }
     
@@ -275,6 +295,65 @@ struct QueuedJobRow: View {
         .padding()
         .background(Color.white.opacity(0.05))
         .clipShape(RoundedRectangle(cornerRadius: 12))
+    }
+}
+
+// MARK: - Failed Job Card
+
+struct FailedJobCard: View {
+    let job: GenerationJob
+    let onRetry: () -> Void
+    let onDismiss: () -> Void
+    
+    var body: some View {
+        VStack(spacing: 12) {
+            HStack(spacing: 8) {
+                HStack(spacing: 4) {
+                    Text(CreatureBuilderContent.creature(for: job.creatureId)?.displayIcon ?? "?")
+                    Text(CreatureBuilderContent.outfit(for: job.outfitId)?.displayIcon ?? "?")
+                    Text(CreatureBuilderContent.buddy(for: job.buddyId)?.displayIcon ?? "?")
+                }
+                .font(.title2)
+                
+                Spacer()
+                
+                Button(action: onDismiss) {
+                    Image(systemName: "xmark.circle.fill")
+                        .foregroundColor(.white.opacity(0.5))
+                }
+            }
+            
+            Text("The creature machine got confused")
+                .font(.caption)
+                .foregroundColor(.white.opacity(0.7))
+            
+            if let error = job.errorMessage {
+                Text(error)
+                    .font(.caption2)
+                    .foregroundColor(.red.opacity(0.8))
+            }
+            
+            Button(action: onRetry) {
+                HStack {
+                    Image(systemName: "arrow.clockwise")
+                    Text("Try Again")
+                }
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundColor(.white)
+                .padding(.horizontal, 20)
+                .padding(.vertical, 10)
+                .background(Color.orange)
+                .clipShape(Capsule())
+            }
+        }
+        .padding()
+        .background(Color.red.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.red.opacity(0.5), lineWidth: 1)
+        )
     }
 }
 

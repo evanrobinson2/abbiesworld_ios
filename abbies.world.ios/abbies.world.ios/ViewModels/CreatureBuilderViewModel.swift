@@ -28,12 +28,14 @@ class CreatureBuilderViewModel: ObservableObject {
     
     @Published var activeJobs: [GenerationJob] = []
     @Published var queuedJobs: [GenerationJob] = []
+    @Published var failedJobs: [GenerationJob] = []
     @Published var readyToReveal: [CreatureCard] = []
     @Published var collection: [CreatureCard] = []
     
     @Published var isLoading = false
     @Published var isCreating = false
     @Published var errorMessage: String?
+    @Published var queueFull = false
     
     @Published var cardToReveal: CreatureCard?
     @Published var showingReveal = false
@@ -60,16 +62,25 @@ class CreatureBuilderViewModel: ObservableObject {
         activeJobs.count + queuedJobs.count
     }
     
+    var failedCount: Int {
+        failedJobs.count
+    }
+    
     var makingBadge: String? {
         let ready = readyCount
-        if ready > 0 {
-            return "\(ready)!"
+        let failed = failedCount
+        if ready > 0 || failed > 0 {
+            return "\(ready + failed)!"
         }
         let making = makingCount
         if making > 0 {
             return "\(making)"
         }
         return nil
+    }
+    
+    var shouldPoll: Bool {
+        !activeJobs.isEmpty || !queuedJobs.isEmpty
     }
     
     var favorites: [CreatureCard] {
@@ -126,11 +137,13 @@ class CreatureBuilderViewModel: ObservableObject {
         
         isCreating = true
         errorMessage = nil
+        queueFull = false
         
         let request = CreateCreatureRequest(
             creatureId: creature.id,
             outfitId: outfit.id,
-            buddyId: buddy.id
+            buddyId: buddy.id,
+            requestId: nil
         )
         
         Task {
@@ -148,10 +161,10 @@ class CreatureBuilderViewModel: ObservableObject {
                     updatedAt: Date()
                 )
                 
-                if activeJobs.count < 3 {
-                    activeJobs.append(job)
-                } else {
+                if response.status == .queued {
                     queuedJobs.append(job)
+                } else {
+                    activeJobs.append(job)
                 }
                 
                 clearSelections()
@@ -159,6 +172,21 @@ class CreatureBuilderViewModel: ObservableObject {
                 
                 startPollingIfNeeded()
                 
+            } catch let error as CreatureBuilderError {
+                switch error {
+                case .queueFull:
+                    queueFull = true
+                    errorMessage = "The creature machine is very busy! Try again soon."
+                case .invalidIngredient(let message):
+                    errorMessage = message
+                case .conflict:
+                    errorMessage = "Something went wrong. Please try again."
+                case .serverError(let message):
+                    errorMessage = message
+                case .networkError:
+                    errorMessage = "Oops! The creature machine got confused."
+                }
+                print("❌ Create creature error: \(error)")
             } catch {
                 errorMessage = "Oops! The creature machine got confused."
                 print("❌ Create creature error: \(error)")
@@ -166,6 +194,20 @@ class CreatureBuilderViewModel: ObservableObject {
             
             isCreating = false
         }
+    }
+    
+    func retryFailedJob(_ job: GenerationJob) {
+        failedJobs.removeAll { $0.id == job.id }
+        
+        selectedCreature = CreatureBuilderContent.creature(for: job.creatureId)
+        selectedOutfit = CreatureBuilderContent.outfit(for: job.outfitId)
+        selectedBuddy = CreatureBuilderContent.buddy(for: job.buddyId)
+        
+        createCreature()
+    }
+    
+    func dismissFailedJob(_ job: GenerationJob) {
+        failedJobs.removeAll { $0.id == job.id }
     }
     
     // MARK: - Reveal
@@ -234,10 +276,13 @@ class CreatureBuilderViewModel: ObservableObject {
                 
                 activeJobs = state.active
                 queuedJobs = state.queued
+                failedJobs = state.failedJobs
                 readyToReveal = state.readyToReveal
                 collection = state.collection.sorted { $0.createdAt > $1.createdAt }
                 
-                startPollingIfNeeded()
+                if state.shouldPoll {
+                    startPollingIfNeeded()
+                }
                 
             } catch {
                 print("❌ Load state error: \(error)")
@@ -254,7 +299,7 @@ class CreatureBuilderViewModel: ObservableObject {
     // MARK: - Polling
     
     private func startPollingIfNeeded() {
-        guard pollTimer == nil, !activeJobs.isEmpty || !queuedJobs.isEmpty else { return }
+        guard pollTimer == nil, shouldPoll else { return }
         
         pollTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { [weak self] _ in
             Task { @MainActor in
@@ -277,6 +322,7 @@ class CreatureBuilderViewModel: ObservableObject {
                 
                 activeJobs = state.active
                 queuedJobs = state.queued
+                failedJobs = state.failedJobs
                 readyToReveal = state.readyToReveal
                 
                 for card in state.collection where card.isRevealed {
@@ -289,7 +335,7 @@ class CreatureBuilderViewModel: ObservableObject {
                     playReadySound()
                 }
                 
-                if activeJobs.isEmpty && queuedJobs.isEmpty {
+                if !state.shouldPoll {
                     stopPolling()
                 }
                 
@@ -321,7 +367,7 @@ class CreatureBuilderViewModel: ObservableObject {
     
     private func createCreatureAsync(request: CreateCreatureRequest) async throws -> CreateCreatureResponse {
         guard let url = URL(string: "\(apiClient.baseURL)/api/games/creature-builder/generations") else {
-            throw URLError(.badURL)
+            throw CreatureBuilderError.networkError
         }
         
         var urlRequest = URLRequest(url: url)
@@ -332,12 +378,33 @@ class CreatureBuilderViewModel: ObservableObject {
         
         let (data, response) = try await URLSession.shared.data(for: urlRequest)
         
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200..<300).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw CreatureBuilderError.networkError
         }
         
-        return try JSONDecoder().decode(CreateCreatureResponse.self, from: data)
+        switch httpResponse.statusCode {
+        case 200, 201:
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            return try decoder.decode(CreateCreatureResponse.self, from: data)
+        case 400:
+            if let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
+                if serverError.code == "invalid_ingredient" {
+                    throw CreatureBuilderError.invalidIngredient(serverError.error)
+                }
+                throw CreatureBuilderError.serverError(serverError.error)
+            }
+            throw CreatureBuilderError.serverError("Bad request")
+        case 409:
+            throw CreatureBuilderError.conflict
+        case 429:
+            throw CreatureBuilderError.queueFull
+        default:
+            if let serverError = try? JSONDecoder().decode(ServerError.self, from: data) {
+                throw CreatureBuilderError.serverError(serverError.error)
+            }
+            throw CreatureBuilderError.networkError
+        }
     }
     
     private func fetchStateAsync() async throws -> CreatureBuilderState {
@@ -385,5 +452,30 @@ class CreatureBuilderViewModel: ObservableObject {
         urlRequest.httpBody = try? JSONEncoder().encode(["favorite": isFavorite])
         
         _ = try? await URLSession.shared.data(for: urlRequest)
+    }
+}
+
+// MARK: - Errors
+
+enum CreatureBuilderError: LocalizedError {
+    case networkError
+    case queueFull
+    case conflict
+    case invalidIngredient(String)
+    case serverError(String)
+    
+    var errorDescription: String? {
+        switch self {
+        case .networkError:
+            return "Network error"
+        case .queueFull:
+            return "Queue is full"
+        case .conflict:
+            return "Request conflict"
+        case .invalidIngredient(let message):
+            return message
+        case .serverError(let message):
+            return message
+        }
     }
 }
