@@ -7,11 +7,15 @@
 //
 
 import Foundation
+import Security
 
 /// Centralized server configuration
 /// Follows iOS best practices: Info.plist for build-time config, UserDefaults for runtime override
 class ServerConfig {
     static let shared = ServerConfig()
+
+    private let keychainService = "evan-personal.abbies-world-ios.server"
+    private let keychainAccount = "api-key"
     
     /// Server base URL
     /// Priority: UserDefaults > Info.plist > Default
@@ -59,42 +63,51 @@ class ServerConfig {
         UserDefaults.standard.synchronize()
     }
     
-    /// API key for local development.
-    /// Never place the shared server key in source control or a distributed app bundle.
-    /// Priority: environment variable > UserDefaults > expanded Info.plist value > nil
+    /// API key provisioned locally into this device's Keychain.
+    /// Never place the shared server key in source control or an app bundle.
     var apiKey: String? {
-        // 1. Let a local Xcode launch environment override stale device settings.
-        if let envKey = ProcessInfo.processInfo.environment["ABBIES_WORLD_SERVER_API_KEY"], !envKey.isEmpty {
+        // A local developer may deliberately provision a connected device once.
+        // The launch flag prevents arbitrary environment injection from persisting.
+        if ProcessInfo.processInfo.arguments.contains("-provisionServerCredential"),
+           let envKey = ProcessInfo.processInfo.environment["ABBIES_WORLD_SERVER_API_KEY"],
+           !envKey.isEmpty {
+            storeAPIKeyInKeychain(envKey)
+            print("server_auth.credential_provisioned storage=keychain")
             return envKey
         }
 
-        // 2. Check UserDefaults (runtime override).
-        if let userDefaultsKey = UserDefaults.standard.string(forKey: "ServerAPIKey"), !userDefaultsKey.isEmpty {
-            return userDefaultsKey
-        }
-        
-        // 3. Accept only an expanded local build setting, never the literal placeholder.
-        if let infoPlistKey = Bundle.main.object(forInfoDictionaryKey: "ServerAPIKey") as? String,
-           !infoPlistKey.isEmpty,
-           !infoPlistKey.contains("$(") {
-            return infoPlistKey
+        if let keychainKey = loadAPIKeyFromKeychain() {
+            return keychainKey
         }
 
-        // 4. No API key found.
+        // Migrate old local installs, then remove the less-protected copy.
+        if let legacyKey = UserDefaults.standard.string(forKey: "ServerAPIKey"),
+           !legacyKey.isEmpty {
+            storeAPIKeyInKeychain(legacyKey)
+            UserDefaults.standard.removeObject(forKey: "ServerAPIKey")
+            print("server_auth.credential_migrated storage=keychain")
+            return legacyKey
+        }
+
         print("⚠️ ServerConfig: No API key found")
         return nil
     }
     
-    /// Set API key at runtime (stores in UserDefaults)
+    /// Set API key at runtime (stores only in this device's Keychain).
     func setAPIKey(_ key: String) {
-        UserDefaults.standard.set(key, forKey: "ServerAPIKey")
-        UserDefaults.standard.synchronize()
+        storeAPIKeyInKeychain(key)
+        UserDefaults.standard.removeObject(forKey: "ServerAPIKey")
     }
     
-    /// Reset API key to default (removes UserDefaults override)
+    /// Remove local server authentication.
     func resetAPIKey() {
         UserDefaults.standard.removeObject(forKey: "ServerAPIKey")
-        UserDefaults.standard.synchronize()
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: keychainAccount
+        ]
+        SecItemDelete(query as CFDictionary)
     }
     
     /// Add API key header to a URLRequest if available
@@ -109,6 +122,43 @@ class ServerConfig {
     
     private init() {
         // Private initializer for singleton
+    }
+
+    private func loadAPIKeyFromKeychain() -> String? {
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: keychainAccount,
+            kSecReturnData as String: true,
+            kSecMatchLimit as String: kSecMatchLimitOne
+        ]
+        var item: CFTypeRef?
+        guard SecItemCopyMatching(query as CFDictionary, &item) == errSecSuccess,
+              let data = item as? Data,
+              let value = String(data: data, encoding: .utf8),
+              !value.isEmpty else {
+            return nil
+        }
+        return value
+    }
+
+    private func storeAPIKeyInKeychain(_ key: String) {
+        let value = Data(key.utf8)
+        let query: [String: Any] = [
+            kSecClass as String: kSecClassGenericPassword,
+            kSecAttrService as String: keychainService,
+            kSecAttrAccount as String: keychainAccount
+        ]
+        let attributes: [String: Any] = [
+            kSecValueData as String: value,
+            kSecAttrAccessible as String: kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+        ]
+        let status = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
+        if status == errSecItemNotFound {
+            var addQuery = query
+            attributes.forEach { addQuery[$0.key] = $0.value }
+            SecItemAdd(addQuery as CFDictionary, nil)
+        }
     }
 }
 
