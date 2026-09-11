@@ -159,22 +159,19 @@ struct CreatureCardView: View {
                 mockCreatureImage
                     .frame(height: 280)
             } else {
-                AsyncImage(url: URL(string: card.imageURL)) { phase in
-                    switch phase {
-                    case .success(let image):
-                        image
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                    case .failure:
+                AuthenticatedAsyncImage(url: URL(string: card.imageURL)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: { failed in
+                    if failed {
                         mockCreatureImage
-                    case .empty:
+                    } else {
                         ZStack {
                             Color.purple.opacity(0.3)
                             ProgressView()
                                 .tint(.white)
                         }
-                    @unknown default:
-                        mockCreatureImage
                     }
                 }
                 .frame(height: 280)

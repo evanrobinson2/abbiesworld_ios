@@ -94,14 +94,13 @@ class CreatureBuilderViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     private var pollTimer: Timer?
     
-    var useMockMode: Bool = true
+    private(set) var useMockMode: Bool = false
     
     // MARK: - Init
     
     init() {
-        if ProcessInfo.processInfo.arguments.contains("-useRealServer") {
-            useMockMode = false
-        }
+        useMockMode = ProcessInfo.processInfo.arguments.contains("-useMockCreatureBuilder")
+        print("creature_builder.mode value=\(useMockMode ? "mock" : "production")")
         loadState()
     }
     
@@ -176,7 +175,7 @@ class CreatureBuilderViewModel: ObservableObject {
                 creatureId: creature.id,
                 outfitId: outfit.id,
                 buddyId: buddy.id,
-                requestId: nil
+                requestId: UUID().uuidString
             )
             
             do {

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct CreatureBuilderView: View {
     @StateObject private var viewModel = CreatureBuilderViewModel()
+    @StateObject private var audioService = CreatureBuilderAudioService()
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -40,20 +41,33 @@ struct CreatureBuilderView: View {
             }
         }
         .onAppear {
+            MusicService.shared.setGameActive(true)
+            audioService.start()
             viewModel.loadState()
+        }
+        .onDisappear {
+            audioService.stopAllAudio()
+            MusicService.shared.setGameActive(false)
         }
     }
     
     private var backgroundGradient: some View {
-        LinearGradient(
-            colors: [
-                Color(red: 0.2, green: 0.1, blue: 0.4),
-                Color(red: 0.1, green: 0.2, blue: 0.3)
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .ignoresSafeArea()
+        ZStack {
+            Image("creature_builder_workshop_background")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+
+            LinearGradient(
+                colors: [
+                    Color.black.opacity(0.28),
+                    Color(red: 0.08, green: 0.03, blue: 0.18).opacity(0.68)
+                ],
+                startPoint: .top,
+                endPoint: .bottom
+            )
+            .ignoresSafeArea()
+        }
     }
     
     private var header: some View {
@@ -68,14 +82,47 @@ struct CreatureBuilderView: View {
             
             Spacer()
             
-            Text("✨ Creature Lab ✨")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
+            VStack(spacing: 2) {
+                Text("✨ Creature Lab ✨")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+
+                Text(audioService.currentTrackTitle)
+                    .font(.caption)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.white.opacity(0.72))
+                    .lineLimit(1)
+            }
             
             Spacer()
             
-            Color.clear.frame(width: 44)
+            HStack(spacing: 8) {
+                Button {
+                    audioService.togglePlayback()
+                } label: {
+                    Image(
+                        systemName: audioService.isPlaying
+                            ? "pause.fill"
+                            : "play.fill"
+                    )
+                    .frame(width: 40, height: 40)
+                    .background(.white.opacity(0.16), in: Circle())
+                }
+                .accessibilityLabel(
+                    audioService.isPlaying ? "Pause music" : "Play music"
+                )
+
+                Button {
+                    audioService.playNext()
+                } label: {
+                    Image(systemName: "forward.end.fill")
+                        .frame(width: 40, height: 40)
+                        .background(.white.opacity(0.16), in: Circle())
+                }
+                .accessibilityLabel("Next Creature Lab song")
+            }
+            .foregroundColor(.white)
         }
         .padding()
     }

@@ -86,10 +86,19 @@ ignore.
 `id`, `generationId`, `recipe`, `name`, `personality`, nullable `powerName`,
 `imageURL`, `createdAt`, `isFavorite`, and `isRevealed`.
 
-`imageURL` is an absolute, directly loadable URL for the raw generated
-illustration. It is intentionally not the server-composited playing card.
-The server retains the raw illustration, deterministic card, and thumbnail
-as separate revision assets.
+`imageURL` is an absolute URL for the raw generated illustration. It is
+intentionally not the client-composited playing card. The URL uses the same
+Bearer authentication as the JSON API; the iOS client retrieves it through
+the shared authenticated `ImageCache`.
+
+Provenance for an immutable card asset is available from:
+
+```http
+GET /api/games/creature-builder/cards/{id}/provenance
+```
+
+It includes catalog and prompt versions, provider model, output SHA-256, and
+approval state without exposing the server-authored prompt.
 
 ---
 
@@ -159,8 +168,9 @@ boolean.
 - Add failed-job UI using the additive `failed` array. Do not leave a failed
   generation looking active forever.
 
-- Render `imageURL` as returned. The server makes local illustrations public
-  and immutable so AsyncImage does not need to attach API credentials.
+- Render `imageURL` through the shared authenticated media cache. Do not use
+  unauthenticated `AsyncImage`; cached immutable output remains available
+  offline after its first successful retrieval.
 
 - After reveal or favorite mutations, reconcile from the returned object or
   the next state response instead of permanently relying on optimistic state.
@@ -202,7 +212,7 @@ The iOS client has been updated to match this contract:
 | Handle 429 queue full | ✅ |
 | Poll while active/queued nonempty | ✅ |
 | Failed job UI with retry/dismiss | ✅ |
-| Use `imageURL` directly (no auth) | ✅ |
+| Authenticated immutable image retrieval | ✅ |
 | Reconcile from server state | ✅ |
 
 ---

@@ -12,6 +12,19 @@ import SwiftUI
 
 // MARK: - Category Tile Styles
 
+private struct IngredientArtwork: View {
+    let ingredient: CreatureIngredient
+    let size: CGFloat
+
+    var body: some View {
+        Image(ingredient.artworkName)
+            .resizable()
+            .scaledToFit()
+            .frame(width: size, height: size)
+            .accessibilityHidden(true)
+    }
+}
+
 struct CreatureTile: View {
     let ingredient: CreatureIngredient
     let isSelected: Bool
@@ -29,8 +42,7 @@ struct CreatureTile: View {
                 )
             
             VStack(spacing: 4) {
-                Text(ingredient.displayIcon)
-                    .font(.system(size: size * 0.4))
+                IngredientArtwork(ingredient: ingredient, size: size * 0.62)
                 
                 Text(ingredient.name.uppercased())
                     .font(.system(size: size * 0.1, weight: .bold))
@@ -80,8 +92,7 @@ struct OutfitTile: View {
                 )
             
             VStack(spacing: 2) {
-                Text(ingredient.displayIcon)
-                    .font(.system(size: size * 0.35))
+                IngredientArtwork(ingredient: ingredient, size: size * 0.56)
                 
                 Text(ingredient.name.uppercased())
                     .font(.system(size: size * 0.08, weight: .bold))
@@ -133,8 +144,7 @@ struct BuddyTile: View {
                 )
             
             VStack(spacing: 2) {
-                Text(ingredient.displayIcon)
-                    .font(.system(size: size * 0.4))
+                IngredientArtwork(ingredient: ingredient, size: size * 0.58)
                 
                 Text(ingredient.name.uppercased())
                     .font(.system(size: size * 0.1, weight: .bold))

@@ -29,6 +29,10 @@ struct CreatureIngredient: Identifiable, Codable, Hashable {
     var displayIcon: String {
         iconEmoji ?? "✨"
     }
+
+    var artworkName: String {
+        "creature_builder_\(type.rawValue)_\(id.replacingOccurrences(of: "-", with: "_"))"
+    }
 }
 
 // MARK: - Generation Job

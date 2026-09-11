@@ -124,19 +124,16 @@ struct CardThumbnail: View {
         Button(action: onTap) {
             VStack(spacing: 0) {
                 ZStack {
-                    AsyncImage(url: URL(string: card.imageURL)) { phase in
-                        switch phase {
-                        case .success(let image):
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                        case .failure:
+                    AuthenticatedAsyncImage(url: URL(string: card.imageURL)) { image in
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    } placeholder: { failed in
+                        if failed {
                             placeholderImage
-                        case .empty:
+                        } else {
                             ProgressView()
                                 .tint(.white)
-                        @unknown default:
-                            placeholderImage
                         }
                     }
                     .frame(width: 140, height: 140)
