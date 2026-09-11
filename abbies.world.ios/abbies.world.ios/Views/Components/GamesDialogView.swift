@@ -12,6 +12,7 @@ struct GamesDialogView: View {
     @Binding var showGoonPopper: Bool
     @Binding var showPictureCarver: Bool
     @Binding var showDinoPicnic: Bool
+    @Binding var showCreatureBuilder: Bool
     // Memory Game temporarily disabled
     // @Binding var showMemoryGame: Bool
     var onDismiss: () -> Void
@@ -76,6 +77,15 @@ struct GamesDialogView: View {
                         showPictureCarver = true
                         onDismiss()
                     }
+                    
+                    GameIconButton(
+                        icon: "wand.and.stars",
+                        title: "Creature Lab",
+                        color: .indigo
+                    ) {
+                        showCreatureBuilder = true
+                        onDismiss()
+                    }
                 }
                 .padding()
                 
@@ -134,6 +144,7 @@ struct GameIconButton: View {
         showGoonPopper: .constant(false),
         showPictureCarver: .constant(false),
         showDinoPicnic: .constant(false),
+        showCreatureBuilder: .constant(false),
         // showMemoryGame: .constant(false),
         onDismiss: {}
     )

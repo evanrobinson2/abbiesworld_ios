@@ -23,6 +23,10 @@ struct MainView: View {
     @State private var showDinoPicnic =
         ProcessInfo.processInfo.arguments.contains("-launchDinoPicnic") ||
         ProcessInfo.processInfo.arguments.contains("-autoPlayDinoPicnic")
+    // Text-friendly test hooks for Creature Card Builder.
+    @State private var showCreatureBuilder =
+        ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilder") ||
+        ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder")
     // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
     @State private var showSettings = false
@@ -285,6 +289,7 @@ struct MainView: View {
                     showGoonPopper: $showGoonPopper,
                     showPictureCarver: $showPictureCarver,
                     showDinoPicnic: $showDinoPicnic,
+                    showCreatureBuilder: $showCreatureBuilder,
                     // showMemoryGame: $showMemoryGame,
                     onDismiss: {
                         showGamesDialog = false
@@ -320,6 +325,9 @@ struct MainView: View {
             }
             .fullScreenCover(isPresented: $showDinoPicnic) {
                 DinoPicnicView()
+            }
+            .fullScreenCover(isPresented: $showCreatureBuilder) {
+                CreatureBuilderView()
             }
             // Memory Game temporarily disabled
             // .fullScreenCover(isPresented: $showMemoryGame) {
