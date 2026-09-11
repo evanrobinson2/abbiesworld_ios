@@ -90,12 +90,18 @@ class CreatureBuilderViewModel: ObservableObject {
     // MARK: - Private
     
     private let apiClient = APIClient.shared
+    private let mockService = MockCreatureBuilderService.shared
     private var cancellables = Set<AnyCancellable>()
     private var pollTimer: Timer?
+    
+    var useMockMode: Bool = true
     
     // MARK: - Init
     
     init() {
+        if ProcessInfo.processInfo.arguments.contains("-useRealServer") {
+            useMockMode = false
+        }
         loadState()
     }
     
@@ -139,14 +145,40 @@ class CreatureBuilderViewModel: ObservableObject {
         errorMessage = nil
         queueFull = false
         
-        let request = CreateCreatureRequest(
-            creatureId: creature.id,
-            outfitId: outfit.id,
-            buddyId: buddy.id,
-            requestId: nil
-        )
-        
         Task {
+            if useMockMode {
+                let response = await mockService.createGeneration(
+                    creatureId: creature.id,
+                    outfitId: outfit.id,
+                    buddyId: buddy.id
+                )
+                
+                let job = GenerationJob(
+                    id: response.generationId,
+                    cardId: response.cardId,
+                    creatureId: creature.id,
+                    outfitId: outfit.id,
+                    buddyId: buddy.id,
+                    status: response.status,
+                    createdAt: Date(),
+                    updatedAt: Date()
+                )
+                
+                queuedJobs.append(job)
+                clearSelections()
+                playCreateSound()
+                startPollingIfNeeded()
+                isCreating = false
+                return
+            }
+            
+            let request = CreateCreatureRequest(
+                creatureId: creature.id,
+                outfitId: outfit.id,
+                buddyId: buddy.id,
+                requestId: nil
+            )
+            
             do {
                 let response = try await createCreatureAsync(request: request)
                 
@@ -237,7 +269,11 @@ class CreatureBuilderViewModel: ObservableObject {
         playRevealSound()
         
         Task {
-            await markCardRevealed(card.id)
+            if useMockMode {
+                _ = mockService.revealCard(cardId: card.id)
+            } else {
+                await markCardRevealed(card.id)
+            }
         }
     }
     
@@ -252,8 +288,14 @@ class CreatureBuilderViewModel: ObservableObject {
         guard let index = collection.firstIndex(where: { $0.id == card.id }) else { return }
         collection[index].isFavorite.toggle()
         
+        let newFavorite = collection[index].isFavorite
+        
         Task {
-            await updateFavorite(card.id, isFavorite: collection[index].isFavorite)
+            if useMockMode {
+                mockService.setFavorite(cardId: card.id, isFavorite: newFavorite)
+            } else {
+                await updateFavorite(card.id, isFavorite: newFavorite)
+            }
         }
     }
     
@@ -271,6 +313,21 @@ class CreatureBuilderViewModel: ObservableObject {
         isLoading = true
         
         Task {
+            if useMockMode {
+                let state = mockService.getState()
+                activeJobs = state.active
+                queuedJobs = state.queued
+                failedJobs = state.failedJobs
+                readyToReveal = state.readyToReveal
+                collection = state.collection.sorted { $0.createdAt > $1.createdAt }
+                
+                if state.shouldPoll {
+                    startPollingIfNeeded()
+                }
+                isLoading = false
+                return
+            }
+            
             do {
                 let state = try await fetchStateAsync()
                 
@@ -315,32 +372,38 @@ class CreatureBuilderViewModel: ObservableObject {
     
     private func pollForUpdates() {
         Task {
-            do {
-                let state = try await fetchStateAsync()
-                
-                let previousReadyCount = readyToReveal.count
-                
-                activeJobs = state.active
-                queuedJobs = state.queued
-                failedJobs = state.failedJobs
-                readyToReveal = state.readyToReveal
-                
-                for card in state.collection where card.isRevealed {
-                    if !collection.contains(where: { $0.id == card.id }) {
-                        collection.insert(card, at: 0)
-                    }
+            let state: CreatureBuilderState
+            
+            if useMockMode {
+                state = mockService.getState()
+            } else {
+                do {
+                    state = try await fetchStateAsync()
+                } catch {
+                    print("❌ Poll error: \(error)")
+                    return
                 }
-                
-                if state.readyToReveal.count > previousReadyCount {
-                    playReadySound()
+            }
+            
+            let previousReadyCount = readyToReveal.count
+            
+            activeJobs = state.active
+            queuedJobs = state.queued
+            failedJobs = state.failedJobs
+            readyToReveal = state.readyToReveal
+            
+            for card in state.collection where card.isRevealed {
+                if !collection.contains(where: { $0.id == card.id }) {
+                    collection.insert(card, at: 0)
                 }
-                
-                if !state.shouldPoll {
-                    stopPolling()
-                }
-                
-            } catch {
-                print("❌ Poll error: \(error)")
+            }
+            
+            if state.readyToReveal.count > previousReadyCount {
+                playReadySound()
+            }
+            
+            if !state.shouldPoll {
+                stopPolling()
             }
         }
     }

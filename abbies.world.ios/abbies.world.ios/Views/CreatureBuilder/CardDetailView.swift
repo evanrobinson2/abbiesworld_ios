@@ -149,28 +149,37 @@ struct CardDetailView: View {
 struct CreatureCardView: View {
     let card: CreatureCard
     
+    private var isMockURL: Bool {
+        card.imageURL.hasPrefix("mock://")
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
-            AsyncImage(url: URL(string: card.imageURL)) { phase in
-                switch phase {
-                case .success(let image):
-                    image
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                case .failure:
-                    placeholderImage
-                case .empty:
-                    ZStack {
-                        Color.purple.opacity(0.3)
-                        ProgressView()
-                            .tint(.white)
+            if isMockURL {
+                mockCreatureImage
+                    .frame(height: 280)
+            } else {
+                AsyncImage(url: URL(string: card.imageURL)) { phase in
+                    switch phase {
+                    case .success(let image):
+                        image
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                    case .failure:
+                        mockCreatureImage
+                    case .empty:
+                        ZStack {
+                            Color.purple.opacity(0.3)
+                            ProgressView()
+                                .tint(.white)
+                        }
+                    @unknown default:
+                        mockCreatureImage
                     }
-                @unknown default:
-                    placeholderImage
                 }
+                .frame(height: 280)
+                .clipped()
             }
-            .frame(height: 280)
-            .clipped()
             
             VStack(spacing: 8) {
                 Text(card.name.uppercased())
@@ -218,12 +227,41 @@ struct CreatureCardView: View {
         .shadow(color: .purple.opacity(0.5), radius: 20, y: 10)
     }
     
-    private var placeholderImage: some View {
+    private var mockCreatureImage: some View {
         ZStack {
-            Color.purple.opacity(0.3)
-            Text("🎨")
-                .font(.system(size: 60))
+            LinearGradient(
+                colors: creatureGradient,
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            
+            VStack(spacing: 12) {
+                HStack(spacing: 8) {
+                    Text(CreatureBuilderContent.creature(for: card.creatureId)?.displayIcon ?? "🌟")
+                        .font(.system(size: 60))
+                    Text(CreatureBuilderContent.buddy(for: card.buddyId)?.displayIcon ?? "")
+                        .font(.system(size: 36))
+                        .offset(x: -10, y: 20)
+                }
+                
+                Text(CreatureBuilderContent.outfit(for: card.outfitId)?.displayIcon ?? "⚡")
+                    .font(.system(size: 40))
+            }
         }
+    }
+    
+    private var creatureGradient: [Color] {
+        let buddyColors: [String: [Color]] = [
+            "bat": [Color(red: 0.2, green: 0.1, blue: 0.3), Color(red: 0.3, green: 0.2, blue: 0.4)],
+            "cheetah": [Color(red: 0.9, green: 0.7, blue: 0.3), Color(red: 1.0, green: 0.5, blue: 0.2)],
+            "puppy": [Color(red: 0.9, green: 0.7, blue: 0.5), Color(red: 1.0, green: 0.8, blue: 0.6)],
+            "owl": [Color(red: 0.3, green: 0.3, blue: 0.5), Color(red: 0.4, green: 0.4, blue: 0.6)],
+            "unicorn": [Color(red: 0.9, green: 0.7, blue: 0.9), Color(red: 0.8, green: 0.6, blue: 1.0)],
+            "peacock": [Color(red: 0.2, green: 0.5, blue: 0.6), Color(red: 0.1, green: 0.6, blue: 0.7)],
+            "frog": [Color(red: 0.4, green: 0.7, blue: 0.4), Color(red: 0.3, green: 0.8, blue: 0.3)],
+            "fox": [Color(red: 0.9, green: 0.5, blue: 0.2), Color(red: 1.0, green: 0.4, blue: 0.1)]
+        ]
+        return buddyColors[card.buddyId] ?? [Color.purple, Color.indigo]
     }
 }
 

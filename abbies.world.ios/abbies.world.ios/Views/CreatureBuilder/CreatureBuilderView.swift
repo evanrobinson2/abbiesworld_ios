@@ -158,21 +158,18 @@ struct BuilderView: View {
     
     var body: some View {
         ScrollView {
-            VStack(spacing: 24) {
-                sectionHeader("PICK A CREATURE", subtitle: "Who is it?")
-                IngredientPicker(
+            VStack(spacing: 20) {
+                CreaturePicker(
                     ingredients: viewModel.creatures,
                     selected: viewModel.selectedCreature
                 ) { viewModel.selectCreature($0) }
                 
-                sectionHeader("PICK AN OUTFIT", subtitle: "What powers?")
-                IngredientPicker(
+                OutfitPicker(
                     ingredients: viewModel.outfits,
                     selected: viewModel.selectedOutfit
                 ) { viewModel.selectOutfit($0) }
                 
-                sectionHeader("PICK A BUDDY", subtitle: "What personality?")
-                IngredientPicker(
+                BuddyPicker(
                     ingredients: viewModel.buddies,
                     selected: viewModel.selectedBuddy
                 ) { viewModel.selectBuddy($0) }
@@ -182,143 +179,117 @@ struct BuilderView: View {
                     makeItButton
                 }
                 
+                if viewModel.queueFull {
+                    queueFullMessage
+                }
+                
+                if let error = viewModel.errorMessage {
+                    errorMessage(error)
+                }
+                
                 Spacer(minLength: 40)
             }
             .padding(.vertical)
         }
     }
     
-    private func sectionHeader(_ title: String, subtitle: String) -> some View {
-        VStack(spacing: 4) {
-            Text(title)
-                .font(.headline)
-                .fontWeight(.bold)
-                .foregroundColor(.white)
-            Text(subtitle)
-                .font(.caption)
-                .foregroundColor(.white.opacity(0.7))
-        }
-    }
-    
     private var recipePreview: some View {
-        VStack(spacing: 12) {
-            HStack(spacing: 20) {
+        VStack(spacing: 16) {
+            Text("YOUR CREATURE")
+                .font(.caption)
+                .fontWeight(.bold)
+                .foregroundColor(.white.opacity(0.7))
+            
+            HStack(spacing: 12) {
                 if let creature = viewModel.selectedCreature {
-                    ingredientBubble(creature)
+                    CreatureTile(ingredient: creature, isSelected: false, size: 70)
                 }
                 Text("+")
-                    .font(.title2)
-                    .foregroundColor(.white.opacity(0.7))
+                    .font(.title)
+                    .foregroundColor(.white.opacity(0.5))
                 if let outfit = viewModel.selectedOutfit {
-                    ingredientBubble(outfit)
+                    OutfitTile(ingredient: outfit, isSelected: false, size: 70)
                 }
                 Text("+")
-                    .font(.title2)
-                    .foregroundColor(.white.opacity(0.7))
+                    .font(.title)
+                    .foregroundColor(.white.opacity(0.5))
                 if let buddy = viewModel.selectedBuddy {
-                    ingredientBubble(buddy)
+                    BuddyTile(ingredient: buddy, isSelected: false, size: 70)
                 }
             }
+            
+            Text("= ???")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.yellow)
         }
         .padding()
         .background(Color.white.opacity(0.1))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .clipShape(RoundedRectangle(cornerRadius: 20))
         .padding(.horizontal)
-    }
-    
-    private func ingredientBubble(_ ingredient: CreatureIngredient) -> some View {
-        VStack(spacing: 4) {
-            Text(ingredient.displayIcon)
-                .font(.largeTitle)
-            Text(ingredient.name)
-                .font(.caption2)
-                .foregroundColor(.white)
-        }
     }
     
     private var makeItButton: some View {
         Button {
             viewModel.createCreature()
         } label: {
-            HStack {
-                Text("✨")
-                Text("MAKE IT!")
+            HStack(spacing: 12) {
+                if viewModel.isCreating {
+                    ProgressView()
+                        .tint(.white)
+                } else {
+                    Text("✨")
+                        .font(.title)
+                }
+                Text(viewModel.isCreating ? "MAKING..." : "MAKE IT!")
+                    .font(.title2)
                     .fontWeight(.bold)
-                Text("✨")
+                if !viewModel.isCreating {
+                    Text("✨")
+                        .font(.title)
+                }
             }
-            .font(.title2)
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
             .padding(.vertical, 20)
             .background(
                 LinearGradient(
-                    colors: [.purple, .pink],
+                    colors: viewModel.isCreating ? [.gray, .gray.opacity(0.7)] : [.purple, .pink],
                     startPoint: .leading,
                     endPoint: .trailing
                 )
             )
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .shadow(color: .purple.opacity(0.5), radius: 10, y: 5)
+            .clipShape(RoundedRectangle(cornerRadius: 24))
+            .shadow(color: viewModel.isCreating ? .clear : .purple.opacity(0.5), radius: 10, y: 5)
         }
         .disabled(viewModel.isCreating)
-        .opacity(viewModel.isCreating ? 0.6 : 1)
-        .padding(.horizontal, 40)
+        .padding(.horizontal, 32)
     }
-}
-
-// MARK: - Ingredient Picker
-
-struct IngredientPicker: View {
-    let ingredients: [CreatureIngredient]
-    let selected: CreatureIngredient?
-    let onSelect: (CreatureIngredient) -> Void
     
-    var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 16) {
-                ForEach(ingredients) { ingredient in
-                    IngredientTile(
-                        ingredient: ingredient,
-                        isSelected: selected?.id == ingredient.id,
-                        onTap: { onSelect(ingredient) }
-                    )
-                }
-            }
-            .padding(.horizontal)
+    private var queueFullMessage: some View {
+        HStack {
+            Text("⏳")
+            Text("The creature machine is very busy! Try again soon.")
+                .font(.subheadline)
         }
+        .foregroundColor(.orange)
+        .padding()
+        .background(Color.orange.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
     }
-}
-
-struct IngredientTile: View {
-    let ingredient: CreatureIngredient
-    let isSelected: Bool
-    let onTap: () -> Void
     
-    var body: some View {
-        Button(action: onTap) {
-            VStack(spacing: 8) {
-                Text(ingredient.displayIcon)
-                    .font(.system(size: 48))
-                
-                Text(ingredient.name)
-                    .font(.caption)
-                    .fontWeight(.medium)
-                    .foregroundColor(.white)
-                    .lineLimit(1)
-            }
-            .frame(width: 90, height: 100)
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(isSelected ? Color.white.opacity(0.3) : Color.white.opacity(0.1))
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(isSelected ? Color.yellow : Color.clear, lineWidth: 3)
-            )
-            .scaleEffect(isSelected ? 1.1 : 1.0)
-            .animation(.spring(response: 0.3), value: isSelected)
+    private func errorMessage(_ message: String) -> some View {
+        HStack {
+            Text("😢")
+            Text(message)
+                .font(.subheadline)
         }
-        .accessibilityLabel(ingredient.name)
+        .foregroundColor(.red)
+        .padding()
+        .background(Color.red.opacity(0.2))
+        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .padding(.horizontal)
     }
 }
 
