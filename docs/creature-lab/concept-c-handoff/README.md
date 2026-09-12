@@ -19,6 +19,8 @@ The lab is a physical, navigable radial room whose machinery makes selection und
 - `creature-lab-workshop-concepts-overview.png` — side-by-side A/B/C review image
 - `manifest.json` — exact source prompts and prompt/image hashes
 - `review-manifest.json` — crop contract and review-image hashes
+- `creature-lab-concept-c-meshy-reference.png` — isolated environment-shell reference for Meshy image-to-3D
+- `meshy-reference-manifest.json` — exact reference-image prompt, dimensions, and hashes
 - `creature-lab-3d-handoff.md` — Concept C spatial, interaction, asset, and mobile-budget handoff
 - `creature-lab-meshy-prompts.json` — exact unsubmitted Meshy prompt pack and hashes
 - `creature-lab-meshy-generation.json` — blocked-before-submission status and zero-credit record
