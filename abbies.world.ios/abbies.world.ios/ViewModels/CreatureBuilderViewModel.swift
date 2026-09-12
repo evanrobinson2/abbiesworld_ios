@@ -67,11 +67,6 @@ class CreatureBuilderViewModel: ObservableObject {
     }
     
     var makingBadge: String? {
-        let ready = readyCount
-        let failed = failedCount
-        if ready > 0 || failed > 0 {
-            return "\(ready + failed)!"
-        }
         let making = makingCount
         if making > 0 {
             return "\(making)"
@@ -100,11 +95,35 @@ class CreatureBuilderViewModel: ObservableObject {
     // MARK: - Init
     
     init() {
-        useMockMode = ProcessInfo.processInfo.arguments.contains("-useMockCreatureBuilder")
+        let arguments = ProcessInfo.processInfo.arguments
+        useMockMode = arguments.contains("-useMockCreatureBuilder")
         print("creature_builder.mode value=\(useMockMode ? "mock" : "production")")
-        loadState()
 
-        if ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder") {
+        if arguments.contains("-verifyCreatureLabReady") {
+            currentTab = .making
+            readyToReveal = [
+                CreatureCard(
+                    id: "ready-verification-card",
+                    generationId: "ready-verification-generation",
+                    recipe: CreatureRecipe(
+                        creatureId: "cat",
+                        outfitId: "superhero",
+                        buddyId: "fox"
+                    ),
+                    name: "Starshield Cat",
+                    personality: "Brave, curious, and always ready to help.",
+                    powerName: "Friendly Force Field",
+                    imageURL: "mock://creature/cat_superhero_fox",
+                    createdAt: Date(),
+                    isFavorite: false,
+                    isRevealed: false
+                )
+            ]
+        } else {
+            loadState()
+        }
+
+        if arguments.contains("-autoPlayCreatureBuilder") {
             Task { @MainActor [weak self] in
                 try? await Task.sleep(for: .seconds(1))
                 guard let self,

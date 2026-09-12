@@ -87,14 +87,10 @@ struct CardRevealView: View {
     
     private var celebrationHeader: some View {
         VStack(spacing: 8) {
-            HStack(spacing: 10) {
-                CreatureLabSparkle(color: .yellow, size: 16)
-                Text("NEW CREATURE!")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.yellow)
-                CreatureLabSparkle(color: .yellow, size: 16)
-            }
+            Text("NEW CREATURE!")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(.yellow)
             
             Text(card.name.uppercased())
                 .font(.title)
@@ -180,7 +176,10 @@ struct CelebrationParticles: View {
     var body: some View {
         GeometryReader { geometry in
             ForEach(particles) { particle in
-                CreatureLabSparkle(color: particle.color, size: particle.size)
+                Circle()
+                    .fill(particle.color)
+                    .frame(width: particle.size, height: particle.size)
+                    .shadow(color: particle.color.opacity(0.7), radius: 4)
                     .position(
                         x: particle.position.x * geometry.size.width,
                         y: particle.position.y * geometry.size.height

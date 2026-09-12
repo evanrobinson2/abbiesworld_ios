@@ -87,7 +87,6 @@ struct MyCardsView: View {
                     .frame(width: 58, height: 76)
                     .rotationEffect(.degrees(10))
                     .offset(x: 18)
-                CreatureLabSparkle(color: .yellow, size: 26)
             }
             .overlay {
                 RoundedRectangle(cornerRadius: 18)

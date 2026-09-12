@@ -60,18 +60,19 @@ struct MakingView: View {
     private var readySection: some View {
         VStack(spacing: 16) {
             statusHeader(
-                title: "READY TO REVEAL!",
-                symbol: "gift.fill",
+                title: "READY TO REVEAL",
+                symbol: "checkmark.circle.fill",
                 color: .green
             )
             
-            LazyVGrid(columns: [GridItem(.adaptive(minimum: 140))], spacing: 16) {
+            HStack(spacing: 20) {
                 ForEach(viewModel.readyToReveal) { card in
                     ReadyCard(card: card) {
                         viewModel.revealCard(card)
                     }
                 }
             }
+            .frame(maxWidth: .infinity)
             .padding(.horizontal)
         }
     }
@@ -170,25 +171,89 @@ struct ReadyCard: View {
     
     var body: some View {
         Button(action: onTap) {
-            VStack(spacing: 8) {
-                CreatureLabCardBack(
-                    creature: CreatureBuilderContent.creature(for: card.creatureId),
-                    outfit: CreatureBuilderContent.outfit(for: card.outfitId),
-                    buddy: CreatureBuilderContent.buddy(for: card.buddyId)
-                )
-                .frame(height: 120)
-                .shadow(color: .yellow, radius: isGlowing ? 10 : 5)
-                
-                Text("TAP TO REVEAL!")
-                    .font(.caption)
-                    .fontWeight(.bold)
-                    .foregroundColor(.yellow)
+            VStack(spacing: 12) {
+                readyCardBack
+                .shadow(color: .green, radius: isGlowing ? 16 : 7)
+
+                Label("REVEAL", systemImage: "checkmark")
+                    .font(.headline.weight(.black))
+                    .foregroundStyle(.white)
+                    .frame(width: 220)
+                    .padding(.vertical, 12)
+                    .background(.green.gradient, in: Capsule())
             }
+            .padding(14)
+            .background(.black.opacity(0.34), in: RoundedRectangle(cornerRadius: 24))
+            .overlay {
+                RoundedRectangle(cornerRadius: 24)
+                    .stroke(.green.opacity(isGlowing ? 0.95 : 0.55), lineWidth: 3)
+            }
+            .scaleEffect(isGlowing ? 1.025 : 1)
         }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(card.name), ready to reveal")
         .onAppear {
             withAnimation(.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
                 isGlowing = true
             }
+        }
+    }
+
+    private var readyCardBack: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 22)
+                .fill(
+                    LinearGradient(
+                        colors: [
+                            Color.indigo.opacity(0.96),
+                            Color.purple.opacity(0.92)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+
+            VStack(spacing: 24) {
+                HStack(spacing: 10) {
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.creature(
+                            for: card.creatureId
+                        ),
+                        size: 58,
+                        accent: .purple
+                    )
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.outfit(
+                            for: card.outfitId
+                        ),
+                        size: 58,
+                        accent: .orange
+                    )
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.buddy(
+                            for: card.buddyId
+                        ),
+                        size: 58,
+                        accent: .green
+                    )
+                }
+
+                Image(systemName: "checkmark")
+                    .font(.system(size: 48, weight: .black))
+                    .foregroundStyle(.white)
+                    .frame(width: 84, height: 84)
+                    .background(.green.gradient, in: Circle())
+
+                Text("CREATURE LAB")
+                    .font(.headline.weight(.black))
+                    .tracking(1.4)
+                    .foregroundStyle(.white)
+            }
+        }
+        .frame(width: 220, height: 280)
+        .overlay {
+            RoundedRectangle(cornerRadius: 22)
+                .stroke(.yellow.opacity(0.82), lineWidth: 4)
         }
     }
 }
@@ -256,11 +321,17 @@ struct IncubatorView: View {
     
     private var sparkles: some View {
         HStack(spacing: 8) {
-            CreatureLabSparkle(color: .cyan, size: 10)
+            Circle()
+                .fill(.cyan)
+                .frame(width: 10, height: 10)
                 .offset(y: bubbleOffset)
-            CreatureLabSparkle(color: .yellow, size: 13)
+            Circle()
+                .fill(.yellow)
+                .frame(width: 13, height: 13)
                 .offset(y: -bubbleOffset)
-            CreatureLabSparkle(color: .pink, size: 10)
+            Circle()
+                .fill(.pink)
+                .frame(width: 10, height: 10)
                 .offset(y: bubbleOffset)
         }
     }

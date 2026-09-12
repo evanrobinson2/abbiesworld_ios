@@ -41,14 +41,6 @@ private enum RadialLabStation: String, CaseIterable {
         }
     }
 
-    var symbol: String {
-        switch self {
-        case .creature: return "pawprint.fill"
-        case .outfit: return "tshirt.fill"
-        case .buddy: return "heart.fill"
-        }
-    }
-
     var accent: Color {
         switch self {
         case .creature: return Color(red: 0.64, green: 0.37, blue: 0.96)
@@ -291,24 +283,15 @@ struct RadialCreatureLabView: View {
                     : (sin(seconds * .pi * 1.35) + 1) / 2
                 let isLive = viewModel.canCreate || viewModel.isCreating
 
-                HStack(spacing: width * 0.08) {
-                    Image(
-                        systemName: viewModel.isCreating
-                            ? "gearshape.2.fill"
-                            : "wand.and.stars"
-                    )
-                    .font(.system(size: width * 0.22, weight: .black))
-
-                    Text(viewModel.isCreating ? "BUILDING…" : "MAKE IT!")
-                        .font(
-                            .system(
-                                size: max(14, width * 0.16),
-                                weight: .black,
-                                design: .rounded
-                            )
+                Text(viewModel.isCreating ? "BUILDING…" : "MAKE IT!")
+                    .font(
+                        .system(
+                            size: max(14, width * 0.17),
+                            weight: .black,
+                            design: .rounded
                         )
-                        .lineLimit(1)
-                }
+                    )
+                    .lineLimit(1)
                 .foregroundStyle(.white)
                 .frame(width: width * 1.52, height: width * 0.58)
                 .background(
@@ -618,10 +601,7 @@ private struct RadialSelectorStation: View {
     }
 
     private var machineLabel: some View {
-        HStack(spacing: 5) {
-            Image(systemName: station.symbol)
-            Text(station.title)
-        }
+        Text(station.title)
         .font(.system(size: max(10, width * 0.072), weight: .black, design: .rounded))
         .foregroundStyle(.white)
         .padding(.horizontal, 12)
@@ -818,10 +798,9 @@ private struct RadialLabReactor: View {
 
                 if isCreating {
                     ForEach(0..<8, id: \.self) { index in
-                        CreatureLabSparkle(
-                            color: index.isMultiple(of: 2) ? .yellow : .mint,
-                            size: size * 0.075
-                        )
+                        Circle()
+                            .fill(index.isMultiple(of: 2) ? Color.yellow : Color.mint)
+                            .frame(width: size * 0.055, height: size * 0.055)
                         .offset(y: -size * 0.62)
                         .rotationEffect(.degrees(Double(index) * 45 + seconds * 120))
                     }

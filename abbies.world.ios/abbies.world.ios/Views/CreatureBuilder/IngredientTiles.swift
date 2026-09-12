@@ -64,21 +64,6 @@ struct IngredientArtworkChip: View {
     }
 }
 
-struct CreatureLabSparkle: View {
-    let color: Color
-    var size: CGFloat = 18
-
-    var body: some View {
-        Image(systemName: "sparkle")
-            .font(.system(size: size, weight: .black))
-            .symbolRenderingMode(.monochrome)
-        .foregroundStyle(color)
-        .shadow(color: color.opacity(0.8), radius: size * 0.18)
-        .frame(width: size, height: size)
-        .accessibilityHidden(true)
-    }
-}
-
 struct CreatureLabCardBack: View {
     let creature: CreatureIngredient?
     let outfit: CreatureIngredient?
@@ -104,11 +89,6 @@ struct CreatureLabCardBack: View {
                 )
 
                 VStack(spacing: max(8, geometry.size.height * 0.04)) {
-                    CreatureLabSparkle(
-                        color: .yellow,
-                        size: min(geometry.size.width * 0.18, 42)
-                    )
-
                     HStack(spacing: max(4, geometry.size.width * 0.025)) {
                         IngredientArtworkChip(
                             ingredient: creature,

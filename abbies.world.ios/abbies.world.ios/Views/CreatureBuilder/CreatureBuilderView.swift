@@ -16,6 +16,7 @@ struct CreatureBuilderView: View {
         && !ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilderDirect")
         && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D")
         && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2DBuild")
+        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLabReady")
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -55,7 +56,11 @@ struct CreatureBuilderView: View {
             requestLandscapeOrientation()
             MusicService.shared.setGameActive(true)
             audioService.start()
-            viewModel.loadState()
+            if !ProcessInfo.processInfo.arguments.contains(
+                "-verifyCreatureLabReady"
+            ) {
+                viewModel.loadState()
+            }
         }
         .onDisappear {
             audioService.stopAllAudio()
@@ -133,14 +138,10 @@ struct CreatureBuilderView: View {
             Spacer()
             
             VStack(spacing: 2) {
-                HStack(spacing: 10) {
-                    CreatureLabSparkle(color: .yellow, size: 14)
-                    Text("Creature Lab")
-                        .font(.title2)
-                        .fontWeight(.bold)
-                        .foregroundColor(.white)
-                    CreatureLabSparkle(color: .yellow, size: 14)
-                }
+                Text("Creature Lab")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
 
                 Text(audioService.currentTrackTitle)
                     .font(.caption)
@@ -217,15 +218,28 @@ struct CreatureBuilderView: View {
                         .font(.system(size: 21, weight: .bold))
                         .symbolRenderingMode(.hierarchical)
                     
-                    if tab == .making, let badge = viewModel.makingBadge {
+                    if tab == .making, viewModel.readyCount > 0 {
+                        Image(systemName: "checkmark")
+                            .font(.caption2.weight(.black))
+                            .foregroundStyle(.white)
+                            .frame(width: 20, height: 20)
+                            .background(.green, in: Circle())
+                            .offset(x: 12, y: -8)
+                            .accessibilityLabel("A creature is ready to reveal")
+                    } else if tab == .making, viewModel.failedCount > 0 {
+                        Image(systemName: "arrow.clockwise")
+                            .font(.caption2.weight(.black))
+                            .foregroundStyle(.white)
+                            .frame(width: 20, height: 20)
+                            .background(.orange, in: Circle())
+                            .offset(x: 12, y: -8)
+                            .accessibilityLabel("A creature needs another try")
+                    } else if tab == .making, let badge = viewModel.makingBadge {
                         Text(badge)
-                            .font(.caption2)
-                            .fontWeight(.bold)
+                            .font(.caption2.weight(.bold))
                             .foregroundColor(.white)
-                            .padding(.horizontal, 6)
-                            .padding(.vertical, 2)
-                            .background(badge.contains("!") ? Color.green : Color.orange)
-                            .clipShape(Capsule())
+                            .frame(minWidth: 20, minHeight: 20)
+                            .background(.orange, in: Circle())
                             .offset(x: 12, y: -8)
                     }
                 }
@@ -598,15 +612,13 @@ struct BuilderView: View {
                     ProgressView()
                         .tint(.white)
                 } else {
-                    CreatureLabSparkle(color: .yellow, size: 20)
+                    Circle()
+                        .fill(.yellow)
+                        .frame(width: 12, height: 12)
                 }
                 Text(viewModel.isCreating ? "MAKING..." : "MAKE IT!")
                     .font(.title2)
                     .fontWeight(.bold)
-                if !viewModel.isCreating {
-                    Image(systemName: "wand.and.stars")
-                        .font(.title2.weight(.bold))
-                }
             }
             .foregroundColor(.white)
             .frame(maxWidth: .infinity)
@@ -674,7 +686,9 @@ struct BuilderView: View {
                         endPoint: .bottomTrailing
                     )
                 )
-            CreatureLabSparkle(color: .yellow, size: 28)
+            Text("?")
+                .font(.title2.weight(.black))
+                .foregroundStyle(.yellow)
             RoundedRectangle(cornerRadius: 14)
                 .stroke(.yellow.opacity(0.75), lineWidth: 3)
         }
