@@ -1,0 +1,83 @@
+{
+  "assets": {
+    "book_store": {
+      "assetName": "creature_builder_overland_book_store",
+      "contentBoundingBox": [
+        193,
+        52,
+        831,
+        972
+      ],
+      "keptPixels": 398177,
+      "pixelSize": [
+        1024,
+        1024
+      ],
+      "removedFragmentPixels": 9,
+      "sha256": "7721526375d7b3e98b4bd5be10d72e757a2b25d195f609f71a8d6589353465b7",
+      "sourceSHA256": "743891a6ed6181a2e3df294ea00281ed8a397baf5a4808b54ba10e327e6e3ae6"
+    },
+    "creature_lab": {
+      "assetName": "creature_builder_overland_creature_lab",
+      "contentBoundingBox": [
+        115,
+        52,
+        908,
+        972
+      ],
+      "keptPixels": 492206,
+      "pixelSize": [
+        1024,
+        1024
+      ],
+      "removedFragmentPixels": 1303,
+      "sha256": "e33c1e4ea0042d98e88963901a01b524f14c9f40b4533dc7f3293db847cc79bc",
+      "sourceSHA256": "7695768e0f337efe21c0ad934b9ce8b7ec3eb3b04c5e59c468a2db1361a2d605"
+    },
+    "hero_board": {
+      "assetName": "creature_builder_overland_board",
+      "pixelSize": [
+        1536,
+        1024
+      ],
+      "sha256": "c7e176c61bad3cc5c26b1eafca79b74e9c21552ac5fbd44253669e2e74a12b09",
+      "sourceSHA256": "2d1df54a72edbe21002a0447d6bc4b1559a47847a9f41d1c762aee779769f270"
+    },
+    "math_store": {
+      "assetName": "creature_builder_overland_math_store",
+      "contentBoundingBox": [
+        218,
+        52,
+        806,
+        972
+      ],
+      "keptPixels": 458065,
+      "pixelSize": [
+        1024,
+        1024
+      ],
+      "removedFragmentPixels": 65,
+      "sha256": "3846344afbc66b99e4795a73527b046e9078e408960dc23dbd16b3f3c2e5fb19",
+      "sourceSHA256": "9d5df8f517abea91c699d93aa0f1ddc22661ec9a4cbc3d8b5d6a114cb6a94ad9"
+    }
+  },
+  "coordinateSpace": {
+    "book_store": [
+      0.76,
+      0.27
+    ],
+    "creature_lab": [
+      0.55,
+      0.77
+    ],
+    "math_store": [
+      0.22,
+      0.48
+    ]
+  },
+  "generatedAt": "2026-09-12T01:20:19.490873+00:00",
+  "model": "gpt-image-2.5-flare",
+  "provider": "OpenAI",
+  "quality": "high",
+  "schemaVersion": 1
+}

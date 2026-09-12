@@ -10,18 +10,26 @@ import SwiftUI
 struct CreatureBuilderView: View {
     @StateObject private var viewModel = CreatureBuilderViewModel()
     @StateObject private var audioService = CreatureBuilderAudioService()
+    @State private var isShowingOverland =
+        !ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder")
+        && !ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilderDirect")
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        ZStack {
-            backgroundGradient
-            
-            VStack(spacing: 0) {
-                header
-                
-                tabContent
-                
-                tabBar
+        Group {
+            if isShowingOverland {
+                CreatureLabOverlandView(
+                    onClose: { dismiss() },
+                    onEnterLab: {
+                        withAnimation(.easeInOut(duration: 0.45)) {
+                            isShowingOverland = false
+                        }
+                    }
+                )
+                .transition(.opacity)
+            } else {
+                labExperience
+                    .transition(.opacity)
             }
         }
         .sheet(isPresented: $viewModel.showingReveal) {
@@ -50,6 +58,20 @@ struct CreatureBuilderView: View {
             MusicService.shared.setGameActive(false)
         }
     }
+
+    private var labExperience: some View {
+        ZStack {
+            backgroundGradient
+
+            VStack(spacing: 0) {
+                header
+
+                tabContent
+
+                tabBar
+            }
+        }
+    }
     
     private var backgroundGradient: some View {
         ZStack {
@@ -73,11 +95,13 @@ struct CreatureBuilderView: View {
     private var header: some View {
         HStack {
             Button {
-                dismiss()
+                withAnimation(.easeInOut(duration: 0.45)) {
+                    isShowingOverland = true
+                }
             } label: {
-                CreatureLabGlyph(symbol: "xmark", tint: .indigo, size: 38)
+                CreatureLabGlyph(symbol: "map.fill", tint: .indigo, size: 38)
             }
-            .accessibilityLabel("Close Creature Lab")
+            .accessibilityLabel("Return to Creature City")
             
             Spacer()
             
@@ -201,6 +225,299 @@ struct CreatureBuilderView: View {
         case .build: return "slider.horizontal.3"
         case .making: return "gearshape.2.fill"
         case .myCards: return "rectangle.stack.fill"
+        }
+    }
+}
+
+// MARK: - Creature City Overland
+
+private struct CreatureOverlandDestination: Identifiable {
+    let id: String
+    let title: String
+    let purpose: String
+    let assetName: String
+    let symbol: String
+    let tint: Color
+    let position: CGPoint
+    let scale: CGFloat
+    let phase: Double
+    let opensCreatureLab: Bool
+}
+
+private struct CreatureLabOverlandView: View {
+    let onClose: () -> Void
+    let onEnterLab: () -> Void
+
+    @State private var selectedJobPlace: CreatureOverlandDestination?
+
+    private let destinations = [
+        CreatureOverlandDestination(
+            id: "math_store",
+            title: "Math Store",
+            purpose: "NUMBER JOBS",
+            assetName: "creature_builder_overland_math_store",
+            symbol: "number",
+            tint: .teal,
+            position: CGPoint(x: 0.22, y: 0.48),
+            scale: 0.22,
+            phase: 0,
+            opensCreatureLab: false
+        ),
+        CreatureOverlandDestination(
+            id: "book_store",
+            title: "Book Store",
+            purpose: "WORD JOBS",
+            assetName: "creature_builder_overland_book_store",
+            symbol: "text.book.closed.fill",
+            tint: .purple,
+            position: CGPoint(x: 0.76, y: 0.27),
+            scale: 0.20,
+            phase: 2.1,
+            opensCreatureLab: false
+        ),
+        CreatureOverlandDestination(
+            id: "creature_lab",
+            title: "Creature Lab",
+            purpose: "MAKE CREATURES",
+            assetName: "creature_builder_overland_creature_lab",
+            symbol: "wand.and.stars",
+            tint: .indigo,
+            position: CGPoint(x: 0.55, y: 0.77),
+            scale: 0.23,
+            phase: 4.2,
+            opensCreatureLab: true
+        ),
+    ]
+
+    var body: some View {
+        GeometryReader { geometry in
+            let board = boardFrame(in: geometry.size)
+
+            ZStack {
+                Image("creature_builder_overland_board")
+                    .resizable()
+                    .scaledToFill()
+                    .blur(radius: 18)
+                    .saturation(0.75)
+                    .ignoresSafeArea()
+
+                Color(red: 0.08, green: 0.2, blue: 0.13)
+                    .opacity(0.52)
+                    .ignoresSafeArea()
+
+                Image("creature_builder_overland_board")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: board.width, height: board.height)
+                    .position(x: board.midX, y: board.midY)
+
+                ForEach(destinations) { destination in
+                    let destinationSize = board.width * destination.scale
+                    TweeningDestinationButton(
+                        destination: destination,
+                        size: destinationSize
+                    ) {
+                        print(
+                            "CREATURE_BUILDER_OVERLAND_EVENT " +
+                            "place=\(destination.id) action=selected"
+                        )
+                        if destination.opensCreatureLab {
+                            onEnterLab()
+                        } else {
+                            selectedJobPlace = destination
+                        }
+                    }
+                    .position(
+                        x: board.minX + board.width * destination.position.x,
+                        y: board.minY
+                            + board.height * destination.position.y
+                            - destinationSize * 0.33
+                    )
+                }
+
+                overlandHeader
+            }
+        }
+        .sheet(item: $selectedJobPlace) { destination in
+            CreatureJobPlaceSheet(destination: destination)
+                .presentationDetents([.medium])
+                .presentationDragIndicator(.visible)
+        }
+    }
+
+    private var overlandHeader: some View {
+        VStack {
+            HStack {
+                Button(action: onClose) {
+                    CreatureLabGlyph(symbol: "xmark", tint: .indigo, size: 40)
+                }
+                .accessibilityLabel("Close Creature City")
+
+                Spacer()
+
+                VStack(spacing: 1) {
+                    Text("CREATURE CITY")
+                        .font(.title2.weight(.black))
+                        .foregroundStyle(.white)
+                    Text("Choose where to go")
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(.white.opacity(0.8))
+                }
+                .padding(.horizontal, 20)
+                .padding(.vertical, 8)
+                .background(.black.opacity(0.32), in: Capsule())
+
+                Spacer()
+
+                Color.clear
+                    .frame(width: 40, height: 40)
+            }
+            .padding()
+
+            Spacer()
+        }
+    }
+
+    private func boardFrame(in size: CGSize) -> CGRect {
+        let aspect: CGFloat = 1.5
+        let boardSize: CGSize
+        if size.width / size.height > aspect {
+            boardSize = CGSize(width: size.height * aspect, height: size.height)
+        } else {
+            boardSize = CGSize(width: size.width, height: size.width / aspect)
+        }
+        return CGRect(
+            x: (size.width - boardSize.width) / 2,
+            y: (size.height - boardSize.height) / 2,
+            width: boardSize.width,
+            height: boardSize.height
+        )
+    }
+}
+
+private struct TweeningDestinationButton: View {
+    let destination: CreatureOverlandDestination
+    let size: CGFloat
+    let action: () -> Void
+
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+
+    var body: some View {
+        TimelineView(.animation) { context in
+            let seconds = context.date.timeIntervalSinceReferenceDate
+            let wave = sin((seconds / 2.8) * .pi * 2 + destination.phase)
+            let breathingScale = reduceMotion ? 1 : 1 + 0.025 * wave
+            let verticalDrift = reduceMotion ? 0 : -3 * wave
+
+            Button(action: action) {
+                ZStack(alignment: .topTrailing) {
+                    VStack(spacing: -4) {
+                        Image(destination.assetName)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: size, height: size)
+                            .shadow(
+                                color: Color.black.opacity(0.28),
+                                radius: size * 0.045,
+                                y: size * 0.025
+                            )
+
+                        HStack(spacing: 6) {
+                            Image(systemName: destination.symbol)
+                                .font(.caption.weight(.black))
+                            VStack(alignment: .leading, spacing: 0) {
+                                Text(destination.title)
+                                    .font(.caption.weight(.black))
+                                Text(destination.purpose)
+                                    .font(.system(size: 8, weight: .bold))
+                                    .tracking(0.6)
+                            }
+                        }
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(destination.tint.opacity(0.9), in: Capsule())
+                        .overlay {
+                            Capsule()
+                                .stroke(.white.opacity(0.75), lineWidth: 1.5)
+                        }
+                    }
+
+                    if !destination.opensCreatureLab {
+                        Image(systemName: "briefcase.fill")
+                            .font(.caption.weight(.black))
+                            .foregroundStyle(.white)
+                            .frame(width: 30, height: 30)
+                            .background(.orange, in: Circle())
+                            .overlay {
+                                Circle().stroke(.white, lineWidth: 2)
+                            }
+                            .offset(x: -size * 0.05, y: size * 0.09)
+                    }
+                }
+                .scaleEffect(breathingScale)
+                .offset(y: verticalDrift)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(
+                "\(destination.title), \(destination.purpose.lowercased())"
+            )
+            .accessibilityHint("Double tap to enter")
+        }
+    }
+}
+
+private struct CreatureJobPlaceSheet: View {
+    let destination: CreatureOverlandDestination
+
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ZStack {
+            Color(red: 0.09, green: 0.05, blue: 0.18)
+                .ignoresSafeArea()
+
+            HStack(spacing: 28) {
+                Image(destination.assetName)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 210, maxHeight: 230)
+
+                VStack(alignment: .leading, spacing: 14) {
+                    CreatureLabGlyph(
+                        symbol: destination.symbol,
+                        tint: destination.tint,
+                        size: 46
+                    )
+
+                    Text(destination.title)
+                        .font(.title.weight(.black))
+                        .foregroundStyle(.white)
+
+                    Text(destination.purpose)
+                        .font(.headline.weight(.bold))
+                        .foregroundStyle(destination.tint)
+
+                    Label(
+                        "Every mission pays the same",
+                        systemImage: "equal.circle.fill"
+                    )
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.white.opacity(0.82))
+
+                    Text("The mission board will live here.")
+                        .font(.subheadline)
+                        .foregroundStyle(.white.opacity(0.64))
+
+                    Button("Back to City") {
+                        dismiss()
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .tint(destination.tint)
+                }
+            }
+            .padding(28)
         }
     }
 }
