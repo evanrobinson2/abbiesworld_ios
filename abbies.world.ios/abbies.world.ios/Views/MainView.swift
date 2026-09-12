@@ -27,7 +27,8 @@ struct MainView: View {
     @State private var showCreatureBuilder =
         ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilder") ||
         ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder") ||
-        ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D")
+        ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D") ||
+        ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2DBuild")
     // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
     @State private var showSettings = false

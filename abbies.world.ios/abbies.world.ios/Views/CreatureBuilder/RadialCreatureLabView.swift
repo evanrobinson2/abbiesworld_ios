@@ -105,7 +105,7 @@ struct RadialCreatureLabView: View {
                         selected: viewModel.selectedCreature,
                         board: board
                     )
-                    .position(x: board.width * 0.225, y: board.height * 0.525)
+                    .position(x: board.width * 0.205, y: board.height * 0.495)
 
                     station(
                         .outfit,
@@ -114,7 +114,7 @@ struct RadialCreatureLabView: View {
                         selected: viewModel.selectedOutfit,
                         board: board
                     )
-                    .position(x: board.width * 0.775, y: board.height * 0.525)
+                    .position(x: board.width * 0.795, y: board.height * 0.495)
 
                     station(
                         .buddy,
@@ -123,28 +123,32 @@ struct RadialCreatureLabView: View {
                         selected: viewModel.selectedBuddy,
                         board: board
                     )
-                    .position(x: board.width * 0.50, y: board.height * 0.245)
+                    .position(x: board.width * 0.50, y: board.height * 0.19)
 
                     RadialLabReactor(
                         creature: viewModel.selectedCreature,
                         outfit: viewModel.selectedOutfit,
                         buddy: viewModel.selectedBuddy,
                         isCreating: viewModel.isCreating,
-                        size: board.width * 0.175
+                        size: board.width * 0.22
                     )
-                    .position(x: board.width * 0.50, y: board.height * 0.535)
+                    .position(x: board.width * 0.50, y: board.height * 0.51)
 
-                    embellishmentSocket(size: board.width * 0.075)
-                        .position(x: board.width * 0.375, y: board.height * 0.805)
+                    embellishmentSocket(size: board.width * 0.085)
+                        .position(x: board.width * 0.34, y: board.height * 0.78)
+                        .zIndex(20)
 
-                    fabricateLever(size: board.width * 0.12)
-                        .position(x: board.width * 0.635, y: board.height * 0.805)
+                    fabricateButton(width: board.width * 0.17)
+                        .position(x: board.width * 0.66, y: board.height * 0.78)
+                        .zIndex(20)
 
                     statusOverlay
                         .frame(maxWidth: board.width * 0.56)
-                        .position(x: board.width * 0.50, y: board.height * 0.935)
+                        .position(x: board.width * 0.50, y: board.height * 0.86)
+                        .allowsHitTesting(false)
                 }
                 .frame(width: board.width, height: board.height)
+                .offset(y: -board.height * 0.03)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .overlay {
                     RoundedRectangle(cornerRadius: 24)
@@ -198,7 +202,7 @@ struct RadialCreatureLabView: View {
             selectedID: selected?.id,
             isActive: activeStation == station,
             isDimmed: activeStation != nil && activeStation != station,
-            width: board.width * (station == .buddy ? 0.22 : 0.235),
+            width: board.width * 0.275,
             reduceMotion: reduceMotion,
             onFocus: {
                 focus(station)
@@ -226,18 +230,8 @@ struct RadialCreatureLabView: View {
                 )
             } else if let error = viewModel.errorMessage {
                 statusPill(error, symbol: "sparkles", color: .pink)
-            } else if viewModel.canCreate {
-                statusPill(
-                    "All three energy channels are ready!",
-                    symbol: "bolt.fill",
-                    color: .mint
-                )
             } else {
-                statusPill(
-                    "Tap a machine, swipe, then tap the center choice.",
-                    symbol: "hand.tap.fill",
-                    color: .white
-                )
+                EmptyView()
             }
         }
     }
@@ -288,49 +282,70 @@ struct RadialCreatureLabView: View {
         .accessibilityHint("A curious socket for something coming later")
     }
 
-    private func fabricateLever(size: CGFloat) -> some View {
+    private func fabricateButton(width: CGFloat) -> some View {
         Button(action: attemptFabrication) {
-            VStack(spacing: 3) {
-                ZStack {
-                    Capsule()
-                        .fill(
-                            viewModel.canCreate
-                                ? Color.orange.gradient
-                                : Color.gray.gradient
-                        )
-                        .frame(width: size * 0.42, height: size * 0.88)
-                        .rotationEffect(.degrees(viewModel.canCreate ? 28 : 8))
+            TimelineView(.animation) { context in
+                let seconds = context.date.timeIntervalSinceReferenceDate
+                let wave = reduceMotion || !viewModel.canCreate
+                    ? 0
+                    : (sin(seconds * .pi * 1.35) + 1) / 2
+                let isLive = viewModel.canCreate || viewModel.isCreating
 
-                    Circle()
-                        .fill(viewModel.canCreate ? Color.yellow : Color.gray)
-                        .frame(width: size * 0.42, height: size * 0.42)
-                        .offset(
-                            x: viewModel.canCreate ? size * 0.18 : size * 0.06,
-                            y: viewModel.canCreate ? -size * 0.30 : -size * 0.34
+                HStack(spacing: width * 0.08) {
+                    Image(
+                        systemName: viewModel.isCreating
+                            ? "gearshape.2.fill"
+                            : "wand.and.stars"
+                    )
+                    .font(.system(size: width * 0.22, weight: .black))
+
+                    Text(viewModel.isCreating ? "BUILDING…" : "MAKE IT!")
+                        .font(
+                            .system(
+                                size: max(14, width * 0.16),
+                                weight: .black,
+                                design: .rounded
+                            )
+                        )
+                        .lineLimit(1)
+                }
+                .foregroundStyle(.white)
+                .frame(width: width * 1.52, height: width * 0.58)
+                .background(
+                    LinearGradient(
+                        colors: isLive
+                            ? [.yellow, .orange, .pink]
+                            : [.gray.opacity(0.82), .indigo.opacity(0.72)],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    ),
+                    in: RoundedRectangle(cornerRadius: width * 0.20)
+                )
+                .overlay {
+                    RoundedRectangle(cornerRadius: width * 0.20)
+                        .stroke(
+                            isLive ? Color.white : Color.white.opacity(0.38),
+                            lineWidth: isLive ? 4 : 2
                         )
                 }
-                .frame(height: size * 0.72)
-
-                Text(viewModel.isCreating ? "BUILDING" : "MAKE")
-                    .font(.system(size: max(10, size * 0.13), weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 9)
-                    .padding(.vertical, 4)
-                    .background(.black.opacity(0.66), in: Capsule())
+                .shadow(
+                    color: isLive ? .orange.opacity(0.78) : .black.opacity(0.36),
+                    radius: isLive ? 15 : 7,
+                    y: 5
+                )
+                .scaleEffect(1 + wave * 0.055)
+                .offset(y: -wave * 3)
+                .rotationEffect(.degrees(leverWobble && !reduceMotion ? -5 : 0))
             }
-            .rotationEffect(.degrees(leverWobble && !reduceMotion ? -6 : 0))
-            .shadow(
-                color: viewModel.canCreate ? .orange.opacity(0.72) : .clear,
-                radius: 10
-            )
         }
         .buttonStyle(.plain)
         .disabled(viewModel.isCreating)
-        .frame(width: size, height: size)
-        .accessibilityLabel(viewModel.canCreate ? "Make creature" : "Creature machine lever")
+        .frame(width: width * 1.7, height: width * 0.82)
+        .contentShape(RoundedRectangle(cornerRadius: width * 0.20))
+        .accessibilityLabel(viewModel.canCreate ? "Make creature" : "Creature machine button")
         .accessibilityHint(
             viewModel.canCreate
-                ? "Pull to start making the creature"
+                ? "Starts making the creature"
                 : "Choose one creature, outfit, and buddy first"
         )
     }
@@ -409,8 +424,11 @@ struct RadialCreatureLabView: View {
     }
 
     private func runAutomatedVerificationIfRequested() {
-        guard ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D")
-        else { return }
+        let arguments = ProcessInfo.processInfo.arguments
+        guard arguments.contains("-verifyCreatureLab2D")
+                || arguments.contains("-verifyCreatureLab2DBuild") else {
+            return
+        }
 
         Task { @MainActor in
             CreatureLab2DDiagnostics.emit("CREATURE_LAB_2D_VERIFY state=started")
@@ -443,6 +461,17 @@ struct RadialCreatureLabView: View {
                 "buddy=\(viewModel.selectedBuddy?.id ?? "none") " +
                 "leverReady=\(viewModel.canCreate)"
             )
+
+            if arguments.contains("-verifyCreatureLab2DBuild") {
+                try? await Task.sleep(for: .milliseconds(180))
+                attemptFabrication()
+                try? await Task.sleep(for: .milliseconds(500))
+                CreatureLab2DDiagnostics.emit(
+                    "CREATURE_LAB_2D_VERIFY state=fabrication_complete " +
+                    "queued=\(viewModel.queuedJobs.count) " +
+                    "creating=\(viewModel.isCreating)"
+                )
+            }
         }
     }
 
@@ -528,15 +557,15 @@ private struct RadialSelectorStation: View {
                             lineWidth: selectedID == current?.id ? 5 : 3
                         )
 
-                    HStack(spacing: width * 0.015) {
-                        optionButton(offset: -1, scale: 0.70)
+                    HStack(spacing: width * 0.022) {
+                        optionButton(offset: -1, scale: 0.82)
                         optionButton(offset: 0, scale: 1.0)
-                        optionButton(offset: 1, scale: 0.70)
+                        optionButton(offset: 1, scale: 0.82)
                     }
                     .padding(.horizontal, width * 0.035)
                     .padding(.vertical, width * 0.045)
                 }
-                .frame(width: width, height: width * 0.55)
+                .frame(width: width, height: width * 0.62)
                 .shadow(
                     color: isActive ? station.accent.opacity(0.72) : .black.opacity(0.32),
                     radius: isActive ? 15 : 7,
@@ -552,7 +581,7 @@ private struct RadialSelectorStation: View {
                     .padding(.vertical, 5)
                     .background(.black.opacity(0.68), in: Capsule())
             }
-            .scaleEffect((isActive ? 1.12 : 1.0) * (1 + wave * 0.012))
+            .scaleEffect((isActive ? 1.075 : 1.0) * (1 + wave * 0.012))
             .offset(y: wave * -1.8)
             .opacity(isDimmed ? 0.56 : 1)
             .animation(
@@ -574,11 +603,15 @@ private struct RadialSelectorStation: View {
                               abs(value.translation.width) > abs(value.translation.height) else {
                             return
                         }
+                        guard isActive else {
+                            onFocus()
+                            return
+                        }
                         browse(value.translation.width < 0 ? 1 : -1)
                     }
             )
         }
-        .frame(width: width * 1.18, height: width * 0.84)
+        .frame(width: width * 1.18, height: width * 0.92)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("\(station.title) machine")
         .accessibilityHint("Swipe to browse, then activate the center choice")
@@ -603,12 +636,13 @@ private struct RadialSelectorStation: View {
     private func optionButton(offset: Int, scale: CGFloat) -> some View {
         if let ingredient = ingredient(offset: offset) {
             Button {
+                guard isActive else {
+                    onFocus()
+                    return
+                }
+
                 if offset == 0 {
-                    if isActive {
-                        onConfirm(ingredient)
-                    } else {
-                        onFocus()
-                    }
+                    onConfirm(ingredient)
                 } else {
                     browse(offset)
                 }
@@ -618,8 +652,8 @@ private struct RadialSelectorStation: View {
                         .resizable()
                         .scaledToFill()
                         .frame(
-                            width: width * 0.265 * scale,
-                            height: width * 0.31 * scale
+                            width: width * 0.285 * scale,
+                            height: width * 0.35 * scale
                         )
                         .clipped()
 
@@ -683,20 +717,20 @@ private struct RadialLabEnergyChannels: View {
 
     var body: some View {
         Canvas { context, size in
-            let center = CGPoint(x: size.width * 0.50, y: size.height * 0.535)
+            let center = CGPoint(x: size.width * 0.50, y: size.height * 0.51)
             let feeds: [(CGPoint, Bool, Color)] = [
                 (
-                    CGPoint(x: size.width * 0.225, y: size.height * 0.525),
+                    CGPoint(x: size.width * 0.205, y: size.height * 0.495),
                     creatureSelected,
                     Color(red: 0.64, green: 0.37, blue: 0.96)
                 ),
                 (
-                    CGPoint(x: size.width * 0.775, y: size.height * 0.525),
+                    CGPoint(x: size.width * 0.795, y: size.height * 0.495),
                     outfitSelected,
                     Color(red: 0.96, green: 0.50, blue: 0.22)
                 ),
                 (
-                    CGPoint(x: size.width * 0.50, y: size.height * 0.245),
+                    CGPoint(x: size.width * 0.50, y: size.height * 0.19),
                     buddySelected,
                     Color(red: 0.30, green: 0.84, blue: 0.64)
                 )
@@ -764,20 +798,20 @@ private struct RadialLabReactor: View {
                 Circle()
                     .stroke(Color(red: 0.80, green: 0.61, blue: 0.30), lineWidth: size * 0.07)
 
-                HStack(spacing: -size * 0.055) {
+                HStack(spacing: size * 0.015) {
                     IngredientArtworkChip(
                         ingredient: creature,
-                        size: size * 0.30,
+                        size: size * 0.305,
                         accent: .purple
                     )
                     IngredientArtworkChip(
                         ingredient: outfit,
-                        size: size * 0.30,
+                        size: size * 0.305,
                         accent: .orange
                     )
                     IngredientArtworkChip(
                         ingredient: buddy,
-                        size: size * 0.30,
+                        size: size * 0.305,
                         accent: .green
                     )
                 }

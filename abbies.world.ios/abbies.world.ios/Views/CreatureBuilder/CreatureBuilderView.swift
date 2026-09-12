@@ -14,6 +14,7 @@ struct CreatureBuilderView: View {
         !ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder")
         && !ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilderDirect")
         && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D")
+        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2DBuild")
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
