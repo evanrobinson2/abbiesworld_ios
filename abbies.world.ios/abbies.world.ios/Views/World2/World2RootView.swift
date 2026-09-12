@@ -38,13 +38,13 @@ struct World2RootView: View {
                 )
                 
             case .cardVault:
-                CardVaultView(
+                World2CardVaultView(
                     viewModel: viewModel,
                     onExit: { viewModel.exitPOI() }
                 )
                 
             case .playerHome:
-                PlayerHomeView(
+                World2PlayerHomeView(
                     viewModel: viewModel,
                     onExit: { viewModel.exitPOI() }
                 )
@@ -317,131 +317,7 @@ struct MinigameHostView: View {
 }
 
 
-struct CardVaultView: View {
-    let viewModel: World2ViewModel
-    let onExit: () -> Void
-    
-    var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [Color(hex: "#1a1a2e") ?? .black, Color(hex: "#0f3460") ?? .blue],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
-            VStack {
-                HStack {
-                    Button(action: onExit) {
-                        Image(systemName: "arrow.left.circle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                    Text("Card Vault")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
-                    Spacer()
-                    Color.clear.frame(width: 32, height: 32)
-                }
-                .padding()
-                
-                Spacer()
-                
-                VStack(spacing: 20) {
-                    Image(systemName: "archivebox.fill")
-                        .font(.system(size: 80))
-                        .foregroundColor(.purple)
-                    
-                    Text("Your Card Collection")
-                        .font(.system(size: 24, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                    
-                    Text("Manage your deck (max 5 active)")
-                        .font(.system(size: 16, design: .rounded))
-                        .foregroundColor(.white.opacity(0.7))
-                }
-                
-                Spacer()
-            }
-        }
-    }
-}
 
-struct PlayerHomeView: View {
-    let viewModel: World2ViewModel
-    let onExit: () -> Void
-    
-    var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [Color(hex: "#f093fb") ?? .pink, Color(hex: "#f5576c") ?? .red],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
-            
-            VStack {
-                HStack {
-                    Button(action: onExit) {
-                        Image(systemName: "arrow.left.circle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                    Text("\(viewModel.currentPlayerId?.displayName ?? "Your")'s Home")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
-                    Spacer()
-                    Color.clear.frame(width: 32, height: 32)
-                }
-                .padding()
-                
-                Spacer()
-                
-                VStack(spacing: 20) {
-                    Image(systemName: "house.fill")
-                        .font(.system(size: 80))
-                        .foregroundColor(.white)
-                    
-                    Text("Place decorations")
-                        .font(.system(size: 24, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                    
-                    HStack(spacing: 20) {
-                        Button(action: {}) {
-                            VStack {
-                                Image(systemName: "music.note.house.fill")
-                                    .font(.system(size: 32))
-                                Text("Jukebox")
-                                    .font(.system(size: 14, weight: .medium))
-                            }
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.white.opacity(0.2))
-                            .cornerRadius(16)
-                        }
-                        
-                        Button(action: {}) {
-                            VStack {
-                                Image(systemName: "sofa.fill")
-                                    .font(.system(size: 32))
-                                Text("Decorate")
-                                    .font(.system(size: 14, weight: .medium))
-                            }
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.white.opacity(0.2))
-                            .cornerRadius(16)
-                        }
-                    }
-                }
-                
-                Spacer()
-            }
-        }
-    }
-}
 
 #Preview {
     World2RootView()
