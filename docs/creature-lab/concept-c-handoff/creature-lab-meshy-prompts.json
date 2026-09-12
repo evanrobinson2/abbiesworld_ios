@@ -1,0 +1,161 @@
+{
+  "schemaVersion": 1,
+  "promptPackId": "CL3D-MESHY-RADIAL-C",
+  "promptPackVersion": "1.0.0",
+  "canonicalConcept": "concept-c-radial-reactor",
+  "createdAt": "2026-09-11T21:41:00-04:00",
+  "hashContract": {
+    "algorithm": "SHA-256",
+    "encoding": "UTF-8",
+    "canonicalization": "Hash the exact JSON string value after JSON decoding, with no leading or trailing newline."
+  },
+  "sourceProvenance": {
+    "conceptManifestPath": "/tmp/creature-lab-workshop-concepts/manifest.json",
+    "conceptImageFilename": "concept-c-radial-reactor-raw.png",
+    "conceptImageSHA256FromManifest": "a15c432bc09bd8364f841c4fb6e3e0c9dacd525668b908a283c4a86a1f5fcaf0",
+    "conceptPromptSHA256FromManifest": "cbeceb875a38eeff244ab56a8e803ef38c742455742c8e66e4be611856d722fc",
+    "meshyDocumentationURL": "https://docs.meshy.ai/api/text-to-3d.md",
+    "meshyDocumentationCheckedAt": "2026-09-11",
+    "apiEndpoint": "https://api.meshy.ai/openapi/v2/text-to-3d"
+  },
+  "apiNotes": {
+    "negativePromptBehavior": "Meshy's current Text-to-3D task object marks negative_prompt as deprecated and without functional impact. The exact negative prompts below are provenance and QA constraints; their essential exclusions are also written into each positive prompt.",
+    "creditPolicy": "Create preview tasks only at first. Do not submit refine tasks until preview geometry is accepted and the displayed or returned credit cost is clear.",
+    "previewPolicy": "No ultra mode. Smart Topology targets are sized for a mobile proof and request both GLB and USDZ.",
+    "refinePolicy": "If explicitly approved after preview review, refine one accepted asset at 2K with PBR disabled before refining any additional asset."
+  },
+  "assets": [
+    {
+      "assetId": "CL3D_ENV_RADIAL_SHELL_POC_V001",
+      "priority": 1,
+      "requiredForProof": true,
+      "promptVersion": "1.0.0",
+      "prompt": "Modular cutaway Creature Lab room shell for a landscape oblique top-down children's game. Circular 15.5 m raised floor, open front and open ceiling, curved rear half-wall. Chunky caricature architecture with rounded ribs and toy-like bevels. Build a 3.2 m center socket, three distinct radial station wedges around it, broad walkable gaps between wedges, an annular path, and three recessed energy channels converging into the center. Dark-plum trim, mint and teal floor panels, purple bases, orange and brass accents. Believable navigable room with varied floor heights under 0.15 m. Simple mobile geometry. No stations, reactor, characters, text, logos, roof, loose props, or menu graphics.",
+      "promptSHA256": "657a82bdf853c499180e9b172e1bd495b07c0f0891465d6c60907ba32c6d82bb",
+      "negativePrompt": "photorealism, realistic industrial laboratory, horror, dirty grime, sharp hazards, thin fragile walls, enclosed front wall, full roof, stairs, steep ramps, furniture, terminals, reactor, characters, text, logo, decals, clutter, cables crossing walkways, flat radial menu, UI wheel, icons, microscopic detail, high-frequency texture, transparent floor",
+      "negativePromptSHA256": "98259946d1eb8f68f9ffbf8b95fe7360fe07f676dbbd69e3de56ddd183fcb91d",
+      "previewRequest": {
+        "mode": "preview",
+        "model_type": "smart-topology",
+        "ai_model": "meshy-t2",
+        "topology": "triangle",
+        "target_polycount": 12000,
+        "moderation": true,
+        "ultra_mode": false,
+        "target_formats": [
+          "glb",
+          "usdz"
+        ],
+        "auto_size": false
+      },
+      "texturePrompt": "Apply clean hand-painted toy-lab colors: dark-plum trim, mint and teal floor panels, chunky purple plinths, warm orange details, sparse brass ribs, cream edge highlights. Flat color groups, subtle gouache grain, no text, icons, decals, grime, baked shadows, or photoreal reflections.",
+      "texturePromptSHA256": "f189047d43f12bc2e07935565a9c8fb6e7a46f5da0daeb674012e4481b1eff02",
+      "refineRequestTemplate": {
+        "mode": "refine",
+        "preview_task_id": "<CL3D_ENV_RADIAL_SHELL_POC_V001_PREVIEW_TASK_ID>",
+        "ai_model": "latest",
+        "enable_pbr": false,
+        "texture_resolution": "2k",
+        "remove_lighting": true,
+        "moderation": true,
+        "target_formats": [
+          "glb",
+          "usdz"
+        ],
+        "auto_size": false
+      },
+      "outputTargets": {
+        "glb": "cl3d_env_radial_shell_poc_v001.glb",
+        "usdz": "cl3d_env_radial_shell_poc_v001.usdz"
+      }
+    },
+    {
+      "assetId": "CL3D_STA_TYPE_WEDGE_POC_V001",
+      "priority": 2,
+      "requiredForProof": true,
+      "promptVersion": "1.0.0",
+      "prompt": "Standalone Creature Type station for a physical radial Creature Lab, built as a curved 80-degree carousel wedge that faces a central reactor. Chunky friendly creature-face silhouette with two ear-like fins, rounded purple housing, teal glass central specimen window, brass arc rail, one large active display cradle, and two smaller neighboring option cradles peeking along the arc. Include a low walk-up swipe rail and oversized confirm pad. Toy-like caricature proportions, dark-plum trim, mint, teal, purple, and orange panels, soft bevels, thick sturdy parts, readable from oblique top-down camera, simple mobile geometry. No creature, text, logo, floor, room, cables, or loose pieces.",
+      "promptSHA256": "82d46c33d43b4765de1b5bcba8125f09f2f1dd92cfb97d3329b52dbad57a8e78",
+      "negativePrompt": "photorealism, horror, medical equipment, weapon, humanoid robot, character, animal, creature inside chamber, text, logo, labels, flat radial menu, UI wheel, floating geometry, loose parts, asymmetrical broken silhouette, thin wires, sharp spikes, tiny controls, dense greebles, background room, floor slab, baked shadows",
+      "negativePromptSHA256": "3a4c09656e2d5e2716671e479b78dc83b3b80ebc970756225684c284b6e90488",
+      "previewRequest": {
+        "mode": "preview",
+        "model_type": "smart-topology",
+        "ai_model": "meshy-t2",
+        "topology": "triangle",
+        "target_polycount": 7000,
+        "moderation": true,
+        "ultra_mode": false,
+        "target_formats": [
+          "glb",
+          "usdz"
+        ],
+        "auto_size": false
+      },
+      "texturePrompt": "Apply dark-plum trim, rounded purple housing, teal glass, mint inserts, orange controls, sparse brass rails, and cream edge highlights. Hand-painted toy-like color blocks with subtle gouache grain; no text, logos, creature art, grime, baked lighting, or tiny decals.",
+      "texturePromptSHA256": "4a3f1396bea6c8a591982d6514985bef675d635e5feff1e498817cb1fb6a301b",
+      "refineRequestTemplate": {
+        "mode": "refine",
+        "preview_task_id": "<CL3D_STA_TYPE_WEDGE_POC_V001_PREVIEW_TASK_ID>",
+        "ai_model": "latest",
+        "enable_pbr": false,
+        "texture_resolution": "2k",
+        "remove_lighting": true,
+        "moderation": true,
+        "target_formats": [
+          "glb",
+          "usdz"
+        ],
+        "auto_size": false
+      },
+      "outputTargets": {
+        "glb": "cl3d_sta_type_wedge_poc_v001.glb",
+        "usdz": "cl3d_sta_type_wedge_poc_v001.usdz"
+      }
+    },
+    {
+      "assetId": "CL3D_REACTOR_CORE_POC_V001",
+      "priority": 3,
+      "requiredForProof": false,
+      "promptVersion": "1.0.0",
+      "prompt": "Standalone central fabrication reactor for a physical radial Creature Lab. Circular 3.2 m assembly pedestal with tall rounded glass chamber, three equally spaced radial energy inlet sockets, brass collar rings, purple structural ribs, teal glass, an empty central reveal plinth, top and base particle nozzle sockets, plus two front mounting lugs for a separate tactile lever and dormant embellishment socket. Chunky toy-like caricature proportions, soft bevels, dark-plum trim, strong oblique top-down silhouette, simple mobile geometry. No character, text, logo, baked particles, floor, room, smoke, weapon, loose pieces, or realistic grime.",
+      "promptSHA256": "bb4283a805bdb434c8edc0d06785eeeb86253e8daf009c8e98653720f9659c2d",
+      "negativePrompt": "photorealism, realistic factory, horror, dangerous machinery, weapon, character, creature, text, logo, labels, flat radial menu, UI wheel, baked particles, baked smoke, flames, grime, rust, sharp blades, needles, thin wires, tiny controls, dense greebles, floating pieces, floor slab, background room, dramatic baked lighting",
+      "negativePromptSHA256": "3c1ffe19d5f19a7466949ae779561e6f7b9663c8563193ba5ca7813e07966c5d",
+      "previewRequest": {
+        "mode": "preview",
+        "model_type": "smart-topology",
+        "ai_model": "meshy-t2",
+        "topology": "triangle",
+        "target_polycount": 9000,
+        "moderation": true,
+        "ultra_mode": false,
+        "target_formats": [
+          "glb",
+          "usdz"
+        ],
+        "auto_size": false
+      },
+      "texturePrompt": "Apply dark-plum trim, purple structural ribs, teal glass, warm orange mounts, sparse brass collar rings, and cream edge highlights. Hand-painted toy-like color blocks with subtle gouache grain; keep the chamber readable and free of baked glow, text, logos, grime, smoke, or characters.",
+      "texturePromptSHA256": "ad67e766ed1789a829e2266bbbee7fdc9163d8fd5304b5785eea8105ae0923eb",
+      "refineRequestTemplate": {
+        "mode": "refine",
+        "preview_task_id": "<CL3D_REACTOR_CORE_POC_V001_PREVIEW_TASK_ID>",
+        "ai_model": "latest",
+        "enable_pbr": false,
+        "texture_resolution": "2k",
+        "remove_lighting": true,
+        "moderation": true,
+        "target_formats": [
+          "glb",
+          "usdz"
+        ],
+        "auto_size": false
+      },
+      "outputTargets": {
+        "glb": "cl3d_reactor_core_poc_v001.glb",
+        "usdz": "cl3d_reactor_core_poc_v001.usdz"
+      }
+    }
+  ]
+}
