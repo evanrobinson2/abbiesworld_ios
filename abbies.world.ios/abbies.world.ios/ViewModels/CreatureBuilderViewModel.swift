@@ -394,8 +394,11 @@ class CreatureBuilderViewModel: ObservableObject {
     private func startPollingIfNeeded() {
         guard pollTimer == nil, shouldPoll else { return }
         
-        pollTimer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true) { [weak self] _ in
-            Task { @MainActor in
+        pollTimer = Timer.scheduledTimer(
+            withTimeInterval: 3.0,
+            repeats: true
+        ) { [weak self] _ in
+            MainActor.assumeIsolated {
                 self?.pollForUpdates()
             }
         }
