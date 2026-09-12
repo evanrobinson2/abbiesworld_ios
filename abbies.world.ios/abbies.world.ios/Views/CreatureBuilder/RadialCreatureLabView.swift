@@ -105,7 +105,7 @@ struct RadialCreatureLabView: View {
                         selected: viewModel.selectedCreature,
                         board: board
                     )
-                    .position(x: board.width * 0.205, y: board.height * 0.495)
+                    .position(x: board.width * 0.19, y: board.height * 0.49)
 
                     station(
                         .outfit,
@@ -114,7 +114,7 @@ struct RadialCreatureLabView: View {
                         selected: viewModel.selectedOutfit,
                         board: board
                     )
-                    .position(x: board.width * 0.795, y: board.height * 0.495)
+                    .position(x: board.width * 0.81, y: board.height * 0.49)
 
                     station(
                         .buddy,
@@ -123,23 +123,23 @@ struct RadialCreatureLabView: View {
                         selected: viewModel.selectedBuddy,
                         board: board
                     )
-                    .position(x: board.width * 0.50, y: board.height * 0.19)
+                    .position(x: board.width * 0.50, y: board.height * 0.16)
 
                     RadialLabReactor(
                         creature: viewModel.selectedCreature,
                         outfit: viewModel.selectedOutfit,
                         buddy: viewModel.selectedBuddy,
                         isCreating: viewModel.isCreating,
-                        size: board.width * 0.22
+                        size: board.width * 0.235
                     )
-                    .position(x: board.width * 0.50, y: board.height * 0.51)
+                    .position(x: board.width * 0.50, y: board.height * 0.515)
 
                     embellishmentSocket(size: board.width * 0.085)
-                        .position(x: board.width * 0.34, y: board.height * 0.78)
+                        .position(x: board.width * 0.34, y: board.height * 0.755)
                         .zIndex(20)
 
                     fabricateButton(width: board.width * 0.17)
-                        .position(x: board.width * 0.66, y: board.height * 0.78)
+                        .position(x: board.width * 0.66, y: board.height * 0.755)
                         .zIndex(20)
 
                     statusOverlay
@@ -148,7 +148,7 @@ struct RadialCreatureLabView: View {
                         .allowsHitTesting(false)
                 }
                 .frame(width: board.width, height: board.height)
-                .offset(y: -board.height * 0.03)
+                .offset(y: -board.height * 0.012)
                 .clipShape(RoundedRectangle(cornerRadius: 24))
                 .overlay {
                     RoundedRectangle(cornerRadius: 24)
@@ -202,7 +202,7 @@ struct RadialCreatureLabView: View {
             selectedID: selected?.id,
             isActive: activeStation == station,
             isDimmed: activeStation != nil && activeStation != station,
-            width: board.width * 0.275,
+            width: board.width * 0.295,
             reduceMotion: reduceMotion,
             onFocus: {
                 focus(station)
@@ -565,7 +565,7 @@ private struct RadialSelectorStation: View {
                     .padding(.horizontal, width * 0.035)
                     .padding(.vertical, width * 0.045)
                 }
-                .frame(width: width, height: width * 0.62)
+                .frame(width: width, height: width * 0.66)
                 .shadow(
                     color: isActive ? station.accent.opacity(0.72) : .black.opacity(0.32),
                     radius: isActive ? 15 : 7,
@@ -581,7 +581,7 @@ private struct RadialSelectorStation: View {
                     .padding(.vertical, 5)
                     .background(.black.opacity(0.68), in: Capsule())
             }
-            .scaleEffect((isActive ? 1.075 : 1.0) * (1 + wave * 0.012))
+            .scaleEffect((isActive ? 1.04 : 1.0) * (1 + wave * 0.012))
             .offset(y: wave * -1.8)
             .opacity(isDimmed ? 0.56 : 1)
             .animation(
@@ -611,7 +611,7 @@ private struct RadialSelectorStation: View {
                     }
             )
         }
-        .frame(width: width * 1.18, height: width * 0.92)
+        .frame(width: width * 1.18, height: width * 0.96)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("\(station.title) machine")
         .accessibilityHint("Swipe to browse, then activate the center choice")
@@ -652,8 +652,8 @@ private struct RadialSelectorStation: View {
                         .resizable()
                         .scaledToFill()
                         .frame(
-                            width: width * 0.285 * scale,
-                            height: width * 0.35 * scale
+                            width: width * 0.31 * scale,
+                            height: width * 0.38 * scale
                         )
                         .clipped()
 
@@ -717,20 +717,20 @@ private struct RadialLabEnergyChannels: View {
 
     var body: some View {
         Canvas { context, size in
-            let center = CGPoint(x: size.width * 0.50, y: size.height * 0.51)
+            let center = CGPoint(x: size.width * 0.50, y: size.height * 0.515)
             let feeds: [(CGPoint, Bool, Color)] = [
                 (
-                    CGPoint(x: size.width * 0.205, y: size.height * 0.495),
+                    CGPoint(x: size.width * 0.19, y: size.height * 0.49),
                     creatureSelected,
                     Color(red: 0.64, green: 0.37, blue: 0.96)
                 ),
                 (
-                    CGPoint(x: size.width * 0.795, y: size.height * 0.495),
+                    CGPoint(x: size.width * 0.81, y: size.height * 0.49),
                     outfitSelected,
                     Color(red: 0.96, green: 0.50, blue: 0.22)
                 ),
                 (
-                    CGPoint(x: size.width * 0.50, y: size.height * 0.19),
+                    CGPoint(x: size.width * 0.50, y: size.height * 0.16),
                     buddySelected,
                     Color(red: 0.30, green: 0.84, blue: 0.64)
                 )

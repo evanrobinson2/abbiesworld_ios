@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct CreatureBuilderView: View {
     @StateObject private var viewModel = CreatureBuilderViewModel()
@@ -51,6 +52,7 @@ struct CreatureBuilderView: View {
             }
         }
         .onAppear {
+            requestLandscapeOrientation()
             MusicService.shared.setGameActive(true)
             audioService.start()
             viewModel.loadState()
@@ -61,17 +63,40 @@ struct CreatureBuilderView: View {
         }
     }
 
+    private func requestLandscapeOrientation() {
+        guard let windowScene = UIApplication.shared.connectedScenes
+            .compactMap({ $0 as? UIWindowScene })
+            .first else {
+            return
+        }
+
+        windowScene.requestGeometryUpdate(
+            .iOS(interfaceOrientations: .landscape)
+        )
+    }
+
     private var labExperience: some View {
         ZStack {
             backgroundGradient
 
+            tabContent
+                .padding(
+                    .top,
+                    viewModel.currentTab == .build ? 0 : 72
+                )
+                .padding(
+                    .bottom,
+                    viewModel.currentTab == .build ? 0 : 76
+                )
+
             VStack(spacing: 0) {
                 header
 
-                tabContent
+                Spacer(minLength: 0)
 
                 tabBar
             }
+            .zIndex(20)
         }
     }
     
