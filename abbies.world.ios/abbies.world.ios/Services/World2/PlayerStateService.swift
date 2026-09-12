@@ -122,6 +122,14 @@ class PlayerStateService: ObservableObject {
         saveLocalState()
     }
     
+    func hasCardWithRecipeHash(_ hash: String) -> Bool {
+        currentPlayer?.cardCollection.hasCardWithRecipeHash(hash) ?? false
+    }
+    
+    func cardWithRecipeHash(_ hash: String) -> CreatureCard? {
+        currentPlayer?.cardCollection.cardWithRecipeHash(hash)
+    }
+    
     func addToActiveDeck(_ cardId: String) -> Bool {
         let success = currentPlayer?.cardCollection.addToActiveDeck(cardId) ?? false
         if success {

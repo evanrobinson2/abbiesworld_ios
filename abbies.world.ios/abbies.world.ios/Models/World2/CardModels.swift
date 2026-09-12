@@ -3,11 +3,12 @@
 //  abbies.world.ios
 //
 //  Data models for the Card system in Abbie's World 2.
+//  Cards are crafted by combining any 3 ingredients.
 //
 
 import Foundation
 
-enum CardRarity: String, Codable, CaseIterable {
+enum CardRarity: String, Codable, CaseIterable, Comparable {
     case common
     case uncommon
     case rare
@@ -33,6 +34,20 @@ enum CardRarity: String, Codable, CaseIterable {
         case .legendary: return "#FF9800"
         }
     }
+    
+    private var sortOrder: Int {
+        switch self {
+        case .common: return 0
+        case .uncommon: return 1
+        case .rare: return 2
+        case .epic: return 3
+        case .legendary: return 4
+        }
+    }
+    
+    static func < (lhs: CardRarity, rhs: CardRarity) -> Bool {
+        lhs.sortOrder < rhs.sortOrder
+    }
 }
 
 enum CardGenerationStatus: String, Codable {
@@ -46,9 +61,12 @@ enum CardGenerationStatus: String, Codable {
 struct CreatureCard: Codable, Identifiable {
     let id: String
     let playerId: String
-    let creatureIngredient: IngredientReference
-    let functionIngredient: IngredientReference
-    let contextIngredient: IngredientReference
+    
+    // Ingredients can be any 3, stored in slots but not category-restricted
+    let creatureIngredient: IngredientReference?
+    let functionIngredient: IngredientReference?
+    let contextIngredient: IngredientReference?
+    
     let prompt: String?
     let generatedImageUrl: String?
     let thumbnailUrl: String?
@@ -59,18 +77,32 @@ struct CreatureCard: Codable, Identifiable {
     var score: Int?
     var generationStatus: CardGenerationStatus
     
+    // Deterministic hash of sorted ingredient IDs - same combo = same hash
+    var recipeHash: String?
+    
     struct IngredientReference: Codable {
         let id: String
         let name: String
         let category: IngredientCategory
     }
     
+    var allIngredients: [IngredientReference] {
+        [creatureIngredient, functionIngredient, contextIngredient].compactMap { $0 }
+    }
+    
     var displayName: String {
-        "\(functionIngredient.name) \(creatureIngredient.name)"
+        let names = allIngredients.map { $0.name }
+        if names.count >= 2 {
+            return "\(names[0]) \(names[1])"
+        } else if names.count == 1 {
+            return names[0]
+        }
+        return "Mystery Creature"
     }
     
     var fullDescription: String {
-        "A \(functionIngredient.name) \(creatureIngredient.name) in \(contextIngredient.name)"
+        let names = allIngredients.map { $0.name }
+        return names.joined(separator: " + ")
     }
 }
 
@@ -87,6 +119,14 @@ struct CardCollection: Codable {
     
     var acceptedCards: [CreatureCard] {
         cards.filter { $0.accepted }
+    }
+    
+    func cardWithRecipeHash(_ hash: String) -> CreatureCard? {
+        cards.first { $0.recipeHash == hash }
+    }
+    
+    func hasCardWithRecipeHash(_ hash: String) -> Bool {
+        cards.contains { $0.recipeHash == hash }
     }
     
     mutating func addToActiveDeck(_ cardId: String) -> Bool {
@@ -111,10 +151,9 @@ struct CardCollection: Codable {
 }
 
 struct CardGenerationRequest: Codable {
-    let creatureIngredientId: String
-    let functionIngredientId: String
-    let contextIngredientId: String
+    let ingredientIds: [String]
     let playerId: String
+    let recipeHash: String
 }
 
 struct CardGenerationResponse: Codable {
@@ -125,4 +164,5 @@ struct CardGenerationResponse: Codable {
     let prompt: String?
     let rarity: CardRarity?
     let error: String?
+    let cached: Bool?
 }

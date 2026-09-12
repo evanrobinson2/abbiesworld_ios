@@ -369,15 +369,23 @@ struct CardTile: View {
             
             VStack(spacing: 8) {
                 HStack(spacing: 4) {
-                    ingredientIcon(card.creatureIngredient.category, color: .orange)
-                    ingredientIcon(card.functionIngredient.category, color: .blue)
-                    ingredientIcon(card.contextIngredient.category, color: .green)
+                    ForEach(card.allIngredients, id: \.id) { ref in
+                        ingredientIcon(ref.category, color: colorFor(ref.category))
+                    }
                 }
                 
                 Image(systemName: "sparkles")
                     .font(.system(size: 32))
                     .foregroundColor(.yellow)
             }
+        }
+    }
+    
+    private func colorFor(_ category: IngredientCategory) -> Color {
+        switch category {
+        case .creature: return .orange
+        case .function: return .blue
+        case .context: return .green
         }
     }
     
@@ -551,9 +559,9 @@ struct CardDetailSheet: View {
                     .foregroundColor(.yellow)
                 
                 HStack(spacing: 8) {
-                    ingredientChip(card.creatureIngredient, color: .orange)
-                    ingredientChip(card.functionIngredient, color: .blue)
-                    ingredientChip(card.contextIngredient, color: .green)
+                    ForEach(card.allIngredients, id: \.id) { ref in
+                        ingredientChip(ref, color: colorFor(ref.category))
+                    }
                 }
             }
             
@@ -569,6 +577,14 @@ struct CardDetailSheet: View {
                 .frame(width: 200, height: 280)
         }
         .shadow(color: .purple.opacity(0.5), radius: 20, y: 10)
+    }
+    
+    private func colorFor(_ category: IngredientCategory) -> Color {
+        switch category {
+        case .creature: return .orange
+        case .function: return .blue
+        case .context: return .green
+        }
     }
     
     private func ingredientChip(_ ref: CreatureCard.IngredientReference, color: Color) -> some View {
@@ -621,9 +637,9 @@ struct CardDetailSheet: View {
                 .foregroundColor(.white.opacity(0.5))
             
             HStack(spacing: 20) {
-                ingredientLabel(card.creatureIngredient.name, icon: "pawprint.fill", color: .orange)
-                ingredientLabel(card.functionIngredient.name, icon: "bolt.fill", color: .blue)
-                ingredientLabel(card.contextIngredient.name, icon: "globe", color: .green)
+                ForEach(card.allIngredients, id: \.id) { ref in
+                    ingredientLabel(ref.name, icon: iconFor(ref.category), color: colorFor(ref.category))
+                }
             }
         }
         .padding()

@@ -2,10 +2,12 @@
 //  CardFactoryView.swift
 //  abbies.world.ios
 //
-//  Card Factory for Abbie's World 2 - create creature cards using ingredients.
+//  Card Factory for Abbie's World 2 - craft creature cards by combining any 3 ingredients.
+//  Uses deterministic recipe hashing for caching - same ingredients = same card.
 //
 
 import SwiftUI
+import CryptoKit
 
 struct World2CardFactoryView: View {
     @ObservedObject var viewModel: World2ViewModel
@@ -26,11 +28,15 @@ struct World2CardFactoryView: View {
                         ingredientSelectionPanel
                             .frame(width: geometry.size.width * 0.55)
                         
-                        previewAndCreatePanel
+                        craftingPanel
                             .frame(width: geometry.size.width * 0.35)
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 20)
+                }
+                
+                if factoryViewModel.showingCardReveal, let card = factoryViewModel.revealedCard {
+                    cardRevealOverlay(card: card)
                 }
             }
         }
@@ -77,7 +83,7 @@ struct World2CardFactoryView: View {
                     .font(.system(size: 28, weight: .black, design: .rounded))
                     .foregroundColor(.white)
                 
-                Text("Combine ingredients to create magical creature cards!")
+                Text("Combine any 3 ingredients to craft a creature card!")
                     .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(.white.opacity(0.7))
             }
@@ -114,36 +120,38 @@ struct World2CardFactoryView: View {
     }
     
     private var ingredientSelectionPanel: some View {
-        VStack(spacing: 16) {
-            ingredientSection(
-                title: "CREATURE",
-                subtitle: "Who is it?",
-                icon: "pawprint.fill",
-                color: .orange,
-                ingredients: factoryViewModel.availableCreatures,
-                selectedId: factoryViewModel.selectedCreature?.id,
-                onSelect: { factoryViewModel.selectCreature($0) }
-            )
+        VStack(spacing: 12) {
+            Text("PICK ANY 3 INGREDIENTS")
+                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .foregroundColor(.white.opacity(0.6))
             
-            ingredientSection(
-                title: "COSTUME / POWER",
-                subtitle: "What can it do?",
-                icon: "bolt.fill",
-                color: .blue,
-                ingredients: factoryViewModel.availableFunctions,
-                selectedId: factoryViewModel.selectedFunction?.id,
-                onSelect: { factoryViewModel.selectFunction($0) }
-            )
-            
-            ingredientSection(
-                title: "PLACE",
-                subtitle: "Where is it?",
-                icon: "globe",
-                color: .green,
-                ingredients: factoryViewModel.availableContexts,
-                selectedId: factoryViewModel.selectedContext?.id,
-                onSelect: { factoryViewModel.selectContext($0) }
-            )
+            ScrollView {
+                VStack(spacing: 16) {
+                    ingredientSection(
+                        title: "CREATURES",
+                        subtitle: "Who is it?",
+                        icon: "pawprint.fill",
+                        color: .orange,
+                        ingredients: factoryViewModel.availableCreatures
+                    )
+                    
+                    ingredientSection(
+                        title: "COSTUMES & POWERS",
+                        subtitle: "What can it do?",
+                        icon: "bolt.fill",
+                        color: .blue,
+                        ingredients: factoryViewModel.availableFunctions
+                    )
+                    
+                    ingredientSection(
+                        title: "PLACES",
+                        subtitle: "Where is it?",
+                        icon: "globe",
+                        color: .green,
+                        ingredients: factoryViewModel.availableContexts
+                    )
+                }
+            }
         }
     }
     
@@ -152,9 +160,7 @@ struct World2CardFactoryView: View {
         subtitle: String,
         icon: String,
         color: Color,
-        ingredients: [IngredientDefinition],
-        selectedId: String?,
-        onSelect: @escaping (IngredientDefinition) -> Void
+        ingredients: [IngredientDefinition]
     ) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(spacing: 10) {
@@ -189,11 +195,11 @@ struct World2CardFactoryView: View {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 12) {
                         ForEach(ingredients) { ingredient in
-                            IngredientSelectionTile(
+                            IngredientTile(
                                 ingredient: ingredient,
-                                isSelected: ingredient.id == selectedId,
-                                accentColor: color,
-                                onSelect: { onSelect(ingredient) }
+                                isSelected: factoryViewModel.isSelected(ingredient),
+                                slotNumber: factoryViewModel.slotNumber(for: ingredient),
+                                onTap: { factoryViewModel.toggleIngredient(ingredient) }
                             )
                         }
                     }
@@ -226,16 +232,16 @@ struct World2CardFactoryView: View {
         .frame(maxWidth: .infinity, alignment: .leading)
     }
     
-    private var previewAndCreatePanel: some View {
+    private var craftingPanel: some View {
         VStack(spacing: 20) {
+            recipeSlots
+            
             recipePreview
             
-            createButton
+            craftButton
             
-            if factoryViewModel.isCreating {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                    .scaleEffect(1.2)
+            if factoryViewModel.generationState == .generating {
+                generatingIndicator
             }
             
             if let error = factoryViewModel.errorMessage {
@@ -244,6 +250,10 @@ struct World2CardFactoryView: View {
                     .foregroundColor(.red)
                     .multilineTextAlignment(.center)
                     .padding()
+            }
+            
+            if factoryViewModel.hasCachedVersion {
+                cachedBadge
             }
             
             Spacer()
@@ -255,40 +265,44 @@ struct World2CardFactoryView: View {
         )
     }
     
+    private var recipeSlots: some View {
+        VStack(spacing: 8) {
+            Text("RECIPE SLOTS")
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .foregroundColor(.white.opacity(0.5))
+            
+            HStack(spacing: 12) {
+                ForEach(0..<3) { index in
+                    RecipeSlot(
+                        slotNumber: index + 1,
+                        ingredient: factoryViewModel.selectedIngredients.count > index
+                            ? factoryViewModel.selectedIngredients[index]
+                            : nil,
+                        onRemove: {
+                            if factoryViewModel.selectedIngredients.count > index {
+                                factoryViewModel.removeIngredient(at: index)
+                            }
+                        }
+                    )
+                }
+            }
+        }
+    }
+    
     private var recipePreview: some View {
-        VStack(spacing: 16) {
-            Text("YOUR RECIPE")
-                .font(.system(size: 14, weight: .bold, design: .rounded))
-                .foregroundColor(.white.opacity(0.6))
-            
-            HStack(spacing: 8) {
-                ingredientChip(factoryViewModel.selectedCreature, color: .orange)
-                
-                Text("+")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.white.opacity(0.5))
-                
-                ingredientChip(factoryViewModel.selectedFunction, color: .blue)
-                
-                Text("+")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(.white.opacity(0.5))
-                
-                ingredientChip(factoryViewModel.selectedContext, color: .green)
-            }
-            
-            HStack(spacing: 4) {
-                Text("=")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(.white.opacity(0.5))
-                
-                mysteryCard
-            }
-            
-            if factoryViewModel.canCreate {
+        VStack(spacing: 12) {
+            if factoryViewModel.canCraft {
                 Text(factoryViewModel.recipeDescription)
                     .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(.yellow)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+                
+                mysteryCard
+            } else {
+                Text("Select 3 ingredients to craft a card")
+                    .font(.system(size: 14, design: .rounded))
+                    .foregroundColor(.white.opacity(0.5))
                     .multilineTextAlignment(.center)
             }
         }
@@ -297,46 +311,6 @@ struct World2CardFactoryView: View {
             RoundedRectangle(cornerRadius: 16)
                 .fill(Color.black.opacity(0.3))
         )
-    }
-    
-    private func ingredientChip(_ ingredient: IngredientDefinition?, color: Color) -> some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(color.opacity(ingredient != nil ? 0.3 : 0.1))
-                .frame(width: 50, height: 60)
-            
-            if let ingredient = ingredient {
-                VStack(spacing: 4) {
-                    Image(systemName: iconFor(ingredient.category))
-                        .font(.system(size: 18))
-                        .foregroundColor(color)
-                    
-                    Text(ingredient.name.prefix(6))
-                        .font(.system(size: 8, weight: .bold))
-                        .foregroundColor(.white)
-                        .lineLimit(1)
-                }
-            } else {
-                Text("?")
-                    .font(.system(size: 24, weight: .bold))
-                    .foregroundColor(color.opacity(0.5))
-            }
-        }
-        .overlay(
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(
-                    ingredient != nil ? color : color.opacity(0.3),
-                    lineWidth: ingredient != nil ? 2 : 1
-                )
-        )
-    }
-    
-    private func iconFor(_ category: IngredientCategory) -> String {
-        switch category {
-        case .creature: return "pawprint.fill"
-        case .function: return "bolt.fill"
-        case .context: return "globe"
-        }
     }
     
     private var mysteryCard: some View {
@@ -349,53 +323,44 @@ struct World2CardFactoryView: View {
                         endPoint: .bottomTrailing
                     )
                 )
-                .frame(width: 70, height: 90)
+                .frame(width: 80, height: 100)
             
-            if factoryViewModel.canCreate {
-                Image(systemName: "sparkles")
-                    .font(.system(size: 28))
-                    .foregroundColor(.yellow)
-            } else {
-                Text("?")
-                    .font(.system(size: 32, weight: .black))
-                    .foregroundColor(.yellow.opacity(0.7))
-            }
+            Image(systemName: "sparkles")
+                .font(.system(size: 32))
+                .foregroundColor(.yellow)
         }
         .overlay(
             RoundedRectangle(cornerRadius: 12)
-                .stroke(
-                    factoryViewModel.canCreate ? Color.yellow : Color.white.opacity(0.3),
-                    lineWidth: factoryViewModel.canCreate ? 3 : 1
-                )
+                .stroke(Color.yellow, lineWidth: 3)
         )
-        .shadow(
-            color: factoryViewModel.canCreate ? .purple.opacity(0.5) : .clear,
-            radius: 10
-        )
+        .shadow(color: .purple.opacity(0.5), radius: 10)
     }
     
-    private var createButton: some View {
+    private var craftButton: some View {
         Button(action: {
             Task {
-                await factoryViewModel.createCard(
-                    playerService: PlayerStateService.shared
+                await factoryViewModel.craftCard(
+                    playerService: PlayerStateService.shared,
+                    parentViewModel: viewModel
                 )
             }
         }) {
             HStack(spacing: 12) {
-                if factoryViewModel.isCreating {
+                if factoryViewModel.generationState == .generating {
                     ProgressView()
                         .progressViewStyle(CircularProgressViewStyle(tint: .white))
                 } else {
                     Image(systemName: "diamond.fill")
                         .foregroundColor(.cyan)
                     
-                    Text("CREATE CARD")
+                    Text(factoryViewModel.hasCachedVersion ? "CRAFT (CACHED)" : "CRAFT CARD")
                         .font(.system(size: 18, weight: .bold, design: .rounded))
                     
-                    Text("(1 gem)")
-                        .font(.system(size: 14, weight: .medium, design: .rounded))
-                        .foregroundColor(.white.opacity(0.7))
+                    if !factoryViewModel.hasCachedVersion {
+                        Text("(1 gem)")
+                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                            .foregroundColor(.white.opacity(0.7))
+                    }
                 }
             }
             .foregroundColor(.white)
@@ -403,9 +368,11 @@ struct World2CardFactoryView: View {
             .padding(.vertical, 16)
             .background(
                 Group {
-                    if factoryViewModel.canCreate && viewModel.gems >= 1 {
+                    if factoryViewModel.canCraft && (viewModel.gems >= 1 || factoryViewModel.hasCachedVersion) {
                         LinearGradient(
-                            colors: [.purple, .pink],
+                            colors: factoryViewModel.hasCachedVersion
+                                ? [.green, .teal]
+                                : [.purple, .pink],
                             startPoint: .leading,
                             endPoint: .trailing
                         )
@@ -416,46 +383,155 @@ struct World2CardFactoryView: View {
             )
             .cornerRadius(16)
         }
-        .disabled(!factoryViewModel.canCreate || viewModel.gems < 1 || factoryViewModel.isCreating)
-        .opacity(factoryViewModel.canCreate && viewModel.gems >= 1 ? 1 : 0.5)
+        .disabled(!factoryViewModel.canCraft || factoryViewModel.generationState == .generating ||
+                  (!factoryViewModel.hasCachedVersion && viewModel.gems < 1))
+        .opacity(factoryViewModel.canCraft ? 1 : 0.5)
+    }
+    
+    private var generatingIndicator: some View {
+        VStack(spacing: 8) {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle(tint: .cyan))
+                .scaleEffect(1.5)
+            
+            Text(factoryViewModel.generationStatusText)
+                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .foregroundColor(.cyan)
+        }
+        .padding()
+    }
+    
+    private var cachedBadge: some View {
+        HStack(spacing: 6) {
+            Image(systemName: "checkmark.circle.fill")
+                .foregroundColor(.green)
+            Text("Recipe already exists - FREE to craft!")
+                .font(.system(size: 12, weight: .medium, design: .rounded))
+                .foregroundColor(.green)
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(
+            Capsule()
+                .fill(Color.green.opacity(0.2))
+        )
+    }
+    
+    private func cardRevealOverlay(card: CreatureCard) -> some View {
+        ZStack {
+            Color.black.opacity(0.9)
+                .ignoresSafeArea()
+            
+            VStack(spacing: 30) {
+                Text("✨ NEW CARD! ✨")
+                    .font(.system(size: 32, weight: .black, design: .rounded))
+                    .foregroundColor(.yellow)
+                
+                CardRevealCard(card: card)
+                
+                Button(action: {
+                    factoryViewModel.dismissReveal()
+                }) {
+                    Text("AWESOME!")
+                        .font(.system(size: 20, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .padding(.horizontal, 40)
+                        .padding(.vertical, 16)
+                        .background(
+                            LinearGradient(
+                                colors: [.purple, .pink],
+                                startPoint: .leading,
+                                endPoint: .trailing
+                            )
+                        )
+                        .cornerRadius(25)
+                }
+            }
+        }
+        .transition(.opacity)
     }
 }
 
-struct IngredientSelectionTile: View {
+struct IngredientTile: View {
     let ingredient: IngredientDefinition
     let isSelected: Bool
-    let accentColor: Color
-    let onSelect: () -> Void
+    let slotNumber: Int?
+    let onTap: () -> Void
+    
+    private var accentColor: Color {
+        switch ingredient.category {
+        case .creature: return .orange
+        case .function: return .blue
+        case .context: return .green
+        }
+    }
     
     var body: some View {
-        Button(action: onSelect) {
-            VStack(spacing: 6) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(accentColor.opacity(isSelected ? 0.4 : 0.2))
-                        .frame(width: 70, height: 70)
+        Button(action: onTap) {
+            ZStack {
+                VStack(spacing: 6) {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 12)
+                            .fill(accentColor.opacity(isSelected ? 0.5 : 0.2))
+                            .frame(width: 70, height: 70)
+                        
+                        Image(systemName: iconFor(ingredient.category))
+                            .font(.system(size: 28))
+                            .foregroundColor(isSelected ? .white : accentColor)
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 12)
+                            .stroke(
+                                isSelected ? Color.yellow : accentColor.opacity(0.5),
+                                lineWidth: isSelected ? 3 : 1
+                            )
+                    )
                     
-                    Image(systemName: iconFor(ingredient.category))
-                        .font(.system(size: 28))
-                        .foregroundColor(isSelected ? .white : accentColor)
+                    Text(ingredient.name)
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+                        .frame(maxWidth: 70)
+                    
+                    rarityBadge
                 }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(
-                            isSelected ? Color.yellow : accentColor.opacity(0.5),
-                            lineWidth: isSelected ? 3 : 1
-                        )
-                )
                 
-                Text(ingredient.name)
-                    .font(.system(size: 11, weight: .semibold, design: .rounded))
-                    .foregroundColor(.white)
-                    .lineLimit(1)
-                    .frame(maxWidth: 70)
+                if let slot = slotNumber {
+                    slotIndicator(slot)
+                }
             }
         }
         .scaleEffect(isSelected ? 1.05 : 1.0)
         .animation(.spring(response: 0.3, dampingFraction: 0.7), value: isSelected)
+    }
+    
+    private var rarityBadge: some View {
+        Text(ingredient.rarity.rawValue.uppercased())
+            .font(.system(size: 8, weight: .bold))
+            .foregroundColor(rarityColor)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(rarityColor.opacity(0.2))
+            .cornerRadius(4)
+    }
+    
+    private var rarityColor: Color {
+        switch ingredient.rarity {
+        case .common: return .gray
+        case .uncommon: return .green
+        case .rare: return .blue
+        case .epic: return .purple
+        case .legendary: return .orange
+        }
+    }
+    
+    private func slotIndicator(_ slot: Int) -> some View {
+        Text("\(slot)")
+            .font(.system(size: 14, weight: .black))
+            .foregroundColor(.white)
+            .frame(width: 24, height: 24)
+            .background(Circle().fill(Color.yellow))
+            .offset(x: 30, y: -35)
     }
     
     private func iconFor(_ category: IngredientCategory) -> String {
@@ -467,117 +543,380 @@ struct IngredientSelectionTile: View {
     }
 }
 
+struct RecipeSlot: View {
+    let slotNumber: Int
+    let ingredient: IngredientDefinition?
+    let onRemove: () -> Void
+    
+    var body: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(ingredient != nil ? slotColor.opacity(0.3) : Color.white.opacity(0.1))
+                .frame(width: 65, height: 80)
+            
+            if let ingredient = ingredient {
+                VStack(spacing: 4) {
+                    Image(systemName: iconFor(ingredient.category))
+                        .font(.system(size: 22))
+                        .foregroundColor(slotColor)
+                    
+                    Text(ingredient.name.prefix(6))
+                        .font(.system(size: 9, weight: .bold))
+                        .foregroundColor(.white)
+                        .lineLimit(1)
+                }
+                
+                Button(action: onRemove) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 18))
+                        .foregroundColor(.white.opacity(0.8))
+                }
+                .offset(x: 25, y: -32)
+            } else {
+                VStack(spacing: 4) {
+                    Text("\(slotNumber)")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.white.opacity(0.3))
+                    
+                    Text("Empty")
+                        .font(.system(size: 10))
+                        .foregroundColor(.white.opacity(0.3))
+                }
+            }
+        }
+        .overlay(
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(
+                    ingredient != nil ? slotColor : Color.white.opacity(0.2),
+                    lineWidth: ingredient != nil ? 2 : 1
+                )
+        )
+    }
+    
+    private var slotColor: Color {
+        guard let ingredient = ingredient else { return .gray }
+        switch ingredient.category {
+        case .creature: return .orange
+        case .function: return .blue
+        case .context: return .green
+        }
+    }
+    
+    private func iconFor(_ category: IngredientCategory) -> String {
+        switch category {
+        case .creature: return "pawprint.fill"
+        case .function: return "bolt.fill"
+        case .context: return "globe"
+        }
+    }
+}
+
+struct CardRevealCard: View {
+    let card: CreatureCard
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .fill(
+                        LinearGradient(
+                            colors: [.indigo, .purple, .pink],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        )
+                    )
+                    .frame(width: 200, height: 280)
+                
+                VStack(spacing: 12) {
+                    if let imageUrl = card.generatedImageUrl, let url = URL(string: imageUrl) {
+                        AsyncImage(url: url) { phase in
+                            switch phase {
+                            case .success(let image):
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                                    .frame(width: 160, height: 160)
+                                    .clipShape(RoundedRectangle(cornerRadius: 12))
+                            default:
+                                placeholderImage
+                            }
+                        }
+                    } else {
+                        placeholderImage
+                    }
+                    
+                    Text(card.prompt ?? "Mystery Creature")
+                        .font(.system(size: 14, weight: .bold, design: .rounded))
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(3)
+                        .padding(.horizontal, 12)
+                    
+                    rarityBadge
+                }
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(Color.yellow, lineWidth: 4)
+            )
+            .shadow(color: .purple.opacity(0.5), radius: 20)
+        }
+    }
+    
+    private var placeholderImage: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 12)
+                .fill(Color.white.opacity(0.2))
+                .frame(width: 160, height: 160)
+            
+            Image(systemName: "sparkles")
+                .font(.system(size: 48))
+                .foregroundColor(.yellow)
+        }
+    }
+    
+    private var rarityBadge: some View {
+        Text(card.rarity.rawValue.uppercased())
+            .font(.system(size: 12, weight: .bold))
+            .foregroundColor(.white)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 4)
+            .background(rarityColor.opacity(0.8))
+            .cornerRadius(8)
+    }
+    
+    private var rarityColor: Color {
+        switch card.rarity {
+        case .common: return .gray
+        case .uncommon: return .green
+        case .rare: return .blue
+        case .epic: return .purple
+        case .legendary: return .orange
+        }
+    }
+}
+
+
+// MARK: - ViewModel
+
+enum CardGenerationState {
+    case idle
+    case generating
+    case completed
+    case failed
+}
+
 @MainActor
 class CardFactoryViewModel: ObservableObject {
     @Published var availableCreatures: [IngredientDefinition] = []
     @Published var availableFunctions: [IngredientDefinition] = []
     @Published var availableContexts: [IngredientDefinition] = []
     
-    @Published var selectedCreature: IngredientDefinition?
-    @Published var selectedFunction: IngredientDefinition?
-    @Published var selectedContext: IngredientDefinition?
+    @Published var selectedIngredients: [IngredientDefinition] = []
     
-    @Published var isCreating = false
+    @Published var generationState: CardGenerationState = .idle
+    @Published var generationStatusText: String = ""
     @Published var errorMessage: String?
     
-    var canCreate: Bool {
-        selectedCreature != nil && selectedFunction != nil && selectedContext != nil && !isCreating
+    @Published var showingCardReveal = false
+    @Published var revealedCard: CreatureCard?
+    
+    @Published var hasCachedVersion = false
+    
+    private let apiClient = APIClient.shared
+    
+    var canCraft: Bool {
+        selectedIngredients.count == 3 && generationState != .generating
     }
     
     var recipeDescription: String {
-        guard let creature = selectedCreature,
-              let function = selectedFunction,
-              let context = selectedContext else {
-            return ""
-        }
-        return "A \(function.name) \(creature.name) in \(context.name)"
+        guard selectedIngredients.count == 3 else { return "" }
+        let names = selectedIngredients.map { $0.name }
+        return "\(names[0]) + \(names[1]) + \(names[2])"
+    }
+    
+    var recipeHash: String {
+        let sortedIds = selectedIngredients.map { $0.id }.sorted()
+        let recipeString = sortedIds.joined(separator: "|")
+        let digest = SHA256.hash(data: Data(recipeString.utf8))
+        return digest.prefix(16).map { String(format: "%02x", $0) }.joined()
     }
     
     func loadAvailableIngredients(from playerService: PlayerStateService) {
         let catalog = IngredientCatalog.sampleCatalog
         
-        let ownedCreatureIds = Set(playerService.creatureIngredients.filter { !$0.used }.map { $0.ingredientId })
-        let ownedFunctionIds = Set(playerService.functionIngredients.filter { !$0.used }.map { $0.ingredientId })
-        let ownedContextIds = Set(playerService.contextIngredients.filter { !$0.used }.map { $0.ingredientId })
+        let ownedCreatureIds = Set(playerService.creatureIngredients.map { $0.ingredientId })
+        let ownedFunctionIds = Set(playerService.functionIngredients.map { $0.ingredientId })
+        let ownedContextIds = Set(playerService.contextIngredients.map { $0.ingredientId })
         
         availableCreatures = catalog.creatures.filter { ownedCreatureIds.contains($0.id) }
         availableFunctions = catalog.functions.filter { ownedFunctionIds.contains($0.id) }
         availableContexts = catalog.contexts.filter { ownedContextIds.contains($0.id) }
         
         if availableCreatures.isEmpty && availableFunctions.isEmpty && availableContexts.isEmpty {
-            availableCreatures = Array(catalog.creatures.prefix(3))
-            availableFunctions = Array(catalog.functions.prefix(3))
-            availableContexts = Array(catalog.contexts.prefix(3))
+            availableCreatures = catalog.creatures
+            availableFunctions = catalog.functions
+            availableContexts = catalog.contexts
         }
     }
     
-    func selectCreature(_ ingredient: IngredientDefinition) {
-        selectedCreature = ingredient
+    func isSelected(_ ingredient: IngredientDefinition) -> Bool {
+        selectedIngredients.contains { $0.id == ingredient.id }
     }
     
-    func selectFunction(_ ingredient: IngredientDefinition) {
-        selectedFunction = ingredient
+    func slotNumber(for ingredient: IngredientDefinition) -> Int? {
+        guard let index = selectedIngredients.firstIndex(where: { $0.id == ingredient.id }) else {
+            return nil
+        }
+        return index + 1
     }
     
-    func selectContext(_ ingredient: IngredientDefinition) {
-        selectedContext = ingredient
+    func toggleIngredient(_ ingredient: IngredientDefinition) {
+        if let index = selectedIngredients.firstIndex(where: { $0.id == ingredient.id }) {
+            selectedIngredients.remove(at: index)
+        } else if selectedIngredients.count < 3 {
+            selectedIngredients.append(ingredient)
+        }
+        
+        checkForCachedVersion()
     }
     
-    func createCard(playerService: PlayerStateService) async {
-        guard canCreate else { return }
+    func removeIngredient(at index: Int) {
+        guard index < selectedIngredients.count else { return }
+        selectedIngredients.remove(at: index)
+        checkForCachedVersion()
+    }
+    
+    private func checkForCachedVersion() {
+        guard selectedIngredients.count == 3 else {
+            hasCachedVersion = false
+            return
+        }
+        
+        let hash = recipeHash
+        let playerService = PlayerStateService.shared
+        hasCachedVersion = playerService.hasCardWithRecipeHash(hash)
+    }
+    
+    func craftCard(playerService: PlayerStateService, parentViewModel: World2ViewModel) async {
+        guard canCraft else { return }
+        
+        let hash = recipeHash
+        
+        if let existingCard = playerService.cardWithRecipeHash(hash) {
+            revealedCard = existingCard
+            showingCardReveal = true
+            selectedIngredients = []
+            return
+        }
+        
         guard playerService.spendGems(1) else {
             errorMessage = "Not enough gems!"
             return
         }
         
-        isCreating = true
+        generationState = .generating
+        generationStatusText = "Mixing ingredients..."
         errorMessage = nil
         
         do {
-            try await Task.sleep(for: .seconds(2))
+            try await Task.sleep(for: .milliseconds(500))
+            generationStatusText = "Crafting your creature..."
             
-            let card = CreatureCard(
-                id: UUID().uuidString,
-                playerId: playerService.currentPlayer?.playerId.rawValue ?? "",
-                creatureIngredient: CreatureCard.IngredientReference(
-                    id: selectedCreature!.id,
-                    name: selectedCreature!.name,
-                    category: .creature
-                ),
-                functionIngredient: CreatureCard.IngredientReference(
-                    id: selectedFunction!.id,
-                    name: selectedFunction!.name,
-                    category: .function
-                ),
-                contextIngredient: CreatureCard.IngredientReference(
-                    id: selectedContext!.id,
-                    name: selectedContext!.name,
-                    category: .context
-                ),
-                prompt: recipeDescription,
-                generatedImageUrl: nil,
-                thumbnailUrl: nil,
-                createdAt: Date(),
-                accepted: true,
-                inActiveDeck: false,
-                rarity: .common,
-                score: nil,
-                generationStatus: .completed
+            let prompt = buildPrompt()
+            
+            try await Task.sleep(for: .milliseconds(500))
+            generationStatusText = "Adding magic sparkles..."
+            
+            let card = try await generateCard(
+                prompt: prompt,
+                recipeHash: hash,
+                playerService: playerService
             )
             
             playerService.addCardToCollection(card)
             
-            selectedCreature = nil
-            selectedFunction = nil
-            selectedContext = nil
-            
-            isCreating = false
+            generationState = .completed
+            revealedCard = card
+            showingCardReveal = true
+            selectedIngredients = []
             
         } catch {
-            isCreating = false
-            errorMessage = "Something went wrong. Try again!"
+            generationState = .failed
+            errorMessage = "Something went wrong. Your gem was refunded!"
             playerService.addGems(1)
         }
+    }
+    
+    private func buildPrompt() -> String {
+        let styleInjections = selectedIngredients.map { $0.styleInjection }
+        
+        return "A magical creature card showing \(styleInjections.joined(separator: ", ")), in a vibrant cartoon style perfect for children"
+    }
+    
+    private func generateCard(
+        prompt: String,
+        recipeHash: String,
+        playerService: PlayerStateService
+    ) async throws -> CreatureCard {
+        let ingredientRefs = selectedIngredients.map { ingredient in
+            CreatureCard.IngredientReference(
+                id: ingredient.id,
+                name: ingredient.name,
+                category: ingredient.category
+            )
+        }
+        
+        let highestRarity = selectedIngredients.map { $0.rarity }.max() ?? .common
+        let boostedRarity = rollForRarityBoost(base: highestRarity)
+        
+        let card = CreatureCard(
+            id: UUID().uuidString,
+            playerId: playerService.currentPlayer?.playerId.rawValue ?? "",
+            creatureIngredient: ingredientRefs.count > 0 ? ingredientRefs[0] : nil,
+            functionIngredient: ingredientRefs.count > 1 ? ingredientRefs[1] : nil,
+            contextIngredient: ingredientRefs.count > 2 ? ingredientRefs[2] : nil,
+            prompt: prompt,
+            generatedImageUrl: nil,
+            thumbnailUrl: nil,
+            createdAt: Date(),
+            accepted: true,
+            inActiveDeck: false,
+            rarity: boostedRarity,
+            score: nil,
+            generationStatus: .pending,
+            recipeHash: recipeHash
+        )
+        
+        return card
+    }
+    
+    private func rollForRarityBoost(base: CardRarity) -> CardRarity {
+        let roll = Double.random(in: 0...1)
+        
+        switch base {
+        case .common:
+            if roll < 0.1 { return .uncommon }
+            return .common
+        case .uncommon:
+            if roll < 0.15 { return .rare }
+            return .uncommon
+        case .rare:
+            if roll < 0.1 { return .epic }
+            return .rare
+        case .epic:
+            if roll < 0.05 { return .legendary }
+            return .epic
+        case .legendary:
+            return .legendary
+        }
+    }
+    
+    func dismissReveal() {
+        showingCardReveal = false
+        revealedCard = nil
+        generationState = .idle
+        hasCachedVersion = false
     }
 }
 
