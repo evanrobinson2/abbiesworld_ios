@@ -102,6 +102,23 @@ class CreatureBuilderViewModel: ObservableObject {
         useMockMode = ProcessInfo.processInfo.arguments.contains("-useMockCreatureBuilder")
         print("creature_builder.mode value=\(useMockMode ? "mock" : "production")")
         loadState()
+
+        if ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder") {
+            Task { @MainActor [weak self] in
+                try? await Task.sleep(for: .seconds(1))
+                guard let self,
+                      let creature = CreatureBuilderContent.creature(for: "cat"),
+                      let outfit = CreatureBuilderContent.outfit(for: "superhero"),
+                      let buddy = CreatureBuilderContent.buddy(for: "fox") else {
+                    return
+                }
+                selectCreature(creature)
+                selectOutfit(outfit)
+                selectBuddy(buddy)
+                print("CREATURE_BUILDER_EVENT event=automated_recipe_selected recipe=cat/superhero/fox")
+                createCreature()
+            }
+        }
     }
     
     deinit {
@@ -175,7 +192,9 @@ class CreatureBuilderViewModel: ObservableObject {
                 creatureId: creature.id,
                 outfitId: outfit.id,
                 buddyId: buddy.id,
-                requestId: UUID().uuidString
+                requestId: ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder")
+                    ? "ios-creature-builder-premium-uat-v1"
+                    : UUID().uuidString
             )
             
             do {
@@ -197,6 +216,10 @@ class CreatureBuilderViewModel: ObservableObject {
                 } else {
                     activeJobs.append(job)
                 }
+                print(
+                    "CREATURE_BUILDER_EVENT event=generation_accepted " +
+                    "generation=\(response.generationId) status=\(response.status.rawValue)"
+                )
                 
                 clearSelections()
                 playCreateSound()
@@ -319,6 +342,11 @@ class CreatureBuilderViewModel: ObservableObject {
                 failedJobs = state.failedJobs
                 readyToReveal = state.readyToReveal
                 collection = state.collection.sorted { $0.createdAt > $1.createdAt }
+                print(
+                    "CREATURE_BUILDER_EVENT event=state_loaded " +
+                    "active=\(state.active.count) queued=\(state.queued.count) " +
+                    "ready=\(state.readyToReveal.count) collection=\(state.collection.count)"
+                )
                 
                 if state.shouldPoll {
                     startPollingIfNeeded()
@@ -390,6 +418,11 @@ class CreatureBuilderViewModel: ObservableObject {
             queuedJobs = state.queued
             failedJobs = state.failedJobs
             readyToReveal = state.readyToReveal
+            print(
+                "CREATURE_BUILDER_EVENT event=state_polled " +
+                "active=\(state.active.count) queued=\(state.queued.count) " +
+                "failed=\(state.failedJobs.count) ready=\(state.readyToReveal.count)"
+            )
             
             for card in state.collection where card.isRevealed {
                 if !collection.contains(where: { $0.id == card.id }) {
