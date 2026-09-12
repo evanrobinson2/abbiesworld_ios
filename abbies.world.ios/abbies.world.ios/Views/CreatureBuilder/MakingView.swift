@@ -41,9 +41,11 @@ struct MakingView: View {
     
     private var failedSection: some View {
         VStack(spacing: 16) {
-            Text("😢 OOPS!")
-                .font(.headline)
-                .foregroundColor(.red)
+            statusHeader(
+                title: "NEEDS ANOTHER TRY",
+                symbol: "exclamationmark.triangle.fill",
+                color: .red
+            )
             
             ForEach(viewModel.failedJobs) { job in
                 FailedJobCard(job: job,
@@ -57,9 +59,11 @@ struct MakingView: View {
     
     private var readySection: some View {
         VStack(spacing: 16) {
-            Text("🎉 READY TO REVEAL!")
-                .font(.headline)
-                .foregroundColor(.green)
+            statusHeader(
+                title: "READY TO REVEAL!",
+                symbol: "gift.fill",
+                color: .green
+            )
             
             LazyVGrid(columns: [GridItem(.adaptive(minimum: 140))], spacing: 16) {
                 ForEach(viewModel.readyToReveal) { card in
@@ -74,9 +78,11 @@ struct MakingView: View {
     
     private var makingSection: some View {
         VStack(spacing: 16) {
-            Text("✨ MAKING...")
-                .font(.headline)
-                .foregroundColor(.white)
+            statusHeader(
+                title: "MAKING...",
+                symbol: "gearshape.2.fill",
+                color: .purple
+            )
             
             HStack(spacing: 16) {
                 ForEach(viewModel.activeJobs) { job in
@@ -93,9 +99,11 @@ struct MakingView: View {
     
     private var queuedSection: some View {
         VStack(spacing: 12) {
-            Text("⏳ WAITING...")
-                .font(.subheadline)
-                .foregroundColor(.white.opacity(0.7))
+            statusHeader(
+                title: "WAITING...",
+                symbol: "clock.fill",
+                color: .orange
+            )
             
             ForEach(viewModel.queuedJobs) { job in
                 QueuedJobRow(job: job)
@@ -106,8 +114,11 @@ struct MakingView: View {
     
     private var emptyState: some View {
         VStack(spacing: 16) {
-            Text("🔮")
-                .font(.system(size: 60))
+            CreatureLabGlyph(
+                symbol: "gearshape.2.fill",
+                tint: .purple,
+                size: 68
+            )
             
             Text("No creatures making")
                 .font(.headline)
@@ -131,6 +142,22 @@ struct MakingView: View {
         }
         .padding(.top, 60)
     }
+
+    private func statusHeader(
+        title: String,
+        symbol: String,
+        color: Color
+    ) -> some View {
+        HStack(spacing: 10) {
+            CreatureLabGlyph(symbol: symbol, tint: color, size: 32)
+            Text(title)
+                .font(.headline)
+                .foregroundStyle(.white)
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 8)
+        .background(.black.opacity(0.24), in: Capsule())
+    }
 }
 
 // MARK: - Ready Card
@@ -144,25 +171,13 @@ struct ReadyCard: View {
     var body: some View {
         Button(action: onTap) {
             VStack(spacing: 8) {
-                ZStack {
-                    RoundedRectangle(cornerRadius: 12)
-                        .fill(
-                            LinearGradient(
-                                colors: [.yellow.opacity(0.3), .orange.opacity(0.3)],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                    
-                    Text("?")
-                        .font(.system(size: 48, weight: .bold))
-                        .foregroundColor(.white)
-                    
-                    RoundedRectangle(cornerRadius: 12)
-                        .stroke(Color.yellow, lineWidth: 3)
-                        .shadow(color: .yellow, radius: isGlowing ? 10 : 5)
-                }
+                CreatureLabCardBack(
+                    creature: CreatureBuilderContent.creature(for: card.creatureId),
+                    outfit: CreatureBuilderContent.outfit(for: card.outfitId),
+                    buddy: CreatureBuilderContent.buddy(for: card.buddyId)
+                )
                 .frame(height: 120)
+                .shadow(color: .yellow, radius: isGlowing ? 10 : 5)
                 
                 Text("TAP TO REVEAL!")
                     .font(.caption)
@@ -193,12 +208,23 @@ struct IncubatorView: View {
                     .frame(width: 100, height: 120)
                 
                 VStack(spacing: 4) {
-                    HStack(spacing: 2) {
-                        Text(creatureIcon)
-                        Text(outfitIcon)
-                        Text(buddyIcon)
+                    HStack(spacing: 4) {
+                        IngredientArtworkChip(
+                            ingredient: CreatureBuilderContent.creature(for: job.creatureId),
+                            size: 27,
+                            accent: .purple
+                        )
+                        IngredientArtworkChip(
+                            ingredient: CreatureBuilderContent.outfit(for: job.outfitId),
+                            size: 27,
+                            accent: .orange
+                        )
+                        IngredientArtworkChip(
+                            ingredient: CreatureBuilderContent.buddy(for: job.buddyId),
+                            size: 27,
+                            accent: .green
+                        )
                     }
-                    .font(.title3)
                     
                     sparkles
                 }
@@ -219,18 +245,6 @@ struct IncubatorView: View {
         }
     }
     
-    private var creatureIcon: String {
-        CreatureBuilderContent.creature(for: job.creatureId)?.displayIcon ?? "?"
-    }
-    
-    private var outfitIcon: String {
-        CreatureBuilderContent.outfit(for: job.outfitId)?.displayIcon ?? "?"
-    }
-    
-    private var buddyIcon: String {
-        CreatureBuilderContent.buddy(for: job.buddyId)?.displayIcon ?? "?"
-    }
-    
     private var statusText: String {
         switch job.status {
         case .queued: return "Waiting..."
@@ -242,14 +256,13 @@ struct IncubatorView: View {
     
     private var sparkles: some View {
         HStack(spacing: 8) {
-            Text("✨")
+            CreatureLabSparkle(color: .cyan, size: 10)
                 .offset(y: bubbleOffset)
-            Text("✨")
+            CreatureLabSparkle(color: .yellow, size: 13)
                 .offset(y: -bubbleOffset)
-            Text("✨")
+            CreatureLabSparkle(color: .pink, size: 10)
                 .offset(y: bubbleOffset)
         }
-        .font(.caption)
     }
 }
 
@@ -257,14 +270,26 @@ struct IncubatorView: View {
 
 struct EmptyIncubator: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: 16)
-            .stroke(Color.white.opacity(0.2), style: StrokeStyle(lineWidth: 2, dash: [8]))
-            .frame(width: 100, height: 120)
-            .overlay(
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .fill(.black.opacity(0.12))
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(
+                    Color.white.opacity(0.22),
+                    style: StrokeStyle(lineWidth: 2, dash: [8])
+                )
+            VStack(spacing: 8) {
+                CreatureLabGlyph(
+                    symbol: "gearshape.fill",
+                    tint: .indigo,
+                    size: 34
+                )
                 Text("Empty")
                     .font(.caption2)
                     .foregroundColor(.white.opacity(0.3))
-            )
+            }
+        }
+        .frame(width: 100, height: 120)
     }
 }
 
@@ -276,15 +301,28 @@ struct QueuedJobRow: View {
     var body: some View {
         HStack(spacing: 12) {
             HStack(spacing: 4) {
-                Text(CreatureBuilderContent.creature(for: job.creatureId)?.displayIcon ?? "?")
-                Text("+")
+                IngredientArtworkChip(
+                    ingredient: CreatureBuilderContent.creature(for: job.creatureId),
+                    size: 36,
+                    accent: .purple
+                )
+                Image(systemName: "plus")
+                    .font(.caption2.weight(.bold))
                     .foregroundColor(.white.opacity(0.5))
-                Text(CreatureBuilderContent.outfit(for: job.outfitId)?.displayIcon ?? "?")
-                Text("+")
+                IngredientArtworkChip(
+                    ingredient: CreatureBuilderContent.outfit(for: job.outfitId),
+                    size: 36,
+                    accent: .orange
+                )
+                Image(systemName: "plus")
+                    .font(.caption2.weight(.bold))
                     .foregroundColor(.white.opacity(0.5))
-                Text(CreatureBuilderContent.buddy(for: job.buddyId)?.displayIcon ?? "?")
+                IngredientArtworkChip(
+                    ingredient: CreatureBuilderContent.buddy(for: job.buddyId),
+                    size: 36,
+                    accent: .green
+                )
             }
-            .font(.title3)
             
             Spacer()
             
@@ -309,11 +347,22 @@ struct FailedJobCard: View {
         VStack(spacing: 12) {
             HStack(spacing: 8) {
                 HStack(spacing: 4) {
-                    Text(CreatureBuilderContent.creature(for: job.creatureId)?.displayIcon ?? "?")
-                    Text(CreatureBuilderContent.outfit(for: job.outfitId)?.displayIcon ?? "?")
-                    Text(CreatureBuilderContent.buddy(for: job.buddyId)?.displayIcon ?? "?")
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.creature(for: job.creatureId),
+                        size: 42,
+                        accent: .purple
+                    )
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.outfit(for: job.outfitId),
+                        size: 42,
+                        accent: .orange
+                    )
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.buddy(for: job.buddyId),
+                        size: 42,
+                        accent: .green
+                    )
                 }
-                .font(.title2)
                 
                 Spacer()
                 

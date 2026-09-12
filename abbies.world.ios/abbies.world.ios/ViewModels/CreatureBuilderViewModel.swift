@@ -184,6 +184,10 @@ class CreatureBuilderViewModel: ObservableObject {
                 queuedJobs.append(job)
                 clearSelections()
                 playCreateSound()
+                if ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder") {
+                    automatedGenerationID = response.generationId
+                    currentTab = .making
+                }
                 startPollingIfNeeded()
                 isCreating = false
                 return
@@ -223,6 +227,7 @@ class CreatureBuilderViewModel: ObservableObject {
                 )
                 if ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder") {
                     automatedGenerationID = response.generationId
+                    currentTab = .making
                 }
                 
                 clearSelections()

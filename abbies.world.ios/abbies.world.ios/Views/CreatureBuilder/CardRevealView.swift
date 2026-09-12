@@ -58,27 +58,43 @@ struct CardRevealView: View {
             withAnimation(.easeInOut(duration: 1).repeatForever(autoreverses: true)) {
                 sparkleOpacity = 1
             }
+            if ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder") {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+                    flipCard()
+                }
+            }
         }
     }
     
     private var backgroundGradient: some View {
-        LinearGradient(
-            colors: [
-                Color(red: 0.1, green: 0.05, blue: 0.2),
-                Color(red: 0.05, green: 0.1, blue: 0.15)
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .ignoresSafeArea()
+        ZStack {
+            Image("creature_builder_workshop_background")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+
+            LinearGradient(
+                colors: [
+                    Color.indigo.opacity(0.62),
+                    Color(red: 0.04, green: 0.02, blue: 0.12).opacity(0.9)
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+        }
     }
     
     private var celebrationHeader: some View {
         VStack(spacing: 8) {
-            Text("✨ NEW CREATURE! ✨")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.yellow)
+            HStack(spacing: 10) {
+                CreatureLabSparkle(color: .yellow, size: 16)
+                Text("NEW CREATURE!")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                    .foregroundColor(.yellow)
+                CreatureLabSparkle(color: .yellow, size: 16)
+            }
             
             Text(card.name.uppercased())
                 .font(.title)
@@ -109,36 +125,11 @@ struct CardRevealView: View {
     }
     
     private var cardBack: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20)
-                .fill(
-                    LinearGradient(
-                        colors: [.purple, .indigo],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-            
-            VStack(spacing: 16) {
-                Text("?")
-                    .font(.system(size: 100, weight: .bold))
-                    .foregroundColor(.white.opacity(0.5))
-                
-                HStack(spacing: 8) {
-                    Text(CreatureBuilderContent.creature(for: card.creatureId)?.displayIcon ?? "")
-                    Text("+")
-                        .foregroundColor(.white.opacity(0.5))
-                    Text(CreatureBuilderContent.outfit(for: card.outfitId)?.displayIcon ?? "")
-                    Text("+")
-                        .foregroundColor(.white.opacity(0.5))
-                    Text(CreatureBuilderContent.buddy(for: card.buddyId)?.displayIcon ?? "")
-                }
-                .font(.title)
-            }
-            
-            RoundedRectangle(cornerRadius: 20)
-                .stroke(Color.yellow.opacity(0.5), lineWidth: 4)
-        }
+        CreatureLabCardBack(
+            creature: CreatureBuilderContent.creature(for: card.creatureId),
+            outfit: CreatureBuilderContent.outfit(for: card.outfitId),
+            buddy: CreatureBuilderContent.buddy(for: card.buddyId)
+        )
     }
     
     private var cardFront: some View {
@@ -189,9 +180,11 @@ struct CelebrationParticles: View {
     var body: some View {
         GeometryReader { geometry in
             ForEach(particles) { particle in
-                Text(particle.emoji)
-                    .font(.system(size: particle.size))
-                    .position(particle.position)
+                CreatureLabSparkle(color: particle.color, size: particle.size)
+                    .position(
+                        x: particle.position.x * geometry.size.width,
+                        y: particle.position.y * geometry.size.height
+                    )
                     .opacity(particle.opacity)
             }
         }
@@ -201,17 +194,17 @@ struct CelebrationParticles: View {
     }
     
     private func createParticles() {
-        let emojis = ["✨", "⭐", "🌟", "💫", "🎉", "🎊"]
+        let colors: [Color] = [.yellow, .cyan, .pink, .mint, .orange]
         
         for i in 0..<20 {
             let particle = Particle(
                 id: i,
-                emoji: emojis.randomElement()!,
+                color: colors.randomElement()!,
                 position: CGPoint(
-                    x: CGFloat.random(in: 50...350),
-                    y: CGFloat.random(in: 100...700)
+                    x: CGFloat.random(in: 0.08...0.92),
+                    y: CGFloat.random(in: 0.12...0.88)
                 ),
-                size: CGFloat.random(in: 20...40),
+                size: CGFloat.random(in: 12...28),
                 opacity: 1.0
             )
             particles.append(particle)
@@ -219,7 +212,7 @@ struct CelebrationParticles: View {
         
         withAnimation(.easeOut(duration: 2)) {
             for i in particles.indices {
-                particles[i].position.y -= 100
+                particles[i].position.y -= 0.15
                 particles[i].opacity = 0
             }
         }
@@ -228,7 +221,7 @@ struct CelebrationParticles: View {
 
 struct Particle: Identifiable {
     let id: Int
-    let emoji: String
+    let color: Color
     var position: CGPoint
     let size: CGFloat
     var opacity: Double

@@ -34,15 +34,14 @@ struct CardDetailView: View {
     }
     
     private var backgroundGradient: some View {
-        LinearGradient(
-            colors: [
-                Color(red: 0.15, green: 0.1, blue: 0.3),
-                Color(red: 0.1, green: 0.15, blue: 0.25)
-            ],
-            startPoint: .topLeading,
-            endPoint: .bottomTrailing
-        )
-        .ignoresSafeArea()
+        ZStack {
+            Image("creature_builder_workshop_background")
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+            Color.indigo.opacity(0.72)
+                .ignoresSafeArea()
+        }
     }
     
     private var header: some View {
@@ -50,20 +49,22 @@ struct CardDetailView: View {
             Button {
                 dismiss()
             } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.title2)
-                    .foregroundColor(.white.opacity(0.7))
+                CreatureLabGlyph(symbol: "xmark", tint: .indigo, size: 38)
             }
+            .accessibilityLabel("Close card")
             
             Spacer()
             
             Button {
                 onFavorite()
             } label: {
-                Image(systemName: card.isFavorite ? "heart.fill" : "heart")
-                    .font(.title2)
-                    .foregroundColor(card.isFavorite ? .pink : .white.opacity(0.7))
+                CreatureLabGlyph(
+                    symbol: card.isFavorite ? "heart.fill" : "heart",
+                    tint: card.isFavorite ? .pink : .purple,
+                    size: 38
+                )
             }
+            .accessibilityLabel(card.isFavorite ? "Remove favorite" : "Favorite card")
         }
     }
     
@@ -76,24 +77,27 @@ struct CardDetailView: View {
         VStack(spacing: 12) {
             HStack(spacing: 24) {
                 ingredientDetail(
-                    icon: CreatureBuilderContent.creature(for: card.creatureId)?.displayIcon ?? "?",
-                    label: CreatureBuilderContent.creature(for: card.creatureId)?.name ?? "Unknown"
+                    ingredient: CreatureBuilderContent.creature(for: card.creatureId),
+                    label: CreatureBuilderContent.creature(for: card.creatureId)?.name ?? "Unknown",
+                    accent: .purple
                 )
                 
                 ingredientDetail(
-                    icon: CreatureBuilderContent.outfit(for: card.outfitId)?.displayIcon ?? "?",
-                    label: CreatureBuilderContent.outfit(for: card.outfitId)?.name ?? "Unknown"
+                    ingredient: CreatureBuilderContent.outfit(for: card.outfitId),
+                    label: CreatureBuilderContent.outfit(for: card.outfitId)?.name ?? "Unknown",
+                    accent: .orange
                 )
                 
                 ingredientDetail(
-                    icon: CreatureBuilderContent.buddy(for: card.buddyId)?.displayIcon ?? "?",
-                    label: CreatureBuilderContent.buddy(for: card.buddyId)?.name ?? "Unknown"
+                    ingredient: CreatureBuilderContent.buddy(for: card.buddyId),
+                    label: CreatureBuilderContent.buddy(for: card.buddyId)?.name ?? "Unknown",
+                    accent: .green
                 )
             }
             
             if let power = card.powerName {
-                HStack {
-                    Text("⚡")
+                HStack(spacing: 8) {
+                    CreatureLabGlyph(symbol: "bolt.fill", tint: .orange, size: 30)
                     Text("Power: \(power)")
                         .font(.subheadline)
                         .foregroundColor(.yellow)
@@ -109,10 +113,17 @@ struct CardDetailView: View {
         .clipShape(RoundedRectangle(cornerRadius: 16))
     }
     
-    private func ingredientDetail(icon: String, label: String) -> some View {
+    private func ingredientDetail(
+        ingredient: CreatureIngredient?,
+        label: String,
+        accent: Color
+    ) -> some View {
         VStack(spacing: 4) {
-            Text(icon)
-                .font(.title2)
+            IngredientArtworkChip(
+                ingredient: ingredient,
+                size: 44,
+                accent: accent
+            )
             Text(label)
                 .font(.caption2)
                 .foregroundColor(.white.opacity(0.7))
@@ -124,7 +135,8 @@ struct CardDetailView: View {
             onMakeAnother()
         } label: {
             HStack {
-                Text("🔄")
+                Image(systemName: "arrow.clockwise")
+                    .font(.headline.weight(.bold))
                 Text("Make Another Like This")
                     .fontWeight(.medium)
             }
@@ -186,11 +198,22 @@ struct CreatureCardView: View {
                     .multilineTextAlignment(.center)
                 
                 HStack(spacing: 4) {
-                    Text(CreatureBuilderContent.creature(for: card.creatureId)?.displayIcon ?? "")
-                    Text(CreatureBuilderContent.outfit(for: card.outfitId)?.displayIcon ?? "")
-                    Text(CreatureBuilderContent.buddy(for: card.buddyId)?.displayIcon ?? "")
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.creature(for: card.creatureId),
+                        size: 28,
+                        accent: .purple
+                    )
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.outfit(for: card.outfitId),
+                        size: 28,
+                        accent: .orange
+                    )
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.buddy(for: card.buddyId),
+                        size: 28,
+                        accent: .green
+                    )
                 }
-                .font(.title3)
                 
                 Text("\"\(card.personality)\"")
                     .font(.caption)
@@ -226,39 +249,40 @@ struct CreatureCardView: View {
     
     private var mockCreatureImage: some View {
         ZStack {
+            if let creature = CreatureBuilderContent.creature(for: card.creatureId) {
+                Image(creature.artworkName)
+                    .resizable()
+                    .scaledToFill()
+                    .scaleEffect(1.08)
+            } else {
+                Image("creature_builder_workshop_background")
+                    .resizable()
+                    .scaledToFill()
+            }
+
             LinearGradient(
-                colors: creatureGradient,
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
+                colors: [.clear, Color.indigo.opacity(0.78)],
+                startPoint: .top,
+                endPoint: .bottom
             )
-            
-            VStack(spacing: 12) {
-                HStack(spacing: 8) {
-                    Text(CreatureBuilderContent.creature(for: card.creatureId)?.displayIcon ?? "🌟")
-                        .font(.system(size: 60))
-                    Text(CreatureBuilderContent.buddy(for: card.buddyId)?.displayIcon ?? "")
-                        .font(.system(size: 36))
-                        .offset(x: -10, y: 20)
+
+            VStack {
+                Spacer()
+                HStack(spacing: 10) {
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.outfit(for: card.outfitId),
+                        size: 58,
+                        accent: .orange
+                    )
+                    IngredientArtworkChip(
+                        ingredient: CreatureBuilderContent.buddy(for: card.buddyId),
+                        size: 58,
+                        accent: .green
+                    )
                 }
-                
-                Text(CreatureBuilderContent.outfit(for: card.outfitId)?.displayIcon ?? "⚡")
-                    .font(.system(size: 40))
+                .padding(.bottom, 18)
             }
         }
-    }
-    
-    private var creatureGradient: [Color] {
-        let buddyColors: [String: [Color]] = [
-            "bat": [Color(red: 0.2, green: 0.1, blue: 0.3), Color(red: 0.3, green: 0.2, blue: 0.4)],
-            "cheetah": [Color(red: 0.9, green: 0.7, blue: 0.3), Color(red: 1.0, green: 0.5, blue: 0.2)],
-            "puppy": [Color(red: 0.9, green: 0.7, blue: 0.5), Color(red: 1.0, green: 0.8, blue: 0.6)],
-            "owl": [Color(red: 0.3, green: 0.3, blue: 0.5), Color(red: 0.4, green: 0.4, blue: 0.6)],
-            "unicorn": [Color(red: 0.9, green: 0.7, blue: 0.9), Color(red: 0.8, green: 0.6, blue: 1.0)],
-            "peacock": [Color(red: 0.2, green: 0.5, blue: 0.6), Color(red: 0.1, green: 0.6, blue: 0.7)],
-            "frog": [Color(red: 0.4, green: 0.7, blue: 0.4), Color(red: 0.3, green: 0.8, blue: 0.3)],
-            "fox": [Color(red: 0.9, green: 0.5, blue: 0.2), Color(red: 1.0, green: 0.4, blue: 0.1)]
-        ]
-        return buddyColors[card.buddyId] ?? [Color.purple, Color.indigo]
     }
 }
 

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import SwiftUI
 
 // MARK: - Ingredient Types
 
@@ -20,15 +19,9 @@ struct CreatureIngredient: Identifiable, Codable, Hashable {
     let id: String
     let type: IngredientType
     let name: String
-    let icon: String?
-    let iconEmoji: String?
     let promptDefinition: String?
     let powerConcept: String?
     let personality: [String]?
-    
-    var displayIcon: String {
-        iconEmoji ?? "✨"
-    }
 
     var artworkName: String {
         "creature_builder_\(type.rawValue)_\(id.replacingOccurrences(of: "-", with: "_"))"
@@ -157,36 +150,36 @@ struct ServerError: Codable {
 
 struct CreatureBuilderContent {
     static let creatures: [CreatureIngredient] = [
-        CreatureIngredient(id: "abbie", type: .creature, name: "Abbie", icon: nil, iconEmoji: "👧", promptDefinition: "a cheerful young girl with bright curious eyes", powerConcept: nil, personality: nil),
-        CreatureIngredient(id: "dragon", type: .creature, name: "Dragon", icon: nil, iconEmoji: "🐉", promptDefinition: "a powerful but friendly dragon with expressive eyes", powerConcept: nil, personality: nil),
-        CreatureIngredient(id: "robot", type: .creature, name: "Robot", icon: nil, iconEmoji: "🤖", promptDefinition: "a cute robot with glowing eyes and friendly demeanor", powerConcept: nil, personality: nil),
-        CreatureIngredient(id: "bunny", type: .creature, name: "Bunny", icon: nil, iconEmoji: "🐰", promptDefinition: "an adorable bunny with soft fur and big ears", powerConcept: nil, personality: nil),
-        CreatureIngredient(id: "cat", type: .creature, name: "Cat", icon: nil, iconEmoji: "🐱", promptDefinition: "a playful cat with bright eyes and fluffy tail", powerConcept: nil, personality: nil),
-        CreatureIngredient(id: "dinosaur", type: .creature, name: "Dinosaur", icon: nil, iconEmoji: "🦖", promptDefinition: "a friendly dinosaur with a big smile", powerConcept: nil, personality: nil),
-        CreatureIngredient(id: "alien", type: .creature, name: "Alien", icon: nil, iconEmoji: "👽", promptDefinition: "a cute alien with big eyes and antennae", powerConcept: nil, personality: nil),
-        CreatureIngredient(id: "monster", type: .creature, name: "Monster", icon: nil, iconEmoji: "👾", promptDefinition: "a silly friendly monster with a goofy grin", powerConcept: nil, personality: nil)
+        CreatureIngredient(id: "abbie", type: .creature, name: "Abbie", promptDefinition: "a cheerful young girl with bright curious eyes", powerConcept: nil, personality: nil),
+        CreatureIngredient(id: "dragon", type: .creature, name: "Dragon", promptDefinition: "a powerful but friendly dragon with expressive eyes", powerConcept: nil, personality: nil),
+        CreatureIngredient(id: "robot", type: .creature, name: "Robot", promptDefinition: "a cute robot with glowing eyes and friendly demeanor", powerConcept: nil, personality: nil),
+        CreatureIngredient(id: "bunny", type: .creature, name: "Bunny", promptDefinition: "an adorable bunny with soft fur and big ears", powerConcept: nil, personality: nil),
+        CreatureIngredient(id: "cat", type: .creature, name: "Cat", promptDefinition: "a playful cat with bright eyes and fluffy tail", powerConcept: nil, personality: nil),
+        CreatureIngredient(id: "dinosaur", type: .creature, name: "Dinosaur", promptDefinition: "a friendly dinosaur with a big smile", powerConcept: nil, personality: nil),
+        CreatureIngredient(id: "alien", type: .creature, name: "Alien", promptDefinition: "a cute alien with big eyes and antennae", powerConcept: nil, personality: nil),
+        CreatureIngredient(id: "monster", type: .creature, name: "Monster", promptDefinition: "a silly friendly monster with a goofy grin", powerConcept: nil, personality: nil)
     ]
     
     static let outfits: [CreatureIngredient] = [
-        CreatureIngredient(id: "lightning-racer", type: .outfit, name: "Lightning Racer", icon: nil, iconEmoji: "⚡", promptDefinition: "wearing a sleek racing uniform crackling with electricity", powerConcept: "extreme speed and electrical energy", personality: nil),
-        CreatureIngredient(id: "astronaut", type: .outfit, name: "Astronaut", icon: nil, iconEmoji: "🚀", promptDefinition: "wearing a space suit with helmet and cosmic gear", powerConcept: "space exploration and zero gravity", personality: nil),
-        CreatureIngredient(id: "ninja", type: .outfit, name: "Ninja", icon: nil, iconEmoji: "🥷", promptDefinition: "wearing stealthy ninja outfit with mask", powerConcept: "stealth, agility, and shadow powers", personality: nil),
-        CreatureIngredient(id: "wizard", type: .outfit, name: "Wizard", icon: nil, iconEmoji: "🧙", promptDefinition: "wearing a magical robe with wizard hat and staff", powerConcept: "magic spells and mystical powers", personality: nil),
-        CreatureIngredient(id: "knight", type: .outfit, name: "Knight", icon: nil, iconEmoji: "⚔️", promptDefinition: "wearing shining armor with sword and shield", powerConcept: "bravery, protection, and honor", personality: nil),
-        CreatureIngredient(id: "firefighter", type: .outfit, name: "Firefighter", icon: nil, iconEmoji: "🚒", promptDefinition: "wearing firefighter gear with helmet and coat", powerConcept: "fire resistance and rescue abilities", personality: nil),
-        CreatureIngredient(id: "superhero", type: .outfit, name: "Superhero", icon: nil, iconEmoji: "🦸", promptDefinition: "wearing a colorful superhero costume with cape", powerConcept: "super strength and flying", personality: nil),
-        CreatureIngredient(id: "pirate", type: .outfit, name: "Pirate", icon: nil, iconEmoji: "🏴‍☠️", promptDefinition: "wearing pirate outfit with hat and eyepatch", powerConcept: "treasure hunting and sea adventures", personality: nil)
+        CreatureIngredient(id: "lightning-racer", type: .outfit, name: "Lightning Racer", promptDefinition: "wearing a sleek racing uniform crackling with electricity", powerConcept: "extreme speed and electrical energy", personality: nil),
+        CreatureIngredient(id: "astronaut", type: .outfit, name: "Astronaut", promptDefinition: "wearing a space suit with helmet and cosmic gear", powerConcept: "space exploration and zero gravity", personality: nil),
+        CreatureIngredient(id: "ninja", type: .outfit, name: "Ninja", promptDefinition: "wearing stealthy ninja outfit with mask", powerConcept: "stealth, agility, and shadow powers", personality: nil),
+        CreatureIngredient(id: "wizard", type: .outfit, name: "Wizard", promptDefinition: "wearing a magical robe with wizard hat and staff", powerConcept: "magic spells and mystical powers", personality: nil),
+        CreatureIngredient(id: "knight", type: .outfit, name: "Knight", promptDefinition: "wearing shining armor with sword and shield", powerConcept: "bravery, protection, and honor", personality: nil),
+        CreatureIngredient(id: "firefighter", type: .outfit, name: "Firefighter", promptDefinition: "wearing firefighter gear with helmet and coat", powerConcept: "fire resistance and rescue abilities", personality: nil),
+        CreatureIngredient(id: "superhero", type: .outfit, name: "Superhero", promptDefinition: "wearing a colorful superhero costume with cape", powerConcept: "super strength and flying", personality: nil),
+        CreatureIngredient(id: "pirate", type: .outfit, name: "Pirate", promptDefinition: "wearing pirate outfit with hat and eyepatch", powerConcept: "treasure hunting and sea adventures", personality: nil)
     ]
     
     static let buddies: [CreatureIngredient] = [
-        CreatureIngredient(id: "bat", type: .buddy, name: "Bat", icon: nil, iconEmoji: "🦇", promptDefinition: "with a tiny bat companion", powerConcept: nil, personality: ["spooky", "mischievous", "gothic", "nocturnal"]),
-        CreatureIngredient(id: "cheetah", type: .buddy, name: "Cheetah", icon: nil, iconEmoji: "🐆", promptDefinition: "with a small cheetah cub companion", powerConcept: nil, personality: ["fast", "competitive", "energetic", "athletic", "confident"]),
-        CreatureIngredient(id: "puppy", type: .buddy, name: "Puppy", icon: nil, iconEmoji: "🐕", promptDefinition: "with an adorable puppy companion", powerConcept: nil, personality: ["happy", "loyal", "playful", "friendly"]),
-        CreatureIngredient(id: "owl", type: .buddy, name: "Owl", icon: nil, iconEmoji: "🦉", promptDefinition: "with a wise owl companion", powerConcept: nil, personality: ["clever", "mysterious", "calm", "magical"]),
-        CreatureIngredient(id: "unicorn", type: .buddy, name: "Unicorn", icon: nil, iconEmoji: "🦄", promptDefinition: "with a magical unicorn companion", powerConcept: nil, personality: ["magical", "graceful", "pure", "dreamy"]),
-        CreatureIngredient(id: "peacock", type: .buddy, name: "Peacock", icon: nil, iconEmoji: "🦚", promptDefinition: "with a colorful peacock companion", powerConcept: nil, personality: ["dramatic", "proud", "colorful", "glamorous"]),
-        CreatureIngredient(id: "frog", type: .buddy, name: "Frog", icon: nil, iconEmoji: "🐸", promptDefinition: "with a cheerful frog companion", powerConcept: nil, personality: ["bouncy", "silly", "nature-loving", "adventurous"]),
-        CreatureIngredient(id: "fox", type: .buddy, name: "Fox", icon: nil, iconEmoji: "🦊", promptDefinition: "with a clever fox companion", powerConcept: nil, personality: ["clever", "cunning", "curious", "playful"])
+        CreatureIngredient(id: "bat", type: .buddy, name: "Bat", promptDefinition: "with a tiny bat companion", powerConcept: nil, personality: ["spooky", "mischievous", "gothic", "nocturnal"]),
+        CreatureIngredient(id: "cheetah", type: .buddy, name: "Cheetah", promptDefinition: "with a small cheetah cub companion", powerConcept: nil, personality: ["fast", "competitive", "energetic", "athletic", "confident"]),
+        CreatureIngredient(id: "puppy", type: .buddy, name: "Puppy", promptDefinition: "with an adorable puppy companion", powerConcept: nil, personality: ["happy", "loyal", "playful", "friendly"]),
+        CreatureIngredient(id: "owl", type: .buddy, name: "Owl", promptDefinition: "with a wise owl companion", powerConcept: nil, personality: ["clever", "mysterious", "calm", "magical"]),
+        CreatureIngredient(id: "unicorn", type: .buddy, name: "Unicorn", promptDefinition: "with a magical unicorn companion", powerConcept: nil, personality: ["magical", "graceful", "pure", "dreamy"]),
+        CreatureIngredient(id: "peacock", type: .buddy, name: "Peacock", promptDefinition: "with a colorful peacock companion", powerConcept: nil, personality: ["dramatic", "proud", "colorful", "glamorous"]),
+        CreatureIngredient(id: "frog", type: .buddy, name: "Frog", promptDefinition: "with a cheerful frog companion", powerConcept: nil, personality: ["bouncy", "silly", "nature-loving", "adventurous"]),
+        CreatureIngredient(id: "fox", type: .buddy, name: "Fox", promptDefinition: "with a clever fox companion", powerConcept: nil, personality: ["clever", "cunning", "curious", "playful"])
     ]
     
     static func creature(for id: String) -> CreatureIngredient? {

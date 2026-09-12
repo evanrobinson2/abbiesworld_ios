@@ -75,18 +75,21 @@ struct CreatureBuilderView: View {
             Button {
                 dismiss()
             } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.title)
-                    .foregroundColor(.white.opacity(0.7))
+                CreatureLabGlyph(symbol: "xmark", tint: .indigo, size: 38)
             }
+            .accessibilityLabel("Close Creature Lab")
             
             Spacer()
             
             VStack(spacing: 2) {
-                Text("✨ Creature Lab ✨")
-                    .font(.title2)
-                    .fontWeight(.bold)
-                    .foregroundColor(.white)
+                HStack(spacing: 10) {
+                    CreatureLabSparkle(color: .yellow, size: 14)
+                    Text("Creature Lab")
+                        .font(.title2)
+                        .fontWeight(.bold)
+                        .foregroundColor(.white)
+                    CreatureLabSparkle(color: .yellow, size: 14)
+                }
 
                 Text(audioService.currentTrackTitle)
                     .font(.caption)
@@ -146,7 +149,9 @@ struct CreatureBuilderView: View {
             }
         }
         .padding(.horizontal)
+        .padding(.top, 8)
         .padding(.bottom, 8)
+        .background(.black.opacity(0.28))
     }
     
     private func tabButton(_ tab: CreatureBuilderTab) -> some View {
@@ -157,8 +162,9 @@ struct CreatureBuilderView: View {
         } label: {
             VStack(spacing: 4) {
                 ZStack(alignment: .topTrailing) {
-                    Text(tabIcon(tab))
-                        .font(.title2)
+                    Image(systemName: tabSymbol(tab))
+                        .font(.system(size: 21, weight: .bold))
+                        .symbolRenderingMode(.hierarchical)
                     
                     if tab == .making, let badge = viewModel.makingBadge {
                         Text(badge)
@@ -187,13 +193,14 @@ struct CreatureBuilderView: View {
             )
             .clipShape(RoundedRectangle(cornerRadius: 12))
         }
+        .frame(maxWidth: .infinity)
     }
     
-    private func tabIcon(_ tab: CreatureBuilderTab) -> String {
+    private func tabSymbol(_ tab: CreatureBuilderTab) -> String {
         switch tab {
-        case .build: return "🔮"
-        case .making: return "✨"
-        case .myCards: return "🃏"
+        case .build: return "slider.horizontal.3"
+        case .making: return "gearshape.2.fill"
+        case .myCards: return "rectangle.stack.fill"
         }
     }
 }
@@ -251,24 +258,19 @@ struct BuilderView: View {
                 if let creature = viewModel.selectedCreature {
                     CreatureTile(ingredient: creature, isSelected: false, size: 70)
                 }
-                Text("+")
-                    .font(.title)
-                    .foregroundColor(.white.opacity(0.5))
+                recipeConnector
                 if let outfit = viewModel.selectedOutfit {
                     OutfitTile(ingredient: outfit, isSelected: false, size: 70)
                 }
-                Text("+")
-                    .font(.title)
-                    .foregroundColor(.white.opacity(0.5))
+                recipeConnector
                 if let buddy = viewModel.selectedBuddy {
                     BuddyTile(ingredient: buddy, isSelected: false, size: 70)
                 }
+                Image(systemName: "equal")
+                    .font(.headline)
+                    .foregroundStyle(.white.opacity(0.65))
+                mysteryOutput
             }
-            
-            Text("= ???")
-                .font(.title2)
-                .fontWeight(.bold)
-                .foregroundColor(.yellow)
         }
         .padding()
         .background(Color.white.opacity(0.1))
@@ -285,15 +287,14 @@ struct BuilderView: View {
                     ProgressView()
                         .tint(.white)
                 } else {
-                    Text("✨")
-                        .font(.title)
+                    CreatureLabSparkle(color: .yellow, size: 20)
                 }
                 Text(viewModel.isCreating ? "MAKING..." : "MAKE IT!")
                     .font(.title2)
                     .fontWeight(.bold)
                 if !viewModel.isCreating {
-                    Text("✨")
-                        .font(.title)
+                    Image(systemName: "wand.and.stars")
+                        .font(.title2.weight(.bold))
                 }
             }
             .foregroundColor(.white)
@@ -315,7 +316,7 @@ struct BuilderView: View {
     
     private var queueFullMessage: some View {
         HStack {
-            Text("⏳")
+            CreatureLabGlyph(symbol: "clock.fill", tint: .orange, size: 32)
             Text("The creature machine is very busy! Try again soon.")
                 .font(.subheadline)
         }
@@ -328,7 +329,11 @@ struct BuilderView: View {
     
     private func errorMessage(_ message: String) -> some View {
         HStack {
-            Text("😢")
+            CreatureLabGlyph(
+                symbol: "exclamationmark.triangle.fill",
+                tint: .red,
+                size: 32
+            )
             Text(message)
                 .font(.subheadline)
         }
@@ -337,6 +342,34 @@ struct BuilderView: View {
         .background(Color.red.opacity(0.2))
         .clipShape(RoundedRectangle(cornerRadius: 12))
         .padding(.horizontal)
+    }
+
+    private var recipeConnector: some View {
+        Image(systemName: "plus")
+            .font(.caption.weight(.black))
+            .foregroundStyle(.white)
+            .frame(width: 22, height: 22)
+            .background(.white.opacity(0.18), in: Circle())
+            .accessibilityHidden(true)
+    }
+
+    private var mysteryOutput: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 14)
+                .fill(
+                    LinearGradient(
+                        colors: [.indigo, .purple],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+            CreatureLabSparkle(color: .yellow, size: 28)
+            RoundedRectangle(cornerRadius: 14)
+                .stroke(.yellow.opacity(0.75), lineWidth: 3)
+        }
+        .frame(width: 58, height: 70)
+        .shadow(color: .purple.opacity(0.6), radius: 7, y: 3)
+        .accessibilityLabel("Mystery creature result")
     }
 }
 

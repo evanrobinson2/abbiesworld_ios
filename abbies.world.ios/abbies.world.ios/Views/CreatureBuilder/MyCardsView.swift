@@ -76,15 +76,31 @@ struct MyCardsView: View {
         VStack(spacing: 16) {
             Spacer()
             
-            Text("🃏")
-                .font(.system(size: 60))
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.indigo.opacity(0.75))
+                    .frame(width: 58, height: 76)
+                    .rotationEffect(.degrees(-12))
+                    .offset(x: -18)
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.purple.gradient)
+                    .frame(width: 58, height: 76)
+                    .rotationEffect(.degrees(10))
+                    .offset(x: 18)
+                CreatureLabSparkle(color: .yellow, size: 26)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: 18)
+                    .stroke(.white.opacity(0.18), lineWidth: 1)
+                    .frame(width: 112, height: 92)
+            }
             
             if showFavoritesOnly {
                 Text("No favorites yet")
                     .font(.headline)
                     .foregroundColor(.white.opacity(0.7))
                 
-                Text("Tap ❤️ on a card to add it!")
+                Text("Tap the heart on a card to add it!")
                     .font(.subheadline)
                     .foregroundColor(.white.opacity(0.5))
             } else {
@@ -163,11 +179,22 @@ struct CardThumbnail: View {
                         .lineLimit(1)
                     
                     HStack(spacing: 2) {
-                        Text(CreatureBuilderContent.creature(for: card.creatureId)?.displayIcon ?? "")
-                        Text(CreatureBuilderContent.outfit(for: card.outfitId)?.displayIcon ?? "")
-                        Text(CreatureBuilderContent.buddy(for: card.buddyId)?.displayIcon ?? "")
+                        IngredientArtworkChip(
+                            ingredient: CreatureBuilderContent.creature(for: card.creatureId),
+                            size: 22,
+                            accent: .purple
+                        )
+                        IngredientArtworkChip(
+                            ingredient: CreatureBuilderContent.outfit(for: card.outfitId),
+                            size: 22,
+                            accent: .orange
+                        )
+                        IngredientArtworkChip(
+                            ingredient: CreatureBuilderContent.buddy(for: card.buddyId),
+                            size: 22,
+                            accent: .green
+                        )
                     }
-                    .font(.caption2)
                 }
                 .padding(.vertical, 8)
                 .frame(maxWidth: .infinity)
@@ -183,9 +210,17 @@ struct CardThumbnail: View {
     
     private var placeholderImage: some View {
         ZStack {
-            Color.purple.opacity(0.3)
-            Text("🎨")
-                .font(.largeTitle)
+            if let creature = CreatureBuilderContent.creature(for: card.creatureId) {
+                Image(creature.artworkName)
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                Image("creature_builder_workshop_background")
+                    .resizable()
+                    .scaledToFill()
+            }
+            Color.indigo.opacity(0.32)
+            CreatureLabGlyph(symbol: "photo", tint: .purple, size: 34)
         }
     }
 }

@@ -2,13 +2,160 @@
 //  IngredientTiles.swift
 //  abbies.world.ios
 //
-//  Visually distinct tile styles for each ingredient category.
-//  Creatures: Purple rounded squares with character
-//  Outfits: Orange hexagonal badges with power icon
-//  Buddies: Green circular badges with companion
+//  Reusable generated-art tiles and Creature Lab UI components.
 //
 
 import SwiftUI
+
+// MARK: - Creature Lab UI Language
+
+struct CreatureLabGlyph: View {
+    let symbol: String
+    let tint: Color
+    var size: CGFloat = 34
+
+    var body: some View {
+        Image(systemName: symbol)
+            .font(.system(size: size * 0.46, weight: .bold, design: .rounded))
+            .symbolRenderingMode(.palette)
+            .foregroundStyle(.white, tint)
+            .frame(width: size, height: size)
+            .background(
+                Circle()
+                    .fill(tint.gradient)
+                    .shadow(color: tint.opacity(0.55), radius: 5, y: 2)
+            )
+            .overlay {
+                Circle()
+                    .stroke(.white.opacity(0.65), lineWidth: 1.5)
+            }
+            .accessibilityHidden(true)
+    }
+}
+
+struct IngredientArtworkChip: View {
+    let ingredient: CreatureIngredient?
+    let size: CGFloat
+    var accent: Color = .purple
+
+    var body: some View {
+        Group {
+            if let ingredient {
+                Image(ingredient.artworkName)
+                    .resizable()
+                    .scaledToFill()
+            } else {
+                ZStack {
+                    accent.opacity(0.25)
+                    Image(systemName: "questionmark")
+                        .font(.system(size: size * 0.4, weight: .heavy, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.75))
+                }
+            }
+        }
+        .frame(width: size, height: size)
+        .clipShape(RoundedRectangle(cornerRadius: size * 0.22))
+        .overlay {
+            RoundedRectangle(cornerRadius: size * 0.22)
+                .stroke(.white.opacity(0.65), lineWidth: max(1.5, size * 0.035))
+        }
+        .shadow(color: accent.opacity(0.4), radius: size * 0.08, y: 2)
+        .accessibilityHidden(true)
+    }
+}
+
+struct CreatureLabSparkle: View {
+    let color: Color
+    var size: CGFloat = 18
+
+    var body: some View {
+        Image(systemName: "sparkle")
+            .font(.system(size: size, weight: .black))
+            .symbolRenderingMode(.monochrome)
+        .foregroundStyle(color)
+        .shadow(color: color.opacity(0.8), radius: size * 0.18)
+        .frame(width: size, height: size)
+        .accessibilityHidden(true)
+    }
+}
+
+struct CreatureLabCardBack: View {
+    let creature: CreatureIngredient?
+    let outfit: CreatureIngredient?
+    let buddy: CreatureIngredient?
+
+    var body: some View {
+        GeometryReader { geometry in
+            let chipSize = min(max(geometry.size.width * 0.18, 24), 48)
+
+            ZStack {
+                Image("creature_builder_workshop_background")
+                    .resizable()
+                    .scaledToFill()
+                    .opacity(0.35)
+
+                LinearGradient(
+                    colors: [
+                        Color.indigo.opacity(0.72),
+                        Color.purple.opacity(0.88)
+                    ],
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+
+                VStack(spacing: max(8, geometry.size.height * 0.04)) {
+                    CreatureLabSparkle(
+                        color: .yellow,
+                        size: min(geometry.size.width * 0.18, 42)
+                    )
+
+                    HStack(spacing: max(4, geometry.size.width * 0.025)) {
+                        IngredientArtworkChip(
+                            ingredient: creature,
+                            size: chipSize,
+                            accent: .purple
+                        )
+                        IngredientArtworkChip(
+                            ingredient: outfit,
+                            size: chipSize,
+                            accent: .orange
+                        )
+                        IngredientArtworkChip(
+                            ingredient: buddy,
+                            size: chipSize,
+                            accent: .green
+                        )
+                    }
+
+                    Text("CREATURE LAB")
+                        .font(
+                            .system(
+                                size: min(max(geometry.size.width * 0.07, 10), 20),
+                                weight: .black,
+                                design: .rounded
+                            )
+                        )
+                        .tracking(1.2)
+                        .foregroundStyle(.white)
+                }
+                .padding()
+            }
+            .clipShape(RoundedRectangle(cornerRadius: geometry.size.width * 0.08))
+            .overlay {
+                RoundedRectangle(cornerRadius: geometry.size.width * 0.08)
+                    .stroke(
+                        LinearGradient(
+                            colors: [.yellow, .orange.opacity(0.7)],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing
+                        ),
+                        lineWidth: max(2, geometry.size.width * 0.018)
+                    )
+            }
+        }
+        .accessibilityLabel("Creature Lab mystery card")
+    }
+}
 
 // MARK: - Consistent Board Tiles
 
@@ -106,42 +253,17 @@ struct BuddyTile: View {
     }
 }
 
-// Retained for older previews that still reference it.
-struct HexagonShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var path = Path()
-        let center = CGPoint(x: rect.midX, y: rect.midY)
-        let radius = min(rect.width, rect.height) / 2
-
-        for i in 0..<6 {
-            let angle = CGFloat(i) * .pi / 3 - .pi / 2
-            let point = CGPoint(
-                x: center.x + radius * cos(angle),
-                y: center.y + radius * sin(angle)
-            )
-            if i == 0 {
-                path.move(to: point)
-            } else {
-                path.addLine(to: point)
-            }
-        }
-        path.closeSubpath()
-        return path
-    }
-}
-
 // MARK: - Category Section Headers
 
 struct CategoryHeader: View {
     let title: String
     let subtitle: String
-    let icon: String
+    let symbol: String
     let color: Color
     
     var body: some View {
         HStack(spacing: 12) {
-            Text(icon)
-                .font(.title)
+            CreatureLabGlyph(symbol: symbol, tint: color, size: 38)
             
             VStack(alignment: .leading, spacing: 2) {
                 Text(title)
@@ -176,7 +298,7 @@ struct CreaturePicker: View {
             CategoryHeader(
                 title: "PICK A CREATURE",
                 subtitle: "Who is it?",
-                icon: "🌟",
+                symbol: "person.fill",
                 color: .purple
             )
             
@@ -212,7 +334,7 @@ struct OutfitPicker: View {
             CategoryHeader(
                 title: "PICK AN OUTFIT",
                 subtitle: "What powers?",
-                icon: "⚡",
+                symbol: "tshirt.fill",
                 color: .orange
             )
             
@@ -248,7 +370,7 @@ struct BuddyPicker: View {
             CategoryHeader(
                 title: "PICK A BUDDY",
                 subtitle: "What personality?",
-                icon: "💚",
+                symbol: "pawprint.fill",
                 color: .green
             )
             
