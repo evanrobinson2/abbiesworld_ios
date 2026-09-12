@@ -19,6 +19,7 @@ enum SSEEventType: String {
     case maintenance
     case fetchLogs = "fetch_logs"
     case toast
+    case mediaPacksUpdated = "media_packs_updated"
     case unknown
 }
 
@@ -303,6 +304,12 @@ class SSEService: ObservableObject {
         case .toast:
             // Toast is handled by MainViewModel via eventSubject
             break
+            
+        case .mediaPacksUpdated:
+            NotificationCenter.default.post(
+                name: NSNotification.Name("MediaPacksUpdated"),
+                object: nil
+            )
             
         case .unknown:
             print("⚠️ SSEService: Unknown event type")

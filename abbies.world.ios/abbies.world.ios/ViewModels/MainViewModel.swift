@@ -27,8 +27,8 @@ class MainViewModel: ObservableObject {
     private let apiClient = APIClient.shared
     private let sseService = SSEService.shared
     private let assetsService = AssetsService.shared
-    private var cancellables = Set<AnyCancellable>()
-    private var imageGenerationTask: Task<Void, Never>?
+    var cancellables = Set<AnyCancellable>()
+    var imageGenerationTask: Task<Void, Never>?
     
     // View mode - controls which layout is displayed
     @Published var viewMode: ViewMode = .default {
@@ -122,6 +122,8 @@ class MainViewModel: ObservableObject {
         }
 
         MusicService.shared.setMediaPack(mediaPack)
+        
+        setupServerPacksSupport()
     }
     
     // Computed property to check if all selections are ready
