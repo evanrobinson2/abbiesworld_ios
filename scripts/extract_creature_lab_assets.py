@@ -4,13 +4,12 @@
 from __future__ import annotations
 
 import argparse
-from collections import deque
 from hashlib import sha256
 import json
 from pathlib import Path
 import shutil
 
-from PIL import Image, ImageChops, ImageFilter
+from PIL import Image
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -24,12 +23,12 @@ CATALOG = (
 
 BOARD_SPECS = {
     "creatures": (
-        "creature-lab-creatures-board.png",
+        "creature-lab-creatures-2d-board.png",
         ("abbie", "dragon", "robot", "bunny", "cat", "dinosaur", "alien", "monster"),
         "creature",
     ),
     "outfits": (
-        "creature-lab-outfits-board.png",
+        "creature-lab-outfits-2d-board.png",
         (
             "lightning-racer",
             "astronaut",
@@ -43,7 +42,7 @@ BOARD_SPECS = {
         "outfit",
     ),
     "buddies": (
-        "creature-lab-buddies-board.png",
+        "creature-lab-buddies-2d-board.png",
         ("bat", "cheetah", "puppy", "owl", "unicorn", "peacock", "frog", "fox"),
         "buddy",
     ),
@@ -52,99 +51,6 @@ BOARD_SPECS = {
 
 def file_hash(path: Path) -> str:
     return sha256(path.read_bytes()).hexdigest()
-
-
-def isolate_subject(cell: Image.Image, output_size: int = 512) -> Image.Image:
-    rgb = cell.convert("RGB")
-    corners = [
-        rgb.getpixel((0, 0)),
-        rgb.getpixel((rgb.width - 1, 0)),
-        rgb.getpixel((0, rgb.height - 1)),
-        rgb.getpixel((rgb.width - 1, rgb.height - 1)),
-    ]
-    background = tuple(sum(pixel[channel] for pixel in corners) // 4 for channel in range(3))
-    flat_background = Image.new("RGB", rgb.size, background)
-    difference = ImageChops.difference(rgb, flat_background).convert("L")
-    alpha = difference.point(lambda value: max(0, min(255, (value - 5) * 10)))
-    alpha = alpha.filter(ImageFilter.GaussianBlur(radius=0.7))
-    border = max(2, min(alpha.size) // 80)
-    bordered_alpha = Image.new("L", alpha.size, 0)
-    bordered_alpha.paste(
-        alpha.crop((border, border, alpha.width - border, alpha.height - border)),
-        (border, border),
-    )
-    alpha = bordered_alpha
-    alpha = keep_primary_component(alpha)
-
-    foreground = rgb.convert("RGBA")
-    foreground.putalpha(alpha)
-    bounds = alpha.point(lambda value: 255 if value > 18 else 0).getbbox()
-    if not bounds:
-        raise RuntimeError("No foreground subject found in generated board cell")
-
-    subject = foreground.crop(bounds)
-    max_dimension = int(output_size * 0.90)
-    subject.thumbnail((max_dimension, max_dimension), Image.Resampling.LANCZOS)
-    output = Image.new("RGBA", (output_size, output_size), (0, 0, 0, 0))
-    output.alpha_composite(
-        subject,
-        ((output_size - subject.width) // 2, (output_size - subject.height) // 2),
-    )
-    return output
-
-
-def keep_primary_component(alpha: Image.Image) -> Image.Image:
-    """Remove neighboring sprites that cross an asset-board cell boundary."""
-    scale = 4
-    width = max(1, alpha.width // scale)
-    height = max(1, alpha.height // scale)
-    mask = (
-        alpha.resize((width, height), Image.Resampling.BILINEAR)
-        .point(lambda value: 255 if value > 24 else 0)
-        .filter(ImageFilter.MaxFilter(3))
-    )
-    pixels = mask.load()
-    visited = set()
-    components = []
-    center = (width / 2, height / 2)
-
-    for y in range(height):
-        for x in range(width):
-            if pixels[x, y] == 0 or (x, y) in visited:
-                continue
-            queue = deque([(x, y)])
-            visited.add((x, y))
-            component = []
-            while queue:
-                point = queue.popleft()
-                component.append(point)
-                px, py = point
-                for neighbor in ((px - 1, py), (px + 1, py), (px, py - 1), (px, py + 1)):
-                    nx, ny = neighbor
-                    if (
-                        0 <= nx < width
-                        and 0 <= ny < height
-                        and pixels[nx, ny] != 0
-                        and neighbor not in visited
-                    ):
-                        visited.add(neighbor)
-                        queue.append(neighbor)
-            mean_x = sum(point[0] for point in component) / len(component)
-            mean_y = sum(point[1] for point in component) / len(component)
-            distance = abs(mean_x - center[0]) + abs(mean_y - center[1])
-            score = len(component) / (1 + distance / max(width, height))
-            components.append((score, component))
-
-    if not components:
-        return alpha
-    selected = max(components, key=lambda item: item[0])[1]
-    component_mask = Image.new("L", (width, height), 0)
-    component_pixels = component_mask.load()
-    for x, y in selected:
-        component_pixels[x, y] = 255
-    component_mask = component_mask.filter(ImageFilter.MaxFilter(3))
-    component_mask = component_mask.resize(alpha.size, Image.Resampling.BILINEAR)
-    return ImageChops.multiply(alpha, component_mask)
 
 
 def write_imageset(name: str, image: Image.Image) -> Path:
@@ -173,13 +79,16 @@ def extract_board(source: Path, ids: tuple[str, ...], category: str) -> list[dic
     board = Image.open(source).convert("RGB")
     records = []
     for index, item_id in enumerate(ids):
-        column = index % 4
-        row = index // 4
-        left = round(column * board.width / 4)
-        right = round((column + 1) * board.width / 4)
-        top = round(row * board.height / 2)
-        bottom = round((row + 1) * board.height / 2)
-        tile = isolate_subject(board.crop((left, top, right, bottom)))
+        column = index % 3
+        row = index // 3
+        left = round(column * board.width / 3)
+        right = round((column + 1) * board.width / 3)
+        top = round(row * board.height / 3)
+        bottom = round((row + 1) * board.height / 3)
+        inset = max(2, round(min(right - left, bottom - top) * 0.012))
+        tile = board.crop(
+            (left + inset, top + inset, right - inset, bottom - inset)
+        ).resize((512, 512), Image.Resampling.LANCZOS)
         asset_name = f"creature_builder_{category}_{item_id.replace('-', '_')}"
         output = write_imageset(asset_name, tile)
         records.append(
@@ -227,7 +136,7 @@ def main() -> None:
         manifest["boards"][board_key] = {
             "source": str(retained_source.relative_to(ROOT)),
             "sourceSHA256": file_hash(retained_source),
-            "grid": {"columns": 4, "rows": 2},
+            "grid": {"columns": 3, "rows": 3, "usedTiles": 8},
             "assets": extract_board(retained_source, ids, category),
         }
 

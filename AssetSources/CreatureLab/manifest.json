@@ -11,150 +11,153 @@
         {
           "assetName": "creature_builder_buddy_bat",
           "id": "bat",
-          "sha256": "7744d42e20f2548b8f6a95e2b4af52a6ccdd1e0f29e964a6b4a3c1ee068cbe8b"
+          "sha256": "dd1e947ef2089e273dbd09d8d24f247f764f909e9eb8a1a26215b80602a89c4a"
         },
         {
           "assetName": "creature_builder_buddy_cheetah",
           "id": "cheetah",
-          "sha256": "692a0b062bf921e0449823753fc6cfabc681da5283048d4f84abd42d7ada6ae8"
+          "sha256": "68d767486bf697bf17f4a043c0b6fd341b6d4b0ba59b077a88bca05b2ac6b00d"
         },
         {
           "assetName": "creature_builder_buddy_puppy",
           "id": "puppy",
-          "sha256": "db53f7295b1602edecf4066acb48b890cb9d004e97ed2ef16819d16d34720092"
+          "sha256": "6280922ad79197c7eee774cd618395d0a55a261c2c777b04d7f991b905a3c586"
         },
         {
           "assetName": "creature_builder_buddy_owl",
           "id": "owl",
-          "sha256": "dbf42afbd19f862b6cd0fff55f6340570a1a3f7c0aabd2fc2ea70e0496a67ec2"
+          "sha256": "383d2d56d0ad20b61559316e040750bfc52a5de8c9d4092d5802082a1833eaf1"
         },
         {
           "assetName": "creature_builder_buddy_unicorn",
           "id": "unicorn",
-          "sha256": "df694238d3900b161454e44d45eae11426b10f986a7c155a4c155d17d6ca2c60"
+          "sha256": "b3d4384cc320244cdba83325007e1703ebd4df93360846db4514421165778a23"
         },
         {
           "assetName": "creature_builder_buddy_peacock",
           "id": "peacock",
-          "sha256": "730be28d0fb7976b63ab9c08c51ad7a2d62cea5db4261beff216c02bca0db30e"
+          "sha256": "966de78d57843ab02c34d497d0a85f7f46c2d9fbde73234db26d1dcb7986946f"
         },
         {
           "assetName": "creature_builder_buddy_frog",
           "id": "frog",
-          "sha256": "8e8aee0e3e28c8364e476e61fd47b613284192adba5a1ca6039c744a41ebf44e"
+          "sha256": "36cb947bc9b8b9e95dbad7820b8a06ba8a625747af44219e46bc98ed8b430725"
         },
         {
           "assetName": "creature_builder_buddy_fox",
           "id": "fox",
-          "sha256": "e5f0bfeeb71e5c3f82161853192e5817d75b22959611d780d201b624f59e52b5"
+          "sha256": "866dd5607935eacd0e50e65d28a7c923642a63bfcff960697dc89ad8a819954a"
         }
       ],
       "grid": {
-        "columns": 4,
-        "rows": 2
+        "columns": 3,
+        "rows": 3,
+        "usedTiles": 8
       },
-      "source": "AssetSources/CreatureLab/creature-lab-buddies-board.png",
-      "sourceSHA256": "5127203f40b7b331e2609d76358c3f37c21f6f868c3d15060f44fc7948f15cc6"
+      "source": "AssetSources/CreatureLab/creature-lab-buddies-2d-board.png",
+      "sourceSHA256": "93941f78f153ab9eb6ee401e012da126ddc418ef7807c68e7ebae4c5e78475e3"
     },
     "creatures": {
       "assets": [
         {
           "assetName": "creature_builder_creature_abbie",
           "id": "abbie",
-          "sha256": "c8ab0585659b7e6fc7664cd2112e0b598beb01a7275f6532b38aa9e759745eb0"
+          "sha256": "c413a449dbc673264b04691fa021d8f531cb5934931609b9b1db3b72b92fdfb6"
         },
         {
           "assetName": "creature_builder_creature_dragon",
           "id": "dragon",
-          "sha256": "a6f1c5548291a8ebf531337183b92048e3d4bfc06dc276c5484be8fd05709c9e"
+          "sha256": "cdfe1c4587db0ae41df23705c8f25c4a378a645d5eca5dc96c18197078153c61"
         },
         {
           "assetName": "creature_builder_creature_robot",
           "id": "robot",
-          "sha256": "3e08b0940cafbf38670d46d93ffe3a96d4c5f7428b6f993661a3296dfbeb4a6d"
+          "sha256": "52d64a5eed63e0f058b19ec1b8a799582627b8cc0ef5995334f6d21938330228"
         },
         {
           "assetName": "creature_builder_creature_bunny",
           "id": "bunny",
-          "sha256": "c6f5ae293fe609ea681c70e322701a2fac738f5afbbcfb965f499babdbc381a5"
+          "sha256": "795b3184e1c84fda329dd64f8565837b65ca2c88998c0a3b837017e06334e53e"
         },
         {
           "assetName": "creature_builder_creature_cat",
           "id": "cat",
-          "sha256": "d8dd07db3466f51e081c7febd80169414797520df0723c96632664650ac64455"
+          "sha256": "eb1bd56640c9c3960954bd15f52aece739d730a910dde01cb2d9aa56b8f33c70"
         },
         {
           "assetName": "creature_builder_creature_dinosaur",
           "id": "dinosaur",
-          "sha256": "838cc0279a7d59f8d81004d17c49adb7c38b923159b9c7c935902d31482f89a2"
+          "sha256": "56753ce8e47f0404cf5b96e04827ff27c25a7d730802f745e70e04f51d78a3c8"
         },
         {
           "assetName": "creature_builder_creature_alien",
           "id": "alien",
-          "sha256": "dd58a0818b5cb7ea48d54f7ce570b905bf045b271bcb8311d6dae854a6b3335b"
+          "sha256": "52c07eab206044499cc397cfda1828e3eb33612461059e86864ca9284661f6d7"
         },
         {
           "assetName": "creature_builder_creature_monster",
           "id": "monster",
-          "sha256": "105e8a0766e9f5011f9d599e5d3ad9116a8d546fdb7ef25fcea7d55d720dbe7d"
+          "sha256": "16a034ff4300cfa1102037e762d40ae73fba0d304e60938923a329030f2afd53"
         }
       ],
       "grid": {
-        "columns": 4,
-        "rows": 2
+        "columns": 3,
+        "rows": 3,
+        "usedTiles": 8
       },
-      "source": "AssetSources/CreatureLab/creature-lab-creatures-board.png",
-      "sourceSHA256": "8915744b1e3322188fccf7cdf370d9e4158e188da509018bc47272320add602f"
+      "source": "AssetSources/CreatureLab/creature-lab-creatures-2d-board.png",
+      "sourceSHA256": "590953c6532088cf2e394572447fde418c9a22b3ca75d8133bbba34f17c1b953"
     },
     "outfits": {
       "assets": [
         {
           "assetName": "creature_builder_outfit_lightning_racer",
           "id": "lightning-racer",
-          "sha256": "08cbc4883cbf8ed02b72fff0f709d3f0ebdc450e9cfccb8ba42ef24849033bc0"
+          "sha256": "8c177d952455269fde648afbcdfa6262ce893af93e3818fb7f43cf446176ea52"
         },
         {
           "assetName": "creature_builder_outfit_astronaut",
           "id": "astronaut",
-          "sha256": "3fbb01bebb4ad1ba6ce50303fccac080797e65eb32df8ef6d1083b1cf0dd371c"
+          "sha256": "803e536c6966ed558334a71b0f4a76d03ec739672fe34d2fc42adc5b836eaa10"
         },
         {
           "assetName": "creature_builder_outfit_ninja",
           "id": "ninja",
-          "sha256": "ae8ff713f85dc19abc4a0ff6ddaa8943c96305c4c0604775d4ffe8a79e73bfc0"
+          "sha256": "38119a7f4078a2444956a4637c9496ee07463863655414f7a7abe9f3580a47d7"
         },
         {
           "assetName": "creature_builder_outfit_wizard",
           "id": "wizard",
-          "sha256": "3916dc5d674be64c618ce051f06f6db71c22408e58ddb03f1dfc8ce1e06daa36"
+          "sha256": "74ef03b0d0e011e89c299da17d6adb8cede659344bc9cf2a6244beb30ea4da9b"
         },
         {
           "assetName": "creature_builder_outfit_knight",
           "id": "knight",
-          "sha256": "3b696944ced487f8ab2e45a2528c174b0d195bbefe972a827c59f3fc9b0b7ff4"
+          "sha256": "4559ab317de073d966a8609f53d90331a8fc2ba0cc95fbc47c4203d6d7fa6886"
         },
         {
           "assetName": "creature_builder_outfit_firefighter",
           "id": "firefighter",
-          "sha256": "41578209360e69e85dba1343d4ac6094d3ce1ab8eeadeccaca5802671fd3d0cd"
+          "sha256": "e94dfca404737f672b8a233860e4685d9f2644b774e7deeb1374a538fad690ee"
         },
         {
           "assetName": "creature_builder_outfit_superhero",
           "id": "superhero",
-          "sha256": "04b5c2fd84725e3b3b2cac86c3604f7037bc129dc766f6d8bf88b6eaa54182fe"
+          "sha256": "18bd499634f409f9fe7408a74a726216a07fabaaa129561b356f0b952664fe4d"
         },
         {
           "assetName": "creature_builder_outfit_pirate",
           "id": "pirate",
-          "sha256": "a3b7d7f91df09cd6afc008539511b7c48d48ec2bbc681ed3d531863adffcfffc"
+          "sha256": "549bb743e1bc3bcfc357f17dd59c58efa1b7e30a2bf3584e794e444b415084f9"
         }
       ],
       "grid": {
-        "columns": 4,
-        "rows": 2
+        "columns": 3,
+        "rows": 3,
+        "usedTiles": 8
       },
-      "source": "AssetSources/CreatureLab/creature-lab-outfits-board.png",
-      "sourceSHA256": "9a2f0103e73d0c2d53e1450974732c4ea2d386eaa0e0609f5a8485f31306d65f"
+      "source": "AssetSources/CreatureLab/creature-lab-outfits-2d-board.png",
+      "sourceSHA256": "08ec76b57370d082892c3302129f6d11091eb2d759e7bc48db891b0a1a880621"
     }
   },
   "generator": "Cursor GenerateImage",
