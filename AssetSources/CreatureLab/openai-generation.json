@@ -1,0 +1,30 @@
+{
+  "assets": {
+    "background": {
+      "filename": "creature-lab-workshop-background.png",
+      "promptSHA256": "0de4582d268f1054a5dfbe1d1908b9950973d199ec388122ea7b4518cae1b7e5",
+      "sha256": "2b865cc3928b730afec4db543136771dd29b412d0b6099ce90c00734526a0954"
+    },
+    "buddies": {
+      "filename": "creature-lab-buddies-2d-board.png",
+      "promptSHA256": "b961cdf9d9214cf17909cd67e965ee2244c7e32af4c6dcbc392d3137ca5b9b7e",
+      "sha256": "7ded6c532a27284a6a2d4cdf8d353b0cc80cbb56cb48dc8dce0d04f83932584c"
+    },
+    "creatures": {
+      "filename": "creature-lab-creatures-2d-board.png",
+      "promptSHA256": "9b1e52f165998695d87f81dc35d31cf530f9582b65b65768b607b981a0a84add",
+      "sha256": "40dab2ecc9551c43d11e32fae3ee8caa040d0b23a11c850dec48576643819ff2"
+    },
+    "outfits": {
+      "filename": "creature-lab-outfits-2d-board.png",
+      "promptSHA256": "e173f6f7d0692f023c7d6140781d184a57279e8f7c3950dfdfeee1fee6966218",
+      "sha256": "46237cac8d4c4bad0b1dec8e440c5c5a0fea9ad0d4f8a16e0244fa15f98e4caf"
+    }
+  },
+  "createdAt": "2026-09-12T00:08:36.462049+00:00",
+  "model": "gpt-image-2.5-flare",
+  "provider": "OpenAI",
+  "quality": "high",
+  "referenceSHA256": "d5b18ffe99256deac007534b644cc318f6e71ddf90d827d44dee411c5279026f",
+  "schemaVersion": 1
+}

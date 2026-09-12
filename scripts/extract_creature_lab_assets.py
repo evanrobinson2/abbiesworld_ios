@@ -132,7 +132,8 @@ def main() -> None:
     for board_key, source in supplied.items():
         filename, ids, category = BOARD_SPECS[board_key]
         retained_source = SOURCE_DIR / filename
-        shutil.copy2(source, retained_source)
+        if source.resolve() != retained_source.resolve():
+            shutil.copy2(source, retained_source)
         manifest["boards"][board_key] = {
             "source": str(retained_source.relative_to(ROOT)),
             "sourceSHA256": file_hash(retained_source),
@@ -141,7 +142,8 @@ def main() -> None:
         }
 
     retained_background = SOURCE_DIR / "creature-lab-workshop-background.png"
-    shutil.copy2(args.background, retained_background)
+    if args.background.resolve() != retained_background.resolve():
+        shutil.copy2(args.background, retained_background)
     manifest["background"] = {
         "source": str(retained_background.relative_to(ROOT)),
         "sourceSHA256": file_hash(retained_background),
