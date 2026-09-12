@@ -6,7 +6,9 @@ The lab is a physical, navigable radial room whose machinery makes selection und
 
 ## Status
 
-- Design and documentation preservation only; no Swift UI was implemented.
+- The first playable 2D SwiftUI fallback now uses the Concept C shell as a
+  physical board with three animated selector machines, live energy channels,
+  a central reactor, dormant embellishment socket, and fabrication lever.
 - Meshy generation was not submitted because no authenticated integration was reachable.
 - Zero Meshy credits were spent.
 - Blender has not run, and no Blender output is included.
@@ -21,6 +23,7 @@ The lab is a physical, navigable radial room whose machinery makes selection und
 - `review-manifest.json` — crop contract and review-image hashes
 - `creature-lab-concept-c-meshy-reference.png` — isolated environment-shell reference for Meshy image-to-3D
 - `meshy-reference-manifest.json` — exact reference-image prompt, dimensions, and hashes
+- `creature-lab-radial-2d-prototype-ipad.png` — simulator-verified selected recipe state
 - `creature-lab-3d-handoff.md` — Concept C spatial, interaction, asset, and mobile-budget handoff
 - `creature-lab-meshy-prompts.json` — exact unsubmitted Meshy prompt pack and hashes
 - `creature-lab-meshy-generation.json` — blocked-before-submission status and zero-credit record

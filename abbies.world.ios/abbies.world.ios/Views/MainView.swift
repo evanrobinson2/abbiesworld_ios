@@ -26,7 +26,8 @@ struct MainView: View {
     // Text-friendly test hooks for Creature Card Builder.
     @State private var showCreatureBuilder =
         ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilder") ||
-        ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder")
+        ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder") ||
+        ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D")
     // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
     @State private var showSettings = false

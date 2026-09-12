@@ -13,6 +13,7 @@ struct CreatureBuilderView: View {
     @State private var isShowingOverland =
         !ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder")
         && !ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilderDirect")
+        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D")
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -528,40 +529,7 @@ struct BuilderView: View {
     @ObservedObject var viewModel: CreatureBuilderViewModel
     
     var body: some View {
-        ScrollView {
-            VStack(spacing: 20) {
-                CreaturePicker(
-                    ingredients: viewModel.creatures,
-                    selected: viewModel.selectedCreature
-                ) { viewModel.selectCreature($0) }
-                
-                OutfitPicker(
-                    ingredients: viewModel.outfits,
-                    selected: viewModel.selectedOutfit
-                ) { viewModel.selectOutfit($0) }
-                
-                BuddyPicker(
-                    ingredients: viewModel.buddies,
-                    selected: viewModel.selectedBuddy
-                ) { viewModel.selectBuddy($0) }
-                
-                if viewModel.canCreate {
-                    recipePreview
-                    makeItButton
-                }
-                
-                if viewModel.queueFull {
-                    queueFullMessage
-                }
-                
-                if let error = viewModel.errorMessage {
-                    errorMessage(error)
-                }
-                
-                Spacer(minLength: 40)
-            }
-            .padding(.vertical)
-        }
+        RadialCreatureLabView(viewModel: viewModel)
     }
     
     private var recipePreview: some View {
