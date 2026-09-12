@@ -32,7 +32,7 @@ struct World2RootView: View {
                 )
                 
             case .cardFactory:
-                CardFactoryView(
+                World2CardFactoryView(
                     viewModel: viewModel,
                     onExit: { viewModel.exitPOI() }
                 )
@@ -316,56 +316,6 @@ struct MinigameHostView: View {
     }
 }
 
-struct CardFactoryView: View {
-    let viewModel: World2ViewModel
-    let onExit: () -> Void
-    
-    var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [Color(hex: "#2c3e50") ?? .gray, Color(hex: "#3498db") ?? .blue],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
-            VStack {
-                HStack {
-                    Button(action: onExit) {
-                        Image(systemName: "arrow.left.circle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                    Text("Card Factory")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
-                    Spacer()
-                    Color.clear.frame(width: 32, height: 32)
-                }
-                .padding()
-                
-                Spacer()
-                
-                VStack(spacing: 20) {
-                    Image(systemName: "wand.and.stars")
-                        .font(.system(size: 80))
-                        .foregroundColor(.yellow)
-                    
-                    Text("Create creature cards!")
-                        .font(.system(size: 24, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
-                    
-                    Text("Select 3 ingredients + 1 gem")
-                        .font(.system(size: 16, design: .rounded))
-                        .foregroundColor(.white.opacity(0.7))
-                }
-                
-                Spacer()
-            }
-        }
-    }
-}
 
 struct CardVaultView: View {
     let viewModel: World2ViewModel
