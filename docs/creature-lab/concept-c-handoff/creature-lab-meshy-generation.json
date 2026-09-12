@@ -1,0 +1,136 @@
+{
+  "schemaVersion": 1,
+  "generationRunId": "CL3D-MESHY-RADIAL-C-20260911T2141-0400",
+  "canonicalConcept": "concept-c-radial-reactor",
+  "promptPackPath": "/tmp/creature-lab-meshy-prompts.json",
+  "handoffPath": "/tmp/creature-lab-3d-handoff.md",
+  "startedAt": "2026-09-11T21:39:00-04:00",
+  "endedAt": "2026-09-11T21:41:00-04:00",
+  "overallStatus": "BLOCKED_BEFORE_SUBMISSION",
+  "credits": {
+    "spent": 0,
+    "currency": "Meshy credits",
+    "visibleBalance": null,
+    "reasonBalanceUnknown": "No authenticated API or browser session could be reached."
+  },
+  "safeAccessInspection": {
+    "secretValuesReadOrPrinted": false,
+    "personalNotesSearched": false,
+    "locationsChecked": [
+      {
+        "location": "current process environment variable names",
+        "result": "MESHY_API_KEY was not present"
+      },
+      {
+        "location": "/Users/evanrobinson/abbies.world.ios/CreatureCreator/server/.env*",
+        "result": "no environment files found"
+      },
+      {
+        "location": "/Users/evanrobinson/abbies.world.ios/CreatureCreator",
+        "result": "existing Meshy adapter found at CreatureCreator/server/lib/providers.ts; it expects MESHY_API_KEY and uses the v1 image-to-3d endpoint"
+      },
+      {
+        "location": "/Users/evanrobinson/abbies-world-creature-card-builder",
+        "result": "no Meshy integration references found"
+      },
+      {
+        "location": "/Users/evanrobinson/.config",
+        "result": "no Meshy integration references found"
+      },
+      {
+        "location": "/Users/evanrobinson/.zshrc",
+        "result": "no MESHY_API_KEY reference found"
+      },
+      {
+        "location": "Cursor-owned browser tabs",
+        "result": "no open tabs were present; a new tab could be created, but navigation could not bind to it"
+      }
+    ],
+    "browserErrors": [
+      "No browser tab available. Please navigate to a page first.",
+      "Browser view not found: 6b458f. Use browser_navigate without a viewId to create a new tab."
+    ],
+    "conclusion": "No safe, already-configured local Meshy authorization path was available. Browser authentication status remains indeterminate because navigation failed before the Meshy page loaded."
+  },
+  "blocker": {
+    "stage": "authorization discovery, before any generation request",
+    "description": "The local adapter has no configured MESHY_API_KEY in the relevant environment, and the authenticated-browser route failed before a Meshy page could load.",
+    "requiredNextAction": "Provide an already-authorized Meshy browser session that the browser tool can reach, or configure MESHY_API_KEY through the existing local server environment without sharing the value in chat. Then submit only the floor preview first and inspect returned consumed_credits before continuing.",
+    "destructiveOrUnclearCreditConfirmationEncountered": false
+  },
+  "jobs": [
+    {
+      "assetId": "CL3D_ENV_RADIAL_SHELL_POC_V001",
+      "priority": 1,
+      "status": "BLOCKED_NOT_SUBMITTED",
+      "jobId": null,
+      "apiMode": "preview",
+      "model": "meshy-t2",
+      "targetPolycount": 12000,
+      "prompt": "Modular cutaway Creature Lab room shell for a landscape oblique top-down children's game. Circular 15.5 m raised floor, open front and open ceiling, curved rear half-wall. Chunky caricature architecture with rounded ribs and toy-like bevels. Build a 3.2 m center socket, three distinct radial station wedges around it, broad walkable gaps between wedges, an annular path, and three recessed energy channels converging into the center. Dark-plum trim, mint and teal floor panels, purple bases, orange and brass accents. Believable navigable room with varied floor heights under 0.15 m. Simple mobile geometry. No stations, reactor, characters, text, logos, roof, loose props, or menu graphics.",
+      "promptSHA256": "657a82bdf853c499180e9b172e1bd495b07c0f0891465d6c60907ba32c6d82bb",
+      "negativePrompt": "photorealism, realistic industrial laboratory, horror, dirty grime, sharp hazards, thin fragile walls, enclosed front wall, full roof, stairs, steep ramps, furniture, terminals, reactor, characters, text, logo, decals, clutter, cables crossing walkways, flat radial menu, UI wheel, icons, microscopic detail, high-frequency texture, transparent floor",
+      "negativePromptSHA256": "98259946d1eb8f68f9ffbf8b95fe7360fe07f676dbbd69e3de56ddd183fcb91d",
+      "consumedCredits": 0,
+      "modelURLs": {
+        "glb": null,
+        "usdz": null,
+        "thumbnail": null
+      },
+      "localPaths": {
+        "glb": null,
+        "usdz": null
+      },
+      "error": "Authorization route unavailable before submission."
+    },
+    {
+      "assetId": "CL3D_STA_TYPE_WEDGE_POC_V001",
+      "priority": 2,
+      "status": "BLOCKED_NOT_SUBMITTED",
+      "jobId": null,
+      "apiMode": "preview",
+      "model": "meshy-t2",
+      "targetPolycount": 7000,
+      "prompt": "Standalone Creature Type station for a physical radial Creature Lab, built as a curved 80-degree carousel wedge that faces a central reactor. Chunky friendly creature-face silhouette with two ear-like fins, rounded purple housing, teal glass central specimen window, brass arc rail, one large active display cradle, and two smaller neighboring option cradles peeking along the arc. Include a low walk-up swipe rail and oversized confirm pad. Toy-like caricature proportions, dark-plum trim, mint, teal, purple, and orange panels, soft bevels, thick sturdy parts, readable from oblique top-down camera, simple mobile geometry. No creature, text, logo, floor, room, cables, or loose pieces.",
+      "promptSHA256": "82d46c33d43b4765de1b5bcba8125f09f2f1dd92cfb97d3329b52dbad57a8e78",
+      "negativePrompt": "photorealism, horror, medical equipment, weapon, humanoid robot, character, animal, creature inside chamber, text, logo, labels, flat radial menu, UI wheel, floating geometry, loose parts, asymmetrical broken silhouette, thin wires, sharp spikes, tiny controls, dense greebles, background room, floor slab, baked shadows",
+      "negativePromptSHA256": "3a4c09656e2d5e2716671e479b78dc83b3b80ebc970756225684c284b6e90488",
+      "consumedCredits": 0,
+      "modelURLs": {
+        "glb": null,
+        "usdz": null,
+        "thumbnail": null
+      },
+      "localPaths": {
+        "glb": null,
+        "usdz": null
+      },
+      "error": "Authorization route unavailable before submission."
+    },
+    {
+      "assetId": "CL3D_REACTOR_CORE_POC_V001",
+      "priority": 3,
+      "status": "SKIPPED_DEPENDENT_ON_FIRST_TWO_PREVIEWS",
+      "jobId": null,
+      "apiMode": "preview",
+      "model": "meshy-t2",
+      "targetPolycount": 9000,
+      "prompt": "Standalone central fabrication reactor for a physical radial Creature Lab. Circular 3.2 m assembly pedestal with tall rounded glass chamber, three equally spaced radial energy inlet sockets, brass collar rings, purple structural ribs, teal glass, an empty central reveal plinth, top and base particle nozzle sockets, plus two front mounting lugs for a separate tactile lever and dormant embellishment socket. Chunky toy-like caricature proportions, soft bevels, dark-plum trim, strong oblique top-down silhouette, simple mobile geometry. No character, text, logo, baked particles, floor, room, smoke, weapon, loose pieces, or realistic grime.",
+      "promptSHA256": "bb4283a805bdb434c8edc0d06785eeeb86253e8daf009c8e98653720f9659c2d",
+      "negativePrompt": "photorealism, realistic factory, horror, dangerous machinery, weapon, character, creature, text, logo, labels, flat radial menu, UI wheel, baked particles, baked smoke, flames, grime, rust, sharp blades, needles, thin wires, tiny controls, dense greebles, floating pieces, floor slab, background room, dramatic baked lighting",
+      "negativePromptSHA256": "3c1ffe19d5f19a7466949ae779561e6f7b9663c8563193ba5ca7813e07966c5d",
+      "consumedCredits": 0,
+      "modelURLs": {
+        "glb": null,
+        "usdz": null,
+        "thumbnail": null
+      },
+      "localPaths": {
+        "glb": null,
+        "usdz": null
+      },
+      "error": null
+    }
+  ],
+  "generatedArtifacts": []
+}

@@ -1,0 +1,166 @@
+{
+  "background": {
+    "assetName": "creature_builder_workshop_background",
+    "sha256": "a43849caf85cdef52ac165ad7671e9a3eb217983defb799739dfb32f594b33bd",
+    "source": "AssetSources/CreatureLab/creature-lab-workshop-background.png",
+    "sourceSHA256": "2b865cc3928b730afec4db543136771dd29b412d0b6099ce90c00734526a0954"
+  },
+  "boards": {
+    "buddies": {
+      "assets": [
+        {
+          "assetName": "creature_builder_buddy_bat",
+          "id": "bat",
+          "sha256": "e0305016d9b7f02e491335b30cd76b40fa062e0a791cbc93ee0ccd756b265f40"
+        },
+        {
+          "assetName": "creature_builder_buddy_cheetah",
+          "id": "cheetah",
+          "sha256": "d0bbd6c3282684efed2c247314a9e383dbad123796626e7b9196461e1c7f01d1"
+        },
+        {
+          "assetName": "creature_builder_buddy_puppy",
+          "id": "puppy",
+          "sha256": "af6b517bec999bdd467aa26f392ebbfe6a1a4bb1f74bd228dca37d1ef66aed8a"
+        },
+        {
+          "assetName": "creature_builder_buddy_owl",
+          "id": "owl",
+          "sha256": "ebf4b491455583ad7fbc9b215009e59b42ee095bb0966d57eb20d6804ec5deba"
+        },
+        {
+          "assetName": "creature_builder_buddy_unicorn",
+          "id": "unicorn",
+          "sha256": "f5a1d8c90fd0cce2a9c68256b70554f70de00ad13d7078e4d9ac926988ce97ac"
+        },
+        {
+          "assetName": "creature_builder_buddy_peacock",
+          "id": "peacock",
+          "sha256": "751abbf7858c1aff6b4a4ac852c9bc24313167a641b3a048f9730f078ac7ffa6"
+        },
+        {
+          "assetName": "creature_builder_buddy_frog",
+          "id": "frog",
+          "sha256": "dc8db9f1b8929d6b7066ea33168fd379738e597bf6755173d40bc3c651394497"
+        },
+        {
+          "assetName": "creature_builder_buddy_fox",
+          "id": "fox",
+          "sha256": "26a977571d57a627e8da8c12eeebcd08762aa4cdadaadaa68d4efb935bd00318"
+        }
+      ],
+      "grid": {
+        "columns": 3,
+        "rows": 3,
+        "usedTiles": 8
+      },
+      "source": "AssetSources/CreatureLab/creature-lab-buddies-2d-board.png",
+      "sourceSHA256": "7ded6c532a27284a6a2d4cdf8d353b0cc80cbb56cb48dc8dce0d04f83932584c"
+    },
+    "creatures": {
+      "assets": [
+        {
+          "assetName": "creature_builder_creature_abbie",
+          "id": "abbie",
+          "sha256": "bc97150c2145b690fb4adffc65866ef2713f9f5d12b5d35fd1d28c7adb01c9b3"
+        },
+        {
+          "assetName": "creature_builder_creature_dragon",
+          "id": "dragon",
+          "sha256": "58dd3e88a06005fdb1ba712e2ee3b5158748b9067869aef74c73039ca8a6f441"
+        },
+        {
+          "assetName": "creature_builder_creature_robot",
+          "id": "robot",
+          "sha256": "98bc436f9307f651bd5907d8e9e2b82c7644fff8c389b154da5289207fd8bcf7"
+        },
+        {
+          "assetName": "creature_builder_creature_bunny",
+          "id": "bunny",
+          "sha256": "051d32152d8ca6b9160addd8d265ebeb2b64f3107cc5a9211b9c7b23509c844f"
+        },
+        {
+          "assetName": "creature_builder_creature_cat",
+          "id": "cat",
+          "sha256": "0e39b2085f4adb6257e66267c9e56f87dbbad9433d833fa3b178335017fc728f"
+        },
+        {
+          "assetName": "creature_builder_creature_dinosaur",
+          "id": "dinosaur",
+          "sha256": "49b13550ed1b44159529a83eebabb5a6c398ea7115706177af47c273f6d7e730"
+        },
+        {
+          "assetName": "creature_builder_creature_alien",
+          "id": "alien",
+          "sha256": "5ee9acf39f6e18f914655d3ca7aab1a9a6d2e356358b794ba1f74e56ebc2fa9e"
+        },
+        {
+          "assetName": "creature_builder_creature_monster",
+          "id": "monster",
+          "sha256": "8570cf760e53735b227673467bf183e10ea8d8e402d35612b93db7213ae6a355"
+        }
+      ],
+      "grid": {
+        "columns": 3,
+        "rows": 3,
+        "usedTiles": 8
+      },
+      "source": "AssetSources/CreatureLab/creature-lab-creatures-2d-board.png",
+      "sourceSHA256": "40dab2ecc9551c43d11e32fae3ee8caa040d0b23a11c850dec48576643819ff2"
+    },
+    "outfits": {
+      "assets": [
+        {
+          "assetName": "creature_builder_outfit_lightning_racer",
+          "id": "lightning-racer",
+          "sha256": "7bfd68dfb4d2048d9cff76cfd880b48a7c452ed164d5b5ca6239b31e6a39da39"
+        },
+        {
+          "assetName": "creature_builder_outfit_astronaut",
+          "id": "astronaut",
+          "sha256": "0a9e1ceda36b6cda8c2c1a87a599fef6f8b3b31119055d9a219ef6169e5f25f4"
+        },
+        {
+          "assetName": "creature_builder_outfit_ninja",
+          "id": "ninja",
+          "sha256": "146bea16334f73c1d317edd6cc3b525ce5165667865bf2ce0f279685dddcfc3d"
+        },
+        {
+          "assetName": "creature_builder_outfit_wizard",
+          "id": "wizard",
+          "sha256": "3766da6d7943ae2f9b9d1604a7a234f2e5e77f0d2d94f498351a8dae5551d298"
+        },
+        {
+          "assetName": "creature_builder_outfit_knight",
+          "id": "knight",
+          "sha256": "cc6c660783a261b54d294dde3093fa4152566b2830be8de2fd8c81461062fb0e"
+        },
+        {
+          "assetName": "creature_builder_outfit_firefighter",
+          "id": "firefighter",
+          "sha256": "cd97b466f806111ee78766a64b35926a5a425e2f354fda89f53118dcfb3b2753"
+        },
+        {
+          "assetName": "creature_builder_outfit_superhero",
+          "id": "superhero",
+          "sha256": "fba9421587caff267336dd1017c55539d150dc140ca2fd9a2b796c9a45771d64"
+        },
+        {
+          "assetName": "creature_builder_outfit_pirate",
+          "id": "pirate",
+          "sha256": "ca9ce58dbaf95b899b89b032d027d388cef85c6f2d52e59a106ef87b42e6a1a5"
+        }
+      ],
+      "grid": {
+        "columns": 3,
+        "rows": 3,
+        "usedTiles": 8
+      },
+      "source": "AssetSources/CreatureLab/creature-lab-outfits-2d-board.png",
+      "sourceSHA256": "46237cac8d4c4bad0b1dec8e440c5c5a0fea9ad0d4f8a16e0244fa15f98e4caf"
+    }
+  },
+  "generator": "Cursor GenerateImage",
+  "pipeline": "extract_creature_lab_assets.py",
+  "schemaVersion": 1
+}

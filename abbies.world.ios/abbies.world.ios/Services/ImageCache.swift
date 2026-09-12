@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CryptoKit
 import UIKit
 
 class ImageCache {
@@ -164,11 +165,12 @@ class ImageCache {
     }
     
     private func urlToFilename(url: URL) -> String {
-        // Create a safe filename from URL
-        let urlString = url.absoluteString
-        let hash = urlString.hash
+        // Swift's Hashable seed changes between launches. SHA-256 keeps the
+        // same immutable server asset available for reliable offline replay.
+        let digest = SHA256.hash(data: Data(url.absoluteString.utf8))
+        let hash = digest.map { String(format: "%02x", $0) }.joined()
         let ext = url.pathExtension.isEmpty ? "png" : url.pathExtension
-        return "\(abs(hash)).\(ext)"
+        return "\(hash).\(ext)"
     }
     
     private func cleanOldCacheIfNeeded() {

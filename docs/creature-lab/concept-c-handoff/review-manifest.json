@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-09-12T01:40:03.724409+00:00",
+  "sourcePromptManifest": {
+    "filename": "manifest.json",
+    "absolutePath": "/tmp/creature-lab-workshop-concepts/manifest.json",
+    "sha256": "6ea62f5a438d5bb76b96ac9ffe6878b7b55b6e62ce4125f90e29dbe1e07022a7"
+  },
+  "crop": {
+    "method": "center crop",
+    "sourceDimensions": {
+      "width": 1536,
+      "height": 1024
+    },
+    "targetDimensions": {
+      "width": 1365,
+      "height": 1024
+    },
+    "box": {
+      "left": 85,
+      "top": 0,
+      "right": 1450,
+      "bottom": 1024
+    },
+    "trimmedPixels": {
+      "left": 85,
+      "right": 86,
+      "top": 0,
+      "bottom": 0
+    },
+    "note": "The odd 171-pixel horizontal trim is centered to the nearest whole pixel (85 px left, 86 px right)."
+  },
+  "concepts": {
+    "concept-a-isometric-triad": {
+      "promptReference": {
+        "manifest": "manifest.json",
+        "conceptKey": "concept-a-isometric-triad",
+        "promptSHA256": "6715477fd99d507fcee69b6f55dbc627b3eb25a3493dae89688a32def3700180"
+      },
+      "source": {
+        "filename": "concept-a-isometric-triad-raw.png",
+        "absolutePath": "/tmp/creature-lab-workshop-concepts/concept-a-isometric-triad-raw.png",
+        "sha256": "95fb80b46c2ca63923543be1a4d3c881f947e92ca79e8aa6cf76d7d054bfc26e"
+      },
+      "output": {
+        "filename": "concept-a-isometric-triad-ipad.png",
+        "absolutePath": "/tmp/creature-lab-workshop-concepts/concept-a-isometric-triad-ipad.png",
+        "dimensions": {
+          "width": 1365,
+          "height": 1024
+        },
+        "sha256": "12f79b6ed8f337d1f9dee681a8de2fb6897e53d0fb374d4f967bac48f485584c"
+      }
+    },
+    "concept-b-cutaway-workshop": {
+      "promptReference": {
+        "manifest": "manifest.json",
+        "conceptKey": "concept-b-cutaway-workshop",
+        "promptSHA256": "39bb3e103945d15e2617c77c1d1928e550b76410a064bbcec04194ed71d23b5f"
+      },
+      "source": {
+        "filename": "concept-b-cutaway-workshop-raw.png",
+        "absolutePath": "/tmp/creature-lab-workshop-concepts/concept-b-cutaway-workshop-raw.png",
+        "sha256": "3ea769d81ce0d5abe4f1ceaea11601a51935f62cbd0325326c7d2c22f6294c93"
+      },
+      "output": {
+        "filename": "concept-b-cutaway-workshop-ipad.png",
+        "absolutePath": "/tmp/creature-lab-workshop-concepts/concept-b-cutaway-workshop-ipad.png",
+        "dimensions": {
+          "width": 1365,
+          "height": 1024
+        },
+        "sha256": "aef0cacd9e506f6b47d95075db57ae9f73d19d0bf39f316f6afeb25316f01d88"
+      }
+    },
+    "concept-c-radial-reactor": {
+      "promptReference": {
+        "manifest": "manifest.json",
+        "conceptKey": "concept-c-radial-reactor",
+        "promptSHA256": "cbeceb875a38eeff244ab56a8e803ef38c742455742c8e66e4be611856d722fc"
+      },
+      "source": {
+        "filename": "concept-c-radial-reactor-raw.png",
+        "absolutePath": "/tmp/creature-lab-workshop-concepts/concept-c-radial-reactor-raw.png",
+        "sha256": "a15c432bc09bd8364f841c4fb6e3e0c9dacd525668b908a283c4a86a1f5fcaf0"
+      },
+      "output": {
+        "filename": "concept-c-radial-reactor-ipad.png",
+        "absolutePath": "/tmp/creature-lab-workshop-concepts/concept-c-radial-reactor-ipad.png",
+        "dimensions": {
+          "width": 1365,
+          "height": 1024
+        },
+        "sha256": "bc3c7b3ac5a2ec3bb858883d4463ac8503ec2a3b8fb50848a617347a9c6da58c"
+      }
+    }
+  },
+  "overview": {
+    "filename": "creature-lab-workshop-concepts-overview.png",
+    "absolutePath": "/tmp/creature-lab-workshop-concepts/creature-lab-workshop-concepts-overview.png",
+    "dimensions": {
+      "width": 4127,
+      "height": 1024
+    },
+    "layout": "A, B, C from left to right; 16 px neutral gutters; no labels or rescaling",
+    "sha256": "c16f34e5015aa2cad3dd0b73c2d8994002b42c40a3f491fd2bddee52e99387e7"
+  }
+}

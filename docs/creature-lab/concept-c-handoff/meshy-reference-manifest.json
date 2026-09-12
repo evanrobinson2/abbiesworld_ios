@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "assetId": "CL3D_ENV_RADIAL_SHELL_IMAGE_REFERENCE_V001",
+  "purpose": "Clean image-to-3D reference for the approved Concept C radial Creature Lab environment shell.",
+  "createdAt": "2026-09-11T21:50:00-04:00",
+  "generator": "Cursor GenerateImage",
+  "output": {
+    "filename": "creature-lab-concept-c-meshy-reference.png",
+    "width": 1152,
+    "height": 864,
+    "sha256": "66d39fad30fae44f71c0bab3224dbbc1c279dcb37fcbe7d0c5b7c89a6070d2d5"
+  },
+  "reference": {
+    "filename": "concept-c-radial-reactor-ipad.png",
+    "sha256": "bc3c7b3ac5a2ec3bb858883d4463ac8503ec2a3b8fb50848a617347a9c6da58c"
+  },
+  "prompt": "Create a clean Meshy image-to-3D reference image for the approved Creature Lab Concept C. Show one complete physical radial laboratory environment as a single isolated object in an orthographic three-quarter top-down view, centered with every outer edge visible. The object includes a thick circular raised terrain/floor slab, open front, curved chunky rear half-wall, broad walkable annular path, three raised radial machine plinths, three flush glass-covered energy channels converging at a recessed central reactor socket, and a clear front entrance pad. Preserve strong physical depth, wall thickness, floor thickness, beveled ramps, walkable gaps, and chunky toy-like construction. Match the reference's premium storybook palette and styling: dark-plum outlines and trim, purple plinths, teal and mint panels, warm orange and sparse brass accents, layered cel shading, subtle gouache texture, friendly comedic proportions. Make the geometry coherent and buildable, with simple broad forms suitable for mobile retopology. Neutral pale background with a soft contact shadow; no scenery beyond the object. Do not include terminals, reactor machinery, characters, creatures, labels, text, logos, UI, floating icons, particles, loose props, roof, enclosed front wall, stairs, cables across paths, thin fragile elements, photorealism, or dramatic perspective. It must read as an isolated 3D asset reference rather than a game screenshot or radial software menu."
+}
