@@ -93,6 +93,7 @@ class CreatureBuilderViewModel: ObservableObject {
     private let mockService = MockCreatureBuilderService.shared
     private var cancellables = Set<AnyCancellable>()
     private var pollTimer: Timer?
+    private var automatedGenerationID: String?
     
     private(set) var useMockMode: Bool = false
     
@@ -220,6 +221,9 @@ class CreatureBuilderViewModel: ObservableObject {
                     "CREATURE_BUILDER_EVENT event=generation_accepted " +
                     "generation=\(response.generationId) status=\(response.status.rawValue)"
                 )
+                if ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder") {
+                    automatedGenerationID = response.generationId
+                }
                 
                 clearSelections()
                 playCreateSound()
@@ -423,6 +427,19 @@ class CreatureBuilderViewModel: ObservableObject {
                 "active=\(state.active.count) queued=\(state.queued.count) " +
                 "failed=\(state.failedJobs.count) ready=\(state.readyToReveal.count)"
             )
+
+            if let generationID = automatedGenerationID,
+               let card = state.readyToReveal.first(where: {
+                   $0.generationId == generationID
+               }) {
+                automatedGenerationID = nil
+                currentTab = .making
+                print(
+                    "CREATURE_BUILDER_EVENT event=automated_card_ready " +
+                    "card=\(card.id)"
+                )
+                revealCard(card)
+            }
             
             for card in state.collection where card.isRevealed {
                 if !collection.contains(where: { $0.id == card.id }) {
