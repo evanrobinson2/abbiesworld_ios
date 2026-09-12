@@ -17,6 +17,7 @@ enum World2Screen: Equatable {
     case poiInterior(poiId: String)
     case cardFactory
     case cardVault
+    case cardShop
     case playerHome
     case minigame(poiId: String, minigameType: String)
 }
@@ -156,7 +157,9 @@ class World2ViewModel: ObservableObject {
             currentScreen = .cardFactory
         case .cardVault:
             currentScreen = .cardVault
-        case .minigame:
+        case .cardShop:
+            currentScreen = .cardShop
+        case .minigame, .farmPlot:
             if let minigameType = poi.minigameType {
                 currentScreen = .minigame(poiId: poi.id, minigameType: minigameType)
                 musicService.transitionToIntense()
@@ -267,12 +270,30 @@ class World2ViewModel: ObservableObject {
                 lightMusicTrack: "music.home.light",
                 intenseMusicTrack: "music.home.intense",
                 poiPlacements: [
-                    POIPlacement(poiId: "poi.abbieTreehouse", x: 0.2, y: 0.4, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.aniTreehouse", x: 0.8, y: 0.4, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.cardFactory", x: 0.5, y: 0.7, scale: 1.2, zIndex: 2)
+                    POIPlacement(poiId: "poi.abbieTreehouse", x: 0.15, y: 0.35, scale: 1.0, zIndex: 1),
+                    POIPlacement(poiId: "poi.aniTreehouse", x: 0.85, y: 0.35, scale: 1.0, zIndex: 1),
+                    POIPlacement(poiId: "poi.cardFactory", x: 0.35, y: 0.65, scale: 1.2, zIndex: 2),
+                    POIPlacement(poiId: "poi.cardVault", x: 0.65, y: 0.65, scale: 1.0, zIndex: 2),
+                    POIPlacement(poiId: "poi.cardShop", x: 0.5, y: 0.85, scale: 1.0, zIndex: 2)
                 ],
-                adjacentWorlds: [.adventure],
+                adjacentWorlds: [.farm, .adventure],
                 ambiance: World.WorldAmbiance(primaryColor: "#4CAF50", secondaryColor: "#8BC34A", mood: "magical")
+            ),
+            .farm: World(
+                id: .farm,
+                name: "Ingredient Farm",
+                description: "Grow and harvest ingredients for your cards",
+                backgroundAsset: "map.farm",
+                lightMusicTrack: "music.farm.light",
+                intenseMusicTrack: "music.farm.intense",
+                poiPlacements: [
+                    POIPlacement(poiId: "poi.farm.creatures", x: 0.25, y: 0.3, scale: 1.0, zIndex: 1),
+                    POIPlacement(poiId: "poi.farm.costumes", x: 0.75, y: 0.3, scale: 1.0, zIndex: 1),
+                    POIPlacement(poiId: "poi.farm.places", x: 0.25, y: 0.65, scale: 1.0, zIndex: 1),
+                    POIPlacement(poiId: "poi.farm.mystery", x: 0.75, y: 0.65, scale: 1.0, zIndex: 1)
+                ],
+                adjacentWorlds: [.home],
+                ambiance: World.WorldAmbiance(primaryColor: "#8BC34A", secondaryColor: "#CDDC39", mood: "pastoral")
             ),
             .adventure: World(
                 id: .adventure,
@@ -349,6 +370,183 @@ class World2ViewModel: ObservableObject {
                 lightMusicTrack: "music.cardFactory.light",
                 intenseMusicTrack: "music.cardFactory.intense",
                 icon: "wand.and.stars",
+                embellishmentSlots: nil,
+                interactiveDecorationHooks: nil,
+                ownerId: nil
+            ),
+            "poi.cardVault": POI(
+                id: "poi.cardVault",
+                name: "Card Vault",
+                type: .cardVault,
+                mapId: .home,
+                exteriorAsset: "poi.cardVault.exterior",
+                interiorAsset: "poi.cardVault.interior",
+                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 250),
+                lore: "A secure vault for your precious card collection",
+                description: "View and manage your cards",
+                entryCost: nil,
+                rewardConfiguration: nil,
+                minigameType: nil,
+                lightMusicTrack: "music.cardVault.light",
+                intenseMusicTrack: "music.cardVault.intense",
+                icon: "archivebox.fill",
+                embellishmentSlots: nil,
+                interactiveDecorationHooks: nil,
+                ownerId: nil
+            ),
+            "poi.cardShop": POI(
+                id: "poi.cardShop",
+                name: "Card Shop",
+                type: .cardShop,
+                mapId: .home,
+                exteriorAsset: "poi.cardShop.exterior",
+                interiorAsset: "poi.cardShop.interior",
+                tapHitbox: POI.HitBox(x: 0, y: 0, width: 220, height: 280),
+                lore: "Trade your cards for shiny gems!",
+                description: "Sell cards for gems, buy decorations",
+                entryCost: nil,
+                rewardConfiguration: nil,
+                minigameType: nil,
+                lightMusicTrack: "music.cardShop.light",
+                intenseMusicTrack: "music.cardShop.intense",
+                icon: "bag.fill",
+                embellishmentSlots: nil,
+                interactiveDecorationHooks: nil,
+                ownerId: nil
+            ),
+            // MARK: - Farm POIs (4 mini-games for farming ingredients)
+            "poi.farm.creatures": POI(
+                id: "poi.farm.creatures",
+                name: "Creature Garden",
+                type: .farmPlot,
+                mapId: .farm,
+                exteriorAsset: "poi.farm.creatures.exterior",
+                interiorAsset: "poi.farm.creatures.interior",
+                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
+                lore: "Tend to magical creatures and earn their friendship",
+                description: "Farm creature ingredients!",
+                entryCost: nil,
+                rewardConfiguration: RewardConfiguration(
+                    baseRewards: [
+                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.cat", probability: 0.4),
+                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.dragon", probability: 0.2),
+                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.robot", probability: 0.2),
+                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.octopus", probability: 0.2)
+                    ],
+                    bonusRewards: [
+                        RewardConfiguration.BonusReward(
+                            condition: "perfect_score",
+                            reward: RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.cheetah", probability: 1.0)
+                        )
+                    ],
+                    performanceTiers: nil
+                ),
+                minigameType: "watering",
+                lightMusicTrack: "music.farm.light",
+                intenseMusicTrack: "music.farm.intense",
+                icon: "pawprint.fill",
+                embellishmentSlots: nil,
+                interactiveDecorationHooks: nil,
+                ownerId: nil
+            ),
+            "poi.farm.costumes": POI(
+                id: "poi.farm.costumes",
+                name: "Costume Orchard",
+                type: .farmPlot,
+                mapId: .farm,
+                exteriorAsset: "poi.farm.costumes.exterior",
+                interiorAsset: "poi.farm.costumes.interior",
+                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
+                lore: "Harvest magical outfits from enchanted trees",
+                description: "Farm costume ingredients!",
+                entryCost: nil,
+                rewardConfiguration: RewardConfiguration(
+                    baseRewards: [
+                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.wizard", probability: 0.3),
+                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.superhero", probability: 0.3),
+                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.chef", probability: 0.2),
+                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.ninja", probability: 0.2)
+                    ],
+                    bonusRewards: [
+                        RewardConfiguration.BonusReward(
+                            condition: "perfect_score",
+                            reward: RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.astronaut", probability: 1.0)
+                        )
+                    ],
+                    performanceTiers: nil
+                ),
+                minigameType: "harvesting",
+                lightMusicTrack: "music.farm.light",
+                intenseMusicTrack: "music.farm.intense",
+                icon: "tshirt.fill",
+                embellishmentSlots: nil,
+                interactiveDecorationHooks: nil,
+                ownerId: nil
+            ),
+            "poi.farm.places": POI(
+                id: "poi.farm.places",
+                name: "Portal Pond",
+                type: .farmPlot,
+                mapId: .farm,
+                exteriorAsset: "poi.farm.places.exterior",
+                interiorAsset: "poi.farm.places.interior",
+                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
+                lore: "Fish for magical places in the enchanted waters",
+                description: "Farm place ingredients!",
+                entryCost: nil,
+                rewardConfiguration: RewardConfiguration(
+                    baseRewards: [
+                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.jungle", probability: 0.3),
+                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.underwater", probability: 0.3),
+                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.castle", probability: 0.2),
+                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.volcano", probability: 0.2)
+                    ],
+                    bonusRewards: [
+                        RewardConfiguration.BonusReward(
+                            condition: "perfect_score",
+                            reward: RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.space", probability: 1.0)
+                        )
+                    ],
+                    performanceTiers: nil
+                ),
+                minigameType: "fishing",
+                lightMusicTrack: "music.farm.light",
+                intenseMusicTrack: "music.farm.intense",
+                icon: "globe",
+                embellishmentSlots: nil,
+                interactiveDecorationHooks: nil,
+                ownerId: nil
+            ),
+            "poi.farm.mystery": POI(
+                id: "poi.farm.mystery",
+                name: "Mystery Patch",
+                type: .farmPlot,
+                mapId: .farm,
+                exteriorAsset: "poi.farm.mystery.exterior",
+                interiorAsset: "poi.farm.mystery.interior",
+                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
+                lore: "What grows here? Only luck knows!",
+                description: "Random ingredients + bonus gems!",
+                entryCost: nil,
+                rewardConfiguration: RewardConfiguration(
+                    baseRewards: [
+                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.bat", probability: 0.2),
+                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.racer", probability: 0.2),
+                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.candyworld", probability: 0.1),
+                        RewardConfiguration.Reward(type: .gems, amount: 2, probability: 0.5)
+                    ],
+                    bonusRewards: [
+                        RewardConfiguration.BonusReward(
+                            condition: "perfect_score",
+                            reward: RewardConfiguration.Reward(type: .gems, amount: 5, probability: 1.0)
+                        )
+                    ],
+                    performanceTiers: nil
+                ),
+                minigameType: "digging",
+                lightMusicTrack: "music.farm.light",
+                intenseMusicTrack: "music.farm.intense",
+                icon: "questionmark.circle.fill",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
                 ownerId: nil

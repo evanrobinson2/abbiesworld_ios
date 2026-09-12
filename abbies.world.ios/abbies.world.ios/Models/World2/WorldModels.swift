@@ -9,6 +9,7 @@ import Foundation
 
 enum WorldId: String, Codable, CaseIterable, Identifiable {
     case home = "world.home"
+    case farm = "world.farm"
     case adventure = "world.adventure"
     
     var id: String { rawValue }
@@ -16,6 +17,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     var displayName: String {
         switch self {
         case .home: return "Home World"
+        case .farm: return "Ingredient Farm"
         case .adventure: return "Adventure World"
         }
     }
@@ -23,7 +25,16 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     var description: String {
         switch self {
         case .home: return "A cozy, magical place where you can create and collect"
+        case .farm: return "Grow and harvest ingredients for your cards"
         case .adventure: return "A rugged frontier where you earn ingredients and gems"
+        }
+    }
+    
+    var direction: String? {
+        switch self {
+        case .home: return nil
+        case .farm: return "East"
+        case .adventure: return "North"
         }
     }
 }

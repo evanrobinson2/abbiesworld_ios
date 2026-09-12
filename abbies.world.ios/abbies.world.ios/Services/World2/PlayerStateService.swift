@@ -130,6 +130,17 @@ class PlayerStateService: ObservableObject {
         currentPlayer?.cardCollection.cardWithRecipeHash(hash)
     }
     
+    func sellCard(_ cardId: String) {
+        guard var player = currentPlayer else { return }
+        
+        player.cardCollection.activeDeck.removeAll { $0 == cardId }
+        player.cardCollection.cards.removeAll { $0.id == cardId }
+        player.progression.totalCardsSold += 1
+        
+        currentPlayer = player
+        saveLocalState()
+    }
+    
     func addToActiveDeck(_ cardId: String) -> Bool {
         let success = currentPlayer?.cardCollection.addToActiveDeck(cardId) ?? false
         if success {

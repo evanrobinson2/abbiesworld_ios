@@ -43,6 +43,12 @@ struct World2RootView: View {
                     onExit: { viewModel.exitPOI() }
                 )
                 
+            case .cardShop:
+                World2CardShopView(
+                    viewModel: viewModel,
+                    onExit: { viewModel.exitPOI() }
+                )
+                
             case .playerHome:
                 World2PlayerHomeView(
                     viewModel: viewModel,

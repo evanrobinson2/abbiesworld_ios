@@ -157,14 +157,16 @@ struct PlayerProgression: Codable {
     var unlockedWorlds: [WorldId]
     var achievedMilestones: [String]
     var totalCardsCreated: Int
+    var totalCardsSold: Int
     var totalGemsEarned: Int
     var totalMinigamesCompleted: Int
     
     init() {
         self.completedPOIs = []
-        self.unlockedWorlds = [.home]
+        self.unlockedWorlds = [.home, .farm]  // Farm unlocked by default for core loop
         self.achievedMilestones = []
         self.totalCardsCreated = 0
+        self.totalCardsSold = 0
         self.totalGemsEarned = 0
         self.totalMinigamesCompleted = 0
     }
