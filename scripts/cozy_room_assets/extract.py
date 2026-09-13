@@ -35,8 +35,14 @@ CATALOG_ROOT = (
 DATASET_ROOT = CATALOG_ROOT / "cozy_room_asset_manifest.dataset"
 RUNTIME_MANIFEST_PATH = DATASET_ROOT / "cozy_room_asset_manifest.json"
 
-SHEET_NAMES = ("sheet-01.jpg", "sheet-02.jpg", "sheet-03.jpg", "sheet-04.jpg")
-PIPELINE_VERSION = 1
+SHEET_NAMES = (
+    "sheet-01.jpg",
+    "sheet-02.jpg",
+    "sheet-03.jpg",
+    "sheet-04.jpg",
+    "sheet-05.jpg",
+)
+PIPELINE_VERSION = 2
 MIN_COMPONENT_AREA = 400
 EDGE_THRESHOLD = 18.0
 ROW_BAND_PIXELS = 100
@@ -97,7 +103,9 @@ def save_png(path: Path, rgba: np.ndarray) -> None:
 
 def import_sources(paths: list[Path]) -> None:
     if len(paths) != len(SHEET_NAMES):
-        raise PipelineError(f"Expected exactly four source sheets, received {len(paths)}")
+        raise PipelineError(
+            f"Expected exactly {len(SHEET_NAMES)} source sheets, received {len(paths)}"
+        )
     SOURCE_ROOT.mkdir(parents=True, exist_ok=True)
     for source, name in zip(paths, SHEET_NAMES):
         source = source.expanduser().resolve()
@@ -190,6 +198,42 @@ def segment_sheet(image: np.ndarray) -> Segmentation:
     return Segmentation(background, distance, labels, components)
 
 
+def component_at_seed(
+    segmentation: Segmentation, seed: list[int]
+) -> Component:
+    if (
+        not isinstance(seed, list)
+        or len(seed) != 2
+        or any(not isinstance(value, int) for value in seed)
+    ):
+        raise PipelineError("Edge seed must be [x, y]")
+    x, y = seed
+    if not (0 <= y < segmentation.labels.shape[0] and 0 <= x < segmentation.labels.shape[1]):
+        raise PipelineError(f"Edge seed lies outside the source: {seed}")
+    label = int(segmentation.labels[y, x])
+    retained_labels = {component.label for component in segmentation.components}
+    if label not in retained_labels:
+        radius = 48
+        top = max(0, y - radius)
+        bottom = min(segmentation.labels.shape[0], y + radius + 1)
+        left = max(0, x - radius)
+        right = min(segmentation.labels.shape[1], x + radius + 1)
+        nearby = segmentation.labels[top:bottom, left:right]
+        candidates_y, candidates_x = np.where(
+            np.isin(nearby, list(retained_labels))
+        )
+        if candidates_x.size:
+            distances = (candidates_x + left - x) ** 2 + (
+                candidates_y + top - y
+            ) ** 2
+            nearest = int(np.argmin(distances))
+            label = int(nearby[candidates_y[nearest], candidates_x[nearest]])
+    for component in segmentation.components:
+        if component.label == label:
+            return component
+    raise PipelineError(f"Edge seed does not land on a retained component: {seed}")
+
+
 def smoothstep(value: np.ndarray, lower: float, upper: float) -> np.ndarray:
     normalized = np.clip((value - lower) / (upper - lower), 0.0, 1.0)
     return normalized * normalized * (3.0 - 2.0 * normalized)
@@ -277,6 +321,117 @@ def extract_component(
     return rgba, source_bounds
 
 
+def extract_region(
+    image: np.ndarray,
+    segmentation: Segmentation,
+    region: list[int],
+    polygon: Any = None,
+    minimum_island_area: int = 0,
+) -> tuple[np.ndarray, list[int], list[int], int]:
+    if (
+        not isinstance(region, list)
+        or len(region) != 4
+        or any(not isinstance(value, int) for value in region)
+    ):
+        raise PipelineError("Manual extraction region must be [left, top, right, bottom]")
+    left, top, right, bottom = region
+    height, width = image.shape[:2]
+    if not (0 <= left < right <= width and 0 <= top < bottom <= height):
+        raise PipelineError(f"Manual extraction region is outside the source: {region}")
+
+    roi = image[top:bottom, left:right]
+    roi_distance = segmentation.distance[top:bottom, left:right]
+    allowed = np.ones(roi_distance.shape, dtype=bool)
+    if polygon is not None:
+        points = np.asarray(
+            [[point[0] - left, point[1] - top] for point in polygon],
+            dtype=np.int32,
+        )
+        if points.ndim != 2 or points.shape[0] < 3 or points.shape[1] != 2:
+            raise PipelineError("Manual isolation polygon requires at least three [x, y] points")
+        allowed.fill(False)
+        cv2.fillPoly(allowed.view(np.uint8), [points], 1)
+    target = (roi_distance > EDGE_THRESHOLD) & allowed
+    target_core = cv2.erode(
+        ((roi_distance > 32.0) & allowed).astype(np.uint8),
+        np.ones((3, 3), dtype=np.uint8),
+        iterations=1,
+    ).astype(bool)
+    if not np.any(target_core):
+        raise PipelineError(f"Manual region has no definite foreground: {region}")
+
+    grab_mask = np.full(target.shape, cv2.GC_PR_BGD, dtype=np.uint8)
+    grab_mask[~allowed] = cv2.GC_BGD
+    grab_mask[target] = cv2.GC_PR_FGD
+    grab_mask[target_core] = cv2.GC_FGD
+    grab_mask[:3, :] = cv2.GC_BGD
+    grab_mask[-3:, :] = cv2.GC_BGD
+    grab_mask[:, :3] = cv2.GC_BGD
+    grab_mask[:, -3:] = cv2.GC_BGD
+
+    cv2.setRNGSeed(0)
+    background_model = np.zeros((1, 65), dtype=np.float64)
+    foreground_model = np.zeros((1, 65), dtype=np.float64)
+    cv2.grabCut(
+        roi,
+        grab_mask,
+        None,
+        background_model,
+        foreground_model,
+        4,
+        cv2.GC_INIT_WITH_MASK,
+    )
+    selected = (grab_mask == cv2.GC_FGD) | (grab_mask == cv2.GC_PR_FGD)
+    alpha = (smoothstep(roi_distance, 6.0, 30.0) * 255.0).astype(np.uint8)
+    alpha = np.where(selected, alpha, 0).astype(np.uint8)
+    strong_target = (roi_distance > 24.0) & allowed
+    alpha = np.maximum(alpha, np.where(strong_target, 235, 0).astype(np.uint8))
+    alpha = cv2.GaussianBlur(alpha, (3, 3), 0.65)
+    alpha = np.where((selected | strong_target) & allowed, alpha, 0).astype(np.uint8)
+    if minimum_island_area > 0:
+        count, island_labels, stats, _ = cv2.connectedComponentsWithStats(
+            (alpha > 2).astype(np.uint8)
+        )
+        retained = np.zeros(alpha.shape, dtype=bool)
+        for label in range(1, count):
+            if int(stats[label, cv2.CC_STAT_AREA]) >= minimum_island_area:
+                retained |= island_labels == label
+        alpha = np.where(retained, alpha, 0).astype(np.uint8)
+
+    visible_y, visible_x = np.where(alpha > 2)
+    if visible_x.size == 0:
+        raise PipelineError(f"Manual region produced an empty matte: {region}")
+    crop_left = max(0, int(visible_x.min()) - OUTPUT_PADDING)
+    crop_top = max(0, int(visible_y.min()) - OUTPUT_PADDING)
+    crop_right = min(alpha.shape[1], int(visible_x.max()) + 1 + OUTPUT_PADDING)
+    crop_bottom = min(alpha.shape[0], int(visible_y.max()) + 1 + OUTPUT_PADDING)
+
+    rgba = cv2.cvtColor(roi, cv2.COLOR_BGR2RGBA)
+    alpha_float = alpha.astype(np.float32) / 255.0
+    background_rgb = segmentation.background_bgr[::-1]
+    rgb = rgba[:, :, :3].astype(np.float32)
+    safe_alpha = np.maximum(alpha_float[:, :, None], 0.08)
+    unblended = (rgb - (1.0 - safe_alpha) * background_rgb) / safe_alpha
+    rgba[:, :, :3] = np.clip(unblended, 0, 255).astype(np.uint8)
+    rgba[:, :, 3] = alpha
+    rgba = rgba[crop_top:crop_bottom, crop_left:crop_right]
+
+    source_bounds = [
+        left + crop_left,
+        top + crop_top,
+        left + crop_right,
+        top + crop_bottom,
+    ]
+    hard_y, hard_x = np.where(target)
+    edge_bounds = [
+        left + int(hard_x.min()),
+        top + int(hard_y.min()),
+        left + int(hard_x.max()) + 1,
+        top + int(hard_y.max()) + 1,
+    ]
+    return rgba, source_bounds, edge_bounds, int(np.count_nonzero(target))
+
+
 def annotated_sheet(
     image: np.ndarray,
     components: list[Component],
@@ -292,6 +447,27 @@ def annotated_sheet(
             (x1 + 4, y1 + 22),
             cv2.FONT_HERSHEY_SIMPLEX,
             0.44,
+            (30, 70, 230),
+            1,
+            cv2.LINE_AA,
+        )
+    return value
+
+
+def annotated_regions(
+    image: np.ndarray,
+    metadata: list[dict[str, Any]],
+) -> np.ndarray:
+    value = image.copy()
+    for index, asset in enumerate(metadata, 1):
+        left, top, right, bottom = asset["region"]
+        cv2.rectangle(value, (left, top), (right, bottom), (30, 70, 230), 2)
+        cv2.putText(
+            value,
+            f"{index}: {asset['label']}",
+            (left + 4, top + 22),
+            cv2.FONT_HERSHEY_SIMPLEX,
+            0.40,
             (30, 70, 230),
             1,
             cv2.LINE_AA,
@@ -339,7 +515,9 @@ def integrate_asset(asset: dict[str, Any], extracted_path: Path) -> dict[str, An
     }
 
 
-def make_contact_sheet(assets: list[dict[str, Any]]) -> Path:
+def make_contact_sheet(
+    assets: list[dict[str, Any]], filename: str = "contact-sheet.png"
+) -> Path:
     cell_width, cell_height = 230, 250
     columns = 6
     rows = (len(assets) + columns - 1) // columns
@@ -379,7 +557,7 @@ def make_contact_sheet(assets: list[dict[str, Any]]) -> Path:
             fill="#57455f",
             font=font,
         )
-    destination = REVIEW_ROOT / "contact-sheet.png"
+    destination = REVIEW_ROOT / filename
     temporary = destination.with_name(f".{destination.name}.{os.getpid()}.tmp")
     destination.parent.mkdir(parents=True, exist_ok=True)
     canvas.save(temporary, format="PNG", optimize=True)
@@ -452,17 +630,78 @@ def run_pipeline() -> dict[str, Any]:
         for name in SHEET_NAMES:
             image = load_sheet(SOURCE_ROOT / name)
             segmentation = segment_sheet(image)
-            expected = len(assets_by_sheet[name])
-            if len(segmentation.components) != expected:
+            metadata = assets_by_sheet[name]
+            region_flags = ["region" in asset for asset in metadata]
+            if any(region_flags) and not all(region_flags):
                 raise PipelineError(
-                    f"{name} yielded {len(segmentation.components)} components; "
-                    f"catalog expects {expected}. Refuse to relabel shifted art."
+                    f"{name} mixes connected-component and manual-region extraction"
+                )
+            uses_regions = bool(metadata) and all(region_flags)
+            if uses_regions:
+                component_records = []
+                for index, asset in enumerate(metadata, 1):
+                    if "edgeSeed" in asset:
+                        component = component_at_seed(
+                            segmentation, asset["edgeSeed"]
+                        )
+                        component_records.append(
+                            {
+                                "componentIndex": index,
+                                "extractionMode": "seeded-connected-component-edge-matte",
+                                "edgeSeed": asset["edgeSeed"],
+                                "edgeBounds": component.bounds,
+                                "foregroundArea": component.area,
+                            }
+                        )
+                    else:
+                        left, top, right, bottom = asset["region"]
+                        local = (
+                            segmentation.distance[top:bottom, left:right]
+                            > EDGE_THRESHOLD
+                        )
+                        hard_y, hard_x = np.where(local)
+                        if hard_x.size == 0:
+                            raise PipelineError(
+                                f"{name} region {index} has no foreground edges"
+                            )
+                        component_records.append(
+                            {
+                                "componentIndex": index,
+                                "extractionMode": "manual-region-edge-matte",
+                                "region": asset["region"],
+                                "edgeBounds": [
+                                    left + int(hard_x.min()),
+                                    top + int(hard_y.min()),
+                                    left + int(hard_x.max()) + 1,
+                                    top + int(hard_y.max()) + 1,
+                                ],
+                                "foregroundArea": int(np.count_nonzero(local)),
+                            }
+                        )
+                annotated = annotated_regions(image, metadata)
+            else:
+                expected = len(metadata)
+                if len(segmentation.components) != expected:
+                    raise PipelineError(
+                        f"{name} yielded {len(segmentation.components)} components; "
+                        f"catalog expects {expected}. Refuse to relabel shifted art."
+                    )
+                component_records = [
+                    {
+                        "componentIndex": index,
+                        "extractionMode": "connected-component-edge-matte",
+                        "edgeBounds": component.bounds,
+                        "foregroundArea": component.area,
+                    }
+                    for index, component in enumerate(
+                        segmentation.components, start=1
+                    )
+                ]
+                annotated = annotated_sheet(
+                    image, segmentation.components, metadata
                 )
             images[name] = image
             segmentations[name] = segmentation
-            annotated = annotated_sheet(
-                image, segmentation.components, assets_by_sheet[name]
-            )
             review_path = EVIDENCE_ROOT / "edge-labels" / name.replace(".jpg", ".png")
             success, encoded = cv2.imencode(
                 ".png", annotated, [cv2.IMWRITE_PNG_COMPRESSION, 9]
@@ -476,17 +715,8 @@ def run_pipeline() -> dict[str, Any]:
                     "backgroundRGB": [
                         int(value) for value in segmentation.background_bgr[::-1]
                     ],
-                    "componentCount": len(segmentation.components),
-                    "components": [
-                        {
-                            "componentIndex": index,
-                            "edgeBounds": component.bounds,
-                            "foregroundArea": component.area,
-                        }
-                        for index, component in enumerate(
-                            segmentation.components, start=1
-                        )
-                    ],
+                    "componentCount": len(component_records),
+                    "components": component_records,
                     "reviewPath": str(review_path.relative_to(REPO_ROOT)),
                     "reviewSha256": sha256_file(review_path),
                 }
@@ -500,10 +730,33 @@ def run_pipeline() -> dict[str, Any]:
         for name in SHEET_NAMES:
             image = ctx["images"][name]
             segmentation = ctx["segmentations"][name]
-            for component, asset in zip(
-                segmentation.components, assets_by_sheet[name]
-            ):
-                rgba, source_bounds = extract_component(image, segmentation, component)
+            for asset in assets_by_sheet[name]:
+                if "edgeSeed" in asset:
+                    component = component_at_seed(
+                        segmentation, asset["edgeSeed"]
+                    )
+                    rgba, source_bounds = extract_component(
+                        image, segmentation, component
+                    )
+                    edge_bounds = component.bounds
+                    foreground_area = component.area
+                elif "region" in asset:
+                    rgba, source_bounds, edge_bounds, foreground_area = extract_region(
+                        image,
+                        segmentation,
+                        asset["region"],
+                        asset.get("isolationPolygon"),
+                        int(asset.get("minimumIslandArea", 0)),
+                    )
+                else:
+                    component = segmentation.components[
+                        int(asset["componentIndex"]) - 1
+                    ]
+                    rgba, source_bounds = extract_component(
+                        image, segmentation, component
+                    )
+                    edge_bounds = component.bounds
+                    foreground_area = component.area
                 destination = EXTRACTED_ROOT / f"{asset['id']}.png"
                 save_png(destination, rgba)
                 metrics = transparent_metrics(destination)
@@ -518,8 +771,8 @@ def run_pipeline() -> dict[str, Any]:
                     {
                         "id": asset["id"],
                         "sourceBounds": source_bounds,
-                        "edgeBounds": component.bounds,
-                        "foregroundArea": component.area,
+                        "edgeBounds": edge_bounds,
+                        "foregroundArea": foreground_area,
                         "path": str(destination.relative_to(REPO_ROOT)),
                         **metrics,
                     }
@@ -545,6 +798,9 @@ def run_pipeline() -> dict[str, Any]:
             manifest_assets.append(
                 {
                     **asset,
+                    "role": asset.get(
+                        "role", spec.get("defaultRole", "placeable-room-prop")
+                    ),
                     "sourcePath": str((SOURCE_ROOT / asset["sheet"]).relative_to(REPO_ROOT)),
                     "sourceSha256": sha256_file(SOURCE_ROOT / asset["sheet"]),
                     "sourceBounds": extraction["sourceBounds"],
@@ -563,16 +819,19 @@ def run_pipeline() -> dict[str, Any]:
                 }
             )
         category_counts: dict[str, int] = {}
+        role_counts: dict[str, int] = {}
         for asset in manifest_assets:
             category_counts[asset["category"]] = (
                 category_counts.get(asset["category"], 0) + 1
             )
+            role_counts[asset["role"]] = role_counts.get(asset["role"], 0) + 1
         manifest = {
             "schemaVersion": 1,
-            "collectionId": "cozy-room-kit",
+            "collectionId": spec["collectionId"],
             "pipelineVersion": PIPELINE_VERSION,
             "assetCount": len(manifest_assets),
             "categoryCounts": dict(sorted(category_counts.items())),
+            "roleCounts": dict(sorted(role_counts.items())),
             "assets": manifest_assets,
         }
         write_json(MANIFEST_PATH, manifest)
@@ -597,13 +856,26 @@ def run_pipeline() -> dict[str, Any]:
             "manifestSha256": sha256_file(MANIFEST_PATH),
             "assetCount": len(manifest_assets),
             "categoryCounts": manifest["categoryCounts"],
+            "roleCounts": manifest["roleCounts"],
         }
 
     def review(ctx: dict[str, Any]) -> dict[str, Any]:
         path = make_contact_sheet(ctx["assets"])
+        ingredient_assets = [
+            asset
+            for asset in ctx["assets"]
+            if asset.get("role") == "furniture-store-ingredient"
+        ]
+        ingredient_path = make_contact_sheet(
+            ingredient_assets, "furniture-ingredients-contact-sheet.png"
+        )
         return {
             "contactSheetPath": str(path.relative_to(REPO_ROOT)),
             "contactSheetSha256": sha256_file(path),
+            "ingredientContactSheetPath": str(
+                ingredient_path.relative_to(REPO_ROOT)
+            ),
+            "ingredientContactSheetSha256": sha256_file(ingredient_path),
         }
 
     def validate(ctx: dict[str, Any]) -> dict[str, Any]:
@@ -614,8 +886,15 @@ def run_pipeline() -> dict[str, Any]:
             raise PipelineError("Catalog contains duplicate asset IDs")
         if len(catalog_names) != len(set(catalog_names)):
             raise PipelineError("Catalog contains duplicate asset catalog names")
-        if manifest["assetCount"] != len(assets) or len(assets) != 66:
-            raise PipelineError("Expected exactly 66 cataloged transparent props")
+        expected_asset_count = int(spec.get("expectedAssetCount", 0))
+        if (
+            expected_asset_count <= 0
+            or manifest["assetCount"] != len(assets)
+            or len(assets) != expected_asset_count
+        ):
+            raise PipelineError(
+                f"Expected exactly {expected_asset_count} cataloged transparent assets"
+            )
         for asset in assets:
             extracted = EXTRACTED_ROOT / f"{asset['id']}.png"
             integrated = (
@@ -712,7 +991,7 @@ def parser() -> argparse.ArgumentParser:
         type=Path,
         action="append",
         default=[],
-        help="Source atlas path, repeated exactly four times in sheet order",
+        help="Source atlas path, repeated once per sheet in sheet order",
     )
     return value
 
@@ -727,7 +1006,7 @@ def main() -> int:
             raise PipelineError(
                 "Missing imported source sheets: "
                 + ", ".join(missing)
-                + ". Supply four ordered --source arguments."
+                + f". Supply {len(SHEET_NAMES)} ordered --source arguments."
             )
         run = run_pipeline()
         print(
@@ -735,7 +1014,7 @@ def main() -> int:
                 {
                     "event": "cozy-room.dag.completed",
                     "status": run["status"],
-                    "assetCount": 66,
+                    "assetCount": run["nodes"][-1]["output"]["assetCount"],
                     "manifest": str(MANIFEST_PATH.relative_to(REPO_ROOT)),
                 },
                 separators=(",", ":"),

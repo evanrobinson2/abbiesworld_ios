@@ -36,7 +36,7 @@
   "nodes": [
     {
       "dependencies": [],
-      "inputDigest": "3ed26385ca189e4b40c03707c3aecbfb1dd2751f8d136adb676aff03f49e87d5",
+      "inputDigest": "d097bbf3ff207e32faabe28c4aa7cbfe7c18c904fba13ef8166bc94118929d57",
       "node": "010.verify-sources",
       "output": {
         "sources": [
@@ -63,6 +63,12 @@
             "sha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
             "sheet": "sheet-04.jpg",
             "width": 1024
+          },
+          {
+            "height": 1024,
+            "sha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+            "sheet": "sheet-05.jpg",
+            "width": 1024
           }
         ]
       },
@@ -72,7 +78,7 @@
       "dependencies": [
         "010.verify-sources"
       ],
-      "inputDigest": "f8e3ebbc9c762b0b813148fb61eebcd11e866c09e2f61ecdc452c2da70464abf",
+      "inputDigest": "e4f2900e56b060649322e837cc6d2ac588365d9c1f9a25a456cc886e8012578b",
       "node": "020.detect-edges",
       "output": {
         "sheets": [
@@ -92,6 +98,7 @@
                   452,
                   407
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 102670
               },
               {
@@ -102,6 +109,7 @@
                   702,
                   314
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 32296
               },
               {
@@ -112,6 +120,7 @@
                   980,
                   319
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 47352
               },
               {
@@ -122,6 +131,7 @@
                   233,
                   737
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 26949
               },
               {
@@ -132,6 +142,7 @@
                   727,
                   489
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 30292
               },
               {
@@ -142,6 +153,7 @@
                   984,
                   502
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 16356
               },
               {
@@ -152,6 +164,7 @@
                   455,
                   692
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 38314
               },
               {
@@ -162,6 +175,7 @@
                   798,
                   748
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 45098
               },
               {
@@ -172,6 +186,7 @@
                   981,
                   738
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 30124
               },
               {
@@ -182,6 +197,7 @@
                   256,
                   983
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 31882
               },
               {
@@ -192,6 +208,7 @@
                   477,
                   990
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 39079
               },
               {
@@ -202,6 +219,7 @@
                   779,
                   965
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 21738
               },
               {
@@ -212,6 +230,7 @@
                   967,
                   985
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 30985
               },
               {
@@ -222,6 +241,7 @@
                   639,
                   981
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 13071
               }
             ],
@@ -245,6 +265,7 @@
                   392,
                   418
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 89208
               },
               {
@@ -255,6 +276,7 @@
                   628,
                   316
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 28371
               },
               {
@@ -265,6 +287,7 @@
                   929,
                   314
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 44959
               },
               {
@@ -275,6 +298,7 @@
                   799,
                   564
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 17779
               },
               {
@@ -285,6 +309,7 @@
                   659,
                   528
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 37869
               },
               {
@@ -295,6 +320,7 @@
                   984,
                   489
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 12611
               },
               {
@@ -305,6 +331,7 @@
                   236,
                   711
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 36324
               },
               {
@@ -315,6 +342,7 @@
                   461,
                   728
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 34010
               },
               {
@@ -325,6 +353,7 @@
                   971,
                   736
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 29947
               },
               {
@@ -335,6 +364,7 @@
                   766,
                   746
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 27655
               },
               {
@@ -345,6 +375,7 @@
                   184,
                   941
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 17261
               },
               {
@@ -355,6 +386,7 @@
                   335,
                   965
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 24148
               },
               {
@@ -365,6 +397,7 @@
                   525,
                   968
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 23589
               },
               {
@@ -375,6 +408,7 @@
                   736,
                   993
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 26539
               },
               {
@@ -385,6 +419,7 @@
                   974,
                   989
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 30758
               }
             ],
@@ -408,6 +443,7 @@
                   381,
                   354
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 72691
               },
               {
@@ -418,6 +454,7 @@
                   608,
                   369
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 32761
               },
               {
@@ -428,6 +465,7 @@
                   747,
                   402
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 15804
               },
               {
@@ -438,6 +476,7 @@
                   996,
                   276
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 37242
               },
               {
@@ -448,6 +487,7 @@
                   976,
                   437
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 24492
               },
               {
@@ -458,6 +498,7 @@
                   258,
                   508
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 23592
               },
               {
@@ -468,6 +509,7 @@
                   374,
                   525
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 8139
               },
               {
@@ -478,6 +520,7 @@
                   426,
                   483
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 3878
               },
               {
@@ -488,6 +531,7 @@
                   574,
                   603
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 9788
               },
               {
@@ -498,6 +542,7 @@
                   774,
                   682
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 32510
               },
               {
@@ -508,6 +553,7 @@
                   993,
                   778
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 50065
               },
               {
@@ -518,6 +564,7 @@
                   252,
                   732
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 30105
               },
               {
@@ -528,6 +575,7 @@
                   337,
                   622
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 2811
               },
               {
@@ -538,6 +586,7 @@
                   434,
                   661
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 7286
               },
               {
@@ -548,6 +597,7 @@
                   617,
                   799
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 19997
               },
               {
@@ -558,6 +608,7 @@
                   235,
                   992
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 33527
               },
               {
@@ -568,6 +619,7 @@
                   384,
                   806
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 10964
               },
               {
@@ -578,6 +630,7 @@
                   786,
                   986
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 25144
               },
               {
@@ -588,6 +641,7 @@
                   982,
                   998
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 26035
               },
               {
@@ -598,6 +652,7 @@
                   426,
                   1001
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 19129
               },
               {
@@ -608,6 +663,7 @@
                   606,
                   997
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 15790
               }
             ],
@@ -631,6 +687,7 @@
                   441,
                   373
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 87968
               },
               {
@@ -641,6 +698,7 @@
                   726,
                   296
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 36870
               },
               {
@@ -651,6 +709,7 @@
                   988,
                   256
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 34694
               },
               {
@@ -661,6 +720,7 @@
                   829,
                   455
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 12269
               },
               {
@@ -671,6 +731,7 @@
                   992,
                   511
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 16734
               },
               {
@@ -681,6 +742,7 @@
                   219,
                   671
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 24178
               },
               {
@@ -691,6 +753,7 @@
                   612,
                   481
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 36903
               },
               {
@@ -701,6 +764,7 @@
                   436,
                   670
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 21018
               },
               {
@@ -711,6 +775,7 @@
                   776,
                   701
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 32394
               },
               {
@@ -721,6 +786,7 @@
                   568,
                   747
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 16642
               },
               {
@@ -731,6 +797,7 @@
                   965,
                   729
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 18649
               },
               {
@@ -741,6 +808,7 @@
                   429,
                   809
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 14527
               },
               {
@@ -751,6 +819,7 @@
                   263,
                   985
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 42059
               },
               {
@@ -761,6 +830,7 @@
                   729,
                   988
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 34973
               },
               {
@@ -771,6 +841,7 @@
                   991,
                   983
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 32860
               },
               {
@@ -781,12 +852,378 @@
                   462,
                   968
                 ],
+                "extractionMode": "connected-component-edge-matte",
                 "foregroundArea": 15993
               }
             ],
             "reviewPath": "AssetSources/CozyRoomKit/evidence/edge-labels/sheet-04.png",
             "reviewSha256": "5776840bab42889d1848ef3ea0acb89f0256501e51f50e7eb4a303571e7a32b8",
             "sheet": "sheet-04.jpg"
+          },
+          {
+            "backgroundRGB": [
+              253,
+              251,
+              252
+            ],
+            "componentCount": 22,
+            "components": [
+              {
+                "componentIndex": 1,
+                "edgeBounds": [
+                  84,
+                  73,
+                  288,
+                  274
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 28343,
+                "region": [
+                  45,
+                  40,
+                  308,
+                  274
+                ]
+              },
+              {
+                "componentIndex": 2,
+                "edgeBounds": [
+                  310,
+                  83,
+                  543,
+                  267
+                ],
+                "edgeSeed": [
+                  410,
+                  150
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 28781
+              },
+              {
+                "componentIndex": 3,
+                "edgeBounds": [
+                  566,
+                  70,
+                  772,
+                  295
+                ],
+                "edgeSeed": [
+                  650,
+                  150
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 27059
+              },
+              {
+                "componentIndex": 4,
+                "edgeBounds": [
+                  780,
+                  49,
+                  948,
+                  268
+                ],
+                "edgeSeed": [
+                  850,
+                  150
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 26744
+              },
+              {
+                "componentIndex": 5,
+                "edgeBounds": [
+                  77,
+                  250,
+                  285,
+                  440
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 22137,
+                "region": [
+                  45,
+                  250,
+                  285,
+                  440
+                ]
+              },
+              {
+                "componentIndex": 6,
+                "edgeBounds": [
+                  264,
+                  276,
+                  519,
+                  452
+                ],
+                "edgeSeed": [
+                  400,
+                  350
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 27140
+              },
+              {
+                "componentIndex": 7,
+                "edgeBounds": [
+                  524,
+                  282,
+                  734,
+                  431
+                ],
+                "edgeSeed": [
+                  630,
+                  350
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 23172
+              },
+              {
+                "componentIndex": 8,
+                "edgeBounds": [
+                  743,
+                  284,
+                  982,
+                  448
+                ],
+                "edgeSeed": [
+                  850,
+                  350
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 25094
+              },
+              {
+                "componentIndex": 9,
+                "edgeBounds": [
+                  82,
+                  390,
+                  365,
+                  585
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 30396,
+                "region": [
+                  40,
+                  390,
+                  365,
+                  585
+                ]
+              },
+              {
+                "componentIndex": 10,
+                "edgeBounds": [
+                  335,
+                  435,
+                  425,
+                  570
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 5397,
+                "region": [
+                  335,
+                  435,
+                  425,
+                  570
+                ]
+              },
+              {
+                "componentIndex": 11,
+                "edgeBounds": [
+                  400,
+                  415,
+                  535,
+                  575
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 10968,
+                "region": [
+                  400,
+                  415,
+                  535,
+                  575
+                ]
+              },
+              {
+                "componentIndex": 12,
+                "edgeBounds": [
+                  450,
+                  410,
+                  740,
+                  650
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 42882,
+                "region": [
+                  450,
+                  410,
+                  740,
+                  650
+                ]
+              },
+              {
+                "componentIndex": 13,
+                "edgeBounds": [
+                  665,
+                  410,
+                  953,
+                  615
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 32476,
+                "region": [
+                  665,
+                  410,
+                  995,
+                  615
+                ]
+              },
+              {
+                "componentIndex": 14,
+                "edgeBounds": [
+                  83,
+                  535,
+                  285,
+                  755
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 28044,
+                "region": [
+                  40,
+                  535,
+                  285,
+                  755
+                ]
+              },
+              {
+                "componentIndex": 15,
+                "edgeBounds": [
+                  273,
+                  552,
+                  482,
+                  737
+                ],
+                "edgeSeed": [
+                  380,
+                  650
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 24694
+              },
+              {
+                "componentIndex": 16,
+                "edgeBounds": [
+                  475,
+                  595,
+                  675,
+                  770
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 13742,
+                "region": [
+                  475,
+                  595,
+                  675,
+                  770
+                ]
+              },
+              {
+                "componentIndex": 17,
+                "edgeBounds": [
+                  635,
+                  560,
+                  855,
+                  765
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 24159,
+                "region": [
+                  635,
+                  560,
+                  855,
+                  765
+                ]
+              },
+              {
+                "componentIndex": 18,
+                "edgeBounds": [
+                  841,
+                  599,
+                  942,
+                  723
+                ],
+                "edgeSeed": [
+                  900,
+                  650
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 8841
+              },
+              {
+                "componentIndex": 19,
+                "edgeBounds": [
+                  66,
+                  735,
+                  335,
+                  960
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 35611,
+                "region": [
+                  45,
+                  735,
+                  340,
+                  985
+                ]
+              },
+              {
+                "componentIndex": 20,
+                "edgeBounds": [
+                  344,
+                  752,
+                  549,
+                  942
+                ],
+                "edgeSeed": [
+                  450,
+                  850
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 24484
+              },
+              {
+                "componentIndex": 21,
+                "edgeBounds": [
+                  553,
+                  751,
+                  786,
+                  951
+                ],
+                "edgeSeed": [
+                  650,
+                  850
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 30609
+              },
+              {
+                "componentIndex": 22,
+                "edgeBounds": [
+                  789,
+                  737,
+                  954,
+                  953
+                ],
+                "edgeSeed": [
+                  870,
+                  850
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 23834
+              }
+            ],
+            "reviewPath": "AssetSources/CozyRoomKit/evidence/edge-labels/sheet-05.png",
+            "reviewSha256": "ec66810ebbf7e8d08fcb407565734188edb01d97209c785119928f01071574d7",
+            "sheet": "sheet-05.jpg"
           }
         ]
       },
@@ -796,10 +1233,10 @@
       "dependencies": [
         "020.detect-edges"
       ],
-      "inputDigest": "472399133445c616cc8c10463a196ba817f7be21ab926b61f2286eeafba9c30e",
+      "inputDigest": "3a1c09029c5acf65889fc60dec25ea67ba2a28713fda141d78d9dc4fbc6593a8",
       "node": "030.extract-alpha",
       "output": {
-        "assetCount": 66,
+        "assetCount": 88,
         "assets": [
           {
             "borderTransparentRatio": 1.0,
@@ -2318,6 +2755,512 @@
             ],
             "visiblePixels": 15993,
             "width": 176
+          },
+          {
+            "borderTransparentRatio": 0.961449,
+            "edgeBounds": [
+              84,
+              73,
+              288,
+              274
+            ],
+            "foregroundArea": 28343,
+            "height": 208,
+            "id": "fsi-s5-01-patchwork-batting-bundle",
+            "opaquePixels": 26626,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-01-patchwork-batting-bundle.png",
+            "sha256": "d3e890fc38e41733c8bc6259ed8d66ca077154df4482454e381adc286422ec87",
+            "sourceBounds": [
+              76,
+              66,
+              296,
+              274
+            ],
+            "visiblePixels": 28603,
+            "width": 220
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              310,
+              83,
+              543,
+              267
+            ],
+            "foregroundArea": 28781,
+            "height": 200,
+            "id": "fsi-s5-02-floral-branch-logs",
+            "opaquePixels": 27775,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-02-floral-branch-logs.png",
+            "sha256": "98405be26abb4919f1969b9849aff05bb338cbbe0f0ce1a11cd4c40234ae6d41",
+            "sourceBounds": [
+              302,
+              75,
+              551,
+              275
+            ],
+            "visiblePixels": 28784,
+            "width": 249
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              566,
+              70,
+              772,
+              295
+            ],
+            "foregroundArea": 27059,
+            "height": 241,
+            "id": "fsi-s5-03-golden-cord-spool",
+            "opaquePixels": 24885,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-03-golden-cord-spool.png",
+            "sha256": "152bcfb12d7095abc11a6e55948c1a08a53dbd4f3ae5d8aa7e12350e9f5a32a4",
+            "sourceBounds": [
+              558,
+              62,
+              780,
+              303
+            ],
+            "visiblePixels": 27446,
+            "width": 222
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              780,
+              49,
+              948,
+              268
+            ],
+            "foregroundArea": 26744,
+            "height": 235,
+            "id": "fsi-s5-04-starlight-jar",
+            "opaquePixels": 25369,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-04-starlight-jar.png",
+            "sha256": "a6844c1a9aa8bf371512d1e5fd37e5831902dcf76988cc8834d060c867d6ad29",
+            "sourceBounds": [
+              772,
+              41,
+              956,
+              276
+            ],
+            "visiblePixels": 26817,
+            "width": 184
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              77,
+              255,
+              276,
+              424
+            ],
+            "foregroundArea": 19472,
+            "height": 170,
+            "id": "fsi-s5-05-lavender-fabric-roll",
+            "opaquePixels": 18381,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-05-lavender-fabric-roll.png",
+            "sha256": "abecc670349e47f0e367049c3a8c15d0258d51ce40e94e31269ad757c6ee4bfb",
+            "sourceBounds": [
+              69,
+              262,
+              280,
+              432
+            ],
+            "visiblePixels": 19108,
+            "width": 211
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              264,
+              276,
+              519,
+              452
+            ],
+            "foregroundArea": 27140,
+            "height": 192,
+            "id": "fsi-s5-06-floral-fabric-bolt",
+            "opaquePixels": 26179,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-06-floral-fabric-bolt.png",
+            "sha256": "807f2b7ee813fbc4050c62cd81157b7e3452ed478ae66b57a8a0884b8eafb476",
+            "sourceBounds": [
+              256,
+              268,
+              527,
+              460
+            ],
+            "visiblePixels": 27140,
+            "width": 271
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              524,
+              282,
+              734,
+              431
+            ],
+            "foregroundArea": 23172,
+            "height": 165,
+            "id": "fsi-s5-07-mint-cushion-blank",
+            "opaquePixels": 22332,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-07-mint-cushion-blank.png",
+            "sha256": "5217fe308f123266c472ddb80fe726002ea2a5e0ea4b2b8b85b3258f13718a67",
+            "sourceBounds": [
+              516,
+              274,
+              742,
+              439
+            ],
+            "visiblePixels": 23186,
+            "width": 226
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              743,
+              284,
+              982,
+              448
+            ],
+            "foregroundArea": 25094,
+            "height": 180,
+            "id": "fsi-s5-08-embroidered-cushion-covers",
+            "opaquePixels": 24089,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-08-embroidered-cushion-covers.png",
+            "sha256": "558dfd2d17b550009ab3922afb83fd3e0ed0ab62d7bfa145b51c8425c18d37bb",
+            "sourceBounds": [
+              735,
+              276,
+              990,
+              456
+            ],
+            "visiblePixels": 25094,
+            "width": 255
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              82,
+              415,
+              351,
+              571
+            ],
+            "foregroundArea": 22470,
+            "height": 153,
+            "id": "fsi-s5-09-flowering-vine-cutting",
+            "opaquePixels": 18625,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-09-flowering-vine-cutting.png",
+            "sha256": "77270e2e9b566e636305b25b9467c8e1835e94e666796904d546481d9d19a842",
+            "sourceBounds": [
+              74,
+              410,
+              359,
+              563
+            ],
+            "visiblePixels": 22920,
+            "width": 285
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              345,
+              471,
+              416,
+              556
+            ],
+            "foregroundArea": 3249,
+            "height": 87,
+            "id": "fsi-s5-10-aqua-glass-gem",
+            "opaquePixels": 2649,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-10-aqua-glass-gem.png",
+            "sha256": "fd63980ccc19f4f6b640ddc7131e2f99c674b0c633283f7181b551bddc91dbeb",
+            "sourceBounds": [
+              337,
+              463,
+              424,
+              550
+            ],
+            "visiblePixels": 3204,
+            "width": 87
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              410,
+              439,
+              519,
+              549
+            ],
+            "foregroundArea": 7028,
+            "height": 107,
+            "id": "fsi-s5-11-prism-glass-gem",
+            "opaquePixels": 6472,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-11-prism-glass-gem.png",
+            "sha256": "33fae57615a2eccd748df1fc06222cf97c6ad283f8694de06e54ffd7008b708b",
+            "sourceBounds": [
+              402,
+              450,
+              527,
+              557
+            ],
+            "visiblePixels": 7014,
+            "width": 125
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              467,
+              449,
+              730,
+              641
+            ],
+            "foregroundArea": 26602,
+            "height": 208,
+            "id": "fsi-s5-12-coral-paint-and-brush",
+            "opaquePixels": 24593,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-12-coral-paint-and-brush.png",
+            "sha256": "21a531aecae2b80037cd33b561bc6c94d9ea298d5affbe8747c80a892a7ef4af",
+            "sourceBounds": [
+              459,
+              441,
+              726,
+              649
+            ],
+            "visiblePixels": 26004,
+            "width": 267
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              675,
+              435,
+              952,
+              603
+            ],
+            "foregroundArea": 23743,
+            "height": 165,
+            "id": "fsi-s5-13-carved-wood-ornaments",
+            "opaquePixels": 21998,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-13-carved-wood-ornaments.png",
+            "sha256": "3be21bb457eddcf465af8ffcc8b54e0e7ac824ffcc9ddaaab204dc8c874974d2",
+            "sourceBounds": [
+              667,
+              436,
+              960,
+              601
+            ],
+            "visiblePixels": 23449,
+            "width": 293
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              83,
+              550,
+              274,
+              740
+            ],
+            "foregroundArea": 25378,
+            "height": 192,
+            "id": "fsi-s5-14-rainbow-yarn-bundle",
+            "opaquePixels": 24249,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-14-rainbow-yarn-bundle.png",
+            "sha256": "2b91d175ab7a6b7b016ea79be2f9cab9f0f821ea79461ca675c17199e128683b",
+            "sourceBounds": [
+              75,
+              555,
+              270,
+              747
+            ],
+            "visiblePixels": 25126,
+            "width": 195
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              273,
+              552,
+              482,
+              737
+            ],
+            "foregroundArea": 24694,
+            "height": 201,
+            "id": "fsi-s5-15-tassel-trim-basket",
+            "opaquePixels": 23039,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-15-tassel-trim-basket.png",
+            "sha256": "63cff53b0c762bae9b942964023e52bf509eb925190e957c2e3e90e6fcab3112",
+            "sourceBounds": [
+              265,
+              544,
+              490,
+              745
+            ],
+            "visiblePixels": 24959,
+            "width": 225
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              506,
+              610,
+              664,
+              754
+            ],
+            "foregroundArea": 9885,
+            "height": 160,
+            "id": "fsi-s5-16-brass-furniture-fittings",
+            "opaquePixels": 8198,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-16-brass-furniture-fittings.png",
+            "sha256": "3a3e71ed57d69e04d94617688c956baa0fdcb07c1fb3afaa1e81632eaa553290",
+            "sourceBounds": [
+              498,
+              602,
+              666,
+              762
+            ],
+            "visiblePixels": 9710,
+            "width": 168
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              645,
+              585,
+              843,
+              756
+            ],
+            "foregroundArea": 19190,
+            "height": 174,
+            "id": "fsi-s5-17-miniature-drawer-parts",
+            "opaquePixels": 18253,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-17-miniature-drawer-parts.png",
+            "sha256": "26cac174b529989c943cb2417a13e2ba0152e94c6eeba48a550614f195443d59",
+            "sourceBounds": [
+              652,
+              577,
+              838,
+              751
+            ],
+            "visiblePixels": 18915,
+            "width": 186
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              841,
+              599,
+              942,
+              723
+            ],
+            "foregroundArea": 8841,
+            "height": 140,
+            "id": "fsi-s5-18-golden-button-set",
+            "opaquePixels": 7645,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-18-golden-button-set.png",
+            "sha256": "137a210e553a61e1cef049aeb05ea70c7f52602ffa24a063d75af69bebdb017d",
+            "sourceBounds": [
+              833,
+              591,
+              950,
+              731
+            ],
+            "visiblePixels": 8919,
+            "width": 117
+          },
+          {
+            "borderTransparentRatio": 0.985437,
+            "edgeBounds": [
+              66,
+              735,
+              335,
+              960
+            ],
+            "foregroundArea": 35611,
+            "height": 233,
+            "id": "fsi-s5-19-peach-canopy-drape",
+            "opaquePixels": 33969,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-19-peach-canopy-drape.png",
+            "sha256": "22c4ec88544361eed67927a033f414f7666f3cb5a7c274e74cc4a388bedf8e5d",
+            "sourceBounds": [
+              58,
+              735,
+              340,
+              968
+            ],
+            "visiblePixels": 35433,
+            "width": 282
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              344,
+              752,
+              549,
+              942
+            ],
+            "foregroundArea": 24484,
+            "height": 206,
+            "id": "fsi-s5-20-floral-applique-patches",
+            "opaquePixels": 23585,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-20-floral-applique-patches.png",
+            "sha256": "37937d581bd6091f0d763cce2abedb46307d6b27cf85f20abc0c01673bf4a862",
+            "sourceBounds": [
+              336,
+              744,
+              557,
+              950
+            ],
+            "visiblePixels": 24484,
+            "width": 221
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              553,
+              751,
+              786,
+              951
+            ],
+            "foregroundArea": 30609,
+            "height": 216,
+            "id": "fsi-s5-21-cardboard-templates-and-cord",
+            "opaquePixels": 28433,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-21-cardboard-templates-and-cord.png",
+            "sha256": "6181d287269ea64a036f50f40399149658e09e9b56530184d0d97c6166b2dc2a",
+            "sourceBounds": [
+              545,
+              743,
+              794,
+              959
+            ],
+            "visiblePixels": 30610,
+            "width": 249
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              789,
+              737,
+              954,
+              953
+            ],
+            "foregroundArea": 23834,
+            "height": 232,
+            "id": "fsi-s5-22-rose-glitter-jar",
+            "opaquePixels": 21799,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s5-22-rose-glitter-jar.png",
+            "sha256": "d4d152ad4ac96dc22e49b6b0f4197a0ecf92ab7888c5dd3fa8186fdf1d4daaea",
+            "sourceBounds": [
+              781,
+              729,
+              962,
+              961
+            ],
+            "visiblePixels": 23970,
+            "width": 181
           }
         ]
       },
@@ -2327,10 +3270,10 @@
       "dependencies": [
         "030.extract-alpha"
       ],
-      "inputDigest": "4442d371bf4c7643fbcb7ba4ecf588c5198f57c0e601eea7f6f00d5b44a07ef8",
+      "inputDigest": "b82293b45255e73e977efbf7ceba593e819cc275001586107824ca29b57afe31",
       "node": "040.integrate-xcassets",
       "output": {
-        "assetCount": 66,
+        "assetCount": 88,
         "assets": [
           {
             "assetCatalogName": "cozy_room_s1_01_forest_canopy_bed",
@@ -2727,6 +3670,138 @@
             "filename": "cozy_room_s4_16_teal_treasure_chest.png",
             "id": "crk-s4-16-teal-treasure-chest",
             "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_16_teal_treasure_chest.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_patchwork_batting_bundle",
+            "filename": "furniture_ingredient_patchwork_batting_bundle.png",
+            "id": "fsi-s5-01-patchwork-batting-bundle",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_patchwork_batting_bundle.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_floral_branch_logs",
+            "filename": "furniture_ingredient_floral_branch_logs.png",
+            "id": "fsi-s5-02-floral-branch-logs",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_floral_branch_logs.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_golden_cord_spool",
+            "filename": "furniture_ingredient_golden_cord_spool.png",
+            "id": "fsi-s5-03-golden-cord-spool",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_golden_cord_spool.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_starlight_jar",
+            "filename": "furniture_ingredient_starlight_jar.png",
+            "id": "fsi-s5-04-starlight-jar",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_starlight_jar.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_lavender_fabric_roll",
+            "filename": "furniture_ingredient_lavender_fabric_roll.png",
+            "id": "fsi-s5-05-lavender-fabric-roll",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_lavender_fabric_roll.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_floral_fabric_bolt",
+            "filename": "furniture_ingredient_floral_fabric_bolt.png",
+            "id": "fsi-s5-06-floral-fabric-bolt",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_floral_fabric_bolt.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_mint_cushion_blank",
+            "filename": "furniture_ingredient_mint_cushion_blank.png",
+            "id": "fsi-s5-07-mint-cushion-blank",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_mint_cushion_blank.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_embroidered_cushion_covers",
+            "filename": "furniture_ingredient_embroidered_cushion_covers.png",
+            "id": "fsi-s5-08-embroidered-cushion-covers",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_embroidered_cushion_covers.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_flowering_vine_cutting",
+            "filename": "furniture_ingredient_flowering_vine_cutting.png",
+            "id": "fsi-s5-09-flowering-vine-cutting",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_flowering_vine_cutting.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_aqua_glass_gem",
+            "filename": "furniture_ingredient_aqua_glass_gem.png",
+            "id": "fsi-s5-10-aqua-glass-gem",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_aqua_glass_gem.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_prism_glass_gem",
+            "filename": "furniture_ingredient_prism_glass_gem.png",
+            "id": "fsi-s5-11-prism-glass-gem",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_prism_glass_gem.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_coral_paint_and_brush",
+            "filename": "furniture_ingredient_coral_paint_and_brush.png",
+            "id": "fsi-s5-12-coral-paint-and-brush",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_coral_paint_and_brush.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_carved_wood_ornaments",
+            "filename": "furniture_ingredient_carved_wood_ornaments.png",
+            "id": "fsi-s5-13-carved-wood-ornaments",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_carved_wood_ornaments.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_rainbow_yarn_bundle",
+            "filename": "furniture_ingredient_rainbow_yarn_bundle.png",
+            "id": "fsi-s5-14-rainbow-yarn-bundle",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_rainbow_yarn_bundle.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_tassel_trim_basket",
+            "filename": "furniture_ingredient_tassel_trim_basket.png",
+            "id": "fsi-s5-15-tassel-trim-basket",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_tassel_trim_basket.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_brass_furniture_fittings",
+            "filename": "furniture_ingredient_brass_furniture_fittings.png",
+            "id": "fsi-s5-16-brass-furniture-fittings",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_brass_furniture_fittings.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_miniature_drawer_parts",
+            "filename": "furniture_ingredient_miniature_drawer_parts.png",
+            "id": "fsi-s5-17-miniature-drawer-parts",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_miniature_drawer_parts.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_golden_button_set",
+            "filename": "furniture_ingredient_golden_button_set.png",
+            "id": "fsi-s5-18-golden-button-set",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_golden_button_set.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_peach_canopy_drape",
+            "filename": "furniture_ingredient_peach_canopy_drape.png",
+            "id": "fsi-s5-19-peach-canopy-drape",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_peach_canopy_drape.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_floral_applique_patches",
+            "filename": "furniture_ingredient_floral_applique_patches.png",
+            "id": "fsi-s5-20-floral-applique-patches",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_floral_applique_patches.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_cardboard_templates_and_cord",
+            "filename": "furniture_ingredient_cardboard_templates_and_cord.png",
+            "id": "fsi-s5-21-cardboard-templates-and-cord",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_cardboard_templates_and_cord.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_rose_glitter_jar",
+            "filename": "furniture_ingredient_rose_glitter_jar.png",
+            "id": "fsi-s5-22-rose-glitter-jar",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_rose_glitter_jar.imageset"
           }
         ]
       },
@@ -2736,27 +3811,41 @@
       "dependencies": [
         "030.extract-alpha"
       ],
-      "inputDigest": "cbf05bc6b6b64245acac4f5ae1fa8c07e9b948476230a3b91a93671a247a6eb0",
+      "inputDigest": "b9401cce700a118167903c3590714b1416b5a445d319964870709ca78cb557dd",
       "node": "050.write-catalog",
       "output": {
-        "assetCount": 66,
+        "assetCount": 88,
         "categoryCounts": {
           "beds": 4,
           "botanical-decor": 2,
+          "botanical-materials": 1,
           "canopy-seating": 4,
           "carts": 4,
+          "cordage": 1,
           "crafting": 4,
           "hanging-decor": 4,
           "hanging-seating": 4,
+          "hardware": 2,
           "lighting": 9,
+          "lumber": 1,
+          "magical-materials": 4,
+          "notions": 2,
+          "packaging": 1,
+          "pigments": 1,
           "play-stages": 4,
           "rugs": 5,
           "seating": 7,
           "shelving": 6,
-          "storage": 9
+          "storage": 9,
+          "textiles": 7,
+          "wood-components": 2
         },
         "manifestPath": "AssetSources/CozyRoomKit/manifest.json",
-        "manifestSha256": "8821818f8a4f32d664edde7e0bf1e4246b4f50048f9fbaebf5c07a0fad7623cf",
+        "manifestSha256": "a691285e40a1bbeff3ea6f1adb3c31b69003a4f085f267b6b37dd2d07c2a9f52",
+        "roleCounts": {
+          "furniture-store-ingredient": 22,
+          "placeable-room-prop": 66
+        },
         "runtimeManifestPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_asset_manifest.dataset/cozy_room_asset_manifest.json"
       },
       "status": "completed"
@@ -2765,11 +3854,13 @@
       "dependencies": [
         "030.extract-alpha"
       ],
-      "inputDigest": "928c97d09758e1ffdbbf120b3551b832908050530738adb354b89427f3c98515",
+      "inputDigest": "6a17171572c71d72af04066c20b747914a047c1644368b5b28c178e1092bf494",
       "node": "060.render-review",
       "output": {
         "contactSheetPath": "AssetSources/CozyRoomKit/review/contact-sheet.png",
-        "contactSheetSha256": "4c9edd9e1ee1681d3f46d646c9fff7a915458c7e30510dd59152bfc66c478068"
+        "contactSheetSha256": "0692ef38be7455d52795dfa19a2f874c51ec460bb91eb5486ac4099aef797490",
+        "ingredientContactSheetPath": "AssetSources/CozyRoomKit/review/furniture-ingredients-contact-sheet.png",
+        "ingredientContactSheetSha256": "1c9b6243ca6d67561be979ea9c55830a73ae200c5624410755b64ea53b7798f0"
       },
       "status": "completed"
     },
@@ -2779,22 +3870,22 @@
         "050.write-catalog",
         "060.render-review"
       ],
-      "inputDigest": "9285fafe30b5f5ad1ef7cd40c44d88ee2c22bad429afae36f0c6bd2dbe7101ac",
+      "inputDigest": "96c5794da6bbc078d319b8dac632fca1ba0d86959a8de3ee6f350202993be663",
       "node": "070.validate",
       "output": {
         "alphaContract": "required",
-        "assetCount": 66,
+        "assetCount": 88,
         "runtimeBytesMatchExtracted": true,
         "runtimeManifestMatchesRepositoryManifest": true,
-        "sourceSheetCount": 4,
+        "sourceSheetCount": 5,
         "status": "pass"
       },
       "status": "completed"
     }
   ],
   "pipeline": "cozy-room-edge-extraction",
-  "pipelineVersion": 1,
+  "pipelineVersion": 2,
   "schemaVersion": 1,
-  "specSha256": "e34bb694a9fc708ca9cec6e38862bd6caee58fa7d93262071f7bdf5aaf451929",
+  "specSha256": "aa00e296db726299242abf727da1173af5e14a457abb2e09f2d6bfaea9c43cec",
   "status": "completed"
 }

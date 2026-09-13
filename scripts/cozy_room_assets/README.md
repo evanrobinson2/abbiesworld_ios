@@ -1,8 +1,9 @@
 # Cozy Room asset extraction DAG
 
-This local pipeline turns the four supplied 1024×1024 prop atlases into 66
-individually labeled transparent PNGs and integrates the exact bytes into the iOS
-asset catalog.
+This local pipeline turns the five supplied 1024×1024 atlases into 88 individually
+labeled transparent PNGs and integrates the exact bytes into the iOS asset catalog.
+The manifest distinguishes 66 `placeable-room-prop` assets from 22
+`furniture-store-ingredient` assets.
 
 ## Run
 
@@ -13,7 +14,8 @@ python3 scripts/cozy_room_assets/extract.py \
   --source /path/to/atlas-1.jpg \
   --source /path/to/atlas-2.jpg \
   --source /path/to/atlas-3.jpg \
-  --source /path/to/atlas-4.jpg
+  --source /path/to/atlas-4.jpg \
+  --source /path/to/furniture-ingredients-atlas.jpg
 ```
 
 Later deterministic runs need no arguments:
@@ -32,11 +34,11 @@ without interpreting images.
 catalog, render review} → validate`
 
 Edge detection estimates each sheet's pale background from its border, creates a
-foreground-distance mask, closes small gaps, and finds connected components. The
-expected component count is locked per source sheet so changed art cannot silently
-shift labels. GrabCut uses each selected edge component as foreground and neighboring
-components as background, which prevents overlapping bounding boxes from leaking
-into one another.
+foreground-distance mask, closes small gaps, and finds connected components. Room
+prop sheets lock their expected component count so changed art cannot silently shift
+labels. The ingredient atlas uses labeled semantic regions because several separate
+ingredients touch in the generated source. GrabCut still finds the real edge inside
+each region instead of exporting rectangular crops.
 
 Outputs:
 
@@ -48,7 +50,8 @@ Outputs:
   and textual validation status.
 - `AssetSources/CozyRoomKit/evidence/edge-labels/`: numbered edge-bound overlays.
 - `AssetSources/CozyRoomKit/review/contact-sheet.png`: checkerboard alpha review.
-- `Assets.xcassets/cozy_room_*.imageset`: game-ready catalog entries.
+- `Assets.xcassets/cozy_room_*.imageset`: game-ready room props.
+- `Assets.xcassets/furniture_ingredient_*.imageset`: game-ready store ingredients.
 - `Assets.xcassets/cozy_room_asset_manifest.dataset`: bundled runtime manifest.
 
 The source cluster labeled **Rainbow Craft Nook** stays one asset because its table,

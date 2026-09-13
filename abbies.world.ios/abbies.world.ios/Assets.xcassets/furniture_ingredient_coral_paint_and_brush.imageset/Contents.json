@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "filename": "furniture_ingredient_coral_paint_and_brush.png",
+      "idiom": "universal",
+      "scale": "1x"
+    },
+    {
+      "idiom": "universal",
+      "scale": "2x"
+    },
+    {
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "cozy-room-extraction-dag",
+    "version": 1
+  },
+  "properties": {
+    "preserves-vector-representation": false
+  }
+}

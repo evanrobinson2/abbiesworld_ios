@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "filename": "furniture_ingredient_brass_furniture_fittings.png",
+      "idiom": "universal",
+      "scale": "1x"
+    },
+    {
+      "idiom": "universal",
+      "scale": "2x"
+    },
+    {
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "cozy-room-extraction-dag",
+    "version": 1
+  },
+  "properties": {
+    "preserves-vector-representation": false
+  }
+}

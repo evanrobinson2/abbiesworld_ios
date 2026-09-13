@@ -1,5 +1,5 @@
 {
-  "assetCount": 66,
+  "assetCount": 88,
   "assets": [
     {
       "alpha": {
@@ -18,6 +18,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-01-forest-canopy-bed.png",
       "pngSha256": "4f90ba3ff3bbb45f61cdf3f413e6d71b7058fcbe3d41027df378fafd464d3367",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         33,
@@ -51,6 +52,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-02-leafy-hanging-nest.png",
       "pngSha256": "948a7b979670aaa9bd2f95ed140204dfd9d0fc0e2a71797d24920828e251eed6",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         460,
@@ -84,6 +86,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-03-twilight-canopy-chair.png",
       "pngSha256": "3f5cb4c7ff68893bf76143eee3a6342abc3f7f7d96021a055d620b2985ead14b",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         728,
@@ -117,6 +120,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-04-orchard-lantern-tree.png",
       "pngSha256": "b6e11a2d0246190c9c5f03ac1e75b841570409c745c2307ddca260765c798b65",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         44,
@@ -150,6 +154,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-05-cookie-flower-rug.png",
       "pngSha256": "d6da90a897ef24481ebe352186b026931d167e6e3d4a7c794f4d08dd15a4ee2f",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         427,
@@ -183,6 +188,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-06-celestial-branch-mobile.png",
       "pngSha256": "6b50a97bc626e8e04bddf3e9e6355240a94ed3d2c422fb3ae0fba2d5936484f7",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         748,
@@ -216,6 +222,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-07-patchwork-cottage-bookshelf.png",
       "pngSha256": "b108e327f1204fb4d551f84df3b422c09de157766f47c068c95965afe16723ee",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         217,
@@ -249,6 +256,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-08-rainbow-craft-nook.png",
       "pngSha256": "2d14050e0ec3217b105c0225f26665bb41281d13d683d4f5cbec7b097ca4748c",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         460,
@@ -283,6 +291,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-09-rosebud-wardrobe.png",
       "pngSha256": "f707a940ece1367e44e363421ba43a31deab5fbcf1afa18796d50c1921a3e2dd",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         800,
@@ -316,6 +325,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-10-garden-toy-chest.png",
       "pngSha256": "adc11613dc2504ab2d4eae3026251b99e983498a8322ef2a39538f4294c58ae7",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         35,
@@ -349,6 +359,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-11-patchwork-cushion-tower.png",
       "pngSha256": "c6fd19aba370952eb8ddfe5e7f2f9fb82be2e34b0cf7fc848e846eee4f337c3f",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         267,
@@ -382,6 +393,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-12-candy-bloom-plant.png",
       "pngSha256": "8803f0d710107345c9126ec42eca9d2ebd3f819afd4e1084422fc71a6f016ae7",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         593,
@@ -415,6 +427,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-13-woodland-puppet-stage.png",
       "pngSha256": "a028be10bc0f5579f5f5db7e868984b6bb7a6ff18e5ce5d3b774f1b1de9b176f",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         786,
@@ -448,6 +461,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-14-storybook-handcart.png",
       "pngSha256": "db1a9929903467f2bac236f0b47cea411d106176529c173680a1f876ebdad9e0",
+      "role": "placeable-room-prop",
       "sheet": "sheet-01.jpg",
       "sourceBounds": [
         502,
@@ -481,6 +495,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-01-blossom-tree-bed.png",
       "pngSha256": "96907b85ab14143af6b7504881a56b60a272b6f81b909dee9f6e40451b9bdb52",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         31,
@@ -514,6 +529,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-02-pillow-hanging-nest.png",
       "pngSha256": "1e063adf533041796820e8cffd2c27b5af43c4ce2764ba41d921e8b9a0d0924d",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         419,
@@ -547,6 +563,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-03-peach-canopy-daybed.png",
       "pngSha256": "32bb74f7e02fc8a4f8c44d9884379f499d9e49c3902cb2b873df3ad78996a59d",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         677,
@@ -580,6 +597,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-04-triple-blossom-tree-lamp.png",
       "pngSha256": "990659f314b7406e275e733b6ac611c67eaea79d1deaa2e2d15254dbff78b302",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         651,
@@ -613,6 +631,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-05-petal-cushion-rug.png",
       "pngSha256": "7b5a868510c6b457dacc15e4c4fda56ca7d17fe46ff42e30cd90010b8faf2a25",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         359,
@@ -646,6 +665,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-06-moon-star-branch-mobile.png",
       "pngSha256": "fa0cd9f2fde74b41e1a6f1aae87e86698bed6a5e54fd146e472cdb613f4c87c3",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         808,
@@ -679,6 +699,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-07-storybook-cottage-shelf.png",
       "pngSha256": "0305262cce446aab1a1639879d62cf307b7831c36ae08557f200fa533e91dcd5",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         43,
@@ -712,6 +733,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-08-sweeping-branch-bookshelf.png",
       "pngSha256": "0aae1942f12b5f0c65d820b19c791a7834509d5213a9f5cffece8a7d92191815",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         244,
@@ -745,6 +767,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-09-bow-heart-wardrobe.png",
       "pngSha256": "9b9b73d4e3a8b501ffab71f6b8a91a904f19a7e6eb4a94557e732fb93463d491",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         800,
@@ -778,6 +801,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-10-painters-table.png",
       "pngSha256": "766a3f7ba58005c1049ad06a70354f212b7e1f5789aef134f3c873c08b026cf2",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         492,
@@ -811,6 +835,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-11-mint-mushroom-stool.png",
       "pngSha256": "1e3ddbf4064231255c392eae0e215ad64949d8a7f983d561718aa74c0fdb888c",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         38,
@@ -844,6 +869,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-12-rose-cushion-stack.png",
       "pngSha256": "304e3b2dc19255898f78d9b484ddab9cf07ed495bb288cbdc3437ad7a440241b",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         177,
@@ -877,6 +903,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-13-mushroom-treasure-chest.png",
       "pngSha256": "b030bae41eb70ead877e9ca7eb8f7b3c2efdb3b20a8985c319ca9ead45fd301d",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         352,
@@ -910,6 +937,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-14-rolling-story-garden.png",
       "pngSha256": "c58c2d4def2f9049c82d527266af30e17ad8689e75edcc99e4db76853144fb40",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         557,
@@ -943,6 +971,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-15-creature-puppet-stage.png",
       "pngSha256": "e7985a0d6e159bbd99f0c0bacb20987af4337fc0e4f4d2165684f1d4d7f38548",
+      "role": "placeable-room-prop",
       "sheet": "sheet-02.jpg",
       "sourceBounds": [
         763,
@@ -976,6 +1005,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-01-treehouse-loft-bed.png",
       "pngSha256": "5eb106d09f727d237050c9f22f2099be35242aa605fe92ad80f9e477efba730e",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         20,
@@ -1009,6 +1039,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-02-pastel-hanging-nest.png",
       "pngSha256": "fcfa48f9c752713f1b0bcb3a6b7593a92b3cc1da5723c42852bbc2f71a39513c",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         393,
@@ -1042,6 +1073,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-03-pink-pavilion-floor-lamp.png",
       "pngSha256": "180d7508266c838055c44141400c71fc65c944efaa3ff8e45af0023e2235eb55",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         613,
@@ -1075,6 +1107,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-04-quilt-canopy-daybed.png",
       "pngSha256": "7dabbb9ad9bb55e10f2a17e7f9a2864cd49cd543608ab7c321dec2c946b15f62",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         757,
@@ -1108,6 +1141,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-05-blossom-compass-rug.png",
       "pngSha256": "b4d12aaa8d12c84d702bb59f30388c9f0d0ac19c9f634aefb21ed2e0fea1df37",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         745,
@@ -1141,6 +1175,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-06-patchwork-flower-rug.png",
       "pngSha256": "acfebf974d59c3ab1871fbd9e8b20e890500edefe913dd36503d7fb6fe553d9a",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         31,
@@ -1174,6 +1209,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-07-glass-orb-lantern-tree.png",
       "pngSha256": "995c37809977ee7ea20497d5be9f2639f3a879c70b2fbb7aa171c890f135e299",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         259,
@@ -1207,6 +1243,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-08-star-moon-pendant-pair.png",
       "pngSha256": "4aae05c68f59c4427d112dea2070729be4cc1d38f2478cc8fa4f4ee55faf6fe1",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         360,
@@ -1240,6 +1277,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-09-bead-and-bell-mobile.png",
       "pngSha256": "71767084c3ccd41f418aa5a40aa0f001fb6f514159bbfb1f7fabc36154604771",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         456,
@@ -1273,6 +1311,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-10-mint-cottage-bookcase.png",
       "pngSha256": "7cb49eb73dd7a446826f0a03fc8540912d809d8f2e8fee697cd10b1bd915d47b",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         576,
@@ -1306,6 +1345,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-11-sculpted-rose-wardrobe.png",
       "pngSha256": "9cd87e97a2a72d33b2497dbe0c49e0d30d823f7d21841972a14e4445dafb177f",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         779,
@@ -1339,6 +1379,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-12-curved-low-bookshelf.png",
       "pngSha256": "27c9617c2d20aad3a3ca758cde8dae6752df358fb7a2c6ee6fcc32a5e0a817ab",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         24,
@@ -1372,6 +1413,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-13-flower-cup-lamp.png",
       "pngSha256": "d12144d8cca7f6af75978def01120b17d55a33790230b1ff412b7dc175182978",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         270,
@@ -1405,6 +1447,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-14-crooked-branch-nightlight.png",
       "pngSha256": "077679c70a24d81c759f16318c71e6a41849f39ca19c1d0c47c3036b85d8049c",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         284,
@@ -1438,6 +1481,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-15-ribbon-art-table.png",
       "pngSha256": "9fed7949f760b5e839c3cb9d871d8c216ab38746c29a75e0f9cf18c92c417524",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         405,
@@ -1471,6 +1515,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-16-round-cushion-stack.png",
       "pngSha256": "9ea83b07db8b3b51135057854c9ca0554cf2e120ee70293396017025cc843df7",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         31,
@@ -1504,6 +1549,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-17-mushroom-and-stump-stools.png",
       "pngSha256": "b53aaba55964b6c9c612da520514ecf4e6730924c3abea03be96186aa0ad4a14",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         227,
@@ -1537,6 +1583,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-18-sugar-vine-plant.png",
       "pngSha256": "cb28fabd183881eaa6677d087734afc203aa901987b8036aa995c8008e32b6f1",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         609,
@@ -1570,6 +1617,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-19-book-display-stage.png",
       "pngSha256": "83f300de7ba21f49c195552c975d3b560d43cf1ab32b738e838e34ba3df53b6a",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         773,
@@ -1603,6 +1651,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-20-painted-treasure-chest.png",
       "pngSha256": "b0337f4d31fe200cb5368f5326dea2fadcfad354795a3c54ad1219aa01151bdb",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         260,
@@ -1636,6 +1685,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-21-library-wagon.png",
       "pngSha256": "ce719cf0c71fe4e09ee01ec426e6d88f23c8e7f26f958800ec0cac714c4ed5bc",
+      "role": "placeable-room-prop",
       "sheet": "sheet-03.jpg",
       "sourceBounds": [
         449,
@@ -1669,6 +1719,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-01-flower-bunk-bed.png",
       "pngSha256": "1c5c6913ccbc7166a4879bb712943b79f22dc9918c4c2b21b974629ae3e82938",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         26,
@@ -1702,6 +1753,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-02-patchwork-hanging-nest.png",
       "pngSha256": "90b449e460fe3762dc29365ec76a02a55c4aef7d6eae8b916d30d663c6d8f845",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         447,
@@ -1735,6 +1787,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-03-pink-canopy-nook.png",
       "pngSha256": "f8f33579740b17ccdab8b56cc604d9ffdbaef4e0bd55e6e39dc0bd3de0a52cc1",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         746,
@@ -1768,6 +1821,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-04-pumpkin-branch-lamp.png",
       "pngSha256": "9914a0217ceabf513452017240a552aa114a45e683d6665cbd6cf8e2cfd08a3a",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         649,
@@ -1801,6 +1855,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-05-mushroom-table-lamp.png",
       "pngSha256": "c519e00f8eca35702316506d93679c695e7fd11d8a0971110a30354b0004e09e",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         848,
@@ -1834,6 +1889,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-06-crescent-tree-floor-lamp.png",
       "pngSha256": "6510e2ce82e80cd8f6c81eef9b44633e858fb3b490f91dcc89be9beac4c5bfbc",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         25,
@@ -1867,6 +1923,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-07-pink-petal-rug.png",
       "pngSha256": "fa3c18655e73b4e82e1401e0f233ba03fa93c194ea19f31a9e1de4bb969fb503",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         300,
@@ -1900,6 +1957,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-08-wave-front-bookshelf.png",
       "pngSha256": "7d7e1049737fe084d03800438b1f03796e70a4039872da4c45939ec074279742",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         241,
@@ -1933,6 +1991,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-09-heart-panel-wardrobe.png",
       "pngSha256": "89fb8aab21d7a8e63d999b337d6b6d10b47c6d12435c0c035042da318c4591ba",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         592,
@@ -1966,6 +2025,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-10-rolled-blanket-cabinet.png",
       "pngSha256": "30945aa2001bde773fc6e79df5b3541a3f565304b29f32b54e7003a8351d8b0a",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         418,
@@ -1999,6 +2059,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-11-mushroom-table-set.png",
       "pngSha256": "95431026afd01ba810d2f150f3c782db87d0bfce2a263d7798d151c1648db42e",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         809,
@@ -2032,6 +2093,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-12-curling-craft-workbench.png",
       "pngSha256": "0d3fe6d7fdd587de7e0b63dc883f001e0471214100c4f46e4aeaebce12c7761b",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         245,
@@ -2065,6 +2127,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-13-ruffled-cushion-tower.png",
       "pngSha256": "25027be995b35185a5db0612f1323bee7b81923d7152ceceff5f90c89bc7b777",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         34,
@@ -2098,6 +2161,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-14-story-garden-cart.png",
       "pngSha256": "5387df58241d3599191df7fada8c4f32a8e5fb2329b1dcb361e2637dab4197eb",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         504,
@@ -2131,6 +2195,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-15-framed-art-stage.png",
       "pngSha256": "8c1608296c12bb40676cde6cc56f1fb2074b2b41bb95c976c5c1a5f037c29787",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         749,
@@ -2164,6 +2229,7 @@
       },
       "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-16-teal-treasure-chest.png",
       "pngSha256": "5cf9dd30d4e40a8ccdd24cfc37d7d574b13dddedfbc4a743c7519e3b1ba3f443",
+      "role": "placeable-room-prop",
       "sheet": "sheet-04.jpg",
       "sourceBounds": [
         294,
@@ -2179,24 +2245,1355 @@
         "flowers",
         "storage"
       ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 0.961449,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_patchwork_batting_bundle",
+      "category": "textiles",
+      "componentIndex": 1,
+      "description": "A ribbon-tied bundle of thick coral, mint, lavender, and cream patchwork batting.",
+      "id": "fsi-s5-01-patchwork-batting-bundle",
+      "label": "Patchwork Batting Bundle",
+      "pixelSize": {
+        "height": 208,
+        "width": 220
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-01-patchwork-batting-bundle.png",
+      "pngSha256": "d3e890fc38e41733c8bc6259ed8d66ca077154df4482454e381adc286422ec87",
+      "region": [
+        45,
+        40,
+        308,
+        274
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        76,
+        66,
+        296,
+        274
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "fabric",
+        "batting",
+        "patchwork",
+        "soft"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_floral_branch_logs",
+      "category": "lumber",
+      "componentIndex": 2,
+      "description": "A stack of dark branch logs wrapped in tiny green leaves and pink blossoms.",
+      "edgeSeed": [
+        410,
+        150
+      ],
+      "id": "fsi-s5-02-floral-branch-logs",
+      "label": "Floral Branch Logs",
+      "pixelSize": {
+        "height": 200,
+        "width": 249
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-02-floral-branch-logs.png",
+      "pngSha256": "98405be26abb4919f1969b9849aff05bb338cbbe0f0ce1a11cd4c40234ae6d41",
+      "region": [
+        295,
+        60,
+        555,
+        280
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        302,
+        75,
+        551,
+        275
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "wood",
+        "logs",
+        "branches",
+        "flowers"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_golden_cord_spool",
+      "category": "cordage",
+      "componentIndex": 3,
+      "description": "A large spool of braided golden cord with a tasseled, beaded loose end.",
+      "edgeSeed": [
+        650,
+        150
+      ],
+      "id": "fsi-s5-03-golden-cord-spool",
+      "label": "Golden Cord Spool",
+      "pixelSize": {
+        "height": 241,
+        "width": 222
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-03-golden-cord-spool.png",
+      "pngSha256": "152bcfb12d7095abc11a6e55948c1a08a53dbd4f3ae5d8aa7e12350e9f5a32a4",
+      "region": [
+        550,
+        35,
+        790,
+        315
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        558,
+        62,
+        780,
+        303
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "cord",
+        "rope",
+        "tassel",
+        "gold"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_starlight_jar",
+      "category": "magical-materials",
+      "componentIndex": 4,
+      "description": "A corked glass jar filled with warm glowing star-shaped pieces.",
+      "edgeSeed": [
+        850,
+        150
+      ],
+      "id": "fsi-s5-04-starlight-jar",
+      "label": "Starlight Jar",
+      "pixelSize": {
+        "height": 235,
+        "width": 184
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-04-starlight-jar.png",
+      "pngSha256": "a6844c1a9aa8bf371512d1e5fd37e5831902dcf76988cc8834d060c867d6ad29",
+      "region": [
+        765,
+        30,
+        970,
+        285
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        772,
+        41,
+        956,
+        276
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "stars",
+        "light",
+        "jar",
+        "magic"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_lavender_fabric_roll",
+      "category": "textiles",
+      "componentIndex": 5,
+      "description": "A compact roll of quilted lavender fabric decorated with small stitched flowers.",
+      "id": "fsi-s5-05-lavender-fabric-roll",
+      "isolationPolygon": [
+        [
+          65,
+          285
+        ],
+        [
+          170,
+          255
+        ],
+        [
+          245,
+          275
+        ],
+        [
+          275,
+          305
+        ],
+        [
+          275,
+          365
+        ],
+        [
+          260,
+          405
+        ],
+        [
+          185,
+          430
+        ],
+        [
+          90,
+          430
+        ],
+        [
+          55,
+          395
+        ],
+        [
+          55,
+          320
+        ]
+      ],
+      "label": "Lavender Fabric Roll",
+      "minimumIslandArea": 300,
+      "pixelSize": {
+        "height": 170,
+        "width": 211
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-05-lavender-fabric-roll.png",
+      "pngSha256": "abecc670349e47f0e367049c3a8c15d0258d51ce40e94e31269ad757c6ee4bfb",
+      "region": [
+        45,
+        250,
+        285,
+        440
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        69,
+        262,
+        280,
+        432
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "fabric",
+        "lavender",
+        "quilted",
+        "roll"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_floral_fabric_bolt",
+      "category": "textiles",
+      "componentIndex": 6,
+      "description": "A partially unrolled bolt of mint and coral fabric covered with soft flower shapes.",
+      "edgeSeed": [
+        400,
+        350
+      ],
+      "id": "fsi-s5-06-floral-fabric-bolt",
+      "label": "Floral Fabric Bolt",
+      "pixelSize": {
+        "height": 192,
+        "width": 271
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-06-floral-fabric-bolt.png",
+      "pngSha256": "807f2b7ee813fbc4050c62cd81157b7e3452ed478ae66b57a8a0884b8eafb476",
+      "region": [
+        250,
+        250,
+        530,
+        465
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        256,
+        268,
+        527,
+        460
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "fabric",
+        "floral",
+        "bolt",
+        "upholstery"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_mint_cushion_blank",
+      "category": "textiles",
+      "componentIndex": 7,
+      "description": "A thick square mint cushion blank with tufted folds and a central button.",
+      "edgeSeed": [
+        630,
+        350
+      ],
+      "id": "fsi-s5-07-mint-cushion-blank",
+      "label": "Mint Cushion Blank",
+      "pixelSize": {
+        "height": 165,
+        "width": 226
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-07-mint-cushion-blank.png",
+      "pngSha256": "5217fe308f123266c472ddb80fe726002ea2a5e0ea4b2b8b85b3258f13718a67",
+      "region": [
+        510,
+        255,
+        745,
+        445
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        516,
+        274,
+        742,
+        439
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "cushion",
+        "mint",
+        "tufted",
+        "upholstery"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_embroidered_cushion_covers",
+      "category": "textiles",
+      "componentIndex": 8,
+      "description": "Two cream and peach cushion covers embroidered with flowers and leafy vines.",
+      "edgeSeed": [
+        850,
+        350
+      ],
+      "id": "fsi-s5-08-embroidered-cushion-covers",
+      "label": "Embroidered Cushion Covers",
+      "pixelSize": {
+        "height": 180,
+        "width": 255
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-08-embroidered-cushion-covers.png",
+      "pngSha256": "558dfd2d17b550009ab3922afb83fd3e0ed0ab62d7bfa145b51c8425c18d37bb",
+      "region": [
+        730,
+        255,
+        995,
+        465
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        735,
+        276,
+        990,
+        456
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "cushions",
+        "embroidery",
+        "flowers",
+        "covers"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_flowering_vine_cutting",
+      "category": "botanical-materials",
+      "componentIndex": 9,
+      "description": "A fresh curling vine cutting with dark leaves and small peach blossoms.",
+      "id": "fsi-s5-09-flowering-vine-cutting",
+      "isolationPolygon": [
+        [
+          55,
+          450
+        ],
+        [
+          105,
+          420
+        ],
+        [
+          215,
+          410
+        ],
+        [
+          315,
+          430
+        ],
+        [
+          350,
+          475
+        ],
+        [
+          345,
+          525
+        ],
+        [
+          300,
+          565
+        ],
+        [
+          165,
+          570
+        ],
+        [
+          75,
+          550
+        ],
+        [
+          50,
+          495
+        ]
+      ],
+      "label": "Flowering Vine Cutting",
+      "minimumIslandArea": 250,
+      "pixelSize": {
+        "height": 153,
+        "width": 285
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-09-flowering-vine-cutting.png",
+      "pngSha256": "77270e2e9b566e636305b25b9467c8e1835e94e666796904d546481d9d19a842",
+      "region": [
+        40,
+        390,
+        365,
+        585
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        74,
+        410,
+        359,
+        563
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "vine",
+        "flowers",
+        "leaves",
+        "natural"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_aqua_glass_gem",
+      "category": "magical-materials",
+      "componentIndex": 10,
+      "description": "A smooth translucent aqua gem with a pearly mint highlight.",
+      "id": "fsi-s5-10-aqua-glass-gem",
+      "isolationPolygon": [
+        [
+          350,
+          480
+        ],
+        [
+          365,
+          455
+        ],
+        [
+          395,
+          455
+        ],
+        [
+          415,
+          480
+        ],
+        [
+          415,
+          530
+        ],
+        [
+          395,
+          555
+        ],
+        [
+          360,
+          555
+        ],
+        [
+          345,
+          520
+        ]
+      ],
+      "label": "Aqua Glass Gem",
+      "minimumIslandArea": 300,
+      "pixelSize": {
+        "height": 87,
+        "width": 87
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-10-aqua-glass-gem.png",
+      "pngSha256": "fd63980ccc19f4f6b640ddc7131e2f99c674b0c633283f7181b551bddc91dbeb",
+      "region": [
+        335,
+        435,
+        425,
+        570
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        337,
+        463,
+        424,
+        550
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "gem",
+        "aqua",
+        "glass",
+        "magic"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_prism_glass_gem",
+      "category": "magical-materials",
+      "componentIndex": 11,
+      "description": "A faceted gem reflecting vivid coral, pink, violet, and cyan planes.",
+      "id": "fsi-s5-11-prism-glass-gem",
+      "isolationPolygon": [
+        [
+          430,
+          440
+        ],
+        [
+          475,
+          435
+        ],
+        [
+          515,
+          460
+        ],
+        [
+          525,
+          510
+        ],
+        [
+          495,
+          555
+        ],
+        [
+          445,
+          565
+        ],
+        [
+          410,
+          525
+        ],
+        [
+          410,
+          480
+        ]
+      ],
+      "label": "Prism Glass Gem",
+      "minimumIslandArea": 300,
+      "pixelSize": {
+        "height": 107,
+        "width": 125
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-11-prism-glass-gem.png",
+      "pngSha256": "33fae57615a2eccd748df1fc06222cf97c6ad283f8694de06e54ffd7008b708b",
+      "region": [
+        400,
+        415,
+        535,
+        575
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        402,
+        450,
+        527,
+        557
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "gem",
+        "prism",
+        "faceted",
+        "magic"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_coral_paint_and_brush",
+      "category": "pigments",
+      "componentIndex": 12,
+      "description": "An open coral paint can paired with a broad wooden-handled finishing brush.",
+      "id": "fsi-s5-12-coral-paint-and-brush",
+      "isolationPolygon": [
+        [
+          470,
+          550
+        ],
+        [
+          520,
+          515
+        ],
+        [
+          525,
+          485
+        ],
+        [
+          545,
+          455
+        ],
+        [
+          640,
+          445
+        ],
+        [
+          690,
+          425
+        ],
+        [
+          725,
+          445
+        ],
+        [
+          730,
+          475
+        ],
+        [
+          690,
+          515
+        ],
+        [
+          695,
+          565
+        ],
+        [
+          660,
+          600
+        ],
+        [
+          590,
+          615
+        ],
+        [
+          565,
+          640
+        ],
+        [
+          485,
+          640
+        ],
+        [
+          460,
+          600
+        ]
+      ],
+      "label": "Coral Paint and Brush",
+      "minimumIslandArea": 500,
+      "pixelSize": {
+        "height": 208,
+        "width": 267
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-12-coral-paint-and-brush.png",
+      "pngSha256": "21a531aecae2b80037cd33b561bc6c94d9ea298d5affbe8747c80a892a7ef4af",
+      "region": [
+        450,
+        410,
+        740,
+        650
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        459,
+        441,
+        726,
+        649
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "paint",
+        "brush",
+        "coral",
+        "finish"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_carved_wood_ornaments",
+      "category": "wood-components",
+      "componentIndex": 13,
+      "description": "A loose pile of pale carved wooden stars, curls, rings, flowers, and trim pieces.",
+      "id": "fsi-s5-13-carved-wood-ornaments",
+      "isolationPolygon": [
+        [
+          700,
+          500
+        ],
+        [
+          735,
+          450
+        ],
+        [
+          835,
+          435
+        ],
+        [
+          930,
+          450
+        ],
+        [
+          980,
+          495
+        ],
+        [
+          980,
+          560
+        ],
+        [
+          940,
+          600
+        ],
+        [
+          820,
+          605
+        ],
+        [
+          705,
+          580
+        ],
+        [
+          675,
+          540
+        ]
+      ],
+      "label": "Carved Wood Ornaments",
+      "minimumIslandArea": 200,
+      "pixelSize": {
+        "height": 165,
+        "width": 293
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-13-carved-wood-ornaments.png",
+      "pngSha256": "3be21bb457eddcf465af8ffcc8b54e0e7ac824ffcc9ddaaab204dc8c874974d2",
+      "region": [
+        665,
+        410,
+        995,
+        615
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        667,
+        436,
+        960,
+        601
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "wood",
+        "carved",
+        "ornaments",
+        "trim"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_rainbow_yarn_bundle",
+      "category": "notions",
+      "componentIndex": 14,
+      "description": "A plush bundle of coral stuffing wrapped with lavender, teal, gold, and pink yarn.",
+      "id": "fsi-s5-14-rainbow-yarn-bundle",
+      "isolationPolygon": [
+        [
+          70,
+          590
+        ],
+        [
+          105,
+          555
+        ],
+        [
+          215,
+          550
+        ],
+        [
+          255,
+          580
+        ],
+        [
+          275,
+          670
+        ],
+        [
+          240,
+          735
+        ],
+        [
+          90,
+          745
+        ],
+        [
+          50,
+          690
+        ]
+      ],
+      "label": "Rainbow Yarn Bundle",
+      "minimumIslandArea": 100,
+      "pixelSize": {
+        "height": 192,
+        "width": 195
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-14-rainbow-yarn-bundle.png",
+      "pngSha256": "2b91d175ab7a6b7b016ea79be2f9cab9f0f821ea79461ca675c17199e128683b",
+      "region": [
+        40,
+        535,
+        285,
+        755
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        75,
+        555,
+        270,
+        747
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "yarn",
+        "stuffing",
+        "rainbow",
+        "soft"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_tassel_trim_basket",
+      "category": "notions",
+      "componentIndex": 15,
+      "description": "A woven supply basket packed with ribbon, cords, tassels, pom-poms, and fabric scraps.",
+      "edgeSeed": [
+        380,
+        650
+      ],
+      "id": "fsi-s5-15-tassel-trim-basket",
+      "label": "Tassel Trim Basket",
+      "pixelSize": {
+        "height": 201,
+        "width": 225
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-15-tassel-trim-basket.png",
+      "pngSha256": "63cff53b0c762bae9b942964023e52bf509eb925190e957c2e3e90e6fcab3112",
+      "region": [
+        255,
+        540,
+        495,
+        750
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        265,
+        544,
+        490,
+        745
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "basket",
+        "ribbon",
+        "tassels",
+        "notions"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_brass_furniture_fittings",
+      "category": "hardware",
+      "componentIndex": 16,
+      "description": "A set of polished brass knobs, pegs, and curved furniture connectors.",
+      "id": "fsi-s5-16-brass-furniture-fittings",
+      "isolationPolygon": [
+        [
+          500,
+          645
+        ],
+        [
+          535,
+          610
+        ],
+        [
+          615,
+          610
+        ],
+        [
+          660,
+          645
+        ],
+        [
+          665,
+          735
+        ],
+        [
+          625,
+          760
+        ],
+        [
+          520,
+          755
+        ],
+        [
+          485,
+          705
+        ]
+      ],
+      "label": "Brass Furniture Fittings",
+      "minimumIslandArea": 1000,
+      "pixelSize": {
+        "height": 160,
+        "width": 168
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-16-brass-furniture-fittings.png",
+      "pngSha256": "3a3e71ed57d69e04d94617688c956baa0fdcb07c1fb3afaa1e81632eaa553290",
+      "region": [
+        475,
+        595,
+        675,
+        770
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        498,
+        602,
+        666,
+        762
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "brass",
+        "hardware",
+        "knobs",
+        "connectors"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_miniature_drawer_parts",
+      "category": "wood-components",
+      "componentIndex": 17,
+      "description": "A compact stack of finished wooden drawer boxes with inset panels and tiny pulls.",
+      "id": "fsi-s5-17-miniature-drawer-parts",
+      "isolationPolygon": [
+        [
+          665,
+          600
+        ],
+        [
+          700,
+          575
+        ],
+        [
+          810,
+          580
+        ],
+        [
+          840,
+          615
+        ],
+        [
+          845,
+          715
+        ],
+        [
+          815,
+          755
+        ],
+        [
+          680,
+          755
+        ],
+        [
+          645,
+          720
+        ],
+        [
+          645,
+          630
+        ]
+      ],
+      "label": "Miniature Drawer Parts",
+      "minimumIslandArea": 300,
+      "pixelSize": {
+        "height": 174,
+        "width": 186
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-17-miniature-drawer-parts.png",
+      "pngSha256": "26cac174b529989c943cb2417a13e2ba0152e94c6eeba48a550614f195443d59",
+      "region": [
+        635,
+        560,
+        855,
+        765
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        652,
+        577,
+        838,
+        751
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "drawers",
+        "wood",
+        "components",
+        "cabinet"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_golden_button_set",
+      "category": "hardware",
+      "componentIndex": 18,
+      "description": "A mixed set of round golden upholstery buttons and embossed decorative fasteners.",
+      "edgeSeed": [
+        900,
+        650
+      ],
+      "id": "fsi-s5-18-golden-button-set",
+      "label": "Golden Button Set",
+      "pixelSize": {
+        "height": 140,
+        "width": 117
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-18-golden-button-set.png",
+      "pngSha256": "137a210e553a61e1cef049aeb05ea70c7f52602ffa24a063d75af69bebdb017d",
+      "region": [
+        830,
+        575,
+        965,
+        745
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        833,
+        591,
+        950,
+        731
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "buttons",
+        "gold",
+        "hardware",
+        "upholstery"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 0.985437,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_peach_canopy_drape",
+      "category": "textiles",
+      "componentIndex": 19,
+      "description": "A gathered peach canopy drape with tied panels and weighted golden tassels.",
+      "id": "fsi-s5-19-peach-canopy-drape",
+      "label": "Peach Canopy Drape",
+      "pixelSize": {
+        "height": 233,
+        "width": 282
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-19-peach-canopy-drape.png",
+      "pngSha256": "22c4ec88544361eed67927a033f414f7666f3cb5a7c274e74cc4a388bedf8e5d",
+      "region": [
+        45,
+        735,
+        340,
+        985
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        58,
+        735,
+        340,
+        968
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "drape",
+        "canopy",
+        "fabric",
+        "tassels"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_floral_applique_patches",
+      "category": "textiles",
+      "componentIndex": 20,
+      "description": "A small stack of scalloped peach textile patches with raised flower appliqués.",
+      "edgeSeed": [
+        450,
+        850
+      ],
+      "id": "fsi-s5-20-floral-applique-patches",
+      "label": "Floral Appliqué Patches",
+      "pixelSize": {
+        "height": 206,
+        "width": 221
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-20-floral-applique-patches.png",
+      "pngSha256": "37937d581bd6091f0d763cce2abedb46307d6b27cf85f20abc0c01673bf4a862",
+      "region": [
+        330,
+        735,
+        560,
+        970
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        336,
+        744,
+        557,
+        950
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "patches",
+        "applique",
+        "flowers",
+        "fabric"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_cardboard_templates_and_cord",
+      "category": "packaging",
+      "componentIndex": 21,
+      "description": "A stack of folded cardboard furniture templates beside loops of colorful utility cord.",
+      "edgeSeed": [
+        650,
+        850
+      ],
+      "id": "fsi-s5-21-cardboard-templates-and-cord",
+      "label": "Cardboard Templates and Cord",
+      "pixelSize": {
+        "height": 216,
+        "width": 249
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-21-cardboard-templates-and-cord.png",
+      "pngSha256": "6181d287269ea64a036f50f40399149658e09e9b56530184d0d97c6166b2dc2a",
+      "region": [
+        540,
+        725,
+        800,
+        980
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        545,
+        743,
+        794,
+        959
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "cardboard",
+        "templates",
+        "cord",
+        "packaging"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_rose_glitter_jar",
+      "category": "magical-materials",
+      "componentIndex": 22,
+      "description": "A corked blue glass jar filled with sparkling rose-pink finishing glitter.",
+      "edgeSeed": [
+        870,
+        850
+      ],
+      "id": "fsi-s5-22-rose-glitter-jar",
+      "label": "Rose Glitter Jar",
+      "pixelSize": {
+        "height": 232,
+        "width": 181
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s5-22-rose-glitter-jar.png",
+      "pngSha256": "d4d152ad4ac96dc22e49b6b0f4197a0ecf92ab7888c5dd3fa8186fdf1d4daaea",
+      "region": [
+        775,
+        710,
+        975,
+        985
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-05.jpg",
+      "sourceBounds": [
+        781,
+        729,
+        962,
+        961
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-05.jpg",
+      "sourceSha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
+      "tags": [
+        "ingredient",
+        "glitter",
+        "jar",
+        "pink",
+        "magic"
+      ]
     }
   ],
   "categoryCounts": {
     "beds": 4,
     "botanical-decor": 2,
+    "botanical-materials": 1,
     "canopy-seating": 4,
     "carts": 4,
+    "cordage": 1,
     "crafting": 4,
     "hanging-decor": 4,
     "hanging-seating": 4,
+    "hardware": 2,
     "lighting": 9,
+    "lumber": 1,
+    "magical-materials": 4,
+    "notions": 2,
+    "packaging": 1,
+    "pigments": 1,
     "play-stages": 4,
     "rugs": 5,
     "seating": 7,
     "shelving": 6,
-    "storage": 9
+    "storage": 9,
+    "textiles": 7,
+    "wood-components": 2
   },
   "collectionId": "cozy-room-kit",
-  "pipelineVersion": 1,
+  "pipelineVersion": 2,
+  "roleCounts": {
+    "furniture-store-ingredient": 22,
+    "placeable-room-prop": 66
+  },
   "schemaVersion": 1
 }
