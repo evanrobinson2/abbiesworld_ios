@@ -7,6 +7,10 @@ This folder contains documents that describe **what is** - current implementatio
 ### `DRAWER_IMPLEMENTATION_SUMMARY.md`
 Complete summary of the drawer implementation, including all phases, features, and technical details. Status: ✅ Complete.
 
+### `GAME_ASSET_REGISTRY_ADOPTION.md`
+Developer standard for registering, publishing, loading, caching, testing, and
+migrating game assets through Game Asset API v1.
+
 ### `MUSIC_IMPLEMENTATION_SUMMARY.md`
 Complete summary of the music playback system implementation, including MusicService, MusicTrack model, and Settings integration. Status: ✅ Complete.
 

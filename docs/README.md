@@ -17,6 +17,7 @@ Documents that describe **one-time problem solving** or processes - risk analyse
 
 **Current State:**
 - `DRAWER_IMPLEMENTATION_SUMMARY.md` - Drawer feature implementation details
+- `GAME_ASSET_REGISTRY_ADOPTION.md` - Standard asset contract and adoption guide for games
 - `MUSIC_IMPLEMENTATION_SUMMARY.md` - Music playback system implementation
 - `PROJECT_REVIEW.md` - Overall project review and assessment
 - `STANDALONE_MINIGAME_PATTERN.md` - Pattern for standalone minigame architecture

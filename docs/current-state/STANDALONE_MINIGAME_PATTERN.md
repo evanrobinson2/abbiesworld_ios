@@ -139,11 +139,8 @@ class {GameName}ViewModel: ObservableObject {
     private var cancellables = Set<AnyCancellable>()
     let audioService = {GameName}AudioService()
     
-    // Asset base URL - uses centralized ServerConfig
-    private var assetBaseURL: String {
-        let base = ServerConfig.shared.baseURL
-        return "\(base)/static/assets/minigames/{game_name}"
-    }
+    // Stable key used with Game Asset API v1.
+    private let gameAssetKey = "{game-name}"
     
     // MARK: - Initialization
     
@@ -195,7 +192,8 @@ class {GameName}ViewModel: ObservableObject {
 
 **Key Points:**
 - Self-contained state management
-- Uses `ServerConfig.shared` for server URL (shared service, but game is independent)
+- Uses one stable game key with
+  [Game Asset API v1](./GAME_ASSET_REGISTRY_ADOPTION.md)
 - Own audio service instance
 - Async asset loading
 - Background loading for non-critical assets
@@ -269,11 +267,8 @@ import AVFoundation
 class {GameName}AudioService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     private var backgroundMusicPlayer: AVAudioPlayer?
     
-    // Asset base URL
-    private var assetBaseURL: String {
-        let base = ServerConfig.shared.baseURL
-        return "\(base)/static/assets/minigames/{game_name}"
-    }
+    // Audio uses the same game-scoped registry as images and data.
+    private let gameAssetKey = "{game-name}"
     
     override init() {
         super.init()
@@ -306,7 +301,7 @@ class {GameName}AudioService: NSObject, ObservableObject, AVAudioPlayerDelegate 
 
 **Key Points:**
 - Self-contained audio management
-- Uses `ServerConfig.shared` for URLs
+- Resolves semantic audio keys through Game Asset API v1
 - Proper cleanup
 - Implements `AVAudioPlayerDelegate` if needed
 
@@ -355,11 +350,14 @@ These are shared but don't create tight coupling:
 
 1. **ServerConfig.shared**
    - Provides base URL
+   - Adds the read credential to registry and same-origin requests
    - Game is independent of how URL is configured
 
 2. **ImageCache.shared**
-   - Asset caching service
+   - Asset caching service for authenticated same-origin images
    - Game doesn't depend on main app for this
+   - Do not use it for an external CDN URL because it currently adds the
+     server authorization header; use the host-aware registry reader pattern
 
 3. **Standard Swift/SwiftUI**
    - Foundation, SwiftUI, SpriteKit, AVFoundation
@@ -403,45 +401,29 @@ struct {GameName}StandaloneApp: App {
 
 ## Asset Loading Pattern
 
-### Server Structure
+New games use a registry key rather than constructing paths under
+`/static/assets/minigames`.
 
-```
-/static/assets/minigames/
-  {game_name}/
-    images/
-      backgrounds/
-      objects/
-      ui/
-    sounds/
-      background.mp3
-      victory.mp3
+```text
+game: {game-name}
+  backgrounds/main
+  objects/collectible
+  music/background
+  music/victory
+  ui/pause-button
 ```
 
-### Loading Code
-
-```swift
-private func loadCriticalAssets() async {
-    let imageURLString = "\(assetBaseURL)/images/background.png"
-    if let url = URL(string: imageURLString) {
-        do {
-            if let image = try await ImageCache.shared.loadImage(from: url) {
-                await MainActor.run {
-                    gameState.backgroundImage = image
-                }
-            }
-        } catch {
-            print("❌ Error loading background: \(error)")
-            // Continue gracefully - game can work without image
-        }
-    }
-}
-```
+Follow [Game Asset Registry Adoption](./GAME_ASSET_REGISTRY_ADOPTION.md) for
+operator upserts, read-only Swift resolution, bundled fallbacks, caching, and
+textual verification.
 
 **Key Points:**
-- Use `ImageCache.shared` for caching
-- Handle errors gracefully
-- Continue game even if assets fail to load
-- Use `MainActor.run` for UI updates
+- Load by semantic key, not by filename or static URL
+- Keep critical bundled fallbacks so the game remains playable offline
+- Cache immutable revision URLs
+- Handle missing assets and unsupported MIME types explicitly
+- Never include the registry admin credential in an app target
+- Never forward server authorization to an external CDN
 
 ---
 
@@ -491,7 +473,7 @@ When creating a new minigame, ensure:
 
 - [ ] **Game ViewModel**
   - [ ] Self-contained state management
-  - [ ] Uses `ServerConfig.shared` for URLs
+  - [ ] Declares one stable Game Asset API key
   - [ ] Own asset loading
   - [ ] Proper cleanup methods
 
@@ -505,8 +487,10 @@ When creating a new minigame, ensure:
   - [ ] Proper cleanup
 
 - [ ] **Asset Organization**
-  - [ ] Assets organized on server
-  - [ ] Uses `ImageCache.shared`
+  - [ ] Semantic keys registered through Game Asset API v1
+  - [ ] Critical assets have bundled fallbacks
+  - [ ] Immutable remote revisions are cached
+  - [ ] External CDN requests do not receive server credentials
   - [ ] Graceful error handling
 
 - [ ] **Integration**
