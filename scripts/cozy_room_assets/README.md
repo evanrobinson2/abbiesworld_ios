@@ -1,8 +1,8 @@
 # Cozy Room asset extraction DAG
 
-This local pipeline turns the five supplied 1024×1024 atlases into 88 individually
+This local pipeline turns the six supplied 1024×1024 atlases into 108 individually
 labeled transparent PNGs and integrates the exact bytes into the iOS asset catalog.
-The manifest distinguishes 66 `placeable-room-prop` assets from 22
+The manifest distinguishes 66 `placeable-room-prop` assets from 42
 `furniture-store-ingredient` assets.
 
 ## Run
@@ -15,7 +15,8 @@ python3 scripts/cozy_room_assets/extract.py \
   --source /path/to/atlas-2.jpg \
   --source /path/to/atlas-3.jpg \
   --source /path/to/atlas-4.jpg \
-  --source /path/to/furniture-ingredients-atlas.jpg
+  --source /path/to/furniture-ingredients-atlas-1.jpg \
+  --source /path/to/furniture-ingredients-atlas-2.jpg
 ```
 
 Later deterministic runs need no arguments:

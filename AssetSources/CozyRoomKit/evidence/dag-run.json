@@ -36,7 +36,7 @@
   "nodes": [
     {
       "dependencies": [],
-      "inputDigest": "d097bbf3ff207e32faabe28c4aa7cbfe7c18c904fba13ef8166bc94118929d57",
+      "inputDigest": "4c3a279dd2b6b1ba6ae2477e8685a5289a35d0382cb9713c907591620dcf16e2",
       "node": "010.verify-sources",
       "output": {
         "sources": [
@@ -69,6 +69,12 @@
             "sha256": "fe2c40b7f3d0997f5ba6cce87687ce2ff188c188e9ce234f1a49ac4dd7c5286f",
             "sheet": "sheet-05.jpg",
             "width": 1024
+          },
+          {
+            "height": 1024,
+            "sha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+            "sheet": "sheet-06.jpg",
+            "width": 1024
           }
         ]
       },
@@ -78,7 +84,7 @@
       "dependencies": [
         "010.verify-sources"
       ],
-      "inputDigest": "e4f2900e56b060649322e837cc6d2ac588365d9c1f9a25a456cc886e8012578b",
+      "inputDigest": "90c63aeda5ee4b60b7512cd44264f02d974b01186fc7a26d0cb46f29ed5efafe",
       "node": "020.detect-edges",
       "output": {
         "sheets": [
@@ -1224,6 +1230,329 @@
             "reviewPath": "AssetSources/CozyRoomKit/evidence/edge-labels/sheet-05.png",
             "reviewSha256": "ec66810ebbf7e8d08fcb407565734188edb01d97209c785119928f01071574d7",
             "sheet": "sheet-05.jpg"
+          },
+          {
+            "backgroundRGB": [
+              254,
+              255,
+              255
+            ],
+            "componentCount": 20,
+            "components": [
+              {
+                "componentIndex": 1,
+                "edgeBounds": [
+                  62,
+                  75,
+                  274,
+                  248
+                ],
+                "edgeSeed": [
+                  150,
+                  150
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 24287
+              },
+              {
+                "componentIndex": 2,
+                "edgeBounds": [
+                  284,
+                  70,
+                  523,
+                  227
+                ],
+                "edgeSeed": [
+                  400,
+                  150
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 15598
+              },
+              {
+                "componentIndex": 3,
+                "edgeBounds": [
+                  512,
+                  61,
+                  706,
+                  208
+                ],
+                "edgeSeed": [
+                  620,
+                  130
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 19538
+              },
+              {
+                "componentIndex": 4,
+                "edgeBounds": [
+                  740,
+                  65,
+                  965,
+                  264
+                ],
+                "edgeSeed": [
+                  850,
+                  160
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 32164
+              },
+              {
+                "componentIndex": 5,
+                "edgeBounds": [
+                  57,
+                  252,
+                  281,
+                  438
+                ],
+                "edgeSeed": [
+                  150,
+                  350
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 26133
+              },
+              {
+                "componentIndex": 6,
+                "edgeBounds": [
+                  270,
+                  215,
+                  535,
+                  455
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 36968,
+                "region": [
+                  270,
+                  215,
+                  535,
+                  455
+                ]
+              },
+              {
+                "componentIndex": 7,
+                "edgeBounds": [
+                  500,
+                  215,
+                  800,
+                  460
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 34372,
+                "region": [
+                  500,
+                  215,
+                  800,
+                  460
+                ]
+              },
+              {
+                "componentIndex": 8,
+                "edgeBounds": [
+                  741,
+                  298,
+                  969,
+                  448
+                ],
+                "edgeSeed": [
+                  850,
+                  350
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 17775
+              },
+              {
+                "componentIndex": 9,
+                "edgeBounds": [
+                  79,
+                  460,
+                  176,
+                  604
+                ],
+                "edgeSeed": [
+                  125,
+                  530
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 12196
+              },
+              {
+                "componentIndex": 10,
+                "edgeBounds": [
+                  214,
+                  442,
+                  342,
+                  604
+                ],
+                "edgeSeed": [
+                  280,
+                  520
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 18257
+              },
+              {
+                "componentIndex": 11,
+                "edgeBounds": [
+                  359,
+                  452,
+                  569,
+                  606
+                ],
+                "edgeSeed": [
+                  450,
+                  520
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 22811
+              },
+              {
+                "componentIndex": 12,
+                "edgeBounds": [
+                  598,
+                  430,
+                  968,
+                  611
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 30257,
+                "region": [
+                  580,
+                  430,
+                  985,
+                  625
+                ]
+              },
+              {
+                "componentIndex": 13,
+                "edgeBounds": [
+                  59,
+                  624,
+                  289,
+                  809
+                ],
+                "edgeSeed": [
+                  170,
+                  700
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 26214
+              },
+              {
+                "componentIndex": 14,
+                "edgeBounds": [
+                  270,
+                  600,
+                  565,
+                  825
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 25041,
+                "region": [
+                  270,
+                  600,
+                  565,
+                  825
+                ]
+              },
+              {
+                "componentIndex": 15,
+                "edgeBounds": [
+                  525,
+                  600,
+                  750,
+                  825
+                ],
+                "extractionMode": "manual-region-edge-matte",
+                "foregroundArea": 20754,
+                "region": [
+                  525,
+                  600,
+                  750,
+                  825
+                ]
+              },
+              {
+                "componentIndex": 16,
+                "edgeBounds": [
+                  747,
+                  625,
+                  952,
+                  759
+                ],
+                "edgeSeed": [
+                  850,
+                  690
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 21414
+              },
+              {
+                "componentIndex": 17,
+                "edgeBounds": [
+                  56,
+                  800,
+                  325,
+                  966
+                ],
+                "edgeSeed": [
+                  180,
+                  880
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 21446
+              },
+              {
+                "componentIndex": 18,
+                "edgeBounds": [
+                  340,
+                  795,
+                  574,
+                  945
+                ],
+                "edgeSeed": [
+                  450,
+                  870
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 20294
+              },
+              {
+                "componentIndex": 19,
+                "edgeBounds": [
+                  591,
+                  784,
+                  818,
+                  965
+                ],
+                "edgeSeed": [
+                  700,
+                  870
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 28468
+              },
+              {
+                "componentIndex": 20,
+                "edgeBounds": [
+                  850,
+                  761,
+                  945,
+                  963
+                ],
+                "edgeSeed": [
+                  900,
+                  870
+                ],
+                "extractionMode": "seeded-connected-component-edge-matte",
+                "foregroundArea": 15555
+              }
+            ],
+            "reviewPath": "AssetSources/CozyRoomKit/evidence/edge-labels/sheet-06.png",
+            "reviewSha256": "04d62bba533a73d548fa9984f22c663b1c8e694642b6293edf9bf4f99eb968ce",
+            "sheet": "sheet-06.jpg"
           }
         ]
       },
@@ -1233,10 +1562,10 @@
       "dependencies": [
         "020.detect-edges"
       ],
-      "inputDigest": "3a1c09029c5acf65889fc60dec25ea67ba2a28713fda141d78d9dc4fbc6593a8",
+      "inputDigest": "300a2b681d1107394547702a0103a467c5f1b865d415bfbc02b4abb944e1f121",
       "node": "030.extract-alpha",
       "output": {
-        "assetCount": 88,
+        "assetCount": 108,
         "assets": [
           {
             "borderTransparentRatio": 1.0,
@@ -3261,6 +3590,466 @@
             ],
             "visiblePixels": 23970,
             "width": 181
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              62,
+              75,
+              274,
+              248
+            ],
+            "foregroundArea": 24287,
+            "height": 189,
+            "id": "fsi-s6-01-coral-furniture-planks",
+            "opaquePixels": 23288,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-01-coral-furniture-planks.png",
+            "sha256": "830a8110e33b412451c06b42bb0af288245f9e8b16773083f56bf6ef8cbee2fa",
+            "sourceBounds": [
+              54,
+              67,
+              282,
+              256
+            ],
+            "visiblePixels": 24287,
+            "width": 228
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              284,
+              70,
+              523,
+              227
+            ],
+            "foregroundArea": 15598,
+            "height": 173,
+            "id": "fsi-s6-02-curved-branch-timber",
+            "opaquePixels": 14637,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-02-curved-branch-timber.png",
+            "sha256": "d141c6ffd333f5e712ece0014110846512f3ad182a6ba3fab5764220f2e11e93",
+            "sourceBounds": [
+              276,
+              62,
+              531,
+              235
+            ],
+            "visiblePixels": 15598,
+            "width": 255
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              512,
+              61,
+              706,
+              208
+            ],
+            "foregroundArea": 19538,
+            "height": 163,
+            "id": "fsi-s6-03-braided-rainbow-cord",
+            "opaquePixels": 18654,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-03-braided-rainbow-cord.png",
+            "sha256": "7e154af430b6f3c541e1215bf96addc4b01c924e1958ebcecc0adf7df4b90543",
+            "sourceBounds": [
+              504,
+              53,
+              714,
+              216
+            ],
+            "visiblePixels": 19539,
+            "width": 210
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              740,
+              65,
+              965,
+              264
+            ],
+            "foregroundArea": 32164,
+            "height": 215,
+            "id": "fsi-s6-04-rolled-quilt-bundle",
+            "opaquePixels": 30876,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-04-rolled-quilt-bundle.png",
+            "sha256": "31b962a55d72afcac3c02b15297b47b412edf3340bbcb96247fa630083abc9da",
+            "sourceBounds": [
+              732,
+              57,
+              973,
+              272
+            ],
+            "visiblePixels": 32219,
+            "width": 241
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              57,
+              252,
+              281,
+              438
+            ],
+            "foregroundArea": 26133,
+            "height": 202,
+            "id": "fsi-s6-05-rustic-twig-bundle",
+            "opaquePixels": 25137,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-05-rustic-twig-bundle.png",
+            "sha256": "ab7ed16f91b84e327c31d91110963c9483e26073adfeae78a52869ee34310d30",
+            "sourceBounds": [
+              49,
+              244,
+              289,
+              446
+            ],
+            "visiblePixels": 26133,
+            "width": 240
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              291,
+              239,
+              518,
+              429
+            ],
+            "foregroundArea": 34895,
+            "height": 206,
+            "id": "fsi-s6-06-cloud-wool-batting",
+            "opaquePixels": 33625,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-06-cloud-wool-batting.png",
+            "sha256": "27163df775e35908bd8b637b2b218da45372a01b8bff75ee899f635f8dc5829e",
+            "sourceBounds": [
+              283,
+              231,
+              526,
+              437
+            ],
+            "visiblePixels": 34740,
+            "width": 243
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              510,
+              243,
+              783,
+              425
+            ],
+            "foregroundArea": 30737,
+            "height": 198,
+            "id": "fsi-s6-07-quilted-batting-roll",
+            "opaquePixels": 28431,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-07-quilted-batting-roll.png",
+            "sha256": "27ce064744744de0e39407ac2ab245e2fa1a3f329bbcf84237148d3e7bf93cee",
+            "sourceBounds": [
+              517,
+              235,
+              780,
+              433
+            ],
+            "visiblePixels": 29315,
+            "width": 263
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              741,
+              298,
+              969,
+              448
+            ],
+            "foregroundArea": 17775,
+            "height": 166,
+            "id": "fsi-s6-08-woven-reed-panel",
+            "opaquePixels": 16883,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-08-woven-reed-panel.png",
+            "sha256": "2aee60d892644d2870e43210e23bb5d8c0ad7c4c13bce1f2baaebf19d13ee44a",
+            "sourceBounds": [
+              733,
+              290,
+              977,
+              456
+            ],
+            "visiblePixels": 17775,
+            "width": 244
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              79,
+              460,
+              176,
+              604
+            ],
+            "foregroundArea": 12196,
+            "height": 160,
+            "id": "fsi-s6-09-small-button-jar",
+            "opaquePixels": 11597,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-09-small-button-jar.png",
+            "sha256": "631af0b62510e1c7a87db4f78ae56203a58f903c331ef35e4acbdc983f29932f",
+            "sourceBounds": [
+              71,
+              452,
+              184,
+              612
+            ],
+            "visiblePixels": 12196,
+            "width": 113
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              214,
+              442,
+              342,
+              604
+            ],
+            "foregroundArea": 18257,
+            "height": 178,
+            "id": "fsi-s6-10-flower-button-jar",
+            "opaquePixels": 17434,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-10-flower-button-jar.png",
+            "sha256": "5f40da4a262d0add2d0364767fc71839e6bcc332d321d28df1ca09ad9066fce7",
+            "sourceBounds": [
+              206,
+              434,
+              350,
+              612
+            ],
+            "visiblePixels": 18257,
+            "width": 144
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              359,
+              452,
+              569,
+              606
+            ],
+            "foregroundArea": 22811,
+            "height": 170,
+            "id": "fsi-s6-11-brass-hardware-crate",
+            "opaquePixels": 21972,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-11-brass-hardware-crate.png",
+            "sha256": "64113c91c70738c5e89ce62f1ff80e9670fd8161fd3fd561e394bc2d6f82b46a",
+            "sourceBounds": [
+              351,
+              444,
+              577,
+              614
+            ],
+            "visiblePixels": 22811,
+            "width": 226
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              598,
+              453,
+              968,
+              611
+            ],
+            "foregroundArea": 29693,
+            "height": 173,
+            "id": "fsi-s6-12-rainbow-paint-set",
+            "opaquePixels": 27588,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-12-rainbow-paint-set.png",
+            "sha256": "821a36028332098062293343bb2e711448a12d3afcf7ebb03e88502a25480831",
+            "sourceBounds": [
+              590,
+              445,
+              976,
+              618
+            ],
+            "visiblePixels": 29375,
+            "width": 386
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              59,
+              624,
+              289,
+              809
+            ],
+            "foregroundArea": 26214,
+            "height": 201,
+            "id": "fsi-s6-13-mixed-decorative-trims",
+            "opaquePixels": 23848,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-13-mixed-decorative-trims.png",
+            "sha256": "28e4d243a697d4418f8865c8b0f846d41aff15e763bf98878d40d8cdd6133597",
+            "sourceBounds": [
+              51,
+              616,
+              297,
+              817
+            ],
+            "visiblePixels": 26504,
+            "width": 246
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              285,
+              628,
+              561,
+              804
+            ],
+            "foregroundArea": 22809,
+            "height": 190,
+            "id": "fsi-s6-14-tasseled-ribbon-bundle",
+            "opaquePixels": 20678,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-14-tasseled-ribbon-bundle.png",
+            "sha256": "8baec950995f8ef0d5b93ebc24e6dd98629a5320a294fc4c1e69cf5740025853",
+            "sourceBounds": [
+              282,
+              620,
+              565,
+              810
+            ],
+            "visiblePixels": 22236,
+            "width": 283
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              541,
+              628,
+              728,
+              806
+            ],
+            "foregroundArea": 16722,
+            "height": 160,
+            "id": "fsi-s6-15-coral-fabric-scraps",
+            "opaquePixels": 14972,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-15-coral-fabric-scraps.png",
+            "sha256": "485b9317a4527d99dbf2c4c4d7a65865b2778fbe94ba163c54faa9d59bc9fd01",
+            "sourceBounds": [
+              544,
+              621,
+              735,
+              781
+            ],
+            "visiblePixels": 15694,
+            "width": 191
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              747,
+              625,
+              952,
+              759
+            ],
+            "foregroundArea": 21414,
+            "height": 150,
+            "id": "fsi-s6-16-quilted-fabric-swatches",
+            "opaquePixels": 20544,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-16-quilted-fabric-swatches.png",
+            "sha256": "e5d6448b6f542408b7dd5bd23ad254b26a77d31707c8601621b76668967f2abe",
+            "sourceBounds": [
+              739,
+              617,
+              960,
+              767
+            ],
+            "visiblePixels": 21414,
+            "width": 221
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              56,
+              800,
+              325,
+              966
+            ],
+            "foregroundArea": 21446,
+            "height": 182,
+            "id": "fsi-s6-17-flowering-branch-spray",
+            "opaquePixels": 16426,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-17-flowering-branch-spray.png",
+            "sha256": "c14fbbcd82b091b13d2808f18e476a114832dd2f96c6160d215f860ec1446ad3",
+            "sourceBounds": [
+              48,
+              792,
+              333,
+              974
+            ],
+            "visiblePixels": 22690,
+            "width": 285
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              340,
+              795,
+              574,
+              945
+            ],
+            "foregroundArea": 20294,
+            "height": 166,
+            "id": "fsi-s6-18-mint-crystal-cluster",
+            "opaquePixels": 16780,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-18-mint-crystal-cluster.png",
+            "sha256": "e7d75de4656065ea3c7cb79e91ebc15232a4a38a61f557e64604a97057063e66",
+            "sourceBounds": [
+              332,
+              787,
+              582,
+              953
+            ],
+            "visiblePixels": 20892,
+            "width": 250
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              591,
+              784,
+              818,
+              965
+            ],
+            "foregroundArea": 28468,
+            "height": 197,
+            "id": "fsi-s6-19-geometric-pattern-sheets",
+            "opaquePixels": 27489,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-19-geometric-pattern-sheets.png",
+            "sha256": "b58bb192fe49db028ac0cbfa0e291de9ad802b503b1bdd3060758782aa556b21",
+            "sourceBounds": [
+              583,
+              776,
+              826,
+              973
+            ],
+            "visiblePixels": 28471,
+            "width": 243
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              850,
+              761,
+              945,
+              963
+            ],
+            "foregroundArea": 15555,
+            "height": 218,
+            "id": "fsi-s6-20-sparkle-essence-bottle",
+            "opaquePixels": 14526,
+            "path": "AssetSources/CozyRoomKit/extracted/fsi-s6-20-sparkle-essence-bottle.png",
+            "sha256": "f7d3b721fef55fbba47b7ededeca8e50c3408cab4749a0528ddc1c031752f49c",
+            "sourceBounds": [
+              842,
+              753,
+              953,
+              971
+            ],
+            "visiblePixels": 15555,
+            "width": 111
           }
         ]
       },
@@ -3270,10 +4059,10 @@
       "dependencies": [
         "030.extract-alpha"
       ],
-      "inputDigest": "b82293b45255e73e977efbf7ceba593e819cc275001586107824ca29b57afe31",
+      "inputDigest": "c4889c6ad63efe1cdfdb41164bf87936e436c954d36ae258d49433a0a958b52b",
       "node": "040.integrate-xcassets",
       "output": {
-        "assetCount": 88,
+        "assetCount": 108,
         "assets": [
           {
             "assetCatalogName": "cozy_room_s1_01_forest_canopy_bed",
@@ -3802,6 +4591,126 @@
             "filename": "furniture_ingredient_rose_glitter_jar.png",
             "id": "fsi-s5-22-rose-glitter-jar",
             "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_rose_glitter_jar.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_coral_furniture_planks",
+            "filename": "furniture_ingredient_coral_furniture_planks.png",
+            "id": "fsi-s6-01-coral-furniture-planks",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_coral_furniture_planks.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_curved_branch_timber",
+            "filename": "furniture_ingredient_curved_branch_timber.png",
+            "id": "fsi-s6-02-curved-branch-timber",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_curved_branch_timber.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_braided_rainbow_cord",
+            "filename": "furniture_ingredient_braided_rainbow_cord.png",
+            "id": "fsi-s6-03-braided-rainbow-cord",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_braided_rainbow_cord.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_rolled_quilt_bundle",
+            "filename": "furniture_ingredient_rolled_quilt_bundle.png",
+            "id": "fsi-s6-04-rolled-quilt-bundle",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_rolled_quilt_bundle.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_rustic_twig_bundle",
+            "filename": "furniture_ingredient_rustic_twig_bundle.png",
+            "id": "fsi-s6-05-rustic-twig-bundle",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_rustic_twig_bundle.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_cloud_wool_batting",
+            "filename": "furniture_ingredient_cloud_wool_batting.png",
+            "id": "fsi-s6-06-cloud-wool-batting",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_cloud_wool_batting.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_quilted_batting_roll",
+            "filename": "furniture_ingredient_quilted_batting_roll.png",
+            "id": "fsi-s6-07-quilted-batting-roll",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_quilted_batting_roll.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_woven_reed_panel",
+            "filename": "furniture_ingredient_woven_reed_panel.png",
+            "id": "fsi-s6-08-woven-reed-panel",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_woven_reed_panel.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_small_button_jar",
+            "filename": "furniture_ingredient_small_button_jar.png",
+            "id": "fsi-s6-09-small-button-jar",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_small_button_jar.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_flower_button_jar",
+            "filename": "furniture_ingredient_flower_button_jar.png",
+            "id": "fsi-s6-10-flower-button-jar",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_flower_button_jar.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_brass_hardware_crate",
+            "filename": "furniture_ingredient_brass_hardware_crate.png",
+            "id": "fsi-s6-11-brass-hardware-crate",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_brass_hardware_crate.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_rainbow_paint_set",
+            "filename": "furniture_ingredient_rainbow_paint_set.png",
+            "id": "fsi-s6-12-rainbow-paint-set",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_rainbow_paint_set.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_mixed_decorative_trims",
+            "filename": "furniture_ingredient_mixed_decorative_trims.png",
+            "id": "fsi-s6-13-mixed-decorative-trims",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_mixed_decorative_trims.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_tasseled_ribbon_bundle",
+            "filename": "furniture_ingredient_tasseled_ribbon_bundle.png",
+            "id": "fsi-s6-14-tasseled-ribbon-bundle",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_tasseled_ribbon_bundle.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_coral_fabric_scraps",
+            "filename": "furniture_ingredient_coral_fabric_scraps.png",
+            "id": "fsi-s6-15-coral-fabric-scraps",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_coral_fabric_scraps.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_quilted_fabric_swatches",
+            "filename": "furniture_ingredient_quilted_fabric_swatches.png",
+            "id": "fsi-s6-16-quilted-fabric-swatches",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_quilted_fabric_swatches.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_flowering_branch_spray",
+            "filename": "furniture_ingredient_flowering_branch_spray.png",
+            "id": "fsi-s6-17-flowering-branch-spray",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_flowering_branch_spray.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_mint_crystal_cluster",
+            "filename": "furniture_ingredient_mint_crystal_cluster.png",
+            "id": "fsi-s6-18-mint-crystal-cluster",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_mint_crystal_cluster.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_geometric_pattern_sheets",
+            "filename": "furniture_ingredient_geometric_pattern_sheets.png",
+            "id": "fsi-s6-19-geometric-pattern-sheets",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_geometric_pattern_sheets.imageset"
+          },
+          {
+            "assetCatalogName": "furniture_ingredient_sparkle_essence_bottle",
+            "filename": "furniture_ingredient_sparkle_essence_bottle.png",
+            "id": "fsi-s6-20-sparkle-essence-bottle",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/furniture_ingredient_sparkle_essence_bottle.imageset"
           }
         ]
       },
@@ -3811,39 +4720,41 @@
       "dependencies": [
         "030.extract-alpha"
       ],
-      "inputDigest": "b9401cce700a118167903c3590714b1416b5a445d319964870709ca78cb557dd",
+      "inputDigest": "970859bb86edc98d06996cde3a56e283a6e62704464af816092c6e484d7f4496",
       "node": "050.write-catalog",
       "output": {
-        "assetCount": 88,
+        "assetCount": 108,
         "categoryCounts": {
           "beds": 4,
           "botanical-decor": 2,
-          "botanical-materials": 1,
+          "botanical-materials": 2,
           "canopy-seating": 4,
           "carts": 4,
-          "cordage": 1,
+          "cordage": 2,
           "crafting": 4,
           "hanging-decor": 4,
           "hanging-seating": 4,
-          "hardware": 2,
+          "hardware": 3,
           "lighting": 9,
-          "lumber": 1,
-          "magical-materials": 4,
-          "notions": 2,
+          "lumber": 4,
+          "magical-materials": 6,
+          "notions": 6,
           "packaging": 1,
-          "pigments": 1,
+          "patterns": 1,
+          "pigments": 2,
           "play-stages": 4,
           "rugs": 5,
           "seating": 7,
           "shelving": 6,
           "storage": 9,
-          "textiles": 7,
-          "wood-components": 2
+          "textiles": 12,
+          "wood-components": 2,
+          "woven-materials": 1
         },
         "manifestPath": "AssetSources/CozyRoomKit/manifest.json",
-        "manifestSha256": "a691285e40a1bbeff3ea6f1adb3c31b69003a4f085f267b6b37dd2d07c2a9f52",
+        "manifestSha256": "fbe97181bb777bfa0f6ab68f3335fb4797f6b882105855b370d4f99d4f20fb47",
         "roleCounts": {
-          "furniture-store-ingredient": 22,
+          "furniture-store-ingredient": 42,
           "placeable-room-prop": 66
         },
         "runtimeManifestPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_asset_manifest.dataset/cozy_room_asset_manifest.json"
@@ -3854,13 +4765,13 @@
       "dependencies": [
         "030.extract-alpha"
       ],
-      "inputDigest": "6a17171572c71d72af04066c20b747914a047c1644368b5b28c178e1092bf494",
+      "inputDigest": "4932413591b588019de45cec84f6cd4c4f7182e55b6e07ad9d0ca7598514128e",
       "node": "060.render-review",
       "output": {
         "contactSheetPath": "AssetSources/CozyRoomKit/review/contact-sheet.png",
-        "contactSheetSha256": "0692ef38be7455d52795dfa19a2f874c51ec460bb91eb5486ac4099aef797490",
+        "contactSheetSha256": "01faa29897a9290fd11d7d57e2461dfd6fb905d9be52acc949cf8cd26bba11c8",
         "ingredientContactSheetPath": "AssetSources/CozyRoomKit/review/furniture-ingredients-contact-sheet.png",
-        "ingredientContactSheetSha256": "1c9b6243ca6d67561be979ea9c55830a73ae200c5624410755b64ea53b7798f0"
+        "ingredientContactSheetSha256": "600c2284512f91b74e11d2a7161a6728743ccce4f22202cfe27deb27f6cdc53b"
       },
       "status": "completed"
     },
@@ -3870,14 +4781,14 @@
         "050.write-catalog",
         "060.render-review"
       ],
-      "inputDigest": "96c5794da6bbc078d319b8dac632fca1ba0d86959a8de3ee6f350202993be663",
+      "inputDigest": "f1569b80fba331134f2003858dbae4fc7e13257022f23cd4e0c38041d9cf1eb1",
       "node": "070.validate",
       "output": {
         "alphaContract": "required",
-        "assetCount": 88,
+        "assetCount": 108,
         "runtimeBytesMatchExtracted": true,
         "runtimeManifestMatchesRepositoryManifest": true,
-        "sourceSheetCount": 5,
+        "sourceSheetCount": 6,
         "status": "pass"
       },
       "status": "completed"
@@ -3886,6 +4797,6 @@
   "pipeline": "cozy-room-edge-extraction",
   "pipelineVersion": 2,
   "schemaVersion": 1,
-  "specSha256": "aa00e296db726299242abf727da1173af5e14a457abb2e09f2d6bfaea9c43cec",
+  "specSha256": "d47cff471bc41fdc7befab30fd85fc2deb8fbb8e627be1607794eda1fe31d18d",
   "status": "completed"
 }

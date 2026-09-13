@@ -1,5 +1,5 @@
 {
-  "assetCount": 88,
+  "assetCount": 108,
   "assets": [
     {
       "alpha": {
@@ -3562,37 +3562,1122 @@
         "pink",
         "magic"
       ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_coral_furniture_planks",
+      "category": "lumber",
+      "componentIndex": 1,
+      "description": "Three thick coral-stained wooden planks with softly irregular carved edges.",
+      "edgeSeed": [
+        150,
+        150
+      ],
+      "id": "fsi-s6-01-coral-furniture-planks",
+      "label": "Coral Furniture Planks",
+      "pixelSize": {
+        "height": 189,
+        "width": 228
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-01-coral-furniture-planks.png",
+      "pngSha256": "830a8110e33b412451c06b42bb0af288245f9e8b16773083f56bf6ef8cbee2fa",
+      "region": [
+        45,
+        55,
+        290,
+        265
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        54,
+        67,
+        282,
+        256
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "wood",
+        "planks",
+        "coral",
+        "structure"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_curved_branch_timber",
+      "category": "lumber",
+      "componentIndex": 2,
+      "description": "A sturdy forked branch timber with a naturally sweeping curve.",
+      "edgeSeed": [
+        400,
+        150
+      ],
+      "id": "fsi-s6-02-curved-branch-timber",
+      "label": "Curved Branch Timber",
+      "pixelSize": {
+        "height": 173,
+        "width": 255
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-02-curved-branch-timber.png",
+      "pngSha256": "d141c6ffd333f5e712ece0014110846512f3ad182a6ba3fab5764220f2e11e93",
+      "region": [
+        270,
+        50,
+        540,
+        245
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        276,
+        62,
+        531,
+        235
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "wood",
+        "branch",
+        "curved",
+        "frame"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_braided_rainbow_cord",
+      "category": "cordage",
+      "componentIndex": 3,
+      "description": "A broad coil of chunky braided cord in coral, mint, turquoise, violet, and gold.",
+      "edgeSeed": [
+        620,
+        130
+      ],
+      "id": "fsi-s6-03-braided-rainbow-cord",
+      "label": "Braided Rainbow Cord",
+      "pixelSize": {
+        "height": 163,
+        "width": 210
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-03-braided-rainbow-cord.png",
+      "pngSha256": "7e154af430b6f3c541e1215bf96addc4b01c924e1958ebcecc0adf7df4b90543",
+      "region": [
+        500,
+        45,
+        725,
+        230
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        504,
+        53,
+        714,
+        216
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "cord",
+        "braided",
+        "rainbow",
+        "binding"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_rolled_quilt_bundle",
+      "category": "textiles",
+      "componentIndex": 4,
+      "description": "Four tied rolls of lavender, violet, peach, and mint quilted fabric.",
+      "edgeSeed": [
+        850,
+        160
+      ],
+      "id": "fsi-s6-04-rolled-quilt-bundle",
+      "label": "Rolled Quilt Bundle",
+      "pixelSize": {
+        "height": 215,
+        "width": 241
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-04-rolled-quilt-bundle.png",
+      "pngSha256": "31b962a55d72afcac3c02b15297b47b412edf3340bbcb96247fa630083abc9da",
+      "region": [
+        725,
+        45,
+        980,
+        280
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        732,
+        57,
+        973,
+        272
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "fabric",
+        "quilts",
+        "rolls",
+        "upholstery"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_rustic_twig_bundle",
+      "category": "lumber",
+      "componentIndex": 5,
+      "description": "A dense bundle of trimmed brown twigs and small branches for rustic frames.",
+      "edgeSeed": [
+        150,
+        350
+      ],
+      "id": "fsi-s6-05-rustic-twig-bundle",
+      "label": "Rustic Twig Bundle",
+      "pixelSize": {
+        "height": 202,
+        "width": 240
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-05-rustic-twig-bundle.png",
+      "pngSha256": "ab7ed16f91b84e327c31d91110963c9483e26073adfeae78a52869ee34310d30",
+      "region": [
+        45,
+        235,
+        295,
+        455
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        49,
+        244,
+        289,
+        446
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "twigs",
+        "branches",
+        "wood",
+        "frame"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_cloud_wool_batting",
+      "category": "textiles",
+      "componentIndex": 6,
+      "description": "A large cloudlike bundle of cream wool stuffing for cushions and mattresses.",
+      "id": "fsi-s6-06-cloud-wool-batting",
+      "isolationPolygon": [
+        [
+          290,
+          305
+        ],
+        [
+          325,
+          250
+        ],
+        [
+          410,
+          225
+        ],
+        [
+          485,
+          250
+        ],
+        [
+          525,
+          315
+        ],
+        [
+          515,
+          390
+        ],
+        [
+          450,
+          440
+        ],
+        [
+          350,
+          435
+        ],
+        [
+          285,
+          380
+        ]
+      ],
+      "label": "Cloud Wool Batting",
+      "minimumIslandArea": 250,
+      "pixelSize": {
+        "height": 206,
+        "width": 243
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-06-cloud-wool-batting.png",
+      "pngSha256": "27163df775e35908bd8b637b2b218da45372a01b8bff75ee899f635f8dc5829e",
+      "region": [
+        270,
+        215,
+        535,
+        455
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        283,
+        231,
+        526,
+        437
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "wool",
+        "batting",
+        "stuffing",
+        "soft"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_quilted_batting_roll",
+      "category": "textiles",
+      "componentIndex": 7,
+      "description": "A thick cream batting roll held together by a broad diamond quilting pattern.",
+      "id": "fsi-s6-07-quilted-batting-roll",
+      "isolationPolygon": [
+        [
+          515,
+          300
+        ],
+        [
+          555,
+          255
+        ],
+        [
+          675,
+          230
+        ],
+        [
+          750,
+          260
+        ],
+        [
+          790,
+          325
+        ],
+        [
+          775,
+          400
+        ],
+        [
+          710,
+          445
+        ],
+        [
+          575,
+          440
+        ],
+        [
+          510,
+          385
+        ]
+      ],
+      "label": "Quilted Batting Roll",
+      "minimumIslandArea": 1000,
+      "pixelSize": {
+        "height": 198,
+        "width": 263
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-07-quilted-batting-roll.png",
+      "pngSha256": "27ce064744744de0e39407ac2ab245e2fa1a3f329bbcf84237148d3e7bf93cee",
+      "region": [
+        500,
+        215,
+        800,
+        460
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        517,
+        235,
+        780,
+        433
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "batting",
+        "quilted",
+        "roll",
+        "padding"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_woven_reed_panel",
+      "category": "woven-materials",
+      "componentIndex": 8,
+      "description": "A tied rectangular panel of closely packed golden reeds.",
+      "edgeSeed": [
+        850,
+        350
+      ],
+      "id": "fsi-s6-08-woven-reed-panel",
+      "label": "Woven Reed Panel",
+      "pixelSize": {
+        "height": 166,
+        "width": 244
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-08-woven-reed-panel.png",
+      "pngSha256": "2aee60d892644d2870e43210e23bb5d8c0ad7c4c13bce1f2baaebf19d13ee44a",
+      "region": [
+        730,
+        280,
+        985,
+        465
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        733,
+        290,
+        977,
+        456
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "reeds",
+        "woven",
+        "panel",
+        "natural"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_small_button_jar",
+      "category": "notions",
+      "componentIndex": 9,
+      "description": "A corked glass jar filled with tiny mixed pastel buttons and beads.",
+      "edgeSeed": [
+        125,
+        530
+      ],
+      "id": "fsi-s6-09-small-button-jar",
+      "label": "Small Button Jar",
+      "pixelSize": {
+        "height": 160,
+        "width": 113
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-09-small-button-jar.png",
+      "pngSha256": "631af0b62510e1c7a87db4f78ae56203a58f903c331ef35e4acbdc983f29932f",
+      "region": [
+        55,
+        445,
+        195,
+        620
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        71,
+        452,
+        184,
+        612
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "buttons",
+        "beads",
+        "jar",
+        "notions"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_flower_button_jar",
+      "category": "notions",
+      "componentIndex": 10,
+      "description": "A large open glass jar packed with flower, heart, and round decorative buttons.",
+      "edgeSeed": [
+        280,
+        520
+      ],
+      "id": "fsi-s6-10-flower-button-jar",
+      "label": "Flower Button Jar",
+      "pixelSize": {
+        "height": 178,
+        "width": 144
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-10-flower-button-jar.png",
+      "pngSha256": "5f40da4a262d0add2d0364767fc71839e6bcc332d321d28df1ca09ad9066fce7",
+      "region": [
+        190,
+        425,
+        360,
+        620
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        206,
+        434,
+        350,
+        612
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "buttons",
+        "flowers",
+        "jar",
+        "notions"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_brass_hardware_crate",
+      "category": "hardware",
+      "componentIndex": 11,
+      "description": "A wooden parts crate filled with brass knobs, pegs, hinges, and fasteners.",
+      "edgeSeed": [
+        450,
+        520
+      ],
+      "id": "fsi-s6-11-brass-hardware-crate",
+      "label": "Brass Hardware Crate",
+      "pixelSize": {
+        "height": 170,
+        "width": 226
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-11-brass-hardware-crate.png",
+      "pngSha256": "64113c91c70738c5e89ce62f1ff80e9670fd8161fd3fd561e394bc2d6f82b46a",
+      "region": [
+        345,
+        435,
+        585,
+        625
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        351,
+        444,
+        577,
+        614
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "hardware",
+        "brass",
+        "crate",
+        "fasteners"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_rainbow_paint_set",
+      "category": "pigments",
+      "componentIndex": 12,
+      "description": "Six open paint pots in orange, turquoise, pink, mint, coral, and cream with one detail brush.",
+      "id": "fsi-s6-12-rainbow-paint-set",
+      "isolationPolygon": [
+        [
+          595,
+          465
+        ],
+        [
+          650,
+          445
+        ],
+        [
+          725,
+          450
+        ],
+        [
+          800,
+          480
+        ],
+        [
+          850,
+          460
+        ],
+        [
+          925,
+          485
+        ],
+        [
+          975,
+          515
+        ],
+        [
+          970,
+          585
+        ],
+        [
+          910,
+          610
+        ],
+        [
+          820,
+          595
+        ],
+        [
+          740,
+          620
+        ],
+        [
+          645,
+          615
+        ],
+        [
+          585,
+          575
+        ]
+      ],
+      "label": "Rainbow Paint Set",
+      "minimumIslandArea": 350,
+      "pixelSize": {
+        "height": 173,
+        "width": 386
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-12-rainbow-paint-set.png",
+      "pngSha256": "821a36028332098062293343bb2e711448a12d3afcf7ebb03e88502a25480831",
+      "region": [
+        580,
+        430,
+        985,
+        625
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        590,
+        445,
+        976,
+        618
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "paint",
+        "brush",
+        "rainbow",
+        "finish"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_mixed_decorative_trims",
+      "category": "notions",
+      "componentIndex": 13,
+      "description": "A loose assortment of braided trim, leaf ribbon, piping, fringe, and patterned cords.",
+      "edgeSeed": [
+        170,
+        700
+      ],
+      "id": "fsi-s6-13-mixed-decorative-trims",
+      "label": "Mixed Decorative Trims",
+      "pixelSize": {
+        "height": 201,
+        "width": 246
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-13-mixed-decorative-trims.png",
+      "pngSha256": "28e4d243a697d4418f8865c8b0f846d41aff15e763bf98878d40d8cdd6133597",
+      "region": [
+        45,
+        605,
+        305,
+        825
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        51,
+        616,
+        297,
+        817
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "trim",
+        "ribbon",
+        "fringe",
+        "notions"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_tasseled_ribbon_bundle",
+      "category": "notions",
+      "componentIndex": 14,
+      "description": "Long coral, gold, violet, and mint ribbons finished with soft tassels.",
+      "id": "fsi-s6-14-tasseled-ribbon-bundle",
+      "isolationPolygon": [
+        [
+          285,
+          675
+        ],
+        [
+          350,
+          625
+        ],
+        [
+          465,
+          615
+        ],
+        [
+          555,
+          650
+        ],
+        [
+          560,
+          725
+        ],
+        [
+          505,
+          790
+        ],
+        [
+          380,
+          815
+        ],
+        [
+          285,
+          770
+        ]
+      ],
+      "label": "Tasseled Ribbon Bundle",
+      "minimumIslandArea": 180,
+      "pixelSize": {
+        "height": 190,
+        "width": 283
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-14-tasseled-ribbon-bundle.png",
+      "pngSha256": "8baec950995f8ef0d5b93ebc24e6dd98629a5320a294fc4c1e69cf5740025853",
+      "region": [
+        270,
+        600,
+        565,
+        825
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        282,
+        620,
+        565,
+        810
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "ribbon",
+        "tassels",
+        "colorful",
+        "notions"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_coral_fabric_scraps",
+      "category": "textiles",
+      "componentIndex": 15,
+      "description": "Several layered coral fabric scraps with torn, pinked, and softly ruffled edges.",
+      "id": "fsi-s6-15-coral-fabric-scraps",
+      "isolationPolygon": [
+        [
+          545,
+          650
+        ],
+        [
+          590,
+          620
+        ],
+        [
+          690,
+          620
+        ],
+        [
+          735,
+          665
+        ],
+        [
+          740,
+          750
+        ],
+        [
+          695,
+          805
+        ],
+        [
+          590,
+          805
+        ],
+        [
+          535,
+          750
+        ]
+      ],
+      "label": "Coral Fabric Scraps",
+      "minimumIslandArea": 1000,
+      "pixelSize": {
+        "height": 160,
+        "width": 191
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-15-coral-fabric-scraps.png",
+      "pngSha256": "485b9317a4527d99dbf2c4c4d7a65865b2778fbe94ba163c54faa9d59bc9fd01",
+      "region": [
+        525,
+        600,
+        750,
+        825
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        544,
+        621,
+        735,
+        781
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "fabric",
+        "scraps",
+        "coral",
+        "patching"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_quilted_fabric_swatches",
+      "category": "textiles",
+      "componentIndex": 16,
+      "description": "Four stacked scalloped swatches in mint, gold, turquoise, and lavender.",
+      "edgeSeed": [
+        850,
+        690
+      ],
+      "id": "fsi-s6-16-quilted-fabric-swatches",
+      "label": "Quilted Fabric Swatches",
+      "pixelSize": {
+        "height": 150,
+        "width": 221
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-16-quilted-fabric-swatches.png",
+      "pngSha256": "e5d6448b6f542408b7dd5bd23ad254b26a77d31707c8601621b76668967f2abe",
+      "region": [
+        730,
+        605,
+        975,
+        780
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        739,
+        617,
+        960,
+        767
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "swatches",
+        "quilted",
+        "fabric",
+        "samples"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_flowering_branch_spray",
+      "category": "botanical-materials",
+      "componentIndex": 17,
+      "description": "A winding green branch spray with leaves, buds, and tiny pink blossoms.",
+      "edgeSeed": [
+        180,
+        880
+      ],
+      "id": "fsi-s6-17-flowering-branch-spray",
+      "label": "Flowering Branch Spray",
+      "pixelSize": {
+        "height": 182,
+        "width": 285
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-17-flowering-branch-spray.png",
+      "pngSha256": "c14fbbcd82b091b13d2808f18e476a114832dd2f96c6160d215f860ec1446ad3",
+      "region": [
+        45,
+        780,
+        335,
+        985
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        48,
+        792,
+        333,
+        974
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "branch",
+        "flowers",
+        "leaves",
+        "natural"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_mint_crystal_cluster",
+      "category": "magical-materials",
+      "componentIndex": 18,
+      "description": "A loose cluster of translucent mint crystals in several faceted sizes.",
+      "edgeSeed": [
+        450,
+        870
+      ],
+      "id": "fsi-s6-18-mint-crystal-cluster",
+      "label": "Mint Crystal Cluster",
+      "pixelSize": {
+        "height": 166,
+        "width": 250
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-18-mint-crystal-cluster.png",
+      "pngSha256": "e7d75de4656065ea3c7cb79e91ebc15232a4a38a61f557e64604a97057063e66",
+      "region": [
+        320,
+        775,
+        590,
+        975
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        332,
+        787,
+        582,
+        953
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "crystals",
+        "mint",
+        "faceted",
+        "magic"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_geometric_pattern_sheets",
+      "category": "patterns",
+      "componentIndex": 19,
+      "description": "A small stack of cream paper templates printed with pale geometric construction patterns.",
+      "edgeSeed": [
+        700,
+        870
+      ],
+      "id": "fsi-s6-19-geometric-pattern-sheets",
+      "label": "Geometric Pattern Sheets",
+      "pixelSize": {
+        "height": 197,
+        "width": 243
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-19-geometric-pattern-sheets.png",
+      "pngSha256": "b58bb192fe49db028ac0cbfa0e291de9ad802b503b1bdd3060758782aa556b21",
+      "region": [
+        575,
+        765,
+        835,
+        985
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        583,
+        776,
+        826,
+        973
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "patterns",
+        "paper",
+        "templates",
+        "plans"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "furniture_ingredient_sparkle_essence_bottle",
+      "category": "magical-materials",
+      "componentIndex": 20,
+      "description": "A corked aqua bottle holding pale shimmering furniture-finishing essence.",
+      "edgeSeed": [
+        900,
+        870
+      ],
+      "id": "fsi-s6-20-sparkle-essence-bottle",
+      "label": "Sparkle Essence Bottle",
+      "pixelSize": {
+        "height": 218,
+        "width": 111
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/fsi-s6-20-sparkle-essence-bottle.png",
+      "pngSha256": "f7d3b721fef55fbba47b7ededeca8e50c3408cab4749a0528ddc1c031752f49c",
+      "region": [
+        830,
+        745,
+        970,
+        985
+      ],
+      "role": "furniture-store-ingredient",
+      "sheet": "sheet-06.jpg",
+      "sourceBounds": [
+        842,
+        753,
+        953,
+        971
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-06.jpg",
+      "sourceSha256": "b1242b0ba41a9c82287062d12734f8475467b0f7541d45d0e2e89d77cdef10c4",
+      "tags": [
+        "ingredient",
+        "sparkle",
+        "bottle",
+        "essence",
+        "magic"
+      ]
     }
   ],
   "categoryCounts": {
     "beds": 4,
     "botanical-decor": 2,
-    "botanical-materials": 1,
+    "botanical-materials": 2,
     "canopy-seating": 4,
     "carts": 4,
-    "cordage": 1,
+    "cordage": 2,
     "crafting": 4,
     "hanging-decor": 4,
     "hanging-seating": 4,
-    "hardware": 2,
+    "hardware": 3,
     "lighting": 9,
-    "lumber": 1,
-    "magical-materials": 4,
-    "notions": 2,
+    "lumber": 4,
+    "magical-materials": 6,
+    "notions": 6,
     "packaging": 1,
-    "pigments": 1,
+    "patterns": 1,
+    "pigments": 2,
     "play-stages": 4,
     "rugs": 5,
     "seating": 7,
     "shelving": 6,
     "storage": 9,
-    "textiles": 7,
-    "wood-components": 2
+    "textiles": 12,
+    "wood-components": 2,
+    "woven-materials": 1
   },
   "collectionId": "cozy-room-kit",
   "pipelineVersion": 2,
   "roleCounts": {
-    "furniture-store-ingredient": 22,
+    "furniture-store-ingredient": 42,
     "placeable-room-prop": 66
   },
   "schemaVersion": 1

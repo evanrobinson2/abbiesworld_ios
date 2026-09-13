@@ -41,6 +41,7 @@ SHEET_NAMES = (
     "sheet-03.jpg",
     "sheet-04.jpg",
     "sheet-05.jpg",
+    "sheet-06.jpg",
 )
 PIPELINE_VERSION = 2
 MIN_COMPONENT_AREA = 400

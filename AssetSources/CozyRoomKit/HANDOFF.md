@@ -4,7 +4,7 @@ The bundled `cozy_room_asset_manifest` contains two filterable roles:
 
 - `placeable-room-prop`: 66 finished furniture and decoration assets using the
   `cozy_room_` catalog prefix.
-- `furniture-store-ingredient`: 22 build materials using the
+- `furniture-store-ingredient`: 42 build materials using the
   `furniture_ingredient_` catalog prefix.
 
 Load the manifest with `NSDataAsset(name: "cozy_room_asset_manifest")`, decode its
