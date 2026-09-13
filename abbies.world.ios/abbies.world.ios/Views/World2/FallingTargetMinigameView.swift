@@ -382,6 +382,7 @@ private struct FallingTargetMinigameView: View {
                 )
             }
         }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.fallingTargets.\(configuration.id)")
         .onAppear {
             if ProcessInfo.processInfo.arguments.contains("-autoPlaySaveVowels") {

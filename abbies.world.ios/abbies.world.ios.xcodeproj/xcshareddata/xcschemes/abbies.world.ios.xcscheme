@@ -34,6 +34,20 @@
                ReferencedContainer = "container:abbies.world.ios.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DC1197B52EECC0C400E52958"
+               BuildableName = "abbies.world.iosUITests.xctest"
+               BlueprintName = "abbies.world.iosUITests"
+               ReferencedContainer = "container:abbies.world.ios.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -50,6 +64,17 @@
                BlueprintIdentifier = "DC1197A52EECC0C400E52958"
                BuildableName = "abbies.world.iosTests.xctest"
                BlueprintName = "abbies.world.iosTests"
+               ReferencedContainer = "container:abbies.world.ios.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "DC1197B52EECC0C400E52958"
+               BuildableName = "abbies.world.iosUITests.xctest"
+               BlueprintName = "abbies.world.iosUITests"
                ReferencedContainer = "container:abbies.world.ios.xcodeproj">
             </BuildableReference>
          </TestableReference>

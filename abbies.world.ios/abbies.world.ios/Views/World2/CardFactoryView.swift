@@ -132,6 +132,7 @@ struct World2CardFactoryView: View {
             .clipped()
         }
         .ignoresSafeArea()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.factory")
         .onAppear {
             factory.start(catalog: viewModel.ingredientCatalog)

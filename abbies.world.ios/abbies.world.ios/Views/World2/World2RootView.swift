@@ -75,7 +75,8 @@ struct World2RootView: View {
                 World2AssetWorkbenchView(
                     playerID: viewModel.currentPlayerId ?? .abbie,
                     service: World2AssetWorkbenchPreviewService(),
-                    onExit: viewModel.exitPOI
+                    onExit: viewModel.exitPOI,
+                    onAward: viewModel.awardWorkbenchPack
                 )
 
             case .creatureLab:
@@ -142,6 +143,7 @@ struct World2RootView: View {
                 showCreatureBuilder: $openCreatureLabFromClassic,
                 onDismiss: { showingClassicGames = false }
             )
+            .accessibilityElement(children: .contain)
             .accessibilityIdentifier("world2.classicGames")
         }
         .fullScreenCover(isPresented: $showingWaypointGame) {
@@ -435,6 +437,10 @@ private final class World2IntroAudioController:
 
     func play() {
         didFinish = false
+        if ProcessInfo.processInfo.arguments.contains("-world2SkipIntro") {
+            didFinish = true
+            return
+        }
         guard let url =
             Bundle.main.url(
                 forResource: "magical_discovery",
@@ -577,6 +583,7 @@ struct PlayerSelectView: View {
             .clipped()
         }
         .ignoresSafeArea()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.playerSelect")
     }
 }

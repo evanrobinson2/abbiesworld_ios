@@ -81,10 +81,13 @@ struct World2PlayerHomeView: View {
                     }
 
                     ForEach(placedFurniture) { instance in
-                        if let item = FurnitureItem.item(id: instance.decorationId) {
+                        if let piece = World2RoomPiece.resolve(
+                            instance.decorationId,
+                            player: roomPlayer
+                        ) {
                             World2PlacedFurnitureView(
                                 instance: instance,
-                                item: item,
+                                piece: piece,
                                 canvasSize: canvasSize,
                                 isArranging: isArrangingFurniture,
                                 isSelected: selectedFurnitureID == instance.id,
@@ -186,10 +189,12 @@ struct World2PlayerHomeView: View {
                         .zIndex(20_000)
                 }
             }
+            .coordinateSpace(name: "world2.room")
             .frame(width: room.size.width, height: room.size.height)
             .clipped()
         }
         .ignoresSafeArea()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.interior.\(poiId)")
         .onAppear {
             World2Diagnostics.log(
@@ -486,9 +491,56 @@ private struct World2StarterJukeboxView: View {
     }
 }
 
+private struct World2RoomPiece {
+    let name: String
+    let catalogAssetName: String?
+    let generated: World2GeneratedDecoration?
+    let category: String
+    let defaultScale: Double
+    let placementLayer: HomeLayout.PlacedDecoration.PlacementLayer
+
+    static func resolve(
+        _ decorationId: String,
+        player: PlayerState?
+    ) -> World2RoomPiece? {
+        if let item = FurnitureItem.item(id: decorationId) {
+            return World2RoomPiece(
+                name: item.name,
+                catalogAssetName: item.assetName,
+                generated: nil,
+                category: item.category,
+                defaultScale: item.defaultScale,
+                placementLayer: item.placementLayer
+            )
+        }
+        if let generated = player?.generatedDecoration(id: decorationId) {
+            return World2RoomPiece(
+                name: generated.label,
+                catalogAssetName: nil,
+                generated: generated,
+                category: "Workbench",
+                defaultScale: 0.82,
+                placementLayer: generated.placementLayer.homeLayer
+            )
+        }
+        return nil
+    }
+
+    @ViewBuilder
+    var artwork: some View {
+        if let generated {
+            World2GeneratedDecorationArtwork(decoration: generated)
+        } else if let catalogAssetName {
+            Image(catalogAssetName)
+                .resizable()
+                .scaledToFit()
+        }
+    }
+}
+
 private struct World2PlacedFurnitureView: View {
     let instance: DecorationInstance
-    let item: FurnitureItem
+    let piece: World2RoomPiece
     let canvasSize: CGSize
     let isArranging: Bool
     let isSelected: Bool
@@ -506,12 +558,10 @@ private struct World2PlacedFurnitureView: View {
     @State private var isDragging = false
 
     var body: some View {
-        Image(item.assetName)
-            .resizable()
-            .scaledToFit()
+        piece.artwork
             .frame(
-                width: item.category == "Beds" ? 260 : 190,
-                height: item.category == "Beds" ? 210 : 175
+                width: piece.category == "Beds" ? 260 : 190,
+                height: piece.category == "Beds" ? 210 : 175
             )
             .scaleEffect(instance.scale * gestureScale)
             .rotationEffect(.degrees(instance.rotation) + gestureRotation)
@@ -520,6 +570,22 @@ private struct World2PlacedFurnitureView: View {
                 radius: isSelected ? 16 : 7,
                 y: 5
             )
+            .accessibilityLabel(piece.name)
+            .accessibilityHint(
+                isArranging
+                    ? "Tap to select, drag to move or put away, pinch to resize, or twist to rotate"
+                    : "Placed furniture"
+            )
+            .accessibilityValue(
+                String(
+                    format: "x %.2f, y %.2f, size %.2f, rotation %.0f degrees",
+                    instance.x,
+                    instance.y,
+                    instance.scale,
+                    instance.rotation
+                )
+            )
+            .accessibilityIdentifier("world2.interior.placedFurniture.\(instance.id)")
             .overlay {
                 if isArranging && isSelected {
                     World2AnimatedSelectionLasso()
@@ -539,7 +605,7 @@ private struct World2PlacedFurnitureView: View {
                     }
                     .buttonStyle(.plain)
                     .offset(x: -4)
-                    .accessibilityLabel("Put \(item.name) back in the drawer")
+                    .accessibilityLabel("Put \(piece.name) back in the drawer")
                     .accessibilityIdentifier(
                         "world2.interior.furniture.remove.\(instance.id)"
                     )
@@ -560,27 +626,12 @@ private struct World2PlacedFurnitureView: View {
             .gesture(isArranging ? dragGesture : nil)
             .simultaneousGesture(isArranging ? scaleGesture : nil)
             .simultaneousGesture(isArranging ? rotationGesture : nil)
-            .accessibilityLabel(item.name)
-            .accessibilityHint(
-                isArranging
-                    ? "Tap to select, drag to move or put away, pinch to resize, or twist to rotate"
-                    : "Placed furniture"
-            )
-            .accessibilityValue(
-                String(
-                    format: "x %.2f, y %.2f, size %.2f, rotation %.0f degrees",
-                    instance.x,
-                    instance.y,
-                    instance.scale,
-                    instance.rotation
-                )
-            )
-            .accessibilityIdentifier("world2.interior.placedFurniture.\(instance.id)")
+            .accessibilityElement(children: .contain)
             .allowsHitTesting(isArranging)
     }
 
     private var dragGesture: some Gesture {
-        DragGesture()
+        DragGesture(coordinateSpace: .named("world2.room"))
             .onChanged { _ in
                 onSelect()
                 if !isDragging {
@@ -589,7 +640,10 @@ private struct World2PlacedFurnitureView: View {
                 }
             }
             .updating($dragOffset) { value, state, _ in
-                state = value.translation
+                state = CGSize(
+                    width: value.location.x - value.startLocation.x,
+                    height: value.location.y - value.startLocation.y
+                )
             }
             .onEnded { value in
                 defer {
@@ -597,14 +651,17 @@ private struct World2PlacedFurnitureView: View {
                     onDragStateChanged(false)
                 }
                 guard canvasSize.width > 0, canvasSize.height > 0 else { return }
-                let destinationX = (canvasSize.width * instance.x) + value.translation.width
-                if let returnZoneMinX, destinationX >= returnZoneMinX {
+                let travel = CGSize(
+                    width: value.location.x - value.startLocation.x,
+                    height: value.location.y - value.startLocation.y
+                )
+                if let returnZoneMinX, value.location.x >= returnZoneMinX {
                     onReturnToInventory()
                     return
                 }
                 onMove(
-                    value.translation.width / canvasSize.width,
-                    value.translation.height / canvasSize.height
+                    travel.width / canvasSize.width,
+                    travel.height / canvasSize.height
                 )
             }
     }
@@ -730,16 +787,17 @@ private struct World2FurnitureDecoratorDrawer: View {
                             spacing: 10
                         ) {
                             ForEach(inventory) { instance in
-                                if let item = FurnitureItem.item(id: instance.decorationId) {
+                                if let piece = World2RoomPiece.resolve(
+                                    instance.decorationId,
+                                    player: playerService.currentPlayer
+                                ) {
                                     Button {
                                         onPlace(instance.id)
                                     } label: {
                                         VStack(spacing: 6) {
-                                            Image(item.assetName)
-                                                .resizable()
-                                                .scaledToFit()
+                                            piece.artwork
                                                 .frame(height: 78)
-                                            Text(item.name)
+                                            Text(piece.name)
                                                 .font(.system(size: 11, weight: .black, design: .rounded))
                                                 .multilineTextAlignment(.center)
                                                 .lineLimit(2)
@@ -758,14 +816,12 @@ private struct World2FurnitureDecoratorDrawer: View {
                                     }
                                     .buttonStyle(.plain)
                                     .draggable(instance.id) {
-                                        Image(item.assetName)
-                                            .resizable()
-                                            .scaledToFit()
+                                        piece.artwork
                                             .frame(width: 120, height: 110)
                                             .padding(8)
                                             .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
                                     }
-                                    .accessibilityLabel(item.name)
+                                    .accessibilityLabel(piece.name)
                                     .accessibilityHint("Drag into the room, or double tap to place")
                                     .accessibilityIdentifier(
                                         "world2.interior.inventory.item.\(instance.id)"

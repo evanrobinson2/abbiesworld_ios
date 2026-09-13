@@ -82,6 +82,7 @@ struct World2MutableSceneView: View {
         }
         .ignoresSafeArea()
         .accessibilityElement(children: .contain)
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.mutableScene")
         .sheet(isPresented: $isAuthoringPlaceholder) {
             World2PlaceholderSceneForm { name, summary, exitName, usesHardpoints in

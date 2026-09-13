@@ -405,6 +405,53 @@ class PlayerStateService: ObservableObject {
         saveLocalState()
     }
 
+    @discardableResult
+    func awardWorkbenchDecorations(
+        _ decorations: [World2GeneratedDecoration],
+        images: [String: Data]
+    ) -> Int {
+        guard var player = currentPlayer else { return 0 }
+        var catalog = player.generatedDecorations ?? []
+        var added = 0
+        let store = World2GeneratedDecorationImageStore.shared
+
+        for decoration in decorations {
+            if catalog.contains(where: { $0.id == decoration.id }) {
+                continue
+            }
+            if let data = images[decoration.id] {
+                guard store.store(data, for: decoration) else { continue }
+            } else if decoration.registryKey.hasPrefix("preview/") {
+                continue
+            }
+
+            catalog.append(decoration)
+            if !player.decorations.contains(where: { $0.decorationId == decoration.id }) {
+                player.decorations.append(
+                    DecorationInstance(
+                        id: "inventory_\(decoration.id)",
+                        decorationId: decoration.id,
+                        x: 0.50,
+                        y: decoration.placementLayer.homeLayer == .wall ? 0.38 : 0.70,
+                        scale: 0.82
+                    )
+                )
+                added += 1
+            }
+        }
+
+        player.generatedDecorations = catalog
+        if added > 0 {
+            player.progression.totalMinigamesCompleted += 1
+            if !player.progression.completedPOIs.contains("poi.assetWorkbench") {
+                player.progression.completedPOIs.append("poi.assetWorkbench")
+            }
+        }
+        currentPlayer = player
+        saveLocalState()
+        return added
+    }
+
     func earnFurnitureIngredient() {
         guard var player = currentPlayer else { return }
         player.furnitureIngredients = player.availableFurnitureIngredientCount + 1
@@ -443,7 +490,10 @@ class PlayerStateService: ObservableObject {
     ) {
         guard var player = currentPlayer,
               let instanceIndex = player.decorations.firstIndex(where: { $0.id == instanceId }),
-              let item = FurnitureItem.item(id: player.decorations[instanceIndex].decorationId),
+              let placement = Self.roomPlacement(
+                for: player.decorations[instanceIndex].decorationId,
+                player: player
+              ),
               !player.homeLayout.placedDecorations.contains(
                 where: { $0.decorationInstanceId == instanceId }
               ) else {
@@ -451,21 +501,23 @@ class PlayerStateService: ObservableObject {
         }
 
         let placedCount = player.homeLayout.placedDecorations.count
-        let defaultX = 0.30 + (Double(placedCount % 4) * 0.15)
-        let defaultY = item.placementLayer == .wall ? 0.38 : 0.70
+        let defaultX = 0.22 + (Double(placedCount % 3) * 0.20)
+        let defaultY = placement.layer == .wall
+            ? 0.34
+            : (placedCount.isMultiple(of: 2) ? 0.58 : 0.74)
         let x = min(max(requestedX ?? defaultX, 0.06), 0.94)
         let y = min(max(requestedY ?? defaultY, 0.16), 0.90)
         let zIndex = (player.decorations.map(\.zIndex).max() ?? 9) + 1
         player.decorations[instanceIndex].x = x
         player.decorations[instanceIndex].y = y
-        player.decorations[instanceIndex].scale = item.defaultScale
+        player.decorations[instanceIndex].scale = placement.scale
         player.decorations[instanceIndex].zIndex = zIndex
         player.homeLayout.placedDecorations.append(
             HomeLayout.PlacedDecoration(
                 id: "placed_\(instanceId)",
                 decorationInstanceId: instanceId,
                 position: .init(x: x, y: y),
-                layer: item.placementLayer
+                layer: placement.layer
             )
         )
         currentPlayer = player
@@ -698,8 +750,24 @@ class PlayerStateService: ObservableObject {
         if player.sceneExits == nil {
             player.sceneExits = []
         }
+        if player.generatedDecorations == nil {
+            player.generatedDecorations = []
+        }
         ensureStarterPOIFactory(in: &player)
         return player
+    }
+
+    private static func roomPlacement(
+        for decorationId: String,
+        player: PlayerState
+    ) -> (scale: Double, layer: HomeLayout.PlacedDecoration.PlacementLayer)? {
+        if let item = FurnitureItem.item(id: decorationId) {
+            return (item.defaultScale, item.placementLayer)
+        }
+        if let generated = player.generatedDecoration(id: decorationId) {
+            return (0.82, generated.placementLayer.homeLayer)
+        }
+        return nil
     }
 
     private static func ensureStarterPOIFactory(in player: inout PlayerState) {

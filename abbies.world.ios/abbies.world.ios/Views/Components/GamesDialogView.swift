@@ -135,6 +135,7 @@ struct GameIconButton: View {
             .frame(width: 100)
         }
         .buttonStyle(PlainButtonStyle())
+        .accessibilityIdentifier("classicGames.\(title)")
     }
 }
 

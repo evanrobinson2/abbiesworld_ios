@@ -87,6 +87,7 @@ struct World2FurnitureStoreView: View {
             .clipped()
         }
         .ignoresSafeArea()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.furnitureStore")
         .onAppear {
             World2Diagnostics.log(

@@ -19,17 +19,33 @@ struct WorldMapView: View {
 
     var body: some View {
         GeometryReader { geometry in
+            let mapName = viewModel.currentWorld?.backgroundAsset ?? "map.home"
+            let mapRect = Self.fittedMapRect(
+                imageSize: Self.mapImageSize(for: mapName),
+                in: geometry.size
+            )
             ZStack {
                 World2SemanticImage(
-                    semanticName: viewModel.currentWorld?.backgroundAsset ?? "map.home",
+                    semanticName: mapName,
                     fallbackIcon: "tree.fill",
                     fallbackLabel: "\(viewModel.currentWorld?.name ?? "World") artwork is not bundled"
                 )
                 .scaledToFill()
                 .frame(width: geometry.size.width, height: geometry.size.height)
                 .clipped()
-                .overlay(Color.black.opacity(0.12))
+                .overlay(Color.black.opacity(0.42))
                 .ignoresSafeArea()
+
+                World2SemanticImage(
+                    semanticName: mapName,
+                    fallbackIcon: "tree.fill",
+                    fallbackLabel: "\(viewModel.currentWorld?.name ?? "World") artwork is not bundled"
+                )
+                .scaledToFit()
+                .frame(width: mapRect.width, height: mapRect.height)
+                .position(x: mapRect.midX, y: mapRect.midY)
+                .shadow(color: .black.opacity(0.45), radius: 18, y: 8)
+                .accessibilityIdentifier("world2.map.frame")
 
                 if let world = viewModel.currentWorld {
                     ForEach(world.poiPlacements) { placement in
@@ -39,7 +55,8 @@ struct WorldMapView: View {
                                 poi: poi,
                                 placement: placement,
                                 layout: layout,
-                                geometry: geometry,
+                                mapRect: mapRect,
+                                viewSize: geometry.size,
                                 developerMode: developerMode,
                                 isDeveloperSelected: selectedDeveloperPOIId == poi.id
                             ) {
@@ -126,6 +143,7 @@ struct WorldMapView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                     .transition(.move(edge: .bottom).combined(with: .opacity))
                     .zIndex(51)
+                    .accessibilityElement(children: .contain)
                     .accessibilityIdentifier("world2.poi.drawer")
                 }
 
@@ -184,6 +202,7 @@ struct WorldMapView: View {
                 }
             }
         }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.homeWorld")
         .onAppear {
             layoutStore.selectPlayer(viewModel.currentPlayerId)
@@ -206,6 +225,28 @@ struct WorldMapView: View {
             }
         }
         .ignoresSafeArea()
+    }
+
+    /// Full painting, centered. Landscape phones used to crop the 4:3 maps, so
+    /// markers floated off the painted pads.
+    static func fittedMapRect(imageSize: CGSize, in viewSize: CGSize) -> CGRect {
+        guard imageSize.width > 1, imageSize.height > 1,
+              viewSize.width > 1, viewSize.height > 1 else {
+            return CGRect(origin: .zero, size: viewSize)
+        }
+        let scale = min(viewSize.width / imageSize.width, viewSize.height / imageSize.height)
+        let size = CGSize(width: imageSize.width * scale, height: imageSize.height * scale)
+        return CGRect(
+            x: (viewSize.width - size.width) / 2,
+            y: (viewSize.height - size.height) / 2,
+            width: size.width,
+            height: size.height
+        )
+    }
+
+    static func mapImageSize(for semanticName: String) -> CGSize {
+        AssetBootstrapService.shared.image(for: semanticName)?.size
+            ?? CGSize(width: 4, height: 3)
     }
 }
 
@@ -419,7 +460,8 @@ private struct World2POIMarker: View {
     let poi: POI
     let placement: POIPlacement
     let layout: World2POILayout
-    let geometry: GeometryProxy
+    let mapRect: CGRect
+    let viewSize: CGSize
     let developerMode: Bool
     let isDeveloperSelected: Bool
     let onTap: () -> Void
@@ -431,6 +473,17 @@ private struct World2POIMarker: View {
     @GestureState private var dragOffset = CGSize.zero
     @GestureState private var gestureScale = 1.0
     @GestureState private var gestureRotation = Angle.zero
+
+    /// The name pill hangs under the artwork. Drop the stack so the building, not the label, sits on the painted spot.
+    private var artworkAnchorDrop: CGFloat {
+        18 * markerScale
+    }
+
+    /// Keep buildings the same size relative to the painting when the map is letterboxed.
+    private var markerScale: Double {
+        guard viewSize.width > 1 else { return layout.scale }
+        return layout.scale * (mapRect.width / viewSize.width)
+    }
 
     private var glowColor: Color {
         if developerMode && isDeveloperSelected { return .orange }
@@ -457,8 +510,8 @@ private struct World2POIMarker: View {
             }
         }
         .position(
-            x: geometry.size.width * layout.x,
-            y: geometry.size.height * layout.y
+            x: mapRect.minX + mapRect.width * layout.x,
+            y: mapRect.minY + mapRect.height * layout.y + artworkAnchorDrop
         )
         .offset(dragOffset)
         .zIndex(Double(placement.zIndex))
@@ -493,7 +546,7 @@ private struct World2POIMarker: View {
             ZStack {
                 Ellipse()
                     .fill(glowColor.opacity((isPulsing || isDeveloperSelected) ? 0.58 : 0.28))
-                    .frame(width: 180 * layout.scale, height: 100 * layout.scale)
+                    .frame(width: 180 * markerScale, height: 100 * markerScale)
                     .blur(radius: (isPulsing || isDeveloperSelected) ? 22 : 14)
 
                 World2SemanticImage(
@@ -502,7 +555,7 @@ private struct World2POIMarker: View {
                     fallbackLabel: "\(poi.name) artwork is not bundled"
                 )
                 .scaledToFit()
-                .frame(width: 230 * layout.scale, height: 205 * layout.scale)
+                .frame(width: 230 * markerScale, height: 205 * markerScale)
                 .shadow(
                     color: glowColor.opacity((isPulsing || isDeveloperSelected) ? 0.95 : 0.58),
                     radius: (isPulsing || isDeveloperSelected) ? 20 : 12
@@ -512,7 +565,7 @@ private struct World2POIMarker: View {
                 if developerMode && isDeveloperSelected {
                     RoundedRectangle(cornerRadius: 22)
                         .stroke(.orange, style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
-                        .frame(width: 230 * layout.scale, height: 205 * layout.scale)
+                        .frame(width: 230 * markerScale, height: 205 * markerScale)
                 }
             }
             .rotationEffect(.degrees(layout.rotationDegrees) + gestureRotation)
@@ -546,10 +599,10 @@ private struct World2POIMarker: View {
                 state = value.translation
             }
             .onEnded { value in
-                guard geometry.size.width > 0, geometry.size.height > 0 else { return }
+                guard mapRect.width > 1, mapRect.height > 1 else { return }
                 onMove(
-                    value.translation.width / geometry.size.width,
-                    value.translation.height / geometry.size.height
+                    value.translation.width / mapRect.width,
+                    value.translation.height / mapRect.height
                 )
             }
     }
@@ -727,9 +780,16 @@ private struct World2POIInspectionDrawer: View {
         case .cardFactory:
             return "Create a Card"
         case .minigame:
-            return poi.minigameType == "furniture_store"
-                ? "Make Furniture"
-                : "Save the Vowels"
+            switch poi.minigameType {
+            case "furniture_store":
+                return "Make Furniture"
+            case "asset_workbench":
+                return "Make a Decoration"
+            case "creature_lab":
+                return "Open Creature Lab"
+            default:
+                return "Save the Vowels"
+            }
         default:
             return "Start"
         }

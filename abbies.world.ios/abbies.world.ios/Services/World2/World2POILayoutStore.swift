@@ -20,7 +20,8 @@ struct World2POILayout: Codable, Equatable {
 @MainActor
 final class World2POILayoutStore: ObservableObject {
     private static let legacyOverridesKey = "world2.layout.overrides.v1"
-    private static let overridesKeyPrefix = "world2.layout.overrides.v2"
+    // v3 stores image-normalized points on the painted map, not view fractions.
+    private static let overridesKeyPrefix = "world2.layout.overrides.v3"
 
     @Published private(set) var drafts: [String: World2POILayout]
     @Published private(set) var savedLayouts: [String: World2POILayout]

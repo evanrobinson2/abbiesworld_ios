@@ -84,6 +84,7 @@ struct CreatureBuilderView: View {
             audioService.stopAllAudio()
             MusicService.shared.setGameActive(false)
         }
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("creatureBuilder.root")
     }
 
@@ -115,6 +116,7 @@ struct CreatureBuilderView: View {
 
             VStack(spacing: 0) {
                 header
+                    .padding(.top, 56)
 
                 Spacer(minLength: 0)
 
@@ -153,6 +155,7 @@ struct CreatureBuilderView: View {
                 CreatureLabGlyph(symbol: "map.fill", tint: .indigo, size: 38)
             }
             .accessibilityLabel("Return to Creature City")
+            .accessibilityIdentifier("creatureLab.backToCity")
             
             Spacer()
             
@@ -396,6 +399,7 @@ private struct CreatureLabOverlandView: View {
                 }
 
                 overlandHeader
+                    .padding(.top, 56)
             }
         }
         .sheet(item: $selectedJobPlace) { destination in
@@ -412,6 +416,7 @@ private struct CreatureLabOverlandView: View {
                     CreatureLabGlyph(symbol: "xmark", tint: .indigo, size: 40)
                 }
                 .accessibilityLabel("Close Creature City")
+                .accessibilityIdentifier("creatureLab.closeCity")
 
                 Spacer()
 

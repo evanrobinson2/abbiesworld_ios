@@ -680,6 +680,12 @@ def main() -> int:
             )
             and "case .assetWorkbench:" in view_model
             and "case .assetWorkbench:" in root_view
+            and '"poi.assetWorkbench"' in slice_loader
+            and 'minigameType: "asset_workbench"' in slice_loader
+            and "func awardWorkbenchDecorations(" in player_service
+            and "func awardWorkbenchPack(" in view_model
+            and "World2GeneratedDecorationArtwork" in home_view
+            and '"world2.assetWorkbench.award.inventory"' in workbench_view
             and 'accessibilityIdentifier("world2.hud.classicGames")' in root_view
             and "DinoPicnicView()" in root_view
             and "WaypointNavigationView(" in root_view

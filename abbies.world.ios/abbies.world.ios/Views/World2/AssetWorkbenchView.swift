@@ -7,18 +7,32 @@ struct World2AssetWorkbenchView: View {
     init(
         playerID: PlayerId,
         service: any World2AssetWorkbenchServing,
-        onExit: @escaping () -> Void
+        onExit: @escaping () -> Void,
+        onAward: @escaping (World2AssetWorkbenchAward, [String: Data]) -> Void = { _, _ in }
     ) {
         _viewModel = StateObject(
             wrappedValue: World2AssetWorkbenchViewModel(
                 playerID: playerID,
-                service: service
+                service: service,
+                onAward: onAward
             )
         )
         self.onExit = onExit
     }
 
     var body: some View {
+        workbenchCanvas
+            .overlay(alignment: .topLeading) {
+                exitButton
+                    .padding(.top, 28)
+                    .padding(.leading, 22)
+            }
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("world2.assetWorkbench")
+            .accessibilityValue(viewModel.diagnosticSummary)
+    }
+
+    private var workbenchCanvas: some View {
         GeometryReader { geometry in
             ZStack {
                 Color(red: 0.10, green: 0.08, blue: 0.18)
@@ -39,7 +53,7 @@ struct World2AssetWorkbenchView: View {
                     .allowsHitTesting(false)
 
                 VStack(spacing: 12) {
-                    header
+                    Color.clear.frame(height: 52)
 
                     Group {
                         switch viewModel.phase {
@@ -56,7 +70,7 @@ struct World2AssetWorkbenchView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .padding(.horizontal, 22)
-                .padding(.top, 16)
+                .padding(.top, 20)
                 .padding(.bottom, 18)
 
                 if let errorMessage = viewModel.errorMessage {
@@ -69,13 +83,9 @@ struct World2AssetWorkbenchView: View {
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
-        .ignoresSafeArea()
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("world2.assetWorkbench")
-        .accessibilityValue(viewModel.diagnosticSummary)
     }
 
-    private var header: some View {
+    private var exitButton: some View {
         HStack(spacing: 16) {
             Button(action: onExit) {
                 Label("Work Land", systemImage: "arrow.left")
@@ -376,9 +386,11 @@ struct World2AssetWorkbenchView: View {
                 }
             }
 
-            Text("Inventory insertion will be connected when the Asset Workbench POI is added to Work Land.")
+            Text("Your three creations are in the furniture drawer. Open your treehouse and tap Decorate My Room.")
                 .font(.system(size: 13, weight: .bold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.74))
+                .multilineTextAlignment(.center)
+                .accessibilityIdentifier("world2.assetWorkbench.award.inventory")
 
             Button("Build Another Pack", action: viewModel.reset)
                 .buttonStyle(.borderedProminent)

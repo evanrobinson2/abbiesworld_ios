@@ -24,14 +24,18 @@ final class World2AssetWorkbenchViewModel: ObservableObject {
 
     let playerID: PlayerId
     private let service: any World2AssetWorkbenchServing
+    private let onAward: (World2AssetWorkbenchAward, [String: Data]) -> Void
+    private var candidateImageData: [String: Data] = [:]
     private var generationTask: Task<Void, Never>?
 
     init(
         playerID: PlayerId,
-        service: any World2AssetWorkbenchServing
+        service: any World2AssetWorkbenchServing,
+        onAward: @escaping (World2AssetWorkbenchAward, [String: Data]) -> Void = { _, _ in }
     ) {
         self.playerID = playerID
         self.service = service
+        self.onAward = onAward
     }
 
     var recipe: World2AssetWorkbenchRecipe? {
@@ -154,13 +158,39 @@ final class World2AssetWorkbenchViewModel: ObservableObject {
 
     func confirmSelection() {
         guard let pack, canConfirmSelection else { return }
+        generationTask?.cancel()
+        generationTask = Task { [weak self] in
+            await self?.confirmLoadedSelection(pack)
+        }
+    }
+
+    private func confirmLoadedSelection(_ pack: World2AssetWorkbenchPack) async {
+        let selected = pack.candidates.filter { selectedCandidateIDs.contains($0.id) }
+        for candidate in selected where candidateImageData[candidate.id] == nil {
+            guard let data = try? await service.imageData(for: candidate),
+                  let image = UIImage(data: data) else {
+                continue
+            }
+            candidateImageData[candidate.id] = data
+            candidateImages[candidate.id] = image
+        }
+
         do {
-            award = try World2AssetWorkbenchAward.make(
+            let award = try World2AssetWorkbenchAward.make(
                 from: pack,
                 selectedCandidateIDs: selectedCandidateIDs
             )
+            let images = persistedImageData(for: award)
+            let previewMissingImage = award.decorations.contains {
+                $0.registryKey.hasPrefix("preview/") && images[$0.id] == nil
+            }
+            guard !previewMissingImage else {
+                throw World2AssetWorkbenchError.generationUnavailable
+            }
+            self.award = award
             phase = .awarded
             errorMessage = nil
+            onAward(award, images)
             logDiagnostic("selection_awarded")
         } catch {
             errorMessage = error.localizedDescription
@@ -177,6 +207,7 @@ final class World2AssetWorkbenchViewModel: ObservableObject {
         award = nil
         selectedCandidateIDs = []
         candidateImages = [:]
+        candidateImageData = [:]
         errorMessage = nil
         logDiagnostic("reset")
     }
@@ -193,8 +224,24 @@ final class World2AssetWorkbenchViewModel: ObservableObject {
                   let image = UIImage(data: data) else {
                 continue
             }
+            candidateImageData[candidate.id] = data
             candidateImages[candidate.id] = image
         }
+    }
+
+    private func persistedImageData(
+        for award: World2AssetWorkbenchAward
+    ) -> [String: Data] {
+        Dictionary(
+            uniqueKeysWithValues: award.decorations.compactMap { decoration in
+                let candidateID = decoration.id.replacingOccurrences(
+                    of: "workbench-decoration-",
+                    with: ""
+                )
+                guard let data = candidateImageData[candidateID] else { return nil }
+                return (decoration.id, data)
+            }
+        )
     }
 
     private func selectedCard(

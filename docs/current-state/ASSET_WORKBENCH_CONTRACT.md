@@ -4,8 +4,10 @@ The **Asset Workbench** is a player-facing Work Land POI that creates qualified,
 treehouse-placeable decorations from three predefined idea cards. It is not the
 developer-only Asset Carving Lab and must never expose raw generation output.
 
-This document defines the standalone module before POI routing, player inventory,
-and exterior/interior artwork are inserted into World 2.
+The Workbench is inserted in Work Land. Awarded decorations persist in the
+selected player's furniture drawer and can be placed in that player's treehouse.
+Live generation still uses the local preview service until the server job
+endpoint exists.
 
 ## Fixed v1 product contract
 
@@ -159,15 +161,11 @@ revision, MIME type, and SHA-256 match the job candidate before decoding it.
 
 ## Game insertion boundary
 
-The standalone module is complete when its models, service protocol, HTTP contract,
-mock service, view model, carousel UI, six-choice validation, choose-three validation,
-pinned registry loading, diagnostics, and tests compile.
+The Workbench module is inserted when its qualified exterior and interior, Work
+Land POI, carousel UI, six-choice validation, and choose-three award compile, and
+the awarded decorations persist in the owner's furniture inventory.
 
-Insertion is deliberately separate:
+Still pending for production generation:
 
-- add and qualify Asset Workbench exterior/interior semantic assets;
-- add `poi.assetWorkbench` to Work Land and route it to the view;
-- persist committed `World2GeneratedDecoration` values in `PlayerState`;
-- teach the treehouse decorator to resolve and place this new asset class;
 - connect the server implementation and selection endpoint;
 - add generation entitlement/cost policy and production telemetry.

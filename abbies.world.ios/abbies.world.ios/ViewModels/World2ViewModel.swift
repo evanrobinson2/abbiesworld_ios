@@ -104,7 +104,10 @@ final class World2ViewModel: ObservableObject {
     func startGame() async {
         setScreen(.loading, reason: "launch")
         World2MusicService.shared.stop()
-        async let minimumVisibleLoading: Void = Task.sleep(for: .seconds(10))
+        let skipIntro = ProcessInfo.processInfo.arguments.contains("-world2SkipIntro")
+        async let minimumVisibleLoading: Void = Task.sleep(
+            for: .seconds(skipIntro ? 0 : 10)
+        )
         await assetService.bootstrap()
         try? await minimumVisibleLoading
         isIntroBootstrapReady = true
@@ -361,6 +364,27 @@ final class World2ViewModel: ObservableObject {
         setScreen(.creatureLab, reason: "classic_games")
     }
 
+    func awardWorkbenchPack(
+        _ award: World2AssetWorkbenchAward,
+        images: [String: Data]
+    ) {
+        let added = playerService.awardWorkbenchDecorations(
+            award.decorations,
+            images: images
+        )
+        World2Diagnostics.log(
+            "asset_workbench_pack_awarded",
+            [
+                "added": "\(added)",
+                "pack": award.packID,
+                "player": currentPlayerId?.rawValue ?? "none",
+            ]
+        )
+        if added > 0 {
+            showToast("\(added) new creations are in your furniture drawer.")
+        }
+    }
+
     func isReadOnlyVisit(to poiId: String) -> Bool {
         guard let ownerId = pois[poiId]?.ownerId else { return false }
         return ownerId != currentPlayerId?.rawValue
@@ -488,9 +512,10 @@ final class World2ViewModel: ObservableObject {
             lightMusicTrack: "music.home.light",
             intenseMusicTrack: "music.home.intense",
             poiPlacements: [
-                POIPlacement(poiId: "poi.abbieTreehouse", x: 0.29, y: 0.40, scale: 1.0, zIndex: 1),
-                POIPlacement(poiId: "poi.aniTreehouse", x: 0.68, y: 0.47, scale: 1.0, zIndex: 1),
-                POIPlacement(poiId: "poi.cardFactory", x: 0.46, y: 0.70, scale: 1.1, zIndex: 2)
+                // Image-normalized centers of the three painted dirt pads.
+                POIPlacement(poiId: "poi.abbieTreehouse", x: 0.326, y: 0.311, scale: 1.0, zIndex: 1),
+                POIPlacement(poiId: "poi.aniTreehouse", x: 0.722, y: 0.443, scale: 1.0, zIndex: 1),
+                POIPlacement(poiId: "poi.cardFactory", x: 0.440, y: 0.685, scale: 1.05, zIndex: 2)
             ],
             adjacentWorlds: [.work, .farm, .blankSlate],
             ambiance: .init(primaryColor: "#56AB2F", secondaryColor: "#A8E063", mood: "welcoming")
@@ -503,27 +528,10 @@ final class World2ViewModel: ObservableObject {
             lightMusicTrack: "music.work.light",
             intenseMusicTrack: "music.work.intense",
             poiPlacements: [
-                POIPlacement(
-                    poiId: "poi.letterWorks",
-                    x: 0.38,
-                    y: 0.52,
-                    scale: 0.98,
-                    zIndex: 1
-                ),
-                POIPlacement(
-                    poiId: "poi.assetWorkbench",
-                    x: 0.72,
-                    y: 0.64,
-                    scale: 0.78,
-                    zIndex: 2
-                ),
-                POIPlacement(
-                    poiId: "poi.creatureLab",
-                    x: 0.68,
-                    y: 0.30,
-                    scale: 0.72,
-                    zIndex: 3
-                )
+                // Painted building footprints, not the empty courtyard circle.
+                POIPlacement(poiId: "poi.letterWorks", x: 0.198, y: 0.371, scale: 0.92, zIndex: 1),
+                POIPlacement(poiId: "poi.assetWorkbench", x: 0.690, y: 0.694, scale: 0.78, zIndex: 2),
+                POIPlacement(poiId: "poi.creatureLab", x: 0.430, y: 0.220, scale: 0.72, zIndex: 3)
             ],
             adjacentWorlds: [.home],
             ambiance: .init(
@@ -542,9 +550,9 @@ final class World2ViewModel: ObservableObject {
             poiPlacements: [
                 POIPlacement(
                     poiId: "poi.furnitureStore",
-                    x: 0.52,
-                    y: 0.38,
-                    scale: 1.35,
+                    x: 0.538,
+                    y: 0.480,
+                    scale: 1.15,
                     zIndex: 1
                 )
             ],

@@ -9,6 +9,7 @@
 /* Begin PBXFileReference section */
 		DC11978B2EECC0C400E52958 /* abbies.world.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = abbies.world.ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1197A02EECC0C400E52958 /* abbies.world.iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = abbies.world.iosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC1197B02EECC0C400E52958 /* abbies.world.iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = abbies.world.iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -20,6 +21,11 @@
 		DC1197A12EECC0C400E52958 /* abbies.world.iosTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = abbies.world.iosTests;
+			sourceTree = "<group>";
+		};
+		DC1197B12EECC0C400E52958 /* abbies.world.iosUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = abbies.world.iosUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -39,6 +45,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC1197B22EECC0C400E52958 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -47,6 +60,7 @@
 			children = (
 				DC11978D2EECC0C400E52958 /* abbies.world.ios */,
 				DC1197A12EECC0C400E52958 /* abbies.world.iosTests */,
+				DC1197B12EECC0C400E52958 /* abbies.world.iosUITests */,
 				DC11978C2EECC0C400E52958 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +70,7 @@
 			children = (
 				DC11978B2EECC0C400E52958 /* abbies.world.ios.app */,
 				DC1197A02EECC0C400E52958 /* abbies.world.iosTests.xctest */,
+				DC1197B02EECC0C400E52958 /* abbies.world.iosUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -108,6 +123,29 @@
 			productReference = DC1197A02EECC0C400E52958 /* abbies.world.iosTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		DC1197B52EECC0C400E52958 /* abbies.world.iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DC1197BA2EECC0C400E52958 /* Build configuration list for PBXNativeTarget "abbies.world.iosUITests" */;
+			buildPhases = (
+				DC1197B32EECC0C400E52958 /* Sources */,
+				DC1197B22EECC0C400E52958 /* Frameworks */,
+				DC1197B42EECC0C400E52958 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DC1197B72EECC0C400E52958 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				DC1197B12EECC0C400E52958 /* abbies.world.iosUITests */,
+			);
+			name = abbies.world.iosUITests;
+			packageProductDependencies = (
+			);
+			productName = abbies.world.iosUITests;
+			productReference = DC1197B02EECC0C400E52958 /* abbies.world.iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -122,6 +160,10 @@
 						CreatedOnToolsVersion = 26.1.1;
 					};
 					DC1197A52EECC0C400E52958 = {
+						CreatedOnToolsVersion = 26.1.1;
+						TestTargetID = DC11978A2EECC0C400E52958;
+					};
+					DC1197B52EECC0C400E52958 = {
 						CreatedOnToolsVersion = 26.1.1;
 						TestTargetID = DC11978A2EECC0C400E52958;
 					};
@@ -143,6 +185,7 @@
 			targets = (
 				DC11978A2EECC0C400E52958 /* abbies.world.ios */,
 				DC1197A52EECC0C400E52958 /* abbies.world.iosTests */,
+				DC1197B52EECC0C400E52958 /* abbies.world.iosUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -153,10 +196,22 @@
 			target = DC11978A2EECC0C400E52958 /* abbies.world.ios */;
 			targetProxy = DC1197A62EECC0C400E52958 /* PBXContainerItemProxy */;
 		};
+		DC1197B72EECC0C400E52958 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC11978A2EECC0C400E52958 /* abbies.world.ios */;
+			targetProxy = DC1197B62EECC0C400E52958 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXContainerItemProxy section */
 		DC1197A62EECC0C400E52958 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC1197832EECC0C400E52958 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC11978A2EECC0C400E52958;
+			remoteInfo = abbies.world.ios;
+		};
+		DC1197B62EECC0C400E52958 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = DC1197832EECC0C400E52958 /* Project object */;
 			proxyType = 1;
@@ -180,6 +235,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DC1197B42EECC0C400E52958 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -191,6 +253,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		DC1197A32EECC0C400E52958 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC1197B32EECC0C400E52958 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -431,6 +500,42 @@
 			};
 			name = Release;
 		};
+		DC1197B82EECC0C400E52958 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 434CRKC9V3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "evan-personal.abbies-world-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = abbies.world.ios;
+			};
+			name = Debug;
+		};
+		DC1197B92EECC0C400E52958 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 434CRKC9V3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "evan-personal.abbies-world-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = abbies.world.ios;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -457,6 +562,15 @@
 			buildConfigurations = (
 				DC1197A82EECC0C400E52958 /* Debug */,
 				DC1197A92EECC0C400E52958 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DC1197BA2EECC0C400E52958 /* Build configuration list for PBXNativeTarget "abbies.world.iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DC1197B82EECC0C400E52958 /* Debug */,
+				DC1197B92EECC0C400E52958 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
