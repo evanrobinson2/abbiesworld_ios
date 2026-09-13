@@ -131,17 +131,19 @@ struct WorldMapView: View {
                             }
                         }
                     )
-                    .frame(maxWidth: 760)
-                    .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 30))
+                    .frame(width: 332)
+                    .frame(maxHeight: .infinity)
+                    .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 28))
                     .overlay {
-                        RoundedRectangle(cornerRadius: 30)
+                        RoundedRectangle(cornerRadius: 28)
                             .stroke(.white.opacity(0.72), lineWidth: 2)
                     }
-                    .shadow(color: .black.opacity(0.32), radius: 24, y: 10)
-                    .padding(.horizontal, 24)
-                    .padding(.bottom, 18)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
+                    .shadow(color: .black.opacity(0.32), radius: 24, x: -8)
+                    .padding(.top, 72)
+                    .padding(.bottom, 16)
+                    .padding(.trailing, 14)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+                    .transition(.move(edge: .trailing))
                     .zIndex(51)
                     .accessibilityElement(children: .contain)
                     .accessibilityIdentifier("world2.poi.drawer")
@@ -825,44 +827,46 @@ private struct World2POIInspectionDrawer: View {
     }
 
     var body: some View {
-        VStack(spacing: 14) {
-            HStack(alignment: .top, spacing: 18) {
-                Button(action: onEnter) {
-                    ZStack(alignment: .bottom) {
-                        World2SemanticImage(
-                            semanticName: poi.exteriorAsset,
-                            fallbackIcon: poi.icon ?? "building.2.fill",
-                            fallbackLabel: "\(poi.name) artwork is not bundled"
-                        )
-                        .scaledToFit()
-                        .frame(width: 150, height: 140)
+        VStack(alignment: .leading, spacing: 14) {
+            Button(action: onEnter) {
+                ZStack(alignment: .bottom) {
+                    World2SemanticImage(
+                        semanticName: poi.exteriorAsset,
+                        fallbackIcon: poi.icon ?? "building.2.fill",
+                        fallbackLabel: "\(poi.name) artwork is not bundled"
+                    )
+                    .scaledToFit()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 168)
 
-                        Label("Tap to start", systemImage: "play.fill")
-                            .font(.system(size: 11, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 10)
-                            .padding(.vertical, 6)
-                            .background(.black.opacity(0.68), in: Capsule())
-                    }
-                    .contentShape(Rectangle())
+                    Label("Tap to start", systemImage: "play.fill")
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 6)
+                        .background(.black.opacity(0.68), in: Capsule())
+                        .padding(.bottom, 8)
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel("\(actionTitle) at \(poi.name)")
-                .accessibilityIdentifier("world2.poi.preview.start")
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("WHAT'S INSIDE")
-                        .font(.system(size: 12, weight: .black, design: .rounded))
-                        .foregroundStyle(.secondary)
-                    Text(poi.name)
-                        .font(.system(size: 28, weight: .black, design: .rounded))
-                    Text(activityDescription)
-                        .font(.system(size: 16, weight: .medium, design: .rounded))
-                        .foregroundStyle(.secondary)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
+                .contentShape(Rectangle())
             }
+            .buttonStyle(.plain)
+            .accessibilityLabel("\(actionTitle) at \(poi.name)")
+            .accessibilityIdentifier("world2.poi.preview.start")
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("WHAT'S INSIDE")
+                    .font(.system(size: 12, weight: .black, design: .rounded))
+                    .foregroundStyle(.secondary)
+                Text(poi.name)
+                    .font(.system(size: 26, weight: .black, design: .rounded))
+                Text(activityDescription)
+                    .font(.system(size: 15, weight: .medium, design: .rounded))
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Spacer(minLength: 8)
 
             if isReadOnlyVisit {
                 Label("Visiting — look around, but only the owner can make changes.", systemImage: "eye.fill")
@@ -872,7 +876,7 @@ private struct World2POIInspectionDrawer: View {
                     .accessibilityIdentifier("world2.poi.visitorNotice")
             }
 
-            HStack(spacing: 16) {
+            VStack(spacing: 12) {
                 Button("Not Yet", action: onDismiss)
                     .buttonStyle(.bordered)
                     .accessibilityIdentifier("world2.poi.dismiss")

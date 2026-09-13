@@ -33,19 +33,6 @@ struct World2PlayerHomeView: View {
             .filter { placedIDs.contains($0.id) }
             .sorted { $0.zIndex < $1.zIndex }
     }
-    private var placedJukeboxes: [DecorationInstance] {
-        guard let player = roomPlayer else { return [] }
-        let placedIDs = Set(
-            player.homeLayout.placedDecorations.map(\.decorationInstanceId)
-        )
-        return player.decorations
-            .filter {
-                $0.decorationId == "decoration.jukebox.starter"
-                    && placedIDs.contains($0.id)
-            }
-            .sorted { $0.zIndex < $1.zIndex }
-    }
-
     var body: some View {
         GeometryReader { room in
             let drawerWidth = min(max(room.size.width * 0.32, 270), 340)
@@ -72,16 +59,15 @@ struct World2PlayerHomeView: View {
                     Color.cyan.opacity(isRoomDropTargeted ? 0.12 : 0)
                         .allowsHitTesting(false)
 
-                    ForEach(placedJukeboxes) { instance in
-                        World2StarterJukeboxView(
-                            instance: instance,
-                            canvasSize: canvasSize,
-                            onOpenMusic: onOpenMusic
-                        )
-                    }
-
                     ForEach(placedFurniture) { instance in
-                        if let piece = World2RoomPiece.resolve(
+                        if instance.decorationId == DecorationInstance.starterJukeboxID,
+                           !isArrangingFurniture {
+                            World2StarterJukeboxView(
+                                instance: instance,
+                                canvasSize: canvasSize,
+                                onOpenMusic: onOpenMusic
+                            )
+                        } else if let piece = World2RoomPiece.resolve(
                             instance.decorationId,
                             player: roomPlayer
                         ) {
@@ -479,6 +465,7 @@ private struct World2StarterJukeboxView: View {
             }
         }
         .buttonStyle(.plain)
+        .contentShape(RoundedRectangle(cornerRadius: 22))
         .scaleEffect(instance.scale)
         .rotationEffect(.degrees(instance.rotation))
         .position(
@@ -503,6 +490,16 @@ private struct World2RoomPiece {
         _ decorationId: String,
         player: PlayerState?
     ) -> World2RoomPiece? {
+        if decorationId == DecorationInstance.starterJukeboxID {
+            return World2RoomPiece(
+                name: "Treehouse Jukebox",
+                catalogAssetName: nil,
+                generated: nil,
+                category: "Jukebox",
+                defaultScale: 1.0,
+                placementLayer: .floor
+            )
+        }
         if let item = FurnitureItem.item(id: decorationId) {
             return World2RoomPiece(
                 name: item.name,
@@ -530,6 +527,16 @@ private struct World2RoomPiece {
     var artwork: some View {
         if let generated {
             World2GeneratedDecorationArtwork(decoration: generated)
+        } else if catalogAssetName == nil && category == "Jukebox" {
+            VStack(spacing: 4) {
+                Image(systemName: "music.note.house.fill")
+                    .font(.system(size: 28, weight: .black))
+                Text("JUKEBOX")
+                    .font(.system(size: 8, weight: .black, design: .rounded))
+            }
+            .foregroundStyle(.white)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(.indigo.opacity(0.9), in: RoundedRectangle(cornerRadius: 12))
         } else if let catalogAssetName {
             Image(catalogAssetName)
                 .resizable()
@@ -586,13 +593,23 @@ private struct World2PlacedFurnitureView: View {
                 )
             )
             .accessibilityIdentifier("world2.interior.placedFurniture.\(instance.id)")
+            .contentShape(Rectangle())
+            .onTapGesture {
+                if isArranging {
+                    onSelect()
+                }
+            }
+            .gesture(isArranging ? dragGesture : nil)
+            .simultaneousGesture(isArranging ? scaleGesture : nil)
+            .simultaneousGesture(isArranging ? rotationGesture : nil)
             .overlay {
                 if isArranging && isSelected {
                     World2AnimatedSelectionLasso()
+                        .allowsHitTesting(false)
                 }
             }
             .overlay(alignment: .trailing) {
-                if isArranging {
+                if isArranging && isSelected {
                     Button(action: onReturnToInventory) {
                         Image(systemName: "xmark")
                             .font(.system(size: 16, weight: .black))
@@ -616,16 +633,7 @@ private struct World2PlacedFurnitureView: View {
                 y: canvasSize.height * instance.y
             )
             .offset(dragOffset)
-            .zIndex(min(Double(instance.zIndex), 1_000))
-            .contentShape(Rectangle())
-            .onTapGesture {
-                if isArranging {
-                    onSelect()
-                }
-            }
-            .gesture(isArranging ? dragGesture : nil)
-            .simultaneousGesture(isArranging ? scaleGesture : nil)
-            .simultaneousGesture(isArranging ? rotationGesture : nil)
+            .zIndex(isSelected ? 900 : min(Double(instance.zIndex), 800))
             .accessibilityElement(children: .contain)
             .allowsHitTesting(isArranging)
     }

@@ -106,10 +106,12 @@ struct DecorationInstance: Codable, Identifiable {
         self.acquiredAt = Date()
     }
     
+    static let starterJukeboxID = "decoration.jukebox.starter"
+
     static func starterJukebox(for playerId: PlayerId) -> DecorationInstance {
         DecorationInstance(
             id: "jukebox_\(playerId.rawValue)",
-            decorationId: "decoration.jukebox.starter",
+            decorationId: starterJukeboxID,
             x: 0.8,
             y: 0.7,
             scale: 1.0,
@@ -156,14 +158,7 @@ struct HomeLayout: Codable {
         HomeLayout(
             playerId: playerId.rawValue,
             poiId: playerId.homePoiId,
-            placedDecorations: [
-                PlacedDecoration(
-                    id: "placed_jukebox_\(playerId.rawValue)",
-                    decorationInstanceId: "jukebox_\(playerId.rawValue)",
-                    position: PlacedDecoration.Position(x: 0.8, y: 0.7),
-                    layer: .floor
-                )
-            ],
+            placedDecorations: [],
             floorBounds: LayoutBounds(minX: 0.1, maxX: 0.9, minY: 0.5, maxY: 0.9),
             wallBounds: LayoutBounds(minX: 0.1, maxX: 0.9, minY: 0.1, maxY: 0.5)
         )

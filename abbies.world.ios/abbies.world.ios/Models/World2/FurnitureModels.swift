@@ -361,7 +361,8 @@ extension PlayerState {
     var furnitureInventory: [DecorationInstance] {
         let generatedIDs = Set(availableGeneratedDecorations.map(\.id))
         return decorations.filter {
-            FurnitureItem.item(id: $0.decorationId) != nil
+            $0.decorationId == DecorationInstance.starterJukeboxID
+                || FurnitureItem.item(id: $0.decorationId) != nil
                 || generatedIDs.contains($0.decorationId)
         }
     }

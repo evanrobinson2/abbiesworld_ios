@@ -1,1 +1,24 @@
-{"images":[{"filename":"world2_2001_map_workLand-6a6df9ddb314.png","idiom":"universal","scale":"1x"},{"idiom":"universal","scale":"2x"},{"idiom":"universal","scale":"3x"}],"info":{"author":"world2-assets-pipeline","version":1},"properties":{"preserves-vector-representation":false}}
+{
+  "images": [
+    {
+      "filename": "world2_2001_map_workLand-61f9ce2eb3ad.png",
+      "idiom": "universal",
+      "scale": "1x"
+    },
+    {
+      "idiom": "universal",
+      "scale": "2x"
+    },
+    {
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "world2-assets-pipeline",
+    "version": 1
+  },
+  "properties": {
+    "preserves-vector-representation": false
+  }
+}

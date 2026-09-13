@@ -754,6 +754,7 @@ class PlayerStateService: ObservableObject {
             player.generatedDecorations = []
         }
         ensureStarterPOIFactory(in: &player)
+        offerJukeboxAsInventory(in: &player)
         return player
     }
 
@@ -761,6 +762,9 @@ class PlayerStateService: ObservableObject {
         for decorationId: String,
         player: PlayerState
     ) -> (scale: Double, layer: HomeLayout.PlacedDecoration.PlacementLayer)? {
+        if decorationId == DecorationInstance.starterJukeboxID {
+            return (1.0, .floor)
+        }
         if let item = FurnitureItem.item(id: decorationId) {
             return (item.defaultScale, item.placementLayer)
         }
@@ -768,6 +772,23 @@ class PlayerStateService: ObservableObject {
             return (0.82, generated.placementLayer.homeLayer)
         }
         return nil
+    }
+
+    /// The starter jukebox used to appear already placed. Old saves get it back in inventory once.
+    private static func offerJukeboxAsInventory(in player: inout PlayerState) {
+        let instanceID = PlayerState.starterJukeboxInstanceID(for: player.playerId)
+        if !player.decorations.contains(where: { $0.id == instanceID }) {
+            player.decorations.append(.starterJukebox(for: player.playerId))
+        }
+        guard !player.progression.achievedMilestones.contains(PlayerState.jukeboxQuestOfferedMilestone) else {
+            return
+        }
+        player.homeLayout.placedDecorations.removeAll { placed in
+            placed.decorationInstanceId == instanceID
+                && placed.position.x == 0.8
+                && placed.position.y == 0.7
+        }
+        player.progression.achievedMilestones.append(PlayerState.jukeboxQuestOfferedMilestone)
     }
 
     private static func ensureStarterPOIFactory(in player: inout PlayerState) {

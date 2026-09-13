@@ -117,11 +117,6 @@ final class World2ViewModel: ObservableObject {
     func continueFromIntro() {
         guard currentScreen == .loading, isIntroBootstrapReady else { return }
         routeAfterBootstrap()
-        MusicService.shared.playSong(id: "world2_joyful_bounce")
-        World2Diagnostics.log(
-            "world_entry_music_started",
-            ["track": "Joyful Bounce"]
-        )
     }
 
     func selectPlayer(_ playerId: PlayerId) {
@@ -497,10 +492,55 @@ final class World2ViewModel: ObservableObject {
 
     private func setScreen(_ screen: World2Screen, reason: String) {
         currentScreen = screen
+        applyMusic(for: screen)
         World2Diagnostics.log(
             "screen_changed",
             ["reason": reason, "screen": screen.diagnosticName]
         )
+    }
+
+    /// Each place decides its cue. An empty track means this place stays quiet.
+    private func applyMusic(for screen: World2Screen) {
+        let songID: String?
+        switch screen {
+        case .loading, .playerSelect:
+            return
+        case .homeWorld:
+            songID = worldSongID(currentWorld?.id ?? .home)
+        case .blankSlate, .selfReplicatingFactory:
+            songID = worldSongID(.blankSlate)
+        case .treehouse(let poiId):
+            songID = pois[poiId]?.lightMusicTrack
+        case .cardFactory:
+            songID = pois["poi.cardFactory"]?.lightMusicTrack
+        case .furnitureStore:
+            songID = pois["poi.furnitureStore"]?.lightMusicTrack
+        case .assetWorkbench:
+            songID = pois["poi.assetWorkbench"]?.lightMusicTrack
+        case .creatureLab:
+            songID = pois["poi.creatureLab"]?.lightMusicTrack
+        case .fallingTargets:
+            songID = pois["poi.letterWorks"]?.lightMusicTrack
+        }
+        World2MusicService.shared.stop()
+        if let songID, !songID.isEmpty {
+            MusicService.shared.playSong(id: songID)
+        } else {
+            MusicService.shared.stop()
+        }
+        World2Diagnostics.log(
+            "location_music",
+            ["screen": screen.diagnosticName, "track": songID ?? "silent"]
+        )
+    }
+
+    private func worldSongID(_ worldId: WorldId) -> String {
+        switch worldId {
+        case .work: return "world2_working_song"
+        case .farm: return "world2_bright_new_day"
+        case .blankSlate: return "world2_cliffside_morning"
+        default: return "world2_joyful_bounce"
+        }
     }
 
     private func loadTruthfulSliceContent() {
@@ -523,15 +563,15 @@ final class World2ViewModel: ObservableObject {
         let work = World(
             id: .work,
             name: "Work Land",
-            description: "A whimsical concrete jungle for sorting letters and building new ideas",
+            description: "A bright workshop meadow with three empty lots",
             backgroundAsset: "map.workLand",
             lightMusicTrack: "music.work.light",
             intenseMusicTrack: "music.work.intense",
             poiPlacements: [
-                // Painted building footprints, not the empty courtyard circle.
-                POIPlacement(poiId: "poi.letterWorks", x: 0.198, y: 0.371, scale: 0.92, zIndex: 1),
-                POIPlacement(poiId: "poi.assetWorkbench", x: 0.690, y: 0.694, scale: 0.78, zIndex: 2),
-                POIPlacement(poiId: "poi.creatureLab", x: 0.430, y: 0.220, scale: 0.72, zIndex: 3)
+                // Empty sand circles on the parent-supplied Work Land painting.
+                POIPlacement(poiId: "poi.letterWorks", x: 0.443, y: 0.662, scale: 0.92, zIndex: 1),
+                POIPlacement(poiId: "poi.creatureLab", x: 0.693, y: 0.388, scale: 0.88, zIndex: 2),
+                POIPlacement(poiId: "poi.assetWorkbench", x: 0.722, y: 0.759, scale: 0.88, zIndex: 3)
             ],
             adjacentWorlds: [.home],
             ambiance: .init(
@@ -609,8 +649,8 @@ final class World2ViewModel: ObservableObject {
                 entryCost: nil,
                 rewardConfiguration: nil,
                 minigameType: nil,
-                lightMusicTrack: "",
-                intenseMusicTrack: "",
+                lightMusicTrack: "world2_joyful_bounce",
+                intenseMusicTrack: "world2_joyful_bounce",
                 icon: "wand.and.stars",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
@@ -629,8 +669,8 @@ final class World2ViewModel: ObservableObject {
                 entryCost: nil,
                 rewardConfiguration: nil,
                 minigameType: "save_the_vowels",
-                lightMusicTrack: "",
-                intenseMusicTrack: "",
+                lightMusicTrack: "world2_working_song",
+                intenseMusicTrack: "world2_working_song",
                 icon: "character.book.closed.fill",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
@@ -649,8 +689,8 @@ final class World2ViewModel: ObservableObject {
                 entryCost: nil,
                 rewardConfiguration: nil,
                 minigameType: "furniture_store",
-                lightMusicTrack: "",
-                intenseMusicTrack: "",
+                lightMusicTrack: "world2_bright_new_day",
+                intenseMusicTrack: "world2_bright_new_day",
                 icon: "chair.lounge.fill",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
@@ -669,8 +709,8 @@ final class World2ViewModel: ObservableObject {
                 entryCost: nil,
                 rewardConfiguration: nil,
                 minigameType: "asset_workbench",
-                lightMusicTrack: "",
-                intenseMusicTrack: "",
+                lightMusicTrack: "world2_well_make_a_way",
+                intenseMusicTrack: "world2_well_make_a_way",
                 icon: "hammer.circle.fill",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
@@ -689,8 +729,8 @@ final class World2ViewModel: ObservableObject {
                 entryCost: nil,
                 rewardConfiguration: nil,
                 minigameType: "creature_lab",
-                lightMusicTrack: "",
-                intenseMusicTrack: "",
+                lightMusicTrack: "world2_cliffside_morning",
+                intenseMusicTrack: "world2_cliffside_morning",
                 icon: "wand.and.stars",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
@@ -719,8 +759,8 @@ final class World2ViewModel: ObservableObject {
             entryCost: nil,
             rewardConfiguration: nil,
             minigameType: nil,
-            lightMusicTrack: "",
-            intenseMusicTrack: "",
+            lightMusicTrack: owner == .ani ? "world2_cliffside_morning" : "world2_family_adventure",
+            intenseMusicTrack: owner == .ani ? "world2_cliffside_morning" : "world2_family_adventure",
             icon: "house.fill",
             embellishmentSlots: nil,
             interactiveDecorationHooks: nil,

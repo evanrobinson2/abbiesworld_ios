@@ -36,6 +36,16 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
 }
 
 struct PlayerState: Codable, Identifiable {
+    static let jukeboxQuestOfferedMilestone = "quest.placeJukebox.inventory"
+    static func starterJukeboxInstanceID(for playerId: PlayerId) -> String {
+        "jukebox_\(playerId.rawValue)"
+    }
+
+    var hasPlacedJukebox: Bool {
+        let instanceID = Self.starterJukeboxInstanceID(for: playerId)
+        return homeLayout.placedDecorations.contains { $0.decorationInstanceId == instanceID }
+    }
+
     var id: String { playerId.rawValue }
     let playerId: PlayerId
     var name: String
@@ -120,7 +130,9 @@ struct PlayerState: Codable, Identifiable {
             sceneExits: [],
             homeLayout: HomeLayout.default(for: id),
             unlockedMusic: ["music.home.light", "music.home.intense"],
-            progression: PlayerProgression(),
+            progression: PlayerProgression(
+                achievedMilestones: [PlayerState.jukeboxQuestOfferedMilestone]
+            ),
             settings: PlayerSettings(),
             currentWorldId: .home,
             lastPlayedAt: Date()
@@ -177,10 +189,10 @@ struct PlayerProgression: Codable {
     var totalGemsEarned: Int
     var totalMinigamesCompleted: Int
     
-    init() {
+    init(achievedMilestones: [String] = []) {
         self.completedPOIs = []
         self.unlockedWorlds = [.home]
-        self.achievedMilestones = []
+        self.achievedMilestones = achievedMilestones
         self.totalCardsCreated = 0
         self.totalCardsSold = 0
         self.totalGemsEarned = 0

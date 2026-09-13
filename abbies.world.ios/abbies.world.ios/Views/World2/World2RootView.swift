@@ -181,6 +181,12 @@ struct World2RootView: View {
             openCreatureLabFromClassic = false
             viewModel.openCreatureLab()
         }
+        .overlay(alignment: .leading) {
+            if showsQuestDrawer {
+                World2QuestDrawer(viewModel: viewModel)
+                    .zIndex(40)
+            }
+        }
         .task {
             await viewModel.startGame()
         }
@@ -192,6 +198,15 @@ struct World2RootView: View {
             if scenePhase != .active {
                 World2DeveloperSession.shared.isEnabled = false
             }
+        }
+    }
+
+    private var showsQuestDrawer: Bool {
+        switch viewModel.currentScreen {
+        case .loading, .playerSelect:
+            return false
+        default:
+            return viewModel.currentPlayerId != nil
         }
     }
 

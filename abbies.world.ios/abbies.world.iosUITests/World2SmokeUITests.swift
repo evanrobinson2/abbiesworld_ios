@@ -34,14 +34,15 @@ final class World2SmokeUITests: XCTestCase {
         enterAsAbbie()
 
         openPOI("poi.abbieTreehouse", expecting: "world2.interior.poi.abbieTreehouse")
-        XCTAssertTrue(
-            app.buttons["Open the treehouse jukebox"].waitForExistence(timeout: 4)
-                || app.descendants(matching: .any)
-                    .matching(NSPredicate(format: "identifier BEGINSWITH 'world2.interior.jukebox.'"))
-                    .firstMatch
-                    .exists,
-            "Starter jukebox was not rendered in Abbie's treehouse\n\(app.debugDescription.prefix(1600))"
-        )
+        let jukebox = app.buttons["Open the treehouse jukebox"]
+        if !jukebox.waitForExistence(timeout: 3) {
+            tap("world2.quests.open")
+            XCTAssertTrue(
+                app.descendants(matching: .any)["world2.quests.item.placeJukebox"].waitForExistence(timeout: 4),
+                "Jukebox was neither placed nor offered as the first quest"
+            )
+            tap("world2.quests.close")
+        }
         tap("world2.interior.back")
 
         openPOI("poi.aniTreehouse", expecting: "world2.interior.poi.aniTreehouse")
@@ -186,9 +187,9 @@ final class World2SmokeUITests: XCTestCase {
         saveShot("map-home")
 
         travel("world.work")
-        assertOnPaintedSpot("poi.letterWorks", x: 0.198, y: 0.371)
-        assertOnPaintedSpot("poi.assetWorkbench", x: 0.690, y: 0.694)
-        assertOnPaintedSpot("poi.creatureLab", x: 0.430, y: 0.220)
+        assertOnPaintedSpot("poi.letterWorks", x: 0.443, y: 0.662)
+        assertOnPaintedSpot("poi.creatureLab", x: 0.693, y: 0.388)
+        assertOnPaintedSpot("poi.assetWorkbench", x: 0.722, y: 0.759)
         saveShot("map-work")
 
         travel("world.home")
