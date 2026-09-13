@@ -1,0 +1,21 @@
+{
+  "approvalState": "parent_selected",
+  "createdAt": "2026-09-13T17:50:00Z",
+  "exactPrompt": "Use the exact parent-selected artwork as the Abbie's World iPad app icon. Preserve the luminous pink and lavender fantasy treehouse perched on a compact blue-violet planet, the broad rainbow behind it, the sparkling pastel orbital ring, the warm glowing windows, the soft cloud framing, and the two small friendly star mascots at lower right. Preserve the premium tactile clay-like dimensional rendering, rounded forms, bright child-friendly palette, and centered magical-world silhouette. The full square must remain opaque and visually complete under Apple's rounded app-icon mask. Keep the treehouse, planet, rainbow, orbital ring, and star mascots readable at 60-pixel icon size. No text, letters, numbers, third-party logos, unrelated UI, transparency, frightening material, or added border. Do not author a separate rounded-square mask; Apple applies the system mask.\n",
+  "inputPath": "candidates/2004/v10/source.png",
+  "inputSha256": "906829e7f094f85d5d39fe23e23959d72cc103be314f1a481722ae22dbe4319c",
+  "integrationState": "blocked_until_qualified_and_parent_approved",
+  "model": "parent-supplied-artwork",
+  "outputPath": "candidates/2004/v10/source.png",
+  "outputSha256": "906829e7f094f85d5d39fe23e23959d72cc103be314f1a481722ae22dbe4319c",
+  "productionId": "2004",
+  "promptPath": "prompts/2004/v10.txt",
+  "promptSha256": "a4e63e29093810411245efdb2b25b79ee82f1ac1355beec59b8313dac5463080",
+  "provider": "local-deterministic",
+  "schemaVersion": 1,
+  "semanticId": "ui.appIcon",
+  "transformation": {
+    "kind": "decodeJPEGToOpaquePNG"
+  },
+  "version": "v10"
+}

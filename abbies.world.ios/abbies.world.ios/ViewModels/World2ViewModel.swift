@@ -1,25 +1,19 @@
-//
-//  World2ViewModel.swift
-//  abbies.world.ios
-//
-//  Main ViewModel for Abbie's World 2 game shell.
-//  Coordinates navigation, POI interaction, and game state.
-//
-
-import Foundation
 import Combine
-import SwiftUI
+import Foundation
+import OSLog
 
 enum World2Screen: Equatable {
     case loading
     case playerSelect
-    case worldMap
-    case poiInterior(poiId: String)
+    case homeWorld
+    case blankSlate
+    case treehouse(poiId: String)
     case cardFactory
-    case cardVault
-    case cardShop
-    case playerHome
-    case minigame(poiId: String, minigameType: String)
+    case selfReplicatingFactory(instanceID: String)
+    case furnitureStore
+    case assetWorkbench
+    case creatureLab
+    case fallingTargets(configurationID: String)
 }
 
 struct POIInspection: Identifiable {
@@ -28,331 +22,571 @@ struct POIInspection: Identifiable {
     let placement: POIPlacement
 }
 
+enum World2Diagnostics {
+    private static let logger = Logger(
+        subsystem: Bundle.main.bundleIdentifier ?? "abbies.world.ios",
+        category: "World2"
+    )
+
+    static func log(_ event: String, _ fields: [String: String] = [:]) {
+        let details = fields
+            .sorted { $0.key < $1.key }
+            .map { "\($0.key)=\($0.value)" }
+            .joined(separator: " ")
+        let message = details.isEmpty ? "event=\(event)" : "event=\(event) \(details)"
+        logger.notice("\(message, privacy: .public)")
+        print("[World2] \(message)")
+    }
+}
+
 @MainActor
-class World2ViewModel: ObservableObject {
-    
+final class World2ViewModel: ObservableObject {
     private let assetService = AssetBootstrapService.shared
     private let playerService = PlayerStateService.shared
-    private let musicService = World2MusicService.shared
     private var cancellables = Set<AnyCancellable>()
-    
-    @Published var currentScreen: World2Screen = .loading
-    @Published var currentWorld: World?
+
+    @Published private(set) var currentScreen: World2Screen = .loading
+    @Published private(set) var currentWorld: World?
+    @Published private(set) var currentMutableSceneID =
+        World2PlacedPlaceInstance.blankSlateSceneID
+    @Published private(set) var isIntroBootstrapReady = false
     @Published var inspectedPOI: POIInspection?
     @Published var showingPOISheet = false
-    @Published var isTransitioning = false
     @Published var toastMessage: String?
-    
+
     private(set) var worlds: [WorldId: World] = [:]
     private(set) var pois: [String: POI] = [:]
-    private(set) var ingredientCatalog: IngredientCatalog = .empty
-    
+    private(set) var ingredientCatalog: IngredientCatalog = .factoryCatalog
+    private var mutableSceneBackStack: [String] = []
+
     var bootstrapProgress: Double { assetService.overallProgress }
-    var isBootstrapReady: Bool { assetService.isReady }
     var gems: Int { playerService.gems }
     var totalIngredients: Int { playerService.totalIngredients }
     var activeDeckCount: Int { playerService.activeDeckCount }
     var currentPlayerId: PlayerId? { playerService.currentPlayer?.playerId }
-    
-    init() {
-        setupBindings()
-        loadGameContent()
+    var placeInventory: [World2PlaceInventoryItem] { playerService.placeInventory }
+    var blankSlatePlaces: [World2PlacedPlaceInstance] {
+        playerService.placedPlaces(in: World2PlacedPlaceInstance.blankSlateSceneID)
     }
-    
-    private func setupBindings() {
-        assetService.$state
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] state in
-                if state.isReady && self?.currentScreen == .loading {
-                    self?.onBootstrapComplete()
-                }
+    var currentMutableScene: World2MutableScene {
+        playerService.scene(currentMutableSceneID) ?? .blankSlate
+    }
+    var currentScenePlaces: [World2PlacedPlaceInstance] {
+        playerService.placedPlaces(in: currentMutableSceneID)
+    }
+    var currentSceneExits: [World2SceneExit] {
+        playerService.exits(from: currentMutableSceneID)
+    }
+    var availableSceneHardpoints: [World2SceneHardpoint] {
+        playerService.availableHardpoints(in: currentMutableSceneID)
+    }
+    var canReturnToPreviousMutableScene: Bool {
+        !mutableSceneBackStack.isEmpty
+    }
+    var factoryInventoryCount: Int {
+        placeInventory.filter { $0.templateID == .selfReplicatingFactory }.count
+    }
+
+    init() {
+        assetService.objectWillChange
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
             }
             .store(in: &cancellables)
+        playerService.objectWillChange
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
+        loadTruthfulSliceContent()
     }
-    
+
     func startGame() async {
-        currentScreen = .loading
+        setScreen(.loading, reason: "launch")
+        World2MusicService.shared.stop()
+        async let minimumVisibleLoading: Void = Task.sleep(for: .seconds(10))
         await assetService.bootstrap()
+        try? await minimumVisibleLoading
+        isIntroBootstrapReady = true
+        World2Diagnostics.log("intro_ready_for_player")
     }
-    
-    private func onBootstrapComplete() {
-        if playerService.currentPlayer == nil {
-            currentScreen = .playerSelect
-        } else {
-            enterWorldMap()
-        }
+
+    func continueFromIntro() {
+        guard currentScreen == .loading, isIntroBootstrapReady else { return }
+        routeAfterBootstrap()
+        MusicService.shared.playSong(id: "world2_joyful_bounce")
+        World2Diagnostics.log(
+            "world_entry_music_started",
+            ["track": "Joyful Bounce"]
+        )
     }
-    
+
     func selectPlayer(_ playerId: PlayerId) {
-        playerService.selectPlayer(playerId)
-        enterWorldMap()
-    }
-    
-    func enterWorldMap() {
-        let worldId = playerService.currentWorldId
-        guard let world = worlds[worldId] else {
-            print("⚠️ World2ViewModel: World not found: \(worldId)")
+        guard playerService.selectPlayer(playerId) else {
+            showToast(
+                playerService.error
+                    ?? "That saved game could not be opened safely."
+            )
             return
         }
-        
-        currentWorld = world
-        currentScreen = .worldMap
-        musicService.enterLocation(worldId.rawValue)
+        dismissPOIInspection()
+        currentMutableSceneID = World2PlacedPlaceInstance.blankSlateSceneID
+        mutableSceneBackStack = []
+        playerService.setCurrentWorld(.home)
+        currentWorld = worlds[.home]
+        setScreen(.homeWorld, reason: "player_selected")
+        World2Diagnostics.log("player_selected", ["player": playerId.rawValue])
     }
-    
-    func navigateToWorld(_ worldId: WorldId) {
-        guard let world = worlds[worldId] else {
-            print("⚠️ World2ViewModel: Cannot navigate to unknown world: \(worldId)")
-            return
-        }
-        
-        guard playerService.currentPlayer?.progression.unlockedWorlds.contains(worldId) == true else {
-            showToast("This world is still locked!")
-            return
-        }
-        
-        isTransitioning = true
-        
-        musicService.exitLocation(returningTo: nil)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
-            self?.currentWorld = world
-            self?.playerService.setCurrentWorld(worldId)
-            self?.musicService.enterLocation(worldId.rawValue)
-            self?.isTransitioning = false
-        }
-    }
-    
+
     func inspectPOI(placement: POIPlacement) {
         guard let poi = pois[placement.poiId] else {
-            print("⚠️ World2ViewModel: POI not found: \(placement.poiId)")
+            World2Diagnostics.log("poi_missing", ["poi": placement.poiId])
             return
         }
-        
         inspectedPOI = POIInspection(id: placement.id, poi: poi, placement: placement)
         showingPOISheet = true
+        World2Diagnostics.log("poi_inspected", ["poi": poi.id])
     }
-    
+
     func dismissPOIInspection() {
         showingPOISheet = false
         inspectedPOI = nil
     }
-    
-    func enterPOI(_ poi: POI) {
-        if let cost = poi.entryCost, let gemCost = cost.gems, gemCost > 0 {
-            guard playerService.spendGems(gemCost) else {
-                showToast("Not enough gems!")
-                return
-            }
-        }
-        
-        dismissPOIInspection()
-        
-        musicService.enterLocation(poi.id)
-        
-        switch poi.type {
-        case .home:
-            currentScreen = .playerHome
-        case .cardFactory:
-            currentScreen = .cardFactory
-        case .cardVault:
-            currentScreen = .cardVault
-        case .cardShop:
-            currentScreen = .cardShop
-        case .minigame, .farmPlot:
-            if let minigameType = poi.minigameType {
-                currentScreen = .minigame(poiId: poi.id, minigameType: minigameType)
-                musicService.transitionToIntense()
-            }
-        case .creatureIngredient, .functionIngredient, .contextIngredient, .gemReward:
-            if let minigameType = poi.minigameType {
-                currentScreen = .minigame(poiId: poi.id, minigameType: minigameType)
-                musicService.transitionToIntense()
-            } else {
-                currentScreen = .poiInterior(poiId: poi.id)
-            }
-        }
-    }
-    
-    func exitPOI() {
-        guard let worldId = currentWorld?.id else {
-            enterWorldMap()
+
+    func switchWorld(to worldId: WorldId) {
+        guard let world = worlds[worldId] else {
+            showToast("That world is still being built.")
             return
         }
-        
-        musicService.transitionToLight()
-        musicService.exitLocation(returningTo: worldId.rawValue)
-        currentScreen = .worldMap
-    }
-    
-    func completeMinigame(poiId: String, rewards: [RewardConfiguration.Reward], score: Int) {
-        musicService.transitionToLight()
-        
-        for reward in rewards {
-            applyReward(reward)
+        dismissPOIInspection()
+        currentWorld = world
+        playerService.setCurrentWorld(worldId)
+        if worldId == .blankSlate {
+            currentMutableSceneID = World2PlacedPlaceInstance.blankSlateSceneID
+            mutableSceneBackStack = []
         }
-        
-        playerService.markPOICompleted(poiId)
+        setScreen(
+            worldId == .blankSlate ? .blankSlate : .homeWorld,
+            reason: "world_changed"
+        )
+        World2Diagnostics.log("world_changed", ["world": worldId.rawValue])
+    }
+
+    @discardableResult
+    func placeInventoryItem(
+        _ itemID: String,
+        x: Double,
+        y: Double,
+        hardpointID: String? = nil
+    ) -> World2PlacedPlaceInstance? {
+        guard let instance = playerService.placeInventoryItem(
+            itemID,
+            in: currentMutableSceneID,
+            x: x,
+            y: y,
+            hardpointID: hardpointID
+        ) else {
+            showToast("That place could not be placed there.")
+            return nil
+        }
+        World2Diagnostics.log(
+            "place_instance_placed",
+            [
+                "instance": instance.id,
+                "scene": instance.sceneID,
+                "template": instance.templateID.rawValue
+            ]
+        )
+        showToast("POI Factory placed. Tap it to go inside!")
+        return instance
+    }
+
+    func enterPlacedPlace(_ instanceID: String) {
+        guard let instance = currentScenePlaces.first(where: { $0.id == instanceID }) else {
+            showToast("That place could not be found.")
+            return
+        }
+        switch instance.templateID {
+        case .selfReplicatingFactory:
+            setScreen(
+                .selfReplicatingFactory(instanceID: instance.id),
+                reason: "placed_poi_entered"
+            )
+        }
+        World2Diagnostics.log(
+            "placed_poi_entered",
+            ["instance": instance.id, "template": instance.templateID.rawValue]
+        )
+    }
+
+    @discardableResult
+    func fabricateFactoryCopy(from instanceID: String) -> World2PlaceInventoryItem? {
+        guard let item = playerService.fabricatePlaceCopy(from: instanceID) else {
+            showToast("This factory could not make a copy.")
+            return nil
+        }
+        World2Diagnostics.log(
+            "place_inventory_item_fabricated",
+            [
+                "item": item.id,
+                "source_instance": instanceID,
+                "template": item.templateID.rawValue
+            ]
+        )
+        showToast("A new POI Factory is in your inventory!")
+        return item
+    }
+
+    func traverseSceneExit(_ exitID: String) {
+        guard let exit = currentSceneExits.first(where: { $0.id == exitID }),
+              playerService.scene(exit.toSceneID) != nil else {
+            showToast("That destination is not ready.")
+            return
+        }
+        mutableSceneBackStack.append(currentMutableSceneID)
+        currentMutableSceneID = exit.toSceneID
+        World2Diagnostics.log(
+            "scene_exit_traversed",
+            [
+                "exit": exit.id,
+                "from_scene": exit.fromSceneID,
+                "to_scene": exit.toSceneID
+            ]
+        )
+    }
+
+    func returnFromMutableScene() {
+        guard let previous = mutableSceneBackStack.popLast() else {
+            returnToHomeWorld()
+            return
+        }
+        currentMutableSceneID = previous
+        World2Diagnostics.log(
+            "mutable_scene_back",
+            ["to_scene": previous]
+        )
+    }
+
+    @discardableResult
+    func birthPlaceholderScene(
+        name: String,
+        summary: String,
+        exitName: String,
+        usesHardpoints: Bool
+    ) -> World2SceneExit? {
+        let hardpoints = usesHardpoints
+            ? World2SceneHardpoint.threePointLayout
+            : []
+        guard let exit = playerService.birthPlaceholderScene(
+            from: currentMutableSceneID,
+            name: name,
+            summary: summary,
+            exitName: exitName,
+            hardpoints: hardpoints
+        ) else {
+            showToast("This scene already has an exit, or its metadata is incomplete.")
+            return nil
+        }
+        World2Diagnostics.log(
+            "developer_placeholder_scene_birthed",
+            [
+                "exit": exit.id,
+                "from_scene": exit.fromSceneID,
+                "to_scene": exit.toSceneID,
+                "hardpoint_count": "\(hardpoints.count)"
+            ]
+        )
+        showToast("The placeholder scene is now part of the world.")
+        return exit
+    }
+
+    func returnToHomeWorld() {
+        currentMutableSceneID = World2PlacedPlaceInstance.blankSlateSceneID
+        mutableSceneBackStack = []
+        switchWorld(to: .home)
+    }
+
+    func enterPOI(_ poi: POI) {
+        dismissPOIInspection()
+        switch poi.type {
+        case .home:
+            setScreen(.treehouse(poiId: poi.id), reason: "poi_entered")
+        case .cardFactory:
+            setScreen(.cardFactory, reason: "poi_entered")
+        case .minigame:
+            guard let configurationID = poi.minigameType else {
+                showToast("This game is still being tuned.")
+                return
+            }
+            if configurationID == "furniture_store" {
+                setScreen(.furnitureStore, reason: "poi_entered")
+            } else if configurationID == "asset_workbench" {
+                setScreen(.assetWorkbench, reason: "poi_entered")
+            } else if configurationID == "creature_lab" {
+                setScreen(.creatureLab, reason: "poi_entered")
+            } else {
+                setScreen(
+                    .fallingTargets(configurationID: configurationID),
+                    reason: "poi_entered"
+                )
+            }
+        case .cardVault, .cardShop, .creatureIngredient, .functionIngredient,
+             .contextIngredient, .gemReward, .farmPlot:
+            World2Diagnostics.log("poi_not_in_slice", ["poi": poi.id, "type": poi.type.rawValue])
+            showToast("That place is not open in this slice.")
+        }
+    }
+
+    func exitPOI() {
+        setScreen(
+            currentWorld?.id == .blankSlate ? .blankSlate : .homeWorld,
+            reason: "poi_exit"
+        )
+    }
+
+    func openCurrentPlayerTreehouse() {
+        guard let playerId = currentPlayerId else { return }
+        currentWorld = worlds[.home]
+        playerService.setCurrentWorld(.home)
+        setScreen(
+            .treehouse(poiId: playerId.homePoiId),
+            reason: "decorate_owned_treehouse"
+        )
+    }
+
+    func openCreatureLab() {
+        dismissPOIInspection()
+        currentWorld = worlds[.work] ?? currentWorld
+        playerService.setCurrentWorld(.work)
+        setScreen(.creatureLab, reason: "classic_games")
+    }
+
+    func isReadOnlyVisit(to poiId: String) -> Bool {
+        guard let ownerId = pois[poiId]?.ownerId else { return false }
+        return ownerId != currentPlayerId?.rawValue
+    }
+
+    func completeMinigame(
+        configurationID: String,
+        score: Int,
+        rewardGems: Int
+    ) {
+        playerService.addGems(rewardGems)
+        if let completedPOI = pois.values.first(
+            where: { $0.minigameType == configurationID }
+        ) {
+            playerService.markPOICompleted(completedPOI.id)
+        }
         playerService.incrementMinigamesCompleted()
-        
-        let rewardSummary = summarizeRewards(rewards)
-        showToast("Great job! \(rewardSummary)")
-        
-        exitPOI()
+        World2Diagnostics.log(
+            "minigame_rewarded",
+            [
+                "configuration": configurationID,
+                "gems": "\(rewardGems)",
+                "score": "\(score)"
+            ]
+        )
     }
-    
-    private func applyReward(_ reward: RewardConfiguration.Reward) {
-        switch reward.type {
-        case .gems:
-            if let amount = reward.amount {
-                playerService.addGems(amount)
-            }
-        case .creatureIngredient:
-            if let itemId = reward.itemId {
-                playerService.addIngredient(id: itemId, category: .creature, source: "minigame")
-            }
-        case .functionIngredient:
-            if let itemId = reward.itemId {
-                playerService.addIngredient(id: itemId, category: .function, source: "minigame")
-            }
-        case .contextIngredient:
-            if let itemId = reward.itemId {
-                playerService.addIngredient(id: itemId, category: .context, source: "minigame")
-            }
-        case .decoration:
-            if let itemId = reward.itemId {
-                let decoration = DecorationInstance(decorationId: itemId, x: 0.5, y: 0.5)
-                playerService.addDecoration(decoration)
-            }
-        case .musicTrack:
-            if let itemId = reward.itemId {
-                playerService.unlockMusic(itemId)
-            }
-        case .card, .unlock:
-            break
-        }
-    }
-    
-    private func summarizeRewards(_ rewards: [RewardConfiguration.Reward]) -> String {
-        var parts: [String] = []
-        
-        let gems = rewards.filter { $0.type == .gems }.compactMap { $0.amount }.reduce(0, +)
-        if gems > 0 {
-            parts.append("\(gems) gem\(gems == 1 ? "" : "s")")
-        }
-        
-        let ingredients = rewards.filter {
-            $0.type == .creatureIngredient || $0.type == .functionIngredient || $0.type == .contextIngredient
-        }.count
-        if ingredients > 0 {
-            parts.append("\(ingredients) ingredient\(ingredients == 1 ? "" : "s")")
-        }
-        
-        return parts.isEmpty ? "Completed!" : "Earned \(parts.joined(separator: " and "))!"
-    }
-    
+
     func showToast(_ message: String) {
         toastMessage = message
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+        Task { @MainActor [weak self] in
+            try? await Task.sleep(for: .seconds(3))
             if self?.toastMessage == message {
                 self?.toastMessage = nil
             }
         }
     }
-    
-    private func loadGameContent() {
-        worlds = [
-            .home: World(
-                id: .home,
-                name: "Home World",
-                description: "A cozy, magical place where you can create and collect",
-                backgroundAsset: "map.home",
-                lightMusicTrack: "music.home.light",
-                intenseMusicTrack: "music.home.intense",
-                poiPlacements: [
-                    POIPlacement(poiId: "poi.abbieTreehouse", x: 0.15, y: 0.35, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.aniTreehouse", x: 0.85, y: 0.35, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.cardFactory", x: 0.35, y: 0.65, scale: 1.2, zIndex: 2),
-                    POIPlacement(poiId: "poi.cardVault", x: 0.65, y: 0.65, scale: 1.0, zIndex: 2),
-                    POIPlacement(poiId: "poi.cardShop", x: 0.5, y: 0.85, scale: 1.0, zIndex: 2)
-                ],
-                adjacentWorlds: [.farm, .adventure],
-                ambiance: World.WorldAmbiance(primaryColor: "#4CAF50", secondaryColor: "#8BC34A", mood: "magical")
-            ),
-            .farm: World(
-                id: .farm,
-                name: "Ingredient Farm",
-                description: "Grow and harvest ingredients for your cards",
-                backgroundAsset: "map.farm",
-                lightMusicTrack: "music.farm.light",
-                intenseMusicTrack: "music.farm.intense",
-                poiPlacements: [
-                    POIPlacement(poiId: "poi.farm.creatures", x: 0.25, y: 0.3, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.farm.costumes", x: 0.75, y: 0.3, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.farm.places", x: 0.25, y: 0.65, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.farm.mystery", x: 0.75, y: 0.65, scale: 1.0, zIndex: 1)
-                ],
-                adjacentWorlds: [.home],
-                ambiance: World.WorldAmbiance(primaryColor: "#8BC34A", secondaryColor: "#CDDC39", mood: "pastoral")
-            ),
-            .adventure: World(
-                id: .adventure,
-                name: "Adventure World",
-                description: "A rugged frontier where you earn ingredients and gems",
-                backgroundAsset: "map.adventure",
-                lightMusicTrack: "music.adventure.light",
-                intenseMusicTrack: "music.adventure.intense",
-                poiPlacements: [
-                    POIPlacement(poiId: "poi.creatureIngredient", x: 0.2, y: 0.3, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.functionIngredient", x: 0.8, y: 0.3, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.contextIngredient", x: 0.2, y: 0.7, scale: 1.0, zIndex: 1),
-                    POIPlacement(poiId: "poi.gemReward", x: 0.8, y: 0.7, scale: 1.0, zIndex: 1)
-                ],
-                adjacentWorlds: [.home],
-                ambiance: World.WorldAmbiance(primaryColor: "#FF9800", secondaryColor: "#795548", mood: "adventurous")
+
+    private func routeAfterBootstrap() {
+        let processArguments = ProcessInfo.processInfo.arguments
+        let arguments = Set(processArguments)
+        let directPlayer: PlayerId = arguments.contains("-world2PlayerAni") ? .ani : .abbie
+
+        if arguments.contains("-launchWorld2WorkLand") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .work)
+        } else if arguments.contains("-launchWorld2FarmLand") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .farm)
+        } else if arguments.contains("-launchWorld2BlankSlate") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .blankSlate)
+        } else if arguments.contains("-launchWorld2POIFactory") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .blankSlate)
+            let instance = blankSlatePlaces.first
+                ?? placeInventory.first.flatMap {
+                    placeInventoryItem($0.id, x: 0.50, y: 0.56)
+                }
+            if let instance {
+                enterPlacedPlace(instance.id)
+            }
+        } else if arguments.contains("-launchWorld2FurnitureStore")
+                    || arguments.contains("-openWorld2FurnitureStoreCart")
+                    || arguments.contains("-autoPlayWorld2FurnitureStore") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .farm)
+            setScreen(.furnitureStore, reason: "direct_launch")
+        } else if arguments.contains("-launchWorld2AssetWorkbench") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .work)
+            setScreen(.assetWorkbench, reason: "direct_launch")
+        } else if arguments.contains("-launchSaveTheVowels")
+                    || arguments.contains("-autoPlaySaveVowels") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .work)
+            setScreen(
+                .fallingTargets(configurationID: "save_the_vowels"),
+                reason: "direct_launch"
             )
-        ]
-        
+        } else if arguments.contains("-launchWorld2CreatureLab") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .work)
+            setScreen(.creatureLab, reason: "direct_launch")
+        } else if let inspectionFlag = processArguments.firstIndex(of: "-inspectWorld2POI"),
+           processArguments.indices.contains(inspectionFlag + 1),
+           let poi = pois[processArguments[inspectionFlag + 1]],
+           let world = worlds[poi.mapId],
+           let placement = world.poiPlacements.first(where: { $0.poiId == poi.id }) {
+            selectPlayer(directPlayer)
+            switchWorld(to: poi.mapId)
+            inspectPOI(placement: placement)
+        } else if arguments.contains("-launchWorld2Home") {
+            selectPlayer(directPlayer)
+        } else if arguments.contains("-launchWorld2AbbieTreehouse") {
+            selectPlayer(directPlayer)
+            setScreen(.treehouse(poiId: PlayerId.abbie.homePoiId), reason: "direct_launch")
+        } else if arguments.contains("-launchWorld2AniTreehouse") {
+            selectPlayer(directPlayer)
+            setScreen(.treehouse(poiId: PlayerId.ani.homePoiId), reason: "direct_launch")
+        } else if arguments.contains("-launchWorld2Factory")
+                    || arguments.contains("-autoPlayWorld2Factory")
+                    || arguments.contains("-autoRejectWorld2Factory") {
+            selectPlayer(directPlayer)
+            setScreen(.cardFactory, reason: "direct_launch")
+        } else {
+            // Player choice is intentional on every ordinary launch, even when local state exists.
+            setScreen(.playerSelect, reason: "bootstrap_ready")
+        }
+    }
+
+    private func setScreen(_ screen: World2Screen, reason: String) {
+        currentScreen = screen
+        World2Diagnostics.log(
+            "screen_changed",
+            ["reason": reason, "screen": screen.diagnosticName]
+        )
+    }
+
+    private func loadTruthfulSliceContent() {
+        let home = World(
+            id: .home,
+            name: "Home World",
+            description: "Three welcoming places to explore",
+            backgroundAsset: "map.home",
+            lightMusicTrack: "music.home.light",
+            intenseMusicTrack: "music.home.intense",
+            poiPlacements: [
+                POIPlacement(poiId: "poi.abbieTreehouse", x: 0.29, y: 0.40, scale: 1.0, zIndex: 1),
+                POIPlacement(poiId: "poi.aniTreehouse", x: 0.68, y: 0.47, scale: 1.0, zIndex: 1),
+                POIPlacement(poiId: "poi.cardFactory", x: 0.46, y: 0.70, scale: 1.1, zIndex: 2)
+            ],
+            adjacentWorlds: [.work, .farm, .blankSlate],
+            ambiance: .init(primaryColor: "#56AB2F", secondaryColor: "#A8E063", mood: "welcoming")
+        )
+        let work = World(
+            id: .work,
+            name: "Work Land",
+            description: "A whimsical concrete jungle for sorting letters and building new ideas",
+            backgroundAsset: "map.workLand",
+            lightMusicTrack: "music.work.light",
+            intenseMusicTrack: "music.work.intense",
+            poiPlacements: [
+                POIPlacement(
+                    poiId: "poi.letterWorks",
+                    x: 0.38,
+                    y: 0.52,
+                    scale: 0.98,
+                    zIndex: 1
+                ),
+                POIPlacement(
+                    poiId: "poi.assetWorkbench",
+                    x: 0.72,
+                    y: 0.64,
+                    scale: 0.78,
+                    zIndex: 2
+                ),
+                POIPlacement(
+                    poiId: "poi.creatureLab",
+                    x: 0.68,
+                    y: 0.30,
+                    scale: 0.72,
+                    zIndex: 3
+                )
+            ],
+            adjacentWorlds: [.home],
+            ambiance: .init(
+                primaryColor: "#7B8A97",
+                secondaryColor: "#E19B57",
+                mood: "busy and welcoming"
+            )
+        )
+        let farm = World(
+            id: .farm,
+            name: "Farm Land",
+            description: "An open meadow with one wonderful new place to explore",
+            backgroundAsset: "map.farm",
+            lightMusicTrack: "music.farm.light",
+            intenseMusicTrack: "music.farm.intense",
+            poiPlacements: [
+                POIPlacement(
+                    poiId: "poi.furnitureStore",
+                    x: 0.52,
+                    y: 0.38,
+                    scale: 1.35,
+                    zIndex: 1
+                )
+            ],
+            adjacentWorlds: [.home],
+            ambiance: .init(
+                primaryColor: "#77B255",
+                secondaryColor: "#F6D365",
+                mood: "sunny and curious"
+            )
+        )
+        let blankSlate = World(
+            id: .blankSlate,
+            name: "Blank Slate",
+            description: "A persistent scene for places made by players",
+            backgroundAsset: "map.blankSlate",
+            lightMusicTrack: "music.home.light",
+            intenseMusicTrack: "music.home.intense",
+            poiPlacements: [],
+            adjacentWorlds: [.home],
+            ambiance: .init(
+                primaryColor: "#EAF8FF",
+                secondaryColor: "#C8E9D6",
+                mood: "open and possible"
+            )
+        )
+        worlds = [.home: home, .work: work, .farm: farm, .blankSlate: blankSlate]
+        currentWorld = home
+
         pois = [
-            "poi.abbieTreehouse": POI(
+            "poi.abbieTreehouse": treehousePOI(
                 id: "poi.abbieTreehouse",
                 name: "Abbie's Treehouse",
-                type: .home,
-                mapId: .home,
-                exteriorAsset: "poi.abbieTreehouse.exterior",
-                interiorAsset: "poi.abbieTreehouse.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 250),
-                lore: "Abbie's magical treehouse filled with wonder",
-                description: "Your cozy home in the trees",
-                entryCost: nil,
-                rewardConfiguration: nil,
-                minigameType: nil,
-                lightMusicTrack: "music.abbieTreehouse.light",
-                intenseMusicTrack: "music.abbieTreehouse.intense",
-                icon: "house.fill",
-                embellishmentSlots: nil,
-                interactiveDecorationHooks: nil,
-                ownerId: "player.abbie"
+                owner: .abbie,
+                exterior: "poi.abbieTreehouse.exterior",
+                interior: "poi.abbieTreehouse.interior"
             ),
-            "poi.aniTreehouse": POI(
+            "poi.aniTreehouse": treehousePOI(
                 id: "poi.aniTreehouse",
                 name: "Ani's Treehouse",
-                type: .home,
-                mapId: .home,
-                exteriorAsset: "poi.aniTreehouse.exterior",
-                interiorAsset: "poi.aniTreehouse.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 250),
-                lore: "Ani's dreamy treehouse full of mystery",
-                description: "A mystical home among the branches",
-                entryCost: nil,
-                rewardConfiguration: nil,
-                minigameType: nil,
-                lightMusicTrack: "music.aniTreehouse.light",
-                intenseMusicTrack: "music.aniTreehouse.intense",
-                icon: "house.fill",
-                embellishmentSlots: nil,
-                interactiveDecorationHooks: nil,
-                ownerId: "player.ani"
+                owner: .ani,
+                exterior: "poi.aniTreehouse.exterior",
+                interior: "poi.aniTreehouse.interior"
             ),
             "poi.cardFactory": POI(
                 id: "poi.cardFactory",
@@ -361,307 +595,148 @@ class World2ViewModel: ObservableObject {
                 mapId: .home,
                 exteriorAsset: "poi.cardFactory.exterior",
                 interiorAsset: "poi.cardFactory.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 250, height: 300),
-                lore: "Where magical creature cards come to life",
-                description: "Create your own creature cards!",
+                tapHitbox: .init(x: 0, y: 0, width: 250, height: 300),
+                lore: "A gentle workshop for combining three ideas.",
+                description: "Combine a Creature, Function, and Context.",
                 entryCost: nil,
                 rewardConfiguration: nil,
                 minigameType: nil,
-                lightMusicTrack: "music.cardFactory.light",
-                intenseMusicTrack: "music.cardFactory.intense",
+                lightMusicTrack: "",
+                intenseMusicTrack: "",
                 icon: "wand.and.stars",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
                 ownerId: nil
             ),
-            "poi.cardVault": POI(
-                id: "poi.cardVault",
-                name: "Card Vault",
-                type: .cardVault,
-                mapId: .home,
-                exteriorAsset: "poi.cardVault.exterior",
-                interiorAsset: "poi.cardVault.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 250),
-                lore: "A secure vault for your precious card collection",
-                description: "View and manage your cards",
+            "poi.letterWorks": POI(
+                id: "poi.letterWorks",
+                name: "The Letter Works",
+                type: .minigame,
+                mapId: .work,
+                exteriorAsset: "poi.letterWorks.exterior",
+                interiorAsset: "poi.letterWorks.interior",
+                tapHitbox: .init(x: 0, y: 0, width: 280, height: 320),
+                lore: "This marvelous municipal machine sorts and sends letters all across Abbie's World.",
+                description: "Help rescue A, E, I, O, and U from the runaway sorting system.",
                 entryCost: nil,
                 rewardConfiguration: nil,
-                minigameType: nil,
-                lightMusicTrack: "music.cardVault.light",
-                intenseMusicTrack: "music.cardVault.intense",
-                icon: "archivebox.fill",
+                minigameType: "save_the_vowels",
+                lightMusicTrack: "",
+                intenseMusicTrack: "",
+                icon: "character.book.closed.fill",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
                 ownerId: nil
             ),
-            "poi.cardShop": POI(
-                id: "poi.cardShop",
-                name: "Card Shop",
-                type: .cardShop,
-                mapId: .home,
-                exteriorAsset: "poi.cardShop.exterior",
-                interiorAsset: "poi.cardShop.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 220, height: 280),
-                lore: "Trade your cards for shiny gems!",
-                description: "Sell cards for gems, buy decorations",
+            "poi.furnitureStore": POI(
+                id: "poi.furnitureStore",
+                name: "Furniture Store",
+                type: .minigame,
+                mapId: .farm,
+                exteriorAsset: "poi.furnitureStore.exterior",
+                interiorAsset: "poi.furnitureStore.interior",
+                tapHitbox: .init(x: 0, y: 0, width: 320, height: 300),
+                lore: "A pink rainbow workshop piled high with cozy possibilities.",
+                description: "Solve little math tasks to earn ingredients, then use any three to make any furniture you choose.",
                 entryCost: nil,
                 rewardConfiguration: nil,
-                minigameType: nil,
-                lightMusicTrack: "music.cardShop.light",
-                intenseMusicTrack: "music.cardShop.intense",
-                icon: "bag.fill",
+                minigameType: "furniture_store",
+                lightMusicTrack: "",
+                intenseMusicTrack: "",
+                icon: "chair.lounge.fill",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
                 ownerId: nil
             ),
-            // MARK: - Farm POIs (4 mini-games for farming ingredients)
-            "poi.farm.creatures": POI(
-                id: "poi.farm.creatures",
-                name: "Creature Garden",
-                type: .farmPlot,
-                mapId: .farm,
-                exteriorAsset: "poi.farm.creatures.exterior",
-                interiorAsset: "poi.farm.creatures.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
-                lore: "Tend to magical creatures and earn their friendship",
-                description: "Farm creature ingredients!",
+            "poi.assetWorkbench": POI(
+                id: "poi.assetWorkbench",
+                name: "Asset Workbench",
+                type: .minigame,
+                mapId: .work,
+                exteriorAsset: "poi.assetWorkbench.exterior",
+                interiorAsset: "poi.assetWorkbench.interior",
+                tapHitbox: .init(x: 0, y: 0, width: 320, height: 280),
+                lore: "A cozy invention cottage where three little ideas become six magical room creations.",
+                description: "Choose a finish, an object, and a personality. Make six ideas, then keep your favorite three.",
                 entryCost: nil,
-                rewardConfiguration: RewardConfiguration(
-                    baseRewards: [
-                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.cat", probability: 0.4),
-                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.dragon", probability: 0.2),
-                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.robot", probability: 0.2),
-                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.octopus", probability: 0.2)
-                    ],
-                    bonusRewards: [
-                        RewardConfiguration.BonusReward(
-                            condition: "perfect_score",
-                            reward: RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.cheetah", probability: 1.0)
-                        )
-                    ],
-                    performanceTiers: nil
-                ),
-                minigameType: "watering",
-                lightMusicTrack: "music.farm.light",
-                intenseMusicTrack: "music.farm.intense",
-                icon: "pawprint.fill",
+                rewardConfiguration: nil,
+                minigameType: "asset_workbench",
+                lightMusicTrack: "",
+                intenseMusicTrack: "",
+                icon: "hammer.circle.fill",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
                 ownerId: nil
             ),
-            "poi.farm.costumes": POI(
-                id: "poi.farm.costumes",
-                name: "Costume Orchard",
-                type: .farmPlot,
-                mapId: .farm,
-                exteriorAsset: "poi.farm.costumes.exterior",
-                interiorAsset: "poi.farm.costumes.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
-                lore: "Harvest magical outfits from enchanted trees",
-                description: "Farm costume ingredients!",
+            "poi.creatureLab": POI(
+                id: "poi.creatureLab",
+                name: "Creature Lab",
+                type: .minigame,
+                mapId: .work,
+                exteriorAsset: "poi.creatureLab.exterior",
+                interiorAsset: nil,
+                tapHitbox: .init(x: 0, y: 0, width: 300, height: 300),
+                lore: "A bright laboratory where three ideas become a brand-new creature card.",
+                description: "Build creatures, watch the machine work, and keep your favorites.",
                 entryCost: nil,
-                rewardConfiguration: RewardConfiguration(
-                    baseRewards: [
-                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.wizard", probability: 0.3),
-                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.superhero", probability: 0.3),
-                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.chef", probability: 0.2),
-                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.ninja", probability: 0.2)
-                    ],
-                    bonusRewards: [
-                        RewardConfiguration.BonusReward(
-                            condition: "perfect_score",
-                            reward: RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.astronaut", probability: 1.0)
-                        )
-                    ],
-                    performanceTiers: nil
-                ),
-                minigameType: "harvesting",
-                lightMusicTrack: "music.farm.light",
-                intenseMusicTrack: "music.farm.intense",
-                icon: "tshirt.fill",
-                embellishmentSlots: nil,
-                interactiveDecorationHooks: nil,
-                ownerId: nil
-            ),
-            "poi.farm.places": POI(
-                id: "poi.farm.places",
-                name: "Portal Pond",
-                type: .farmPlot,
-                mapId: .farm,
-                exteriorAsset: "poi.farm.places.exterior",
-                interiorAsset: "poi.farm.places.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
-                lore: "Fish for magical places in the enchanted waters",
-                description: "Farm place ingredients!",
-                entryCost: nil,
-                rewardConfiguration: RewardConfiguration(
-                    baseRewards: [
-                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.jungle", probability: 0.3),
-                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.underwater", probability: 0.3),
-                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.castle", probability: 0.2),
-                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.volcano", probability: 0.2)
-                    ],
-                    bonusRewards: [
-                        RewardConfiguration.BonusReward(
-                            condition: "perfect_score",
-                            reward: RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.space", probability: 1.0)
-                        )
-                    ],
-                    performanceTiers: nil
-                ),
-                minigameType: "fishing",
-                lightMusicTrack: "music.farm.light",
-                intenseMusicTrack: "music.farm.intense",
-                icon: "globe",
-                embellishmentSlots: nil,
-                interactiveDecorationHooks: nil,
-                ownerId: nil
-            ),
-            "poi.farm.mystery": POI(
-                id: "poi.farm.mystery",
-                name: "Mystery Patch",
-                type: .farmPlot,
-                mapId: .farm,
-                exteriorAsset: "poi.farm.mystery.exterior",
-                interiorAsset: "poi.farm.mystery.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
-                lore: "What grows here? Only luck knows!",
-                description: "Random ingredients + bonus gems!",
-                entryCost: nil,
-                rewardConfiguration: RewardConfiguration(
-                    baseRewards: [
-                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.bat", probability: 0.2),
-                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.racer", probability: 0.2),
-                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.candyworld", probability: 0.1),
-                        RewardConfiguration.Reward(type: .gems, amount: 2, probability: 0.5)
-                    ],
-                    bonusRewards: [
-                        RewardConfiguration.BonusReward(
-                            condition: "perfect_score",
-                            reward: RewardConfiguration.Reward(type: .gems, amount: 5, probability: 1.0)
-                        )
-                    ],
-                    performanceTiers: nil
-                ),
-                minigameType: "digging",
-                lightMusicTrack: "music.farm.light",
-                intenseMusicTrack: "music.farm.intense",
-                icon: "questionmark.circle.fill",
-                embellishmentSlots: nil,
-                interactiveDecorationHooks: nil,
-                ownerId: nil
-            ),
-            "poi.creatureIngredient": POI(
-                id: "poi.creatureIngredient",
-                name: "Creature Den",
-                type: .creatureIngredient,
-                mapId: .adventure,
-                exteriorAsset: "poi.creatureDen.exterior",
-                interiorAsset: "poi.creatureDen.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
-                lore: "Home to wild and wonderful creatures",
-                description: "Earn creature ingredients here",
-                entryCost: nil,
-                rewardConfiguration: RewardConfiguration(
-                    baseRewards: [
-                        RewardConfiguration.Reward(type: .creatureIngredient, itemId: "creature.random", probability: 1.0)
-                    ],
-                    bonusRewards: nil,
-                    performanceTiers: nil
-                ),
-                minigameType: "matching",
-                lightMusicTrack: "music.creaturePOI.light",
-                intenseMusicTrack: "music.creaturePOI.intense",
-                icon: "pawprint.fill",
-                embellishmentSlots: nil,
-                interactiveDecorationHooks: nil,
-                ownerId: nil
-            ),
-            "poi.functionIngredient": POI(
-                id: "poi.functionIngredient",
-                name: "Costume Workshop",
-                type: .functionIngredient,
-                mapId: .adventure,
-                exteriorAsset: "poi.costumeWorkshop.exterior",
-                interiorAsset: "poi.costumeWorkshop.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
-                lore: "Where outfits and powers are crafted",
-                description: "Earn costume ingredients here",
-                entryCost: nil,
-                rewardConfiguration: RewardConfiguration(
-                    baseRewards: [
-                        RewardConfiguration.Reward(type: .functionIngredient, itemId: "function.random", probability: 1.0)
-                    ],
-                    bonusRewards: nil,
-                    performanceTiers: nil
-                ),
-                minigameType: "sequence",
-                lightMusicTrack: "music.functionPOI.light",
-                intenseMusicTrack: "music.functionPOI.intense",
-                icon: "tshirt.fill",
-                embellishmentSlots: nil,
-                interactiveDecorationHooks: nil,
-                ownerId: nil
-            ),
-            "poi.contextIngredient": POI(
-                id: "poi.contextIngredient",
-                name: "Portal Gateway",
-                type: .contextIngredient,
-                mapId: .adventure,
-                exteriorAsset: "poi.portalGateway.exterior",
-                interiorAsset: "poi.portalGateway.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
-                lore: "Doorways to wondrous places",
-                description: "Earn place ingredients here",
-                entryCost: nil,
-                rewardConfiguration: RewardConfiguration(
-                    baseRewards: [
-                        RewardConfiguration.Reward(type: .contextIngredient, itemId: "context.random", probability: 1.0)
-                    ],
-                    bonusRewards: nil,
-                    performanceTiers: nil
-                ),
-                minigameType: "puzzle",
-                lightMusicTrack: "music.contextPOI.light",
-                intenseMusicTrack: "music.contextPOI.intense",
-                icon: "globe",
-                embellishmentSlots: nil,
-                interactiveDecorationHooks: nil,
-                ownerId: nil
-            ),
-            "poi.gemReward": POI(
-                id: "poi.gemReward",
-                name: "Gem Mine",
-                type: .gemReward,
-                mapId: .adventure,
-                exteriorAsset: "poi.gemMine.exterior",
-                interiorAsset: "poi.gemMine.interior",
-                tapHitbox: POI.HitBox(x: 0, y: 0, width: 200, height: 200),
-                lore: "Sparkling gems await discovery",
-                description: "Earn gems to create cards",
-                entryCost: nil,
-                rewardConfiguration: RewardConfiguration(
-                    baseRewards: [
-                        RewardConfiguration.Reward(type: .gems, amount: 3, probability: 1.0)
-                    ],
-                    bonusRewards: [
-                        RewardConfiguration.BonusReward(
-                            condition: "perfect_score",
-                            reward: RewardConfiguration.Reward(type: .gems, amount: 2, probability: 1.0)
-                        )
-                    ],
-                    performanceTiers: nil
-                ),
-                minigameType: "reaction",
-                lightMusicTrack: "music.gemPOI.light",
-                intenseMusicTrack: "music.gemPOI.intense",
-                icon: "diamond.fill",
+                rewardConfiguration: nil,
+                minigameType: "creature_lab",
+                lightMusicTrack: "",
+                intenseMusicTrack: "",
+                icon: "wand.and.stars",
                 embellishmentSlots: nil,
                 interactiveDecorationHooks: nil,
                 ownerId: nil
             )
         ]
-        
-        ingredientCatalog = .sampleCatalog
+    }
+
+    private func treehousePOI(
+        id: String,
+        name: String,
+        owner: PlayerId,
+        exterior: String,
+        interior: String
+    ) -> POI {
+        POI(
+            id: id,
+            name: name,
+            type: .home,
+            mapId: .home,
+            exteriorAsset: exterior,
+            interiorAsset: interior,
+            tapHitbox: .init(x: 0, y: 0, width: 200, height: 250),
+            lore: owner == .abbie ? "A bright place for making and imagining." : "A calm place for stories and stargazing.",
+            description: "\(owner.displayName)'s own treehouse",
+            entryCost: nil,
+            rewardConfiguration: nil,
+            minigameType: nil,
+            lightMusicTrack: "",
+            intenseMusicTrack: "",
+            icon: "house.fill",
+            embellishmentSlots: nil,
+            interactiveDecorationHooks: nil,
+            ownerId: owner.rawValue
+        )
+    }
+}
+
+private extension World2Screen {
+    var diagnosticName: String {
+        switch self {
+        case .loading: return "loading"
+        case .playerSelect: return "player_select"
+        case .homeWorld: return "home_world"
+        case .blankSlate: return "blank_slate"
+        case .treehouse(let poiId): return "treehouse:\(poiId)"
+        case .cardFactory: return "card_factory"
+        case .selfReplicatingFactory(let instanceID):
+            return "self_replicating_factory:\(instanceID)"
+        case .furnitureStore: return "furniture_store"
+        case .assetWorkbench: return "asset_workbench"
+        case .creatureLab: return "creature_lab"
+        case .fallingTargets(let configurationID):
+            return "falling_targets:\(configurationID)"
+        }
     }
 }

@@ -23,7 +23,7 @@
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
-		<true/>
+		<false/>
 	</dict>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
@@ -57,7 +57,5 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>ServerAPIKey</key>
-	<string>$(ABBIES_WORLD_SERVER_API_KEY)</string>
 </dict>
 </plist>

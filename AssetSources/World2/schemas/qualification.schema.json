@@ -1,0 +1,137 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abbies.world/schemas/world2/qualification.schema.json",
+  "title": "World 2 immutable qualification decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assetId",
+    "subjectKind",
+    "sha256",
+    "sourceSha256",
+    "promptSha256",
+    "specificationSha256",
+    "evaluator",
+    "nodeEvidence",
+    "useSizePreview",
+    "automatedDecision",
+    "promptRepair",
+    "recordedAt"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "assetId": {
+      "type": "string",
+      "pattern": "^[0-9]{4}[A-Z]?$"
+    },
+    "subjectKind": {
+      "enum": [
+        "source",
+        "runtime_derivative"
+      ]
+    },
+    "sha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "sourceSha256": {
+      "oneOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "promptSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "specificationSha256": {
+      "$ref": "#/$defs/sha256"
+    },
+    "evaluator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "provider",
+        "model",
+        "mode"
+      ],
+      "properties": {
+        "provider": {
+          "enum": [
+            "openai",
+            "mock"
+          ]
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mode": {
+          "enum": [
+            "live",
+            "mock"
+          ]
+        }
+      }
+    },
+    "nodeEvidence": {
+      "type": "array",
+      "minItems": 7,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "useSizePreview": {
+      "type": "string",
+      "minLength": 1
+    },
+    "automatedDecision": {
+      "enum": [
+        "qualified",
+        "rejected",
+        "needs_review"
+      ]
+    },
+    "promptRepair": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "originalPromptPreserved",
+        "maximumAttempts",
+        "revisionNotes"
+      ],
+      "properties": {
+        "originalPromptPreserved": {
+          "const": true
+        },
+        "maximumAttempts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        },
+        "revisionNotes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recordedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

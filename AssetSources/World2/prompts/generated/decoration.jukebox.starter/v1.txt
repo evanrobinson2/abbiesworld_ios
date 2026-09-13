@@ -1,0 +1,13 @@
+an isolated hand drawn digital illustration of one magical starter jukebox decoration for a customizable treehouse in a whimsical children’s fantasy game, designed for a smart six year old audience
+
+make the jukebox bold, chunky, cute, exaggerated and highly readable at small iPad game scale, sophisticated rather than babyish, not chibi, with a simple rounded silhouette, broad controls, sturdy toy-like proportions and a welcoming creative-music identity
+
+show a compact fantasy jukebox made from warm natural wood, cream trim and jewel-like panels, with strawberry-pink, lavender, teal and restrained golden accents that can sit naturally inside either supplied treehouse interior; include one large circular music window, two simple speaker openings, a broad base and a few integrated star and musical-note ornaments
+
+give it one memorable signature motif: a softly glowing crescent arc around the music window with three tiny suspended sparkle shapes, all physically attached to the jukebox
+
+leave the front panel uncluttered and keep the silhouette free of loose accessories so a future code-driven playing glow can be overlaid clearly; present only the dormant starter state with no animated effects or emitted notes
+
+center the complete jukebox with generous transparent padding, straight-on three-quarter storybook view, no floor and no room background, crisp extraction-safe edge, soft contained contact shadow only, readable at roughly 140 points tall
+
+clean expressive dark-plum outlines, tactile illustrated wood and painted textures, layered flat color, gentle cel shading, polished magical game art, no characters, no text, no letters, no numbers, no brand logo, no floating UI, no loose objects, no photorealism, no 3D rendering, no clutter --ar 1:1

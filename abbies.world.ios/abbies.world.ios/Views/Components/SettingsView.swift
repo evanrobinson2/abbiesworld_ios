@@ -24,6 +24,8 @@ struct SettingsView: View {
                     
                     // View Mode Section
                     ViewModeSection(viewModel: viewModel)
+
+                    World2DeveloperSettingsSection()
                     
                     // Other settings sections can go here
                     VStack(alignment: .leading, spacing: 16) {

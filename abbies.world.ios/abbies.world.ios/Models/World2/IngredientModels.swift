@@ -80,4 +80,37 @@ struct IngredientCatalog: Codable {
             ]
         )
     }
+
+    static var factoryCatalog: IngredientCatalog {
+        IngredientCatalog(
+            version: 2,
+            lastUpdated: Date(timeIntervalSince1970: 0),
+            creatures: AnimalAvenueCatalog.animals.map {
+                factoryDefinition(from: $0, category: .creature)
+            },
+            functions: AnimalAvenueCatalog.outfits.map {
+                factoryDefinition(from: $0, category: .function)
+            },
+            contexts: AnimalAvenueCatalog.places.map {
+                factoryDefinition(from: $0, category: .context)
+            }
+        )
+    }
+
+    private static func factoryDefinition(
+        from item: MediaPackItem,
+        category: IngredientCategory
+    ) -> IngredientDefinition {
+        IngredientDefinition(
+            id: item.id,
+            name: item.name,
+            category: category,
+            assetId: item.bundleImageName,
+            thumbnailAsset: item.bundleImageName,
+            description: item.name,
+            styleInjection: item.styleInjection,
+            rarity: .common,
+            tags: nil
+        )
+    }
 }

@@ -8,27 +8,37 @@
 
 import Foundation
 import Combine
-import CryptoKit
 import UIKit
 
 @MainActor
 class AssetBootstrapService: ObservableObject {
     static let shared = AssetBootstrapService()
     
-    private let apiClient = APIClient.shared
-    private var cancellables = Set<AnyCancellable>()
-    
     @Published private(set) var state: BootstrapState = .initial
     @Published private(set) var manifest: AssetManifest?
     @Published private(set) var localCache: LocalAssetCache = .empty
+    @Published private(set) var registryAvailability: GameAssetRegistryAvailability = .unchecked
+    @Published private(set) var registryRevisions: [String: Int] = [:]
     
     private let cacheDirectory: URL
     private let manifestCacheKey = "world2_asset_manifest"
     private let localCacheKey = "world2_local_asset_cache"
+    private let qualifiedImageNames: [String: String]
+    private let qualifiedImages: [String: World2QualifiedImage]
+    private var registryImages: [String: UIImage] = [:]
     
     private init() {
         let cachesDir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         cacheDirectory = cachesDir.appendingPathComponent("World2Assets", isDirectory: true)
+        let runtimeImages = Self.loadQualifiedImages()
+        qualifiedImages = Dictionary(
+            uniqueKeysWithValues: runtimeImages.map { ($0.semanticId, $0) }
+        )
+        qualifiedImageNames = Dictionary(
+            uniqueKeysWithValues: runtimeImages.map {
+                ($0.semanticId, $0.assetCatalogName)
+            }
+        )
         try? FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
         
         loadLocalCache()
@@ -38,85 +48,33 @@ class AssetBootstrapService: ObservableObject {
     var overallProgress: Double { state.overallProgress }
     
     func bootstrap() async {
+        state = .initial
         state.phase = .fetchingManifest
-        
-        do {
-            let fetchedManifest = try await fetchManifest()
-            manifest = fetchedManifest
-            state.manifestVersion = fetchedManifest.version
-            
-            state.phase = .comparingAssets
-            let assetsToDownload = compareAssets(manifest: fetchedManifest)
-            
-            if assetsToDownload.isEmpty {
-                print("✅ AssetBootstrapService: All assets up to date")
-                state.phase = .ready
-                return
-            }
-            
-            state.phase = .downloadingAssets
-            state.totalAssets = assetsToDownload.count
-            state.downloadedAssets = 0
-            
-            let requiredAssets = assetsToDownload.filter { $0.isRequired }
-            let optionalAssets = assetsToDownload.filter { !$0.isRequired }
-            
-            for asset in requiredAssets {
-                do {
-                    try await downloadAsset(asset)
-                    state.downloadedAssets += 1
-                } catch {
-                    let bootstrapError = BootstrapState.BootstrapError(
-                        assetId: asset.id,
-                        message: "Failed to download required asset: \(asset.id)",
-                        underlyingError: error,
-                        timestamp: Date()
-                    )
-                    state.errors.append(bootstrapError)
-                    print("❌ AssetBootstrapService: Failed to download \(asset.id): \(error)")
-                }
-            }
-            
-            state.phase = .verifying
-            
-            let requiredMissing = requiredAssets.filter { asset in
-                localCache.cachedAsset(byId: asset.id) == nil
-            }
-            
-            if !requiredMissing.isEmpty {
-                state.phase = .failed
-                print("❌ AssetBootstrapService: Missing required assets: \(requiredMissing.map { $0.id })")
-                return
-            }
-            
-            state.phase = .ready
-            print("✅ AssetBootstrapService: Bootstrap complete")
-            
-            Task.detached { [weak self] in
-                for asset in optionalAssets {
-                    try? await self?.downloadAsset(asset)
-                    await MainActor.run {
-                        self?.state.downloadedAssets += 1
-                    }
-                }
-            }
-            
-        } catch {
-            if let cachedManifest = loadCachedManifest() {
-                print("⚠️ AssetBootstrapService: Using cached manifest due to network error")
-                manifest = cachedManifest
-                state.manifestVersion = cachedManifest.version
-                state.phase = .ready
-            } else {
-                state.phase = .failed
-                state.errors.append(BootstrapState.BootstrapError(
-                    assetId: nil,
-                    message: "Failed to fetch manifest and no cache available",
-                    underlyingError: error,
-                    timestamp: Date()
-                ))
-                print("❌ AssetBootstrapService: Bootstrap failed: \(error)")
-            }
+
+        // The vertical slice never waits for a network request. A bundled manifest,
+        // then a cached manifest, then a truthful in-code fallback are all playable.
+        let source: String
+        if let bundledManifest = loadBundledManifest() {
+            manifest = bundledManifest
+            source = "bundled"
+        } else if let cachedManifest = loadCachedManifest() {
+            manifest = cachedManifest
+            source = "cache"
+        } else {
+            manifest = Self.sampleManifest
+            source = "fallback"
+        }
+
+        state.manifestVersion = manifest?.version
+        state.totalAssets = max(1, manifest?.assets.count ?? 0)
+        state.downloadedAssets = state.totalAssets
+        state.phase = .ready
+        World2Diagnostics.log("bootstrap_ready", ["source": source])
+
+        // Registry content is an enhancement. Failure cannot move the app out of ready.
+        Task { [weak self] in
+            guard let self else { return }
+            await self.refreshRegistry()
         }
     }
     
@@ -126,17 +84,22 @@ class AssetBootstrapService: ObservableObject {
         }
         return cacheDirectory.appendingPathComponent(cached.localPath)
     }
-    
-    func assetImage(_ assetId: String) async -> UIImage? {
-        guard let url = asset(assetId) else {
-            if let entry = manifest?.asset(byId: assetId) {
-                try? await downloadAsset(entry)
-                if let newUrl = asset(assetId) {
-                    return UIImage(contentsOfFile: newUrl.path)
-                }
-            }
+
+    func image(for semanticName: String) -> UIImage? {
+        // World 2 image art is fail-closed: only an asset named by the generated,
+        // qualification-backed runtime manifest can reach a game screen.
+        if let registryImage = registryImages[semanticName] {
+            return registryImage
+        }
+        guard let catalogName = qualifiedImageNames[semanticName] else {
+            World2Diagnostics.log("asset_placeholder", ["semantic_id": semanticName])
             return nil
         }
+        return UIImage(named: catalogName)
+    }
+
+    func assetImage(_ assetId: String) async -> UIImage? {
+        guard let url = asset(assetId) else { return nil }
         return UIImage(contentsOfFile: url.path)
     }
     
@@ -152,91 +115,122 @@ class AssetBootstrapService: ObservableObject {
         localCache.cachedAsset(byId: assetId)?.version
     }
     
-    private func fetchManifest() async throws -> AssetManifest {
-        guard let url = URL(string: "\(apiClient.baseURL)/api/world2/manifest") else {
-            throw URLError(.badURL)
+    private func refreshRegistry() async {
+        let client: GameAssetRegistryClient
+        do {
+            client = try GameAssetRegistryClient()
+            registryAvailability = try await client.availability()
+        } catch {
+            registryAvailability = .failed
+            World2Diagnostics.log("asset_registry_readiness_failed")
+            return
         }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        ServerConfig.shared.addAPIKeyHeader(to: &request)
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              (200..<300).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+
+        guard registryAvailability == .available else {
+            World2Diagnostics.log("asset_registry_unavailable", ["fallback": "bundled"])
+            return
         }
-        
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        let manifest = try decoder.decode(AssetManifest.self, from: data)
-        
-        cacheManifest(manifest)
-        
-        return manifest
-    }
-    
-    private func compareAssets(manifest: AssetManifest) -> [AssetManifest.AssetEntry] {
-        return manifest.assets.filter { entry in
-            guard let cached = localCache.cachedAsset(byId: entry.id) else {
-                return true
+
+        var accepted = 0
+        for descriptor in qualifiedImages.values.sorted(by: {
+            $0.semanticId < $1.semanticId
+        }) {
+            guard let registryKey = World2RegistryKey.assetKey(
+                for: descriptor.semanticId
+            ) else {
+                continue
             }
-            return !cached.isUpToDate(with: entry)
+
+            do {
+                let record = try await client.current(registryKey)
+                let location = try client.location(for: record)
+                switch location {
+                case .bundled(let bundleName):
+                    guard bundleName == descriptor.assetCatalogName,
+                          record.sha256 == nil
+                            || record.sha256?.lowercased()
+                                == descriptor.derivativeSha256.lowercased() else {
+                        World2Diagnostics.log(
+                            "asset_registry_record_rejected",
+                            ["asset_key": registryKey, "reason": "bundled_identity"]
+                        )
+                        continue
+                    }
+                case .remote:
+                    guard record.sha256?.lowercased()
+                            == descriptor.derivativeSha256.lowercased() else {
+                        World2Diagnostics.log(
+                            "asset_registry_record_rejected",
+                            ["asset_key": registryKey, "reason": "qualification_hash"]
+                        )
+                        continue
+                    }
+                    guard let image = try await registryImage(
+                        for: descriptor,
+                        record: record,
+                        client: client
+                    ) else {
+                        continue
+                    }
+                    registryImages[descriptor.semanticId] = image
+                }
+
+                registryRevisions[descriptor.semanticId] = record.revision
+                accepted += 1
+            } catch {
+                World2Diagnostics.log(
+                    "asset_registry_asset_unavailable",
+                    ["asset_key": registryKey]
+                )
+            }
         }
-    }
-    
-    private func downloadAsset(_ entry: AssetManifest.AssetEntry) async throws {
-        let fullUrl: String
-        if entry.url.hasPrefix("http") {
-            fullUrl = entry.url
-        } else {
-            fullUrl = "\(manifest?.baseUrl ?? apiClient.baseURL)\(entry.url)"
-        }
-        
-        guard let url = URL(string: fullUrl) else {
-            throw URLError(.badURL)
-        }
-        
-        var request = URLRequest(url: url)
-        ServerConfig.shared.addAPIKeyHeader(to: &request)
-        
-        let (data, response) = try await URLSession.shared.data(for: request)
-        
-        guard let httpResponse = response as? HTTPURLResponse,
-              httpResponse.statusCode == 200 else {
-            throw URLError(.badServerResponse)
-        }
-        
-        let downloadedHash = sha256(data: data)
-        if downloadedHash != entry.hash {
-            print("⚠️ AssetBootstrapService: Hash mismatch for \(entry.id)")
-        }
-        
-        let filename = "\(entry.id).\(url.pathExtension.isEmpty ? "bin" : url.pathExtension)"
-        let localPath = filename
-        let fileURL = cacheDirectory.appendingPathComponent(localPath)
-        
-        try data.write(to: fileURL)
-        
-        let cachedAsset = LocalAssetCache.CachedAsset(
-            id: entry.id,
-            localPath: localPath,
-            version: entry.version,
-            hash: downloadedHash,
-            downloadedAt: Date(),
-            lastAccessedAt: Date()
+
+        World2Diagnostics.log(
+            "asset_registry_ready",
+            [
+                "accepted": String(accepted),
+                "requested": String(qualifiedImages.count),
+            ]
         )
-        
-        localCache.updateCachedAsset(cachedAsset)
-        saveLocalCache()
-        
-        print("✅ AssetBootstrapService: Downloaded \(entry.id)")
     }
-    
-    private func sha256(data: Data) -> String {
-        let digest = SHA256.hash(data: data)
-        return digest.map { String(format: "%02x", $0) }.joined()
+
+    private func registryImage(
+        for descriptor: World2QualifiedImage,
+        record: GameAssetRecord,
+        client: GameAssetRegistryClient
+    ) async throws -> UIImage? {
+        let cacheId = "registry:\(descriptor.semanticId)"
+        if let cached = localCache.cachedAsset(byId: cacheId),
+           cached.version == record.revision,
+           cached.hash.lowercased() == descriptor.derivativeSha256.lowercased() {
+            let url = cacheDirectory.appendingPathComponent(cached.localPath)
+            if let image = UIImage(contentsOfFile: url.path) {
+                return image
+            }
+        }
+
+        let data = try await client.data(for: record)
+        guard let image = UIImage(data: data) else {
+            return nil
+        }
+
+        let localPath = "registry-\(descriptor.assetId)-r\(record.revision).png"
+        try data.write(
+            to: cacheDirectory.appendingPathComponent(localPath),
+            options: .atomic
+        )
+        localCache.updateCachedAsset(
+            .init(
+                id: cacheId,
+                localPath: localPath,
+                version: record.revision,
+                hash: descriptor.derivativeSha256,
+                downloadedAt: Date(),
+                lastAccessedAt: Date()
+            )
+        )
+        saveLocalCache()
+        return image
     }
     
     private func loadLocalCache() {
@@ -264,6 +258,53 @@ class AssetBootstrapService: ObservableObject {
             return nil
         }
         return manifest
+    }
+
+    private func loadBundledManifest() -> AssetManifest? {
+        let candidates = ["world2_asset_manifest", "World2AssetManifest"]
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        for name in candidates {
+            guard let url = Bundle.main.url(forResource: name, withExtension: "json"),
+                  let data = try? Data(contentsOf: url),
+                  let decoded = try? decoder.decode(AssetManifest.self, from: data) else {
+                continue
+            }
+            return decoded
+        }
+        return nil
+    }
+
+    private static func loadQualifiedImages() -> [World2QualifiedImage] {
+        let data: Data?
+        if let catalogData = NSDataAsset(name: "world2_runtime_manifest")?.data {
+            data = catalogData
+        } else if let url = Bundle.main.url(
+                forResource: "world2_runtime_manifest",
+                withExtension: "json"
+            ) {
+            data = try? Data(contentsOf: url)
+        } else {
+            data = nil
+        }
+
+        guard let data,
+              let runtimeManifest = try? JSONDecoder().decode(
+                World2RuntimeAssetManifest.self,
+                from: data
+            )
+        else {
+            return []
+        }
+
+        return runtimeManifest.assets.map {
+            World2QualifiedImage(
+                assetId: $0.assetId,
+                semanticId: $0.semanticId,
+                assetCatalogName: $0.assetCatalogName,
+                derivativeSha256: $0.derivativeSha256
+            )
+        }
     }
     
     func clearCache() {
@@ -378,5 +419,53 @@ extension AssetBootstrapService {
                 )
             ]
         )
+    }
+}
+
+private struct World2RuntimeAssetManifest: Decodable {
+    let assets: [Asset]
+
+    struct Asset: Decodable {
+        let assetId: String
+        let semanticId: String
+        let assetCatalogName: String
+        let derivativeSha256: String
+    }
+}
+
+private struct World2QualifiedImage {
+    let assetId: String
+    let semanticId: String
+    let assetCatalogName: String
+    let derivativeSha256: String
+}
+
+enum World2RegistryKey {
+    private static let assetKeys: [String: String] = [
+        "title.background": "backgrounds/title",
+        "map.home": "maps/home",
+        "map.workLand": "maps/work-land",
+        "map.farm": "maps/farm-land",
+        "poi.abbieTreehouse.exterior": "pois/abbie-treehouse/exterior",
+        "poi.abbieTreehouse.interior": "pois/abbie-treehouse/interior",
+        "poi.aniTreehouse.exterior": "pois/ani-treehouse/exterior",
+        "poi.aniTreehouse.interior": "pois/ani-treehouse/interior",
+        "poi.cardFactory.exterior": "pois/card-factory/exterior",
+        "poi.cardFactory.interior": "pois/card-factory/interior",
+        "poi.letterWorks.exterior": "pois/letter-works/exterior",
+        "poi.letterWorks.interior": "pois/letter-works/interior",
+        "poi.furnitureStore.exterior": "pois/furniture-store/exterior",
+        "poi.furnitureStore.interior": "pois/furniture-store/interior",
+        "poi.selfReplicatingFactory.exterior": "pois/poi-factory/exterior",
+        "poi.selfReplicatingFactory.interior": "pois/poi-factory/interior",
+        "poi.assetWorkbench.exterior": "pois/asset-workbench/exterior",
+        "poi.assetWorkbench.interior": "pois/asset-workbench/interior",
+        "ui.appIcon": "ui/app-icon",
+        "furniture.abbieStarterBed": "furniture/beds/abbie-starter",
+        "furniture.aniStarterBed": "furniture/beds/ani-starter",
+    ]
+
+    static func assetKey(for semanticId: String) -> String? {
+        assetKeys[semanticId]
     }
 }

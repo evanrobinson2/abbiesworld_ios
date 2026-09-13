@@ -1,0 +1,11 @@
+a hand drawn digital source board containing exactly nine separate icon tiles for the Home World HUD and Card Factory of a whimsical children’s fantasy game, designed for a smart six year old audience
+
+make every icon bold, chunky, cute, exaggerated and highly readable at small iPad HUD scale, sophisticated rather than babyish, not chibi, with one consistent dark-plum expressive outline, broad simple silhouette, tactile painted texture and gentle cel shading
+
+create an exact 3 by 3 grid with equal square cells and narrow uniform pale-cream gutters, using these row-major subjects: 1 a faceted pink-purple gem, 2 a friendly creature paw emblem, 3 a magic wand and costume-star emblem, 4 a tiny landscape portal emblem for context or place, 5 a collectible fantasy card emblem with no writing, 6 a small fanned deck of cards with no writing, 7 a welcoming magical treehouse home emblem, 8 a musical note with a tiny sparkle, 9 a simple neutral World 2 sparkle emblem reserved as a spare cell
+
+use the shared Abbie’s World 2 palette from the supplied title, Home World and Card Factory references: strawberry pink, lavender, violet, teal, sky blue, warm cream and restrained golden sparkle accents; make adjacent cells distinct while clearly belonging to one branded family
+
+keep every subject centered, fully contained and isolated within its own cell with generous extraction-safe padding; do not let outlines, glows or shadows cross a cell edge; keep silhouettes readable at 40 points and 120 points
+
+polished illustrated game art, clean expressive outlines, tactile storybook texture, layered flat color and gentle cel shading, no characters, no faces, no words, no letters, no numbers, no logos, no unrelated objects, no realistic currency, no photorealism, no 3D rendering, no UI screenshot, no clutter --ar 1:1

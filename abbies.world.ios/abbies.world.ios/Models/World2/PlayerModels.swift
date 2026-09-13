@@ -43,8 +43,14 @@ struct PlayerState: Codable, Identifiable {
     var creatureIngredients: [IngredientInstance]
     var functionIngredients: [IngredientInstance]
     var contextIngredients: [IngredientInstance]
+    var furnitureIngredients: Int?
     var cardCollection: CardCollection
     var decorations: [DecorationInstance]
+    var generatedDecorations: [World2GeneratedDecoration]?
+    var placeInventory: [World2PlaceInventoryItem]?
+    var placedPlaces: [World2PlacedPlaceInstance]?
+    var createdScenes: [World2MutableScene]?
+    var sceneExits: [World2SceneExit]?
     var homeLayout: HomeLayout
     var unlockedMusic: [String]
     var progression: PlayerProgression
@@ -54,6 +60,10 @@ struct PlayerState: Codable, Identifiable {
     
     var totalIngredientCount: Int {
         creatureIngredients.count + functionIngredients.count + contextIngredients.count
+    }
+
+    var availableFurnitureIngredientCount: Int {
+        furnitureIngredients ?? 0
     }
     
     var activeDeckCount: Int {
@@ -100,8 +110,14 @@ struct PlayerState: Codable, Identifiable {
             creatureIngredients: [],
             functionIngredients: [],
             contextIngredients: [],
+            furnitureIngredients: 0,
             cardCollection: CardCollection(playerId: id.rawValue, cards: [], activeDeck: []),
             decorations: [DecorationInstance.starterJukebox(for: id)],
+            generatedDecorations: [],
+            placeInventory: [World2PlaceInventoryItem.starterFactory(for: id)],
+            placedPlaces: [],
+            createdScenes: [],
+            sceneExits: [],
             homeLayout: HomeLayout.default(for: id),
             unlockedMusic: ["music.home.light", "music.home.intense"],
             progression: PlayerProgression(),
@@ -163,7 +179,7 @@ struct PlayerProgression: Codable {
     
     init() {
         self.completedPOIs = []
-        self.unlockedWorlds = [.home, .farm]  // Farm unlocked by default for core loop
+        self.unlockedWorlds = [.home]
         self.achievedMilestones = []
         self.totalCardsCreated = 0
         self.totalCardsSold = 0

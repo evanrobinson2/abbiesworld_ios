@@ -13,18 +13,18 @@ struct World2CardShopView: View {
     let onExit: () -> Void
     
     @State private var selectedTab: ShopTab = .sell
-    @State private var selectedCard: CreatureCard?
+    @State private var selectedCard: World2CreatureCard?
     @State private var showingSellConfirmation = false
     @State private var justSold = false
     @State private var soldAmount = 0
     
     private var playerService: PlayerStateService { PlayerStateService.shared }
     
-    private var collection: [CreatureCard] {
+    private var collection: [World2CreatureCard] {
         playerService.currentPlayer?.cardCollection.acceptedCards ?? []
     }
     
-    private var sellableCards: [CreatureCard] {
+    private var sellableCards: [World2CreatureCard] {
         collection.filter { !$0.inActiveDeck }
     }
     
@@ -222,7 +222,7 @@ struct World2CardShopView: View {
         }
     }
     
-    private func sellConfirmationOverlay(card: CreatureCard) -> some View {
+    private func sellConfirmationOverlay(card: World2CreatureCard) -> some View {
         ZStack {
             Color.black.opacity(0.8)
                 .ignoresSafeArea()
@@ -300,7 +300,7 @@ struct World2CardShopView: View {
         .transition(.opacity)
     }
     
-    private func cardPreview(_ card: CreatureCard) -> some View {
+    private func cardPreview(_ card: World2CreatureCard) -> some View {
         VStack(spacing: 12) {
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
@@ -398,7 +398,7 @@ struct World2CardShopView: View {
         }
     }
     
-    private func sellPrice(for card: CreatureCard) -> Int {
+    private func sellPrice(for card: World2CreatureCard) -> Int {
         switch card.rarity {
         case .common: return 1
         case .uncommon: return 2
@@ -408,7 +408,7 @@ struct World2CardShopView: View {
         }
     }
     
-    private func sellCard(_ card: CreatureCard) {
+    private func sellCard(_ card: World2CreatureCard) {
         let price = sellPrice(for: card)
         
         playerService.sellCard(card.id)
@@ -462,7 +462,7 @@ struct ShopDecoration: Identifiable {
 }
 
 struct SellableCardTile: View {
-    let card: CreatureCard
+    let card: World2CreatureCard
     let onTap: () -> Void
     
     var body: some View {
@@ -610,11 +610,7 @@ struct DecorationShopTile: View {
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 10)
-                .background(
-                    canAfford
-                        ? Color.green.gradient
-                        : LinearGradient(colors: [.gray], startPoint: .leading, endPoint: .trailing)
-                )
+                .background(canAfford ? Color.green : Color.gray)
                 .cornerRadius(10)
             }
             .disabled(!canAfford)

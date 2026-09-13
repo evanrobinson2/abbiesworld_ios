@@ -92,6 +92,17 @@ iOSInjectionProject/
 # macOS
 .DS_Store
 
+# Node / Next.js generated output
+node_modules/
+.next/
+.vercel/
+*.tsbuildinfo
+
+# Python generated output
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
 # Environment variables
 .env
 .env.local
@@ -103,4 +114,8 @@ iOSInjectionProject/
 credentials*
 *.key
 *.pem
+
+# Local scratch projects (nested git repos, not Abbie's World)
+/DinoSnacks/
+/GameTemplate/
 

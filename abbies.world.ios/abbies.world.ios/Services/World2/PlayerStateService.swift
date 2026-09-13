@@ -12,9 +12,22 @@ import Combine
 @MainActor
 class PlayerStateService: ObservableObject {
     static let shared = PlayerStateService()
+    private static let starterPOIFactoryMilestone = "place_factory_starter_received.v1"
+    private static let playerStateSchemaVersion = 1
+
+    private struct StoredPlayerState: Codable {
+        let schemaVersion: Int
+        let player: PlayerState
+    }
+
+    private enum PlayerLoadResult {
+        case missing
+        case loaded(PlayerState)
+        case corrupt
+    }
     
     private let apiClient = APIClient.shared
-    private let stateKey = "world2_player_state"
+    private let legacyStateKey = "world2_player_state"
     private var cancellables = Set<AnyCancellable>()
     
     @Published private(set) var currentPlayer: PlayerState?
@@ -22,9 +35,7 @@ class PlayerStateService: ObservableObject {
     @Published private(set) var isSyncing = false
     @Published var error: String?
     
-    private init() {
-        loadLocalState()
-    }
+    private init() {}
     
     var gems: Int { currentPlayer?.gems ?? 0 }
     var creatureIngredients: [IngredientInstance] { currentPlayer?.creatureIngredients ?? [] }
@@ -33,15 +44,247 @@ class PlayerStateService: ObservableObject {
     var totalIngredients: Int { currentPlayer?.totalIngredientCount ?? 0 }
     var activeDeckCount: Int { currentPlayer?.activeDeckCount ?? 0 }
     var currentWorldId: WorldId { currentPlayer?.currentWorldId ?? .home }
-    
-    func selectPlayer(_ playerId: PlayerId) {
-        if var player = loadPlayerState(for: playerId) {
-            player.lastPlayedAt = Date()
-            currentPlayer = player
-        } else {
-            currentPlayer = PlayerState.newPlayer(id: playerId)
+    var furnitureInventory: [DecorationInstance] {
+        currentPlayer?.furnitureInventory ?? []
+    }
+    var unplacedFurnitureInventory: [DecorationInstance] {
+        currentPlayer?.unplacedFurnitureInventory ?? []
+    }
+    var furnitureIngredients: Int {
+        currentPlayer?.availableFurnitureIngredientCount ?? 0
+    }
+    var placeInventory: [World2PlaceInventoryItem] {
+        currentPlayer?.placeInventory ?? []
+    }
+    var placedPlaces: [World2PlacedPlaceInstance] {
+        currentPlayer?.placedPlaces ?? []
+    }
+    var createdScenes: [World2MutableScene] {
+        currentPlayer?.createdScenes ?? []
+    }
+    var sceneExits: [World2SceneExit] {
+        currentPlayer?.sceneExits ?? []
+    }
+
+    @discardableResult
+    func claimTreehouseStarterPack(for owner: PlayerId) -> FurnitureStarterPack? {
+        guard var player = currentPlayer, player.playerId == owner else { return nil }
+        let pack = FurnitureStarterPack.pack(for: owner)
+        guard !player.progression.achievedMilestones.contains(pack.milestoneID) else {
+            return nil
         }
+
+        for (index, item) in pack.items.enumerated()
+        where !player.decorations.contains(where: { $0.decorationId == item.id }) {
+            player.decorations.append(
+                DecorationInstance(
+                    id: "starter_pack_\(owner.rawValue)_\(item.id)",
+                    decorationId: item.id,
+                    x: 0.32 + (Double(index) * 0.09),
+                    y: item.placementLayer == .wall ? 0.38 : 0.70,
+                    scale: item.defaultScale,
+                    zIndex: index + 1
+                )
+            )
+        }
+        player.progression.achievedMilestones.append(pack.milestoneID)
+        currentPlayer = player
         saveLocalState()
+        return pack
+    }
+    
+    @discardableResult
+    func selectPlayer(_ playerId: PlayerId) -> Bool {
+        let player: PlayerState
+        switch loadPlayerState(for: playerId) {
+        case .missing:
+            player = PlayerState.newPlayer(id: playerId)
+        case .loaded(let storedPlayer):
+            player = Self.migrated(storedPlayer)
+        case .corrupt:
+            currentPlayer = nil
+            error = "We couldn't safely open \(playerId.displayName)'s saved game. The original save was preserved."
+            return false
+        }
+
+        var selectedPlayer = player
+        error = nil
+        selectedPlayer.lastPlayedAt = Date()
+        currentPlayer = selectedPlayer
+        saveLocalState()
+        return true
+    }
+
+    func playerState(for playerId: PlayerId) -> PlayerState? {
+        if currentPlayer?.playerId == playerId {
+            return currentPlayer
+        }
+        switch loadPlayerState(for: playerId) {
+        case .missing:
+            return PlayerState.newPlayer(id: playerId)
+        case .loaded(let player):
+            return Self.migrated(player)
+        case .corrupt:
+            error = "We couldn't safely display \(playerId.displayName)'s saved treehouse."
+            return nil
+        }
+    }
+
+    func placedPlaces(in sceneID: String) -> [World2PlacedPlaceInstance] {
+        placedPlaces
+            .filter { $0.sceneID == sceneID }
+            .sorted { $0.placedAt < $1.placedAt }
+    }
+
+    func scene(_ sceneID: String) -> World2MutableScene? {
+        if sceneID == World2MutableScene.blankSlate.id {
+            return .blankSlate
+        }
+        return createdScenes.first { $0.id == sceneID }
+    }
+
+    func exits(from sceneID: String) -> [World2SceneExit] {
+        sceneExits
+            .filter { $0.fromSceneID == sceneID }
+            .sorted { $0.createdAt < $1.createdAt }
+    }
+
+    func availableHardpoints(in sceneID: String) -> [World2SceneHardpoint] {
+        guard let scene = scene(sceneID) else { return [] }
+        let occupied = Set(
+            placedPlaces(in: sceneID).compactMap(\.hardpointID)
+        )
+        return scene.hardpoints.filter { !occupied.contains($0.id) }
+    }
+
+    @discardableResult
+    func placeInventoryItem(
+        _ itemID: String,
+        in sceneID: String,
+        x: Double,
+        y: Double,
+        hardpointID: String? = nil
+    ) -> World2PlacedPlaceInstance? {
+        guard var player = currentPlayer,
+              let scene = scene(sceneID),
+              scene.isMutableByPlayer,
+              let itemIndex = (player.placeInventory ?? []).firstIndex(
+                where: { $0.id == itemID }
+              ) else {
+            return nil
+        }
+
+        let target: (x: Double, y: Double, hardpointID: String?)
+        if scene.hardpoints.isEmpty {
+            target = (
+                min(max(x, 0.10), 0.90),
+                min(max(y, 0.24), 0.86),
+                nil
+            )
+        } else {
+            guard let hardpointID,
+                  let hardpoint = availableHardpoints(in: sceneID).first(
+                    where: { $0.id == hardpointID }
+                  ) else {
+                return nil
+            }
+            target = (hardpoint.x, hardpoint.y, hardpoint.id)
+        }
+
+        var inventory = player.placeInventory ?? []
+        let item = inventory.remove(at: itemIndex)
+        let instance = World2PlacedPlaceInstance(
+            templateID: item.templateID,
+            sceneID: sceneID,
+            x: target.x,
+            y: target.y,
+            hardpointID: target.hardpointID,
+            placedByPlayerID: player.playerId.rawValue,
+            sourceInventoryItemID: item.id
+        )
+        var placed = player.placedPlaces ?? []
+        placed.append(instance)
+        player.placeInventory = inventory
+        player.placedPlaces = placed
+        player.lastPlayedAt = Date()
+        currentPlayer = player
+        saveLocalState()
+        return instance
+    }
+
+    @discardableResult
+    func birthPlaceholderScene(
+        from sceneID: String,
+        name: String,
+        summary: String,
+        exitName: String,
+        hardpoints: [World2SceneHardpoint]
+    ) -> World2SceneExit? {
+        guard var player = currentPlayer,
+              scene(sceneID) != nil,
+              exits(from: sceneID).isEmpty else {
+            return nil
+        }
+
+        let trimmedName = name.trimmingCharacters(in: .whitespacesAndNewlines)
+        let trimmedExitName = exitName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmedName.isEmpty, !trimmedExitName.isEmpty else { return nil }
+
+        let destination = World2MutableScene(
+            id: "scene.\(UUID().uuidString)",
+            name: trimmedName,
+            summary: summary.trimmingCharacters(in: .whitespacesAndNewlines),
+            isMutableByPlayer: true,
+            hardpoints: hardpoints,
+            isDeveloperPlaceholder: true,
+            createdAt: Date(),
+            createdByPlayerID: player.playerId.rawValue
+        )
+        let exit = World2SceneExit(
+            id: "exit.\(UUID().uuidString)",
+            fromSceneID: sceneID,
+            toSceneID: destination.id,
+            name: trimmedExitName,
+            summary: "Placeholder exit to \(destination.name)",
+            x: 0.82,
+            y: 0.50,
+            createdAt: Date(),
+            createdByPlayerID: player.playerId.rawValue
+        )
+        var scenes = player.createdScenes ?? []
+        scenes.append(destination)
+        var exits = player.sceneExits ?? []
+        exits.append(exit)
+        player.createdScenes = scenes
+        player.sceneExits = exits
+        player.lastPlayedAt = Date()
+        currentPlayer = player
+        saveLocalState()
+        return exit
+    }
+
+    @discardableResult
+    func fabricatePlaceCopy(
+        from sourcePlaceInstanceID: String
+    ) -> World2PlaceInventoryItem? {
+        guard var player = currentPlayer,
+              let source = (player.placedPlaces ?? []).first(
+                where: { $0.id == sourcePlaceInstanceID }
+              ) else {
+            return nil
+        }
+
+        let item = World2PlaceInventoryItem(
+            templateID: source.templateID,
+            sourcePlaceInstanceID: sourcePlaceInstanceID
+        )
+        var inventory = player.placeInventory ?? []
+        inventory.append(item)
+        player.placeInventory = inventory
+        player.lastPlayedAt = Date()
+        currentPlayer = player
+        saveLocalState()
+        return item
     }
     
     func addGems(_ amount: Int) {
@@ -116,7 +359,7 @@ class PlayerStateService: ObservableObject {
         }
     }
     
-    func addCardToCollection(_ card: CreatureCard) {
+    func addCardToCollection(_ card: World2CreatureCard) {
         currentPlayer?.cardCollection.cards.append(card)
         currentPlayer?.progression.totalCardsCreated += 1
         saveLocalState()
@@ -126,7 +369,7 @@ class PlayerStateService: ObservableObject {
         currentPlayer?.cardCollection.hasCardWithRecipeHash(hash) ?? false
     }
     
-    func cardWithRecipeHash(_ hash: String) -> CreatureCard? {
+    func cardWithRecipeHash(_ hash: String) -> World2CreatureCard? {
         currentPlayer?.cardCollection.cardWithRecipeHash(hash)
     }
     
@@ -159,6 +402,127 @@ class PlayerStateService: ObservableObject {
     
     func addDecoration(_ decoration: DecorationInstance) {
         currentPlayer?.decorations.append(decoration)
+        saveLocalState()
+    }
+
+    func earnFurnitureIngredient() {
+        guard var player = currentPlayer else { return }
+        player.furnitureIngredients = player.availableFurnitureIngredientCount + 1
+        currentPlayer = player
+        saveLocalState()
+    }
+
+    @discardableResult
+    func craftFurniture(_ item: FurnitureItem) -> DecorationInstance? {
+        guard var player = currentPlayer,
+              player.availableFurnitureIngredientCount >= FurnitureItem.ingredientCost else {
+            return nil
+        }
+        let furniture = DecorationInstance(
+            decorationId: item.id,
+            x: 0.5,
+            y: item.placementLayer == .wall ? 0.38 : 0.70,
+            scale: item.defaultScale
+        )
+        player.furnitureIngredients =
+            player.availableFurnitureIngredientCount - FurnitureItem.ingredientCost
+        player.decorations.append(furniture)
+        player.progression.totalMinigamesCompleted += 1
+        if !player.progression.completedPOIs.contains("poi.furnitureStore") {
+            player.progression.completedPOIs.append("poi.furnitureStore")
+        }
+        currentPlayer = player
+        saveLocalState()
+        return furniture
+    }
+
+    func placeFurniture(
+        instanceId: String,
+        x requestedX: Double? = nil,
+        y requestedY: Double? = nil
+    ) {
+        guard var player = currentPlayer,
+              let instanceIndex = player.decorations.firstIndex(where: { $0.id == instanceId }),
+              let item = FurnitureItem.item(id: player.decorations[instanceIndex].decorationId),
+              !player.homeLayout.placedDecorations.contains(
+                where: { $0.decorationInstanceId == instanceId }
+              ) else {
+            return
+        }
+
+        let placedCount = player.homeLayout.placedDecorations.count
+        let defaultX = 0.30 + (Double(placedCount % 4) * 0.15)
+        let defaultY = item.placementLayer == .wall ? 0.38 : 0.70
+        let x = min(max(requestedX ?? defaultX, 0.06), 0.94)
+        let y = min(max(requestedY ?? defaultY, 0.16), 0.90)
+        let zIndex = (player.decorations.map(\.zIndex).max() ?? 9) + 1
+        player.decorations[instanceIndex].x = x
+        player.decorations[instanceIndex].y = y
+        player.decorations[instanceIndex].scale = item.defaultScale
+        player.decorations[instanceIndex].zIndex = zIndex
+        player.homeLayout.placedDecorations.append(
+            HomeLayout.PlacedDecoration(
+                id: "placed_\(instanceId)",
+                decorationInstanceId: instanceId,
+                position: .init(x: x, y: y),
+                layer: item.placementLayer
+            )
+        )
+        currentPlayer = player
+        saveLocalState()
+    }
+
+    func updateFurnitureTransform(
+        instanceId: String,
+        x: Double? = nil,
+        y: Double? = nil,
+        scale: Double? = nil,
+        rotation: Double? = nil
+    ) {
+        guard var player = currentPlayer,
+              let instanceIndex = player.decorations.firstIndex(where: { $0.id == instanceId }),
+              let layoutIndex = player.homeLayout.placedDecorations.firstIndex(
+                where: { $0.decorationInstanceId == instanceId }
+              ) else {
+            return
+        }
+
+        if let x {
+            player.decorations[instanceIndex].x = min(max(x, 0.06), 0.94)
+        }
+        if let y {
+            player.decorations[instanceIndex].y = min(max(y, 0.16), 0.90)
+        }
+        if let scale {
+            player.decorations[instanceIndex].scale = min(max(scale, 0.32), 1.80)
+        }
+        if let rotation {
+            player.decorations[instanceIndex].rotation = rotation
+        }
+        player.homeLayout.placedDecorations[layoutIndex].position = .init(
+            x: player.decorations[instanceIndex].x,
+            y: player.decorations[instanceIndex].y
+        )
+        currentPlayer = player
+        saveLocalState()
+    }
+
+    func bringFurnitureToFront(instanceId: String) {
+        guard var player = currentPlayer,
+              let index = player.decorations.firstIndex(where: { $0.id == instanceId }) else {
+            return
+        }
+        player.decorations[index].zIndex = (player.decorations.map(\.zIndex).max() ?? 0) + 1
+        currentPlayer = player
+        saveLocalState()
+    }
+
+    func returnFurnitureToInventory(instanceId: String) {
+        guard var player = currentPlayer else { return }
+        player.homeLayout.placedDecorations.removeAll {
+            $0.decorationInstanceId == instanceId
+        }
+        currentPlayer = player
         saveLocalState()
     }
     
@@ -228,11 +592,13 @@ class PlayerStateService: ObservableObject {
             
             let decoder = JSONDecoder()
             decoder.dateDecodingStrategy = .iso8601
-            let serverState = try decoder.decode(PlayerState.self, from: data)
+            let serverState = Self.migrated(
+                try decoder.decode(PlayerState.self, from: data)
+            )
             
             if serverState.lastPlayedAt > player.lastPlayedAt {
                 currentPlayer = serverState
-                saveLocalState()
+                saveLocalState(touchLastPlayedAt: false)
                 print("✅ PlayerStateService: Updated with server state")
             } else {
                 print("✅ PlayerStateService: Local state is current")
@@ -243,29 +609,120 @@ class PlayerStateService: ObservableObject {
         }
     }
     
-    private func loadLocalState() {
-        guard let data = UserDefaults.standard.data(forKey: stateKey),
-              let state = try? JSONDecoder().decode(PlayerState.self, from: data) else {
+    private func saveLocalState(touchLastPlayedAt: Bool = true) {
+        guard var player = currentPlayer else {
             return
         }
-        currentPlayer = state
+        if touchLastPlayedAt {
+            player.lastPlayedAt = Date()
+            currentPlayer = player
+        }
+        let stored = StoredPlayerState(
+            schemaVersion: Self.playerStateSchemaVersion,
+            player: player
+        )
+        do {
+            let data = try JSONEncoder().encode(stored)
+            UserDefaults.standard.set(
+                data,
+                forKey: playerStateKey(for: player.playerId)
+            )
+            UserDefaults.standard.removeObject(forKey: legacyStateKey)
+        } catch {
+            self.error = "Your latest progress could not be saved."
+            print("PLAYER_STATE_SAVE_FAILED error=\(error.localizedDescription)")
+        }
     }
     
-    private func saveLocalState() {
-        guard let player = currentPlayer,
-              let data = try? JSONEncoder().encode(player) else {
-            return
-        }
-        UserDefaults.standard.set(data, forKey: stateKey)
+    private func playerStateKey(for playerId: PlayerId) -> String {
+        "world2_player_\(playerId.rawValue)"
     }
-    
-    private func loadPlayerState(for playerId: PlayerId) -> PlayerState? {
-        let key = "world2_player_\(playerId.rawValue)"
-        guard let data = UserDefaults.standard.data(forKey: key),
-              let state = try? JSONDecoder().decode(PlayerState.self, from: data) else {
-            return nil
+
+    private func loadPlayerState(for playerId: PlayerId) -> PlayerLoadResult {
+        let defaults = UserDefaults.standard
+        let key = playerStateKey(for: playerId)
+        if let data = defaults.data(forKey: key) {
+            guard let player = decodePlayerState(data),
+                  player.playerId == playerId else {
+                preserveCorruptSave(data, key: key)
+                return .corrupt
+            }
+            return .loaded(player)
         }
-        return state
+
+        guard let legacyData = defaults.data(forKey: legacyStateKey) else {
+            return .missing
+        }
+        guard let legacyPlayer = decodePlayerState(legacyData) else {
+            preserveCorruptSave(legacyData, key: legacyStateKey)
+            return .corrupt
+        }
+        guard legacyPlayer.playerId == playerId else {
+            return .missing
+        }
+        return .loaded(legacyPlayer)
+    }
+
+    private func decodePlayerState(_ data: Data) -> PlayerState? {
+        let decoder = JSONDecoder()
+        if let stored = try? decoder.decode(StoredPlayerState.self, from: data),
+           stored.schemaVersion <= Self.playerStateSchemaVersion {
+            return stored.player
+        }
+        return try? decoder.decode(PlayerState.self, from: data)
+    }
+
+    private func preserveCorruptSave(_ data: Data, key: String) {
+        let timestamp = Int(Date().timeIntervalSince1970)
+        UserDefaults.standard.set(
+            data,
+            forKey: "\(key).preserved-corrupt.\(timestamp)"
+        )
+        print("PLAYER_STATE_CORRUPT_PRESERVED key=\(key)")
+    }
+
+    private static func migrated(_ storedPlayer: PlayerState) -> PlayerState {
+        var player = storedPlayer
+        if player.furnitureIngredients == nil {
+            player.furnitureIngredients = 0
+        }
+        if player.placeInventory == nil {
+            player.placeInventory = []
+        }
+        if player.placedPlaces == nil {
+            player.placedPlaces = []
+        }
+        if player.createdScenes == nil {
+            player.createdScenes = []
+        }
+        if player.sceneExits == nil {
+            player.sceneExits = []
+        }
+        ensureStarterPOIFactory(in: &player)
+        return player
+    }
+
+    private static func ensureStarterPOIFactory(in player: inout PlayerState) {
+        var inventory = player.placeInventory ?? []
+        if !player.progression.achievedMilestones.contains(starterPOIFactoryMilestone) {
+            let alreadyExists = inventory.contains {
+                $0.templateID == .selfReplicatingFactory
+            }
+            if !alreadyExists {
+                inventory.append(.starterFactory(for: player.playerId))
+            }
+            player.progression.achievedMilestones.append(starterPOIFactoryMilestone)
+        }
+        player.placeInventory = inventory
+        if player.placedPlaces == nil {
+            player.placedPlaces = []
+        }
+        if player.createdScenes == nil {
+            player.createdScenes = []
+        }
+        if player.sceneExits == nil {
+            player.sceneExits = []
+        }
     }
     
     func resetProgress() {

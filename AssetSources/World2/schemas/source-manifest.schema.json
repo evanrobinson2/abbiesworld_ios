@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abbies.world/schemas/world2/source-manifest.schema.json",
+  "title": "World 2 exact source and prompt provenance",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assets"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 9,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "productionId",
+          "promptPath",
+          "promptSha256",
+          "candidatePath",
+          "candidateSha256",
+          "sourceUrl",
+          "sourceState"
+        ],
+        "properties": {
+          "productionId": {
+            "type": "string",
+            "pattern": "^[0-9]{4}[A-Z]?$"
+          },
+          "promptPath": {
+            "type": "string",
+            "pattern": "^prompts/[0-9]{4}[A-Z]?/v[0-9]+\\.txt$"
+          },
+          "promptSha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "candidatePath": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "candidateSha256": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[a-f0-9]{64}$"
+          },
+          "sourceUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "uri"
+          },
+          "sourceState": {
+            "enum": [
+              "awaiting_authenticated_local_import",
+              "imported_exact_hash"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

@@ -11,19 +11,37 @@ import UIKit
 struct CreatureBuilderView: View {
     @StateObject private var viewModel = CreatureBuilderViewModel()
     @StateObject private var audioService = CreatureBuilderAudioService()
-    @State private var isShowingOverland =
-        !ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder")
-        && !ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilderDirect")
-        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D")
-        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2DBuild")
-        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLabReady")
+    @State private var isShowingOverland: Bool
     @Environment(\.dismiss) private var dismiss
-    
+    private let onClose: (() -> Void)?
+
+    init(
+        startsInLab: Bool = false,
+        onClose: (() -> Void)? = nil
+    ) {
+        self.onClose = onClose
+        let arguments = ProcessInfo.processInfo.arguments
+        _isShowingOverland = State(
+            initialValue: !startsInLab
+                && !arguments.contains("-autoPlayCreatureBuilder")
+                && !arguments.contains("-launchCreatureBuilderDirect")
+                && !arguments.contains("-verifyCreatureLab2D")
+                && !arguments.contains("-verifyCreatureLab2DBuild")
+                && !arguments.contains("-verifyCreatureLabReady")
+        )
+    }
+
     var body: some View {
         Group {
             if isShowingOverland {
                 CreatureLabOverlandView(
-                    onClose: { dismiss() },
+                    onClose: {
+                        if let onClose {
+                            onClose()
+                        } else {
+                            dismiss()
+                        }
+                    },
                     onEnterLab: {
                         withAnimation(.easeInOut(duration: 0.45)) {
                             isShowingOverland = false
@@ -66,6 +84,7 @@ struct CreatureBuilderView: View {
             audioService.stopAllAudio()
             MusicService.shared.setGameActive(false)
         }
+        .accessibilityIdentifier("creatureBuilder.root")
     }
 
     private func requestLandscapeOrientation() {

@@ -1,0 +1,13 @@
+Parent-selected interior for the Asset Workbench POI.
+Preserve this warm, welcoming storybook invention room as a full-bleed 16:9 iPad
+background: a dominant central copper fabrication machine with a bright circular
+viewport, large teal and purple overhead pipes, brass fittings and gauges, a
+lower conveyor carrying miniature cottage models, shelves of jars, hand tools,
+rolled plans, flowers, stools, work surfaces, and glowing lanterns. Preserve the
+central machine as the visual anchor while retaining useful workshop context at
+both sides. This is atmospheric background artwork behind code-rendered headers,
+three idea-card carousels, generation progress, and the six-candidate choice tray.
+Do not add characters, authored UI controls, readable text, logos, watermarks,
+frightening machinery, or harsh industrial hazards.
+
+--ar 16:9

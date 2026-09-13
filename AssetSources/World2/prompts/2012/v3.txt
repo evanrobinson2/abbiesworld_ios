@@ -1,0 +1,12 @@
+Parent-selected exterior for the Asset Workbench POI in Work Land.
+Preserve the complete welcoming storybook craft-workshop cottage exactly as shown:
+peach and lavender roof, timber framing, open ground-floor workbench window filled
+with jars and tools, hanging lanterns, flowers, crates, painted ground shadow, and
+the miniature cottage model displayed on the right-side shelf. Keep ample
+transparent padding around every protruding feature for map-scale placement. The
+PNG alpha channel and transparent outer background are verified separately by
+file-integrity analysis; a vision renderer may display transparent pixels against
+black. Do not redraw the cottage or add characters, authored UI, readable text,
+logos, watermarks, unrelated buildings, or frightening material.
+
+--ar 1:1

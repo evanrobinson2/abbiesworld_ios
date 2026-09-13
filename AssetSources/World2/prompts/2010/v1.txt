@@ -1,0 +1,9 @@
+Parent-selected exterior for the self-replicating POI Factory.
+Preserve one complete whimsical pastel machine-building in three-quarter view,
+including the tall output chimney, rounded turbine, pipes, indicator lights, small
+entrance, and conveyor carrying a miniature copy of the factory. Remove only the
+pale outer background and center the complete building on transparent padding.
+Do not add characters, authored UI, readable text, logos, watermarks, unrelated
+buildings, or frightening material.
+
+--ar 1:1

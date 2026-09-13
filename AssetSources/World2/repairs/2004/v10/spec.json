@@ -1,0 +1,62 @@
+{
+  "productionId": "2004",
+  "prompt": {
+    "path": "prompts/2004/v10.txt",
+    "sha256": "a4e63e29093810411245efdb2b25b79ee82f1ac1355beec59b8313dac5463080",
+    "state": "exact",
+    "version": "v10"
+  },
+  "qualification": {
+    "alphaContract": "forbidden",
+    "audience": "smart six-year-old using an iPad",
+    "expectedEmbellishmentAreas": [],
+    "fileContract": {
+      "aspectRatioTolerance": 0.01,
+      "expectedAspectRatio": 1.0,
+      "formats": [
+        "PNG"
+      ],
+      "minimumHeight": 1024,
+      "minimumWidth": 1024
+    },
+    "intendedScreen": "iPad and iPhone Home Screen app icon",
+    "maximumRepairAttempts": 2,
+    "mustNotShow": [
+      "Text, letters, numbers, third-party logos, unrelated UI, transparency, frightening material, or hard clipping of the central treehouse and planet"
+    ],
+    "mustShow": [
+      "One centered pink and lavender fantasy treehouse perched on a compact blue-violet planet",
+      "A broad rainbow, sparkling pastel orbital ring, warm glowing windows, soft cloud framing, and two small friendly star mascots",
+      "A bright full-bleed square composition whose central magical-world silhouette remains readable at small app-icon size"
+    ],
+    "references": [],
+    "safeZones": [
+      "Keep the treehouse, planet, rainbow, orbital ring, and star mascots readable within Apple's rounded app-icon mask; decorative clouds and background color may extend into cropped corner regions"
+    ],
+    "transformation": {
+      "kind": "optimize",
+      "maxDimension": 1024,
+      "metadataMarker": "2004-v10-parent-selected-icon",
+      "outputFormat": "PNG",
+      "preserveAlpha": false
+    },
+    "useSizes": [
+      {
+        "height": 180,
+        "name": "iPadLargeIcon",
+        "width": 180
+      },
+      {
+        "height": 60,
+        "name": "iPadSmallIcon",
+        "width": 60
+      }
+    ]
+  },
+  "semanticId": "ui.appIcon",
+  "source": {
+    "candidatePath": "candidates/2004/v10/source.png",
+    "sha256": "906829e7f094f85d5d39fe23e23959d72cc103be314f1a481722ae22dbe4319c"
+  },
+  "status": "canonical_repair"
+}

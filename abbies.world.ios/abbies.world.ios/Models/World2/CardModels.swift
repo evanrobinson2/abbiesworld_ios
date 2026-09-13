@@ -58,7 +58,7 @@ enum CardGenerationStatus: String, Codable {
     case rejected
 }
 
-struct CreatureCard: Codable, Identifiable {
+struct World2CreatureCard: Codable, Identifiable {
     let id: String
     let playerId: String
     
@@ -108,20 +108,20 @@ struct CreatureCard: Codable, Identifiable {
 
 struct CardCollection: Codable {
     let playerId: String
-    var cards: [CreatureCard]
+    var cards: [World2CreatureCard]
     var activeDeck: [String]
     
     static let maxActiveDeckSize = 5
     
-    var activeDeckCards: [CreatureCard] {
+    var activeDeckCards: [World2CreatureCard] {
         cards.filter { activeDeck.contains($0.id) }
     }
     
-    var acceptedCards: [CreatureCard] {
+    var acceptedCards: [World2CreatureCard] {
         cards.filter { $0.accepted }
     }
     
-    func cardWithRecipeHash(_ hash: String) -> CreatureCard? {
+    func cardWithRecipeHash(_ hash: String) -> World2CreatureCard? {
         cards.first { $0.recipeHash == hash }
     }
     

@@ -12,16 +12,16 @@ struct World2CardVaultView: View {
     let onExit: () -> Void
     
     @State private var selectedTab: VaultTab = .collection
-    @State private var selectedCard: CreatureCard?
+    @State private var selectedCard: World2CreatureCard?
     @State private var showingCardDetail = false
     
     private var playerService: PlayerStateService { PlayerStateService.shared }
     
-    private var collection: [CreatureCard] {
+    private var collection: [World2CreatureCard] {
         playerService.currentPlayer?.cardCollection.acceptedCards ?? []
     }
     
-    private var activeDeck: [CreatureCard] {
+    private var activeDeck: [World2CreatureCard] {
         playerService.currentPlayer?.cardCollection.activeDeckCards ?? []
     }
     
@@ -299,7 +299,7 @@ struct World2CardVaultView: View {
         }
     }
     
-    private func toggleDeckStatus(_ card: CreatureCard) {
+    private func toggleDeckStatus(_ card: World2CreatureCard) {
         if activeDeck.contains(where: { $0.id == card.id }) {
             _ = playerService.removeFromActiveDeck(card.id)
         } else if activeDeck.count < 5 {
@@ -309,7 +309,7 @@ struct World2CardVaultView: View {
 }
 
 struct CardTile: View {
-    let card: CreatureCard
+    let card: World2CreatureCard
     let isInDeck: Bool
     let onTap: () -> Void
     
@@ -407,7 +407,7 @@ struct CardTile: View {
 }
 
 struct DeckCardTile: View {
-    let card: CreatureCard
+    let card: World2CreatureCard
     let onTap: () -> Void
     let onRemove: () -> Void
     
@@ -473,7 +473,7 @@ struct DeckCardTile: View {
 }
 
 struct CardDetailSheet: View {
-    let card: CreatureCard
+    let card: World2CreatureCard
     let isInDeck: Bool
     let onToggleDeck: () -> Void
     let onDismiss: () -> Void
@@ -526,11 +526,7 @@ struct CardDetailSheet: View {
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 16)
-                    .background(
-                        isInDeck
-                            ? Color.red.opacity(0.8)
-                            : Color.purple.gradient
-                    )
+                    .background(isInDeck ? Color.red.opacity(0.8) : Color.purple)
                     .cornerRadius(16)
                 }
                 .padding(.horizontal)
@@ -587,7 +583,7 @@ struct CardDetailSheet: View {
         }
     }
     
-    private func ingredientChip(_ ref: CreatureCard.IngredientReference, color: Color) -> some View {
+    private func ingredientChip(_ ref: World2CreatureCard.IngredientReference, color: Color) -> some View {
         VStack(spacing: 4) {
             Image(systemName: iconFor(ref.category))
                 .font(.system(size: 20))

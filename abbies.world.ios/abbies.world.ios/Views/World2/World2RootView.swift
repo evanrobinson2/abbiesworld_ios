@@ -1,329 +1,626 @@
-//
-//  World2RootView.swift
-//  abbies.world.ios
-//
-//  Root view for Abbie's World 2 game shell.
-//
-
 import SwiftUI
+import AVFoundation
+import Combine
 
 struct World2RootView: View {
     @StateObject private var viewModel = World2ViewModel()
-    
+    @Environment(\.scenePhase) private var scenePhase
+    @State private var showingMusicPlayer =
+        ProcessInfo.processInfo.arguments.contains("-openWorld2Music")
+    @State private var showingSettings =
+        ProcessInfo.processInfo.arguments.contains("-openWorld2Settings")
+    @State private var showingClassicGames =
+        ProcessInfo.processInfo.arguments.contains("-openWorld2ClassicGames")
+    @State private var showingWaypointGame = false
+    @State private var showingGoonPopper = false
+    @State private var showingPictureCarver = false
+    @State private var showingDinoPicnic = false
+    @State private var openCreatureLabFromClassic = false
+
     var body: some View {
-        ZStack {
+        ZStack(alignment: .topTrailing) {
             switch viewModel.currentScreen {
             case .loading:
-                BootstrapLoadingView(progress: viewModel.bootstrapProgress)
-                
+                BootstrapLoadingView(
+                    progress: viewModel.bootstrapProgress,
+                    isBootstrapReady: viewModel.isIntroBootstrapReady,
+                    onContinue: viewModel.continueFromIntro
+                )
+
             case .playerSelect:
-                PlayerSelectView(onSelect: { playerId in
-                    viewModel.selectPlayer(playerId)
-                })
-                
-            case .worldMap:
+                PlayerSelectView(onSelect: viewModel.selectPlayer)
+
+            case .homeWorld:
                 WorldMapView(viewModel: viewModel)
-                
-            case .poiInterior(let poiId):
-                POIInteriorView(
+
+            case .blankSlate:
+                World2MutableSceneView(viewModel: viewModel)
+
+            case .treehouse(let poiId):
+                World2PlayerHomeView(
                     poiId: poiId,
                     viewModel: viewModel,
-                    onExit: { viewModel.exitPOI() }
+                    onExit: viewModel.exitPOI,
+                    onOpenSettings: {
+                        showingSettings = true
+                    },
+                    onOpenMusic: {
+                        World2MusicService.shared.stop()
+                        showingMusicPlayer = true
+                        World2Diagnostics.log("music_player_opened")
+                    }
                 )
-                
+
             case .cardFactory:
                 World2CardFactoryView(
                     viewModel: viewModel,
-                    onExit: { viewModel.exitPOI() }
+                    onExit: viewModel.exitPOI
                 )
-                
-            case .cardVault:
-                World2CardVaultView(
+
+            case .selfReplicatingFactory(let instanceID):
+                World2SelfReplicatingFactoryView(
+                    instanceID: instanceID,
                     viewModel: viewModel,
-                    onExit: { viewModel.exitPOI() }
+                    onExit: viewModel.exitPOI
                 )
-                
-            case .cardShop:
-                World2CardShopView(
+
+            case .furnitureStore:
+                World2FurnitureStoreView(
                     viewModel: viewModel,
-                    onExit: { viewModel.exitPOI() }
+                    onExit: viewModel.exitPOI,
+                    onDecorateHome: viewModel.openCurrentPlayerTreehouse
                 )
-                
-            case .playerHome:
-                World2PlayerHomeView(
-                    viewModel: viewModel,
-                    onExit: { viewModel.exitPOI() }
+
+            case .assetWorkbench:
+                World2AssetWorkbenchView(
+                    playerID: viewModel.currentPlayerId ?? .abbie,
+                    service: World2AssetWorkbenchPreviewService(),
+                    onExit: viewModel.exitPOI
                 )
-                
-            case .minigame(let poiId, let minigameType):
-                MinigameHostView(
-                    poiId: poiId,
-                    minigameType: minigameType,
-                    viewModel: viewModel,
-                    onComplete: { rewards, score in
-                        viewModel.completeMinigame(poiId: poiId, rewards: rewards, score: score)
+
+            case .creatureLab:
+                CreatureBuilderView(
+                    startsInLab: true,
+                    onClose: viewModel.exitPOI
+                )
+
+            case .fallingTargets(let configurationID):
+                FallingTargetGameHost(
+                    configurationID: configurationID,
+                    playerID: viewModel.currentPlayerId?.rawValue ?? "player.unknown",
+                    onRoundCompleted: { score, gems in
+                        viewModel.completeMinigame(
+                            configurationID: configurationID,
+                            score: score,
+                            rewardGems: gems
+                        )
                     },
-                    onExit: { viewModel.exitPOI() }
+                    onExit: viewModel.exitPOI
                 )
             }
-            
-            if viewModel.isTransitioning {
-                Color.black
-                    .ignoresSafeArea()
-                    .transition(.opacity)
+
+            if viewModel.currentScreen.showsGlobalHUD {
+                globalHUDButtons
             }
-            
+
             if let toast = viewModel.toastMessage {
                 VStack {
                     Spacer()
                     Text(toast)
                         .font(.system(size: 16, weight: .semibold, design: .rounded))
-                        .foregroundColor(.white)
+                        .foregroundStyle(.white)
                         .padding(.horizontal, 24)
                         .padding(.vertical, 12)
-                        .background(
-                            Capsule()
-                                .fill(Color.black.opacity(0.8))
-                        )
-                        .padding(.bottom, 100)
+                        .background(.black.opacity(0.8), in: Capsule())
+                        .accessibilityIdentifier("world2.toast")
+                        .padding(.bottom, 40)
                 }
-                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .frame(maxWidth: .infinity)
             }
         }
-        .animation(.easeInOut(duration: 0.3), value: viewModel.currentScreen)
-        .animation(.spring(response: 0.4, dampingFraction: 0.8), value: viewModel.toastMessage)
+        .background(Color.black.ignoresSafeArea())
+        .ignoresSafeArea()
+        .statusBarHidden(true)
+        .sheet(isPresented: $showingMusicPlayer) {
+            MusicPlayerView {
+                showingMusicPlayer = false
+                World2Diagnostics.log("music_player_closed")
+            }
+            .accessibilityIdentifier("world2.music.player")
+        }
+        .sheet(isPresented: $showingSettings) {
+            World2SettingsView {
+                showingSettings = false
+            }
+        }
+        .sheet(isPresented: $showingClassicGames) {
+            GamesDialogView(
+                showWaypointGame: $showingWaypointGame,
+                showGoonPopper: $showingGoonPopper,
+                showPictureCarver: $showingPictureCarver,
+                showDinoPicnic: $showingDinoPicnic,
+                showCreatureBuilder: $openCreatureLabFromClassic,
+                onDismiss: { showingClassicGames = false }
+            )
+            .accessibilityIdentifier("world2.classicGames")
+        }
+        .fullScreenCover(isPresented: $showingWaypointGame) {
+            WaypointNavigationView(
+                onDismiss: { showingWaypointGame = false },
+                onComplete: { showingWaypointGame = false }
+            )
+        }
+        .fullScreenCover(isPresented: $showingGoonPopper) {
+            GoonPopperView(
+                onDismiss: { showingGoonPopper = false },
+                onComplete: {}
+            )
+        }
+        .fullScreenCover(isPresented: $showingPictureCarver) {
+            PictureCarverView(onDismiss: { showingPictureCarver = false })
+        }
+        .fullScreenCover(isPresented: $showingDinoPicnic) {
+            DinoPicnicView()
+        }
+        .onChange(of: showingWaypointGame) { _, isActive in
+            MusicService.shared.setGameActive(isActive)
+        }
+        .onChange(of: showingGoonPopper) { _, isActive in
+            MusicService.shared.setGameActive(isActive)
+        }
+        .onChange(of: showingPictureCarver) { _, isActive in
+            MusicService.shared.setGameActive(isActive)
+        }
+        .onChange(of: showingDinoPicnic) { _, isActive in
+            MusicService.shared.setGameActive(isActive)
+        }
+        .onChange(of: openCreatureLabFromClassic) { _, shouldOpen in
+            guard shouldOpen else { return }
+            openCreatureLabFromClassic = false
+            viewModel.openCreatureLab()
+        }
         .task {
             await viewModel.startGame()
         }
+        .onAppear {
+            // World 2 delegates all music to the established app player.
+            World2MusicService.shared.stop()
+        }
+        .onChange(of: scenePhase) {
+            if scenePhase != .active {
+                World2DeveloperSession.shared.isEnabled = false
+            }
+        }
+    }
+
+    private var globalHUDButtons: some View {
+        HStack(spacing: 8) {
+            Button {
+                showingClassicGames = true
+            } label: {
+                globalHUDIcon {
+                    Image(systemName: "gamecontroller.fill")
+                }
+            }
+            .accessibilityLabel("Open classic games")
+            .accessibilityIdentifier("world2.hud.classicGames")
+
+            Button {
+                showingSettings = true
+            } label: {
+                globalHUDIcon {
+                    Image(systemName: "gearshape.fill")
+                }
+            }
+            .accessibilityLabel("Open settings")
+            .accessibilityIdentifier("world2.hud.settings")
+
+            Button {
+                World2MusicService.shared.stop()
+                showingMusicPlayer = true
+                World2Diagnostics.log("music_player_opened")
+            } label: {
+                globalHUDIcon {
+                    Image(systemName: "music.note")
+                }
+            }
+            .accessibilityLabel("Open music player")
+            .accessibilityIdentifier("world2.hud.music")
+        }
+        .padding(.top, 16)
+        .padding(.trailing, 18)
+        .zIndex(100)
+    }
+
+    private func globalHUDIcon<Icon: View>(
+        @ViewBuilder icon: () -> Icon
+    ) -> some View {
+        icon()
+            .font(.system(size: 20, weight: .bold))
+            .foregroundStyle(.white)
+            .frame(width: 48, height: 48)
+            .background(.ultraThinMaterial, in: Circle())
+            .overlay(Circle().stroke(.white.opacity(0.42), lineWidth: 1.5))
+            .shadow(color: .black.opacity(0.28), radius: 8, y: 4)
     }
 }
 
 struct BootstrapLoadingView: View {
     let progress: Double
-    
+    let isBootstrapReady: Bool
+    let onContinue: () -> Void
+    @State private var introStartedAt = ProcessInfo.processInfo.systemUptime
+    @StateObject private var introAudio = World2IntroAudioController()
+
+    private let statusMessages = [
+        "Waking up the treehouses…",
+        "Polishing the magic cards…",
+        "Sorting the vowels…",
+        "Tuning the music…",
+        "Opening Abbie's World…"
+    ]
+
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [Color(hex: "#1a1a2e") ?? .black, Color(hex: "#16213e") ?? .black],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
-            
-            VStack(spacing: 40) {
-                Text("✨ ABBIE'S WORLD ✨")
-                    .font(.system(size: 36, weight: .black, design: .rounded))
-                    .foregroundColor(.white)
-                
-                VStack(spacing: 16) {
-                    ProgressView(value: progress)
-                        .progressViewStyle(LinearProgressViewStyle(tint: .cyan))
-                        .frame(width: 250)
-                    
-                    Text(loadingMessage)
-                        .font(.system(size: 14, weight: .medium, design: .rounded))
-                        .foregroundColor(.white.opacity(0.7))
-                }
-                
-                Image(systemName: "sparkles")
-                    .font(.system(size: 48))
-                    .foregroundColor(.yellow)
-                    .symbolEffect(.pulse, options: .repeating)
+            if let introVideoURL {
+                World2IntroVideo(url: introVideoURL)
+                    .ignoresSafeArea()
+                    .accessibilityHidden(true)
+            } else {
+                World2SemanticImage(
+                    semanticName: "title.background",
+                    fallbackIcon: "globe.americas.fill",
+                    fallbackLabel: "World 2 title artwork is awaiting qualification"
+                )
+                .scaledToFill()
+                .ignoresSafeArea()
             }
+
+            Color.black.opacity(0.28)
+                .ignoresSafeArea()
+                .allowsHitTesting(false)
+
+            VStack(spacing: 28) {
+                AnimatedWorld2Title()
+                    .accessibilityLabel("Abbie's World")
+                    .accessibilityIdentifier("world2.loading.animatedTitle")
+
+                if canContinue {
+                    Button(action: onContinue) {
+                        Label("ENTER ABBIE'S WORLD", systemImage: "sparkles")
+                            .font(.system(size: 18, weight: .black, design: .rounded))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 24)
+                            .padding(.vertical, 14)
+                            .background(.indigo.gradient, in: Capsule())
+                            .overlay(Capsule().stroke(.white.opacity(0.8), lineWidth: 2))
+                            .shadow(color: .cyan.opacity(0.55), radius: 14, y: 5)
+                    }
+                    .buttonStyle(.plain)
+                    .transition(.scale.combined(with: .opacity))
+                    .accessibilityHint("The intro is complete")
+                    .accessibilityIdentifier("world2.loading.continue")
+                } else {
+                    TimelineView(.animation(minimumInterval: 1.0 / 30.0)) { _ in
+                        let timedProgress = min(
+                            max(
+                                (ProcessInfo.processInfo.systemUptime - introStartedAt)
+                                    / 10.0,
+                                0
+                            ),
+                            1
+                        )
+                        let displayedProgress = min(
+                            timedProgress,
+                            max(progress, 0)
+                        )
+                        let messageIndex = min(
+                            Int(displayedProgress * Double(statusMessages.count)),
+                            statusMessages.count - 1
+                        )
+
+                        VStack(spacing: 12) {
+                            HStack(spacing: 12) {
+                                ProgressView(value: displayedProgress)
+                                    .tint(.cyan)
+                                    .frame(width: 250)
+
+                                Text("\(Int(displayedProgress * 100))%")
+                                    .font(.system(size: 14, weight: .black, design: .rounded))
+                                    .foregroundStyle(.white)
+                                    .monospacedDigit()
+                                    .frame(width: 44, alignment: .trailing)
+                            }
+                            .accessibilityElement(children: .combine)
+                            .accessibilityLabel("Loading")
+                            .accessibilityValue("\(Int(displayedProgress * 100)) percent")
+
+                            Text(statusMessages[messageIndex])
+                                .font(.system(size: 16, weight: .medium, design: .rounded))
+                                .foregroundStyle(.white.opacity(0.75))
+                                .contentTransition(.opacity)
+                                .accessibilityIdentifier("world2.loading.status")
+                        }
+                    }
+                }
+            }
+            .animation(.spring(response: 0.42, dampingFraction: 0.72), value: canContinue)
+        }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("world2.loading")
+        .onAppear {
+            introStartedAt = ProcessInfo.processInfo.systemUptime
+            introAudio.play()
+        }
+        .onDisappear {
+            introAudio.stop()
         }
     }
-    
-    private var loadingMessage: String {
-        if progress < 0.2 {
-            return "Waking up the magic..."
-        } else if progress < 0.5 {
-            return "Loading wonderful things..."
-        } else if progress < 0.8 {
-            return "Almost ready..."
-        } else {
-            return "Here we go!"
+
+    private var canContinue: Bool {
+        isBootstrapReady && introAudio.didFinish
+    }
+
+    private var introVideoURL: URL? {
+        Bundle.main.url(
+            forResource: "world2_intro",
+            withExtension: "mp4",
+            subdirectory: "Resources/World2"
+        )
+        ?? Bundle.main.url(forResource: "world2_intro", withExtension: "mp4")
+    }
+
+}
+
+private struct World2IntroVideo: UIViewRepresentable {
+    let url: URL
+
+    func makeUIView(context: Context) -> World2IntroVideoPlayerView {
+        let view = World2IntroVideoPlayerView()
+        view.play(url: url)
+        return view
+    }
+
+    func updateUIView(_ uiView: World2IntroVideoPlayerView, context: Context) {}
+
+    static func dismantleUIView(
+        _ uiView: World2IntroVideoPlayerView,
+        coordinator: ()
+    ) {
+        uiView.stop()
+    }
+}
+
+private final class World2IntroVideoPlayerView: UIView {
+    private var queuePlayer: AVQueuePlayer?
+    private var playerLooper: AVPlayerLooper?
+
+    override class var layerClass: AnyClass {
+        AVPlayerLayer.self
+    }
+
+    private var playerLayer: AVPlayerLayer {
+        layer as! AVPlayerLayer
+    }
+
+    func play(url: URL) {
+        let player = AVQueuePlayer()
+        player.isMuted = true
+        playerLayer.player = player
+        playerLayer.videoGravity = .resizeAspectFill
+        playerLooper = AVPlayerLooper(
+            player: player,
+            templateItem: AVPlayerItem(url: url)
+        )
+        queuePlayer = player
+        player.play()
+    }
+
+    func stop() {
+        queuePlayer?.pause()
+        playerLooper?.disableLooping()
+        playerLayer.player = nil
+        playerLooper = nil
+        queuePlayer = nil
+    }
+}
+
+private final class World2IntroAudioController:
+    NSObject,
+    ObservableObject,
+    AVAudioPlayerDelegate
+{
+    @Published private(set) var didFinish = false
+    private var audioPlayer: AVAudioPlayer?
+
+    func play() {
+        didFinish = false
+        guard let url =
+            Bundle.main.url(
+                forResource: "magical_discovery",
+                withExtension: "m4a",
+                subdirectory: "Resources/Music/World2"
+            )
+            ?? Bundle.main.url(
+                forResource: "magical_discovery",
+                withExtension: "m4a"
+            ) else {
+            print("❌ BootstrapLoadingView: Missing magical_discovery.m4a")
+            didFinish = true
+            return
+        }
+
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
+            try AVAudioSession.sharedInstance().setActive(true)
+            let player = try AVAudioPlayer(contentsOf: url)
+            player.delegate = self
+            player.numberOfLoops = 0
+            player.volume = 0.72
+            player.prepareToPlay()
+            player.play()
+            audioPlayer = player
+            print("🎵 BootstrapLoadingView: Playing magical_discovery.m4a")
+        } catch {
+            print("❌ BootstrapLoadingView: Could not play splash music: \(error)")
+            didFinish = true
+        }
+    }
+
+    func stop() {
+        audioPlayer?.stop()
+        audioPlayer = nil
+    }
+
+    func audioPlayerDidFinishPlaying(
+        _ player: AVAudioPlayer,
+        successfully flag: Bool
+    ) {
+        audioPlayer = nil
+        didFinish = true
+    }
+}
+
+private struct AnimatedWorld2Title: View {
+    private let letters = Array("ABBIE'S WORLD")
+
+    var body: some View {
+        TimelineView(.animation(minimumInterval: 1 / 30)) { timeline in
+            let time = timeline.date.timeIntervalSinceReferenceDate
+            HStack(spacing: 1) {
+                ForEach(letters.indices, id: \.self) { index in
+                    let character = letters[index]
+                    Text(String(character))
+                        .font(.system(size: 48, weight: .black, design: .rounded))
+                        .foregroundStyle(
+                            index < 7
+                                ? Color.pink.gradient
+                                : Color.cyan.gradient
+                        )
+                        .offset(
+                            y: character == " "
+                                ? 0
+                                : CGFloat(sin(time * 4.2 + Double(index) * 0.48) * 8)
+                        )
+                        .rotationEffect(
+                            .degrees(
+                                character == " "
+                                    ? 0
+                                    : sin(time * 2.8 + Double(index) * 0.35) * 3
+                            )
+                        )
+                        .shadow(color: .white.opacity(0.7), radius: 2)
+                }
+            }
+            .padding(.vertical, 18)
+            .padding(.horizontal, 28)
+            .background(.black.opacity(0.28), in: Capsule())
+            .overlay(Capsule().stroke(.white.opacity(0.3), lineWidth: 2))
         }
     }
 }
 
 struct PlayerSelectView: View {
     let onSelect: (PlayerId) -> Void
-    
+    @ObservedObject private var playerService = PlayerStateService.shared
+
     var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [Color(hex: "#667eea") ?? .purple, Color(hex: "#764ba2") ?? .purple],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
-            
-            VStack(spacing: 40) {
-                Text("Who's Playing?")
-                    .font(.system(size: 36, weight: .black, design: .rounded))
-                    .foregroundColor(.white)
-                
-                HStack(spacing: 40) {
-                    PlayerSelectButton(
-                        playerId: .abbie,
-                        color: Color(hex: "#FF69B4") ?? .pink,
-                        onSelect: onSelect
-                    )
-                    
-                    PlayerSelectButton(
-                        playerId: .ani,
-                        color: Color(hex: "#9370DB") ?? .purple,
-                        onSelect: onSelect
-                    )
+        GeometryReader { screen in
+            ZStack {
+                World2SemanticImage(
+                    semanticName: "title.background",
+                    fallbackIcon: "globe.americas.fill",
+                    fallbackLabel: "Abbie's World"
+                )
+                .scaledToFill()
+                .frame(width: screen.size.width, height: screen.size.height)
+                .clipped()
+                .overlay(Color.indigo.opacity(0.30))
+
+                VStack(spacing: 20) {
+                    AnimatedWorld2Title()
+                        .accessibilityHidden(true)
+
+                    Text("Who's Playing?")
+                        .font(.system(size: 32, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+
+                    Text("Choose your own treehouse adventure.")
+                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.82))
+
+                    HStack(spacing: 46) {
+                        PlayerSelectButton(playerId: .abbie, color: .pink, onSelect: onSelect)
+                        PlayerSelectButton(playerId: .ani, color: .purple, onSelect: onSelect)
+                    }
+
+                    if let error = playerService.error {
+                        Label(error, systemImage: "exclamationmark.triangle.fill")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white)
+                            .multilineTextAlignment(.center)
+                            .padding(.horizontal, 16)
+                            .padding(.vertical, 10)
+                            .background(.red.opacity(0.82), in: RoundedRectangle(cornerRadius: 14))
+                            .accessibilityIdentifier("world2.playerSelect.error")
+                    }
                 }
+                .padding(.horizontal, 42)
+                .padding(.vertical, 24)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 30)
+                        .stroke(.white.opacity(0.42), lineWidth: 2)
+                )
             }
+            .frame(width: screen.size.width, height: screen.size.height)
+            .clipped()
         }
+        .ignoresSafeArea()
+        .accessibilityIdentifier("world2.playerSelect")
     }
 }
 
-struct PlayerSelectButton: View {
+private struct PlayerSelectButton: View {
     let playerId: PlayerId
     let color: Color
     let onSelect: (PlayerId) -> Void
-    
-    @State private var isPressed = false
-    
+
     var body: some View {
-        Button(action: { onSelect(playerId) }) {
-            VStack(spacing: 16) {
-                Circle()
-                    .fill(color.gradient)
-                    .frame(width: 120, height: 120)
-                    .overlay(
-                        Text(playerId == .abbie ? "👧" : "👦")
-                            .font(.system(size: 60))
-                    )
+        Button {
+            onSelect(playerId)
+        } label: {
+            VStack(spacing: 14) {
+                Image(systemName: playerId == .abbie ? "sparkles" : "moon.stars.fill")
+                    .font(.system(size: 54, weight: .bold))
+                    .foregroundStyle(.white)
+                    .frame(width: 128, height: 128)
+                    .background(color.gradient, in: Circle())
                     .shadow(color: color.opacity(0.5), radius: 10, y: 5)
-                
+
                 Text(playerId.displayName)
-                    .font(.system(size: 24, weight: .bold, design: .rounded))
-                    .foregroundColor(.white)
+                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white)
             }
         }
-        .scaleEffect(isPressed ? 0.95 : 1.0)
-        .animation(.spring(response: 0.3, dampingFraction: 0.6), value: isPressed)
-        .simultaneousGesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { _ in isPressed = true }
-                .onEnded { _ in isPressed = false }
-        )
+        .buttonStyle(.plain)
+        .accessibilityLabel("Play as \(playerId.displayName)")
+        .accessibilityIdentifier("world2.player.\(playerId == .abbie ? "abbie" : "ani")")
     }
 }
 
-struct POIInteriorView: View {
-    let poiId: String
-    let viewModel: World2ViewModel
-    let onExit: () -> Void
-    
-    var body: some View {
-        ZStack {
-            Color.black.opacity(0.9)
-                .ignoresSafeArea()
-            
-            VStack {
-                HStack {
-                    Button(action: onExit) {
-                        Image(systemName: "arrow.left.circle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                }
-                .padding()
-                
-                Spacer()
-                
-                if let poi = viewModel.pois[poiId] {
-                    VStack(spacing: 20) {
-                        Image(systemName: poi.icon ?? "building.2.fill")
-                            .font(.system(size: 80))
-                            .foregroundColor(.white)
-                        
-                        Text(poi.name)
-                            .font(.system(size: 32, weight: .bold, design: .rounded))
-                            .foregroundColor(.white)
-                        
-                        Text(poi.description)
-                            .font(.system(size: 18, design: .rounded))
-                            .foregroundColor(.white.opacity(0.7))
-                    }
-                }
-                
-                Spacer()
-            }
+private extension World2Screen {
+    var showsGlobalHUD: Bool {
+        switch self {
+        case .loading, .playerSelect, .treehouse, .cardFactory,
+             .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
+             .creatureLab, .fallingTargets:
+            return false
+        case .homeWorld, .blankSlate:
+            return true
         }
     }
 }
-
-struct MinigameHostView: View {
-    let poiId: String
-    let minigameType: String
-    let viewModel: World2ViewModel
-    let onComplete: ([RewardConfiguration.Reward], Int) -> Void
-    let onExit: () -> Void
-    
-    var body: some View {
-        ZStack {
-            Color.black.ignoresSafeArea()
-            
-            VStack(spacing: 30) {
-                HStack {
-                    Button(action: onExit) {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.system(size: 32))
-                            .foregroundColor(.white)
-                    }
-                    Spacer()
-                }
-                .padding()
-                
-                Spacer()
-                
-                VStack(spacing: 20) {
-                    Image(systemName: "gamecontroller.fill")
-                        .font(.system(size: 60))
-                        .foregroundColor(.cyan)
-                    
-                    Text("Minigame: \(minigameType.capitalized)")
-                        .font(.system(size: 24, weight: .bold, design: .rounded))
-                        .foregroundColor(.white)
-                    
-                    Text("Coming Soon!")
-                        .font(.system(size: 16, design: .rounded))
-                        .foregroundColor(.white.opacity(0.6))
-                    
-                    Button(action: {
-                        if let poi = viewModel.pois[poiId],
-                           let config = poi.rewardConfiguration {
-                            onComplete(config.baseRewards, 100)
-                        } else {
-                            onComplete([], 0)
-                        }
-                    }) {
-                        Text("Complete (Demo)")
-                            .font(.system(size: 18, weight: .semibold, design: .rounded))
-                            .foregroundColor(.white)
-                            .padding(.horizontal, 32)
-                            .padding(.vertical, 16)
-                            .background(Color.green.gradient)
-                            .cornerRadius(25)
-                    }
-                    .padding(.top, 20)
-                }
-                
-                Spacer()
-            }
-        }
-    }
-}
-
-
-
 
 #Preview {
     World2RootView()

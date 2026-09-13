@@ -1,0 +1,20 @@
+a hand drawn digital illustration of the interior of a magical Card Factory for a whimsical children’s fantasy game, designed for a smart six year old audience
+
+show a cute fantasy castle interior blended with a magical creative workshop, bold chunky storybook forms, exaggerated playful proportions, broad readable details, sophisticated rather than babyish, not chibi
+
+the room should feel like the place where magical cards are assembled from ingredients, with a central creation area and clearly readable zones for creature ingredients, function or costume ingredients, and context ingredients, plus a reveal area where the finished card appears
+
+use warm cream stone, wood, pink and purple accents, magical machinery, whimsical shelves, presses, tubes, drawers, display pedestals, sorting stations and fantasy workshop apparatus, all simplified and readable, as though a castle workshop has been devoted to making wonderful cards
+
+carry some exterior identity inside: celebratory regalia, crest motifs, blossom-inspired decorative accents, and subtle A and A insignia integrated into a banner, crest, stained-glass element, archway ornament or decorative panel
+
+the space should feel visually complete but intentionally usable as a game screen: leave clear open surfaces, empty counters, readable wall areas, display niches and open floor zones where future cards, ingredients, effects and interface overlays can appear
+
+make the environment magical, cheerful and full of anticipation, like a wonderful workshop where creation is the main event, but avoid clutter and avoid making the mechanics visually confusing
+
+soft warm diffuse lighting with a magical glow, clean expressive outlines, tactile storybook textures, polished illustrated game background, no characters, no UI, no extra text
+
+REPAIR V2 — constrained revision from multimodal qualification:
+Preserve the castle workshop, AA crest, blossom accents, and palette while substantially simplifying shelves and machinery. Create three large, clearly separated empty ingredient stations for creature, function or costume, and context, plus one prominent empty illuminated card-reveal pedestal. Keep broad open overlay-safe counters and floor space.
+
+--ar 4:3

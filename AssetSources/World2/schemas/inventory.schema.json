@@ -1,0 +1,389 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abbies.world/schemas/world2/inventory.schema.json",
+  "title": "World 2 asset inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "assets"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 20,
+      "items": {
+        "$ref": "#/$defs/asset"
+      }
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": [
+        "semanticId",
+        "status"
+      ],
+      "properties": {
+        "productionId": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[0-9]{4}[A-Z]?$"
+        },
+        "semanticId": {
+          "type": "string",
+          "minLength": 3
+        },
+        "status": {
+          "enum": [
+            "canonical",
+            "reserved",
+            "supplemental_candidate"
+          ]
+        },
+        "prompt": {
+          "$ref": "#/$defs/prompt"
+        },
+        "source": {
+          "$ref": "#/$defs/source"
+        },
+        "qualification": {
+          "$ref": "#/$defs/qualification"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "canonical"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "productionId",
+              "prompt",
+              "source",
+              "qualification"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "reserved"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "productionId"
+            ],
+            "not": {
+              "anyOf": [
+                {
+                  "required": [
+                    "prompt"
+                  ]
+                },
+                {
+                  "required": [
+                    "source"
+                  ]
+                },
+                {
+                  "required": [
+                    "qualification"
+                  ]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "supplemental_candidate"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "productionId",
+              "prompt",
+              "source",
+              "qualification"
+            ],
+            "properties": {
+              "productionId": {
+                "const": null
+              }
+            }
+          }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "prompt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "state",
+        "path",
+        "sha256",
+        "version"
+      ],
+      "properties": {
+        "state": {
+          "enum": [
+            "awaiting_exact_supplied_prompt",
+            "exact"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "pattern": "^prompts/(?:[0-9]{4}[A-Z]?|generated/[a-zA-Z0-9_.-]+)/v[0-9]+\\.txt$"
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^v[0-9]+$"
+        }
+      }
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "candidatePath",
+        "sha256"
+      ],
+      "properties": {
+        "candidatePath": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sha256": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "pattern": "^[a-f0-9]{64}$"
+        }
+      }
+    },
+    "qualification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "intendedScreen",
+        "audience",
+        "mustShow",
+        "mustNotShow",
+        "references",
+        "useSizes",
+        "alphaContract",
+        "safeZones",
+        "expectedEmbellishmentAreas",
+        "fileContract",
+        "transformation",
+        "maximumRepairAttempts"
+      ],
+      "properties": {
+        "intendedScreen": {
+          "type": "string",
+          "minLength": 1
+        },
+        "audience": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mustShow": {
+          "$ref": "#/$defs/nonEmptyStrings"
+        },
+        "mustNotShow": {
+          "$ref": "#/$defs/nonEmptyStrings"
+        },
+        "references": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9]{4}[A-Z]?$"
+          }
+        },
+        "useSizes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/useSize"
+          }
+        },
+        "alphaContract": {
+          "enum": [
+            "required",
+            "forbidden",
+            "allowed"
+          ]
+        },
+        "safeZones": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "expectedEmbellishmentAreas": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "fileContract": {
+          "$ref": "#/$defs/fileContract"
+        },
+        "transformation": {
+          "$ref": "#/$defs/transformation"
+        },
+        "maximumRepairAttempts": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
+        }
+      }
+    },
+    "nonEmptyStrings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "useSize": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "width",
+        "height"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "width": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4096
+        }
+      }
+    },
+    "fileContract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "minimumWidth",
+        "minimumHeight",
+        "formats",
+        "expectedAspectRatio",
+        "aspectRatioTolerance"
+      ],
+      "properties": {
+        "minimumWidth": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "minimumHeight": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "formats": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "PNG",
+              "JPEG",
+              "WEBP"
+            ]
+          }
+        },
+        "expectedAspectRatio": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "exclusiveMinimum": 0
+        },
+        "aspectRatioTolerance": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 0.25
+        }
+      }
+    },
+    "transformation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind",
+        "outputFormat",
+        "maxDimension",
+        "preserveAlpha"
+      ],
+      "properties": {
+        "kind": {
+          "const": "optimize"
+        },
+        "outputFormat": {
+          "const": "PNG"
+        },
+        "maxDimension": {
+          "type": "integer",
+          "minimum": 64,
+          "maximum": 8192
+        },
+        "preserveAlpha": {
+          "type": "boolean"
+        },
+        "crop": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  }
+}

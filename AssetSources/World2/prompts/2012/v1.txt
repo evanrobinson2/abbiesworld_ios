@@ -1,0 +1,11 @@
+Parent-selected exterior for the Asset Workbench POI in Work Land.
+Preserve one complete welcoming storybook craft-workshop cottage in three-quarter
+view, including the peach and lavender roof, timber framing, open ground-floor
+workbench window filled with jars and tools, hanging lanterns, flowers, crates,
+and the miniature cottage model displayed on the right-side shelf. Preserve the
+soft painted ground shadow and plants as part of the POI silhouette. Remove only
+the white outer background and center the complete building on transparent
+padding. Do not add characters, authored UI, readable text, logos, watermarks,
+unrelated buildings, or frightening material.
+
+--ar 1:1

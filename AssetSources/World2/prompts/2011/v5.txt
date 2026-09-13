@@ -1,0 +1,11 @@
+Parent-selected interior for the self-replicating POI Factory.
+Create the parent-selected full-bleed iPad 4:3 crop of this warm, whimsical machine
+room. Preserve the central circular glass fabrication viewport, brass and pastel
+pipes, gauges, windows, work surfaces, and broad open tiled floor. The outermost
+left and right machinery may be cropped; do not require the complete chamber
+silhouette. This is background artwork behind code-rendered controls.
+This is background artwork behind code-rendered fabrication and exit controls.
+Do not add characters, authored UI controls, readable branding, logos, watermarks,
+frightening machinery, or clutter that blocks the open floor.
+
+--ar 4:3

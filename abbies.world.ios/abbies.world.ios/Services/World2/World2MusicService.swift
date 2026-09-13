@@ -146,7 +146,7 @@ class World2MusicService: ObservableObject {
         isMusicEnabled.toggle()
         
         if isMusicEnabled {
-            if let locationId = currentLocationId {
+            if currentLocationId != nil {
                 playTrackForCurrentState()
             }
         } else {
@@ -244,7 +244,6 @@ class World2MusicService: ObservableObject {
             
             let fadeSteps = 20
             let stepDuration = crossfadeDuration / Double(fadeSteps)
-            let volumeStep = volume / Float(fadeSteps)
             
             for step in 0..<fadeSteps {
                 DispatchQueue.main.asyncAfter(deadline: .now() + stepDuration * Double(step)) { [weak self] in
@@ -279,7 +278,7 @@ class World2MusicService: ObservableObject {
         let volumeStep = player.volume / Float(fadeSteps)
         
         for step in 0..<fadeSteps {
-            DispatchQueue.main.asyncAfter(deadline: .now() + stepDuration * Double(step)) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + stepDuration * Double(step)) {
                 player.volume = max(0, player.volume - volumeStep)
             }
         }
