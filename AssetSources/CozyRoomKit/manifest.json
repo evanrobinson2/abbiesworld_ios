@@ -1,0 +1,2202 @@
+{
+  "assetCount": 66,
+  "assets": [
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_01_forest_canopy_bed",
+      "category": "beds",
+      "componentIndex": 1,
+      "description": "A carved branch bed with a leafy log canopy, patchwork quilt, and pastel flower pillows.",
+      "id": "crk-s1-01-forest-canopy-bed",
+      "label": "Forest Canopy Bed",
+      "pixelSize": {
+        "height": 397,
+        "width": 427
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-01-forest-canopy-bed.png",
+      "pngSha256": "4f90ba3ff3bbb45f61cdf3f413e6d71b7058fcbe3d41027df378fafd464d3367",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        33,
+        18,
+        460,
+        415
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "bed",
+        "branches",
+        "patchwork",
+        "flowers"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 0.990385,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_02_leafy_hanging_nest",
+      "category": "hanging-seating",
+      "componentIndex": 2,
+      "description": "A round rope swing ringed with green leaves and filled with bright patchwork cushions.",
+      "id": "crk-s1-02-leafy-hanging-nest",
+      "label": "Leafy Hanging Nest",
+      "pixelSize": {
+        "height": 322,
+        "width": 250
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-02-leafy-hanging-nest.png",
+      "pngSha256": "948a7b979670aaa9bd2f95ed140204dfd9d0fc0e2a71797d24920828e251eed6",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        460,
+        0,
+        710,
+        322
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "swing",
+        "nest",
+        "rope",
+        "cushions"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_03_twilight_canopy_chair",
+      "category": "canopy-seating",
+      "componentIndex": 3,
+      "description": "A pink reading chair under a purple tree canopy wrapped in tiny flower lights.",
+      "id": "crk-s1-03-twilight-canopy-chair",
+      "label": "Twilight Canopy Chair",
+      "pixelSize": {
+        "height": 295,
+        "width": 260
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-03-twilight-canopy-chair.png",
+      "pngSha256": "3f5cb4c7ff68893bf76143eee3a6342abc3f7f7d96021a055d620b2985ead14b",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        728,
+        32,
+        988,
+        327
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "chair",
+        "canopy",
+        "reading",
+        "lights"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_04_orchard_lantern_tree",
+      "category": "lighting",
+      "componentIndex": 4,
+      "description": "A twisting wooden floor lamp carrying three warm peach fruit lanterns.",
+      "id": "crk-s1-04-orchard-lantern-tree",
+      "label": "Orchard Lantern Tree",
+      "pixelSize": {
+        "height": 361,
+        "width": 197
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-04-orchard-lantern-tree.png",
+      "pngSha256": "b6e11a2d0246190c9c5f03ac1e75b841570409c745c2307ddca260765c798b65",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        44,
+        384,
+        241,
+        745
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "lamp",
+        "tree",
+        "lantern",
+        "warm-light"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_05_cookie_flower_rug",
+      "category": "rugs",
+      "componentIndex": 5,
+      "description": "A low pink flower rug with stitched petals and a sprinkled cookie-like center.",
+      "id": "crk-s1-05-cookie-flower-rug",
+      "label": "Cookie Flower Rug",
+      "pixelSize": {
+        "height": 159,
+        "width": 308
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-05-cookie-flower-rug.png",
+      "pngSha256": "d6da90a897ef24481ebe352186b026931d167e6e3d4a7c794f4d08dd15a4ee2f",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        427,
+        338,
+        735,
+        497
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "rug",
+        "flower",
+        "pink",
+        "floor"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_06_celestial_branch_mobile",
+      "category": "hanging-decor",
+      "componentIndex": 6,
+      "description": "A leafy branch mobile with dangling star, moon, bud, and jewel ornaments.",
+      "id": "crk-s1-06-celestial-branch-mobile",
+      "label": "Celestial Branch Mobile",
+      "pixelSize": {
+        "height": 203,
+        "width": 244
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-06-celestial-branch-mobile.png",
+      "pngSha256": "6b50a97bc626e8e04bddf3e9e6355240a94ed3d2c422fb3ae0fba2d5936484f7",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        748,
+        307,
+        992,
+        510
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "mobile",
+        "moon",
+        "star",
+        "branch"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_07_patchwork_cottage_bookshelf",
+      "category": "shelving",
+      "componentIndex": 7,
+      "description": "A small house-shaped wooden bookshelf with a rosy roof and colorful books.",
+      "id": "crk-s1-07-patchwork-cottage-bookshelf",
+      "label": "Patchwork Cottage Bookshelf",
+      "pixelSize": {
+        "height": 275,
+        "width": 246
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-07-patchwork-cottage-bookshelf.png",
+      "pngSha256": "b108e327f1204fb4d551f84df3b422c09de157766f47c068c95965afe16723ee",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        217,
+        425,
+        463,
+        700
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "bookshelf",
+        "cottage",
+        "books",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_08_rainbow_craft_nook",
+      "category": "crafting",
+      "componentIndex": 8,
+      "description": "A connected craft ensemble with a round supply table, stump stools, and a stocked wooden cabinet.",
+      "id": "crk-s1-08-rainbow-craft-nook",
+      "label": "Rainbow Craft Nook",
+      "pixelSize": {
+        "height": 265,
+        "width": 346
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-08-rainbow-craft-nook.png",
+      "pngSha256": "2d14050e0ec3217b105c0225f26665bb41281d13d683d4f5cbec7b097ca4748c",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        460,
+        491,
+        806,
+        756
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "craft",
+        "table",
+        "cabinet",
+        "stools",
+        "ensemble"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_09_rosebud_wardrobe",
+      "category": "storage",
+      "componentIndex": 9,
+      "description": "A rounded pink wardrobe decorated with climbing mint vines and heart-shaped roses.",
+      "id": "crk-s1-09-rosebud-wardrobe",
+      "label": "Rosebud Wardrobe",
+      "pixelSize": {
+        "height": 250,
+        "width": 189
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-09-rosebud-wardrobe.png",
+      "pngSha256": "f707a940ece1367e44e363421ba43a31deab5fbcf1afa18796d50c1921a3e2dd",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        800,
+        496,
+        989,
+        746
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "wardrobe",
+        "closet",
+        "roses",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_10_garden_toy_chest",
+      "category": "storage",
+      "componentIndex": 10,
+      "description": "A compact teal-and-pink chest covered in bright flowers, leaves, and a sunflower clasp.",
+      "id": "crk-s1-10-garden-toy-chest",
+      "label": "Garden Toy Chest",
+      "pixelSize": {
+        "height": 225,
+        "width": 229
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-10-garden-toy-chest.png",
+      "pngSha256": "adc11613dc2504ab2d4eae3026251b99e983498a8322ef2a39538f4294c58ae7",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        35,
+        766,
+        264,
+        991
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "chest",
+        "toy-box",
+        "flowers",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_11_patchwork_cushion_tower",
+      "category": "seating",
+      "componentIndex": 11,
+      "description": "A tall stack of five mismatched floral floor cushions in coral, yellow, mint, peach, and lavender.",
+      "id": "crk-s1-11-patchwork-cushion-tower",
+      "label": "Patchwork Cushion Tower",
+      "pixelSize": {
+        "height": 293,
+        "width": 218
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-11-patchwork-cushion-tower.png",
+      "pngSha256": "c6fd19aba370952eb8ddfe5e7f2f9fb82be2e34b0cf7fc848e846eee4f337c3f",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        267,
+        705,
+        485,
+        998
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "cushions",
+        "stack",
+        "floor-seat",
+        "patchwork"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_12_candy_bloom_plant",
+      "category": "botanical-decor",
+      "componentIndex": 12,
+      "description": "A fantastical potted plant with curling blue leaves and swirled candy-colored blooms.",
+      "id": "crk-s1-12-candy-bloom-plant",
+      "label": "Candy Bloom Plant",
+      "pixelSize": {
+        "height": 230,
+        "width": 194
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-12-candy-bloom-plant.png",
+      "pngSha256": "8803f0d710107345c9126ec42eca9d2ebd3f819afd4e1084422fc71a6f016ae7",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        593,
+        743,
+        787,
+        973
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "plant",
+        "candy",
+        "flowers",
+        "decor"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_13_woodland_puppet_stage",
+      "category": "play-stages",
+      "componentIndex": 13,
+      "description": "A round stump stage with bunting, a pale backdrop, and two seated story dolls.",
+      "id": "crk-s1-13-woodland-puppet-stage",
+      "label": "Woodland Puppet Stage",
+      "pixelSize": {
+        "height": 263,
+        "width": 189
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-13-woodland-puppet-stage.png",
+      "pngSha256": "a028be10bc0f5579f5f5db7e868984b6bb7a6ff18e5ce5d3b774f1b1de9b176f",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        786,
+        730,
+        975,
+        993
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "stage",
+        "puppets",
+        "bunting",
+        "play"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s1_14_storybook_handcart",
+      "category": "carts",
+      "componentIndex": 14,
+      "description": "A tiny mint pull cart carrying upright books and rolled pink blankets.",
+      "id": "crk-s1-14-storybook-handcart",
+      "label": "Storybook Handcart",
+      "pixelSize": {
+        "height": 168,
+        "width": 145
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s1-14-storybook-handcart.png",
+      "pngSha256": "db1a9929903467f2bac236f0b47cea411d106176529c173680a1f876ebdad9e0",
+      "sheet": "sheet-01.jpg",
+      "sourceBounds": [
+        502,
+        821,
+        647,
+        989
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-01.jpg",
+      "sourceSha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+      "tags": [
+        "cart",
+        "books",
+        "blankets",
+        "wheels"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_01_blossom_tree_bed",
+      "category": "beds",
+      "componentIndex": 1,
+      "description": "A tree-grown bed with an overhead branch, hanging star ornaments, a floral quilt, and flower pillows.",
+      "id": "crk-s2-01-blossom-tree-bed",
+      "label": "Blossom Tree Bed",
+      "pixelSize": {
+        "height": 406,
+        "width": 369
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-01-blossom-tree-bed.png",
+      "pngSha256": "96907b85ab14143af6b7504881a56b60a272b6f81b909dee9f6e40451b9bdb52",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        31,
+        20,
+        400,
+        426
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "bed",
+        "tree",
+        "blossoms",
+        "patchwork"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_02_pillow_hanging_nest",
+      "category": "hanging-seating",
+      "componentIndex": 2,
+      "description": "A leaf-edged rope nest packed with coral, cream, violet, and blue cushions.",
+      "id": "crk-s2-02-pillow-hanging-nest",
+      "label": "Pillow Hanging Nest",
+      "pixelSize": {
+        "height": 306,
+        "width": 217
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-02-pillow-hanging-nest.png",
+      "pngSha256": "1e063adf533041796820e8cffd2c27b5af43c4ce2764ba41d921e8b9a0d0924d",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        419,
+        18,
+        636,
+        324
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "swing",
+        "nest",
+        "pillows",
+        "rope"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_03_peach_canopy_daybed",
+      "category": "canopy-seating",
+      "componentIndex": 3,
+      "description": "A low wooden daybed tucked beneath softly draped peach fabric and pastel pillows.",
+      "id": "crk-s2-03-peach-canopy-daybed",
+      "label": "Peach Canopy Daybed",
+      "pixelSize": {
+        "height": 292,
+        "width": 260
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-03-peach-canopy-daybed.png",
+      "pngSha256": "32bb74f7e02fc8a4f8c44d9884379f499d9e49c3902cb2b873df3ad78996a59d",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        677,
+        30,
+        937,
+        322
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "daybed",
+        "canopy",
+        "pillows",
+        "reading"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_04_triple_blossom_tree_lamp",
+      "category": "lighting",
+      "componentIndex": 4,
+      "description": "A branching wooden standing lamp with three glowing flower-shaped shades.",
+      "id": "crk-s2-04-triple-blossom-tree-lamp",
+      "label": "Triple Blossom Tree Lamp",
+      "pixelSize": {
+        "height": 282,
+        "width": 156
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-04-triple-blossom-tree-lamp.png",
+      "pngSha256": "990659f314b7406e275e733b6ac611c67eaea79d1deaa2e2d15254dbff78b302",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        651,
+        290,
+        807,
+        572
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "lamp",
+        "tree",
+        "flowers",
+        "standing"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_05_petal_cushion_rug",
+      "category": "rugs",
+      "componentIndex": 5,
+      "description": "Six plump petal cushions arranged into a soft pink-and-mint flower.",
+      "id": "crk-s2-05-petal-cushion-rug",
+      "label": "Petal Cushion Rug",
+      "pixelSize": {
+        "height": 188,
+        "width": 308
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-05-petal-cushion-rug.png",
+      "pngSha256": "7b5a868510c6b457dacc15e4c4fda56ca7d17fe46ff42e30cd90010b8faf2a25",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        359,
+        348,
+        667,
+        536
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "rug",
+        "cushions",
+        "flower",
+        "floor"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_06_moon_star_branch_mobile",
+      "category": "hanging-decor",
+      "componentIndex": 6,
+      "description": "A crooked branch suspending a crescent moon, stars, hearts, and colorful beads.",
+      "id": "crk-s2-06-moon-star-branch-mobile",
+      "label": "Moon and Star Branch Mobile",
+      "pixelSize": {
+        "height": 197,
+        "width": 184
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-06-moon-star-branch-mobile.png",
+      "pngSha256": "fa0cd9f2fde74b41e1a6f1aae87e86698bed6a5e54fd146e472cdb613f4c87c3",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        808,
+        300,
+        992,
+        497
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "mobile",
+        "moon",
+        "stars",
+        "hearts"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_07_storybook_cottage_shelf",
+      "category": "shelving",
+      "componentIndex": 7,
+      "description": "A narrow pink cottage bookcase with a purple shingled roof, books, drawers, and an arched cubby.",
+      "id": "crk-s2-07-storybook-cottage-shelf",
+      "label": "Storybook Cottage Shelf",
+      "pixelSize": {
+        "height": 295,
+        "width": 201
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-07-storybook-cottage-shelf.png",
+      "pngSha256": "0305262cce446aab1a1639879d62cf307b7831c36ae08557f200fa533e91dcd5",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        43,
+        424,
+        244,
+        719
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "bookshelf",
+        "cottage",
+        "pink",
+        "books"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_08_sweeping_branch_bookshelf",
+      "category": "shelving",
+      "componentIndex": 8,
+      "description": "An open wooden bookshelf shaped like a long curling tree branch.",
+      "id": "crk-s2-08-sweeping-branch-bookshelf",
+      "label": "Sweeping Branch Bookshelf",
+      "pixelSize": {
+        "height": 324,
+        "width": 225
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-08-sweeping-branch-bookshelf.png",
+      "pngSha256": "0aae1942f12b5f0c65d820b19c791a7834509d5213a9f5cffece8a7d92191815",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        244,
+        412,
+        469,
+        736
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "bookshelf",
+        "branch",
+        "books",
+        "display"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_09_bow_heart_wardrobe",
+      "category": "storage",
+      "componentIndex": 9,
+      "description": "An ornate pink wardrobe with heart windows, ribbon trim, and a large lavender bow.",
+      "id": "crk-s2-09-bow-heart-wardrobe",
+      "label": "Bow and Heart Wardrobe",
+      "pixelSize": {
+        "height": 256,
+        "width": 179
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-09-bow-heart-wardrobe.png",
+      "pngSha256": "9b9b73d4e3a8b501ffab71f6b8a91a904f19a7e6eb4a94557e732fb93463d491",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        800,
+        488,
+        979,
+        744
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "wardrobe",
+        "hearts",
+        "bow",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_10_painters_table",
+      "category": "crafting",
+      "componentIndex": 10,
+      "description": "A peach craft table covered with paints, brushes, palettes, paper, and a stump stool.",
+      "id": "crk-s2-10-painters-table",
+      "label": "Painter's Table",
+      "pixelSize": {
+        "height": 200,
+        "width": 282
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-10-painters-table.png",
+      "pngSha256": "766a3f7ba58005c1049ad06a70354f212b7e1f5789aef134f3c873c08b026cf2",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        492,
+        554,
+        774,
+        754
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "craft",
+        "painting",
+        "table",
+        "stool"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_11_mint_mushroom_stool",
+      "category": "seating",
+      "componentIndex": 11,
+      "description": "A tall mint mushroom seat with tiny pink floral decorations and a small purple companion mushroom.",
+      "id": "crk-s2-11-mint-mushroom-stool",
+      "label": "Mint Mushroom Stool",
+      "pixelSize": {
+        "height": 215,
+        "width": 154
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-11-mint-mushroom-stool.png",
+      "pngSha256": "1e3ddbf4064231255c392eae0e215ad64949d8a7f983d561718aa74c0fdb888c",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        38,
+        734,
+        192,
+        949
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "stool",
+        "mushroom",
+        "mint",
+        "seat"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_12_rose_cushion_stack",
+      "category": "seating",
+      "componentIndex": 12,
+      "description": "Three square floor cushions in mint, coral, and lavender with embroidered roses.",
+      "id": "crk-s2-12-rose-cushion-stack",
+      "label": "Rose Cushion Stack",
+      "pixelSize": {
+        "height": 225,
+        "width": 166
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-12-rose-cushion-stack.png",
+      "pngSha256": "304e3b2dc19255898f78d9b484ddab9cf07ed495bb288cbdc3437ad7a440241b",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        177,
+        748,
+        343,
+        973
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "cushions",
+        "stack",
+        "roses",
+        "floor-seat"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_13_mushroom_treasure_chest",
+      "category": "storage",
+      "componentIndex": 13,
+      "description": "A rosy decorated chest topped by a coral branch of red-and-white mushrooms.",
+      "id": "crk-s2-13-mushroom-treasure-chest",
+      "label": "Mushroom Treasure Chest",
+      "pixelSize": {
+        "height": 240,
+        "width": 181
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-13-mushroom-treasure-chest.png",
+      "pngSha256": "b030bae41eb70ead877e9ca7eb8f7b3c2efdb3b20a8985c319ca9ead45fd301d",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        352,
+        736,
+        533,
+        976
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "chest",
+        "mushrooms",
+        "treasure",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_14_rolling_story_garden",
+      "category": "carts",
+      "componentIndex": 14,
+      "description": "A whimsical book cart on purple wheels, crowded with stories, flowers, and small character dolls.",
+      "id": "crk-s2-14-rolling-story-garden",
+      "label": "Rolling Story Garden",
+      "pixelSize": {
+        "height": 248,
+        "width": 187
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-14-rolling-story-garden.png",
+      "pngSha256": "c58c2d4def2f9049c82d527266af30e17ad8689e75edcc99e4db76853144fb40",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        557,
+        753,
+        744,
+        1001
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "cart",
+        "books",
+        "flowers",
+        "wheels"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s2_15_creature_puppet_stage",
+      "category": "play-stages",
+      "componentIndex": 15,
+      "description": "A bunting-topped stump stage displaying a friendly pastel creature puppet.",
+      "id": "crk-s2-15-creature-puppet-stage",
+      "label": "Creature Puppet Stage",
+      "pixelSize": {
+        "height": 268,
+        "width": 219
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s2-15-creature-puppet-stage.png",
+      "pngSha256": "e7985a0d6e159bbd99f0c0bacb20987af4337fc0e4f4d2165684f1d4d7f38548",
+      "sheet": "sheet-02.jpg",
+      "sourceBounds": [
+        763,
+        729,
+        982,
+        997
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-02.jpg",
+      "sourceSha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+      "tags": [
+        "stage",
+        "creature",
+        "puppet",
+        "bunting"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_01_treehouse_loft_bed",
+      "category": "beds",
+      "componentIndex": 1,
+      "description": "A branch-framed loft bed with a patchwork top bunk, ladder, and curtained play nook below.",
+      "id": "crk-s3-01-treehouse-loft-bed",
+      "label": "Treehouse Loft Bed",
+      "pixelSize": {
+        "height": 350,
+        "width": 369
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-01-treehouse-loft-bed.png",
+      "pngSha256": "5eb106d09f727d237050c9f22f2099be35242aa605fe92ad80f9e477efba730e",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        20,
+        12,
+        389,
+        362
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "bed",
+        "loft",
+        "treehouse",
+        "play-nook"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_02_pastel_hanging_nest",
+      "category": "hanging-seating",
+      "componentIndex": 2,
+      "description": "A rope-suspended circular nest filled with mint, peach, lavender, and coral cushions.",
+      "id": "crk-s3-02-pastel-hanging-nest",
+      "label": "Pastel Hanging Nest",
+      "pixelSize": {
+        "height": 360,
+        "width": 223
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-02-pastel-hanging-nest.png",
+      "pngSha256": "fcfa48f9c752713f1b0bcb3a6b7593a92b3cc1da5723c42852bbc2f71a39513c",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        393,
+        17,
+        616,
+        377
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "swing",
+        "nest",
+        "pastel",
+        "cushions"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_03_pink_pavilion_floor_lamp",
+      "category": "lighting",
+      "componentIndex": 3,
+      "description": "A tall branch lamp with a pointed pink pavilion shade and dangling gold charms.",
+      "id": "crk-s3-03-pink-pavilion-floor-lamp",
+      "label": "Pink Pavilion Floor Lamp",
+      "pixelSize": {
+        "height": 387,
+        "width": 142
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-03-pink-pavilion-floor-lamp.png",
+      "pngSha256": "180d7508266c838055c44141400c71fc65c944efaa3ff8e45af0023e2235eb55",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        613,
+        23,
+        755,
+        410
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "lamp",
+        "pavilion",
+        "pink",
+        "standing"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_04_quilt_canopy_daybed",
+      "category": "canopy-seating",
+      "componentIndex": 4,
+      "description": "A lavender daybed beneath a cream fabric canopy with quilts, pillows, and flower lights.",
+      "id": "crk-s3-04-quilt-canopy-daybed",
+      "label": "Quilt Canopy Daybed",
+      "pixelSize": {
+        "height": 256,
+        "width": 247
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-04-quilt-canopy-daybed.png",
+      "pngSha256": "7dabbb9ad9bb55e10f2a17e7f9a2864cd49cd543608ab7c321dec2c946b15f62",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        757,
+        28,
+        1004,
+        284
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "daybed",
+        "canopy",
+        "quilt",
+        "lights"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_05_blossom_compass_rug",
+      "category": "rugs",
+      "componentIndex": 5,
+      "description": "A coral flower rug with cream pointed petals and a purple circular center.",
+      "id": "crk-s3-05-blossom-compass-rug",
+      "label": "Blossom Compass Rug",
+      "pixelSize": {
+        "height": 164,
+        "width": 239
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-05-blossom-compass-rug.png",
+      "pngSha256": "b4d12aaa8d12c84d702bb59f30388c9f0d0ac19c9f634aefb21ed2e0fea1df37",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        745,
+        281,
+        984,
+        445
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "rug",
+        "flower",
+        "coral",
+        "floor"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_06_patchwork_flower_rug",
+      "category": "rugs",
+      "componentIndex": 6,
+      "description": "A soft multicolor flower rug made from stitched lavender, mint, blue, and pink petals.",
+      "id": "crk-s3-06-patchwork-flower-rug",
+      "label": "Patchwork Flower Rug",
+      "pixelSize": {
+        "height": 157,
+        "width": 235
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-06-patchwork-flower-rug.png",
+      "pngSha256": "acfebf974d59c3ab1871fbd9e8b20e890500edefe913dd36503d7fb6fe553d9a",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        31,
+        359,
+        266,
+        516
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "rug",
+        "patchwork",
+        "flower",
+        "pastel"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_07_glass_orb_lantern_tree",
+      "category": "lighting",
+      "componentIndex": 7,
+      "description": "A slender wooden lamp tree holding a warm glowing orb in a glass pendant.",
+      "id": "crk-s3-07-glass-orb-lantern-tree",
+      "label": "Glass Orb Lantern Tree",
+      "pixelSize": {
+        "height": 202,
+        "width": 123
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-07-glass-orb-lantern-tree.png",
+      "pngSha256": "995c37809977ee7ea20497d5be9f2639f3a879c70b2fbb7aa171c890f135e299",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        259,
+        331,
+        382,
+        533
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "lamp",
+        "tree",
+        "orb",
+        "pendant"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_08_star_moon_pendant_pair",
+      "category": "hanging-decor",
+      "componentIndex": 8,
+      "description": "A golden star and crescent moon pair with small glowing drops.",
+      "id": "crk-s3-08-star-moon-pendant-pair",
+      "label": "Star and Moon Pendant Pair",
+      "pixelSize": {
+        "height": 146,
+        "width": 74
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-08-star-moon-pendant-pair.png",
+      "pngSha256": "4aae05c68f59c4427d112dea2070729be4cc1d38f2478cc8fa4f4ee55faf6fe1",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        360,
+        345,
+        434,
+        491
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "pendant",
+        "star",
+        "moon",
+        "celestial"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_09_bead_and_bell_mobile",
+      "category": "hanging-decor",
+      "componentIndex": 9,
+      "description": "Two twig hangers carrying strings of pastel beads, leaves, bells, and flower charms.",
+      "id": "crk-s3-09-bead-and-bell-mobile",
+      "label": "Bead and Bell Mobile",
+      "pixelSize": {
+        "height": 235,
+        "width": 126
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-09-bead-and-bell-mobile.png",
+      "pngSha256": "71767084c3ccd41f418aa5a40aa0f001fb6f514159bbfb1f7fabc36154604771",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        456,
+        376,
+        582,
+        611
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "mobile",
+        "beads",
+        "bells",
+        "twigs"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_10_mint_cottage_bookcase",
+      "category": "shelving",
+      "componentIndex": 10,
+      "description": "A mint-roofed cottage bookcase with open shelves, books, berries, and a tiny drawer.",
+      "id": "crk-s3-10-mint-cottage-bookcase",
+      "label": "Mint Cottage Bookcase",
+      "pixelSize": {
+        "height": 268,
+        "width": 206
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-10-mint-cottage-bookcase.png",
+      "pngSha256": "7cb49eb73dd7a446826f0a03fc8540912d809d8f2e8fee697cd10b1bd915d47b",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        576,
+        422,
+        782,
+        690
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "bookcase",
+        "cottage",
+        "mint",
+        "books"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_11_sculpted_rose_wardrobe",
+      "category": "storage",
+      "componentIndex": 11,
+      "description": "A tall mint wardrobe with a thick coral roof, heart handles, and painted roses.",
+      "id": "crk-s3-11-sculpted-rose-wardrobe",
+      "label": "Sculpted Rose Wardrobe",
+      "pixelSize": {
+        "height": 340,
+        "width": 222
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-11-sculpted-rose-wardrobe.png",
+      "pngSha256": "9cd87e97a2a72d33b2497dbe0c49e0d30d823f7d21841972a14e4445dafb177f",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        779,
+        446,
+        1001,
+        786
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "wardrobe",
+        "roses",
+        "hearts",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_12_curved_low_bookshelf",
+      "category": "shelving",
+      "componentIndex": 12,
+      "description": "A low cream-and-wood shelf with a sweeping branch frame, books, and green cubbies.",
+      "id": "crk-s3-12-curved-low-bookshelf",
+      "label": "Curved Low Bookshelf",
+      "pixelSize": {
+        "height": 243,
+        "width": 236
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-12-curved-low-bookshelf.png",
+      "pngSha256": "27c9617c2d20aad3a3ca758cde8dae6752df358fb7a2c6ee6fcc32a5e0a817ab",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        24,
+        497,
+        260,
+        740
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "bookshelf",
+        "low-shelf",
+        "branch",
+        "cubbies"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_13_flower_cup_lamp",
+      "category": "lighting",
+      "componentIndex": 13,
+      "description": "A tiny peach cup lamp holding a soft yellow flower-shaped light.",
+      "id": "crk-s3-13-flower-cup-lamp",
+      "label": "Flower Cup Lamp",
+      "pixelSize": {
+        "height": 92,
+        "width": 75
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-13-flower-cup-lamp.png",
+      "pngSha256": "d12144d8cca7f6af75978def01120b17d55a33790230b1ff412b7dc175182978",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        270,
+        538,
+        345,
+        630
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "lamp",
+        "flower",
+        "tabletop",
+        "small"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_14_crooked_branch_nightlight",
+      "category": "lighting",
+      "componentIndex": 14,
+      "description": "A small bent branch stand with a pale pink hanging nightlight.",
+      "id": "crk-s3-14-crooked-branch-nightlight",
+      "label": "Crooked Branch Nightlight",
+      "pixelSize": {
+        "height": 171,
+        "width": 158
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-14-crooked-branch-nightlight.png",
+      "pngSha256": "077679c70a24d81c759f16318c71e6a41849f39ca19c1d0c47c3036b85d8049c",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        284,
+        498,
+        442,
+        669
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "nightlight",
+        "branch",
+        "pink",
+        "tabletop"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_15_ribbon_art_table",
+      "category": "crafting",
+      "componentIndex": 15,
+      "description": "A low wooden art table draped in ribbon-edged cloth and covered with paints, brushes, and paper.",
+      "id": "crk-s3-15-ribbon-art-table",
+      "label": "Ribbon Art Table",
+      "pixelSize": {
+        "height": 191,
+        "width": 220
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-15-ribbon-art-table.png",
+      "pngSha256": "9fed7949f760b5e839c3cb9d871d8c216ab38746c29a75e0f9cf18c92c417524",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        405,
+        616,
+        625,
+        807
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "craft",
+        "art",
+        "table",
+        "paint"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_16_round_cushion_stack",
+      "category": "seating",
+      "componentIndex": 16,
+      "description": "Three plump round floor cushions in peach, purple, and mint with quilted floral details.",
+      "id": "crk-s3-16-round-cushion-stack",
+      "label": "Round Cushion Stack",
+      "pixelSize": {
+        "height": 250,
+        "width": 212
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-16-round-cushion-stack.png",
+      "pngSha256": "9ea83b07db8b3b51135057854c9ca0554cf2e120ee70293396017025cc843df7",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        31,
+        750,
+        243,
+        1000
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "cushions",
+        "round",
+        "stack",
+        "floor-seat"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_17_mushroom_and_stump_stools",
+      "category": "seating",
+      "componentIndex": 17,
+      "description": "A paired red mushroom stool and plain cut-log stool for a tiny activity area.",
+      "id": "crk-s3-17-mushroom-and-stump-stools",
+      "label": "Mushroom and Stump Stools",
+      "pixelSize": {
+        "height": 122,
+        "width": 165
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-17-mushroom-and-stump-stools.png",
+      "pngSha256": "b53aaba55964b6c9c612da520514ecf4e6730924c3abea03be96186aa0ad4a14",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        227,
+        692,
+        392,
+        814
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "stools",
+        "mushroom",
+        "stump",
+        "seating"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_18_sugar_vine_plant",
+      "category": "botanical-decor",
+      "componentIndex": 18,
+      "description": "A potted fantasy plant with curling mint vines, striped buds, and candy-colored fruit.",
+      "id": "crk-s3-18-sugar-vine-plant",
+      "label": "Sugar Vine Plant",
+      "pixelSize": {
+        "height": 284,
+        "width": 185
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-18-sugar-vine-plant.png",
+      "pngSha256": "cb28fabd183881eaa6677d087734afc203aa901987b8036aa995c8008e32b6f1",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        609,
+        710,
+        794,
+        994
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "plant",
+        "vines",
+        "candy",
+        "decor"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_19_book_display_stage",
+      "category": "play-stages",
+      "componentIndex": 19,
+      "description": "A round stump platform with twig posts, bunting, and one featured standing book.",
+      "id": "crk-s3-19-book-display-stage",
+      "label": "Book Display Stage",
+      "pixelSize": {
+        "height": 253,
+        "width": 217
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-19-book-display-stage.png",
+      "pngSha256": "83f300de7ba21f49c195552c975d3b560d43cf1ab32b738e838e34ba3df53b6a",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        773,
+        753,
+        990,
+        1006
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "stage",
+        "book",
+        "bunting",
+        "display"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_20_painted_treasure_chest",
+      "category": "storage",
+      "componentIndex": 20,
+      "description": "A coral-and-purple domed chest covered in hand-painted flowers and curling vines.",
+      "id": "crk-s3-20-painted-treasure-chest",
+      "label": "Painted Treasure Chest",
+      "pixelSize": {
+        "height": 186,
+        "width": 174
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-20-painted-treasure-chest.png",
+      "pngSha256": "b0337f4d31fe200cb5368f5326dea2fadcfad354795a3c54ad1219aa01151bdb",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        260,
+        823,
+        434,
+        1009
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "chest",
+        "painted",
+        "flowers",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s3_21_library_wagon",
+      "category": "carts",
+      "componentIndex": 21,
+      "description": "A mint four-wheel wagon filled with books and two small story dolls.",
+      "id": "crk-s3-21-library-wagon",
+      "label": "Library Wagon",
+      "pixelSize": {
+        "height": 190,
+        "width": 165
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s3-21-library-wagon.png",
+      "pngSha256": "ce719cf0c71fe4e09ee01ec426e6d88f23c8e7f26f958800ec0cac714c4ed5bc",
+      "sheet": "sheet-03.jpg",
+      "sourceBounds": [
+        449,
+        815,
+        614,
+        1005
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-03.jpg",
+      "sourceSha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+      "tags": [
+        "wagon",
+        "books",
+        "dolls",
+        "wheels"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_01_flower_bunk_bed",
+      "category": "beds",
+      "componentIndex": 1,
+      "description": "A dark branch bunk bed with two patchwork levels, oversized pillows, flowers, and a ladder.",
+      "id": "crk-s4-01-flower-bunk-bed",
+      "label": "Flower Bunk Bed",
+      "pixelSize": {
+        "height": 367,
+        "width": 423
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-01-flower-bunk-bed.png",
+      "pngSha256": "1c5c6913ccbc7166a4879bb712943b79f22dc9918c4c2b21b974629ae3e82938",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        26,
+        14,
+        449,
+        381
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "bed",
+        "bunk",
+        "branches",
+        "flowers"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 0.984772,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_02_patchwork_hanging_nest",
+      "category": "hanging-seating",
+      "componentIndex": 2,
+      "description": "A teal-edged rope nest overflowing with round pastel patchwork pillows.",
+      "id": "crk-s4-02-patchwork-hanging-nest",
+      "label": "Patchwork Hanging Nest",
+      "pixelSize": {
+        "height": 304,
+        "width": 287
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-02-patchwork-hanging-nest.png",
+      "pngSha256": "90b449e460fe3762dc29365ec76a02a55c4aef7d6eae8b916d30d663c6d8f845",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        447,
+        0,
+        734,
+        304
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "swing",
+        "nest",
+        "patchwork",
+        "pillows"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_03_pink_canopy_nook",
+      "category": "canopy-seating",
+      "componentIndex": 3,
+      "description": "A compact mint daybed inside a softly draped pink canopy trimmed with flower lights.",
+      "id": "crk-s4-03-pink-canopy-nook",
+      "label": "Pink Canopy Nook",
+      "pixelSize": {
+        "height": 238,
+        "width": 250
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-03-pink-canopy-nook.png",
+      "pngSha256": "f8f33579740b17ccdab8b56cc604d9ffdbaef4e0bd55e6e39dc0bd3de0a52cc1",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        746,
+        26,
+        996,
+        264
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "nook",
+        "canopy",
+        "daybed",
+        "lights"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_04_pumpkin_branch_lamp",
+      "category": "lighting",
+      "componentIndex": 4,
+      "description": "A horizontal branch fixture with three warm ribbed lanterns and jewel drops.",
+      "id": "crk-s4-04-pumpkin-branch-lamp",
+      "label": "Pumpkin Branch Lamp",
+      "pixelSize": {
+        "height": 217,
+        "width": 188
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-04-pumpkin-branch-lamp.png",
+      "pngSha256": "9914a0217ceabf513452017240a552aa114a45e683d6665cbd6cf8e2cfd08a3a",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        649,
+        246,
+        837,
+        463
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "lamp",
+        "branch",
+        "lanterns",
+        "warm-light"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_05_mushroom_table_lamp",
+      "category": "lighting",
+      "componentIndex": 5,
+      "description": "A wooden tabletop lamp with a peach mushroom shade, mint cap, and bead fringe.",
+      "id": "crk-s4-05-mushroom-table-lamp",
+      "label": "Mushroom Table Lamp",
+      "pixelSize": {
+        "height": 239,
+        "width": 152
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-05-mushroom-table-lamp.png",
+      "pngSha256": "c519e00f8eca35702316506d93679c695e7fd11d8a0971110a30354b0004e09e",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        848,
+        280,
+        1000,
+        519
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "lamp",
+        "mushroom",
+        "tabletop",
+        "fringe"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_06_crescent_tree_floor_lamp",
+      "category": "lighting",
+      "componentIndex": 6,
+      "description": "A curling tree lamp hung with a glowing moon orb, star, crescent, bead, and cloud charms.",
+      "id": "crk-s4-06-crescent-tree-floor-lamp",
+      "label": "Crescent Tree Floor Lamp",
+      "pixelSize": {
+        "height": 305,
+        "width": 202
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-06-crescent-tree-floor-lamp.png",
+      "pngSha256": "6510e2ce82e80cd8f6c81eef9b44633e858fb3b490f91dcc89be9beac4c5bfbc",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        25,
+        374,
+        227,
+        679
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "lamp",
+        "tree",
+        "moon",
+        "celestial"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_07_pink_petal_rug",
+      "category": "rugs",
+      "componentIndex": 7,
+      "description": "A broad stitched flower rug with layered coral and blush petals around a lavender center.",
+      "id": "crk-s4-07-pink-petal-rug",
+      "label": "Pink Petal Rug",
+      "pixelSize": {
+        "height": 177,
+        "width": 320
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-07-pink-petal-rug.png",
+      "pngSha256": "fa3c18655e73b4e82e1401e0f233ba03fa93c194ea19f31a9e1de4bb969fb503",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        300,
+        312,
+        620,
+        489
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "rug",
+        "flower",
+        "pink",
+        "stitched"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_08_wave_front_bookshelf",
+      "category": "shelving",
+      "componentIndex": 8,
+      "description": "A cream display shelf with a curling wave-shaped wooden frame and open cubbies.",
+      "id": "crk-s4-08-wave-front-bookshelf",
+      "label": "Wave-Front Bookshelf",
+      "pixelSize": {
+        "height": 189,
+        "width": 203
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-08-wave-front-bookshelf.png",
+      "pngSha256": "7d7e1049737fe084d03800438b1f03796e70a4039872da4c45939ec074279742",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        241,
+        489,
+        444,
+        678
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "bookshelf",
+        "waves",
+        "display",
+        "cubbies"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_09_heart_panel_wardrobe",
+      "category": "storage",
+      "componentIndex": 9,
+      "description": "A sculpted lavender wardrobe with cream floral doors and matching heart handles.",
+      "id": "crk-s4-09-heart-panel-wardrobe",
+      "label": "Heart Panel Wardrobe",
+      "pixelSize": {
+        "height": 257,
+        "width": 192
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-09-heart-panel-wardrobe.png",
+      "pngSha256": "89fb8aab21d7a8e63d999b337d6b6d10b47c6d12435c0c035042da318c4591ba",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        592,
+        452,
+        784,
+        709
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "wardrobe",
+        "hearts",
+        "floral",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_10_rolled_blanket_cabinet",
+      "category": "storage",
+      "componentIndex": 10,
+      "description": "A small curled wooden cabinet with an open front full of folded and rolled blankets.",
+      "id": "crk-s4-10-rolled-blanket-cabinet",
+      "label": "Rolled Blanket Cabinet",
+      "pixelSize": {
+        "height": 182,
+        "width": 158
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-10-rolled-blanket-cabinet.png",
+      "pngSha256": "30945aa2001bde773fc6e79df5b3541a3f565304b29f32b54e7003a8351d8b0a",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        418,
+        573,
+        576,
+        755
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "cabinet",
+        "blankets",
+        "linen",
+        "storage"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_11_mushroom_table_set",
+      "category": "seating",
+      "componentIndex": 11,
+      "description": "A flower-topped mushroom table grouped with one stump seat and two tiny mushroom stools.",
+      "id": "crk-s4-11-mushroom-table-set",
+      "label": "Mushroom Table Set",
+      "pixelSize": {
+        "height": 195,
+        "width": 164
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-11-mushroom-table-set.png",
+      "pngSha256": "95431026afd01ba810d2f150f3c782db87d0bfce2a263d7798d151c1648db42e",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        809,
+        542,
+        973,
+        737
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "table",
+        "stools",
+        "mushrooms",
+        "seating"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_12_curling_craft_workbench",
+      "category": "crafting",
+      "componentIndex": 12,
+      "description": "A low live-edge craft bench with paints, thread, fabric, and softly curled wooden legs.",
+      "id": "crk-s4-12-curling-craft-workbench",
+      "label": "Curling Craft Workbench",
+      "pixelSize": {
+        "height": 155,
+        "width": 192
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-12-curling-craft-workbench.png",
+      "pngSha256": "0d3fe6d7fdd587de7e0b63dc883f001e0471214100c4f46e4aeaebce12c7761b",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        245,
+        662,
+        437,
+        817
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "craft",
+        "workbench",
+        "paint",
+        "fabric"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_13_ruffled_cushion_tower",
+      "category": "seating",
+      "componentIndex": 13,
+      "description": "Four oversized square floor cushions stacked in violet, mint, cream, and rose.",
+      "id": "crk-s4-13-ruffled-cushion-tower",
+      "label": "Ruffled Cushion Tower",
+      "pixelSize": {
+        "height": 286,
+        "width": 237
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-13-ruffled-cushion-tower.png",
+      "pngSha256": "25027be995b35185a5db0612f1323bee7b81923d7152ceceff5f90c89bc7b777",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        34,
+        707,
+        271,
+        993
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "cushions",
+        "stack",
+        "ruffles",
+        "floor-seat"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_14_story_garden_cart",
+      "category": "carts",
+      "componentIndex": 14,
+      "description": "A wooden pull cart carrying books, tiny hooded story dolls, and a curling fantasy plant.",
+      "id": "crk-s4-14-story-garden-cart",
+      "label": "Story Garden Cart",
+      "pixelSize": {
+        "height": 297,
+        "width": 233
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-14-story-garden-cart.png",
+      "pngSha256": "5387df58241d3599191df7fada8c4f32a8e5fb2329b1dcb361e2637dab4197eb",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        504,
+        699,
+        737,
+        996
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "cart",
+        "books",
+        "dolls",
+        "plant"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_15_framed_art_stage",
+      "category": "play-stages",
+      "componentIndex": 15,
+      "description": "A natural stump platform with bunting and a featured framed flower artwork.",
+      "id": "crk-s4-15-framed-art-stage",
+      "label": "Framed Art Stage",
+      "pixelSize": {
+        "height": 283,
+        "width": 250
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-15-framed-art-stage.png",
+      "pngSha256": "8c1608296c12bb40676cde6cc56f1fb2074b2b41bb95c976c5c1a5f037c29787",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        749,
+        708,
+        999,
+        991
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "stage",
+        "art",
+        "frame",
+        "bunting"
+      ]
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required"
+      },
+      "assetCatalogName": "cozy_room_s4_16_teal_treasure_chest",
+      "category": "storage",
+      "componentIndex": 16,
+      "description": "A compact teal chest with coral trim, painted flowers, and a small front latch.",
+      "id": "crk-s4-16-teal-treasure-chest",
+      "label": "Teal Treasure Chest",
+      "pixelSize": {
+        "height": 153,
+        "width": 176
+      },
+      "pngPath": "AssetSources/CozyRoomKit/extracted/crk-s4-16-teal-treasure-chest.png",
+      "pngSha256": "5cf9dd30d4e40a8ccdd24cfc37d7d574b13dddedfbc4a743c7519e3b1ba3f443",
+      "sheet": "sheet-04.jpg",
+      "sourceBounds": [
+        294,
+        823,
+        470,
+        976
+      ],
+      "sourcePath": "AssetSources/CozyRoomKit/sources/sheet-04.jpg",
+      "sourceSha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+      "tags": [
+        "chest",
+        "teal",
+        "flowers",
+        "storage"
+      ]
+    }
+  ],
+  "categoryCounts": {
+    "beds": 4,
+    "botanical-decor": 2,
+    "canopy-seating": 4,
+    "carts": 4,
+    "crafting": 4,
+    "hanging-decor": 4,
+    "hanging-seating": 4,
+    "lighting": 9,
+    "play-stages": 4,
+    "rugs": 5,
+    "seating": 7,
+    "shelving": 6,
+    "storage": 9
+  },
+  "collectionId": "cozy-room-kit",
+  "pipelineVersion": 1,
+  "schemaVersion": 1
+}

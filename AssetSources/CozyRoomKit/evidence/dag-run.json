@@ -1,0 +1,2800 @@
+{
+  "edges": [
+    {
+      "from": "010.verify-sources",
+      "to": "020.detect-edges"
+    },
+    {
+      "from": "020.detect-edges",
+      "to": "030.extract-alpha"
+    },
+    {
+      "from": "030.extract-alpha",
+      "to": "040.integrate-xcassets"
+    },
+    {
+      "from": "030.extract-alpha",
+      "to": "050.write-catalog"
+    },
+    {
+      "from": "030.extract-alpha",
+      "to": "060.render-review"
+    },
+    {
+      "from": "040.integrate-xcassets",
+      "to": "070.validate"
+    },
+    {
+      "from": "050.write-catalog",
+      "to": "070.validate"
+    },
+    {
+      "from": "060.render-review",
+      "to": "070.validate"
+    }
+  ],
+  "nodes": [
+    {
+      "dependencies": [],
+      "inputDigest": "3ed26385ca189e4b40c03707c3aecbfb1dd2751f8d136adb676aff03f49e87d5",
+      "node": "010.verify-sources",
+      "output": {
+        "sources": [
+          {
+            "height": 1024,
+            "sha256": "69e2e062bd067758bd6456f9c824422ed7527f08409b6e07cb4e555911861c14",
+            "sheet": "sheet-01.jpg",
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "sha256": "1fa0b85e86d00984ef0e21a91cb510a1aa2e377da392229e83917bfc291581d5",
+            "sheet": "sheet-02.jpg",
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "sha256": "5d4f2611eb41e28930237c4e91e8ea6de8b833e737cf280b149ba82f53eda8be",
+            "sheet": "sheet-03.jpg",
+            "width": 1024
+          },
+          {
+            "height": 1024,
+            "sha256": "ef841c350cca76ad3a1a294f6e0fe43380c33408242864b4009457a7e5f14c20",
+            "sheet": "sheet-04.jpg",
+            "width": 1024
+          }
+        ]
+      },
+      "status": "completed"
+    },
+    {
+      "dependencies": [
+        "010.verify-sources"
+      ],
+      "inputDigest": "f8e3ebbc9c762b0b813148fb61eebcd11e866c09e2f61ecdc452c2da70464abf",
+      "node": "020.detect-edges",
+      "output": {
+        "sheets": [
+          {
+            "backgroundRGB": [
+              250,
+              244,
+              251
+            ],
+            "componentCount": 14,
+            "components": [
+              {
+                "componentIndex": 1,
+                "edgeBounds": [
+                  41,
+                  26,
+                  452,
+                  407
+                ],
+                "foregroundArea": 102670
+              },
+              {
+                "componentIndex": 2,
+                "edgeBounds": [
+                  468,
+                  0,
+                  702,
+                  314
+                ],
+                "foregroundArea": 32296
+              },
+              {
+                "componentIndex": 3,
+                "edgeBounds": [
+                  736,
+                  40,
+                  980,
+                  319
+                ],
+                "foregroundArea": 47352
+              },
+              {
+                "componentIndex": 4,
+                "edgeBounds": [
+                  52,
+                  392,
+                  233,
+                  737
+                ],
+                "foregroundArea": 26949
+              },
+              {
+                "componentIndex": 5,
+                "edgeBounds": [
+                  435,
+                  346,
+                  727,
+                  489
+                ],
+                "foregroundArea": 30292
+              },
+              {
+                "componentIndex": 6,
+                "edgeBounds": [
+                  756,
+                  315,
+                  984,
+                  502
+                ],
+                "foregroundArea": 16356
+              },
+              {
+                "componentIndex": 7,
+                "edgeBounds": [
+                  225,
+                  433,
+                  455,
+                  692
+                ],
+                "foregroundArea": 38314
+              },
+              {
+                "componentIndex": 8,
+                "edgeBounds": [
+                  468,
+                  499,
+                  798,
+                  748
+                ],
+                "foregroundArea": 45098
+              },
+              {
+                "componentIndex": 9,
+                "edgeBounds": [
+                  808,
+                  504,
+                  981,
+                  738
+                ],
+                "foregroundArea": 30124
+              },
+              {
+                "componentIndex": 10,
+                "edgeBounds": [
+                  43,
+                  774,
+                  256,
+                  983
+                ],
+                "foregroundArea": 31882
+              },
+              {
+                "componentIndex": 11,
+                "edgeBounds": [
+                  275,
+                  713,
+                  477,
+                  990
+                ],
+                "foregroundArea": 39079
+              },
+              {
+                "componentIndex": 12,
+                "edgeBounds": [
+                  601,
+                  751,
+                  779,
+                  965
+                ],
+                "foregroundArea": 21738
+              },
+              {
+                "componentIndex": 13,
+                "edgeBounds": [
+                  794,
+                  738,
+                  967,
+                  985
+                ],
+                "foregroundArea": 30985
+              },
+              {
+                "componentIndex": 14,
+                "edgeBounds": [
+                  510,
+                  829,
+                  639,
+                  981
+                ],
+                "foregroundArea": 13071
+              }
+            ],
+            "reviewPath": "AssetSources/CozyRoomKit/evidence/edge-labels/sheet-01.png",
+            "reviewSha256": "a5cd36dc9cd9d09c9428303a978a9f53d0f29de4055df8a848dd53539cbc122f",
+            "sheet": "sheet-01.jpg"
+          },
+          {
+            "backgroundRGB": [
+              254,
+              255,
+              255
+            ],
+            "componentCount": 15,
+            "components": [
+              {
+                "componentIndex": 1,
+                "edgeBounds": [
+                  39,
+                  28,
+                  392,
+                  418
+                ],
+                "foregroundArea": 89208
+              },
+              {
+                "componentIndex": 2,
+                "edgeBounds": [
+                  427,
+                  26,
+                  628,
+                  316
+                ],
+                "foregroundArea": 28371
+              },
+              {
+                "componentIndex": 3,
+                "edgeBounds": [
+                  685,
+                  38,
+                  929,
+                  314
+                ],
+                "foregroundArea": 44959
+              },
+              {
+                "componentIndex": 4,
+                "edgeBounds": [
+                  659,
+                  298,
+                  799,
+                  564
+                ],
+                "foregroundArea": 17779
+              },
+              {
+                "componentIndex": 5,
+                "edgeBounds": [
+                  367,
+                  356,
+                  659,
+                  528
+                ],
+                "foregroundArea": 37869
+              },
+              {
+                "componentIndex": 6,
+                "edgeBounds": [
+                  816,
+                  308,
+                  984,
+                  489
+                ],
+                "foregroundArea": 12611
+              },
+              {
+                "componentIndex": 7,
+                "edgeBounds": [
+                  51,
+                  432,
+                  236,
+                  711
+                ],
+                "foregroundArea": 36324
+              },
+              {
+                "componentIndex": 8,
+                "edgeBounds": [
+                  252,
+                  420,
+                  461,
+                  728
+                ],
+                "foregroundArea": 34010
+              },
+              {
+                "componentIndex": 9,
+                "edgeBounds": [
+                  808,
+                  496,
+                  971,
+                  736
+                ],
+                "foregroundArea": 29947
+              },
+              {
+                "componentIndex": 10,
+                "edgeBounds": [
+                  500,
+                  562,
+                  766,
+                  746
+                ],
+                "foregroundArea": 27655
+              },
+              {
+                "componentIndex": 11,
+                "edgeBounds": [
+                  46,
+                  742,
+                  184,
+                  941
+                ],
+                "foregroundArea": 17261
+              },
+              {
+                "componentIndex": 12,
+                "edgeBounds": [
+                  185,
+                  756,
+                  335,
+                  965
+                ],
+                "foregroundArea": 24148
+              },
+              {
+                "componentIndex": 13,
+                "edgeBounds": [
+                  360,
+                  744,
+                  525,
+                  968
+                ],
+                "foregroundArea": 23589
+              },
+              {
+                "componentIndex": 14,
+                "edgeBounds": [
+                  565,
+                  761,
+                  736,
+                  993
+                ],
+                "foregroundArea": 26539
+              },
+              {
+                "componentIndex": 15,
+                "edgeBounds": [
+                  771,
+                  737,
+                  974,
+                  989
+                ],
+                "foregroundArea": 30758
+              }
+            ],
+            "reviewPath": "AssetSources/CozyRoomKit/evidence/edge-labels/sheet-02.png",
+            "reviewSha256": "7e27d074952c5a1855c3dcd4299a400c95581be91610e8ce4ae7a79114efa1b9",
+            "sheet": "sheet-02.jpg"
+          },
+          {
+            "backgroundRGB": [
+              254,
+              250,
+              247
+            ],
+            "componentCount": 21,
+            "components": [
+              {
+                "componentIndex": 1,
+                "edgeBounds": [
+                  28,
+                  20,
+                  381,
+                  354
+                ],
+                "foregroundArea": 72691
+              },
+              {
+                "componentIndex": 2,
+                "edgeBounds": [
+                  401,
+                  25,
+                  608,
+                  369
+                ],
+                "foregroundArea": 32761
+              },
+              {
+                "componentIndex": 3,
+                "edgeBounds": [
+                  621,
+                  31,
+                  747,
+                  402
+                ],
+                "foregroundArea": 15804
+              },
+              {
+                "componentIndex": 4,
+                "edgeBounds": [
+                  765,
+                  36,
+                  996,
+                  276
+                ],
+                "foregroundArea": 37242
+              },
+              {
+                "componentIndex": 5,
+                "edgeBounds": [
+                  753,
+                  289,
+                  976,
+                  437
+                ],
+                "foregroundArea": 24492
+              },
+              {
+                "componentIndex": 6,
+                "edgeBounds": [
+                  39,
+                  367,
+                  258,
+                  508
+                ],
+                "foregroundArea": 23592
+              },
+              {
+                "componentIndex": 7,
+                "edgeBounds": [
+                  267,
+                  339,
+                  374,
+                  525
+                ],
+                "foregroundArea": 8139
+              },
+              {
+                "componentIndex": 8,
+                "edgeBounds": [
+                  368,
+                  353,
+                  426,
+                  483
+                ],
+                "foregroundArea": 3878
+              },
+              {
+                "componentIndex": 9,
+                "edgeBounds": [
+                  464,
+                  384,
+                  574,
+                  603
+                ],
+                "foregroundArea": 9788
+              },
+              {
+                "componentIndex": 10,
+                "edgeBounds": [
+                  584,
+                  430,
+                  774,
+                  682
+                ],
+                "foregroundArea": 32510
+              },
+              {
+                "componentIndex": 11,
+                "edgeBounds": [
+                  787,
+                  454,
+                  993,
+                  778
+                ],
+                "foregroundArea": 50065
+              },
+              {
+                "componentIndex": 12,
+                "edgeBounds": [
+                  32,
+                  505,
+                  252,
+                  732
+                ],
+                "foregroundArea": 30105
+              },
+              {
+                "componentIndex": 13,
+                "edgeBounds": [
+                  278,
+                  546,
+                  337,
+                  622
+                ],
+                "foregroundArea": 2811
+              },
+              {
+                "componentIndex": 14,
+                "edgeBounds": [
+                  292,
+                  506,
+                  434,
+                  661
+                ],
+                "foregroundArea": 7286
+              },
+              {
+                "componentIndex": 15,
+                "edgeBounds": [
+                  413,
+                  624,
+                  617,
+                  799
+                ],
+                "foregroundArea": 19997
+              },
+              {
+                "componentIndex": 16,
+                "edgeBounds": [
+                  39,
+                  758,
+                  235,
+                  992
+                ],
+                "foregroundArea": 33527
+              },
+              {
+                "componentIndex": 17,
+                "edgeBounds": [
+                  235,
+                  700,
+                  384,
+                  806
+                ],
+                "foregroundArea": 10964
+              },
+              {
+                "componentIndex": 18,
+                "edgeBounds": [
+                  617,
+                  718,
+                  786,
+                  986
+                ],
+                "foregroundArea": 25144
+              },
+              {
+                "componentIndex": 19,
+                "edgeBounds": [
+                  781,
+                  761,
+                  982,
+                  998
+                ],
+                "foregroundArea": 26035
+              },
+              {
+                "componentIndex": 20,
+                "edgeBounds": [
+                  268,
+                  831,
+                  426,
+                  1001
+                ],
+                "foregroundArea": 19129
+              },
+              {
+                "componentIndex": 21,
+                "edgeBounds": [
+                  457,
+                  823,
+                  606,
+                  997
+                ],
+                "foregroundArea": 15790
+              }
+            ],
+            "reviewPath": "AssetSources/CozyRoomKit/evidence/edge-labels/sheet-03.png",
+            "reviewSha256": "80031f94d2232f55823274b71d6b8e3f0889a6b46c1fb967223a9bb6c3003aa5",
+            "sheet": "sheet-03.jpg"
+          },
+          {
+            "backgroundRGB": [
+              254,
+              254,
+              254
+            ],
+            "componentCount": 16,
+            "components": [
+              {
+                "componentIndex": 1,
+                "edgeBounds": [
+                  34,
+                  22,
+                  441,
+                  373
+                ],
+                "foregroundArea": 87968
+              },
+              {
+                "componentIndex": 2,
+                "edgeBounds": [
+                  455,
+                  0,
+                  726,
+                  296
+                ],
+                "foregroundArea": 36870
+              },
+              {
+                "componentIndex": 3,
+                "edgeBounds": [
+                  754,
+                  34,
+                  988,
+                  256
+                ],
+                "foregroundArea": 34694
+              },
+              {
+                "componentIndex": 4,
+                "edgeBounds": [
+                  657,
+                  254,
+                  829,
+                  455
+                ],
+                "foregroundArea": 12269
+              },
+              {
+                "componentIndex": 5,
+                "edgeBounds": [
+                  856,
+                  288,
+                  992,
+                  511
+                ],
+                "foregroundArea": 16734
+              },
+              {
+                "componentIndex": 6,
+                "edgeBounds": [
+                  33,
+                  382,
+                  219,
+                  671
+                ],
+                "foregroundArea": 24178
+              },
+              {
+                "componentIndex": 7,
+                "edgeBounds": [
+                  308,
+                  320,
+                  612,
+                  481
+                ],
+                "foregroundArea": 36903
+              },
+              {
+                "componentIndex": 8,
+                "edgeBounds": [
+                  249,
+                  497,
+                  436,
+                  670
+                ],
+                "foregroundArea": 21018
+              },
+              {
+                "componentIndex": 9,
+                "edgeBounds": [
+                  600,
+                  460,
+                  776,
+                  701
+                ],
+                "foregroundArea": 32394
+              },
+              {
+                "componentIndex": 10,
+                "edgeBounds": [
+                  426,
+                  581,
+                  568,
+                  747
+                ],
+                "foregroundArea": 16642
+              },
+              {
+                "componentIndex": 11,
+                "edgeBounds": [
+                  817,
+                  550,
+                  965,
+                  729
+                ],
+                "foregroundArea": 18649
+              },
+              {
+                "componentIndex": 12,
+                "edgeBounds": [
+                  253,
+                  670,
+                  429,
+                  809
+                ],
+                "foregroundArea": 14527
+              },
+              {
+                "componentIndex": 13,
+                "edgeBounds": [
+                  42,
+                  715,
+                  263,
+                  985
+                ],
+                "foregroundArea": 42059
+              },
+              {
+                "componentIndex": 14,
+                "edgeBounds": [
+                  512,
+                  707,
+                  729,
+                  988
+                ],
+                "foregroundArea": 34973
+              },
+              {
+                "componentIndex": 15,
+                "edgeBounds": [
+                  757,
+                  716,
+                  991,
+                  983
+                ],
+                "foregroundArea": 32860
+              },
+              {
+                "componentIndex": 16,
+                "edgeBounds": [
+                  302,
+                  831,
+                  462,
+                  968
+                ],
+                "foregroundArea": 15993
+              }
+            ],
+            "reviewPath": "AssetSources/CozyRoomKit/evidence/edge-labels/sheet-04.png",
+            "reviewSha256": "5776840bab42889d1848ef3ea0acb89f0256501e51f50e7eb4a303571e7a32b8",
+            "sheet": "sheet-04.jpg"
+          }
+        ]
+      },
+      "status": "completed"
+    },
+    {
+      "dependencies": [
+        "020.detect-edges"
+      ],
+      "inputDigest": "472399133445c616cc8c10463a196ba817f7be21ab926b61f2286eeafba9c30e",
+      "node": "030.extract-alpha",
+      "output": {
+        "assetCount": 66,
+        "assets": [
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              41,
+              26,
+              452,
+              407
+            ],
+            "foregroundArea": 102670,
+            "height": 397,
+            "id": "crk-s1-01-forest-canopy-bed",
+            "opaquePixels": 98870,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-01-forest-canopy-bed.png",
+            "sha256": "4f90ba3ff3bbb45f61cdf3f413e6d71b7058fcbe3d41027df378fafd464d3367",
+            "sourceBounds": [
+              33,
+              18,
+              460,
+              415
+            ],
+            "visiblePixels": 102943,
+            "width": 427
+          },
+          {
+            "borderTransparentRatio": 0.990385,
+            "edgeBounds": [
+              468,
+              0,
+              702,
+              314
+            ],
+            "foregroundArea": 32296,
+            "height": 322,
+            "id": "crk-s1-02-leafy-hanging-nest",
+            "opaquePixels": 29576,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-02-leafy-hanging-nest.png",
+            "sha256": "948a7b979670aaa9bd2f95ed140204dfd9d0fc0e2a71797d24920828e251eed6",
+            "sourceBounds": [
+              460,
+              0,
+              710,
+              322
+            ],
+            "visiblePixels": 32855,
+            "width": 250
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              736,
+              40,
+              980,
+              319
+            ],
+            "foregroundArea": 47352,
+            "height": 295,
+            "id": "crk-s1-03-twilight-canopy-chair",
+            "opaquePixels": 45985,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-03-twilight-canopy-chair.png",
+            "sha256": "3f5cb4c7ff68893bf76143eee3a6342abc3f7f7d96021a055d620b2985ead14b",
+            "sourceBounds": [
+              728,
+              32,
+              988,
+              327
+            ],
+            "visiblePixels": 47353,
+            "width": 260
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              52,
+              392,
+              233,
+              737
+            ],
+            "foregroundArea": 26949,
+            "height": 361,
+            "id": "crk-s1-04-orchard-lantern-tree",
+            "opaquePixels": 24438,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-04-orchard-lantern-tree.png",
+            "sha256": "b6e11a2d0246190c9c5f03ac1e75b841570409c745c2307ddca260765c798b65",
+            "sourceBounds": [
+              44,
+              384,
+              241,
+              745
+            ],
+            "visiblePixels": 26959,
+            "width": 197
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              435,
+              346,
+              727,
+              489
+            ],
+            "foregroundArea": 30292,
+            "height": 159,
+            "id": "crk-s1-05-cookie-flower-rug",
+            "opaquePixels": 29354,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-05-cookie-flower-rug.png",
+            "sha256": "d6da90a897ef24481ebe352186b026931d167e6e3d4a7c794f4d08dd15a4ee2f",
+            "sourceBounds": [
+              427,
+              338,
+              735,
+              497
+            ],
+            "visiblePixels": 30292,
+            "width": 308
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              756,
+              315,
+              984,
+              502
+            ],
+            "foregroundArea": 16356,
+            "height": 203,
+            "id": "crk-s1-06-celestial-branch-mobile",
+            "opaquePixels": 13919,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-06-celestial-branch-mobile.png",
+            "sha256": "6b50a97bc626e8e04bddf3e9e6355240a94ed3d2c422fb3ae0fba2d5936484f7",
+            "sourceBounds": [
+              748,
+              307,
+              992,
+              510
+            ],
+            "visiblePixels": 16497,
+            "width": 244
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              225,
+              433,
+              455,
+              692
+            ],
+            "foregroundArea": 38314,
+            "height": 275,
+            "id": "crk-s1-07-patchwork-cottage-bookshelf",
+            "opaquePixels": 37152,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-07-patchwork-cottage-bookshelf.png",
+            "sha256": "b108e327f1204fb4d551f84df3b422c09de157766f47c068c95965afe16723ee",
+            "sourceBounds": [
+              217,
+              425,
+              463,
+              700
+            ],
+            "visiblePixels": 38314,
+            "width": 246
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              468,
+              499,
+              798,
+              748
+            ],
+            "foregroundArea": 45098,
+            "height": 265,
+            "id": "crk-s1-08-rainbow-craft-nook",
+            "opaquePixels": 42527,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-08-rainbow-craft-nook.png",
+            "sha256": "2d14050e0ec3217b105c0225f26665bb41281d13d683d4f5cbec7b097ca4748c",
+            "sourceBounds": [
+              460,
+              491,
+              806,
+              756
+            ],
+            "visiblePixels": 45111,
+            "width": 346
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              808,
+              504,
+              981,
+              738
+            ],
+            "foregroundArea": 30124,
+            "height": 250,
+            "id": "crk-s1-09-rosebud-wardrobe",
+            "opaquePixels": 29198,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-09-rosebud-wardrobe.png",
+            "sha256": "f707a940ece1367e44e363421ba43a31deab5fbcf1afa18796d50c1921a3e2dd",
+            "sourceBounds": [
+              800,
+              496,
+              989,
+              746
+            ],
+            "visiblePixels": 30124,
+            "width": 189
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              43,
+              774,
+              256,
+              983
+            ],
+            "foregroundArea": 31882,
+            "height": 225,
+            "id": "crk-s1-10-garden-toy-chest",
+            "opaquePixels": 30789,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-10-garden-toy-chest.png",
+            "sha256": "adc11613dc2504ab2d4eae3026251b99e983498a8322ef2a39538f4294c58ae7",
+            "sourceBounds": [
+              35,
+              766,
+              264,
+              991
+            ],
+            "visiblePixels": 31882,
+            "width": 229
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              275,
+              713,
+              477,
+              990
+            ],
+            "foregroundArea": 39079,
+            "height": 293,
+            "id": "crk-s1-11-patchwork-cushion-tower",
+            "opaquePixels": 37588,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-11-patchwork-cushion-tower.png",
+            "sha256": "c6fd19aba370952eb8ddfe5e7f2f9fb82be2e34b0cf7fc848e846eee4f337c3f",
+            "sourceBounds": [
+              267,
+              705,
+              485,
+              998
+            ],
+            "visiblePixels": 39147,
+            "width": 218
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              601,
+              751,
+              779,
+              965
+            ],
+            "foregroundArea": 21738,
+            "height": 230,
+            "id": "crk-s1-12-candy-bloom-plant",
+            "opaquePixels": 19895,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-12-candy-bloom-plant.png",
+            "sha256": "8803f0d710107345c9126ec42eca9d2ebd3f819afd4e1084422fc71a6f016ae7",
+            "sourceBounds": [
+              593,
+              743,
+              787,
+              973
+            ],
+            "visiblePixels": 21744,
+            "width": 194
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              794,
+              738,
+              967,
+              985
+            ],
+            "foregroundArea": 30985,
+            "height": 263,
+            "id": "crk-s1-13-woodland-puppet-stage",
+            "opaquePixels": 29779,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-13-woodland-puppet-stage.png",
+            "sha256": "a028be10bc0f5579f5f5db7e868984b6bb7a6ff18e5ce5d3b774f1b1de9b176f",
+            "sourceBounds": [
+              786,
+              730,
+              975,
+              993
+            ],
+            "visiblePixels": 30996,
+            "width": 189
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              510,
+              829,
+              639,
+              981
+            ],
+            "foregroundArea": 13071,
+            "height": 168,
+            "id": "crk-s1-14-storybook-handcart",
+            "opaquePixels": 12083,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s1-14-storybook-handcart.png",
+            "sha256": "db1a9929903467f2bac236f0b47cea411d106176529c173680a1f876ebdad9e0",
+            "sourceBounds": [
+              502,
+              821,
+              647,
+              989
+            ],
+            "visiblePixels": 13178,
+            "width": 145
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              39,
+              28,
+              392,
+              418
+            ],
+            "foregroundArea": 89208,
+            "height": 406,
+            "id": "crk-s2-01-blossom-tree-bed",
+            "opaquePixels": 83896,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-01-blossom-tree-bed.png",
+            "sha256": "96907b85ab14143af6b7504881a56b60a272b6f81b909dee9f6e40451b9bdb52",
+            "sourceBounds": [
+              31,
+              20,
+              400,
+              426
+            ],
+            "visiblePixels": 89594,
+            "width": 369
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              427,
+              26,
+              628,
+              316
+            ],
+            "foregroundArea": 28371,
+            "height": 306,
+            "id": "crk-s2-02-pillow-hanging-nest",
+            "opaquePixels": 26737,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-02-pillow-hanging-nest.png",
+            "sha256": "1e063adf533041796820e8cffd2c27b5af43c4ce2764ba41d921e8b9a0d0924d",
+            "sourceBounds": [
+              419,
+              18,
+              636,
+              324
+            ],
+            "visiblePixels": 28371,
+            "width": 217
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              685,
+              38,
+              929,
+              314
+            ],
+            "foregroundArea": 44959,
+            "height": 292,
+            "id": "crk-s2-03-peach-canopy-daybed",
+            "opaquePixels": 43502,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-03-peach-canopy-daybed.png",
+            "sha256": "32bb74f7e02fc8a4f8c44d9884379f499d9e49c3902cb2b873df3ad78996a59d",
+            "sourceBounds": [
+              677,
+              30,
+              937,
+              322
+            ],
+            "visiblePixels": 44964,
+            "width": 260
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              659,
+              298,
+              799,
+              564
+            ],
+            "foregroundArea": 17779,
+            "height": 282,
+            "id": "crk-s2-04-triple-blossom-tree-lamp",
+            "opaquePixels": 15161,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-04-triple-blossom-tree-lamp.png",
+            "sha256": "990659f314b7406e275e733b6ac611c67eaea79d1deaa2e2d15254dbff78b302",
+            "sourceBounds": [
+              651,
+              290,
+              807,
+              572
+            ],
+            "visiblePixels": 17876,
+            "width": 156
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              367,
+              356,
+              659,
+              528
+            ],
+            "foregroundArea": 37869,
+            "height": 188,
+            "id": "crk-s2-05-petal-cushion-rug",
+            "opaquePixels": 36826,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-05-petal-cushion-rug.png",
+            "sha256": "7b5a868510c6b457dacc15e4c4fda56ca7d17fe46ff42e30cd90010b8faf2a25",
+            "sourceBounds": [
+              359,
+              348,
+              667,
+              536
+            ],
+            "visiblePixels": 37869,
+            "width": 308
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              816,
+              308,
+              984,
+              489
+            ],
+            "foregroundArea": 12611,
+            "height": 197,
+            "id": "crk-s2-06-moon-star-branch-mobile",
+            "opaquePixels": 9867,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-06-moon-star-branch-mobile.png",
+            "sha256": "fa0cd9f2fde74b41e1a6f1aae87e86698bed6a5e54fd146e472cdb613f4c87c3",
+            "sourceBounds": [
+              808,
+              300,
+              992,
+              497
+            ],
+            "visiblePixels": 13114,
+            "width": 184
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              51,
+              432,
+              236,
+              711
+            ],
+            "foregroundArea": 36324,
+            "height": 295,
+            "id": "crk-s2-07-storybook-cottage-shelf",
+            "opaquePixels": 34899,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-07-storybook-cottage-shelf.png",
+            "sha256": "0305262cce446aab1a1639879d62cf307b7831c36ae08557f200fa533e91dcd5",
+            "sourceBounds": [
+              43,
+              424,
+              244,
+              719
+            ],
+            "visiblePixels": 36328,
+            "width": 201
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              252,
+              420,
+              461,
+              728
+            ],
+            "foregroundArea": 34010,
+            "height": 324,
+            "id": "crk-s2-08-sweeping-branch-bookshelf",
+            "opaquePixels": 32184,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-08-sweeping-branch-bookshelf.png",
+            "sha256": "0aae1942f12b5f0c65d820b19c791a7834509d5213a9f5cffece8a7d92191815",
+            "sourceBounds": [
+              244,
+              412,
+              469,
+              736
+            ],
+            "visiblePixels": 34011,
+            "width": 225
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              808,
+              496,
+              971,
+              736
+            ],
+            "foregroundArea": 29947,
+            "height": 256,
+            "id": "crk-s2-09-bow-heart-wardrobe",
+            "opaquePixels": 29006,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-09-bow-heart-wardrobe.png",
+            "sha256": "9b9b73d4e3a8b501ffab71f6b8a91a904f19a7e6eb4a94557e732fb93463d491",
+            "sourceBounds": [
+              800,
+              488,
+              979,
+              744
+            ],
+            "visiblePixels": 29947,
+            "width": 179
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              500,
+              562,
+              766,
+              746
+            ],
+            "foregroundArea": 27655,
+            "height": 200,
+            "id": "crk-s2-10-painters-table",
+            "opaquePixels": 25814,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-10-painters-table.png",
+            "sha256": "766a3f7ba58005c1049ad06a70354f212b7e1f5789aef134f3c873c08b026cf2",
+            "sourceBounds": [
+              492,
+              554,
+              774,
+              754
+            ],
+            "visiblePixels": 28074,
+            "width": 282
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              46,
+              742,
+              184,
+              941
+            ],
+            "foregroundArea": 17261,
+            "height": 215,
+            "id": "crk-s2-11-mint-mushroom-stool",
+            "opaquePixels": 15944,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-11-mint-mushroom-stool.png",
+            "sha256": "1e3ddbf4064231255c392eae0e215ad64949d8a7f983d561718aa74c0fdb888c",
+            "sourceBounds": [
+              38,
+              734,
+              192,
+              949
+            ],
+            "visiblePixels": 17375,
+            "width": 154
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              185,
+              756,
+              335,
+              965
+            ],
+            "foregroundArea": 24148,
+            "height": 225,
+            "id": "crk-s2-12-rose-cushion-stack",
+            "opaquePixels": 23229,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-12-rose-cushion-stack.png",
+            "sha256": "304e3b2dc19255898f78d9b484ddab9cf07ed495bb288cbdc3437ad7a440241b",
+            "sourceBounds": [
+              177,
+              748,
+              343,
+              973
+            ],
+            "visiblePixels": 24148,
+            "width": 166
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              360,
+              744,
+              525,
+              968
+            ],
+            "foregroundArea": 23589,
+            "height": 240,
+            "id": "crk-s2-13-mushroom-treasure-chest",
+            "opaquePixels": 22105,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-13-mushroom-treasure-chest.png",
+            "sha256": "b030bae41eb70ead877e9ca7eb8f7b3c2efdb3b20a8985c319ca9ead45fd301d",
+            "sourceBounds": [
+              352,
+              736,
+              533,
+              976
+            ],
+            "visiblePixels": 23589,
+            "width": 181
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              565,
+              761,
+              736,
+              993
+            ],
+            "foregroundArea": 26539,
+            "height": 248,
+            "id": "crk-s2-14-rolling-story-garden",
+            "opaquePixels": 25228,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-14-rolling-story-garden.png",
+            "sha256": "c58c2d4def2f9049c82d527266af30e17ad8689e75edcc99e4db76853144fb40",
+            "sourceBounds": [
+              557,
+              753,
+              744,
+              1001
+            ],
+            "visiblePixels": 26542,
+            "width": 187
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              771,
+              737,
+              974,
+              989
+            ],
+            "foregroundArea": 30758,
+            "height": 268,
+            "id": "crk-s2-15-creature-puppet-stage",
+            "opaquePixels": 28128,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s2-15-creature-puppet-stage.png",
+            "sha256": "e7985a0d6e159bbd99f0c0bacb20987af4337fc0e4f4d2165684f1d4d7f38548",
+            "sourceBounds": [
+              763,
+              729,
+              982,
+              997
+            ],
+            "visiblePixels": 30876,
+            "width": 219
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              28,
+              20,
+              381,
+              354
+            ],
+            "foregroundArea": 72691,
+            "height": 350,
+            "id": "crk-s3-01-treehouse-loft-bed",
+            "opaquePixels": 70031,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-01-treehouse-loft-bed.png",
+            "sha256": "5eb106d09f727d237050c9f22f2099be35242aa605fe92ad80f9e477efba730e",
+            "sourceBounds": [
+              20,
+              12,
+              389,
+              362
+            ],
+            "visiblePixels": 72698,
+            "width": 369
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              401,
+              25,
+              608,
+              369
+            ],
+            "foregroundArea": 32761,
+            "height": 360,
+            "id": "crk-s3-02-pastel-hanging-nest",
+            "opaquePixels": 29339,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-02-pastel-hanging-nest.png",
+            "sha256": "fcfa48f9c752713f1b0bcb3a6b7593a92b3cc1da5723c42852bbc2f71a39513c",
+            "sourceBounds": [
+              393,
+              17,
+              616,
+              377
+            ],
+            "visiblePixels": 32888,
+            "width": 223
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              621,
+              31,
+              747,
+              402
+            ],
+            "foregroundArea": 15804,
+            "height": 387,
+            "id": "crk-s3-03-pink-pavilion-floor-lamp",
+            "opaquePixels": 13724,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-03-pink-pavilion-floor-lamp.png",
+            "sha256": "180d7508266c838055c44141400c71fc65c944efaa3ff8e45af0023e2235eb55",
+            "sourceBounds": [
+              613,
+              23,
+              755,
+              410
+            ],
+            "visiblePixels": 15862,
+            "width": 142
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              765,
+              36,
+              996,
+              276
+            ],
+            "foregroundArea": 37242,
+            "height": 256,
+            "id": "crk-s3-04-quilt-canopy-daybed",
+            "opaquePixels": 35786,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-04-quilt-canopy-daybed.png",
+            "sha256": "7dabbb9ad9bb55e10f2a17e7f9a2864cd49cd543608ab7c321dec2c946b15f62",
+            "sourceBounds": [
+              757,
+              28,
+              1004,
+              284
+            ],
+            "visiblePixels": 37319,
+            "width": 247
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              753,
+              289,
+              976,
+              437
+            ],
+            "foregroundArea": 24492,
+            "height": 164,
+            "id": "crk-s3-05-blossom-compass-rug",
+            "opaquePixels": 23629,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-05-blossom-compass-rug.png",
+            "sha256": "b4d12aaa8d12c84d702bb59f30388c9f0d0ac19c9f634aefb21ed2e0fea1df37",
+            "sourceBounds": [
+              745,
+              281,
+              984,
+              445
+            ],
+            "visiblePixels": 24492,
+            "width": 239
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              39,
+              367,
+              258,
+              508
+            ],
+            "foregroundArea": 23592,
+            "height": 157,
+            "id": "crk-s3-06-patchwork-flower-rug",
+            "opaquePixels": 22800,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-06-patchwork-flower-rug.png",
+            "sha256": "acfebf974d59c3ab1871fbd9e8b20e890500edefe913dd36503d7fb6fe553d9a",
+            "sourceBounds": [
+              31,
+              359,
+              266,
+              516
+            ],
+            "visiblePixels": 23592,
+            "width": 235
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              267,
+              339,
+              374,
+              525
+            ],
+            "foregroundArea": 8139,
+            "height": 202,
+            "id": "crk-s3-07-glass-orb-lantern-tree",
+            "opaquePixels": 6485,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-07-glass-orb-lantern-tree.png",
+            "sha256": "995c37809977ee7ea20497d5be9f2639f3a879c70b2fbb7aa171c890f135e299",
+            "sourceBounds": [
+              259,
+              331,
+              382,
+              533
+            ],
+            "visiblePixels": 8723,
+            "width": 123
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              368,
+              353,
+              426,
+              483
+            ],
+            "foregroundArea": 3878,
+            "height": 146,
+            "id": "crk-s3-08-star-moon-pendant-pair",
+            "opaquePixels": 3150,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-08-star-moon-pendant-pair.png",
+            "sha256": "4aae05c68f59c4427d112dea2070729be4cc1d38f2478cc8fa4f4ee55faf6fe1",
+            "sourceBounds": [
+              360,
+              345,
+              434,
+              491
+            ],
+            "visiblePixels": 3881,
+            "width": 74
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              464,
+              384,
+              574,
+              603
+            ],
+            "foregroundArea": 9788,
+            "height": 235,
+            "id": "crk-s3-09-bead-and-bell-mobile",
+            "opaquePixels": 7705,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-09-bead-and-bell-mobile.png",
+            "sha256": "71767084c3ccd41f418aa5a40aa0f001fb6f514159bbfb1f7fabc36154604771",
+            "sourceBounds": [
+              456,
+              376,
+              582,
+              611
+            ],
+            "visiblePixels": 9803,
+            "width": 126
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              584,
+              430,
+              774,
+              682
+            ],
+            "foregroundArea": 32510,
+            "height": 268,
+            "id": "crk-s3-10-mint-cottage-bookcase",
+            "opaquePixels": 31569,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-10-mint-cottage-bookcase.png",
+            "sha256": "7cb49eb73dd7a446826f0a03fc8540912d809d8f2e8fee697cd10b1bd915d47b",
+            "sourceBounds": [
+              576,
+              422,
+              782,
+              690
+            ],
+            "visiblePixels": 32510,
+            "width": 206
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              787,
+              454,
+              993,
+              778
+            ],
+            "foregroundArea": 50065,
+            "height": 340,
+            "id": "crk-s3-11-sculpted-rose-wardrobe",
+            "opaquePixels": 48792,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-11-sculpted-rose-wardrobe.png",
+            "sha256": "9cd87e97a2a72d33b2497dbe0c49e0d30d823f7d21841972a14e4445dafb177f",
+            "sourceBounds": [
+              779,
+              446,
+              1001,
+              786
+            ],
+            "visiblePixels": 50065,
+            "width": 222
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              32,
+              505,
+              252,
+              732
+            ],
+            "foregroundArea": 30105,
+            "height": 243,
+            "id": "crk-s3-12-curved-low-bookshelf",
+            "opaquePixels": 28237,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-12-curved-low-bookshelf.png",
+            "sha256": "27c9617c2d20aad3a3ca758cde8dae6752df358fb7a2c6ee6fcc32a5e0a817ab",
+            "sourceBounds": [
+              24,
+              497,
+              260,
+              740
+            ],
+            "visiblePixels": 30106,
+            "width": 236
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              278,
+              546,
+              337,
+              622
+            ],
+            "foregroundArea": 2811,
+            "height": 92,
+            "id": "crk-s3-13-flower-cup-lamp",
+            "opaquePixels": 2465,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-13-flower-cup-lamp.png",
+            "sha256": "d12144d8cca7f6af75978def01120b17d55a33790230b1ff412b7dc175182978",
+            "sourceBounds": [
+              270,
+              538,
+              345,
+              630
+            ],
+            "visiblePixels": 2813,
+            "width": 75
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              292,
+              506,
+              434,
+              661
+            ],
+            "foregroundArea": 7286,
+            "height": 171,
+            "id": "crk-s3-14-crooked-branch-nightlight",
+            "opaquePixels": 6425,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-14-crooked-branch-nightlight.png",
+            "sha256": "077679c70a24d81c759f16318c71e6a41849f39ca19c1d0c47c3036b85d8049c",
+            "sourceBounds": [
+              284,
+              498,
+              442,
+              669
+            ],
+            "visiblePixels": 7299,
+            "width": 158
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              413,
+              624,
+              617,
+              799
+            ],
+            "foregroundArea": 19997,
+            "height": 191,
+            "id": "crk-s3-15-ribbon-art-table",
+            "opaquePixels": 18204,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-15-ribbon-art-table.png",
+            "sha256": "9fed7949f760b5e839c3cb9d871d8c216ab38746c29a75e0f9cf18c92c417524",
+            "sourceBounds": [
+              405,
+              616,
+              625,
+              807
+            ],
+            "visiblePixels": 20445,
+            "width": 220
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              39,
+              758,
+              235,
+              992
+            ],
+            "foregroundArea": 33527,
+            "height": 250,
+            "id": "crk-s3-16-round-cushion-stack",
+            "opaquePixels": 32545,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-16-round-cushion-stack.png",
+            "sha256": "9ea83b07db8b3b51135057854c9ca0554cf2e120ee70293396017025cc843df7",
+            "sourceBounds": [
+              31,
+              750,
+              243,
+              1000
+            ],
+            "visiblePixels": 33527,
+            "width": 212
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              235,
+              700,
+              384,
+              806
+            ],
+            "foregroundArea": 10964,
+            "height": 122,
+            "id": "crk-s3-17-mushroom-and-stump-stools",
+            "opaquePixels": 10099,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-17-mushroom-and-stump-stools.png",
+            "sha256": "b53aaba55964b6c9c612da520514ecf4e6730924c3abea03be96186aa0ad4a14",
+            "sourceBounds": [
+              227,
+              692,
+              392,
+              814
+            ],
+            "visiblePixels": 10964,
+            "width": 165
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              617,
+              718,
+              786,
+              986
+            ],
+            "foregroundArea": 25144,
+            "height": 284,
+            "id": "crk-s3-18-sugar-vine-plant",
+            "opaquePixels": 22785,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-18-sugar-vine-plant.png",
+            "sha256": "cb28fabd183881eaa6677d087734afc203aa901987b8036aa995c8008e32b6f1",
+            "sourceBounds": [
+              609,
+              710,
+              794,
+              994
+            ],
+            "visiblePixels": 25234,
+            "width": 185
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              781,
+              761,
+              982,
+              998
+            ],
+            "foregroundArea": 26035,
+            "height": 253,
+            "id": "crk-s3-19-book-display-stage",
+            "opaquePixels": 23962,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-19-book-display-stage.png",
+            "sha256": "83f300de7ba21f49c195552c975d3b560d43cf1ab32b738e838e34ba3df53b6a",
+            "sourceBounds": [
+              773,
+              753,
+              990,
+              1006
+            ],
+            "visiblePixels": 26036,
+            "width": 217
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              268,
+              831,
+              426,
+              1001
+            ],
+            "foregroundArea": 19129,
+            "height": 186,
+            "id": "crk-s3-20-painted-treasure-chest",
+            "opaquePixels": 18445,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-20-painted-treasure-chest.png",
+            "sha256": "b0337f4d31fe200cb5368f5326dea2fadcfad354795a3c54ad1219aa01151bdb",
+            "sourceBounds": [
+              260,
+              823,
+              434,
+              1009
+            ],
+            "visiblePixels": 19129,
+            "width": 174
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              457,
+              823,
+              606,
+              997
+            ],
+            "foregroundArea": 15790,
+            "height": 190,
+            "id": "crk-s3-21-library-wagon",
+            "opaquePixels": 14681,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s3-21-library-wagon.png",
+            "sha256": "ce719cf0c71fe4e09ee01ec426e6d88f23c8e7f26f958800ec0cac714c4ed5bc",
+            "sourceBounds": [
+              449,
+              815,
+              614,
+              1005
+            ],
+            "visiblePixels": 15790,
+            "width": 165
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              34,
+              22,
+              441,
+              373
+            ],
+            "foregroundArea": 87968,
+            "height": 367,
+            "id": "crk-s4-01-flower-bunk-bed",
+            "opaquePixels": 84400,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-01-flower-bunk-bed.png",
+            "sha256": "1c5c6913ccbc7166a4879bb712943b79f22dc9918c4c2b21b974629ae3e82938",
+            "sourceBounds": [
+              26,
+              14,
+              449,
+              381
+            ],
+            "visiblePixels": 88071,
+            "width": 423
+          },
+          {
+            "borderTransparentRatio": 0.984772,
+            "edgeBounds": [
+              455,
+              0,
+              726,
+              296
+            ],
+            "foregroundArea": 36870,
+            "height": 304,
+            "id": "crk-s4-02-patchwork-hanging-nest",
+            "opaquePixels": 33669,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-02-patchwork-hanging-nest.png",
+            "sha256": "90b449e460fe3762dc29365ec76a02a55c4aef7d6eae8b916d30d663c6d8f845",
+            "sourceBounds": [
+              447,
+              0,
+              734,
+              304
+            ],
+            "visiblePixels": 36977,
+            "width": 287
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              754,
+              34,
+              988,
+              256
+            ],
+            "foregroundArea": 34694,
+            "height": 238,
+            "id": "crk-s4-03-pink-canopy-nook",
+            "opaquePixels": 33709,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-03-pink-canopy-nook.png",
+            "sha256": "f8f33579740b17ccdab8b56cc604d9ffdbaef4e0bd55e6e39dc0bd3de0a52cc1",
+            "sourceBounds": [
+              746,
+              26,
+              996,
+              264
+            ],
+            "visiblePixels": 34694,
+            "width": 250
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              657,
+              254,
+              829,
+              455
+            ],
+            "foregroundArea": 12269,
+            "height": 217,
+            "id": "crk-s4-04-pumpkin-branch-lamp",
+            "opaquePixels": 10350,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-04-pumpkin-branch-lamp.png",
+            "sha256": "9914a0217ceabf513452017240a552aa114a45e683d6665cbd6cf8e2cfd08a3a",
+            "sourceBounds": [
+              649,
+              246,
+              837,
+              463
+            ],
+            "visiblePixels": 12398,
+            "width": 188
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              856,
+              288,
+              992,
+              511
+            ],
+            "foregroundArea": 16734,
+            "height": 239,
+            "id": "crk-s4-05-mushroom-table-lamp",
+            "opaquePixels": 15402,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-05-mushroom-table-lamp.png",
+            "sha256": "c519e00f8eca35702316506d93679c695e7fd11d8a0971110a30354b0004e09e",
+            "sourceBounds": [
+              848,
+              280,
+              1000,
+              519
+            ],
+            "visiblePixels": 16744,
+            "width": 152
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              33,
+              382,
+              219,
+              671
+            ],
+            "foregroundArea": 24178,
+            "height": 305,
+            "id": "crk-s4-06-crescent-tree-floor-lamp",
+            "opaquePixels": 21353,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-06-crescent-tree-floor-lamp.png",
+            "sha256": "6510e2ce82e80cd8f6c81eef9b44633e858fb3b490f91dcc89be9beac4c5bfbc",
+            "sourceBounds": [
+              25,
+              374,
+              227,
+              679
+            ],
+            "visiblePixels": 24335,
+            "width": 202
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              308,
+              320,
+              612,
+              481
+            ],
+            "foregroundArea": 36903,
+            "height": 177,
+            "id": "crk-s4-07-pink-petal-rug",
+            "opaquePixels": 35874,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-07-pink-petal-rug.png",
+            "sha256": "fa3c18655e73b4e82e1401e0f233ba03fa93c194ea19f31a9e1de4bb969fb503",
+            "sourceBounds": [
+              300,
+              312,
+              620,
+              489
+            ],
+            "visiblePixels": 36903,
+            "width": 320
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              249,
+              497,
+              436,
+              670
+            ],
+            "foregroundArea": 21018,
+            "height": 189,
+            "id": "crk-s4-08-wave-front-bookshelf",
+            "opaquePixels": 20150,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-08-wave-front-bookshelf.png",
+            "sha256": "7d7e1049737fe084d03800438b1f03796e70a4039872da4c45939ec074279742",
+            "sourceBounds": [
+              241,
+              489,
+              444,
+              678
+            ],
+            "visiblePixels": 21018,
+            "width": 203
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              600,
+              460,
+              776,
+              701
+            ],
+            "foregroundArea": 32394,
+            "height": 257,
+            "id": "crk-s4-09-heart-panel-wardrobe",
+            "opaquePixels": 31387,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-09-heart-panel-wardrobe.png",
+            "sha256": "89fb8aab21d7a8e63d999b337d6b6d10b47c6d12435c0c035042da318c4591ba",
+            "sourceBounds": [
+              592,
+              452,
+              784,
+              709
+            ],
+            "visiblePixels": 32394,
+            "width": 192
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              426,
+              581,
+              568,
+              747
+            ],
+            "foregroundArea": 16642,
+            "height": 182,
+            "id": "crk-s4-10-rolled-blanket-cabinet",
+            "opaquePixels": 16004,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-10-rolled-blanket-cabinet.png",
+            "sha256": "30945aa2001bde773fc6e79df5b3541a3f565304b29f32b54e7003a8351d8b0a",
+            "sourceBounds": [
+              418,
+              573,
+              576,
+              755
+            ],
+            "visiblePixels": 16642,
+            "width": 158
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              817,
+              550,
+              965,
+              729
+            ],
+            "foregroundArea": 18649,
+            "height": 195,
+            "id": "crk-s4-11-mushroom-table-set",
+            "opaquePixels": 17498,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-11-mushroom-table-set.png",
+            "sha256": "95431026afd01ba810d2f150f3c782db87d0bfce2a263d7798d151c1648db42e",
+            "sourceBounds": [
+              809,
+              542,
+              973,
+              737
+            ],
+            "visiblePixels": 18650,
+            "width": 164
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              253,
+              670,
+              429,
+              809
+            ],
+            "foregroundArea": 14527,
+            "height": 155,
+            "id": "crk-s4-12-curling-craft-workbench",
+            "opaquePixels": 13375,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-12-curling-craft-workbench.png",
+            "sha256": "0d3fe6d7fdd587de7e0b63dc883f001e0471214100c4f46e4aeaebce12c7761b",
+            "sourceBounds": [
+              245,
+              662,
+              437,
+              817
+            ],
+            "visiblePixels": 14699,
+            "width": 192
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              42,
+              715,
+              263,
+              985
+            ],
+            "foregroundArea": 42059,
+            "height": 286,
+            "id": "crk-s4-13-ruffled-cushion-tower",
+            "opaquePixels": 40368,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-13-ruffled-cushion-tower.png",
+            "sha256": "25027be995b35185a5db0612f1323bee7b81923d7152ceceff5f90c89bc7b777",
+            "sourceBounds": [
+              34,
+              707,
+              271,
+              993
+            ],
+            "visiblePixels": 42061,
+            "width": 237
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              512,
+              707,
+              729,
+              988
+            ],
+            "foregroundArea": 34973,
+            "height": 297,
+            "id": "crk-s4-14-story-garden-cart",
+            "opaquePixels": 32902,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-14-story-garden-cart.png",
+            "sha256": "5387df58241d3599191df7fada8c4f32a8e5fb2329b1dcb361e2637dab4197eb",
+            "sourceBounds": [
+              504,
+              699,
+              737,
+              996
+            ],
+            "visiblePixels": 35096,
+            "width": 233
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              757,
+              716,
+              991,
+              983
+            ],
+            "foregroundArea": 32860,
+            "height": 283,
+            "id": "crk-s4-15-framed-art-stage",
+            "opaquePixels": 30382,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-15-framed-art-stage.png",
+            "sha256": "8c1608296c12bb40676cde6cc56f1fb2074b2b41bb95c976c5c1a5f037c29787",
+            "sourceBounds": [
+              749,
+              708,
+              999,
+              991
+            ],
+            "visiblePixels": 32860,
+            "width": 250
+          },
+          {
+            "borderTransparentRatio": 1.0,
+            "edgeBounds": [
+              302,
+              831,
+              462,
+              968
+            ],
+            "foregroundArea": 15993,
+            "height": 153,
+            "id": "crk-s4-16-teal-treasure-chest",
+            "opaquePixels": 15347,
+            "path": "AssetSources/CozyRoomKit/extracted/crk-s4-16-teal-treasure-chest.png",
+            "sha256": "5cf9dd30d4e40a8ccdd24cfc37d7d574b13dddedfbc4a743c7519e3b1ba3f443",
+            "sourceBounds": [
+              294,
+              823,
+              470,
+              976
+            ],
+            "visiblePixels": 15993,
+            "width": 176
+          }
+        ]
+      },
+      "status": "completed"
+    },
+    {
+      "dependencies": [
+        "030.extract-alpha"
+      ],
+      "inputDigest": "4442d371bf4c7643fbcb7ba4ecf588c5198f57c0e601eea7f6f00d5b44a07ef8",
+      "node": "040.integrate-xcassets",
+      "output": {
+        "assetCount": 66,
+        "assets": [
+          {
+            "assetCatalogName": "cozy_room_s1_01_forest_canopy_bed",
+            "filename": "cozy_room_s1_01_forest_canopy_bed.png",
+            "id": "crk-s1-01-forest-canopy-bed",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_01_forest_canopy_bed.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_02_leafy_hanging_nest",
+            "filename": "cozy_room_s1_02_leafy_hanging_nest.png",
+            "id": "crk-s1-02-leafy-hanging-nest",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_02_leafy_hanging_nest.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_03_twilight_canopy_chair",
+            "filename": "cozy_room_s1_03_twilight_canopy_chair.png",
+            "id": "crk-s1-03-twilight-canopy-chair",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_03_twilight_canopy_chair.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_04_orchard_lantern_tree",
+            "filename": "cozy_room_s1_04_orchard_lantern_tree.png",
+            "id": "crk-s1-04-orchard-lantern-tree",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_04_orchard_lantern_tree.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_05_cookie_flower_rug",
+            "filename": "cozy_room_s1_05_cookie_flower_rug.png",
+            "id": "crk-s1-05-cookie-flower-rug",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_05_cookie_flower_rug.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_06_celestial_branch_mobile",
+            "filename": "cozy_room_s1_06_celestial_branch_mobile.png",
+            "id": "crk-s1-06-celestial-branch-mobile",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_06_celestial_branch_mobile.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_07_patchwork_cottage_bookshelf",
+            "filename": "cozy_room_s1_07_patchwork_cottage_bookshelf.png",
+            "id": "crk-s1-07-patchwork-cottage-bookshelf",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_07_patchwork_cottage_bookshelf.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_08_rainbow_craft_nook",
+            "filename": "cozy_room_s1_08_rainbow_craft_nook.png",
+            "id": "crk-s1-08-rainbow-craft-nook",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_08_rainbow_craft_nook.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_09_rosebud_wardrobe",
+            "filename": "cozy_room_s1_09_rosebud_wardrobe.png",
+            "id": "crk-s1-09-rosebud-wardrobe",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_09_rosebud_wardrobe.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_10_garden_toy_chest",
+            "filename": "cozy_room_s1_10_garden_toy_chest.png",
+            "id": "crk-s1-10-garden-toy-chest",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_10_garden_toy_chest.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_11_patchwork_cushion_tower",
+            "filename": "cozy_room_s1_11_patchwork_cushion_tower.png",
+            "id": "crk-s1-11-patchwork-cushion-tower",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_11_patchwork_cushion_tower.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_12_candy_bloom_plant",
+            "filename": "cozy_room_s1_12_candy_bloom_plant.png",
+            "id": "crk-s1-12-candy-bloom-plant",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_12_candy_bloom_plant.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_13_woodland_puppet_stage",
+            "filename": "cozy_room_s1_13_woodland_puppet_stage.png",
+            "id": "crk-s1-13-woodland-puppet-stage",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_13_woodland_puppet_stage.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s1_14_storybook_handcart",
+            "filename": "cozy_room_s1_14_storybook_handcart.png",
+            "id": "crk-s1-14-storybook-handcart",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s1_14_storybook_handcart.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_01_blossom_tree_bed",
+            "filename": "cozy_room_s2_01_blossom_tree_bed.png",
+            "id": "crk-s2-01-blossom-tree-bed",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_01_blossom_tree_bed.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_02_pillow_hanging_nest",
+            "filename": "cozy_room_s2_02_pillow_hanging_nest.png",
+            "id": "crk-s2-02-pillow-hanging-nest",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_02_pillow_hanging_nest.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_03_peach_canopy_daybed",
+            "filename": "cozy_room_s2_03_peach_canopy_daybed.png",
+            "id": "crk-s2-03-peach-canopy-daybed",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_03_peach_canopy_daybed.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_04_triple_blossom_tree_lamp",
+            "filename": "cozy_room_s2_04_triple_blossom_tree_lamp.png",
+            "id": "crk-s2-04-triple-blossom-tree-lamp",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_04_triple_blossom_tree_lamp.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_05_petal_cushion_rug",
+            "filename": "cozy_room_s2_05_petal_cushion_rug.png",
+            "id": "crk-s2-05-petal-cushion-rug",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_05_petal_cushion_rug.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_06_moon_star_branch_mobile",
+            "filename": "cozy_room_s2_06_moon_star_branch_mobile.png",
+            "id": "crk-s2-06-moon-star-branch-mobile",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_06_moon_star_branch_mobile.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_07_storybook_cottage_shelf",
+            "filename": "cozy_room_s2_07_storybook_cottage_shelf.png",
+            "id": "crk-s2-07-storybook-cottage-shelf",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_07_storybook_cottage_shelf.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_08_sweeping_branch_bookshelf",
+            "filename": "cozy_room_s2_08_sweeping_branch_bookshelf.png",
+            "id": "crk-s2-08-sweeping-branch-bookshelf",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_08_sweeping_branch_bookshelf.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_09_bow_heart_wardrobe",
+            "filename": "cozy_room_s2_09_bow_heart_wardrobe.png",
+            "id": "crk-s2-09-bow-heart-wardrobe",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_09_bow_heart_wardrobe.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_10_painters_table",
+            "filename": "cozy_room_s2_10_painters_table.png",
+            "id": "crk-s2-10-painters-table",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_10_painters_table.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_11_mint_mushroom_stool",
+            "filename": "cozy_room_s2_11_mint_mushroom_stool.png",
+            "id": "crk-s2-11-mint-mushroom-stool",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_11_mint_mushroom_stool.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_12_rose_cushion_stack",
+            "filename": "cozy_room_s2_12_rose_cushion_stack.png",
+            "id": "crk-s2-12-rose-cushion-stack",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_12_rose_cushion_stack.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_13_mushroom_treasure_chest",
+            "filename": "cozy_room_s2_13_mushroom_treasure_chest.png",
+            "id": "crk-s2-13-mushroom-treasure-chest",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_13_mushroom_treasure_chest.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_14_rolling_story_garden",
+            "filename": "cozy_room_s2_14_rolling_story_garden.png",
+            "id": "crk-s2-14-rolling-story-garden",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_14_rolling_story_garden.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s2_15_creature_puppet_stage",
+            "filename": "cozy_room_s2_15_creature_puppet_stage.png",
+            "id": "crk-s2-15-creature-puppet-stage",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s2_15_creature_puppet_stage.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_01_treehouse_loft_bed",
+            "filename": "cozy_room_s3_01_treehouse_loft_bed.png",
+            "id": "crk-s3-01-treehouse-loft-bed",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_01_treehouse_loft_bed.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_02_pastel_hanging_nest",
+            "filename": "cozy_room_s3_02_pastel_hanging_nest.png",
+            "id": "crk-s3-02-pastel-hanging-nest",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_02_pastel_hanging_nest.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_03_pink_pavilion_floor_lamp",
+            "filename": "cozy_room_s3_03_pink_pavilion_floor_lamp.png",
+            "id": "crk-s3-03-pink-pavilion-floor-lamp",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_03_pink_pavilion_floor_lamp.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_04_quilt_canopy_daybed",
+            "filename": "cozy_room_s3_04_quilt_canopy_daybed.png",
+            "id": "crk-s3-04-quilt-canopy-daybed",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_04_quilt_canopy_daybed.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_05_blossom_compass_rug",
+            "filename": "cozy_room_s3_05_blossom_compass_rug.png",
+            "id": "crk-s3-05-blossom-compass-rug",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_05_blossom_compass_rug.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_06_patchwork_flower_rug",
+            "filename": "cozy_room_s3_06_patchwork_flower_rug.png",
+            "id": "crk-s3-06-patchwork-flower-rug",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_06_patchwork_flower_rug.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_07_glass_orb_lantern_tree",
+            "filename": "cozy_room_s3_07_glass_orb_lantern_tree.png",
+            "id": "crk-s3-07-glass-orb-lantern-tree",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_07_glass_orb_lantern_tree.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_08_star_moon_pendant_pair",
+            "filename": "cozy_room_s3_08_star_moon_pendant_pair.png",
+            "id": "crk-s3-08-star-moon-pendant-pair",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_08_star_moon_pendant_pair.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_09_bead_and_bell_mobile",
+            "filename": "cozy_room_s3_09_bead_and_bell_mobile.png",
+            "id": "crk-s3-09-bead-and-bell-mobile",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_09_bead_and_bell_mobile.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_10_mint_cottage_bookcase",
+            "filename": "cozy_room_s3_10_mint_cottage_bookcase.png",
+            "id": "crk-s3-10-mint-cottage-bookcase",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_10_mint_cottage_bookcase.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_11_sculpted_rose_wardrobe",
+            "filename": "cozy_room_s3_11_sculpted_rose_wardrobe.png",
+            "id": "crk-s3-11-sculpted-rose-wardrobe",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_11_sculpted_rose_wardrobe.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_12_curved_low_bookshelf",
+            "filename": "cozy_room_s3_12_curved_low_bookshelf.png",
+            "id": "crk-s3-12-curved-low-bookshelf",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_12_curved_low_bookshelf.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_13_flower_cup_lamp",
+            "filename": "cozy_room_s3_13_flower_cup_lamp.png",
+            "id": "crk-s3-13-flower-cup-lamp",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_13_flower_cup_lamp.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_14_crooked_branch_nightlight",
+            "filename": "cozy_room_s3_14_crooked_branch_nightlight.png",
+            "id": "crk-s3-14-crooked-branch-nightlight",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_14_crooked_branch_nightlight.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_15_ribbon_art_table",
+            "filename": "cozy_room_s3_15_ribbon_art_table.png",
+            "id": "crk-s3-15-ribbon-art-table",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_15_ribbon_art_table.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_16_round_cushion_stack",
+            "filename": "cozy_room_s3_16_round_cushion_stack.png",
+            "id": "crk-s3-16-round-cushion-stack",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_16_round_cushion_stack.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_17_mushroom_and_stump_stools",
+            "filename": "cozy_room_s3_17_mushroom_and_stump_stools.png",
+            "id": "crk-s3-17-mushroom-and-stump-stools",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_17_mushroom_and_stump_stools.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_18_sugar_vine_plant",
+            "filename": "cozy_room_s3_18_sugar_vine_plant.png",
+            "id": "crk-s3-18-sugar-vine-plant",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_18_sugar_vine_plant.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_19_book_display_stage",
+            "filename": "cozy_room_s3_19_book_display_stage.png",
+            "id": "crk-s3-19-book-display-stage",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_19_book_display_stage.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_20_painted_treasure_chest",
+            "filename": "cozy_room_s3_20_painted_treasure_chest.png",
+            "id": "crk-s3-20-painted-treasure-chest",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_20_painted_treasure_chest.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s3_21_library_wagon",
+            "filename": "cozy_room_s3_21_library_wagon.png",
+            "id": "crk-s3-21-library-wagon",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s3_21_library_wagon.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_01_flower_bunk_bed",
+            "filename": "cozy_room_s4_01_flower_bunk_bed.png",
+            "id": "crk-s4-01-flower-bunk-bed",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_01_flower_bunk_bed.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_02_patchwork_hanging_nest",
+            "filename": "cozy_room_s4_02_patchwork_hanging_nest.png",
+            "id": "crk-s4-02-patchwork-hanging-nest",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_02_patchwork_hanging_nest.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_03_pink_canopy_nook",
+            "filename": "cozy_room_s4_03_pink_canopy_nook.png",
+            "id": "crk-s4-03-pink-canopy-nook",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_03_pink_canopy_nook.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_04_pumpkin_branch_lamp",
+            "filename": "cozy_room_s4_04_pumpkin_branch_lamp.png",
+            "id": "crk-s4-04-pumpkin-branch-lamp",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_04_pumpkin_branch_lamp.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_05_mushroom_table_lamp",
+            "filename": "cozy_room_s4_05_mushroom_table_lamp.png",
+            "id": "crk-s4-05-mushroom-table-lamp",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_05_mushroom_table_lamp.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_06_crescent_tree_floor_lamp",
+            "filename": "cozy_room_s4_06_crescent_tree_floor_lamp.png",
+            "id": "crk-s4-06-crescent-tree-floor-lamp",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_06_crescent_tree_floor_lamp.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_07_pink_petal_rug",
+            "filename": "cozy_room_s4_07_pink_petal_rug.png",
+            "id": "crk-s4-07-pink-petal-rug",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_07_pink_petal_rug.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_08_wave_front_bookshelf",
+            "filename": "cozy_room_s4_08_wave_front_bookshelf.png",
+            "id": "crk-s4-08-wave-front-bookshelf",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_08_wave_front_bookshelf.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_09_heart_panel_wardrobe",
+            "filename": "cozy_room_s4_09_heart_panel_wardrobe.png",
+            "id": "crk-s4-09-heart-panel-wardrobe",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_09_heart_panel_wardrobe.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_10_rolled_blanket_cabinet",
+            "filename": "cozy_room_s4_10_rolled_blanket_cabinet.png",
+            "id": "crk-s4-10-rolled-blanket-cabinet",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_10_rolled_blanket_cabinet.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_11_mushroom_table_set",
+            "filename": "cozy_room_s4_11_mushroom_table_set.png",
+            "id": "crk-s4-11-mushroom-table-set",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_11_mushroom_table_set.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_12_curling_craft_workbench",
+            "filename": "cozy_room_s4_12_curling_craft_workbench.png",
+            "id": "crk-s4-12-curling-craft-workbench",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_12_curling_craft_workbench.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_13_ruffled_cushion_tower",
+            "filename": "cozy_room_s4_13_ruffled_cushion_tower.png",
+            "id": "crk-s4-13-ruffled-cushion-tower",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_13_ruffled_cushion_tower.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_14_story_garden_cart",
+            "filename": "cozy_room_s4_14_story_garden_cart.png",
+            "id": "crk-s4-14-story-garden-cart",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_14_story_garden_cart.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_15_framed_art_stage",
+            "filename": "cozy_room_s4_15_framed_art_stage.png",
+            "id": "crk-s4-15-framed-art-stage",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_15_framed_art_stage.imageset"
+          },
+          {
+            "assetCatalogName": "cozy_room_s4_16_teal_treasure_chest",
+            "filename": "cozy_room_s4_16_teal_treasure_chest.png",
+            "id": "crk-s4-16-teal-treasure-chest",
+            "imageset": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_s4_16_teal_treasure_chest.imageset"
+          }
+        ]
+      },
+      "status": "completed"
+    },
+    {
+      "dependencies": [
+        "030.extract-alpha"
+      ],
+      "inputDigest": "cbf05bc6b6b64245acac4f5ae1fa8c07e9b948476230a3b91a93671a247a6eb0",
+      "node": "050.write-catalog",
+      "output": {
+        "assetCount": 66,
+        "categoryCounts": {
+          "beds": 4,
+          "botanical-decor": 2,
+          "canopy-seating": 4,
+          "carts": 4,
+          "crafting": 4,
+          "hanging-decor": 4,
+          "hanging-seating": 4,
+          "lighting": 9,
+          "play-stages": 4,
+          "rugs": 5,
+          "seating": 7,
+          "shelving": 6,
+          "storage": 9
+        },
+        "manifestPath": "AssetSources/CozyRoomKit/manifest.json",
+        "manifestSha256": "8821818f8a4f32d664edde7e0bf1e4246b4f50048f9fbaebf5c07a0fad7623cf",
+        "runtimeManifestPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/cozy_room_asset_manifest.dataset/cozy_room_asset_manifest.json"
+      },
+      "status": "completed"
+    },
+    {
+      "dependencies": [
+        "030.extract-alpha"
+      ],
+      "inputDigest": "928c97d09758e1ffdbbf120b3551b832908050530738adb354b89427f3c98515",
+      "node": "060.render-review",
+      "output": {
+        "contactSheetPath": "AssetSources/CozyRoomKit/review/contact-sheet.png",
+        "contactSheetSha256": "4c9edd9e1ee1681d3f46d646c9fff7a915458c7e30510dd59152bfc66c478068"
+      },
+      "status": "completed"
+    },
+    {
+      "dependencies": [
+        "040.integrate-xcassets",
+        "050.write-catalog",
+        "060.render-review"
+      ],
+      "inputDigest": "9285fafe30b5f5ad1ef7cd40c44d88ee2c22bad429afae36f0c6bd2dbe7101ac",
+      "node": "070.validate",
+      "output": {
+        "alphaContract": "required",
+        "assetCount": 66,
+        "runtimeBytesMatchExtracted": true,
+        "runtimeManifestMatchesRepositoryManifest": true,
+        "sourceSheetCount": 4,
+        "status": "pass"
+      },
+      "status": "completed"
+    }
+  ],
+  "pipeline": "cozy-room-edge-extraction",
+  "pipelineVersion": 1,
+  "schemaVersion": 1,
+  "specSha256": "e34bb694a9fc708ca9cec6e38862bd6caee58fa7d93262071f7bdf5aaf451929",
+  "status": "completed"
+}

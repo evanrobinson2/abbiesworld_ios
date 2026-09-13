@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "filename": "cozy_room_asset_manifest.json",
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "author": "cozy-room-extraction-dag",
+    "version": 1
+  }
+}
