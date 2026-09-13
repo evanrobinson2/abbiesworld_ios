@@ -12,7 +12,9 @@ Start with these guides:
    explains the expected view, model, service, and integration boundaries.
 2. [Game Asset Registry adoption](docs/current-state/GAME_ASSET_REGISTRY_ADOPTION.md)
    is the standard for new game images, audio, data, and metadata.
-3. [Documentation index](docs/README.md) links the current architecture,
+3. [Audio coordination pattern](docs/current-state/AUDIO_COORDINATION_PATTERN.md)
+   explains how a minigame cooperates with shared music playback.
+4. [Documentation index](docs/README.md) links the current architecture,
    minigame briefs, integrations, and future plans.
 
 ## Asset rule for new games
@@ -41,7 +43,11 @@ receive the read credential managed by `ServerConfig`.
 - `docs/` — current patterns, feature contracts, and development guides
 - `AssetSources/` — reviewed source art, manifests, and provenance
 - `scripts/` — repeatable asset preparation and validation tools
-- standalone game directories — isolated prototypes that can later join the app
+
+Production game code belongs in the main Xcode target under
+`Views/Minigames/`, `ViewModels/`, `Models/`, and `Services/`. Root-level
+prototype directories are historical or isolated experiments, not the
+production source of truth.
 
 Open `abbies.world.ios/abbies.world.ios.xcodeproj` in Xcode to build the main
 application.
