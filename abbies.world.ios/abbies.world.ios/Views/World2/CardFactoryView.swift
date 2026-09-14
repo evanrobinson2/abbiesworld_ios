@@ -2,7 +2,7 @@
 //  CardFactoryView.swift
 //  abbies.world.ios
 //
-//  Card Factory for Abbie's World 2 - craft creature cards by combining any 3 ingredients.
+//  Card Factory for Abbie's World - craft creature cards by combining any 3 ingredients.
 //  Uses deterministic recipe hashing for caching - same ingredients = same card.
 //
 

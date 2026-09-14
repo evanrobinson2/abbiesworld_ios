@@ -2,7 +2,7 @@
 //  World2ViewModel.swift
 //  abbies.world.ios
 //
-//  Main ViewModel for Abbie's World 2 game shell.
+//  Main ViewModel for Abbie's World game shell.
 //  Coordinates navigation, POI interaction, and game state.
 //
 
@@ -66,6 +66,13 @@ class World2ViewModel: ObservableObject {
                 if state.isReady && self?.currentScreen == .loading {
                     self?.onBootstrapComplete()
                 }
+            }
+            .store(in: &cancellables)
+
+        playerService.objectWillChange
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
             }
             .store(in: &cancellables)
     }

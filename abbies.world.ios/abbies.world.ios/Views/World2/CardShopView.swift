@@ -2,7 +2,7 @@
 //  CardShopView.swift
 //  abbies.world.ios
 //
-//  Card Shop for Abbie's World 2 - sell cards for gems, buy decorations.
+//  Card Shop for Abbie's World - sell cards for gems, buy decorations.
 //  Core loop: FARM → CRAFT → SELL → DECORATE
 //
 
@@ -90,7 +90,7 @@ struct World2CardShopView: View {
                     .font(.system(size: 28, weight: .black, design: .rounded))
                     .foregroundColor(.white)
                 
-                Text("Sell cards for gems, buy decorations!")
+                Text("Sell cards for gems, buy furniture for home!")
                     .font(.system(size: 14, weight: .medium, design: .rounded))
                     .foregroundColor(.white.opacity(0.7))
             }
@@ -195,7 +195,7 @@ struct World2CardShopView: View {
     
     private var buyDecorView: some View {
         VStack(spacing: 20) {
-            Text("Decorations for your Home")
+            Text("Furniture for your Home")
                 .font(.system(size: 14, design: .rounded))
                 .foregroundColor(.white.opacity(0.6))
                 .padding(.top, 12)
@@ -430,14 +430,40 @@ struct World2CardShopView: View {
     }
     
     private var availableDecorations: [ShopDecoration] {
-        [
-            ShopDecoration(id: "decor.plant", name: "Magic Plant", icon: "leaf.fill", price: 3, color: .green),
-            ShopDecoration(id: "decor.lamp", name: "Glowing Lamp", icon: "lightbulb.fill", price: 5, color: .yellow),
-            ShopDecoration(id: "decor.star", name: "Star Mobile", icon: "star.fill", price: 8, color: .purple),
-            ShopDecoration(id: "decor.globe", name: "Snow Globe", icon: "globe", price: 10, color: .cyan),
-            ShopDecoration(id: "decor.trophy", name: "Gold Trophy", icon: "trophy.fill", price: 15, color: .orange),
-            ShopDecoration(id: "decor.rainbow", name: "Rainbow Arc", icon: "rainbow", price: 20, color: .pink)
-        ]
+        let catalogItems = CozyRoomCatalog.shared.shopItems
+        if catalogItems.isEmpty {
+            return [
+                ShopDecoration(id: "decor.plant", name: "Magic Plant", icon: "leaf.fill", catalogName: nil, price: 3, color: .green),
+                ShopDecoration(id: "decor.lamp", name: "Glowing Lamp", icon: "lightbulb.fill", catalogName: nil, price: 5, color: .yellow),
+                ShopDecoration(id: "decor.star", name: "Star Mobile", icon: "star.fill", catalogName: nil, price: 8, color: .purple),
+                ShopDecoration(id: "decor.globe", name: "Snow Globe", icon: "globe", catalogName: nil, price: 10, color: .cyan),
+                ShopDecoration(id: "decor.trophy", name: "Gold Trophy", icon: "trophy.fill", catalogName: nil, price: 15, color: .orange),
+                ShopDecoration(id: "decor.rainbow", name: "Rainbow Arc", icon: "rainbow", catalogName: nil, price: 20, color: .pink)
+            ]
+        }
+
+        return catalogItems.map { item in
+            ShopDecoration(
+                id: item.id,
+                name: item.name,
+                icon: "sofa.fill",
+                catalogName: item.catalogName,
+                price: item.price,
+                color: shopColor(for: item.category)
+            )
+        }
+    }
+
+    private func shopColor(for category: String) -> Color {
+        switch category {
+        case "beds": return .pink
+        case "lighting", "hanging-decor": return .yellow
+        case "rugs": return .orange
+        case "botanical-decor": return .green
+        case "storage", "shelving": return .brown
+        case "seating", "hanging-seating", "canopy-seating": return .purple
+        default: return .mint
+        }
     }
     
     private func buyDecoration(_ decoration: ShopDecoration) {
@@ -457,6 +483,7 @@ struct ShopDecoration: Identifiable {
     let id: String
     let name: String
     let icon: String
+    let catalogName: String?
     let price: Int
     let color: Color
 }
@@ -586,10 +613,17 @@ struct DecorationShopTile: View {
                 RoundedRectangle(cornerRadius: 16)
                     .fill(decoration.color.opacity(0.2))
                     .frame(height: 100)
-                
-                Image(systemName: decoration.icon)
-                    .font(.system(size: 40))
-                    .foregroundColor(decoration.color)
+
+                if let catalogName = decoration.catalogName {
+                    Image(catalogName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(8)
+                } else {
+                    Image(systemName: decoration.icon)
+                        .font(.system(size: 40))
+                        .foregroundColor(decoration.color)
+                }
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 16)

@@ -1,8 +1,10 @@
-# ABBIE'S WORLD 2 — PRODUCT REQUIREMENTS DOCUMENT
+# ABBIE'S WORLD — PRODUCT REQUIREMENTS DOCUMENT
+
+> Product name: **Abbie's World**. The working title "Abbie's World" is retired.
 
 ## 1. PRODUCT VISION
 
-Abbie's World 2 is a child-directed exploration and creation game for iPad built around a simple loop:
+Abbie's World is a child-directed exploration and creation game for iPad built around a simple loop:
 
 **EXPLORE → PLAY → EARN → CREATE → COLLECT → PERSONALIZE**
 

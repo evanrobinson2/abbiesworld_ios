@@ -2,7 +2,7 @@
 //  PlayerStateService.swift
 //  abbies.world.ios
 //
-//  Player state management service for Abbie's World 2.
+//  Player state management service for Abbie's World.
 //  Handles persistence, syncing, and player progression.
 //
 
@@ -158,7 +158,27 @@ class PlayerStateService: ObservableObject {
     }
     
     func addDecoration(_ decoration: DecorationInstance) {
-        currentPlayer?.decorations.append(decoration)
+        guard var player = currentPlayer else { return }
+        player.decorations.append(decoration)
+        currentPlayer = player
+        saveLocalState()
+    }
+
+    func updateDecorationPosition(id: String, x: Double, y: Double) {
+        guard var player = currentPlayer,
+              let index = player.decorations.firstIndex(where: { $0.id == id }) else {
+            return
+        }
+        player.decorations[index].x = x
+        player.decorations[index].y = y
+        currentPlayer = player
+        saveLocalState()
+    }
+
+    func removeDecoration(id: String) {
+        guard var player = currentPlayer else { return }
+        player.decorations.removeAll { $0.id == id }
+        currentPlayer = player
         saveLocalState()
     }
     

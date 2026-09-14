@@ -9,6 +9,7 @@ import SwiftUI
 
 struct WorldMapView: View {
     @ObservedObject var viewModel: World2ViewModel
+    var onExit: (() -> Void)? = nil
     
     var body: some View {
         GeometryReader { geometry in
@@ -30,7 +31,7 @@ struct WorldMapView: View {
                 }
                 
                 VStack {
-                    World2HUDView(viewModel: viewModel)
+                    World2HUDView(viewModel: viewModel, onExit: onExit)
                     Spacer()
                     WorldNavigationBar(viewModel: viewModel)
                 }
@@ -56,9 +57,16 @@ struct WorldMapView: View {
     @ViewBuilder
     private func mapBackground(for world: World?) -> some View {
         if let world = world {
-            let colors: [Color] = world.id == .home
-                ? [Color(hex: "#56ab2f") ?? .green, Color(hex: "#a8e063") ?? .green]
-                : [Color(hex: "#f2994a") ?? .orange, Color(hex: "#f2c94c") ?? .yellow]
+            let colors: [Color] = {
+                switch world.id {
+                case .home:
+                    return [Color(hex: "#56ab2f") ?? .green, Color(hex: "#a8e063") ?? .green]
+                case .farm:
+                    return [Color(hex: "#7CB342") ?? .green, Color(hex: "#F4D35E") ?? .yellow]
+                case .adventure:
+                    return [Color(hex: "#f2994a") ?? .orange, Color(hex: "#f2c94c") ?? .yellow]
+                }
+            }()
             
             LinearGradient(
                 colors: colors,
@@ -133,6 +141,8 @@ struct POIMarkerView: View {
             return .blue
         case .cardVault:
             return .indigo
+        case .cardShop:
+            return .mint
         case .creatureIngredient:
             return .orange
         case .functionIngredient:
@@ -141,7 +151,7 @@ struct POIMarkerView: View {
             return .teal
         case .gemReward:
             return .yellow
-        case .minigame:
+        case .minigame, .farmPlot:
             return .green
         }
     }
@@ -149,9 +159,19 @@ struct POIMarkerView: View {
 
 struct World2HUDView: View {
     @ObservedObject var viewModel: World2ViewModel
+    var onExit: (() -> Void)? = nil
     
     var body: some View {
         HStack(spacing: 16) {
+            if let onExit {
+                Button(action: onExit) {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.system(size: 28))
+                        .foregroundColor(.white)
+                }
+                .accessibilityLabel("Leave Abbie's World")
+            }
+
             HUDItem(icon: "diamond.fill", value: "\(viewModel.gems)", color: .cyan)
             
             HUDItem(icon: "leaf.fill", value: "\(viewModel.totalIngredients)", color: .green)
@@ -223,7 +243,7 @@ struct WorldNavigationBar: View {
                         viewModel.navigateToWorld(adjacentWorldId)
                     }) {
                         HStack(spacing: 8) {
-                            Image(systemName: adjacentWorldId == .home ? "house.fill" : "map.fill")
+                            Image(systemName: adjacentWorldId.navigationIcon)
                                 .font(.system(size: 18))
                             
                             Text("Go to \(adjacentWorldId.displayName)")
@@ -234,7 +254,7 @@ struct WorldNavigationBar: View {
                         .padding(.vertical, 12)
                         .background(
                             Capsule()
-                                .fill(adjacentWorldId == .home ? Color.green : Color.orange)
+                                .fill(adjacentWorldId.navigationColor)
                                 .shadow(color: .black.opacity(0.3), radius: 5, y: 3)
                         )
                     }
@@ -342,11 +362,12 @@ struct POIInspectionSheet: View {
         case .home: return .pink
         case .cardFactory: return .blue
         case .cardVault: return .indigo
+        case .cardShop: return .mint
         case .creatureIngredient: return .orange
         case .functionIngredient: return .cyan
         case .contextIngredient: return .teal
         case .gemReward: return .yellow
-        case .minigame: return .green
+        case .minigame, .farmPlot: return .green
         }
     }
 }
@@ -412,19 +433,21 @@ struct RewardBadge: View {
     }
 }
 
-extension Color {
-    init?(hex: String) {
-        var hexSanitized = hex.trimmingCharacters(in: .whitespacesAndNewlines)
-        hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-        
-        var rgb: UInt64 = 0
-        guard Scanner(string: hexSanitized).scanHexInt64(&rgb) else { return nil }
-        
-        let r = Double((rgb & 0xFF0000) >> 16) / 255.0
-        let g = Double((rgb & 0x00FF00) >> 8) / 255.0
-        let b = Double(rgb & 0x0000FF) / 255.0
-        
-        self.init(red: r, green: g, blue: b)
+private extension WorldId {
+    var navigationIcon: String {
+        switch self {
+        case .home: return "house.fill"
+        case .farm: return "leaf.fill"
+        case .adventure: return "map.fill"
+        }
+    }
+
+    var navigationColor: Color {
+        switch self {
+        case .home: return .green
+        case .farm: return .mint
+        case .adventure: return .orange
+        }
     }
 }
 

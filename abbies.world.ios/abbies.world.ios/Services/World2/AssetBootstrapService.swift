@@ -2,7 +2,7 @@
 //  AssetBootstrapService.swift
 //  abbies.world.ios
 //
-//  Asset bootstrap service for Abbie's World 2.
+//  Asset bootstrap service for Abbie's World.
 //  Manages manifest-driven content loading, caching, and offline support.
 //
 

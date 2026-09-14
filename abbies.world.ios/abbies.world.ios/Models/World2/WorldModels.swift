@@ -2,7 +2,7 @@
 //  WorldModels.swift
 //  abbies.world.ios
 //
-//  Data models for Abbie's World 2 map and navigation system.
+//  Data models for Abbie's World map and navigation system.
 //
 
 import Foundation

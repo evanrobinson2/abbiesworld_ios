@@ -2,7 +2,7 @@
 //  PlayerModels.swift
 //  abbies.world.ios
 //
-//  Data models for player state in Abbie's World 2.
+//  Data models for player state in Abbie's World.
 //
 
 import Foundation

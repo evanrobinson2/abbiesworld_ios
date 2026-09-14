@@ -2,7 +2,7 @@
 //  PlayerHomeView.swift
 //  abbies.world.ios
 //
-//  Player Home for Abbie's World 2 - decorate your treehouse and manage music.
+//  Player Home for Abbie's World - decorate your treehouse and manage music.
 //
 
 import SwiftUI
@@ -229,16 +229,9 @@ struct World2PlayerHomeView: View {
     }
     
     private func updateDecorationPosition(_ decoration: DecorationInstance, to newPosition: CGPoint, in geometry: GeometryProxy) {
-        guard var decorations = playerService.currentPlayer?.decorations,
-              let index = decorations.firstIndex(where: { $0.id == decoration.id }) else {
-            return
-        }
-        
         let normalizedX = max(0.1, min(0.9, newPosition.x / geometry.size.width))
         let normalizedY = max(0.1, min(0.9, newPosition.y / geometry.size.height))
-        
-        decorations[index].x = normalizedX
-        decorations[index].y = normalizedY
+        playerService.updateDecorationPosition(id: decoration.id, x: normalizedX, y: normalizedY)
     }
     
     private func placeDecoration(_ decoration: DecorationInstance) {
@@ -250,6 +243,7 @@ struct World2PlayerHomeView: View {
     
     private func removeDecoration(_ decoration: DecorationInstance) {
         selectedDecoration = nil
+        playerService.removeDecoration(id: decoration.id)
     }
 }
 
@@ -365,16 +359,48 @@ struct PlacedDecorationView: View {
         }
     }
     
+    @ViewBuilder
     private var genericDecorationView: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.white.opacity(0.3))
-                .frame(width: 60, height: 60)
-            
-            Image(systemName: "star.fill")
-                .font(.system(size: 28))
-                .foregroundColor(.yellow)
+        if let asset = CozyRoomCatalog.shared.asset(forDecorationId: decoration.decorationId) {
+            Image(asset.assetCatalogName)
+                .resizable()
+                .scaledToFit()
+                .frame(width: displaySize(for: asset).width, height: displaySize(for: asset).height)
+        } else {
+            ZStack {
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(Color.white.opacity(0.3))
+                    .frame(width: 60, height: 60)
+
+                Image(systemName: fallbackIcon)
+                    .font(.system(size: 28))
+                    .foregroundColor(.yellow)
+            }
         }
+    }
+
+    private var fallbackIcon: String {
+        if decoration.decorationId.contains("plant") {
+            return "leaf.fill"
+        } else if decoration.decorationId.contains("lamp") {
+            return "lightbulb.fill"
+        } else if decoration.decorationId.contains("trophy") {
+            return "trophy.fill"
+        } else {
+            return "star.fill"
+        }
+    }
+
+    private func displaySize(for asset: CozyRoomAsset) -> CGSize {
+        let maxHeight: CGFloat = asset.category == "beds" ? 160 : 110
+        guard let pixelSize = asset.pixelSize, pixelSize.height > 0 else {
+            return CGSize(width: 90, height: maxHeight)
+        }
+        let scale = maxHeight / CGFloat(pixelSize.height)
+        return CGSize(
+            width: max(48, CGFloat(pixelSize.width) * scale),
+            height: maxHeight
+        )
     }
 }
 
@@ -395,7 +421,7 @@ struct DecorationPickerSheet: View {
                         Text("No Decorations Yet!")
                             .font(.system(size: 20, weight: .bold, design: .rounded))
                         
-                        Text("Complete minigames to earn decorations!")
+                        Text("Buy furniture at the Card Shop!")
                             .font(.system(size: 14))
                             .foregroundColor(.secondary)
                     }
@@ -406,7 +432,7 @@ struct DecorationPickerSheet: View {
                             columns: [GridItem(.adaptive(minimum: 100))],
                             spacing: 16
                         ) {
-                            ForEach(availableDecorations) { decoration in
+            ForEach(availableDecorations) { decoration in
                                 Button(action: { onSelect(decoration) }) {
                                     DecorationTile(decoration: decoration)
                                 }
@@ -438,10 +464,17 @@ struct DecorationTile: View {
                 RoundedRectangle(cornerRadius: 12)
                     .fill(Color.purple.opacity(0.2))
                     .frame(width: 80, height: 80)
-                
-                Image(systemName: iconFor(decoration))
-                    .font(.system(size: 32))
-                    .foregroundColor(.purple)
+
+                if let asset = CozyRoomCatalog.shared.asset(forDecorationId: decoration.decorationId) {
+                    Image(asset.assetCatalogName)
+                        .resizable()
+                        .scaledToFit()
+                        .padding(8)
+                } else {
+                    Image(systemName: iconFor(decoration))
+                        .font(.system(size: 32))
+                        .foregroundColor(.purple)
+                }
             }
             
             Text(nameFor(decoration))
@@ -464,7 +497,10 @@ struct DecorationTile: View {
     }
     
     private func nameFor(_ decoration: DecorationInstance) -> String {
-        decoration.decorationId
+        if let asset = CozyRoomCatalog.shared.asset(forDecorationId: decoration.decorationId) {
+            return asset.label
+        }
+        return decoration.decorationId
             .replacingOccurrences(of: "decoration.", with: "")
             .replacingOccurrences(of: ".", with: " ")
             .capitalized
