@@ -30,6 +30,9 @@ struct MainView: View {
         ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D") ||
         ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2DBuild") ||
         ProcessInfo.processInfo.arguments.contains("-verifyCreatureLabReady")
+    // Abbie's World overland shell (farm / craft / sell / decorate).
+    @State private var showAbbiesWorld =
+        ProcessInfo.processInfo.arguments.contains("-launchAbbiesWorld")
     // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
     @State private var showSettings = false
@@ -288,6 +291,7 @@ struct MainView: View {
             }
             .sheet(isPresented: $showGamesDialog) {
                 GamesDialogView(
+                    showAbbiesWorld: $showAbbiesWorld,
                     showWaypointGame: $showWaypointGame,
                     showGoonPopper: $showGoonPopper,
                     showPictureCarver: $showPictureCarver,
@@ -332,6 +336,13 @@ struct MainView: View {
             .fullScreenCover(isPresented: $showCreatureBuilder) {
                 CreatureBuilderView()
             }
+            .fullScreenCover(isPresented: $showAbbiesWorld) {
+                World2RootView(onExit: {
+                    showAbbiesWorld = false
+                    World2MusicService.shared.stop()
+                    MusicService.shared.setGameActive(false)
+                })
+            }
             // Memory Game temporarily disabled
             // .fullScreenCover(isPresented: $showMemoryGame) {
             //     MemoryGameView(
@@ -354,6 +365,9 @@ struct MainView: View {
                 MusicService.shared.setGameActive(newValue)
             }
             .onChange(of: showDinoPicnic) { oldValue, newValue in
+                MusicService.shared.setGameActive(newValue)
+            }
+            .onChange(of: showAbbiesWorld) { oldValue, newValue in
                 MusicService.shared.setGameActive(newValue)
             }
         }

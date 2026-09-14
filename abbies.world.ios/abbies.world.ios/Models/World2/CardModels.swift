@@ -2,7 +2,7 @@
 //  CardModels.swift
 //  abbies.world.ios
 //
-//  Data models for the Card system in Abbie's World 2.
+//  Data models for the Card system in Abbie's World.
 //  Cards are crafted by combining any 3 ingredients.
 //
 

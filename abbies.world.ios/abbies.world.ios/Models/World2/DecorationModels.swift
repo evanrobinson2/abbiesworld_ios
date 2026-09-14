@@ -2,7 +2,7 @@
 //  DecorationModels.swift
 //  abbies.world.ios
 //
-//  Data models for home decoration in Abbie's World 2.
+//  Data models for home decoration in Abbie's World.
 //
 
 import Foundation

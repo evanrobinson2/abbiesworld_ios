@@ -13,7 +13,11 @@ struct abbies_world_iosApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            if ProcessInfo.processInfo.arguments.contains("-launchAbbiesWorld") {
+                World2RootView()
+            } else {
+                MainView()
+            }
         }
     }
 }

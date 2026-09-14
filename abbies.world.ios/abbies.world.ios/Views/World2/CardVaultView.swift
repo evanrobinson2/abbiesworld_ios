@@ -2,7 +2,7 @@
 //  CardVaultView.swift
 //  abbies.world.ios
 //
-//  Card Vault for Abbie's World 2 - manage card collection and active deck.
+//  Card Vault for Abbie's World - manage card collection and active deck.
 //
 
 import SwiftUI

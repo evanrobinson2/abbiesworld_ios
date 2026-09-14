@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct GamesDialogView: View {
+    @Binding var showAbbiesWorld: Bool
     @Binding var showWaypointGame: Bool
     @Binding var showGoonPopper: Bool
     @Binding var showPictureCarver: Bool
@@ -31,6 +32,15 @@ struct GamesDialogView: View {
                     GridItem(.flexible()),
                     GridItem(.flexible())
                 ], spacing: 20) {
+                    GameIconButton(
+                        icon: "house.fill",
+                        title: "Abbie's World",
+                        color: .mint
+                    ) {
+                        showAbbiesWorld = true
+                        onDismiss()
+                    }
+
                     GameIconButton(
                         icon: "leaf.fill",
                         title: "Dino Picnic",
@@ -140,6 +150,7 @@ struct GameIconButton: View {
 
 #Preview {
     GamesDialogView(
+        showAbbiesWorld: .constant(false),
         showWaypointGame: .constant(false),
         showGoonPopper: .constant(false),
         showPictureCarver: .constant(false),

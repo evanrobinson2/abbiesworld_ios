@@ -2,7 +2,7 @@
 //  IngredientModels.swift
 //  abbies.world.ios
 //
-//  Data models for ingredients in Abbie's World 2 card creation system.
+//  Data models for ingredients in Abbie's World card creation system.
 //
 
 import Foundation

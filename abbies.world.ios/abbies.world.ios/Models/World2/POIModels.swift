@@ -2,7 +2,7 @@
 //  POIModels.swift
 //  abbies.world.ios
 //
-//  Data models for Points of Interest (POIs) in Abbie's World 2.
+//  Data models for Points of Interest (POIs) in Abbie's World.
 //
 
 import Foundation

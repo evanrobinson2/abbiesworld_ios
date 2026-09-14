@@ -2,7 +2,7 @@
 //  World2MusicService.swift
 //  abbies.world.ios
 //
-//  Music service extension for Abbie's World 2 light/intense track system.
+//  Music service extension for Abbie's World light/intense track system.
 //  Builds on top of MusicService patterns.
 //
 

@@ -2,12 +2,13 @@
 //  World2RootView.swift
 //  abbies.world.ios
 //
-//  Root view for Abbie's World 2 game shell.
+//  Root view for Abbie's World game shell.
 //
 
 import SwiftUI
 
 struct World2RootView: View {
+    var onExit: (() -> Void)? = nil
     @StateObject private var viewModel = World2ViewModel()
     
     var body: some View {
@@ -17,12 +18,15 @@ struct World2RootView: View {
                 BootstrapLoadingView(progress: viewModel.bootstrapProgress)
                 
             case .playerSelect:
-                PlayerSelectView(onSelect: { playerId in
-                    viewModel.selectPlayer(playerId)
-                })
+                PlayerSelectView(
+                    onSelect: { playerId in
+                        viewModel.selectPlayer(playerId)
+                    },
+                    onExit: onExit
+                )
                 
             case .worldMap:
-                WorldMapView(viewModel: viewModel)
+                WorldMapView(viewModel: viewModel, onExit: onExit)
                 
             case .poiInterior(let poiId):
                 POIInteriorView(
@@ -93,6 +97,7 @@ struct World2RootView: View {
         .animation(.easeInOut(duration: 0.3), value: viewModel.currentScreen)
         .animation(.spring(response: 0.4, dampingFraction: 0.8), value: viewModel.toastMessage)
         .task {
+            print("🏡 Abbie's World catalog: \(CozyRoomCatalog.shared.inspectSummary)")
             await viewModel.startGame()
         }
     }
@@ -148,6 +153,7 @@ struct BootstrapLoadingView: View {
 
 struct PlayerSelectView: View {
     let onSelect: (PlayerId) -> Void
+    var onExit: (() -> Void)? = nil
     
     var body: some View {
         ZStack {
@@ -159,6 +165,22 @@ struct PlayerSelectView: View {
             .ignoresSafeArea()
             
             VStack(spacing: 40) {
+                if let onExit {
+                    HStack {
+                        Button(action: onExit) {
+                            HStack(spacing: 8) {
+                                Image(systemName: "xmark.circle.fill")
+                                    .font(.system(size: 28))
+                                Text("Back")
+                                    .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            }
+                            .foregroundColor(.white)
+                        }
+                        Spacer()
+                    }
+                    .padding(.horizontal, 24)
+                }
+
                 Text("Who's Playing?")
                     .font(.system(size: 36, weight: .black, design: .rounded))
                     .foregroundColor(.white)
