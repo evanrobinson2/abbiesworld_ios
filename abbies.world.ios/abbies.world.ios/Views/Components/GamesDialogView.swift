@@ -13,6 +13,7 @@ struct GamesDialogView: View {
     @Binding var showPictureCarver: Bool
     @Binding var showDinoPicnic: Bool
     @Binding var showCreatureBuilder: Bool
+    @Binding var showDecoratorMachine: Bool
     // Memory Game temporarily disabled
     // @Binding var showMemoryGame: Bool
     var onDismiss: () -> Void
@@ -86,6 +87,15 @@ struct GamesDialogView: View {
                         showCreatureBuilder = true
                         onDismiss()
                     }
+                    
+                    GameIconButton(
+                        icon: "sofa.fill",
+                        title: "Decorator Machine",
+                        color: .teal
+                    ) {
+                        showDecoratorMachine = true
+                        onDismiss()
+                    }
                 }
                 .padding()
                 
@@ -145,6 +155,7 @@ struct GameIconButton: View {
         showPictureCarver: .constant(false),
         showDinoPicnic: .constant(false),
         showCreatureBuilder: .constant(false),
+        showDecoratorMachine: .constant(false),
         // showMemoryGame: .constant(false),
         onDismiss: {}
     )
