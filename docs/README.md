@@ -22,6 +22,7 @@ Documents that describe **one-time problem solving** or processes - risk analyse
 - `minigames/DINO_PICNIC_VERTICAL_SLICE.md` - Current bundled-first vertical-slice example
 
 **Current State:**
+- `current-state/SCENE_HARDPOINT_SYSTEM.md` - How World 2 places get onto maps, and how to inspect the rigging as text
 - `DRAWER_IMPLEMENTATION_SUMMARY.md` - Drawer feature implementation details
 - `GAME_ASSET_REGISTRY_ADOPTION.md` - Standard asset contract and adoption guide for games
 - `MUSIC_IMPLEMENTATION_SUMMARY.md` - Music playback system implementation

@@ -83,7 +83,8 @@ class PlayerStateService: ObservableObject {
                     x: 0.32 + (Double(index) * 0.09),
                     y: item.placementLayer == .wall ? 0.38 : 0.70,
                     scale: item.defaultScale,
-                    zIndex: index + 1
+                    zIndex: index + 1,
+                    badges: [.starter]
                 )
             )
         }
@@ -434,7 +435,8 @@ class PlayerStateService: ObservableObject {
                         decorationId: decoration.id,
                         x: 0.50,
                         y: decoration.placementLayer.homeLayer == .wall ? 0.38 : 0.70,
-                        scale: 0.82
+                        scale: 0.82,
+                        badges: [.new, .handmade]
                     )
                 )
                 added += 1
@@ -544,7 +546,8 @@ class PlayerStateService: ObservableObject {
             decorationId: item.id,
             x: 0.5,
             y: item.placementLayer == .wall ? 0.38 : 0.70,
-            scale: item.defaultScale
+            scale: item.defaultScale,
+            badges: [.new, .questReward]
         )
         player.furnitureIngredients =
             player.availableFurnitureIngredientCount - FurnitureItem.ingredientCost

@@ -200,33 +200,40 @@ struct World2PlayerHomeView: View {
                     "poi": poiId
                 ]
             )
-            if !isReadOnly,
-               let owner,
-               let pack = PlayerStateService.shared.claimTreehouseStarterPack(for: owner) {
-                awardedStarterPack = pack
-                starterPackBurst = false
-                Task { @MainActor in
-                    try? await Task.sleep(for: .milliseconds(120))
-                    withAnimation(.spring(response: 0.65, dampingFraction: 0.68)) {
-                        starterPackBurst = true
-                    }
-                }
-                World2Diagnostics.log(
-                    "treehouse_starter_pack_awarded",
-                    [
-                        "item_count": "\(pack.items.count)",
-                        "player": owner.rawValue,
-                    ]
-                )
-            }
             // A reward sent us here to show her the new thing: open the drawer
             // on it rather than leaving her to hunt.
-            if !isReadOnly, let rewardID = viewModel.consumeInventoryHighlight() {
+            let rewardID = isReadOnly ? nil : viewModel.consumeInventoryHighlight()
+            if let rewardID {
                 highlightedInventoryID = rewardID
                 isArrangingFurniture = true
                 World2Diagnostics.log(
                     "inventory_highlight_opened",
                     ["instance": rewardID, "poi": poiId]
+                )
+            }
+            if !isReadOnly,
+               let owner,
+               let pack = PlayerStateService.shared.claimTreehouseStarterPack(for: owner) {
+                // Two celebrations at once is one too many. Arriving on the back
+                // of a reward, the pack still lands — it just waits in the
+                // drawer wearing its STARTER ribbons instead of interrupting.
+                if rewardID == nil {
+                    awardedStarterPack = pack
+                    starterPackBurst = false
+                    Task { @MainActor in
+                        try? await Task.sleep(for: .milliseconds(120))
+                        withAnimation(.spring(response: 0.65, dampingFraction: 0.68)) {
+                            starterPackBurst = true
+                        }
+                    }
+                }
+                World2Diagnostics.log(
+                    "treehouse_starter_pack_awarded",
+                    [
+                        "celebrated": "\(rewardID == nil)",
+                        "item_count": "\(pack.items.count)",
+                        "player": owner.rawValue,
+                    ]
                 )
             }
             if !isReadOnly,
