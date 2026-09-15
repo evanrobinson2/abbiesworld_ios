@@ -99,6 +99,24 @@ class DecoratorMachineViewModel: ObservableObject {
         return selectedEssences.map { $0.emoji }.joined(separator: " + ")
     }
     
+    /// Kid-friendly curated set of essences - start simple, unlock more later
+    var availableEssences: [DecoratorEssence] {
+        // Start with 8 fun, easy-to-understand essences
+        // Mix of critters (visual) and feelings (relatable)
+        let starterIds = [
+            "cat_whisker",      // 🐱 Kids love cats
+            "bunny_bounce",     // 🐰 Bouncy bunny
+            "rainbow_hiccup",   // 🌈 Colorful!
+            "cloud_fluff",      // ☁️ Soft and fluffy
+            "giggle_fizz",      // 🤭 Silly!
+            "starlight_dust",   // ✨ Sparkly magic
+            "cozy_nap_energy",  // 😴 Sleepy time
+            "bubblegum_dream",  // 🍬 Sweet treat
+        ]
+        
+        return starterIds.compactMap { DecoratorEssenceContent.essence(for: $0) }
+    }
+    
     // MARK: - Private
     
     private let apiClient = APIClient.shared
