@@ -99,40 +99,9 @@ struct World2PlacedPlaceInstance: Codable, Identifiable, Equatable {
     }
 }
 
-struct World2SceneHardpoint: Codable, Identifiable, Equatable {
-    let id: String
-    let name: String
-    let x: Double
-    let y: Double
-
-    static let threePointLayout = [
-        World2SceneHardpoint(id: "hardpoint.left", name: "Left clearing", x: 0.27, y: 0.58),
-        World2SceneHardpoint(id: "hardpoint.center", name: "Center clearing", x: 0.50, y: 0.48),
-        World2SceneHardpoint(id: "hardpoint.right", name: "Right clearing", x: 0.73, y: 0.58),
-    ]
-}
-
-struct World2MutableScene: Codable, Identifiable, Equatable {
-    let id: String
-    var name: String
-    var summary: String
-    let isMutableByPlayer: Bool
-    var hardpoints: [World2SceneHardpoint]
-    let isDeveloperPlaceholder: Bool
-    let createdAt: Date
-    let createdByPlayerID: String?
-
-    static let blankSlate = World2MutableScene(
-        id: World2PlacedPlaceInstance.blankSlateSceneID,
-        name: "Blank Slate",
-        summary: "A persistent scene for places you make",
-        isMutableByPlayer: true,
-        hardpoints: [],
-        isDeveloperPlaceholder: false,
-        createdAt: .distantPast,
-        createdByPlayerID: nil
-    )
-}
+// World2SceneHardpoint and World2MutableScene used to live here with a flat
+// x/y shape. They are part of the scene graph now: see
+// World2SceneGraphModels.swift, which also decodes the older saved shape.
 
 struct World2SceneExit: Codable, Identifiable, Equatable {
     let id: String
