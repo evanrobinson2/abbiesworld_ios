@@ -305,6 +305,7 @@ private struct CreatureOverlandDestination: Identifiable {
     let scale: CGFloat
     let phase: Double
     let opensCreatureLab: Bool
+    var opensDecoratorMachine: Bool = false
 }
 
 private struct CreatureLabOverlandView: View {
@@ -312,6 +313,7 @@ private struct CreatureLabOverlandView: View {
     let onEnterLab: () -> Void
 
     @State private var selectedJobPlace: CreatureOverlandDestination?
+    @State private var showDecoratorMachine = false
 
     private let destinations = [
         CreatureOverlandDestination(
@@ -327,16 +329,17 @@ private struct CreatureLabOverlandView: View {
             opensCreatureLab: false
         ),
         CreatureOverlandDestination(
-            id: "book_store",
-            title: "Book Store",
-            purpose: "WORD JOBS",
-            assetName: "creature_builder_overland_book_store",
-            symbol: "text.book.closed.fill",
-            tint: .purple,
+            id: "furniture_shop",
+            title: "Furniture Shop",
+            purpose: "MAKE DECORATIONS",
+            assetName: "decorator_machine",
+            symbol: "sofa.fill",
+            tint: .teal,
             position: CGPoint(x: 0.76, y: 0.27),
             scale: 0.20,
             phase: 2.1,
-            opensCreatureLab: false
+            opensCreatureLab: false,
+            opensDecoratorMachine: true
         ),
         CreatureOverlandDestination(
             id: "creature_lab",
@@ -386,6 +389,8 @@ private struct CreatureLabOverlandView: View {
                         )
                         if destination.opensCreatureLab {
                             onEnterLab()
+                        } else if destination.opensDecoratorMachine {
+                            showDecoratorMachine = true
                         } else {
                             selectedJobPlace = destination
                         }
@@ -406,6 +411,9 @@ private struct CreatureLabOverlandView: View {
             CreatureJobPlaceSheet(destination: destination)
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
+        }
+        .fullScreenCover(isPresented: $showDecoratorMachine) {
+            DecoratorMachineView()
         }
     }
 
