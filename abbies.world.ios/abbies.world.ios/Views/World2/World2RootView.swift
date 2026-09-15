@@ -15,6 +15,7 @@ struct World2RootView: View {
     @State private var showingGoonPopper = false
     @State private var showingPictureCarver = false
     @State private var showingDinoPicnic = false
+    @State private var showingDecoratorMachine = false
     @State private var openCreatureLabFromClassic = false
 
     var body: some View {
@@ -158,6 +159,7 @@ struct World2RootView: View {
                 showPictureCarver: $showingPictureCarver,
                 showDinoPicnic: $showingDinoPicnic,
                 showCreatureBuilder: $openCreatureLabFromClassic,
+                showDecoratorMachine: $showingDecoratorMachine,
                 onDismiss: { showingClassicGames = false }
             )
             .accessibilityElement(children: .contain)
@@ -181,6 +183,9 @@ struct World2RootView: View {
         .fullScreenCover(isPresented: $showingDinoPicnic) {
             DinoPicnicView()
         }
+        .fullScreenCover(isPresented: $showingDecoratorMachine) {
+            DecoratorMachineView()
+        }
         .onChange(of: showingWaypointGame) { _, isActive in
             MusicService.shared.setGameActive(isActive)
         }
@@ -191,6 +196,9 @@ struct World2RootView: View {
             MusicService.shared.setGameActive(isActive)
         }
         .onChange(of: showingDinoPicnic) { _, isActive in
+            MusicService.shared.setGameActive(isActive)
+        }
+        .onChange(of: showingDecoratorMachine) { _, isActive in
             MusicService.shared.setGameActive(isActive)
         }
         .onChange(of: openCreatureLabFromClassic) { _, shouldOpen in
