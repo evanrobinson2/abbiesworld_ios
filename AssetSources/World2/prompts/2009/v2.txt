@@ -1,0 +1,9 @@
+Parent-selected centerpiece for Ani's five-item treehouse starter pack.
+Preserve one ornate purple moonlit canopy bed in three-quarter view, including
+the sculpted violet frame and posts, visible chandelier and chain, glowing
+flowering vines, lavender drapes, rainbow quilt, unicorn pillows, and soft floor
+shadow. Preserve the chandelier chain exactly as supplied. Remove only the pale
+outer background and center the furniture on transparent padding. Do not add
+characters, authored UI, text, logos, watermarks, or other furniture.
+
+--ar 1:1

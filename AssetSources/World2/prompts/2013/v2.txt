@@ -1,0 +1,16 @@
+Parent-selected interior for the Asset Workbench POI.
+Preserve this warm, welcoming storybook invention room exactly as shown: a
+dominant central copper fabrication machine with a bright circular viewport,
+large teal and purple overhead pipes, brass fittings and gauges, a lower conveyor
+carrying miniature cottage models, shelves of jars, hand tools, rolled plans,
+flowers, stools, work surfaces, and glowing lanterns. Its rounded, playful machine
+forms are intentional and must match the whimsical cottage exterior selected for
+a smart six-year-old. “Sophisticated” here means polished illustration, coherent
+materials, rich craftsmanship, and layered detail—not adult realism, sharp
+industrial geometry, or reduced whimsy. This is atmospheric full-bleed 16:9
+background artwork behind code-rendered headers, three idea-card carousels,
+generation progress, and the six-candidate choice tray. Do not redraw the room or
+add characters, authored UI controls, readable text, logos, watermarks,
+frightening machinery, or harsh industrial hazards.
+
+--ar 16:9

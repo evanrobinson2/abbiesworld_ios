@@ -33,7 +33,7 @@ final class DinoPicnicAudioService {
         playNextBackgroundNote()
         backgroundTimer = Timer.scheduledTimer(withTimeInterval: 0.55, repeats: true) {
             [weak self] _ in
-            Task { @MainActor in
+            Task { @MainActor [weak self] in
                 self?.playNextBackgroundNote()
             }
         }

@@ -26,15 +26,23 @@ struct MusicPlayerView: View {
                                 .cornerRadius(12)
                                 .shadow(radius: 8)
                         } else {
-                            // Placeholder when no artwork
-                            RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.gray.opacity(0.3))
+                            // Qualified World 2 artwork keeps bundled tracks branded
+                            // even when their audio metadata has no album image.
+                            Image("world2_2004_ui_appIcon")
+                                .resizable()
+                                .scaledToFill()
                                 .frame(width: 180, height: 180)
-                                .overlay(
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .overlay(alignment: .bottomTrailing) {
                                     Image(systemName: "music.note")
-                                        .font(.system(size: 48))
-                                        .foregroundColor(.gray)
-                                )
+                                        .font(.system(size: 22, weight: .bold))
+                                        .foregroundStyle(.white)
+                                        .padding(10)
+                                        .background(.black.opacity(0.58), in: Circle())
+                                        .padding(8)
+                                }
+                                .shadow(radius: 8)
+                                .accessibilityLabel("Abbie's World music artwork")
                         }
                         
                         Text(currentSong.displayName)

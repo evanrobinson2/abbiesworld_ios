@@ -1,0 +1,9 @@
+Parent-selected Farm Land overland map for Abbie's World 2.
+Preserve the inviting hand-drawn green woodland, pale winding cobblestone paths,
+central circular path intersection, rounded trees, shrubs, rocks, and small warm
+flowers. The center path junction must remain visibly open for the code-rendered
+Furniture Store POI. This is an environmental map background, not a standalone
+building. Do not add characters, buildings, authored UI, text, logos, watermarks,
+or frightening material.
+
+--ar 4:3

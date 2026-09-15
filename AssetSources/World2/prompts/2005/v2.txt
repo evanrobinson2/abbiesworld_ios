@@ -1,0 +1,8 @@
+Parent-selected exterior for the Furniture Store in Farm Land. Preserve the complete
+blue-and-gold whimsical furniture building, rooftop cushions, trees, plants, awnings,
+windows, entry, and readable silhouette. The PNG alpha channel and transparent outer
+background are verified separately by file-integrity analysis; a vision renderer may
+display transparent pixels against black. The tiny lower-right generator mark has
+been removed. Do not redraw the store or add authored UI.
+
+--ar 1:1

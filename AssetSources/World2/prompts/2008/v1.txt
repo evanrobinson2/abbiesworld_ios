@@ -1,0 +1,8 @@
+Parent-selected first furniture item for Abbie's inventory.
+Preserve one complete ornate pastel rainbow canopy bed in three-quarter view,
+including the carved pink wood frame, scalloped canopy, patchwork bedding,
+pillows, draped blanket, small unicorn motif, and soft floor shadow. Remove only
+the pale outer background and center the complete bed on transparent padding.
+Do not add characters, authored UI, text, logos, watermarks, or other furniture.
+
+--ar 1:1

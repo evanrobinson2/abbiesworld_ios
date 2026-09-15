@@ -1,0 +1,25 @@
+an isometric hand drawn digital illustration of a magical Card Factory designed as a major interactive point of interest in a whimsical children’s fantasy game for a smart six year old audience
+
+make it feel like a cute fantasy castle and creative workshop combined, with bold chunky storybook forms, exaggerated playful proportions, broad readable details, strong silhouette, sophisticated rather than babyish, not chibi
+
+the building should feel grand, magical and inviting, with pink and purple accents, warm cream stone, soft wood, whimsical towers, rounded roofs, banners, decorative trim and playful fantasy architecture, clearly a place where magical cards are created
+
+the grounds outside should be adorable and memorable, with a small integrated landscaped footprint including paths, flowers, oversized shrubs and especially beautiful pink blossom hedges sculpted into statuesque heroic figurines, like topiary guardians or fantasy champions standing proudly outside the factory
+
+the exterior should be adorned with celebratory regalia and decorative flourishes, including ribbons, banners, medallions, crest-like ornaments and other whimsical fantasy details, but keep the shapes broad and readable rather than fussy
+
+feature the letters A and A somewhere in the architecture or regalia in a tasteful integrated way, such as on a crest, banner, archway, emblem or decorative medallion, clearly visible but part of the building rather than plain text signage
+
+leave several visually obvious areas available for future embellishments or game-state overlays, such as banner hooks, empty pedestals, clear wall areas, open garden patches or decorative mounts, do not fill every surface
+
+strong welcoming entrance, obvious that it is a destination players will want to tap, isolated on a clean white background for compositing onto the overland map
+
+clean expressive outlines, tactile illustrated textures, gentle cel shading, vibrant but slightly muted palette, magical and inviting, no characters, no UI, no extra text
+
+REPAIR V2 — constrained revision from multimodal qualification:
+Preserve the castle-workshop silhouette, blossom guardians, AA crest, entrance, and palette. Add one unmistakable oversized blank fantasy-card emblem and a broad visible card press or card-feed architectural feature. Simplify fine decoration so the Card Factory identity reads at map scale.
+
+RUNTIME NORMALIZATION — parent-requested deterministic treatment:
+Preserve the qualified Card Factory pixels while replacing only the clean background with true transparency. Center and maximize the complete silhouette with safe padding; preserve flags, topiary guardians, card motifs, entrance, path, and soft antialiased edges.
+
+--ar 1:1

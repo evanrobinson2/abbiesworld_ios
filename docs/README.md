@@ -15,8 +15,16 @@ Documents that describe **one-time problem solving** or processes - risk analyse
 
 ## Quick Reference
 
+**Developing Games:**
+- `current-state/STANDALONE_MINIGAME_PATTERN.md` - Self-contained game architecture
+- `current-state/GAME_ASSET_REGISTRY_ADOPTION.md` - Standard asset publishing and loading contract
+- `current-state/AUDIO_COORDINATION_PATTERN.md` - Shared music and minigame audio coordination
+- `minigames/DINO_PICNIC_VERTICAL_SLICE.md` - Current bundled-first vertical-slice example
+
 **Current State:**
+- `current-state/SCENE_HARDPOINT_SYSTEM.md` - How World 2 places get onto maps, and how to inspect the rigging as text
 - `DRAWER_IMPLEMENTATION_SUMMARY.md` - Drawer feature implementation details
+- `GAME_ASSET_REGISTRY_ADOPTION.md` - Standard asset contract and adoption guide for games
 - `MUSIC_IMPLEMENTATION_SUMMARY.md` - Music playback system implementation
 - `PROJECT_REVIEW.md` - Overall project review and assessment
 - `STANDALONE_MINIGAME_PATTERN.md` - Pattern for standalone minigame architecture

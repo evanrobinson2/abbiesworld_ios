@@ -1,0 +1,4 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "ignoreCommand": "bash -c 'if [ -f package.json ] && { [ -d app ] || [ -d pages ] || [ -d src/app ] || [ -d src/pages ]; }; then exit 1; fi; echo \"No Next.js app at the repo root; skipping creature-creator.\"; exit 0'"
+}

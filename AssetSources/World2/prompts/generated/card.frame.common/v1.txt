@@ -1,0 +1,15 @@
+an isolated hand drawn digital illustration of one common collectible card frame for cards created in the magical Card Factory of a whimsical children’s fantasy game, designed for a smart six year old audience
+
+make the frame bold, chunky, cute, exaggerated and highly readable on an iPad, sophisticated rather than babyish, not chibi, with a strong rounded 5 to 7 portrait silhouette, broad borders, clean hierarchy and a premium tactile storybook finish
+
+show one complete empty card frame with a very large unobstructed transparent central image window occupying most of the card, a small clear lower description panel with no writing, and restrained corner mounts that can hold code-rendered rarity embellishments later
+
+use the Card Factory’s warm cream stone, natural wood, strawberry pink, lavender, violet, teal and restrained golden sparkle identity from the supplied exterior and interior references; common rarity should feel welcoming and special without looking rare, expensive or superior
+
+include one memorable signature motif: a tiny factory crest shape centered above the image window, using abstract ribbon and sparkle forms only with no letters
+
+keep all functional surfaces empty and high contrast; leave generous safe zones inside the image window and description panel; do not bake in a creature, ingredient, title, score, rarity word, button or decorative effect that competes with future card content
+
+center the entire 5 to 7 frame inside the portrait canvas with generous transparent padding, crisp extraction-safe outer and inner edges, fully visible corners and no cast shadow outside the safe crop
+
+clean expressive dark-plum outlines, tactile painted texture, layered flat color, gentle cel shading, polished illustrated game art, no characters, no words, no letters, no numbers, no logos, no UI screenshot, no photorealism, no 3D rendering, no clutter --ar 5:7

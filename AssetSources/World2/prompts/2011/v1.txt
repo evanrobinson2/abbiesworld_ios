@@ -1,0 +1,9 @@
+Parent-selected interior for the self-replicating POI Factory.
+Preserve the complete warm, whimsical machine room in wide landscape view,
+including the giant circular glass fabrication chamber, brass and pastel pipes,
+gauges, windows, small conveyor assembly, workbenches, and broad open tiled floor.
+This is background artwork behind code-rendered fabrication and exit controls.
+Do not add characters, authored UI controls, readable branding, logos, watermarks,
+frightening machinery, or clutter that blocks the open floor.
+
+--ar 16:9

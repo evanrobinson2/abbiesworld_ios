@@ -1,0 +1,12 @@
+a standalone 3D stylized logo badge reading “Abbie’s World”, designed for a whimsical children’s fantasy game for a smart six year old audience, chunky cute lettering, bold rounded shapes, playful dimensional forms, polished cel shaded rendering, magical and inviting, sophisticated rather than babyish, not chibi
+
+make the logo primarily pink, using a rich playful palette of strawberry pink, blush pink, raspberry, soft coral, with small accent touches of lavender, teal, sky blue, and warm golden sparkle details, thick friendly letters with depth and beveling, soft glossy highlights, toy-like premium finish, charming fantasy badge composition
+
+the words should feel fun, magical, and highly readable, like a premium iPad game logo, with whimsical decorative embellishments such as sparkles, stars, swirls, ribbons, hearts, or gem-like details tastefully integrated into the badge, but do not add characters
+
+centered composition, isolated on a clean plain background for easy compositing over a title screen, no UI, no extra text
+
+REPAIR V2 — constrained revision from multimodal qualification:
+Preserve the exact readable spelling “Abbie’s World” and the selected pink identity. Make the badge wider and more compact inside generous extraction padding so it remains readable in a 600 by 240 title placement. Use one uniform plain neutral background, never a fake transparency checkerboard.
+
+--ar 1:1

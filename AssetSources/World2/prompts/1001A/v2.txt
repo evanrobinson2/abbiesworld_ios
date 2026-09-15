@@ -1,0 +1,12 @@
+a chunky cute cel shaded title screen illustration for a whimsical children’s fantasy game, designed for a smart six year old audience, bold simplified forms, exaggerated playful shapes, warm magical tone, sophisticated rather than babyish, not chibi
+
+show a stylized profile view of planet Earth occupying the bottom left portion of the screen, as if seen from space, with a rounded toy-like shape, visible glowing blue atmosphere, soft clouds, simple land and ocean forms, and a loose stylized blocky feel reminiscent of a sandbox game aesthetic but softer, more organic, and more whimsical, not pixel art, not rigid cubes
+
+the rest of the composition should be a beautiful outer space backdrop with soft stars, subtle cosmic color, and a sense of wonder and adventure, while leaving generous clean open space in the upper and central areas for a separate “Abbie’s World” logo or badge to be composited later
+
+clean expressive outlines, polished illustrated game art, gentle cel shading, vibrant but slightly muted palette, highly readable composition, magical and inviting, no characters, no UI, no text
+
+REPAIR V2 — constrained revision from multimodal qualification:
+Make the lower-left body unmistakably Earth with simplified blue oceans, organic blocky continents, soft cloud bands, and a glowing atmosphere. Use chunkier toy-like forms, clean expressive outlines, and distinct cel-shaded value steps while preserving the open upper-center title area.
+
+--ar 4:3

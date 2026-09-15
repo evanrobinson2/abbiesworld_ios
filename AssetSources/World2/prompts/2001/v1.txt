@@ -1,0 +1,13 @@
+an elevated isometric hand drawn digital illustration of Work Land, a whimsical concrete jungle biome for Abbie’s World, designed for a smart six year old audience
+
+show a compact explorable child’s-eye city where mysterious grown-up work happens: playful municipal towers, civic buildings, pipes, ducts, vents, glass tubes, rooftop machinery, catwalks, elevators, loading bays and friendly mechanical infrastructure
+
+bold chunky storybook forms, exaggerated playful proportions, broad readable details, irregular hand-drawn silhouettes, sophisticated rather than babyish, not chibi
+
+use warm concrete, dusty blue-gray, muted teal, soft coral, amber, rose and violet accents so the city feels busy, magical and inviting rather than gray, realistic, hostile or boring
+
+include exactly one large empty placement pad for The Letter Works, centered in the navigable composition and connected by a broad obvious path; keep this pad completely empty, clean and unobstructed
+
+make the world compact and readable at iPad scale with a clear HUD-safe upper edge and a small integrated environmental footprint; do not place a building on the reserved pad
+
+clean expressive outlines, tactile illustrated textures, gentle cel shading, soft diffuse daylight, premium whimsical game art, no characters, no readable text, no UI --ar 4:3

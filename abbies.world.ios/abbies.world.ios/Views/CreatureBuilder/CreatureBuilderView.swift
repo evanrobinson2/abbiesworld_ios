@@ -11,19 +11,37 @@ import UIKit
 struct CreatureBuilderView: View {
     @StateObject private var viewModel = CreatureBuilderViewModel()
     @StateObject private var audioService = CreatureBuilderAudioService()
-    @State private var isShowingOverland =
-        !ProcessInfo.processInfo.arguments.contains("-autoPlayCreatureBuilder")
-        && !ProcessInfo.processInfo.arguments.contains("-launchCreatureBuilderDirect")
-        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D")
-        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2DBuild")
-        && !ProcessInfo.processInfo.arguments.contains("-verifyCreatureLabReady")
+    @State private var isShowingOverland: Bool
     @Environment(\.dismiss) private var dismiss
-    
+    private let onClose: (() -> Void)?
+
+    init(
+        startsInLab: Bool = false,
+        onClose: (() -> Void)? = nil
+    ) {
+        self.onClose = onClose
+        let arguments = ProcessInfo.processInfo.arguments
+        _isShowingOverland = State(
+            initialValue: !startsInLab
+                && !arguments.contains("-autoPlayCreatureBuilder")
+                && !arguments.contains("-launchCreatureBuilderDirect")
+                && !arguments.contains("-verifyCreatureLab2D")
+                && !arguments.contains("-verifyCreatureLab2DBuild")
+                && !arguments.contains("-verifyCreatureLabReady")
+        )
+    }
+
     var body: some View {
         Group {
             if isShowingOverland {
                 CreatureLabOverlandView(
-                    onClose: { dismiss() },
+                    onClose: {
+                        if let onClose {
+                            onClose()
+                        } else {
+                            dismiss()
+                        }
+                    },
                     onEnterLab: {
                         withAnimation(.easeInOut(duration: 0.45)) {
                             isShowingOverland = false
@@ -66,6 +84,8 @@ struct CreatureBuilderView: View {
             audioService.stopAllAudio()
             MusicService.shared.setGameActive(false)
         }
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("creatureBuilder.root")
     }
 
     private func requestLandscapeOrientation() {
@@ -96,6 +116,7 @@ struct CreatureBuilderView: View {
 
             VStack(spacing: 0) {
                 header
+                    .padding(.top, 56)
 
                 Spacer(minLength: 0)
 
@@ -134,6 +155,7 @@ struct CreatureBuilderView: View {
                 CreatureLabGlyph(symbol: "map.fill", tint: .indigo, size: 38)
             }
             .accessibilityLabel("Return to Creature City")
+            .accessibilityIdentifier("creatureLab.backToCity")
             
             Spacer()
             
@@ -283,6 +305,7 @@ private struct CreatureOverlandDestination: Identifiable {
     let scale: CGFloat
     let phase: Double
     let opensCreatureLab: Bool
+    var opensDecoratorMachine: Bool = false
 }
 
 private struct CreatureLabOverlandView: View {
@@ -290,6 +313,7 @@ private struct CreatureLabOverlandView: View {
     let onEnterLab: () -> Void
 
     @State private var selectedJobPlace: CreatureOverlandDestination?
+    @State private var showDecoratorMachine = false
 
     private let destinations = [
         CreatureOverlandDestination(
@@ -305,16 +329,17 @@ private struct CreatureLabOverlandView: View {
             opensCreatureLab: false
         ),
         CreatureOverlandDestination(
-            id: "book_store",
-            title: "Book Store",
-            purpose: "WORD JOBS",
-            assetName: "creature_builder_overland_book_store",
-            symbol: "text.book.closed.fill",
-            tint: .purple,
+            id: "furniture_shop",
+            title: "Furniture Shop",
+            purpose: "MAKE DECORATIONS",
+            assetName: "decorator_machine",
+            symbol: "sofa.fill",
+            tint: .teal,
             position: CGPoint(x: 0.76, y: 0.27),
             scale: 0.20,
             phase: 2.1,
-            opensCreatureLab: false
+            opensCreatureLab: false,
+            opensDecoratorMachine: true
         ),
         CreatureOverlandDestination(
             id: "creature_lab",
@@ -364,6 +389,8 @@ private struct CreatureLabOverlandView: View {
                         )
                         if destination.opensCreatureLab {
                             onEnterLab()
+                        } else if destination.opensDecoratorMachine {
+                            showDecoratorMachine = true
                         } else {
                             selectedJobPlace = destination
                         }
@@ -377,12 +404,16 @@ private struct CreatureLabOverlandView: View {
                 }
 
                 overlandHeader
+                    .padding(.top, 56)
             }
         }
         .sheet(item: $selectedJobPlace) { destination in
             CreatureJobPlaceSheet(destination: destination)
                 .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
+        }
+        .fullScreenCover(isPresented: $showDecoratorMachine) {
+            DecoratorMachineView()
         }
     }
 
@@ -393,6 +424,7 @@ private struct CreatureLabOverlandView: View {
                     CreatureLabGlyph(symbol: "xmark", tint: .indigo, size: 40)
                 }
                 .accessibilityLabel("Close Creature City")
+                .accessibilityIdentifier("creatureLab.closeCity")
 
                 Spacer()
 

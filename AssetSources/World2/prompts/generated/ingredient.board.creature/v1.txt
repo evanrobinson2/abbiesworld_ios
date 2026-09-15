@@ -1,0 +1,11 @@
+a hand drawn digital source board containing exactly nine separate creature ingredient tiles for the Card Factory creative minigame in a whimsical children’s fantasy game, designed for a smart six year old audience
+
+make every creature bold, chunky, cute, exaggerated and highly readable at 120 point iPad game scale, sophisticated rather than babyish, not chibi, with strong different silhouettes, expressive but simple faces, confident dark-plum outlines, tactile painted texture and gentle cel shading
+
+create an exact 3 by 3 grid with equal rounded-square cells and narrow uniform warm-cream gutters, using these row-major subjects: 1 a playful orange cat, 2 a friendly emerald fantasy dragon with no fire, 3 a rounded silver toy robot with a teal face display, 4 a cheerful purple octopus, 5 a tiny friendly lavender bat, 6 a lively golden cheetah with clear spots, 7 a simple sparkling creature-paw category emblem, 8 an empty decorative spare cell containing only a subtle star pattern, 9 an empty decorative spare cell containing only a subtle star pattern
+
+use the Card Factory’s celebratory pink, purple, teal, cream and warm-gold identity from the supplied exterior and interior references; give all six creatures the same premium storybook rendering while keeping species instantly distinguishable
+
+keep each creature centered, fully visible and isolated inside its own cell, occupying about eighty percent of the cell with generous extraction-safe padding; no wings, ears, tails, limbs, outlines, glows or shadows may cross a cell edge
+
+polished illustrated game art, clean expressive outlines, tactile storybook texture, layered flat color and gentle cel shading, no human characters, no costumes, no words, no letters, no numbers, no logos, no weapons, no fire, no frightening expressions, no duplicate creatures, no cropped bodies, no photorealism, no 3D rendering, no UI screenshot, no clutter --ar 1:1

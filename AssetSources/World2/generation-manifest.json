@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "provider": "OpenAI",
+  "model": "gpt-image-2.5-flare-2026-09-08",
+  "quality": "high",
+  "outputFormat": "png",
+  "method": {
+    "sourceOfTruth": "The exact World 2 Midjourney prompts stored under prompts/ define the vocabulary and ordered prompt grammar.",
+    "transport": "OpenAI reference-image edit with explicit model, size, quality, prompt hash, reference hashes, and immutable output hash.",
+    "aspectRatioRule": "The prompt retains the intended --ar value for provenance. The API receives only a supported size; crop and extraction are separate qualified transformations.",
+    "expansionLockedUntilParentApproval": true
+  },
+  "avatarPolicy": {
+    "state": "blocked_needs_parent_approved_character_reference",
+    "reason": "Do not invent a likeness for Abbie or Ani. Neutral code-driven player motifs remain in use until a parent-approved reference and sanitized design brief exist.",
+    "semanticIds": [
+      "avatar.abbie",
+      "avatar.ani"
+    ]
+  },
+  "representativeCandidates": [
+    {
+      "semanticId": "ui.iconBoard.homeSlice",
+      "class": "icon_board",
+      "version": "v1",
+      "state": "ready_for_generation",
+      "promptPath": "prompts/generated/ui.iconBoard.homeSlice/v1.txt",
+      "promptSha256": "35e10a8807078daec5a4dda5a7c8bf48a7a7f51b18641fa793908a47c95e0f90",
+      "size": "1024x1024",
+      "alphaRequiredAfterExtraction": true,
+      "references": [
+        {
+          "assetId": "1001B",
+          "path": "candidates/1001B/v1/source.jpeg",
+          "sha256": "f1ec2e64ec8d92c42848d4dfc7013b44e623d45a9a0404042e42fb745b735c4e"
+        },
+        {
+          "assetId": "1002",
+          "path": "candidates/1002/v1/source.jpeg",
+          "sha256": "eb66c0f5ca35dd803ddcfa945586ece52649199e3832e5f095438e9227869371"
+        },
+        {
+          "assetId": "1008",
+          "path": "candidates/1008/v1/source.jpeg",
+          "sha256": "546c07b29740d2e8b5cd9c64aba6b437be9b139fc31fa6ddcc484084d76b905b"
+        }
+      ],
+      "productionId": null,
+      "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
+    },
+    {
+      "semanticId": "ingredient.board.creature",
+      "class": "ingredient_board",
+      "version": "v1",
+      "state": "ready_for_generation",
+      "promptPath": "prompts/generated/ingredient.board.creature/v1.txt",
+      "promptSha256": "65f3c4e5e867604a324f089d7f1d760fae0ef29e4aea7a08cfa7b194f38a8d2d",
+      "size": "1024x1024",
+      "alphaRequiredAfterExtraction": true,
+      "references": [
+        {
+          "assetId": "1008",
+          "path": "candidates/1008/v1/source.jpeg",
+          "sha256": "546c07b29740d2e8b5cd9c64aba6b437be9b139fc31fa6ddcc484084d76b905b"
+        },
+        {
+          "assetId": "1009",
+          "path": "candidates/1009/v1/source.jpeg",
+          "sha256": "8c45c30a8bf18aeabce5bdcef0c4fed15e0ec7e4abe3cbfe89806fc06230b2cc"
+        }
+      ],
+      "productionId": null,
+      "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
+    },
+    {
+      "semanticId": "decoration.jukebox.starter",
+      "class": "decoration",
+      "version": "v1",
+      "state": "ready_for_generation",
+      "promptPath": "prompts/generated/decoration.jukebox.starter/v1.txt",
+      "promptSha256": "44f7274050442448191a376a737fd93fdc07c6677b7f85e488e08fcc9d161cb0",
+      "size": "1024x1024",
+      "alphaRequiredAfterExtraction": true,
+      "references": [
+        {
+          "assetId": "1005",
+          "path": "candidates/1005/v1/source.jpeg",
+          "sha256": "01ed9f96fbb34a30a6e14e3c48e33eadb3b86742830aa5196fbab1df74b1d74d"
+        },
+        {
+          "assetId": "1007",
+          "path": "candidates/1007/v1/source.jpeg",
+          "sha256": "5fb534cd8d5cef70e8089076d50b49ab9f9791760eac035eccdda709770c24bb"
+        }
+      ],
+      "productionId": null,
+      "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
+    },
+    {
+      "semanticId": "card.frame.common",
+      "class": "card_frame",
+      "version": "v1",
+      "state": "ready_for_generation",
+      "promptPath": "prompts/generated/card.frame.common/v1.txt",
+      "promptSha256": "1b7f9c65ae7bfacdb076e8f5b552421252a814ef1c11fa204b842a68d97ae09b",
+      "size": "1024x1536",
+      "intendedCropAspectRatio": "5:7",
+      "alphaRequiredAfterExtraction": true,
+      "references": [
+        {
+          "assetId": "1008",
+          "path": "candidates/1008/v1/source.jpeg",
+          "sha256": "546c07b29740d2e8b5cd9c64aba6b437be9b139fc31fa6ddcc484084d76b905b"
+        },
+        {
+          "assetId": "1009",
+          "path": "candidates/1009/v1/source.jpeg",
+          "sha256": "8c45c30a8bf18aeabce5bdcef0c4fed15e0ec7e4abe3cbfe89806fc06230b2cc"
+        }
+      ],
+      "productionId": null,
+      "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
+    }
+  ],
+  "p0Inventory": {
+    "playerIdentity": [
+      "avatar.abbie",
+      "avatar.ani"
+    ],
+    "hudAndCategoryIcons": [
+      "ui.gem",
+      "ui.ingredient.creature",
+      "ui.ingredient.function",
+      "ui.ingredient.context",
+      "ui.card",
+      "ui.deck",
+      "ui.home",
+      "ui.music"
+    ],
+    "creatureIngredients": [
+      "ingredient.creature.cat",
+      "ingredient.creature.dragon",
+      "ingredient.creature.robot",
+      "ingredient.creature.octopus",
+      "ingredient.creature.bat",
+      "ingredient.creature.cheetah"
+    ],
+    "functionIngredients": [
+      "ingredient.function.astronaut",
+      "ingredient.function.wizard",
+      "ingredient.function.superhero",
+      "ingredient.function.chef",
+      "ingredient.function.racer",
+      "ingredient.function.ninja"
+    ],
+    "contextIngredients": [
+      "ingredient.context.space",
+      "ingredient.context.underwater",
+      "ingredient.context.jungle",
+      "ingredient.context.volcano",
+      "ingredient.context.castle",
+      "ingredient.context.candyworld"
+    ],
+    "cardPresentation": [
+      "card.frame.common",
+      "card.back.default"
+    ],
+    "homeInteraction": [
+      "decoration.jukebox.starter",
+      "decoration.jukebox.playing"
+    ],
+    "optionalGeneratedVfx": [
+      "vfx.poi.selectionHalo"
+    ]
+  }
+}

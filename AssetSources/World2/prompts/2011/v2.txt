@@ -1,0 +1,10 @@
+Parent-selected interior for the self-replicating POI Factory.
+Preserve the warm, whimsical machine room in an iPad 4:3 landscape crop,
+including the complete giant circular glass fabrication chamber, brass and pastel
+pipes, gauges, windows, work surfaces, and broad open tiled floor. Crop only the
+outer sides of the supplied wide frame while keeping the chamber and floor readable.
+This is background artwork behind code-rendered fabrication and exit controls.
+Do not add characters, authored UI controls, readable branding, logos, watermarks,
+frightening machinery, or clutter that blocks the open floor.
+
+--ar 4:3

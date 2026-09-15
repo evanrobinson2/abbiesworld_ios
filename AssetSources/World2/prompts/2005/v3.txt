@@ -1,0 +1,9 @@
+Parent-selected replacement exterior for the Furniture Store in Farm Land.
+Preserve the complete pink-and-blue whimsical glass-fronted store, rainbow entrance,
+rainbow arch, giant blue treetop canopy, rooftop cushions, flower lamp, plants,
+steps, windows, and readable three-quarter silhouette. Remove the pale outer
+background and tiny lower-right generator mark only. The PNG alpha channel is
+verified separately by file-integrity analysis; a vision renderer may display
+transparent pixels against black. Do not redraw the store or add authored UI.
+
+--ar 1:1

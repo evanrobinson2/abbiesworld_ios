@@ -1,0 +1,7 @@
+The parent-selected canonical exterior for The Letter Works, a magical municipal processing building in Work Land responsible for sorting and distributing letters throughout Abbie’s World.
+
+Treat the supplied selected image as the exact visual identity and preserve its complete irregular silhouette, stacked architectural forms, welcoming entrance, warm pink roofs, cream masonry, small integrated ground footprint and premium hand-drawn storybook rendering.
+
+The building must remain highly readable as one tappable point of interest at small iPad map scale. Preserve clean expressive outlines, tactile illustrated textures, gentle cel shading, vibrant but slightly muted colors and soft diffuse lighting.
+
+Runtime normalization may replace only the clean outer background with true transparency and center the untouched building with safe padding. Do not invent characters, readable text or UI. --ar 1:1

@@ -14,8 +14,6 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     static let shared = MusicService()
     
     private let apiClient = APIClient.shared
-    private let assetsService = AssetsService.shared
-    private var playlistLoadCancellable: AnyCancellable?
     private var activeMediaPack: MediaPack = .classic
     
     // Published state
@@ -65,11 +63,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         setupAudioSession()
         loadSettings()
         setupInterruptionHandling()
-        if activeMediaPack == .halloween {
-            loadHalloweenPlaylist()
-        } else {
-            loadPlaylist()
-        }
+        loadPlaylist()
     }
     
     deinit {
@@ -176,8 +170,6 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     func setMediaPack(_ mediaPack: MediaPack) {
         guard mediaPack != activeMediaPack else { return }
 
-        playlistLoadCancellable?.cancel()
-        playlistLoadCancellable = nil
         stop()
         currentSong = nil
         playlist = []
@@ -185,101 +177,52 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         shuffledQueue = []
         activeMediaPack = mediaPack
 
-        if mediaPack == .halloween {
-            loadHalloweenPlaylist()
-        } else {
-            loadPlaylist()
-        }
+        loadPlaylist()
     }
     
     func loadPlaylist() {
-        guard activeMediaPack != .halloween else {
-            loadHalloweenPlaylist()
-            return
-        }
-
-        // Check cache first
-        if let cachedPlaylist = loadCachedPlaylist(), isCacheFresh(), !cachedPlaylist.isEmpty {
-            print("✅ MusicService: Using cached playlist (\(cachedPlaylist.count) songs)")
-            playlist = cachedPlaylist
-            restorePlaybackState()
-            return
-        }
-        
-        // If cache is empty or stale, clear it and fetch fresh
-        if let cachedPlaylist = loadCachedPlaylist(), cachedPlaylist.isEmpty {
-            print("⚠️ MusicService: Cached playlist is empty, clearing cache and fetching fresh")
-            clearCache()
-        }
-        
-        // Fetch from server - filter to only main playlist tracks, not game-specific music
-        isLoading = true
-        playlistLoadCancellable = assetsService.getAssets(type: "music")
-            .receive(on: DispatchQueue.main)
-            .sink(
-                receiveCompletion: { [weak self] completion in
-                    self?.isLoading = false
-                    if case .failure(let error) = completion {
-                        print("❌ MusicService: Error loading playlist: \(error)")
-                        // Try to use stale cache if available
-                        if let cached = self?.loadCachedPlaylist() {
-                            print("⚠️ MusicService: Using stale cached playlist")
-                            self?.playlist = cached
-                        }
-                    }
-                },
-                receiveValue: { [weak self] assets in
-                    guard let self = self, self.activeMediaPack != .halloween else { return }
-                    // Filter to only main playlist tracks (exclude game-specific music like goonpopper)
-                    let mainAssets = assets.filter { $0.type == "music/main" }
-                    let tracks = mainAssets.map { asset in MusicTrack(from: asset) }
-                    self.playlist = tracks
-                    self.cachePlaylist(tracks)
-                    print("✅ MusicService: Loaded \(tracks.count) main playlist songs from server (filtered from \(assets.count) total music tracks)")
-                    
-                    // Auto-start if music is enabled
-                    if self.isMusicEnabled && !self.isPlaying && !tracks.isEmpty {
-                        self.play()
-                    }
-                }
-            )
-    }
-
-    private func loadHalloweenPlaylist() {
-        guard activeMediaPack == .halloween else { return }
+        clearCache()
+        isLoading = false
 
         let definitions = [
-            ("midnight_monster_groove", "Midnight Monster Groove"),
-            ("glass_chapel_waltz", "Glass Chapel Waltz"),
-            ("late_train_glow", "Late Train Glow")
+            ("bright_new_day", "Bright New Day"),
+            ("cliffside_morning", "Cliffside Morning"),
+            ("family_adventure", "Family Adventure"),
+            ("joyful_bounce", "Joyful Bounce"),
+            ("well_make_a_way", "We’ll Make a Way"),
+            ("working_song", "Working Song")
         ]
 
         let tracks = definitions.compactMap { id, name -> MusicTrack? in
             guard let url =
                 Bundle.main.url(
                     forResource: id,
-                    withExtension: "mp3",
-                    subdirectory: "MediaPacks/Halloween/music"
-                ) ??
-                Bundle.main.url(forResource: id, withExtension: "mp3") else {
-                print("❌ MusicService: Missing bundled Halloween track: \(id).mp3")
+                    withExtension: "m4a",
+                    subdirectory: "Resources/Music/World2"
+                )
+                ?? Bundle.main.url(forResource: id, withExtension: "m4a") else {
+                print("❌ MusicService: Missing bundled World 2 track: \(id).m4a")
                 return nil
             }
 
             let size = (try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
             return MusicTrack(
-                id: "halloween_\(id)",
+                id: "world2_\(id)",
                 name: name,
                 url: url.absoluteString,
                 size: size,
-                mimeType: "audio/mpeg"
+                mimeType: "audio/mp4"
             )
         }
 
         playlist = tracks
-        currentIndex = 0
-        currentSong = tracks.first
-        print("🎃 MusicService: Loaded \(tracks.count) bundled Halloween tracks")
+        currentIndex = min(max(currentIndex, 0), max(tracks.count - 1, 0))
+        currentSong = tracks.indices.contains(currentIndex) ? tracks[currentIndex] : nil
+        shuffledQueue = []
+        if isShuffleEnabled {
+            generateShuffleQueue()
+        }
+        print("🎵 MusicService: Loaded \(tracks.count) bundled World 2 tracks")
 
         if isMusicEnabled && !tracks.isEmpty {
             play()
@@ -427,6 +370,14 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             }
             self.loadAndPlayCurrentSong()
         }
+    }
+
+    func playSong(id: String) {
+        guard let track = playlist.first(where: { $0.id == id }) else {
+            print("⚠️ MusicService: Track not found in playlist: \(id)")
+            return
+        }
+        playSong(track)
     }
     
     // MARK: - Queue Management

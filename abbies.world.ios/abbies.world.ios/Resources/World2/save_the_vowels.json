@@ -1,0 +1,50 @@
+{
+  "id": "save_the_vowels",
+  "gameType": "fallingTargets",
+  "title": "Save the Vowels",
+  "mission": "The Letter Works needs help! Tap A, E, I, O, and U before they tumble into the machinery.",
+  "durationSeconds": 10,
+  "difficulty": {
+    "prompt": "How wild should the letter storm be?",
+    "easyLabel": "Breezy",
+    "hardLabel": "Wild",
+    "defaultValue": 0.25
+  },
+  "targets": {
+    "set": ["A", "E", "I", "O", "U"],
+    "matchCaseInsensitive": true
+  },
+  "distractors": {
+    "set": ["B", "C", "D", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "V", "W", "X", "Y", "Z"]
+  },
+  "scoring": {
+    "targetHit": 1,
+    "hardWrongHitPenalty": 1,
+    "penaltyStartsAtDifficulty": 0.55
+  },
+  "spawn": {
+    "easyFallSpeed": 55,
+    "hardFallSpeed": 175,
+    "easyMaximumVisible": 3,
+    "hardMaximumVisible": 10,
+    "easyTargetFrequency": 0.62,
+    "hardTargetFrequency": 0.3,
+    "easyLetterSize": 72,
+    "hardLetterSize": 44,
+    "hardSizeVariance": 18,
+    "lowercaseStartsAtDifficulty": 0.38,
+    "hardLowercaseProbability": 0.55,
+    "hardHorizontalDrift": 54
+  },
+  "environment": {
+    "poi": "poi.letterWorks",
+    "interiorAsset": "poi.letterWorks.interior",
+    "sourceHook": "letter_works.hopper.release",
+    "targetHitHook": "letter_works.collection_tank.receive",
+    "roundEndHook": "letter_works.machinery.celebrate"
+  },
+  "reward": {
+    "type": "gems",
+    "amount": 3
+  }
+}

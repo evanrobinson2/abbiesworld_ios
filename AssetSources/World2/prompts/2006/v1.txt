@@ -1,0 +1,7 @@
+Parent-selected interior for the Furniture Store shopping minigame. Preserve the
+warm pink-and-teal indoor furniture avenue, glass ceiling, shell lights, moon light,
+balconies, cushions, displays, and broad central path. Use it as an environmental
+background behind code-rendered budget, catalog, cart, and checkout controls.
+Do not add authored UI, characters, branding, or frightening material.
+
+--ar 16:9

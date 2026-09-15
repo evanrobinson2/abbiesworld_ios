@@ -13,7 +13,7 @@ struct abbies_world_iosApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            World2RootView()
         }
     }
 }
