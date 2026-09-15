@@ -14,9 +14,11 @@ struct World2PlayerHomeView: View {
     @State private var starterPackBurst = false
     @State private var isRoomDropTargeted = false
     @State private var draggingPlacedFurnitureID: String?
+    /// The card the drawer should open on, set when a reward sends us here.
+    @State private var highlightedInventoryID: String?
 
-    private var poi: POI? { viewModel.pois[poiId] }
-    private var owner: PlayerId? { poi?.ownerId.flatMap(PlayerId.init(rawValue:)) }
+    private var poi: World2POIArchetype? { viewModel.archetype(poiId) }
+    private var owner: PlayerId? { poi?.ownerID.flatMap(PlayerId.init(rawValue:)) }
     private var isReadOnly: Bool { viewModel.isReadOnlyVisit(to: poiId) }
     private var roomPlayer: PlayerState? {
         guard let owner else { return PlayerStateService.shared.currentPlayer }
@@ -151,16 +153,24 @@ struct World2PlayerHomeView: View {
                         playerName: owner?.displayName ?? "Player",
                         width: drawerWidth,
                         isReturnTargetActive: draggingPlacedFurnitureID != nil,
+                        highlightedInstanceID: highlightedInventoryID,
                         onDone: {
+                            // The NEW! ribbons have done their job once she has
+                            // had the drawer open, so retire them here.
+                            PlayerStateService.shared.markInventorySeen()
                             withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
                                 isArrangingFurniture = false
                                 selectedFurnitureID = nil
                                 draggingPlacedFurnitureID = nil
+                                highlightedInventoryID = nil
                             }
                         },
                         onPlace: { instanceID in
                             PlayerStateService.shared.placeFurniture(instanceId: instanceID)
                             selectedFurnitureID = instanceID
+                            if highlightedInventoryID == instanceID {
+                                highlightedInventoryID = nil
+                            }
                         }
                     )
                     .frame(width: drawerWidth, height: room.size.height)
@@ -207,6 +217,16 @@ struct World2PlayerHomeView: View {
                         "item_count": "\(pack.items.count)",
                         "player": owner.rawValue,
                     ]
+                )
+            }
+            // A reward sent us here to show her the new thing: open the drawer
+            // on it rather than leaving her to hunt.
+            if !isReadOnly, let rewardID = viewModel.consumeInventoryHighlight() {
+                highlightedInventoryID = rewardID
+                isArrangingFurniture = true
+                World2Diagnostics.log(
+                    "inventory_highlight_opened",
+                    ["instance": rewardID, "poi": poiId]
                 )
             }
             if !isReadOnly,
@@ -407,6 +427,24 @@ struct World2PlayerHomeView: View {
                     )
                 }
                 .tint(.indigo)
+                .overlay(alignment: .topTrailing) {
+                    if viewModel.unseenInventoryCount > 0 {
+                        Text("\(viewModel.unseenInventoryCount) NEW!")
+                            .font(.system(size: 10, weight: .black, design: .rounded))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 4)
+                            .background(.pink, in: Capsule())
+                            .overlay(Capsule().stroke(.white, lineWidth: 1.5))
+                            .offset(x: 12, y: -10)
+                            .accessibilityIdentifier("world2.interior.newItemsPip")
+                    }
+                }
+                .accessibilityLabel(
+                    viewModel.unseenInventoryCount > 0
+                        ? "Decorate my room, \(viewModel.unseenInventoryCount) new items"
+                        : "Decorate my room"
+                )
                 .accessibilityIdentifier("world2.interior.arrangeFurniture")
 
                 Button {
@@ -482,9 +520,29 @@ private struct World2RoomPiece {
     let name: String
     let catalogAssetName: String?
     let generated: World2GeneratedDecoration?
+    /// Set for story rewards, which are drawn in SwiftUI rather than loaded.
+    let story: World2StoryDecoration?
     let category: String
     let defaultScale: Double
     let placementLayer: HomeLayout.PlacedDecoration.PlacementLayer
+
+    init(
+        name: String,
+        catalogAssetName: String? = nil,
+        generated: World2GeneratedDecoration? = nil,
+        story: World2StoryDecoration? = nil,
+        category: String,
+        defaultScale: Double,
+        placementLayer: HomeLayout.PlacedDecoration.PlacementLayer
+    ) {
+        self.name = name
+        self.catalogAssetName = catalogAssetName
+        self.generated = generated
+        self.story = story
+        self.category = category
+        self.defaultScale = defaultScale
+        self.placementLayer = placementLayer
+    }
 
     static func resolve(
         _ decorationId: String,
@@ -493,8 +551,6 @@ private struct World2RoomPiece {
         if decorationId == DecorationInstance.starterJukeboxID {
             return World2RoomPiece(
                 name: "Treehouse Jukebox",
-                catalogAssetName: nil,
-                generated: nil,
                 category: "Jukebox",
                 defaultScale: 1.0,
                 placementLayer: .floor
@@ -504,16 +560,23 @@ private struct World2RoomPiece {
             return World2RoomPiece(
                 name: item.name,
                 catalogAssetName: item.assetName,
-                generated: nil,
                 category: item.category,
                 defaultScale: item.defaultScale,
                 placementLayer: item.placementLayer
             )
         }
+        if let story = World2StoryDecoration.decoration(id: decorationId) {
+            return World2RoomPiece(
+                name: story.name,
+                story: story,
+                category: story.category,
+                defaultScale: story.defaultScale,
+                placementLayer: story.placementLayer.homeLayer
+            )
+        }
         if let generated = player?.generatedDecoration(id: decorationId) {
             return World2RoomPiece(
                 name: generated.label,
-                catalogAssetName: nil,
                 generated: generated,
                 category: "Workbench",
                 defaultScale: 0.82,
@@ -525,7 +588,9 @@ private struct World2RoomPiece {
 
     @ViewBuilder
     var artwork: some View {
-        if let generated {
+        if let story {
+            World2StoryDecorationArtwork(decoration: story)
+        } else if let generated {
             World2GeneratedDecorationArtwork(decoration: generated)
         } else if catalogAssetName == nil && category == "Jukebox" {
             VStack(spacing: 4) {
@@ -724,12 +789,18 @@ private struct World2FurnitureDecoratorDrawer: View {
     let playerName: String
     let width: CGFloat
     let isReturnTargetActive: Bool
+    let highlightedInstanceID: String?
     let onDone: () -> Void
     let onPlace: (String) -> Void
     @ObservedObject private var playerService = PlayerStateService.shared
 
+    /// New things first, so a just-earned reward is the first card in the drawer
+    /// even before anybody scrolls.
     private var inventory: [DecorationInstance] {
-        playerService.unplacedFurnitureInventory
+        playerService.unplacedFurnitureInventory.sorted { lhs, rhs in
+            if lhs.isUnseen != rhs.isUnseen { return lhs.isUnseen }
+            return lhs.acquiredAt > rhs.acquiredAt
+        }
     }
 
     var body: some View {
@@ -786,58 +857,33 @@ private struct World2FurnitureDecoratorDrawer: View {
                     }
                     .padding(20)
                 } else {
-                    ScrollView {
-                        LazyVGrid(
-                            columns: [
-                                GridItem(.flexible(), spacing: 10),
-                                GridItem(.flexible(), spacing: 10),
-                            ],
-                            spacing: 10
-                        ) {
-                            ForEach(inventory) { instance in
-                                if let piece = World2RoomPiece.resolve(
-                                    instance.decorationId,
-                                    player: playerService.currentPlayer
-                                ) {
-                                    Button {
-                                        onPlace(instance.id)
-                                    } label: {
-                                        VStack(spacing: 6) {
-                                            piece.artwork
-                                                .frame(height: 78)
-                                            Text(piece.name)
-                                                .font(.system(size: 11, weight: .black, design: .rounded))
-                                                .multilineTextAlignment(.center)
-                                                .lineLimit(2)
-                                        }
-                                        .padding(8)
-                                        .frame(maxWidth: .infinity)
-                                        .background(
-                                            .white.opacity(0.80),
-                                            in: RoundedRectangle(cornerRadius: 16)
-                                        )
-                                        .overlay(
-                                            RoundedRectangle(cornerRadius: 16)
-                                                .stroke(.indigo.opacity(0.22), lineWidth: 1.5)
-                                        )
-                                        .contentShape(RoundedRectangle(cornerRadius: 16))
+                    ScrollViewReader { scroller in
+                        ScrollView {
+                            LazyVGrid(
+                                columns: [
+                                    GridItem(.flexible(), spacing: 10),
+                                    GridItem(.flexible(), spacing: 10),
+                                ],
+                                spacing: 10
+                            ) {
+                                ForEach(inventory) { instance in
+                                    if let piece = World2RoomPiece.resolve(
+                                        instance.decorationId,
+                                        player: playerService.currentPlayer
+                                    ) {
+                                        card(for: instance, piece: piece)
+                                            .id(instance.id)
                                     }
-                                    .buttonStyle(.plain)
-                                    .draggable(instance.id) {
-                                        piece.artwork
-                                            .frame(width: 120, height: 110)
-                                            .padding(8)
-                                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
-                                    }
-                                    .accessibilityLabel(piece.name)
-                                    .accessibilityHint("Drag into the room, or double tap to place")
-                                    .accessibilityIdentifier(
-                                        "world2.interior.inventory.item.\(instance.id)"
-                                    )
                                 }
                             }
+                            .padding(12)
                         }
-                        .padding(12)
+                        .onAppear {
+                            guard let highlightedInstanceID else { return }
+                            withAnimation(.easeOut(duration: 0.45)) {
+                                scroller.scrollTo(highlightedInstanceID, anchor: .center)
+                            }
+                        }
                     }
                 }
             }
@@ -863,6 +909,66 @@ private struct World2FurnitureDecoratorDrawer: View {
         .shadow(color: .black.opacity(0.28), radius: 18, x: -5)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.interior.decorator.drawer")
+    }
+
+    private func card(
+        for instance: DecorationInstance,
+        piece: World2RoomPiece
+    ) -> some View {
+        let isHighlighted = highlightedInstanceID == instance.id
+        let badges = instance.displayBadges
+
+        return Button {
+            onPlace(instance.id)
+        } label: {
+            VStack(spacing: 6) {
+                piece.artwork
+                    .frame(height: 78)
+                Text(piece.name)
+                    .font(.system(size: 11, weight: .black, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .lineLimit(2)
+                if !badges.isEmpty {
+                    HStack(spacing: 3) {
+                        ForEach(badges, id: \.self) { badge in
+                            World2InventoryBadgeChip(badge: badge)
+                        }
+                    }
+                }
+            }
+            .padding(8)
+            .frame(maxWidth: .infinity)
+            .background(
+                .white.opacity(0.80),
+                in: RoundedRectangle(cornerRadius: 16)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(
+                        isHighlighted ? .yellow : .indigo.opacity(0.22),
+                        lineWidth: isHighlighted ? 4 : 1.5
+                    )
+            )
+            .shadow(
+                color: isHighlighted ? .orange.opacity(0.8) : .clear,
+                radius: 14
+            )
+            .contentShape(RoundedRectangle(cornerRadius: 16))
+        }
+        .buttonStyle(.plain)
+        .draggable(instance.id) {
+            piece.artwork
+                .frame(width: 120, height: 110)
+                .padding(8)
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18))
+        }
+        .accessibilityLabel(
+            badges.isEmpty
+                ? piece.name
+                : "\(piece.name), \(badges.map(\.label).joined(separator: ", "))"
+        )
+        .accessibilityHint("Drag into the room, or double tap to place")
+        .accessibilityIdentifier("world2.interior.inventory.item.\(instance.id)")
     }
 }
 

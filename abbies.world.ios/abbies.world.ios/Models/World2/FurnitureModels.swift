@@ -363,6 +363,7 @@ extension PlayerState {
         return decorations.filter {
             $0.decorationId == DecorationInstance.starterJukeboxID
                 || FurnitureItem.item(id: $0.decorationId) != nil
+                || World2StoryDecoration.isStoryDecoration($0.decorationId)
                 || generatedIDs.contains($0.decorationId)
         }
     }

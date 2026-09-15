@@ -234,8 +234,9 @@ class PlayerStateService: ObservableObject {
             id: "scene.\(UUID().uuidString)",
             name: trimmedName,
             summary: summary.trimmingCharacters(in: .whitespacesAndNewlines),
-            isMutableByPlayer: true,
             hardpoints: hardpoints,
+            isMutableByPlayer: true,
+            showsOpenHardpointsToPlayers: true,
             isDeveloperPlaceholder: true,
             createdAt: Date(),
             createdByPlayerID: player.playerId.rawValue
@@ -450,6 +451,80 @@ class PlayerStateService: ObservableObject {
         currentPlayer = player
         saveLocalState()
         return added
+    }
+
+    /// Put a story reward into the player's inventory.
+    ///
+    /// Awarding is idempotent: the Three Bears will happily let a child play
+    /// again, but they only ever hand over one magic bowl. The returned
+    /// instance is what the celebration screen and the drawer highlight.
+    @discardableResult
+    func awardStoryDecoration(
+        _ decoration: World2StoryDecoration
+    ) -> DecorationInstance? {
+        guard var player = currentPlayer else { return nil }
+        let instanceID = "story_\(player.playerId.rawValue)_\(decoration.id)"
+
+        if let existingIndex = player.decorations.firstIndex(where: { $0.id == instanceID }) {
+            // Already earned. Re-light the NEW! ribbon so a repeat win still
+            // points at the right card in the drawer.
+            player.decorations[existingIndex].badges = decoration.badges
+            currentPlayer = player
+            saveLocalState()
+            World2Diagnostics.log(
+                "story_decoration_regranted",
+                ["decoration": decoration.id, "player": player.playerId.rawValue]
+            )
+            return player.decorations[existingIndex]
+        }
+
+        let instance = DecorationInstance(
+            id: instanceID,
+            decorationId: decoration.id,
+            x: 0.50,
+            y: decoration.placementLayer == .wall ? 0.38 : 0.72,
+            scale: decoration.defaultScale,
+            zIndex: (player.decorations.map(\.zIndex).max() ?? 0) + 1,
+            badges: decoration.badges
+        )
+        player.decorations.append(instance)
+        player.progression.totalMinigamesCompleted += 1
+        if !player.progression.completedPOIs.contains(decoration.awardedByArchetypeID) {
+            player.progression.completedPOIs.append(decoration.awardedByArchetypeID)
+        }
+        currentPlayer = player
+        saveLocalState()
+        World2Diagnostics.log(
+            "story_decoration_awarded",
+            [
+                "decoration": decoration.id,
+                "instance": instanceID,
+                "player": player.playerId.rawValue,
+            ]
+        )
+        return instance
+    }
+
+    func hasStoryDecoration(_ decoration: World2StoryDecoration) -> Bool {
+        currentPlayer?.decorations.contains { $0.decorationId == decoration.id } ?? false
+    }
+
+    /// Number of inventory items still wearing a NEW! ribbon, for the drawer badge.
+    var unseenInventoryCount: Int {
+        currentPlayer?.decorations.filter(\.isUnseen).count ?? 0
+    }
+
+    /// Retire the NEW! ribbons once the player has actually looked at the drawer.
+    func markInventorySeen() {
+        guard var player = currentPlayer else { return }
+        var changed = false
+        for index in player.decorations.indices where player.decorations[index].isUnseen {
+            player.decorations[index].markSeen()
+            changed = true
+        }
+        guard changed else { return }
+        currentPlayer = player
+        saveLocalState()
     }
 
     func earnFurnitureIngredient() {
@@ -767,6 +842,9 @@ class PlayerStateService: ObservableObject {
         }
         if let item = FurnitureItem.item(id: decorationId) {
             return (item.defaultScale, item.placementLayer)
+        }
+        if let story = World2StoryDecoration.decoration(id: decorationId) {
+            return (story.defaultScale, story.placementLayer.homeLayer)
         }
         if let generated = player.generatedDecoration(id: decorationId) {
             return (0.82, generated.placementLayer.homeLayer)

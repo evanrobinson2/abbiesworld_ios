@@ -87,6 +87,9 @@ struct DecorationInstance: Codable, Identifiable {
     var rotation: Double
     var zIndex: Int
     var state: DecorationState?
+    /// Ribbons shown on this item's card in the drawer. Optional so saves
+    /// written before badges existed still decode.
+    var badges: [World2InventoryBadge]?
     let acquiredAt: Date
     
     struct DecorationState: Codable {
@@ -94,7 +97,7 @@ struct DecorationInstance: Codable, Identifiable {
         var customData: [String: String]?
     }
     
-    init(id: String? = nil, decorationId: String, x: Double, y: Double, scale: Double = 1.0, rotation: Double = 0, zIndex: Int = 0, state: DecorationState? = nil) {
+    init(id: String? = nil, decorationId: String, x: Double, y: Double, scale: Double = 1.0, rotation: Double = 0, zIndex: Int = 0, state: DecorationState? = nil, badges: [World2InventoryBadge]? = nil) {
         self.id = id ?? UUID().uuidString
         self.decorationId = decorationId
         self.x = x
@@ -103,7 +106,23 @@ struct DecorationInstance: Codable, Identifiable {
         self.rotation = rotation
         self.zIndex = zIndex
         self.state = state
+        self.badges = badges
         self.acquiredAt = Date()
+    }
+
+    var displayBadges: [World2InventoryBadge] {
+        World2InventoryBadge.forDisplay(badges ?? [])
+    }
+
+    /// True while the item still wears its NEW! ribbon.
+    var isUnseen: Bool {
+        badges?.contains(.new) ?? false
+    }
+
+    mutating func markSeen() {
+        guard var badges else { return }
+        badges.removeAll { $0 == .new }
+        self.badges = badges
     }
     
     static let starterJukeboxID = "decoration.jukebox.starter"

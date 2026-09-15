@@ -85,6 +85,12 @@ struct World2RootView: View {
                     onClose: viewModel.exitPOI
                 )
 
+            case .threeBearsHouse:
+                World2ThreeBearsHouseView(
+                    onExit: viewModel.exitPOI,
+                    onComplete: viewModel.completeJustRightPorridge
+                )
+
             case .fallingTargets(let configurationID):
                 FallingTargetGameHost(
                     configurationID: configurationID,
@@ -102,6 +108,17 @@ struct World2RootView: View {
 
             if viewModel.currentScreen.showsGlobalHUD {
                 globalHUDButtons
+            }
+
+            if let celebration = viewModel.rewardCelebration {
+                World2RewardCelebrationView(
+                    celebration: celebration,
+                    playerName: viewModel.currentPlayerId?.displayName ?? "you",
+                    onShowMe: viewModel.openTreehouseForReward,
+                    onDismiss: viewModel.dismissRewardCelebration
+                )
+                .transition(.opacity)
+                .zIndex(30_000)
             }
 
             if let toast = viewModel.toastMessage {
@@ -636,7 +653,7 @@ private extension World2Screen {
         switch self {
         case .loading, .playerSelect, .treehouse, .cardFactory,
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
-             .creatureLab, .fallingTargets:
+             .creatureLab, .fallingTargets, .threeBearsHouse:
             return false
         case .homeWorld, .blankSlate:
             return true
