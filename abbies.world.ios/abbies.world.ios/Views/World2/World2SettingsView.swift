@@ -43,9 +43,9 @@ struct World2DeveloperSettingsSection: View {
                     )
                 ) {
                     VStack(alignment: .leading, spacing: 3) {
-                        Text("World Layout Developer Mode")
+                        Text("Scene Editor Developer Mode")
                             .font(.headline)
-                        Text("Move, resize, and rotate world assets.")
+                        Text("Edit hardpoints and the places standing on them.")
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }

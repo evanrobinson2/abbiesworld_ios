@@ -50,7 +50,7 @@ struct World2MutableSceneView: View {
                 if selectedInventoryItemID != nil,
                    !viewModel.currentMutableScene.hardpoints.isEmpty {
                     ForEach(viewModel.availableSceneHardpoints) { hardpoint in
-                        World2HardpointMarker(hardpoint: hardpoint) {
+                        World2PlaceDropTarget(hardpoint: hardpoint) {
                             placeSelectedItem(on: hardpoint)
                         }
                         .position(
@@ -452,7 +452,9 @@ private struct World2PlaceInventoryRow: View {
     }
 }
 
-private struct World2HardpointMarker: View {
+/// The big "put it here" ring a player taps in a player-mutable scene. Distinct
+/// from the scene editor's World2HardpointMarker, which is a developer tool.
+private struct World2PlaceDropTarget: View {
     let hardpoint: World2SceneHardpoint
     let onPlace: () -> Void
     @State private var isPulsing = false

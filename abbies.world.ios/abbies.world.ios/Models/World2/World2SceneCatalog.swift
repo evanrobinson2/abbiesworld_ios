@@ -19,7 +19,7 @@ import Foundation
 
 enum World2SceneCatalog {
     static func sceneID(for worldId: WorldId) -> String {
-        worldId.rawValue
+        worldId.sceneID
     }
 
     static let all: [World2SceneDefinition] = [

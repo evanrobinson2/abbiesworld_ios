@@ -13,6 +13,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     case farm = "world.farm"
     case adventure = "world.adventure"
     case blankSlate = "world.blankSlate"
+    case threeBears = "world.threeBears"
     
     var id: String { rawValue }
     
@@ -23,6 +24,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .farm: return "Farm Land"
         case .adventure: return "Adventure World"
         case .blankSlate: return "Blank Slate"
+        case .threeBears: return "Three Bears Woods"
         }
     }
     
@@ -33,6 +35,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .farm: return "A sunny open place for growing ideas and finding furniture"
         case .adventure: return "A rugged frontier where you earn ingredients and gems"
         case .blankSlate: return "An empty scene waiting for player-made places"
+        case .threeBears: return "A hushed clearing in the woods where somebody is cooking"
         }
     }
     
@@ -43,10 +46,25 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .farm: return "East"
         case .adventure: return "North"
         case .blankSlate: return "Through the Portal"
+        case .threeBears: return "Into the Woods"
+        }
+    }
+
+    /// The scene that holds this world's pads and places.
+    var sceneID: String {
+        switch self {
+        case .blankSlate: return World2SceneDefinition.blankSlateSceneID
+        default: return rawValue
         }
     }
 }
 
+/// World-level metadata: what this map is called, how it sounds, and where you
+/// can walk from here.
+///
+/// Placement used to live here as `poiPlacements`. It belongs to the scene graph
+/// now — see World2SceneCatalog and World2SceneGraphStore — so a world and its
+/// contents can be edited independently.
 struct World: Codable, Identifiable {
     let id: WorldId
     let name: String
@@ -54,32 +72,15 @@ struct World: Codable, Identifiable {
     let backgroundAsset: String
     let lightMusicTrack: String
     let intenseMusicTrack: String
-    let poiPlacements: [POIPlacement]
     let adjacentWorlds: [WorldId]
     let ambiance: WorldAmbiance
+
+    var sceneID: String { id.sceneID }
     
     struct WorldAmbiance: Codable {
         let primaryColor: String
         let secondaryColor: String
         let mood: String
-    }
-}
-
-struct POIPlacement: Codable, Identifiable {
-    let id: String
-    let poiId: String
-    let x: Double
-    let y: Double
-    let scale: Double
-    let zIndex: Int
-    
-    init(id: String? = nil, poiId: String, x: Double, y: Double, scale: Double = 1.0, zIndex: Int = 0) {
-        self.id = id ?? UUID().uuidString
-        self.poiId = poiId
-        self.x = x
-        self.y = y
-        self.scale = scale
-        self.zIndex = zIndex
     }
 }
 

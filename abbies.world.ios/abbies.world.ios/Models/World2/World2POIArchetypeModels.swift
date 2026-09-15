@@ -164,6 +164,13 @@ struct World2POIContract: Codable, Equatable, Sendable {
     }
 }
 
+/// Hand-drawn stand-in art for a place whose painted exterior has not been
+/// generated yet. A brand-new place should look like somewhere on the map, not
+/// like a missing asset.
+enum World2POIArtStyle: String, Codable, Sendable {
+    case bearsCottage
+}
+
 /// A registered kind of place.
 struct World2POIArchetype: Identifiable, Equatable, Sendable {
     let id: String
@@ -172,6 +179,8 @@ struct World2POIArchetype: Identifiable, Equatable, Sendable {
     let sizeClass: World2POISizeClass
     let exteriorAsset: String
     let interiorAsset: String?
+    /// Used only when `exteriorAsset` has not been qualified into the bundle.
+    let drawnArtStyle: World2POIArtStyle?
     let icon: String
     let lore: String?
     /// Shown in the inspection drawer under the name.
@@ -190,6 +199,7 @@ struct World2POIArchetype: Identifiable, Equatable, Sendable {
         sizeClass: World2POISizeClass,
         exteriorAsset: String,
         interiorAsset: String? = nil,
+        drawnArtStyle: World2POIArtStyle? = nil,
         icon: String? = nil,
         lore: String? = nil,
         activityDescription: String,
@@ -204,6 +214,7 @@ struct World2POIArchetype: Identifiable, Equatable, Sendable {
         self.sizeClass = sizeClass
         self.exteriorAsset = exteriorAsset
         self.interiorAsset = interiorAsset
+        self.drawnArtStyle = drawnArtStyle
         self.icon = icon ?? kind.fallbackIcon
         self.lore = lore
         self.activityDescription = activityDescription

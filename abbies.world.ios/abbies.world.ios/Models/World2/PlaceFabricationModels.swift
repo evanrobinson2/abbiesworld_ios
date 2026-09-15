@@ -58,7 +58,7 @@ struct World2PlaceInventoryItem: Codable, Identifiable, Equatable {
 }
 
 struct World2PlacedPlaceInstance: Codable, Identifiable, Equatable {
-    static let blankSlateSceneID = "scene.blankSlate"
+    static let blankSlateSceneID = World2SceneDefinition.blankSlateSceneID
 
     let id: String
     let templateID: World2PlaceTemplateID

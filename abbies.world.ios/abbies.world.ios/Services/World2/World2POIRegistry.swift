@@ -215,6 +215,7 @@ enum World2POIRegistry {
         sizeClass: .large,
         exteriorAsset: "poi.threeBearsHouse.exterior",
         interiorAsset: "poi.threeBearsHouse.interior",
+        drawnArtStyle: .bearsCottage,
         icon: "house.and.flag.fill",
         lore: "Three bowls are steaming on the table and nobody is home yet.",
         activityDescription: "Papa's porridge is too hot and Mama's is too cold. Find the one that is just right three times and the bears will let you keep the magic bowl.",
