@@ -514,8 +514,13 @@ final class World2ViewModel: ObservableObject {
         )
     }
 
+    /// "Keep playing" leaves the place that just paid out. Its game is finished,
+    /// so dropping her back on the table with no bowls left would be a dead end.
     func dismissRewardCelebration() {
         rewardCelebration = nil
+        if currentScreen == .threeBearsHouse {
+            exitPOI()
+        }
     }
 
     /// "Show me" on the celebration: walk straight into the treehouse with the

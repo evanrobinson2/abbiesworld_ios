@@ -202,7 +202,9 @@ struct World2PlayerHomeView: View {
             )
             // A reward sent us here to show her the new thing: open the drawer
             // on it rather than leaving her to hunt.
-            let rewardID = isReadOnly ? nil : viewModel.consumeInventoryHighlight()
+            let rewardID: String? = isReadOnly
+                ? nil
+                : viewModel.consumeInventoryHighlight()
             if let rewardID {
                 highlightedInventoryID = rewardID
                 isArrangingFurniture = true
