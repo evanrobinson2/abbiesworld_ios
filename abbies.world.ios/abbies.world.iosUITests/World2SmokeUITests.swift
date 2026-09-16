@@ -7,20 +7,15 @@ final class World2SmokeUITests: XCTestCase {
         continueAfterFailure = false
         XCUIDevice.shared.orientation = .landscapeLeft
         app = XCUIApplication()
-        app.launchArguments = ["-world2SkipIntro"]
+        app.launchArguments = ["-world2SkipIntro", "-world2SkipAuth"]
     }
 
     func testSplashContinueAppearsWithoutAuth() throws {
-        app.launchArguments = []
+        app.launchArguments = ["-world2SkipAuth"]
         app.launch()
 
         let intro = app.descendants(matching: .any)["world2.loading"]
         XCTAssertTrue(intro.waitForExistence(timeout: 8), "Intro never appeared")
-
-        let login = app.descendants(matching: .any).matching(
-            NSPredicate(format: "label CONTAINS[c] 'sign in' OR label CONTAINS[c] 'log in' OR identifier CONTAINS[c] 'auth0'")
-        )
-        XCTAssertEqual(login.count, 0, "Auth0 or another login gate blocked launch")
 
         let continueButton = app.descendants(matching: .any)["world2.loading.continue"]
         XCTAssertTrue(
@@ -75,7 +70,7 @@ final class World2SmokeUITests: XCTestCase {
     }
 
     func testInventoryFactoryAndFurnitureStoreOpen() throws {
-        app.launchArguments = ["-world2SkipIntro", "-launchWorld2BlankSlate"]
+        app.launchArguments = ["-world2SkipIntro", "-launchWorld2BlankSlate", "-world2SkipAuth"]
         app.launch()
         let continueButton = app.buttons["world2.loading.continue"]
         XCTAssertTrue(continueButton.waitForExistence(timeout: 8))
@@ -92,7 +87,7 @@ final class World2SmokeUITests: XCTestCase {
         )
 
         app.terminate()
-        app.launchArguments = ["-world2SkipIntro", "-launchWorld2FurnitureStore"]
+        app.launchArguments = ["-world2SkipIntro", "-launchWorld2FurnitureStore", "-world2SkipAuth"]
         app.launch()
         let continueAgain = app.buttons["world2.loading.continue"]
         XCTAssertTrue(continueAgain.waitForExistence(timeout: 8))
@@ -103,7 +98,7 @@ final class World2SmokeUITests: XCTestCase {
         )
 
         app.terminate()
-        app.launchArguments = ["-world2SkipIntro", "-launchWorld2Home"]
+        app.launchArguments = ["-world2SkipIntro", "-launchWorld2Home", "-world2SkipAuth"]
         app.launch()
         let continueHome = app.buttons["world2.loading.continue"]
         XCTAssertTrue(continueHome.waitForExistence(timeout: 8))
@@ -116,7 +111,7 @@ final class World2SmokeUITests: XCTestCase {
     }
 
     func testDecoratingPlacesMovesAndKeepsFurniture() throws {
-        app.launchArguments = ["-world2SkipIntro", "-launchWorld2AbbieTreehouse"]
+        app.launchArguments = ["-world2SkipIntro", "-launchWorld2AbbieTreehouse", "-world2SkipAuth"]
         app.launch()
         let continueButton = app.buttons["world2.loading.continue"]
         XCTAssertTrue(continueButton.waitForExistence(timeout: 8))

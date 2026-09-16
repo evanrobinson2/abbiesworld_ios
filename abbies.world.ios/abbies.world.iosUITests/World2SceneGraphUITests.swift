@@ -16,7 +16,7 @@ final class World2SceneGraphUITests: XCTestCase {
         continueAfterFailure = false
         XCUIDevice.shared.orientation = .landscapeLeft
         app = XCUIApplication()
-        app.launchArguments = ["-world2SkipIntro"]
+        app.launchArguments = ["-world2SkipIntro", "-world2SkipAuth"]
     }
 
     /// The pads the scene catalog leaves open should shimmer on the painted maps
@@ -64,7 +64,7 @@ final class World2SceneGraphUITests: XCTestCase {
 
     /// The whole payout: win, celebrate, then find the thing in the drawer.
     func testJustRightAwardsPorridgeIntoPlayerInventory() throws {
-        app.launchArguments = ["-world2SkipIntro", "-launchWorld2JustRight"]
+        app.launchArguments = ["-world2SkipIntro", "-launchWorld2JustRight", "-world2SkipAuth"]
         app.launch()
         continueFromIntro()
 

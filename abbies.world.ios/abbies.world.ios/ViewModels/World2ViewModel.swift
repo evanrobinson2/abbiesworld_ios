@@ -18,6 +18,9 @@ enum World2Screen: Equatable {
     case characterStudio
     case sceneBuilder
     case worldTeleporter
+    case whizbang
+    case decoratorMachine
+    case planningDept
 }
 
 /// A place the player has tapped on the map, paired with the instance they
@@ -69,6 +72,10 @@ final class World2ViewModel: ObservableObject {
 
     /// Placement truth for every scene. Shared with the scene editor.
     let sceneGraph = World2SceneGraphStore()
+    /// Overland tunnels (N/S/E/W). Shared with the minimap and Planning Dept.
+    let worldGraph = World2WorldGraphStore()
+    /// Abbie + Daddy game pieces on the open map.
+    let party = World2PartyController()
 
     @Published private(set) var currentScreen: World2Screen = .loading
     @Published private(set) var currentWorld: World?
@@ -135,6 +142,18 @@ final class World2ViewModel: ObservableObject {
         currentScene.openHardpoints
     }
 
+    /// Overland graph for the HUD minimap and Planning Dept.
+    var worldGraphSnapshot: World2WorldGraphSnapshot {
+        worldGraph.snapshot(currentSceneID: currentWorld?.sceneID)
+    }
+
+    /// Neighbours from the tunnel graph (falls back to authored adjacency).
+    func travelDestinations(from worldID: WorldId) -> [WorldId] {
+        let fromGraph = worldGraph.adjacentWorldIDs(from: worldID)
+        if !fromGraph.isEmpty { return fromGraph }
+        return worlds[worldID]?.adjacentWorlds ?? []
+    }
+
     init() {
         assetService.objectWillChange
             .sink { [weak self] _ in
@@ -151,7 +170,13 @@ final class World2ViewModel: ObservableObject {
                 self?.objectWillChange.send()
             }
             .store(in: &cancellables)
+        worldGraph.objectWillChange
+            .sink { [weak self] _ in
+                self?.objectWillChange.send()
+            }
+            .store(in: &cancellables)
         loadWorldMetadata()
+        worldGraph.configure(worlds: worlds, playerID: nil)
         auditRegisteredContent()
     }
 
@@ -183,12 +208,18 @@ final class World2ViewModel: ObservableObject {
         }
         dismissPOIInspection()
         sceneGraph.selectPlayer(playerId)
+        worldGraph.configure(worlds: worlds, playerID: playerId)
         currentMutableSceneID = World2PlacedPlaceInstance.blankSlateSceneID
         mutableSceneBackStack = []
         playerService.setCurrentWorld(.home)
         currentWorld = worlds[.home]
         setScreen(.homeWorld, reason: "player_selected")
         World2Diagnostics.log("player_selected", ["player": playerId.rawValue])
+    }
+
+    func returnToProfileSelect() {
+        dismissPOIInspection()
+        setScreen(.playerSelect, reason: "switch_profile")
     }
 
     // MARK: - Inspection
@@ -208,6 +239,7 @@ final class World2ViewModel: ObservableObject {
             instance: instance
         )
         showingPOISheet = true
+        party.walkToPOI(at: instance.transform.position)
         World2Diagnostics.log(
             "poi_inspected",
             ["archetype": archetype.id, "instance": instance.id]
@@ -231,6 +263,7 @@ final class World2ViewModel: ObservableObject {
             currentMutableSceneID = World2PlacedPlaceInstance.blankSlateSceneID
             mutableSceneBackStack = []
         }
+        party.enterScene(.defaultSpawn)
         setScreen(
             worldId == .blankSlate ? .blankSlate : .homeWorld,
             reason: "world_changed"
@@ -319,6 +352,7 @@ final class World2ViewModel: ObservableObject {
         }
         mutableSceneBackStack.append(currentMutableSceneID)
         currentMutableSceneID = exit.toSceneID
+        party.enterScene(exit.arrivalContract)
         World2Diagnostics.log(
             "scene_exit_traversed",
             [
@@ -335,6 +369,7 @@ final class World2ViewModel: ObservableObject {
             return
         }
         currentMutableSceneID = previous
+        party.enterScene(.defaultSpawn)
         World2Diagnostics.log(
             "mutable_scene_back",
             ["to_scene": previous]
@@ -408,6 +443,12 @@ final class World2ViewModel: ObservableObject {
             setScreen(.characterStudio, reason: "poi_entered")
         case .sceneBuilder:
             setScreen(.sceneBuilder, reason: "poi_entered")
+        case .whizbang:
+            setScreen(.whizbang, reason: "poi_entered")
+        case .decoratorMachine:
+            setScreen(.decoratorMachine, reason: "poi_entered")
+        case .planningDept:
+            setScreen(.planningDept, reason: "poi_entered")
         case .placeFactory:
             // Factories are entered through their placed instance, which knows
             // which copy the player tapped.
@@ -460,6 +501,27 @@ final class World2ViewModel: ObservableObject {
         currentWorld = worlds[.work] ?? currentWorld
         playerService.setCurrentWorld(.work)
         setScreen(.creatureLab, reason: "classic_games")
+    }
+
+    func openWhizbang() {
+        dismissPOIInspection()
+        currentWorld = worlds[.work] ?? currentWorld
+        playerService.setCurrentWorld(.work)
+        setScreen(.whizbang, reason: "classic_games")
+    }
+
+    func openDecoratorMachine() {
+        dismissPOIInspection()
+        currentWorld = worlds[.farm] ?? currentWorld
+        playerService.setCurrentWorld(.farm)
+        setScreen(.decoratorMachine, reason: "classic_games")
+    }
+
+    func openPlanningDept() {
+        dismissPOIInspection()
+        currentWorld = worlds[.home] ?? currentWorld
+        playerService.setCurrentWorld(.home)
+        setScreen(.planningDept, reason: "hud_minimap")
     }
 
     func awardWorkbenchPack(
@@ -670,6 +732,22 @@ final class World2ViewModel: ObservableObject {
             selectPlayer(directPlayer)
             switchWorld(to: .work)
             setScreen(.creatureLab, reason: "direct_launch")
+        } else if arguments.contains("-launchWhizbang")
+                    || arguments.contains("-autoPlayWhizbang")
+                    || arguments.contains("-launchWorld2Whizbang") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .work)
+            setScreen(.whizbang, reason: "direct_launch")
+        } else if arguments.contains("-launchDecoratorMachine")
+                    || arguments.contains("-launchWorld2DecoratorMachine") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .farm)
+            setScreen(.decoratorMachine, reason: "direct_launch")
+        } else if arguments.contains("-launchWorld2PlanningDept")
+                    || arguments.contains("-openWorld2Minimap") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .home)
+            setScreen(.planningDept, reason: "direct_launch")
         } else if let inspectionFlag = processArguments.firstIndex(of: "-inspectWorld2POI"),
            processArguments.indices.contains(inspectionFlag + 1),
            let archetype = World2POIRegistry.archetype(
@@ -742,6 +820,12 @@ final class World2ViewModel: ObservableObject {
             songID = World2POIRegistry.characterStudio.musicTrackID
         case .sceneBuilder:
             songID = World2POIRegistry.sceneBuilder.musicTrackID
+        case .whizbang:
+            songID = World2POIRegistry.whizbang.musicTrackID
+        case .decoratorMachine:
+            songID = World2POIRegistry.decoratorMachine.musicTrackID
+        case .planningDept:
+            songID = World2POIRegistry.planningDept.musicTrackID
         case .worldTeleporter:
             songID = "world2_cliffside_morning"
         }
@@ -911,6 +995,9 @@ private extension World2Screen {
         case .characterStudio: return "character_studio"
         case .sceneBuilder: return "scene_builder"
         case .worldTeleporter: return "world_teleporter"
+        case .whizbang: return "whizbang"
+        case .decoratorMachine: return "decorator_machine"
+        case .planningDept: return "planning_dept"
         }
     }
 }

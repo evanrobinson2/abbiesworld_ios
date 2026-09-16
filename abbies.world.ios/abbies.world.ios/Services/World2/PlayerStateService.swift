@@ -252,7 +252,12 @@ class PlayerStateService: ObservableObject {
             x: 0.82,
             y: 0.50,
             createdAt: Date(),
-            createdByPlayerID: player.playerId.rawValue
+            createdByPlayerID: player.playerId.rawValue,
+            // Arrive bottom-left, then walk toward the scene center.
+            partyLanding: World2PartyLandingContract(
+                landing: .init(x: 0.10, y: 0.88),
+                approach: .init(x: 0.50, y: 0.62)
+            )
         )
         var scenes = player.createdScenes ?? []
         scenes.append(destination)

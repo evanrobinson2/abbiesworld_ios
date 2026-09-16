@@ -95,6 +95,7 @@
 			);
 			name = abbies.world.ios;
 			packageProductDependencies = (
+				A1B0AUTH0000000000000002 /* Auth0 */,
 			);
 			productName = abbies.world.ios;
 			productReference = DC11978B2EECC0C400E52958 /* abbies.world.ios.app */;
@@ -179,6 +180,9 @@
 			mainGroup = DC1197822EECC0C400E52958;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
+			packageReferences = (
+				A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0.swift" */,
+			);
 			productRefGroup = DC11978C2EECC0C400E52958 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -189,6 +193,25 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0.swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/Auth0.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.18.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1B0AUTH0000000000000002 /* Auth0 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0.swift" */;
+			productName = Auth0;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin PBXTargetDependency section */
 		DC1197A72EECC0C400E52958 /* PBXTargetDependency */ = {

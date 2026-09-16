@@ -325,6 +325,15 @@ struct FurnitureStarterPack {
                 "crk-s3-08-star-moon-pendant-pair",
                 "crk-s4-11-mushroom-table-set",
             ]
+        case .evan:
+            title = "Evan's Workshop Pack"
+            itemIDs = [
+                FurnitureItem.abbieStarterBed.id,
+                "crk-s1-05-cookie-flower-rug",
+                "crk-s1-09-rosebud-wardrobe",
+                "crk-s2-10-painters-table",
+                "crk-s3-18-sugar-vine-plant",
+            ]
         }
         var items: [FurnitureItem] = []
         for itemID in itemIDs {

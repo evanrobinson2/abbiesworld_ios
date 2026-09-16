@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ClientId</key>
+	<string>1gBeX46sl6mL9IaUsREDoVlsu3HUfczG</string>
+	<key>Domain</key>
+	<string>dev-33h7qd4ytudlk0ls.us.auth0.com</string>
+	<key>Audience</key>
+	<string>https://api.abbies.world</string>
+</dict>
+</plist>

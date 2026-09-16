@@ -113,4 +113,36 @@ struct World2SceneExit: Codable, Identifiable, Equatable {
     let y: Double
     let createdAt: Date
     let createdByPlayerID: String
+    /// Optional spawn / approach for Abbie + Daddy when this exit is taken.
+    /// Older saves omit it and fall back to the bottom-left staging corner.
+    var partyLanding: World2PartyLandingContract?
+
+    init(
+        id: String,
+        fromSceneID: String,
+        toSceneID: String,
+        name: String,
+        summary: String,
+        x: Double,
+        y: Double,
+        createdAt: Date,
+        createdByPlayerID: String,
+        partyLanding: World2PartyLandingContract? = nil
+    ) {
+        self.id = id
+        self.fromSceneID = fromSceneID
+        self.toSceneID = toSceneID
+        self.name = name
+        self.summary = summary
+        self.x = x
+        self.y = y
+        self.createdAt = createdAt
+        self.createdByPlayerID = createdByPlayerID
+        self.partyLanding = partyLanding
+    }
+
+    /// Contract the party should honor when arriving through this exit.
+    var arrivalContract: World2PartyLandingContract {
+        partyLanding ?? .defaultSpawn
+    }
 }

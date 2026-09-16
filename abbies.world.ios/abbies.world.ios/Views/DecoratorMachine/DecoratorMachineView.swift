@@ -10,6 +10,7 @@ import SwiftUI
 struct DecoratorMachineView: View {
     @StateObject private var viewModel = DecoratorMachineViewModel()
     @Environment(\.dismiss) private var dismiss
+    var onDismiss: (() -> Void)?
     
     @State private var draggedEssence: DecoratorEssence?
     @State private var dragLocation: CGPoint = .zero
@@ -74,6 +75,7 @@ struct DecoratorMachineView: View {
         HStack {
             // Close button - big and friendly
             Button {
+                onDismiss?()
                 dismiss()
             } label: {
                 Image(systemName: "house.fill")

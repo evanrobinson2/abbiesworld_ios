@@ -47,6 +47,12 @@ struct World2MutableSceneView: View {
                     .zIndex(12)
                 }
 
+                World2PartyLayer(
+                    party: viewModel.party,
+                    mapRect: CGRect(origin: .zero, size: geometry.size)
+                )
+                .zIndex(18)
+
                 if selectedInventoryItemID != nil,
                    !viewModel.currentMutableScene.hardpoints.isEmpty {
                     ForEach(viewModel.availableSceneHardpoints) { hardpoint in
@@ -99,6 +105,11 @@ struct World2MutableSceneView: View {
         }
         .onAppear {
             logSceneState()
+            // Only seed if the party has never been placed this session visit;
+            // traverseSceneExit / returnFromMutableScene own the landing contract.
+            if viewModel.party.sceneVisitID == 0 {
+                viewModel.party.enterScene(.defaultSpawn)
+            }
         }
         .onChange(of: viewModel.currentMutableSceneID) {
             selectedInventoryItemID = nil

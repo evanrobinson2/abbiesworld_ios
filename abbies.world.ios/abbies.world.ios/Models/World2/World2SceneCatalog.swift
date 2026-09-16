@@ -76,7 +76,7 @@ enum World2SceneCatalog {
                 name: "Creekside spot",
                 position: World2NormalizedPoint(x: 0.152, y: 0.566),
                 acceptedSizeClasses: [.small, .medium],
-                notes: "Open — proof that a registered place can be dropped here"
+                notes: "Planning Department — world graph map room"
             ),
             World2SceneHardpoint(
                 id: "hardpoint.home.hilltopPad",
@@ -116,6 +116,16 @@ enum World2SceneCatalog {
                 y: 0.685,
                 scale: 1.05,
                 zIndex: 2
+            ),
+            authored(
+                "instance.home.planningDept",
+                World2POIRegistry.planningDeptID,
+                scene: sceneID(for: .home),
+                hardpoint: "hardpoint.home.creekPad",
+                x: 0.152,
+                y: 0.566,
+                scale: 0.88,
+                zIndex: 4
             ),
         ],
         showsOpenHardpointsToPlayers: true,
@@ -159,7 +169,7 @@ enum World2SceneCatalog {
                 name: "Corner lot",
                 position: World2NormalizedPoint(x: 0.221, y: 0.409),
                 acceptedSizeClasses: [.small, .medium],
-                notes: "Open — the third empty lot the art promises"
+                notes: "Whizbang gadget barn stands here"
             ),
         ],
         poiInstances: [
@@ -192,6 +202,16 @@ enum World2SceneCatalog {
                 y: 0.759,
                 scale: 0.88,
                 zIndex: 3
+            ),
+            authored(
+                "instance.work.whizbang",
+                World2POIRegistry.whizbangID,
+                scene: sceneID(for: .work),
+                hardpoint: "hardpoint.work.cornerLot",
+                x: 0.221,
+                y: 0.409,
+                scale: 0.90,
+                zIndex: 4
             ),
         ],
         showsOpenHardpointsToPlayers: true,
@@ -239,6 +259,16 @@ enum World2SceneCatalog {
                 y: 0.480,
                 scale: 1.15,
                 zIndex: 1
+            ),
+            authored(
+                "instance.farm.decoratorMachine",
+                World2POIRegistry.decoratorMachineID,
+                scene: sceneID(for: .farm),
+                hardpoint: "hardpoint.farm.orchardPad",
+                x: 0.213,
+                y: 0.661,
+                scale: 0.92,
+                zIndex: 2
             ),
         ],
         showsOpenHardpointsToPlayers: true,

@@ -4,13 +4,12 @@ import Combine
 
 struct World2RootView: View {
     @StateObject private var viewModel = World2ViewModel()
+    @EnvironmentObject private var auth: AuthenticationService
     @Environment(\.scenePhase) private var scenePhase
     @State private var showingMusicPlayer =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Music")
     @State private var showingSettings =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Settings")
-    @State private var showingLivingScenePOC =
-        ProcessInfo.processInfo.arguments.contains("-openLivingScenePOC")
     @State private var showingClassicGames =
         ProcessInfo.processInfo.arguments.contains("-openWorld2ClassicGames")
     @State private var showingWaypointGame = false
@@ -18,10 +17,14 @@ struct World2RootView: View {
     @State private var showingPictureCarver = false
     @State private var showingDinoPicnic = false
     @State private var showingDecoratorMachine = false
+    @State private var showingWhizbang = false
     @State private var openCreatureLabFromClassic = false
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
+            if !auth.isAuthenticated {
+                AuthLoginView(auth: auth)
+            } else {
             switch viewModel.currentScreen {
             case .loading:
                 BootstrapLoadingView(
@@ -31,7 +34,9 @@ struct World2RootView: View {
                 )
 
             case .playerSelect:
-                PlayerSelectView(onSelect: viewModel.selectPlayer)
+                HouseholdProfileSelectView(auth: auth) { playerId in
+                    viewModel.selectPlayer(playerId)
+                }
 
             case .homeWorld:
                 WorldMapView(viewModel: viewModel)
@@ -111,6 +116,27 @@ struct World2RootView: View {
                     onClose: viewModel.exitPOI
                 )
 
+            case .whizbang:
+                IncredimachineView(
+                    onDismiss: viewModel.exitPOI,
+                    onComplete: {
+                        viewModel.completeMinigame(
+                            configurationID: "whizbang",
+                            score: 1,
+                            rewardGems: 8
+                        )
+                    }
+                )
+
+            case .decoratorMachine:
+                DecoratorMachineView(onDismiss: viewModel.exitPOI)
+
+            case .planningDept:
+                World2PlanningDeptView(
+                    viewModel: viewModel,
+                    onExit: viewModel.exitPOI
+                )
+
             case .fallingTargets(let configurationID):
                 FallingTargetGameHost(
                     configurationID: configurationID,
@@ -125,8 +151,9 @@ struct World2RootView: View {
                     onExit: viewModel.exitPOI
                 )
             }
+            } // authenticated shell
 
-            if viewModel.currentScreen.showsGlobalHUD {
+            if auth.isAuthenticated, viewModel.currentScreen.showsGlobalHUD {
                 globalHUDButtons
             }
 
@@ -167,12 +194,11 @@ struct World2RootView: View {
             .accessibilityIdentifier("world2.music.player")
         }
         .sheet(isPresented: $showingSettings) {
-            World2SettingsView {
-                showingSettings = false
-            }
-        }
-        .fullScreenCover(isPresented: $showingLivingScenePOC) {
-            LivingScenePOCView(onClose: { showingLivingScenePOC = false })
+            World2SettingsView(
+                onDismiss: { showingSettings = false },
+                onSwitchProfile: { viewModel.returnToProfileSelect() }
+            )
+            .environmentObject(auth)
         }
         .sheet(isPresented: $showingClassicGames) {
             GamesDialogView(
@@ -182,6 +208,7 @@ struct World2RootView: View {
                 showDinoPicnic: $showingDinoPicnic,
                 showCreatureBuilder: $openCreatureLabFromClassic,
                 showDecoratorMachine: $showingDecoratorMachine,
+                showWhizbang: $showingWhizbang,
                 onDismiss: { showingClassicGames = false }
             )
             .accessibilityElement(children: .contain)
@@ -205,9 +232,6 @@ struct World2RootView: View {
         .fullScreenCover(isPresented: $showingDinoPicnic) {
             DinoPicnicView()
         }
-        .fullScreenCover(isPresented: $showingDecoratorMachine) {
-            DecoratorMachineView()
-        }
         .onChange(of: showingWaypointGame) { _, isActive in
             MusicService.shared.setGameActive(isActive)
         }
@@ -220,8 +244,15 @@ struct World2RootView: View {
         .onChange(of: showingDinoPicnic) { _, isActive in
             MusicService.shared.setGameActive(isActive)
         }
-        .onChange(of: showingDecoratorMachine) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
+        .onChange(of: showingDecoratorMachine) { _, shouldOpen in
+            guard shouldOpen else { return }
+            showingDecoratorMachine = false
+            viewModel.openDecoratorMachine()
+        }
+        .onChange(of: showingWhizbang) { _, shouldOpen in
+            guard shouldOpen else { return }
+            showingWhizbang = false
+            viewModel.openWhizbang()
         }
         .onChange(of: openCreatureLabFromClassic) { _, shouldOpen in
             guard shouldOpen else { return }
@@ -259,6 +290,11 @@ struct World2RootView: View {
 
     private var globalHUDButtons: some View {
         HStack(spacing: 8) {
+            World2MinimapHUDChip(
+                snapshot: viewModel.worldGraphSnapshot,
+                onOpen: { viewModel.openPlanningDept() }
+            )
+
             Button {
                 showingClassicGames = true
             } label: {
@@ -700,7 +736,8 @@ private extension World2Screen {
         case .loading, .playerSelect, .treehouse, .cardFactory,
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse,
-             .characterStudio, .sceneBuilder, .worldTeleporter:
+             .characterStudio, .sceneBuilder, .worldTeleporter,
+             .whizbang, .decoratorMachine, .planningDept:
             return false
         case .homeWorld, .blankSlate:
             return true
@@ -710,4 +747,5 @@ private extension World2Screen {
 
 #Preview {
     World2RootView()
+        .environmentObject(AuthenticationService.shared)
 }

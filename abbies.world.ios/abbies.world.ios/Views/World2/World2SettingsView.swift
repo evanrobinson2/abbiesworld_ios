@@ -2,6 +2,8 @@ import SwiftUI
 
 struct World2SettingsView: View {
     let onDismiss: () -> Void
+    var onSwitchProfile: (() -> Void)? = nil
+    @EnvironmentObject private var auth: AuthenticationService
 
     var body: some View {
         NavigationStack {
@@ -10,6 +12,11 @@ struct World2SettingsView: View {
                     Text("Settings")
                         .font(.system(size: 34, weight: .black, design: .rounded))
 
+                    World2AccountSettingsSection(
+                        auth: auth,
+                        onDismiss: onDismiss,
+                        onSwitchProfile: onSwitchProfile
+                    )
                     World2DeveloperSettingsSection()
                 }
                 .padding(24)
@@ -24,12 +31,47 @@ struct World2SettingsView: View {
     }
 }
 
+struct World2AccountSettingsSection: View {
+    @ObservedObject var auth: AuthenticationService
+    let onDismiss: () -> Void
+    var onSwitchProfile: (() -> Void)? = nil
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Label("Account", systemImage: "person.crop.circle")
+                .font(.system(size: 20, weight: .black, design: .rounded))
+            if let email = auth.accountEmail {
+                Text(email)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+            }
+            if let profile = auth.activeProfile {
+                Text("Playing as \(profile.displayName)\(profile.isProxy ? " (proxy)" : "")")
+                    .font(.subheadline)
+            }
+            Button("Switch profile") {
+                auth.clearActiveProfile()
+                onDismiss()
+                onSwitchProfile?()
+            }
+            .buttonStyle(.bordered)
+            Button("Sign out", role: .destructive) {
+                Task {
+                    await auth.logout()
+                    onDismiss()
+                }
+            }
+            .buttonStyle(.borderedProminent)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+}
+
 struct World2DeveloperSettingsSection: View {
     @ObservedObject private var developerSession = World2DeveloperSession.shared
     @State private var ageGateUnlocked = false
     @State private var showingAgeGate =
         ProcessInfo.processInfo.arguments.contains("-openWorld2AgeGate")
-    @State private var showingLivingScenePOC = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -78,28 +120,6 @@ struct World2DeveloperSettingsSection: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityIdentifier("world2.settings.assetCarving")
-
-                    Button {
-                        showingLivingScenePOC = true
-                    } label: {
-                        HStack {
-                            Image(systemName: "leaf.circle.fill")
-                                .foregroundStyle(.mint)
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text("Living Scene POC")
-                                    .font(.headline)
-                                Text("Static PNG made gently alive on-device. No video.")
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .foregroundStyle(.secondary)
-                        }
-                        .padding(.vertical, 6)
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier("world2.settings.livingScenePOC")
                 }
 
                 Text(
@@ -140,9 +160,6 @@ struct World2DeveloperSettingsSection: View {
             }
             .presentationDetents([.medium])
             .presentationDragIndicator(.visible)
-        }
-        .fullScreenCover(isPresented: $showingLivingScenePOC) {
-            LivingScenePOCView(onClose: { showingLivingScenePOC = false })
         }
     }
 }
@@ -223,4 +240,5 @@ private struct World2AgeGateView: View {
 
 #Preview {
     World2SettingsView(onDismiss: {})
+        .environmentObject(AuthenticationService.shared)
 }

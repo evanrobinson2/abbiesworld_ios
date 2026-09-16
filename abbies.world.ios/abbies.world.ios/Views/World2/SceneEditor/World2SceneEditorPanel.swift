@@ -17,12 +17,14 @@ import SwiftUI
 struct World2SceneEditorPanel: View {
     let sceneID: String
     @ObservedObject var store: World2SceneGraphStore
+    @ObservedObject var worldGraph: World2WorldGraphStore
     @Binding var layer: World2SceneEditorLayer
     @Binding var selectedInstanceID: String?
     @Binding var selectedHardpointID: String?
     @Binding var snappingEnabled: Bool
     let aspectRatio: Double
     let onDone: () -> Void
+    var onOpenPlanningDept: (() -> Void)? = nil
 
     @State private var hardpointNameDraft = ""
 
@@ -46,6 +48,8 @@ struct World2SceneEditorPanel: View {
                 poiLayerControls
             case .hardpoints:
                 hardpointLayerControls
+            case .tunnels:
+                tunnelsLayerControls
             }
 
             validationRow
@@ -275,6 +279,79 @@ struct World2SceneEditorPanel: View {
             }
 
             Spacer(minLength: 0)
+        }
+    }
+
+    // MARK: - Tunnel layer (overland N/S/E/W connectors)
+
+    private var tunnelsLayerControls: some View {
+        let connectors = worldGraph.connectors(from: sceneID)
+        return VStack(alignment: .leading, spacing: 10) {
+            Text("Scene tunnels — expansion doors on the world graph, not POI pads.")
+                .font(.system(size: 13, weight: .semibold, design: .rounded))
+                .foregroundStyle(.secondary)
+
+            HStack(spacing: 8) {
+                ForEach(connectors) { connector in
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text(connector.direction.displayName)
+                            .font(.system(size: 12, weight: .black, design: .rounded))
+                        Text(
+                            connector.isOpen
+                                ? "Open"
+                                : (worldGraph.snapshot(currentSceneID: sceneID)
+                                    .node(for: connector.toSceneID ?? "")?
+                                    .name ?? connector.toSceneID ?? "?")
+                        )
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .foregroundStyle(connector.isOpen ? .yellow : .cyan)
+
+                        if connector.isLocked {
+                            Text("Locked")
+                                .font(.caption2.bold())
+                                .foregroundStyle(.orange)
+                        }
+
+                        HStack(spacing: 6) {
+                            Button(connector.isLocked ? "Unlock" : "Lock") {
+                                worldGraph.setConnectorLocked(
+                                    from: sceneID,
+                                    direction: connector.direction,
+                                    locked: !connector.isLocked
+                                )
+                            }
+                            .buttonStyle(.bordered)
+                            .controlSize(.small)
+
+                            if !connector.isOpen {
+                                Button("Clear") {
+                                    _ = worldGraph.clearConnector(
+                                        from: sceneID,
+                                        direction: connector.direction
+                                    )
+                                }
+                                .buttonStyle(.bordered)
+                                .tint(.red)
+                                .controlSize(.small)
+                                .disabled(connector.isLocked)
+                            }
+                        }
+                    }
+                    .padding(8)
+                    .background(.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 10))
+                    .accessibilityIdentifier(
+                        "world2.sceneEditor.tunnel.\(connector.direction.rawValue)"
+                    )
+                }
+                Spacer(minLength: 0)
+            }
+
+            Button("Open Planning Department") {
+                onOpenPlanningDept?()
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.orange)
+            .accessibilityIdentifier("world2.sceneEditor.openPlanningDept")
         }
     }
 

@@ -59,6 +59,8 @@ struct WorldMapView: View {
                 hardpointLayer(mapRect: mapRect)
                 placeLayer(mapRect: mapRect, viewSize: geometry.size, aspectRatio: aspectRatio)
                 cookingBadgeLayer(mapRect: mapRect)
+                World2PartyLayer(party: viewModel.party, mapRect: mapRect)
+                    .zIndex(20)
                 topChrome
                 travelNavigation
                 inspectionOverlay
@@ -72,7 +74,10 @@ struct WorldMapView: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.homeWorld")
-        .onAppear(perform: syncEditorSelection)
+        .onAppear {
+            syncEditorSelection()
+            viewModel.party.enterScene(.defaultSpawn, aspectRatio: aspectRatioForCurrentMap())
+        }
         .onChange(of: viewModel.currentPlayerId) {
             store.selectPlayer(viewModel.currentPlayerId)
             syncEditorSelection()
@@ -87,12 +92,18 @@ struct WorldMapView: View {
             lookZoom = 1
             lookPan = .zero
             syncEditorSelection()
+            viewModel.party.enterScene(.defaultSpawn, aspectRatio: aspectRatioForCurrentMap())
         }
         .onChange(of: editorLayer) {
             candidateHardpointID = nil
             snapRejection = nil
         }
         .ignoresSafeArea()
+    }
+
+    private func aspectRatioForCurrentMap() -> Double {
+        // Approximate; the live GeometryReader aspect is preferred when walking.
+        4.0 / 3.0
     }
 
     private func lookMapRect(base: CGRect, in viewSize: CGSize) -> CGRect {
@@ -388,13 +399,16 @@ struct WorldMapView: View {
 
     @ViewBuilder
     private var travelNavigation: some View {
-        if let world = viewModel.currentWorld, !world.adjacentWorlds.isEmpty {
-            World2TravelNavigation(
-                currentWorld: world.id,
-                destinations: world.adjacentWorlds,
-                onTravel: viewModel.switchWorld
-            )
-            .zIndex(20)
+        if let world = viewModel.currentWorld {
+            let destinations = viewModel.travelDestinations(from: world.id)
+            if !destinations.isEmpty {
+                World2TravelNavigation(
+                    currentWorld: world.id,
+                    destinations: destinations,
+                    onTravel: viewModel.switchWorld
+                )
+                .zIndex(20)
+            }
         }
     }
 
@@ -464,17 +478,22 @@ struct WorldMapView: View {
             World2SceneEditorPanel(
                 sceneID: sceneID,
                 store: store,
+                worldGraph: viewModel.worldGraph,
                 layer: $editorLayer,
                 selectedInstanceID: $selectedInstanceID,
                 selectedHardpointID: $selectedHardpointID,
                 snappingEnabled: $snappingEnabled,
-                aspectRatio: aspectRatio
-            ) {
-                store.save()
-                withAnimation(.easeOut(duration: 0.2)) {
-                    showingEditor = false
+                aspectRatio: aspectRatio,
+                onDone: {
+                    store.save()
+                    withAnimation(.easeOut(duration: 0.2)) {
+                        showingEditor = false
+                    }
+                },
+                onOpenPlanningDept: {
+                    viewModel.openPlanningDept()
                 }
-            }
+            )
             .frame(maxWidth: 980)
             .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 24))
             .overlay {
@@ -931,11 +950,21 @@ struct World2SemanticImage: View {
     let fallbackIcon: String
     let fallbackLabel: String
 
+    /// Cake-tower construction plate for POIs that have not been qualified yet.
+    private static let poiPlaceholderCatalogName = "under_construction"
+
     var body: some View {
         if let image = AssetBootstrapService.shared.image(for: semanticName) {
             Image(uiImage: image)
                 .resizable()
                 .accessibilityLabel(semanticName)
+        } else if usesPOIConstructionPlaceholder,
+                  let placeholder = UIImage(named: Self.poiPlaceholderCatalogName) {
+            Image(uiImage: placeholder)
+                .resizable()
+                .scaledToFit()
+                .accessibilityLabel(fallbackLabel)
+                .accessibilityIdentifier("world2.asset.placeholder.\(semanticName)")
         } else {
             ZStack {
                 LinearGradient(
@@ -956,6 +985,12 @@ struct World2SemanticImage: View {
             .accessibilityLabel(fallbackLabel)
             .accessibilityIdentifier("world2.asset.placeholder.\(semanticName)")
         }
+    }
+
+    /// Drawn-art POIs still take the nil path above this view; everything else
+    /// under `poi.*` shows the shared under-construction plate.
+    private var usesPOIConstructionPlaceholder: Bool {
+        semanticName.hasPrefix("poi.")
     }
 }
 

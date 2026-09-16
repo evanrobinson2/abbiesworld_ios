@@ -10,6 +10,7 @@ import Foundation
 enum PlayerId: String, Codable, CaseIterable, Identifiable {
     case abbie = "player.abbie"
     case ani = "player.ani"
+    case evan = "player.evan"
     
     var id: String { rawValue }
     
@@ -17,6 +18,7 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .abbie: return "Abbie"
         case .ani: return "Ani"
+        case .evan: return "Evan"
         }
     }
     
@@ -24,6 +26,8 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .abbie: return "poi.abbieTreehouse"
         case .ani: return "poi.aniTreehouse"
+        // Developer profile reuses Abbie's treehouse pad until Evan has a home POI.
+        case .evan: return "poi.abbieTreehouse"
         }
     }
     
@@ -31,6 +35,7 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .abbie: return "avatar.abbie"
         case .ani: return "avatar.ani"
+        case .evan: return "avatar.abbie"
         }
     }
 }

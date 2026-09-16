@@ -19,6 +19,12 @@ struct World2POIDrawnArtwork: View {
         switch style {
         case .bearsCottage:
             World2BearsCottage()
+        case .whizbangGadgetBarn:
+            World2WhizbangGadgetBarn()
+        case .decoratorWorkshop:
+            World2DecoratorWorkshop()
+        case .planningDept:
+            World2PlanningDeptHall()
         }
     }
 }
@@ -198,6 +204,116 @@ private struct World2ThatchRoof: Shape {
         )
         path.closeSubpath()
         return path
+    }
+}
+
+/// A squat gadget barn: copper roof, spring door, and a launch chimney.
+private struct World2WhizbangGadgetBarn: View {
+    private let wall = Color(red: 0.86, green: 0.42, blue: 0.22)
+    private let roof = Color(red: 0.72, green: 0.55, blue: 0.28)
+    private let metal = Color(red: 0.55, green: 0.62, blue: 0.70)
+
+    var body: some View {
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            VStack(spacing: -height * 0.02) {
+                ZStack(alignment: .top) {
+                    RoundedRectangle(cornerRadius: 4)
+                        .fill(metal)
+                        .frame(width: width * 0.16, height: height * 0.22)
+                        .offset(x: width * 0.22)
+                    Triangle()
+                        .fill(roof)
+                        .frame(width: width * 0.92, height: height * 0.28)
+                }
+                RoundedRectangle(cornerRadius: width * 0.04)
+                    .fill(wall)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: width * 0.08)
+                            .fill(Color(red: 0.28, green: 0.18, blue: 0.14))
+                            .frame(width: width * 0.28, height: height * 0.22)
+                            .offset(y: height * 0.06)
+                    )
+                    .frame(height: height * 0.48)
+            }
+            .frame(width: width, height: height, alignment: .bottom)
+        }
+        .accessibilityLabel("A copper gadget barn with a launch chimney")
+        .accessibilityIdentifier("world2.poi.artwork.whizbang")
+    }
+}
+
+/// A teal workshop with a sofa-shaped awning.
+private struct World2DecoratorWorkshop: View {
+    private let wall = Color(red: 0.22, green: 0.55, blue: 0.52)
+    private let awning = Color(red: 0.95, green: 0.72, blue: 0.38)
+
+    var body: some View {
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            VStack(spacing: -height * 0.04) {
+                Capsule()
+                    .fill(awning)
+                    .frame(width: width * 0.88, height: height * 0.22)
+                RoundedRectangle(cornerRadius: width * 0.05)
+                    .fill(wall)
+                    .overlay(
+                        HStack(spacing: width * 0.08) {
+                            ForEach(0..<2, id: \.self) { _ in
+                                RoundedRectangle(cornerRadius: 3)
+                                    .fill(Color(red: 0.95, green: 0.88, blue: 0.62))
+                                    .frame(width: width * 0.16, height: height * 0.16)
+                            }
+                        }
+                    )
+                    .frame(height: height * 0.46)
+            }
+            .frame(width: width, height: height, alignment: .bottom)
+        }
+        .accessibilityLabel("A teal decorator workshop with a sofa awning")
+        .accessibilityIdentifier("world2.poi.artwork.decoratorMachine")
+    }
+}
+
+/// A blue municipal hall with a map-pin awning.
+private struct World2PlanningDeptHall: View {
+    private let wall = Color(red: 0.28, green: 0.42, blue: 0.62)
+    private let roof = Color(red: 0.18, green: 0.28, blue: 0.42)
+
+    var body: some View {
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            VStack(spacing: -height * 0.03) {
+                Triangle()
+                    .fill(roof)
+                    .frame(width: width * 0.9, height: height * 0.28)
+                RoundedRectangle(cornerRadius: width * 0.04)
+                    .fill(wall)
+                    .overlay(
+                        Image(systemName: "map.fill")
+                            .font(.system(size: width * 0.18, weight: .bold))
+                            .foregroundStyle(.white.opacity(0.85))
+                    )
+                    .frame(height: height * 0.48)
+            }
+            .frame(width: width, height: height, alignment: .bottom)
+        }
+        .accessibilityLabel("Planning Department hall with a map on the door")
+        .accessibilityIdentifier("world2.poi.artwork.planningDept")
+    }
+}
+
+private struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        Path { path in
+            path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+            path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+            path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
+            path.closeSubpath()
+        }
     }
 }
 

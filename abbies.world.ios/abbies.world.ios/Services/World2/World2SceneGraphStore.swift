@@ -32,6 +32,7 @@ final class World2DeveloperSession: ObservableObject {
 enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
     case pois
     case hardpoints
+    case tunnels
 
     var id: String { rawValue }
 
@@ -39,6 +40,7 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .pois: return "Places"
         case .hardpoints: return "Hardpoints"
+        case .tunnels: return "Tunnels"
         }
     }
 
@@ -46,6 +48,7 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .pois: return "building.2.fill"
         case .hardpoints: return "target"
+        case .tunnels: return "arrow.up.arrow.down.circle"
         }
     }
 
@@ -55,6 +58,8 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
             return "Drag a place to move it. It snaps to a nearby pad; drag further to break away."
         case .hardpoints:
             return "Tap bare map to add a pad, drag a pad to move it. Places re-pin to where their pad went."
+        case .tunnels:
+            return "Scene tunnels are N/S/E/W expansion doors on the overland graph — open them in Planning Dept."
         }
     }
 }

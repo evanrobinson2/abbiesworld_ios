@@ -33,6 +33,9 @@ struct MainView: View {
     // Decorator Machine
     @State private var showDecoratorMachine =
         ProcessInfo.processInfo.arguments.contains("-launchDecoratorMachine")
+    @State private var showWhizbang =
+        ProcessInfo.processInfo.arguments.contains("-launchWhizbang") ||
+        ProcessInfo.processInfo.arguments.contains("-autoPlayWhizbang")
     // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
     @State private var showSettings = false
@@ -297,6 +300,7 @@ struct MainView: View {
                     showDinoPicnic: $showDinoPicnic,
                     showCreatureBuilder: $showCreatureBuilder,
                     showDecoratorMachine: $showDecoratorMachine,
+                    showWhizbang: $showWhizbang,
                     // showMemoryGame: $showMemoryGame,
                     onDismiss: {
                         showGamesDialog = false
@@ -338,6 +342,11 @@ struct MainView: View {
             }
             .fullScreenCover(isPresented: $showDecoratorMachine) {
                 DecoratorMachineView()
+            }
+            .fullScreenCover(isPresented: $showWhizbang) {
+                IncredimachineView(
+                    onDismiss: { showWhizbang = false }
+                )
             }
             // Memory Game temporarily disabled
             // .fullScreenCover(isPresented: $showMemoryGame) {
