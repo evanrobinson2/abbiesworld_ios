@@ -91,11 +91,33 @@ class AssetBootstrapService: ObservableObject {
         if let registryImage = registryImages[semanticName] {
             return registryImage
         }
-        guard let catalogName = qualifiedImageNames[semanticName] else {
-            World2Diagnostics.log("asset_placeholder", ["semantic_id": semanticName])
+        if let catalogName = qualifiedImageNames[semanticName] {
+            return UIImage(named: catalogName)
+        }
+        // Local spike / authoring plates that ship ahead of qualification.
+        if let catalogName = Self.localCatalogFallbacks[semanticName] {
+            return UIImage(named: catalogName)
+        }
+        World2Diagnostics.log("asset_placeholder", ["semantic_id": semanticName])
+        return nil
+    }
+
+    /// Bundled looping video for a semantic ID (map ambient plates, etc.).
+    func videoURL(for semanticName: String) -> URL? {
+        guard let resourceName = Self.localVideoFallbacks[semanticName] else {
             return nil
         }
-        return UIImage(named: catalogName)
+        return Bundle.main.url(
+            forResource: resourceName,
+            withExtension: "mp4",
+            subdirectory: "Resources/World2"
+        )
+        ?? Bundle.main.url(
+            forResource: resourceName,
+            withExtension: "mp4",
+            subdirectory: "World2"
+        )
+        ?? Bundle.main.url(forResource: resourceName, withExtension: "mp4")
     }
 
     func assetImage(_ assetId: String) async -> UIImage? {
@@ -306,6 +328,22 @@ class AssetBootstrapService: ObservableObject {
             )
         }
     }
+
+    /// Bundled plates that ship ahead of the qualification runtime manifest.
+    /// Fail-open only for these known semantic IDs so Art Garden is playable.
+    private static let localCatalogFallbacks: [String: String] = [
+        "map.artGarden": "world2_map_artGarden",
+        "poi.characterStudio.exterior": "world2_poi_characterStudio",
+        "poi.characterStudio.interior": "world2_interior_characterStudio",
+        "poi.sceneBuilder.exterior": "world2_poi_sceneBuilder",
+        "poi.sceneBuilder.interior": "world2_interior_sceneBuilder",
+    ]
+
+    /// Bundled ambient / looping videos that ship ahead of registry hosting.
+    /// `map.artGarden.ambient` v1 is crackware (Luma watermark) — wiring only.
+    private static let localVideoFallbacks: [String: String] = [
+        "map.artGarden.ambient": "world2_map_artGarden_ambient",
+    ]
     
     func clearCache() {
         try? FileManager.default.removeItem(at: cacheDirectory)
@@ -463,6 +501,12 @@ enum World2RegistryKey {
         "ui.appIcon": "ui/app-icon",
         "furniture.abbieStarterBed": "furniture/beds/abbie-starter",
         "furniture.aniStarterBed": "furniture/beds/ani-starter",
+        "map.artGarden": "maps/art-garden",
+        "map.artGarden.ambient": "maps/art-garden/ambient",
+        "poi.characterStudio.exterior": "pois/character-studio/exterior",
+        "poi.characterStudio.interior": "pois/character-studio/interior",
+        "poi.sceneBuilder.exterior": "pois/scene-builder/exterior",
+        "poi.sceneBuilder.interior": "pois/scene-builder/interior",
     ]
 
     static func assetKey(for semanticId: String) -> String? {

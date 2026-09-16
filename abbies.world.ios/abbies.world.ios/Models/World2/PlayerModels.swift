@@ -113,7 +113,8 @@ struct PlayerState: Codable, Identifiable {
     }
     
     static func newPlayer(id: PlayerId) -> PlayerState {
-        PlayerState(
+        let teleporter = World2StoryDecoration.worldTeleporter
+        return PlayerState(
             playerId: id,
             name: id.displayName,
             gems: 5,
@@ -122,7 +123,18 @@ struct PlayerState: Codable, Identifiable {
             contextIngredients: [],
             furnitureIngredients: 0,
             cardCollection: CardCollection(playerId: id.rawValue, cards: [], activeDeck: []),
-            decorations: [DecorationInstance.starterJukebox(for: id)],
+            decorations: [
+                DecorationInstance.starterJukebox(for: id),
+                DecorationInstance(
+                    id: "story_\(id.rawValue)_\(teleporter.id)",
+                    decorationId: teleporter.id,
+                    x: 0.50,
+                    y: 0.72,
+                    scale: teleporter.defaultScale,
+                    zIndex: 2,
+                    badges: teleporter.badges
+                ),
+            ],
             generatedDecorations: [],
             placeInventory: [World2PlaceInventoryItem.starterFactory(for: id)],
             placedPlaces: [],
@@ -131,7 +143,10 @@ struct PlayerState: Codable, Identifiable {
             homeLayout: HomeLayout.default(for: id),
             unlockedMusic: ["music.home.light", "music.home.intense"],
             progression: PlayerProgression(
-                achievedMilestones: [PlayerState.jukeboxQuestOfferedMilestone]
+                achievedMilestones: [
+                    PlayerState.jukeboxQuestOfferedMilestone,
+                    "inventory.worldTeleporter.offered.v1",
+                ]
             ),
             settings: PlayerSettings(),
             currentWorldId: .home,

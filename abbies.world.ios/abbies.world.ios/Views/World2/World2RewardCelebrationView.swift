@@ -182,9 +182,12 @@ struct World2InventoryBadgeChip: View {
         .foregroundStyle(.white)
         .padding(.horizontal, size.horizontalPadding)
         .padding(.vertical, size.verticalPadding)
-        .background(background, in: Capsule())
+        .background {
+            background.clipShape(Capsule())
+        }
         .overlay(Capsule().stroke(.white.opacity(0.65), lineWidth: 1))
         .shadow(color: .black.opacity(0.25), radius: 3, y: 1)
+        .accessibilityElement(children: .combine)
         .accessibilityLabel(badge.label)
         .accessibilityIdentifier("world2.badge.\(badge.rawValue)")
     }

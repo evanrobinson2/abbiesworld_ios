@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct WorldMapView: View {
     @ObservedObject var viewModel: World2ViewModel
@@ -12,9 +13,19 @@ struct WorldMapView: View {
     /// The pad lighting up under a live drag, and why it might refuse.
     @State private var candidateHardpointID: String?
     @State private var snapRejection: String?
+    /// Art Garden plate is wider than the iPad; drag/pinch to look around.
+    @State private var lookZoom: CGFloat = 1
+    @State private var lookPan: CGSize = .zero
+    @GestureState private var livePan: CGSize = .zero
+    @GestureState private var liveZoom: CGFloat = 1
+
+    @ObservedObject private var sceneCook = World2SceneCookService.shared
 
     private var developerMode: Bool { developerSession.isEnabled }
     private var store: World2SceneGraphStore { viewModel.sceneGraph }
+    private var allowsLookAround: Bool {
+        viewModel.currentWorld?.id == .artGarden && !developerMode
+    }
     private var sceneID: String { (viewModel.currentWorld?.id ?? .home).sceneID }
     private var scene: World2SceneDefinition { store.scene(sceneID) }
 
@@ -31,13 +42,15 @@ struct WorldMapView: View {
         case .work: return "Help the city's magical machines"
         case .farm: return "Discover something new in the meadow"
         case .threeBears: return "Somebody left three bowls out"
+        case .artGarden: return "Drag to look around the garden"
         default: return "Choose a place to visit"
         }
     }
 
     var body: some View {
         GeometryReader { geometry in
-            let mapRect = Self.mapRect(for: scene, in: geometry.size)
+            let baseRect = Self.mapRect(for: scene, in: geometry.size)
+            let mapRect = lookMapRect(base: baseRect, in: geometry.size)
             let aspectRatio = mapRect.height > 1 ? mapRect.width / mapRect.height : 4.0 / 3.0
 
             ZStack {
@@ -45,12 +58,17 @@ struct WorldMapView: View {
                 padPlacementLayer(mapRect: mapRect)
                 hardpointLayer(mapRect: mapRect)
                 placeLayer(mapRect: mapRect, viewSize: geometry.size, aspectRatio: aspectRatio)
+                cookingBadgeLayer(mapRect: mapRect)
                 topChrome
                 travelNavigation
                 inspectionOverlay
                 snapHintOverlay
                 editorOverlay(aspectRatio: aspectRatio)
             }
+            .gesture(
+                lookAroundGesture(fitted: baseRect, in: geometry.size),
+                including: allowsLookAround ? .gesture : .subviews
+            )
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.homeWorld")
@@ -66,6 +84,8 @@ struct WorldMapView: View {
         .onChange(of: viewModel.currentWorld?.id) {
             candidateHardpointID = nil
             snapRejection = nil
+            lookZoom = 1
+            lookPan = .zero
             syncEditorSelection()
         }
         .onChange(of: editorLayer) {
@@ -73,6 +93,92 @@ struct WorldMapView: View {
             snapRejection = nil
         }
         .ignoresSafeArea()
+    }
+
+    private func lookMapRect(base: CGRect, in viewSize: CGSize) -> CGRect {
+        guard allowsLookAround || lookZoom > 1.01 || abs(lookPan.width) > 1 else {
+            return base
+        }
+        let zoom = min(max(lookZoom * liveZoom, 1), 2.6)
+        let width = base.width * zoom
+        let height = base.height * zoom
+        var origin = CGPoint(
+            x: base.midX - width / 2 + lookPan.width + livePan.width,
+            y: base.midY - height / 2 + lookPan.height + livePan.height
+        )
+        let minX = viewSize.width - width - 40
+        let minY = viewSize.height - height - 40
+        origin.x = min(40, max(minX, origin.x))
+        origin.y = min(40, max(minY, origin.y))
+        return CGRect(origin: origin, size: CGSize(width: width, height: height))
+    }
+
+    private func lookAroundGesture(fitted: CGRect, in viewSize: CGSize) -> some Gesture {
+        SimultaneousGesture(
+            DragGesture()
+                .updating($livePan) { value, state, _ in
+                    state = value.translation
+                }
+                .onEnded { value in
+                    lookPan.width += value.translation.width
+                    lookPan.height += value.translation.height
+                    lookPan = clampedPan(fitted: fitted, in: viewSize)
+                },
+            MagnificationGesture()
+                .updating($liveZoom) { value, state, _ in
+                    state = value
+                }
+                .onEnded { value in
+                    lookZoom = min(max(lookZoom * value, 1), 2.6)
+                    lookPan = clampedPan(fitted: fitted, in: viewSize)
+                }
+        )
+    }
+
+    private func clampedPan(fitted: CGRect, in viewSize: CGSize) -> CGSize {
+        let zoom = min(max(lookZoom, 1), 2.6)
+        let width = fitted.width * zoom
+        let height = fitted.height * zoom
+        let midOriginX = fitted.midX - width / 2
+        let midOriginY = fitted.midY - height / 2
+        let minX = viewSize.width - width - 40 - midOriginX
+        let maxX = 40 - midOriginX
+        let minY = viewSize.height - height - 40 - midOriginY
+        let maxY = 40 - midOriginY
+        return CGSize(
+            width: min(maxX, max(minX, lookPan.width)),
+            height: min(maxY, max(minY, lookPan.height))
+        )
+    }
+
+    @ViewBuilder
+    private func cookingBadgeLayer(mapRect: CGRect) -> some View {
+        if sceneCook.isCooking,
+           let instance = scene.poiInstances.first(where: {
+               $0.archetypeID == World2POIRegistry.sceneBuilderID
+           }) {
+            let point = CGPoint(
+                x: mapRect.minX + CGFloat(instance.transform.position.x) * mapRect.width,
+                y: mapRect.minY + CGFloat(instance.transform.position.y) * mapRect.height
+            )
+            Group {
+                if let badge = UIImage(named: "world2_scene_builder_cooking_badge") {
+                    Image(uiImage: badge)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 88, height: 88)
+                } else {
+                    Text("COOKING")
+                        .font(.system(size: 14, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                        .padding(10)
+                        .background(.orange, in: Capsule())
+                }
+            }
+            .position(x: point.x, y: point.y - 70)
+            .accessibilityIdentifier("world2.sceneBuilder.mapCookingBadge")
+            .zIndex(90)
+        }
     }
 
     // MARK: - Background
@@ -99,18 +205,38 @@ struct WorldMapView: View {
                 .overlay(Color.black.opacity(0.42))
                 .ignoresSafeArea()
 
+                mapPlate(mapRect: mapRect)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func mapPlate(mapRect: CGRect) -> some View {
+        // Crackware ambient loops (watermarked free-tier exports) stay off the
+        // kid surface; developer mode is enough to verify wiring.
+        let allowCrackwareAmbient = developerMode
+        let plate = Group {
+            if allowCrackwareAmbient,
+               let ambientID = scene.ambientVideoAsset,
+               let url = AssetBootstrapService.shared.videoURL(for: ambientID) {
+                World2LoopingVideoView(url: url)
+                    .accessibilityLabel("\(scene.name) ambient map (crackware)")
+            } else {
                 World2SemanticImage(
                     semanticName: scene.backgroundAsset,
                     fallbackIcon: "tree.fill",
                     fallbackLabel: "\(scene.name) artwork is not bundled"
                 )
                 .scaledToFit()
-                .frame(width: mapRect.width, height: mapRect.height)
-                .position(x: mapRect.midX, y: mapRect.midY)
-                .shadow(color: .black.opacity(0.45), radius: 18, y: 8)
-                .accessibilityIdentifier("world2.map.frame")
             }
         }
+
+        plate
+            .frame(width: mapRect.width, height: mapRect.height)
+            .clipped()
+            .position(x: mapRect.midX, y: mapRect.midY)
+            .shadow(color: .black.opacity(0.45), radius: 18, y: 8)
+            .accessibilityIdentifier("world2.map.frame")
     }
 
     // MARK: - Hardpoints
@@ -414,11 +540,31 @@ struct WorldMapView: View {
         )
     }
 
+    /// Cover the screen so a wide overland plate overflows and can be panned.
+    static func coveredMapRect(imageSize: CGSize, in viewSize: CGSize) -> CGRect {
+        guard imageSize.width > 1, imageSize.height > 1,
+              viewSize.width > 1, viewSize.height > 1 else {
+            return CGRect(origin: .zero, size: viewSize)
+        }
+        let scale = max(viewSize.width / imageSize.width, viewSize.height / imageSize.height)
+        let size = CGSize(width: imageSize.width * scale, height: imageSize.height * scale)
+        return CGRect(
+            x: (viewSize.width - size.width) / 2,
+            y: (viewSize.height - size.height) / 2,
+            width: size.width,
+            height: size.height
+        )
+    }
+
     /// The rectangle every normalized coordinate in this scene is measured
     /// against. A painted map gets its own letterboxed frame; a scene drawn by
     /// hand fills the screen, so its pads are laid out against the whole view.
+    /// Art Garden uses cover so the overland plate is bigger than the iPad.
     static func mapRect(for scene: World2SceneDefinition, in viewSize: CGSize) -> CGRect {
         if let image = AssetBootstrapService.shared.image(for: scene.backgroundAsset) {
+            if scene.id == World2SceneCatalog.sceneID(for: .artGarden) {
+                return coveredMapRect(imageSize: image.size, in: viewSize)
+            }
             return fittedMapRect(imageSize: image.size, in: viewSize)
         }
         if scene.backdropStyle != nil {

@@ -13,6 +13,7 @@ import Combine
 class PlayerStateService: ObservableObject {
     static let shared = PlayerStateService()
     private static let starterPOIFactoryMilestone = "place_factory_starter_received.v1"
+    private static let worldTeleporterMilestone = "inventory.worldTeleporter.offered.v1"
     private static let playerStateSchemaVersion = 1
 
     private struct StoredPlayerState: Codable {
@@ -832,6 +833,7 @@ class PlayerStateService: ObservableObject {
             player.generatedDecorations = []
         }
         ensureStarterPOIFactory(in: &player)
+        ensureWorldTeleporter(in: &player)
         offerJukeboxAsInventory(in: &player)
         return player
     }
@@ -892,6 +894,31 @@ class PlayerStateService: ObservableObject {
         }
         if player.sceneExits == nil {
             player.sceneExits = []
+        }
+    }
+
+    /// Seed the World Teleporter into every player's treehouse drawer once.
+    private static func ensureWorldTeleporter(in player: inout PlayerState) {
+        let decoration = World2StoryDecoration.worldTeleporter
+        let instanceID = "story_\(player.playerId.rawValue)_\(decoration.id)"
+        let alreadyOwned = player.decorations.contains {
+            $0.decorationId == decoration.id || $0.id == instanceID
+        }
+        if !alreadyOwned {
+            player.decorations.append(
+                DecorationInstance(
+                    id: instanceID,
+                    decorationId: decoration.id,
+                    x: 0.50,
+                    y: 0.72,
+                    scale: decoration.defaultScale,
+                    zIndex: (player.decorations.map(\.zIndex).max() ?? 0) + 1,
+                    badges: decoration.badges
+                )
+            )
+        }
+        if !player.progression.achievedMilestones.contains(worldTeleporterMilestone) {
+            player.progression.achievedMilestones.append(worldTeleporterMilestone)
         }
     }
     

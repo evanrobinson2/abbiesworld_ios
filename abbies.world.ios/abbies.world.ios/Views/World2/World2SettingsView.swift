@@ -29,6 +29,7 @@ struct World2DeveloperSettingsSection: View {
     @State private var ageGateUnlocked = false
     @State private var showingAgeGate =
         ProcessInfo.processInfo.arguments.contains("-openWorld2AgeGate")
+    @State private var showingLivingScenePOC = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -77,6 +78,28 @@ struct World2DeveloperSettingsSection: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityIdentifier("world2.settings.assetCarving")
+
+                    Button {
+                        showingLivingScenePOC = true
+                    } label: {
+                        HStack {
+                            Image(systemName: "leaf.circle.fill")
+                                .foregroundStyle(.mint)
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("Living Scene POC")
+                                    .font(.headline)
+                                Text("Static PNG made gently alive on-device. No video.")
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                            Spacer()
+                            Image(systemName: "chevron.right")
+                                .foregroundStyle(.secondary)
+                        }
+                        .padding(.vertical, 6)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("world2.settings.livingScenePOC")
                 }
 
                 Text(
@@ -117,6 +140,9 @@ struct World2DeveloperSettingsSection: View {
             }
             .presentationDetents([.medium])
             .presentationDragIndicator(.visible)
+        }
+        .fullScreenCover(isPresented: $showingLivingScenePOC) {
+            LivingScenePOCView(onClose: { showingLivingScenePOC = false })
         }
     }
 }

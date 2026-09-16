@@ -119,3 +119,6 @@ credentials*
 /DinoSnacks/
 /GameTemplate/
 
+
+# Meshy spike intermediates (large binaries)
+experiments/meshy_actor/output/

@@ -69,6 +69,13 @@ struct World2PlayerHomeView: View {
                                 canvasSize: canvasSize,
                                 onOpenMusic: onOpenMusic
                             )
+                        } else if instance.decorationId == World2StoryDecoration.worldTeleporter.id,
+                                  !isArrangingFurniture {
+                            World2PlacedTeleporterView(
+                                instance: instance,
+                                canvasSize: canvasSize,
+                                onUse: viewModel.openWorldTeleporter
+                            )
                         } else if let piece = World2RoomPiece.resolve(
                             instance.decorationId,
                             player: roomPlayer
@@ -170,6 +177,19 @@ struct World2PlayerHomeView: View {
                             selectedFurnitureID = instanceID
                             if highlightedInventoryID == instanceID {
                                 highlightedInventoryID = nil
+                            }
+                        },
+                        onUse: { instanceID in
+                            guard let decorationId = roomPlayer?.decorations
+                                .first(where: { $0.id == instanceID })?
+                                .decorationId,
+                                  let story = World2StoryDecoration.decoration(id: decorationId)
+                            else { return }
+                            switch story.inventoryAction {
+                            case .openWorldTeleporter:
+                                viewModel.openWorldTeleporter()
+                            case .none:
+                                break
                             }
                         }
                     )
@@ -794,6 +814,27 @@ private struct World2AnimatedSelectionLasso: View {
     }
 }
 
+private struct World2PlacedTeleporterView: View {
+    let instance: DecorationInstance
+    let canvasSize: CGSize
+    let onUse: () -> Void
+
+    var body: some View {
+        Button(action: onUse) {
+            World2WorldTeleporterToken(isAnimated: true)
+                .frame(width: 120, height: 120)
+        }
+        .buttonStyle(.plain)
+        .position(
+            x: canvasSize.width * instance.x,
+            y: canvasSize.height * instance.y
+        )
+        .zIndex(min(Double(instance.zIndex), 1_000))
+        .accessibilityLabel("Use the World Teleporter")
+        .accessibilityIdentifier("world2.interior.teleporter.\(instance.id)")
+    }
+}
+
 private struct World2FurnitureDecoratorDrawer: View {
     let playerName: String
     let width: CGFloat
@@ -801,6 +842,7 @@ private struct World2FurnitureDecoratorDrawer: View {
     let highlightedInstanceID: String?
     let onDone: () -> Void
     let onPlace: (String) -> Void
+    let onUse: (String) -> Void
     @ObservedObject private var playerService = PlayerStateService.shared
 
     /// New things first, so a just-earned reward is the first card in the drawer
@@ -926,45 +968,71 @@ private struct World2FurnitureDecoratorDrawer: View {
     ) -> some View {
         let isHighlighted = highlightedInstanceID == instance.id
         let badges = instance.displayBadges
+        let usable = piece.story?.isUsableFromInventory == true
 
-        return Button {
-            onPlace(instance.id)
-        } label: {
-            VStack(spacing: 6) {
-                piece.artwork
-                    .frame(height: 78)
-                Text(piece.name)
-                    .font(.system(size: 11, weight: .black, design: .rounded))
-                    .multilineTextAlignment(.center)
-                    .lineLimit(2)
-                if !badges.isEmpty {
-                    HStack(spacing: 3) {
-                        ForEach(badges, id: \.self) { badge in
-                            World2InventoryBadgeChip(badge: badge)
-                        }
+        return VStack(spacing: 6) {
+            piece.artwork
+                .frame(height: 78)
+            Text(piece.name)
+                .font(.system(size: 11, weight: .black, design: .rounded))
+                .multilineTextAlignment(.center)
+                .lineLimit(2)
+            if !badges.isEmpty {
+                HStack(spacing: 3) {
+                    ForEach(badges, id: \.self) { badge in
+                        World2InventoryBadgeChip(badge: badge)
                     }
                 }
             }
-            .padding(8)
-            .frame(maxWidth: .infinity)
-            .background(
-                .white.opacity(0.80),
-                in: RoundedRectangle(cornerRadius: 16)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(
-                        isHighlighted ? .yellow : .indigo.opacity(0.22),
-                        lineWidth: isHighlighted ? 4 : 1.5
-                    )
-            )
-            .shadow(
-                color: isHighlighted ? .orange.opacity(0.8) : .clear,
-                radius: 14
-            )
-            .contentShape(RoundedRectangle(cornerRadius: 16))
+            if usable {
+                Button {
+                    onUse(instance.id)
+                } label: {
+                    Text("USE")
+                        .font(.system(size: 12, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 7)
+                        .background(.orange, in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("world2.interior.inventory.use.\(instance.id)")
+
+                Button {
+                    onPlace(instance.id)
+                } label: {
+                    Text("Place in room")
+                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                        .foregroundStyle(.indigo)
+                }
+                .buttonStyle(.plain)
+            }
         }
-        .buttonStyle(.plain)
+        .padding(8)
+        .frame(maxWidth: .infinity)
+        .background(
+            .white.opacity(0.80),
+            in: RoundedRectangle(cornerRadius: 16)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(
+                    isHighlighted ? .yellow : .indigo.opacity(0.22),
+                    lineWidth: isHighlighted ? 4 : 1.5
+                )
+        )
+        .shadow(
+            color: isHighlighted ? .orange.opacity(0.8) : .clear,
+            radius: 14
+        )
+        .contentShape(RoundedRectangle(cornerRadius: 16))
+        .onTapGesture {
+            if usable {
+                onUse(instance.id)
+            } else {
+                onPlace(instance.id)
+            }
+        }
         .draggable(instance.id) {
             piece.artwork
                 .frame(width: 120, height: 110)
@@ -976,7 +1044,11 @@ private struct World2FurnitureDecoratorDrawer: View {
                 ? piece.name
                 : "\(piece.name), \(badges.map(\.label).joined(separator: ", "))"
         )
-        .accessibilityHint("Drag into the room, or double tap to place")
+        .accessibilityHint(
+            usable
+                ? "Double tap to use, or drag into the room to place"
+                : "Drag into the room, or double tap to place"
+        )
         .accessibilityIdentifier("world2.interior.inventory.item.\(instance.id)")
     }
 }

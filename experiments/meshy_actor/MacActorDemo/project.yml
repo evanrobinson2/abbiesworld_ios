@@ -1,0 +1,33 @@
+name: MacActorDemo
+options:
+  bundleIdPrefix: world.abbies.spike
+  deploymentTarget:
+    macOS: "14.0"
+  xcodeVersion: "16.0"
+settings:
+  BASE_SDK: macosx
+  MACOSX_DEPLOYMENT_TARGET: "14.0"
+  SWIFT_VERSION: "5.10"
+targets:
+  MacActorDemo:
+    type: application
+    platform: macOS
+    sources:
+      - MacActorDemo
+    resources:
+      - path: ../output
+        type: folder
+        buildPhase: resources
+        includes:
+          - character.usdz
+          - character.glb
+    settings:
+      PRODUCT_BUNDLE_IDENTIFIER: world.abbies.spike.MacActorDemo
+      GENERATE_INFOPLIST_FILE: YES
+      INFOPLIST_KEY_NSHumanReadableCopyright: "Abbie's World spike"
+      INFOPLIST_KEY_CFBundleDisplayName: MacActorDemo
+      LD_RUNPATH_SEARCH_PATHS: ["@executable_path/../Frameworks"]
+      ENABLE_HARDENED_RUNTIME: YES
+      CODE_SIGN_IDENTITY: "-"
+      CODE_SIGNING_ALLOWED: YES
+      CODE_SIGNING_REQUIRED: NO

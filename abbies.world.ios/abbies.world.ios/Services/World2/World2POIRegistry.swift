@@ -23,6 +23,8 @@ enum World2POIRegistry {
     static let creatureLabID = "poi.creatureLab"
     static let placeFactoryID = "poi.selfReplicatingFactory"
     static let threeBearsHouseID = "poi.threeBearsHouse"
+    static let characterStudioID = "poi.characterStudio"
+    static let sceneBuilderID = "poi.sceneBuilder"
 
     /// Every registered archetype, keyed by id.
     static let archetypes: [String: World2POIArchetype] = {
@@ -43,6 +45,8 @@ enum World2POIRegistry {
         creatureLab,
         placeFactory,
         threeBearsHouse,
+        characterStudio,
+        sceneBuilder,
     ]
 
     static func archetype(_ id: String) -> World2POIArchetype? {
@@ -225,6 +229,45 @@ enum World2POIRegistry {
             route: .threeBearsHouse,
             grants: [.storyDecoration(decorationID: World2StoryDecoration.perfectPorridge.id)],
             completionMilestone: "minigame.justRightPorridge.completed"
+        )
+    )
+
+    // MARK: - Art Garden
+
+    static let characterStudio = World2POIArchetype(
+        id: characterStudioID,
+        name: "Character Studio",
+        kind: .minigame,
+        sizeClass: .large,
+        exteriorAsset: "poi.characterStudio.exterior",
+        interiorAsset: "poi.characterStudio.interior",
+        icon: "paintpalette.fill",
+        lore: "A round doorway under a giant palette. Inside, a brass viewport waits for an avatar on a pedestal.",
+        activityDescription: "Step into the workshop and dress up your avatar. The big circle is where the pedestal will live.",
+        callToAction: "Open the Studio",
+        musicTrackID: "world2_joyful_bounce",
+        contract: World2POIContract(
+            route: .characterStudio,
+            completionMilestone: "minigame.characterStudio.opened"
+        )
+    )
+
+    static let sceneBuilder = World2POIArchetype(
+        id: sceneBuilderID,
+        name: "The Imagination Atelier",
+        kind: .factory,
+        sizeClass: .large,
+        exteriorAsset: "poi.sceneBuilder.exterior",
+        interiorAsset: "poi.sceneBuilder.interior",
+        icon: "map.fill",
+        lore: "A giant parchment roof and a compass door. Inside, the cartographer's table waits to cook a new world scene.",
+        activityDescription: "Choose place, theme, atmosphere, special feature, vibe, and hardpoints. Tap Generate and watch the atelier cook your scene.",
+        callToAction: "Open the Atelier",
+        musicTrackID: "world2_joyful_bounce",
+        contract: World2POIContract(
+            route: .sceneBuilder,
+            grants: [.storyDecoration(decorationID: World2StoryDecoration.propertyDeed.id)],
+            completionMilestone: "minigame.sceneBuilder.completed"
         )
     )
 

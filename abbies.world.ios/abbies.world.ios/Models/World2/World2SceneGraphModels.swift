@@ -388,6 +388,9 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
     var summary: String
     /// Semantic asset name for the painted backdrop.
     var backgroundAsset: String
+    /// Optional muted looping video semantic ID (e.g. map.artGarden.ambient).
+    /// When resolved, the map plate prefers this over the still poster.
+    var ambientVideoAsset: String?
     var backdropStyle: World2SceneBackdropStyle?
     var hardpoints: [World2SceneHardpoint]
     var poiInstances: [World2POIInstance]
@@ -405,6 +408,7 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         name: String,
         summary: String,
         backgroundAsset: String = "",
+        ambientVideoAsset: String? = nil,
         backdropStyle: World2SceneBackdropStyle? = nil,
         hardpoints: [World2SceneHardpoint] = [],
         poiInstances: [World2POIInstance] = [],
@@ -418,6 +422,7 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         self.name = name
         self.summary = summary
         self.backgroundAsset = backgroundAsset
+        self.ambientVideoAsset = ambientVideoAsset
         self.backdropStyle = backdropStyle
         self.hardpoints = hardpoints
         self.poiInstances = poiInstances

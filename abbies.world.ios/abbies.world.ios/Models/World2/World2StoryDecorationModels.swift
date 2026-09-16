@@ -27,6 +27,14 @@ enum World2StoryPlacementLayer: String, Codable, Sendable {
 /// Which hand-drawn renderer the view layer should use for this decoration.
 enum World2StoryArtStyle: String, Codable, Sendable {
     case perfectPorridge
+    case worldTeleporter
+    case propertyDeed
+}
+
+/// What tapping Use does for a story item that is not only décor.
+enum World2StoryInventoryAction: String, Codable, Sendable {
+    case none
+    case openWorldTeleporter
 }
 
 struct World2StoryDecoration: Identifiable, Equatable, Sendable {
@@ -39,8 +47,10 @@ struct World2StoryDecoration: Identifiable, Equatable, Sendable {
     let artStyle: World2StoryArtStyle
     let badges: [World2InventoryBadge]
     /// The registered archetype that hands this out. Keeps the reward traceable
-    /// back to a contract.
+    /// back to a contract. Seeded system items use `system.seed`.
     let awardedByArchetypeID: String
+    /// Inventory Use action. `.none` means place-only décor.
+    let inventoryAction: World2StoryInventoryAction
 
     static let perfectPorridge = World2StoryDecoration(
         id: "decoration.story.perfectPorridge",
@@ -51,10 +61,39 @@ struct World2StoryDecoration: Identifiable, Equatable, Sendable {
         placementLayer: .floor,
         artStyle: .perfectPorridge,
         badges: [.new, .oneOfAKind, .storyTreasure, .questReward],
-        awardedByArchetypeID: "poi.threeBearsHouse"
+        awardedByArchetypeID: "poi.threeBearsHouse",
+        inventoryAction: .none
     )
 
-    static let all: [World2StoryDecoration] = [perfectPorridge]
+    /// Pocket portal. Opens a travel screen to every scene, including unconnected ones.
+    static let worldTeleporter = World2StoryDecoration(
+        id: "decoration.story.worldTeleporter",
+        name: "World Teleporter",
+        shortDescription: "A brass pocket portal. Use it to peek at every scene and travel there — even places with no path on the map.",
+        category: "Travel Gear",
+        defaultScale: 0.62,
+        placementLayer: .floor,
+        artStyle: .worldTeleporter,
+        badges: [.new, .oneOfAKind, .starter],
+        awardedByArchetypeID: "system.seed",
+        inventoryAction: .openWorldTeleporter
+    )
+
+    /// Magical property deed from The Imagination Atelier after a scene cooks.
+    static let propertyDeed = World2StoryDecoration(
+        id: "decoration.story.propertyDeed",
+        name: "Property Deed",
+        shortDescription: "A sealed parchment claim to a freshly cooked land. Map lines shimmer under the wax seal.",
+        category: "Story Treasure",
+        defaultScale: 0.55,
+        placementLayer: .floor,
+        artStyle: .propertyDeed,
+        badges: [.new, .oneOfAKind, .storyTreasure, .questReward],
+        awardedByArchetypeID: "poi.sceneBuilder",
+        inventoryAction: .none
+    )
+
+    static let all: [World2StoryDecoration] = [perfectPorridge, worldTeleporter, propertyDeed]
 
     static func decoration(id: String) -> World2StoryDecoration? {
         all.first { $0.id == id }
@@ -62,6 +101,10 @@ struct World2StoryDecoration: Identifiable, Equatable, Sendable {
 
     static func isStoryDecoration(_ id: String) -> Bool {
         decoration(id: id) != nil
+    }
+
+    var isUsableFromInventory: Bool {
+        inventoryAction != .none
     }
 
     /// Badges minus the one-time NEW! ribbon, used once the player has seen it.

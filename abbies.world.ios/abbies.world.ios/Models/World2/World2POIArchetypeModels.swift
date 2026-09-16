@@ -59,6 +59,8 @@ enum World2POIRoute: Codable, Equatable, Sendable {
     case fallingTargets(configurationID: String)
     case placeFactory
     case threeBearsHouse
+    case characterStudio
+    case sceneBuilder
 
     var diagnosticName: String {
         switch self {
@@ -70,6 +72,8 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .fallingTargets(let configurationID): return "falling_targets:\(configurationID)"
         case .placeFactory: return "place_factory"
         case .threeBearsHouse: return "three_bears_house"
+        case .characterStudio: return "character_studio"
+        case .sceneBuilder: return "scene_builder"
         }
     }
 
@@ -81,6 +85,8 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .assetWorkbench: return "asset_workbench"
         case .creatureLab: return "creature_lab"
         case .threeBearsHouse: return "just_right_porridge"
+        case .characterStudio: return "character_studio"
+        case .sceneBuilder: return "scene_builder"
         case .playerHome, .cardFactory, .placeFactory: return nil
         }
     }

@@ -9,6 +9,8 @@ struct World2RootView: View {
         ProcessInfo.processInfo.arguments.contains("-openWorld2Music")
     @State private var showingSettings =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Settings")
+    @State private var showingLivingScenePOC =
+        ProcessInfo.processInfo.arguments.contains("-openLivingScenePOC")
     @State private var showingClassicGames =
         ProcessInfo.processInfo.arguments.contains("-openWorld2ClassicGames")
     @State private var showingWaypointGame = false
@@ -92,6 +94,23 @@ struct World2RootView: View {
                     onComplete: viewModel.completeJustRightPorridge
                 )
 
+            case .characterStudio:
+                World2CharacterStudioView(onExit: viewModel.exitPOI)
+
+            case .sceneBuilder:
+                World2SceneBuilderView(
+                    onExit: viewModel.exitPOI,
+                    onAwardDeed: viewModel.completeSceneBuilderDeed
+                )
+
+            case .worldTeleporter:
+                World2WorldTeleporterView(
+                    destinations: viewModel.teleporterDestinations,
+                    currentWorldID: viewModel.currentWorld?.id,
+                    onTravel: viewModel.travelViaTeleporter,
+                    onClose: viewModel.exitPOI
+                )
+
             case .fallingTargets(let configurationID):
                 FallingTargetGameHost(
                     configurationID: configurationID,
@@ -151,6 +170,9 @@ struct World2RootView: View {
             World2SettingsView {
                 showingSettings = false
             }
+        }
+        .fullScreenCover(isPresented: $showingLivingScenePOC) {
+            LivingScenePOCView(onClose: { showingLivingScenePOC = false })
         }
         .sheet(isPresented: $showingClassicGames) {
             GamesDialogView(
@@ -393,14 +415,30 @@ struct BootstrapLoadingView: View {
         .onAppear {
             introStartedAt = ProcessInfo.processInfo.systemUptime
             introAudio.play()
+            tryAutoEnter()
+        }
+        .onChange(of: isBootstrapReady) { _, _ in
+            tryAutoEnter()
+        }
+        .onChange(of: introAudio.didFinish) { _, _ in
+            tryAutoEnter()
         }
         .onDisappear {
             introAudio.stop()
         }
     }
 
+    private func tryAutoEnter() {
+        guard shouldAutoEnter, canContinue else { return }
+        onContinue()
+    }
+
     private var canContinue: Bool {
         isBootstrapReady && introAudio.didFinish
+    }
+
+    private var shouldAutoEnter: Bool {
+        ProcessInfo.processInfo.arguments.contains("-world2SkipIntro")
     }
 
     private var introVideoURL: URL? {
@@ -661,7 +699,8 @@ private extension World2Screen {
         switch self {
         case .loading, .playerSelect, .treehouse, .cardFactory,
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
-             .creatureLab, .fallingTargets, .threeBearsHouse:
+             .creatureLab, .fallingTargets, .threeBearsHouse,
+             .characterStudio, .sceneBuilder, .worldTeleporter:
             return false
         case .homeWorld, .blankSlate:
             return true

@@ -11,6 +11,7 @@
 //  Developer mode only. Nothing here is reachable by a player.
 //
 
+import Combine
 import SwiftUI
 
 struct World2SceneEditorPanel: View {

@@ -1,0 +1,66 @@
+{
+  "id": "livingScene.artGarden.poc",
+  "version": 1,
+  "scene": "scene.png",
+  "depth": "depth.png",
+  "camera": {
+    "parallax": 0.012,
+    "zoom": 0.008,
+    "period": 12.0,
+    "nearParallaxScale": 1.35,
+    "farParallaxScale": 0.55
+  },
+  "effects": [
+    {
+      "mask": "water_mask.png",
+      "effect": "water_flow",
+      "strength": 0.008,
+      "speed": 0.12
+    },
+    {
+      "mask": "foliage_mask.png",
+      "effect": "soft_sway",
+      "strength": 0.004,
+      "speed": 0.08
+    },
+    {
+      "mask": "cloud_mask.png",
+      "effect": "cloud_drift",
+      "strength": 0.006,
+      "speed": 0.015
+    },
+    {
+      "effect": "sparkles",
+      "density": 0.3,
+      "regions": [
+        {
+          "x": 0.45,
+          "y": 0.58,
+          "radius": 0.12
+        },
+        {
+          "x": 0.62,
+          "y": 0.48,
+          "radius": 0.1
+        },
+        {
+          "x": 0.32,
+          "y": 0.55,
+          "radius": 0.08
+        }
+      ]
+    }
+  ],
+  "hardpoints": [
+    {
+      "id": "lower_left_plot",
+      "x": 0.28,
+      "y": 0.78,
+      "radius": 0.12
+    }
+  ],
+  "notes": [
+    "POC only. Canonical artwork is scene.png (exact Art Garden still).",
+    "Masks are local color heuristics, not authoring-quality."
+  ]
+}

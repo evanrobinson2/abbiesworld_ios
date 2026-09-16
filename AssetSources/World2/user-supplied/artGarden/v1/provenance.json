@@ -1,0 +1,28 @@
+{
+  "semanticId": "map.artGarden.ambient",
+  "registryKey": "maps/art-garden/ambient",
+  "assetCatalogName": "world2_map_artGarden_ambient",
+  "kind": "loopingVideo",
+  "role": "map-backdrop-ambient",
+  "version": "v1",
+  "grade": "crackware",
+  "shippable": false,
+  "sourceFilename": "Untitled_In_a_stylized_animated_cinematic_style_this_ZwWtcfGZ.mp4",
+  "sha256": "97c0366178333cd3a28ceade7574ea6fb84063be033078cc2939559b39ddc8ba",
+  "format": "mp4",
+  "codec": "h264",
+  "width": 1280,
+  "height": 720,
+  "durationSeconds": 5.041,
+  "frameRate": "24/1",
+  "loop": true,
+  "muted": true,
+  "provider": "luma",
+  "notes": [
+    "CRACKWARE — first semi-animate branch. Free-tier Luma watermark is brutal; not for Abbie play or App Store.",
+    "Kept only to prove ambient-loop wiring + asset IDs.",
+    "Replace with a clean paid/clean export (or client-side motion) before any parent-facing build.",
+    "Still poster remains map.artGarden / world2_map_artGarden for normal play."
+  ],
+  "runtimeBundlePath": "Resources/World2/world2_map_artGarden_ambient.mp4"
+}

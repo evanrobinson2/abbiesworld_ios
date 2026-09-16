@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct KidFriendlyRevealView: View {
-    let decoration: Decoration
+    let decoration: MachineDecoration
     let onComplete: () -> Void
     
     @State private var phase: RevealPhase = .shaking
@@ -232,8 +232,8 @@ struct StarBurstView: View {
                     .fill(
                         LinearGradient(
                             colors: [.yellow.opacity(0.3), .clear],
-                            startPoint: .center,
-                            endRadius: .trailing
+                            startPoint: .leading,
+                            endPoint: .trailing
                         )
                     )
                     .frame(width: 400, height: 20)
@@ -299,7 +299,7 @@ struct ConfettiPiece: View {
 
 #Preview {
     KidFriendlyRevealView(
-        decoration: Decoration(
+        decoration: MachineDecoration(
             id: "1",
             generationId: "gen1",
             recipe: DecoratorRecipe(essenceIds: ["cat_whisker", "rainbow_hiccup", "cozy_nap_energy"]),

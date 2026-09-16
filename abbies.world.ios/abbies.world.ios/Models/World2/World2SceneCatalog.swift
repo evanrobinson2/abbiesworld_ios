@@ -27,6 +27,7 @@ enum World2SceneCatalog {
         workLand,
         farmLand,
         threeBears,
+        artGarden,
         World2SceneDefinition.blankSlate,
     ]
 
@@ -285,6 +286,76 @@ enum World2SceneCatalog {
                 y: 0.512,
                 scale: 1.05,
                 zIndex: 1
+            ),
+        ],
+        showsOpenHardpointsToPlayers: true,
+        createdAt: .distantPast
+    )
+
+    // MARK: - Art Garden
+    //
+    // Unconnected on purpose: no adjacency from Home / Farm / Work. Reach it
+    // with the World Teleporter inventory item.
+    //
+    // ambientVideoAsset v1 is CRACKWARE (free-tier Luma watermark). Kid play
+    // keeps the still poster; developer mode can enable the loop for wiring checks.
+
+    static let artGarden = World2SceneDefinition(
+        id: sceneID(for: .artGarden),
+        name: "Art Garden",
+        summary: "Terraced gardens, a Character Studio, and The Imagination Atelier",
+        backgroundAsset: "map.artGarden",
+        ambientVideoAsset: "map.artGarden.ambient",
+        hardpoints: [
+            World2SceneHardpoint(
+                id: "hardpoint.artGarden.studioPad",
+                name: "Sandy plaza",
+                position: World2NormalizedPoint(x: 0.318, y: 0.548),
+                acceptedSizeClasses: [.medium, .large],
+                notes: "Circular clearing — Character Studio stands here"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.artGarden.atelierPad",
+                name: "Easel terrace",
+                position: World2NormalizedPoint(x: 0.620, y: 0.430),
+                acceptedSizeClasses: [.medium, .large],
+                notes: "Rocky atelier plateau — Imagination Atelier"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.artGarden.meadowPad",
+                name: "Lower meadow",
+                position: World2NormalizedPoint(x: 0.480, y: 0.780),
+                acceptedSizeClasses: [.small, .medium],
+                notes: "Open — colorful stepping stones"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.artGarden.cliffPad",
+                name: "Pencil lookout",
+                position: World2NormalizedPoint(x: 0.780, y: 0.280),
+                acceptedSizeClasses: [.small, .medium],
+                notes: "Open — near the orange pencil tower"
+            ),
+        ],
+        poiInstances: [
+            authored(
+                "instance.artGarden.characterStudio",
+                World2POIRegistry.characterStudioID,
+                scene: sceneID(for: .artGarden),
+                hardpoint: "hardpoint.artGarden.studioPad",
+                x: 0.318,
+                y: 0.548,
+                scale: 0.92,
+                zIndex: 1
+            ),
+            authored(
+                "instance.artGarden.sceneBuilder",
+                World2POIRegistry.sceneBuilderID,
+                scene: sceneID(for: .artGarden),
+                hardpoint: "hardpoint.artGarden.atelierPad",
+                x: 0.620,
+                y: 0.430,
+                scale: 1.05,
+                zIndex: 2
             ),
         ],
         showsOpenHardpointsToPlayers: true,

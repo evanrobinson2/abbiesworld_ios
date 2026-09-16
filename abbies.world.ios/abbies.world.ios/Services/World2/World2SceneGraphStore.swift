@@ -112,7 +112,7 @@ final class World2SceneGraphStore: ObservableObject {
     /// The scene as it should be drawn right now: the developer's override when
     /// there is one, otherwise the shipped catalog, otherwise a blank slate.
     func scene(_ sceneID: String) -> World2SceneDefinition {
-        draftScenes[sceneID]
+        var resolved = draftScenes[sceneID]
             ?? World2SceneCatalog.scene(sceneID)
             ?? World2SceneDefinition(
                 id: sceneID,
@@ -120,6 +120,12 @@ final class World2SceneGraphStore: ObservableObject {
                 summary: "",
                 isMutableByPlayer: true
             )
+        // Ambient video ships in the catalog; older saved overrides may omit it.
+        if resolved.ambientVideoAsset == nil,
+           let catalogAmbient = World2SceneCatalog.scene(sceneID)?.ambientVideoAsset {
+            resolved.ambientVideoAsset = catalogAmbient
+        }
+        return resolved
     }
 
     func scene(for worldId: WorldId) -> World2SceneDefinition {

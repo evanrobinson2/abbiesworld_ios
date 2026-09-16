@@ -443,4 +443,50 @@ final class InventoryBadgeTests: XCTestCase {
             "Bowl of Perfect Porridge"
         )
     }
+
+    func testArtGardenIsUnconnectedAndHostsCharacterStudio() {
+        let scene = World2SceneCatalog.artGarden
+        XCTAssertEqual(scene.id, WorldId.artGarden.sceneID)
+        XCTAssertEqual(scene.backgroundAsset, "map.artGarden")
+        XCTAssertTrue(
+            scene.poiInstances.contains {
+                $0.archetypeID == World2POIRegistry.characterStudioID
+            }
+        )
+        XCTAssertTrue(
+            scene.poiInstances.contains {
+                $0.archetypeID == World2POIRegistry.sceneBuilderID
+            }
+        )
+        XCTAssertEqual(World2POIRegistry.characterStudio.route, .characterStudio)
+        XCTAssertEqual(World2POIRegistry.sceneBuilder.route, .sceneBuilder)
+        XCTAssertEqual(
+            World2POIRegistry.sceneBuilder.contract.grants,
+            [.storyDecoration(decorationID: World2StoryDecoration.propertyDeed.id)]
+        )
+        XCTAssertTrue(
+            WorldId.artGarden.direction == nil,
+            "Art Garden must not advertise an overland travel direction"
+        )
+    }
+
+    func testPropertyDeedIsStoryTreasureFromSceneBuilder() {
+        let deed = World2StoryDecoration.propertyDeed
+        XCTAssertEqual(deed.artStyle, .propertyDeed)
+        XCTAssertEqual(deed.awardedByArchetypeID, World2POIRegistry.sceneBuilderID)
+        XCTAssertEqual(
+            World2StoryDecoration.decoration(id: deed.id)?.name,
+            "Property Deed"
+        )
+    }
+
+    func testWorldTeleporterIsUsableInventoryGear() {
+        let teleporter = World2StoryDecoration.worldTeleporter
+        XCTAssertEqual(teleporter.inventoryAction, .openWorldTeleporter)
+        XCTAssertTrue(teleporter.isUsableFromInventory)
+        XCTAssertEqual(
+            World2StoryDecoration.decoration(id: teleporter.id)?.artStyle,
+            .worldTeleporter
+        )
+    }
 }

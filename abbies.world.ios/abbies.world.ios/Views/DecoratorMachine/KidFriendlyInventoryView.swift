@@ -150,7 +150,7 @@ struct KidFriendlyInventoryView: View {
 // MARK: - Kid Decoration Card
 
 struct KidDecorationCard: View {
-    let decoration: Decoration
+    let decoration: MachineDecoration
     let onFavorite: () -> Void
     
     @State private var isPressed = false
@@ -256,7 +256,7 @@ struct KidDecorationCard: View {
     KidFriendlyInventoryView(viewModel: {
         let vm = DecoratorMachineViewModel()
         vm.inventory = [
-            Decoration(
+            MachineDecoration(
                 id: "1",
                 generationId: "gen1",
                 recipe: DecoratorRecipe(essenceIds: ["cat_whisker", "rainbow_hiccup"]),
@@ -268,7 +268,7 @@ struct KidDecorationCard: View {
                 isRevealed: true,
                 isFavorite: true
             ),
-            Decoration(
+            MachineDecoration(
                 id: "2",
                 generationId: "gen2",
                 recipe: DecoratorRecipe(essenceIds: ["bunny_bounce", "cloud_fluff", "giggle_fizz"]),
@@ -280,7 +280,7 @@ struct KidDecorationCard: View {
                 isRevealed: true,
                 isFavorite: false
             ),
-            Decoration(
+            MachineDecoration(
                 id: "3",
                 generationId: "gen3",
                 recipe: DecoratorRecipe(essenceIds: ["moonbeam", "owl_wisdom"]),

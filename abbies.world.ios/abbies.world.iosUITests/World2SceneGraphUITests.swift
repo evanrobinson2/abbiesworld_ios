@@ -94,7 +94,19 @@ final class World2SceneGraphUITests: XCTestCase {
         )
         assertExists("world2.reward.itemName", "The reward's name")
         assertExists("world2.reward.inventoryNotice", "Where it went")
-        assertExists("world2.badge.new", "NEW! ribbon on the reward")
+        assertExists("world2.reward.badges", "The ribbon row")
+        // Chips are drawn as combined labels; query by the words a child sees.
+        for ribbon in ["NEW!", "ONE OF A KIND", "STORY TREASURE"] {
+            XCTAssertTrue(
+                app.staticTexts[ribbon].waitForExistence(timeout: 4)
+                    || celebration.staticTexts[ribbon].exists
+                    || app.descendants(matching: .any)
+                        .matching(NSPredicate(format: "label CONTAINS %@", ribbon))
+                        .firstMatch
+                        .exists,
+                "Missing ribbon \(ribbon)\n\(app.debugDescription.prefix(2000))"
+            )
+        }
         saveShot("porridge-celebration")
 
         tap("world2.reward.showMe")

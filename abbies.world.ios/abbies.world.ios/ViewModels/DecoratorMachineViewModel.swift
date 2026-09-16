@@ -35,8 +35,8 @@ class DecoratorMachineViewModel: ObservableObject {
     @Published var activeJobs: [DecoratorJob] = []
     @Published var queuedJobs: [DecoratorJob] = []
     @Published var failedJobs: [DecoratorJob] = []
-    @Published var readyToReveal: [Decoration] = []
-    @Published var inventory: [Decoration] = []
+    @Published var readyToReveal: [MachineDecoration] = []
+    @Published var inventory: [MachineDecoration] = []
     
     @Published var isLoading = false
     @Published var isCreating = false
@@ -44,9 +44,9 @@ class DecoratorMachineViewModel: ObservableObject {
     @Published var queueFull = false
     
     @Published var machineState: MachineAnimationState = .idle
-    @Published var decorationToReveal: Decoration?
+    @Published var decorationToReveal: MachineDecoration?
     @Published var showingReveal = false
-    @Published var decorationDetail: Decoration?
+    @Published var decorationDetail: MachineDecoration?
     @Published var showingDetail = false
     
     // MARK: - Configuration
@@ -88,7 +88,7 @@ class DecoratorMachineViewModel: ObservableObject {
         !activeJobs.isEmpty || !queuedJobs.isEmpty
     }
     
-    var favorites: [Decoration] {
+    var favorites: [MachineDecoration] {
         inventory.filter { $0.isFavorite }
     }
     
@@ -229,7 +229,7 @@ class DecoratorMachineViewModel: ObservableObject {
         try? await Task.sleep(for: .seconds(3))
         
         let mockPrompt = composePrompt(from: essencesCopy)
-        let mockDecoration = Decoration(
+        let mockDecoration = MachineDecoration(
             id: decorationId,
             generationId: generationId,
             recipe: recipe,
@@ -390,7 +390,7 @@ class DecoratorMachineViewModel: ObservableObject {
     
     // MARK: - Reveal
     
-    func revealDecoration(_ decoration: Decoration) {
+    func revealDecoration(_ decoration: MachineDecoration) {
         decorationToReveal = decoration
         showingReveal = true
         playReadySound()
@@ -423,12 +423,12 @@ class DecoratorMachineViewModel: ObservableObject {
     
     // MARK: - Inventory
     
-    func showDecorationDetail(_ decoration: Decoration) {
+    func showDecorationDetail(_ decoration: MachineDecoration) {
         decorationDetail = decoration
         showingDetail = true
     }
     
-    func toggleFavorite(_ decoration: Decoration) {
+    func toggleFavorite(_ decoration: MachineDecoration) {
         guard let index = inventory.firstIndex(where: { $0.id == decoration.id }) else { return }
         inventory[index].isFavorite.toggle()
         
@@ -441,7 +441,7 @@ class DecoratorMachineViewModel: ObservableObject {
         }
     }
     
-    func makeAnotherLikeThis(_ decoration: Decoration) {
+    func makeAnotherLikeThis(_ decoration: MachineDecoration) {
         selectedEssences = decoration.recipeEssenceIds.compactMap {
             DecoratorEssenceContent.essence(for: $0)
         }

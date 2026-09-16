@@ -1,0 +1,248 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4BF09B699CFF433190CFF2B8 /* MacActorDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F510450F5F4005B5094A88 /* MacActorDemoApp.swift */; };
+		758C122C72AC4674A50BC683 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98BC973D7BE54F268754C6DF /* ContentView.swift */; };
+		0D037B063948401F9CF6E56A /* CharacterState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CCA743BA80649E2B46EF2AA /* CharacterState.swift */; };
+		E4872ED09DE14555B6CF582B /* ActorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA540D7435A04BF2A5D93FDD /* ActorController.swift */; };
+		328A11B04F6342C6A955E08E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4CC28314CB6E4AC8BA987685 /* Assets.xcassets */; };
+		0595069A1F88441881152516 /* output in Resources */ = {isa = PBXBuildFile; fileRef = B2A343EB681242D0965B864F /* output */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DB2A25068FF3459ABB7690F2 /* MacActorDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacActorDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		89F510450F5F4005B5094A88 /* MacActorDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacActorDemoApp.swift; sourceTree = "<group>"; };
+		98BC973D7BE54F268754C6DF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		4CCA743BA80649E2B46EF2AA /* CharacterState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterState.swift; sourceTree = "<group>"; };
+		DA540D7435A04BF2A5D93FDD /* ActorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActorController.swift; sourceTree = "<group>"; };
+		4CC28314CB6E4AC8BA987685 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B2A343EB681242D0965B864F /* output */ = {isa = PBXFileReference; lastKnownFileType = folder; name = output; path = ../output; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		121C1EE81E2F4B528A482BC0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7060AE592E65486FB0142BAD = {
+			isa = PBXGroup;
+			children = (
+				FC2D0E2391144F55B972EBAA /* MacActorDemo */,
+				B2A343EB681242D0965B864F /* output */,
+				9305C784853C44BC90E8CD13 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		9305C784853C44BC90E8CD13 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB2A25068FF3459ABB7690F2 /* MacActorDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FC2D0E2391144F55B972EBAA /* MacActorDemo */ = {
+			isa = PBXGroup;
+			children = (
+				89F510450F5F4005B5094A88 /* MacActorDemoApp.swift */,
+				98BC973D7BE54F268754C6DF /* ContentView.swift */,
+				4CCA743BA80649E2B46EF2AA /* CharacterState.swift */,
+				DA540D7435A04BF2A5D93FDD /* ActorController.swift */,
+				4CC28314CB6E4AC8BA987685 /* Assets.xcassets */,
+			);
+			path = MacActorDemo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F2F502900F19496E86E1ED63 /* MacActorDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = {ids['build_config_list_target']} /* Build configuration list for PBXNativeTarget "MacActorDemo" */;
+			buildPhases = (
+				6E31AA8313E149C38E91DA37 /* Sources */,
+				121C1EE81E2F4B528A482BC0 /* Frameworks */,
+				9A9C71F42974477AB8A5FB4C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacActorDemo;
+			productName = MacActorDemo;
+			productReference = DB2A25068FF3459ABB7690F2 /* MacActorDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FEF5FEC57A854322977BE563 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1600;
+				LastUpgradeCheck = 1600;
+			};
+			buildConfigurationList = 68AAADEDA2174EBE819A1A7D /* Build configuration list for PBXProject "MacActorDemo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7060AE592E65486FB0142BAD;
+			productRefGroup = 9305C784853C44BC90E8CD13 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F2F502900F19496E86E1ED63 /* MacActorDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		9A9C71F42974477AB8A5FB4C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				328A11B04F6342C6A955E08E /* Assets.xcassets in Resources */,
+				0595069A1F88441881152516 /* output in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6E31AA8313E149C38E91DA37 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4BF09B699CFF433190CFF2B8 /* MacActorDemoApp.swift in Sources */,
+				758C122C72AC4674A50BC683 /* ContentView.swift in Sources */,
+				0D037B063948401F9CF6E56A /* CharacterState.swift in Sources */,
+				E4872ED09DE14555B6CF582B /* ActorController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C8FB975ED15B41098854E2B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		16CA1BDA44FE4201BADF85B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_OPTIMIZATION_LEVEL = s;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5B86DBC8CC0144ACA1FA72E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MacActorDemo;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Abbie World spike";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = world.abbies.spike.MacActorDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		87B0FE9A7A544BF9855EBED1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGNING_ALLOWED = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = MacActorDemo;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Abbie World spike";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = world.abbies.spike.MacActorDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		68AAADEDA2174EBE819A1A7D /* Build configuration list for PBXProject "MacActorDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C8FB975ED15B41098854E2B8 /* Debug */,
+				16CA1BDA44FE4201BADF85B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		503CF240252F4147A873F0B9 /* Build configuration list for PBXNativeTarget "MacActorDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B86DBC8CC0144ACA1FA72E3 /* Debug */,
+				87B0FE9A7A544BF9855EBED1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FEF5FEC57A854322977BE563 /* Project object */;
+}

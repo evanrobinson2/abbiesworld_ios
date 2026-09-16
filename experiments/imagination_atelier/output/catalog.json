@@ -1,0 +1,3365 @@
+{
+  "generatedBy": "carve_atelier_assets.py",
+  "promptFamily": "Imagination Atelier",
+  "tileCount": 159,
+  "categories": [
+    "ingredient.creature",
+    "ingredient.handheld.adventure",
+    "ingredient.handheld.fantasy",
+    "ingredient.headwear",
+    "ui.actionControl",
+    "ui.categoryButton",
+    "ui.slotState"
+  ],
+  "missingPrompts": [
+    "P0.1 Main Character Builder (full-screen 16:9) \u2014 not in this drop",
+    "P0.2 Creation in Progress \u2014 not in this drop",
+    "P0.3 Character Reveal \u2014 not in this drop",
+    "P1.4 HUD Elements \u2014 not in this drop",
+    "P3.2 Outfits \u2014 not in this drop",
+    "P3.5 Silly Handhelds \u2014 not in this drop",
+    "P3.8 Character Generation Placeholders \u2014 not in this drop",
+    "P3.7 Creation Effects \u2014 runtime particle generator (World2AtelierParticleField), not carved plates"
+  ],
+  "tiles": [
+    {
+      "id": "P1.1_categoryButtons_vA/category_creature",
+      "name": "category_creature",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vA",
+      "canonical": true,
+      "png": "output/P1.1_categoryButtons_vA/category_creature.png",
+      "size": [
+        407,
+        394
+      ],
+      "bbox": [
+        25,
+        25,
+        486,
+        486
+      ],
+      "assetCatalogName": "world2_atelier_category_creature",
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vA/category_outfit",
+      "name": "category_outfit",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vA",
+      "canonical": true,
+      "png": "output/P1.1_categoryButtons_vA/category_outfit.png",
+      "size": [
+        388,
+        390
+      ],
+      "bbox": [
+        537,
+        25,
+        998,
+        486
+      ],
+      "assetCatalogName": "world2_atelier_category_outfit",
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vA/category_headwear",
+      "name": "category_headwear",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vA",
+      "canonical": true,
+      "png": "output/P1.1_categoryButtons_vA/category_headwear.png",
+      "size": [
+        378,
+        375
+      ],
+      "bbox": [
+        25,
+        537,
+        486,
+        998
+      ],
+      "assetCatalogName": "world2_atelier_category_headwear",
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vA/category_handheld",
+      "name": "category_handheld",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vA",
+      "canonical": true,
+      "png": "output/P1.1_categoryButtons_vA/category_handheld.png",
+      "size": [
+        374,
+        385
+      ],
+      "bbox": [
+        537,
+        537,
+        998,
+        998
+      ],
+      "assetCatalogName": "world2_atelier_category_handheld",
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vB/category_creature",
+      "name": "category_creature",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vB",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vB/category_creature.png",
+      "size": [
+        378,
+        393
+      ],
+      "bbox": [
+        20,
+        20,
+        491,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vB/category_outfit",
+      "name": "category_outfit",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vB",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vB/category_outfit.png",
+      "size": [
+        375,
+        407
+      ],
+      "bbox": [
+        532,
+        20,
+        1003,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vB/category_headwear",
+      "name": "category_headwear",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vB",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vB/category_headwear.png",
+      "size": [
+        376,
+        419
+      ],
+      "bbox": [
+        20,
+        532,
+        491,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vB/category_handheld",
+      "name": "category_handheld",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vB",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vB/category_handheld.png",
+      "size": [
+        370,
+        412
+      ],
+      "bbox": [
+        532,
+        532,
+        1003,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vC/category_creature",
+      "name": "category_creature",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vC",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vC/category_creature.png",
+      "size": [
+        420,
+        390
+      ],
+      "bbox": [
+        20,
+        20,
+        491,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vC/category_outfit",
+      "name": "category_outfit",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vC",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vC/category_outfit.png",
+      "size": [
+        402,
+        388
+      ],
+      "bbox": [
+        532,
+        20,
+        1003,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vC/category_headwear",
+      "name": "category_headwear",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vC",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vC/category_headwear.png",
+      "size": [
+        420,
+        435
+      ],
+      "bbox": [
+        20,
+        532,
+        491,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vC/category_handheld",
+      "name": "category_handheld",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vC",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vC/category_handheld.png",
+      "size": [
+        416,
+        407
+      ],
+      "bbox": [
+        532,
+        532,
+        1003,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vD/category_creature",
+      "name": "category_creature",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vD",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vD/category_creature.png",
+      "size": [
+        387,
+        371
+      ],
+      "bbox": [
+        20,
+        20,
+        491,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vD/category_outfit",
+      "name": "category_outfit",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vD",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vD/category_outfit.png",
+      "size": [
+        360,
+        342
+      ],
+      "bbox": [
+        532,
+        20,
+        1003,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vD/category_headwear",
+      "name": "category_headwear",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vD",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vD/category_headwear.png",
+      "size": [
+        376,
+        367
+      ],
+      "bbox": [
+        20,
+        532,
+        491,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.1_categoryButtons_vD/category_handheld",
+      "name": "category_handheld",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "sheet": "P1.1_categoryButtons_vD",
+      "canonical": false,
+      "png": "output/P1.1_categoryButtons_vD/category_handheld.png",
+      "size": [
+        357,
+        340
+      ],
+      "bbox": [
+        532,
+        532,
+        1003,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vA/slot_empty",
+      "name": "slot_empty",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vA",
+      "canonical": true,
+      "png": "output/P1.2_slotStates_vA/slot_empty.png",
+      "size": [
+        417,
+        403
+      ],
+      "bbox": [
+        25,
+        25,
+        486,
+        486
+      ],
+      "assetCatalogName": "world2_atelier_slot_empty",
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vA/slot_filled",
+      "name": "slot_filled",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vA",
+      "canonical": true,
+      "png": "output/P1.2_slotStates_vA/slot_filled.png",
+      "size": [
+        411,
+        405
+      ],
+      "bbox": [
+        537,
+        25,
+        998,
+        486
+      ],
+      "assetCatalogName": "world2_atelier_slot_filled",
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vA/slot_locked",
+      "name": "slot_locked",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vA",
+      "canonical": true,
+      "png": "output/P1.2_slotStates_vA/slot_locked.png",
+      "size": [
+        414,
+        414
+      ],
+      "bbox": [
+        25,
+        537,
+        486,
+        998
+      ],
+      "assetCatalogName": "world2_atelier_slot_locked",
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vA/slot_active",
+      "name": "slot_active",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vA",
+      "canonical": true,
+      "png": "output/P1.2_slotStates_vA/slot_active.png",
+      "size": [
+        411,
+        413
+      ],
+      "bbox": [
+        537,
+        537,
+        998,
+        998
+      ],
+      "assetCatalogName": "world2_atelier_slot_active",
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vB/slot_empty",
+      "name": "slot_empty",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vB",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vB/slot_empty.png",
+      "size": [
+        395,
+        397
+      ],
+      "bbox": [
+        20,
+        20,
+        491,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vB/slot_filled",
+      "name": "slot_filled",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vB",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vB/slot_filled.png",
+      "size": [
+        402,
+        397
+      ],
+      "bbox": [
+        532,
+        20,
+        1003,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vB/slot_locked",
+      "name": "slot_locked",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vB",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vB/slot_locked.png",
+      "size": [
+        425,
+        409
+      ],
+      "bbox": [
+        20,
+        532,
+        491,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vB/slot_active",
+      "name": "slot_active",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vB",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vB/slot_active.png",
+      "size": [
+        438,
+        430
+      ],
+      "bbox": [
+        532,
+        532,
+        1003,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vC/slot_empty",
+      "name": "slot_empty",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vC",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vC/slot_empty.png",
+      "size": [
+        416,
+        408
+      ],
+      "bbox": [
+        20,
+        20,
+        491,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vC/slot_filled",
+      "name": "slot_filled",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vC",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vC/slot_filled.png",
+      "size": [
+        420,
+        416
+      ],
+      "bbox": [
+        532,
+        20,
+        1003,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vC/slot_locked",
+      "name": "slot_locked",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vC",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vC/slot_locked.png",
+      "size": [
+        422,
+        404
+      ],
+      "bbox": [
+        20,
+        532,
+        491,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vC/slot_active",
+      "name": "slot_active",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vC",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vC/slot_active.png",
+      "size": [
+        443,
+        443
+      ],
+      "bbox": [
+        532,
+        532,
+        1003,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vD/slot_empty",
+      "name": "slot_empty",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vD",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vD/slot_empty.png",
+      "size": [
+        427,
+        398
+      ],
+      "bbox": [
+        20,
+        20,
+        491,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vD/slot_filled",
+      "name": "slot_filled",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vD",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vD/slot_filled.png",
+      "size": [
+        412,
+        413
+      ],
+      "bbox": [
+        532,
+        20,
+        1003,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vD/slot_locked",
+      "name": "slot_locked",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vD",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vD/slot_locked.png",
+      "size": [
+        420,
+        410
+      ],
+      "bbox": [
+        20,
+        532,
+        491,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.2_slotStates_vD/slot_active",
+      "name": "slot_active",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "sheet": "P1.2_slotStates_vD",
+      "canonical": false,
+      "png": "output/P1.2_slotStates_vD/slot_active.png",
+      "size": [
+        460,
+        411
+      ],
+      "bbox": [
+        532,
+        532,
+        1003,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vA/action_create",
+      "name": "action_create",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vA",
+      "canonical": true,
+      "png": "output/P1.3_actionControls_vA/action_create.png",
+      "size": [
+        424,
+        393
+      ],
+      "bbox": [
+        25,
+        25,
+        486,
+        486
+      ],
+      "assetCatalogName": "world2_atelier_action_create",
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vA/action_clear",
+      "name": "action_clear",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vA",
+      "canonical": true,
+      "png": "output/P1.3_actionControls_vA/action_clear.png",
+      "size": [
+        392,
+        340
+      ],
+      "bbox": [
+        537,
+        25,
+        998,
+        486
+      ],
+      "assetCatalogName": "world2_atelier_action_clear",
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vA/action_randomize",
+      "name": "action_randomize",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vA",
+      "canonical": true,
+      "png": "output/P1.3_actionControls_vA/action_randomize.png",
+      "size": [
+        413,
+        341
+      ],
+      "bbox": [
+        25,
+        537,
+        486,
+        998
+      ],
+      "assetCatalogName": "world2_atelier_action_randomize",
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vA/action_equip",
+      "name": "action_equip",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vA",
+      "canonical": true,
+      "png": "output/P1.3_actionControls_vA/action_equip.png",
+      "size": [
+        306,
+        326
+      ],
+      "bbox": [
+        537,
+        537,
+        998,
+        998
+      ],
+      "assetCatalogName": "world2_atelier_action_equip",
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vB/action_create",
+      "name": "action_create",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vB",
+      "canonical": false,
+      "png": "output/P1.3_actionControls_vB/action_create.png",
+      "size": [
+        412,
+        414
+      ],
+      "bbox": [
+        20,
+        20,
+        491,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vB/action_randomize",
+      "name": "action_randomize",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vB",
+      "canonical": false,
+      "png": "output/P1.3_actionControls_vB/action_randomize.png",
+      "size": [
+        386,
+        373
+      ],
+      "bbox": [
+        532,
+        20,
+        1003,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vB/action_clear",
+      "name": "action_clear",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vB",
+      "canonical": false,
+      "png": "output/P1.3_actionControls_vB/action_clear.png",
+      "size": [
+        364,
+        365
+      ],
+      "bbox": [
+        20,
+        532,
+        491,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vB/action_equip",
+      "name": "action_equip",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vB",
+      "canonical": false,
+      "png": "output/P1.3_actionControls_vB/action_equip.png",
+      "size": [
+        491,
+        490
+      ],
+      "bbox": [
+        532,
+        532,
+        1003,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vC/action_create",
+      "name": "action_create",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vC",
+      "canonical": false,
+      "png": "output/P1.3_actionControls_vC/action_create.png",
+      "size": [
+        407,
+        353
+      ],
+      "bbox": [
+        20,
+        20,
+        491,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vC/action_randomize",
+      "name": "action_randomize",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vC",
+      "canonical": false,
+      "png": "output/P1.3_actionControls_vC/action_randomize.png",
+      "size": [
+        337,
+        331
+      ],
+      "bbox": [
+        532,
+        20,
+        1003,
+        491
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vC/action_clear",
+      "name": "action_clear",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vC",
+      "canonical": false,
+      "png": "output/P1.3_actionControls_vC/action_clear.png",
+      "size": [
+        329,
+        334
+      ],
+      "bbox": [
+        20,
+        532,
+        491,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P1.3_actionControls_vC/action_equip",
+      "name": "action_equip",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "sheet": "P1.3_actionControls_vC",
+      "canonical": false,
+      "png": "output/P1.3_actionControls_vC/action_equip.png",
+      "size": [
+        346,
+        379
+      ],
+      "bbox": [
+        532,
+        532,
+        1003,
+        1003
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_cheetah",
+      "name": "creature_cheetah",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_cheetah.png",
+      "size": [
+        184,
+        326
+      ],
+      "bbox": [
+        3,
+        17,
+        167,
+        323
+      ],
+      "assetCatalogName": "world2_atelier_creature_cheetah",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_houseCat",
+      "name": "creature_houseCat",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_houseCat.png",
+      "size": [
+        183,
+        326
+      ],
+      "bbox": [
+        174,
+        17,
+        337,
+        323
+      ],
+      "assetCatalogName": "world2_atelier_creature_houseCat",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_fox",
+      "name": "creature_fox",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_fox.png",
+      "size": [
+        184,
+        255
+      ],
+      "bbox": [
+        344,
+        17,
+        508,
+        323
+      ],
+      "assetCatalogName": "world2_atelier_creature_fox",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_bunny",
+      "name": "creature_bunny",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_bunny.png",
+      "size": [
+        184,
+        326
+      ],
+      "bbox": [
+        515,
+        17,
+        679,
+        323
+      ],
+      "assetCatalogName": "world2_atelier_creature_bunny",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_shihTzu",
+      "name": "creature_shihTzu",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_shihTzu.png",
+      "size": [
+        183,
+        326
+      ],
+      "bbox": [
+        686,
+        17,
+        849,
+        323
+      ],
+      "assetCatalogName": "world2_atelier_creature_shihTzu",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_wolf",
+      "name": "creature_wolf",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_wolf.png",
+      "size": [
+        184,
+        280
+      ],
+      "bbox": [
+        856,
+        17,
+        1020,
+        323
+      ],
+      "assetCatalogName": "world2_atelier_creature_wolf",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_redPanda",
+      "name": "creature_redPanda",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_redPanda.png",
+      "size": [
+        190,
+        229
+      ],
+      "bbox": [
+        4,
+        358,
+        200,
+        664
+      ],
+      "assetCatalogName": "world2_atelier_creature_redPanda",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_frog",
+      "name": "creature_frog",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_frog.png",
+      "size": [
+        217,
+        231
+      ],
+      "bbox": [
+        208,
+        358,
+        405,
+        664
+      ],
+      "assetCatalogName": "world2_atelier_creature_frog",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_dragon",
+      "name": "creature_dragon",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_dragon.png",
+      "size": [
+        217,
+        243
+      ],
+      "bbox": [
+        413,
+        358,
+        610,
+        664
+      ],
+      "assetCatalogName": "world2_atelier_creature_dragon",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_unicorn",
+      "name": "creature_unicorn",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_unicorn.png",
+      "size": [
+        217,
+        209
+      ],
+      "bbox": [
+        618,
+        358,
+        815,
+        664
+      ],
+      "assetCatalogName": "world2_atelier_creature_unicorn",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vA/creature_raccoon",
+      "name": "creature_raccoon",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vA",
+      "canonical": true,
+      "png": "output/P3.1_baseCreatures_vA/creature_raccoon.png",
+      "size": [
+        174,
+        208
+      ],
+      "bbox": [
+        823,
+        358,
+        1019,
+        664
+      ],
+      "assetCatalogName": "world2_atelier_creature_raccoon",
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_cheetah",
+      "name": "creature_cheetah",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_cheetah.png",
+      "size": [
+        214,
+        283
+      ],
+      "bbox": [
+        4,
+        17,
+        200,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_houseCat",
+      "name": "creature_houseCat",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_houseCat.png",
+      "size": [
+        217,
+        297
+      ],
+      "bbox": [
+        208,
+        17,
+        405,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_fox",
+      "name": "creature_fox",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_fox.png",
+      "size": [
+        217,
+        326
+      ],
+      "bbox": [
+        413,
+        17,
+        610,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_bunny",
+      "name": "creature_bunny",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_bunny.png",
+      "size": [
+        217,
+        326
+      ],
+      "bbox": [
+        618,
+        17,
+        815,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_shihTzu",
+      "name": "creature_shihTzu",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_shihTzu.png",
+      "size": [
+        212,
+        281
+      ],
+      "bbox": [
+        823,
+        17,
+        1019,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_wolf",
+      "name": "creature_wolf",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_wolf.png",
+      "size": [
+        165,
+        252
+      ],
+      "bbox": [
+        3,
+        358,
+        167,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_redPanda",
+      "name": "creature_redPanda",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_redPanda.png",
+      "size": [
+        183,
+        262
+      ],
+      "bbox": [
+        174,
+        358,
+        337,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_owlFrogCluster",
+      "name": "creature_owlFrogCluster",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_owlFrogCluster.png",
+      "size": [
+        184,
+        303
+      ],
+      "bbox": [
+        344,
+        358,
+        508,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_dragon",
+      "name": "creature_dragon",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_dragon.png",
+      "size": [
+        184,
+        253
+      ],
+      "bbox": [
+        515,
+        358,
+        679,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_unicorn",
+      "name": "creature_unicorn",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_unicorn.png",
+      "size": [
+        183,
+        299
+      ],
+      "bbox": [
+        686,
+        358,
+        849,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vB/creature_raccoon",
+      "name": "creature_raccoon",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vB",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vB/creature_raccoon.png",
+      "size": [
+        178,
+        257
+      ],
+      "bbox": [
+        856,
+        358,
+        1020,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_cheetah",
+      "name": "creature_cheetah",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_cheetah.png",
+      "size": [
+        184,
+        271
+      ],
+      "bbox": [
+        4,
+        17,
+        200,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_houseCat",
+      "name": "creature_houseCat",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_houseCat.png",
+      "size": [
+        217,
+        246
+      ],
+      "bbox": [
+        208,
+        17,
+        405,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_fox",
+      "name": "creature_fox",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_fox.png",
+      "size": [
+        217,
+        288
+      ],
+      "bbox": [
+        413,
+        17,
+        610,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_bunny",
+      "name": "creature_bunny",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_bunny.png",
+      "size": [
+        217,
+        264
+      ],
+      "bbox": [
+        618,
+        17,
+        815,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_shihTzu",
+      "name": "creature_shihTzu",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_shihTzu.png",
+      "size": [
+        175,
+        260
+      ],
+      "bbox": [
+        823,
+        17,
+        1019,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_redPanda",
+      "name": "creature_redPanda",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_redPanda.png",
+      "size": [
+        204,
+        252
+      ],
+      "bbox": [
+        4,
+        358,
+        200,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_frog",
+      "name": "creature_frog",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_frog.png",
+      "size": [
+        217,
+        258
+      ],
+      "bbox": [
+        208,
+        358,
+        405,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_dragon",
+      "name": "creature_dragon",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_dragon.png",
+      "size": [
+        217,
+        326
+      ],
+      "bbox": [
+        413,
+        358,
+        610,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_unicorn",
+      "name": "creature_unicorn",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_unicorn.png",
+      "size": [
+        217,
+        289
+      ],
+      "bbox": [
+        618,
+        358,
+        815,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vC/creature_raccoon",
+      "name": "creature_raccoon",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vC",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vC/creature_raccoon.png",
+      "size": [
+        194,
+        237
+      ],
+      "bbox": [
+        823,
+        358,
+        1019,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_cheetah",
+      "name": "creature_cheetah",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_cheetah.png",
+      "size": [
+        184,
+        326
+      ],
+      "bbox": [
+        3,
+        17,
+        167,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_houseCat",
+      "name": "creature_houseCat",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_houseCat.png",
+      "size": [
+        183,
+        326
+      ],
+      "bbox": [
+        174,
+        17,
+        337,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_fox",
+      "name": "creature_fox",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_fox.png",
+      "size": [
+        184,
+        326
+      ],
+      "bbox": [
+        344,
+        17,
+        508,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_bunny",
+      "name": "creature_bunny",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_bunny.png",
+      "size": [
+        184,
+        326
+      ],
+      "bbox": [
+        515,
+        17,
+        679,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_raccoon",
+      "name": "creature_raccoon",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_raccoon.png",
+      "size": [
+        183,
+        326
+      ],
+      "bbox": [
+        686,
+        17,
+        849,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_shihTzu",
+      "name": "creature_shihTzu",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_shihTzu.png",
+      "size": [
+        184,
+        326
+      ],
+      "bbox": [
+        856,
+        17,
+        1020,
+        323
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_redPanda",
+      "name": "creature_redPanda",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_redPanda.png",
+      "size": [
+        216,
+        326
+      ],
+      "bbox": [
+        4,
+        358,
+        200,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_frog",
+      "name": "creature_frog",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_frog.png",
+      "size": [
+        217,
+        326
+      ],
+      "bbox": [
+        208,
+        358,
+        405,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_dragon",
+      "name": "creature_dragon",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_dragon.png",
+      "size": [
+        217,
+        326
+      ],
+      "bbox": [
+        413,
+        358,
+        610,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_unicorn",
+      "name": "creature_unicorn",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_unicorn.png",
+      "size": [
+        217,
+        326
+      ],
+      "bbox": [
+        618,
+        358,
+        815,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.1_baseCreatures_vD/creature_wolf",
+      "name": "creature_wolf",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "sheet": "P3.1_baseCreatures_vD",
+      "canonical": false,
+      "png": "output/P3.1_baseCreatures_vD/creature_wolf.png",
+      "size": [
+        216,
+        326
+      ],
+      "bbox": [
+        823,
+        358,
+        1019,
+        664
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_baseballCap",
+      "name": "hat_baseballCap",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_baseballCap.png",
+      "size": [
+        167,
+        143
+      ],
+      "bbox": [
+        10,
+        8,
+        194,
+        195
+      ],
+      "assetCatalogName": "world2_atelier_hat_baseballCap",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_goldenCrown",
+      "name": "hat_goldenCrown",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_goldenCrown.png",
+      "size": [
+        204,
+        157
+      ],
+      "bbox": [
+        215,
+        8,
+        399,
+        195
+      ],
+      "assetCatalogName": "world2_atelier_hat_goldenCrown",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_knightHelmet",
+      "name": "hat_knightHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_knightHelmet.png",
+      "size": [
+        178,
+        193
+      ],
+      "bbox": [
+        419,
+        8,
+        604,
+        195
+      ],
+      "assetCatalogName": "world2_atelier_hat_knightHelmet",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_astronautHelmet",
+      "name": "hat_astronautHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_astronautHelmet.png",
+      "size": [
+        204,
+        190
+      ],
+      "bbox": [
+        624,
+        8,
+        808,
+        195
+      ],
+      "assetCatalogName": "world2_atelier_hat_astronautHelmet",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_wizardCat",
+      "name": "hat_wizardCat",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_wizardCat.png",
+      "size": [
+        204,
+        207
+      ],
+      "bbox": [
+        829,
+        8,
+        1013,
+        195
+      ],
+      "assetCatalogName": "world2_atelier_hat_wizardCat",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_pirateCat",
+      "name": "hat_pirateCat",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_pirateCat.png",
+      "size": [
+        183,
+        194
+      ],
+      "bbox": [
+        10,
+        211,
+        194,
+        398
+      ],
+      "assetCatalogName": "world2_atelier_hat_pirateCat",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_explorerOwl",
+      "name": "hat_explorerOwl",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_explorerOwl.png",
+      "size": [
+        204,
+        194
+      ],
+      "bbox": [
+        215,
+        211,
+        399,
+        398
+      ],
+      "assetCatalogName": "world2_atelier_hat_explorerOwl",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_flowerGirl",
+      "name": "hat_flowerGirl",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_flowerGirl.png",
+      "size": [
+        205,
+        182
+      ],
+      "bbox": [
+        419,
+        211,
+        604,
+        398
+      ],
+      "assetCatalogName": "world2_atelier_hat_flowerGirl",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_racingHelmet",
+      "name": "hat_racingHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_racingHelmet.png",
+      "size": [
+        187,
+        200
+      ],
+      "bbox": [
+        624,
+        211,
+        808,
+        398
+      ],
+      "assetCatalogName": "world2_atelier_hat_racingHelmet",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix/hat_gamerCat",
+      "name": "hat_gamerCat",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vD_isolatedMix",
+      "canonical": true,
+      "png": "output/P3.3_hatsHelmets_vD_isolatedMix/hat_gamerCat.png",
+      "size": [
+        172,
+        168
+      ],
+      "bbox": [
+        829,
+        211,
+        1013,
+        398
+      ],
+      "assetCatalogName": "world2_atelier_hat_gamerCat",
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_baseballCap",
+      "name": "hat_baseballCap",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_baseballCap.png",
+      "size": [
+        147,
+        151
+      ],
+      "bbox": [
+        5,
+        10,
+        165,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_goldenCrown",
+      "name": "hat_goldenCrown",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_goldenCrown.png",
+      "size": [
+        181,
+        197
+      ],
+      "bbox": [
+        175,
+        10,
+        336,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_knightHelmet",
+      "name": "hat_knightHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_knightHelmet.png",
+      "size": [
+        180,
+        167
+      ],
+      "bbox": [
+        346,
+        10,
+        506,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_astronautHelmet",
+      "name": "hat_astronautHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_astronautHelmet.png",
+      "size": [
+        179,
+        165
+      ],
+      "bbox": [
+        517,
+        10,
+        677,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_wizardWorn",
+      "name": "hat_wizardWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_wizardWorn.png",
+      "size": [
+        181,
+        203
+      ],
+      "bbox": [
+        687,
+        10,
+        848,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_goggleCapWorn",
+      "name": "hat_goggleCapWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_goggleCapWorn.png",
+      "size": [
+        171,
+        182
+      ],
+      "bbox": [
+        858,
+        10,
+        1018,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_pirateWorn",
+      "name": "hat_pirateWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_pirateWorn.png",
+      "size": [
+        212,
+        203
+      ],
+      "bbox": [
+        6,
+        213,
+        198,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_safariWorn",
+      "name": "hat_safariWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_safariWorn.png",
+      "size": [
+        213,
+        189
+      ],
+      "bbox": [
+        210,
+        213,
+        403,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_flowerWorn",
+      "name": "hat_flowerWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_flowerWorn.png",
+      "size": [
+        213,
+        160
+      ],
+      "bbox": [
+        415,
+        213,
+        608,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_racingHelmet",
+      "name": "hat_racingHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_racingHelmet.png",
+      "size": [
+        196,
+        165
+      ],
+      "bbox": [
+        620,
+        213,
+        813,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA/hat_catEarHeadphones",
+      "name": "hat_catEarHeadphones",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vA",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vA/hat_catEarHeadphones.png",
+      "size": [
+        179,
+        168
+      ],
+      "bbox": [
+        825,
+        213,
+        1017,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_baseballCap",
+      "name": "hat_baseballCap",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_baseballCap.png",
+      "size": [
+        156,
+        119
+      ],
+      "bbox": [
+        6,
+        10,
+        198,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_goldenCrown",
+      "name": "hat_goldenCrown",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_goldenCrown.png",
+      "size": [
+        174,
+        161
+      ],
+      "bbox": [
+        210,
+        10,
+        403,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_knightHelmet",
+      "name": "hat_knightHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_knightHelmet.png",
+      "size": [
+        194,
+        173
+      ],
+      "bbox": [
+        415,
+        10,
+        608,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_astronautHelmet",
+      "name": "hat_astronautHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_astronautHelmet.png",
+      "size": [
+        213,
+        203
+      ],
+      "bbox": [
+        620,
+        10,
+        813,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_wizardHat",
+      "name": "hat_wizardHat",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_wizardHat.png",
+      "size": [
+        179,
+        177
+      ],
+      "bbox": [
+        825,
+        10,
+        1017,
+        193
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_pirateWorn",
+      "name": "hat_pirateWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_pirateWorn.png",
+      "size": [
+        144,
+        169
+      ],
+      "bbox": [
+        5,
+        213,
+        165,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_sorcererWorn",
+      "name": "hat_sorcererWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_sorcererWorn.png",
+      "size": [
+        181,
+        203
+      ],
+      "bbox": [
+        175,
+        213,
+        336,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_explorerWorn",
+      "name": "hat_explorerWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_explorerWorn.png",
+      "size": [
+        180,
+        163
+      ],
+      "bbox": [
+        346,
+        213,
+        506,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_floralWorn",
+      "name": "hat_floralWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_floralWorn.png",
+      "size": [
+        180,
+        163
+      ],
+      "bbox": [
+        517,
+        213,
+        677,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_racingHelmet",
+      "name": "hat_racingHelmet",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_racingHelmet.png",
+      "size": [
+        181,
+        144
+      ],
+      "bbox": [
+        687,
+        213,
+        848,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB/hat_headphonesWorn",
+      "name": "hat_headphonesWorn",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vB",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vB/hat_headphonesWorn.png",
+      "size": [
+        142,
+        158
+      ],
+      "bbox": [
+        858,
+        213,
+        1018,
+        396
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_01",
+      "name": "hat_01",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_01.png",
+      "size": [
+        164,
+        117
+      ],
+      "bbox": [
+        8,
+        8,
+        196,
+        195
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_02",
+      "name": "hat_02",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_02.png",
+      "size": [
+        187,
+        156
+      ],
+      "bbox": [
+        212,
+        8,
+        401,
+        195
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_03",
+      "name": "hat_03",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_03.png",
+      "size": [
+        209,
+        207
+      ],
+      "bbox": [
+        417,
+        8,
+        606,
+        195
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_04",
+      "name": "hat_04",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_04.png",
+      "size": [
+        209,
+        169
+      ],
+      "bbox": [
+        622,
+        8,
+        811,
+        195
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_05",
+      "name": "hat_05",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_05.png",
+      "size": [
+        178,
+        184
+      ],
+      "bbox": [
+        827,
+        8,
+        1015,
+        195
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_06",
+      "name": "hat_06",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_06.png",
+      "size": [
+        208,
+        207
+      ],
+      "bbox": [
+        8,
+        211,
+        196,
+        398
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_07",
+      "name": "hat_07",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_07.png",
+      "size": [
+        209,
+        191
+      ],
+      "bbox": [
+        212,
+        211,
+        401,
+        398
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_08",
+      "name": "hat_08",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_08.png",
+      "size": [
+        209,
+        177
+      ],
+      "bbox": [
+        417,
+        211,
+        606,
+        398
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_09",
+      "name": "hat_09",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_09.png",
+      "size": [
+        201,
+        171
+      ],
+      "bbox": [
+        622,
+        211,
+        811,
+        398
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC/hat_10",
+      "name": "hat_10",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "sheet": "P3.3_hatsHelmets_vC",
+      "canonical": false,
+      "png": "output/P3.3_hatsHelmets_vC/hat_10.png",
+      "size": [
+        154,
+        145
+      ],
+      "bbox": [
+        827,
+        211,
+        1015,
+        398
+      ],
+      "assetCatalogName": null,
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_magicWand",
+      "name": "hand_magicWand",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_magicWand.png",
+      "size": [
+        184,
+        206
+      ],
+      "bbox": [
+        3,
+        8,
+        167,
+        194
+      ],
+      "assetCatalogName": "world2_atelier_hand_magicWand",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_lantern",
+      "name": "hand_lantern",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_lantern.png",
+      "size": [
+        183,
+        193
+      ],
+      "bbox": [
+        174,
+        8,
+        337,
+        194
+      ],
+      "assetCatalogName": "world2_atelier_hand_lantern",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_compass",
+      "name": "hand_compass",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_compass.png",
+      "size": [
+        184,
+        206
+      ],
+      "bbox": [
+        344,
+        8,
+        508,
+        194
+      ],
+      "assetCatalogName": "world2_atelier_hand_compass",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_magnifyingGlass",
+      "name": "hand_magnifyingGlass",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_magnifyingGlass.png",
+      "size": [
+        184,
+        170
+      ],
+      "bbox": [
+        515,
+        8,
+        679,
+        194
+      ],
+      "assetCatalogName": "world2_atelier_hand_magnifyingGlass",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_toySword",
+      "name": "hand_toySword",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_toySword.png",
+      "size": [
+        183,
+        174
+      ],
+      "bbox": [
+        686,
+        8,
+        849,
+        194
+      ],
+      "assetCatalogName": "world2_atelier_hand_toySword",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_roundShield",
+      "name": "hand_roundShield",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_roundShield.png",
+      "size": [
+        150,
+        168
+      ],
+      "bbox": [
+        856,
+        8,
+        1020,
+        194
+      ],
+      "assetCatalogName": "world2_atelier_hand_roundShield",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_flowerBouquet",
+      "name": "hand_flowerBouquet",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_flowerBouquet.png",
+      "size": [
+        182,
+        206
+      ],
+      "bbox": [
+        4,
+        211,
+        200,
+        397
+      ],
+      "assetCatalogName": "world2_atelier_hand_flowerBouquet",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_paintbrushA",
+      "name": "hand_paintbrushA",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_paintbrushA.png",
+      "size": [
+        217,
+        206
+      ],
+      "bbox": [
+        208,
+        211,
+        405,
+        397
+      ],
+      "assetCatalogName": "world2_atelier_hand_paintbrushA",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_magicalBook",
+      "name": "hand_magicalBook",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_magicalBook.png",
+      "size": [
+        217,
+        206
+      ],
+      "bbox": [
+        413,
+        211,
+        610,
+        397
+      ],
+      "assetCatalogName": "world2_atelier_hand_magicalBook",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_treasureMap",
+      "name": "hand_treasureMap",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_treasureMap.png",
+      "size": [
+        217,
+        206
+      ],
+      "bbox": [
+        618,
+        211,
+        815,
+        397
+      ],
+      "assetCatalogName": "world2_atelier_hand_treasureMap",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_paintbrushB",
+      "name": "hand_paintbrushB",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_paintbrushB.png",
+      "size": [
+        174,
+        195
+      ],
+      "bbox": [
+        823,
+        211,
+        1019,
+        397
+      ],
+      "assetCatalogName": "world2_atelier_hand_paintbrushB",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_brownGrimoire",
+      "name": "hand_brownGrimoire",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_brownGrimoire.png",
+      "size": [
+        184,
+        206
+      ],
+      "bbox": [
+        3,
+        414,
+        167,
+        600
+      ],
+      "assetCatalogName": "world2_atelier_hand_brownGrimoire",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_microphone",
+      "name": "hand_microphone",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_microphone.png",
+      "size": [
+        183,
+        206
+      ],
+      "bbox": [
+        174,
+        414,
+        337,
+        600
+      ],
+      "assetCatalogName": "world2_atelier_hand_microphone",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_crystalOrb",
+      "name": "hand_crystalOrb",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_crystalOrb.png",
+      "size": [
+        179,
+        200
+      ],
+      "bbox": [
+        344,
+        414,
+        508,
+        600
+      ],
+      "assetCatalogName": "world2_atelier_hand_crystalOrb",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_tinyFlag",
+      "name": "hand_tinyFlag",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_tinyFlag.png",
+      "size": [
+        184,
+        200
+      ],
+      "bbox": [
+        515,
+        414,
+        679,
+        600
+      ],
+      "assetCatalogName": "world2_atelier_hand_tinyFlag",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_telescope",
+      "name": "hand_telescope",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_telescope.png",
+      "size": [
+        179,
+        138
+      ],
+      "bbox": [
+        686,
+        414,
+        849,
+        600
+      ],
+      "assetCatalogName": "world2_atelier_hand_telescope",
+      "dragable": true
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA/hand_glowingCrystal",
+      "name": "hand_glowingCrystal",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "sheet": "P3.4_adventureHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.4_adventureHandhelds_vA/hand_glowingCrystal.png",
+      "size": [
+        140,
+        160
+      ],
+      "bbox": [
+        856,
+        414,
+        1020,
+        600
+      ],
+      "assetCatalogName": "world2_atelier_hand_glowingCrystal",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_moonStaff",
+      "name": "hand_moonStaff",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_moonStaff.png",
+      "size": [
+        120,
+        195
+      ],
+      "bbox": [
+        2,
+        10,
+        125,
+        193
+      ],
+      "assetCatalogName": "world2_atelier_hand_moonStaff",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_dragonEgg",
+      "name": "hand_dragonEgg",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_dragonEgg.png",
+      "size": [
+        143,
+        169
+      ],
+      "bbox": [
+        130,
+        10,
+        253,
+        193
+      ],
+      "assetCatalogName": "world2_atelier_hand_dragonEgg",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_rainbowBottle",
+      "name": "hand_rainbowBottle",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_rainbowBottle.png",
+      "size": [
+        118,
+        188
+      ],
+      "bbox": [
+        258,
+        10,
+        381,
+        193
+      ],
+      "assetCatalogName": "world2_atelier_hand_rainbowBottle",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_glowingStar",
+      "name": "hand_glowingStar",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_glowingStar.png",
+      "size": [
+        143,
+        190
+      ],
+      "bbox": [
+        386,
+        10,
+        509,
+        193
+      ],
+      "assetCatalogName": "world2_atelier_hand_glowingStar",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_starCharm",
+      "name": "hand_starCharm",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_starCharm.png",
+      "size": [
+        143,
+        203
+      ],
+      "bbox": [
+        514,
+        10,
+        637,
+        193
+      ],
+      "assetCatalogName": "world2_atelier_hand_starCharm",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_enchantedKeyA",
+      "name": "hand_enchantedKeyA",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_enchantedKeyA.png",
+      "size": [
+        112,
+        201
+      ],
+      "bbox": [
+        642,
+        10,
+        765,
+        193
+      ],
+      "assetCatalogName": "world2_atelier_hand_enchantedKeyA",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_enchantedKeyB",
+      "name": "hand_enchantedKeyB",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_enchantedKeyB.png",
+      "size": [
+        143,
+        202
+      ],
+      "bbox": [
+        770,
+        10,
+        893,
+        193
+      ],
+      "assetCatalogName": "world2_atelier_hand_enchantedKeyB",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_crystalOrbGem",
+      "name": "hand_crystalOrbGem",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_crystalOrbGem.png",
+      "size": [
+        132,
+        166
+      ],
+      "bbox": [
+        898,
+        10,
+        1021,
+        193
+      ],
+      "assetCatalogName": "world2_atelier_hand_crystalOrbGem",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_crystalDome",
+      "name": "hand_crystalDome",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_crystalDome.png",
+      "size": [
+        150,
+        201
+      ],
+      "bbox": [
+        4,
+        213,
+        200,
+        396
+      ],
+      "assetCatalogName": "world2_atelier_hand_crystalDome",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_magicFeather",
+      "name": "hand_magicFeather",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_magicFeather.png",
+      "size": [
+        217,
+        199
+      ],
+      "bbox": [
+        208,
+        213,
+        405,
+        396
+      ],
+      "assetCatalogName": "world2_atelier_hand_magicFeather",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_treasureChest",
+      "name": "hand_treasureChest",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_treasureChest.png",
+      "size": [
+        217,
+        201
+      ],
+      "bbox": [
+        413,
+        213,
+        610,
+        396
+      ],
+      "assetCatalogName": "world2_atelier_hand_treasureChest",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_glowMushroom",
+      "name": "hand_glowMushroom",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_glowMushroom.png",
+      "size": [
+        217,
+        189
+      ],
+      "bbox": [
+        618,
+        213,
+        815,
+        396
+      ],
+      "assetCatalogName": "world2_atelier_hand_glowMushroom",
+      "dragable": true
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA/hand_planetWand",
+      "name": "hand_planetWand",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "sheet": "P3.6_fantasyHandhelds_vA",
+      "canonical": true,
+      "png": "output/P3.6_fantasyHandhelds_vA/hand_planetWand.png",
+      "size": [
+        190,
+        201
+      ],
+      "bbox": [
+        823,
+        213,
+        1019,
+        396
+      ],
+      "assetCatalogName": "world2_atelier_hand_planetWand",
+      "dragable": true
+    }
+  ]
+}

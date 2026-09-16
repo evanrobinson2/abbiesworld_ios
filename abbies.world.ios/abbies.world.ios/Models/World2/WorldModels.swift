@@ -14,6 +14,8 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     case adventure = "world.adventure"
     case blankSlate = "world.blankSlate"
     case threeBears = "world.threeBears"
+    /// Unconnected garden scene with Character Studio. Reach it with the World Teleporter.
+    case artGarden = "world.artGarden"
     
     var id: String { rawValue }
     
@@ -25,6 +27,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .adventure: return "Adventure World"
         case .blankSlate: return "Blank Slate"
         case .threeBears: return "Three Bears Woods"
+        case .artGarden: return "Art Garden"
         }
     }
     
@@ -36,6 +39,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .adventure: return "A rugged frontier where you earn ingredients and gems"
         case .blankSlate: return "An empty scene waiting for player-made places"
         case .threeBears: return "A hushed clearing in the woods where somebody is cooking"
+        case .artGarden: return "A terraced garden of easels and paths, with a studio for dressing up"
         }
     }
     
@@ -47,6 +51,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .adventure: return "North"
         case .blankSlate: return "Through the Portal"
         case .threeBears: return "Into the Woods"
+        case .artGarden: return nil
         }
     }
 

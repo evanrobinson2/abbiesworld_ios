@@ -15,6 +15,9 @@ enum World2Screen: Equatable {
     case creatureLab
     case fallingTargets(configurationID: String)
     case threeBearsHouse
+    case characterStudio
+    case sceneBuilder
+    case worldTeleporter
 }
 
 /// A place the player has tapped on the map, paired with the instance they
@@ -401,11 +404,38 @@ final class World2ViewModel: ObservableObject {
             )
         case .threeBearsHouse:
             setScreen(.threeBearsHouse, reason: "poi_entered")
+        case .characterStudio:
+            setScreen(.characterStudio, reason: "poi_entered")
+        case .sceneBuilder:
+            setScreen(.sceneBuilder, reason: "poi_entered")
         case .placeFactory:
             // Factories are entered through their placed instance, which knows
             // which copy the player tapped.
             showToast("Tap the factory on the map to go inside.")
         }
+    }
+
+    /// Open the World Teleporter travel screen from inventory (or a placed token).
+    func openWorldTeleporter() {
+        setScreen(.worldTeleporter, reason: "inventory_use_teleporter")
+    }
+
+    /// Destinations the teleporter can send you to — every authored world with
+    /// metadata, including unconnected scenes like Art Garden.
+    var teleporterDestinations: [World] {
+        WorldId.allCases.compactMap { worlds[$0] }
+    }
+
+    func travelViaTeleporter(to worldId: WorldId) {
+        guard worlds[worldId] != nil else {
+            showToast("That world is still being built.")
+            return
+        }
+        switchWorld(to: worldId)
+        World2Diagnostics.log(
+            "teleporter_travel",
+            ["world": worldId.rawValue]
+        )
     }
 
     func exitPOI() {
@@ -514,6 +544,30 @@ final class World2ViewModel: ObservableObject {
         )
     }
 
+    // MARK: - Scene Builder reward
+
+    func completeSceneBuilderDeed(_ decoration: World2StoryDecoration = .propertyDeed) {
+        guard let instance = playerService.awardStoryDecoration(decoration) else {
+            showToast("Choose a player before cooking a land.")
+            return
+        }
+        playerService.markPOICompleted(World2POIRegistry.sceneBuilderID)
+        inventoryHighlightID = instance.id
+        rewardCelebration = World2RewardCelebration(
+            id: instance.id,
+            decoration: decoration,
+            headline: "LAND DEED READY!",
+            earnedPerfectly: true
+        )
+        World2Diagnostics.log(
+            "scene_builder_deed_awarded",
+            [
+                "instance": instance.id,
+                "player": currentPlayerId?.rawValue ?? "none",
+            ]
+        )
+    }
+
     /// "Keep playing" leaves the place that just paid out. Its game is finished,
     /// so dropping her back on the table with no bowls left would be a dead end.
     func dismissRewardCelebration() {
@@ -566,6 +620,16 @@ final class World2ViewModel: ObservableObject {
         } else if arguments.contains("-launchWorld2ThreeBears") {
             selectPlayer(directPlayer)
             switchWorld(to: .threeBears)
+        } else if arguments.contains("-launchWorld2ArtGarden") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .artGarden)
+        } else if arguments.contains("-launchWorld2SceneBuilder") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .artGarden)
+            setScreen(.sceneBuilder, reason: "direct_launch")
+        } else if arguments.contains("-launchWorld2Teleporter") {
+            selectPlayer(directPlayer)
+            setScreen(.worldTeleporter, reason: "direct_launch")
         } else if arguments.contains("-launchWorld2JustRight")
                     || arguments.contains("-autoPlayWorld2JustRight") {
             selectPlayer(directPlayer)
@@ -674,6 +738,12 @@ final class World2ViewModel: ObservableObject {
             songID = World2POIRegistry.letterWorks.musicTrackID
         case .threeBearsHouse:
             songID = World2POIRegistry.threeBearsHouse.musicTrackID
+        case .characterStudio:
+            songID = World2POIRegistry.characterStudio.musicTrackID
+        case .sceneBuilder:
+            songID = World2POIRegistry.sceneBuilder.musicTrackID
+        case .worldTeleporter:
+            songID = "world2_cliffside_morning"
         }
         World2MusicService.shared.stop()
         if let songID, !songID.isEmpty {
@@ -693,6 +763,7 @@ final class World2ViewModel: ObservableObject {
         case .farm: return "world2_bright_new_day"
         case .blankSlate: return "world2_cliffside_morning"
         case .threeBears: return "world2_family_adventure"
+        case .artGarden: return "world2_joyful_bounce"
         default: return "world2_joyful_bounce"
         }
     }
@@ -768,12 +839,28 @@ final class World2ViewModel: ObservableObject {
                 mood: "open and possible"
             )
         )
+        // Art Garden stays off the overland graph on purpose — teleporter only.
+        let artGarden = World(
+            id: .artGarden,
+            name: "Art Garden",
+            description: "Terraced gardens, easels, and a Character Studio",
+            backgroundAsset: "map.artGarden",
+            lightMusicTrack: "music.home.light",
+            intenseMusicTrack: "music.home.intense",
+            adjacentWorlds: [],
+            ambiance: .init(
+                primaryColor: "#6FBF73",
+                secondaryColor: "#F6D365",
+                mood: "painterly and bright"
+            )
+        )
         worlds = [
             .home: home,
             .work: work,
             .farm: farm,
             .threeBears: threeBears,
             .blankSlate: blankSlate,
+            .artGarden: artGarden,
         ]
         currentWorld = home
     }
@@ -821,6 +908,9 @@ private extension World2Screen {
         case .fallingTargets(let configurationID):
             return "falling_targets:\(configurationID)"
         case .threeBearsHouse: return "three_bears_house"
+        case .characterStudio: return "character_studio"
+        case .sceneBuilder: return "scene_builder"
+        case .worldTeleporter: return "world_teleporter"
         }
     }
 }

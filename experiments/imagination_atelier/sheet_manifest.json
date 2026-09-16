@@ -1,0 +1,527 @@
+{
+  "description": "Imagination Atelier carve manifest. Each sheet lists how to extract dragable ingredient / UI tiles.",
+  "naming": "Canonical installs use world2_atelier_<name> in Assets.xcassets.",
+  "sheets": [
+    {
+      "id": "P1.1_categoryButtons_vA",
+      "file": "P1.1_categoryButtons_vA.png",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "canonical": true,
+      "asset_prefix": "world2_atelier",
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "inset": [
+        0.05,
+        0.05
+      ],
+      "items": [
+        "category_creature",
+        "category_outfit",
+        "category_headwear",
+        "category_handheld"
+      ]
+    },
+    {
+      "id": "P1.1_categoryButtons_vB",
+      "file": "P1.1_categoryButtons_vB.jpg",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "canonical": false,
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "items": [
+        "category_creature",
+        "category_outfit",
+        "category_headwear",
+        "category_handheld"
+      ]
+    },
+    {
+      "id": "P1.1_categoryButtons_vC",
+      "file": "P1.1_categoryButtons_vC.png",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "canonical": false,
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "items": [
+        "category_creature",
+        "category_outfit",
+        "category_headwear",
+        "category_handheld"
+      ]
+    },
+    {
+      "id": "P1.1_categoryButtons_vD",
+      "file": "P1.1_categoryButtons_vD.png",
+      "prompt": "P1.1",
+      "category": "ui.categoryButton",
+      "canonical": false,
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "items": [
+        "category_creature",
+        "category_outfit",
+        "category_headwear",
+        "category_handheld"
+      ]
+    },
+    {
+      "id": "P1.2_slotStates_vA",
+      "file": "P1.2_slotStates_vA.png",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "canonical": true,
+      "asset_prefix": "world2_atelier",
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "inset": [
+        0.05,
+        0.05
+      ],
+      "items": [
+        "slot_empty",
+        "slot_filled",
+        "slot_locked",
+        "slot_active"
+      ]
+    },
+    {
+      "id": "P1.2_slotStates_vB",
+      "file": "P1.2_slotStates_vB.png",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "canonical": false,
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "items": [
+        "slot_empty",
+        "slot_filled",
+        "slot_locked",
+        "slot_active"
+      ]
+    },
+    {
+      "id": "P1.2_slotStates_vC",
+      "file": "P1.2_slotStates_vC.png",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "canonical": false,
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "items": [
+        "slot_empty",
+        "slot_filled",
+        "slot_locked",
+        "slot_active"
+      ]
+    },
+    {
+      "id": "P1.2_slotStates_vD",
+      "file": "P1.2_slotStates_vD.jpg",
+      "prompt": "P1.2",
+      "category": "ui.slotState",
+      "canonical": false,
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "items": [
+        "slot_empty",
+        "slot_filled",
+        "slot_locked",
+        "slot_active"
+      ]
+    },
+    {
+      "id": "P1.3_actionControls_vA",
+      "file": "P1.3_actionControls_vA.png",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "canonical": true,
+      "asset_prefix": "world2_atelier",
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "inset": [
+        0.05,
+        0.05
+      ],
+      "items": [
+        "action_create",
+        "action_clear",
+        "action_randomize",
+        "action_equip"
+      ]
+    },
+    {
+      "id": "P1.3_actionControls_vB",
+      "file": "P1.3_actionControls_vB.jpg",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "canonical": false,
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "items": [
+        "action_create",
+        "action_randomize",
+        "action_clear",
+        "action_equip"
+      ]
+    },
+    {
+      "id": "P1.3_actionControls_vC",
+      "file": "P1.3_actionControls_vC.jpg",
+      "prompt": "P1.3",
+      "category": "ui.actionControl",
+      "canonical": false,
+      "mode": "grid",
+      "rows": 2,
+      "cols": 2,
+      "items": [
+        "action_create",
+        "action_randomize",
+        "action_clear",
+        "action_equip"
+      ]
+    },
+    {
+      "id": "P3.1_baseCreatures_vA",
+      "file": "P3.1_baseCreatures_vA.jpg",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "canonical": true,
+      "asset_prefix": "world2_atelier",
+      "mode": "rows",
+      "notes": "11 creatures; owl missing.",
+      "inset": [
+        0.02,
+        0.05
+      ],
+      "rows_items": [
+        [
+          "creature_cheetah",
+          "creature_houseCat",
+          "creature_fox",
+          "creature_bunny",
+          "creature_shihTzu",
+          "creature_wolf"
+        ],
+        [
+          "creature_redPanda",
+          "creature_frog",
+          "creature_dragon",
+          "creature_unicorn",
+          "creature_raccoon"
+        ]
+      ],
+      "hard": 26.0,
+      "soft": 44.0
+    },
+    {
+      "id": "P3.1_baseCreatures_vB",
+      "file": "P3.1_baseCreatures_vB.jpg",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "canonical": false,
+      "mode": "rows",
+      "notes": "Owl+frog fused mid-bottom.",
+      "inset": [
+        0.02,
+        0.05
+      ],
+      "rows_items": [
+        [
+          "creature_cheetah",
+          "creature_houseCat",
+          "creature_fox",
+          "creature_bunny",
+          "creature_shihTzu"
+        ],
+        [
+          "creature_wolf",
+          "creature_redPanda",
+          "creature_owlFrogCluster",
+          "creature_dragon",
+          "creature_unicorn",
+          "creature_raccoon"
+        ]
+      ],
+      "hard": 26.0,
+      "soft": 44.0
+    },
+    {
+      "id": "P3.1_baseCreatures_vC",
+      "file": "P3.1_baseCreatures_vC.jpg",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "canonical": false,
+      "mode": "rows",
+      "inset": [
+        0.02,
+        0.05
+      ],
+      "rows_items": [
+        [
+          "creature_cheetah",
+          "creature_houseCat",
+          "creature_fox",
+          "creature_bunny",
+          "creature_shihTzu"
+        ],
+        [
+          "creature_redPanda",
+          "creature_frog",
+          "creature_dragon",
+          "creature_unicorn",
+          "creature_raccoon"
+        ]
+      ],
+      "hard": 26.0,
+      "soft": 44.0
+    },
+    {
+      "id": "P3.1_baseCreatures_vD",
+      "file": "P3.1_baseCreatures_vD.jpg",
+      "prompt": "P3.1",
+      "category": "ingredient.creature",
+      "canonical": false,
+      "mode": "rows",
+      "inset": [
+        0.02,
+        0.05
+      ],
+      "rows_items": [
+        [
+          "creature_cheetah",
+          "creature_houseCat",
+          "creature_fox",
+          "creature_bunny",
+          "creature_raccoon",
+          "creature_shihTzu"
+        ],
+        [
+          "creature_redPanda",
+          "creature_frog",
+          "creature_dragon",
+          "creature_unicorn",
+          "creature_wolf"
+        ]
+      ],
+      "hard": 26.0,
+      "soft": 44.0
+    },
+    {
+      "id": "P3.3_hatsHelmets_vD_isolatedMix",
+      "file": "P3.3_hatsHelmets_vD_isolatedMix.jpg",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "canonical": true,
+      "asset_prefix": "world2_atelier",
+      "mode": "grid",
+      "rows": 2,
+      "cols": 5,
+      "inset": [
+        0.05,
+        0.04
+      ],
+      "items": [
+        "hat_baseballCap",
+        "hat_goldenCrown",
+        "hat_knightHelmet",
+        "hat_astronautHelmet",
+        "hat_wizardCat",
+        "hat_pirateCat",
+        "hat_explorerOwl",
+        "hat_flowerGirl",
+        "hat_racingHelmet",
+        "hat_gamerCat"
+      ],
+      "hard": 26.0,
+      "soft": 44.0
+    },
+    {
+      "id": "P3.3_hatsHelmets_vA",
+      "file": "P3.3_hatsHelmets_vA.jpg",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "canonical": false,
+      "mode": "rows",
+      "inset": [
+        0.03,
+        0.05
+      ],
+      "rows_items": [
+        [
+          "hat_baseballCap",
+          "hat_goldenCrown",
+          "hat_knightHelmet",
+          "hat_astronautHelmet",
+          "hat_wizardWorn",
+          "hat_goggleCapWorn"
+        ],
+        [
+          "hat_pirateWorn",
+          "hat_safariWorn",
+          "hat_flowerWorn",
+          "hat_racingHelmet",
+          "hat_catEarHeadphones"
+        ]
+      ],
+      "hard": 26.0,
+      "soft": 44.0
+    },
+    {
+      "id": "P3.3_hatsHelmets_vB",
+      "file": "P3.3_hatsHelmets_vB.jpg",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "canonical": false,
+      "mode": "rows",
+      "inset": [
+        0.03,
+        0.05
+      ],
+      "rows_items": [
+        [
+          "hat_baseballCap",
+          "hat_goldenCrown",
+          "hat_knightHelmet",
+          "hat_astronautHelmet",
+          "hat_wizardHat"
+        ],
+        [
+          "hat_pirateWorn",
+          "hat_sorcererWorn",
+          "hat_explorerWorn",
+          "hat_floralWorn",
+          "hat_racingHelmet",
+          "hat_headphonesWorn"
+        ]
+      ],
+      "hard": 26.0,
+      "soft": 44.0
+    },
+    {
+      "id": "P3.3_hatsHelmets_vC",
+      "file": "P3.3_hatsHelmets_vC.jpg",
+      "prompt": "P3.3",
+      "category": "ingredient.headwear",
+      "canonical": false,
+      "mode": "grid",
+      "items": [
+        "hat_01",
+        "hat_02",
+        "hat_03",
+        "hat_04",
+        "hat_05",
+        "hat_06",
+        "hat_07",
+        "hat_08",
+        "hat_09",
+        "hat_10"
+      ],
+      "rows": 2,
+      "cols": 5,
+      "inset": [
+        0.04,
+        0.04
+      ],
+      "hard": 26.0,
+      "soft": 44.0
+    },
+    {
+      "id": "P3.4_adventureHandhelds_vA",
+      "file": "P3.4_adventureHandhelds_vA.jpg",
+      "prompt": "P3.4",
+      "category": "ingredient.handheld.adventure",
+      "canonical": true,
+      "asset_prefix": "world2_atelier",
+      "mode": "rows",
+      "hard": 26.0,
+      "soft": 44.0,
+      "inset": [
+        0.02,
+        0.04
+      ],
+      "rows_items": [
+        [
+          "hand_magicWand",
+          "hand_lantern",
+          "hand_compass",
+          "hand_magnifyingGlass",
+          "hand_toySword",
+          "hand_roundShield"
+        ],
+        [
+          "hand_flowerBouquet",
+          "hand_paintbrushA",
+          "hand_magicalBook",
+          "hand_treasureMap",
+          "hand_paintbrushB"
+        ],
+        [
+          "hand_brownGrimoire",
+          "hand_microphone",
+          "hand_crystalOrb",
+          "hand_tinyFlag",
+          "hand_telescope",
+          "hand_glowingCrystal"
+        ]
+      ]
+    },
+    {
+      "id": "P3.6_fantasyHandhelds_vA",
+      "file": "P3.6_fantasyHandhelds_vA.jpg",
+      "prompt": "P3.6",
+      "category": "ingredient.handheld.fantasy",
+      "canonical": true,
+      "asset_prefix": "world2_atelier",
+      "mode": "rows",
+      "hard": 30.0,
+      "soft": 48.0,
+      "inset": [
+        0.02,
+        0.05
+      ],
+      "notes": "Baked Midjourney sparkles ignored; use World2AtelierParticleField.itemAura at runtime.",
+      "rows_items": [
+        [
+          "hand_moonStaff",
+          "hand_dragonEgg",
+          "hand_rainbowBottle",
+          "hand_glowingStar",
+          "hand_starCharm",
+          "hand_enchantedKeyA",
+          "hand_enchantedKeyB",
+          "hand_crystalOrbGem"
+        ],
+        [
+          "hand_crystalDome",
+          "hand_magicFeather",
+          "hand_treasureChest",
+          "hand_glowMushroom",
+          "hand_planetWand"
+        ]
+      ]
+    }
+  ],
+  "missingPrompts": [
+    "P0.1 Main Character Builder (full-screen 16:9) \u2014 not in this drop",
+    "P0.2 Creation in Progress \u2014 not in this drop",
+    "P0.3 Character Reveal \u2014 not in this drop",
+    "P1.4 HUD Elements \u2014 not in this drop",
+    "P3.2 Outfits \u2014 not in this drop",
+    "P3.5 Silly Handhelds \u2014 not in this drop",
+    "P3.8 Character Generation Placeholders \u2014 not in this drop",
+    "P3.7 Creation Effects \u2014 runtime particle generator (World2AtelierParticleField), not carved plates"
+  ]
+}

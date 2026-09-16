@@ -1,0 +1,22 @@
+{
+  "task": "generate_scene_builder_assets",
+  "generated": [
+    "scene_place_selector",
+    "scene_theme_selector",
+    "scene_atmosphere_selector",
+    "scene_special_feature_selector",
+    "scene_vibe_selector",
+    "hardpoint_selector",
+    "generate_scene_button",
+    "scene_preview_frame",
+    "deed_reward",
+    "scene_builder_cooking_badge",
+    "scene_builder_sample_cook"
+  ],
+  "source_images": [
+    "map_store_exterior",
+    "map_store_interior",
+    "art_garden_overland"
+  ],
+  "bundled_as": "world2_* imagesets"
+}

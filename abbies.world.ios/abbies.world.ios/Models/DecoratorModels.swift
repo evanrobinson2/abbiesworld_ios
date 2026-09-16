@@ -56,7 +56,7 @@ struct DecoratorEssence: Codable, Identifiable, Hashable {
 
 // MARK: - Decoration (Output)
 
-struct Decoration: Codable, Identifiable {
+struct MachineDecoration: Codable, Identifiable {
     let id: String
     let generationId: String
     let recipe: DecoratorRecipe
@@ -113,8 +113,8 @@ struct DecoratorState: Codable {
     let active: [DecoratorJob]
     let queued: [DecoratorJob]
     let failedJobs: [DecoratorJob]
-    let readyToReveal: [Decoration]
-    let inventory: [Decoration]
+    let readyToReveal: [MachineDecoration]
+    let inventory: [MachineDecoration]
     
     var shouldPoll: Bool {
         !active.isEmpty || !queued.isEmpty
