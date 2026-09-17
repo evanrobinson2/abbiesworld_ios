@@ -1,0 +1,652 @@
+[
+  {
+    "id": "cozy_nap_energy",
+    "name": "Cozy Nap Energy",
+    "category": "feelings",
+    "imageName": "essence_cozy_nap",
+    "emoji": "\ud83d\ude34",
+    "file": "essence_cozy_nap.png",
+    "preview": "essence_cozy_nap.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        221,
+        221,
+        221
+      ],
+      "trimmedTo": [
+        636,
+        950
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 43.8
+    }
+  },
+  {
+    "id": "giggle_fizz",
+    "name": "Giggle Fizz",
+    "category": "feelings",
+    "imageName": "essence_giggle_fizz",
+    "emoji": "\ud83e\udd2d",
+    "file": "essence_giggle_fizz.png",
+    "preview": "essence_giggle_fizz.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        221,
+        220,
+        221
+      ],
+      "trimmedTo": [
+        564,
+        959
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 40.5
+    }
+  },
+  {
+    "id": "warm_hug_aura",
+    "name": "Warm Hug Aura",
+    "category": "feelings",
+    "imageName": "essence_warm_hug",
+    "emoji": "\ud83e\udd17",
+    "file": "essence_warm_hug.png",
+    "preview": "essence_warm_hug.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        209,
+        209,
+        209
+      ],
+      "trimmedTo": [
+        649,
+        943
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 46.6
+    }
+  },
+  {
+    "id": "mischief_sparkle",
+    "name": "Mischief Sparkle",
+    "category": "feelings",
+    "imageName": "essence_mischief",
+    "emoji": "\ud83d\ude08",
+    "file": "essence_mischief.png",
+    "preview": "essence_mischief.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        217,
+        217,
+        217
+      ],
+      "trimmedTo": [
+        582,
+        941
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 42.0
+    }
+  },
+  {
+    "id": "sleepy_mumbles",
+    "name": "Sleepy Mumbles",
+    "category": "feelings",
+    "imageName": "essence_sleepy_mumbles",
+    "emoji": "\ud83d\udca4",
+    "file": "essence_sleepy_mumbles.png",
+    "preview": "essence_sleepy_mumbles.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        245,
+        245,
+        243
+      ],
+      "trimmedTo": [
+        578,
+        915
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 43.4
+    }
+  },
+  {
+    "id": "cat_whisker",
+    "name": "Cat Whisker",
+    "category": "critters",
+    "imageName": "essence_cat_whisker",
+    "emoji": "\ud83d\udc31",
+    "file": "essence_cat_whisker.png",
+    "preview": "essence_cat_whisker.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        226,
+        225,
+        226
+      ],
+      "trimmedTo": [
+        604,
+        916
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 43.3
+    }
+  },
+  {
+    "id": "bunny_bounce",
+    "name": "Bunny Bounce",
+    "category": "critters",
+    "imageName": "essence_bunny_bounce",
+    "emoji": "\ud83d\udc30",
+    "file": "essence_bunny_bounce.png",
+    "preview": "essence_bunny_bounce.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        217,
+        217,
+        217
+      ],
+      "trimmedTo": [
+        597,
+        916
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 43.2
+    }
+  },
+  {
+    "id": "owl_wisdom",
+    "name": "Owl Wisdom",
+    "category": "critters",
+    "imageName": "essence_owl_wisdom",
+    "emoji": "\ud83e\udd89",
+    "file": "essence_owl_wisdom.png",
+    "preview": "essence_owl_wisdom.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        205,
+        205,
+        205
+      ],
+      "trimmedTo": [
+        557,
+        951
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 40.6
+    }
+  },
+  {
+    "id": "frog_song",
+    "name": "Frog Song",
+    "category": "critters",
+    "imageName": "essence_frog_song",
+    "emoji": "\ud83d\udc38",
+    "file": "essence_frog_song.png",
+    "preview": "essence_frog_song.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        219,
+        218,
+        219
+      ],
+      "trimmedTo": [
+        530,
+        953
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 40.4
+    }
+  },
+  {
+    "id": "penguin_waddle",
+    "name": "Penguin Waddle",
+    "category": "critters",
+    "imageName": "essence_penguin_waddle",
+    "emoji": "\ud83d\udc27",
+    "file": "essence_penguin_waddle.png",
+    "preview": "essence_penguin_waddle.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        208,
+        208,
+        208
+      ],
+      "trimmedTo": [
+        531,
+        922
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 40.1
+    }
+  },
+  {
+    "id": "moonbeam",
+    "name": "Moonbeam",
+    "category": "weather",
+    "imageName": "essence_moonbeam",
+    "emoji": "\ud83c\udf19",
+    "file": "essence_moonbeam.png",
+    "preview": "essence_moonbeam.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        233,
+        233,
+        233
+      ],
+      "trimmedTo": [
+        624,
+        912
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 44.1
+    }
+  },
+  {
+    "id": "thundersnuggle",
+    "name": "Thundersnuggle",
+    "category": "weather",
+    "imageName": "essence_thundersnuggle",
+    "emoji": "\u26c8\ufe0f",
+    "file": "essence_thundersnuggle.png",
+    "preview": "essence_thundersnuggle.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        190,
+        190,
+        190
+      ],
+      "trimmedTo": [
+        586,
+        931
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 41.1
+    }
+  },
+  {
+    "id": "rainbow_hiccup",
+    "name": "Rainbow Hiccup",
+    "category": "weather",
+    "imageName": "essence_rainbow_hiccup",
+    "emoji": "\ud83c\udf08",
+    "file": "essence_rainbow_hiccup.png",
+    "preview": "essence_rainbow_hiccup.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        220,
+        220,
+        220
+      ],
+      "trimmedTo": [
+        709,
+        900
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 48.0
+    }
+  },
+  {
+    "id": "cloud_fluff",
+    "name": "Cloud Fluff",
+    "category": "weather",
+    "imageName": "essence_cloud_fluff",
+    "emoji": "\u2601\ufe0f",
+    "file": "essence_cloud_fluff.png",
+    "preview": "essence_cloud_fluff.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        211,
+        211,
+        211
+      ],
+      "trimmedTo": [
+        641,
+        934
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 43.7
+    }
+  },
+  {
+    "id": "starlight_dust",
+    "name": "Starlight Dust",
+    "category": "weather",
+    "imageName": "essence_starlight_dust",
+    "emoji": "\u2728",
+    "file": "essence_starlight_dust.png",
+    "preview": "essence_starlight_dust.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        213,
+        213,
+        213
+      ],
+      "trimmedTo": [
+        552,
+        951
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 40.6
+    }
+  },
+  {
+    "id": "bubblegum_dream",
+    "name": "Bubblegum Dream",
+    "category": "flavors",
+    "imageName": "essence_bubblegum_dream",
+    "emoji": "\ud83c\udf6c",
+    "file": "essence_bubblegum_dream.png",
+    "preview": "essence_bubblegum_dream.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        216,
+        216,
+        216
+      ],
+      "trimmedTo": [
+        592,
+        910
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 41.2
+    }
+  },
+  {
+    "id": "marshmallow_squish",
+    "name": "Marshmallow Squish",
+    "category": "flavors",
+    "imageName": "essence_marshmallow_squish",
+    "emoji": "\ud83c\udf61",
+    "file": "essence_marshmallow_squish.png",
+    "preview": "essence_marshmallow_squish.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        233,
+        233,
+        233
+      ],
+      "trimmedTo": [
+        623,
+        908
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 46.8
+    }
+  },
+  {
+    "id": "cinnamon_swirl",
+    "name": "Cinnamon Swirl",
+    "category": "flavors",
+    "imageName": "essence_cinnamon_swirl",
+    "emoji": "\ud83c\udf00",
+    "file": "essence_cinnamon_swirl.png",
+    "preview": "essence_cinnamon_swirl.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        208,
+        207,
+        208
+      ],
+      "trimmedTo": [
+        655,
+        943
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 45.1
+    }
+  },
+  {
+    "id": "velvet_whisper",
+    "name": "Velvet Whisper",
+    "category": "flavors",
+    "imageName": "essence_velvet_whisper",
+    "emoji": "\ud83c\udf80",
+    "file": "essence_velvet_whisper.png",
+    "preview": "essence_velvet_whisper.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        215,
+        215,
+        215
+      ],
+      "trimmedTo": [
+        601,
+        931
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 43.5
+    }
+  },
+  {
+    "id": "crinkle_crunch",
+    "name": "Crinkle Crunch",
+    "category": "flavors",
+    "imageName": "essence_crinkle_crunch",
+    "emoji": "\ud83e\udd68",
+    "file": "essence_crinkle_crunch.png",
+    "preview": "essence_crinkle_crunch.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        216,
+        215,
+        216
+      ],
+      "trimmedTo": [
+        611,
+        968
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 42.3
+    }
+  },
+  {
+    "id": "yesterdays_wish",
+    "name": "Yesterday's Wish",
+    "category": "wildCards",
+    "imageName": "essence_yesterdays_wish",
+    "emoji": "\ud83c\udf1f",
+    "file": "essence_yesterdays_wish.png",
+    "preview": "essence_yesterdays_wish.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        217,
+        217,
+        217
+      ],
+      "trimmedTo": [
+        656,
+        943
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 45.2
+    }
+  },
+  {
+    "id": "forgotten_lullaby",
+    "name": "Forgotten Lullaby",
+    "category": "wildCards",
+    "imageName": "essence_forgotten_lullaby",
+    "emoji": "\ud83c\udfb5",
+    "file": "essence_forgotten_lullaby.png",
+    "preview": "essence_forgotten_lullaby.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        221,
+        221,
+        221
+      ],
+      "trimmedTo": [
+        520,
+        926
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 38.4
+    }
+  },
+  {
+    "id": "upside_down_tuesday",
+    "name": "Upside-Down Tuesday",
+    "category": "wildCards",
+    "imageName": "essence_upside_down_tuesday",
+    "emoji": "\ud83d\ude43",
+    "file": "essence_upside_down_tuesday.png",
+    "preview": "essence_upside_down_tuesday.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        216,
+        216,
+        216
+      ],
+      "trimmedTo": [
+        673,
+        941
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 47.0
+    }
+  },
+  {
+    "id": "pocket_giggles",
+    "name": "Pocket Full of Giggles",
+    "category": "wildCards",
+    "imageName": "essence_pocket_giggles",
+    "emoji": "\ud83d\ude02",
+    "file": "essence_pocket_giggles.png",
+    "preview": "essence_pocket_giggles.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        231,
+        231,
+        231
+      ],
+      "trimmedTo": [
+        576,
+        941
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 43.1
+    }
+  },
+  {
+    "id": "dancing_shadows",
+    "name": "Dancing Shadows",
+    "category": "wildCards",
+    "imageName": "essence_dancing_shadows",
+    "emoji": "\ud83d\udc64",
+    "file": "essence_dancing_shadows.png",
+    "preview": "essence_dancing_shadows.webp",
+    "hasArt": true,
+    "carve": {
+      "background": [
+        213,
+        212,
+        212
+      ],
+      "trimmedTo": [
+        600,
+        922
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 40.6
+    }
+  }
+]
