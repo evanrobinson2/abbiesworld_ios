@@ -1,0 +1,53 @@
+{
+  "$comment": "Named looks the studio can render a topic in. A style only ever supplies the `look` clause. The framing-and-plate clause is appended to every prompt by app/studioPrompt.js and is deliberately not editable here, because carving finds the background by flooding inward from the border: a style that introduced scenery, a gradient or a drop shadow would produce art that cannot be carved. Add a style by adding an entry; `house` is the one the existing 83 assets were generated in.",
+  "styles": [
+    {
+      "id": "house",
+      "label": "House style",
+      "blurb": "What the existing 83 assets were generated in. Start here unless you want a deliberate departure.",
+      "look": "Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors."
+    },
+    {
+      "id": "watercolour",
+      "label": "Watercolour",
+      "blurb": "Softer and more delicate. Good for calm, dreamy things; weaker outlines make for a fussier carve.",
+      "look": "Soft watercolour storybook illustration, visible paper texture, gentle washes of colour that bleed slightly, delicate ink linework."
+    },
+    {
+      "id": "felt",
+      "label": "Felt and stitch",
+      "blurb": "Handmade toy look. Reads as something you could actually sew, which suits textiles and soft furniture.",
+      "look": "Made of craft felt and stitched fabric, visible blanket-stitch seams, slightly fuzzy edges, flat matte colours, handmade toy look."
+    },
+    {
+      "id": "clay",
+      "label": "Claymation",
+      "blurb": "Chunky and tactile, with real weight. Strong silhouettes, so it carves cleanly.",
+      "look": "Claymation stop-motion look, softly moulded plasticine forms with visible thumbprints, chunky and tactile, matte surface."
+    },
+    {
+      "id": "papercut",
+      "label": "Paper cut",
+      "blurb": "Layered flat shapes with crisp edges. The cleanest carve of any style here.",
+      "look": "Layered paper-cut collage, flat shapes with crisp scissor-cut edges, subtle paper grain, gentle separation between layers."
+    },
+    {
+      "id": "crayon",
+      "label": "Wax crayon",
+      "blurb": "Scribbly and childlike, as if Abbie drew it herself. Loose edges make the carve rough on purpose.",
+      "look": "Bright wax crayon drawing, waxy uneven strokes, colour scribbled slightly outside the lines, energetic and childlike."
+    },
+    {
+      "id": "stainedGlass",
+      "label": "Stained glass",
+      "blurb": "Bold leading and luminous colour. Dramatic, and the heavy black outlines carve very well.",
+      "look": "Stained-glass look, bold black leading dividing panes of luminous saturated colour, flat and graphic."
+    },
+    {
+      "id": "gingerbread",
+      "label": "Gingerbread",
+      "blurb": "Everything as if baked and iced. Silly and very popular with six-year-olds.",
+      "look": "Made of baked gingerbread with piped white royal icing details and candy buttons, warm brown dough, thick clean dark outlines."
+    }
+  ]
+}
