@@ -69,6 +69,47 @@ So the chain is inspectable end to end: ingredients → recipe → prompt → ar
   first surfaces a bad carve, largest first surfaces bloat.
 - Results page at 120 at a time, because 1192 cards at once is not a review.
 
+## On a phone or a tablet
+
+The page was built at a desk, and it showed. On a 390px phone the four filter
+rows put the first piece of art almost four screens down, an empty recipe tray
+reserved a third of the screen to say nothing, and the smallest control was
+18px. What changed:
+
+- **Filters fold away below 900px** behind a `Filters` button that carries a
+  badge counting what is currently narrowed, so a filtered view is never a
+  mystery. 900px rather than 720px because a tablet in portrait is 820px wide
+  and has room sideways but not downwards. Above that width every row is shown
+  outright and there is no toggle.
+- **The recipe tray collapses to one slim bar until something is picked**, and
+  expands to the five slots only once a recipe is under way. Slots become a
+  swipeable strip rather than wrapping onto three rows, and the tray scrolls
+  itself instead of covering the screen.
+- **Every control clears 44px under a coarse pointer** (WCAG 2.5.8). Inline
+  links inside a sentence are exempt by that rule and stay inline. The `Made
+  from` list on a decoration card became chips, because five adjacent text
+  links in one line is a coin toss under a fingertip.
+- **Fields are 16px on touch**, which is what stops iOS Safari zooming the page
+  the moment a field takes focus.
+- **The kind summary belongs to the browse tab**, so the studio is not eight
+  cards of scrolling from the top, and art is two columns instead of one.
+- `initialScale` is set without `maximumScale`, so the page still pinch-zooms —
+  which is how anyone actually inspects a carve on a tablet.
+
+`npm run layout` drives a real browser at phone, tablet-portrait and desktop
+sizes and prints a pass/fail line per claim above. CSS only exists once a
+browser has applied it at a given width, so this is the one part of the app that
+cannot be checked with pure functions. It needs the server running:
+
+```bash
+npm run build && npm start -- --port 5174   # in one shell
+npm run layout                              # in another
+```
+
+The scroll budget is deliberately looser on desktop (1.6 screens vs 1.2): above
+the fold width every filter row is displayed on purpose, and that is worth a
+little scroll when you have a mouse and a wheel.
+
 ## Studio: make something new
 
 The **Studio** tab generates art from a topic and a style. Type what you want,
@@ -160,6 +201,13 @@ npm install
 cp .env.example .env.local   # then fill in your keys
 npm run dev                  # http://localhost:5174
 npm run check                # prompt invariants, recipe wording, catalogue integrity
+npm run layout               # phone/tablet/desktop layout, needs the server up
+```
+
+`npm run layout` needs a browser the first time:
+
+```bash
+npm install && npx playwright install chromium
 ```
 
 `npm run check` uses the built-in node test runner, no extra dependencies.

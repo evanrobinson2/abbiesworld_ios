@@ -7,12 +7,16 @@
     "dev": "next dev --port 5174",
     "build": "next build",
     "start": "next start",
-    "check": "node --test \"checks/*.test.mjs\""
+    "check": "node --test \"checks/*.test.mjs\"",
+    "layout": "node checks/layout.mjs"
   },
   "dependencies": {
     "next": "^16.3.5",
     "react": "^19.3.0",
     "react-dom": "^19.3.0"
   },
-  "type": "module"
+  "type": "module",
+  "devDependencies": {
+    "playwright": "^1.63.0"
+  }
 }
