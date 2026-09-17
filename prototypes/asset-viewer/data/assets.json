@@ -1,0 +1,1938 @@
+{
+  "generatedAt": "2026-09-17T18:16:40+00:00",
+  "families": [
+    {
+      "id": "form",
+      "label": "Form",
+      "question": "What is it?",
+      "blurb": "The undecorated blank. Forms decide what the machine is building; everything else decides how it turns out."
+    },
+    {
+      "id": "material",
+      "label": "Material",
+      "question": "What is it made of?",
+      "blurb": "Raw stuff, shown as a bare sample rather than made into anything. Materials carry the look and the feel of the finished piece."
+    },
+    {
+      "id": "essence",
+      "label": "Essence",
+      "question": "How does it feel?",
+      "blurb": "Bottled mood. Essences do not change what a thing is, only the feeling it gives off."
+    },
+    {
+      "id": "enchantment",
+      "label": "Enchantment",
+      "question": "What does it do?",
+      "blurb": "The trick the finished thing performs. This is where a couch becomes a couch that burps rainbows."
+    },
+    {
+      "id": "trim",
+      "label": "Trim",
+      "question": "What is the finishing touch?",
+      "blurb": "Haberdashery. Optional, cheap to add, and the fastest way to make two otherwise identical pieces feel different."
+    }
+  ],
+  "assets": [
+    {
+      "id": "form_chair",
+      "name": "Little Chair",
+      "family": "form",
+      "category": "seating",
+      "emoji": "\ud83e\ude91",
+      "tags": [
+        "sit",
+        "small"
+      ],
+      "file": "form_chair.png",
+      "preview": "form_chair.webp",
+      "prompt": "A simple small wooden chair with four legs and a rounded back, for a children's storybook game. Shown as a plain undecorated blank: bare pale plywood, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          211,
+          211,
+          211
+        ],
+        "trimmedTo": [
+          533,
+          939
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 34.2
+      }
+    },
+    {
+      "id": "form_armchair",
+      "name": "Squishy Armchair",
+      "family": "form",
+      "category": "seating",
+      "emoji": "\ud83d\udecb\ufe0f",
+      "tags": [
+        "sit",
+        "soft",
+        "big"
+      ],
+      "file": "form_armchair.png",
+      "preview": "form_armchair.webp",
+      "prompt": "A plump rounded armchair with thick arms and a deep seat, for a children's storybook game. Shown as a plain undecorated blank: bare pale plywood, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          216,
+          216,
+          216
+        ],
+        "trimmedTo": [
+          861,
+          810
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 66.3
+      }
+    },
+    {
+      "id": "form_cushion",
+      "name": "Floor Cushion",
+      "family": "form",
+      "category": "seating",
+      "emoji": "\ud83e\uddf8",
+      "tags": [
+        "sit",
+        "soft",
+        "small"
+      ],
+      "file": "form_cushion.png",
+      "preview": "form_cushion.webp",
+      "prompt": "A big round floor cushion, like a beanbag pouffe, for a children's storybook game. Shown as a plain undecorated blank: bare undyed natural canvas, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          219,
+          219,
+          219
+        ],
+        "trimmedTo": [
+          881,
+          781
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 69.0
+      }
+    },
+    {
+      "id": "form_bed",
+      "name": "Cozy Bed",
+      "family": "form",
+      "category": "sleeping",
+      "emoji": "\ud83d\udecf\ufe0f",
+      "tags": [
+        "sleep",
+        "big"
+      ],
+      "file": "form_bed.png",
+      "preview": "form_bed.webp",
+      "prompt": "A small single bed with a tall headboard and a plain mattress, for a children's storybook game. Shown as a plain undecorated blank: bare pale plywood frame with an undyed canvas mattress, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          221,
+          221,
+          221
+        ],
+        "trimmedTo": [
+          817,
+          847
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 70.7
+      }
+    },
+    {
+      "id": "form_lamp",
+      "name": "Table Lamp",
+      "family": "form",
+      "category": "lighting",
+      "emoji": "\ud83d\udca1",
+      "tags": [
+        "light",
+        "small"
+      ],
+      "file": "form_lamp.png",
+      "preview": "form_lamp.webp",
+      "prompt": "A table lamp with a slim base and a plain drum shade, for a children's storybook game. Shown as a plain undecorated blank: bare pale plywood base with an undyed canvas shade, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          213,
+          213,
+          213
+        ],
+        "trimmedTo": [
+          503,
+          917
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 28.6
+      }
+    },
+    {
+      "id": "form_shelf",
+      "name": "Bookshelf",
+      "family": "form",
+      "category": "storage",
+      "emoji": "\ud83d\udcda",
+      "tags": [
+        "store",
+        "tall"
+      ],
+      "file": "form_shelf.png",
+      "preview": "form_shelf.webp",
+      "prompt": "A short bookshelf with three empty shelves, for a children's storybook game. Shown as a plain undecorated blank: bare pale plywood, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          231,
+          231,
+          231
+        ],
+        "trimmedTo": [
+          780,
+          858
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 82.4
+      }
+    },
+    {
+      "id": "form_toy_chest",
+      "name": "Toy Chest",
+      "family": "form",
+      "category": "storage",
+      "emoji": "\ud83e\uddf3",
+      "tags": [
+        "store",
+        "lid"
+      ],
+      "file": "form_toy_chest.png",
+      "preview": "form_toy_chest.webp",
+      "prompt": "A chunky toy chest with a domed hinged lid, propped slightly open, for a children's storybook game. Shown as a plain undecorated blank: bare pale plywood, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          218,
+          218,
+          218
+        ],
+        "trimmedTo": [
+          762,
+          716
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 76.9
+      }
+    },
+    {
+      "id": "form_rug",
+      "name": "Round Rug",
+      "family": "form",
+      "category": "textiles",
+      "emoji": "\ud83e\uddf6",
+      "tags": [
+        "floor",
+        "soft"
+      ],
+      "file": "form_rug.png",
+      "preview": "form_rug.webp",
+      "prompt": "A oval floor rug lying flat, seen at a slight angle, for a children's storybook game. Shown as a plain undecorated blank: bare undyed natural canvas with a plain woven edge, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          216,
+          216,
+          216
+        ],
+        "trimmedTo": [
+          959,
+          760
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 58.6
+      }
+    },
+    {
+      "id": "form_curtains",
+      "name": "Curtains",
+      "family": "form",
+      "category": "textiles",
+      "emoji": "\ud83c\udfad",
+      "tags": [
+        "window",
+        "soft",
+        "tall"
+      ],
+      "file": "form_curtains.png",
+      "preview": "form_curtains.webp",
+      "prompt": "A pair of gathered curtains hanging from a short wooden rod, for a children's storybook game. Shown as a plain undecorated blank: bare undyed natural canvas with a plain plywood rod, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          236,
+          235,
+          233
+        ],
+        "trimmedTo": [
+          922,
+          864
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 42.0
+      }
+    },
+    {
+      "id": "form_mirror",
+      "name": "Standing Mirror",
+      "family": "form",
+      "category": "decor",
+      "emoji": "\ud83e\ude9e",
+      "tags": [
+        "wall",
+        "shiny"
+      ],
+      "file": "form_mirror.png",
+      "preview": "form_mirror.webp",
+      "prompt": "A round standing mirror in a plain frame on a little easel foot, for a children's storybook game. Shown as a plain undecorated blank: bare pale plywood frame with a plain pale silver mirror face, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          212,
+          212,
+          212
+        ],
+        "trimmedTo": [
+          574,
+          836
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 44.4
+      }
+    },
+    {
+      "id": "mat_cloud_cotton",
+      "name": "Cloud Cotton",
+      "family": "material",
+      "category": "soft",
+      "emoji": "\u2601\ufe0f",
+      "tags": [
+        "soft",
+        "white",
+        "floaty"
+      ],
+      "file": "mat_cloud_cotton.png",
+      "preview": "mat_cloud_cotton.webp",
+      "prompt": "A raw material sample of cloud cotton: a neat folded stack of impossibly fluffy white cloud-like fabric, edges puffing into little clouds, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          213,
+          213,
+          213
+        ],
+        "trimmedTo": [
+          850,
+          779
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 68.9
+      }
+    },
+    {
+      "id": "mat_knitted_yarn",
+      "name": "Knitted Yarn",
+      "family": "material",
+      "category": "soft",
+      "emoji": "\ud83e\uddf6",
+      "tags": [
+        "soft",
+        "warm",
+        "stripey"
+      ],
+      "file": "mat_knitted_yarn.png",
+      "preview": "mat_knitted_yarn.webp",
+      "prompt": "A raw material sample of knitted yarn: two fat balls of chunky wool in warm rainbow stripes with knitting stitches showing, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          170,
+          170,
+          170
+        ],
+        "trimmedTo": [
+          909,
+          635
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 54.1
+      }
+    },
+    {
+      "id": "mat_velvet_plush",
+      "name": "Velvet Plush",
+      "family": "material",
+      "category": "soft",
+      "emoji": "\ud83c\udf9a\ufe0f",
+      "tags": [
+        "soft",
+        "rich",
+        "purple"
+      ],
+      "file": "mat_velvet_plush.png",
+      "preview": "mat_velvet_plush.webp",
+      "prompt": "A raw material sample of velvet plush: a thick roll of deep plum velvet with a soft sheen and a rolled cut edge, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          208,
+          207,
+          207
+        ],
+        "trimmedTo": [
+          961,
+          815
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 53.4
+      }
+    },
+    {
+      "id": "mat_mossy_oak",
+      "name": "Mossy Oak",
+      "family": "material",
+      "category": "wood",
+      "emoji": "\ud83e\udeb5",
+      "tags": [
+        "wood",
+        "green",
+        "woodland"
+      ],
+      "file": "mat_mossy_oak.png",
+      "preview": "mat_mossy_oak.webp",
+      "prompt": "A raw material sample of mossy oak: two short stacked oak planks with bright green moss and tiny mushrooms growing along the grain, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          222,
+          222,
+          222
+        ],
+        "trimmedTo": [
+          812,
+          671
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 61.3
+      }
+    },
+    {
+      "id": "mat_birch_bark",
+      "name": "Birch Bark",
+      "family": "material",
+      "category": "wood",
+      "emoji": "\ud83c\udf3f",
+      "tags": [
+        "wood",
+        "white",
+        "papery"
+      ],
+      "file": "mat_birch_bark.png",
+      "preview": "mat_birch_bark.webp",
+      "prompt": "A raw material sample of birch bark: a loose curl of white-and-charcoal birch bark, peeling like paper, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          213,
+          212,
+          212
+        ],
+        "trimmedTo": [
+          793,
+          823
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 64.0
+      }
+    },
+    {
+      "id": "mat_rainbow_marble",
+      "name": "Rainbow Marble",
+      "family": "material",
+      "category": "stone",
+      "emoji": "\ud83e\udea8",
+      "tags": [
+        "hard",
+        "shiny",
+        "rainbow"
+      ],
+      "file": "mat_rainbow_marble.png",
+      "preview": "mat_rainbow_marble.webp",
+      "prompt": "A raw material sample of rainbow marble: a chunky polished block of stone veined with swirling pastel rainbow marbling, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          220,
+          220,
+          220
+        ],
+        "trimmedTo": [
+          841,
+          892
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 71.1
+      }
+    },
+    {
+      "id": "mat_seashell_pearl",
+      "name": "Seashell Pearl",
+      "family": "material",
+      "category": "stone",
+      "emoji": "\ud83d\udc1a",
+      "tags": [
+        "hard",
+        "shiny",
+        "seaside"
+      ],
+      "file": "mat_seashell_pearl.png",
+      "preview": "mat_seashell_pearl.webp",
+      "prompt": "A raw material sample of seashell pearl: a little heap of iridescent spiral seashells and two round pearls, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          230,
+          230,
+          230
+        ],
+        "trimmedTo": [
+          805,
+          796
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 65.4
+      }
+    },
+    {
+      "id": "mat_tin_foil",
+      "name": "Crinkled Tin",
+      "family": "material",
+      "category": "metal",
+      "emoji": "\ud83e\uddf4",
+      "tags": [
+        "metal",
+        "shiny",
+        "crinkly"
+      ],
+      "file": "mat_tin_foil.png",
+      "preview": "mat_tin_foil.webp",
+      "prompt": "A raw material sample of crinkled tin: a scrunched sheet of bright silver tin foil with sharp creases catching the light, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          217,
+          217,
+          217
+        ],
+        "trimmedTo": [
+          854,
+          738
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 63.3
+      }
+    },
+    {
+      "id": "mat_star_silver",
+      "name": "Star Silver",
+      "family": "material",
+      "category": "metal",
+      "emoji": "\u2728",
+      "tags": [
+        "metal",
+        "shiny",
+        "magic"
+      ],
+      "file": "mat_star_silver.png",
+      "preview": "mat_star_silver.webp",
+      "prompt": "A raw material sample of star silver: a small ingot of glowing pale silver metal with tiny stars suspended inside it, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          215,
+          214,
+          214
+        ],
+        "trimmedTo": [
+          788,
+          752
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 75.0
+      }
+    },
+    {
+      "id": "mat_gingerbread",
+      "name": "Gingerbread",
+      "family": "material",
+      "category": "sweet",
+      "emoji": "\ud83c\udf6a",
+      "tags": [
+        "edible",
+        "brown",
+        "warm"
+      ],
+      "file": "mat_gingerbread.png",
+      "preview": "mat_gingerbread.webp",
+      "prompt": "A raw material sample of gingerbread: three stacked slabs of warm brown gingerbread piped with white icing along the edges, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          185,
+          185,
+          185
+        ],
+        "trimmedTo": [
+          827,
+          798
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 69.9
+      }
+    },
+    {
+      "id": "mat_candy_glass",
+      "name": "Candy Glass",
+      "family": "material",
+      "category": "sweet",
+      "emoji": "\ud83c\udf6d",
+      "tags": [
+        "edible",
+        "shiny",
+        "pink"
+      ],
+      "file": "mat_candy_glass.png",
+      "preview": "mat_candy_glass.webp",
+      "prompt": "A raw material sample of candy glass: two flat translucent panes of pink and orange hard candy, glossy with chipped corners, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          222,
+          222,
+          222
+        ],
+        "trimmedTo": [
+          706,
+          802
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 66.4
+      }
+    },
+    {
+      "id": "mat_honey_amber",
+      "name": "Honey Amber",
+      "family": "material",
+      "category": "sweet",
+      "emoji": "\ud83c\udf6f",
+      "tags": [
+        "edible",
+        "golden",
+        "sticky"
+      ],
+      "file": "mat_honey_amber.png",
+      "preview": "mat_honey_amber.webp",
+      "prompt": "A raw material sample of honey amber: a thick golden lump of set honey resin with a slow drip and a tiny bee wing caught inside, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          209,
+          209,
+          209
+        ],
+        "trimmedTo": [
+          746,
+          924
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 43.3
+      }
+    },
+    {
+      "id": "mat_dragon_scale",
+      "name": "Dragon Scale",
+      "family": "material",
+      "category": "curious",
+      "emoji": "\ud83d\udc09",
+      "tags": [
+        "magic",
+        "green",
+        "shiny"
+      ],
+      "file": "mat_dragon_scale.png",
+      "preview": "mat_dragon_scale.webp",
+      "prompt": "A raw material sample of dragon scale: a small fan of overlapping emerald-green scales with gold edges, friendly rather than fierce, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          193,
+          192,
+          194
+        ],
+        "trimmedTo": [
+          946,
+          933
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 59.2
+      }
+    },
+    {
+      "id": "mat_moon_paper",
+      "name": "Moon Paper",
+      "family": "material",
+      "category": "curious",
+      "emoji": "\ud83c\udf12",
+      "tags": [
+        "magic",
+        "papery",
+        "glowing"
+      ],
+      "file": "mat_moon_paper.png",
+      "preview": "mat_moon_paper.webp",
+      "prompt": "A raw material sample of moon paper: a few loose sheets of thin glowing pale-blue paper, softly luminous with torn edges, for a children's storybook game. Shown as a bare sample of the material on its own \u2014 a small neat stack, chunk or swatch \u2014 not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          219,
+          218,
+          218
+        ],
+        "trimmedTo": [
+          924,
+          886
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 62.6
+      }
+    },
+    {
+      "id": "cozy_nap_energy",
+      "name": "Cozy Nap Energy",
+      "family": "essence",
+      "category": "feelings",
+      "emoji": "\ud83d\ude34",
+      "tags": [],
+      "file": "essence_cozy_nap.png",
+      "preview": "essence_cozy_nap.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Cozy Nap Energy: a tiny sleeping crescent moon and a small soft pillow floating inside swirling pale lavender mist. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          221,
+          221,
+          221
+        ],
+        "trimmedTo": [
+          636,
+          950
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 43.8
+      }
+    },
+    {
+      "id": "giggle_fizz",
+      "name": "Giggle Fizz",
+      "family": "essence",
+      "category": "feelings",
+      "emoji": "\ud83e\udd2d",
+      "tags": [],
+      "file": "essence_giggle_fizz.png",
+      "preview": "essence_giggle_fizz.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Giggle Fizz: fizzy popping yellow and orange bubbles bursting upward with tiny star sparkles inside bright lemon-yellow liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          221,
+          220,
+          221
+        ],
+        "trimmedTo": [
+          564,
+          959
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 40.5
+      }
+    },
+    {
+      "id": "warm_hug_aura",
+      "name": "Warm Hug Aura",
+      "family": "essence",
+      "category": "feelings",
+      "emoji": "\ud83e\udd17",
+      "tags": [],
+      "file": "essence_warm_hug.png",
+      "preview": "essence_warm_hug.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Warm Hug Aura: two soft rounded coral-pink arms curled into a gentle hug shape surrounded by glowing warm orange rings inside peachy liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          209,
+          209,
+          209
+        ],
+        "trimmedTo": [
+          649,
+          943
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 46.6
+      }
+    },
+    {
+      "id": "mischief_sparkle",
+      "name": "Mischief Sparkle",
+      "family": "essence",
+      "category": "feelings",
+      "emoji": "\ud83d\ude08",
+      "tags": [],
+      "file": "essence_mischief.png",
+      "preview": "essence_mischief.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Mischief Sparkle: a cheeky little purple imp tail and scattered magenta sparkles zig-zagging inside swirling violet liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          217,
+          217,
+          217
+        ],
+        "trimmedTo": [
+          582,
+          941
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 42.0
+      }
+    },
+    {
+      "id": "sleepy_mumbles",
+      "name": "Sleepy Mumbles",
+      "family": "essence",
+      "category": "feelings",
+      "emoji": "\ud83d\udca4",
+      "tags": [],
+      "file": "essence_sleepy_mumbles.png",
+      "preview": "essence_sleepy_mumbles.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Sleepy Mumbles: three little floating sleep bubbles and soft drifting swirl shapes inside dusty blue liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          245,
+          245,
+          243
+        ],
+        "trimmedTo": [
+          578,
+          915
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 43.4
+      }
+    },
+    {
+      "id": "cat_whisker",
+      "name": "Cat Whisker",
+      "family": "essence",
+      "category": "critters",
+      "emoji": "\ud83d\udc31",
+      "tags": [],
+      "file": "essence_cat_whisker.png",
+      "preview": "essence_cat_whisker.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Cat Whisker: one long curved white cat whisker and two tiny pointed cat-ear silhouettes floating inside bubbly mint green liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          226,
+          225,
+          226
+        ],
+        "trimmedTo": [
+          604,
+          916
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 43.3
+      }
+    },
+    {
+      "id": "bunny_bounce",
+      "name": "Bunny Bounce",
+      "family": "essence",
+      "category": "critters",
+      "emoji": "\ud83d\udc30",
+      "tags": [],
+      "file": "essence_bunny_bounce.png",
+      "preview": "essence_bunny_bounce.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Bunny Bounce: a tiny pair of long bunny ears and a fluffy round cottontail bouncing along a dotted arc trail inside pale pink liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          217,
+          217,
+          217
+        ],
+        "trimmedTo": [
+          597,
+          916
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 43.2
+      }
+    },
+    {
+      "id": "owl_wisdom",
+      "name": "Owl Wisdom",
+      "family": "essence",
+      "category": "critters",
+      "emoji": "\ud83e\udd89",
+      "tags": [],
+      "file": "essence_owl_wisdom.png",
+      "preview": "essence_owl_wisdom.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Owl Wisdom: a small round wise owl with big amber eyes and tiny round spectacles perched inside deep teal liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          205,
+          205,
+          205
+        ],
+        "trimmedTo": [
+          557,
+          951
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 40.6
+      }
+    },
+    {
+      "id": "frog_song",
+      "name": "Frog Song",
+      "family": "essence",
+      "category": "critters",
+      "emoji": "\ud83d\udc38",
+      "tags": [],
+      "file": "essence_frog_song.png",
+      "preview": "essence_frog_song.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Frog Song: a tiny cheerful green frog mid-croak with little curved music note shapes floating up around it inside bright lily-pad green liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          219,
+          218,
+          219
+        ],
+        "trimmedTo": [
+          530,
+          953
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 40.4
+      }
+    },
+    {
+      "id": "penguin_waddle",
+      "name": "Penguin Waddle",
+      "family": "essence",
+      "category": "critters",
+      "emoji": "\ud83d\udc27",
+      "tags": [],
+      "file": "essence_penguin_waddle.png",
+      "preview": "essence_penguin_waddle.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Penguin Waddle: a tiny round penguin with orange feet mid-waddle leaving little footprint marks inside icy pale blue liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          208,
+          208,
+          208
+        ],
+        "trimmedTo": [
+          531,
+          922
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 40.1
+      }
+    },
+    {
+      "id": "moonbeam",
+      "name": "Moonbeam",
+      "family": "essence",
+      "category": "weather",
+      "emoji": "\ud83c\udf19",
+      "tags": [],
+      "file": "essence_moonbeam.png",
+      "preview": "essence_moonbeam.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Moonbeam: a glowing pale yellow crescent moon with soft silver light rays radiating outward inside deep midnight blue liquid dotted with tiny stars. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          233,
+          233,
+          233
+        ],
+        "trimmedTo": [
+          624,
+          912
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 44.1
+      }
+    },
+    {
+      "id": "thundersnuggle",
+      "name": "Thundersnuggle",
+      "family": "essence",
+      "category": "weather",
+      "emoji": "\u26c8\ufe0f",
+      "tags": [],
+      "file": "essence_thundersnuggle.png",
+      "preview": "essence_thundersnuggle.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Thundersnuggle: a small round fluffy storm cloud with a friendly smiling face and a soft yellow zigzag lightning bolt tucked under a tiny blanket, inside slate gray-blue liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          190,
+          190,
+          190
+        ],
+        "trimmedTo": [
+          586,
+          931
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 41.1
+      }
+    },
+    {
+      "id": "rainbow_hiccup",
+      "name": "Rainbow Hiccup",
+      "family": "essence",
+      "category": "weather",
+      "emoji": "\ud83c\udf08",
+      "tags": [],
+      "file": "essence_rainbow_hiccup.png",
+      "preview": "essence_rainbow_hiccup.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Rainbow Hiccup: a short stubby rainbow arc with a comical hiccup burst of colourful dots popping off one end. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          220,
+          220,
+          220
+        ],
+        "trimmedTo": [
+          709,
+          900
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 48.0
+      }
+    },
+    {
+      "id": "cloud_fluff",
+      "name": "Cloud Fluff",
+      "family": "essence",
+      "category": "weather",
+      "emoji": "\u2601\ufe0f",
+      "tags": [],
+      "file": "essence_cloud_fluff.png",
+      "preview": "essence_cloud_fluff.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Cloud Fluff: three soft puffy white clouds stacked like cotton candy tufts inside pale sky blue liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          211,
+          211,
+          211
+        ],
+        "trimmedTo": [
+          641,
+          934
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 43.7
+      }
+    },
+    {
+      "id": "starlight_dust",
+      "name": "Starlight Dust",
+      "family": "essence",
+      "category": "weather",
+      "emoji": "\u2728",
+      "tags": [],
+      "file": "essence_starlight_dust.png",
+      "preview": "essence_starlight_dust.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Starlight Dust: a shower of tiny golden four-pointed stars and glittering dust motes settling inside deep indigo liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          213,
+          213,
+          213
+        ],
+        "trimmedTo": [
+          552,
+          951
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 40.6
+      }
+    },
+    {
+      "id": "bubblegum_dream",
+      "name": "Bubblegum Dream",
+      "family": "essence",
+      "category": "flavors",
+      "emoji": "\ud83c\udf6c",
+      "tags": [],
+      "file": "essence_bubblegum_dream.png",
+      "preview": "essence_bubblegum_dream.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Bubblegum Dream: a big glossy pink bubblegum bubble mid-blow with smaller bubbles around it inside bright bubblegum pink liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          216,
+          216,
+          216
+        ],
+        "trimmedTo": [
+          592,
+          910
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 41.2
+      }
+    },
+    {
+      "id": "marshmallow_squish",
+      "name": "Marshmallow Squish",
+      "family": "essence",
+      "category": "flavors",
+      "emoji": "\ud83c\udf61",
+      "tags": [],
+      "file": "essence_marshmallow_squish.png",
+      "preview": "essence_marshmallow_squish.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Marshmallow Squish: two soft squishy white marshmallow cubes being gently squashed inside creamy off-white liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          233,
+          233,
+          233
+        ],
+        "trimmedTo": [
+          623,
+          908
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 46.8
+      }
+    },
+    {
+      "id": "cinnamon_swirl",
+      "name": "Cinnamon Swirl",
+      "family": "essence",
+      "category": "flavors",
+      "emoji": "\ud83c\udf00",
+      "tags": [],
+      "file": "essence_cinnamon_swirl.png",
+      "preview": "essence_cinnamon_swirl.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Cinnamon Swirl: a warm brown and cream spiral swirl like a cinnamon roll cross-section inside caramel amber liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          208,
+          207,
+          208
+        ],
+        "trimmedTo": [
+          655,
+          943
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 45.1
+      }
+    },
+    {
+      "id": "velvet_whisper",
+      "name": "Velvet Whisper",
+      "family": "essence",
+      "category": "flavors",
+      "emoji": "\ud83c\udf80",
+      "tags": [],
+      "file": "essence_velvet_whisper.png",
+      "preview": "essence_velvet_whisper.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Velvet Whisper: a soft draped deep burgundy velvet ribbon curling elegantly with a small bow, inside rich plum liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          215,
+          215,
+          215
+        ],
+        "trimmedTo": [
+          601,
+          931
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 43.5
+      }
+    },
+    {
+      "id": "crinkle_crunch",
+      "name": "Crinkle Crunch",
+      "family": "essence",
+      "category": "flavors",
+      "emoji": "\ud83e\udd68",
+      "tags": [],
+      "file": "essence_crinkle_crunch.png",
+      "preview": "essence_crinkle_crunch.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Crinkle Crunch: crinkled crackly golden foil shards and a few crunchy zigzag crumb shapes inside pale straw yellow liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          216,
+          215,
+          216
+        ],
+        "trimmedTo": [
+          611,
+          968
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 42.3
+      }
+    },
+    {
+      "id": "yesterdays_wish",
+      "name": "Yesterday's Wish",
+      "family": "essence",
+      "category": "wildCards",
+      "emoji": "\ud83c\udf1f",
+      "tags": [],
+      "file": "essence_yesterdays_wish.png",
+      "preview": "essence_yesterdays_wish.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Yesterday's Wish: a golden shooting star trailing a curved tail with a few floating dandelion seed puffs, inside dusky rose liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          217,
+          217,
+          217
+        ],
+        "trimmedTo": [
+          656,
+          943
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 45.2
+      }
+    },
+    {
+      "id": "forgotten_lullaby",
+      "name": "Forgotten Lullaby",
+      "family": "essence",
+      "category": "wildCards",
+      "emoji": "\ud83c\udfb5",
+      "tags": [],
+      "file": "essence_forgotten_lullaby.png",
+      "preview": "essence_forgotten_lullaby.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Forgotten Lullaby: a small antique music box with a tiny turning crank and soft curved music notes drifting away and fading, inside pale seafoam liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          221,
+          221,
+          221
+        ],
+        "trimmedTo": [
+          520,
+          926
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 38.4
+      }
+    },
+    {
+      "id": "upside_down_tuesday",
+      "name": "Upside-Down Tuesday",
+      "family": "essence",
+      "category": "wildCards",
+      "emoji": "\ud83d\ude43",
+      "tags": [],
+      "file": "essence_upside_down_tuesday.png",
+      "preview": "essence_upside_down_tuesday.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Upside-Down Tuesday: a small upside-down house with an upside-down smiling sun, everything comically inverted, inside swirling turquoise liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          216,
+          216,
+          216
+        ],
+        "trimmedTo": [
+          673,
+          941
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 47.0
+      }
+    },
+    {
+      "id": "pocket_giggles",
+      "name": "Pocket Full of Giggles",
+      "family": "essence",
+      "category": "wildCards",
+      "emoji": "\ud83d\ude02",
+      "tags": [],
+      "file": "essence_pocket_giggles.png",
+      "preview": "essence_pocket_giggles.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Pocket Full of Giggles: a small patched trouser pocket overflowing with bouncing round laughing faces and happy bubbles, inside sunny tangerine liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          231,
+          231,
+          231
+        ],
+        "trimmedTo": [
+          576,
+          941
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 43.1
+      }
+    },
+    {
+      "id": "dancing_shadows",
+      "name": "Dancing Shadows",
+      "family": "essence",
+      "category": "wildCards",
+      "emoji": "\ud83d\udc64",
+      "tags": [],
+      "file": "essence_dancing_shadows.png",
+      "preview": "essence_dancing_shadows.webp",
+      "prompt": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing Dancing Shadows: three playful rounded purple shadow silhouette figures mid-dance with linked arms, inside deep dusk lavender liquid. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          213,
+          212,
+          212
+        ],
+        "trimmedTo": [
+          600,
+          922
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 40.6
+      }
+    },
+    {
+      "id": "ench_glows_at_night",
+      "name": "Glows at Night",
+      "family": "enchantment",
+      "category": "light",
+      "emoji": "\ud83c\udf1d",
+      "tags": [
+        "light",
+        "calm"
+      ],
+      "file": "ench_glows_at_night.png",
+      "preview": "ench_glows_at_night.webp",
+      "prompt": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating a thing that glows softly at night: a warm glowing crescent moon surrounded by gentle rays. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          227,
+          227,
+          227
+        ],
+        "trimmedTo": [
+          683,
+          796
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 56.4
+      }
+    },
+    {
+      "id": "ench_changes_colour",
+      "name": "Changes Colour",
+      "family": "enchantment",
+      "category": "light",
+      "emoji": "\ud83c\udfa8",
+      "tags": [
+        "light",
+        "playful"
+      ],
+      "file": "ench_changes_colour.png",
+      "preview": "ench_changes_colour.webp",
+      "prompt": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating a thing that changes colour: a circle split into four bright colour wedges with little swap arrows between them. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          222,
+          221,
+          220
+        ],
+        "trimmedTo": [
+          685,
+          915
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 44.8
+      }
+    },
+    {
+      "id": "ench_purrs_when_you_sit",
+      "name": "Purrs When You Sit",
+      "family": "enchantment",
+      "category": "sound",
+      "emoji": "\ud83d\udc08",
+      "tags": [
+        "sound",
+        "cozy"
+      ],
+      "file": "ench_purrs_when_you_sit.png",
+      "preview": "ench_purrs_when_you_sit.webp",
+      "prompt": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating a thing that purrs when you sit on it: a curled-up contented cat with little purr ripples rising from it. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          218,
+          218,
+          218
+        ],
+        "trimmedTo": [
+          693,
+          811
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 55.9
+      }
+    },
+    {
+      "id": "ench_sings_lullabies",
+      "name": "Sings Lullabies",
+      "family": "enchantment",
+      "category": "sound",
+      "emoji": "\ud83c\udfb5",
+      "tags": [
+        "sound",
+        "calm"
+      ],
+      "file": "ench_sings_lullabies.png",
+      "preview": "ench_sings_lullabies.webp",
+      "prompt": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating a thing that sings lullabies: three soft curved music notes drifting over a tiny sleeping star. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          227,
+          227,
+          227
+        ],
+        "trimmedTo": [
+          647,
+          775
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 52.9
+      }
+    },
+    {
+      "id": "ench_floats_an_inch",
+      "name": "Floats an Inch Up",
+      "family": "enchantment",
+      "category": "motion",
+      "emoji": "\ud83c\udf88",
+      "tags": [
+        "motion",
+        "magic"
+      ],
+      "file": "ench_floats_an_inch.png",
+      "preview": "ench_floats_an_inch.webp",
+      "prompt": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating a thing that floats an inch off the floor: a small rounded shape hovering above a dashed ground line with little lift sparkles beneath it. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          221,
+          220,
+          218
+        ],
+        "trimmedTo": [
+          714,
+          821
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 57.9
+      }
+    },
+    {
+      "id": "ench_grows_flowers",
+      "name": "Grows Flowers",
+      "family": "enchantment",
+      "category": "growth",
+      "emoji": "\ud83c\udf3c",
+      "tags": [
+        "growth",
+        "green"
+      ],
+      "file": "ench_grows_flowers.png",
+      "preview": "ench_grows_flowers.webp",
+      "prompt": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating a thing that grows flowers: a curling green vine sprouting three cheerful daisies. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          223,
+          223,
+          223
+        ],
+        "trimmedTo": [
+          737,
+          909
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 51.4
+      }
+    },
+    {
+      "id": "ench_burps_rainbows",
+      "name": "Burps Rainbows",
+      "family": "enchantment",
+      "category": "mischief",
+      "emoji": "\ud83c\udf08",
+      "tags": [
+        "mischief",
+        "silly",
+        "rainbow"
+      ],
+      "file": "ench_burps_rainbows.png",
+      "preview": "ench_burps_rainbows.webp",
+      "prompt": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating a thing that burps rainbows: a comical puff of rainbow arcs and colourful dots bursting upward. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          219,
+          219,
+          219
+        ],
+        "trimmedTo": [
+          662,
+          775
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 55.8
+      }
+    },
+    {
+      "id": "ench_hides_your_socks",
+      "name": "Hides Your Socks",
+      "family": "enchantment",
+      "category": "mischief",
+      "emoji": "\ud83e\udde6",
+      "tags": [
+        "mischief",
+        "silly"
+      ],
+      "file": "ench_hides_your_socks.png",
+      "preview": "ench_hides_your_socks.webp",
+      "prompt": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating a thing that hides your socks: one striped sock vanishing into a cheeky little trapdoor. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          222,
+          221,
+          221
+        ],
+        "trimmedTo": [
+          720,
+          903
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 49.4
+      }
+    },
+    {
+      "id": "trim_pompom_fringe",
+      "name": "Pompom Fringe",
+      "family": "trim",
+      "category": "fringe",
+      "emoji": "\ud83d\udd34",
+      "tags": [
+        "soft",
+        "bobbly",
+        "rainbow"
+      ],
+      "file": "trim_pompom_fringe.png",
+      "preview": "trim_pompom_fringe.webp",
+      "prompt": "A haberdashery notion of pompom fringe: a loose coil of braid hung with fat rainbow pompoms, for a children's storybook game. Shown on its own as a neat coil, spool or sewing card, not attached to anything. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the notion fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          215,
+          215,
+          215
+        ],
+        "trimmedTo": [
+          903,
+          704
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 51.3
+      }
+    },
+    {
+      "id": "trim_lace_edging",
+      "name": "Lace Edging",
+      "family": "trim",
+      "category": "fringe",
+      "emoji": "\ud83e\udd7c",
+      "tags": [
+        "soft",
+        "white",
+        "delicate"
+      ],
+      "file": "trim_lace_edging.png",
+      "preview": "trim_lace_edging.webp",
+      "prompt": "A haberdashery notion of lace edging: a neat coil of scalloped cream lace trim, for a children's storybook game. Shown on its own as a neat coil, spool or sewing card, not attached to anything. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the notion fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          217,
+          217,
+          217
+        ],
+        "trimmedTo": [
+          801,
+          687
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 66.1
+      }
+    },
+    {
+      "id": "trim_brass_knobs",
+      "name": "Brass Knobs",
+      "family": "trim",
+      "category": "hardware",
+      "emoji": "\ud83d\udeaa",
+      "tags": [
+        "metal",
+        "shiny",
+        "golden"
+      ],
+      "file": "trim_brass_knobs.png",
+      "preview": "trim_brass_knobs.webp",
+      "prompt": "A haberdashery notion of brass knobs: four round polished brass drawer knobs laid out on a small card, for a children's storybook game. Shown on its own as a neat coil, spool or sewing card, not attached to anything. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the notion fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          223,
+          221,
+          222
+        ],
+        "trimmedTo": [
+          763,
+          725
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 85.7
+      }
+    },
+    {
+      "id": "trim_button_card",
+      "name": "Button Card",
+      "family": "trim",
+      "category": "hardware",
+      "emoji": "\ud83d\udd35",
+      "tags": [
+        "colourful",
+        "small"
+      ],
+      "file": "trim_button_card.png",
+      "preview": "trim_button_card.webp",
+      "prompt": "A haberdashery notion of a button card: six mismatched colourful buttons stitched onto a little card, for a children's storybook game. Shown on its own as a neat coil, spool or sewing card, not attached to anything. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the notion fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          228,
+          228,
+          228
+        ],
+        "trimmedTo": [
+          912,
+          774
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 78.3
+      }
+    },
+    {
+      "id": "trim_tiny_bells",
+      "name": "Tiny Bells",
+      "family": "trim",
+      "category": "hardware",
+      "emoji": "\ud83d\udd14",
+      "tags": [
+        "metal",
+        "sound",
+        "golden"
+      ],
+      "file": "trim_tiny_bells.png",
+      "preview": "trim_tiny_bells.webp",
+      "prompt": "A haberdashery notion of tiny bells: three small round golden jingle bells threaded on a short red cord, for a children's storybook game. Shown on its own as a neat coil, spool or sewing card, not attached to anything. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the notion fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          225,
+          225,
+          225
+        ],
+        "trimmedTo": [
+          709,
+          527
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 41.4
+      }
+    },
+    {
+      "id": "trim_ribbon_bows",
+      "name": "Ribbon Bows",
+      "family": "trim",
+      "category": "ribbon",
+      "emoji": "\ud83c\udf80",
+      "tags": [
+        "soft",
+        "pink",
+        "pretty"
+      ],
+      "file": "trim_ribbon_bows.png",
+      "preview": "trim_ribbon_bows.webp",
+      "prompt": "A haberdashery notion of ribbon bows: a spool of satin ribbon with two tied bows resting beside it, for a children's storybook game. Shown on its own as a neat coil, spool or sewing card, not attached to anything. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the notion fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "hasArt": true,
+      "carve": {
+        "background": [
+          211,
+          211,
+          211
+        ],
+        "trimmedTo": [
+          814,
+          792
+        ],
+        "output": [
+          512,
+          512
+        ],
+        "coveragePct": 44.8
+      }
+    }
+  ]
+}

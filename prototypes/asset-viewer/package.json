@@ -1,0 +1,18 @@
+{
+  "name": "asset-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Art QA browser for generated and carved Decorator Machine ingredient art.",
+  "scripts": {
+    "dev": "next dev --port 5174",
+    "build": "next build",
+    "start": "next start",
+    "check": "node --test \"checks/*.test.mjs\""
+  },
+  "dependencies": {
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "type": "module"
+}
