@@ -162,7 +162,7 @@ export default function Studio({ families, styles }) {
               <>
                 Route: <strong>{status.preferred === 'gateway' ? 'AI Gateway' : 'OpenAI direct'}</strong>
                 {status.routes.includes('gateway') && status.routes.includes('direct') && (
-                  <> , falling back to {status.preferred === 'gateway' ? 'OpenAI direct' : 'nothing'} if it refuses</>
+                  <>, falling back to OpenAI direct if it refuses</>
                 )}
                 {' · '}model <code>{status.model}</code>
                 {!status.hasGatewayKey && <> · no gateway key set, so calls go straight to OpenAI</>}

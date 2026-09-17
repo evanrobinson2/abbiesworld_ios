@@ -69,12 +69,97 @@ So the chain is inspectable end to end: ingredients → recipe → prompt → ar
   first surfaces a bad carve, largest first surfaces bloat.
 - Results page at 120 at a time, because 1192 cards at once is not a review.
 
+## Studio: make something new
+
+The **Studio** tab generates art from a topic and a style. Type what you want,
+choose whose job it is, pick a look, and it gets made.
+
+A prompt is three parts in a fixed order:
+
+1. **the topic, cast into a family's role** — what to draw. The same topic
+   becomes a different prompt per family: `mushroom` as a *form* is a plain
+   unpainted blank, as a *material* it is a bare sample, as an *essence* it is a
+   bottled mood.
+2. **the style's look** — how to draw it.
+3. **the plate** — how to frame and isolate it.
+
+The plate is **not configurable**, by anyone, ever. Carving finds the background
+by flooding inward from the image border, so a prompt that admits scenery, a
+gradient or a drop shadow produces art that cannot become a sprite. A style may
+change how a thing looks; it may not change that. `npm run check` asserts every
+prompt still ends with the plate for every style, every family, a style someone
+wrote themselves, and a topic that explicitly asks for a sunlit forest and a
+long dramatic shadow.
+
+Prompts are composed **server-side** and returned with the image, so the prompt
+shown is provably the prompt sent.
+
+### Styles
+
+Eight ship: house (what the existing 83 assets were generated in), watercolour,
+felt and stitch, claymation, paper cut, wax crayon, stained glass, gingerbread.
+Each says when to use it and how well it carves.
+
+Styles are data. Add one permanently by adding an entry to `data/styles.json`
+with a `look` clause. A style written in the browser is kept in local storage
+and the panel says so rather than implying it persisted.
+
+### Keeping a generation
+
+The deployment is read-only, so nothing is saved server-side. The studio gives
+you the WebP to download and a ready-made catalogue entry to paste, and says
+exactly what to do with them. Committing is a deliberate act.
+
+## Configuring generation
+
+Two environment variables, both set for you on Vercel already. Copy
+`.env.example` to `.env.local` for local work.
+
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | yes | Pays for and produces the images. Needs `gpt-image-2`. |
+| `AI_GATEWAY_API_KEY` | no | Routes through Vercel AI Gateway for spend tracking, budgets and logs. |
+
+Generation prefers **Vercel AI Gateway in BYOK mode**: the gateway
+authenticates the Vercel team but calls OpenAI with `OPENAI_API_KEY`, so OpenAI
+bills directly and Vercel adds no markup, while you still get per-key budgets,
+tagging and request logs. Create a key with a cap:
+
+```bash
+vercel ai-gateway api-keys create --name asset-studio --limit 25 --refresh-period monthly
+```
+
+**The gateway currently answers `403 customer_verification_required`** until the
+team has a card on file, even in BYOK mode where Vercel is not charging for
+tokens. Rather than ship a dead button, an unusable gateway falls back to
+calling OpenAI directly; the response names the route that served it and lists
+every attempt, and the studio shows both. Add the card and the gateway takes
+over with no code change.
+
+Quality is **quick** (~10s) or **good** (~30s). A `high` tier is deliberately
+not offered, because the function ceiling is 60s on every Vercel plan and high
+can exceed it.
+
+### Access
+
+The deployment is behind **Vercel Authentication on all domains**, because
+`/api/generate` spends real money and an open endpoint on a guessable URL does
+not. Sign in with the Vercel account that owns the project and it behaves
+normally. To open it up again:
+
+```bash
+curl -X PATCH "https://api.vercel.com/v9/projects/$PROJECT_ID?teamId=$TEAM_ID" \
+  -H "Authorization: Bearer $VERCEL_TOKEN" -H 'Content-Type: application/json' \
+  -d '{"ssoProtection":null}'
+```
+
 ## Run it
 
 ```bash
 npm install
-npm run dev     # http://localhost:5174
-npm run check   # recipe wording, prompt drift, catalogue integrity
+cp .env.example .env.local   # then fill in your keys
+npm run dev                  # http://localhost:5174
+npm run check                # prompt invariants, recipe wording, catalogue integrity
 ```
 
 `npm run check` uses the built-in node test runner, no extra dependencies.
