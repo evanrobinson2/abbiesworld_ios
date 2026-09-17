@@ -13,6 +13,7 @@ import {
   exits,
   makeRoom,
   mix,
+  moveDecoration,
   openDecorator,
   openRoomHardpoints,
   placeDecoration,
@@ -130,12 +131,11 @@ describe('making rooms', () => {
     expect(state.rooms).toHaveLength(after);
   });
 
-  it('gives a fully built treehouse plenty of spots', () => {
+  it('lets her build every room in the treehouse', () => {
     let state = home({ roomKits: ROOM_HARDPOINTS.length });
     for (const hardpoint of openRoomHardpoints(state)) state = makeRoom(state, hardpoint.id);
-    const spots = state.rooms.reduce((sum, room) => sum + room.slots.length, 0);
     expect(state.rooms).toHaveLength(ROOM_HARDPOINTS.length);
-    expect(spots).toBeGreaterThanOrEqual(15);
+    expect(openRoomHardpoints(state)).toHaveLength(0);
   });
 });
 
@@ -147,22 +147,54 @@ describe('placing things', () => {
     expect(placeDecoration(state, card.id).rooms).toEqual(state.rooms);
   });
 
-  it('refuses once the room is full without losing the item', () => {
-    let state = home({ startingDecorations: 8 });
-    const room = currentRoom(state);
-    for (let i = 0; i < room.slots.length; i += 1) {
+  it('never runs out of room: a room has no capacity', () => {
+    let state = home({ startingDecorations: 12 });
+    while (drawerDecorations(state).length) {
       state = placeDecoration(state, drawerDecorations(state)[0].id);
     }
-    const leftover = drawerDecorations(state)[0];
-    expect(canPlace(state, leftover.id)).toBe(false);
-    state = placeDecoration(state, leftover.id);
-    expect(drawerDecorations(state).some((item) => item.id === leftover.id)).toBe(true);
+    expect(currentRoom(state).placements).toHaveLength(12);
+    expect(drawerDecorations(state)).toHaveLength(0);
+  });
+
+  it('drops a decoration at a free position, not a slot', () => {
+    let state = home();
+    const first = drawerDecorations(state)[0];
+    state = placeDecoration(state, first.id, { x: 0.18, y: 0.73 });
+    const placement = currentRoom(state).placements[0];
+    expect(placement).toMatchObject({ decorationID: first.id, x: 0.18, y: 0.73 });
+  });
+
+  it('defaults to the middle of the room when no position is given', () => {
+    let state = home();
+    state = placeDecoration(state, drawerDecorations(state)[0].id);
+    expect(currentRoom(state).placements[0]).toMatchObject({ x: 0.5, y: 0.5 });
+  });
+
+  it('nudges position, scale, and rotation freely afterwards', () => {
+    let state = home();
+    const first = drawerDecorations(state)[0];
+    state = placeDecoration(state, first.id, { x: 0.5, y: 0.5 });
+    state = moveDecoration(state, first.id, { x: 0.9, y: 0.1, scale: 1.8, rotation: 30 });
+    expect(currentRoom(state).placements[0]).toMatchObject({
+      x: 0.9,
+      y: 0.1,
+      scale: 1.8,
+      rotation: 30,
+    });
+  });
+
+  it('keeps a nudge inside the room', () => {
+    let state = home();
+    const first = drawerDecorations(state)[0];
+    state = placeDecoration(state, first.id);
+    state = moveDecoration(state, first.id, { x: 5, y: -3 });
+    expect(currentRoom(state).placements[0]).toMatchObject({ x: 1, y: 0 });
   });
 
   it('clears the NEW badge when she places something', () => {
     let state = mix(openDecorator(home()));
     const madeID = state.lastMade.id;
-    state = placeDecoration(backToTreehouse(state), madeID);
+    state = placeDecoration(backToTreehouse(state), madeID, { x: 0.3, y: 0.6 });
     expect(state.inventory.find((item) => item.id === madeID).badges).not.toContain('new');
   });
 });

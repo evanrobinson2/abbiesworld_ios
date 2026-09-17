@@ -19,14 +19,22 @@ a game to play, so the core and the proof are the deliverable. Ported to Swift
 it becomes room hardpoints in the treehouse, a filtered drawer, and a
 Decorator Machine POI.
 
-## Rooms are hardpoints
+## Rooms are hardpoints. Decorations are not.
 
-The treehouse has five room hardpoints — Downstairs, Upstairs, Kitchen, Attic,
-Treetop Porch. Downstairs is built to begin with; the rest are open. A Room Kit
-is spent on an open hardpoint to build a room, exactly the way a World Seed is
-planted on a map hardpoint, so this reuses the pattern World 2 already has
-instead of inventing a second one. Each room carries its own decoration slots,
-which are hardpoints by another name. Fully built: 5 rooms, 19 spots.
+Two different things, deliberately.
+
+**Rooms attach to hardpoints.** The treehouse has five room pads — Downstairs,
+Upstairs, Kitchen, Attic, Treetop Porch. Downstairs is built to begin with; the
+rest are open. A Room Kit is spent on an open pad to build a room, exactly the
+way a World Seed is planted on a map pad, so this reuses the pattern World 2
+already has instead of inventing a second one.
+
+**Decorations are placed freely.** Inside a room she drops a thing wherever she
+likes and nudges it afterwards — position, scale, rotation — with no snapping,
+no slots, and no capacity. A room never fills up; the proof puts 30 decorations
+in one. This matches `placeFurniture(instanceId:x:y:)` and
+`updateFurnitureTransform` in `PlayerStateService`, which is how the treehouse
+already works today.
 
 ## What the proof actually guarantees
 
@@ -41,6 +49,7 @@ is checked by `npm run prove` as well as the tests:
   one of them has at least one exit.
 - **MORE then back always returns to the room she left,** checked for every
   room in a fully built treehouse.
+- **A room never runs out of space,** so she is never told no for lack of room.
 - **One inventory.** Something made in the machine is in the drawer the moment
   she gets home, wearing a `new` badge, which retires when she places it.
 
@@ -77,8 +86,9 @@ centered on a plain background, no text
 ## Porting notes
 
 - Room hardpoints should be real `World2SceneHardpoint`s so the scene editor
-  can move and rename them, and `acceptedSizeClasses` can keep a wardrobe out
-  of a shelf slot.
+  can move and rename them. Decoration placement stays free-form and should
+  keep using the existing `HomeLayout.PlacedDecoration` x/y/scale/rotation —
+  the snap engine is for rooms and places, never for her stuff.
 - The drawer filter belongs next to `unplacedFurnitureInventory` in
   `PlayerStateService` rather than in the view, so every caller gets it.
 - The Decorator Machine wants to be a World 2 POI archetype with a contract

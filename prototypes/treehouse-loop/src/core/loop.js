@@ -30,15 +30,14 @@ function nextId(prefix, state) {
   return `${prefix}.${state.seed}.${autoId}`;
 }
 
-function buildRoom(hardpointID, name, slotCount) {
+// A room is a free canvas. Decorations land wherever she taps and can be
+// nudged afterwards; nothing snaps and there is no capacity.
+function buildRoom(hardpointID, name) {
   return {
     id: `room.${hardpointID}`,
     hardpointID,
     name,
-    slots: Array.from({ length: slotCount }, (_, index) => ({
-      id: `${hardpointID}.slot${index}`,
-      decorationID: null,
-    })),
+    placements: [],
   };
 }
 
@@ -46,7 +45,7 @@ export function createHome({ seed = 1, startingDecorations = 3, roomKits = 1 } =
   const rooms = [];
   for (const hardpoint of ROOM_HARDPOINTS) {
     if (hardpoint.startsBuilt) {
-      rooms.push(buildRoom(hardpoint.id, hardpoint.name, hardpoint.slots));
+      rooms.push(buildRoom(hardpoint.id, hardpoint.name));
     }
   }
 
@@ -141,12 +140,13 @@ export function exits(state) {
   return [];
 }
 
+/// Placeable if it is an unplaced decoration and she is standing in a room.
+/// There is no capacity check: a room never fills up.
 export function canPlace(state, itemID) {
   const item = state.inventory.find((entry) => entry.id === itemID);
   if (!item || item.placed) return false;
   if (!PLACEABLE_KINDS.includes(item.kind)) return false;
-  const room = currentRoom(state);
-  return Boolean(room && room.slots.some((slot) => !slot.decorationID));
+  return Boolean(currentRoom(state));
 }
 
 // ------------------------------------------------------------------ actions
@@ -171,7 +171,7 @@ export function makeRoom(state, hardpointID) {
   const kit = roomKits(state)[0];
   if (!kit) return { ...state, log: [...state.log, 'no room kit'] };
 
-  const room = buildRoom(hardpoint.id, hardpoint.name, hardpoint.slots);
+  const room = buildRoom(hardpoint.id, hardpoint.name);
   return {
     ...state,
     rooms: [...state.rooms, room],
@@ -184,23 +184,24 @@ export function makeRoom(state, hardpointID) {
   };
 }
 
-export function placeDecoration(state, itemID) {
+/// Drop a decoration anywhere in the room. Position is free and optional: a
+/// tap with no coordinates lands it in the middle for her to nudge later.
+export function placeDecoration(state, itemID, at = {}) {
   if (!canPlace(state, itemID)) {
     return { ...state, log: [...state.log, `cannot place ${itemID}`] };
   }
   const room = currentRoom(state);
-  const slotIndex = room.slots.findIndex((slot) => !slot.decorationID);
+  const placement = {
+    decorationID: itemID,
+    x: clamp01(at.x ?? 0.5),
+    y: clamp01(at.y ?? 0.5),
+    scale: at.scale ?? 1,
+    rotation: at.rotation ?? 0,
+  };
   return {
     ...state,
     rooms: state.rooms.map((entry) =>
-      entry.id !== room.id
-        ? entry
-        : {
-            ...entry,
-            slots: entry.slots.map((slot, index) =>
-              index === slotIndex ? { ...slot, decorationID: itemID } : slot
-            ),
-          }
+      entry.id !== room.id ? entry : { ...entry, placements: [...entry.placements, placement] }
     ),
     inventory: state.inventory.map((item) =>
       // Placing also clears the NEW badge: she has plainly seen it now.
@@ -208,7 +209,36 @@ export function placeDecoration(state, itemID) {
         ? { ...item, placed: true, badges: item.badges.filter((b) => b !== 'new') }
         : item
     ),
-    log: [...state.log, `place ${itemID} in ${room.id}`],
+    log: [...state.log, `place ${itemID} in ${room.id} at ${placement.x},${placement.y}`],
+  };
+}
+
+/// Nudge something she already placed. Free transform, no snapping.
+export function moveDecoration(state, itemID, change = {}) {
+  const room = currentRoom(state);
+  if (!room) return state;
+  if (!room.placements.some((entry) => entry.decorationID === itemID)) return state;
+  return {
+    ...state,
+    rooms: state.rooms.map((entry) =>
+      entry.id !== room.id
+        ? entry
+        : {
+            ...entry,
+            placements: entry.placements.map((placement) =>
+              placement.decorationID !== itemID
+                ? placement
+                : {
+                    ...placement,
+                    x: clamp01(change.x ?? placement.x),
+                    y: clamp01(change.y ?? placement.y),
+                    scale: change.scale ?? placement.scale,
+                    rotation: change.rotation ?? placement.rotation,
+                  }
+            ),
+          }
+    ),
+    log: [...state.log, `move ${itemID}`],
   };
 }
 
@@ -222,9 +252,7 @@ export function takeBackDecoration(state, itemID) {
         ? entry
         : {
             ...entry,
-            slots: entry.slots.map((slot) =>
-              slot.decorationID === itemID ? { ...slot, decorationID: null } : slot
-            ),
+            placements: entry.placements.filter((entry2) => entry2.decorationID !== itemID),
           }
     ),
     inventory: state.inventory.map((item) =>
@@ -232,6 +260,10 @@ export function takeBackDecoration(state, itemID) {
     ),
     log: [...state.log, `take back ${itemID}`],
   };
+}
+
+function clamp01(value) {
+  return Math.min(1, Math.max(0, value));
 }
 
 /// The MORE button. Remembers where she was so the machine can send her back.
@@ -364,12 +396,14 @@ export function renderText(state) {
     const room = currentRoom(state);
     lines.push(`TREEHOUSE — ${room ? room.name : 'no room'}   (${state.rooms.length} room(s) built)`);
     if (room) {
-      const filled = room.slots.filter((slot) => slot.decorationID).length;
-      lines.push(`  spots: ${filled}/${room.slots.length} full`);
-      for (const slot of room.slots) {
-        const item = state.inventory.find((entry) => entry.id === slot.decorationID);
-        lines.push(`    ${slot.id.split('.').pop().padEnd(6)} ${item ? item.name : '· empty ·'}`);
+      lines.push(`  ${room.placements.length} thing(s) in here, placed freely (no hardpoints):`);
+      for (const placement of room.placements) {
+        const item = state.inventory.find((entry) => entry.id === placement.decorationID);
+        const where = `x=${placement.x.toFixed(2)} y=${placement.y.toFixed(2)}`;
+        const how = `scale=${placement.scale.toFixed(2)} rot=${placement.rotation}`;
+        lines.push(`    ${(item?.name ?? placement.decorationID).padEnd(32)} ${where}  ${how}`);
       }
+      if (!room.placements.length) lines.push('    (empty — she can drop things anywhere)');
     }
     const open = openRoomHardpoints(state);
     lines.push(

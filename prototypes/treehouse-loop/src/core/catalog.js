@@ -1,15 +1,22 @@
 // The treehouse loop: rooms to put stuff in, and a machine that makes stuff.
 //
-// Room slots are hardpoints by another name. A room kit is planted on a room
-// hardpoint the same way the World Seed is planted on a map hardpoint, so this
-// reuses the pattern already in World 2 rather than inventing a second one.
+// Two different things, deliberately:
+//
+//   ROOMS attach to hardpoints. A Room Kit is planted on a room hardpoint the
+//   same way a World Seed is planted on a map hardpoint, so this reuses the
+//   pattern World 2 already has rather than inventing a second one.
+//
+//   DECORATIONS DO NOT. Inside a room she drops a thing wherever she likes and
+//   nudges it around freely — position, scale, rotation — matching
+//   placeFurniture(instanceId:x:y:) and updateFurnitureTransform in
+//   PlayerStateService. No snapping, no slots, no fixed capacity.
 
 export const ROOM_HARDPOINTS = [
-  { id: 'hp.home.downstairs', name: 'Downstairs', slots: 5, startsBuilt: true },
-  { id: 'hp.home.upstairs', name: 'Upstairs', slots: 4, startsBuilt: false },
-  { id: 'hp.home.kitchen', name: 'Kitchen', slots: 4, startsBuilt: false },
-  { id: 'hp.home.attic', name: 'Attic', slots: 3, startsBuilt: false },
-  { id: 'hp.home.porch', name: 'Treetop Porch', slots: 3, startsBuilt: false },
+  { id: 'hp.home.downstairs', name: 'Downstairs', startsBuilt: true },
+  { id: 'hp.home.upstairs', name: 'Upstairs', startsBuilt: false },
+  { id: 'hp.home.kitchen', name: 'Kitchen', startsBuilt: false },
+  { id: 'hp.home.attic', name: 'Attic', startsBuilt: false },
+  { id: 'hp.home.porch', name: 'Treetop Porch', startsBuilt: false },
 ];
 
 // What an inventory item is. Only `decoration` may be placed in a room, which

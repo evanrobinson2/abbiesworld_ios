@@ -16,6 +16,7 @@ import {
   exits,
   makeRoom,
   mix,
+  moveDecoration,
   openDecorator,
   openRoomHardpoints,
   placeDecoration,
@@ -118,9 +119,10 @@ check('she lands back in the room she left', currentRoom(state).hardpointID === 
 check('what she made is waiting in the drawer', unseenCount(state) === waiting);
 
 const made = drawerDecorations(state).find((item) => item.badges.includes('handmade'));
-state = placeDecoration(state, made.id);
-screen(state, 'she places the thing she invented');
-check('the handmade piece is in the room', currentRoom(state).slots.some((s) => s.decorationID === made.id));
+state = placeDecoration(state, made.id, { x: 0.22, y: 0.64 });
+state = moveDecoration(state, made.id, { x: 0.28, scale: 1.4, rotation: 8 });
+screen(state, 'she drops the thing she invented and nudges it');
+check('the handmade piece is in the room', currentRoom(state).placements.some((p) => p.decorationID === made.id));
 check('placing it cleared its NEW badge', !state.inventory.find((i) => i.id === made.id).badges.includes('new'));
 
 // And she can change her mind.
@@ -189,9 +191,19 @@ for (const hardpoint of ROOM_HARDPOINTS) {
   if (!big.rooms.some((room) => room.hardpointID === hardpoint.id)) allBuildable = false;
 }
 check(`all ${ROOM_HARDPOINTS.length} room hardpoints can be built`, allBuildable);
-const totalSpots = big.rooms.reduce((sum, room) => sum + room.slots.length, 0);
-check('a fully built treehouse has room for plenty of stuff', totalSpots >= 15);
-console.log(`  (fully built: ${big.rooms.length} rooms, ${totalSpots} spots for her stuff)`);
+check('every room hardpoint is now used', openRoomHardpoints(big).length === 0);
+console.log(`  (fully built: ${big.rooms.length} rooms, each an open canvas)`);
+
+// Decorations are free-placed, so a room never fills up.
+let crowded = createHome({ seed: 11, startingDecorations: 30 });
+while (drawerDecorations(crowded).length) {
+  crowded = placeDecoration(crowded, drawerDecorations(crowded)[0].id, {
+    x: Math.random(),
+    y: Math.random(),
+  });
+}
+check('a room accepts 30 decorations with no capacity limit', currentRoom(crowded).placements.length === 30);
+check('nothing was dropped on the floor', drawerDecorations(crowded).length === 0);
 
 // 5. Never a room she cannot get out of.
 check(
