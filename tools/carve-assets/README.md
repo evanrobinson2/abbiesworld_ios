@@ -22,10 +22,10 @@ pip3 install Pillow numpy scipy
 
 ```bash
 python3 tools/carve-assets/carve.py \
-  --in  AssetSources/EssenceKit/raw \
-  --out AssetSources/EssenceKit/carved \
+  --in  AssetSources/IngredientKit/raw \
+  --out AssetSources/IngredientKit/carved \
   --size 512 \
-  --manifest AssetSources/EssenceKit/carve-report.json
+  --manifest AssetSources/IngredientKit/carve-report.json
 ```
 
 Per file it prints the detected background colour, the trimmed bounding box,
@@ -39,9 +39,24 @@ or kept the whole plate shows up.
 python3 tools/carve-assets/build_viewer_assets.py
 ```
 
-Re-reads the essence list from `DecoratorModels.swift`, joins it with the carve
-report, and writes `prototypes/essence-viewer/data/essences.json` plus 384px
-WebP previews. See `prototypes/essence-viewer/README.md`.
+Builds the viewer's catalogue from two sources — essences from
+`DecoratorModels.swift` and every other ingredient family from
+`catalog/ingredients.json` — joins both with the carve report, and writes
+`prototypes/asset-viewer/data/assets.json` plus 384px WebP previews. It exits
+non-zero on a catalogue entry with no art, an asset with no recorded prompt, or
+a carved file with no catalogue entry. See `prototypes/asset-viewer/README.md`.
+
+## The ingredient catalogue
+
+`catalog/ingredients.json` is the source of truth for every non-essence
+ingredient. Each family declares a `promptTemplate`; each ingredient supplies
+the `subject` that fills it, plus its category, tags and emoji. That means the
+prompt behind any piece of art is recorded next to the art itself, and a whole
+family can be restyled by editing one template.
+
+The recorded prompts are normalised to their family template rather than being
+byte-identical to the first generation, so regenerating gives equivalent art
+rather than a pixel-for-pixel repeat.
 
 ## Generating art that carves well
 
