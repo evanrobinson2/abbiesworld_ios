@@ -488,3 +488,38 @@ footer code {
   padding: 1px 5px;
   border-radius: 4px;
 }
+
+/* Added when the viewer grew to cover every asset in the repo. */
+.families strong .n {
+  font-weight: 500;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.readbackSmall {
+  margin: 5px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #374151;
+  font-style: italic;
+}
+
+.madeFrom {
+  margin: 8px 0 0;
+  font-size: 11.5px;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.madeFrom .linkish {
+  font-size: 11.5px;
+}
+
+.more {
+  margin: 20px 0 0;
+  text-align: center;
+}
+
+button.pick:disabled {
+  cursor: default;
+}

@@ -12,6 +12,13 @@ export const SLOT_ORDER = ['form', 'material', 'essence', 'enchantment', 'trim']
 // exists. That asymmetry is why forms are their own family.
 export const REQUIRED_SLOTS = ['form'];
 
+/** The recipe slots, in order, as the catalogue declares them. Not every family
+ *  is a slot: tools gate what the workshop can do, and decorations are output. */
+export function slotsFrom(families) {
+  const declared = families.filter((family) => family.recipeSlot).map((family) => family.id);
+  return SLOT_ORDER.filter((slot) => declared.includes(slot));
+}
+
 // Names are stored in title case because that is how they read as item labels,
 // but mid-sentence they have to drop to lower case throughout — "that purrs
 // When You Sit" is not a sentence. None of these names are proper nouns.
@@ -62,10 +69,11 @@ export function missingSlots(mix) {
   return REQUIRED_SLOTS.filter((slot) => !mix[slot]);
 }
 
-/** One random asset per family, for trying combinations quickly. */
-export function surprise(assets) {
+/** One random asset per recipe slot, for trying combinations quickly. */
+export function surprise(assets, families = null) {
+  const slots = families ? slotsFrom(families) : SLOT_ORDER;
   const mix = {};
-  for (const slot of SLOT_ORDER) {
+  for (const slot of slots) {
     const options = assets.filter((asset) => asset.family === slot && asset.hasArt);
     if (options.length) mix[slot] = options[Math.floor(Math.random() * options.length)];
   }
