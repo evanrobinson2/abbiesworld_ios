@@ -1,22 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { PLATES, plateById } from './plates';
 import { imagePrompt, missingSlots, sentence, slotsFrom, surprise } from './recipe';
-
-// The backgrounds exist to make a bad carve obvious. Magenta shows a halo that
-// white hides; the dark and treehouse plates show whether a sprite still reads
-// against the surfaces it will actually sit on in the app.
-const PLATES = [
-  {
-    id: 'checker',
-    label: 'Checkerboard',
-    css: 'repeating-conic-gradient(#e8eaef 0% 25%, #ffffff 0% 50%) 50% / 18px 18px',
-  },
-  { id: 'magenta', label: 'Halo test', css: '#ff00c8' },
-  { id: 'white', label: 'White', css: '#ffffff' },
-  { id: 'dark', label: 'Dark', css: '#1b1f2a' },
-  { id: 'treehouse', label: 'Treehouse', css: 'linear-gradient(180deg,#cfe8c8,#f2e2c4)' },
-];
 
 const SORTS = [
   { id: 'catalogue', label: 'Catalogue order' },
@@ -133,7 +119,7 @@ export default function Browser({ kinds, families, assets, generatedAt }) {
     );
   }
 
-  const activePlate = PLATES.find((entry) => entry.id === plate) ?? PLATES[0];
+  const activePlate = plateById(plate);
   const picked = slots.map((slot) => mix[slot]).filter(Boolean);
   const stillNeeded = missingSlots(mix);
   const filtersActive =

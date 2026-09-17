@@ -1,5 +1,6 @@
 import catalogue from '../data/assets.json';
-import Browser from './Browser';
+import styleCatalogue from '../data/styles.json';
+import App from './App';
 
 export default function Page() {
   const { kinds, families, assets, generatedAt } = catalogue;
@@ -13,7 +14,7 @@ export default function Page() {
         generated for the Decorator Machine and carved to transparency; the rest were already here and
         are classified from their path. Filter by kind, family, category, tag, or source; switch the
         background to judge a carve; and click ingredients to build a recipe and see the prompt the
-        machine would send.
+        machine would send. The studio makes new art from a topic and a style of your own.
       </p>
 
       <ul className="families">
@@ -35,7 +36,13 @@ export default function Page() {
         })}
       </ul>
 
-      <Browser kinds={kinds} families={families} assets={assets} generatedAt={generatedAt} />
+      <App
+        kinds={kinds}
+        families={families}
+        assets={assets}
+        styles={styleCatalogue.styles}
+        generatedAt={generatedAt}
+      />
     </main>
   );
 }

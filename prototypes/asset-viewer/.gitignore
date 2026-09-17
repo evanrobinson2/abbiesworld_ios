@@ -3,3 +3,10 @@ node_modules/
 out/
 .vercel/
 .vercel
+.env
+.env.*
+!.env.example
+
+# Written by the Next.js install, regenerated every time.
+AGENTS.md
+CLAUDE.md
