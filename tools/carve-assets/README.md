@@ -39,12 +39,29 @@ or kept the whole plate shows up.
 python3 tools/carve-assets/build_viewer_assets.py
 ```
 
-Builds the viewer's catalogue from two sources — essences from
-`DecoratorModels.swift` and every other ingredient family from
-`catalog/ingredients.json` — joins both with the carve report, and writes
+Builds the viewer's catalogue from three sources — essences from
+`DecoratorModels.swift`, every other generated family from
+`catalog/ingredients.json`, and everything already in the repo from
+`repo-assets.json` — joins the generated art with the carve report, and writes
 `prototypes/asset-viewer/data/assets.json` plus 384px WebP previews. It exits
 non-zero on a catalogue entry with no art, an asset with no recorded prompt, or
 a carved file with no catalogue entry. See `prototypes/asset-viewer/README.md`.
+
+## Index everything already in the repo
+
+```bash
+python3 tools/carve-assets/index_repo_assets.py
+```
+
+Walks the repo for images, groups an `.imageset` into one logical asset, and
+classifies each one from its path and filename into a kind and family. That is a
+heuristic and it is meant to be: hand-labelling a thousand files is not
+maintainable, and a coarse-but-honest bucket plus working search beats a perfect
+taxonomy nobody keeps up. Anything matching no rule lands in `unclassified` and
+is reported, which is the signal to add a rule.
+
+Writes 144px WebP thumbnails and `prototypes/asset-viewer/data/repo-assets.json`.
+Run it before `build_viewer_assets.py`.
 
 ## The ingredient catalogue
 
@@ -57,6 +74,13 @@ family can be restyled by editing one template.
 The recorded prompts are normalised to their family template rather than being
 byte-identical to the first generation, so regenerating gives equivalent art
 rather than a pixel-for-pixel repeat.
+
+Decorations are the exception. Their prompt is not templated: it is the composed
+recipe output from `prototypes/asset-viewer/app/recipe.js`, stored verbatim
+because that exact string is what produced the art. `npm run check` in the
+viewer recomposes every decoration's recipe and asserts it reproduces the stored
+prompt character for character, so the composer cannot drift away from the art
+it generated.
 
 ## Generating art that carves well
 

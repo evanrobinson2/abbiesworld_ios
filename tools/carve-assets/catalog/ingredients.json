@@ -1,6 +1,5 @@
 {
-  "$comment": "Source of truth for Decorator Machine ingredient art. Every asset records the prompt that made it, so any piece can be regenerated or restyled without guesswork. Full prompt = the family's promptTemplate with {subject} replaced. Essences are also described here, but their names, categories and emoji are read from DecoratorModels.swift at build time so the game catalogue stays authoritative.",
-
+  "$comment": "Source of truth for generated Decorator Machine art. A kind is the bucket an asset lives in for browsing; a family is the specific job it does. Only families marked recipeSlot are consumed by the machine. Every asset records the prompt that made it, so any piece can be regenerated or restyled without guesswork. Full prompt = the family's promptTemplate with {subject} replaced, except decorations, whose prompt is the composed recipe output from prototypes/asset-viewer/app/recipe.js and is stored verbatim; a check re-composes it to prove the two never drift.",
   "families": [
     {
       "id": "form",
@@ -8,120 +7,881 @@
       "question": "What is it?",
       "blurb": "The undecorated blank. Forms decide what the machine is building; everything else decides how it turns out.",
       "promptTemplate": "A {subject}, for a children's storybook game. Shown as a plain undecorated blank: {blank}, completely unpainted, no pattern, no print, no decoration of any kind, like an unpainted craft-store kit piece waiting to be decorated. Storybook illustration style, soft rounded shapes, thick clean dark outlines. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
-      "defaults": { "blank": "bare pale plywood" }
+      "defaults": {
+        "blank": "bare pale plywood"
+      },
+      "kind": "craftingItem",
+      "recipeSlot": true
     },
     {
       "id": "material",
       "label": "Material",
       "question": "What is it made of?",
       "blurb": "Raw stuff, shown as a bare sample rather than made into anything. Materials carry the look and the feel of the finished piece.",
-      "promptTemplate": "A raw material sample of {subject}, for a children's storybook game. Shown as a bare sample of the material on its own — a small neat stack, chunk or swatch — not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+      "promptTemplate": "A raw material sample of {subject}, for a children's storybook game. Shown as a bare sample of the material on its own — a small neat stack, chunk or swatch — not built into any object. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the sample fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "kind": "rawMaterial",
+      "recipeSlot": true
     },
     {
       "id": "essence",
       "label": "Essence",
       "question": "How does it feel?",
       "blurb": "Bottled mood. Essences do not change what a thing is, only the feeling it gives off.",
-      "promptTemplate": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing {subject}. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+      "promptTemplate": "A single whimsical glass potion bottle with a cork stopper, for a children's storybook game, containing {subject}. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the bottle fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "kind": "ingredient",
+      "recipeSlot": true
     },
     {
       "id": "enchantment",
       "label": "Enchantment",
       "question": "What does it do?",
       "blurb": "The trick the finished thing performs. This is where a couch becomes a couch that burps rainbows.",
-      "promptTemplate": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating {subject}. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+      "promptTemplate": "A small round enamel charm medallion on a tiny ring, for a children's storybook game, its face illustrating {subject}. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors, glossy enamel look. Centered composition, the charm fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "kind": "ingredient",
+      "recipeSlot": true
     },
     {
       "id": "trim",
       "label": "Trim",
       "question": "What is the finishing touch?",
       "blurb": "Haberdashery. Optional, cheap to add, and the fastest way to make two otherwise identical pieces feel different.",
-      "promptTemplate": "A haberdashery notion of {subject}, for a children's storybook game. Shown on its own as a neat coil, spool or sewing card, not attached to anything. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the notion fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+      "promptTemplate": "A haberdashery notion of {subject}, for a children's storybook game. Shown on its own as a neat coil, spool or sewing card, not attached to anything. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the notion fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers.",
+      "kind": "craftingItem",
+      "recipeSlot": true
+    },
+    {
+      "id": "tool",
+      "kind": "craftingItem",
+      "recipeSlot": false,
+      "label": "Tool",
+      "question": "What do you work it with?",
+      "blurb": "Child-safe workshop tools. Not consumed by a recipe; these gate what the workshop can do at all.",
+      "promptTemplate": "A {subject}, a well-loved child-safe craft tool for a children's storybook game. Shown on its own, not in use. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the tool fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "decoration",
+      "kind": "decoration",
+      "recipeSlot": false,
+      "label": "Decoration",
+      "question": "What came out?",
+      "blurb": "The machine's output. Each one was generated from the prompt its own recipe composes, so the pipeline is provable end to end.",
+      "promptTemplate": null
     }
   ],
-
   "ingredients": [
-    { "id": "form_chair", "name": "Little Chair", "family": "form", "category": "seating", "emoji": "\ud83e\ude91", "tags": ["sit", "small"],
-      "subject": "simple small wooden chair with four legs and a rounded back" },
-    { "id": "form_armchair", "name": "Squishy Armchair", "family": "form", "category": "seating", "emoji": "\ud83d\udecb\ufe0f", "tags": ["sit", "soft", "big"],
-      "subject": "plump rounded armchair with thick arms and a deep seat" },
-    { "id": "form_cushion", "name": "Floor Cushion", "family": "form", "category": "seating", "emoji": "\ud83e\uddf8", "tags": ["sit", "soft", "small"],
-      "subject": "big round floor cushion, like a beanbag pouffe", "blank": "bare undyed natural canvas" },
-    { "id": "form_bed", "name": "Cozy Bed", "family": "form", "category": "sleeping", "emoji": "\ud83d\udecf\ufe0f", "tags": ["sleep", "big"],
-      "subject": "small single bed with a tall headboard and a plain mattress", "blank": "bare pale plywood frame with an undyed canvas mattress" },
-    { "id": "form_lamp", "name": "Table Lamp", "family": "form", "category": "lighting", "emoji": "\ud83d\udca1", "tags": ["light", "small"],
-      "subject": "table lamp with a slim base and a plain drum shade", "blank": "bare pale plywood base with an undyed canvas shade" },
-    { "id": "form_shelf", "name": "Bookshelf", "family": "form", "category": "storage", "emoji": "\ud83d\udcda", "tags": ["store", "tall"],
-      "subject": "short bookshelf with three empty shelves" },
-    { "id": "form_toy_chest", "name": "Toy Chest", "family": "form", "category": "storage", "emoji": "\ud83e\uddf3", "tags": ["store", "lid"],
-      "subject": "chunky toy chest with a domed hinged lid, propped slightly open" },
-    { "id": "form_rug", "name": "Round Rug", "family": "form", "category": "textiles", "emoji": "\ud83e\uddf6", "tags": ["floor", "soft"],
-      "subject": "oval floor rug lying flat, seen at a slight angle", "blank": "bare undyed natural canvas with a plain woven edge" },
-    { "id": "form_curtains", "name": "Curtains", "family": "form", "category": "textiles", "emoji": "\ud83c\udfad", "tags": ["window", "soft", "tall"],
-      "subject": "pair of gathered curtains hanging from a short wooden rod", "blank": "bare undyed natural canvas with a plain plywood rod" },
-    { "id": "form_mirror", "name": "Standing Mirror", "family": "form", "category": "decor", "emoji": "\ud83e\ude9e", "tags": ["wall", "shiny"],
-      "subject": "round standing mirror in a plain frame on a little easel foot", "blank": "bare pale plywood frame with a plain pale silver mirror face" },
-
-    { "id": "mat_cloud_cotton", "name": "Cloud Cotton", "family": "material", "category": "soft", "emoji": "\u2601\ufe0f", "tags": ["soft", "white", "floaty"],
-      "subject": "cloud cotton: a neat folded stack of impossibly fluffy white cloud-like fabric, edges puffing into little clouds" },
-    { "id": "mat_knitted_yarn", "name": "Knitted Yarn", "family": "material", "category": "soft", "emoji": "\ud83e\uddf6", "tags": ["soft", "warm", "stripey"],
-      "subject": "knitted yarn: two fat balls of chunky wool in warm rainbow stripes with knitting stitches showing" },
-    { "id": "mat_velvet_plush", "name": "Velvet Plush", "family": "material", "category": "soft", "emoji": "\ud83c\udf9a\ufe0f", "tags": ["soft", "rich", "purple"],
-      "subject": "velvet plush: a thick roll of deep plum velvet with a soft sheen and a rolled cut edge" },
-    { "id": "mat_mossy_oak", "name": "Mossy Oak", "family": "material", "category": "wood", "emoji": "\ud83e\udeb5", "tags": ["wood", "green", "woodland"],
-      "subject": "mossy oak: two short stacked oak planks with bright green moss and tiny mushrooms growing along the grain" },
-    { "id": "mat_birch_bark", "name": "Birch Bark", "family": "material", "category": "wood", "emoji": "\ud83c\udf3f", "tags": ["wood", "white", "papery"],
-      "subject": "birch bark: a loose curl of white-and-charcoal birch bark, peeling like paper" },
-    { "id": "mat_rainbow_marble", "name": "Rainbow Marble", "family": "material", "category": "stone", "emoji": "\ud83e\udea8", "tags": ["hard", "shiny", "rainbow"],
-      "subject": "rainbow marble: a chunky polished block of stone veined with swirling pastel rainbow marbling" },
-    { "id": "mat_seashell_pearl", "name": "Seashell Pearl", "family": "material", "category": "stone", "emoji": "\ud83d\udc1a", "tags": ["hard", "shiny", "seaside"],
-      "subject": "seashell pearl: a little heap of iridescent spiral seashells and two round pearls" },
-    { "id": "mat_tin_foil", "name": "Crinkled Tin", "family": "material", "category": "metal", "emoji": "\ud83e\uddf4", "tags": ["metal", "shiny", "crinkly"],
-      "subject": "crinkled tin: a scrunched sheet of bright silver tin foil with sharp creases catching the light" },
-    { "id": "mat_star_silver", "name": "Star Silver", "family": "material", "category": "metal", "emoji": "\u2728", "tags": ["metal", "shiny", "magic"],
-      "subject": "star silver: a small ingot of glowing pale silver metal with tiny stars suspended inside it" },
-    { "id": "mat_gingerbread", "name": "Gingerbread", "family": "material", "category": "sweet", "emoji": "\ud83c\udf6a", "tags": ["edible", "brown", "warm"],
-      "subject": "gingerbread: three stacked slabs of warm brown gingerbread piped with white icing along the edges" },
-    { "id": "mat_candy_glass", "name": "Candy Glass", "family": "material", "category": "sweet", "emoji": "\ud83c\udf6d", "tags": ["edible", "shiny", "pink"],
-      "subject": "candy glass: two flat translucent panes of pink and orange hard candy, glossy with chipped corners" },
-    { "id": "mat_honey_amber", "name": "Honey Amber", "family": "material", "category": "sweet", "emoji": "\ud83c\udf6f", "tags": ["edible", "golden", "sticky"],
-      "subject": "honey amber: a thick golden lump of set honey resin with a slow drip and a tiny bee wing caught inside" },
-    { "id": "mat_dragon_scale", "name": "Dragon Scale", "family": "material", "category": "curious", "emoji": "\ud83d\udc09", "tags": ["magic", "green", "shiny"],
-      "subject": "dragon scale: a small fan of overlapping emerald-green scales with gold edges, friendly rather than fierce" },
-    { "id": "mat_moon_paper", "name": "Moon Paper", "family": "material", "category": "curious", "emoji": "\ud83c\udf12", "tags": ["magic", "papery", "glowing"],
-      "subject": "moon paper: a few loose sheets of thin glowing pale-blue paper, softly luminous with torn edges" },
-
-    { "id": "ench_glows_at_night", "name": "Glows at Night", "family": "enchantment", "category": "light", "emoji": "\ud83c\udf1d", "tags": ["light", "calm"],
-      "subject": "a thing that glows softly at night: a warm glowing crescent moon surrounded by gentle rays" },
-    { "id": "ench_changes_colour", "name": "Changes Colour", "family": "enchantment", "category": "light", "emoji": "\ud83c\udfa8", "tags": ["light", "playful"],
-      "subject": "a thing that changes colour: a circle split into four bright colour wedges with little swap arrows between them" },
-    { "id": "ench_purrs_when_you_sit", "name": "Purrs When You Sit", "family": "enchantment", "category": "sound", "emoji": "\ud83d\udc08", "tags": ["sound", "cozy"],
-      "subject": "a thing that purrs when you sit on it: a curled-up contented cat with little purr ripples rising from it" },
-    { "id": "ench_sings_lullabies", "name": "Sings Lullabies", "family": "enchantment", "category": "sound", "emoji": "\ud83c\udfb5", "tags": ["sound", "calm"],
-      "subject": "a thing that sings lullabies: three soft curved music notes drifting over a tiny sleeping star" },
-    { "id": "ench_floats_an_inch", "name": "Floats an Inch Up", "family": "enchantment", "category": "motion", "emoji": "\ud83c\udf88", "tags": ["motion", "magic"],
-      "subject": "a thing that floats an inch off the floor: a small rounded shape hovering above a dashed ground line with little lift sparkles beneath it" },
-    { "id": "ench_grows_flowers", "name": "Grows Flowers", "family": "enchantment", "category": "growth", "emoji": "\ud83c\udf3c", "tags": ["growth", "green"],
-      "subject": "a thing that grows flowers: a curling green vine sprouting three cheerful daisies" },
-    { "id": "ench_burps_rainbows", "name": "Burps Rainbows", "family": "enchantment", "category": "mischief", "emoji": "\ud83c\udf08", "tags": ["mischief", "silly", "rainbow"],
-      "subject": "a thing that burps rainbows: a comical puff of rainbow arcs and colourful dots bursting upward" },
-    { "id": "ench_hides_your_socks", "name": "Hides Your Socks", "family": "enchantment", "category": "mischief", "emoji": "\ud83e\udde6", "tags": ["mischief", "silly"],
-      "subject": "a thing that hides your socks: one striped sock vanishing into a cheeky little trapdoor" },
-
-    { "id": "trim_pompom_fringe", "name": "Pompom Fringe", "family": "trim", "category": "fringe", "emoji": "\ud83d\udd34", "tags": ["soft", "bobbly", "rainbow"],
-      "subject": "pompom fringe: a loose coil of braid hung with fat rainbow pompoms" },
-    { "id": "trim_lace_edging", "name": "Lace Edging", "family": "trim", "category": "fringe", "emoji": "\ud83e\udd7c", "tags": ["soft", "white", "delicate"],
-      "subject": "lace edging: a neat coil of scalloped cream lace trim" },
-    { "id": "trim_brass_knobs", "name": "Brass Knobs", "family": "trim", "category": "hardware", "emoji": "\ud83d\udeaa", "tags": ["metal", "shiny", "golden"],
-      "subject": "brass knobs: four round polished brass drawer knobs laid out on a small card" },
-    { "id": "trim_button_card", "name": "Button Card", "family": "trim", "category": "hardware", "emoji": "\ud83d\udd35", "tags": ["colourful", "small"],
-      "subject": "a button card: six mismatched colourful buttons stitched onto a little card" },
-    { "id": "trim_tiny_bells", "name": "Tiny Bells", "family": "trim", "category": "hardware", "emoji": "\ud83d\udd14", "tags": ["metal", "sound", "golden"],
-      "subject": "tiny bells: three small round golden jingle bells threaded on a short red cord" },
-    { "id": "trim_ribbon_bows", "name": "Ribbon Bows", "family": "trim", "category": "ribbon", "emoji": "\ud83c\udf80", "tags": ["soft", "pink", "pretty"],
-      "subject": "ribbon bows: a spool of satin ribbon with two tied bows resting beside it" }
+    {
+      "id": "form_chair",
+      "name": "Little Chair",
+      "family": "form",
+      "category": "seating",
+      "emoji": "🪑",
+      "tags": [
+        "sit",
+        "small"
+      ],
+      "subject": "simple small wooden chair with four legs and a rounded back"
+    },
+    {
+      "id": "form_armchair",
+      "name": "Squishy Armchair",
+      "family": "form",
+      "category": "seating",
+      "emoji": "🛋️",
+      "tags": [
+        "sit",
+        "soft",
+        "big"
+      ],
+      "subject": "plump rounded armchair with thick arms and a deep seat"
+    },
+    {
+      "id": "form_cushion",
+      "name": "Floor Cushion",
+      "family": "form",
+      "category": "seating",
+      "emoji": "🧸",
+      "tags": [
+        "sit",
+        "soft",
+        "small"
+      ],
+      "subject": "big round floor cushion, like a beanbag pouffe",
+      "blank": "bare undyed natural canvas"
+    },
+    {
+      "id": "form_bed",
+      "name": "Cozy Bed",
+      "family": "form",
+      "category": "sleeping",
+      "emoji": "🛏️",
+      "tags": [
+        "sleep",
+        "big"
+      ],
+      "subject": "small single bed with a tall headboard and a plain mattress",
+      "blank": "bare pale plywood frame with an undyed canvas mattress"
+    },
+    {
+      "id": "form_lamp",
+      "name": "Table Lamp",
+      "family": "form",
+      "category": "lighting",
+      "emoji": "💡",
+      "tags": [
+        "light",
+        "small"
+      ],
+      "subject": "table lamp with a slim base and a plain drum shade",
+      "blank": "bare pale plywood base with an undyed canvas shade"
+    },
+    {
+      "id": "form_shelf",
+      "name": "Bookshelf",
+      "family": "form",
+      "category": "storage",
+      "emoji": "📚",
+      "tags": [
+        "store",
+        "tall"
+      ],
+      "subject": "short bookshelf with three empty shelves"
+    },
+    {
+      "id": "form_toy_chest",
+      "name": "Toy Chest",
+      "family": "form",
+      "category": "storage",
+      "emoji": "🧳",
+      "tags": [
+        "store",
+        "lid"
+      ],
+      "subject": "chunky toy chest with a domed hinged lid, propped slightly open"
+    },
+    {
+      "id": "form_rug",
+      "name": "Round Rug",
+      "family": "form",
+      "category": "textiles",
+      "emoji": "🧶",
+      "tags": [
+        "floor",
+        "soft"
+      ],
+      "subject": "oval floor rug lying flat, seen at a slight angle",
+      "blank": "bare undyed natural canvas with a plain woven edge"
+    },
+    {
+      "id": "form_curtains",
+      "name": "Curtains",
+      "family": "form",
+      "category": "textiles",
+      "emoji": "🎭",
+      "tags": [
+        "window",
+        "soft",
+        "tall"
+      ],
+      "subject": "pair of gathered curtains hanging from a short wooden rod",
+      "blank": "bare undyed natural canvas with a plain plywood rod"
+    },
+    {
+      "id": "form_mirror",
+      "name": "Standing Mirror",
+      "family": "form",
+      "category": "decor",
+      "emoji": "🪞",
+      "tags": [
+        "wall",
+        "shiny"
+      ],
+      "subject": "round standing mirror in a plain frame on a little easel foot",
+      "blank": "bare pale plywood frame with a plain pale silver mirror face"
+    },
+    {
+      "id": "mat_cloud_cotton",
+      "name": "Cloud Cotton",
+      "family": "material",
+      "category": "soft",
+      "emoji": "☁️",
+      "tags": [
+        "soft",
+        "white",
+        "floaty"
+      ],
+      "subject": "cloud cotton: a neat folded stack of impossibly fluffy white cloud-like fabric, edges puffing into little clouds"
+    },
+    {
+      "id": "mat_knitted_yarn",
+      "name": "Knitted Yarn",
+      "family": "material",
+      "category": "soft",
+      "emoji": "🧶",
+      "tags": [
+        "soft",
+        "warm",
+        "stripey"
+      ],
+      "subject": "knitted yarn: two fat balls of chunky wool in warm rainbow stripes with knitting stitches showing"
+    },
+    {
+      "id": "mat_velvet_plush",
+      "name": "Velvet Plush",
+      "family": "material",
+      "category": "soft",
+      "emoji": "🎚️",
+      "tags": [
+        "soft",
+        "rich",
+        "purple"
+      ],
+      "subject": "velvet plush: a thick roll of deep plum velvet with a soft sheen and a rolled cut edge"
+    },
+    {
+      "id": "mat_mossy_oak",
+      "name": "Mossy Oak",
+      "family": "material",
+      "category": "wood",
+      "emoji": "🪵",
+      "tags": [
+        "wood",
+        "green",
+        "woodland"
+      ],
+      "subject": "mossy oak: two short stacked oak planks with bright green moss and tiny mushrooms growing along the grain"
+    },
+    {
+      "id": "mat_birch_bark",
+      "name": "Birch Bark",
+      "family": "material",
+      "category": "wood",
+      "emoji": "🌿",
+      "tags": [
+        "wood",
+        "white",
+        "papery"
+      ],
+      "subject": "birch bark: a loose curl of white-and-charcoal birch bark, peeling like paper"
+    },
+    {
+      "id": "mat_rainbow_marble",
+      "name": "Rainbow Marble",
+      "family": "material",
+      "category": "stone",
+      "emoji": "🪨",
+      "tags": [
+        "hard",
+        "shiny",
+        "rainbow"
+      ],
+      "subject": "rainbow marble: a chunky polished block of stone veined with swirling pastel rainbow marbling"
+    },
+    {
+      "id": "mat_seashell_pearl",
+      "name": "Seashell Pearl",
+      "family": "material",
+      "category": "stone",
+      "emoji": "🐚",
+      "tags": [
+        "hard",
+        "shiny",
+        "seaside"
+      ],
+      "subject": "seashell pearl: a little heap of iridescent spiral seashells and two round pearls"
+    },
+    {
+      "id": "mat_tin_foil",
+      "name": "Crinkled Tin",
+      "family": "material",
+      "category": "metal",
+      "emoji": "🧴",
+      "tags": [
+        "metal",
+        "shiny",
+        "crinkly"
+      ],
+      "subject": "crinkled tin: a scrunched sheet of bright silver tin foil with sharp creases catching the light"
+    },
+    {
+      "id": "mat_star_silver",
+      "name": "Star Silver",
+      "family": "material",
+      "category": "metal",
+      "emoji": "✨",
+      "tags": [
+        "metal",
+        "shiny",
+        "magic"
+      ],
+      "subject": "star silver: a small ingot of glowing pale silver metal with tiny stars suspended inside it"
+    },
+    {
+      "id": "mat_gingerbread",
+      "name": "Gingerbread",
+      "family": "material",
+      "category": "sweet",
+      "emoji": "🍪",
+      "tags": [
+        "edible",
+        "brown",
+        "warm"
+      ],
+      "subject": "gingerbread: three stacked slabs of warm brown gingerbread piped with white icing along the edges"
+    },
+    {
+      "id": "mat_candy_glass",
+      "name": "Candy Glass",
+      "family": "material",
+      "category": "sweet",
+      "emoji": "🍭",
+      "tags": [
+        "edible",
+        "shiny",
+        "pink"
+      ],
+      "subject": "candy glass: two flat translucent panes of pink and orange hard candy, glossy with chipped corners"
+    },
+    {
+      "id": "mat_honey_amber",
+      "name": "Honey Amber",
+      "family": "material",
+      "category": "sweet",
+      "emoji": "🍯",
+      "tags": [
+        "edible",
+        "golden",
+        "sticky"
+      ],
+      "subject": "honey amber: a thick golden lump of set honey resin with a slow drip and a tiny bee wing caught inside"
+    },
+    {
+      "id": "mat_dragon_scale",
+      "name": "Dragon Scale",
+      "family": "material",
+      "category": "curious",
+      "emoji": "🐉",
+      "tags": [
+        "magic",
+        "green",
+        "shiny"
+      ],
+      "subject": "dragon scale: a small fan of overlapping emerald-green scales with gold edges, friendly rather than fierce"
+    },
+    {
+      "id": "mat_moon_paper",
+      "name": "Moon Paper",
+      "family": "material",
+      "category": "curious",
+      "emoji": "🌒",
+      "tags": [
+        "magic",
+        "papery",
+        "glowing"
+      ],
+      "subject": "moon paper: a few loose sheets of thin glowing pale-blue paper, softly luminous with torn edges"
+    },
+    {
+      "id": "ench_glows_at_night",
+      "name": "Glows at Night",
+      "family": "enchantment",
+      "category": "light",
+      "emoji": "🌝",
+      "tags": [
+        "light",
+        "calm"
+      ],
+      "subject": "a thing that glows softly at night: a warm glowing crescent moon surrounded by gentle rays"
+    },
+    {
+      "id": "ench_changes_colour",
+      "name": "Changes Colour",
+      "family": "enchantment",
+      "category": "light",
+      "emoji": "🎨",
+      "tags": [
+        "light",
+        "playful"
+      ],
+      "subject": "a thing that changes colour: a circle split into four bright colour wedges with little swap arrows between them"
+    },
+    {
+      "id": "ench_purrs_when_you_sit",
+      "name": "Purrs When You Sit",
+      "family": "enchantment",
+      "category": "sound",
+      "emoji": "🐈",
+      "tags": [
+        "sound",
+        "cozy"
+      ],
+      "subject": "a thing that purrs when you sit on it: a curled-up contented cat with little purr ripples rising from it"
+    },
+    {
+      "id": "ench_sings_lullabies",
+      "name": "Sings Lullabies",
+      "family": "enchantment",
+      "category": "sound",
+      "emoji": "🎵",
+      "tags": [
+        "sound",
+        "calm"
+      ],
+      "subject": "a thing that sings lullabies: three soft curved music notes drifting over a tiny sleeping star"
+    },
+    {
+      "id": "ench_floats_an_inch",
+      "name": "Floats an Inch Up",
+      "family": "enchantment",
+      "category": "motion",
+      "emoji": "🎈",
+      "tags": [
+        "motion",
+        "magic"
+      ],
+      "subject": "a thing that floats an inch off the floor: a small rounded shape hovering above a dashed ground line with little lift sparkles beneath it"
+    },
+    {
+      "id": "ench_grows_flowers",
+      "name": "Grows Flowers",
+      "family": "enchantment",
+      "category": "growth",
+      "emoji": "🌼",
+      "tags": [
+        "growth",
+        "green"
+      ],
+      "subject": "a thing that grows flowers: a curling green vine sprouting three cheerful daisies"
+    },
+    {
+      "id": "ench_burps_rainbows",
+      "name": "Burps Rainbows",
+      "family": "enchantment",
+      "category": "mischief",
+      "emoji": "🌈",
+      "tags": [
+        "mischief",
+        "silly",
+        "rainbow"
+      ],
+      "subject": "a thing that burps rainbows: a comical puff of rainbow arcs and colourful dots bursting upward"
+    },
+    {
+      "id": "ench_hides_your_socks",
+      "name": "Hides Your Socks",
+      "family": "enchantment",
+      "category": "mischief",
+      "emoji": "🧦",
+      "tags": [
+        "mischief",
+        "silly"
+      ],
+      "subject": "a thing that hides your socks: one striped sock vanishing into a cheeky little trapdoor"
+    },
+    {
+      "id": "trim_pompom_fringe",
+      "name": "Pompom Fringe",
+      "family": "trim",
+      "category": "fringe",
+      "emoji": "🔴",
+      "tags": [
+        "soft",
+        "bobbly",
+        "rainbow"
+      ],
+      "subject": "pompom fringe: a loose coil of braid hung with fat rainbow pompoms"
+    },
+    {
+      "id": "trim_lace_edging",
+      "name": "Lace Edging",
+      "family": "trim",
+      "category": "fringe",
+      "emoji": "🥼",
+      "tags": [
+        "soft",
+        "white",
+        "delicate"
+      ],
+      "subject": "lace edging: a neat coil of scalloped cream lace trim"
+    },
+    {
+      "id": "trim_brass_knobs",
+      "name": "Brass Knobs",
+      "family": "trim",
+      "category": "hardware",
+      "emoji": "🚪",
+      "tags": [
+        "metal",
+        "shiny",
+        "golden"
+      ],
+      "subject": "brass knobs: four round polished brass drawer knobs laid out on a small card"
+    },
+    {
+      "id": "trim_button_card",
+      "name": "Button Card",
+      "family": "trim",
+      "category": "hardware",
+      "emoji": "🔵",
+      "tags": [
+        "colourful",
+        "small"
+      ],
+      "subject": "a button card: six mismatched colourful buttons stitched onto a little card"
+    },
+    {
+      "id": "trim_tiny_bells",
+      "name": "Tiny Bells",
+      "family": "trim",
+      "category": "hardware",
+      "emoji": "🔔",
+      "tags": [
+        "metal",
+        "sound",
+        "golden"
+      ],
+      "subject": "tiny bells: three small round golden jingle bells threaded on a short red cord"
+    },
+    {
+      "id": "trim_ribbon_bows",
+      "name": "Ribbon Bows",
+      "family": "trim",
+      "category": "ribbon",
+      "emoji": "🎀",
+      "tags": [
+        "soft",
+        "pink",
+        "pretty"
+      ],
+      "subject": "ribbon bows: a spool of satin ribbon with two tied bows resting beside it"
+    },
+    {
+      "id": "tool_needle_thread",
+      "name": "Needle and Thread",
+      "family": "tool",
+      "category": "sewing",
+      "emoji": "🧵",
+      "tags": [
+        "sew",
+        "soft"
+      ],
+      "subject": "chunky child-safe needle already threaded with bright thread, resting beside a small spool"
+    },
+    {
+      "id": "tool_scissors",
+      "name": "Craft Scissors",
+      "family": "tool",
+      "category": "sewing",
+      "emoji": "✂️",
+      "tags": [
+        "cut",
+        "colourful"
+      ],
+      "subject": "pair of round-tipped child-safe craft scissors with bright coloured handles"
+    },
+    {
+      "id": "tool_measuring_tape",
+      "name": "Measuring Tape",
+      "family": "tool",
+      "category": "sewing",
+      "emoji": "📏",
+      "tags": [
+        "measure",
+        "soft"
+      ],
+      "subject": "soft cloth measuring tape loosely coiled with one end curling upward"
+    },
+    {
+      "id": "tool_glue_pot",
+      "name": "Glue Pot",
+      "family": "tool",
+      "category": "finishing",
+      "emoji": "🫙",
+      "tags": [
+        "stick",
+        "white"
+      ],
+      "subject": "round pot of white craft glue with a little wooden applicator stick resting in it and one glossy drip down the side"
+    },
+    {
+      "id": "tool_paintbrushes",
+      "name": "Paintbrushes",
+      "family": "tool",
+      "category": "finishing",
+      "emoji": "🖌️",
+      "tags": [
+        "paint",
+        "colourful"
+      ],
+      "subject": "three paintbrushes of different sizes with paint-stained bristles, bundled together"
+    },
+    {
+      "id": "tool_stencil_set",
+      "name": "Stencil Set",
+      "family": "tool",
+      "category": "finishing",
+      "emoji": "⭐",
+      "tags": [
+        "pattern",
+        "papery"
+      ],
+      "subject": "two overlapping stencil sheets cut with simple star and flower shapes"
+    },
+    {
+      "id": "tool_hand_saw",
+      "name": "Little Hand Saw",
+      "family": "tool",
+      "category": "woodwork",
+      "emoji": "🪚",
+      "tags": [
+        "cut",
+        "wood"
+      ],
+      "subject": "small blunt-toothed hand saw with a rounded wooden handle"
+    },
+    {
+      "id": "tool_sanding_block",
+      "name": "Sanding Block",
+      "family": "tool",
+      "category": "woodwork",
+      "emoji": "🧱",
+      "tags": [
+        "smooth",
+        "wood"
+      ],
+      "subject": "sanding block wrapped in speckled sandpaper with a few curls of wood shaving beside it"
+    },
+    {
+      "id": "tool_tack_hammer",
+      "name": "Tack Hammer",
+      "family": "tool",
+      "category": "woodwork",
+      "emoji": "🔨",
+      "tags": [
+        "hit",
+        "metal"
+      ],
+      "subject": "small wooden-handled tack hammer lying beside four little brass tacks"
+    },
+    {
+      "id": "tool_spring_clamp",
+      "name": "Spring Clamp",
+      "family": "tool",
+      "category": "woodwork",
+      "emoji": "🗜️",
+      "tags": [
+        "hold",
+        "orange"
+      ],
+      "subject": "chunky orange spring clamp with soft rubber jaws"
+    },
+    {
+      "id": "deco_gingerbread_purr_chair",
+      "name": "Gingerbread Purr Chair",
+      "family": "decoration",
+      "category": "seating",
+      "emoji": "🍪",
+      "tags": [
+        "sit",
+        "edible",
+        "cozy"
+      ],
+      "recipe": [
+        "form_chair",
+        "mat_gingerbread",
+        "cozy_nap_energy",
+        "ench_purrs_when_you_sit",
+        "trim_pompom_fringe"
+      ],
+      "readback": "A Little Chair made of Gingerbread, with Cozy Nap Energy, that purrs when you sit, finished with Pompom Fringe.",
+      "prompt": "A whimsical little chair for a child's bedroom, built from gingerbread, radiating cozy nap energy, enchanted so that it purrs when you sit, finished with pompom fringe. Emphasise: edible, brown, warm. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_cloud_cotton_pouffe",
+      "name": "Cloud Cotton Pouffe",
+      "family": "decoration",
+      "category": "seating",
+      "emoji": "☁️",
+      "tags": [
+        "sit",
+        "soft",
+        "floaty"
+      ],
+      "recipe": [
+        "form_cushion",
+        "mat_cloud_cotton",
+        "cloud_fluff",
+        "ench_floats_an_inch"
+      ],
+      "readback": "A Floor Cushion made of Cloud Cotton, with Cloud Fluff, that floats an inch up.",
+      "prompt": "A whimsical floor cushion for a child's bedroom, built from cloud cotton, radiating cloud fluff, enchanted so that it floats an inch up. Emphasise: soft, white, floaty. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_velvet_purr_armchair",
+      "name": "Velvet Purr Armchair",
+      "family": "decoration",
+      "category": "seating",
+      "emoji": "🐱",
+      "tags": [
+        "sit",
+        "soft",
+        "cozy"
+      ],
+      "recipe": [
+        "form_armchair",
+        "mat_velvet_plush",
+        "warm_hug_aura",
+        "ench_purrs_when_you_sit",
+        "trim_pompom_fringe"
+      ],
+      "readback": "A Squishy Armchair made of Velvet Plush, with Warm Hug Aura, that purrs when you sit, finished with Pompom Fringe.",
+      "prompt": "A whimsical squishy armchair for a child's bedroom, built from velvet plush, radiating warm hug aura, enchanted so that it purrs when you sit, finished with pompom fringe. Emphasise: soft, rich, purple. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_star_silver_bed",
+      "name": "Star Silver Bed",
+      "family": "decoration",
+      "category": "sleeping",
+      "emoji": "✨",
+      "tags": [
+        "sleep",
+        "magic",
+        "calm"
+      ],
+      "recipe": [
+        "form_bed",
+        "mat_star_silver",
+        "starlight_dust",
+        "ench_sings_lullabies",
+        "trim_lace_edging"
+      ],
+      "readback": "A Cozy Bed made of Star Silver, with Starlight Dust, that sings lullabies, finished with Lace Edging.",
+      "prompt": "A whimsical cozy bed for a child's bedroom, built from star silver, radiating starlight dust, enchanted so that it sings lullabies, finished with lace edging. Emphasise: metal, shiny, magic. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_marble_rainbow_lamp",
+      "name": "Marble Rainbow Lamp",
+      "family": "decoration",
+      "category": "lighting",
+      "emoji": "🌈",
+      "tags": [
+        "light",
+        "rainbow",
+        "shiny"
+      ],
+      "recipe": [
+        "form_lamp",
+        "mat_rainbow_marble",
+        "rainbow_hiccup",
+        "ench_glows_at_night",
+        "trim_tiny_bells"
+      ],
+      "readback": "A Table Lamp made of Rainbow Marble, with Rainbow Hiccup, that glows at night, finished with Tiny Bells.",
+      "prompt": "A whimsical table lamp for a child's bedroom, built from rainbow marble, radiating rainbow hiccup, enchanted so that it glows at night, finished with tiny bells. Emphasise: hard, shiny, rainbow. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_mossy_oak_bookshelf",
+      "name": "Mossy Oak Bookshelf",
+      "family": "decoration",
+      "category": "storage",
+      "emoji": "🌿",
+      "tags": [
+        "store",
+        "wood",
+        "green"
+      ],
+      "recipe": [
+        "form_shelf",
+        "mat_mossy_oak",
+        "frog_song",
+        "ench_grows_flowers"
+      ],
+      "readback": "A Bookshelf made of Mossy Oak, with Frog Song, that grows flowers.",
+      "prompt": "A whimsical bookshelf for a child's bedroom, built from mossy oak, radiating frog song, enchanted so that it grows flowers. Emphasise: wood, green, woodland. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_honey_amber_toy_chest",
+      "name": "Honey Amber Toy Chest",
+      "family": "decoration",
+      "category": "storage",
+      "emoji": "🍯",
+      "tags": [
+        "store",
+        "golden",
+        "silly"
+      ],
+      "recipe": [
+        "form_toy_chest",
+        "mat_honey_amber",
+        "pocket_giggles",
+        "ench_hides_your_socks",
+        "trim_brass_knobs"
+      ],
+      "readback": "A Toy Chest made of Honey Amber, with Pocket Full of Giggles, that hides your socks, finished with Brass Knobs.",
+      "prompt": "A whimsical toy chest for a child's bedroom, built from honey amber, radiating pocket full of giggles, enchanted so that it hides your socks, finished with brass knobs. Emphasise: edible, golden, sticky. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_seashell_moon_rug",
+      "name": "Seashell Moon Rug",
+      "family": "decoration",
+      "category": "textiles",
+      "emoji": "🐚",
+      "tags": [
+        "floor",
+        "seaside",
+        "shiny"
+      ],
+      "recipe": [
+        "form_rug",
+        "mat_seashell_pearl",
+        "moonbeam",
+        "ench_changes_colour",
+        "trim_lace_edging"
+      ],
+      "readback": "A Round Rug made of Seashell Pearl, with Moonbeam, that changes colour, finished with Lace Edging.",
+      "prompt": "A whimsical round rug for a child's bedroom, built from seashell pearl, radiating moonbeam, enchanted so that it changes colour, finished with lace edging. Emphasise: hard, shiny, seaside. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_moon_paper_curtains",
+      "name": "Moon Paper Curtains",
+      "family": "decoration",
+      "category": "textiles",
+      "emoji": "🌒",
+      "tags": [
+        "window",
+        "glowing",
+        "calm"
+      ],
+      "recipe": [
+        "form_curtains",
+        "mat_moon_paper",
+        "sleepy_mumbles",
+        "ench_glows_at_night"
+      ],
+      "readback": "A Curtains made of Moon Paper, with Sleepy Mumbles, that glows at night.",
+      "prompt": "A whimsical curtains for a child's bedroom, built from moon paper, radiating sleepy mumbles, enchanted so that it glows at night. Emphasise: magic, papery, glowing. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    },
+    {
+      "id": "deco_candy_glass_mirror",
+      "name": "Candy Glass Mirror",
+      "family": "decoration",
+      "category": "decor",
+      "emoji": "🍭",
+      "tags": [
+        "wall",
+        "pink",
+        "shiny"
+      ],
+      "recipe": [
+        "form_mirror",
+        "mat_candy_glass",
+        "bubblegum_dream",
+        "ench_changes_colour",
+        "trim_ribbon_bows"
+      ],
+      "readback": "A Standing Mirror made of Candy Glass, with Bubblegum Dream, that changes colour, finished with Ribbon Bows.",
+      "prompt": "A whimsical standing mirror for a child's bedroom, built from candy glass, radiating bubblegum dream, enchanted so that it changes colour, finished with ribbon bows. Emphasise: edible, shiny, pink. Storybook illustration style, soft rounded shapes, thick clean dark outlines, bright friendly colors. Centered composition, the object fills most of the frame. Completely flat solid light gray background, absolutely no gradient, no drop shadow, no scenery, no text, no letters, no numbers."
+    }
   ],
-
   "essenceSubjects": {
     "cozy_nap_energy": "Cozy Nap Energy: a tiny sleeping crescent moon and a small soft pillow floating inside swirling pale lavender mist",
     "giggle_fizz": "Giggle Fizz: fizzy popping yellow and orange bubbles bursting upward with tiny star sparkles inside bright lemon-yellow liquid",
@@ -148,5 +908,47 @@
     "upside_down_tuesday": "Upside-Down Tuesday: a small upside-down house with an upside-down smiling sun, everything comically inverted, inside swirling turquoise liquid",
     "pocket_giggles": "Pocket Full of Giggles: a small patched trouser pocket overflowing with bouncing round laughing faces and happy bubbles, inside sunny tangerine liquid",
     "dancing_shadows": "Dancing Shadows: three playful rounded purple shadow silhouette figures mid-dance with linked arms, inside deep dusk lavender liquid"
-  }
+  },
+  "kinds": [
+    {
+      "id": "ingredient",
+      "label": "Ingredient",
+      "blurb": "Dumped into the machine. Abstract inputs that flavour the result without deciding what it is."
+    },
+    {
+      "id": "rawMaterial",
+      "label": "Raw material",
+      "blurb": "Physical stuff the thing is actually made of. Carries the look and the feel."
+    },
+    {
+      "id": "craftingItem",
+      "label": "Crafting item",
+      "blurb": "Blanks, notions and tools — the workshop side of the machine rather than the magic side."
+    },
+    {
+      "id": "decoration",
+      "label": "Decoration",
+      "blurb": "Finished output. What lands in the player's inventory and gets placed in a room."
+    },
+    {
+      "id": "sceneArt",
+      "label": "Scene art",
+      "blurb": "Places: maps, scene backdrops, POI exteriors and interiors."
+    },
+    {
+      "id": "characterArt",
+      "label": "Character art",
+      "blurb": "Creatures, buddies, outfits and actors."
+    },
+    {
+      "id": "interfaceArt",
+      "label": "Interface art",
+      "blurb": "Icons, buttons, app icons and mascots."
+    },
+    {
+      "id": "reference",
+      "label": "Reference",
+      "blurb": "Concept sheets and pipeline working files. Not shipped, kept for provenance."
+    }
+  ]
 }

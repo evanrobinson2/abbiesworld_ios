@@ -1,6 +1,216 @@
 {
   "carved": [
     {
+      "source": "deco_candy_glass_mirror.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        219,
+        219,
+        219
+      ],
+      "trimmedTo": [
+        841,
+        987
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 51.0
+    },
+    {
+      "source": "deco_cloud_cotton_pouffe.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        197,
+        196,
+        196
+      ],
+      "trimmedTo": [
+        925,
+        762
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 46.5
+    },
+    {
+      "source": "deco_gingerbread_purr_chair.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        218,
+        217,
+        218
+      ],
+      "trimmedTo": [
+        819,
+        881
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 64.0
+    },
+    {
+      "source": "deco_honey_amber_toy_chest.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        225,
+        223,
+        224
+      ],
+      "trimmedTo": [
+        846,
+        931
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 74.7
+    },
+    {
+      "source": "deco_marble_rainbow_lamp.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        219,
+        219,
+        219
+      ],
+      "trimmedTo": [
+        592,
+        926
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 39.3
+    },
+    {
+      "source": "deco_moon_paper_curtains.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        213,
+        212,
+        213
+      ],
+      "trimmedTo": [
+        865,
+        994
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 59.5
+    },
+    {
+      "source": "deco_mossy_oak_bookshelf.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        220,
+        220,
+        220
+      ],
+      "trimmedTo": [
+        899,
+        958
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 60.6
+    },
+    {
+      "source": "deco_seashell_moon_rug.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        210,
+        210,
+        210
+      ],
+      "trimmedTo": [
+        979,
+        974
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 72.0
+    },
+    {
+      "source": "deco_star_silver_bed.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        226,
+        225,
+        225
+      ],
+      "trimmedTo": [
+        970,
+        919
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 54.9
+    },
+    {
+      "source": "deco_velvet_purr_armchair.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        217,
+        216,
+        216
+      ],
+      "trimmedTo": [
+        848,
+        911
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 65.7
+    },
+    {
       "source": "ench_burps_rainbows.png",
       "sourceSize": [
         1024,
@@ -1196,6 +1406,216 @@
         512
       ],
       "coveragePct": 53.4
+    },
+    {
+      "source": "tool_glue_pot.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        212,
+        212,
+        212
+      ],
+      "trimmedTo": [
+        581,
+        813
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 51.5
+    },
+    {
+      "source": "tool_hand_saw.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        217,
+        216,
+        216
+      ],
+      "trimmedTo": [
+        888,
+        802
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 43.5
+    },
+    {
+      "source": "tool_measuring_tape.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        214,
+        213,
+        213
+      ],
+      "trimmedTo": [
+        864,
+        708
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 52.1
+    },
+    {
+      "source": "tool_needle_thread.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        219,
+        219,
+        219
+      ],
+      "trimmedTo": [
+        681,
+        839
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 37.5
+    },
+    {
+      "source": "tool_paintbrushes.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        231,
+        231,
+        231
+      ],
+      "trimmedTo": [
+        715,
+        906
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 36.6
+    },
+    {
+      "source": "tool_sanding_block.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        215,
+        214,
+        214
+      ],
+      "trimmedTo": [
+        942,
+        725
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 45.1
+    },
+    {
+      "source": "tool_scissors.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        233,
+        231,
+        231
+      ],
+      "trimmedTo": [
+        619,
+        873
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 32.7
+    },
+    {
+      "source": "tool_spring_clamp.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        218,
+        218,
+        218
+      ],
+      "trimmedTo": [
+        671,
+        836
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 38.2
+    },
+    {
+      "source": "tool_stencil_set.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        228,
+        227,
+        227
+      ],
+      "trimmedTo": [
+        951,
+        953
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 67.3
+    },
+    {
+      "source": "tool_tack_hammer.png",
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "background": [
+        214,
+        214,
+        214
+      ],
+      "trimmedTo": [
+        725,
+        864
+      ],
+      "output": [
+        512,
+        512
+      ],
+      "coveragePct": 23.0
     },
     {
       "source": "trim_brass_knobs.png",
