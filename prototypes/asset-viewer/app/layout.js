@@ -1,9 +1,17 @@
 import './globals.css';
 
 export const metadata = {
-  title: 'Decorator Machine — ingredient art',
+  title: "Abbie's World — asset browser",
   description:
-    'Browse every Decorator Machine ingredient by family, category, and tag, and see the prompt each recipe would send.',
+    'Browse every image in the repo by kind, family, category and tag, build a recipe, and generate new art from a topic and a style.',
+};
+
+// initialScale without maximumScale: the page must still pinch-zoom, which is
+// how anyone actually inspects a carve on a tablet.
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#f4f5f8',
 };
 
 export default function RootLayout({ children }) {

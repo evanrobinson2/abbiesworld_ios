@@ -24,8 +24,9 @@ body {
 main {
   max-width: 1280px;
   margin: 0 auto;
-  /* Bottom padding clears the fixed recipe tray. */
-  padding: 28px 20px 300px;
+  /* Bottom padding clears the collapsed recipe tray. An expanded tray is
+     allowed to overlay, because you only expand it on purpose. */
+  padding: 28px 20px 112px;
 }
 
 h1 {
@@ -756,4 +757,289 @@ button.go:disabled {
 
 a.chip {
   text-decoration: none;
+}
+
+/* ---- The collapsed recipe tray ---- */
+/* Nothing is picked yet, so the tray is one slim bar rather than five empty
+   boxes and a paragraph explaining them. */
+.tray.collapsed {
+  padding: 10px 20px;
+}
+
+.trayBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+}
+
+.trayBar .trayHint {
+  margin: 0;
+}
+
+/* An expanded tray can be taller than a phone, so it scrolls itself rather
+   than covering the whole screen. */
+.tray {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+/* ---- Touch ---- */
+/* A 30px swatch and a 26px chip are fine under a mouse and a coin toss under a
+   fingertip. 44px is the accessible minimum, and 16px inputs stop iOS Safari
+   zooming the page the moment a field takes focus. */
+@media (pointer: coarse) {
+  button.chip,
+  a.chip,
+  .tab,
+  .select,
+  button.go {
+    min-height: 44px;
+  }
+
+  button.chip,
+  a.chip {
+    padding: 11px 15px;
+    font-size: 14px;
+  }
+
+  button.chip.small {
+    padding: 10px 13px;
+    font-size: 13px;
+    /* A two-letter tag would otherwise be 44px tall and 40px wide. */
+    min-width: 44px;
+  }
+
+  .swatch {
+    width: 44px;
+    height: 44px;
+  }
+
+  .search,
+  .select,
+  input.topic,
+  .customStyle textarea {
+    font-size: 16px;
+  }
+
+  .search,
+  .select {
+    min-height: 44px;
+  }
+
+  .linkish {
+    padding: 4px 0;
+  }
+
+  button.pick {
+    /* Stops a tap on a card being read as a text selection drag. */
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* ---- Narrow screens ---- */
+@media (max-width: 720px) {
+  main {
+    padding: 18px 13px 104px;
+  }
+
+  h1 {
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  .lede {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  /* Two columns of label and count. The blurbs reappear as the note under the
+     filter rows once a kind is chosen, so nothing is actually lost. */
+  .families {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .families li {
+    padding: 9px 11px;
+  }
+
+  .families .b {
+    display: none;
+  }
+
+  .toolbar {
+    padding: 11px 12px;
+    gap: 13px;
+    border-radius: 11px;
+  }
+
+  /* Two small cards beat one big one when you are scanning art. */
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(142px, 1fr));
+    gap: 10px;
+  }
+
+  .meta {
+    padding: 9px 10px 11px;
+  }
+
+  .prompt {
+    font-size: 11px;
+  }
+
+  /* The slots become a swipeable strip instead of wrapping onto three rows. */
+  .traySlots {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+
+  .slot {
+    flex: 0 0 auto;
+    min-width: 94px;
+  }
+
+  .trayOut {
+    flex: 1 1 100%;
+    min-width: 0;
+  }
+
+  .trayBar {
+    flex-wrap: wrap;
+    gap: 9px;
+  }
+
+  .tray {
+    padding: 11px 13px;
+    gap: 11px;
+  }
+
+  .readback {
+    font-size: 15px;
+  }
+
+  .tabs {
+    margin: 16px 0 14px;
+  }
+}
+
+/* Genuinely tiny screens only. A 390px iPhone is the common case, not the edge
+   case, and it wants two columns. */
+@media (max-width: 340px) {
+  .families {
+    grid-template-columns: 1fr;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(124px, 1fr));
+  }
+}
+
+/* Copy that is too long for a phone bar and too terse for a desktop one. */
+.narrowOnly {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .wideOnly {
+    display: none;
+  }
+
+  .narrowOnly {
+    display: inline;
+  }
+}
+
+/* "Made from" is a row of tappable ingredients, not a sentence of links. */
+.madeFrom {
+  margin: 9px 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.madeFrom > span {
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Inline links inside a sentence are exempt from the 44px target rule
+   (WCAG 2.5.8), but they can still afford a little more room to land on. */
+@media (pointer: coarse) {
+  .linkish {
+    padding: 7px 0;
+  }
+}
+
+/* ---- Search row and the collapsible filter panel ---- */
+.searchRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.searchRow .search {
+  flex: 1 1 auto;
+}
+
+/* Wide screens show every filter at once and never need the toggle. Narrow
+   screens hide the panel in CSS rather than in JS, so the markup is identical
+   either way and there is nothing for hydration to disagree about. */
+.filterToggle {
+  display: none;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 7px;
+  white-space: nowrap;
+}
+
+.filterToggle em {
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 700;
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  opacity: 1;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.filterToggle[aria-expanded='true'] em {
+  background: #fff;
+  color: var(--accent);
+}
+
+/* 900px rather than 720px: an iPad in portrait is 820px wide and has plenty of
+   room sideways, but vertical space is exactly what four filter rows waste. */
+@media (max-width: 900px) {
+  .filterToggle {
+    display: inline-flex;
+  }
+
+  .filters {
+    display: none;
+  }
+
+  .filters.open {
+    display: block;
+  }
 }

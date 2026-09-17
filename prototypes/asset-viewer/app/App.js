@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Browser from './Browser';
 import Studio from './Studio';
 
-export default function App({ kinds, families, assets, styles, generatedAt }) {
+export default function App({ kinds, families, assets, styles, generatedAt, summary }) {
   const [tab, setTab] = useState('browse');
   const made = assets.filter((asset) => asset.source === 'generated').length;
 
@@ -26,7 +26,10 @@ export default function App({ kinds, families, assets, styles, generatedAt }) {
       </nav>
 
       {tab === 'browse' ? (
-        <Browser kinds={kinds} families={families} assets={assets} generatedAt={generatedAt} />
+        <>
+          {summary}
+          <Browser kinds={kinds} families={families} assets={assets} generatedAt={generatedAt} />
+        </>
       ) : (
         <Studio families={families} styles={styles} />
       )}
