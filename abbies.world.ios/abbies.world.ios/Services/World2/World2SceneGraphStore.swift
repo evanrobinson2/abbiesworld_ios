@@ -22,9 +22,48 @@ import Foundation
 final class World2DeveloperSession: ObservableObject {
     static let shared = World2DeveloperSession()
 
-    @Published var isEnabled = false
+    private static let defaultsPrefix = "world2.developerSession.v1"
 
-    private init() {}
+    /// Developer tools are on by default for this household build.
+    @Published var isEnabled: Bool {
+        didSet { defaults.set(isEnabled, forKey: "\(Self.defaultsPrefix).isEnabled") }
+    }
+
+    /// Floating layout toolbar on mutable / authored scenes (default on).
+    @Published var layoutToolbarVisible: Bool {
+        didSet { defaults.set(layoutToolbarVisible, forKey: "\(Self.defaultsPrefix).layoutToolbarVisible") }
+    }
+
+    @Published var showPOIs: Bool {
+        didSet { defaults.set(showPOIs, forKey: "\(Self.defaultsPrefix).showPOIs") }
+    }
+
+    @Published var showPortals: Bool {
+        didSet { defaults.set(showPortals, forKey: "\(Self.defaultsPrefix).showPortals") }
+    }
+
+    @Published var showPOIHardpoints: Bool {
+        didSet { defaults.set(showPOIHardpoints, forKey: "\(Self.defaultsPrefix).showPOIHardpoints") }
+    }
+
+    @Published var showPortalHardpoints: Bool {
+        didSet { defaults.set(showPortalHardpoints, forKey: "\(Self.defaultsPrefix).showPortalHardpoints") }
+    }
+
+    private let defaults: UserDefaults
+
+    private init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        self.isEnabled = defaults.object(forKey: "\(Self.defaultsPrefix).isEnabled") as? Bool ?? true
+        self.layoutToolbarVisible =
+            defaults.object(forKey: "\(Self.defaultsPrefix).layoutToolbarVisible") as? Bool ?? true
+        self.showPOIs = defaults.object(forKey: "\(Self.defaultsPrefix).showPOIs") as? Bool ?? true
+        self.showPortals = defaults.object(forKey: "\(Self.defaultsPrefix).showPortals") as? Bool ?? true
+        self.showPOIHardpoints =
+            defaults.object(forKey: "\(Self.defaultsPrefix).showPOIHardpoints") as? Bool ?? true
+        self.showPortalHardpoints =
+            defaults.object(forKey: "\(Self.defaultsPrefix).showPortalHardpoints") as? Bool ?? true
+    }
 }
 
 /// Which layer of the scene editor is accepting edits. Only one layer is live at

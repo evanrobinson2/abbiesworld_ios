@@ -31,12 +31,12 @@ final class World2SmokeUITests: XCTestCase {
         openPOI("poi.abbieTreehouse", expecting: "world2.interior.poi.abbieTreehouse")
         let jukebox = app.buttons["Open the treehouse jukebox"]
         if !jukebox.waitForExistence(timeout: 3) {
-            tap("world2.quests.open")
+            tap("world2.playerMenu.open")
             XCTAssertTrue(
                 app.descendants(matching: .any)["world2.quests.item.placeJukebox"].waitForExistence(timeout: 4),
                 "Jukebox was neither placed nor offered as the first quest"
             )
-            tap("world2.quests.close")
+            tap("world2.playerMenu.close")
         }
         tap("world2.interior.back")
 
@@ -62,11 +62,11 @@ final class World2SmokeUITests: XCTestCase {
         tap("world2.assetWorkbench.exit")
 
         travel("world.home")
-        tap("world2.hud.classicGames")
+        tap("world2.playerMenu.open")
         XCTAssertTrue(
-            app.descendants(matching: .any)["classicGames.Dino Picnic"].waitForExistence(timeout: 4)
+            app.descendants(matching: .any)["world2.playerMenu.settings"].waitForExistence(timeout: 4),
+            "Settings should live in the avatar menu after HUD declutter"
         )
-        XCTAssertTrue(app.descendants(matching: .any)["classicGames.Creature Lab"].exists)
     }
 
     func testInventoryFactoryAndFurnitureStoreOpen() throws {
@@ -103,11 +103,11 @@ final class World2SmokeUITests: XCTestCase {
         let continueHome = app.buttons["world2.loading.continue"]
         XCTAssertTrue(continueHome.waitForExistence(timeout: 8))
         continueHome.tap()
-        tap("world2.hud.classicGames")
+        tap("world2.playerMenu.open")
         XCTAssertTrue(
-            app.descendants(matching: .any)["classicGames.Dino Picnic"].waitForExistence(timeout: 4)
+            app.descendants(matching: .any)["world2.playerMenu.settings"].waitForExistence(timeout: 4),
+            "Home launch should expose settings via avatar menu"
         )
-        XCTAssertTrue(app.descendants(matching: .any)["classicGames.Creature Lab"].exists)
     }
 
     func testDecoratingPlacesMovesAndKeepsFurniture() throws {

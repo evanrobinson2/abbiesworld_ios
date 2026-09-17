@@ -260,16 +260,6 @@ enum World2SceneCatalog {
                 scale: 1.15,
                 zIndex: 1
             ),
-            authored(
-                "instance.farm.decoratorMachine",
-                World2POIRegistry.decoratorMachineID,
-                scene: sceneID(for: .farm),
-                hardpoint: "hardpoint.farm.orchardPad",
-                x: 0.213,
-                y: 0.661,
-                scale: 0.92,
-                zIndex: 2
-            ),
         ],
         showsOpenHardpointsToPlayers: true,
         createdAt: .distantPast

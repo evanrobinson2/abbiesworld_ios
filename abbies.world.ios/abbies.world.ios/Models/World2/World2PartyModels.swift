@@ -23,11 +23,41 @@ enum World2PartyActorID: String, CaseIterable, Codable, Identifiable, Sendable {
         }
     }
 
-    /// Asset catalog imageset. Meshy USDZ binding can replace this later.
+    /// Asset catalog imageset used as a load fallback.
     var imageAssetName: String {
         switch self {
         case .abbie: return "world2_actor_abbie"
         case .daddy: return "world2_actor_daddy"
+        }
+    }
+
+    /// Bundled Meshy USDZ under Resources/World2Actors/.
+    var usdzResourceName: String {
+        switch self {
+        case .abbie: return "abbie"
+        case .daddy: return "daddy"
+        }
+    }
+
+    /// Clip name hints for idle. Empty means freeze (Abbie's pack has no true idle).
+    var idleClipHints: [String] {
+        switch self {
+        case .abbie:
+            // Observed: "Idle" in this pack is a cautious walk — do not bind.
+            return []
+        case .daddy:
+            return ["Idle"]
+        }
+    }
+
+    /// Clip name hints for running to a selected POI.
+    var runClipHints: [String] {
+        switch self {
+        case .abbie:
+            // Observed remap: Casual_Walk is the run motion in Abbie's pack.
+            return ["Casual_Walk", "Casual Walk", "Run_02", "Run 2", "Run"]
+        case .daddy:
+            return ["Run_02", "Run 2", "Run", "Casual_Walk", "Casual Walk"]
         }
     }
 
@@ -75,8 +105,8 @@ struct World2PartyLandingContract: Codable, Equatable, Sendable {
 
 /// Pure path math — grotesquely simple on purpose. Straight line only.
 enum World2PartyPathfinding {
-    /// Map-heights per second. Tuned so a cross-map walk feels playful, not slow.
-    static let walkSpeed: Double = 0.42
+    /// Map-heights per second. Tuned for a playful run across the map.
+    static let walkSpeed: Double = 0.55
 
     static func duration(
         from: World2NormalizedPoint,

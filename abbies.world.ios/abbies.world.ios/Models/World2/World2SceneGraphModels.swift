@@ -84,6 +84,19 @@ enum World2POISizeClass: String, Codable, CaseIterable, Sendable, Comparable {
 
 // MARK: - Hardpoints
 
+/// What a pad is for — place POIs, or plant portal / scene-kit exits.
+enum World2HardpointPurpose: String, Codable, CaseIterable, Sendable {
+    case place
+    case portal
+
+    var title: String {
+        switch self {
+        case .place: return "POI pad"
+        case .portal: return "Portal pad"
+        }
+    }
+}
+
 /// A named, authored spot in a scene where a place belongs. The painted maps
 /// already have dirt pads and sand circles; a hardpoint is the machine-readable
 /// version of one of those pads.
@@ -107,6 +120,8 @@ struct World2SceneHardpoint: Codable, Identifiable, Equatable, Sendable {
     /// developer drag or delete them. Used for pads that art depends on.
     var isLocked: Bool
     var notes: String?
+    /// Defaults to `.place` for older saved JSON.
+    var purpose: World2HardpointPurpose
 
     init(
         id: String,
@@ -115,7 +130,8 @@ struct World2SceneHardpoint: Codable, Identifiable, Equatable, Sendable {
         acceptedSizeClasses: Set<World2POISizeClass> = World2SceneHardpoint.anySizeClass,
         snapRadius: Double = World2SceneHardpoint.defaultSnapRadius,
         isLocked: Bool = false,
-        notes: String? = nil
+        notes: String? = nil,
+        purpose: World2HardpointPurpose = .place
     ) {
         self.id = id
         self.name = name
@@ -126,6 +142,7 @@ struct World2SceneHardpoint: Codable, Identifiable, Equatable, Sendable {
         self.snapRadius = min(max(snapRadius, 0.02), 0.30)
         self.isLocked = isLocked
         self.notes = notes
+        self.purpose = purpose
     }
 
     /// Kept so existing call sites and saved JSON can keep speaking in flat x/y.
@@ -160,6 +177,7 @@ struct World2SceneHardpoint: Codable, Identifiable, Equatable, Sendable {
         case snapRadius
         case isLocked
         case notes
+        case purpose
         case x
         case y
     }
@@ -191,7 +209,11 @@ struct World2SceneHardpoint: Codable, Identifiable, Equatable, Sendable {
             snapRadius: try container.decodeIfPresent(Double.self, forKey: .snapRadius)
                 ?? World2SceneHardpoint.defaultSnapRadius,
             isLocked: try container.decodeIfPresent(Bool.self, forKey: .isLocked) ?? false,
-            notes: try container.decodeIfPresent(String.self, forKey: .notes)
+            notes: try container.decodeIfPresent(String.self, forKey: .notes),
+            purpose: try container.decodeIfPresent(
+                World2HardpointPurpose.self,
+                forKey: .purpose
+            ) ?? .place
         )
     }
 
@@ -204,6 +226,7 @@ struct World2SceneHardpoint: Codable, Identifiable, Equatable, Sendable {
         try container.encode(snapRadius, forKey: .snapRadius)
         try container.encode(isLocked, forKey: .isLocked)
         try container.encodeIfPresent(notes, forKey: .notes)
+        try container.encode(purpose, forKey: .purpose)
         // Flat mirrors keep exported JSON readable by hand and by older builds.
         try container.encode(position.x, forKey: .x)
         try container.encode(position.y, forKey: .y)

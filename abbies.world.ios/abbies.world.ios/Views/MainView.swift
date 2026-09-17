@@ -30,9 +30,6 @@ struct MainView: View {
         ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2D") ||
         ProcessInfo.processInfo.arguments.contains("-verifyCreatureLab2DBuild") ||
         ProcessInfo.processInfo.arguments.contains("-verifyCreatureLabReady")
-    // Decorator Machine
-    @State private var showDecoratorMachine =
-        ProcessInfo.processInfo.arguments.contains("-launchDecoratorMachine")
     @State private var showWhizbang =
         ProcessInfo.processInfo.arguments.contains("-launchWhizbang") ||
         ProcessInfo.processInfo.arguments.contains("-autoPlayWhizbang")
@@ -265,19 +262,6 @@ struct MainView: View {
                             .shadow(radius: 5)
                     }
                     .accessibilityLabel("Music")
-
-                    Button(action: {
-                        showGamesDialog = true
-                    }) {
-                        Image(systemName: "gamecontroller.fill")
-                            .font(.system(size: 24))
-                            .foregroundColor(.white)
-                            .padding(12)
-                            .background(Color.blue.opacity(0.82))
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
-                    }
-                    .accessibilityLabel("Games")
                 }
                 .padding(.top, topSafeArea + 4)
                 .padding(.horizontal, 16)
@@ -299,7 +283,6 @@ struct MainView: View {
                     showPictureCarver: $showPictureCarver,
                     showDinoPicnic: $showDinoPicnic,
                     showCreatureBuilder: $showCreatureBuilder,
-                    showDecoratorMachine: $showDecoratorMachine,
                     showWhizbang: $showWhizbang,
                     // showMemoryGame: $showMemoryGame,
                     onDismiss: {
@@ -339,9 +322,6 @@ struct MainView: View {
             }
             .fullScreenCover(isPresented: $showCreatureBuilder) {
                 CreatureBuilderView()
-            }
-            .fullScreenCover(isPresented: $showDecoratorMachine) {
-                DecoratorMachineView()
             }
             .fullScreenCover(isPresented: $showWhizbang) {
                 IncredimachineView(

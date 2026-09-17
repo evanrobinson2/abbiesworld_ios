@@ -58,6 +58,8 @@ struct WorldMapView: View {
                 padPlacementLayer(mapRect: mapRect)
                 hardpointLayer(mapRect: mapRect)
                 placeLayer(mapRect: mapRect, viewSize: geometry.size, aspectRatio: aspectRatio)
+                plantedPlaceLayer(mapRect: mapRect)
+                plantDropTargetLayer(mapRect: mapRect)
                 cookingBadgeLayer(mapRect: mapRect)
                 World2PartyLayer(party: viewModel.party, mapRect: mapRect)
                     .zIndex(20)
@@ -91,6 +93,7 @@ struct WorldMapView: View {
             snapRejection = nil
             lookZoom = 1
             lookPan = .zero
+            viewModel.selectedPlaceInventoryItemID = nil
             syncEditorSelection()
             viewModel.party.enterScene(.defaultSpawn, aspectRatio: aspectRatioForCurrentMap())
         }
@@ -371,6 +374,63 @@ struct WorldMapView: View {
         }
     }
 
+    /// Seedlings / portals planted from Place Inventory on this authored map.
+    @ViewBuilder
+    private func plantedPlaceLayer(mapRect: CGRect) -> some View {
+        ForEach(viewModel.currentAuthoredMapPlaces.filter(\.hasSkySpotlight)) { instance in
+            World2SkySpotlightEmbellishment(
+                sceneSize: mapRect.size,
+                anchor: CGPoint(
+                    x: mapRect.minX + CGFloat(instance.x) * mapRect.width,
+                    y: mapRect.minY + CGFloat(instance.y) * mapRect.height
+                )
+            )
+            .allowsHitTesting(false)
+            .zIndex(14)
+            .accessibilityHidden(true)
+        }
+
+        ForEach(viewModel.currentAuthoredMapPlaces) { instance in
+            World2MutableScenePlaceMarker(instance: instance) {
+                viewModel.enterPlacedPlace(instance.id)
+            }
+            .position(
+                x: mapRect.minX + CGFloat(instance.x) * mapRect.width,
+                y: mapRect.minY + CGFloat(instance.y) * mapRect.height
+            )
+            .zIndex(16)
+            .accessibilityIdentifier("world2.map.planted.\(instance.id)")
+        }
+    }
+
+    @ViewBuilder
+    private func plantDropTargetLayer(mapRect: CGRect) -> some View {
+        if viewModel.selectedPlaceInventoryItemID != nil,
+           !viewModel.plantableAuthoredHardpoints.isEmpty {
+            ForEach(viewModel.plantableAuthoredHardpoints) { hardpoint in
+                World2PlaceDropTarget(hardpoint: hardpoint) {
+                    plantSelectedInventoryItem(on: hardpoint)
+                }
+                .position(
+                    x: mapRect.minX + CGFloat(hardpoint.x) * mapRect.width,
+                    y: mapRect.minY + CGFloat(hardpoint.y) * mapRect.height
+                )
+                .zIndex(35)
+            }
+        }
+    }
+
+    private func plantSelectedInventoryItem(on hardpoint: World2SceneHardpoint) {
+        guard let itemID = viewModel.selectedPlaceInventoryItemID else { return }
+        _ = viewModel.placeInventoryItem(
+            itemID,
+            x: hardpoint.x,
+            y: hardpoint.y,
+            hardpointID: hardpoint.id,
+            in: sceneID
+        )
+    }
+
     // MARK: - Chrome
 
     private var topChrome: some View {
@@ -510,12 +570,12 @@ struct WorldMapView: View {
                 showingEditor = true
                 syncEditorSelection()
             } label: {
-                Label("Edit Scene", systemImage: "slider.horizontal.3")
-                    .font(.system(size: 14, weight: .black, design: .rounded))
+                Label("Edit", systemImage: "slider.horizontal.3")
+                    .font(.system(size: 13, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .background(.orange, in: Capsule())
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 10)
+                    .background(.orange.opacity(0.92), in: Capsule())
             }
             .buttonStyle(.plain)
             .padding(.leading, 18)

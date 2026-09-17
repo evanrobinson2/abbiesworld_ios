@@ -5,20 +5,10 @@ import Combine
 struct World2RootView: View {
     @StateObject private var viewModel = World2ViewModel()
     @EnvironmentObject private var auth: AuthenticationService
-    @Environment(\.scenePhase) private var scenePhase
     @State private var showingMusicPlayer =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Music")
     @State private var showingSettings =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Settings")
-    @State private var showingClassicGames =
-        ProcessInfo.processInfo.arguments.contains("-openWorld2ClassicGames")
-    @State private var showingWaypointGame = false
-    @State private var showingGoonPopper = false
-    @State private var showingPictureCarver = false
-    @State private var showingDinoPicnic = false
-    @State private var showingDecoratorMachine = false
-    @State private var showingWhizbang = false
-    @State private var openCreatureLabFromClassic = false
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -128,12 +118,24 @@ struct World2RootView: View {
                     }
                 )
 
-            case .decoratorMachine:
-                DecoratorMachineView(onDismiss: viewModel.exitPOI)
-
             case .planningDept:
                 World2PlanningDeptView(
                     viewModel: viewModel,
+                    onExit: viewModel.exitPOI
+                )
+
+            case .sceneCreator(let instanceID):
+                World2SceneCreatorView(
+                    instanceID: instanceID,
+                    onTakeKit: {
+                        _ = viewModel.takeSceneKit(fromCreatorInstanceID: instanceID)
+                    },
+                    onExit: viewModel.exitPOI
+                )
+
+            case .beacon(let instanceID):
+                World2BeaconView(
+                    message: viewModel.beaconMessage(for: instanceID),
                     onExit: viewModel.exitPOI
                 )
 
@@ -152,10 +154,6 @@ struct World2RootView: View {
                 )
             }
             } // authenticated shell
-
-            if auth.isAuthenticated, viewModel.currentScreen.showsGlobalHUD {
-                globalHUDButtons
-            }
 
             if let celebration = viewModel.rewardCelebration {
                 World2RewardCelebrationView(
@@ -200,69 +198,19 @@ struct World2RootView: View {
             )
             .environmentObject(auth)
         }
-        .sheet(isPresented: $showingClassicGames) {
-            GamesDialogView(
-                showWaypointGame: $showingWaypointGame,
-                showGoonPopper: $showingGoonPopper,
-                showPictureCarver: $showingPictureCarver,
-                showDinoPicnic: $showingDinoPicnic,
-                showCreatureBuilder: $openCreatureLabFromClassic,
-                showDecoratorMachine: $showingDecoratorMachine,
-                showWhizbang: $showingWhizbang,
-                onDismiss: { showingClassicGames = false }
-            )
-            .accessibilityElement(children: .contain)
-            .accessibilityIdentifier("world2.classicGames")
-        }
-        .fullScreenCover(isPresented: $showingWaypointGame) {
-            WaypointNavigationView(
-                onDismiss: { showingWaypointGame = false },
-                onComplete: { showingWaypointGame = false }
-            )
-        }
-        .fullScreenCover(isPresented: $showingGoonPopper) {
-            GoonPopperView(
-                onDismiss: { showingGoonPopper = false },
-                onComplete: {}
-            )
-        }
-        .fullScreenCover(isPresented: $showingPictureCarver) {
-            PictureCarverView(onDismiss: { showingPictureCarver = false })
-        }
-        .fullScreenCover(isPresented: $showingDinoPicnic) {
-            DinoPicnicView()
-        }
-        .onChange(of: showingWaypointGame) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
-        }
-        .onChange(of: showingGoonPopper) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
-        }
-        .onChange(of: showingPictureCarver) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
-        }
-        .onChange(of: showingDinoPicnic) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
-        }
-        .onChange(of: showingDecoratorMachine) { _, shouldOpen in
-            guard shouldOpen else { return }
-            showingDecoratorMachine = false
-            viewModel.openDecoratorMachine()
-        }
-        .onChange(of: showingWhizbang) { _, shouldOpen in
-            guard shouldOpen else { return }
-            showingWhizbang = false
-            viewModel.openWhizbang()
-        }
-        .onChange(of: openCreatureLabFromClassic) { _, shouldOpen in
-            guard shouldOpen else { return }
-            openCreatureLabFromClassic = false
-            viewModel.openCreatureLab()
-        }
         .overlay(alignment: .leading) {
-            if showsQuestDrawer {
-                World2QuestDrawer(viewModel: viewModel)
-                    .zIndex(40)
+            if showsPlayerMenu {
+                World2PlayerMenuDrawer(
+                    viewModel: viewModel,
+                    onOpenSettings: { showingSettings = true },
+                    onOpenMusic: {
+                        World2MusicService.shared.stop()
+                        showingMusicPlayer = true
+                        World2Diagnostics.log("music_player_opened")
+                    },
+                    onOpenWorldMap: { viewModel.openPlanningDept() }
+                )
+                .zIndex(40)
             }
         }
         .task {
@@ -272,14 +220,9 @@ struct World2RootView: View {
             // World 2 delegates all music to the established app player.
             World2MusicService.shared.stop()
         }
-        .onChange(of: scenePhase) {
-            if scenePhase != .active {
-                World2DeveloperSession.shared.isEnabled = false
-            }
-        }
     }
 
-    private var showsQuestDrawer: Bool {
+    private var showsPlayerMenu: Bool {
         switch viewModel.currentScreen {
         case .loading, .playerSelect:
             return false
@@ -288,61 +231,7 @@ struct World2RootView: View {
         }
     }
 
-    private var globalHUDButtons: some View {
-        HStack(spacing: 8) {
-            World2MinimapHUDChip(
-                snapshot: viewModel.worldGraphSnapshot,
-                onOpen: { viewModel.openPlanningDept() }
-            )
-
-            Button {
-                showingClassicGames = true
-            } label: {
-                globalHUDIcon {
-                    Image(systemName: "gamecontroller.fill")
-                }
-            }
-            .accessibilityLabel("Open classic games")
-            .accessibilityIdentifier("world2.hud.classicGames")
-
-            Button {
-                showingSettings = true
-            } label: {
-                globalHUDIcon {
-                    Image(systemName: "gearshape.fill")
-                }
-            }
-            .accessibilityLabel("Open settings")
-            .accessibilityIdentifier("world2.hud.settings")
-
-            Button {
-                World2MusicService.shared.stop()
-                showingMusicPlayer = true
-                World2Diagnostics.log("music_player_opened")
-            } label: {
-                globalHUDIcon {
-                    Image(systemName: "music.note")
-                }
-            }
-            .accessibilityLabel("Open music player")
-            .accessibilityIdentifier("world2.hud.music")
-        }
-        .padding(.top, 16)
-        .padding(.trailing, 18)
-        .zIndex(100)
-    }
-
-    private func globalHUDIcon<Icon: View>(
-        @ViewBuilder icon: () -> Icon
-    ) -> some View {
-        icon()
-            .font(.system(size: 20, weight: .bold))
-            .foregroundStyle(.white)
-            .frame(width: 48, height: 48)
-            .background(.ultraThinMaterial, in: Circle())
-            .overlay(Circle().stroke(.white.opacity(0.42), lineWidth: 1.5))
-            .shadow(color: .black.opacity(0.28), radius: 8, y: 4)
-    }
+    // Bootstrap loading overlay (intro) — kept below.
 }
 
 struct BootstrapLoadingView: View {
@@ -737,7 +626,8 @@ private extension World2Screen {
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse,
              .characterStudio, .sceneBuilder, .worldTeleporter,
-             .whizbang, .decoratorMachine, .planningDept:
+             .whizbang, .planningDept,
+             .sceneCreator, .beacon:
             return false
         case .homeWorld, .blankSlate:
             return true

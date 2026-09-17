@@ -333,10 +333,18 @@ class AssetBootstrapService: ObservableObject {
     /// Fail-open only for these known semantic IDs so Art Garden is playable.
     private static let localCatalogFallbacks: [String: String] = [
         "map.artGarden": "world2_map_artGarden",
+        "map.blankWorld": "world2_blank_world",
+        "map.blankSlate": "world2_blank_world",
         "poi.characterStudio.exterior": "world2_poi_characterStudio",
         "poi.characterStudio.interior": "world2_interior_characterStudio",
         "poi.sceneBuilder.exterior": "world2_poi_sceneBuilder",
         "poi.sceneBuilder.interior": "world2_interior_sceneBuilder",
+        "poi.worldSeed.inventory": "world2_world_seed",
+        "poi.worldSeed.seedling": "world2_world_seedling",
+        "poi.worldSeed.portal": "world2_world_portal",
+        "poi.sceneKit.inventory": "world2_world_seed",
+        "poi.sceneCreator.exterior": "world2_world_portal",
+        "poi.beacon.exterior": "world2_world_seedling",
     ]
 
     /// Bundled ambient / looping videos that ship ahead of registry hosting.

@@ -19,8 +19,9 @@ enum World2Screen: Equatable {
     case sceneBuilder
     case worldTeleporter
     case whizbang
-    case decoratorMachine
     case planningDept
+    case sceneCreator(instanceID: String)
+    case beacon(instanceID: String)
 }
 
 /// A place the player has tapped on the map, paired with the instance they
@@ -86,6 +87,8 @@ final class World2ViewModel: ObservableObject {
     @Published var showingPOISheet = false
     @Published var toastMessage: String?
     @Published var rewardCelebration: World2RewardCelebration?
+    /// Place-inventory item armed for planting on the open map / mutable scene.
+    @Published var selectedPlaceInventoryItemID: String?
     /// The inventory item the treehouse drawer should open on next. Set when a
     /// reward lands so "Show me!" can point straight at it.
     @Published private(set) var inventoryHighlightID: String?
@@ -116,15 +119,26 @@ final class World2ViewModel: ObservableObject {
     var currentScenePlaces: [World2PlacedPlaceInstance] {
         playerService.placedPlaces(in: currentMutableSceneID)
     }
+    /// Place-inventory POIs planted on the authored overland map (Home, Farm, …).
+    var currentAuthoredMapPlaces: [World2PlacedPlaceInstance] {
+        playerService.placedPlaces(in: (currentWorld?.id ?? .home).sceneID)
+    }
     var currentSceneExits: [World2SceneExit] {
         playerService.exits(from: currentMutableSceneID)
     }
     var availableSceneHardpoints: [World2SceneHardpoint] {
         playerService.availableHardpoints(in: currentMutableSceneID)
     }
+    /// Open scene-graph pads that do not already hold a planted place.
+    var plantableAuthoredHardpoints: [World2SceneHardpoint] {
+        let occupied = Set(currentAuthoredMapPlaces.compactMap(\.hardpointID))
+        return currentScene.openHardpoints.filter { !occupied.contains($0.id) }
+    }
     var canReturnToPreviousMutableScene: Bool {
         !mutableSceneBackStack.isEmpty
     }
+    /// Sentinel pushed when entering a seedling world from an authored map.
+    private static let homeMapReturnToken = "__return_authored_map__"
     var factoryInventoryCount: Int {
         placeInventory.filter { $0.templateID == .selfReplicatingFactory }.count
     }
@@ -284,11 +298,13 @@ final class World2ViewModel: ObservableObject {
         _ itemID: String,
         x: Double,
         y: Double,
-        hardpointID: String? = nil
+        hardpointID: String? = nil,
+        in sceneID: String? = nil
     ) -> World2PlacedPlaceInstance? {
+        let targetSceneID = sceneID ?? currentMutableSceneID
         guard let instance = playerService.placeInventoryItem(
             itemID,
-            in: currentMutableSceneID,
+            in: targetSceneID,
             x: x,
             y: y,
             hardpointID: hardpointID
@@ -304,12 +320,40 @@ final class World2ViewModel: ObservableObject {
                 "template": instance.templateID.rawValue
             ]
         )
-        showToast("POI Factory placed. Tap it to go inside!")
+        showToast(placementToast(for: instance.templateID, growth: instance.seedGrowth))
+        if selectedPlaceInventoryItemID == itemID {
+            selectedPlaceInventoryItemID = nil
+        }
         return instance
     }
 
+    func togglePlaceInventorySelection(_ itemID: String) {
+        selectedPlaceInventoryItemID =
+            selectedPlaceInventoryItemID == itemID ? nil : itemID
+    }
+
+    private func placementToast(
+        for template: World2PlaceTemplateID,
+        growth: World2WorldSeedGrowth?
+    ) -> String {
+        switch template {
+        case .selfReplicatingFactory:
+            return "POI Factory placed. Tap it to go inside!"
+        case .worldSeed:
+            return growth == .portal
+                ? "World portal ready — tap to enter your world."
+                : "World Seed planted! Tap the seedling to enter your blank world."
+        case .sceneKit:
+            return "New scene attached! Walk through the exit — a Beacon is in your inventory."
+        case .sceneCreator:
+            return "Scene Creator placed."
+        case .beacon:
+            return "Beacon placed. Tap it to read the message."
+        }
+    }
+
     func enterPlacedPlace(_ instanceID: String) {
-        guard let instance = currentScenePlaces.first(where: { $0.id == instanceID }) else {
+        guard let instance = playerService.placedPlaces.first(where: { $0.id == instanceID }) else {
             showToast("That place could not be found.")
             return
         }
@@ -319,11 +363,75 @@ final class World2ViewModel: ObservableObject {
                 .selfReplicatingFactory(instanceID: instance.id),
                 reason: "placed_poi_entered"
             )
+        case .worldSeed:
+            guard let hubID = instance.linkedSceneID,
+                  playerService.scene(hubID) != nil else {
+                showToast("That world is still sprouting.")
+                return
+            }
+            if currentScreen == .homeWorld || currentWorld?.id != .blankSlate {
+                mutableSceneBackStack.append(Self.homeMapReturnToken)
+            } else {
+                mutableSceneBackStack.append(currentMutableSceneID)
+            }
+            currentMutableSceneID = hubID
+            currentWorld = worlds[.blankSlate]
+            playerService.setCurrentWorld(.blankSlate)
+            setScreen(.blankSlate, reason: "world_seed_entered")
+            party.enterScene(.defaultSpawn)
+            showToast(
+                instance.seedGrowth == .portal
+                    ? "Stepped through the world portal."
+                    : "Entered your seedling world."
+            )
+        case .sceneCreator:
+            setScreen(
+                .sceneCreator(instanceID: instance.id),
+                reason: "placed_poi_entered"
+            )
+        case .sceneKit:
+            if let childID = instance.linkedSceneID,
+               let exit = currentSceneExits.first(where: { $0.toSceneID == childID }) {
+                traverseSceneExit(exit.id)
+            } else {
+                showToast("That scene door is not ready yet.")
+            }
+        case .beacon:
+            setScreen(
+                .beacon(instanceID: instance.id),
+                reason: "placed_poi_entered"
+            )
         }
         World2Diagnostics.log(
             "placed_poi_entered",
             ["instance": instance.id, "template": instance.templateID.rawValue]
         )
+    }
+
+    /// Scene Creator hands the player a Scene Kit bound to this hub.
+    @discardableResult
+    func takeSceneKit(fromCreatorInstanceID instanceID: String) -> World2PlaceInventoryItem? {
+        guard let instance = playerService.placedPlaces.first(where: { $0.id == instanceID }),
+              instance.templateID == .sceneCreator,
+              let hubID = instance.linkedSceneID ?? Optional(instance.sceneID) else {
+            showToast("The Scene Creator could not pack a kit.")
+            return nil
+        }
+        guard let item = playerService.grantPlaceInventoryItem(.sceneKit(forHub: hubID)) else {
+            showToast("Choose a player first.")
+            return nil
+        }
+        showToast("Scene Kit added to Place Inventory!")
+        World2Diagnostics.log(
+            "scene_kit_granted",
+            ["item": item.id, "hub": hubID]
+        )
+        return item
+    }
+
+    func beaconMessage(for instanceID: String) -> String {
+        playerService.placedPlaces.first(where: { $0.id == instanceID })?.message
+            ?? "You made it! This beacon marks your new scene."
     }
 
     @discardableResult
@@ -365,6 +473,10 @@ final class World2ViewModel: ObservableObject {
 
     func returnFromMutableScene() {
         guard let previous = mutableSceneBackStack.popLast() else {
+            returnToHomeWorld()
+            return
+        }
+        if previous == Self.homeMapReturnToken {
             returnToHomeWorld()
             return
         }
@@ -445,8 +557,6 @@ final class World2ViewModel: ObservableObject {
             setScreen(.sceneBuilder, reason: "poi_entered")
         case .whizbang:
             setScreen(.whizbang, reason: "poi_entered")
-        case .decoratorMachine:
-            setScreen(.decoratorMachine, reason: "poi_entered")
         case .planningDept:
             setScreen(.planningDept, reason: "poi_entered")
         case .placeFactory:
@@ -508,13 +618,6 @@ final class World2ViewModel: ObservableObject {
         currentWorld = worlds[.work] ?? currentWorld
         playerService.setCurrentWorld(.work)
         setScreen(.whizbang, reason: "classic_games")
-    }
-
-    func openDecoratorMachine() {
-        dismissPOIInspection()
-        currentWorld = worlds[.farm] ?? currentWorld
-        playerService.setCurrentWorld(.farm)
-        setScreen(.decoratorMachine, reason: "classic_games")
     }
 
     func openPlanningDept() {
@@ -738,11 +841,6 @@ final class World2ViewModel: ObservableObject {
             selectPlayer(directPlayer)
             switchWorld(to: .work)
             setScreen(.whizbang, reason: "direct_launch")
-        } else if arguments.contains("-launchDecoratorMachine")
-                    || arguments.contains("-launchWorld2DecoratorMachine") {
-            selectPlayer(directPlayer)
-            switchWorld(to: .farm)
-            setScreen(.decoratorMachine, reason: "direct_launch")
         } else if arguments.contains("-launchWorld2PlanningDept")
                     || arguments.contains("-openWorld2Minimap") {
             selectPlayer(directPlayer)
@@ -800,7 +898,7 @@ final class World2ViewModel: ObservableObject {
             return
         case .homeWorld:
             songID = worldSongID(currentWorld?.id ?? .home)
-        case .blankSlate, .selfReplicatingFactory:
+        case .blankSlate, .selfReplicatingFactory, .sceneCreator, .beacon:
             songID = worldSongID(.blankSlate)
         case .treehouse(let poiId):
             songID = World2POIRegistry.archetype(poiId)?.musicTrackID
@@ -822,8 +920,6 @@ final class World2ViewModel: ObservableObject {
             songID = World2POIRegistry.sceneBuilder.musicTrackID
         case .whizbang:
             songID = World2POIRegistry.whizbang.musicTrackID
-        case .decoratorMachine:
-            songID = World2POIRegistry.decoratorMachine.musicTrackID
         case .planningDept:
             songID = World2POIRegistry.planningDept.musicTrackID
         case .worldTeleporter:
@@ -996,8 +1092,9 @@ private extension World2Screen {
         case .sceneBuilder: return "scene_builder"
         case .worldTeleporter: return "world_teleporter"
         case .whizbang: return "whizbang"
-        case .decoratorMachine: return "decorator_machine"
         case .planningDept: return "planning_dept"
+        case .sceneCreator(let instanceID): return "scene_creator:\(instanceID)"
+        case .beacon(let instanceID): return "beacon:\(instanceID)"
         }
     }
 }

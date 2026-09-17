@@ -26,7 +26,6 @@ enum World2POIRegistry {
     static let characterStudioID = "poi.characterStudio"
     static let sceneBuilderID = "poi.sceneBuilder"
     static let whizbangID = "poi.whizbang"
-    static let decoratorMachineID = "poi.decoratorMachine"
     static let planningDeptID = "poi.planningDept"
 
     /// Every registered archetype, keyed by id.
@@ -51,7 +50,6 @@ enum World2POIRegistry {
         characterStudio,
         sceneBuilder,
         whizbang,
-        decoratorMachine,
         planningDept,
     ]
 
@@ -296,32 +294,12 @@ enum World2POIRegistry {
         )
     )
 
-    static let decoratorMachine = World2POIArchetype(
-        id: decoratorMachineID,
-        name: "Decorator Machine",
-        kind: .minigame,
-        sizeClass: .medium,
-        exteriorAsset: "poi.decoratorMachine.exterior",
-        drawnArtStyle: .decoratorWorkshop,
-        icon: "sofa.fill",
-        lore: "A cozy workshop that stirs furniture essences into brand-new room treasures.",
-        activityDescription: "Drag essences into the hopper, cook a decoration, and keep the ones you love.",
-        callToAction: "Open the Machine",
-        musicTrackID: "world2_well_make_a_way",
-        contract: World2POIContract(
-            route: .decoratorMachine,
-            grants: [.generatedDecorations(count: 1)],
-            completionMilestone: "minigame.decoratorMachine.opened"
-        )
-    )
-
     static let planningDept = World2POIArchetype(
         id: planningDeptID,
         name: "Planning Department",
         kind: .factory,
         sizeClass: .medium,
         exteriorAsset: "poi.planningDept.exterior",
-        drawnArtStyle: .planningDept,
         icon: "map.fill",
         lore: "Blueprints, pins, and a table-sized map of every land you know.",
         activityDescription: "See the world graph, find open North / South / East / West expansion tunnels, and plan where a new land can attach.",

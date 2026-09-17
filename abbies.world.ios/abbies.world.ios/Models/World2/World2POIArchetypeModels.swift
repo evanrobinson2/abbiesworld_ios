@@ -62,7 +62,6 @@ enum World2POIRoute: Codable, Equatable, Sendable {
     case characterStudio
     case sceneBuilder
     case whizbang
-    case decoratorMachine
     case planningDept
 
     var diagnosticName: String {
@@ -78,7 +77,6 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .characterStudio: return "character_studio"
         case .sceneBuilder: return "scene_builder"
         case .whizbang: return "whizbang"
-        case .decoratorMachine: return "decorator_machine"
         case .planningDept: return "planning_dept"
         }
     }
@@ -94,7 +92,6 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .characterStudio: return "character_studio"
         case .sceneBuilder: return "scene_builder"
         case .whizbang: return "whizbang"
-        case .decoratorMachine: return "decorator_machine"
         case .planningDept: return "planning_dept"
         case .playerHome, .cardFactory, .placeFactory: return nil
         }
@@ -185,8 +182,6 @@ struct World2POIContract: Codable, Equatable, Sendable {
 enum World2POIArtStyle: String, Codable, Sendable {
     case bearsCottage
     case whizbangGadgetBarn
-    case decoratorWorkshop
-    case planningDept
 }
 
 /// A registered kind of place.
