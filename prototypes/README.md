@@ -57,6 +57,7 @@ with something you are running, say so and we will pick one together.
 | Prototype | Proves |
 | --- | --- |
 | `critter-carousel/` | The Creature Lab POI minigame: a tap-only carousel that picks creature + outfit + buddy, and the prompt DAG that turns the three into one image prompt |
+| `treehouse-loop/` | Rooms she can build on treehouse hardpoints, a drawer pre-filtered to decorations, the MORE door to the Decorator Machine, and the way back — with no dead ends and one shared inventory |
 
 ## Handing a prototype to the app
 

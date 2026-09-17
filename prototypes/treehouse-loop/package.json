@@ -1,0 +1,14 @@
+{
+  "name": "treehouse-loop",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Proves the treehouse loop: rooms, a decoration-only drawer, the More door to the Decorator Machine, and the way back.",
+  "scripts": {
+    "test": "vitest run",
+    "prove": "node src/harness/prove.js"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.4"
+  }
+}
