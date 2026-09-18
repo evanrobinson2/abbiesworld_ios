@@ -47,7 +47,7 @@ enum DecorationType: String, Codable, CaseIterable {
     }
 }
 
-struct Decoration: Codable, Identifiable {
+struct World2Decoration: Codable, Identifiable {
     let id: String
     let name: String
     let type: DecorationType

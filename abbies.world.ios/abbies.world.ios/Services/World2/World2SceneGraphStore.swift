@@ -118,6 +118,8 @@ final class World2SceneGraphStore: ObservableObject {
                 id: sceneID,
                 name: "Untitled Scene",
                 summary: "",
+                minimapIcon: "minimap.placeholder",
+                minimapIconStyle: .placeholder,
                 isMutableByPlayer: true
             )
     }
@@ -128,6 +130,69 @@ final class World2SceneGraphStore: ObservableObject {
 
     func isOverridden(_ sceneID: String) -> Bool {
         draftScenes[sceneID] != nil
+    }
+
+    /// Catalog plus player-made orphans, so attachment can see every live scene.
+    var allScenes: [World2SceneDefinition] {
+        var ids = Set(World2SceneCatalog.all.map(\.id))
+        ids.formUnion(draftScenes.keys)
+        return ids.sorted().map { scene($0) }
+    }
+
+    var openNodes: [World2OpenNode] {
+        World2SceneAttachment.openNodes(in: allScenes)
+    }
+
+    @discardableResult
+    func makeOrphanScene(
+        named name: String,
+        by playerID: String?
+    ) -> World2SceneDefinition {
+        let scene = World2SceneDefinition(
+            id: "scene.\(UUID().uuidString.lowercased())",
+            name: name,
+            summary: "A new place, not on the world yet.",
+            backdropStyle: .orphanClearing,
+            minimapIcon: "minimap.orphan",
+            minimapIconStyle: .orphanClearing,
+            isMutableByPlayer: true,
+            showsOpenHardpointsToPlayers: true,
+            isOrphan: true,
+            createdByPlayerID: playerID
+        )
+        draftScenes[scene.id] = scene
+        scheduleSave()
+        World2Diagnostics.log(
+            "orphan_scene_created",
+            ["scene": scene.id, "name": scene.name]
+        )
+        return scene
+    }
+
+    /// Hang an orphan on an empty compass socket. Duals write together.
+    @discardableResult
+    func connectOrphan(_ orphanID: String, to node: World2OpenNode) -> Bool {
+        var orphan = scene(orphanID)
+        var host = scene(node.hostSceneID)
+        guard World2SceneAttachment.attach(
+            orphan: &orphan,
+            host: &host,
+            compass: node.compass
+        ) else {
+            return false
+        }
+        draftScenes[orphan.id] = orphan
+        draftScenes[host.id] = host
+        scheduleSave()
+        World2Diagnostics.log(
+            "orphan_scene_connected",
+            [
+                "orphan": orphan.id,
+                "host": host.id,
+                "compass": node.compass.rawValue,
+            ]
+        )
+        return true
     }
 
     // MARK: - Reading
@@ -310,7 +375,8 @@ final class World2SceneGraphStore: ObservableObject {
                 zIndex: previous.zIndex,
                 createdAt: previous.createdAt,
                 createdByPlayerID: previous.createdByPlayerID,
-                isAuthored: previous.isAuthored
+                isAuthored: previous.isAuthored,
+                portal: previous.portal
             )
         }
         World2Diagnostics.log(

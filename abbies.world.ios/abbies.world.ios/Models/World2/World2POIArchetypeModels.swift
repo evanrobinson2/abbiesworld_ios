@@ -25,6 +25,7 @@ enum World2POIKind: String, Codable, CaseIterable, Sendable {
     case minigame
     case factory
     case story
+    case portal
 
     var displayName: String {
         switch self {
@@ -33,6 +34,7 @@ enum World2POIKind: String, Codable, CaseIterable, Sendable {
         case .minigame: return "Game"
         case .factory: return "Factory"
         case .story: return "Story Place"
+        case .portal: return "Portal"
         }
     }
 
@@ -43,6 +45,7 @@ enum World2POIKind: String, Codable, CaseIterable, Sendable {
         case .minigame: return "gamecontroller.fill"
         case .factory: return "building.2.crop.circle.fill"
         case .story: return "book.closed.fill"
+        case .portal: return "door.left.hand.open"
         }
     }
 }
@@ -58,7 +61,9 @@ enum World2POIRoute: Codable, Equatable, Sendable {
     case creatureLab
     case fallingTargets(configurationID: String)
     case placeFactory
+    case sceneWorks
     case threeBearsHouse
+    case scenePortal
 
     var diagnosticName: String {
         switch self {
@@ -69,7 +74,9 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .creatureLab: return "creature_lab"
         case .fallingTargets(let configurationID): return "falling_targets:\(configurationID)"
         case .placeFactory: return "place_factory"
+        case .sceneWorks: return "scene_works"
         case .threeBearsHouse: return "three_bears_house"
+        case .scenePortal: return "scene_portal"
         }
     }
 
@@ -81,7 +88,7 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .assetWorkbench: return "asset_workbench"
         case .creatureLab: return "creature_lab"
         case .threeBearsHouse: return "just_right_porridge"
-        case .playerHome, .cardFactory, .placeFactory: return nil
+        case .playerHome, .cardFactory, .placeFactory, .sceneWorks, .scenePortal: return nil
         }
     }
 }
@@ -169,6 +176,9 @@ struct World2POIContract: Codable, Equatable, Sendable {
 /// like a missing asset.
 enum World2POIArtStyle: String, Codable, Sendable {
     case bearsCottage
+    case portalGate
+    case sceneWorks
+    case poiFactory
 }
 
 /// A registered kind of place.
@@ -241,6 +251,15 @@ enum World2POIRegistryIssue: Equatable, CustomStringConvertible {
     case hardpointDoubleBooked(hardpointID: String, sceneID: String, instanceIDs: [String])
     case duplicateHardpointID(hardpointID: String, sceneID: String)
     case duplicateInstanceID(instanceID: String, sceneID: String)
+    case portalUnknownDestination(instanceID: String, sceneID: String, destinationSceneID: String)
+    case portalBrokenDual(
+        instanceID: String,
+        sceneID: String,
+        reverseInstanceID: String,
+        destinationSceneID: String
+    )
+    case portalDuplicateCompass(sceneID: String, compass: String, instanceIDs: [String])
+    case sceneMissingMinimapIcon(sceneID: String)
 
     var description: String {
         switch self {
@@ -256,6 +275,14 @@ enum World2POIRegistryIssue: Equatable, CustomStringConvertible {
             return "scene=\(sceneID) duplicate hardpoint id=\(hardpointID)"
         case .duplicateInstanceID(let instanceID, let sceneID):
             return "scene=\(sceneID) duplicate instance id=\(instanceID)"
+        case .portalUnknownDestination(let instanceID, let sceneID, let destinationSceneID):
+            return "scene=\(sceneID) instance=\(instanceID) portal destination \(destinationSceneID) is not a scene"
+        case .portalBrokenDual(let instanceID, let sceneID, let reverseInstanceID, let destinationSceneID):
+            return "scene=\(sceneID) instance=\(instanceID) dual \(reverseInstanceID) in \(destinationSceneID) does not point back"
+        case .portalDuplicateCompass(let sceneID, let compass, let instanceIDs):
+            return "scene=\(sceneID) compass \(compass) claimed by \(instanceIDs.joined(separator: ","))"
+        case .sceneMissingMinimapIcon(let sceneID):
+            return "scene=\(sceneID) has no minimap_icon"
         }
     }
 }

@@ -233,7 +233,7 @@ struct StarBurstView: View {
                         LinearGradient(
                             colors: [.yellow.opacity(0.3), .clear],
                             startPoint: .center,
-                            endRadius: .trailing
+                            endPoint: .trailing
                         )
                     )
                     .frame(width: 400, height: 20)

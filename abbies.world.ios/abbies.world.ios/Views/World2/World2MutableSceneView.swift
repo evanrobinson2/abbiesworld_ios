@@ -325,8 +325,12 @@ struct World2MutableSceneView: View {
                                 item: item,
                                 isSelected: selectedInventoryItemID == item.id
                             ) {
-                                selectedInventoryItemID =
-                                    selectedInventoryItemID == item.id ? nil : item.id
+                                if item.isSceneKit {
+                                    viewModel.visitSceneKit(item.id)
+                                } else {
+                                    selectedInventoryItemID =
+                                        selectedInventoryItemID == item.id ? nil : item.id
+                                }
                             }
                         }
                     }
@@ -429,13 +433,17 @@ private struct World2PlaceInventoryRow: View {
                 VStack(alignment: .leading, spacing: 3) {
                     Text(template.name)
                         .font(.system(size: 15, weight: .black, design: .rounded))
-                    Text(isSelected ? "Ready to place" : "Tap to choose")
+                    Text(item.isSceneKit
+                            ? "Go there — kit stays until connected"
+                            : (isSelected ? "Ready to place" : "Tap to choose"))
                         .font(.system(size: 11, weight: .bold, design: .rounded))
                         .opacity(0.72)
                 }
 
                 Spacer()
-                Image(systemName: isSelected ? "checkmark.circle.fill" : "circle")
+                Image(systemName: item.isSceneKit
+                    ? "arrow.right.circle.fill"
+                    : (isSelected ? "checkmark.circle.fill" : "circle"))
                     .font(.title3.bold())
             }
             .foregroundStyle(isSelected ? .white : .indigo)
@@ -446,7 +454,7 @@ private struct World2PlaceInventoryRow: View {
             )
         }
         .buttonStyle(.plain)
-        .accessibilityLabel("Place \(template.name)")
+        .accessibilityLabel(item.isSceneKit ? "Visit \(template.name)" : "Place \(template.name)")
         .accessibilityValue(isSelected ? "Selected" : "Not selected")
         .accessibilityIdentifier("world2.placeInventory.item.\(item.id)")
     }

@@ -57,6 +57,14 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         default: return rawValue
         }
     }
+
+    init?(sceneID: String) {
+        if sceneID == World2SceneDefinition.blankSlateSceneID {
+            self = .blankSlate
+            return
+        }
+        self.init(rawValue: sceneID)
+    }
 }
 
 /// World-level metadata: what this map is called, how it sounds, and where you
