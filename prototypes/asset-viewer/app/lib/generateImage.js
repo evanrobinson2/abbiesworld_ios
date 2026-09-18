@@ -17,11 +17,11 @@
 // calling OpenAI directly and the response says which route served it. Add the
 // card and the gateway takes over with no code change.
 
+import { recordGeneration } from './generationProfile';
+import { DEFAULT_QUALITY, imageModel, imageSize } from './imageConfig';
+
 const GATEWAY = 'https://ai-gateway.vercel.sh/v1/images/generations';
 const OPENAI = 'https://api.openai.com/v1/images/generations';
-
-const MODEL = 'gpt-image-2';
-const SIZE = '1024x1024';
 
 // WebP at 92 keeps a 1024px card near 150KB instead of the 1.4MB PNG, which
 // matters because the image travels back through a serverless response.
@@ -60,7 +60,7 @@ async function call(route, { prompt, quality }) {
       model: route.model,
       prompt,
       n: 1,
-      size: SIZE,
+      size: imageSize(),
       quality,
       ...FORMAT,
       ...route.extra,
@@ -93,6 +93,7 @@ async function call(route, { prompt, quality }) {
 function routes() {
   const openaiKey = process.env.OPENAI_API_KEY;
   const gatewayKey = process.env.AI_GATEWAY_API_KEY;
+  const model = imageModel();
   const available = [];
 
   if (gatewayKey && openaiKey) {
@@ -100,7 +101,7 @@ function routes() {
       name: 'gateway',
       url: GATEWAY,
       key: gatewayKey,
-      model: `openai/${MODEL}`,
+      model: `openai/${model}`,
       extra: {
         providerOptions: {
           gateway: {
@@ -112,7 +113,7 @@ function routes() {
     });
   }
   if (openaiKey) {
-    available.push({ name: 'direct', url: OPENAI, key: openaiKey, model: MODEL, extra: {} });
+    available.push({ name: 'direct', url: OPENAI, key: openaiKey, model, extra: {} });
   }
   return available;
 }
@@ -125,6 +126,8 @@ export function providerStatus() {
     hasGatewayKey: Boolean(process.env.AI_GATEWAY_API_KEY),
     routes: configured,
     preferred: configured[0] ?? null,
+    model: imageModel(),
+    size: imageSize(),
   };
 }
 
@@ -134,7 +137,7 @@ export function providerStatus() {
  * @returns the first success, or the last failure with every attempt listed so
  *          a misconfiguration is diagnosable from the response alone.
  */
-export async function generateImage({ prompt, quality = 'low' }) {
+export async function generateImage({ prompt, quality = DEFAULT_QUALITY }) {
   const available = routes();
   if (available.length === 0) {
     return {
@@ -156,6 +159,18 @@ export async function generateImage({ prompt, quality = 'low' }) {
       type: result.type ?? null,
       message: result.ok ? null : result.message,
       elapsedMs: result.elapsedMs,
+    });
+    await recordGeneration({
+      ok: result.ok,
+      model: route.model,
+      quality,
+      size: imageSize(),
+      route: result.route,
+      elapsedMs: result.elapsedMs,
+      promptChars: prompt.length,
+      status: result.status ?? 200,
+      type: result.type ?? null,
+      usage: result.usage ?? null,
     });
     if (result.ok) return { ...result, attempts };
     // A bad prompt fails the same way everywhere, so only retry elsewhere when

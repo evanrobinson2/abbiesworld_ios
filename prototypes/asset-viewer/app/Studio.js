@@ -29,7 +29,7 @@ export default function Studio({ families, styles }) {
   const [customLook, setCustomLook] = useState('');
   const [customLabel, setCustomLabel] = useState('');
   const [notes, setNotes] = useState('');
-  const [quality, setQuality] = useState('low');
+  const [quality, setQuality] = useState('low'); // fastest; overwritten by server defaultQuality if set
   const [plate, setPlate] = useState('checker');
 
   const [savedStyles, setSavedStyles] = useState([]);
@@ -55,7 +55,10 @@ export default function Studio({ families, styles }) {
   useEffect(() => {
     fetch('/api/generate')
       .then((response) => response.json())
-      .then(setStatus)
+      .then((json) => {
+        setStatus(json);
+        if (json.defaultQuality) setQuality(json.defaultQuality);
+      })
       .catch(() => setStatus({ routes: [], preferred: null, unreachable: true }));
   }, []);
 

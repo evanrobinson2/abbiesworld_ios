@@ -158,8 +158,12 @@ Two environment variables, both set for you on Vercel already. Copy
 
 | Variable | Required | Purpose |
 | --- | --- | --- |
-| `OPENAI_API_KEY` | yes | Pays for and produces the images. Needs `gpt-image-2`. |
+| `OPENAI_API_KEY` | yes | Pays for and produces the images. Needs `gpt-image-2.5-flare`. |
 | `AI_GATEWAY_API_KEY` | no | Routes through Vercel AI Gateway for spend tracking, budgets and logs. |
+| `IMAGE_MODEL` | no | Defaults to `gpt-image-2.5-flare` (OpenAI's fastest 2.5 model). |
+| `IMAGE_QUALITY` | no | Defaults to `low` (fastest). The studio can still pick `medium`. |
+| `IMAGE_SIZE` | no | Defaults to `1024x1024`. |
+| `GENERATION_PROFILE_PATH` | no | JSONL file of per-request latency records. |
 
 Generation prefers **Vercel AI Gateway in BYOK mode**: the gateway
 authenticates the Vercel team but calls OpenAI with `OPENAI_API_KEY`, so OpenAI
@@ -177,9 +181,15 @@ calling OpenAI directly; the response names the route that served it and lists
 every attempt, and the studio shows both. Add the card and the gateway takes
 over with no code change.
 
-Quality is **quick** (~10s) or **good** (~30s). A `high` tier is deliberately
-not offered, because the function ceiling is 60s on every Vercel plan and high
-can exceed it.
+Quality is **quick** (`low`, default, ~10s) or **good** (`medium`, ~30s). That
+is the speed mode — OpenAI has no separate speed parameter. A `high` tier is
+deliberately not offered, because the function ceiling is 60s on every Vercel
+plan and high can exceed it.
+
+Every generation attempt is profiled: a structured `image.generate.profile`
+log line, a JSONL file, and `GET /api/generate/metrics` with count, p50/p95,
+and breakdowns by model, quality, and route. Use that when kids start waiting
+too long.
 
 ### Access
 

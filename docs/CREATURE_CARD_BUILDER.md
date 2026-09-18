@@ -554,6 +554,10 @@ Do not inherit StoryBoard's highest-quality generation defaults.
 
 This is an interactive game. Latency matters more than print fidelity.
 
+Default: **gpt-image-2.5-flare** at quality **low**. Configuration must be
+able to raise quality without a code change. The server must record per-request
+latency (p50/p95, model, quality, route) so wait-time regressions are visible.
+
 ---
 
 ## 23. Image Generation Target
