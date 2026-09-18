@@ -1,0 +1,22 @@
+{
+  "name": "critter-carousel",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Phaser prototype of the Creature Lab POI minigame. Pure-logic core, tap-only, no gestures.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "prove": "node src/harness/prove.js",
+    "play": "node src/harness/play.js"
+  },
+  "dependencies": {
+    "phaser": "^4.2.1"
+  },
+  "devDependencies": {
+    "vite": "^7.1.5",
+    "vitest": "^3.2.4"
+  }
+}
