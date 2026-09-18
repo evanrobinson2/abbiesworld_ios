@@ -19,6 +19,12 @@ struct World2POIDrawnArtwork: View {
         switch style {
         case .bearsCottage:
             World2BearsCottage()
+        case .portalGate:
+            World2PortalGate()
+        case .sceneWorks:
+            World2SceneWorksMill()
+        case .poiFactory:
+            World2POIFactoryShed()
         }
     }
 }
@@ -196,6 +202,138 @@ private struct World2ThatchRoof: Shape {
             to: CGPoint(x: rect.minX, y: rect.maxY),
             control: CGPoint(x: rect.midX, y: rect.maxY - rect.height * 0.16)
         )
+        path.closeSubpath()
+        return path
+    }
+}
+
+/// A standing stone arch with a glowing doorway. Used for tap portals whose
+/// painted exterior has not been generated yet.
+private struct World2PortalGate: View {
+    var body: some View {
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            let stone = Color(red: 0.42, green: 0.38, blue: 0.48)
+            let stoneLight = Color(red: 0.62, green: 0.58, blue: 0.70)
+
+            ZStack {
+                Ellipse()
+                    .fill(
+                        RadialGradient(
+                            colors: [
+                                Color.cyan.opacity(0.85),
+                                Color.indigo.opacity(0.55),
+                                Color.clear,
+                            ],
+                            center: .center,
+                            startRadius: 4,
+                            endRadius: min(width, height) * 0.42
+                        )
+                    )
+                    .frame(width: width * 0.55, height: height * 0.62)
+                    .offset(y: height * 0.04)
+
+                UnevenRoundedRectangle(
+                    topLeadingRadius: width * 0.28,
+                    bottomLeadingRadius: width * 0.04,
+                    bottomTrailingRadius: width * 0.04,
+                    topTrailingRadius: width * 0.28
+                )
+                .stroke(stoneLight, lineWidth: max(width * 0.08, 6))
+                .frame(width: width * 0.62, height: height * 0.78)
+                .overlay {
+                    UnevenRoundedRectangle(
+                        topLeadingRadius: width * 0.28,
+                        bottomLeadingRadius: width * 0.04,
+                        bottomTrailingRadius: width * 0.04,
+                        topTrailingRadius: width * 0.28
+                    )
+                    .stroke(stone, lineWidth: 3)
+                    .frame(width: width * 0.62, height: height * 0.78)
+                }
+            }
+            .frame(width: width, height: height)
+        }
+        .accessibilityLabel("A glowing stone portal")
+        .accessibilityIdentifier("world2.poi.artwork.portalGate")
+    }
+}
+
+private struct World2SceneWorksMill: View {
+    var body: some View {
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            ZStack(alignment: .bottom) {
+                RoundedRectangle(cornerRadius: width * 0.08)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.55, green: 0.78, blue: 0.62),
+                                Color(red: 0.28, green: 0.48, blue: 0.38),
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .frame(width: width * 0.78, height: height * 0.58)
+                Triangle()
+                    .fill(Color(red: 0.78, green: 0.42, blue: 0.28))
+                    .frame(width: width * 0.92, height: height * 0.34)
+                    .offset(y: -height * 0.52)
+                Circle()
+                    .fill(Color(red: 0.95, green: 0.88, blue: 0.55))
+                    .frame(width: width * 0.22, height: width * 0.22)
+                    .offset(x: width * 0.18, y: -height * 0.22)
+                Image(systemName: "map.fill")
+                    .font(.system(size: width * 0.18, weight: .black))
+                    .foregroundStyle(.white)
+                    .offset(y: -height * 0.12)
+            }
+            .frame(width: width, height: height)
+        }
+        .accessibilityLabel("Scene Works mill")
+        .accessibilityIdentifier("world2.poi.artwork.sceneWorks")
+    }
+}
+
+private struct World2POIFactoryShed: View {
+    var body: some View {
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            ZStack(alignment: .bottom) {
+                RoundedRectangle(cornerRadius: width * 0.06)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.55, green: 0.72, blue: 0.88),
+                                Color(red: 0.28, green: 0.38, blue: 0.55),
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .frame(width: width * 0.82, height: height * 0.62)
+                Image(systemName: "building.2.crop.circle.fill")
+                    .font(.system(size: width * 0.28, weight: .black))
+                    .foregroundStyle(.yellow)
+                    .offset(y: -height * 0.14)
+            }
+            .frame(width: width, height: height)
+        }
+        .accessibilityLabel("POI Factory")
+        .accessibilityIdentifier("world2.poi.artwork.poiFactory")
+    }
+}
+
+private struct Triangle: Shape {
+    func path(in rect: CGRect) -> Path {
+        var path = Path()
+        path.move(to: CGPoint(x: rect.midX, y: rect.minY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY))
         path.closeSubpath()
         return path
     }

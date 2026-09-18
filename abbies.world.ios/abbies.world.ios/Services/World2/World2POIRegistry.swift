@@ -22,7 +22,9 @@ enum World2POIRegistry {
     static let assetWorkbenchID = "poi.assetWorkbench"
     static let creatureLabID = "poi.creatureLab"
     static let placeFactoryID = "poi.selfReplicatingFactory"
+    static let sceneWorksID = "poi.sceneWorks"
     static let threeBearsHouseID = "poi.threeBearsHouse"
+    static let scenePortalID = "poi.scenePortal"
 
     /// Every registered archetype, keyed by id.
     static let archetypes: [String: World2POIArchetype] = {
@@ -42,7 +44,9 @@ enum World2POIRegistry {
         assetWorkbench,
         creatureLab,
         placeFactory,
+        sceneWorks,
         threeBearsHouse,
+        scenePortal,
     ]
 
     static func archetype(_ id: String) -> World2POIArchetype? {
@@ -191,9 +195,10 @@ enum World2POIRegistry {
         sizeClass: .medium,
         exteriorAsset: "poi.selfReplicatingFactory.exterior",
         interiorAsset: "poi.selfReplicatingFactory.interior",
+        drawnArtStyle: .poiFactory,
         icon: "building.2.crop.circle.fill",
-        lore: "A small factory that makes another small factory.",
-        activityDescription: "Step inside and make one more factory to place somewhere else.",
+        lore: "A small factory that makes a POI for your inventory.",
+        activityDescription: "Step inside and make a place you can carry, then drop it somewhere that has an open pad.",
         callToAction: "Go Inside",
         musicTrackID: "world2_cliffside_morning",
         contract: World2POIContract(
@@ -201,6 +206,29 @@ enum World2POIRegistry {
             grants: [
                 .placeInventoryItem(
                     templateID: World2PlaceTemplateID.selfReplicatingFactory.rawValue
+                )
+            ]
+        )
+    )
+
+    static let sceneWorks = World2POIArchetype(
+        id: sceneWorksID,
+        name: "Scene Works",
+        kind: .factory,
+        sizeClass: .medium,
+        exteriorAsset: "poi.sceneWorks.exterior",
+        interiorAsset: "poi.sceneWorks.interior",
+        drawnArtStyle: .sceneWorks,
+        icon: "map.fill",
+        lore: "The mill that prints a new place into your pocket.",
+        activityDescription: "Make a scene kit, visit the orphan place, get it ready, then hang it on an open path.",
+        callToAction: "Make a Scene",
+        musicTrackID: "world2_joyful_bounce",
+        contract: World2POIContract(
+            route: .sceneWorks,
+            grants: [
+                .placeInventoryItem(
+                    templateID: World2PlaceTemplateID.newSceneKit.rawValue
                 )
             ]
         )
@@ -226,6 +254,27 @@ enum World2POIRegistry {
             grants: [.storyDecoration(decorationID: World2StoryDecoration.perfectPorridge.id)],
             completionMilestone: "minigame.justRightPorridge.completed"
         )
+    )
+
+    // MARK: - Portals
+
+    /// One registered teleporter. Destination, transition, and activation live
+    /// on the *instance*, because WEST-to-the-saloon and the kitchen microwave
+    /// are the same kind of place standing in different spots.
+    static let scenePortal = World2POIArchetype(
+        id: scenePortalID,
+        name: "Scene Portal",
+        kind: .portal,
+        sizeClass: .small,
+        exteriorAsset: "poi.scenePortal.exterior",
+        interiorAsset: nil,
+        drawnArtStyle: .portalGate,
+        icon: "door.left.hand.open",
+        lore: "A door into another place. Some sit on the edge of the map and some sit in the middle of it.",
+        activityDescription: "Step through and arrive somewhere else.",
+        callToAction: "Go There",
+        musicTrackID: nil,
+        contract: World2POIContract(route: .scenePortal)
     )
 
     // MARK: - Validation

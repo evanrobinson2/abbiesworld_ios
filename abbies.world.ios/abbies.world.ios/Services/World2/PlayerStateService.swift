@@ -174,6 +174,9 @@ class PlayerStateService: ObservableObject {
               ) else {
             return nil
         }
+        guard player.placeInventory?[itemIndex].isSceneKit != true else {
+            return nil
+        }
 
         let target: (x: Double, y: Double, hardpointID: String?)
         if scene.hardpoints.isEmpty {
@@ -235,6 +238,8 @@ class PlayerStateService: ObservableObject {
             id: "scene.\(UUID().uuidString)",
             name: trimmedName,
             summary: summary.trimmingCharacters(in: .whitespacesAndNewlines),
+            minimapIcon: "minimap.placeholder",
+            minimapIconStyle: .placeholder,
             hardpoints: hardpoints,
             isMutableByPlayer: true,
             showsOpenHardpointsToPlayers: true,
@@ -269,16 +274,28 @@ class PlayerStateService: ObservableObject {
     func fabricatePlaceCopy(
         from sourcePlaceInstanceID: String
     ) -> World2PlaceInventoryItem? {
-        guard var player = currentPlayer,
-              let source = (player.placedPlaces ?? []).first(
-                where: { $0.id == sourcePlaceInstanceID }
-              ) else {
+        guard let source = (currentPlayer?.placedPlaces ?? []).first(
+            where: { $0.id == sourcePlaceInstanceID }
+        ) else {
             return nil
         }
-
-        let item = World2PlaceInventoryItem(
+        return fabricateInventoryItem(
             templateID: source.templateID,
             sourcePlaceInstanceID: sourcePlaceInstanceID
+        )
+    }
+
+    @discardableResult
+    func fabricateInventoryItem(
+        templateID: World2PlaceTemplateID,
+        boundSceneID: String? = nil,
+        sourcePlaceInstanceID: String? = nil
+    ) -> World2PlaceInventoryItem? {
+        guard var player = currentPlayer else { return nil }
+        let item = World2PlaceInventoryItem(
+            templateID: templateID,
+            sourcePlaceInstanceID: sourcePlaceInstanceID,
+            boundSceneID: boundSceneID
         )
         var inventory = player.placeInventory ?? []
         inventory.append(item)
@@ -287,6 +304,22 @@ class PlayerStateService: ObservableObject {
         currentPlayer = player
         saveLocalState()
         return item
+    }
+
+    @discardableResult
+    func consumeSceneKit(boundTo sceneID: String) -> Bool {
+        guard var player = currentPlayer else { return false }
+        var inventory = player.placeInventory ?? []
+        let before = inventory.count
+        inventory.removeAll {
+            $0.templateID == .newSceneKit && $0.boundSceneID == sceneID
+        }
+        guard inventory.count < before else { return false }
+        player.placeInventory = inventory
+        player.lastPlayedAt = Date()
+        currentPlayer = player
+        saveLocalState()
+        return true
     }
     
     func addGems(_ amount: Int) {

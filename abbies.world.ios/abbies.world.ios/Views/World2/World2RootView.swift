@@ -65,6 +65,13 @@ struct World2RootView: View {
                     onExit: viewModel.exitPOI
                 )
 
+            case .sceneWorks(let instanceID):
+                World2SceneWorksView(
+                    instanceID: instanceID,
+                    viewModel: viewModel,
+                    onExit: viewModel.exitPOI
+                )
+
             case .furnitureStore:
                 World2FurnitureStoreView(
                     viewModel: viewModel,
@@ -660,7 +667,7 @@ private extension World2Screen {
     var showsGlobalHUD: Bool {
         switch self {
         case .loading, .playerSelect, .treehouse, .cardFactory,
-             .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
+             .selfReplicatingFactory, .sceneWorks, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse:
             return false
         case .homeWorld, .blankSlate:

@@ -311,6 +311,8 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
     /// Instances authored in the shipped scene catalog cannot be deleted by the
     /// editor, only moved. Player-made instances can be removed.
     let isAuthored: Bool
+    /// When set, tapping or swiping this place teleports into another scene.
+    var portal: World2PortalLink?
 
     init(
         id: String? = nil,
@@ -321,7 +323,8 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
         zIndex: Int = 0,
         createdAt: Date = Date(),
         createdByPlayerID: String? = nil,
-        isAuthored: Bool = false
+        isAuthored: Bool = false,
+        portal: World2PortalLink? = nil
     ) {
         self.id = id ?? "poiInstance.\(UUID().uuidString)"
         self.archetypeID = archetypeID
@@ -332,6 +335,7 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
         self.createdAt = createdAt
         self.createdByPlayerID = createdByPlayerID
         self.isAuthored = isAuthored
+        self.portal = portal
     }
 
     var isSnapped: Bool { hardpointID != nil }
@@ -346,6 +350,7 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
         case createdAt
         case createdByPlayerID
         case isAuthored
+        case portal
     }
 
     init(from decoder: Decoder) throws {
@@ -362,7 +367,8 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
                 String.self,
                 forKey: .createdByPlayerID
             ),
-            isAuthored: try container.decodeIfPresent(Bool.self, forKey: .isAuthored) ?? false
+            isAuthored: try container.decodeIfPresent(Bool.self, forKey: .isAuthored) ?? false,
+            portal: try container.decodeIfPresent(World2PortalLink.self, forKey: .portal)
         )
     }
 }
@@ -374,6 +380,7 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
 /// missing-asset placeholder.
 enum World2SceneBackdropStyle: String, Codable, Sendable {
     case threeBearsWoods
+    case orphanClearing
 }
 
 /// One place the camera can sit: a painted backdrop, the pads on it, and the
@@ -389,6 +396,11 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
     /// Semantic asset name for the painted backdrop.
     var backgroundAsset: String
     var backdropStyle: World2SceneBackdropStyle?
+    /// Semantic asset for the compass-rose minimap. A scene that does not
+    /// register one cannot appear as a neighbour tile.
+    var minimapIcon: String
+    /// Drawn stand-in used until `minimapIcon` is painted into the bundle.
+    var minimapIconStyle: World2MinimapIconStyle?
     var hardpoints: [World2SceneHardpoint]
     var poiInstances: [World2POIInstance]
     /// Players (not just developers) may place places from their inventory here.
@@ -397,6 +409,9 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
     /// Developers always see every pad regardless.
     var showsOpenHardpointsToPlayers: Bool
     var isDeveloperPlaceholder: Bool
+    /// True until this scene is hung on an open compass node. An orphan is
+    /// visitable from its scene kit, but it is not part of the world yet.
+    var isOrphan: Bool
     let createdAt: Date
     let createdByPlayerID: String?
 
@@ -406,11 +421,14 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         summary: String,
         backgroundAsset: String = "",
         backdropStyle: World2SceneBackdropStyle? = nil,
+        minimapIcon: String = "",
+        minimapIconStyle: World2MinimapIconStyle? = nil,
         hardpoints: [World2SceneHardpoint] = [],
         poiInstances: [World2POIInstance] = [],
         isMutableByPlayer: Bool = false,
         showsOpenHardpointsToPlayers: Bool = false,
         isDeveloperPlaceholder: Bool = false,
+        isOrphan: Bool = false,
         createdAt: Date = Date(),
         createdByPlayerID: String? = nil
     ) {
@@ -419,11 +437,14 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         self.summary = summary
         self.backgroundAsset = backgroundAsset
         self.backdropStyle = backdropStyle
+        self.minimapIcon = minimapIcon
+        self.minimapIconStyle = minimapIconStyle
         self.hardpoints = hardpoints
         self.poiInstances = poiInstances
         self.isMutableByPlayer = isMutableByPlayer
         self.showsOpenHardpointsToPlayers = showsOpenHardpointsToPlayers
         self.isDeveloperPlaceholder = isDeveloperPlaceholder
+        self.isOrphan = isOrphan
         self.createdAt = createdAt
         self.createdByPlayerID = createdByPlayerID
     }
@@ -435,6 +456,8 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         name: "Blank Slate",
         summary: "A persistent scene for places you make",
         backgroundAsset: "map.blankSlate",
+        minimapIcon: "minimap.blankSlate",
+        minimapIconStyle: .blankGrid,
         isMutableByPlayer: true
     )
 
@@ -448,6 +471,10 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
 
     var occupancy: [String: String] {
         World2HardpointSnapEngine.occupancy(of: poiInstances)
+    }
+
+    var resolvedMinimapIcon: String {
+        minimapIcon.isEmpty ? "minimap.placeholder" : minimapIcon
     }
 
     var openHardpoints: [World2SceneHardpoint] {
@@ -471,11 +498,14 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         case summary
         case backgroundAsset
         case backdropStyle
+        case minimapIcon
+        case minimapIconStyle
         case hardpoints
         case poiInstances
         case isMutableByPlayer
         case showsOpenHardpointsToPlayers
         case isDeveloperPlaceholder
+        case isOrphan
         case createdAt
         case createdByPlayerID
     }
@@ -493,6 +523,11 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
             backdropStyle: try container.decodeIfPresent(
                 World2SceneBackdropStyle.self,
                 forKey: .backdropStyle
+            ),
+            minimapIcon: try container.decodeIfPresent(String.self, forKey: .minimapIcon) ?? "",
+            minimapIconStyle: try container.decodeIfPresent(
+                World2MinimapIconStyle.self,
+                forKey: .minimapIconStyle
             ),
             hardpoints: try container.decodeIfPresent(
                 [World2SceneHardpoint].self,
@@ -514,6 +549,7 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
                 Bool.self,
                 forKey: .isDeveloperPlaceholder
             ) ?? false,
+            isOrphan: try container.decodeIfPresent(Bool.self, forKey: .isOrphan) ?? false,
             createdAt: try container.decodeIfPresent(Date.self, forKey: .createdAt)
                 ?? Date.distantPast,
             createdByPlayerID: try container.decodeIfPresent(

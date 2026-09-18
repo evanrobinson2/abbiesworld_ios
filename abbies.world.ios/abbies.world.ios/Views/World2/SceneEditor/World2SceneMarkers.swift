@@ -269,6 +269,7 @@ struct World2POIInstanceMarker: View {
         case .cardFactory: return .yellow
         case .story: return .orange
         case .factory: return .mint
+        case .portal: return .indigo
         case .home:
             return archetype.ownerID == PlayerId.ani.rawValue ? .purple : .pink
         }
@@ -305,22 +306,31 @@ struct World2POIInstanceMarker: View {
         .zIndex(Double(instance.zIndex))
         .onAppear { isPulsing = !reduceMotion && !isEditable }
         .onDisappear { isPulsing = false }
-        .accessibilityLabel("Explore \(archetype.name)")
+        .accessibilityLabel(accessibilityName)
         .accessibilityHint(
             isEditable
                 ? "Drag to move and snap, pinch to resize, rotate with two fingers"
-                : "Opens details about what is inside"
+                : (instance.portal == nil
+                    ? "Opens details about what is inside"
+                    : "Travels to \(instance.portal?.displayName ?? "another scene")")
         )
         .accessibilityValue(
             isEditable
                 ? "\(instance.transform.debugSummary), \(instance.hardpointID.map { "on \($0)" } ?? "freehand")"
                 : ""
         )
-        .accessibilityIdentifier("world2.poi.\(archetype.id)")
+        .accessibilityIdentifier("world2.poi.\(instance.portal == nil ? archetype.id : instance.id)")
+    }
+
+    private var accessibilityName: String {
+        if let portal = instance.portal {
+            return "Portal to \(portal.displayName)"
+        }
+        return "Explore \(archetype.name)"
     }
 
     private var markerContent: some View {
-        VStack(spacing: 7) {
+        VStack(spacing: archetype.kind == .portal ? 4 : 7) {
             artworkStack
             nameLabel
         }
@@ -343,15 +353,29 @@ struct World2POIInstanceMarker: View {
         }
     }
 
+    private var artworkWidth: CGFloat {
+        archetype.kind == .portal ? 128 : 230
+    }
+
+    private var artworkHeight: CGFloat {
+        archetype.kind == .portal ? 128 : 205
+    }
+
     private var artworkStack: some View {
         ZStack {
             Ellipse()
                 .fill(glowColor.opacity(isHighlighted ? 0.58 : 0.28))
-                .frame(width: 180 * markerScale, height: 100 * markerScale)
+                .frame(
+                    width: (archetype.kind == .portal ? 110 : 180) * markerScale,
+                    height: (archetype.kind == .portal ? 80 : 100) * markerScale
+                )
                 .blur(radius: isHighlighted ? 22 : 14)
 
             exteriorArtwork
-            .frame(width: 230 * markerScale, height: 205 * markerScale)
+            .frame(
+                width: artworkWidth * markerScale,
+                height: artworkHeight * markerScale
+            )
             .shadow(
                 color: glowColor.opacity(isHighlighted ? 0.95 : 0.58),
                 radius: isHighlighted ? 20 : 12
@@ -361,7 +385,10 @@ struct World2POIInstanceMarker: View {
             if isEditable && isSelected {
                 RoundedRectangle(cornerRadius: 22)
                     .stroke(.orange, style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
-                    .frame(width: 230 * markerScale, height: 205 * markerScale)
+                    .frame(
+                        width: artworkWidth * markerScale,
+                        height: artworkHeight * markerScale
+                    )
             }
         }
         .rotationEffect(.degrees(instance.transform.rotationDegrees) + gestureRotation)
@@ -379,7 +406,7 @@ struct World2POIInstanceMarker: View {
     private var nameLabel: some View {
         HStack(spacing: 5) {
             Image(systemName: isEditable ? "move.3d" : "hand.tap.fill")
-            Text(archetype.name)
+            Text(instance.portal?.displayName ?? archetype.name)
             if isEditable && !instance.isSnapped {
                 Image(systemName: "pin.slash.fill")
             }

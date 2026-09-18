@@ -18,6 +18,8 @@ struct World2SceneBackdrop: View {
         switch style {
         case .threeBearsWoods:
             World2ThreeBearsWoodsBackdrop()
+        case .orphanClearing:
+            World2OrphanClearingBackdrop()
         }
     }
 }
@@ -215,6 +217,37 @@ private struct World2ConiferShape: Shape {
         }
 
         return path
+    }
+}
+
+private struct World2OrphanClearingBackdrop: View {
+    var body: some View {
+        GeometryReader { geometry in
+            let size = geometry.size
+            ZStack {
+                LinearGradient(
+                    colors: [
+                        Color(red: 0.72, green: 0.88, blue: 0.98),
+                        Color(red: 0.86, green: 0.93, blue: 0.70),
+                        Color(red: 0.62, green: 0.78, blue: 0.48),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                Ellipse()
+                    .fill(Color(red: 0.78, green: 0.90, blue: 0.52).opacity(0.85))
+                    .frame(width: size.width * 0.62, height: size.height * 0.28)
+                    .position(x: size.width * 0.50, y: size.height * 0.62)
+                Text("NEW PLACE")
+                    .font(.system(size: 28, weight: .black, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.55))
+                    .position(x: size.width * 0.50, y: size.height * 0.18)
+            }
+            .frame(width: size.width, height: size.height)
+            .clipped()
+        }
+        .accessibilityLabel("An empty sunny clearing waiting to become a place")
+        .accessibilityIdentifier("world2.backdrop.orphanClearing")
     }
 }
 

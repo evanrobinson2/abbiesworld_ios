@@ -23,4 +23,12 @@ final class World2RegistryKeyTests: XCTestCase {
             "pois/asset-workbench/interior"
         )
     }
+
+    func testMinimapIconsHaveStableRegistryKeys() {
+        XCTAssertEqual(World2RegistryKey.assetKey(for: "minimap.home"), "maps/minimap/home")
+        XCTAssertEqual(
+            World2RegistryKey.assetKey(for: "minimap.threeBears"),
+            "maps/minimap/three-bears"
+        )
+    }
 }

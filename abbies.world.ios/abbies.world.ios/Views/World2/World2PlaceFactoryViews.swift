@@ -33,7 +33,7 @@ struct World2SelfReplicatingFactoryView: View {
             VStack(spacing: 20) {
                 HStack {
                     Button(action: onExit) {
-                        Label("Blank Slate", systemImage: "arrow.left")
+                        Label("Back to Map", systemImage: "arrow.left")
                             .font(.system(size: 15, weight: .black, design: .rounded))
                     }
                     .buttonStyle(.borderedProminent)
@@ -91,7 +91,7 @@ struct World2SelfReplicatingFactoryView: View {
                         )
 
                         VStack(alignment: .leading, spacing: 10) {
-                            Text("THIS FACTORY MAKES ITSELF")
+                            Text("THIS FACTORY MAKES A POI")
                                 .font(.system(size: 18, weight: .black, design: .rounded))
                                 .foregroundStyle(.white)
 
@@ -101,7 +101,7 @@ struct World2SelfReplicatingFactoryView: View {
                                 }
                                 copiesMadeThisVisit += 1
                             } label: {
-                                Label("MAKE ANOTHER POI FACTORY", systemImage: "sparkles")
+                                Label("MAKE A POI FOR MY INVENTORY", systemImage: "sparkles")
                                     .font(.system(size: 18, weight: .black, design: .rounded))
                                     .foregroundStyle(.indigo)
                                     .padding(.horizontal, 24)
@@ -111,12 +111,12 @@ struct World2SelfReplicatingFactoryView: View {
                                     .shadow(color: .yellow.opacity(0.54), radius: 20, y: 7)
                             }
                             .buttonStyle(.plain)
-                            .accessibilityHint("Adds one placeable factory to your place inventory")
+                            .accessibilityHint("Adds one placeable POI to your inventory")
                             .accessibilityIdentifier("world2.poiFactory.fabricate")
 
                             Text(
                                 copiesMadeThisVisit == 0
-                                    ? "The copy will appear in your Blank Slate inventory."
+                                    ? "The copy waits in your pocket until you place it on an open pad."
                                     : "\(copiesMadeThisVisit) made this visit • \(viewModel.factoryInventoryCount) ready to place"
                             )
                             .font(.system(size: 13, weight: .bold, design: .rounded))

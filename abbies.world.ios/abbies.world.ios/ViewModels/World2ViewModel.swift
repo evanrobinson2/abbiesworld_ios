@@ -10,6 +10,7 @@ enum World2Screen: Equatable {
     case treehouse(poiId: String)
     case cardFactory
     case selfReplicatingFactory(instanceID: String)
+    case sceneWorks(instanceID: String)
     case furnitureStore
     case assetWorkbench
     case creatureLab
@@ -69,6 +70,7 @@ final class World2ViewModel: ObservableObject {
 
     @Published private(set) var currentScreen: World2Screen = .loading
     @Published private(set) var currentWorld: World?
+    @Published private(set) var viewingSceneID: String = WorldId.home.sceneID
     @Published private(set) var currentMutableSceneID =
         World2PlacedPlaceInstance.blankSlateSceneID
     @Published private(set) var isIntroBootstrapReady = false
@@ -118,10 +120,13 @@ final class World2ViewModel: ObservableObject {
     var factoryInventoryCount: Int {
         placeInventory.filter { $0.templateID == .selfReplicatingFactory }.count
     }
+    var sceneKitInventoryCount: Int {
+        placeInventory.filter(\.isSceneKit).count
+    }
 
     /// The scene backing the map the player is looking at.
     var currentScene: World2SceneDefinition {
-        sceneGraph.scene((currentWorld?.id ?? .home).sceneID)
+        sceneGraph.scene(viewingSceneID)
     }
 
     var currentSceneInstances: [World2POIInstance] {
@@ -184,6 +189,7 @@ final class World2ViewModel: ObservableObject {
         mutableSceneBackStack = []
         playerService.setCurrentWorld(.home)
         currentWorld = worlds[.home]
+        viewingSceneID = WorldId.home.sceneID
         setScreen(.homeWorld, reason: "player_selected")
         World2Diagnostics.log("player_selected", ["player": playerId.rawValue])
     }
@@ -223,6 +229,7 @@ final class World2ViewModel: ObservableObject {
         }
         dismissPOIInspection()
         currentWorld = world
+        viewingSceneID = worldId.sceneID
         playerService.setCurrentWorld(worldId)
         if worldId == .blankSlate {
             currentMutableSceneID = World2PlacedPlaceInstance.blankSlateSceneID
@@ -257,6 +264,10 @@ final class World2ViewModel: ObservableObject {
             y: y,
             hardpointID: hardpointID
         ) else {
+            if placeInventory.first(where: { $0.id == itemID })?.isSceneKit == true {
+                visitSceneKit(itemID)
+                return nil
+            }
             showToast("That place could not be placed there.")
             return nil
         }
@@ -283,6 +294,8 @@ final class World2ViewModel: ObservableObject {
                 .selfReplicatingFactory(instanceID: instance.id),
                 reason: "placed_poi_entered"
             )
+        case .newSceneKit:
+            showToast("Open that kit from your pocket to visit the new scene.")
         }
         World2Diagnostics.log(
             "placed_poi_entered",
@@ -292,7 +305,10 @@ final class World2ViewModel: ObservableObject {
 
     @discardableResult
     func fabricateFactoryCopy(from instanceID: String) -> World2PlaceInventoryItem? {
-        guard let item = playerService.fabricatePlaceCopy(from: instanceID) else {
+        guard let item = playerService.fabricateInventoryItem(
+            templateID: .selfReplicatingFactory,
+            sourcePlaceInstanceID: instanceID
+        ) else {
             showToast("This factory could not make a copy.")
             return nil
         }
@@ -304,8 +320,80 @@ final class World2ViewModel: ObservableObject {
                 "template": item.templateID.rawValue
             ]
         )
-        showToast("A new POI Factory is in your inventory!")
+        showToast("A new POI is in your inventory!")
         return item
+    }
+
+    @discardableResult
+    func makeNewScene() -> World2PlaceInventoryItem? {
+        let count = sceneGraph.allScenes.filter(\.isOrphan).count + 1
+        let scene = sceneGraph.makeOrphanScene(
+            named: "New Place \(count)",
+            by: currentPlayerId?.rawValue
+        )
+        guard let item = playerService.fabricateInventoryItem(
+            templateID: .newSceneKit,
+            boundSceneID: scene.id
+        ) else {
+            showToast("Scene Works could not print a kit.")
+            return nil
+        }
+        World2Diagnostics.log(
+            "scene_kit_fabricated",
+            ["item": item.id, "scene": scene.id]
+        )
+        showToast("A scene kit is in your pocket. Go there to get it ready.")
+        return item
+    }
+
+    func visitSceneKit(_ itemID: String) {
+        guard let item = placeInventory.first(where: { $0.id == itemID }),
+              item.isSceneKit,
+              let sceneID = item.boundSceneID else {
+            showToast("That scene is not ready yet.")
+            return
+        }
+        visitScene(sceneID)
+    }
+
+    /// Walk into any scene, including an orphan that is not a WorldId yet.
+    func visitScene(_ sceneID: String) {
+        dismissPOIInspection()
+        viewingSceneID = sceneID
+        if let worldID = WorldId(sceneID: sceneID), let world = worlds[worldID] {
+            currentWorld = world
+            playerService.setCurrentWorld(worldID)
+            if worldID == .blankSlate {
+                currentMutableSceneID = World2PlacedPlaceInstance.blankSlateSceneID
+                mutableSceneBackStack = []
+                setScreen(.blankSlate, reason: "scene_visited")
+                return
+            }
+        }
+        setScreen(.homeWorld, reason: "scene_visited")
+        World2Diagnostics.log("scene_visited", ["scene": sceneID])
+    }
+
+    var openNodesForAttachment: [World2OpenNode] {
+        sceneGraph.openNodes
+    }
+
+    func connectCurrentOrphan(to node: World2OpenNode) {
+        let orphanID = viewingSceneID
+        guard sceneGraph.scene(orphanID).isOrphan else {
+            showToast("This place is already on the world.")
+            return
+        }
+        guard sceneGraph.connectOrphan(orphanID, to: node) else {
+            showToast("That path is already taken.")
+            return
+        }
+        _ = playerService.consumeSceneKit(boundTo: orphanID)
+        showToast("Hung on \(node.label). The kit is used up.")
+        World2Diagnostics.log(
+            "scene_kit_consumed",
+            ["scene": orphanID, "host": node.hostSceneID, "compass": node.compass.rawValue]
+        )
     }
 
     func traverseSceneExit(_ exitID: String) {
@@ -374,13 +462,44 @@ final class World2ViewModel: ObservableObject {
     func returnToHomeWorld() {
         currentMutableSceneID = World2PlacedPlaceInstance.blankSlateSceneID
         mutableSceneBackStack = []
-        switchWorld(to: .home)
+        visitScene(WorldId.home.sceneID)
     }
 
     // MARK: - Entering registered places
 
     /// Route by contract. Every registered place declares the screen it opens,
     /// so adding a place never means editing a pile of `if` statements.
+    func enterPOI(instance: World2POIInstance) {
+        if instance.portal != nil {
+            travelThroughPortal(instance)
+            return
+        }
+        guard let archetype = World2POIRegistry.archetype(instance.archetypeID) else {
+            World2Diagnostics.log(
+                "poi_archetype_unregistered",
+                ["archetype": instance.archetypeID, "instance": instance.id]
+            )
+            showToast("That place is not registered yet.")
+            return
+        }
+        switch archetype.route {
+        case .placeFactory:
+            dismissPOIInspection()
+            setScreen(
+                .selfReplicatingFactory(instanceID: instance.id),
+                reason: "poi_entered"
+            )
+        case .sceneWorks:
+            dismissPOIInspection()
+            setScreen(
+                .sceneWorks(instanceID: instance.id),
+                reason: "poi_entered"
+            )
+        default:
+            enterPOI(archetype)
+        }
+    }
+
     func enterPOI(_ archetype: World2POIArchetype) {
         dismissPOIInspection()
         switch archetype.route {
@@ -402,10 +521,40 @@ final class World2ViewModel: ObservableObject {
         case .threeBearsHouse:
             setScreen(.threeBearsHouse, reason: "poi_entered")
         case .placeFactory:
-            // Factories are entered through their placed instance, which knows
-            // which copy the player tapped.
             showToast("Tap the factory on the map to go inside.")
+        case .sceneWorks:
+            showToast("Tap Scene Works on the map to go inside.")
+        case .scenePortal:
+            showToast("That path does not go anywhere yet.")
         }
+    }
+
+    /// Follow a portal POI into its destination scene. Empty sockets stay put.
+    func travelThroughPortal(_ instance: World2POIInstance) {
+        dismissPOIInspection()
+        guard let portal = instance.portal, portal.hasDestination,
+              let destinationID = portal.destinationSceneID else {
+            showToast("That path does not go anywhere yet.")
+            World2Diagnostics.log(
+                "portal_blocked",
+                [
+                    "instance": instance.id,
+                    "destination": instance.portal?.destinationSceneID ?? "none",
+                ]
+            )
+            return
+        }
+        World2Diagnostics.log(
+            "portal_travel",
+            [
+                "instance": instance.id,
+                "from": instance.sceneID,
+                "to": destinationID,
+                "transition": portal.transition.diagnosticName,
+                "activation": portal.activation.diagnosticName,
+            ]
+        )
+        visitScene(destinationID)
     }
 
     func exitPOI() {
@@ -658,7 +807,7 @@ final class World2ViewModel: ObservableObject {
             return
         case .homeWorld:
             songID = worldSongID(currentWorld?.id ?? .home)
-        case .blankSlate, .selfReplicatingFactory:
+        case .blankSlate, .selfReplicatingFactory, .sceneWorks:
             songID = worldSongID(.blankSlate)
         case .treehouse(let poiId):
             songID = World2POIRegistry.archetype(poiId)?.musicTrackID
@@ -815,6 +964,8 @@ private extension World2Screen {
         case .cardFactory: return "card_factory"
         case .selfReplicatingFactory(let instanceID):
             return "self_replicating_factory:\(instanceID)"
+        case .sceneWorks(let instanceID):
+            return "scene_works:\(instanceID)"
         case .furnitureStore: return "furniture_store"
         case .assetWorkbench: return "asset_workbench"
         case .creatureLab: return "creature_lab"

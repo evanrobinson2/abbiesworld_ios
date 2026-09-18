@@ -12,6 +12,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct World2SceneEditorPanel: View {
     let sceneID: String
@@ -21,6 +22,8 @@ struct World2SceneEditorPanel: View {
     @Binding var selectedHardpointID: String?
     @Binding var snappingEnabled: Bool
     let aspectRatio: Double
+    var openNodes: [World2OpenNode] = []
+    var onConnect: ((World2OpenNode) -> Void)?
     let onDone: () -> Void
 
     @State private var hardpointNameDraft = ""
@@ -38,6 +41,9 @@ struct World2SceneEditorPanel: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
             header
+            if scene.isOrphan {
+                connectRow
+            }
             layerPicker
 
             switch layer {
@@ -81,6 +87,41 @@ struct World2SceneEditorPanel: View {
                 .foregroundStyle(store.hasUnsavedChanges ? .orange : .green)
                 .accessibilityIdentifier("world2.sceneEditor.saveStatus")
         }
+    }
+
+    @ViewBuilder
+    private var connectRow: some View {
+        HStack(spacing: 10) {
+            Label("ORPHAN", systemImage: "map")
+                .font(.system(size: 13, weight: .black, design: .rounded))
+                .foregroundStyle(.mint)
+
+            Text("Add pads and portals here. Last step: hang it on an open node.")
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .foregroundStyle(.secondary)
+
+            Spacer()
+
+            Menu {
+                if openNodes.isEmpty {
+                    Text("No open paths on the world")
+                } else {
+                    ForEach(openNodes) { node in
+                        Button(node.label) {
+                            onConnect?(node)
+                        }
+                    }
+                }
+            } label: {
+                Label("Connect to Open Node", systemImage: "point.3.connected.trianglepath.dotted")
+                    .font(.system(size: 13, weight: .black, design: .rounded))
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.mint)
+            .disabled(openNodes.isEmpty || onConnect == nil)
+            .accessibilityIdentifier("world2.sceneEditor.connectOrphan")
+        }
+        .padding(.vertical, 4)
     }
 
     private var layerPicker: some View {

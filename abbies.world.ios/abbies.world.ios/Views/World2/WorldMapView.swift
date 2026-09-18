@@ -12,10 +12,14 @@ struct WorldMapView: View {
     /// The pad lighting up under a live drag, and why it might refuse.
     @State private var candidateHardpointID: String?
     @State private var snapRejection: String?
+    @State private var travelDrag: World2TravelDrag?
+    @State private var scriptedTravel: World2ScriptedTravel?
+    @State private var showingPocket = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
     private var developerMode: Bool { developerSession.isEnabled }
     private var store: World2SceneGraphStore { viewModel.sceneGraph }
-    private var sceneID: String { (viewModel.currentWorld?.id ?? .home).sceneID }
+    private var sceneID: String { viewModel.viewingSceneID }
     private var scene: World2SceneDefinition { store.scene(sceneID) }
 
     private var isEditingPlaces: Bool {
@@ -27,6 +31,9 @@ struct WorldMapView: View {
     }
 
     private var worldSubtitle: String {
+        if scene.isOrphan {
+            return "Not on the world yet — get it ready, then hang it on an open path"
+        }
         switch viewModel.currentWorld?.id {
         case .work: return "Help the city's magical machines"
         case .farm: return "Discover something new in the meadow"
@@ -41,16 +48,24 @@ struct WorldMapView: View {
             let aspectRatio = mapRect.height > 1 ? mapRect.width / mapRect.height : 4.0 / 3.0
 
             ZStack {
-                mapBackground(geometry: geometry, mapRect: mapRect)
-                padPlacementLayer(mapRect: mapRect)
-                hardpointLayer(mapRect: mapRect)
-                placeLayer(mapRect: mapRect, viewSize: geometry.size, aspectRatio: aspectRatio)
+                mapStage(geometry: geometry, mapRect: mapRect)
                 topChrome
                 travelNavigation
+                minimapOverlay
+                orphanBanner
+                pocketOverlay
                 inspectionOverlay
                 snapHintOverlay
                 editorOverlay(aspectRatio: aspectRatio)
+                if let scriptedTravel {
+                    World2PortalFlashOverlay(
+                        progress: scriptedTravel.progress,
+                        kind: scriptedTravel.kind
+                    )
+                    .zIndex(90)
+                }
             }
+            .gesture(mapSwipeGesture(viewSize: geometry.size))
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.homeWorld")
@@ -66,6 +81,17 @@ struct WorldMapView: View {
         .onChange(of: viewModel.currentWorld?.id) {
             candidateHardpointID = nil
             snapRejection = nil
+            travelDrag = nil
+            scriptedTravel = nil
+            showingPocket = false
+            syncEditorSelection()
+        }
+        .onChange(of: viewModel.viewingSceneID) {
+            candidateHardpointID = nil
+            snapRejection = nil
+            travelDrag = nil
+            scriptedTravel = nil
+            showingPocket = false
             syncEditorSelection()
         }
         .onChange(of: editorLayer) {
@@ -77,8 +103,76 @@ struct WorldMapView: View {
 
     // MARK: - Background
 
+    /// Painted map plus places, offset together while a slide is in flight so
+    /// the chrome (arrows, HUD) stays put.
     @ViewBuilder
-    private func mapBackground(geometry: GeometryProxy, mapRect: CGRect) -> some View {
+    private func mapStage(geometry: GeometryProxy, mapRect: CGRect) -> some View {
+        let drag = travelDrag
+        let currentOffset = drag.map { session in
+            World2SwipeTravel.currentMapOffset(
+                compass: session.compass,
+                percent: session.percent,
+                width: geometry.size.width,
+                height: geometry.size.height
+            )
+        }
+        let destinationScene = drag.flatMap { session -> World2SceneDefinition? in
+            guard !session.rubberBanding,
+                  let destinationID = session.instance?.portal?.destinationSceneID else {
+                return nil
+            }
+            return store.scene(destinationID)
+        }
+
+        ZStack {
+            mapLayers(geometry: geometry, mapRect: mapRect, scene: scene)
+                .offset(
+                    x: currentOffset.map { CGFloat($0.x) } ?? 0,
+                    y: currentOffset.map { CGFloat($0.y) } ?? 0
+                )
+
+            if let drag, let destinationScene {
+                let destRect = Self.mapRect(for: destinationScene, in: geometry.size)
+                let destOffset = World2SwipeTravel.destinationMapOffset(
+                    compass: drag.compass,
+                    percent: drag.percent,
+                    width: geometry.size.width,
+                    height: geometry.size.height
+                )
+                mapLayers(geometry: geometry, mapRect: destRect, scene: destinationScene)
+                    .offset(x: CGFloat(destOffset.x), y: CGFloat(destOffset.y))
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(true)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func mapLayers(
+        geometry: GeometryProxy,
+        mapRect: CGRect,
+        scene: World2SceneDefinition
+    ) -> some View {
+        ZStack {
+            mapBackground(geometry: geometry, mapRect: mapRect, scene: scene)
+            if scene.id == self.scene.id {
+                padPlacementLayer(mapRect: mapRect)
+                hardpointLayer(mapRect: mapRect)
+                placeLayer(
+                    mapRect: mapRect,
+                    viewSize: geometry.size,
+                    aspectRatio: mapRect.height > 1 ? mapRect.width / mapRect.height : 4.0 / 3.0
+                )
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func mapBackground(
+        geometry: GeometryProxy,
+        mapRect: CGRect,
+        scene: World2SceneDefinition
+    ) -> some View {
         if let backdropStyle = scene.backdropStyle,
            AssetBootstrapService.shared.image(for: scene.backgroundAsset) == nil {
             // A drawn backdrop fills the screen, so no letterbox blur is needed.
@@ -183,7 +277,8 @@ struct WorldMapView: View {
         aspectRatio: Double
     ) -> some View {
         ForEach(scene.instancesInDrawOrder) { instance in
-            if let archetype = World2POIRegistry.archetype(instance.archetypeID) {
+            if shouldDrawPlace(instance) {
+                if let archetype = World2POIRegistry.archetype(instance.archetypeID) {
                 World2POIInstanceMarker(
                     archetype: archetype,
                     instance: instance,
@@ -195,6 +290,8 @@ struct WorldMapView: View {
                     onTap: {
                         if isEditingPlaces {
                             selectedInstanceID = instance.id
+                        } else if instance.portal != nil {
+                            beginPortalTravel(instance)
                         } else {
                             withAnimation(.spring(response: 0.38, dampingFraction: 0.82)) {
                                 viewModel.inspectPOI(instance: instance)
@@ -231,7 +328,15 @@ struct WorldMapView: View {
                     }
                 )
             }
+            }
         }
+    }
+
+    private func shouldDrawPlace(_ instance: World2POIInstance) -> Bool {
+        if instance.hidesOnPlayerMap {
+            return isEditingPlaces || isEditingHardpoints
+        }
+        return true
     }
 
     // MARK: - Chrome
@@ -240,7 +345,7 @@ struct WorldMapView: View {
         VStack {
             HStack(alignment: .top, spacing: 14) {
                 World2WorldIdentity(
-                    name: viewModel.currentWorld?.name ?? "Abbie's World",
+                    name: scene.name,
                     subtitle: worldSubtitle
                 )
 
@@ -262,13 +367,108 @@ struct WorldMapView: View {
 
     @ViewBuilder
     private var travelNavigation: some View {
-        if let world = viewModel.currentWorld, !world.adjacentWorlds.isEmpty {
-            World2TravelNavigation(
-                currentWorld: world.id,
-                destinations: world.adjacentWorlds,
-                onTravel: viewModel.switchWorld
+        World2CompassNavigation(
+            sockets: compassSockets,
+            bottomInset: isEditingPlaces || isEditingHardpoints ? 118 : 20,
+            onSelect: handleCompassTap
+        )
+        .zIndex(20)
+        .allowsHitTesting(scriptedTravel == nil && !(travelDrag?.isSettling ?? false))
+    }
+
+    @ViewBuilder
+    private var minimapOverlay: some View {
+        World2MinimapView(
+            neighborhood: World2MinimapGraph.neighborhood(of: scene, resolve: store.scene),
+            onSelect: handleCompassTap
+        )
+        .padding(.leading, 16)
+        .padding(.bottom, isEditingPlaces || isEditingHardpoints ? 118 : 18)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+        .zIndex(22)
+        .allowsHitTesting(scriptedTravel == nil && !(travelDrag?.isSettling ?? false))
+    }
+
+    @ViewBuilder
+    private var orphanBanner: some View {
+        if scene.isOrphan {
+            VStack(spacing: 8) {
+                Text("This place is an orphan")
+                    .font(.system(size: 16, weight: .black, design: .rounded))
+                Text("The kit in your pocket still works. Developer mode adds pads and portals. Connecting to an open path uses the kit up.")
+                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .opacity(0.86)
+                Button("Leave — keep the kit") {
+                    viewModel.visitScene(WorldId.home.sceneID)
+                }
+                .buttonStyle(.borderedProminent)
+                .tint(.mint)
+                .accessibilityIdentifier("world2.orphan.leave")
+            }
+            .foregroundStyle(.white)
+            .padding(.horizontal, 18)
+            .padding(.vertical, 12)
+            .background(.black.opacity(0.62), in: RoundedRectangle(cornerRadius: 18))
+            .padding(.top, 92)
+            .frame(maxWidth: 520)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .zIndex(24)
+            .accessibilityIdentifier("world2.orphan.banner")
+        }
+    }
+
+    @ViewBuilder
+    private var pocketOverlay: some View {
+        VStack {
+            Spacer()
+            HStack {
+                Spacer()
+                if showingPocket {
+                    World2PlacePocket(
+                        items: viewModel.placeInventory,
+                        sceneName: { sceneID in viewModel.sceneGraph.scene(sceneID).name },
+                        onVisitKit: viewModel.visitSceneKit,
+                        onTakeFactoryToBlankSlate: {
+                            showingPocket = false
+                            viewModel.switchWorld(to: .blankSlate)
+                        },
+                        onClose: { showingPocket = false }
+                    )
+                    .padding(.trailing, 16)
+                    .padding(.bottom, isEditingPlaces || isEditingHardpoints ? 118 : 18)
+                } else {
+                    Button {
+                        showingPocket = true
+                    } label: {
+                        Label("\(viewModel.placeInventory.count)", systemImage: "shippingbox.fill")
+                            .font(.system(size: 14, weight: .black, design: .rounded))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 12)
+                            .background(.indigo.opacity(0.92), in: Capsule())
+                    }
+                    .buttonStyle(.plain)
+                    .padding(.trailing, 16)
+                    .padding(.bottom, isEditingPlaces || isEditingHardpoints ? 118 : 88)
+                    .accessibilityIdentifier("world2.pocket.open")
+                    .accessibilityLabel("Place inventory")
+                }
+            }
+        }
+        .zIndex(23)
+    }
+
+    private var compassSockets: [World2CompassSocket] {
+        World2Compass.allCases.map { compass in
+            let instance = scene.compassPortal(compass)
+            let portal = instance?.portal
+            return World2CompassSocket(
+                compass: compass,
+                title: portal?.displayName ?? "Nowhere yet",
+                destinationSceneID: portal?.destinationSceneID,
+                isOpen: portal?.hasDestination == true
             )
-            .zIndex(20)
         }
     }
 
@@ -287,7 +487,7 @@ struct WorldMapView: View {
             World2POIInspectionDrawer(
                 poi: inspection.poi,
                 isReadOnlyVisit: viewModel.isReadOnlyVisit(to: inspection.poi.id),
-                onEnter: { viewModel.enterPOI(inspection.poi) },
+                onEnter: { viewModel.enterPOI(instance: inspection.instance) },
                 onDismiss: {
                     withAnimation(.easeOut(duration: 0.2)) {
                         viewModel.dismissPOIInspection()
@@ -342,7 +542,11 @@ struct WorldMapView: View {
                 selectedInstanceID: $selectedInstanceID,
                 selectedHardpointID: $selectedHardpointID,
                 snappingEnabled: $snappingEnabled,
-                aspectRatio: aspectRatio
+                aspectRatio: aspectRatio,
+                openNodes: scene.isOrphan ? viewModel.openNodesForAttachment : [],
+                onConnect: scene.isOrphan
+                    ? { node in viewModel.connectCurrentOrphan(to: node) }
+                    : nil
             ) {
                 store.save()
                 withAnimation(.easeOut(duration: 0.2)) {
@@ -426,111 +630,225 @@ struct WorldMapView: View {
         }
         return fittedMapRect(imageSize: CGSize(width: 4, height: 3), in: viewSize)
     }
-}
 
-/// Travel arrows laid out by index so a world can have any number of
-/// neighbours without two arrows landing on top of each other.
-private struct World2TravelNavigation: View {
-    let currentWorld: WorldId
-    let destinations: [WorldId]
-    let onTravel: (WorldId) -> Void
+    // MARK: - Travel
 
-    private static let slots: [(alignment: Alignment, insets: EdgeInsets)] = [
-        (.bottomLeading, EdgeInsets(top: 0, leading: 18, bottom: 20, trailing: 0)),
-        (.trailing, EdgeInsets(top: 95, leading: 0, bottom: 95, trailing: 18)),
-        (.bottomTrailing, EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 18)),
-        (.topLeading, EdgeInsets(top: 92, leading: 18, bottom: 0, trailing: 0)),
-    ]
+    private var mapSwipeEnabled: Bool {
+        !isEditingPlaces
+            && !isEditingHardpoints
+            && !viewModel.showingPOISheet
+            && scriptedTravel == nil
+            && !(travelDrag?.isSettling ?? false)
+    }
 
-    /// Home sits at the origin of the map, so the way back always occupies the
-    /// bottom-left slot no matter which world you are standing in.
-    private var ordered: [WorldId] {
-        destinations.sorted { lhs, rhs in
-            if lhs == .home { return true }
-            if rhs == .home { return false }
-            return lhs.rawValue < rhs.rawValue
+    private func mapSwipeGesture(viewSize: CGSize) -> some Gesture {
+        DragGesture(minimumDistance: 22, coordinateSpace: .local)
+            .onChanged { value in
+                guard mapSwipeEnabled || travelDrag != nil else { return }
+                handleSwipeChanged(value, viewSize: viewSize)
+            }
+            .onEnded { value in
+                handleSwipeEnded(value, viewSize: viewSize)
+            }
+    }
+
+    private func handleSwipeChanged(_ value: DragGesture.Value, viewSize: CGSize) {
+        if travelDrag == nil {
+            guard mapSwipeEnabled else { return }
+            guard World2SwipeTravel.isInsideSwipeInset(
+                x: value.startLocation.x,
+                y: value.startLocation.y,
+                width: viewSize.width,
+                height: viewSize.height
+            ) else { return }
+            guard let compass = World2Compass.dominant(
+                translationX: value.translation.width,
+                translationY: value.translation.height
+            ) else { return }
+            let instance = scene.compassPortal(compass)
+            travelDrag = World2TravelDrag(
+                compass: compass,
+                percent: 0,
+                instance: instance,
+                rubberBanding: instance?.portal?.hasDestination != true
+            )
+        }
+        guard var drag = travelDrag, !drag.isSettling else { return }
+        let raw = World2SwipeTravel.percent(
+            translationX: value.translation.width,
+            translationY: value.translation.height,
+            compass: drag.compass,
+            width: viewSize.width,
+            height: viewSize.height
+        )
+        drag.percent = drag.rubberBanding
+            ? World2SwipeTravel.rubberBand(raw)
+            : min(max(raw, 0), 1)
+        travelDrag = drag
+    }
+
+    private func handleSwipeEnded(_ value: DragGesture.Value, viewSize: CGSize) {
+        guard let drag = travelDrag, !drag.isSettling else { return }
+        let percent = World2SwipeTravel.percent(
+            translationX: value.translation.width,
+            translationY: value.translation.height,
+            compass: drag.compass,
+            width: viewSize.width,
+            height: viewSize.height
+        )
+        let predicted = World2SwipeTravel.percent(
+            translationX: value.predictedEndTranslation.width,
+            translationY: value.predictedEndTranslation.height,
+            compass: drag.compass,
+            width: viewSize.width,
+            height: viewSize.height
+        )
+        let resolution = World2SwipeTravel.resolve(
+            percent: percent,
+            predictedPercent: predicted,
+            hasDestination: !drag.rubberBanding
+        )
+        settleTravel(drag: drag, resolution: resolution)
+    }
+
+    private func handleCompassTap(_ compass: World2Compass) {
+        guard scriptedTravel == nil, travelDrag?.isSettling != true else { return }
+        let instance = scene.compassPortal(compass)
+        if let instance, instance.portal?.hasDestination == true {
+            beginPortalTravel(instance)
+        } else {
+            rubberBandEmptySocket(compass)
         }
     }
 
-    var body: some View {
-        ZStack {
-            ForEach(Array(ordered.enumerated()), id: \.element) { index, destination in
-                let slot = Self.slots[index % Self.slots.count]
-                World2TravelArrow(
-                    title: destination.displayName,
-                    direction: destination == .home
-                        ? "BACK HOME"
-                        : (destination.direction?.uppercased() ?? "EXPLORE"),
-                    systemName: icon(for: slot.alignment, destination: destination),
-                    tint: tint(for: destination)
-                ) {
-                    onTravel(destination)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: slot.alignment)
-                .padding(slot.insets)
-                .accessibilityIdentifier("world2.world.\(destination.rawValue)")
+    private func beginPortalTravel(_ instance: World2POIInstance) {
+        guard let portal = instance.portal, portal.hasDestination else {
+            viewModel.travelThroughPortal(instance)
+            return
+        }
+        if reduceMotion {
+            viewModel.travelThroughPortal(instance)
+            return
+        }
+        switch portal.transition {
+        case .slide(let compass):
+            commitSlide(instance: instance, compass: compass)
+        case .portal, .dream, .fade:
+            playScriptedTravel(instance: instance, kind: portal.transition)
+        }
+    }
+
+    private func commitSlide(instance: World2POIInstance, compass: World2Compass) {
+        var drag = travelDrag ?? World2TravelDrag(
+            compass: compass,
+            percent: travelDrag?.percent ?? 0,
+            instance: instance,
+            rubberBanding: false
+        )
+        drag.instance = instance
+        drag.compass = compass
+        drag.rubberBanding = false
+        drag.isSettling = true
+        travelDrag = drag
+        withAnimation(.spring(response: 0.32, dampingFraction: 0.88)) {
+            updateTravelPercent(1)
+        }
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(280))
+            viewModel.travelThroughPortal(instance)
+            travelDrag = nil
+        }
+    }
+
+    private func settleTravel(drag: World2TravelDrag, resolution: World2SwipeTravel.Resolution) {
+        var next = drag
+        next.isSettling = true
+        travelDrag = next
+        switch resolution {
+        case .commit:
+            guard let instance = drag.instance else {
+                snapBack(drag)
+                return
+            }
+            commitSlide(instance: instance, compass: drag.compass)
+        case .cancel:
+            snapBack(drag)
+        }
+    }
+
+    private func snapBack(_ drag: World2TravelDrag) {
+        var next = drag
+        next.isSettling = true
+        travelDrag = next
+        withAnimation(.spring(response: 0.28, dampingFraction: 0.82)) {
+            updateTravelPercent(0)
+        }
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(260))
+            if travelDrag?.isSettling == true {
+                travelDrag = nil
             }
         }
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("world2.world.travelArrows")
     }
 
-    private func tint(for destination: WorldId) -> Color {
-        switch destination {
-        case .farm: return .green
-        case .threeBears: return .brown
-        case .blankSlate: return .cyan
-        default: return .orange
+    private func rubberBandEmptySocket(_ compass: World2Compass) {
+        guard !reduceMotion else { return }
+        travelDrag = World2TravelDrag(
+            compass: compass,
+            percent: 0,
+            instance: scene.compassPortal(compass),
+            rubberBanding: true,
+            isSettling: true
+        )
+        withAnimation(.spring(response: 0.22, dampingFraction: 0.68)) {
+            updateTravelPercent(World2SwipeTravel.emptyRubberBandLimit)
+        }
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(180))
+            withAnimation(.spring(response: 0.32, dampingFraction: 0.72)) {
+                updateTravelPercent(0)
+            }
+            try? await Task.sleep(for: .milliseconds(280))
+            travelDrag = nil
         }
     }
 
-    private func icon(for alignment: Alignment, destination: WorldId) -> String {
-        if destination == .home { return "arrow.uturn.left" }
-        switch alignment {
-        case .trailing: return "arrow.right"
-        case .bottomTrailing: return "arrow.down.right"
-        case .topLeading: return "arrow.up.left"
-        default: return "arrow.down.left"
+    private func updateTravelPercent(_ percent: Double) {
+        guard var drag = travelDrag else { return }
+        drag.percent = percent
+        travelDrag = drag
+    }
+
+    private func playScriptedTravel(
+        instance: World2POIInstance,
+        kind: World2SceneTransition
+    ) {
+        scriptedTravel = World2ScriptedTravel(kind: kind, progress: 0, instance: instance)
+        withAnimation(.easeIn(duration: kind == .dream ? 0.72 : 0.42)) {
+            guard var flash = scriptedTravel else { return }
+            flash.progress = 1
+            scriptedTravel = flash
+        }
+        Task { @MainActor in
+            try? await Task.sleep(for: .milliseconds(kind == .dream ? 740 : 440))
+            viewModel.travelThroughPortal(instance)
+            scriptedTravel = nil
         }
     }
 }
 
-private struct World2TravelArrow: View {
-    let title: String
-    let direction: String
-    let systemName: String
-    let tint: Color
-    let action: () -> Void
+private struct World2TravelDrag {
+    var compass: World2Compass
+    var percent: Double
+    var instance: World2POIInstance?
+    var rubberBanding: Bool
+    var isSettling: Bool = false
+}
 
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 10) {
-                Image(systemName: systemName)
-                    .font(.system(size: 25, weight: .black))
-                    .frame(width: 34, height: 34)
-                    .background(.white.opacity(0.20), in: Circle())
-
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(direction)
-                        .font(.system(size: 9, weight: .black, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.72))
-                    Text(title)
-                        .font(.system(size: 16, weight: .black, design: .rounded))
-                }
-            }
-            .foregroundStyle(.white)
-            .padding(.leading, 9)
-            .padding(.trailing, 15)
-            .padding(.vertical, 8)
-            .background(tint.opacity(0.94), in: Capsule())
-            .overlay(Capsule().stroke(.white.opacity(0.72), lineWidth: 2))
-            .shadow(color: tint.opacity(0.75), radius: 13)
-            .contentShape(Capsule())
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Travel \(direction.lowercased()) to \(title)")
-        .accessibilityHint("Opens \(title)")
-    }
+private struct World2ScriptedTravel {
+    var kind: World2SceneTransition
+    var progress: Double
+    var instance: World2POIInstance
 }
 
 private struct World2WorldIdentity: View {
@@ -809,6 +1127,96 @@ struct World2SemanticImage: View {
             }
             .accessibilityLabel(fallbackLabel)
             .accessibilityIdentifier("world2.asset.placeholder.\(semanticName)")
+        }
+    }
+}
+
+private struct World2PlacePocket: View {
+    let items: [World2PlaceInventoryItem]
+    let sceneName: (String) -> String
+    let onVisitKit: (String) -> Void
+    let onTakeFactoryToBlankSlate: () -> Void
+    let onClose: () -> Void
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                Label("POCKET", systemImage: "shippingbox.fill")
+                    .font(.system(size: 14, weight: .black, design: .rounded))
+                Spacer()
+                Button("Close", action: onClose)
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+            }
+
+            if items.isEmpty {
+                Text("Nothing to carry yet.")
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .foregroundStyle(.secondary)
+            } else {
+                ScrollView {
+                    LazyVStack(spacing: 8) {
+                        ForEach(items) { item in
+                            pocketRow(item)
+                        }
+                    }
+                }
+                .frame(maxHeight: 240)
+            }
+        }
+        .padding(16)
+        .frame(width: 320)
+        .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 22))
+        .overlay {
+            RoundedRectangle(cornerRadius: 22)
+                .stroke(.white.opacity(0.7), lineWidth: 2)
+        }
+        .accessibilityIdentifier("world2.pocket")
+    }
+
+    @ViewBuilder
+    private func pocketRow(_ item: World2PlaceInventoryItem) -> some View {
+        let template = World2PlaceTemplate.template(for: item.templateID)
+        if item.isSceneKit {
+            Button {
+                onVisitKit(item.id)
+            } label: {
+                HStack {
+                    Image(systemName: "map.fill")
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(item.boundSceneID.map(sceneName) ?? template.name)
+                            .font(.system(size: 14, weight: .black, design: .rounded))
+                        Text("Go there — not used up yet")
+                            .font(.system(size: 11, weight: .bold, design: .rounded))
+                            .opacity(0.7)
+                    }
+                    Spacer()
+                    Image(systemName: "arrow.right.circle.fill")
+                }
+                .foregroundStyle(.indigo)
+                .padding(10)
+                .background(Color.mint.opacity(0.22), in: RoundedRectangle(cornerRadius: 14))
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("world2.pocket.kit.\(item.id)")
+        } else {
+            Button(action: onTakeFactoryToBlankSlate) {
+                HStack {
+                    Image(systemName: template.fallbackIcon)
+                    VStack(alignment: .leading, spacing: 1) {
+                        Text(template.name)
+                            .font(.system(size: 14, weight: .black, design: .rounded))
+                        Text("Take to Blank Slate to place")
+                            .font(.system(size: 11, weight: .bold, design: .rounded))
+                            .opacity(0.7)
+                    }
+                    Spacer()
+                }
+                .foregroundStyle(.indigo)
+                .padding(10)
+                .background(Color.indigo.opacity(0.10), in: RoundedRectangle(cornerRadius: 14))
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("world2.pocket.item.\(item.id)")
         }
     }
 }
