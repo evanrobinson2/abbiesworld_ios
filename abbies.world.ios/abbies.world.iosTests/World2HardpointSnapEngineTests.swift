@@ -46,7 +46,8 @@ final class SnapEngineTests: XCTestCase {
 
     func testSnapsToNearbyPadAndReportsIt() {
         let pads = [pad("a", x: 0.50, y: 0.50)]
-        let result = resolve(at: 0.52, 0.51, pads: pads)
+        // ~0.013 map-height away (within the ~0.022 default pull).
+        let result = resolve(at: 0.508, 0.505, pads: pads)
         XCTAssertEqual(result.hardpointID, "a")
         XCTAssertEqual(result.position, World2NormalizedPoint(x: 0.50, y: 0.50))
         XCTAssertEqual(result.highlightedHardpointID, "a")
@@ -72,9 +73,9 @@ final class SnapEngineTests: XCTestCase {
     func testPicksNearestOfTwoCandidates() {
         let pads = [
             pad("far", x: 0.50, y: 0.50),
-            pad("near", x: 0.56, y: 0.50),
+            pad("near", x: 0.520, y: 0.50),
         ]
-        let result = resolve(at: 0.55, 0.50, pads: pads)
+        let result = resolve(at: 0.515, 0.50, pads: pads)
         XCTAssertEqual(result.hardpointID, "near")
     }
 
@@ -121,7 +122,7 @@ final class SnapEngineTests: XCTestCase {
     func testPrefersCompatiblePadOverIncompatibleNearerOne() {
         let pads = [
             pad("smallOnly", x: 0.50, y: 0.50, accepts: [.small]),
-            pad("anySize", x: 0.53, y: 0.50),
+            pad("anySize", x: 0.512, y: 0.50),
         ]
         let result = resolve(at: 0.50, 0.50, pads: pads, size: .large)
         XCTAssertEqual(result.hardpointID, "anySize")
@@ -131,18 +132,18 @@ final class SnapEngineTests: XCTestCase {
     // MARK: - Hysteresis
 
     func testSnappedPlaceHoldsItsPadInsideBreakawayRadius() {
-        let padA = pad("a", x: 0.50, y: 0.50, radius: 0.08)
-        // 0.10 away is outside the 0.08 snap radius but inside breakaway (0.14).
-        let result = resolve(at: 0.50, 0.60, pads: [padA], current: "a")
+        let padA = pad("a", x: 0.50, y: 0.50, radius: 0.022)
+        // 0.030 away is outside the 0.022 snap radius but inside breakaway (~0.039).
+        let result = resolve(at: 0.50, 0.530, pads: [padA], current: "a")
         XCTAssertEqual(result.hardpointID, "a", "should still be held by its pad")
         XCTAssertEqual(result.position, padA.position)
     }
 
     func testDraggingPastBreakawayRadiusUnsnaps() {
-        let padA = pad("a", x: 0.50, y: 0.50, radius: 0.08)
-        let result = resolve(at: 0.50, 0.75, pads: [padA], current: "a")
+        let padA = pad("a", x: 0.50, y: 0.50, radius: 0.022)
+        let result = resolve(at: 0.50, 0.60, pads: [padA], current: "a")
         XCTAssertNil(result.hardpointID, "should have broken away")
-        XCTAssertEqual(result.position, World2NormalizedPoint(x: 0.50, y: 0.75))
+        XCTAssertEqual(result.position, World2NormalizedPoint(x: 0.50, y: 0.60))
     }
 
     func testBreakawayIsWiderThanSnapSoOneDragDoesNotChatter() {

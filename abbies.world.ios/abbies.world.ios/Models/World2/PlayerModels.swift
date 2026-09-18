@@ -26,8 +26,7 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .abbie: return "poi.abbieTreehouse"
         case .ani: return "poi.aniTreehouse"
-        // Developer profile reuses Abbie's treehouse pad until Evan has a home POI.
-        case .evan: return "poi.abbieTreehouse"
+        case .evan: return "poi.evanHome"
         }
     }
     
@@ -36,6 +35,14 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
         case .abbie: return "avatar.abbie"
         case .ani: return "avatar.ani"
         case .evan: return "avatar.abbie"
+        }
+    }
+
+    /// Catalog imageset for the player-menu avatar chip.
+    var menuAvatarCatalogName: String {
+        switch self {
+        case .abbie, .ani: return "world2_actor_abbie"
+        case .evan: return "world2_actor_daddy"
         }
     }
 }
@@ -141,7 +148,10 @@ struct PlayerState: Codable, Identifiable {
                 ),
             ],
             generatedDecorations: [],
-            placeInventory: [World2PlaceInventoryItem.starterFactory(for: id)],
+            placeInventory: [
+                World2PlaceInventoryItem.starterFactory(for: id),
+                World2PlaceInventoryItem.starterWorldSeed(for: id),
+            ],
             placedPlaces: [],
             createdScenes: [],
             sceneExits: [],
@@ -151,6 +161,8 @@ struct PlayerState: Codable, Identifiable {
                 achievedMilestones: [
                     PlayerState.jukeboxQuestOfferedMilestone,
                     "inventory.worldTeleporter.offered.v1",
+                    "place_factory_starter_received.v1",
+                    "place_world_seed_starter_received.v1",
                 ]
             ),
             settings: PlayerSettings(),

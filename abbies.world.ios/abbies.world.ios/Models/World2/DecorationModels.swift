@@ -153,7 +153,10 @@ struct HomeLayout: Codable {
         let decorationInstanceId: String
         var position: Position
         var layer: PlacementLayer
-        
+        /// Which treehouse room this piece lives in. Nil means the default
+        /// Cozy Nook (legacy saves before multi-room).
+        var roomId: String?
+
         struct Position: Codable {
             var x: Double
             var y: Double
@@ -163,6 +166,24 @@ struct HomeLayout: Codable {
             case floor
             case wall
             case foreground
+        }
+
+        var resolvedRoomId: String {
+            roomId ?? TreehouseRoomID.default.rawValue
+        }
+
+        init(
+            id: String,
+            decorationInstanceId: String,
+            position: Position,
+            layer: PlacementLayer,
+            roomId: String? = nil
+        ) {
+            self.id = id
+            self.decorationInstanceId = decorationInstanceId
+            self.position = position
+            self.layer = layer
+            self.roomId = roomId
         }
     }
     

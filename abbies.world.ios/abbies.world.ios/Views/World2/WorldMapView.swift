@@ -1,5 +1,6 @@
 import SwiftUI
 import UIKit
+import Combine
 
 struct WorldMapView: View {
     @ObservedObject var viewModel: World2ViewModel
@@ -9,7 +10,10 @@ struct WorldMapView: View {
     @State private var selectedInstanceID: String?
     @State private var selectedHardpointID: String?
     @State private var snappingEnabled = true
-    @State private var showingEditor = true
+    /// Panel chrome visible (false = fully dismissed via Done).
+    @State private var showingEditor = false
+    @State private var editorMinimized = true
+    @State private var showingSceneInvent = false
     /// The pad lighting up under a live drag, and why it might refuse.
     @State private var candidateHardpointID: String?
     @State private var snapRejection: String?
@@ -24,17 +28,22 @@ struct WorldMapView: View {
     private var developerMode: Bool { developerSession.isEnabled }
     private var store: World2SceneGraphStore { viewModel.sceneGraph }
     private var allowsLookAround: Bool {
-        viewModel.currentWorld?.id == .artGarden && !developerMode
+        viewModel.currentWorld?.id == .artGarden && !isBuildMode
     }
     private var sceneID: String { (viewModel.currentWorld?.id ?? .home).sceneID }
     private var scene: World2SceneDefinition { store.scene(sceneID) }
 
+    /// Overland is either Interact (play / march) or Build (scene editor).
+    private var isBuildMode: Bool {
+        developerMode && showingEditor
+    }
+
     private var isEditingPlaces: Bool {
-        developerMode && showingEditor && editorLayer == .pois
+        isBuildMode && editorLayer == .pois
     }
 
     private var isEditingHardpoints: Bool {
-        developerMode && showingEditor && editorLayer == .hardpoints
+        isBuildMode && editorLayer == .hardpoints
     }
 
     private var worldSubtitle: String {
@@ -43,6 +52,8 @@ struct WorldMapView: View {
         case .farm: return "Discover something new in the meadow"
         case .threeBears: return "Somebody left three bowls out"
         case .artGarden: return "Drag to look around the garden"
+        case .evan: return "Daddy's glowing mountain base"
+        case .blankSlate: return "Drag to look around"
         default: return "Choose a place to visit"
         }
     }
@@ -55,13 +66,17 @@ struct WorldMapView: View {
 
             ZStack {
                 mapBackground(geometry: geometry, mapRect: mapRect)
+                marchTapLayer(mapRect: mapRect)
                 padPlacementLayer(mapRect: mapRect)
                 hardpointLayer(mapRect: mapRect)
                 placeLayer(mapRect: mapRect, viewSize: geometry.size, aspectRatio: aspectRatio)
+                plantedPlaceLayer(mapRect: mapRect)
+                plantDropTargetLayer(mapRect: mapRect)
                 cookingBadgeLayer(mapRect: mapRect)
                 World2PartyLayer(party: viewModel.party, mapRect: mapRect)
                     .zIndex(20)
                 topChrome
+                modeBanner
                 travelNavigation
                 inspectionOverlay
                 snapHintOverlay
@@ -71,6 +86,17 @@ struct WorldMapView: View {
                 lookAroundGesture(fitted: baseRect, in: geometry.size),
                 including: allowsLookAround ? .gesture : .subviews
             )
+            .onReceive(Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()) { date in
+                guard !isBuildMode else { return }
+                let lead = viewModel.party.pieces(at: date)
+                    .first(where: { $0.id == .abbie })?.position
+                    ?? viewModel.party.leadPosition
+                viewModel.syncProximityInspection(
+                    lead: lead,
+                    instances: scene.instancesInDrawOrder,
+                    aspectRatio: aspectRatio
+                )
+            }
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.homeWorld")
@@ -83,7 +109,9 @@ struct WorldMapView: View {
             syncEditorSelection()
         }
         .onChange(of: developerSession.isEnabled) {
-            showingEditor = developerSession.isEnabled
+            // Developer mode starts in Interact so play is obvious; Build is opt-in.
+            showingEditor = false
+            editorMinimized = true
             syncEditorSelection()
         }
         .onChange(of: viewModel.currentWorld?.id) {
@@ -91,12 +119,24 @@ struct WorldMapView: View {
             snapRejection = nil
             lookZoom = 1
             lookPan = .zero
+            viewModel.selectedPlaceInventoryItemID = nil
             syncEditorSelection()
             viewModel.party.enterScene(.defaultSpawn, aspectRatio: aspectRatioForCurrentMap())
         }
         .onChange(of: editorLayer) {
             candidateHardpointID = nil
             snapRejection = nil
+        }
+        .sheet(isPresented: $showingSceneInvent) {
+            World2SceneInventDecorationsView(
+                scene: scene,
+                plateImage: AssetBootstrapService.shared.image(for: scene.backgroundAsset),
+                onOpenDecorate: {
+                    showingSceneInvent = false
+                    viewModel.openCurrentPlayerTreehouse(startDecorating: true)
+                },
+                onClose: { showingSceneInvent = false }
+            )
         }
         .ignoresSafeArea()
     }
@@ -190,6 +230,92 @@ struct WorldMapView: View {
             .accessibilityIdentifier("world2.sceneBuilder.mapCookingBadge")
             .zIndex(90)
         }
+    }
+
+    // MARK: - Interact: march anywhere
+
+    /// Tap bare ground to send Abbie + Daddy marching (Interact only).
+    @ViewBuilder
+    private func marchTapLayer(mapRect: CGRect) -> some View {
+        if !isBuildMode, viewModel.selectedPlaceInventoryItemID == nil {
+            Color.clear
+                .contentShape(Rectangle())
+                .onTapGesture(coordinateSpace: .local) { location in
+                    guard mapRect.width > 1, mapRect.height > 1 else { return }
+                    let point = World2NormalizedPoint(
+                        x: (location.x - mapRect.minX) / mapRect.width,
+                        y: (location.y - mapRect.minY) / mapRect.height
+                    ).clamped()
+                    viewModel.party.walkToward(point)
+                }
+                .frame(width: mapRect.width, height: mapRect.height)
+                .position(x: mapRect.midX, y: mapRect.midY)
+                .zIndex(1)
+                .accessibilityLabel("March here")
+                .accessibilityIdentifier("world2.map.marchTap")
+        }
+    }
+
+    /// Big mode chip so Build vs Interact is unmistakable on overland.
+    @ViewBuilder
+    private var modeBanner: some View {
+        if developerMode {
+            HStack(spacing: 0) {
+                modeChip(
+                    title: "Interact",
+                    symbol: "figure.walk",
+                    active: !isBuildMode,
+                    activeColor: .green
+                ) {
+                    withAnimation(.easeOut(duration: 0.2)) {
+                        showingEditor = false
+                        editorMinimized = true
+                    }
+                }
+                modeChip(
+                    title: "Build",
+                    symbol: "hammer.fill",
+                    active: isBuildMode,
+                    activeColor: .orange
+                ) {
+                    withAnimation(.easeOut(duration: 0.2)) {
+                        showingEditor = true
+                        editorMinimized = true
+                        syncEditorSelection()
+                    }
+                }
+            }
+            .background(.black.opacity(0.55), in: Capsule())
+            .overlay(Capsule().stroke(.white.opacity(0.45), lineWidth: 1.5))
+            .padding(.top, 64)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .zIndex(45)
+            .accessibilityElement(children: .contain)
+            .accessibilityIdentifier("world2.map.modeBanner")
+        }
+    }
+
+    private func modeChip(
+        title: String,
+        symbol: String,
+        active: Bool,
+        activeColor: Color,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            Label(title, systemImage: symbol)
+                .font(.system(size: 16, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 18)
+                .padding(.vertical, 12)
+                .background(
+                    active ? activeColor.opacity(0.95) : Color.clear,
+                    in: Capsule()
+                )
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(active ? .isSelected : [])
+        .accessibilityIdentifier("world2.map.mode.\(title.lowercased())")
     }
 
     // MARK: - Background
@@ -327,7 +453,9 @@ struct WorldMapView: View {
                     mapRect: mapRect,
                     viewSize: viewSize,
                     isEditable: isEditingPlaces,
-                    isSelected: selectedInstanceID == instance.id,
+                    isSelected: isEditingPlaces
+                        ? selectedInstanceID == instance.id
+                        : viewModel.inspectedPOI?.id == instance.id,
                     isDimmed: isEditingHardpoints,
                     onTap: {
                         if isEditingPlaces {
@@ -371,6 +499,63 @@ struct WorldMapView: View {
         }
     }
 
+    /// Seedlings / portals planted from Place Inventory on this authored map.
+    @ViewBuilder
+    private func plantedPlaceLayer(mapRect: CGRect) -> some View {
+        ForEach(viewModel.currentAuthoredMapPlaces.filter(\.hasSkySpotlight)) { instance in
+            World2SkySpotlightEmbellishment(
+                sceneSize: mapRect.size,
+                anchor: CGPoint(
+                    x: mapRect.minX + CGFloat(instance.x) * mapRect.width,
+                    y: mapRect.minY + CGFloat(instance.y) * mapRect.height
+                )
+            )
+            .allowsHitTesting(false)
+            .zIndex(14)
+            .accessibilityHidden(true)
+        }
+
+        ForEach(viewModel.currentAuthoredMapPlaces) { instance in
+            World2MutableScenePlaceMarker(instance: instance) {
+                viewModel.enterPlacedPlace(instance.id)
+            }
+            .position(
+                x: mapRect.minX + CGFloat(instance.x) * mapRect.width,
+                y: mapRect.minY + CGFloat(instance.y) * mapRect.height
+            )
+            .zIndex(16)
+            .accessibilityIdentifier("world2.map.planted.\(instance.id)")
+        }
+    }
+
+    @ViewBuilder
+    private func plantDropTargetLayer(mapRect: CGRect) -> some View {
+        if viewModel.selectedPlaceInventoryItemID != nil,
+           !viewModel.plantableAuthoredHardpoints.isEmpty {
+            ForEach(viewModel.plantableAuthoredHardpoints) { hardpoint in
+                World2PlaceDropTarget(hardpoint: hardpoint) {
+                    plantSelectedInventoryItem(on: hardpoint)
+                }
+                .position(
+                    x: mapRect.minX + CGFloat(hardpoint.x) * mapRect.width,
+                    y: mapRect.minY + CGFloat(hardpoint.y) * mapRect.height
+                )
+                .zIndex(35)
+            }
+        }
+    }
+
+    private func plantSelectedInventoryItem(on hardpoint: World2SceneHardpoint) {
+        guard let itemID = viewModel.selectedPlaceInventoryItemID else { return }
+        _ = viewModel.placeInventoryItem(
+            itemID,
+            x: hardpoint.x,
+            y: hardpoint.y,
+            hardpointID: hardpoint.id,
+            in: sceneID
+        )
+    }
+
     // MARK: - Chrome
 
     private var topChrome: some View {
@@ -392,7 +577,7 @@ struct WorldMapView: View {
             }
             .padding(.leading, 18)
             .padding(.trailing, 132)
-            .padding(.top, 14)
+            .padding(.top, 6)
             Spacer()
         }
     }
@@ -415,7 +600,7 @@ struct WorldMapView: View {
     @ViewBuilder
     private var inspectionOverlay: some View {
         if viewModel.showingPOISheet, let inspection = viewModel.inspectedPOI {
-            Color.black.opacity(0.28)
+            Color.black.opacity(0.12)
                 .ignoresSafeArea()
                 .onTapGesture {
                     withAnimation(.easeOut(duration: 0.2)) {
@@ -423,6 +608,7 @@ struct WorldMapView: View {
                     }
                 }
                 .zIndex(50)
+                .allowsHitTesting(true)
 
             World2POIInspectionDrawer(
                 poi: inspection.poi,
@@ -436,12 +622,17 @@ struct WorldMapView: View {
             )
             .frame(width: 332)
             .frame(maxHeight: .infinity)
-            .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 28))
+            .background {
+                RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    .fill(.ultraThinMaterial)
+                    .opacity(0.88)
+            }
+            .background(Color.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 28))
             .overlay {
                 RoundedRectangle(cornerRadius: 28)
-                    .stroke(.white.opacity(0.72), lineWidth: 2)
+                    .stroke(.white.opacity(0.45), lineWidth: 1.5)
             }
-            .shadow(color: .black.opacity(0.32), radius: 24, x: -8)
+            .shadow(color: .black.opacity(0.22), radius: 18, x: -6)
             .padding(.top, 72)
             .padding(.bottom, 16)
             .padding(.trailing, 14)
@@ -483,46 +674,79 @@ struct WorldMapView: View {
                 selectedInstanceID: $selectedInstanceID,
                 selectedHardpointID: $selectedHardpointID,
                 snappingEnabled: $snappingEnabled,
+                isMinimized: $editorMinimized,
                 aspectRatio: aspectRatio,
                 onDone: {
                     store.save()
                     withAnimation(.easeOut(duration: 0.2)) {
                         showingEditor = false
+                        editorMinimized = false
                     }
                 },
                 onOpenPlanningDept: {
                     viewModel.openPlanningDept()
+                },
+                onInventDecorations: {
+                    showingSceneInvent = true
+                },
+                onDecorateTreehouse: {
+                    viewModel.openCurrentPlayerTreehouse(startDecorating: true)
                 }
             )
-            .frame(maxWidth: 980)
-            .background(.ultraThickMaterial, in: RoundedRectangle(cornerRadius: 24))
-            .overlay {
-                RoundedRectangle(cornerRadius: 24)
-                    .stroke(.orange.opacity(0.85), lineWidth: 3)
-            }
-            .shadow(color: .black.opacity(0.35), radius: 20, y: 8)
-            .padding(.horizontal, 18)
-            .padding(.bottom, 14)
+            .frame(maxWidth: editorMinimized ? 480 : 720)
+            .padding(.horizontal, 16)
+            .padding(.bottom, 12)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            .transition(.move(edge: .bottom).combined(with: .opacity))
             .zIndex(80)
+            .allowsHitTesting(true)
         } else if developerMode {
-            Button {
-                showingEditor = true
-                syncEditorSelection()
-            } label: {
-                Label("Edit Scene", systemImage: "slider.horizontal.3")
-                    .font(.system(size: 14, weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 16)
-                    .padding(.vertical, 12)
-                    .background(.orange, in: Capsule())
+            HStack(spacing: 8) {
+                Button {
+                    showingEditor = true
+                    editorMinimized = true
+                    syncEditorSelection()
+                } label: {
+                    Label("Edit", systemImage: "slider.horizontal.3")
+                        .font(.system(size: 13, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .background(.orange.opacity(0.85), in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("world2.sceneEditor.open")
+
+                Button {
+                    showingSceneInvent = true
+                } label: {
+                    Label("Invent", systemImage: "wand.and.stars")
+                        .font(.system(size: 13, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .background(.purple.opacity(0.88), in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("world2.sceneInvent.open")
+
+                Button {
+                    viewModel.openCurrentPlayerTreehouse(startDecorating: true)
+                } label: {
+                    Label("Decorate", systemImage: "paintbrush.pointed.fill")
+                        .font(.system(size: 13, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 10)
+                        .background(.pink.opacity(0.9), in: Capsule())
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("world2.map.decorateTreehouse")
             }
-            .buttonStyle(.plain)
             .padding(.leading, 18)
             .padding(.bottom, 18)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
             .zIndex(80)
-            .accessibilityIdentifier("world2.sceneEditor.open")
         }
     }
 
@@ -729,71 +953,35 @@ private struct World2GameStatusHUD: View {
     let deck: Int
 
     var body: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 10) {
             if let player {
-                Label(
-                    player.displayName,
-                    systemImage: player == .abbie ? "sparkles" : "moon.stars.fill"
-                )
-                .font(.system(size: 12, weight: .black, design: .rounded))
-                .foregroundStyle(player == .abbie ? .pink : .purple)
-                .padding(.horizontal, 11)
-                .accessibilityLabel("Playing as \(player.displayName)")
-                .accessibilityIdentifier("world2.hud.player")
-
-                Divider()
-                    .overlay(.white.opacity(0.22))
-                    .frame(height: 30)
+                Text(player.displayName)
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .foregroundStyle(player == .abbie ? Color.pink.opacity(0.9) : Color.purple.opacity(0.9))
+                    .accessibilityLabel("Playing as \(player.displayName)")
+                    .accessibilityIdentifier("world2.hud.player")
             }
 
-            World2HUDStat(
-                value: gems,
-                label: "Gems",
-                icon: "diamond.fill",
-                identifier: "world2.hud.gems"
-            )
-            World2HUDStat(
-                value: ingredients,
-                label: "Items",
-                icon: "shippingbox.fill",
-                identifier: "world2.hud.ingredients"
-            )
-            World2HUDStat(
-                value: deck,
-                label: "Deck",
-                icon: "rectangle.stack.fill",
-                identifier: "world2.hud.deck"
-            )
+            quietStat(value: gems, icon: "diamond.fill", identifier: "world2.hud.gems")
+            quietStat(value: ingredients, icon: "shippingbox.fill", identifier: "world2.hud.ingredients")
+            quietStat(value: deck, icon: "rectangle.stack.fill", identifier: "world2.hud.deck")
         }
-        .padding(.vertical, 7)
-        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16))
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(.white.opacity(0.38), lineWidth: 1)
-        )
-        .shadow(color: .black.opacity(0.25), radius: 10, y: 4)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 5)
+        .background(Color.black.opacity(0.22), in: Capsule())
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.hud.gameStatus")
     }
-}
 
-private struct World2HUDStat: View {
-    let value: Int
-    let label: String
-    let icon: String
-    let identifier: String
-
-    var body: some View {
-        VStack(spacing: 0) {
-            Label("\(value)", systemImage: icon)
-                .font(.system(size: 13, weight: .black, design: .rounded))
-                .foregroundStyle(.white)
-            Text(label.uppercased())
-                .font(.system(size: 8, weight: .black, design: .rounded))
-                .foregroundStyle(.white.opacity(0.62))
+    private func quietStat(value: Int, icon: String, identifier: String) -> some View {
+        HStack(spacing: 3) {
+            Image(systemName: icon)
+                .font(.system(size: 10, weight: .bold))
+            Text("\(value)")
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+                .monospacedDigit()
         }
-        .frame(minWidth: 52)
-        .padding(.horizontal, 3)
+        .foregroundStyle(.white.opacity(0.82))
         .accessibilityIdentifier(identifier)
     }
 }

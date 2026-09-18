@@ -22,9 +22,107 @@ import Foundation
 final class World2DeveloperSession: ObservableObject {
     static let shared = World2DeveloperSession()
 
-    @Published var isEnabled = false
+    private static let defaultsPrefix = "world2.developerSession.v1"
 
-    private init() {}
+    /// Developer tools are on by default for this household build.
+    @Published var isEnabled: Bool {
+        didSet { defaults.set(isEnabled, forKey: "\(Self.defaultsPrefix).isEnabled") }
+    }
+
+    /// Floating layout toolbar on mutable / authored scenes (default on).
+    @Published var layoutToolbarVisible: Bool {
+        didSet { defaults.set(layoutToolbarVisible, forKey: "\(Self.defaultsPrefix).layoutToolbarVisible") }
+    }
+
+    @Published var showPOIs: Bool {
+        didSet { defaults.set(showPOIs, forKey: "\(Self.defaultsPrefix).showPOIs") }
+    }
+
+    @Published var showPortals: Bool {
+        didSet { defaults.set(showPortals, forKey: "\(Self.defaultsPrefix).showPortals") }
+    }
+
+    @Published var showPOIHardpoints: Bool {
+        didSet { defaults.set(showPOIHardpoints, forKey: "\(Self.defaultsPrefix).showPOIHardpoints") }
+    }
+
+    @Published var showPortalHardpoints: Bool {
+        didSet { defaults.set(showPortalHardpoints, forKey: "\(Self.defaultsPrefix).showPortalHardpoints") }
+    }
+
+    /// Layout diag on mutable scenes: full chip wall, minimal strip, or off.
+    @Published var layoutDiagMode: World2LayoutDiagMode {
+        didSet { defaults.set(layoutDiagMode.rawValue, forKey: "\(Self.defaultsPrefix).layoutDiagMode") }
+    }
+
+    /// Active daddy tool on the Dev Tools strip (nil / play = kid surface).
+    @Published var activeDevTool: World2DevTool {
+        didSet { defaults.set(activeDevTool.rawValue, forKey: "\(Self.defaultsPrefix).activeDevTool") }
+    }
+
+    private let defaults: UserDefaults
+
+    private init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+        self.isEnabled = defaults.object(forKey: "\(Self.defaultsPrefix).isEnabled") as? Bool ?? true
+        self.layoutToolbarVisible =
+            defaults.object(forKey: "\(Self.defaultsPrefix).layoutToolbarVisible") as? Bool ?? true
+        self.showPOIs = defaults.object(forKey: "\(Self.defaultsPrefix).showPOIs") as? Bool ?? true
+        self.showPortals = defaults.object(forKey: "\(Self.defaultsPrefix).showPortals") as? Bool ?? true
+        self.showPOIHardpoints =
+            defaults.object(forKey: "\(Self.defaultsPrefix).showPOIHardpoints") as? Bool ?? true
+        self.showPortalHardpoints =
+            defaults.object(forKey: "\(Self.defaultsPrefix).showPortalHardpoints") as? Bool ?? true
+        let diagRaw = defaults.string(forKey: "\(Self.defaultsPrefix).layoutDiagMode")
+            ?? World2LayoutDiagMode.min.rawValue
+        self.layoutDiagMode = World2LayoutDiagMode(rawValue: diagRaw) ?? .min
+        let toolRaw = defaults.string(forKey: "\(Self.defaultsPrefix).activeDevTool")
+            ?? World2DevTool.play.rawValue
+        self.activeDevTool = World2DevTool(rawValue: toolRaw) ?? .play
+    }
+}
+
+enum World2LayoutDiagMode: String, CaseIterable, Identifiable, Sendable {
+    case full
+    case min
+    case off
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .full: return "Full"
+        case .min: return "Min"
+        case .off: return "Off"
+        }
+    }
+}
+
+enum World2DevTool: String, CaseIterable, Identifiable, Sendable {
+    case play
+    case hardpoints
+    case layout
+    case invent
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .play: return "Play"
+        case .hardpoints: return "Pads"
+        case .layout: return "Layout"
+        case .invent: return "Invent"
+        }
+    }
+
+    var symbolName: String {
+        switch self {
+        case .play: return "hand.tap.fill"
+        case .hardpoints: return "target"
+        case .layout: return "slider.horizontal.3"
+        case .invent: return "wand.and.stars"
+        }
+    }
 }
 
 /// Which layer of the scene editor is accepting edits. Only one layer is live at
@@ -55,11 +153,11 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
     var instruction: String {
         switch self {
         case .pois:
-            return "Drag a place to move it. It snaps to a nearby pad; drag further to break away."
+            return "Drag · pinch · twist places on the map"
         case .hardpoints:
-            return "Tap bare map to add a pad, drag a pad to move it. Places re-pin to where their pad went."
+            return "Tap map to add a pad · drag to move"
         case .tunnels:
-            return "Scene tunnels are N/S/E/W expansion doors on the overland graph — open them in Planning Dept."
+            return "N/S/E/W expansion doors"
         }
     }
 }
@@ -495,7 +593,10 @@ final class World2SceneGraphStore: ObservableObject {
             guard let index = scene.hardpoints.firstIndex(where: { $0.id == hardpointID }) else {
                 return
             }
-            scene.hardpoints[index].snapRadius = min(max(radius, 0.02), 0.30)
+            scene.hardpoints[index].snapRadius = min(
+                max(radius, World2SceneHardpoint.snapRadiusRange.lowerBound),
+                World2SceneHardpoint.snapRadiusRange.upperBound
+            )
         }
     }
 

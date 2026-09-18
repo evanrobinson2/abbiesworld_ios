@@ -333,10 +333,26 @@ class AssetBootstrapService: ObservableObject {
     /// Fail-open only for these known semantic IDs so Art Garden is playable.
     private static let localCatalogFallbacks: [String: String] = [
         "map.artGarden": "world2_map_artGarden",
+        "map.blankWorld": "world2_blank_world",
+        "map.blankSlate": "world2_blank_world",
         "poi.characterStudio.exterior": "world2_poi_characterStudio",
         "poi.characterStudio.interior": "world2_interior_characterStudio",
         "poi.sceneBuilder.exterior": "world2_poi_sceneBuilder",
         "poi.sceneBuilder.interior": "world2_interior_sceneBuilder",
+        "poi.worldSeed.inventory": "world2_world_seed",
+        "poi.worldSeed.seedling": "world2_world_seedling",
+        "poi.worldSeed.portal": "world2_world_portal",
+        "poi.sceneKit.inventory": "world2_world_seed",
+        "poi.sceneCreator.exterior": "world2_world_portal",
+        "poi.beacon.exterior": "world2_world_seedling",
+        "poi.abbieTreehouse.interior.cozyNook": "abbie_treehouse_room_cozy_nook",
+        "poi.abbieTreehouse.interior.rooftopLookout": "abbie_treehouse_room_rooftop_lookout",
+        "poi.abbieTreehouse.interior.fitnessCenter": "abbie_treehouse_room_fitness_center",
+        // Prefer the Cozy Nook plate whenever the legacy single-interior id is asked for.
+        "poi.abbieTreehouse.interior": "abbie_treehouse_room_cozy_nook",
+        "map.evan": "evan_citadel_scene",
+        "poi.evanHome.exterior": "evan_citadel_exterior",
+        "poi.evanHome.interior": "evan_citadel_interior",
     ]
 
     /// Bundled ambient / looping videos that ship ahead of registry hosting.
@@ -501,6 +517,9 @@ enum World2RegistryKey {
         "ui.appIcon": "ui/app-icon",
         "furniture.abbieStarterBed": "furniture/beds/abbie-starter",
         "furniture.aniStarterBed": "furniture/beds/ani-starter",
+        "poi.evanHome.exterior": "pois/evan-citadel/exterior",
+        "poi.evanHome.interior": "pois/evan-citadel/interior",
+        "map.evan": "maps/evan-citadel",
         "map.artGarden": "maps/art-garden",
         "map.artGarden.ambient": "maps/art-garden/ambient",
         "poi.characterStudio.exterior": "pois/character-studio/exterior",

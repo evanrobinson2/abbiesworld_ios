@@ -2,8 +2,8 @@
 //  World2PartyLayer.swift
 //  abbies.world.ios
 //
-//  Draws Abbie and Daddy on top of a map plate. Bob while walking; face the
-//  direction of travel. Hit-testing is off — they are scenery, not controls.
+//  Draws Abbie and Daddy on top of a map plate as Meshy USDZ avatars.
+//  They run to a selected POI and idle (or freeze) when settled.
 //
 
 import SwiftUI
@@ -22,7 +22,7 @@ struct World2PartyLayer: View {
             let pieces = party.pieces(at: timeline.date)
             ZStack {
                 ForEach(pieces) { piece in
-                    pieceView(piece, at: timeline.date)
+                    pieceView(piece)
                         .zIndex(10 + piece.id.zBias)
                 }
             }
@@ -33,32 +33,31 @@ struct World2PartyLayer: View {
     }
 
     @ViewBuilder
-    private func pieceView(_ piece: World2PartyPieceState, at date: Date) -> some View {
+    private func pieceView(_ piece: World2PartyPieceState) -> some View {
         let size = markerSize
-        let bob: CGFloat = {
-            guard piece.isWalking, !reduceMotion else { return 0 }
-            return CGFloat(sin(date.timeIntervalSinceReferenceDate * 10 + piece.id.zBias)) * 4
-        }()
         let screen = CGPoint(
             x: mapRect.minX + mapRect.width * piece.position.x,
             y: mapRect.minY + mapRect.height * piece.position.y
         )
 
         VStack(spacing: 2) {
-            Image(piece.imageAssetName)
-                .resizable()
-                .scaledToFit()
-                .frame(width: size, height: size)
-                .scaleEffect(x: piece.facingRight ? 1 : -1, y: 1)
-                .shadow(color: .black.opacity(0.35), radius: 4, y: 3)
-                .offset(y: bob)
+            World2PartyAvatarViewport(
+                actor: piece.id,
+                isWalking: piece.isWalking,
+                facingRight: piece.facingRight,
+                size: size
+            )
+            .shadow(color: .black.opacity(0.35), radius: 4, y: 3)
 
-            Text(piece.displayName)
-                .font(.system(size: 11, weight: .black, design: .rounded))
-                .foregroundStyle(.white)
-                .padding(.horizontal, 7)
-                .padding(.vertical, 2)
-                .background(.black.opacity(0.62), in: Capsule())
+            if piece.isWalking {
+                Text(piece.displayName)
+                    .font(.system(size: 11, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 7)
+                    .padding(.vertical, 2)
+                    .background(.black.opacity(0.62), in: Capsule())
+                    .transition(.opacity)
+            }
         }
         .frame(width: size + 12, height: size + 22)
         .position(x: screen.x, y: screen.y - size * 0.28)
@@ -67,6 +66,6 @@ struct World2PartyLayer: View {
     }
 
     private var markerSize: CGFloat {
-        max(56, min(mapRect.width, mapRect.height) * 0.11)
+        max(72, min(mapRect.width, mapRect.height) * 0.13)
     }
 }

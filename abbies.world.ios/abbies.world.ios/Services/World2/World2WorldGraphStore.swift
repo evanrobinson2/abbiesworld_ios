@@ -49,6 +49,7 @@ final class World2WorldGraphStore: ObservableObject {
             WorldId.farm.sceneID,
             WorldId.threeBears.sceneID,
             WorldId.blankSlate.sceneID,
+            WorldId.evan.sceneID,
         ]
     }
 
@@ -57,10 +58,31 @@ final class World2WorldGraphStore: ObservableObject {
             knownSceneIDs = saved.knownSceneIDs
             connectorsByScene = Dictionary(grouping: saved.connectors, by: \.fromSceneID)
             ensureCardinalsPresent()
+            ensureAuthoredScenesAndTunnels()
             return
         }
         seedFromAuthoredAdjacency()
         persist()
+    }
+
+    /// Ship new lands (like Daddy's Citadel north of Home) onto existing saves.
+    private func ensureAuthoredScenesAndTunnels() {
+        var changed = false
+        for sceneID in seedSceneIDs where !knownSceneIDs.contains(sceneID) {
+            knownSceneIDs.append(sceneID)
+            changed = true
+        }
+        ensureCardinalsPresent()
+        var built = connectorsByScene
+        let before = built
+        applySeedTunnel(from: .home, .north, to: .evan, into: &built)
+        if built != before {
+            connectorsByScene = built
+            changed = true
+        }
+        if changed {
+            persist()
+        }
     }
 
     /// Default graph: every known scene gets N/S/E/W; taken slots come from the
@@ -84,6 +106,7 @@ final class World2WorldGraphStore: ObservableObject {
         applySeedTunnel(from: .home, .west, to: .work, into: &built)
         applySeedTunnel(from: .home, .east, to: .farm, into: &built)
         applySeedTunnel(from: .home, .south, to: .blankSlate, into: &built)
+        applySeedTunnel(from: .home, .north, to: .evan, into: &built)
         applySeedTunnel(from: .farm, .east, to: .threeBears, into: &built)
 
         connectorsByScene = built

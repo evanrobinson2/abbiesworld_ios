@@ -13,6 +13,7 @@ import Combine
 class PlayerStateService: ObservableObject {
     static let shared = PlayerStateService()
     private static let starterPOIFactoryMilestone = "place_factory_starter_received.v1"
+    private static let starterWorldSeedMilestone = "place_world_seed_starter_received.v1"
     private static let worldTeleporterMilestone = "inventory.worldTeleporter.offered.v1"
     private static let playerStateSchemaVersion = 1
 
@@ -168,50 +169,258 @@ class PlayerStateService: ObservableObject {
         hardpointID: String? = nil
     ) -> World2PlacedPlaceInstance? {
         guard var player = currentPlayer,
-              let scene = scene(sceneID),
-              scene.isMutableByPlayer,
               let itemIndex = (player.placeInventory ?? []).firstIndex(
                 where: { $0.id == itemID }
               ) else {
             return nil
         }
 
+        var inventory = player.placeInventory ?? []
+        let item = inventory[itemIndex]
+        let mutable = scene(sceneID)
+
+        // Mutable player scenes take freehand / pad placement. Authored overland
+        // maps (Home, Daddy's Citadel, …) accept World Seeds and placeable POIs
+        // onto open scene-graph pads — that is how a factory lands in Daddy's world.
         let target: (x: Double, y: Double, hardpointID: String?)
-        if scene.hardpoints.isEmpty {
-            target = (
-                min(max(x, 0.10), 0.90),
-                min(max(y, 0.24), 0.86),
-                nil
-            )
-        } else {
-            guard let hardpointID,
-                  let hardpoint = availableHardpoints(in: sceneID).first(
-                    where: { $0.id == hardpointID }
-                  ) else {
+        if let mutable {
+            let allowedOnImmutable =
+                item.templateID == .worldSeed
+                || Self.canPlantOnAuthoredMap(item.templateID)
+            guard mutable.isMutableByPlayer || allowedOnImmutable else {
                 return nil
             }
-            target = (hardpoint.x, hardpoint.y, hardpoint.id)
+            if mutable.hardpoints.isEmpty {
+                target = (
+                    min(max(x, 0.10), 0.90),
+                    min(max(y, 0.24), 0.86),
+                    nil
+                )
+            } else {
+                guard let hardpointID,
+                      let hardpoint = availableHardpoints(in: sceneID).first(
+                        where: { $0.id == hardpointID }
+                      ) else {
+                    return nil
+                }
+                target = (hardpoint.x, hardpoint.y, hardpoint.id)
+            }
+        } else if Self.canPlantOnAuthoredMap(item.templateID) {
+            guard let hardpointID else { return nil }
+            let alreadyPlanted = (player.placedPlaces ?? []).contains {
+                $0.sceneID == sceneID && $0.hardpointID == hardpointID
+            }
+            guard !alreadyPlanted else { return nil }
+            target = (
+                min(max(x, 0.05), 0.95),
+                min(max(y, 0.10), 0.92),
+                hardpointID
+            )
+        } else {
+            return nil
         }
 
-        var inventory = player.placeInventory ?? []
-        let item = inventory.remove(at: itemIndex)
-        let instance = World2PlacedPlaceInstance(
-            templateID: item.templateID,
-            sceneID: sceneID,
+        inventory.remove(at: itemIndex)
+
+        switch item.templateID {
+        case .worldSeed:
+            return plantWorldSeed(
+                item: item,
+                in: sceneID,
+                at: target,
+                player: &player,
+                inventory: inventory
+            )
+        case .sceneKit:
+            guard mutable?.isMutableByPlayer == true else { return nil }
+            return attachSceneKit(
+                item: item,
+                in: sceneID,
+                at: target,
+                player: &player,
+                inventory: inventory
+            )
+        case .selfReplicatingFactory, .sceneCreator, .beacon:
+            let instance = World2PlacedPlaceInstance(
+                templateID: item.templateID,
+                sceneID: sceneID,
+                x: target.x,
+                y: target.y,
+                hardpointID: target.hardpointID,
+                placedByPlayerID: player.playerId.rawValue,
+                sourceInventoryItemID: item.id,
+                linkedSceneID: item.linkedSceneID,
+                message: item.message
+            )
+            var placed = player.placedPlaces ?? []
+            placed.append(instance)
+            player.placeInventory = inventory
+            player.placedPlaces = placed
+            player.lastPlayedAt = Date()
+            currentPlayer = player
+            saveLocalState()
+            return instance
+        }
+    }
+
+    /// Templates that may snap onto authored overland pads (not only blank worlds).
+    private static func canPlantOnAuthoredMap(_ template: World2PlaceTemplateID) -> Bool {
+        switch template {
+        case .worldSeed, .selfReplicatingFactory, .sceneCreator, .beacon:
+            return true
+        case .sceneKit:
+            return false
+        }
+    }
+
+    /// Plant a World Seed: birth a blank hub world + Scene Creator, leave a seedling POI here.
+    private func plantWorldSeed(
+        item: World2PlaceInventoryItem,
+        in parentSceneID: String,
+        at target: (x: Double, y: Double, hardpointID: String?),
+        player: inout PlayerState,
+        inventory: [World2PlaceInventoryItem]
+    ) -> World2PlacedPlaceInstance? {
+        let hubID = "scene.world.\(UUID().uuidString)"
+        let padA = World2SceneHardpoint(
+            id: "\(hubID).pad.a",
+            name: "Build Pad",
+            position: World2NormalizedPoint(x: 0.50, y: 0.62),
+            acceptedSizeClasses: [.medium, .large]
+        )
+        let padB = World2SceneHardpoint(
+            id: "\(hubID).pad.b",
+            name: "Side Pad",
+            position: World2NormalizedPoint(x: 0.72, y: 0.58),
+            acceptedSizeClasses: [.small, .medium]
+        )
+        let hub = World2MutableScene(
+            id: hubID,
+            name: "New World",
+            summary: "A blank world waiting for its first scenes.",
+            backgroundAsset: "map.blankWorld",
+            hardpoints: [padA, padB],
+            isMutableByPlayer: true,
+            showsOpenHardpointsToPlayers: true,
+            isDeveloperPlaceholder: false,
+            createdAt: Date(),
+            createdByPlayerID: player.playerId.rawValue
+        )
+        let creator = World2PlacedPlaceInstance(
+            templateID: .sceneCreator,
+            sceneID: hubID,
+            x: 0.32,
+            y: 0.55,
+            hardpointID: nil,
+            placedByPlayerID: player.playerId.rawValue,
+            sourceInventoryItemID: "seeded_scene_creator",
+            linkedSceneID: hubID
+        )
+        let seedling = World2PlacedPlaceInstance(
+            templateID: .worldSeed,
+            sceneID: parentSceneID,
             x: target.x,
             y: target.y,
             hardpointID: target.hardpointID,
             placedByPlayerID: player.playerId.rawValue,
-            sourceInventoryItemID: item.id
+            sourceInventoryItemID: item.id,
+            linkedSceneID: hubID,
+            seedGrowth: .seedling
         )
+
+        var scenes = player.createdScenes ?? []
+        scenes.append(hub)
         var placed = player.placedPlaces ?? []
-        placed.append(instance)
-        player.placeInventory = inventory
+        placed.append(contentsOf: [creator, seedling])
+        player.createdScenes = scenes
         player.placedPlaces = placed
+        player.placeInventory = inventory
         player.lastPlayedAt = Date()
         currentPlayer = player
         saveLocalState()
-        return instance
+        return seedling
+    }
+
+    /// Attach a Scene Kit to a hardpoint: birth a child scene + exit, grant a Beacon, mature seedling.
+    private func attachSceneKit(
+        item: World2PlaceInventoryItem,
+        in parentSceneID: String,
+        at target: (x: Double, y: Double, hardpointID: String?),
+        player: inout PlayerState,
+        inventory: [World2PlaceInventoryItem]
+    ) -> World2PlacedPlaceInstance? {
+        let childID = "scene.kit.\(UUID().uuidString)"
+        let childPad = World2SceneHardpoint(
+            id: "\(childID).pad",
+            name: "Beacon Pad",
+            position: World2NormalizedPoint(x: 0.50, y: 0.60),
+            acceptedSizeClasses: [.small, .medium]
+        )
+        let child = World2MutableScene(
+            id: childID,
+            name: "New Scene",
+            summary: "A freshly attached scene from a Scene Kit.",
+            backgroundAsset: "map.blankWorld",
+            hardpoints: [childPad],
+            isMutableByPlayer: true,
+            showsOpenHardpointsToPlayers: true,
+            createdAt: Date(),
+            createdByPlayerID: player.playerId.rawValue
+        )
+        let exit = World2SceneExit(
+            id: "exit.\(UUID().uuidString)",
+            fromSceneID: parentSceneID,
+            toSceneID: childID,
+            name: "Scene Portal",
+            summary: "Walk through to the scene you just attached.",
+            x: target.x,
+            y: target.y,
+            createdAt: Date(),
+            createdByPlayerID: player.playerId.rawValue,
+            partyLanding: World2PartyLandingContract(
+                landing: .init(x: 0.12, y: 0.86),
+                approach: .init(x: 0.48, y: 0.60)
+            )
+        )
+        // Marker left on the pad so the kit "becomes" the door — use a seedling
+        // visual until we have dedicated kit-placed art; exit marker also shows.
+        let kitMarker = World2PlacedPlaceInstance(
+            templateID: .sceneKit,
+            sceneID: parentSceneID,
+            x: target.x,
+            y: max(0.12, target.y - 0.08),
+            hardpointID: target.hardpointID,
+            placedByPlayerID: player.playerId.rawValue,
+            sourceInventoryItemID: item.id,
+            linkedSceneID: childID
+        )
+
+        var scenes = player.createdScenes ?? []
+        scenes.append(child)
+        var exits = player.sceneExits ?? []
+        exits.append(exit)
+        var placed = player.placedPlaces ?? []
+        placed.append(kitMarker)
+        // Mature every seedling that points at this hub (or parent) into a portal.
+        for index in placed.indices {
+            guard placed[index].templateID == .worldSeed,
+                  placed[index].seedGrowth == .seedling else { continue }
+            let linked = placed[index].linkedSceneID
+            if linked == parentSceneID || linked == item.linkedSceneID {
+                placed[index].seedGrowth = .portal
+            }
+        }
+        var nextInventory = inventory
+        nextInventory.append(.beacon())
+
+        player.createdScenes = scenes
+        player.sceneExits = exits
+        player.placedPlaces = placed
+        player.placeInventory = nextInventory
+        player.lastPlayedAt = Date()
+        currentPlayer = player
+        saveLocalState()
+        return kitMarker
     }
 
     @discardableResult
@@ -272,6 +481,81 @@ class PlayerStateService: ObservableObject {
     }
 
     @discardableResult
+    func addHardpoint(
+        to sceneID: String,
+        purpose: World2HardpointPurpose,
+        x: Double,
+        y: Double
+    ) -> World2SceneHardpoint? {
+        guard var player = currentPlayer else { return nil }
+        var scenes = player.createdScenes ?? []
+        guard let index = scenes.firstIndex(where: { $0.id == sceneID }) else {
+            return nil
+        }
+        let pad = World2SceneHardpoint(
+            id: "\(sceneID).pad.\(UUID().uuidString.prefix(8))",
+            name: purpose == .portal ? "Portal Pad" : "Build Pad",
+            position: World2NormalizedPoint(x: x, y: y),
+            purpose: purpose
+        )
+        scenes[index].hardpoints.append(pad)
+        player.createdScenes = scenes
+        player.lastPlayedAt = Date()
+        currentPlayer = player
+        saveLocalState()
+        return pad
+    }
+
+    /// Quick portal exit + blank destination (uses globe art on the exit marker).
+    @discardableResult
+    func addPortalExit(
+        from sceneID: String,
+        x: Double,
+        y: Double,
+        name: String = "New Portal"
+    ) -> World2SceneExit? {
+        guard var player = currentPlayer,
+              scene(sceneID) != nil else {
+            return nil
+        }
+        let destination = World2MutableScene(
+            id: "scene.\(UUID().uuidString)",
+            name: "New Scene",
+            summary: "A scene waiting for its first backdrop.",
+            backgroundAsset: "map.blankWorld",
+            isMutableByPlayer: true,
+            showsOpenHardpointsToPlayers: true,
+            createdAt: Date(),
+            createdByPlayerID: player.playerId.rawValue
+        )
+        let exit = World2SceneExit(
+            id: "exit.\(UUID().uuidString)",
+            fromSceneID: sceneID,
+            toSceneID: destination.id,
+            name: name,
+            summary: "Walk through to \(destination.name).",
+            x: x,
+            y: y,
+            createdAt: Date(),
+            createdByPlayerID: player.playerId.rawValue,
+            partyLanding: World2PartyLandingContract(
+                landing: .init(x: 0.12, y: 0.86),
+                approach: .init(x: 0.48, y: 0.60)
+            )
+        )
+        var scenes = player.createdScenes ?? []
+        scenes.append(destination)
+        var exits = player.sceneExits ?? []
+        exits.append(exit)
+        player.createdScenes = scenes
+        player.sceneExits = exits
+        player.lastPlayedAt = Date()
+        currentPlayer = player
+        saveLocalState()
+        return exit
+    }
+
+    @discardableResult
     func fabricatePlaceCopy(
         from sourcePlaceInstanceID: String
     ) -> World2PlaceInventoryItem? {
@@ -284,7 +568,9 @@ class PlayerStateService: ObservableObject {
 
         let item = World2PlaceInventoryItem(
             templateID: source.templateID,
-            sourcePlaceInstanceID: sourcePlaceInstanceID
+            sourcePlaceInstanceID: sourcePlaceInstanceID,
+            linkedSceneID: source.linkedSceneID,
+            message: source.message
         )
         var inventory = player.placeInventory ?? []
         inventory.append(item)
@@ -461,6 +747,36 @@ class PlayerStateService: ObservableObject {
         return added
     }
 
+    /// Always mint a fresh inventory copy (Daddy's candy / hug every visit).
+    @discardableResult
+    func awardRepeatableStoryDecoration(
+        _ decoration: World2StoryDecoration
+    ) -> DecorationInstance? {
+        guard var player = currentPlayer else { return nil }
+        let instanceID = "story_\(player.playerId.rawValue)_\(decoration.id)_\(UUID().uuidString)"
+        let instance = DecorationInstance(
+            id: instanceID,
+            decorationId: decoration.id,
+            x: 0.50,
+            y: decoration.placementLayer == .wall ? 0.38 : 0.72,
+            scale: decoration.defaultScale,
+            zIndex: (player.decorations.map(\.zIndex).max() ?? 0) + 1,
+            badges: decoration.badges
+        )
+        player.decorations.append(instance)
+        currentPlayer = player
+        saveLocalState()
+        World2Diagnostics.log(
+            "story_decoration_repeat_awarded",
+            [
+                "decoration": decoration.id,
+                "instance": instanceID,
+                "player": player.playerId.rawValue,
+            ]
+        )
+        return instance
+    }
+
     /// Put a story reward into the player's inventory.
     ///
     /// Awarding is idempotent: the Three Bears will happily let a child play
@@ -570,7 +886,8 @@ class PlayerStateService: ObservableObject {
     func placeFurniture(
         instanceId: String,
         x requestedX: Double? = nil,
-        y requestedY: Double? = nil
+        y requestedY: Double? = nil,
+        roomId: String = "cozyNook"
     ) {
         guard var player = currentPlayer,
               let instanceIndex = player.decorations.firstIndex(where: { $0.id == instanceId }),
@@ -584,11 +901,13 @@ class PlayerStateService: ObservableObject {
             return
         }
 
-        let placedCount = player.homeLayout.placedDecorations.count
-        let defaultX = 0.22 + (Double(placedCount % 3) * 0.20)
+        let roomPlacedCount = player.homeLayout.placedDecorations
+            .filter { $0.resolvedRoomId == roomId }
+            .count
+        let defaultX = 0.22 + (Double(roomPlacedCount % 3) * 0.20)
         let defaultY = placement.layer == .wall
             ? 0.34
-            : (placedCount.isMultiple(of: 2) ? 0.58 : 0.74)
+            : (roomPlacedCount.isMultiple(of: 2) ? 0.58 : 0.74)
         let x = min(max(requestedX ?? defaultX, 0.06), 0.94)
         let y = min(max(requestedY ?? defaultY, 0.16), 0.90)
         let zIndex = (player.decorations.map(\.zIndex).max() ?? 9) + 1
@@ -601,11 +920,44 @@ class PlayerStateService: ObservableObject {
                 id: "placed_\(instanceId)",
                 decorationInstanceId: instanceId,
                 position: .init(x: x, y: y),
-                layer: placement.layer
+                layer: placement.layer,
+                roomId: roomId
             )
         )
         currentPlayer = player
         saveLocalState()
+    }
+
+    /// Decorate-mode catalogue stamp: mint a free instance and drop it in the room.
+    @discardableResult
+    func placeCatalogFurniture(
+        item: FurnitureItem,
+        x: Double,
+        y: Double,
+        roomId: String
+    ) -> String? {
+        let furniture = DecorationInstance(
+            decorationId: item.id,
+            x: min(max(x, 0.06), 0.94),
+            y: min(max(y, 0.16), 0.90),
+            scale: item.defaultScale,
+            zIndex: (currentPlayer?.decorations.map(\.zIndex).max() ?? 9) + 1,
+            badges: nil
+        )
+        guard var player = currentPlayer else { return nil }
+        player.decorations.append(furniture)
+        player.homeLayout.placedDecorations.append(
+            HomeLayout.PlacedDecoration(
+                id: "placed_\(furniture.id)",
+                decorationInstanceId: furniture.id,
+                position: .init(x: furniture.x, y: furniture.y),
+                layer: item.placementLayer,
+                roomId: roomId
+            )
+        )
+        currentPlayer = player
+        saveLocalState()
+        return furniture.id
     }
 
     func updateFurnitureTransform(
@@ -838,6 +1190,7 @@ class PlayerStateService: ObservableObject {
             player.generatedDecorations = []
         }
         ensureStarterPOIFactory(in: &player)
+        ensureStarterWorldSeed(in: &player)
         ensureWorldTeleporter(in: &player)
         offerJukeboxAsInventory(in: &player)
         return player
@@ -900,6 +1253,31 @@ class PlayerStateService: ObservableObject {
         if player.sceneExits == nil {
             player.sceneExits = []
         }
+    }
+
+    private static func ensureStarterWorldSeed(in player: inout PlayerState) {
+        var inventory = player.placeInventory ?? []
+        let alreadyExists = inventory.contains { $0.templateID == .worldSeed }
+        if !alreadyExists {
+            inventory.append(.starterWorldSeed(for: player.playerId))
+        }
+        if !player.progression.achievedMilestones.contains(starterWorldSeedMilestone) {
+            player.progression.achievedMilestones.append(starterWorldSeedMilestone)
+        }
+        player.placeInventory = inventory
+    }
+
+    /// Append a placeable inventory item (World Seed, Scene Kit, Beacon, etc.).
+    @discardableResult
+    func grantPlaceInventoryItem(_ item: World2PlaceInventoryItem) -> World2PlaceInventoryItem? {
+        guard var player = currentPlayer else { return nil }
+        var inventory = player.placeInventory ?? []
+        inventory.append(item)
+        player.placeInventory = inventory
+        player.lastPlayedAt = Date()
+        currentPlayer = player
+        saveLocalState()
+        return item
     }
 
     /// Seed the World Teleporter into every player's treehouse drawer once.

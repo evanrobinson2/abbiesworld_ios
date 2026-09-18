@@ -5,9 +5,9 @@
 //  Drawn stand-in exteriors for registered places whose painted art has not
 //  been generated yet.
 //
-//  A new scene should be playable the day it is authored, so a place with a
-//  `drawnArtStyle` renders here instead of falling through to the purple
-//  missing-asset card.
+//  Prefer the shared `under_construction` cake-tower plate via
+//  `World2SemanticImage` for unqualified `poi.*` assets. Keep a drawnArtStyle
+//  only when a place needs a temporary bespoke silhouette before art lands.
 //
 
 import SwiftUI
@@ -21,10 +21,6 @@ struct World2POIDrawnArtwork: View {
             World2BearsCottage()
         case .whizbangGadgetBarn:
             World2WhizbangGadgetBarn()
-        case .decoratorWorkshop:
-            World2DecoratorWorkshop()
-        case .planningDept:
-            World2PlanningDeptHall()
         }
     }
 }
@@ -241,68 +237,6 @@ private struct World2WhizbangGadgetBarn: View {
         }
         .accessibilityLabel("A copper gadget barn with a launch chimney")
         .accessibilityIdentifier("world2.poi.artwork.whizbang")
-    }
-}
-
-/// A teal workshop with a sofa-shaped awning.
-private struct World2DecoratorWorkshop: View {
-    private let wall = Color(red: 0.22, green: 0.55, blue: 0.52)
-    private let awning = Color(red: 0.95, green: 0.72, blue: 0.38)
-
-    var body: some View {
-        GeometryReader { geometry in
-            let width = geometry.size.width
-            let height = geometry.size.height
-            VStack(spacing: -height * 0.04) {
-                Capsule()
-                    .fill(awning)
-                    .frame(width: width * 0.88, height: height * 0.22)
-                RoundedRectangle(cornerRadius: width * 0.05)
-                    .fill(wall)
-                    .overlay(
-                        HStack(spacing: width * 0.08) {
-                            ForEach(0..<2, id: \.self) { _ in
-                                RoundedRectangle(cornerRadius: 3)
-                                    .fill(Color(red: 0.95, green: 0.88, blue: 0.62))
-                                    .frame(width: width * 0.16, height: height * 0.16)
-                            }
-                        }
-                    )
-                    .frame(height: height * 0.46)
-            }
-            .frame(width: width, height: height, alignment: .bottom)
-        }
-        .accessibilityLabel("A teal decorator workshop with a sofa awning")
-        .accessibilityIdentifier("world2.poi.artwork.decoratorMachine")
-    }
-}
-
-/// A blue municipal hall with a map-pin awning.
-private struct World2PlanningDeptHall: View {
-    private let wall = Color(red: 0.28, green: 0.42, blue: 0.62)
-    private let roof = Color(red: 0.18, green: 0.28, blue: 0.42)
-
-    var body: some View {
-        GeometryReader { geometry in
-            let width = geometry.size.width
-            let height = geometry.size.height
-            VStack(spacing: -height * 0.03) {
-                Triangle()
-                    .fill(roof)
-                    .frame(width: width * 0.9, height: height * 0.28)
-                RoundedRectangle(cornerRadius: width * 0.04)
-                    .fill(wall)
-                    .overlay(
-                        Image(systemName: "map.fill")
-                            .font(.system(size: width * 0.18, weight: .bold))
-                            .foregroundStyle(.white.opacity(0.85))
-                    )
-                    .frame(height: height * 0.48)
-            }
-            .frame(width: width, height: height, alignment: .bottom)
-        }
-        .accessibilityLabel("Planning Department hall with a map on the door")
-        .accessibilityIdentifier("world2.poi.artwork.planningDept")
     }
 }
 

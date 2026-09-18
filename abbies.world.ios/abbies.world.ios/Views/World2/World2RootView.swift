@@ -5,20 +5,10 @@ import Combine
 struct World2RootView: View {
     @StateObject private var viewModel = World2ViewModel()
     @EnvironmentObject private var auth: AuthenticationService
-    @Environment(\.scenePhase) private var scenePhase
     @State private var showingMusicPlayer =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Music")
     @State private var showingSettings =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Settings")
-    @State private var showingClassicGames =
-        ProcessInfo.processInfo.arguments.contains("-openWorld2ClassicGames")
-    @State private var showingWaypointGame = false
-    @State private var showingGoonPopper = false
-    @State private var showingPictureCarver = false
-    @State private var showingDinoPicnic = false
-    @State private var showingDecoratorMachine = false
-    @State private var showingWhizbang = false
-    @State private var openCreatureLabFromClassic = false
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -59,6 +49,12 @@ struct World2RootView: View {
                     }
                 )
 
+            case .daddyWelcome:
+                World2DaddyWelcomeView(
+                    viewModel: viewModel,
+                    onExit: viewModel.exitPOI
+                )
+
             case .cardFactory:
                 World2CardFactoryView(
                     viewModel: viewModel,
@@ -76,7 +72,7 @@ struct World2RootView: View {
                 World2FurnitureStoreView(
                     viewModel: viewModel,
                     onExit: viewModel.exitPOI,
-                    onDecorateHome: viewModel.openCurrentPlayerTreehouse
+                    onDecorateHome: { viewModel.openCurrentPlayerTreehouse() }
                 )
 
             case .assetWorkbench:
@@ -128,12 +124,24 @@ struct World2RootView: View {
                     }
                 )
 
-            case .decoratorMachine:
-                DecoratorMachineView(onDismiss: viewModel.exitPOI)
-
             case .planningDept:
                 World2PlanningDeptView(
                     viewModel: viewModel,
+                    onExit: viewModel.exitPOI
+                )
+
+            case .sceneCreator(let instanceID):
+                World2SceneCreatorView(
+                    instanceID: instanceID,
+                    onTakeKit: {
+                        _ = viewModel.takeSceneKit(fromCreatorInstanceID: instanceID)
+                    },
+                    onExit: viewModel.exitPOI
+                )
+
+            case .beacon(let instanceID):
+                World2BeaconView(
+                    message: viewModel.beaconMessage(for: instanceID),
                     onExit: viewModel.exitPOI
                 )
 
@@ -152,10 +160,6 @@ struct World2RootView: View {
                 )
             }
             } // authenticated shell
-
-            if auth.isAuthenticated, viewModel.currentScreen.showsGlobalHUD {
-                globalHUDButtons
-            }
 
             if let celebration = viewModel.rewardCelebration {
                 World2RewardCelebrationView(
@@ -200,69 +204,19 @@ struct World2RootView: View {
             )
             .environmentObject(auth)
         }
-        .sheet(isPresented: $showingClassicGames) {
-            GamesDialogView(
-                showWaypointGame: $showingWaypointGame,
-                showGoonPopper: $showingGoonPopper,
-                showPictureCarver: $showingPictureCarver,
-                showDinoPicnic: $showingDinoPicnic,
-                showCreatureBuilder: $openCreatureLabFromClassic,
-                showDecoratorMachine: $showingDecoratorMachine,
-                showWhizbang: $showingWhizbang,
-                onDismiss: { showingClassicGames = false }
-            )
-            .accessibilityElement(children: .contain)
-            .accessibilityIdentifier("world2.classicGames")
-        }
-        .fullScreenCover(isPresented: $showingWaypointGame) {
-            WaypointNavigationView(
-                onDismiss: { showingWaypointGame = false },
-                onComplete: { showingWaypointGame = false }
-            )
-        }
-        .fullScreenCover(isPresented: $showingGoonPopper) {
-            GoonPopperView(
-                onDismiss: { showingGoonPopper = false },
-                onComplete: {}
-            )
-        }
-        .fullScreenCover(isPresented: $showingPictureCarver) {
-            PictureCarverView(onDismiss: { showingPictureCarver = false })
-        }
-        .fullScreenCover(isPresented: $showingDinoPicnic) {
-            DinoPicnicView()
-        }
-        .onChange(of: showingWaypointGame) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
-        }
-        .onChange(of: showingGoonPopper) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
-        }
-        .onChange(of: showingPictureCarver) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
-        }
-        .onChange(of: showingDinoPicnic) { _, isActive in
-            MusicService.shared.setGameActive(isActive)
-        }
-        .onChange(of: showingDecoratorMachine) { _, shouldOpen in
-            guard shouldOpen else { return }
-            showingDecoratorMachine = false
-            viewModel.openDecoratorMachine()
-        }
-        .onChange(of: showingWhizbang) { _, shouldOpen in
-            guard shouldOpen else { return }
-            showingWhizbang = false
-            viewModel.openWhizbang()
-        }
-        .onChange(of: openCreatureLabFromClassic) { _, shouldOpen in
-            guard shouldOpen else { return }
-            openCreatureLabFromClassic = false
-            viewModel.openCreatureLab()
-        }
         .overlay(alignment: .leading) {
-            if showsQuestDrawer {
-                World2QuestDrawer(viewModel: viewModel)
-                    .zIndex(40)
+            if showsPlayerMenu {
+                World2PlayerMenuDrawer(
+                    viewModel: viewModel,
+                    onOpenSettings: { showingSettings = true },
+                    onOpenMusic: {
+                        World2MusicService.shared.stop()
+                        showingMusicPlayer = true
+                        World2Diagnostics.log("music_player_opened")
+                    },
+                    onOpenWorldMap: { viewModel.openPlanningDept() }
+                )
+                .zIndex(40)
             }
         }
         .task {
@@ -272,14 +226,9 @@ struct World2RootView: View {
             // World 2 delegates all music to the established app player.
             World2MusicService.shared.stop()
         }
-        .onChange(of: scenePhase) {
-            if scenePhase != .active {
-                World2DeveloperSession.shared.isEnabled = false
-            }
-        }
     }
 
-    private var showsQuestDrawer: Bool {
+    private var showsPlayerMenu: Bool {
         switch viewModel.currentScreen {
         case .loading, .playerSelect:
             return false
@@ -288,61 +237,7 @@ struct World2RootView: View {
         }
     }
 
-    private var globalHUDButtons: some View {
-        HStack(spacing: 8) {
-            World2MinimapHUDChip(
-                snapshot: viewModel.worldGraphSnapshot,
-                onOpen: { viewModel.openPlanningDept() }
-            )
-
-            Button {
-                showingClassicGames = true
-            } label: {
-                globalHUDIcon {
-                    Image(systemName: "gamecontroller.fill")
-                }
-            }
-            .accessibilityLabel("Open classic games")
-            .accessibilityIdentifier("world2.hud.classicGames")
-
-            Button {
-                showingSettings = true
-            } label: {
-                globalHUDIcon {
-                    Image(systemName: "gearshape.fill")
-                }
-            }
-            .accessibilityLabel("Open settings")
-            .accessibilityIdentifier("world2.hud.settings")
-
-            Button {
-                World2MusicService.shared.stop()
-                showingMusicPlayer = true
-                World2Diagnostics.log("music_player_opened")
-            } label: {
-                globalHUDIcon {
-                    Image(systemName: "music.note")
-                }
-            }
-            .accessibilityLabel("Open music player")
-            .accessibilityIdentifier("world2.hud.music")
-        }
-        .padding(.top, 16)
-        .padding(.trailing, 18)
-        .zIndex(100)
-    }
-
-    private func globalHUDIcon<Icon: View>(
-        @ViewBuilder icon: () -> Icon
-    ) -> some View {
-        icon()
-            .font(.system(size: 20, weight: .bold))
-            .foregroundStyle(.white)
-            .frame(width: 48, height: 48)
-            .background(.ultraThinMaterial, in: Circle())
-            .overlay(Circle().stroke(.white.opacity(0.42), lineWidth: 1.5))
-            .shadow(color: .black.opacity(0.28), radius: 8, y: 4)
-    }
+    // Bootstrap loading overlay (intro) — kept below.
 }
 
 struct BootstrapLoadingView: View {
@@ -655,24 +550,37 @@ struct PlayerSelectView: View {
                 .scaledToFill()
                 .frame(width: screen.size.width, height: screen.size.height)
                 .clipped()
-                .overlay(Color.indigo.opacity(0.30))
+                .overlay(
+                    LinearGradient(
+                        colors: [
+                            Color.indigo.opacity(0.35),
+                            Color.black.opacity(0.45),
+                            Color.pink.opacity(0.25)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
 
-                VStack(spacing: 20) {
+                VStack(spacing: 22) {
                     AnimatedWorld2Title()
                         .accessibilityHidden(true)
 
                     Text("Who's Playing?")
-                        .font(.system(size: 32, weight: .black, design: .rounded))
+                        .font(.system(size: 36, weight: .black, design: .rounded))
                         .foregroundStyle(.white)
+                        .shadow(color: .pink.opacity(0.5), radius: 8, y: 2)
 
-                    Text("Choose your own treehouse adventure.")
-                        .font(.system(size: 15, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.82))
+                    Text("Choose your badge to open a treehouse.")
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.85))
 
-                    HStack(spacing: 46) {
-                        PlayerSelectButton(playerId: .abbie, color: .pink, onSelect: onSelect)
-                        PlayerSelectButton(playerId: .ani, color: .purple, onSelect: onSelect)
+                    HStack(spacing: 36) {
+                        PlayerSelectButton(playerId: .abbie, onSelect: onSelect)
+                        PlayerSelectButton(playerId: .ani, onSelect: onSelect)
+                        PlayerSelectButton(playerId: .evan, onSelect: onSelect)
                     }
+                    .frame(maxWidth: .infinity)
 
                     if let error = playerService.error {
                         Label(error, systemImage: "exclamationmark.triangle.fill")
@@ -686,12 +594,17 @@ struct PlayerSelectView: View {
                     }
                 }
                 .padding(.horizontal, 42)
-                .padding(.vertical, 24)
-                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(.white.opacity(0.42), lineWidth: 2)
+                .padding(.vertical, 28)
+                .frame(maxWidth: min(screen.size.width - 48, 760))
+                .background(
+                    RoundedRectangle(cornerRadius: 36, style: .continuous)
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 36, style: .continuous)
+                                .stroke(.white.opacity(0.42), lineWidth: 2.5)
+                        )
                 )
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .frame(width: screen.size.width, height: screen.size.height)
             .clipped()
@@ -704,29 +617,86 @@ struct PlayerSelectView: View {
 
 private struct PlayerSelectButton: View {
     let playerId: PlayerId
-    let color: Color
     let onSelect: (PlayerId) -> Void
+    @State private var pulse = false
 
     var body: some View {
         Button {
             onSelect(playerId)
         } label: {
             VStack(spacing: 14) {
-                Image(systemName: playerId == .abbie ? "sparkles" : "moon.stars.fill")
-                    .font(.system(size: 54, weight: .bold))
-                    .foregroundStyle(.white)
-                    .frame(width: 128, height: 128)
-                    .background(color.gradient, in: Circle())
-                    .shadow(color: color.opacity(0.5), radius: 10, y: 5)
+                ZStack {
+                    Circle()
+                        .fill(style.gradient)
+                        .frame(width: 128, height: 128)
+                        .overlay(Circle().stroke(.white.opacity(0.85), lineWidth: 3))
+                        .shadow(color: style.glow.opacity(0.55), radius: pulse ? 16 : 8, y: 5)
+                        .scaleEffect(pulse ? 1.03 : 1.0)
+
+                    if let uiImage = UIImage(named: playerId.menuAvatarCatalogName) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                    } else {
+                        Image(systemName: style.symbol)
+                            .font(.system(size: 48, weight: .bold))
+                            .foregroundStyle(.white)
+                    }
+                }
 
                 Text(playerId.displayName)
-                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .font(.system(size: 24, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
             }
         }
         .buttonStyle(.plain)
         .accessibilityLabel("Play as \(playerId.displayName)")
-        .accessibilityIdentifier("world2.player.\(playerId == .abbie ? "abbie" : "ani")")
+        .accessibilityIdentifier("world2.player.\(playerId == .abbie ? "abbie" : playerId == .ani ? "ani" : "evan")")
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1.6).repeatForever(autoreverses: true)) {
+                pulse = true
+            }
+        }
+    }
+
+    private var style: (gradient: RadialGradient, glow: Color, symbol: String) {
+        switch playerId {
+        case .abbie:
+            return (
+                RadialGradient(
+                    colors: [Color.pink.opacity(0.95), Color(red: 0.72, green: 0.18, blue: 0.48)],
+                    center: .topLeading,
+                    startRadius: 6,
+                    endRadius: 90
+                ),
+                .pink,
+                "sparkles"
+            )
+        case .ani:
+            return (
+                RadialGradient(
+                    colors: [Color.purple.opacity(0.95), Color(red: 0.32, green: 0.16, blue: 0.62)],
+                    center: .topLeading,
+                    startRadius: 6,
+                    endRadius: 90
+                ),
+                .purple,
+                "moon.stars.fill"
+            )
+        case .evan:
+            return (
+                RadialGradient(
+                    colors: [Color.teal.opacity(0.95), Color(red: 0.08, green: 0.35, blue: 0.48)],
+                    center: .topLeading,
+                    startRadius: 6,
+                    endRadius: 90
+                ),
+                .teal,
+                "shield.lefthalf.filled"
+            )
+        }
     }
 }
 
@@ -737,7 +707,8 @@ private extension World2Screen {
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse,
              .characterStudio, .sceneBuilder, .worldTeleporter,
-             .whizbang, .decoratorMachine, .planningDept:
+             .whizbang, .planningDept,
+             .sceneCreator, .beacon, .daddyWelcome:
             return false
         case .homeWorld, .blankSlate:
             return true

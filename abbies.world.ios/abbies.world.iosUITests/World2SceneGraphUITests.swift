@@ -112,7 +112,7 @@ final class World2SceneGraphUITests: XCTestCase {
         tap("world2.reward.showMe")
 
         assertExists("world2.interior.poi.abbieTreehouse", "Abbie's treehouse")
-        assertExists("world2.interior.decorator.drawer", "The drawer, already open")
+        assertExists("world2.interior.decorator.tray", "The decorate tray, already open")
         let card = app.descendants(matching: .any).matching(
             NSPredicate(
                 format: "identifier CONTAINS 'inventory.item.story_' AND identifier CONTAINS 'perfectPorridge'"

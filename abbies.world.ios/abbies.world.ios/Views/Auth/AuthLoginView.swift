@@ -68,66 +68,220 @@ struct HouseholdProfileSelectView: View {
     @ObservedObject var auth: AuthenticationService
     let onPlay: (PlayerId) -> Void
 
-    var body: some View {
-        ZStack {
-            Color(red: 0.11, green: 0.18, blue: 0.24).ignoresSafeArea()
-            VStack(spacing: 24) {
-                Text("Who is playing?")
-                    .font(.system(size: 36, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                if let email = auth.accountEmail {
-                    Text(email)
-                        .font(.subheadline)
-                        .foregroundStyle(.white.opacity(0.7))
-                }
-                Text(auth.canManageProfiles
-                     ? "Parent/developer mode: you can open Abbie or Ani as a proxy, or play as yourself."
-                     : "Choose your profile to continue.")
-                    .font(.body)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.white.opacity(0.85))
-                    .padding(.horizontal, 40)
+    private var profiles: [HouseholdProfile] {
+        auth.household?.profiles ?? []
+    }
 
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 180), spacing: 16)], spacing: 16) {
-                    ForEach(auth.household?.profiles ?? []) { profile in
-                        Button {
-                            Task {
-                                await auth.selectProfile(profile)
-                                onPlay(profile.playerId)
+    var body: some View {
+        GeometryReader { screen in
+            ZStack {
+                World2SemanticImage(
+                    semanticName: "title.background",
+                    fallbackIcon: "globe.americas.fill",
+                    fallbackLabel: "Abbie's World"
+                )
+                .scaledToFill()
+                .frame(width: screen.size.width, height: screen.size.height)
+                .clipped()
+                .overlay(
+                    LinearGradient(
+                        colors: [
+                            Color.indigo.opacity(0.35),
+                            Color.black.opacity(0.45),
+                            Color.pink.opacity(0.25)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+
+                VStack(spacing: 22) {
+                    Text("Who's playing?")
+                        .font(.system(size: 40, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                        .shadow(color: .pink.opacity(0.55), radius: 10, y: 2)
+                        .accessibilityAddTraits(.isHeader)
+
+                    if let email = auth.accountEmail {
+                        Text(email)
+                            .font(.system(size: 14, weight: .semibold, design: .rounded))
+                            .foregroundStyle(.white.opacity(0.72))
+                    }
+
+                    Text(
+                        auth.canManageProfiles
+                            ? "Pick a badge to open that treehouse."
+                            : "Choose your badge to continue."
+                    )
+                    .font(.system(size: 17, weight: .medium, design: .rounded))
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.white.opacity(0.88))
+                    .padding(.horizontal, 24)
+
+                    HStack(spacing: 28) {
+                        ForEach(profiles) { profile in
+                            HouseholdPlayerBadgeButton(profile: profile) {
+                                Task {
+                                    await auth.selectProfile(profile)
+                                    onPlay(profile.playerId)
+                                }
                             }
-                        } label: {
-                            VStack(spacing: 10) {
-                                Text(profile.displayName)
-                                    .font(.title2.bold())
-                                Text(profile.isProxy ? "Proxy" : profile.role.rawValue.capitalized)
-                                    .font(.caption)
-                                    .opacity(0.8)
-                            }
-                            .foregroundStyle(.white)
-                            .frame(maxWidth: .infinity, minHeight: 120)
-                            .background(color(for: profile).opacity(0.85))
-                            .clipShape(RoundedRectangle(cornerRadius: 18, style: .continuous))
                         }
-                        .accessibilityIdentifier("profile_\(profile.playerId.rawValue)")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 8)
+
+                    Button("Sign out") {
+                        Task { await auth.logout() }
+                    }
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.78))
+                    .padding(.top, 10)
+                }
+                .padding(.horizontal, 36)
+                .padding(.vertical, 34)
+                .frame(maxWidth: min(screen.size.width - 48, 760))
+                .background(
+                    RoundedRectangle(cornerRadius: 36, style: .continuous)
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 36, style: .continuous)
+                                .stroke(
+                                    LinearGradient(
+                                        colors: [
+                                            .white.opacity(0.65),
+                                            .cyan.opacity(0.35),
+                                            .pink.opacity(0.45)
+                                        ],
+                                        startPoint: .topLeading,
+                                        endPoint: .bottomTrailing
+                                    ),
+                                    lineWidth: 2.5
+                                )
+                        )
+                        .shadow(color: .black.opacity(0.28), radius: 24, y: 12)
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+            }
+            .frame(width: screen.size.width, height: screen.size.height)
+        }
+        .ignoresSafeArea()
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("world2.playerSelect")
+    }
+}
+
+private struct HouseholdPlayerBadgeButton: View {
+    let profile: HouseholdProfile
+    let action: () -> Void
+
+    @State private var pulse = false
+
+    var body: some View {
+        Button(action: action) {
+            VStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .fill(
+                            RadialGradient(
+                                colors: [
+                                    style.glow.opacity(0.95),
+                                    style.base.opacity(0.75),
+                                    style.deep.opacity(0.9)
+                                ],
+                                center: .topLeading,
+                                startRadius: 8,
+                                endRadius: 90
+                            )
+                        )
+                        .frame(width: 132, height: 132)
+                        .overlay(
+                            Circle()
+                                .stroke(.white.opacity(0.85), lineWidth: 3)
+                        )
+                        .shadow(color: style.glow.opacity(0.55), radius: pulse ? 18 : 10, y: 6)
+                        .scaleEffect(pulse ? 1.03 : 1.0)
+
+                    if let uiImage = UIImage(named: profile.playerId.menuAvatarCatalogName) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 104, height: 104)
+                            .clipShape(Circle())
+                            .overlay(Circle().stroke(.white.opacity(0.35), lineWidth: 1.5))
+                    } else {
+                        Image(systemName: style.symbol)
+                            .font(.system(size: 48, weight: .bold))
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.25), radius: 2, y: 1)
                     }
                 }
-                .padding(.horizontal, 40)
 
-                Button("Sign out") {
-                    Task { await auth.logout() }
+                VStack(spacing: 4) {
+                    Text(profile.displayName)
+                        .font(.system(size: 24, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+
+                    Text(subtitle)
+                        .font(.system(size: 13, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.78))
+                        .padding(.horizontal, 10)
+                        .padding(.vertical, 4)
+                        .background(Capsule().fill(.white.opacity(0.14)))
                 }
-                .foregroundStyle(.white.opacity(0.8))
-                .padding(.top, 12)
             }
-            .padding()
+            .frame(minWidth: 150)
+            .padding(.vertical, 8)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("Play as \(profile.displayName)")
+        .accessibilityIdentifier("profile_\(profile.playerId.rawValue)")
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1.6).repeatForever(autoreverses: true)) {
+                pulse = true
+            }
         }
     }
 
-    private func color(for profile: HouseholdProfile) -> Color {
-        switch profile.playerId {
-        case .abbie: return .pink
-        case .ani: return .purple
-        case .evan: return .teal
+    private var subtitle: String {
+        if profile.isProxy { return "Proxy play" }
+        switch profile.role {
+        case .developer: return "Daddy"
+        case .parent: return "Parent"
+        case .child: return "Explorer"
         }
     }
+
+    private var style: BadgeStyle {
+        switch profile.playerId {
+        case .abbie:
+            return BadgeStyle(
+                base: Color(red: 1.0, green: 0.45, blue: 0.72),
+                deep: Color(red: 0.72, green: 0.18, blue: 0.48),
+                glow: Color(red: 1.0, green: 0.72, blue: 0.88),
+                symbol: "sparkles"
+            )
+        case .ani:
+            return BadgeStyle(
+                base: Color(red: 0.62, green: 0.42, blue: 0.95),
+                deep: Color(red: 0.32, green: 0.16, blue: 0.62),
+                glow: Color(red: 0.82, green: 0.7, blue: 1.0),
+                symbol: "moon.stars.fill"
+            )
+        case .evan:
+            return BadgeStyle(
+                base: Color(red: 0.18, green: 0.72, blue: 0.78),
+                deep: Color(red: 0.08, green: 0.35, blue: 0.48),
+                glow: Color(red: 0.55, green: 0.92, blue: 0.95),
+                symbol: "shield.lefthalf.filled"
+            )
+        }
+    }
+}
+
+private struct BadgeStyle {
+    let base: Color
+    let deep: Color
+    let glow: Color
+    let symbol: String
 }

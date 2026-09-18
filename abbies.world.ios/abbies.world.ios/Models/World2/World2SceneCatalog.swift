@@ -28,6 +28,7 @@ enum World2SceneCatalog {
         farmLand,
         threeBears,
         artGarden,
+        evanCitadel,
         World2SceneDefinition.blankSlate,
     ]
 
@@ -260,16 +261,6 @@ enum World2SceneCatalog {
                 scale: 1.15,
                 zIndex: 1
             ),
-            authored(
-                "instance.farm.decoratorMachine",
-                World2POIRegistry.decoratorMachineID,
-                scene: sceneID(for: .farm),
-                hardpoint: "hardpoint.farm.orchardPad",
-                x: 0.213,
-                y: 0.661,
-                scale: 0.92,
-                zIndex: 2
-            ),
         ],
         showsOpenHardpointsToPlayers: true,
         createdAt: .distantPast
@@ -386,6 +377,56 @@ enum World2SceneCatalog {
                 y: 0.430,
                 scale: 1.05,
                 zIndex: 2
+            ),
+        ],
+        showsOpenHardpointsToPlayers: true,
+        createdAt: .distantPast
+    )
+
+    // MARK: - Daddy's Citadel
+    //
+    // Evan's home world. Reachable by teleporter and from Home adjacency when
+    // daddy is exploring; Evan lands here on profile select.
+
+    static let evanCitadel = World2SceneDefinition(
+        id: sceneID(for: .evan),
+        name: "Daddy's Citadel",
+        summary: "A glowing mountain base overlooking the water",
+        backgroundAsset: "map.evan",
+        hardpoints: [
+            World2SceneHardpoint(
+                id: "hardpoint.evan.homePad",
+                name: "Citadel terrace",
+                position: World2NormalizedPoint(x: 0.52, y: 0.58),
+                acceptedSizeClasses: [.medium, .large],
+                isLocked: true,
+                notes: "Daddy's home stands on the main terrace"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.evan.lookoutPad",
+                name: "Lookout ring",
+                position: World2NormalizedPoint(x: 0.72, y: 0.42),
+                acceptedSizeClasses: [.small, .medium],
+                notes: "Open pad on the upper ring"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.evan.shorePad",
+                name: "Shore platform",
+                position: World2NormalizedPoint(x: 0.30, y: 0.72),
+                acceptedSizeClasses: [.small, .medium],
+                notes: "Open pad near the water"
+            ),
+        ],
+        poiInstances: [
+            authored(
+                "instance.evan.home",
+                World2POIRegistry.evanHomeID,
+                scene: sceneID(for: .evan),
+                hardpoint: "hardpoint.evan.homePad",
+                x: 0.52,
+                y: 0.58,
+                scale: 1.05,
+                zIndex: 1
             ),
         ],
         showsOpenHardpointsToPlayers: true,
