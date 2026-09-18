@@ -26,8 +26,7 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .abbie: return "poi.abbieTreehouse"
         case .ani: return "poi.aniTreehouse"
-        // Developer profile reuses Abbie's treehouse pad until Evan has a home POI.
-        case .evan: return "poi.abbieTreehouse"
+        case .evan: return "poi.evanHome"
         }
     }
     

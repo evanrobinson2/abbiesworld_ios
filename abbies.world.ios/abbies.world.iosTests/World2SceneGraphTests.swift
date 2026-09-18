@@ -221,7 +221,7 @@ final class SceneGraphCodableTests: XCTestCase {
             name: "Pad",
             position: World2NormalizedPoint(x: 0.4, y: 0.7),
             acceptedSizeClasses: [.small, .medium],
-            snapRadius: 0.11,
+            snapRadius: 0.028,
             isLocked: true,
             notes: "note"
         )
@@ -259,8 +259,8 @@ final class SceneGraphCodableTests: XCTestCase {
             position: .center,
             snapRadius: 99
         )
-        XCTAssertGreaterThan(tiny.snapRadius, 0)
-        XCTAssertLessThanOrEqual(huge.snapRadius, 0.30)
+        XCTAssertEqual(tiny.snapRadius, World2SceneHardpoint.snapRadiusRange.lowerBound)
+        XCTAssertEqual(huge.snapRadius, World2SceneHardpoint.snapRadiusRange.upperBound)
     }
 
     func testEmptyAcceptedSizesFallsBackToAnySizeRatherThanAcceptingNothing() {

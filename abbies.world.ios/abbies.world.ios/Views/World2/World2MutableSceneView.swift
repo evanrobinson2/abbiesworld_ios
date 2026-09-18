@@ -9,11 +9,11 @@ struct World2MutableSceneView: View {
     @State private var isAuthoringPlaceholder = false
     @State private var showingBackdropEditor = false
     @State private var layoutAddMode: LayoutAddMode? = nil
-    @State private var layoutToolbarExpanded = false
     @State private var chromeVisible = true
     @State private var chromeHideTask: Task<Void, Never>?
     @State private var backdropURLDraft = ""
     @State private var backdropStatus: String?
+    @State private var showingSceneInvent = false
 
     private enum LayoutAddMode: String, Identifiable {
         case poiHardpoint
@@ -175,27 +175,8 @@ struct World2MutableSceneView: View {
                     }
 
                     if developerMode, developerSession.layoutToolbarVisible {
-                        if layoutToolbarExpanded {
-                            layoutToolbar
-                                .transition(.opacity.combined(with: .move(edge: .top)))
-                        } else if chromeVisible {
-                            Button {
-                                bumpChrome()
-                                withAnimation(.spring(response: 0.28, dampingFraction: 0.82)) {
-                                    layoutToolbarExpanded = true
-                                }
-                            } label: {
-                                Label("Layout", systemImage: "slider.horizontal.3")
-                                    .font(.system(size: 12, weight: .black, design: .rounded))
-                                    .foregroundStyle(.white)
-                                    .padding(.horizontal, 12)
-                                    .padding(.vertical, 8)
-                                    .background(.orange.opacity(0.92), in: Capsule())
-                            }
-                            .buttonStyle(.plain)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .accessibilityIdentifier("world2.mutableScene.layoutCollapsed")
-                        }
+                        devToolsStrip
+                            .transition(.opacity.combined(with: .move(edge: .top)))
                     }
 
                     if let banner = contextualBanner {
@@ -214,7 +195,8 @@ struct World2MutableSceneView: View {
                 .padding(.horizontal, 20)
                 .padding(.top, 14)
                 .animation(.easeOut(duration: 0.25), value: chromeVisible)
-                .animation(.easeOut(duration: 0.2), value: layoutToolbarExpanded)
+                .animation(.easeOut(duration: 0.2), value: developerSession.activeDevTool)
+                .animation(.easeOut(duration: 0.2), value: developerSession.layoutDiagMode)
                 .zIndex(50)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
@@ -238,6 +220,20 @@ struct World2MutableSceneView: View {
         .sheet(isPresented: $showingBackdropEditor) {
             backdropEditorSheet
         }
+        .sheet(isPresented: $showingSceneInvent) {
+            let mutable = viewModel.currentMutableScene
+            let plate = backdropStore.image(forSceneID: viewModel.currentMutableSceneID)
+                ?? AssetBootstrapService.shared.image(for: mutable.backgroundAsset)
+            World2SceneInventDecorationsView(
+                scene: mutable,
+                plateImage: plate,
+                onOpenDecorate: {
+                    showingSceneInvent = false
+                    viewModel.openCurrentPlayerTreehouse(startDecorating: true)
+                },
+                onClose: { showingSceneInvent = false }
+            )
+        }
         .onAppear {
             logSceneState()
             bumpChrome()
@@ -248,7 +244,6 @@ struct World2MutableSceneView: View {
         .onChange(of: viewModel.currentMutableSceneID) {
             viewModel.selectedPlaceInventoryItemID = nil
             layoutAddMode = nil
-            layoutToolbarExpanded = false
             logSceneState()
             bumpChrome()
         }
@@ -269,8 +264,9 @@ struct World2MutableSceneView: View {
 
     private var shouldShowHardpoints: Bool {
         hasArmedInventoryItem || (developerMode && layoutAddMode != nil)
-            || (developerMode && (developerSession.showPOIHardpoints || developerSession.showPortalHardpoints)
-                && layoutToolbarExpanded)
+            || (developerMode && developerSession.activeDevTool != .play
+                && (developerSession.showPOIHardpoints || developerSession.showPortalHardpoints))
+            || (developerMode && developerSession.activeDevTool == .layout)
     }
 
     private var contextualBanner: (text: String, symbol: String, tint: Color)? {
@@ -307,7 +303,8 @@ struct World2MutableSceneView: View {
             try? await Task.sleep(for: .seconds(3.5))
             guard !Task.isCancelled else { return }
             // Keep chrome up while actively placing / editing layout.
-            if hasArmedInventoryItem || layoutAddMode != nil || layoutToolbarExpanded {
+            if hasArmedInventoryItem || layoutAddMode != nil
+                || developerSession.activeDevTool != .play {
                 bumpChrome()
                 return
             }
@@ -480,20 +477,6 @@ struct World2MutableSceneView: View {
                     developerSession.showPortalHardpoints.toggle()
                 }
                 Spacer(minLength: 0)
-                Button {
-                    withAnimation(.spring(response: 0.28, dampingFraction: 0.82)) {
-                        layoutToolbarExpanded = false
-                    }
-                    bumpChrome()
-                } label: {
-                    Image(systemName: "chevron.up")
-                        .font(.system(size: 12, weight: .black))
-                        .foregroundStyle(.white)
-                        .padding(7)
-                        .background(.black.opacity(0.4), in: Circle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("Collapse layout toolbar")
             }
 
             HStack(spacing: 8) {
@@ -523,6 +506,134 @@ struct World2MutableSceneView: View {
                 .stroke(.orange.opacity(0.55), lineWidth: 1.5)
         )
         .accessibilityIdentifier("world2.mutableScene.layoutToolbar")
+    }
+
+    private var devToolsStrip: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
+                Text("DEV")
+                    .font(.system(size: 10, weight: .black, design: .rounded))
+                    .foregroundStyle(.orange.opacity(0.9))
+
+                ForEach(World2DevTool.allCases) { tool in
+                    Button {
+                        bumpChrome()
+                        withAnimation(.spring(response: 0.28, dampingFraction: 0.82)) {
+                            developerSession.activeDevTool = tool
+                            if tool == .hardpoints {
+                                developerSession.showPOIHardpoints = true
+                                developerSession.showPortalHardpoints = true
+                            }
+                            if tool == .play {
+                                layoutAddMode = nil
+                            }
+                        }
+                    } label: {
+                        Label(
+                            tool == .play ? "Interact" : tool.title,
+                            systemImage: tool == .play ? "figure.walk" : tool.symbolName
+                        )
+                            .font(.system(size: 11, weight: .black, design: .rounded))
+                            .padding(.horizontal, 10)
+                            .padding(.vertical, 7)
+                            .background(
+                                developerSession.activeDevTool == tool
+                                    ? (tool == .play ? Color.green.opacity(0.92) : Color.orange.opacity(0.9))
+                                    : Color.black.opacity(0.35),
+                                in: Capsule()
+                            )
+                            .foregroundStyle(.white)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("world2.mutableScene.devTool.\(tool.rawValue)")
+                }
+
+                Spacer(minLength: 0)
+
+                if developerSession.activeDevTool == .layout {
+                    ForEach(World2LayoutDiagMode.allCases) { mode in
+                        Button {
+                            bumpChrome()
+                            developerSession.layoutDiagMode = mode
+                        } label: {
+                            Text(mode.title)
+                                .font(.system(size: 10, weight: .black, design: .rounded))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 6)
+                                .background(
+                                    developerSession.layoutDiagMode == mode
+                                        ? Color.cyan.opacity(0.85)
+                                        : Color.black.opacity(0.3),
+                                    in: Capsule()
+                                )
+                                .foregroundStyle(.white)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("world2.mutableScene.layoutDiag.\(mode.rawValue)")
+                    }
+                }
+            }
+
+            if developerSession.activeDevTool == .layout {
+                switch developerSession.layoutDiagMode {
+                case .full:
+                    layoutToolbar
+                case .min:
+                    HStack(spacing: 8) {
+                        addModeChip("Add POI pad", mode: .poiHardpoint, symbol: "plus.circle")
+                        addModeChip("Add portal pad", mode: .portalHardpoint, symbol: "plus.diamond")
+                        Spacer(minLength: 0)
+                    }
+                case .off:
+                    EmptyView()
+                }
+            } else if developerSession.activeDevTool == .hardpoints {
+                HStack(spacing: 8) {
+                    visibilityChip("POI pads", on: developerSession.showPOIHardpoints) {
+                        developerSession.showPOIHardpoints.toggle()
+                    }
+                    visibilityChip("Portal pads", on: developerSession.showPortalHardpoints) {
+                        developerSession.showPortalHardpoints.toggle()
+                    }
+                    addModeChip("Add POI pad", mode: .poiHardpoint, symbol: "plus.circle")
+                    addModeChip("Add portal pad", mode: .portalHardpoint, symbol: "plus.diamond")
+                    Spacer(minLength: 0)
+                }
+            } else if developerSession.activeDevTool == .invent {
+                HStack(spacing: 8) {
+                    Button {
+                        bumpChrome()
+                        showingSceneInvent = true
+                    } label: {
+                        Label("Invent props", systemImage: "wand.and.stars")
+                            .font(.system(size: 12, weight: .black, design: .rounded))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.purple.opacity(0.9), in: Capsule())
+                            .foregroundStyle(.white)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("world2.mutableScene.inventOpen")
+
+                    Button {
+                        bumpChrome()
+                        viewModel.openCurrentPlayerTreehouse(startDecorating: true)
+                    } label: {
+                        Label("Decorate room", systemImage: "paintbrush.pointed.fill")
+                            .font(.system(size: 12, weight: .black, design: .rounded))
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 8)
+                            .background(Color.pink.opacity(0.9), in: Capsule())
+                            .foregroundStyle(.white)
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("world2.mutableScene.decorateOpen")
+
+                    Spacer(minLength: 0)
+                }
+            }
+        }
+        .accessibilityIdentifier("world2.mutableScene.devTools")
     }
 
     private func visibilityChip(

@@ -2,13 +2,8 @@
 //  World2SceneEditorPanel.swift
 //  abbies.world.ios
 //
-//  The scene editor, formerly the layout editor.
-//
-//  Two layers, one live at a time, which is the pattern RTS and ship-builder
-//  editors settled on: you are either editing the pads or the things standing on
-//  them, never both, so a single drag is never ambiguous.
-//
-//  Developer mode only. Nothing here is reachable by a player.
+//  Minimal translucent scene editor chrome. Finger gestures on the map do the
+//  real work — this panel only switches layers and exposes rare tools.
 //
 
 import Combine
@@ -22,11 +17,12 @@ struct World2SceneEditorPanel: View {
     @Binding var selectedInstanceID: String?
     @Binding var selectedHardpointID: String?
     @Binding var snappingEnabled: Bool
+    @Binding var isMinimized: Bool
     let aspectRatio: Double
     let onDone: () -> Void
     var onOpenPlanningDept: (() -> Void)? = nil
-
-    @State private var hardpointNameDraft = ""
+    var onInventDecorations: (() -> Void)? = nil
+    var onDecorateTreehouse: (() -> Void)? = nil
 
     private var scene: World2SceneDefinition { store.scene(sceneID) }
 
@@ -39,110 +35,306 @@ struct World2SceneEditorPanel: View {
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            header
-            layerPicker
-
-            switch layer {
-            case .pois:
-                poiLayerControls
-            case .hardpoints:
-                hardpointLayerControls
-            case .tunnels:
-                tunnelsLayerControls
+        Group {
+            if isMinimized {
+                minimizedChrome
+            } else {
+                expandedChrome
             }
-
-            validationRow
-            footer
         }
-        .padding(16)
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.sceneEditor")
     }
 
-    // MARK: - Header
+    // MARK: - Minimized
 
-    private var header: some View {
-        HStack(spacing: 12) {
-            Label("SCENE EDITOR", systemImage: "hammer.fill")
-                .font(.system(size: 15, weight: .black, design: .rounded))
-                .foregroundStyle(.orange)
-
-            Text(scene.name)
-                .font(.system(size: 13, weight: .bold, design: .rounded))
+    private var minimizedChrome: some View {
+        HStack(spacing: 10) {
+            Image(systemName: layer.symbolName)
+                .font(.system(size: 13, weight: .black))
+            Text(layer.title)
+                .font(.system(size: 13, weight: .black, design: .rounded))
+            Text("· fingers edit")
+                .font(.system(size: 11, weight: .semibold, design: .rounded))
                 .foregroundStyle(.secondary)
 
-            Text(
-                "\(scene.poiInstances.count) placed · \(scene.openHardpoints.count) pads open"
-            )
-            .font(.system(size: 12, weight: .semibold, design: .rounded))
-            .foregroundStyle(.secondary)
-            .accessibilityIdentifier("world2.sceneEditor.counts")
-
-            Spacer()
-
-            Text(store.saveMessage)
-                .font(.system(size: 12, weight: .bold, design: .rounded))
-                .foregroundStyle(store.hasUnsavedChanges ? .orange : .green)
-                .accessibilityIdentifier("world2.sceneEditor.saveStatus")
-        }
-    }
-
-    private var layerPicker: some View {
-        HStack(spacing: 12) {
-            Picker("Edit layer", selection: $layer) {
-                ForEach(World2SceneEditorLayer.allCases) { option in
-                    Label(option.title, systemImage: option.symbolName)
-                        .tag(option)
-                }
+            if store.hasUnsavedChanges {
+                Circle()
+                    .fill(Color.orange)
+                    .frame(width: 8, height: 8)
+                    .accessibilityLabel("Unsaved changes")
             }
-            .pickerStyle(.segmented)
-            .frame(maxWidth: 260)
-            .accessibilityIdentifier("world2.sceneEditor.layerPicker")
 
-            Text(layer.instruction)
-                .font(.system(size: 12, weight: .medium, design: .rounded))
-                .foregroundStyle(.secondary)
-                .fixedSize(horizontal: false, vertical: true)
+            Spacer(minLength: 8)
 
-            Spacer(minLength: 0)
+            Button {
+                withAnimation(.easeOut(duration: 0.18)) {
+                    isMinimized = false
+                }
+            } label: {
+                Label("Expand", systemImage: "chevron.up")
+                    .labelStyle(.iconOnly)
+                    .font(.system(size: 14, weight: .bold))
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("world2.sceneEditor.expand")
+
+            if onInventDecorations != nil {
+                Button {
+                    onInventDecorations?()
+                } label: {
+                    Image(systemName: "wand.and.stars")
+                        .font(.system(size: 14, weight: .bold))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Invent decorations for this scene")
+                .accessibilityIdentifier("world2.sceneEditor.invent")
+            }
+
+            if onDecorateTreehouse != nil {
+                Button {
+                    onDecorateTreehouse?()
+                } label: {
+                    Image(systemName: "paintbrush.pointed.fill")
+                        .font(.system(size: 14, weight: .bold))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Decorate treehouse")
+                .accessibilityIdentifier("world2.sceneEditor.decorate")
+            }
+
+            toolsMenu
         }
+        .foregroundStyle(.primary)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
+        .background(.ultraThinMaterial, in: Capsule())
+        .overlay(Capsule().stroke(.white.opacity(0.28), lineWidth: 1))
+        .shadow(color: .black.opacity(0.22), radius: 10, y: 4)
     }
 
-    // MARK: - Places layer
+    // MARK: - Expanded (still tiny)
 
-    private var poiLayerControls: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 8) {
-                ForEach(scene.instancesInDrawOrder) { instance in
-                    Button(instanceLabel(instance)) {
-                        selectedInstanceID = instance.id
+    private var expandedChrome: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 10) {
+                Label("Edit", systemImage: "hammer.fill")
+                    .font(.system(size: 13, weight: .black, design: .rounded))
+                    .foregroundStyle(.orange)
+
+                Picker("Layer", selection: $layer) {
+                    ForEach(World2SceneEditorLayer.allCases) { option in
+                        Text(option.title).tag(option)
                     }
-                    .buttonStyle(.bordered)
-                    .tint(selectedInstanceID == instance.id ? .orange : .gray)
-                    .accessibilityIdentifier("world2.sceneEditor.place.\(instance.id)")
                 }
-
-                addPlaceMenu
+                .pickerStyle(.segmented)
+                .frame(maxWidth: 280)
+                .accessibilityIdentifier("world2.sceneEditor.layerPicker")
 
                 Spacer(minLength: 0)
 
-                Toggle("Snapping", isOn: $snappingEnabled)
-                    .toggleStyle(.switch)
-                    .fixedSize()
-                    .accessibilityIdentifier("world2.sceneEditor.snapToggle")
+                if store.hasUnsavedChanges {
+                    Text("unsaved")
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .foregroundStyle(.orange)
+                        .accessibilityIdentifier("world2.sceneEditor.saveStatus")
+                }
+
+                Button {
+                    withAnimation(.easeOut(duration: 0.18)) {
+                        isMinimized = true
+                    }
+                } label: {
+                    Label("Minimize", systemImage: "chevron.down")
+                        .labelStyle(.iconOnly)
+                        .font(.system(size: 14, weight: .bold))
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier("world2.sceneEditor.minimize")
+
+                toolsMenu
+
+                Button("Done", action: onDone)
+                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .accessibilityIdentifier("world2.sceneEditor.done")
             }
 
+            switch layer {
+            case .pois:
+                placesStrip
+            case .hardpoints:
+                hardpointsStrip
+            case .tunnels:
+                tunnelsStrip
+            }
+
+            if !store.validationIssues(for: sceneID).isEmpty {
+                validationStrip
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
+        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(.orange.opacity(0.45), lineWidth: 1.5)
+        )
+        .shadow(color: .black.opacity(0.2), radius: 12, y: 5)
+    }
+
+    // MARK: - Layer strips (finger-first)
+
+    private var placesStrip: some View {
+        HStack(spacing: 8) {
+            Text("Drag · pinch · twist on the map")
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+
+            Spacer(minLength: 0)
+
+            Toggle("Snap", isOn: $snappingEnabled)
+                .toggleStyle(.switch)
+                .labelsHidden()
+                .accessibilityLabel("Snapping")
+                .accessibilityIdentifier("world2.sceneEditor.snapToggle")
+
+            addPlaceMenu
+
             if let instance = selectedInstance {
-                instanceTransformRow(instance)
-                instanceActionRow(instance)
-            } else {
-                Text("Choose a place, or add one.")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.secondary)
+                if instance.isSnapped {
+                    Button("Unsnap", systemImage: "pin.slash") {
+                        store.unsnapInstance(instance.id, in: sceneID)
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .accessibilityIdentifier("world2.sceneEditor.place.unsnap")
+                }
+
+                Button("Remove", systemImage: "trash") {
+                    if store.removeInstance(instance.id, in: sceneID) {
+                        selectedInstanceID = nil
+                    }
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .tint(.red)
+                .disabled(instance.isAuthored)
+                .accessibilityIdentifier("world2.sceneEditor.place.remove")
             }
         }
     }
+
+    private var hardpointsStrip: some View {
+        HStack(spacing: 8) {
+            Text("Tap map to add · drag pads")
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+
+            Spacer(minLength: 0)
+
+            Button("Add Pad", systemImage: "plus.viewfinder") {
+                let added = store.addHardpoint(in: sceneID, at: .center)
+                selectedHardpointID = added.id
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+            .accessibilityIdentifier("world2.sceneEditor.addPad")
+
+            if let hardpoint = selectedHardpoint {
+                Toggle("Lock", isOn: lockedBinding(hardpoint))
+                    .toggleStyle(.switch)
+                    .labelsHidden()
+                    .accessibilityLabel("Locked")
+                    .accessibilityIdentifier("world2.sceneEditor.pad.locked")
+
+                Button("Delete", systemImage: "trash") {
+                    if store.removeHardpoint(hardpoint.id, in: sceneID) {
+                        selectedHardpointID = nil
+                    }
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .tint(.red)
+                .disabled(hardpoint.isLocked)
+                .accessibilityIdentifier("world2.sceneEditor.pad.delete")
+            }
+        }
+    }
+
+    private var tunnelsStrip: some View {
+        let connectors = worldGraph.connectors(from: sceneID)
+        return HStack(spacing: 6) {
+            ForEach(connectors) { connector in
+                Menu {
+                    Button(connector.isLocked ? "Unlock" : "Lock") {
+                        worldGraph.setConnectorLocked(
+                            from: sceneID,
+                            direction: connector.direction,
+                            locked: !connector.isLocked
+                        )
+                    }
+                    if !connector.isOpen {
+                        Button("Clear", role: .destructive) {
+                            _ = worldGraph.clearConnector(
+                                from: sceneID,
+                                direction: connector.direction
+                            )
+                        }
+                        .disabled(connector.isLocked)
+                    }
+                    if onOpenPlanningDept != nil {
+                        Button("Planning Dept") {
+                            onOpenPlanningDept?()
+                        }
+                    }
+                } label: {
+                    HStack(spacing: 4) {
+                        Text(connector.direction.shortLabel)
+                            .font(.system(size: 11, weight: .black, design: .rounded))
+                        Circle()
+                            .fill(connector.isOpen ? Color.yellow : Color.cyan)
+                            .frame(width: 7, height: 7)
+                    }
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 6)
+                    .background(.white.opacity(0.12), in: Capsule())
+                }
+                .accessibilityIdentifier(
+                    "world2.sceneEditor.tunnel.\(connector.direction.rawValue)"
+                )
+            }
+
+            Spacer(minLength: 0)
+
+            if onOpenPlanningDept != nil {
+                Button("Plan", systemImage: "map") {
+                    onOpenPlanningDept?()
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                .accessibilityIdentifier("world2.sceneEditor.openPlanningDept")
+            }
+        }
+    }
+
+    private var validationStrip: some View {
+        let issues = store.validationIssues(for: sceneID)
+        return VStack(alignment: .leading, spacing: 2) {
+            ForEach(issues.prefix(2).map(\.description), id: \.self) { detail in
+                Label(detail, systemImage: "exclamationmark.triangle.fill")
+                    .font(.system(size: 10, weight: .bold, design: .rounded))
+                    .foregroundStyle(.red)
+                    .lineLimit(1)
+            }
+        }
+        .accessibilityIdentifier("world2.sceneEditor.validation.issues")
+    }
+
+    // MARK: - Shared controls
 
     private var addPlaceMenu: some View {
         Menu {
@@ -155,397 +347,48 @@ struct World2SceneEditorPanel: View {
                     )
                     selectedInstanceID = added?.id
                 } label: {
-                    Label(
-                        "\(archetype.name) (\(archetype.sizeClass.displayName))",
-                        systemImage: archetype.icon
-                    )
+                    Label(archetype.name, systemImage: archetype.icon)
                 }
             }
         } label: {
-            Label("Add Place", systemImage: "plus.circle.fill")
+            Label("Add", systemImage: "plus")
+                .font(.system(size: 12, weight: .bold, design: .rounded))
         }
         .buttonStyle(.bordered)
+        .controlSize(.small)
         .accessibilityIdentifier("world2.sceneEditor.addPlace")
     }
 
-    private func instanceLabel(_ instance: World2POIInstance) -> String {
-        let name = World2POIRegistry.archetype(instance.archetypeID)?.name
-            ?? instance.archetypeID
-        return instance.isSnapped ? name : "\(name) ⚓︎"
-    }
-
-    private func instanceTransformRow(_ instance: World2POIInstance) -> some View {
-        HStack(spacing: 14) {
-            Text(instance.transform.debugSummary)
-                .font(.system(.footnote, design: .monospaced, weight: .bold))
-                .accessibilityIdentifier("world2.sceneEditor.place.transform")
-
-            Text(
-                instance.hardpointID.map { "on \($0)" } ?? "freehand"
-            )
-            .font(.system(size: 12, weight: .black, design: .rounded))
-            .foregroundStyle(instance.isSnapped ? .green : .orange)
-            .accessibilityIdentifier("world2.sceneEditor.place.pinState")
-
-            Text("Scale")
-                .font(.caption.bold())
-            Slider(
-                value: Binding(
-                    get: { store.scene(sceneID).instance(instance.id)?.transform.scale ?? 1 },
-                    set: { store.setScale($0, instanceID: instance.id, in: sceneID) }
-                ),
-                in: World2POITransform.scaleRange
-            )
-            .frame(maxWidth: 140)
-            .accessibilityIdentifier("world2.sceneEditor.place.scale")
-
-            Text("Rotate")
-                .font(.caption.bold())
-            Slider(
-                value: Binding(
-                    get: {
-                        store.scene(sceneID)
-                            .instance(instance.id)?
-                            .transform
-                            .rotationDegrees ?? 0
-                    },
-                    set: { store.setRotation($0, instanceID: instance.id, in: sceneID) }
-                ),
-                in: World2POITransform.rotationRange
-            )
-            .frame(maxWidth: 140)
-            .accessibilityIdentifier("world2.sceneEditor.place.rotation")
-        }
-    }
-
-    private func instanceActionRow(_ instance: World2POIInstance) -> some View {
-        HStack(spacing: 10) {
-            if instance.isSnapped {
-                Button("Unsnap", systemImage: "pin.slash.fill") {
-                    store.unsnapInstance(instance.id, in: sceneID)
-                }
-                .buttonStyle(.bordered)
-                .accessibilityIdentifier("world2.sceneEditor.place.unsnap")
-            } else {
-                Button("Snap to Nearest Pad", systemImage: "pin.fill") {
-                    let pad = store.snapInstanceToNearestHardpoint(
-                        instance.id,
-                        in: sceneID,
-                        aspectRatio: aspectRatio
-                    )
-                    if pad == nil {
-                        store.objectWillChange.send()
-                    }
-                }
-                .buttonStyle(.bordered)
-                .accessibilityIdentifier("world2.sceneEditor.place.snap")
-            }
-
-            Menu {
-                ForEach(World2POIRegistry.placeableInEditor) { archetype in
-                    Button(archetype.name) {
-                        store.replaceArchetype(
-                            of: instance.id,
-                            in: sceneID,
-                            with: archetype.id
-                        )
-                    }
-                }
-            } label: {
-                Label("Replace With", systemImage: "arrow.triangle.2.circlepath")
-            }
-            .buttonStyle(.bordered)
-            .accessibilityIdentifier("world2.sceneEditor.place.replace")
-
-            Button("Front", systemImage: "square.3.layers.3d.top.filled") {
-                store.bringInstanceToFront(instance.id, in: sceneID)
-            }
-            .buttonStyle(.bordered)
-
-            Button("Remove", systemImage: "trash") {
-                if store.removeInstance(instance.id, in: sceneID) {
-                    selectedInstanceID = nil
+    private var toolsMenu: some View {
+        Menu {
+            if onInventDecorations != nil {
+                Button("Invent Props for Scene", systemImage: "wand.and.stars") {
+                    onInventDecorations?()
                 }
             }
-            .buttonStyle(.bordered)
-            .tint(.red)
-            .disabled(instance.isAuthored)
-            .accessibilityIdentifier("world2.sceneEditor.place.remove")
-
-            if instance.isAuthored {
-                Text("Shipped place — move or swap it, but it cannot be deleted.")
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer(minLength: 0)
-        }
-    }
-
-    // MARK: - Tunnel layer (overland N/S/E/W connectors)
-
-    private var tunnelsLayerControls: some View {
-        let connectors = worldGraph.connectors(from: sceneID)
-        return VStack(alignment: .leading, spacing: 10) {
-            Text("Scene tunnels — expansion doors on the world graph, not POI pads.")
-                .font(.system(size: 13, weight: .semibold, design: .rounded))
-                .foregroundStyle(.secondary)
-
-            HStack(spacing: 8) {
-                ForEach(connectors) { connector in
-                    VStack(alignment: .leading, spacing: 4) {
-                        Text(connector.direction.displayName)
-                            .font(.system(size: 12, weight: .black, design: .rounded))
-                        Text(
-                            connector.isOpen
-                                ? "Open"
-                                : (worldGraph.snapshot(currentSceneID: sceneID)
-                                    .node(for: connector.toSceneID ?? "")?
-                                    .name ?? connector.toSceneID ?? "?")
-                        )
-                        .font(.system(size: 11, weight: .semibold, design: .rounded))
-                        .foregroundStyle(connector.isOpen ? .yellow : .cyan)
-
-                        if connector.isLocked {
-                            Text("Locked")
-                                .font(.caption2.bold())
-                                .foregroundStyle(.orange)
-                        }
-
-                        HStack(spacing: 6) {
-                            Button(connector.isLocked ? "Unlock" : "Lock") {
-                                worldGraph.setConnectorLocked(
-                                    from: sceneID,
-                                    direction: connector.direction,
-                                    locked: !connector.isLocked
-                                )
-                            }
-                            .buttonStyle(.bordered)
-                            .controlSize(.small)
-
-                            if !connector.isOpen {
-                                Button("Clear") {
-                                    _ = worldGraph.clearConnector(
-                                        from: sceneID,
-                                        direction: connector.direction
-                                    )
-                                }
-                                .buttonStyle(.bordered)
-                                .tint(.red)
-                                .controlSize(.small)
-                                .disabled(connector.isLocked)
-                            }
-                        }
-                    }
-                    .padding(8)
-                    .background(.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 10))
-                    .accessibilityIdentifier(
-                        "world2.sceneEditor.tunnel.\(connector.direction.rawValue)"
-                    )
-                }
-                Spacer(minLength: 0)
-            }
-
-            Button("Open Planning Department") {
-                onOpenPlanningDept?()
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.orange)
-            .accessibilityIdentifier("world2.sceneEditor.openPlanningDept")
-        }
-    }
-
-    // MARK: - Hardpoint layer
-
-    private var hardpointLayerControls: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack(spacing: 8) {
-                ForEach(scene.hardpoints) { hardpoint in
-                    Button(hardpointLabel(hardpoint)) {
-                        selectedHardpointID = hardpoint.id
-                        hardpointNameDraft = hardpoint.name
-                    }
-                    .buttonStyle(.bordered)
-                    .tint(selectedHardpointID == hardpoint.id ? .cyan : .gray)
-                    .accessibilityIdentifier("world2.sceneEditor.pad.\(hardpoint.id)")
-                }
-
-                Button("Add Pad", systemImage: "plus.viewfinder") {
-                    let added = store.addHardpoint(in: sceneID, at: .center)
-                    selectedHardpointID = added.id
-                    hardpointNameDraft = added.name
-                }
-                .buttonStyle(.bordered)
-                .accessibilityIdentifier("world2.sceneEditor.addPad")
-
-                Spacer(minLength: 0)
-            }
-
-            if let hardpoint = selectedHardpoint {
-                hardpointDetailRow(hardpoint)
-                hardpointSizeRow(hardpoint)
-            } else {
-                Text("Choose a pad, or add one and drag it onto the painting.")
-                    .font(.system(size: 13, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.secondary)
-            }
-        }
-    }
-
-    private func hardpointLabel(_ hardpoint: World2SceneHardpoint) -> String {
-        let occupied = scene.occupancy[hardpoint.id] != nil
-        let lock = hardpoint.isLocked ? " 🔒" : ""
-        return "\(hardpoint.name)\(occupied ? "" : " ○")\(lock)"
-    }
-
-    private func hardpointDetailRow(_ hardpoint: World2SceneHardpoint) -> some View {
-        HStack(spacing: 14) {
-            TextField("Pad name", text: $hardpointNameDraft)
-                .textFieldStyle(.roundedBorder)
-                .frame(maxWidth: 190)
-                .onSubmit {
-                    store.renameHardpoint(
-                        hardpoint.id,
-                        in: sceneID,
-                        to: hardpointNameDraft
-                    )
-                }
-                .accessibilityIdentifier("world2.sceneEditor.pad.name")
-
-            Text(
-                String(
-                    format: "x %.3f  y %.3f  pull %.3f",
-                    hardpoint.position.x,
-                    hardpoint.position.y,
-                    hardpoint.snapRadius
-                )
-            )
-            .font(.system(.footnote, design: .monospaced, weight: .bold))
-            .accessibilityIdentifier("world2.sceneEditor.pad.values")
-
-            Text("Pull")
-                .font(.caption.bold())
-            Slider(
-                value: Binding(
-                    get: { store.scene(sceneID).hardpoint(hardpoint.id)?.snapRadius ?? 0.085 },
-                    set: { store.setSnapRadius($0, hardpointID: hardpoint.id, in: sceneID) }
-                ),
-                in: 0.02...0.30
-            )
-            .frame(maxWidth: 150)
-            .accessibilityIdentifier("world2.sceneEditor.pad.pull")
-
-            Toggle("Locked", isOn: lockedBinding(hardpoint))
-                .toggleStyle(.switch)
-                .fixedSize()
-                .accessibilityIdentifier("world2.sceneEditor.pad.locked")
-
-            Spacer(minLength: 0)
-        }
-    }
-
-    private func lockedBinding(_ hardpoint: World2SceneHardpoint) -> Binding<Bool> {
-        Binding(
-            get: { store.scene(sceneID).hardpoint(hardpoint.id)?.isLocked ?? false },
-            set: { store.setHardpointLocked($0, hardpointID: hardpoint.id, in: sceneID) }
-        )
-    }
-
-    private func hardpointSizeRow(_ hardpoint: World2SceneHardpoint) -> some View {
-        HStack(spacing: 10) {
-            Text("ACCEPTS")
-                .font(.system(size: 11, weight: .black, design: .rounded))
-                .foregroundStyle(.secondary)
-
-            ForEach(World2POISizeClass.allCases, id: \.self) { sizeClass in
-                let isOn = hardpoint.accepts(sizeClass)
-                Button(sizeClass.displayName) {
-                    var updated = hardpoint.acceptedSizeClasses
-                    if isOn {
-                        updated.remove(sizeClass)
-                    } else {
-                        updated.insert(sizeClass)
-                    }
-                    store.setAcceptedSizeClasses(
-                        updated,
-                        hardpointID: hardpoint.id,
-                        in: sceneID
-                    )
-                }
-                .buttonStyle(.bordered)
-                .tint(isOn ? .cyan : .gray)
-                .accessibilityIdentifier(
-                    "world2.sceneEditor.pad.size.\(sizeClass.rawValue)"
-                )
-            }
-
-            Button("Delete Pad", systemImage: "trash") {
-                if store.removeHardpoint(hardpoint.id, in: sceneID) {
-                    selectedHardpointID = nil
+            if onDecorateTreehouse != nil {
+                Button("Decorate Treehouse", systemImage: "paintbrush.pointed.fill") {
+                    onDecorateTreehouse?()
                 }
             }
-            .buttonStyle(.bordered)
-            .tint(.red)
-            .disabled(hardpoint.isLocked)
-            .accessibilityIdentifier("world2.sceneEditor.pad.delete")
-
-            if hardpoint.isLocked {
-                Text("Locked pads hold shipped art in place. Unlock to move or delete.")
-                    .font(.system(size: 11, weight: .medium, design: .rounded))
-                    .foregroundStyle(.secondary)
+            Button("Save Locally", systemImage: "internaldrive.fill") {
+                store.save()
             }
+            .disabled(!store.hasUnsavedChanges)
+            .accessibilityIdentifier("world2.sceneEditor.save")
 
-            Spacer(minLength: 0)
-        }
-    }
-
-    // MARK: - Validation and footer
-
-    private var validationRow: some View {
-        let issues = store.validationIssues(for: sceneID)
-        return Group {
-            if issues.isEmpty {
-                Label("Scene validates against the POI registry", systemImage: "checkmark.seal.fill")
-                    .font(.system(size: 12, weight: .bold, design: .rounded))
-                    .foregroundStyle(.green)
-                    .accessibilityIdentifier("world2.sceneEditor.validation.ok")
-            } else {
-                VStack(alignment: .leading, spacing: 3) {
-                    ForEach(issues.map(\.description), id: \.self) { detail in
-                        Label(detail, systemImage: "exclamationmark.triangle.fill")
-                            .font(.system(size: 11, weight: .bold, design: .monospaced))
-                            .foregroundStyle(.red)
-                    }
-                }
-                .accessibilityIdentifier("world2.sceneEditor.validation.issues")
+            Button("Discard Unsaved", systemImage: "trash.slash") {
+                store.discardChanges()
             }
-        }
-    }
+            .disabled(!store.hasUnsavedChanges)
 
-    private var footer: some View {
-        HStack(spacing: 10) {
             Button("Reset Scene", systemImage: "arrow.counterclockwise") {
                 store.resetScene(sceneID)
                 selectedInstanceID = nil
                 selectedHardpointID = nil
             }
-            .buttonStyle(.bordered)
             .disabled(!store.isOverridden(sceneID))
             .accessibilityIdentifier("world2.sceneEditor.reset")
-
-            Button("Discard Unsaved", systemImage: "trash.slash") {
-                store.discardChanges()
-            }
-            .buttonStyle(.bordered)
-            .disabled(!store.hasUnsavedChanges)
-
-            Button("Save Locally", systemImage: "internaldrive.fill") {
-                store.save()
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.orange)
-            .disabled(!store.hasUnsavedChanges)
-            .accessibilityIdentifier("world2.sceneEditor.save")
 
             ShareLink(
                 item: store.exportJSON(sceneID: sceneID),
@@ -554,8 +397,6 @@ struct World2SceneEditorPanel: View {
             ) {
                 Label("Export JSON", systemImage: "square.and.arrow.up")
             }
-            .buttonStyle(.bordered)
-            .accessibilityIdentifier("world2.sceneEditor.export")
 
             Button("Log Rigging", systemImage: "text.alignleft") {
                 World2Diagnostics.report(
@@ -563,14 +404,43 @@ struct World2SceneEditorPanel: View {
                     store.riggingReport(sceneID: sceneID)
                 )
             }
-            .buttonStyle(.bordered)
             .accessibilityIdentifier("world2.sceneEditor.logRigging")
 
-            Spacer(minLength: 0)
+            if let selectedInstance, selectedInstance.isSnapped == false {
+                Button("Snap to Nearest Pad", systemImage: "pin.fill") {
+                    _ = store.snapInstanceToNearestHardpoint(
+                        selectedInstance.id,
+                        in: sceneID,
+                        aspectRatio: aspectRatio
+                    )
+                }
+                .accessibilityIdentifier("world2.sceneEditor.place.snap")
+            }
 
-            Button("Done", action: onDone)
-                .buttonStyle(.bordered)
-                .accessibilityIdentifier("world2.sceneEditor.done")
+            if let selectedInstance {
+                Menu("Replace With") {
+                    ForEach(World2POIRegistry.placeableInEditor) { archetype in
+                        Button(archetype.name) {
+                            store.replaceArchetype(
+                                of: selectedInstance.id,
+                                in: sceneID,
+                                with: archetype.id
+                            )
+                        }
+                    }
+                }
+            }
+        } label: {
+            Image(systemName: "ellipsis.circle")
+                .font(.system(size: 16, weight: .semibold))
         }
+        .accessibilityIdentifier("world2.sceneEditor.tools")
+    }
+
+    private func lockedBinding(_ hardpoint: World2SceneHardpoint) -> Binding<Bool> {
+        Binding(
+            get: { store.scene(sceneID).hardpoint(hardpoint.id)?.isLocked ?? false },
+            set: { store.setHardpointLocked($0, hardpointID: hardpoint.id, in: sceneID) }
+        )
     }
 }

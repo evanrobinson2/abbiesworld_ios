@@ -192,6 +192,7 @@ struct World2WorldTeleporterView: View {
         case .blankSlate: return "square.dashed"
         case .threeBears: return "house.and.flag.fill"
         case .artGarden: return "paintpalette.fill"
+        case .evan: return "building.2.fill"
         }
     }
 }

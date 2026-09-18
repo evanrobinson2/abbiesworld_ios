@@ -16,6 +16,8 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     case threeBears = "world.threeBears"
     /// Unconnected garden scene with Character Studio. Reach it with the World Teleporter.
     case artGarden = "world.artGarden"
+    /// Daddy's mountain citadel — futuristic scene with his home POI.
+    case evan = "world.evan"
     
     var id: String { rawValue }
     
@@ -28,6 +30,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .blankSlate: return "Blank Slate"
         case .threeBears: return "Three Bears Woods"
         case .artGarden: return "Art Garden"
+        case .evan: return "Daddy's Citadel"
         }
     }
     
@@ -40,6 +43,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .blankSlate: return "An empty scene waiting for player-made places"
         case .threeBears: return "A hushed clearing in the woods where somebody is cooking"
         case .artGarden: return "A terraced garden of easels and paths, with a studio for dressing up"
+        case .evan: return "A glowing white citadel on the mountain, looking out over the water"
         }
     }
     
@@ -52,6 +56,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .blankSlate: return "Through the Portal"
         case .threeBears: return "Into the Woods"
         case .artGarden: return nil
+        case .evan: return "Daddy's Base"
         }
     }
 

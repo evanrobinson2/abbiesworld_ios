@@ -104,7 +104,13 @@ struct World2SceneHardpoint: Codable, Identifiable, Equatable, Sendable {
     static let anySizeClass: Set<World2POISizeClass> = Set(World2POISizeClass.allCases)
 
     /// Magnetic pull distance, in units of map height.
-    static let defaultSnapRadius = 0.085
+    /// ≈20px on a ~900pt-tall plate — tight enough that pads don't grab
+    /// from across the clearing.
+    static let defaultSnapRadius = 0.022
+
+    /// Allowed pull band (~11–27px on a ~900pt plate). Keeps authoring in the
+    /// 15–25px feel and clamps older loose saved radii (~0.085) down.
+    static let snapRadiusRange: ClosedRange<Double> = 0.012...0.030
 
     /// Breaking away is deliberately harder than snapping on. Without the
     /// hysteresis a snapped place chatters on and off its pad during one slow
@@ -139,7 +145,10 @@ struct World2SceneHardpoint: Codable, Identifiable, Equatable, Sendable {
         self.acceptedSizeClasses = acceptedSizeClasses.isEmpty
             ? World2SceneHardpoint.anySizeClass
             : acceptedSizeClasses
-        self.snapRadius = min(max(snapRadius, 0.02), 0.30)
+        self.snapRadius = min(
+            max(snapRadius, World2SceneHardpoint.snapRadiusRange.lowerBound),
+            World2SceneHardpoint.snapRadiusRange.upperBound
+        )
         self.isLocked = isLocked
         self.notes = notes
         self.purpose = purpose

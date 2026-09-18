@@ -31,7 +31,65 @@ struct World2StoryDecorationArtwork: View {
             World2WorldTeleporterToken(isAnimated: isAnimated)
         case .propertyDeed:
             World2PropertyDeedToken(isAnimated: isAnimated)
+        case .daddyCandy:
+            World2DaddyCandyToken(isAnimated: isAnimated)
+        case .daddyHug:
+            World2DaddyHugToken(isAnimated: isAnimated)
         }
+    }
+}
+
+private struct World2DaddyCandyToken: View {
+    var isAnimated = true
+    @State private var bounce = false
+
+    var body: some View {
+        ZStack {
+            Image(systemName: "birthday.cake.fill")
+                .font(.system(size: 36, weight: .black))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [.pink, .orange, .yellow],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
+                .scaleEffect(bounce && isAnimated ? 1.08 : 1.0)
+            Text("🍬")
+                .font(.system(size: 28))
+                .offset(y: 2)
+        }
+        .onAppear {
+            guard isAnimated else { return }
+            withAnimation(.easeInOut(duration: 0.7).repeatForever(autoreverses: true)) {
+                bounce = true
+            }
+        }
+    }
+}
+
+private struct World2DaddyHugToken: View {
+    var isAnimated = true
+    @State private var pulse = false
+
+    var body: some View {
+        Image(systemName: "heart.fill")
+            .font(.system(size: 40, weight: .black))
+            .foregroundStyle(
+                LinearGradient(
+                    colors: [.pink, .red.opacity(0.85)],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .scaleEffect(pulse && isAnimated ? 1.12 : 1.0)
+            .shadow(color: .pink.opacity(0.45), radius: pulse ? 10 : 4)
+            .onAppear {
+                guard isAnimated else { return }
+                withAnimation(.easeInOut(duration: 0.9).repeatForever(autoreverses: true)) {
+                    pulse = true
+                }
+            }
     }
 }
 

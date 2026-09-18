@@ -49,6 +49,12 @@ struct World2RootView: View {
                     }
                 )
 
+            case .daddyWelcome:
+                World2DaddyWelcomeView(
+                    viewModel: viewModel,
+                    onExit: viewModel.exitPOI
+                )
+
             case .cardFactory:
                 World2CardFactoryView(
                     viewModel: viewModel,
@@ -66,7 +72,7 @@ struct World2RootView: View {
                 World2FurnitureStoreView(
                     viewModel: viewModel,
                     onExit: viewModel.exitPOI,
-                    onDecorateHome: viewModel.openCurrentPlayerTreehouse
+                    onDecorateHome: { viewModel.openCurrentPlayerTreehouse() }
                 )
 
             case .assetWorkbench:
@@ -544,24 +550,37 @@ struct PlayerSelectView: View {
                 .scaledToFill()
                 .frame(width: screen.size.width, height: screen.size.height)
                 .clipped()
-                .overlay(Color.indigo.opacity(0.30))
+                .overlay(
+                    LinearGradient(
+                        colors: [
+                            Color.indigo.opacity(0.35),
+                            Color.black.opacity(0.45),
+                            Color.pink.opacity(0.25)
+                        ],
+                        startPoint: .topLeading,
+                        endPoint: .bottomTrailing
+                    )
+                )
 
-                VStack(spacing: 20) {
+                VStack(spacing: 22) {
                     AnimatedWorld2Title()
                         .accessibilityHidden(true)
 
                     Text("Who's Playing?")
-                        .font(.system(size: 32, weight: .black, design: .rounded))
+                        .font(.system(size: 36, weight: .black, design: .rounded))
                         .foregroundStyle(.white)
+                        .shadow(color: .pink.opacity(0.5), radius: 8, y: 2)
 
-                    Text("Choose your own treehouse adventure.")
-                        .font(.system(size: 15, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.82))
+                    Text("Choose your badge to open a treehouse.")
+                        .font(.system(size: 16, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.85))
 
-                    HStack(spacing: 46) {
-                        PlayerSelectButton(playerId: .abbie, color: .pink, onSelect: onSelect)
-                        PlayerSelectButton(playerId: .ani, color: .purple, onSelect: onSelect)
+                    HStack(spacing: 36) {
+                        PlayerSelectButton(playerId: .abbie, onSelect: onSelect)
+                        PlayerSelectButton(playerId: .ani, onSelect: onSelect)
+                        PlayerSelectButton(playerId: .evan, onSelect: onSelect)
                     }
+                    .frame(maxWidth: .infinity)
 
                     if let error = playerService.error {
                         Label(error, systemImage: "exclamationmark.triangle.fill")
@@ -575,12 +594,17 @@ struct PlayerSelectView: View {
                     }
                 }
                 .padding(.horizontal, 42)
-                .padding(.vertical, 24)
-                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 30)
-                        .stroke(.white.opacity(0.42), lineWidth: 2)
+                .padding(.vertical, 28)
+                .frame(maxWidth: min(screen.size.width - 48, 760))
+                .background(
+                    RoundedRectangle(cornerRadius: 36, style: .continuous)
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 36, style: .continuous)
+                                .stroke(.white.opacity(0.42), lineWidth: 2.5)
+                        )
                 )
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
             }
             .frame(width: screen.size.width, height: screen.size.height)
             .clipped()
@@ -593,29 +617,86 @@ struct PlayerSelectView: View {
 
 private struct PlayerSelectButton: View {
     let playerId: PlayerId
-    let color: Color
     let onSelect: (PlayerId) -> Void
+    @State private var pulse = false
 
     var body: some View {
         Button {
             onSelect(playerId)
         } label: {
             VStack(spacing: 14) {
-                Image(systemName: playerId == .abbie ? "sparkles" : "moon.stars.fill")
-                    .font(.system(size: 54, weight: .bold))
-                    .foregroundStyle(.white)
-                    .frame(width: 128, height: 128)
-                    .background(color.gradient, in: Circle())
-                    .shadow(color: color.opacity(0.5), radius: 10, y: 5)
+                ZStack {
+                    Circle()
+                        .fill(style.gradient)
+                        .frame(width: 128, height: 128)
+                        .overlay(Circle().stroke(.white.opacity(0.85), lineWidth: 3))
+                        .shadow(color: style.glow.opacity(0.55), radius: pulse ? 16 : 8, y: 5)
+                        .scaleEffect(pulse ? 1.03 : 1.0)
+
+                    if let uiImage = UIImage(named: playerId.menuAvatarCatalogName) {
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 100, height: 100)
+                            .clipShape(Circle())
+                    } else {
+                        Image(systemName: style.symbol)
+                            .font(.system(size: 48, weight: .bold))
+                            .foregroundStyle(.white)
+                    }
+                }
 
                 Text(playerId.displayName)
-                    .font(.system(size: 25, weight: .bold, design: .rounded))
+                    .font(.system(size: 24, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
             }
         }
         .buttonStyle(.plain)
         .accessibilityLabel("Play as \(playerId.displayName)")
-        .accessibilityIdentifier("world2.player.\(playerId == .abbie ? "abbie" : "ani")")
+        .accessibilityIdentifier("world2.player.\(playerId == .abbie ? "abbie" : playerId == .ani ? "ani" : "evan")")
+        .onAppear {
+            withAnimation(.easeInOut(duration: 1.6).repeatForever(autoreverses: true)) {
+                pulse = true
+            }
+        }
+    }
+
+    private var style: (gradient: RadialGradient, glow: Color, symbol: String) {
+        switch playerId {
+        case .abbie:
+            return (
+                RadialGradient(
+                    colors: [Color.pink.opacity(0.95), Color(red: 0.72, green: 0.18, blue: 0.48)],
+                    center: .topLeading,
+                    startRadius: 6,
+                    endRadius: 90
+                ),
+                .pink,
+                "sparkles"
+            )
+        case .ani:
+            return (
+                RadialGradient(
+                    colors: [Color.purple.opacity(0.95), Color(red: 0.32, green: 0.16, blue: 0.62)],
+                    center: .topLeading,
+                    startRadius: 6,
+                    endRadius: 90
+                ),
+                .purple,
+                "moon.stars.fill"
+            )
+        case .evan:
+            return (
+                RadialGradient(
+                    colors: [Color.teal.opacity(0.95), Color(red: 0.08, green: 0.35, blue: 0.48)],
+                    center: .topLeading,
+                    startRadius: 6,
+                    endRadius: 90
+                ),
+                .teal,
+                "shield.lefthalf.filled"
+            )
+        }
     }
 }
 
@@ -627,7 +708,7 @@ private extension World2Screen {
              .creatureLab, .fallingTargets, .threeBearsHouse,
              .characterStudio, .sceneBuilder, .worldTeleporter,
              .whizbang, .planningDept,
-             .sceneCreator, .beacon:
+             .sceneCreator, .beacon, .daddyWelcome:
             return false
         case .homeWorld, .blankSlate:
             return true

@@ -179,11 +179,15 @@ class PlayerStateService: ObservableObject {
         let item = inventory[itemIndex]
         let mutable = scene(sceneID)
 
-        // World Seeds plant on Home (or any authored map) via an explicit pad.
-        // Everything else still needs a player-mutable scene.
+        // Mutable player scenes take freehand / pad placement. Authored overland
+        // maps (Home, Daddy's Citadel, …) accept World Seeds and placeable POIs
+        // onto open scene-graph pads — that is how a factory lands in Daddy's world.
         let target: (x: Double, y: Double, hardpointID: String?)
         if let mutable {
-            guard mutable.isMutableByPlayer || item.templateID == .worldSeed else {
+            let allowedOnImmutable =
+                item.templateID == .worldSeed
+                || Self.canPlantOnAuthoredMap(item.templateID)
+            guard mutable.isMutableByPlayer || allowedOnImmutable else {
                 return nil
             }
             if mutable.hardpoints.isEmpty {
@@ -201,7 +205,7 @@ class PlayerStateService: ObservableObject {
                 }
                 target = (hardpoint.x, hardpoint.y, hardpoint.id)
             }
-        } else if item.templateID == .worldSeed {
+        } else if Self.canPlantOnAuthoredMap(item.templateID) {
             guard let hardpointID else { return nil }
             let alreadyPlanted = (player.placedPlaces ?? []).contains {
                 $0.sceneID == sceneID && $0.hardpointID == hardpointID
@@ -237,7 +241,6 @@ class PlayerStateService: ObservableObject {
                 inventory: inventory
             )
         case .selfReplicatingFactory, .sceneCreator, .beacon:
-            guard mutable?.isMutableByPlayer == true else { return nil }
             let instance = World2PlacedPlaceInstance(
                 templateID: item.templateID,
                 sceneID: sceneID,
@@ -257,6 +260,16 @@ class PlayerStateService: ObservableObject {
             currentPlayer = player
             saveLocalState()
             return instance
+        }
+    }
+
+    /// Templates that may snap onto authored overland pads (not only blank worlds).
+    private static func canPlantOnAuthoredMap(_ template: World2PlaceTemplateID) -> Bool {
+        switch template {
+        case .worldSeed, .selfReplicatingFactory, .sceneCreator, .beacon:
+            return true
+        case .sceneKit:
+            return false
         }
     }
 
@@ -734,6 +747,36 @@ class PlayerStateService: ObservableObject {
         return added
     }
 
+    /// Always mint a fresh inventory copy (Daddy's candy / hug every visit).
+    @discardableResult
+    func awardRepeatableStoryDecoration(
+        _ decoration: World2StoryDecoration
+    ) -> DecorationInstance? {
+        guard var player = currentPlayer else { return nil }
+        let instanceID = "story_\(player.playerId.rawValue)_\(decoration.id)_\(UUID().uuidString)"
+        let instance = DecorationInstance(
+            id: instanceID,
+            decorationId: decoration.id,
+            x: 0.50,
+            y: decoration.placementLayer == .wall ? 0.38 : 0.72,
+            scale: decoration.defaultScale,
+            zIndex: (player.decorations.map(\.zIndex).max() ?? 0) + 1,
+            badges: decoration.badges
+        )
+        player.decorations.append(instance)
+        currentPlayer = player
+        saveLocalState()
+        World2Diagnostics.log(
+            "story_decoration_repeat_awarded",
+            [
+                "decoration": decoration.id,
+                "instance": instanceID,
+                "player": player.playerId.rawValue,
+            ]
+        )
+        return instance
+    }
+
     /// Put a story reward into the player's inventory.
     ///
     /// Awarding is idempotent: the Three Bears will happily let a child play
@@ -843,7 +886,8 @@ class PlayerStateService: ObservableObject {
     func placeFurniture(
         instanceId: String,
         x requestedX: Double? = nil,
-        y requestedY: Double? = nil
+        y requestedY: Double? = nil,
+        roomId: String = "cozyNook"
     ) {
         guard var player = currentPlayer,
               let instanceIndex = player.decorations.firstIndex(where: { $0.id == instanceId }),
@@ -857,11 +901,13 @@ class PlayerStateService: ObservableObject {
             return
         }
 
-        let placedCount = player.homeLayout.placedDecorations.count
-        let defaultX = 0.22 + (Double(placedCount % 3) * 0.20)
+        let roomPlacedCount = player.homeLayout.placedDecorations
+            .filter { $0.resolvedRoomId == roomId }
+            .count
+        let defaultX = 0.22 + (Double(roomPlacedCount % 3) * 0.20)
         let defaultY = placement.layer == .wall
             ? 0.34
-            : (placedCount.isMultiple(of: 2) ? 0.58 : 0.74)
+            : (roomPlacedCount.isMultiple(of: 2) ? 0.58 : 0.74)
         let x = min(max(requestedX ?? defaultX, 0.06), 0.94)
         let y = min(max(requestedY ?? defaultY, 0.16), 0.90)
         let zIndex = (player.decorations.map(\.zIndex).max() ?? 9) + 1
@@ -874,11 +920,44 @@ class PlayerStateService: ObservableObject {
                 id: "placed_\(instanceId)",
                 decorationInstanceId: instanceId,
                 position: .init(x: x, y: y),
-                layer: placement.layer
+                layer: placement.layer,
+                roomId: roomId
             )
         )
         currentPlayer = player
         saveLocalState()
+    }
+
+    /// Decorate-mode catalogue stamp: mint a free instance and drop it in the room.
+    @discardableResult
+    func placeCatalogFurniture(
+        item: FurnitureItem,
+        x: Double,
+        y: Double,
+        roomId: String
+    ) -> String? {
+        let furniture = DecorationInstance(
+            decorationId: item.id,
+            x: min(max(x, 0.06), 0.94),
+            y: min(max(y, 0.16), 0.90),
+            scale: item.defaultScale,
+            zIndex: (currentPlayer?.decorations.map(\.zIndex).max() ?? 9) + 1,
+            badges: nil
+        )
+        guard var player = currentPlayer else { return nil }
+        player.decorations.append(furniture)
+        player.homeLayout.placedDecorations.append(
+            HomeLayout.PlacedDecoration(
+                id: "placed_\(furniture.id)",
+                decorationInstanceId: furniture.id,
+                position: .init(x: furniture.x, y: furniture.y),
+                layer: item.placementLayer,
+                roomId: roomId
+            )
+        )
+        currentPlayer = player
+        saveLocalState()
+        return furniture.id
     }
 
     func updateFurnitureTransform(

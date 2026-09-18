@@ -22,6 +22,8 @@ enum World2Screen: Equatable {
     case planningDept
     case sceneCreator(instanceID: String)
     case beacon(instanceID: String)
+    /// Daddy's Citadel POI — welcome plate + always a candy or hug.
+    case daddyWelcome
 }
 
 /// A place the player has tapped on the map, paired with the instance they
@@ -260,9 +262,59 @@ final class World2ViewModel: ObservableObject {
         )
     }
 
+    /// Approach-based drawer: open when the party is near a place, close when they leave.
+    func syncProximityInspection(
+        lead: World2NormalizedPoint,
+        instances: [World2POIInstance],
+        aspectRatio: Double
+    ) {
+        let threshold = 0.085
+        var nearest: (instance: World2POIInstance, distance: Double)?
+        for instance in instances {
+            let distance = lead.distance(to: instance.transform.position, aspectRatio: aspectRatio)
+            if nearest == nil || distance < nearest!.distance {
+                nearest = (instance, distance)
+            }
+        }
+
+        guard let nearest, nearest.distance <= threshold else {
+            if showingPOISheet {
+                dismissPOIInspection()
+            }
+            return
+        }
+
+        if inspectedPOI?.id != nearest.instance.id {
+            guard let archetype = World2POIRegistry.archetype(nearest.instance.archetypeID) else {
+                return
+            }
+            inspectedPOI = POIInspection(
+                id: nearest.instance.id,
+                poi: archetype,
+                instance: nearest.instance
+            )
+            showingPOISheet = true
+            World2Diagnostics.log(
+                "poi_proximity_opened",
+                ["archetype": archetype.id, "distance": String(format: "%.3f", nearest.distance)]
+            )
+        }
+    }
+
     func dismissPOIInspection() {
         showingPOISheet = false
         inspectedPOI = nil
+    }
+
+    /// Gift flight cue after Daddy's Citadel awards candy/hug.
+    @Published var flyingGiftDecoration: World2StoryDecoration?
+
+    func presentFlyingGift(_ decoration: World2StoryDecoration) {
+        flyingGiftDecoration = decoration
+    }
+
+    func clearFlyingGift() {
+        flyingGiftDecoration = nil
     }
 
     func switchWorld(to worldId: WorldId) {
@@ -535,7 +587,11 @@ final class World2ViewModel: ObservableObject {
         dismissPOIInspection()
         switch archetype.route {
         case .playerHome:
-            setScreen(.treehouse(poiId: archetype.id), reason: "poi_entered")
+            if archetype.id == World2POIRegistry.evanHomeID {
+                setScreen(.daddyWelcome, reason: "poi_entered_daddy_welcome")
+            } else {
+                setScreen(.treehouse(poiId: archetype.id), reason: "poi_entered")
+            }
         case .cardFactory:
             setScreen(.cardFactory, reason: "poi_entered")
         case .furnitureStore:
@@ -596,14 +652,29 @@ final class World2ViewModel: ObservableObject {
         )
     }
 
-    func openCurrentPlayerTreehouse() {
+    @discardableResult
+    func awardDaddyVisitGift(_ decoration: World2StoryDecoration) -> DecorationInstance? {
+        playerService.awardRepeatableStoryDecoration(decoration)
+    }
+
+    /// When true, opening a treehouse should jump straight into Decorate mode.
+    @Published var shouldStartDecorating = false
+
+    func openCurrentPlayerTreehouse(startDecorating: Bool = false) {
         guard let playerId = currentPlayerId else { return }
+        shouldStartDecorating = startDecorating
         currentWorld = worlds[.home]
         playerService.setCurrentWorld(.home)
         setScreen(
             .treehouse(poiId: playerId.homePoiId),
-            reason: "decorate_owned_treehouse"
+            reason: startDecorating ? "decorate_owned_treehouse" : "open_owned_treehouse"
         )
+    }
+
+    func consumeStartDecoratingFlag() -> Bool {
+        let value = shouldStartDecorating
+        shouldStartDecorating = false
+        return value
     }
 
     func openCreatureLab() {
@@ -924,6 +995,8 @@ final class World2ViewModel: ObservableObject {
             songID = World2POIRegistry.planningDept.musicTrackID
         case .worldTeleporter:
             songID = "world2_cliffside_morning"
+        case .daddyWelcome:
+            songID = World2POIRegistry.treehouse(for: .evan).musicTrackID
         }
         World2MusicService.shared.stop()
         if let songID, !songID.isEmpty {
@@ -960,7 +1033,7 @@ final class World2ViewModel: ObservableObject {
             backgroundAsset: "map.home",
             lightMusicTrack: "music.home.light",
             intenseMusicTrack: "music.home.intense",
-            adjacentWorlds: [.work, .farm, .blankSlate],
+            adjacentWorlds: [.work, .farm, .blankSlate, .evan],
             ambiance: .init(primaryColor: "#56AB2F", secondaryColor: "#A8E063", mood: "welcoming")
         )
         let work = World(
@@ -1034,6 +1107,20 @@ final class World2ViewModel: ObservableObject {
                 mood: "painterly and bright"
             )
         )
+        let daddyCitadel = World(
+            id: .evan,
+            name: "Daddy's Citadel",
+            description: "A glowing mountain base north of Home",
+            backgroundAsset: "map.evan",
+            lightMusicTrack: "music.home.light",
+            intenseMusicTrack: "music.home.intense",
+            adjacentWorlds: [.home],
+            ambiance: .init(
+                primaryColor: "#1B3A4B",
+                secondaryColor: "#4FC3F7",
+                mood: "bright and futuristic"
+            )
+        )
         worlds = [
             .home: home,
             .work: work,
@@ -1041,6 +1128,7 @@ final class World2ViewModel: ObservableObject {
             .threeBears: threeBears,
             .blankSlate: blankSlate,
             .artGarden: artGarden,
+            .evan: daddyCitadel,
         ]
         currentWorld = home
     }
@@ -1095,6 +1183,7 @@ private extension World2Screen {
         case .planningDept: return "planning_dept"
         case .sceneCreator(let instanceID): return "scene_creator:\(instanceID)"
         case .beacon(let instanceID): return "beacon:\(instanceID)"
+        case .daddyWelcome: return "daddy_welcome"
         }
     }
 }

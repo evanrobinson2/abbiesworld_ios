@@ -16,6 +16,7 @@ import Foundation
 enum World2POIRegistry {
     static let abbieTreehouseID = "poi.abbieTreehouse"
     static let aniTreehouseID = "poi.aniTreehouse"
+    static let evanHomeID = "poi.evanHome"
     static let cardFactoryID = "poi.cardFactory"
     static let letterWorksID = "poi.letterWorks"
     static let furnitureStoreID = "poi.furnitureStore"
@@ -40,6 +41,7 @@ enum World2POIRegistry {
     static let all: [World2POIArchetype] = [
         treehouse(for: .abbie),
         treehouse(for: .ani),
+        treehouse(for: .evan),
         cardFactory,
         letterWorks,
         furnitureStore,
@@ -68,24 +70,46 @@ enum World2POIRegistry {
     // MARK: - Homes
 
     static func treehouse(for owner: PlayerId) -> World2POIArchetype {
-        let isAbbie = owner == .abbie
+        let name: String
+        let lore: String
+        let music: String
+        switch owner {
+        case .abbie:
+            name = "\(owner.displayName)'s Treehouse"
+            lore = "A bright place for making and imagining."
+            music = "world2_family_adventure"
+        case .ani:
+            name = "\(owner.displayName)'s Treehouse"
+            lore = "A calm place for stories and stargazing."
+            music = "world2_cliffside_morning"
+        case .evan:
+            name = "Daddy's Citadel"
+            lore = "A glowing white base on the mountain — blue paths, glass halls, and a view of the water."
+            music = "world2_cliffside_morning"
+        }
         return World2POIArchetype(
             id: owner.homePoiId,
-            name: "\(owner.displayName)'s Treehouse",
+            name: name,
             kind: .home,
             sizeClass: .large,
             exteriorAsset: "\(owner.homePoiId).exterior",
             interiorAsset: "\(owner.homePoiId).interior",
-            icon: "house.fill",
-            lore: isAbbie
-                ? "A bright place for making and imagining."
-                : "A calm place for stories and stargazing.",
-            activityDescription: "Step inside and add a cozy touch to make the space feel like yours.",
-            callToAction: "Decorate My Space",
-            musicTrackID: isAbbie ? "world2_family_adventure" : "world2_cliffside_morning",
+            icon: owner == .evan ? "building.2.fill" : "house.fill",
+            lore: lore,
+            activityDescription: owner == .evan
+                ? "Say hello — Daddy always has candy or a hug waiting."
+                : "Step inside and add a cozy touch to make the space feel like yours.",
+            callToAction: owner == .evan ? "Say Hello" : "Decorate My Space",
+            musicTrackID: music,
             contract: World2POIContract(
                 route: .playerHome,
-                requiresOwnership: true
+                grants: owner == .evan
+                    ? [
+                        .storyDecoration(decorationID: World2StoryDecoration.daddyCandy.id),
+                        .storyDecoration(decorationID: World2StoryDecoration.daddyHug.id),
+                    ]
+                    : [],
+                requiresOwnership: owner != .evan
             ),
             ownerID: owner.rawValue
         )

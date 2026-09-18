@@ -345,6 +345,14 @@ class AssetBootstrapService: ObservableObject {
         "poi.sceneKit.inventory": "world2_world_seed",
         "poi.sceneCreator.exterior": "world2_world_portal",
         "poi.beacon.exterior": "world2_world_seedling",
+        "poi.abbieTreehouse.interior.cozyNook": "abbie_treehouse_room_cozy_nook",
+        "poi.abbieTreehouse.interior.rooftopLookout": "abbie_treehouse_room_rooftop_lookout",
+        "poi.abbieTreehouse.interior.fitnessCenter": "abbie_treehouse_room_fitness_center",
+        // Prefer the Cozy Nook plate whenever the legacy single-interior id is asked for.
+        "poi.abbieTreehouse.interior": "abbie_treehouse_room_cozy_nook",
+        "map.evan": "evan_citadel_scene",
+        "poi.evanHome.exterior": "evan_citadel_exterior",
+        "poi.evanHome.interior": "evan_citadel_interior",
     ]
 
     /// Bundled ambient / looping videos that ship ahead of registry hosting.
@@ -509,6 +517,9 @@ enum World2RegistryKey {
         "ui.appIcon": "ui/app-icon",
         "furniture.abbieStarterBed": "furniture/beds/abbie-starter",
         "furniture.aniStarterBed": "furniture/beds/ani-starter",
+        "poi.evanHome.exterior": "pois/evan-citadel/exterior",
+        "poi.evanHome.interior": "pois/evan-citadel/interior",
+        "map.evan": "maps/evan-citadel",
         "map.artGarden": "maps/art-garden",
         "map.artGarden.ambient": "maps/art-garden/ambient",
         "poi.characterStudio.exterior": "pois/character-studio/exterior",

@@ -262,22 +262,6 @@ struct World2POIInstanceMarker: View {
         return instance.transform.scale * (mapRect.width / viewSize.width)
     }
 
-    private var glowColor: Color {
-        if isEditable && isSelected { return .orange }
-        switch archetype.kind {
-        case .minigame: return .cyan
-        case .cardFactory: return .yellow
-        case .story: return .orange
-        case .factory: return .mint
-        case .home:
-            return archetype.ownerID == PlayerId.ani.rawValue ? .purple : .pink
-        }
-    }
-
-    private var isHighlighted: Bool {
-        isPulsing || (isEditable && isSelected)
-    }
-
     var body: some View {
         Group {
             if isEditable {
@@ -343,56 +327,97 @@ struct World2POIInstanceMarker: View {
         }
     }
 
-    private var artworkStack: some View {
-        ZStack {
-            Ellipse()
-                .fill(glowColor.opacity(isHighlighted ? 0.58 : 0.28))
-                .frame(width: 180 * markerScale, height: 100 * markerScale)
-                .blur(radius: isHighlighted ? 22 : 14)
-
-            exteriorArtwork
-            .frame(width: 230 * markerScale, height: 205 * markerScale)
-            .shadow(
-                color: glowColor.opacity(isHighlighted ? 0.95 : 0.58),
-                radius: isHighlighted ? 20 : 12
-            )
-            .shadow(color: .black.opacity(0.38), radius: 10, y: 6)
-
-            if isEditable && isSelected {
-                RoundedRectangle(cornerRadius: 22)
-                    .stroke(.orange, style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
-                    .frame(width: 230 * markerScale, height: 205 * markerScale)
-            }
+    private var glowColor: Color {
+        if isEditable && isSelected { return .orange }
+        if isSelected { return .yellow }
+        switch archetype.kind {
+        case .minigame: return .cyan
+        case .cardFactory: return .yellow
+        case .story: return .orange
+        case .factory: return .mint
+        case .home:
+            return archetype.ownerID == PlayerId.ani.rawValue ? .purple : .pink
         }
-        .rotationEffect(.degrees(instance.transform.rotationDegrees) + gestureRotation)
-        .scaleEffect(
-            (isEditable || reduceMotion ? 1 : (isPulsing ? 1.06 : 0.98)) * gestureScale
+    }
+
+    private var dancePhase: Double {
+        Double(abs(instance.id.hashValue % 1000)) / 1000.0 * .pi * 2
+    }
+
+    private var artworkStack: some View {
+        TimelineView(.animation(minimumInterval: 1.0 / 30.0, paused: reduceMotion || isEditable)) { timeline in
+            let t = timeline.date.timeIntervalSinceReferenceDate
+            let glowPulse = reduceMotion || isEditable
+                ? 0.40
+                : 0.32 + 0.28 * (0.5 + 0.5 * sin((t * 1.6) + dancePhase))
+            // Inspected / descriptive tile grows harder; others keep a mild pulse.
+            let selectedGrow: CGFloat = {
+                if isEditable || reduceMotion { return 1 }
+                if isSelected {
+                    return 1.0 + 0.08 * (0.5 + 0.5 * sin(t * 2.4))
+                }
+                return isPulsing ? (0.98 + 0.08 * (0.5 + 0.5 * sin(t * 1.15 + dancePhase))) : 1
+            }()
+
+            ZStack {
+                Ellipse()
+                    .fill(glowColor.opacity(glowPulse * (isSelected ? 0.85 : 0.55)))
+                    .frame(width: 180 * markerScale, height: 100 * markerScale)
+                    .blur(radius: isSelected ? 22 : 14)
+                    .offset(y: 48 * markerScale)
+
+                exteriorArtwork
+                    .frame(width: 230 * markerScale, height: 205 * markerScale)
+                    .shadow(
+                        color: glowColor.opacity(isSelected ? 0.95 : 0.58),
+                        radius: isSelected ? 20 : 12
+                    )
+                    .shadow(color: .black.opacity(0.38), radius: 10, y: 6)
+                    .modifier(
+                        World2PlantSway(
+                            date: timeline.date,
+                            phase: dancePhase,
+                            intensity: reduceMotion || isEditable ? 0 : World2BuildingSway.intensity
+                        )
+                    )
+
+                if isEditable && isSelected {
+                    RoundedRectangle(cornerRadius: 22)
+                        .stroke(.orange.opacity(0.9), style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
+                        .frame(width: 230 * markerScale, height: 205 * markerScale)
+                }
+            }
+            .rotationEffect(.degrees(instance.transform.rotationDegrees) + gestureRotation)
+            .scaleEffect(selectedGrow * gestureScale)
+        }
+        .animation(
+            .spring(response: 0.42, dampingFraction: 0.82),
+            value: instance.transform.position.x
         )
         .animation(
-            isEditable || reduceMotion
-                ? nil
-                : .easeInOut(duration: 1.15).repeatForever(autoreverses: true),
-            value: isPulsing
+            .spring(response: 0.42, dampingFraction: 0.82),
+            value: instance.transform.position.y
         )
+        .animation(.easeInOut(duration: 0.25), value: isSelected)
     }
 
     private var nameLabel: some View {
-        HStack(spacing: 5) {
-            Image(systemName: isEditable ? "move.3d" : "hand.tap.fill")
-            Text(archetype.name)
-            if isEditable && !instance.isSnapped {
-                Image(systemName: "pin.slash.fill")
+        Group {
+            if isEditable || isSelected {
+                HStack(spacing: 5) {
+                    Image(systemName: isEditable ? "move.3d" : "hand.tap.fill")
+                    Text(archetype.name)
+                    if isEditable && !instance.isSnapped {
+                        Image(systemName: "pin.slash.fill")
+                    }
+                }
+                .font(.system(size: 14, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(.black.opacity(isSelected ? 0.55 : 0.40), in: Capsule())
             }
         }
-        .font(.system(size: 16, weight: .black, design: .rounded))
-        .foregroundStyle(.white)
-        .multilineTextAlignment(.center)
-        .padding(.horizontal, 12)
-        .padding(.vertical, 7)
-        .background(
-            isEditable ? .orange.opacity(0.88) : .black.opacity(0.62),
-            in: Capsule()
-        )
     }
 
     private func proposedPosition(for translation: CGSize) -> World2NormalizedPoint {
@@ -434,5 +459,53 @@ struct World2POIInstanceMarker: View {
             .onEnded { value in
                 onRotation(instance.transform.rotationDegrees + value.degrees)
             }
+    }
+}
+
+// MARK: - Rhythmic building sway (from Furniture Land / PlantSway stash)
+
+enum World2BuildingSway {
+    static let lowerBound = 0.0
+    static let upperBound = 1.0
+    /// Half of the range — readable lean without a flop.
+    static let intensity = 0.5
+    /// Tip travel, in points, when intensity is at the upper bound.
+    static let maxTipPoints: CGFloat = 40
+
+    static func tipPoints(at intensity: Double) -> CGFloat {
+        let clamped = min(max(intensity, lowerBound), upperBound)
+        return maxTipPoints * CGFloat(clamped)
+    }
+}
+
+/// Lean from the feet origin so buildings sway like plants, not float sideways.
+private struct World2PlantSway: ViewModifier {
+    let date: Date
+    let phase: Double
+    var intensity: Double = World2BuildingSway.intensity
+    var origin: UnitPoint = UnitPoint(x: 0.5, y: 1)
+    var renderScale: CGFloat = 1
+
+    func body(content: Content) -> some View {
+        let elapsed = date.timeIntervalSinceReferenceDate
+        let wave = sin(elapsed * 1.05 + phase) * 0.72
+            + sin(elapsed * 2.2 + phase * 1.4) * 0.28
+        let tip = World2BuildingSway.tipPoints(at: intensity) * renderScale
+        content.visualEffect { content, proxy in
+            let height = max(proxy.size.height, 1)
+            let shear = CGFloat(wave) * tip / height
+            let pivot = CGPoint(
+                x: proxy.size.width * origin.x,
+                y: proxy.size.height * origin.y
+            )
+            var transform = CGAffineTransform(translationX: -pivot.x, y: -pivot.y)
+            transform = transform.concatenating(
+                CGAffineTransform(a: 1, b: 0, c: shear, d: 1, tx: 0, ty: 0)
+            )
+            transform = transform.concatenating(
+                CGAffineTransform(translationX: pivot.x, y: pivot.y)
+            )
+            return content.transformEffect(transform)
+        }
     }
 }

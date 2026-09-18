@@ -124,7 +124,7 @@ final class World2SmokeUITests: XCTestCase {
             tap("world2.interior.arrangeFurniture")
         }
         XCTAssertTrue(
-            app.descendants(matching: .any)["world2.interior.decorator.drawer"].waitForExistence(timeout: 4),
+            app.descendants(matching: .any)["world2.interior.decorator.tray"].waitForExistence(timeout: 4),
             "Decorating drawer never opened"
         )
 

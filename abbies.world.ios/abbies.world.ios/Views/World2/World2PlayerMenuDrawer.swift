@@ -65,9 +65,16 @@ struct World2PlayerMenuDrawer: View {
                     .clipShape(Circle())
                     .overlay(Circle().stroke(.white.opacity(0.85), lineWidth: 2.5))
                     .shadow(color: .black.opacity(0.28), radius: 8, y: 4)
+                    .overlay {
+                        if viewModel.flyingGiftDecoration != nil {
+                            Circle()
+                                .stroke(Color.pink.opacity(0.9), lineWidth: 3)
+                                .scaleEffect(1.18)
+                        }
+                    }
 
-                if inventoryBadgeCount > 0 || pendingQuestCount > 0 {
-                    Text("\(inventoryBadgeCount + pendingQuestCount)")
+                if inventoryBadgeCount > 0 || pendingQuestCount > 0 || viewModel.flyingGiftDecoration != nil {
+                    Text("\(max(1, inventoryBadgeCount + pendingQuestCount))")
                         .font(.system(size: 11, weight: .black, design: .rounded))
                         .foregroundStyle(.white)
                         .frame(minWidth: 20, minHeight: 20)

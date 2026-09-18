@@ -1,0 +1,8 @@
+{
+  "images" : [
+    { "filename" : "evan_citadel_exterior.png", "idiom" : "universal", "scale" : "1x" },
+    { "idiom" : "universal", "scale" : "2x" },
+    { "idiom" : "universal", "scale" : "3x" }
+  ],
+  "info" : { "author" : "cursor", "version" : 1 }
+}

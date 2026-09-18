@@ -29,6 +29,8 @@ enum World2StoryArtStyle: String, Codable, Sendable {
     case perfectPorridge
     case worldTeleporter
     case propertyDeed
+    case daddyCandy
+    case daddyHug
 }
 
 /// What tapping Use does for a story item that is not only décor.
@@ -93,7 +95,41 @@ struct World2StoryDecoration: Identifiable, Equatable, Sendable {
         inventoryAction: .none
     )
 
-    static let all: [World2StoryDecoration] = [perfectPorridge, worldTeleporter, propertyDeed]
+    /// Daddy's Citadel always-on gift — a piece of candy for the drawer.
+    static let daddyCandy = World2StoryDecoration(
+        id: "decoration.story.daddyCandy",
+        name: "Daddy Candy",
+        shortDescription: "A shiny wrapped candy from Daddy's Citadel. Sweet enough to keep forever.",
+        category: "Daddy Gift",
+        defaultScale: 0.48,
+        placementLayer: .floor,
+        artStyle: .daddyCandy,
+        badges: [.new, .questReward],
+        awardedByArchetypeID: "poi.evanHome",
+        inventoryAction: .none
+    )
+
+    /// Daddy's Citadel always-on gift — a pocket hug.
+    static let daddyHug = World2StoryDecoration(
+        id: "decoration.story.daddyHug",
+        name: "Pocket Hug",
+        shortDescription: "A warm little hug you can carry in your inventory. It still feels like Daddy.",
+        category: "Daddy Gift",
+        defaultScale: 0.52,
+        placementLayer: .floor,
+        artStyle: .daddyHug,
+        badges: [.new, .questReward],
+        awardedByArchetypeID: "poi.evanHome",
+        inventoryAction: .none
+    )
+
+    static let all: [World2StoryDecoration] = [
+        perfectPorridge,
+        worldTeleporter,
+        propertyDeed,
+        daddyCandy,
+        daddyHug,
+    ]
 
     static func decoration(id: String) -> World2StoryDecoration? {
         all.first { $0.id == id }
