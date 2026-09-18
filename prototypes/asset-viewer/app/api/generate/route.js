@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 
 import { generateImage, providerStatus } from '../../lib/generateImage';
+import { ALLOWED_QUALITIES, defaultQuality, generationConfig } from '../../lib/imageConfig';
 import { promptProblems, studioPrompt } from '../../studioPrompt';
 import styleCatalogue from '../../../data/styles.json';
 
@@ -9,15 +10,18 @@ import styleCatalogue from '../../../data/styles.json';
 export const maxDuration = 60;
 
 const STYLES = Object.fromEntries(styleCatalogue.styles.map((style) => [style.id, style]));
-const ALLOWED_QUALITY = new Set(['low', 'medium']);
+const ALLOWED_QUALITY = new Set(ALLOWED_QUALITIES);
 
 /** What the studio can do right now, so the UI can say so before anyone waits
  *  30 seconds to find out. Never returns key material. */
 export function GET() {
+  const config = generationConfig();
   return NextResponse.json({
     ...providerStatus(),
-    model: 'gpt-image-2',
+    ...config,
+    model: config.model,
     styles: styleCatalogue.styles.map(({ id, label }) => ({ id, label })),
+    metricsPath: '/api/generate/metrics',
   });
 }
 
@@ -29,7 +33,7 @@ export async function POST(request) {
     return NextResponse.json({ error: 'Expected a JSON body.' }, { status: 400 });
   }
 
-  const { topic, family = 'decoration', styleId = 'house', customLook = '', notes = '', quality = 'low' } = body;
+  const { topic, family = 'decoration', styleId = 'house', customLook = '', notes = '', quality = defaultQuality() } = body;
 
   if (!ALLOWED_QUALITY.has(quality)) {
     return NextResponse.json(

@@ -144,7 +144,10 @@ boolean.
   versioned image prompt, generates one illustration, and deterministically
   composes retained card assets.
 
-- Creature Builder defaults to **gpt-image-2.5-flare** at medium quality.
+- Creature Builder defaults to **gpt-image-2.5-flare** at **low** quality
+  (fastest). Quality is the speed/fidelity tradeoff; `medium` remains
+  available as a configuration override. Do not default to `high` / `xhigh`
+  / `max` — kids wait on these completions.
 
 - At most three Creature Builder jobs execute concurrently per server
   instance. The default waiting queue is 20; a full queue returns **429**.
