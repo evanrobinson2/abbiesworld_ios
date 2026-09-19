@@ -1,82 +1,243 @@
 {
+  "schemaVersion": 1,
   "name": "idle",
   "rigFamily": "abbiesworld.humanoid.child.v1",
   "duration": 2.4,
   "loop": true,
-  "description": "Subtle breathing and gentle movement for standing idle",
   "tracks": {
     "torso.rotation": {
       "keyframes": [
-        { "time": 0.0, "value": 0 },
-        { "time": 0.6, "value": 1 },
-        { "time": 1.2, "value": 0 },
-        { "time": 1.8, "value": -0.5 },
-        { "time": 2.4, "value": 0 }
-      ],
-      "interpolation": "ease-in-out"
-    },
-    "torso.scaleY": {
-      "keyframes": [
-        { "time": 0.0, "value": 1.0 },
-        { "time": 0.6, "value": 1.012 },
-        { "time": 1.2, "value": 1.0 },
-        { "time": 1.8, "value": 1.008 },
-        { "time": 2.4, "value": 1.0 }
+        {
+          "time": 0.0,
+          "value": 0.0
+        },
+        {
+          "time": 0.343,
+          "value": 1.17
+        },
+        {
+          "time": 0.686,
+          "value": 1.46
+        },
+        {
+          "time": 1.029,
+          "value": 0.65
+        },
+        {
+          "time": 1.371,
+          "value": -0.65
+        },
+        {
+          "time": 1.714,
+          "value": -1.46
+        },
+        {
+          "time": 2.057,
+          "value": -1.17
+        },
+        {
+          "time": 2.4,
+          "value": -0.0
+        }
       ],
       "interpolation": "ease-in-out"
     },
     "head.rotation": {
       "keyframes": [
-        { "time": 0.0, "value": 0 },
-        { "time": 0.8, "value": 2 },
-        { "time": 1.6, "value": -1 },
-        { "time": 2.4, "value": 0 }
+        {
+          "time": 0.0,
+          "value": 1.18
+        },
+        {
+          "time": 0.343,
+          "value": 2.0
+        },
+        {
+          "time": 0.686,
+          "value": 1.32
+        },
+        {
+          "time": 1.029,
+          "value": -0.36
+        },
+        {
+          "time": 1.371,
+          "value": -1.76
+        },
+        {
+          "time": 1.714,
+          "value": -1.84
+        },
+        {
+          "time": 2.057,
+          "value": -0.53
+        },
+        {
+          "time": 2.4,
+          "value": 1.18
+        }
       ],
       "interpolation": "ease-in-out"
     },
     "head.y": {
       "keyframes": [
-        { "time": 0.0, "value": 0 },
-        { "time": 0.6, "value": 3 },
-        { "time": 1.2, "value": 0 },
-        { "time": 1.8, "value": 2 },
-        { "time": 2.4, "value": 0 }
+        {
+          "time": 0.0,
+          "value": 0.0
+        },
+        {
+          "time": 0.343,
+          "value": 1.56
+        },
+        {
+          "time": 0.686,
+          "value": 1.95
+        },
+        {
+          "time": 1.029,
+          "value": 0.87
+        },
+        {
+          "time": 1.371,
+          "value": -0.87
+        },
+        {
+          "time": 1.714,
+          "value": -1.95
+        },
+        {
+          "time": 2.057,
+          "value": -1.56
+        },
+        {
+          "time": 2.4,
+          "value": -0.0
+        }
       ],
       "interpolation": "ease-in-out"
     },
     "upper_arm_left.rotation": {
       "keyframes": [
-        { "time": 0.0, "value": 0 },
-        { "time": 1.2, "value": 2 },
-        { "time": 2.4, "value": 0 }
+        {
+          "time": 0.0,
+          "value": 1.43
+        },
+        {
+          "time": 0.48,
+          "value": 0.88
+        },
+        {
+          "time": 0.96,
+          "value": -0.88
+        },
+        {
+          "time": 1.44,
+          "value": -1.43
+        },
+        {
+          "time": 1.92,
+          "value": -0.0
+        },
+        {
+          "time": 2.4,
+          "value": 1.43
+        }
       ],
       "interpolation": "ease-in-out"
     },
     "upper_arm_right.rotation": {
       "keyframes": [
-        { "time": 0.0, "value": 0 },
-        { "time": 1.2, "value": -2 },
-        { "time": 2.4, "value": 0 }
+        {
+          "time": 0.0,
+          "value": -1.43
+        },
+        {
+          "time": 0.48,
+          "value": -0.88
+        },
+        {
+          "time": 0.96,
+          "value": 0.88
+        },
+        {
+          "time": 1.44,
+          "value": 1.43
+        },
+        {
+          "time": 1.92,
+          "value": 0.0
+        },
+        {
+          "time": 2.4,
+          "value": -1.43
+        }
       ],
       "interpolation": "ease-in-out"
     },
     "hair_front.rotation": {
       "keyframes": [
-        { "time": 0.0, "value": 0 },
-        { "time": 0.8, "value": 1 },
-        { "time": 1.6, "value": -0.5 },
-        { "time": 2.4, "value": 0 }
+        {
+          "time": 0.0,
+          "value": 0.81
+        },
+        {
+          "time": 0.48,
+          "value": 0.81
+        },
+        {
+          "time": 0.96,
+          "value": -0.31
+        },
+        {
+          "time": 1.44,
+          "value": -1.0
+        },
+        {
+          "time": 1.92,
+          "value": -0.31
+        },
+        {
+          "time": 2.4,
+          "value": 0.81
+        }
       ],
       "interpolation": "ease-in-out"
     },
     "hair_back.rotation": {
       "keyframes": [
-        { "time": 0.0, "value": 0 },
-        { "time": 0.9, "value": -1 },
-        { "time": 1.8, "value": 0.5 },
-        { "time": 2.4, "value": 0 }
+        {
+          "time": 0.0,
+          "value": -0.8
+        },
+        {
+          "time": 0.48,
+          "value": -0.25
+        },
+        {
+          "time": 0.96,
+          "value": 0.65
+        },
+        {
+          "time": 1.44,
+          "value": 0.65
+        },
+        {
+          "time": 1.92,
+          "value": -0.25
+        },
+        {
+          "time": 2.4,
+          "value": -0.8
+        }
       ],
       "interpolation": "ease-in-out"
     }
+  },
+  "provenance": {
+    "source": "procedural",
+    "generator": "generate_procedural_motion.py",
+    "template": "idle_breathing",
+    "generatedAt": "2026-09-19T20:47:55.373254+00:00",
+    "rigFamily": "abbiesworld.humanoid.child.v1"
   }
 }

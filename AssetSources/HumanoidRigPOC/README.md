@@ -185,7 +185,9 @@ Animations are JSON files with keyframed tracks:
 
 ```json
 {
+  "schemaVersion": 1,
   "name": "walk",
+  "rigFamily": "abbiesworld.humanoid.child.v1",
   "duration": 0.8,
   "loop": true,
   "tracks": {
@@ -197,6 +199,12 @@ Animations are JSON files with keyframed tracks:
       ],
       "interpolation": "ease-in-out"
     }
+  },
+  "provenance": {
+    "source": "mixamo",
+    "sourceFile": "walking.fbx",
+    "importedAt": "2026-09-19T...",
+    "rigFamily": "abbiesworld.humanoid.child.v1"
   }
 }
 ```
@@ -205,6 +213,112 @@ Supported track types:
 - `{bone}.rotation` - Rotation in degrees
 - `{bone}.y` - Y translation in pixels
 - `{bone}.scaleY` - Y scale factor
+
+## Motion Import Pipeline
+
+Animation data is treated as reusable motion that can be retargeted onto our
+fixed 2D puppet skeleton. Source motion from Mixamo, Rokoko, or any standard
+humanoid FBX/BVH is converted to our canonical format.
+
+### Pipeline Flow
+
+```
+FBX/BVH humanoid animation
+        ↓
+Blender headless extraction
+        ↓
+Map source joints to canonical rig
+        ↓
+Project motion to 2D plane
+        ↓
+Simplify/smooth curves
+        ↓
+Emit animation JSON
+        ↓
+Play on any generated puppet
+```
+
+### Import from FBX/BVH
+
+```bash
+# Requires Blender 3.0+ installed
+python3 scripts/humanoid_rig_poc/import_humanoid_motion.py \
+  --input mixamo_walk.fbx \
+  --name walk \
+  --rig abbiesworld.humanoid.child.v1 \
+  --plane front \
+  --loop \
+  --source mixamo \
+  --license "Mixamo free license"
+```
+
+### Generate Procedural Placeholders
+
+For development without FBX files:
+
+```bash
+python3 scripts/humanoid_rig_poc/generate_procedural_motion.py --all
+```
+
+This creates biomechanically-plausible idle, walk, and run cycles.
+
+### Source Skeleton Mapping
+
+The importer collapses complex 3D skeletons to our simple 2D rig:
+
+| Source Bones | Target |
+|--------------|--------|
+| Hips (translation) | root.y |
+| Spine/Spine1/Spine2 | torso.rotation |
+| Neck/Head | head.rotation |
+| LeftArm | upper_arm_left.rotation |
+| LeftForeArm | forearm_left.rotation |
+| RightArm | upper_arm_right.rotation |
+| RightForeArm | forearm_right.rotation |
+| LeftUpLeg | thigh_left.rotation |
+| LeftLeg | shin_left.rotation |
+| LeftFoot | foot_left.rotation |
+| RightUpLeg | thigh_right.rotation |
+| RightLeg | shin_right.rotation |
+| RightFoot | foot_right.rotation |
+
+Ignored: fingers, toes, twist bones, facial bones, IK helpers.
+
+### Canonical Animation Library
+
+Target clips for the rig family:
+
+**Vertical Slice (v1):**
+- idle
+- walk
+- run
+
+**Future Motion Pack:**
+- wave
+- cheer
+- jump
+- land
+- clap
+- point
+- pick_up
+- place_down
+- look_around
+- dance_simple
+- surprised
+
+### Rig Family Principle
+
+**Animation belongs to the rig family, not individual characters.**
+
+```
+abbiesworld.humanoid.child.v1 + walk.json = walk animation
+different_generated_character + same walk.json = same walk animation
+```
+
+This means:
+- Generate appearance once, reuse standardized motion forever
+- Zero per-character animation editing required
+- Any puppet using the rig family plays all its animations
 
 ## Failure Codes
 

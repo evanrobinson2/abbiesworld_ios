@@ -12,6 +12,8 @@ const PART_ORDER = [
   'pelvis', 'torso', 'head', 'hair_front'
 ];
 
+const AVAILABLE_ANIMATIONS = ['neutral', 'idle', 'walk', 'run'];
+
 const SKELETON = {
   root: { parent: null, children: ['pelvis'] },
   pelvis: { parent: 'root', children: ['torso', 'thigh_left', 'thigh_right'] },
@@ -116,6 +118,11 @@ export default function HumanoidRigPage() {
     fetch('/humanoid-rig/animations/walk.json')
       .then(r => r.ok ? r.json() : null)
       .then(data => setAnimData(prev => ({ ...prev, walk: data })))
+      .catch(() => {});
+
+    fetch('/humanoid-rig/animations/run.json')
+      .then(r => r.ok ? r.json() : null)
+      .then(data => setAnimData(prev => ({ ...prev, run: data })))
       .catch(() => {});
   }, []);
 
@@ -274,46 +281,24 @@ export default function HumanoidRigPage() {
         Reference-conditioned 2D puppet generation experiment
       </p>
 
-      <div style={{ display: 'flex', gap: 20, marginBottom: 20 }}>
-        <button
-          onClick={() => setView('preview')}
-          style={{
-            padding: '8px 16px',
-            background: view === 'preview' ? '#333' : '#eee',
-            color: view === 'preview' ? '#fff' : '#333',
-            border: 'none',
-            borderRadius: 4,
-            cursor: 'pointer',
-          }}
-        >
-          Preview
-        </button>
-        <button
-          onClick={() => setView('template')}
-          style={{
-            padding: '8px 16px',
-            background: view === 'template' ? '#333' : '#eee',
-            color: view === 'template' ? '#fff' : '#333',
-            border: 'none',
-            borderRadius: 4,
-            cursor: 'pointer',
-          }}
-        >
-          Template
-        </button>
-        <button
-          onClick={() => setView('parts')}
-          style={{
-            padding: '8px 16px',
-            background: view === 'parts' ? '#333' : '#eee',
-            color: view === 'parts' ? '#fff' : '#333',
-            border: 'none',
-            borderRadius: 4,
-            cursor: 'pointer',
-          }}
-        >
-          Parts
-        </button>
+      <div style={{ display: 'flex', gap: 20, marginBottom: 20, flexWrap: 'wrap' }}>
+        {['preview', 'template', 'parts', 'motion'].map((v) => (
+          <button
+            key={v}
+            onClick={() => setView(v)}
+            style={{
+              padding: '8px 16px',
+              background: view === v ? '#333' : '#eee',
+              color: view === v ? '#fff' : '#333',
+              border: 'none',
+              borderRadius: 4,
+              cursor: 'pointer',
+              textTransform: 'capitalize',
+            }}
+          >
+            {v === 'motion' ? 'Motion Diagnostics' : v}
+          </button>
+        ))}
       </div>
 
       {view === 'preview' && (
@@ -349,8 +334,8 @@ export default function HumanoidRigPage() {
               <label style={{ display: 'block', marginBottom: 5, fontWeight: 'bold' }}>
                 Animation
               </label>
-              <div style={{ display: 'flex', gap: 10 }}>
-                {['neutral', 'idle', 'walk'].map((anim) => (
+              <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+                {AVAILABLE_ANIMATIONS.map((anim) => (
                   <button
                     key={anim}
                     onClick={() => {
@@ -460,6 +445,129 @@ export default function HumanoidRigPage() {
                 <div style={{ fontSize: 11, marginTop: 5, color: '#666' }}>{partId}</div>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {view === 'motion' && (
+        <div>
+          <h3>Motion Diagnostics</h3>
+          <p style={{ color: '#666', marginBottom: 20 }}>
+            Animation data overview and keyframe visualization
+          </p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: 20 }}>
+            {AVAILABLE_ANIMATIONS.filter(a => a !== 'neutral').map((animName) => {
+              const anim = animData[animName];
+              if (!anim) return (
+                <div key={animName} style={{ padding: 15, background: '#f5f5f5', borderRadius: 8 }}>
+                  <h4 style={{ margin: 0, textTransform: 'capitalize' }}>{animName}</h4>
+                  <p style={{ color: '#999', margin: '10px 0 0' }}>Not loaded</p>
+                </div>
+              );
+
+              const trackCount = Object.keys(anim.tracks || {}).length;
+              const keyframeCount = Object.values(anim.tracks || {}).reduce(
+                (sum, t) => sum + (t.keyframes?.length || 0), 0
+              );
+
+              return (
+                <div key={animName} style={{ padding: 15, background: '#f5f5f5', borderRadius: 8 }}>
+                  <h4 style={{ margin: '0 0 10px', textTransform: 'capitalize' }}>{animName}</h4>
+                  
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 5, fontSize: 13 }}>
+                    <span style={{ color: '#666' }}>Duration:</span>
+                    <span>{anim.duration}s</span>
+                    <span style={{ color: '#666' }}>Loop:</span>
+                    <span>{anim.loop ? 'Yes' : 'No'}</span>
+                    <span style={{ color: '#666' }}>Tracks:</span>
+                    <span>{trackCount}</span>
+                    <span style={{ color: '#666' }}>Keyframes:</span>
+                    <span>{keyframeCount}</span>
+                    <span style={{ color: '#666' }}>Source:</span>
+                    <span>{anim.provenance?.source || 'unknown'}</span>
+                  </div>
+
+                  <div style={{ marginTop: 15 }}>
+                    <div style={{ fontSize: 12, fontWeight: 'bold', marginBottom: 5 }}>Tracks</div>
+                    <div style={{ maxHeight: 150, overflow: 'auto', fontSize: 11, fontFamily: 'monospace' }}>
+                      {Object.entries(anim.tracks || {}).map(([track, data]) => (
+                        <div key={track} style={{ 
+                          padding: '2px 5px', 
+                          background: '#fff', 
+                          marginBottom: 2,
+                          borderRadius: 3,
+                          display: 'flex',
+                          justifyContent: 'space-between'
+                        }}>
+                          <span>{track}</span>
+                          <span style={{ color: '#888' }}>{data.keyframes?.length || 0} kf</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => {
+                      setAnimation(animName);
+                      setView('preview');
+                      startTimeRef.current = null;
+                    }}
+                    style={{
+                      marginTop: 10,
+                      padding: '6px 12px',
+                      background: '#4a9eff',
+                      color: '#fff',
+                      border: 'none',
+                      borderRadius: 4,
+                      cursor: 'pointer',
+                      fontSize: 12,
+                    }}
+                  >
+                    Play
+                  </button>
+                </div>
+              );
+            })}
+          </div>
+
+          <div style={{ marginTop: 30 }}>
+            <h4>Motion Import Pipeline</h4>
+            <p style={{ color: '#666', fontSize: 14 }}>
+              The animation system supports importing standard humanoid motion from FBX/BVH files
+              (Mixamo, Rokoko, etc.) and converting them to our canonical format.
+            </p>
+            <pre style={{ background: '#1e1e1e', color: '#d4d4d4', padding: 15, borderRadius: 4, overflow: 'auto', fontSize: 12 }}>
+{`# Import motion from FBX file (requires Blender)
+python3 scripts/humanoid_rig_poc/import_humanoid_motion.py \\
+  --input mixamo_walk.fbx \\
+  --name walk \\
+  --loop \\
+  --source mixamo
+
+# Generate procedural placeholder animations
+python3 scripts/humanoid_rig_poc/generate_procedural_motion.py --all`}
+            </pre>
+          </div>
+
+          <div style={{ marginTop: 30 }}>
+            <h4>Rig Family Principle</h4>
+            <p style={{ color: '#666', fontSize: 14 }}>
+              Animation belongs to the rig family, not individual characters. Any generated puppet
+              using the <code>abbiesworld.humanoid.child.v1</code> rig can play these animations
+              without modification.
+            </p>
+            <div style={{ 
+              background: '#e8f4e8', 
+              padding: 15, 
+              borderRadius: 8, 
+              marginTop: 10,
+              fontFamily: 'monospace',
+              fontSize: 13,
+            }}>
+              <div>abbiesworld.humanoid.child.v1 + walk.json = walk animation</div>
+              <div style={{ marginTop: 5 }}>different_generated_character + same walk.json = same walk animation</div>
+            </div>
           </div>
         </div>
       )}
