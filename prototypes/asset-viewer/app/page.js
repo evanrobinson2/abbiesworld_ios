@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import catalogue from '../data/assets.json';
 import styleCatalogue from '../data/styles.json';
 import App from './App';
@@ -9,6 +10,9 @@ export default function Page() {
   return (
     <main>
       <h1>Abbie&rsquo;s World — asset browser</h1>
+      <p style={{ fontSize: 14, marginTop: -10, marginBottom: 15 }}>
+        <Link href="/humanoid-rig" style={{ color: '#666' }}>→ Humanoid Rig POC</Link>
+      </p>
       <p className="lede">
         Every image in the repo: {assets.length} assets across {kinds.length} kinds, {made} of them
         generated for the Decorator Machine.{' '}

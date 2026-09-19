@@ -1,0 +1,1217 @@
+{
+  "schemaVersion": 1,
+  "rigFamily": "abbiesworld.humanoid.child.v1",
+  "canvas": {
+    "width": 2048,
+    "height": 2048
+  },
+  "skeleton": {
+    "root": {
+      "children": [
+        "pelvis"
+      ]
+    },
+    "pelvis": {
+      "parent": "root",
+      "children": [
+        "torso",
+        "thigh_left",
+        "thigh_right"
+      ]
+    },
+    "torso": {
+      "parent": "pelvis",
+      "children": [
+        "head",
+        "upper_arm_left",
+        "upper_arm_right"
+      ]
+    },
+    "head": {
+      "parent": "torso",
+      "children": [
+        "hair_back",
+        "hair_front"
+      ]
+    },
+    "hair_back": {
+      "parent": "head",
+      "children": []
+    },
+    "hair_front": {
+      "parent": "head",
+      "children": []
+    },
+    "upper_arm_left": {
+      "parent": "torso",
+      "children": [
+        "forearm_left"
+      ]
+    },
+    "forearm_left": {
+      "parent": "upper_arm_left",
+      "children": [
+        "hand_left"
+      ]
+    },
+    "hand_left": {
+      "parent": "forearm_left",
+      "children": []
+    },
+    "upper_arm_right": {
+      "parent": "torso",
+      "children": [
+        "forearm_right"
+      ]
+    },
+    "forearm_right": {
+      "parent": "upper_arm_right",
+      "children": [
+        "hand_right"
+      ]
+    },
+    "hand_right": {
+      "parent": "forearm_right",
+      "children": []
+    },
+    "thigh_left": {
+      "parent": "pelvis",
+      "children": [
+        "shin_left"
+      ]
+    },
+    "shin_left": {
+      "parent": "thigh_left",
+      "children": [
+        "foot_left"
+      ]
+    },
+    "foot_left": {
+      "parent": "shin_left",
+      "children": []
+    },
+    "thigh_right": {
+      "parent": "pelvis",
+      "children": [
+        "shin_right"
+      ]
+    },
+    "shin_right": {
+      "parent": "thigh_right",
+      "children": [
+        "foot_right"
+      ]
+    },
+    "foot_right": {
+      "parent": "shin_right",
+      "children": []
+    }
+  },
+  "parts": {
+    "head": {
+      "zIndex": 50,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.85
+        ],
+        "pixels": [
+          1024,
+          1740
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.85
+        ],
+        "pixels": [
+          1024,
+          1740
+        ]
+      },
+      "distalSocket": null,
+      "hiddenOverlap": {
+        "proximal": 0.12,
+        "distal": 0.0
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.3,
+          "y": 0.0,
+          "width": 0.4,
+          "height": 0.25
+        },
+        "pixels": {
+          "x": 614,
+          "y": 0,
+          "width": 820,
+          "height": 512
+        }
+      },
+      "defaultRotationRange": {
+        "min": -15,
+        "max": 15
+      }
+    },
+    "hair_back": {
+      "zIndex": 5,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.2
+        ],
+        "pixels": [
+          1024,
+          410
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.2
+        ],
+        "pixels": [
+          1024,
+          410
+        ]
+      },
+      "distalSocket": null,
+      "hiddenOverlap": {
+        "proximal": 0.15,
+        "distal": 0.0
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.25,
+          "y": 0.0,
+          "width": 0.5,
+          "height": 0.2
+        },
+        "pixels": {
+          "x": 512,
+          "y": 0,
+          "width": 1024,
+          "height": 410
+        }
+      },
+      "defaultRotationRange": {
+        "min": -5,
+        "max": 5
+      }
+    },
+    "hair_front": {
+      "zIndex": 55,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.5
+        ],
+        "pixels": [
+          1024,
+          1024
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.5
+        ],
+        "pixels": [
+          1024,
+          1024
+        ]
+      },
+      "distalSocket": null,
+      "hiddenOverlap": {
+        "proximal": 0.1,
+        "distal": 0.0
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.3,
+          "y": 0.02,
+          "width": 0.4,
+          "height": 0.15
+        },
+        "pixels": {
+          "x": 614,
+          "y": 41,
+          "width": 820,
+          "height": 307
+        }
+      },
+      "defaultRotationRange": {
+        "min": -5,
+        "max": 5
+      }
+    },
+    "torso": {
+      "zIndex": 40,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.15
+        ],
+        "pixels": [
+          1024,
+          307
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.85
+        ],
+        "pixels": [
+          1024,
+          1740
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.15
+        ],
+        "pixels": [
+          1024,
+          307
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.1,
+        "distal": 0.12
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.3,
+          "y": 0.22,
+          "width": 0.4,
+          "height": 0.28
+        },
+        "pixels": {
+          "x": 614,
+          "y": 451,
+          "width": 820,
+          "height": 573
+        }
+      },
+      "defaultRotationRange": {
+        "min": -10,
+        "max": 10
+      }
+    },
+    "pelvis": {
+      "zIndex": 35,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.3
+        ],
+        "pixels": [
+          1024,
+          614
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.3
+        ],
+        "pixels": [
+          1024,
+          614
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.7
+        ],
+        "pixels": [
+          1024,
+          1434
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.15,
+        "distal": 0.1
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.35,
+          "y": 0.45,
+          "width": 0.3,
+          "height": 0.12
+        },
+        "pixels": {
+          "x": 717,
+          "y": 922,
+          "width": 614,
+          "height": 246
+        }
+      },
+      "defaultRotationRange": {
+        "min": -5,
+        "max": 5
+      }
+    },
+    "upper_arm_left": {
+      "zIndex": 30,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.88
+        ],
+        "pixels": [
+          1024,
+          1802
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.14,
+        "distal": 0.14
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.18,
+          "y": 0.24,
+          "width": 0.12,
+          "height": 0.18
+        },
+        "pixels": {
+          "x": 369,
+          "y": 491,
+          "width": 246,
+          "height": 369
+        }
+      },
+      "defaultRotationRange": {
+        "min": -70,
+        "max": 90
+      }
+    },
+    "forearm_left": {
+      "zIndex": 31,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.88
+        ],
+        "pixels": [
+          1024,
+          1802
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.14,
+        "distal": 0.12
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.12,
+          "y": 0.38,
+          "width": 0.1,
+          "height": 0.16
+        },
+        "pixels": {
+          "x": 246,
+          "y": 778,
+          "width": 205,
+          "height": 328
+        }
+      },
+      "defaultRotationRange": {
+        "min": 0,
+        "max": 140
+      }
+    },
+    "hand_left": {
+      "zIndex": 32,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.15
+        ],
+        "pixels": [
+          1024,
+          307
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.15
+        ],
+        "pixels": [
+          1024,
+          307
+        ]
+      },
+      "distalSocket": null,
+      "hiddenOverlap": {
+        "proximal": 0.12,
+        "distal": 0.0
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.08,
+          "y": 0.5,
+          "width": 0.08,
+          "height": 0.1
+        },
+        "pixels": {
+          "x": 164,
+          "y": 1024,
+          "width": 164,
+          "height": 205
+        }
+      },
+      "defaultRotationRange": {
+        "min": -30,
+        "max": 30
+      }
+    },
+    "upper_arm_right": {
+      "zIndex": 30,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.88
+        ],
+        "pixels": [
+          1024,
+          1802
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.14,
+        "distal": 0.14
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.7,
+          "y": 0.24,
+          "width": 0.12,
+          "height": 0.18
+        },
+        "pixels": {
+          "x": 1434,
+          "y": 491,
+          "width": 246,
+          "height": 369
+        }
+      },
+      "defaultRotationRange": {
+        "min": -90,
+        "max": 70
+      }
+    },
+    "forearm_right": {
+      "zIndex": 31,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.88
+        ],
+        "pixels": [
+          1024,
+          1802
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.14,
+        "distal": 0.12
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.78,
+          "y": 0.38,
+          "width": 0.1,
+          "height": 0.16
+        },
+        "pixels": {
+          "x": 1598,
+          "y": 778,
+          "width": 205,
+          "height": 328
+        }
+      },
+      "defaultRotationRange": {
+        "min": -140,
+        "max": 0
+      }
+    },
+    "hand_right": {
+      "zIndex": 32,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.15
+        ],
+        "pixels": [
+          1024,
+          307
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.15
+        ],
+        "pixels": [
+          1024,
+          307
+        ]
+      },
+      "distalSocket": null,
+      "hiddenOverlap": {
+        "proximal": 0.12,
+        "distal": 0.0
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.84,
+          "y": 0.5,
+          "width": 0.08,
+          "height": 0.1
+        },
+        "pixels": {
+          "x": 1720,
+          "y": 1024,
+          "width": 164,
+          "height": 205
+        }
+      },
+      "defaultRotationRange": {
+        "min": -30,
+        "max": 30
+      }
+    },
+    "thigh_left": {
+      "zIndex": 20,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.88
+        ],
+        "pixels": [
+          1024,
+          1802
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.12,
+        "distal": 0.14
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.32,
+          "y": 0.52,
+          "width": 0.12,
+          "height": 0.2
+        },
+        "pixels": {
+          "x": 655,
+          "y": 1065,
+          "width": 246,
+          "height": 410
+        }
+      },
+      "defaultRotationRange": {
+        "min": -45,
+        "max": 55
+      }
+    },
+    "shin_left": {
+      "zIndex": 21,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.88
+        ],
+        "pixels": [
+          1024,
+          1802
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.14,
+        "distal": 0.1
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.3,
+          "y": 0.68,
+          "width": 0.1,
+          "height": 0.18
+        },
+        "pixels": {
+          "x": 614,
+          "y": 1393,
+          "width": 205,
+          "height": 369
+        }
+      },
+      "defaultRotationRange": {
+        "min": 0,
+        "max": 130
+      }
+    },
+    "foot_left": {
+      "zIndex": 22,
+      "pivot": {
+        "normalized": [
+          0.3,
+          0.2
+        ],
+        "pixels": [
+          614,
+          410
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.3,
+          0.2
+        ],
+        "pixels": [
+          614,
+          410
+        ]
+      },
+      "distalSocket": null,
+      "hiddenOverlap": {
+        "proximal": 0.1,
+        "distal": 0.0
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.28,
+          "y": 0.84,
+          "width": 0.12,
+          "height": 0.08
+        },
+        "pixels": {
+          "x": 573,
+          "y": 1720,
+          "width": 246,
+          "height": 164
+        }
+      },
+      "defaultRotationRange": {
+        "min": -20,
+        "max": 40
+      }
+    },
+    "thigh_right": {
+      "zIndex": 20,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.88
+        ],
+        "pixels": [
+          1024,
+          1802
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.12,
+        "distal": 0.14
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.56,
+          "y": 0.52,
+          "width": 0.12,
+          "height": 0.2
+        },
+        "pixels": {
+          "x": 1147,
+          "y": 1065,
+          "width": 246,
+          "height": 410
+        }
+      },
+      "defaultRotationRange": {
+        "min": -55,
+        "max": 45
+      }
+    },
+    "shin_right": {
+      "zIndex": 21,
+      "pivot": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.5,
+          0.12
+        ],
+        "pixels": [
+          1024,
+          246
+        ]
+      },
+      "distalSocket": {
+        "normalized": [
+          0.5,
+          0.88
+        ],
+        "pixels": [
+          1024,
+          1802
+        ]
+      },
+      "hiddenOverlap": {
+        "proximal": 0.14,
+        "distal": 0.1
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.6,
+          "y": 0.68,
+          "width": 0.1,
+          "height": 0.18
+        },
+        "pixels": {
+          "x": 1229,
+          "y": 1393,
+          "width": 205,
+          "height": 369
+        }
+      },
+      "defaultRotationRange": {
+        "min": -130,
+        "max": 0
+      }
+    },
+    "foot_right": {
+      "zIndex": 22,
+      "pivot": {
+        "normalized": [
+          0.7,
+          0.2
+        ],
+        "pixels": [
+          1434,
+          410
+        ]
+      },
+      "proximalSocket": {
+        "normalized": [
+          0.7,
+          0.2
+        ],
+        "pixels": [
+          1434,
+          410
+        ]
+      },
+      "distalSocket": null,
+      "hiddenOverlap": {
+        "proximal": 0.1,
+        "distal": 0.0
+      },
+      "bounds": {
+        "normalized": {
+          "x": 0.6,
+          "y": 0.84,
+          "width": 0.12,
+          "height": 0.08
+        },
+        "pixels": {
+          "x": 1229,
+          "y": 1720,
+          "width": 246,
+          "height": 164
+        }
+      },
+      "defaultRotationRange": {
+        "min": -40,
+        "max": 20
+      }
+    }
+  },
+  "partOrder": [
+    "hair_back",
+    "thigh_left",
+    "shin_left",
+    "foot_left",
+    "thigh_right",
+    "shin_right",
+    "foot_right",
+    "upper_arm_left",
+    "forearm_left",
+    "hand_left",
+    "upper_arm_right",
+    "forearm_right",
+    "hand_right",
+    "pelvis",
+    "torso",
+    "head",
+    "hair_front"
+  ],
+  "explodedSheet": {
+    "canvas": {
+      "width": 2048,
+      "height": 2048
+    },
+    "previewRegion": {
+      "x": 0,
+      "y": 0,
+      "width": 2048,
+      "height": 584
+    },
+    "cells": {
+      "head": {
+        "x": 0,
+        "y": 584,
+        "width": 512,
+        "height": 292
+      },
+      "torso": {
+        "x": 512,
+        "y": 584,
+        "width": 512,
+        "height": 292
+      },
+      "pelvis": {
+        "x": 1024,
+        "y": 584,
+        "width": 512,
+        "height": 292
+      },
+      "hair_back": {
+        "x": 1536,
+        "y": 584,
+        "width": 512,
+        "height": 292
+      },
+      "upper_arm_left": {
+        "x": 0,
+        "y": 876,
+        "width": 512,
+        "height": 292
+      },
+      "forearm_left": {
+        "x": 512,
+        "y": 876,
+        "width": 512,
+        "height": 292
+      },
+      "hand_left": {
+        "x": 1024,
+        "y": 876,
+        "width": 512,
+        "height": 292
+      },
+      "hair_front": {
+        "x": 1536,
+        "y": 876,
+        "width": 512,
+        "height": 292
+      },
+      "upper_arm_right": {
+        "x": 0,
+        "y": 1168,
+        "width": 512,
+        "height": 292
+      },
+      "forearm_right": {
+        "x": 512,
+        "y": 1168,
+        "width": 512,
+        "height": 292
+      },
+      "hand_right": {
+        "x": 1024,
+        "y": 1168,
+        "width": 512,
+        "height": 292
+      },
+      "thigh_left": {
+        "x": 0,
+        "y": 1460,
+        "width": 512,
+        "height": 292
+      },
+      "shin_left": {
+        "x": 512,
+        "y": 1460,
+        "width": 512,
+        "height": 292
+      },
+      "foot_left": {
+        "x": 1024,
+        "y": 1460,
+        "width": 512,
+        "height": 292
+      },
+      "thigh_right": {
+        "x": 0,
+        "y": 1752,
+        "width": 512,
+        "height": 292
+      },
+      "shin_right": {
+        "x": 512,
+        "y": 1752,
+        "width": 512,
+        "height": 292
+      },
+      "foot_right": {
+        "x": 1024,
+        "y": 1752,
+        "width": 512,
+        "height": 292
+      }
+    }
+  },
+  "jointTests": {
+    "shoulder_left": {
+      "part": "upper_arm_left",
+      "angles": [
+        -70,
+        -30,
+        0,
+        45,
+        90
+      ]
+    },
+    "shoulder_right": {
+      "part": "upper_arm_right",
+      "angles": [
+        -90,
+        -45,
+        0,
+        30,
+        70
+      ]
+    },
+    "elbow_left": {
+      "part": "forearm_left",
+      "angles": [
+        0,
+        45,
+        90,
+        120,
+        140
+      ]
+    },
+    "elbow_right": {
+      "part": "forearm_right",
+      "angles": [
+        -140,
+        -120,
+        -90,
+        -45,
+        0
+      ]
+    },
+    "hip_left": {
+      "part": "thigh_left",
+      "angles": [
+        -45,
+        -20,
+        0,
+        30,
+        55
+      ]
+    },
+    "hip_right": {
+      "part": "thigh_right",
+      "angles": [
+        -55,
+        -30,
+        0,
+        20,
+        45
+      ]
+    },
+    "knee_left": {
+      "part": "shin_left",
+      "angles": [
+        0,
+        30,
+        60,
+        90,
+        130
+      ]
+    },
+    "knee_right": {
+      "part": "shin_right",
+      "angles": [
+        -130,
+        -90,
+        -60,
+        -30,
+        0
+      ]
+    }
+  },
+  "failureCodes": [
+    "GEOMETRY_DRIFT",
+    "WRONG_PART",
+    "MISSING_PART",
+    "EXTRA_PART",
+    "CELL_OVERFLOW",
+    "PART_TOO_SMALL",
+    "SOCKET_UNCOVERED",
+    "ALPHA_DIRTY",
+    "ALPHA_HALO",
+    "DISCONNECTED_COMPONENT",
+    "JOINT_GAP",
+    "STYLE_DRIFT",
+    "LEFT_RIGHT_CONFUSION",
+    "GENERATION_FAILURE"
+  ]
+}
