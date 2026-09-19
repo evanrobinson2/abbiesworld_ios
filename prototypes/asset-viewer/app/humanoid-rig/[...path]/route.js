@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
+import { existsSync } from 'fs';
 
-const ASSETS_ROOT = join(process.cwd(), '..', '..', 'AssetSources', 'HumanoidRigPOC');
+// In development, read from the repo's AssetSources directory
+// In production (Vercel), read from public/humanoid-rig-assets (copied during build)
+const DEV_ASSETS_ROOT = join(process.cwd(), '..', '..', 'AssetSources', 'HumanoidRigPOC');
+const PROD_ASSETS_ROOT = join(process.cwd(), 'public', 'humanoid-rig-assets');
+
+const ASSETS_ROOT = existsSync(DEV_ASSETS_ROOT) ? DEV_ASSETS_ROOT : PROD_ASSETS_ROOT;
 
 const MIME_TYPES = {
   '.png': 'image/png',

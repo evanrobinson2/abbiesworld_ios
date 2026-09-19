@@ -5,6 +5,7 @@
   "description": "Art QA browser for generated and carved Decorator Machine ingredient art.",
   "scripts": {
     "dev": "next dev --port 5174",
+    "prebuild": "node scripts/copy-humanoid-assets.mjs",
     "build": "next build",
     "start": "next start",
     "check": "node --test \"checks/*.test.mjs\"",
