@@ -1,0 +1,1015 @@
+{
+  "success": false,
+  "rigFamily": "abbiesworld.humanoid.child.v1",
+  "parts": {
+    "head": {
+      "success": false,
+      "alpha": {
+        "partID": "head",
+        "size": [
+          860,
+          552
+        ],
+        "opaquePct": 86.5,
+        "transparentPct": 13.5,
+        "semiTransparentPct": 0.9,
+        "numComponents": 3,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "head",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              430,
+              469
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "hair_back": {
+      "success": false,
+      "alpha": {
+        "partID": "hair_back",
+        "size": [
+          1037,
+          450
+        ],
+        "opaquePct": 79.5,
+        "transparentPct": 20.5,
+        "semiTransparentPct": 1.1,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "hair_back",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              518,
+              90
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "hair_front": {
+      "success": false,
+      "alpha": {
+        "partID": "hair_front",
+        "size": [
+          860,
+          347
+        ],
+        "opaquePct": 95.0,
+        "transparentPct": 5.0,
+        "semiTransparentPct": 0.5,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "hair_front",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              430,
+              173
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "torso": {
+      "success": false,
+      "alpha": {
+        "partID": "torso",
+        "size": [
+          860,
+          613
+        ],
+        "opaquePct": 85.5,
+        "transparentPct": 14.5,
+        "semiTransparentPct": 1.2,
+        "numComponents": 3,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "torso",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              430,
+              91
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              430,
+              91
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "pelvis": {
+      "success": false,
+      "alpha": {
+        "partID": "pelvis",
+        "size": [
+          654,
+          286
+        ],
+        "opaquePct": 96.9,
+        "transparentPct": 3.1,
+        "semiTransparentPct": 0.7,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "pelvis",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              327,
+              85
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              327,
+              200
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "upper_arm_left": {
+      "success": false,
+      "alpha": {
+        "partID": "upper_arm_left",
+        "size": [
+          273,
+          395
+        ],
+        "opaquePct": 84.8,
+        "transparentPct": 15.2,
+        "semiTransparentPct": 2.7,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "upper_arm_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              136,
+              47
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              136,
+              347
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "forearm_left": {
+      "success": false,
+      "alpha": {
+        "partID": "forearm_left",
+        "size": [
+          245,
+          368
+        ],
+        "opaquePct": 81.6,
+        "transparentPct": 18.4,
+        "semiTransparentPct": 2.4,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "forearm_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              122,
+              44
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              122,
+              323
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "hand_left": {
+      "success": false,
+      "alpha": {
+        "partID": "hand_left",
+        "size": [
+          190,
+          232
+        ],
+        "opaquePct": 83.4,
+        "transparentPct": 16.6,
+        "semiTransparentPct": 3.6,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "hand_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              95,
+              34
+            ],
+            "coveragePct": 99.9
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "upper_arm_right": {
+      "success": false,
+      "alpha": {
+        "partID": "upper_arm_right",
+        "size": [
+          272,
+          395
+        ],
+        "opaquePct": 85.0,
+        "transparentPct": 15.0,
+        "semiTransparentPct": 2.7,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "upper_arm_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              136,
+              47
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              136,
+              347
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "forearm_right": {
+      "success": false,
+      "alpha": {
+        "partID": "forearm_right",
+        "size": [
+          245,
+          368
+        ],
+        "opaquePct": 81.6,
+        "transparentPct": 18.4,
+        "semiTransparentPct": 2.4,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "forearm_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              122,
+              44
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              122,
+              323
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "hand_right": {
+      "success": false,
+      "alpha": {
+        "partID": "hand_right",
+        "size": [
+          191,
+          232
+        ],
+        "opaquePct": 83.2,
+        "transparentPct": 16.8,
+        "semiTransparentPct": 3.6,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "hand_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              95,
+              34
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "thigh_left": {
+      "success": false,
+      "alpha": {
+        "partID": "thigh_left",
+        "size": [
+          286,
+          450
+        ],
+        "opaquePct": 85.0,
+        "transparentPct": 15.0,
+        "semiTransparentPct": 1.8,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "thigh_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              143,
+              54
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              143,
+              396
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "shin_left": {
+      "success": false,
+      "alpha": {
+        "partID": "shin_left",
+        "size": [
+          245,
+          409
+        ],
+        "opaquePct": 83.7,
+        "transparentPct": 16.3,
+        "semiTransparentPct": 2.3,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "shin_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              122,
+              49
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              122,
+              359
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "foot_left": {
+      "success": false,
+      "alpha": {
+        "partID": "foot_left",
+        "size": [
+          259,
+          191
+        ],
+        "opaquePct": 87.2,
+        "transparentPct": 12.7,
+        "semiTransparentPct": 4.2,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "foot_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              77,
+              38
+            ],
+            "coveragePct": 89.3
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "thigh_right": {
+      "success": false,
+      "alpha": {
+        "partID": "thigh_right",
+        "size": [
+          286,
+          450
+        ],
+        "opaquePct": 85.0,
+        "transparentPct": 15.0,
+        "semiTransparentPct": 1.8,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "thigh_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              143,
+              54
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              143,
+              396
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "shin_right": {
+      "success": false,
+      "alpha": {
+        "partID": "shin_right",
+        "size": [
+          245,
+          409
+        ],
+        "opaquePct": 83.8,
+        "transparentPct": 16.2,
+        "semiTransparentPct": 2.3,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "shin_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              122,
+              49
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              122,
+              359
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "foot_right": {
+      "success": false,
+      "alpha": {
+        "partID": "foot_right",
+        "size": [
+          259,
+          191
+        ],
+        "opaquePct": 87.2,
+        "transparentPct": 12.7,
+        "semiTransparentPct": 4.2,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "foot_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              181,
+              38
+            ],
+            "coveragePct": 89.3
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    }
+  },
+  "joints": {
+    "shoulder_left": {
+      "part": "upper_arm_left",
+      "results": [
+        {
+          "angle": -70,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 90,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "shoulder_right": {
+      "part": "upper_arm_right",
+      "results": [
+        {
+          "angle": -90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 70,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "elbow_left": {
+      "part": "forearm_left",
+      "results": [
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 120,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 140,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "elbow_right": {
+      "part": "forearm_right",
+      "results": [
+        {
+          "angle": -140,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -120,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "hip_left": {
+      "part": "thigh_left",
+      "results": [
+        {
+          "angle": -45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -20,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 55,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "hip_right": {
+      "part": "thigh_right",
+      "results": [
+        {
+          "angle": -55,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 20,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 45,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "knee_left": {
+      "part": "shin_left",
+      "results": [
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 60,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 130,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "knee_right": {
+      "part": "shin_right",
+      "results": [
+        {
+          "angle": -130,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -60,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "summary": {
+    "totalParts": 17,
+    "validatedParts": 17,
+    "passedParts": 0,
+    "failures": [
+      {
+        "part": "head",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "hair_back",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "hair_front",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "torso",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "pelvis",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "upper_arm_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "forearm_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "hand_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "upper_arm_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "forearm_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "hand_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "thigh_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "shin_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "foot_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "thigh_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "shin_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "foot_right",
+        "code": "ALPHA_DIRTY"
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "characterID": "test-001",
+  "description": "Test character extracted from template for preview demonstration",
+  "source": "template-extraction",
+  "methods": {
+    "template": {
+      "success": true,
+      "note": "Parts extracted directly from construction template"
+    }
+  }
+}
