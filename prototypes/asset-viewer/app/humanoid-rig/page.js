@@ -97,8 +97,8 @@ export default function HumanoidRigPage() {
   const [animation, setAnimation] = useState('neutral');
   const [animData, setAnimData] = useState({ idle: null, walk: null });
   const [showSkeleton, setShowSkeleton] = useState(false);
-  const [characterId, setCharacterId] = useState('explorer-001');
-  const availableCharacters = ['explorer-001', 'test-001'];
+  const [characterId, setCharacterId] = useState('explorer-003');
+  const availableCharacters = ['explorer-003', 'explorer-002', 'explorer-001', 'test-001'];
   const [view, setView] = useState('preview');
   const [templateImage, setTemplateImage] = useState(null);
   const [generatedImage, setGeneratedImage] = useState(null);

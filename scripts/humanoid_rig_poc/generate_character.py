@@ -57,16 +57,21 @@ CRITICAL GEOMETRY CONSTRAINTS - DO NOT VIOLATE:
 GEOMETRY_CONSTRAINT_EXPLODED = """
 CRITICAL GEOMETRY CONSTRAINTS - DO NOT VIOLATE:
 - This is an EXPLODED CHARACTER SHEET with body parts in separate cells
-- Preserve the EXACT cell boundaries - each body part stays in its labeled cell
+- Preserve the EXACT cell boundaries - each body part stays in its cell
 - Preserve the EXACT geometry/silhouette of each body part within its cell
 - Do NOT move parts between cells or merge cells
-- Do NOT add any background within cells - each cell should have flat gray background
+- Each cell must have a FLAT SOLID GRAY background (#C8C8C8)
 - Do NOT change the number, size, or arrangement of cells
 - Each body part must remain SEPARATE and DISTINCT
-- Paint each body part to match the character reference appearance
+- Paint each body part to match the character appearance
 - The top preview area should show the assembled character
-- Treat the construction image as authoritative GEOMETRY and LAYOUT
-- Treat the character reference as authoritative APPEARANCE
+
+ABSOLUTELY FORBIDDEN:
+- NO text labels of any kind
+- NO words, letters, or numbers anywhere in the image
+- NO "HEAD", "TORSO", "ARM" labels
+- NO annotations or captions
+- The ONLY content should be the painted body parts on gray backgrounds
 """
 
 

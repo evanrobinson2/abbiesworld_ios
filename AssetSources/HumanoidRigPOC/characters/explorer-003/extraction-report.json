@@ -1,0 +1,144 @@
+{
+  "parts": {
+    "head": {
+      "success": true,
+      "contentPixels": 474720,
+      "size": [
+        860,
+        552
+      ]
+    },
+    "hair_back": {
+      "success": true,
+      "contentPixels": 478800,
+      "size": [
+        1064,
+        450
+      ]
+    },
+    "hair_front": {
+      "success": true,
+      "contentPixels": 298420,
+      "size": [
+        860,
+        347
+      ]
+    },
+    "torso": {
+      "success": true,
+      "contentPixels": 527180,
+      "size": [
+        860,
+        613
+      ]
+    },
+    "pelvis": {
+      "success": true,
+      "contentPixels": 187044,
+      "size": [
+        654,
+        286
+      ]
+    },
+    "upper_arm_left": {
+      "success": true,
+      "contentPixels": 116974,
+      "size": [
+        286,
+        409
+      ]
+    },
+    "forearm_left": {
+      "success": true,
+      "contentPixels": 90160,
+      "size": [
+        245,
+        368
+      ]
+    },
+    "hand_left": {
+      "success": true,
+      "contentPixels": 49980,
+      "size": [
+        204,
+        245
+      ]
+    },
+    "upper_arm_right": {
+      "success": true,
+      "contentPixels": 116974,
+      "size": [
+        286,
+        409
+      ]
+    },
+    "forearm_right": {
+      "success": true,
+      "contentPixels": 90160,
+      "size": [
+        245,
+        368
+      ]
+    },
+    "hand_right": {
+      "success": true,
+      "contentPixels": 49980,
+      "size": [
+        204,
+        245
+      ]
+    },
+    "thigh_left": {
+      "success": true,
+      "contentPixels": 128700,
+      "size": [
+        286,
+        450
+      ]
+    },
+    "shin_left": {
+      "success": true,
+      "contentPixels": 100205,
+      "size": [
+        245,
+        409
+      ]
+    },
+    "foot_left": {
+      "success": true,
+      "contentPixels": 58344,
+      "size": [
+        286,
+        204
+      ]
+    },
+    "thigh_right": {
+      "success": true,
+      "contentPixels": 128700,
+      "size": [
+        286,
+        450
+      ]
+    },
+    "shin_right": {
+      "success": true,
+      "contentPixels": 100205,
+      "size": [
+        245,
+        409
+      ]
+    },
+    "foot_right": {
+      "success": true,
+      "contentPixels": 58344,
+      "size": [
+        286,
+        204
+      ]
+    }
+  },
+  "summary": {
+    "total": 17,
+    "success": 17
+  }
+}

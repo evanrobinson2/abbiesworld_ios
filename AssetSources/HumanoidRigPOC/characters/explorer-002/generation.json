@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "characterID": "explorer-002",
+  "description": "A cheerful young explorer child with messy brown hair, bright curious eyes, wearing a tan safari vest over a blue t-shirt, khaki shorts, and brown boots. Cute cartoon style, friendly expression.",
+  "model": "gpt-image-1",
+  "createdAt": "2026-09-19T22:06:06.063664+00:00",
+  "methods": {
+    "exploded": {
+      "method": "exploded",
+      "templateSHA256": "e810e4f6cb91a92ab1f5c085f8e55697578bea6ea9e2f637cf93358fd40f6c08",
+      "outputSHA256": "ddca4fe358008877664dc351b1b79fad9e8bc124f13505a51b4ca02def80ba5b",
+      "promptSHA256": "a84340ca119affc6b8cb912c80079610daaf77645af6d611344de4cbef6e4a0a",
+      "outputFile": "generated-exploded.png",
+      "success": true
+    }
+  }
+}

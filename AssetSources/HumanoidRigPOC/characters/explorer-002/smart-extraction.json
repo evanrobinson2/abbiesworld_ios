@@ -1,0 +1,366 @@
+{
+  "characterId": "explorer-002",
+  "sheetSize": [
+    2048,
+    2048
+  ],
+  "parts": {
+    "head": {
+      "success": true,
+      "path": "parts/head.png",
+      "coverage": 0.4948,
+      "hasBounds": true,
+      "issues": [],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "torso": {
+      "success": true,
+      "path": "parts/torso.png",
+      "coverage": 0.3015,
+      "hasBounds": true,
+      "issues": [],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "pelvis": {
+      "success": true,
+      "path": "parts/pelvis.png",
+      "coverage": 0.5791,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "hair_back": {
+      "success": true,
+      "path": "parts/hair_back.png",
+      "coverage": 0.5607,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "upper_arm_left": {
+      "success": true,
+      "path": "parts/upper_arm_left.png",
+      "coverage": 0.5967,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "forearm_left": {
+      "success": true,
+      "path": "parts/forearm_left.png",
+      "coverage": 0.4342,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "hand_left": {
+      "success": true,
+      "path": "parts/hand_left.png",
+      "coverage": 0.3029,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "hair_front": {
+      "success": true,
+      "path": "parts/hair_front.png",
+      "coverage": 0.1714,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "upper_arm_right": {
+      "success": true,
+      "path": "parts/upper_arm_right.png",
+      "coverage": 0.3849,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "forearm_right": {
+      "success": true,
+      "path": "parts/forearm_right.png",
+      "coverage": 0.3052,
+      "hasBounds": true,
+      "issues": [],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "hand_right": {
+      "success": true,
+      "path": "parts/hand_right.png",
+      "coverage": 0.413,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "thigh_left": {
+      "success": true,
+      "path": "parts/thigh_left.png",
+      "coverage": 0.5846,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "shin_left": {
+      "success": true,
+      "path": "parts/shin_left.png",
+      "coverage": 0.5,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "foot_left": {
+      "success": true,
+      "path": "parts/foot_left.png",
+      "coverage": 0.5279,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "thigh_right": {
+      "success": true,
+      "path": "parts/thigh_right.png",
+      "coverage": 0.3589,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "shin_right": {
+      "success": true,
+      "path": "parts/shin_right.png",
+      "coverage": 0.4273,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    },
+    "foot_right": {
+      "success": true,
+      "path": "parts/foot_right.png",
+      "coverage": 0.5259,
+      "hasBounds": true,
+      "issues": [
+        "POSSIBLE_TEXT_ARTIFACTS"
+      ],
+      "contentBounds": {
+        "x": 0,
+        "y": 0,
+        "width": 512,
+        "height": 292
+      },
+      "contentCenter": {
+        "x": 256.0,
+        "y": 146.0,
+        "normalizedX": 0.5,
+        "normalizedY": 0.5
+      }
+    }
+  },
+  "summary": {
+    "total": 17,
+    "success": 3,
+    "warnings": 14,
+    "failures": 0
+  }
+}
