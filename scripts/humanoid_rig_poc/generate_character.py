@@ -107,9 +107,9 @@ geometry exactly.
             model=model,
             image=img,
             prompt=prompt.strip(),
-            size="2048x2048",
+            size="1024x1024",
             quality="high",
-            response_format="b64_json",
+            output_format="png",
             n=1,
         )
     
@@ -162,9 +162,9 @@ exact shape and position within its cell. Use flat gray background in each cell.
             model=model,
             image=img,
             prompt=prompt.strip(),
-            size="2048x2048",
+            size="1024x1024",
             quality="high",
-            response_format="b64_json",
+            output_format="png",
             n=1,
         )
     

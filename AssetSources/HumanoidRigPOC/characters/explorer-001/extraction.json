@@ -1,0 +1,533 @@
+{
+  "success": false,
+  "sourceSHA256": "c0e73ed0177e1d2445c59bc6f15e001dce6c01394f3a2c83e2a6519ec5d8e446",
+  "rigFamily": "abbiesworld.humanoid.child.v1",
+  "parts": {
+    "head": {
+      "partID": "head",
+      "success": false,
+      "failures": [
+        "CELL_OVERFLOW"
+      ],
+      "cellBounds": {
+        "x": 0,
+        "y": 584,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        208,
+        162,
+        153
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 100.0,
+      "numComponents": 1,
+      "outputFile": "head.png",
+      "outputSHA256": "12b981273dba757c38327d0970adaa3ea09f1413a3c6fe73ae95a316cd448034"
+    },
+    "torso": {
+      "partID": "torso",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 512,
+        "y": 584,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        211,
+        207,
+        198
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 25.2,
+      "numComponents": 30,
+      "outputFile": "torso.png",
+      "outputSHA256": "fefeef235ddfdab528958192450c0cadd236c00fae18c32d1b803b39f3cb1bfb"
+    },
+    "pelvis": {
+      "partID": "pelvis",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 1024,
+        "y": 584,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        210,
+        206,
+        198
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 68.1,
+      "numComponents": 64,
+      "outputFile": "pelvis.png",
+      "outputSHA256": "cffe9d412e9145fead70520f811268f49f8ba1437506a3130f6f768350ce7fd7"
+    },
+    "hair_back": {
+      "partID": "hair_back",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 1536,
+        "y": 584,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        210,
+        206,
+        197
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 60.9,
+      "numComponents": 63,
+      "outputFile": "hair_back.png",
+      "outputSHA256": "d9d5f4b325d0b0b9ee03375267b587ca7932da6e66bef2d2a679b5730dd57dc2"
+    },
+    "upper_arm_left": {
+      "partID": "upper_arm_left",
+      "success": false,
+      "failures": [
+        "CELL_OVERFLOW"
+      ],
+      "cellBounds": {
+        "x": 0,
+        "y": 876,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        206,
+        166,
+        157
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 100.0,
+      "numComponents": 1,
+      "outputFile": "upper_arm_left.png",
+      "outputSHA256": "86fa0d5085e1e49072a0cb86845a70d3b9a514deabed4d56acf191fbe419b0d4"
+    },
+    "forearm_left": {
+      "partID": "forearm_left",
+      "success": false,
+      "failures": [
+        "DISCONNECTED_COMPONENT"
+      ],
+      "cellBounds": {
+        "x": 512,
+        "y": 876,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        210,
+        206,
+        197
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 35.5,
+      "numComponents": 45,
+      "outputFile": "forearm_left.png",
+      "outputSHA256": "261194b3c66581d82de455cd3656eea4973e13dd1fd454e0f25232497910ff0a"
+    },
+    "hand_left": {
+      "partID": "hand_left",
+      "success": false,
+      "failures": [
+        "CELL_OVERFLOW"
+      ],
+      "cellBounds": {
+        "x": 1024,
+        "y": 876,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        141,
+        101,
+        105
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 100.0,
+      "numComponents": 1,
+      "outputFile": "hand_left.png",
+      "outputSHA256": "cb22a578bdf369c1c229e7c51368b35245dba957b6898e0a0abe66efb4a82f02"
+    },
+    "hair_front": {
+      "partID": "hair_front",
+      "success": false,
+      "failures": [
+        "CELL_OVERFLOW"
+      ],
+      "cellBounds": {
+        "x": 1536,
+        "y": 876,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        109,
+        105,
+        109
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 100.0,
+      "numComponents": 1,
+      "outputFile": "hair_front.png",
+      "outputSHA256": "9bcb8523bf09548beb8848006c68e0d48d78bcebb4ff265c7fc53c55f2119c92"
+    },
+    "upper_arm_right": {
+      "partID": "upper_arm_right",
+      "success": false,
+      "failures": [
+        "DISCONNECTED_COMPONENT"
+      ],
+      "cellBounds": {
+        "x": 0,
+        "y": 1168,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        203,
+        200,
+        191
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 54.6,
+      "numComponents": 15,
+      "outputFile": "upper_arm_right.png",
+      "outputSHA256": "d1390a0c73778ffc703db7db4ff369f3caf7779d202264e7e78c84964dd5cb55"
+    },
+    "forearm_right": {
+      "partID": "forearm_right",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 512,
+        "y": 1168,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        210,
+        206,
+        198
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 59.5,
+      "numComponents": 73,
+      "outputFile": "forearm_right.png",
+      "outputSHA256": "88d80bba603fb3d7efa09c6380c99ce35ee4e93c7e62478925509b270c21d2f7"
+    },
+    "hand_right": {
+      "partID": "hand_right",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 1024,
+        "y": 1168,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        210,
+        206,
+        198
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 58.2,
+      "numComponents": 84,
+      "outputFile": "hand_right.png",
+      "outputSHA256": "e256f0bc41140b559f4974a23b64a4ac718cb19f28c3068954ac9b25f73297f4"
+    },
+    "thigh_left": {
+      "partID": "thigh_left",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 0,
+        "y": 1460,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        211,
+        207,
+        198
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 69.8,
+      "numComponents": 120,
+      "outputFile": "thigh_left.png",
+      "outputSHA256": "28558f607765544a57615f3cf153f752eed5b17005f89744035f49639dfca9e7"
+    },
+    "shin_left": {
+      "partID": "shin_left",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 512,
+        "y": 1460,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        211,
+        208,
+        199
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 68.4,
+      "numComponents": 101,
+      "outputFile": "shin_left.png",
+      "outputSHA256": "979f3424fbf8dfb05107efd098be15043326a95278c696bb4c290baa614fa344"
+    },
+    "foot_left": {
+      "partID": "foot_left",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 1024,
+        "y": 1460,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        211,
+        208,
+        199
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 64.9,
+      "numComponents": 86,
+      "outputFile": "foot_left.png",
+      "outputSHA256": "902fa8936d415bd10de4289a3308d0b626335e152fe3853f48167ef2e7ac2d8e"
+    },
+    "thigh_right": {
+      "partID": "thigh_right",
+      "success": false,
+      "failures": [
+        "DISCONNECTED_COMPONENT"
+      ],
+      "cellBounds": {
+        "x": 0,
+        "y": 1752,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        211,
+        208,
+        199
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 46.9,
+      "numComponents": 175,
+      "outputFile": "thigh_right.png",
+      "outputSHA256": "c1f95e097060194a1788822d0c9a9544a5690a6c0620350015ba445f501ad092"
+    },
+    "shin_right": {
+      "partID": "shin_right",
+      "success": false,
+      "failures": [
+        "DISCONNECTED_COMPONENT"
+      ],
+      "cellBounds": {
+        "x": 512,
+        "y": 1752,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        212,
+        208,
+        199
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 45.9,
+      "numComponents": 155,
+      "outputFile": "shin_right.png",
+      "outputSHA256": "450a921ea79ec17f6693c4c0482e9f8b18c7eba23ec79de7f3b58eb5ec34f6a3"
+    },
+    "foot_right": {
+      "partID": "foot_right",
+      "success": true,
+      "failures": [],
+      "cellBounds": {
+        "x": 1024,
+        "y": 1752,
+        "width": 512,
+        "height": 292
+      },
+      "detectedBackground": [
+        212,
+        208,
+        199
+      ],
+      "trimmedBounds": {
+        "left": 0,
+        "top": 0,
+        "right": 512,
+        "bottom": 292
+      },
+      "outputSize": [
+        512,
+        292
+      ],
+      "coveragePct": 51.9,
+      "numComponents": 175,
+      "outputFile": "foot_right.png",
+      "outputSHA256": "654a06b104b8ec171e94eb9eff7e07c6da6453703beb198ee14162204c4d5254"
+    }
+  }
+}

@@ -1,0 +1,1161 @@
+{
+  "success": false,
+  "rigFamily": "abbiesworld.humanoid.child.v1",
+  "parts": {
+    "head": {
+      "success": false,
+      "alpha": {
+        "partID": "head",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 100.0,
+        "transparentPct": 0.0,
+        "semiTransparentPct": 0.0,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "head",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              248
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "hair_back": {
+      "success": false,
+      "alpha": {
+        "partID": "hair_back",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 60.9,
+        "transparentPct": 39.1,
+        "semiTransparentPct": 4.4,
+        "numComponents": 4,
+        "failures": [
+          "ALPHA_DIRTY",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "hair_back",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              58
+            ],
+            "coveragePct": 37.6
+          }
+        ],
+        "failures": [
+          "SOCKET_UNCOVERED"
+        ],
+        "passed": false
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "DISCONNECTED_COMPONENT",
+        "SOCKET_UNCOVERED"
+      ]
+    },
+    "hair_front": {
+      "success": false,
+      "alpha": {
+        "partID": "hair_front",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 100.0,
+        "transparentPct": 0.0,
+        "semiTransparentPct": 0.6,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "hair_front",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              146
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "torso": {
+      "success": false,
+      "alpha": {
+        "partID": "torso",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 25.2,
+        "transparentPct": 74.8,
+        "semiTransparentPct": 1.7,
+        "numComponents": 2,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "torso",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              43
+            ],
+            "coveragePct": 0.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              43
+            ],
+            "coveragePct": 0.0
+          }
+        ],
+        "failures": [
+          "SOCKET_UNCOVERED",
+          "SOCKET_UNCOVERED"
+        ],
+        "passed": false
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "SOCKET_UNCOVERED",
+        "SOCKET_UNCOVERED"
+      ]
+    },
+    "pelvis": {
+      "success": false,
+      "alpha": {
+        "partID": "pelvis",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 68.1,
+        "transparentPct": 31.9,
+        "semiTransparentPct": 4.5,
+        "numComponents": 4,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "pelvis",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              87
+            ],
+            "coveragePct": 99.9
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              204
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "upper_arm_left": {
+      "success": false,
+      "alpha": {
+        "partID": "upper_arm_left",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 100.0,
+        "transparentPct": 0.0,
+        "semiTransparentPct": 0.0,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "upper_arm_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              35
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              256
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "forearm_left": {
+      "success": false,
+      "alpha": {
+        "partID": "forearm_left",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 35.5,
+        "transparentPct": 64.4,
+        "semiTransparentPct": 5.6,
+        "numComponents": 4,
+        "failures": [
+          "ALPHA_DIRTY",
+          "ALPHA_HALO",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "forearm_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              35
+            ],
+            "coveragePct": 0.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              256
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [
+          "SOCKET_UNCOVERED"
+        ],
+        "passed": false
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "ALPHA_HALO",
+        "DISCONNECTED_COMPONENT",
+        "SOCKET_UNCOVERED"
+      ]
+    },
+    "hand_left": {
+      "success": false,
+      "alpha": {
+        "partID": "hand_left",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 100.0,
+        "transparentPct": 0.0,
+        "semiTransparentPct": 0.0,
+        "numComponents": 1,
+        "failures": [
+          "ALPHA_DIRTY"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "hand_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              43
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY"
+      ]
+    },
+    "upper_arm_right": {
+      "success": false,
+      "alpha": {
+        "partID": "upper_arm_right",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 54.6,
+        "transparentPct": 45.3,
+        "semiTransparentPct": 6.4,
+        "numComponents": 4,
+        "failures": [
+          "ALPHA_DIRTY",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "upper_arm_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              35
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              256
+            ],
+            "coveragePct": 47.5
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "DISCONNECTED_COMPONENT"
+      ]
+    },
+    "forearm_right": {
+      "success": false,
+      "alpha": {
+        "partID": "forearm_right",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 59.5,
+        "transparentPct": 40.4,
+        "semiTransparentPct": 7.1,
+        "numComponents": 4,
+        "failures": [
+          "ALPHA_DIRTY",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "forearm_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              35
+            ],
+            "coveragePct": 100.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              256
+            ],
+            "coveragePct": 45.5
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "DISCONNECTED_COMPONENT"
+      ]
+    },
+    "hand_right": {
+      "success": false,
+      "alpha": {
+        "partID": "hand_right",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 58.2,
+        "transparentPct": 41.7,
+        "semiTransparentPct": 7.0,
+        "numComponents": 4,
+        "failures": [
+          "ALPHA_DIRTY",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "hand_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              43
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "DISCONNECTED_COMPONENT"
+      ]
+    },
+    "thigh_left": {
+      "success": false,
+      "alpha": {
+        "partID": "thigh_left",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 69.8,
+        "transparentPct": 30.2,
+        "semiTransparentPct": 7.4,
+        "numComponents": 2,
+        "failures": [
+          "ALPHA_DIRTY",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "thigh_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              35
+            ],
+            "coveragePct": 82.4
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              256
+            ],
+            "coveragePct": 31.7
+          }
+        ],
+        "failures": [
+          "SOCKET_UNCOVERED"
+        ],
+        "passed": false
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "DISCONNECTED_COMPONENT",
+        "SOCKET_UNCOVERED"
+      ]
+    },
+    "shin_left": {
+      "success": false,
+      "alpha": {
+        "partID": "shin_left",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 68.4,
+        "transparentPct": 31.6,
+        "semiTransparentPct": 7.4,
+        "numComponents": 2,
+        "failures": [
+          "ALPHA_DIRTY",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "shin_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              35
+            ],
+            "coveragePct": 92.0
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              256
+            ],
+            "coveragePct": 31.7
+          }
+        ],
+        "failures": [
+          "SOCKET_UNCOVERED"
+        ],
+        "passed": false
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "DISCONNECTED_COMPONENT",
+        "SOCKET_UNCOVERED"
+      ]
+    },
+    "foot_left": {
+      "success": false,
+      "alpha": {
+        "partID": "foot_left",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 64.9,
+        "transparentPct": 35.1,
+        "semiTransparentPct": 7.1,
+        "numComponents": 2,
+        "failures": [
+          "ALPHA_DIRTY",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "foot_left",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              153,
+              58
+            ],
+            "coveragePct": 100.0
+          }
+        ],
+        "failures": [],
+        "passed": true
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "DISCONNECTED_COMPONENT"
+      ]
+    },
+    "thigh_right": {
+      "success": false,
+      "alpha": {
+        "partID": "thigh_right",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 46.9,
+        "transparentPct": 53.0,
+        "semiTransparentPct": 7.5,
+        "numComponents": 5,
+        "failures": [
+          "ALPHA_DIRTY",
+          "ALPHA_HALO",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "thigh_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              35
+            ],
+            "coveragePct": 57.3
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              256
+            ],
+            "coveragePct": 0.0
+          }
+        ],
+        "failures": [
+          "SOCKET_UNCOVERED"
+        ],
+        "passed": false
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "ALPHA_HALO",
+        "DISCONNECTED_COMPONENT",
+        "SOCKET_UNCOVERED"
+      ]
+    },
+    "shin_right": {
+      "success": false,
+      "alpha": {
+        "partID": "shin_right",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 45.9,
+        "transparentPct": 54.0,
+        "semiTransparentPct": 7.2,
+        "numComponents": 4,
+        "failures": [
+          "ALPHA_DIRTY",
+          "ALPHA_HALO",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "shin_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              256,
+              35
+            ],
+            "coveragePct": 59.7
+          },
+          {
+            "type": "distal",
+            "position": [
+              256,
+              256
+            ],
+            "coveragePct": 0.0
+          }
+        ],
+        "failures": [
+          "SOCKET_UNCOVERED"
+        ],
+        "passed": false
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "ALPHA_HALO",
+        "DISCONNECTED_COMPONENT",
+        "SOCKET_UNCOVERED"
+      ]
+    },
+    "foot_right": {
+      "success": false,
+      "alpha": {
+        "partID": "foot_right",
+        "size": [
+          512,
+          292
+        ],
+        "opaquePct": 51.9,
+        "transparentPct": 48.0,
+        "semiTransparentPct": 7.2,
+        "numComponents": 3,
+        "failures": [
+          "ALPHA_DIRTY",
+          "DISCONNECTED_COMPONENT"
+        ],
+        "passed": false
+      },
+      "sockets": {
+        "partID": "foot_right",
+        "sockets": [
+          {
+            "type": "pivot",
+            "position": [
+              358,
+              58
+            ],
+            "coveragePct": 36.1
+          }
+        ],
+        "failures": [
+          "SOCKET_UNCOVERED"
+        ],
+        "passed": false
+      },
+      "failures": [
+        "ALPHA_DIRTY",
+        "DISCONNECTED_COMPONENT",
+        "SOCKET_UNCOVERED"
+      ]
+    }
+  },
+  "joints": {
+    "shoulder_left": {
+      "part": "upper_arm_left",
+      "results": [
+        {
+          "angle": -70,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 90,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "shoulder_right": {
+      "part": "upper_arm_right",
+      "results": [
+        {
+          "angle": -90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 70,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "elbow_left": {
+      "part": "forearm_left",
+      "results": [
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 120,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 140,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "elbow_right": {
+      "part": "forearm_right",
+      "results": [
+        {
+          "angle": -140,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -120,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "hip_left": {
+      "part": "thigh_left",
+      "results": [
+        {
+          "angle": -45,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -20,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 55,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "hip_right": {
+      "part": "thigh_right",
+      "results": [
+        {
+          "angle": -55,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 20,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 45,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "knee_left": {
+      "part": "shin_left",
+      "results": [
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 60,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 130,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    },
+    "knee_right": {
+      "part": "shin_right",
+      "results": [
+        {
+          "angle": -130,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -90,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -60,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": -30,
+          "tested": true,
+          "passed": true
+        },
+        {
+          "angle": 0,
+          "tested": true,
+          "passed": true
+        }
+      ]
+    }
+  },
+  "summary": {
+    "totalParts": 17,
+    "validatedParts": 17,
+    "passedParts": 0,
+    "failures": [
+      {
+        "part": "head",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "hair_back",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "hair_back",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "hair_back",
+        "code": "SOCKET_UNCOVERED"
+      },
+      {
+        "part": "hair_front",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "torso",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "torso",
+        "code": "SOCKET_UNCOVERED"
+      },
+      {
+        "part": "torso",
+        "code": "SOCKET_UNCOVERED"
+      },
+      {
+        "part": "pelvis",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "upper_arm_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "forearm_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "forearm_left",
+        "code": "ALPHA_HALO"
+      },
+      {
+        "part": "forearm_left",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "forearm_left",
+        "code": "SOCKET_UNCOVERED"
+      },
+      {
+        "part": "hand_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "upper_arm_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "upper_arm_right",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "forearm_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "forearm_right",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "hand_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "hand_right",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "thigh_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "thigh_left",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "thigh_left",
+        "code": "SOCKET_UNCOVERED"
+      },
+      {
+        "part": "shin_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "shin_left",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "shin_left",
+        "code": "SOCKET_UNCOVERED"
+      },
+      {
+        "part": "foot_left",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "foot_left",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "thigh_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "thigh_right",
+        "code": "ALPHA_HALO"
+      },
+      {
+        "part": "thigh_right",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "thigh_right",
+        "code": "SOCKET_UNCOVERED"
+      },
+      {
+        "part": "shin_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "shin_right",
+        "code": "ALPHA_HALO"
+      },
+      {
+        "part": "shin_right",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "shin_right",
+        "code": "SOCKET_UNCOVERED"
+      },
+      {
+        "part": "foot_right",
+        "code": "ALPHA_DIRTY"
+      },
+      {
+        "part": "foot_right",
+        "code": "DISCONNECTED_COMPONENT"
+      },
+      {
+        "part": "foot_right",
+        "code": "SOCKET_UNCOVERED"
+      }
+    ]
+  }
+}

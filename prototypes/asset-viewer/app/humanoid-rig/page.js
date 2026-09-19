@@ -97,7 +97,8 @@ export default function HumanoidRigPage() {
   const [animation, setAnimation] = useState('neutral');
   const [animData, setAnimData] = useState({ idle: null, walk: null });
   const [showSkeleton, setShowSkeleton] = useState(false);
-  const [characterId, setCharacterId] = useState('test-001');
+  const [characterId, setCharacterId] = useState('explorer-001');
+  const availableCharacters = ['explorer-001', 'test-001'];
   const [view, setView] = useState('preview');
   const [templateImage, setTemplateImage] = useState(null);
   const [generatedImage, setGeneratedImage] = useState(null);
@@ -281,7 +282,7 @@ export default function HumanoidRigPage() {
         Reference-conditioned 2D puppet generation experiment
       </p>
 
-      <div style={{ display: 'flex', gap: 20, marginBottom: 20, flexWrap: 'wrap' }}>
+      <div style={{ display: 'flex', gap: 20, marginBottom: 20, flexWrap: 'wrap', alignItems: 'center' }}>
         {['preview', 'template', 'parts', 'motion'].map((v) => (
           <button
             key={v}
@@ -299,6 +300,24 @@ export default function HumanoidRigPage() {
             {v === 'motion' ? 'Motion Diagnostics' : v}
           </button>
         ))}
+        
+        <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: 8 }}>
+          <label style={{ fontSize: 14, color: '#666' }}>Character:</label>
+          <select
+            value={characterId}
+            onChange={(e) => setCharacterId(e.target.value)}
+            style={{
+              padding: '6px 12px',
+              borderRadius: 4,
+              border: '1px solid #ccc',
+              fontSize: 14,
+            }}
+          >
+            {availableCharacters.map((c) => (
+              <option key={c} value={c}>{c}</option>
+            ))}
+          </select>
+        </div>
       </div>
 
       {view === 'preview' && (
