@@ -8,7 +8,7 @@ out/
 !.env.example
 
 # Copied during build from AssetSources/HumanoidRigPOC
-public/humanoid-rig-assets/
+public/humanoid-rig/
 
 # Written by the Next.js install, regenerated every time.
 AGENTS.md

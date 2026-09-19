@@ -3,12 +3,32 @@ import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
-// In development, read from the repo's AssetSources directory
-// In production (Vercel), read from public/humanoid-rig-assets (copied during build)
-const DEV_ASSETS_ROOT = join(process.cwd(), '..', '..', 'AssetSources', 'HumanoidRigPOC');
-const PROD_ASSETS_ROOT = join(process.cwd(), 'public', 'humanoid-rig-assets');
-
-const ASSETS_ROOT = existsSync(DEV_ASSETS_ROOT) ? DEV_ASSETS_ROOT : PROD_ASSETS_ROOT;
+// Resolve the assets root at runtime, not module load time
+function getAssetsRoot() {
+  // Check for development path first (repo-relative)
+  const devPath = join(process.cwd(), '..', '..', 'AssetSources', 'HumanoidRigPOC');
+  if (existsSync(devPath)) {
+    return devPath;
+  }
+  
+  // Production: assets copied to public/humanoid-rig during build
+  // In Vercel serverless, check multiple possible locations
+  const possiblePaths = [
+    join(process.cwd(), 'public', 'humanoid-rig'),
+    join(process.cwd(), '.next', 'static', 'humanoid-rig'),
+    '/var/task/public/humanoid-rig',
+    '/var/task/.next/server/app/humanoid-rig',
+  ];
+  
+  for (const p of possiblePaths) {
+    if (existsSync(p)) {
+      return p;
+    }
+  }
+  
+  // Fallback
+  return join(process.cwd(), 'public', 'humanoid-rig');
+}
 
 const MIME_TYPES = {
   '.png': 'image/png',
@@ -23,7 +43,8 @@ export async function GET(request, { params }) {
   const filePath = pathSegments.join('/');
   
   const safePath = filePath.replace(/\.\./g, '');
-  const fullPath = join(ASSETS_ROOT, safePath);
+  const assetsRoot = getAssetsRoot();
+  const fullPath = join(assetsRoot, safePath);
   
   try {
     const data = await readFile(fullPath);

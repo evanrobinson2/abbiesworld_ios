@@ -14,7 +14,7 @@ const projectRoot = join(__dirname, '..');
 const repoRoot = join(projectRoot, '..', '..');
 
 const SOURCE = join(repoRoot, 'AssetSources', 'HumanoidRigPOC');
-const DEST = join(projectRoot, 'public', 'humanoid-rig-assets');
+const DEST = join(projectRoot, 'public', 'humanoid-rig');
 
 if (!existsSync(SOURCE)) {
   console.log(`Source not found: ${SOURCE}`);
