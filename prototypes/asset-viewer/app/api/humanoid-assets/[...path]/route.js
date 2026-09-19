@@ -3,33 +3,6 @@ import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 
-// Resolve the assets root at runtime, not module load time
-function getAssetsRoot() {
-  // Check for development path first (repo-relative)
-  const devPath = join(process.cwd(), '..', '..', 'AssetSources', 'HumanoidRigPOC');
-  if (existsSync(devPath)) {
-    return devPath;
-  }
-  
-  // Production: assets copied to public/humanoid-rig during build
-  // In Vercel serverless, check multiple possible locations
-  const possiblePaths = [
-    join(process.cwd(), 'public', 'humanoid-rig'),
-    join(process.cwd(), '.next', 'static', 'humanoid-rig'),
-    '/var/task/public/humanoid-rig',
-    '/var/task/.next/server/app/humanoid-rig',
-  ];
-  
-  for (const p of possiblePaths) {
-    if (existsSync(p)) {
-      return p;
-    }
-  }
-  
-  // Fallback
-  return join(process.cwd(), 'public', 'humanoid-rig');
-}
-
 const MIME_TYPES = {
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
@@ -37,6 +10,14 @@ const MIME_TYPES = {
   '.webp': 'image/webp',
   '.json': 'application/json',
 };
+
+function getAssetsRoot() {
+  const devPath = join(process.cwd(), '..', '..', 'AssetSources', 'HumanoidRigPOC');
+  if (existsSync(devPath)) {
+    return devPath;
+  }
+  return join(process.cwd(), 'public', 'humanoid-rig');
+}
 
 export async function GET(request, { params }) {
   const pathSegments = await params.path;
@@ -60,7 +41,7 @@ export async function GET(request, { params }) {
     });
   } catch (error) {
     if (error.code === 'ENOENT') {
-      return NextResponse.json({ error: 'File not found', path: safePath }, { status: 404 });
+      return NextResponse.json({ error: 'File not found', path: safePath, root: assetsRoot }, { status: 404 });
     }
     return NextResponse.json({ error: 'Failed to read file' }, { status: 500 });
   }
