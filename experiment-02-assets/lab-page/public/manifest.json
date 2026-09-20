@@ -1,0 +1,161 @@
+{
+  "abbie": {
+    "arm_hand_close_1.png": {
+      "width": 135,
+      "height": 135,
+      "mode": "RGBA"
+    },
+    "arm_hand_close_2.png": {
+      "width": 135,
+      "height": 135,
+      "mode": "RGBA"
+    },
+    "arm_hand_open_1.png": {
+      "width": 135,
+      "height": 135,
+      "mode": "RGBA"
+    },
+    "arm_lower.png": {
+      "width": 150,
+      "height": 190,
+      "mode": "RGBA"
+    },
+    "arm_upper.png": {
+      "width": 80,
+      "height": 140,
+      "mode": "RGBA"
+    },
+    "body_lower_back.png": {
+      "width": 331,
+      "height": 150,
+      "mode": "RGBA"
+    },
+    "body_lower_front.png": {
+      "width": 331,
+      "height": 150,
+      "mode": "RGBA"
+    },
+    "body_middle.png": {
+      "width": 209,
+      "height": 209,
+      "mode": "RGBA"
+    },
+    "body_upper.png": {
+      "width": 230,
+      "height": 230,
+      "mode": "RGBA"
+    },
+    "head_1.png": {
+      "width": 250,
+      "height": 250,
+      "mode": "RGBA"
+    },
+    "head_2.png": {
+      "width": 250,
+      "height": 250,
+      "mode": "RGBA"
+    },
+    "head_3.png": {
+      "width": 250,
+      "height": 250,
+      "mode": "RGBA"
+    },
+    "head_hair_back.png": {
+      "width": 350,
+      "height": 550,
+      "mode": "RGBA"
+    },
+    "head_hair_front_1.png": {
+      "width": 130,
+      "height": 250,
+      "mode": "RGBA"
+    },
+    "head_hair_front_2.png": {
+      "width": 240,
+      "height": 190,
+      "mode": "RGBA"
+    },
+    "leg_foot.png": {
+      "width": 120,
+      "height": 80,
+      "mode": "RGBA"
+    },
+    "leg_lower.png": {
+      "width": 140,
+      "height": 280,
+      "mode": "RGBA"
+    },
+    "leg_upper.png": {
+      "width": 90,
+      "height": 170,
+      "mode": "RGBA"
+    },
+    "wand_1.png": {
+      "width": 200,
+      "height": 450,
+      "mode": "RGBA"
+    },
+    "wand_2.png": {
+      "width": 200,
+      "height": 450,
+      "mode": "RGBA"
+    },
+    "wand_3.png": {
+      "width": 200,
+      "height": 450,
+      "mode": "RGBA"
+    },
+    "wand_4.png": {
+      "width": 200,
+      "height": 450,
+      "mode": "RGBA"
+    }
+  },
+  "effect": {
+    "bubble.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    },
+    "heart.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    },
+    "slash_01.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    },
+    "slash_02.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    },
+    "slash_03.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    },
+    "slash_04.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    },
+    "slash_05.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    },
+    "slash_06.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    },
+    "star.png": {
+      "width": 600,
+      "height": 600,
+      "mode": "RGBA"
+    }
+  }
+}

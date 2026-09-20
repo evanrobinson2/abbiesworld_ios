@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abbie Assets Animation Lab</title>
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --accent: #e94560;
+            --accent-light: #ff6b6b;
+            --text: #eee;
+            --text-muted: #8892b0;
+            --border: #0f3460;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .asset-card {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+        
+        .asset-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(233, 69, 96, 0.2);
+            border-color: var(--accent);
+        }
+        
+        .asset-card.selected {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        
+        .asset-preview {
+            width: 100%;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.75rem;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 16px 16px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .asset-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .asset-name {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            word-break: break-word;
+        }
+        
+        .asset-dims {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 0.25rem;
+        }
+        
+        /* Character Assembly */
+        .assembly-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .assembly-canvas {
+            flex: 1;
+            min-width: 400px;
+            height: 600px;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 20px 20px;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .assembly-canvas img {
+            position: absolute;
+            transform-origin: center center;
+            cursor: move;
+            transition: filter 0.2s;
+        }
+        
+        .assembly-canvas img:hover {
+            filter: drop-shadow(0 0 8px var(--accent));
+        }
+        
+        .assembly-canvas img.dragging {
+            z-index: 1000 !important;
+        }
+        
+        .assembly-controls {
+            flex: 0 0 300px;
+        }
+        
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .control-group label {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .control-group input[type="range"] {
+            width: 100%;
+            accent-color: var(--accent);
+        }
+        
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: var(--accent-light);
+        }
+        
+        .btn-secondary {
+            background: var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: #1a4a80;
+        }
+        
+        /* Slash Animation */
+        .slash-demo {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .slash-canvas {
+            width: 300px;
+            height: 300px;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 20px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .slash-canvas img {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+        }
+        
+        .slash-frames {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .slash-frame {
+            width: 80px;
+            height: 80px;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        
+        .slash-frame.active {
+            border-color: var(--accent);
+        }
+        
+        .slash-frame img {
+            width: 90%;
+            height: 90%;
+            object-fit: contain;
+        }
+        
+        .slash-controls {
+            margin-top: 1rem;
+        }
+        
+        /* Effects Gallery */
+        .effects-demo {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .effect-item {
+            text-align: center;
+        }
+        
+        .effect-canvas {
+            width: 200px;
+            height: 200px;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 20px 20px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .effect-canvas img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* Layer Controls */
+        .layer-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .layer-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: var(--bg-dark);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+        }
+        
+        .layer-item:hover {
+            background: #252545;
+        }
+        
+        .layer-item.hidden {
+            opacity: 0.4;
+        }
+        
+        .layer-thumb {
+            width: 40px;
+            height: 40px;
+            background: repeating-conic-gradient(#3a3a5a 0% 25%, #2a2a4a 0% 50%) 50% / 8px 8px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .layer-thumb img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+        
+        .layer-name {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+        
+        .layer-visibility {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-muted);
+        }
+        
+        .layer-visibility:hover {
+            color: var(--text);
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .tab {
+            padding: 0.5rem 1rem;
+            background: var(--bg-dark);
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s, color 0.2s;
+        }
+        
+        .tab:hover {
+            background: var(--border);
+        }
+        
+        .tab.active {
+            background: var(--accent);
+            color: white;
+        }
+        
+        /* Info Panel */
+        .info-panel {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+        
+        .info-title {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-detail {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🧙‍♀️ Abbie Assets Animation Lab</h1>
+        <p>Interactive explorer for Abbie's 2D skeletal animation assets</p>
+    </header>
+    
+    <!-- Character Parts Gallery -->
+    <section class="section">
+        <h2>Character Parts</h2>
+        <div class="category-tabs">
+            <span class="tab active" data-category="all">All Parts</span>
+            <span class="tab" data-category="head">Head</span>
+            <span class="tab" data-category="body">Body</span>
+            <span class="tab" data-category="arm">Arms</span>
+            <span class="tab" data-category="leg">Legs</span>
+            <span class="tab" data-category="wand">Wand</span>
+        </div>
+        <div class="asset-grid" id="partsGrid"></div>
+    </section>
+    
+    <!-- Character Assembly -->
+    <section class="section">
+        <h2>Character Assembly</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Drag parts to position them. Use controls to adjust scale and rotation.
+        </p>
+        <div class="assembly-container">
+            <div class="assembly-canvas" id="assemblyCanvas"></div>
+            <div class="assembly-controls">
+                <div class="control-group">
+                    <label>Global Scale: <span id="scaleValue">1.0</span>x</label>
+                    <input type="range" id="scaleSlider" min="0.5" max="2" step="0.1" value="1">
+                </div>
+                <div class="control-group">
+                    <label>Selected Part Rotation: <span id="rotationValue">0</span>°</label>
+                    <input type="range" id="rotationSlider" min="-180" max="180" step="5" value="0">
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <button class="btn" onclick="resetAssembly()">Reset Positions</button>
+                    <button class="btn btn-secondary" onclick="toggleAllParts()">Toggle All</button>
+                </div>
+                <h3 style="margin-bottom: 1rem; font-size: 1rem;">Layer Order</h3>
+                <div class="layer-list" id="layerList"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Slash Animation -->
+    <section class="section">
+        <h2>Slash Effect Animation</h2>
+        <div class="slash-demo">
+            <div>
+                <div class="slash-canvas" id="slashCanvas">
+                    <img id="slashImage" src="effect/slash_01.png" alt="Slash">
+                </div>
+                <div class="slash-controls">
+                    <button class="btn" id="playSlash">▶ Play</button>
+                    <button class="btn btn-secondary" id="stopSlash">⏹ Stop</button>
+                    <span style="margin-left: 1rem; color: var(--text-muted);">
+                        FPS: <input type="number" id="slashFps" value="12" min="1" max="60" style="width: 50px; background: var(--bg-dark); border: 1px solid var(--border); color: white; padding: 4px; border-radius: 4px;">
+                    </span>
+                </div>
+            </div>
+            <div>
+                <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Click a frame to view</p>
+                <div class="slash-frames" id="slashFrames"></div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Effects Gallery -->
+    <section class="section">
+        <h2>Magic Effects</h2>
+        <div class="effects-demo">
+            <div class="effect-item">
+                <div class="effect-canvas">
+                    <img src="effect/bubble.png" alt="Bubble">
+                </div>
+                <div class="asset-name">Bubble</div>
+            </div>
+            <div class="effect-item">
+                <div class="effect-canvas">
+                    <img src="effect/heart.png" alt="Heart">
+                </div>
+                <div class="asset-name">Heart</div>
+            </div>
+            <div class="effect-item">
+                <div class="effect-canvas">
+                    <img src="effect/star.png" alt="Star">
+                </div>
+                <div class="asset-name">Star</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Asset Info -->
+    <section class="section">
+        <h2>Package Info</h2>
+        <div class="info-panel">
+            <div class="info-title">abbie_assets_animation_effect.unitypackage</div>
+            <div class="info-detail">
+                <p>This Unity package contains a complete 2D skeletal character rig for "Abbie" along with magical effect sprites.</p>
+                <br>
+                <p><strong>Character Parts:</strong> 24 body part sprites including head variants, body segments, arm components, leg pieces, and wand accessories.</p>
+                <br>
+                <p><strong>Effects:</strong> 9 effect sprites including bubble, heart, star, and 6-frame slash animation.</p>
+                <br>
+                <p><strong>Animations:</strong> Includes Unity animation clips for idle, move, attack, dodge, duck, hurt, jump (start/midair/land), and effect animations.</p>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Abbie Assets Animation Lab • Extracted from Unity Package</p>
+    </footer>
+    
+    <script>
+        // Asset manifest (will be loaded from JSON)
+        let manifest = null;
+        
+        // Character parts with default positions for assembly
+        const defaultPositions = {
+            'head_hair_back.png': { x: 200, y: 50, z: 0, scale: 0.5 },
+            'head_1.png': { x: 200, y: 80, z: 1, scale: 0.6 },
+            'head_hair_front_1.png': { x: 180, y: 60, z: 2, scale: 0.5 },
+            'head_hair_front_2.png': { x: 200, y: 140, z: 2, scale: 0.4 },
+            'body_upper.png': { x: 200, y: 200, z: 3, scale: 0.5 },
+            'body_middle.png': { x: 200, y: 270, z: 4, scale: 0.5 },
+            'body_lower_back.png': { x: 200, y: 320, z: 5, scale: 0.4 },
+            'body_lower_front.png': { x: 200, y: 320, z: 6, scale: 0.4 },
+            'arm_upper.png': { x: 140, y: 200, z: 7, scale: 0.5 },
+            'arm_lower.png': { x: 120, y: 280, z: 8, scale: 0.4 },
+            'arm_hand_open_1.png': { x: 100, y: 360, z: 9, scale: 0.4 },
+            'wand_1.png': { x: 80, y: 250, z: 10, scale: 0.3 },
+            'leg_upper.png': { x: 170, y: 380, z: 11, scale: 0.5 },
+            'leg_lower.png': { x: 160, y: 460, z: 12, scale: 0.4 },
+            'leg_foot.png': { x: 150, y: 540, z: 13, scale: 0.5 },
+        };
+        
+        const partPositions = {};
+        const partVisibility = {};
+        let selectedPart = null;
+        let isDragging = false;
+        let dragOffset = { x: 0, y: 0 };
+        
+        // Load manifest and initialize
+        async function init() {
+            const response = await fetch('manifest.json');
+            manifest = await response.json();
+            
+            renderPartsGrid();
+            initAssembly();
+            initSlashAnimation();
+            initCategoryTabs();
+        }
+        
+        function renderPartsGrid(category = 'all') {
+            const grid = document.getElementById('partsGrid');
+            grid.innerHTML = '';
+            
+            Object.entries(manifest.abbie).forEach(([name, info]) => {
+                const partCategory = getPartCategory(name);
+                if (category !== 'all' && partCategory !== category) return;
+                
+                const card = document.createElement('div');
+                card.className = 'asset-card';
+                card.innerHTML = `
+                    <div class="asset-preview">
+                        <img src="abbie/${name}" alt="${name}">
+                    </div>
+                    <div class="asset-name">${name.replace('.png', '')}</div>
+                    <div class="asset-dims">${info.width}×${info.height}</div>
+                `;
+                card.onclick = () => selectPartInAssembly(name);
+                grid.appendChild(card);
+            });
+        }
+        
+        function getPartCategory(name) {
+            if (name.includes('head') || name.includes('hair')) return 'head';
+            if (name.includes('body')) return 'body';
+            if (name.includes('arm') || name.includes('hand')) return 'arm';
+            if (name.includes('leg') || name.includes('foot')) return 'leg';
+            if (name.includes('wand')) return 'wand';
+            return 'other';
+        }
+        
+        function initCategoryTabs() {
+            document.querySelectorAll('.category-tabs .tab').forEach(tab => {
+                tab.onclick = () => {
+                    document.querySelectorAll('.category-tabs .tab').forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    renderPartsGrid(tab.dataset.category);
+                };
+            });
+        }
+        
+        function initAssembly() {
+            const canvas = document.getElementById('assemblyCanvas');
+            const layerList = document.getElementById('layerList');
+            
+            // Initialize positions and visibility
+            Object.keys(defaultPositions).forEach(name => {
+                partPositions[name] = { ...defaultPositions[name] };
+                partVisibility[name] = true;
+            });
+            
+            // Create images sorted by z-index
+            const sortedParts = Object.entries(partPositions).sort((a, b) => a[1].z - b[1].z);
+            
+            sortedParts.forEach(([name, pos]) => {
+                const img = document.createElement('img');
+                img.src = `abbie/${name}`;
+                img.dataset.part = name;
+                img.style.left = `${pos.x}px`;
+                img.style.top = `${pos.y}px`;
+                img.style.zIndex = pos.z;
+                img.style.transform = `scale(${pos.scale})`;
+                
+                img.onmousedown = (e) => startDrag(e, name);
+                canvas.appendChild(img);
+            });
+            
+            // Render layer list (reversed for UI - top layers first)
+            [...sortedParts].reverse().forEach(([name, pos]) => {
+                const item = document.createElement('div');
+                item.className = 'layer-item';
+                item.dataset.part = name;
+                item.innerHTML = `
+                    <div class="layer-thumb">
+                        <img src="abbie/${name}" alt="${name}">
+                    </div>
+                    <div class="layer-name">${name.replace('.png', '')}</div>
+                    <div class="layer-visibility" onclick="event.stopPropagation(); togglePartVisibility('${name}')">👁</div>
+                `;
+                item.onclick = () => selectPartInAssembly(name);
+                layerList.appendChild(item);
+            });
+            
+            // Mouse move and up handlers
+            document.addEventListener('mousemove', onDrag);
+            document.addEventListener('mouseup', endDrag);
+            
+            // Scale slider
+            document.getElementById('scaleSlider').oninput = (e) => {
+                const scale = parseFloat(e.target.value);
+                document.getElementById('scaleValue').textContent = scale.toFixed(1);
+                
+                document.querySelectorAll('#assemblyCanvas img').forEach(img => {
+                    const name = img.dataset.part;
+                    const baseScale = defaultPositions[name]?.scale || 1;
+                    img.style.transform = `scale(${baseScale * scale}) rotate(${partPositions[name]?.rotation || 0}deg)`;
+                });
+            };
+            
+            // Rotation slider
+            document.getElementById('rotationSlider').oninput = (e) => {
+                const rotation = parseInt(e.target.value);
+                document.getElementById('rotationValue').textContent = rotation;
+                
+                if (selectedPart) {
+                    partPositions[selectedPart].rotation = rotation;
+                    const img = document.querySelector(`#assemblyCanvas img[data-part="${selectedPart}"]`);
+                    const scale = parseFloat(document.getElementById('scaleSlider').value);
+                    const baseScale = defaultPositions[selectedPart]?.scale || 1;
+                    img.style.transform = `scale(${baseScale * scale}) rotate(${rotation}deg)`;
+                }
+            };
+        }
+        
+        function startDrag(e, name) {
+            e.preventDefault();
+            isDragging = true;
+            selectedPart = name;
+            
+            const img = e.target;
+            img.classList.add('dragging');
+            
+            const rect = img.getBoundingClientRect();
+            dragOffset.x = e.clientX - rect.left;
+            dragOffset.y = e.clientY - rect.top;
+            
+            // Update rotation slider
+            document.getElementById('rotationSlider').value = partPositions[name]?.rotation || 0;
+            document.getElementById('rotationValue').textContent = partPositions[name]?.rotation || 0;
+            
+            // Highlight in layer list
+            document.querySelectorAll('.layer-item').forEach(item => {
+                item.style.background = item.dataset.part === name ? 'var(--border)' : '';
+            });
+        }
+        
+        function onDrag(e) {
+            if (!isDragging || !selectedPart) return;
+            
+            const canvas = document.getElementById('assemblyCanvas');
+            const rect = canvas.getBoundingClientRect();
+            const img = document.querySelector(`#assemblyCanvas img[data-part="${selectedPart}"]`);
+            
+            const x = e.clientX - rect.left - dragOffset.x;
+            const y = e.clientY - rect.top - dragOffset.y;
+            
+            img.style.left = `${x}px`;
+            img.style.top = `${y}px`;
+            
+            partPositions[selectedPart].x = x;
+            partPositions[selectedPart].y = y;
+        }
+        
+        function endDrag() {
+            if (selectedPart) {
+                const img = document.querySelector(`#assemblyCanvas img[data-part="${selectedPart}"]`);
+                if (img) img.classList.remove('dragging');
+            }
+            isDragging = false;
+        }
+        
+        function selectPartInAssembly(name) {
+            selectedPart = name;
+            
+            // Update rotation slider
+            document.getElementById('rotationSlider').value = partPositions[name]?.rotation || 0;
+            document.getElementById('rotationValue').textContent = partPositions[name]?.rotation || 0;
+            
+            // Highlight in layer list
+            document.querySelectorAll('.layer-item').forEach(item => {
+                item.style.background = item.dataset.part === name ? 'var(--border)' : '';
+            });
+            
+            // Highlight image
+            document.querySelectorAll('#assemblyCanvas img').forEach(img => {
+                img.style.filter = img.dataset.part === name ? 'drop-shadow(0 0 8px var(--accent))' : '';
+            });
+        }
+        
+        function togglePartVisibility(name) {
+            partVisibility[name] = !partVisibility[name];
+            
+            const img = document.querySelector(`#assemblyCanvas img[data-part="${name}"]`);
+            const layerItem = document.querySelector(`.layer-item[data-part="${name}"]`);
+            
+            if (img) img.style.display = partVisibility[name] ? 'block' : 'none';
+            if (layerItem) layerItem.classList.toggle('hidden', !partVisibility[name]);
+        }
+        
+        function toggleAllParts() {
+            const allVisible = Object.values(partVisibility).every(v => v);
+            
+            Object.keys(partVisibility).forEach(name => {
+                partVisibility[name] = !allVisible;
+                togglePartVisibility(name);
+                partVisibility[name] = !allVisible; // Reset since toggle flips it
+            });
+        }
+        
+        function resetAssembly() {
+            Object.keys(defaultPositions).forEach(name => {
+                partPositions[name] = { ...defaultPositions[name] };
+                partVisibility[name] = true;
+                
+                const img = document.querySelector(`#assemblyCanvas img[data-part="${name}"]`);
+                if (img) {
+                    img.style.left = `${defaultPositions[name].x}px`;
+                    img.style.top = `${defaultPositions[name].y}px`;
+                    img.style.transform = `scale(${defaultPositions[name].scale})`;
+                    img.style.display = 'block';
+                }
+                
+                const layerItem = document.querySelector(`.layer-item[data-part="${name}"]`);
+                if (layerItem) layerItem.classList.remove('hidden');
+            });
+            
+            document.getElementById('scaleSlider').value = 1;
+            document.getElementById('scaleValue').textContent = '1.0';
+            document.getElementById('rotationSlider').value = 0;
+            document.getElementById('rotationValue').textContent = '0';
+        }
+        
+        // Slash Animation
+        let slashInterval = null;
+        let currentSlashFrame = 0;
+        const slashFrameCount = 6;
+        
+        function initSlashAnimation() {
+            const framesContainer = document.getElementById('slashFrames');
+            
+            for (let i = 1; i <= slashFrameCount; i++) {
+                const frameNum = String(i).padStart(2, '0');
+                const frame = document.createElement('div');
+                frame.className = `slash-frame${i === 1 ? ' active' : ''}`;
+                frame.innerHTML = `<img src="effect/slash_${frameNum}.png" alt="Frame ${i}">`;
+                frame.onclick = () => setSlashFrame(i - 1);
+                framesContainer.appendChild(frame);
+            }
+            
+            document.getElementById('playSlash').onclick = playSlash;
+            document.getElementById('stopSlash').onclick = stopSlash;
+        }
+        
+        function setSlashFrame(index) {
+            currentSlashFrame = index;
+            const frameNum = String(index + 1).padStart(2, '0');
+            document.getElementById('slashImage').src = `effect/slash_${frameNum}.png`;
+            
+            document.querySelectorAll('.slash-frame').forEach((f, i) => {
+                f.classList.toggle('active', i === index);
+            });
+        }
+        
+        function playSlash() {
+            stopSlash();
+            const fps = parseInt(document.getElementById('slashFps').value) || 12;
+            const interval = 1000 / fps;
+            
+            slashInterval = setInterval(() => {
+                currentSlashFrame = (currentSlashFrame + 1) % slashFrameCount;
+                setSlashFrame(currentSlashFrame);
+            }, interval);
+        }
+        
+        function stopSlash() {
+            if (slashInterval) {
+                clearInterval(slashInterval);
+                slashInterval = null;
+            }
+        }
+        
+        // Initialize on load
+        init();
+    </script>
+</body>
+</html>
