@@ -15,11 +15,7 @@
             --border: #0f3460;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: 'Segoe UI', system-ui, sans-serif;
@@ -29,10 +25,7 @@
             padding: 2rem;
         }
         
-        header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
+        header { text-align: center; margin-bottom: 3rem; }
         
         h1 {
             font-size: 2.5rem;
@@ -43,10 +36,7 @@
             margin-bottom: 0.5rem;
         }
         
-        header p {
-            color: var(--text-muted);
-            font-size: 1.1rem;
-        }
+        header p { color: var(--text-muted); font-size: 1.1rem; }
         
         .section {
             background: var(--bg-card);
@@ -72,59 +62,7 @@
             border-radius: 2px;
         }
         
-        .asset-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1.5rem;
-        }
-        
-        .asset-card {
-            background: var(--bg-dark);
-            border-radius: 12px;
-            padding: 1rem;
-            text-align: center;
-            transition: transform 0.2s, box-shadow 0.2s;
-            cursor: pointer;
-            border: 1px solid transparent;
-        }
-        
-        .asset-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 24px rgba(233, 69, 96, 0.2);
-            border-color: var(--accent);
-        }
-        
-        .asset-preview {
-            width: 100%;
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 0.75rem;
-            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 16px 16px;
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .asset-preview img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-        
-        .asset-name {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            word-break: break-word;
-        }
-        
-        .asset-dims {
-            font-size: 0.75rem;
-            color: var(--accent);
-            margin-top: 0.25rem;
-        }
-        
-        /* Skeletal Animation Section */
+        /* Animation Stage */
         .animation-container {
             display: flex;
             gap: 2rem;
@@ -134,27 +72,27 @@
         .animation-stage {
             flex: 1;
             min-width: 400px;
-            height: 500px;
+            height: 600px;
             background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 20px 20px;
             border-radius: 12px;
             position: relative;
             overflow: hidden;
         }
         
-        .skeleton-container {
+        .skeleton-root {
             position: absolute;
             left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
+            bottom: 50px;
         }
         
         .bone {
             position: absolute;
-            transform-origin: top center;
+            transform-origin: center top;
         }
         
         .bone img {
             display: block;
+            transform-origin: center top;
         }
         
         .animation-controls {
@@ -171,10 +109,6 @@
             font-size: 1rem;
             margin-bottom: 1rem;
             cursor: pointer;
-        }
-        
-        .anim-select option {
-            background: var(--bg-dark);
         }
         
         .playback-controls {
@@ -195,37 +129,14 @@
             transition: background 0.2s;
         }
         
-        .btn:hover {
-            background: var(--accent-light);
-        }
+        .btn:hover { background: var(--accent-light); }
+        .btn-secondary { background: var(--border); }
+        .btn-secondary:hover { background: #1a4a80; }
+        .btn.active { background: var(--accent-light); box-shadow: 0 0 0 2px var(--accent); }
         
-        .btn-secondary {
-            background: var(--border);
-        }
-        
-        .btn-secondary:hover {
-            background: #1a4a80;
-        }
-        
-        .btn.active {
-            background: var(--accent-light);
-            box-shadow: 0 0 0 2px var(--accent);
-        }
-        
-        .speed-control {
-            margin-bottom: 1rem;
-        }
-        
-        .speed-control label {
-            display: block;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-        
-        .speed-control input {
-            width: 100%;
-            accent-color: var(--accent);
-        }
+        .speed-control { margin-bottom: 1rem; }
+        .speed-control label { display: block; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .speed-control input { width: 100%; accent-color: var(--accent); }
         
         .timeline {
             background: var(--bg-dark);
@@ -247,7 +158,6 @@
             background: var(--accent);
             border-radius: 4px;
             width: 0%;
-            transition: width 0.05s linear;
         }
         
         .timeline-info {
@@ -258,66 +168,47 @@
             color: var(--text-muted);
         }
         
-        /* Slash Animation */
-        .slash-demo {
-            display: flex;
-            gap: 2rem;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-        
-        .slash-canvas {
-            width: 300px;
-            height: 300px;
-            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 20px 20px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-        
-        .slash-canvas img {
-            position: absolute;
-            width: 80%;
-            height: 80%;
-            object-fit: contain;
-        }
-        
-        .slash-frames {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .slash-frame {
-            width: 80px;
-            height: 80px;
+        .anim-info {
             background: var(--bg-dark);
             border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .anim-info h4 { margin-bottom: 0.5rem; color: var(--accent); }
+        .anim-info p { color: var(--text-muted); margin-bottom: 0.25rem; }
+        
+        /* Parts Grid */
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .asset-card {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 0.75rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .asset-card:hover { transform: translateY(-4px); }
+        
+        .asset-preview {
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: border-color 0.2s;
+            margin-bottom: 0.5rem;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 12px 12px;
+            border-radius: 8px;
         }
         
-        .slash-frame.active {
-            border-color: var(--accent);
-        }
+        .asset-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .asset-name { font-size: 0.75rem; color: var(--text-muted); }
         
-        .slash-frame img {
-            width: 90%;
-            height: 90%;
-            object-fit: contain;
-        }
-        
-        .slash-controls {
-            margin-top: 1rem;
-        }
-        
-        /* Effects Gallery */
+        /* Effects */
         .effects-demo {
             display: flex;
             gap: 2rem;
@@ -325,14 +216,12 @@
             justify-content: center;
         }
         
-        .effect-item {
-            text-align: center;
-        }
+        .effect-item { text-align: center; }
         
         .effect-canvas {
-            width: 200px;
-            height: 200px;
-            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 20px 20px;
+            width: 150px;
+            height: 150px;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 16px 16px;
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -341,76 +230,13 @@
         }
         
         .effect-canvas img {
-            width: 80%;
-            height: 80%;
+            width: 70%;
+            height: 70%;
             object-fit: contain;
             animation: pulse 2s ease-in-out infinite;
         }
         
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        
-        .category-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            flex-wrap: wrap;
-        }
-        
-        .tab {
-            padding: 0.5rem 1rem;
-            background: var(--bg-dark);
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: background 0.2s, color 0.2s;
-        }
-        
-        .tab:hover {
-            background: var(--border);
-        }
-        
-        .tab.active {
-            background: var(--accent);
-            color: white;
-        }
-        
-        /* Info Panel */
-        .info-panel {
-            background: var(--bg-dark);
-            border-radius: 12px;
-            padding: 1.5rem;
-            margin-top: 1rem;
-        }
-        
-        .info-title {
-            font-size: 1.1rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .info-detail {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-        
-        .anim-info {
-            background: var(--bg-dark);
-            border-radius: 8px;
-            padding: 1rem;
-            font-size: 0.85rem;
-        }
-        
-        .anim-info h4 {
-            margin-bottom: 0.5rem;
-            color: var(--accent);
-        }
-        
-        .anim-info p {
-            color: var(--text-muted);
-            margin-bottom: 0.25rem;
-        }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         
         footer {
             text-align: center;
@@ -430,11 +256,11 @@
     <section class="section">
         <h2>Skeletal Animation Player</h2>
         <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-            Play the original Unity animations extracted from the package. Select an animation and press Play.
+            Play the original Unity animations. The skeleton is built from the actual Unity prefab hierarchy.
         </p>
         <div class="animation-container">
             <div class="animation-stage" id="animationStage">
-                <div class="skeleton-container" id="skeletonContainer"></div>
+                <div class="skeleton-root" id="skeletonRoot"></div>
             </div>
             <div class="animation-controls">
                 <select class="anim-select" id="animSelect">
@@ -471,14 +297,13 @@
                 </div>
                 
                 <div class="playback-controls">
-                    <button class="btn btn-secondary" id="loopBtn">🔁 Loop: ON</button>
+                    <button class="btn btn-secondary active" id="loopBtn">🔁 Loop: ON</button>
                 </div>
                 
-                <div class="anim-info" id="animInfo">
+                <div class="anim-info">
                     <h4>Animation Info</h4>
                     <p>Duration: <span id="infoDuration">--</span></p>
                     <p>Animated Parts: <span id="infoParts">--</span></p>
-                    <p>Total Keyframes: <span id="infoKeyframes">--</span></p>
                 </div>
             </div>
         </div>
@@ -486,39 +311,8 @@
     
     <!-- Character Parts Gallery -->
     <section class="section">
-        <h2>Character Parts</h2>
-        <div class="category-tabs">
-            <span class="tab active" data-category="all">All Parts</span>
-            <span class="tab" data-category="head">Head</span>
-            <span class="tab" data-category="body">Body</span>
-            <span class="tab" data-category="arm">Arms</span>
-            <span class="tab" data-category="leg">Legs</span>
-            <span class="tab" data-category="wand">Wand</span>
-        </div>
+        <h2>Character Parts (24 sprites)</h2>
         <div class="asset-grid" id="partsGrid"></div>
-    </section>
-    
-    <!-- Slash Animation -->
-    <section class="section">
-        <h2>Slash Effect Animation</h2>
-        <div class="slash-demo">
-            <div>
-                <div class="slash-canvas" id="slashCanvas">
-                    <img id="slashImage" src="effect/slash_01.png" alt="Slash">
-                </div>
-                <div class="slash-controls">
-                    <button class="btn" id="playSlash">▶ Play</button>
-                    <button class="btn btn-secondary" id="stopSlash">⏹ Stop</button>
-                    <span style="margin-left: 1rem; color: var(--text-muted);">
-                        FPS: <input type="number" id="slashFps" value="12" min="1" max="60" style="width: 50px; background: var(--bg-dark); border: 1px solid var(--border); color: white; padding: 4px; border-radius: 4px;">
-                    </span>
-                </div>
-            </div>
-            <div>
-                <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Click a frame to view</p>
-                <div class="slash-frames" id="slashFrames"></div>
-            </div>
-        </div>
     </section>
     
     <!-- Effects Gallery -->
@@ -526,53 +320,38 @@
         <h2>Magic Effects</h2>
         <div class="effects-demo">
             <div class="effect-item">
-                <div class="effect-canvas">
-                    <img src="effect/bubble.png" alt="Bubble">
-                </div>
+                <div class="effect-canvas"><img src="effect/bubble.png" alt="Bubble"></div>
                 <div class="asset-name">Bubble</div>
             </div>
             <div class="effect-item">
-                <div class="effect-canvas">
-                    <img src="effect/heart.png" alt="Heart">
-                </div>
+                <div class="effect-canvas"><img src="effect/heart.png" alt="Heart"></div>
                 <div class="asset-name">Heart</div>
             </div>
             <div class="effect-item">
-                <div class="effect-canvas">
-                    <img src="effect/star.png" alt="Star">
-                </div>
+                <div class="effect-canvas"><img src="effect/star.png" alt="Star"></div>
                 <div class="asset-name">Star</div>
             </div>
-        </div>
-    </section>
-    
-    <!-- Asset Info -->
-    <section class="section">
-        <h2>Package Info</h2>
-        <div class="info-panel">
-            <div class="info-title">abbie_assets_animation_effect.unitypackage</div>
-            <div class="info-detail">
-                <p>This Unity package contains a complete 2D skeletal character rig for "Abbie" along with magical effect sprites.</p>
-                <br>
-                <p><strong>Character Parts:</strong> 24 body part sprites including head variants, body segments, arm components, leg pieces, and wand accessories.</p>
-                <br>
-                <p><strong>Effects:</strong> 9 effect sprites including bubble, heart, star, and 6-frame slash animation.</p>
-                <br>
-                <p><strong>Animations:</strong> 9 animation clips extracted from Unity - idle, move, attack, dodge, duck, hurt, jump_start, jump_midair, jump_land.</p>
+            <div class="effect-item">
+                <div class="effect-canvas">
+                    <img id="slashImg" src="effect/slash_01.png" alt="Slash">
+                </div>
+                <div class="asset-name">Slash (click to play)</div>
             </div>
         </div>
     </section>
     
     <footer>
-        <p>Abbie Assets Animation Lab • Extracted from Unity Package • Animations Playable</p>
+        <p>Abbie Assets Animation Lab • Extracted from Unity Package</p>
     </footer>
     
     <script>
-        // Asset manifest and animations data
-        let manifest = null;
-        let animations = null;
+        // Configuration
+        const UNITY_SCALE = 100; // Unity units to pixels
         
-        // Animation state
+        // Global state
+        let skeleton = null;
+        let animations = null;
+        let manifest = null;
         let currentAnimation = null;
         let isPlaying = false;
         let isLooping = true;
@@ -581,268 +360,158 @@
         let animationFrame = null;
         let lastTimestamp = 0;
         
-        // Skeleton configuration - maps parts to their pivot points and hierarchy
-        const skeletonConfig = {
-            scale: 0.4,
-            parts: {
-                // Root - lower body
-                body_lower_front: { 
-                    x: 0, y: 0, pivotX: 0.5, pivotY: 0.3, 
-                    img: 'body_lower_front.png', z: 5 
-                },
-                body_lower_back: { 
-                    x: 0, y: 0, pivotX: 0.5, pivotY: 0.3, 
-                    img: 'body_lower_back.png', z: 1,
-                    parent: 'body_lower_front'
-                },
-                
-                // Middle body
-                body_middle: { 
-                    x: 0, y: -60, pivotX: 0.5, pivotY: 0.8, 
-                    img: 'body_middle.png', z: 6,
-                    parent: 'body_lower_front'
-                },
-                
-                // Upper body
-                body_upper: { 
-                    x: 0, y: -70, pivotX: 0.5, pivotY: 0.8, 
-                    img: 'body_upper.png', z: 7,
-                    parent: 'body_middle'
-                },
-                
-                // Head
-                head: { 
-                    x: 0, y: -90, pivotX: 0.5, pivotY: 0.9, 
-                    img: 'head_1.png', z: 10,
-                    parent: 'body_upper'
-                },
-                
-                // Hair back (behind head)
-                head_hair_back: { 
-                    x: 0, y: 30, pivotX: 0.5, pivotY: 0.2, 
-                    img: 'head_hair_back.png', z: 2,
-                    parent: 'head'
-                },
-                
-                // Hair front
-                head_hair_front_1: { 
-                    x: -30, y: -20, pivotX: 0.5, pivotY: 0.3, 
-                    img: 'head_hair_front_1.png', z: 11,
-                    parent: 'head'
-                },
-                head_hair_front_2: { 
-                    x: 20, y: 30, pivotX: 0.3, pivotY: 0.2, 
-                    img: 'head_hair_front_2.png', z: 12,
-                    parent: 'head'
-                },
-                
-                // Left arm (character's left, viewer's right)
-                arm_upper: { 
-                    x: 50, y: -50, pivotX: 0.5, pivotY: 0.15, 
-                    img: 'arm_upper.png', z: 8,
-                    parent: 'body_upper'
-                },
-                arm_lower: { 
-                    x: 0, y: 80, pivotX: 0.5, pivotY: 0.1, 
-                    img: 'arm_lower.png', z: 9,
-                    parent: 'arm_upper'
-                },
-                arm_hand_open_1: { 
-                    x: 0, y: 110, pivotX: 0.5, pivotY: 0.2, 
-                    img: 'arm_hand_open_1.png', z: 10,
-                    parent: 'arm_lower'
-                },
-                
-                // Right arm (character's right, viewer's left) - behind body
-                arm_upper_right: { 
-                    x: -50, y: -50, pivotX: 0.5, pivotY: 0.15, 
-                    img: 'arm_upper.png', z: 3,
-                    parent: 'body_upper',
-                    flipX: true
-                },
-                arm_lower_right: { 
-                    x: 0, y: 80, pivotX: 0.5, pivotY: 0.1, 
-                    img: 'arm_lower.png', z: 4,
-                    parent: 'arm_upper_right',
-                    flipX: true
-                },
-                
-                // Wand (attached to left hand)
-                wand: { 
-                    x: 10, y: 50, pivotX: 0.5, pivotY: 0.9, 
-                    img: 'wand_1.png', z: 11,
-                    parent: 'arm_hand_open_1'
-                },
-                
-                // Left leg
-                leg_upper: { 
-                    x: 25, y: 50, pivotX: 0.5, pivotY: 0.15, 
-                    img: 'leg_upper.png', z: 4,
-                    parent: 'body_lower_front'
-                },
-                leg_lower: { 
-                    x: 0, y: 100, pivotX: 0.5, pivotY: 0.1, 
-                    img: 'leg_lower.png', z: 3,
-                    parent: 'leg_upper'
-                },
-                leg_foot: { 
-                    x: 0, y: 170, pivotX: 0.3, pivotY: 0.3, 
-                    img: 'leg_foot.png', z: 2,
-                    parent: 'leg_lower'
-                },
-                
-                // Right leg (behind)
-                leg_upper_right: { 
-                    x: -25, y: 50, pivotX: 0.5, pivotY: 0.15, 
-                    img: 'leg_upper.png', z: 1,
-                    parent: 'body_lower_front',
-                    flipX: true
-                },
-                leg_lower_right: { 
-                    x: 0, y: 100, pivotX: 0.5, pivotY: 0.1, 
-                    img: 'leg_lower.png', z: 0,
-                    parent: 'leg_upper_right',
-                    flipX: true
-                },
-                leg_foot_right: { 
-                    x: 0, y: 170, pivotX: 0.7, pivotY: 0.3, 
-                    img: 'leg_foot.png', z: -1,
-                    parent: 'leg_lower_right',
-                    flipX: true
-                }
-            }
+        // Bone elements and rotations
+        const boneElements = {};
+        const boneRotations = {};
+        
+        // Animation path to bone name mapping
+        const animPathToBone = {
+            "body_lower/leg_upper_left": "leg_upper_left",
+            "body_lower/leg_upper_left/leg_lower": "leg_lower_left",
+            "body_lower/leg_upper_left/leg_lower/leg_foot": "leg_foot_left",
+            "body_lower/leg_upper_right": "leg_upper_right",
+            "body_lower/leg_upper_right/leg_lower": "leg_lower_right",
+            "body_lower/leg_upper_right/leg_lower/leg_foot": "leg_foot_right",
+            "body_lower/body_middle": "body_middle",
+            "body_lower/body_middle/body_upper": "body_upper",
+            "body_lower/body_middle/body_upper/arm_upper_left": "arm_upper_left",
+            "body_lower/body_middle/body_upper/arm_upper_left/arm_lower": "arm_lower_left",
+            "body_lower/body_middle/body_upper/arm_upper_right": "arm_upper_right",
+            "body_lower/body_middle/body_upper/arm_upper_right/arm_lower": "arm_lower_right",
+            "body_lower/body_middle/body_upper/head": "head",
+            "body_lower/body_middle/body_upper/head/hair_1": "hair_1",
+            "body_lower/body_middle/body_upper/head/hair_2": "hair_2",
+            "body_lower/body_middle/body_upper/head/hair_3": "hair_3",
+            "body_lower/body_middle/body_upper/head/hair_4": "hair_4",
+            "body_lower/skirt": "skirt",
+            "body_lower/skirt/back": "skirt_back",
+            "body_lower": "body_lower"
         };
         
-        // Part rotation state
-        const partRotations = {};
-        
         async function init() {
-            // Load manifest
-            const manifestResponse = await fetch('manifest.json');
-            manifest = await manifestResponse.json();
+            // Load all data
+            [skeleton, animations, manifest] = await Promise.all([
+                fetch('skeleton.json').then(r => r.json()),
+                fetch('animations.json').then(r => r.json()),
+                fetch('manifest.json').then(r => r.json())
+            ]);
             
-            // Load animations
-            const animResponse = await fetch('animations.json');
-            animations = await animResponse.json();
-            
+            buildSkeleton();
+            initControls();
             renderPartsGrid();
-            initSkeleton();
-            initAnimationControls();
-            initSlashAnimation();
-            initCategoryTabs();
-            
-            // Load default animation
+            initSlash();
             loadAnimation('idle');
         }
         
-        function initSkeleton() {
-            const container = document.getElementById('skeletonContainer');
-            container.innerHTML = '';
+        function buildSkeleton() {
+            const root = document.getElementById('skeletonRoot');
+            root.innerHTML = '';
             
-            // Sort parts by z-index
-            const sortedParts = Object.entries(skeletonConfig.parts)
-                .sort((a, b) => a[1].z - b[1].z);
+            // Sort bones by sorting order
+            const sortedBones = Object.entries(skeleton)
+                .filter(([name, bone]) => bone.sprite)
+                .sort((a, b) => a[1].sortingOrder - b[1].sortingOrder);
             
             // Create bone elements
-            sortedParts.forEach(([name, config]) => {
-                const bone = document.createElement('div');
-                bone.className = 'bone';
-                bone.id = `bone-${name}`;
-                bone.dataset.part = name;
+            for (const [name, bone] of sortedBones) {
+                const el = document.createElement('div');
+                el.className = 'bone';
+                el.id = `bone-${name}`;
                 
                 const img = document.createElement('img');
-                img.src = `abbie/${config.img}`;
-                img.style.transform = config.flipX ? 'scaleX(-1)' : '';
+                img.src = `abbie/${bone.sprite}`;
+                img.onload = () => updateBoneTransform(name);
                 
-                bone.appendChild(img);
-                container.appendChild(bone);
+                el.appendChild(img);
+                root.appendChild(el);
                 
-                // Initialize rotation
-                partRotations[name] = 0;
-            });
-            
-            // Initial positioning
-            updateSkeletonPose();
-        }
-        
-        function updateSkeletonPose() {
-            const scale = skeletonConfig.scale;
-            
-            // Calculate world transforms for each bone
-            const worldTransforms = {};
-            
-            function calculateTransform(name) {
-                if (worldTransforms[name]) return worldTransforms[name];
-                
-                const config = skeletonConfig.parts[name];
-                const rotation = partRotations[name] || 0;
-                
-                let worldX = config.x * scale;
-                let worldY = config.y * scale;
-                let worldRotation = rotation;
-                
-                if (config.parent) {
-                    const parentTransform = calculateTransform(config.parent);
-                    const parentConfig = skeletonConfig.parts[config.parent];
-                    
-                    // Apply parent rotation to offset
-                    const rad = parentTransform.rotation * Math.PI / 180;
-                    const cos = Math.cos(rad);
-                    const sin = Math.sin(rad);
-                    
-                    const offsetX = config.x * scale;
-                    const offsetY = config.y * scale;
-                    
-                    worldX = parentTransform.x + (offsetX * cos - offsetY * sin);
-                    worldY = parentTransform.y + (offsetX * sin + offsetY * cos);
-                    worldRotation = parentTransform.rotation + rotation;
-                }
-                
-                worldTransforms[name] = { x: worldX, y: worldY, rotation: worldRotation };
-                return worldTransforms[name];
+                boneElements[name] = el;
+                boneRotations[name] = bone.rotation || 0;
             }
             
-            // Apply transforms to bones
-            Object.keys(skeletonConfig.parts).forEach(name => {
-                const bone = document.getElementById(`bone-${name}`);
-                const config = skeletonConfig.parts[name];
-                const transform = calculateTransform(name);
-                
-                const img = bone.querySelector('img');
-                const pivotX = config.pivotX * img.naturalWidth * scale;
-                const pivotY = config.pivotY * img.naturalHeight * scale;
-                
-                bone.style.left = `${transform.x - pivotX}px`;
-                bone.style.top = `${transform.y - pivotY}px`;
-                bone.style.transform = `rotate(${transform.rotation}deg)`;
-                bone.style.transformOrigin = `${pivotX}px ${pivotY}px`;
-                bone.style.zIndex = config.z;
-                
-                img.style.width = `${img.naturalWidth * scale}px`;
-                img.style.height = `${img.naturalHeight * scale}px`;
-            });
+            // Initial pose
+            setTimeout(() => updateAllBones(), 100);
+        }
+        
+        function getBoneWorldTransform(name, baseRotations = {}) {
+            const bone = skeleton[name];
+            if (!bone) return { x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1 };
+            
+            // Get local transform
+            const localX = bone.x * UNITY_SCALE;
+            const localY = -bone.y * UNITY_SCALE; // Flip Y for screen coords
+            const localRot = baseRotations[name] !== undefined ? baseRotations[name] : (bone.rotation || 0);
+            const scaleX = bone.scaleX || 1;
+            const scaleY = bone.scaleY || 1;
+            
+            // If no parent, return local
+            if (!bone.parent || !skeleton[bone.parent]) {
+                return { x: localX, y: localY, rotation: localRot, scaleX, scaleY };
+            }
+            
+            // Get parent transform
+            const parent = getBoneWorldTransform(bone.parent, baseRotations);
+            
+            // Apply parent rotation to local offset
+            const rad = parent.rotation * Math.PI / 180;
+            const cos = Math.cos(rad);
+            const sin = Math.sin(rad);
+            
+            const rotatedX = localX * cos - localY * sin;
+            const rotatedY = localX * sin + localY * cos;
+            
+            return {
+                x: parent.x + rotatedX * parent.scaleX,
+                y: parent.y + rotatedY * parent.scaleY,
+                rotation: parent.rotation + localRot,
+                scaleX: scaleX * parent.scaleX,
+                scaleY: scaleY * parent.scaleY
+            };
+        }
+        
+        function updateBoneTransform(name) {
+            const el = boneElements[name];
+            const bone = skeleton[name];
+            if (!el || !bone) return;
+            
+            const world = getBoneWorldTransform(name, boneRotations);
+            const img = el.querySelector('img');
+            
+            // Position at world coords, with pivot at top-center of sprite
+            el.style.left = `${world.x}px`;
+            el.style.top = `${world.y}px`;
+            el.style.transform = `rotate(${world.rotation}deg)`;
+            el.style.zIndex = bone.sortingOrder + 100;
+            
+            // Scale and flip the image
+            const flipX = bone.flipX ? -1 : 1;
+            const flipY = bone.flipY ? -1 : 1;
+            img.style.transform = `
+                translate(-50%, 0)
+                scaleX(${world.scaleX * flipX * 0.5})
+                scaleY(${world.scaleY * flipY * 0.5})
+            `;
+        }
+        
+        function updateAllBones() {
+            for (const name of Object.keys(boneElements)) {
+                updateBoneTransform(name);
+            }
         }
         
         function loadAnimation(name) {
             currentAnimation = animations[name];
             currentTime = 0;
             
-            // Reset rotations
-            Object.keys(partRotations).forEach(part => {
-                partRotations[part] = 0;
-            });
+            // Reset rotations to skeleton default
+            for (const [boneName, bone] of Object.entries(skeleton)) {
+                boneRotations[boneName] = bone.rotation || 0;
+            }
             
-            // Update info panel
             if (currentAnimation) {
                 document.getElementById('totalTime').textContent = currentAnimation.duration.toFixed(2) + 's';
                 document.getElementById('infoDuration').textContent = currentAnimation.duration.toFixed(2) + 's';
                 document.getElementById('infoParts').textContent = Object.keys(currentAnimation.curves).length;
-                
-                let totalKeyframes = 0;
-                Object.values(currentAnimation.curves).forEach(curve => {
-                    totalKeyframes += curve.keyframes?.length || 0;
-                });
-                document.getElementById('infoKeyframes').textContent = totalKeyframes;
             }
             
             updateAnimationFrame(0);
@@ -859,8 +528,12 @@
             document.getElementById('currentTime').textContent = time.toFixed(2) + 's';
             
             // Interpolate each curve
-            Object.entries(currentAnimation.curves).forEach(([partName, curve]) => {
-                if (!curve.keyframes || curve.keyframes.length === 0) return;
+            for (const [animPath, curve] of Object.entries(currentAnimation.curves)) {
+                if (!curve.keyframes || curve.keyframes.length === 0) continue;
+                
+                // Map animation path to bone name
+                const boneName = animPathToBone[animPath];
+                if (!boneName || !boneRotations.hasOwnProperty(boneName)) continue;
                 
                 // Find surrounding keyframes
                 const keyframes = curve.keyframes;
@@ -884,13 +557,12 @@
                     rotation = prevFrame.rotation + (nextFrame.rotation - prevFrame.rotation) * t;
                 }
                 
-                // Apply rotation if part exists
-                if (partRotations.hasOwnProperty(partName)) {
-                    partRotations[partName] = rotation;
-                }
-            });
+                // Get base rotation from skeleton and add animation rotation
+                const baseRot = skeleton[boneName]?.rotation || 0;
+                boneRotations[boneName] = baseRot + rotation;
+            }
             
-            updateSkeletonPose();
+            updateAllBones();
         }
         
         function playAnimation() {
@@ -931,9 +603,7 @@
         function pauseAnimation() {
             isPlaying = false;
             document.getElementById('playBtn').classList.remove('active');
-            if (animationFrame) {
-                cancelAnimationFrame(animationFrame);
-            }
+            if (animationFrame) cancelAnimationFrame(animationFrame);
         }
         
         function resetAnimation() {
@@ -942,36 +612,24 @@
             updateAnimationFrame(0);
         }
         
-        function initAnimationControls() {
-            document.getElementById('animSelect').onchange = (e) => {
-                loadAnimation(e.target.value);
-            };
-            
-            document.getElementById('playBtn').onclick = () => {
-                if (isPlaying) {
-                    pauseAnimation();
-                } else {
-                    playAnimation();
-                }
-            };
-            
+        function initControls() {
+            document.getElementById('animSelect').onchange = e => loadAnimation(e.target.value);
+            document.getElementById('playBtn').onclick = () => isPlaying ? pauseAnimation() : playAnimation();
             document.getElementById('pauseBtn').onclick = pauseAnimation;
             document.getElementById('resetBtn').onclick = resetAnimation;
             
-            document.getElementById('speedSlider').oninput = (e) => {
+            document.getElementById('speedSlider').oninput = e => {
                 playbackSpeed = parseFloat(e.target.value);
                 document.getElementById('speedValue').textContent = playbackSpeed.toFixed(1);
             };
             
-            document.getElementById('loopBtn').onclick = (e) => {
+            document.getElementById('loopBtn').onclick = e => {
                 isLooping = !isLooping;
                 e.target.textContent = `🔁 Loop: ${isLooping ? 'ON' : 'OFF'}`;
                 e.target.classList.toggle('active', isLooping);
             };
-            document.getElementById('loopBtn').classList.add('active');
             
-            // Timeline scrubbing
-            document.getElementById('timelineBar').onclick = (e) => {
+            document.getElementById('timelineBar').onclick = e => {
                 if (!currentAnimation) return;
                 const rect = e.target.getBoundingClientRect();
                 const percent = (e.clientX - rect.left) / rect.width;
@@ -980,14 +638,11 @@
             };
         }
         
-        function renderPartsGrid(category = 'all') {
+        function renderPartsGrid() {
             const grid = document.getElementById('partsGrid');
             grid.innerHTML = '';
             
-            Object.entries(manifest.abbie).forEach(([name, info]) => {
-                const partCategory = getPartCategory(name);
-                if (category !== 'all' && partCategory !== category) return;
-                
+            for (const [name, info] of Object.entries(manifest.abbie)) {
                 const card = document.createElement('div');
                 card.className = 'asset-card';
                 card.innerHTML = `
@@ -995,81 +650,32 @@
                         <img src="abbie/${name}" alt="${name}">
                     </div>
                     <div class="asset-name">${name.replace('.png', '')}</div>
-                    <div class="asset-dims">${info.width}×${info.height}</div>
                 `;
                 grid.appendChild(card);
-            });
+            }
         }
         
-        function getPartCategory(name) {
-            if (name.includes('head') || name.includes('hair')) return 'head';
-            if (name.includes('body')) return 'body';
-            if (name.includes('arm') || name.includes('hand')) return 'arm';
-            if (name.includes('leg') || name.includes('foot')) return 'leg';
-            if (name.includes('wand')) return 'wand';
-            return 'other';
-        }
-        
-        function initCategoryTabs() {
-            document.querySelectorAll('.category-tabs .tab').forEach(tab => {
-                tab.onclick = () => {
-                    document.querySelectorAll('.category-tabs .tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    renderPartsGrid(tab.dataset.category);
-                };
-            });
-        }
-        
-        // Slash Animation
+        // Slash animation
+        let slashFrame = 0;
         let slashInterval = null;
-        let currentSlashFrame = 0;
-        const slashFrameCount = 6;
         
-        function initSlashAnimation() {
-            const framesContainer = document.getElementById('slashFrames');
-            
-            for (let i = 1; i <= slashFrameCount; i++) {
-                const frameNum = String(i).padStart(2, '0');
-                const frame = document.createElement('div');
-                frame.className = `slash-frame${i === 1 ? ' active' : ''}`;
-                frame.innerHTML = `<img src="effect/slash_${frameNum}.png" alt="Frame ${i}">`;
-                frame.onclick = () => setSlashFrame(i - 1);
-                framesContainer.appendChild(frame);
-            }
-            
-            document.getElementById('playSlash').onclick = playSlash;
-            document.getElementById('stopSlash').onclick = stopSlash;
+        function initSlash() {
+            const img = document.getElementById('slashImg');
+            img.parentElement.onclick = () => {
+                if (slashInterval) {
+                    clearInterval(slashInterval);
+                    slashInterval = null;
+                    slashFrame = 0;
+                    img.src = 'effect/slash_01.png';
+                } else {
+                    slashInterval = setInterval(() => {
+                        slashFrame = (slashFrame + 1) % 6;
+                        img.src = `effect/slash_0${slashFrame + 1}.png`;
+                    }, 80);
+                }
+            };
         }
         
-        function setSlashFrame(index) {
-            currentSlashFrame = index;
-            const frameNum = String(index + 1).padStart(2, '0');
-            document.getElementById('slashImage').src = `effect/slash_${frameNum}.png`;
-            
-            document.querySelectorAll('.slash-frame').forEach((f, i) => {
-                f.classList.toggle('active', i === index);
-            });
-        }
-        
-        function playSlash() {
-            stopSlash();
-            const fps = parseInt(document.getElementById('slashFps').value) || 12;
-            const interval = 1000 / fps;
-            
-            slashInterval = setInterval(() => {
-                currentSlashFrame = (currentSlashFrame + 1) % slashFrameCount;
-                setSlashFrame(currentSlashFrame);
-            }, interval);
-        }
-        
-        function stopSlash() {
-            if (slashInterval) {
-                clearInterval(slashInterval);
-                slashInterval = null;
-            }
-        }
-        
-        // Initialize on load
         init();
     </script>
 </body>
