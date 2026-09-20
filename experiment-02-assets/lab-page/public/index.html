@@ -94,11 +94,6 @@
             border-color: var(--accent);
         }
         
-        .asset-card.selected {
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px var(--accent);
-        }
-        
         .asset-preview {
             width: 100%;
             height: 120px;
@@ -129,56 +124,64 @@
             margin-top: 0.25rem;
         }
         
-        /* Character Assembly */
-        .assembly-container {
+        /* Skeletal Animation Section */
+        .animation-container {
             display: flex;
             gap: 2rem;
             flex-wrap: wrap;
         }
         
-        .assembly-canvas {
+        .animation-stage {
             flex: 1;
             min-width: 400px;
-            height: 600px;
+            height: 500px;
             background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 20px 20px;
             border-radius: 12px;
             position: relative;
             overflow: hidden;
         }
         
-        .assembly-canvas img {
+        .skeleton-container {
             position: absolute;
-            transform-origin: center center;
-            cursor: move;
-            transition: filter 0.2s;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
         }
         
-        .assembly-canvas img:hover {
-            filter: drop-shadow(0 0 8px var(--accent));
+        .bone {
+            position: absolute;
+            transform-origin: top center;
         }
         
-        .assembly-canvas img.dragging {
-            z-index: 1000 !important;
+        .bone img {
+            display: block;
         }
         
-        .assembly-controls {
+        .animation-controls {
             flex: 0 0 300px;
         }
         
-        .control-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .control-group label {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-bottom: 0.5rem;
-        }
-        
-        .control-group input[type="range"] {
+        .anim-select {
             width: 100%;
-            accent-color: var(--accent);
+            padding: 0.75rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        
+        .anim-select option {
+            background: var(--bg-dark);
+        }
+        
+        .playback-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
         }
         
         .btn {
@@ -190,8 +193,6 @@
             cursor: pointer;
             font-size: 1rem;
             transition: background 0.2s;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
         }
         
         .btn:hover {
@@ -204,6 +205,57 @@
         
         .btn-secondary:hover {
             background: #1a4a80;
+        }
+        
+        .btn.active {
+            background: var(--accent-light);
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        
+        .speed-control {
+            margin-bottom: 1rem;
+        }
+        
+        .speed-control label {
+            display: block;
+            color: var(--text-muted);
+            margin-bottom: 0.5rem;
+        }
+        
+        .speed-control input {
+            width: 100%;
+            accent-color: var(--accent);
+        }
+        
+        .timeline {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .timeline-progress {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            width: 0%;
+            transition: width 0.05s linear;
+        }
+        
+        .timeline-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
         }
         
         /* Slash Animation */
@@ -300,65 +352,6 @@
             50% { transform: scale(1.1); }
         }
         
-        /* Layer Controls */
-        .layer-list {
-            max-height: 400px;
-            overflow-y: auto;
-        }
-        
-        .layer-item {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem;
-            background: var(--bg-dark);
-            border-radius: 8px;
-            margin-bottom: 0.5rem;
-            cursor: pointer;
-        }
-        
-        .layer-item:hover {
-            background: #252545;
-        }
-        
-        .layer-item.hidden {
-            opacity: 0.4;
-        }
-        
-        .layer-thumb {
-            width: 40px;
-            height: 40px;
-            background: repeating-conic-gradient(#3a3a5a 0% 25%, #2a2a4a 0% 50%) 50% / 8px 8px;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .layer-thumb img {
-            max-width: 100%;
-            max-height: 100%;
-        }
-        
-        .layer-name {
-            flex: 1;
-            font-size: 0.9rem;
-        }
-        
-        .layer-visibility {
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--text-muted);
-        }
-        
-        .layer-visibility:hover {
-            color: var(--text);
-        }
-        
         .category-tabs {
             display: flex;
             gap: 0.5rem;
@@ -402,6 +395,23 @@
             font-size: 0.9rem;
         }
         
+        .anim-info {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .anim-info h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+        
+        .anim-info p {
+            color: var(--text-muted);
+            margin-bottom: 0.25rem;
+        }
+        
         footer {
             text-align: center;
             margin-top: 3rem;
@@ -416,6 +426,64 @@
         <p>Interactive explorer for Abbie's 2D skeletal animation assets</p>
     </header>
     
+    <!-- Skeletal Animation Player -->
+    <section class="section">
+        <h2>Skeletal Animation Player</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Play the original Unity animations extracted from the package. Select an animation and press Play.
+        </p>
+        <div class="animation-container">
+            <div class="animation-stage" id="animationStage">
+                <div class="skeleton-container" id="skeletonContainer"></div>
+            </div>
+            <div class="animation-controls">
+                <select class="anim-select" id="animSelect">
+                    <option value="idle">Idle</option>
+                    <option value="move">Walk/Move</option>
+                    <option value="attack">Attack</option>
+                    <option value="dodge">Dodge</option>
+                    <option value="duck">Duck</option>
+                    <option value="hurt">Hurt</option>
+                    <option value="jump_start">Jump Start</option>
+                    <option value="jump_midair">Jump Midair</option>
+                    <option value="jump_land">Jump Land</option>
+                </select>
+                
+                <div class="playback-controls">
+                    <button class="btn" id="playBtn">▶ Play</button>
+                    <button class="btn btn-secondary" id="pauseBtn">⏸ Pause</button>
+                    <button class="btn btn-secondary" id="resetBtn">⏹ Reset</button>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-bar" id="timelineBar">
+                        <div class="timeline-progress" id="timelineProgress"></div>
+                    </div>
+                    <div class="timeline-info">
+                        <span id="currentTime">0.00s</span>
+                        <span id="totalTime">0.00s</span>
+                    </div>
+                </div>
+                
+                <div class="speed-control">
+                    <label>Playback Speed: <span id="speedValue">1.0</span>x</label>
+                    <input type="range" id="speedSlider" min="0.1" max="2" step="0.1" value="1">
+                </div>
+                
+                <div class="playback-controls">
+                    <button class="btn btn-secondary" id="loopBtn">🔁 Loop: ON</button>
+                </div>
+                
+                <div class="anim-info" id="animInfo">
+                    <h4>Animation Info</h4>
+                    <p>Duration: <span id="infoDuration">--</span></p>
+                    <p>Animated Parts: <span id="infoParts">--</span></p>
+                    <p>Total Keyframes: <span id="infoKeyframes">--</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
     <!-- Character Parts Gallery -->
     <section class="section">
         <h2>Character Parts</h2>
@@ -428,33 +496,6 @@
             <span class="tab" data-category="wand">Wand</span>
         </div>
         <div class="asset-grid" id="partsGrid"></div>
-    </section>
-    
-    <!-- Character Assembly -->
-    <section class="section">
-        <h2>Character Assembly</h2>
-        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
-            Drag parts to position them. Use controls to adjust scale and rotation.
-        </p>
-        <div class="assembly-container">
-            <div class="assembly-canvas" id="assemblyCanvas"></div>
-            <div class="assembly-controls">
-                <div class="control-group">
-                    <label>Global Scale: <span id="scaleValue">1.0</span>x</label>
-                    <input type="range" id="scaleSlider" min="0.5" max="2" step="0.1" value="1">
-                </div>
-                <div class="control-group">
-                    <label>Selected Part Rotation: <span id="rotationValue">0</span>°</label>
-                    <input type="range" id="rotationSlider" min="-180" max="180" step="5" value="0">
-                </div>
-                <div style="margin-bottom: 1rem;">
-                    <button class="btn" onclick="resetAssembly()">Reset Positions</button>
-                    <button class="btn btn-secondary" onclick="toggleAllParts()">Toggle All</button>
-                </div>
-                <h3 style="margin-bottom: 1rem; font-size: 1rem;">Layer Order</h3>
-                <div class="layer-list" id="layerList"></div>
-            </div>
-        </div>
     </section>
     
     <!-- Slash Animation -->
@@ -517,53 +558,426 @@
                 <br>
                 <p><strong>Effects:</strong> 9 effect sprites including bubble, heart, star, and 6-frame slash animation.</p>
                 <br>
-                <p><strong>Animations:</strong> Includes Unity animation clips for idle, move, attack, dodge, duck, hurt, jump (start/midair/land), and effect animations.</p>
+                <p><strong>Animations:</strong> 9 animation clips extracted from Unity - idle, move, attack, dodge, duck, hurt, jump_start, jump_midair, jump_land.</p>
             </div>
         </div>
     </section>
     
     <footer>
-        <p>Abbie Assets Animation Lab • Extracted from Unity Package</p>
+        <p>Abbie Assets Animation Lab • Extracted from Unity Package • Animations Playable</p>
     </footer>
     
     <script>
-        // Asset manifest (will be loaded from JSON)
+        // Asset manifest and animations data
         let manifest = null;
+        let animations = null;
         
-        // Character parts with default positions for assembly
-        const defaultPositions = {
-            'head_hair_back.png': { x: 200, y: 50, z: 0, scale: 0.5 },
-            'head_1.png': { x: 200, y: 80, z: 1, scale: 0.6 },
-            'head_hair_front_1.png': { x: 180, y: 60, z: 2, scale: 0.5 },
-            'head_hair_front_2.png': { x: 200, y: 140, z: 2, scale: 0.4 },
-            'body_upper.png': { x: 200, y: 200, z: 3, scale: 0.5 },
-            'body_middle.png': { x: 200, y: 270, z: 4, scale: 0.5 },
-            'body_lower_back.png': { x: 200, y: 320, z: 5, scale: 0.4 },
-            'body_lower_front.png': { x: 200, y: 320, z: 6, scale: 0.4 },
-            'arm_upper.png': { x: 140, y: 200, z: 7, scale: 0.5 },
-            'arm_lower.png': { x: 120, y: 280, z: 8, scale: 0.4 },
-            'arm_hand_open_1.png': { x: 100, y: 360, z: 9, scale: 0.4 },
-            'wand_1.png': { x: 80, y: 250, z: 10, scale: 0.3 },
-            'leg_upper.png': { x: 170, y: 380, z: 11, scale: 0.5 },
-            'leg_lower.png': { x: 160, y: 460, z: 12, scale: 0.4 },
-            'leg_foot.png': { x: 150, y: 540, z: 13, scale: 0.5 },
+        // Animation state
+        let currentAnimation = null;
+        let isPlaying = false;
+        let isLooping = true;
+        let playbackSpeed = 1.0;
+        let currentTime = 0;
+        let animationFrame = null;
+        let lastTimestamp = 0;
+        
+        // Skeleton configuration - maps parts to their pivot points and hierarchy
+        const skeletonConfig = {
+            scale: 0.4,
+            parts: {
+                // Root - lower body
+                body_lower_front: { 
+                    x: 0, y: 0, pivotX: 0.5, pivotY: 0.3, 
+                    img: 'body_lower_front.png', z: 5 
+                },
+                body_lower_back: { 
+                    x: 0, y: 0, pivotX: 0.5, pivotY: 0.3, 
+                    img: 'body_lower_back.png', z: 1,
+                    parent: 'body_lower_front'
+                },
+                
+                // Middle body
+                body_middle: { 
+                    x: 0, y: -60, pivotX: 0.5, pivotY: 0.8, 
+                    img: 'body_middle.png', z: 6,
+                    parent: 'body_lower_front'
+                },
+                
+                // Upper body
+                body_upper: { 
+                    x: 0, y: -70, pivotX: 0.5, pivotY: 0.8, 
+                    img: 'body_upper.png', z: 7,
+                    parent: 'body_middle'
+                },
+                
+                // Head
+                head: { 
+                    x: 0, y: -90, pivotX: 0.5, pivotY: 0.9, 
+                    img: 'head_1.png', z: 10,
+                    parent: 'body_upper'
+                },
+                
+                // Hair back (behind head)
+                head_hair_back: { 
+                    x: 0, y: 30, pivotX: 0.5, pivotY: 0.2, 
+                    img: 'head_hair_back.png', z: 2,
+                    parent: 'head'
+                },
+                
+                // Hair front
+                head_hair_front_1: { 
+                    x: -30, y: -20, pivotX: 0.5, pivotY: 0.3, 
+                    img: 'head_hair_front_1.png', z: 11,
+                    parent: 'head'
+                },
+                head_hair_front_2: { 
+                    x: 20, y: 30, pivotX: 0.3, pivotY: 0.2, 
+                    img: 'head_hair_front_2.png', z: 12,
+                    parent: 'head'
+                },
+                
+                // Left arm (character's left, viewer's right)
+                arm_upper: { 
+                    x: 50, y: -50, pivotX: 0.5, pivotY: 0.15, 
+                    img: 'arm_upper.png', z: 8,
+                    parent: 'body_upper'
+                },
+                arm_lower: { 
+                    x: 0, y: 80, pivotX: 0.5, pivotY: 0.1, 
+                    img: 'arm_lower.png', z: 9,
+                    parent: 'arm_upper'
+                },
+                arm_hand_open_1: { 
+                    x: 0, y: 110, pivotX: 0.5, pivotY: 0.2, 
+                    img: 'arm_hand_open_1.png', z: 10,
+                    parent: 'arm_lower'
+                },
+                
+                // Right arm (character's right, viewer's left) - behind body
+                arm_upper_right: { 
+                    x: -50, y: -50, pivotX: 0.5, pivotY: 0.15, 
+                    img: 'arm_upper.png', z: 3,
+                    parent: 'body_upper',
+                    flipX: true
+                },
+                arm_lower_right: { 
+                    x: 0, y: 80, pivotX: 0.5, pivotY: 0.1, 
+                    img: 'arm_lower.png', z: 4,
+                    parent: 'arm_upper_right',
+                    flipX: true
+                },
+                
+                // Wand (attached to left hand)
+                wand: { 
+                    x: 10, y: 50, pivotX: 0.5, pivotY: 0.9, 
+                    img: 'wand_1.png', z: 11,
+                    parent: 'arm_hand_open_1'
+                },
+                
+                // Left leg
+                leg_upper: { 
+                    x: 25, y: 50, pivotX: 0.5, pivotY: 0.15, 
+                    img: 'leg_upper.png', z: 4,
+                    parent: 'body_lower_front'
+                },
+                leg_lower: { 
+                    x: 0, y: 100, pivotX: 0.5, pivotY: 0.1, 
+                    img: 'leg_lower.png', z: 3,
+                    parent: 'leg_upper'
+                },
+                leg_foot: { 
+                    x: 0, y: 170, pivotX: 0.3, pivotY: 0.3, 
+                    img: 'leg_foot.png', z: 2,
+                    parent: 'leg_lower'
+                },
+                
+                // Right leg (behind)
+                leg_upper_right: { 
+                    x: -25, y: 50, pivotX: 0.5, pivotY: 0.15, 
+                    img: 'leg_upper.png', z: 1,
+                    parent: 'body_lower_front',
+                    flipX: true
+                },
+                leg_lower_right: { 
+                    x: 0, y: 100, pivotX: 0.5, pivotY: 0.1, 
+                    img: 'leg_lower.png', z: 0,
+                    parent: 'leg_upper_right',
+                    flipX: true
+                },
+                leg_foot_right: { 
+                    x: 0, y: 170, pivotX: 0.7, pivotY: 0.3, 
+                    img: 'leg_foot.png', z: -1,
+                    parent: 'leg_lower_right',
+                    flipX: true
+                }
+            }
         };
         
-        const partPositions = {};
-        const partVisibility = {};
-        let selectedPart = null;
-        let isDragging = false;
-        let dragOffset = { x: 0, y: 0 };
+        // Part rotation state
+        const partRotations = {};
         
-        // Load manifest and initialize
         async function init() {
-            const response = await fetch('manifest.json');
-            manifest = await response.json();
+            // Load manifest
+            const manifestResponse = await fetch('manifest.json');
+            manifest = await manifestResponse.json();
+            
+            // Load animations
+            const animResponse = await fetch('animations.json');
+            animations = await animResponse.json();
             
             renderPartsGrid();
-            initAssembly();
+            initSkeleton();
+            initAnimationControls();
             initSlashAnimation();
             initCategoryTabs();
+            
+            // Load default animation
+            loadAnimation('idle');
+        }
+        
+        function initSkeleton() {
+            const container = document.getElementById('skeletonContainer');
+            container.innerHTML = '';
+            
+            // Sort parts by z-index
+            const sortedParts = Object.entries(skeletonConfig.parts)
+                .sort((a, b) => a[1].z - b[1].z);
+            
+            // Create bone elements
+            sortedParts.forEach(([name, config]) => {
+                const bone = document.createElement('div');
+                bone.className = 'bone';
+                bone.id = `bone-${name}`;
+                bone.dataset.part = name;
+                
+                const img = document.createElement('img');
+                img.src = `abbie/${config.img}`;
+                img.style.transform = config.flipX ? 'scaleX(-1)' : '';
+                
+                bone.appendChild(img);
+                container.appendChild(bone);
+                
+                // Initialize rotation
+                partRotations[name] = 0;
+            });
+            
+            // Initial positioning
+            updateSkeletonPose();
+        }
+        
+        function updateSkeletonPose() {
+            const scale = skeletonConfig.scale;
+            
+            // Calculate world transforms for each bone
+            const worldTransforms = {};
+            
+            function calculateTransform(name) {
+                if (worldTransforms[name]) return worldTransforms[name];
+                
+                const config = skeletonConfig.parts[name];
+                const rotation = partRotations[name] || 0;
+                
+                let worldX = config.x * scale;
+                let worldY = config.y * scale;
+                let worldRotation = rotation;
+                
+                if (config.parent) {
+                    const parentTransform = calculateTransform(config.parent);
+                    const parentConfig = skeletonConfig.parts[config.parent];
+                    
+                    // Apply parent rotation to offset
+                    const rad = parentTransform.rotation * Math.PI / 180;
+                    const cos = Math.cos(rad);
+                    const sin = Math.sin(rad);
+                    
+                    const offsetX = config.x * scale;
+                    const offsetY = config.y * scale;
+                    
+                    worldX = parentTransform.x + (offsetX * cos - offsetY * sin);
+                    worldY = parentTransform.y + (offsetX * sin + offsetY * cos);
+                    worldRotation = parentTransform.rotation + rotation;
+                }
+                
+                worldTransforms[name] = { x: worldX, y: worldY, rotation: worldRotation };
+                return worldTransforms[name];
+            }
+            
+            // Apply transforms to bones
+            Object.keys(skeletonConfig.parts).forEach(name => {
+                const bone = document.getElementById(`bone-${name}`);
+                const config = skeletonConfig.parts[name];
+                const transform = calculateTransform(name);
+                
+                const img = bone.querySelector('img');
+                const pivotX = config.pivotX * img.naturalWidth * scale;
+                const pivotY = config.pivotY * img.naturalHeight * scale;
+                
+                bone.style.left = `${transform.x - pivotX}px`;
+                bone.style.top = `${transform.y - pivotY}px`;
+                bone.style.transform = `rotate(${transform.rotation}deg)`;
+                bone.style.transformOrigin = `${pivotX}px ${pivotY}px`;
+                bone.style.zIndex = config.z;
+                
+                img.style.width = `${img.naturalWidth * scale}px`;
+                img.style.height = `${img.naturalHeight * scale}px`;
+            });
+        }
+        
+        function loadAnimation(name) {
+            currentAnimation = animations[name];
+            currentTime = 0;
+            
+            // Reset rotations
+            Object.keys(partRotations).forEach(part => {
+                partRotations[part] = 0;
+            });
+            
+            // Update info panel
+            if (currentAnimation) {
+                document.getElementById('totalTime').textContent = currentAnimation.duration.toFixed(2) + 's';
+                document.getElementById('infoDuration').textContent = currentAnimation.duration.toFixed(2) + 's';
+                document.getElementById('infoParts').textContent = Object.keys(currentAnimation.curves).length;
+                
+                let totalKeyframes = 0;
+                Object.values(currentAnimation.curves).forEach(curve => {
+                    totalKeyframes += curve.keyframes?.length || 0;
+                });
+                document.getElementById('infoKeyframes').textContent = totalKeyframes;
+            }
+            
+            updateAnimationFrame(0);
+        }
+        
+        function updateAnimationFrame(time) {
+            if (!currentAnimation) return;
+            
+            currentTime = time;
+            
+            // Update timeline
+            const progress = (time / currentAnimation.duration) * 100;
+            document.getElementById('timelineProgress').style.width = `${Math.min(progress, 100)}%`;
+            document.getElementById('currentTime').textContent = time.toFixed(2) + 's';
+            
+            // Interpolate each curve
+            Object.entries(currentAnimation.curves).forEach(([partName, curve]) => {
+                if (!curve.keyframes || curve.keyframes.length === 0) return;
+                
+                // Find surrounding keyframes
+                const keyframes = curve.keyframes;
+                let prevFrame = keyframes[0];
+                let nextFrame = keyframes[keyframes.length - 1];
+                
+                for (let i = 0; i < keyframes.length - 1; i++) {
+                    if (time >= keyframes[i].time && time <= keyframes[i + 1].time) {
+                        prevFrame = keyframes[i];
+                        nextFrame = keyframes[i + 1];
+                        break;
+                    }
+                }
+                
+                // Interpolate rotation
+                let rotation;
+                if (prevFrame === nextFrame || prevFrame.time === nextFrame.time) {
+                    rotation = prevFrame.rotation;
+                } else {
+                    const t = (time - prevFrame.time) / (nextFrame.time - prevFrame.time);
+                    rotation = prevFrame.rotation + (nextFrame.rotation - prevFrame.rotation) * t;
+                }
+                
+                // Apply rotation if part exists
+                if (partRotations.hasOwnProperty(partName)) {
+                    partRotations[partName] = rotation;
+                }
+            });
+            
+            updateSkeletonPose();
+        }
+        
+        function playAnimation() {
+            if (!currentAnimation) return;
+            
+            isPlaying = true;
+            lastTimestamp = performance.now();
+            document.getElementById('playBtn').classList.add('active');
+            
+            function animate(timestamp) {
+                if (!isPlaying) return;
+                
+                const delta = (timestamp - lastTimestamp) / 1000 * playbackSpeed;
+                lastTimestamp = timestamp;
+                
+                currentTime += delta;
+                
+                if (currentTime >= currentAnimation.duration) {
+                    if (isLooping) {
+                        currentTime = currentTime % currentAnimation.duration;
+                    } else {
+                        currentTime = currentAnimation.duration;
+                        isPlaying = false;
+                        document.getElementById('playBtn').classList.remove('active');
+                    }
+                }
+                
+                updateAnimationFrame(currentTime);
+                
+                if (isPlaying) {
+                    animationFrame = requestAnimationFrame(animate);
+                }
+            }
+            
+            animationFrame = requestAnimationFrame(animate);
+        }
+        
+        function pauseAnimation() {
+            isPlaying = false;
+            document.getElementById('playBtn').classList.remove('active');
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+        }
+        
+        function resetAnimation() {
+            pauseAnimation();
+            currentTime = 0;
+            updateAnimationFrame(0);
+        }
+        
+        function initAnimationControls() {
+            document.getElementById('animSelect').onchange = (e) => {
+                loadAnimation(e.target.value);
+            };
+            
+            document.getElementById('playBtn').onclick = () => {
+                if (isPlaying) {
+                    pauseAnimation();
+                } else {
+                    playAnimation();
+                }
+            };
+            
+            document.getElementById('pauseBtn').onclick = pauseAnimation;
+            document.getElementById('resetBtn').onclick = resetAnimation;
+            
+            document.getElementById('speedSlider').oninput = (e) => {
+                playbackSpeed = parseFloat(e.target.value);
+                document.getElementById('speedValue').textContent = playbackSpeed.toFixed(1);
+            };
+            
+            document.getElementById('loopBtn').onclick = (e) => {
+                isLooping = !isLooping;
+                e.target.textContent = `🔁 Loop: ${isLooping ? 'ON' : 'OFF'}`;
+                e.target.classList.toggle('active', isLooping);
+            };
+            document.getElementById('loopBtn').classList.add('active');
+            
+            // Timeline scrubbing
+            document.getElementById('timelineBar').onclick = (e) => {
+                if (!currentAnimation) return;
+                const rect = e.target.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                currentTime = percent * currentAnimation.duration;
+                updateAnimationFrame(currentTime);
+            };
         }
         
         function renderPartsGrid(category = 'all') {
@@ -583,7 +997,6 @@
                     <div class="asset-name">${name.replace('.png', '')}</div>
                     <div class="asset-dims">${info.width}×${info.height}</div>
                 `;
-                card.onclick = () => selectPartInAssembly(name);
                 grid.appendChild(card);
             });
         }
@@ -605,187 +1018,6 @@
                     renderPartsGrid(tab.dataset.category);
                 };
             });
-        }
-        
-        function initAssembly() {
-            const canvas = document.getElementById('assemblyCanvas');
-            const layerList = document.getElementById('layerList');
-            
-            // Initialize positions and visibility
-            Object.keys(defaultPositions).forEach(name => {
-                partPositions[name] = { ...defaultPositions[name] };
-                partVisibility[name] = true;
-            });
-            
-            // Create images sorted by z-index
-            const sortedParts = Object.entries(partPositions).sort((a, b) => a[1].z - b[1].z);
-            
-            sortedParts.forEach(([name, pos]) => {
-                const img = document.createElement('img');
-                img.src = `abbie/${name}`;
-                img.dataset.part = name;
-                img.style.left = `${pos.x}px`;
-                img.style.top = `${pos.y}px`;
-                img.style.zIndex = pos.z;
-                img.style.transform = `scale(${pos.scale})`;
-                
-                img.onmousedown = (e) => startDrag(e, name);
-                canvas.appendChild(img);
-            });
-            
-            // Render layer list (reversed for UI - top layers first)
-            [...sortedParts].reverse().forEach(([name, pos]) => {
-                const item = document.createElement('div');
-                item.className = 'layer-item';
-                item.dataset.part = name;
-                item.innerHTML = `
-                    <div class="layer-thumb">
-                        <img src="abbie/${name}" alt="${name}">
-                    </div>
-                    <div class="layer-name">${name.replace('.png', '')}</div>
-                    <div class="layer-visibility" onclick="event.stopPropagation(); togglePartVisibility('${name}')">👁</div>
-                `;
-                item.onclick = () => selectPartInAssembly(name);
-                layerList.appendChild(item);
-            });
-            
-            // Mouse move and up handlers
-            document.addEventListener('mousemove', onDrag);
-            document.addEventListener('mouseup', endDrag);
-            
-            // Scale slider
-            document.getElementById('scaleSlider').oninput = (e) => {
-                const scale = parseFloat(e.target.value);
-                document.getElementById('scaleValue').textContent = scale.toFixed(1);
-                
-                document.querySelectorAll('#assemblyCanvas img').forEach(img => {
-                    const name = img.dataset.part;
-                    const baseScale = defaultPositions[name]?.scale || 1;
-                    img.style.transform = `scale(${baseScale * scale}) rotate(${partPositions[name]?.rotation || 0}deg)`;
-                });
-            };
-            
-            // Rotation slider
-            document.getElementById('rotationSlider').oninput = (e) => {
-                const rotation = parseInt(e.target.value);
-                document.getElementById('rotationValue').textContent = rotation;
-                
-                if (selectedPart) {
-                    partPositions[selectedPart].rotation = rotation;
-                    const img = document.querySelector(`#assemblyCanvas img[data-part="${selectedPart}"]`);
-                    const scale = parseFloat(document.getElementById('scaleSlider').value);
-                    const baseScale = defaultPositions[selectedPart]?.scale || 1;
-                    img.style.transform = `scale(${baseScale * scale}) rotate(${rotation}deg)`;
-                }
-            };
-        }
-        
-        function startDrag(e, name) {
-            e.preventDefault();
-            isDragging = true;
-            selectedPart = name;
-            
-            const img = e.target;
-            img.classList.add('dragging');
-            
-            const rect = img.getBoundingClientRect();
-            dragOffset.x = e.clientX - rect.left;
-            dragOffset.y = e.clientY - rect.top;
-            
-            // Update rotation slider
-            document.getElementById('rotationSlider').value = partPositions[name]?.rotation || 0;
-            document.getElementById('rotationValue').textContent = partPositions[name]?.rotation || 0;
-            
-            // Highlight in layer list
-            document.querySelectorAll('.layer-item').forEach(item => {
-                item.style.background = item.dataset.part === name ? 'var(--border)' : '';
-            });
-        }
-        
-        function onDrag(e) {
-            if (!isDragging || !selectedPart) return;
-            
-            const canvas = document.getElementById('assemblyCanvas');
-            const rect = canvas.getBoundingClientRect();
-            const img = document.querySelector(`#assemblyCanvas img[data-part="${selectedPart}"]`);
-            
-            const x = e.clientX - rect.left - dragOffset.x;
-            const y = e.clientY - rect.top - dragOffset.y;
-            
-            img.style.left = `${x}px`;
-            img.style.top = `${y}px`;
-            
-            partPositions[selectedPart].x = x;
-            partPositions[selectedPart].y = y;
-        }
-        
-        function endDrag() {
-            if (selectedPart) {
-                const img = document.querySelector(`#assemblyCanvas img[data-part="${selectedPart}"]`);
-                if (img) img.classList.remove('dragging');
-            }
-            isDragging = false;
-        }
-        
-        function selectPartInAssembly(name) {
-            selectedPart = name;
-            
-            // Update rotation slider
-            document.getElementById('rotationSlider').value = partPositions[name]?.rotation || 0;
-            document.getElementById('rotationValue').textContent = partPositions[name]?.rotation || 0;
-            
-            // Highlight in layer list
-            document.querySelectorAll('.layer-item').forEach(item => {
-                item.style.background = item.dataset.part === name ? 'var(--border)' : '';
-            });
-            
-            // Highlight image
-            document.querySelectorAll('#assemblyCanvas img').forEach(img => {
-                img.style.filter = img.dataset.part === name ? 'drop-shadow(0 0 8px var(--accent))' : '';
-            });
-        }
-        
-        function togglePartVisibility(name) {
-            partVisibility[name] = !partVisibility[name];
-            
-            const img = document.querySelector(`#assemblyCanvas img[data-part="${name}"]`);
-            const layerItem = document.querySelector(`.layer-item[data-part="${name}"]`);
-            
-            if (img) img.style.display = partVisibility[name] ? 'block' : 'none';
-            if (layerItem) layerItem.classList.toggle('hidden', !partVisibility[name]);
-        }
-        
-        function toggleAllParts() {
-            const allVisible = Object.values(partVisibility).every(v => v);
-            
-            Object.keys(partVisibility).forEach(name => {
-                partVisibility[name] = !allVisible;
-                togglePartVisibility(name);
-                partVisibility[name] = !allVisible; // Reset since toggle flips it
-            });
-        }
-        
-        function resetAssembly() {
-            Object.keys(defaultPositions).forEach(name => {
-                partPositions[name] = { ...defaultPositions[name] };
-                partVisibility[name] = true;
-                
-                const img = document.querySelector(`#assemblyCanvas img[data-part="${name}"]`);
-                if (img) {
-                    img.style.left = `${defaultPositions[name].x}px`;
-                    img.style.top = `${defaultPositions[name].y}px`;
-                    img.style.transform = `scale(${defaultPositions[name].scale})`;
-                    img.style.display = 'block';
-                }
-                
-                const layerItem = document.querySelector(`.layer-item[data-part="${name}"]`);
-                if (layerItem) layerItem.classList.remove('hidden');
-            });
-            
-            document.getElementById('scaleSlider').value = 1;
-            document.getElementById('scaleValue').textContent = '1.0';
-            document.getElementById('rotationSlider').value = 0;
-            document.getElementById('rotationValue').textContent = '0';
         }
         
         // Slash Animation
