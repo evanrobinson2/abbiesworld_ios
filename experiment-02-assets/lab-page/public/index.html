@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abbie Assets Animation Lab</title>
+    <style>
+        :root {
+            --bg-dark: #1a1a2e;
+            --bg-card: #16213e;
+            --accent: #e94560;
+            --accent-light: #ff6b6b;
+            --text: #eee;
+            --text-muted: #8892b0;
+            --border: #0f3460;
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 2rem;
+        }
+        
+        header { text-align: center; margin-bottom: 3rem; }
+        
+        h1 {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p { color: var(--text-muted); font-size: 1.1rem; }
+        
+        .section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border);
+        }
+        
+        .section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .section h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        /* Animation Stage */
+        .animation-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .animation-stage {
+            flex: 1;
+            min-width: 400px;
+            height: 600px;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 20px 20px;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skeleton-root {
+            position: absolute;
+            left: 50%;
+            bottom: 50px;
+        }
+        
+        .bone {
+            position: absolute;
+            transform-origin: center top;
+        }
+        
+        .bone img {
+            display: block;
+            transform-origin: center top;
+        }
+        
+        .animation-controls {
+            flex: 0 0 300px;
+        }
+        
+        .anim-select {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--bg-dark);
+            border: 1px solid var(--border);
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        
+        .playback-controls {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+        
+        .btn:hover { background: var(--accent-light); }
+        .btn-secondary { background: var(--border); }
+        .btn-secondary:hover { background: #1a4a80; }
+        .btn.active { background: var(--accent-light); box-shadow: 0 0 0 2px var(--accent); }
+        
+        .speed-control { margin-bottom: 1rem; }
+        .speed-control label { display: block; color: var(--text-muted); margin-bottom: 0.5rem; }
+        .speed-control input { width: 100%; accent-color: var(--accent); }
+        
+        .timeline {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .timeline-bar {
+            height: 8px;
+            background: var(--border);
+            border-radius: 4px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .timeline-progress {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 4px;
+            width: 0%;
+        }
+        
+        .timeline-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .anim-info {
+            background: var(--bg-dark);
+            border-radius: 8px;
+            padding: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .anim-info h4 { margin-bottom: 0.5rem; color: var(--accent); }
+        .anim-info p { color: var(--text-muted); margin-bottom: 0.25rem; }
+        
+        /* Parts Grid */
+        .asset-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+        }
+        
+        .asset-card {
+            background: var(--bg-dark);
+            border-radius: 12px;
+            padding: 0.75rem;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+        
+        .asset-card:hover { transform: translateY(-4px); }
+        
+        .asset-preview {
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 12px 12px;
+            border-radius: 8px;
+        }
+        
+        .asset-preview img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .asset-name { font-size: 0.75rem; color: var(--text-muted); }
+        
+        /* Effects */
+        .effects-demo {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .effect-item { text-align: center; }
+        
+        .effect-canvas {
+            width: 150px;
+            height: 150px;
+            background: repeating-conic-gradient(#2a2a4a 0% 25%, #1a1a3e 0% 50%) 50% / 16px 16px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .effect-canvas img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+        
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🧙‍♀️ Abbie Assets Animation Lab</h1>
+        <p>Interactive explorer for Abbie's 2D skeletal animation assets</p>
+    </header>
+    
+    <!-- Skeletal Animation Player -->
+    <section class="section">
+        <h2>Skeletal Animation Player</h2>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Play the original Unity animations. The skeleton is built from the actual Unity prefab hierarchy.
+        </p>
+        <div class="animation-container">
+            <div class="animation-stage" id="animationStage">
+                <div class="skeleton-root" id="skeletonRoot"></div>
+            </div>
+            <div class="animation-controls">
+                <select class="anim-select" id="animSelect">
+                    <option value="idle">Idle</option>
+                    <option value="move">Walk/Move</option>
+                    <option value="attack">Attack</option>
+                    <option value="dodge">Dodge</option>
+                    <option value="duck">Duck</option>
+                    <option value="hurt">Hurt</option>
+                    <option value="jump_start">Jump Start</option>
+                    <option value="jump_midair">Jump Midair</option>
+                    <option value="jump_land">Jump Land</option>
+                </select>
+                
+                <div class="playback-controls">
+                    <button class="btn" id="playBtn">▶ Play</button>
+                    <button class="btn btn-secondary" id="pauseBtn">⏸ Pause</button>
+                    <button class="btn btn-secondary" id="resetBtn">⏹ Reset</button>
+                </div>
+                
+                <div class="timeline">
+                    <div class="timeline-bar" id="timelineBar">
+                        <div class="timeline-progress" id="timelineProgress"></div>
+                    </div>
+                    <div class="timeline-info">
+                        <span id="currentTime">0.00s</span>
+                        <span id="totalTime">0.00s</span>
+                    </div>
+                </div>
+                
+                <div class="speed-control">
+                    <label>Playback Speed: <span id="speedValue">1.0</span>x</label>
+                    <input type="range" id="speedSlider" min="0.1" max="2" step="0.1" value="1">
+                </div>
+                
+                <div class="playback-controls">
+                    <button class="btn btn-secondary active" id="loopBtn">🔁 Loop: ON</button>
+                </div>
+                
+                <div class="anim-info">
+                    <h4>Animation Info</h4>
+                    <p>Duration: <span id="infoDuration">--</span></p>
+                    <p>Animated Parts: <span id="infoParts">--</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Character Parts Gallery -->
+    <section class="section">
+        <h2>Character Parts (24 sprites)</h2>
+        <div class="asset-grid" id="partsGrid"></div>
+    </section>
+    
+    <!-- Effects Gallery -->
+    <section class="section">
+        <h2>Magic Effects</h2>
+        <div class="effects-demo">
+            <div class="effect-item">
+                <div class="effect-canvas"><img src="effect/bubble.png" alt="Bubble"></div>
+                <div class="asset-name">Bubble</div>
+            </div>
+            <div class="effect-item">
+                <div class="effect-canvas"><img src="effect/heart.png" alt="Heart"></div>
+                <div class="asset-name">Heart</div>
+            </div>
+            <div class="effect-item">
+                <div class="effect-canvas"><img src="effect/star.png" alt="Star"></div>
+                <div class="asset-name">Star</div>
+            </div>
+            <div class="effect-item">
+                <div class="effect-canvas">
+                    <img id="slashImg" src="effect/slash_01.png" alt="Slash">
+                </div>
+                <div class="asset-name">Slash (click to play)</div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Abbie Assets Animation Lab • Extracted from Unity Package</p>
+    </footer>
+    
+    <script>
+        // Configuration
+        const UNITY_SCALE = 100; // Unity units to pixels
+        
+        // Global state
+        let skeleton = null;
+        let animations = null;
+        let manifest = null;
+        let currentAnimation = null;
+        let isPlaying = false;
+        let isLooping = true;
+        let playbackSpeed = 1.0;
+        let currentTime = 0;
+        let animationFrame = null;
+        let lastTimestamp = 0;
+        
+        // Bone elements and rotations
+        const boneElements = {};
+        const boneRotations = {};
+        
+        // Animation path to bone name mapping
+        const animPathToBone = {
+            "body_lower/leg_upper_left": "leg_upper_left",
+            "body_lower/leg_upper_left/leg_lower": "leg_lower_left",
+            "body_lower/leg_upper_left/leg_lower/leg_foot": "leg_foot_left",
+            "body_lower/leg_upper_right": "leg_upper_right",
+            "body_lower/leg_upper_right/leg_lower": "leg_lower_right",
+            "body_lower/leg_upper_right/leg_lower/leg_foot": "leg_foot_right",
+            "body_lower/body_middle": "body_middle",
+            "body_lower/body_middle/body_upper": "body_upper",
+            "body_lower/body_middle/body_upper/arm_upper_left": "arm_upper_left",
+            "body_lower/body_middle/body_upper/arm_upper_left/arm_lower": "arm_lower_left",
+            "body_lower/body_middle/body_upper/arm_upper_right": "arm_upper_right",
+            "body_lower/body_middle/body_upper/arm_upper_right/arm_lower": "arm_lower_right",
+            "body_lower/body_middle/body_upper/head": "head",
+            "body_lower/body_middle/body_upper/head/hair_1": "hair_1",
+            "body_lower/body_middle/body_upper/head/hair_2": "hair_2",
+            "body_lower/body_middle/body_upper/head/hair_3": "hair_3",
+            "body_lower/body_middle/body_upper/head/hair_4": "hair_4",
+            "body_lower/skirt": "skirt",
+            "body_lower/skirt/back": "skirt_back",
+            "body_lower": "body_lower"
+        };
+        
+        async function init() {
+            // Load all data
+            [skeleton, animations, manifest] = await Promise.all([
+                fetch('skeleton.json').then(r => r.json()),
+                fetch('animations.json').then(r => r.json()),
+                fetch('manifest.json').then(r => r.json())
+            ]);
+            
+            buildSkeleton();
+            initControls();
+            renderPartsGrid();
+            initSlash();
+            loadAnimation('idle');
+        }
+        
+        function buildSkeleton() {
+            const root = document.getElementById('skeletonRoot');
+            root.innerHTML = '';
+            
+            // Sort bones by sorting order
+            const sortedBones = Object.entries(skeleton)
+                .filter(([name, bone]) => bone.sprite)
+                .sort((a, b) => a[1].sortingOrder - b[1].sortingOrder);
+            
+            // Create bone elements
+            for (const [name, bone] of sortedBones) {
+                const el = document.createElement('div');
+                el.className = 'bone';
+                el.id = `bone-${name}`;
+                
+                const img = document.createElement('img');
+                img.src = `abbie/${bone.sprite}`;
+                img.onload = () => updateBoneTransform(name);
+                
+                el.appendChild(img);
+                root.appendChild(el);
+                
+                boneElements[name] = el;
+                boneRotations[name] = bone.rotation || 0;
+            }
+            
+            // Initial pose
+            setTimeout(() => updateAllBones(), 100);
+        }
+        
+        function getBoneWorldTransform(name, baseRotations = {}) {
+            const bone = skeleton[name];
+            if (!bone) return { x: 0, y: 0, rotation: 0, scaleX: 1, scaleY: 1 };
+            
+            // Get local transform
+            const localX = bone.x * UNITY_SCALE;
+            const localY = -bone.y * UNITY_SCALE; // Flip Y for screen coords
+            const localRot = baseRotations[name] !== undefined ? baseRotations[name] : (bone.rotation || 0);
+            const scaleX = bone.scaleX || 1;
+            const scaleY = bone.scaleY || 1;
+            
+            // If no parent, return local
+            if (!bone.parent || !skeleton[bone.parent]) {
+                return { x: localX, y: localY, rotation: localRot, scaleX, scaleY };
+            }
+            
+            // Get parent transform
+            const parent = getBoneWorldTransform(bone.parent, baseRotations);
+            
+            // Apply parent rotation to local offset
+            const rad = parent.rotation * Math.PI / 180;
+            const cos = Math.cos(rad);
+            const sin = Math.sin(rad);
+            
+            const rotatedX = localX * cos - localY * sin;
+            const rotatedY = localX * sin + localY * cos;
+            
+            return {
+                x: parent.x + rotatedX * parent.scaleX,
+                y: parent.y + rotatedY * parent.scaleY,
+                rotation: parent.rotation + localRot,
+                scaleX: scaleX * parent.scaleX,
+                scaleY: scaleY * parent.scaleY
+            };
+        }
+        
+        function updateBoneTransform(name) {
+            const el = boneElements[name];
+            const bone = skeleton[name];
+            if (!el || !bone) return;
+            
+            const world = getBoneWorldTransform(name, boneRotations);
+            const img = el.querySelector('img');
+            
+            // Position at world coords, with pivot at top-center of sprite
+            el.style.left = `${world.x}px`;
+            el.style.top = `${world.y}px`;
+            el.style.transform = `rotate(${world.rotation}deg)`;
+            el.style.zIndex = bone.sortingOrder + 100;
+            
+            // Scale and flip the image
+            const flipX = bone.flipX ? -1 : 1;
+            const flipY = bone.flipY ? -1 : 1;
+            img.style.transform = `
+                translate(-50%, 0)
+                scaleX(${world.scaleX * flipX * 0.5})
+                scaleY(${world.scaleY * flipY * 0.5})
+            `;
+        }
+        
+        function updateAllBones() {
+            for (const name of Object.keys(boneElements)) {
+                updateBoneTransform(name);
+            }
+        }
+        
+        function loadAnimation(name) {
+            currentAnimation = animations[name];
+            currentTime = 0;
+            
+            // Reset rotations to skeleton default
+            for (const [boneName, bone] of Object.entries(skeleton)) {
+                boneRotations[boneName] = bone.rotation || 0;
+            }
+            
+            if (currentAnimation) {
+                document.getElementById('totalTime').textContent = currentAnimation.duration.toFixed(2) + 's';
+                document.getElementById('infoDuration').textContent = currentAnimation.duration.toFixed(2) + 's';
+                document.getElementById('infoParts').textContent = Object.keys(currentAnimation.curves).length;
+            }
+            
+            updateAnimationFrame(0);
+        }
+        
+        function updateAnimationFrame(time) {
+            if (!currentAnimation) return;
+            
+            currentTime = time;
+            
+            // Update timeline
+            const progress = (time / currentAnimation.duration) * 100;
+            document.getElementById('timelineProgress').style.width = `${Math.min(progress, 100)}%`;
+            document.getElementById('currentTime').textContent = time.toFixed(2) + 's';
+            
+            // Interpolate each curve
+            for (const [animPath, curve] of Object.entries(currentAnimation.curves)) {
+                if (!curve.keyframes || curve.keyframes.length === 0) continue;
+                
+                // Map animation path to bone name
+                const boneName = animPathToBone[animPath];
+                if (!boneName || !boneRotations.hasOwnProperty(boneName)) continue;
+                
+                // Find surrounding keyframes
+                const keyframes = curve.keyframes;
+                let prevFrame = keyframes[0];
+                let nextFrame = keyframes[keyframes.length - 1];
+                
+                for (let i = 0; i < keyframes.length - 1; i++) {
+                    if (time >= keyframes[i].time && time <= keyframes[i + 1].time) {
+                        prevFrame = keyframes[i];
+                        nextFrame = keyframes[i + 1];
+                        break;
+                    }
+                }
+                
+                // Interpolate rotation
+                let rotation;
+                if (prevFrame === nextFrame || prevFrame.time === nextFrame.time) {
+                    rotation = prevFrame.rotation;
+                } else {
+                    const t = (time - prevFrame.time) / (nextFrame.time - prevFrame.time);
+                    rotation = prevFrame.rotation + (nextFrame.rotation - prevFrame.rotation) * t;
+                }
+                
+                // Get base rotation from skeleton and add animation rotation
+                const baseRot = skeleton[boneName]?.rotation || 0;
+                boneRotations[boneName] = baseRot + rotation;
+            }
+            
+            updateAllBones();
+        }
+        
+        function playAnimation() {
+            if (!currentAnimation) return;
+            
+            isPlaying = true;
+            lastTimestamp = performance.now();
+            document.getElementById('playBtn').classList.add('active');
+            
+            function animate(timestamp) {
+                if (!isPlaying) return;
+                
+                const delta = (timestamp - lastTimestamp) / 1000 * playbackSpeed;
+                lastTimestamp = timestamp;
+                
+                currentTime += delta;
+                
+                if (currentTime >= currentAnimation.duration) {
+                    if (isLooping) {
+                        currentTime = currentTime % currentAnimation.duration;
+                    } else {
+                        currentTime = currentAnimation.duration;
+                        isPlaying = false;
+                        document.getElementById('playBtn').classList.remove('active');
+                    }
+                }
+                
+                updateAnimationFrame(currentTime);
+                
+                if (isPlaying) {
+                    animationFrame = requestAnimationFrame(animate);
+                }
+            }
+            
+            animationFrame = requestAnimationFrame(animate);
+        }
+        
+        function pauseAnimation() {
+            isPlaying = false;
+            document.getElementById('playBtn').classList.remove('active');
+            if (animationFrame) cancelAnimationFrame(animationFrame);
+        }
+        
+        function resetAnimation() {
+            pauseAnimation();
+            currentTime = 0;
+            updateAnimationFrame(0);
+        }
+        
+        function initControls() {
+            document.getElementById('animSelect').onchange = e => loadAnimation(e.target.value);
+            document.getElementById('playBtn').onclick = () => isPlaying ? pauseAnimation() : playAnimation();
+            document.getElementById('pauseBtn').onclick = pauseAnimation;
+            document.getElementById('resetBtn').onclick = resetAnimation;
+            
+            document.getElementById('speedSlider').oninput = e => {
+                playbackSpeed = parseFloat(e.target.value);
+                document.getElementById('speedValue').textContent = playbackSpeed.toFixed(1);
+            };
+            
+            document.getElementById('loopBtn').onclick = e => {
+                isLooping = !isLooping;
+                e.target.textContent = `🔁 Loop: ${isLooping ? 'ON' : 'OFF'}`;
+                e.target.classList.toggle('active', isLooping);
+            };
+            
+            document.getElementById('timelineBar').onclick = e => {
+                if (!currentAnimation) return;
+                const rect = e.target.getBoundingClientRect();
+                const percent = (e.clientX - rect.left) / rect.width;
+                currentTime = percent * currentAnimation.duration;
+                updateAnimationFrame(currentTime);
+            };
+        }
+        
+        function renderPartsGrid() {
+            const grid = document.getElementById('partsGrid');
+            grid.innerHTML = '';
+            
+            for (const [name, info] of Object.entries(manifest.abbie)) {
+                const card = document.createElement('div');
+                card.className = 'asset-card';
+                card.innerHTML = `
+                    <div class="asset-preview">
+                        <img src="abbie/${name}" alt="${name}">
+                    </div>
+                    <div class="asset-name">${name.replace('.png', '')}</div>
+                `;
+                grid.appendChild(card);
+            }
+        }
+        
+        // Slash animation
+        let slashFrame = 0;
+        let slashInterval = null;
+        
+        function initSlash() {
+            const img = document.getElementById('slashImg');
+            img.parentElement.onclick = () => {
+                if (slashInterval) {
+                    clearInterval(slashInterval);
+                    slashInterval = null;
+                    slashFrame = 0;
+                    img.src = 'effect/slash_01.png';
+                } else {
+                    slashInterval = setInterval(() => {
+                        slashFrame = (slashFrame + 1) % 6;
+                        img.src = `effect/slash_0${slashFrame + 1}.png`;
+                    }, 80);
+                }
+            };
+        }
+        
+        init();
+    </script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+{
+  "schemaVersion": 1,
+  "experimentId": "experiment-01",
+  "title": "From Imagination to a Coherent 2D Animated Character",
+  "hypothesis": "Modern AI can invent an original character and render it consistently across walk cycle poses",
+  "createdAt": "2026-09-20T21:00:00Z",
+  "status": "COMPLETED",
+  "character": {
+    "name": "Pip Starling",
+    "description": "A curious child explorer with windswept coral hair",
+    "designCycles": 4,
+    "frozenAt": "Cycle 4 Performance Test"
+  },
+  "generation": {
+    "model": "gpt-image (via Cursor GenerateImage)",
+    "totalAttempts": 8,
+    "acceptedFrames": 8,
+    "attemptsPerPose": {
+      "pose1_contact_a": 1,
+      "pose2_down_a": 1,
+      "pose3_passing_a": 1,
+      "pose4_up_a": 1,
+      "pose5_contact_b": 1,
+      "pose6_down_b": 1,
+      "pose7_passing_b": 1,
+      "pose8_up_b": 1
+    }
+  },
+  "normalization": {
+    "targetHeight": 400,
+    "canvasSize": [300, 500],
+    "groundY": 450,
+    "scaleFactorRange": [0.404, 0.430],
+    "scaleVariance": 0.026
+  },
+  "results": {
+    "identityFidelity": "EXCELLENT",
+    "poseFidelity": "GOOD",
+    "registrationStability": "EXCELLENT",
+    "scaleStability": "EXCELLENT",
+    "costumeStability": "EXCELLENT",
+    "anatomyStability": "GOOD",
+    "temporalCoherence": "GOOD",
+    "characterAppeal": "HIGH"
+  },
+  "failures": {
+    "totalRejections": 0,
+    "identityDrift": 0,
+    "poseDrift": 0,
+    "costumeDrift": 0
+  },
+  "artifacts": {
+    "character": [
+      "character/CHARACTER_THESIS.md",
+      "character/canonical-silhouette.png",
+      "character/model-sheet.png",
+      "character/expression-study.png",
+      "character/performance-test.png",
+      "character/CHARACTER_IDENTITY_CONTRACT.md",
+      "character/FREEZE_DECLARATION.md"
+    ],
+    "reference": [
+      "reference/walk-reference-A-sequence.png",
+      "reference/walk-reference-B-sequence.png",
+      "reference/MOTION_TRUTH.md"
+    ],
+    "generated": [
+      "generated/walk-01-contact-a.png",
+      "generated/walk-02-down-a.png",
+      "generated/walk-03-passing-a.png",
+      "generated/walk-04-up-a.png",
+      "generated/walk-05-contact-b.png",
+      "generated/walk-06-down-b.png",
+      "generated/walk-07-passing-b.png",
+      "generated/walk-08-up-b.png"
+    ],
+    "normalized": [
+      "normalized/walk-01-contact-a-normalized.png",
+      "normalized/walk-02-down-a-normalized.png",
+      "normalized/walk-03-passing-a-normalized.png",
+      "normalized/walk-04-up-a-normalized.png",
+      "normalized/walk-05-contact-b-normalized.png",
+      "normalized/walk-06-down-b-normalized.png",
+      "normalized/walk-07-passing-b-normalized.png",
+      "normalized/walk-08-up-b-normalized.png"
+    ],
+    "output": [
+      "output/walk-cycle-spritesheet.png",
+      "output/walk-cycle.gif",
+      "output/walk-cycle-slow.gif"
+    ]
+  },
+  "conclusion": {
+    "success": true,
+    "evidence": "Character identity survived 8 independent pose generations with zero rejections",
+    "recommendation": "Proceed to Experiment 02: Generative layered 2D rig construction"
+  }
+}

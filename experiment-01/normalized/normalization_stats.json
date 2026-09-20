@@ -1,0 +1,212 @@
+{
+  "config": {
+    "target_height": 400,
+    "canvas_size": [
+      300,
+      500
+    ],
+    "ground_y": 450
+  },
+  "frames": {
+    "walk-01-contact-a": {
+      "original_size": [
+        864,
+        1152
+      ],
+      "bounding_box": [
+        206,
+        84,
+        689,
+        1015
+      ],
+      "character_height": 931,
+      "foot_y_original": 1014,
+      "center_x_original": 447,
+      "scale_factor": 0.43010752688172044,
+      "paste_offset": [
+        -42,
+        15
+      ],
+      "normalization_required": {
+        "scale_change": 0.5698924731182795,
+        "horizontal_shift": 42,
+        "vertical_shift": 15
+      }
+    },
+    "walk-02-down-a": {
+      "original_size": [
+        864,
+        1152
+      ],
+      "bounding_box": [
+        211,
+        73,
+        679,
+        1031
+      ],
+      "character_height": 958,
+      "foot_y_original": 1030,
+      "center_x_original": 445,
+      "scale_factor": 0.4179728317659352,
+      "paste_offset": [
+        -36,
+        21
+      ],
+      "normalization_required": {
+        "scale_change": 0.5820271682340648,
+        "horizontal_shift": 36,
+        "vertical_shift": 21
+      }
+    },
+    "walk-03-passing-a": {
+      "original_size": [
+        864,
+        1152
+      ],
+      "bounding_box": [
+        226,
+        74,
+        633,
+        1036
+      ],
+      "character_height": 962,
+      "foot_y_original": 1035,
+      "center_x_original": 429,
+      "scale_factor": 0.4162330905306972,
+      "paste_offset": [
+        -28,
+        20
+      ],
+      "normalization_required": {
+        "scale_change": 0.5837669094693028,
+        "horizontal_shift": 28,
+        "vertical_shift": 20
+      }
+    },
+    "walk-04-up-a": {
+      "original_size": [
+        864,
+        1152
+      ],
+      "bounding_box": [
+        139,
+        83,
+        752,
+        1029
+      ],
+      "character_height": 946,
+      "foot_y_original": 1028,
+      "center_x_original": 445,
+      "scale_factor": 0.42328042328042326,
+      "paste_offset": [
+        -38,
+        16
+      ],
+      "normalization_required": {
+        "scale_change": 0.5767195767195767,
+        "horizontal_shift": 38,
+        "vertical_shift": 16
+      }
+    },
+    "walk-05-contact-b": {
+      "original_size": [
+        864,
+        1152
+      ],
+      "bounding_box": [
+        159,
+        73,
+        716,
+        1048
+      ],
+      "character_height": 975,
+      "foot_y_original": 1047,
+      "center_x_original": 437,
+      "scale_factor": 0.4106776180698152,
+      "paste_offset": [
+        -29,
+        21
+      ],
+      "normalization_required": {
+        "scale_change": 0.5893223819301848,
+        "horizontal_shift": 29,
+        "vertical_shift": 21
+      }
+    },
+    "walk-06-down-b": {
+      "original_size": [
+        864,
+        1152
+      ],
+      "bounding_box": [
+        201,
+        72,
+        685,
+        1035
+      ],
+      "character_height": 963,
+      "foot_y_original": 1034,
+      "center_x_original": 443,
+      "scale_factor": 0.4158004158004158,
+      "paste_offset": [
+        -34,
+        21
+      ],
+      "normalization_required": {
+        "scale_change": 0.5841995841995842,
+        "horizontal_shift": 34,
+        "vertical_shift": 21
+      }
+    },
+    "walk-07-passing-b": {
+      "original_size": [
+        864,
+        1152
+      ],
+      "bounding_box": [
+        192,
+        64,
+        704,
+        1056
+      ],
+      "character_height": 992,
+      "foot_y_original": 1055,
+      "center_x_original": 448,
+      "scale_factor": 0.4036326942482341,
+      "paste_offset": [
+        -30,
+        28
+      ],
+      "normalization_required": {
+        "scale_change": 0.5963673057517659,
+        "horizontal_shift": 30,
+        "vertical_shift": 28
+      }
+    },
+    "walk-08-up-b": {
+      "original_size": [
+        864,
+        1152
+      ],
+      "bounding_box": [
+        178,
+        76,
+        714,
+        1050
+      ],
+      "character_height": 974,
+      "foot_y_original": 1049,
+      "center_x_original": 446,
+      "scale_factor": 0.41109969167523125,
+      "paste_offset": [
+        -33,
+        20
+      ],
+      "normalization_required": {
+        "scale_change": 0.5889003083247688,
+        "horizontal_shift": 33,
+        "vertical_shift": 20
+      }
+    }
+  }
+}

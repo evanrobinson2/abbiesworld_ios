@@ -1,0 +1,6 @@
+# Unity package files - already extracted
+*.unitypackage
+extracted/
+
+# Temporary/duplicate images
+images/
