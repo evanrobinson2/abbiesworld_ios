@@ -21,30 +21,40 @@ export function assembleCatalog(parts) {
   };
 }
 
-export function getLevel(catalog, levelId) {
+export function getLevel(catalog, levelId, overrides = {}) {
   const level = catalog.levels.find((entry) => entry.id === levelId) ?? catalog.levels[0];
   if (!level) throw new Error('peg-battle pack has no levels');
-  const enemy = catalog.enemies.find((entry) => entry.id === level.enemy);
-  const board = catalog.boards.find((entry) => entry.id === level.board);
-  const cards = level.deck.map((id) => catalog.cards.find((card) => card.id === id)).filter(Boolean);
-  return { level, enemy, board, cards };
+  const enemyId = overrides.enemyId ?? level.enemy;
+  const boardId = overrides.boardId ?? level.board;
+  const deckIds = overrides.deck ?? level.deck;
+  const enemy = catalog.enemies.find((entry) => entry.id === enemyId);
+  const board = catalog.boards.find((entry) => entry.id === boardId);
+  const cards = deckIds.map((id) => catalog.cards.find((card) => card.id === id)).filter(Boolean);
+  return {
+    level: { ...level, enemy: enemy?.id ?? level.enemy, board: board?.id ?? level.board, deck: deckIds },
+    enemy,
+    board,
+    cards,
+  };
 }
 
-export function createBattle(catalog, { levelId, seed = 1234 } = {}) {
-  const definition = getLevel(catalog, levelId ?? catalog.pack.defaultLevel);
+export function createBattle(catalog, { levelId, seed = 1234, enemyId, boardId, deck } = {}) {
+  const overrides = { enemyId, boardId, deck };
+  const definition = getLevel(catalog, levelId ?? catalog.pack.defaultLevel, overrides);
   if (!definition.enemy || !definition.board || definition.cards.length < 3) {
     throw new Error('peg-battle level is missing enemy, board, or cards');
   }
   const random = mulberry32(seed);
   const shuffled = shuffle(definition.cards.map((card) => card.id), random);
   const hand = shuffled.slice(0, definition.level.handSize);
-  const deck = shuffled.slice(definition.level.handSize);
+  const deckQueue = shuffled.slice(definition.level.handSize);
   const pegs = clonePegs(definition.board.pegs);
 
   return {
     alive: true,
     seed: Number(seed) || hashNumber(seed),
     catalog,
+    overrides,
     definition: freeze(definition),
     physics: { ...DEFAULT_PHYSICS },
     phase: 'intro',
@@ -61,7 +71,7 @@ export function createBattle(catalog, { levelId, seed = 1234 } = {}) {
     lastPower: 0,
     lastImpactTier: 0,
     hand,
-    deck,
+    deck: deckQueue,
     selectedCardId: null,
     pegs,
     ball: null,
@@ -101,12 +111,25 @@ export function resetBattle(session) {
   const catalog = session.catalog;
   const levelId = session.definition.level.id;
   const seed = session.seed;
+  const overrides = session.overrides ?? {};
   destroyBattle(session);
-  return createBattle(catalog, { levelId, seed });
+  return createBattle(catalog, { levelId, seed, ...overrides });
 }
 
-export function newRandomBattle(catalog, { levelId } = {}) {
-  return createBattle(catalog, { levelId, seed: (Math.random() * 0xffffffff) >>> 0 });
+export function newRandomBattle(catalog, { levelId, enemyId, boardId, deck } = {}) {
+  return createBattle(catalog, {
+    levelId,
+    enemyId,
+    boardId,
+    deck,
+    seed: (Math.random() * 0xffffffff) >>> 0,
+  });
+}
+
+export function clearFx(session) {
+  if (!session) return session;
+  session.fxQueue = [];
+  return session;
 }
 
 export function currentIntent(session) {
@@ -157,12 +180,26 @@ export function cycleHand(session, playedId) {
 }
 
 function applyStarPower(session, ballSpec) {
+  const already = Boolean(ballSpec.starPower);
   ballSpec.starPower = true;
   if (ballSpec.behavior === 'rocket') {
     ballSpec.launchSpeed = session.physics.maxSpeed * 0.85;
   }
-  if (ballSpec.behavior === 'boomerang') {
+  if (ballSpec.behavior === 'boomerang' && !ballSpec.starReturnGranted) {
     ballSpec.returnsLeft += 1;
+    ballSpec.starReturnGranted = true;
+  }
+  const ball = session.world?.ball;
+  if (!ball) return;
+  ball.starPower = true;
+  if (ballSpec.behavior === 'rocket') {
+    const speed = Math.hypot(ball.vx, ball.vy) || 1;
+    const target = session.physics.maxSpeed;
+    ball.vx = (ball.vx / speed) * target;
+    ball.vy = (ball.vy / speed) * target;
+  }
+  if (ballSpec.behavior === 'boomerang' && !already) {
+    ball.returnsLeft = ballSpec.returnsLeft;
   }
 }
 
@@ -278,9 +315,7 @@ export function advanceLiveShot(session, dt = SHOT_STEP_DT) {
     if (event.type !== 'peg') continue;
     const peg = session.world.pegs.find((entry) => entry.id === event.id);
     if (peg) resolvePegHit(session, peg, card, session.shotAcc);
-    if (session.shotAcc.starPower && session.world.ball) {
-      session.world.ball.starPower = true;
-    }
+    if (session.shotAcc.starPower) applyStarPower(session, session.shotAcc.ballSpec);
   }
   if (!session.world.ball.alive || session.shot.steps > 2400) {
     if (session.world.ball.alive) session.world.ball.alive = false;
@@ -404,7 +439,8 @@ export function resolveEnemyTurn(session) {
   session.shield = 0;
   session.playerHearts = Math.max(0, session.playerHearts - heartsLost);
   session.fxQueue = (session.catalog.fx.sequences[move.sequence] ?? ['impactFlash']).slice();
-  if (move.id === 'bark' || session.definition.enemy.signatureBoardAction?.when === `onAttack:${move.id}`) {
+  const when = session.definition.enemy.signatureBoardAction?.when;
+  if (when === `onAttack:${move.id}`) {
     applyMuddyPaws(session, session.definition.enemy.signatureBoardAction?.pegCount ?? 3);
   }
   session.intentIndex += 1;

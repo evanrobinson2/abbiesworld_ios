@@ -198,6 +198,7 @@ struct PegBattleSession {
         var power = 0
         var starPower = false
         var consecutive = 0
+        var burst = false
         var nextPegs = flight.pegs
         let hitIds = Set(flight.events)
         for index in nextPegs.indices where hitIds.contains(nextPegs[index].id) {
@@ -227,9 +228,9 @@ struct PegBattleSession {
                 peg.pendingCharge = true
             }
             consecutive += 1
-            if card.behavior == "star" && consecutive >= 10 {
+            if card.behavior == "star" && consecutive >= 10 && !burst {
                 power += starPower ? 20 : 10
-                consecutive = 0
+                burst = true
             }
             power += value
             nextPegs[index] = peg
@@ -259,16 +260,17 @@ struct PegBattleSession {
             phase = "victory"
             enemyState = "defeated"
         } else {
-            resolveEnemy()
+            phase = "hitResolve"
         }
     }
 
     mutating func resolveEnemy() {
+        guard phase == "hitResolve" else { return }
         let incoming = intent.damage
         let absorbed = min(shield, incoming)
         shield = 0
         playerHearts = max(0, playerHearts - (incoming - absorbed))
-        if intent.id == "bark" {
+        if enemy.signatureBoardAction.when == "onAttack:\(intent.id)" {
             let muddy = pegs.indices.filter { !pegs[$0].muddy }.shuffled(using: &rng)
             for index in muddy.prefix(enemy.signatureBoardAction.pegCount) {
                 pegs[index].muddy = true

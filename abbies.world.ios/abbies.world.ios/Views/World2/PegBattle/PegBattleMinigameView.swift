@@ -9,6 +9,7 @@ struct PegBattleMinigameView: View {
     @State private var session: PegBattleSession?
     @State private var aim: Double = 0
     @State private var loadError: String?
+    @State private var sessionToken = UUID()
 
     var body: some View {
         ZStack {
@@ -45,6 +46,7 @@ struct PegBattleMinigameView: View {
     }
 
     private func recreate(_ next: PegBattleSession) {
+        sessionToken = UUID()
         session = next
         aim = 0
     }
@@ -104,10 +106,17 @@ struct PegBattleMinigameView: View {
                         self.session = next
                     } label: {
                         VStack {
-                            Text(card?.glyph ?? "•").font(.largeTitle)
+                            if let card, let image = UIImage(named: PegBattleArt.catalogName(card.asset)) {
+                                Image(uiImage: image)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 72, height: 72)
+                            } else {
+                                Text(card?.glyph ?? "•").font(.largeTitle)
+                            }
                             Text(card?.shortName ?? id).bold()
                         }
-                        .frame(width: 110, height: 120)
+                        .frame(width: 110, height: 132)
                         .background(
                             RoundedRectangle(cornerRadius: 16)
                                 .fill(session.selectedCardId == id ? Color.yellow.opacity(0.5) : Color.white.opacity(0.9))
@@ -138,14 +147,15 @@ struct PegBattleMinigameView: View {
     }
 
     private func hearts(_ current: Int, max: Int) -> some View {
-        Text(String(repeating: "❤️", count: current) + String(repeating: "♡", count: max(0, max - current)))
+        Text(String(repeating: "❤️", count: current) + String(repeating: "♡", count: Swift.max(0, max - current)))
     }
 
     private func enemyPortrait(_ session: PegBattleSession) -> some View {
-        let name = "world2_peg_battle_bad_doggo_\(session.enemyState)"
+        let semantic = session.enemy.assets[session.enemyState] ?? "bad-doggo/\(session.enemyState)"
+        let name = PegBattleArt.catalogName(semantic)
         return VStack {
-            if UIImage(named: name) != nil {
-                Image(name).resizable().scaledToFit()
+            if let image = UIImage(named: name) {
+                Image(uiImage: image).resizable().scaledToFit()
             } else {
                 Capsule()
                     .fill(Color.orange.opacity(0.8))
@@ -157,8 +167,16 @@ struct PegBattleMinigameView: View {
     private func board(_ session: PegBattleSession) -> some View {
         GeometryReader { geo in
             ZStack {
-                RoundedRectangle(cornerRadius: 18)
-                    .fill(Color.white.opacity(0.35))
+                if let image = UIImage(named: PegBattleArt.catalogName(session.level.arenaAsset)) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: geo.size.width, height: geo.size.height)
+                        .clipped()
+                } else {
+                    RoundedRectangle(cornerRadius: 18)
+                        .fill(Color.white.opacity(0.35))
+                }
                 ForEach(session.pegs) { peg in
                     PegBattlePegView(peg: peg)
                         .frame(
@@ -186,6 +204,14 @@ struct PegBattleMinigameView: View {
         var next = session
         next.fire(angle: aim)
         self.session = next
+        let token = sessionToken
+        if next.phase == "hitResolve" {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.1) {
+                guard token == sessionToken, var later = self.session, later.phase == "hitResolve" else { return }
+                later.resolveEnemy()
+                self.session = later
+            }
+        }
     }
 }
 
@@ -194,12 +220,14 @@ struct PegBattlePegView: View {
 
     var body: some View {
         ZStack {
+            if peg.charged {
+                Circle()
+                    .stroke(Color.yellow.opacity(0.85), lineWidth: 3)
+                    .scaleEffect(1.28)
+            }
             Circle()
                 .fill(fill)
                 .overlay(Circle().stroke(Color(red: 0.23, green: 0.12, blue: 0.24), lineWidth: 2))
-            if peg.charged {
-                Circle().stroke(Color.yellow, lineWidth: 3).scaleEffect(1.25)
-            }
             if peg.painted {
                 Circle().fill(Color.purple.opacity(0.4))
             }

@@ -5,7 +5,7 @@ CAMERA / VIEWPOINT: orthographic-ish three-quarter object shot, slightly above
 FRAMING: single object centered, occupying about 70 percent of the frame, generous padding
 SILHOUETTE: thick friendly crescent / boomerang marble, rounded tips, readable at card size
 POSE: sitting in empty space, no stand
-BACKGROUND: flat solid chroma-key green #00CC66, no floor, no shadow blob
+BACKGROUND: flat solid chroma-key green #00CC66 only, no olive halo, no floor, no shadow blob, no sticker outline
 TRANSPARENCY: background must be a single flat color so it can be carved to alpha later
 LIGHTING: soft studio daylight, gentle cel highlight
 PALETTE: teal and gold candy, cream edge, strawberry-pink accent, dark-plum outline

@@ -511,28 +511,71 @@ footer {
 .fx-shock {
   position: absolute;
   left: 50%;
-  top: 40%;
-  width: 12px;
-  height: 12px;
-  border: 4px solid #3a1f3d;
-  border-radius: 50%;
+  top: 42%;
+  width: 24px;
+  height: 24px;
   transform: translate(-50%, -50%);
   animation: shock 420ms ease-out forwards;
 }
 
 @keyframes shock {
   to {
-    width: 220px;
-    height: 220px;
+    width: 240px;
+    height: 240px;
     opacity: 0;
   }
 }
 
-.fx-slash,
-.fx-paw {
+.fx-slash {
   position: absolute;
   inset: 20% 10%;
-  background: linear-gradient(110deg, transparent 40%, rgba(58, 31, 61, 0.55) 42%, transparent 44%);
+  background: linear-gradient(110deg, transparent 40%, rgba(58, 31, 61, 0.55) 42%, transparent 44%),
+    linear-gradient(98deg, transparent 48%, rgba(58, 31, 61, 0.45) 50%, transparent 52%),
+    linear-gradient(122deg, transparent 56%, rgba(58, 31, 61, 0.4) 58%, transparent 60%);
+}
+
+.fx-paw {
+  position: absolute;
+  right: 8%;
+  top: 18%;
+  width: 180px;
+  height: 180px;
+  animation: paw 380ms ease-out forwards;
+}
+
+@keyframes paw {
+  from {
+    transform: translate(40px, -20px) scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-10px, 30px) scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+.fx-freeze {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.28);
+  mix-blend-mode: screen;
+}
+
+.fx-scatter {
+  position: absolute;
+  left: 50%;
+  top: 28%;
+  transform: translateX(-50%);
+  font-size: 36px;
+  letter-spacing: 8px;
+  animation: scatter 640ms ease-out forwards;
+}
+
+@keyframes scatter {
+  to {
+    transform: translateX(-50%) translateY(-28px);
+    opacity: 0;
+  }
 }
 
 .fx-word {

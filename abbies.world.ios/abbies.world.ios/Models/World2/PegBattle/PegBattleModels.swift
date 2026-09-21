@@ -98,35 +98,18 @@ struct PegBattleCatalog: Equatable, Sendable {
     var levels: [PegBattleLevel]
 }
 
+enum PegBattleArt {
+    static func catalogName(_ semantic: String) -> String {
+        World2MinigamePackLoader.catalogName(packPrefix: "world2_peg_battle_", semantic: semantic)
+    }
+}
+
 enum PegBattleCatalogLoader {
+    static let packId = "peg-battle"
+
     static func load(bundle: Bundle = .main) throws -> PegBattleCatalog {
-        let roots = [
-            "minigames/peg-battle",
-            "World2/minigames/peg-battle",
-            "peg-battle",
-        ]
         func data(_ name: String) throws -> Data {
-            for root in roots {
-                if let url = bundle.url(forResource: name, withExtension: "json", subdirectory: root)
-                    ?? bundle.url(forResource: name, withExtension: "json") {
-                    return try Data(contentsOf: url)
-                }
-            }
-            // Nested content files
-            for root in roots {
-                if let url = bundle.url(
-                    forResource: name,
-                    withExtension: "json",
-                    subdirectory: "\(root)/content"
-                ) {
-                    return try Data(contentsOf: url)
-                }
-            }
-            throw NSError(
-                domain: "PegBattle",
-                code: 1,
-                userInfo: [NSLocalizedDescriptionKey: "Missing \(name).json in peg-battle pack"]
-            )
+            try World2MinigamePackLoader.data(packId: packId, resource: name, bundle: bundle)
         }
         let decoder = JSONDecoder()
         let pack = try decoder.decode(PegBattlePack.self, from: data("pack"))

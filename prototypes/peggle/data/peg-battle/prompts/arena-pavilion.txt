@@ -13,6 +13,6 @@ LINE TREATMENT: clean expressive outlines, tactile illustrated textures, gentle 
 RENDERING STYLE: Abbie's World hand-drawn digital illustration, bold chunky storybook forms, sophisticated rather than babyish, not chibi
 SCALE: full-screen iPad landscape battle arena
 CROPPING RULES: keep a broad empty central playfield so code-rendered SVG pegs and the ball can sit on top; do not paint pegs, marbles, scores, or UI into the board
-PROHIBITED: text, letters, numbers, UI, buttons, characters, animals, painted pegs, painted balls, logos, frightening material, weapons, cannons
+PROHIBITED: text, letters, numbers, words, banners with writing, the words PLINK or PAVILION, UI, buttons, characters, animals, painted pegs, painted balls, logos, frightening material, weapons, cannons. If a decorative ribbon exists it must be blank fabric with zero glyphs.
 INTENDED GAME PLACEMENT: battle scene background behind the pegboard
 RELATIONSHIP TO SIBLING ASSETS: same pavilion identity as poi.pegglePavilion.interior, but composed as a duel stage with a quieter center

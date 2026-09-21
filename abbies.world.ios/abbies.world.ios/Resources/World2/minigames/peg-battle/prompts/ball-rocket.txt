@@ -5,7 +5,7 @@ CAMERA / VIEWPOINT: orthographic-ish three-quarter object shot, slightly above, 
 FRAMING: single object centered, occupying about 70 percent of the frame, generous padding
 SILHOUETTE: compact rounded rocket with cream fins, still reads as a ball/projectile toy
 POSE: sitting in empty space, no stand, no exhaust flame required
-BACKGROUND: flat solid chroma-key green #00CC66, no floor, no shadow blob
+BACKGROUND: flat solid chroma-key green #00CC66 only, no olive halo, no floor, no shadow blob, no sticker outline
 TRANSPARENCY: background must be a single flat color so it can be carved to alpha later
 LIGHTING: soft studio daylight, gentle cel highlight
 PALETTE: strawberry pink body, cream fins, teal window, brass gold nose, dark-plum outline

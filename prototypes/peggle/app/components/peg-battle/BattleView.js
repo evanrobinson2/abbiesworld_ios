@@ -11,6 +11,7 @@ import {
   beginPlayerTurn,
   cardArt,
   chooseCard,
+  clearFx,
   createBattle,
   currentIntent,
   debugSnapshot,
@@ -51,6 +52,8 @@ function Placeholder({ label, fill }) {
 export default function BattleView({
   catalog,
   seed = 1234,
+  enemyId,
+  boardId,
   debug = false,
   harness = false,
   onExit,
@@ -72,14 +75,14 @@ export default function BattleView({
   }
 
   useEffect(() => {
-    replaceSession(createBattle(catalog, { seed }));
+    replaceSession(createBattle(catalog, { seed, enemyId, boardId }));
     return () => {
       destroyBattle(sessionRef.current);
       sessionRef.current = null;
     };
-    // catalog is stable for the prototype; seed is the recreation key
+    // catalog is stable for the prototype; seed / enemy / board recreate the session
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [seed]);
+  }, [seed, enemyId, boardId]);
 
   const session = sessionRef.current;
   const snapshot = session ? debugSnapshot(session) : null;
@@ -105,6 +108,17 @@ export default function BattleView({
     }
     return undefined;
   }, [session?.phase]);
+
+  useEffect(() => {
+    if (!session?.fxQueue?.length) return undefined;
+    const timer = window.setTimeout(() => {
+      if (sessionRef.current?.fxQueue?.length) {
+        clearFx(sessionRef.current);
+        refresh();
+      }
+    }, 720);
+    return () => window.clearTimeout(timer);
+  }, [session?.phase, session?.fxQueue?.join(',')]);
 
   useEffect(() => {
     if (!sessionRef.current || sessionRef.current.phase !== 'resolving') return undefined;
@@ -181,7 +195,15 @@ export default function BattleView({
           {harness && (
             <button
               type="button"
-              onClick={() => replaceSession(newRandomBattle(catalog, { levelId: session?.definition.level.id }))}
+              onClick={() =>
+                replaceSession(
+                  newRandomBattle(catalog, {
+                    levelId: session?.definition.level.id,
+                    enemyId,
+                    boardId,
+                  })
+                )
+              }
             >
               New Random Battle
             </button>

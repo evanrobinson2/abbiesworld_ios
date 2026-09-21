@@ -56,10 +56,21 @@ export default function PegBattleHarnessPage() {
         >
           New random battle
         </button>
+        <button type="button" onClick={() => window.location.reload()}>
+          Reload asset manifest
+        </button>
         <a href="/">Kid battle</a>
         <a href="/plink">Legacy marble drop</a>
       </form>
-      <BattleView key={`${seed}-${enemy}-${board}`} catalog={catalog} seed={seed} debug harness />
+      <BattleView
+        key={`${seed}-${enemy}-${board}`}
+        catalog={catalog}
+        seed={seed}
+        enemyId={enemy}
+        boardId={board}
+        debug
+        harness
+      />
     </main>
   );
 }

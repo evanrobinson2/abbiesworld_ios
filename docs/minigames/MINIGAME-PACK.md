@@ -46,4 +46,16 @@ python3 scripts/minigame_packs/generate.py --pack <pack-id>
 python3 scripts/minigame_packs/sync.py --pack <pack-id>
 ```
 
-Then register a new POI + route + view. Do not copy the battle engine into that game.
+Then register a new POI + route + view. Do **not** copy `PegBattleSession`.
+
+World 2 door checklist (keep this small):
+
+1. `pack.json` names the existing land / POI, or a new `poi.*` id.
+2. `World2POIRegistry` gets one archetype (name, art keys, contract route).
+3. Place it on an existing scene hardpoint in `World2SceneCatalog` — Evan places land; do not invent extra pads.
+4. One `World2POIRoute` case + one `World2RootView` switch arm that opens **your** view.
+5. iOS loads JSON through `World2MinigamePackLoader` so the next pack does not hard-code bundle paths.
+
+Peg Battle reuses `poi.pegglePavilion` on Peggle Land, tunneled **west of Work Land** (Home → west → Work → west → Peggle), route `.plink`.
+
+The custom view is only the door. Live combat stays inside a disposable session.

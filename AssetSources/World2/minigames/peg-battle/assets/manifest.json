@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "pack": "peg-battle",
-  "updatedAt": "2026-09-21T21:28:46.817850Z",
+  "updatedAt": "2026-09-21T21:51:42.338360Z",
   "families": {
     "bad-doggo": {
       "character": "bad-doggo",
@@ -214,7 +214,7 @@
       "ok": true,
       "rawRel": "assets/raw/arena-pavilion.png",
       "generationSource": "gpt-image-1",
-      "createdAt": "2026-09-21T21:26:10.864757Z",
+      "createdAt": "2026-09-21T21:51:42.332406Z",
       "carvedRel": "assets/carved/arena-pavilion.png"
     },
     {

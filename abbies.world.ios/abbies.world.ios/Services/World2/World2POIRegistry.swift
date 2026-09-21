@@ -338,6 +338,10 @@ enum World2POIRegistry {
     )
 
     // MARK: - Peggle Land
+    //
+    // Door only. Peg Battle combat lives in the peg-battle content pack +
+    // PegBattleSession. The next minigame should copy AssetSources/World2/minigames/
+    // and add one route/view — not fork this session.
 
     static let pegglePavilion = World2POIArchetype(
         id: pegglePavilionID,

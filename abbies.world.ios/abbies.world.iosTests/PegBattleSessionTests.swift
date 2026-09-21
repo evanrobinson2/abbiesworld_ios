@@ -44,14 +44,29 @@ final class PegBattleSessionTests: XCTestCase {
         session.chooseCard(session.hand[0])
         session.fire(angle: 0.2)
         XCTAssertEqual(session.lastDamage, session.lastPower / 10)
-        XCTAssertTrue(["playerAim", "victory", "defeat"].contains(session.phase))
-        if session.phase == "playerAim" {
-            XCTAssertEqual(session.intent.id, "scratch")
+        XCTAssertTrue(["hitResolve", "victory", "defeat"].contains(session.phase))
+        if session.phase == "hitResolve" {
+            session.resolveEnemy()
+            XCTAssertTrue(["playerAim", "defeat"].contains(session.phase))
+            if session.phase == "playerAim" {
+                XCTAssertEqual(session.intent.id, "scratch")
+            }
         }
     }
 
     func testPavilionRouteStaysPlinkForTheWorldHook() {
         XCTAssertEqual(World2POIRegistry.pegglePavilion.route, .plink)
         XCTAssertEqual(World2POIRegistry.pegglePavilion.id, "poi.pegglePavilion")
+        XCTAssertEqual(World2POIRegistry.pegglePavilion.kind, .minigame)
+    }
+
+    func testPackLoaderFindsPegBattleJSON() throws {
+        let data = try World2MinigamePackLoader.data(
+            packId: "peg-battle",
+            resource: "pack",
+            bundle: Bundle(for: World2ViewModel.self)
+        )
+        XCTAssertGreaterThan(data.count, 20)
+        XCTAssertEqual(PegBattleArt.catalogName("balls/star"), "world2_peg_battle_balls_star")
     }
 }

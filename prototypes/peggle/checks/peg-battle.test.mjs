@@ -140,7 +140,7 @@ describe('BattleSession', () => {
     if (waiting) assert.ok(session.hand.includes(waiting));
   });
 
-  it('telegraphs bark then scratch then pounce', () => {
+    it('telegraphs bark then scratch then pounce', () => {
     const session = createBattle(catalog, { seed: 8 });
     assert.equal(currentIntent(session).id, 'bark');
     session.phase = 'hitResolve';
@@ -150,6 +150,22 @@ describe('BattleSession', () => {
     resolveEnemyTurn(session);
     assert.equal(currentIntent(session).id, 'pounce');
     assert.equal(currentIntent(session).damage, 4);
+  });
+
+  it('applies muddy paws only on the signature bark', () => {
+    const session = createBattle(catalog, { seed: 8 });
+    session.phase = 'hitResolve';
+    resolveEnemyTurn(session);
+    assert.equal(session.pegs.filter((peg) => peg.muddy).length, 3);
+    session.phase = 'hitResolve';
+    resolveEnemyTurn(session);
+    assert.equal(session.pegs.filter((peg) => peg.muddy).length, 3);
+  });
+
+  it('lets the harness pick an enemy without editing the pack JSON', () => {
+    const session = createBattle(catalog, { seed: 1, enemyId: 'bad-doggo', boardId: 'pavilion-duel' });
+    assert.equal(session.definition.enemy.id, 'bad-doggo');
+    assert.equal(session.definition.board.id, 'pavilion-duel');
   });
 
   it('bubble shield expires after the enemy attack', () => {

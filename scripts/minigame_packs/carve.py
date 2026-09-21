@@ -95,6 +95,29 @@ def _largest_component(mask: np.ndarray) -> np.ndarray:
     return keep
 
 
+def _defringe_green(rgba: np.ndarray, rounds: int = 14) -> np.ndarray:
+    """Eat green/olive pixels that touch already-transparent background."""
+    out = rgba.copy()
+    for _ in range(rounds):
+        alpha = out[:, :, 3]
+        r = out[:, :, 0].astype(np.int16)
+        g = out[:, :, 1].astype(np.int16)
+        b = out[:, :, 2].astype(np.int16)
+        greenish = (g > r + 4) & (g > b + 8) & (g >= 30)
+        transparent = alpha < 8
+        near = np.zeros_like(transparent)
+        near[1:, :] |= transparent[:-1, :]
+        near[:-1, :] |= transparent[1:, :]
+        near[:, 1:] |= transparent[:, :-1]
+        near[:, :-1] |= transparent[:, 1:]
+        kill = greenish & near & (alpha > 0)
+        if not kill.any():
+            break
+        out[kill, 3] = 0
+        out[kill, :3] = 0
+    return out
+
+
 def carve_bytes(source: Image.Image, size: int | None = 1024) -> tuple[Image.Image, dict]:
     rgb_image = source.convert("RGB")
     rgb = np.asarray(rgb_image).astype(np.float32)
@@ -102,17 +125,27 @@ def carve_bytes(source: Image.Image, size: int | None = 1024) -> tuple[Image.Ima
     distance = np.linalg.norm(rgb - background, axis=2)
     chroma_distance = np.linalg.norm(rgb - CHROMA, axis=2)
     r, g, b = rgb[:, :, 0], rgb[:, :, 1], rgb[:, :, 2]
-    lime = (g > r + 18) & (g > b + 40) & (g > 70)
-    is_bg = (distance <= TOLERANCE) | (chroma_distance <= 48.0) | lime
-    outside = _flood_background(is_bg) | lime
+    lime = (g > r + 18) & (g > b + 40) & (g > 70) & (r < 150)
+    olive = (g > r + 4) & (g > b + 8) & (g >= 40) & (r < 120) & (b < 110)
+    is_bg = (distance <= TOLERANCE) | (chroma_distance <= 48.0) | lime | olive
+    outside = _flood_background(is_bg) | lime | olive
     subject = _largest_component(~outside)
+    # Eat the generator's olive sticker fringe so carved cards don't keep a halo.
+    subject_image = Image.fromarray((subject.astype(np.uint8) * 255), mode="L")
+    subject_image = subject_image.filter(ImageFilter.MinFilter(5))
+    subject = np.asarray(subject_image) > 127
     alpha = np.where(subject, 255, 0).astype(np.uint8)
     alpha_image = Image.fromarray(alpha, mode="L")
     if FEATHER_PX > 0:
         alpha_image = alpha_image.filter(ImageFilter.GaussianBlur(FEATHER_PX))
     carved = rgb_image.convert("RGBA")
-    carved.putalpha(alpha_image)
-    bbox = alpha_image.point(lambda v: 255 if v > 8 else 0).getbbox()
+    rgba = np.asarray(carved).copy()
+    alpha_arr = np.asarray(alpha_image)
+    rgba[:, :, 3] = alpha_arr
+    rgba[alpha_arr == 0, :3] = 0
+    rgba = _defringe_green(rgba)
+    carved = Image.fromarray(rgba, mode="RGBA")
+    bbox = carved.split()[-1].point(lambda v: 255 if v > 8 else 0).getbbox()
     if bbox is None:
         raise ValueError("carve removed everything")
     left, top, right, bottom = bbox
