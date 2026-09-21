@@ -21,13 +21,9 @@ Open http://127.0.0.1:5174
 
 Play the same prototype on Vercel (no localhost): https://abbies-world-plink.vercel.app
 
-Flow a six-year-old can follow:
+The web flow currently has a **parked** Safari map, loadout, and mixed-critter clash overlay. Product spec is 1v1 (one animal, one opponent) in `docs/minigames/PLINK-PLAN.md`. Do not treat the swarm overlay as the iOS game.
 
-1. Peggle Land overland.
-2. Tap **The Plink Pavilion**.
-3. Pick a bed.
-4. Drag to aim, release to drop the dewdrop marble.
-5. Wake every **glow seed**. Extra drops come from bowls; the garden always gifts one last drop.
+Soundtrack for now: Abbie's World on safari; Cheerful Dance and Blocks in the Game on the board.
 
 ## Data
 
