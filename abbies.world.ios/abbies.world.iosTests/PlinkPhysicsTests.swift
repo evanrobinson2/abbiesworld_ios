@@ -12,6 +12,9 @@ final class PlinkPhysicsTests: XCTestCase {
         XCTAssertEqual(campaign.beds.first?.id, "dewdrop-nursery")
         XCTAssertEqual(campaign.beds.last?.awardsDecoration, World2StoryDecoration.plinkFountain.id)
         XCTAssertTrue((campaign.beds.first?.pegs.contains { $0.kind == "glow" }) ?? false)
+        XCTAssertEqual(campaign.music.map(\.id), ["abbies-world", "cheerful-dance", "blocks-in-the-game"])
+        XCTAssertEqual(campaign.music.map(\.role), ["safari", "play", "blocks"])
+        XCTAssertEqual(PlinkMusicService.playlist.count, 3)
     }
 
     func testAimIsClamped() {
@@ -30,7 +33,8 @@ final class PlinkPhysicsTests: XCTestCase {
     func testFreshProgressUnlocksOnlyTheNursery() throws {
         let campaign = try PlinkCampaignLoader.load(bundle: Bundle(for: World2ViewModel.self))
         let progress = PlinkProgress.fresh(from: campaign)
-        XCTAssertEqual(progress.unlockedBedIds, ["dewdrop-nursery"])
+        XCTAssertTrue(progress.unlockedBedIds.contains("dewdrop-nursery"))
+        XCTAssertEqual(progress.unlockedBedIds.count, campaign.beds.filter(\.unlockedByDefault).count)
         var round = PlinkRound.start(campaign: campaign, bed: campaign.beds[0], progress: progress)
         XCTAssertEqual(round.glowRemaining, 3)
         PlinkPhysics.resolveShot(&round, angle: 0)

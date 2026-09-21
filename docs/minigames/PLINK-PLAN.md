@@ -42,6 +42,16 @@ Parked, not spec: a prototype `clash.js` / campaign safari patch may exist from 
 
 **Critter art DAG.** Character reference in, constrained poses out, for battle stages (at least: idle, hit, charged, low hearts, win, rest). Same kitty, not a new design each pose.
 
+**Soundtrack (for now).** Three parent-supplied pieces, not per-level yet:
+
+| Track | Source title | Role now |
+| --- | --- | --- |
+| Abbie's World | Abbie’s World | Safari / lobby |
+| Cheerful Dance | Веселый танец | Board (rotates with Blocks) |
+| Blocks in the Game | Блоки в игре | Board (rotates with Cheerful Dance) |
+
+Beds may later set a `music` id. Do not invent new level music until asked.
+
 ## Not in scope unless reopened
 
 - Expanding World 2 scene-catalog / land authoring (Evan).
@@ -55,7 +65,7 @@ Parked, not spec: a prototype `clash.js` / campaign safari patch may exist from 
 
 Wire Evan’s three plates. Paint the Swift board with interior + seed/glow/ball sprites. Local catalog fallbacks for `map.peggleLand` and the pavilion interior/exterior so the existing land/POI can show his art when he places it. Same falling timescale as Vercel. Tests still decode the eight beds.
 
-**Done when:** `-launchPlink` shows the innard behind a falling dewdrop, and the pavilion POI uses the transparent exterior.
+**Done when:** `-launchPlink` shows the innard behind a falling dewdrop, the pavilion POI uses the transparent exterior, and the three bundled tracks play (safari vs board).
 
 ### Phase B — Safari picker + loadout
 
@@ -95,7 +105,7 @@ Pipeline: character ref → locked silhouette → poses for battle stages → op
 
 ### Phase F — Only after A–D feel good on device
 
-More animals, more poses, server campaign record, sound. Not before.
+More animals, more poses, server campaign record, original per-level music. Not before.
 
 ## Questions (answer these; defaults in italics)
 

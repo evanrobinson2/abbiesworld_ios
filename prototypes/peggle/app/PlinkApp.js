@@ -5,6 +5,7 @@ import { clampAim } from './lib/physics.js';
 import {
   SHOT_PLAYBACK_RATE,
   SHOT_STEP_DT,
+  activateTiltPrompt,
   advanceShot,
   beginShot,
   createProgress,
@@ -15,6 +16,25 @@ import {
 } from './lib/engine.js';
 
 const PLAYER_ID = 'player.local';
+
+const ANIMAL_GLYPH = {
+  bunny: '🐰',
+  fox: '🦊',
+  turtle: '🐢',
+  parrot: '🦜',
+  panda: '🐼',
+  lion: '🦁',
+  owl: '🦉',
+  elephant: '🐘',
+};
+
+const PEG_FILL = {
+  glow: '#f4c430',
+  seed: '#ef7ea8',
+  tilt: '#5ec8d8',
+  bomb: '#3d8b4f',
+  redBomb: '#d4453a',
+};
 
 function usePlaceholder(src) {
   const [image, setImage] = useState(null);
@@ -54,6 +74,12 @@ function drawCircleSprite(ctx, image, x, y, radius, fallback) {
   ctx.stroke();
 }
 
+function pegArt(peg, art) {
+  if (peg.kind === 'glow') return art.glow;
+  if (peg.kind === 'seed') return art.seed;
+  return null;
+}
+
 function drawBoard(ctx, round, width, height, aim, hovering, ball, trail, art) {
   const physics = round.campaign.physics;
   ctx.clearRect(0, 0, width, height);
@@ -91,20 +117,23 @@ function drawBoard(ctx, round, width, height, aim, hovering, ball, trail, art) {
     const y = peg.y * height;
     const r = Math.max(10, physics.pegRadius * minDim);
     ctx.globalAlpha = peg.hit ? 0.35 : 1;
-    drawCircleSprite(
-      ctx,
-      peg.kind === 'glow' ? art.glow : art.seed,
-      x,
-      y,
-      r,
-      peg.kind === 'glow' ? '#f4c430' : '#ef7ea8'
-    );
+    drawCircleSprite(ctx, pegArt(peg, art), x, y, r, PEG_FILL[peg.kind] ?? PEG_FILL.seed);
     ctx.globalAlpha = 1;
     if (peg.kind === 'glow' && !peg.hit && !art.glow) {
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255,255,255,0.7)';
       ctx.arc(x - r * 0.25, y - r * 0.25, r * 0.28, 0, Math.PI * 2);
       ctx.fill();
+    }
+    if (peg.kind === 'tilt' && !peg.hit) {
+      ctx.strokeStyle = '#fff8e7';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(x, y - r * 0.45);
+      ctx.lineTo(x, y + r * 0.45);
+      ctx.moveTo(x - r * 0.45, y);
+      ctx.lineTo(x + r * 0.45, y);
+      ctx.stroke();
     }
   }
 
@@ -152,67 +181,115 @@ function drawBoard(ctx, round, width, height, aim, hovering, ball, trail, art) {
   }
 }
 
-function LandView({ inspect, onEnter }) {
+function SafariMap({ inspect, progress, onPick }) {
+  const safari = inspect.safari ?? {
+    title: 'Plink Safari',
+    summary: 'Pick any animal garden.',
+  };
   return (
-    <section className="land">
+    <section className="safari">
       <header>
         <p className="kicker">Abbie&rsquo;s World</p>
-        <h1>{inspect.land.name}</h1>
-        <p>{inspect.land.summary}</p>
+        <h1>{safari.title}</h1>
+        <p>{safari.summary}</p>
       </header>
-      <button className="pavilion" onClick={onEnter} type="button">
-        <img alt="" className="land-art" src="/placeholders/land.png" />
-        <img alt="" className="dome-art" src="/placeholders/pavilion.png" />
-        <strong>{inspect.poi.name}</strong>
-        <em>{inspect.poi.callToAction}</em>
-      </button>
-      <p className="hint">Tap the pavilion to go inside. This is the Peggle Land POI.</p>
+      <div className="safari-map">
+        <img alt="" className="land-plate" src="/placeholders/land.png" />
+        <img alt="" className="pavilion-chip" src="/placeholders/pavilion.png" />
+        {inspect.beds.map((bed) => {
+          const cleared = progress.clearedBedIds.includes(bed.id);
+          const x = bed.map?.x ?? 0.5;
+          const y = bed.map?.y ?? 0.5;
+          return (
+            <button
+              key={bed.id}
+              className={`garden-pin${cleared ? ' cleared' : ''}`}
+              style={{ left: `${x * 100}%`, top: `${y * 100}%` }}
+              onClick={() => onPick(bed.id)}
+              type="button"
+            >
+              <span aria-hidden="true">{ANIMAL_GLYPH[bed.animal] ?? '🌱'}</span>
+              <strong>{bed.name}</strong>
+            </button>
+          );
+        })}
+      </div>
+      <p className="status">
+        Gems: {progress.gems}. Gardens helped: {progress.clearedBedIds.length}/{inspect.bedCount}.
+        {progress.awardedDecoration ? ' Marble Fountain earned.' : ''}
+      </p>
+      <p className="hint">Tap any animal garden. Nothing is locked.</p>
     </section>
   );
 }
 
-function Lobby({ inspect, progress, onPlay, onBack }) {
+function Loadout({ campaign, bed, loadout, onToggle, onPlay, onBack }) {
+  const max = campaign.clash?.maxLoadout ?? 2;
   return (
-    <section className="lobby">
+    <section className="loadout">
       <button className="texty" onClick={onBack} type="button">
-        Back to {inspect.land.name}
+        Back to Safari
       </button>
-      <h1>{inspect.poi.name}</h1>
-      <p>{inspect.poi.summary}</p>
-      <p className="status">
-        Gems earned here: {progress.gems}. Beds cleared: {progress.clearedBedIds.length}/{inspect.bedCount}.
-        {progress.awardedDecoration ? ' Marble Fountain earned.' : ''}
-      </p>
-      <ol className="beds">
-        {inspect.beds.map((bed) => {
-          const unlocked = progress.unlockedBedIds.includes(bed.id);
-          const cleared = progress.clearedBedIds.includes(bed.id);
+      <h1>Pack for {bed.name}</h1>
+      <p>{bed.summary}</p>
+      <p className="status">Pick up to {max} power-ups, then play. You can also go with none.</p>
+      <ul className="power-ups">
+        {(campaign.powerUps ?? []).map((power) => {
+          const selected = loadout.includes(power.id);
+          const full = !selected && loadout.length >= max;
           return (
-            <li key={bed.id}>
-              <button disabled={!unlocked} onClick={() => onPlay(bed.id)} type="button">
-                <strong>{bed.name}</strong>
-                <span>
-                  {bed.glow} glow seeds · {bed.pegs} beads · {bed.drops} drops
-                  {cleared ? ' · cleared' : unlocked ? '' : ' · locked'}
-                </span>
+            <li key={power.id}>
+              <button
+                className={selected ? 'picked' : ''}
+                disabled={full}
+                onClick={() => onToggle(power.id)}
+                type="button"
+              >
+                <strong>{power.name}</strong>
+                <span>{power.summary}</span>
               </button>
             </li>
           );
         })}
-      </ol>
+      </ul>
+      <button className="primary" onClick={onPlay} type="button">
+        Play {bed.name}
+      </button>
     </section>
   );
 }
 
-function Board({ campaign, bedId, progress, onExit, onProgress }) {
+function ClashOverlay({ clash }) {
+  if (!clash) return null;
+  return (
+    <aside className="clash-overlay" data-testid="clash-overlay">
+      <p className="hearts">Your hearts: {clash.playerHearts}</p>
+      <ul className="critter-row">
+        {clash.critters.map((critter) => (
+          <li key={critter.id} data-resting={critter.hearts === 0}>
+            <strong>{critter.name}</strong>
+            <span>{critter.hearts} hearts</span>
+          </li>
+        ))}
+      </ul>
+      <p className="report">{clash.lastReport}</p>
+      {clash.tiltCharges > 0 ? <p>Tilt Balls: {clash.tiltCharges}</p> : null}
+      {clash.tiltArmed ? <p>Next drop will tilt-steer.</p> : null}
+    </aside>
+  );
+}
+
+function Board({ campaign, bedId, loadout, progress, onExit, onProgress }) {
   const canvasRef = useRef(null);
   const worldRef = useRef(null);
   const roundRef = useRef(null);
-  const [round, setRound] = useState(() => createRound(campaign, campaign.beds.find((bed) => bed.id === bedId), progress));
+  const bed = campaign.beds.find((item) => item.id === bedId) ?? campaign.beds[0];
+  const [round, setRound] = useState(() => createRound(campaign, bed, progress, { loadout }));
   const [aim, setAim] = useState(0);
   const [hovering, setHovering] = useState(false);
   const [ball, setBall] = useState(null);
   const [trail, setTrail] = useState([]);
+  const [tiltFlight, setTiltFlight] = useState(false);
   const interior = usePlaceholder('/placeholders/interior.png');
   const seed = usePlaceholder('/placeholders/seed.png');
   const glow = usePlaceholder('/placeholders/glow.png');
@@ -264,6 +341,7 @@ function Board({ campaign, bedId, progress, onExit, onProgress }) {
         worldRef.current = null;
         setBall(null);
         setTrail([]);
+        setTiltFlight(false);
         setRound(settled);
         onProgressRef.current(settled.progress);
         return;
@@ -273,6 +351,35 @@ function Board({ campaign, bedId, progress, onExit, onProgress }) {
     frame = window.requestAnimationFrame(tick);
     return () => window.cancelAnimationFrame(frame);
   }, [round.phase]);
+
+  useEffect(() => {
+    const onKey = (event) => {
+      if (!worldRef.current?.tiltEnabled) return;
+      if (event.key === 'ArrowLeft' || event.key === 'a' || event.key === 'A') {
+        worldRef.current.tiltSteer = -1;
+      } else if (event.key === 'ArrowRight' || event.key === 'd' || event.key === 'D') {
+        worldRef.current.tiltSteer = 1;
+      }
+    };
+    const onUp = (event) => {
+      if (!worldRef.current?.tiltEnabled) return;
+      if (['ArrowLeft', 'ArrowRight', 'a', 'A', 'd', 'D'].includes(event.key)) {
+        worldRef.current.tiltSteer = 0;
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('keyup', onUp);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('keyup', onUp);
+    };
+  }, [round.phase]);
+
+  const setSteer = (value) => {
+    if (worldRef.current?.tiltEnabled) {
+      worldRef.current.tiltSteer = value;
+    }
+  };
 
   const onPointer = (event) => {
     if (round.phase !== 'aim') return;
@@ -287,11 +394,13 @@ function Board({ campaign, bedId, progress, onExit, onProgress }) {
 
   const fire = () => {
     if (round.phase !== 'aim') return;
+    const armed = Boolean(round.clash?.tiltArmed);
     const { round: falling, world } = beginShot(
       { ...round, pegs: round.pegs.map((peg) => ({ ...peg })) },
       aim
     );
     worldRef.current = world;
+    setTiltFlight(armed);
     setTrail([{ x: world.ball.x, y: world.ball.y }]);
     setBall({ ...world.ball });
     setRound(falling);
@@ -301,56 +410,140 @@ function Board({ campaign, bedId, progress, onExit, onProgress }) {
     worldRef.current = null;
     setBall(null);
     setTrail([]);
-    setRound(createRound(campaign, round.bed, progress));
+    setTiltFlight(false);
+    setRound(createRound(campaign, round.bed, progress, { loadout }));
     setAim(0);
+  };
+
+  const armTilt = () => {
+    setRound((current) => {
+      if (!current.clash) return current;
+      const clash = { ...current.clash };
+      if (!activateTiltPrompt(clash)) return current;
+      return { ...current, clash, status: 'Tilt is packed for the next drop.' };
+    });
   };
 
   return (
     <section className="board">
       <header className="hud">
         <button className="texty" onClick={onExit} type="button">
-          Pavilion
+          Safari
         </button>
         <div>
-          <strong>{round.bed.name}</strong>
+          <strong>
+            {ANIMAL_GLYPH[round.bed.animal] ?? ''} {round.bed.name}
+          </strong>
           <span>
-            {remainingGlow(round.pegs)} glow · {round.dropsLeft} drops · {round.gemsThisRound} gems
+            {remainingGlow(round.pegs)} glow · {round.clash?.playerHearts ?? round.dropsLeft} hearts ·{' '}
+            {round.gemsThisRound} gems
           </span>
         </div>
         <button className="texty" onClick={retry} type="button">
           Again
         </button>
       </header>
-      <canvas
-        ref={canvasRef}
-        className="playfield"
-        onPointerMove={onPointer}
-        onPointerDown={onPointer}
-        onPointerUp={fire}
-        aria-label="Plink playfield. Drag to aim, release to drop."
-      />
+      <ClashOverlay clash={round.clash} />
+      <div className="play-wrap">
+        <canvas
+          ref={canvasRef}
+          className="playfield"
+          onPointerMove={onPointer}
+          onPointerDown={onPointer}
+          onPointerUp={fire}
+          aria-label="Plink playfield. Drag to aim, release to drop."
+        />
+        {tiltFlight ? (
+          <div className="tilt-overlay">
+            <p>Tilt is steering this drop. Finger aim stays the same. iPad tilt lives in the Swift app.</p>
+            <div className="tilt-paddles">
+              <button
+                type="button"
+                onPointerDown={() => setSteer(-1)}
+                onPointerUp={() => setSteer(0)}
+                onPointerLeave={() => setSteer(0)}
+              >
+                Tilt left
+              </button>
+              <button
+                type="button"
+                onPointerDown={() => setSteer(1)}
+                onPointerUp={() => setSteer(0)}
+                onPointerLeave={() => setSteer(0)}
+              >
+                Tilt right
+              </button>
+            </div>
+          </div>
+        ) : null}
+        {round.clash?.tiltPrompt ? (
+          <button className="tilt-thumb" onClick={armTilt} type="button">
+            Tilt Ball
+          </button>
+        ) : null}
+      </div>
       <p className="status" data-testid="plink-status">
         {round.status}
       </p>
       {round.phase === 'cleared' ? (
-        <button className="primary" onClick={onExit} type="button">
-          Back to the pavilion
-        </button>
+        <div className="end-card">
+          <p>{round.status}</p>
+          <button className="primary" onClick={onExit} type="button">
+            Back to Safari
+          </button>
+        </div>
       ) : null}
-      {round.phase === 'retry' ? (
-        <button className="primary" onClick={retry} type="button">
-          Try this bed again
-        </button>
+      {round.phase === 'rest' || round.phase === 'retry' ? (
+        <div className="end-card">
+          <p>The garden needs a rest. Try again whenever you like.</p>
+          <button className="primary" onClick={retry} type="button">
+            Try this garden again
+          </button>
+          <button className="texty" onClick={onExit} type="button">
+            Back to Safari
+          </button>
+        </div>
       ) : null}
     </section>
   );
 }
 
+function PlinkMusic({ cue }) {
+  const audioRef = useRef(null);
+  const safari = '/music/abbies-world.mp3';
+  const play = '/music/cheerful-dance.mp3';
+  const blocks = '/music/blocks-in-the-game.mp3';
+  const src = cue === 'play' ? play : safari;
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return undefined;
+    audio.src = src;
+    audio.loop = cue !== 'play';
+    const start = () => audio.play().catch(() => {});
+    start();
+    const onEnded = () => {
+      if (cue !== 'play') return;
+      audio.src = audio.getAttribute('data-piece') === 'blocks' ? play : blocks;
+      audio.setAttribute('data-piece', audio.getAttribute('data-piece') === 'blocks' ? 'play' : 'blocks');
+      audio.play().catch(() => {});
+    };
+    audio.addEventListener('ended', onEnded);
+    return () => {
+      audio.removeEventListener('ended', onEnded);
+      audio.pause();
+    };
+  }, [cue, src, play, blocks]);
+
+  return <audio ref={audioRef} data-plink-music={cue} hidden />;
+}
+
 export default function PlinkApp() {
   const [payload, setPayload] = useState(null);
   const [error, setError] = useState(null);
-  const [screen, setScreen] = useState('land');
+  const [screen, setScreen] = useState('safari');
   const [bedId, setBedId] = useState(null);
+  const [loadout, setLoadout] = useState([]);
   const [progress, setProgress] = useState(null);
 
   useEffect(() => {
@@ -386,40 +579,60 @@ export default function PlinkApp() {
     });
   };
 
+  const togglePower = (id) => {
+    setLoadout((current) => {
+      if (current.includes(id)) return current.filter((item) => item !== id);
+      const max = payload?.campaign?.clash?.maxLoadout ?? 2;
+      if (current.length >= max) return current;
+      return [...current, id];
+    });
+  };
+
   if (error) {
     return <main className="fail">{error}</main>;
   }
   if (!payload || !inspect || !progress) {
-    return <main className="fail">Loading Peggle Land…</main>;
+    return <main className="fail">Loading Plink Safari…</main>;
   }
+
+  const selectedBed = payload.campaign.beds.find((bed) => bed.id === bedId) ?? payload.campaign.beds[0];
 
   return (
     <main data-source={payload.source}>
-      {screen === 'land' ? (
-        <LandView inspect={inspect} onEnter={() => setScreen('lobby')} />
-      ) : null}
-      {screen === 'lobby' ? (
-        <Lobby
+      <PlinkMusic cue={screen === 'play' ? 'play' : 'safari'} />
+      {screen === 'safari' ? (
+        <SafariMap
           inspect={inspect}
           progress={progress}
-          onBack={() => setScreen('land')}
-          onPlay={(id) => {
+          onPick={(id) => {
             setBedId(id);
-            setScreen('play');
+            setLoadout([]);
+            setScreen('loadout');
           }}
+        />
+      ) : null}
+      {screen === 'loadout' ? (
+        <Loadout
+          campaign={payload.campaign}
+          bed={selectedBed}
+          loadout={loadout}
+          onToggle={togglePower}
+          onBack={() => setScreen('safari')}
+          onPlay={() => setScreen('play')}
         />
       ) : null}
       {screen === 'play' ? (
         <Board
           campaign={payload.campaign}
           bedId={bedId}
+          loadout={loadout}
           progress={progress}
           onProgress={saveProgress}
-          onExit={() => setScreen('lobby')}
+          onExit={() => setScreen('safari')}
         />
       ) : null}
       <footer>
-        data source: {payload.source} · {inspect.bedCount} beds · game key {inspect.gameKey}
+        data source: {payload.source} · {inspect.bedCount} gardens · game key {inspect.gameKey}
       </footer>
     </main>
   );

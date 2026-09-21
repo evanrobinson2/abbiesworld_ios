@@ -11,6 +11,7 @@ struct PlinkMinigameView: View {
     @State private var aim: Double = 0
     @State private var ball: PlinkPhysics.Ball?
     @State private var fallClock = Date()
+    @StateObject private var music = PlinkMusicService()
 
     var body: some View {
         ZStack {
@@ -36,8 +37,21 @@ struct PlinkMinigameView: View {
                 Text("Opening the Plink Pavilion…")
             }
         }
-        .onAppear(perform: load)
+        .onAppear(perform: appear)
+        .onDisappear(perform: disappear)
         .accessibilityIdentifier("world2.plink")
+    }
+
+    private func appear() {
+        load()
+        World2MusicService.shared.stop()
+        MusicService.shared.setGameActive(true)
+        music.playSafari()
+    }
+
+    private func disappear() {
+        music.stop()
+        MusicService.shared.setGameActive(false)
     }
 
     private func load() {
@@ -68,6 +82,7 @@ struct PlinkMinigameView: View {
                         Button {
                             round = .start(campaign: campaign, bed: bed, progress: progress)
                             aim = 0
+                            music.playBoard()
                         } label: {
                             VStack(alignment: .leading) {
                                 Text(bed.name).font(.headline)
@@ -89,7 +104,10 @@ struct PlinkMinigameView: View {
     private func board(_ round: PlinkRound) -> some View {
         VStack(spacing: 12) {
             HStack {
-                Button("Pavilion") { self.round = nil }
+                Button("Pavilion") {
+                    self.round = nil
+                    music.playSafari()
+                }
                 Spacer()
                 VStack {
                     Text(round.bed.name).font(.headline)
@@ -177,6 +195,7 @@ struct PlinkMinigameView: View {
 
     private func finishBed() {
         round = nil
+        music.playSafari()
     }
 }
 

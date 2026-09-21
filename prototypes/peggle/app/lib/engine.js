@@ -1,7 +1,26 @@
 import { clonePegs, clampAim, launchWorld, simulateShot, stepBall } from './physics.js';
+import {
+  createClashState,
+  injectLoadoutPegs,
+  livingCritters,
+  maybeSpawnTiltPrompt,
+  resolveClashTurn,
+} from './clash.js';
 
 export const SHOT_PLAYBACK_RATE = 0.28;
 export const SHOT_STEP_DT = 1 / 120;
+
+export {
+  activateTiltPrompt,
+  applyArmor,
+  applyShotDamage,
+  createClashState,
+  injectLoadoutPegs,
+  livingCritters,
+  maybeSpawnTiltPrompt,
+  resolveClashTurn,
+  tickCritterCadence,
+} from './clash.js';
 
 export function bedById(campaign, bedId) {
   return campaign.beds.find((bed) => bed.id === bedId) ?? campaign.beds[0];
@@ -25,12 +44,17 @@ export function createProgress(campaign, stored = {}) {
   };
 }
 
-export function createRound(campaign, bed, progress) {
-  const pegs = clonePegs(bed.pegs);
+export function createRound(campaign, bed, progress, options = {}) {
+  const maxLoadout = campaign.clash?.maxLoadout ?? 2;
+  const loadout = [...new Set(options.loadout ?? [])].slice(0, maxLoadout);
+  const templatePegs = injectLoadoutPegs(bed.pegs, loadout);
+  const pegs = clonePegs(templatePegs);
   return {
     campaign,
     bed,
     pegs,
+    templatePegs,
+    loadout,
     dropsLeft: bed.drops ?? campaign.rules.startingDrops,
     giftUsed: false,
     gardenGlow: false,
@@ -39,22 +63,30 @@ export function createRound(campaign, bed, progress) {
     gemsThisRound: 0,
     lastBowl: null,
     phase: 'aim',
-    status: `Aim the dewdrop. Light ${remainingGlow(pegs)} glow seeds.`,
+    status: campaign.clash
+      ? `Aim a dewdrop. This shot is your turn in ${bed.name}.`
+      : `Aim the dewdrop. Light ${remainingGlow(pegs)} glow seeds.`,
     progress,
     lastShot: null,
+    clash: campaign.clash ? createClashState(campaign, bed, loadout) : null,
   };
 }
 
 function popHitPegs(round) {
+  const hits = [];
   let glowHits = 0;
   for (const peg of round.pegs) {
     if (!peg.hit || !peg.alive) continue;
+    hits.push({ id: peg.id, kind: peg.kind });
     peg.alive = false;
     peg.hit = false;
     round.totalHits += 1;
     if (peg.kind === 'glow') glowHits += 1;
+    if (peg.kind === 'tilt' && round.clash) {
+      round.clash.tiltCharges += 1;
+    }
   }
-  return glowHits;
+  return { glowHits, hits };
 }
 
 function applyBowl(round, effect) {
@@ -86,10 +118,41 @@ function unlockNext(campaign, progress, bedId) {
   return null;
 }
 
+function markGardenHelped(round, notes) {
+  round.phase = 'cleared';
+  round.gemsThisRound += round.bed.rewardGems;
+  round.progress.gems += round.gemsThisRound;
+  if (!round.progress.clearedBedIds.includes(round.bed.id)) {
+    round.progress.clearedBedIds.push(round.bed.id);
+  }
+  const previous = round.progress.bestScores[round.bed.id] ?? 0;
+  round.progress.bestScores[round.bed.id] = Math.max(previous, round.gemsThisRound);
+  const next = unlockNext(round.campaign, round.progress, round.bed.id);
+  if (round.bed.awardsDecoration) {
+    round.progress.awardedDecoration = true;
+  }
+  if (round.bed.awardsDecoration) {
+    round.status = `${round.bed.name} is smiling! The Marble Fountain is yours.`;
+  } else if (next) {
+    round.status = `${round.bed.name} is happy. ${next.name} is ready whenever you are.`;
+  } else {
+    round.status = `${round.bed.name} is happy. The critters are resting.`;
+  }
+  if (notes.length) {
+    round.status = `${notes.filter(Boolean).join(' ')} ${round.status}`;
+  }
+  return round;
+}
+
 export function beginShot(round, angle) {
   if (round.phase !== 'aim') return { round, world: null };
   const world = launchWorld(round.campaign, round.pegs, clampAim(angle));
   world.events = [];
+  const tiltArmed = Boolean(round.clash?.tiltArmed);
+  if (tiltArmed) {
+    world.tiltEnabled = true;
+    world.tiltSteer = 0;
+  }
   return {
     world,
     round: {
@@ -99,7 +162,10 @@ export function beginShot(round, angle) {
       hitsThisShot: 0,
       lastBowl: null,
       lastShot: null,
-      status: 'The dewdrop is falling…',
+      clash: round.clash
+        ? { ...round.clash, tiltArmed: false, tiltPrompt: false }
+        : null,
+      status: tiltArmed ? 'Tilt is steering this dewdrop…' : 'The dewdrop is falling…',
     },
   };
 }
@@ -122,11 +188,11 @@ export function settleShot(round, world) {
     },
   };
   next.hitsThisShot = world.events.filter((event) => event.type === 'peg').length;
-  const glowHits = popHitPegs(next);
+  const { glowHits, hits } = popHitPegs(next);
   const catchEvent = [...world.events].reverse().find((event) => event.type === 'caught');
   next.lastBowl = catchEvent?.bowl ?? null;
   const notes = [applyBowl(next, catchEvent?.effect)];
-  return finishResolvedShot(next, notes, glowHits);
+  return finishResolvedShot(next, notes, glowHits, hits);
 }
 
 export function resolveShot(round, angle) {
@@ -135,38 +201,48 @@ export function resolveShot(round, angle) {
   round.lastShot = shot;
   round.pegs = shot.pegs;
   round.hitsThisShot = shot.events.filter((event) => event.type === 'peg').length;
-  const glowHits = popHitPegs(round);
+  const { glowHits, hits } = popHitPegs(round);
   const catchEvent = [...shot.events].reverse().find((event) => event.type === 'caught');
   round.lastBowl = catchEvent?.bowl ?? null;
   const notes = [applyBowl(round, catchEvent?.effect)];
-  return finishResolvedShot(round, notes, glowHits);
+  return finishResolvedShot(round, notes, glowHits, hits);
 }
 
-function finishResolvedShot(round, notes, glowHits) {
-
+function finishResolvedShot(round, notes, glowHits, hits = []) {
   if (round.hitsThisShot >= round.campaign.rules.gardenGlowHits) {
     round.gardenGlow = true;
     notes.push('Garden Glow! The beads are dancing.');
   }
 
   const glowLeft = remainingGlow(round.pegs);
-  if (glowLeft === 0) {
-    round.phase = 'cleared';
-    round.gemsThisRound += round.bed.rewardGems;
-    round.progress.gems += round.gemsThisRound;
-    if (!round.progress.clearedBedIds.includes(round.bed.id)) {
-      round.progress.clearedBedIds.push(round.bed.id);
+  const glowCleared = glowLeft === 0;
+
+  if (round.clash && round.campaign.clash) {
+    const result = resolveClashTurn(round, { hits, glowCleared });
+    notes.push(result.report);
+
+    if (result.won) {
+      return markGardenHelped(round, notes);
     }
-    const previous = round.progress.bestScores[round.bed.id] ?? 0;
-    round.progress.bestScores[round.bed.id] = Math.max(previous, round.gemsThisRound);
-    const next = unlockNext(round.campaign, round.progress, round.bed.id);
-    if (round.bed.awardsDecoration) {
-      round.progress.awardedDecoration = true;
+    if (result.rest) {
+      round.phase = 'rest';
+      round.status = 'The garden needs a rest. Try again whenever you like.';
+      return round;
     }
-    round.status = next
-      ? `Bed cleared! ${round.bed.name} unlocked ${next.name}.`
-      : `Bed cleared! You woke every glow seed.`;
+
+    maybeSpawnTiltPrompt(round.clash, round.campaign.clash.tiltSpawnChance);
+    round.dropsLeft = Math.max(1, round.dropsLeft);
+    round.phase = 'aim';
+    const foes = livingCritters(round.clash.critters).length;
+    round.status = `${notes.filter(Boolean).join(' ')} Your hearts: ${round.clash.playerHearts}. Critters still playing: ${foes}.`;
+    if (glowHits > 0 && !result.reset) {
+      round.status = `Glow seeds woke: ${glowHits}. ${round.status}`;
+    }
     return round;
+  }
+
+  if (glowLeft === 0) {
+    return markGardenHelped(round, notes);
   }
 
   round.dropsLeft -= 1;
@@ -196,10 +272,19 @@ export function inspectCampaign(campaign) {
     kidName: campaign.kidName,
     land: campaign.land,
     poi: campaign.poi,
+    safari: campaign.safari ?? null,
+    powerUps: campaign.powerUps ?? [],
+    clash: campaign.clash ?? null,
+    music: campaign.music ?? [],
+    critters: campaign.critters ?? [],
     bedCount: campaign.beds.length,
     beds: campaign.beds.map((bed) => ({
       id: bed.id,
       name: bed.name,
+      animal: bed.animal ?? null,
+      map: bed.map ?? null,
+      encounter: bed.encounter ?? [],
+      unlockedByDefault: Boolean(bed.unlockedByDefault),
       pegs: bed.pegs.length,
       glow: bed.pegs.filter((peg) => peg.kind === 'glow').length,
       drops: bed.drops,

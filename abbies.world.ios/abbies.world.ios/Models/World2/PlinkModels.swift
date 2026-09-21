@@ -10,6 +10,17 @@ struct PlinkCampaign: Codable, Equatable, Sendable {
     let rules: Rules
     let bowls: [Bowl]
     let beds: [Bed]
+    let music: [MusicTrack]
+
+    struct MusicTrack: Codable, Equatable, Identifiable, Sendable {
+        let id: String
+        let title: String
+        let sourceTitle: String?
+        let catalogName: String
+        let file: String?
+        let role: String
+        let durationSeconds: Int?
+    }
 
     struct Identity: Codable, Equatable, Sendable {
         let id: String

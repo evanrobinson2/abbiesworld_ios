@@ -4,12 +4,14 @@
 // Playfield is normalized 0..1. Y grows downward. The fountain sits near the
 // top. Collection bowls occupy a strip at floorY.
 
+export const PEG_KINDS = new Set(['glow', 'seed', 'tilt', 'bomb', 'redBomb']);
+
 export function clonePegs(pegs) {
   return pegs.map((peg, index) => ({
     id: peg.id ?? `peg-${index}`,
     x: peg.x,
     y: peg.y,
-    kind: peg.kind === 'glow' ? 'glow' : 'seed',
+    kind: PEG_KINDS.has(peg.kind) ? peg.kind : 'seed',
     alive: peg.alive !== false,
     hit: false,
   }));
@@ -55,6 +57,9 @@ export function stepBall(world, dt) {
   const events = [];
   const drag = Math.max(0, 1 - physics.airDrag * dt);
   ball.vy += physics.gravity * dt;
+  if (world.tiltEnabled && world.tiltSteer) {
+    ball.vx += world.tiltSteer * 1.15 * dt;
+  }
   ball.vx *= drag;
   ball.vy *= drag;
 

@@ -88,4 +88,6 @@ curl -s http://127.0.0.1:5174/api/catalog | jq .inspect
 
 iOS launch flags: `-launchWorld2PeggleLand`, `-launchPlink`.
 
-Build order, locked product, and open questions: [PLINK-PLAN.md](./PLINK-PLAN.md). Newer thread requests override this page until that plan is folded back in.
+Soundtrack (temporary): Abbie's World on safari/lobby; Cheerful Dance and Blocks in the Game rotate on the board. Per-level original music is later.
+
+Build order and the locked product (1v1 critter, tilt as a power-up, Phase A first): [PLINK-PLAN.md](./PLINK-PLAN.md). Prototype safari/clash helpers may still describe mixed waves — that is parked, not spec.

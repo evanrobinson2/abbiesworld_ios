@@ -31,10 +31,42 @@ describe('Plink campaign', () => {
     assert.equal(inspect.bedCount, 8);
     assert.equal(inspect.beds[0].id, 'dewdrop-nursery');
     assert.ok(inspect.beds.at(-1).awardsDecoration);
+    assert.deepEqual(
+      (inspect.music ?? campaign.music).map((track) => track.id),
+      ['abbies-world', 'cheerful-dance', 'blocks-in-the-game']
+    );
     for (const bed of inspect.beds) {
       assert.ok(bed.glow > 0, `${bed.id} needs glow seeds`);
       assert.ok(bed.pegs >= bed.glow);
     }
+  });
+
+  it('inspects safari clash fields without dropping bed ids', () => {
+    const inspect = inspectCampaign(campaign);
+    assert.equal(inspect.safari.title, 'Plink Safari');
+    assert.equal(inspect.powerUps.length, 3);
+    assert.equal(inspect.clash.playerHearts, 12);
+    assert.equal(inspect.critters.length, 9);
+    assert.deepEqual(
+      inspect.beds.map((bed) => bed.id),
+      [
+        'dewdrop-nursery',
+        'berry-lattice',
+        'rainbow-arch',
+        'marble-mill',
+        'sparkle-orchard',
+        'crystal-cascade',
+        'night-garden',
+        'pavilion-finale',
+      ]
+    );
+    for (const bed of inspect.beds) {
+      assert.equal(bed.unlockedByDefault, true);
+      assert.ok(bed.animal);
+      assert.ok(bed.map);
+      assert.ok(bed.encounter.length >= 3);
+    }
+    assert.ok(inspect.beds.at(-1).encounter.includes('stampedeElephant'));
   });
 
   it('keeps the iOS and Vercel bundled copies identical to the source campaign', async () => {
@@ -89,17 +121,19 @@ describe('Plink physics', () => {
 });
 
 describe('Plink progression', () => {
-  it('starts only the nursery unlocked and can clear it with garden gifts', () => {
+  it('starts every safari garden unlocked and can take a nursery turn', () => {
     const progress = createProgress(campaign);
-    assert.deepEqual(progress.unlockedBedIds, ['dewdrop-nursery']);
+    assert.equal(progress.unlockedBedIds.length, 8);
+    assert.ok(progress.unlockedBedIds.includes('dewdrop-nursery'));
     const round = createRound(campaign, campaign.beds[0], progress);
     assert.equal(remainingGlow(round.pegs), 3);
+    assert.equal(round.clash.playerHearts, 12);
     let guard = 0;
     while (round.phase === 'aim' && guard < 40) {
       resolveShot(round, (guard % 5) * 0.2 - 0.4);
       guard += 1;
     }
-    assert.ok(round.phase === 'cleared' || round.phase === 'retry' || round.phase === 'aim');
+    assert.ok(['cleared', 'rest', 'retry', 'aim'].includes(round.phase));
     assert.ok(guard < 40);
   });
 });

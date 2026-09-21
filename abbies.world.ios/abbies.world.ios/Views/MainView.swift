@@ -361,6 +361,9 @@ struct MainView: View {
             .onChange(of: showDinoPicnic) { oldValue, newValue in
                 MusicService.shared.setGameActive(newValue)
             }
+            .onChange(of: showPlink) { _, newValue in
+                MusicService.shared.setGameActive(newValue)
+            }
         }
         .ignoresSafeArea()
         .toast($viewModel.toastMessage)
