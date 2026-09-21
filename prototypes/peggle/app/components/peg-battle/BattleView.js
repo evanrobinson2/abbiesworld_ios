@@ -142,8 +142,9 @@ export default function BattleView({
     return () => cancelAnimationFrame(frame);
   }, [session?.phase]);
 
+  const cacheKey = session?.catalog?.manifest?.updatedAt;
   const enemy = session ? enemyArt(session) : null;
-  const enemySrc = enemy ? publicSrc(enemy) : null;
+  const enemySrc = enemy ? publicSrc(enemy, { cacheKey }) : null;
   const intent = session ? currentIntent(session) : null;
   const zoom = session?.fxQueue?.includes('spriteZoomAttack');
   const knock = session?.fxQueue?.includes('spriteKnockback');
@@ -242,8 +243,8 @@ export default function BattleView({
             <div
               className="arena"
               style={{
-                backgroundImage: publicSrc(session.catalog.manifest?.families?.arena?.slots?.idle)
-                  ? `url(${publicSrc(session.catalog.manifest.families.arena.slots.idle)})`
+                backgroundImage: publicSrc(session.catalog.manifest?.families?.arena?.slots?.idle, { cacheKey })
+                  ? `url(${publicSrc(session.catalog.manifest.families.arena.slots.idle, { cacheKey })})`
                   : undefined,
               }}
             >
@@ -322,7 +323,7 @@ Phase: ${snapshot.phase}`}
           {(session?.hand ?? []).map((id) => {
             const card = session.definition.cards.find((entry) => entry.id === id);
             const art = cardArt(session, id);
-            const src = publicSrc(art);
+            const src = publicSrc(art, { cacheKey });
             const active = session.selectedCardId === id;
             return (
               <button

@@ -25,10 +25,11 @@ export function getSlot(manifest, familyId, slot) {
   return { ...entry, missing: false, placeholder: null };
 }
 
-export function publicSrc(entry, { publicPrefix = '/assets/peg-battle' } = {}) {
+export function publicSrc(entry, { publicPrefix = '/assets/peg-battle', cacheKey } = {}) {
   if (!entry || entry.missing || !entry.src) return null;
   const file = String(entry.src).split('/').pop();
-  return `${publicPrefix}/${file}`;
+  const query = cacheKey ? `?v=${encodeURIComponent(cacheKey)}` : '';
+  return `${publicPrefix}/${file}${query}`;
 }
 
 function logMissing(key) {
