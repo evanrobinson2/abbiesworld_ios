@@ -1,0 +1,13 @@
+an elevated isometric hand drawn digital illustration of Peggle Land, a festive carnival meadow biome for Abbie’s World, designed for a smart six year old audience
+
+show a compact explorable child’s-eye marble garden where gem seeds grow on round pads and collection bowls sit like friendly fountains: candy-colored paths, bead-shaped shrubs, glass-and-brass garden architecture, dewdrop lanterns, marbles nested in flower beds, and gentle carnival banners without writing
+
+bold chunky storybook forms, exaggerated playful proportions, broad readable details, irregular hand-drawn silhouettes, sophisticated rather than babyish, not chibi
+
+use strawberry pink, apricot, lavender, teal, cream stone and restrained golden sparkle so the land feels joyful, magical and inviting rather than noisy, casino-like, or frightening
+
+include exactly one large empty placement pad for The Plink Pavilion, centered in the navigable composition and connected by a broad obvious path; keep this pad completely empty, clean and unobstructed
+
+make the world compact and readable at iPad scale with a clear HUD-safe upper edge and a small integrated environmental footprint; do not place a building on the reserved pad
+
+clean expressive outlines, tactile illustrated textures, gentle cel shading, soft diffuse daylight, premium whimsical game art, no characters, no readable text, no UI --ar 4:3

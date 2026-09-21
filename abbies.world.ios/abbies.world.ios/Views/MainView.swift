@@ -33,6 +33,9 @@ struct MainView: View {
     @State private var showWhizbang =
         ProcessInfo.processInfo.arguments.contains("-launchWhizbang") ||
         ProcessInfo.processInfo.arguments.contains("-autoPlayWhizbang")
+    @State private var showPlink =
+        ProcessInfo.processInfo.arguments.contains("-launchPlink") ||
+        ProcessInfo.processInfo.arguments.contains("-autoPlayPlink")
     // Memory Game temporarily disabled
     // @State private var showMemoryGame = false
     @State private var showSettings = false
@@ -284,6 +287,7 @@ struct MainView: View {
                     showDinoPicnic: $showDinoPicnic,
                     showCreatureBuilder: $showCreatureBuilder,
                     showWhizbang: $showWhizbang,
+                    showPlink: $showPlink,
                     // showMemoryGame: $showMemoryGame,
                     onDismiss: {
                         showGamesDialog = false
@@ -326,6 +330,11 @@ struct MainView: View {
             .fullScreenCover(isPresented: $showWhizbang) {
                 IncredimachineView(
                     onDismiss: { showWhizbang = false }
+                )
+            }
+            .fullScreenCover(isPresented: $showPlink) {
+                PlinkMinigameView(
+                    onDismiss: { showPlink = false }
                 )
             }
             // Memory Game temporarily disabled

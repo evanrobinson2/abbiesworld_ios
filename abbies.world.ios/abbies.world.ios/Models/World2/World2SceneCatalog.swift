@@ -29,6 +29,7 @@ enum World2SceneCatalog {
         threeBears,
         artGarden,
         evanCitadel,
+        peggleLand,
         World2SceneDefinition.blankSlate,
     ]
 
@@ -425,6 +426,57 @@ enum World2SceneCatalog {
                 hardpoint: "hardpoint.evan.homePad",
                 x: 0.52,
                 y: 0.58,
+                scale: 1.05,
+                zIndex: 1
+            ),
+        ],
+        showsOpenHardpointsToPlayers: true,
+        createdAt: .distantPast
+    )
+
+    // MARK: - Peggle Land
+    //
+    // Carnival meadow west of Work Land. One pavilion on the center pad, plus
+    // two open pads so the hardpoint system stays visible.
+
+    static let peggleLand = World2SceneDefinition(
+        id: sceneID(for: .peggle),
+        name: "Peggle Land",
+        summary: "A carnival meadow of marble fountains and gem-seed gardens",
+        backgroundAsset: "map.peggleLand",
+        backdropStyle: .peggleLand,
+        hardpoints: [
+            World2SceneHardpoint(
+                id: "hardpoint.peggle.pavilionPad",
+                name: "Pavilion circle",
+                position: World2NormalizedPoint(x: 0.50, y: 0.56),
+                acceptedSizeClasses: [.medium, .large],
+                isLocked: true,
+                notes: "The Plink Pavilion stands here"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.peggle.lanternPad",
+                name: "Lantern lawn",
+                position: World2NormalizedPoint(x: 0.22, y: 0.70),
+                acceptedSizeClasses: [.small, .medium],
+                notes: "Open"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.peggle.beadPad",
+                name: "Bead terrace",
+                position: World2NormalizedPoint(x: 0.78, y: 0.38),
+                acceptedSizeClasses: [.small, .medium],
+                notes: "Open"
+            ),
+        ],
+        poiInstances: [
+            authored(
+                "instance.peggle.pavilion",
+                World2POIRegistry.pegglePavilionID,
+                scene: sceneID(for: .peggle),
+                hardpoint: "hardpoint.peggle.pavilionPad",
+                x: 0.50,
+                y: 0.56,
                 scale: 1.05,
                 zIndex: 1
             ),

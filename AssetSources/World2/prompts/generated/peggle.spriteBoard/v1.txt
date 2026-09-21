@@ -1,0 +1,9 @@
+a hand drawn digital source board containing exactly nine separate sprite tiles for the Plink marble-drop minigame in Abbie’s World, designed for a smart six year old audience
+
+make every sprite bold, chunky, cute, exaggerated and highly readable at 120 point iPad game scale, sophisticated rather than babyish, not chibi, with strong different silhouettes, confident dark-plum outlines, tactile painted texture and gentle cel shading
+
+create an exact 3 by 3 grid with equal rounded-square cells and narrow uniform warm-cream gutters, using these row-major subjects: 1 a round strawberry-pink gem seed bead, 2 a round golden glow seed bead that looks extra sparkly, 3 a round teal dewdrop marble, 4 a small flower-fountain launcher seen from the side, 5 a cream collection bowl, 6 a brass collection bowl with a plus-drop emblem that is a simple plus shape and not a letter, 7 a lavender collection bowl with a gem facet, 8 a teal collection bowl with a sparkle burst, 9 a tiny garden-glow sparkle burst
+
+each cell contains exactly one complete object with extraction-safe padding, no cell-crossing artwork, no faces, no words, no letters, no numbers, no weapons, no cannons, no branding
+
+clean expressive outlines, tactile illustrated textures, gentle cel shading, soft studio lighting, premium whimsical game art --ar 1:1

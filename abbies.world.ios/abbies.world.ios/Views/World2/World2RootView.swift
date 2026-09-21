@@ -130,6 +130,12 @@ struct World2RootView: View {
                     onExit: viewModel.exitPOI
                 )
 
+            case .plink:
+                PlinkMinigameView(
+                    onDismiss: viewModel.exitPOI,
+                    onBedCleared: viewModel.completePlinkBed
+                )
+
             case .sceneCreator(let instanceID):
                 World2SceneCreatorView(
                     instanceID: instanceID,

@@ -50,6 +50,7 @@ final class World2WorldGraphStore: ObservableObject {
             WorldId.threeBears.sceneID,
             WorldId.blankSlate.sceneID,
             WorldId.evan.sceneID,
+            WorldId.peggle.sceneID,
         ]
     }
 
@@ -76,6 +77,7 @@ final class World2WorldGraphStore: ObservableObject {
         var built = connectorsByScene
         let before = built
         applySeedTunnel(from: .home, .north, to: .evan, into: &built)
+        applySeedTunnel(from: .work, .west, to: .peggle, into: &built)
         if built != before {
             connectorsByScene = built
             changed = true
@@ -107,6 +109,7 @@ final class World2WorldGraphStore: ObservableObject {
         applySeedTunnel(from: .home, .east, to: .farm, into: &built)
         applySeedTunnel(from: .home, .south, to: .blankSlate, into: &built)
         applySeedTunnel(from: .home, .north, to: .evan, into: &built)
+        applySeedTunnel(from: .work, .west, to: .peggle, into: &built)
         applySeedTunnel(from: .farm, .east, to: .threeBears, into: &built)
 
         connectorsByScene = built

@@ -1,0 +1,13 @@
+an isolated hand drawn digital illustration of The Plink Pavilion, a tappable point of interest in Peggle Land for Abbie’s World, designed for a smart six year old audience
+
+make it feel like a round glass-and-brass garden pavilion with a marble fountain bursting from the roof, collection bowls as stepped planters around the base, and a welcoming arched entrance
+
+bold chunky storybook forms, exaggerated playful proportions, a strong readable silhouette at small iPad map scale, sophisticated rather than babyish, not chibi
+
+use cream stone, warm brass ribs, strawberry-pink and teal stained glass, lavender banners without writing, and restrained golden sparkle; the fountain should read as friendly dewdrops, never as a weapon or cannon
+
+the complete building must sit on a small integrated landscaped footprint with flowers and bead-shaped shrubs, highly readable as one tappable place
+
+clean expressive outlines, tactile illustrated textures, gentle cel shading, soft diffuse daylight, premium whimsical game art
+
+Runtime normalization may replace only the clean outer background with true transparency and center the untouched building with safe padding. Do not invent characters, readable text, UI, branding, or frightening material --ar 1:1

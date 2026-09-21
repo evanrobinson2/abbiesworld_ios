@@ -35,6 +35,8 @@ struct World2StoryDecorationArtwork: View {
             World2DaddyCandyToken(isAnimated: isAnimated)
         case .daddyHug:
             World2DaddyHugToken(isAnimated: isAnimated)
+        case .plinkFountain:
+            World2PlinkFountainToken(isAnimated: isAnimated)
         }
     }
 }
@@ -178,6 +180,34 @@ struct World2WorldTeleporterToken: View {
             guard isAnimated else { return }
             withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
                 pulse = true
+            }
+        }
+    }
+}
+
+private struct World2PlinkFountainToken: View {
+    var isAnimated = true
+    @State private var drip = false
+
+    var body: some View {
+        ZStack {
+            Capsule()
+                .fill(Color(red: 0.78, green: 0.62, blue: 0.32))
+                .frame(width: 42, height: 28)
+                .offset(y: 16)
+            Circle()
+                .fill(Color(red: 0.37, green: 0.78, blue: 0.85))
+                .frame(width: drip && isAnimated ? 22 : 18, height: drip && isAnimated ? 22 : 18)
+                .offset(y: drip ? -18 : -12)
+            Circle()
+                .fill(Color(red: 0.83, green: 0.33, blue: 0.54))
+                .frame(width: 10, height: 10)
+                .offset(y: drip ? -28 : -22)
+        }
+        .onAppear {
+            guard isAnimated else { return }
+            withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
+                drip = true
             }
         }
     }

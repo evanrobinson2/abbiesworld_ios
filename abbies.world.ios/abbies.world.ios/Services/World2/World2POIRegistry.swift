@@ -28,6 +28,7 @@ enum World2POIRegistry {
     static let sceneBuilderID = "poi.sceneBuilder"
     static let whizbangID = "poi.whizbang"
     static let planningDeptID = "poi.planningDept"
+    static let pegglePavilionID = "poi.pegglePavilion"
 
     /// Every registered archetype, keyed by id.
     static let archetypes: [String: World2POIArchetype] = {
@@ -53,6 +54,7 @@ enum World2POIRegistry {
         sceneBuilder,
         whizbang,
         planningDept,
+        pegglePavilion,
     ]
 
     static func archetype(_ id: String) -> World2POIArchetype? {
@@ -332,6 +334,31 @@ enum World2POIRegistry {
         contract: World2POIContract(
             route: .planningDept,
             completionMilestone: "minigame.planningDept.opened"
+        )
+    )
+
+    // MARK: - Peggle Land
+
+    static let pegglePavilion = World2POIArchetype(
+        id: pegglePavilionID,
+        name: "The Plink Pavilion",
+        kind: .minigame,
+        sizeClass: .large,
+        exteriorAsset: "poi.pegglePavilion.exterior",
+        interiorAsset: "poi.pegglePavilion.interior",
+        drawnArtStyle: .plinkPavilion,
+        icon: "drop.circle.fill",
+        lore: "A glass-and-brass garden pavilion whose marble fountain wakes gem seeds.",
+        activityDescription: "Aim the dewdrop from the flower fountain. Bounce it through gem seeds and catch it in the collection bowls. Wake every glow seed.",
+        callToAction: "Play Plink",
+        musicTrackID: "world2_joyful_bounce",
+        contract: World2POIContract(
+            route: .plink,
+            grants: [
+                .gems(upTo: 12),
+                .storyDecoration(decorationID: World2StoryDecoration.plinkFountain.id),
+            ],
+            completionMilestone: "minigame.plink.completed"
         )
     )
 

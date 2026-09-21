@@ -18,6 +18,8 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     case artGarden = "world.artGarden"
     /// Daddy's mountain citadel — futuristic scene with his home POI.
     case evan = "world.evan"
+    /// Carnival meadow west of Work Land. Hosts The Plink Pavilion.
+    case peggle = "world.peggle"
     
     var id: String { rawValue }
     
@@ -31,6 +33,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .threeBears: return "Three Bears Woods"
         case .artGarden: return "Art Garden"
         case .evan: return "Daddy's Citadel"
+        case .peggle: return "Peggle Land"
         }
     }
     
@@ -44,6 +47,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .threeBears: return "A hushed clearing in the woods where somebody is cooking"
         case .artGarden: return "A terraced garden of easels and paths, with a studio for dressing up"
         case .evan: return "A glowing white citadel on the mountain, looking out over the water"
+        case .peggle: return "A carnival meadow of marble fountains, gem seeds, and collection bowls"
         }
     }
     
@@ -57,6 +61,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .threeBears: return "Into the Woods"
         case .artGarden: return nil
         case .evan: return "Daddy's Base"
+        case .peggle: return "Marble Meadow"
         }
     }
 

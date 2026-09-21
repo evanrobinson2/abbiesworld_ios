@@ -21,6 +21,8 @@ struct World2POIDrawnArtwork: View {
             World2BearsCottage()
         case .whizbangGadgetBarn:
             World2WhizbangGadgetBarn()
+        case .plinkPavilion:
+            World2PlinkPavilion()
         }
     }
 }
@@ -237,6 +239,50 @@ private struct World2WhizbangGadgetBarn: View {
         }
         .accessibilityLabel("A copper gadget barn with a launch chimney")
         .accessibilityIdentifier("world2.poi.artwork.whizbang")
+    }
+}
+
+/// A round glass-and-brass pavilion with a marble fountain on the roof.
+private struct World2PlinkPavilion: View {
+    private let brass = Color(red: 0.78, green: 0.62, blue: 0.32)
+    private let glass = Color(red: 0.55, green: 0.82, blue: 0.80)
+    private let pink = Color(red: 0.83, green: 0.33, blue: 0.54)
+
+    var body: some View {
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            VStack(spacing: -height * 0.04) {
+                ZStack {
+                    Circle()
+                        .fill(pink.opacity(0.85))
+                        .frame(width: width * 0.22, height: width * 0.22)
+                        .offset(y: -height * 0.02)
+                    Circle()
+                        .fill(Color(red: 0.37, green: 0.78, blue: 0.85))
+                        .frame(width: width * 0.12, height: width * 0.12)
+                        .offset(y: -height * 0.08)
+                }
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [glass, brass],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
+                    .overlay(
+                        Capsule()
+                            .fill(Color(red: 0.28, green: 0.16, blue: 0.18))
+                            .frame(width: width * 0.22, height: height * 0.18)
+                            .offset(y: height * 0.08)
+                    )
+                    .frame(width: width * 0.78, height: height * 0.58)
+            }
+            .frame(width: width, height: height, alignment: .bottom)
+        }
+        .accessibilityLabel("A glass pavilion with a marble fountain on the roof")
+        .accessibilityIdentifier("world2.poi.artwork.plinkPavilion")
     }
 }
 

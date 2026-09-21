@@ -489,4 +489,26 @@ final class InventoryBadgeTests: XCTestCase {
             .worldTeleporter
         )
     }
+
+    func testPeggleLandHostsThePlinkPavilion() {
+        let scene = World2SceneCatalog.peggleLand
+        XCTAssertEqual(scene.id, WorldId.peggle.sceneID)
+        XCTAssertEqual(scene.backgroundAsset, "map.peggleLand")
+        XCTAssertEqual(scene.backdropStyle, .peggleLand)
+        XCTAssertTrue(
+            scene.poiInstances.contains {
+                $0.archetypeID == World2POIRegistry.pegglePavilionID
+            }
+        )
+        XCTAssertFalse(scene.openHardpoints.isEmpty)
+        XCTAssertEqual(World2POIRegistry.pegglePavilion.route, .plink)
+        XCTAssertEqual(
+            World2POIRegistry.pegglePavilion.contract.grants,
+            [
+                .gems(upTo: 12),
+                .storyDecoration(decorationID: World2StoryDecoration.plinkFountain.id),
+            ]
+        )
+        XCTAssertEqual(WorldId.peggle.displayName, "Peggle Land")
+    }
 }

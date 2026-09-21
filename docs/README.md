@@ -20,6 +20,7 @@ Documents that describe **one-time problem solving** or processes - risk analyse
 - `current-state/GAME_ASSET_REGISTRY_ADOPTION.md` - Standard asset publishing and loading contract
 - `current-state/AUDIO_COORDINATION_PATTERN.md` - Shared music and minigame audio coordination
 - `minigames/DINO_PICNIC_VERTICAL_SLICE.md` - Current bundled-first vertical-slice example
+- `minigames/PLINK.md` - Peggle Land / Plink Pavilion marble-drop minigame
 
 **Current State:**
 - `current-state/SCENE_HARDPOINT_SYSTEM.md` - How World 2 places get onto maps, and how to inspect the rigging as text

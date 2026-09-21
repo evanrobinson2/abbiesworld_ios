@@ -1,0 +1,13 @@
+a hand drawn digital illustration of the interior of The Plink Pavilion for Abbie’s World, designed for a smart six year old audience
+
+show a tall enclosed glass garden hall that can host a marble-drop playfield: a broad open central board, a flower-fountain launcher at the top, round gem-seed beads waiting in the middle air, and four friendly collection bowls along the floor
+
+bold chunky storybook forms, exaggerated playful proportions, broad readable details, sophisticated rather than babyish, not chibi
+
+use cream stone, warm brass ribs, strawberry pink, lavender, teal and restrained golden sparkle; stained-glass windows should wash the hall with candy-colored light
+
+keep the central playfield clearly empty of authored UI, letters, numbers, scores, buttons or characters so code-rendered pegs, the marble, and bowls can sit on top
+
+the space should feel like Letter Works’ collection tanks mixed with a carnival greenhouse, never like a shooting gallery or casino
+
+clean expressive outlines, tactile illustrated textures, gentle cel shading, soft diffuse daylight, premium whimsical game art, no characters, no readable text, no UI --ar 16:9

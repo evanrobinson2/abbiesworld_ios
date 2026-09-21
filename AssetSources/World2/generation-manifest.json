@@ -120,6 +120,107 @@
       ],
       "productionId": null,
       "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
+    },
+    {
+      "semanticId": "map.peggleLand",
+      "class": "overland_map",
+      "version": "v1",
+      "state": "ready_for_generation",
+      "promptPath": "prompts/generated/map.peggleLand/v1.txt",
+      "promptSha256": "34e0986e0109ce6623189ab245d624014c4bc3cc91f78baddddb798c85ce66d8",
+      "size": "1024x1024",
+      "alphaRequiredAfterExtraction": false,
+      "references": [
+        {
+          "assetId": "1002",
+          "path": "candidates/1002/v1/source.jpeg",
+          "sha256": "eb66c0f5ca35dd803ddcfa945586ece52649199e3832e5f095438e9227869371"
+        },
+        {
+          "assetId": "2001",
+          "path": "normalized-candidates/2001/v1/source.png",
+          "sha256": "6a6df9ddb314fd932a961f8e2ec7c531a7bfcb72abb2b886fd9f3f9ef3723d05"
+        },
+        {
+          "assetId": "2007",
+          "path": "normalized-candidates/2007/v2/source.png",
+          "sha256": "c1d33d413712ca7cb9e16b1e0550557820a058dc0b268081158327fb64c0cc61"
+        }
+      ],
+      "productionId": null,
+      "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
+    },
+    {
+      "semanticId": "poi.pegglePavilion.exterior",
+      "class": "poi_exterior",
+      "version": "v1",
+      "state": "ready_for_generation",
+      "promptPath": "prompts/generated/poi.pegglePavilion.exterior/v1.txt",
+      "promptSha256": "7522cfde36b6084219454134f610c72aa0afa53a62d365a22a15cb4a2c561723",
+      "size": "1024x1024",
+      "alphaRequiredAfterExtraction": true,
+      "references": [
+        {
+          "assetId": "2002",
+          "path": "normalized-candidates/2002/v1/source.png",
+          "sha256": "e32ff4f45cc4f5a400634a69cfe1edb4e279a03b25283e0cfff8e4922cfd183b"
+        },
+        {
+          "assetId": "1002",
+          "path": "candidates/1002/v1/source.jpeg",
+          "sha256": "eb66c0f5ca35dd803ddcfa945586ece52649199e3832e5f095438e9227869371"
+        }
+      ],
+      "productionId": null,
+      "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
+    },
+    {
+      "semanticId": "poi.pegglePavilion.interior",
+      "class": "poi_interior",
+      "version": "v1",
+      "state": "ready_for_generation",
+      "promptPath": "prompts/generated/poi.pegglePavilion.interior/v1.txt",
+      "promptSha256": "a2a5940a903edcb41e7b8e78d9777d7d656716726375582a290c24b277b5476d",
+      "size": "1024x1024",
+      "alphaRequiredAfterExtraction": false,
+      "references": [
+        {
+          "assetId": "2003",
+          "path": "normalized-candidates/2003/v1/source.png",
+          "sha256": "890ab5c4439c217733daeadfebdf384870d966f8f57f545cc6407f912512a4b5"
+        },
+        {
+          "assetId": "2002",
+          "path": "normalized-candidates/2002/v1/source.png",
+          "sha256": "e32ff4f45cc4f5a400634a69cfe1edb4e279a03b25283e0cfff8e4922cfd183b"
+        }
+      ],
+      "productionId": null,
+      "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
+    },
+    {
+      "semanticId": "peggle.spriteBoard",
+      "class": "sprite_board",
+      "version": "v1",
+      "state": "ready_for_generation",
+      "promptPath": "prompts/generated/peggle.spriteBoard/v1.txt",
+      "promptSha256": "52f08e0cd0484e2f2a16efa1362f193c4a8fe1d82de63dd4aeaeca0ff31596a9",
+      "size": "1024x1024",
+      "alphaRequiredAfterExtraction": true,
+      "references": [
+        {
+          "assetId": "2002",
+          "path": "normalized-candidates/2002/v1/source.png",
+          "sha256": "e32ff4f45cc4f5a400634a69cfe1edb4e279a03b25283e0cfff8e4922cfd183b"
+        },
+        {
+          "assetId": "1002",
+          "path": "candidates/1002/v1/source.jpeg",
+          "sha256": "eb66c0f5ca35dd803ddcfa945586ece52649199e3832e5f095438e9227869371"
+        }
+      ],
+      "productionId": null,
+      "integrationState": "blocked_until_qualified_parent_approved_and_id_assigned"
     }
   ],
   "p0Inventory": {

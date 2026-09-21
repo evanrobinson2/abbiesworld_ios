@@ -1,0 +1,827 @@
+{
+  "schemaVersion": 1,
+  "gameKey": "peggle",
+  "kidName": "Plink",
+  "land": {
+    "id": "world.peggle",
+    "name": "Peggle Land",
+    "summary": "A carnival meadow of marble fountains, gem seeds, and collection bowls.",
+    "backgroundAsset": "map.peggleLand"
+  },
+  "poi": {
+    "id": "poi.pegglePavilion",
+    "name": "The Plink Pavilion",
+    "summary": "A glass-and-brass pavilion whose marble fountain wakes gem seeds.",
+    "exteriorAsset": "poi.pegglePavilion.exterior",
+    "interiorAsset": "poi.pegglePavilion.interior",
+    "callToAction": "Play Plink"
+  },
+  "physics": {
+    "ballRadius": 0.018,
+    "pegRadius": 0.026,
+    "gravity": 1.65,
+    "restitution": 0.72,
+    "airDrag": 0.18,
+    "maxSpeed": 2.4,
+    "launchSpeed": 1.55,
+    "fountain": {
+      "x": 0.5,
+      "y": 0.08
+    },
+    "floorY": 0.9
+  },
+  "rules": {
+    "startingDrops": 6,
+    "gardenGiftDrop": true,
+    "gardenGlowHits": 8,
+    "alwaysFinishable": true
+  },
+  "bowls": [
+    {
+      "id": "bounce",
+      "label": "Bounce",
+      "x": 0.14,
+      "width": 0.2,
+      "effect": "bounce"
+    },
+    {
+      "id": "extra",
+      "label": "+1 Drop",
+      "x": 0.38,
+      "width": 0.2,
+      "effect": "extraDrop"
+    },
+    {
+      "id": "gems",
+      "label": "Gems",
+      "x": 0.62,
+      "width": 0.2,
+      "effect": "gems"
+    },
+    {
+      "id": "glow",
+      "label": "Glow",
+      "x": 0.86,
+      "width": 0.2,
+      "effect": "glowBoost"
+    }
+  ],
+  "beds": [
+    {
+      "id": "dewdrop-nursery",
+      "name": "Dewdrop Nursery",
+      "summary": "A first gentle board. Light the three glow seeds.",
+      "unlockedByDefault": true,
+      "drops": 8,
+      "rewardGems": 4,
+      "pegs": [
+        {
+          "x": 0.5,
+          "y": 0.32,
+          "kind": "glow"
+        },
+        {
+          "x": 0.38,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.62,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.6,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.6,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.6,
+          "kind": "glow"
+        },
+        {
+          "x": 0.4,
+          "y": 0.74,
+          "kind": "seed"
+        },
+        {
+          "x": 0.6,
+          "y": 0.74,
+          "kind": "seed"
+        }
+      ]
+    },
+    {
+      "id": "berry-lattice",
+      "name": "Berry Lattice",
+      "summary": "A tidy berry trellis. Wake every glow berry.",
+      "unlockedByDefault": false,
+      "drops": 7,
+      "rewardGems": 5,
+      "pegs": [
+        {
+          "x": 0.28,
+          "y": 0.3,
+          "kind": "glow"
+        },
+        {
+          "x": 0.42,
+          "y": 0.3,
+          "kind": "seed"
+        },
+        {
+          "x": 0.58,
+          "y": 0.3,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.3,
+          "kind": "glow"
+        },
+        {
+          "x": 0.28,
+          "y": 0.42,
+          "kind": "seed"
+        },
+        {
+          "x": 0.42,
+          "y": 0.42,
+          "kind": "seed"
+        },
+        {
+          "x": 0.58,
+          "y": 0.42,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.42,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.54,
+          "kind": "seed"
+        },
+        {
+          "x": 0.42,
+          "y": 0.54,
+          "kind": "glow"
+        },
+        {
+          "x": 0.58,
+          "y": 0.54,
+          "kind": "glow"
+        },
+        {
+          "x": 0.72,
+          "y": 0.54,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.66,
+          "kind": "glow"
+        },
+        {
+          "x": 0.42,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.58,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.66,
+          "kind": "glow"
+        }
+      ]
+    },
+    {
+      "id": "rainbow-arch",
+      "name": "Rainbow Arch",
+      "summary": "Bounce through a candy arch of beads.",
+      "unlockedByDefault": false,
+      "drops": 6,
+      "rewardGems": 6,
+      "pegs": [
+        {
+          "x": 0.2872,
+          "y": 0.4843,
+          "kind": "glow"
+        },
+        {
+          "x": 0.3544,
+          "y": 0.402,
+          "kind": "seed"
+        },
+        {
+          "x": 0.4216,
+          "y": 0.3447,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.32,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5784,
+          "y": 0.3447,
+          "kind": "glow"
+        },
+        {
+          "x": 0.6456,
+          "y": 0.402,
+          "kind": "seed"
+        },
+        {
+          "x": 0.7128,
+          "y": 0.4843,
+          "kind": "glow"
+        },
+        {
+          "x": 0.3,
+          "y": 0.7,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.7,
+          "kind": "seed"
+        },
+        {
+          "x": 0.7,
+          "y": 0.7,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.42,
+          "kind": "glow"
+        }
+      ]
+    },
+    {
+      "id": "marble-mill",
+      "name": "Marble Mill",
+      "summary": "Columns of beads and a glowing heart.",
+      "unlockedByDefault": false,
+      "drops": 6,
+      "rewardGems": 7,
+      "pegs": [
+        {
+          "x": 0.28,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.72,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.28,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.72,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.34,
+          "kind": "glow"
+        },
+        {
+          "x": 0.42,
+          "y": 0.48,
+          "kind": "seed"
+        },
+        {
+          "x": 0.58,
+          "y": 0.48,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.62,
+          "kind": "glow"
+        }
+      ]
+    },
+    {
+      "id": "sparkle-orchard",
+      "name": "Sparkle Orchard",
+      "summary": "Beads hide among round orchard rings.",
+      "unlockedByDefault": false,
+      "drops": 6,
+      "rewardGems": 8,
+      "pegs": [
+        {
+          "x": 0.22,
+          "y": 0.34,
+          "kind": "seed"
+        },
+        {
+          "x": 0.38,
+          "y": 0.3,
+          "kind": "glow"
+        },
+        {
+          "x": 0.54,
+          "y": 0.34,
+          "kind": "seed"
+        },
+        {
+          "x": 0.7,
+          "y": 0.3,
+          "kind": "seed"
+        },
+        {
+          "x": 0.82,
+          "y": 0.38,
+          "kind": "glow"
+        },
+        {
+          "x": 0.26,
+          "y": 0.48,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.46,
+          "kind": "glow"
+        },
+        {
+          "x": 0.74,
+          "y": 0.5,
+          "kind": "seed"
+        },
+        {
+          "x": 0.32,
+          "y": 0.62,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.6,
+          "kind": "glow"
+        },
+        {
+          "x": 0.68,
+          "y": 0.62,
+          "kind": "seed"
+        },
+        {
+          "x": 0.4,
+          "y": 0.74,
+          "kind": "seed"
+        },
+        {
+          "x": 0.6,
+          "y": 0.74,
+          "kind": "glow"
+        }
+      ]
+    },
+    {
+      "id": "crystal-cascade",
+      "name": "Crystal Cascade",
+      "summary": "A falling V of crystals. Catch the glows.",
+      "unlockedByDefault": false,
+      "drops": 5,
+      "rewardGems": 9,
+      "pegs": [
+        {
+          "x": 0.5,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.43,
+          "y": 0.4,
+          "kind": "glow"
+        },
+        {
+          "x": 0.57,
+          "y": 0.4,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.52,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.52,
+          "kind": "glow"
+        },
+        {
+          "x": 0.29,
+          "y": 0.64,
+          "kind": "glow"
+        },
+        {
+          "x": 0.43,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.57,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.71,
+          "y": 0.64,
+          "kind": "glow"
+        },
+        {
+          "x": 0.22,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.78,
+          "y": 0.76,
+          "kind": "glow"
+        }
+      ]
+    },
+    {
+      "id": "night-garden",
+      "name": "Night Garden",
+      "summary": "A denser bedtime garden of beads.",
+      "unlockedByDefault": false,
+      "drops": 5,
+      "rewardGems": 10,
+      "pegs": [
+        {
+          "x": 0.22,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.28,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.28,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.22,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.52,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.52,
+          "kind": "glow"
+        },
+        {
+          "x": 0.78,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.64,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.76,
+          "kind": "glow"
+        }
+      ]
+    },
+    {
+      "id": "pavilion-finale",
+      "name": "Pavilion Finale",
+      "summary": "The big board. Clear every glow seed to win the fountain.",
+      "unlockedByDefault": false,
+      "drops": 5,
+      "rewardGems": 12,
+      "awardsDecoration": "decoration.story.plinkFountain",
+      "pegs": [
+        {
+          "x": 0.22,
+          "y": 0.26,
+          "kind": "glow"
+        },
+        {
+          "x": 0.332,
+          "y": 0.26,
+          "kind": "seed"
+        },
+        {
+          "x": 0.444,
+          "y": 0.26,
+          "kind": "seed"
+        },
+        {
+          "x": 0.556,
+          "y": 0.26,
+          "kind": "glow"
+        },
+        {
+          "x": 0.668,
+          "y": 0.26,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.26,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.36,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.36,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.36,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.36,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.36,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.332,
+          "y": 0.46,
+          "kind": "glow"
+        },
+        {
+          "x": 0.444,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.556,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.668,
+          "y": 0.46,
+          "kind": "glow"
+        },
+        {
+          "x": 0.78,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.56,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.56,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.56,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.56,
+          "kind": "glow"
+        },
+        {
+          "x": 0.78,
+          "y": 0.56,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.332,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.444,
+          "y": 0.66,
+          "kind": "glow"
+        },
+        {
+          "x": 0.556,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.668,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.66,
+          "kind": "glow"
+        },
+        {
+          "x": 0.22,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.76,
+          "kind": "glow"
+        }
+      ]
+    }
+  ]
+}

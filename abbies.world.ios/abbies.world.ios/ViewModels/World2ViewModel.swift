@@ -24,6 +24,7 @@ enum World2Screen: Equatable {
     case beacon(instanceID: String)
     /// Daddy's Citadel POI — welcome plate + always a candy or hug.
     case daddyWelcome
+    case plink
 }
 
 /// A place the player has tapped on the map, paired with the instance they
@@ -615,6 +616,8 @@ final class World2ViewModel: ObservableObject {
             setScreen(.whizbang, reason: "poi_entered")
         case .planningDept:
             setScreen(.planningDept, reason: "poi_entered")
+        case .plink:
+            setScreen(.plink, reason: "poi_entered")
         case .placeFactory:
             // Factories are entered through their placed instance, which knows
             // which copy the player tapped.
@@ -745,6 +748,29 @@ final class World2ViewModel: ObservableObject {
                 "gems": "\(rewardGems)",
                 "score": "\(score)"
             ]
+        )
+    }
+
+    /// Gems from a Plink bed, and the Marble Fountain when the finale clears.
+    func completePlinkBed(bedID: String, gems: Int, awardsFountain: Bool) {
+        completeMinigame(configurationID: "plink", score: 1, rewardGems: gems)
+        guard awardsFountain else { return }
+        let fountain = World2StoryDecoration.plinkFountain
+        guard let instance = playerService.awardStoryDecoration(fountain) else { return }
+        if let milestone = World2POIRegistry.pegglePavilion.contract.completionMilestone {
+            playerService.markPOICompleted(World2POIRegistry.pegglePavilionID)
+            World2Diagnostics.log("milestone_reached", ["milestone": milestone])
+        }
+        inventoryHighlightID = instance.id
+        rewardCelebration = World2RewardCelebration(
+            id: instance.id,
+            decoration: fountain,
+            headline: "GARDEN GLOW!",
+            earnedPerfectly: true
+        )
+        World2Diagnostics.log(
+            "plink_finale_completed",
+            ["bed": bedID, "instance": instance.id]
         )
     }
 
@@ -912,6 +938,15 @@ final class World2ViewModel: ObservableObject {
             selectPlayer(directPlayer)
             switchWorld(to: .work)
             setScreen(.whizbang, reason: "direct_launch")
+        } else if arguments.contains("-launchWorld2PeggleLand") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .peggle)
+        } else if arguments.contains("-launchPlink")
+                    || arguments.contains("-autoPlayPlink")
+                    || arguments.contains("-launchWorld2Plink") {
+            selectPlayer(directPlayer)
+            switchWorld(to: .peggle)
+            setScreen(.plink, reason: "direct_launch")
         } else if arguments.contains("-launchWorld2PlanningDept")
                     || arguments.contains("-openWorld2Minimap") {
             selectPlayer(directPlayer)
@@ -993,6 +1028,8 @@ final class World2ViewModel: ObservableObject {
             songID = World2POIRegistry.whizbang.musicTrackID
         case .planningDept:
             songID = World2POIRegistry.planningDept.musicTrackID
+        case .plink:
+            songID = World2POIRegistry.pegglePavilion.musicTrackID
         case .worldTeleporter:
             songID = "world2_cliffside_morning"
         case .daddyWelcome:
@@ -1017,6 +1054,7 @@ final class World2ViewModel: ObservableObject {
         case .blankSlate: return "world2_cliffside_morning"
         case .threeBears: return "world2_family_adventure"
         case .artGarden: return "world2_joyful_bounce"
+        case .peggle: return "world2_joyful_bounce"
         default: return "world2_joyful_bounce"
         }
     }
@@ -1043,7 +1081,7 @@ final class World2ViewModel: ObservableObject {
             backgroundAsset: "map.workLand",
             lightMusicTrack: "music.work.light",
             intenseMusicTrack: "music.work.intense",
-            adjacentWorlds: [.home],
+            adjacentWorlds: [.home, .peggle],
             ambiance: .init(
                 primaryColor: "#7B8A97",
                 secondaryColor: "#E19B57",
@@ -1121,6 +1159,20 @@ final class World2ViewModel: ObservableObject {
                 mood: "bright and futuristic"
             )
         )
+        let peggle = World(
+            id: .peggle,
+            name: "Peggle Land",
+            description: "A carnival meadow of marble fountains and gem-seed gardens",
+            backgroundAsset: "map.peggleLand",
+            lightMusicTrack: "music.home.light",
+            intenseMusicTrack: "music.home.intense",
+            adjacentWorlds: [.work],
+            ambiance: .init(
+                primaryColor: "#D4538A",
+                secondaryColor: "#7AD3C1",
+                mood: "festive and gentle"
+            )
+        )
         worlds = [
             .home: home,
             .work: work,
@@ -1129,6 +1181,7 @@ final class World2ViewModel: ObservableObject {
             .blankSlate: blankSlate,
             .artGarden: artGarden,
             .evan: daddyCitadel,
+            .peggle: peggle,
         ]
         currentWorld = home
     }
@@ -1181,6 +1234,7 @@ private extension World2Screen {
         case .worldTeleporter: return "world_teleporter"
         case .whizbang: return "whizbang"
         case .planningDept: return "planning_dept"
+        case .plink: return "plink"
         case .sceneCreator(let instanceID): return "scene_creator:\(instanceID)"
         case .beacon(let instanceID): return "beacon:\(instanceID)"
         case .daddyWelcome: return "daddy_welcome"
