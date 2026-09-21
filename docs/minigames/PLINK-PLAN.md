@@ -15,7 +15,7 @@ World hook (do not fork the map editor for the next minigame):
 - Land: `world.peggle`, west of Work Land (Home → west → Work → west → Peggle)
 - Custom innard: `PegBattleMinigameView` / prototype `/` and `/dev/peg-battle`
 
-See `docs/minigames/MINIGAME-PACK.md`.
+See `docs/minigames/MINIGAME-PACK.md`. Asset spend order (your time vs kid benefit): `docs/minigames/PEG-BATTLE-ASSETS.md`.
 
 ## What is already true
 

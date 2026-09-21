@@ -33,11 +33,11 @@ describe('peg-battle pack', () => {
       'rocket-ball',
       'boomerang-ball',
     ]);
-    assert.equal(catalog.boards[0].pegs.length, 39);
+    assert.equal(catalog.boards[0].pegs.length, 68);
     assert.equal(catalog.boards[0].pegs.filter((peg) => peg.kind === 'star').length, 2);
     assert.equal(catalog.boards[0].pegs.filter((peg) => peg.kind === 'heart').length, 1);
     assert.equal(catalog.boards[0].pegs.filter((peg) => peg.strength > 1).length, 3);
-    assert.equal(catalog.boards[0].pegs.filter((peg) => peg.valuable).length, 1);
+    assert.equal(catalog.boards[0].pegs.filter((peg) => peg.valuable).length, 2);
   });
 
   it('keeps the iOS and prototype pack copies identical to AssetSources', async () => {
@@ -116,6 +116,23 @@ describe('BattleSession', () => {
     assert.equal(session.lastDamage, Math.floor(session.lastPower / 10));
     assert.ok(session.lastDamage >= 0);
     assert.ok(session.enemyHearts <= 6);
+  });
+
+  it('packs bricks so the board is a wall, not a wallpaper overlay', () => {
+    const physics = sessionPhysics();
+    const pegs = catalog.boards[0].pegs;
+    const spacings = [];
+    for (let i = 0; i < pegs.length; i += 1) {
+      for (let j = i + 1; j < pegs.length; j += 1) {
+        const dx = pegs[i].x - pegs[j].x;
+        const dy = pegs[i].y - pegs[j].y;
+        const dist = Math.hypot(dx, dy);
+        if (dist < physics.blockWidth * 1.4) spacings.push(dist);
+      }
+    }
+    assert.ok(pegs.length >= 60);
+    assert.ok(spacings.length > 80);
+    assert.ok(Math.min(...spacings) < physics.blockWidth * 1.15);
   });
 
   it('keeps the orb smaller than a peg, matching open-source Peggle scale', () => {

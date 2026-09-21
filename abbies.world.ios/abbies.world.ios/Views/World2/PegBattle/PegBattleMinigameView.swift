@@ -52,52 +52,34 @@ struct PegBattleMinigameView: View {
     }
 
     private func battle(_ session: PegBattleSession) -> some View {
-        VStack(spacing: 10) {
-            HStack {
-                Button("Peggle Land") { onDismiss?() }
-                Spacer()
-                VStack {
-                    Text(session.enemy.name).font(.title2.bold())
-                    Text(session.intent.telegraph).font(.subheadline)
-                }
-                Spacer()
-                Button("Reset Battle") {
-                    recreate(.reset(session))
-                }
-                .accessibilityIdentifier("world2.pegBattle.reset")
-            }
-            .padding(.horizontal)
-
-            HStack {
-                hearts(session.enemyHearts, max: session.enemy.maxHealth)
-                Spacer()
-                hearts(session.playerHearts, max: session.level.playerHearts)
-                if session.shield > 0 {
-                    Text(String(repeating: "🫧", count: session.shield))
-                }
-            }
-            .padding(.horizontal)
-
-            HStack(alignment: .top, spacing: 12) {
+        VStack(spacing: 8) {
+            HStack(alignment: .center, spacing: 10) {
                 enemyPortrait(session)
-                    .frame(width: 180)
-                board(session)
-                VStack(alignment: .leading) {
-                    Text("Turn \(session.turn)")
-                    Text("Seed \(session.seed)")
-                    Text("Phase \(session.phase)")
-                    Text("\(session.lastPower) POWER → \(session.lastDamage) dmg")
-                        .font(.headline)
-                    Slider(value: $aim, in: -1.15...1.15)
-                    Button("Fire") { fire(session) }
-                        .disabled(session.phase != "playerAim" || session.selectedCardId == nil)
-                        .accessibilityIdentifier("world2.pegBattle.fire")
+                    .frame(width: 72, height: 72)
+                VStack(spacing: 2) {
+                    hearts(session.enemyHearts, max: session.enemy.maxHealth)
+                    Text(session.enemy.name).font(.headline)
+                    Text(session.intent.telegraph).font(.caption)
                 }
-                .frame(width: 180)
+                Spacer()
+                VStack(spacing: 2) {
+                    hearts(session.playerHearts, max: session.level.playerHearts)
+                    if session.shield > 0 {
+                        Text(String(repeating: "🫧", count: session.shield))
+                    }
+                    Button("Reset") { recreate(.reset(session)) }
+                        .accessibilityIdentifier("world2.pegBattle.reset")
+                }
             }
             .padding(.horizontal)
 
+            board(session)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+
             HStack {
+                if onDismiss != nil {
+                    Button("Peggle Land") { onDismiss?() }
+                }
                 ForEach(session.hand, id: \.self) { id in
                     let card = session.cards.first { $0.id == id }
                     Button {
@@ -106,25 +88,21 @@ struct PegBattleMinigameView: View {
                         self.session = next
                     } label: {
                         VStack {
-                            if let card, let image = UIImage(named: PegBattleArt.catalogName(card.asset)) {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 72, height: 72)
-                            } else {
-                                Text(card?.glyph ?? "•").font(.largeTitle)
-                            }
-                            Text(card?.shortName ?? id).bold()
+                            Text(card?.glyph ?? "•").font(.title)
+                            Text(card?.shortName ?? id).bold().font(.caption)
                         }
-                        .frame(width: 110, height: 132)
+                        .frame(width: 96, height: 104)
                         .background(
-                            RoundedRectangle(cornerRadius: 16)
+                            RoundedRectangle(cornerRadius: 14)
                                 .fill(session.selectedCardId == id ? Color.yellow.opacity(0.5) : Color.white.opacity(0.9))
                         )
                     }
                     .disabled(session.phase != "playerAim")
                     .accessibilityIdentifier("world2.pegBattle.card.\(id)")
                 }
+                Button("Fire") { fire(session) }
+                    .disabled(session.phase != "playerAim" || session.selectedCardId == nil)
+                    .accessibilityIdentifier("world2.pegBattle.fire")
             }
 
             if session.phase == "victory" || session.phase == "defeat" {
@@ -143,7 +121,7 @@ struct PegBattleMinigameView: View {
                 }
             }
         }
-        .padding(.bottom, 16)
+        .padding(.bottom, 12)
     }
 
     private func hearts(_ current: Int, max: Int) -> some View {
@@ -165,23 +143,25 @@ struct PegBattleMinigameView: View {
     }
 
     private func board(_ session: PegBattleSession) -> some View {
-        GeometryReader { geo in
+        let physics = PegBattlePhysics.defaults
+        return GeometryReader { geo in
             ZStack {
-                if let image = UIImage(named: PegBattleArt.catalogName(session.level.arenaAsset)) {
-                    Image(uiImage: image)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geo.size.width, height: geo.size.height)
-                        .clipped()
-                } else {
-                    RoundedRectangle(cornerRadius: 18)
-                        .fill(Color.white.opacity(0.35))
-                }
+                RoundedRectangle(cornerRadius: 18)
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.21, green: 0.35, blue: 0.32),
+                                Color(red: 0.11, green: 0.18, blue: 0.17),
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                    )
                 ForEach(session.pegs) { peg in
                     PegBattlePegView(peg: peg)
                         .frame(
-                            width: geo.size.width * 0.07,
-                            height: geo.size.height * 0.058
+                            width: geo.size.width * physics.blockWidth,
+                            height: geo.size.height * physics.blockHeight
                         )
                         .position(
                             x: peg.x * geo.size.width,
@@ -189,19 +169,39 @@ struct PegBattleMinigameView: View {
                         )
                 }
                 Circle()
-                    .fill(Color.white)
-                    .overlay(Circle().stroke(Color(red: 0.23, green: 0.12, blue: 0.24), lineWidth: 1.5))
+                    .fill(
+                        RadialGradient(
+                            colors: [.white, Color(red: 1, green: 0.9, blue: 0.45), Color(red: 0.83, green: 0.54, blue: 0.1)],
+                            center: .topLeading,
+                            startRadius: 2,
+                            endRadius: 18
+                        )
+                    )
+                    .overlay(Circle().stroke(Color(red: 0.14, green: 0.08, blue: 0.16), lineWidth: 2))
                     .frame(
-                        width: geo.size.width * PegBattlePhysics.defaults.ballRadius * 2,
-                        height: geo.size.width * PegBattlePhysics.defaults.ballRadius * 2
+                        width: geo.size.width * physics.ballRadius * 2,
+                        height: geo.size.width * physics.ballRadius * 2
                     )
                     .position(
-                        x: (0.5 + sin(aim) * 0.08) * geo.size.width,
-                        y: (0.08 + cos(aim) * 0.08) * geo.size.height
+                        x: (physics.fountainX + sin(aim) * 0.08) * geo.size.width,
+                        y: (physics.fountainY + cos(aim) * 0.08) * geo.size.height
                     )
             }
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { value in
+                        let dx = value.location.x / geo.size.width - physics.fountainX
+                        let dy = max(0.02, value.location.y / geo.size.height - physics.fountainY)
+                        aim = PegBattlePhysics.clampAim(atan2(dx, dy))
+                    }
+                    .onEnded { _ in
+                        fire(session)
+                    }
+            )
         }
-        .aspectRatio(1.1, contentMode: .fit)
+        .aspectRatio(0.86, contentMode: .fit)
+        .padding(.horizontal, 12)
     }
 
     private func fire(_ session: PegBattleSession) {

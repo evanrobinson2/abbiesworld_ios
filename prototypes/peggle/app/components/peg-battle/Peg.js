@@ -13,71 +13,67 @@ export function Peg({
   const isGone = gone || present === false;
   const isSticky = sticky || muddy;
   const isValuable = valuable || charged || type === 'star';
-  const fill =
-    type === 'star' ? '#f4c430' : type === 'heart' ? '#ef6d8a' : '#7ad3c1';
+  const brickFill = type === 'star' ? '#f0c430' : type === 'heart' ? '#ef6d8a' : '#5ec4b4';
   return (
     <svg
-      viewBox="0 0 72 60"
-      className={`peg svg-peg ${isGone ? 'gone' : ''} ${isSticky ? 'sticky' : ''} ${isValuable ? 'valuable' : ''}`}
+      viewBox="0 0 80 66"
+      className={`peg svg-peg ${isGone ? 'gone' : ''} ${isSticky ? 'sticky' : ''} ${isValuable ? 'valuable' : ''} ${hitIntensity ? 'hit' : ''}`}
     >
-      {isGone ? (
-        <rect
-          x="6"
-          y="6"
-          width="60"
-          height="48"
-          rx="10"
-          fill="none"
-          stroke="#3a1f3d"
-          strokeWidth="2"
-          strokeDasharray="5 4"
-          opacity="0.28"
-        />
-      ) : (
-        <>
+      <rect
+        x="8"
+        y="8"
+        width="64"
+        height="50"
+        rx="9"
+        fill="none"
+        stroke="#241428"
+        strokeWidth="2.2"
+        strokeDasharray={isGone ? '5 4' : '0'}
+        opacity={isGone ? 0.4 : 0.12}
+      />
+      {(!isGone || hitIntensity > 0) && (
+        <g className="brick-body">
+          <rect x="10" y="12" width="64" height="50" rx="9" fill="#1c3330" opacity="0.45" />
           {isValuable && (
-            <rect
-              x="2"
-              y="2"
-              width="68"
-              height="56"
-              rx="12"
-              fill="none"
-              stroke="#fff4b0"
-              strokeWidth={3 + hitIntensity * 2}
-              opacity="0.85"
-            />
+            <rect x="4" y="4" width="72" height="58" rx="12" fill="none" stroke="#ffe36a" strokeWidth="4" />
           )}
-          <rect x="6" y="6" width="60" height="48" rx="10" fill={fill} stroke="#3a1f3d" strokeWidth="3" />
-          {painted && <rect x="6" y="6" width="60" height="48" rx="10" fill="rgba(142, 70, 196, 0.45)" />}
+          <rect x="8" y="8" width="64" height="50" rx="9" fill={brickFill} stroke="#241428" strokeWidth="3" />
+          <rect x="14" y="12" width="46" height="11" rx="6" fill="rgba(255,255,255,0.32)" />
+          {painted && <rect x="8" y="8" width="64" height="50" rx="9" fill="rgba(142, 70, 196, 0.48)" />}
           {isSticky && (
             <>
-              <rect x="6" y="6" width="60" height="48" rx="10" fill="rgba(92, 58, 28, 0.38)" />
-              <ellipse cx="24" cy="50" rx="6" ry="8" fill="rgba(92, 58, 28, 0.55)" />
-              <ellipse cx="48" cy="52" rx="5" ry="7" fill="rgba(92, 58, 28, 0.5)" />
+              <rect x="8" y="8" width="64" height="50" rx="9" fill="rgba(92, 58, 28, 0.42)" />
+              <ellipse cx="26" cy="56" rx="7" ry="9" fill="rgba(92, 58, 28, 0.7)" />
+              <ellipse cx="54" cy="58" rx="6" ry="8" fill="rgba(92, 58, 28, 0.62)" />
             </>
           )}
           {type === 'star' && (
             <path
-              d="M36 14 L39 24 L50 25 L41 32 L44 43 L36 37 L28 43 L31 32 L22 25 L33 24 Z"
+              d="M40 16 L44 28 L56 29 L46 37 L50 50 L40 42 L30 50 L34 37 L24 29 L36 28 Z"
               fill="#fff6c8"
-              stroke="#3a1f3d"
-              strokeWidth="1.4"
+              stroke="#241428"
+              strokeWidth="1.6"
             />
           )}
           {type === 'heart' && (
             <path
-              d="M36 42 L24 30 A8 8 0 0 1 36 22 A8 8 0 0 1 48 30 Z"
+              d="M40 48 L24 34 A10 10 0 0 1 40 24 A10 10 0 0 1 56 34 Z"
               fill="#fff"
-              opacity="0.9"
+              opacity="0.95"
             />
           )}
           {strength > 1 && (
-            <text x="36" y="38" textAnchor="middle" fontSize="16" fontWeight="700" fill="#3a1f3d">
-              {strength}
-            </text>
+            <g>
+              <circle cx="64" cy="18" r="11" fill="#fff8e8" stroke="#241428" strokeWidth="2" />
+              <text x="64" y="23" textAnchor="middle" fontSize="14" fontWeight="800" fill="#241428">
+                {strength}
+              </text>
+            </g>
           )}
-        </>
+          {hitIntensity > 0 && (
+            <rect x="8" y="8" width="64" height="50" rx="9" fill="#fff" opacity="0.35" />
+          )}
+        </g>
       )}
     </svg>
   );

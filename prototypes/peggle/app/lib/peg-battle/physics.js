@@ -9,17 +9,19 @@
 export const PEG_KINDS = new Set(['normal', 'star', 'heart']);
 
 export const DEFAULT_PHYSICS = {
-  ballRadius: 0.0105,
-  pegRadius: 0.029,
-  blockWidth: 0.07,
-  blockHeight: 0.058,
+  // PegglePy: ballRad 12 / pegRad 25 = 0.48. Ball is smaller than a brick,
+  // but a readable marble once the board fills the screen.
+  ballRadius: 0.022,
+  pegRadius: 0.046,
+  blockWidth: 0.092,
+  blockHeight: 0.074,
   gravity: 1.55,
   restitution: 0.72,
   airDrag: 0.08,
   maxSpeed: 1.85,
   launchSpeed: 0.92,
-  fountain: { x: 0.5, y: 0.08 },
-  floorY: 0.92,
+  fountain: { x: 0.5, y: 0.07 },
+  floorY: 0.94,
 };
 
 export function clonePegs(pegs) {

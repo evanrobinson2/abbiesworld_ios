@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Peg } from './Peg';
 import { ComicLayer } from './ComicLayer';
 import { publicSrc } from '../../lib/peg-battle/assets.js';
@@ -9,7 +9,6 @@ import {
   advanceLiveShot,
   beginLiveShot,
   beginPlayerTurn,
-  cardArt,
   chooseCard,
   clearFx,
   createBattle,
@@ -179,46 +178,21 @@ export default function BattleView({
 
   const selected = session?.definition.cards.find((card) => card.id === session.selectedCardId);
 
+  const orbStyle = session
+    ? {
+        width: `${session.physics.ballRadius * 2 * 100}%`,
+        background:
+          selected?.behavior === 'bubble'
+            ? 'radial-gradient(circle at 32% 28%, #fff, #9be7ff 42%, #2f8aa8)'
+            : 'radial-gradient(circle at 32% 28%, #fff, #ffe7a0 40%, #d48a1a)',
+      }
+    : null;
+  const loadedOrb = session && session.phase === 'playerAim' && session.selectedCardId && !ball?.alive;
+
   return (
-    <div className={`peg-battle ${harness ? 'harness' : ''}`}>
-      <header className="battle-top">
-        <button type="button" onClick={() => (onExit ? onExit() : (window.location.href = '/dev/peg-battle'))}>
-          {onExit ? 'Peggle Land' : 'Harness'}
-        </button>
-        <div>
-          <p className="kicker">Peg Battle</p>
-          <h1>{session?.definition.enemy.name ?? 'Peg Battle'}</h1>
-        </div>
-        <div className="dev-row">
-          <button type="button" onClick={() => replaceSession(resetBattle(sessionRef.current))}>
-            Reset Battle
-          </button>
-          {harness && (
-            <button
-              type="button"
-              onClick={() =>
-                replaceSession(
-                  newRandomBattle(catalog, {
-                    levelId: session?.definition.level.id,
-                    enemyId,
-                    boardId,
-                  })
-                )
-              }
-            >
-              New Random Battle
-            </button>
-          )}
-        </div>
-      </header>
-
-      {session?.phase === 'intro' && (
-        <div className="banner">{session.definition.level.introLine}</div>
-      )}
-
-      <div className="battle-grid">
-        <aside className="enemy-panel">
-          <Hearts current={session?.enemyHearts ?? 0} max={session?.enemyMaxHearts ?? 6} />
+    <div className={`peg-battle ${harness ? 'harness' : 'kid'}`}>
+      <header className="battle-hud">
+        <div className="fighter enemy">
           <div className={`enemy-art ${breathe ? 'breathe' : ''} ${zoom ? 'zoom' : ''} ${knock ? 'knock' : ''}`}>
             {enemySrc ? (
               <img src={enemySrc} alt={session.definition.enemy.name} />
@@ -229,107 +203,128 @@ export default function BattleView({
               />
             )}
           </div>
-          <p className="intent">{intent?.telegraph}</p>
-        </aside>
-
-        <section
-          className="playfield"
-          ref={boardRef}
-          onPointerMove={pointerAim}
-          onPointerDown={pointerAim}
-          onPointerUp={fire}
-        >
-          {session && (
-            <div
-              className="arena"
-              style={{
-                backgroundImage: publicSrc(session.catalog.manifest?.families?.arena?.slots?.idle, { cacheKey })
-                  ? `url(${publicSrc(session.catalog.manifest.families.arena.slots.idle, { cacheKey })})`
-                  : undefined,
-              }}
-            >
-              <svg className="aim-layer" viewBox="0 0 100 100" preserveAspectRatio="none">
-                {session.phase === 'playerAim' && session.selectedCardId && (
-                  <g>
-                    {Array.from({ length: 8 }, (_, index) => {
-                      const t = 0.08 + index * 0.07;
-                      const x = (fountain.x + Math.sin(aim) * t) * 100;
-                      const y = (fountain.y + Math.cos(aim) * t) * 100;
-                      return <circle key={index} cx={x} cy={y} r={1.1} fill="#fff" opacity={0.85} />;
-                    })}
-                  </g>
-                )}
-                {ball?.alive && (
-                  <circle
-                    cx={ball.x * 100}
-                    cy={ball.y * 100}
-                    r={session.physics.ballRadius * 100}
-                    fill={selected?.behavior === 'bubble' ? '#9be7ff' : '#f7f1ea'}
-                    stroke="#3a1f3d"
-                    strokeWidth="0.6"
-                  />
-                )}
-              </svg>
-              {pegs.map((peg) => (
-                <div
-                  key={peg.id}
-                  className="peg-slot"
-                  style={{
-                    left: `${peg.x * 100}%`,
-                    top: `${peg.y * 100}%`,
-                    width: `${(session.physics.blockWidth ?? session.physics.pegRadius * 2) * 100}%`,
-                    height: `${(session.physics.blockHeight ?? session.physics.pegRadius * 2) * 100}%`,
-                  }}
-                >
-                  <Peg
-                    type={peg.kind}
-                    charged={peg.charged}
-                    painted={peg.painted}
-                    muddy={peg.muddy}
-                    sticky={peg.sticky}
-                    present={peg.present}
-                    gone={peg.gone}
-                    strength={peg.strength}
-                    valuable={peg.valuable}
-                    hitIntensity={peg.hitThisShot ? 1 : 0}
-                  />
-                </div>
-              ))}
-              <ComicLayer queue={session.fxQueue} tier={session.lastImpactTier} />
-              {session.lastPower > 0 && session.phase !== 'playerAim' && (
-                <div className="power-call">{session.lastPower} POWER!</div>
-              )}
-            </div>
-          )}
-        </section>
-
-        <aside className="player-panel">
+          <div>
+            <Hearts current={session?.enemyHearts ?? 0} max={session?.enemyMaxHearts ?? 6} />
+            <p className="intent">{intent?.telegraph}</p>
+          </div>
+        </div>
+        <div className="hud-center">
+          <p className="kicker">Peg Battle</p>
+          <h1>{session?.definition.enemy.name ?? 'Peg Battle'}</h1>
+          <p className="status">{session?.status}</p>
+          <div className="dev-row">
+            {onExit && (
+              <button type="button" onClick={onExit}>
+                Peggle Land
+              </button>
+            )}
+            <button type="button" onClick={() => replaceSession(resetBattle(sessionRef.current))}>
+              Reset Battle
+            </button>
+            {harness && (
+              <button
+                type="button"
+                onClick={() =>
+                  replaceSession(
+                    newRandomBattle(catalog, {
+                      levelId: session?.definition.level.id,
+                      enemyId,
+                      boardId,
+                    })
+                  )
+                }
+              >
+                New Random Battle
+              </button>
+            )}
+          </div>
+        </div>
+        <div className="fighter player">
           <Hearts current={session?.playerHearts ?? 0} max={session?.playerMaxHearts ?? 6} />
           {session?.shield > 0 && <Hearts current={session.shield} max={session.shield} kind="shield" />}
-          <p className="status">{session?.status}</p>
-          {debug && snapshot && (
-            <pre className="debug">
-              {`Turn: ${snapshot.turn}
-Player HP: ${snapshot.playerHP}
-Enemy HP: ${snapshot.enemyHP}
-Current hand: ${snapshot.hand.join(', ')}
-Deck queue: ${snapshot.deck.join(', ')}
-Enemy intent: ${snapshot.enemyIntent}
-Board: ${snapshot.board.present} present / ${snapshot.board.gone} gone / ${snapshot.board.sticky} sticky / ${snapshot.board.painted} painted
-Seed: ${snapshot.seed}
-Phase: ${snapshot.phase}`}
-            </pre>
-          )}
-        </aside>
-      </div>
+        </div>
+      </header>
+
+      {session?.phase === 'intro' && <div className="banner">{session.definition.level.introLine}</div>}
+
+      <section
+        className="playfield"
+        ref={boardRef}
+        onPointerMove={pointerAim}
+        onPointerDown={pointerAim}
+        onPointerUp={fire}
+      >
+        {session && (
+          <div className="arena felt">
+            <svg className="aim-layer" viewBox="0 0 100 100" preserveAspectRatio="none">
+              {session.phase === 'playerAim' && session.selectedCardId && (
+                <g>
+                  {Array.from({ length: 8 }, (_, index) => {
+                    const t = 0.08 + index * 0.07;
+                    const x = (fountain.x + Math.sin(aim) * t) * 100;
+                    const y = (fountain.y + Math.cos(aim) * t) * 100;
+                    return <circle key={index} cx={x} cy={y} r={1.2} fill="#fff8dc" opacity={0.9} />;
+                  })}
+                </g>
+              )}
+            </svg>
+            {pegs.map((peg) => (
+              <div
+                key={peg.id}
+                className={`peg-slot ${peg.gone || peg.present === false ? 'gone' : ''} ${peg.hitThisShot ? 'hit' : ''}`}
+                style={{
+                  left: `${peg.x * 100}%`,
+                  top: `${peg.y * 100}%`,
+                  width: `${session.physics.blockWidth * 100}%`,
+                  height: `${session.physics.blockHeight * 100}%`,
+                }}
+              >
+                <Peg
+                  type={peg.kind}
+                  charged={peg.charged}
+                  painted={peg.painted}
+                  muddy={peg.muddy}
+                  sticky={peg.sticky}
+                  present={peg.present}
+                  gone={peg.gone}
+                  strength={peg.strength}
+                  valuable={peg.valuable}
+                  hitIntensity={peg.hitThisShot ? 1 : 0}
+                />
+              </div>
+            ))}
+            {loadedOrb && (
+              <div
+                className="orb parked"
+                style={{
+                  ...orbStyle,
+                  left: `${fountain.x * 100}%`,
+                  top: `${fountain.y * 100}%`,
+                }}
+              />
+            )}
+            {ball?.alive && (
+              <div
+                className="orb flying"
+                style={{
+                  ...orbStyle,
+                  left: `${ball.x * 100}%`,
+                  top: `${ball.y * 100}%`,
+                }}
+              />
+            )}
+            <ComicLayer queue={session.fxQueue} tier={session.lastImpactTier} />
+            {session.lastPower > 0 && session.phase !== 'playerAim' && (
+              <div className="power-call">{session.lastPower} POWER!</div>
+            )}
+          </div>
+        )}
+      </section>
 
       <div className="hand">
-        <p className="kicker">Your balls</p>
         <div className="cards">
           {(session?.hand ?? []).map((id) => {
             const card = session.definition.cards.find((entry) => entry.id === id);
-            const art = cardArt(session, id);
-            const src = publicSrc(art, { cacheKey });
             const active = session.selectedCardId === id;
             return (
               <button
@@ -339,9 +334,8 @@ Phase: ${snapshot.phase}`}
                 disabled={session.phase !== 'playerAim'}
                 onClick={() => pickCard(id)}
               >
-                {src ? <img src={src} alt="" /> : <span className="glyph">{card?.glyph}</span>}
+                <span className="glyph">{card?.glyph}</span>
                 <strong>{card?.shortName}</strong>
-                <small>{card?.summary}</small>
               </button>
             );
           })}
@@ -352,6 +346,13 @@ Phase: ${snapshot.phase}`}
           ))}
         </div>
       </div>
+
+      {debug && snapshot && (
+        <pre className="debug">
+          {`Turn ${snapshot.turn}  ${snapshot.phase}  seed ${snapshot.seed}
+Present ${snapshot.board.present}  gone ${snapshot.board.gone}  sticky ${snapshot.board.sticky}  valuable ${snapshot.board.valuable}  painted ${snapshot.board.painted}`}
+        </pre>
+      )}
 
       {(session?.phase === 'victory' || session?.phase === 'defeat') && (
         <div className="outcome">

@@ -13,18 +13,18 @@ enum PegBattlePhysics {
     }
 
     static let defaults = (
-        ballRadius: 0.0105,
-        pegRadius: 0.029,
-        blockWidth: 0.07,
-        blockHeight: 0.058,
+        ballRadius: 0.022,
+        pegRadius: 0.046,
+        blockWidth: 0.092,
+        blockHeight: 0.074,
         gravity: 1.55,
         restitution: 0.72,
         airDrag: 0.08,
         maxSpeed: 1.85,
         launchSpeed: 0.92,
         fountainX: 0.5,
-        fountainY: 0.08,
-        floorY: 0.92
+        fountainY: 0.07,
+        floorY: 0.94
     )
 
     static func clampAim(_ angle: Double, limit: Double = 1.15) -> Double {

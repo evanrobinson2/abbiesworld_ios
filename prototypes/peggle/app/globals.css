@@ -319,55 +319,77 @@ footer {
 .peg-battle {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   min-height: 100dvh;
-  padding: 12px 16px 18px;
+  padding: 8px 12px 12px;
+}
+
+.peg-battle.kid {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.battle-hud {
+  display: grid;
+  grid-template-columns: minmax(140px, 1fr) auto minmax(120px, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.fighter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fighter.player {
+  justify-content: flex-end;
+}
+
+.hud-center {
+  text-align: center;
+}
+
+.hud-center h1 {
+  font-size: 22px;
+  margin: 0;
 }
 
 .battle-top,
 .dev-row,
 .hand .cards {
   display: flex;
-  gap: 10px;
+  gap: 8px;
   align-items: center;
 }
 
-.battle-top {
-  justify-content: space-between;
+.dev-row {
+  justify-content: center;
+  flex-wrap: wrap;
 }
 
-.battle-top h1 {
-  font-size: 28px;
-  margin: 0;
-}
-
-.battle-grid {
-  display: grid;
-  grid-template-columns: 220px 1fr 220px;
-  gap: 12px;
+.playfield {
   flex: 1;
   min-height: 0;
-}
-
-.playfield,
-.enemy-panel,
-.player-panel {
-  background: rgba(255, 247, 251, 0.72);
-  border-radius: 20px;
-  padding: 10px;
+  padding: 0;
+  background: transparent;
 }
 
 .arena {
   position: relative;
   width: 100%;
-  height: min(72vh, 720px);
+  height: min(68vh, 760px);
   border-radius: 18px;
   overflow: hidden;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.05)),
-    radial-gradient(circle at 50% 0%, #ffe7f2, #bfe8d8);
-  background-size: cover;
   touch-action: none;
+}
+
+.arena.felt {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 46%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.03) 0 2px, transparent 2px 28px),
+    linear-gradient(180deg, #355a52, #243f3a 55%, #1b2f2c);
+  box-shadow: inset 0 0 0 6px #1a2c28, 0 16px 36px rgba(20, 30, 28, 0.28);
 }
 
 .aim-layer {
@@ -389,16 +411,93 @@ footer {
   overflow: visible;
 }
 
+.peg-slot.hit .brick-body {
+  transform-origin: center;
+  animation: brick-ping 160ms ease-out;
+}
+
+.peg-slot.gone .brick-body {
+  animation: brick-pop 180ms ease-out forwards;
+}
+
+@keyframes brick-ping {
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes brick-pop {
+  to {
+    transform: scale(0.15);
+    opacity: 0;
+  }
+}
+
+.orb {
+  position: absolute;
+  aspect-ratio: 1;
+  height: auto;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid #241428;
+  box-shadow: 0 2px 0 #241428, 0 6px 10px rgba(0, 0, 0, 0.28);
+  z-index: 3;
+  pointer-events: none;
+}
+
 .enemy-art {
-  width: 100%;
+  width: 72px;
+  height: 72px;
   display: grid;
   place-items: center;
+  flex: none;
 }
 
 .enemy-art img,
 .placeholder-silhouette {
-  width: min(100%, 220px);
-  height: auto;
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+}
+
+.intent,
+.status {
+  font-weight: 700;
+  font-size: 13px;
+  margin: 0;
+}
+
+.hand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ball-card {
+  width: 108px;
+  min-height: 108px;
+  border: 3px solid #3a1f3d;
+  border-radius: 16px;
+  background: var(--card);
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  padding: 6px;
+}
+
+.ball-card small {
+  display: none;
+}
+
+.debug {
+  font-size: 11px;
+  background: #fff;
+  padding: 6px 8px;
+  border-radius: 10px;
+  overflow: auto;
+  max-height: 72px;
+  margin: 0;
 }
 
 .enemy-art.breathe {
@@ -428,18 +527,8 @@ footer {
 .intent,
 .status {
   font-weight: 700;
-}
-
-.ball-card {
-  width: 160px;
-  min-height: 150px;
-  border: 3px solid #3a1f3d;
-  border-radius: 18px;
-  background: var(--card);
-  display: grid;
-  gap: 4px;
-  padding: 8px;
-  text-align: left;
+  font-size: 13px;
+  margin: 0;
 }
 
 .ball-card.active {
@@ -447,8 +536,8 @@ footer {
 }
 
 .ball-card img {
-  width: 72px;
-  height: 72px;
+  width: 56px;
+  height: 56px;
   object-fit: contain;
 }
 
@@ -613,10 +702,11 @@ footer {
 .debug {
   font-size: 11px;
   background: #fff;
-  padding: 8px;
+  padding: 6px 8px;
   border-radius: 10px;
   overflow: auto;
-  max-height: 240px;
+  max-height: 72px;
+  margin: 0;
 }
 
 .harness-form {
@@ -628,7 +718,7 @@ footer {
 }
 
 @media (max-width: 900px) {
-  .battle-grid {
+  .battle-hud {
     grid-template-columns: 1fr;
   }
   .arena {
