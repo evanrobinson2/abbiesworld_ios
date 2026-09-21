@@ -1,4 +1,7 @@
-import { clonePegs, clampAim, simulateShot } from './physics.js';
+import { clonePegs, clampAim, launchWorld, simulateShot, stepBall } from './physics.js';
+
+export const SHOT_PLAYBACK_RATE = 0.28;
+export const SHOT_STEP_DT = 1 / 120;
 
 export function bedById(campaign, bedId) {
   return campaign.beds.find((bed) => bed.id === bedId) ?? campaign.beds[0];
@@ -83,10 +86,52 @@ function unlockNext(campaign, progress, bedId) {
   return null;
 }
 
+export function beginShot(round, angle) {
+  if (round.phase !== 'aim') return { round, world: null };
+  const world = launchWorld(round.campaign, round.pegs, clampAim(angle));
+  world.events = [];
+  return {
+    world,
+    round: {
+      ...round,
+      phase: 'falling',
+      pegs: world.pegs,
+      hitsThisShot: 0,
+      lastBowl: null,
+      lastShot: null,
+      status: 'The dewdrop is falling…',
+    },
+  };
+}
+
+export function advanceShot(world, dt = SHOT_STEP_DT) {
+  if (!world?.ball?.alive) return [];
+  const events = stepBall(world, dt);
+  world.events.push(...events);
+  return events;
+}
+
+export function settleShot(round, world) {
+  const next = {
+    ...round,
+    pegs: world.pegs,
+    lastShot: {
+      events: world.events,
+      ball: { x: world.ball.x, y: world.ball.y },
+      ended: !world.ball.alive,
+    },
+  };
+  next.hitsThisShot = world.events.filter((event) => event.type === 'peg').length;
+  const glowHits = popHitPegs(next);
+  const catchEvent = [...world.events].reverse().find((event) => event.type === 'caught');
+  next.lastBowl = catchEvent?.bowl ?? null;
+  const notes = [applyBowl(next, catchEvent?.effect)];
+  return finishResolvedShot(next, notes, glowHits);
+}
+
 export function resolveShot(round, angle) {
   if (round.phase !== 'aim') return round;
-  const aimed = clampAim(angle);
-  const shot = simulateShot(round.campaign, round.pegs, aimed);
+  const shot = simulateShot(round.campaign, round.pegs, clampAim(angle));
   round.lastShot = shot;
   round.pegs = shot.pegs;
   round.hitsThisShot = shot.events.filter((event) => event.type === 'peg').length;
@@ -94,6 +139,10 @@ export function resolveShot(round, angle) {
   const catchEvent = [...shot.events].reverse().find((event) => event.type === 'caught');
   round.lastBowl = catchEvent?.bowl ?? null;
   const notes = [applyBowl(round, catchEvent?.effect)];
+  return finishResolvedShot(round, notes, glowHits);
+}
+
+function finishResolvedShot(round, notes, glowHits) {
 
   if (round.hitsThisShot >= round.campaign.rules.gardenGlowHits) {
     round.gardenGlow = true;

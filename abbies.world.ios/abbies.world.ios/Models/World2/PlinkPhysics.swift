@@ -103,10 +103,89 @@ enum PlinkPhysics {
         return (nextPegs, caught, steps, pegHits)
     }
 
-    static func resolveShot(_ round: inout PlinkRound, angle: Double) {
-        guard round.phase == .aim else { return }
-        let result = simulateShot(campaign: round.campaign, pegs: round.pegs, angle: angle)
-        round.pegs = result.pegs
+    static let playbackRate = 0.28
+    static let stepDt = 1.0 / 120.0
+
+    static func beginShot(_ round: inout PlinkRound, angle: Double) -> Ball? {
+        guard round.phase == .aim else { return nil }
+        let physics = round.campaign.physics
+        let aimed = clampAim(angle)
+        round.phase = .falling
+        round.status = "The dewdrop is falling…"
+        return Ball(
+            x: physics.fountain.x,
+            y: physics.fountain.y,
+            vx: sin(aimed) * physics.launchSpeed,
+            vy: cos(aimed) * physics.launchSpeed,
+            alive: true
+        )
+    }
+
+    static func stepFalling(_ round: inout PlinkRound, ball: inout Ball, dt: Double = stepDt) {
+        guard round.phase == .falling, ball.alive else { return }
+        stepLiveBall(&round, ball: &ball, dt: dt)
+    }
+
+    private static func stepLiveBall(_ round: inout PlinkRound, ball: inout Ball, dt: Double) {
+        let physics = round.campaign.physics
+        let drag = max(0, 1 - physics.airDrag * dt)
+        ball.vy += physics.gravity * dt
+        ball.vx *= drag
+        ball.vy *= drag
+        let speed = hypot(ball.vx, ball.vy)
+        if speed > physics.maxSpeed {
+            let scale = physics.maxSpeed / speed
+            ball.vx *= scale
+            ball.vy *= scale
+        }
+        ball.x += ball.vx * dt
+        ball.y += ball.vy * dt
+
+        let radius = physics.ballRadius
+        if ball.x < radius {
+            ball.x = radius
+            ball.vx = abs(ball.vx) * physics.restitution
+        } else if ball.x > 1 - radius {
+            ball.x = 1 - radius
+            ball.vx = -abs(ball.vx) * physics.restitution
+        }
+        if ball.y < radius {
+            ball.y = radius
+            ball.vy = abs(ball.vy) * physics.restitution
+        }
+
+        let minDist = radius + physics.pegRadius
+        for index in round.pegs.indices where round.pegs[index].alive {
+            let dx = ball.x - round.pegs[index].x
+            let dy = ball.y - round.pegs[index].y
+            let dist = hypot(dx, dy)
+            guard dist > 0, dist < minDist else { continue }
+            let nx = dx / dist
+            let ny = dy / dist
+            ball.x = round.pegs[index].x + nx * minDist
+            ball.y = round.pegs[index].y + ny * minDist
+            let dot = ball.vx * nx + ball.vy * ny
+            ball.vx = (ball.vx - 2 * dot * nx) * physics.restitution
+            ball.vy = (ball.vy - 2 * dot * ny) * physics.restitution
+            if !round.pegs[index].hit {
+                round.pegs[index].hit = true
+            }
+            if abs(ball.vx) < 0.08 {
+                ball.vx += ball.x >= round.pegs[index].x ? 0.12 : -0.12
+            }
+        }
+
+        if ball.y + radius >= physics.floorY && ball.vy > 0 {
+            ball.alive = false
+            let bowl = round.campaign.bowls.first { abs(ball.x - $0.x) <= $0.width / 2 }
+            settleShot(&round, caught: Catch(bowlID: bowl?.id, effect: bowl?.effect ?? "miss", x: ball.x))
+        } else if ball.y > 1.08 {
+            ball.alive = false
+            settleShot(&round, caught: Catch(bowlID: nil, effect: "miss", x: ball.x))
+        }
+    }
+
+    static func settleShot(_ round: inout PlinkRound, caught: Catch) {
         var glowHits = 0
         for index in round.pegs.indices where round.pegs[index].hit && round.pegs[index].alive {
             round.pegs[index].alive = false
@@ -116,7 +195,7 @@ enum PlinkPhysics {
             }
         }
 
-        switch result.catch.effect {
+        switch caught.effect {
         case "extraDrop":
             round.dropsLeft += 1
         case "gems":
@@ -153,9 +232,17 @@ enum PlinkPhysics {
             round.status = "The glow seeds are still sleeping. Try this bed again."
             return
         }
+        round.phase = .aim
         round.status = glowHits > 0
             ? "Glow seeds woke: \(glowHits). \(round.glowRemaining) left. \(round.dropsLeft) drops."
             : "\(round.glowRemaining) glow seeds left. \(round.dropsLeft) drops."
+    }
+
+    static func resolveShot(_ round: inout PlinkRound, angle: Double) {
+        guard round.phase == .aim else { return }
+        let result = simulateShot(campaign: round.campaign, pegs: round.pegs, angle: angle)
+        round.pegs = result.pegs
+        settleShot(&round, caught: result.catch)
     }
 
     static func nextBed(in campaign: PlinkCampaign, after bedID: String) -> PlinkCampaign.Bed? {

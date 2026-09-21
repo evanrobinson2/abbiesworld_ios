@@ -3,7 +3,16 @@ import { readFile } from 'node:fs/promises';
 import { describe, it } from 'node:test';
 import { resolve } from 'node:path';
 import { simulateShot, clampAim } from '../app/lib/physics.js';
-import { createProgress, createRound, inspectCampaign, remainingGlow, resolveShot } from '../app/lib/engine.js';
+import {
+  SHOT_STEP_DT,
+  advanceShot,
+  beginShot,
+  createProgress,
+  createRound,
+  inspectCampaign,
+  remainingGlow,
+  resolveShot,
+} from '../app/lib/engine.js';
 
 const campaign = JSON.parse(
   await readFile(
@@ -62,6 +71,20 @@ describe('Plink physics', () => {
     const caught = shot.events.find((event) => event.type === 'caught');
     assert.ok(caught);
     assert.ok(caught.effect);
+  });
+
+  it('keeps the marble in the air for many steps instead of finishing in one tick', () => {
+    const bed = campaign.beds[0];
+    const shot = simulateShot(campaign, bed.pegs, 0.18);
+    assert.ok(shot.steps > 80, `expected a visible fall, got ${shot.steps} steps`);
+    const { world } = beginShot(createRound(campaign, bed, createProgress(campaign)), 0.18);
+    let steps = 0;
+    while (world.ball.alive && steps < 40) {
+      advanceShot(world, SHOT_STEP_DT);
+      steps += 1;
+    }
+    assert.equal(world.ball.alive, true);
+    assert.ok(world.ball.y > campaign.physics.fountain.y);
   });
 });
 

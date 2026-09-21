@@ -2,22 +2,73 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { clampAim } from './lib/physics.js';
-import { createProgress, createRound, inspectCampaign, remainingGlow, resolveShot } from './lib/engine.js';
+import {
+  SHOT_PLAYBACK_RATE,
+  SHOT_STEP_DT,
+  advanceShot,
+  beginShot,
+  createProgress,
+  createRound,
+  inspectCampaign,
+  remainingGlow,
+  settleShot,
+} from './lib/engine.js';
 
 const PLAYER_ID = 'player.local';
 
-function drawBoard(ctx, round, width, height, aim, hovering) {
+function usePlaceholder(src) {
+  const [image, setImage] = useState(null);
+  useEffect(() => {
+    const next = new Image();
+    next.src = src;
+    next.onload = () => setImage(next);
+  }, [src]);
+  return image;
+}
+
+function drawImageCover(ctx, image, width, height) {
+  if (!image) return;
+  const scale = Math.max(width / image.width, height / image.height);
+  const w = image.width * scale;
+  const h = image.height * scale;
+  ctx.drawImage(image, (width - w) / 2, (height - h) / 2, w, h);
+}
+
+function drawCircleSprite(ctx, image, x, y, radius, fallback) {
+  ctx.save();
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.closePath();
+  ctx.clip();
+  if (image) {
+    ctx.drawImage(image, x - radius, y - radius, radius * 2, radius * 2);
+  } else {
+    ctx.fillStyle = fallback;
+    ctx.fill();
+  }
+  ctx.restore();
+  ctx.strokeStyle = '#4a2250';
+  ctx.lineWidth = Math.max(2, radius * 0.18);
+  ctx.beginPath();
+  ctx.arc(x, y, radius, 0, Math.PI * 2);
+  ctx.stroke();
+}
+
+function drawBoard(ctx, round, width, height, aim, hovering, ball, trail, art) {
   const physics = round.campaign.physics;
   ctx.clearRect(0, 0, width, height);
-  const sky = ctx.createLinearGradient(0, 0, 0, height);
-  sky.addColorStop(0, '#fde7f3');
-  sky.addColorStop(0.45, '#f7d9b8');
-  sky.addColorStop(1, '#b7e3d4');
-  ctx.fillStyle = sky;
-  ctx.fillRect(0, 0, width, height);
-
-  ctx.fillStyle = 'rgba(255,255,255,0.18)';
-  ctx.fillRect(0, 0, width, height * physics.fountain.y + 18);
+  if (art.interior) {
+    drawImageCover(ctx, art.interior, width, height);
+    ctx.fillStyle = 'rgba(255,255,255,0.18)';
+    ctx.fillRect(0, 0, width, height);
+  } else {
+    const sky = ctx.createLinearGradient(0, 0, 0, height);
+    sky.addColorStop(0, '#fde7f3');
+    sky.addColorStop(0.45, '#f7d9b8');
+    sky.addColorStop(1, '#b7e3d4');
+    ctx.fillStyle = sky;
+    ctx.fillRect(0, 0, width, height);
+  }
 
   for (const bowl of round.campaign.bowls) {
     const x = bowl.x * width;
@@ -33,19 +84,23 @@ function drawBoard(ctx, round, width, height, aim, hovering) {
     ctx.fillText(bowl.label, x, y + 28);
   }
 
+  const minDim = Math.min(width, height);
   for (const peg of round.pegs) {
     if (!peg.alive) continue;
     const x = peg.x * width;
     const y = peg.y * height;
-    const r = physics.pegRadius * Math.min(width, height);
-    ctx.beginPath();
-    ctx.fillStyle = peg.kind === 'glow' ? '#f4c430' : '#ef7ea8';
-    ctx.arc(x, y, r, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.strokeStyle = '#4a2250';
-    ctx.lineWidth = 3;
-    ctx.stroke();
-    if (peg.kind === 'glow') {
+    const r = Math.max(10, physics.pegRadius * minDim);
+    ctx.globalAlpha = peg.hit ? 0.35 : 1;
+    drawCircleSprite(
+      ctx,
+      peg.kind === 'glow' ? art.glow : art.seed,
+      x,
+      y,
+      r,
+      peg.kind === 'glow' ? '#f4c430' : '#ef7ea8'
+    );
+    ctx.globalAlpha = 1;
+    if (peg.kind === 'glow' && !peg.hit && !art.glow) {
       ctx.beginPath();
       ctx.fillStyle = 'rgba(255,255,255,0.7)';
       ctx.arc(x - r * 0.25, y - r * 0.25, r * 0.28, 0, Math.PI * 2);
@@ -67,18 +122,34 @@ function drawBoard(ctx, round, width, height, aim, hovering) {
   ctx.lineWidth = 3;
   ctx.stroke();
 
-  const aimX = fx + Math.sin(aim) * 90;
-  const aimY = fy + Math.cos(aim) * 90;
-  ctx.strokeStyle = hovering ? '#4a2250' : 'rgba(74,34,80,0.55)';
-  ctx.lineWidth = 4;
-  ctx.beginPath();
-  ctx.moveTo(fx, fy);
-  ctx.lineTo(aimX, aimY);
-  ctx.stroke();
-  ctx.fillStyle = '#5ec8d8';
-  ctx.beginPath();
-  ctx.arc(fx, fy, physics.ballRadius * Math.min(width, height), 0, Math.PI * 2);
-  ctx.fill();
+  if (round.phase === 'aim') {
+    const aimX = fx + Math.sin(aim) * 90;
+    const aimY = fy + Math.cos(aim) * 90;
+    ctx.strokeStyle = hovering ? '#4a2250' : 'rgba(74,34,80,0.55)';
+    ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.moveTo(fx, fy);
+    ctx.lineTo(aimX, aimY);
+    ctx.stroke();
+  }
+
+  const marble = ball ?? { x: physics.fountain.x, y: physics.fountain.y, alive: true };
+  const ballR = Math.max(16, physics.ballRadius * minDim * 2.4);
+  if (trail?.length) {
+    trail.forEach((point, index) => {
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(94, 200, 216, ${0.12 + (index / trail.length) * 0.28})`;
+      ctx.arc(point.x * width, point.y * height, ballR * 0.45, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+  if (marble.alive !== false) {
+    drawCircleSprite(ctx, art.ball, marble.x * width, marble.y * height, ballR, '#5ec8d8');
+    ctx.beginPath();
+    ctx.fillStyle = 'rgba(255,255,255,0.75)';
+    ctx.arc(marble.x * width - ballR * 0.28, marble.y * height - ballR * 0.28, ballR * 0.22, 0, Math.PI * 2);
+    ctx.fill();
+  }
 }
 
 function LandView({ inspect, onEnter }) {
@@ -90,7 +161,8 @@ function LandView({ inspect, onEnter }) {
         <p>{inspect.land.summary}</p>
       </header>
       <button className="pavilion" onClick={onEnter} type="button">
-        <span className="dome" aria-hidden="true" />
+        <img alt="" className="land-art" src="/placeholders/land.png" />
+        <img alt="" className="dome-art" src="/placeholders/pavilion.png" />
         <strong>{inspect.poi.name}</strong>
         <em>{inspect.poi.callToAction}</em>
       </button>
@@ -134,27 +206,76 @@ function Lobby({ inspect, progress, onPlay, onBack }) {
 
 function Board({ campaign, bedId, progress, onExit, onProgress }) {
   const canvasRef = useRef(null);
+  const worldRef = useRef(null);
+  const roundRef = useRef(null);
   const [round, setRound] = useState(() => createRound(campaign, campaign.beds.find((bed) => bed.id === bedId), progress));
   const [aim, setAim] = useState(0);
   const [hovering, setHovering] = useState(false);
+  const [ball, setBall] = useState(null);
+  const [trail, setTrail] = useState([]);
+  const interior = usePlaceholder('/placeholders/interior.png');
+  const seed = usePlaceholder('/placeholders/seed.png');
+  const glow = usePlaceholder('/placeholders/glow.png');
+  const ballArt = usePlaceholder('/placeholders/ball.png');
+  const onProgressRef = useRef(onProgress);
+  onProgressRef.current = onProgress;
+  roundRef.current = round;
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
-    const resize = () => {
+    const paint = () => {
       const rect = canvas.getBoundingClientRect();
       canvas.width = rect.width * window.devicePixelRatio;
       canvas.height = rect.height * window.devicePixelRatio;
       ctx.setTransform(window.devicePixelRatio, 0, 0, window.devicePixelRatio, 0, 0);
-      drawBoard(ctx, round, rect.width, rect.height, aim, hovering);
+      drawBoard(ctx, round, rect.width, rect.height, aim, hovering, ball, trail, {
+        interior,
+        seed,
+        glow,
+        ball: ballArt,
+      });
     };
-    resize();
-    window.addEventListener('resize', resize);
-    return () => window.removeEventListener('resize', resize);
-  }, [round, aim, hovering]);
+    paint();
+    window.addEventListener('resize', paint);
+    return () => window.removeEventListener('resize', paint);
+  }, [round, aim, hovering, ball, trail, interior, seed, glow, ballArt]);
+
+  useEffect(() => {
+    if (round.phase !== 'falling' || !worldRef.current) return undefined;
+    let frame = 0;
+    let last = performance.now();
+    let leftover = 0;
+    const tick = (now) => {
+      const world = worldRef.current;
+      if (!world) return;
+      leftover += Math.min(0.05, (now - last) / 1000) * SHOT_PLAYBACK_RATE;
+      last = now;
+      while (leftover >= SHOT_STEP_DT && world.ball.alive) {
+        leftover -= SHOT_STEP_DT;
+        advanceShot(world, SHOT_STEP_DT);
+      }
+      setBall({ ...world.ball });
+      setTrail((points) => [...points.slice(-10), { x: world.ball.x, y: world.ball.y }]);
+      setRound((current) => ({ ...current, pegs: world.pegs.map((peg) => ({ ...peg })) }));
+      if (!world.ball.alive) {
+        const settled = settleShot(roundRef.current, world);
+        worldRef.current = null;
+        setBall(null);
+        setTrail([]);
+        setRound(settled);
+        onProgressRef.current(settled.progress);
+        return;
+      }
+      frame = window.requestAnimationFrame(tick);
+    };
+    frame = window.requestAnimationFrame(tick);
+    return () => window.cancelAnimationFrame(frame);
+  }, [round.phase]);
 
   const onPointer = (event) => {
+    if (round.phase !== 'aim') return;
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
     const x = (event.clientX - rect.left) / rect.width;
@@ -166,12 +287,20 @@ function Board({ campaign, bedId, progress, onExit, onProgress }) {
 
   const fire = () => {
     if (round.phase !== 'aim') return;
-    const next = resolveShot({ ...round, pegs: round.pegs.map((peg) => ({ ...peg })) }, aim);
-    setRound(next);
-    onProgress(next.progress);
+    const { round: falling, world } = beginShot(
+      { ...round, pegs: round.pegs.map((peg) => ({ ...peg })) },
+      aim
+    );
+    worldRef.current = world;
+    setTrail([{ x: world.ball.x, y: world.ball.y }]);
+    setBall({ ...world.ball });
+    setRound(falling);
   };
 
   const retry = () => {
+    worldRef.current = null;
+    setBall(null);
+    setTrail([]);
     setRound(createRound(campaign, round.bed, progress));
     setAim(0);
   };

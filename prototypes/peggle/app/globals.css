@@ -67,8 +67,30 @@ h1 {
   cursor: pointer;
 }
 
+.pavilion {
+  position: relative;
+  overflow: hidden;
+}
+
+.pavilion .land-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.55;
+}
+
+.pavilion .dome-art,
 .pavilion .dome {
+  position: relative;
+  z-index: 1;
   width: 180px;
+  height: 180px;
+  object-fit: contain;
+}
+
+.pavilion .dome {
   height: 140px;
   border-radius: 180px 180px 24px 24px;
   background: radial-gradient(circle at 40% 30%, #fff, #8fd8d3 45%, #d4538a 80%);
@@ -77,6 +99,8 @@ h1 {
 
 .pavilion strong,
 .pavilion em {
+  position: relative;
+  z-index: 1;
   display: block;
 }
 

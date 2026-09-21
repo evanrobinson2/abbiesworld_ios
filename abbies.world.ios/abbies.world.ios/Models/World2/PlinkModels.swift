@@ -152,6 +152,7 @@ struct PlinkProgress: Equatable, Sendable {
 
 enum PlinkPhase: Equatable, Sendable {
     case aim
+    case falling
     case cleared
     case retry
 }

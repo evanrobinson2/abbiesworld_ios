@@ -9,6 +9,8 @@ struct PlinkMinigameView: View {
     @State private var round: PlinkRound?
     @State private var loadError: String?
     @State private var aim: Double = 0
+    @State private var ball: PlinkPhysics.Ball?
+    @State private var fallClock = Date()
 
     var body: some View {
         ZStack {
@@ -100,10 +102,16 @@ struct PlinkMinigameView: View {
             .padding(.horizontal)
 
             GeometryReader { geometry in
-                PlinkBoardCanvas(round: round, aim: aim)
+                TimelineView(.animation(minimumInterval: 1.0 / 60.0, paused: round.phase != .falling)) { context in
+                    PlinkBoardCanvas(round: round, aim: aim, ball: ball)
+                        .onChange(of: context.date) { _, _ in
+                            stepFall(now: context.date)
+                        }
+                }
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { value in
+                                guard round.phase == .aim else { return }
                                 let fountain = round.campaign.physics.fountain
                                 let x = value.location.x / max(geometry.size.width, 1)
                                 let y = value.location.y / max(geometry.size.height, 1)
@@ -134,7 +142,21 @@ struct PlinkMinigameView: View {
 
     private func fire() {
         guard var current = round, current.phase == .aim else { return }
-        PlinkPhysics.resolveShot(&current, angle: aim)
+        ball = PlinkPhysics.beginShot(&current, angle: aim)
+        fallClock = Date()
+        round = current
+    }
+
+    private func stepFall(now: Date) {
+        guard var current = round, var live = ball, current.phase == .falling else { return }
+        let elapsed = now.timeIntervalSince(fallClock)
+        fallClock = now
+        var leftover = min(0.05, elapsed) * PlinkPhysics.playbackRate
+        while leftover >= PlinkPhysics.stepDt && live.alive {
+            leftover -= PlinkPhysics.stepDt
+            PlinkPhysics.stepFalling(&current, ball: &live)
+        }
+        ball = live.alive ? live : nil
         round = current
         progress = current.progress
         if current.phase == .cleared {
@@ -148,6 +170,7 @@ struct PlinkMinigameView: View {
 
     private func retry() {
         guard let campaign, let progress, let bed = round?.bed else { return }
+        ball = nil
         round = .start(campaign: campaign, bed: bed, progress: progress)
         aim = 0
     }
@@ -160,6 +183,7 @@ struct PlinkMinigameView: View {
 private struct PlinkBoardCanvas: View {
     let round: PlinkRound
     let aim: Double
+    var ball: PlinkPhysics.Ball? = nil
 
     var body: some View {
         Canvas { context, size in
@@ -179,31 +203,48 @@ private struct PlinkBoardCanvas: View {
                 )
             }
             for peg in round.pegs where peg.alive {
-                let r = physics.pegRadius * min(size.width, size.height)
+                let r = max(10, physics.pegRadius * min(size.width, size.height))
                 let rect = CGRect(
                     x: peg.x * size.width - r,
                     y: peg.y * size.height - r,
                     width: r * 2,
                     height: r * 2
                 )
+                let color = peg.kind == "glow" ? Color(red: 0.96, green: 0.77, blue: 0.19) : Color(red: 0.94, green: 0.49, blue: 0.66)
                 context.fill(
                     Path(ellipseIn: rect),
-                    with: .color(peg.kind == "glow" ? Color(red: 0.96, green: 0.77, blue: 0.19) : Color(red: 0.94, green: 0.49, blue: 0.66))
+                    with: .color(color.opacity(peg.hit ? 0.35 : 1))
                 )
             }
-            let aimEnd = CGPoint(
-                x: fountain.x + sin(aim) * 80,
-                y: fountain.y + cos(aim) * 80
+            if round.phase == .aim {
+                let aimEnd = CGPoint(
+                    x: fountain.x + sin(aim) * 80,
+                    y: fountain.y + cos(aim) * 80
+                )
+                var line = Path()
+                line.move(to: fountain)
+                line.addLine(to: aimEnd)
+                context.stroke(line, with: .color(.purple.opacity(0.7)), lineWidth: 4)
+            }
+            let marble = ball ?? PlinkPhysics.Ball(
+                x: physics.fountain.x,
+                y: physics.fountain.y,
+                vx: 0,
+                vy: 0,
+                alive: round.phase != .falling
             )
-            var line = Path()
-            line.move(to: fountain)
-            line.addLine(to: aimEnd)
-            context.stroke(line, with: .color(.purple.opacity(0.7)), lineWidth: 4)
-            let ballR = physics.ballRadius * min(size.width, size.height)
-            context.fill(
-                Path(ellipseIn: CGRect(x: fountain.x - ballR, y: fountain.y - ballR, width: ballR * 2, height: ballR * 2)),
-                with: .color(Color(red: 0.37, green: 0.78, blue: 0.85))
-            )
+            let ballR = max(16, physics.ballRadius * min(size.width, size.height) * 2.4)
+            if marble.alive {
+                context.fill(
+                    Path(ellipseIn: CGRect(
+                        x: marble.x * size.width - ballR,
+                        y: marble.y * size.height - ballR,
+                        width: ballR * 2,
+                        height: ballR * 2
+                    )),
+                    with: .color(Color(red: 0.37, green: 0.78, blue: 0.85))
+                )
+            }
         }
         .background(
             LinearGradient(
