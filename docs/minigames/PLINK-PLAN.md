@@ -1,16 +1,30 @@
 # Plink — build plan
 
-This is the accountable spec for what Evan asked for across the Plink thread. Newer requests override older ones. Do not implement past the current phase without checking this file.
+This is the accountable spec for what Evan asked for across the Plink / Peg Battle thread. Newer requests override older ones.
 
 Kid name: **Plink**. Land: **Peggle Land**. POI: **The Plink Pavilion**. Internal key: `peggle`. Audience: smart six-year-old on iPad. No PopCap/GPL copy. Port **5174** for localhost; never silently pick another port.
 
+## Current product (overrides earlier marble-safari sketches)
+
+**Peg Battle.** Abbie vs one goofy opponent. Five Battle Cards, three-card hand, Peglin-style block pegs that pop when hit (decorators for strength / gone / present / sticky / valuable), telegraphed enemy moves, 6 hearts, 1 damage per 10 Power. First opponent: **Bad Doggo**. Raster art is generated through the minigame pack pipeline; pegs and FX are SVG/programmatic. Live combat lives in a disposable `BattleSession`. Ball scale is checked against open-source PegglePy (`ballRad` 12 / `pegRad` 25).
+
+World hook (do not fork the map editor for the next minigame):
+
+- Pack: `AssetSources/World2/minigames/peg-battle/`
+- POI: `poi.pegglePavilion` still opens route `.plink`
+- Land: `world.peggle`, west of Work Land (Home → west → Work → west → Peggle)
+- Custom innard: `PegBattleMinigameView` / prototype `/` and `/dev/peg-battle`
+
+See `docs/minigames/MINIGAME-PACK.md`. Asset spend order (your time vs kid benefit): `docs/minigames/PEG-BATTLE-ASSETS.md`.
+
 ## What is already true
 
-Playable web prototype: falling dewdrop, eight beds, bowls, garden-gift extra drop, reviewed sprite placeholders. Live URL: https://abbies-world-plink.vercel.app
+Playable web prototype: Peg Battle harness on `/dev/peg-battle`, kid battle on `/`, legacy marble drop on `/plink`. Live URL: https://abbies-world-plink.vercel.app
 
-iOS skeleton: bundled `plink_campaign.json`, original circle-circle physics, live falling shot, World 2 POI route `.plink`, Games menu, `-launchPlink` / `-launchWorld2PeggleLand`. Sequential beds. Drawn stand-in pavilion. Board is still code circles, not the painted interior.
+iOS: Peg Battle session + view from the pavilion and Classic Games. Bundled pack JSON. Evan’s three plates have local catalog fallbacks (`world2_plink_land` / `_pavilion` / `_interior`). **Evan builds / places the land.** Do not expand hardpoint layout unless he asks.
 
-Evan’s three plates are on disk (not wired into the map/POI image lookup yet):
+Parked, not spec: marble-safari clash waves, lobby Crazy Mode, mixed critter swarms.
+
 
 | # | Role | Semantic id | iOS catalog |
 | --- | --- | --- | --- |

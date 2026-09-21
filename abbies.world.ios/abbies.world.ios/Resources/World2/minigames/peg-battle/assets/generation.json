@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "pack": "peg-battle",
+  "provider": "OpenAI",
+  "model": "gpt-image-1",
+  "size": "1024x1024",
+  "quality": "high",
+  "carveBackground": "#00CC66",
+  "styleLock": "Abbie's World storybook: bold chunky forms, sophisticated not babyish, not chibi, dark-plum outlines, tactile paint, gentle cel shading, cream / caramel / strawberry / lavender / teal / brass gold.",
+  "assets": [
+    {
+      "id": "bad-doggo/confident",
+      "family": "bad-doggo",
+      "assetType": "enemy-state",
+      "state": "confident",
+      "character": "bad-doggo",
+      "carve": true,
+      "canvas": "1024x1024",
+      "promptPath": "prompts/bad-doggo-confident.txt",
+      "intendedPlacement": "battle portrait, right-of-board enemy actor"
+    },
+    {
+      "id": "bad-doggo/hurt",
+      "family": "bad-doggo",
+      "assetType": "enemy-state",
+      "state": "hurt",
+      "character": "bad-doggo",
+      "carve": true,
+      "canvas": "1024x1024",
+      "promptPath": "prompts/bad-doggo-hurt.txt",
+      "referenceAsset": "bad-doggo/confident",
+      "intendedPlacement": "battle portrait crossfade when health falls below 40%"
+    },
+    {
+      "id": "bad-doggo/defeated",
+      "family": "bad-doggo",
+      "assetType": "enemy-state",
+      "state": "defeated",
+      "character": "bad-doggo",
+      "carve": true,
+      "canvas": "1024x1024",
+      "promptPath": "prompts/bad-doggo-defeated.txt",
+      "referenceAsset": "bad-doggo/confident",
+      "intendedPlacement": "victory illustration"
+    },
+    {
+      "id": "arena/pavilion",
+      "family": "arena",
+      "assetType": "battle-background",
+      "state": "idle",
+      "carve": false,
+      "canvas": "1536x1024",
+      "size": "1536x1024",
+      "promptPath": "prompts/arena-pavilion.txt",
+      "intendedPlacement": "full Peg Battle playfield behind SVG pegs"
+    },
+    {
+      "id": "balls/star",
+      "family": "balls",
+      "assetType": "card-illustration",
+      "state": "star",
+      "carve": true,
+      "canvas": "1024x1024",
+      "promptPath": "prompts/ball-star.txt",
+      "intendedPlacement": "Star Ball card and launcher icon"
+    },
+    {
+      "id": "balls/bubble",
+      "family": "balls",
+      "assetType": "card-illustration",
+      "state": "bubble",
+      "carve": true,
+      "canvas": "1024x1024",
+      "promptPath": "prompts/ball-bubble.txt",
+      "intendedPlacement": "Bubble Ball card and launcher icon"
+    },
+    {
+      "id": "balls/paint",
+      "family": "balls",
+      "assetType": "card-illustration",
+      "state": "paint",
+      "carve": true,
+      "canvas": "1024x1024",
+      "promptPath": "prompts/ball-paint.txt",
+      "intendedPlacement": "Paint Ball card and launcher icon"
+    },
+    {
+      "id": "balls/rocket",
+      "family": "balls",
+      "assetType": "card-illustration",
+      "state": "rocket",
+      "carve": true,
+      "canvas": "1024x1024",
+      "promptPath": "prompts/ball-rocket.txt",
+      "intendedPlacement": "Rocket Ball card and launcher icon"
+    },
+    {
+      "id": "balls/boomerang",
+      "family": "balls",
+      "assetType": "card-illustration",
+      "state": "boomerang",
+      "carve": true,
+      "canvas": "1024x1024",
+      "promptPath": "prompts/ball-boomerang.txt",
+      "intendedPlacement": "Boomerang Ball card and launcher icon"
+    }
+  ]
+}

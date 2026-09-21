@@ -30,17 +30,20 @@ We used these as mechanics references. None of their code, art, or audio is in t
 | [Chaosah Magical Arcade](https://codeberg.org/mailbun/chaosah-magical-arcade) | MIT code, mixed asset licenses | Godot Peggle-like from a kids' comic jam. Closest kid-safe licensed reference. |
 | [Feggle](https://github.com/FergusGriggs/Feggle) | MIT | Tiny pygame clone. |
 | [PeggleTutorial](https://github.com/FergusGriggs/PeggleTutorial) | MIT code; **PopCap audio** | Tutorial only. Do not ship its sounds. |
-| [PegglePy](https://github.com/Mr0o/PegglePy) | GPL-3.0 | Study the bounce puzzle, do not copy. |
+| [PegglePy](https://github.com/Mr0o/PegglePy) | GPL-3.0 | Study the bounce puzzle, do not copy. `local/config.py`: `ballRad = 12`, `pegRad = 25` → ball/peg ≈ 0.48. Peg Battle uses that ratio so the orb stays smaller than a block. |
 | [Pego](https://github.com/Timo654/Pego) | Unclear | Unity clone on itch. Leave it alone until the license is explicit. |
 
-Plink's physics (`prototypes/peggle/app/lib/physics.js` and the Swift port) are original circle-circle integration.
+Peglin (Red Nexus, not open source) is the Peg Battle board language: rounded-rect blocks, they **pop once hit**, leftover dashed slots (`gone` / not `present`), and decorators for `strength`, `sticky`, `valuable`, paint, star, heart. We did not copy Peglin or PegglePy code.
+
+Plink marble physics (`prototypes/peggle/app/lib/physics.js`) stay original circle-circle. Peg Battle (`app/lib/peg-battle/physics.js` and the Swift port) is original circle-vs-AABB against those blocks.
 
 ## World insertion
 
 - **Land** `world.peggle` / Peggle Land. Carnival meadow west of Work Land.
 - **Pad** `hardpoint.peggle.pavilionPad` plus two open pads so the scene still proves the hardpoint system.
-- **POI** `poi.pegglePavilion` / The Plink Pavilion. Contract opens `.plink`, grants gems and the Marble Fountain decoration, milestone `minigame.plink.completed`.
-- **Classic Games** also lists Plink, same as Whizbang.
+- **POI** `poi.pegglePavilion` / The Plink Pavilion. Contract opens `.plink` into **Peg Battle**. Grants gems and the Marble Fountain decoration, milestone `minigame.plink.completed`.
+- **Classic Games** lists Peg Battle, same as Whizbang.
+- **Pack** `AssetSources/World2/minigames/peg-battle/` is the content. The next minigame should copy that pack pattern, not the battle engine.
 
 ## Progression
 

@@ -1,0 +1,47 @@
+{
+  "enemies": [
+    {
+      "id": "bad-doggo",
+      "name": "Bad Doggo",
+      "maxHealth": 6,
+      "assets": {
+        "confident": "bad-doggo/confident",
+        "hurt": "bad-doggo/hurt",
+        "defeated": "bad-doggo/defeated"
+      },
+      "hurtBelowRatio": 0.4,
+      "signatureBoardAction": {
+        "id": "muddy-paws",
+        "name": "Muddy Paws",
+        "pegCount": 3,
+        "when": "onAttack:bark"
+      },
+      "attackPattern": ["bark", "scratch", "pounce"],
+      "moves": {
+        "bark": {
+          "id": "bark",
+          "name": "Bark",
+          "damage": 1,
+          "telegraph": "NEXT: BARK! — ❤️",
+          "sequence": "bark"
+        },
+        "scratch": {
+          "id": "scratch",
+          "name": "Scratch",
+          "damage": 1,
+          "telegraph": "NEXT: SCRATCH! — ❤️",
+          "sequence": "scratch"
+        },
+        "pounce": {
+          "id": "pounce",
+          "name": "Big Pounce",
+          "damage": 4,
+          "telegraph": "NEXT: BIG POUNCE! — ❤️❤️❤️❤️",
+          "sequence": "pounce"
+        }
+      },
+      "victoryLine": "DOGGO WANTS BELLY RUBS!",
+      "defeatLine": "WHOOPS! TRY AGAIN?"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+PURPOSE: enemy battle portrait for Peg Battle, Abbie's World, smart six-year-old iPad audience
+SUBJECT: the exact same Bad Doggo as the confident sibling, not a new dog
+STATE / EMOTION: hurt, worried, sad, droopy, still kid-safe, never injured or bleeding
+CAMERA / VIEWPOINT: identical eye-level three-quarter view, subject faces slightly toward the viewer's left
+FRAMING: identical full-body centered framing, same scale, same padding
+SILHOUETTE: keep the same stocky dog silhouette; only ears and posture shift slightly
+POSE: same upright stance as the confident sibling, but a small slouch, lowered floppy ears, eyebrows tilted up in the middle, paws closer to the body
+BACKGROUND: flat solid chroma-key green #00CC66, no gradient, no floor, no ground plane, no cast shadow
+TRANSPARENCY: background must be a single flat color so it can be carved to alpha later
+LIGHTING: same soft diffuse daylight and gentle cel shading as the confident sibling
+PALETTE: identical fur, collar, and tag — warm caramel, cream blaze, darker saddle, strawberry-red collar, unmarked gold circle tag, dark-plum outlines
+LINE TREATMENT: clean expressive dark-plum outlines matching the confident sibling
+RENDERING STYLE: Abbie's World hand-drawn digital illustration, bold chunky storybook forms, sophisticated rather than babyish, not chibi
+SCALE: identical to the confident sibling so a crossfade reads as a state change
+CROPPING RULES: do not crop ears, tail, paws, or collar; same padding as the confident sibling
+PROHIBITED: text, UI, extra characters, wounds, bandages, tears of blood, weapons, new outfit, different collar, different fur pattern, different camera, ground plane
+INTENDED GAME PLACEMENT: crossfade over the confident portrait when Bad Doggo health falls below about 40 percent
+RELATIONSHIP TO SIBLING ASSETS: change only expression, ear position, and a slight slouch — identity, viewpoint, proportions, collar, and framing stay locked
+CHARACTER IDENTITY LOCK: same dog as bad-doggo/confident

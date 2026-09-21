@@ -100,7 +100,7 @@ struct GamesDialogView: View {
 
                     GameIconButton(
                         icon: "drop.circle.fill",
-                        title: "Plink",
+                        title: "Peg Battle",
                         color: .pink
                     ) {
                         showPlink = true

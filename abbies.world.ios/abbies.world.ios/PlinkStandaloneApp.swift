@@ -11,7 +11,7 @@ import SwiftUI
 struct PlinkStandaloneApp: App {
     var body: some Scene {
         WindowGroup {
-            PlinkMinigameView()
+            PegBattleMinigameView()
                 .ignoresSafeArea()
         }
     }

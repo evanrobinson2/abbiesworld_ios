@@ -1,10 +1,24 @@
-# Plink (Abbie's World Peggle)
+# Plink / Peg Battle (Abbie's World Peggle)
 
-Localhost prototype for **Peggle Land** and **The Plink Pavilion**.
+Kid-facing game name: **Plink**. The playable duel is **Peg Battle**. Internal key: `peggle`.
 
-Kid-facing game name: **Plink**. Internal game key: `peggle`.
+`/` is the Bad Doggo Peg Battle. `/dev/peg-battle` is the developer harness (seed, reset, debug). `/plink` is the older marble-drop toy.
 
-This is the playable first slice. The iOS app registers the same land, POI, and campaign JSON. Painted production art is generated through the World 2 asset pipeline; until those derivatives are parent-approved, the prototype draws the board in code.
+Content lives in `AssetSources/World2/minigames/peg-battle/` and is copied into this prototype and the iOS bundle by `python3 scripts/minigame_packs/sync.py --pack peg-battle`.
+
+## Run
+
+Port **5174**. Never silently pick another.
+
+```sh
+cd prototypes/peggle
+npm install
+npm run check
+npm run dev
+```
+
+Open http://127.0.0.1:5174 and http://127.0.0.1:5174/dev/peg-battle
+
 
 ## Run
 

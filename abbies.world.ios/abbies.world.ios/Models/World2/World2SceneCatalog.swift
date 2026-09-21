@@ -436,8 +436,9 @@ enum World2SceneCatalog {
 
     // MARK: - Peggle Land
     //
-    // Carnival meadow west of Work Land. One pavilion on the center pad, plus
-    // two open pads so the hardpoint system stays visible.
+    // Carnival meadow west of Work Land (Home → west → Work → west → Peggle).
+    // The Plink Pavilion on the center pad opens Peg Battle. Two open pads stay
+    // empty so the hardpoint system remains visible. Evan places the land.
 
     static let peggleLand = World2SceneDefinition(
         id: sceneID(for: .peggle),

@@ -1,0 +1,19 @@
+PURPOSE: victory / friendly portrait for Peg Battle, Abbie's World, smart six-year-old iPad audience
+SUBJECT: the exact same Bad Doggo as the confident sibling, now friendly and ready for belly rubs
+STATE / EMOTION: relieved, friendly, soft smile, no longer blocking the way, never dead, never defeated-in-battle-gore
+CAMERA / VIEWPOINT: identical eye-level three-quarter view, subject faces slightly toward the viewer's left
+FRAMING: identical full-body centered framing, same scale, same padding
+SILHOUETTE: same stocky dog; ears relaxed, maybe a tiny happy tail lift
+POSE: same body placement as the confident sibling, softened, as if offering a hug or belly rub, tongue not required, eyes warmer
+BACKGROUND: flat solid chroma-key green #00CC66, no gradient, no floor, no ground plane, no cast shadow
+TRANSPARENCY: background must be a single flat color so it can be carved to alpha later
+LIGHTING: same soft diffuse daylight and gentle cel shading as the confident sibling
+PALETTE: identical fur, collar, and tag — warm caramel, cream blaze, darker saddle, strawberry-red collar, unmarked gold circle tag, dark-plum outlines
+LINE TREATMENT: clean expressive dark-plum outlines matching the confident sibling
+RENDERING STYLE: Abbie's World hand-drawn digital illustration, bold chunky storybook forms, sophisticated rather than babyish, not chibi
+SCALE: identical to the confident sibling
+CROPPING RULES: do not crop ears, tail, paws, or collar
+PROHIBITED: text, UI, extra characters, KO stars, gravestones, injuries, different collar, different camera, ground plane, hearts as oversized stickers covering the dog
+INTENDED GAME PLACEMENT: victory illustration after Bad Doggo reaches zero hearts
+RELATIONSHIP TO SIBLING ASSETS: same identity lock as confident and hurt; only the emotion changes
+CHARACTER IDENTITY LOCK: same dog as bad-doggo/confident

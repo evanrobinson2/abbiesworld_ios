@@ -41,5 +41,13 @@ final class World2RegistryKeyTests: XCTestCase {
             World2RegistryKey.assetKey(for: "peggle.spriteBoard"),
             "minigames/plink/sprite-board"
         )
+        XCTAssertEqual(
+            World2RegistryKey.assetKey(for: "peg.battle.enemy.bad-doggo.confident"),
+            "minigames/peg-battle/bad-doggo/confident"
+        )
+        XCTAssertEqual(
+            World2RegistryKey.assetKey(for: "peg.battle.arena.pavilion"),
+            "minigames/peg-battle/arena/pavilion"
+        )
     }
 }
