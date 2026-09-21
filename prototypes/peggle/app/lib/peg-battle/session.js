@@ -1,5 +1,4 @@
 import { getEnemyState, getSlot } from './assets.js';
-import { getLevel } from './catalog.js';
 import { DEFAULT_PHYSICS, clonePegs, launchWorld, simulateShot, stepBall } from './physics.js';
 import { mulberry32, pickN, shuffle } from './rng.js';
 
@@ -20,6 +19,15 @@ export function assembleCatalog(parts) {
     fx: parts.fx,
     manifest: parts.manifest ?? { families: {} },
   };
+}
+
+export function getLevel(catalog, levelId) {
+  const level = catalog.levels.find((entry) => entry.id === levelId) ?? catalog.levels[0];
+  if (!level) throw new Error('peg-battle pack has no levels');
+  const enemy = catalog.enemies.find((entry) => entry.id === level.enemy);
+  const board = catalog.boards.find((entry) => entry.id === level.board);
+  const cards = level.deck.map((id) => catalog.cards.find((card) => card.id === id)).filter(Boolean);
+  return { level, enemy, board, cards };
 }
 
 export function createBattle(catalog, { levelId, seed = 1234 } = {}) {

@@ -37,12 +37,3 @@ export function loadCatalog(root) {
   }
   return { pack, enemies, cards, boards, levels, fx, manifest };
 }
-
-export function getLevel(catalog, levelId) {
-  const level = catalog.levels.find((entry) => entry.id === levelId) ?? catalog.levels[0];
-  if (!level) throw new Error('peg-battle pack has no levels');
-  const enemy = catalog.enemies.find((entry) => entry.id === level.enemy);
-  const board = catalog.boards.find((entry) => entry.id === level.board);
-  const cards = level.deck.map((id) => catalog.cards.find((card) => card.id === id)).filter(Boolean);
-  return { level, enemy, board, cards };
-}

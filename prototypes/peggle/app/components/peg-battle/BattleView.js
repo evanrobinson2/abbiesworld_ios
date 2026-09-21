@@ -73,14 +73,7 @@ export default function BattleView({
 
   useEffect(() => {
     replaceSession(createBattle(catalog, { seed }));
-    const intro = setTimeout(() => {
-      if (sessionRef.current?.phase === 'intro') {
-        beginPlayerTurn(sessionRef.current);
-        refresh();
-      }
-    }, 900);
     return () => {
-      clearTimeout(intro);
       destroyBattle(sessionRef.current);
       sessionRef.current = null;
     };
@@ -92,13 +85,33 @@ export default function BattleView({
   const snapshot = session ? debugSnapshot(session) : null;
 
   useEffect(() => {
+    if (session?.phase === 'intro') {
+      const timer = window.setTimeout(() => {
+        if (sessionRef.current?.phase === 'intro') {
+          beginPlayerTurn(sessionRef.current);
+          refresh();
+        }
+      }, 900);
+      return () => window.clearTimeout(timer);
+    }
+    if (session?.phase === 'hitResolve') {
+      const timer = window.setTimeout(() => {
+        if (sessionRef.current?.phase === 'hitResolve') {
+          resolveEnemyTurn(sessionRef.current);
+          refresh();
+        }
+      }, 1100);
+      return () => window.clearTimeout(timer);
+    }
+    return undefined;
+  }, [session?.phase]);
+
+  useEffect(() => {
     if (!sessionRef.current || sessionRef.current.phase !== 'resolving') return undefined;
     let frame = 0;
-    let enemyTimer = 0;
     let last = performance.now();
     const loop = (now) => {
-      const current = sessionRef.current;
-      if (!current || current.phase !== 'resolving') return;
+      if (sessionRef.current?.phase !== 'resolving') return;
       const elapsed = Math.min(0.05, (now - last) / 1000);
       last = now;
       const substeps = Math.max(1, Math.round((elapsed / SHOT_STEP_DT) * 10));
@@ -109,20 +122,10 @@ export default function BattleView({
       refresh();
       if (sessionRef.current?.phase === 'resolving') {
         frame = requestAnimationFrame(loop);
-      } else if (sessionRef.current?.phase === 'hitResolve') {
-        enemyTimer = window.setTimeout(() => {
-          if (sessionRef.current?.phase === 'hitResolve') {
-            resolveEnemyTurn(sessionRef.current);
-            refresh();
-          }
-        }, 900);
       }
     };
     frame = requestAnimationFrame(loop);
-    return () => {
-      cancelAnimationFrame(frame);
-      if (enemyTimer) window.clearTimeout(enemyTimer);
-    };
+    return () => cancelAnimationFrame(frame);
   }, [session?.phase]);
 
   const enemy = session ? enemyArt(session) : null;
