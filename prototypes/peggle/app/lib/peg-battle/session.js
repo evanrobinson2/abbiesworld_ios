@@ -204,11 +204,13 @@ function applyStarPower(session, ballSpec) {
 }
 
 export function resolvePegHit(session, peg, card, acc) {
-  if (peg.muddy) {
+  if (peg.gone || peg.present === false) return;
+
+  if (peg.sticky || peg.muddy) {
+    peg.sticky = false;
     peg.muddy = false;
     acc.consecutive = 0;
     acc.cleaned += 1;
-    peg.pendingCharge = true;
     return;
   }
 
@@ -221,7 +223,7 @@ export function resolvePegHit(session, peg, card, acc) {
     applyStarPower(session, acc.ballSpec);
   }
 
-  let value = peg.charged ? 2 : 1;
+  let value = peg.valuable || peg.charged ? 2 : 1;
   if (acc.starPower && card.behavior === 'star') value *= 2;
 
   if (peg.painted && card.behavior !== 'paint') {
@@ -237,13 +239,6 @@ export function resolvePegHit(session, peg, card, acc) {
     acc.shield += amount;
   }
 
-  if (peg.charged) {
-    peg.charged = false;
-    acc.pops += 1;
-  } else {
-    peg.pendingCharge = true;
-  }
-
   acc.consecutive += 1;
   if (card.behavior === 'star' && acc.consecutive >= 10 && !acc.burst) {
     acc.power += acc.starPower ? 20 : 10;
@@ -251,16 +246,22 @@ export function resolvePegHit(session, peg, card, acc) {
   }
   acc.power += value;
   acc.hits += 1;
+
+  // Paint marks a block for later. Everything else spends strength and pops.
+  if (card.behavior !== 'paint') {
+    peg.strength = Math.max(0, (peg.strength ?? 1) - 1);
+    if (peg.strength <= 0) {
+      peg.present = false;
+      peg.gone = true;
+      acc.pops += 1;
+    }
+  }
 }
 
 export function settleCharges(pegs) {
   for (const peg of pegs) {
-    if (peg.charged && !peg.hitThisShot) peg.charged = false;
-    if (peg.pendingCharge) {
-      peg.charged = true;
-      peg.pendingCharge = false;
-    }
     peg.hitThisShot = false;
+    peg.pendingCharge = false;
   }
 }
 
@@ -425,8 +426,16 @@ export function resolveFlight(session, angle) {
 }
 
 export function applyMuddyPaws(session, count) {
-  const chosen = pickN(session.pegs, count, session.randomState, (peg) => !peg.muddy);
-  for (const peg of chosen) peg.muddy = true;
+  const chosen = pickN(
+    session.pegs,
+    count,
+    session.randomState,
+    (peg) => peg.present !== false && !peg.gone && !peg.muddy
+  );
+  for (const peg of chosen) {
+    peg.muddy = true;
+    peg.sticky = true;
+  }
   return chosen.map((peg) => peg.id);
 }
 
@@ -470,8 +479,12 @@ export function debugSnapshot(session) {
     enemyIntent: intent?.name ?? null,
     intentDamage: intent?.damage ?? 0,
     board: {
-      charged: session.pegs.filter((peg) => peg.charged).length,
+      present: session.pegs.filter((peg) => peg.present !== false && !peg.gone).length,
+      gone: session.pegs.filter((peg) => peg.gone || peg.present === false).length,
+      sticky: session.pegs.filter((peg) => peg.sticky || peg.muddy).length,
+      valuable: session.pegs.filter((peg) => peg.valuable || peg.kind === 'star').length,
       painted: session.pegs.filter((peg) => peg.painted).length,
+      charged: session.pegs.filter((peg) => peg.charged).length,
       muddy: session.pegs.filter((peg) => peg.muddy).length,
       star: session.pegs.filter((peg) => peg.kind === 'star').length,
       heart: session.pegs.filter((peg) => peg.kind === 'heart').length,

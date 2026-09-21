@@ -66,7 +66,8 @@
           "id": "p9",
           "x": 0.5,
           "y": 0.285,
-          "kind": "normal"
+          "kind": "normal",
+          "valuable": true
         },
         {
           "id": "p10",
@@ -102,7 +103,8 @@
           "id": "p15",
           "x": 0.383,
           "y": 0.37,
-          "kind": "normal"
+          "kind": "normal",
+          "strength": 2
         },
         {
           "id": "p16",
@@ -156,7 +158,8 @@
           "id": "p24",
           "x": 0.5,
           "y": 0.455,
-          "kind": "normal"
+          "kind": "normal",
+          "strength": 2
         },
         {
           "id": "p25",
@@ -198,7 +201,8 @@
           "id": "p31",
           "x": 0.539,
           "y": 0.54,
-          "kind": "normal"
+          "kind": "normal",
+          "strength": 2
         },
         {
           "id": "p32",

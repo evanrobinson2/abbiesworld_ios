@@ -6,7 +6,7 @@ Kid name: **Plink**. Land: **Peggle Land**. POI: **The Plink Pavilion**. Interna
 
 ## Current product (overrides earlier marble-safari sketches)
 
-**Peg Battle.** Abbie vs one goofy opponent. Five Battle Cards, three-card hand, charged pegs, telegraphed enemy moves, 6 hearts, 1 damage per 10 Power. First opponent: **Bad Doggo**. Raster art is generated through the minigame pack pipeline; pegs and FX are SVG/programmatic. Live combat lives in a disposable `BattleSession`.
+**Peg Battle.** Abbie vs one goofy opponent. Five Battle Cards, three-card hand, Peglin-style block pegs that pop when hit (decorators for strength / gone / present / sticky / valuable), telegraphed enemy moves, 6 hearts, 1 damage per 10 Power. First opponent: **Bad Doggo**. Raster art is generated through the minigame pack pipeline; pegs and FX are SVG/programmatic. Live combat lives in a disposable `BattleSession`. Ball scale is checked against open-source PegglePy (`ballRad` 12 / `pegRad` 25).
 
 World hook (do not fork the map editor for the next minigame):
 

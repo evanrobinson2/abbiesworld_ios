@@ -16,6 +16,7 @@ import {
   resetBattle,
   resolveEnemyTurn,
   resolveFlight,
+  resolvePegHit,
 } from '../app/lib/peg-battle/session.js';
 
 const catalog = loadCatalog();
@@ -35,25 +36,29 @@ describe('peg-battle pack', () => {
     assert.equal(catalog.boards[0].pegs.length, 39);
     assert.equal(catalog.boards[0].pegs.filter((peg) => peg.kind === 'star').length, 2);
     assert.equal(catalog.boards[0].pegs.filter((peg) => peg.kind === 'heart').length, 1);
+    assert.equal(catalog.boards[0].pegs.filter((peg) => peg.strength > 1).length, 3);
+    assert.equal(catalog.boards[0].pegs.filter((peg) => peg.valuable).length, 1);
   });
 
   it('keeps the iOS and prototype pack copies identical to AssetSources', async () => {
-    const source = resolve(
-      import.meta.dirname,
-      '../../../AssetSources/World2/minigames/peg-battle/pack.json'
-    );
-    const web = resolve(import.meta.dirname, '../data/peg-battle/pack.json');
-    const ios = resolve(
-      import.meta.dirname,
-      '../../../abbies.world.ios/abbies.world.ios/Resources/World2/minigames/peg-battle/pack.json'
-    );
-    const [a, b, c] = await Promise.all([
-      readFile(source, 'utf8'),
-      readFile(web, 'utf8'),
-      readFile(ios, 'utf8'),
-    ]);
-    assert.equal(a, b);
-    assert.equal(a, c);
+    for (const file of ['pack.json', 'content/boards.json']) {
+      const source = resolve(
+        import.meta.dirname,
+        `../../../AssetSources/World2/minigames/peg-battle/${file}`
+      );
+      const web = resolve(import.meta.dirname, `../data/peg-battle/${file}`);
+      const ios = resolve(
+        import.meta.dirname,
+        `../../../abbies.world.ios/abbies.world.ios/Resources/World2/minigames/peg-battle/${file}`
+      );
+      const [a, b, c] = await Promise.all([
+        readFile(source, 'utf8'),
+        readFile(web, 'utf8'),
+        readFile(ios, 'utf8'),
+      ]);
+      assert.equal(a, b, file);
+      assert.equal(a, c, file);
+    }
   });
 
   it('falls back when a carved portrait is missing', () => {
@@ -81,12 +86,14 @@ describe('BattleSession', () => {
     beginPlayerTurn(session);
     chooseCard(session, session.hand[0]);
     session.playerHearts = 1;
-    session.pegs[0].charged = true;
+    session.pegs[0].gone = true;
+    session.pegs[0].sticky = true;
     const again = resetBattle(session);
     assert.equal(again.playerHearts, 6);
     assert.equal(again.enemyHearts, 6);
     assert.equal(again.turn, 1);
-    assert.equal(again.pegs.filter((peg) => peg.charged).length, 0);
+    assert.equal(again.pegs.filter((peg) => peg.gone).length, 0);
+    assert.equal(again.pegs.filter((peg) => peg.sticky).length, 0);
     assert.equal(again.seed, 99);
     assert.equal(session.phase, 'destroyed');
   });
@@ -111,20 +118,73 @@ describe('BattleSession', () => {
     assert.ok(session.enemyHearts <= 6);
   });
 
-  it('charges pegs on shot A and pops them on shot B', () => {
+  it('keeps the orb smaller than a peg, matching open-source Peggle scale', () => {
+    const physics = sessionPhysics();
+    // PegglePy (Mr0o/PegglePy local/config.py): ballRad 12 / pegRad 25 = 0.48.
+    assert.ok(physics.ballRadius / physics.pegRadius < 0.55);
+    assert.ok(physics.ballRadius / physics.pegRadius > 0.3);
+    assert.ok(physics.ballRadius < physics.blockWidth / 2);
+  });
+
+  it('pops a block after it is hit so the next shot can pass through', () => {
     const session = createBattle(catalog, { seed: 42 });
     beginPlayerTurn(session);
     chooseCard(session, session.hand[0]);
     resolveFlight(session, 0.15);
-    const charged = session.pegs.filter((peg) => peg.charged).length;
+    const gone = session.pegs.filter((peg) => peg.gone || peg.present === false).length;
+    assert.ok(gone > 0);
     if (session.phase === 'hitResolve') resolveEnemyTurn(session);
     if (session.phase === 'playerAim') {
       chooseCard(session, session.hand[0]);
-      const before = session.pegs.filter((peg) => peg.charged).length;
-      assert.equal(before, charged);
       resolveFlight(session, 0.15);
       assert.ok(session.pegs.every((peg) => !peg.hitThisShot));
     }
+  });
+
+  it('strength-2 blocks stay present after one hit', () => {
+    const session = createBattle(catalog, { seed: 8 });
+    const target = session.pegs.find((peg) => peg.strength > 1);
+    assert.ok(target);
+    assert.equal(target.strength, 2);
+    resolvePegHit(session, target, session.definition.cards[0], {
+      consecutive: 0,
+      cleaned: 0,
+      power: 0,
+      hits: 0,
+      pops: 0,
+      shield: 0,
+      hearts: 0,
+      burst: false,
+      starPower: false,
+      ballSpec: { behavior: 'star', returnsLeft: 0 },
+    });
+    assert.equal(target.gone, false);
+    assert.equal(target.present, true);
+    assert.equal(target.strength, 1);
+  });
+
+  it('sticky blocks stay present after the first hit', () => {
+    const session = createBattle(catalog, { seed: 8 });
+    const target = session.pegs.find((peg) => peg.kind === 'normal' && peg.present);
+    target.sticky = true;
+    target.muddy = true;
+    beginPlayerTurn(session);
+    chooseCard(session, session.hand[0]);
+    resolvePegHit(session, target, session.definition.cards[0], {
+      consecutive: 1,
+      cleaned: 0,
+      power: 0,
+      hits: 0,
+      pops: 0,
+      shield: 0,
+      hearts: 0,
+      burst: false,
+      starPower: false,
+      ballSpec: { behavior: 'star', returnsLeft: 0 },
+    });
+    assert.equal(target.gone, false);
+    assert.equal(target.present, true);
+    assert.equal(target.sticky, false);
   });
 
   it('cycles the played card to the bottom and redraws to three', () => {

@@ -381,7 +381,6 @@ footer {
 .peg-slot {
   position: absolute;
   transform: translate(-50%, -50%);
-  aspect-ratio: 1;
 }
 
 .peg-slot .svg-peg {

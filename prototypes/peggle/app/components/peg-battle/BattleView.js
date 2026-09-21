@@ -277,7 +277,8 @@ export default function BattleView({
                   style={{
                     left: `${peg.x * 100}%`,
                     top: `${peg.y * 100}%`,
-                    width: `${session.physics.pegRadius * 2 * 100}%`,
+                    width: `${(session.physics.blockWidth ?? session.physics.pegRadius * 2) * 100}%`,
+                    height: `${(session.physics.blockHeight ?? session.physics.pegRadius * 2) * 100}%`,
                   }}
                 >
                   <Peg
@@ -285,6 +286,11 @@ export default function BattleView({
                     charged={peg.charged}
                     painted={peg.painted}
                     muddy={peg.muddy}
+                    sticky={peg.sticky}
+                    present={peg.present}
+                    gone={peg.gone}
+                    strength={peg.strength}
+                    valuable={peg.valuable}
                     hitIntensity={peg.hitThisShot ? 1 : 0}
                   />
                 </div>
@@ -309,7 +315,7 @@ Enemy HP: ${snapshot.enemyHP}
 Current hand: ${snapshot.hand.join(', ')}
 Deck queue: ${snapshot.deck.join(', ')}
 Enemy intent: ${snapshot.enemyIntent}
-Board: ${snapshot.board.charged} charged / ${snapshot.board.painted} painted / ${snapshot.board.muddy} muddy
+Board: ${snapshot.board.present} present / ${snapshot.board.gone} gone / ${snapshot.board.sticky} sticky / ${snapshot.board.painted} painted
 Seed: ${snapshot.seed}
 Phase: ${snapshot.phase}`}
             </pre>

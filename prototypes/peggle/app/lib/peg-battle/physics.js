@@ -1,11 +1,18 @@
-// Peg Battle physics. Persistent pegs, original circle-circle bounce.
+// Peg Battle physics. Peglin-style blocks that pop when hit.
 // Playfield is normalized 0..1. Y grows downward.
+//
+// Scale is checked against open-source PegglePy (Mr0o/PegglePy):
+//   ballRad = 12, pegRad = 25 on a 1200×900 board → ball/peg ≈ 0.48.
+// Our previous ball (0.018) was almost as wide as the peg (0.022). The orb
+// is now about half the block, and pegs are rounded rectangles, not circles.
 
 export const PEG_KINDS = new Set(['normal', 'star', 'heart']);
 
 export const DEFAULT_PHYSICS = {
-  ballRadius: 0.018,
-  pegRadius: 0.022,
+  ballRadius: 0.0105,
+  pegRadius: 0.029,
+  blockWidth: 0.07,
+  blockHeight: 0.058,
   gravity: 1.55,
   restitution: 0.72,
   airDrag: 0.08,
@@ -16,17 +23,27 @@ export const DEFAULT_PHYSICS = {
 };
 
 export function clonePegs(pegs) {
-  return pegs.map((peg, index) => ({
-    id: peg.id ?? `peg-${index}`,
-    x: peg.x,
-    y: peg.y,
-    kind: PEG_KINDS.has(peg.kind) ? peg.kind : 'normal',
-    charged: Boolean(peg.charged),
-    painted: Boolean(peg.painted),
-    muddy: Boolean(peg.muddy),
-    hitThisShot: false,
-    pendingCharge: false,
-  }));
+  return pegs.map((peg, index) => {
+    const strength = Math.max(1, Number(peg.strength) || 1);
+    const gone = Boolean(peg.gone);
+    return {
+      id: peg.id ?? `peg-${index}`,
+      x: peg.x,
+      y: peg.y,
+      kind: PEG_KINDS.has(peg.kind) ? peg.kind : 'normal',
+      shape: peg.shape ?? 'block',
+      strength,
+      present: peg.present !== false && !gone,
+      gone,
+      charged: Boolean(peg.charged) || peg.kind === 'star',
+      painted: Boolean(peg.painted),
+      muddy: Boolean(peg.muddy),
+      sticky: Boolean(peg.sticky) || Boolean(peg.muddy),
+      valuable: Boolean(peg.valuable) || peg.kind === 'star' || Boolean(peg.charged),
+      hitThisShot: false,
+      pendingCharge: false,
+    };
+  });
 }
 
 export function aimVector(angle, speed) {
@@ -57,6 +74,26 @@ function scaleTo(ball, speed) {
   const factor = speed / current;
   ball.vx *= factor;
   ball.vy *= factor;
+}
+
+function collideCircleBlock(ball, peg, ballR, hw, hh) {
+  const closestX = Math.max(peg.x - hw, Math.min(ball.x, peg.x + hw));
+  const closestY = Math.max(peg.y - hh, Math.min(ball.y, peg.y + hh));
+  let dx = ball.x - closestX;
+  let dy = ball.y - closestY;
+  let dist = length(dx, dy);
+  if (dist === 0) {
+    const overlapX = hw - Math.abs(ball.x - peg.x);
+    const overlapY = hh - Math.abs(ball.y - peg.y);
+    if (overlapX < overlapY) {
+      const nx = ball.x >= peg.x ? 1 : -1;
+      return { nx, ny: 0, penetrate: overlapX + ballR };
+    }
+    const ny = ball.y >= peg.y ? 1 : -1;
+    return { nx: 0, ny, penetrate: overlapY + ballR };
+  }
+  if (dist >= ballR) return null;
+  return { nx: dx / dist, ny: dy / dist, penetrate: ballR - dist };
 }
 
 export function launchWorld(physics, pegs, angle, ballSpec = {}) {
@@ -90,7 +127,7 @@ export function stepBall(world, dt) {
   ball.vx *= drag;
   ball.vy *= drag;
 
-  const cap = ball.starPower && ball.behavior === 'rocket' ? physics.maxSpeed : physics.maxSpeed;
+  const cap = physics.maxSpeed;
   const speed = length(ball.vx, ball.vy);
   if (speed > cap) scaleTo(ball, cap);
 
@@ -113,17 +150,15 @@ export function stepBall(world, dt) {
     events.push({ type: 'wall', side: 'top' });
   }
 
-  const minDist = radius + physics.pegRadius;
+  const hw = (physics.blockWidth ?? physics.pegRadius * 2) / 2;
+  const hh = (physics.blockHeight ?? physics.pegRadius * 2) / 2;
   for (const peg of world.pegs) {
-    const dx = ball.x - peg.x;
-    const dy = ball.y - peg.y;
-    const dist = length(dx, dy);
-    if (dist >= minDist || dist === 0) continue;
-    const nx = dx / dist;
-    const ny = dy / dist;
-    ball.x = peg.x + nx * minDist;
-    ball.y = peg.y + ny * minDist;
-    const bounced = reflect(ball.vx, ball.vy, nx, ny, physics.restitution);
+    if (peg.gone || peg.present === false) continue;
+    const hit = collideCircleBlock(ball, peg, radius, hw, hh);
+    if (!hit) continue;
+    ball.x += hit.nx * (hit.penetrate + 0.0004);
+    ball.y += hit.ny * (hit.penetrate + 0.0004);
+    const bounced = reflect(ball.vx, ball.vy, hit.nx, hit.ny, physics.restitution);
     ball.vx = bounced.vx;
     ball.vy = bounced.vy;
     if (ball.behavior === 'rocket') {

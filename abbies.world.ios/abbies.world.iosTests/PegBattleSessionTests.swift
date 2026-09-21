@@ -24,11 +24,15 @@ final class PegBattleSessionTests: XCTestCase {
         var session = PegBattleSession.create(catalog: catalog, seed: 99)
         session.playerHearts = 1
         session.pegs[0].charged = true
+        session.pegs[0].gone = true
+        session.pegs[0].sticky = true
         session.turn = 4
         let again = PegBattleSession.reset(session)
         XCTAssertEqual(again.playerHearts, 6)
         XCTAssertEqual(again.turn, 1)
         XCTAssertFalse(again.pegs.contains(where: \.charged))
+        XCTAssertFalse(again.pegs.contains(where: \.gone))
+        XCTAssertFalse(again.pegs.contains(where: \.sticky))
         XCTAssertEqual(again.seed, 99)
     }
 

@@ -64,8 +64,13 @@ struct PegBattleBoard: Decodable, Equatable, Identifiable, Sendable {
         var muddy: Bool = false
         var hitThisShot: Bool = false
         var pendingCharge: Bool = false
+        var present: Bool = true
+        var gone: Bool = false
+        var strength: Int = 1
+        var sticky: Bool = false
+        var valuable: Bool = false
 
-        enum CodingKeys: String, CodingKey { case id, x, y, kind }
+        enum CodingKeys: String, CodingKey { case id, x, y, kind, strength, valuable, sticky, present, gone }
 
         init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -73,6 +78,11 @@ struct PegBattleBoard: Decodable, Equatable, Identifiable, Sendable {
             y = try container.decode(Double.self, forKey: .y)
             kind = try container.decodeIfPresent(String.self, forKey: .kind) ?? "normal"
             id = try container.decodeIfPresent(String.self, forKey: .id) ?? "peg-\(x)-\(y)"
+            strength = max(1, try container.decodeIfPresent(Int.self, forKey: .strength) ?? 1)
+            gone = try container.decodeIfPresent(Bool.self, forKey: .gone) ?? false
+            present = (try container.decodeIfPresent(Bool.self, forKey: .present) ?? true) && !gone
+            sticky = try container.decodeIfPresent(Bool.self, forKey: .sticky) ?? false
+            valuable = (try container.decodeIfPresent(Bool.self, forKey: .valuable) ?? false) || kind == "star"
         }
     }
 }

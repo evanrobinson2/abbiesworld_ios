@@ -180,8 +180,8 @@ struct PegBattleMinigameView: View {
                 ForEach(session.pegs) { peg in
                     PegBattlePegView(peg: peg)
                         .frame(
-                            width: geo.size.width * 0.044,
-                            height: geo.size.width * 0.044
+                            width: geo.size.width * 0.07,
+                            height: geo.size.height * 0.058
                         )
                         .position(
                             x: peg.x * geo.size.width,
@@ -190,7 +190,11 @@ struct PegBattleMinigameView: View {
                 }
                 Circle()
                     .fill(Color.white)
-                    .frame(width: 14, height: 14)
+                    .overlay(Circle().stroke(Color(red: 0.23, green: 0.12, blue: 0.24), lineWidth: 1.5))
+                    .frame(
+                        width: geo.size.width * PegBattlePhysics.defaults.ballRadius * 2,
+                        height: geo.size.width * PegBattlePhysics.defaults.ballRadius * 2
+                    )
                     .position(
                         x: (0.5 + sin(aim) * 0.08) * geo.size.width,
                         y: (0.08 + cos(aim) * 0.08) * geo.size.height
@@ -220,25 +224,33 @@ struct PegBattlePegView: View {
 
     var body: some View {
         ZStack {
-            if peg.charged {
-                Circle()
-                    .stroke(Color.yellow.opacity(0.85), lineWidth: 3)
-                    .scaleEffect(1.28)
-            }
-            Circle()
-                .fill(fill)
-                .overlay(Circle().stroke(Color(red: 0.23, green: 0.12, blue: 0.24), lineWidth: 2))
-            if peg.painted {
-                Circle().fill(Color.purple.opacity(0.4))
-            }
-            if peg.muddy {
-                Circle().fill(Color.brown.opacity(0.4))
-            }
-            if peg.kind == "star" {
-                Text("★").font(.caption2)
-            }
-            if peg.kind == "heart" {
-                Text("♥").font(.caption2)
+            if peg.gone || !peg.present {
+                RoundedRectangle(cornerRadius: 6)
+                    .stroke(Color(red: 0.23, green: 0.12, blue: 0.24).opacity(0.28), style: StrokeStyle(lineWidth: 2, dash: [4, 3]))
+            } else {
+                if peg.valuable || peg.charged || peg.kind == "star" {
+                    RoundedRectangle(cornerRadius: 7)
+                        .stroke(Color.yellow.opacity(0.85), lineWidth: 3)
+                        .scaleEffect(1.08)
+                }
+                RoundedRectangle(cornerRadius: 6)
+                    .fill(fill)
+                    .overlay(RoundedRectangle(cornerRadius: 6).stroke(Color(red: 0.23, green: 0.12, blue: 0.24), lineWidth: 2))
+                if peg.painted {
+                    RoundedRectangle(cornerRadius: 6).fill(Color.purple.opacity(0.4))
+                }
+                if peg.sticky || peg.muddy {
+                    RoundedRectangle(cornerRadius: 6).fill(Color.brown.opacity(0.4))
+                }
+                if peg.kind == "star" {
+                    Text("★").font(.caption2)
+                }
+                if peg.kind == "heart" {
+                    Text("♥").font(.caption2)
+                }
+                if peg.strength > 1 {
+                    Text("\(peg.strength)").font(.caption2.bold())
+                }
             }
         }
     }
