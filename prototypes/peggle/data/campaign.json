@@ -1,0 +1,1048 @@
+{
+  "schemaVersion": 1,
+  "gameKey": "peggle",
+  "kidName": "Plink",
+  "land": {
+    "id": "world.peggle",
+    "name": "Peggle Land",
+    "summary": "A carnival meadow of marble fountains, gem seeds, and collection bowls.",
+    "backgroundAsset": "map.peggleLand"
+  },
+  "poi": {
+    "id": "poi.pegglePavilion",
+    "name": "The Plink Pavilion",
+    "summary": "A glass-and-brass pavilion whose marble fountain wakes gem seeds.",
+    "exteriorAsset": "poi.pegglePavilion.exterior",
+    "interiorAsset": "poi.pegglePavilion.interior",
+    "callToAction": "Play Plink"
+  },
+  "physics": {
+    "ballRadius": 0.018,
+    "pegRadius": 0.026,
+    "gravity": 1.65,
+    "restitution": 0.72,
+    "airDrag": 0.18,
+    "maxSpeed": 2.4,
+    "launchSpeed": 1.55,
+    "fountain": {
+      "x": 0.5,
+      "y": 0.08
+    },
+    "floorY": 0.9
+  },
+  "rules": {
+    "startingDrops": 6,
+    "gardenGiftDrop": true,
+    "gardenGlowHits": 8,
+    "alwaysFinishable": true
+  },
+  "bowls": [
+    {
+      "id": "bounce",
+      "label": "Bounce",
+      "x": 0.14,
+      "width": 0.2,
+      "effect": "bounce"
+    },
+    {
+      "id": "extra",
+      "label": "+1 Drop",
+      "x": 0.38,
+      "width": 0.2,
+      "effect": "extraDrop"
+    },
+    {
+      "id": "gems",
+      "label": "Gems",
+      "x": 0.62,
+      "width": 0.2,
+      "effect": "gems"
+    },
+    {
+      "id": "glow",
+      "label": "Glow",
+      "x": 0.86,
+      "width": 0.2,
+      "effect": "glowBoost"
+    }
+  ],
+  "beds": [
+    {
+      "id": "dewdrop-nursery",
+      "name": "Bunny Meadow",
+      "summary": "Soft clover paths. A bunny garden of moths, beetles, and a pollen fox.",
+      "unlockedByDefault": true,
+      "drops": 8,
+      "rewardGems": 4,
+      "pegs": [
+        {
+          "x": 0.5,
+          "y": 0.32,
+          "kind": "glow"
+        },
+        {
+          "x": 0.38,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.62,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.6,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.6,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.6,
+          "kind": "glow"
+        },
+        {
+          "x": 0.4,
+          "y": 0.74,
+          "kind": "seed"
+        },
+        {
+          "x": 0.6,
+          "y": 0.74,
+          "kind": "seed"
+        }
+      ],
+      "animal": "bunny",
+      "map": {
+        "x": 0.18,
+        "y": 0.72
+      },
+      "encounter": [
+        "seedMoth",
+        "brambleBeetle",
+        "pollenFox"
+      ]
+    },
+    {
+      "id": "berry-lattice",
+      "name": "Fox Hollow",
+      "summary": "A berry den. The pollen fox brought friends to play.",
+      "unlockedByDefault": true,
+      "drops": 7,
+      "rewardGems": 5,
+      "pegs": [
+        {
+          "x": 0.28,
+          "y": 0.3,
+          "kind": "glow"
+        },
+        {
+          "x": 0.42,
+          "y": 0.3,
+          "kind": "seed"
+        },
+        {
+          "x": 0.58,
+          "y": 0.3,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.3,
+          "kind": "glow"
+        },
+        {
+          "x": 0.28,
+          "y": 0.42,
+          "kind": "seed"
+        },
+        {
+          "x": 0.42,
+          "y": 0.42,
+          "kind": "seed"
+        },
+        {
+          "x": 0.58,
+          "y": 0.42,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.42,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.54,
+          "kind": "seed"
+        },
+        {
+          "x": 0.42,
+          "y": 0.54,
+          "kind": "glow"
+        },
+        {
+          "x": 0.58,
+          "y": 0.54,
+          "kind": "glow"
+        },
+        {
+          "x": 0.72,
+          "y": 0.54,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.66,
+          "kind": "glow"
+        },
+        {
+          "x": 0.42,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.58,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.66,
+          "kind": "glow"
+        }
+      ],
+      "animal": "fox",
+      "map": {
+        "x": 0.38,
+        "y": 0.58
+      },
+      "encounter": [
+        "pollenFox",
+        "seedMoth",
+        "brambleBeetle",
+        "thunderParrot"
+      ]
+    },
+    {
+      "id": "rainbow-arch",
+      "name": "Turtle Tide",
+      "summary": "Tide-pool beads. The shell turtle shrugs off ordinary taps.",
+      "unlockedByDefault": true,
+      "drops": 6,
+      "rewardGems": 6,
+      "pegs": [
+        {
+          "x": 0.2872,
+          "y": 0.4843,
+          "kind": "glow"
+        },
+        {
+          "x": 0.3544,
+          "y": 0.402,
+          "kind": "seed"
+        },
+        {
+          "x": 0.4216,
+          "y": 0.3447,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.32,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5784,
+          "y": 0.3447,
+          "kind": "glow"
+        },
+        {
+          "x": 0.6456,
+          "y": 0.402,
+          "kind": "seed"
+        },
+        {
+          "x": 0.7128,
+          "y": 0.4843,
+          "kind": "glow"
+        },
+        {
+          "x": 0.3,
+          "y": 0.7,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.7,
+          "kind": "seed"
+        },
+        {
+          "x": 0.7,
+          "y": 0.7,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.42,
+          "kind": "glow"
+        }
+      ],
+      "animal": "turtle",
+      "map": {
+        "x": 0.62,
+        "y": 0.7
+      },
+      "encounter": [
+        "shellTurtle",
+        "seedMoth",
+        "brambleBeetle"
+      ]
+    },
+    {
+      "id": "marble-mill",
+      "name": "Parrot Canopy",
+      "summary": "Bright leaves and a thunder parrot who loves a noisy bounce.",
+      "unlockedByDefault": true,
+      "drops": 6,
+      "rewardGems": 7,
+      "pegs": [
+        {
+          "x": 0.28,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.72,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.28,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.72,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.28,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.72,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.34,
+          "kind": "glow"
+        },
+        {
+          "x": 0.42,
+          "y": 0.48,
+          "kind": "seed"
+        },
+        {
+          "x": 0.58,
+          "y": 0.48,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.62,
+          "kind": "glow"
+        }
+      ],
+      "animal": "parrot",
+      "map": {
+        "x": 0.78,
+        "y": 0.48
+      },
+      "encounter": [
+        "thunderParrot",
+        "pollenFox",
+        "seedMoth",
+        "brambleBeetle"
+      ]
+    },
+    {
+      "id": "sparkle-orchard",
+      "name": "Panda Garden",
+      "summary": "Bamboo shade and a sleepy panda who takes a lot of hearts.",
+      "unlockedByDefault": true,
+      "drops": 6,
+      "rewardGems": 8,
+      "pegs": [
+        {
+          "x": 0.22,
+          "y": 0.34,
+          "kind": "seed"
+        },
+        {
+          "x": 0.38,
+          "y": 0.3,
+          "kind": "glow"
+        },
+        {
+          "x": 0.54,
+          "y": 0.34,
+          "kind": "seed"
+        },
+        {
+          "x": 0.7,
+          "y": 0.3,
+          "kind": "seed"
+        },
+        {
+          "x": 0.82,
+          "y": 0.38,
+          "kind": "glow"
+        },
+        {
+          "x": 0.26,
+          "y": 0.48,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.46,
+          "kind": "glow"
+        },
+        {
+          "x": 0.74,
+          "y": 0.5,
+          "kind": "seed"
+        },
+        {
+          "x": 0.32,
+          "y": 0.62,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.6,
+          "kind": "glow"
+        },
+        {
+          "x": 0.68,
+          "y": 0.62,
+          "kind": "seed"
+        },
+        {
+          "x": 0.4,
+          "y": 0.74,
+          "kind": "seed"
+        },
+        {
+          "x": 0.6,
+          "y": 0.74,
+          "kind": "glow"
+        }
+      ],
+      "animal": "panda",
+      "map": {
+        "x": 0.28,
+        "y": 0.38
+      },
+      "encounter": [
+        "bambooPanda",
+        "seedMoth",
+        "brambleBeetle"
+      ]
+    },
+    {
+      "id": "crystal-cascade",
+      "name": "Lion Ridge",
+      "summary": "Sunny rocks. The sun lion waits at the front of the ridge.",
+      "unlockedByDefault": true,
+      "drops": 5,
+      "rewardGems": 9,
+      "pegs": [
+        {
+          "x": 0.5,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.43,
+          "y": 0.4,
+          "kind": "glow"
+        },
+        {
+          "x": 0.57,
+          "y": 0.4,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.52,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.52,
+          "kind": "glow"
+        },
+        {
+          "x": 0.29,
+          "y": 0.64,
+          "kind": "glow"
+        },
+        {
+          "x": 0.43,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.57,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.71,
+          "y": 0.64,
+          "kind": "glow"
+        },
+        {
+          "x": 0.22,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.78,
+          "y": 0.76,
+          "kind": "glow"
+        }
+      ],
+      "animal": "lion",
+      "map": {
+        "x": 0.52,
+        "y": 0.32
+      },
+      "encounter": [
+        "sunLion",
+        "pollenFox",
+        "thunderParrot"
+      ]
+    },
+    {
+      "id": "night-garden",
+      "name": "Owl Night",
+      "summary": "Moonlight beads and a night owl on lookout.",
+      "unlockedByDefault": true,
+      "drops": 5,
+      "rewardGems": 10,
+      "pegs": [
+        {
+          "x": 0.22,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.28,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.28,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.28,
+          "kind": "glow"
+        },
+        {
+          "x": 0.22,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.4,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.52,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.52,
+          "kind": "glow"
+        },
+        {
+          "x": 0.78,
+          "y": 0.52,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.64,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.64,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.76,
+          "kind": "glow"
+        }
+      ],
+      "animal": "owl",
+      "map": {
+        "x": 0.72,
+        "y": 0.28
+      },
+      "encounter": [
+        "nightOwl",
+        "seedMoth",
+        "pollenFox",
+        "brambleBeetle"
+      ]
+    },
+    {
+      "id": "pavilion-finale",
+      "name": "Elephant Grove",
+      "summary": "The biggest garden. Help the stampede elephant, then the fountain sparkles.",
+      "unlockedByDefault": true,
+      "drops": 5,
+      "rewardGems": 12,
+      "awardsDecoration": "decoration.story.plinkFountain",
+      "pegs": [
+        {
+          "x": 0.22,
+          "y": 0.26,
+          "kind": "glow"
+        },
+        {
+          "x": 0.332,
+          "y": 0.26,
+          "kind": "seed"
+        },
+        {
+          "x": 0.444,
+          "y": 0.26,
+          "kind": "seed"
+        },
+        {
+          "x": 0.556,
+          "y": 0.26,
+          "kind": "glow"
+        },
+        {
+          "x": 0.668,
+          "y": 0.26,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.26,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.36,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.36,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.36,
+          "kind": "glow"
+        },
+        {
+          "x": 0.64,
+          "y": 0.36,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.36,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.332,
+          "y": 0.46,
+          "kind": "glow"
+        },
+        {
+          "x": 0.444,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.556,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.668,
+          "y": 0.46,
+          "kind": "glow"
+        },
+        {
+          "x": 0.78,
+          "y": 0.46,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.56,
+          "kind": "glow"
+        },
+        {
+          "x": 0.36,
+          "y": 0.56,
+          "kind": "seed"
+        },
+        {
+          "x": 0.5,
+          "y": 0.56,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.56,
+          "kind": "glow"
+        },
+        {
+          "x": 0.78,
+          "y": 0.56,
+          "kind": "seed"
+        },
+        {
+          "x": 0.22,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.332,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.444,
+          "y": 0.66,
+          "kind": "glow"
+        },
+        {
+          "x": 0.556,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.668,
+          "y": 0.66,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.66,
+          "kind": "glow"
+        },
+        {
+          "x": 0.22,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.36,
+          "y": 0.76,
+          "kind": "glow"
+        },
+        {
+          "x": 0.5,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.64,
+          "y": 0.76,
+          "kind": "seed"
+        },
+        {
+          "x": 0.78,
+          "y": 0.76,
+          "kind": "glow"
+        }
+      ],
+      "animal": "elephant",
+      "map": {
+        "x": 0.5,
+        "y": 0.52
+      },
+      "encounter": [
+        "stampedeElephant",
+        "sunLion",
+        "bambooPanda",
+        "nightOwl"
+      ]
+    }
+  ],
+  "safari": {
+    "title": "Plink Safari",
+    "summary": "Pick any animal garden. Pack power-ups. Each dewdrop is one turn of Critter Clash."
+  },
+  "powerUps": [
+    {
+      "id": "tilt",
+      "name": "Tilt Compass",
+      "summary": "Hit the compass peg to earn a Tilt Ball. Then a sparkle may pop — right thumb wakes tilt for the next drop.",
+      "kind": "tilt"
+    },
+    {
+      "id": "bomb",
+      "name": "Bomb Seeds",
+      "summary": "Boom tiles. Hitting one splashes every critter.",
+      "kind": "bomb"
+    },
+    {
+      "id": "redBomb",
+      "name": "Red Bomb Seeds",
+      "summary": "Scarlet boom tiles. Four times the splash.",
+      "kind": "redBomb"
+    }
+  ],
+  "clash": {
+    "playerHearts": 12,
+    "glowDamage": 2,
+    "seedDamage": 1,
+    "bombDamage": 3,
+    "redBombMultiplier": 4,
+    "boardClearBurst": 8,
+    "tiltSpawnChance": 0.18,
+    "maxLoadout": 2
+  },
+  "critters": [
+    {
+      "id": "seedMoth",
+      "name": "Seed Moth",
+      "hearts": 3,
+      "attack": 1,
+      "cadence": 1,
+      "armor": "none"
+    },
+    {
+      "id": "brambleBeetle",
+      "name": "Bramble Beetle",
+      "hearts": 6,
+      "attack": 1,
+      "cadence": 2,
+      "armor": "none"
+    },
+    {
+      "id": "pollenFox",
+      "name": "Pollen Fox",
+      "hearts": 5,
+      "attack": 2,
+      "cadence": 1,
+      "armor": "none"
+    },
+    {
+      "id": "shellTurtle",
+      "name": "Shell Turtle",
+      "hearts": 8,
+      "attack": 1,
+      "cadence": 2,
+      "armor": "halfUnlessBomb"
+    },
+    {
+      "id": "thunderParrot",
+      "name": "Thunder Parrot",
+      "hearts": 4,
+      "attack": 2,
+      "cadence": 1,
+      "armor": "none"
+    },
+    {
+      "id": "bambooPanda",
+      "name": "Bamboo Panda",
+      "hearts": 10,
+      "attack": 2,
+      "cadence": 2,
+      "armor": "none"
+    },
+    {
+      "id": "sunLion",
+      "name": "Sun Lion",
+      "hearts": 12,
+      "attack": 3,
+      "cadence": 2,
+      "armor": "none"
+    },
+    {
+      "id": "nightOwl",
+      "name": "Night Owl",
+      "hearts": 7,
+      "attack": 2,
+      "cadence": 1,
+      "armor": "none"
+    },
+    {
+      "id": "stampedeElephant",
+      "name": "Stampede Elephant",
+      "hearts": 16,
+      "attack": 3,
+      "cadence": 2,
+      "armor": "none"
+    }
+  ],
+  "music": [
+    {
+      "id": "abbies-world",
+      "title": "Abbie's World",
+      "sourceTitle": "Abbie’s World",
+      "catalogName": "world2_plink_music_abbiesWorld",
+      "file": "abbies-world.mp3",
+      "role": "safari",
+      "durationSeconds": 153
+    },
+    {
+      "id": "cheerful-dance",
+      "title": "Cheerful Dance",
+      "sourceTitle": "Веселый танец",
+      "catalogName": "world2_plink_music_cheerfulDance",
+      "file": "cheerful-dance.mp3",
+      "role": "play",
+      "durationSeconds": 126
+    },
+    {
+      "id": "blocks-in-the-game",
+      "title": "Blocks in the Game",
+      "sourceTitle": "Блоки в игре",
+      "catalogName": "world2_plink_music_blocksInTheGame",
+      "file": "blocks-in-the-game.mp3",
+      "role": "blocks",
+      "durationSeconds": 137
+    }
+  ]
+}

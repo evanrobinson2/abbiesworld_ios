@@ -23,4 +23,23 @@ final class World2RegistryKeyTests: XCTestCase {
             "pois/asset-workbench/interior"
         )
     }
+
+    func testPlinkHasStableRegistryKeys() {
+        XCTAssertEqual(
+            World2RegistryKey.assetKey(for: "map.peggleLand"),
+            "maps/peggle-land"
+        )
+        XCTAssertEqual(
+            World2RegistryKey.assetKey(for: "poi.pegglePavilion.exterior"),
+            "pois/peggle-pavilion/exterior"
+        )
+        XCTAssertEqual(
+            World2RegistryKey.assetKey(for: "poi.pegglePavilion.interior"),
+            "pois/peggle-pavilion/interior"
+        )
+        XCTAssertEqual(
+            World2RegistryKey.assetKey(for: "peggle.spriteBoard"),
+            "minigames/plink/sprite-board"
+        )
+    }
 }

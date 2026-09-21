@@ -53,6 +53,7 @@ struct WorldMapView: View {
         case .threeBears: return "Somebody left three bowls out"
         case .artGarden: return "Drag to look around the garden"
         case .evan: return "Daddy's glowing mountain base"
+        case .peggle: return "Wake the gem seeds at the Plink Pavilion"
         case .blankSlate: return "Drag to look around"
         default: return "Choose a place to visit"
         }

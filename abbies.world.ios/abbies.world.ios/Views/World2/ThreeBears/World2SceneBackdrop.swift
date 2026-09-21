@@ -18,6 +18,8 @@ struct World2SceneBackdrop: View {
         switch style {
         case .threeBearsWoods:
             World2ThreeBearsWoodsBackdrop()
+        case .peggleLand:
+            World2PeggleLandBackdrop()
         }
     }
 }
@@ -215,6 +217,43 @@ private struct World2ConiferShape: Shape {
         }
 
         return path
+    }
+}
+
+private struct World2PeggleLandBackdrop: View {
+    var body: some View {
+        GeometryReader { geometry in
+            let size = geometry.size
+            ZStack {
+                LinearGradient(
+                    colors: [
+                        Color(red: 0.99, green: 0.82, blue: 0.90),
+                        Color(red: 0.98, green: 0.78, blue: 0.55),
+                        Color(red: 0.55, green: 0.82, blue: 0.74),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                Circle()
+                    .fill(Color.white.opacity(0.35))
+                    .frame(width: size.width * 0.28, height: size.width * 0.28)
+                    .position(x: size.width * 0.82, y: size.height * 0.16)
+                Capsule()
+                    .fill(Color(red: 0.93, green: 0.82, blue: 0.62).opacity(0.9))
+                    .frame(width: size.width * 0.22, height: size.height * 0.16)
+                    .position(x: size.width * 0.50, y: size.height * 0.56)
+                Capsule()
+                    .fill(Color(red: 0.93, green: 0.82, blue: 0.62).opacity(0.55))
+                    .frame(width: size.width * 0.14, height: size.height * 0.10)
+                    .position(x: size.width * 0.22, y: size.height * 0.70)
+                Capsule()
+                    .fill(Color(red: 0.93, green: 0.82, blue: 0.62).opacity(0.55))
+                    .frame(width: size.width * 0.14, height: size.height * 0.10)
+                    .position(x: size.width * 0.78, y: size.height * 0.38)
+            }
+        }
+        .accessibilityLabel("A candy-colored carnival meadow with three dirt pads")
+        .accessibilityIdentifier("world2.backdrop.peggleLand")
     }
 }
 

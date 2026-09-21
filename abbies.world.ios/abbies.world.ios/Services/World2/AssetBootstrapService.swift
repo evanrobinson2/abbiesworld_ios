@@ -522,10 +522,14 @@ enum World2RegistryKey {
         "map.evan": "maps/evan-citadel",
         "map.artGarden": "maps/art-garden",
         "map.artGarden.ambient": "maps/art-garden/ambient",
+        "map.peggleLand": "maps/peggle-land",
         "poi.characterStudio.exterior": "pois/character-studio/exterior",
         "poi.characterStudio.interior": "pois/character-studio/interior",
         "poi.sceneBuilder.exterior": "pois/scene-builder/exterior",
         "poi.sceneBuilder.interior": "pois/scene-builder/interior",
+        "poi.pegglePavilion.exterior": "pois/peggle-pavilion/exterior",
+        "poi.pegglePavilion.interior": "pois/peggle-pavilion/interior",
+        "peggle.spriteBoard": "minigames/plink/sprite-board",
     ]
 
     static func assetKey(for semanticId: String) -> String? {

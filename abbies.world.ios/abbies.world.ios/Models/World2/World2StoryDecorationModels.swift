@@ -31,6 +31,7 @@ enum World2StoryArtStyle: String, Codable, Sendable {
     case propertyDeed
     case daddyCandy
     case daddyHug
+    case plinkFountain
 }
 
 /// What tapping Use does for a story item that is not only décor.
@@ -123,12 +124,27 @@ struct World2StoryDecoration: Identifiable, Equatable, Sendable {
         inventoryAction: .none
     )
 
+    /// Marble fountain from clearing the Plink Pavilion finale.
+    static let plinkFountain = World2StoryDecoration(
+        id: "decoration.story.plinkFountain",
+        name: "Marble Fountain",
+        shortDescription: "A tiny brass fountain that still drips dewdrops. It remembers every glow seed you woke.",
+        category: "Story Treasure",
+        defaultScale: 0.56,
+        placementLayer: .floor,
+        artStyle: .plinkFountain,
+        badges: [.new, .oneOfAKind, .storyTreasure, .questReward],
+        awardedByArchetypeID: "poi.pegglePavilion",
+        inventoryAction: .none
+    )
+
     static let all: [World2StoryDecoration] = [
         perfectPorridge,
         worldTeleporter,
         propertyDeed,
         daddyCandy,
         daddyHug,
+        plinkFountain,
     ]
 
     static func decoration(id: String) -> World2StoryDecoration? {

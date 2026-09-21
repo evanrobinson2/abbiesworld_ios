@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "note": "Parent-supplied Plink plates. 1 scene-level land, 2 POI interior, 3 POI exterior with studio background removed.",
+  "assets": [
+    {
+      "role": "scene",
+      "semanticId": "map.peggleLand",
+      "catalogName": "world2_plink_land",
+      "source": "scene.png",
+      "runtime": "scene-runtime.png"
+    },
+    {
+      "role": "poi-interior",
+      "semanticId": "poi.pegglePavilion.interior",
+      "catalogName": "world2_plink_interior",
+      "source": "interior.png",
+      "runtime": "interior-runtime.png"
+    },
+    {
+      "role": "poi-exterior",
+      "semanticId": "poi.pegglePavilion.exterior",
+      "catalogName": "world2_plink_pavilion",
+      "source": "poi.png",
+      "runtime": "poi-transparent.png",
+      "backgroundRemoved": true
+    }
+  ],
+  "music": [
+    {
+      "id": "abbies-world",
+      "title": "Abbie's World",
+      "sourceTitle": "Abbie’s World",
+      "file": "music/abbies-world.mp3",
+      "role": "safari"
+    },
+    {
+      "id": "cheerful-dance",
+      "title": "Cheerful Dance",
+      "sourceTitle": "Веселый танец",
+      "file": "music/cheerful-dance.mp3",
+      "role": "play"
+    },
+    {
+      "id": "blocks-in-the-game",
+      "title": "Blocks in the Game",
+      "sourceTitle": "Блоки в игре",
+      "file": "music/blocks-in-the-game.mp3",
+      "role": "blocks"
+    }
+  ]
+}

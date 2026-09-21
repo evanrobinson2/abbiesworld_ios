@@ -406,6 +406,7 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
 /// missing-asset placeholder.
 enum World2SceneBackdropStyle: String, Codable, Sendable {
     case threeBearsWoods
+    case peggleLand
 }
 
 /// One place the camera can sit: a painted backdrop, the pads on it, and the

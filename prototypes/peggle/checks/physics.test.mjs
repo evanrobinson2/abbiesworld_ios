@@ -1,0 +1,139 @@
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { describe, it } from 'node:test';
+import { resolve } from 'node:path';
+import { simulateShot, clampAim } from '../app/lib/physics.js';
+import {
+  SHOT_STEP_DT,
+  advanceShot,
+  beginShot,
+  createProgress,
+  createRound,
+  inspectCampaign,
+  remainingGlow,
+  resolveShot,
+} from '../app/lib/engine.js';
+
+const campaign = JSON.parse(
+  await readFile(
+    resolve(import.meta.dirname, '../../../AssetSources/World2/minigames/plink/campaign.json'),
+    'utf8'
+  )
+);
+
+describe('Plink campaign', () => {
+  it('describes Peggle Land, the pavilion, and eight beds', () => {
+    const inspect = inspectCampaign(campaign);
+    assert.equal(inspect.gameKey, 'peggle');
+    assert.equal(inspect.kidName, 'Plink');
+    assert.equal(inspect.land.id, 'world.peggle');
+    assert.equal(inspect.poi.id, 'poi.pegglePavilion');
+    assert.equal(inspect.bedCount, 8);
+    assert.equal(inspect.beds[0].id, 'dewdrop-nursery');
+    assert.ok(inspect.beds.at(-1).awardsDecoration);
+    assert.deepEqual(
+      (inspect.music ?? campaign.music).map((track) => track.id),
+      ['abbies-world', 'cheerful-dance', 'blocks-in-the-game']
+    );
+    for (const bed of inspect.beds) {
+      assert.ok(bed.glow > 0, `${bed.id} needs glow seeds`);
+      assert.ok(bed.pegs >= bed.glow);
+    }
+  });
+
+  it('inspects safari clash fields without dropping bed ids', () => {
+    const inspect = inspectCampaign(campaign);
+    assert.equal(inspect.safari.title, 'Plink Safari');
+    assert.equal(inspect.powerUps.length, 3);
+    assert.equal(inspect.clash.playerHearts, 12);
+    assert.equal(inspect.critters.length, 9);
+    assert.deepEqual(
+      inspect.beds.map((bed) => bed.id),
+      [
+        'dewdrop-nursery',
+        'berry-lattice',
+        'rainbow-arch',
+        'marble-mill',
+        'sparkle-orchard',
+        'crystal-cascade',
+        'night-garden',
+        'pavilion-finale',
+      ]
+    );
+    for (const bed of inspect.beds) {
+      assert.equal(bed.unlockedByDefault, true);
+      assert.ok(bed.animal);
+      assert.ok(bed.map);
+      assert.ok(bed.encounter.length >= 3);
+    }
+    assert.ok(inspect.beds.at(-1).encounter.includes('stampedeElephant'));
+  });
+
+  it('keeps the iOS and Vercel bundled copies identical to the source campaign', async () => {
+    const sourcePath = resolve(
+      import.meta.dirname,
+      '../../../AssetSources/World2/minigames/plink/campaign.json'
+    );
+    const iosPath = resolve(
+      import.meta.dirname,
+      '../../../abbies.world.ios/abbies.world.ios/Resources/World2/plink_campaign.json'
+    );
+    const vercelPath = resolve(import.meta.dirname, '../data/campaign.json');
+    const [source, iosCopy, vercelCopy] = await Promise.all([
+      readFile(sourcePath, 'utf8'),
+      readFile(iosPath, 'utf8'),
+      readFile(vercelPath, 'utf8'),
+    ]);
+    assert.equal(iosCopy, source);
+    assert.equal(vercelCopy, source);
+  });
+});
+
+describe('Plink physics', () => {
+  it('clamps aim so a six-year-old cannot fire backwards', () => {
+    assert.equal(clampAim(4), 1.15);
+    assert.equal(clampAim(-4), -1.15);
+  });
+
+  it('drops a straight marble into a bowl on the first bed', () => {
+    const bed = campaign.beds[0];
+    const shot = simulateShot(campaign, bed.pegs, 0.18);
+    assert.equal(shot.ended, true);
+    assert.ok(shot.steps > 10);
+    const caught = shot.events.find((event) => event.type === 'caught');
+    assert.ok(caught);
+    assert.ok(caught.effect);
+  });
+
+  it('keeps the marble in the air for many steps instead of finishing in one tick', () => {
+    const bed = campaign.beds[0];
+    const shot = simulateShot(campaign, bed.pegs, 0.18);
+    assert.ok(shot.steps > 80, `expected a visible fall, got ${shot.steps} steps`);
+    const { world } = beginShot(createRound(campaign, bed, createProgress(campaign)), 0.18);
+    let steps = 0;
+    while (world.ball.alive && steps < 40) {
+      advanceShot(world, SHOT_STEP_DT);
+      steps += 1;
+    }
+    assert.equal(world.ball.alive, true);
+    assert.ok(world.ball.y > campaign.physics.fountain.y);
+  });
+});
+
+describe('Plink progression', () => {
+  it('starts every safari garden unlocked and can take a nursery turn', () => {
+    const progress = createProgress(campaign);
+    assert.equal(progress.unlockedBedIds.length, 8);
+    assert.ok(progress.unlockedBedIds.includes('dewdrop-nursery'));
+    const round = createRound(campaign, campaign.beds[0], progress);
+    assert.equal(remainingGlow(round.pegs), 3);
+    assert.equal(round.clash.playerHearts, 12);
+    let guard = 0;
+    while (round.phase === 'aim' && guard < 40) {
+      resolveShot(round, (guard % 5) * 0.2 - 0.4);
+      guard += 1;
+    }
+    assert.ok(['cleared', 'rest', 'retry', 'aim'].includes(round.phase));
+    assert.ok(guard < 40);
+  });
+});
