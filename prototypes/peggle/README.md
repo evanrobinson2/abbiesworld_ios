@@ -19,7 +19,7 @@ npm run dev
 
 Open http://127.0.0.1:5174
 
-Playable Vercel deploy (same prototype, no localhost): see the latest production URL in the Vercel project `abbies-world-plink`.
+Play the same prototype on Vercel (no localhost): https://abbies-world-plink.vercel.app
 
 Flow a six-year-old can follow:
 
