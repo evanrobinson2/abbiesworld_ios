@@ -20,7 +20,52 @@ import {
   resetBattle,
   resolveEnemyTurn,
 } from '../../lib/peg-battle/session.js';
-import { clampAim } from '../../lib/peg-battle/physics.js';
+import { clampAim, previewTrajectory } from '../../lib/peg-battle/physics.js';
+
+function AnalogStick({ label, hint, knob, onAim, onClick, disabled, pressed }) {
+  const wellRef = useRef(null);
+
+  function pointer(event) {
+    if (disabled || !onAim) return;
+    const well = wellRef.current;
+    if (!well) return;
+    const rect = well.getBoundingClientRect();
+    const nx = (event.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+    const ny = (event.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+    onAim(nx, ny);
+  }
+
+  return (
+    <div className={`analog-stick ${disabled ? 'off' : ''} ${pressed ? 'pressed' : ''}`}>
+      <button
+        type="button"
+        ref={wellRef}
+        className="stick-well"
+        aria-label={label}
+        disabled={disabled}
+        onPointerDown={(event) => {
+          event.currentTarget.setPointerCapture(event.pointerId);
+          if (onClick) onClick();
+          else pointer(event);
+        }}
+        onPointerMove={(event) => {
+          if (!onAim || event.buttons === 0) return;
+          pointer(event);
+        }}
+      >
+        <span
+          className="stick-knob"
+          style={{
+            left: `${50 + (knob?.x ?? 0) * 32}%`,
+            top: `${50 + (knob?.y ?? 0) * 32}%`,
+          }}
+        />
+      </button>
+      <span className="stick-label">{label}</span>
+      {hint ? <small>{hint}</small> : null}
+    </div>
+  );
+}
 
 function Hearts({ current, max, kind = 'heart' }) {
   const glyph = kind === 'shield' ? '🫧' : '❤️';
@@ -62,6 +107,7 @@ export default function BattleView({
   const boardRef = useRef(null);
   const [tick, setTick] = useState(0);
   const [aim, setAim] = useState(0);
+  const [launchPressed, setLaunchPressed] = useState(false);
   const refresh = () => setTick((value) => value + 1);
 
   function replaceSession(next) {
@@ -153,15 +199,12 @@ export default function BattleView({
   const ball = session?.world?.ball;
   const fountain = session?.physics.fountain;
 
-  function pointerAim(event) {
-    const node = boardRef.current;
-    if (!node || !session || session.phase !== 'playerAim' || !session.selectedCardId) return;
-    const rect = node.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
-    const dx = x - fountain.x;
-    const dy = Math.max(0.02, y - fountain.y);
-    setAim(clampAim(Math.atan2(dx, dy)));
+  function aimFromStick(nx, ny) {
+    if (!session || session.phase !== 'playerAim') return;
+    const length = Math.hypot(nx, ny) || 1;
+    const x = nx / length;
+    const y = Math.max(0.12, ny / length);
+    setAim(clampAim(Math.atan2(x, y)));
   }
 
   function fire() {
@@ -177,6 +220,16 @@ export default function BattleView({
   }
 
   const selected = session?.definition.cards.find((card) => card.id === session.selectedCardId);
+  const canAim = session?.phase === 'playerAim';
+  const canLaunch = Boolean(canAim && session?.selectedCardId);
+  const path = canLaunch
+    ? previewTrajectory(session.physics, pegs, aim, {
+        behavior: selected?.behavior ?? 'star',
+        launchSpeed: selected?.behavior === 'rocket' ? session.physics.launchSpeed * 0.55 : session.physics.launchSpeed,
+        returnsLeft: selected?.behavior === 'boomerang' ? 1 : 0,
+      })
+    : [];
+  const stickKnob = { x: Math.sin(aim), y: Math.cos(aim) };
 
   const orbStyle = session
     ? {
@@ -187,7 +240,7 @@ export default function BattleView({
             : 'radial-gradient(circle at 32% 28%, #fff, #ffe7a0 40%, #d48a1a)',
       }
     : null;
-  const loadedOrb = session && session.phase === 'playerAim' && session.selectedCardId && !ball?.alive;
+  const loadedOrb = canLaunch && !ball?.alive;
 
   return (
     <div className={`peg-battle ${harness ? 'harness' : 'kid'}`}>
@@ -247,27 +300,24 @@ export default function BattleView({
 
       {session?.phase === 'intro' && <div className="banner">{session.definition.level.introLine}</div>}
 
-      <section
-        className="playfield"
-        ref={boardRef}
-        onPointerMove={pointerAim}
-        onPointerDown={pointerAim}
-        onPointerUp={fire}
-      >
-        {session && (
-          <div className="arena felt">
-            <svg className="aim-layer" viewBox="0 0 100 100" preserveAspectRatio="none">
-              {session.phase === 'playerAim' && session.selectedCardId && (
-                <g>
-                  {Array.from({ length: 8 }, (_, index) => {
-                    const t = 0.08 + index * 0.07;
-                    const x = (fountain.x + Math.sin(aim) * t) * 100;
-                    const y = (fountain.y + Math.cos(aim) * t) * 100;
-                    return <circle key={index} cx={x} cy={y} r={1.2} fill="#fff8dc" opacity={0.9} />;
-                  })}
-                </g>
-              )}
-            </svg>
+      <div className="stage">
+        <AnalogStick label="AIM" hint="Left stick" knob={stickKnob} disabled={!canAim} onAim={aimFromStick} />
+        <section className="playfield" ref={boardRef}>
+          {session && (
+            <div className="arena felt">
+              <svg className="aim-layer" viewBox="0 0 100 100" preserveAspectRatio="none">
+                {path.length > 1 && (
+                  <polyline
+                    points={path.map((point) => `${point.x * 100},${point.y * 100}`).join(' ')}
+                    fill="none"
+                    stroke="#fff4c2"
+                    strokeWidth="0.85"
+                    strokeDasharray="2.2 1.6"
+                    strokeLinecap="round"
+                    opacity="0.9"
+                  />
+                )}
+              </svg>
             {pegs.map((peg) => (
               <div
                 key={peg.id}
@@ -319,7 +369,20 @@ export default function BattleView({
             )}
           </div>
         )}
-      </section>
+        </section>
+        <AnalogStick
+          label="DROP"
+          hint="Click stick"
+          knob={{ x: 0, y: 0 }}
+          disabled={!canLaunch}
+          pressed={launchPressed}
+          onClick={() => {
+            setLaunchPressed(true);
+            fire();
+            window.setTimeout(() => setLaunchPressed(false), 160);
+          }}
+        />
+      </div>
 
       <div className="hand">
         <div className="cards">

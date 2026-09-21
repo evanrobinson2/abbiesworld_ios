@@ -9,19 +9,18 @@
 export const PEG_KINDS = new Set(['normal', 'star', 'heart']);
 
 export const DEFAULT_PHYSICS = {
-  // PegglePy: ballRad 12 / pegRad 25 = 0.48. Ball is smaller than a brick,
-  // but a readable marble once the board fills the screen.
-  ballRadius: 0.022,
-  pegRadius: 0.046,
-  blockWidth: 0.092,
-  blockHeight: 0.074,
+  // PegglePy: ballRad 12 / pegRad 25 = 0.48. Ball stays smaller than a brick.
+  ballRadius: 0.011,
+  pegRadius: 0.024,
+  blockWidth: 0.048,
+  blockHeight: 0.038,
   gravity: 1.55,
   restitution: 0.72,
   airDrag: 0.08,
   maxSpeed: 1.85,
   launchSpeed: 0.92,
-  fountain: { x: 0.5, y: 0.07 },
-  floorY: 0.94,
+  fountain: { x: 0.5, y: 0.03 },
+  floorY: 0.96,
 };
 
 export function clonePegs(pegs) {
@@ -213,4 +212,18 @@ export function simulateShot(physics, pegs, angle, ballSpec = {}, { dt = 1 / 120
     ended: true,
     ball: { x: world.ball.x, y: world.ball.y },
   };
+}
+
+export function previewTrajectory(physics, pegs, angle, ballSpec = {}, { dt = 1 / 120, maxSteps = 420, maxHits = 1 } = {}) {
+  const world = launchWorld(physics, pegs, angle, ballSpec);
+  const points = [{ x: world.ball.x, y: world.ball.y }];
+  let hits = 0;
+  for (let step = 0; step < maxSteps && world.ball.alive; step += 1) {
+    const events = stepBall(world, dt);
+    if (step % 3 === 0) points.push({ x: world.ball.x, y: world.ball.y });
+    hits += events.filter((event) => event.type === 'peg').length;
+    if (hits >= maxHits && step > 12) break;
+    if (events.some((event) => event.type === 'ended')) break;
+  }
+  return points;
 }

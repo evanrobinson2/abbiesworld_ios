@@ -13,18 +13,18 @@ enum PegBattlePhysics {
     }
 
     static let defaults = (
-        ballRadius: 0.022,
-        pegRadius: 0.046,
-        blockWidth: 0.092,
-        blockHeight: 0.074,
+        ballRadius: 0.011,
+        pegRadius: 0.024,
+        blockWidth: 0.048,
+        blockHeight: 0.038,
         gravity: 1.55,
         restitution: 0.72,
         airDrag: 0.08,
         maxSpeed: 1.85,
         launchSpeed: 0.92,
         fountainX: 0.5,
-        fountainY: 0.07,
-        floorY: 0.94
+        fountainY: 0.03,
+        floorY: 0.96
     )
 
     static func clampAim(_ angle: Double, limit: Double = 1.15) -> Double {
@@ -138,6 +138,29 @@ enum PegBattlePhysics {
             }
         }
         return (next, events, steps)
+    }
+
+    static func preview(angle: Double, behavior: String) -> [(x: Double, y: Double)] {
+        let p = defaults
+        var x = p.fountainX
+        var y = p.fountainY
+        let aimed = clampAim(angle)
+        let speed = behavior == "rocket" ? p.launchSpeed * 0.55 : p.launchSpeed
+        var vx = sin(aimed) * speed
+        var vy = cos(aimed) * speed
+        var points = [(x: x, y: y)]
+        let dt = 1.0 / 120.0
+        for step in 0..<360 {
+            vy += p.gravity * dt
+            let drag = max(0, 1 - p.airDrag * dt)
+            vx *= drag
+            vy *= drag
+            x += vx * dt
+            y += vy * dt
+            if step % 3 == 0 { points.append((x: x, y: y)) }
+            if y >= 0.34 || x < 0 || x > 1 { break }
+        }
+        return points
     }
 }
 

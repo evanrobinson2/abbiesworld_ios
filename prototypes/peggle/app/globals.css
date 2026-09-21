@@ -325,8 +325,81 @@ footer {
 }
 
 .peg-battle.kid {
-  max-width: 920px;
+  max-width: 1280px;
   margin: 0 auto;
+}
+
+.stage {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr) 96px;
+  gap: 10px;
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+}
+
+.analog-stick {
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  color: #241428;
+}
+
+.analog-stick small,
+.stick-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.stick-well {
+  position: relative;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  border: 4px solid #241428;
+  background:
+    radial-gradient(circle at 50% 50%, #4a5a52 0 34%, #2a3834 35% 100%);
+  box-shadow: inset 0 8px 12px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  padding: 0;
+}
+
+.stick-knob {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle at 32% 28%, #fff, #d0d6cc 40%, #6a746c);
+  border: 3px solid #241428;
+  pointer-events: none;
+}
+
+.analog-stick.off {
+  opacity: 0.45;
+}
+
+.analog-stick.pressed .stick-well {
+  transform: scale(0.94);
+  background: #1a2422;
+}
+
+.playfield {
+  flex: 1;
+  min-height: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.arena {
+  position: relative;
+  width: 100%;
+  height: min(84vh, 980px);
+  border-radius: 18px;
+  overflow: hidden;
+  touch-action: none;
 }
 
 .battle-hud {
@@ -366,22 +439,6 @@ footer {
 .dev-row {
   justify-content: center;
   flex-wrap: wrap;
-}
-
-.playfield {
-  flex: 1;
-  min-height: 0;
-  padding: 0;
-  background: transparent;
-}
-
-.arena {
-  position: relative;
-  width: 100%;
-  height: min(68vh, 760px);
-  border-radius: 18px;
-  overflow: hidden;
-  touch-action: none;
 }
 
 .arena.felt {
@@ -721,8 +778,15 @@ footer {
   .battle-hud {
     grid-template-columns: 1fr;
   }
+  .stage {
+    grid-template-columns: 72px minmax(0, 1fr) 72px;
+  }
   .arena {
-    height: 58vh;
+    height: 70vh;
+  }
+  .stick-well {
+    width: 72px;
+    height: 72px;
   }
 }
 

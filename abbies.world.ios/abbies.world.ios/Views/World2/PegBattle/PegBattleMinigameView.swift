@@ -73,8 +73,24 @@ struct PegBattleMinigameView: View {
             }
             .padding(.horizontal)
 
-            board(session)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            HStack(alignment: .center, spacing: 8) {
+                analogStick(label: "AIM", knobX: sin(aim), knobY: cos(aim))
+                    .gesture(
+                        DragGesture(minimumDistance: 0)
+                            .onChanged { value in
+                                let dx = (value.location.x - 44) / 44
+                                let dy = (value.location.y - 44) / 44
+                                let len = max(0.001, hypot(dx, dy))
+                                aim = PegBattlePhysics.clampAim(atan2(dx / len, max(0.12, dy / len)))
+                            }
+                    )
+                board(session)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                analogStick(label: "DROP", knobX: 0, knobY: 0)
+                    .onTapGesture { fire(session) }
+                    .accessibilityIdentifier("world2.pegBattle.fire")
+            }
+            .padding(.horizontal, 8)
 
             HStack {
                 if onDismiss != nil {
@@ -100,9 +116,6 @@ struct PegBattleMinigameView: View {
                     .disabled(session.phase != "playerAim")
                     .accessibilityIdentifier("world2.pegBattle.card.\(id)")
                 }
-                Button("Fire") { fire(session) }
-                    .disabled(session.phase != "playerAim" || session.selectedCardId == nil)
-                    .accessibilityIdentifier("world2.pegBattle.fire")
             }
 
             if session.phase == "victory" || session.phase == "defeat" {
@@ -142,8 +155,26 @@ struct PegBattleMinigameView: View {
         }
     }
 
+    private func analogStick(label: String, knobX: Double, knobY: Double) -> some View {
+        VStack(spacing: 6) {
+            ZStack {
+                Circle().fill(Color(red: 0.18, green: 0.22, blue: 0.2))
+                    .overlay(Circle().stroke(Color(red: 0.14, green: 0.08, blue: 0.16), lineWidth: 3))
+                Circle()
+                    .fill(Color(white: 0.85))
+                    .frame(width: 28, height: 28)
+                    .offset(x: knobX * 22, y: knobY * 22)
+            }
+            .frame(width: 88, height: 88)
+            Text(label).font(.caption.bold())
+        }
+    }
+
     private func board(_ session: PegBattleSession) -> some View {
         let physics = PegBattlePhysics.defaults
+        let path = session.selectedCardId == nil
+            ? []
+            : PegBattlePhysics.preview(angle: aim, behavior: session.cards.first { $0.id == session.selectedCardId }?.behavior ?? "star")
         return GeometryReader { geo in
             ZStack {
                 RoundedRectangle(cornerRadius: 18)
@@ -157,6 +188,15 @@ struct PegBattleMinigameView: View {
                             endPoint: .bottom
                         )
                     )
+                if path.count > 1 {
+                    Path { bezier in
+                        bezier.move(to: CGPoint(x: path[0].x * geo.size.width, y: path[0].y * geo.size.height))
+                        for point in path.dropFirst() {
+                            bezier.addLine(to: CGPoint(x: point.x * geo.size.width, y: point.y * geo.size.height))
+                        }
+                    }
+                    .stroke(Color.yellow.opacity(0.85), style: StrokeStyle(lineWidth: 2, dash: [6, 5]))
+                }
                 ForEach(session.pegs) { peg in
                     PegBattlePegView(peg: peg)
                         .frame(
@@ -183,25 +223,12 @@ struct PegBattleMinigameView: View {
                         height: geo.size.width * physics.ballRadius * 2
                     )
                     .position(
-                        x: (physics.fountainX + sin(aim) * 0.08) * geo.size.width,
-                        y: (physics.fountainY + cos(aim) * 0.08) * geo.size.height
+                        x: physics.fountainX * geo.size.width,
+                        y: physics.fountainY * geo.size.height
                     )
             }
-            .contentShape(Rectangle())
-            .gesture(
-                DragGesture(minimumDistance: 0)
-                    .onChanged { value in
-                        let dx = value.location.x / geo.size.width - physics.fountainX
-                        let dy = max(0.02, value.location.y / geo.size.height - physics.fountainY)
-                        aim = PegBattlePhysics.clampAim(atan2(dx, dy))
-                    }
-                    .onEnded { _ in
-                        fire(session)
-                    }
-            )
         }
-        .aspectRatio(0.86, contentMode: .fit)
-        .padding(.horizontal, 12)
+        .aspectRatio(0.78, contentMode: .fit)
     }
 
     private func fire(_ session: PegBattleSession) {

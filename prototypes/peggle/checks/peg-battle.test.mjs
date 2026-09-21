@@ -4,7 +4,7 @@ import { describe, it } from 'node:test';
 import { resolve } from 'node:path';
 import { loadCatalog } from '../app/lib/peg-battle/catalog.js';
 import { getEnemyState } from '../app/lib/peg-battle/assets.js';
-import { simulateShot } from '../app/lib/peg-battle/physics.js';
+import { simulateShot, previewTrajectory } from '../app/lib/peg-battle/physics.js';
 import {
   beginPlayerTurn,
   chooseCard,
@@ -33,7 +33,7 @@ describe('peg-battle pack', () => {
       'rocket-ball',
       'boomerang-ball',
     ]);
-    assert.equal(catalog.boards[0].pegs.length, 68);
+    assert.equal(catalog.boards[0].pegs.length, 127);
     assert.equal(catalog.boards[0].pegs.filter((peg) => peg.kind === 'star').length, 2);
     assert.equal(catalog.boards[0].pegs.filter((peg) => peg.kind === 'heart').length, 1);
     assert.equal(catalog.boards[0].pegs.filter((peg) => peg.strength > 1).length, 3);
@@ -130,9 +130,18 @@ describe('BattleSession', () => {
         if (dist < physics.blockWidth * 1.4) spacings.push(dist);
       }
     }
-    assert.ok(pegs.length >= 60);
+    assert.ok(pegs.length >= 100);
     assert.ok(spacings.length > 80);
     assert.ok(Math.min(...spacings) < physics.blockWidth * 1.15);
+  });
+
+  it('leaves a long drop above the brick field and draws a trajectory', () => {
+    const physics = sessionPhysics();
+    const first = Math.min(...catalog.boards[0].pegs.map((peg) => peg.y));
+    assert.ok(first - physics.fountain.y > 0.25);
+    const points = previewTrajectory(physics, catalog.boards[0].pegs, 0.2, { behavior: 'star' });
+    assert.ok(points.length > 8);
+    assert.ok(points.at(-1).y > points[0].y);
   });
 
   it('keeps the orb smaller than a peg, matching open-source Peggle scale', () => {

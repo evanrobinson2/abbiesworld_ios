@@ -17,6 +17,7 @@ export function assembleCatalog(parts) {
     boards: parts.boards.boards ?? parts.boards,
     levels: parts.levels.levels ?? parts.levels,
     fx: parts.fx,
+    pixels: parts.pixels ?? { palette: {}, sprites: {} },
     manifest: parts.manifest ?? { families: {} },
   };
 }

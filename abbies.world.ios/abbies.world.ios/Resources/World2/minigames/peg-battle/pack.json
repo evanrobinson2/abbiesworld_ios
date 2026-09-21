@@ -13,7 +13,8 @@
     "cards": "content/cards.json",
     "boards": "content/boards.json",
     "levels": "content/levels.json",
-    "fx": "content/comic-fx.json"
+    "fx": "content/comic-fx.json",
+    "pixels": "content/pixels.json"
   },
   "assets": "assets/manifest.json",
   "generation": "assets/generation.json"

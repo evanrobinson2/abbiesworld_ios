@@ -7,7 +7,7 @@ final class PegBattleSessionTests: XCTestCase {
         XCTAssertEqual(catalog.pack.id, "peg-battle")
         XCTAssertEqual(catalog.enemies.first?.id, "bad-doggo")
         XCTAssertEqual(catalog.cards.count, 5)
-        XCTAssertEqual(catalog.boards.first?.pegs.count, 68)
+        XCTAssertEqual(catalog.boards.first?.pegs.count, 127)
         XCTAssertEqual(catalog.levels.first?.id, "bad-doggo-duel")
     }
 

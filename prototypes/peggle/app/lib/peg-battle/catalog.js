@@ -29,11 +29,19 @@ export function loadCatalog(root) {
   const boards = readPackJson(pack.content.boards, root).boards;
   const levels = readPackJson(pack.content.levels, root).levels;
   const fx = readPackJson(pack.content.fx, root);
+  let pixels = { palette: {}, sprites: {} };
+  if (pack.content.pixels) {
+    try {
+      pixels = readPackJson(pack.content.pixels, root);
+    } catch {
+      pixels = { palette: {}, sprites: {}, missing: true };
+    }
+  }
   let manifest = { families: {}, records: [] };
   try {
     manifest = readPackJson(pack.assets, root);
   } catch {
     manifest = { families: {}, records: [], missing: true };
   }
-  return { pack, enemies, cards, boards, levels, fx, manifest };
+  return { pack, enemies, cards, boards, levels, fx, pixels, manifest };
 }
