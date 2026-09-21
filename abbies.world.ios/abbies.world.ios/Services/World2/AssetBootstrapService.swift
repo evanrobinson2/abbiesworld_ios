@@ -353,6 +353,13 @@ class AssetBootstrapService: ObservableObject {
         "map.evan": "evan_citadel_scene",
         "poi.evanHome.exterior": "evan_citadel_exterior",
         "poi.evanHome.interior": "evan_citadel_interior",
+        "map.peggleLand": "world2_plink_land",
+        "poi.pegglePavilion.exterior": "world2_plink_pavilion",
+        "poi.pegglePavilion.interior": "world2_plink_interior",
+        "peg.battle.enemy.bad-doggo.confident": "world2_peg_battle_bad_doggo_confident",
+        "peg.battle.enemy.bad-doggo.hurt": "world2_peg_battle_bad_doggo_hurt",
+        "peg.battle.enemy.bad-doggo.defeated": "world2_peg_battle_bad_doggo_defeated",
+        "peg.battle.arena.pavilion": "world2_peg_battle_arena_pavilion",
     ]
 
     /// Bundled ambient / looping videos that ship ahead of registry hosting.
@@ -530,6 +537,10 @@ enum World2RegistryKey {
         "poi.pegglePavilion.exterior": "pois/peggle-pavilion/exterior",
         "poi.pegglePavilion.interior": "pois/peggle-pavilion/interior",
         "peggle.spriteBoard": "minigames/plink/sprite-board",
+        "peg.battle.enemy.bad-doggo.confident": "minigames/peg-battle/bad-doggo/confident",
+        "peg.battle.enemy.bad-doggo.hurt": "minigames/peg-battle/bad-doggo/hurt",
+        "peg.battle.enemy.bad-doggo.defeated": "minigames/peg-battle/bad-doggo/defeated",
+        "peg.battle.arena.pavilion": "minigames/peg-battle/arena/pavilion",
     ]
 
     static func assetKey(for semanticId: String) -> String? {

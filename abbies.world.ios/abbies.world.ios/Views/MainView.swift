@@ -333,7 +333,7 @@ struct MainView: View {
                 )
             }
             .fullScreenCover(isPresented: $showPlink) {
-                PlinkMinigameView(
+                PegBattleMinigameView(
                     onDismiss: { showPlink = false }
                 )
             }

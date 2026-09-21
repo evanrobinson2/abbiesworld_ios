@@ -1,0 +1,18 @@
+PURPOSE: Bubble Ball card illustration for Peg Battle, also used as the ball icon
+SUBJECT: one iridescent soap-bubble sphere toy marble
+STATE / EMOTION: protective, gentle, cheerful
+CAMERA / VIEWPOINT: orthographic-ish three-quarter object shot, slightly above
+FRAMING: single object centered, occupying about 70 percent of the frame, generous padding
+SILHOUETTE: perfect round bubble marble, thick friendly outline, readable at card size
+POSE: sitting in empty space, no stand
+BACKGROUND: flat solid chroma-key green #00CC66, no floor, no shadow blob
+TRANSPARENCY: background must be a single flat color so it can be carved to alpha later
+LIGHTING: soft studio daylight, candy rainbow sheen, not photoreal glass
+PALETTE: pale aqua, lavender, cream highlight, strawberry-pink glint, dark-plum outline
+LINE TREATMENT: clean dark-plum outline, storybook
+RENDERING STYLE: Abbie's World hand-drawn digital illustration, bold chunky forms, not chibi
+SCALE: card art / launcher icon
+CROPPING RULES: entire bubble inside the frame
+PROHIBITED: text, UI, extra objects, characters, weapons
+INTENDED GAME PLACEMENT: Bubble Ball card and launcher
+RELATIONSHIP TO SIBLING ASSETS: same object treatment as the other four Battle Balls

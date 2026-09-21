@@ -1,0 +1,20 @@
+{
+  "id": "peg-battle",
+  "schemaVersion": 1,
+  "kidName": "Plink",
+  "title": "Peg Battle",
+  "summary": "Abbie vs one goofy opponent. Choose a Battle Card, fire its ball, then answer the telegraphed move.",
+  "poiId": "poi.pegglePavilion",
+  "landId": "world.peggle",
+  "route": "plink",
+  "defaultLevel": "bad-doggo-duel",
+  "content": {
+    "enemies": "content/enemies.json",
+    "cards": "content/cards.json",
+    "boards": "content/boards.json",
+    "levels": "content/levels.json",
+    "fx": "content/comic-fx.json"
+  },
+  "assets": "assets/manifest.json",
+  "generation": "assets/generation.json"
+}

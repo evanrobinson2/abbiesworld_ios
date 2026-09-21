@@ -1,0 +1,351 @@
+{
+  "schemaVersion": 1,
+  "pack": "peg-battle",
+  "updatedAt": "2026-09-21T21:28:46.817850Z",
+  "families": {
+    "bad-doggo": {
+      "character": "bad-doggo",
+      "family": "bad-doggo",
+      "slots": {
+        "confident": {
+          "id": "bad-doggo/confident",
+          "assetType": "enemy-state",
+          "state": "confident",
+          "family": "bad-doggo",
+          "src": "assets/carved/bad-doggo-confident.png",
+          "raw": "assets/raw/bad-doggo-confident.png",
+          "carved": true,
+          "promptPath": "prompts/bad-doggo-confident.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        },
+        "hurt": {
+          "id": "bad-doggo/hurt",
+          "assetType": "enemy-state",
+          "state": "hurt",
+          "family": "bad-doggo",
+          "src": "assets/carved/bad-doggo-hurt.png",
+          "raw": "assets/raw/bad-doggo-hurt.png",
+          "carved": true,
+          "promptPath": "prompts/bad-doggo-hurt.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        },
+        "defeated": {
+          "id": "bad-doggo/defeated",
+          "assetType": "enemy-state",
+          "state": "defeated",
+          "family": "bad-doggo",
+          "src": "assets/carved/bad-doggo-defeated.png",
+          "raw": "assets/raw/bad-doggo-defeated.png",
+          "carved": true,
+          "promptPath": "prompts/bad-doggo-defeated.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        }
+      }
+    },
+    "arena": {
+      "character": null,
+      "family": "arena",
+      "slots": {
+        "idle": {
+          "id": "arena/pavilion",
+          "assetType": "battle-background",
+          "state": "idle",
+          "family": "arena",
+          "src": "assets/carved/arena-pavilion.png",
+          "raw": "assets/raw/arena-pavilion.png",
+          "carved": false,
+          "promptPath": "prompts/arena-pavilion.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        }
+      }
+    },
+    "balls": {
+      "character": null,
+      "family": "balls",
+      "slots": {
+        "star": {
+          "id": "balls/star",
+          "assetType": "card-illustration",
+          "state": "star",
+          "family": "balls",
+          "src": "assets/carved/balls-star.png",
+          "raw": "assets/raw/balls-star.png",
+          "carved": true,
+          "promptPath": "prompts/ball-star.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        },
+        "bubble": {
+          "id": "balls/bubble",
+          "assetType": "card-illustration",
+          "state": "bubble",
+          "family": "balls",
+          "src": "assets/carved/balls-bubble.png",
+          "raw": "assets/raw/balls-bubble.png",
+          "carved": true,
+          "promptPath": "prompts/ball-bubble.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        },
+        "paint": {
+          "id": "balls/paint",
+          "assetType": "card-illustration",
+          "state": "paint",
+          "family": "balls",
+          "src": "assets/carved/balls-paint.png",
+          "raw": "assets/raw/balls-paint.png",
+          "carved": true,
+          "promptPath": "prompts/ball-paint.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        },
+        "rocket": {
+          "id": "balls/rocket",
+          "assetType": "card-illustration",
+          "state": "rocket",
+          "family": "balls",
+          "src": "assets/carved/balls-rocket.png",
+          "raw": "assets/raw/balls-rocket.png",
+          "carved": true,
+          "promptPath": "prompts/ball-rocket.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        },
+        "boomerang": {
+          "id": "balls/boomerang",
+          "assetType": "card-illustration",
+          "state": "boomerang",
+          "family": "balls",
+          "src": "assets/carved/balls-boomerang.png",
+          "raw": "assets/raw/balls-boomerang.png",
+          "carved": true,
+          "promptPath": "prompts/ball-boomerang.txt",
+          "generationSource": "gpt-image-1",
+          "missing": false
+        }
+      }
+    }
+  },
+  "records": [
+    {
+      "id": "bad-doggo/confident",
+      "ok": true,
+      "rawRel": "assets/raw/bad-doggo-confident.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:24:14.676156Z",
+      "carvedRel": "assets/carved/bad-doggo-confident.png",
+      "carve": {
+        "coverage": 0.4933,
+        "background": [
+          136.0,
+          189.0,
+          77.0
+        ],
+        "bbox": [
+          121,
+          3,
+          924,
+          1024
+        ],
+        "width": 1024,
+        "height": 1024,
+        "src": "/workspace/AssetSources/World2/minigames/peg-battle/assets/raw/bad-doggo-confident.png",
+        "dest": "/workspace/AssetSources/World2/minigames/peg-battle/assets/carved/bad-doggo-confident.png"
+      }
+    },
+    {
+      "id": "bad-doggo/hurt",
+      "ok": true,
+      "rawRel": "assets/raw/bad-doggo-hurt.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:24:48.718343Z",
+      "carvedRel": "assets/carved/bad-doggo-hurt.png",
+      "carve": {
+        "coverage": 0.441,
+        "background": [
+          114.0,
+          172.0,
+          69.0
+        ],
+        "bbox": [
+          120,
+          27,
+          943,
+          917
+        ],
+        "width": 1024,
+        "height": 1024,
+        "src": "/workspace/AssetSources/World2/minigames/peg-battle/assets/raw/bad-doggo-hurt.png",
+        "dest": "/workspace/AssetSources/World2/minigames/peg-battle/assets/carved/bad-doggo-hurt.png"
+      }
+    },
+    {
+      "id": "bad-doggo/defeated",
+      "ok": true,
+      "rawRel": "assets/raw/bad-doggo-defeated.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:25:20.891083Z",
+      "carvedRel": "assets/carved/bad-doggo-defeated.png",
+      "carve": {
+        "coverage": 0.4305,
+        "background": [
+          112.0,
+          182.0,
+          82.0
+        ],
+        "bbox": [
+          106,
+          18,
+          944,
+          916
+        ],
+        "width": 1024,
+        "height": 1024,
+        "src": "/workspace/AssetSources/World2/minigames/peg-battle/assets/raw/bad-doggo-defeated.png",
+        "dest": "/workspace/AssetSources/World2/minigames/peg-battle/assets/carved/bad-doggo-defeated.png"
+      }
+    },
+    {
+      "id": "arena/pavilion",
+      "ok": true,
+      "rawRel": "assets/raw/arena-pavilion.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:26:10.864757Z",
+      "carvedRel": "assets/carved/arena-pavilion.png"
+    },
+    {
+      "id": "balls/star",
+      "ok": true,
+      "rawRel": "assets/raw/balls-star.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:26:37.798309Z",
+      "carvedRel": "assets/carved/balls-star.png",
+      "carve": {
+        "coverage": 0.518,
+        "background": [
+          130.0,
+          187.0,
+          55.0
+        ],
+        "bbox": [
+          64,
+          53,
+          952,
+          950
+        ],
+        "width": 1024,
+        "height": 1024,
+        "src": "/workspace/AssetSources/World2/minigames/peg-battle/assets/raw/balls-star.png",
+        "dest": "/workspace/AssetSources/World2/minigames/peg-battle/assets/carved/balls-star.png"
+      }
+    },
+    {
+      "id": "balls/bubble",
+      "ok": true,
+      "rawRel": "assets/raw/balls-bubble.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:27:05.573076Z",
+      "carvedRel": "assets/carved/balls-bubble.png",
+      "carve": {
+        "coverage": 0.4971,
+        "background": [
+          107.0,
+          173.0,
+          83.0
+        ],
+        "bbox": [
+          85,
+          81,
+          935,
+          934
+        ],
+        "width": 1024,
+        "height": 1024,
+        "src": "/workspace/AssetSources/World2/minigames/peg-battle/assets/raw/balls-bubble.png",
+        "dest": "/workspace/AssetSources/World2/minigames/peg-battle/assets/carved/balls-bubble.png"
+      }
+    },
+    {
+      "id": "balls/paint",
+      "ok": true,
+      "rawRel": "assets/raw/balls-paint.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:27:36.421871Z",
+      "carvedRel": "assets/carved/balls-paint.png",
+      "carve": {
+        "coverage": 0.482,
+        "background": [
+          96.0,
+          177.0,
+          94.0
+        ],
+        "bbox": [
+          94,
+          84,
+          923,
+          954
+        ],
+        "width": 1024,
+        "height": 1024,
+        "src": "/workspace/AssetSources/World2/minigames/peg-battle/assets/raw/balls-paint.png",
+        "dest": "/workspace/AssetSources/World2/minigames/peg-battle/assets/carved/balls-paint.png"
+      }
+    },
+    {
+      "id": "balls/rocket",
+      "ok": true,
+      "rawRel": "assets/raw/balls-rocket.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:28:17.634906Z",
+      "carvedRel": "assets/carved/balls-rocket.png",
+      "carve": {
+        "coverage": 0.4588,
+        "background": [
+          92.0,
+          187.0,
+          86.0
+        ],
+        "bbox": [
+          59,
+          72,
+          904,
+          930
+        ],
+        "width": 1024,
+        "height": 1024,
+        "src": "/workspace/AssetSources/World2/minigames/peg-battle/assets/raw/balls-rocket.png",
+        "dest": "/workspace/AssetSources/World2/minigames/peg-battle/assets/carved/balls-rocket.png"
+      }
+    },
+    {
+      "id": "balls/boomerang",
+      "ok": true,
+      "rawRel": "assets/raw/balls-boomerang.png",
+      "generationSource": "gpt-image-1",
+      "createdAt": "2026-09-21T21:28:46.239440Z",
+      "carvedRel": "assets/carved/balls-boomerang.png",
+      "carve": {
+        "coverage": 0.478,
+        "background": [
+          86.0,
+          176.0,
+          64.0
+        ],
+        "bbox": [
+          84,
+          33,
+          917,
+          991
+        ],
+        "width": 1024,
+        "height": 1024,
+        "src": "/workspace/AssetSources/World2/minigames/peg-battle/assets/raw/balls-boomerang.png",
+        "dest": "/workspace/AssetSources/World2/minigames/peg-battle/assets/carved/balls-boomerang.png"
+      }
+    }
+  ]
+}

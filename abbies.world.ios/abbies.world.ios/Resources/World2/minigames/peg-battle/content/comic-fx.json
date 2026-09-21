@@ -1,0 +1,47 @@
+{
+  "sequences": {
+    "bark": [
+      "freezeFrame",
+      "spriteZoomAttack",
+      "shockwave",
+      "screenShake",
+      "playerDamage"
+    ],
+    "scratch": [
+      "spriteLunge",
+      "slashOverlay",
+      "impactFlash",
+      "playerDamage"
+    ],
+    "pounce": [
+      "freezeFrame",
+      "spriteZoomAttack",
+      "speedLines",
+      "pawSwipe",
+      "screenShake",
+      "impactFlash",
+      "playerDamage"
+    ],
+    "hit-tier-0": ["recoil"],
+    "hit-tier-1": ["recoil", "impactFlash"],
+    "hit-tier-2": ["spriteKnockback", "comicBurst", "screenShake", "starScatter"],
+    "hit-tier-3": [
+      "freezeFrame",
+      "spriteKnockback",
+      "speedLines",
+      "comicBurst",
+      "screenShake",
+      "impactFlash"
+    ],
+    "hit-tier-4": [
+      "freezeFrame",
+      "spriteKnockback",
+      "speedLines",
+      "comicBurst",
+      "heartScatter",
+      "stateCrossfade",
+      "screenShake",
+      "impactFlash"
+    ]
+  }
+}

@@ -1,0 +1,18 @@
+PURPOSE: Paint Ball card illustration for Peg Battle, also used as the ball icon
+SUBJECT: one round berry-purple paint marble with a single cute drip
+STATE / EMOTION: messy-fun, cheerful
+CAMERA / VIEWPOINT: orthographic-ish three-quarter object shot, slightly above
+FRAMING: single object centered, occupying about 70 percent of the frame, generous padding
+SILHOUETTE: round marble plus one small drip, still a ball, not a paint can
+POSE: sitting in empty space, no stand
+BACKGROUND: flat solid chroma-key green #00CC66, no floor, no shadow blob
+TRANSPARENCY: background must be a single flat color so it can be carved to alpha later
+LIGHTING: soft studio daylight, gentle cel highlight
+PALETTE: berry purple, lavender, cream highlight, strawberry-pink accent, dark-plum outline
+LINE TREATMENT: clean dark-plum outline, storybook
+RENDERING STYLE: Abbie's World hand-drawn digital illustration, bold chunky forms, not chibi
+SCALE: card art / launcher icon
+CROPPING RULES: entire marble and drip inside the frame
+PROHIBITED: text, UI, extra objects, characters, weapons, paint splatter covering the background
+INTENDED GAME PLACEMENT: Paint Ball card and launcher
+RELATIONSHIP TO SIBLING ASSETS: same object treatment as the other four Battle Balls

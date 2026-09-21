@@ -131,9 +131,15 @@ struct World2RootView: View {
                 )
 
             case .plink:
-                PlinkMinigameView(
+                PegBattleMinigameView(
                     onDismiss: viewModel.exitPOI,
-                    onBedCleared: viewModel.completePlinkBed
+                    onWin: { gems in
+                        viewModel.completeMinigame(
+                            configurationID: "plink",
+                            score: 1,
+                            rewardGems: gems
+                        )
+                    }
                 )
 
             case .sceneCreator(let instanceID):

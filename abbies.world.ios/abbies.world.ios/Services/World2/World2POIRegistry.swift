@@ -348,9 +348,9 @@ enum World2POIRegistry {
         interiorAsset: "poi.pegglePavilion.interior",
         drawnArtStyle: .plinkPavilion,
         icon: "drop.circle.fill",
-        lore: "A glass-and-brass garden pavilion whose marble fountain wakes gem seeds.",
-        activityDescription: "Aim the dewdrop from the flower fountain. Bounce it through gem seeds and catch it in the collection bowls. Wake every glow seed.",
-        callToAction: "Play Plink",
+        lore: "A glass-and-brass garden pavilion where Abbie duels one goofy opponent at Peg Battle.",
+        activityDescription: "Choose one of three Battle Cards, fire its ball through the pegboard, then answer Bad Doggo's telegraphed move. Charged pegs remember your last shot.",
+        callToAction: "Play Peg Battle",
         musicTrackID: "world2_joyful_bounce",
         contract: World2POIContract(
             route: .plink,

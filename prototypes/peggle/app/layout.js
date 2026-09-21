@@ -1,9 +1,9 @@
 import './globals.css';
 
 export const metadata = {
-  title: "Plink — Abbie's World Peggle Land",
+  title: "Peg Battle — Abbie's World",
   description:
-    'Localhost prototype of Plink, the marble-drop minigame in Peggle Land.',
+    'Peg Battle prototype: choose a Battle Card, fire SVG pegs, and duel Bad Doggo.',
 };
 
 export const viewport = {

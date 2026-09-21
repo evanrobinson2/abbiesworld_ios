@@ -39,8 +39,9 @@ Plink's physics (`prototypes/peggle/app/lib/physics.js` and the Swift port) are 
 
 - **Land** `world.peggle` / Peggle Land. Carnival meadow west of Work Land.
 - **Pad** `hardpoint.peggle.pavilionPad` plus two open pads so the scene still proves the hardpoint system.
-- **POI** `poi.pegglePavilion` / The Plink Pavilion. Contract opens `.plink`, grants gems and the Marble Fountain decoration, milestone `minigame.plink.completed`.
-- **Classic Games** also lists Plink, same as Whizbang.
+- **POI** `poi.pegglePavilion` / The Plink Pavilion. Contract opens `.plink` into **Peg Battle**. Grants gems and the Marble Fountain decoration, milestone `minigame.plink.completed`.
+- **Classic Games** lists Peg Battle, same as Whizbang.
+- **Pack** `AssetSources/World2/minigames/peg-battle/` is the content. The next minigame should copy that pack pattern, not the battle engine.
 
 ## Progression
 

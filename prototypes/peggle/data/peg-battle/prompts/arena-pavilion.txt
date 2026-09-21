@@ -1,0 +1,18 @@
+PURPOSE: Peg Battle arena background for Abbie's World, smart six-year-old iPad landscape
+SUBJECT: the interior hall of The Plink Pavilion used as a 1v1 Peg Battle arena
+STATE / EMOTION: cheerful carnival-garden, inviting, not scary
+CAMERA / VIEWPOINT: slightly elevated front view of a tall playfield hall, landscape 3:2
+FRAMING: wide hall with a large empty central board rectangle, decorative architecture around the edges, launcher alcove at the top center, quiet floor strip at the bottom
+SILHOUETTE: architecture only — no characters, no pegs, no balls, no cards
+POSE: not applicable
+BACKGROUND: this image IS the background; fill the entire frame; no chroma key
+TRANSPARENCY: opaque, full-bleed illustration
+LIGHTING: stained-glass wash of strawberry pink, lavender and teal light, soft daylight, no darkness
+PALETTE: cream stone, warm brass ribs, strawberry-pink and teal stained glass, lavender banners with NO writing, restrained golden sparkle
+LINE TREATMENT: clean expressive outlines, tactile illustrated textures, gentle cel shading
+RENDERING STYLE: Abbie's World hand-drawn digital illustration, bold chunky storybook forms, sophisticated rather than babyish, not chibi
+SCALE: full-screen iPad landscape battle arena
+CROPPING RULES: keep a broad empty central playfield so code-rendered SVG pegs and the ball can sit on top; do not paint pegs, marbles, scores, or UI into the board
+PROHIBITED: text, letters, numbers, UI, buttons, characters, animals, painted pegs, painted balls, logos, frightening material, weapons, cannons
+INTENDED GAME PLACEMENT: battle scene background behind the pegboard
+RELATIONSHIP TO SIBLING ASSETS: same pavilion identity as poi.pegglePavilion.interior, but composed as a duel stage with a quieter center

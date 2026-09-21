@@ -1,0 +1,18 @@
+PURPOSE: Rocket Ball card illustration for Peg Battle, also used as the ball icon
+SUBJECT: one rounded toy rocket marble, friendly, never a weapon
+STATE / EMOTION: zippy, cheerful
+CAMERA / VIEWPOINT: orthographic-ish three-quarter object shot, slightly above, nose pointing up-right
+FRAMING: single object centered, occupying about 70 percent of the frame, generous padding
+SILHOUETTE: compact rounded rocket with cream fins, still reads as a ball/projectile toy
+POSE: sitting in empty space, no stand, no exhaust flame required
+BACKGROUND: flat solid chroma-key green #00CC66, no floor, no shadow blob
+TRANSPARENCY: background must be a single flat color so it can be carved to alpha later
+LIGHTING: soft studio daylight, gentle cel highlight
+PALETTE: strawberry pink body, cream fins, teal window, brass gold nose, dark-plum outline
+LINE TREATMENT: clean dark-plum outline, storybook
+RENDERING STYLE: Abbie's World hand-drawn digital illustration, bold chunky forms, not chibi
+SCALE: card art / launcher icon
+CROPPING RULES: entire toy rocket inside the frame
+PROHIBITED: text, UI, extra objects, characters, missiles, explosions, military markings, fire
+INTENDED GAME PLACEMENT: Rocket Ball card and launcher
+RELATIONSHIP TO SIBLING ASSETS: same object treatment as the other four Battle Balls

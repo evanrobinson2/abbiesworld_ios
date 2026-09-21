@@ -2,7 +2,7 @@
   "name": "plink",
   "version": "0.1.0",
   "private": true,
-  "description": "Localhost prototype for Abbie's World Plink — the Peggle Land marble-drop minigame.",
+  "description": "Peg Battle prototype for Abbie's World — choose a Battle Card, fire SVG pegs, duel one goofy opponent.",
   "scripts": {
     "dev": "next dev --port 5174",
     "build": "next build",

@@ -1,0 +1,59 @@
+{
+  "cards": [
+    {
+      "id": "star-ball",
+      "name": "Star Ball",
+      "shortName": "STAR",
+      "glyph": "⭐",
+      "asset": "balls/star",
+      "behavior": "star",
+      "level": 1,
+      "summary": "Every peg is Power. Ten in a row makes a Star Burst.",
+      "starPower": "Every peg now counts double."
+    },
+    {
+      "id": "bubble-ball",
+      "name": "Bubble Ball",
+      "shortName": "BUBBLE",
+      "glyph": "🫧",
+      "asset": "balls/bubble",
+      "behavior": "bubble",
+      "level": 1,
+      "summary": "Peg hits also make Bubble Shield.",
+      "starPower": "Pegs create twice as much Shield."
+    },
+    {
+      "id": "paint-ball",
+      "name": "Paint Ball",
+      "shortName": "PAINT",
+      "glyph": "🎨",
+      "asset": "balls/paint",
+      "behavior": "paint",
+      "level": 1,
+      "summary": "Paints every peg it touches. Painted pegs explode later.",
+      "starPower": "Paint explosions become larger."
+    },
+    {
+      "id": "rocket-ball",
+      "name": "Rocket Ball",
+      "shortName": "ROCKET",
+      "glyph": "🚀",
+      "asset": "balls/rocket",
+      "behavior": "rocket",
+      "level": 1,
+      "summary": "Starts slow, then speeds up after every bounce.",
+      "starPower": "Maximum speed immediately."
+    },
+    {
+      "id": "boomerang-ball",
+      "name": "Boomerang Ball",
+      "shortName": "BOOMERANG",
+      "glyph": "🪃",
+      "asset": "balls/boomerang",
+      "behavior": "boomerang",
+      "level": 1,
+      "summary": "The first time it reaches the floor, it flies back up once.",
+      "starPower": "Gains another return trip."
+    }
+  ]
+}

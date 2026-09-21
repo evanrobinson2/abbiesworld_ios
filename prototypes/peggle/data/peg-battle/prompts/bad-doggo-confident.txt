@@ -1,0 +1,19 @@
+PURPOSE: enemy battle portrait for Peg Battle, Abbie's World, smart six-year-old iPad audience
+SUBJECT: Bad Doggo, one goofy cartoon dog opponent, not a realistic dog
+STATE / EMOTION: happy, confident, proud, goofy grin, not mean, not scary
+CAMERA / VIEWPOINT: eye-level, three-quarter view, subject faces slightly toward the viewer's left
+FRAMING: full body, complete silhouette, feet included, centered, subject about 70 percent of frame height, generous padding
+SILHOUETTE: stocky medium-large dog, long floppy ears, round head, simple collar, readable at small size
+POSE: upright playful swagger, chest slightly puffed, one front paw lifted a little as if proud, weight on the other three paws, no sitting, no lying down
+BACKGROUND: flat solid chroma-key green #00CC66, no gradient, no floor, no ground plane, no cast shadow, no environment
+TRANSPARENCY: background must be a single flat color so it can be carved to alpha later
+LIGHTING: soft diffuse daylight, gentle cel shading, no harsh rim, no dramatic noir
+PALETTE: warm caramel fur, cream chest and muzzle blaze, darker caramel saddle on the back, strawberry-red collar, one round plain gold tag with no letters, dark-plum outlines, cream inner ears
+LINE TREATMENT: clean expressive dark-plum outlines, even weight, storybook
+RENDERING STYLE: Abbie's World hand-drawn digital illustration, bold chunky storybook forms, exaggerated playful proportions, sophisticated rather than babyish, not chibi, tactile painted texture
+SCALE: large battle portrait, iPad landscape, readable from across a room
+CROPPING RULES: do not crop ears, tail, paws, or collar; keep the whole dog inside the frame with padding
+PROHIBITED: text, letters, numbers, UI, logos, watermarks, extra characters, weapons, gore, teeth-baring threat, realistic fur photography, chibi, ground plane, furniture, speech bubbles
+INTENDED GAME PLACEMENT: static enemy actor on the right of the Peg Battle board; later crossfades with the hurt sibling
+RELATIONSHIP TO SIBLING ASSETS: this is the identity lock for all Bad Doggo art — same proportions, same collar, same fur pattern, same viewpoint, same framing
+CHARACTER IDENTITY LOCK: round black nose, large friendly dark eyes with simple highlights, visible eyebrows, cream muzzle blaze, caramel body, darker saddle, floppy ears, strawberry-red collar, unmarked gold circle tag

@@ -1,0 +1,22 @@
+{
+  "levels": [
+    {
+      "id": "bad-doggo-duel",
+      "name": "Bad Doggo Blocks the Way!",
+      "enemy": "bad-doggo",
+      "board": "pavilion-duel",
+      "deck": [
+        "star-ball",
+        "bubble-ball",
+        "paint-ball",
+        "rocket-ball",
+        "boomerang-ball"
+      ],
+      "handSize": 3,
+      "playerHearts": 6,
+      "powerPerDamage": 10,
+      "arenaAsset": "arena/pavilion",
+      "introLine": "BAD DOGGO BLOCKS THE WAY!"
+    }
+  ]
+}
