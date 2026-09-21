@@ -115,3 +115,28 @@ More animals, more poses, server campaign record, original per-level music. Not 
 4. **Build order.** Phase A (your three plates in the real iOS game) before B–E? *Yes. The toy has to live in Swift before safari/clash/DAG.*
 
 Reply with corrections or “defaults.” After that, the next coding turn starts at Phase A and does not skip ahead.
+
+## Proposed: marble stash and SVG pegs (not scheduled yet)
+
+Do not build this until Phase A is on device. This is the cousin of Peggle’s hopper, not a reskin.
+
+**Peggle (study only).** Ten identical balls. Extra balls come from the moving bucket and high shot scores. Special shots are a Master’s green peg that changes the *next* (or current) ball: Fireball, Flippers, Multiball, Super Guide. Pegs are blue / orange / green / purple. We copy none of the art, audio, Fever, or names.
+
+**Plink hopper.** The player owns a **stash**. Before a garden they pack a **pouch** of marbles (default **6**). During the fight the pouch **cycles front to back**: each dewdrop drop uses the front marble. A six-year-old starts with six plain **Dewdrops** (no extra effect). Wins unlock new marble *types* into the stash; they still pick the mix each round.
+
+Default marble types (unlock later, do not ship all at once):
+
+| Marble | When it exists | On that drop |
+| --- | --- | --- |
+| Dewdrop | Start | Normal physics, no bonus |
+| Tilt marble | Unlock, or a compass peg may tuck one into the pouch | That drop is tilt-steered + overlay |
+| Boom marble | Unlock | Treats the shot as if a bomb tile was hit |
+| Red boom | Unlock, rare | Treats the shot as a red bomb (4×) |
+
+Used Dewdrops go to the **back of the pouch**. Specials are **spent** unless the +1 Drop bowl tucks that same marble back. The garden gift is always a Dewdrop so the fight cannot stall.
+
+Board **pegs** stay a separate layer (seed, glow, compass, bomb, red bomb). Hitting a compass peg still *grants* a Tilt marble into the pouch — that is the “you got that as a ball” beat. Packing a Tilt marble from the stash is the other way to have one.
+
+**SVG pegs and marbles.** Author each kind as an SVG template (`core`, `rim`, `glyph`, `spark`) with states idle / lit / popping. Palettes swap per animal garden without new drawings. Web draws SVG directly. iOS uses the same paths as SwiftUI `Shape`s (or PDF vectors), not CSS shaders — wet-marble shine is a SwiftUI/Metal highlight on those paths. Raster sprites stay fallbacks only.
+
+Peg kinds that need views now: `seed`, `glow`, `tilt`, `bomb`, `redBomb`, plus the four marble faces above.
