@@ -19,6 +19,8 @@ npm run dev
 
 Open http://127.0.0.1:5174
 
+Playable Vercel deploy (same prototype, no localhost): see the latest production URL in the Vercel project `abbies-world-plink`.
+
 Flow a six-year-old can follow:
 
 1. Peggle Land overland.
@@ -29,7 +31,7 @@ Flow a six-year-old can follow:
 
 ## Data
 
-`GET /api/catalog` loads `AssetSources/World2/minigames/plink/campaign.json`.
+`GET /api/catalog` loads the bundled `data/campaign.json` (kept identical to `AssetSources/World2/minigames/plink/campaign.json`).
 
 If `ABBIES_SERVER_URL` is set, the same route asks Game Asset API v1 for `minigames/plink/campaign` and uses that payload when it looks like a campaign. Missing server support falls back to the bundled file and says so in the footer (`data source: bundled` or `server`).
 

@@ -28,7 +28,7 @@ describe('Plink campaign', () => {
     }
   });
 
-  it('keeps the iOS bundled copy identical to the source campaign', async () => {
+  it('keeps the iOS and Vercel bundled copies identical to the source campaign', async () => {
     const sourcePath = resolve(
       import.meta.dirname,
       '../../../AssetSources/World2/minigames/plink/campaign.json'
@@ -37,11 +37,14 @@ describe('Plink campaign', () => {
       import.meta.dirname,
       '../../../abbies.world.ios/abbies.world.ios/Resources/World2/plink_campaign.json'
     );
-    const [source, iosCopy] = await Promise.all([
+    const vercelPath = resolve(import.meta.dirname, '../data/campaign.json');
+    const [source, iosCopy, vercelCopy] = await Promise.all([
       readFile(sourcePath, 'utf8'),
       readFile(iosPath, 'utf8'),
+      readFile(vercelPath, 'utf8'),
     ]);
     assert.equal(iosCopy, source);
+    assert.equal(vercelCopy, source);
   });
 });
 

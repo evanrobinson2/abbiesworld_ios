@@ -1,15 +1,8 @@
-import { readFile } from 'node:fs/promises';
-import { resolve } from 'node:path';
 import { inspectCampaign } from '../../lib/engine.js';
+import bundled from '../../../data/campaign.json' with { type: 'json' };
 
-const CAMPAIGN_PATH = resolve(
-  process.cwd(),
-  '../../AssetSources/World2/minigames/plink/campaign.json'
-);
-
-async function bundledCampaign() {
-  const raw = await readFile(CAMPAIGN_PATH, 'utf8');
-  return JSON.parse(raw);
+function bundledCampaign() {
+  return bundled;
 }
 
 async function serverCampaign() {
