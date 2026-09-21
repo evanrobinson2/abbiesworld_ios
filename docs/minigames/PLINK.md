@@ -87,3 +87,5 @@ curl -s http://127.0.0.1:5174/api/catalog | jq .inspect
 ```
 
 iOS launch flags: `-launchWorld2PeggleLand`, `-launchPlink`.
+
+Build order, locked product, and open questions: [PLINK-PLAN.md](./PLINK-PLAN.md). Newer thread requests override this page until that plan is folded back in.
