@@ -20,15 +20,14 @@ Evan requested this return path on 2026-09-26: art direction creates a concrete 
 - Art-request: `art-requests/fulfilled/20260926-abbie-regal-portrait.json`.
 - Still open: in-game screenshot / device layout check beside foe panel; then close the issue.
 
-## Cursor — AD dump runtime bind — 2026-09-26
+## Cursor — Temper matchups + economy retune — 2026-09-26
 
-Bound fulfilled source packs into catalog + loaders (artwork only for proposal powers — no new power gameplay):
-
-- **Power icons (10):** Fire / Refresh / Split / Tilt + Magnet / Bounce / Bubble / Spark / Ghost / Giant → `world2_plink_power_icon_*` (FRAME-FIT normalized). Portal / Lucky / empty-slot still not ready.
-- **Bell Market:** `world2_plate_marbleVoyage_shop_bellMarket_interior` wired in `MarbleVoyageShopView` (Fit + scrim).
-- **Climb tiles:** treasure / mystery / shrine → `world2_token_marbleVoyage_climb_*` on chart chips.
-- **Henchmen:** Crab / Grasshopper / Armadillo / Bat registered on `PlinkAttackerKind` + `henchmenPool`; idle imagesets bound. Porcupine remains opener.
-- Design-rule gate green (13 transparent UI assets). Device screenshot still pending.
+- **Temper** (Brawl / Swift / Craft): orbs + attackers; Strong ×1.35 / Soft ×0.75 cage damage.
+- Battle cast card shows Temper matchup line, foe tip, and bag stance tip (“Heavy Hands is Strong here”).
+- Boards by role/Temper: hench open paw, Swift lanterns, Craft chevrons, Brawl tails, summit cavern (lanes opened).
+- HP: hench 38 / mini 100 / summit 148; bites slightly softer early.
+- Shop: upgrade 18, buy specialty 36, destroy refund 14, gold peg 7 — kids can upgrade starters; thoughtful buys for bosses.
+- XCTest: `PlinkTemperTests` green.
 
 ## Cursor — Full-run spine + marble levels live — 2026-09-26
 

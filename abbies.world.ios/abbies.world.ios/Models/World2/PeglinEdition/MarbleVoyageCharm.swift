@@ -178,14 +178,14 @@ struct MarbleVoyageEconomyTuning: Equatable, Codable, Sendable {
     var shopInflation: Double
 
     static let recommended = MarbleVoyageEconomyTuning(
-        goldPegPrevalence: 0.15,
-        goldPegValue: 6,
-        healPrice: 25,
-        ballUpgradePrice: 25,
-        buyMarblePrice: 30,
-        destroyRefund: 8,
-        healFraction: 0.20,
-        shopInflation: 1.25
+        goldPegPrevalence: 0.16,
+        goldPegValue: 7,
+        healPrice: 22,
+        ballUpgradePrice: 18,
+        buyMarblePrice: 36,
+        destroyRefund: 14,
+        healFraction: 0.22,
+        shopInflation: 1.22
     )
 
     enum CodingKeys: String, CodingKey {

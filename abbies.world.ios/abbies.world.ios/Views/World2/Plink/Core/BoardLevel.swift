@@ -47,8 +47,8 @@ struct BoardLevel: Identifiable {
     private static let peglinCavernArcs = BoardLevel(
         id: "peglin.cavernArcs",
         name: "Cavern Arcs",
-        blurb: "Dense force pegs · curved rails · buckets",
-        balls: 12,
+        blurb: "Summit density · curved rails · buckets",
+        balls: 10,
         pegs: spaced(
             // Specials first so density culling never drops R / bombs / crits.
             cavernSpecials()
@@ -68,8 +68,8 @@ struct BoardLevel: Identifiable {
     private static let foxNineTails = BoardLevel(
         id: "fox.nineTails",
         name: "Nine Tails",
-        blurb: "Fox Land — nine spaced tail arcs",
-        balls: 16,
+        blurb: "Spaced tails — Brawl land bosses",
+        balls: 14,
         pegs: spaced(
             foxBody()
                 + foxTails(count: 9, pegsPerTail: 6)
@@ -92,8 +92,8 @@ struct BoardLevel: Identifiable {
     private static let foxPawPrint = BoardLevel(
         id: "fox.pawPrint",
         name: "Fox Paw",
-        blurb: "Fox Land — paw pads with open lanes",
-        balls: 16,
+        blurb: "Open lanes — forgiving hench scrap",
+        balls: 14,
         pegs: spaced(
             pad(cx: 0.50, cy: 0.54, r: 0.11, n: 8, kind: .orange)
                 + [PegSpec(nx: 0.50, ny: 0.54, kind: .orange)]
@@ -120,8 +120,8 @@ struct BoardLevel: Identifiable {
     private static let foxLanternRings = BoardLevel(
         id: "fox.lanternRings",
         name: "Lantern Rings",
-        blurb: "Fox Land — glowing rings with open lanes",
-        balls: 16,
+        blurb: "Ring lanes — Swift foes and flyers",
+        balls: 14,
         pegs: spaced(
             gappedRing(cx: 0.50, cy: 0.46, r: 0.30, n: 14, gapEvery: 7, kind: .orange)
                 + gappedRing(cx: 0.50, cy: 0.46, r: 0.22, n: 12, gapEvery: 6, kind: .orange)
@@ -146,8 +146,8 @@ struct BoardLevel: Identifiable {
     private static let foxTrailChevrons = BoardLevel(
         id: "fox.trailChevrons",
         name: "Fox Trail",
-        blurb: "Fox Land — chevron tracks down the grove",
-        balls: 16,
+        blurb: "Chevron tracks — Craft puzzle lanes",
+        balls: 14,
         pegs: spaced(
             chevron(cy: 0.24, halfWidth: 0.28, depth: 0.07, kind: .orange)
                 + chevron(cy: 0.36, halfWidth: 0.32, depth: 0.07, kind: .orange)
@@ -190,8 +190,8 @@ private func cavernForceField() -> [PegSpec] {
     ]
     for row in rows {
         for (i, x) in row.xs.enumerated() {
-            // Skip a few cells as lanes through the lattice.
-            if i % 9 == 4 { continue }
+            // Wider lanes through the lattice — summit still dense but readable.
+            if i % 7 == 3 || i % 11 == 5 { continue }
             out.append(PegSpec(nx: x, ny: row.cy, kind: .orange))
         }
     }

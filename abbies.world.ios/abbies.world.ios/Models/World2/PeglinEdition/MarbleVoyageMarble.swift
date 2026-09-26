@@ -55,7 +55,8 @@ struct MarbleVoyageOwnedMarble: Equatable, Codable, Identifiable, Sendable {
             bounciness: min(1.15, base.bounciness + bounceBoost),
             mass: base.mass,
             radius: base.radius,
-            trail: base.trail
+            trail: base.trail,
+            temper: base.temper
         )
     }
 
@@ -151,13 +152,16 @@ enum MarbleVoyageMarbleRules {
         return marble * global
     }
 
-    /// Per-shot mult for the marble about to fire (level physics companion).
+    /// Per-shot mult for the marble about to fire (level × Temper matchup).
     static func shotDamageMultiplier(
         marble: MarbleVoyageOwnedMarble,
-        ballLevel: Int
+        ballLevel: Int,
+        foeTemper: PlinkTemper? = nil
     ) -> Double {
         let global = 1.0 + 0.05 * Double(max(0, ballLevel - 1))
-        return marble.damageMultiplier * global
+        let base = marble.damageMultiplier * global
+        guard let foeTemper else { return base }
+        return base * marble.orb.temper.damageFactor(against: foeTemper)
     }
 
     /// Ordered orb ids the fight board fires (bag order).

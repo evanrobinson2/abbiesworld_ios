@@ -46,30 +46,30 @@ extension PeglinBattleRules {
     /// Spawn column — far right. Ground foes need `startingLane` free shots before bite.
     static let startingLane = 4
 
-    /// Per-foe HP (rescue target has none — only these fight).
+    /// Per-foe HP — early hench forgiving; summit hard without Strong Temper.
     static func foeMaxHP(
         for kind: PlinkAttackerKind,
         role: MarbleVoyageGangFightRole? = nil
     ) -> Int {
         switch role {
-        case .bigBoss: return 128
-        case .miniBoss: return 108
-        case .henchman: return 44
+        case .bigBoss: return 148
+        case .miniBoss: return 100
+        case .henchman: return 38
         case .none:
             break
         }
         if kind.isNamedCrew {
             switch kind {
-            case .raze: return 62
-            case .vix: return 54
-            case .morrow: return 56
-            case .nib: return 42
-            default: return 50
+            case .raze: return 66
+            case .vix: return 56
+            case .morrow: return 58
+            case .nib: return 44
+            default: return 52
             }
         }
-        // Flying hench: slightly less HP (they pressure earlier).
-        if kind.isFlying { return 32 }
-        return 38
+        // Flying hench: less HP (they pressure earlier).
+        if kind.isFlying { return 30 }
+        return 36
     }
 
     /// Bite damage when this foe reaches melee (or every turn if flying).
@@ -79,20 +79,20 @@ extension PeglinBattleRules {
     ) -> Int {
         var base: Int
         switch role {
-        case .bigBoss: base = 22
-        case .miniBoss: base = 18
-        case .henchman: base = 12
+        case .bigBoss: base = 20
+        case .miniBoss: base = 16
+        case .henchman: base = 11
         case .none:
             if kind.isNamedCrew {
                 switch kind {
-                case .raze: base = 15
-                case .vix: base = 13
-                case .morrow: base = 14
-                case .nib: base = 11
-                default: base = 13
+                case .raze: base = 14
+                case .vix: base = 12
+                case .morrow: base = 13
+                case .nib: base = 10
+                default: base = 12
                 }
             } else {
-                base = kind.isFlying ? 11 : 12
+                base = kind.isFlying ? 10 : 11
             }
         }
         return base

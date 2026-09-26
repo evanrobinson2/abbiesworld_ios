@@ -24,6 +24,8 @@ struct PlinkVoyageTunables: Equatable, Sendable {
     var hoverStacks: Int = 0
     /// Owned charm stacks for the right-side rail (charm → count).
     var charmStacks: [MarbleVoyageCharm: Int] = [:]
+    /// Kid bag stance tip vs the front foe (“Your Heavy Hands is Strong here”).
+    var bagTemperTip: String = ""
 }
 
 /// Peglin rescue battle: deck → board → damage **front bad guy**; bombs lob AOE at the cluster.
@@ -350,7 +352,10 @@ struct PlinkBattleHostView: View {
         guard let front = frontFoe else { return }
         enemyMaxHP = front.maxHP
         enemyHP = front.hp
+        bridge?.scene.frontFoeTemper = front.kind.temper
         bridge?.scene.loadFrontFoe(maxHP: front.maxHP, currentHP: front.hp)
+        // Refresh Strong/Soft for the marble already in the shooter.
+        bridge?.scene.refreshActiveShotDamageMultiplier()
     }
 
     private func applyFrontDamage(_ amount: Int) {
@@ -1831,6 +1836,8 @@ struct PlinkBattleHostView: View {
                         .foregroundStyle(.white.opacity(0.88))
                         .fixedSize(horizontal: false, vertical: true)
 
+                    fightTemperTipBlock(for: front.kind)
+
                     HStack(spacing: 8) {
                         fightStatChip(label: "HP", value: front.isDefeated ? "OUT" : "\(front.hp)/\(front.maxHP)")
                         fightStatChip(label: "ATK", value: "\(resolvedEnemyAttack)")
@@ -1892,6 +1899,43 @@ struct PlinkBattleHostView: View {
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .stroke(Color.white.opacity(0.14), lineWidth: 1)
         )
+    }
+
+    /// Temper matchup + kid tip — shares strength / weakness without a new screen.
+    @ViewBuilder
+    private func fightTemperTipBlock(for kind: PlinkAttackerKind) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text(kind.temperTipLine)
+                .font(.system(size: 12, weight: .black, design: .rounded))
+                .foregroundStyle(temperAccent(kind.temper))
+                .fixedSize(horizontal: false, vertical: true)
+            Text(kind.battleTip)
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .foregroundStyle(.white.opacity(0.82))
+                .fixedSize(horizontal: false, vertical: true)
+            if let tip = voyageEconomy?.bagTemperTip, !tip.isEmpty {
+                Text(tip)
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color(red: 0.75, green: 0.95, blue: 1.0))
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(10)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(Color.white.opacity(0.06), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(temperAccent(kind.temper).opacity(0.45), lineWidth: 1)
+        )
+        .accessibilityIdentifier("world2.plink.battle.temperTip")
+    }
+
+    private func temperAccent(_ temper: PlinkTemper) -> Color {
+        switch temper {
+        case .brawl: return Color(red: 1.0, green: 0.45, blue: 0.4)
+        case .swift: return Color(red: 0.35, green: 0.9, blue: 0.85)
+        case .craft: return Color(red: 1.0, green: 0.82, blue: 0.35)
+        }
     }
 
     private var fightRescueChip: some View {
@@ -2898,9 +2942,14 @@ struct PlinkBattleHostView: View {
                 stacks: voyageEconomy.hoverStacks
             )
         }
+        scene.frontFoeTemper = frontFoe?.kind.temper ?? waveAttacker.temper
         // Pause aim until the cutaway finishes revealing the board.
         scene.isPaused = true
-        let next = PlinkBattleBridge(scene: scene, boardIndex: PeglinBattleRules.boardIndex(for: enemyKind))
+        let boardIdx = PeglinBattleRules.boardIndex(
+            forAttacker: frontFoe?.kind ?? waveAttacker,
+            role: gangFightRole
+        )
+        let next = PlinkBattleBridge(scene: scene, boardIndex: boardIdx)
         next.onPhase = { phase in
             phaseLabel = phase
             if phase == "VICTORY" || phase == "DEFEAT" || phase == "RESCUED" || phase == "MELEE" {

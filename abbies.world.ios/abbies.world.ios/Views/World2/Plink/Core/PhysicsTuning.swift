@@ -18,6 +18,8 @@ struct OrbKind: Identifiable, Equatable, Hashable {
     let radius: Double
     /// Motion-blur echo + optional elemental accent — owned by this marble.
     let trail: OrbTrailStyle
+    /// Fight Temper — Strong / Soft vs foe Tempers.
+    let temper: PlinkTemper
 
     /// Bundled catalog imageset (`world2_orb_peglin_*`); SVG source under AssetSources.
     var catalogImageName: String { "world2_orb_peglin_\(id)" }
@@ -31,7 +33,8 @@ struct OrbKind: Identifiable, Equatable, Hashable {
             tint: (1.0, 0.92, 0.55),
             accent: .sparks,
             maxPoints: 28
-        )
+        ),
+        temper: .brawl
     )
     static let bounceberry = OrbKind(
         id: "bounceberry",
@@ -42,7 +45,8 @@ struct OrbKind: Identifiable, Equatable, Hashable {
             tint: (0.95, 0.45, 0.75),
             accent: .petals,
             maxPoints: 30
-        )
+        ),
+        temper: .swift
     )
     static let pebble = OrbKind(
         id: "pebble",
@@ -54,7 +58,8 @@ struct OrbKind: Identifiable, Equatable, Hashable {
             accent: .dust,
             maxPoints: 18,
             sampleDistance: 10
-        )
+        ),
+        temper: .brawl
     )
     static let zipbolt = OrbKind(
         id: "zipbolt",
@@ -66,7 +71,8 @@ struct OrbKind: Identifiable, Equatable, Hashable {
             accent: .bolts,
             maxPoints: 36,
             sampleDistance: 6
-        )
+        ),
+        temper: .swift
     )
     static let puff = OrbKind(
         id: "puff",
@@ -78,7 +84,8 @@ struct OrbKind: Identifiable, Equatable, Hashable {
             accent: .mist,
             maxPoints: 22,
             echoScale: 1.35
-        )
+        ),
+        temper: .craft
     )
 
     static let all: [OrbKind] = [sparkle, bounceberry, pebble, zipbolt, puff]

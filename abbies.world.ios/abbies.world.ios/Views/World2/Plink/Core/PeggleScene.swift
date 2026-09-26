@@ -63,6 +63,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     var deckMarbles: [MarbleVoyageOwnedMarble] = []
     /// Run-wide ballLevel (shop upgrades). Used with each marble's level.
     var runBallLevel: Int = 1
+    /// Front foe Temper for Strong / Soft marble damage (nil = no matchup).
+    var frontFoeTemper: PlinkTemper? = nil
     /// Active marble's shot mult (set in advanceDeckOrb / configure).
     private var activeShotDamageMultiplier: Double = 1.0
     /// Extra crit/refresh pegs seeded from Cycle charm.
@@ -290,8 +292,14 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         selectOrb(marble.tunedOrb())
         activeShotDamageMultiplier = MarbleVoyageMarbleRules.shotDamageMultiplier(
             marble: marble,
-            ballLevel: runBallLevel
+            ballLevel: runBallLevel,
+            foeTemper: frontFoeTemper
         )
+    }
+
+    /// Host calls when the front foe changes mid-fight.
+    func refreshActiveShotDamageMultiplier() {
+        syncActiveMarbleFromDeck()
     }
 
     private func advanceDeckOrb() {

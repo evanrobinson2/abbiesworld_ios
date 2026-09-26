@@ -18,7 +18,7 @@ enum MarbleVoyageMode: String, Codable, CaseIterable, Identifiable, Sendable {
     var blurb: String {
         switch self {
         case .campaign: return "Climb · rescue spirits · free Bizarro"
-        case .endless: return "How high can you climb? Difficulty never stops."
+        case .endless: return "Wave after wave · no map · how far can you go?"
         }
     }
 
@@ -469,11 +469,12 @@ struct MarbleVoyageRun: Equatable, Sendable {
 
     /// Foe bite per round — climbs in endless / late campaign, softened by Lullaby.
     func enemyAttack(for node: MarbleVoyageNode) -> Int {
-        var base = 14 + node.threat * 2 + (node.kind == .boss ? 10 : 0)
-        if node.gangRole == .miniBoss { base += 4 }
+        var base = 12 + node.threat * 2 + (node.kind == .boss ? 8 : 0)
+        if node.gangRole == .miniBoss { base += 3 }
+        if node.gangRole == .bigBoss { base += 5 }
         let capped = mode == .endless
-            ? min(42, base + fightsCleared / 2)
-            : min(36, base)
+            ? min(38, base + fightsCleared / 2)
+            : min(32, base)
         let softened = MarbleVoyageCharm.foeAttackReduction(lullabyStacks: charmStack(.lullaby))
         return max(1, capped - softened)
     }
@@ -816,76 +817,84 @@ struct MarbleVoyageRun: Equatable, Sendable {
         return run
     }
 
-    /// Grow the endless chart one column ahead of the player (idempotent).
+    /// Grow endless by one linear beat ahead of the player (no branching chart).
+    /// Pattern: fight → shop → fight → … ; every 4th wave a rest event; every 5th a boss wave.
     mutating func appendEndlessFrontier() {
         guard mode == .endless else { return }
         if !reachableChoices().isEmpty { return }
 
-        let nextColumn = (nodes.map(\.column).max() ?? 0) + 1
-        var rng = SeededGenerator(seed: seed &+ UInt64(nextColumn) &* 1_000_003)
-        // Col 1 fight, 2 event, 3 fight, 4 event, 5 boss, 6 fight…
-        let isBossWave = nextColumn % 5 == 0
-        let isEventColumn = !isBossWave && nextColumn % 2 == 0
-        let wave = nextColumn
+        let wave = (nodes.map(\.column).max() ?? 0) + 1
+        var rng = SeededGenerator(seed: seed &+ UInt64(wave) &* 1_000_003)
+        let isBossWave = wave % 5 == 0
+        let isRestWave = !isBossWave && wave % 4 == 0
 
-        let newIDs: [String]
+        let node: MarbleVoyageNode
         if isBossWave {
-            // Every 5th wave is a named crew member; every 3rd of those is the big boss.
             let bossIndex = max(1, wave / 5)
             let isBigBoss = bossIndex % 3 == 0
             let arc = (bossIndex - 1) % Self.gangMiniArcCount
             let crew = isBigBoss ? gang.bigBoss : gang.miniBoss(arcIndex: arc)
-            let id = "e\(wave)_boss"
-            nodes.append(
-                .init(
-                    id: id,
-                    kind: .boss,
-                    column: nextColumn,
-                    row: 1,
-                    title: isBigBoss
-                        ? "Summit wave · \(crew.displayName)"
-                        : "\(crew.displayName)’s wave",
-                    enemyKind: gang.hostage(forArc: bossIndex),
-                    threat: 6 + wave / 2,
-                    stage: wave,
-                    waveAttacker: crew,
-                    gangRole: isBigBoss ? .bigBoss : .miniBoss,
-                    miniArcIndex: isBigBoss ? -1 : arc
-                )
+            node = .init(
+                id: "e\(wave)_boss",
+                kind: .boss,
+                column: wave,
+                row: 1,
+                title: isBigBoss
+                    ? "Wave \(wave) · Summit · \(crew.displayName)"
+                    : "Wave \(wave) · \(crew.displayName)",
+                enemyKind: gang.hostage(forArc: bossIndex),
+                threat: 6 + wave / 2,
+                stage: wave,
+                waveAttacker: crew,
+                gangRole: isBigBoss ? .bigBoss : .miniBoss,
+                miniArcIndex: isBigBoss ? -1 : arc
             )
-            newIDs = [id]
-        } else if isEventColumn {
-            newIDs = Self.appendEventColumn(into: &nodes, column: nextColumn, stage: wave, rng: &rng)
+        } else if isRestWave {
+            let kinds: [MarbleVoyageNodeKind] = [.treasure, .mystery, .shrine]
+            let kind = kinds.randomElement(using: &rng) ?? .treasure
+            node = .init(
+                id: "e\(wave)_rest",
+                kind: kind,
+                column: wave,
+                row: 1,
+                title: "Wave \(wave) · \(Self.eventTitle(kind, stage: wave, rng: &rng))",
+                threat: wave,
+                stage: wave,
+                miniArcIndex: (wave / 2) % Self.gangMiniArcCount
+            )
         } else {
-            let left = "e\(wave)a"
-            let right = "e\(wave)b"
-            let threat = max(1, 1 + wave / 2)
             let arc = (wave / 2) % Self.gangMiniArcCount
-            for (index, id) in [left, right].enumerated() {
-                nodes.append(
-                    .init(
-                        id: id,
-                        kind: .fight,
-                        column: nextColumn,
-                        row: index == 0 ? 0 : 2,
-                        title: index == 0 ? "Wave \(wave) · Left path" : "Wave \(wave) · Right path",
-                        enemyKind: Self.enemyForStage(wave, branch: index),
-                        threat: threat,
-                        stage: wave,
-                        waveAttacker: gang.randomHenchman(
-                            seedSalt: seed &+ UInt64(wave) &* 7919 &+ UInt64(index)
-                        ),
-                        gangRole: .henchman,
-                        miniArcIndex: arc
-                    )
-                )
-            }
-            newIDs = [left, right]
+            node = .init(
+                id: "e\(wave)",
+                kind: .fight,
+                column: wave,
+                row: 1,
+                title: "Wave \(wave)",
+                enemyKind: Self.enemyForStage(wave, branch: 0),
+                threat: max(1, 1 + wave / 2),
+                stage: wave,
+                waveAttacker: gang.randomHenchman(
+                    seedSalt: seed &+ UInt64(wave) &* 7919
+                ),
+                gangRole: .henchman,
+                miniArcIndex: arc
+            )
         }
 
-        for to in newIDs {
-            edges.append(.init(from: currentNodeID, to: to))
-        }
+        nodes.append(node)
+        edges.append(.init(from: currentNodeID, to: node.id))
+    }
+
+    /// Next endless beat waiting on the progress hub (nil if frontier empty).
+    var endlessNextBeat: MarbleVoyageNode? {
+        guard mode == .endless else { return nil }
+        return reachableChoices().first
+    }
+
+    /// 1-based wave index for chrome (cleared fights + 1, or next beat stage).
+    var endlessDisplayWave: Int {
+        if let next = endlessNextBeat, next.stage > 0 { return next.stage }
+        return max(1, fightsCleared + 1)
     }
 
     // MARK: - Naming / enemies

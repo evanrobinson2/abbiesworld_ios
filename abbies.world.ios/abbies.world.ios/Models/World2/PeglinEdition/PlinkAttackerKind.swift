@@ -131,6 +131,66 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
         }
     }
 
+    /// Fight Temper — drives Strong / Soft marble tips and damage.
+    var temper: PlinkTemper {
+        switch self {
+        case .raze, .porcupineBoxer, .crabPincher, .armadilloBlocker,
+             .coyoteBruiser, .hyena, .thornbackBeetle:
+            return .brawl
+        case .vix, .nib, .batDivekicker, .gangFox, .vulture, .cawScout, .lizard:
+            return .swift
+        case .morrow, .grasshopperKickboxer, .briarToad, .thornhornMantis:
+            return .craft
+        }
+    }
+
+    /// Kid cast-card tip — shares strength / weakness in plain words.
+    var battleTip: String {
+        switch self {
+        case .raze:
+            return "Brawler. Hits hard up close. Soft vs Craft — bring Puff!"
+        case .vix:
+            return "Quick lieutenant. Soft vs Brawl — Pebble or Sparkle bites harder."
+        case .morrow:
+            return "Crafty coin-counter. Soft vs Swift — Zipbolt or Bounceberry."
+        case .nib:
+            return "Speedy hanger-on. Soft vs Brawl — heavy marbles help."
+        case .porcupineBoxer:
+            return "First scrap. Brawl temper — Craft balls (Puff) are Strong."
+        case .crabPincher:
+            return "Big claw, Brawl temper. Soft vs Craft."
+        case .grasshopperKickboxer:
+            return "Springy kicker — Craft temper. Soft vs Swift zippers."
+        case .armadilloBlocker:
+            return "Shell bumper — Brawl. Soft vs Craft balls."
+        case .batDivekicker:
+            return "Flying dive — Swift. Soft vs Brawl heavies."
+        case .coyoteBruiser:
+            return "Spike coyote — Brawl. Soft vs Craft."
+        case .gangFox:
+            return "Punk fox — Swift. Soft vs Brawl."
+        case .hyena:
+            return "Laughing lunge — Brawl. Soft vs Craft."
+        case .lizard:
+            return "Slippery Swift. Soft vs Brawl."
+        case .vulture:
+            return "Diving Swift flier. Soft vs Brawl."
+        case .cawScout:
+            return "Grove lookout — Swift flyer. Soft vs Brawl."
+        case .thornbackBeetle:
+            return "Armored Brawl. Soft vs Craft."
+        case .briarToad:
+            return "Sticky Craft toad. Soft vs Swift."
+        case .thornhornMantis:
+            return "Crafty cuts. Soft vs Swift."
+        }
+    }
+
+    /// Cast-card Temper + matchup summary.
+    var temperTipLine: String {
+        "\(temper.title) · \(temper.matchupLine)"
+    }
+
     /// Kid-facing role blurb for chrome / feed.
     var roleBlurb: String {
         switch self {

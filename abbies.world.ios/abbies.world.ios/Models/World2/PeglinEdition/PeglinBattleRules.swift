@@ -70,7 +70,7 @@ enum PeglinBattleRules {
     /// Peglin-style cavern is the default fight board (dense force pegs + rails).
     static func boardID(for kind: PeglinEnemyKind?) -> String {
         switch kind {
-        case .foxSpirit, .burrowJackal: return "fox.pawPrint" // open lanes — cavern arcs blocked shots through
+        case .foxSpirit, .burrowJackal: return "fox.pawPrint"
         case .brambleSpirit: return "fox.pawPrint"
         case .stagSpirit: return "fox.lanternRings"
         case .bizarroAbbie: return "fox.lanternRings"
@@ -78,7 +78,38 @@ enum PeglinBattleRules {
         }
     }
 
+    /// Voyage fight boards — Temper / role pick denser or more open layouts.
+    static func boardID(
+        forAttacker attacker: PlinkAttackerKind?,
+        role: MarbleVoyageGangFightRole?
+    ) -> String {
+        switch role {
+        case .bigBoss:
+            // Summit: densest readable board — reward careful aim + Strong Temper.
+            return "peglin.cavernArcs"
+        case .miniBoss:
+            switch attacker?.temper {
+            case .swift: return "fox.lanternRings"
+            case .craft: return "fox.trailChevrons"
+            case .brawl, .none: return "fox.nineTails"
+            }
+        case .henchman, .none:
+            switch attacker?.temper {
+            case .swift: return "fox.lanternRings"
+            case .craft: return "fox.trailChevrons"
+            case .brawl, .none: return "fox.pawPrint"
+            }
+        }
+    }
+
     static func boardIndex(for kind: PeglinEnemyKind?) -> Int {
         BoardLevel.index(ofID: boardID(for: kind))
+    }
+
+    static func boardIndex(
+        forAttacker attacker: PlinkAttackerKind?,
+        role: MarbleVoyageGangFightRole?
+    ) -> Int {
+        BoardLevel.index(ofID: boardID(forAttacker: attacker, role: role))
     }
 }

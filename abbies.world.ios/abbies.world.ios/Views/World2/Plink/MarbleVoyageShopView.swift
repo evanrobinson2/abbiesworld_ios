@@ -92,7 +92,7 @@ struct MarbleVoyageShopView: View {
             Text("Bell Market")
                 .font(.system(size: 34, weight: .black, design: .rounded))
                 .foregroundStyle(.white)
-            Text("Spend coins before the next climb — buy, upgrade, or scrap marbles.")
+            Text("Spend coins before the next climb — upgrade starters cheap, buy specialties for boss Tempers, or scrap to reshape.")
                 .font(.system(size: 14, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.85))
                 .multilineTextAlignment(.center)

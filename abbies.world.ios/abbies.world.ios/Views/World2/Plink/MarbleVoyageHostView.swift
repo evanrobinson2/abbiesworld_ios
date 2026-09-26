@@ -400,8 +400,13 @@ struct MarbleVoyageHostView: View {
         ZStack {
             switch active.phase {
             case .map:
-                mapPhase
-                    .transition(.opacity)
+                if active.mode == .endless {
+                    endlessProgressPhase(active)
+                        .transition(.opacity)
+                } else {
+                    mapPhase
+                        .transition(.opacity)
+                }
             case .fight(let nodeID):
                 if let node = active.node(nodeID) {
                     fightPhase(node)
@@ -456,7 +461,7 @@ struct MarbleVoyageHostView: View {
             }
 
             // Adaptive leaves when not on the climb (climb owns scroll-parallax layers).
-            if case .map = active.phase {
+            if case .map = active.phase, active.mode == .campaign {
                 EmptyView()
             } else {
                 MarbleVoyageSceneAtmosphere(
@@ -524,6 +529,165 @@ struct MarbleVoyageHostView: View {
     }
 
     // MARK: - Map
+
+    /// Endless has no climb chart — a wave hub with clear depth / next beat / fight.
+    private func endlessProgressPhase(_ active: MarbleVoyageRun) -> some View {
+        let next = active.endlessNextBeat
+        let wave = active.endlessDisplayWave
+        let best = max(active.endlessBest, active.fightsCleared)
+        let foe = next?.waveAttacker
+        let isRest = next.map { $0.kind == .treasure || $0.kind == .mystery || $0.kind == .shrine } ?? false
+        let cta = isRest ? "OPEN" : "FIGHT"
+
+        return ZStack {
+            LinearGradient(
+                colors: [
+                    Color(red: 0.06, green: 0.12, blue: 0.22),
+                    Color(red: 0.12, green: 0.22, blue: 0.36),
+                    Color(red: 0.18, green: 0.1, blue: 0.22),
+                ],
+                startPoint: .topLeading,
+                endPoint: .bottomTrailing
+            )
+            .ignoresSafeArea()
+
+            VStack(spacing: 0) {
+                headerBar
+                Spacer(minLength: 12)
+
+                VStack(spacing: 18) {
+                    Text("ENDLESS")
+                        .font(.system(size: 14, weight: .black, design: .rounded))
+                        .tracking(3)
+                        .foregroundStyle(Color(red: 0.55, green: 0.95, blue: 1.0))
+
+                    Text("Wave \(wave)")
+                        .font(.system(size: 48, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+
+                    HStack(spacing: 18) {
+                        endlessStatChip(label: "Cleared", value: "\(active.fightsCleared)")
+                        endlessStatChip(label: "Best", value: "\(best)")
+                        endlessStatChip(label: "HP", value: "\(active.playerHP)/\(active.playerMaxHP)")
+                        endlessStatChip(label: "Coins", value: "\(active.coins)")
+                    }
+
+                    if let next {
+                        VStack(spacing: 10) {
+                            if let foe, !isRest {
+                                PlinkAttackerBattlePortrait(kind: foe, pose: .idle, size: 120)
+                                    .shadow(color: .black.opacity(0.45), radius: 10, y: 4)
+                                Text(foe.displayName.uppercased())
+                                    .font(.system(size: 22, weight: .black, design: .rounded))
+                                    .foregroundStyle(.white)
+                                Text(foe.roleBlurb)
+                                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                                    .foregroundStyle(.white.opacity(0.75))
+                            } else {
+                                Image(systemName: next.kind.systemIcon)
+                                    .font(.system(size: 52, weight: .black))
+                                    .foregroundStyle(.white)
+                                Text(next.kind.chartLabel)
+                                    .font(.system(size: 22, weight: .black, design: .rounded))
+                                    .foregroundStyle(.white)
+                            }
+                            Text(next.title)
+                                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                .foregroundStyle(.white.opacity(0.7))
+                                .multilineTextAlignment(.center)
+                        }
+                        .padding(.vertical, 12)
+                        .padding(.horizontal, 20)
+                        .frame(maxWidth: 420)
+                        .background(.ultraThinMaterial.opacity(0.9), in: RoundedRectangle(cornerRadius: 24, style: .continuous))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                                .stroke(.white.opacity(0.35), lineWidth: 1.5)
+                        )
+
+                        Button {
+                            MarbleVoyageAudio.tap()
+                            beginEndlessBeat(next)
+                        } label: {
+                            Text(cta)
+                                .font(.system(size: 22, weight: .black, design: .rounded))
+                                .foregroundStyle(.white)
+                                .frame(maxWidth: 280)
+                                .padding(.vertical, 16)
+                                .background(
+                                    Capsule().fill(
+                                        isRest
+                                            ? Color(red: 0.35, green: 0.65, blue: 0.95)
+                                            : Color(red: 0.9, green: 0.32, blue: 0.38)
+                                    )
+                                )
+                                .overlay(
+                                    Capsule().stroke(Color.white.opacity(0.65), lineWidth: 2)
+                                )
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("world2.marbleVoyage.endless.continue")
+                    } else {
+                        Text("Preparing next wave…")
+                            .font(.system(size: 16, weight: .semibold, design: .rounded))
+                            .foregroundStyle(.white.opacity(0.7))
+                            .onAppear {
+                                var updated = active
+                                updated.appendEndlessFrontier()
+                                run = updated
+                            }
+                    }
+
+                    Text("No map — just the next wave. Heal only at Bell Market.")
+                        .font(.system(size: 13, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.55))
+                        .multilineTextAlignment(.center)
+                        .padding(.horizontal, 28)
+                }
+
+                Spacer(minLength: 24)
+            }
+            .padding(.horizontal, 24)
+        }
+        .accessibilityIdentifier("world2.marbleVoyage.endless.progress")
+    }
+
+    private func endlessStatChip(label: String, value: String) -> some View {
+        VStack(spacing: 2) {
+            Text(value)
+                .font(.system(size: 18, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
+                .monospacedDigit()
+            Text(label)
+                .font(.system(size: MarbleVoyageDesignRules.battleFeedMinMetaFont, weight: .bold, design: .rounded))
+                .foregroundStyle(.white.opacity(0.55))
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(Color.black.opacity(0.28), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+    }
+
+    /// Curtain into the next endless fight / rest — no climb march.
+    private func beginEndlessBeat(_ node: MarbleVoyageNode) {
+        guard let active = run, active.mode == .endless, case .map = active.phase else { return }
+        MarbleVoyageAudio.sceneTransition()
+        withAnimation(.easeIn(duration: 0.22)) {
+            sceneCurtain = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            withAnimation(.easeInOut(duration: 0.35)) {
+                run?.choose(node.id)
+                if case .event = run?.phase {
+                    prepareEvent(for: node)
+                }
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) {
+                withAnimation(.easeOut(duration: 0.45)) {
+                    sceneCurtain = false
+                }
+            }
+        }
+    }
 
     private var mapPhase: some View {
         ZStack {
@@ -1943,7 +2107,7 @@ struct MarbleVoyageHostView: View {
             overrideEnemyMaxHP: active.map { $0.enemyMaxHP(for: node) },
             overridePlayerMaxHP: active?.playerMaxHP,
             overrideEnemyAttack: active.map { $0.enemyAttack(for: node) },
-            voyageEconomy: active.map { voyageTunables(for: $0) },
+            voyageEconomy: active.map { voyageTunables(for: $0, foe: node.waveAttacker) },
             startingDeck: active?.fightDeckOrbIDs,
             startingMarbles: active?.marbleCollection,
             startingBallLevel: active?.ballLevel ?? 1,
@@ -1996,8 +2160,12 @@ struct MarbleVoyageHostView: View {
     }
 
     /// Gold prevalence / ball power / charm effects the board needs for this fight.
-    private func voyageTunables(for run: MarbleVoyageRun) -> PlinkVoyageTunables {
-        PlinkVoyageTunables(
+    private func voyageTunables(
+        for run: MarbleVoyageRun,
+        foe: PlinkAttackerKind?
+    ) -> PlinkVoyageTunables {
+        let foeTemper = foe?.temper ?? .brawl
+        return PlinkVoyageTunables(
             goldPegPrevalence: run.economy.goldPegPrevalence,
             goldPegValue: run.effectiveGoldPegValue,
             ballDamageMultiplier: run.fightDamageMultiplier,
@@ -2011,6 +2179,10 @@ struct MarbleVoyageHostView: View {
                     let n = run.charmStack(charm)
                     return n > 0 ? (charm, n) : nil
                 }
+            ),
+            bagTemperTip: PlinkTemperRules.bagTip(
+                collection: run.marbleCollection,
+                foe: foeTemper
             )
         )
     }
