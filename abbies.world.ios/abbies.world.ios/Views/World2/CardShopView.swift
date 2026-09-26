@@ -58,6 +58,10 @@ struct World2CardShopView: View {
                 soldCelebration
             }
         }
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.cardShop.exit",
+            onExit: onExit
+        )
     }
     
     private var backgroundGradient: some View {
@@ -73,16 +77,6 @@ struct World2CardShopView: View {
     
     private var shopHeader: some View {
         HStack {
-            Button(action: onExit) {
-                HStack(spacing: 8) {
-                    Image(systemName: "arrow.left.circle.fill")
-                        .font(.system(size: 28))
-                    Text("Back to Map")
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                }
-                .foregroundColor(.white)
-            }
-            
             Spacer()
             
             VStack(spacing: 4) {

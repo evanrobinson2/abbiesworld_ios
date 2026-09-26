@@ -4,19 +4,19 @@
 //
 //  Travel screen opened from the World Teleporter inventory item.
 //
-//  Lists every reachable World 2 scene — including Art Garden, which has no
-//  overland adjacency — so a player can hop without walking the map edges.
+//  Lists every reachable scene — compiled worlds, or the signed-in document.
 //
 
 import SwiftUI
+import UIKit
 
 struct World2WorldTeleporterView: View {
-    let destinations: [World]
-    let currentWorldID: WorldId?
-    let onTravel: (WorldId) -> Void
+    let destinations: [World2TeleporterDestination]
+    let currentSceneID: String?
+    let onTravel: (String) -> Void
     let onClose: () -> Void
 
-    @State private var selectedID: WorldId?
+    @State private var selectedID: String?
 
     var body: some View {
         GeometryReader { geo in
@@ -28,7 +28,6 @@ struct World2WorldTeleporterView: View {
                     Spacer(minLength: 8)
                     destinationGrid
                     Spacer(minLength: 8)
-                    travelBar
                 }
                 .padding(.horizontal, 22)
                 .padding(.vertical, 16)
@@ -36,7 +35,24 @@ struct World2WorldTeleporterView: View {
         }
         .ignoresSafeArea()
         .onAppear {
-            selectedID = currentWorldID ?? destinations.first?.id
+            selectedID = currentSceneID ?? destinations.first?.id
+        }
+        .world2InteriorActions(
+            destinations.map { destination in
+                World2ThumbAction(
+                    id: destination.id,
+                    title: destination.name,
+                    icon: "globe",
+                    accessibilityID: "world2.teleporter.destination.\(destination.id)"
+                )
+            },
+            selectedID: selectedID,
+            exitTitle: "Exit",
+            exitAccessibilityID: "world2.teleporter.close",
+            onExit: onClose
+        ) { id in
+            selectedID = id
+            onTravel(id)
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.teleporter.screen")
@@ -44,23 +60,12 @@ struct World2WorldTeleporterView: View {
 
     private var topBar: some View {
         HStack {
-            Button(action: onClose) {
-                Label("Close", systemImage: "xmark")
-                    .font(.system(size: 16, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
-                    .background(.black.opacity(0.7), in: Capsule())
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("world2.teleporter.close")
-
             Spacer()
 
             VStack(alignment: .trailing, spacing: 2) {
                 Text("World Teleporter")
                     .font(.system(size: 20, weight: .black, design: .rounded))
-                Text("Pick a scene, then Travel")
+                Text("Tap a land to go")
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .opacity(0.9)
             }
@@ -79,14 +84,14 @@ struct World2WorldTeleporterView: View {
                 ],
                 spacing: 14
             ) {
-                ForEach(destinations) { world in
+                ForEach(destinations) { destination in
                     Button {
-                        selectedID = world.id
+                        selectedID = destination.id
                     } label: {
-                        destinationCard(world)
+                        destinationCard(destination)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityIdentifier("world2.teleporter.dest.\(world.id.rawValue)")
+                    .accessibilityIdentifier("world2.teleporter.dest.\(destination.id)")
                 }
             }
             .padding(18)
@@ -95,12 +100,12 @@ struct World2WorldTeleporterView: View {
         .frame(maxHeight: 420)
     }
 
-    private func destinationCard(_ world: World) -> some View {
-        let isSelected = selectedID == world.id
-        let isHere = currentWorldID == world.id
+    private func destinationCard(_ destination: World2TeleporterDestination) -> some View {
+        let isSelected = selectedID == destination.id
+        let isHere = currentSceneID == destination.id
         return VStack(alignment: .leading, spacing: 8) {
             HStack {
-                Image(systemName: iconName(for: world.id))
+                Image(systemName: iconName(for: destination.id))
                     .font(.system(size: 22, weight: .bold))
                 Spacer()
                 if isHere {
@@ -111,10 +116,10 @@ struct World2WorldTeleporterView: View {
                         .background(.green.opacity(0.9), in: Capsule())
                 }
             }
-            Text(world.name)
+            Text(destination.name)
                 .font(.system(size: 16, weight: .black, design: .rounded))
                 .multilineTextAlignment(.leading)
-            Text(world.description)
+            Text(destination.summary)
                 .font(.system(size: 12, weight: .medium, design: .rounded))
                 .foregroundStyle(.white.opacity(0.85))
                 .lineLimit(3)
@@ -133,44 +138,22 @@ struct World2WorldTeleporterView: View {
         )
     }
 
-    private var travelBar: some View {
-        let canTravel = selectedID != nil && selectedID != currentWorldID
-        return Button {
-            guard let selectedID else { return }
-            onTravel(selectedID)
-        } label: {
-            Label(
-                canTravel
-                    ? "Travel to \(destinations.first { $0.id == selectedID }?.name ?? "Scene")"
-                    : (selectedID == currentWorldID ? "You are already here" : "Choose a scene"),
-                systemImage: "airplane"
-            )
-            .font(.system(size: 18, weight: .black, design: .rounded))
-            .foregroundStyle(.white)
-            .frame(maxWidth: .infinity)
-            .padding(.vertical, 16)
-            .background(
-                canTravel ? Color.orange : Color.gray.opacity(0.7),
-                in: RoundedRectangle(cornerRadius: 18)
-            )
-        }
-        .buttonStyle(.plain)
-        .disabled(!canTravel)
-        .accessibilityIdentifier("world2.teleporter.travel")
-        .padding(.bottom, 8)
-    }
-
     @ViewBuilder
     private func teleporterBackdrop(size: CGSize) -> some View {
-        // Reuse the Character Studio workshop plate as travel-room chrome until
-        // a dedicated teleporter plate is painted.
-        if let image = AssetBootstrapService.shared.image(for: "poi.characterStudio.interior")
-            ?? UIImage(named: "world2_interior_characterStudio") {
+        if let image = AssetBootstrapService.shared.image(for: "poi.characterStudio.interior") {
             Image(uiImage: image)
                 .resizable()
                 .scaledToFill()
                 .frame(width: size.width, height: size.height)
                 .clipped()
+        } else if let placeholder = UIImage(named: "under_construction_scene")
+            ?? UIImage(named: "under_construction") {
+            Image(uiImage: placeholder)
+                .resizable()
+                .scaledToFill()
+                .frame(width: size.width, height: size.height)
+                .clipped()
+                .opacity(0.55)
         } else {
             LinearGradient(
                 colors: [
@@ -183,8 +166,8 @@ struct World2WorldTeleporterView: View {
         }
     }
 
-    private func iconName(for id: WorldId) -> String {
-        switch id {
+    private func iconName(for id: String) -> String {
+        switch WorldId(rawValue: id) {
         case .home: return "house.fill"
         case .work: return "wrench.and.screwdriver.fill"
         case .farm: return "leaf.fill"
@@ -193,6 +176,11 @@ struct World2WorldTeleporterView: View {
         case .threeBears: return "house.and.flag.fill"
         case .artGarden: return "paintpalette.fill"
         case .evan: return "building.2.fill"
+        case .peglinEdition: return "circle.grid.cross.fill"
+        case .none:
+            if id.contains("spooky") { return "moon.fill" }
+            if id.contains("home") { return "house.fill" }
+            return "globe.americas.fill"
         }
     }
 }
@@ -200,28 +188,18 @@ struct World2WorldTeleporterView: View {
 #Preview {
     World2WorldTeleporterView(
         destinations: [
-            World(
-                id: .home,
-                name: "Home World",
-                description: "Three welcoming places",
-                backgroundAsset: "map.home",
-                lightMusicTrack: "music.home.light",
-                intenseMusicTrack: "music.home.intense",
-                adjacentWorlds: [],
-                ambiance: .init(primaryColor: "#56AB2F", secondaryColor: "#A8E063", mood: "welcoming")
+            World2TeleporterDestination(
+                id: "scene.home",
+                name: "Abbie's World",
+                summary: "The live world"
             ),
-            World(
-                id: .artGarden,
-                name: "Art Garden",
-                description: "Terraced gardens and a Character Studio",
-                backgroundAsset: "map.artGarden",
-                lightMusicTrack: "music.home.light",
-                intenseMusicTrack: "music.home.intense",
-                adjacentWorlds: [],
-                ambiance: .init(primaryColor: "#6FBF73", secondaryColor: "#F6D365", mood: "painterly")
+            World2TeleporterDestination(
+                id: "scene.spookyLand",
+                name: "Spooky Land",
+                summary: "A second scene on the document"
             ),
         ],
-        currentWorldID: .home,
+        currentSceneID: "scene.home",
         onTravel: { _ in },
         onClose: {}
     )

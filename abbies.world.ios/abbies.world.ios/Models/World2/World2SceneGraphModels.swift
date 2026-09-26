@@ -267,7 +267,7 @@ extension World2SceneHardpoint {
 
 /// Where a placed POI sits and how big it reads on the painted map.
 struct World2POITransform: Codable, Equatable, Sendable {
-    static let scaleRange: ClosedRange<Double> = 0.35...2.40
+    static let scaleRange: ClosedRange<Double> = 0.55...2.40
     static let rotationRange: ClosedRange<Double> = -180...180
 
     var position: World2NormalizedPoint
@@ -343,6 +343,8 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
     /// Instances authored in the shipped scene catalog cannot be deleted by the
     /// editor, only moved. Player-made instances can be removed.
     let isAuthored: Bool
+    /// Sandbox glow / sway / tint / reskin knobs.
+    var presentation: World2POIPresentation?
 
     init(
         id: String? = nil,
@@ -353,7 +355,8 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
         zIndex: Int = 0,
         createdAt: Date = Date(),
         createdByPlayerID: String? = nil,
-        isAuthored: Bool = false
+        isAuthored: Bool = false,
+        presentation: World2POIPresentation? = nil
     ) {
         self.id = id ?? "poiInstance.\(UUID().uuidString)"
         self.archetypeID = archetypeID
@@ -364,9 +367,14 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
         self.createdAt = createdAt
         self.createdByPlayerID = createdByPlayerID
         self.isAuthored = isAuthored
+        self.presentation = presentation
     }
 
     var isSnapped: Bool { hardpointID != nil }
+
+    var resolvedPresentation: World2POIPresentation {
+        presentation ?? .default
+    }
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -378,6 +386,7 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
         case createdAt
         case createdByPlayerID
         case isAuthored
+        case presentation
     }
 
     init(from decoder: Decoder) throws {
@@ -394,7 +403,11 @@ struct World2POIInstance: Codable, Identifiable, Equatable, Sendable {
                 String.self,
                 forKey: .createdByPlayerID
             ),
-            isAuthored: try container.decodeIfPresent(Bool.self, forKey: .isAuthored) ?? false
+            isAuthored: try container.decodeIfPresent(Bool.self, forKey: .isAuthored) ?? false,
+            presentation: try container.decodeIfPresent(
+                World2POIPresentation.self,
+                forKey: .presentation
+            )
         )
     }
 }
@@ -423,6 +436,8 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
     /// Optional muted looping video semantic ID (e.g. map.artGarden.ambient).
     /// When resolved, the map plate prefers this over the still poster.
     var ambientVideoAsset: String?
+    /// Document song id. Played when this scene is the map.
+    var musicTrackID: String?
     var backdropStyle: World2SceneBackdropStyle?
     var hardpoints: [World2SceneHardpoint]
     var poiInstances: [World2POIInstance]
@@ -441,6 +456,7 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         summary: String,
         backgroundAsset: String = "",
         ambientVideoAsset: String? = nil,
+        musicTrackID: String? = nil,
         backdropStyle: World2SceneBackdropStyle? = nil,
         hardpoints: [World2SceneHardpoint] = [],
         poiInstances: [World2POIInstance] = [],
@@ -455,6 +471,7 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         self.summary = summary
         self.backgroundAsset = backgroundAsset
         self.ambientVideoAsset = ambientVideoAsset
+        self.musicTrackID = musicTrackID
         self.backdropStyle = backdropStyle
         self.hardpoints = hardpoints
         self.poiInstances = poiInstances
@@ -507,6 +524,7 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
         case name
         case summary
         case backgroundAsset
+        case musicTrackID
         case backdropStyle
         case hardpoints
         case poiInstances
@@ -527,6 +545,7 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
                 String.self,
                 forKey: .backgroundAsset
             ) ?? "",
+            musicTrackID: try container.decodeIfPresent(String.self, forKey: .musicTrackID),
             backdropStyle: try container.decodeIfPresent(
                 World2SceneBackdropStyle.self,
                 forKey: .backdropStyle
@@ -558,6 +577,23 @@ struct World2SceneDefinition: Codable, Identifiable, Equatable, Sendable {
                 forKey: .createdByPlayerID
             )
         )
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(id, forKey: .id)
+        try container.encode(name, forKey: .name)
+        try container.encode(summary, forKey: .summary)
+        try container.encode(backgroundAsset, forKey: .backgroundAsset)
+        try container.encodeIfPresent(musicTrackID, forKey: .musicTrackID)
+        try container.encodeIfPresent(backdropStyle, forKey: .backdropStyle)
+        try container.encode(hardpoints, forKey: .hardpoints)
+        try container.encode(poiInstances, forKey: .poiInstances)
+        try container.encode(isMutableByPlayer, forKey: .isMutableByPlayer)
+        try container.encode(showsOpenHardpointsToPlayers, forKey: .showsOpenHardpointsToPlayers)
+        try container.encode(isDeveloperPlaceholder, forKey: .isDeveloperPlaceholder)
+        try container.encode(createdAt, forKey: .createdAt)
+        try container.encodeIfPresent(createdByPlayerID, forKey: .createdByPlayerID)
     }
 }
 

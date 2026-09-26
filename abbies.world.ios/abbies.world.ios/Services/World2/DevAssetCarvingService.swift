@@ -220,6 +220,101 @@ enum DevAssetCarvingService {
         }
     }
 
+    /// Every distinct object on an atlas, reading order (top-to-bottom, left-to-right).
+    nonisolated static func carveSheetIslands(from data: Data) throws -> [Data] {
+        let result = try carve(data: data)
+        let sorted = result.assets.sorted { lhs, rhs in
+            let rowSlop: CGFloat = 28
+            if abs(lhs.sourceBounds.minY - rhs.sourceBounds.minY) > rowSlop {
+                return lhs.sourceBounds.minY < rhs.sourceBounds.minY
+            }
+            return lhs.sourceBounds.minX < rhs.sourceBounds.minX
+        }
+        let pngs = sorted.compactMap { $0.strippedImage.pngData() }
+        guard !pngs.isEmpty else { throw DevAssetCarvingError.noAssets }
+        return pngs
+    }
+
+    /// Largest foreground object with the border color stripped. Decorations and POIs.
+    nonisolated static func carveForegroundPNG(from data: Data) throws -> Data {
+        let result = try carve(data: data)
+        guard let best = result.assets.max(by: { lhs, rhs in
+            lhs.sourceBounds.width * lhs.sourceBounds.height
+                < rhs.sourceBounds.width * rhs.sourceBounds.height
+        }),
+        let png = best.strippedImage.pngData() else {
+            throw DevAssetCarvingError.noAssets
+        }
+        return png
+    }
+
+    /// Map markers and tray tiles. Interiors and scene plates stay full paintings.
+    nonisolated static func shouldCutoutSprite(semanticId: String) -> Bool {
+        let id = semanticId.lowercased()
+        if id.contains("portal") { return true }
+        if id.contains("badge") { return true }
+        if id.hasPrefix("poi."), !id.contains(".interior") { return true }
+        if id.hasPrefix("decoration.") { return true }
+        return false
+    }
+
+    nonisolated static func cutoutIfNeeded(_ image: UIImage, semanticId: String) -> UIImage {
+        guard shouldCutoutSprite(semanticId: semanticId) else { return image }
+        guard let data = image.pngData() else { return image }
+        let cut = spriteCutoutPNG(from: data)
+        if cut == data { return image }
+        return UIImage(data: cut) ?? image
+    }
+
+    /// Transparent PNG for a sprite. Already-cut-out art is left alone.
+    nonisolated static func spriteCutoutPNG(from data: Data) -> Data {
+        if hasTransparentBorder(data) { return data }
+        if let carved = try? carveForegroundPNG(from: data) {
+            return carved
+        }
+        if let keyed = try? knockoutBorderPNG(from: data) {
+            return keyed
+        }
+        return data
+    }
+
+    nonisolated static func hasTransparentBorder(_ data: Data) -> Bool {
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
+            return false
+        }
+        let options: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: 64,
+            kCGImageSourceShouldCacheImmediately: true,
+        ]
+        guard let image = CGImageSourceCreateThumbnailAtIndex(
+            source,
+            0,
+            options as CFDictionary
+        ) else {
+            return false
+        }
+        let width = image.width
+        let height = image.height
+        guard width > 1, height > 1 else { return false }
+        var rgba = [UInt8](repeating: 0, count: width * height * 4)
+        guard let context = CGContext(
+            data: &rgba,
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bytesPerRow: width * 4,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else {
+            return false
+        }
+        context.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+        let corners = [0, (width - 1) * 4, (height - 1) * width * 4, ((height - 1) * width + width - 1) * 4]
+        return corners.contains { rgba[$0 + 3] < 32 }
+    }
+
     static func redactedSourceURL(_ value: String) -> String {
         guard var components = URLComponents(string: value) else { return "invalid" }
         components.query = nil
@@ -331,6 +426,113 @@ enum DevAssetCarvingService {
             backgroundRGB: background.map(Int.init),
             assets: assets
         )
+    }
+
+    /// When connected-component carving cannot find a distinct object, knock
+    /// out pixels that match the border color so a JPEG portal is still a cutout.
+    private nonisolated static func knockoutBorderPNG(from data: Data) throws -> Data {
+        guard let source = CGImageSourceCreateWithData(data as CFData, nil) else {
+            throw DevAssetCarvingError.invalidImage
+        }
+        let options: [CFString: Any] = [
+            kCGImageSourceCreateThumbnailFromImageAlways: true,
+            kCGImageSourceCreateThumbnailWithTransform: true,
+            kCGImageSourceThumbnailMaxPixelSize: maximumProcessingDimension,
+            kCGImageSourceShouldCacheImmediately: true,
+        ]
+        guard let image = CGImageSourceCreateThumbnailAtIndex(
+            source,
+            0,
+            options as CFDictionary
+        ) else {
+            throw DevAssetCarvingError.invalidImage
+        }
+        let width = image.width
+        let height = image.height
+        var rgba = [UInt8](repeating: 0, count: width * height * 4)
+        guard let context = CGContext(
+            data: &rgba,
+            width: width,
+            height: height,
+            bitsPerComponent: 8,
+            bytesPerRow: width * 4,
+            space: CGColorSpaceCreateDeviceRGB(),
+            bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue
+        ) else {
+            throw DevAssetCarvingError.invalidImage
+        }
+        context.interpolationQuality = .high
+        context.draw(image, in: CGRect(x: 0, y: 0, width: width, height: height))
+
+        let background = borderMedian(rgba: rgba, width: width, height: height)
+        let distance = colorDistance(
+            rgba: rgba,
+            width: width,
+            height: height,
+            background: background
+        )
+        var minX = width
+        var minY = height
+        var maxX = 0
+        var maxY = 0
+        for index in 0..<(width * height) {
+            let offset = index * 4
+            let normalized = max(
+                0,
+                min(
+                    1,
+                    (distance[index] - alphaLowerBound)
+                        / (alphaUpperBound - alphaLowerBound)
+                )
+            )
+            let alpha = normalized * normalized * (3 - 2 * normalized)
+            if alpha <= 0.01 {
+                rgba[offset] = 0
+                rgba[offset + 1] = 0
+                rgba[offset + 2] = 0
+                rgba[offset + 3] = 0
+                continue
+            }
+            for channel in 0..<3 {
+                let value = (
+                    Float(rgba[offset + channel])
+                        - Float(background[channel]) * (1 - alpha)
+                ) / alpha
+                let premultiplied = value * alpha
+                rgba[offset + channel] = UInt8(max(0, min(255, Int(premultiplied.rounded()))))
+            }
+            rgba[offset + 3] = UInt8(max(0, min(255, Int((alpha * 255).rounded()))))
+            let x = index % width
+            let y = index / width
+            minX = min(minX, x)
+            minY = min(minY, y)
+            maxX = max(maxX, x)
+            maxY = max(maxY, y)
+        }
+        guard minX <= maxX, minY <= maxY else {
+            throw DevAssetCarvingError.noAssets
+        }
+        let padding = max(4, min(width, height) / 80)
+        let left = max(0, minX - padding)
+        let top = max(0, minY - padding)
+        let right = min(width - 1, maxX + padding)
+        let bottom = min(height - 1, maxY + padding)
+        let cropWidth = right - left + 1
+        let cropHeight = bottom - top + 1
+        var cropped = [UInt8](repeating: 0, count: cropWidth * cropHeight * 4)
+        for y in 0..<cropHeight {
+            for x in 0..<cropWidth {
+                let sourceOffset = ((top + y) * width + left + x) * 4
+                let destOffset = (y * cropWidth + x) * 4
+                for channel in 0..<4 {
+                    cropped[destOffset + channel] = rgba[sourceOffset + channel]
+                }
+            }
+        }
+        guard let png = try makeImage(rgba: cropped, width: cropWidth, height: cropHeight).pngData() else {
+            throw DevAssetCarvingError.invalidImage
+        }
+        return png
     }
 
     private nonisolated static func borderMedian(

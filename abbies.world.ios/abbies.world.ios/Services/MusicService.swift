@@ -29,10 +29,14 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     // Playback state
     private var audioPlayer: AVAudioPlayer?
+    private var outgoingPlayer: AVAudioPlayer?
+    private var transitionToken = UUID()
+    private let songFadeDuration: TimeInterval = 0.5
     private var currentIndex: Int = 0
     private var shuffledQueue: [Int] = []
     private var wasPlayingBeforeGame: Bool = false
     private var wasPlayingBeforeInterruption: Bool = false
+    private var audibleVolume: Float { isMuted ? 0 : 0.5 }
     
     // Cache keys
     private let playlistCacheKey = "music_playlist_cache"
@@ -63,7 +67,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         setupAudioSession()
         loadSettings()
         setupInterruptionHandling()
-        loadPlaylist()
+        loadPlaylist(autostart: false)
     }
     
     deinit {
@@ -180,53 +184,109 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         loadPlaylist()
     }
     
-    func loadPlaylist() {
+    func loadPlaylist(autostart: Bool = true) {
         clearCache()
         isLoading = false
 
-        let definitions = [
-            ("bright_new_day", "Bright New Day"),
-            ("cliffside_morning", "Cliffside Morning"),
-            ("family_adventure", "Family Adventure"),
-            ("joyful_bounce", "Joyful Bounce"),
-            ("well_make_a_way", "We’ll Make a Way"),
-            ("working_song", "Working Song")
+        playlist = Self.bundledWorld2Tracks()
+        currentIndex = min(max(currentIndex, 0), max(playlist.count - 1, 0))
+        currentSong = playlist.indices.contains(currentIndex) ? playlist[currentIndex] : nil
+        shuffledQueue = []
+        if isShuffleEnabled {
+            generateShuffleQueue()
+        }
+        print("🎵 MusicService: Loaded \(playlist.count) bundled World 2 tracks")
+
+        if autostart && isMusicEnabled && !playlist.isEmpty {
+            play()
+        }
+    }
+
+    /// Everyday World 2 + Peglin Edition soundtrack shipped in the app bundle.
+    /// Document `songs[]` can add/override; an empty document must not silence play.
+    static func bundledWorld2Tracks() -> [MusicTrack] {
+        // (playlistId, filename without ext, display name, ext)
+        let definitions: [(String, String, String, String)] = [
+            ("world2_abbies_world", "abbies_world", "Abbie's World", "mp3"),
+            ("world2_glassy_bells", "glassy_bells", "Glassy Bells", "mp3"),
+            ("world2_ciel_de_lumiere", "ciel_de_lumiere", "Ciel de Lumière", "mp3"),
+            ("world2_bright_new_day", "bright_new_day", "Bright New Day", "m4a"),
+            ("world2_cliffside_morning", "cliffside_morning", "Cliffside Morning", "m4a"),
+            ("world2_family_adventure", "family_adventure", "Family Adventure", "m4a"),
+            ("world2_joyful_bounce", "joyful_bounce", "Joyful Bounce", "m4a"),
+            ("world2_well_make_a_way", "well_make_a_way", "We’ll Make a Way", "m4a"),
+            ("world2_working_song", "working_song", "Working Song", "m4a"),
+            // Peglin / Plink parent drops (also used as scene musicTrackID).
+            ("plink_abbies_world", "plink_abbies_world", "Abbie's World (Peglin)", "mp3"),
+            ("plink_fell_from_the_blue", "plink_fell_from_the_blue", "Fell From the Blue", "mp3"),
+            ("plink_things_in_the_grass", "plink_things_in_the_grass", "Things in the Grass", "mp3"),
+            ("plink_cheerful_khorovod", "plink_cheerful_khorovod", "Cheerful Round Dance", "mp3"),
+            ("plink_electronic_folk_dance", "plink_electronic_folk_dance", "Electronic Folk Dance", "mp3"),
         ]
 
-        let tracks = definitions.compactMap { id, name -> MusicTrack? in
-            guard let url =
-                Bundle.main.url(
-                    forResource: id,
-                    withExtension: "m4a",
+        return definitions.compactMap { playlistId, file, name, ext -> MusicTrack? in
+            let remote = AssetBootstrapService.shared.cachedFileURL(named: file)
+            guard let url = remote
+                ?? Bundle.main.url(
+                    forResource: file,
+                    withExtension: ext,
                     subdirectory: "Resources/Music/World2"
                 )
-                ?? Bundle.main.url(forResource: id, withExtension: "m4a") else {
-                print("❌ MusicService: Missing bundled World 2 track: \(id).m4a")
+                ?? Bundle.main.url(forResource: file, withExtension: ext) else {
+                print("❌ MusicService: Missing World 2 track: \(file).\(ext)")
                 return nil
             }
 
             let size = (try? url.resourceValues(forKeys: [.fileSizeKey]).fileSize) ?? 0
             return MusicTrack(
-                id: "world2_\(id)",
+                id: playlistId,
                 name: name,
                 url: url.absoluteString,
                 size: size,
-                mimeType: "audio/mp4"
+                mimeType: ext == "mp3" ? "audio/mpeg" : "audio/mp4"
             )
         }
+    }
 
-        playlist = tracks
-        currentIndex = min(max(currentIndex, 0), max(tracks.count - 1, 0))
-        currentSong = tracks.indices.contains(currentIndex) ? tracks[currentIndex] : nil
+    /// Merge household document songs on top of the bundled smattering.
+    /// Never replace with an empty list — that was silencing Peglin Edition.
+    func reloadContentPlaylist() {
+        guard World2WorldSync.shared.usesServerDocument else { return }
+        var byID = Dictionary(uniqueKeysWithValues: Self.bundledWorld2Tracks().map { ($0.id, $0) })
+        for song in World2WorldSync.shared.songs {
+            let url = AssetBootstrapService.shared.cachedFileURL(named: song.file)
+                ?? Bundle.main.url(forResource: song.file, withExtension: "mp3")
+                ?? Bundle.main.url(forResource: song.file, withExtension: "m4a")
+                ?? Bundle.main.url(
+                    forResource: song.file,
+                    withExtension: "mp3",
+                    subdirectory: "Resources/Music/World2"
+                )
+            guard let url else { continue }
+            let ext = url.pathExtension.lowercased()
+            byID[song.id] = MusicTrack(
+                id: song.id,
+                name: song.name,
+                url: url.absoluteString,
+                size: 0,
+                mimeType: ext == "mp3" ? "audio/mpeg" : "audio/mp4"
+            )
+            // Scene musicTrackID often matches the file stem.
+            if byID[song.file] == nil {
+                byID[song.file] = MusicTrack(
+                    id: song.file,
+                    name: song.name,
+                    url: url.absoluteString,
+                    size: 0,
+                    mimeType: ext == "mp3" ? "audio/mpeg" : "audio/mp4"
+                )
+            }
+        }
+        playlist = Array(byID.values).sorted { $0.name < $1.name }
+        currentIndex = 0
+        currentSong = playlist.first
         shuffledQueue = []
-        if isShuffleEnabled {
-            generateShuffleQueue()
-        }
-        print("🎵 MusicService: Loaded \(tracks.count) bundled World 2 tracks")
-
-        if isMusicEnabled && !tracks.isEmpty {
-            play()
-        }
+        print("🎵 MusicService: Content playlist \(playlist.count) tracks (bundled + document)")
     }
     
     private func loadCachedPlaylist() -> [MusicTrack]? {
@@ -304,13 +364,32 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
     
     func stop() {
-        audioPlayer?.stop()
-        audioPlayer?.delegate = nil // Remove delegate to prevent callbacks
-        audioPlayer = nil
-        isPlaying = false
-        currentSongArtwork = nil // Clear artwork when stopping
-        // Don't clear currentSong here - we might want to know what was playing
-        saveSettings()
+        let token = UUID()
+        transitionToken = token
+        let players = [audioPlayer, outgoingPlayer].compactMap { $0 }
+        outgoingPlayer = nil
+        guard !players.isEmpty else {
+            isPlaying = false
+            currentSongArtwork = nil
+            saveSettings()
+            return
+        }
+        for player in players {
+            player.setVolume(0, fadeDuration: songFadeDuration)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + songFadeDuration) { [weak self] in
+            guard let self, self.transitionToken == token else { return }
+            for player in players {
+                player.stop()
+                player.delegate = nil
+            }
+            if let current = self.audioPlayer, players.contains(where: { $0 === current }) {
+                self.audioPlayer = nil
+            }
+            self.isPlaying = false
+            self.currentSongArtwork = nil
+            self.saveSettings()
+        }
     }
     
     func toggleMusic() {
@@ -336,7 +415,7 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     
     func toggleMute() {
         isMuted.toggle()
-        audioPlayer?.volume = isMuted ? 0.0 : 0.5
+        audioPlayer?.volume = audibleVolume
         saveSettings()
     }
     
@@ -347,37 +426,27 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
         }
         
         print("🎵 MusicService: Switching to song: \(track.displayName)")
-        
-        // Stop current playback and clean up properly
-        if let player = audioPlayer {
-            player.stop()
-            player.delegate = nil // Remove delegate to prevent callbacks during transition
-        }
-        audioPlayer = nil
-        isPlaying = false
-        
-        // Update to new song BEFORE loading (so loadAndPlayCurrentSong can find it)
         currentIndex = index
         currentSong = track
-        
-        // Small delay to ensure audio system is ready and old player is fully stopped
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) { [weak self] in
-            guard let self = self else { return }
-            // Double-check we still have a current song (shouldn't be nil at this point)
-            guard self.currentSong != nil else {
-                print("❌ MusicService: currentSong became nil before loading")
-                return
-            }
-            self.loadAndPlayCurrentSong()
-        }
+        currentSongArtwork = nil
+        loadAndPlayCurrentSong()
     }
 
     func playSong(id: String) {
-        guard let track = playlist.first(where: { $0.id == id }) else {
-            print("⚠️ MusicService: Track not found in playlist: \(id)")
+        if currentSong?.id == id, isPlaying {
             return
         }
-        playSong(track)
+        if let track = playlist.first(where: { $0.id == id }) {
+            playSong(track)
+            return
+        }
+        // Bundled Peglin / World2 cue not yet merged into playlist (empty songs[] wipe).
+        if let bundled = Self.bundledWorld2Tracks().first(where: { $0.id == id }) {
+            playlist.append(bundled)
+            playSong(bundled)
+            return
+        }
+        print("⚠️ MusicService: Track not found in playlist: \(id)")
     }
     
     // MARK: - Queue Management
@@ -427,22 +496,10 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             return
         }
         
-        // Clean up current player before switching
-        if let player = audioPlayer {
-            player.stop()
-            player.delegate = nil
-        }
-        audioPlayer = nil
-        isPlaying = false
-        currentSongArtwork = nil // Clear artwork when switching
-        
         currentIndex = nextIndex
         currentSong = playlist[nextIndex]
-        
-        // Small delay to ensure audio system is ready
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.loadAndPlayCurrentSong()
-        }
+        currentSongArtwork = nil
+        loadAndPlayCurrentSong()
     }
     
     func playPrevious() {
@@ -458,22 +515,10 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             return
         }
         
-        // Clean up current player before switching
-        if let player = audioPlayer {
-            player.stop()
-            player.delegate = nil
-        }
-        audioPlayer = nil
-        isPlaying = false
-        currentSongArtwork = nil // Clear artwork when switching
-        
         currentIndex = previousIndex
         currentSong = playlist[previousIndex]
-        
-        // Small delay to ensure audio system is ready
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [weak self] in
-            self?.loadAndPlayCurrentSong()
-        }
+        currentSongArtwork = nil
+        loadAndPlayCurrentSong()
     }
     
     private func getPreviousIndex() -> Int? {
@@ -593,13 +638,28 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     }
 
     private func prepareAndPlay(_ player: AVAudioPlayer) {
-        audioPlayer?.stop()
-        audioPlayer?.delegate = nil
-        audioPlayer = nil
+        let token = UUID()
+        transitionToken = token
+
+        if let parked = outgoingPlayer {
+            parked.stop()
+            parked.delegate = nil
+        }
+        if let current = audioPlayer, current !== player {
+            current.delegate = nil
+            current.setVolume(0, fadeDuration: songFadeDuration)
+            outgoingPlayer = current
+            DispatchQueue.main.asyncAfter(deadline: .now() + songFadeDuration) { [weak self, weak current] in
+                guard let self, let current else { return }
+                guard self.outgoingPlayer === current else { return }
+                current.stop()
+                self.outgoingPlayer = nil
+            }
+        }
 
         player.delegate = self
         player.numberOfLoops = (repeatMode == .one) ? -1 : 0
-        player.volume = isMuted ? 0.0 : 0.5
+        player.volume = 0
 
         guard player.prepareToPlay(), player.play() else {
             print("❌ MusicService: Failed to prepare or start audio player")
@@ -607,6 +667,9 @@ class MusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
             return
         }
 
+        if audibleVolume > 0 {
+            player.setVolume(audibleVolume, fadeDuration: songFadeDuration)
+        }
         audioPlayer = player
         isPlaying = true
         saveSettings()

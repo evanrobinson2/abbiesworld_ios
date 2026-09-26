@@ -1,4 +1,7 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
 struct AuthLoginView: View {
     @ObservedObject var auth: AuthenticationService
@@ -24,10 +27,16 @@ struct AuthLoginView: View {
                     .padding(.horizontal, 48)
 
                 #if targetEnvironment(simulator)
-                Text("Simulator tip: finish sign-in inside the sheet on this Mac. If Google opens on your iPhone and sits on Connecting…, cancel on the phone — that page cannot hand back to the Simulator.")
+                Text("Do not scan the Google QR on your iPhone. That phone page says Connecting… forever and never returns to the Simulator. Cancel on the phone.")
                     .font(.footnote)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.yellow.opacity(0.95))
+                    .padding(.horizontal, 40)
+
+                Text("Fast path: open Studio on this Mac, sign in, tap Copy MCP token, then Paste Studio token below. If clipboard got overwritten, Paste still tries ~/.abbies_world_token.")
+                    .font(.footnote)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.white.opacity(0.88))
                     .padding(.horizontal, 40)
                 #endif
 
@@ -57,10 +66,41 @@ struct AuthLoginView: View {
                 .disabled(auth.isBusy)
                 .accessibilityIdentifier("auth0_sign_in")
 
+                #if targetEnvironment(simulator)
+                Button {
+                    Task {
+                        let token = UIPasteboard.general.string ?? ""
+                        await auth.loginWithPastedAccessToken(token)
+                    }
+                } label: {
+                    Text("Paste Studio token")
+                        .font(.headline)
+                        .frame(maxWidth: 420)
+                        .padding(.vertical, 16)
+                        .background(Color.cyan.opacity(0.28))
+                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        .foregroundStyle(.white)
+                }
+                .disabled(auth.isBusy)
+                .accessibilityIdentifier("auth0_paste_studio_token")
+
+                Text("If you stay in Auth0: use email/password in the Simulator sheet, or Continue with Google and finish entirely on this Mac — never the phone QR.")
+                    .font(.caption)
+                    .multilineTextAlignment(.center)
+                    .foregroundStyle(.white.opacity(0.7))
+                    .padding(.horizontal, 40)
+                #endif
+
                 Spacer()
             }
             .padding()
         }
+        #if targetEnvironment(simulator)
+        .task {
+            // File-backed token only — reading UIPasteboard pops a permission alert.
+            await auth.loginWithSimulatorSavedTokenIfNeeded()
+        }
+        #endif
     }
 }
 

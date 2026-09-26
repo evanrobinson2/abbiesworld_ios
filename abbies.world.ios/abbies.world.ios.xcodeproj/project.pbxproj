@@ -6,6 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		DCED64143065434F00FA6BED /* Auth0 in Frameworks */ = {isa = PBXBuildFile; productRef = A1B0AUTH0000000000000002 /* Auth0 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DC1197A62EECC0C400E52958 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC1197832EECC0C400E52958 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC11978A2EECC0C400E52958;
+			remoteInfo = abbies.world.ios;
+		};
+		DC1197B62EECC0C400E52958 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DC1197832EECC0C400E52958 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DC11978A2EECC0C400E52958;
+			remoteInfo = abbies.world.ios;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		DC11978B2EECC0C400E52958 /* abbies.world.ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = abbies.world.ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC1197A02EECC0C400E52958 /* abbies.world.iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = abbies.world.iosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -35,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCED64143065434F00FA6BED /* Auth0 in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +107,7 @@
 				DC1197872EECC0C400E52958 /* Sources */,
 				DC1197882EECC0C400E52958 /* Frameworks */,
 				DC1197892EECC0C400E52958 /* Resources */,
+				DC1197C22EECC0C400E52958 /* Stamp debug build */,
 			);
 			buildRules = (
 			);
@@ -179,10 +202,10 @@
 			);
 			mainGroup = DC1197822EECC0C400E52958;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			packageReferences = (
-				A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0.swift" */,
+				A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0" */,
 			);
+			preferredProjectObjectVersion = 77;
 			productRefGroup = DC11978C2EECC0C400E52958 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -193,55 +216,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0.swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/auth0/Auth0.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.18.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		A1B0AUTH0000000000000002 /* Auth0 */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0.swift" */;
-			productName = Auth0;
-		};
-/* End XCSwiftPackageProductDependency section */
-
-/* Begin PBXTargetDependency section */
-		DC1197A72EECC0C400E52958 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DC11978A2EECC0C400E52958 /* abbies.world.ios */;
-			targetProxy = DC1197A62EECC0C400E52958 /* PBXContainerItemProxy */;
-		};
-		DC1197B72EECC0C400E52958 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DC11978A2EECC0C400E52958 /* abbies.world.ios */;
-			targetProxy = DC1197B62EECC0C400E52958 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin PBXContainerItemProxy section */
-		DC1197A62EECC0C400E52958 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC1197832EECC0C400E52958 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC11978A2EECC0C400E52958;
-			remoteInfo = abbies.world.ios;
-		};
-		DC1197B62EECC0C400E52958 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DC1197832EECC0C400E52958 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DC11978A2EECC0C400E52958;
-			remoteInfo = abbies.world.ios;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		DC1197892EECC0C400E52958 /* Resources */ = {
@@ -267,6 +241,25 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		DC1197C22EECC0C400E52958 /* Stamp debug build */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Stamp debug build";
+			outputPaths = (
+				"$(TARGET_BUILD_DIR)/$(UNLOCALIZED_RESOURCES_FOLDER_PATH)/World2BuildStamp.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -eu\ndest=\"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/World2BuildStamp.txt\"\nmkdir -p \"$(dirname \"$dest\")\"\nperl -MTime::HiRes=time -e 'printf \"%d\\n\", time()*1000' > \"$dest\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DC1197872EECC0C400E52958 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -290,6 +283,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DC1197A72EECC0C400E52958 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC11978A2EECC0C400E52958 /* abbies.world.ios */;
+			targetProxy = DC1197A62EECC0C400E52958 /* PBXContainerItemProxy */;
+		};
+		DC1197B72EECC0C400E52958 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DC11978A2EECC0C400E52958 /* abbies.world.ios */;
+			targetProxy = DC1197B62EECC0C400E52958 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		DC1197942EECC0C700E52958 /* Debug */ = {
@@ -478,14 +484,14 @@
 				DEVELOPMENT_TEAM = 434CRKC9V3;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "evan-personal.abbies-world-iosTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "evan-personal.abbies-world-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -505,14 +511,14 @@
 				DEVELOPMENT_TEAM = 434CRKC9V3;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "evan-personal.abbies-world-iosTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "evan-personal.abbies-world-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = NO;
@@ -599,6 +605,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/auth0/Auth0.swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.18.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		A1B0AUTH0000000000000002 /* Auth0 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A1B0AUTH0000000000000001 /* XCRemoteSwiftPackageReference "Auth0" */;
+			productName = Auth0;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DC1197832EECC0C400E52958 /* Project object */;
 }

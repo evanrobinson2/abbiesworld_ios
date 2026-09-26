@@ -468,7 +468,9 @@ def main() -> int:
             and "GameAssetRegistryError.hashMismatch" in registry
             and "asset_registry_unavailable" in assets
             and '["fallback": "bundled"]' in assets
-            and "descriptor.derivativeSha256" in assets
+            and "conventionalKey" in assets
+            and "asset_registry_remote_accepted" in assets
+            and "descriptor.derivativeSha256" not in assets
             and "/api/world2/manifest" not in assets
             and 'DEFAULT_GAME_KEY = "abbies-world-2"' in registry_publisher
             and 'os.environ.get("ASSET_REGISTRY_ADMIN_API_KEY")'

@@ -19,26 +19,21 @@ class AssetBootstrapService: ObservableObject {
     @Published private(set) var localCache: LocalAssetCache = .empty
     @Published private(set) var registryAvailability: GameAssetRegistryAvailability = .unchecked
     @Published private(set) var registryRevisions: [String: Int] = [:]
+    /// Bumps when a hosted plate replaces the bundled one, so screens redraw.
+    @Published private(set) var registryGeneration = 0
     
     private let cacheDirectory: URL
     private let manifestCacheKey = "world2_asset_manifest"
     private let localCacheKey = "world2_local_asset_cache"
-    private let qualifiedImageNames: [String: String]
-    private let qualifiedImages: [String: World2QualifiedImage]
     private var registryImages: [String: UIImage] = [:]
+    private var fileURLs: [String: URL] = [:]
+    private var remoteFetchInFlight: Set<String> = []
+    private var remoteFetchFailed: Set<String> = []
+    private var pendingRemoteSemanticIDs: Set<String> = []
     
     private init() {
         let cachesDir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
         cacheDirectory = cachesDir.appendingPathComponent("World2Assets", isDirectory: true)
-        let runtimeImages = Self.loadQualifiedImages()
-        qualifiedImages = Dictionary(
-            uniqueKeysWithValues: runtimeImages.map { ($0.semanticId, $0) }
-        )
-        qualifiedImageNames = Dictionary(
-            uniqueKeysWithValues: runtimeImages.map {
-                ($0.semanticId, $0.assetCatalogName)
-            }
-        )
         try? FileManager.default.createDirectory(at: cacheDirectory, withIntermediateDirectories: true)
         
         loadLocalCache()
@@ -86,38 +81,150 @@ class AssetBootstrapService: ObservableObject {
     }
 
     func image(for semanticName: String) -> UIImage? {
-        // World 2 image art is fail-closed: only an asset named by the generated,
-        // qualification-backed runtime manifest can reach a game screen.
+        // Server is source of truth: hosted registry bytes, https on the world
+        // document, or the household plate proxy. Missing art is
+        // `under_construction` at the call site — never a silent wrong plate.
         if let registryImage = registryImages[semanticName] {
             return registryImage
         }
-        if let catalogName = qualifiedImageNames[semanticName] {
-            return UIImage(named: catalogName)
+        // Peglin Edition ships early plates in the asset catalog until registry
+        // publish catches up (`world2_map_peglin_*` / `world2_poi_peglin_*`).
+        if let bundled = Self.bundledPeglinPlate(for: semanticName) {
+            return bundled
         }
-        // Local spike / authoring plates that ship ahead of qualification.
-        if let catalogName = Self.localCatalogFallbacks[semanticName] {
-            return UIImage(named: catalogName)
+        if Self.isRemotePlateURL(semanticName) {
+            noteHTTPInterest(semanticName)
+            return nil
         }
+        noteRemoteInterest(semanticName)
+        notePlateProxyInterest(semanticName)
         World2Diagnostics.log("asset_placeholder", ["semantic_id": semanticName])
         return nil
     }
 
-    /// Bundled looping video for a semantic ID (map ambient plates, etc.).
-    func videoURL(for semanticName: String) -> URL? {
-        guard let resourceName = Self.localVideoFallbacks[semanticName] else {
-            return nil
+    /// `map.peglin.bramble` → `world2_map_peglin_bramble`
+    /// `token.peglin.wreck` → `world2_token_peglin_wreck`
+    private static func bundledPeglinPlate(for semanticName: String) -> UIImage? {
+        if semanticName == "title.marbleVoyage" {
+            return UIImage(named: "world2_title_marbleVoyage")
         }
-        return Bundle.main.url(
-            forResource: resourceName,
-            withExtension: "mp4",
-            subdirectory: "Resources/World2"
-        )
-        ?? Bundle.main.url(
-            forResource: resourceName,
-            withExtension: "mp4",
-            subdirectory: "World2"
-        )
-        ?? Bundle.main.url(forResource: resourceName, withExtension: "mp4")
+        if semanticName == MarbleVoyageClimbMap.semanticID
+            || semanticName == "map.marbleVoyage.climb"
+        {
+            return UIImage(named: MarbleVoyageClimbMap.catalogName)
+        }
+        if semanticName.hasPrefix("map.peglin.") || semanticName.hasPrefix("poi.peglin.") {
+            let catalogName = "world2_" + semanticName.replacingOccurrences(of: ".", with: "_")
+            if let image = UIImage(named: catalogName) { return image }
+        }
+        if semanticName.hasPrefix("token.peglin.") {
+            let catalogName = "world2_" + semanticName.replacingOccurrences(of: ".", with: "_")
+            return UIImage(named: catalogName)
+        }
+        // Circular kid power icons + legacy poker-chip ids.
+        if semanticName.hasPrefix("ui.plink.power.icon.") {
+            let suffix = String(semanticName.dropFirst("ui.plink.power.icon.".count))
+            return UIImage(named: "world2_plink_power_icon_\(suffix)")
+        }
+        if semanticName.hasPrefix("ui.plink.powerUp.") {
+            let catalogName = "world2_" + semanticName.replacingOccurrences(of: ".", with: "_")
+            return UIImage(named: catalogName)
+        }
+        // Rescue cage + burst plates.
+        switch semanticName {
+        case "ui.plink.cage.frame":
+            return UIImage(named: "world2_plink_cage_frame")
+        case "ui.plink.cage.broken":
+            return UIImage(named: "world2_plink_cage_broken")
+        case "ui.plink.rescue.burst":
+            return UIImage(named: "world2_plink_rescue_burst")
+        default:
+            break
+        }
+        return nil
+    }
+
+    /// Pull every plate the live world document names so the iPad matches server.
+    func prefetchAssets(referencedBy document: World2WorldDocument) {
+        var ids = Set<String>()
+        for scene in document.scenes.values {
+            let bg = scene.backgroundAsset.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !bg.isEmpty { ids.insert(bg) }
+        }
+        for place in document.places ?? [] {
+            let exterior = place.exteriorAsset.trimmingCharacters(in: .whitespacesAndNewlines)
+            if !exterior.isEmpty { ids.insert(exterior) }
+            if let interior = place.interiorAsset?.trimmingCharacters(in: .whitespacesAndNewlines),
+               !interior.isEmpty {
+                ids.insert(interior)
+            }
+            for room in place.rooms ?? [] {
+                let image = room.image.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !image.isEmpty { ids.insert(image) }
+            }
+        }
+        for id in ids {
+            _ = image(for: id)
+        }
+        World2Diagnostics.log("asset_world_prefetch", ["count": String(ids.count)])
+    }
+
+    private static func isRemotePlateURL(_ value: String) -> Bool {
+        guard let url = URL(string: value), let scheme = url.scheme?.lowercased() else {
+            return false
+        }
+        return scheme == "http" || scheme == "https"
+    }
+
+    private func noteHTTPInterest(_ urlString: String) {
+        guard registryImages[urlString] == nil else { return }
+        guard !remoteFetchFailed.contains(urlString) else { return }
+        guard !remoteFetchInFlight.contains(urlString) else { return }
+        remoteFetchInFlight.insert(urlString)
+        Task { [weak self] in
+            defer { self?.remoteFetchInFlight.remove(urlString) }
+            guard let self else { return }
+            guard let url = URL(string: urlString) else {
+                self.remoteFetchFailed.insert(urlString)
+                return
+            }
+            do {
+                let (data, response) = try await URLSession.shared.data(from: url)
+                let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+                guard (200..<300).contains(status), let image = UIImage(data: data) else {
+                    self.remoteFetchFailed.insert(urlString)
+                    return
+                }
+                self.registryImages[urlString] = image
+                self.registryGeneration += 1
+                World2Diagnostics.log("asset_http_plate_accepted", ["url": urlString])
+            } catch {
+                self.remoteFetchFailed.insert(urlString)
+                World2Diagnostics.log(
+                    "asset_http_plate_failed",
+                    ["url": urlString, "error": error.localizedDescription]
+                )
+            }
+        }
+    }
+
+    /// Downloaded sound or model. Matches the registry key or its file name.
+    func cachedFileURL(named name: String) -> URL? {
+        let hyphen = name.replacingOccurrences(of: "_", with: "-")
+        let wanted = Set([name, hyphen])
+        for (key, url) in fileURLs {
+            let file = (key as NSString).lastPathComponent
+            let stem = (file as NSString).deletingPathExtension
+            if wanted.contains(key) || wanted.contains(file) || wanted.contains(stem) {
+                return url
+            }
+        }
+        return nil
+    }
+
+    /// Hosted looping video for a semantic ID (map ambient plates, etc.).
+    func videoURL(for semanticName: String) -> URL? {
+        cachedFileURL(named: semanticName)
     }
 
     func assetImage(_ assetId: String) async -> UIImage? {
@@ -149,61 +256,17 @@ class AssetBootstrapService: ObservableObject {
         }
 
         guard registryAvailability == .available else {
-            World2Diagnostics.log("asset_registry_unavailable", ["fallback": "bundled"])
+            World2Diagnostics.log("asset_registry_unavailable", ["fallback": "none"])
             return
         }
 
+        await ingestRegistryCatalog(client)
+
+        let requested = registeredSemanticIDs().union(pendingRemoteSemanticIDs)
         var accepted = 0
-        for descriptor in qualifiedImages.values.sorted(by: {
-            $0.semanticId < $1.semanticId
-        }) {
-            guard let registryKey = World2RegistryKey.assetKey(
-                for: descriptor.semanticId
-            ) else {
-                continue
-            }
-
-            do {
-                let record = try await client.current(registryKey)
-                let location = try client.location(for: record)
-                switch location {
-                case .bundled(let bundleName):
-                    guard bundleName == descriptor.assetCatalogName,
-                          record.sha256 == nil
-                            || record.sha256?.lowercased()
-                                == descriptor.derivativeSha256.lowercased() else {
-                        World2Diagnostics.log(
-                            "asset_registry_record_rejected",
-                            ["asset_key": registryKey, "reason": "bundled_identity"]
-                        )
-                        continue
-                    }
-                case .remote:
-                    guard record.sha256?.lowercased()
-                            == descriptor.derivativeSha256.lowercased() else {
-                        World2Diagnostics.log(
-                            "asset_registry_record_rejected",
-                            ["asset_key": registryKey, "reason": "qualification_hash"]
-                        )
-                        continue
-                    }
-                    guard let image = try await registryImage(
-                        for: descriptor,
-                        record: record,
-                        client: client
-                    ) else {
-                        continue
-                    }
-                    registryImages[descriptor.semanticId] = image
-                }
-
-                registryRevisions[descriptor.semanticId] = record.revision
+        for semanticId in requested.sorted() {
+            if await fetchRemotePlate(semanticId, client: client) {
                 accepted += 1
-            } catch {
-                World2Diagnostics.log(
-                    "asset_registry_asset_unavailable",
-                    ["asset_key": registryKey]
-                )
             }
         }
 
@@ -211,33 +274,218 @@ class AssetBootstrapService: ObservableObject {
             "asset_registry_ready",
             [
                 "accepted": String(accepted),
-                "requested": String(qualifiedImages.count),
+                "requested": String(requested.count),
             ]
         )
     }
 
+    /// Places and maps the running app may need. Prefetch from registry only.
+    private func registeredSemanticIDs() -> Set<String> {
+        var ids = Set<String>()
+        for archetype in World2POIRegistry.all {
+            ids.insert(archetype.exteriorAsset)
+            if let interior = archetype.interiorAsset {
+                ids.insert(interior)
+            }
+        }
+        for scene in World2SceneCatalog.all {
+            if !scene.backgroundAsset.isEmpty {
+                ids.insert(scene.backgroundAsset)
+            }
+        }
+        return ids
+    }
+
+    private func noteRemoteInterest(_ semanticName: String) {
+        guard registryImages[semanticName] == nil else { return }
+        guard World2RegistryKey.assetKey(for: semanticName) != nil else { return }
+        guard !remoteFetchInFlight.contains(semanticName) else { return }
+        pendingRemoteSemanticIDs.insert(semanticName)
+        Task { [weak self] in
+            guard let self else { return }
+            // Auth0 loads the world; registry reads still want an API key.
+            // If the key is missing, fall through to the household plate proxy
+            // so semantic ids on the server document still paint.
+            if self.registryAvailability == .failed || self.registryAvailability == .unavailable {
+                _ = await self.fetchViaPlateProxy(semanticName)
+                return
+            }
+            let client: GameAssetRegistryClient
+            do {
+                client = try GameAssetRegistryClient()
+                if self.registryAvailability == .unchecked {
+                    self.registryAvailability = try await client.availability()
+                }
+            } catch {
+                self.registryAvailability = .failed
+                _ = await self.fetchViaPlateProxy(semanticName)
+                return
+            }
+            if self.registryAvailability == .available {
+                _ = await self.fetchRemotePlate(semanticName, client: client)
+            } else {
+                _ = await self.fetchViaPlateProxy(semanticName)
+            }
+        }
+    }
+
+    @discardableResult
+    private func fetchRemotePlate(
+        _ semanticId: String,
+        client: GameAssetRegistryClient
+    ) async -> Bool {
+        guard !remoteFetchInFlight.contains(semanticId) else { return false }
+        guard let registryKey = World2RegistryKey.assetKey(for: semanticId) else {
+            return false
+        }
+        remoteFetchInFlight.insert(semanticId)
+        defer { remoteFetchInFlight.remove(semanticId) }
+
+        do {
+            let record = try await client.current(registryKey)
+            let location = try client.location(for: record)
+            switch location {
+            case .bundled(let name):
+                if let image = UIImage(named: name) {
+                    registryImages[semanticId] = image
+                    registryRevisions[semanticId] = record.revision
+                    registryGeneration += 1
+                    World2Diagnostics.log(
+                        "asset_registry_bundled_accepted",
+                        ["semantic_id": semanticId, "bundle": name]
+                    )
+                    return true
+                }
+                World2Diagnostics.log(
+                    "asset_registry_bundled_missing_from_client",
+                    ["semantic_id": semanticId, "bundle": name]
+                )
+                return await fetchViaPlateProxy(semanticId)
+            case .remote:
+                do {
+                    guard let image = try await registryImage(
+                        semanticId: semanticId,
+                        record: record,
+                        client: client
+                    ) else {
+                        return await fetchViaPlateProxy(semanticId)
+                    }
+                    registryImages[semanticId] = image
+                    registryRevisions[semanticId] = record.revision
+                    registryGeneration += 1
+                    World2Diagnostics.log(
+                        "asset_registry_remote_accepted",
+                        [
+                            "asset_key": registryKey,
+                            "semantic_id": semanticId,
+                            "revision": String(record.revision),
+                        ]
+                    )
+                    return true
+                } catch {
+                    World2Diagnostics.log(
+                        "asset_registry_asset_unavailable",
+                        ["asset_key": registryKey, "semantic_id": semanticId]
+                    )
+                    return await fetchViaPlateProxy(semanticId)
+                }
+            }
+        } catch {
+            World2Diagnostics.log(
+                "asset_registry_asset_unavailable",
+                ["asset_key": registryKey, "semantic_id": semanticId]
+            )
+            return await fetchViaPlateProxy(semanticId)
+        }
+    }
+
+    private func notePlateProxyInterest(_ semanticName: String) {
+        guard registryImages[semanticName] == nil else { return }
+        guard !Self.isRemotePlateURL(semanticName) else { return }
+        guard World2RegistryKey.assetKey(for: semanticName) != nil
+                || semanticName.contains(".") else { return }
+        guard !remoteFetchFailed.contains("proxy:\(semanticName)") else { return }
+        guard !remoteFetchInFlight.contains("proxy:\(semanticName)") else { return }
+        Task { [weak self] in
+            _ = await self?.fetchViaPlateProxy(semanticName)
+        }
+    }
+
+    @discardableResult
+    private func fetchViaPlateProxy(_ semanticId: String) async -> Bool {
+        let gate = "proxy:\(semanticId)"
+        guard registryImages[semanticId] == nil else { return true }
+        guard !remoteFetchFailed.contains(gate) else { return false }
+        guard !remoteFetchInFlight.contains(gate) else { return false }
+        remoteFetchInFlight.insert(gate)
+        defer { remoteFetchInFlight.remove(gate) }
+
+        var components = URLComponents(string: ServerConfig.shared.plateProxyURL)
+        var items = components?.queryItems ?? []
+        items.append(URLQueryItem(name: "semantic", value: semanticId))
+        components?.queryItems = items
+        guard let url = components?.url else {
+            remoteFetchFailed.insert(gate)
+            return false
+        }
+
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            let status = (response as? HTTPURLResponse)?.statusCode ?? 0
+            guard (200..<300).contains(status), let image = UIImage(data: data) else {
+                remoteFetchFailed.insert(gate)
+                World2Diagnostics.log(
+                    "asset_plate_proxy_failed",
+                    ["semantic_id": semanticId, "status": String(status)]
+                )
+                return false
+            }
+            let prepared = DevAssetCarvingService.cutoutIfNeeded(image, semanticId: semanticId)
+            registryImages[semanticId] = prepared
+            registryGeneration += 1
+            World2Diagnostics.log("asset_plate_proxy_accepted", ["semantic_id": semanticId])
+            return true
+        } catch {
+            remoteFetchFailed.insert(gate)
+            World2Diagnostics.log(
+                "asset_plate_proxy_failed",
+                ["semantic_id": semanticId, "error": error.localizedDescription]
+            )
+            return false
+        }
+    }
+
     private func registryImage(
-        for descriptor: World2QualifiedImage,
+        semanticId: String,
         record: GameAssetRecord,
         client: GameAssetRegistryClient
     ) async throws -> UIImage? {
-        let cacheId = "registry:\(descriptor.semanticId)"
+        let cacheId = "registry:\(semanticId)"
+        let recordHash = record.sha256?.lowercased() ?? ""
         if let cached = localCache.cachedAsset(byId: cacheId),
            cached.version == record.revision,
-           cached.hash.lowercased() == descriptor.derivativeSha256.lowercased() {
+           cached.hash.lowercased() == recordHash,
+           !recordHash.isEmpty {
             let url = cacheDirectory.appendingPathComponent(cached.localPath)
             if let image = UIImage(contentsOfFile: url.path) {
-                return image
+                let prepared = DevAssetCarvingService.cutoutIfNeeded(image, semanticId: semanticId)
+                if prepared !== image, let png = prepared.pngData() {
+                    try? png.write(to: url, options: .atomic)
+                }
+                return prepared
             }
         }
 
         let data = try await client.data(for: record)
-        guard let image = UIImage(data: data) else {
+        let prepared = DevAssetCarvingService.shouldCutoutSprite(semanticId: semanticId)
+            ? DevAssetCarvingService.spriteCutoutPNG(from: data)
+            : data
+        guard let image = UIImage(data: prepared) else {
             return nil
         }
 
-        let localPath = "registry-\(descriptor.assetId)-r\(record.revision).png"
-        try data.write(
+        let localPath = "registry-\(semanticId.replacingOccurrences(of: ".", with: "-"))-r\(record.revision).png"
+        try prepared.write(
             to: cacheDirectory.appendingPathComponent(localPath),
             options: .atomic
         )
@@ -246,13 +494,60 @@ class AssetBootstrapService: ObservableObject {
                 id: cacheId,
                 localPath: localPath,
                 version: record.revision,
-                hash: descriptor.derivativeSha256,
+                hash: recordHash,
                 downloadedAt: Date(),
                 lastAccessedAt: Date()
             )
         )
         saveLocalCache()
         return image
+    }
+
+    private func ingestRegistryCatalog(_ client: GameAssetRegistryClient) async {
+        let records: [GameAssetRecord]
+        do {
+            records = try await client.listAll()
+        } catch {
+            World2Diagnostics.log("asset_registry_list_failed")
+            return
+        }
+        for record in records {
+            let mime = record.mimeType?.lowercased() ?? ""
+            if mime.hasPrefix("image"), let semantic = record.metadata?.semanticId {
+                _ = await fetchRemotePlate(semantic, client: client)
+            } else if Self.storesDownloadedFile(mime: mime, key: record.key),
+                      let url = try? await cacheRegistryFile(record, client: client) {
+                fileURLs[record.key] = url
+            }
+        }
+        registryGeneration += 1
+        MusicService.shared.reloadContentPlaylist()
+    }
+
+    private static func storesDownloadedFile(mime: String, key: String) -> Bool {
+        if mime.hasPrefix("audio") || mime.hasPrefix("model") || mime.hasPrefix("video") {
+            return true
+        }
+        return key.hasPrefix("music/") || key.hasPrefix("actors/") || key.hasPrefix("models/")
+    }
+
+    private func cacheRegistryFile(
+        _ record: GameAssetRecord,
+        client: GameAssetRegistryClient
+    ) async throws -> URL? {
+        let location = try client.location(for: record)
+        guard case .remote = location else { return nil }
+        let safe = record.key.replacingOccurrences(of: "/", with: "-")
+        let ext = record.source.filename.flatMap { URL(fileURLWithPath: $0).pathExtension }
+        let suffix = ext?.isEmpty == false ? ".\(ext!)" : ""
+        let localPath = "registry-file-\(safe)-r\(record.revision)\(suffix)"
+        let url = cacheDirectory.appendingPathComponent(localPath)
+        if FileManager.default.fileExists(atPath: url.path) {
+            return url
+        }
+        let data = try await client.data(for: record)
+        try data.write(to: url, options: .atomic)
+        return url
     }
     
     private func loadLocalCache() {
@@ -296,70 +591,6 @@ class AssetBootstrapService: ObservableObject {
         }
         return nil
     }
-
-    private static func loadQualifiedImages() -> [World2QualifiedImage] {
-        let data: Data?
-        if let catalogData = NSDataAsset(name: "world2_runtime_manifest")?.data {
-            data = catalogData
-        } else if let url = Bundle.main.url(
-                forResource: "world2_runtime_manifest",
-                withExtension: "json"
-            ) {
-            data = try? Data(contentsOf: url)
-        } else {
-            data = nil
-        }
-
-        guard let data,
-              let runtimeManifest = try? JSONDecoder().decode(
-                World2RuntimeAssetManifest.self,
-                from: data
-            )
-        else {
-            return []
-        }
-
-        return runtimeManifest.assets.map {
-            World2QualifiedImage(
-                assetId: $0.assetId,
-                semanticId: $0.semanticId,
-                assetCatalogName: $0.assetCatalogName,
-                derivativeSha256: $0.derivativeSha256
-            )
-        }
-    }
-
-    /// Bundled plates that ship ahead of the qualification runtime manifest.
-    /// Fail-open only for these known semantic IDs so Art Garden is playable.
-    private static let localCatalogFallbacks: [String: String] = [
-        "map.artGarden": "world2_map_artGarden",
-        "map.blankWorld": "world2_blank_world",
-        "map.blankSlate": "world2_blank_world",
-        "poi.characterStudio.exterior": "world2_poi_characterStudio",
-        "poi.characterStudio.interior": "world2_interior_characterStudio",
-        "poi.sceneBuilder.exterior": "world2_poi_sceneBuilder",
-        "poi.sceneBuilder.interior": "world2_interior_sceneBuilder",
-        "poi.worldSeed.inventory": "world2_world_seed",
-        "poi.worldSeed.seedling": "world2_world_seedling",
-        "poi.worldSeed.portal": "world2_world_portal",
-        "poi.sceneKit.inventory": "world2_world_seed",
-        "poi.sceneCreator.exterior": "world2_world_portal",
-        "poi.beacon.exterior": "world2_world_seedling",
-        "poi.abbieTreehouse.interior.cozyNook": "abbie_treehouse_room_cozy_nook",
-        "poi.abbieTreehouse.interior.rooftopLookout": "abbie_treehouse_room_rooftop_lookout",
-        "poi.abbieTreehouse.interior.fitnessCenter": "abbie_treehouse_room_fitness_center",
-        // Prefer the Cozy Nook plate whenever the legacy single-interior id is asked for.
-        "poi.abbieTreehouse.interior": "abbie_treehouse_room_cozy_nook",
-        "map.evan": "evan_citadel_scene",
-        "poi.evanHome.exterior": "evan_citadel_exterior",
-        "poi.evanHome.interior": "evan_citadel_interior",
-    ]
-
-    /// Bundled ambient / looping videos that ship ahead of registry hosting.
-    /// `map.artGarden.ambient` v1 is crackware (Luma watermark) — wiring only.
-    private static let localVideoFallbacks: [String: String] = [
-        "map.artGarden.ambient": "world2_map_artGarden_ambient",
-    ]
     
     func clearCache() {
         try? FileManager.default.removeItem(at: cacheDirectory)
@@ -476,27 +707,11 @@ extension AssetBootstrapService {
     }
 }
 
-private struct World2RuntimeAssetManifest: Decodable {
-    let assets: [Asset]
-
-    struct Asset: Decodable {
-        let assetId: String
-        let semanticId: String
-        let assetCatalogName: String
-        let derivativeSha256: String
-    }
-}
-
-private struct World2QualifiedImage {
-    let assetId: String
-    let semanticId: String
-    let assetCatalogName: String
-    let derivativeSha256: String
-}
-
 enum World2RegistryKey {
     private static let assetKeys: [String: String] = [
         "title.background": "backgrounds/title",
+        "title.marbleVoyage": "backgrounds/title-marble-voyage",
+        "logo.abbiesWorld": "ui/logo-abbies-world",
         "map.home": "maps/home",
         "map.workLand": "maps/work-land",
         "map.farm": "maps/farm-land",
@@ -529,6 +744,46 @@ enum World2RegistryKey {
     ]
 
     static func assetKey(for semanticId: String) -> String? {
-        assetKeys[semanticId]
+        if let known = assetKeys[semanticId] {
+            return known
+        }
+        return conventionalKey(for: semanticId)
+    }
+
+    /// New plates do not need a new binary. Publish under this key.
+    /// `poi.figurineExplorer.exterior` → `pois/figurine-explorer/exterior`.
+    /// Irregular historical keys stay in `assetKeys` and win over this rule.
+    static func conventionalKey(for semanticId: String) -> String? {
+        let parts = semanticId.split(separator: ".").map(String.init)
+        guard let head = parts.first, parts.count >= 2 else { return nil }
+        let tail = parts.dropFirst().map(kebab).joined(separator: "/")
+        switch head {
+        case "poi":
+            guard parts.count >= 3 else { return nil }
+            return "pois/\(tail)"
+        case "map":
+            return "maps/\(tail)"
+        case "scene":
+            return "scenes/\(tail)"
+        case "furniture":
+            return "furniture/\(tail)"
+        case "ui":
+            return "ui/\(tail)"
+        default:
+            return nil
+        }
+    }
+
+    private static func kebab(_ token: String) -> String {
+        var out = ""
+        for character in token {
+            if character.isUppercase {
+                if !out.isEmpty { out.append("-") }
+                out.append(contentsOf: character.lowercased())
+            } else {
+                out.append(character)
+            }
+        }
+        return out
     }
 }

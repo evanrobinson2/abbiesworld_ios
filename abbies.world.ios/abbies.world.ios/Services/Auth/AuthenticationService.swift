@@ -18,7 +18,19 @@ final class AuthenticationService: ObservableObject {
     @Published private(set) var household: HouseholdSnapshot?
     @Published private(set) var activeProfile: HouseholdProfile?
 
-    private let credentialsManager = CredentialsManager(authentication: Auth0.authentication())
+    private let credentialsManager: CredentialsManager = {
+        #if targetEnvironment(simulator)
+        // Simulator Keychain often rejects Auth0's NSKeyedArchiver blob (entitlements /
+        // accessibility churn), which surfaces as "Could not save the pasted token".
+        // UserDefaults storage is fine for the Studio paste-token escape hatch.
+        return CredentialsManager(
+            authentication: Auth0.authentication(),
+            storage: SimulatorCredentialsStorage()
+        )
+        #else
+        return CredentialsManager(authentication: Auth0.authentication())
+        #endif
+    }()
     private let defaults = UserDefaults.standard
     private let activeProfileKey = "abbies.world.activeProfileId"
 
@@ -45,7 +57,8 @@ final class AuthenticationService: ObservableObject {
             }
             return
         }
-        isAuthenticated = credentialsManager.canRenew()
+        // hasValid covers Simulator paste-token sessions (access token, no refresh).
+        isAuthenticated = credentialsManager.canRenew() || credentialsManager.hasValid()
         if isAuthenticated {
             Task { await refreshSession(reason: "launch") }
         }
@@ -88,6 +101,188 @@ final class AuthenticationService: ObservableObject {
             lastError = Self.friendlyLoginError(error)
             World2Diagnostics.log("auth_login_failed", ["error": "\(error)"])
         }
+    }
+
+    /// Simulator escape hatch: paste the Auth0 access token from Studio → Copy MCP token.
+    /// Continuity QR / phone "Connecting…" cannot return the OAuth callback to the Simulator.
+    func loginWithPastedAccessToken(_ raw: String) async {
+        guard !shouldSkipAuthForAutomation else { return }
+        isBusy = true
+        lastError = nil
+        defer { isBusy = false }
+
+        var token = Self.extractAccessToken(from: raw)
+        #if targetEnvironment(simulator)
+        // Clipboard often gets overwritten (chat, Studio UI). Prefer the file-backed
+        // token Cursor / agents write for MCP when pasteboard is empty or garbage.
+        // Also used after the user denies the Simulator paste permission alert.
+        if token == nil {
+            token = Self.loadSimulatorSavedToken()
+        }
+        #endif
+        guard let token, token.split(separator: ".").count >= 2, token.count > 40 else {
+            let hint: String
+            #if targetEnvironment(simulator)
+            hint = " Clipboard empty or not a JWT. Re-copy from Studio → Copy MCP token, or keep ~/.abbies_world_token updated."
+            #else
+            hint = " In Studio, sign in and tap Copy MCP token."
+            #endif
+            lastError = "That does not look like an Auth0 access token.\(hint)"
+            return
+        }
+        await storePastedAccessToken(token)
+    }
+
+    #if targetEnvironment(simulator)
+    /// Auto-login without touching UIPasteboard (avoids the CoreSimulator paste permission alert).
+    func loginWithSimulatorSavedTokenIfNeeded() async {
+        guard !shouldSkipAuthForAutomation else { return }
+        guard !isAuthenticated, !isBusy else { return }
+        guard let token = Self.loadSimulatorSavedToken() else { return }
+        isBusy = true
+        lastError = nil
+        defer { isBusy = false }
+        await storePastedAccessToken(token)
+    }
+    #endif
+
+    private func storePastedAccessToken(_ token: String) async {
+        let expiresIn = Self.expiryDate(fromJWT: token) ?? Date().addingTimeInterval(60 * 60)
+        if expiresIn.timeIntervalSinceNow < 30 {
+            lastError = "That token is already expired. Copy a fresh one from Studio."
+            return
+        }
+        // Auth0 docs: clear before storing a different session so pinned session_expiry
+        // / DPoP thumbprints from a prior login cannot poison the paste path.
+        _ = credentialsManager.clear()
+        let credentials = Credentials(
+            accessToken: token,
+            tokenType: "Bearer",
+            idToken: Self.minimalIDToken(forAccessToken: token),
+            refreshToken: nil,
+            expiresIn: expiresIn,
+            scope: "openid profile email offline_access"
+        )
+        guard credentialsManager.store(credentials: credentials) else {
+            lastError = "Could not save the pasted token on this device."
+            World2Diagnostics.log("auth_paste_store_failed", ["expires_in": "\(Int(expiresIn.timeIntervalSinceNow))"])
+            return
+        }
+        #if targetEnvironment(simulator)
+        // Keep the Mac-side file in sync so relaunch can skip the pasteboard alert.
+        Self.writeSimulatorHostToken(token)
+        #endif
+        isAuthenticated = true
+        lastError = nil
+        await refreshSession(reason: "paste_token")
+        if household == nil, lastError == nil {
+            lastError = "Token saved, but the world server did not answer yet."
+        }
+    }
+
+    /// Auth0's CredentialsManager may decode `idToken`; an empty string can fail archive/
+    /// pin paths. Mint a tiny unsigned JWT so store + hasValid stay happy for paste login.
+    private static func minimalIDToken(forAccessToken accessToken: String) -> String {
+        func b64(_ data: Data) -> String {
+            data.base64EncodedString()
+                .replacingOccurrences(of: "+", with: "-")
+                .replacingOccurrences(of: "/", with: "_")
+                .replacingOccurrences(of: "=", with: "")
+        }
+        let header = b64(Data(#"{"alg":"none","typ":"JWT"}"#.utf8))
+        var payload: [String: Any] = ["sub": "paste-token"]
+        if let exp = expiryDate(fromJWT: accessToken)?.timeIntervalSince1970 {
+            payload["exp"] = Int(exp)
+        }
+        guard
+            let payloadData = try? JSONSerialization.data(withJSONObject: payload),
+            !payloadData.isEmpty
+        else {
+            return "\(header).e30." // {"alg":"none"} . {} .
+        }
+        return "\(header).\(b64(payloadData))."
+    }
+
+    #if targetEnvironment(simulator)
+    private static func writeSimulatorHostToken(_ token: String) {
+        guard let hostHome = ProcessInfo.processInfo.environment["SIMULATOR_HOST_HOME"], !hostHome.isEmpty else {
+            return
+        }
+        let url = URL(fileURLWithPath: hostHome).appendingPathComponent(".abbies_world_token")
+        try? token.write(to: url, atomically: true, encoding: .utf8)
+    }
+    #endif
+
+    /// Pull a JWT out of raw clipboard / JSON wrappers Studio sometimes copies.
+    private static func extractAccessToken(from raw: String) -> String? {
+        var text = raw
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+            .replacingOccurrences(of: "Bearer ", with: "", options: .caseInsensitive)
+            .trimmingCharacters(in: CharacterSet(charactersIn: "\"'"))
+        if text.isEmpty { return nil }
+
+        if text.hasPrefix("{"),
+           let data = text.data(using: .utf8),
+           let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] {
+            for key in ["accessToken", "access_token", "token", "mcpToken"] {
+                if let value = json[key] as? String, !value.isEmpty {
+                    text = value.trimmingCharacters(in: .whitespacesAndNewlines)
+                    break
+                }
+            }
+        }
+
+        // If the clipboard has prose + a JWT, take the eyJ… segment.
+        if !text.hasPrefix("eyJ"), let range = text.range(of: "eyJ") {
+            text = String(text[range.lowerBound...])
+                .split(whereSeparator: { $0.isWhitespace || $0 == "\"" || $0 == "'" })
+                .first
+                .map(String.init) ?? text
+        }
+
+        let parts = text.split(separator: ".")
+        guard parts.count >= 2 else { return nil }
+        return text
+    }
+
+    #if targetEnvironment(simulator)
+    private static func loadSimulatorSavedToken() -> String? {
+        var candidates: [URL] = []
+        // Mac home is not NSHomeDirectory() inside the Simulator sandbox.
+        if let hostHome = ProcessInfo.processInfo.environment["SIMULATOR_HOST_HOME"], !hostHome.isEmpty {
+            candidates.append(URL(fileURLWithPath: hostHome).appendingPathComponent(".abbies_world_token"))
+        }
+        if let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
+            candidates.append(docs.appendingPathComponent("abbies_world_token.txt"))
+        }
+        for url in candidates {
+            guard let raw = try? String(contentsOf: url, encoding: .utf8) else { continue }
+            if let token = extractAccessToken(from: raw) { return token }
+        }
+        return nil
+    }
+    #endif
+
+    private static func expiryDate(fromJWT token: String) -> Date? {
+        let parts = token.split(separator: ".")
+        guard parts.count >= 2 else { return nil }
+        var payload = String(parts[1])
+            .replacingOccurrences(of: "-", with: "+")
+            .replacingOccurrences(of: "_", with: "/")
+        while payload.count % 4 != 0 { payload.append("=") }
+        guard
+            let data = Data(base64Encoded: payload),
+            let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
+        else {
+            return nil
+        }
+        if let exp = json["exp"] as? TimeInterval {
+            return Date(timeIntervalSince1970: exp)
+        }
+        if let exp = json["exp"] as? Int {
+            return Date(timeIntervalSince1970: TimeInterval(exp))
+        }
+        return nil
     }
 
     /// `evan-personal.abbies-world-ios://<domain>/ios/<bundle>/callback`
@@ -176,8 +371,14 @@ final class AuthenticationService: ObservableObject {
             let credentials = try await credentialsManager.credentials()
             return credentials.accessToken
         } catch {
+            // Paste-token sessions have no refresh token — surface a clearer recovery path.
             isAuthenticated = false
+            #if targetEnvironment(simulator)
+            lastError = "Please paste a fresh Studio token (Copy MCP token)."
+            #else
             lastError = "Please sign in again."
+            #endif
+            World2Diagnostics.log("auth_access_token_failed", ["error": "\(error)"])
             return nil
         }
     }
@@ -219,6 +420,28 @@ final class AuthenticationService: ObservableObject {
         }
     }
 }
+
+#if targetEnvironment(simulator)
+/// Keychain-free Auth0 credential store for the iOS Simulator paste-token path.
+private final class SimulatorCredentialsStorage: CredentialsStorage {
+    private let defaults = UserDefaults.standard
+    private func defaultsKey(for key: String) -> String { "abbies.world.sim.credentials.\(key)" }
+
+    func getEntry(forKey key: String) -> Data? {
+        defaults.data(forKey: defaultsKey(for: key))
+    }
+
+    func setEntry(_ data: Data, forKey key: String) -> Bool {
+        defaults.set(data, forKey: defaultsKey(for: key))
+        return true
+    }
+
+    func deleteEntry(forKey key: String) -> Bool {
+        defaults.removeObject(forKey: defaultsKey(for: key))
+        return true
+    }
+}
+#endif
 
 enum HouseholdRole: String, Codable, Equatable {
     case parent

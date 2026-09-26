@@ -52,6 +52,19 @@ class PlayerStateService: ObservableObject {
     var unplacedFurnitureInventory: [DecorationInstance] {
         currentPlayer?.unplacedFurnitureInventory ?? []
     }
+
+    /// Furniture already stamped onto a decorate surface (treehouse room / scene / POI).
+    func placedFurniture(onSurface surfaceKey: String) -> [DecorationInstance] {
+        guard let player = currentPlayer else { return [] }
+        let placedIDs = Set(
+            player.homeLayout.placedDecorations
+                .filter { $0.resolvedRoomId == surfaceKey }
+                .map(\.decorationInstanceId)
+        )
+        return player.furnitureInventory
+            .filter { placedIDs.contains($0.id) }
+            .sorted { $0.zIndex < $1.zIndex }
+    }
     var furnitureIngredients: Int {
         currentPlayer?.availableFurnitureIngredientCount ?? 0
     }
@@ -179,9 +192,8 @@ class PlayerStateService: ObservableObject {
         let item = inventory[itemIndex]
         let mutable = scene(sceneID)
 
-        // Mutable player scenes take freehand / pad placement. Authored overland
-        // maps (Home, Daddy's Citadel, …) accept World Seeds and placeable POIs
-        // onto open scene-graph pads — that is how a factory lands in Daddy's world.
+        // Mutable player scenes and authored overland maps both take freehand
+        // placement. POI hardpoints are retired — tap where it should go.
         let target: (x: Double, y: Double, hardpointID: String?)
         if let mutable {
             let allowedOnImmutable =
@@ -190,31 +202,16 @@ class PlayerStateService: ObservableObject {
             guard mutable.isMutableByPlayer || allowedOnImmutable else {
                 return nil
             }
-            if mutable.hardpoints.isEmpty {
-                target = (
-                    min(max(x, 0.10), 0.90),
-                    min(max(y, 0.24), 0.86),
-                    nil
-                )
-            } else {
-                guard let hardpointID,
-                      let hardpoint = availableHardpoints(in: sceneID).first(
-                        where: { $0.id == hardpointID }
-                      ) else {
-                    return nil
-                }
-                target = (hardpoint.x, hardpoint.y, hardpoint.id)
-            }
-        } else if Self.canPlantOnAuthoredMap(item.templateID) {
-            guard let hardpointID else { return nil }
-            let alreadyPlanted = (player.placedPlaces ?? []).contains {
-                $0.sceneID == sceneID && $0.hardpointID == hardpointID
-            }
-            guard !alreadyPlanted else { return nil }
             target = (
                 min(max(x, 0.05), 0.95),
-                min(max(y, 0.10), 0.92),
-                hardpointID
+                min(max(y, 0.08), 0.92),
+                nil
+            )
+        } else if Self.canPlantOnAuthoredMap(item.templateID) {
+            target = (
+                min(max(x, 0.05), 0.95),
+                min(max(y, 0.08), 0.92),
+                nil
             )
         } else {
             return nil
@@ -747,6 +744,83 @@ class PlayerStateService: ObservableObject {
         return added
     }
 
+    @discardableResult
+    func replaceGeneratedDecorationArtwork(id: String, png: Data) -> Bool {
+        guard var player = currentPlayer,
+              var catalog = player.generatedDecorations,
+              let index = catalog.firstIndex(where: { $0.id == id }),
+              let hash = World2GeneratedDecorationImageStore.shared.replace(png, decorationID: id) else {
+            return false
+        }
+        let old = catalog[index]
+        catalog[index] = World2GeneratedDecoration(
+            id: old.id,
+            packID: old.packID,
+            label: old.label,
+            registryKey: old.registryKey,
+            registryRevision: old.registryRevision,
+            sha256: hash,
+            placementLayer: old.placementLayer,
+            recipe: old.recipe,
+            awardedAt: old.awardedAt
+        )
+        player.generatedDecorations = catalog
+        currentPlayer = player
+        saveLocalState()
+        return true
+    }
+
+    /// Swap a highlighted prop's picture for a new carved PNG.
+    /// Existing inventions keep their id. Anything else becomes a generated prop.
+    @discardableResult
+    func applyRefinedPicture(instanceID: String, png: Data, label: String) -> Bool {
+        guard var player = currentPlayer,
+              let index = player.decorations.firstIndex(where: { $0.id == instanceID }) else {
+            return false
+        }
+        let instance = player.decorations[index]
+        if player.generatedDecoration(id: instance.decorationId) != nil {
+            return replaceGeneratedDecorationArtwork(id: instance.decorationId, png: png)
+        }
+
+        let store = World2GeneratedDecorationImageStore.shared
+        let decorationID = "refine-\(instance.id)"
+        let decoration = World2GeneratedDecoration(
+            id: decorationID,
+            packID: "dev-refine",
+            label: label,
+            registryKey: "preview/refine/\(decorationID)",
+            registryRevision: 1,
+            sha256: store.digest(png),
+            placementLayer: .floor,
+            recipe: World2AssetWorkbenchRecipe(
+                finishID: "finish.hand-painted",
+                objectFamilyID: "object.furniture",
+                personalityID: "personality.storybook"
+            ),
+            awardedAt: Date()
+        )
+        guard store.store(png, for: decoration) else { return false }
+        var catalog = player.generatedDecorations ?? []
+        catalog.removeAll { $0.id == decorationID }
+        catalog.append(decoration)
+        player.generatedDecorations = catalog
+        player.decorations[index] = DecorationInstance(
+            id: instance.id,
+            decorationId: decorationID,
+            x: instance.x,
+            y: instance.y,
+            scale: instance.scale,
+            rotation: instance.rotation,
+            zIndex: instance.zIndex,
+            state: instance.state,
+            badges: instance.badges
+        )
+        currentPlayer = player
+        saveLocalState()
+        return true
+    }
+
     /// Always mint a fresh inventory copy (Daddy's candy / hug every visit).
     @discardableResult
     func awardRepeatableStoryDecoration(
@@ -1119,6 +1193,37 @@ class PlayerStateService: ObservableObject {
         } catch {
             self.error = "Your latest progress could not be saved."
             print("PLAYER_STATE_SAVE_FAILED error=\(error.localizedDescription)")
+            return
+        }
+        World2WorldSync.shared.noteLocalChange()
+    }
+
+    func exportPlayers() -> [String: PlayerState] {
+        var exported: [String: PlayerState] = [:]
+        for playerId in PlayerId.allCases {
+            if case .loaded(let player) = loadPlayerState(for: playerId) {
+                exported[playerId.rawValue] = player
+            }
+        }
+        if let currentPlayer {
+            exported[currentPlayer.playerId.rawValue] = currentPlayer
+        }
+        return exported
+    }
+
+    func replaceStoredPlayers(_ players: [String: PlayerState]) {
+        for (_, player) in players {
+            let stored = StoredPlayerState(
+                schemaVersion: Self.playerStateSchemaVersion,
+                player: player
+            )
+            if let data = try? JSONEncoder().encode(stored) {
+                UserDefaults.standard.set(data, forKey: playerStateKey(for: player.playerId))
+            }
+        }
+        if let current = currentPlayer,
+           let updated = players[current.playerId.rawValue] {
+            currentPlayer = updated
         }
     }
     
