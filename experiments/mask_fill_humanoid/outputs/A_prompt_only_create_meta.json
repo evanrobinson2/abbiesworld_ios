@@ -1,0 +1,37 @@
+{
+  "api": "abbies.world /api/create",
+  "condition": "A_prompt_only",
+  "ok": true,
+  "elapsed_sec": 32.08,
+  "http_status": 200,
+  "image_url": "/static/generated/4ddaa608-64b7-44b8-ba31-43c225f7f655.png",
+  "model_used": "gpt-image-2.5-sunburst",
+  "output": "outputs/A_prompt_only_create.png",
+  "request": {
+    "freeTextDescription": "clay kid left bicep, knitted orange sweater sleeve",
+    "model": "gpt-image-2.5-flare",
+    "quality": "low",
+    "recipeItems": []
+  },
+  "analysis": {
+    "bicep_mean_rgb": [
+      198.8,
+      177.4,
+      162.9
+    ],
+    "edit_region": {
+      "changed_pct": 79.21,
+      "changed_pixels": 10212,
+      "mean_abs_diff": 0.49,
+      "pixels": 12893
+    },
+    "keep_region": {
+      "changed_pct": 98.08,
+      "changed_pixels": 1015837,
+      "mean_abs_diff": 81.89,
+      "pixels": 1035683
+    },
+    "threshold": 18
+  },
+  "note": "Server used gpt-image-2.5-sunburst even though client requested flare/low."
+}

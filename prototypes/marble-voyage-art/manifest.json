@@ -1,0 +1,111 @@
+{
+  "product": "Marble Voyage",
+  "version": "1.0",
+  "updated": "2026-09-25",
+  "sourceOfTruth": "Peglin Edition bundled Assets.xcassets + AssetSources/World2/user-supplied/peglin/v1",
+  "styleLock": "hand-built fantasy diorama · three-quarter isometric · cel-shaded · painterly · miniature/tilt-shift · kid-safe Abbie's World warmth",
+  "voyageUsage": {
+    "titleBackdrop": "map.peglin.crashLand",
+    "chartBackdrop": "map.peglin.crashLand",
+    "fightPlates": {
+      "brambleSpirit": "map.peglin.bramble",
+      "foxSpirit": "map.peglin.foxLand",
+      "stagSpirit": "map.peglin.stagLand",
+      "default": "map.peglin.crashLand"
+    },
+    "chartChrome": "SF Symbols only (no custom event plates yet)",
+    "sfx": "Resources/SFX/Plink (Kenney CC0 via PlinkSFX / MarbleVoyageAudio)",
+    "music": "PlinkMusicService safari/board cues"
+  },
+  "assets": [
+    {
+      "semanticId": "map.peglin.crashLand",
+      "catalog": "world2_map_peglin_crashLand",
+      "role": ["title backdrop", "chart backdrop", "default fight plate"],
+      "preview": "plates/map.peglin.crashLand.jpg",
+      "notes": "Crash crater hub — wrecked craft, mushrooms, crystal pool"
+    },
+    {
+      "semanticId": "map.peglin.bramble",
+      "catalog": "world2_map_peglin_bramble",
+      "role": ["fight plate · Bramble Spirit"],
+      "preview": "plates/map.peglin.bramble.jpg",
+      "notes": "Rabbit-fawn clover bowl + burrow pockets"
+    },
+    {
+      "semanticId": "map.peglin.foxLand",
+      "catalog": "world2_map_peglin_foxLand",
+      "role": ["fight plate · Fox Spirit"],
+      "preview": "plates/map.peglin.foxLand.jpg",
+      "notes": "Kitsune grove, pink trees, lanterns"
+    },
+    {
+      "semanticId": "map.peglin.stagLand",
+      "catalog": "world2_map_peglin_stagLand",
+      "role": ["fight plate · Stag Spirit / boss"],
+      "preview": "plates/map.peglin.stagLand.jpg",
+      "notes": "Crystal-antler stag, ley stones"
+    },
+    {
+      "semanticId": "map.peglin.forgottenRealm",
+      "catalog": "world2_map_peglin_forgottenRealm",
+      "role": ["Peglin progression land — not yet wired into voyage nodes"],
+      "preview": "plates/map.peglin.forgottenRealm.jpg",
+      "notes": "Ruins + pedestal orb (power-up land)"
+    },
+    {
+      "semanticId": "enemy.peglin.brambleSpirit.happy",
+      "catalog": "world2_peglin_bramble_happy",
+      "role": ["fight portrait"],
+      "preview": "portraits/enemy.brambleSpirit.happy.png"
+    },
+    {
+      "semanticId": "enemy.peglin.foxSpirit.happy",
+      "catalog": "world2_peglin_fox_happy",
+      "role": ["fight portrait"],
+      "preview": "portraits/enemy.foxSpirit.happy.png"
+    },
+    {
+      "semanticId": "enemy.peglin.stagSpirit.happy",
+      "catalog": "world2_peglin_stag_happy",
+      "role": ["fight / boss portrait"],
+      "preview": "portraits/enemy.stagSpirit.happy.png"
+    },
+    {
+      "semanticId": "character.peglin.abbie.happy",
+      "catalog": "world2_peglin_abbie_happy",
+      "role": ["player portrait"],
+      "preview": "portraits/abbie.happy.png"
+    },
+    {
+      "semanticId": "orb.peglin.sparkle",
+      "catalog": "world2_orb_peglin_sparkle",
+      "role": ["parble / deck marble"],
+      "preview": "orbs/orb.peglin.sparkle.png"
+    },
+    {
+      "semanticId": "orb.peglin.bounceberry",
+      "catalog": "world2_orb_peglin_bounceberry",
+      "role": ["parble / deck marble"],
+      "preview": "orbs/orb.peglin.bounceberry.png"
+    },
+    {
+      "semanticId": "orb.peglin.pebble",
+      "catalog": "world2_orb_peglin_pebble",
+      "role": ["parble / deck marble"],
+      "preview": "orbs/orb.peglin.pebble.png"
+    },
+    {
+      "semanticId": "orb.peglin.zipbolt",
+      "catalog": "world2_orb_peglin_zipbolt",
+      "role": ["parble / deck marble"],
+      "preview": "orbs/orb.peglin.zipbolt.png"
+    },
+    {
+      "semanticId": "orb.peglin.puff",
+      "catalog": "world2_orb_peglin_puff",
+      "role": ["parble / deck marble"],
+      "preview": "orbs/orb.peglin.puff.png"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "kind": "figurines",
+  "states": {
+    "bramble": "world2_peglin_bramble_figurine",
+    "fox": "world2_peglin_fox_figurine",
+    "stag": "world2_peglin_stag_figurine"
+  },
+  "note": "Full-body idle boards for fight floor presence. Portraits stay elbow-height."
+}

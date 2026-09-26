@@ -25,6 +25,7 @@ enum World2POIRegistry {
     static let placeFactoryID = "poi.selfReplicatingFactory"
     static let threeBearsHouseID = "poi.threeBearsHouse"
     static let characterStudioID = "poi.characterStudio"
+    static let figurineExplorerID = "poi.figurineExplorer"
     static let sceneBuilderID = "poi.sceneBuilder"
     static let whizbangID = "poi.whizbang"
     static let planningDeptID = "poi.planningDept"
@@ -50,13 +51,43 @@ enum World2POIRegistry {
         placeFactory,
         threeBearsHouse,
         characterStudio,
+        figurineExplorer,
         sceneBuilder,
         whizbang,
         planningDept,
+        peglinWreck,
+        peglinPegMonastery,
+        peglinBattleClearing,
+        peglinSalvageWorkshop,
+        peglinBrokenPath,
+        peglinBrambleGuardian,
+        peglinFoxGuardian,
+        peglinStagGuardian,
+        peglinForgottenOrb,
+        peglinPathToFox,
+        peglinPathToStag,
+        peglinPathToForgotten,
+        peglinPathBackToCrash,
+        peglinPathBackToBramble,
+        peglinPathBackToFox,
+        peglinPathBackToStag,
+        peglinPathHomeToFox,
+        peglinPathFoxToHome,
     ]
 
     static func archetype(_ id: String) -> World2POIArchetype? {
-        archetypes[id]
+        if let remote = World2WorldSync.shared.archetype(id) {
+            return remote
+        }
+        // Peglin Edition shells stay available even when the household document
+        // is server-backed (until MCP seed lands those places remotely).
+        if id.hasPrefix("poi.peglin.") {
+            return archetypes[id]
+        }
+        if World2WorldSync.shared.usesServerDocument {
+            return nil
+        }
+        return archetypes[id]
     }
 
     /// Archetypes a developer may drop into a scene from the editor. Treehouses
@@ -85,7 +116,7 @@ enum World2POIRegistry {
         case .evan:
             name = "Daddy's Citadel"
             lore = "A glowing white base on the mountain — blue paths, glass halls, and a view of the water."
-            music = "world2_cliffside_morning"
+            music = "world2_glassy_bells"
         }
         return World2POIArchetype(
             id: owner.homePoiId,
@@ -280,6 +311,24 @@ enum World2POIRegistry {
         )
     )
 
+    static let figurineExplorer = World2POIArchetype(
+        id: figurineExplorerID,
+        name: "Figurine Explorer",
+        kind: .minigame,
+        sizeClass: .medium,
+        exteriorAsset: "poi.figurineExplorer.exterior",
+        interiorAsset: "poi.figurineExplorer.interior",
+        icon: "figure.walk",
+        lore: "A little pedestal on the lookout ring. Spin a figurine and watch it run in place.",
+        activityDescription: "Cycle Abbie and Daddy, pick a clip, and drag to walk around the figure. They stay put and run on the spot.",
+        callToAction: "Open the Explorer",
+        musicTrackID: "world2_joyful_bounce",
+        contract: World2POIContract(
+            route: .figurineExplorer,
+            completionMilestone: "minigame.figurineExplorer.opened"
+        )
+    )
+
     static let sceneBuilder = World2POIArchetype(
         id: sceneBuilderID,
         name: "The Imagination Atelier",
@@ -334,6 +383,275 @@ enum World2POIRegistry {
             completionMilestone: "minigame.planningDept.opened"
         )
     )
+
+    // MARK: - Peglin Edition
+
+    static let peglinWreck = World2POIArchetype(
+        id: PeglinEdition.wreckPlaceID,
+        name: "The Wreck",
+        kind: .story,
+        sizeClass: .large,
+        // Scene crop of the crash craft (same idea as land guardians using their plate).
+        exteriorAsset: "token.peglin.wreck",
+        interiorAsset: "poi.peglin.wreck.interior",
+        icon: "airplane",
+        lore: "Half-buried fantasy-tech craft — your point of origin on this floating isle.",
+        activityDescription: "Step into the damaged control chamber and reclaim what you can.",
+        callToAction: "Enter the Wreck",
+        musicTrackID: "plink_abbies_world",
+        contract: World2POIContract(
+            route: .rooms,
+            completionMilestone: "peglin.wreck.entered"
+        )
+    )
+
+    /// Peg Monastery — Crash World home land; math challenge earns Plink blessings.
+    static let peglinPegMonastery = World2POIArchetype(
+        id: PeglinEdition.pegMonasteryID,
+        name: "Peg Monastery",
+        kind: .minigame,
+        sizeClass: .large,
+        exteriorAsset: "poi.peglin.pegMonastery.exterior",
+        interiorAsset: "poi.peglin.pegMonastery.interior",
+        icon: "bell.fill",
+        lore: "A floating cloister of bells — solve a sum to earn Refresh, Super Peg, or Bomb Peg.",
+        activityDescription: "Enter the hall and answer a math challenge. Max two of each blessing.",
+        callToAction: "Enter Monastery",
+        musicTrackID: "plink_abbies_world",
+        contract: World2POIContract(
+            route: .pegMonastery,
+            grants: [.gems(upTo: 2)],
+            completionMilestone: "peglin.monastery.blessing"
+        )
+    )
+
+    static let peglinBattleClearing = World2POIArchetype(
+        id: PeglinEdition.battlePlaceID,
+        name: "Battle Clearing",
+        kind: .minigame,
+        sizeClass: .large,
+        exteriorAsset: "token.peglin.battle",
+        icon: "circle.grid.cross.fill",
+        lore: "A natural bowl where wreckage and crystals become the pegboard.",
+        activityDescription: "Aim, bounce, clear orange pegs — the Peglin machine lives here.",
+        callToAction: "Enter Battle",
+        musicTrackID: "plink_fell_from_the_blue",
+        contract: World2POIContract(
+            route: .plink,
+            grants: [.gems(upTo: 12)],
+            completionMilestone: "peglin.battle.clearing"
+        )
+    )
+
+    static let peglinSalvageWorkshop = World2POIArchetype(
+        id: PeglinEdition.workshopPlaceID,
+        name: "Salvage Workshop",
+        kind: .story,
+        sizeClass: .medium,
+        exteriorAsset: "token.peglin.workshop",
+        interiorAsset: "poi.peglin.salvageWorkshop.interior",
+        icon: "wrench.and.screwdriver.fill",
+        lore: "A lean-to of wreck panels — future home for orbs and upgrades.",
+        activityDescription: "Warm bench light, shelves of salvage, room to grow.",
+        callToAction: "Enter Workshop",
+        musicTrackID: "plink_abbies_world",
+        contract: World2POIContract(
+            route: .rooms,
+            completionMilestone: "peglin.workshop.entered"
+        )
+    )
+
+    static let peglinBrokenPath = World2POIArchetype(
+        id: PeglinEdition.brokenPathPlaceID,
+        name: "To Fox Land",
+        kind: .story,
+        sizeClass: .medium,
+        exteriorAsset: "map.peglin.foxLand",
+        icon: "bridge",
+        lore: "A fractured path north toward Fox Land.",
+        activityDescription: "Step north to challenge the Fox Spirit.",
+        callToAction: "Go to Fox Land",
+        contract: World2POIContract(
+            route: .travel(sceneID: PeglinEdition.Land.foxLand.sceneID),
+            completionMilestone: "peglin.brokenPath.toFox"
+        )
+    )
+
+    static let peglinBrambleGuardian = World2POIArchetype(
+        id: PeglinEdition.brambleGuardianID,
+        name: "Bramble Spirit",
+        kind: .minigame,
+        sizeClass: .large,
+        exteriorAsset: "token.peglin.bramble",
+        icon: "hare.fill",
+        lore: "A glowing rabbit-fawn rooted in the clover bowl — the board is the clearing.",
+        activityDescription: "Aim into the burrow pockets. Clear the spirit's trial.",
+        callToAction: "Challenge Bramble",
+        musicTrackID: "plink_things_in_the_grass",
+        contract: World2POIContract(
+            route: .plink,
+            grants: [.gems(upTo: 10)],
+            completionMilestone: "peglin.bramble.clear"
+        )
+    )
+
+    static let peglinFoxGuardian = World2POIArchetype(
+        id: PeglinEdition.foxGuardianID,
+        name: "Fox Spirit",
+        kind: .minigame,
+        sizeClass: .large,
+        exteriorAsset: "token.peglin.foxLand",
+        icon: "flame.fill",
+        lore: "A many-tailed kitsune among pink trees and lantern mushrooms.",
+        activityDescription: "Bounce through the fox grove — lanterns and caps are your pegs.",
+        callToAction: "Challenge Fox Land",
+        musicTrackID: "plink_electronic_folk_dance",
+        contract: World2POIContract(
+            route: .plink,
+            grants: [.gems(upTo: 12)],
+            completionMilestone: "peglin.foxLand.clear"
+        )
+    )
+
+    static let peglinStagGuardian = World2POIArchetype(
+        id: PeglinEdition.stagGuardianID,
+        name: "Stag Spirit",
+        kind: .minigame,
+        sizeClass: .large,
+        exteriorAsset: "token.peglin.stagLand",
+        icon: "leaf.fill",
+        lore: "Crystal antlers over a ley-line pool — standing stones hum as bumpers.",
+        activityDescription: "Fight the stag's trial on the floating green.",
+        callToAction: "Challenge Stag Land",
+        musicTrackID: "plink_cheerful_khorovod",
+        contract: World2POIContract(
+            route: .plink,
+            grants: [.gems(upTo: 14)],
+            completionMilestone: "peglin.stagLand.clear"
+        )
+    )
+
+    static let peglinForgottenOrb = World2POIArchetype(
+        id: PeglinEdition.forgottenOrbID,
+        name: "Forgotten Orb",
+        kind: .story,
+        sizeClass: .medium,
+        exteriorAsset: "token.peglin.forgottenRealm",
+        icon: "sparkles",
+        lore: "A free power-up waits on the ruined pedestal under the ancient tree.",
+        activityDescription: "Claim the glowing teardrop — no battle, just a gift.",
+        callToAction: "Claim Power-Up",
+        musicTrackID: "plink_abbies_world",
+        contract: World2POIContract(
+            route: .rooms,
+            grants: [.gems(upTo: 8)],
+            completionMilestone: "peglin.forgottenRealm.orb"
+        )
+    )
+
+    static let peglinPathToFox = peglinPath(
+        id: PeglinEdition.pathToFoxID,
+        name: "Path to Fox Land",
+        destination: .foxLand,
+        exterior: "token.peglin.travel"
+    )
+
+    static let peglinPathToStag = peglinPath(
+        id: PeglinEdition.pathToStagID,
+        name: "Path to Stag Land",
+        destination: .stagLand,
+        exterior: "token.peglin.travel"
+    )
+
+    static let peglinPathToForgotten = peglinPath(
+        id: PeglinEdition.pathToForgottenID,
+        name: "Path to Forgotten Realm",
+        destination: .forgottenRealm,
+        exterior: "token.peglin.travel"
+    )
+
+    static let peglinPathBackToCrash = peglinPath(
+        id: PeglinEdition.pathBackToCrashID,
+        name: "Back to Crash World",
+        destination: .crashWorld,
+        exterior: "token.peglin.travel"
+    )
+
+    static let peglinPathBackToBramble = peglinPath(
+        id: PeglinEdition.pathBackToBrambleID,
+        name: "Back to Bramble",
+        destination: .bramble,
+        exterior: "token.peglin.travel"
+    )
+
+    static let peglinPathBackToFox = peglinPath(
+        id: PeglinEdition.pathBackToFoxID,
+        name: "Back to Fox Land",
+        destination: .foxLand,
+        exterior: "token.peglin.travel"
+    )
+
+    static let peglinPathBackToStag = peglinPath(
+        id: PeglinEdition.pathBackToStagID,
+        name: "Back to Stag Land",
+        destination: .stagLand,
+        exterior: "token.peglin.travel"
+    )
+
+    static let peglinPathHomeToFox = peglinTravel(
+        id: PeglinEdition.pathHomeToFoxID,
+        name: "To Fox Land",
+        destinationSceneID: PeglinEdition.Land.foxLand.sceneID,
+        exterior: "map.peglin.foxLand"
+    )
+
+    static let peglinPathFoxToHome = peglinTravel(
+        id: PeglinEdition.pathFoxToHomeID,
+        name: "Back to Wreck",
+        destinationSceneID: PeglinEdition.crashLandSceneID,
+        exterior: "map.peglin.crashLand"
+    )
+
+    private static func peglinPath(
+        id: String,
+        name: String,
+        destination: PeglinEdition.Land,
+        exterior: String
+    ) -> World2POIArchetype {
+        peglinTravel(
+            id: id,
+            name: name,
+            destinationSceneID: destination.sceneID,
+            exterior: exterior,
+            lore: "A floating fragment path toward \(destination.displayName).",
+            milestone: "peglin.travel.\(destination.rawValue)"
+        )
+    }
+
+    private static func peglinTravel(
+        id: String,
+        name: String,
+        destinationSceneID: String,
+        exterior: String,
+        lore: String? = nil,
+        milestone: String? = nil
+    ) -> World2POIArchetype {
+        World2POIArchetype(
+            id: id,
+            name: name,
+            kind: .story,
+            sizeClass: .small,
+            exteriorAsset: exterior,
+            icon: "arrow.triangle.swap",
+            lore: lore ?? "A path toward \(name).",
+            activityDescription: "Travel via \(name).",
+            callToAction: name,
+            contract: World2POIContract(
+                route: .travel(sceneID: destinationSceneID),
+                completionMilestone: milestone ?? "peglin.travel.\(id)"
+            )
+        )
+    }
 
     // MARK: - Validation
 

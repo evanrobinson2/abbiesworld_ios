@@ -25,7 +25,7 @@ struct World2CharacterStudioView: View {
                 World2SemanticImage(
                     semanticName: archetype.interiorAsset ?? "poi.characterStudio.interior",
                     fallbackIcon: "paintpalette.fill",
-                    fallbackLabel: "Character Studio interior artwork is not bundled"
+                    fallbackLabel: "Character Studio is under construction"
                 )
                 .scaledToFill()
                 .frame(width: geo.size.width, height: geo.size.height)
@@ -53,17 +53,6 @@ struct World2CharacterStudioView: View {
 
                 VStack {
                     HStack {
-                        Button(action: onExit) {
-                            Label("Leave Studio", systemImage: "arrow.left")
-                                .font(.system(size: 16, weight: .bold, design: .rounded))
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 10)
-                                .background(.black.opacity(0.72), in: Capsule())
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityIdentifier("world2.characterStudio.exit")
-
                         Spacer()
 
                         Button {
@@ -107,6 +96,10 @@ struct World2CharacterStudioView: View {
         .fullScreenCover(isPresented: $showingEffectLab) {
             World2AtelierEffectLabView(onClose: { showingEffectLab = false })
         }
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.characterStudio.exit",
+            onExit: onExit
+        )
     }
 
     private var effectPicker: some View {

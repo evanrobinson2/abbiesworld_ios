@@ -1,0 +1,30 @@
+---
+description: Marble Voyage / Plink design preflight before playtest handoff
+globs: abbies.world.ios/**/Plink/**/*.swift,abbies.world.ios/**/MarbleVoyage*.swift,abbies.world.ios/**/Assets.xcassets/world2_plink_power_icon_*/**,abbies.world.ios/**/Assets.xcassets/world2_peglin_*_figurine/**,abbies.world.ios/**/Assets.xcassets/world2_title_*/**,abbies.world.ios/**/Assets.xcassets/world2_map_peglin_*/**,abbies.world.ios/**/Assets.xcassets/world2_map_marbleVoyage_*/**,scripts/check_voyage*.py,scripts/preflight_marble_voyage.sh
+alwaysApply: false
+---
+
+# Marble Voyage design gates — run before playtest
+
+Before a **major build** or sending Evan into **Marble Voyage / Plink**, run:
+
+```bash
+./scripts/preflight_marble_voyage.sh
+```
+
+Must exit **0**. Do not hand off on failure.
+
+## Rules enforced (see `MarbleVoyageDesignRules.swift`)
+
+1. **Screen real estate** — 4:3 fight/title plates fill ≥85% width on reference iPad landscape; climb chart fills ~70–92% width (art-leads tall aspect, small letterbox only).
+2. **Transparent UI** — power icons (`world2_plink_power_icon_*`) must have clear corners / real alpha — no opaque card-stock backgrounds.
+3. **Readable battle feed** — panel ≥160pt; body/meta fonts from the design contract (no 8–9pt transcript).
+4. **Climb intro** — start at top/summit, pan ≈4s to player centered (explicit `climbCameraOffset`, not fragile `scrollTo`).
+5. **VS portraits** — fox / bramble / stag figurines resolve.
+6. **No-clip plates** — 4:3 Fit only; never `scaledToFill` on voyage surfaces (also `scripts/check_voyage_plate_aspects.py`).
+
+## Physics contract (live + headless continuum)
+
+7. **No straight-up bounce** — after peg / rail / side-wall rebound, outbound velocity must not sit inside ~14° of pure +Y (`PlinkContinuum.avoidStraightUpVelocity`). Shared by `PeggleScene` and `PlinkRoundSimulator`.
+
+Update thresholds in **both** `MarbleVoyageDesignRules.swift` and `scripts/check_voyage_design_rules.py` together.

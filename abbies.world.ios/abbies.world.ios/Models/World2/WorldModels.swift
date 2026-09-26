@@ -18,6 +18,8 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     case artGarden = "world.artGarden"
     /// Daddy's mountain citadel — futuristic scene with his home POI.
     case evan = "world.evan"
+    /// Peglin Edition — floating Crash Land hub (default login destination).
+    case peglinEdition = "world.peglinEdition"
     
     var id: String { rawValue }
     
@@ -31,6 +33,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .threeBears: return "Three Bears Woods"
         case .artGarden: return "Art Garden"
         case .evan: return "Daddy's Citadel"
+        case .peglinEdition: return "Peglin Edition"
         }
     }
     
@@ -44,6 +47,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .threeBears: return "A hushed clearing in the woods where somebody is cooking"
         case .artGarden: return "A terraced garden of easels and paths, with a studio for dressing up"
         case .evan: return "A glowing white citadel on the mountain, looking out over the water"
+        case .peglinEdition: return "Crash World → Bramble → Fox → Stag → Forgotten Realm"
         }
     }
     
@@ -57,6 +61,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .threeBears: return "Into the Woods"
         case .artGarden: return nil
         case .evan: return "Daddy's Base"
+        case .peglinEdition: return "Peglin Edition"
         }
     }
 
@@ -64,9 +69,18 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     var sceneID: String {
         switch self {
         case .blankSlate: return World2SceneDefinition.blankSlateSceneID
+        case .peglinEdition: return PeglinEdition.crashLandSceneID
         default: return rawValue
         }
     }
+}
+
+/// Teleporter rows. Compiled worlds use `WorldId.rawValue`; a signed-in
+/// document uses its own scene ids (`scene.home`, not `world.home`).
+struct World2TeleporterDestination: Identifiable, Equatable {
+    var id: String
+    var name: String
+    var summary: String
 }
 
 /// World-level metadata: what this map is called, how it sounds, and where you

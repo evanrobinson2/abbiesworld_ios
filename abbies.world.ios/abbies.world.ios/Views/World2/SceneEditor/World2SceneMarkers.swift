@@ -237,9 +237,13 @@ struct World2POIInstanceMarker: View {
     let isSelected: Bool
     /// True in the hardpoint layer, where places step out of the way.
     let isDimmed: Bool
+    /// False when the scene label pass draws this name instead.
+    var showsNameLabel: Bool = true
+    var showsNewBadge: Bool = false
     let onTap: () -> Void
     let onDragChanged: (World2NormalizedPoint) -> Void
     let onDragEnded: (World2NormalizedPoint) -> Void
+    @ObservedObject private var plates = World2GeneratedPlateStore.shared
     let onScale: (Double) -> Void
     let onRotation: (Double) -> Void
 
@@ -252,7 +256,7 @@ struct World2POIInstanceMarker: View {
     /// The name pill hangs under the artwork, so drop the stack to put the
     /// building — not the label — on the painted spot.
     private var artworkAnchorDrop: CGFloat {
-        18 * markerScale
+        22 * markerScale
     }
 
     /// Keep buildings the same size relative to the painting when the map is
@@ -306,28 +310,49 @@ struct World2POIInstanceMarker: View {
     private var markerContent: some View {
         VStack(spacing: 7) {
             artworkStack
-            nameLabel
+            if showsNameLabel {
+                nameLabel
+            }
         }
     }
 
     /// Painted art when it has been qualified into the bundle, the archetype's
-    /// drawn stand-in otherwise.
+    /// drawn stand-in otherwise. Peglin landmarks use the same large footprint
+    /// as other places so they read on the map (not pocket tokens).
     @ViewBuilder
     private var exteriorArtwork: some View {
-        if let drawnArtStyle = archetype.drawnArtStyle,
+        if let tokenKind = PeglinLandmarkTokenKind.kind(forArchetypeID: archetype.id),
+           UIImage(named: tokenKind.catalogImageName) != nil {
+            PeglinLandmarkTokenView(
+                kind: tokenKind,
+                isSelected: isSelected,
+                size: 175 * markerScale
+            )
+        } else if plates.image(for: archetype.exteriorAsset) != nil {
+            World2SemanticImage(
+                semanticName: archetype.exteriorAsset,
+                fallbackIcon: archetype.icon,
+                fallbackLabel: archetype.name
+            )
+            .scaledToFit()
+        } else if let drawnArtStyle = archetype.drawnArtStyle,
            AssetBootstrapService.shared.image(for: archetype.exteriorAsset) == nil {
             World2POIDrawnArtwork(style: drawnArtStyle)
         } else {
             World2SemanticImage(
                 semanticName: archetype.exteriorAsset,
                 fallbackIcon: archetype.icon,
-                fallbackLabel: "\(archetype.name) artwork is not bundled"
+                fallbackLabel: archetype.name
             )
             .scaledToFit()
         }
     }
 
     private var glowColor: Color {
+        let presentation = instance.resolvedPresentation
+        if let hue = presentation.tintHue {
+            return Color(hue: hue, saturation: 0.72, brightness: 0.95)
+        }
         if isEditable && isSelected { return .orange }
         if isSelected { return .yellow }
         switch archetype.kind {
@@ -345,12 +370,16 @@ struct World2POIInstanceMarker: View {
     }
 
     private var artworkStack: some View {
-        TimelineView(.animation(minimumInterval: 1.0 / 30.0, paused: reduceMotion || isEditable)) { timeline in
+        let presentation = instance.resolvedPresentation
+        let isLandmark = PeglinLandmarkTokenKind.kind(forArchetypeID: archetype.id) != nil
+        // ~25% larger than the readable landmark baseline (was 240×220).
+        let artW: CGFloat = (isLandmark ? 300 : 280) * markerScale
+        let artH: CGFloat = (isLandmark ? 275 : 255) * markerScale
+        return TimelineView(.animation(minimumInterval: 1.0 / 30.0, paused: reduceMotion || isEditable)) { timeline in
             let t = timeline.date.timeIntervalSinceReferenceDate
-            let glowPulse = reduceMotion || isEditable
-                ? 0.40
+            let glowPulse = reduceMotion || isEditable || !presentation.glowEnabled
+                ? (presentation.glowEnabled ? 0.40 : 0)
                 : 0.32 + 0.28 * (0.5 + 0.5 * sin((t * 1.6) + dancePhase))
-            // Inspected / descriptive tile grows harder; others keep a mild pulse.
             let selectedGrow: CGFloat = {
                 if isEditable || reduceMotion { return 1 }
                 if isSelected {
@@ -360,35 +389,64 @@ struct World2POIInstanceMarker: View {
             }()
 
             ZStack {
+                // Soft ground contact only — keep it hugging the asset base.
                 Ellipse()
-                    .fill(glowColor.opacity(glowPulse * (isSelected ? 0.85 : 0.55)))
-                    .frame(width: 180 * markerScale, height: 100 * markerScale)
-                    .blur(radius: isSelected ? 22 : 14)
-                    .offset(y: 48 * markerScale)
+                    .fill(Color.black.opacity(isSelected ? 0.28 : 0.18))
+                    .frame(width: artW * 0.55, height: artH * 0.10)
+                    .blur(radius: 1.5)
+                    .offset(y: artH * 0.42)
+
+                if presentation.glowEnabled && !isLandmark {
+                    Ellipse()
+                        .fill(glowColor.opacity(max(0.06, glowPulse) * (isSelected ? 0.55 : 0.28)))
+                        .frame(width: artW * 0.55, height: artH * 0.12)
+                        .blur(radius: isSelected ? 4 : 3)
+                        .offset(y: artH * 0.40)
+                }
 
                 exteriorArtwork
-                    .frame(width: 230 * markerScale, height: 205 * markerScale)
-                    .shadow(
-                        color: glowColor.opacity(isSelected ? 0.95 : 0.58),
-                        radius: isSelected ? 20 : 12
+                    .frame(
+                        width: artW,
+                        height: artH,
+                        alignment: .center
                     )
-                    .shadow(color: .black.opacity(0.38), radius: 10, y: 6)
+                    // Hairline contact shadow — almost on the sprite.
+                    .shadow(
+                        color: .black.opacity(isSelected ? 0.38 : 0.26),
+                        radius: isSelected ? 1.5 : 1,
+                        y: 1
+                    )
                     .modifier(
                         World2PlantSway(
                             date: timeline.date,
                             phase: dancePhase,
-                            intensity: reduceMotion || isEditable ? 0 : World2BuildingSway.intensity
+                            intensity: reduceMotion || isEditable || !presentation.swayEnabled
+                                ? 0
+                                : World2BuildingSway.intensity
                         )
+                    )
+                    .colorMultiply(
+                        presentation.tintHue == nil
+                            ? Color.white
+                            : Color(hue: presentation.tintHue ?? 0, saturation: 0.35, brightness: 1)
                     )
 
                 if isEditable && isSelected {
                     RoundedRectangle(cornerRadius: 22)
                         .stroke(.orange.opacity(0.9), style: StrokeStyle(lineWidth: 3, dash: [8, 6]))
-                        .frame(width: 230 * markerScale, height: 205 * markerScale)
+                        .frame(width: artW, height: artH)
+                }
+
+                // Only show NEW when we have real badge art — never a placeholder pill.
+                if showsNewBadge,
+                   World2GeneratedPlateStore.shared.image(for: World2NewBadgeArtwork.semanticID) != nil {
+                    World2NewBadge(size: 48 * markerScale)
+                        .offset(x: artW * 0.34, y: -artH * 0.38)
+                        .allowsHitTesting(false)
                 }
             }
             .rotationEffect(.degrees(instance.transform.rotationDegrees) + gestureRotation)
-            .scaleEffect(selectedGrow * gestureScale)
+            .scaleEffect(selectedGrow * max(gestureScale, 0.55))
         }
         .animation(
             .spring(response: 0.42, dampingFraction: 0.82),
@@ -444,10 +502,13 @@ struct World2POIInstanceMarker: View {
     private var scaleGesture: some Gesture {
         MagnificationGesture()
             .updating($gestureScale) { value, state, _ in
-                state = value
+                // Keep live pinch from collapsing the marker to invisible.
+                state = max(value, 0.55)
             }
             .onEnded { value in
-                onScale(instance.transform.scale * value)
+                let next = instance.transform.scale * max(value, 0.55)
+                onScale(min(max(next, World2POITransform.scaleRange.lowerBound),
+                            World2POITransform.scaleRange.upperBound))
             }
     }
 

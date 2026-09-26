@@ -1,0 +1,26 @@
+{
+  "sourceSheet": "source.png",
+  "carved": 16,
+  "picks": {
+    "sparkle": { "sheetIndex": 1, "file": "carved/orb_01.png", "why": "Faceted ice crystal — readable sparkle silhouette" },
+    "bounceberry": { "sheetIndex": 3, "file": "carved/orb_03.png", "why": "Juicy red gem — high bounce personality" },
+    "pebble": { "sheetIndex": 7, "file": "carved/orb_07.png", "why": "Dense black marble — heavy drop look" },
+    "zipbolt": { "sheetIndex": 11, "file": "carved/orb_11.png", "why": "Electric cracks — laserish zip" },
+    "puff": { "sheetIndex": 12, "file": "carved/orb_12.png", "why": "Fluffy peach cloud — soft catcher (visual only; physics stays circle)" }
+  },
+  "svg": [
+    "svg/orb.peglin.sparkle.svg",
+    "svg/orb.peglin.bounceberry.svg",
+    "svg/orb.peglin.pebble.svg",
+    "svg/orb.peglin.zipbolt.svg",
+    "svg/orb.peglin.puff.svg"
+  ],
+  "catalogImagesets": {
+    "sparkle": "world2_orb_peglin_sparkle",
+    "bounceberry": "world2_orb_peglin_bounceberry",
+    "pebble": "world2_orb_peglin_pebble",
+    "zipbolt": "world2_orb_peglin_zipbolt",
+    "puff": "world2_orb_peglin_puff"
+  },
+  "physicsNote": "All colliders remain SKPhysicsBody(circleOfRadius:). SVG/PNG are skins only."
+}

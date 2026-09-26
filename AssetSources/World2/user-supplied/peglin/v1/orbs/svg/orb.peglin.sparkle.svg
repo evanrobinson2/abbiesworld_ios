@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <defs>
+    <radialGradient id="g" cx="38%" cy="32%" r="62%">
+      <stop offset="0%" stop-color="#f4fbff"/>
+      <stop offset="35%" stop-color="#b8e8f7"/>
+      <stop offset="75%" stop-color="#6eb8de"/>
+      <stop offset="100%" stop-color="#3a7eab"/>
+    </radialGradient>
+    <linearGradient id="facet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="28" fill="url(#g)" stroke="#d7f3ff" stroke-width="1.5"/>
+  <polygon points="32,8 42,22 32,28 22,22" fill="url(#facet)" opacity="0.7"/>
+  <polygon points="44,18 52,32 40,36 34,24" fill="#ffffff" opacity="0.22"/>
+  <polygon points="20,18 30,24 24,36 12,32" fill="#ffffff" opacity="0.18"/>
+  <ellipse cx="22" cy="20" rx="7" ry="4.5" fill="#ffffff" opacity="0.85"/>
+</svg>

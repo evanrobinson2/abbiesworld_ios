@@ -15,6 +15,19 @@ Documents that describe **one-time problem solving** or processes - risk analyse
 
 ## Quick Reference
 
+**Product:**
+- `ABBIES_WORLD_2_PRD.md` - The iPad game
+- `STUDIO_PRD.md` - Grown-up studio on the media browser. Draft.
+- `GPT_DUNGEON_MASTER_PRIMER.md` - Zeus/DM: full world editor API, live session JSON, SwiftUI overlay guide
+- `CHATGPT_MCP_INSTALL.md` - ChatGPT developer-mode connector (Studio MCP URL + token)
+- `CHATGPT_WORLD_AUTHOR_MCP.md` - Steel-rail `author_beat` habit + example prompts for ChatGPT
+- `current-state/STEEL_RAIL_AUTHORSHIP.md` - NL → closed ops; MCP `author_beat` contract
+- `current-state/ASSET_GENERATION_SERVICE.md` - first-class plate jobs → registry semantic IDs
+- `current-state/GAME_ASSET_REGISTRY_ADOPTION.md` - Game Asset API v1
+- `studio-mcp-command-dictionary.json` - MCP tool inventory for ChatGPT world authoring
+
+**Studio UI:** `prototypes/studio-mock/assets.html` — browse/submit asset jobs (Bearer from Copy MCP token)
+
 **Developing Games:**
 - `current-state/STANDALONE_MINIGAME_PATTERN.md` - Self-contained game architecture
 - `current-state/GAME_ASSET_REGISTRY_ADOPTION.md` - Standard asset publishing and loading contract
@@ -37,6 +50,7 @@ Documents that describe **one-time problem solving** or processes - risk analyse
 - `PHASER_MINIGAMES_PORTING_PLAN.md` - Plan for porting Phaser games to Swift
 - `VIEW_MODE_PLAN.md` - View mode system implementation plan
 - `VOICE_INTEGRATION_SUGGESTIONS.md` - Voice narration opportunities
+- `ACTOR_ANIMATION_REDO.md` - Open chore: regenerate Abbie and Daddy clips from scratch
 
 **Problem Solving:**
 - `MUSIC_PLAYBACK_RISKS.md` - Risk analysis for music playback

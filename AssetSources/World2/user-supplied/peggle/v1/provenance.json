@@ -1,0 +1,41 @@
+{
+  "schemaVersion": 1,
+  "note": "Parent-supplied Peglin Edition soundtrack.",
+  "music": [
+    {
+      "id": "abbies-world",
+      "title": "Abbie's World",
+      "sourceTitle": "Abbie’s World",
+      "file": "music/plink_abbies_world.mp3",
+      "role": "safari"
+    },
+    {
+      "id": "fell-from-the-blue",
+      "title": "Fell From the Blue",
+      "sourceTitle": "Fell From the Blue",
+      "file": "music/plink_fell_from_the_blue.mp3",
+      "role": "crash"
+    },
+    {
+      "id": "things-in-the-grass",
+      "title": "Things in the Grass",
+      "sourceTitle": "Things in the Grass",
+      "file": "music/plink_things_in_the_grass.mp3",
+      "role": "nature"
+    },
+    {
+      "id": "cheerful-khorovod",
+      "title": "Cheerful Round Dance",
+      "sourceTitle": "Веселый хоровод",
+      "file": "music/plink_cheerful_khorovod.mp3",
+      "role": "play"
+    },
+    {
+      "id": "electronic-folk-dance",
+      "title": "Electronic Folk Dance",
+      "sourceTitle": "Электронный народный танец",
+      "file": "music/plink_electronic_folk_dance.mp3",
+      "role": "blocks"
+    }
+  ]
+}

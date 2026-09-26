@@ -47,6 +47,9 @@ playground.xcworkspace
 # .swiftpm
 
 .build/
+.build-sim/
+.build-device/
+.build-sim-log.txt
 
 # CocoaPods
 #
@@ -122,3 +125,7 @@ credentials*
 
 # Meshy spike intermediates (large binaries)
 experiments/meshy_actor/output/
+
+# Scratch captures / pre-chroma-key backups
+tmp-ipad-screenshot.png
+*.prestrip.bak

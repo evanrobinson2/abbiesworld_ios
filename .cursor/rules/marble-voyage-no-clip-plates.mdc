@@ -1,0 +1,25 @@
+---
+description: Marble Voyage plates and climb poster — no clipping
+globs: abbies.world.ios/**/Plink/**/*.swift,abbies.world.ios/**/MarbleVoyage*.swift,abbies.world.ios/**/Assets.xcassets/world2_title_*/**,abbies.world.ios/**/Assets.xcassets/world2_map_peglin_*/**,abbies.world.ios/**/Assets.xcassets/world2_map_marbleVoyage_*/**
+alwaysApply: false
+---
+
+# Marble Voyage art — no clipping; art leads
+
+## Fight / title plates (landscape)
+**4:3 landscape** (prefer **2048×1536**). Display with **`MarbleVoyageUnclippedPlate` / `.scaledToFit`** only.
+
+## Climb overland poster (tall)
+**Art leads.** The scroll chart sizes itself to `MarbleVoyageClimbMap` / `world2_map_marbleVoyage_climb` aspect and targets ~88% viewport width (small side letterbox only — not a skinny centered stub). Do **not** force 4:3 on this poster. Show with **Fit** inside the chart canvas; use **scrims / vignette overlays** for UI readability — never crop the painting to fill.
+
+**Forbidden** for voyage plates and climb poster:
+- `.scaledToFill()` on the painting
+- parent `.clipped()` that crops the painting
+
+**Check:**
+```bash
+python3 scripts/check_voyage_plate_aspects.py
+# Full playtest gate (includes this + feed/alpha/climb/VS):
+./scripts/preflight_marble_voyage.sh
+```
+(Climb poster is excluded from the 4:3 plate list on purpose.)
