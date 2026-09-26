@@ -37,7 +37,9 @@
     "completedBy": "Codex \u2014 Art Director",
     "assetSourcePath": "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/bat-divekicker-idle.png",
     "sourceHashSha256": "61b5387a6217ca397c5843e7bf0bfe54528df274766aae3d7fba0ac2ff87f8c3",
-    "notes": "Background-only preparation preserves original airborne left-oriented pose, two wings and distinct clawed feet. Far wing root remains occluded by vest as in source; no attachment redesign claimed. White background and floor shadow removed; full ears and wing tips retained. Use hover anchor. Generated derivative, original preserved. RGBA, safe margins and corner alpha verified. Ground/hover anchor in provenance. Builder still owns roster/catalog/semantic wiring, optical scale matching and runtime QA. No attack/defeat poses supplied."
+    "notes": "Background-only preparation preserves original airborne left-oriented pose, two wings and distinct clawed feet. Far wing root remains occluded by vest as in source; no attachment redesign claimed. White background and floor shadow removed; full ears and wing tips retained. Use hover anchor. Generated derivative, original preserved. RGBA, safe margins and corner alpha verified. Ground/hover anchor in provenance. Builder still owns roster/catalog/semantic wiring, optical scale matching and runtime QA. No attack/defeat poses supplied. Runtime catalog bound as world2_plink_gang_batDivekicker_idle (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_gang_batDivekicker_idle",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z"
   },
   "createdAt": "2026-09-26T20:30:00Z",
   "type": "production_sprite",

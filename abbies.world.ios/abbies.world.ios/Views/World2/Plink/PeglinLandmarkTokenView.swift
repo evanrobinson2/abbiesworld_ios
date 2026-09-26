@@ -181,9 +181,10 @@ struct PeglinAbbieBattlePortrait: View {
     }
 
     private var abbieUIImage: UIImage? {
-        let name = state.abbiePortraitCatalogName
-        if let img = UIImage(named: name) { return img }
-        return UIImage(named: PeglinAbbieArt.mapCatalogName)
+        // Route by mood so hurt/defeated never show the regal smile (chore #25).
+        // Never fall back to the pixel map sprite.
+        UIImage(named: state.abbiePortraitCatalogName)
+            ?? UIImage(named: PeglinAbbieArt.portraitCatalogName)
     }
 }
 

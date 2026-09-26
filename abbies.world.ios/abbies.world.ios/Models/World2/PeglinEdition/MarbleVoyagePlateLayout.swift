@@ -27,6 +27,7 @@ enum MarbleVoyagePlateLayout {
         "world2_map_peglin_foxLand",
         "world2_map_peglin_bramble",
         "world2_map_peglin_stagLand",
+        "world2_plate_marbleVoyage_shop_bellMarket_interior",
     ]
 
     static func aspectRatio(of image: UIImage) -> CGFloat {

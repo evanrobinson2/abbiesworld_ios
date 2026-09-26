@@ -55,6 +55,8 @@
     "completedBy": "Codex \u2014 Art Director",
     "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/bubble-transparent.png",
     "sourceHashSha256": "ea86711ca30629cbca04bf1193c767d566589e6d2b5d329f08b64f51719feeaf",
-    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_bubble. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits."
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_bubble. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_bubble (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_bubble",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z"
   }
 }

@@ -19,6 +19,8 @@ enum PlinkSFX {
         case march
         /// Deck is “ready enough” (≥3).
         case ready
+        /// Turbo armed release — punchy layered hits.
+        case turbo
 
         var filenames: [String] {
             switch self {
@@ -33,6 +35,7 @@ enum PlinkSFX {
             case .drop: return ["plink_pop"]
             case .march: return ["plink_launch"]
             case .ready: return ["plink_hit_b"]
+            case .turbo: return ["plink_crit", "plink_launch"]
             }
         }
 
@@ -49,6 +52,7 @@ enum PlinkSFX {
             case .drop: return 0.52
             case .march: return 0.45
             case .ready: return 0.55
+            case .turbo: return 0.78
             }
         }
     }
@@ -71,13 +75,27 @@ enum PlinkSFX {
         case .drop:
             dropRotate = (dropRotate + 1) % names.count
             name = names[dropRotate]
+        case .turbo:
+            // Layer punch + launch — play first immediately, second staggered.
+            name = names[0]
+            lock.unlock()
+            playFile(name, volume: cue.volume)
+            if names.count > 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
+                    playFile(names[1], volume: cue.volume * 0.85)
+                }
+            }
+            return
         default:
             name = names[0]
         }
         lock.unlock()
+        playFile(name, volume: cue.volume)
+    }
 
+    private static func playFile(_ name: String, volume: Float) {
         guard let url = url(for: name) else {
-            World2Diagnostics.log("plink_sfx_missing", ["cue": cue.rawValue, "file": name])
+            World2Diagnostics.log("plink_sfx_missing", ["file": name])
             return
         }
 
@@ -88,7 +106,7 @@ enum PlinkSFX {
             lock.unlock()
             do {
                 let player = try AVAudioPlayer(contentsOf: url)
-                player.volume = cue.volume
+                player.volume = volume
                 player.prepareToPlay()
                 player.play()
                 lock.lock()
@@ -100,7 +118,7 @@ enum PlinkSFX {
             } catch {
                 World2Diagnostics.log(
                     "plink_sfx_failed",
-                    ["cue": cue.rawValue, "error": error.localizedDescription]
+                    ["file": name, "error": error.localizedDescription]
                 )
             }
         }

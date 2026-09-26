@@ -60,6 +60,8 @@
 	<true/>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSMotionUsageDescription</key>
+	<string>Marble Voyage uses the iPad’s tilt so you can steer a marble like a labyrinth.</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>

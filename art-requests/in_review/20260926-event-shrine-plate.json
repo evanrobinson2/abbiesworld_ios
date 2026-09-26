@@ -3,7 +3,7 @@
   "semanticId": "plate.marbleVoyage.event.shrine",
   "kind": "plate",
   "priority": "normal",
-  "status": "open",
+  "status": "in_review",
   "placeholder": {
     "type": "sf_symbol",
     "detail": "eventPhase SF Symbol only for shrine rests"
@@ -25,7 +25,7 @@
   ],
   "requestedBy": "cursor",
   "requestedAt": "2026-09-26T20:45:00Z",
-  "sessionNote": "Accompanying graphic for shrine rests.",
+  "sessionNote": "Evan authorized production with iconic single-object compositions, restrained atmosphere and quiet UI space. Not elaborate scenic backgrounds.",
   "fulfillment": null,
   "createdAt": "2026-09-26T20:45:00Z",
   "type": "plate",

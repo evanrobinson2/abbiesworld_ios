@@ -121,6 +121,12 @@ class AssetBootstrapService: ObservableObject {
             let catalogName = "world2_" + semanticName.replacingOccurrences(of: ".", with: "_")
             return UIImage(named: catalogName)
         }
+        if semanticName.hasPrefix("token.marbleVoyage.")
+            || semanticName.hasPrefix("plate.marbleVoyage.")
+        {
+            let catalogName = "world2_" + semanticName.replacingOccurrences(of: ".", with: "_")
+            return UIImage(named: catalogName)
+        }
         // Rescue-wave attackers + burrow jackal hostage tokens.
         // `token.plink.cawScout.idle` → `world2_plink_cawScout_idle`
         // `token.plink.gang.vix` → `world2_plink_gang_vix`

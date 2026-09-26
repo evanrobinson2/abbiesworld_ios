@@ -11,11 +11,35 @@ Evan requested this return path on 2026-09-26: art direction creates a concrete 
 - Completion requires implementation commit/PR, relevant validation, an in-game screenshot, and a coordination update. Close only when acceptance checks pass. Approval to bind an asset does not authorize unrelated gameplay, regeneration, publishing, or deployment.
 - Link each chore from this document and from its art-request record when present. Use the same semantic ID throughout.
 
-### Ready for game dev: regal Abbie portrait
+### Chore #25 — regal Abbie portrait (in progress)
 
 [Chore #25 — bind approved regal Abbie in the new battle layout](https://github.com/evanrobinson2/abbiesworld_ios/issues/25).
 
-Evan selected Midjourney job `95ea4d08-fd39-4bd6-bb7f-53301290ec95`, candidate #1 (index 0). Integrate the portrait **in the game’s new battle layout**; full-body art stays on overland tiles. Existing semantic ID `character.peglin.abbie.happy`, catalog `world2_peglin_abbie_happy`; builder must verify actual routing and preserve other expression states. Exact original is saved in chat outputs with SHA-256 `638f1f70f93415b2d52a43ba2eb86b2a36c36dccfb67763cb4604d4674962278`; durable repo source import remains the first chore step. No game binding or runtime verification is claimed.
+- Claimed on `review/marble-voyage-plink`. Exact original imported to `AssetSources/MarbleVoyage/abbie-regal-2026-09-26/` (SHA-256 `638f1f70…` verified). Catalog `world2_peglin_abbie_happy` now carries the regal bust for happy/idle.
+- Expression routing restored: hurt / defeated / wink use dedicated older sheets (outfit mismatch — follow-up art). Overland `world2_peglin_abbie_map` untouched. Prior casual bust kept at `AssetSources/MarbleVoyage/abbie-portrait-2026-09-26/` for rollback.
+- Art-request: `art-requests/fulfilled/20260926-abbie-regal-portrait.json`.
+- Still open: in-game screenshot / device layout check beside foe panel; then close the issue.
+
+## Cursor — AD dump runtime bind — 2026-09-26
+
+Bound fulfilled source packs into catalog + loaders (artwork only for proposal powers — no new power gameplay):
+
+- **Power icons (10):** Fire / Refresh / Split / Tilt + Magnet / Bounce / Bubble / Spark / Ghost / Giant → `world2_plink_power_icon_*` (FRAME-FIT normalized). Portal / Lucky / empty-slot still not ready.
+- **Bell Market:** `world2_plate_marbleVoyage_shop_bellMarket_interior` wired in `MarbleVoyageShopView` (Fit + scrim).
+- **Climb tiles:** treasure / mystery / shrine → `world2_token_marbleVoyage_climb_*` on chart chips.
+- **Henchmen:** Crab / Grasshopper / Armadillo / Bat registered on `PlinkAttackerKind` + `henchmenPool`; idle imagesets bound. Porcupine remains opener.
+- Design-rule gate green (13 transparent UI assets). Device screenshot still pending.
+
+## Cursor — Full-run spine + marble levels live — 2026-09-26
+
+- Marble Lv2/3 now apply **tunedOrb physics + per-shot damage** in fights (was shop-only before).
+- Added `MarbleVoyageCampaignSim` — Monte Carlo campaigns under shop policies (greedy/banker/spender/random) on top of `PlinkBattleBalance` continuum samples.
+- First pass clear rates (~24 trials): greedy ~38%, random ~29%, banker/spender ~25%. Mean fights cleared ~6–7 of 10 — too hard for kid default; tune next.
+
+## Cursor — Tilt power-up — 2026-09-26
+
+- Shipped **Tilt** (gravity-only labyrinth): arm → 3·2·1 → TILT! → CoreMotion gravity for rest of marble; landscape only; no cancel; refuses while split siblings alive.
+- Tilt icon art fulfilled and catalog-bound with the AD dump (see “AD dump runtime bind” above).
 
 ## Art requests
 
@@ -244,3 +268,7 @@ Invoke `$abbies-art-director` in a new chat. The personal skill belongs at `/Use
 ### Art-only GitHub publication — 2026-09-26
 
 - Evan explicitly authorized commit and push of the art handoff. Include this session’s five AssetSources packs, request lifecycle records and regenerated queue. Preserve concurrent builder code and unrelated edits. All 29 request schemas/statuses and related paths validated. Runtime integration remains separate.
+
+### Iconic event plates active — 2026-09-26
+
+- Codex Art Director: Evan authorized Treasure, Mystery, Shrine 4:3 event plates, one iconic object per scene, quiet space for title/outcome/Continue. Scope sources, provenance, queue handoff. No game edits; preserve concurrent builder changes. Serial Midjourney submissions at least one minute apart.

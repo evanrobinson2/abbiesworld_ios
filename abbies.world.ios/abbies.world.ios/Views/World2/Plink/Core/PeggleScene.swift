@@ -31,6 +31,24 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         var bannerTitle: String
         var bannerBody: String
         var canAdvance: Bool
+        /// 0…1 turbo meter for the aim trackpad.
+        var turboCharge: CGFloat
+        /// True while the player is holding a downward turbo pull with enough charge.
+        var turboArmed: Bool
+        /// Tilt power-up phase (nil = inactive).
+        var tiltPhase: PlinkTiltPhase?
+        /// Ball freeze point while Tilt is active (scene coords); nil when inactive.
+        var tiltOrigin: CGPoint?
+    }
+
+    private struct FlightBall {
+        var node: SKNode
+        var vel: CGVector
+        var lastKick: TimeInterval
+        var isFire: Bool
+        var done: Bool
+        /// `nil` = normal split sibling; otherwise peg contacts left before the ball vanishes.
+        var contactsRemaining: Int?
     }
 
     /// When true: win by reducing enemyHP; lose on 0 balls or 0 player HP.
@@ -39,8 +57,14 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     var goldPegPrevalence: Double = 0.15
     /// Coins granted per gold peg lit (Moon Gleam already baked in by host).
     var goldPegValue: Int = 6
-    /// Ball level damage multiplier (1.0 + 0.1×(level−1)).
+    /// Ball level damage multiplier (fallback when no owned marble deck).
     var ballDamageMultiplier: Double = 1.0
+    /// Voyage bag with levels — drives tuned physics + per-shot damage.
+    var deckMarbles: [MarbleVoyageOwnedMarble] = []
+    /// Run-wide ballLevel (shop upgrades). Used with each marble's level.
+    var runBallLevel: Int = 1
+    /// Active marble's shot mult (set in advanceDeckOrb / configure).
+    private var activeShotDamageMultiplier: Double = 1.0
     /// Extra crit/refresh pegs seeded from Cycle charm.
     var cycleExtraSpecials: Int = 0
     /// Sock Snatch coins per bomb clear.
@@ -99,12 +123,25 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     private var ball: SKNode?
     private var ballVel: CGVector = .zero
     private var ballLastKickAt: TimeInterval = -1
-    /// Extra split orbs (same continuum rules as the primary ball).
-    private var splitBalls: [(node: SKNode, vel: CGVector, lastKick: TimeInterval, isFire: Bool, done: Bool)] = []
+    /// Extra split / turbo-echo orbs (same continuum rules as the primary ball).
+    private var splitBalls: [FlightBall] = []
     /// Next / live ball burns through pegs (no bounce).
     private var ballIsFire = false
     private var pendingFire = false
     private var pendingSplit = false
+    /// Active Tilt power-up (gravity labyrinth for this marble).
+    private var tiltPhase: PlinkTiltPhase?
+    private var tiltOrigin: CGPoint?
+    private var tiltPhaseStartedAt: TimeInterval = 0
+    private var tiltMotion = PlinkTiltMotionSource()
+    private var labyrinthGravity: CGVector?
+    /// Trackpad downward pull 0…1 (host updates while aiming).
+    private var turboPullNormalized: CGFloat = 0
+    /// Spendable turbo meter 0…1.
+    private var turboCharge: CGFloat = PlinkTurboRules.maxCharge
+    /// This shot will spawn a one-contact echo on the first primary peg hit.
+    private var shotTurboArmed = false
+    private var turboEchoSpawned = false
     private var aimGuide: SKNode?
     private var shooter: SKNode?
     private var phase: Phase = .aim
@@ -211,20 +248,55 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         }
         enemyCounterDamage = max(0, counterDamage)
         deckOrbIDs = deck
-        deckCursor = 0
-        if let first = deck.first,
-           let orb = OrbKind.all.first(where: { $0.id == first }) {
-            selectOrb(orb)
+        if deckMarbles.isEmpty, !deck.isEmpty {
+            // Legacy id-only decks — treat as Lv1 of each kind.
+            deckMarbles = deck.map { MarbleVoyageOwnedMarble.make(orbID: $0, level: 1) }
         }
+        deckCursor = 0
+        syncActiveMarbleFromDeck()
+    }
+
+    /// Prefer owned marbles (levels) when the voyage bag is known.
+    func configureSpiritBattle(
+        enemyMax: Int,
+        playerMax: Int,
+        counterDamage: Int,
+        marbles: [MarbleVoyageOwnedMarble],
+        ballLevel: Int,
+        startingPlayerHP: Int? = nil
+    ) {
+        deckMarbles = marbles
+        runBallLevel = max(1, ballLevel)
+        configureSpiritBattle(
+            enemyMax: enemyMax,
+            playerMax: playerMax,
+            deck: marbles.map(\.orbID),
+            counterDamage: counterDamage,
+            startingPlayerHP: startingPlayerHP
+        )
+    }
+
+    private func syncActiveMarbleFromDeck() {
+        guard !deckMarbles.isEmpty else {
+            if let first = deckOrbIDs.first,
+               let orb = OrbKind.all.first(where: { $0.id == first }) {
+                selectOrb(orb)
+            }
+            activeShotDamageMultiplier = max(0.01, ballDamageMultiplier)
+            return
+        }
+        let idx = min(max(0, deckCursor), deckMarbles.count - 1)
+        let marble = deckMarbles[idx]
+        selectOrb(marble.tunedOrb())
+        activeShotDamageMultiplier = MarbleVoyageMarbleRules.shotDamageMultiplier(
+            marble: marble,
+            ballLevel: runBallLevel
+        )
     }
 
     private func advanceDeckOrb() {
-        guard !deckOrbIDs.isEmpty else { return }
-        let idx = min(deckCursor, deckOrbIDs.count - 1)
-        let id = deckOrbIDs[idx]
-        if let orb = OrbKind.all.first(where: { $0.id == id }) {
-            selectOrb(orb)
-        }
+        guard !deckOrbIDs.isEmpty || !deckMarbles.isEmpty else { return }
+        syncActiveMarbleFromDeck()
     }
 
     override func didMove(to view: SKView) {
@@ -395,6 +467,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     @discardableResult
     func applySplitPowerUp() -> Bool {
         guard spiritBattleMode, phase == .aim || phase == .flying else { return false }
+        guard tiltPhase == nil else { return false }
         if phase == .flying, ball != nil {
             spawnSplitSiblings()
             statusText = "POWER · Split ×3!"
@@ -407,6 +480,51 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         return true
     }
 
+    /// Tilt — slow → 3·2·1 → TILT! → tip iPad (gravity-only labyrinth) for this marble.
+    /// No cancel. Landscape only. Refuses if split siblings are alive or already tilting.
+    @discardableResult
+    func applyTiltPowerUp() -> Bool {
+        guard spiritBattleMode, phase == .flying, let live = ball, !live.isHidden else { return false }
+        guard tiltPhase == nil else { return false }
+        let splitsAlive = splitBalls.contains { !$0.done }
+        guard !splitsAlive else { return false }
+
+        tiltPhase = .arming
+        tiltPhaseStartedAt = shotAge
+        tiltOrigin = live.position
+        labyrinthGravity = nil
+        tiltMotion.start()
+        statusText = "TILT · Slowing…"
+        PlinkSFX.play(.crit)
+        publish()
+        return true
+    }
+
+    private func endTiltMode() {
+        tiltPhase = nil
+        tiltOrigin = nil
+        labyrinthGravity = nil
+        tiltMotion.stop()
+    }
+
+    private func tiltGravityMagnitude() -> CGFloat {
+        CGFloat(abs(tuning.gravity * tuning.orb.gravityScale))
+    }
+
+    private func refreshLabyrinthGravity() {
+        let magnitude = tiltGravityMagnitude()
+        if let pr = tiltMotion.relativePitchRoll() {
+            labyrinthGravity = PlinkTiltMath.gravityVector(
+                pitchRadians: pr.pitch,
+                rollRadians: pr.roll,
+                magnitude: magnitude
+            )
+        } else {
+            // Simulator / no motion — keep world-down so the shot still completes.
+            labyrinthGravity = CGVector(dx: 0, dy: -magnitude)
+        }
+    }
+
     private func tintBallsForFire() {
         let tint = SKAction.colorize(with: SKColor(red: 1, green: 0.45, blue: 0.1, alpha: 1), colorBlendFactor: 0.65, duration: 0.12)
         ball?.run(tint)
@@ -417,8 +535,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
 
     private func spawnSplitSiblings() {
         guard let primary = ball else { return }
-        // Already split this shot.
-        guard splitBalls.isEmpty else { return }
+        // Already split this shot (power-up siblings).
+        guard splitBalls.filter({ $0.contactsRemaining == nil && !$0.done }).isEmpty else { return }
         let angles: [CGFloat] = [-0.42, 0.42] // ~±24°
         let speed = max(220, hypot(ballVel.dx, ballVel.dy))
         let baseAngle = atan2(ballVel.dy, ballVel.dx)
@@ -441,8 +559,61 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             if ballIsFire {
                 node.run(SKAction.colorize(with: SKColor(red: 1, green: 0.45, blue: 0.1, alpha: 1), colorBlendFactor: 0.65, duration: 0.01))
             }
-            splitBalls.append((node: node, vel: vel, lastKick: ballLastKickAt, isFire: ballIsFire, done: false))
+            splitBalls.append(FlightBall(
+                node: node,
+                vel: vel,
+                lastKick: ballLastKickAt,
+                isFire: ballIsFire,
+                done: false,
+                contactsRemaining: nil
+            ))
         }
+    }
+
+    /// One-contact turbo echo — vanishes after its next peg contact (Drow-style extra shot).
+    private func spawnTurboEcho(at position: CGPoint) {
+        let speed = max(220, hypot(ballVel.dx, ballVel.dy))
+        let baseAngle = atan2(ballVel.dy, ballVel.dx)
+        // Prefer the side the primary is already leaning toward.
+        let side: CGFloat = ballVel.dx >= 0 ? 1 : -1
+        let a = baseAngle + side * PlinkTurboRules.echoAngleRadians
+        let vel = CGVector(dx: cos(a) * speed, dy: sin(a) * speed)
+        let node = makeOrbVisual(radius: ballRadius * 0.88)
+        node.position = position
+        node.zPosition = 31
+        node.name = "ball-turbo-echo"
+        let body = SKPhysicsBody(circleOfRadius: ballRadius * 0.88)
+        body.isDynamic = false
+        body.affectedByGravity = false
+        body.allowsRotation = false
+        body.categoryBitMask = Category.ball
+        body.contactTestBitMask = 0
+        body.collisionBitMask = 0
+        node.physicsBody = body
+        addChild(node)
+        node.run(SKAction.colorize(
+            with: SKColor(red: 0.45, green: 0.95, blue: 1.0, alpha: 1),
+            colorBlendFactor: 0.55,
+            duration: 0.01
+        ))
+        splitBalls.append(FlightBall(
+            node: node,
+            vel: vel,
+            lastKick: ballLastKickAt,
+            isFire: ballIsFire,
+            done: false,
+            contactsRemaining: PlinkTurboRules.echoContacts
+        ))
+        noteHighlight("Turbo echo")
+        PlinkSFX.play(.hit)
+        statusText = "TURBO echo!"
+    }
+
+    /// Host calls when foes die outside the front-foe settle path (e.g. bomb splash).
+    func regenerateTurbo(kills: Int) {
+        guard kills > 0 else { return }
+        turboCharge = PlinkTurboRules.afterKills(charge: turboCharge, kills: kills)
+        publish()
     }
 
     private func spawnPegsFromLevel(animated: Bool) {
@@ -766,7 +937,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             pegRadius: pegRadius,
             ballRadius: ballRadius,
             tuning: tuning,
-            hoverSpeedRetain: hoverSpeedRetain
+            hoverSpeedRetain: hoverSpeedRetain,
+            gravityOverride: labyrinthGravity
         )
         let hit = PlinkContinuum.step(
             pos: &pos,
@@ -890,9 +1062,21 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         pendingFire = false
         let willSplit = pendingSplit
         pendingSplit = false
+        // Arm turbo when the trackpad is pulled down far enough and the meter is full.
+        if spiritBattleMode,
+           PlinkTurboRules.canArm(charge: turboCharge, pull: turboPullNormalized) {
+            turboCharge = PlinkTurboRules.afterUse(charge: turboCharge)
+            shotTurboArmed = true
+            turboEchoSpawned = false
+            noteHighlight("Turbo")
+        } else {
+            shotTurboArmed = false
+            turboEchoSpawned = false
+        }
+        turboPullNormalized = 0
         phase = .flying
         shotAge = 0
-        statusText = "…"
+        statusText = shotTurboArmed ? "TURBO!" : "…"
         aimGuide?.isHidden = true
         shooter?.isHidden = true
         PlinkSFX.play(.launch)
@@ -948,6 +1132,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     }
 
     private func endShot() {
+        endTiltMode()
         // Pegs already pop on hit in spirit mode; clear any leftovers (classic mode).
         let leftover = pegs.filter { $0.isLit && !$0.isCleared }
         for peg in leftover {
@@ -984,6 +1169,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
 
             // Promote next foe before their approach/melee turn.
             if enemyHP <= 0 {
+                regenerateTurbo(kills: 1)
                 let rescued = onFrontFoeDefeated?() ?? true
                 if rescued {
                     PlinkSFX.play(.win)
@@ -1095,8 +1281,18 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         }
     }
 
-    private func lightPegFromFlight(_ peg: PegNode) {
+    private enum PegHitSource {
+        case primary
+        case split
+        case turboEcho(Int)
+    }
+
+    private func lightPegFromFlight(_ peg: PegNode, source: PegHitSource = .primary) {
         let newly = peg.light(at: lastUpdateTime)
+        // Turbo echo spends its contact even on an already-lit peg (still a "contact").
+        if case .turboEcho(let index) = source {
+            consumeTurboEchoContact(at: index)
+        }
         guard newly else { return }
 
         var points = 0
@@ -1151,7 +1347,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                     let dx = other.position.x - peg.position.x
                     let dy = other.position.y - peg.position.y
                     if hypot(dx, dy) <= aoe {
-                        lightPegFromFlight(other)
+                        lightPegFromFlight(other, source: .split)
                         splash += 1
                     }
                 }
@@ -1215,7 +1411,29 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             // Pop already removed this peg; rebuild the field under the live ball.
             respawnPegBoard()
         }
+        // First primary peg hit with turbo → burst one extra one-contact ball.
+        if case .primary = source,
+           shotTurboArmed,
+           !turboEchoSpawned,
+           let live = ball {
+            turboEchoSpawned = true
+            spawnTurboEcho(at: live.position)
+        }
         publish()
+    }
+
+    private func consumeTurboEchoContact(at index: Int) {
+        guard splitBalls.indices.contains(index),
+              !splitBalls[index].done,
+              var left = splitBalls[index].contactsRemaining else { return }
+        left -= 1
+        splitBalls[index].contactsRemaining = left
+        if left <= 0 {
+            let pos = splitBalls[index].node.position
+            splitBalls[index].done = true
+            splitBalls[index].node.removeFromParent()
+            spark(at: pos, color: SKColor(red: 0.45, green: 0.95, blue: 1.0, alpha: 1))
+        }
     }
 
     /// Pop peg on hit. HP contribution tallies on the host corner rails.
@@ -1225,7 +1443,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         let origin = peg.position
         // Upgraded marbles hit the cage harder.
         let scaled = contribution > 0
-            ? max(1, Int((Double(contribution) * ballDamageMultiplier).rounded()))
+            ? max(1, Int((Double(contribution) * activeShotDamageMultiplier).rounded()))
             : contribution
         if scaled > 0 {
             emitHPContribution(scaled, at: origin)
@@ -1416,87 +1634,162 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
 
         if phase == .flying, let live = ball {
             let frameDt = CGFloat(dt) * simSpeed
-            let h: CGFloat = 1 / 120
-            var primaryDone = live.isHidden
-            if !primaryDone {
-                var pos = live.position
-                var kickT = CGFloat(ballLastKickAt)
-                var remaining = frameDt
-                var primaryFloor = false
-                while remaining > 1e-6 {
-                    let step = min(h, remaining)
-                    shotAge += TimeInterval(step)
-                    primaryFloor = stepFlight(
-                        pos: &pos,
-                        vel: &ballVel,
-                        dt: step,
-                        t: CGFloat(shotAge),
-                        lastKickT: &kickT,
-                        passThroughPegs: ballIsFire,
-                        onPeg: { [weak self] peg in self?.lightPegFromFlight(peg) }
-                    ) || primaryFloor
-                    remaining -= step
-                    if primaryFloor { break }
-                }
-                ballLastKickAt = TimeInterval(kickT)
-                enforceMinBallSpeed()
-                live.position = pos
-                primaryDone = primaryFloor
-                    || pos.y < -60 || pos.x < -60 || pos.x > size.width + 60
-                if primaryDone {
-                    live.isHidden = true
-                }
-                if trailPoints.last.map({
-                    hypot(pos.x - $0.x, pos.y - $0.y) > tuning.orb.trail.sampleDistance
-                }) ?? true {
-                    trailPoints.append(pos)
-                    let cap = tuning.orb.trail.maxPoints
-                    if trailPoints.count > cap {
-                        trailPoints.removeFirst(trailPoints.count - cap)
+
+            // Tilt arming / countdown / stamp — no cancel; ball parks before labyrinth.
+            if let mode = tiltPhase, mode != .labyrinth {
+                shotAge += TimeInterval(frameDt)
+                switch mode {
+                case .arming:
+                    ballVel.dx *= PlinkTiltRules.armDampingPerFrame
+                    ballVel.dy *= PlinkTiltRules.armDampingPerFrame
+                    live.position.x += ballVel.dx * frameDt * 0.35
+                    live.position.y += ballVel.dy * frameDt * 0.35
+                    tiltOrigin = live.position
+                    let speed = hypot(ballVel.dx, ballVel.dy)
+                    let timedOut = (shotAge - tiltPhaseStartedAt) >= PlinkTiltRules.armTimeout
+                    if speed < PlinkTiltRules.armStopSpeed || timedOut {
+                        ballVel = .zero
+                        tiltOrigin = live.position
+                        tiltPhase = .countdown(digit: 3)
+                        tiltPhaseStartedAt = shotAge
+                        statusText = "3"
+                        PlinkSFX.play(.ui)
+                        publish()
                     }
-                    redrawTrail()
+                case .countdown(let digit):
+                    ballVel = .zero
+                    if let origin = tiltOrigin { live.position = origin }
+                    if (shotAge - tiltPhaseStartedAt) >= PlinkTiltRules.countdownStep {
+                        if digit > 1 {
+                            let next = digit - 1
+                            tiltPhase = .countdown(digit: next)
+                            tiltPhaseStartedAt = shotAge
+                            statusText = "\(next)"
+                            PlinkSFX.play(.ui)
+                            publish()
+                        } else {
+                            tiltPhase = .stamp
+                            tiltPhaseStartedAt = shotAge
+                            statusText = "TILT!"
+                            tiltMotion.captureBaseline()
+                            refreshLabyrinthGravity()
+                            PlinkSFX.play(.win)
+                            publish()
+                        }
+                    }
+                case .stamp:
+                    ballVel = .zero
+                    if let origin = tiltOrigin { live.position = origin }
+                    if (shotAge - tiltPhaseStartedAt) >= PlinkTiltRules.stampDuration {
+                        tiltPhase = .labyrinth
+                        statusText = tiltMotion.isAvailable
+                            ? "Tip the iPad!"
+                            : "Tilt · tip on device (sim uses normal gravity)"
+                        publish()
+                    }
+                case .labyrinth:
+                    break
                 }
             } else {
-                shotAge += TimeInterval(frameDt)
-            }
-
-            // Step split siblings on the same continuum.
-            var anySplitAlive = false
-            for i in splitBalls.indices where !splitBalls[i].done {
-                var sPos = splitBalls[i].node.position
-                var sVel = splitBalls[i].vel
-                var sKick = CGFloat(splitBalls[i].lastKick)
-                var sRemaining = frameDt
-                var sFloor = false
-                while sRemaining > 1e-6 {
-                    let step = min(h, sRemaining)
-                    sFloor = stepFlight(
-                        pos: &sPos,
-                        vel: &sVel,
-                        dt: step,
-                        t: CGFloat(shotAge),
-                        lastKickT: &sKick,
-                        passThroughPegs: splitBalls[i].isFire,
-                        onPeg: { [weak self] peg in self?.lightPegFromFlight(peg) }
-                    ) || sFloor
-                    sRemaining -= step
-                    if sFloor { break }
+                if tiltPhase == .labyrinth {
+                    refreshLabyrinthGravity()
                 }
-                splitBalls[i].vel = sVel
-                splitBalls[i].lastKick = TimeInterval(sKick)
-                splitBalls[i].node.position = sPos
-                if sFloor || sPos.y < -60 || sPos.x < -60 || sPos.x > size.width + 60 {
-                    splitBalls[i].done = true
-                    splitBalls[i].node.removeFromParent()
+                let h: CGFloat = 1 / 120
+                var primaryDone = live.isHidden
+                if !primaryDone {
+                    var pos = live.position
+                    var kickT = CGFloat(ballLastKickAt)
+                    var remaining = frameDt
+                    var primaryFloor = false
+                    while remaining > 1e-6 {
+                        let step = min(h, remaining)
+                        shotAge += TimeInterval(step)
+                        primaryFloor = stepFlight(
+                            pos: &pos,
+                            vel: &ballVel,
+                            dt: step,
+                            t: CGFloat(shotAge),
+                            lastKickT: &kickT,
+                            passThroughPegs: ballIsFire,
+                            onPeg: { [weak self] peg in self?.lightPegFromFlight(peg, source: .primary) }
+                        ) || primaryFloor
+                        remaining -= step
+                        if primaryFloor { break }
+                    }
+                    ballLastKickAt = TimeInterval(kickT)
+                    if tiltPhase != .labyrinth {
+                        enforceMinBallSpeed()
+                    }
+                    live.position = pos
+                    if tiltPhase == .labyrinth {
+                        tiltOrigin = pos
+                    }
+                    primaryDone = primaryFloor
+                        || pos.y < -60 || pos.x < -60 || pos.x > size.width + 60
+                    if primaryDone {
+                        live.isHidden = true
+                    }
+                    if trailPoints.last.map({
+                        hypot(pos.x - $0.x, pos.y - $0.y) > tuning.orb.trail.sampleDistance
+                    }) ?? true {
+                        trailPoints.append(pos)
+                        let cap = tuning.orb.trail.maxPoints
+                        if trailPoints.count > cap {
+                            trailPoints.removeFirst(trailPoints.count - cap)
+                        }
+                        redrawTrail()
+                    }
                 } else {
-                    anySplitAlive = true
+                    shotAge += TimeInterval(frameDt)
                 }
-            }
 
-            // Only settle when every orb has left the playfield.
-            if primaryDone, !anySplitAlive, shotAge > 0.35 {
-                phase = .settling
-                settleFrames = 0
+                // Step split siblings on the same continuum.
+                var anySplitAlive = false
+                for i in splitBalls.indices where !splitBalls[i].done {
+                    var sPos = splitBalls[i].node.position
+                    var sVel = splitBalls[i].vel
+                    var sKick = CGFloat(splitBalls[i].lastKick)
+                    var sRemaining = frameDt
+                    var sFloor = false
+                    let isTurboEcho = splitBalls[i].contactsRemaining != nil
+                    while sRemaining > 1e-6 {
+                        let step = min(h, sRemaining)
+                        sFloor = stepFlight(
+                            pos: &sPos,
+                            vel: &sVel,
+                            dt: step,
+                            t: CGFloat(shotAge),
+                            lastKickT: &sKick,
+                            passThroughPegs: splitBalls[i].isFire,
+                            onPeg: { [weak self] peg in
+                                guard let self else { return }
+                                if isTurboEcho {
+                                    self.lightPegFromFlight(peg, source: .turboEcho(i))
+                                } else {
+                                    self.lightPegFromFlight(peg, source: .split)
+                                }
+                            }
+                        ) || sFloor
+                        sRemaining -= step
+                        if sFloor || splitBalls[i].done { break }
+                    }
+                    if splitBalls[i].done { continue }
+                    splitBalls[i].vel = sVel
+                    splitBalls[i].lastKick = TimeInterval(sKick)
+                    splitBalls[i].node.position = sPos
+                    if sFloor || sPos.y < -60 || sPos.x < -60 || sPos.x > size.width + 60 {
+                        splitBalls[i].done = true
+                        splitBalls[i].node.removeFromParent()
+                    } else {
+                        anySplitAlive = true
+                    }
+                }
+
+                // Only settle when every orb has left the playfield.
+                if primaryDone, !anySplitAlive, shotAge > 0.35 {
+                    phase = .settling
+                    settleFrames = 0
+                }
             }
         }
 
@@ -1548,17 +1841,19 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     }
 
     /// Accessibility / on-screen stick: `normalizedX` −1…1 maps to full aim sweep.
-    func applyAimJoystick(normalizedX: CGFloat) {
+    /// `turboPull` 0…1 is downward pull on the trackpad (arms turbo when charged).
+    func applyAimJoystick(normalizedX: CGFloat, turboPull: CGFloat = 0) {
         guard phase == .aim else { return }
         let x = max(-1, min(1, normalizedX))
         aimOffset = x * maxAim
+        turboPullNormalized = max(0, min(1, turboPull))
         redrawAim()
         publish()
     }
 
     var isAimingPhase: Bool { phase == .aim }
 
-    /// Fire from the on-screen stick (same as releasing a board drag).
+    /// Pinball drop from the on-screen stick — same as releasing a board drag.
     func fireFromJoystick() {
         guard phase == .aim, ball == nil else { return }
         shoot()
@@ -1567,6 +1862,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     private func publish() {
         let orange = pegs.filter(\.isOrangeTarget).count
         let show = phase == .won || phase == .lost
+        let turboArmedNow = phase == .aim
+            && PlinkTurboRules.canArm(charge: turboCharge, pull: turboPullNormalized)
         onHud?(HudSnapshot(
             levelName: levels[levelIndex].name,
             status: statusText,
@@ -1593,7 +1890,11 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                         ? "Cage \(enemyHP) left · \(runPlink) dealt"
                         : "Orange pegs remain · \(runPlink) plink")
                     : ""),
-            canAdvance: phase == .won && levelIndex + 1 < levels.count
+            canAdvance: phase == .won && levelIndex + 1 < levels.count,
+            turboCharge: turboCharge,
+            turboArmed: turboArmedNow || (phase == .flying && shotTurboArmed && !turboEchoSpawned),
+            tiltPhase: tiltPhase,
+            tiltOrigin: tiltOrigin
         ))
     }
 

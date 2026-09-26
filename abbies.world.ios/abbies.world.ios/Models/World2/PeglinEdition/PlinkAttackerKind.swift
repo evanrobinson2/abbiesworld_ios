@@ -40,6 +40,10 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
     case nib
     // Unnamed henchpeople
     case porcupineBoxer
+    case crabPincher
+    case grasshopperKickboxer
+    case armadilloBlocker
+    case batDivekicker
     // Lineup-sheet alternates (optional; not default cycle)
     case coyoteBruiser
     case gangFox
@@ -57,6 +61,7 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
     var roster: PlinkAttackerRoster {
         switch self {
         case .raze, .vix, .morrow, .nib, .porcupineBoxer,
+             .crabPincher, .grasshopperKickboxer, .armadilloBlocker, .batDivekicker,
              .coyoteBruiser, .gangFox, .hyena, .lizard, .vulture:
             return .badguyGang
         case .cawScout, .thornbackBeetle, .briarToad, .thornhornMantis:
@@ -79,6 +84,10 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
         case .morrow: return "Morrow"
         case .nib: return "Nib"
         case .porcupineBoxer: return "Porcupine Boxer"
+        case .crabPincher: return "Crab Pincher"
+        case .grasshopperKickboxer: return "Grasshopper Kickboxer"
+        case .armadilloBlocker: return "Armadillo Blocker"
+        case .batDivekicker: return "Bat Divekicker"
         case .coyoteBruiser: return "Spike Coyote"
         case .gangFox: return "Gang Fox"
         case .hyena: return "Hyena"
@@ -98,6 +107,10 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
         case .morrow: return "Morrow"
         case .nib: return "Nib"
         case .porcupineBoxer: return "Porcupine"
+        case .crabPincher: return "Crab"
+        case .grasshopperKickboxer: return "Hopper"
+        case .armadilloBlocker: return "Armadillo"
+        case .batDivekicker: return "Bat"
         case .coyoteBruiser: return "Coyote"
         case .gangFox: return "Punk"
         case .hyena: return "Hyena"
@@ -113,7 +126,7 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
     /// Flying foes skip the approach — they bite every turn from any lane.
     var isFlying: Bool {
         switch self {
-        case .cawScout, .vulture: return true
+        case .cawScout, .vulture, .batDivekicker: return true
         default: return false
         }
     }
@@ -122,6 +135,10 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
     var roleBlurb: String {
         switch self {
         case .porcupineBoxer: return "Boxer"
+        case .crabPincher: return "Pincher"
+        case .grasshopperKickboxer: return "Kickboxer"
+        case .armadilloBlocker: return "Blocker"
+        case .batDivekicker: return "Divekicker"
         case .raze: return "Bruiser"
         case .vix: return "Lieutenant"
         case .morrow: return "Quartermaster"
@@ -143,6 +160,14 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
             return "Vix’s hanger-on. Small claws, big mouth — and somehow still at the top."
         case .porcupineBoxer:
             return "First scrap on the trail. Quills up, gloves on, ready to bounce Abbie back."
+        case .crabPincher:
+            return "Sideways scuttle and one oversized claw. Snaps at anything that rolls past."
+        case .grasshopperKickboxer:
+            return "Long-legged kickboxer. Springs in, kicks high, hops away laughing."
+        case .armadilloBlocker:
+            return "Shell up, paws braced. Turns the trail into a living bumper."
+        case .batDivekicker:
+            return "Hovers overhead, then dives with both feet. Watch the wings."
         case .coyoteBruiser:
             return "A spike-shouldered coyote who loves a loud scrap."
         case .gangFox:

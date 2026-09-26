@@ -59,6 +59,8 @@
     "completedBy": "Codex \u2014 Art Director",
     "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/spark-transparent.png",
     "sourceHashSha256": "3b5fa259ddb9f07264fec2c4b7df0435280cde892235f96c0eac8d196351ada9",
-    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_spark. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Uses Evan-approved irregular six-point spark, superseding rejected lightning/pegs concept."
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_spark. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Uses Evan-approved irregular six-point spark, superseding rejected lightning/pegs concept. Runtime catalog bound as world2_plink_power_icon_spark (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_spark",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z"
   }
 }

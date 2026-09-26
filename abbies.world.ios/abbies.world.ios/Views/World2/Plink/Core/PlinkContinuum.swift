@@ -55,6 +55,8 @@ struct ContinuumConfig: Equatable {
     var tuning: PhysicsTuning
     /// Hover stacks → outbound speed mult after peg bounce (1 = off).
     var hoverSpeedRetain: Double = 1
+    /// When set (Tilt labyrinth), replaces `tuning.gravityVector`.
+    var gravityOverride: CGVector? = nil
     /// Side / top insets matching PeggleScene walls.
     var sideInsetFrac: CGFloat = 0.03
     var topInsetFrac: CGFloat = 0.02
@@ -106,7 +108,7 @@ enum PlinkContinuum {
         // Walls are perfectly elastic — never bleed speed on a wall hit.
         let wallE: CGFloat = 1
 
-        let g = config.tuning.gravityVector
+        let g = config.gravityOverride ?? config.tuning.gravityVector
         vel.dx += g.dx * dt
         vel.dy += g.dy * dt
         let damp = max(CGFloat(0), 1 - damping * dt)

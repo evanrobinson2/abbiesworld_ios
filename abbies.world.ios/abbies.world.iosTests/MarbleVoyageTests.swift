@@ -31,6 +31,28 @@ final class MarbleVoyageTests: XCTestCase {
         }
     }
 
+    func testProductionHenchmenIdleArtIsBundled() throws {
+        let kinds: [PlinkAttackerKind] = [
+            .crabPincher, .grasshopperKickboxer, .armadilloBlocker, .batDivekicker,
+        ]
+        for kind in kinds {
+            let image = try XCTUnwrap(kind.catalogImage(for: .idle), "\(kind.rawValue) idle")
+            XCTAssertGreaterThan(image.size.width, 1)
+            XCTAssertTrue(MarbleVoyageGangRun.henchmenPool.contains(kind))
+        }
+        XCTAssertTrue(PlinkAttackerKind.batDivekicker.isFlying)
+    }
+
+    func testClimbDestinationAndBellMarketCatalogBound() throws {
+        for kind in [MarbleVoyageNodeKind.treasure, .mystery, .shrine] {
+            let name = try XCTUnwrap(MarbleVoyageArt.climbDestinationCatalogName(for: kind))
+            XCTAssertNotNil(UIImage(named: name), name)
+        }
+        XCTAssertNotNil(UIImage(named: MarbleVoyageArt.bellMarketInteriorCatalogName))
+        XCTAssertNotNil(UIImage(named: "world2_plink_power_icon_tilt"))
+        XCTAssertNotNil(UIImage(named: "world2_plink_power_icon_bounce"))
+    }
+
     func testCampaignGangChartStructure() {
         let run = MarbleVoyageRun.make(mode: .campaign, seed: 42)
         XCTAssertEqual(run.mode, .campaign)
@@ -337,6 +359,8 @@ final class MarbleVoyageTests: XCTestCase {
         XCTAssertEqual(PlinkPowerUp.fire.chipAssetID, "ui.plink.power.icon.fire")
         XCTAssertEqual(PlinkPowerUp.split.title, "Split")
         XCTAssertEqual(PlinkPowerUp.fire.title, "Fire")
+        XCTAssertEqual(PlinkPowerUp.tilt.title, "Tilt")
+        XCTAssertEqual(PlinkPowerUp.tilt.catalogIconName, "world2_plink_power_icon_tilt")
     }
 
     func testDeckReadyThresholdAndCap() {

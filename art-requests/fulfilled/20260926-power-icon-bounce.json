@@ -55,6 +55,8 @@
     "completedBy": "Codex \u2014 Art Director",
     "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/bounce-transparent.png",
     "sourceHashSha256": "a573924be9e8e0956535d29f31adfb8b58cfc495f90ce525769ec4af03efd5d9",
-    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_bounce. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Final motif follows Evan correction: ghost starting ball, single V-shaped bounce off bumper, solid departing ball. Spring versions are superseded."
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_bounce. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Final motif follows Evan correction: ghost starting ball, single V-shaped bounce off bumper, solid departing ball. Spring versions are superseded. Runtime catalog bound as world2_plink_power_icon_bounce (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_bounce",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z"
   }
 }

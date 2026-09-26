@@ -55,6 +55,8 @@
     "completedBy": "Codex \u2014 Art Director",
     "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/ghost-transparent.png",
     "sourceHashSha256": "687c9a8610ab41c2bb6527deee1c223b907ce68cf813eafd45b9f2d90f6d8625",
-    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_ghost. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits."
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_ghost. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_ghost (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_ghost",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z"
   }
 }

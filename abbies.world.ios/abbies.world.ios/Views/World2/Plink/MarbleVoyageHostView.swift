@@ -1636,12 +1636,7 @@ struct MarbleVoyageHostView: View {
                                 .frame(width: drawTile, height: drawTile)
                         }
                     } else {
-                        Image(systemName: MarbleVoyageArt.eventAccentIcon(node.kind))
-                            .font(.system(size: iconSize, weight: .black))
-                            .symbolRenderingMode(.hierarchical)
-                            .foregroundStyle(.white)
-                            .shadow(color: .black.opacity(0.45), radius: 2, y: 1)
-                            .frame(width: drawTile, height: drawTile)
+                        chartDestinationArt(kind: node.kind, tile: drawTile, iconSize: iconSize)
                         chartTileNameOverlay(node.kind.chartLabel, tint: .white, tile: drawTile)
                         if seen && !isReachable {
                             Image(systemName: "checkmark.circle.fill")
@@ -1773,6 +1768,27 @@ struct MarbleVoyageHostView: View {
             value: dockPulse
         )
         .accessibilityLabel(ominous ? "Boss \(kind.displayName)" : kind.displayName)
+    }
+
+    /// Treasure / mystery / shrine chart vignette — catalog art when bound, else SF accent.
+    @ViewBuilder
+    private func chartDestinationArt(kind: MarbleVoyageNodeKind, tile: CGFloat, iconSize: CGFloat) -> some View {
+        if let catalog = MarbleVoyageArt.climbDestinationCatalogName(for: kind),
+           UIImage(named: catalog) != nil {
+            Image(catalog)
+                .resizable()
+                .scaledToFit()
+                .frame(width: tile * 0.78, height: tile * 0.78)
+                .frame(width: tile, height: tile)
+                .shadow(color: .black.opacity(0.4), radius: 3, y: 1)
+        } else {
+            Image(systemName: MarbleVoyageArt.eventAccentIcon(kind))
+                .font(.system(size: iconSize, weight: .black))
+                .symbolRenderingMode(.hierarchical)
+                .foregroundStyle(.white)
+                .shadow(color: .black.opacity(0.45), radius: 2, y: 1)
+                .frame(width: tile, height: tile)
+        }
     }
 
     /// Role tab above a fight portrait — who this tile is about.
@@ -1929,6 +1945,8 @@ struct MarbleVoyageHostView: View {
             overrideEnemyAttack: active.map { $0.enemyAttack(for: node) },
             voyageEconomy: active.map { voyageTunables(for: $0) },
             startingDeck: active?.fightDeckOrbIDs,
+            startingMarbles: active?.marbleCollection,
+            startingBallLevel: active?.ballLevel ?? 1,
             onExit: {
                 MarbleVoyageAudio.defeat()
                 run?.phase = .defeat

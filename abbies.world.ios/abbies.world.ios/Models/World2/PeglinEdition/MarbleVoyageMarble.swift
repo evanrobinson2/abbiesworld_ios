@@ -151,6 +151,15 @@ enum MarbleVoyageMarbleRules {
         return marble * global
     }
 
+    /// Per-shot mult for the marble about to fire (level physics companion).
+    static func shotDamageMultiplier(
+        marble: MarbleVoyageOwnedMarble,
+        ballLevel: Int
+    ) -> Double {
+        let global = 1.0 + 0.05 * Double(max(0, ballLevel - 1))
+        return marble.damageMultiplier * global
+    }
+
     /// Ordered orb ids the fight board fires (bag order).
     static func fightDeckOrbIDs(in collection: [MarbleVoyageOwnedMarble]) -> [String] {
         collection.map(\.orbID)

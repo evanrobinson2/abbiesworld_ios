@@ -90,6 +90,16 @@ enum MarbleVoyageDesignRules {
         "world2_plink_power_icon_refresh",
         "world2_plink_power_icon_fire",
         "world2_plink_power_icon_split",
+        "world2_plink_power_icon_tilt",
+        "world2_plink_power_icon_magnet",
+        "world2_plink_power_icon_bounce",
+        "world2_plink_power_icon_bubble",
+        "world2_plink_power_icon_spark",
+        "world2_plink_power_icon_ghost",
+        "world2_plink_power_icon_giant",
+        "world2_token_marbleVoyage_climb_treasure",
+        "world2_token_marbleVoyage_climb_mystery",
+        "world2_token_marbleVoyage_climb_shrine",
     ]
 
     /// Corner samples must be at or below this alpha (0…255).
@@ -111,10 +121,16 @@ enum MarbleVoyageDesignRules {
 
     /// Fixed width of the NOW-marble aim pad (does not grow with copy).
     static let fightAimTrackpadWidth: CGFloat = 176
-    /// Fixed height of the aim pad.
-    static let fightAimTrackpadHeight: CGFloat = 76
+    /// Fixed height — tall enough for downward turbo pull.
+    static let fightAimTrackpadHeight: CGFloat = 118
     /// Marble thumb size inside the trackpad.
     static let fightAimTrackpadThumbSize: CGFloat = 40
+
+    // MARK: - Fight power slots (bottom-left FIFO wells)
+
+    /// Default always-visible power wells (extra capacity is a future shop item).
+    static let fightPowerSlotCount: Int = PlinkPowerUp.defaultSlotCapacity
+    static let fightPowerSlotSize: CGFloat = 62
 
     // MARK: - Climb intro camera (manual cast flyby)
 

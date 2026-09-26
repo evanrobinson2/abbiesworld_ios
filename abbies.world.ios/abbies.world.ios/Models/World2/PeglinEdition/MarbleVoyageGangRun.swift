@@ -46,8 +46,10 @@ struct MarbleVoyageGangRun: Equatable, Sendable {
     static let miniBossCageHPMultiplier: Int = 2
 
     /// Lightweight stand-ins for zone 1–2 / wind-up. Never named crew.
+    /// Production henchmen lead the pool after Porcupine (opener stays Porcupine).
     static let henchmenPool: [PlinkAttackerKind] = [
         .porcupineBoxer,
+        .crabPincher, .grasshopperKickboxer, .armadilloBlocker, .batDivekicker,
         .cawScout, .thornbackBeetle, .briarToad, .thornhornMantis,
         .coyoteBruiser, .gangFox, .hyena, .lizard, .vulture,
     ]

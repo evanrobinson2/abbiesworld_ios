@@ -17,7 +17,9 @@
     "completedBy": "Codex \u2014 Art Director",
     "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/refresh-transparent.png",
     "sourceHashSha256": "df5a6b94e48e6f4bff731f29eb5c5aca53f2c4ae3a460e81c6c0f5f312a02ebf",
-    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_refresh. RGBA/corner-alpha checks passed. Runtime catalog replacement, scale consistency and in-app 56pt legibility remain unverified; no Swift or catalog edits."
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_refresh. RGBA/corner-alpha checks passed. Runtime catalog replacement, scale consistency and in-app 56pt legibility remain unverified; no Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_refresh (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_refresh",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z"
   },
   "styleNotes": "Approved Tilt style lock: dark teal enamel disc, warm brass rim, bold contours, chunky hand-painted forms, restrained cel shading. True transparent corners; no checkerboard or opaque square. Match motif weight at 56\u201372pt.",
   "id": "20260926-power-icon-refresh",

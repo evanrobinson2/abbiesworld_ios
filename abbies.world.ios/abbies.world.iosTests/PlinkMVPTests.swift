@@ -79,15 +79,40 @@ final class PlinkMVPTests: XCTestCase {
         XCTAssertEqual(PlinkPowerUp.split.chipAssetID, "ui.plink.power.icon.split")
         XCTAssertEqual(World2RegistryKey.assetKey(for: "ui.plink.power.icon.refresh"), "ui/plink/power/icon/refresh")
         XCTAssertEqual(PlinkPowerUp.maxOwned, 2)
+        XCTAssertEqual(PlinkPowerUp.defaultSlotCapacity, 2)
+
         let player = "unit.\(UUID().uuidString)"
-        let seeded = PlinkPowerUpStore.counts(for: player)
-        XCTAssertEqual(seeded[.refresh], 1)
-        XCTAssertEqual(seeded[.fire], 1)
-        XCTAssertEqual(seeded[.split], 1)
+        let seeded = PlinkPowerUpStore.inventory(for: player)
+        XCTAssertEqual(seeded.slotCapacity, 2)
+        XCTAssertEqual(seeded.slots.count, 2)
+        XCTAssertEqual(seeded.count(of: .refresh), 1)
+        XCTAssertEqual(seeded.count(of: .fire), 1)
+        XCTAssertEqual(seeded.count(of: .split), 1)
+        XCTAssertEqual(seeded.count(of: .tilt), 1)
+        // Front two slots filled FIFO; rest wait behind.
+        XCTAssertNotNil(seeded.slots[0])
+        XCTAssertNotNil(seeded.slots[1])
+        XCTAssertEqual(seeded.waitingCount, 2)
+
         XCTAssertTrue(PlinkPowerUpStore.award(.refresh, for: player))
         XCTAssertEqual(PlinkPowerUpStore.count(.refresh, for: player), 2)
         XCTAssertFalse(PlinkPowerUpStore.award(.refresh, for: player))
+
+        let spent = PlinkPowerUpStore.spendSlot(0, for: player)
+        XCTAssertNotNil(spent)
+        var after = PlinkPowerUpStore.inventory(for: player)
+        XCTAssertEqual(after.slots.count, 2)
+        // Using a slot pulls the next waiting charge into the tray.
+        XCTAssertEqual(after.waitingCount, max(0, after.queue.count - after.slotCapacity))
+
         XCTAssertTrue(PlinkPowerUpStore.spend(.fire, for: player))
         XCTAssertEqual(PlinkPowerUpStore.count(.fire, for: player), 0)
+
+        // Empty both visible slots → dashed empty wells.
+        after = PlinkPowerUpStore.inventory(for: player)
+        while let _ = PlinkPowerUpStore.spendSlot(0, for: player) {}
+        let empty = PlinkPowerUpStore.inventory(for: player)
+        XCTAssertTrue(empty.slots.allSatisfy { $0 == nil })
+        XCTAssertEqual(empty.waitingCount, 0)
     }
 }

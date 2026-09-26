@@ -55,6 +55,8 @@
     "completedBy": "Codex \u2014 Art Director",
     "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/giant-transparent.png",
     "sourceHashSha256": "f3c0a14954f7468f89f618eae62a93693a6d96ab8f4d34c135005c31de50b75e",
-    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_giant. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits."
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_giant. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_giant (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_giant",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z"
   }
 }

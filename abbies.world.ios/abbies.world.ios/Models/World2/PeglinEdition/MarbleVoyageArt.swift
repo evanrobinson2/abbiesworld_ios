@@ -53,8 +53,25 @@ enum MarbleVoyageArt {
     }
 
     static func eventAccentIcon(_ kind: MarbleVoyageNodeKind) -> String {
-        kind.systemIcon
+        switch kind {
+        case .shrine: return "cross.circle.fill"
+        default: return kind.systemIcon
+        }
     }
+
+    /// Bundled climb destination vignette (`token.marbleVoyage.climb.*`).
+    static func climbDestinationCatalogName(for kind: MarbleVoyageNodeKind) -> String? {
+        switch kind {
+        case .treasure: return "world2_token_marbleVoyage_climb_treasure"
+        case .mystery: return "world2_token_marbleVoyage_climb_mystery"
+        case .shrine: return "world2_token_marbleVoyage_climb_shrine"
+        default: return nil
+        }
+    }
+
+    /// Bell Market shop interior plate.
+    static let bellMarketInteriorCatalogName = "world2_plate_marbleVoyage_shop_bellMarket_interior"
+    static let bellMarketInteriorSemanticID = "plate.marbleVoyage.shop.bellMarket.interior"
 
     /// Shared chart tile fill — dark rose, thematic for every node.
     static let chartTileRose: (r: Double, g: Double, b: Double) = (0.58, 0.22, 0.38)

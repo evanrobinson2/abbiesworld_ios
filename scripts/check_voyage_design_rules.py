@@ -50,6 +50,16 @@ POWER_ICONS = [
     "world2_plink_power_icon_refresh",
     "world2_plink_power_icon_fire",
     "world2_plink_power_icon_split",
+    "world2_plink_power_icon_tilt",
+    "world2_plink_power_icon_magnet",
+    "world2_plink_power_icon_bounce",
+    "world2_plink_power_icon_bubble",
+    "world2_plink_power_icon_spark",
+    "world2_plink_power_icon_ghost",
+    "world2_plink_power_icon_giant",
+    "world2_token_marbleVoyage_climb_treasure",
+    "world2_token_marbleVoyage_climb_mystery",
+    "world2_token_marbleVoyage_climb_shrine",
 ]
 MAX_CORNER_ALPHA = 16
 MIN_TRANSPARENT_FRAC = 0.12
@@ -98,7 +108,7 @@ def check_swift_contract(failures: list[str]) -> None:
         "battleFeedMinMetaFont": str(FEED_MIN_META),
         "battleFeedMinChipValueFont": str(FEED_MIN_CHIP),
         "fightAimTrackpadWidth": "176",
-        "fightAimTrackpadHeight": "76",
+        "fightAimTrackpadHeight": "118",
         "climbIntroSettleSeconds": str(CLIMB_SETTLE_SEC),
         "climbRevealPanSeconds": str(CLIMB_REVEAL_PAN_SEC),
         "climbRevealLetterSeconds": str(CLIMB_REVEAL_LETTER_SEC),

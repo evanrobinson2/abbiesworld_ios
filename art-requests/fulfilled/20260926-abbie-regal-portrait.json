@@ -1,0 +1,58 @@
+{
+  "id": "20260926-abbie-regal-portrait",
+  "semanticId": "character.peglin.abbie.happy",
+  "status": "fulfilled",
+  "priority": "high",
+  "type": "character_portrait",
+  "kind": "character",
+  "keepStockIcon": false,
+  "aspect": "1:1",
+  "requestedBy": "cursor",
+  "createdAt": "2026-09-26T23:20:00Z",
+  "requestedAt": "2026-09-26T23:20:00Z",
+  "gameArea": "Marble Voyage / Plink battle HUD",
+  "characterOrAssetName": "Abbie regal battle portrait",
+  "surface": "Battle header Abbie portrait (happy/idle)",
+  "brief": "Bind Evan-approved regal Midjourney bust to battle happy/idle. Preserve face, lighter curls, royal outfit and smile. Full-body stays on overland tiles.",
+  "usage": "Replace Assets.xcassets/world2_peglin_abbie_happy.imageset payload; route hurt/defeated/wink to dedicated sheets",
+  "expectedBackground": "Pale neutral studio backdrop",
+  "targetPixelSize": "1024x1024",
+  "productionIntent": "runtime_bind",
+  "styleNotes": "Regal raspberry/plum jacket, gold piping, mint gems, cheeky smile with right canine. Waist-up battle-ready edition.",
+  "promptSeeds": [
+    "Abbie regal fashion battle-ready edition, raspberry military jacket, gold embroidery, mint gems, joyful cheeky smile --ar 1:1 --stylize 150"
+  ],
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/abbie-regal-2026-09-26/midjourney-original.jpeg",
+    "AssetSources/MarbleVoyage/abbie-regal-2026-09-26/provenance.json",
+    "AssetSources/MarbleVoyage/abbie-regal-2026-09-26/HANDOFF.md",
+    "AssetSources/MarbleVoyage/abbie-portrait-2026-09-26/abbie-portrait-canonical.jpeg",
+    "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_peglin_abbie_happy.imageset/abbie-profile-approved.jpeg",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/PeglinCharacterArt.swift",
+    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/PeglinLandmarkTokenView.swift"
+  ],
+  "existingAssetSemanticIds": [
+    "character.peglin.abbie.happy"
+  ],
+  "acceptanceCriteria": [
+    "Exact approved original SHA-256 638f1f70… in AssetSources",
+    "Happy/idle battle portrait shows regal bust",
+    "Hurt/defeated/wink do not use the smiling regal sheet",
+    "Overland map full-body unchanged",
+    "Prior casual bust retained for rollback"
+  ],
+  "sessionNote": "Filed from chore #25. Source delivery + runtime bind in same builder pass.",
+  "placeholder": {
+    "type": "catalog_swap",
+    "detail": "Prior casual bust in world2_peglin_abbie_happy; superseded by regal"
+  },
+  "fulfillment": {
+    "completedAt": "2026-09-26T23:20:00Z",
+    "completedBy": "Cursor — game-dev chore #25",
+    "assetSourcePath": "AssetSources/MarbleVoyage/abbie-regal-2026-09-26/midjourney-original.jpeg",
+    "sourceHashSha256": "638f1f70f93415b2d52a43ba2eb86b2a36c36dccfb67763cb4604d4674962278",
+    "catalogImageset": "world2_peglin_abbie_happy",
+    "choreIssue": "https://github.com/evanrobinson2/abbiesworld_ios/issues/25",
+    "notes": "Source imported and happy catalog bound. Expression sheets restored to older art (outfit mismatch follow-up). Overland map untouched. In-game screenshot / close still pending device verify."
+  }
+}

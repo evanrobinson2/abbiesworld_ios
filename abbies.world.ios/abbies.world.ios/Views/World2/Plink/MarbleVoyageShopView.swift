@@ -31,15 +31,27 @@ struct MarbleVoyageShopView: View {
 
     var body: some View {
         ZStack {
+            MarbleVoyageUnclippedPlate(
+                catalogName: MarbleVoyageArt.bellMarketInteriorCatalogName,
+                semanticName: MarbleVoyageArt.bellMarketInteriorSemanticID,
+                fallbackIcon: "storefront.fill",
+                fallbackLabel: "Bell Market",
+                letterbox: Color(red: 0.06, green: 0.12, blue: 0.22)
+            )
+            .ignoresSafeArea()
+
+            // Soft scrim so shop chrome stays readable over the bright canopy / shelves.
             LinearGradient(
                 colors: [
-                    Color(red: 0.08, green: 0.16, blue: 0.28),
-                    Color(red: 0.13, green: 0.26, blue: 0.40),
+                    Color.black.opacity(0.45),
+                    Color.black.opacity(0.28),
+                    Color.black.opacity(0.5),
                 ],
                 startPoint: .top,
                 endPoint: .bottom
             )
             .ignoresSafeArea()
+            .allowsHitTesting(false)
 
             ScrollView {
                 VStack(spacing: 18) {

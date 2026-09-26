@@ -12,21 +12,26 @@ enum PeglinCharacterState: String, CaseIterable, Identifiable, Sendable {
     var id: String { rawValue }
 
     /// Catalog imageset for Abbie's elbow-height battle / HUD portrait.
+    /// Happy/idle use the approved regal bust; hurt/defeated/wink keep dedicated sheets
+    /// (older outfits — follow-up art, do not force the regal smile onto them).
     var abbiePortraitCatalogName: String {
         switch self {
-        case .idle, .happy: return "world2_peglin_abbie_happy"
+        case .idle, .happy: return PeglinAbbieArt.portraitCatalogName
         case .sneakyWink: return "world2_peglin_abbie_sneaky_wink"
         case .hurt: return "world2_peglin_abbie_hurt"
-        case .defeated: return "world2_peglin_abbie_hurt_angry"
+        case .defeated: return PeglinAbbieArt.hurtAngryCatalogName
         }
     }
 }
 
 enum PeglinAbbieArt {
+    /// Approved regal bust — Marble Voyage / Peglin HUD battle happy/idle (chore #25).
+    static let portraitCatalogName = "world2_peglin_abbie_happy"
+
     /// Full-body pixel Abbie for map walk + fight zones.
     static let mapCatalogName = "world2_peglin_abbie_map"
 
-    /// Extra hurt variants kept for future beat scripting.
+    /// Extra hurt variants — older expression sheets; not the regal smile.
     static let hurtGrimCatalogName = "world2_peglin_abbie_hurt_grim"
     static let hurtAngryCatalogName = "world2_peglin_abbie_hurt_angry"
 }

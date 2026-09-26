@@ -142,13 +142,13 @@ final class MarbleVoyageDesignRulesTests: XCTestCase {
 
     func testFightAimTrackpadIsFixedSize() {
         XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadWidth, 176, accuracy: 0.01)
-        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadHeight, 76, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadHeight, 118, accuracy: 0.01)
         XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadThumbSize, 40, accuracy: 0.01)
-        // Wide enough for a thumb, short enough to stay a corner control.
+        // Wide enough for a thumb; tall enough for downward turbo pull.
         XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadWidth, 140)
         XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadWidth, 220)
-        XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 56)
-        XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 100)
+        XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 100)
+        XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 140)
     }
 
     func testOverlandScrollCameraOffsetClamps() {

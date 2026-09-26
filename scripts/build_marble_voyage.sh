@@ -99,7 +99,8 @@ echo "BUILD OK — ${APP_PATH:-unknown app path}"
 if [[ "$DO_CAPTURE" -eq 1 ]]; then
   echo
   echo "→ voyage capture (reuses this build)"
-  exec "$ROOT/scripts/capture_marble_voyage.sh" --skip-build --device "$DEVICE_NAME" "${CAPTURE_ARGS[@]}"
+  # With `set -u`, an empty CAPTURE_ARGS[@] errors — expand safely.
+  exec "$ROOT/scripts/capture_marble_voyage.sh" --skip-build --device "$DEVICE_NAME" ${CAPTURE_ARGS[@]+"${CAPTURE_ARGS[@]}"}
 fi
 
 "$ROOT/scripts/voyage_capture_reminder.sh"
