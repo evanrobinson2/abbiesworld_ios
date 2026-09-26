@@ -19,7 +19,13 @@ struct MarbleVoyageRootView: View {
     @State private var selectedPlayerID: String?
 
     private var wantsDebugFight: Bool {
-        ProcessInfo.processInfo.arguments.contains(Self.debugFightLaunchArgument)
+        // Capture mode owns stage routing inside MarbleVoyageHostView.
+        guard !MarbleVoyageCapture.isActive else { return false }
+        return ProcessInfo.processInfo.arguments.contains(Self.debugFightLaunchArgument)
+    }
+
+    private var wantsCaptureBoot: Bool {
+        MarbleVoyageCapture.isActive && auth.shouldSkipAuthForAutomation
     }
 
     var body: some View {
@@ -57,12 +63,12 @@ struct MarbleVoyageRootView: View {
 
             case .debugFight:
                 PlinkBattleHostView(
-                    title: "Debug Rescue",
+                    title: "Trail scrap",
                     enemyKind: .foxSpirit,
-                    waveAttackerOverride: .raze,
+                    waveAttackerOverride: MarbleVoyageRun.makeCampaign(seed: 42).node("land0_poi1")?.waveAttacker,
                     focusCrewMember: .raze,
                     gangFightRole: .henchman,
-                    sceneBackgroundAsset: "map.peglin.bramble",
+                    sceneBackgroundAsset: MarbleVoyageArt.fightPlate(enemy: .foxSpirit),
                     playerID: selectedPlayerID ?? "automation",
                     onExit: {
                         gate = .voyage
@@ -100,11 +106,25 @@ struct MarbleVoyageRootView: View {
                 }
             }
         }
+        .onChange(of: bootstrapReady) { _, ready in
+            guard ready, wantsCaptureBoot else { return }
+            // Jump past the continue gate once assets are warm.
+            selectedPlayerID = selectedPlayerID ?? "automation"
+            fadeOpacity = 1
+            gate = .voyage
+        }
     }
 
     private func resolveGate(animated: Bool) {
         let next: Gate
-        if wantsDebugFight, auth.shouldSkipAuthForAutomation || auth.isAuthenticated {
+        if wantsCaptureBoot {
+            // Skip auth / profile / intro — land on the voyage shell for stage stills.
+            next = bootstrapReady ? .voyage : .intro
+            selectedPlayerID = auth.activeProfile?.playerId.rawValue ?? "automation"
+            if bootstrapReady, gate != .voyage {
+                fadeOpacity = 1
+            }
+        } else if wantsDebugFight, auth.shouldSkipAuthForAutomation || auth.isAuthenticated {
             next = .debugFight
             selectedPlayerID = auth.activeProfile?.playerId.rawValue ?? "automation"
         } else if auth.shouldSkipAuthForAutomation {

@@ -102,8 +102,8 @@ STOPS = [
 # Marble levels mirror `MarbleVoyageOwnedMarble.damageMultiplier` (Peglin orbs max at 3).
 MARBLE_MAX_LEVEL = 3
 MARBLE_DAMAGE_MULTIPLIER = {1: 1.0, 2: 1.12, 3: 1.25}
-# `MarbleVoyageOwnedMarble.starterCollection()` — one of each catalog orb at Lv1.
-MARBLE_COLLECTION_SIZE = 6
+# `MarbleVoyageOwnedMarble.starterCollection()` — four plain Sparkles at Lv1.
+MARBLE_COLLECTION_SIZE = 4
 
 
 def marble_collection() -> list[int]:

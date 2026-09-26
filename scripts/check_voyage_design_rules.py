@@ -5,7 +5,7 @@ Enforces the same numeric contract as MarbleVoyageDesignRules.swift:
   1. Screen real estate — 4:3 plates fill iPad landscape width
   2. Transparent UI — power icons keep real alpha (no opaque card stock)
   3. Readable battle feed — min panel width + font sizes in PlinkBattleHostView
-  4. Climb intro — boss first, ~4s pan, player centered
+  4. Climb intro — boss→Abbie cast scrub, manual transport, frame next choice
   5. VS portraits — fox/enemy figurines resolve on disk
   6. No-clip plates — delegates to check_voyage_plate_aspects.py
 
@@ -40,11 +40,11 @@ CHAR_ART = APP / "Models" / "World2" / "PeglinEdition" / "PeglinCharacterArt.swi
 # --- Thresholds (keep in sync with MarbleVoyageDesignRules.swift) ---
 MIN_PLATE_WIDTH_FILL = 0.85
 REF_VIEWPORTS = [(1180, 820), (1194, 834), (1366, 1024)]
-CLIMB_MIN_W_FRAC = 0.70
-CLIMB_MAX_W_FRAC = 0.92
+CLIMB_MIN_W_FRAC = 0.98
+CLIMB_MAX_W_FRAC = 1.0
 CLIMB_REF = (1180, 700)
-CLIMB_TARGET_W_FRAC = 0.88
-CLIMB_HARD_CAP_W_FRAC = 0.92
+CLIMB_TARGET_W_FRAC = 1.0
+CLIMB_HARD_CAP_W_FRAC = 1.0
 CLIMB_MIN_SCROLL_SCREENS = 2.6
 POWER_ICONS = [
     "world2_plink_power_icon_refresh",
@@ -57,8 +57,11 @@ FEED_MIN_WIDTH = 160
 FEED_MIN_BODY = 12
 FEED_MIN_META = 11
 FEED_MIN_CHIP = 14
-CLIMB_PAN_SEC = 7.0
-CLIMB_SETTLE_SEC = 3.7
+CLIMB_SETTLE_SEC = 0.8
+CLIMB_REVEAL_PAN_SEC = 1.45
+CLIMB_REVEAL_LETTER_SEC = 0.1
+CLIMB_REVEAL_HOLD_SEC = 2.5
+CLIMB_REVEAL_FINAL_SEC = 1.6
 VS_FIGURINES = [
     "world2_peglin_bramble_figurine",
     "world2_peglin_fox_figurine",
@@ -94,9 +97,19 @@ def check_swift_contract(failures: list[str]) -> None:
         "battleFeedMinBodyFont": str(FEED_MIN_BODY),
         "battleFeedMinMetaFont": str(FEED_MIN_META),
         "battleFeedMinChipValueFont": str(FEED_MIN_CHIP),
-        "climbIntroPanSeconds": str(CLIMB_PAN_SEC),
+        "fightAimTrackpadWidth": "176",
+        "fightAimTrackpadHeight": "76",
         "climbIntroSettleSeconds": str(CLIMB_SETTLE_SEC),
-        "climbIntroPlayerScrollAnchorY": "0.5",
+        "climbRevealPanSeconds": str(CLIMB_REVEAL_PAN_SEC),
+        "climbRevealLetterSeconds": str(CLIMB_REVEAL_LETTER_SEC),
+        "climbRevealHoldAfterNameSeconds": str(CLIMB_REVEAL_HOLD_SEC),
+        "climbRevealFinalPanSeconds": str(CLIMB_REVEAL_FINAL_SEC),
+        "climbIntroPlayerScrollAnchorY": "0.58",
+        "climbRevealFocusAnchorY": "0.38",
+        "climbCastScrubPointsPerFrame": "72",
+        "climbFoeCardMaxWidth": "360",
+        "climbFoeCardEstimateHeight": "280",
+        "climbFoeCardMinClearance": "16",
         "minTransparentPixelFraction": str(MIN_TRANSPARENT_FRAC),
         "climbChartMinWidthFraction": f"{CLIMB_MIN_W_FRAC:.2f}",
         "climbChartMaxWidthFraction": f"{CLIMB_MAX_W_FRAC:.2f}",
@@ -131,39 +144,21 @@ def check_screen_real_estate(failures: list[str]) -> None:
     if "targetWidthFraction" not in climb_src and f"{CLIMB_TARGET_W_FRAC}" not in climb_src:
         fail(
             failures,
-            "ClimbMap must target ~88% viewport width (no skinny 0.58 column)",
+            "ClimbMap must target full viewport width (no side letterbox)",
         )
-    if "0.58" in climb_src:
+    if "0.58" in climb_src or "0.88" in climb_src:
         fail(
             failures,
-            "ClimbMap still caps at 0.58 width — causes huge side pillarboxing",
+            "ClimbMap still caps below full width — causes side pillarboxing",
         )
 
-    # Compute expected content width using same formula as Swift (approx from image).
-    climb_folder = ASSETS / "world2_map_marbleVoyage_climb.imageset"
-    imgs = [
-        p
-        for p in climb_folder.iterdir()
-        if p.suffix.lower() in {".png", ".jpg", ".jpeg", ".webp"}
-    ] if climb_folder.is_dir() else []
-    if not imgs:
-        fail(failures, "climb poster imageset missing")
-        return
-    with Image.open(imgs[0]) as im:
-        cw, ch = im.size
-    aspect = cw / ch if ch else 344 / 1024
-    aspect_h_over_w = 1 / aspect if aspect else 1024 / 344
+    # Full-bleed width; height grows for scroll (matches Swift contentSize).
     vw, vh = CLIMB_REF
-    width = min(vw * CLIMB_TARGET_W_FRAC, vw * CLIMB_HARD_CAP_W_FRAC)
-    height = width * aspect_h_over_w
+    width = vw * CLIMB_TARGET_W_FRAC
+    height = width * 2.8  # aspectHeightOverWidth
     min_height = max(vh * CLIMB_MIN_SCROLL_SCREENS, 1600)
     if height < min_height:
         height = min_height
-        width = height * aspect
-        cap = vw * CLIMB_HARD_CAP_W_FRAC
-        if width > cap:
-            width = cap
-            height = width * aspect_h_over_w
     frac = width / vw
     if frac < CLIMB_MIN_W_FRAC or frac > CLIMB_MAX_W_FRAC:
         fail(
@@ -269,25 +264,47 @@ def check_climb_intro(failures: list[str]) -> None:
         return
     # Extract function body roughly.
     start = text.index("private func playClimbIntro")
-    body = text[start : start + 2800]
-    if ".boss" not in body and "bossID" not in body:
-        fail(failures, "climb intro must start at boss / summit")
-    if "MarbleVoyageDesignRules.climbIntroPanSeconds" not in body:
-        fail(failures, "climb intro must use MarbleVoyageDesignRules.climbIntroPanSeconds")
-    if "MarbleVoyageDesignRules.climbIntroSettleSeconds" not in body:
+    body = text[start : start + 4500]
+    if "climbRevealBeats" not in text and "makeClimbRevealBeats" not in text and "MarbleVoyageOverlandScroll" not in text:
+        fail(failures, "climb intro must build per-enemy cast stops (OverlandScroll or climbRevealBeats)")
+    if "skipClimbIntro" not in text:
+        fail(failures, "climb intro must offer skipClimbIntro")
+    if "climbRevealStep" not in text and "climbReveal.prev" not in text:
+        fail(failures, "climb intro must offer manual prev/next transport")
+    if "MarbleVoyageDesignRules.climbRevealPanSeconds" not in body and "climbRevealPanSeconds" not in text:
+        fail(failures, "climb intro must use MarbleVoyageDesignRules.climbRevealPanSeconds")
+    if "MarbleVoyageDesignRules.climbIntroSettleSeconds" not in body and "climbIntroSettleSeconds" not in text:
         fail(failures, "climb intro must use MarbleVoyageDesignRules.climbIntroSettleSeconds")
-    if "climbIntroPlayerScrollAnchorY" not in body and "anchorY" not in body and "0.5" not in body:
-        fail(failures, "climb intro must end with player centered")
+    if "climbIntroPlayerScrollAnchorY" not in body and "anchorY" not in body and "0.58" not in body:
+        fail(failures, "climb intro must end framing Abbie / next glowing choice")
+    if "climbCastTourOrder" not in text and "MarbleVoyageOverlandScroll" not in text:
+        fail(failures, "climb cast order must come from DesignRules.climbCastTourOrder / OverlandScroll")
+    design = DESIGN_SWIFT.read_text(encoding="utf-8")
+    if "climbCastTourOrder" in design and ".bossToAbbie" not in design:
+        fail(failures, "climb cast must default to .bossToAbbie (summit first, climb up)")
+    if "scrubCastFrame" not in text and "climbCastScrub" not in text:
+        fail(failures, "climb cast must scrub frames on vertical drag")
+    if "presentEngageCardForReachable" not in text and "climbEngageNodeID" not in text:
+        fail(failures, "climb must keep a foe card for the next glowing landing")
+    if "preferredCardDock" not in text and "climbFoeCardDock" not in text:
+        fail(failures, "foe card must dock opposite the focused tile (occlusion)")
+    battle = BATTLE.read_text(encoding="utf-8")
+    if "fightAimTrackpadWidth" not in battle and "applyAimJoystick" not in battle:
+        fail(failures, "fight HUD must expose a fixed-size aim trackpad wired to applyAimJoystick")
     if "climbCameraOffset" not in text and "scrollTo" not in body:
         fail(
             failures,
             "climb intro must drive camera (climbCameraOffset) or scrollTo — "
             "proxy-only timing is unreliable",
         )
-    # Contract file must keep ~4s pan.
+    if "forward.end.fill" not in text and "climbReveal.skip" not in text:
+        fail(failures, "climb intro must expose a >| skip control")
+    if "chevron.backward" not in text or "chevron.forward" not in text:
+        fail(failures, "climb intro must expose < and > transport")
+    # Contract file must keep reveal timings.
     design = read(DESIGN_SWIFT) if DESIGN_SWIFT.is_file() else ""
-    if not re.search(rf"climbIntroPanSeconds[^=]*=\s*{CLIMB_PAN_SEC}\b", design):
-        fail(failures, f"climbIntroPanSeconds must be {CLIMB_PAN_SEC}")
+    if not re.search(rf"climbRevealPanSeconds[^=]*=\s*{CLIMB_REVEAL_PAN_SEC}\b", design):
+        fail(failures, f"climbRevealPanSeconds must be {CLIMB_REVEAL_PAN_SEC}")
 
 
 def check_versus_portraits(failures: list[str]) -> None:
@@ -369,7 +386,7 @@ def main() -> int:
         f"  • plate width fill ≥ {MIN_PLATE_WIDTH_FILL} on iPad landscape refs\n"
         f"  • {len(POWER_ICONS)} power icons have transparent corners\n"
         f"  • battle feed ≥ {FEED_MIN_WIDTH}pt / fonts ≥ {FEED_MIN_META}pt\n"
-        f"  • climb intro pan {CLIMB_PAN_SEC}s, player centered\n"
+        f"  • climb cast reveal (manual < > >|, pan {CLIMB_REVEAL_PAN_SEC}s/foe)\n"
         f"  • {len(VS_FIGURINES)} VS figurines present\n"
         "  • no-clip 4:3 plate aspects + no scaledToFill"
     )

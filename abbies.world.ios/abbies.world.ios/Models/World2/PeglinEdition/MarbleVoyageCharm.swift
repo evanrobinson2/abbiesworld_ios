@@ -46,7 +46,7 @@ enum MarbleVoyageCharm: String, CaseIterable, Identifiable, Codable, Sendable {
     var blurb: String {
         switch self {
         case .bloom: return "Shop heals restore more."
-        case .hover: return "Ball keeps speed between pegs."
+        case .hover: return "Pegs fling the ball a bit faster."
         case .prismBurst: return "Long orange streaks hit harder."
         case .moonGleam: return "Gold pegs pay more."
         case .cycle: return "Board leans toward crit / refresh."
@@ -151,6 +151,11 @@ enum MarbleVoyageCharm: String, CaseIterable, Identifiable, Codable, Sendable {
     static func extraSpecialPegs(cycleStacks: Int) -> Int {
         max(0, cycleStacks)
     }
+
+    /// Outbound speed multiplier after a peg bounce (Hover). Caps later in continuum.
+    static func hoverSpeedRetain(stacks: Int) -> Double {
+        1.0 + 0.06 * Double(max(0, stacks))
+    }
 }
 
 /// Economy tunables — gold peg prevalence/value (from gold sims).
@@ -163,6 +168,10 @@ struct MarbleVoyageEconomyTuning: Equatable, Codable, Sendable {
     var healPrice: Int
     /// Shop ball-upgrade base price.
     var ballUpgradePrice: Int
+    /// Shop “buy a marble” base price.
+    var buyMarblePrice: Int
+    /// Coins returned when destroying one bag marble.
+    var destroyRefund: Int
     /// Heal restores this fraction of max HP (before Bloom).
     var healFraction: Double
     /// Per-purchase price multiplier within one shop visit.
@@ -173,7 +182,64 @@ struct MarbleVoyageEconomyTuning: Equatable, Codable, Sendable {
         goldPegValue: 6,
         healPrice: 25,
         ballUpgradePrice: 25,
+        buyMarblePrice: 30,
+        destroyRefund: 8,
         healFraction: 0.20,
         shopInflation: 1.25
     )
+
+    enum CodingKeys: String, CodingKey {
+        case goldPegPrevalence, goldPegValue, healPrice, ballUpgradePrice
+        case buyMarblePrice, destroyRefund, healFraction, shopInflation
+    }
+
+    init(
+        goldPegPrevalence: Double,
+        goldPegValue: Int,
+        healPrice: Int,
+        ballUpgradePrice: Int,
+        buyMarblePrice: Int,
+        destroyRefund: Int,
+        healFraction: Double,
+        shopInflation: Double
+    ) {
+        self.goldPegPrevalence = goldPegPrevalence
+        self.goldPegValue = goldPegValue
+        self.healPrice = healPrice
+        self.ballUpgradePrice = ballUpgradePrice
+        self.buyMarblePrice = buyMarblePrice
+        self.destroyRefund = destroyRefund
+        self.healFraction = healFraction
+        self.shopInflation = shopInflation
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        let defaults = Self.recommended
+        goldPegPrevalence = try c.decodeIfPresent(Double.self, forKey: .goldPegPrevalence)
+            ?? defaults.goldPegPrevalence
+        goldPegValue = try c.decodeIfPresent(Int.self, forKey: .goldPegValue) ?? defaults.goldPegValue
+        healPrice = try c.decodeIfPresent(Int.self, forKey: .healPrice) ?? defaults.healPrice
+        ballUpgradePrice = try c.decodeIfPresent(Int.self, forKey: .ballUpgradePrice)
+            ?? defaults.ballUpgradePrice
+        buyMarblePrice = try c.decodeIfPresent(Int.self, forKey: .buyMarblePrice)
+            ?? defaults.buyMarblePrice
+        destroyRefund = try c.decodeIfPresent(Int.self, forKey: .destroyRefund)
+            ?? defaults.destroyRefund
+        healFraction = try c.decodeIfPresent(Double.self, forKey: .healFraction) ?? defaults.healFraction
+        shopInflation = try c.decodeIfPresent(Double.self, forKey: .shopInflation)
+            ?? defaults.shopInflation
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var c = encoder.container(keyedBy: CodingKeys.self)
+        try c.encode(goldPegPrevalence, forKey: .goldPegPrevalence)
+        try c.encode(goldPegValue, forKey: .goldPegValue)
+        try c.encode(healPrice, forKey: .healPrice)
+        try c.encode(ballUpgradePrice, forKey: .ballUpgradePrice)
+        try c.encode(buyMarblePrice, forKey: .buyMarblePrice)
+        try c.encode(destroyRefund, forKey: .destroyRefund)
+        try c.encode(healFraction, forKey: .healFraction)
+        try c.encode(shopInflation, forKey: .shopInflation)
+    }
 }

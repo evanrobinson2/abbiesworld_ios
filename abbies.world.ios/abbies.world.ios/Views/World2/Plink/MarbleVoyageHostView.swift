@@ -37,8 +37,75 @@ struct MarbleVoyageHostView: View {
     @State private var isClimbIntroPlaying = false
     @State private var climbIntroPlayedSeed: UInt64?
     @State private var climbDragAnchor: CGFloat?
+    /// Cast scrub: frame index when the vertical drag began.
+    @State private var climbCastScrubAnchor: Int?
+    /// Cast intro — generic overland tour (order from DesignRules.climbCastTourOrder).
+    @State private var climbRevealFocusID: String?
+    @State private var climbRevealLetters = 0
+    @State private var climbRevealBeats: [MarbleVoyageOverlandScroll.Stop] = []
+    @State private var climbRevealIndex = 0
+    @State private var climbIntroViewportHeight: CGFloat = 0
+    /// After cast (or when returning to map): reachable landing the foe card describes.
+    @State private var climbEngageNodeID: String?
     @StateObject private var chartMusic = PlinkMusicService()
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var captureReady = false
+    @State private var didApplyCaptureBootstrap = false
+
+    private var captureStage: MarbleVoyageCaptureStage? {
+        MarbleVoyageCapture.stage
+    }
+
+    private var captureSeed: UInt64 {
+        MarbleVoyageCapture.seed
+    }
+
+    private var climbRevealStop: MarbleVoyageOverlandScroll.Stop? {
+        guard climbRevealIndex >= 0, climbRevealIndex < climbRevealBeats.count else { return nil }
+        return climbRevealBeats[climbRevealIndex]
+    }
+
+    private var climbRevealCard: MarbleVoyageOverlandScroll.Card? {
+        climbRevealStop?.card
+    }
+
+    /// Cast tour card, or the engage card for the next glowing landing.
+    private var activeClimbFoeCard: MarbleVoyageOverlandScroll.Card? {
+        if isClimbIntroPlaying { return climbRevealCard }
+        return climbEngageCard
+    }
+
+    private var climbEngageCard: MarbleVoyageOverlandScroll.Card? {
+        guard let run, let id = climbEngageNodeID, let node = run.node(id) else { return nil }
+        return makeEngageCard(for: node, run: run)
+    }
+
+    private var showClimbFoeCard: Bool {
+        isClimbIntroPlaying || climbEngageNodeID != nil
+    }
+
+    private var climbFoeCardDock: MarbleVoyageOverlandScroll.CardDock {
+        let focusID = isClimbIntroPlaying
+            ? climbRevealFocusID
+            : (climbEngageNodeID ?? climbRevealFocusID)
+        guard let focusID,
+              let point = nodePositionsForCurrentChart()[focusID],
+              chartContentSize.width > 1
+        else { return .trailing }
+        return MarbleVoyageOverlandScroll.preferredCardDock(
+            focusX: point.x,
+            contentWidth: chartContentSize.width
+        )
+    }
+
+    private var climbRevealAccent: Color {
+        switch activeClimbFoeCard?.roleKind {
+        case .bigBoss: return Color(red: 0.95, green: 0.25, blue: 0.4)
+        case .miniBoss: return Color(red: 1.0, green: 0.55, blue: 0.22)
+        case .henchman: return Color(red: 0.55, green: 0.8, blue: 1.0)
+        case .none: return Color(red: 1.0, green: 0.55, blue: 0.28)
+        }
+    }
 
     var body: some View {
         ZStack {
@@ -126,11 +193,26 @@ struct MarbleVoyageHostView: View {
                 .zIndex(50)
                 .transition(.opacity.combined(with: .scale(scale: 0.96)))
             }
+
+            if captureReady {
+                Color.clear
+                    .frame(width: 1, height: 1)
+                    .accessibilityIdentifier(MarbleVoyageCapture.readyAccessibilityID)
+                    .accessibilityLabel("Voyage capture ready")
+                    .allowsHitTesting(false)
+                    .accessibilityHidden(false)
+            }
         }
         .accessibilityIdentifier("world2.marbleVoyage")
+        .ignoresSafeArea()
         .onAppear {
             reloadStats()
-            chartMusic.playMeadow()
+            if MarbleVoyageCapture.isActive {
+                chartMusic.stop()
+                applyCaptureBootstrapIfNeeded()
+            } else {
+                chartMusic.playMeadow()
+            }
         }
         .onChange(of: auth.activeProfile?.id) { _, _ in
             reloadStats()
@@ -227,6 +309,10 @@ struct MarbleVoyageHostView: View {
     }
 
     private func refreshChartMusic(for shell: Shell, phase: MarbleVoyagePhase?) {
+        if MarbleVoyageCapture.isActive {
+            chartMusic.stop()
+            return
+        }
         // Battle host owns fight music; meadow beds the title + chart + events.
         if case .fight = phase {
             chartMusic.stop()
@@ -243,6 +329,70 @@ struct MarbleVoyageHostView: View {
         if shell == .title || phase == nil || phase == .map || phase == .victory || phase == .defeat {
             chartMusic.playMeadow()
         }
+    }
+
+    private func applyCaptureBootstrapIfNeeded() {
+        guard let stage = captureStage, !didApplyCaptureBootstrap else { return }
+        didApplyCaptureBootstrap = true
+        MarbleVoyageCapture.clearReadyMarker()
+        captureReady = false
+
+        switch stage {
+        case .title:
+            shell = .title
+            run = nil
+            eventOutcome = nil
+        case .chart, .fight, .shop, .event:
+            climbIntroToken &+= 1
+            climbIntroPlayedSeed = captureSeed
+            isClimbIntroPlaying = false
+            climbRevealBeats = []
+            climbRevealIndex = 0
+            climbRevealFocusID = nil
+            climbEngageNodeID = nil
+            run = MarbleVoyageCapture.makeRun(for: stage, seed: captureSeed)
+            eventOutcome = nil
+            shell = .playing
+            // Skip climb cast — park the porthole on the player for a stable still.
+            DispatchQueue.main.async {
+                skipClimbIntro(snapToPlayer: true)
+            }
+            if MarbleVoyageCapture.wantsAutoBreakout, stage == .chart {
+                // After the chart + engage card settle, march into the first fight so we can
+                // record the real breakout (curtain → versus → board) on device.
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                    triggerCaptureAutoBreakout()
+                }
+            }
+        }
+
+        MarbleVoyageCapture.armReadyMarker(stage: stage, seed: captureSeed)
+        let readyDelay: TimeInterval
+        switch stage {
+        case .title: readyDelay = 1.1
+        case .chart: readyDelay = 1.4
+        case .fight: readyDelay = 1.8
+        case .shop, .event: readyDelay = 1.2
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + readyDelay) {
+            captureReady = true
+        }
+    }
+
+    /// Capture / recording helper — climb the first glowing fight from the chart.
+    private func triggerCaptureAutoBreakout() {
+        guard let run, case .map = run.phase, !isMarching else { return }
+        let positions = nodePositionsForCurrentChart()
+        let node = run.reachableChoices().first(where: { $0.kind == .fight || $0.kind == .boss })
+            ?? run.reachableChoices().first
+        guard let node else {
+            print("voyage.breakout: no reachable landing")
+            return
+        }
+        print("voyage.breakout: beginClimb → \(node.id) \(node.title)")
+        climbEngageNodeID = node.id
+        climbRevealFocusID = node.id
+        beginClimb(to: node, positions: positions)
     }
 
     @ViewBuilder
@@ -326,11 +476,23 @@ struct MarbleVoyageHostView: View {
             }
 
             if sceneCurtain {
-                Color.black.opacity(0.55)
-                    .ignoresSafeArea()
-                    .transition(.opacity)
-                    .allowsHitTesting(false)
-                    .zIndex(30)
+                // Must read as a hard slam — 0.55 on blueprint navy was invisible.
+                ZStack {
+                    Color.black
+                    RadialGradient(
+                        colors: [
+                            Color(red: 0.45, green: 0.9, blue: 1).opacity(0.35),
+                            .clear,
+                        ],
+                        center: .center,
+                        startRadius: 20,
+                        endRadius: 520
+                    )
+                }
+                .ignoresSafeArea()
+                .transition(.opacity)
+                .allowsHitTesting(true)
+                .zIndex(50)
             }
         }
         .animation(.easeInOut(duration: 0.45), value: phaseIdentity(active.phase))
@@ -348,12 +510,12 @@ struct MarbleVoyageHostView: View {
     }
 
     private var voyageBackdrop: some View {
-        // Letterbox around the blueprint climb chart.
+        // Matches blueprint paper so any residual edge never reads as a letterbox.
         LinearGradient(
             colors: [
-                Color(red: 0.04, green: 0.12, blue: 0.22),
-                Color(red: 0.07, green: 0.20, blue: 0.34),
-                Color(red: 0.05, green: 0.14, blue: 0.26),
+                Color(red: 0.10, green: 0.30, blue: 0.48),
+                Color(red: 0.07, green: 0.22, blue: 0.38),
+                Color(red: 0.05, green: 0.16, blue: 0.30),
             ],
             startPoint: .top,
             endPoint: .bottom
@@ -366,49 +528,292 @@ struct MarbleVoyageHostView: View {
     private var mapPhase: some View {
         ZStack {
             chart
-                .ignoresSafeArea(edges: .bottom)
+                .ignoresSafeArea()
 
             VStack(spacing: 0) {
                 mapChromeHeader
                 Spacer(minLength: 0)
-                if let line = run?.lastEventLine, !line.isEmpty {
-                    Text(line)
-                        .font(.system(size: 14, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white)
-                        .padding(12)
-                        .frame(maxWidth: .infinity)
-                        .background(.ultraThinMaterial.opacity(0.92), in: RoundedRectangle(cornerRadius: 14))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 14)
-                                .stroke(.white.opacity(0.35), lineWidth: 1)
-                        )
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 16)
+            }
+
+            if showClimbFoeCard {
+                climbRevealNameCard
+                    .allowsHitTesting(!isClimbIntroPlaying)
+                    .zIndex(30)
+
+                if isClimbIntroPlaying {
+                    // Right-thumb cast scrubber — < previous (toward boss) · > next · >| to Abbie.
+                    climbRevealTransport
+                        .zIndex(40)
                 }
             }
-            .padding(.top, 10)
         }
+        .ignoresSafeArea()
+    }
+
+    /// Cast / engage foe card — docks opposite the focused tile so map art stays clear.
+    private var climbRevealNameCard: some View {
+        let card = activeClimbFoeCard
+        let name = (card?.name ?? "").uppercased()
+        let revealed = isClimbIntroPlaying
+            ? String(name.prefix(climbRevealLetters))
+            : name
+        let accent = climbRevealAccent
+        let dock = climbFoeCardDock
+        let engageNode: MarbleVoyageNode? = {
+            guard let run, let id = climbEngageNodeID else { return nil }
+            return run.node(id)
+        }()
+        let isFightEngage = engageNode?.kind == .fight || engageNode?.kind == .boss
+        return VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top, spacing: 14) {
+                VStack(alignment: .leading, spacing: 8) {
+                    if let role = card?.role, !role.isEmpty {
+                        Text(role)
+                            .font(.system(size: 15, weight: .black, design: .rounded))
+                            .tracking(2.5)
+                            .foregroundStyle(accent)
+                            .shadow(color: .black.opacity(0.75), radius: 3, y: 1)
+                    }
+                    // One line only — scale down before wrapping (MORRO / W bug).
+                    Text(revealed.isEmpty ? " " : revealed)
+                        .font(.system(size: 44, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                        .shadow(color: accent.opacity(0.85), radius: 8, y: 2)
+                        .shadow(color: .black.opacity(0.9), radius: 2, y: 1)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.42)
+                        .allowsTightening(true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .animation(
+                            reduceMotion
+                                ? .easeOut(duration: 0.12)
+                                : .easeOut(duration: 0.08),
+                            value: climbRevealLetters
+                        )
+                        .accessibilityLabel(name)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+                if let kind = card?.kind {
+                    PlinkAttackerBattlePortrait(
+                        kind: kind,
+                        size: 100,
+                        stroke: accent.opacity(0.9)
+                    )
+                    .accessibilityIdentifier("world2.marbleVoyage.climbReveal.portrait")
+                }
+            }
+
+            if (!isClimbIntroPlaying || climbRevealLetters >= name.count),
+               !name.isEmpty, let card {
+                VStack(alignment: .leading, spacing: 10) {
+                    if !card.stageTitle.isEmpty {
+                        Text(card.stageTitle)
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundStyle(.white.opacity(0.78))
+                    }
+                    if !card.blurb.isEmpty {
+                        Text(card.blurb)
+                            .font(.system(size: 15, weight: .semibold, design: .rounded))
+                            .foregroundStyle(.white.opacity(0.92))
+                            .fixedSize(horizontal: false, vertical: true)
+                            .lineLimit(3)
+                    }
+                    if card.hp > 0 || card.atk > 0 {
+                        HStack(spacing: 10) {
+                            climbRevealStatChip(title: "HP", value: "\(card.hp)", tint: accent)
+                            climbRevealStatChip(title: "ATK", value: "\(card.atk)", tint: Color(red: 1, green: 0.7, blue: 0.35))
+                            climbRevealStatChip(title: "THREAT", value: "\(card.threat)", tint: Color(red: 0.7, green: 0.85, blue: 1))
+                        }
+                    }
+                }
+                .transition(.opacity.combined(with: .move(edge: .trailing)))
+            }
+
+            if isClimbIntroPlaying, !climbRevealBeats.isEmpty {
+                Text("\(climbRevealIndex + 1) / \(climbRevealBeats.count)")
+                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.55))
+            } else if !isClimbIntroPlaying, climbEngageNodeID != nil {
+                Text(isFightEngage
+                     ? "Tap the glowing tile to enter the arena."
+                     : "Tap the glowing tile to land.")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.8))
+                if let engageNode, isFightEngage {
+                    Button {
+                        PlinkSFX.play(.ui)
+                        beginClimb(to: engageNode, positions: nodePositionsForCurrentChart())
+                    } label: {
+                        Text("FIGHT")
+                            .font(.system(size: 18, weight: .black, design: .rounded))
+                            .foregroundStyle(.white)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 12)
+                            .background(
+                                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                                    .fill(accent.opacity(0.95))
+                            )
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(isMarching)
+                    .accessibilityIdentifier("world2.marbleVoyage.climbEngage.fight")
+                    .accessibilityLabel("Enter arena against \(card?.name ?? engageNode.title)")
+                }
+            }
+        }
+        .padding(.horizontal, 20)
+        .padding(.vertical, 14)
+        .frame(maxWidth: MarbleVoyageDesignRules.climbFoeCardMaxWidth, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 22, style: .continuous)
+                .fill(Color.black.opacity(0.62))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 22, style: .continuous)
+                        .stroke(accent.opacity(0.7), lineWidth: 2)
+                )
+        )
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity,
+            alignment: dock == .trailing ? .trailing : .leading
+        )
+        .padding(.leading, dock == .leading ? 22 : 8)
+        .padding(.trailing, dock == .trailing ? 22 : 8)
+        .padding(.top, 120)
+        .padding(.bottom, 140)
+        .accessibilityIdentifier("world2.marbleVoyage.climbReveal.name")
+        .accessibilityLabel({
+            guard let card else { return "Cast card" }
+            return "\(card.role) \(card.name). \(card.blurb) HP \(card.hp), attack \(card.atk)"
+        }())
+    }
+
+    private func climbRevealStatChip(title: String, value: String, tint: Color) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(title)
+                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .tracking(0.8)
+                .foregroundStyle(tint.opacity(0.9))
+            Text(value)
+                .font(.system(size: 22, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
+                .monospacedDigit()
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Color.white.opacity(0.1))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .stroke(tint.opacity(0.45), lineWidth: 1)
+                )
+        )
+    }
+
+    /// Manual cast transport — previous · next · skip to dock.
+    private var climbRevealTransport: some View {
+        HStack(spacing: 12) {
+            climbRevealTransportButton(
+                systemName: "chevron.backward",
+                label: "Previous foe",
+                id: "world2.marbleVoyage.climbReveal.prev",
+                enabled: climbRevealIndex > 0
+            ) {
+                climbRevealStep(delta: -1)
+            }
+
+            climbRevealTransportButton(
+                systemName: "chevron.forward",
+                label: climbRevealIndex >= climbRevealBeats.count - 1
+                    ? "Finish cast intro"
+                    : "Next foe",
+                id: "world2.marbleVoyage.climbReveal.next",
+                enabled: !climbRevealBeats.isEmpty
+            ) {
+                if climbRevealIndex >= climbRevealBeats.count - 1 {
+                    skipClimbIntro(snapToPlayer: true)
+                } else {
+                    climbRevealStep(delta: 1)
+                }
+            }
+
+            climbRevealTransportButton(
+                systemName: "forward.end.fill",
+                label: "Skip to Abbie",
+                id: "world2.marbleVoyage.climbReveal.skip",
+                enabled: true
+            ) {
+                skipClimbIntro(snapToPlayer: true)
+            }
+        }
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .background(
+            Capsule(style: .continuous)
+                .fill(Color.black.opacity(0.62))
+                .overlay(
+                    Capsule(style: .continuous)
+                        .stroke(.white.opacity(0.4), lineWidth: 1.5)
+                )
+        )
+        .shadow(color: .black.opacity(0.55), radius: 14, y: 5)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+        .padding(.trailing, 28)
+        .padding(.bottom, 36)
+        .allowsHitTesting(true)
+        .accessibilityElement(children: .contain)
+        .accessibilityIdentifier("world2.marbleVoyage.climbReveal.transport")
+    }
+
+    private func climbRevealTransportButton(
+        systemName: String,
+        label: String,
+        id: String,
+        enabled: Bool,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            guard enabled else { return }
+            PlinkSFX.play(.ui)
+            action()
+        } label: {
+            Image(systemName: systemName)
+                .font(.system(size: 22, weight: .bold))
+                .foregroundStyle(.white.opacity(enabled ? 1 : 0.35))
+                .frame(width: 56, height: 56)
+                .contentShape(Circle())
+        }
+        .buttonStyle(.plain)
+        .disabled(!enabled)
+        .accessibilityIdentifier(id)
+        .accessibilityLabel(label)
     }
 
     private var mapChromeHeader: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 4) {
             headerBar
             if let run {
                 Text(run.mode == .campaign
                      ? "Climb · \(min(MarbleVoyageRun.campaignTotalFights, run.fightsCleared + 1))/\(MarbleVoyageRun.campaignTotalFights)"
                      : "Endless climb · \(run.fightsCleared) freed")
-                    .font(.system(size: 24, weight: .black, design: .rounded))
+                    .font(.system(size: 22, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
                     .shadow(color: .black.opacity(0.55), radius: 4, y: 1)
-                Text("Tap a glowing landing — Abbie climbs the path.")
-                    .font(.system(size: 14, weight: .semibold, design: .rounded))
+                Text(isClimbIntroPlaying
+                     ? "〈 〉 or drag — scrub from the summit down to Abbie."
+                     : (climbEngageNodeID != nil
+                        ? "Tap the glowing landing — or FIGHT on the card."
+                        : "Tap a glowing landing — Abbie climbs toward the boss."))
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white.opacity(0.92))
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 28)
             }
         }
-        .padding(.bottom, 12)
-        .padding(.top, 4)
+        .padding(.bottom, 8)
+        .padding(.top, 0)
         .frame(maxWidth: .infinity)
         .background {
             // Soft shader scrim so chrome stays readable over the island poster.
@@ -576,7 +981,8 @@ struct MarbleVoyageHostView: View {
                     .accessibilityIdentifier("world2.marbleVoyage.hp")
             }
         }
-        .padding(.horizontal, 18)
+        .padding(.horizontal, 12)
+        .padding(.top, 2)
     }
 
     private var chart: some View {
@@ -595,104 +1001,85 @@ struct MarbleVoyageHostView: View {
             )
             let maxOffset = max(0, contentHeight - geo.size.height)
 
-            HStack(spacing: 0) {
-                Spacer(minLength: 0)
+            // Full-bleed chart — no side Spacers / letterbox gutters.
+            ZStack(alignment: .topLeading) {
                 ZStack(alignment: .topLeading) {
-                    ZStack(alignment: .topLeading) {
-                        climbPosterBackdrop(width: contentWidth, height: contentHeight)
+                    climbPosterBackdrop(width: contentWidth, height: contentHeight)
 
-                        // Light haze only — keep blueprint lines readable (no leaf litter).
-                        LinearGradient(
-                            colors: [
-                                Color.black.opacity(0.10),
-                                Color.clear,
-                                Color.black.opacity(0.14),
-                            ],
-                            startPoint: .top,
-                            endPoint: .bottom
-                        )
-                        .frame(width: contentWidth, height: contentHeight)
-                        .allowsHitTesting(false)
+                    // Light haze only — keep blueprint lines readable (no leaf litter).
+                    LinearGradient(
+                        colors: [
+                            Color.black.opacity(0.10),
+                            Color.clear,
+                            Color.black.opacity(0.14),
+                        ],
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                    .frame(width: contentWidth, height: contentHeight)
+                    .allowsHitTesting(false)
 
-                        if let run {
-                            ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
-                                chartEdge(
-                                    from: edge.from,
-                                    to: edge.to,
-                                    positions: positions,
-                                    kind: .idle
-                                )
-                            }
-                            ForEach(Array(run.pathTaken.enumerated()), id: \.offset) { _, edge in
-                                chartEdge(
-                                    from: edge.from,
-                                    to: edge.to,
-                                    positions: positions,
-                                    kind: .traversed
-                                )
-                            }
-                            ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
-                                let isChoice = edge.from == run.currentNodeID
-                                    && run.reachableChoices().contains(where: { $0.id == edge.to })
-                                if isChoice {
-                                    chartEdge(
-                                        from: edge.from,
-                                        to: edge.to,
-                                        positions: positions,
-                                        kind: .choice
-                                    )
-                                }
-                            }
-                            ForEach(run.nodes) { node in
-                                if let point = positions[node.id] {
-                                    nodeChip(
-                                        node,
-                                        positions: positions,
-                                        hidePlayerWhileMarching: isMarching,
-                                        tile: tile
-                                    )
-                                        .id(node.id)
-                                        .position(point)
-                                }
-                            }
-                        }
-
-                        if let marchPosition {
-                            climbPlayerToken(size: tile * 0.45, flashing: false)
-                                .position(marchPosition)
-                                .zIndex(20)
-                                .allowsHitTesting(false)
-                        }
-
-                        if !reduceMotion {
-                            MarbleVoyageSceneAtmosphere(
-                                mood: .climb,
-                                parallax: CGSize(
-                                    width: sin(climbScrollOffset / 140) * 22,
-                                    height: climbScrollOffset * 0.09
-                                ),
-                                reduceMotion: reduceMotion,
-                                intensity: 0.72,
-                                seed: 29,
-                                transitionBoost: atmosphereBoost
+                    if let run {
+                        ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
+                            chartEdge(
+                                from: edge.from,
+                                to: edge.to,
+                                positions: positions,
+                                kind: .idle
                             )
-                            .frame(width: contentWidth, height: contentHeight)
-                            .allowsHitTesting(false)
-                            .zIndex(25)
+                        }
+                        ForEach(Array(run.pathTaken.enumerated()), id: \.offset) { _, edge in
+                            chartEdge(
+                                from: edge.from,
+                                to: edge.to,
+                                positions: positions,
+                                kind: .traversed
+                            )
+                        }
+                        ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
+                            let isChoice = edge.from == run.currentNodeID
+                                && run.reachableChoices().contains(where: { $0.id == edge.to })
+                            if isChoice {
+                                chartEdge(
+                                    from: edge.from,
+                                    to: edge.to,
+                                    positions: positions,
+                                    kind: .choice
+                                )
+                            }
+                        }
+                        ForEach(run.nodes) { node in
+                            if let point = positions[node.id] {
+                                nodeChip(
+                                    node,
+                                    positions: positions,
+                                    hidePlayerWhileMarching: isMarching,
+                                    tile: tile
+                                )
+                                    .id(node.id)
+                                    .position(point)
+                            }
                         }
                     }
-                    .frame(width: contentWidth, height: contentHeight, alignment: .topLeading)
-                    .offset(y: -climbCameraOffset)
+
+                    if let marchPosition {
+                        climbPlayerToken(size: tile * 0.45, flashing: false)
+                            .position(marchPosition)
+                            .zIndex(20)
+                            .allowsHitTesting(false)
+                    }
                 }
-                .frame(width: contentWidth, height: geo.size.height, alignment: .top)
-                .clipped()
-                .contentShape(Rectangle())
-                .gesture(climbPanGesture(maxOffset: maxOffset))
-                Spacer(minLength: 0)
+                .frame(width: contentWidth, height: contentHeight, alignment: .topLeading)
+                .offset(y: -climbCameraOffset)
             }
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
+            .clipped()
+            .contentShape(Rectangle())
+            .gesture(climbPanGesture(maxOffset: maxOffset))
             .onAppear {
                 dockPulse = true
                 chartContentSize = CGSize(width: contentWidth, height: contentHeight)
+                climbIntroViewportHeight = geo.size.height
                 pulseAtmosphere()
                 playClimbIntro(
                     contentHeight: contentHeight,
@@ -704,6 +1091,7 @@ struct MarbleVoyageHostView: View {
                 let cols = max((run?.nodes.map(\.column).max() ?? 1) + 1, 2)
                 let resized = MarbleVoyageClimbMap.contentSize(in: newSize, columnCount: cols)
                 chartContentSize = resized
+                climbIntroViewportHeight = newSize.height
                 let newMax = max(0, resized.height - newSize.height)
                 let clamped = min(max(0, climbCameraOffset), newMax)
                 climbCameraOffset = clamped
@@ -729,7 +1117,7 @@ struct MarbleVoyageHostView: View {
             }
         }
         .accessibilityIdentifier("world2.marbleVoyage.chart")
-        .allowsHitTesting(!isMarching && !isClimbIntroPlaying)
+        .allowsHitTesting(!isMarching)
     }
 
     private func climbPosterBackdrop(width: CGFloat, height: CGFloat) -> some View {
@@ -739,7 +1127,11 @@ struct MarbleVoyageHostView: View {
     private func climbPanGesture(maxOffset: CGFloat) -> some Gesture {
         DragGesture(minimumDistance: 12)
             .onChanged { value in
-                guard !isClimbIntroPlaying, !isMarching else { return }
+                guard !isMarching else { return }
+                if isClimbIntroPlaying {
+                    scrubCastFrame(translationY: value.translation.height)
+                    return
+                }
                 if climbDragAnchor == nil {
                     climbDragAnchor = climbCameraOffset
                 }
@@ -752,7 +1144,25 @@ struct MarbleVoyageHostView: View {
             }
             .onEnded { _ in
                 climbDragAnchor = nil
+                climbCastScrubAnchor = nil
             }
+    }
+
+    /// Vertical drag during cast = scrub frame index (boss → Abbie), camera follows.
+    private func scrubCastFrame(translationY: CGFloat) {
+        guard !climbRevealBeats.isEmpty else { return }
+        if climbCastScrubAnchor == nil {
+            climbCastScrubAnchor = climbRevealIndex
+        }
+        let stride = MarbleVoyageDesignRules.climbCastScrubPointsPerFrame
+        // Finger down → next frames toward Abbie; finger up → back toward the boss.
+        let delta = Int((translationY / stride).rounded(.towardZero))
+        let next = min(
+            max(0, (climbCastScrubAnchor ?? 0) + delta),
+            climbRevealBeats.count - 1
+        )
+        guard next != climbRevealIndex else { return }
+        presentClimbReveal(at: next, animated: false)
     }
 
     private func climbOffsetCentering(
@@ -761,8 +1171,26 @@ struct MarbleVoyageHostView: View {
         maxOffset: CGFloat,
         anchorY: CGFloat
     ) -> CGFloat {
-        let raw = pointY - viewportHeight * anchorY
-        return min(max(0, raw), maxOffset)
+        MarbleVoyageOverlandScroll.cameraOffset(
+            centering: pointY,
+            viewportHeight: viewportHeight,
+            maxOffset: maxOffset,
+            anchorY: anchorY
+        )
+    }
+
+    /// Prefer the midpoint of Abbie + her next glowing landing so both share the viewport.
+    private func climbPlayFocusY(
+        run: MarbleVoyageRun,
+        positions: [String: CGPoint]
+    ) -> CGFloat {
+        // Fallback near Abbie’s dock (bottom of chart) when positions are still settling.
+        let playerY = positions[run.currentNodeID]?.y ?? chartContentSize.height * 0.88
+        guard let next = run.reachableChoices().first,
+              let nextPoint = positions[next.id] else {
+            return playerY
+        }
+        return (playerY + nextPoint.y) * 0.5
     }
 
     private func setClimbCamera(_ offset: CGFloat, animated: Bool, duration: TimeInterval) {
@@ -779,7 +1207,7 @@ struct MarbleVoyageHostView: View {
         }
     }
 
-    /// Summit / top of map first, then pan down so the player sits in the screen center.
+    /// Cast intro via generic overland scroll — order from DesignRules.climbCastTourOrder.
     private func playClimbIntro(
         contentHeight: CGFloat,
         viewportHeight: CGFloat,
@@ -788,45 +1216,240 @@ struct MarbleVoyageHostView: View {
         guard let run else { return }
         let token = climbIntroToken
         let maxOffset = max(0, contentHeight - viewportHeight)
-        let playerY = positions[run.currentNodeID]?.y
-            ?? contentHeight * 0.90
+        let focusY = climbPlayFocusY(run: run, positions: positions)
         let endOffset = climbOffsetCentering(
-            pointY: playerY,
+            pointY: focusY,
             viewportHeight: viewportHeight,
             maxOffset: maxOffset,
             anchorY: MarbleVoyageDesignRules.climbIntroPlayerScrollAnchorY
         )
 
-        // Returning from a fight/event: snap to player — do not re-run the overview.
+        // Returning from a fight/event: snap to player — keep engage card, skip cast.
         if climbIntroPlayedSeed == run.seed {
+            clearClimbRevealCard()
+            climbRevealBeats = []
             setClimbCamera(endOffset, animated: false, duration: 0)
             isClimbIntroPlaying = false
+            presentEngageCardForReachable(positions: positions)
             return
         }
         climbIntroPlayedSeed = run.seed
+        climbIntroViewportHeight = viewportHeight
+        climbEngageNodeID = nil
 
-        // Top of map frames the boss/summit; porthole starts at content offset 0.
-        let bossID = run.nodes.first(where: { $0.kind == .boss })?.id
-        _ = bossID
+        let beats = MarbleVoyageOverlandScroll.makeCastStops(
+            run: run,
+            positions: positions,
+            order: MarbleVoyageDesignRules.climbCastTourOrder,
+            fighterKind: { chartFighterKind(for: $0, run: run) }
+        )
+        climbRevealBeats = beats
+        climbRevealIndex = 0
         isClimbIntroPlaying = true
-        setClimbCamera(0, animated: false, duration: 0)
+        clearClimbRevealCard()
 
-        let settle: TimeInterval = reduceMotion
-            ? 0.12
-            : MarbleVoyageDesignRules.climbIntroSettleSeconds
-        let pan: TimeInterval = reduceMotion
-            ? 0.3
-            : MarbleVoyageDesignRules.climbIntroPanSeconds
+        if beats.isEmpty {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                guard token == climbIntroToken else { return }
+                skipClimbIntro(snapToPlayer: true)
+            }
+            return
+        }
 
+        let first = beats[0]
+        let firstOffset = climbOffsetCentering(
+            pointY: first.pointY,
+            viewportHeight: viewportHeight,
+            maxOffset: maxOffset,
+            anchorY: first.focusAnchorY
+        )
+        setClimbCamera(firstOffset, animated: false, duration: 0)
+
+        let settle = reduceMotion ? 0.12 : MarbleVoyageDesignRules.climbIntroSettleSeconds
         DispatchQueue.main.asyncAfter(deadline: .now() + settle) {
             guard token == climbIntroToken else { return }
-            setClimbCamera(endOffset, animated: true, duration: pan)
-            DispatchQueue.main.asyncAfter(deadline: .now() + pan) {
+            presentClimbReveal(at: 0, animated: !reduceMotion)
+        }
+    }
+
+    private func presentClimbReveal(at index: Int, animated: Bool) {
+        let token = climbIntroToken
+        guard index >= 0, index < climbRevealBeats.count else { return }
+        let beat = climbRevealBeats[index]
+        climbRevealIndex = index
+
+        let viewportHeight = max(climbIntroViewportHeight, 1)
+        let maxOffset = max(0, chartContentSize.height - viewportHeight)
+        let pan = animated && !reduceMotion
+            ? MarbleVoyageDesignRules.climbRevealPanSeconds
+            : 0.2
+        let offset = climbOffsetCentering(
+            pointY: beat.pointY,
+            viewportHeight: viewportHeight,
+            maxOffset: maxOffset,
+            anchorY: beat.focusAnchorY
+        )
+
+        climbRevealFocusID = beat.nodeID
+        climbRevealLetters = 0
+
+        setClimbCamera(offset, animated: animated, duration: pan)
+
+        let nameLen = (beat.card?.name ?? "").uppercased().count
+        if !animated || reduceMotion {
+            climbRevealLetters = nameLen
+            return
+        }
+
+        // Type while the camera pans — don't wait for settle.
+        DispatchQueue.main.async {
+            guard token == climbIntroToken, climbRevealIndex == index else { return }
+            animateClimbRevealLetters(token: token) {}
+        }
+    }
+
+    private func climbRevealStep(delta: Int) {
+        climbIntroToken &+= 1
+        let next = climbRevealIndex + delta
+        guard next >= 0, next < climbRevealBeats.count else { return }
+        presentClimbReveal(at: next, animated: !reduceMotion)
+    }
+
+    private func animateClimbRevealLetters(token: UInt, completion: @escaping () -> Void) {
+        let total = (climbRevealCard?.name ?? "").uppercased().count
+        guard total > 0 else {
+            completion()
+            return
+        }
+        if reduceMotion {
+            withAnimation(.easeOut(duration: 0.15)) {
+                climbRevealLetters = total
+            }
+            completion()
+            return
+        }
+        let step = MarbleVoyageDesignRules.climbRevealLetterSeconds
+        for i in 1...total {
+            DispatchQueue.main.asyncAfter(deadline: .now() + step * Double(i)) {
                 guard token == climbIntroToken else { return }
-                setClimbCamera(endOffset, animated: false, duration: 0)
-                isClimbIntroPlaying = false
+                climbRevealLetters = i
+                if i == total {
+                    completion()
+                }
             }
         }
+    }
+
+    /// Skip / finish cast. `snapToPlayer` ends on Abbie + keeps the engage foe card.
+    private func skipClimbIntro(snapToPlayer: Bool) {
+        climbIntroToken &+= 1
+        clearClimbRevealCard()
+        climbRevealBeats = []
+        isClimbIntroPlaying = false
+
+        let tile = MarbleVoyageArt.chartTileSize(forViewportWidth: chartContentSize.width)
+        let positions = nodePositions(in: chartContentSize.width > 1 ? chartContentSize : CGSize(width: 700, height: 1600), tile: tile)
+
+        if snapToPlayer {
+            let contentHeight = chartContentSize.height
+            let viewportHeight = max(climbIntroViewportHeight, 1)
+            let maxOffset = max(0, contentHeight - viewportHeight)
+            let focusY: CGFloat
+            if let run {
+                focusY = climbPlayFocusY(run: run, positions: positions)
+            } else {
+                focusY = contentHeight * 0.88
+            }
+            let endOffset = climbOffsetCentering(
+                pointY: focusY,
+                viewportHeight: viewportHeight,
+                maxOffset: maxOffset,
+                anchorY: MarbleVoyageDesignRules.climbIntroPlayerScrollAnchorY
+            )
+            let pan = reduceMotion ? 0.25 : MarbleVoyageDesignRules.climbRevealFinalPanSeconds
+            setClimbCamera(endOffset, animated: !reduceMotion, duration: pan)
+        }
+
+        presentEngageCardForReachable(positions: positions)
+    }
+
+    /// Show / refresh the foe card for the next glowing landing (tap tile or FIGHT to enter).
+    private func presentEngageCardForReachable(positions: [String: CGPoint]) {
+        guard let run else {
+            climbEngageNodeID = nil
+            climbRevealFocusID = nil
+            return
+        }
+        let choices = run.reachableChoices()
+        // Prefer a fight among branches; otherwise first glowing landing that we can place.
+        let pick = choices.first(where: {
+            ($0.kind == .fight || $0.kind == .boss) && positions[$0.id] != nil
+        }) ?? choices.first(where: { positions[$0.id] != nil }) ?? choices.first
+        climbEngageNodeID = pick?.id
+        climbRevealFocusID = pick?.id
+        if let pick, let card = makeEngageCard(for: pick, run: run) {
+            climbRevealLetters = card.name.count
+        } else {
+            climbRevealLetters = 0
+        }
+    }
+
+    private func makeEngageCard(
+        for node: MarbleVoyageNode,
+        run: MarbleVoyageRun
+    ) -> MarbleVoyageOverlandScroll.Card? {
+        if let fighter = chartFighterKind(for: node, run: run) {
+            let role = node.gangRole ?? (node.kind == .boss ? .bigBoss : .henchman)
+            let roleLabel: String
+            switch role {
+            case .bigBoss: roleLabel = "SUMMIT BOSS"
+            case .miniBoss: roleLabel = "LAND BOSS"
+            case .henchman: roleLabel = "FIGHT"
+            }
+            return .init(
+                name: fighter.shortName,
+                role: roleLabel,
+                roleKind: role,
+                blurb: fighter.castBlurb,
+                stageTitle: node.title,
+                hp: run.enemyMaxHP(for: node),
+                atk: run.enemyAttack(for: node),
+                threat: node.threat,
+                kind: fighter
+            )
+        }
+        switch node.kind {
+        case .treasure:
+            return .init(
+                name: "Treasure",
+                role: "TREASURE",
+                roleKind: .henchman,
+                blurb: "A glowing cache on the climb.",
+                stageTitle: node.kind.chartLabel,
+                hp: 0,
+                atk: 0,
+                threat: node.threat,
+                kind: nil
+            )
+        case .mystery, .shrine:
+            return .init(
+                name: "?",
+                role: "ENCOUNTER",
+                roleKind: .henchman,
+                blurb: "Could be a fight, treasure, or a trap.",
+                stageTitle: "?",
+                hp: 0,
+                atk: 0,
+                threat: node.threat,
+                kind: nil
+            )
+        default:
+            return nil
+        }
+    }
+
+    private func clearClimbRevealCard() {
+        climbRevealLetters = 0
     }
 
     private func marchChart(
@@ -835,11 +1458,11 @@ struct MarbleVoyageHostView: View {
         positions: [String: CGPoint],
         animated: Bool
     ) {
-        guard let focus = run?.currentNodeID,
-              let point = positions[focus] else { return }
+        guard let run else { return }
         let maxOffset = max(0, contentHeight - viewportHeight)
+        let focusY = climbPlayFocusY(run: run, positions: positions)
         let target = climbOffsetCentering(
-            pointY: point.y,
+            pointY: focusY,
             viewportHeight: viewportHeight,
             maxOffset: maxOffset,
             anchorY: 0.5
@@ -909,7 +1532,7 @@ struct MarbleVoyageHostView: View {
         return Color.white.opacity(0.18)
     }
 
-    /// column = altitude (0 bottom dock → N boss at top); row = left/right branch.
+    /// column 0 = Abbie’s dock at the BOTTOM; higher column = further UP toward the summit boss.
     /// Vertical spacing follows big fight-tile size so portraits stay readable.
     private func nodePositions(in size: CGSize, tile: CGFloat) -> [String: CGPoint] {
         guard let run else { return [:] }
@@ -934,20 +1557,27 @@ struct MarbleVoyageHostView: View {
     ) -> some View {
         if let run {
             let isHere = node.id == run.currentNodeID && !hidePlayerWhileMarching
-            let isDock = node.kind == .start
             let showPlayer = isHere
             let isReachable = run.reachableChoices().contains(where: { $0.id == node.id })
             let seen = run.visited.contains(node.id)
+            let role = node.gangRole ?? (node.kind == .boss ? .bigBoss : (node.kind == .fight ? .henchman : nil))
+            let drawTile = tile * MarbleVoyageArt.chartTileRoleScale(for: role)
             let rose = MarbleVoyageArt.chartTileRose
             let tint = Color(red: rose.r, green: rose.g, blue: rose.b)
-            let corner = MarbleVoyageArt.chartTileCorner(for: tile)
-            let iconSize = MarbleVoyageArt.chartTileIconSize(for: tile)
-            let labelWidth = MarbleVoyageArt.chartTileLabelWidth(for: tile)
-            let chip = VStack(spacing: 6) {
-                ZStack {
+            let corner = MarbleVoyageArt.chartTileCorner(for: drawTile)
+            let iconSize = MarbleVoyageArt.chartTileIconSize(for: drawTile)
+            let fighter = chartFighterKind(for: node, run: run)
+            let chip = VStack(spacing: 4) {
+                if !showPlayer, fighter != nil, let role {
+                    chartFightRoleBanner(role: role, tile: drawTile)
+                        .offset(y: 2)
+                        .zIndex(2)
+                }
+
+                ZStack(alignment: .topLeading) {
                     RoundedRectangle(cornerRadius: corner, style: .continuous)
                         .fill(tint.opacity(showPlayer ? 0.98 : (isReachable ? 0.96 : seen ? 0.82 : 0.34)))
-                        .frame(width: tile, height: tile)
+                        .frame(width: drawTile, height: drawTile)
                         .overlay(
                             RoundedRectangle(cornerRadius: corner, style: .continuous)
                                 .stroke(
@@ -956,7 +1586,7 @@ struct MarbleVoyageHostView: View {
                                         : (seen && !isReachable
                                            ? Color(red: 1.0, green: 0.82, blue: 0.22)
                                            : .white.opacity(isReachable ? 0.95 : 0.4)),
-                                    lineWidth: showPlayer ? 4 : (seen && !isReachable ? 4 : (isReachable ? 3.5 : 2))
+                                    lineWidth: showPlayer ? 3.5 : (seen && !isReachable ? 3.5 : (isReachable ? 3 : 1.5))
                                 )
                         )
                         .shadow(
@@ -965,32 +1595,45 @@ struct MarbleVoyageHostView: View {
                                 : (isReachable
                                    ? tint.opacity(0.7)
                                    : (seen ? Color(red: 1.0, green: 0.82, blue: 0.22).opacity(0.5) : .clear)),
-                            radius: showPlayer || seen || isReachable ? 10 : 0
+                            radius: showPlayer || seen || isReachable ? 8 : 0
                         )
 
                     if showPlayer {
-                        PeglinAbbieBattlePortrait(state: .happy, size: tile * 0.72)
+                        PeglinAbbieBattlePortrait(state: .happy, size: drawTile * 0.72)
+                            .frame(width: drawTile, height: drawTile)
                             .shadow(
                                 color: Color(red: 0.3, green: 0.95, blue: 0.55).opacity(0.55),
                                 radius: 8
                             )
                             .scaleEffect(dockPulse && !reduceMotion ? 1.04 : 1.0)
-                    } else if let fighter = chartFighterKind(for: node, run: run) {
+                        chartTileNameOverlay("ABBIE", tint: Color(red: 0.55, green: 1.0, blue: 0.7), tile: drawTile)
+                    } else if let fighter {
                         chartFighterPortrait(
                             kind: fighter,
-                            tile: tile,
-                            ominous: node.gangRole == .bigBoss || node.kind == .boss
+                            tile: drawTile,
+                            ominous: role == .bigBoss || node.kind == .boss
+                        )
+                        .frame(width: drawTile, height: drawTile)
+                        chartTileNameOverlay(
+                            fighter.shortName.uppercased(),
+                            tint: role == .bigBoss
+                                ? Color(red: 1.0, green: 0.45, blue: 0.55)
+                                : (role == .miniBoss
+                                   ? Color(red: 1.0, green: 0.78, blue: 0.35)
+                                   : Color(red: 0.75, green: 0.9, blue: 1.0)),
+                            tile: drawTile
                         )
                         if seen && !isReachable {
                             Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: 28, weight: .black))
+                                .font(.system(size: max(16, drawTile * 0.18), weight: .black))
                                 .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.25))
                                 .background(
                                     Circle()
                                         .fill(Color.black.opacity(0.55))
-                                        .frame(width: 26, height: 26)
+                                        .frame(width: drawTile * 0.22, height: drawTile * 0.22)
                                 )
-                                .offset(x: tile * 0.38, y: -tile * 0.38)
+                                .offset(x: drawTile * 0.38, y: -drawTile * 0.38)
+                                .frame(width: drawTile, height: drawTile)
                         }
                     } else {
                         Image(systemName: MarbleVoyageArt.eventAccentIcon(node.kind))
@@ -998,32 +1641,22 @@ struct MarbleVoyageHostView: View {
                             .symbolRenderingMode(.hierarchical)
                             .foregroundStyle(.white)
                             .shadow(color: .black.opacity(0.45), radius: 2, y: 1)
+                            .frame(width: drawTile, height: drawTile)
+                        chartTileNameOverlay(node.kind.chartLabel, tint: .white, tile: drawTile)
                         if seen && !isReachable {
                             Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: 28, weight: .black))
+                                .font(.system(size: max(16, drawTile * 0.18), weight: .black))
                                 .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.25))
-                                .background(
-                                    Circle()
-                                        .fill(Color.black.opacity(0.55))
-                                        .frame(width: 26, height: 26)
-                                )
-                                .offset(x: tile * 0.38, y: -tile * 0.38)
+                                .offset(x: drawTile * 0.38, y: -drawTile * 0.38)
+                                .frame(width: drawTile, height: drawTile)
                         }
                     }
                 }
-                .frame(width: tile, height: tile)
-                Text(showPlayer ? (isDock ? "You · Dock" : "You") : node.title)
-                    .font(.system(size: max(13, tile * 0.085), weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
-                    .shadow(color: .black.opacity(0.85), radius: 2, y: 1)
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 4)
-                    .background(Color.black.opacity(0.45), in: Capsule())
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .frame(width: labelWidth)
+                .frame(width: drawTile, height: drawTile)
             }
             .scaleEffect(reachableTileScale(isReachable: isReachable, isBoss: node.kind == .boss))
+            .scaleEffect(climbRevealFocusID == node.id ? 1.18 : 1.0)
+            .animation(.spring(response: 0.45, dampingFraction: 0.78), value: climbRevealFocusID)
             .animation(
                 isReachable && node.kind != .boss && !reduceMotion
                     ? .easeInOut(duration: 0.9).repeatForever(autoreverses: true)
@@ -1032,7 +1665,12 @@ struct MarbleVoyageHostView: View {
                        : .default),
                 value: dockPulse
             )
-            .accessibilityLabel(showPlayer ? "Abbie at \(node.title)" : "\(node.kind.displayName): \(node.title)")
+            .accessibilityLabel(
+                showPlayer
+                    ? "Abbie at \(node.title)"
+                    : (fighter.map { "Fight \($0.displayName): \(node.title)" }
+                       ?? "\(node.kind.displayName): \(node.title)")
+            )
             .accessibilityIdentifier(
                 isReachable
                     ? "world2.marbleVoyage.choice.\(node.id)"
@@ -1041,6 +1679,14 @@ struct MarbleVoyageHostView: View {
 
             if isReachable {
                 Button {
+                    if isClimbIntroPlaying {
+                        climbIntroToken &+= 1
+                        isClimbIntroPlaying = false
+                        climbRevealBeats = []
+                        clearClimbRevealCard()
+                    }
+                    climbEngageNodeID = node.id
+                    climbRevealFocusID = node.id
                     beginClimb(to: node, positions: positions)
                 } label: {
                     chip
@@ -1051,6 +1697,24 @@ struct MarbleVoyageHostView: View {
                 chip
             }
         }
+    }
+
+    /// Compact name chip inside the portrait — replaces the old under-tile captions.
+    private func chartTileNameOverlay(_ text: String, tint: Color, tile: CGFloat) -> some View {
+        Text(text)
+            .font(.system(size: max(10, tile * 0.11), weight: .black, design: .rounded))
+            .foregroundStyle(tint)
+            .shadow(color: .black.opacity(0.9), radius: 1, y: 1)
+            .padding(.horizontal, max(6, tile * 0.05))
+            .padding(.vertical, max(3, tile * 0.025))
+            .background(
+                Capsule()
+                    .fill(Color.black.opacity(0.55))
+                    .overlay(Capsule().stroke(tint.opacity(0.55), lineWidth: 1))
+            )
+            .padding(max(5, tile * 0.05))
+            .frame(width: tile, height: tile, alignment: .topLeading)
+            .allowsHitTesting(false)
     }
 
     /// Fighter shown on a fight/boss chart tile — henchman, that land's boss, or the summit boss.
@@ -1111,6 +1775,50 @@ struct MarbleVoyageHostView: View {
         .accessibilityLabel(ominous ? "Boss \(kind.displayName)" : kind.displayName)
     }
 
+    /// Role tab above a fight portrait — who this tile is about.
+    private func chartFightRoleBanner(role: MarbleVoyageGangFightRole, tile: CGFloat) -> some View {
+        let label: String
+        let tint: Color
+        let tilt: Double
+        switch role {
+        case .bigBoss:
+            label = "SUMMIT"
+            tint = Color(red: 0.95, green: 0.25, blue: 0.4)
+            tilt = -3
+        case .miniBoss:
+            label = "LAND BOSS"
+            tint = Color(red: 1.0, green: 0.55, blue: 0.22)
+            tilt = 2.5
+        case .henchman:
+            label = "FIGHT"
+            tint = Color(red: 0.55, green: 0.75, blue: 1.0)
+            tilt = -1.5
+        }
+        return Text(label)
+            .font(.system(size: max(11, tile * 0.07), weight: .black, design: .rounded))
+            .tracking(1.2)
+            .foregroundStyle(.white)
+            .padding(.horizontal, max(10, tile * 0.06))
+            .padding(.vertical, max(4, tile * 0.025))
+            .background(
+                UnevenRoundedRectangle(
+                    cornerRadii: .init(topLeading: 4, bottomLeading: 12, bottomTrailing: 4, topTrailing: 12),
+                    style: .continuous
+                )
+                .fill(tint)
+                .shadow(color: tint.opacity(0.65), radius: 6, y: 2)
+            )
+            .overlay(
+                UnevenRoundedRectangle(
+                    cornerRadii: .init(topLeading: 4, bottomLeading: 12, bottomTrailing: 4, topTrailing: 12),
+                    style: .continuous
+                )
+                .stroke(.white.opacity(0.85), lineWidth: 1.5)
+            )
+            .rotationEffect(.degrees(tilt))
+            .accessibilityHidden(true)
+    }
+
     private func climbPlayerToken(size: CGFloat, flashing: Bool) -> some View {
         ZStack {
             Circle()
@@ -1134,7 +1842,7 @@ struct MarbleVoyageHostView: View {
         .accessibilityIdentifier("world2.marbleVoyage.playerToken")
     }
 
-    /// 1s climb along the dotted path, then open the landing scene.
+    /// March along the path, slam a curtain, then open the landing (versus → board).
     private func beginClimb(to node: MarbleVoyageNode, positions: [String: CGPoint]) {
         guard !isMarching, let run else { return }
         let from = positions[run.currentNodeID] ?? nodePositionsForCurrentChart()[run.currentNodeID]
@@ -1146,9 +1854,10 @@ struct MarbleVoyageHostView: View {
 
         MarbleVoyageAudio.choosePath()
         isMarching = true
+        climbEngageNodeID = nil
         marchPosition = from
 
-        let travel: TimeInterval = reduceMotion ? 0.15 : 1.0
+        let travel: TimeInterval = reduceMotion ? 0.2 : 1.15
         withAnimation(.easeInOut(duration: travel)) {
             marchPosition = to
         }
@@ -1159,11 +1868,11 @@ struct MarbleVoyageHostView: View {
 
     private func commitLanding(_ node: MarbleVoyageNode) {
         MarbleVoyageAudio.sceneTransition()
-        withAnimation(.easeInOut(duration: 0.28)) {
+        withAnimation(.easeIn(duration: 0.22)) {
             sceneCurtain = true
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.22) {
-            withAnimation(.easeInOut(duration: 0.4)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            withAnimation(.easeInOut(duration: 0.35)) {
                 run?.choose(node.id)
                 if case .event = run?.phase {
                     prepareEvent(for: node)
@@ -1171,8 +1880,11 @@ struct MarbleVoyageHostView: View {
                 marchPosition = nil
                 isMarching = false
             }
-            withAnimation(.easeOut(duration: 0.35)) {
-                sceneCurtain = false
+            // Hold black a beat so the versus splash can mount under the curtain.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.28) {
+                withAnimation(.easeOut(duration: 0.45)) {
+                    sceneCurtain = false
+                }
             }
         }
     }
@@ -1216,6 +1928,7 @@ struct MarbleVoyageHostView: View {
             overridePlayerMaxHP: active?.playerMaxHP,
             overrideEnemyAttack: active.map { $0.enemyAttack(for: node) },
             voyageEconomy: active.map { voyageTunables(for: $0) },
+            startingDeck: active?.fightDeckOrbIDs,
             onExit: {
                 MarbleVoyageAudio.defeat()
                 run?.phase = .defeat
@@ -1257,7 +1970,10 @@ struct MarbleVoyageHostView: View {
                         }
                     }
                 }
-            }
+            },
+            // Voyage: skip deck lobby — tile tap → curtain → versus slam → board.
+            autoStartFight: true,
+            captureFreezeBoard: captureStage == .fight
         )
     }
 
@@ -1270,7 +1986,14 @@ struct MarbleVoyageHostView: View {
             cycleExtra: MarbleVoyageCharm.extraSpecialPegs(cycleStacks: run.charmStack(.cycle)),
             sockSnatch: MarbleVoyageCharm.bombClearCoins(sockSnatchStacks: run.charmStack(.sockSnatch)),
             prismBonus: MarbleVoyageCharm.prismCageBonus(stacks: run.charmStack(.prismBurst)),
-            softPurr: MarbleVoyageCharm.biteDamageReduction(softPurrStacks: run.charmStack(.softPurr))
+            softPurr: MarbleVoyageCharm.biteDamageReduction(softPurrStacks: run.charmStack(.softPurr)),
+            hoverStacks: run.charmStack(.hover),
+            charmStacks: Dictionary(
+                uniqueKeysWithValues: MarbleVoyageCharm.allCases.compactMap { charm in
+                    let n = run.charmStack(charm)
+                    return n > 0 ? (charm, n) : nil
+                }
+            )
         )
     }
 
@@ -1312,6 +2035,21 @@ struct MarbleVoyageHostView: View {
                     .foregroundStyle(outcome.hpDelta > 0
                                      ? Color(red: 0.4, green: 0.95, blue: 0.55)
                                      : Color(red: 1, green: 0.4, blue: 0.4))
+            }
+            if outcome.coinDelta > 0 {
+                Text("+\(outcome.coinDelta) coins")
+                    .font(.system(size: 28, weight: .black, design: .rounded))
+                    .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.35))
+            }
+            if let charm = outcome.charmGrant {
+                Text("Charm · \(charm.title)")
+                    .font(.system(size: 22, weight: .black, design: .rounded))
+                    .foregroundStyle(Color(red: 0.75, green: 0.9, blue: 1.0))
+            }
+            if outcome.ballUpgrade {
+                Text("Ball upgrade!")
+                    .font(.system(size: 22, weight: .black, design: .rounded))
+                    .foregroundStyle(Color(red: 1.0, green: 0.7, blue: 0.4))
             }
             Button {
                 MarbleVoyageAudio.tap()

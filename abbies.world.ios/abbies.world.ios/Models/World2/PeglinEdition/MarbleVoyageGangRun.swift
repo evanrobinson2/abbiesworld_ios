@@ -47,6 +47,7 @@ struct MarbleVoyageGangRun: Equatable, Sendable {
 
     /// Lightweight stand-ins for zone 1–2 / wind-up. Never named crew.
     static let henchmenPool: [PlinkAttackerKind] = [
+        .porcupineBoxer,
         .cawScout, .thornbackBeetle, .briarToad, .thornhornMantis,
         .coyoteBruiser, .gangFox, .hyena, .lizard, .vulture,
     ]

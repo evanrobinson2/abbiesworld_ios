@@ -20,24 +20,67 @@ enum MarbleVoyageDesignRules {
     /// Stops huge unused side pillarboxes when plates/layout regress.
     static let minPlateWidthFillFraction: CGFloat = 0.85
 
-    /// Climb chart: tall poster art-leads; fill most landscape width (small letterbox only).
-    static let climbChartMinWidthFraction: CGFloat = 0.70
-    static let climbChartMaxWidthFraction: CGFloat = 0.92
+    /// Climb chart: full-bleed width (no side letterbox).
+    static let climbChartMinWidthFraction: CGFloat = 0.98
+    static let climbChartMaxWidthFraction: CGFloat = 1.00
 
-    // MARK: - Fight chrome packing (rescue strip above board)
+    // MARK: - Fight chrome packing (header + board | enemy card)
 
-    /// VStack gap between portrait/attacker strip and the board — keep tiny so no dead band.
+    /// VStack gap between header and the board/card row — keep tiny so no dead band.
     static let maxFightChromeBoardSpacing: CGFloat = 4
-    /// Compact portrait art; shorter chrome → taller 4:3 board (and less side pillarbox).
-    static let fightPortraitArtSize: CGFloat = 88
+    /// Compact Abbie portrait in the short header row.
+    static let fightPortraitArtSize: CGFloat = 72
+    /// Side cast card width as a fraction of the fight row (board keeps the rest).
+    static let fightEnemyCardWidthFraction: CGFloat = 0.26
+    /// Absolute card width clamp (iPad landscape).
+    static let fightEnemyCardMinWidth: CGFloat = 220
+    static let fightEnemyCardMaxWidth: CGFloat = 300
+    /// Hero art on the side cast card.
+    static let fightEnemyCardArtSize: CGFloat = 168
+    /// Front-foe art scale vs base — unused when HP tiers drive size.
+    static let fightFrontFoeArtScale: CGFloat = 1.4
+    /// Rescue / hostage art scale on the cast card.
+    static let fightRescueArtScale: CGFloat = 0.55
+
+    /// Portrait size tier from foe max HP (not lane proximity).
+    enum FightEnemySizeTier: Equatable {
+        case small
+        case medium
+        case boss
+
+        static func tier(maxHP: Int) -> FightEnemySizeTier {
+            if maxHP >= 100 { return .boss }
+            if maxHP >= 50 { return .medium }
+            return .small
+        }
+
+        /// Multiplier of `fightPortraitArtSize`.
+        var scale: CGFloat {
+            switch self {
+            case .small: return 0.55
+            case .medium: return 0.90
+            case .boss: return 1.40
+            }
+        }
+    }
+
+    static func fightEnemyPortraitSize(maxHP: Int, base: CGFloat = fightPortraitArtSize) -> CGFloat {
+        base * FightEnemySizeTier.tier(maxHP: maxHP).scale
+    }
+
     /// Horizontal slots for badguy-gang chrome (Raze / Vix / Morrow / Nib — grow sideways).
     static let fightAttackerSlotCount: Int = 4
-    /// Fitted board height ÷ viewport height after estimated chrome (reference iPads).
-    static let minFightBoardHeightFractionOfViewport: CGFloat = 0.68
-    /// Estimated top-bar + portrait-strip height used by packing math / preflight.
+    /// Board pane height ÷ viewport height after estimated chrome (reference iPads).
+    /// Board fills the pane (no 4:3 letterbox); Leave/Marbles are overlays, not a chrome row.
+    static let minFightBoardHeightFractionOfViewport: CGFloat = 0.70
+    /// Estimated header height used by packing math / preflight (enemy lives in side card).
     static var estimatedFightChromeHeight: CGFloat {
-        // Leave / phase bar ≈34 + spacing + unified glass strip (label + art + pad) + spacing.
-        34 + maxFightChromeBoardSpacing + (fightPortraitArtSize + 36) + maxFightChromeBoardSpacing
+        fightPortraitArtSize + 36 + maxFightChromeBoardSpacing
+    }
+
+    static func fightEnemyCardWidth(in rowWidth: CGFloat) -> CGFloat {
+        let ideal = rowWidth * fightEnemyCardWidthFraction
+        return min(fightEnemyCardMaxWidth, max(fightEnemyCardMinWidth, ideal))
     }
 
     // MARK: - Transparent UI chrome (power icons)
@@ -64,16 +107,46 @@ enum MarbleVoyageDesignRules {
     /// Cage/Hurt chip value.
     static let battleFeedMinChipValueFont: CGFloat = 14
 
-    // MARK: - Climb intro camera
+    // MARK: - Fight aim trackpad (bottom-right marble chip)
 
-    /// Hold on summit / boss before panning (~3.7s so the boss portrait reads).
-    static let climbIntroSettleSeconds: TimeInterval = 3.7
-    /// Ease pan from boss → player — slow so big land tiles can be read on the way down.
-    static let climbIntroPanSeconds: TimeInterval = 7.0
-    /// Player node ends centered in the scroll viewport.
-    static let climbIntroPlayerScrollAnchorY: CGFloat = 0.5
+    /// Fixed width of the NOW-marble aim pad (does not grow with copy).
+    static let fightAimTrackpadWidth: CGFloat = 176
+    /// Fixed height of the aim pad.
+    static let fightAimTrackpadHeight: CGFloat = 76
+    /// Marble thumb size inside the trackpad.
+    static let fightAimTrackpadThumbSize: CGFloat = 40
+
+    // MARK: - Climb intro camera (manual cast flyby)
+
+    /// Cast tour walk order — boss (top) → Abbie (bottom). Scrub frames match this.
+    static let climbCastTourOrder: MarbleVoyageOverlandScroll.CastOrder = .bossToAbbie
+    /// Where a focused tile sits in the viewport (0 top → 1 bottom).
+    static let climbRevealFocusAnchorY: CGFloat = 0.38
+    /// Brief hold before framing the first foe (summit).
+    static let climbIntroSettleSeconds: TimeInterval = 0.8
+    /// Camera ease onto each enemy portrait (slower flyby).
+    static let climbRevealPanSeconds: TimeInterval = 1.45
+    /// Delay between letters in the flying name card.
+    static let climbRevealLetterSeconds: TimeInterval = 0.1
+    /// Final ease from last foe → player / next choice after the cast is dismissed.
+    static let climbRevealFinalPanSeconds: TimeInterval = 1.6
+    /// Player / next-choice end framing in the scroll viewport.
+    static let climbIntroPlayerScrollAnchorY: CGFloat = 0.58
     /// Finger drag → camera: lower = slower / more deliberate pan on the climb.
     static let climbPanDragSensitivity: CGFloat = 0.38
+    /// Vertical drag distance (pts) that advances one cast frame while scrubbing.
+    static let climbCastScrubPointsPerFrame: CGFloat = 72
+    /// Foe / cast name card max width on the climb.
+    static let climbFoeCardMaxWidth: CGFloat = 360
+    /// Estimated card height used by occlusion checks (name + blurb + stats).
+    static let climbFoeCardEstimateHeight: CGFloat = 280
+    /// Minimum gap between card and focused tile before we treat it as covering art.
+    static let climbFoeCardMinClearance: CGFloat = 16
+
+    /// @available(*, deprecated, message: "Manual cast — hold is player-driven.")
+    static let climbRevealHoldAfterNameSeconds: TimeInterval = 2.5
+    /// @available(*, deprecated, message: "Replaced by per-enemy climbReveal* timings.")
+    static let climbIntroPanSeconds: TimeInterval = climbRevealFinalPanSeconds
 
     // MARK: - VS splash portraits
 
@@ -94,19 +167,16 @@ enum MarbleVoyageDesignRules {
         plateWidthFillFraction(in: bounds) >= minPlateWidthFillFraction
     }
 
-    /// Board pane under chrome: largest 4:3 height ÷ full viewport height.
+    /// Board pane under chrome: fills remaining height ÷ full viewport height.
     /// Compact chrome raises this; a tall dead band under portraits lowers it.
+    /// (Board no longer 4:3-letterboxes inside the pane.)
     static func fightBoardHeightFractionOfViewport(
         _ viewport: CGSize,
         chromeHeight: CGFloat = estimatedFightChromeHeight
     ) -> CGFloat {
         guard viewport.width > 1, viewport.height > 1 else { return 0 }
-        let pane = CGSize(
-            width: viewport.width,
-            height: max(1, viewport.height - chromeHeight)
-        )
-        let fitted = MarbleVoyagePlateLayout.fitSize(in: pane)
-        return fitted.height / viewport.height
+        let paneHeight = max(1, viewport.height - chromeHeight)
+        return paneHeight / viewport.height
     }
 
     static func isAcceptableFightBoardPacking(in viewport: CGSize) -> Bool {

@@ -40,6 +40,13 @@ For any App Store app (including free), **App Store Connect → Analytics** is e
 
 **Inside Peglin map (household):** **Marble Voyage** button, or `-launchMarbleVoyage`.
 
+**Silent stage stills (agents):** opt-in only.
+
+- Remind after major voyage builds: `./scripts/voyage_capture_reminder.sh` (also printed by preflight / `build_marble_voyage.sh`).
+- Request with build: `./scripts/build_marble_voyage.sh --capture` (or `VOYAGE_CAPTURE=1`).
+- After any build: `./scripts/capture_marble_voyage.sh --skip-build`.
+- Launch args: `-world2SkipAuth -voyageCapture=title|chart|fight|shop|event`. Output under `artifacts/voyage-capture/`.
+
 ## Art & sound
 
 - Plates: semantic registry IDs via `MarbleVoyageArt` (`map.peglin.*`).
@@ -49,9 +56,10 @@ For any App Store app (including free), **App Store Connect → Analytics** is e
 ## Code map
 
 - Models: `MarbleVoyageModels.swift` (modes, chart generators, difficulty)
+- Capture: `MarbleVoyageCapture.swift` + `scripts/capture_marble_voyage.sh`
 - Shell: `MarbleVoyageHostView.swift` (title, chart, events, end cards)
 - Fights: `PlinkBattleHostView` + `overrideEnemyMaxHP` / `overrideEnemyAttack` / carried HP
-- Tests: `MarbleVoyageTests.swift`
+- Tests: `MarbleVoyageTests.swift`, `MarbleVoyageCaptureTests.swift`
 
 ## Spin-out checklist (free App Store)
 

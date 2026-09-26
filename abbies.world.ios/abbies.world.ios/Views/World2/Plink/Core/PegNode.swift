@@ -53,8 +53,8 @@ final class PegNode: SKShapeNode {
         body.isDynamic = false
         body.affectedByGravity = false
         body.allowsRotation = false
-        // Peglin PhysicsMaterial2D: Friction 0, Restitution ≈ 0.8
-        body.restitution = 0.8
+        // Peglin PhysicsMaterial2D was Restitution ≈ 0.8; Abbie rule: pegs never bleed speed.
+        body.restitution = 1.0
         body.friction = 0
         body.categoryBitMask = categories
         body.contactTestBitMask = 1 << 0

@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Fail if Marble Voyage plate images are not ~4:3 landscape,
-or if Plink voyage UI reintroduces scaledToFill on those plates.
+or if Plink voyage UI crops fight/event plates with scaledToFill.
 
-Agents: run this before binding new title / chart / fight plates.
-Display contract is Fit (never Fill) — see MarbleVoyagePlateLayout.swift.
+Title menu may bleed via MarbleVoyageBleedPlate only.
 """
 from __future__ import annotations
 
@@ -34,19 +33,20 @@ PLATES = [
     "world2_map_peglin_stagLand",
 ]
 
-# Surfaces that must never crop voyage plates.
+# Surfaces that must never crop voyage fight/event plates.
 NO_FILL_SWIFT = [
     PLINK / "MarbleVoyageHostView.swift",
-    PLINK / "MarbleVoyageTitleAtmosphere.swift",
     PLINK / "PlinkBattleHostView.swift",
+]
+LAYOUT_SWIFT = (
     ROOT
     / "abbies.world.ios"
     / "abbies.world.ios"
     / "Models"
     / "World2"
     / "PeglinEdition"
-    / "MarbleVoyagePlateLayout.swift",
-]
+    / "MarbleVoyagePlateLayout.swift"
+)
 
 
 def check_no_fill(failures: list[str]) -> None:
@@ -62,8 +62,31 @@ def check_no_fill(failures: list[str]) -> None:
                 continue
             if fill_re.search(line):
                 failures.append(
-                    f"{path.name}:{i}: scaledToFill is forbidden on voyage plates"
+                    f"{path.name}:{i}: scaledToFill is forbidden on voyage fight/event plates"
                 )
+
+    # Title bleed is allowed only inside MarbleVoyageBleedPlate.
+    if not LAYOUT_SWIFT.is_file():
+        failures.append(f"missing source: {LAYOUT_SWIFT}")
+        return
+    text = LAYOUT_SWIFT.read_text(encoding="utf-8")
+    if "struct MarbleVoyageBleedPlate" not in text:
+        for i, line in enumerate(text.splitlines(), 1):
+            if line.lstrip().startswith("//"):
+                continue
+            if fill_re.search(line):
+                failures.append(
+                    f"{LAYOUT_SWIFT.name}:{i}: scaledToFill requires MarbleVoyageBleedPlate"
+                )
+        return
+    bleed_at = text.index("struct MarbleVoyageBleedPlate")
+    for i, line in enumerate(text[:bleed_at].splitlines(), 1):
+        if line.lstrip().startswith("//"):
+            continue
+        if fill_re.search(line):
+            failures.append(
+                f"{LAYOUT_SWIFT.name}:{i}: scaledToFill only allowed in MarbleVoyageBleedPlate"
+            )
 
 
 def main(extra: list[str]) -> int:
@@ -108,12 +131,12 @@ def main(extra: list[str]) -> int:
             print(" ", line)
         print(
             "\nGenerate at 2048x1536 (4:3 landscape). "
-            "UI must use MarbleVoyageUnclippedPlate / scaledToFit — never Fill."
+            "UI must Fit fight/event plates; title may Bleed via MarbleVoyageBleedPlate."
         )
         return 1
     print(
         f"OK — {len(names)} plate(s) match 4:3 ±{TOL}; "
-        "no scaledToFill in voyage surfaces"
+        "fight/event Fit; title Bleed allowed"
     )
     return 0
 

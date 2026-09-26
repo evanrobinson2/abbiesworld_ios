@@ -1,7 +1,7 @@
 {
   "product": "Marble Voyage",
   "version": "1.0",
-  "updated": "2026-09-25",
+  "updated": "2026-09-26",
   "sourceOfTruth": "Peglin Edition bundled Assets.xcassets + AssetSources/World2/user-supplied/peglin/v1",
   "styleLock": "hand-built fantasy diorama · three-quarter isometric · cel-shaded · painterly · miniature/tilt-shift · kid-safe Abbie's World warmth",
   "voyageUsage": {
@@ -75,37 +75,46 @@
       "semanticId": "character.peglin.abbie.happy",
       "catalog": "world2_peglin_abbie_happy",
       "role": ["player portrait"],
-      "preview": "portraits/abbie.happy.png"
+      "preview": "portraits/abbie.profile-approved.jpeg"
     },
     {
       "semanticId": "orb.peglin.sparkle",
       "catalog": "world2_orb_peglin_sparkle",
-      "role": ["parble / deck marble"],
+      "role": ["marble / deck orb"],
       "preview": "orbs/orb.peglin.sparkle.png"
     },
     {
       "semanticId": "orb.peglin.bounceberry",
       "catalog": "world2_orb_peglin_bounceberry",
-      "role": ["parble / deck marble"],
+      "role": ["marble / deck orb"],
       "preview": "orbs/orb.peglin.bounceberry.png"
     },
     {
       "semanticId": "orb.peglin.pebble",
       "catalog": "world2_orb_peglin_pebble",
-      "role": ["parble / deck marble"],
+      "role": ["marble / deck orb"],
       "preview": "orbs/orb.peglin.pebble.png"
     },
     {
       "semanticId": "orb.peglin.zipbolt",
       "catalog": "world2_orb_peglin_zipbolt",
-      "role": ["parble / deck marble"],
+      "role": ["marble / deck orb"],
       "preview": "orbs/orb.peglin.zipbolt.png"
     },
     {
       "semanticId": "orb.peglin.puff",
       "catalog": "world2_orb_peglin_puff",
-      "role": ["parble / deck marble"],
+      "role": ["marble / deck orb"],
       "preview": "orbs/orb.peglin.puff.png"
+    },
+    {
+      "semanticId": "token.plink.gang.porcupineBoxer.idle",
+      "catalog": "world2_plink_gang_porcupineBoxer_idle",
+      "role": [
+        "first campaign fight: front enemy"
+      ],
+      "preview": "portraits/porcupine-boxer.png",
+      "notes": "Approved Midjourney candidate 4; transparent cutout; shared idle/attack/defeated artwork."
     }
   ]
 }

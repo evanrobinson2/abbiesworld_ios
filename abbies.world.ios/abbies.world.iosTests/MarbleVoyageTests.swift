@@ -3,21 +3,53 @@ import UIKit
 @testable import abbies_world_ios
 
 final class MarbleVoyageTests: XCTestCase {
+    func testOpeningCampaignEnemyIsPorcupineAcrossSeeds() throws {
+        for seed: UInt64 in [0, 1, 42, 999, .max] {
+            let run = MarbleVoyageRun.makeCampaign(seed: seed)
+            let first = try XCTUnwrap(run.reachableChoices().first)
+            XCTAssertEqual(first.id, "land0_poi1")
+            XCTAssertEqual(first.waveAttacker, .porcupineBoxer)
+            let roster = PeglinBattleRules.makeRescueRoster(
+                wave: try XCTUnwrap(first.waveAttacker),
+                focus: run.gang.miniBoss(arcIndex: 0),
+                role: first.gangRole,
+                seed: seed
+            )
+            XCTAssertEqual(roster.first?.kind, .porcupineBoxer)
+            XCTAssertEqual(roster.count, 3)
+            XCTAssertFalse(roster.contains { $0.kind.isNamedCrew })
+            XCTAssertFalse(PlinkAttackerKind.porcupineBoxer.isFlying)
+        }
+    }
+
+    func testPorcupineBundledArtLoadsForEveryCombatPose() throws {
+        for pose in PlinkAttackerPose.allCases {
+            let image = try XCTUnwrap(PlinkAttackerKind.porcupineBoxer.catalogImage(for: pose))
+            let cgImage = try XCTUnwrap(image.cgImage)
+            XCTAssertGreaterThan(cgImage.width, 100)
+            XCTAssertTrue([CGImageAlphaInfo.premultipliedFirst, .premultipliedLast, .first, .last].contains(cgImage.alphaInfo))
+        }
+    }
+
     func testCampaignGangChartStructure() {
         let run = MarbleVoyageRun.make(mode: .campaign, seed: 42)
         XCTAssertEqual(run.mode, .campaign)
         XCTAssertEqual(run.currentNodeID, "start")
         XCTAssertEqual(run.playerHP, MarbleVoyageRun.defaultMaxHP)
 
-        // Linear climb: 3 lands × (3 POI fights + land boss) = 12 fight nodes, then the summit boss.
         let fights = run.nodes.filter { $0.kind == .fight }
         let bosses = run.nodes.filter { $0.kind == .boss }
-        XCTAssertEqual(fights.count, 12)
-        XCTAssertEqual(bosses.count, 1)
+        let events = run.nodes.filter {
+            $0.kind == .treasure || $0.kind == .mystery || $0.kind == .shrine
+        }
         XCTAssertEqual(fights.count + bosses.count, MarbleVoyageRun.campaignTotalFights)
-        // One start node plus every fight, chained one after another.
-        XCTAssertEqual(run.nodes.count, MarbleVoyageRun.campaignTotalFights + 1)
-        XCTAssertEqual(run.edges.count, MarbleVoyageRun.campaignTotalFights)
+        XCTAssertEqual(events.count, MarbleVoyageRun.campaignEventBeats)
+        // start + combat + event beats
+        XCTAssertEqual(
+            run.nodes.count,
+            1 + MarbleVoyageRun.campaignTotalFights + MarbleVoyageRun.campaignEventBeats
+        )
+        XCTAssertEqual(run.edges.count, run.nodes.count - 1)
 
         XCTAssertEqual(run.gang.miniBossOrder.count, MarbleVoyageRun.gangMiniArcCount)
         XCTAssertFalse(run.gang.miniBossOrder.contains(run.gang.bigBoss))
@@ -47,16 +79,19 @@ final class MarbleVoyageTests: XCTestCase {
         XCTAssertFalse(hench.waveAttacker?.isNamedCrew == true)
         XCTAssertTrue(MarbleVoyageGangRun.henchmenPool.contains(hench.waveAttacker!))
 
-        XCTAssertEqual(hench.title, "L1 POI1 Warmup")
-        XCTAssertEqual(run.node("land0_poi2")?.title, "L1 POI2 Battle")
-        XCTAssertEqual(run.node("land0_poi3")?.title, "L1 POI3 Hard")
-        XCTAssertEqual(landBoss.title, "L1 Boss · \(run.gang.miniBossOrder[0].shortName)")
-        XCTAssertEqual(run.node("land1_poi1")?.title, "L2 POI1 Warmup")
+        XCTAssertEqual(hench.title, "Trail scrap")
+        // Middle scrap is an encounter, not Bridge scrap fight.
+        let mid = run.node("land0_poi2")!
+        XCTAssertTrue([MarbleVoyageNodeKind.treasure, .mystery, .shrine].contains(mid.kind))
+        XCTAssertEqual(run.node("land0_poi3")?.title, "Cliff scrap")
+        XCTAssertEqual(landBoss.title, "\(run.gang.miniBossOrder[0].displayName)’s gate")
+        XCTAssertNotNil(run.node("land0_rest"))
+        XCTAssertEqual(run.node("land1_poi1")?.title, "Canal scrap")
         XCTAssertEqual(
             run.node("land2_boss")?.title,
-            "L3 Boss · \(run.gang.miniBossOrder[2].shortName)"
+            "\(run.gang.miniBossOrder[2].displayName)’s gate"
         )
-        XCTAssertEqual(boss.title, "Summit · \(run.gang.bigBoss.shortName)")
+        XCTAssertEqual(boss.title, "Summit · \(run.gang.bigBoss.displayName)")
 
         // Linear: exactly one way forward at every landing.
         let choices = run.reachableChoices()
@@ -94,6 +129,9 @@ final class MarbleVoyageTests: XCTestCase {
         run.choose("land0_poi1")
         run.finishFight(won: true, remainingHP: 120, goldEarned: 60)
 
+        XCTAssertEqual(run.marbleCollection.count, MarbleVoyageMarbleRules.starterBagCount)
+        XCTAssertTrue(run.marbleCollection.allSatisfy { $0.orbID == OrbKind.plainStarterID })
+
         let before = run.marbleCollection.map(\.clampedLevel)
         XCTAssertEqual(run.applyShop(.ballUpgrade), .ok(
             message: "\(run.marbleCollection[0].orb.name) is now Lv2"
@@ -103,6 +141,63 @@ final class MarbleVoyageTests: XCTestCase {
         XCTAssertEqual(Array(run.marbleCollection.dropFirst()).map(\.clampedLevel),
                        Array(before.dropFirst()))
         XCTAssertGreaterThan(run.fightDamageMultiplier, 1.0)
+    }
+
+    func testShopBuyAndDestroyMarbleMutateBag() {
+        var run = MarbleVoyageRun.make(mode: .campaign, seed: 13)
+        run.choose("land0_poi1")
+        run.finishFight(won: true, remainingHP: 120, goldEarned: 80)
+
+        XCTAssertEqual(run.marbleCollection.count, 4)
+        let offers = try! XCTUnwrap(run.shop?.marbleOffers)
+        XCTAssertFalse(offers.isEmpty)
+        let orbID = offers[0]
+        let beforeCoins = run.coins
+
+        XCTAssertEqual(
+            run.applyShop(.buyMarble(orbID: orbID)),
+            .ok(message: "\((OrbKind.all.first { $0.id == orbID } ?? .sparkle).name) joined the bag")
+        )
+        XCTAssertEqual(run.marbleCollection.count, 5)
+        XCTAssertEqual(run.marbleCollection.last?.orbID, orbID)
+        XCTAssertLessThan(run.coins, beforeCoins)
+
+        let scrapID = run.marbleCollection[0].instanceID
+        let scrapName = run.marbleCollection[0].orb.name
+        let refund = try! XCTUnwrap(run.shop?.destroyRefund)
+        let coinsBeforeScrap = run.coins
+        XCTAssertEqual(
+            run.applyShop(.destroyMarble(instanceID: scrapID)),
+            .ok(message: "Scrapped \(scrapName) · +\(refund) coins")
+        )
+        XCTAssertEqual(run.marbleCollection.count, 4)
+        XCTAssertEqual(run.coins, coinsBeforeScrap + refund)
+        XCTAssertFalse(run.marbleCollection.contains { $0.instanceID == scrapID })
+
+        // Floor: cannot scrap below min bag.
+        while run.marbleCollection.count > MarbleVoyageMarbleRules.minBagCount {
+            let id = run.marbleCollection[0].instanceID
+            _ = run.applyShop(.destroyMarble(instanceID: id))
+        }
+        XCTAssertEqual(run.marbleCollection.count, MarbleVoyageMarbleRules.minBagCount)
+        let blocked = run.marbleCollection[0].instanceID
+        XCTAssertEqual(run.applyShop(.destroyMarble(instanceID: blocked)), .alreadyMaxed)
+    }
+
+    func testFightDeckUsesBagOrder() {
+        var run = MarbleVoyageRun.make(mode: .campaign, seed: 14)
+        run.marbleCollection = [
+            .make(orbID: OrbKind.sparkle.id),
+            .make(orbID: OrbKind.zipbolt.id),
+            .make(orbID: OrbKind.pebble.id),
+            .make(orbID: OrbKind.sparkle.id),
+        ]
+        XCTAssertEqual(run.fightDeckOrbIDs, [
+            OrbKind.sparkle.id,
+            OrbKind.zipbolt.id,
+            OrbKind.pebble.id,
+            OrbKind.sparkle.id,
+        ])
     }
 
     func testGangRunSeedIsDeterministicAndCoversCrew() {
@@ -223,15 +318,10 @@ final class MarbleVoyageTests: XCTestCase {
         let ratio = image.size.width / image.size.height
         XCTAssertLessThan(ratio, 0.5, "Climb poster is a tall scroll backdrop, not 4:3")
         let content = MarbleVoyageClimbMap.contentSize(in: CGSize(width: 1180, height: 700))
-        // Art-leads tall aspect, but must use most of the landscape width (no huge side gutters).
-        XCTAssertGreaterThanOrEqual(content.width, 1180 * 0.70)
-        XCTAssertLessThanOrEqual(content.width, 1180 * 0.92)
+        // Full-bleed width — no side letterbox gutters.
+        XCTAssertEqual(content.width, 1180, accuracy: 0.5)
+        // Tile spacing may stretch the chart taller than the nominal art aspect — still a climb scroll.
         XCTAssertGreaterThan(content.height / content.width, 2.5)
-        XCTAssertEqual(
-            content.width / content.height,
-            MarbleVoyageClimbMap.aspectWidthOverHeight,
-            accuracy: 0.02
-        )
     }
 
     func testRescueMoodLadder() {
@@ -318,5 +408,37 @@ final class MarbleVoyageTests: XCTestCase {
         XCTAssertEqual(game.fightsWon, 2)
         XCTAssertEqual(game.healsFound, 1)
         XCTAssertEqual(game.bigBossesBeaten, 1)
+    }
+
+    func testOverlandCastOrderVariants() {
+        let run = MarbleVoyageRun.makeCampaign(seed: 42)
+        let landIDs = ["land0_boss", "land1_boss", "land2_boss"]
+        let summitID = "boss"
+
+        let tarantino = MarbleVoyageOverlandScroll.orderedTourNodes(
+            from: run.nodes,
+            order: .summitThenLandsDescending
+        ).map(\.id)
+        XCTAssertEqual(tarantino.first, summitID)
+        XCTAssertEqual(Array(tarantino.dropFirst()), landIDs.reversed())
+
+        let beforeAbbie = MarbleVoyageOverlandScroll.orderedTourNodes(
+            from: run.nodes,
+            order: .landsDescendingThenSummit
+        ).map(\.id)
+        XCTAssertEqual(beforeAbbie.last, summitID)
+        XCTAssertEqual(Array(beforeAbbie.dropLast()), landIDs.reversed())
+
+        let bossFirst = MarbleVoyageOverlandScroll.orderedTourNodes(
+            from: run.nodes,
+            order: .bossToAbbie
+        ).map(\.id)
+        XCTAssertEqual(bossFirst.first, summitID)
+        XCTAssertEqual(bossFirst.last, "land0_poi1")
+        XCTAssertTrue(bossFirst.contains("land0_boss"))
+        // Matches map top→bottom scrub: summit first, early-trail scraps last.
+        let nibIdx = bossFirst.firstIndex(of: "land0_boss")!
+        let land1Idx = bossFirst.firstIndex(of: "land1_boss")!
+        XCTAssertGreaterThan(nibIdx, land1Idx)
     }
 }

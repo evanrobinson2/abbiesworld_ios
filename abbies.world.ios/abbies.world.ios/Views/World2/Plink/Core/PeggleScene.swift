@@ -25,6 +25,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         var playerMaxHP: Int
         var critActive: Bool
         var orbName: String
+        var orbID: String
         var phase: Phase
         var showBanner: Bool
         var bannerTitle: String
@@ -46,6 +47,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     var sockSnatchCoinsPerBomb: Int = 0
     /// Prism Burst cage bonus when orange streak ≥ threshold.
     var prismCageBonus: Int = 0
+    /// Hover charm outbound speed retain after peg hits.
+    var hoverSpeedRetain: Double = 1
     /// Fight-total coins earned (read by voyage host on win).
     private(set) var runGoldCoins = 0
     private var orangeStreak = 0
@@ -266,7 +269,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             playerHP = playerMaxHP
         }
         statusText = spiritBattleMode
-            ? "Hit pegs · damage front foe · bomb = lob AOE"
+            ? "Aim and drop! Hit the front bad guy."
             : "Clear every orange · yellow=crit · green=refresh"
         rebuildWorld()
         publish()
@@ -573,7 +576,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             texture.filteringMode = .linear
             let imgW = max(1, image.size.width)
             let imgH = max(1, image.size.height)
-            let scale = min(w / imgW, h / imgH) // aspect-fit — never stretch the plate
+            let scale = max(w / imgW, h / imgH) // aspect-fill — crop edges, no letterbox bands
             let drawW = imgW * scale
             let drawH = imgH * scale
             let letterbox = SKSpriteNode(
@@ -584,19 +587,43 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             letterbox.zPosition = -21
             addChild(letterbox)
 
+            // Soft blur + dim so the plate is atmosphere, not competing with pegs.
             let sky = SKSpriteNode(texture: texture, size: CGSize(width: drawW, height: drawH))
-            sky.position = CGPoint(x: w / 2, y: h / 2)
-            sky.zPosition = -20
-            sky.name = "sceneBackdrop"
-            addChild(sky)
+            sky.position = .zero
+            sky.alpha = 0.72
+            sky.color = SKColor(red: 0.55, green: 0.62, blue: 0.68, alpha: 1)
+            sky.colorBlendFactor = 0.28
 
+            let frosted = SKEffectNode()
+            frosted.shouldEnableEffects = true
+            frosted.shouldRasterize = true
+            frosted.filter = CIFilter(name: "CIGaussianBlur", parameters: [
+                kCIInputRadiusKey: 5.5,
+            ])
+            frosted.position = CGPoint(x: w / 2, y: h / 2)
+            frosted.zPosition = -20
+            frosted.name = "sceneBackdrop"
+            frosted.addChild(sky)
+            addChild(frosted)
+
+            // Glass wash — cool tint so orange pegs stay readable.
             let wash = SKSpriteNode(
-                color: SKColor(red: 0.04, green: 0.06, blue: 0.10, alpha: 0.18),
+                color: SKColor(red: 0.05, green: 0.10, blue: 0.14, alpha: 0.48),
                 size: CGSize(width: w, height: h)
             )
             wash.position = CGPoint(x: w / 2, y: h / 2)
             wash.zPosition = -18
+            wash.name = "sceneBackdropWash"
             addChild(wash)
+
+            let glass = SKSpriteNode(
+                color: SKColor(red: 0.72, green: 0.86, blue: 0.88, alpha: 0.10),
+                size: CGSize(width: w, height: h)
+            )
+            glass.position = CGPoint(x: w / 2, y: h / 2)
+            glass.zPosition = -17
+            glass.name = "sceneBackdropGlass"
+            addChild(glass)
         } else {
             let sky = SKSpriteNode(
                 color: SKColor(red: 0.04, green: 0.06, blue: 0.12, alpha: 1),
@@ -738,7 +765,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             size: size,
             pegRadius: pegRadius,
             ballRadius: ballRadius,
-            tuning: tuning
+            tuning: tuning,
+            hoverSpeedRetain: hoverSpeedRetain
         )
         let hit = PlinkContinuum.step(
             pos: &pos,
@@ -944,10 +972,14 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
 
         if spiritBattleMode {
             var hurt = 0
+            // Apply this shot's cage damage once — never mid-peg.
             if scored > 0 {
-                // HP already applied per-peg to the front foe.
-                enemyHP = max(0, min(enemyHP, enemyMaxHP))
+                enemyHP = max(0, enemyHP - scored)
                 onDamageDealt?(scored)
+            }
+            // Bomb splash applies at settle too (same round boundary).
+            if shotBombAOE > 0 {
+                onBombEnemyAOE?(shotBombAOE)
             }
 
             // Promote next foe before their approach/melee turn.
@@ -986,23 +1018,23 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                     playerHP = max(0, playerHP - atk)
                     if scored > 0 || shotBombAOE > 0 {
                         PlinkSFX.play(.hurt)
-                        statusText = "Hit −\(scored) · bomb AOE −\(shotBombAOE) · melee −\(atk)"
+                        statusText = "Hit −\(scored) · bomb −\(shotBombAOE) · \(atk) back!"
                     } else {
                         PlinkSFX.play(.miss)
-                        statusText = "Miss · melee −\(atk) · Abbie \(playerHP)"
+                        statusText = "Miss · \(atk) hits Abbie!"
                     }
                     onPlayerHurt?(atk)
                 } else if scored <= 0, shotBombAOE <= 0 {
                     PlinkSFX.play(.miss)
-                    statusText = "Miss · foe advances"
+                    statusText = "Miss · foe steps closer"
                 } else {
-                    statusText = "Hit −\(scored) · bomb −\(shotBombAOE) · foe advances"
+                    statusText = "Hit −\(scored) · bomb −\(shotBombAOE) · foe steps closer"
                 }
             } else if scored <= 0, shotBombAOE <= 0 {
                 PlinkSFX.play(.miss)
                 statusText = "Miss!"
             } else {
-                statusText = "Hit −\(scored) · bomb −\(shotBombAOE) · \(enemyHP)/\(enemyMaxHP)"
+                statusText = "Hit −\(scored) · bomb −\(shotBombAOE)"
             }
 
             onRoundResolved?(ShotRoundSummary(
@@ -1076,8 +1108,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                 let before = shotPlink
                 shotPlink = max(1, shotPlink) * 2
                 let bonus = shotPlink - before
-                if bonus > 0, spiritBattleMode {
-                    enemyHP = max(0, enemyHP - bonus)
+                if bonus > 0 {
                     emitHPContribution(bonus, at: peg.position)
                 }
             } else {
@@ -1125,16 +1156,15 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
                 bombSplashing = false
-                // Lob toward the bad-guy cluster — host AOEs every living foe.
+                // Lob toward the bad-guy cluster — apply AOE when the shot settles.
                 let lob = PeglinBattleRules.bombEnemyAOEDamage
                 shotBombAOE += lob
-                onBombEnemyAOE?(lob)
                 if sockSnatchCoinsPerBomb > 0 {
                     runGoldCoins += sockSnatchCoinsPerBomb
                     noteHighlight("Sock Snatch +\(sockSnatchCoinsPerBomb)")
                 }
                 noteHighlight(splash > 0 ? "Bomb lob ×\(splash)" : "Bomb lob")
-                statusText = "BOMB LOBBED · AOE −\(lob)"
+                statusText = "BOMB! −\(lob) to every bad guy"
             } else {
                 statusText = "BOMB!"
             }
@@ -1188,7 +1218,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         publish()
     }
 
-    /// Pop peg on hit and float the HP contribution above it.
+    /// Pop peg on hit. HP contribution tallies on the host corner rails.
+    /// Spirit HP is subtracted only when the shot settles — never mid-flight.
     private func destroyPegNow(_ peg: PegNode, contribution: Int) {
         guard !peg.isCleared else { return }
         let origin = peg.position
@@ -1198,16 +1229,13 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             : contribution
         if scaled > 0 {
             emitHPContribution(scaled, at: origin)
-            if spiritBattleMode {
-                enemyHP = max(0, enemyHP - scaled)
-            }
         }
         PlinkSFX.play(.pop)
         peg.popAway()
         pegs.removeAll { $0 === peg || $0.isCleared }
 
-        if spiritBattleMode, enemyHP <= 0 {
-            // Finish the shot quickly once the spirit is down.
+        // End the shot early once pending damage would drop the front foe.
+        if spiritBattleMode, enemyHP - shotPlink <= 0 {
             phase = .settling
             settleFrames = 8
         }
@@ -1235,42 +1263,10 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         ]))
     }
 
+    /// Peg HP tallies live on the host's top-corner rails (not mid-board floats).
     private func emitHPContribution(_ points: Int, at point: CGPoint) {
-        let label = SKLabelNode(text: "+\(points)")
-        label.fontName = "AvenirNext-Heavy"
-        label.fontSize = 28
-        label.fontColor = SKColor(red: 0.45, green: 1.0, blue: 0.55, alpha: 1)
-        label.verticalAlignmentMode = .center
-        label.horizontalAlignmentMode = .center
-        label.position = point
-        label.zPosition = 50
-        label.setScale(0.4)
-        addChild(label)
-
-        let outline = SKLabelNode(text: "+\(points)")
-        outline.fontName = "AvenirNext-Heavy"
-        outline.fontSize = 28
-        outline.fontColor = SKColor(white: 0, alpha: 0.55)
-        outline.verticalAlignmentMode = .center
-        outline.horizontalAlignmentMode = .center
-        outline.position = CGPoint(x: 1.5, y: -1.5)
-        outline.zPosition = -1
-        label.addChild(outline)
-
-        label.run(.sequence([
-            .group([
-                .moveBy(x: 0, y: 56, duration: 0.55),
-                .sequence([
-                    .scale(to: 1.15, duration: 0.12),
-                    .scale(to: 1.0, duration: 0.1),
-                ]),
-                .sequence([
-                    .wait(forDuration: 0.28),
-                    .fadeOut(withDuration: 0.3),
-                ]),
-            ]),
-            .removeFromParent(),
-        ]))
+        _ = points
+        _ = point
     }
 
     private func spark(at point: CGPoint, color: SKColor) {
@@ -1577,13 +1573,14 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             ballsLeft: ballsLeft,
             orangeLeft: orange,
             plink: phase == .flying || phase == .settling ? shotPlink : runPlink,
-            shotScore: shotPlink,
+            shotScore: shotPlink + shotBombAOE,
             enemyHP: enemyHP,
             enemyMaxHP: enemyMaxHP,
             playerHP: playerHP,
             playerMaxHP: playerMaxHP,
             critActive: critActive,
             orbName: tuning.orb.name,
+            orbID: tuning.orb.id,
             phase: phase,
             showBanner: show,
             bannerTitle: phase == .won ? "Victory!" : (phase == .lost ? "Try again" : ""),

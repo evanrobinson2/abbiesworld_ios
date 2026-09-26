@@ -1,18 +1,20 @@
 import Foundation
 import CoreGraphics
 
-// MARK: - Leveled marbles (Peglin orb-upgrade analogue)
+// MARK: - Run bag (owned marble instances)
 //
-// Peglin orbs level twice to a max of 3. Voyage marbles do the same:
-// shop “Ball upgrade” raises one owned marble’s level. Levels rewrite
-// physics knobs + cage damage — documented for sims in evidence JSON.
+// Voyage fights fire this bag in order — no per-fight deck picker.
+// Shop buys / upgrades / destroys instances. Merge/synthesize can consume
+// instances later without changing the fight loop.
 
-/// One marble the player owns for the run (kind + permanent level).
+/// One marble the player owns for the run (unique instance + kind + permanent level).
 struct MarbleVoyageOwnedMarble: Equatable, Codable, Identifiable, Sendable {
+    /// Stable per-ball id so duplicates and destroy/merge target the right marble.
+    var instanceID: String
     var orbID: String
     var level: Int
 
-    var id: String { orbID }
+    var id: String { instanceID }
 
     static let minLevel = 1
     static let maxLevel = 3
@@ -57,29 +59,80 @@ struct MarbleVoyageOwnedMarble: Equatable, Codable, Identifiable, Sendable {
         )
     }
 
-    static func starterCollection() -> [MarbleVoyageOwnedMarble] {
-        OrbKind.all.map { MarbleVoyageOwnedMarble(orbID: $0.id, level: 1) }
+    static func make(orbID: String, level: Int = minLevel) -> MarbleVoyageOwnedMarble {
+        MarbleVoyageOwnedMarble(
+            instanceID: UUID().uuidString,
+            orbID: orbID,
+            level: level
+        )
+    }
+
+    /// Four plain Sparkles — specialty kinds come from the shop (and later merge).
+    static func starterCollection(
+        count: Int = MarbleVoyageMarbleRules.starterBagCount
+    ) -> [MarbleVoyageOwnedMarble] {
+        (0..<count).map { _ in make(orbID: OrbKind.plainStarterID, level: minLevel) }
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case instanceID, orbID, level
+    }
+
+    init(instanceID: String, orbID: String, level: Int) {
+        self.instanceID = instanceID
+        self.orbID = orbID
+        self.level = level
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        instanceID = try c.decodeIfPresent(String.self, forKey: .instanceID) ?? UUID().uuidString
+        orbID = try c.decode(String.self, forKey: .orbID)
+        level = try c.decode(Int.self, forKey: .level)
     }
 }
 
 enum MarbleVoyageMarbleRules {
-    /// Pick which marble a shop “Ball upgrade” raises — lowest level, then catalog order.
+    /// Opening bag size — four plain marbles.
+    static let starterBagCount = 4
+    /// Cannot scrap below this (still enough to fight).
+    static let minBagCount = 3
+    /// Hard cap — matches fight deck cap.
+    static let maxBagCount = PeglinBattleRules.maxDeckCount
+
+    /// Kinds the Bell Market can sell (specialties + another plain).
+    static var shopCatalog: [OrbKind] { OrbKind.all }
+
+    /// Pick which marble a shop “Ball upgrade” raises — lowest level, then catalog order, then bag order.
     static func upgradeTarget(in collection: [MarbleVoyageOwnedMarble]) -> Int? {
         guard !collection.isEmpty else { return nil }
         if collection.allSatisfy(\.isMaxed) { return nil }
-        var best = 0
+        var best: Int?
         for i in collection.indices where !collection[i].isMaxed {
-            if collection[i].level < collection[best].level
-                || (collection[i].level == collection[best].level
-                    && catalogIndex(collection[i].orbID) < catalogIndex(collection[best].orbID)) {
+            guard let current = best else {
+                best = i
+                continue
+            }
+            let a = collection[i]
+            let b = collection[current]
+            if a.level < b.level
+                || (a.level == b.level && catalogIndex(a.orbID) < catalogIndex(b.orbID))
+                || (a.level == b.level
+                    && catalogIndex(a.orbID) == catalogIndex(b.orbID)
+                    && i < current) {
                 best = i
             }
         }
-        return collection[best].isMaxed ? nil : best
+        guard let best, !collection[best].isMaxed else { return nil }
+        return best
     }
 
     static func catalogIndex(_ orbID: String) -> Int {
         OrbKind.all.firstIndex(where: { $0.id == orbID }) ?? 99
+    }
+
+    static func index(ofInstanceID instanceID: String, in collection: [MarbleVoyageOwnedMarble]) -> Int? {
+        collection.firstIndex { $0.instanceID == instanceID }
     }
 
     /// Mean damage mult across the collection (sim / HUD).
@@ -97,4 +150,14 @@ enum MarbleVoyageMarbleRules {
         let global = 1.0 + 0.05 * Double(max(0, ballLevel - 1))
         return marble * global
     }
+
+    /// Ordered orb ids the fight board fires (bag order).
+    static func fightDeckOrbIDs(in collection: [MarbleVoyageOwnedMarble]) -> [String] {
+        collection.map(\.orbID)
+    }
+}
+
+extension OrbKind {
+    /// Starter / “plain” marble kind id (Sparkle — Peglin default SO).
+    static let plainStarterID = OrbKind.sparkle.id
 }

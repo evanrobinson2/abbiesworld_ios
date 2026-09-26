@@ -37,7 +37,7 @@ struct OrbKind: Identifiable, Equatable, Hashable {
         id: "bounceberry",
         name: "Bounceberry",
         blurb: "Super bouncy lateral chaos",
-        fireForce: 460, gravityScale: 1.0, bounciness: 0.95, mass: 1.0, radius: 11,
+        fireForce: 460, gravityScale: 1.0, bounciness: 1.0, mass: 1.0, radius: 11,
         trail: .motionBlur(
             tint: (0.95, 0.45, 0.75),
             accent: .petals,
@@ -47,8 +47,8 @@ struct OrbKind: Identifiable, Equatable, Hashable {
     static let pebble = OrbKind(
         id: "pebble",
         name: "Pebble",
-        blurb: "Dense — drops deep, short hops",
-        fireForce: 500, gravityScale: 1.15, bounciness: 0.35, mass: 2.0, radius: 12,
+        blurb: "Dense — drops deep, still snappy",
+        fireForce: 620, gravityScale: 1.25, bounciness: 1.0, mass: 1.35, radius: 12,
         trail: .motionBlur(
             tint: (0.55, 0.5, 0.42),
             accent: .dust,
@@ -60,7 +60,7 @@ struct OrbKind: Identifiable, Equatable, Hashable {
         id: "zipbolt",
         name: "Zipbolt",
         blurb: "Huge force · low g · laserish",
-        fireForce: 700, gravityScale: 0.35, bounciness: 0.88, mass: 0.9, radius: 9,
+        fireForce: 700, gravityScale: 0.35, bounciness: 1.0, mass: 0.9, radius: 9,
         trail: .motionBlur(
             tint: (0.35, 0.9, 1.0),
             accent: .bolts,
@@ -72,7 +72,7 @@ struct OrbKind: Identifiable, Equatable, Hashable {
         id: "puff",
         name: "Puff",
         blurb: "Big soft catcher — fills gaps",
-        fireForce: 400, gravityScale: 0.9, bounciness: 0.78, mass: 0.85, radius: 15,
+        fireForce: 520, gravityScale: 0.9, bounciness: 1.0, mass: 0.85, radius: 15,
         trail: .motionBlur(
             tint: (0.85, 0.88, 1.0),
             accent: .mist,
@@ -182,9 +182,10 @@ struct PhysicsTuning: Equatable {
         )
     }
 
-    /// Passive rubber e (≤ 1). Bumper kick is separate and always adds outward Δv.
+    /// Peg hits are always elastic — orbs never lose speed to a peg (Evan rule).
+    /// Orb `bounciness` still flavors bumper kick feel; it does not damp peg bounce.
     func effectiveRestitution(pegSurface: CGFloat) -> CGFloat {
-        min(1.0, max(0.05, bouncinessCG * pegSurface))
+        max(1.0, pegSurface)
     }
 
     /// Outward punch: base kick × orb bounciness feel; dense orbs get a slightly softer kick.

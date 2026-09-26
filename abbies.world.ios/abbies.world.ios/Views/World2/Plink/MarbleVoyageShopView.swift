@@ -3,7 +3,7 @@ import SwiftUI
 import UIKit
 #endif
 
-/// Post-fight shop: spend gold-peg coins on a heal, a marble level, or a permanent charm.
+/// Post-fight shop: heal, buy/upgrade/destroy bag marbles, or stack a permanent charm.
 struct MarbleVoyageShopView: View {
     @Binding var run: MarbleVoyageRun
     var onLeave: () -> Void
@@ -21,6 +21,14 @@ struct MarbleVoyageShopView: View {
         return run.marbleCollection[index]
     }
 
+    private var canDestroy: Bool {
+        run.marbleCollection.count > MarbleVoyageMarbleRules.minBagCount
+    }
+
+    private var bagFull: Bool {
+        run.marbleCollection.count >= MarbleVoyageMarbleRules.maxBagCount
+    }
+
     var body: some View {
         ZStack {
             LinearGradient(
@@ -36,7 +44,9 @@ struct MarbleVoyageShopView: View {
             ScrollView {
                 VStack(spacing: 18) {
                     header
+                    bagStrip
                     healRow
+                    buyMarbleRow
                     ballRow
                     charmRow
                     leaveButton
@@ -70,7 +80,7 @@ struct MarbleVoyageShopView: View {
             Text("Bell Market")
                 .font(.system(size: 34, weight: .black, design: .rounded))
                 .foregroundStyle(.white)
-            Text("Spend coins before the next climb — no free heals out there.")
+            Text("Spend coins before the next climb — buy, upgrade, or scrap marbles.")
                 .font(.system(size: 14, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.85))
                 .multilineTextAlignment(.center)
@@ -83,12 +93,82 @@ struct MarbleVoyageShopView: View {
                 Label("\(run.playerHP)/\(run.playerMaxHP)", systemImage: "heart.fill")
                     .font(.system(size: 22, weight: .black, design: .rounded))
                     .foregroundStyle(Color(red: 1, green: 0.45, blue: 0.55))
+                Label(
+                    "\(run.marbleCollection.count)/\(MarbleVoyageMarbleRules.maxBagCount)",
+                    systemImage: "circle.grid.3x3.fill"
+                )
+                .font(.system(size: 18, weight: .black, design: .rounded))
+                .foregroundStyle(Color(red: 0.65, green: 0.9, blue: 1.0))
             }
             .padding(.horizontal, 18)
             .padding(.vertical, 10)
             .background(.ultraThinMaterial.opacity(0.95), in: Capsule())
             .offset(x: shake ? -6 : 0)
         }
+    }
+
+    private var bagStrip: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("Your bag")
+                    .font(.system(size: 17, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                Spacer()
+                Text(
+                    canDestroy
+                        ? "Tap a marble to scrap (+\(shop?.destroyRefund ?? run.economy.destroyRefund))"
+                        : "Keep at least \(MarbleVoyageMarbleRules.minBagCount) marbles"
+                )
+                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                .foregroundStyle(.white.opacity(0.7))
+            }
+
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(run.marbleCollection) { marble in
+                        bagMarbleChip(marble)
+                    }
+                }
+            }
+        }
+        .padding(14)
+        .background(.ultraThinMaterial.opacity(0.9), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(.white.opacity(0.25), lineWidth: 1.5)
+        )
+        .accessibilityIdentifier("world2.marbleVoyage.shop.bag")
+    }
+
+    private func bagMarbleChip(_ marble: MarbleVoyageOwnedMarble) -> some View {
+        Button {
+            apply(.destroyMarble(instanceID: marble.instanceID))
+        } label: {
+            VStack(spacing: 6) {
+                orbThumb(marble.orb)
+                    .frame(width: 52, height: 52)
+                Text(marble.orb.name)
+                    .font(.system(size: 12, weight: .heavy, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                Text("Lv\(marble.clampedLevel)")
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 10)
+            .background(Color.black.opacity(0.35), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 14, style: .continuous)
+                    .stroke(.white.opacity(canDestroy ? 0.45 : 0.15), lineWidth: 1)
+            )
+            .opacity(canDestroy ? 1 : 0.55)
+        }
+        .buttonStyle(.plain)
+        .disabled(!canDestroy)
+        .accessibilityIdentifier("world2.marbleVoyage.shop.bag.\(marble.instanceID)")
+        .accessibilityLabel("\(marble.orb.name) level \(marble.clampedLevel)")
+        .accessibilityHint(canDestroy ? "Scrap for coins" : "Bag is at the minimum")
     }
 
     private var healRow: some View {
@@ -102,6 +182,56 @@ struct MarbleVoyageShopView: View {
         ) {
             apply(.heal)
         }
+    }
+
+    @ViewBuilder
+    private var buyMarbleRow: some View {
+        let offers = shop?.marbleOffers ?? []
+        if offers.isEmpty {
+            Text(bagFull ? "Bag is full — scrap one to buy another." : "Marble shelf is bare this visit.")
+                .font(.system(size: 14, weight: .semibold, design: .rounded))
+                .foregroundStyle(.white.opacity(0.7))
+        } else {
+            HStack(spacing: 14) {
+                ForEach(offers, id: \.self) { orbID in
+                    buyMarbleCard(orbID: orbID, price: shop?.buyMarblePrice ?? run.economy.buyMarblePrice)
+                }
+            }
+        }
+    }
+
+    private func buyMarbleCard(orbID: String, price: Int) -> some View {
+        let orb = OrbKind.all.first(where: { $0.id == orbID }) ?? .sparkle
+        let affordable = run.coins >= price && !bagFull
+        return Button {
+            apply(.buyMarble(orbID: orbID))
+        } label: {
+            VStack(spacing: 10) {
+                orbThumb(orb)
+                    .frame(width: 64, height: 64)
+                Text(orb.name)
+                    .font(.system(size: 17, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                Text(orb.blurb)
+                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.82))
+                    .multilineTextAlignment(.center)
+                    .lineLimit(3)
+                priceTag(price, affordable: affordable)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .padding(.horizontal, 12)
+            .background(.ultraThinMaterial.opacity(0.9), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 20, style: .continuous)
+                    .stroke(.white.opacity(affordable ? 0.6 : 0.2), lineWidth: 1.5)
+            )
+            .opacity(affordable ? 1 : 0.55)
+        }
+        .buttonStyle(.plain)
+        .disabled(bagFull)
+        .accessibilityIdentifier("world2.marbleVoyage.shop.buyMarble.\(orbID)")
     }
 
     private var ballRow: some View {
@@ -183,6 +313,23 @@ struct MarbleVoyageShopView: View {
                 .font(.system(size: 40, weight: .black))
                 .foregroundStyle(.white)
                 .frame(width: 72, height: 72)
+        }
+    }
+
+    @ViewBuilder
+    private func orbThumb(_ orb: OrbKind) -> some View {
+        if let image = UIImage(named: orb.catalogImageName) {
+            Image(uiImage: image)
+                .resizable()
+                .scaledToFit()
+        } else {
+            Circle()
+                .fill(Color.white.opacity(0.25))
+                .overlay(
+                    Text(String(orb.name.prefix(1)))
+                        .font(.system(size: 18, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                )
         }
     }
 

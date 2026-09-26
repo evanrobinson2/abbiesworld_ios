@@ -44,9 +44,18 @@ enum MarbleVoyageNodeKind: String, Codable, CaseIterable, Sendable {
         case .start: return "Launch"
         case .fight: return "Fight"
         case .treasure: return "Treasure"
-        case .mystery: return "Mystery"
-        case .shrine: return "Shrine"
+        case .mystery, .shrine: return "?"
         case .boss: return "Boss"
+        }
+    }
+
+    /// Chart pill / tile caption — no invented colloquial names.
+    var chartLabel: String {
+        switch self {
+        case .start: return "DOCK"
+        case .fight, .boss: return "FIGHT"
+        case .treasure: return "TREASURE"
+        case .mystery, .shrine: return "?"
         }
     }
 
@@ -55,8 +64,7 @@ enum MarbleVoyageNodeKind: String, Codable, CaseIterable, Sendable {
         case .start: return "airplane.departure"
         case .fight: return "flame.fill"
         case .treasure: return "gift.fill"
-        case .mystery: return "questionmark.circle.fill"
-        case .shrine: return "cross.circle.fill"
+        case .mystery, .shrine: return "questionmark.circle.fill"
         case .boss: return "crown.fill"
         }
     }
@@ -159,8 +167,10 @@ struct MarbleVoyageRun: Equatable, Sendable {
     static let gangMiniArcCount = 3
     /// POI fights inside one land before that land's boss.
     static let gangZonesPerArc = 3
-    /// Every campaign fight: 3 lands × (3 POIs + land boss) + the summit.
-    static let campaignTotalFights = gangMiniArcCount * (gangZonesPerArc + 1) + 1
+    /// Combat nodes: per land 2 scraps + land boss, plus summit.
+    static let campaignTotalFights = gangMiniArcCount * 3 + 1
+    /// Mid-land encounter + post-boss rest, per land.
+    static let campaignEventBeats = gangMiniArcCount * 2
 
     var currentNode: MarbleVoyageNode? {
         nodes.first { $0.id == currentNodeID }
@@ -322,6 +332,50 @@ struct MarbleVoyageRun: Equatable, Sendable {
             )
             return .ok(message: "\(name) is now Lv\(level)")
 
+        case .buyMarble(let orbID):
+            guard marbleCollection.count < MarbleVoyageMarbleRules.maxBagCount else {
+                return .alreadyMaxed
+            }
+            guard open.marbleOffers.contains(orbID) else { return .alreadyMaxed }
+            guard coins >= open.buyMarblePrice else { return .cannotAfford }
+            let price = open.buyMarblePrice
+            coins -= price
+            let marble = MarbleVoyageOwnedMarble.make(orbID: orbID)
+            marbleCollection.append(marble)
+            open.marbleOffers.removeAll { $0 == orbID }
+            open.buyMarblePrice = open.inflate(price, economy: economy)
+            open.purchasesThisVisit += 1
+            shop = open
+            notePurchase(
+                sku: "\(MarbleVoyageShopSKU.buyMarble.rawValue).\(orbID)",
+                price: price,
+                detail: "bag→\(marbleCollection.count)"
+            )
+            return .ok(message: "\(marble.orb.name) joined the bag")
+
+        case .destroyMarble(let instanceID):
+            guard marbleCollection.count > MarbleVoyageMarbleRules.minBagCount else {
+                return .alreadyMaxed
+            }
+            guard let idx = MarbleVoyageMarbleRules.index(
+                ofInstanceID: instanceID,
+                in: marbleCollection
+            ) else {
+                return .alreadyMaxed
+            }
+            let refund = open.destroyRefund
+            let name = marbleCollection[idx].orb.name
+            marbleCollection.remove(at: idx)
+            coins += refund
+            open.purchasesThisVisit += 1
+            shop = open
+            notePurchase(
+                sku: MarbleVoyageShopSKU.destroyMarble.rawValue,
+                price: -refund,
+                detail: "scrapped \(name) · bag→\(marbleCollection.count)"
+            )
+            return .ok(message: "Scrapped \(name) · +\(refund) coins")
+
         case .buyCharm(let charm):
             guard let price = open.charmPrices[charm],
                   open.charmOffers.contains(charm)
@@ -366,6 +420,17 @@ struct MarbleVoyageRun: Equatable, Sendable {
     mutating func applyEvent(_ outcome: MarbleVoyageEventOutcome) {
         let kind = currentNode?.kind ?? .mystery
         playerHP = max(0, min(playerMaxHP, playerHP + outcome.hpDelta))
+        coins = max(0, coins + outcome.coinDelta)
+        if let charm = outcome.charmGrant {
+            addCharm(charm)
+        }
+        if outcome.ballUpgrade,
+           let idx = MarbleVoyageMarbleRules.upgradeTarget(in: marbleCollection) {
+            marbleCollection[idx].level = min(
+                MarbleVoyageOwnedMarble.maxLevel,
+                marbleCollection[idx].level + 1
+            )
+        }
         lastEventLine = outcome.message
         record.events.append(
             .init(
@@ -373,7 +438,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
                 kind: kind.rawValue,
                 message: outcome.message,
                 hpDelta: outcome.hpDelta,
-                coinDelta: 0
+                coinDelta: outcome.coinDelta
             )
         )
         syncRecordTotals()
@@ -383,10 +448,8 @@ struct MarbleVoyageRun: Equatable, Sendable {
             persistEndlessBest()
             return
         }
-        phase = .map
-        if mode == .endless {
-            appendEndlessFrontier()
-        }
+        // Same beat as fights — Bell Market, then back to the climb.
+        openShop(after: currentNodeID)
     }
 
     // MARK: - Difficulty
@@ -445,6 +508,11 @@ struct MarbleVoyageRun: Equatable, Sendable {
         let fraction = economy.healFraction
             + MarbleVoyageCharm.shopHealBonusFraction(stacks: charmStack(.bloom))
         return max(1, Int((Double(playerMaxHP) * fraction).rounded()))
+    }
+
+    /// Ordered orb ids handed to the fight board (bag order — no lobby picker).
+    var fightDeckOrbIDs: [String] {
+        MarbleVoyageMarbleRules.fightDeckOrbIDs(in: marbleCollection)
     }
 
     /// Cage damage multiplier from marble levels × the legacy global ball level.
@@ -593,7 +661,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
         )
     }
 
-    /// Linear climb: 3 lands × (POI1 warmup → POI2 battle → POI3 hard → land boss), then the summit.
+    /// Linear climb: 3 lands × (trail → bridge → cliff scrap → land boss), then the summit.
     static func makeCampaign(seed: UInt64) -> MarbleVoyageRun {
         let gang = MarbleVoyageGangRun.make(seed: seed)
         var nodes: [MarbleVoyageNode] = [
@@ -609,31 +677,57 @@ struct MarbleVoyageRun: Equatable, Sendable {
             previousID = to
         }
 
-        let poiLabels = ["POI1 Warmup", "POI2 Battle", "POI3 Hard"]
+        // Kid-facing scrap names — never leak L# / POI scaffolding into the chart.
+        let scrapByLand: [[String]] = [
+            ["Trail scrap", "Bridge scrap", "Cliff scrap"],
+            ["Canal scrap", "Market scrap", "Rooftop scrap"],
+            ["Fog scrap", "Ruin scrap", "Spire scrap"],
+        ]
         let poiRows = [0, 2, 0]
 
         for land in 0..<gangMiniArcCount {
             let hostage = gang.hostage(forArc: land)
+            let scraps = scrapByLand[land % scrapByLand.count]
             for poi in 0..<gangZonesPerArc {
                 step += 1
                 let id = "land\(land)_poi\(poi + 1)"
-                nodes.append(
-                    .init(
-                        id: id,
-                        kind: .fight,
-                        column: column,
-                        row: poiRows[poi % poiRows.count],
-                        title: "L\(land + 1) \(poiLabels[poi])",
-                        enemyKind: hostage,
-                        threat: step,
-                        stage: step,
-                        waveAttacker: gang.randomHenchman(
-                            seedSalt: seed &+ UInt64(step) &* 104_729
-                        ),
-                        gangRole: .henchman,
-                        miniArcIndex: land
+                // Middle scrap → encounter / treasure instead of a fight.
+                if poi == 1 {
+                    var rng = SeededGenerator(seed: seed &+ UInt64(step) &* 9_911)
+                    let kinds: [MarbleVoyageNodeKind] = [.treasure, .mystery, .shrine]
+                    let kind = kinds[Int.random(in: 0..<kinds.count, using: &rng)]
+                    nodes.append(
+                        .init(
+                            id: id,
+                            kind: kind,
+                            column: column,
+                            row: poiRows[poi % poiRows.count],
+                            title: Self.eventTitle(kind, stage: step, rng: &rng),
+                            threat: step,
+                            stage: step,
+                            miniArcIndex: land
+                        )
                     )
-                )
+                } else {
+                    nodes.append(
+                        .init(
+                            id: id,
+                            kind: .fight,
+                            column: column,
+                            row: poiRows[poi % poiRows.count],
+                            title: scraps[poi % scraps.count],
+                            enemyKind: hostage,
+                            threat: step,
+                            stage: step,
+                            // Opening campaign fight always introduces the approved boxer.
+                            waveAttacker: step == 1 ? .porcupineBoxer : gang.randomHenchman(
+                                seedSalt: seed &+ UInt64(step) &* 104_729
+                            ),
+                            gangRole: .henchman,
+                            miniArcIndex: land
+                        )
+                    )
+                }
                 link(id)
                 column += 1
             }
@@ -647,7 +741,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
                     kind: .fight,
                     column: column,
                     row: 1,
-                    title: "L\(land + 1) Boss · \(head.shortName)",
+                    title: "\(head.displayName)’s gate",
                     enemyKind: hostage,
                     threat: step,
                     stage: step,
@@ -658,16 +752,36 @@ struct MarbleVoyageRun: Equatable, Sendable {
             )
             link(bossID)
             column += 1
+
+            // Rest beat after each land boss — shrine or treasure.
+            step += 1
+            let restID = "land\(land)_rest"
+            var restRng = SeededGenerator(seed: seed &+ UInt64(land) &* 77_777)
+            let restKind: MarbleVoyageNodeKind = land % 2 == 0 ? .shrine : .treasure
+            nodes.append(
+                .init(
+                    id: restID,
+                    kind: restKind,
+                    column: column,
+                    row: 1,
+                    title: Self.eventTitle(restKind, stage: step, rng: &restRng),
+                    threat: step,
+                    stage: step,
+                    miniArcIndex: land
+                )
+            )
+            link(restID)
+            column += 1
         }
 
-        step += 2 // the summit is a real step up from the last land boss
+        step += 2 // the summit is a real step up from the last land rest
         nodes.append(
             .init(
                 id: "boss",
                 kind: .boss,
                 column: column,
                 row: 1,
-                title: "Summit · \(gang.bigBoss.shortName)",
+                title: "Summit · \(gang.bigBoss.displayName)",
                 enemyKind: .bizarroAbbie,
                 threat: step,
                 stage: step,
@@ -684,7 +798,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
             gang: gang,
             nodes: nodes,
             edges: edges,
-            lastEventLine: "Three lands, then the summit. \(gang.bigBoss.displayName) is waiting."
+            lastEventLine: ""
         )
     }
 
@@ -696,7 +810,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
             gang: gang,
             nodes: [.init(id: "start", kind: .start, column: 0, row: 1, title: "Sky Dock")],
             edges: [],
-            lastEventLine: "Endless voyage — the grid grows as you clear fights. Best \(storedEndlessBest())."
+            lastEventLine: ""
         )
         run.appendEndlessFrontier()
         return run
@@ -728,7 +842,9 @@ struct MarbleVoyageRun: Equatable, Sendable {
                     kind: .boss,
                     column: nextColumn,
                     row: 1,
-                    title: "Wave \(wave) · \(crew.shortName)",
+                    title: isBigBoss
+                        ? "Summit wave · \(crew.displayName)"
+                        : "\(crew.displayName)’s wave",
                     enemyKind: gang.hostage(forArc: bossIndex),
                     threat: 6 + wave / 2,
                     stage: wave,
@@ -752,7 +868,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
                         kind: .fight,
                         column: nextColumn,
                         row: index == 0 ? 0 : 2,
-                        title: "Wave \(wave) · \(index == 0 ? "Port" : "Starboard")",
+                        title: index == 0 ? "Wave \(wave) · Left path" : "Wave \(wave) · Right path",
                         enemyKind: Self.enemyForStage(wave, branch: index),
                         threat: threat,
                         stage: wave,
@@ -785,7 +901,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
         stage: Int,
         rng: inout SeededGenerator
     ) -> [String] {
-        let kinds: [MarbleVoyageNodeKind] = [.treasure, .mystery, .shrine]
+        let kinds: [MarbleVoyageNodeKind] = [.treasure, .mystery]
         let top = kinds.randomElement(using: &rng) ?? .treasure
         var bottomPool = kinds.filter { $0 != top }
         if bottomPool.isEmpty { bottomPool = [MarbleVoyageNodeKind.mystery] }
@@ -798,7 +914,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
                 kind: top,
                 column: column,
                 row: 0,
-                title: eventTitle(top, stage: stage, rng: &rng)
+                title: eventTitle(top, rng: &rng)
             )
         )
         nodes.append(
@@ -807,22 +923,23 @@ struct MarbleVoyageRun: Equatable, Sendable {
                 kind: bottom,
                 column: column,
                 row: 2,
-                title: eventTitle(bottom, stage: stage, rng: &rng)
+                title: eventTitle(bottom, rng: &rng)
             )
         )
         return [idA, idB]
     }
 
-    private static func eventTitle(_ kind: MarbleVoyageNodeKind, stage: Int, rng: inout SeededGenerator) -> String {
+    /// Fixed labels only — Treasure or ? (no invented place names).
+    private static func eventTitle(_ kind: MarbleVoyageNodeKind, stage: Int = 0, rng: inout SeededGenerator) -> String {
+        _ = stage
+        _ = rng
         switch kind {
         case .treasure:
-            return ["Salvage Cache", "Orb Chest", "Glow Crate", "Bell Trunk"].randomElement(using: &rng)!
-        case .mystery:
-            return ["Fog Beacon", "Whisper Gate", "Drift Signal", "Echo Well"].randomElement(using: &rng)!
-        case .shrine:
-            return ["Bell Shrine", "Heal Choir", "Light Altar", "Mercy Bell"].randomElement(using: &rng)!
+            return "Treasure"
+        case .mystery, .shrine:
+            return "?"
         default:
-            return "Landing \(stage)"
+            return kind.displayName
         }
     }
 }
@@ -830,6 +947,9 @@ struct MarbleVoyageRun: Equatable, Sendable {
 struct MarbleVoyageEventOutcome: Equatable, Sendable {
     let message: String
     let hpDelta: Int
+    var coinDelta: Int = 0
+    var charmGrant: MarbleVoyageCharm? = nil
+    var ballUpgrade: Bool = false
 }
 
 enum MarbleVoyageEvents {
@@ -840,30 +960,107 @@ enum MarbleVoyageEvents {
     ) -> MarbleVoyageEventOutcome {
         switch kind {
         case .treasure:
-            let heal = [18, 24, 30, 34].randomElement(using: &rng) ?? 24
-            return .init(
-                message: "\(title): Bell Balm! +\(heal) HP.",
-                hpDelta: heal
-            )
+            return resolveTreasure(title: title, rng: &rng)
         case .shrine:
-            let heal = [32, 36, 42].randomElement(using: &rng) ?? 36
-            return .init(
-                message: "\(title): A heal spell wraps you in warm light. +\(heal) HP.",
-                hpDelta: heal
-            )
+            return resolveShrine(title: title, rng: &rng)
         case .mystery:
-            let roll = Int.random(in: 0..<100, using: &rng)
-            if roll < 38 {
-                let heal = 40
-                return .init(message: "\(title): A floating bell kisses you. +\(heal) HP!", hpDelta: heal)
-            }
-            if roll < 68 {
-                return .init(message: "\(title): Empty fog… no hurt, no heal.", hpDelta: 0)
-            }
-            let hurt = [12, 16, 20].randomElement(using: &rng) ?? 16
-            return .init(message: "\(title): A trick! Sparks sting for −\(hurt) HP.", hpDelta: -hurt)
+            return resolveMystery(title: title, rng: &rng)
         default:
             return .init(message: "Nothing happens.", hpDelta: 0)
         }
+    }
+
+    private static func resolveTreasure(
+        title: String,
+        rng: inout some RandomNumberGenerator
+    ) -> MarbleVoyageEventOutcome {
+        let roll = Int.random(in: 0..<100, using: &rng)
+        if roll < 35 {
+            let coins = [18, 24, 30, 36].randomElement(using: &rng) ?? 24
+            return .init(
+                message: "\(title): +\(coins) coins.",
+                hpDelta: 0,
+                coinDelta: coins
+            )
+        }
+        if roll < 60 {
+            let heal = [18, 24, 30].randomElement(using: &rng) ?? 24
+            return .init(
+                message: "\(title): +\(heal) HP.",
+                hpDelta: heal
+            )
+        }
+        if roll < 82 {
+            let charm = MarbleVoyageCharm.allCases.randomElement(using: &rng) ?? .moonGleam
+            return .init(
+                message: "\(title): Charm — \(charm.title)!",
+                hpDelta: 0,
+                charmGrant: charm
+            )
+        }
+        return .init(
+            message: "\(title): One marble levels up.",
+            hpDelta: 0,
+            ballUpgrade: true
+        )
+    }
+
+    private static func resolveShrine(
+        title: String,
+        rng: inout some RandomNumberGenerator
+    ) -> MarbleVoyageEventOutcome {
+        let heal = [32, 36, 42, 48].randomElement(using: &rng) ?? 36
+        let roll = Int.random(in: 0..<100, using: &rng)
+        if roll < 55 {
+            return .init(
+                message: "\(title): +\(heal) HP.",
+                hpDelta: heal
+            )
+        }
+        if roll < 80 {
+            let charm: MarbleVoyageCharm = [.bloom, .softPurr, .lullaby].randomElement(using: &rng) ?? .bloom
+            return .init(
+                message: "\(title): \(charm.title) · +\(heal / 2) HP.",
+                hpDelta: heal / 2,
+                charmGrant: charm
+            )
+        }
+        return .init(
+            message: "\(title): One marble levels up · +\(heal / 2) HP.",
+            hpDelta: heal / 2,
+            ballUpgrade: true
+        )
+    }
+
+    private static func resolveMystery(
+        title: String,
+        rng: inout some RandomNumberGenerator
+    ) -> MarbleVoyageEventOutcome {
+        let roll = Int.random(in: 0..<100, using: &rng)
+        if roll < 28 {
+            let heal = 40
+            return .init(message: "\(title): +\(heal) HP!", hpDelta: heal)
+        }
+        if roll < 48 {
+            let coins = [12, 16, 22].randomElement(using: &rng) ?? 16
+            return .init(
+                message: "\(title): +\(coins) coins.",
+                hpDelta: 0,
+                coinDelta: coins
+            )
+        }
+        if roll < 62 {
+            let charm = MarbleVoyageCharm.allCases.randomElement(using: &rng) ?? .cycle
+            return .init(
+                message: "\(title): Charm — \(charm.title)!",
+                hpDelta: 0,
+                charmGrant: charm
+            )
+        }
+        if roll < 78 {
+            return .init(message: "\(title): Nothing this time.", hpDelta: 0)
+        }
+        let hurt = [12, 16, 20].randomElement(using: &rng) ?? 16
+        return .init(message: "\(title): Trap! −\(hurt) HP.", hpDelta: -hurt)
     }
 }

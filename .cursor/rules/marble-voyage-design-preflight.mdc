@@ -28,3 +28,21 @@ Must exit **0**. Do not hand off on failure.
 7. **No straight-up bounce** — after peg / rail / side-wall rebound, outbound velocity must not sit inside ~14° of pure +Y (`PlinkContinuum.avoidStraightUpVelocity`). Shared by `PeggleScene` and `PlinkRoundSimulator`.
 
 Update thresholds in **both** `MarbleVoyageDesignRules.swift` and `scripts/check_voyage_design_rules.py` together.
+
+## Stage stills after a major build (agent habit)
+
+Evan is not the builder — **you are**. After a **major Marble Voyage / Plink build** or playtest handoff:
+
+1. **Always remind** in the handoff (one line) that silent stage stills are available — do not wait for him to ask.
+2. **Do not auto-capture** unless he requested stills / “with capture”, or you need PNGs for autonomous layout review.
+3. When capturing:
+   ```bash
+   ./scripts/build_marble_voyage.sh --capture
+   ```
+   or, when the `.app` is already built:
+   ```bash
+   ./scripts/capture_marble_voyage.sh --skip-build
+   ```
+4. Open PNGs under `artifacts/voyage-capture/<stamp>/` for layout review.
+
+Capture relaunches the app on the capture simulator (default `iPad (A16)`) — avoid yanking a device Evan is actively playing. Reminder text: `./scripts/voyage_capture_reminder.sh`. Always-on rule: `marble-voyage-capture-habit.mdc`.

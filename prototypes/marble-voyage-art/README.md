@@ -11,3 +11,6 @@ vercel --prod --yes
 
 Machine-readable list: `manifest.json`  
 Also: `docs/minigames/MARBLE_VOYAGE_ART_MANIFEST.md`.
+
+**Board layout mock (static, not in the app):**  
+[`board-layout-mock/trail-scrap/`](board-layout-mock/trail-scrap/) — Trail scrap / `fox.pawPrint` composition study with real art.

@@ -33,4 +33,5 @@ if [[ "$FAIL" -ne 0 ]]; then
 fi
 
 echo "PREFLIGHT OK — design gates passed."
+"$ROOT/scripts/voyage_capture_reminder.sh"
 exit 0

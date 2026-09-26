@@ -53,6 +53,8 @@ struct ContinuumConfig: Equatable {
     var pegRadius: CGFloat
     var ballRadius: CGFloat
     var tuning: PhysicsTuning
+    /// Hover stacks → outbound speed mult after peg bounce (1 = off).
+    var hoverSpeedRetain: Double = 1
     /// Side / top insets matching PeggleScene walls.
     var sideInsetFrac: CGFloat = 0.03
     var topInsetFrac: CGFloat = 0.02
@@ -222,8 +224,10 @@ enum PlinkContinuum {
         }
 
         var v = ballVel
+        let inboundSpeed = hypot(v.dx, v.dy)
         let vRad = v.dx * n.dx + v.dy * n.dy
         if vRad < 0 {
+            // Pegs are always at least elastic (e ≥ 1) — never bleed ball speed.
             let e = config.tuning.effectiveRestitution(pegSurface: pegSurface)
             v.dx -= (1 + e) * vRad * n.dx
             v.dy -= (1 + e) * vRad * n.dy
@@ -231,6 +235,21 @@ enum PlinkContinuum {
         let kick = config.tuning.effectiveBumperKick + forceKick
         v.dx += n.dx * kick
         v.dy += n.dy * kick
+
+        // Hard floor: outbound |v| never below inbound (pegs cannot remove energy).
+        let outboundSpeed = hypot(v.dx, v.dy)
+        if inboundSpeed > 1e-3, outboundSpeed > 1e-3, outboundSpeed < inboundSpeed {
+            let scale = inboundSpeed / outboundSpeed
+            v.dx *= scale
+            v.dy *= scale
+        }
+
+        // Hover charm — fling a bit faster off each peg.
+        let hover = max(1.0, config.hoverSpeedRetain)
+        if hover > 1.001 {
+            v.dx *= CGFloat(hover)
+            v.dy *= CGFloat(hover)
+        }
 
         let speed = hypot(v.dx, v.dy)
         if speed > config.tuning.maxBallSpeedCG {

@@ -2,7 +2,8 @@ import Foundation
 import CoreGraphics
 
 /// Semantic plates + SF Symbol accents for Marble Voyage (registry-backed).
-/// Plate pixel contract: `MarbleVoyagePlateLayout` (4:3, Fit only — never Fill/crop).
+/// Plate pixel contract: `MarbleVoyagePlateLayout` (4:3 authoring).
+/// Title menu bleeds (`MarbleVoyageBleedPlate`); fight/event plates stay Fit.
 enum MarbleVoyageArt {
     /// Title menu plate (not intro). Bundled catalog: `world2_title_marbleVoyage` (+ unlockable alternates).
     static let titleBackdrop = "title.marbleVoyage"
@@ -64,12 +65,21 @@ enum MarbleVoyageArt {
         return chartTileRose
     }
 
-    /// Fight / POI tiles dominate the climb — ~⅓ of the iPad viewport width.
-    static let chartTileViewportWidthFraction: CGFloat = 0.33
-    static let chartTileMinSize: CGFloat = 160
-    static let chartTileMaxSize: CGFloat = 420
-    /// Center-to-center vertical gap as a multiple of tile edge (keeps big portraits readable).
+    /// Chart portraits — big enough to read the art on the climb.
+    static let chartTileViewportWidthFraction: CGFloat = 0.22
+    static let chartTileMinSize: CGFloat = 148
+    static let chartTileMaxSize: CGFloat = 260
+    /// Center-to-center vertical gap as a multiple of tile edge.
     static let chartTileVerticalSpacingFactor: CGFloat = 1.55
+
+    /// Role scale vs base tile — keep scraps readable; bosses a touch larger.
+    static func chartTileRoleScale(for role: MarbleVoyageGangFightRole?) -> CGFloat {
+        switch role {
+        case .bigBoss: return 1.2
+        case .miniBoss: return 1.08
+        case .henchman, .none: return 0.95
+        }
+    }
 
     static func chartTileSize(forViewportWidth width: CGFloat) -> CGFloat {
         let raw = width * chartTileViewportWidthFraction

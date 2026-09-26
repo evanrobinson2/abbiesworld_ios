@@ -1,0 +1,15 @@
+{
+  "sourceService": "Midjourney",
+  "sourceJob": "881f3b1d-cbd4-4a5a-ab80-b3f28f63ec12",
+  "candidateIndex": 3,
+  "sourceUrl": "https://cdn.midjourney.com/881f3b1d-cbd4-4a5a-ab80-b3f28f63ec12/0_3.jpeg",
+  "approvedBy": "Evan, 2026-09-26 conversation",
+  "originalSHA256": "7a242a5dce7b965a335a16fa23b880a05d31017552afbd7d52a1beadf02cd7aa",
+  "spriteSHA256": "0b35b4992fe71bf2e62588e4110a061f90730fe0d103a65f0ec77f067bd274db",
+  "preparation": "Built-in imagegen background extraction, transparent background; original preserved.",
+  "editPrompt": "Remove only white background and ground shadow; preserve approved character identity, pose, colors, costume and left-facing silhouette.",
+  "catalog": "world2_plink_gang_porcupineBoxer_idle",
+  "semanticId": "token.plink.gang.porcupineBoxer.idle",
+  "poses": "Idle cutout reused by existing attack/defeated fallback; no separate pose art generated.",
+  "generationPrompt": "Full-body female porcupine henchperson for a colorful comedic fantasy game, unmistakably animal proportions, almost spherical turquoise body, tiny sturdy legs, small determined muzzle, enormous blunt hot-pink quills swept backward with small lemon-yellow tips, comically oversized padded boxing gloves, simple battered black leather waistcoat with one visible patch. Ridiculous confidence, fierce little scowl. Strict side profile facing left, grounded low boxing guard, both gloves clearly readable and held away from her face, ready to fight. Strong clean silhouette readable at small size, bold cel shading, restrained surface detail, crisp edges, kid-friendly polished 2D character art. Single character, entire body and every quill visible, centered on pure white with generous margins --no text, logo, UI, scenery --ar 3:4 --stylize 150"
+}

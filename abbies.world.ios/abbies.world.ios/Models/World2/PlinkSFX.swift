@@ -24,15 +24,15 @@ enum PlinkSFX {
             switch self {
             case .hit: return ["plink_hit_a", "plink_hit_b", "plink_hit_c"]
             case .pop: return ["plink_pop"]
-            case .crit: return ["plink_crit"]
+            case .crit: return ["plink_hit_a", "plink_pop"]
             case .launch: return ["plink_launch"]
-            case .miss: return ["plink_miss"]
-            case .win: return ["plink_win"]
+            case .miss: return ["plink_hurt", "plink_hit_b"]
+            case .win: return ["plink_pop", "plink_hit_a"]
             case .hurt: return ["plink_hurt"]
-            case .ui: return ["plink_ui", "plink_ui_click"]
-            case .drop: return ["plink_pop", "plink_ui_click"]
+            case .ui: return ["plink_ui"]
+            case .drop: return ["plink_pop"]
             case .march: return ["plink_launch"]
-            case .ready: return ["plink_crit"]
+            case .ready: return ["plink_hit_b"]
             }
         }
 
@@ -40,12 +40,12 @@ enum PlinkSFX {
             switch self {
             case .hit: return 0.55
             case .pop: return 0.58
-            case .crit: return 0.62
+            case .crit: return 0.6
             case .launch: return 0.5
-            case .miss: return 0.58
-            case .win: return 0.7
+            case .miss: return 0.55
+            case .win: return 0.72
             case .hurt: return 0.58
-            case .ui: return 0.48
+            case .ui: return 0.42
             case .drop: return 0.52
             case .march: return 0.45
             case .ready: return 0.55

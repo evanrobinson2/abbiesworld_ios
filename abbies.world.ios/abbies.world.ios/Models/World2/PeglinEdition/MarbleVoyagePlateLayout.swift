@@ -3,10 +3,13 @@ import SwiftUI
 import UIKit
 #endif
 
-/// Hard layout contract for Marble Voyage plates — **never crop the painting**.
+/// Hard layout contract for Marble Voyage plates.
 ///
-/// Plates are authored at **4:3 landscape** and always shown with `.scaledToFit`
-/// (letterbox / pillarbox). `scaledToFill` + `.clipped()` is forbidden for these surfaces.
+/// Plates are authored at **4:3 landscape**.
+/// - **Fit** (`MarbleVoyageUnclippedPlate`): never crop — letterbox/pillarbox OK
+///   (fight boards, event backdrops).
+/// - **Bleed** (`MarbleVoyageBleedPlate`): full-bleed fill for title menu only —
+///   may crop edges on wide iPads so the painting owns the whole viewport.
 enum MarbleVoyagePlateLayout {
     /// Width ÷ height. Matches shipped plates (1024×771 ≈ 4:3).
     static let aspectWidthOverHeight: CGFloat = 4.0 / 3.0
@@ -56,7 +59,7 @@ enum MarbleVoyagePlateLayout {
 }
 
 /// Full plate visible — fit inside the frame, atmospheric fill in the empty bands.
-/// Use this for title / chart / fight backdrops. Do **not** reach for `scaledToFill`.
+/// Use for fight / event backdrops. Title menu uses `MarbleVoyageBleedPlate` instead.
 struct MarbleVoyageUnclippedPlate: View {
     var catalogName: String? = nil
     var semanticName: String = ""
@@ -95,5 +98,45 @@ struct MarbleVoyageUnclippedPlate: View {
                 .foregroundStyle(.white.opacity(0.45))
                 .padding(80)
         }
+    }
+}
+
+/// Title-menu plate — fills the viewport edge-to-edge (crops sides/top on wide iPads).
+struct MarbleVoyageBleedPlate: View {
+    var catalogName: String? = nil
+    var semanticName: String = ""
+    var fallbackIcon: String = "photo.artframe"
+    var fallbackLabel: String = "Plate"
+
+    var body: some View {
+        GeometryReader { geo in
+            ZStack {
+                Color(red: 0.04, green: 0.07, blue: 0.14)
+                Group {
+                    if let catalogName, UIImage(named: catalogName) != nil {
+                        Image(catalogName)
+                            .resizable()
+                            .scaledToFill()
+                    } else if !semanticName.isEmpty {
+                        World2SemanticImage(
+                            semanticName: semanticName,
+                            fallbackIcon: fallbackIcon,
+                            fallbackLabel: fallbackLabel
+                        )
+                        .scaledToFill()
+                    } else {
+                        Image(systemName: fallbackIcon)
+                            .resizable()
+                            .scaledToFit()
+                            .foregroundStyle(.white.opacity(0.45))
+                            .padding(80)
+                    }
+                }
+                .frame(width: geo.size.width, height: geo.size.height)
+                .clipped()
+            }
+        }
+        .accessibilityHidden(true)
+        .accessibilityIdentifier("world2.marbleVoyage.titleBleed")
     }
 }

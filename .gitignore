@@ -129,3 +129,8 @@ experiments/meshy_actor/output/
 # Scratch captures / pre-chroma-key backups
 tmp-ipad-screenshot.png
 *.prestrip.bak
+
+# Marble Voyage silent stage stills (regenerate via scripts/capture_marble_voyage.sh)
+artifacts/voyage-capture/
+# Breakout recordings (regenerate via scripts/record_voyage_breakout.sh)
+artifacts/voyage-breakout/

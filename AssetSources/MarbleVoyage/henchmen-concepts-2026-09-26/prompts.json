@@ -1,0 +1,26 @@
+{
+  "styleReference": "https://cdn.midjourney.com/881f3b1d-cbd4-4a5a-ab80-b3f28f63ec12/0_3.jpeg",
+  "rateLimit": "Four-image submissions at least 120 seconds apart from user instruction onward.",
+  "prompts": [
+    {
+      "key": "crab-pincher",
+      "name": "Crab Pincher",
+      "prompt": "Full-body unnamed gender-neutral crab henchperson for a colorful comedic fantasy game, unmistakably crab anatomy, broad low cobalt-blue shell, tiny suspicious eyes on short stalks, short scuttling legs with tangerine joints, one enormous hot-coral pincer and one comically tiny claw. Simple battered black leather cuff around the large claw and a crooked patched leather belt around the shell, no human torso. Grumpy petty-bully expression and ridiculous confidence. Strict side profile facing left, low grounded combat-ready idle pose, huge forward claw held like a boxing guard, small claw visible underneath, all legs separated and readable. Broad squat silhouette distinct from an upright mammal. Bold cel shading with selective painterly wear, strong contours, restrained surface detail, kid-friendly polished 2D game character concept. One character, entire body and both claws visible, centered on pure white with generous margins. --no text, logo, UI, scenery --ar 3:4 --stylize 150"
+    },
+    {
+      "key": "grasshopper-kickboxer",
+      "name": "Grasshopper Kickboxer",
+      "prompt": "Full-body unnamed male grasshopper henchman for a colorful comedic fantasy game, unmistakably insect anatomy, slender angular lime-green thorax and abdomen, wedge-shaped insect head, two long bent antennae, cocky narrowed eyes, enormous folded violet zigzag hind legs, small coral markings. Tiny battered black leather vest and broad patched kickboxing shin guards. Ridiculous overconfidence. Strict side profile facing left, spring-loaded combat-ready idle stance, both giant hind legs folded and feet grounded, four small forelimbs in a neat fighting guard, no human torso and no human hands. Tall angular silhouette, long hind legs clearly separated from the tiny forelimbs. Bold cel shading with selective painterly wear, strong contours, restrained surface detail, kid-friendly polished 2D game character concept. One character, entire body antennae and feet visible, centered on pure white with generous margins. --no text, logo, UI, scenery --ar 3:4 --stylize 150"
+    },
+    {
+      "key": "armadillo-blocker",
+      "name": "Armadillo Blocker",
+      "prompt": "Full-body unnamed female armadillo henchperson for a colorful comedic fantasy game, unmistakably animal proportions, enormous smooth domed segmented violet shell over a tiny stubborn face, turquoise underside, short sturdy legs, vivid orange long pointed ears, thick tapering ringed tail. Simple battered black leather harness buckled around the shell with one repair patch and plain padded wrist guards. Unimpressed little scowl, ridiculous confidence. Strict side profile facing left, low braced combat-ready idle pose, four-footed animal body with forepaws guarding the muzzle, armored shoulders ready for a body check, face clearly visible. Compact walking-shield silhouette, broad curved shell, small head, no human torso. Bold cel shading with selective painterly wear, strong contours, restrained surface detail, kid-friendly polished 2D game character concept. One character, entire shell ears tail and feet visible, centered on pure white with generous margins. --no text, logo, UI, scenery --ar 3:4 --stylize 150"
+    },
+    {
+      "key": "bat-divekicker",
+      "name": "Bat Divekicker",
+      "prompt": "Full-body unnamed gender-neutral bat henchperson for a colorful comedic fantasy game, unmistakably bat anatomy, tiny fuzzy cyan body, oversized pointed ears, small pug-like bat nose and a smug mischievous grin, enormous angular wings with hot-coral membranes and violet finger bones. Tiny battered black leather vest with one repair patch and comically heavy simple ankle cuffs on tiny clawed feet. Ridiculous confidence. Strict side profile facing left, airborne combat-ready idle hover, wings lifted into a tall open kite silhouette, face and both small feet clearly readable, wings are the forelimbs, no extra arms, no human torso. Strong open spaces between body wings and feet. Bold cel shading with selective painterly wear, strong contours, restrained surface detail, kid-friendly polished 2D game character concept. One character, complete wings ears and feet visible, centered on pure white with generous margins. --no text, logo, UI, scenery --ar 3:4 --stylize 150"
+    }
+  ]
+}

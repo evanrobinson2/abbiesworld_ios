@@ -126,14 +126,17 @@ struct MarbleVoyageTitleStage: View {
         let panX = reduceMotion ? 0 : bias.dx * size.width * 0.012 * kenProgress
         let panY = reduceMotion ? 0 : bias.dy * size.height * 0.012 * kenProgress
 
-        return MarbleVoyageUnclippedPlate(
+        return MarbleVoyageBleedPlate(
             catalogName: UIImage(named: plate.catalogName) != nil ? plate.catalogName : nil,
             semanticName: plate == .skyDock ? MarbleVoyageArt.titleBackdrop : "",
             fallbackIcon: "photo.artframe",
             fallbackLabel: plate.displayName
         )
+        // Slight overscan so Ken Burns pan never flashes empty bands.
+        .scaleEffect(reduceMotion ? 1.0 : 1.06)
         .frame(width: size.width, height: size.height)
         .offset(x: active ? panX : 0, y: active ? panY : 0)
+        .clipped()
     }
 
     private func restartCarousel() {

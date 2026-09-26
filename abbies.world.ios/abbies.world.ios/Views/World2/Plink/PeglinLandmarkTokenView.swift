@@ -171,7 +171,8 @@ struct PeglinAbbieBattlePortrait: View {
 
     var body: some View {
         PeglinBattlePortraitFrame(
-            image: abbieImage,
+            uiImage: abbieUIImage,
+            fallbackSystemName: "face.smiling",
             size: size,
             stroke: Color(red: 0.45, green: 0.82, blue: 0.55).opacity(0.7),
             accessibilityLabel: "Abbie \(state.rawValue)",
@@ -179,15 +180,10 @@ struct PeglinAbbieBattlePortrait: View {
         )
     }
 
-    private var abbieImage: Image {
+    private var abbieUIImage: UIImage? {
         let name = state.abbiePortraitCatalogName
-        if UIImage(named: name) != nil {
-            return Image(name)
-        }
-        if UIImage(named: PeglinAbbieArt.mapCatalogName) != nil {
-            return Image(PeglinAbbieArt.mapCatalogName)
-        }
-        return Image(systemName: "face.smiling")
+        if let img = UIImage(named: name) { return img }
+        return UIImage(named: PeglinAbbieArt.mapCatalogName)
     }
 }
 
@@ -199,7 +195,8 @@ struct PeglinEnemyBattlePortrait: View {
 
     var body: some View {
         PeglinBattlePortraitFrame(
-            image: enemyImage,
+            uiImage: enemyUIImage,
+            fallbackSystemName: enemyFallback,
             size: size,
             stroke: kind.isDistortedAbbie
                 ? Color(red: 0.95, green: 0.2, blue: 0.55).opacity(0.9)
@@ -210,19 +207,23 @@ struct PeglinEnemyBattlePortrait: View {
         )
     }
 
-    private var enemyImage: Image {
-        if let name = kind.portraitCatalogName(for: state), UIImage(named: name) != nil {
-            return Image(name)
+    private var enemyUIImage: UIImage? {
+        if let name = kind.portraitCatalogName(for: state), let img = UIImage(named: name) {
+            return img
         }
-        if let idle = kind.portraitCatalogName(for: .idle), UIImage(named: idle) != nil {
-            return Image(idle)
+        if let idle = kind.portraitCatalogName(for: .idle), let img = UIImage(named: idle) {
+            return img
         }
+        return nil
+    }
+
+    private var enemyFallback: String {
         switch kind {
-        case .brambleSpirit: return Image(systemName: "hare.fill")
-        case .foxSpirit: return Image(systemName: "pawprint.fill")
-        case .stagSpirit: return Image(systemName: "leaf.fill")
-        case .burrowJackal: return Image(systemName: "flame.fill")
-        case .bizarroAbbie: return Image(systemName: "person.fill.questionmark")
+        case .brambleSpirit: return "hare.fill"
+        case .foxSpirit: return "pawprint.fill"
+        case .stagSpirit: return "leaf.fill"
+        case .burrowJackal: return "flame.fill"
+        case .bizarroAbbie: return "person.fill.questionmark"
         }
     }
 }
@@ -232,27 +233,24 @@ struct PlinkAttackerBattlePortrait: View {
     var kind: PlinkAttackerKind
     var pose: PlinkAttackerPose = .idle
     var size: CGFloat = 72
+    var stroke: Color = Color(red: 1.0, green: 0.55, blue: 0.28).opacity(0.9)
 
     var body: some View {
         PeglinBattlePortraitFrame(
-            image: attackerImage,
+            uiImage: kind.catalogImage(for: pose),
+            fallbackSystemName: "bird.fill",
             size: size,
-            stroke: Color(red: 1.0, green: 0.55, blue: 0.28).opacity(0.9),
+            stroke: stroke,
             accessibilityLabel: "\(kind.displayName) \(pose.rawValue)",
             accessibilityIdentifier: "world2.plink.battle.attackerPortrait"
         )
     }
-
-    private var attackerImage: Image {
-        if let ui = kind.catalogImage(for: pose) {
-            return Image(uiImage: ui)
-        }
-        return Image(systemName: "bird.fill")
-    }
 }
 
+/// Face-first portrait frame: HeadDAG top-center crop on tall full-bodies, then fill.
 private struct PeglinBattlePortraitFrame: View {
-    var image: Image
+    var uiImage: UIImage?
+    var fallbackSystemName: String
     var size: CGFloat
     var stroke: Color
     var accessibilityLabel: String
@@ -278,11 +276,9 @@ private struct PeglinBattlePortraitFrame: View {
                     )
                 )
 
-            image
-                .resizable()
-                .scaledToFit()
-                .padding(6)
+            portraitContent
                 .frame(width: size, height: size)
+                .clipped()
                 .modifier(BizarroAbbieDistort(enabled: distort))
         }
         .frame(width: size, height: size)
@@ -294,6 +290,33 @@ private struct PeglinBattlePortraitFrame: View {
         .shadow(color: .black.opacity(0.45), radius: 12, y: 6)
         .accessibilityLabel(accessibilityLabel)
         .accessibilityIdentifier(accessibilityIdentifier)
+    }
+
+    @ViewBuilder
+    private var portraitContent: some View {
+        if let uiImage {
+            Image(uiImage: Self.faceZoomed(uiImage))
+                .resizable()
+                .scaledToFill()
+        } else {
+            Image(systemName: fallbackSystemName)
+                .resizable()
+                .scaledToFit()
+                .foregroundStyle(.white.opacity(0.85))
+                .padding(size * 0.22)
+        }
+    }
+
+    /// HeadDAG fallback crop for tall full-body plates; square busts pass through.
+    private static func faceZoomed(_ image: UIImage) -> UIImage {
+        let w = max(1, image.size.width)
+        let h = max(1, image.size.height)
+        let aspect = w / h
+        // Tall / full-body → top-center head box (DAG fallback rect).
+        if aspect < 0.92 {
+            return HeadDAGService.shared.crop(image, bbox: .topCenterHead)
+        }
+        return image
     }
 }
 

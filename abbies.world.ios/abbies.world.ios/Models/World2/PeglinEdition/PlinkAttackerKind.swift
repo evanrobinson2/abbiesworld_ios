@@ -38,6 +38,8 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
     case vix
     case morrow
     case nib
+    // Unnamed henchpeople
+    case porcupineBoxer
     // Lineup-sheet alternates (optional; not default cycle)
     case coyoteBruiser
     case gangFox
@@ -54,7 +56,7 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
 
     var roster: PlinkAttackerRoster {
         switch self {
-        case .raze, .vix, .morrow, .nib,
+        case .raze, .vix, .morrow, .nib, .porcupineBoxer,
              .coyoteBruiser, .gangFox, .hyena, .lizard, .vulture:
             return .badguyGang
         case .cawScout, .thornbackBeetle, .briarToad, .thornhornMantis:
@@ -76,6 +78,7 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
         case .vix: return "Vix"
         case .morrow: return "Morrow"
         case .nib: return "Nib"
+        case .porcupineBoxer: return "Porcupine Boxer"
         case .coyoteBruiser: return "Spike Coyote"
         case .gangFox: return "Gang Fox"
         case .hyena: return "Hyena"
@@ -94,6 +97,7 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
         case .vix: return "Vix"
         case .morrow: return "Morrow"
         case .nib: return "Nib"
+        case .porcupineBoxer: return "Porcupine"
         case .coyoteBruiser: return "Coyote"
         case .gangFox: return "Punk"
         case .hyena: return "Hyena"
@@ -117,11 +121,46 @@ enum PlinkAttackerKind: String, CaseIterable, Identifiable, Sendable {
     /// Kid-facing role blurb for chrome / feed.
     var roleBlurb: String {
         switch self {
+        case .porcupineBoxer: return "Boxer"
         case .raze: return "Bruiser"
         case .vix: return "Lieutenant"
         case .morrow: return "Quartermaster"
         case .nib: return "Hanger-on"
         default: return "Wave"
+        }
+    }
+
+    /// Longer cast-card copy for the climb intro (1–2 sentences).
+    var castBlurb: String {
+        switch self {
+        case .raze:
+            return "Lead bruiser of the crew. Hits hard, laughs louder, and never waits his turn."
+        case .vix:
+            return "The lieutenant. Cool head, sharp plans, and sharper teeth — Vix runs the summit."
+        case .morrow:
+            return "Quartermaster of the climb. Counts every coin, then takes them."
+        case .nib:
+            return "Vix’s hanger-on. Small claws, big mouth — and somehow still at the top."
+        case .porcupineBoxer:
+            return "First scrap on the trail. Quills up, gloves on, ready to bounce Abbie back."
+        case .coyoteBruiser:
+            return "A spike-shouldered coyote who loves a loud scrap."
+        case .gangFox:
+            return "Punk fox with a smirk. Fast paws, faster getaways."
+        case .hyena:
+            return "Laughs while it lunges. Don’t let the giggle fool you."
+        case .lizard:
+            return "Slippery fighter. Leaves a trail of trouble."
+        case .vulture:
+            return "Circles overhead and dives when Abbie’s busy."
+        case .cawScout:
+            return "Grove lookout. Screeches, then dives."
+        case .thornbackBeetle:
+            return "Armored beetle. Bounces marbles right back."
+        case .briarToad:
+            return "Puffed-up toad. Sticky tongue, sticky mood."
+        case .thornhornMantis:
+            return "Forest mantis. Quick cuts from the brush."
         }
     }
 

@@ -1,0 +1,38 @@
+---
+description: After Marble Voyage builds, remind Evan stage stills are available (agent is the developer)
+alwaysApply: true
+---
+
+# Voyage capture — agent owns the reminder
+
+Evan is not the day-to-day builder in this repo — **you are**. After you finish a **Marble Voyage / Plink build**, install, or playtest handoff, you must surface stage stills yourself. Do not wait for him to remember the script exists.
+
+## Default (every major voyage build)
+
+In the handoff message, include one short line:
+
+> Stage stills available: `./scripts/build_marble_voyage.sh --capture` (or `--skip-build` if the `.app` is already built). Say the word and I’ll run it and open the PNGs.
+
+Do **not** run capture automatically on every compile.
+
+## When to actually capture
+
+Run capture when Evan asks for stills / screenshots / “with capture” / layout review from the current build, or when you need PNGs to continue autonomous layout/art review:
+
+```bash
+./scripts/build_marble_voyage.sh --capture
+# or, app already built:
+./scripts/capture_marble_voyage.sh --skip-build
+```
+
+Then open `artifacts/voyage-capture/<stamp>/*.png` and review them.
+
+## Interference
+
+Capture relaunches the app on the capture simulator (default `iPad (A16)`). Prefer that dedicated sim; don’t yank a device Evan is actively playing. Reminder-only builds use `./scripts/build_marble_voyage.sh` with no `--capture`.
+
+## Related
+
+- `scripts/voyage_capture_reminder.sh`
+- `scripts/build_marble_voyage.sh` / `scripts/capture_marble_voyage.sh`
+- `.cursor/rules/marble-voyage-design-preflight.mdc`

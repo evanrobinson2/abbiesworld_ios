@@ -78,9 +78,103 @@ final class MarbleVoyageDesignRulesTests: XCTestCase {
     }
 
     func testClimbIntroTimingContract() {
-        XCTAssertEqual(MarbleVoyageDesignRules.climbIntroPanSeconds, 7.0, accuracy: 0.01)
-        XCTAssertEqual(MarbleVoyageDesignRules.climbIntroSettleSeconds, 3.7, accuracy: 0.01)
-        XCTAssertEqual(MarbleVoyageDesignRules.climbIntroPlayerScrollAnchorY, 0.5, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbIntroSettleSeconds, 0.8, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbRevealPanSeconds, 1.45, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbRevealLetterSeconds, 0.1, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbRevealFinalPanSeconds, 1.6, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbIntroPlayerScrollAnchorY, 0.58, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbRevealFocusAnchorY, 0.38, accuracy: 0.01)
+        // Default cast: boss (top) → Abbie (bottom). Scrub frames match.
+        XCTAssertEqual(
+            MarbleVoyageDesignRules.climbCastTourOrder,
+            .bossToAbbie
+        )
+    }
+
+    func testClimbFoeCardDocksOppositeFocusedTile() {
+        // Focus on the left half → card must hug trailing so the portrait stays visible.
+        XCTAssertEqual(
+            MarbleVoyageOverlandScroll.preferredCardDock(focusX: 200, contentWidth: 1180),
+            .trailing
+        )
+        // Focus on the right half → card hugs leading.
+        XCTAssertEqual(
+            MarbleVoyageOverlandScroll.preferredCardDock(focusX: 900, contentWidth: 1180),
+            .leading
+        )
+
+        let viewport = CGSize(width: 1180, height: 820)
+        let tileSize: CGFloat = 200
+        // Tile framed near focus anchor on the left.
+        let tile = MarbleVoyageOverlandScroll.focusedTileRectInViewport(
+            contentPoint: CGPoint(x: 280, y: viewport.height * 0.38),
+            tileSize: tileSize,
+            cameraOffsetY: 0
+        )
+        let badCard = MarbleVoyageOverlandScroll.cardRect(dock: .leading, viewport: viewport)
+        let goodCard = MarbleVoyageOverlandScroll.cardRect(dock: .trailing, viewport: viewport)
+        XCTAssertTrue(
+            MarbleVoyageOverlandScroll.cardOccludesFocusedTile(card: badCard, tile: tile),
+            "Leading card covers a left-side focused foe — that is the bug we ship against"
+        )
+        XCTAssertFalse(
+            MarbleVoyageOverlandScroll.cardOccludesFocusedTile(card: goodCard, tile: tile),
+            "Trailing dock must leave the focused foe tile clear"
+        )
+    }
+
+    func testFoeCardNameWrapCheck() {
+        // Card column ≈ maxWidth 360 − padding − 100pt portrait − gaps ≈ 200pt.
+        let available: CGFloat = 200
+        XCTAssertTrue(
+            MarbleVoyageOverlandScroll.foeNameFitsOneLine("MORROW", fontSize: 44, availableWidth: available)
+        )
+        XCTAssertTrue(
+            MarbleVoyageOverlandScroll.foeNameFitsOneLine("PORCUPINE", fontSize: 44, availableWidth: available)
+                || MarbleVoyageOverlandScroll.foeNameFitsOneLine("PORCUPINE", fontSize: 44 * 0.42, availableWidth: available),
+            "PORCUPINE must fit at full size or after minimumScaleFactor 0.42"
+        )
+        // Absurd width must fail the pre-scale check so we know the helper works.
+        XCTAssertFalse(
+            MarbleVoyageOverlandScroll.foeNameFitsOneLine("PORCUPINE BOXER SUPREME", fontSize: 44, availableWidth: 80)
+        )
+    }
+
+    func testFightAimTrackpadIsFixedSize() {
+        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadWidth, 176, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadHeight, 76, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadThumbSize, 40, accuracy: 0.01)
+        // Wide enough for a thumb, short enough to stay a corner control.
+        XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadWidth, 140)
+        XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadWidth, 220)
+        XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 56)
+        XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 100)
+    }
+
+    func testOverlandScrollCameraOffsetClamps() {
+        let mid = MarbleVoyageOverlandScroll.cameraOffset(
+            centering: 400,
+            viewportHeight: 700,
+            maxOffset: 2000,
+            anchorY: 0.5
+        )
+        XCTAssertEqual(mid, 50, accuracy: 0.01)
+
+        let top = MarbleVoyageOverlandScroll.cameraOffset(
+            centering: 10,
+            viewportHeight: 700,
+            maxOffset: 2000,
+            anchorY: 0.5
+        )
+        XCTAssertEqual(top, 0, accuracy: 0.01)
+
+        let bottom = MarbleVoyageOverlandScroll.cameraOffset(
+            centering: 5000,
+            viewportHeight: 700,
+            maxOffset: 900,
+            anchorY: 0.5
+        )
+        XCTAssertEqual(bottom, 900, accuracy: 0.01)
     }
 
     func testVersusEnemyFigurinesResolve() {
