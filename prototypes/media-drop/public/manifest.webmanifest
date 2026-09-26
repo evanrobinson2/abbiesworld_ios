@@ -1,0 +1,52 @@
+{
+  "name": "AW Drop",
+  "short_name": "AW Drop",
+  "description": "Drop Suno + Midjourney media into Abbie's World",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f7f1e8",
+  "theme_color": "#1b3a4b",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "share_target": {
+    "action": "/share",
+    "method": "POST",
+    "enctype": "multipart/form-data",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url",
+      "files": [
+        {
+          "name": "file",
+          "accept": [
+            "image/*",
+            "audio/*",
+            "video/*",
+            ".png",
+            ".jpg",
+            ".jpeg",
+            ".webp",
+            ".gif",
+            ".heic",
+            ".mp3",
+            ".wav",
+            ".m4a",
+            ".mp4",
+            ".mov"
+          ]
+        }
+      ]
+    }
+  }
+}

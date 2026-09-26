@@ -4,25 +4,60 @@ import SpriteKit
 import UIKit
 #endif
 
-/// Peglin sandbox battle: deck of 10 orbs → scene-plate board → peg points = enemy HP.
+/// Board knobs a Marble Voyage run hands to one fight (gold economy + charm stacks).
+struct PlinkVoyageTunables: Equatable, Sendable {
+    /// Fraction of blue/orange pegs that roll gold.
+    var goldPegPrevalence: Double = MarbleVoyageEconomyTuning.recommended.goldPegPrevalence
+    /// Coins per gold peg, Moon Gleam already applied.
+    var goldPegValue: Int = MarbleVoyageEconomyTuning.recommended.goldPegValue
+    /// Marble levels × run ball level.
+    var ballDamageMultiplier: Double = 1
+    /// Extra crit/refresh pegs from Cycle.
+    var cycleExtra: Int = 0
+    /// Coins per bomb clear from Sock Snatch.
+    var sockSnatch: Int = 0
+    /// Cage bonus on long orange streaks from Prism Burst.
+    var prismBonus: Int = 0
+    /// Flat bite reduction from Soft Purr.
+    var softPurr: Int = 0
+}
+
+/// Peglin rescue battle: deck → board → damage **front bad guy**; bombs lob AOE at the cluster.
+/// Rescue target is held back with **no HP** — free them by defeating every foe.
 struct PlinkBattleHostView: View {
     var title: String = "Battle Clearing"
+    /// Friend being held back (no HP) — Fox / Burrow Jackal / Hare / Stag.
+    /// Prefer `foxSpirit` / `burrowJackal`; never use gangFox here.
     var enemyKind: PeglinEnemyKind? = nil
+    /// Explicit wave attacker override. When nil, cycles badguy gang via `climbStage`.
+    var waveAttackerOverride: PlinkAttackerKind? = nil
+    /// Climb stage hint for cycling gang members (1-based). Scaffolding only.
+    var climbStage: Int = 1
+    /// Attacker portrait scale (3× big boss). Applied to the active named crew bust.
+    var attackerPortraitScale: CGFloat = 1
+    /// Mini-arc head / big boss for chrome when the wave foe is a henchman.
+    var focusCrewMember: PlinkAttackerKind? = nil
+    /// Gang-run role for chrome labels (hench / mini / big).
+    var gangFightRole: MarbleVoyageGangFightRole? = nil
     /// Same semantic plate as the land the player just left (e.g. `map.peglin.bramble`).
     var sceneBackgroundAsset: String = ""
     /// Player key for durable power-up inventory.
     var playerID: String? = nil
     /// Voyage / carried HP — when set, fight starts at this value (clamped to max).
     var startingPlayerHP: Int? = nil
-    /// Optional foe / Abbie caps (Marble Voyage difficulty curve).
+    /// Optional Abbie HP cap (Marble Voyage difficulty curve). Cage HP overrides ignored.
     var overrideEnemyMaxHP: Int? = nil
     var overridePlayerMaxHP: Int? = nil
-    /// Optional foe ATK per round (voyage rising difficulty).
+    /// Optional attacker ATK per round (voyage rising difficulty; scaffolding for multi-foe).
     var overrideEnemyAttack: Int? = nil
+    /// Gold economy + charm stacks from the voyage run (nil outside Marble Voyage).
+    var voyageEconomy: PlinkVoyageTunables? = nil
     var onExit: () -> Void
     var onVictory: (() -> Void)? = nil
-    /// `(won, remainingPlayerHP)` — used by voyage runs that persist HP.
-    var onBattleEnded: ((Bool, Int) -> Void)? = nil
+    /// `(won, remainingPlayerHP, coinsEarned)` — used by voyage runs that persist HP + wallet.
+    var onBattleEnded: ((Bool, Int, Int) -> Void)? = nil
+    /// Automation / debug: seed a mix deck and jump straight into the versus intro.
+    var autoStartFight: Bool = false
 
     private enum Stage {
         case deck
@@ -37,8 +72,13 @@ struct PlinkBattleHostView: View {
     @State private var bridge: PlinkBattleBridge?
     @State private var abbieState: PeglinCharacterState = .happy
     @State private var enemyState: PeglinCharacterState = .idle
+    /// Current wave attacker pose (dive flash on cage rattle).
+    @State private var attackerPose: PlinkAttackerPose = .idle
     @State private var enemyHP = 0
     @State private var enemyMaxHP = 0
+    @State private var foeRoster: [PlinkBattleFoe] = []
+    @State private var frontFoeID: UUID?
+    @State private var bombLobFlash = false
     @State private var playerHP = 0
     @State private var playerMaxHP = 0
     @State private var ballsLeft = 10
@@ -128,6 +168,8 @@ struct PlinkBattleHostView: View {
                             PlinkBattleVersusIntroView(
                                 title: title,
                                 enemyKind: enemyKind,
+                                badGuys: PlinkAttackerKind.namedCrew,
+                                focusBadGuy: chromeFocusCrew,
                                 reduceMotion: reduceMotion,
                                 onRevealBoard: {
                                     music.playBoard()
@@ -153,9 +195,8 @@ struct PlinkBattleHostView: View {
         .onAppear {
             MusicService.shared.stop()
             music.playSafari()
-            enemyMaxHP = overrideEnemyMaxHP ?? PeglinBattleRules.enemyMaxHP(for: enemyKind)
+            rebuildFoeRoster()
             playerMaxHP = overridePlayerMaxHP ?? PeglinBattleRules.playerMaxHP(for: enemyKind)
-            enemyHP = enemyMaxHP
             if let startingPlayerHP {
                 playerHP = max(1, min(playerMaxHP, startingPlayerHP))
             } else {
@@ -166,11 +207,18 @@ struct PlinkBattleHostView: View {
                 "battle_lobby",
                 [
                     "enemy": enemyKind?.rawValue ?? "crash",
-                    "hp": "\(enemyMaxHP)",
+                    "foes": "\(foeRoster.count)",
+                    "front_hp": "\(enemyMaxHP)",
                     "player_hp": "\(playerHP)",
                     "plate": sceneBackgroundAsset,
                 ]
             )
+            if autoStartFight, stage == .deck {
+                deck = (0..<PeglinBattleRules.mixFillCount).map { _ in
+                    OrbKind.all.randomElement()?.id ?? OrbKind.sparkle.id
+                }
+                startFight()
+            }
         }
         .onDisappear {
             tearDown()
@@ -203,7 +251,152 @@ struct PlinkBattleHostView: View {
     }
 
     private var resolvedEnemyAttack: Int {
-        overrideEnemyAttack ?? PeglinBattleRules.enemyCounterAttack(for: enemyKind)
+        if let overrideEnemyAttack { return overrideEnemyAttack }
+        if let front = frontFoe {
+            return PeglinBattleRules.foeAttack(for: front.kind, role: gangFightRole)
+        }
+        return PeglinBattleRules.enemyCounterAttack(for: enemyKind)
+    }
+
+    /// Current-wave attacker from the named badguy gang (Raze→Vix→Morrow→Nib).
+    /// Strip shows the full crew; forest fauna via biome override later.
+    private var waveAttacker: PlinkAttackerKind {
+        waveAttackerOverride
+            ?? PlinkAttackerKind.forClimbStage(climbStage, roster: .badguyGang)
+    }
+
+    /// Named crew to highlight in chrome (mini-arc head or big boss); falls back to wave foe.
+    private var chromeFocusCrew: PlinkAttackerKind {
+        if let focusCrewMember, focusCrewMember.isNamedCrew { return focusCrewMember }
+        if waveAttacker.isNamedCrew { return waveAttacker }
+        return PlinkAttackerKind.forClimbStage(climbStage, roster: .badguyGang)
+    }
+
+    private var frontFoe: PlinkBattleFoe? {
+        if let id = frontFoeID { return foeRoster.first(where: { $0.id == id }) }
+        return foeRoster.first(where: { !$0.isDefeated })
+    }
+
+    private func rebuildFoeRoster() {
+        let roster = PeglinBattleRules.makeRescueRoster(
+            wave: waveAttacker,
+            focus: chromeFocusCrew,
+            role: gangFightRole
+        )
+        foeRoster = roster
+        frontFoeID = roster.first?.id
+        if let front = roster.first {
+            enemyMaxHP = front.maxHP
+            enemyHP = front.hp
+        }
+    }
+
+    private func syncFrontFoeIntoScene() {
+        guard let front = frontFoe else { return }
+        enemyMaxHP = front.maxHP
+        enemyHP = front.hp
+        bridge?.scene.loadFrontFoe(maxHP: front.maxHP, currentHP: front.hp)
+    }
+
+    private func applyFrontDamage(_ amount: Int) {
+        guard amount > 0, let id = frontFoe?.id,
+              let idx = foeRoster.firstIndex(where: { $0.id == id }) else { return }
+        foeRoster[idx].hp = max(0, foeRoster[idx].hp - amount)
+        enemyHP = foeRoster[idx].hp
+    }
+
+    private func applyBombAOE(_ amount: Int) {
+        guard amount > 0 else { return }
+        withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
+            bombLobFlash = true
+        }
+        for i in foeRoster.indices where !foeRoster[i].isDefeated {
+            foeRoster[i].hp = max(0, foeRoster[i].hp - amount)
+        }
+        if let id = frontFoeID, let idx = foeRoster.firstIndex(where: { $0.id == id }) {
+            enemyHP = foeRoster[idx].hp
+            bridge?.scene.loadFrontFoe(maxHP: foeRoster[idx].maxHP, currentHP: foeRoster[idx].hp)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+            withAnimation(.easeOut(duration: 0.2)) { bombLobFlash = false }
+        }
+    }
+
+    /// Front foe down — promote next living foe (`false`), or rescue complete (`true`).
+    private func advanceFrontFoeOrRescue() -> Bool {
+        if let id = frontFoeID, let idx = foeRoster.firstIndex(where: { $0.id == id }) {
+            foeRoster[idx].hp = 0
+        }
+        if let next = foeRoster.first(where: { !$0.isDefeated }) {
+            frontFoeID = next.id
+            syncFrontFoeIntoScene()
+            let fly = next.kind.isFlying ? " · flying!" : " · lane \(next.lane)"
+            statusLine = "\(next.shortLabel) steps up!\(fly) \(next.hp)/\(next.maxHP)"
+            return false
+        }
+        frontFoeID = nil
+        enemyHP = 0
+        return true
+    }
+
+    /// End of shot: ground foes walk one square left; front foe bites if melee (or always if flying).
+    @discardableResult
+    private func resolveEnemyApproachAndMelee() -> Int {
+        let result = PeglinBattleRules.resolveEnemyTurn(
+            roster: &foeRoster,
+            frontID: frontFoeID,
+            attackOverride: overrideEnemyAttack,
+            role: gangFightRole
+        )
+        withAnimation(.spring(response: 0.45, dampingFraction: 0.78)) {
+            // Trigger view refresh for lane offsets.
+            foeRoster = foeRoster
+        }
+        if result.damage > 0 {
+            phaseLabel = "MELEE"
+            // Soft Purr takes the edge off every bite, but a bite always lands.
+            return max(1, result.damage - (voyageEconomy?.softPurr ?? 0))
+        }
+        if result.didAdvance, let foe = result.attacker {
+            phaseLabel = "APPROACH"
+            statusLine = foe.kind.isFlying
+                ? "\(foe.shortLabel) circles overhead"
+                : "\(foe.shortLabel) advances · \(foe.lane) squares out"
+        }
+        return 0
+    }
+
+    private var deckCrewCaption: String {
+        switch gangFightRole {
+        case .bigBoss:
+            return "BIG BOSS · \(chromeFocusCrew.displayName) · front fight · bomb AOE"
+        case .miniBoss:
+            return "Mini-boss · \(chromeFocusCrew.displayName) · one at a time"
+        case .henchman:
+            return "\(chromeFocusCrew.shortName)’s hench pack · one at a time"
+        case .none:
+            return "Rescue · defeat bad guys one at a time · bomb = AOE"
+        }
+    }
+
+    private var deckCrewStrip: some View {
+        let focus = chromeFocusCrew
+        let activeScale = max(1, attackerPortraitScale)
+        return HStack(alignment: .bottom, spacing: 4) {
+            if !waveAttacker.isNamedCrew {
+                PlinkAttackerBattlePortrait(kind: waveAttacker, pose: .idle, size: 56)
+            }
+            ForEach(PlinkAttackerKind.namedCrew) { member in
+                let isFocus = member == focus
+                let size: CGFloat = isFocus ? 44 * min(activeScale, 3) : 36
+                PlinkAttackerBattlePortrait(
+                    kind: member,
+                    pose: .idle,
+                    size: size
+                )
+                .opacity(isFocus ? 1 : 0.55)
+            }
+        }
     }
 
     // MARK: - Deck builder (directed parble pick)
@@ -232,11 +425,15 @@ struct PlinkBattleHostView: View {
                                     .font(.system(size: 14, weight: .medium, design: .rounded))
                                     .foregroundStyle(.white.opacity(0.9))
                                     .fixedSize(horizontal: false, vertical: true)
-                                Text("Foe \(enemyMaxHP) HP · ATK \(resolvedEnemyAttack) · You \(playerMaxHP) HP")
+                                Text("Cage \(enemyMaxHP) · Free the \(enemyKind?.shortName ?? "friend") · You \(playerMaxHP) HP")
                                     .font(.system(size: 13, weight: .semibold, design: .rounded))
                                     .foregroundStyle(Color(red: 0.55, green: 0.9, blue: 0.65))
+                                Text(deckCrewCaption)
+                                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                                    .foregroundStyle(Color(red: 1, green: 0.7, blue: 0.4))
                             }
                             Spacer(minLength: 8)
+                            deckCrewStrip
                             if let enemyKind {
                                 PeglinEnemyBattlePortrait(kind: enemyKind, state: .idle, size: 88)
                             }
@@ -702,7 +899,7 @@ struct PlinkBattleHostView: View {
 
     private var fightLayer: some View {
         ZStack {
-            VStack(spacing: 6) {
+            VStack(spacing: MarbleVoyageDesignRules.maxFightChromeBoardSpacing) {
                 fightTopBar
                     .opacity(Double(fightIntroProgress))
 
@@ -723,9 +920,9 @@ struct PlinkBattleHostView: View {
                             }
                         )
 
-                    // Compact tally — top-right overlay on the board.
+                    // Hit transcript — top-right overlay; width from design contract.
                     battleFeedPane
-                        .frame(width: 118)
+                        .frame(width: MarbleVoyageDesignRules.battleFeedMinWidth)
                         .padding(.top, 10)
                         .padding(.trailing, 10)
                         .opacity(Double(fightIntroProgress))
@@ -867,8 +1064,9 @@ struct PlinkBattleHostView: View {
     }
 
     private var cageFraction: CGFloat {
-        guard enemyMaxHP > 0 else { return 1 }
-        return CGFloat(enemyHP) / CGFloat(enemyMaxHP)
+        let living = foeRoster.filter { !$0.isDefeated }.count
+        let total = max(1, foeRoster.count)
+        return CGFloat(living) / CGFloat(total)
     }
 
     private func refreshHostageMood() {
@@ -876,6 +1074,7 @@ struct PlinkBattleHostView: View {
             enemyState = .happy
             return
         }
+        // Mood tracks how many bad guys still hold them — not a cage HP bar.
         enemyState = PeglinRescueMood.state(cageFractionRemaining: cageFraction)
     }
 
@@ -915,12 +1114,14 @@ struct PlinkBattleHostView: View {
         )
     }
 
-    /// Large portraits above the board — Abbie left, foe right-aligned with the board edge.
+    /// Top chrome: Abbie | BAD GUYS cluster | RESCUE hostage.
+    /// Grows sideways for multi-foe; keep height compact so the board sits flush underneath.
     private var fightPortraitBar: some View {
-        HStack(alignment: .bottom, spacing: 12) {
+        let art = MarbleVoyageDesignRules.fightPortraitArtSize
+        return HStack(alignment: .bottom, spacing: 8) {
             fightFighterBanner(
                 name: "Abbie",
-                portrait: AnyView(PeglinAbbieBattlePortrait(state: abbieState, size: 112)),
+                portrait: AnyView(PeglinAbbieBattlePortrait(state: abbieState, size: art)),
                 hp: playerHP,
                 maxHP: playerMaxHP,
                 tint: Color(red: 0.45, green: 0.85, blue: 0.55),
@@ -929,33 +1130,226 @@ struct PlinkBattleHostView: View {
                 impactFlash: playerImpactFlash,
                 portraitOnLeading: true,
                 isPlayer: true,
-                meterTitle: "HP"
+                meterTitle: "HP",
+                roleCaption: "Coming to rescue"
             )
-            Spacer(minLength: 8)
-            fightFighterBanner(
-                name: enemyKind?.shortName ?? "Friend",
-                portrait: AnyView(
-                    Group {
-                        if let enemyKind {
-                            PeglinEnemyBattlePortrait(kind: enemyKind, state: enemyState, size: 112)
-                        } else {
-                            foePlaceholder(size: 112)
-                        }
-                    }
-                ),
-                hp: enemyHP,
-                maxHP: enemyMaxHP,
-                tint: Color(red: 0.9, green: 0.5, blue: 0.72),
-                float: enemyHPFloat,
-                shake: enemyShake,
-                impactFlash: enemyImpactFlash,
-                portraitOnLeading: false,
-                isPlayer: false,
-                meterTitle: "Cage"
-            )
+
+            VStack(spacing: 4) {
+                comicStripLabel("BAD GUYS:", tint: Color(red: 1, green: 0.45, blue: 0.28))
+                fightWaveAttackerChip(size: art * 0.78)
+            }
+            .frame(maxWidth: .infinity)
+
+            VStack(spacing: 4) {
+                comicStripLabel("RESCUE:", tint: Color(red: 0.4, green: 0.9, blue: 0.85))
+                rescueTargetChip(size: art)
+            }
         }
         .padding(.horizontal, 2)
         .accessibilityIdentifier("world2.plink.battle.portraits")
+        .overlay {
+            if bombLobFlash {
+                Text("BOMB!")
+                    .font(.system(size: 28, weight: .black, design: .rounded))
+                    .foregroundStyle(Color(red: 1, green: 0.85, blue: 0.3))
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
+                    .background(Color.black.opacity(0.75), in: Capsule())
+                    .overlay(Capsule().stroke(Color(red: 1, green: 0.45, blue: 0.2), lineWidth: 3))
+                    .rotationEffect(.degrees(-8))
+                    .transition(.scale.combined(with: .opacity))
+                    .allowsHitTesting(false)
+            }
+        }
+    }
+
+    /// Rescue friend — held back, **no HP bar**.
+    private func rescueTargetChip(size: CGFloat) -> some View {
+        VStack(spacing: 4) {
+            Group {
+                if let enemyKind {
+                    PeglinEnemyBattlePortrait(kind: enemyKind, state: enemyState, size: size)
+                } else {
+                    foePlaceholder(size: size)
+                }
+            }
+            .opacity(cageShattered ? 1 : 0.92)
+            Text(enemyKind?.shortName ?? "Friend")
+                .font(.system(size: 14, weight: .heavy, design: .rounded))
+                .foregroundStyle(.white)
+            Text(cageShattered ? "FREE!" : "HELD BACK")
+                .font(.system(size: 11, weight: .black, design: .rounded))
+                .foregroundStyle(cageShattered
+                                 ? Color(red: 0.45, green: 0.95, blue: 0.55)
+                                 : Color(red: 0.7, green: 0.85, blue: 0.95))
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
+        .background(Color.black.opacity(0.4), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(Color(red: 0.4, green: 0.9, blue: 0.85).opacity(0.65), lineWidth: 1.5)
+        )
+        .accessibilityIdentifier("world2.plink.battle.rescue")
+        .accessibilityLabel("\(enemyKind?.displayName ?? "Friend") held back — no HP")
+    }
+
+    private func comicStripLabel(_ text: String, tint: Color) -> some View {
+        Text(text)
+            .font(.system(size: 11, weight: .black, design: .rounded))
+            .tracking(0.8)
+            .foregroundStyle(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 3)
+            .background(
+                UnevenRoundedRectangle(
+                    cornerRadii: .init(topLeading: 3, bottomLeading: 10, bottomTrailing: 3, topTrailing: 10),
+                    style: .continuous
+                )
+                .fill(tint)
+            )
+            .overlay(
+                UnevenRoundedRectangle(
+                    cornerRadii: .init(topLeading: 3, bottomLeading: 10, bottomTrailing: 3, topTrailing: 10),
+                    style: .continuous
+                )
+                .stroke(.white.opacity(0.85), lineWidth: 1.5)
+            )
+            .rotationEffect(.degrees(text.hasPrefix("BAD") ? -2 : 2))
+            .accessibilityHidden(true)
+    }
+
+    /// Bad-guy cluster — each has an HP bar; front foe takes peg damage; bombs AOE all.
+    private func fightWaveAttackerChip(size: CGFloat) -> some View {
+        let frontID = frontFoe?.id
+        let frontSize = size * min(max(1, attackerPortraitScale), 1.65)
+        let benchSize = size * 0.58
+        return VStack(spacing: 4) {
+            HStack(alignment: .bottom, spacing: 6) {
+                ForEach(foeRoster) { foe in
+                    let isFront = foe.id == frontID
+                    let laneOffset = CGFloat(foe.lane) * 10
+                    VStack(spacing: 3) {
+                        ZStack(alignment: .top) {
+                            PlinkAttackerBattlePortrait(
+                                kind: foe.kind,
+                                pose: isFront ? attackerPose : .idle,
+                                size: isFront ? frontSize : benchSize
+                            )
+                            .opacity(foe.isDefeated ? 0.28 : (isFront ? 1 : 0.7))
+                            .grayscale(foe.isDefeated ? 0.85 : 0)
+                            .scaleEffect(isFront && attackerPose == .attack ? 1.08 : 1.0)
+                            .animation(.spring(response: 0.28, dampingFraction: 0.7), value: attackerPose)
+
+                            if foe.kind.isFlying, !foe.isDefeated {
+                                Image(systemName: "wind")
+                                    .font(.system(size: 11, weight: .black))
+                                    .foregroundStyle(Color(red: 0.55, green: 0.9, blue: 1))
+                                    .padding(3)
+                                    .background(Color.black.opacity(0.55), in: Circle())
+                                    .offset(x: (isFront ? frontSize : benchSize) * 0.38, y: -4)
+                            }
+
+                            if isFront, let enemyHPFloat {
+                                Text(enemyHPFloat.text)
+                                    .font(.system(size: 26, weight: .black, design: .rounded))
+                                    .foregroundStyle(
+                                        enemyHPFloat.isHeal
+                                            ? Color(red: 0.45, green: 1, blue: 0.55)
+                                            : Color(red: 1, green: 0.35, blue: 0.35)
+                                    )
+                                    .shadow(color: .black.opacity(0.75), radius: 3, y: 1)
+                                    .scaleEffect(enemyImpactFlash ? 1.25 : 1.0)
+                                    .offset(y: -14)
+                                    .id(enemyHPFloat.id)
+                                    .transition(.scale.combined(with: .opacity))
+                                    .allowsHitTesting(false)
+                            }
+                        }
+
+                        GeometryReader { geo in
+                            let frac = foe.maxHP == 0 ? 0 : CGFloat(foe.hp) / CGFloat(foe.maxHP)
+                            ZStack(alignment: .leading) {
+                                Capsule().fill(Color.white.opacity(0.18))
+                                Capsule()
+                                    .fill(foe.isDefeated
+                                          ? Color.gray.opacity(0.5)
+                                          : Color(red: 1, green: 0.45, blue: 0.28))
+                                    .frame(width: max(4, geo.size.width * frac))
+                            }
+                        }
+                        .frame(width: isFront ? frontSize : benchSize, height: 7)
+
+                        HStack(spacing: 2) {
+                            ForEach(0..<PeglinBattleRules.laneCount, id: \.self) { col in
+                                Circle()
+                                    .fill(
+                                        foe.isDefeated
+                                            ? Color.white.opacity(0.12)
+                                            : (col == foe.lane
+                                               ? Color(red: 1, green: 0.7, blue: 0.35)
+                                               : Color.white.opacity(0.22))
+                                    )
+                                    .frame(width: 5, height: 5)
+                            }
+                        }
+
+                        Text(foe.isDefeated ? "OUT" : (foe.canMeleeThisRound ? "MELEE" : "\(foe.hp)"))
+                            .font(.system(size: 11, weight: .black, design: .rounded))
+                            .foregroundStyle(.white.opacity(foe.isDefeated ? 0.45 : 0.95))
+                    }
+                    .offset(x: foe.isDefeated ? 0 : laneOffset)
+                    .offset(x: isFront ? enemyShake : 0)
+                    .scaleEffect(isFront && enemyImpactFlash ? 1.06 : 1.0)
+                    .animation(.spring(response: 0.45, dampingFraction: 0.78), value: foe.lane)
+                    .accessibilityIdentifier(
+                        isFront
+                            ? "world2.plink.battle.attacker.active"
+                            : "world2.plink.battle.attacker.\(foe.kind.rawValue)"
+                    )
+                }
+            }
+            Text(
+                frontFoe.map { foe in
+                    if foe.kind.isFlying {
+                        return "FRONT · \(foe.shortLabel) · FLY ATK \(resolvedEnemyAttack)"
+                    }
+                    if foe.lane <= PeglinBattleRules.meleeLane {
+                        return "FRONT · \(foe.shortLabel) · MELEE ATK \(resolvedEnemyAttack)"
+                    }
+                    return "FRONT · \(foe.shortLabel) · \(foe.lane) out · ATK \(resolvedEnemyAttack)"
+                } ?? "Clear the pack"
+            )
+                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .foregroundStyle(Color(red: 1, green: 0.7, blue: 0.35).opacity(0.95))
+                .lineLimit(1)
+                .minimumScaleFactor(0.75)
+        }
+        .padding(.horizontal, 8)
+        .padding(.vertical, 6)
+        .background(
+            (enemyImpactFlash ? Color.red.opacity(0.35) : Color.black.opacity(0.4)),
+            in: RoundedRectangle(cornerRadius: 16, style: .continuous)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(
+                    enemyImpactFlash
+                        ? Color.red.opacity(0.95)
+                        : Color(red: 1, green: 0.55, blue: 0.28).opacity(0.65),
+                    lineWidth: enemyImpactFlash ? 3 : 1.5
+                )
+        )
+        .background(
+            GeometryReader { geo in
+                Color.clear.preference(
+                    key: PlinkBattleBannerFrameKey.self,
+                    value: [false: geo.frame(in: .named("plinkBattleSpace"))]
+                )
+            }
+        )
+        .accessibilityIdentifier("world2.plink.battle.attacker")
+        .accessibilityLabel("Bad guys — fight the front foe; bombs hit everyone")
     }
 
     /// Thin strip — leave / phase / orbs (jukebox lives on the board overlay).
@@ -1079,7 +1473,7 @@ struct PlinkBattleHostView: View {
                     .transition(.scale.combined(with: .opacity))
                 }
             }
-            .frame(width: geo.size.width, height: geo.size.height, alignment: .center)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .top)
         }
     }
 
@@ -1102,7 +1496,7 @@ struct PlinkBattleHostView: View {
             }
 
             Text(statusLine)
-                .font(.system(size: 9, weight: .semibold, design: .rounded))
+                .font(.system(size: MarbleVoyageDesignRules.battleFeedMinMetaFont, weight: .semibold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.75))
                 .lineLimit(2)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -1112,7 +1506,7 @@ struct PlinkBattleHostView: View {
                     LazyVStack(spacing: 3) {
                         if battleRounds.isEmpty {
                             Text("Drops…")
-                                .font(.system(size: 10, weight: .medium, design: .rounded))
+                                .font(.system(size: MarbleVoyageDesignRules.battleFeedMinMetaFont, weight: .medium, design: .rounded))
                                 .foregroundStyle(.white.opacity(0.4))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                         }
@@ -1153,10 +1547,16 @@ struct PlinkBattleHostView: View {
     private func feedTotalChip(title: String, value: Int, tint: Color, pulsed: Bool = false) -> some View {
         VStack(alignment: .leading, spacing: 1) {
             Text(title.uppercased())
-                .font(.system(size: 8, weight: .bold, design: .rounded))
+                .font(.system(size: MarbleVoyageDesignRules.battleFeedMinMetaFont, weight: .bold, design: .rounded))
                 .foregroundStyle(.white.opacity(0.5))
             Text("\(value)")
-                .font(.system(size: pulsed ? 20 : 16, weight: .black, design: .rounded))
+                .font(.system(
+                    size: pulsed
+                        ? MarbleVoyageDesignRules.battleFeedMinChipValueFont + 4
+                        : MarbleVoyageDesignRules.battleFeedMinChipValueFont,
+                    weight: .black,
+                    design: .rounded
+                ))
                 .foregroundStyle(tint)
                 .scaleEffect(pulsed ? 1.08 : 1)
                 .minimumScaleFactor(0.7)
@@ -1176,31 +1576,33 @@ struct PlinkBattleHostView: View {
     }
 
     private func battleRoundRow(_ round: BattleRound, highlighted: Bool = false) -> some View {
-        VStack(alignment: .leading, spacing: 3) {
+        let body = MarbleVoyageDesignRules.battleFeedMinBodyFont
+        let meta = MarbleVoyageDesignRules.battleFeedMinMetaFont
+        return VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 4) {
                 Text("R\(round.number)")
-                    .font(.system(size: 10, weight: .black, design: .rounded))
+                    .font(.system(size: meta, weight: .black, design: .rounded))
                     .foregroundStyle(.white.opacity(0.65))
-                    .frame(width: 22, alignment: .leading)
+                    .frame(width: 26, alignment: .leading)
                 if round.damageToEnemy > 0 {
                     Text("−\(round.damageToEnemy)")
-                        .font(.system(size: highlighted ? 13 : 11, weight: .heavy, design: .rounded))
+                        .font(.system(size: highlighted ? body + 1 : body, weight: .heavy, design: .rounded))
                         .foregroundStyle(Color(red: 0.45, green: 0.95, blue: 0.55))
                 } else {
                     Text("miss")
-                        .font(.system(size: 10, weight: .bold, design: .rounded))
+                        .font(.system(size: meta, weight: .bold, design: .rounded))
                         .foregroundStyle(.white.opacity(0.35))
                 }
                 Spacer(minLength: 2)
                 if round.damageToPlayer > 0 {
                     Text("−\(round.damageToPlayer)")
-                        .font(.system(size: highlighted ? 13 : 11, weight: .heavy, design: .rounded))
+                        .font(.system(size: highlighted ? body + 1 : body, weight: .heavy, design: .rounded))
                         .foregroundStyle(Color(red: 1, green: 0.5, blue: 0.4))
                 }
             }
             if !round.highlights.isEmpty {
                 Text(round.highlights.joined(separator: " · "))
-                    .font(.system(size: 9, weight: .heavy, design: .rounded))
+                    .font(.system(size: meta, weight: .heavy, design: .rounded))
                     .foregroundStyle(Color(red: 1, green: 0.88, blue: 0.45))
                     .lineLimit(2)
                     .minimumScaleFactor(0.8)
@@ -1236,16 +1638,22 @@ struct PlinkBattleHostView: View {
         impactFlash: Bool,
         portraitOnLeading: Bool,
         isPlayer: Bool,
-        meterTitle: String = "HP"
+        meterTitle: String = "HP",
+        roleCaption: String? = nil
     ) -> some View {
         let fraction = maxHP == 0 ? 0 : CGFloat(hp) / CGFloat(maxHP)
-        let info = VStack(alignment: portraitOnLeading ? .leading : .trailing, spacing: 6) {
+        let info = VStack(alignment: portraitOnLeading ? .leading : .trailing, spacing: 4) {
+            if let roleCaption {
+                Text(roleCaption.uppercased())
+                    .font(.system(size: 11, weight: .heavy, design: .rounded))
+                    .foregroundStyle(tint.opacity(0.95))
+            }
             Text(name)
-                .font(.system(size: 18, weight: .heavy, design: .rounded))
+                .font(.system(size: 16, weight: .heavy, design: .rounded))
                 .foregroundStyle(.white)
                 .lineLimit(1)
             Text("\(meterTitle) \(hp)/\(maxHP)")
-                .font(.system(size: 18, weight: .black, design: .rounded))
+                .font(.system(size: 16, weight: .black, design: .rounded))
                 .foregroundStyle(.white)
                 .minimumScaleFactor(0.7)
                 .lineLimit(1)
@@ -1257,7 +1665,7 @@ struct PlinkBattleHostView: View {
                         .frame(width: geo.size.width * max(0, min(1, fraction)))
                 }
             }
-            .frame(width: 160, height: 12)
+            .frame(width: 140, height: 10)
         }
 
         let art = ZStack(alignment: .top) {
@@ -1289,8 +1697,8 @@ struct PlinkBattleHostView: View {
                 art
             }
         }
-        .padding(.horizontal, 12)
-        .padding(.vertical, 10)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 7)
         .background(
             (impactFlash ? Color.red.opacity(0.35) : Color.black.opacity(0.42)),
             in: RoundedRectangle(cornerRadius: 22, style: .continuous)
@@ -1525,8 +1933,9 @@ struct PlinkBattleHostView: View {
         playerImpactFlash = false
         enemyImpactFlash = false
         lastEnemyTallyAt = .distantPast
-        enemyHP = enemyMaxHP
+        rebuildFoeRoster()
         // Carry voyage HP into the fight — never free-heal at fight start.
+        playerMaxHP = overridePlayerMaxHP ?? PeglinBattleRules.playerMaxHP(for: enemyKind)
         if let startingPlayerHP {
             playerHP = max(1, min(playerMaxHP, startingPlayerHP))
         } else {
@@ -1542,8 +1951,9 @@ struct PlinkBattleHostView: View {
         abbieState = .happy
         enemyState = PeglinRescueMood.state(cageFractionRemaining: 1)
         cageShattered = false
+        bombLobFlash = false
         phaseLabel = "RESCUE"
-        statusLine = "Break the cage · HP \(playerHP)/\(playerMaxHP)"
+        statusLine = "Front foe · approach from right · bomb = lob AOE · HP \(playerHP)/\(playerMaxHP)"
         // Keep safari music through the versus splash; board music kicks in on cutaway.
         showVersusIntro = true
 
@@ -1559,6 +1969,14 @@ struct PlinkBattleHostView: View {
             counterDamage: resolvedEnemyAttack,
             startingPlayerHP: startingPlayerHP
         )
+        if let voyageEconomy {
+            scene.goldPegPrevalence = voyageEconomy.goldPegPrevalence
+            scene.goldPegValue = voyageEconomy.goldPegValue
+            scene.ballDamageMultiplier = voyageEconomy.ballDamageMultiplier
+            scene.cycleExtraSpecials = voyageEconomy.cycleExtra
+            scene.sockSnatchCoinsPerBomb = voyageEconomy.sockSnatch
+            scene.prismCageBonus = voyageEconomy.prismBonus
+        }
         // Pause aim until the cutaway finishes revealing the board.
         scene.isPaused = true
         let next = PlinkBattleBridge(scene: scene, boardIndex: PeglinBattleRules.boardIndex(for: enemyKind))
@@ -1576,7 +1994,12 @@ struct PlinkBattleHostView: View {
                 statusLine = snap.status
                 ballsLeft = snap.ballsLeft
                 shotScore = snap.shotScore
+                // Scene owns front-foe HP; mirror into roster.
                 enemyHP = snap.enemyHP
+                enemyMaxHP = snap.enemyMaxHP
+                if let id = frontFoeID, let idx = foeRoster.firstIndex(where: { $0.id == id }) {
+                    foeRoster[idx].hp = snap.enemyHP
+                }
                 playerHP = snap.playerHP
                 refreshHostageMood()
             }
@@ -1586,19 +2009,43 @@ struct PlinkBattleHostView: View {
         }
         next.onDamage = { dmg in
             abbieState = .sneakyWink
-            phaseLabel = "CAGE_HIT"
+            phaseLabel = "FRONT_HIT"
             refreshHostageMood()
             showHPFloat(onPlayer: false, delta: -dmg)
         }
+        next.onBombAOE = { dmg in
+            phaseLabel = "BOMB_LOB"
+            applyBombAOE(dmg)
+            refreshHostageMood()
+            showHPFloat(onPlayer: false, delta: -dmg)
+            statusLine = "Bomb lobbed! AOE −\(dmg)"
+        }
+        next.onFrontFoeDefeated = {
+            advanceFrontFoeOrRescue()
+        }
+        next.onEnemyTurn = {
+            resolveEnemyApproachAndMelee()
+        }
         next.onPlayerHurt = { dmg in
             abbieState = .hurt
-            phaseLabel = "CAGE_RATTLE"
+            phaseLabel = "MELEE"
+            withAnimation(.spring(response: 0.28, dampingFraction: 0.7)) {
+                attackerPose = .attack
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
+                withAnimation(.easeOut(duration: 0.2)) {
+                    attackerPose = .idle
+                }
+            }
             refreshHostageMood()
             showHPFloat(onPlayer: true, delta: -dmg)
+            let name = frontFoe?.shortLabel ?? waveAttacker.shortName
+            let lane = frontFoe?.lane ?? 0
+            statusLine = "\(name) melee · lane \(lane) · Abbie \(playerHP)/\(playerMaxHP)"
         }
         next.onRoundResolved = { summary in
             recordRound(
-                damageToEnemy: summary.damageToEnemy,
+                damageToEnemy: summary.damageToEnemy + summary.bombAOE,
                 damageToPlayer: summary.damageToPlayer,
                 highlights: summary.highlights
             )
@@ -1617,7 +2064,11 @@ struct PlinkBattleHostView: View {
                 }
             }
             onVictory?()
-            onBattleEnded?(true, max(playerHP, bridge?.scene.playerHP ?? playerHP))
+            onBattleEnded?(
+                true,
+                max(playerHP, bridge?.scene.playerHP ?? playerHP),
+                scene.runGoldCoins
+            )
         }
         next.onLost = {
             PeglinEdition.log("battle_completed", ["result": "defeat"])
@@ -1631,7 +2082,7 @@ struct PlinkBattleHostView: View {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.82)) {
                 showBanner = true
             }
-            onBattleEnded?(false, 0)
+            onBattleEnded?(false, 0, 0)
         }
         bridge = next
         PeglinEdition.log(
@@ -1787,6 +2238,9 @@ private final class PlinkBattleBridge {
     var onPhase: ((String) -> Void)?
     var onHud: ((PeggleScene.HudSnapshot) -> Void)?
     var onDamage: ((Int) -> Void)?
+    var onBombAOE: ((Int) -> Void)?
+    var onFrontFoeDefeated: (() -> Bool)?
+    var onEnemyTurn: (() -> Int)?
     var onPlayerHurt: ((Int) -> Void)?
     var onRoundResolved: ((PeggleScene.ShotRoundSummary) -> Void)?
     var onWon: (() -> Void)?
@@ -1799,6 +2253,15 @@ private final class PlinkBattleBridge {
         scene.applyTuning(PhysicsTuning.default)
         scene.onDamageDealt = { [weak self] dmg in
             Task { @MainActor in self?.onDamage?(dmg) }
+        }
+        scene.onBombEnemyAOE = { [weak self] dmg in
+            Task { @MainActor in self?.onBombAOE?(dmg) }
+        }
+        scene.onFrontFoeDefeated = { [weak self] in
+            self?.onFrontFoeDefeated?() ?? true
+        }
+        scene.onEnemyTurn = { [weak self] in
+            self?.onEnemyTurn?() ?? 0
         }
         scene.onPlayerHurt = { [weak self] dmg in
             Task { @MainActor in self?.onPlayerHurt?(dmg) }
@@ -1837,6 +2300,9 @@ private final class PlinkBattleBridge {
         alive = false
         scene.onHud = nil
         scene.onDamageDealt = nil
+        scene.onBombEnemyAOE = nil
+        scene.onFrontFoeDefeated = nil
+        scene.onEnemyTurn = nil
         scene.onPlayerHurt = nil
         scene.onRoundResolved = nil
         scene.isPaused = true

@@ -121,6 +121,22 @@ class AssetBootstrapService: ObservableObject {
             let catalogName = "world2_" + semanticName.replacingOccurrences(of: ".", with: "_")
             return UIImage(named: catalogName)
         }
+        // Rescue-wave attackers + burrow jackal hostage tokens.
+        // `token.plink.cawScout.idle` → `world2_plink_cawScout_idle`
+        // `token.plink.gang.vix` → `world2_plink_gang_vix`
+        // `token.plink.gang.vix.portrait` → `world2_plink_gang_vix_portrait`
+        if semanticName.hasPrefix("token.plink.") {
+            let suffix = String(semanticName.dropFirst("token.".count)) // plink.…
+            let catalogName = "world2_" + suffix.replacingOccurrences(of: ".", with: "_")
+            if let img = UIImage(named: catalogName) { return img }
+            // Named crew: portrait fallback when body missing
+            if catalogName.hasSuffix("_portrait") == false,
+               catalogName.contains("_gang_"),
+               let portrait = UIImage(named: catalogName + "_portrait") {
+                return portrait
+            }
+            return nil
+        }
         // Circular kid power icons + legacy poker-chip ids.
         if semanticName.hasPrefix("ui.plink.power.icon.") {
             let suffix = String(semanticName.dropFirst("ui.plink.power.icon.".count))

@@ -1,44 +1,51 @@
 import CoreGraphics
 import Foundation
-import UIKit
 
-/// Tall floating-island overland poster for Marble Voyage climb chart.
-/// **Art leads** — chart canvas keeps the poster’s tall aspect (never stretch to landscape width).
+/// Tall climb-chart canvas for Marble Voyage.
+/// **Blueprint schematic** (procedural grid) — painted island poster is retired for play.
 enum MarbleVoyageClimbMap {
     static let semanticID = "map.marbleVoyage.climb"
+    /// Legacy catalog id (unused while blueprint mode is on).
     static let catalogName = "world2_map_marbleVoyage_climb"
+    /// Prefer procedural blueprint over missing/broken poster art.
+    static let usesBlueprintPaper = true
 
-    /// Width ÷ height of the authored poster (~344∶1024 ≈ 1∶3).
-    static var aspectWidthOverHeight: CGFloat {
-        guard let image = UIImage(named: catalogName), image.size.height > 0 else {
-            return 344.0 / 1024.0
-        }
-        return image.size.width / image.size.height
-    }
+    /// Fixed tall aspect for blueprint chart (~1∶2.8).
+    static var aspectWidthOverHeight: CGFloat { 1.0 / 2.8 }
 
-    static var aspectHeightOverWidth: CGFloat {
-        let r = aspectWidthOverHeight
-        return r > 0 ? 1 / r : 1024.0 / 344.0
-    }
+    static var aspectHeightOverWidth: CGFloat { 2.8 }
 
-    /// ~3 landscape screens tall, width derived from poster aspect and capped to the viewport
-    /// so the island doesn’t get fattened across a wide iPad.
+    /// Preferred chart width as a fraction of the viewport (small side letterbox only).
+    static let targetWidthFraction: CGFloat = 0.88
+    /// Hard cap so a tiny bit of sky can still frame the island.
+    static let hardWidthCapFraction: CGFloat = 0.92
+    /// Minimum scroll height in viewport-heights so the intro pan has room.
+    static let minScrollScreens: CGFloat = 2.6
+
+    /// Wide tall canvas: fill most of the landscape width, height from poster aspect.
+    /// Never fatten/squash the painting — only grow scroll height when width grows.
     static func contentSize(in viewport: CGSize) -> CGSize {
-        let targetHeight = max(viewport.height * 2.9, 1400)
-        var width = targetHeight * aspectWidthOverHeight
-        var height = targetHeight
-        let maxWidth = max(viewport.width * 0.58, 320) // portrait-poster column on landscape
-        if width > maxWidth {
-            width = maxWidth
-            height = width * aspectHeightOverWidth
+        guard viewport.width > 1, viewport.height > 1 else {
+            return CGSize(width: 700, height: 2100)
         }
-        // Still taller than one screen so the climb can pan.
-        height = max(height, viewport.height * 2.35)
-        width = height * aspectWidthOverHeight
-        if width > viewport.width * 0.92 {
-            width = viewport.width * 0.92
-            height = width * aspectHeightOverWidth
+
+        var width = min(
+            viewport.width * targetWidthFraction,
+            viewport.width * hardWidthCapFraction
+        )
+        var height = width * aspectHeightOverWidth
+
+        let minHeight = max(viewport.height * minScrollScreens, 1600)
+        if height < minHeight {
+            height = minHeight
+            width = height * aspectWidthOverHeight
+            let cap = viewport.width * hardWidthCapFraction
+            if width > cap {
+                width = cap
+                height = width * aspectHeightOverWidth
+            }
         }
+
         return CGSize(width: width, height: height)
     }
 }

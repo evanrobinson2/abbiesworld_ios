@@ -16,8 +16,13 @@ struct MarbleVoyageHostView: View {
     @State private var run: MarbleVoyageRun?
     @State private var eventOutcome: MarbleVoyageEventOutcome?
     @State private var gallery = MarbleVoyageGallery.load()
+    @State private var playerStats = MarbleVoyagePlayerStats.empty
+    @State private var gameStats = MarbleVoyagePlayerStats.empty
     @State private var showTrophyCenter = false
+    @State private var showStatusPanel = false
+    @State private var showAuthSheet = false
     @State private var unlockToast: String?
+    @EnvironmentObject private var auth: AuthenticationService
     /// Player token sliding along the climb path (1s) before the scene opens.
     @State private var marchPosition: CGPoint?
     @State private var isMarching = false
@@ -27,6 +32,11 @@ struct MarbleVoyageHostView: View {
     @State private var climbScrollOffset: CGFloat = 0
     @State private var atmosphereBoost: Double = 0
     @State private var climbIntroToken: UInt = 0
+    /// Explicit porthole Y offset (0 = top / summit). Prefer this over ScrollViewProxy.
+    @State private var climbCameraOffset: CGFloat = 0
+    @State private var isClimbIntroPlaying = false
+    @State private var climbIntroPlayedSeed: UInt64?
+    @State private var climbDragAnchor: CGFloat?
     @StateObject private var chartMusic = PlinkMusicService()
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
 
@@ -84,11 +94,92 @@ struct MarbleVoyageHostView: View {
                 .zIndex(50)
                 .transition(.opacity.combined(with: .scale(scale: 0.96)))
             }
+
+            if showStatusPanel {
+                MarbleVoyageStatusPanelView(
+                    player: playerStats,
+                    game: gameStats,
+                    playerLabel: statusPlayerLabel,
+                    isSignedIn: auth.isAuthenticated,
+                    onSignIn: {
+                        showStatusPanel = false
+                        showAuthSheet = true
+                    },
+                    onSignOut: {
+                        Task {
+                            await auth.logout()
+                            reloadStats()
+                        }
+                    },
+                    onOpenTrophies: {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
+                            showStatusPanel = false
+                            showTrophyCenter = true
+                        }
+                    },
+                    onClose: {
+                        withAnimation(.spring(response: 0.35, dampingFraction: 0.86)) {
+                            showStatusPanel = false
+                        }
+                    }
+                )
+                .zIndex(50)
+                .transition(.opacity.combined(with: .scale(scale: 0.96)))
+            }
         }
         .accessibilityIdentifier("world2.marbleVoyage")
         .onAppear {
-            gallery = MarbleVoyageGallery.load()
+            reloadStats()
             chartMusic.playMeadow()
+        }
+        .onChange(of: auth.activeProfile?.id) { _, _ in
+            reloadStats()
+        }
+        .onChange(of: auth.isAuthenticated) { _, _ in
+            reloadStats()
+        }
+        .sheet(isPresented: $showAuthSheet) {
+            NavigationStack {
+                if auth.isAuthenticated {
+                    VStack(spacing: 20) {
+                        Text(auth.activeProfile?.displayName ?? auth.accountName ?? "Signed in")
+                            .font(.system(size: 28, weight: .black, design: .rounded))
+                        if let email = auth.accountEmail {
+                            Text(email)
+                                .font(.system(size: 15, weight: .semibold, design: .rounded))
+                                .foregroundStyle(.secondary)
+                        }
+                        MarbleVoyagePrimaryButton(
+                            title: "Sign out",
+                            systemImage: "rectangle.portrait.and.arrow.right",
+                            fill: MarbleVoyageChrome.dangerFill,
+                            accessibilityID: "world2.marbleVoyage.sheet.signOut"
+                        ) {
+                            Task {
+                                await auth.logout()
+                                showAuthSheet = false
+                                reloadStats()
+                            }
+                        }
+                        .padding(.horizontal, 24)
+                        Spacer()
+                    }
+                    .padding(.top, 28)
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("Done") { showAuthSheet = false }
+                        }
+                    }
+                } else {
+                    AuthLoginView(auth: auth)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("Close") { showAuthSheet = false }
+                            }
+                        }
+                }
+            }
+            .presentationDetents([.medium, .large])
         }
         .onDisappear {
             chartMusic.stop()
@@ -116,6 +207,8 @@ struct MarbleVoyageHostView: View {
             return .climb
         case .fight(let id):
             return .enemy(run.node(id)?.enemyKind)
+        case .shop:
+            return .victory
         case .event(let id):
             if let kind = run.node(id)?.kind {
                 return .node(kind)
@@ -143,6 +236,10 @@ struct MarbleVoyageHostView: View {
             chartMusic.playMeadow(variant2: true)
             return
         }
+        if case .shop = phase {
+            chartMusic.playMeadow(variant2: true)
+            return
+        }
         if shell == .title || phase == nil || phase == .map || phase == .victory || phase == .defeat {
             chartMusic.playMeadow()
         }
@@ -165,6 +262,19 @@ struct MarbleVoyageHostView: View {
                 } else {
                     mapPhase
                 }
+            case .shop:
+                MarbleVoyageShopView(
+                    run: Binding(
+                        get: { run ?? active },
+                        set: { run = $0 }
+                    ),
+                    onLeave: {
+                        withAnimation(.spring(response: 0.4, dampingFraction: 0.84)) {
+                            pulseAtmosphere()
+                        }
+                    }
+                )
+                .transition(.move(edge: .bottom).combined(with: .opacity))
             case .event(let nodeID):
                 if let node = active.node(nodeID) {
                     eventPhase(node)
@@ -230,6 +340,7 @@ struct MarbleVoyageHostView: View {
         switch phase {
         case .map: return "map"
         case .fight(let id): return "fight:\(id)"
+        case .shop(let id): return "shop:\(id)"
         case .event(let id): return "event:\(id)"
         case .victory: return "victory"
         case .defeat: return "defeat"
@@ -237,12 +348,12 @@ struct MarbleVoyageHostView: View {
     }
 
     private var voyageBackdrop: some View {
-        // Chart owns the island poster; this is only letterbox / non-map beds.
+        // Letterbox around the blueprint climb chart.
         LinearGradient(
             colors: [
-                Color(red: 0.35, green: 0.62, blue: 0.92),
-                Color(red: 0.55, green: 0.78, blue: 0.95),
-                Color(red: 0.72, green: 0.88, blue: 0.98),
+                Color(red: 0.04, green: 0.12, blue: 0.22),
+                Color(red: 0.07, green: 0.20, blue: 0.34),
+                Color(red: 0.05, green: 0.14, blue: 0.26),
             ],
             startPoint: .top,
             endPoint: .bottom
@@ -284,7 +395,7 @@ struct MarbleVoyageHostView: View {
             headerBar
             if let run {
                 Text(run.mode == .campaign
-                     ? "Climb · \(min(MarbleVoyageRun.campaignFightStages + 1, run.fightsCleared + 1))/\(MarbleVoyageRun.campaignFightStages + 1)"
+                     ? "Climb · \(min(MarbleVoyageRun.campaignTotalFights, run.fightsCleared + 1))/\(MarbleVoyageRun.campaignTotalFights)"
                      : "Endless climb · \(run.fightsCleared) freed")
                     .font(.system(size: 24, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
@@ -315,46 +426,44 @@ struct MarbleVoyageHostView: View {
     }
     private var titleMenu: some View {
         VStack(spacing: 18) {
-            HStack {
+            HStack(spacing: 10) {
                 if !isStandalone {
-                    Button {
-                        MarbleVoyageAudio.tap()
-                        onExit()
-                    } label: {
-                        Label("Leave", systemImage: "xmark.circle.fill")
-                            .font(.system(size: 16, weight: .black, design: .rounded))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 8)
-                            .background(.white.opacity(0.16), in: Capsule())
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier("world2.marbleVoyage.leave")
+                    MarbleVoyageSecondaryButton(
+                        title: "Leave",
+                        systemImage: "xmark.circle.fill",
+                        accessibilityID: "world2.marbleVoyage.leave",
+                        action: onExit
+                    )
                 }
                 Spacer()
-                Button {
-                    MarbleVoyageAudio.tap()
-                    withAnimation(.spring(response: 0.38, dampingFraction: 0.86)) {
-                        showTrophyCenter = true
+                MarbleVoyageSecondaryButton(
+                    title: "Status",
+                    systemImage: "chart.bar.fill",
+                    accessibilityID: "world2.marbleVoyage.statusButton",
+                    action: {
+                        reloadStats()
+                        withAnimation(.spring(response: 0.38, dampingFraction: 0.86)) {
+                            showStatusPanel = true
+                        }
                     }
-                } label: {
-                    Label("Trophies", systemImage: "trophy.fill")
-                        .font(.system(size: 15, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 14)
-                        .padding(.vertical, 8)
-                        .background(.white.opacity(0.16), in: Capsule())
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("world2.marbleVoyage.trophies")
-
-                if MarbleVoyageRun.storedEndlessBest() > 0 {
-                    Text("Endless best \(MarbleVoyageRun.storedEndlessBest())")
-                        .font(.system(size: 14, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.75))
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                        .background(.black.opacity(0.35), in: Capsule())
+                )
+                MarbleVoyageSecondaryButton(
+                    title: "Trophies",
+                    systemImage: "trophy.fill",
+                    accessibilityID: "world2.marbleVoyage.trophies",
+                    action: {
+                        withAnimation(.spring(response: 0.38, dampingFraction: 0.86)) {
+                            showTrophyCenter = true
+                        }
+                    }
+                )
+                if auth.isAuthenticated {
+                    MarbleVoyageSecondaryButton(
+                        title: auth.activeProfile?.displayName ?? "Account",
+                        systemImage: "person.crop.circle.fill",
+                        accessibilityID: "world2.marbleVoyage.account",
+                        action: { showAuthSheet = true }
+                    )
                 }
             }
             .padding(.horizontal, 18)
@@ -386,42 +495,23 @@ struct MarbleVoyageHostView: View {
 
             VStack(spacing: 12) {
                 ForEach(MarbleVoyageMode.allCases) { mode in
-                    Button {
-                        MarbleVoyageAudio.modeSelect()
+                    MarbleVoyageModeCardButton(
+                        mode: mode,
+                        accessibilityID: "world2.marbleVoyage.mode.\(mode.rawValue)"
+                    ) {
                         withAnimation(.spring(response: 0.4, dampingFraction: 0.84)) {
                             climbIntroToken &+= 1
+                            climbIntroPlayedSeed = nil
+                            climbCameraOffset = 0
+                            climbScrollOffset = 0
+                            isClimbIntroPlaying = false
                             run = MarbleVoyageRun.make(mode: mode)
                             eventOutcome = nil
                             shell = .playing
+                            MarbleVoyagePlayerStats.recordSessionStart(playerKey: statsPlayerKey)
+                            reloadStats()
                         }
-                    } label: {
-                        HStack(spacing: 14) {
-                            Image(systemName: mode.systemIcon)
-                                .font(.system(size: 28, weight: .black))
-                                .frame(width: 44)
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(mode.title)
-                                    .font(.system(size: 22, weight: .black, design: .rounded))
-                                Text(mode.blurb)
-                                    .font(.system(size: 14, weight: .semibold, design: .rounded))
-                                    .foregroundStyle(.white.opacity(0.85))
-                            }
-                            Spacer()
-                            Image(systemName: "chevron.right")
-                                .font(.system(size: 16, weight: .black))
-                                .foregroundStyle(.white.opacity(0.7))
-                        }
-                        .foregroundStyle(.white)
-                        .padding(18)
-                        .background(.ultraThinMaterial.opacity(0.72), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .stroke(.white.opacity(0.5), lineWidth: 2)
-                        )
-                        .shadow(color: .black.opacity(0.28), radius: 12, y: 5)
                     }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier("world2.marbleVoyage.mode.\(mode.rawValue)")
                 }
             }
             .padding(.horizontal, 28)
@@ -440,28 +530,38 @@ struct MarbleVoyageHostView: View {
         .accessibilityLabel(MarbleVoyageArt.fullTitle)
     }
 
+    private var statusPlayerLabel: String {
+        if let name = auth.activeProfile?.displayName { return name }
+        if let email = auth.accountEmail { return email }
+        return "Guest"
+    }
+
+    private var statsPlayerKey: String {
+        MarbleVoyagePlayerStats.playerKey(auth: auth)
+    }
+
+    private func reloadStats() {
+        playerStats = MarbleVoyagePlayerStats.load(playerKey: statsPlayerKey)
+        gameStats = MarbleVoyagePlayerStats.loadGame()
+        gallery = MarbleVoyageGallery.load()
+    }
+
     // MARK: - Chart chrome
 
     private var headerBar: some View {
         HStack {
-            Button {
-                MarbleVoyageAudio.tap()
+            MarbleVoyageSecondaryButton(
+                title: "Menu",
+                systemImage: "chevron.backward.circle.fill",
+                accessibilityID: "world2.marbleVoyage.menu"
+            ) {
                 withAnimation(.spring(response: 0.35, dampingFraction: 0.85)) {
                     shell = .title
                     run = nil
                     eventOutcome = nil
+                    reloadStats()
                 }
-            } label: {
-                Label("Menu", systemImage: "chevron.backward.circle.fill")
-                    .font(.system(size: 16, weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 8)
-                    .background(.ultraThinMaterial.opacity(0.95), in: Capsule())
-                    .overlay(Capsule().stroke(.white.opacity(0.4), lineWidth: 1))
             }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("world2.marbleVoyage.menu")
 
             Spacer()
 
@@ -481,101 +581,78 @@ struct MarbleVoyageHostView: View {
 
     private var chart: some View {
         GeometryReader { geo in
-            // Art leads: tall poster column (correct proportions), letterbox on landscape sides.
+            // Art leads: tall poster column (correct proportions), modest letterbox on sides.
             let content = MarbleVoyageClimbMap.contentSize(in: geo.size)
             let contentWidth = content.width
             let contentHeight = content.height
             let positions = nodePositions(in: CGSize(width: contentWidth, height: contentHeight))
+            let maxOffset = max(0, contentHeight - geo.size.height)
+
             HStack(spacing: 0) {
                 Spacer(minLength: 0)
-                ScrollViewReader { proxy in
-                    ScrollView(.vertical, showsIndicators: false) {
-                        ZStack(alignment: .topLeading) {
-                            climbPosterBackdrop(width: contentWidth, height: contentHeight)
+                ZStack(alignment: .topLeading) {
+                    ZStack(alignment: .topLeading) {
+                        climbPosterBackdrop(width: contentWidth, height: contentHeight)
 
-                            MarbleVoyageSceneAtmosphere(
-                                mood: .climb,
-                                parallax: CGSize(
-                                    width: sin(climbScrollOffset / 180) * 10,
-                                    height: climbScrollOffset * 0.04
-                                ),
-                                reduceMotion: reduceMotion,
-                                intensity: 0.55,
-                                seed: 11,
-                                transitionBoost: atmosphereBoost * 0.6
-                            )
-                            .frame(width: contentWidth, height: contentHeight)
-                            .allowsHitTesting(false)
+                        // Light haze only — keep blueprint lines readable (no leaf litter).
+                        LinearGradient(
+                            colors: [
+                                Color.black.opacity(0.10),
+                                Color.clear,
+                                Color.black.opacity(0.14),
+                            ],
+                            startPoint: .top,
+                            endPoint: .bottom
+                        )
+                        .frame(width: contentWidth, height: contentHeight)
+                        .allowsHitTesting(false)
 
-                            LinearGradient(
-                                colors: [
-                                    Color.black.opacity(0.16),
-                                    Color.black.opacity(0.06),
-                                    Color.black.opacity(0.2),
-                                ],
-                                startPoint: .top,
-                                endPoint: .bottom
-                            )
-                            .frame(width: contentWidth, height: contentHeight)
-                            .allowsHitTesting(false)
-
-                            RadialGradient(
-                                colors: [
-                                    Color.clear,
-                                    Color.black.opacity(0.26),
-                                ],
-                                center: .center,
-                                startRadius: min(contentWidth, contentHeight) * 0.2,
-                                endRadius: max(contentWidth, contentHeight) * 0.58
-                            )
-                            .frame(width: contentWidth, height: contentHeight)
-                            .allowsHitTesting(false)
-
-                            if let run {
-                                ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
+                        if let run {
+                            ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
+                                chartEdge(
+                                    from: edge.from,
+                                    to: edge.to,
+                                    positions: positions,
+                                    kind: .idle
+                                )
+                            }
+                            ForEach(Array(run.pathTaken.enumerated()), id: \.offset) { _, edge in
+                                chartEdge(
+                                    from: edge.from,
+                                    to: edge.to,
+                                    positions: positions,
+                                    kind: .traversed
+                                )
+                            }
+                            ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
+                                let isChoice = edge.from == run.currentNodeID
+                                    && run.reachableChoices().contains(where: { $0.id == edge.to })
+                                if isChoice {
                                     chartEdge(
                                         from: edge.from,
                                         to: edge.to,
                                         positions: positions,
-                                        kind: .idle
+                                        kind: .choice
                                     )
-                                }
-                                ForEach(Array(run.pathTaken.enumerated()), id: \.offset) { _, edge in
-                                    chartEdge(
-                                        from: edge.from,
-                                        to: edge.to,
-                                        positions: positions,
-                                        kind: .traversed
-                                    )
-                                }
-                                ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
-                                    let isChoice = edge.from == run.currentNodeID
-                                        && run.reachableChoices().contains(where: { $0.id == edge.to })
-                                    if isChoice {
-                                        chartEdge(
-                                            from: edge.from,
-                                            to: edge.to,
-                                            positions: positions,
-                                            kind: .choice
-                                        )
-                                    }
-                                }
-                                ForEach(run.nodes) { node in
-                                    if let point = positions[node.id] {
-                                        nodeChip(node, positions: positions, hidePlayerWhileMarching: isMarching)
-                                            .id(node.id)
-                                            .position(point)
-                                    }
-                                }
-                                if let marchPosition {
-                                    climbPlayerToken(size: 58, flashing: false)
-                                        .position(marchPosition)
-                                        .zIndex(20)
-                                        .allowsHitTesting(false)
-                                        .accessibilityHidden(true)
                                 }
                             }
+                            ForEach(run.nodes) { node in
+                                if let point = positions[node.id] {
+                                    nodeChip(node, positions: positions, hidePlayerWhileMarching: isMarching)
+                                        .id(node.id)
+                                        .position(point)
+                                }
+                            }
+                        }
 
+                        if let marchPosition {
+                            climbPlayerToken(size: 58, flashing: false)
+                                .position(marchPosition)
+                                .zIndex(20)
+                                .allowsHitTesting(false)
+                        }
+
+                        if !reduceMotion {
                             MarbleVoyageSceneAtmosphere(
                                 mood: .climb,
                                 parallax: CGSize(
@@ -591,102 +668,168 @@ struct MarbleVoyageHostView: View {
                             .allowsHitTesting(false)
                             .zIndex(25)
                         }
-                        .frame(width: contentWidth, height: contentHeight)
-                        .background(
-                            GeometryReader { proxy in
-                                Color.clear.preference(
-                                    key: MarbleVoyageClimbScrollOffsetKey.self,
-                                    value: -proxy.frame(in: .named("marbleVoyageClimbScroll")).minY
-                                )
-                            }
-                        )
-                        .preference(
-                            key: MarbleVoyageChartSizeKey.self,
-                            value: CGSize(width: contentWidth, height: contentHeight)
-                        )
                     }
-                    .frame(width: contentWidth)
-                    .coordinateSpace(name: "marbleVoyageClimbScroll")
-                    .onPreferenceChange(MarbleVoyageClimbScrollOffsetKey.self) { climbScrollOffset = $0 }
-                    .onAppear {
-                        dockPulse = true
-                        chartContentSize = CGSize(width: contentWidth, height: contentHeight)
-                        pulseAtmosphere()
-                        playClimbIntro(proxy: proxy)
-                    }
-                    .onPreferenceChange(MarbleVoyageChartSizeKey.self) { chartContentSize = $0 }
-                    .onChange(of: run?.currentNodeID) { _, _ in
-                        marchChart(proxy: proxy, animated: !reduceMotion, anchor: .center)
-                    }
-                    .onChange(of: run?.seed) { _, _ in
-                        climbIntroToken &+= 1
-                        playClimbIntro(proxy: proxy)
-                    }
+                    .frame(width: contentWidth, height: contentHeight, alignment: .topLeading)
+                    .offset(y: -climbCameraOffset)
                 }
+                .frame(width: contentWidth, height: geo.size.height, alignment: .top)
+                .clipped()
+                .contentShape(Rectangle())
+                .gesture(climbPanGesture(maxOffset: maxOffset))
                 Spacer(minLength: 0)
+            }
+            .onAppear {
+                dockPulse = true
+                chartContentSize = CGSize(width: contentWidth, height: contentHeight)
+                pulseAtmosphere()
+                playClimbIntro(
+                    contentHeight: contentHeight,
+                    viewportHeight: geo.size.height,
+                    positions: positions
+                )
+            }
+            .onChange(of: geo.size) { _, newSize in
+                let resized = MarbleVoyageClimbMap.contentSize(in: newSize)
+                chartContentSize = resized
+                let newMax = max(0, resized.height - newSize.height)
+                let clamped = min(max(0, climbCameraOffset), newMax)
+                climbCameraOffset = clamped
+                climbScrollOffset = clamped
+            }
+            .onChange(of: run?.currentNodeID) { _, _ in
+                guard !isClimbIntroPlaying else { return }
+                marchChart(
+                    contentHeight: contentHeight,
+                    viewportHeight: geo.size.height,
+                    positions: positions,
+                    animated: !reduceMotion
+                )
+            }
+            .onChange(of: run?.seed) { _, _ in
+                climbIntroToken &+= 1
+                climbIntroPlayedSeed = nil
+                playClimbIntro(
+                    contentHeight: contentHeight,
+                    viewportHeight: geo.size.height,
+                    positions: positions
+                )
             }
         }
         .accessibilityIdentifier("world2.marbleVoyage.chart")
-        .allowsHitTesting(!isMarching)
+        .allowsHitTesting(!isMarching && !isClimbIntroPlaying)
     }
 
     private func climbPosterBackdrop(width: CGFloat, height: CGFloat) -> some View {
-        ZStack {
-            Color(red: 0.45, green: 0.72, blue: 0.95)
-            if UIImage(named: MarbleVoyageClimbMap.catalogName) != nil {
-                Image(MarbleVoyageClimbMap.catalogName)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: width, height: height)
-            } else {
-                World2SemanticImage(
-                    semanticName: MarbleVoyageClimbMap.semanticID,
-                    fallbackIcon: "mountain.2.fill",
-                    fallbackLabel: "Climb"
-                )
-                .scaledToFit()
-                .frame(width: width, height: height)
-            }
-        }
-        .frame(width: width, height: height)
-        .accessibilityHidden(true)
+        MarbleVoyageBlueprintPaper(width: width, height: height)
     }
 
-    /// Summit / boss first, then pan down so the player sits in the screen center.
-    private func playClimbIntro(proxy: ScrollViewProxy) {
+    private func climbPanGesture(maxOffset: CGFloat) -> some Gesture {
+        DragGesture(minimumDistance: 12)
+            .onChanged { value in
+                guard !isClimbIntroPlaying, !isMarching else { return }
+                if climbDragAnchor == nil {
+                    climbDragAnchor = climbCameraOffset
+                }
+                let next = (climbDragAnchor ?? climbCameraOffset) - value.translation.height
+                let clamped = min(max(0, next), maxOffset)
+                climbCameraOffset = clamped
+                climbScrollOffset = clamped
+            }
+            .onEnded { _ in
+                climbDragAnchor = nil
+            }
+    }
+
+    private func climbOffsetCentering(
+        pointY: CGFloat,
+        viewportHeight: CGFloat,
+        maxOffset: CGFloat,
+        anchorY: CGFloat
+    ) -> CGFloat {
+        let raw = pointY - viewportHeight * anchorY
+        return min(max(0, raw), maxOffset)
+    }
+
+    private func setClimbCamera(_ offset: CGFloat, animated: Bool, duration: TimeInterval) {
+        let apply = {
+            climbCameraOffset = offset
+            climbScrollOffset = offset
+        }
+        if animated {
+            withAnimation(.easeInOut(duration: duration)) { apply() }
+        } else {
+            var t = Transaction()
+            t.disablesAnimations = true
+            withTransaction(t) { apply() }
+        }
+    }
+
+    /// Summit / top of map first, then pan down so the player sits in the screen center.
+    private func playClimbIntro(
+        contentHeight: CGFloat,
+        viewportHeight: CGFloat,
+        positions: [String: CGPoint]
+    ) {
         guard let run else { return }
         let token = climbIntroToken
-        let bossID = run.nodes.first(where: { $0.kind == .boss })?.id
-        let playerID = run.currentNodeID
+        let maxOffset = max(0, contentHeight - viewportHeight)
+        let playerY = positions[run.currentNodeID]?.y
+            ?? contentHeight * 0.90
+        let endOffset = climbOffsetCentering(
+            pointY: playerY,
+            viewportHeight: viewportHeight,
+            maxOffset: maxOffset,
+            anchorY: MarbleVoyageDesignRules.climbIntroPlayerScrollAnchorY
+        )
 
-        if let bossID {
-            proxy.scrollTo(bossID, anchor: .center)
-        } else {
-            proxy.scrollTo(playerID, anchor: UnitPoint(x: 0.5, y: 0.05))
+        // Returning from a fight/event: snap to player — do not re-run the overview.
+        if climbIntroPlayedSeed == run.seed {
+            setClimbCamera(endOffset, animated: false, duration: 0)
+            isClimbIntroPlaying = false
+            return
         }
+        climbIntroPlayedSeed = run.seed
 
-        let settle: TimeInterval = reduceMotion ? 0.12 : 0.7
-        let pan: TimeInterval = reduceMotion ? 0.3 : 1.8
+        // Top of map frames the boss/summit; porthole starts at content offset 0.
+        let bossID = run.nodes.first(where: { $0.kind == .boss })?.id
+        _ = bossID
+        isClimbIntroPlaying = true
+        setClimbCamera(0, animated: false, duration: 0)
+
+        let settle: TimeInterval = reduceMotion
+            ? 0.12
+            : MarbleVoyageDesignRules.climbIntroSettleSeconds
+        let pan: TimeInterval = reduceMotion
+            ? 0.3
+            : MarbleVoyageDesignRules.climbIntroPanSeconds
+
         DispatchQueue.main.asyncAfter(deadline: .now() + settle) {
             guard token == climbIntroToken else { return }
-            withAnimation(.easeInOut(duration: pan)) {
-                proxy.scrollTo(playerID, anchor: .center)
+            setClimbCamera(endOffset, animated: true, duration: pan)
+            DispatchQueue.main.asyncAfter(deadline: .now() + pan) {
+                guard token == climbIntroToken else { return }
+                setClimbCamera(endOffset, animated: false, duration: 0)
+                isClimbIntroPlaying = false
             }
         }
     }
 
     private func marchChart(
-        proxy: ScrollViewProxy,
-        animated: Bool,
-        anchor: UnitPoint = .center
+        contentHeight: CGFloat,
+        viewportHeight: CGFloat,
+        positions: [String: CGPoint],
+        animated: Bool
     ) {
-        guard let focus = run?.currentNodeID else { return }
-        let action = { proxy.scrollTo(focus, anchor: anchor) }
-        if animated {
-            withAnimation(.easeInOut(duration: 0.85)) { action() }
-        } else {
-            action()
-        }
+        guard let focus = run?.currentNodeID,
+              let point = positions[focus] else { return }
+        let maxOffset = max(0, contentHeight - viewportHeight)
+        let target = climbOffsetCentering(
+            pointY: point.y,
+            viewportHeight: viewportHeight,
+            maxOffset: maxOffset,
+            anchorY: 0.5
+        )
+        setClimbCamera(target, animated: animated, duration: 0.85)
     }
 
     private enum ChartEdgeKind {
@@ -778,54 +921,99 @@ struct MarbleVoyageHostView: View {
             let showPlayer = isHere
             let isReachable = run.reachableChoices().contains(where: { $0.id == node.id })
             let seen = run.visited.contains(node.id)
-            let rgb = MarbleVoyageArt.chipTint(node.kind)
-            let tint = Color(red: rgb.r, green: rgb.g, blue: rgb.b)
-            let chip = VStack(spacing: 4) {
+            let rose = MarbleVoyageArt.chartTileRose
+            let tint = Color(red: rose.r, green: rose.g, blue: rose.b)
+            let tile = MarbleVoyageArt.chartTileSize
+            let corner = MarbleVoyageArt.chartTileCorner
+            let chip = VStack(spacing: 6) {
                 ZStack {
-                    if showPlayer {
-                        climbPlayerToken(size: isDock ? 66 : 60, flashing: true)
-                    } else {
-                        Circle()
-                            .fill(tint.opacity(isReachable ? 0.95 : seen ? 0.78 : 0.28))
-                            .frame(width: 52, height: 52)
-                            .overlay(
-                                Circle().stroke(
-                                    seen && !isReachable
-                                        ? Color(red: 1.0, green: 0.82, blue: 0.22)
-                                        : .white.opacity(isReachable ? 0.95 : 0.35),
-                                    lineWidth: seen && !isReachable ? 3.5 : (isReachable ? 3 : 1.5)
+                    RoundedRectangle(cornerRadius: corner, style: .continuous)
+                        .fill(tint.opacity(showPlayer ? 0.98 : (isReachable ? 0.96 : seen ? 0.82 : 0.34)))
+                        .frame(width: tile, height: tile)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: corner, style: .continuous)
+                                .stroke(
+                                    showPlayer
+                                        ? Color(red: 0.45, green: 0.95, blue: 0.7)
+                                        : (seen && !isReachable
+                                           ? Color(red: 1.0, green: 0.82, blue: 0.22)
+                                           : .white.opacity(isReachable ? 0.95 : 0.4)),
+                                    lineWidth: showPlayer ? 4 : (seen && !isReachable ? 4 : (isReachable ? 3.5 : 2))
                                 )
-                            )
+                        )
+                        .shadow(
+                            color: showPlayer
+                                ? Color(red: 0.3, green: 0.95, blue: 0.55).opacity(0.55)
+                                : (isReachable
+                                   ? tint.opacity(0.7)
+                                   : (seen ? Color(red: 1.0, green: 0.82, blue: 0.22).opacity(0.5) : .clear)),
+                            radius: showPlayer || seen || isReachable ? 10 : 0
+                        )
+
+                    if showPlayer {
+                        PeglinAbbieBattlePortrait(state: .happy, size: tile * 0.72)
                             .shadow(
-                                color: isReachable
-                                    ? tint.opacity(0.7)
-                                    : (seen ? Color(red: 1.0, green: 0.82, blue: 0.22).opacity(0.55) : .clear),
-                                radius: seen || isReachable ? 8 : 0
+                                color: Color(red: 0.3, green: 0.95, blue: 0.55).opacity(0.55),
+                                radius: 8
                             )
-                        Image(systemName: MarbleVoyageArt.eventAccentIcon(node.kind))
-                            .font(.system(size: 18, weight: .black))
-                            .foregroundStyle(.white)
-                        if seen && !isReachable && !showPlayer {
+                            .scaleEffect(dockPulse && !reduceMotion ? 1.04 : 1.0)
+                    } else if let fighter = chartFighterKind(for: node, run: run) {
+                        chartFighterPortrait(
+                            kind: fighter,
+                            tile: tile,
+                            ominous: node.gangRole == .bigBoss || node.kind == .boss
+                        )
+                        if seen && !isReachable {
                             Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: 18, weight: .black))
+                                .font(.system(size: 28, weight: .black))
                                 .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.25))
-                                .background(Circle().fill(Color.black.opacity(0.55)).frame(width: 16, height: 16))
-                                .offset(x: 18, y: -18)
+                                .background(
+                                    Circle()
+                                        .fill(Color.black.opacity(0.55))
+                                        .frame(width: 26, height: 26)
+                                )
+                                .offset(x: tile * 0.38, y: -tile * 0.38)
+                        }
+                    } else {
+                        Image(systemName: MarbleVoyageArt.eventAccentIcon(node.kind))
+                            .font(.system(size: MarbleVoyageArt.chartTileIconSize, weight: .black))
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(.white)
+                            .shadow(color: .black.opacity(0.45), radius: 2, y: 1)
+                        if seen && !isReachable {
+                            Image(systemName: "checkmark.circle.fill")
+                                .font(.system(size: 28, weight: .black))
+                                .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.25))
+                                .background(
+                                    Circle()
+                                        .fill(Color.black.opacity(0.55))
+                                        .frame(width: 26, height: 26)
+                                )
+                                .offset(x: tile * 0.38, y: -tile * 0.38)
                         }
                     }
                 }
+                .frame(width: tile, height: tile)
                 Text(showPlayer ? (isDock ? "You · Dock" : "You") : node.title)
-                    .font(.system(size: 11, weight: .black, design: .rounded))
+                    .font(.system(size: 13, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
                     .shadow(color: .black.opacity(0.85), radius: 2, y: 1)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 3)
-                    .background(Color.black.opacity(0.42), in: Capsule())
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 4)
+                    .background(Color.black.opacity(0.45), in: Capsule())
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
-                    .frame(width: 96)
+                    .frame(width: MarbleVoyageArt.chartTileLabelWidth)
             }
-            .scaleEffect(isReachable && !reduceMotion ? 1.06 : 1)
+            .scaleEffect(reachableTileScale(isReachable: isReachable, isBoss: node.kind == .boss))
+            .animation(
+                isReachable && node.kind != .boss && !reduceMotion
+                    ? .easeInOut(duration: 0.9).repeatForever(autoreverses: true)
+                    : (showPlayer && !reduceMotion
+                       ? .easeInOut(duration: 0.7).repeatForever(autoreverses: true)
+                       : .default),
+                value: dockPulse
+            )
             .accessibilityLabel(showPlayer ? "Abbie at \(node.title)" : "\(node.kind.displayName): \(node.title)")
             .accessibilityIdentifier(
                 isReachable
@@ -845,6 +1033,64 @@ struct MarbleVoyageHostView: View {
                 chip
             }
         }
+    }
+
+    /// Fighter shown on a fight/boss chart tile — henchman, that land's boss, or the summit boss.
+    private func chartFighterKind(for node: MarbleVoyageNode, run: MarbleVoyageRun) -> PlinkAttackerKind? {
+        switch node.kind {
+        case .fight, .boss:
+            if let attacker = node.waveAttacker { return attacker }
+            switch node.gangRole {
+            case .bigBoss:
+                return run.gang.bigBoss
+            case .miniBoss where node.miniArcIndex >= 0:
+                return run.gang.miniBoss(arcIndex: node.miniArcIndex)
+            default:
+                return node.kind == .boss ? run.gang.bigBoss : nil
+            }
+        default:
+            return nil
+        }
+    }
+
+    /// Next-level choices keep the same base size; only a gentle grow/shrink tween.
+    /// Boss tiles never scale — they use an opacity/glow pulse instead.
+    private func reachableTileScale(isReachable: Bool, isBoss: Bool = false) -> CGFloat {
+        guard isReachable, !isBoss else { return 1 }
+        if reduceMotion { return 1 }
+        return dockPulse ? 1.1 : 0.92
+    }
+
+    /// Fight / mini / big-boss chart portrait. Big boss gets ominous glow (no size pulse).
+    @ViewBuilder
+    private func chartFighterPortrait(kind: PlinkAttackerKind, tile: CGFloat, ominous: Bool) -> some View {
+        let glow = ominous && !reduceMotion && dockPulse
+        ZStack {
+            if let img = kind.catalogImage(for: .idle) {
+                Image(uiImage: img)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: tile * 0.88, height: tile * 0.88)
+            } else {
+                Image(systemName: kind.isNamedCrew ? "crown.fill" : "skull.fill")
+                    .font(.system(size: MarbleVoyageArt.chartTileIconSize, weight: .black))
+                    .foregroundStyle(.white)
+            }
+        }
+        .opacity(ominous ? (glow ? 1.0 : 0.72) : 1)
+        .shadow(
+            color: ominous
+                ? Color(red: 0.85, green: 0.15, blue: 0.35).opacity(glow ? 0.95 : 0.35)
+                : .black.opacity(0.35),
+            radius: ominous ? (glow ? 18 : 6) : 4
+        )
+        .animation(
+            ominous && !reduceMotion
+                ? .easeInOut(duration: 1.15).repeatForever(autoreverses: true)
+                : .default,
+            value: dockPulse
+        )
+        .accessibilityLabel(ominous ? "Boss \(kind.displayName)" : kind.displayName)
     }
 
     private func climbPlayerToken(size: CGFloat, flashing: Bool) -> some View {
@@ -924,27 +1170,45 @@ struct MarbleVoyageHostView: View {
 
     private func fightPhase(_ node: MarbleVoyageNode) -> some View {
         let active = run
+        let focusCrew: PlinkAttackerKind? = {
+            guard let gang = active?.gang else { return nil }
+            switch node.gangRole {
+            case .bigBoss:
+                return gang.bigBoss
+            case .miniBoss, .henchman:
+                guard node.miniArcIndex >= 0 else { return nil }
+                return gang.miniBoss(arcIndex: node.miniArcIndex)
+            case .none:
+                return nil
+            }
+        }()
         return PlinkBattleHostView(
             title: node.title,
             enemyKind: node.enemyKind,
+            waveAttackerOverride: node.waveAttacker,
+            climbStage: max(1, node.stage),
+            attackerPortraitScale: active.map { $0.attackerPortraitScale(for: node) } ?? 1,
+            focusCrewMember: focusCrew,
+            gangFightRole: node.gangRole,
             sceneBackgroundAsset: MarbleVoyageArt.fightPlate(enemy: node.enemyKind),
             playerID: playerID,
             startingPlayerHP: active?.playerHP,
             overrideEnemyMaxHP: active.map { $0.enemyMaxHP(for: node) },
             overridePlayerMaxHP: active?.playerMaxHP,
             overrideEnemyAttack: active.map { $0.enemyAttack(for: node) },
+            voyageEconomy: active.map { voyageTunables(for: $0) },
             onExit: {
                 MarbleVoyageAudio.defeat()
                 run?.phase = .defeat
                 run?.lastEventLine = "Left the fight — voyage abandoned."
             },
             onVictory: nil,
-            onBattleEnded: { won, remaining in
+            onBattleEnded: { won, remaining, goldEarned in
                 DispatchQueue.main.asyncAfter(deadline: .now() + (won ? 1.35 : 1.0)) {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.84)) {
                         let enemy = node.enemyKind
                         let wasBoss = node.kind == .boss
-                        run?.finishFight(won: won, remainingHP: remaining)
+                        run?.finishFight(won: won, remainingHP: remaining, goldEarned: goldEarned)
                         if won {
                             let pulse = gallery.recordFightWin(
                                 isBoss: wasBoss,
@@ -953,6 +1217,14 @@ struct MarbleVoyageHostView: View {
                                 mode: run?.mode ?? .campaign
                             )
                             presentUnlockToast(pulse)
+                            MarbleVoyagePlayerStats.recordFightWin(
+                                playerKey: statsPlayerKey,
+                                isMiniBoss: node.gangRole == .miniBoss,
+                                isBigBoss: node.gangRole == .bigBoss || wasBoss,
+                                fightsClearedAfter: run?.fightsCleared ?? 0,
+                                mode: run?.mode ?? .campaign
+                            )
+                            reloadStats()
                             if run?.mode == .endless {
                                 let depth = run?.fightsCleared ?? 0
                                 let endlessPulse = gallery.recordEndlessBest(depth)
@@ -967,6 +1239,19 @@ struct MarbleVoyageHostView: View {
                     }
                 }
             }
+        )
+    }
+
+    /// Gold prevalence / ball power / charm effects the board needs for this fight.
+    private func voyageTunables(for run: MarbleVoyageRun) -> PlinkVoyageTunables {
+        PlinkVoyageTunables(
+            goldPegPrevalence: run.economy.goldPegPrevalence,
+            goldPegValue: run.effectiveGoldPegValue,
+            ballDamageMultiplier: run.fightDamageMultiplier,
+            cycleExtra: MarbleVoyageCharm.extraSpecialPegs(cycleStacks: run.charmStack(.cycle)),
+            sockSnatch: MarbleVoyageCharm.bombClearCoins(sockSnatchStacks: run.charmStack(.sockSnatch)),
+            prismBonus: MarbleVoyageCharm.prismCageBonus(stacks: run.charmStack(.prismBurst)),
+            softPurr: MarbleVoyageCharm.biteDamageReduction(softPurrStacks: run.charmStack(.softPurr))
         )
     }
 
@@ -1014,6 +1299,8 @@ struct MarbleVoyageHostView: View {
                 withAnimation(.spring(response: 0.38, dampingFraction: 0.82)) {
                     if outcome.hpDelta > 0 {
                         presentUnlockToast(gallery.recordHealEvent())
+                        MarbleVoyagePlayerStats.recordHeal(playerKey: statsPlayerKey)
+                        reloadStats()
                     }
                     run?.applyEvent(outcome)
                     eventOutcome = nil
@@ -1022,9 +1309,13 @@ struct MarbleVoyageHostView: View {
                 Text("Continue")
                     .font(.system(size: 20, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
-                    .padding(.horizontal, 36)
+                    .frame(maxWidth: 280)
                     .padding(.vertical, 14)
-                    .background(Color(red: 0.2, green: 0.55, blue: 0.75), in: Capsule())
+                    .background(MarbleVoyageChrome.primaryFill, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 18, style: .continuous)
+                            .stroke(MarbleVoyageChrome.glassStroke, lineWidth: 1.5)
+                    )
             }
             .buttonStyle(.plain)
             .accessibilityIdentifier("world2.marbleVoyage.event.continue")
@@ -1046,53 +1337,48 @@ struct MarbleVoyageHostView: View {
                 .multilineTextAlignment(.center)
                 .padding(.horizontal, 32)
             HStack(spacing: 12) {
-                Button {
+                MarbleVoyagePrimaryButton(
+                    title: "Sail again",
+                    systemImage: "arrow.clockwise",
+                    fill: tint,
+                    accessibilityID: "world2.marbleVoyage.again"
+                ) {
                     MarbleVoyageAudio.modeSelect()
                     if let mode {
                         run = MarbleVoyageRun.make(mode: mode)
+                        MarbleVoyagePlayerStats.recordSessionStart(playerKey: statsPlayerKey)
+                        reloadStats()
                     } else {
                         shell = .title
                         run = nil
                     }
                     eventOutcome = nil
-                } label: {
-                    Text("Sail again")
-                        .font(.system(size: 18, weight: .black, design: .rounded))
-                        .padding(.horizontal, 22)
-                        .padding(.vertical, 12)
-                        .background(tint, in: Capsule())
-                        .foregroundStyle(.white)
                 }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("world2.marbleVoyage.again")
-                Button {
-                    MarbleVoyageAudio.tap()
+                .frame(maxWidth: 220)
+
+                MarbleVoyageSecondaryButton(
+                    title: "Title",
+                    systemImage: "house.fill",
+                    accessibilityID: "world2.marbleVoyage.titleReturn"
+                ) {
                     withAnimation {
                         shell = .title
                         run = nil
                         eventOutcome = nil
+                        reloadStats()
                     }
-                } label: {
-                    Text("Title")
-                        .font(.system(size: 18, weight: .black, design: .rounded))
-                        .padding(.horizontal, 22)
-                        .padding(.vertical, 12)
-                        .background(.white.opacity(0.18), in: Capsule())
-                        .foregroundStyle(.white)
                 }
-                .buttonStyle(.plain)
+
                 if !isStandalone {
-                    Button(action: onExit) {
-                        Text("World")
-                            .font(.system(size: 18, weight: .black, design: .rounded))
-                            .padding(.horizontal, 22)
-                            .padding(.vertical, 12)
-                            .background(.white.opacity(0.18), in: Capsule())
-                            .foregroundStyle(.white)
-                    }
-                    .buttonStyle(.plain)
+                    MarbleVoyageSecondaryButton(
+                        title: "World",
+                        systemImage: "globe.americas.fill",
+                        accessibilityID: "world2.marbleVoyage.world",
+                        action: onExit
+                    )
                 }
             }
+            .padding(.horizontal, 24)
             Spacer()
         }
     }
@@ -1112,10 +1398,3 @@ struct MarbleVoyageHostView: View {
     }
 }
 
-private struct MarbleVoyageChartSizeKey: PreferenceKey {
-    static var defaultValue: CGSize = .zero
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
-        let next = nextValue()
-        if next.width > 1 { value = next }
-    }
-}

@@ -221,8 +221,33 @@ struct PeglinEnemyBattlePortrait: View {
         case .brambleSpirit: return Image(systemName: "hare.fill")
         case .foxSpirit: return Image(systemName: "pawprint.fill")
         case .stagSpirit: return Image(systemName: "leaf.fill")
+        case .burrowJackal: return Image(systemName: "flame.fill")
         case .bizarroAbbie: return Image(systemName: "person.fill.questionmark")
         }
+    }
+}
+
+/// Wave-attacker portrait — named badguy gang (Raze/Vix/Morrow/Nib) or forest fauna.
+struct PlinkAttackerBattlePortrait: View {
+    var kind: PlinkAttackerKind
+    var pose: PlinkAttackerPose = .idle
+    var size: CGFloat = 72
+
+    var body: some View {
+        PeglinBattlePortraitFrame(
+            image: attackerImage,
+            size: size,
+            stroke: Color(red: 1.0, green: 0.55, blue: 0.28).opacity(0.9),
+            accessibilityLabel: "\(kind.displayName) \(pose.rawValue)",
+            accessibilityIdentifier: "world2.plink.battle.attackerPortrait"
+        )
+    }
+
+    private var attackerImage: Image {
+        if let ui = kind.catalogImage(for: pose) {
+            return Image(uiImage: ui)
+        }
+        return Image(systemName: "bird.fill")
     }
 }
 

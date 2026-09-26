@@ -100,4 +100,40 @@ final class PlinkCavernSimTests: XCTestCase {
         XCTAssertGreaterThan(force.forceKick, 40)
         XCTAssertEqual(stone.forceKick, 0)
     }
+
+    /// Evan physics rule: head-on under-peg hit must not rebound straight up (+Y).
+    func testBounceFromHeadOnUnderPegIsNotStraightUp() {
+        let config = ContinuumConfig(
+            size: CGSize(width: 400, height: 600),
+            pegRadius: 10,
+            ballRadius: 8,
+            tuning: .default
+        )
+        let pegPos = CGPoint(x: 200, y: 300)
+        // Ball approaching from below along the peg's +Y normal.
+        let inbound = CGVector(dx: 0, dy: -400)
+        let normal = CGVector(dx: 0, dy: 1)
+        let out = PlinkContinuum.bounce(
+            ballVel: inbound,
+            pegPos: pegPos,
+            normal: normal,
+            pegSurface: 0.8,
+            forceKick: 0,
+            config: config
+        )
+        XCTAssertGreaterThan(out.vel.dy, 0, "Should rebound upward")
+        let speed = hypot(out.vel.dx, out.vel.dy)
+        XCTAssertGreaterThan(speed, 1)
+        let lateralFrac = abs(out.vel.dx) / speed
+        XCTAssertGreaterThanOrEqual(
+            lateralFrac,
+            PlinkContinuum.minUpwardLateralFraction - 0.001,
+            "Outbound must leave the straight-up cone (~\(PlinkContinuum.straightUpConeDegrees)°)"
+        )
+        // Direct clamp unit check: pure +Y gets a lateral kick.
+        var pureUp = CGVector(dx: 0, dy: 500)
+        PlinkContinuum.avoidStraightUpVelocity(&pureUp, preferredSign: 1)
+        XCTAssertGreaterThan(abs(pureUp.dx), 0)
+        XCTAssertEqual(hypot(pureUp.dx, pureUp.dy), 500, accuracy: 0.5)
+    }
 }

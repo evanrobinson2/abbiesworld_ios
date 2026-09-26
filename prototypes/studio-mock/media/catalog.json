@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "generatedAt": "2026-09-25T20:45:00Z",
+  "generatedAt": "2026-09-25T22:40:00Z",
   "basePath": "/media",
   "license": {
-    "sfx": "Kenney Interface Sounds + UI Audio (CC0) — see /media/sfx/plink/KENNEY_LICENSE.txt"
+    "sfx": "Kenney Interface Sounds + UI Audio (CC0) \u2014 see /media/sfx/plink/KENNEY_LICENSE.txt"
   },
   "groups": [
     {
@@ -39,8 +39,16 @@
       "group": "combat",
       "title": "Hit (cycle)",
       "cue": "hit",
-      "files": ["sfx/plink/plink_hit_a.wav", "sfx/plink/plink_hit_b.wav", "sfx/plink/plink_hit_c.wav"],
-      "tags": ["peg", "damage", "plink"]
+      "files": [
+        "sfx/plink/plink_hit_a.wav",
+        "sfx/plink/plink_hit_b.wav",
+        "sfx/plink/plink_hit_c.wav"
+      ],
+      "tags": [
+        "peg",
+        "damage",
+        "plink"
+      ]
     },
     {
       "id": "sfx.plink.pop",
@@ -48,8 +56,13 @@
       "group": "combat",
       "title": "Pop",
       "cue": "pop",
-      "files": ["sfx/plink/plink_pop.wav"],
-      "tags": ["peg", "clear"]
+      "files": [
+        "sfx/plink/plink_pop.wav"
+      ],
+      "tags": [
+        "peg",
+        "clear"
+      ]
     },
     {
       "id": "sfx.plink.crit",
@@ -57,8 +70,13 @@
       "group": "combat",
       "title": "Crit",
       "cue": "crit",
-      "files": ["sfx/plink/plink_crit.wav"],
-      "tags": ["crit", "power"]
+      "files": [
+        "sfx/plink/plink_crit.wav"
+      ],
+      "tags": [
+        "crit",
+        "power"
+      ]
     },
     {
       "id": "sfx.plink.hurt",
@@ -66,8 +84,13 @@
       "group": "combat",
       "title": "Hurt",
       "cue": "hurt",
-      "files": ["sfx/plink/plink_hurt.wav"],
-      "tags": ["damage", "player"]
+      "files": [
+        "sfx/plink/plink_hurt.wav"
+      ],
+      "tags": [
+        "damage",
+        "player"
+      ]
     },
     {
       "id": "sfx.plink.miss",
@@ -75,8 +98,13 @@
       "group": "combat",
       "title": "Miss / defeat sting",
       "cue": "miss",
-      "files": ["sfx/plink/plink_miss.wav"],
-      "tags": ["miss", "defeat"]
+      "files": [
+        "sfx/plink/plink_miss.wav"
+      ],
+      "tags": [
+        "miss",
+        "defeat"
+      ]
     },
     {
       "id": "sfx.plink.win",
@@ -84,8 +112,13 @@
       "group": "combat",
       "title": "Win / heal",
       "cue": "win",
-      "files": ["sfx/plink/plink_win.wav"],
-      "tags": ["victory", "heal"]
+      "files": [
+        "sfx/plink/plink_win.wav"
+      ],
+      "tags": [
+        "victory",
+        "heal"
+      ]
     },
     {
       "id": "sfx.plink.launch",
@@ -93,8 +126,14 @@
       "group": "voyage",
       "title": "Launch / scene whoosh",
       "cue": "launch",
-      "files": ["sfx/plink/plink_launch.wav"],
-      "tags": ["orb", "transition", "march"]
+      "files": [
+        "sfx/plink/plink_launch.wav"
+      ],
+      "tags": [
+        "orb",
+        "transition",
+        "march"
+      ]
     },
     {
       "id": "sfx.plink.ui",
@@ -102,8 +141,14 @@
       "group": "ui",
       "title": "UI tap",
       "cue": "ui",
-      "files": ["sfx/plink/plink_ui.wav", "sfx/plink/plink_ui_click.wav"],
-      "tags": ["menu", "button"]
+      "files": [
+        "sfx/plink/plink_ui.wav",
+        "sfx/plink/plink_ui_click.wav"
+      ],
+      "tags": [
+        "menu",
+        "button"
+      ]
     },
     {
       "id": "sfx.plink.drop",
@@ -111,8 +156,14 @@
       "group": "voyage",
       "title": "Marble drop into deck",
       "cue": "drop",
-      "files": ["sfx/plink/plink_pop.wav", "sfx/plink/plink_ui_click.wav"],
-      "tags": ["deck", "marble"]
+      "files": [
+        "sfx/plink/plink_pop.wav",
+        "sfx/plink/plink_ui_click.wav"
+      ],
+      "tags": [
+        "deck",
+        "marble"
+      ]
     },
     {
       "id": "sfx.plink.march",
@@ -120,25 +171,41 @@
       "group": "voyage",
       "title": "Climb path march",
       "cue": "march",
-      "files": ["sfx/plink/plink_launch.wav"],
-      "tags": ["map", "path"]
+      "files": [
+        "sfx/plink/plink_launch.wav"
+      ],
+      "tags": [
+        "map",
+        "path"
+      ]
     },
     {
       "id": "sfx.plink.ready",
       "kind": "sfx",
       "group": "ui",
-      "title": "Deck ready (≥3)",
+      "title": "Deck ready (\u22653)",
       "cue": "ready",
-      "files": ["sfx/plink/plink_crit.wav"],
-      "tags": ["deck", "ready"]
+      "files": [
+        "sfx/plink/plink_crit.wav"
+      ],
+      "tags": [
+        "deck",
+        "ready"
+      ]
     },
     {
       "id": "map.marbleVoyage.climb",
       "kind": "image",
       "group": "maps",
       "title": "Marble Voyage climb island",
-      "files": ["maps/marbleVoyage/climb.jpg"],
-      "tags": ["overland", "poster", "tall"],
+      "files": [
+        "maps/marbleVoyage/climb.jpg"
+      ],
+      "tags": [
+        "overland",
+        "poster",
+        "tall"
+      ],
       "aspect": "1:3"
     },
     {
@@ -146,48 +213,197 @@
       "kind": "image",
       "group": "icons",
       "title": "Cage frame",
-      "files": ["images/plink/world2_plink_cage_frame.png"],
-      "tags": ["rescue", "cage"]
+      "files": [
+        "images/plink/world2_plink_cage_frame.png"
+      ],
+      "tags": [
+        "rescue",
+        "cage"
+      ]
     },
     {
       "id": "ui.plink.cage.broken",
       "kind": "image",
       "group": "icons",
       "title": "Cage broken",
-      "files": ["images/plink/world2_plink_cage_broken.png"],
-      "tags": ["rescue", "cage"]
+      "files": [
+        "images/plink/world2_plink_cage_broken.png"
+      ],
+      "tags": [
+        "rescue",
+        "cage"
+      ]
     },
     {
       "id": "ui.plink.rescue.burst",
       "kind": "image",
       "group": "icons",
       "title": "Rescue burst",
-      "files": ["images/plink/world2_plink_rescue_burst.png"],
-      "tags": ["rescue"]
+      "files": [
+        "images/plink/world2_plink_rescue_burst.png"
+      ],
+      "tags": [
+        "rescue"
+      ]
     },
     {
       "id": "ui.plink.power.icon.refresh",
       "kind": "image",
       "group": "icons",
-      "title": "Power · Refresh (recycle)",
-      "files": ["images/plink/world2_plink_power_icon_refresh.png"],
-      "tags": ["power", "recycle"]
+      "title": "Power \u00b7 Refresh (recycle)",
+      "files": [
+        "images/plink/world2_plink_power_icon_refresh.png"
+      ],
+      "tags": [
+        "power",
+        "recycle"
+      ]
     },
     {
       "id": "ui.plink.power.icon.fire",
       "kind": "image",
       "group": "icons",
-      "title": "Power · Fire ball",
-      "files": ["images/plink/world2_plink_power_icon_fire.png"],
-      "tags": ["power", "fire"]
+      "title": "Power \u00b7 Fire ball",
+      "files": [
+        "images/plink/world2_plink_power_icon_fire.png"
+      ],
+      "tags": [
+        "power",
+        "fire"
+      ]
     },
     {
       "id": "ui.plink.power.icon.split",
       "kind": "image",
       "group": "icons",
-      "title": "Power · Split (3 balls)",
-      "files": ["images/plink/world2_plink_power_icon_split.png"],
-      "tags": ["power", "split"]
+      "title": "Power \u00b7 Split (3 balls)",
+      "files": [
+        "images/plink/world2_plink_power_icon_split.png"
+      ],
+      "tags": [
+        "power",
+        "split"
+      ]
+    },
+    {
+      "id": "token.plink.gang.raze",
+      "kind": "image",
+      "group": "icons",
+      "title": "Raze \u00b7 body",
+      "files": [
+        "images/plink/world2_plink_gang_raze.png"
+      ],
+      "tags": [
+        "gang",
+        "plink",
+        "raze",
+        "body"
+      ]
+    },
+    {
+      "id": "token.plink.gang.raze.portrait",
+      "kind": "image",
+      "group": "icons",
+      "title": "Raze \u00b7 bruiser portrait",
+      "files": [
+        "images/plink/world2_plink_gang_raze_portrait.png"
+      ],
+      "tags": [
+        "gang",
+        "plink",
+        "raze",
+        "portrait"
+      ]
+    },
+    {
+      "id": "token.plink.gang.vix",
+      "kind": "image",
+      "group": "icons",
+      "title": "Vix \u00b7 body",
+      "files": [
+        "images/plink/world2_plink_gang_vix.png"
+      ],
+      "tags": [
+        "gang",
+        "plink",
+        "vix",
+        "body"
+      ]
+    },
+    {
+      "id": "token.plink.gang.vix.portrait",
+      "kind": "image",
+      "group": "icons",
+      "title": "Vix \u00b7 lieutenant portrait",
+      "files": [
+        "images/plink/world2_plink_gang_vix_portrait.png"
+      ],
+      "tags": [
+        "gang",
+        "plink",
+        "vix",
+        "portrait"
+      ]
+    },
+    {
+      "id": "token.plink.gang.morrow",
+      "kind": "image",
+      "group": "icons",
+      "title": "Morrow \u00b7 body",
+      "files": [
+        "images/plink/world2_plink_gang_morrow.png"
+      ],
+      "tags": [
+        "gang",
+        "plink",
+        "morrow",
+        "body"
+      ]
+    },
+    {
+      "id": "token.plink.gang.morrow.portrait",
+      "kind": "image",
+      "group": "icons",
+      "title": "Morrow \u00b7 quartermaster portrait",
+      "files": [
+        "images/plink/world2_plink_gang_morrow_portrait.png"
+      ],
+      "tags": [
+        "gang",
+        "plink",
+        "morrow",
+        "portrait"
+      ]
+    },
+    {
+      "id": "token.plink.gang.nib",
+      "kind": "image",
+      "group": "icons",
+      "title": "Nib \u00b7 body",
+      "files": [
+        "images/plink/world2_plink_gang_nib.png"
+      ],
+      "tags": [
+        "gang",
+        "plink",
+        "nib",
+        "body"
+      ]
+    },
+    {
+      "id": "token.plink.gang.nib.portrait",
+      "kind": "image",
+      "group": "icons",
+      "title": "Nib \u00b7 hanger-on portrait",
+      "files": [
+        "images/plink/world2_plink_gang_nib_portrait.png"
+      ],
+      "tags": [
+        "gang",
+        "plink",
+        "nib",
+        "portrait"
+      ]
     }
   ]
 }

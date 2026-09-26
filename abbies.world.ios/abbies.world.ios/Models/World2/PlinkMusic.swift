@@ -3,7 +3,7 @@ import Combine
 import Foundation
 
 /// Peglin Edition soundtrack — parent-supplied drops under Resources/Music/World2.
-/// Safari / voyage chart: Meadow Remembers · Battle: Music Box Battle / Techno rotation.
+/// Voyage chart / title: Marble Voyage · Battle: Marble Time (+ legacy board rotation).
 @MainActor
 final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate {
     struct Track: Equatable {
@@ -14,6 +14,18 @@ final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate
     }
 
     static let playlist: [Track] = [
+        Track(
+            id: "marble-voyage",
+            filename: "plink_marble_voyage",
+            title: "Marble Voyage",
+            role: "safari"
+        ),
+        Track(
+            id: "marble-time",
+            filename: "plink_marble_time",
+            title: "Marble Time",
+            role: "play"
+        ),
         Track(
             id: "meadow-remembers",
             filename: "plink_meadow_remembers",
@@ -91,8 +103,8 @@ final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate
         playlist.filter { $0.role == "safari" }
     }
 
-    @Published private(set) var currentTrackID = "meadow-remembers"
-    @Published private(set) var currentTrackTitle = "Meadow Remembers"
+    @Published private(set) var currentTrackID = "marble-voyage"
+    @Published private(set) var currentTrackTitle = "Marble Voyage"
     @Published private(set) var isPlaying = false
 
     private var player: AVAudioPlayer?
@@ -106,22 +118,27 @@ final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate
 
     func playSafari() {
         autoAdvance = true
-        // Prefer Meadow Remembers as the voyage / lobby bed.
-        play(id: "meadow-remembers", loop: true, crossfade: true)
+        play(id: "marble-voyage", loop: true, crossfade: true)
     }
 
-    /// Alternate meadow bed (chart / title ambience).
+    /// Voyage chart / title bed — Marble Voyage (variant2 keeps a meadow alternate).
     func playMeadow(variant2: Bool = false) {
         autoAdvance = true
-        play(id: variant2 ? "meadow-remembers-2" : "meadow-remembers", loop: true, crossfade: true)
+        play(id: variant2 ? "meadow-remembers-2" : "marble-voyage", loop: true, crossfade: true)
     }
 
     func playBoard() {
         autoAdvance = true
         let board = Self.boardTracks
         guard !board.isEmpty else { return }
-        // Prefer Music Box Battle first, then rotate through battle + techno.
-        let preferred = ["music-box-battle", "music-box-battle-2", "music-box-techno", "music-box-techno-2"]
+        // Prefer Marble Time first, then legacy battle / techno rotation.
+        let preferred = [
+            "marble-time",
+            "music-box-battle",
+            "music-box-battle-2",
+            "music-box-techno",
+            "music-box-techno-2",
+        ]
         let ordered = preferred.compactMap { id in board.first { $0.id == id } }
             + board.filter { track in !preferred.contains(track.id) }
         guard !ordered.isEmpty else { return }

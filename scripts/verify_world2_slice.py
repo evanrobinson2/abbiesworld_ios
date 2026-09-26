@@ -51,7 +51,34 @@ def function_body(source: str, signature: str) -> str:
     raise AssertionError(f"Unterminated function: {signature}")
 
 
+def run_marble_voyage_design_rules() -> dict[str, str]:
+    """Asset/source design gates for Marble Voyage / Plink (no Xcode rebuild)."""
+    import subprocess
+
+    voyage_script = ROOT / "scripts" / "check_voyage_design_rules.py"
+    if not voyage_script.is_file():
+        raise AssertionError("marble-voyage-design-rules: check_voyage_design_rules.py missing")
+    voyage = subprocess.run(
+        [sys.executable, str(voyage_script)],
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+    )
+    if voyage.returncode != 0:
+        detail = (voyage.stdout or voyage.stderr or "voyage design rules failed").strip()
+        raise AssertionError(f"marble-voyage-design-rules: {detail}")
+    return {
+        "invariant": "marble-voyage-design-rules",
+        "status": "pass",
+        "evidence": "preflight design gates (plates, alpha, feed, climb, VS) green",
+    }
+
+
 def main() -> int:
+    # Voyage gates first so major-build preflight is always exercised even if
+    # older slice file paths drift.
+    checks: list[dict[str, str]] = [run_marble_voyage_design_rules()]
+
     root_view = read("Views/World2/World2RootView.swift")
     map_view = read("Views/World2/WorldMapView.swift")
     home_view = read("Views/World2/PlayerHomeView.swift")
@@ -111,7 +138,7 @@ def main() -> int:
         slice_loader.index("let home = World(") : slice_loader.index("let work = World(")
     ]
     reject = function_body(factory_view, "func reject()")
-    checks = [
+    checks += [
         require(
             "World2RootView()" in app
             and "case .loading:" in root_view
@@ -697,6 +724,7 @@ def main() -> int:
             "The Asset Workbench defines three idea carousels, six qualified immutable candidates, an exact choose-three award, pinned registry loading, a mockable generation service, qualified artwork, and a live World 2 route. Classic games remain reachable from World 2.",
         ),
     ]
+
     print(json.dumps({"schemaVersion": 1, "checks": checks}, indent=2))
     return 0
 

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 80" width="64" height="80">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7ad05a"/>
+      <stop offset="100%" stop-color="#1a2a22"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="32" cy="72" rx="14" ry="4" fill="#000" opacity="0.28"/>
+  <path d="M32 8c-12 0-22 10-22 22 0 16 22 42 22 42s22-26 22-42c0-12-10-22-22-22z" fill="url(#g)" stroke="#fff" stroke-width="2"/>
+  <circle cx="32" cy="28" r="11" fill="#fff"/>
+  <text x="32" y="32" text-anchor="middle" font-size="10" font-family="sans-serif" fill="#3d7a4a">workshop</text>
+  <!-- token.peglin.workshop -->
+</svg>

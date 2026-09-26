@@ -31,11 +31,14 @@ enum PeglinAbbieArt {
     static let hurtAngryCatalogName = "world2_peglin_abbie_hurt_angry"
 }
 
-/// Enemy expression sheets — five states each (+ bizarro Abbie boss).
+/// Hostage / rescue spirits (cage meter) — **not** wave attackers.
+/// Wave foes that hurt Abbie live on `PlinkAttackerKind` (Caw Scout, beetle, toad, mantis).
 enum PeglinEnemyKind: String, CaseIterable, Identifiable, Sendable {
     case brambleSpirit
     case foxSpirit
     case stagSpirit
+    /// Colorful burrow fox — optional Fox alternate for later climb nodes.
+    case burrowJackal
     /// Campaign finale — warped mirror of Abbie.
     case bizarroAbbie
 
@@ -46,6 +49,7 @@ enum PeglinEnemyKind: String, CaseIterable, Identifiable, Sendable {
         case .brambleSpirit: return "Bramble Spirit"
         case .foxSpirit: return "Fox Spirit"
         case .stagSpirit: return "Stag Spirit"
+        case .burrowJackal: return "Burrow Jackal"
         case .bizarroAbbie: return "Bizarro Abbie"
         }
     }
@@ -56,13 +60,25 @@ enum PeglinEnemyKind: String, CaseIterable, Identifiable, Sendable {
         case .brambleSpirit: return "Hare"
         case .foxSpirit: return "Fox"
         case .stagSpirit: return "Stag"
+        case .burrowJackal: return "Jackal"
         case .bizarroAbbie: return "Bizarro"
         }
     }
 
     /// Semantic IDs for the Game Asset registry.
     var stateSemanticIDs: [String] {
-        PeglinCharacterState.allCases.map { "enemy.peglin.\(rawValue).\($0.rawValue)" }
+        switch self {
+        case .burrowJackal:
+            // Hostage art ships as plink tokens (idle / happy / burrow / pounce).
+            return [
+                "token.plink.burrowJackal.idle",
+                "token.plink.burrowJackal.happy",
+                "token.plink.burrowJackal.burrow",
+                "token.plink.burrowJackal.pounce",
+            ]
+        default:
+            return PeglinCharacterState.allCases.map { "enemy.peglin.\(rawValue).\($0.rawValue)" }
+        }
     }
 
     /// Bundled catalog imageset for a portrait state (nil if art not shipped).
@@ -74,6 +90,14 @@ enum PeglinEnemyKind: String, CaseIterable, Identifiable, Sendable {
             return "world2_peglin_fox_\(state.rawValue)"
         case .stagSpirit:
             return "world2_peglin_stag_\(state.rawValue)"
+        case .burrowJackal:
+            switch state {
+            case .idle: return "world2_plink_burrowJackal_idle"
+            case .happy: return "world2_plink_burrowJackal_happy"
+            case .sneakyWink: return "world2_plink_burrowJackal_burrow"
+            case .hurt: return "world2_plink_burrowJackal_pounce"
+            case .defeated: return "world2_plink_burrowJackal_idle"
+            }
         case .bizarroAbbie:
             // Reuses Abbie portraits; SwiftUI applies a distortion filter.
             return state.abbiePortraitCatalogName
@@ -86,6 +110,7 @@ enum PeglinEnemyKind: String, CaseIterable, Identifiable, Sendable {
         case .brambleSpirit: return "Caged clover-hare · crack the bars!"
         case .foxSpirit: return "Lantern-fox trapped · free the grove!"
         case .stagSpirit: return "Crystal stag caged · break the lock!"
+        case .burrowJackal: return "Rainbow jackal boxed in · dig them free!"
         case .bizarroAbbie: return "Mirror Abbie locked in · don't trust the smile!"
         }
     }
@@ -98,6 +123,7 @@ enum PeglinEnemyKind: String, CaseIterable, Identifiable, Sendable {
         case .brambleSpirit: return "world2_peglin_bramble_figurine"
         case .foxSpirit: return "world2_peglin_fox_figurine"
         case .stagSpirit: return "world2_peglin_stag_figurine"
+        case .burrowJackal: return "world2_plink_burrowJackal_idle"
         case .bizarroAbbie: return PeglinAbbieArt.mapCatalogName
         }
     }

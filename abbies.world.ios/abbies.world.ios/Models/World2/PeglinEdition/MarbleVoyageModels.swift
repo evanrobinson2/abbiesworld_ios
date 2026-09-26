@@ -1,3 +1,4 @@
+import CoreGraphics
 import Foundation
 
 /// Product modes for Marble Voyage (App Store game).
@@ -67,11 +68,18 @@ struct MarbleVoyageNode: Identifiable, Equatable, Sendable {
     let column: Int
     let row: Int
     let title: String
+    /// Hostage in the cage (never a gang member).
     var enemyKind: PeglinEnemyKind?
     /// 1…N — scales foe HP / pressure.
     var threat: Int
-    /// Campaign spirit-fight index 1…3 (0 = non-fight / boss column).
+    /// Climb stage 1…N (drives gang cycling in battle chrome).
     var stage: Int
+    /// Who actually rattles Abbie here — henchman, mini-boss, or the big boss.
+    var waveAttacker: PlinkAttackerKind?
+    /// Gang-run role for cage multipliers / portrait scale / chrome copy.
+    var gangRole: MarbleVoyageGangFightRole?
+    /// Which land (mini-arc) this node belongs to; -1 for the summit and non-arc nodes.
+    var miniArcIndex: Int
 
     init(
         id: String,
@@ -81,7 +89,10 @@ struct MarbleVoyageNode: Identifiable, Equatable, Sendable {
         title: String,
         enemyKind: PeglinEnemyKind? = nil,
         threat: Int = 0,
-        stage: Int = 0
+        stage: Int = 0,
+        waveAttacker: PlinkAttackerKind? = nil,
+        gangRole: MarbleVoyageGangFightRole? = nil,
+        miniArcIndex: Int = -1
     ) {
         self.id = id
         self.kind = kind
@@ -91,6 +102,9 @@ struct MarbleVoyageNode: Identifiable, Equatable, Sendable {
         self.enemyKind = enemyKind
         self.threat = threat
         self.stage = stage
+        self.waveAttacker = waveAttacker
+        self.gangRole = gangRole
+        self.miniArcIndex = miniArcIndex
     }
 }
 
@@ -102,6 +116,8 @@ struct MarbleVoyageEdge: Equatable, Sendable {
 enum MarbleVoyagePhase: Equatable, Sendable {
     case map
     case fight(nodeID: String)
+    /// Post-fight shop — spend the coins the gold pegs paid out.
+    case shop(afterNodeID: String)
     case event(nodeID: String)
     case victory
     case defeat
@@ -124,10 +140,27 @@ struct MarbleVoyageRun: Equatable, Sendable {
     var fightsCleared: Int
     /// Best endless depth this device (updated on defeat/victory).
     var endlessBest: Int
+    /// Who is big boss and who heads each land — rolled once per run.
+    var gang: MarbleVoyageGangRun
+    var coins: Int
+    var charmStacks: [MarbleVoyageCharm: Int]
+    var ballLevel: Int
+    var marbleCollection: [MarbleVoyageOwnedMarble]
+    var economy: MarbleVoyageEconomyTuning
+    var shop: MarbleVoyageShopState?
+    /// Summit cleared but the shop is still open — leaving it rolls the credits.
+    var pendingVictoryAfterShop: Bool
+    var shopVisitCount: Int
+    /// Full reconstructible documentation of this voyage.
+    var record: MarbleVoyageRunRecord
 
     static let defaultMaxHP = 120
-    /// Regular spirit fights before the Bizarro Abbie boss (not counting the boss).
-    static let campaignFightStages = 3
+    /// Lands in a campaign climb — each headed by one named crew mini-boss.
+    static let gangMiniArcCount = 3
+    /// POI fights inside one land before that land's boss.
+    static let gangZonesPerArc = 3
+    /// Every campaign fight: 3 lands × (3 POIs + land boss) + the summit.
+    static let campaignTotalFights = gangMiniArcCount * (gangZonesPerArc + 1) + 1
 
     var currentNode: MarbleVoyageNode? {
         nodes.first { $0.id == currentNodeID }
@@ -153,6 +186,14 @@ struct MarbleVoyageRun: Equatable, Sendable {
               let dest = node(destinationID)
         else { return }
         pathTaken.append(.init(from: currentNodeID, to: destinationID))
+        record.path.append(
+            .init(
+                from: currentNodeID,
+                to: destinationID,
+                title: dest.title,
+                kind: dest.kind.rawValue
+            )
+        )
         visited.insert(destinationID)
         currentNodeID = destinationID
         lastEventLine = ""
@@ -166,43 +207,180 @@ struct MarbleVoyageRun: Equatable, Sendable {
         }
     }
 
-    mutating func finishFight(won: Bool, remainingHP: Int) {
+    // MARK: - Fight resolution
+
+    mutating func finishFight(won: Bool, remainingHP: Int, goldEarned: Int = 0) {
+        let fought = currentNode
+        let hpBefore = playerHP
         playerHP = max(0, min(playerMaxHP, remainingHP))
+
         if !won || playerHP <= 0 {
             playerHP = 0
             phase = .defeat
             lastEventLine = defeatCopy()
-            persistEndlessBestIfNeeded()
+            appendFightRecord(fought, won: false, hpBefore: hpBefore, goldEarned: 0)
+            record.outcome = .defeat
+            record.finishedAtISO8601 = ISO8601DateFormatter().string(from: Date())
+            syncRecordTotals()
+            persistEndlessBest()
             return
         }
+
         fightsCleared += 1
-        if currentNode?.kind == .boss {
+        coins += max(0, goldEarned)
+        appendFightRecord(fought, won: true, hpBefore: hpBefore, goldEarned: max(0, goldEarned))
+
+        if fought?.kind == .boss, mode == .campaign {
             phase = .victory
-            lastEventLine = mode == .campaign
-                ? "Bizarro Abbie is free — the climb is yours!"
-                : "Boss cage broken — keep climbing?"
-            persistEndlessBestIfNeeded()
-            if mode == .endless {
-                // Endless treats a boss clear as a checkpoint, then extends the chart.
-                phase = .map
-                lastEventLine = "Wave \(fightsCleared) clear · HP \(playerHP). The grid grows…"
-                appendEndlessFrontier()
+            pendingVictoryAfterShop = false
+            lastEventLine = "\(gang.bigBoss.displayName) is beaten — the summit is yours!"
+            record.outcome = .victory
+            record.finishedAtISO8601 = ISO8601DateFormatter().string(from: Date())
+            syncRecordTotals()
+            persistEndlessBest()
+            return
+        }
+
+        lastEventLine = goldEarned > 0
+            ? "Won with \(playerHP)/\(playerMaxHP) HP · +\(goldEarned) coins."
+            : "Won with \(playerHP)/\(playerMaxHP) HP. Heal only at the shop."
+        openShop(after: currentNodeID)
+    }
+
+    // MARK: - Shop
+
+    mutating func openShop(after nodeID: String) {
+        shopVisitCount += 1
+        shop = MarbleVoyageShopState.open(
+            economy: economy,
+            seed: seed,
+            visitIndex: shopVisitCount
+        )
+        // Nothing beyond this node means the shop is the last beat of the run.
+        pendingVictoryAfterShop = mode == .campaign
+            && !edges.contains { $0.from == nodeID }
+        record.shops.append(
+            .init(
+                afterNodeID: nodeID,
+                walletBefore: coins,
+                walletAfter: coins,
+                hpBefore: playerHP,
+                hpAfter: playerHP,
+                charmOffers: shop?.charmOffers.map(\.rawValue) ?? [],
+                purchases: []
+            )
+        )
+        phase = .shop(afterNodeID: nodeID)
+    }
+
+    @discardableResult
+    mutating func applyShop(_ action: MarbleVoyageShopAction) -> MarbleVoyageShopResult {
+        guard var open = shop else {
+            if case .leave = action { leaveShop() ; return .left }
+            return .cannotAfford
+        }
+
+        switch action {
+        case .leave:
+            leaveShop()
+            return .left
+
+        case .heal:
+            guard playerHP < playerMaxHP else { return .alreadyMaxed }
+            guard coins >= open.healPrice else { return .cannotAfford }
+            let price = open.healPrice
+            let healed = min(shopHealAmount(), playerMaxHP - playerHP)
+            coins -= price
+            playerHP += healed
+            open.healPrice = open.inflate(price, economy: economy)
+            open.purchasesThisVisit += 1
+            shop = open
+            notePurchase(sku: MarbleVoyageShopSKU.heal.rawValue, price: price, detail: "+\(healed) HP")
+            return .ok(message: "Bell balm · +\(healed) HP")
+
+        case .ballUpgrade:
+            guard let target = MarbleVoyageMarbleRules.upgradeTarget(in: marbleCollection) else {
+                return .alreadyMaxed
             }
+            guard coins >= open.ballUpgradePrice else { return .cannotAfford }
+            let price = open.ballUpgradePrice
+            coins -= price
+            marbleCollection[target].level = min(
+                MarbleVoyageOwnedMarble.maxLevel,
+                marbleCollection[target].level + 1
+            )
+            ballLevel += 1
+            let name = marbleCollection[target].orb.name
+            let level = marbleCollection[target].clampedLevel
+            open.ballUpgradePrice = open.inflate(price, economy: economy)
+            open.purchasesThisVisit += 1
+            shop = open
+            notePurchase(
+                sku: MarbleVoyageShopSKU.ballUpgrade.rawValue,
+                price: price,
+                detail: "\(name) → Lv\(level)"
+            )
+            return .ok(message: "\(name) is now Lv\(level)")
+
+        case .buyCharm(let charm):
+            guard let price = open.charmPrices[charm],
+                  open.charmOffers.contains(charm)
+            else { return .alreadyMaxed }
+            guard coins >= price else { return .cannotAfford }
+            coins -= price
+            addCharm(charm)
+            open.charmOffers.removeAll { $0 == charm }
+            open.charmPrices[charm] = open.inflate(price, economy: economy)
+            open.purchasesThisVisit += 1
+            shop = open
+            notePurchase(
+                sku: "\(MarbleVoyageShopSKU.charm.rawValue).\(charm.rawValue)",
+                price: price,
+                detail: "stack→\(charmStack(charm))"
+            )
+            return .ok(message: "\(charm.title) · \(charm.blurb)")
+        }
+    }
+
+    mutating func leaveShop() {
+        shop = nil
+        closeShopRecord()
+        if pendingVictoryAfterShop {
+            pendingVictoryAfterShop = false
+            phase = .victory
+            lastEventLine = "\(gang.bigBoss.displayName) is beaten — the summit is yours!"
+            record.outcome = .victory
+            record.finishedAtISO8601 = ISO8601DateFormatter().string(from: Date())
+            syncRecordTotals()
+            persistEndlessBest()
             return
         }
         phase = .map
-        lastEventLine = "Won with \(playerHP)/\(playerMaxHP) HP. Heal only from blessings."
         if mode == .endless {
             appendEndlessFrontier()
         }
     }
+
+    // MARK: - Events
 
     mutating func applyEvent(_ outcome: MarbleVoyageEventOutcome) {
+        let kind = currentNode?.kind ?? .mystery
         playerHP = max(0, min(playerMaxHP, playerHP + outcome.hpDelta))
         lastEventLine = outcome.message
+        record.events.append(
+            .init(
+                nodeID: currentNodeID,
+                kind: kind.rawValue,
+                message: outcome.message,
+                hpDelta: outcome.hpDelta,
+                coinDelta: 0
+            )
+        )
+        syncRecordTotals()
         if playerHP <= 0 {
             phase = .defeat
-            persistEndlessBestIfNeeded()
+            record.outcome = .defeat
+            persistEndlessBest()
             return
         }
         phase = .map
@@ -211,36 +389,82 @@ struct MarbleVoyageRun: Equatable, Sendable {
         }
     }
 
+    // MARK: - Difficulty
+
     func enemyMaxHP(for node: MarbleVoyageNode) -> Int {
+        let base: Int
         switch node.kind {
         case .boss:
-            return 220 + node.threat * 40
+            base = 220 + node.threat * 40
         case .fight:
-            return 55 + node.threat * 32 + (mode == .endless ? fightsCleared * 8 : 0)
+            base = 55 + node.threat * 32 + (mode == .endless ? fightsCleared * 8 : 0)
         default:
-            return 100
+            base = 100
         }
+        return base * gang.cageHPMultiplier(for: node.gangRole)
     }
 
-    /// Foe bite per round — climbs in endless / late campaign.
+    /// Foe bite per round — climbs in endless / late campaign, softened by Lullaby.
     func enemyAttack(for node: MarbleVoyageNode) -> Int {
-        let base = 14 + node.threat * 2 + (node.kind == .boss ? 10 : 0)
-        if mode == .endless {
-            return min(42, base + fightsCleared / 2)
-        }
-        return min(36, base)
+        var base = 14 + node.threat * 2 + (node.kind == .boss ? 10 : 0)
+        if node.gangRole == .miniBoss { base += 4 }
+        let capped = mode == .endless
+            ? min(42, base + fightsCleared / 2)
+            : min(36, base)
+        let softened = MarbleVoyageCharm.foeAttackReduction(lullabyStacks: charmStack(.lullaby))
+        return max(1, capped - softened)
     }
 
-    private func defeatCopy() -> String {
+    /// 3× chrome for the big boss, 1.25× for a land boss, 1× for henchmen.
+    func attackerPortraitScale(for node: MarbleVoyageNode) -> CGFloat {
+        gang.portraitScale(for: node.gangRole)
+    }
+
+    // MARK: - Charms / economy
+
+    func charmStack(_ charm: MarbleVoyageCharm) -> Int {
+        charmStacks[charm] ?? 0
+    }
+
+    mutating func addCharm(_ charm: MarbleVoyageCharm, count: Int = 1) {
+        guard count > 0 else { return }
+        charmStacks[charm] = charmStack(charm) + count
+        record.addCharmStack(charm, count: count)
+    }
+
+    /// Coins per gold peg after Moon Gleam.
+    var effectiveGoldPegValue: Int {
+        let multiplier = MarbleVoyageCharm.goldValueMultiplier(
+            moonGleamStacks: charmStack(.moonGleam)
+        )
+        return max(1, Int((Double(economy.goldPegValue) * multiplier).rounded()))
+    }
+
+    /// HP restored by one shop heal (base fraction + Bloom stacks).
+    func shopHealAmount() -> Int {
+        let fraction = economy.healFraction
+            + MarbleVoyageCharm.shopHealBonusFraction(stacks: charmStack(.bloom))
+        return max(1, Int((Double(playerMaxHP) * fraction).rounded()))
+    }
+
+    /// Cage damage multiplier from marble levels × the legacy global ball level.
+    var fightDamageMultiplier: Double {
+        MarbleVoyageMarbleRules.fightDamageMultiplier(
+            collection: marbleCollection,
+            ballLevel: ballLevel
+        )
+    }
+
+    func defeatCopy() -> String {
         switch mode {
         case .campaign:
-            return "Campaign ends at stage \(max(1, fightsCleared)). HP only returns with a blessing."
+            return "Climb ends after \(fightsCleared) fights. HP only returns at the shop."
         case .endless:
             return "Endless run over — cleared \(fightsCleared) fights. Best \(max(endlessBest, fightsCleared))."
         }
     }
 
-    private mutating func persistEndlessBestIfNeeded() {
+    mutating func persistEndlessBest() {
         guard mode == .endless else { return }
         let best = max(endlessBest, fightsCleared)
         endlessBest = best
@@ -251,6 +475,66 @@ struct MarbleVoyageRun: Equatable, Sendable {
 
     static func storedEndlessBest() -> Int {
         UserDefaults.standard.integer(forKey: endlessBestKey)
+    }
+
+    /// Keep the legacy endless-best key in sync when stats are written elsewhere.
+    static func noteEndlessBest(_ best: Int) {
+        guard best > storedEndlessBest() else { return }
+        UserDefaults.standard.set(best, forKey: endlessBestKey)
+    }
+
+    // MARK: - Record bookkeeping
+
+    private mutating func syncRecordTotals() {
+        record.coins = coins
+        record.playerHP = playerHP
+        record.playerMaxHP = playerMaxHP
+        record.ballLevel = ballLevel
+    }
+
+    private mutating func appendFightRecord(
+        _ node: MarbleVoyageNode?,
+        won: Bool,
+        hpBefore: Int,
+        goldEarned: Int
+    ) {
+        guard let node else { return }
+        record.fights.append(
+            .init(
+                nodeID: node.id,
+                title: node.title,
+                role: node.gangRole?.rawValue ?? "none",
+                waveAttacker: node.waveAttacker?.rawValue,
+                foes: [node.waveAttacker?.rawValue].compactMap { $0 },
+                won: won,
+                rounds: 0,
+                damageDealt: 0,
+                damageTaken: max(0, hpBefore - playerHP),
+                hpBefore: hpBefore,
+                hpAfter: playerHP,
+                goldEarned: goldEarned,
+                goldPegHits: 0,
+                pegsLit: 0,
+                boardPegs: 0,
+                fightSeed: seed &+ UInt64(record.fights.count &+ 1) &* 7919
+            )
+        )
+        syncRecordTotals()
+    }
+
+    private mutating func notePurchase(sku: String, price: Int, detail: String) {
+        guard !record.shops.isEmpty else { return }
+        record.shops[record.shops.count - 1].purchases.append(
+            .init(sku: sku, pricePaid: price, detail: detail)
+        )
+        closeShopRecord()
+    }
+
+    private mutating func closeShopRecord() {
+        guard !record.shops.isEmpty else { return }
+        record.shops[record.shops.count - 1].walletAfter = coins
+        record.shops[record.shops.count - 1].hpAfter = playerHP
+        syncRecordTotals()
     }
 
     // MARK: - Generators
@@ -265,120 +549,18 @@ struct MarbleVoyageRun: Equatable, Sendable {
         }
     }
 
-    /// Short voyage: fight → blessing → fight → blessing → mix → Bizarro Abbie.
-    static func makeCampaign(seed: UInt64) -> MarbleVoyageRun {
-        var rng = SeededGenerator(seed: seed)
-        var nodes: [MarbleVoyageNode] = [
-            .init(id: "start", kind: .start, column: 0, row: 1, title: "Sky Dock", threat: 0, stage: 0)
-        ]
-        var edges: [MarbleVoyageEdge] = []
-        var previousIDs = ["start"]
-        var column = 1
-
-        func link(_ toIDs: [String]) {
-            for from in previousIDs {
-                for to in toIDs {
-                    edges.append(.init(from: from, to: to))
-                }
-            }
-            previousIDs = toIDs
-        }
-
-        // Fight 1 → event → Fight 2 → event
-        for stage in 1...2 {
-            let left = "s\(stage)a"
-            let right = "s\(stage)b"
-            nodes.append(
-                .init(
-                    id: left,
-                    kind: .fight,
-                    column: column,
-                    row: 0,
-                    title: campaignFightTitle(stage: stage, branch: 0, rng: &rng),
-                    enemyKind: enemyForStage(stage, branch: 0),
-                    threat: stage + 1,
-                    stage: stage
-                )
-            )
-            nodes.append(
-                .init(
-                    id: right,
-                    kind: .fight,
-                    column: column,
-                    row: 2,
-                    title: campaignFightTitle(stage: stage, branch: 1, rng: &rng),
-                    enemyKind: enemyForStage(stage, branch: 1),
-                    threat: stage + 1,
-                    stage: stage
-                )
-            )
-            link([left, right])
-            column += 1
-
-            let eventIDs = appendEventColumn(into: &nodes, column: column, stage: stage, rng: &rng)
-            link(eventIDs)
-            column += 1
-        }
-
-        // Mixed column: fight / treasure / question
-        let mixFight = "s3fight"
-        let mixTreasure = "s3treasure"
-        let mixMystery = "s3mystery"
-        nodes.append(
-            .init(
-                id: mixFight,
-                kind: .fight,
-                column: column,
-                row: 0,
-                title: campaignFightTitle(stage: 3, branch: 0, rng: &rng),
-                enemyKind: enemyForStage(3, branch: 0),
-                threat: 4,
-                stage: 3
-            )
-        )
-        nodes.append(
-            .init(
-                id: mixTreasure,
-                kind: .treasure,
-                column: column,
-                row: 1,
-                title: eventTitle(.treasure, stage: 3, rng: &rng),
-                threat: 0,
-                stage: 0
-            )
-        )
-        nodes.append(
-            .init(
-                id: mixMystery,
-                kind: .mystery,
-                column: column,
-                row: 2,
-                title: eventTitle(.mystery, stage: 3, rng: &rng),
-                threat: 0,
-                stage: 0
-            )
-        )
-        link([mixFight, mixTreasure, mixMystery])
-        column += 1
-
-        // Boss — Bizarro Abbie
-        let bossID = "boss"
-        nodes.append(
-            .init(
-                id: bossID,
-                kind: .boss,
-                column: column,
-                row: 1,
-                title: "Bizarro Abbie",
-                enemyKind: .bizarroAbbie,
-                threat: 7,
-                stage: 4
-            )
-        )
-        link([bossID])
-
+    /// Blank run around a freshly generated chart — every generator goes through here.
+    private static func makeRunShell(
+        mode: MarbleVoyageMode,
+        seed: UInt64,
+        gang: MarbleVoyageGangRun,
+        nodes: [MarbleVoyageNode],
+        edges: [MarbleVoyageEdge],
+        lastEventLine: String
+    ) -> MarbleVoyageRun {
+        let economy = MarbleVoyageEconomyTuning.recommended
         return MarbleVoyageRun(
-            mode: .campaign,
+            mode: mode,
             nodes: nodes,
             edges: edges,
             currentNodeID: "start",
@@ -387,30 +569,134 @@ struct MarbleVoyageRun: Equatable, Sendable {
             playerHP: defaultMaxHP,
             playerMaxHP: defaultMaxHP,
             phase: .map,
-            lastEventLine: "Tap a glowing landing above. Climb to free them!",
+            lastEventLine: lastEventLine,
             seed: seed,
             fightsCleared: 0,
-            endlessBest: storedEndlessBest()
+            endlessBest: storedEndlessBest(),
+            gang: gang,
+            coins: 0,
+            charmStacks: [:],
+            ballLevel: 1,
+            marbleCollection: MarbleVoyageOwnedMarble.starterCollection(),
+            economy: economy,
+            shop: nil,
+            pendingVictoryAfterShop: false,
+            shopVisitCount: 0,
+            record: MarbleVoyageRunRecord.fresh(
+                kind: .live,
+                seed: seed,
+                mode: mode,
+                economy: economy,
+                playerMaxHP: defaultMaxHP,
+                gang: gang
+            )
+        )
+    }
+
+    /// Linear climb: 3 lands × (POI1 warmup → POI2 battle → POI3 hard → land boss), then the summit.
+    static func makeCampaign(seed: UInt64) -> MarbleVoyageRun {
+        let gang = MarbleVoyageGangRun.make(seed: seed)
+        var nodes: [MarbleVoyageNode] = [
+            .init(id: "start", kind: .start, column: 0, row: 1, title: "Sky Dock")
+        ]
+        var edges: [MarbleVoyageEdge] = []
+        var previousID = "start"
+        var column = 1
+        var step = 0
+
+        func link(_ to: String) {
+            edges.append(.init(from: previousID, to: to))
+            previousID = to
+        }
+
+        let poiLabels = ["POI1 Warmup", "POI2 Battle", "POI3 Hard"]
+        let poiRows = [0, 2, 0]
+
+        for land in 0..<gangMiniArcCount {
+            let hostage = gang.hostage(forArc: land)
+            for poi in 0..<gangZonesPerArc {
+                step += 1
+                let id = "land\(land)_poi\(poi + 1)"
+                nodes.append(
+                    .init(
+                        id: id,
+                        kind: .fight,
+                        column: column,
+                        row: poiRows[poi % poiRows.count],
+                        title: "L\(land + 1) \(poiLabels[poi])",
+                        enemyKind: hostage,
+                        threat: step,
+                        stage: step,
+                        waveAttacker: gang.randomHenchman(
+                            seedSalt: seed &+ UInt64(step) &* 104_729
+                        ),
+                        gangRole: .henchman,
+                        miniArcIndex: land
+                    )
+                )
+                link(id)
+                column += 1
+            }
+
+            step += 1
+            let bossID = "land\(land)_boss"
+            let head = gang.miniBoss(arcIndex: land)
+            nodes.append(
+                .init(
+                    id: bossID,
+                    kind: .fight,
+                    column: column,
+                    row: 1,
+                    title: "L\(land + 1) Boss · \(head.shortName)",
+                    enemyKind: hostage,
+                    threat: step,
+                    stage: step,
+                    waveAttacker: head,
+                    gangRole: .miniBoss,
+                    miniArcIndex: land
+                )
+            )
+            link(bossID)
+            column += 1
+        }
+
+        step += 2 // the summit is a real step up from the last land boss
+        nodes.append(
+            .init(
+                id: "boss",
+                kind: .boss,
+                column: column,
+                row: 1,
+                title: "Summit · \(gang.bigBoss.shortName)",
+                enemyKind: .bizarroAbbie,
+                threat: step,
+                stage: step,
+                waveAttacker: gang.bigBoss,
+                gangRole: .bigBoss,
+                miniArcIndex: -1
+            )
+        )
+        link("boss")
+
+        return makeRunShell(
+            mode: .campaign,
+            seed: seed,
+            gang: gang,
+            nodes: nodes,
+            edges: edges,
+            lastEventLine: "Three lands, then the summit. \(gang.bigBoss.displayName) is waiting."
         )
     }
 
     static func makeEndless(seed: UInt64) -> MarbleVoyageRun {
-        var run = MarbleVoyageRun(
+        let gang = MarbleVoyageGangRun.make(seed: seed)
+        var run = makeRunShell(
             mode: .endless,
-            nodes: [
-                .init(id: "start", kind: .start, column: 0, row: 1, title: "Sky Dock", threat: 0, stage: 0)
-            ],
-            edges: [],
-            currentNodeID: "start",
-            visited: ["start"],
-            pathTaken: [],
-            playerHP: defaultMaxHP,
-            playerMaxHP: defaultMaxHP,
-            phase: .map,
-            lastEventLine: "Endless voyage — the grid grows as you clear fights. Best \(storedEndlessBest()).",
             seed: seed,
-            fightsCleared: 0,
-            endlessBest: storedEndlessBest()
+            gang: gang,
+            nodes: [.init(id: "start", kind: .start, column: 0, row: 1, title: "Sky Dock")],
+            edges: [],
+            lastEventLine: "Endless voyage — the grid grows as you clear fights. Best \(storedEndlessBest())."
         )
         run.appendEndlessFrontier()
         return run
@@ -430,6 +716,11 @@ struct MarbleVoyageRun: Equatable, Sendable {
 
         let newIDs: [String]
         if isBossWave {
+            // Every 5th wave is a named crew member; every 3rd of those is the big boss.
+            let bossIndex = max(1, wave / 5)
+            let isBigBoss = bossIndex % 3 == 0
+            let arc = (bossIndex - 1) % Self.gangMiniArcCount
+            let crew = isBigBoss ? gang.bigBoss : gang.miniBoss(arcIndex: arc)
             let id = "e\(wave)_boss"
             nodes.append(
                 .init(
@@ -437,10 +728,13 @@ struct MarbleVoyageRun: Equatable, Sendable {
                     kind: .boss,
                     column: nextColumn,
                     row: 1,
-                    title: "Wave \(wave) Sovereign",
-                    enemyKind: .stagSpirit,
+                    title: "Wave \(wave) · \(crew.shortName)",
+                    enemyKind: gang.hostage(forArc: bossIndex),
                     threat: 6 + wave / 2,
-                    stage: wave
+                    stage: wave,
+                    waveAttacker: crew,
+                    gangRole: isBigBoss ? .bigBoss : .miniBoss,
+                    miniArcIndex: isBigBoss ? -1 : arc
                 )
             )
             newIDs = [id]
@@ -450,30 +744,26 @@ struct MarbleVoyageRun: Equatable, Sendable {
             let left = "e\(wave)a"
             let right = "e\(wave)b"
             let threat = max(1, 1 + wave / 2)
-            nodes.append(
-                .init(
-                    id: left,
-                    kind: .fight,
-                    column: nextColumn,
-                    row: 0,
-                    title: "Wave \(wave) · Port",
-                    enemyKind: Self.enemyForStage(wave, branch: 0),
-                    threat: threat,
-                    stage: wave
+            let arc = (wave / 2) % Self.gangMiniArcCount
+            for (index, id) in [left, right].enumerated() {
+                nodes.append(
+                    .init(
+                        id: id,
+                        kind: .fight,
+                        column: nextColumn,
+                        row: index == 0 ? 0 : 2,
+                        title: "Wave \(wave) · \(index == 0 ? "Port" : "Starboard")",
+                        enemyKind: Self.enemyForStage(wave, branch: index),
+                        threat: threat,
+                        stage: wave,
+                        waveAttacker: gang.randomHenchman(
+                            seedSalt: seed &+ UInt64(wave) &* 7919 &+ UInt64(index)
+                        ),
+                        gangRole: .henchman,
+                        miniArcIndex: arc
+                    )
                 )
-            )
-            nodes.append(
-                .init(
-                    id: right,
-                    kind: .fight,
-                    column: nextColumn,
-                    row: 2,
-                    title: "Wave \(wave) · Starboard",
-                    enemyKind: Self.enemyForStage(wave, branch: 1),
-                    threat: threat,
-                    stage: wave
-                )
-            )
+            }
             newIDs = [left, right]
         }
 
@@ -487,14 +777,6 @@ struct MarbleVoyageRun: Equatable, Sendable {
     private static func enemyForStage(_ stage: Int, branch: Int) -> PeglinEnemyKind {
         let cycle: [PeglinEnemyKind] = [.brambleSpirit, .foxSpirit, .stagSpirit]
         return cycle[(stage + branch) % cycle.count]
-    }
-
-    private static func campaignFightTitle(stage: Int, branch: Int, rng: inout SeededGenerator) -> String {
-        let left = ["Clover", "Lantern", "Ridge", "Moss", "Ember", "Pearl"]
-        let right = ["Skirmish", "Duel", "Ambush", "Trial", "Clash", "Hunt"]
-        let a = left[(stage + branch) % left.count]
-        let b = right[Int.random(in: 0..<right.count, using: &rng)]
-        return "\(a) \(b)"
     }
 
     private static func appendEventColumn(
@@ -516,9 +798,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
                 kind: top,
                 column: column,
                 row: 0,
-                title: eventTitle(top, stage: stage, rng: &rng),
-                threat: 0,
-                stage: 0
+                title: eventTitle(top, stage: stage, rng: &rng)
             )
         )
         nodes.append(
@@ -527,9 +807,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
                 kind: bottom,
                 column: column,
                 row: 2,
-                title: eventTitle(bottom, stage: stage, rng: &rng),
-                threat: 0,
-                stage: 0
+                title: eventTitle(bottom, stage: stage, rng: &rng)
             )
         )
         return [idA, idB]

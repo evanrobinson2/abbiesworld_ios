@@ -1,4 +1,5 @@
 import Foundation
+import CoreGraphics
 
 /// Semantic plates + SF Symbol accents for Marble Voyage (registry-backed).
 /// Plate pixel contract: `MarbleVoyagePlateLayout` (4:3, Fit only — never Fill/crop).
@@ -24,26 +25,48 @@ enum MarbleVoyageArt {
     static func fightPlate(enemy: PeglinEnemyKind?) -> String {
         switch enemy {
         case .brambleSpirit: return "map.peglin.bramble"
-        case .foxSpirit: return "map.peglin.foxLand"
+        case .foxSpirit, .burrowJackal: return "map.peglin.foxLand"
         case .stagSpirit: return "map.peglin.stagLand"
         case .bizarroAbbie: return "map.peglin.crashLand"
         case nil: return "map.peglin.crashLand"
         }
     }
 
+    // MARK: - Rescue framing (hostage ≠ wave attacker)
+
+    /// Hostage / cage target on a fight node (Fox, Jackal, Hare, Stag…).
+    /// Wave attackers that rattle Abbie are `PlinkAttackerKind`.
+    ///
+    /// Rosters (see `PlinkAttackerKind` header):
+    /// - **Badguy gang** (primary): Raze → Vix → Morrow → Nib
+    /// - **Forest fauna** (biome variants): L1 cawScout; L2 beetle / toad / mantis
+    /// - Hostage is never a gang member — use `foxSpirit` / `burrowJackal`
+    static func waveAttackers(forClimbStage stage: Int) -> [PlinkAttackerKind] {
+        // Primary path: cycle the gang. Forest biome override can swap roster later.
+        _ = stage
+        return PlinkAttackerKind.badguyGang
+    }
+
+    static func defaultWaveAttacker(forClimbStage stage: Int) -> PlinkAttackerKind {
+        PlinkAttackerKind.forClimbStage(stage, roster: .badguyGang)
+    }
+
     static func eventAccentIcon(_ kind: MarbleVoyageNodeKind) -> String {
         kind.systemIcon
     }
 
-    /// Tint tokens for chart chips (UI only — plates stay semantic).
+    /// Shared chart tile fill — dark rose, thematic for every node.
+    static let chartTileRose: (r: Double, g: Double, b: Double) = (0.58, 0.22, 0.38)
+
+    /// @available(*, deprecated, message: "Chart tiles share chartTileRose; icons carry meaning.")
     static func chipTint(_ kind: MarbleVoyageNodeKind) -> (r: Double, g: Double, b: Double) {
-        switch kind {
-        case .start: return (0.35, 0.65, 0.95)
-        case .fight: return (0.95, 0.45, 0.28)
-        case .treasure: return (0.95, 0.75, 0.25)
-        case .mystery: return (0.65, 0.45, 0.95)
-        case .shrine: return (0.35, 0.85, 0.65)
-        case .boss: return (0.95, 0.25, 0.45)
-        }
+        _ = kind
+        return chartTileRose
     }
+
+    /// Base map tile edge (pt). Next-level tiles pulse in place (same size).
+    static let chartTileSize: CGFloat = 130
+    static let chartTileIconSize: CGFloat = 54
+    static let chartTileCorner: CGFloat = 22
+    static let chartTileLabelWidth: CGFloat = 140
 }

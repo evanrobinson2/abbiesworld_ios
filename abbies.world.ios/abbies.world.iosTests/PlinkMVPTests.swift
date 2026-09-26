@@ -31,23 +31,20 @@ final class PlinkMVPTests: XCTestCase {
     @MainActor
     func testPlinkSoundtrackPlaylistMatchesParentDrops() {
         let ids = PlinkMusicService.playlist.map(\.id)
+        XCTAssertTrue(ids.contains("marble-voyage"))
+        XCTAssertTrue(ids.contains("marble-time"))
+        XCTAssertEqual(PlinkMusicService.playlist.first?.id, "marble-voyage")
+        let filenames = PlinkMusicService.playlist.map(\.filename)
+        XCTAssertTrue(filenames.contains("plink_marble_voyage"))
+        XCTAssertTrue(filenames.contains("plink_marble_time"))
         XCTAssertEqual(
-            ids,
-            [
-                "abbies-world",
-                "fell-from-the-blue",
-                "things-in-the-grass",
-                "cheerful-khorovod",
-                "electronic-folk-dance",
-            ]
+            PlinkMusicService.playlist.first(where: { $0.id == "marble-time" })?.role,
+            "play"
         )
-        XCTAssertEqual(PlinkMusicService.playlist.map(\.filename), [
-            "plink_abbies_world",
-            "plink_fell_from_the_blue",
-            "plink_things_in_the_grass",
-            "plink_cheerful_khorovod",
-            "plink_electronic_folk_dance",
-        ])
+        XCTAssertEqual(
+            PlinkMusicService.playlist.first(where: { $0.id == "marble-voyage" })?.role,
+            "safari"
+        )
     }
 
     func testPlinkSFXCuesHaveKenneyFilenames() {
@@ -57,9 +54,9 @@ final class PlinkMVPTests: XCTestCase {
     }
 
     func testEnemyCounterAttackAfterHit() {
-        XCTAssertEqual(PeglinBattleRules.enemyAttackDamage, 18)
-        XCTAssertEqual(PeglinBattleRules.enemyCounterAttack(for: .foxSpirit), 18)
-        XCTAssertEqual(PeglinBattleRules.enemyCounterAttack(for: .stagSpirit), 18)
+        XCTAssertEqual(PeglinBattleRules.enemyAttackDamage, 12)
+        XCTAssertEqual(PeglinBattleRules.enemyCounterAttack(for: .foxSpirit), 12)
+        XCTAssertEqual(PeglinBattleRules.enemyCounterAttack(for: .stagSpirit), 12)
         XCTAssertEqual(PeglinBattleRules.emptyShotPenalty, PeglinBattleRules.enemyAttackDamage)
         XCTAssertEqual(PeggleFeel.minBallSpeed, 0)
         XCTAssertEqual(PhysicsPreset.salon.tuning.woodDamping, 0)

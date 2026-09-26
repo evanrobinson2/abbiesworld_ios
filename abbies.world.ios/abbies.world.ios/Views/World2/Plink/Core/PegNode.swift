@@ -11,6 +11,8 @@ enum PegKind {
     case bomb
     /// Grey stone — dense blockers / clusters; tiny score, no force kick.
     case stone
+    /// Gold: coin payout for the voyage shop (prevalence tuned on the run).
+    case gold
 }
 
 /// Peglin-inspired peg: jewel body + highlight + kind glyph.
@@ -26,16 +28,8 @@ final class PegNode: SKShapeNode {
     private let rim = SKShapeNode()
     private let glyph = SKShapeNode()
 
-    /// Peglin peg PhysicsMaterial2D.Restitution ≈ 0.8 (combined with orb e via min).
-    var surfaceBounciness: CGFloat {
-        switch kind {
-        case .stone: return 0.75
-        case .blue, .orange: return 0.8
-        case .crit: return 0.85
-        case .refresh: return 0.75
-        case .bomb: return 0.9
-        }
-    }
+    /// Pegs never bleed speed — elastic only. Neutral (blue/stone) is worst via zero force kick.
+    var surfaceBounciness: CGFloat { 1.0 }
 
     var isOrangeTarget: Bool { kind == .orange && !isCleared }
 
@@ -135,6 +129,13 @@ final class PegNode: SKShapeNode {
         case .bomb:
             glyph.path = CGPath(
                 ellipseIn: CGRect(x: -s * 0.55, y: -s * 0.55, width: s * 1.1, height: s * 1.1),
+                transform: nil
+            )
+            glyph.isHidden = false
+        case .gold:
+            // Coin disc.
+            glyph.path = CGPath(
+                ellipseIn: CGRect(x: -s * 0.7, y: -s * 0.7, width: s * 1.4, height: s * 1.4),
                 transform: nil
             )
             glyph.isHidden = false
@@ -285,6 +286,20 @@ final class PegNode: SKShapeNode {
                 rim: .white,
                 glyph: .white,
                 glow: 16
+            )
+        case (.gold, false):
+            return Palette(
+                fill: SKColor(red: 1.0, green: 0.78, blue: 0.18, alpha: 1),
+                rim: SKColor(red: 1.0, green: 0.95, blue: 0.55, alpha: 1),
+                glyph: SKColor(red: 0.55, green: 0.35, blue: 0.05, alpha: 1),
+                glow: 8
+            )
+        case (.gold, true):
+            return Palette(
+                fill: SKColor(red: 1.0, green: 0.92, blue: 0.45, alpha: 1),
+                rim: .white,
+                glyph: SKColor(red: 0.75, green: 0.5, blue: 0.08, alpha: 1),
+                glow: 18
             )
         }
     }

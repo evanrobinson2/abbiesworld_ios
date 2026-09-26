@@ -26,25 +26,21 @@ struct ContinuumPeg: Equatable {
     var isCleared: Bool = false
 
     /// Peglin fire pegs punch a little outward energy on hit.
+    /// Neutral (`.blue` / `.stone`) never boosts — but never bleeds speed either (`surfaceBounciness == 1`).
     var forceKick: CGFloat {
         switch kind {
         case .orange: return 52
         case .crit: return 68
         case .bomb: return 40
         case .refresh: return 28
+        case .gold: return 36
         case .blue, .stone: return 0
         }
     }
 
-    var surfaceBounciness: CGFloat {
-        switch kind {
-        case .stone: return 0.75
-        case .blue, .orange: return 0.8
-        case .crit: return 0.85
-        case .refresh: return 0.75
-        case .bomb: return 0.9
-        }
-    }
+    /// Pegs never take away speed — restitution is always elastic.
+    /// Neutral is the *worst* (kick 0); force/crit/bomb still add outward energy.
+    var surfaceBounciness: CGFloat { 1.0 }
 }
 
 struct ContinuumRail: Equatable {
@@ -73,6 +69,14 @@ enum ContinuumHit: Equatable {
 
 /// Pure continuum step — SpriteKit-free so XCTest can simulate full rounds.
 enum PlinkContinuum {
+    // MARK: - Physics contract (Evan)
+
+    /// Half-angle from +Y (degrees) inside which an upward rebound is treated as “straight up.”
+    /// ~14° ⇒ |dx|/speed must be at least `sin(14°)` ≈ 0.242.
+    static let straightUpConeDegrees: CGFloat = 14
+    /// Minimum |vx|/speed after an upward bounce (sin of `straightUpConeDegrees`).
+    static let minUpwardLateralFraction: CGFloat = 0.242
+
     /// One fixed-dt integration + collisions. Returns whether the ball hit the floor.
     @discardableResult
     static func step(
@@ -112,19 +116,23 @@ enum PlinkContinuum {
         var hit: ContinuumHit = .none
 
         // Walls
+        var wallPreferredSign = vel.dx
         if pos.x < left {
             pos.x = left
             if vel.dx < 0 { vel.dx = -vel.dx * wallE }
             hit = .wall
+            avoidStraightUpVelocity(&vel, preferredSign: wallPreferredSign)
         } else if pos.x > right {
             pos.x = right
             if vel.dx > 0 { vel.dx = -vel.dx * wallE }
             hit = .wall
+            avoidStraightUpVelocity(&vel, preferredSign: wallPreferredSign)
         }
         if pos.y > top {
             pos.y = top
             if vel.dy > 0 { vel.dy = -vel.dy * wallE }
             hit = .wall
+            // Top hit sends the ball down — no straight-up clamp needed.
         }
 
         // Rails — still use orb wallRestitution (wood feel), not the forced wall E.
@@ -231,9 +239,37 @@ enum PlinkContinuum {
             v.dy *= c
         }
 
+        // Prefer incoming lateral, then hit normal — never leave nearly pure +Y.
+        let preferred = abs(ballVel.dx) > 1e-3 ? ballVel.dx : n.dx
+        avoidStraightUpVelocity(&v, preferredSign: preferred)
+
         let sep = config.ballRadius + config.pegRadius + 0.5
         let out = CGPoint(x: pegPos.x + n.dx * sep, y: pegPos.y + n.dy * sep)
         return (out, v)
+    }
+
+    /// Evan rule: outbound velocity must never be nearly pure +Y (straight up).
+    /// If within `straightUpConeDegrees` of +Y, kick a lateral component and preserve speed.
+    static func avoidStraightUpVelocity(_ vel: inout CGVector, preferredSign: CGFloat = 0) {
+        guard vel.dy > 0 else { return }
+        let speed = hypot(vel.dx, vel.dy)
+        guard speed > 1e-3 else { return }
+        let lateralFrac = abs(vel.dx) / speed
+        guard lateralFrac < minUpwardLateralFraction else { return }
+
+        let sign: CGFloat
+        if abs(preferredSign) > 1e-6 {
+            sign = preferredSign >= 0 ? 1 : -1
+        } else if abs(vel.dx) > 1e-6 {
+            sign = vel.dx >= 0 ? 1 : -1
+        } else {
+            sign = Bool.random() ? 1 : -1
+        }
+
+        let newAbsDx = speed * minUpwardLateralFraction
+        let newDy = sqrt(max(0, speed * speed - newAbsDx * newAbsDx))
+        vel.dx = sign * newAbsDx
+        vel.dy = newDy
     }
 
     /// Closest-point capsule collision against each rail segment.
@@ -246,6 +282,7 @@ enum PlinkContinuum {
         wallE: CGFloat
     ) -> Bool {
         var any = false
+        let preferredSign = vel.dx
         for rail in rails {
             guard rail.points.count >= 2 else { continue }
             for i in 0..<(rail.points.count - 1) {
@@ -283,6 +320,9 @@ enum PlinkContinuum {
                 pos.y = closest.y + n.dy * minDist
                 any = true
             }
+        }
+        if any {
+            avoidStraightUpVelocity(&vel, preferredSign: preferredSign)
         }
         return any
     }

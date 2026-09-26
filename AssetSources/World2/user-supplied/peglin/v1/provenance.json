@@ -1,0 +1,13 @@
+{
+  "edition": "peglin",
+  "version": "v1",
+  "mapping": {
+    "map.peglin.crashLand": "crashLand/source.jpg",
+    "map.peglin.bramble": "bramble/source.jpg",
+    "map.peglin.foxLand": "foxLand/source.jpg",
+    "map.peglin.stagLand": "stagLand/source.jpg",
+    "map.peglin.forgottenRealm": "forgottenRealm/source.jpg"
+  },
+  "pending": [],
+  "notes": "All five land plates bundled. Progression: Crash → Bramble → Fox → Stag → Forgotten Realm."
+}

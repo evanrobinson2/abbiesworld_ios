@@ -26,6 +26,7 @@ struct abbies_world_iosApp: App {
                     .environmentObject(auth)
             } else {
                 MarbleVoyageRootView()
+                    .environmentObject(auth)
             }
         }
     }

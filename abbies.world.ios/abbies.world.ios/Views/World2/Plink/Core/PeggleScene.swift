@@ -34,6 +34,21 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
 
     /// When true: win by reducing enemyHP; lose on 0 balls or 0 player HP.
     var spiritBattleMode = true
+    /// Voyage gold peg prevalence (0…1 of blue/orange rolls).
+    var goldPegPrevalence: Double = 0.15
+    /// Coins granted per gold peg lit (Moon Gleam already baked in by host).
+    var goldPegValue: Int = 6
+    /// Ball level damage multiplier (1.0 + 0.1×(level−1)).
+    var ballDamageMultiplier: Double = 1.0
+    /// Extra crit/refresh pegs seeded from Cycle charm.
+    var cycleExtraSpecials: Int = 0
+    /// Sock Snatch coins per bomb clear.
+    var sockSnatchCoinsPerBomb: Int = 0
+    /// Prism Burst cage bonus when orange streak ≥ threshold.
+    var prismCageBonus: Int = 0
+    /// Fight-total coins earned (read by voyage host on win).
+    private(set) var runGoldCoins = 0
+    private var orangeStreak = 0
     var enemyMaxHP = 36
     var playerMaxHP = 30
     /// Damage the foe deals back after a scoring shot (0 = no counter).
@@ -51,6 +66,13 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     var onHud: ((HudSnapshot) -> Void)?
     var onDamageDealt: ((Int) -> Void)?
     var onPlayerHurt: ((Int) -> Void)?
+    /// Bomb peg touched — lob AOE at the bad-guy cluster (host applies to each living foe).
+    var onBombEnemyAOE: ((Int) -> Void)?
+    /// Front foe HP hit 0 — return `true` when the rescue is complete (no living foes left).
+    /// Host must load the next front foe’s HP into this scene when returning `false`.
+    var onFrontFoeDefeated: (() -> Bool)?
+    /// End of drop: host resolves approach/melee and returns damage dealt to Abbie (0 = still marching).
+    var onEnemyTurn: (() -> Int)?
     /// One callback per finished drop — damage + cool specials for the right-side tally.
     var onRoundResolved: ((ShotRoundSummary) -> Void)?
 
@@ -58,6 +80,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         var damageToEnemy: Int
         var damageToPlayer: Int
         var highlights: [String]
+        var bombAOE: Int
     }
 
     private enum Category {
@@ -93,6 +116,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     private var lastUpdateTime: TimeInterval = 0
     private var statusText = "Clear the orange pegs"
     private var shotPlink = 0
+    private var shotBombAOE = 0
     private var critActive = false
     private var runPlink = 0
     private var bombSplashing = false
@@ -154,6 +178,13 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         applyTuning(next)
     }
 
+    /// Swap the front foe mid-fight (host advances the roster).
+    func loadFrontFoe(maxHP: Int, currentHP: Int) {
+        enemyMaxHP = max(1, maxHP)
+        enemyHP = max(0, min(enemyMaxHP, currentHP))
+        publish()
+    }
+
     /// Configure HP battle + optional deck before `loadLevel`.
     /// `startingPlayerHP` carries voyage HP in (no free heal at fight start).
     func configureSpiritBattle(
@@ -164,6 +195,9 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         startingPlayerHP: Int? = nil
     ) {
         spiritBattleMode = true
+        // Each fight starts with an empty purse — the host banks it on victory.
+        runGoldCoins = 0
+        orangeStreak = 0
         enemyMaxHP = max(1, enemyMax)
         playerMaxHP = max(1, playerMax)
         enemyHP = enemyMaxHP
@@ -232,7 +266,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             playerHP = playerMaxHP
         }
         statusText = spiritBattleMode
-            ? "Hit pegs · points = HP · bomb = AOE"
+            ? "Hit pegs · damage front foe · bomb = lob AOE"
             : "Clear every orange · yellow=crit · green=refresh"
         rebuildWorld()
         publish()
@@ -449,12 +483,20 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         return (1 - mappedNy) * h
     }
 
-    /// Explicit specials stay; blue/orange may roll into refresh.
+    /// Explicit specials stay; blue/orange may roll into gold or refresh.
     private func rolledPegKind(from base: PegKind) -> PegKind {
         switch base {
-        case .crit, .bomb, .refresh, .stone:
+        case .crit, .bomb, .refresh, .stone, .gold:
             return base
         case .blue, .orange:
+            if Double.random(in: 0..<1) < goldPegPrevalence {
+                return .gold
+            }
+            // Cycle charm leans the board toward crit / refresh.
+            let cycleLean = 0.04 * Double(max(0, cycleExtraSpecials))
+            if Double.random(in: 0..<1) < cycleLean {
+                return Bool.random() ? .crit : .refresh
+            }
             if Double.random(in: 0..<1) < PeglinBattleRules.refreshPegChance {
                 return .refresh
             }
@@ -812,6 +854,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             }
         }
         shotPlink = 0
+        shotBombAOE = 0
         critActive = false
         shotHighlights = []
         splitBalls.removeAll()
@@ -902,45 +945,75 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         if spiritBattleMode {
             var hurt = 0
             if scored > 0 {
-                // HP already applied per-peg; keep foe clamp + feed callback with round total.
+                // HP already applied per-peg to the front foe.
                 enemyHP = max(0, min(enemyHP, enemyMaxHP))
                 onDamageDealt?(scored)
             }
 
-            // Foe always swings for constant ATK if still standing (hit or miss).
-            if enemyHP > 0, enemyCounterDamage > 0 {
-                let atk = enemyCounterDamage
-                hurt = atk
-                playerHP = max(0, playerHP - atk)
-                if scored > 0 {
-                    PlinkSFX.play(.hurt)
-                    statusText = "Cage −\(scored) · rattle −\(atk) · Abbie \(playerHP)"
-                } else {
-                    PlinkSFX.play(.miss)
-                    statusText = "Miss · cage rattle −\(atk) · Abbie \(playerHP)"
+            // Promote next foe before their approach/melee turn.
+            if enemyHP <= 0 {
+                let rescued = onFrontFoeDefeated?() ?? true
+                if rescued {
+                    PlinkSFX.play(.win)
+                    phase = .won
+                    statusText = "Rescued! +\(runPlink) pts"
+                    onRoundResolved?(ShotRoundSummary(
+                        damageToEnemy: scored,
+                        damageToPlayer: 0,
+                        highlights: shotHighlights,
+                        bombAOE: shotBombAOE
+                    ))
+                    shotHighlights = []
+                    shotBombAOE = 0
+                    publish()
+                    return
                 }
-                onPlayerHurt?(atk)
-            } else if scored <= 0 {
+                statusText = "Next foe! \(enemyHP)/\(enemyMaxHP)"
+            }
+
+            // Approach / melee — host owns lane advance; flying bite every turn.
+            if enemyHP > 0 {
+                let atk: Int
+                if let onEnemyTurn {
+                    atk = max(0, onEnemyTurn())
+                } else if enemyCounterDamage > 0 {
+                    atk = enemyCounterDamage
+                } else {
+                    atk = 0
+                }
+                if atk > 0 {
+                    hurt = atk
+                    playerHP = max(0, playerHP - atk)
+                    if scored > 0 || shotBombAOE > 0 {
+                        PlinkSFX.play(.hurt)
+                        statusText = "Hit −\(scored) · bomb AOE −\(shotBombAOE) · melee −\(atk)"
+                    } else {
+                        PlinkSFX.play(.miss)
+                        statusText = "Miss · melee −\(atk) · Abbie \(playerHP)"
+                    }
+                    onPlayerHurt?(atk)
+                } else if scored <= 0, shotBombAOE <= 0 {
+                    PlinkSFX.play(.miss)
+                    statusText = "Miss · foe advances"
+                } else {
+                    statusText = "Hit −\(scored) · bomb −\(shotBombAOE) · foe advances"
+                }
+            } else if scored <= 0, shotBombAOE <= 0 {
                 PlinkSFX.play(.miss)
                 statusText = "Miss!"
             } else {
-                statusText = "Cage −\(scored) · \(enemyHP)/\(enemyMaxHP)"
+                statusText = "Hit −\(scored) · bomb −\(shotBombAOE) · \(enemyHP)/\(enemyMaxHP)"
             }
 
             onRoundResolved?(ShotRoundSummary(
                 damageToEnemy: scored,
                 damageToPlayer: hurt,
-                highlights: shotHighlights
+                highlights: shotHighlights,
+                bombAOE: shotBombAOE
             ))
             shotHighlights = []
+            shotBombAOE = 0
 
-            if enemyHP <= 0 {
-                PlinkSFX.play(.win)
-                phase = .won
-                statusText = "Rescued! +\(runPlink) pts"
-                publish()
-                return
-            }
             if playerHP <= 0 {
                 phase = .lost
                 statusText = "Abbie down · \(runPlink) pts"
@@ -1052,12 +1125,31 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
                 bombSplashing = false
-                noteHighlight(splash > 0 ? "Bomb ×\(splash)" : "Bomb")
-                statusText = "BOMB AOE ×\(splash)"
+                // Lob toward the bad-guy cluster — host AOEs every living foe.
+                let lob = PeglinBattleRules.bombEnemyAOEDamage
+                shotBombAOE += lob
+                onBombEnemyAOE?(lob)
+                if sockSnatchCoinsPerBomb > 0 {
+                    runGoldCoins += sockSnatchCoinsPerBomb
+                    noteHighlight("Sock Snatch +\(sockSnatchCoinsPerBomb)")
+                }
+                noteHighlight(splash > 0 ? "Bomb lob ×\(splash)" : "Bomb lob")
+                statusText = "BOMB LOBBED · AOE −\(lob)"
             } else {
                 statusText = "BOMB!"
             }
             points = 0
+
+        case .gold:
+            // Gold pays the shop, and still plinks like the peg it replaced.
+            runGoldCoins += goldPegValue
+            points = PeglinBattleRules.points(for: .blue, critActive: critActive)
+            shotPlink += points
+            PlinkSFX.play(.crit)
+            spark(at: peg.position, color: SKColor(red: 1, green: 0.85, blue: 0.25, alpha: 1))
+            emitCoinPayout(goldPegValue, at: peg.position)
+            noteHighlight("Gold +\(goldPegValue)")
+            statusText = "GOLD +\(goldPegValue) coins · purse \(runGoldCoins)"
 
         case .blue, .orange, .stone:
             points = PeglinBattleRules.points(for: peg.kind, critActive: critActive)
@@ -1067,8 +1159,19 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                   ? SKColor(white: 0.75, alpha: 1)
                   : .white)
             statusText = spiritBattleMode
-                ? "Cage +\(points) · \(max(0, enemyHP - points))/\(enemyMaxHP)"
+                ? "Hit +\(points) · \(max(0, enemyHP - points))/\(enemyMaxHP)"
                 : "plink \(shotPlink)"
+        }
+
+        // Prism Burst: long orange streaks bite the cage harder.
+        if peg.kind == .orange {
+            orangeStreak += 1
+            if prismCageBonus > 0, orangeStreak >= MarbleVoyageCharm.prismStreakThreshold {
+                points += prismCageBonus
+                noteHighlight("Prism +\(prismCageBonus)")
+            }
+        } else if peg.kind != .gold {
+            orangeStreak = 0
         }
 
         if peg.kind == .bomb {
@@ -1089,10 +1192,14 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     private func destroyPegNow(_ peg: PegNode, contribution: Int) {
         guard !peg.isCleared else { return }
         let origin = peg.position
-        if contribution > 0 {
-            emitHPContribution(contribution, at: origin)
+        // Upgraded marbles hit the cage harder.
+        let scaled = contribution > 0
+            ? max(1, Int((Double(contribution) * ballDamageMultiplier).rounded()))
+            : contribution
+        if scaled > 0 {
+            emitHPContribution(scaled, at: origin)
             if spiritBattleMode {
-                enemyHP = max(0, enemyHP - contribution)
+                enemyHP = max(0, enemyHP - scaled)
             }
         }
         PlinkSFX.play(.pop)
@@ -1104,6 +1211,28 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             phase = .settling
             settleFrames = 8
         }
+    }
+
+    /// Coin count floats up in gold so the shop payout is visible mid-shot.
+    private func emitCoinPayout(_ coins: Int, at point: CGPoint) {
+        let label = SKLabelNode(text: "+\(coins)¢")
+        label.fontName = "AvenirNext-Heavy"
+        label.fontSize = 26
+        label.fontColor = SKColor(red: 1.0, green: 0.85, blue: 0.28, alpha: 1)
+        label.verticalAlignmentMode = .center
+        label.horizontalAlignmentMode = .center
+        label.position = point
+        label.zPosition = 51
+        label.setScale(0.4)
+        addChild(label)
+        label.run(.sequence([
+            .group([
+                .scale(to: 1.1, duration: 0.14),
+                .moveBy(x: 0, y: 46, duration: 0.6),
+            ]),
+            .fadeOut(withDuration: 0.25),
+            .removeFromParent(),
+        ]))
     }
 
     private func emitHPContribution(_ points: Int, at point: CGPoint) {

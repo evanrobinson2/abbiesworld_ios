@@ -1,0 +1,19 @@
+{
+  "name": "media-drop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Auth0-gated media inbox for Abbie's World — Suno, Midjourney, and file drops.",
+  "scripts": {
+    "dev": "next dev --port 5175",
+    "build": "next build",
+    "start": "next start --port 5175"
+  },
+  "dependencies": {
+    "@auth0/nextjs-auth0": "^4.13.0",
+    "@vercel/blob": "^2.0.0",
+    "next": "^16.3.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  },
+  "type": "module"
+}

@@ -30,7 +30,7 @@ struct MarbleVoyageSceneAtmosphere: View {
 
         static func enemy(_ kind: PeglinEnemyKind?) -> Mood {
             switch kind {
-            case .foxSpirit: return .fox
+            case .foxSpirit, .burrowJackal: return .fox
             case .brambleSpirit: return .bramble
             case .stagSpirit: return .stag
             case .bizarroAbbie: return .bizarro

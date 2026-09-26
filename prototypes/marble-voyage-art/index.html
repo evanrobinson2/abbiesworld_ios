@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marble Voyage — Art Manifest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=DM+Sans:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #f4efe6;
+      --muted: rgba(244, 239, 230, 0.72);
+      --deep: #07101f;
+      --panel: rgba(12, 22, 40, 0.72);
+      --line: rgba(255, 255, 255, 0.14);
+      --accent: #7ad7ff;
+      --warm: #ffb36b;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, rgba(90, 160, 255, 0.28), transparent 55%),
+        radial-gradient(900px 500px at 90% 0%, rgba(255, 120, 170, 0.18), transparent 50%),
+        linear-gradient(160deg, #050b16 0%, #0b1830 48%, #07141c 100%);
+      color: var(--ink);
+      font-family: "DM Sans", system-ui, sans-serif;
+    }
+    .hero {
+      position: relative;
+      min-height: 72vh;
+      display: grid;
+      align-items: end;
+      padding: 2.5rem clamp(1.2rem, 4vw, 3.5rem) 2rem;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(5, 10, 20, 0.15), rgba(5, 10, 20, 0.88)),
+        url("plates/map.peglin.crashLand.jpg") center / cover no-repeat;
+      transform: scale(1.04);
+      filter: saturate(1.05) contrast(1.05);
+    }
+    .hero-copy { position: relative; z-index: 1; max-width: 42rem; }
+    .eyebrow {
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(2.6rem, 7vw, 4.6rem);
+      line-height: 0.95;
+      margin: 0 0 0.85rem;
+    }
+    .lede {
+      font-size: 1.05rem;
+      line-height: 1.45;
+      color: var(--muted);
+      max-width: 36rem;
+      margin: 0 0 1.25rem;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.35);
+      border-radius: 999px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+    }
+    main {
+      padding: 1.5rem clamp(1.2rem, 4vw, 3.5rem) 4rem;
+      display: grid;
+      gap: 2.5rem;
+    }
+    section h2 {
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.8rem;
+      margin: 0 0 0.35rem;
+    }
+    section p.sub {
+      margin: 0 0 1.1rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    .card figure {
+      margin: 0;
+      aspect-ratio: 16 / 10;
+      background: #000;
+      overflow: hidden;
+    }
+    .card.portrait figure { aspect-ratio: 1; }
+    .card.orb figure {
+      aspect-ratio: 1;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.12), transparent 45%),
+        #0a1424;
+    }
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card.orb img {
+      width: 58%;
+      height: 58%;
+      object-fit: contain;
+    }
+    .card .body { padding: 0.95rem 1rem 1.1rem; }
+    .card .id {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem;
+      color: var(--accent);
+      word-break: break-all;
+    }
+    .card h3 {
+      margin: 0.35rem 0 0.3rem;
+      font-size: 1.05rem;
+    }
+    .card .roles {
+      color: var(--muted);
+      font-size: 0.86rem;
+      line-height: 1.35;
+    }
+    .map {
+      display: grid;
+      gap: 0.7rem;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1rem 1.1rem;
+    }
+    .map row, .map .row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 0.75rem;
+      align-items: center;
+      font-size: 0.92rem;
+    }
+    .map .k { color: var(--warm); font-weight: 700; }
+    .map code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.82rem;
+      color: var(--accent);
+    }
+    footer {
+      padding: 0 clamp(1.2rem, 4vw, 3.5rem) 2.5rem;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-bg" aria-hidden="true"></div>
+    <div class="hero-copy">
+      <div class="eyebrow">Marble Voyage · artwork review</div>
+      <h1>Peglin plates,<br />already in the game</h1>
+      <p class="lede">
+        Voyage reuses the bundled Peglin Edition land plates and fight portraits —
+        no new Midjourney drop for v1. Title/chart = Crash Land; fights swap Bramble / Fox / Stag.
+      </p>
+      <div class="meta">
+        <span class="chip">Free forever</span>
+        <span class="chip">Semantic IDs as SoT</span>
+        <span class="chip"><a href="manifest.json">manifest.json</a></span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <h2>How voyage picks art</h2>
+      <p class="sub">From <code>MarbleVoyageArt.swift</code> — plates are registry semantic IDs resolved to bundled catalogs.</p>
+      <div class="map">
+        <div class="row"><span class="k">Title / chart</span><code>map.peglin.crashLand</code></div>
+        <div class="row"><span class="k">Bramble fight</span><code>map.peglin.bramble</code></div>
+        <div class="row"><span class="k">Fox fight</span><code>map.peglin.foxLand</code></div>
+        <div class="row"><span class="k">Stag / boss</span><code>map.peglin.stagLand</code></div>
+        <div class="row"><span class="k">Events</span><span>SF Symbol chips only (treasure / mystery / shrine) — no custom event plates yet</span></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Scene plates</h2>
+      <p class="sub">Full-bleed iPad backgrounds. Forgotten Realm is in the Peglin set but not yet a voyage node.</p>
+      <div class="grid" id="plates"></div>
+    </section>
+
+    <section>
+      <h2>Fight portraits</h2>
+      <p class="sub">Happy-state cutouts used in Plink battle chrome.</p>
+      <div class="grid" id="portraits"></div>
+    </section>
+
+    <section>
+      <h2>Parbles (orbs)</h2>
+      <p class="sub">Deck marbles for fights.</p>
+      <div class="grid" id="orbs"></div>
+    </section>
+  </main>
+
+  <footer>
+    Source: <code>Assets.xcassets/world2_map_peglin_*</code> ·
+    Catalog notes in <code>docs/current-state/PEGLIN_EDITION_ASSET_MANIFEST.md</code> ·
+    Machine-readable: <a href="manifest.json">manifest.json</a>
+  </footer>
+
+  <script>
+    const titleize = (id) => id.split(".").slice(-1)[0]
+      .replace(/([A-Z])/g, " $1")
+      .replace(/^./, (c) => c.toUpperCase());
+
+    async function boot() {
+      const manifest = await fetch("manifest.json").then((r) => r.json());
+      const byRole = (needle) =>
+        manifest.assets.filter((a) =>
+          (a.role || []).some((r) => String(r).toLowerCase().includes(needle))
+        );
+
+      const mount = (el, items, kind) => {
+        el.innerHTML = items
+          .map((a) => {
+            const roles = (a.role || []).join(" · ");
+            const notes = a.notes ? `<div class="roles">${a.notes}</div>` : "";
+            return `
+              <article class="card ${kind}">
+                <figure><img src="${a.preview}" alt="${a.semanticId}" loading="lazy" /></figure>
+                <div class="body">
+                  <div class="id">${a.semanticId}</div>
+                  <h3>${titleize(a.semanticId)}</h3>
+                  <div class="roles">${roles}</div>
+                  ${notes}
+                </div>
+              </article>`;
+          })
+          .join("");
+      };
+
+      mount(
+        document.getElementById("plates"),
+        manifest.assets.filter((a) => a.semanticId.startsWith("map.peglin.")),
+        "plate"
+      );
+      mount(
+        document.getElementById("portraits"),
+        manifest.assets.filter(
+          (a) =>
+            a.semanticId.includes("abbie") ||
+            a.semanticId.startsWith("enemy.peglin.")
+        ),
+        "portrait"
+      );
+      mount(
+        document.getElementById("orbs"),
+        manifest.assets.filter((a) => a.semanticId.startsWith("orb.peglin.")),
+        "orb"
+      );
+    }
+    boot();
+  </script>
+</body>
+</html>

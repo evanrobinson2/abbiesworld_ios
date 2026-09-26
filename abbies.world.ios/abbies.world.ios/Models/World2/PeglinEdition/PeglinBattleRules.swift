@@ -16,7 +16,7 @@ enum PeglinBattleRules {
     static func enemyMaxHP(for kind: PeglinEnemyKind?) -> Int {
         switch kind {
         case .brambleSpirit: return 180
-        case .foxSpirit: return 200
+        case .foxSpirit, .burrowJackal: return 200
         case .stagSpirit: return 240
         case .bizarroAbbie: return 280
         case nil: return 160
@@ -27,7 +27,7 @@ enum PeglinBattleRules {
     static func playerMaxHP(for kind: PeglinEnemyKind?) -> Int {
         switch kind {
         case .brambleSpirit: return 400
-        case .foxSpirit: return 400
+        case .foxSpirit, .burrowJackal: return 400
         case .stagSpirit: return 360
         case .bizarroAbbie: return 320
         case nil: return 400
@@ -44,6 +44,7 @@ enum PeglinBattleRules {
         case .refresh: return 1 * mult
         case .stone: return 1 * mult
         case .bomb: return 0 // splash lights neighbors; they score normally
+        case .gold: return 1 * mult // coins handled separately; still ticks the cage a little
         }
     }
 
@@ -53,13 +54,14 @@ enum PeglinBattleRules {
     /// Chance each blue/orange peg becomes a refresh peg when a board is laid out.
     static let refreshPegChance: Double = 0.08
 
-    /// Flat foe ATK each round the spirit is still alive (hit or miss).
-    static let enemyAttackDamage = 18
+    /// Flat foe ATK each round the spirit is still alive **and in melee**
+    /// (flying foes bite every turn — see `PlinkBattleFoe.canMeleeThisRound`).
+    static let enemyAttackDamage = 12
 
     /// @available(*, deprecated, message: "Use enemyAttackDamage")
     static let emptyShotPenalty = enemyAttackDamage
 
-    /// Constant attack — same for every spirit.
+    /// Fallback when no per-foe attack is wired.
     static func enemyCounterAttack(for kind: PeglinEnemyKind?) -> Int {
         _ = kind
         return enemyAttackDamage
@@ -68,7 +70,7 @@ enum PeglinBattleRules {
     /// Peglin-style cavern is the default fight board (dense force pegs + rails).
     static func boardID(for kind: PeglinEnemyKind?) -> String {
         switch kind {
-        case .foxSpirit: return "fox.pawPrint" // open lanes — cavern arcs blocked shots through
+        case .foxSpirit, .burrowJackal: return "fox.pawPrint" // open lanes — cavern arcs blocked shots through
         case .brambleSpirit: return "fox.pawPrint"
         case .stagSpirit: return "fox.lanternRings"
         case .bizarroAbbie: return "fox.lanternRings"
