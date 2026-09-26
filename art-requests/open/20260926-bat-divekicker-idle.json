@@ -1,0 +1,28 @@
+{
+  "id": "20260926-bat-divekicker-idle",
+  "semanticId": "token.plink.gang.batDivekicker.idle",
+  "kind": "token",
+  "priority": "high",
+  "status": "open",
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "Concept JPEG selected; no runtime imageset / library bind yet"
+  },
+  "keepStockIcon": false,
+  "surface": "Marble Voyage climb foe tile + fight attacker idle (Bat Divekicker)",
+  "brief": "Transparent idle cutout from selected Bat Divekicker concept. Left-facing airborne silhouette; attached far wing; separate feet; clear wing/body gap. Use hover anchor (not grounded foot baseline).",
+  "aspect": "3:4",
+  "styleNotes": "Flying cast — document hover pivot in provenance.",
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/bat-divekicker.jpeg",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/HANDOFF.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/prompts.json"
+  ],
+  "promptSeeds": [
+    "prompts.json key bat-divekicker"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:30:00Z",
+  "sessionNote": "Seeded with art-request queue bootstrap.",
+  "fulfillment": null
+}

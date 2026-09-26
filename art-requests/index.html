@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Art requests — Abbie’s World</title>
+  <style>
+    :root {
+      --bg: #1a1410;
+      --panel: #2a2118;
+      --ink: #f3e6d4;
+      --muted: #b9a894;
+      --accent: #e08a4b;
+      --edge: #4a3b2c;
+      --open: #6bcf8e;
+      --review: #e0c15a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #3a2a1c, var(--bg));
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin: 0 0 0.35rem;
+    }
+    .lede {
+      color: var(--muted);
+      max-width: 42rem;
+      line-height: 1.45;
+      margin-bottom: 1.75rem;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: 1px solid var(--edge);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 0.45rem 0.9rem;
+      border-radius: 4px;
+    }
+    button:hover { border-color: var(--accent); color: #fff; }
+    .counts { color: var(--muted); font-size: 0.95rem; }
+    .counts strong { color: var(--open); }
+    #status { color: var(--muted); font-size: 0.9rem; min-height: 1.2em; }
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    article {
+      background: var(--panel);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .pill {
+      border: 1px solid var(--edge);
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+    }
+    .pill.priority-blocker, .pill.priority-high { border-color: var(--accent); color: var(--accent); }
+    .pill.status-open { border-color: var(--open); color: var(--open); }
+    .pill.status-in_review { border-color: var(--review); color: var(--review); }
+    h2 {
+      font-size: 1.15rem;
+      margin: 0.15rem 0;
+      line-height: 1.25;
+    }
+    .semantic {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem;
+      color: #d4c4a8;
+      word-break: break-all;
+    }
+    .brief {
+      color: var(--ink);
+      opacity: 0.92;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+    .paths {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+    .empty {
+      color: var(--muted);
+      padding: 2rem 0;
+    }
+    code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <h1>Art requests</h1>
+  <p class="lede">
+    Open inbox for Abbie’s World. Coding agents file placeholders here;
+    the art director reviews in Chrome, fulfills via Midjourney / AssetSources,
+    then moves JSON to <code>fulfilled/</code>.
+  </p>
+  <div class="toolbar">
+    <button type="button" id="reload">Reload open/</button>
+    <span class="counts" id="counts"></span>
+  </div>
+  <p id="status">Loading…</p>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    const OPEN_FILES = [
+      "20260926-crab-pincher-idle.json",
+      "20260926-grasshopper-kickboxer-idle.json",
+      "20260926-armadillo-blocker-idle.json",
+      "20260926-bat-divekicker-idle.json",
+      "20260926-climb-nonfight-token.json"
+    ];
+
+    const grid = document.getElementById("grid");
+    const status = document.getElementById("status");
+    const counts = document.getElementById("counts");
+
+    async function loadOne(name) {
+      const res = await fetch("./open/" + name, { cache: "no-store" });
+      if (!res.ok) throw new Error(name + " " + res.status);
+      return res.json();
+    }
+
+    function card(req) {
+      const el = document.createElement("article");
+      const paths = (req.relatedPaths || [])
+        .slice(0, 3)
+        .map((p) => "<li>" + escapeHtml(p) + "</li>")
+        .join("");
+      el.innerHTML =
+        '<div class="meta">' +
+        '<span class="pill status-' + escapeAttr(req.status) + '">' + escapeHtml(req.status) + "</span>" +
+        '<span class="pill priority-' + escapeAttr(req.priority) + '">' + escapeHtml(req.priority) + "</span>" +
+        '<span class="pill">' + escapeHtml(req.kind) + "</span>" +
+        (req.keepStockIcon ? '<span class="pill">keep stock?</span>' : "") +
+        "</div>" +
+        "<h2>" + escapeHtml(req.id) + "</h2>" +
+        '<div class="semantic">' + escapeHtml(req.semanticId) + "</div>" +
+        '<p class="brief">' + escapeHtml(req.brief) + "</p>" +
+        (paths ? '<ul class="paths">' + paths + "</ul>" : "") +
+        '<p class="brief" style="opacity:0.7;font-size:0.85rem">' +
+        escapeHtml(req.surface || "") +
+        "</p>";
+      return el;
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+    function escapeAttr(s) {
+      return escapeHtml(s).replace(/'/g, "&#39;");
+    }
+
+    async function reload() {
+      status.textContent = "Loading open/…";
+      grid.innerHTML = "";
+      const loaded = [];
+      const missing = [];
+      for (const name of OPEN_FILES) {
+        try {
+          loaded.push(await loadOne(name));
+        } catch (e) {
+          missing.push(name);
+        }
+      }
+      loaded.sort((a, b) => {
+        const order = { blocker: 0, high: 1, normal: 2, low: 3, optional: 4 };
+        return (order[a.priority] ?? 9) - (order[b.priority] ?? 9);
+      });
+      counts.innerHTML =
+        "<strong>" + loaded.length + "</strong> open listed" +
+        (missing.length ? " · " + missing.length + " missing from manifest" : "");
+      if (!loaded.length) {
+        grid.innerHTML = '<p class="empty">No open requests loaded. Serve this folder over HTTP and ensure OPEN_FILES matches open/.</p>';
+        status.textContent = missing.length ? "Missing: " + missing.join(", ") : "Empty.";
+        return;
+      }
+      loaded.forEach((r) => grid.appendChild(card(r)));
+      status.textContent =
+        "Serve with: python3 -m http.server 8766 --directory art-requests  →  http://127.0.0.1:8766/";
+      if (missing.length) {
+        status.textContent += " · Update OPEN_FILES for: " + missing.join(", ");
+      }
+    }
+
+    document.getElementById("reload").addEventListener("click", reload);
+    reload();
+  </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abbies.world/schemas/art-request.json",
+  "title": "AbbieArtRequest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "semanticId",
+    "kind",
+    "priority",
+    "status",
+    "placeholder",
+    "keepStockIcon",
+    "surface",
+    "brief",
+    "requestedBy",
+    "requestedAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Filename stem without .json. Prefer YYYYMMDD-short-kebab.",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,80}$"
+    },
+    "semanticId": {
+      "type": "string",
+      "description": "Stable Game Asset / local library semantic ID (join key). Example: token.plink.gang.crabPincher.idle"
+    },
+    "kind": {
+      "type": "string",
+      "enum": ["token", "plate", "portrait", "ui", "fx", "sfx", "music", "other"]
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["blocker", "high", "normal", "low", "optional"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "in_review", "fulfilled", "wont_fix"]
+    },
+    "placeholder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "sf_symbol",
+            "world2_placeholder_pack",
+            "missing_catalog",
+            "provisional_reuse",
+            "temp_prototype",
+            "none"
+          ]
+        },
+        "detail": {
+          "type": "string",
+          "description": "SF Symbol name, catalog name, or path note."
+        }
+      }
+    },
+    "keepStockIcon": {
+      "type": "boolean",
+      "description": "True when SF Symbol / stock chrome may stay forever; request is optional polish."
+    },
+    "surface": {
+      "type": "string",
+      "description": "Where the player sees it (screen + role)."
+    },
+    "brief": {
+      "type": "string",
+      "description": "Kid-facing art brief. Concrete silhouette, palette, facing, constraints."
+    },
+    "aspect": {
+      "type": "string",
+      "description": "Preferred Midjourney / export aspect, e.g. 3:4, 4:3, 1:1."
+    },
+    "styleNotes": {
+      "type": "string"
+    },
+    "relatedPaths": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "promptSeeds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "requestedBy": {
+      "type": "string",
+      "description": "Agent or human id, e.g. cursor, codex, evan."
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "sessionNote": {
+      "type": "string",
+      "description": "Optional one-liner for coordination (why now)."
+    },
+    "fulfillment": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "completedAt": { "type": "string", "format": "date-time" },
+        "completedBy": { "type": "string" },
+        "assetSourcePath": { "type": "string" },
+        "catalogOrLibraryPath": { "type": "string" },
+        "sourceHashSha256": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "20260926-crab-pincher-idle",
+  "semanticId": "token.plink.gang.crabPincher.idle",
+  "kind": "token",
+  "priority": "high",
+  "status": "open",
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "Concept JPEG selected; no world2_plink_gang_crabPincher_idle imageset / library bind yet"
+  },
+  "keepStockIcon": false,
+  "surface": "Marble Voyage climb foe tile + fight attacker idle (Crab Pincher)",
+  "brief": "Production-ready transparent idle cutout from the art-director-selected Crab Pincher concept. Left-facing combat silhouette; giant/tiny claw contrast; cobalt/orange proposal is optional refinement not required recolor. Readable at chart tile size (~148–260pt).",
+  "aspect": "3:4",
+  "styleNotes": "Match porcupine-boxer pipeline: white-bg concept → RGBA PNG, no halo, consistent foot baseline with grounded cast.",
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/crab-pincher.jpeg",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/HANDOFF.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/prompts.json"
+  ],
+  "promptSeeds": [
+    "See prompts.json key crab-pincher — concept already generated; prefer prep over reroll unless anatomy fails QA."
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:30:00Z",
+  "sessionNote": "Seeded with art-request queue bootstrap. Enum case not yet in PlinkAttackerKind — builder adds with bind.",
+  "fulfillment": null
+}

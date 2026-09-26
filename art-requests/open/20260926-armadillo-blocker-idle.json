@@ -1,0 +1,28 @@
+{
+  "id": "20260926-armadillo-blocker-idle",
+  "semanticId": "token.plink.gang.armadilloBlocker.idle",
+  "kind": "token",
+  "priority": "high",
+  "status": "open",
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "Concept JPEG selected; no runtime imageset / library bind yet"
+  },
+  "keepStockIcon": false,
+  "surface": "Marble Voyage climb foe tile + fight attacker idle (Armadillo Blocker)",
+  "brief": "Transparent idle cutout from selected Armadillo Blocker concept. Four limbs visible; shell readable; costume reduction is optional refinement. Left-facing braced blocker pose.",
+  "aspect": "3:4",
+  "styleNotes": "Grounded cast baseline; match porcupine prep QA checklist.",
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/armadillo-blocker.jpeg",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/HANDOFF.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/prompts.json"
+  ],
+  "promptSeeds": [
+    "prompts.json key armadillo-blocker"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:30:00Z",
+  "sessionNote": "Seeded with art-request queue bootstrap.",
+  "fulfillment": null
+}

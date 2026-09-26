@@ -1,0 +1,28 @@
+{
+  "id": "20260926-climb-nonfight-token",
+  "semanticId": "token.marbleVoyage.climb.nonFight",
+  "kind": "ui",
+  "priority": "normal",
+  "status": "open",
+  "placeholder": {
+    "type": "sf_symbol",
+    "detail": "MarbleVoyageNodeKind.systemIcon for treasure / mystery / shrine (gift / questionmark / sparkles family)"
+  },
+  "keepStockIcon": false,
+  "surface": "Climb chart non-fight tiles labeled only Treasure or ? — accent icon beside/on tile chrome",
+  "brief": "Decide: keep SF Symbol accents forever, OR design a tiny pair of custom glyphs (Treasure chest/orb scrap + mystery ?) that match trail-scrap / rose chart language. Labels stay fixed as Treasure / ? — this request is the icon only.",
+  "aspect": "1:1",
+  "styleNotes": "If custom: transparent PNG, no card stock, readable ~32–48pt. If keep stock: move to wont_fix with keepStockIcon true.",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/MarbleVoyageModels.swift",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/MarbleVoyageArt.swift"
+  ],
+  "promptSeeds": [
+    "Kid-friendly comedic fantasy trail scrap icon, treasure pouch or small chest, bold silhouette, pure white bg --ar 1:1",
+    "Same style mystery question-mark scrap token, no letters other than ?"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:30:00Z",
+  "sessionNote": "Seeded — Evan may elect keepStockIcon after one review pass.",
+  "fulfillment": null
+}

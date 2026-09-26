@@ -1,0 +1,28 @@
+{
+  "id": "20260926-grasshopper-kickboxer-idle",
+  "semanticId": "token.plink.gang.grasshopperKickboxer.idle",
+  "kind": "token",
+  "priority": "high",
+  "status": "open",
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "Concept JPEG selected; no runtime imageset / library bind yet"
+  },
+  "keepStockIcon": false,
+  "surface": "Marble Voyage climb foe tile + fight attacker idle (Grasshopper Kickboxer)",
+  "brief": "Transparent idle cutout from selected Grasshopper Kickboxer concept. Resolve six-limb anatomy, hind-leg connections, antenna tips; keep insect proportions; left-facing; readable small.",
+  "aspect": "3:4",
+  "styleNotes": "Same prep rules as HANDOFF.md; do not invent a second silhouette language.",
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/grasshopper-kickboxer.jpeg",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/HANDOFF.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/prompts.json"
+  ],
+  "promptSeeds": [
+    "prompts.json key grasshopper-kickboxer — prep first; reroll only if limbs fail QA."
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:30:00Z",
+  "sessionNote": "Seeded with art-request queue bootstrap.",
+  "fulfillment": null
+}
