@@ -13,15 +13,14 @@
   "brief": "Optional custom turbo meter / boost glyph for the downward-pull trackpad. Stock bolt is fine until art lands.",
   "aspect": "1:1",
   "relatedPaths": [
-    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/PlinkBattleHostView.swift",
-    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/PlinkTurbo.swift"
+    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/PlinkBattleHostView.swift"
   ],
   "promptSeeds": [
     "Simple kid-friendly turbo bolt meter icon for a marble game, bold silhouette, pure white, no text --ar 1:1"
   ],
   "requestedBy": "cursor",
   "requestedAt": "2026-09-26T20:55:00Z",
-  "sessionNote": "Filed with turbo boost mechanic.",
+  "sessionNote": "Filed with turbo boost mechanic. Local builder work-in-progress references omitted from GitHub relatedPaths until that code is committed.",
   "fulfillment": {
     "completedAt": "2026-09-26T21:15:14.165741+00:00",
     "completedBy": "Codex \u2014 Art Director",

@@ -36,7 +36,6 @@
     "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
     "art-requests/ART_DIRECTOR_AGENT.md",
     "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/PlinkPowerUp.swift",
-    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/PlinkTiltLabyrinth.swift",
     "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-transparent.png",
     "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg",
     "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-provenance.json",
@@ -53,7 +52,7 @@
     "Matches visual weight of sibling power icons",
     "No baked text"
   ],
-  "sessionNote": "New power-up shipped with SF Symbol fallback (gyroscope) until this lands.",
+  "sessionNote": "New power-up shipped with SF Symbol fallback (gyroscope) until this lands. Local builder work-in-progress references omitted from GitHub relatedPaths until that code is committed.",
   "placeholder": {
     "type": "missing_catalog",
     "detail": "SF Symbol gyroscope fallback; no world2_plink_power_icon_tilt imageset yet"
