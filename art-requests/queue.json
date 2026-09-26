@@ -1,0 +1,115 @@
+{
+  "updatedAt": "2026-09-26T20:49:38Z",
+  "sourceOfTruth": "Individual JSON files under art-requests/{open,in_review,fulfilled,wont_fix}/",
+  "artDirectorGuide": "art-requests/ART_DIRECTOR_AGENT.md",
+  "open": [
+    {
+      "id": "20260926-bell-market-shop-interior",
+      "semanticId": "plate.marbleVoyage.shop.bellMarket.interior",
+      "priority": "blocker",
+      "type": "plate",
+      "path": "art-requests/open/20260926-bell-market-shop-interior.json"
+    },
+    {
+      "id": "20260926-armadillo-blocker-idle",
+      "semanticId": "token.plink.gang.armadilloBlocker.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260926-armadillo-blocker-idle.json"
+    },
+    {
+      "id": "20260926-bat-divekicker-idle",
+      "semanticId": "token.plink.gang.batDivekicker.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260926-bat-divekicker-idle.json"
+    },
+    {
+      "id": "20260926-crab-pincher-idle",
+      "semanticId": "token.plink.gang.crabPincher.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260926-crab-pincher-idle.json"
+    },
+    {
+      "id": "20260926-grasshopper-kickboxer-idle",
+      "semanticId": "token.plink.gang.grasshopperKickboxer.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260926-grasshopper-kickboxer-idle.json"
+    },
+    {
+      "id": "20260926-climb-mystery-tile",
+      "semanticId": "token.marbleVoyage.climb.mystery",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260926-climb-mystery-tile.json"
+    },
+    {
+      "id": "20260926-climb-scrap-destination-tiles",
+      "semanticId": "token.marbleVoyage.climb.scrapKit",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260926-climb-scrap-destination-tiles.json"
+    },
+    {
+      "id": "20260926-climb-shrine-tile",
+      "semanticId": "token.marbleVoyage.climb.shrine",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260926-climb-shrine-tile.json"
+    },
+    {
+      "id": "20260926-climb-sky-dock-tile",
+      "semanticId": "token.marbleVoyage.climb.skyDock",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260926-climb-sky-dock-tile.json"
+    },
+    {
+      "id": "20260926-climb-treasure-tile",
+      "semanticId": "token.marbleVoyage.climb.treasure",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260926-climb-treasure-tile.json"
+    },
+    {
+      "id": "20260926-climb-nonfight-token",
+      "semanticId": "token.marbleVoyage.climb.nonFight",
+      "priority": "normal",
+      "type": "decision",
+      "path": "art-requests/open/20260926-climb-nonfight-token.json"
+    },
+    {
+      "id": "20260926-event-mystery-plate",
+      "semanticId": "plate.marbleVoyage.event.mystery",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260926-event-mystery-plate.json"
+    },
+    {
+      "id": "20260926-event-shrine-plate",
+      "semanticId": "plate.marbleVoyage.event.shrine",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260926-event-shrine-plate.json"
+    },
+    {
+      "id": "20260926-event-treasure-plate",
+      "semanticId": "plate.marbleVoyage.event.treasure",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260926-event-treasure-plate.json"
+    },
+    {
+      "id": "20260926-shop-heal-stall-icon",
+      "semanticId": "ui.marbleVoyage.shop.healBalm",
+      "priority": "optional",
+      "type": "ui_icon",
+      "path": "art-requests/open/20260926-shop-heal-stall-icon.json"
+    }
+  ],
+  "inReview": [],
+  "fulfilled": [],
+  "wontFix": []
+}

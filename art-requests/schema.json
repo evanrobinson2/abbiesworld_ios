@@ -3,19 +3,21 @@
   "$id": "https://abbies.world/schemas/art-request.json",
   "title": "AbbieArtRequest",
   "type": "object",
-  "additionalProperties": false,
+  "additionalProperties": true,
   "required": [
     "id",
     "semanticId",
-    "kind",
-    "priority",
     "status",
-    "placeholder",
-    "keepStockIcon",
-    "surface",
+    "priority",
+    "type",
     "brief",
+    "aspect",
+    "styleNotes",
+    "keepStockIcon",
+    "relatedPaths",
+    "promptSeeds",
     "requestedBy",
-    "requestedAt"
+    "createdAt"
   ],
   "properties": {
     "id": {
@@ -25,10 +27,26 @@
     },
     "semanticId": {
       "type": "string",
-      "description": "Stable Game Asset / local library semantic ID (join key). Example: token.plink.gang.crabPincher.idle"
+      "description": "Stable Game Asset / local library semantic ID (join key)."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "character_concept",
+        "production_sprite",
+        "plate",
+        "map_token",
+        "ui_icon",
+        "fx",
+        "sfx",
+        "music",
+        "decision",
+        "other"
+      ]
     },
     "kind": {
       "type": "string",
+      "description": "Legacy coarse bucket; prefer type. Kept for older tooling.",
       "enum": ["token", "plate", "portrait", "ui", "fx", "sfx", "music", "other"]
     },
     "priority": {
@@ -55,51 +73,63 @@
             "none"
           ]
         },
-        "detail": {
-          "type": "string",
-          "description": "SF Symbol name, catalog name, or path note."
-        }
+        "detail": { "type": "string" }
       }
     },
-    "keepStockIcon": {
-      "type": "boolean",
-      "description": "True when SF Symbol / stock chrome may stay forever; request is optional polish."
-    },
-    "surface": {
-      "type": "string",
-      "description": "Where the player sees it (screen + role)."
-    },
-    "brief": {
-      "type": "string",
-      "description": "Kid-facing art brief. Concrete silhouette, palette, facing, constraints."
-    },
-    "aspect": {
-      "type": "string",
-      "description": "Preferred Midjourney / export aspect, e.g. 3:4, 4:3, 1:1."
-    },
-    "styleNotes": {
-      "type": "string"
-    },
+    "keepStockIcon": { "type": "boolean" },
+    "surface": { "type": "string" },
+    "brief": { "type": "string" },
+    "aspect": { "type": "string" },
+    "styleNotes": { "type": "string" },
     "relatedPaths": {
       "type": "array",
-      "items": { "type": "string" }
+      "items": { "type": "string" },
+      "description": "Repo-relative paths only. Prefer committed images + provenance."
     },
     "promptSeeds": {
       "type": "array",
       "items": { "type": "string" }
     },
-    "requestedBy": {
-      "type": "string",
-      "description": "Agent or human id, e.g. cursor, codex, evan."
-    },
-    "requestedAt": {
+    "requestedBy": { "type": "string" },
+    "createdAt": {
       "type": "string",
       "format": "date-time"
     },
-    "sessionNote": {
+    "requestedAt": {
       "type": "string",
-      "description": "Optional one-liner for coordination (why now)."
+      "format": "date-time",
+      "description": "Legacy alias of createdAt."
     },
+    "gameArea": { "type": "string" },
+    "usage": { "type": "string" },
+    "targetPixelSize": { "type": "string" },
+    "expectedBackground": { "type": "string" },
+    "characterOrAssetName": { "type": "string" },
+    "pose": { "type": "string" },
+    "facing": { "type": "string" },
+    "productionIntent": {
+      "type": "string",
+      "enum": [
+        "concept_only",
+        "production_sprite",
+        "runtime_bind",
+        "verified_in_app",
+        "keep_stock_decision"
+      ]
+    },
+    "existingAssetSemanticIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "referenceRequestIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "acceptanceCriteria": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "sessionNote": { "type": "string" },
     "fulfillment": {
       "type": ["object", "null"],
       "additionalProperties": false,

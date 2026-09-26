@@ -121,23 +121,35 @@
 <body>
   <h1>Art requests</h1>
   <p class="lede">
-    Open inbox for Abbie’s World. Coding agents file placeholders here;
-    the art director reviews in Chrome, fulfills via Midjourney / AssetSources,
-    then moves JSON to <code>fulfilled/</code>.
+    Open inbox for Abbie’s World. Remote reviewers: start at
+    <code>ART_DIRECTOR_AGENT.md</code>, then <code>queue.json</code>.
+    Coding agents file placeholders here; art directors fulfill via Midjourney / AssetSources,
+    then move JSON to <code>fulfilled/</code>.
   </p>
   <div class="toolbar">
-    <button type="button" id="reload">Reload open/</button>
+    <button type="button" id="reload">Reload from queue.json</button>
     <span class="counts" id="counts"></span>
   </div>
   <p id="status">Loading…</p>
   <div class="grid" id="grid"></div>
 
   <script>
-    const OPEN_FILES = [
+    // Fallback if queue.json cannot be fetched (file://). Keep in sync via rebuild script.
+    const OPEN_FILES_FALLBACK = [
+      "20260926-bell-market-shop-interior.json",
+      "20260926-climb-scrap-destination-tiles.json",
+      "20260926-climb-sky-dock-tile.json",
+      "20260926-climb-treasure-tile.json",
+      "20260926-climb-mystery-tile.json",
+      "20260926-climb-shrine-tile.json",
       "20260926-crab-pincher-idle.json",
       "20260926-grasshopper-kickboxer-idle.json",
       "20260926-armadillo-blocker-idle.json",
       "20260926-bat-divekicker-idle.json",
+      "20260926-event-treasure-plate.json",
+      "20260926-event-mystery-plate.json",
+      "20260926-event-shrine-plate.json",
+      "20260926-shop-heal-stall-icon.json",
       "20260926-climb-nonfight-token.json"
     ];
 
@@ -145,31 +157,32 @@
     const status = document.getElementById("status");
     const counts = document.getElementById("counts");
 
-    async function loadOne(name) {
-      const res = await fetch("./open/" + name, { cache: "no-store" });
-      if (!res.ok) throw new Error(name + " " + res.status);
+    async function loadOne(relPath) {
+      const res = await fetch("./" + relPath.replace(/^art-requests\//, ""), { cache: "no-store" });
+      if (!res.ok) throw new Error(relPath + " " + res.status);
       return res.json();
     }
 
     function card(req) {
       const el = document.createElement("article");
       const paths = (req.relatedPaths || [])
-        .slice(0, 3)
+        .filter((p) => /\.(png|jpe?g|webp|gif)$/i.test(p))
+        .slice(0, 4)
         .map((p) => "<li>" + escapeHtml(p) + "</li>")
         .join("");
       el.innerHTML =
         '<div class="meta">' +
         '<span class="pill status-' + escapeAttr(req.status) + '">' + escapeHtml(req.status) + "</span>" +
         '<span class="pill priority-' + escapeAttr(req.priority) + '">' + escapeHtml(req.priority) + "</span>" +
-        '<span class="pill">' + escapeHtml(req.kind) + "</span>" +
+        '<span class="pill">' + escapeHtml(req.type || req.kind || "") + "</span>" +
         (req.keepStockIcon ? '<span class="pill">keep stock?</span>' : "") +
         "</div>" +
-        "<h2>" + escapeHtml(req.id) + "</h2>" +
+        "<h2>" + escapeHtml(req.characterOrAssetName || req.id) + "</h2>" +
         '<div class="semantic">' + escapeHtml(req.semanticId) + "</div>" +
         '<p class="brief">' + escapeHtml(req.brief) + "</p>" +
         (paths ? '<ul class="paths">' + paths + "</ul>" : "") +
         '<p class="brief" style="opacity:0.7;font-size:0.85rem">' +
-        escapeHtml(req.surface || "") +
+        escapeHtml(req.surface || req.gameArea || "") +
         "</p>";
       return el;
     }
@@ -185,16 +198,28 @@
       return escapeHtml(s).replace(/'/g, "&#39;");
     }
 
+    async function openFileList() {
+      try {
+        const res = await fetch("./queue.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("queue " + res.status);
+        const q = await res.json();
+        return (q.open || []).map((row) => row.path.replace(/^art-requests\//, ""));
+      } catch (_) {
+        return OPEN_FILES_FALLBACK.map((n) => "open/" + n);
+      }
+    }
+
     async function reload() {
       status.textContent = "Loading open/…";
       grid.innerHTML = "";
       const loaded = [];
       const missing = [];
-      for (const name of OPEN_FILES) {
+      const list = await openFileList();
+      for (const rel of list) {
         try {
-          loaded.push(await loadOne(name));
+          loaded.push(await loadOne(rel));
         } catch (e) {
-          missing.push(name);
+          missing.push(rel);
         }
       }
       loaded.sort((a, b) => {
@@ -202,19 +227,16 @@
         return (order[a.priority] ?? 9) - (order[b.priority] ?? 9);
       });
       counts.innerHTML =
-        "<strong>" + loaded.length + "</strong> open listed" +
-        (missing.length ? " · " + missing.length + " missing from manifest" : "");
+        "<strong>" + loaded.length + "</strong> open" +
+        (missing.length ? " · " + missing.length + " missing" : "");
       if (!loaded.length) {
-        grid.innerHTML = '<p class="empty">No open requests loaded. Serve this folder over HTTP and ensure OPEN_FILES matches open/.</p>';
+        grid.innerHTML = '<p class="empty">No open requests loaded. On GitHub, read <code>queue.json</code> and <code>open/*.json</code> directly. Locally: <code>python3 -m http.server 8766 --directory art-requests</code>.</p>';
         status.textContent = missing.length ? "Missing: " + missing.join(", ") : "Empty.";
         return;
       }
       loaded.forEach((r) => grid.appendChild(card(r)));
       status.textContent =
-        "Serve with: python3 -m http.server 8766 --directory art-requests  →  http://127.0.0.1:8766/";
-      if (missing.length) {
-        status.textContent += " · Update OPEN_FILES for: " + missing.join(", ");
-      }
+        "GitHub: open ART_DIRECTOR_AGENT.md → queue.json → open/*.json. Local board: python3 -m http.server 8766 --directory art-requests";
     }
 
     document.getElementById("reload").addEventListener("click", reload);

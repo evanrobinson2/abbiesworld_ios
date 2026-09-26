@@ -1,0 +1,47 @@
+{
+  "id": "20260926-event-treasure-plate",
+  "semanticId": "plate.marbleVoyage.event.treasure",
+  "kind": "plate",
+  "priority": "normal",
+  "status": "open",
+  "placeholder": {
+    "type": "sf_symbol",
+    "detail": "eventPhase shows gift.fill SF Symbol on dark void \u2014 no encounter plate"
+  },
+  "keepStockIcon": false,
+  "surface": "Treasure event resolve screen (after tapping a Treasure climb node)",
+  "brief": "4:3 encounter plate for opening a Treasure stop: scrap chest / coin spill vignette with room for title + Continue chrome. No baked text. Kid-friendly; pairs with chart treasure tile.",
+  "aspect": "4:3",
+  "styleNotes": "Fit plate; letterbox OK. Same style lock as Bell Market / fight lands.",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/MarbleVoyageHostView.swift",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/fox-land.jpg",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/porcupine-boxer.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/index.html",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/README.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg"
+  ],
+  "promptSeeds": [
+    "Comedic fantasy treasure encounter backdrop, open scrap chest glowing coins, 4:3 landscape empty upper third for UI, no text --ar 4:3 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:45:00Z",
+  "sessionNote": "Accompanying graphic for Treasure destinations.",
+  "fulfillment": null,
+  "createdAt": "2026-09-26T20:45:00Z",
+  "type": "plate",
+  "gameArea": "Marble Voyage \u2014 event resolve",
+  "usage": "4:3 backdrop when resolving a Treasure node",
+  "targetPixelSize": "~2048\u00d71536 4:3",
+  "expectedBackground": "Painted scene with quiet upper third for UI",
+  "characterOrAssetName": "Treasure encounter plate",
+  "productionIntent": "runtime_bind",
+  "referenceRequestIds": [
+    "20260926-climb-treasure-tile"
+  ],
+  "acceptanceCriteria": [
+    "Scrap chest / coin spill; no baked text",
+    "Room for title + Continue",
+    "Fit/letterbox OK"
+  ]
+}

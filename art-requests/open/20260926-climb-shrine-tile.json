@@ -1,0 +1,48 @@
+{
+  "id": "20260926-climb-shrine-tile",
+  "semanticId": "token.marbleVoyage.climb.shrine",
+  "kind": "token",
+  "priority": "high",
+  "status": "open",
+  "placeholder": {
+    "type": "sf_symbol",
+    "detail": "questionmark.circle.fill / cross.circle.fill accents; chartLabel still ?"
+  },
+  "keepStockIcon": false,
+  "surface": "Climb chart \u2014 Shrine / rest nodes (kind shrine; labeled ?)",
+  "brief": "Square destination tile for shrine/rest beats. Soft bell / glowing stone / mercy-bell scrap \u2014 distinct from Treasure chest and Mystery crate, but still kid-facing trail scrap. UI label remains ? \u2014 no baked text.",
+  "aspect": "1:1",
+  "styleNotes": "Bell Market elsewhere uses bell language; shrine can echo a small trail bell without looking like the full shop.",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/MarbleVoyageModels.swift",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/fox-land.jpg",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/porcupine-boxer.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/index.html",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/README.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg"
+  ],
+  "promptSeeds": [
+    "Kid-friendly fantasy trail shrine bell scrap for climb map tile, soft glow, bold silhouette, pure white, no text --ar 1:1 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:45:00Z",
+  "sessionNote": "Land rests alternate shrine/treasure; middle scraps can roll shrine.",
+  "fulfillment": null,
+  "createdAt": "2026-09-26T20:45:00Z",
+  "type": "map_token",
+  "gameArea": "Marble Voyage \u2014 climb chart",
+  "usage": "Square shrine/rest destination tile (often labeled ?)",
+  "targetPixelSize": "Square token; readable ~64\u2013120pt",
+  "expectedBackground": "Pure white / transparent cutout preferred",
+  "characterOrAssetName": "Shrine / rest stop",
+  "productionIntent": "runtime_bind",
+  "referenceRequestIds": [
+    "20260926-event-shrine-plate",
+    "20260926-bell-market-shop-interior"
+  ],
+  "acceptanceCriteria": [
+    "Soft bell / glowing stone distinct from treasure chest and mystery crate",
+    "Kid-friendly mercy mood",
+    "No text"
+  ]
+}

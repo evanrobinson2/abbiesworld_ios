@@ -28,15 +28,18 @@ If unsure: write the request with `"keepStockIcon": true` and `"priority": "opti
 
 ## Required fields
 
-Follow `art-requests/schema.json`. Minimum:
+Follow `art-requests/schema.json`. Minimum for remote review:
 
-- `id` (filename stem), `semanticId`, `kind`, `priority`, `status: "open"`
-- `placeholder.type` + optional `detail`
-- `keepStockIcon`, `surface`, `brief`
-- `requestedBy` (e.g. `cursor`), `requestedAt` (ISO-8601)
-- Prefer `relatedPaths`, `aspect`, `promptSeeds` when known
+- `id`, `semanticId`, `status`, `priority`, `type`, `brief`, `aspect`, `styleNotes`
+- `keepStockIcon`, `relatedPaths` (**repo-relative only** — never `/Users/…`), `promptSeeds`
+- `requestedBy`, `createdAt` (ISO-8601; `requestedAt` may mirror it)
+- Prefer `acceptanceCriteria`, visual refs under `AssetSources/…`, `gameArea` / `usage`
 
 **Semantic ID is the join key** — use existing conventions (`token.plink.gang.<id>.<pose>`, `map.*`, `poi.*.*`). Do not invent a parallel registry.
+
+After moving requests between folders, run: `python3 scripts/rebuild_art_request_queue.py`
+
+Art directors (remote or local) start at `art-requests/ART_DIRECTOR_AGENT.md`.
 
 ## Before / during every major build or playtest handoff
 

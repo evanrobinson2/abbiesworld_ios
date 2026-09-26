@@ -1,5 +1,34 @@
 # Agent Coordination
 
+## Art requests
+
+Artwork requests from builders live in `art-requests/`.
+
+Remote or local art directors should begin with:
+
+`art-requests/ART_DIRECTOR_AGENT.md`
+
+Then inspect:
+
+- `art-requests/queue.json` (compact index)
+- `art-requests/open/*.json` (source of truth per request)
+
+`semanticId` is the canonical join key for generated artwork.
+
+Do not invent a parallel registry. Do not require `~/.codex/skills/abbies-art-director/SKILL.md` — the repo docs are authoritative for GitHub-only review.
+
+Rebuild the index after moving requests:
+
+`python3 scripts/rebuild_art_request_queue.py`
+
+## Cursor — GitHub-operable art-request system — 2026-09-26
+
+- Added `art-requests/ART_DIRECTOR_AGENT.md` (standalone remote art-director contract).
+- Enriched all `open/*.json` with `type`, `createdAt`, acceptance criteria, and repo-relative visual `relatedPaths` (henchmen JPEGs, porcupine cutout, trail-scrap style refs).
+- Added pack `AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/provenance.json` and `art-requests/queue.json` (+ rebuild script).
+- Updated README / INTAKE / index board / schema for GitHub-only review.
+- **Not committed/pushed** in this pass — Evan must authorize.
+
 ## Cursor — Art request queue bootstrap — 2026-09-26
 
 - Added repo inbox `art-requests/` (`open` / `in_review` / `fulfilled` / `wont_fix`), `schema.json`, review board `index.html`, builder README, and paste-ready `ART_DIRECTOR_INTAKE.md`.

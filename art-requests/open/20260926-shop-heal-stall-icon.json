@@ -1,0 +1,39 @@
+{
+  "id": "20260926-shop-heal-stall-icon",
+  "semanticId": "ui.marbleVoyage.shop.healBalm",
+  "kind": "ui",
+  "priority": "optional",
+  "status": "open",
+  "placeholder": {
+    "type": "sf_symbol",
+    "detail": "Shop heal row uses text + heart SF accents; no dedicated balm art"
+  },
+  "keepStockIcon": true,
+  "surface": "Bell Market \u2014 Bell balm / heal purchase row",
+  "brief": "Optional custom icon for shop heal (bell balm bottle or glowing bell drop). May keep SF heart forever \u2014 art director can wont_fix.",
+  "aspect": "1:1",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/MarbleVoyageShopView.swift",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/fox-land.jpg"
+  ],
+  "promptSeeds": [
+    "Simple kid-friendly bell balm potion icon, bold silhouette, pure white, no text --ar 1:1"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:45:00Z",
+  "sessionNote": "Accompanying shop chrome; keepStockIcon allowed.",
+  "fulfillment": null,
+  "createdAt": "2026-09-26T20:45:00Z",
+  "type": "ui_icon",
+  "styleNotes": "Match Marble Voyage trail-scrap / porcupine cast language.",
+  "gameArea": "Marble Voyage \u2014 Bell Market",
+  "usage": "Optional custom icon for heal row; keepStockIcon true",
+  "targetPixelSize": "~64\u201396pt icon",
+  "expectedBackground": "Transparent",
+  "characterOrAssetName": "Bell balm heal icon",
+  "productionIntent": "keep_stock_decision",
+  "acceptanceCriteria": [
+    "May wont_fix and keep SF heart",
+    "If custom: bold silhouette, no text"
+  ]
+}
