@@ -106,6 +106,12 @@ final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate
     @Published private(set) var currentTrackID = "marble-voyage"
     @Published private(set) var currentTrackTitle = "Marble Voyage"
     @Published private(set) var isPlaying = false
+    /// 0…1 — transport volume (persists across track changes).
+    @Published private(set) var volume: Float = 0.52
+
+    var currentTrack: Track? {
+        Self.playlist.first { $0.id == currentTrackID }
+    }
 
     private var player: AVAudioPlayer?
     private var fadingOut: AVAudioPlayer?
@@ -113,7 +119,6 @@ final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate
     private var autoAdvance = true
     private var boardRotateIndex = 0
     private var crossfadeToken = UUID()
-    private let musicVolume: Float = 0.52
     private let crossfadeSeconds: TimeInterval = 0.85
 
     func playSafari() {
@@ -169,6 +174,27 @@ final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate
         }
         let prev = Self.playlist[(idx - 1 + Self.playlist.count) % Self.playlist.count]
         selectTrack(id: prev.id)
+    }
+
+    func togglePause() {
+        guard let player else { return }
+        if player.isPlaying {
+            player.pause()
+            isPlaying = false
+        } else {
+            player.volume = volume
+            player.play()
+            isPlaying = true
+        }
+    }
+
+    func setVolume(_ value: Float) {
+        let clamped = max(0, min(1, value))
+        volume = clamped
+        player?.volume = clamped
+        if let fadingOut, fadingOut.isPlaying {
+            fadingOut.volume = clamped
+        }
     }
 
     func stop() {
@@ -237,8 +263,8 @@ final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate
                     DispatchQueue.main.asyncAfter(deadline: .now() + stepTime * Double(step)) {
                         guard self.crossfadeToken == token else { return }
                         let t = Float(step) / Float(steps)
-                        self.player?.volume = self.musicVolume * t
-                        self.fadingOut?.volume = self.musicVolume * (1 - t)
+                        self.player?.volume = self.volume * t
+                        self.fadingOut?.volume = self.volume * (1 - t)
                         if step == steps {
                             self.fadingOut?.stop()
                             self.fadingOut = nil
@@ -247,7 +273,7 @@ final class PlinkMusicService: NSObject, ObservableObject, AVAudioPlayerDelegate
                 }
             } else {
                 outgoing?.stop()
-                next.volume = musicVolume
+                next.volume = volume
                 next.play()
                 player = next
                 isPlaying = true

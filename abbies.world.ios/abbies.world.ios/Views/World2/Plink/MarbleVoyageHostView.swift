@@ -581,11 +581,18 @@ struct MarbleVoyageHostView: View {
 
     private var chart: some View {
         GeometryReader { geo in
-            // Art leads: tall poster column (correct proportions), modest letterbox on sides.
-            let content = MarbleVoyageClimbMap.contentSize(in: geo.size)
+            let columnCount = max((run?.nodes.map(\.column).max() ?? 1) + 1, 2)
+            let content = MarbleVoyageClimbMap.contentSize(
+                in: geo.size,
+                columnCount: columnCount
+            )
             let contentWidth = content.width
             let contentHeight = content.height
-            let positions = nodePositions(in: CGSize(width: contentWidth, height: contentHeight))
+            let tile = MarbleVoyageArt.chartTileSize(forViewportWidth: geo.size.width)
+            let positions = nodePositions(
+                in: CGSize(width: contentWidth, height: contentHeight),
+                tile: tile
+            )
             let maxOffset = max(0, contentHeight - geo.size.height)
 
             HStack(spacing: 0) {
@@ -638,7 +645,12 @@ struct MarbleVoyageHostView: View {
                             }
                             ForEach(run.nodes) { node in
                                 if let point = positions[node.id] {
-                                    nodeChip(node, positions: positions, hidePlayerWhileMarching: isMarching)
+                                    nodeChip(
+                                        node,
+                                        positions: positions,
+                                        hidePlayerWhileMarching: isMarching,
+                                        tile: tile
+                                    )
                                         .id(node.id)
                                         .position(point)
                                 }
@@ -646,7 +658,7 @@ struct MarbleVoyageHostView: View {
                         }
 
                         if let marchPosition {
-                            climbPlayerToken(size: 58, flashing: false)
+                            climbPlayerToken(size: tile * 0.45, flashing: false)
                                 .position(marchPosition)
                                 .zIndex(20)
                                 .allowsHitTesting(false)
@@ -689,7 +701,8 @@ struct MarbleVoyageHostView: View {
                 )
             }
             .onChange(of: geo.size) { _, newSize in
-                let resized = MarbleVoyageClimbMap.contentSize(in: newSize)
+                let cols = max((run?.nodes.map(\.column).max() ?? 1) + 1, 2)
+                let resized = MarbleVoyageClimbMap.contentSize(in: newSize, columnCount: cols)
                 chartContentSize = resized
                 let newMax = max(0, resized.height - newSize.height)
                 let clamped = min(max(0, climbCameraOffset), newMax)
@@ -730,7 +743,9 @@ struct MarbleVoyageHostView: View {
                 if climbDragAnchor == nil {
                     climbDragAnchor = climbCameraOffset
                 }
-                let next = (climbDragAnchor ?? climbCameraOffset) - value.translation.height
+                // Slow, deliberate pan — big land portraits need time to read.
+                let scaled = value.translation.height * MarbleVoyageDesignRules.climbPanDragSensitivity
+                let next = (climbDragAnchor ?? climbCameraOffset) - scaled
                 let clamped = min(max(0, next), maxOffset)
                 climbCameraOffset = clamped
                 climbScrollOffset = clamped
@@ -894,15 +909,16 @@ struct MarbleVoyageHostView: View {
         return Color.white.opacity(0.18)
     }
 
-    /// column = altitude (0 bottom dock → N boss / last peg at top); row = left/right branch.
-    private func nodePositions(in size: CGSize) -> [String: CGPoint] {
+    /// column = altitude (0 bottom dock → N boss at top); row = left/right branch.
+    /// Vertical spacing follows big fight-tile size so portraits stay readable.
+    private func nodePositions(in size: CGSize, tile: CGFloat) -> [String: CGPoint] {
         guard let run else { return [:] }
-        let maxCol = max(run.nodes.map(\.column).max() ?? 1, 1)
         let maxRow = max(run.nodes.map(\.row).max() ?? 1, 1)
+        let step = tile * MarbleVoyageArt.chartTileVerticalSpacingFactor
+        let bottomPad = tile * 1.15
         var out: [String: CGPoint] = [:]
         for node in run.nodes {
-            // Match the island poster: grassy dock near the bottom, glowing summit at top.
-            let y = size.height * (0.90 - 0.80 * CGFloat(node.column) / CGFloat(maxCol))
+            let y = size.height - bottomPad - step * CGFloat(node.column)
             let x = size.width * (0.22 + 0.56 * CGFloat(node.row) / CGFloat(max(maxRow, 1)))
             out[node.id] = CGPoint(x: x, y: y)
         }
@@ -913,7 +929,8 @@ struct MarbleVoyageHostView: View {
     private func nodeChip(
         _ node: MarbleVoyageNode,
         positions: [String: CGPoint],
-        hidePlayerWhileMarching: Bool
+        hidePlayerWhileMarching: Bool,
+        tile: CGFloat
     ) -> some View {
         if let run {
             let isHere = node.id == run.currentNodeID && !hidePlayerWhileMarching
@@ -923,8 +940,9 @@ struct MarbleVoyageHostView: View {
             let seen = run.visited.contains(node.id)
             let rose = MarbleVoyageArt.chartTileRose
             let tint = Color(red: rose.r, green: rose.g, blue: rose.b)
-            let tile = MarbleVoyageArt.chartTileSize
-            let corner = MarbleVoyageArt.chartTileCorner
+            let corner = MarbleVoyageArt.chartTileCorner(for: tile)
+            let iconSize = MarbleVoyageArt.chartTileIconSize(for: tile)
+            let labelWidth = MarbleVoyageArt.chartTileLabelWidth(for: tile)
             let chip = VStack(spacing: 6) {
                 ZStack {
                     RoundedRectangle(cornerRadius: corner, style: .continuous)
@@ -976,7 +994,7 @@ struct MarbleVoyageHostView: View {
                         }
                     } else {
                         Image(systemName: MarbleVoyageArt.eventAccentIcon(node.kind))
-                            .font(.system(size: MarbleVoyageArt.chartTileIconSize, weight: .black))
+                            .font(.system(size: iconSize, weight: .black))
                             .symbolRenderingMode(.hierarchical)
                             .foregroundStyle(.white)
                             .shadow(color: .black.opacity(0.45), radius: 2, y: 1)
@@ -995,7 +1013,7 @@ struct MarbleVoyageHostView: View {
                 }
                 .frame(width: tile, height: tile)
                 Text(showPlayer ? (isDock ? "You · Dock" : "You") : node.title)
-                    .font(.system(size: 13, weight: .black, design: .rounded))
+                    .font(.system(size: max(13, tile * 0.085), weight: .black, design: .rounded))
                     .foregroundStyle(.white)
                     .shadow(color: .black.opacity(0.85), radius: 2, y: 1)
                     .padding(.horizontal, 8)
@@ -1003,7 +1021,7 @@ struct MarbleVoyageHostView: View {
                     .background(Color.black.opacity(0.45), in: Capsule())
                     .lineLimit(2)
                     .multilineTextAlignment(.center)
-                    .frame(width: MarbleVoyageArt.chartTileLabelWidth)
+                    .frame(width: labelWidth)
             }
             .scaleEffect(reachableTileScale(isReachable: isReachable, isBoss: node.kind == .boss))
             .animation(
@@ -1073,7 +1091,7 @@ struct MarbleVoyageHostView: View {
                     .frame(width: tile * 0.88, height: tile * 0.88)
             } else {
                 Image(systemName: kind.isNamedCrew ? "crown.fill" : "skull.fill")
-                    .font(.system(size: MarbleVoyageArt.chartTileIconSize, weight: .black))
+                    .font(.system(size: MarbleVoyageArt.chartTileIconSize(for: tile), weight: .black))
                     .foregroundStyle(.white)
             }
         }
@@ -1163,7 +1181,8 @@ struct MarbleVoyageHostView: View {
         let size = chartContentSize.width > 1
             ? chartContentSize
             : CGSize(width: 700, height: 1600)
-        return nodePositions(in: size)
+        let tile = MarbleVoyageArt.chartTileSize(forViewportWidth: size.width)
+        return nodePositions(in: size, tile: tile)
     }
 
     // MARK: - Fight

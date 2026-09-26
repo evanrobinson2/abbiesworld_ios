@@ -22,9 +22,8 @@ enum MarbleVoyageClimbMap {
     /// Minimum scroll height in viewport-heights so the intro pan has room.
     static let minScrollScreens: CGFloat = 2.6
 
-    /// Wide tall canvas: fill most of the landscape width, height from poster aspect.
-    /// Never fatten/squash the painting — only grow scroll height when width grows.
-    static func contentSize(in viewport: CGSize) -> CGSize {
+    /// Wide tall canvas: fill most landscape width; grow height so big fight tiles don't overlap.
+    static func contentSize(in viewport: CGSize, columnCount: Int = 14) -> CGSize {
         guard viewport.width > 1, viewport.height > 1 else {
             return CGSize(width: 700, height: 2100)
         }
@@ -35,14 +34,17 @@ enum MarbleVoyageClimbMap {
         )
         var height = width * aspectHeightOverWidth
 
-        let minHeight = max(viewport.height * minScrollScreens, 1600)
+        let tile = MarbleVoyageArt.chartTileSize(forViewportWidth: viewport.width)
+        let step = tile * MarbleVoyageArt.chartTileVerticalSpacingFactor
+        let tileFitHeight = step * CGFloat(max(columnCount, 1)) + tile * 2.2
+        let minHeight = max(viewport.height * minScrollScreens, tileFitHeight, 1600)
         if height < minHeight {
             height = minHeight
             width = height * aspectWidthOverHeight
             let cap = viewport.width * hardWidthCapFraction
             if width > cap {
                 width = cap
-                height = width * aspectHeightOverWidth
+                height = max(width * aspectHeightOverWidth, tileFitHeight)
             }
         }
 

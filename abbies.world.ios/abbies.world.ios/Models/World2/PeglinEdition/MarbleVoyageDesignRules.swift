@@ -36,8 +36,8 @@ enum MarbleVoyageDesignRules {
     static let minFightBoardHeightFractionOfViewport: CGFloat = 0.68
     /// Estimated top-bar + portrait-strip height used by packing math / preflight.
     static var estimatedFightChromeHeight: CGFloat {
-        // Leave / phase bar ≈34 + spacing + banner (art + pad) + spacing under strip.
-        34 + maxFightChromeBoardSpacing + (fightPortraitArtSize + 24) + maxFightChromeBoardSpacing
+        // Leave / phase bar ≈34 + spacing + unified glass strip (label + art + pad) + spacing.
+        34 + maxFightChromeBoardSpacing + (fightPortraitArtSize + 36) + maxFightChromeBoardSpacing
     }
 
     // MARK: - Transparent UI chrome (power icons)
@@ -68,10 +68,12 @@ enum MarbleVoyageDesignRules {
 
     /// Hold on summit / boss before panning (~3.7s so the boss portrait reads).
     static let climbIntroSettleSeconds: TimeInterval = 3.7
-    /// Ease pan from boss → player (kid-readable “look how far”).
-    static let climbIntroPanSeconds: TimeInterval = 4.0
+    /// Ease pan from boss → player — slow so big land tiles can be read on the way down.
+    static let climbIntroPanSeconds: TimeInterval = 7.0
     /// Player node ends centered in the scroll viewport.
     static let climbIntroPlayerScrollAnchorY: CGFloat = 0.5
+    /// Finger drag → camera: lower = slower / more deliberate pan on the climb.
+    static let climbPanDragSensitivity: CGFloat = 0.38
 
     // MARK: - VS splash portraits
 

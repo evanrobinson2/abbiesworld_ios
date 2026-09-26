@@ -78,7 +78,7 @@ final class MarbleVoyageDesignRulesTests: XCTestCase {
     }
 
     func testClimbIntroTimingContract() {
-        XCTAssertEqual(MarbleVoyageDesignRules.climbIntroPanSeconds, 4.0, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbIntroPanSeconds, 7.0, accuracy: 0.01)
         XCTAssertEqual(MarbleVoyageDesignRules.climbIntroSettleSeconds, 3.7, accuracy: 0.01)
         XCTAssertEqual(MarbleVoyageDesignRules.climbIntroPlayerScrollAnchorY, 0.5, accuracy: 0.01)
     }

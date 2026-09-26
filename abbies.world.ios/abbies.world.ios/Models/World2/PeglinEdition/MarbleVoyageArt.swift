@@ -64,9 +64,25 @@ enum MarbleVoyageArt {
         return chartTileRose
     }
 
-    /// Base map tile edge (pt). Next-level tiles pulse in place (same size).
-    static let chartTileSize: CGFloat = 130
-    static let chartTileIconSize: CGFloat = 54
-    static let chartTileCorner: CGFloat = 22
-    static let chartTileLabelWidth: CGFloat = 140
+    /// Fight / POI tiles dominate the climb — ~⅓ of the iPad viewport width.
+    static let chartTileViewportWidthFraction: CGFloat = 0.33
+    static let chartTileMinSize: CGFloat = 160
+    static let chartTileMaxSize: CGFloat = 420
+    /// Center-to-center vertical gap as a multiple of tile edge (keeps big portraits readable).
+    static let chartTileVerticalSpacingFactor: CGFloat = 1.55
+
+    static func chartTileSize(forViewportWidth width: CGFloat) -> CGFloat {
+        let raw = width * chartTileViewportWidthFraction
+        return min(chartTileMaxSize, max(chartTileMinSize, raw))
+    }
+
+    static func chartTileCorner(for tile: CGFloat) -> CGFloat { max(22, tile * 0.17) }
+    static func chartTileIconSize(for tile: CGFloat) -> CGFloat { tile * 0.42 }
+    static func chartTileLabelWidth(for tile: CGFloat) -> CGFloat { tile * 1.08 }
+
+    /// @available(*, deprecated, message: "Use chartTileSize(forViewportWidth:)")
+    static let chartTileSize: CGFloat = 220
+    static let chartTileIconSize: CGFloat = 90
+    static let chartTileCorner: CGFloat = 36
+    static let chartTileLabelWidth: CGFloat = 240
 }

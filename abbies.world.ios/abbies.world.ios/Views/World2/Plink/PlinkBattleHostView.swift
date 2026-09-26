@@ -117,6 +117,7 @@ struct PlinkBattleHostView: View {
     @State private var cageShattered = false
     @State private var fightReadyPulse = false
     @State private var didAnnounceReady = false
+    @State private var showMusicDetail = false
     @StateObject private var music = PlinkMusicService()
 
     private struct MarbleFlight: Identifiable, Equatable {
@@ -407,7 +408,7 @@ struct PlinkBattleHostView: View {
                 HStack {
                     leaveButton
                     Spacer()
-                    musicPickerChip
+                    musicPlayerOverlay
                 }
 
                 ScrollView(.vertical, showsIndicators: false) {
@@ -936,16 +937,13 @@ struct PlinkBattleHostView: View {
                         .opacity(Double(fightIntroProgress))
                         .zIndex(6)
 
-                    // Jukebox + aim stick — bottom-right overlays.
-                    VStack(alignment: .trailing, spacing: 10) {
-                        jukeboxOverlay
-                        aimJoystick
-                    }
-                    .padding(.trailing, 12)
-                    .padding(.bottom, 12)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                    .opacity(Double(fightIntroProgress))
-                    .zIndex(6)
+                    // Music transport — bottom-right (tap title for detail tile).
+                    musicPlayerOverlay
+                        .padding(.trailing, 12)
+                        .padding(.bottom, 12)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+                        .opacity(Double(fightIntroProgress))
+                        .zIndex(6)
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             }
@@ -1006,61 +1004,184 @@ struct PlinkBattleHostView: View {
         .accessibilityIdentifier("world2.plink.powerUp.tray")
     }
 
-    private var jukeboxOverlay: some View {
-        HStack(spacing: 4) {
-            Button {
-                PlinkSFX.play(.ui)
+    /// Compact transport + expandable detail tile (deck chrome + fight overlay).
+    private var musicPlayerOverlay: some View {
+        VStack(alignment: .trailing, spacing: 8) {
+            if showMusicDetail {
+                musicDetailTile
+                    .transition(.asymmetric(
+                        insertion: .move(edge: .bottom).combined(with: .opacity),
+                        removal: .opacity
+                    ))
+            }
+            musicTransportBar
+        }
+        .animation(.spring(response: 0.34, dampingFraction: 0.82), value: showMusicDetail)
+    }
+
+    private var musicTransportBar: some View {
+        HStack(spacing: 6) {
+            musicTransportButton(systemName: "backward.fill", label: "Previous track") {
                 music.cyclePrevious()
-            } label: {
-                Image(systemName: "backward.fill")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(.white.opacity(0.95))
-                    .frame(width: 30, height: 30)
             }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Previous track")
 
-            Image(systemName: "music.note.list")
-                .font(.system(size: 13, weight: .bold))
-                .foregroundStyle(Color(red: 1, green: 0.85, blue: 0.45))
+            musicTransportButton(
+                systemName: music.isPlaying ? "pause.fill" : "play.fill",
+                label: music.isPlaying ? "Pause" : "Play"
+            ) {
+                music.togglePause()
+            }
 
-            Text(music.currentTrackTitle)
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
-                .lineLimit(1)
-                .frame(maxWidth: 110)
+            musicTransportButton(systemName: "forward.fill", label: "Next track") {
+                music.cycleNext()
+            }
+            .accessibilityIdentifier("world2.plink.music.next")
 
             Button {
                 PlinkSFX.play(.ui)
-                music.cycleNext()
+                withAnimation(.spring(response: 0.34, dampingFraction: 0.82)) {
+                    showMusicDetail.toggle()
+                }
             } label: {
-                Image(systemName: "forward.fill")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(.white.opacity(0.95))
-                    .frame(width: 30, height: 30)
+                HStack(spacing: 5) {
+                    Image(systemName: "music.note")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(Color(red: 1, green: 0.82, blue: 0.42))
+                    Text(music.currentTrackTitle)
+                        .font(.system(size: 12, weight: .bold, design: .rounded))
+                        .foregroundStyle(.white)
+                        .lineLimit(1)
+                }
+                .frame(maxWidth: 128, alignment: .leading)
+                .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityLabel("Next track")
-            .accessibilityIdentifier("world2.plink.music.next")
+            .accessibilityLabel("Open music details")
+            .accessibilityIdentifier("world2.plink.music.detail")
+
+            Image(systemName: music.volume < 0.05 ? "speaker.slash.fill" : "speaker.wave.2.fill")
+                .font(.system(size: 11, weight: .semibold))
+                .foregroundStyle(.white.opacity(0.75))
+                .frame(width: 16)
+
+            Slider(
+                value: Binding(
+                    get: { Double(music.volume) },
+                    set: { music.setVolume(Float($0)) }
+                ),
+                in: 0...1
+            )
+            .frame(width: 78)
+            .tint(Color(red: 0.55, green: 0.9, blue: 0.72))
+            .accessibilityLabel("Volume")
         }
         .padding(.horizontal, 10)
-        .padding(.vertical, 6)
-        .background(.ultraThinMaterial.opacity(0.85), in: Capsule())
-        .overlay(Capsule().stroke(.white.opacity(0.35), lineWidth: 1))
+        .padding(.vertical, 7)
+        .background(.ultraThinMaterial.opacity(0.92), in: Capsule())
+        .overlay(Capsule().stroke(.white.opacity(0.28), lineWidth: 1))
         .shadow(color: .black.opacity(0.35), radius: 8, y: 3)
         .accessibilityIdentifier("world2.plink.music.picker")
     }
 
-    /// Small on-screen stick for aiming (motor-skill assist). Release to fire.
-    private var aimJoystick: some View {
-        AimAssistJoystick(
-            reduceMotion: reduceMotion,
-            enabled: bridge?.scene.isAimingPhase ?? false
-        ) { normalizedX in
-            bridge?.scene.applyAimJoystick(normalizedX: normalizedX)
-        } onRelease: {
-            bridge?.scene.fireFromJoystick()
+    private func musicTransportButton(
+        systemName: String,
+        label: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            PlinkSFX.play(.ui)
+            action()
+        } label: {
+            Image(systemName: systemName)
+                .font(.system(size: 12, weight: .bold))
+                .foregroundStyle(.white.opacity(0.95))
+                .frame(width: 28, height: 28)
+                .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
+    }
+
+    private var musicDetailTile: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack(alignment: .firstTextBaseline) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(music.currentTrackTitle)
+                        .font(.system(size: 16, weight: .heavy, design: .rounded))
+                        .foregroundStyle(.white)
+                        .lineLimit(2)
+                    Text((music.currentTrack?.role ?? "track").uppercased())
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .foregroundStyle(Color(red: 0.7, green: 0.9, blue: 0.8).opacity(0.9))
+                        .tracking(0.6)
+                }
+                Spacer(minLength: 8)
+                Button {
+                    PlinkSFX.play(.ui)
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
+                        showMusicDetail = false
+                    }
+                } label: {
+                    Image(systemName: "xmark")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(.white.opacity(0.85))
+                        .frame(width: 26, height: 26)
+                        .background(Circle().fill(Color.white.opacity(0.12)))
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("Close music details")
+            }
+
+            ScrollView(.vertical, showsIndicators: false) {
+                VStack(spacing: 4) {
+                    ForEach(PlinkMusicService.playlist, id: \.id) { track in
+                        let selected = track.id == music.currentTrackID
+                        Button {
+                            PlinkSFX.play(.ui)
+                            music.selectTrack(id: track.id)
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: selected && music.isPlaying ? "speaker.wave.2.fill" : "music.note")
+                                    .font(.system(size: 11, weight: .bold))
+                                    .foregroundStyle(selected
+                                                     ? Color(red: 1, green: 0.82, blue: 0.42)
+                                                     : .white.opacity(0.45))
+                                    .frame(width: 16)
+                                VStack(alignment: .leading, spacing: 1) {
+                                    Text(track.title)
+                                        .font(.system(size: 13, weight: selected ? .heavy : .semibold, design: .rounded))
+                                        .foregroundStyle(.white.opacity(selected ? 1 : 0.82))
+                                        .lineLimit(1)
+                                    Text(track.role.capitalized)
+                                        .font(.system(size: 10, weight: .medium, design: .rounded))
+                                        .foregroundStyle(.white.opacity(0.45))
+                                }
+                                Spacer(minLength: 4)
+                            }
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 7)
+                            .background(
+                                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                    .fill(selected ? Color.white.opacity(0.14) : Color.clear)
+                            )
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("\(track.title), \(track.role)")
+                        .accessibilityAddTraits(selected ? .isSelected : [])
+                    }
+                }
+            }
+            .frame(maxHeight: 220)
+        }
+        .padding(12)
+        .frame(width: 280, alignment: .leading)
+        .background(.ultraThinMaterial.opacity(0.96), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(.white.opacity(0.28), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.4), radius: 14, y: 6)
+        .accessibilityIdentifier("world2.plink.music.tile")
     }
 
     private var cageFraction: CGFloat {
@@ -1116,36 +1237,39 @@ struct PlinkBattleHostView: View {
 
     /// Top chrome: Abbie | BAD GUYS cluster | RESCUE hostage.
     /// Grows sideways for multi-foe; keep height compact so the board sits flush underneath.
+    /// One glass instrument: Abbie · Bad guys · Rescue — shared height, quiet accents.
     private var fightPortraitBar: some View {
         let art = MarbleVoyageDesignRules.fightPortraitArtSize
-        return HStack(alignment: .bottom, spacing: 8) {
-            fightFighterBanner(
-                name: "Abbie",
-                portrait: AnyView(PeglinAbbieBattlePortrait(state: abbieState, size: art)),
-                hp: playerHP,
-                maxHP: playerMaxHP,
-                tint: Color(red: 0.45, green: 0.85, blue: 0.55),
-                float: playerHPFloat,
-                shake: playerShake,
-                impactFlash: playerImpactFlash,
-                portraitOnLeading: true,
-                isPlayer: true,
-                meterTitle: "HP",
-                roleCaption: "Coming to rescue"
-            )
+        return HStack(alignment: .center, spacing: 0) {
+            fightAbbieCell(art: art)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
-            VStack(spacing: 4) {
-                comicStripLabel("BAD GUYS:", tint: Color(red: 1, green: 0.45, blue: 0.28))
-                fightWaveAttackerChip(size: art * 0.78)
-            }
-            .frame(maxWidth: .infinity)
+            fightChromeDivider
 
-            VStack(spacing: 4) {
-                comicStripLabel("RESCUE:", tint: Color(red: 0.4, green: 0.9, blue: 0.85))
-                rescueTargetChip(size: art)
-            }
+            fightBadGuysCell(art: art)
+                .frame(maxWidth: .infinity)
+                .layoutPriority(1)
+
+            fightChromeDivider
+
+            fightRescueCell(art: art * 0.9)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
-        .padding(.horizontal, 2)
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .fill(.ultraThinMaterial.opacity(0.88))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .fill(Color.black.opacity(0.28))
+                )
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                .stroke(Color.white.opacity(0.22), lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.28), radius: 10, y: 3)
         .accessibilityIdentifier("world2.plink.battle.portraits")
         .overlay {
             if bombLobFlash {
@@ -1163,183 +1287,140 @@ struct PlinkBattleHostView: View {
         }
     }
 
-    /// Rescue friend — held back, **no HP bar**.
-    private func rescueTargetChip(size: CGFloat) -> some View {
-        VStack(spacing: 4) {
+    private var fightChromeDivider: some View {
+        Rectangle()
+            .fill(Color.white.opacity(0.14))
+            .frame(width: 1)
+            .padding(.vertical, 6)
+            .padding(.horizontal, 8)
+    }
+
+    private func fightAbbieCell(art: CGFloat) -> some View {
+        let fraction = playerMaxHP == 0 ? 0 : CGFloat(playerHP) / CGFloat(playerMaxHP)
+        let tint = Color(red: 0.45, green: 0.88, blue: 0.58)
+        return HStack(alignment: .center, spacing: 12) {
+            ZStack(alignment: .top) {
+                PeglinAbbieBattlePortrait(state: abbieState, size: art)
+                    .shadow(color: tint.opacity(0.35), radius: 8, y: 2)
+                if let float = playerHPFloat {
+                    Text(float.text)
+                        .font(.system(size: 28, weight: .black, design: .rounded))
+                        .foregroundStyle(
+                            float.isHeal
+                                ? Color(red: 0.45, green: 1, blue: 0.55)
+                                : Color(red: 1, green: 0.35, blue: 0.35)
+                        )
+                        .shadow(color: .black.opacity(0.75), radius: 3, y: 1)
+                        .scaleEffect(playerImpactFlash ? 1.25 : 1.0)
+                        .offset(y: -14)
+                        .id(float.id)
+                        .transition(.scale.combined(with: .opacity))
+                        .allowsHitTesting(false)
+                }
+            }
+            .offset(x: playerShake)
+            .scaleEffect(playerImpactFlash ? 1.04 : 1.0)
+
+            VStack(alignment: .leading, spacing: 4) {
+                Text("YOU")
+                    .font(.system(size: 10, weight: .bold, design: .rounded))
+                    .foregroundStyle(tint.opacity(0.9))
+                    .tracking(0.8)
+                Text("Abbie")
+                    .font(.system(size: 17, weight: .heavy, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                Text("\(playerHP)/\(playerMaxHP)")
+                    .font(.system(size: 14, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.88))
+                    .monospacedDigit()
+                GeometryReader { geo in
+                    ZStack(alignment: .leading) {
+                        Capsule().fill(Color.white.opacity(0.16))
+                        Capsule()
+                            .fill(tint)
+                            .frame(width: geo.size.width * max(0, min(1, fraction)))
+                    }
+                }
+                .frame(width: 120, height: 8)
+            }
+        }
+        .padding(.trailing, 4)
+        .background(
+            GeometryReader { geo in
+                Color.clear.preference(
+                    key: PlinkBattleBannerFrameKey.self,
+                    value: [true: geo.frame(in: .named("plinkBattleSpace"))]
+                )
+            }
+        )
+        .accessibilityLabel("Abbie \(playerHP) of \(playerMaxHP) hit points")
+        .accessibilityIdentifier("world2.plink.battle.banner.player")
+    }
+
+    private func fightRescueCell(art: CGFloat) -> some View {
+        let tint = Color(red: 0.55, green: 0.88, blue: 0.95)
+        return HStack(alignment: .center, spacing: 10) {
             Group {
                 if let enemyKind {
-                    PeglinEnemyBattlePortrait(kind: enemyKind, state: enemyState, size: size)
+                    PeglinEnemyBattlePortrait(kind: enemyKind, state: enemyState, size: art)
                 } else {
-                    foePlaceholder(size: size)
+                    foePlaceholder(size: art)
                 }
             }
             .opacity(cageShattered ? 1 : 0.92)
-            Text(enemyKind?.shortName ?? "Friend")
-                .font(.system(size: 14, weight: .heavy, design: .rounded))
-                .foregroundStyle(.white)
-            Text(cageShattered ? "FREE!" : "HELD BACK")
-                .font(.system(size: 11, weight: .black, design: .rounded))
-                .foregroundStyle(cageShattered
-                                 ? Color(red: 0.45, green: 0.95, blue: 0.55)
-                                 : Color(red: 0.7, green: 0.85, blue: 0.95))
+
+            VStack(alignment: .leading, spacing: 3) {
+                Text("RESCUE")
+                    .font(.system(size: 10, weight: .bold, design: .rounded))
+                    .foregroundStyle(tint.opacity(0.9))
+                    .tracking(0.8)
+                Text(enemyKind?.shortName ?? "Friend")
+                    .font(.system(size: 15, weight: .heavy, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                Text(cageShattered ? "Free!" : "Held back")
+                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .foregroundStyle(cageShattered
+                                     ? Color(red: 0.45, green: 0.95, blue: 0.55)
+                                     : tint.opacity(0.9))
+            }
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 6)
-        .background(Color.black.opacity(0.4), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .stroke(Color(red: 0.4, green: 0.9, blue: 0.85).opacity(0.65), lineWidth: 1.5)
-        )
+        .frame(maxWidth: .infinity, alignment: .leading)
         .accessibilityIdentifier("world2.plink.battle.rescue")
         .accessibilityLabel("\(enemyKind?.displayName ?? "Friend") held back — no HP")
     }
 
-    private func comicStripLabel(_ text: String, tint: Color) -> some View {
-        Text(text)
-            .font(.system(size: 11, weight: .black, design: .rounded))
-            .tracking(0.8)
-            .foregroundStyle(.white)
-            .padding(.horizontal, 8)
-            .padding(.vertical, 3)
-            .background(
-                UnevenRoundedRectangle(
-                    cornerRadii: .init(topLeading: 3, bottomLeading: 10, bottomTrailing: 3, topTrailing: 10),
-                    style: .continuous
+    private func fightBadGuysCell(art: CGFloat) -> some View {
+        let accent = Color(red: 1, green: 0.55, blue: 0.32)
+        return VStack(spacing: 5) {
+            HStack {
+                Text("BAD GUYS")
+                    .font(.system(size: 10, weight: .bold, design: .rounded))
+                    .foregroundStyle(accent.opacity(0.95))
+                    .tracking(0.8)
+                Spacer(minLength: 4)
+                Text(
+                    frontFoe.map { foe in
+                        if foe.kind.isFlying {
+                            return "Front · \(foe.shortLabel) · Fly ATK \(resolvedEnemyAttack)"
+                        }
+                        if foe.lane <= PeglinBattleRules.meleeLane {
+                            return "Front · \(foe.shortLabel) · Melee ATK \(resolvedEnemyAttack)"
+                        }
+                        return "Front · \(foe.shortLabel) · \(foe.lane) out · ATK \(resolvedEnemyAttack)"
+                    } ?? "Clear the pack"
                 )
-                .fill(tint)
-            )
-            .overlay(
-                UnevenRoundedRectangle(
-                    cornerRadii: .init(topLeading: 3, bottomLeading: 10, bottomTrailing: 3, topTrailing: 10),
-                    style: .continuous
-                )
-                .stroke(.white.opacity(0.85), lineWidth: 1.5)
-            )
-            .rotationEffect(.degrees(text.hasPrefix("BAD") ? -2 : 2))
-            .accessibilityHidden(true)
-    }
-
-    /// Bad-guy cluster — each has an HP bar; front foe takes peg damage; bombs AOE all.
-    private func fightWaveAttackerChip(size: CGFloat) -> some View {
-        let frontID = frontFoe?.id
-        let frontSize = size * min(max(1, attackerPortraitScale), 1.65)
-        let benchSize = size * 0.58
-        return VStack(spacing: 4) {
-            HStack(alignment: .bottom, spacing: 6) {
-                ForEach(foeRoster) { foe in
-                    let isFront = foe.id == frontID
-                    let laneOffset = CGFloat(foe.lane) * 10
-                    VStack(spacing: 3) {
-                        ZStack(alignment: .top) {
-                            PlinkAttackerBattlePortrait(
-                                kind: foe.kind,
-                                pose: isFront ? attackerPose : .idle,
-                                size: isFront ? frontSize : benchSize
-                            )
-                            .opacity(foe.isDefeated ? 0.28 : (isFront ? 1 : 0.7))
-                            .grayscale(foe.isDefeated ? 0.85 : 0)
-                            .scaleEffect(isFront && attackerPose == .attack ? 1.08 : 1.0)
-                            .animation(.spring(response: 0.28, dampingFraction: 0.7), value: attackerPose)
-
-                            if foe.kind.isFlying, !foe.isDefeated {
-                                Image(systemName: "wind")
-                                    .font(.system(size: 11, weight: .black))
-                                    .foregroundStyle(Color(red: 0.55, green: 0.9, blue: 1))
-                                    .padding(3)
-                                    .background(Color.black.opacity(0.55), in: Circle())
-                                    .offset(x: (isFront ? frontSize : benchSize) * 0.38, y: -4)
-                            }
-
-                            if isFront, let enemyHPFloat {
-                                Text(enemyHPFloat.text)
-                                    .font(.system(size: 26, weight: .black, design: .rounded))
-                                    .foregroundStyle(
-                                        enemyHPFloat.isHeal
-                                            ? Color(red: 0.45, green: 1, blue: 0.55)
-                                            : Color(red: 1, green: 0.35, blue: 0.35)
-                                    )
-                                    .shadow(color: .black.opacity(0.75), radius: 3, y: 1)
-                                    .scaleEffect(enemyImpactFlash ? 1.25 : 1.0)
-                                    .offset(y: -14)
-                                    .id(enemyHPFloat.id)
-                                    .transition(.scale.combined(with: .opacity))
-                                    .allowsHitTesting(false)
-                            }
-                        }
-
-                        GeometryReader { geo in
-                            let frac = foe.maxHP == 0 ? 0 : CGFloat(foe.hp) / CGFloat(foe.maxHP)
-                            ZStack(alignment: .leading) {
-                                Capsule().fill(Color.white.opacity(0.18))
-                                Capsule()
-                                    .fill(foe.isDefeated
-                                          ? Color.gray.opacity(0.5)
-                                          : Color(red: 1, green: 0.45, blue: 0.28))
-                                    .frame(width: max(4, geo.size.width * frac))
-                            }
-                        }
-                        .frame(width: isFront ? frontSize : benchSize, height: 7)
-
-                        HStack(spacing: 2) {
-                            ForEach(0..<PeglinBattleRules.laneCount, id: \.self) { col in
-                                Circle()
-                                    .fill(
-                                        foe.isDefeated
-                                            ? Color.white.opacity(0.12)
-                                            : (col == foe.lane
-                                               ? Color(red: 1, green: 0.7, blue: 0.35)
-                                               : Color.white.opacity(0.22))
-                                    )
-                                    .frame(width: 5, height: 5)
-                            }
-                        }
-
-                        Text(foe.isDefeated ? "OUT" : (foe.canMeleeThisRound ? "MELEE" : "\(foe.hp)"))
-                            .font(.system(size: 11, weight: .black, design: .rounded))
-                            .foregroundStyle(.white.opacity(foe.isDefeated ? 0.45 : 0.95))
-                    }
-                    .offset(x: foe.isDefeated ? 0 : laneOffset)
-                    .offset(x: isFront ? enemyShake : 0)
-                    .scaleEffect(isFront && enemyImpactFlash ? 1.06 : 1.0)
-                    .animation(.spring(response: 0.45, dampingFraction: 0.78), value: foe.lane)
-                    .accessibilityIdentifier(
-                        isFront
-                            ? "world2.plink.battle.attacker.active"
-                            : "world2.plink.battle.attacker.\(foe.kind.rawValue)"
-                    )
-                }
-            }
-            Text(
-                frontFoe.map { foe in
-                    if foe.kind.isFlying {
-                        return "FRONT · \(foe.shortLabel) · FLY ATK \(resolvedEnemyAttack)"
-                    }
-                    if foe.lane <= PeglinBattleRules.meleeLane {
-                        return "FRONT · \(foe.shortLabel) · MELEE ATK \(resolvedEnemyAttack)"
-                    }
-                    return "FRONT · \(foe.shortLabel) · \(foe.lane) out · ATK \(resolvedEnemyAttack)"
-                } ?? "Clear the pack"
-            )
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .foregroundStyle(Color(red: 1, green: 0.7, blue: 0.35).opacity(0.95))
+                .font(.system(size: 11, weight: .semibold, design: .rounded))
+                .foregroundStyle(.white.opacity(0.72))
                 .lineLimit(1)
                 .minimumScaleFactor(0.75)
+            }
+
+            fightWaveAttackerChip(size: art)
         }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 6)
-        .background(
-            (enemyImpactFlash ? Color.red.opacity(0.35) : Color.black.opacity(0.4)),
-            in: RoundedRectangle(cornerRadius: 16, style: .continuous)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
-                .stroke(
-                    enemyImpactFlash
-                        ? Color.red.opacity(0.95)
-                        : Color(red: 1, green: 0.55, blue: 0.28).opacity(0.65),
-                    lineWidth: enemyImpactFlash ? 3 : 1.5
-                )
-        )
+        .padding(.horizontal, 2)
+        .scaleEffect(enemyImpactFlash ? 1.02 : 1.0)
         .background(
             GeometryReader { geo in
                 Color.clear.preference(
@@ -1352,7 +1433,100 @@ struct PlinkBattleHostView: View {
         .accessibilityLabel("Bad guys — fight the front foe; bombs hit everyone")
     }
 
-    /// Thin strip — leave / phase / orbs (jukebox lives on the board overlay).
+    /// Bad-guy cluster — each has an HP bar; front foe takes peg damage; bombs AOE all.
+    private func fightWaveAttackerChip(size: CGFloat) -> some View {
+        let frontID = frontFoe?.id
+        let frontSize = size * min(max(1, attackerPortraitScale), 1.65)
+        let benchSize = size * 0.62
+        return HStack(alignment: .bottom, spacing: 10) {
+            ForEach(foeRoster) { foe in
+                let isFront = foe.id == frontID
+                let laneOffset = CGFloat(foe.lane) * 8
+                VStack(spacing: 3) {
+                    ZStack(alignment: .top) {
+                        PlinkAttackerBattlePortrait(
+                            kind: foe.kind,
+                            pose: isFront ? attackerPose : .idle,
+                            size: isFront ? frontSize : benchSize
+                        )
+                        .opacity(foe.isDefeated ? 0.28 : (isFront ? 1 : 0.72))
+                        .grayscale(foe.isDefeated ? 0.85 : 0)
+                        .scaleEffect(isFront && attackerPose == .attack ? 1.08 : 1.0)
+                        .animation(.spring(response: 0.28, dampingFraction: 0.7), value: attackerPose)
+
+                        if foe.kind.isFlying, !foe.isDefeated {
+                            Image(systemName: "wind")
+                                .font(.system(size: 11, weight: .black))
+                                .foregroundStyle(Color(red: 0.55, green: 0.9, blue: 1))
+                                .padding(3)
+                                .background(Color.black.opacity(0.55), in: Circle())
+                                .offset(x: (isFront ? frontSize : benchSize) * 0.38, y: -4)
+                        }
+
+                        if isFront, let enemyHPFloat {
+                            Text(enemyHPFloat.text)
+                                .font(.system(size: 26, weight: .black, design: .rounded))
+                                .foregroundStyle(
+                                    enemyHPFloat.isHeal
+                                        ? Color(red: 0.45, green: 1, blue: 0.55)
+                                        : Color(red: 1, green: 0.35, blue: 0.35)
+                                )
+                                .shadow(color: .black.opacity(0.75), radius: 3, y: 1)
+                                .scaleEffect(enemyImpactFlash ? 1.25 : 1.0)
+                                .offset(y: -14)
+                                .id(enemyHPFloat.id)
+                                .transition(.scale.combined(with: .opacity))
+                                .allowsHitTesting(false)
+                        }
+                    }
+
+                    GeometryReader { geo in
+                        let frac = foe.maxHP == 0 ? 0 : CGFloat(foe.hp) / CGFloat(foe.maxHP)
+                        ZStack(alignment: .leading) {
+                            Capsule().fill(Color.white.opacity(0.18))
+                            Capsule()
+                                .fill(foe.isDefeated
+                                      ? Color.gray.opacity(0.5)
+                                      : Color(red: 1, green: 0.45, blue: 0.28))
+                                .frame(width: max(4, geo.size.width * frac))
+                        }
+                    }
+                    .frame(width: isFront ? frontSize : benchSize, height: 7)
+
+                    HStack(spacing: 2) {
+                        ForEach(0..<PeglinBattleRules.laneCount, id: \.self) { col in
+                            Circle()
+                                .fill(
+                                    foe.isDefeated
+                                        ? Color.white.opacity(0.12)
+                                        : (col == foe.lane
+                                           ? Color(red: 1, green: 0.7, blue: 0.35)
+                                           : Color.white.opacity(0.22))
+                                )
+                                .frame(width: 5, height: 5)
+                        }
+                    }
+
+                    Text(foe.isDefeated ? "OUT" : (foe.canMeleeThisRound ? "MELEE" : "\(foe.hp)"))
+                        .font(.system(size: 11, weight: .black, design: .rounded))
+                        .foregroundStyle(.white.opacity(foe.isDefeated ? 0.45 : 0.95))
+                        .monospacedDigit()
+                }
+                .offset(x: foe.isDefeated ? 0 : laneOffset)
+                .offset(x: isFront ? enemyShake : 0)
+                .scaleEffect(isFront && enemyImpactFlash ? 1.06 : 1.0)
+                .animation(.spring(response: 0.45, dampingFraction: 0.78), value: foe.lane)
+                .accessibilityIdentifier(
+                    isFront
+                        ? "world2.plink.battle.attacker.active"
+                        : "world2.plink.battle.attacker.\(foe.kind.rawValue)"
+                )
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    /// Thin strip — leave / phase / orbs (music lives on the board overlay).
     private var fightTopBar: some View {
         HStack(spacing: 10) {
             leaveButton
@@ -1375,45 +1549,6 @@ struct PlinkBattleHostView: View {
                 .background(.black.opacity(0.5), in: Capsule())
                 .accessibilityLabel("Unlimited orbs")
         }
-    }
-
-    private var musicPickerChip: some View {
-        HStack(spacing: 4) {
-            Button {
-                PlinkSFX.play(.ui)
-                music.cyclePrevious()
-            } label: {
-                Image(systemName: "backward.fill")
-                    .font(.system(size: 11, weight: .bold))
-                    .foregroundStyle(.white.opacity(0.9))
-                    .frame(width: 28, height: 28)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Previous track")
-
-            Text("♪ \(music.currentTrackTitle)")
-                .font(.system(size: 12, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
-                .lineLimit(1)
-                .frame(minWidth: 90, maxWidth: 160)
-
-            Button {
-                PlinkSFX.play(.ui)
-                music.cycleNext()
-            } label: {
-                Image(systemName: "forward.fill")
-                    .font(.system(size: 11, weight: .bold))
-                    .foregroundStyle(.white.opacity(0.9))
-                    .frame(width: 28, height: 28)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Next track")
-            .accessibilityIdentifier("world2.plink.music.next")
-        }
-        .padding(.horizontal, 8)
-        .padding(.vertical, 4)
-        .background(.black.opacity(0.5), in: Capsule())
-        .accessibilityIdentifier("world2.plink.music.picker")
     }
 
     private var fightBoardPane: some View {
@@ -1625,103 +1760,6 @@ struct PlinkBattleHostView: View {
         .accessibilityLabel(
             "Round \(round.number). Dealt \(round.damageToEnemy). Taken \(round.damageToPlayer). \(round.highlights.joined(separator: ", "))"
         )
-    }
-
-    private func fightFighterBanner(
-        name: String,
-        portrait: AnyView,
-        hp: Int,
-        maxHP: Int,
-        tint: Color,
-        float: HPFloat?,
-        shake: CGFloat,
-        impactFlash: Bool,
-        portraitOnLeading: Bool,
-        isPlayer: Bool,
-        meterTitle: String = "HP",
-        roleCaption: String? = nil
-    ) -> some View {
-        let fraction = maxHP == 0 ? 0 : CGFloat(hp) / CGFloat(maxHP)
-        let info = VStack(alignment: portraitOnLeading ? .leading : .trailing, spacing: 4) {
-            if let roleCaption {
-                Text(roleCaption.uppercased())
-                    .font(.system(size: 11, weight: .heavy, design: .rounded))
-                    .foregroundStyle(tint.opacity(0.95))
-            }
-            Text(name)
-                .font(.system(size: 16, weight: .heavy, design: .rounded))
-                .foregroundStyle(.white)
-                .lineLimit(1)
-            Text("\(meterTitle) \(hp)/\(maxHP)")
-                .font(.system(size: 16, weight: .black, design: .rounded))
-                .foregroundStyle(.white)
-                .minimumScaleFactor(0.7)
-                .lineLimit(1)
-            GeometryReader { geo in
-                ZStack(alignment: portraitOnLeading ? .leading : .trailing) {
-                    Capsule().fill(Color.white.opacity(0.18))
-                    Capsule()
-                        .fill(tint)
-                        .frame(width: geo.size.width * max(0, min(1, fraction)))
-                }
-            }
-            .frame(width: 140, height: 10)
-        }
-
-        let art = ZStack(alignment: .top) {
-            portrait
-                .shadow(color: tint.opacity(0.45), radius: 10, y: 2)
-            if let float {
-                Text(float.text)
-                    .font(.system(size: 32, weight: .black, design: .rounded))
-                    .foregroundStyle(
-                        float.isHeal
-                            ? Color(red: 0.45, green: 1, blue: 0.55)
-                            : Color(red: 1, green: 0.35, blue: 0.35)
-                    )
-                    .shadow(color: .black.opacity(0.75), radius: 3, y: 1)
-                    .scaleEffect(impactFlash ? 1.25 : 1.0)
-                    .offset(y: -18)
-                    .id(float.id)
-                    .transition(.scale.combined(with: .opacity))
-                    .allowsHitTesting(false)
-            }
-        }
-
-        return HStack(alignment: .bottom, spacing: 14) {
-            if portraitOnLeading {
-                art
-                info
-            } else {
-                info
-                art
-            }
-        }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 7)
-        .background(
-            (impactFlash ? Color.red.opacity(0.35) : Color.black.opacity(0.42)),
-            in: RoundedRectangle(cornerRadius: 22, style: .continuous)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 22, style: .continuous)
-                .stroke(
-                    impactFlash ? Color.red.opacity(0.95) : tint.opacity(0.55),
-                    lineWidth: impactFlash ? 3.5 : 2
-                )
-        )
-        .offset(x: shake)
-        .scaleEffect(impactFlash ? 1.04 : 1.0)
-        .background(
-            GeometryReader { geo in
-                Color.clear.preference(
-                    key: PlinkBattleBannerFrameKey.self,
-                    value: [isPlayer: geo.frame(in: .named("plinkBattleSpace"))]
-                )
-            }
-        )
-        .accessibilityLabel("\(name) \(hp) of \(maxHP) hit points")
-        .accessibilityIdentifier(isPlayer ? "world2.plink.battle.banner.player" : "world2.plink.battle.banner.enemy")
     }
 
     private func foePlaceholder(size: CGFloat) -> some View {
@@ -2344,89 +2382,3 @@ private struct PlinkBattleBannerFrameKey: PreferenceKey {
     }
 }
 
-
-// MARK: - Aim assist stick
-
-private struct AimAssistJoystick: View {
-    var reduceMotion: Bool
-    var enabled: Bool
-    var onAim: (CGFloat) -> Void
-    var onRelease: () -> Void
-
-    @State private var knob: CGSize = .zero
-
-    private let base: CGFloat = 92
-    private let knobSize: CGFloat = 42
-    private var travel: CGFloat { (base - knobSize) / 2 - 4 }
-
-    var body: some View {
-        ZStack {
-            Circle()
-                .fill(.ultraThinMaterial.opacity(0.9))
-                .overlay(
-                    Circle()
-                        .stroke(
-                            enabled
-                                ? Color(red: 0.55, green: 0.9, blue: 0.75).opacity(0.85)
-                                : Color.white.opacity(0.25),
-                            lineWidth: 2
-                        )
-                )
-                .shadow(color: .black.opacity(0.4), radius: 10, y: 4)
-
-            // Crosshair hint
-            Circle()
-                .stroke(Color.white.opacity(0.18), lineWidth: 1)
-                .frame(width: base * 0.55, height: base * 0.55)
-
-            Circle()
-                .fill(
-                    RadialGradient(
-                        colors: [
-                            Color(red: 0.55, green: 0.95, blue: 0.75),
-                            Color(red: 0.2, green: 0.55, blue: 0.45),
-                        ],
-                        center: .topLeading,
-                        startRadius: 2,
-                        endRadius: 28
-                    )
-                )
-                .frame(width: knobSize, height: knobSize)
-                .overlay(Circle().stroke(.white.opacity(0.65), lineWidth: 1.5))
-                .shadow(color: .black.opacity(0.45), radius: 4, y: 2)
-                .offset(knob)
-                .opacity(enabled ? 1 : 0.45)
-        }
-        .frame(width: base, height: base)
-        .gesture(
-            DragGesture(minimumDistance: 0)
-                .onChanged { value in
-                    guard enabled else { return }
-                    let dx = value.translation.width
-                    let dy = value.translation.height
-                    let clampedX = max(-travel, min(travel, dx))
-                    let clampedY = max(-travel, min(travel, dy))
-                    let next = CGSize(width: clampedX, height: clampedY)
-                    if reduceMotion {
-                        knob = next
-                    } else {
-                        withAnimation(.interactiveSpring(response: 0.18, dampingFraction: 0.78)) {
-                            knob = next
-                        }
-                    }
-                    onAim(CGFloat(clampedX / max(travel, 1)))
-                }
-                .onEnded { _ in
-                    guard enabled else { return }
-                    onAim(CGFloat(knob.width / max(travel, 1)))
-                    onRelease()
-                    withAnimation(.spring(response: 0.32, dampingFraction: 0.72)) {
-                        knob = .zero
-                    }
-                }
-        )
-        .accessibilityIdentifier("world2.plink.aimJoystick")
-        .accessibilityLabel("Aim stick. Drag to aim, release to fire.")
-        .accessibilityAddTraits(.allowsDirectInteraction)
-    }
-}
