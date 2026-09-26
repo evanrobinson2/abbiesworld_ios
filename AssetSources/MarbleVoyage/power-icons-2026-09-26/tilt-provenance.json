@@ -1,0 +1,25 @@
+{
+  "semanticId": "ui.plink.power.icon.tilt",
+  "filename": "tilt-original.jpeg",
+  "sourceProvider": "Midjourney",
+  "jobId": "15015adc-6c98-4af7-8683-ae94c2830cd4",
+  "candidateIndex": 3,
+  "sourceUrl": "https://cdn.midjourney.com/15015adc-6c98-4af7-8683-ae94c2830cd4/0_3.jpeg",
+  "submittedAt": "2026-09-26T21:14:37Z",
+  "sha256": "2e405b75a80247688fe74bf1c28b51061a9144ae0d5a2243819e5237297c2622",
+  "approval": "Evan: that is good, let us use that, and keep that style (2026-09-26).",
+  "styleLock": true,
+  "derivative": {
+    "filename": "tilt-transparent.png",
+    "sourceProvider": "OpenAI imagegen background extraction",
+    "derivativeOf": "2e405b75a80247688fe74bf1c28b51061a9144ae0d5a2243819e5237297c2622",
+    "sha256": "6d0caaa9aae844a790eae1c205284050e3fb2c342676781d0e6ccaf017f21ccd",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "maxCornerAlpha": 0,
+    "notes": "Generated extraction preserves approved motif, but is not pixel-identical to source. Original retained."
+  },
+  "promptFile": "tilt-prompt.txt"
+}

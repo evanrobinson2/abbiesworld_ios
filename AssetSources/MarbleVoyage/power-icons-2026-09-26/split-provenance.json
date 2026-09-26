@@ -1,0 +1,24 @@
+{
+  "semanticId": "ui.plink.power.icon.split",
+  "filename": "split-original.jpeg",
+  "sourceProvider": "Midjourney",
+  "jobId": "816770e5-f22d-4b07-8ddd-449d9407a2d0",
+  "candidateIndex": 0,
+  "sourceUrl": "https://cdn.midjourney.com/816770e5-f22d-4b07-8ddd-449d9407a2d0/0_0.jpeg",
+  "submittedAt": "2026-09-26T21:20:46Z",
+  "sha256": "cf4b9e4c176a33f8bda48b91881e717228465338b33b17ad323ec4ae9dfd030e",
+  "selection": "Art director selection under user-authorized production; style locked to user-approved Tilt candidate 4.",
+  "promptFile": "split-prompt.txt",
+  "derivative": {
+    "filename": "split-transparent.png",
+    "sourceProvider": "OpenAI imagegen background extraction",
+    "derivativeOf": "cf4b9e4c176a33f8bda48b91881e717228465338b33b17ad323ec4ae9dfd030e",
+    "sha256": "4bd4ce24634df0451bd472b0024b616127719716957763399a06dc854888d5c2",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "maxCornerAlpha": 0,
+    "notes": "Generated background extraction, not pixel-identical to original. Original preserved."
+  }
+}

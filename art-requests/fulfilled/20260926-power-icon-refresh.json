@@ -1,0 +1,60 @@
+{
+  "status": "fulfilled",
+  "priority": "high",
+  "type": "ui_icon",
+  "kind": "ui",
+  "keepStockIcon": false,
+  "aspect": "1:1",
+  "requestedBy": "cursor",
+  "createdAt": "2026-09-26T21:10:00Z",
+  "requestedAt": "2026-09-26T21:10:00Z",
+  "gameArea": "Marble Voyage / Plink battle power tray",
+  "expectedBackground": "Transparent RGBA \u2014 clear corners required (design gate maxCornerAlpha \u2264 16)",
+  "targetPixelSize": "Circular chip ~128\u2013256px master; runtime ~56\u201372pt",
+  "productionIntent": "runtime_bind",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:21:54.781589+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/refresh-transparent.png",
+    "sourceHashSha256": "df5a6b94e48e6f4bff731f29eb5c5aca53f2c4ae3a460e81c6c0f5f312a02ebf",
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_refresh. RGBA/corner-alpha checks passed. Runtime catalog replacement, scale consistency and in-app 56pt legibility remain unverified; no Swift or catalog edits."
+  },
+  "styleNotes": "Approved Tilt style lock: dark teal enamel disc, warm brass rim, bold contours, chunky hand-painted forms, restrained cel shading. True transparent corners; no checkerboard or opaque square. Match motif weight at 56\u201372pt.",
+  "id": "20260926-power-icon-refresh",
+  "semanticId": "ui.plink.power.icon.refresh",
+  "characterOrAssetName": "Refresh power icon",
+  "surface": "Battle power tray \u2014 Refresh",
+  "brief": "Replace provisional Cursor-pipeline Refresh chip with art-director production. Motif: new pegs appearing / circular refresh sparkles. Keep circular transparent chip.",
+  "usage": "Replace Assets.xcassets/world2_plink_power_icon_refresh.imageset payload",
+  "promptSeeds": [
+    "Circular kid game power icon, sparkling refresh arrows making new pegs appear, bold cel shaded, transparent background, no text --ar 1:1 --stylize 150"
+  ],
+  "relatedPaths": [
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-refresh.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-fire.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-split.png",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "art-requests/ART_DIRECTOR_AGENT.md",
+    "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_refresh.imageset/world2_plink_power_icon_refresh.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-refresh.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/refresh-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/refresh-transparent.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/refresh-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md"
+  ],
+  "existingAssetSemanticIds": [
+    "ui.plink.power.icon.refresh"
+  ],
+  "acceptanceCriteria": [
+    "Replaces deprecated pipeline PNG",
+    "True transparent corners",
+    "Readable as Refresh at 56pt"
+  ],
+  "sessionNote": "Existing catalog PNG is provisional from deprecated Cursor asset pipeline \u2014 regenerate properly.",
+  "placeholder": {
+    "type": "provisional_reuse",
+    "detail": "world2_plink_power_icon_refresh.png from deprecated pipeline"
+  }
+}

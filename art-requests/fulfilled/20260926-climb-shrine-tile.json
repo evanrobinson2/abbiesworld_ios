@@ -1,0 +1,57 @@
+{
+  "id": "20260926-climb-shrine-tile",
+  "semanticId": "token.marbleVoyage.climb.shrine",
+  "kind": "token",
+  "priority": "high",
+  "status": "fulfilled",
+  "placeholder": {
+    "type": "sf_symbol",
+    "detail": "questionmark.circle.fill / cross.circle.fill accents; chartLabel still ?"
+  },
+  "keepStockIcon": false,
+  "surface": "Climb chart \u2014 Shrine / rest nodes (kind shrine; labeled ?)",
+  "brief": "Square destination tile for shrine/rest beats. Soft bell / glowing stone / mercy-bell scrap \u2014 distinct from Treasure chest and Mystery crate, but still kid-facing trail scrap. UI label remains ? \u2014 no baked text.",
+  "aspect": "1:1",
+  "styleNotes": "Bell Market elsewhere uses bell language; shrine can echo a small trail bell without looking like the full shop.",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/MarbleVoyageModels.swift",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/fox-land.jpg",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/porcupine-boxer.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/index.html",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/README.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/shrine-original.jpeg",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/shrine-transparent.png",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/shrine-provenance.json"
+  ],
+  "promptSeeds": [
+    "Kid-friendly fantasy trail shrine bell scrap for climb map tile, soft glow, bold silhouette, pure white, no text --ar 1:1 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:45:00Z",
+  "sessionNote": "Land rests alternate shrine/treasure; middle scraps can roll shrine.",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:30:35.984350+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/shrine-transparent.png",
+    "sourceHashSha256": "b51cef056ff14ff99d089bf702bc5108f6c9e5b12d72c81262990bd21d9d2a19",
+    "notes": "Transparent destination token ready for builder bind. RGBA/corner-alpha checks passed. Square canvas, full silhouette; preserve UI-supplied label. Actual 64\u2013120pt runtime legibility and wiring remain unverified. No catalog or Swift edits."
+  },
+  "createdAt": "2026-09-26T20:45:00Z",
+  "type": "map_token",
+  "gameArea": "Marble Voyage \u2014 climb chart",
+  "usage": "Square shrine/rest destination tile (often labeled ?)",
+  "targetPixelSize": "Square token; readable ~64\u2013120pt",
+  "expectedBackground": "Pure white / transparent cutout preferred",
+  "characterOrAssetName": "Shrine / rest stop",
+  "productionIntent": "runtime_bind",
+  "referenceRequestIds": [
+    "20260926-event-shrine-plate",
+    "20260926-bell-market-shop-interior"
+  ],
+  "acceptanceCriteria": [
+    "Soft bell / glowing stone distinct from treasure chest and mystery crate",
+    "Kid-friendly mercy mood",
+    "No text"
+  ]
+}

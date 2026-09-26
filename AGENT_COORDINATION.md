@@ -138,3 +138,92 @@ Invoke `$abbies-art-director` in a new chat. The personal skill belongs at `/Use
 - If a full-size image is visible in DOM but absent from the inventory, verify no unsaved prompt, refresh that same source job page, wait for the image to load, re-inventory, then bundle the exact original. This resolved the bat retrieval after a bare URL request had returned HTTP 403.
 - Bat #4 original successfully saved; all five selected originals now 928 × 1232. Updated review manifests, HTML/canvas board, README, and ZIP in chat outputs. Earlier bat WEBP remains only as a historical preview.
 - No Download button was clicked, no user intervention was required, no new image generation was submitted, and no service authentication/access protections were bypassed. Keep the existing generation rate limit.
+
+### Active Bell Market retrieval — 2026-09-26
+
+- Codex, primary role Art Director: recovering the selected Bell Market job `9b609bdc-3a96-4d83-8973-2ab8e02a3275`, candidate 3 (index 2), for the existing request.
+- Scope: original image and provenance under `AssetSources/MarbleVoyage/bell-market-2026-09-26/`, request fulfillment, queue index and builder handoff. Preserve concurrent game edits; catalog binding and runtime verification remain with the builder.
+
+### Bell Market source delivered — 2026-09-26
+
+- Exact candidate 3 JPEG saved with SHA-256 provenance and HANDOFF.md under `AssetSources/MarbleVoyage/bell-market-2026-09-26/`. Native 1232 × 928; no upscale or new credit spend.
+- Request moved to fulfilled for source delivery / builder bind, with resolution and runtime limitations explicit. Shop remains gradient-only until builder catalog integration.
+- Used existing Chrome pageAssets helper. Original user tab was owned by another session, so retrieved through a separate temporary job tab without disrupting it. Local write permission was already available.
+
+### Active paced art production — 2026-09-26
+
+- Codex Art Director: Evan authorized continuing the queue with considerate Midjourney pacing. One active generation at a time; at least 180 seconds between four-candidate grids, longer when review/preparation needs it; no automatic rerolls; pause on service warnings.
+- Existing four henchman masters remain assigned to builder preparation per current division of work. New art scope starts with the four power icon requests, source masters/provenance and production handoff. No game code/builds/commits.
+
+### Future power art registered — 2026-09-26
+
+- Evan approved Tilt candidate 4 as the style lock. Registered eight low-priority future requests: Magnet, Bounce, Bubble, Spark, Ghost, Giant, Portal and Lucky. IDs use existing `ui.plink.power.icon.*` convention. Each records proposed gameplay, readability criteria, style reference and design risk. These are proposals, not runtime powers; no enum, store or gameplay changes.
+
+### Midjourney pacing update — 2026-09-26
+
+- Evan explicitly changed the minimum interval to one minute between grids. This supersedes the earlier 120/180-second cadence for this session. Continue serially, review each result, no automatic rerolls, and pause on service warnings.
+
+### Four power icons delivered — 2026-09-26
+
+- Tilt, Fire, Refresh and Split originals, transparent derivatives, exact Midjourney prompts, SHA-256 provenance, approved STYLE.md and builder HANDOFF.md saved under `AssetSources/MarbleVoyage/power-icons-2026-09-26/`. Four requests moved to fulfilled for source delivery; catalog/runtime binding remains with Cursor.
+- Tilt source explicitly approved by Evan; siblings selected by Art Director to match. Refresh derivative corrects conflicting arrowheads. Derivatives made with built-in imagegen; originals remain unmodified.
+- Checked all four PNGs for RGBA and clear corners (max corner alpha 0); verified original/derivative hashes, 12 current/future power request schemas and queue relatedPaths. Actual 56–72pt in-app rendering remains unverified; builder must normalize optical diameter and padding.
+- Midjourney submissions: Tilt 21:14:37Z, Fire 21:17:51Z, Refresh 21:19:07Z, Split 21:20:46Z. Serial; intervals 194s, 76s, 99s; latter two follow Evan’s explicit one-minute change. No rerolls.
+- Registered eight future power requests; closed turbo/heal as keep-stock. No Swift, catalog, build, commit or push work performed.
+
+### Active climb destination trio — 2026-09-26
+
+- Codex Art Director: continuing Evan-authorized queue production with Treasure, Mystery and Shrine destination tokens. Scope: source masters, transparent derivatives, provenance and fulfillment handoff. Preserve game work. Use approved painted palette/contours; destination vignettes have distinct silhouettes, not circular power emblems. One-minute minimum serial Midjourney cadence, review each result.
+
+### Climb destination trio delivered — 2026-09-26
+
+- Treasure (candidate 1), Mystery (candidate 2), Shrine (candidate 4) saved under `AssetSources/MarbleVoyage/climb-destinations-2026-09-26/`, each with original JPEG, transparent PNG, exact prompt and job/candidate/SHA-256 provenance. Requests fulfilled for builder bind; no runtime work.
+- Inspected silhouettes and matched palette. RGBA/corner-alpha checks passed, all corner maxima 0; source/derivative hashes and schemas verified. Imagegen extractions are generated derivatives, not pixel-identical copies. Actual chart-size runtime appearance remains for builder QA.
+- Superseded nonfight tiny-glyph request closed as keep-stock fallback; full map-token requests now cover destination art. Separate event backgrounds remain open.
+- Midjourney serial submissions 21:25:22Z, 21:26:50Z, 21:28:11Z: intervals 88s and 81s, no rerolls. Next art priority Sky Dock, then regional destination kit / event plates.
+
+### Active Sky Dock and regional kit — 2026-09-26
+
+- Codex Art Director: Evan requested continued production. Claim Sky Dock and nine-location scrapKit. Scope: AssetSources masters/provenance/handoff and request lifecycle; no game/catalog edits. One-minute minimum between serial Midjourney grids.
+
+### Dynamic battlemap scope correction — 2026-09-26
+
+- Evan explicitly retained Sky Dock and Treasure/Mystery/Shrine as markers on the dynamic overland battlemap; candidate appearance remains subject to review.
+- Declined `20260926-climb-scrap-destination-tiles` → `wont_fix`: fixed regional/subregional scenery is no longer justified by the current dynamic battlemap. Covers Trail, Bridge, Cliff, Canal, Market, Rooftop, Fog, Ruin, Spire. Do not restart production based on legacy names.
+- Sky Dock source work preserved, request remains in_review. Trail had already been submitted before pause; no further regional generations. General production remains paused pending next direction.
+
+### Active enemy production — 2026-09-26
+
+- Evan explicitly asked Codex to do the four new enemies; Codex now owns source preparation for Crab, Grasshopper, Armadillo and Bat, superseding the earlier Cursor-preparation split for this task. Builder retains catalog/roster/runtime work.
+- Scope: transparent derivatives, targeted anatomy fixes, provenance, anchors and request fulfillment under AssetSources/MarbleVoyage/henchmen-production-2026-09-26. Preserve all source concepts and concurrent code changes.
+
+### Four enemy idle sprites delivered — 2026-09-26
+
+- Crab Pincher, Grasshopper Kickboxer, Armadillo Blocker and Bat Divekicker transparent PNGs (first three 1086 × 1448; Bat 1089 × 1445) saved under `AssetSources/MarbleVoyage/henchmen-production-2026-09-26/`. Four production-sprite requests fulfilled; original Midjourney concepts preserved.
+- Crab claw/leg separation preserved; Grasshopper anatomy resolved into four guarding limbs + two connected hind legs; Armadillo guarded forepaws and planted feet readable. Bat final edit is background-only, preserving original pose and vest-occluded far-wing root; no new attachment design claimed. Initial Bat anatomy-edit output was service-rejected; one background-only retry succeeded.
+- Verified all original/output SHA-256 hashes, RGBA, clear corners, non-clipped visible bounds, and four request schemas. Per-asset ground or hover anchors plus builder instructions included. Different optical bounds require builder scale/baseline matching; app appearance remains unverified.
+- No Midjourney submissions, roster/catalog edits, builds, commits or pushes during this preparation pass. Builder should bind exact semantic IDs and verify portrait/idle/attack fallback routes. No attack/defeat sprites supplied.
+
+### Active future power icon production — 2026-09-26
+
+- Evan requested making the eight proposed new powerups. Scope is artwork for Magnet, Bounce, Bubble, Spark, Ghost, Giant, Portal, Lucky using approved Tilt style, transparent derivatives, provenance and queue handoff. Gameplay remains proposal-only; no enum/store/catalog/gameplay edits. One-minute minimum serial Midjourney grids, review each before next.
+
+- Scope extension: Evan requested empty-slot candidates and uniform overlapping/swappable icon frames. Added ui.plink.power.icon.emptySlot request; match approved Tilt circle footprint, rim and padding, and document common placement.
+
+- Bounce correction from Evan: replace spring metaphor with literal ghost-ball → bumper contact → solid departing-ball trajectory. New Midjourney job 90afc9eb-fe45-4532-b2a8-b58cbe1fcc33 candidate 2; spring files preserved as superseded, not for binding. Evan also emphasized shared request records as direct handoff to game builder; all eight already contain proposed mechanics and risks.
+
+- IMPORTANT Spark visual correction: Evan rejected lightning-bolt/wooden-pegs icon. Spark request returned to in_review; do NOT bind current spark-transparent.png while replacement renders. Superseded copies retained. New direction is one recognizable ivory/gold pointed starburst per spark-user-reference.png. Gameplay chain effect unchanged.
+
+### Power batch paused by Evan — 2026-09-26
+
+- Stop further submissions. Magnet, literal Bounce, Bubble, approved starburst Spark and Ghost transparent sources delivered. Harvesting already-in-flight Giant derivative and Portal candidates only. Lucky and empty-slot prompts prepared but no grids submitted. Final frame-size normalization and runtime binding remain outstanding.
+
+### Final power-art handoff submitted — 2026-09-26T22:06:17.942059+00:00
+
+- Six transparent new icons fulfilled: Magnet, literal Bounce, Bubble, Evan-approved starburst Spark, Ghost, Giant. All six RGBA/corner-alpha and original/derivative SHA-256 checks passed. Nine current request schemas validated.
+- Four Portal source candidates preserved; Portal remains in_review without transparent output. Lucky and empty-slot not generated, pending after user pause. No more generation submitted.
+- HANDOFF.md updated; FRAME-FIT.json records ten ready icon bounds including prior four. Exact overlap/optical normalization and runtime binding remain builder work. Superseded spring/bolt art explicitly excluded from handoff.
+
+### Art-only GitHub publication — 2026-09-26
+
+- Evan explicitly authorized commit and push of the art handoff. Include this session’s five AssetSources packs, request lifecycle records and regenerated queue. Preserve concurrent builder code and unrelated edits. All 29 request schemas/statuses and related paths validated. Runtime integration remains separate.

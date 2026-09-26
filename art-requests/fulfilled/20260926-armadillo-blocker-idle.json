@@ -1,0 +1,60 @@
+{
+  "id": "20260926-armadillo-blocker-idle",
+  "semanticId": "token.plink.gang.armadilloBlocker.idle",
+  "kind": "token",
+  "priority": "high",
+  "status": "fulfilled",
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "Concept JPEG selected; no runtime imageset / library bind yet"
+  },
+  "keepStockIcon": false,
+  "surface": "Marble Voyage climb foe tile + fight attacker idle (Armadillo Blocker)",
+  "brief": "Transparent idle cutout from selected Armadillo Blocker concept. Four limbs visible; shell readable; costume reduction is optional refinement. Left-facing braced blocker pose.",
+  "aspect": "3:4",
+  "styleNotes": "Grounded cast baseline; match porcupine prep QA checklist.",
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/armadillo-blocker.jpeg",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/HANDOFF.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/prompts.json",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "AssetSources/MarbleVoyage/porcupine-boxer/porcupine-boxer.png",
+    "AssetSources/MarbleVoyage/porcupine-boxer/provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/armadillo-blocker-idle.png",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/armadillo-blocker-provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "PREP FIRST \u2014 selected concept committed.",
+    "Full-body unnamed female armadillo henchperson for a colorful comedic fantasy game, unmistakably animal proportions, enormous smooth domed segmented violet shell over a tiny stubborn face, turquoise underside, short sturdy legs, vivid orange long pointed ears, thick tapering ringed tail. Simple battered black leather harness buckled around the shell with one repair patch and plain padded wrist guards. Unimpressed little scowl, ridiculous confidence. Strict side profile facing left, low braced combat-ready idle pose, four-footed animal body with forepaws guarding the muzzle, armored shoulders ready for a body check, face clearly visible. Compact walking-shield silhouette, broad curved shell, small head, no human torso. Bold cel shading with selective painterly wear, strong contours, restrained surface detail, kid-friendly polished 2D game character concept. One character, entire shell ears tail and feet visible, centered on pure white with generous margins. --no text, logo, UI, scenery --ar 3:4 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:30:00Z",
+  "sessionNote": "Seeded with art-request queue bootstrap.",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:45:25.944545+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/armadillo-blocker-idle.png",
+    "sourceHashSha256": "328c71d553ecc773a6b9dead1340d8875483029e4103af3e0dcc62cfc5e657fc",
+    "notes": "Preserved compact shell-backed blocking stance, teal face, rose shell, long ears, harness and ringed tail. Two guarded forepaws and two planted hind feet read separately. White background and cast shadow removed. Generated preparation edit, original preserved. RGBA, safe margins and corner alpha verified. Ground/hover anchor in provenance. Builder still owns roster/catalog/semantic wiring, optical scale matching and runtime QA. No attack/defeat poses supplied."
+  },
+  "createdAt": "2026-09-26T20:30:00Z",
+  "type": "production_sprite",
+  "gameArea": "Marble Voyage \u2014 climb chart foe tile + fight attacker",
+  "usage": "Idle combat silhouette for unnamed henchman",
+  "targetPixelSize": "Master ~928\u00d71232 concept; transparent PNG for ~148\u2013260pt UI",
+  "expectedBackground": "Transparent (RGBA); source concept is pure white",
+  "characterOrAssetName": "Armadillo Blocker",
+  "pose": "idle",
+  "facing": "left",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [
+    "token.plink.gang.porcupineBoxer.idle"
+  ],
+  "acceptanceCriteria": [
+    "Four limbs + shell readable; face visible under shell",
+    "Left-facing braced idle; transparent PNG no halo",
+    "Matches grounded cast baseline with porcupine"
+  ]
+}
