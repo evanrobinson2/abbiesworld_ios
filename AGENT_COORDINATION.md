@@ -1,5 +1,22 @@
 # Agent Coordination
 
+## Game-dev chores for approved art
+
+Evan requested this return path on 2026-09-26: art direction creates a concrete game-dev chore when approved artwork needs preparation/import/runtime wiring, rather than asking Evan to relay a download package.
+
+- Use GitHub Issues titled `chore(art-integration): <asset and surface>`. Search open issues by semantic ID/asset first and update an existing chore instead of duplicating it. This is a builder work item, not a second asset registry: `art-requests/` and its semantic IDs remain the asset source of truth.
+- Include approval, exact job/candidate, source location and SHA-256, intended surface, existing semantic ID/catalog, scope, acceptance checklist and pending work. Prefer committed repo-relative source/provenance links. If source landing is still pending, make it an explicit first task and provide verified retrieval details; do not claim the asset is GitHub-delivered.
+- At session startup and before major builds, game dev checks open `chore(art-integration)` issues alongside the art-request queue. Claim via issue comment naming the working branch and intended files.
+- Source fulfillment is distinct from runtime completion. Keep the chore open through import, loader routing, layout checks and runtime verification. Blocked verification stays open with the reason.
+- Completion requires implementation commit/PR, relevant validation, an in-game screenshot, and a coordination update. Close only when acceptance checks pass. Approval to bind an asset does not authorize unrelated gameplay, regeneration, publishing, or deployment.
+- Link each chore from this document and from its art-request record when present. Use the same semantic ID throughout.
+
+### Ready for game dev: regal Abbie portrait
+
+[Chore #25 — bind approved regal Abbie in the new battle layout](https://github.com/evanrobinson2/abbiesworld_ios/issues/25).
+
+Evan selected Midjourney job `95ea4d08-fd39-4bd6-bb7f-53301290ec95`, candidate #1 (index 0). Integrate the portrait **in the game’s new battle layout**; full-body art stays on overland tiles. Existing semantic ID `character.peglin.abbie.happy`, catalog `world2_peglin_abbie_happy`; builder must verify actual routing and preserve other expression states. Exact original is saved in chat outputs with SHA-256 `638f1f70f93415b2d52a43ba2eb86b2a36c36dccfb67763cb4604d4674962278`; durable repo source import remains the first chore step. No game binding or runtime verification is claimed.
+
 ## Art requests
 
 Artwork requests from builders live in `art-requests/`.
