@@ -39,7 +39,10 @@
     "sourceHashSha256": "328c71d553ecc773a6b9dead1340d8875483029e4103af3e0dcc62cfc5e657fc",
     "notes": "Preserved compact shell-backed blocking stance, teal face, rose shell, long ears, harness and ringed tail. Two guarded forepaws and two planted hind feet read separately. White background and cast shadow removed. Generated preparation edit, original preserved. RGBA, safe margins and corner alpha verified. Ground/hover anchor in provenance. Builder still owns roster/catalog/semantic wiring, optical scale matching and runtime QA. No attack/defeat poses supplied. Runtime catalog bound as world2_plink_gang_armadilloBlocker_idle (2026-09-26T23:28:16Z).",
     "catalogImageset": "world2_plink_gang_armadilloBlocker_idle",
-    "runtimeBoundAt": "2026-09-26T23:28:16Z"
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_armadilloBlocker_idle.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
   },
   "createdAt": "2026-09-26T20:30:00Z",
   "type": "production_sprite",

@@ -9,13 +9,10 @@ import Foundation
 // - Pick **1 of 4** as the **Big Boss** → fight chrome **3× portrait**, cage HP **×10**.
 // - The **other 3** are each a **mini-boss arc**.
 //
-// **Per mini-boss arc (in the world / chart):** **3 fight zones** + a treasure/box:
-// 1. Zone 1 — simple enemies / henchmen
-// 2. Zone 2 — simple enemies / henchmen
-// 3. Zone 3 — that named gang member as **mini-boss**
-// 4. Box / treasure beat (“3 fights + box 3 times”)
-//
-// Do **three** mini-arcs (3×3 = 9 fights + 3 boxes), then the **Big Boss** fight.
+// **Per mini-boss arc (in the world / chart):** **2 choice forks** + land boss + rest:
+// Each fork is Fight (gold + XP, sometimes treasure) vs Gift (loot, no XP).
+// Then the land boss (mandatory), then a rest beat.
+// Do **three** mini-arcs, then the **Big Boss** fight.
 //
 // Henchmen = forest fauna / lineup leftovers — NEVER the named crew.
 // Named crew only as mini-boss (zone 3) or big boss.
@@ -46,13 +43,15 @@ struct MarbleVoyageGangRun: Equatable, Sendable {
     static let miniBossCageHPMultiplier: Int = 2
 
     /// Lightweight stand-ins for zone 1–2 / wind-up. Never named crew.
-    /// Production henchmen lead the pool after Porcupine (opener stays Porcupine).
+    /// Production cutouts only — legacy lineup leftovers (lizard etc.) had broken plates
+    /// that showed as mismatched legs in climb tiles.
     static let henchmenPool: [PlinkAttackerKind] = [
         .porcupineBoxer,
         .crabPincher, .grasshopperKickboxer, .armadilloBlocker, .batDivekicker,
-        .cawScout, .thornbackBeetle, .briarToad, .thornhornMantis,
-        .coyoteBruiser, .gangFox, .hyena, .lizard, .vulture,
     ]
+
+    /// Opening scrap always introduces the boxer; later scraps draw from the rest.
+    static let openerHenchman: PlinkAttackerKind = .porcupineBoxer
 
     /// Hostages freed across the climb (cage art) — not gang members.
     static let hostageCycle: [PeglinEnemyKind] = [
@@ -79,9 +78,18 @@ struct MarbleVoyageGangRun: Equatable, Sendable {
         return miniBossOrder[i]
     }
 
-    func randomHenchman(seedSalt: UInt64) -> PlinkAttackerKind {
+    func randomHenchman(
+        seedSalt: UInt64,
+        excluding: Set<PlinkAttackerKind> = []
+    ) -> PlinkAttackerKind {
         var rng = SeededGenerator(seed: seedSalt)
-        return Self.henchmenPool.randomElement(using: &rng) ?? .cawScout
+        let pool = Self.henchmenPool.filter { !excluding.contains($0) }
+        if let pick = pool.randomElement(using: &rng) { return pick }
+        // Pool exhausted — allow repeats but still prefer non-opener when possible.
+        let fallback = Self.henchmenPool.filter { $0 != Self.openerHenchman }
+        return fallback.randomElement(using: &rng)
+            ?? Self.henchmenPool.randomElement(using: &rng)
+            ?? Self.openerHenchman
     }
 
     func hostage(forArc arcIndex: Int) -> PeglinEnemyKind {

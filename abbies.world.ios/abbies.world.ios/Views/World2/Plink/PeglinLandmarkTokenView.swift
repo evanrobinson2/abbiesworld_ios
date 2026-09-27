@@ -168,6 +168,8 @@ private struct PeglinMapPinShape: Shape {
 struct PeglinAbbieBattlePortrait: View {
     var state: PeglinCharacterState = .happy
     var size: CGFloat = 120
+    /// Prefer the approved regal bust for happy/idle chrome (avoid wink regression).
+    var preferRegalBust: Bool = true
 
     var body: some View {
         PeglinBattlePortraitFrame(
@@ -176,14 +178,22 @@ struct PeglinAbbieBattlePortrait: View {
             size: size,
             stroke: Color(red: 0.45, green: 0.82, blue: 0.55).opacity(0.7),
             accessibilityLabel: "Abbie \(state.rawValue)",
-            accessibilityIdentifier: "world2.plink.battle.abbiePortrait"
+            accessibilityIdentifier: "world2.plink.battle.abbiePortrait",
+            // Regal bust is already a full face — never HeadDAG-zoom it.
+            faceCrop: false,
+            contentMode: .fit
         )
     }
 
     private var abbieUIImage: UIImage? {
-        // Route by mood so hurt/defeated never show the regal smile (chore #25).
-        // Never fall back to the pixel map sprite.
-        UIImage(named: state.abbiePortraitCatalogName)
+        // HUD chrome stays on the regal bust unless hurt/defeated.
+        let catalog: String
+        if preferRegalBust, state == .idle || state == .happy || state == .sneakyWink {
+            catalog = PeglinAbbieArt.portraitCatalogName
+        } else {
+            catalog = state.abbiePortraitCatalogName
+        }
+        return UIImage(named: catalog)
             ?? UIImage(named: PeglinAbbieArt.portraitCatalogName)
     }
 }
@@ -243,13 +253,19 @@ struct PlinkAttackerBattlePortrait: View {
             size: size,
             stroke: stroke,
             accessibilityLabel: "\(kind.displayName) \(pose.rawValue)",
-            accessibilityIdentifier: "world2.plink.battle.attackerPortrait"
+            accessibilityIdentifier: "world2.plink.battle.attackerPortrait",
+            faceBBox: kind.portraitFaceBBox
         )
     }
 }
 
 /// Face-first portrait frame: HeadDAG top-center crop on tall full-bodies, then fill.
 private struct PeglinBattlePortraitFrame: View {
+    enum ContentMode {
+        case fill
+        case fit
+    }
+
     var uiImage: UIImage?
     var fallbackSystemName: String
     var size: CGFloat
@@ -257,6 +273,11 @@ private struct PeglinBattlePortraitFrame: View {
     var accessibilityLabel: String
     var accessibilityIdentifier: String
     var distort: Bool = false
+    /// When true, tall plates get a top-center head crop. Bust plates should leave this false.
+    var faceCrop: Bool = true
+    /// Optional per-character face box (normalized). Overrides the default top-center head crop.
+    var faceBBox: NormalizedRect? = nil
+    var contentMode: ContentMode = .fill
 
     var body: some View {
         ZStack {
@@ -296,9 +317,11 @@ private struct PeglinBattlePortraitFrame: View {
     @ViewBuilder
     private var portraitContent: some View {
         if let uiImage {
-            Image(uiImage: Self.faceZoomed(uiImage))
+            let prepared = faceCrop ? Self.faceZoomed(uiImage, bbox: faceBBox) : uiImage
+            Image(uiImage: prepared)
                 .resizable()
-                .scaledToFill()
+                .aspectRatio(contentMode: contentMode == .fit ? .fit : .fill)
+                .padding(contentMode == .fit ? size * 0.04 : 0)
         } else {
             Image(systemName: fallbackSystemName)
                 .resizable()
@@ -309,13 +332,17 @@ private struct PeglinBattlePortraitFrame: View {
     }
 
     /// HeadDAG fallback crop for tall full-body plates; square busts pass through.
-    private static func faceZoomed(_ image: UIImage) -> UIImage {
+    private static func faceZoomed(_ image: UIImage, bbox: NormalizedRect?) -> UIImage {
         let w = max(1, image.size.width)
         let h = max(1, image.size.height)
         let aspect = w / h
-        // Tall / full-body → top-center head box (DAG fallback rect).
+        // Tall / full-body → head box (per-kind override or top-center DAG fallback).
         if aspect < 0.92 {
-            return HeadDAGService.shared.crop(image, bbox: .topCenterHead)
+            return HeadDAGService.shared.crop(image, bbox: bbox ?? .topCenterHead)
+        }
+        // Square-ish plates with an explicit face box still honor it (wide wing plates).
+        if let bbox {
+            return HeadDAGService.shared.crop(image, bbox: bbox)
         }
         return image
     }

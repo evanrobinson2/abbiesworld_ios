@@ -24,7 +24,7 @@ struct BoardLevel: Identifiable {
     var referenceWidth: CGFloat
     var referenceHeight: CGFloat
 
-    /// Fox Land + Peglin cavern — intentional motifs with radical rail geometry.
+    /// Fox Land + Peglin cavern — intentional motifs (rails retired from cavern).
     static let catalog: [BoardLevel] = [
         peglinCavernArcs,
         foxNineTails,
@@ -41,24 +41,24 @@ struct BoardLevel: Identifiable {
         catalog.firstIndex { $0.id == id } ?? 0
     }
 
-    // MARK: Peglin cavern (dense force pegs + curved rails)
+    // MARK: Peglin cavern (dense force pegs — no legacy curved barrier rails)
 
-    /// Closest match to Peglin forest cavern: U-rails, force-orange majority, stone clusters, buckets.
+    /// Dense force-orange majority, stone clusters, buckets. Curved U/loop rails retired.
     private static let peglinCavernArcs = BoardLevel(
         id: "peglin.cavernArcs",
         name: "Cavern Arcs",
-        blurb: "Summit density · curved rails · buckets",
+        blurb: "Summit density · force pegs · buckets",
         balls: 10,
         pegs: spaced(
             // Specials first so density culling never drops R / bombs / crits.
             cavernSpecials()
                 + cavernForceField()
                 + stoneTriangles(),
-            minDist: 0.028
+            minDist: 0.022
         ),
-        rails: cavernRails(),
+        rails: [],
         buckets: cavernBuckets(),
-        pegRadius: 7.5,
+        pegRadius: 6.8,
         referenceWidth: 900,
         referenceHeight: 1100
     )
@@ -72,7 +72,7 @@ struct BoardLevel: Identifiable {
         balls: 14,
         pegs: spaced(
             foxBody()
-                + foxTails(count: 9, pegsPerTail: 6)
+                + foxTails(count: 11, pegsPerTail: 8)
                 + [
                     PegSpec(nx: 0.50, ny: 0.22, kind: .crit),
                     PegSpec(nx: 0.50, ny: 0.72, kind: .orange),
@@ -80,11 +80,12 @@ struct BoardLevel: Identifiable {
                     PegSpec(nx: 0.72, ny: 0.40, kind: .blue),
                     PegSpec(nx: 0.38, ny: 0.58, kind: .bomb),
                     PegSpec(nx: 0.62, ny: 0.58, kind: .bomb),
-                ]
+                ],
+            minDist: 0.038
         ),
         rails: [],
         buckets: defaultBuckets(),
-        pegRadius: 10,
+        pegRadius: 8.5,
         referenceWidth: 1000,
         referenceHeight: 900
     )
@@ -92,27 +93,12 @@ struct BoardLevel: Identifiable {
     private static let foxPawPrint = BoardLevel(
         id: "fox.pawPrint",
         name: "Fox Paw",
-        blurb: "Open lanes — forgiving hench scrap",
+        blurb: "Dense paw — forgiving scrap with bounce room",
         balls: 14,
-        pegs: spaced(
-            pad(cx: 0.50, cy: 0.54, r: 0.11, n: 8, kind: .orange)
-                + [PegSpec(nx: 0.50, ny: 0.54, kind: .orange)]
-                + pad(cx: 0.28, cy: 0.32, r: 0.055, n: 5, kind: .orange)
-                + pad(cx: 0.42, cy: 0.26, r: 0.055, n: 5, kind: .orange)
-                + pad(cx: 0.58, cy: 0.26, r: 0.055, n: 5, kind: .orange)
-                + pad(cx: 0.72, cy: 0.32, r: 0.055, n: 5, kind: .orange)
-                + [
-                    PegSpec(nx: 0.50, ny: 0.40, kind: .crit),
-                    PegSpec(nx: 0.50, ny: 0.70, kind: .orange),
-                    PegSpec(nx: 0.22, ny: 0.54, kind: .blue),
-                    PegSpec(nx: 0.78, ny: 0.54, kind: .blue),
-                    PegSpec(nx: 0.36, ny: 0.48, kind: .bomb),
-                    PegSpec(nx: 0.64, ny: 0.48, kind: .bomb),
-                ]
-        ),
+        pegs: spaced(foxPawPegs(), minDist: 0.036),
         rails: [],
         buckets: defaultBuckets(),
-        pegRadius: 10,
+        pegRadius: 8.5,
         referenceWidth: 1000,
         referenceHeight: 900
     )
@@ -175,27 +161,30 @@ struct BoardLevel: Identifiable {
 /// Dense force-orange field filling the cavern (majority of pegs).
 private func cavernForceField() -> [PegSpec] {
     var out: [PegSpec] = []
-    // Hex-ish lattice biased toward the glowing fire pegs in Peglin screenshots.
+    // Tighter hex-ish lattice — more mayhem / bounce chains.
     let rows: [(cy: CGFloat, xs: [CGFloat])] = [
-        (0.18, strideArray(from: 0.18, through: 0.82, by: 0.08)),
-        (0.24, strideArray(from: 0.14, through: 0.86, by: 0.07)),
-        (0.30, strideArray(from: 0.16, through: 0.84, by: 0.07)),
-        (0.36, strideArray(from: 0.12, through: 0.88, by: 0.065)),
-        (0.42, strideArray(from: 0.15, through: 0.85, by: 0.065)),
-        (0.48, strideArray(from: 0.13, through: 0.87, by: 0.06)),
-        (0.54, strideArray(from: 0.16, through: 0.84, by: 0.065)),
-        (0.60, strideArray(from: 0.14, through: 0.86, by: 0.07)),
-        (0.66, strideArray(from: 0.18, through: 0.82, by: 0.07)),
-        (0.72, strideArray(from: 0.22, through: 0.78, by: 0.08)),
+        (0.16, strideArray(from: 0.16, through: 0.84, by: 0.06)),
+        (0.21, strideArray(from: 0.13, through: 0.87, by: 0.055)),
+        (0.26, strideArray(from: 0.15, through: 0.85, by: 0.055)),
+        (0.31, strideArray(from: 0.12, through: 0.88, by: 0.05)),
+        (0.36, strideArray(from: 0.14, through: 0.86, by: 0.05)),
+        (0.41, strideArray(from: 0.12, through: 0.88, by: 0.05)),
+        (0.46, strideArray(from: 0.13, through: 0.87, by: 0.05)),
+        (0.51, strideArray(from: 0.12, through: 0.88, by: 0.05)),
+        (0.56, strideArray(from: 0.14, through: 0.86, by: 0.05)),
+        (0.61, strideArray(from: 0.13, through: 0.87, by: 0.055)),
+        (0.66, strideArray(from: 0.16, through: 0.84, by: 0.055)),
+        (0.71, strideArray(from: 0.18, through: 0.82, by: 0.06)),
+        (0.76, strideArray(from: 0.22, through: 0.78, by: 0.065)),
     ]
     for row in rows {
         for (i, x) in row.xs.enumerated() {
-            // Wider lanes through the lattice — summit still dense but readable.
-            if i % 7 == 3 || i % 11 == 5 { continue }
+            // Narrower skip lanes — denser default.
+            if i % 9 == 4 { continue }
             out.append(PegSpec(nx: x, ny: row.cy, kind: .orange))
         }
     }
-    // Arc-following force beads along the big U rails.
+    // Arc-following force beads (peg motif only — no physics barrier rails).
     out += arcPegs(cx: 0.28, cy: 0.48, r: 0.22, start: .pi * 0.15, end: .pi * 0.95, n: 14, kind: .orange)
     out += arcPegs(cx: 0.72, cy: 0.48, r: 0.22, start: .pi * 0.05, end: .pi * 0.85, n: 14, kind: .orange)
     out += arcPegs(cx: 0.50, cy: 0.38, r: 0.16, start: .pi * 0.2, end: .pi * 0.8, n: 10, kind: .orange)
@@ -231,26 +220,6 @@ private func cavernSpecials() -> [PegSpec] {
     ]
 }
 
-private func cavernRails() -> [RailSpec] {
-    [
-        // Left deep U
-        arcRail(cx: 0.26, cy: 0.50, r: 0.26, start: .pi * 0.08, end: .pi * 0.98, steps: 22, halfWidth: 0.014),
-        // Right deep U
-        arcRail(cx: 0.74, cy: 0.50, r: 0.26, start: .pi * 0.02, end: .pi * 0.92, steps: 22, halfWidth: 0.014),
-        // Center nested bowl
-        arcRail(cx: 0.50, cy: 0.42, r: 0.20, start: .pi * 0.18, end: .pi * 0.82, steps: 18, halfWidth: 0.012),
-        // Upper swoops
-        arcRail(cx: 0.38, cy: 0.28, r: 0.18, start: -.pi * 0.15, end: .pi * 0.55, steps: 14, halfWidth: 0.011),
-        arcRail(cx: 0.62, cy: 0.28, r: 0.18, start: .pi * 0.45, end: .pi * 1.15, steps: 14, halfWidth: 0.011),
-        // Mid crossing bars (gentle S)
-        polylineRail([
-            CGPoint(x: 0.18, y: 0.56), CGPoint(x: 0.32, y: 0.52),
-            CGPoint(x: 0.42, y: 0.58), CGPoint(x: 0.58, y: 0.52),
-            CGPoint(x: 0.68, y: 0.58), CGPoint(x: 0.82, y: 0.54),
-        ], halfWidth: 0.010),
-    ]
-}
-
 private func cavernBuckets() -> [BucketSpec] {
     [
         BucketSpec(nx: 0.18, ny: 0.90, radius: 0.055),
@@ -270,6 +239,24 @@ private func defaultBuckets() -> [BucketSpec] {
 }
 
 // MARK: - Fox motif builders
+
+private func foxPawPegs() -> [PegSpec] {
+    var pegs: [PegSpec] = []
+    pegs += pad(cx: 0.50, cy: 0.54, r: 0.11, n: 12, kind: .orange)
+    pegs.append(PegSpec(nx: 0.50, ny: 0.54, kind: .orange))
+    pegs += pad(cx: 0.28, cy: 0.32, r: 0.055, n: 7, kind: .orange)
+    pegs += pad(cx: 0.42, cy: 0.26, r: 0.055, n: 7, kind: .orange)
+    pegs += pad(cx: 0.58, cy: 0.26, r: 0.055, n: 7, kind: .orange)
+    pegs += pad(cx: 0.72, cy: 0.32, r: 0.055, n: 7, kind: .orange)
+    pegs += pad(cx: 0.50, cy: 0.42, r: 0.08, n: 8, kind: .blue)
+    pegs.append(PegSpec(nx: 0.50, ny: 0.40, kind: .crit))
+    pegs.append(PegSpec(nx: 0.50, ny: 0.70, kind: .orange))
+    pegs.append(PegSpec(nx: 0.22, ny: 0.54, kind: .blue))
+    pegs.append(PegSpec(nx: 0.78, ny: 0.54, kind: .blue))
+    pegs.append(PegSpec(nx: 0.36, ny: 0.48, kind: .bomb))
+    pegs.append(PegSpec(nx: 0.64, ny: 0.48, kind: .bomb))
+    return pegs
+}
 
 private func foxBody() -> [PegSpec] {
     pad(cx: 0.50, cy: 0.42, r: 0.06, n: 5, kind: .orange)
@@ -335,29 +322,7 @@ private func chevron(cy: CGFloat, halfWidth: CGFloat, depth: CGFloat, kind: PegK
     return out
 }
 
-// MARK: - Rail / arc helpers
-
-private func arcRail(
-    cx: CGFloat,
-    cy: CGFloat,
-    r: CGFloat,
-    start: CGFloat,
-    end: CGFloat,
-    steps: Int,
-    halfWidth: CGFloat
-) -> RailSpec {
-    let pts = (0...steps).map { i -> CGPoint in
-        let t = CGFloat(i) / CGFloat(steps)
-        let a = start + (end - start) * t
-        // y grows downward in board space; classic math angles from +x.
-        return CGPoint(x: cx + cos(a) * r, y: cy + sin(a) * r)
-    }
-    return RailSpec(points: pts, halfWidth: halfWidth)
-}
-
-private func polylineRail(_ pts: [CGPoint], halfWidth: CGFloat) -> RailSpec {
-    RailSpec(points: pts, halfWidth: halfWidth)
-}
+// MARK: - Arc peg helpers
 
 private func arcPegs(
     cx: CGFloat,

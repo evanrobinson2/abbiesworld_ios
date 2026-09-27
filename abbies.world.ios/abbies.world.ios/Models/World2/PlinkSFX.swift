@@ -21,6 +21,10 @@ enum PlinkSFX {
         case ready
         /// Turbo armed release — punchy layered hits.
         case turbo
+        /// Linger gravity rift arms.
+        case gravity
+        /// Front foe KO / shop purchase ding.
+        case ko
 
         var filenames: [String] {
             switch self {
@@ -36,6 +40,8 @@ enum PlinkSFX {
             case .march: return ["plink_launch"]
             case .ready: return ["plink_hit_b"]
             case .turbo: return ["plink_crit", "plink_launch"]
+            case .gravity: return ["plink_launch", "plink_hurt"]
+            case .ko: return ["plink_pop", "plink_hit_a"]
             }
         }
 
@@ -53,6 +59,8 @@ enum PlinkSFX {
             case .march: return 0.45
             case .ready: return 0.55
             case .turbo: return 0.78
+            case .gravity: return 0.62
+            case .ko: return 0.7
             }
         }
     }
@@ -75,7 +83,7 @@ enum PlinkSFX {
         case .drop:
             dropRotate = (dropRotate + 1) % names.count
             name = names[dropRotate]
-        case .turbo:
+        case .turbo, .gravity:
             // Layer punch + launch — play first immediately, second staggered.
             name = names[0]
             lock.unlock()

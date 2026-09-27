@@ -39,7 +39,10 @@
     "sourceHashSha256": "ea7d389f867efe563d60155136639817bbfc7b8bdf18ef8a96fe46ac8327f7d9",
     "notes": "Preserved squat teal carapace, oversized coral cuffed pincer and tiny opposing claw; cleaned walking-leg separation, removed white background and cast shadow. Both claws and full body visible; left-oriented three-quarter guard. Generated preparation derivative, not pixel-identical extraction. RGBA, safe margins and corner alpha verified. Ground/hover anchor in provenance. Builder still owns roster/catalog/semantic wiring, optical scale matching and runtime QA. No attack/defeat poses supplied. Runtime catalog bound as world2_plink_gang_crabPincher_idle (2026-09-26T23:28:16Z).",
     "catalogImageset": "world2_plink_gang_crabPincher_idle",
-    "runtimeBoundAt": "2026-09-26T23:28:16Z"
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_crabPincher_idle.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
   },
   "createdAt": "2026-09-26T20:30:00Z",
   "type": "production_sprite",

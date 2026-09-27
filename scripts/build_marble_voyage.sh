@@ -7,10 +7,12 @@
 #   ./scripts/build_marble_voyage.sh --capture     # build, then capture stills
 #   VOYAGE_CAPTURE=1 ./scripts/build_marble_voyage.sh
 #   ./scripts/build_marble_voyage.sh --device "iPad (A16)"
+#   ./scripts/build_marble_voyage.sh --skip-opening-dag
 #
 # Does not run capture unless --capture or VOYAGE_CAPTURE=1.
 # Capture relaunches the app on the chosen simulator — avoid the device
 # Evan is actively playtesting, or use a dedicated sim via --device.
+# Opening-screen DAG runs before xcodebuild (skip with --skip-opening-dag).
 set -euo pipefail
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
@@ -21,11 +23,15 @@ PROJECT="$ROOT/abbies.world.ios/abbies.world.ios.xcodeproj"
 DERIVED="$ROOT/DerivedData/voyage-capture"
 DEVICE_NAME="${VOYAGE_CAPTURE_DEVICE:-iPad (A16)}"
 DO_CAPTURE=0
+SKIP_OPENING_DAG=0
 CAPTURE_ARGS=()
 
 # Env opt-in (same as --capture).
 if [[ "${VOYAGE_CAPTURE:-}" == "1" || "${VOYAGE_CAPTURE:-}" == "true" || "${VOYAGE_CAPTURE:-}" == "yes" ]]; then
   DO_CAPTURE=1
+fi
+if [[ "${VOYAGE_SKIP_OPENING_DAG:-}" == "1" || "${VOYAGE_SKIP_OPENING_DAG:-}" == "true" ]]; then
+  SKIP_OPENING_DAG=1
 fi
 
 while [[ $# -gt 0 ]]; do
@@ -38,6 +44,10 @@ while [[ $# -gt 0 ]]; do
       DO_CAPTURE=0
       shift
       ;;
+    --skip-opening-dag)
+      SKIP_OPENING_DAG=1
+      shift
+      ;;
     --device)
       DEVICE_NAME="${2:?}"
       shift 2
@@ -47,7 +57,7 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     -h|--help)
-      sed -n '2,16p' "$0"
+      sed -n '2,18p' "$0"
       exit 0
       ;;
     *)
@@ -71,7 +81,15 @@ resolve_udid() {
 echo "=== Marble Voyage build ==="
 echo "device: $DEVICE_NAME"
 echo "capture: $([[ "$DO_CAPTURE" -eq 1 ]] && echo yes || echo no — reminder only)"
+echo "opening-dag: $([[ "$SKIP_OPENING_DAG" -eq 1 ]] && echo skip || echo yes)"
 echo
+
+if [[ "$SKIP_OPENING_DAG" -eq 0 ]]; then
+  echo "→ opening-screen DAG"
+  python3 "$ROOT/scripts/voyage_opening_screen_dag.py" \
+    --json "$ROOT/artifacts/voyage-opening-dag/latest.json"
+  echo
+fi
 
 UDID="$(resolve_udid "$DEVICE_NAME" || true)"
 if [[ -z "${UDID:-}" ]]; then

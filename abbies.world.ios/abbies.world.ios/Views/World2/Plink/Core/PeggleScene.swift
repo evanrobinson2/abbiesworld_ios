@@ -39,6 +39,10 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         var tiltPhase: PlinkTiltPhase?
         /// Ball freeze point while Tilt is active (scene coords); nil when inactive.
         var tiltOrigin: CGPoint?
+        /// Legacy countdown digit (unused — rift eases in with no 3·2·1).
+        var gravityWaveCountdown: Int?
+        /// True while the linger gravity rift is easing in.
+        var gravityWaveActive: Bool
     }
 
     private struct FlightBall {
@@ -63,6 +67,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     var deckMarbles: [MarbleVoyageOwnedMarble] = []
     /// Run-wide ballLevel (shop upgrades). Used with each marble's level.
     var runBallLevel: Int = 1
+    /// Hero level from voyage XP — multiplies cage damage with marble/ball.
+    var runHeroLevel: Int = MarbleVoyageHeroLevel.minLevel
     /// Front foe Temper for Strong / Soft marble damage (nil = no matchup).
     var frontFoeTemper: PlinkTemper? = nil
     /// Active marble's shot mult (set in advanceDeckOrb / configure).
@@ -77,6 +83,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     var hoverSpeedRetain: Double = 1
     /// Fight-total coins earned (read by voyage host on win).
     private(set) var runGoldCoins = 0
+    /// Extra cage damage consumed once on the next settled shot (bomb multi-kill).
+    var pendingComboCageBonus = 0
     private var orangeStreak = 0
     var enemyMaxHP = 36
     var playerMaxHP = 30
@@ -137,6 +145,13 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     private var tiltPhaseStartedAt: TimeInterval = 0
     private var tiltMotion = PlinkTiltMotionSource()
     private var labyrinthGravity: CGVector?
+    /// Auto gravity rift for shots that linger past 5s.
+    private enum GravityWavePhase: Equatable {
+        case idle
+        case ramping(startedAt: TimeInterval)
+    }
+    private var gravityWavePhase: GravityWavePhase = .idle
+    private var gravityWaveExtra: CGFloat = 0
     /// Trackpad downward pull 0…1 (host updates while aiming).
     private var turboPullNormalized: CGFloat = 0
     /// Spendable turbo meter 0…1.
@@ -162,6 +177,13 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     private var critActive = false
     private var runPlink = 0
     private var bombSplashing = false
+    /// While true, lightPegFromFlight skips per-hit publish / pop spam (bomb cascade).
+    private var suppressHitSideEffects = false
+    private var suppressedPublishes = 0
+    private var deferredBoardRefresh = false
+    /// Peg hits recorded in the current `update` for the profiler ring.
+    private var framePegHits = 0
+    private var frameProfileNote = ""
     /// Cool specials this drop (crit / refresh / bomb / …) for the battle feed.
     private var shotHighlights: [String] = []
     /// Spirit mode: hit a refresh peg → rebuild the peg field mid-shot.
@@ -265,10 +287,12 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         counterDamage: Int,
         marbles: [MarbleVoyageOwnedMarble],
         ballLevel: Int,
+        heroLevel: Int = MarbleVoyageHeroLevel.minLevel,
         startingPlayerHP: Int? = nil
     ) {
         deckMarbles = marbles
         runBallLevel = max(1, ballLevel)
+        runHeroLevel = max(MarbleVoyageHeroLevel.minLevel, heroLevel)
         configureSpiritBattle(
             enemyMax: enemyMax,
             playerMax: playerMax,
@@ -293,7 +317,8 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         activeShotDamageMultiplier = MarbleVoyageMarbleRules.shotDamageMultiplier(
             marble: marble,
             ballLevel: runBallLevel,
-            foeTemper: frontFoeTemper
+            foeTemper: frontFoeTemper,
+            heroLevel: runHeroLevel
         )
     }
 
@@ -501,6 +526,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         tiltPhaseStartedAt = shotAge
         tiltOrigin = live.position
         labyrinthGravity = nil
+        resetGravityWave()
         tiltMotion.start()
         statusText = "TILT · Slowing…"
         PlinkSFX.play(.crit)
@@ -513,6 +539,44 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         tiltOrigin = nil
         labyrinthGravity = nil
         tiltMotion.stop()
+    }
+
+    private func resetGravityWave() {
+        gravityWavePhase = .idle
+        gravityWaveExtra = 0
+    }
+
+    private func tickGravityWave() {
+        // Tilt owns gravity while active — don't fight it.
+        guard tiltPhase == nil else { return }
+
+        switch gravityWavePhase {
+        case .idle:
+            guard shotAge >= PlinkGravityWaveRules.armAfterSeconds else { return }
+            gravityWavePhase = .ramping(startedAt: shotAge)
+            gravityWaveExtra = 0
+            noteHighlight("Gravity rift")
+            statusText = "Gravity rift…"
+            PlinkSFX.play(.gravity)
+            publish()
+
+        case .ramping(let started):
+            let elapsed = shotAge - started
+            gravityWaveExtra = PlinkGravityWaveRules.extraGravity(rampElapsed: elapsed)
+            let label = "Gravity rift · pulling…"
+            if statusText != label {
+                statusText = label
+                publish()
+            }
+        }
+    }
+
+    /// Continuum gravity: tilt labyrinth, else normal + optional rift pull.
+    private func flightGravityOverride() -> CGVector? {
+        if let labyrinthGravity { return labyrinthGravity }
+        guard gravityWaveExtra > 0.01 else { return nil }
+        let base = tuning.gravityVector
+        return CGVector(dx: base.dx, dy: base.dy - gravityWaveExtra)
     }
 
     private func tiltGravityMagnitude() -> CGFloat {
@@ -946,7 +1010,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             ballRadius: ballRadius,
             tuning: tuning,
             hoverSpeedRetain: hoverSpeedRetain,
-            gravityOverride: labyrinthGravity
+            gravityOverride: flightGravityOverride()
         )
         let hit = PlinkContinuum.step(
             pos: &pos,
@@ -1051,10 +1115,11 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
 
         let launch = launchState()
         if spiritBattleMode {
-            if ballsLeft > 0 { ballsLeft -= 1 }
+            // Recycle forever — never drain the marble count.
             if !deckOrbIDs.isEmpty {
                 deckCursor = (deckCursor + 1) % deckOrbIDs.count
             }
+            ballsLeft = max(deckOrbIDs.count, deckMarbles.count, 1)
         } else {
             ballsLeft -= 1
             if !deckOrbIDs.isEmpty {
@@ -1082,6 +1147,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             turboEchoSpawned = false
         }
         turboPullNormalized = 0
+        resetGravityWave()
         phase = .flying
         shotAge = 0
         statusText = shotTurboArmed ? "TURBO!" : "…"
@@ -1141,6 +1207,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
 
     private func endShot() {
         endTiltMode()
+        resetGravityWave()
         // Pegs already pop on hit in spirit mode; clear any leftovers (classic mode).
         let leftover = pegs.filter { $0.isLit && !$0.isCleared }
         for peg in leftover {
@@ -1149,7 +1216,13 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         }
         pegs.removeAll { $0.isCleared }
 
-        let scored = shotPlink
+        var scored = shotPlink
+        if pendingComboCageBonus > 0 {
+            let bonus = pendingComboCageBonus
+            pendingComboCageBonus = 0
+            scored += bonus
+            noteHighlight("Combo +\(bonus)")
+        }
         runPlink += scored
         ball?.removeFromParent()
         ball = nil
@@ -1165,14 +1238,11 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
 
         if spiritBattleMode {
             var hurt = 0
-            // Apply this shot's cage damage once — never mid-peg.
+            // Apply this shot's peg cage damage once — never mid-peg.
+            // Bomb AOE already fired mid-flight via onBombEnemyAOE (do not re-apply).
             if scored > 0 {
                 enemyHP = max(0, enemyHP - scored)
                 onDamageDealt?(scored)
-            }
-            // Bomb splash applies at settle too (same round boundary).
-            if shotBombAOE > 0 {
-                onBombEnemyAOE?(shotBombAOE)
             }
 
             // Promote next foe before their approach/melee turn.
@@ -1318,17 +1388,21 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             } else {
                 noteHighlight("Crit")
             }
-            points = PeglinBattleRules.points(for: .crit, critActive: critActive)
+            points = pegHitPoints(raw: PeglinBattleRules.points(for: .crit, critActive: critActive))
             shotPlink += points
-            PlinkSFX.play(.crit)
+            if !suppressHitSideEffects {
+                PlinkSFX.play(.crit)
+            }
             spark(at: peg.position, color: SKColor(red: 1, green: 0.9, blue: 0.2, alpha: 1))
             statusText = "CRIT! +\(points)"
 
         case .refresh:
             noteHighlight("Refresh")
-            points = PeglinBattleRules.points(for: .refresh, critActive: critActive)
+            points = pegHitPoints(raw: PeglinBattleRules.points(for: .refresh, critActive: critActive))
             shotPlink += points
-            PlinkSFX.play(.crit)
+            if !suppressHitSideEffects {
+                PlinkSFX.play(.crit)
+            }
             spark(at: peg.position, color: SKColor(red: 0.4, green: 1, blue: 0.6, alpha: 1))
             if spiritBattleMode {
                 // Full board rebuild mid-shot (new random refresh rolls).
@@ -1349,9 +1423,18 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             spark(at: peg.position, color: SKColor(red: 1, green: 0.45, blue: 0.15, alpha: 1))
             if !bombSplashing {
                 bombSplashing = true
+                suppressHitSideEffects = true
+                suppressedPublishes = 0
+                deferredBoardRefresh = false
+                let splashStarted = CFAbsoluteTimeGetCurrent()
                 let aoe = size.width * PeglinBattleRules.bombAOENormalized
                 var splash = 0
-                for other in pegs where other !== peg && !other.isCleared && !other.isLit {
+                // Snapshot targets first — never mutate `pegs` mid-iteration (refresh
+                // used to rebuild the whole board inside this loop → multi-second hitch).
+                let targets = pegs.filter { other in
+                    other !== peg && !other.isCleared && !other.isLit
+                }
+                for other in targets {
                     let dx = other.position.x - peg.position.x
                     let dy = other.position.y - peg.position.y
                     if hypot(dx, dy) <= aoe {
@@ -1359,16 +1442,44 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                         splash += 1
                     }
                 }
+                suppressHitSideEffects = false
                 bombSplashing = false
-                // Lob toward the bad-guy cluster — apply AOE when the shot settles.
+                let splashMs = (CFAbsoluteTimeGetCurrent() - splashStarted) * 1000
+                frameProfileNote = String(format: "BOMB splash=%d %.1fms", splash, splashMs)
+                let path = PlinkFlightProfiler.dumpBombEvent(
+                    splashCount: splash,
+                    splashMs: splashMs,
+                    refreshDeferred: deferredBoardRefresh,
+                    publishSuppressed: suppressedPublishes
+                )
+                #if DEBUG
+                statusText = String(format: "BOMB · %d pegs · %.0fms", splash, splashMs)
+                #else
+                _ = path
+                #endif
+
+                // Lob immediately — watching real-time AOE is the whole point of the bomb.
+                // Defer host UI to the next runloop so this physics frame finishes clean.
                 let lob = PeglinBattleRules.bombEnemyAOEDamage
                 shotBombAOE += lob
+                DispatchQueue.main.async { [weak self] in
+                    self?.onBombEnemyAOE?(lob)
+                }
                 if sockSnatchCoinsPerBomb > 0 {
                     runGoldCoins += sockSnatchCoinsPerBomb
                     noteHighlight("Sock Snatch +\(sockSnatchCoinsPerBomb)")
                 }
                 noteHighlight(splash > 0 ? "Bomb lob ×\(splash)" : "Bomb lob")
-                statusText = "BOMB! −\(lob) to every bad guy"
+                if !statusText.hasPrefix("BOMB ·") {
+                    statusText = "BOMB! −\(lob) to every bad guy"
+                }
+
+                // One board rebuild after the cascade — never mid-splash.
+                if deferredBoardRefresh || pendingBoardRefresh {
+                    deferredBoardRefresh = false
+                    pendingBoardRefresh = false
+                    respawnPegBoard()
+                }
             } else {
                 statusText = "BOMB!"
             }
@@ -1377,18 +1488,22 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         case .gold:
             // Gold pays the shop, and still plinks like the peg it replaced.
             runGoldCoins += goldPegValue
-            points = PeglinBattleRules.points(for: .blue, critActive: critActive)
+            points = pegHitPoints(raw: PeglinBattleRules.points(for: .blue, critActive: critActive))
             shotPlink += points
-            PlinkSFX.play(.crit)
+            if !suppressHitSideEffects {
+                PlinkSFX.play(.crit)
+            }
             spark(at: peg.position, color: SKColor(red: 1, green: 0.85, blue: 0.25, alpha: 1))
             emitCoinPayout(goldPegValue, at: peg.position)
             noteHighlight("Gold +\(goldPegValue)")
             statusText = "GOLD +\(goldPegValue) coins · purse \(runGoldCoins)"
 
         case .blue, .orange, .stone:
-            points = PeglinBattleRules.points(for: peg.kind, critActive: critActive)
+            points = pegHitPoints(raw: PeglinBattleRules.points(for: peg.kind, critActive: critActive))
             shotPlink += points
-            PlinkSFX.play(.hit)
+            if !suppressHitSideEffects {
+                PlinkSFX.play(.hit)
+            }
             spark(at: peg.position, color: peg.kind == .stone
                   ? SKColor(white: 0.75, alpha: 1)
                   : .white)
@@ -1400,6 +1515,13 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         // Prism Burst: long orange streaks bite the cage harder.
         if peg.kind == .orange {
             orangeStreak += 1
+            if !suppressHitSideEffects {
+                #if canImport(UIKit)
+                if PlayerStateService.shared.currentPlayer?.settings.hapticFeedbackEnabled ?? true {
+                    UIImpactFeedbackGenerator(style: .light).impactOccurred(intensity: 0.55)
+                }
+                #endif
+            }
             if prismCageBonus > 0, orangeStreak >= MarbleVoyageCharm.prismStreakThreshold {
                 points += prismCageBonus
                 noteHighlight("Prism +\(prismCageBonus)")
@@ -1415,9 +1537,15 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         // Destroy immediately — don't wait for end of round.
         destroyPegNow(peg, contribution: points)
         if pendingBoardRefresh {
-            pendingBoardRefresh = false
-            // Pop already removed this peg; rebuild the field under the live ball.
-            respawnPegBoard()
+            if suppressHitSideEffects || bombSplashing {
+                // Defer full rebuild until the bomb cascade finishes.
+                deferredBoardRefresh = true
+                pendingBoardRefresh = false
+            } else {
+                pendingBoardRefresh = false
+                // Pop already removed this peg; rebuild the field under the live ball.
+                respawnPegBoard()
+            }
         }
         // First primary peg hit with turbo → burst one extra one-contact ball.
         if case .primary = source,
@@ -1427,7 +1555,11 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             turboEchoSpawned = true
             spawnTurboEcho(at: live.position)
         }
-        publish()
+        if suppressHitSideEffects {
+            suppressedPublishes += 1
+        } else {
+            publish()
+        }
     }
 
     private func consumeTurboEchoContact(at index: Int) {
@@ -1450,43 +1582,88 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
         guard !peg.isCleared else { return }
         let origin = peg.position
         // Upgraded marbles hit the cage harder.
-        let scaled = contribution > 0
-            ? max(1, Int((Double(contribution) * activeShotDamageMultiplier).rounded()))
-            : contribution
+        // `contribution` is already marble × pegDamageScale from `pegHitPoints`.
+        let scaled = contribution
         if scaled > 0 {
             emitHPContribution(scaled, at: origin)
         }
-        PlinkSFX.play(.pop)
+        if !suppressHitSideEffects {
+            PlinkSFX.play(.pop)
+        }
         peg.popAway()
         pegs.removeAll { $0 === peg || $0.isCleared }
+        framePegHits += 1
 
-        // End the shot early once pending damage would drop the front foe.
-        if spiritBattleMode, enemyHP - shotPlink <= 0 {
-            phase = .settling
-            settleFrames = 8
-        }
+        // Do NOT force `.settling` when pending damage would kill the front foe.
+        // Creep waves (Armadillo ×22) stack enough peg hits mid-chaos that an early
+        // settle made the marble freeze and vanish on-board — reads as a bug.
+        // Damage still applies once at `endShot()` when the orb naturally exits.
     }
 
-    /// Coin count floats up in gold so the shop payout is visible mid-shot.
+    /// Coin count pops, arcs toward the top purse, then fades — readable mid-shot juice.
     private func emitCoinPayout(_ coins: Int, at point: CGPoint) {
         let label = SKLabelNode(text: "+\(coins)¢")
         label.fontName = "AvenirNext-Heavy"
-        label.fontSize = 26
-        label.fontColor = SKColor(red: 1.0, green: 0.85, blue: 0.28, alpha: 1)
+        label.fontSize = 28
+        label.fontColor = SKColor(red: 1.0, green: 0.88, blue: 0.28, alpha: 1)
         label.verticalAlignmentMode = .center
         label.horizontalAlignmentMode = .center
         label.position = point
         label.zPosition = 51
-        label.setScale(0.4)
+        label.setScale(0.35)
+        label.alpha = 0
         addChild(label)
+
+        let driftX = CGFloat.random(in: -28...28)
+        let rise = CGFloat.random(in: 72...110)
         label.run(.sequence([
             .group([
-                .scale(to: 1.1, duration: 0.14),
-                .moveBy(x: 0, y: 46, duration: 0.6),
+                .fadeIn(withDuration: 0.06),
+                .scale(to: 1.25, duration: 0.12),
             ]),
-            .fadeOut(withDuration: 0.25),
+            .group([
+                .scale(to: 1.0, duration: 0.1),
+                .moveBy(x: driftX, y: rise, duration: 0.55),
+            ]),
+            .group([
+                .moveBy(x: driftX * 0.35, y: 36, duration: 0.28),
+                .fadeOut(withDuration: 0.28),
+                .scale(to: 0.7, duration: 0.28),
+            ]),
             .removeFromParent(),
         ]))
+
+        // Tiny spark trail so gold reads as “collected,” not just floating text.
+        for i in 0..<3 {
+            let spark = SKShapeNode(circleOfRadius: CGFloat.random(in: 2.5...4.5))
+            spark.fillColor = SKColor(red: 1, green: 0.9, blue: 0.35, alpha: 0.95)
+            spark.strokeColor = .clear
+            spark.glowWidth = 2
+            spark.position = CGPoint(
+                x: point.x + CGFloat.random(in: -10...10),
+                y: point.y + CGFloat.random(in: -8...8)
+            )
+            spark.zPosition = 50
+            addChild(spark)
+            let delay = 0.04 * Double(i)
+            spark.run(.sequence([
+                .wait(forDuration: delay),
+                .group([
+                    .moveBy(x: driftX * 0.4, y: rise * 0.55, duration: 0.4),
+                    .fadeOut(withDuration: 0.4),
+                ]),
+                .removeFromParent(),
+            ]))
+        }
+    }
+
+    /// Marble × global softener → cage damage for this peg hit.
+    private func pegHitPoints(raw: Int) -> Int {
+        guard raw > 0 else { return 0 }
+        let scaled = Double(raw)
+            * activeShotDamageMultiplier
+            * PeglinBattleRules.pegDamageScale
+        return max(1, Int(scaled.rounded()))
     }
 
     /// Peg HP tallies live on the host's top-corner rails (not mid-board floats).
@@ -1629,6 +1806,10 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
     }
 
     override func update(_ currentTime: TimeInterval) {
+        let updateStarted = CFAbsoluteTimeGetCurrent()
+        framePegHits = 0
+        frameProfileNote = ""
+
         let dt: TimeInterval
         if lastUpdateTime > 0 {
             dt = min(1 / 30, currentTime - lastUpdateTime)
@@ -1702,6 +1883,7 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                 if tiltPhase == .labyrinth {
                     refreshLabyrinthGravity()
                 }
+                tickGravityWave()
                 let h: CGFloat = 1 / 120
                 var primaryDone = live.isHidden
                 if !primaryDone {
@@ -1732,10 +1914,19 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                     if tiltPhase == .labyrinth {
                         tiltOrigin = pos
                     }
-                    primaryDone = primaryFloor
-                        || pos.y < -60 || pos.x < -60 || pos.x > size.width + 60
+                    let outOfBounds = pos.y < -60
+                        || pos.y > size.height + 80
+                        || pos.x < -60
+                        || pos.x > size.width + 60
+                    let invalid = pos.x.isNaN || pos.y.isNaN
+                        || ballVel.dx.isNaN || ballVel.dy.isNaN
+                    let timedOut = shotAge >= PlinkGravityWaveRules.maxShotSeconds
+                    primaryDone = primaryFloor || outOfBounds || invalid || timedOut
                     if primaryDone {
                         live.isHidden = true
+                        if timedOut && !primaryFloor {
+                            frameProfileNote = "SHOT_TIMEOUT"
+                        }
                     }
                     if trailPoints.last.map({
                         hypot(pos.x - $0.x, pos.y - $0.y) > tuning.orb.trail.sampleDistance
@@ -1785,7 +1976,10 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
                     splitBalls[i].vel = sVel
                     splitBalls[i].lastKick = TimeInterval(sKick)
                     splitBalls[i].node.position = sPos
-                    if sFloor || sPos.y < -60 || sPos.x < -60 || sPos.x > size.width + 60 {
+                    if sFloor || sPos.y < -60 || sPos.y > size.height + 80
+                        || sPos.x < -60 || sPos.x > size.width + 60
+                        || sPos.x.isNaN || sPos.y.isNaN
+                        || shotAge >= PlinkGravityWaveRules.maxShotSeconds {
                         splitBalls[i].done = true
                         splitBalls[i].node.removeFromParent()
                     } else {
@@ -1805,6 +1999,17 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             settleFrames += 1
             if settleFrames > 10 { endShot() }
         }
+
+        let updateMs = (CFAbsoluteTimeGetCurrent() - updateStarted) * 1000
+        PlinkFlightProfiler.record(
+            currentTime: currentTime,
+            dt: dt,
+            updateMs: updateMs,
+            phase: String(describing: phase),
+            pegHits: framePegHits,
+            shotAge: shotAge,
+            note: frameProfileNote
+        )
     }
 
     // MARK: - Touch
@@ -1902,7 +2107,12 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             turboCharge: turboCharge,
             turboArmed: turboArmedNow || (phase == .flying && shotTurboArmed && !turboEchoSpawned),
             tiltPhase: tiltPhase,
-            tiltOrigin: tiltOrigin
+            tiltOrigin: tiltOrigin,
+            gravityWaveCountdown: nil,
+            gravityWaveActive: {
+                if case .ramping = gravityWavePhase { return true }
+                return false
+            }()
         ))
     }
 

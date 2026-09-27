@@ -57,6 +57,9 @@
     "sourceHashSha256": "cb98cd8eb3782af7bfc357e899800a814c9cc3b07839e47ca49a039934358b46",
     "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_magnet. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_magnet (2026-09-26T23:28:16Z).",
     "catalogImageset": "world2_plink_power_icon_magnet",
-    "runtimeBoundAt": "2026-09-26T23:28:16Z"
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_magnet.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
   }
 }

@@ -2,13 +2,13 @@ import XCTest
 @testable import abbies_world_ios
 
 final class PlinkCavernSimTests: XCTestCase {
-    func testCavernBoardIsDenseForceMajorityWithRails() {
+    func testCavernBoardIsDenseForceMajorityWithoutLegacyRails() {
         let level = BoardLevel.level(id: "peglin.cavernArcs")
         XCTAssertNotNil(level)
         guard let level else { return }
 
         XCTAssertGreaterThan(level.pegs.count, 80, "Peglin cavern should be dense")
-        XCTAssertFalse(level.rails.isEmpty)
+        XCTAssertTrue(level.rails.isEmpty, "Legacy curved U/loop barrier rails must stay purged")
         XCTAssertEqual(level.buckets.count, 4)
         XCTAssertLessThan(level.pegRadius, 9, "Force pegs are the small ones")
 
@@ -27,13 +27,14 @@ final class PlinkCavernSimTests: XCTestCase {
         XCTAssertEqual(BoardLevel.catalog.first?.id, "peglin.cavernArcs")
     }
 
-    func testSingleShotTouchesRailsAndForcePegs() {
+    func testSingleShotTouchesForcePegsWithoutLegacyRails() {
         let level = BoardLevel.level(id: "peglin.cavernArcs")!
         var pack = PlinkContinuum.materialize(
             level: level,
             size: CGSize(width: level.referenceWidth, height: level.referenceHeight),
             tuning: .default
         )
+        XCTAssertTrue(pack.rails.isEmpty)
         let shot = PlinkRoundSimulator.simulateShot(
             aimOffset: 0.15,
             pegs: &pack.pegs,
@@ -43,7 +44,7 @@ final class PlinkCavernSimTests: XCTestCase {
         )
         XCTAssertTrue(shot.hitFloor || shot.duration > 0.5)
         XCTAssertGreaterThan(shot.pegHits, 0, "Should collide with dense peg field")
-        XCTAssertGreaterThan(shot.railHits, 0, "Radical geometry rails must participate")
+        XCTAssertEqual(shot.railHits, 0, "No legacy barrier rails on cavern board")
         XCTAssertGreaterThan(shot.orangesLit, 0)
     }
 

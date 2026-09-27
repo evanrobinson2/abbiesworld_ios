@@ -3,12 +3,14 @@ import CoreGraphics
 
 /// Sandbox Peglin battle rules — MVP is easy (dense pegs + soft HP).
 enum PeglinBattleRules {
-    /// Hard cap for a fight deck (kids can spam-tap up to this).
-    static let maxDeckCount = 10
+    /// No practical deck cap — marbles recycle forever in spirit fights.
+    static let maxDeckCount = 99
     /// Quick-fill size for Random / Even mix.
     static let mixFillCount = 10
     /// Fight button gets its “you’re ready” spark once the deck hits this.
     static let readyDeckCount = 3
+    /// Peg→HP scale (<1) so shots bounce longer before the cage melts.
+    static let pegDamageScale: Double = 0.48
 
     /// @available(*, deprecated, renamed: "mixFillCount")
     static let deckSize = mixFillCount
@@ -34,18 +36,24 @@ enum PeglinBattleRules {
         }
     }
 
-    /// Peg → points (1 point = 1 enemy HP), except bomb which is AOE-only.
+    /// Peg → raw points before `pegDamageScale` (bomb is AOE-only).
     static func points(for kind: PegKind, critActive: Bool) -> Int {
         let mult = critActive ? 2 : 1
         switch kind {
         case .blue: return 1 * mult
-        case .orange: return 2 * mult
-        case .crit: return 3 * mult
+        case .orange: return 1 * mult // was 2 — softer so boards can stay denser
+        case .crit: return 2 * mult // was 3
         case .refresh: return 1 * mult
         case .stone: return 1 * mult
         case .bomb: return 0 // splash lights neighbors; they score normally
         case .gold: return 1 * mult // coins handled separately; still ticks the cage a little
         }
+    }
+
+    /// Apply spirit damage scale (keeps bomb/0 intact).
+    static func scaledPoints(_ raw: Int) -> Int {
+        guard raw > 0 else { return 0 }
+        return max(1, Int((Double(raw) * pegDamageScale).rounded()))
     }
 
     /// Bomb splash radius as fraction of board width.
@@ -94,10 +102,11 @@ enum PeglinBattleRules {
             case .brawl, .none: return "fox.nineTails"
             }
         case .henchman, .none:
+            // Prefer denser boards by default — mayhem over open lanes.
             switch attacker?.temper {
-            case .swift: return "fox.lanternRings"
-            case .craft: return "fox.trailChevrons"
-            case .brawl, .none: return "fox.pawPrint"
+            case .swift: return "fox.trailChevrons"
+            case .craft: return "fox.nineTails"
+            case .brawl, .none: return "peglin.cavernArcs"
             }
         }
     }

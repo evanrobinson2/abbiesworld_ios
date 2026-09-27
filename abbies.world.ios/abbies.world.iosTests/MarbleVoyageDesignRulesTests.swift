@@ -123,6 +123,76 @@ final class MarbleVoyageDesignRulesTests: XCTestCase {
         )
     }
 
+    func testClimbFoeCardClearsNeighborMysteryWhenFocusIsLeft() {
+        // Screenshot regression: left FIGHT + right MYSTERY — trailing dock at default
+        // top pad covers the mystery. Placement must pick a clear alternative.
+        let viewport = CGSize(width: 1180, height: 820)
+        let tileSize: CGFloat = 200
+        let fight = MarbleVoyageOverlandScroll.focusedTileRectInViewport(
+            contentPoint: CGPoint(x: 280, y: viewport.height * 0.42),
+            tileSize: tileSize,
+            cameraOffsetY: 0
+        )
+        let mystery = MarbleVoyageOverlandScroll.focusedTileRectInViewport(
+            contentPoint: CGPoint(x: 900, y: viewport.height * 0.42),
+            tileSize: tileSize,
+            cameraOffsetY: 0
+        )
+        let treasure = MarbleVoyageOverlandScroll.focusedTileRectInViewport(
+            contentPoint: CGPoint(x: 590, y: viewport.height * 0.72),
+            tileSize: tileSize,
+            cameraOffsetY: 0
+        )
+
+        let placement = MarbleVoyageOverlandScroll.preferredCardPlacement(
+            focusX: 280,
+            contentWidth: 1180,
+            focusTile: fight,
+            neighborTiles: [mystery, treasure],
+            viewport: viewport
+        )
+        let card = MarbleVoyageOverlandScroll.cardRect(
+            dock: placement.dock,
+            viewport: viewport,
+            topPad: placement.topPad
+        )
+
+        XCTAssertFalse(
+            MarbleVoyageOverlandScroll.cardOccludesFocusedTile(card: card, tile: fight),
+            "Card must not cover the focused fight tile (dock=\(placement.dock) top=\(placement.topPad))"
+        )
+        let mysteryHit = MarbleVoyageOverlandScroll.neighborOcclusionArea(
+            card: card,
+            tiles: [mystery]
+        )
+        XCTAssertLessThan(
+            mysteryHit,
+            40,
+            "Card must not cover the mystery neighbor (area=\(mysteryHit) dock=\(placement.dock) top=\(placement.topPad))"
+        )
+    }
+
+    func testBatDivekickerPortraitFaceBBoxIsEyeCentered() {
+        guard let bbox = PlinkAttackerKind.batDivekicker.portraitFaceBBox else {
+            return XCTFail("batDivekicker needs an explicit face bbox")
+        }
+        // Must sit lower than topCenterHead so ears/wing tips aren't the whole crop.
+        XCTAssertGreaterThan(bbox.y, NormalizedRect.topCenterHead.y + 0.08)
+        XCTAssertLessThan(bbox.w, 0.55)
+        XCTAssertLessThan(bbox.h, 0.40)
+        // Left-biased head on the wide-wing plate.
+        XCTAssertLessThan(bbox.x, 0.22)
+        XCTAssertGreaterThan(bbox.x + bbox.w, 0.40)
+    }
+
+    func testPorcupinePortraitIsNotTheQuillCrop() {
+        guard let bbox = PlinkAttackerKind.porcupineBoxer.portraitFaceBBox else {
+            return XCTFail("porcupine must not use the default top-center crop (that frame is quills)")
+        }
+        XCTAssertGreaterThan(bbox.y, NormalizedRect.topCenterHead.y + 0.15)
+        XCTAssertGreaterThan(bbox.h, 0.2)
+    }
+
     func testFoeCardNameWrapCheck() {
         // Card column ≈ maxWidth 360 − padding − 100pt portrait − gaps ≈ 200pt.
         let available: CGFloat = 200
@@ -140,15 +210,52 @@ final class MarbleVoyageDesignRulesTests: XCTestCase {
         )
     }
 
+    func testVoyageTilesStayLegible() {
+        let ipad = CGSize(width: 1180, height: 820)
+        let report = VoyageTileLegibility.abbieTrayClearsChartHandle(viewport: ipad)
+        XCTAssertTrue(
+            report.ok,
+            report.failures.map(\.message).joined(separator: "\n")
+        )
+        // Narrower landscape still keeps HP on one line and clear of the handle.
+        let compact = VoyageTileLegibility.abbieTrayClearsChartHandle(
+            viewport: CGSize(width: 1024, height: 768)
+        )
+        XCTAssertTrue(compact.ok, compact.failures.map(\.message).joined(separator: "\n"))
+
+        // The old 0.72 inset left a dead ring — art must fill the square.
+        let edge = VoyageTileLegibility.chartArtEdgeFraction()
+        XCTAssertGreaterThanOrEqual(edge * edge, VoyageTileLegibility.minPortraitFill)
+        XCTAssertFalse(
+            VoyageTileLegibility.chartPortraitIsLegible(imageAspect: 1089.0 / 1445.0, usesFaceCrop: false),
+            "Tall full-body plates letterbox below the fill floor unless face-cropped"
+        )
+        XCTAssertTrue(
+            VoyageTileLegibility.chartPortraitIsLegible(imageAspect: 1, usesFaceCrop: false),
+            "Square Abbie bust fills a square tile"
+        )
+        XCTAssertTrue(
+            VoyageTileLegibility.chartPortraitIsLegible(imageAspect: 1089.0 / 1445.0, usesFaceCrop: true)
+        )
+        XCTAssertFalse(
+            VoyageTileLegibility.textFitsOneLine("120/120", fontSize: 16, width: 18),
+            "A one-glyph column is the stacked HP bug"
+        )
+    }
+
     func testFightAimTrackpadIsFixedSize() {
-        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadWidth, 176, accuracy: 0.01)
-        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadHeight, 118, accuracy: 0.01)
-        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadThumbSize, 40, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadWidth, 200, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadHeight, 136, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.fightAimTrackpadThumbSize, 48, accuracy: 0.01)
         // Wide enough for a thumb; tall enough for downward turbo pull.
-        XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadWidth, 140)
-        XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadWidth, 220)
-        XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 100)
-        XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 140)
+        XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadWidth, 160)
+        XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadWidth, 240)
+        XCTAssertGreaterThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 110)
+        XCTAssertLessThan(MarbleVoyageDesignRules.fightAimTrackpadHeight, 160)
+        XCTAssertEqual(MarbleVoyageDesignRules.fightPowerSlotCount, 2)
+        XCTAssertGreaterThanOrEqual(MarbleVoyageDesignRules.fightPowerSlotSize, 70)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbAbbieCardMaxWidth, 420, accuracy: 0.01)
+        XCTAssertEqual(MarbleVoyageDesignRules.climbFoeCardMaxWidth, 300, accuracy: 0.01)
     }
 
     func testOverlandScrollCameraOffsetClamps() {

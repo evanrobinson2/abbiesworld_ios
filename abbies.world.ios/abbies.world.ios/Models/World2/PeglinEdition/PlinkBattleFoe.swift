@@ -37,7 +37,7 @@ struct PlinkBattleFoe: Identifiable, Equatable, Sendable {
 
 extension PeglinBattleRules {
     /// Flat AOE to every living bad guy when a bomb peg is touched (lobbed at the cluster).
-    static let bombEnemyAOEDamage: Int = 16
+    static var bombEnemyAOEDamage: Int { PlinkCreepWave.bombAOEDamage }
 
     /// Melee contact column (Abbie's side).
     static let meleeLane = 0
@@ -46,7 +46,7 @@ extension PeglinBattleRules {
     /// Spawn column — far right. Ground foes need `startingLane` free shots before bite.
     static let startingLane = 4
 
-    /// Per-foe HP — early hench forgiving; summit hard without Strong Temper.
+    /// Per-foe HP — creeps are soft; bosses still chunky.
     static func foeMaxHP(
         for kind: PlinkAttackerKind,
         role: MarbleVoyageGangFightRole? = nil
@@ -54,7 +54,8 @@ extension PeglinBattleRules {
         switch role {
         case .bigBoss: return 148
         case .miniBoss: return 100
-        case .henchman: return 38
+        case .henchman:
+            return kind.isFlying ? PlinkCreepWave.henchFlyingHP : PlinkCreepWave.henchGroundHP
         case .none:
             break
         }
@@ -68,8 +69,8 @@ extension PeglinBattleRules {
             }
         }
         // Flying hench: less HP (they pressure earlier).
-        if kind.isFlying { return 30 }
-        return 36
+        if kind.isFlying { return PlinkCreepWave.henchFlyingHP }
+        return PlinkCreepWave.henchGroundHP
     }
 
     /// Bite damage when this foe reaches melee (or every turn if flying).
@@ -81,7 +82,7 @@ extension PeglinBattleRules {
         switch role {
         case .bigBoss: base = 20
         case .miniBoss: base = 16
-        case .henchman: base = 11
+        case .henchman: base = kind.isFlying ? 8 : 9
         case .none:
             if kind.isNamedCrew {
                 switch kind {
@@ -92,14 +93,14 @@ extension PeglinBattleRules {
                 default: base = 12
                 }
             } else {
-                base = kind.isFlying ? 10 : 11
+                base = kind.isFlying ? 8 : 9
             }
         }
         return base
     }
 
-    /// Build the fight roster: focus foe first, then the rest of the named crew (or hench pack).
-    /// Everyone spawns on the right; staggered so the front foe is one step closer.
+    /// Build the fight roster: focus foe first, then the creep wave / guards.
+    /// Lanes stagger so the pack walks in like a Dota wave.
     static func makeRescueRoster(
         wave: PlinkAttackerKind,
         focus: PlinkAttackerKind,
@@ -108,46 +109,46 @@ extension PeglinBattleRules {
     ) -> [PlinkBattleFoe] {
         switch role {
         case .henchman:
-            var rng = SeededGenerator(seed: seed)
-            var pack: [PlinkAttackerKind] = [wave]
-            let pool = MarbleVoyageGangRun.henchmenPool.filter { $0 != wave }
-            while pack.count < 3, let next = pool.randomElement(using: &rng) {
-                if !pack.contains(next) { pack.append(next) }
-            }
+            // True creep wave: N copies of the fight's lead kind — one icon, many HP bars.
+            let pack = Array(repeating: wave, count: PlinkCreepWave.henchmanCount)
             return pack.enumerated().map { index, kind in
                 PlinkBattleFoe(
                     kind: kind,
                     maxHP: foeMaxHP(for: kind, role: .henchman),
-                    lane: max(meleeLane + 1, startingLane - min(index, 1))
+                    lane: staggeredLane(index: index)
                 )
             }
-        case .miniBoss, .bigBoss, .none:
-            // Big boss is a solo showdown. Mini-boss brings one hanger-on.
-            // Full named-crew chrome still highlights on the approach strip via portraits.
-            if role == .bigBoss {
-                return [
-                    PlinkBattleFoe(
-                        kind: focus,
-                        maxHP: foeMaxHP(for: focus, role: .bigBoss),
-                        lane: startingLane
-                    )
-                ]
+        case .miniBoss:
+            let adds = uniformCreepAdds(
+                count: PlinkCreepWave.miniBossAddCount,
+                seed: seed,
+                excluding: focus
+            )
+            let pack = [focus] + adds
+            return pack.enumerated().map { index, kind in
+                let isLead = index == 0
+                return PlinkBattleFoe(
+                    kind: kind,
+                    maxHP: foeMaxHP(for: kind, role: isLead ? .miniBoss : .henchman),
+                    lane: staggeredLane(index: index)
+                )
             }
-            if role == .miniBoss {
-                let hanger = PlinkAttackerKind.namedCrew.first { $0 != focus } ?? .nib
-                return [
-                    PlinkBattleFoe(
-                        kind: focus,
-                        maxHP: foeMaxHP(for: focus, role: .miniBoss),
-                        lane: startingLane
-                    ),
-                    PlinkBattleFoe(
-                        kind: hanger,
-                        maxHP: foeMaxHP(for: hanger, role: .henchman),
-                        lane: startingLane
-                    ),
-                ]
+        case .bigBoss:
+            let adds = uniformCreepAdds(
+                count: PlinkCreepWave.bigBossGuardCount,
+                seed: seed &+ 3,
+                excluding: focus
+            )
+            let pack = [focus] + adds
+            return pack.enumerated().map { index, kind in
+                let isLead = index == 0
+                return PlinkBattleFoe(
+                    kind: kind,
+                    maxHP: foeMaxHP(for: kind, role: isLead ? .bigBoss : .henchman),
+                    lane: staggeredLane(index: index)
+                )
             }
+        case .none:
             var order: [PlinkAttackerKind] = [focus]
             for member in PlinkAttackerKind.namedCrew where member != focus {
                 order.append(member)
@@ -156,10 +157,68 @@ extension PeglinBattleRules {
                 PlinkBattleFoe(
                     kind: kind,
                     maxHP: foeMaxHP(for: kind, role: .none),
-                    lane: max(meleeLane + 1, startingLane - min(index, 1))
+                    lane: staggeredLane(index: index)
                 )
             }
         }
+    }
+
+    /// One seeded creep type, cloned `count` times (never a mixed icon zoo).
+    private static func uniformCreepAdds(
+        count: Int,
+        seed: UInt64,
+        excluding: PlinkAttackerKind?
+    ) -> [PlinkAttackerKind] {
+        guard count > 0 else { return [] }
+        var rng = SeededGenerator(seed: seed)
+        var pool = MarbleVoyageGangRun.henchmenPool
+        if let excluding {
+            pool = pool.filter { $0 != excluding }
+        }
+        let kind = pool.randomElement(using: &rng) ?? .porcupineBoxer
+        return Array(repeating: kind, count: count)
+    }
+
+    private static func staggeredLane(index: Int) -> Int {
+        // Front of wave one step closer; back ranks stay deep.
+        max(meleeLane + 1, startingLane - min(index, startingLane - 1))
+    }
+
+    /// Stable seed so the versus splash and the board share the same pack.
+    static func rescueRosterSeed(
+        wave: PlinkAttackerKind,
+        focus: PlinkAttackerKind,
+        role: MarbleVoyageGangFightRole?,
+        climbStage: Int
+    ) -> UInt64 {
+        var value: UInt64 = 0xC0FFEE
+        for byte in wave.rawValue.utf8 { value = value &* 131 &+ UInt64(byte) }
+        for byte in focus.rawValue.utf8 { value = value &* 137 &+ UInt64(byte) }
+        for byte in (role?.rawValue ?? "none").utf8 { value = value &* 149 &+ UInt64(byte) }
+        value = value &* 157 &+ UInt64(max(0, climbStage))
+        return value
+    }
+
+    /// Ordered attacker kinds for the fight cast card / versus splash (lead first).
+    static func rescueCastKinds(from roster: [PlinkBattleFoe]) -> [PlinkAttackerKind] {
+        roster.map(\.kind)
+    }
+
+    /// Lead-foe HP / ATK for overland cast cards (matches the board roster lead).
+    static func previewLeadFoeStats(
+        wave: PlinkAttackerKind,
+        focus: PlinkAttackerKind,
+        role: MarbleVoyageGangFightRole?
+    ) -> (hp: Int, atk: Int) {
+        let lead: PlinkAttackerKind
+        switch role {
+        case .henchman: lead = wave
+        case .miniBoss, .bigBoss, .none: lead = focus
+        }
+        return (
+            foeMaxHP(for: lead, role: role),
+            foeAttack(for: lead, role: role)
+        )
     }
 
     /// End-of-round: ground foes step one square left; return front-foe bite (0 if still marching).

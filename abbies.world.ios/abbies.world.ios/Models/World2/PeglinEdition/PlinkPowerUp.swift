@@ -77,6 +77,13 @@ struct PlinkPowerUpInventory: Equatable, Sendable {
         max(0, queue.count - max(1, min(PlinkPowerUp.maxSlotCapacity, slotCapacity)))
     }
 
+    /// FIFO backlog behind the battle wells (ghost inventory strip).
+    var waitingQueue: [PlinkPowerUp] {
+        let cap = max(1, min(PlinkPowerUp.maxSlotCapacity, slotCapacity))
+        guard queue.count > cap else { return [] }
+        return Array(queue.dropFirst(cap))
+    }
+
     func count(of kind: PlinkPowerUp) -> Int {
         queue.filter { $0 == kind }.count
     }

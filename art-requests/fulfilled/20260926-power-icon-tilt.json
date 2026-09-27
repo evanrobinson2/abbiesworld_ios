@@ -19,7 +19,10 @@
     "sourceHashSha256": "6d0caaa9aae844a790eae1c205284050e3fb2c342676781d0e6ccaf017f21ccd",
     "notes": "User-approved source, transparent production derivative delivered. RGBA and corner-alpha check passed. Builder must bind world2_plink_power_icon_tilt / ui.plink.power.icon.tilt and verify actual 56pt UI. No runtime changes. Runtime catalog bound as world2_plink_power_icon_tilt (2026-09-26T23:28:16Z).",
     "catalogImageset": "world2_plink_power_icon_tilt",
-    "runtimeBoundAt": "2026-09-26T23:28:16Z"
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_tilt.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
   },
   "styleNotes": "Approved Tilt style lock: dark teal enamel disc, warm brass rim, bold contours, chunky hand-painted forms, restrained cel shading. True transparent corners; no checkerboard or opaque square. Match motif weight at 56\u201372pt.",
   "id": "20260926-power-icon-tilt",

@@ -35,7 +35,7 @@
     "character.peglin.abbie.happy"
   ],
   "acceptanceCriteria": [
-    "Exact approved original SHA-256 638f1f70… in AssetSources",
+    "Exact approved original SHA-256 638f1f70\u2026 in AssetSources",
     "Happy/idle battle portrait shows regal bust",
     "Hurt/defeated/wink do not use the smiling regal sheet",
     "Overland map full-body unchanged",
@@ -48,11 +48,14 @@
   },
   "fulfillment": {
     "completedAt": "2026-09-26T23:20:00Z",
-    "completedBy": "Cursor — game-dev chore #25",
+    "completedBy": "Cursor \u2014 game-dev chore #25",
     "assetSourcePath": "AssetSources/MarbleVoyage/abbie-regal-2026-09-26/midjourney-original.jpeg",
     "sourceHashSha256": "638f1f70f93415b2d52a43ba2eb86b2a36c36dccfb67763cb4604d4674962278",
     "catalogImageset": "world2_peglin_abbie_happy",
     "choreIssue": "https://github.com/evanrobinson2/abbiesworld_ios/issues/25",
-    "notes": "Source imported and happy catalog bound. Expression sheets restored to older art (outfit mismatch follow-up). Overland map untouched. In-game screenshot / close still pending device verify."
+    "notes": "Source imported and happy catalog bound. Expression sheets restored to older art (outfit mismatch follow-up). Overland map untouched. In-game screenshot / close still pending device verify.",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_peglin_abbie_happy.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
   }
 }

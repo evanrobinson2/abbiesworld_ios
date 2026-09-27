@@ -132,5 +132,7 @@ tmp-ipad-screenshot.png
 
 # Marble Voyage silent stage stills (regenerate via scripts/capture_marble_voyage.sh)
 artifacts/voyage-capture/
+artifacts/voyage-opening-dag/
+artifacts/voyage-portrait-review/
 # Breakout recordings (regenerate via scripts/record_voyage_breakout.sh)
 artifacts/voyage-breakout/

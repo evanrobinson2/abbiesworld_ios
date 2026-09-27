@@ -377,4 +377,26 @@ extension PlinkAttackerKind {
         // Lineup leftover idle naming
         return UIImage(named: "world2_plink_gang_\(rawValue)_idle")
     }
+
+    /// Face box for tall plates. Written by `scripts/review_voyage_portraits.py`
+    /// after the tile crop and the full plate were both shown to a vision model.
+    /// Nil only when that default top-center crop itself passed review.
+    var portraitFaceBBox: NormalizedRect? {
+        switch self {
+        case .armadilloBlocker:
+            return NormalizedRect(x: 0.02, y: 0.32, w: 0.42, h: 0.32)
+        case .batDivekicker:
+            return NormalizedRect(x: 0.14, y: 0.27, w: 0.42, h: 0.32)
+        case .crabPincher:
+            return NormalizedRect(x: 0.04, y: 0.10, w: 0.64, h: 0.48)
+        case .grasshopperKickboxer:
+            return NormalizedRect(x: 0.14, y: 0.19, w: 0.30, h: 0.23)
+        case .porcupineBoxer:
+            return NormalizedRect(x: 0.05, y: 0.27, w: 0.46, h: 0.35)
+        case .vulture:
+            return NormalizedRect(x: 0.39, y: 0.02, w: 0.24, h: 0.24)
+        default:
+            return nil
+        }
+    }
 }

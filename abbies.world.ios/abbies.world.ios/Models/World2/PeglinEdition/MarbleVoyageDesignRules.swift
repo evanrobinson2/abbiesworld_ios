@@ -39,7 +39,7 @@ enum MarbleVoyageDesignRules {
     static let fightEnemyCardArtSize: CGFloat = 168
     /// Front-foe art scale vs base — unused when HP tiers drive size.
     static let fightFrontFoeArtScale: CGFloat = 1.4
-    /// Rescue / hostage art scale on the cast card.
+    /// Rescue / hostage art scale (versus intro — not fight card chrome).
     static let fightRescueArtScale: CGFloat = 0.55
 
     /// Portrait size tier from foe max HP (not lane proximity).
@@ -117,20 +117,30 @@ enum MarbleVoyageDesignRules {
     /// Cage/Hurt chip value.
     static let battleFeedMinChipValueFont: CGFloat = 14
 
-    // MARK: - Fight aim trackpad (bottom-right marble chip)
+    // MARK: - Fight aim trackpad (cast-card footer — was RESCUE slot)
 
     /// Fixed width of the NOW-marble aim pad (does not grow with copy).
-    static let fightAimTrackpadWidth: CGFloat = 176
-    /// Fixed height — tall enough for downward turbo pull.
-    static let fightAimTrackpadHeight: CGFloat = 118
+    static let fightAimTrackpadWidth: CGFloat = 200
+    /// Fixed height — tall enough for downward turbo pull; sits under the cast card.
+    static let fightAimTrackpadHeight: CGFloat = 136
     /// Marble thumb size inside the trackpad.
-    static let fightAimTrackpadThumbSize: CGFloat = 40
+    static let fightAimTrackpadThumbSize: CGFloat = 48
 
-    // MARK: - Fight power slots (bottom-left FIFO wells)
+    // MARK: - Fight power slots (bottom-left thumb wells)
 
     /// Default always-visible power wells (extra capacity is a future shop item).
     static let fightPowerSlotCount: Int = PlinkPowerUp.defaultSlotCapacity
-    static let fightPowerSlotSize: CGFloat = 62
+    /// Active well diameter — packaging stays thin so the icon reads big.
+    static let fightPowerSlotSize: CGFloat = 76
+    /// Ghost FIFO chips behind the two active wells.
+    static let fightPowerGhostSize: CGFloat = 36
+    /// Max ghost chips drawn (overflow collapses into +N).
+    static let fightPowerGhostVisible: Int = 4
+
+    // MARK: - Fight creep silhouette strip (retired from live HUD; kept for tests/helpers)
+
+    /// Max silhouette cards before stacking same-kind leftovers as ×N.
+    static let fightCreepSilhouetteBudget: Int = 8
 
     // MARK: - Climb intro camera (manual cast flyby)
 
@@ -149,22 +159,43 @@ enum MarbleVoyageDesignRules {
     /// Player / next-choice end framing in the scroll viewport.
     static let climbIntroPlayerScrollAnchorY: CGFloat = 0.58
     /// Finger drag → camera: lower = slower / more deliberate pan on the climb.
-    static let climbPanDragSensitivity: CGFloat = 0.38
+    /// 1:1 finger travel — drawer ScrollView is preferred for full-map browsing.
+    static let climbPanDragSensitivity: CGFloat = 0.85
     /// Vertical drag distance (pts) that advances one cast frame while scrubbing.
     static let climbCastScrubPointsPerFrame: CGFloat = 72
     /// Foe / cast name card max width on the climb.
-    static let climbFoeCardMaxWidth: CGFloat = 360
+    static let climbFoeCardMaxWidth: CGFloat = 300
     /// Estimated card height used by occlusion checks (name + blurb + stats).
-    static let climbFoeCardEstimateHeight: CGFloat = 280
+    /// Keep tight — an oversized estimate makes every mid-row placement look blocked.
+    static let climbFoeCardEstimateHeight: CGFloat = 250
+    /// Default top inset for the foe card (must match HostView padding).
+    static let climbFoeCardTopPad: CGFloat = 200
     /// Minimum gap between card and focused tile before we treat it as covering art.
     static let climbFoeCardMinClearance: CGFloat = 16
+    /// Neighbor tiles (mystery / treasure / other fights) also need breathing room.
+    static let climbFoeCardNeighborClearance: CGFloat = 20
+    /// Abbie status tray max width (left-docked, not full-bleed).
+    static let climbAbbieCardMaxWidth: CGFloat = 420
+    /// Extra chart bottom inset so Abbie’s status card doesn’t cover dock tiles.
+    static let climbAbbieCardClearance: CGFloat = 120
 
     /// @available(*, deprecated, message: "Manual cast — hold is player-driven.")
     static let climbRevealHoldAfterNameSeconds: TimeInterval = 2.5
     /// @available(*, deprecated, message: "Replaced by per-enemy climbReveal* timings.")
     static let climbIntroPanSeconds: TimeInterval = climbRevealFinalPanSeconds
 
-    // MARK: - VS splash portraits
+    // MARK: - Fight cue splash (pre-board)
+
+    /// Compact fight cue — portrait + count, then cut to the board.
+    static let versusRescueTotalSeconds: TimeInterval = 3.6
+    /// Card settled; hold beat begins.
+    static let versusRescueHoldStartsAt: TimeInterval = 0.55
+    /// Cutaway wipe begins.
+    static let versusRescueCutawayStartsAt: TimeInterval = 2.6
+    /// Mid-cutaway: board chrome + battle music.
+    static let versusRescueBoardRevealAt: TimeInterval = 2.95
+    /// Overlay gone; intro finishes (must ≈ `versusRescueTotalSeconds`).
+    static let versusRescueDoneAt: TimeInterval = versusRescueTotalSeconds
 
     /// Enemy kinds that must resolve a bundled figurine (or idle portrait fallback).
     /// Burrow Jackal is an optional Fox alternate — idle token counts as figurine.

@@ -32,9 +32,9 @@ enum MarbleVoyageCapture {
     static let readyFileName = "READY"
     static let defaultSeed: UInt64 = 42
     /// First campaign scrap fight — matches `-marbleVoyageDebugFight` Trail scrap.
-    static let captureFightNodeID = "land0_poi1"
+    static let captureFightNodeID = "land0_fight1"
     /// Mid-land encounter / treasure / shrine for the event still.
-    static let captureEventNodeID = "land0_poi2"
+    static let captureEventNodeID = "land0_gift1"
 
     static var isActive: Bool { stage != nil }
 

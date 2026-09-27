@@ -7,19 +7,100 @@ final class MarbleVoyageTests: XCTestCase {
         for seed: UInt64 in [0, 1, 42, 999, .max] {
             let run = MarbleVoyageRun.makeCampaign(seed: seed)
             let first = try XCTUnwrap(run.reachableChoices().first)
-            XCTAssertEqual(first.id, "land0_poi1")
+            XCTAssertEqual(first.id, "land0_fight1")
             XCTAssertEqual(first.waveAttacker, .porcupineBoxer)
-            let roster = PeglinBattleRules.makeRescueRoster(
-                wave: try XCTUnwrap(first.waveAttacker),
-                focus: run.gang.miniBoss(arcIndex: 0),
+            let focus = first.waveAttacker ?? .porcupineBoxer
+            let rosterSeed = PeglinBattleRules.rescueRosterSeed(
+                wave: focus,
+                focus: focus,
                 role: first.gangRole,
-                seed: seed
+                climbStage: first.stage
+            )
+            let roster = PeglinBattleRules.makeRescueRoster(
+                wave: focus,
+                focus: focus,
+                role: first.gangRole,
+                seed: rosterSeed
             )
             XCTAssertEqual(roster.first?.kind, .porcupineBoxer)
-            XCTAssertEqual(roster.count, 3)
+            XCTAssertEqual(roster.count, PlinkCreepWave.henchmanCount)
+            // One creep type — no icon zoo of mixed hench art.
+            XCTAssertTrue(roster.allSatisfy { $0.kind == .porcupineBoxer })
             XCTAssertFalse(roster.contains { $0.kind.isNamedCrew })
             XCTAssertFalse(PlinkAttackerKind.porcupineBoxer.isFlying)
+            // Soft creeps — bombs one-shot the wave.
+            XCTAssertLessThanOrEqual(
+                roster.map(\.maxHP).max() ?? 0,
+                PlinkCreepWave.bombAOEDamage
+            )
+
+            // Versus splash / board share the same pack for a given fight.
+            let again = PeglinBattleRules.makeRescueRoster(
+                wave: focus,
+                focus: focus,
+                role: first.gangRole,
+                seed: rosterSeed
+            )
+            XCTAssertEqual(again.map(\.kind), roster.map(\.kind))
+            XCTAssertEqual(
+                PeglinBattleRules.rescueCastKinds(from: roster).first,
+                .porcupineBoxer
+            )
         }
+    }
+
+    func testBigBossRescueCastHasHonorGuard() throws {
+        let run = MarbleVoyageRun.makeCampaign(seed: 7)
+        let boss = try XCTUnwrap(run.nodes.first { $0.gangRole == .bigBoss })
+        let lead = try XCTUnwrap(boss.waveAttacker ?? run.gang.bigBoss)
+        let seed = PeglinBattleRules.rescueRosterSeed(
+            wave: lead,
+            focus: lead,
+            role: .bigBoss,
+            climbStage: boss.stage
+        )
+        let roster = PeglinBattleRules.makeRescueRoster(
+            wave: lead,
+            focus: lead,
+            role: .bigBoss,
+            seed: seed
+        )
+        XCTAssertEqual(roster.count, 1 + PlinkCreepWave.bigBossGuardCount)
+        XCTAssertEqual(roster.first?.kind, lead)
+        XCTAssertEqual(roster.first?.maxHP, PeglinBattleRules.foeMaxHP(for: lead, role: .bigBoss))
+        let guards = Array(roster.dropFirst())
+        XCTAssertEqual(Set(guards.map(\.kind)).count, 1, "honor guard should be one creep type")
+    }
+
+    func testMiniBossRescueCastIsLeadPlusCreepAdds() throws {
+        let run = MarbleVoyageRun.makeCampaign(seed: 11)
+        let node = try XCTUnwrap(run.nodes.first { $0.gangRole == .miniBoss })
+        let lead = try XCTUnwrap(node.waveAttacker)
+        let seed = PeglinBattleRules.rescueRosterSeed(
+            wave: lead,
+            focus: lead,
+            role: .miniBoss,
+            climbStage: node.stage
+        )
+        let roster = PeglinBattleRules.makeRescueRoster(
+            wave: lead,
+            focus: lead,
+            role: .miniBoss,
+            seed: seed
+        )
+        XCTAssertEqual(roster.count, 1 + PlinkCreepWave.miniBossAddCount)
+        XCTAssertEqual(roster.first?.kind, lead)
+        let adds = Array(roster.dropFirst())
+        XCTAssertTrue(adds.allSatisfy { $0.maxHP <= PlinkCreepWave.henchGroundHP })
+        XCTAssertEqual(Set(adds.map(\.kind)).count, 1, "mini adds should be one creep type")
+    }
+
+    func testCreepWaveComboPayoffs() {
+        XCTAssertEqual(PlinkCreepWave.comboBonusXP(kills: 1), 0)
+        XCTAssertEqual(PlinkCreepWave.comboBonusXP(kills: 3), 12)
+        XCTAssertEqual(PlinkCreepWave.comboLabel(kills: 2), "DOUBLE! ×2")
+        XCTAssertEqual(PlinkCreepWave.comboLabel(kills: 5), "CREEP WAVE! ×5")
+        XCTAssertEqual(PlinkCreepWave.comboDamageBonus(kills: 4), 8)
     }
 
     func testPorcupineBundledArtLoadsForEveryCombatPose() throws {
@@ -71,7 +152,8 @@ final class MarbleVoyageTests: XCTestCase {
             run.nodes.count,
             1 + MarbleVoyageRun.campaignTotalFights + MarbleVoyageRun.campaignEventBeats
         )
-        XCTAssertEqual(run.edges.count, run.nodes.count - 1)
+        // Branching chart: more edges than a linear path.
+        XCTAssertGreaterThan(run.edges.count, run.nodes.count - 1)
 
         XCTAssertEqual(run.gang.miniBossOrder.count, MarbleVoyageRun.gangMiniArcCount)
         XCTAssertFalse(run.gang.miniBossOrder.contains(run.gang.bigBoss))
@@ -95,60 +177,86 @@ final class MarbleVoyageTests: XCTestCase {
         XCTAssertEqual(landBoss.miniArcIndex, 0)
         XCTAssertEqual(run.attackerPortraitScale(for: landBoss), 1.25)
 
-        let hench = run.node("land0_poi1")!
+        let hench = run.node("land0_fight1")!
         XCTAssertEqual(hench.gangRole, .henchman)
         XCTAssertEqual(hench.miniArcIndex, 0)
         XCTAssertFalse(hench.waveAttacker?.isNamedCrew == true)
         XCTAssertTrue(MarbleVoyageGangRun.henchmenPool.contains(hench.waveAttacker!))
+        XCTAssertEqual(hench.waveAttacker, MarbleVoyageGangRun.openerHenchman)
+
+        // No duplicate henchmen on the chart until the production pool is exhausted.
+        let henchKinds = run.nodes.compactMap { node -> PlinkAttackerKind? in
+            guard node.gangRole == .henchman else { return nil }
+            return node.waveAttacker
+        }
+        let unique = Set(henchKinds)
+        XCTAssertEqual(
+            unique.count,
+            min(henchKinds.count, MarbleVoyageGangRun.henchmenPool.count),
+            "henchmen should be unique until pool exhausted; got \(henchKinds.map(\.rawValue))"
+        )
+        XCTAssertEqual(
+            henchKinds.filter { $0 == .porcupineBoxer }.count,
+            1,
+            "Porcupine opener must appear exactly once before pool wraps"
+        )
 
         XCTAssertEqual(hench.title, "Trail scrap")
-        // Middle scrap is an encounter, not Bridge scrap fight.
-        let mid = run.node("land0_poi2")!
-        XCTAssertTrue([MarbleVoyageNodeKind.treasure, .mystery, .shrine].contains(mid.kind))
-        XCTAssertEqual(run.node("land0_poi3")?.title, "Cliff scrap")
+        let gift = run.node("land0_gift1")!
+        XCTAssertTrue([MarbleVoyageNodeKind.treasure, .mystery, .shrine].contains(gift.kind))
+        XCTAssertFalse(gift.awardsHeroXP)
+        XCTAssertEqual(run.node("land0_fight2")?.title, "Bridge scrap")
+        XCTAssertTrue(run.node("land0_fight2")?.grantsTreasureOnWin == true)
         XCTAssertEqual(landBoss.title, "\(run.gang.miniBossOrder[0].displayName)’s gate")
         XCTAssertNotNil(run.node("land0_rest"))
-        XCTAssertEqual(run.node("land1_poi1")?.title, "Canal scrap")
+        XCTAssertEqual(run.node("land1_fight1")?.title, "Canal scrap")
         XCTAssertEqual(
             run.node("land2_boss")?.title,
             "\(run.gang.miniBossOrder[2].displayName)’s gate"
         )
         XCTAssertEqual(boss.title, "Summit · \(run.gang.bigBoss.displayName)")
 
-        // Linear: exactly one way forward at every landing.
+        // Fight vs gift at the dock.
         let choices = run.reachableChoices()
-        XCTAssertEqual(choices.count, 1)
-        XCTAssertEqual(choices.first?.id, "land0_poi1")
+        XCTAssertEqual(choices.count, 2)
+        XCTAssertEqual(Set(choices.map(\.id)), Set(["land0_fight1", "land0_gift1"]))
     }
 
     func testCampaignShopOpensAfterEveryNonSummitFight() {
         var run = MarbleVoyageRun.make(mode: .campaign, seed: 11)
-        run.choose("land0_poi1")
+        run.choose("land0_fight1")
         run.finishFight(won: true, remainingHP: 100, goldEarned: 40)
 
-        XCTAssertEqual(run.phase, .shop(afterNodeID: "land0_poi1"))
+        XCTAssertEqual(run.phase, .shop(afterNodeID: "land0_fight1"))
         XCTAssertEqual(run.coins, 40)
         XCTAssertNotNil(run.shop)
         XCTAssertEqual(run.shopVisitCount, 1)
 
-        XCTAssertEqual(run.applyShop(.heal), .ok(message: "Bell balm · +20 HP"))
-        XCTAssertEqual(run.playerHP, 120)
-        XCTAssertEqual(run.coins, 15)
-
+        let hpBeforeHeal = run.playerHP
+        let expectedHeal = min(run.shopHealAmount(), run.playerMaxHP - hpBeforeHeal)
+        XCTAssertGreaterThan(expectedHeal, 0)
+        XCTAssertEqual(run.applyShop(.heal), .ok(message: "Bell balm · +\(expectedHeal) HP"))
+        XCTAssertEqual(run.playerHP, hpBeforeHeal + expectedHeal)
+        let afterHeal = 40 - MarbleVoyageEconomyTuning.recommended.healPrice
+        XCTAssertEqual(run.coins, afterHeal)
         XCTAssertEqual(run.applyShop(.heal), .alreadyMaxed)
+
+        // Gate: purse below upgrade price still refuses.
+        run.coins = MarbleVoyageEconomyTuning.recommended.ballUpgradePrice - 1
         XCTAssertEqual(run.applyShop(.ballUpgrade), .cannotAfford)
+        run.coins = afterHeal
 
         run.leaveShop()
         XCTAssertEqual(run.phase, .map)
         XCTAssertNil(run.shop)
         XCTAssertEqual(run.record.shops.count, 1)
         XCTAssertEqual(run.record.shops[0].walletBefore, 40)
-        XCTAssertEqual(run.record.shops[0].walletAfter, 15)
+        XCTAssertEqual(run.record.shops[0].walletAfter, afterHeal)
     }
 
     func testShopBallUpgradeRaisesLowestMarble() {
         var run = MarbleVoyageRun.make(mode: .campaign, seed: 12)
-        run.choose("land0_poi1")
+        run.choose("land0_fight1")
         run.finishFight(won: true, remainingHP: 120, goldEarned: 60)
 
         XCTAssertEqual(run.marbleCollection.count, MarbleVoyageMarbleRules.starterBagCount)
@@ -167,7 +275,7 @@ final class MarbleVoyageTests: XCTestCase {
 
     func testShopBuyAndDestroyMarbleMutateBag() {
         var run = MarbleVoyageRun.make(mode: .campaign, seed: 13)
-        run.choose("land0_poi1")
+        run.choose("land0_fight1")
         run.finishFight(won: true, remainingHP: 120, goldEarned: 80)
 
         XCTAssertEqual(run.marbleCollection.count, 4)
@@ -238,9 +346,12 @@ final class MarbleVoyageTests: XCTestCase {
         var run = MarbleVoyageRun.make(mode: .endless, seed: 7)
         XCTAssertEqual(run.mode, .endless)
         let first = run.reachableChoices()
-        XCTAssertEqual(first.count, 2)
-        XCTAssertEqual(Set(first.map(\.kind)), [.fight])
+        // Linear progression — one next beat, never a branching climb chart.
+        XCTAssertEqual(first.count, 1)
+        XCTAssertEqual(first[0].kind, .fight)
         XCTAssertEqual(first[0].gangRole, .henchman)
+        XCTAssertEqual(first[0].stage, 1)
+        XCTAssertEqual(run.endlessDisplayWave, 1)
         run.choose(first[0].id)
         run.finishFight(won: true, remainingHP: 90)
         XCTAssertEqual(run.phase, .shop(afterNodeID: first[0].id))
@@ -248,27 +359,54 @@ final class MarbleVoyageTests: XCTestCase {
         XCTAssertEqual(run.phase, .map)
         XCTAssertEqual(run.fightsCleared, 1)
         let next = run.reachableChoices()
-        XCTAssertFalse(next.isEmpty)
-        XCTAssertEqual(Set(next.map(\.kind)).intersection([.treasure, .mystery, .shrine]).count, next.count)
+        XCTAssertEqual(next.count, 1)
+        // Wave 2 is still a fight (rests land on wave 4, bosses on wave 5).
+        XCTAssertEqual(next[0].kind, .fight)
+        XCTAssertEqual(next[0].stage, 2)
+    }
+
+    func testEndlessRestAndBossWavesAreLinear() {
+        var run = MarbleVoyageRun.make(mode: .endless, seed: 11)
+        // Advance through waves 1…3 fights via shop, then wave 4 should be a rest.
+        for expected in 1...3 {
+            let beat = try! XCTUnwrap(run.endlessNextBeat)
+            XCTAssertEqual(beat.stage, expected)
+            XCTAssertEqual(beat.kind, .fight)
+            run.choose(beat.id)
+            run.finishFight(won: true, remainingHP: 80)
+            run.leaveShop()
+        }
+        let rest = try! XCTUnwrap(run.endlessNextBeat)
+        XCTAssertEqual(rest.stage, 4)
+        XCTAssertTrue([MarbleVoyageNodeKind.treasure, .mystery, .shrine].contains(rest.kind))
+        run.choose(rest.id)
+        run.applyEvent(.init(message: "Rest", hpDelta: 0))
+        run.leaveShop()
+        let boss = try! XCTUnwrap(run.endlessNextBeat)
+        XCTAssertEqual(boss.stage, 5)
+        XCTAssertEqual(boss.kind, .boss)
     }
 
     func testFightWinCarriesHPWithoutHeal() {
         var run = MarbleVoyageRun.make(mode: .campaign, seed: 1)
-        run.choose("land0_poi1")
-        XCTAssertEqual(run.phase, .fight(nodeID: "land0_poi1"))
+        run.choose("land0_fight1")
+        XCTAssertEqual(run.phase, .fight(nodeID: "land0_fight1"))
         XCTAssertEqual(run.pathTaken.count, 1)
         XCTAssertEqual(run.pathTaken.first?.from, "start")
-        XCTAssertEqual(run.pathTaken.first?.to, "land0_poi1")
-        XCTAssertTrue(run.didTraverse(from: "start", to: "land0_poi1"))
-        XCTAssertFalse(run.didTraverse(from: "start", to: "land0_poi2"))
+        XCTAssertEqual(run.pathTaken.first?.to, "land0_fight1")
+        XCTAssertTrue(run.didTraverse(from: "start", to: "land0_fight1"))
+        XCTAssertFalse(run.didTraverse(from: "start", to: "land0_gift1"))
         run.finishFight(won: true, remainingHP: 77)
-        XCTAssertEqual(run.playerHP, 77)
-        XCTAssertTrue(run.lastEventLine.contains("77"))
-        // Shop first, then back on the chart — the fight never free-heals.
-        XCTAssertEqual(run.phase, .shop(afterNodeID: "land0_poi1"))
+        // Fight sets HP from remaining; win XP may bump max/current HP, but never free-heals to full.
+        let carried = run.playerHP
+        XCTAssertGreaterThanOrEqual(carried, 77)
+        XCTAssertLessThan(carried, run.playerMaxHP)
+        XCTAssertTrue(run.lastEventLine.contains("\(carried)"))
+        // Shop first, then back on the chart — leaving the shop does not heal.
+        XCTAssertEqual(run.phase, .shop(afterNodeID: "land0_fight1"))
         run.leaveShop()
         XCTAssertEqual(run.phase, .map)
-        XCTAssertEqual(run.playerHP, 77)
+        XCTAssertEqual(run.playerHP, carried)
     }
 
     func testHealOnlyFromEventEffects() {
@@ -282,7 +420,7 @@ final class MarbleVoyageTests: XCTestCase {
 
     func testDefeatOnZeroHP() {
         var run = MarbleVoyageRun.make(mode: .campaign, seed: 3)
-        run.choose("land0_poi1")
+        run.choose("land0_fight1")
         run.finishFight(won: false, remainingHP: 0)
         XCTAssertEqual(run.phase, .defeat)
         XCTAssertEqual(run.playerHP, 0)
@@ -304,7 +442,7 @@ final class MarbleVoyageTests: XCTestCase {
 
     func testEnemyHPAndAttackScaleWithThreat() {
         let run = MarbleVoyageRun.make(mode: .campaign, seed: 5)
-        let easy = run.node("land0_poi1")!
+        let easy = run.node("land0_fight1")!
         let mid = run.node("land1_boss")!
         let boss = run.node("boss")!
         XCTAssertLessThan(run.enemyMaxHP(for: easy), run.enemyMaxHP(for: mid))
@@ -364,7 +502,8 @@ final class MarbleVoyageTests: XCTestCase {
     }
 
     func testDeckReadyThresholdAndCap() {
-        XCTAssertEqual(PeglinBattleRules.maxDeckCount, 10)
+        // Bag can grow large; spirit fights recycle forever so this is not a hard fight limit.
+        XCTAssertEqual(PeglinBattleRules.maxDeckCount, 99)
         XCTAssertEqual(PeglinBattleRules.readyDeckCount, 3)
         XCTAssertEqual(PeglinBattleRules.mixFillCount, 10)
     }
@@ -458,7 +597,7 @@ final class MarbleVoyageTests: XCTestCase {
             order: .bossToAbbie
         ).map(\.id)
         XCTAssertEqual(bossFirst.first, summitID)
-        XCTAssertEqual(bossFirst.last, "land0_poi1")
+        XCTAssertEqual(bossFirst.last, "land0_fight1")
         XCTAssertTrue(bossFirst.contains("land0_boss"))
         // Matches map top→bottom scrub: summit first, early-trail scraps last.
         let nibIdx = bossFirst.firstIndex(of: "land0_boss")!

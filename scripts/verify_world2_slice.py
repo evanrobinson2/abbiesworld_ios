@@ -74,10 +74,38 @@ def run_marble_voyage_design_rules() -> dict[str, str]:
     }
 
 
+def run_marble_voyage_opening_screen_dag() -> dict[str, str]:
+    """Predicted opening-screen contracts (title/chart/fight/shop/event)."""
+    import subprocess
+
+    dag_script = ROOT / "scripts" / "voyage_opening_screen_dag.py"
+    if not dag_script.is_file():
+        raise AssertionError("marble-voyage-opening-dag: voyage_opening_screen_dag.py missing")
+    out = ROOT / "artifacts" / "voyage-opening-dag" / "latest.json"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    proc = subprocess.run(
+        [sys.executable, str(dag_script), "--json", str(out), "--quiet"],
+        cwd=str(ROOT),
+        capture_output=True,
+        text=True,
+    )
+    if proc.returncode != 0:
+        detail = (proc.stdout or proc.stderr or "opening-screen DAG failed").strip()
+        raise AssertionError(f"marble-voyage-opening-dag: {detail}")
+    return {
+        "invariant": "marble-voyage-opening-dag",
+        "status": "pass",
+        "evidence": f"opening-screen DAG green → {out}",
+    }
+
+
 def main() -> int:
     # Voyage gates first so major-build preflight is always exercised even if
     # older slice file paths drift.
-    checks: list[dict[str, str]] = [run_marble_voyage_design_rules()]
+    checks: list[dict[str, str]] = [
+        run_marble_voyage_design_rules(),
+        run_marble_voyage_opening_screen_dag(),
+    ]
 
     root_view = read("Views/World2/World2RootView.swift")
     map_view = read("Views/World2/WorldMapView.swift")

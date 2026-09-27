@@ -38,7 +38,10 @@
     "sourceHashSha256": "8dab3a964b4156cf8170c0a71467e7624c8847ba88730a9298bed9529ef908b7",
     "notes": "Transparent destination token ready for builder bind. RGBA/corner-alpha checks passed. Square canvas, full silhouette; preserve UI-supplied label. Actual 64\u2013120pt runtime legibility and wiring remain unverified. No catalog or Swift edits. Runtime catalog bound as world2_token_marbleVoyage_climb_treasure (2026-09-26T23:28:16Z).",
     "catalogImageset": "world2_token_marbleVoyage_climb_treasure",
-    "runtimeBoundAt": "2026-09-26T23:28:16Z"
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_token_marbleVoyage_climb_treasure.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
   },
   "createdAt": "2026-09-26T20:45:00Z",
   "type": "map_token",

@@ -64,10 +64,14 @@ struct PlinkBattleHostView: View {
     var startingMarbles: [MarbleVoyageOwnedMarble]? = nil
     /// Run ballLevel for per-shot damage (shop upgrades).
     var startingBallLevel: Int = 1
+    /// Hero level from voyage XP (multiplies cage damage).
+    var startingHeroLevel: Int = MarbleVoyageHeroLevel.minLevel
+    /// XP into current hero level (for the fight header bar).
+    var startingHeroXPIntoLevel: Int = 0
     var onExit: () -> Void
     var onVictory: (() -> Void)? = nil
-    /// `(won, remainingPlayerHP, coinsEarned)` — used by voyage runs that persist HP + wallet.
-    var onBattleEnded: ((Bool, Int, Int) -> Void)? = nil
+    /// `(won, remainingPlayerHP, coinsEarned, comboXP)` — voyage persists HP + wallet + combo bonus XP.
+    var onBattleEnded: ((Bool, Int, Int, Int) -> Void)? = nil
     /// Automation / debug: seed a mix deck and jump straight into the versus intro.
     var autoStartFight: Bool = false
     /// Capture stills: skip versus splash, show the board chrome, keep physics paused.
@@ -93,6 +97,10 @@ struct PlinkBattleHostView: View {
     @State private var foeRoster: [PlinkBattleFoe] = []
     @State private var frontFoeID: UUID?
     @State private var bombLobFlash = false
+    /// Kid-facing multi-kill callout (DOUBLE / TRIPLE / CREEP WAVE).
+    @State private var comboFlashText = ""
+    /// Accumulated bomb multi-kill XP for this fight (capped on finish).
+    @State private var fightComboXP = 0
     @State private var playerHP = 0
     @State private var playerMaxHP = 0
     @State private var ballsLeft = 10
@@ -160,6 +168,12 @@ struct PlinkBattleHostView: View {
     /// 0…1 — drives Metal ripple + shock rings from the aim pad.
     @State private var turboFxStrength: CGFloat = 0
     @State private var tiltPhase: PlinkTiltPhase? = nil
+    @State private var gravityWaveCountdown: Int? = nil
+    @State private var gravityWaveActive = false
+    /// Edge-detect settle → aim for soft camera dip.
+    @State private var lastHudPhase: PeggleScene.Phase? = nil
+    /// Edge-detect gravity rift arm haptic.
+    @State private var wasGravityWaveActive = false
     @StateObject private var music = PlinkMusicService()
 
     private struct MarbleFlight: Identifiable, Equatable {
@@ -210,10 +224,9 @@ struct PlinkBattleHostView: View {
                         fightLayer
                         if showVersusIntro {
                             PlinkBattleVersusIntroView(
-                                title: title,
                                 enemyKind: enemyKind,
-                                badGuys: PlinkAttackerKind.namedCrew,
-                                focusBadGuy: chromeFocusCrew,
+                                badGuys: fightCastKinds,
+                                focusBadGuy: fightCastKinds.first ?? chromeFocusCrew,
                                 reduceMotion: reduceMotion,
                                 onRevealBoard: {
                                     music.playBoard()
@@ -315,18 +328,33 @@ struct PlinkBattleHostView: View {
         return PeglinBattleRules.enemyCounterAttack(for: enemyKind)
     }
 
-    /// Current-wave attacker from the named badguy gang (Raze→Vix→Morrow→Nib).
-    /// Strip shows the full crew; forest fauna via biome override later.
+    /// Current-wave attacker (henchman / mini / summit).
     private var waveAttacker: PlinkAttackerKind {
         waveAttackerOverride
             ?? PlinkAttackerKind.forClimbStage(climbStage, roster: .badguyGang)
     }
 
-    /// Named crew to highlight in chrome (mini-arc head or big boss); falls back to wave foe.
+    /// Lead foe for this fight — the one you actually face first (highest rank on the tile).
     private var chromeFocusCrew: PlinkAttackerKind {
-        if let focusCrewMember, focusCrewMember.isNamedCrew { return focusCrewMember }
-        if waveAttacker.isNamedCrew { return waveAttacker }
-        return PlinkAttackerKind.forClimbStage(climbStage, roster: .badguyGang)
+        switch gangFightRole {
+        case .henchman:
+            return waveAttacker
+        case .miniBoss, .bigBoss:
+            if let focusCrewMember, focusCrewMember.isNamedCrew { return focusCrewMember }
+            if waveAttacker.isNamedCrew { return waveAttacker }
+            return PlinkAttackerKind.forClimbStage(climbStage, roster: .badguyGang)
+        case .none:
+            if let focusCrewMember, focusCrewMember.isNamedCrew { return focusCrewMember }
+            if waveAttacker.isNamedCrew { return waveAttacker }
+            return waveAttacker
+        }
+    }
+
+    /// Exact pack on the board / versus splash (lead first).
+    private var fightCastKinds: [PlinkAttackerKind] {
+        let kinds = PeglinBattleRules.rescueCastKinds(from: foeRoster)
+        if !kinds.isEmpty { return kinds }
+        return [chromeFocusCrew]
     }
 
     private var frontFoe: PlinkBattleFoe? {
@@ -335,13 +363,23 @@ struct PlinkBattleHostView: View {
     }
 
     private func rebuildFoeRoster() {
+        let focus = chromeFocusCrew
+        let seed = PeglinBattleRules.rescueRosterSeed(
+            wave: waveAttacker,
+            focus: focus,
+            role: gangFightRole,
+            climbStage: climbStage
+        )
         let roster = PeglinBattleRules.makeRescueRoster(
             wave: waveAttacker,
-            focus: chromeFocusCrew,
-            role: gangFightRole
+            focus: focus,
+            role: gangFightRole,
+            seed: seed
         )
         foeRoster = roster
         frontFoeID = roster.first?.id
+        fightComboXP = 0
+        comboFlashText = ""
         if let front = roster.first {
             enemyMaxHP = front.maxHP
             enemyHP = front.hp
@@ -367,27 +405,63 @@ struct PlinkBattleHostView: View {
 
     private func applyBombAOE(_ amount: Int) {
         guard amount > 0 else { return }
-        withAnimation(.spring(response: 0.35, dampingFraction: 0.7)) {
-            bombLobFlash = true
-        }
-        var nonFrontKills = 0
+        // No spring animation here — bomb mid-flight must stay cheap.
+        bombLobFlash = true
         let frontID = frontFoeID
+        var killCount = 0
+        var killedFront = false
         for i in foeRoster.indices where !foeRoster[i].isDefeated {
             let before = foeRoster[i].hp
             foeRoster[i].hp = max(0, before - amount)
-            if before > 0, foeRoster[i].hp == 0, foeRoster[i].id != frontID {
-                nonFrontKills += 1
+            if before > 0, foeRoster[i].hp == 0 {
+                killCount += 1
+                if foeRoster[i].id == frontID {
+                    killedFront = true
+                }
             }
         }
-        if nonFrontKills > 0 {
-            bridge?.scene.regenerateTurbo(kills: nonFrontKills)
+        if killCount > 0 {
+            bridge?.scene.regenerateTurbo(kills: killCount)
         }
-        if let id = frontFoeID, let idx = foeRoster.firstIndex(where: { $0.id == id }) {
+        let comboXP = PlinkCreepWave.comboBonusXP(kills: killCount)
+        if comboXP > 0 {
+            fightComboXP = min(
+                MarbleVoyageHeroLevel.comboXPCapPerFight,
+                fightComboXP + comboXP
+            )
+        }
+        let label = PlinkCreepWave.comboLabel(kills: killCount)
+        if !label.isEmpty {
+            comboFlashText = label
+            let bonus = PlinkCreepWave.comboDamageBonus(kills: killCount)
+            if bonus > 0, let scene = bridge?.scene {
+                scene.pendingComboCageBonus = min(24, scene.pendingComboCageBonus + bonus)
+            }
+            statusLine = "\(label) Bomb −\(amount) · \(killCount) creeps!"
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                if comboFlashText == label {
+                    comboFlashText = ""
+                }
+            }
+        } else {
+            statusLine = "Bomb splash! −\(amount) to every bad guy"
+        }
+
+        if killedFront {
+            if let next = foeRoster.first(where: { !$0.isDefeated }) {
+                // Promote while the marble still flies — next creep eats leftover peg damage.
+                frontFoeID = next.id
+                syncFrontFoeIntoScene()
+            } else {
+                enemyHP = 0
+                bridge?.scene.loadFrontFoe(maxHP: max(1, enemyMaxHP), currentHP: 0)
+            }
+        } else if let id = frontFoeID, let idx = foeRoster.firstIndex(where: { $0.id == id }) {
             enemyHP = foeRoster[idx].hp
             bridge?.scene.loadFrontFoe(maxHP: foeRoster[idx].maxHP, currentHP: foeRoster[idx].hp)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
-            withAnimation(.easeOut(duration: 0.2)) { bombLobFlash = false }
+            bombLobFlash = false
         }
     }
 
@@ -436,34 +510,63 @@ struct PlinkBattleHostView: View {
     }
 
     private var deckCrewCaption: String {
+        let lead = chromeFocusCrew
         switch gangFightRole {
         case .bigBoss:
-            return "Summit boss · \(chromeFocusCrew.displayName)"
+            return "Summit boss · \(lead.displayName)"
         case .miniBoss:
-            return "Land boss · \(chromeFocusCrew.displayName)"
+            return fightCastKinds.count > 1
+                ? "Land boss · \(lead.displayName) + crew"
+                : "Land boss · \(lead.displayName)"
         case .henchman:
-            return "\(chromeFocusCrew.shortName)’s crew"
+            let n = max(fightCastKinds.count, PlinkCreepWave.henchmanCount)
+            return fightCastKinds.count > 1
+                ? "Creep wave · \(n)"
+                : lead.displayName
         case .none:
             return "Rescue the friend!"
         }
     }
 
+    @ViewBuilder
     private var deckCrewStrip: some View {
-        let focus = chromeFocusCrew
+        let cast = fightCastKinds
+        let focus = cast.first ?? chromeFocusCrew
         let activeScale = max(1, attackerPortraitScale)
-        return HStack(alignment: .bottom, spacing: 4) {
-            if !waveAttacker.isNamedCrew {
-                PlinkAttackerBattlePortrait(kind: waveAttacker, pose: .idle, size: 56)
-            }
-            ForEach(PlinkAttackerKind.namedCrew) { member in
-                let isFocus = member == focus
-                let size: CGFloat = isFocus ? 44 * min(activeScale, 3) : 36
+        let uniqueCast = cast.reduce(into: [PlinkAttackerKind]()) { acc, kind in
+            if !acc.contains(kind) { acc.append(kind) }
+        }
+        // Uniform creep wave → one portrait + count, not seven stacked clones.
+        if cast.count > 1, uniqueCast.count == 1 {
+            HStack(alignment: .bottom, spacing: 8) {
                 PlinkAttackerBattlePortrait(
-                    kind: member,
+                    kind: focus,
                     pose: .idle,
-                    size: size
+                    size: 48 * min(activeScale, 2.4)
                 )
-                .opacity(isFocus ? 1 : 0.55)
+                Text("×\(cast.count)")
+                    .font(.system(size: 28, weight: .black, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.9))
+            }
+        } else {
+            HStack(alignment: .bottom, spacing: uniqueCast.count == 1 ? 0 : -6) {
+                ForEach(Array(uniqueCast.enumerated()), id: \.offset) { index, member in
+                    let isFocus = index == 0 || member == focus
+                    let size: CGFloat = isFocus ? 48 * min(activeScale, 2.4) : 36
+                    PlinkAttackerBattlePortrait(
+                        kind: member,
+                        pose: .idle,
+                        size: size
+                    )
+                    .opacity(isFocus ? 1 : 0.72)
+                    .zIndex(isFocus ? 10 : Double(uniqueCast.count - index))
+                }
+                if cast.count > uniqueCast.count {
+                    Text("×\(cast.count)")
+                        .font(.system(size: 22, weight: .black, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.85))
+                        .padding(.leading, 4)
+                }
             }
         }
     }
@@ -489,7 +592,7 @@ struct PlinkBattleHostView: View {
                                 Text("Choose your Marbles")
                                     .font(.system(size: 26, weight: .heavy, design: .rounded))
                                     .foregroundStyle(.white)
-                                Text("Tap a marble — drop as fast as you like (up to \(PeglinBattleRules.maxDeckCount)). Ready after \(PeglinBattleRules.readyDeckCount)!")
+                                Text("Tap marbles as fast as you like — they recycle forever in the fight. Ready after \(PeglinBattleRules.readyDeckCount)!")
                                     .font(.system(size: 14, weight: .medium, design: .rounded))
                                     .foregroundStyle(.white.opacity(0.9))
                                     .fixedSize(horizontal: false, vertical: true)
@@ -1082,7 +1185,7 @@ struct PlinkBattleHostView: View {
 
                             // Damage rails — accumulate mid-shot, then shoot up to portraits.
                             damageRailChip(amount: playerRailAccum, hitsPlayer: true, pulsing: playerRailPulse)
-                                .padding(.leading, showFightDrawer ? MarbleVoyageDesignRules.battleFeedMinWidth + 60 : 44)
+                                .padding(.leading, 12)
                                 .padding(.top, 12)
                                 .background(
                                     GeometryReader { geo in
@@ -1098,7 +1201,7 @@ struct PlinkBattleHostView: View {
                                 .allowsHitTesting(false)
 
                             damageRailChip(amount: enemyRailAccum, hitsPlayer: false, pulsing: enemyRailPulse)
-                                .padding(.trailing, 10)
+                                .padding(.trailing, showFightDrawer ? MarbleVoyageDesignRules.battleFeedMinWidth + 60 : 44)
                                 .padding(.top, 12)
                                 .background(
                                     GeometryReader { geo in
@@ -1113,42 +1216,42 @@ struct PlinkBattleHostView: View {
                                 .zIndex(7)
                                 .allowsHitTesting(false)
 
-                            // Always-visible FIFO power wells (not buried in the drawer).
+                            // Power wells — bottom-left thumb reach.
                             powerSlotTray
-                                .padding(.leading, 46)
-                                .padding(.bottom, 14)
+                                .padding(.leading, 10)
+                                .padding(.bottom, 10)
                                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
                                 .opacity(Double(fightIntroProgress))
                                 .zIndex(12)
                                 .allowsHitTesting(fightIntroProgress > 0.5)
 
-                            // Aim trackpad — fixed-size bottom-right marble surface.
-                            currentOrbChip
-                                .padding(.trailing, 12)
-                                .padding(.bottom, 14)
-                                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
-                                .opacity(Double(fightIntroProgress))
-                                .zIndex(12)
-                                .allowsHitTesting(fightIntroProgress > 0.5)
-
                             tiltPowerOverlay
+                            gravityWaveOverlay
                                 .opacity(Double(fightIntroProgress))
                                 .zIndex(14)
                                 .allowsHitTesting(false)
 
-                            // Feed + music + powers — left-side drawer (board stays clear).
+                            // Feed / leave / music — single-icon rail on the RIGHT.
                             fightSideDrawer
                                 .opacity(Double(fightIntroProgress))
                                 .zIndex(9)
                         }
                         .offset(x: boardShake.width, y: boardShake.height)
-                        .plinkTurboDistortion(strength: turboFxStrength, reduceMotion: reduceMotion)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
 
-                        fightEnemyCard
-                            .frame(width: cardWidth)
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .opacity(Double(fightIntroProgress))
+                        // Cast card + aim trackpad stacked where RESCUE used to sit.
+                        VStack(spacing: 8) {
+                            fightEnemyCard
+                                .frame(maxHeight: .infinity, alignment: .top)
+
+                            currentOrbChip
+                                .plinkTurboDistortion(strength: turboFxStrength, reduceMotion: reduceMotion)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .opacity(Double(fightIntroProgress))
+                                .allowsHitTesting(fightIntroProgress > 0.5)
+                        }
+                        .frame(width: cardWidth)
+                        .opacity(Double(fightIntroProgress))
                     }
                     .frame(width: row.size.width, height: row.size.height, alignment: .top)
                 }
@@ -1181,12 +1284,6 @@ struct PlinkBattleHostView: View {
         return "Battle · Foe \(foeIndex) of \(total)"
     }
 
-    private var fightObjectiveLine: String {
-        let total = max(1, foeRoster.count)
-        let name = enemyKind?.shortName ?? "friend"
-        return "Rescue \(name) — defeat all \(total) foes"
-    }
-
     private var fightRoleLabel: String {
         switch gangFightRole {
         case .bigBoss: return "SUMMIT BOSS"
@@ -1195,70 +1292,29 @@ struct PlinkBattleHostView: View {
         }
     }
 
-    /// Left-edge drawer: damage history + music, collapsed to a slim handle by default.
+    /// Right-edge drawer: one menu icon opens feed / leave / jukebox.
     private var fightSideDrawer: some View {
         HStack(spacing: 0) {
-            Button {
-                PlinkSFX.play(.ui)
-                withAnimation(.spring(response: 0.34, dampingFraction: 0.84)) {
-                    showFightDrawer.toggle()
-                    if !showFightDrawer { showMusicDetail = false }
-                }
-            } label: {
-                VStack(spacing: 10) {
-                    Image(systemName: showFightDrawer ? "chevron.left" : "chevron.right")
-                        .font(.system(size: 13, weight: .black))
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 14, weight: .bold))
-                    Image(systemName: "list.bullet.rectangle")
-                        .font(.system(size: 15, weight: .bold))
-                    Image(systemName: "music.note")
-                        .font(.system(size: 14, weight: .bold))
-                    if !showFightDrawer, (totalDamageDealt + totalDamageTaken) > 0 {
-                        Text("\(totalDamageDealt)")
-                            .font(.system(size: 11, weight: .black, design: .rounded))
-                            .foregroundStyle(Color(red: 0.45, green: 0.95, blue: 0.55))
-                    }
-                }
-                .foregroundStyle(.white.opacity(0.95))
-                .frame(width: 34)
-                .padding(.vertical, 16)
-                .contentShape(Rectangle())
-            }
-            .buttonStyle(.plain)
-            .background(
-                UnevenRoundedRectangle(
-                    topLeadingRadius: 0,
-                    bottomLeadingRadius: 0,
-                    bottomTrailingRadius: 14,
-                    topTrailingRadius: 14,
-                    style: .continuous
-                )
-                .fill(.ultraThinMaterial.opacity(0.94))
-                .overlay(
-                    UnevenRoundedRectangle(
-                        topLeadingRadius: 0,
-                        bottomLeadingRadius: 0,
-                        bottomTrailingRadius: 14,
-                        topTrailingRadius: 14,
-                        style: .continuous
-                    )
-                    .stroke(Color.white.opacity(0.25), lineWidth: 1)
-                )
-            )
-            .accessibilityLabel(showFightDrawer ? "Close menu" : "Open menu — leave, log, music")
-            .accessibilityIdentifier("world2.plink.battle.drawer.toggle")
+            Spacer(minLength: 0)
 
             if showFightDrawer {
                 VStack(alignment: .leading, spacing: 12) {
                     leaveButton
                         .frame(maxWidth: .infinity, alignment: .leading)
 
-                    battleFeedPane
-                        .frame(width: MarbleVoyageDesignRules.battleFeedMinWidth)
-                        .frame(maxHeight: .infinity, alignment: .top)
-                    musicPlayerOverlay
-                        .frame(width: MarbleVoyageDesignRules.battleFeedMinWidth)
+                    if showMusicDetail {
+                        musicPlayerOverlay
+                            .frame(width: MarbleVoyageDesignRules.battleFeedMinWidth)
+                        battleFeedPane
+                            .frame(width: MarbleVoyageDesignRules.battleFeedMinWidth)
+                            .frame(maxHeight: .infinity, alignment: .top)
+                    } else {
+                        battleFeedPane
+                            .frame(width: MarbleVoyageDesignRules.battleFeedMinWidth)
+                            .frame(maxHeight: .infinity, alignment: .top)
+                        musicPlayerOverlay
+                            .frame(width: MarbleVoyageDesignRules.battleFeedMinWidth)
+                    }
                 }
                 .padding(.horizontal, 12)
                 .padding(.vertical, 12)
@@ -1266,32 +1322,92 @@ struct PlinkBattleHostView: View {
                 .frame(maxHeight: .infinity)
                 .background(
                     UnevenRoundedRectangle(
-                        topLeadingRadius: 0,
-                        bottomLeadingRadius: 0,
-                        bottomTrailingRadius: 18,
-                        topTrailingRadius: 18,
+                        topLeadingRadius: 18,
+                        bottomLeadingRadius: 18,
+                        bottomTrailingRadius: 0,
+                        topTrailingRadius: 0,
                         style: .continuous
                     )
                     .fill(.ultraThinMaterial.opacity(0.96))
                     .overlay(
                         UnevenRoundedRectangle(
-                            topLeadingRadius: 0,
-                            bottomLeadingRadius: 0,
-                            bottomTrailingRadius: 18,
-                            topTrailingRadius: 18,
+                            topLeadingRadius: 18,
+                            bottomLeadingRadius: 18,
+                            bottomTrailingRadius: 0,
+                            topTrailingRadius: 0,
                             style: .continuous
                         )
                         .stroke(Color.white.opacity(0.22), lineWidth: 1)
                     )
                 )
-                .transition(.move(edge: .leading).combined(with: .opacity))
+                .transition(.move(edge: .trailing).combined(with: .opacity))
                 .accessibilityIdentifier("world2.plink.battle.drawer")
             }
 
-            Spacer(minLength: 0)
+            VStack(spacing: 10) {
+                drawerIconButton(
+                    systemName: "list.bullet.rectangle",
+                    label: showFightDrawer ? "Close menu" : "Open menu"
+                ) {
+                    withAnimation(.spring(response: 0.34, dampingFraction: 0.84)) {
+                        showFightDrawer.toggle()
+                        if !showFightDrawer { showMusicDetail = false }
+                    }
+                }
+                .accessibilityIdentifier("world2.plink.battle.drawer.toggle")
+
+                if !showFightDrawer, (totalDamageDealt + totalDamageTaken) > 0 {
+                    Text("\(totalDamageDealt)")
+                        .font(.system(size: 11, weight: .black, design: .rounded))
+                        .foregroundStyle(Color(red: 0.45, green: 0.95, blue: 0.55))
+                        .accessibilityLabel("Damage dealt \(totalDamageDealt)")
+                }
+            }
+            .foregroundStyle(.white.opacity(0.95))
+            .frame(width: 34)
+            .padding(.vertical, 14)
+            .background(
+                UnevenRoundedRectangle(
+                    topLeadingRadius: 14,
+                    bottomLeadingRadius: 14,
+                    bottomTrailingRadius: 0,
+                    topTrailingRadius: 0,
+                    style: .continuous
+                )
+                .fill(.ultraThinMaterial.opacity(0.94))
+                .overlay(
+                    UnevenRoundedRectangle(
+                        topLeadingRadius: 14,
+                        bottomLeadingRadius: 14,
+                        bottomTrailingRadius: 0,
+                        topTrailingRadius: 0,
+                        style: .continuous
+                    )
+                    .stroke(Color.white.opacity(0.25), lineWidth: 1)
+                )
+            )
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+        .padding(.top, 8)
         .animation(.spring(response: 0.34, dampingFraction: 0.84), value: showFightDrawer)
+    }
+
+    private func drawerIconButton(
+        systemName: String,
+        label: String,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button {
+            PlinkSFX.play(.ui)
+            action()
+        } label: {
+            Image(systemName: systemName)
+                .font(.system(size: 14, weight: .bold))
+                .frame(width: 28, height: 28)
+                .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(label)
     }
 
     /// Owned voyage charms — vertical stack on the unused right rail.
@@ -1371,34 +1487,38 @@ struct PlinkBattleHostView: View {
     private func notifyTurboArmed() {
         #if canImport(UIKit)
         if PlayerStateService.shared.currentPlayer?.settings.hapticFeedbackEnabled ?? true {
-            UIImpactFeedbackGenerator(style: .medium).impactOccurred(intensity: 0.9)
+            UIImpactFeedbackGenerator(style: .medium).impactOccurred(intensity: 0.7)
         }
         #endif
+        // Soft click only — no board-wide FX while aiming.
         PlinkSFX.play(.ui)
         withAnimation(.easeOut(duration: 0.12)) {
-            turboFxStrength = max(turboFxStrength, 0.45)
+            turboFxStrength = max(turboFxStrength, 0.22)
         }
     }
 
-    /// Turbo release: layered SFX, heavy haptic, small board shake, hardcore ripple.
+    /// Turbo release: enhanced SFX + light pad ripple (never a deny / full-screen flash).
     private func triggerTurboReleaseFX() {
         PlinkSFX.play(.turbo)
         #if canImport(UIKit)
         if PlayerStateService.shared.currentPlayer?.settings.hapticFeedbackEnabled ?? true {
-            UIImpactFeedbackGenerator(style: .heavy).impactOccurred(intensity: 1.0)
-            UIImpactFeedbackGenerator(style: .rigid).impactOccurred(intensity: 0.7)
+            UIImpactFeedbackGenerator(style: .heavy).impactOccurred(intensity: 0.85)
         }
         #endif
-        if !reduceMotion {
-            pulseBoardShake(intensity: 7)
-        }
         withAnimation(.easeOut(duration: 0.08)) {
-            turboFxStrength = 1
+            turboFxStrength = 0.55
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.55) {
-            withAnimation(.easeOut(duration: 0.4)) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+            withAnimation(.easeOut(duration: 0.28)) {
                 turboFxStrength = 0
             }
+        }
+    }
+
+    /// Empty-turbo release — same drop as a normal shot (scene plays `.launch`).
+    private func triggerNormalReleaseFX() {
+        withAnimation(.easeOut(duration: 0.12)) {
+            turboFxStrength = 0
         }
     }
 
@@ -1444,36 +1564,87 @@ struct PlinkBattleHostView: View {
         }
     }
 
-    /// Always-visible battle wells — empty sockets when bare; FIFO fill from the bag.
+    /// Linger-shot gravity rift — vignette + banner while the pull eases in.
+    @ViewBuilder
+    private var gravityWaveOverlay: some View {
+        if tiltPhase == nil, gravityWaveActive {
+            ZStack {
+                // Edge vignette — cool indigo pull, keeps the board readable.
+                RadialGradient(
+                    colors: [
+                        Color.clear,
+                        Color(red: 0.15, green: 0.05, blue: 0.35).opacity(0.18),
+                        Color(red: 0.08, green: 0.02, blue: 0.28).opacity(0.55),
+                    ],
+                    center: .center,
+                    startRadius: 80,
+                    endRadius: 520
+                )
+                .ignoresSafeArea()
+                .allowsHitTesting(false)
+
+                VStack(spacing: 6) {
+                    Text("Gravity rift")
+                        .font(.system(size: MarbleVoyageDesignRules.battleFeedMinBodyFont, weight: .black, design: .rounded))
+                        .foregroundStyle(Color(red: 0.75, green: 0.9, blue: 1.0))
+                        .tracking(0.6)
+                    Text("Pulling…")
+                        .font(.system(size: 26, weight: .black, design: .rounded))
+                        .foregroundStyle(.white)
+                        .shadow(color: .black.opacity(0.7), radius: 6, y: 2)
+                }
+                .padding(.horizontal, 22)
+                .padding(.vertical, 12)
+                .background(
+                    RoundedRectangle(cornerRadius: 20, style: .continuous)
+                        .fill(Color.black.opacity(0.55))
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 20, style: .continuous)
+                                .stroke(Color(red: 0.55, green: 0.85, blue: 1.0).opacity(0.8), lineWidth: 2.5)
+                        )
+                )
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .padding(.top, 56)
+            }
+            .allowsHitTesting(false)
+            .accessibilityIdentifier("world2.plink.battle.gravityWaveOverlay")
+            .accessibilityLabel("Gravity rift pulling")
+            .transition(.opacity)
+        }
+    }
+
+    /// Horizontal bottom-left wells — thin packaging, big icons, ghost FIFO backlog.
     private var powerSlotTray: some View {
         let slots = powerInventory.slots
-        let waiting = powerInventory.waitingCount
-        return HStack(alignment: .bottom, spacing: 10) {
+        let waiting = powerInventory.waitingQueue
+        let ghostBudget = MarbleVoyageDesignRules.fightPowerGhostVisible
+        let ghostShown = Array(waiting.prefix(ghostBudget))
+        let ghostOverflow = max(0, waiting.count - ghostShown.count)
+        let well = MarbleVoyageDesignRules.fightPowerSlotSize
+        let ghost = MarbleVoyageDesignRules.fightPowerGhostSize
+        return HStack(alignment: .bottom, spacing: 8) {
             ForEach(Array(slots.enumerated()), id: \.offset) { index, kind in
                 Button {
                     usePowerSlot(index)
                 } label: {
                     ZStack {
-                        Circle()
-                            .strokeBorder(
-                                Color.white.opacity(kind == nil ? 0.35 : 0.55),
-                                style: StrokeStyle(lineWidth: 2, dash: kind == nil ? [5, 4] : [])
-                            )
-                            .background(
-                                Circle()
-                                    .fill(Color.black.opacity(kind == nil ? 0.28 : 0.45))
-                            )
-                            .frame(width: 62, height: 62)
                         if let kind {
-                            PlinkPowerUpChip(kind: kind, size: 56)
-                                .shadow(color: .black.opacity(0.5), radius: 6, y: 3)
+                            PlinkPowerUpChip(kind: kind, size: well)
+                                .shadow(color: .black.opacity(0.45), radius: 5, y: 2)
                         } else {
+                            Circle()
+                                .strokeBorder(
+                                    Color.white.opacity(0.35),
+                                    style: StrokeStyle(lineWidth: 2, dash: [5, 4])
+                                )
+                                .background(Circle().fill(Color.black.opacity(0.28)))
+                                .frame(width: well, height: well)
                             Image(systemName: "bolt.slash")
-                                .font(.system(size: 18, weight: .bold))
+                                .font(.system(size: 16, weight: .bold))
                                 .foregroundStyle(.white.opacity(0.28))
                         }
                     }
-                    .frame(width: 62, height: 62)
+                    .frame(width: well, height: well)
                     .contentShape(Circle())
                 }
                 .buttonStyle(.plain)
@@ -1485,24 +1656,25 @@ struct PlinkBattleHostView: View {
                 .accessibilityHint(kind?.blurb ?? "Earn powers at the Peg Monastery")
                 .accessibilityIdentifier("world2.plink.powerUp.slot.\(index)")
             }
-            if waiting > 0 {
-                Text("+\(waiting)")
-                    .font(.system(size: 13, weight: .black, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.75))
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 6)
-                    .background(Capsule().fill(Color.black.opacity(0.4)))
-                    .accessibilityLabel("\(waiting) more powers waiting")
-                    .accessibilityIdentifier("world2.plink.powerUp.waiting")
+
+            if !ghostShown.isEmpty || ghostOverflow > 0 {
+                HStack(spacing: 4) {
+                    ForEach(Array(ghostShown.enumerated()), id: \.offset) { _, kind in
+                        PlinkPowerUpChip(kind: kind, size: ghost)
+                            .opacity(0.42)
+                            .allowsHitTesting(false)
+                    }
+                    if ghostOverflow > 0 {
+                        Text("+\(ghostOverflow)")
+                            .font(.system(size: 11, weight: .black, design: .rounded))
+                            .foregroundStyle(.white.opacity(0.65))
+                            .accessibilityIdentifier("world2.plink.powerUp.waiting")
+                    }
+                }
+                .padding(.bottom, 8)
+                .accessibilityLabel("\(waiting.count) more powers waiting")
             }
         }
-        .padding(.horizontal, 10)
-        .padding(.vertical, 8)
-        .background(.ultraThinMaterial.opacity(0.9), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-        .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
-                .stroke(Color(red: 1, green: 0.85, blue: 0.35).opacity(0.45), lineWidth: 1.5)
-        )
         .accessibilityIdentifier("world2.plink.powerUp.tray")
     }
 
@@ -1742,40 +1914,33 @@ struct PlinkBattleHostView: View {
         )
     }
 
-    /// Short header: Abbie + place/activity + marbles left. Enemy lives on the side cast card.
+    /// One-line header: Abbie + fight activity (foe counter lives on the cast card).
     private var fightHeaderBar: some View {
-        let art = MarbleVoyageDesignRules.fightPortraitArtSize
-        return HStack(alignment: .center, spacing: 12) {
+        let art = MarbleVoyageDesignRules.fightPortraitArtSize * 0.85
+        return HStack(alignment: .center, spacing: 10) {
             fightAbbieCell(art: art)
 
-            VStack(alignment: .leading, spacing: 2) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(title)
-                    .font(.system(size: 13, weight: .bold, design: .rounded))
+                    .font(.system(size: 14, weight: .bold, design: .rounded))
                     .foregroundStyle(Color(red: 0.65, green: 0.9, blue: 1.0))
                     .lineLimit(1)
+                Text("·")
+                    .foregroundStyle(.white.opacity(0.35))
                 Text(fightActivityLine)
-                    .font(.system(size: 18, weight: .black, design: .rounded))
+                    .font(.system(size: 15, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
                     .lineLimit(1)
-                Text(fightObjectiveLine)
-                    .font(.system(size: 12, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.78))
-                    .lineLimit(2)
+                    .minimumScaleFactor(0.75)
+                Text("Lv\(startingHeroLevel)")
+                    .font(.system(size: 12, weight: .bold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.7))
+                    .lineLimit(1)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
-
-            VStack(alignment: .trailing, spacing: 2) {
-                Text("\(ballsLeft)")
-                    .font(.system(size: 22, weight: .black, design: .rounded))
-                    .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.3))
-                    .monospacedDigit()
-                Text(ballsLeft == 1 ? "marble left" : "marbles left")
-                    .font(.system(size: 11, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.7))
-            }
         }
         .padding(.horizontal, 10)
-        .padding(.vertical, 6)
+        .padding(.vertical, 5)
         .background(
             RoundedRectangle(cornerRadius: 16, style: .continuous)
                 .fill(.ultraThinMaterial.opacity(0.82))
@@ -1806,7 +1971,7 @@ struct PlinkBattleHostView: View {
         }
     }
 
-    /// Cast card beside the board — role, hero art, HP/ATK, intent, bench, rescue.
+    /// Cast card beside the board — role, hero art, HP + foe counter tile, temper tip, charms.
     private var fightEnemyCard: some View {
         let accent = Color(red: 1, green: 0.55, blue: 0.32)
         let art = MarbleVoyageDesignRules.fightEnemyCardArtSize
@@ -1827,37 +1992,14 @@ struct PlinkBattleHostView: View {
                         .lineLimit(2)
                         .minimumScaleFactor(0.85)
 
-                    Text(title)
-                        .font(.system(size: 13, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.72))
-
-                    Text(front.kind.castBlurb)
-                        .font(.system(size: 13, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.88))
-                        .fixedSize(horizontal: false, vertical: true)
-
                     fightTemperTipBlock(for: front.kind)
 
-                    HStack(spacing: 8) {
+                    HStack(alignment: .center, spacing: 8) {
                         fightStatChip(label: "HP", value: front.isDefeated ? "OUT" : "\(front.hp)/\(front.maxHP)")
                         fightStatChip(label: "ATK", value: "\(resolvedEnemyAttack)")
+                        fightEnemyCounterTile
                     }
-
-                    Text(frontFoeIntentLine(front))
-                        .font(.system(size: 12, weight: .bold, design: .rounded))
-                        .foregroundStyle(Color(red: 1, green: 0.75, blue: 0.45))
-                        .fixedSize(horizontal: false, vertical: true)
                 }
-
-                if foeRoster.count > 1 {
-                    Text("Next up")
-                        .font(.system(size: 11, weight: .black, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.55))
-                        .tracking(0.6)
-                    fightBenchRow(art: 44)
-                }
-
-                fightRescueChip
 
                 fightCharmRail
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -1878,6 +2020,35 @@ struct PlinkBattleHostView: View {
         )
         .shadow(color: .black.opacity(0.28), radius: 10, y: 3)
         .accessibilityIdentifier("world2.plink.battle.enemyCard")
+    }
+
+    /// Compact foe-count tile — right edge of the HP/ATK chrome row.
+    private var fightEnemyCounterTile: some View {
+        let living = foeRoster.filter { !$0.isDefeated }.count
+        let total = max(1, foeRoster.count)
+        return VStack(alignment: .leading, spacing: 2) {
+            Text("FOES")
+                .font(.system(size: MarbleVoyageDesignRules.battleFeedMinMetaFont, weight: .black, design: .rounded))
+                .tracking(0.8)
+                .foregroundStyle(Color(red: 1, green: 0.75, blue: 0.45))
+            Text("\(living)/\(total)")
+                .font(.system(size: 16, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
+                .monospacedDigit()
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .frame(minWidth: 64, alignment: .leading)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill(Color(red: 0.35, green: 0.16, blue: 0.12).opacity(0.92))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke(Color(red: 1, green: 0.55, blue: 0.32).opacity(0.7), lineWidth: 1.5)
+        )
+        .accessibilityIdentifier("world2.plink.battle.foeCounter")
+        .accessibilityLabel("\(living) of \(total) foes remaining")
     }
 
     private func fightStatChip(label: String, value: String) -> some View {
@@ -1936,35 +2107,6 @@ struct PlinkBattleHostView: View {
         case .swift: return Color(red: 0.35, green: 0.9, blue: 0.85)
         case .craft: return Color(red: 1.0, green: 0.82, blue: 0.35)
         }
-    }
-
-    private var fightRescueChip: some View {
-        HStack(spacing: 8) {
-            if let enemyKind {
-                PeglinEnemyBattlePortrait(kind: enemyKind, state: cageShattered ? .happy : enemyState, size: 44)
-            }
-            VStack(alignment: .leading, spacing: 2) {
-                Text("RESCUE")
-                    .font(.system(size: MarbleVoyageDesignRules.battleFeedMinMetaFont, weight: .black, design: .rounded))
-                    .tracking(0.8)
-                    .foregroundStyle(Color(red: 0.45, green: 0.95, blue: 0.85))
-                Text(fightObjectiveLine)
-                    .font(.system(size: 12, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                    .fixedSize(horizontal: false, vertical: true)
-            }
-        }
-        .padding(10)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .fill(Color(red: 0.12, green: 0.35, blue: 0.38).opacity(0.85))
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .stroke(Color(red: 0.45, green: 0.95, blue: 0.85).opacity(0.55), lineWidth: 1.5)
-        )
-        .accessibilityIdentifier("world2.plink.battle.rescue")
     }
 
     private var fightChromeDivider: some View {
@@ -2102,21 +2244,7 @@ struct PlinkBattleHostView: View {
                 )
             }
         )
-        .accessibilityLabel("\(foe.kind.displayName) \(foe.hp) of \(foe.maxHP). \(frontFoeIntentLine(foe))")
-    }
-
-    private func frontFoeIntentLine(_ foe: PlinkBattleFoe) -> String {
-        if foe.isDefeated { return "Down!" }
-        if foe.kind.isFlying {
-            return "Flies · hits for \(resolvedEnemyAttack) every shot"
-        }
-        if foe.lane <= PeglinBattleRules.meleeLane {
-            return "In range · hits for \(resolvedEnemyAttack) after your shot"
-        }
-        if foe.lane == 1 {
-            return "1 step away · reaches you next shot"
-        }
-        return "\(foe.lane) steps away · hits for \(resolvedEnemyAttack) at Abbie"
+        .accessibilityLabel("\(foe.kind.displayName) \(foe.hp) of \(foe.maxHP) hit points")
     }
 
     /// Fixed-size aim trackpad — X aims, pull down arms turbo when the meter is full.
@@ -2241,20 +2369,22 @@ struct PlinkBattleHostView: View {
                             notifyTurboArmed()
                         }
                         turboWasArmed = nowArmed
+                        // Gentle pad glow only while actually armed — never punish empty-meter pulls.
                         if nowArmed {
-                            turboFxStrength = max(turboFxStrength, 0.28 + ny * 0.22)
-                        } else if turboFxStrength < 0.6 {
-                            turboFxStrength = max(0, turboFxStrength - 0.08)
+                            turboFxStrength = max(0.12, min(0.28, 0.12 + ny * 0.12))
+                        } else {
+                            turboFxStrength = 0
                         }
                     }
                     .onEnded { _ in
                         guard canAim else {
                             aimPadTurboPull = 0
                             turboWasArmed = false
+                            turboFxStrength = 0
                             return
                         }
-                        // Pinball: release the stick to drop. Keep turbo pull live
-                        // through fire so shoot() can consume a charged boost.
+                        // Pinball: release always drops. Full-down with empty meter is a
+                        // normal shot — never a deny flash / whistle.
                         let pullAtRelease = aimPadTurboPull
                         let turboShot = PlinkTurboRules.canArm(
                             charge: turboCharge,
@@ -2266,6 +2396,8 @@ struct PlinkBattleHostView: View {
                         )
                         if turboShot {
                             triggerTurboReleaseFX()
+                        } else {
+                            triggerNormalReleaseFX()
                         }
                         bridge?.scene.fireFromJoystick()
                         aimPadTurboPull = 0
@@ -2313,32 +2445,6 @@ struct PlinkBattleHostView: View {
         }
     }
 
-    /// Remaining pack — sized by max HP (small / medium / boss), not proximity.
-    private func fightBenchRow(art: CGFloat) -> some View {
-        let frontID = frontFoe?.id
-        let bench = foeRoster.filter { $0.id != frontID }
-        return HStack(alignment: .bottom, spacing: 8) {
-            ForEach(bench) { foe in
-                let size = MarbleVoyageDesignRules.fightEnemyPortraitSize(maxHP: foe.maxHP, base: art)
-                VStack(spacing: 2) {
-                    PlinkAttackerBattlePortrait(
-                        kind: foe.kind,
-                        pose: .idle,
-                        size: size
-                    )
-                    .opacity(foe.isDefeated ? 0.28 : 0.7)
-                    .grayscale(foe.isDefeated ? 0.85 : 0)
-
-                    Text(foe.isDefeated ? "OUT" : "\(foe.hp)")
-                        .font(.system(size: MarbleVoyageDesignRules.battleFeedMinMetaFont, weight: .black, design: .rounded))
-                        .foregroundStyle(.white.opacity(foe.isDefeated ? 0.45 : 0.85))
-                        .monospacedDigit()
-                }
-                .accessibilityIdentifier("world2.plink.battle.attacker.\(foe.kind.rawValue)")
-            }
-        }
-    }
-
     private var fightBoardPane: some View {
         GeometryReader { geo in
             // Fill the pane — no 4:3 letterbox / pillarbox. Scene rebuilds via resizeFill.
@@ -2363,6 +2469,24 @@ struct PlinkBattleHostView: View {
                     Color.black.opacity(0.2)
                         .frame(width: geo.size.width, height: geo.size.height)
                         .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                }
+
+                if !comboFlashText.isEmpty {
+                    Text(comboFlashText)
+                        .font(.system(size: 42, weight: .black, design: .rounded))
+                        .foregroundStyle(
+                            LinearGradient(
+                                colors: [
+                                    Color(red: 1.0, green: 0.92, blue: 0.35),
+                                    Color(red: 1.0, green: 0.55, blue: 0.2),
+                                ],
+                                startPoint: .top,
+                                endPoint: .bottom
+                            )
+                        )
+                        .shadow(color: .black.opacity(0.65), radius: 4, y: 2)
+                        .transition(.scale.combined(with: .opacity))
+                        .allowsHitTesting(false)
                 }
 
                 if showBanner {
@@ -2399,6 +2523,7 @@ struct PlinkBattleHostView: View {
                 }
             }
             .frame(width: geo.size.width, height: geo.size.height)
+            .animation(.spring(response: 0.32, dampingFraction: 0.72), value: comboFlashText)
         }
     }
 
@@ -2898,6 +3023,10 @@ struct PlinkBattleHostView: View {
         bombLobFlash = false
         phaseLabel = "RESCUE"
         statusLine = "Aim and drop! Hit the front bad guy."
+        gravityWaveCountdown = nil
+        gravityWaveActive = false
+        wasGravityWaveActive = false
+        lastHudPhase = nil
         // Keep safari music through the versus splash; board music kicks in on cutaway.
         showVersusIntro = true
         aimPadNormalizedX = 0
@@ -2919,6 +3048,7 @@ struct PlinkBattleHostView: View {
                 counterDamage: resolvedEnemyAttack,
                 marbles: startingMarbles,
                 ballLevel: startingBallLevel,
+                heroLevel: startingHeroLevel,
                 startingPlayerHP: startingPlayerHP
             )
         } else {
@@ -2957,10 +3087,14 @@ struct PlinkBattleHostView: View {
             }
         }
         next.onHud = { snap in
-            withAnimation(.easeOut(duration: 0.15)) {
+            let previousPhase = lastHudPhase
+            let apply: () -> Void = {
                 // Keep feed quiet — no "PLAYER TURN" / "RESOLVE SHOT" board chatter.
                 if snap.phase == .aim || snap.phase == .won || snap.phase == .lost {
                     statusLine = snap.status
+                } else if snap.gravityWaveActive {
+                    statusLine = snap.status
+                    phaseLabel = "GRAVITY"
                 }
                 ballsLeft = snap.ballsLeft
                 shotScore = snap.shotScore
@@ -2968,6 +3102,8 @@ struct PlinkBattleHostView: View {
                 turboCharge = snap.turboCharge
                 turboArmed = snap.turboArmed
                 tiltPhase = snap.tiltPhase
+                gravityWaveCountdown = snap.gravityWaveCountdown
+                gravityWaveActive = snap.gravityWaveActive
                 // Scene owns front-foe HP (applied at shot settle only).
                 enemyHP = snap.enemyHP
                 enemyMaxHP = snap.enemyMaxHP
@@ -2977,15 +3113,35 @@ struct PlinkBattleHostView: View {
                 playerHP = snap.playerHP
                 refreshHostageMood()
             }
+            // Mid-flight HUD churn must not animate — bomb splash used to queue
+            // N withAnimation blocks and hitch the SpriteKit frame.
             if snap.phase == .flying || snap.phase == .settling {
+                apply()
                 abbieState = .sneakyWink
                 aimPadTurboPull = 0
                 if !enemyRailFlushed {
                     setEnemyRail(snap.shotScore + pendingBombRail)
                 }
             } else {
+                withAnimation(.easeOut(duration: 0.15), apply)
                 enemyRailFlushed = false
             }
+            // Soft board dip when the marble exits and aim returns.
+            if snap.phase == .aim,
+               previousPhase == .settling || previousPhase == .flying,
+               !reduceMotion {
+                pulseBoardShake(intensity: 3.5)
+            }
+            // Light haptic when gravity rift first arms.
+            if snap.gravityWaveActive, !wasGravityWaveActive {
+                #if canImport(UIKit)
+                if PlayerStateService.shared.currentPlayer?.settings.hapticFeedbackEnabled ?? true {
+                    UIImpactFeedbackGenerator(style: .soft).impactOccurred(intensity: 0.7)
+                }
+                #endif
+            }
+            wasGravityWaveActive = snap.gravityWaveActive
+            lastHudPhase = snap.phase
         }
         next.onDamage = { dmg in
             abbieState = .sneakyWink
@@ -2997,7 +3153,10 @@ struct PlinkBattleHostView: View {
         }
         next.onBombAOE = { dmg in
             phaseLabel = "BOMB"
-            pulseBoardShake(intensity: 16)
+            // Light shake only — heavy pulseBoardShake was stacking with splash UI.
+            if !reduceMotion {
+                pulseBoardShake(intensity: 8)
+            }
             applyBombAOE(dmg)
             refreshHostageMood()
             if !enemyRailFlushed {
@@ -3007,7 +3166,16 @@ struct PlinkBattleHostView: View {
             statusLine = "Bomb splash! −\(dmg) to every bad guy"
         }
         next.onFrontFoeDefeated = {
-            advanceFrontFoeOrRescue()
+            PlinkSFX.play(.ko)
+            #if canImport(UIKit)
+            if PlayerStateService.shared.currentPlayer?.settings.hapticFeedbackEnabled ?? true {
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred(intensity: 0.95)
+            }
+            #endif
+            if !reduceMotion {
+                pulseBoardShake(intensity: 6)
+            }
+            return advanceFrontFoeOrRescue()
         }
         next.onEnemyTurn = {
             resolveEnemyApproachAndMelee()
@@ -3062,7 +3230,8 @@ struct PlinkBattleHostView: View {
             onBattleEnded?(
                 true,
                 max(playerHP, bridge?.scene.playerHP ?? playerHP),
-                scene.runGoldCoins
+                scene.runGoldCoins,
+                fightComboXP
             )
         }
         next.onLost = {
@@ -3077,7 +3246,7 @@ struct PlinkBattleHostView: View {
             withAnimation(.spring(response: 0.4, dampingFraction: 0.82)) {
                 showBanner = true
             }
-            onBattleEnded?(false, 0, 0)
+            onBattleEnded?(false, 0, 0, 0)
         }
         bridge = next
         PeglinEdition.log(

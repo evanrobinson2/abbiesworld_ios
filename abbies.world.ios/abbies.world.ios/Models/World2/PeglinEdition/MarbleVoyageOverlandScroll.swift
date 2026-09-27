@@ -58,6 +58,12 @@ enum MarbleVoyageOverlandScroll {
         case trailing
     }
 
+    /// Chosen dock + vertical inset so the card clears focus *and* neighbors.
+    struct CardPlacement: Equatable, Sendable {
+        var dock: CardDock
+        var topPad: CGFloat
+    }
+
     /// True when a foe name can sit on one line at `fontSize` inside `availableWidth`
     /// (black rounded approx). Used to catch MORRO̸W wrap regressions.
     static func foeNameFitsOneLine(
@@ -81,6 +87,74 @@ enum MarbleVoyageOverlandScroll {
         return focusX < contentWidth * 0.5 ? .trailing : .leading
     }
 
+    /// Pick dock + top pad that clears the focused tile and neighboring map tiles
+    /// (mystery / treasure / other fights). Opposite-focus dock is only a soft bias —
+    /// covering a neighbor is nearly as bad as covering the focus (left-fight + right-mystery).
+    static func preferredCardPlacement(
+        focusX: CGFloat,
+        contentWidth: CGFloat,
+        focusTile: CGRect,
+        neighborTiles: [CGRect],
+        viewport: CGSize,
+        baseTopPad: CGFloat = MarbleVoyageDesignRules.climbFoeCardTopPad
+    ) -> CardPlacement {
+        let preferred = preferredCardDock(focusX: focusX, contentWidth: contentWidth)
+        // Wide vertical search: same-side dock can clear focus by sitting above/below the tile;
+        // opposite dock can clear a mystery/treasure neighbor the same way.
+        let cardHeight = MarbleVoyageDesignRules.climbFoeCardEstimateHeight
+        // Dynamic pads: sit just above / below the focus and each neighbor, plus defaults.
+        var topPads: [CGFloat] = [
+            max(72, baseTopPad - 80),
+            max(88, baseTopPad - 40),
+            baseTopPad,
+            baseTopPad + 60,
+            baseTopPad + 120,
+            baseTopPad + 180,
+            baseTopPad + 240,
+            baseTopPad + 300,
+        ]
+        let clearance = MarbleVoyageDesignRules.climbFoeCardNeighborClearance
+        for tile in [focusTile] + neighborTiles {
+            // Card entirely above this tile.
+            topPads.append(max(72, tile.minY - clearance - cardHeight))
+            // Card entirely below this tile.
+            topPads.append(tile.maxY + clearance)
+        }
+        topPads = Array(Set(topPads.map { ($0 * 2).rounded() / 2 })).sorted()
+
+        let docks: [CardDock] = preferred == .trailing
+            ? [.trailing, .leading]
+            : [.leading, .trailing]
+
+        var best: CardPlacement?
+        var bestScore = CGFloat.greatestFiniteMagnitude
+
+        for dock in docks {
+            for top in topPads {
+                let card = cardRect(dock: dock, viewport: viewport, topPad: top)
+                // Soft floor for transport / Abbie dock — prefer staying clear, don't hard-reject
+                // or mid-row mystery/fight pairs become unsolvable on short viewports.
+                let overflow = max(0, card.maxY - (viewport.height - 56))
+                if overflow > cardHeight * 0.45 { continue }
+
+                let focusHit = cardOccludesFocusedTile(card: card, tile: focusTile)
+                let neighborArea = neighborOcclusionArea(card: card, tiles: neighborTiles)
+                // Hard-ish: covering focus OR a meaningful slice of a neighbor is bad.
+                let focusPenalty: CGFloat = focusHit ? 10_000 : 0
+                let neighborPenalty: CGFloat = neighborArea > 40 ? (5_000 + neighborArea) : neighborArea
+                let dockBias: CGFloat = dock == preferred ? 0 : 40
+                let padBias = abs(top - baseTopPad) * 0.15
+                let overflowPenalty = overflow * 8
+                let score = focusPenalty + neighborPenalty + dockBias + padBias + overflowPenalty
+                if score < bestScore {
+                    bestScore = score
+                    best = CardPlacement(dock: dock, topPad: top)
+                }
+            }
+        }
+        return best ?? CardPlacement(dock: preferred, topPad: baseTopPad)
+    }
+
     /// Axis-aligned card rect in viewport coords (top-leading origin).
     static func cardRect(
         dock: CardDock,
@@ -91,7 +165,7 @@ enum MarbleVoyageOverlandScroll {
         ),
         leadingPad: CGFloat = 22,
         trailingPad: CGFloat = 22,
-        topPad: CGFloat = 120
+        topPad: CGFloat = MarbleVoyageDesignRules.climbFoeCardTopPad
     ) -> CGRect {
         let x: CGFloat
         switch dock {
@@ -128,6 +202,20 @@ enum MarbleVoyageOverlandScroll {
         return card.intersects(inflated)
     }
 
+    /// Sum of intersection areas with neighbor tiles (mystery / treasure / other fights).
+    static func neighborOcclusionArea(
+        card: CGRect,
+        tiles: [CGRect],
+        clearance: CGFloat = MarbleVoyageDesignRules.climbFoeCardNeighborClearance
+    ) -> CGFloat {
+        tiles.reduce(0) { sum, tile in
+            let inflated = tile.insetBy(dx: -clearance, dy: -clearance)
+            let hit = card.intersection(inflated)
+            guard !hit.isNull else { return sum }
+            return sum + hit.width * hit.height
+        }
+    }
+
     /// Tour nodes in cast / scrub order.
     static func orderedTourNodes(
         from nodes: [MarbleVoyageNode],
@@ -161,11 +249,19 @@ enum MarbleVoyageOverlandScroll {
         fighterKind: (MarbleVoyageNode) -> PlinkAttackerKind?,
         focusAnchorY: CGFloat = MarbleVoyageDesignRules.climbRevealFocusAnchorY
     ) -> [Stop] {
-        orderedTourNodes(from: run.nodes, order: order).compactMap { node in
+        var seenFighters: Set<PlinkAttackerKind> = []
+        return orderedTourNodes(from: run.nodes, order: order).compactMap { node in
             guard let fighter = fighterKind(node),
                   let point = positions[node.id]
             else { return nil }
+            // One cast beat per foe — avoid "Porcupine ×2" when a chart had duplicates.
+            guard seenFighters.insert(fighter).inserted else { return nil }
             let role = resolvedRole(for: node)
+            let stats = PeglinBattleRules.previewLeadFoeStats(
+                wave: fighter,
+                focus: fighter,
+                role: role
+            )
             return Stop(
                 nodeID: node.id,
                 pointY: point.y,
@@ -176,8 +272,8 @@ enum MarbleVoyageOverlandScroll {
                     roleKind: role,
                     blurb: fighter.castBlurb,
                     stageTitle: node.title,
-                    hp: run.enemyMaxHP(for: node),
-                    atk: run.enemyAttack(for: node),
+                    hp: stats.hp,
+                    atk: stats.atk,
                     threat: node.threat,
                     kind: fighter
                 )

@@ -142,24 +142,28 @@ enum MarbleVoyageMarbleRules {
         return collection.map(\.damageMultiplier).reduce(0, +) / Double(collection.count)
     }
 
-    /// Combined mult: marble mean × run ballLevel steps (legacy global +0.05/level).
+    /// Combined mult: hero × marble mean × run ballLevel steps.
     static func fightDamageMultiplier(
         collection: [MarbleVoyageOwnedMarble],
-        ballLevel: Int
+        ballLevel: Int,
+        heroLevel: Int = MarbleVoyageHeroLevel.minLevel
     ) -> Double {
         let marble = meanDamageMultiplier(in: collection)
         let global = 1.0 + 0.05 * Double(max(0, ballLevel - 1))
-        return marble * global
+        let hero = MarbleVoyageHeroLevel.damageMultiplier(level: heroLevel)
+        return marble * global * hero
     }
 
-    /// Per-shot mult for the marble about to fire (level × Temper matchup).
+    /// Per-shot mult for the marble about to fire (hero × level × Temper matchup).
     static func shotDamageMultiplier(
         marble: MarbleVoyageOwnedMarble,
         ballLevel: Int,
-        foeTemper: PlinkTemper? = nil
+        foeTemper: PlinkTemper? = nil,
+        heroLevel: Int = MarbleVoyageHeroLevel.minLevel
     ) -> Double {
         let global = 1.0 + 0.05 * Double(max(0, ballLevel - 1))
-        let base = marble.damageMultiplier * global
+        let hero = MarbleVoyageHeroLevel.damageMultiplier(level: heroLevel)
+        let base = marble.damageMultiplier * global * hero
         guard let foeTemper else { return base }
         return base * marble.orb.temper.damageFactor(against: foeTemper)
     }

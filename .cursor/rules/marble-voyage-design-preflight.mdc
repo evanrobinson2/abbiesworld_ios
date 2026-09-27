@@ -29,6 +29,32 @@ Must exit **0**. Do not hand off on failure.
 
 Update thresholds in **both** `MarbleVoyageDesignRules.swift` and `scripts/check_voyage_design_rules.py` together.
 
+## Portrait tiles — vision review, not a guessed crop
+
+Do not ship a `portraitFaceBBox` (or rely on the default top-center head box) until this passes:
+
+```bash
+python3 scripts/review_voyage_portraits.py
+```
+
+That script renders the **exact tile crop** (normalized box, then center square fill) and sends **both** that crop and the full plate to a vision model in one request. The model must say the face — eyes, nose, mouth — is in frame and centered. Quills, ears, wings, or a sliver of face at the edge is a fail. It retries with the model’s suggested box. `--apply` writes only boxes that passed.
+
+Report: `artifacts/voyage-portrait-review/<stamp>/report.json`.
+
+The lizard idle plate has no usable face (broken composite). It stays out of `henchmenPool` until new art passes this review.
+
+## Opening-screen DAG (predicted stills)
+
+Every major build / preflight also runs:
+
+```bash
+python3 scripts/voyage_opening_screen_dag.py
+```
+
+Templated contracts for predictable opening screens (`title`, `chart`, `fight`, plus `shop` / `event`). Returns **anomalies** (hard fail) and **issues** (advisory). JSON report: `artifacts/voyage-opening-dag/latest.json`. Add a future still by appending a `ScreenSpec` in that script — do not invent a parallel checker.
+
+`./scripts/build_marble_voyage.sh` runs the DAG before `xcodebuild` (skip with `--skip-opening-dag` / `VOYAGE_SKIP_OPENING_DAG=1`).
+
 ## Stage stills after a major build (agent habit)
 
 Evan is not the builder — **you are**. After a **major Marble Voyage / Plink build** or playtest handoff:

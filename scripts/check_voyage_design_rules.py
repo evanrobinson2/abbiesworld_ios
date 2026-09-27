@@ -107,8 +107,8 @@ def check_swift_contract(failures: list[str]) -> None:
         "battleFeedMinBodyFont": str(FEED_MIN_BODY),
         "battleFeedMinMetaFont": str(FEED_MIN_META),
         "battleFeedMinChipValueFont": str(FEED_MIN_CHIP),
-        "fightAimTrackpadWidth": "176",
-        "fightAimTrackpadHeight": "118",
+        "fightAimTrackpadWidth": "200",
+        "fightAimTrackpadHeight": "136",
         "climbIntroSettleSeconds": str(CLIMB_SETTLE_SEC),
         "climbRevealPanSeconds": str(CLIMB_REVEAL_PAN_SEC),
         "climbRevealLetterSeconds": str(CLIMB_REVEAL_LETTER_SEC),
@@ -117,9 +117,16 @@ def check_swift_contract(failures: list[str]) -> None:
         "climbIntroPlayerScrollAnchorY": "0.58",
         "climbRevealFocusAnchorY": "0.38",
         "climbCastScrubPointsPerFrame": "72",
-        "climbFoeCardMaxWidth": "360",
-        "climbFoeCardEstimateHeight": "280",
+        "climbFoeCardMaxWidth": "300",
+        "climbFoeCardEstimateHeight": "250",
         "climbFoeCardMinClearance": "16",
+        "climbFoeCardNeighborClearance": "20",
+        "climbAbbieCardClearance": "120",
+        "climbAbbieCardMaxWidth": "420",
+        "versusRescueTotalSeconds": "3.6",
+        "versusRescueHoldStartsAt": "0.55",
+        "versusRescueCutawayStartsAt": "2.6",
+        "versusRescueBoardRevealAt": "2.95",
         "minTransparentPixelFraction": str(MIN_TRANSPARENT_FRAC),
         "climbChartMinWidthFraction": f"{CLIMB_MIN_W_FRAC:.2f}",
         "climbChartMaxWidthFraction": f"{CLIMB_MAX_W_FRAC:.2f}",
@@ -296,8 +303,13 @@ def check_climb_intro(failures: list[str]) -> None:
         fail(failures, "climb cast must scrub frames on vertical drag")
     if "presentEngageCardForReachable" not in text and "climbEngageNodeID" not in text:
         fail(failures, "climb must keep a foe card for the next glowing landing")
-    if "preferredCardDock" not in text and "climbFoeCardDock" not in text:
-        fail(failures, "foe card must dock opposite the focused tile (occlusion)")
+    if (
+        "preferredCardPlacement" not in text
+        and "preferredCardDock" not in text
+        and "climbFoeCardPlacement" not in text
+        and "climbFoeCardDock" not in text
+    ):
+        fail(failures, "foe card must dock clear of focus + neighbor tiles (occlusion)")
     battle = BATTLE.read_text(encoding="utf-8")
     if "fightAimTrackpadWidth" not in battle and "applyAimJoystick" not in battle:
         fail(failures, "fight HUD must expose a fixed-size aim trackpad wired to applyAimJoystick")
@@ -343,6 +355,11 @@ def check_versus_portraits(failures: list[str]) -> None:
         vtext = read(versus)
         if "PeglinEnemyFigurine" not in vtext:
             fail(failures, "VS screen must render PeglinEnemyFigurine for enemies")
+        if "versusRescueDoneAt" not in vtext or "versusRescueCutawayStartsAt" not in vtext:
+            fail(
+                failures,
+                "VS fight cue must use MarbleVoyageDesignRules.versusRescue* timings",
+            )
     else:
         fail(failures, "PlinkBattleVersusIntroView.swift missing")
 

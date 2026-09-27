@@ -23,6 +23,12 @@ enum PlinkBattleBalance {
         var playerHPLeft: Int
         var damageDealt: Int
         var damageTaken: Int
+        var meanShotDuration: Double
+        var maxShotDuration: Double
+        var meanPegHits: Double
+        var zeroHitShots: Int
+        /// Shots with long hang + few pegs (fun smell seed).
+        var longHangFewPegShots: Int
     }
 
     struct WinRateReport: Equatable {
@@ -34,12 +40,20 @@ enum PlinkBattleBalance {
         var meanHPLeftWhenWon: Double
     }
 
+    struct ShotSample: Equatable, Sendable {
+        var pegDamage: Int
+        var bombAOE: Int
+        var pegHits: Int
+        /// Simulated hang time (seconds) before floor / stall.
+        var duration: Double
+    }
+
     /// Sample spirit-mode peg damage for one aim on a board (no UI).
     static func sampleShotDamage(
         level: BoardLevel,
         aimOffset: CGFloat,
         tuning: PhysicsTuning = .default
-    ) -> (pegDamage: Int, bombAOE: Int, pegHits: Int) {
+    ) -> ShotSample {
         var pack = PlinkContinuum.materialize(
             level: level,
             size: CGSize(width: level.referenceWidth, height: level.referenceHeight),
@@ -86,11 +100,15 @@ enum PlinkBattleBalance {
                         critActive = true
                         pegDamage = max(1, pegDamage) * 2
                     }
-                    pegDamage += PeglinBattleRules.points(for: .crit, critActive: critActive)
+                    pegDamage += PeglinBattleRules.scaledPoints(
+                        PeglinBattleRules.points(for: .crit, critActive: critActive)
+                    )
                 default:
-                    pegDamage += PeglinBattleRules.points(
-                        for: pack.pegs[idx].kind,
-                        critActive: critActive
+                    pegDamage += PeglinBattleRules.scaledPoints(
+                        PeglinBattleRules.points(
+                            for: pack.pegs[idx].kind,
+                            critActive: critActive
+                        )
                     )
                 }
             }
@@ -99,10 +117,18 @@ enum PlinkBattleBalance {
             if hypot(vel.dx, vel.dy) < 8 && t > 0.9 { break }
             if pegHits > 80 { break }
         }
-        return (pegDamage, bombAOE, pegHits)
+        return ShotSample(
+            pegDamage: pegDamage,
+            bombAOE: bombAOE,
+            pegHits: pegHits,
+            duration: Double(t)
+        )
     }
 
     /// One full rescue fight under approach/melee rules.
+    /// - Parameters:
+    ///   - aimSpread: launch aim offsets sampled each round (tighter = more skilled).
+    ///   - shotDamageMultiplier: marble level × Temper × ball level fold-in (default 1).
     static func simulateFight(
         role: MarbleVoyageGangFightRole,
         wave: PlinkAttackerKind,
@@ -110,7 +136,9 @@ enum PlinkBattleBalance {
         playerMaxHP: Int = MarbleVoyageRun.defaultMaxHP,
         boardID: String = "fox.pawPrint",
         seed: UInt64,
-        maxRounds: Int = 80
+        maxRounds: Int = 80,
+        aimSpread: ClosedRange<CGFloat> = -0.75...0.75,
+        shotDamageMultiplier: Double = 1.0
     ) -> FightResult {
         var rng = SeededGenerator(seed: seed)
         var roster = PeglinBattleRules.makeRescueRoster(
@@ -124,7 +152,30 @@ enum PlinkBattleBalance {
         var rounds = 0
         var dealt = 0
         var taken = 0
+        var durationSum = 0.0
+        var durationMax = 0.0
+        var pegHitSum = 0.0
+        var zeroHits = 0
+        var longHangFew = 0
         let level = BoardLevel.level(id: boardID) ?? BoardLevel.catalog[0]
+        let mult = max(0.05, shotDamageMultiplier)
+        let pegBudget = max(1, level.pegs.count)
+
+        func packResult(won: Bool) -> FightResult {
+            let n = max(1, rounds)
+            return FightResult(
+                won: won,
+                rounds: rounds,
+                playerHPLeft: playerHP,
+                damageDealt: dealt,
+                damageTaken: taken,
+                meanShotDuration: durationSum / Double(n),
+                maxShotDuration: durationMax,
+                meanPegHits: pegHitSum / Double(n),
+                zeroHitShots: zeroHits,
+                longHangFewPegShots: longHangFew
+            )
+        }
 
         while rounds < maxRounds, playerHP > 0 {
             rounds += 1
@@ -132,11 +183,20 @@ enum PlinkBattleBalance {
                   !roster[frontIdx].isDefeated
             else { break }
 
-            // Aim fan — kid-ish mid-board bias with noise.
-            let aim = CGFloat.random(in: -0.75...0.75, using: &rng)
+            let aim = CGFloat.random(in: aimSpread, using: &rng)
             let sample = sampleShotDamage(level: level, aimOffset: aim)
-            let peg = sample.pegDamage
-            let aoe = sample.bombAOE
+            durationSum += sample.duration
+            durationMax = max(durationMax, sample.duration)
+            pegHitSum += Double(sample.pegHits)
+            if sample.pegHits == 0 { zeroHits += 1 }
+            // Hang smell: long flight, few hits relative to board peg count.
+            if sample.duration >= MarbleVoyageFunSmell.hangDurationThreshold
+                && sample.pegHits <= max(2, pegBudget / 12) {
+                longHangFew += 1
+            }
+
+            let peg = Int((Double(sample.pegDamage) * mult).rounded())
+            let aoe = Int((Double(sample.bombAOE) * mult).rounded())
 
             if peg > 0 {
                 roster[frontIdx].hp = max(0, roster[frontIdx].hp - peg)
@@ -155,13 +215,7 @@ enum PlinkBattleBalance {
                     frontID = next.id
                     frontIdx = roster.firstIndex(where: { $0.id == next.id })!
                 } else {
-                    return FightResult(
-                        won: true,
-                        rounds: rounds,
-                        playerHPLeft: playerHP,
-                        damageDealt: dealt,
-                        damageTaken: taken
-                    )
+                    return packResult(won: true)
                 }
             }
 
@@ -176,31 +230,13 @@ enum PlinkBattleBalance {
                 taken += swing.damage
             }
             if playerHP <= 0 {
-                return FightResult(
-                    won: false,
-                    rounds: rounds,
-                    playerHPLeft: 0,
-                    damageDealt: dealt,
-                    damageTaken: taken
-                )
+                return packResult(won: false)
             }
             if roster.allSatisfy(\.isDefeated) {
-                return FightResult(
-                    won: true,
-                    rounds: rounds,
-                    playerHPLeft: playerHP,
-                    damageDealt: dealt,
-                    damageTaken: taken
-                )
+                return packResult(won: true)
             }
         }
-        return FightResult(
-            won: roster.allSatisfy(\.isDefeated) && playerHP > 0,
-            rounds: rounds,
-            playerHPLeft: playerHP,
-            damageDealt: dealt,
-            damageTaken: taken
-        )
+        return packResult(won: roster.allSatisfy(\.isDefeated) && playerHP > 0)
     }
 
     static func winRate(

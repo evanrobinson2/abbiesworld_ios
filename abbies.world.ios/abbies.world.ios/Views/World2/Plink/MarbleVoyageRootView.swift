@@ -65,7 +65,7 @@ struct MarbleVoyageRootView: View {
                 PlinkBattleHostView(
                     title: "Trail scrap",
                     enemyKind: .foxSpirit,
-                    waveAttackerOverride: MarbleVoyageRun.makeCampaign(seed: 42).node("land0_poi1")?.waveAttacker,
+                    waveAttackerOverride: MarbleVoyageRun.makeCampaign(seed: 42).node("land0_fight1")?.waveAttacker,
                     focusCrewMember: .raze,
                     gangFightRole: .henchman,
                     sceneBackgroundAsset: MarbleVoyageArt.fightPlate(enemy: .foxSpirit),

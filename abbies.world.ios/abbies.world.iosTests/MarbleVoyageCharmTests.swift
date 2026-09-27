@@ -42,9 +42,9 @@ final class MarbleVoyageCharmTests: XCTestCase {
         XCTAssertEqual(run.effectiveGoldPegValue, 7) // 6 * 1.2 → 7
         XCTAssertEqual(run.shopHealAmount(), 30) // 20%+5% of 120
 
-        run.choose("land0_poi1")
+        run.choose("land0_fight1")
         XCTAssertEqual(run.record.path.count, 1)
-        XCTAssertEqual(run.record.path[0].to, "land0_poi1")
+        XCTAssertEqual(run.record.path[0].to, "land0_fight1")
     }
 
     func testCharmArtIsBundledUnderCatalogName() {

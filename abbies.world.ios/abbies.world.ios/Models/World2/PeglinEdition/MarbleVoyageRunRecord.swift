@@ -20,6 +20,8 @@ struct MarbleVoyageRunRecord: Equatable, Codable, Sendable {
     var playerHP: Int
     var playerMaxHP: Int
     var ballLevel: Int
+    var heroLevel: Int
+    var heroXPIntoLevel: Int
     /// Charm id → stack count (permanent for the run).
     var charmStacks: [String: Int]
     var path: [PathStep]
@@ -126,6 +128,8 @@ struct MarbleVoyageRunRecord: Equatable, Codable, Sendable {
             playerHP: playerMaxHP,
             playerMaxHP: playerMaxHP,
             ballLevel: 1,
+            heroLevel: MarbleVoyageHeroLevel.minLevel,
+            heroXPIntoLevel: 0,
             charmStacks: [:],
             path: [],
             fights: [],

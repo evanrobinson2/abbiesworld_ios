@@ -88,6 +88,10 @@ struct MarbleVoyageNode: Identifiable, Equatable, Sendable {
     var gangRole: MarbleVoyageGangFightRole?
     /// Which land (mini-arc) this node belongs to; -1 for the summit and non-arc nodes.
     var miniArcIndex: Int
+    /// Gift / rest beats that skip a fight award no hero XP.
+    var awardsHeroXP: Bool
+    /// Winning this fight also pays a small treasure bonus (coins).
+    var grantsTreasureOnWin: Bool
 
     init(
         id: String,
@@ -100,7 +104,9 @@ struct MarbleVoyageNode: Identifiable, Equatable, Sendable {
         stage: Int = 0,
         waveAttacker: PlinkAttackerKind? = nil,
         gangRole: MarbleVoyageGangFightRole? = nil,
-        miniArcIndex: Int = -1
+        miniArcIndex: Int = -1,
+        awardsHeroXP: Bool = true,
+        grantsTreasureOnWin: Bool = false
     ) {
         self.id = id
         self.kind = kind
@@ -113,6 +119,8 @@ struct MarbleVoyageNode: Identifiable, Equatable, Sendable {
         self.waveAttacker = waveAttacker
         self.gangRole = gangRole
         self.miniArcIndex = miniArcIndex
+        self.awardsHeroXP = awardsHeroXP
+        self.grantsTreasureOnWin = grantsTreasureOnWin
     }
 }
 
@@ -153,6 +161,10 @@ struct MarbleVoyageRun: Equatable, Sendable {
     var coins: Int
     var charmStacks: [MarbleVoyageCharm: Int]
     var ballLevel: Int
+    /// Hero level from fight/event XP (Dota-style) — not from walking tiles.
+    var heroLevel: Int
+    /// XP progress inside the current hero level (0 until next).
+    var heroXPIntoLevel: Int
     var marbleCollection: [MarbleVoyageOwnedMarble]
     var economy: MarbleVoyageEconomyTuning
     var shop: MarbleVoyageShopState?
@@ -165,12 +177,12 @@ struct MarbleVoyageRun: Equatable, Sendable {
     static let defaultMaxHP = 120
     /// Lands in a campaign climb — each headed by one named crew mini-boss.
     static let gangMiniArcCount = 3
-    /// POI fights inside one land before that land's boss.
-    static let gangZonesPerArc = 3
-    /// Combat nodes: per land 2 scraps + land boss, plus summit.
-    static let campaignTotalFights = gangMiniArcCount * 3 + 1
-    /// Mid-land encounter + post-boss rest, per land.
-    static let campaignEventBeats = gangMiniArcCount * 2
+    /// Fight-vs-gift choice forks inside one land before that land's boss.
+    static let gangChoiceForksPerArc = 2
+    /// Max combat clears if the kid always takes the fight (scraps + land bosses + summit).
+    static let campaignTotalFights = gangMiniArcCount * (gangChoiceForksPerArc + 1) + 1
+    /// Gift bypass tiles + post-boss rest, per land (all present on the chart).
+    static let campaignEventBeats = gangMiniArcCount * (gangChoiceForksPerArc + 1)
 
     var currentNode: MarbleVoyageNode? {
         nodes.first { $0.id == currentNodeID }
@@ -219,7 +231,12 @@ struct MarbleVoyageRun: Equatable, Sendable {
 
     // MARK: - Fight resolution
 
-    mutating func finishFight(won: Bool, remainingHP: Int, goldEarned: Int = 0) {
+    mutating func finishFight(
+        won: Bool,
+        remainingHP: Int,
+        goldEarned: Int = 0,
+        comboXP: Int = 0
+    ) {
         let fought = currentNode
         let hpBefore = playerHP
         playerHP = max(0, min(playerMaxHP, remainingHP))
@@ -237,13 +254,32 @@ struct MarbleVoyageRun: Equatable, Sendable {
         }
 
         fightsCleared += 1
-        coins += max(0, goldEarned)
-        appendFightRecord(fought, won: true, hpBefore: hpBefore, goldEarned: max(0, goldEarned))
+        var purseGain = max(0, goldEarned)
+        var treasureNote = ""
+        if fought?.grantsTreasureOnWin == true {
+            let bonus = 10 + max(0, fought?.threat ?? 0) * 2
+            purseGain += bonus
+            treasureNote = " · treasure +\(bonus)"
+        }
+        coins += purseGain
+        var xpNote = awardFightWinXP(for: fought)
+        let cappedCombo = min(
+            max(0, comboXP),
+            MarbleVoyageHeroLevel.comboXPCapPerFight
+        )
+        if cappedCombo > 0 {
+            let comboNote = awardHeroXP(cappedCombo)
+            if !comboNote.isEmpty {
+                xpNote = xpNote.isEmpty ? "Combo \(comboNote)" : "\(xpNote) · combo \(comboNote)"
+            }
+        }
+        appendFightRecord(fought, won: true, hpBefore: hpBefore, goldEarned: purseGain)
 
         if fought?.kind == .boss, mode == .campaign {
             phase = .victory
             pendingVictoryAfterShop = false
             lastEventLine = "\(gang.bigBoss.displayName) is beaten — the summit is yours!"
+                + (xpNote.isEmpty ? "" : " · \(xpNote)")
             record.outcome = .victory
             record.finishedAtISO8601 = ISO8601DateFormatter().string(from: Date())
             syncRecordTotals()
@@ -251,9 +287,10 @@ struct MarbleVoyageRun: Equatable, Sendable {
             return
         }
 
-        lastEventLine = goldEarned > 0
-            ? "Won with \(playerHP)/\(playerMaxHP) HP · +\(goldEarned) coins."
+        let baseLine = purseGain > 0
+            ? "Won with \(playerHP)/\(playerMaxHP) HP · +\(purseGain) coins\(treasureNote)."
             : "Won with \(playerHP)/\(playerMaxHP) HP. Heal only at the shop."
+        lastEventLine = xpNote.isEmpty ? baseLine : "\(baseLine) · \(xpNote)"
         openShop(after: currentNodeID)
     }
 
@@ -431,12 +468,20 @@ struct MarbleVoyageRun: Equatable, Sendable {
                 marbleCollection[idx].level + 1
             )
         }
-        lastEventLine = outcome.message
+        let xpNote: String
+        if currentNode?.awardsHeroXP == false {
+            xpNote = "no XP (gift)"
+        } else {
+            xpNote = awardHeroXP(MarbleVoyageHeroLevel.eventXP(for: kind))
+        }
+        lastEventLine = xpNote.isEmpty
+            ? outcome.message
+            : "\(outcome.message) · \(xpNote)"
         record.events.append(
             .init(
                 nodeID: currentNodeID,
                 kind: kind.rawValue,
-                message: outcome.message,
+                message: lastEventLine,
                 hpDelta: outcome.hpDelta,
                 coinDelta: outcome.coinDelta
             )
@@ -516,12 +561,61 @@ struct MarbleVoyageRun: Equatable, Sendable {
         MarbleVoyageMarbleRules.fightDeckOrbIDs(in: marbleCollection)
     }
 
-    /// Cage damage multiplier from marble levels × the legacy global ball level.
+    /// Cage damage: hero level × marble mean × legacy ballLevel steps.
     var fightDamageMultiplier: Double {
         MarbleVoyageMarbleRules.fightDamageMultiplier(
             collection: marbleCollection,
-            ballLevel: ballLevel
+            ballLevel: ballLevel,
+            heroLevel: heroLevel
         )
+    }
+
+    /// 0…1 fill for the climb / fight XP bar.
+    var heroXPProgress: Double {
+        MarbleVoyageHeroLevel.progress(level: heroLevel, xpIntoLevel: heroXPIntoLevel)
+    }
+
+    /// Grant XP; bumps max HP on odd levels; returns kid-facing note (or "").
+    @discardableResult
+    mutating func awardHeroXP(_ amount: Int) -> String {
+        let before = heroLevel
+        let result = MarbleVoyageHeroLevel.apply(
+            xp: amount,
+            level: heroLevel,
+            xpIntoLevel: heroXPIntoLevel
+        )
+        heroLevel = result.newLevel
+        heroXPIntoLevel = result.newXPIntoLevel
+        if result.maxHPGained > 0 {
+            playerMaxHP += result.maxHPGained
+            playerHP = min(playerMaxHP, playerHP + result.maxHPGained)
+        }
+        syncRecordTotals()
+        guard result.xpGained > 0 else { return "" }
+        if result.levelsGained > 0 {
+            return "+\(result.xpGained) XP · Level \(before)→\(heroLevel)!"
+        }
+        return "+\(result.xpGained) XP"
+    }
+
+    @discardableResult
+    mutating func awardFightWinXP(for node: MarbleVoyageNode?) -> String {
+        let role = node?.gangRole ?? .henchman
+        let wave = node?.waveAttacker ?? .porcupineBoxer
+        let focus = wave
+        let seed = PeglinBattleRules.rescueRosterSeed(
+            wave: wave,
+            focus: focus,
+            role: role,
+            climbStage: node?.stage ?? fightsCleared
+        )
+        let xp = MarbleVoyageHeroLevel.fightWinXP(
+            role: role,
+            wave: wave,
+            focus: focus,
+            seed: seed
+        )
+        return awardHeroXP(xp)
     }
 
     func defeatCopy() -> String {
@@ -559,6 +653,8 @@ struct MarbleVoyageRun: Equatable, Sendable {
         record.playerHP = playerHP
         record.playerMaxHP = playerMaxHP
         record.ballLevel = ballLevel
+        record.heroLevel = heroLevel
+        record.heroXPIntoLevel = heroXPIntoLevel
     }
 
     private mutating func appendFightRecord(
@@ -646,6 +742,8 @@ struct MarbleVoyageRun: Equatable, Sendable {
             coins: 0,
             charmStacks: [:],
             ballLevel: 1,
+            heroLevel: MarbleVoyageHeroLevel.minLevel,
+            heroXPIntoLevel: 0,
             marbleCollection: MarbleVoyageOwnedMarble.starterCollection(),
             economy: economy,
             shop: nil,
@@ -662,74 +760,224 @@ struct MarbleVoyageRun: Equatable, Sendable {
         )
     }
 
-    /// Linear climb: 3 lands × (trail → bridge → cliff scrap → land boss), then the summit.
+    /// Branched climb for player-protocol Monte Carlo (not the live kid chart).
+    /// Forks: easy/hard scrap, fight/event mid-land, rest/push after mini-boss.
+    static func makeProtocolCampaign(seed: UInt64) -> MarbleVoyageRun {
+        let gang = MarbleVoyageGangRun.make(seed: seed)
+        var nodes: [MarbleVoyageNode] = [
+            .init(id: "start", kind: .start, column: 0, row: 1, title: "Sky Dock")
+        ]
+        var edges: [MarbleVoyageEdge] = []
+        var column = 1
+        var step = 0
+        var usedHenchmen: Set<PlinkAttackerKind> = []
+
+        func add(_ node: MarbleVoyageNode) {
+            nodes.append(node)
+        }
+        func join(_ from: String, _ to: String) {
+            edges.append(.init(from: from, to: to))
+        }
+        func nextHenchman(salt: UInt64, opener: Bool = false) -> PlinkAttackerKind {
+            if opener {
+                usedHenchmen.insert(MarbleVoyageGangRun.openerHenchman)
+                return MarbleVoyageGangRun.openerHenchman
+            }
+            let pick = gang.randomHenchman(seedSalt: salt, excluding: usedHenchmen)
+            usedHenchmen.insert(pick)
+            return pick
+        }
+
+        var prevIDs = ["start"]
+
+        for land in 0..<gangMiniArcCount {
+            let hostage = gang.hostage(forArc: land)
+            step += 1
+            // Fork A: easy scrap vs hard scrap
+            let easyID = "land\(land)_easy"
+            let hardID = "land\(land)_hard"
+            add(.init(
+                id: easyID, kind: .fight, column: column, row: 0,
+                title: "Easy scrap", enemyKind: hostage, threat: max(1, step - 1), stage: step,
+                waveAttacker: nextHenchman(salt: seed &+ UInt64(step), opener: step == 1),
+                gangRole: .henchman, miniArcIndex: land
+            ))
+            add(.init(
+                id: hardID, kind: .fight, column: column, row: 2,
+                title: "Hard scrap", enemyKind: hostage, threat: step + 2, stage: step,
+                waveAttacker: nextHenchman(salt: seed &+ UInt64(step) &* 17),
+                gangRole: .henchman, miniArcIndex: land
+            ))
+            for p in prevIDs {
+                join(p, easyID)
+                join(p, hardID)
+            }
+            column += 1
+            step += 1
+
+            // Fork B: mid fight vs event
+            let midFight = "land\(land)_midFight"
+            let midEvent = "land\(land)_midEvent"
+            var midRng = SeededGenerator(seed: seed &+ UInt64(land) &* 4242)
+            let eventKind: MarbleVoyageNodeKind = [.treasure, .mystery, .shrine]
+                .randomElement(using: &midRng) ?? .treasure
+            add(.init(
+                id: midFight, kind: .fight, column: column, row: 0,
+                title: "Mid scrap", enemyKind: hostage, threat: step, stage: step,
+                waveAttacker: nextHenchman(salt: seed &+ UInt64(step) &* 99),
+                gangRole: .henchman, miniArcIndex: land
+            ))
+            add(.init(
+                id: midEvent, kind: eventKind, column: column, row: 2,
+                title: Self.eventTitle(eventKind, stage: step, rng: &midRng),
+                threat: step, stage: step, miniArcIndex: land
+            ))
+            for fork in [easyID, hardID] {
+                join(fork, midFight)
+                join(fork, midEvent)
+            }
+            column += 1
+            step += 1
+
+            // Mini-boss (merge)
+            let bossID = "land\(land)_boss"
+            let head = gang.miniBoss(arcIndex: land)
+            add(.init(
+                id: bossID, kind: .fight, column: column, row: 1,
+                title: "\(head.displayName)’s gate", enemyKind: hostage, threat: step, stage: step,
+                waveAttacker: head, gangRole: .miniBoss, miniArcIndex: land
+            ))
+            join(midFight, bossID)
+            join(midEvent, bossID)
+            column += 1
+            step += 1
+
+            // Fork C: rest vs push (skip rest into a bonus scrap)
+            let restID = "land\(land)_rest"
+            let pushID = "land\(land)_push"
+            let restKind: MarbleVoyageNodeKind = land % 2 == 0 ? .shrine : .treasure
+            var restRng = SeededGenerator(seed: seed &+ UInt64(land) &* 77)
+            add(.init(
+                id: restID, kind: restKind, column: column, row: 0,
+                title: Self.eventTitle(restKind, stage: step, rng: &restRng),
+                threat: step, stage: step, miniArcIndex: land
+            ))
+            add(.init(
+                id: pushID, kind: .fight, column: column, row: 2,
+                title: "Push scrap", enemyKind: hostage, threat: step + 1, stage: step,
+                waveAttacker: nextHenchman(salt: seed &+ UInt64(step) &* 313),
+                gangRole: .henchman, miniArcIndex: land
+            ))
+            join(bossID, restID)
+            join(bossID, pushID)
+            column += 1
+            prevIDs = [restID, pushID]
+        }
+
+        step += 2
+        let summitID = "boss"
+        add(.init(
+            id: summitID, kind: .boss, column: column, row: 1,
+            title: "Summit · \(gang.bigBoss.displayName)",
+            enemyKind: .bizarroAbbie, threat: step, stage: step,
+            waveAttacker: gang.bigBoss, gangRole: .bigBoss, miniArcIndex: -1
+        ))
+        for p in prevIDs { join(p, summitID) }
+
+        return makeRunShell(
+            mode: .campaign,
+            seed: seed,
+            gang: gang,
+            nodes: nodes,
+            edges: edges,
+            lastEventLine: "protocol-audit map"
+        )
+    }
+
+    /// Branching climb: each scrap is Fight (gold + XP, sometimes treasure) vs Gift (loot, no XP).
+    /// Land bosses + summit stay mandatory.
     static func makeCampaign(seed: UInt64) -> MarbleVoyageRun {
         let gang = MarbleVoyageGangRun.make(seed: seed)
         var nodes: [MarbleVoyageNode] = [
             .init(id: "start", kind: .start, column: 0, row: 1, title: "Sky Dock")
         ]
         var edges: [MarbleVoyageEdge] = []
-        var previousID = "start"
         var column = 1
         var step = 0
+        var prevIDs = ["start"]
+        var usedHenchmen: Set<PlinkAttackerKind> = []
 
-        func link(_ to: String) {
-            edges.append(.init(from: previousID, to: to))
-            previousID = to
+        func join(_ from: String, _ to: String) {
+            edges.append(.init(from: from, to: to))
+        }
+        func nextHenchman(salt: UInt64, opener: Bool = false) -> PlinkAttackerKind {
+            if opener {
+                usedHenchmen.insert(MarbleVoyageGangRun.openerHenchman)
+                return MarbleVoyageGangRun.openerHenchman
+            }
+            let pick = gang.randomHenchman(seedSalt: salt, excluding: usedHenchmen)
+            usedHenchmen.insert(pick)
+            return pick
         }
 
         // Kid-facing scrap names — never leak L# / POI scaffolding into the chart.
         let scrapByLand: [[String]] = [
-            ["Trail scrap", "Bridge scrap", "Cliff scrap"],
-            ["Canal scrap", "Market scrap", "Rooftop scrap"],
-            ["Fog scrap", "Ruin scrap", "Spire scrap"],
+            ["Trail scrap", "Bridge scrap"],
+            ["Canal scrap", "Market scrap"],
+            ["Fog scrap", "Ruin scrap"],
         ]
-        let poiRows = [0, 2, 0]
 
         for land in 0..<gangMiniArcCount {
             let hostage = gang.hostage(forArc: land)
             let scraps = scrapByLand[land % scrapByLand.count]
-            for poi in 0..<gangZonesPerArc {
+
+            for fork in 0..<gangChoiceForksPerArc {
                 step += 1
-                let id = "land\(land)_poi\(poi + 1)"
-                // Middle scrap → encounter / treasure instead of a fight.
-                if poi == 1 {
-                    var rng = SeededGenerator(seed: seed &+ UInt64(step) &* 9_911)
-                    let kinds: [MarbleVoyageNodeKind] = [.treasure, .mystery, .shrine]
-                    let kind = kinds[Int.random(in: 0..<kinds.count, using: &rng)]
-                    nodes.append(
-                        .init(
-                            id: id,
-                            kind: kind,
-                            column: column,
-                            row: poiRows[poi % poiRows.count],
-                            title: Self.eventTitle(kind, stage: step, rng: &rng),
-                            threat: step,
-                            stage: step,
-                            miniArcIndex: land
-                        )
+                let fightID = "land\(land)_fight\(fork + 1)"
+                let giftID = "land\(land)_gift\(fork + 1)"
+                var giftRng = SeededGenerator(seed: seed &+ UInt64(step) &* 9_911)
+                let giftKind: MarbleVoyageNodeKind = [.treasure, .mystery, .shrine]
+                    .randomElement(using: &giftRng) ?? .treasure
+
+                nodes.append(
+                    .init(
+                        id: fightID,
+                        kind: .fight,
+                        column: column,
+                        row: 0,
+                        title: scraps[fork % scraps.count],
+                        enemyKind: hostage,
+                        threat: step,
+                        stage: step,
+                        // Opening campaign fight always introduces the approved boxer once.
+                        waveAttacker: nextHenchman(
+                            salt: seed &+ UInt64(step) &* 104_729,
+                            opener: step == 1
+                        ),
+                        gangRole: .henchman,
+                        miniArcIndex: land,
+                        // Second scrap of each land can drop bonus treasure on win.
+                        grantsTreasureOnWin: fork == 1
                     )
-                } else {
-                    nodes.append(
-                        .init(
-                            id: id,
-                            kind: .fight,
-                            column: column,
-                            row: poiRows[poi % poiRows.count],
-                            title: scraps[poi % scraps.count],
-                            enemyKind: hostage,
-                            threat: step,
-                            stage: step,
-                            // Opening campaign fight always introduces the approved boxer.
-                            waveAttacker: step == 1 ? .porcupineBoxer : gang.randomHenchman(
-                                seedSalt: seed &+ UInt64(step) &* 104_729
-                            ),
-                            gangRole: .henchman,
-                            miniArcIndex: land
-                        )
+                )
+                nodes.append(
+                    .init(
+                        id: giftID,
+                        kind: giftKind,
+                        column: column,
+                        row: 2,
+                        title: "Gift · \(Self.eventTitle(giftKind, stage: step, rng: &giftRng))",
+                        threat: step,
+                        stage: step,
+                        miniArcIndex: land,
+                        awardsHeroXP: false
                     )
+                )
+                for prev in prevIDs {
+                    join(prev, fightID)
+                    join(prev, giftID)
                 }
-                link(id)
+                prevIDs = [fightID, giftID]
                 column += 1
             }
 
@@ -751,10 +999,10 @@ struct MarbleVoyageRun: Equatable, Sendable {
                     miniArcIndex: land
                 )
             )
-            link(bossID)
+            for prev in prevIDs { join(prev, bossID) }
             column += 1
 
-            // Rest beat after each land boss — shrine or treasure.
+            // Post-boss rest — still awards XP (not a fight bypass).
             step += 1
             let restID = "land\(land)_rest"
             var restRng = SeededGenerator(seed: seed &+ UInt64(land) &* 77_777)
@@ -768,17 +1016,20 @@ struct MarbleVoyageRun: Equatable, Sendable {
                     title: Self.eventTitle(restKind, stage: step, rng: &restRng),
                     threat: step,
                     stage: step,
-                    miniArcIndex: land
+                    miniArcIndex: land,
+                    awardsHeroXP: true
                 )
             )
-            link(restID)
+            join(bossID, restID)
+            prevIDs = [restID]
             column += 1
         }
 
-        step += 2 // the summit is a real step up from the last land rest
+        step += 2
+        let summitID = "boss"
         nodes.append(
             .init(
-                id: "boss",
+                id: summitID,
                 kind: .boss,
                 column: column,
                 row: 1,
@@ -791,7 +1042,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
                 miniArcIndex: -1
             )
         )
-        link("boss")
+        for prev in prevIDs { join(prev, summitID) }
 
         return makeRunShell(
             mode: .campaign,
@@ -799,7 +1050,7 @@ struct MarbleVoyageRun: Equatable, Sendable {
             gang: gang,
             nodes: nodes,
             edges: edges,
-            lastEventLine: ""
+            lastEventLine: "Fight for gold & XP — or take the gift and skip the XP."
         )
     }
 
@@ -873,9 +1124,17 @@ struct MarbleVoyageRun: Equatable, Sendable {
                 enemyKind: Self.enemyForStage(wave, branch: 0),
                 threat: max(1, 1 + wave / 2),
                 stage: wave,
-                waveAttacker: gang.randomHenchman(
-                    seedSalt: seed &+ UInt64(wave) &* 7919
-                ),
+                waveAttacker: {
+                    if wave == 1 { return MarbleVoyageGangRun.openerHenchman }
+                    // Prefer unused pool; never re-roll the opener boxer after wave 1.
+                    let seen = Set(
+                        nodes.compactMap(\.waveAttacker).filter { !$0.isNamedCrew }
+                    )
+                    return gang.randomHenchman(
+                        seedSalt: seed &+ UInt64(wave) &* 7919,
+                        excluding: seen.union([MarbleVoyageGangRun.openerHenchman])
+                    )
+                }(),
                 gangRole: .henchman,
                 miniArcIndex: arc
             )
@@ -902,40 +1161,6 @@ struct MarbleVoyageRun: Equatable, Sendable {
     private static func enemyForStage(_ stage: Int, branch: Int) -> PeglinEnemyKind {
         let cycle: [PeglinEnemyKind] = [.brambleSpirit, .foxSpirit, .stagSpirit]
         return cycle[(stage + branch) % cycle.count]
-    }
-
-    private static func appendEventColumn(
-        into nodes: inout [MarbleVoyageNode],
-        column: Int,
-        stage: Int,
-        rng: inout SeededGenerator
-    ) -> [String] {
-        let kinds: [MarbleVoyageNodeKind] = [.treasure, .mystery]
-        let top = kinds.randomElement(using: &rng) ?? .treasure
-        var bottomPool = kinds.filter { $0 != top }
-        if bottomPool.isEmpty { bottomPool = [MarbleVoyageNodeKind.mystery] }
-        let bottom = bottomPool.randomElement(using: &rng) ?? .mystery
-        let idA = "ev\(column)a"
-        let idB = "ev\(column)b"
-        nodes.append(
-            .init(
-                id: idA,
-                kind: top,
-                column: column,
-                row: 0,
-                title: eventTitle(top, rng: &rng)
-            )
-        )
-        nodes.append(
-            .init(
-                id: idB,
-                kind: bottom,
-                column: column,
-                row: 2,
-                title: eventTitle(bottom, rng: &rng)
-            )
-        )
-        return [idA, idB]
     }
 
     /// Fixed labels only — Treasure or ? (no invented place names).

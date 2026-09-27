@@ -29,6 +29,7 @@ struct MarbleVoyageHostView: View {
     @State private var sceneCurtain = false
     @State private var dockPulse = false
     @State private var chartContentSize: CGSize = .zero
+    @State private var chartViewportSize: CGSize = .zero
     @State private var climbScrollOffset: CGFloat = 0
     @State private var atmosphereBoost: Double = 0
     @State private var climbIntroToken: UInt = 0
@@ -47,6 +48,8 @@ struct MarbleVoyageHostView: View {
     @State private var climbIntroViewportHeight: CGFloat = 0
     /// After cast (or when returning to map): reachable landing the foe card describes.
     @State private var climbEngageNodeID: String?
+    /// Pull-up chart drawer — native ScrollView so the sim can reach the whole climb.
+    @State private var climbChartDrawerOpen = false
     @StateObject private var chartMusic = PlinkMusicService()
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var captureReady = false
@@ -84,17 +87,41 @@ struct MarbleVoyageHostView: View {
         isClimbIntroPlaying || climbEngageNodeID != nil
     }
 
-    private var climbFoeCardDock: MarbleVoyageOverlandScroll.CardDock {
+    private var climbFoeCardPlacement: MarbleVoyageOverlandScroll.CardPlacement {
         let focusID = isClimbIntroPlaying
             ? climbRevealFocusID
             : (climbEngageNodeID ?? climbRevealFocusID)
+        let fallback = MarbleVoyageOverlandScroll.CardPlacement(
+            dock: .trailing,
+            topPad: MarbleVoyageDesignRules.climbFoeCardTopPad
+        )
         guard let focusID,
-              let point = nodePositionsForCurrentChart()[focusID],
-              chartContentSize.width > 1
-        else { return .trailing }
-        return MarbleVoyageOverlandScroll.preferredCardDock(
-            focusX: point.x,
-            contentWidth: chartContentSize.width
+              let focusPoint = nodePositionsForCurrentChart()[focusID],
+              chartContentSize.width > 1,
+              chartViewportSize.width > 1
+        else { return fallback }
+
+        // Tile size must match chart() — keyed off viewport width, not content width.
+        let tile = MarbleVoyageArt.chartTileSize(forViewportWidth: chartViewportSize.width)
+        let focusTile = MarbleVoyageOverlandScroll.focusedTileRectInViewport(
+            contentPoint: focusPoint,
+            tileSize: tile,
+            cameraOffsetY: climbCameraOffset
+        )
+        let neighbors: [CGRect] = nodePositionsForCurrentChart().compactMap { id, point in
+            guard id != focusID else { return nil }
+            return MarbleVoyageOverlandScroll.focusedTileRectInViewport(
+                contentPoint: point,
+                tileSize: tile,
+                cameraOffsetY: climbCameraOffset
+            )
+        }
+        return MarbleVoyageOverlandScroll.preferredCardPlacement(
+            focusX: focusPoint.x,
+            contentWidth: chartContentSize.width,
+            focusTile: focusTile,
+            neighborTiles: neighbors,
+            viewport: chartViewportSize
         )
     }
 
@@ -584,9 +611,7 @@ struct MarbleVoyageHostView: View {
                                     .font(.system(size: 14, weight: .semibold, design: .rounded))
                                     .foregroundStyle(.white.opacity(0.75))
                             } else {
-                                Image(systemName: next.kind.systemIcon)
-                                    .font(.system(size: 52, weight: .black))
-                                    .foregroundStyle(.white)
+                                chartDestinationArt(kind: next.kind, tile: 120, iconSize: 44)
                                 Text(next.kind.chartLabel)
                                     .font(.system(size: 22, weight: .black, design: .rounded))
                                     .foregroundStyle(.white)
@@ -648,6 +673,10 @@ struct MarbleVoyageHostView: View {
                 Spacer(minLength: 24)
             }
             .padding(.horizontal, 24)
+            .transition(.asymmetric(
+                insertion: .move(edge: .bottom).combined(with: .opacity),
+                removal: .opacity
+            ))
         }
         .accessibilityIdentifier("world2.marbleVoyage.endless.progress")
     }
@@ -710,8 +739,231 @@ struct MarbleVoyageHostView: View {
                         .zIndex(40)
                 }
             }
+
+            // Abbie status card — always docks at the bottom of the climb map.
+            if !isClimbIntroPlaying, !climbChartDrawerOpen {
+                climbAbbieCard
+                    .zIndex(25)
+                    .transition(.move(edge: .bottom).combined(with: .opacity))
+            }
+
+            if !isClimbIntroPlaying {
+                climbChartDrawer
+                    .zIndex(35)
+            }
         }
         .ignoresSafeArea()
+    }
+
+    /// Chart handle docks bottom-trailing so it never covers Abbie’s tray.
+    private var climbChartDrawer: some View {
+        GeometryReader { geo in
+            let openHeight = geo.size.height * 0.88
+            let handle = VoyageTileLegibility.chartHandleSize
+            VStack(spacing: 0) {
+                Spacer(minLength: 0)
+                VStack(spacing: 0) {
+                    Button {
+                        MarbleVoyageAudio.tap()
+                        withAnimation(.spring(response: 0.38, dampingFraction: 0.86)) {
+                            climbChartDrawerOpen.toggle()
+                        }
+                    } label: {
+                        HStack(spacing: 8) {
+                            Image(systemName: climbChartDrawerOpen ? "chevron.down" : "chevron.up")
+                                .font(.system(size: 12, weight: .black))
+                            Text(climbChartDrawerOpen ? "Hide chart" : "Full chart")
+                                .font(.system(size: 14, weight: .black, design: .rounded))
+                                .lineLimit(1)
+                        }
+                        .foregroundStyle(.white.opacity(0.92))
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .frame(height: handle.height)
+                    .accessibilityIdentifier("world2.marbleVoyage.chartDrawer.handle")
+
+                    if climbChartDrawerOpen {
+                        ScrollView(.vertical, showsIndicators: true) {
+                            climbDrawerScrollContent(viewport: geo.size)
+                                .padding(.bottom, 28)
+                        }
+                        .frame(maxHeight: .infinity)
+                        .accessibilityIdentifier("world2.marbleVoyage.chartDrawer.scroll")
+                    }
+                }
+                .frame(
+                    width: climbChartDrawerOpen ? geo.size.width - 24 : handle.width,
+                    height: climbChartDrawerOpen ? openHeight : handle.height,
+                    alignment: .top
+                )
+                .background(
+                    UnevenRoundedRectangle(
+                        cornerRadii: .init(topLeading: 22, bottomLeading: 0, bottomTrailing: 0, topTrailing: 22),
+                        style: .continuous
+                    )
+                    .fill(Color.black.opacity(climbChartDrawerOpen ? 0.82 : 0.55))
+                    .overlay(
+                        UnevenRoundedRectangle(
+                            cornerRadii: .init(topLeading: 22, bottomLeading: 0, bottomTrailing: 0, topTrailing: 22),
+                            style: .continuous
+                        )
+                        .stroke(Color.white.opacity(0.28), lineWidth: 1.5)
+                    )
+                )
+                .gesture(
+                    DragGesture(minimumDistance: 8)
+                        .onEnded { value in
+                            let open = value.translation.height < -40
+                                || (climbChartDrawerOpen && value.translation.height < 40)
+                            let close = value.translation.height > 40
+                            withAnimation(.spring(response: 0.38, dampingFraction: 0.86)) {
+                                if open { climbChartDrawerOpen = true }
+                                if close { climbChartDrawerOpen = false }
+                            }
+                        }
+                )
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            .padding(.trailing, VoyageTileLegibility.dockInset)
+            .padding(.bottom, VoyageTileLegibility.dockInset)
+        }
+        .allowsHitTesting(true)
+    }
+
+    /// Compact scrollable chart for the drawer (same nodes / edges, native scroll).
+    @ViewBuilder
+    private func climbDrawerScrollContent(viewport: CGSize) -> some View {
+        if let run {
+            let columnCount = max((run.nodes.map(\.column).max() ?? 1) + 1, 2)
+            let content = MarbleVoyageClimbMap.contentSize(in: viewport, columnCount: columnCount)
+            let tile = MarbleVoyageArt.chartTileSize(forViewportWidth: content.width)
+            let positions = nodePositions(
+                in: CGSize(width: content.width, height: content.height),
+                tile: tile
+            )
+            ZStack(alignment: .topLeading) {
+                climbPosterBackdrop(width: content.width, height: content.height)
+                ForEach(Array(run.edges.enumerated()), id: \.offset) { _, edge in
+                    let isChoice = edge.from == run.currentNodeID
+                        && run.reachableChoices().contains(where: { $0.id == edge.to })
+                    chartEdge(
+                        from: edge.from,
+                        to: edge.to,
+                        positions: positions,
+                        kind: isChoice ? .choice : (run.didTraverse(from: edge.from, to: edge.to) ? .traversed : .idle)
+                    )
+                }
+                ForEach(run.nodes) { node in
+                    if let point = positions[node.id] {
+                        nodeChip(
+                            node,
+                            positions: positions,
+                            hidePlayerWhileMarching: false,
+                            tile: tile
+                        )
+                        .position(point)
+                    }
+                }
+            }
+            .frame(width: content.width, height: content.height, alignment: .topLeading)
+        }
+    }
+
+    /// Player tray — portrait, stance, and one-line stats. Layout comes from `VoyageTileLegibility`.
+    @ViewBuilder
+    private var climbAbbieCard: some View {
+        if let run {
+            GeometryReader { geo in
+                let stance = PlinkTemperRules.bagStanceTitle(in: run.marbleCollection)
+                let plan = VoyageTileLegibility.abbieTrayPlan(
+                    viewportWidth: geo.size.width,
+                    hpText: "\(run.playerHP)/\(run.playerMaxHP)",
+                    levelText: "\(run.heroLevel)",
+                    coinsText: "\(run.coins)",
+                    stance: stance
+                )
+                climbAbbieTray(run: run, stance: stance, plan: plan)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
+                    .padding(.leading, VoyageTileLegibility.dockInset)
+                    .padding(.bottom, VoyageTileLegibility.dockInset)
+            }
+            .allowsHitTesting(true)
+        }
+    }
+
+    private func climbAbbieTray(
+        run: MarbleVoyageRun,
+        stance: String,
+        plan: VoyageTileLegibility.AbbieTrayPlan
+    ) -> some View {
+        let accent = Color(red: 0.45, green: 0.95, blue: 0.7)
+        let identity = HStack(alignment: .center, spacing: 12) {
+            PeglinAbbieBattlePortrait(state: .happy, size: 72)
+                .accessibilityHidden(true)
+            VStack(alignment: .leading, spacing: 4) {
+                Text("ABBIE")
+                    .font(.system(size: 13, weight: .black, design: .rounded))
+                    .tracking(2)
+                    .foregroundStyle(accent)
+                Text(stance)
+                    .font(.system(size: 22, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
+                Text("Level \(run.heroLevel) · ×\(String(format: "%.2f", MarbleVoyageHeroLevel.damageMultiplier(level: run.heroLevel))) dmg")
+                    .font(.system(size: 12, weight: .semibold, design: .rounded))
+                    .foregroundStyle(.white.opacity(0.75))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        let stats = HStack(spacing: 6) {
+            climbAbbieStatPill(
+                title: "HP",
+                value: "\(run.playerHP)/\(run.playerMaxHP)",
+                tint: Color(red: 1, green: 0.45, blue: 0.55)
+            )
+            climbAbbieStatPill(
+                title: "LV",
+                value: "\(run.heroLevel)",
+                tint: Color(red: 0.45, green: 0.85, blue: 1.0)
+            )
+            climbAbbieStatPill(
+                title: "COINS",
+                value: "\(run.coins)",
+                tint: Color(red: 1.0, green: 0.84, blue: 0.3)
+            )
+        }
+        return VStack(alignment: .leading, spacing: 8) {
+            if plan.twoRow {
+                identity
+                stats
+            } else {
+                HStack(alignment: .center, spacing: 12) {
+                    identity
+                    stats
+                }
+            }
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 10)
+        .frame(maxWidth: plan.cardWidth, alignment: .leading)
+        .fixedSize(horizontal: true, vertical: true)
+        .background(
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .fill(Color.black.opacity(0.72))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 18, style: .continuous)
+                        .stroke(accent.opacity(0.65), lineWidth: 2)
+                )
+        )
+        .accessibilityIdentifier("world2.marbleVoyage.climb.abbieCard")
+        .accessibilityLabel(
+            "Abbie. Level \(run.heroLevel). \(stance). Hit points \(run.playerHP) of \(run.playerMaxHP). \(run.coins) coins. \(run.marbleCollection.count) marbles."
+        )
     }
 
     /// Cast / engage foe card — docks opposite the focused tile so map art stays clear.
@@ -722,14 +974,15 @@ struct MarbleVoyageHostView: View {
             ? String(name.prefix(climbRevealLetters))
             : name
         let accent = climbRevealAccent
-        let dock = climbFoeCardDock
+        let placement = climbFoeCardPlacement
+        let dock = placement.dock
         let engageNode: MarbleVoyageNode? = {
             guard let run, let id = climbEngageNodeID else { return nil }
             return run.node(id)
         }()
         let isFightEngage = engageNode?.kind == .fight || engageNode?.kind == .boss
-        return VStack(alignment: .leading, spacing: 12) {
-            HStack(alignment: .top, spacing: 14) {
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack(alignment: .top, spacing: 10) {
                 VStack(alignment: .leading, spacing: 8) {
                     if let role = card?.role, !role.isEmpty {
                         Text(role)
@@ -740,7 +993,7 @@ struct MarbleVoyageHostView: View {
                     }
                     // One line only — scale down before wrapping (MORRO / W bug).
                     Text(revealed.isEmpty ? " " : revealed)
-                        .font(.system(size: 44, weight: .black, design: .rounded))
+                        .font(.system(size: 32, weight: .black, design: .rounded))
                         .foregroundStyle(.white)
                         .shadow(color: accent.opacity(0.85), radius: 8, y: 2)
                         .shadow(color: .black.opacity(0.9), radius: 2, y: 1)
@@ -761,7 +1014,7 @@ struct MarbleVoyageHostView: View {
                 if let kind = card?.kind {
                     PlinkAttackerBattlePortrait(
                         kind: kind,
-                        size: 100,
+                        size: 72,
                         stroke: accent.opacity(0.9)
                     )
                     .accessibilityIdentifier("world2.marbleVoyage.climbReveal.portrait")
@@ -770,19 +1023,7 @@ struct MarbleVoyageHostView: View {
 
             if (!isClimbIntroPlaying || climbRevealLetters >= name.count),
                !name.isEmpty, let card {
-                VStack(alignment: .leading, spacing: 10) {
-                    if !card.stageTitle.isEmpty {
-                        Text(card.stageTitle)
-                            .font(.system(size: 14, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white.opacity(0.78))
-                    }
-                    if !card.blurb.isEmpty {
-                        Text(card.blurb)
-                            .font(.system(size: 15, weight: .semibold, design: .rounded))
-                            .foregroundStyle(.white.opacity(0.92))
-                            .fixedSize(horizontal: false, vertical: true)
-                            .lineLimit(3)
-                    }
+                VStack(alignment: .leading, spacing: 6) {
                     if card.hp > 0 || card.atk > 0 {
                         HStack(spacing: 10) {
                             climbRevealStatChip(title: "HP", value: "\(card.hp)", tint: accent)
@@ -800,16 +1041,17 @@ struct MarbleVoyageHostView: View {
                     .foregroundStyle(.white.opacity(0.55))
             } else if !isClimbIntroPlaying, climbEngageNodeID != nil {
                 Text(isFightEngage
-                     ? "Tap the glowing tile to enter the arena."
-                     : "Tap the glowing tile to land.")
+                     ? "Enter the arena when you’re ready."
+                     : "Land here when you’re ready.")
                     .font(.system(size: 13, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white.opacity(0.8))
-                if let engageNode, isFightEngage {
+                if let engageNode {
+                    let cta = isFightEngage ? "FIGHT" : "LAND"
                     Button {
                         PlinkSFX.play(.ui)
                         beginClimb(to: engageNode, positions: nodePositionsForCurrentChart())
                     } label: {
-                        Text("FIGHT")
+                        Text(cta)
                             .font(.system(size: 18, weight: .black, design: .rounded))
                             .foregroundStyle(.white)
                             .frame(maxWidth: .infinity)
@@ -821,13 +1063,21 @@ struct MarbleVoyageHostView: View {
                     }
                     .buttonStyle(.plain)
                     .disabled(isMarching)
-                    .accessibilityIdentifier("world2.marbleVoyage.climbEngage.fight")
-                    .accessibilityLabel("Enter arena against \(card?.name ?? engageNode.title)")
+                    .accessibilityIdentifier(
+                        isFightEngage
+                            ? "world2.marbleVoyage.climbEngage.fight"
+                            : "world2.marbleVoyage.climbEngage.land"
+                    )
+                    .accessibilityLabel(
+                        isFightEngage
+                            ? "Enter arena against \(card?.name ?? engageNode.title)"
+                            : "Land on \(engageNode.title)"
+                    )
                 }
             }
         }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 14)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
         .frame(maxWidth: MarbleVoyageDesignRules.climbFoeCardMaxWidth, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius: 22, style: .continuous)
@@ -844,12 +1094,19 @@ struct MarbleVoyageHostView: View {
         )
         .padding(.leading, dock == .leading ? 22 : 8)
         .padding(.trailing, dock == .trailing ? 22 : 8)
-        .padding(.top, 120)
-        .padding(.bottom, 140)
+        .padding(.top, placement.topPad)
+        .padding(
+            .bottom,
+            isClimbIntroPlaying
+                ? 100
+                : 90 + MarbleVoyageDesignRules.climbAbbieCardClearance * 0.45
+        )
+        .animation(.easeOut(duration: 0.22), value: placement.dock)
+        .animation(.easeOut(duration: 0.22), value: placement.topPad)
         .accessibilityIdentifier("world2.marbleVoyage.climbReveal.name")
         .accessibilityLabel({
             guard let card else { return "Cast card" }
-            return "\(card.role) \(card.name). \(card.blurb) HP \(card.hp), attack \(card.atk)"
+            return "\(card.role) \(card.name). HP \(card.hp), attack \(card.atk)"
         }())
     }
 
@@ -863,6 +1120,8 @@ struct MarbleVoyageHostView: View {
                 .font(.system(size: 22, weight: .black, design: .rounded))
                 .foregroundStyle(.white)
                 .monospacedDigit()
+                .lineLimit(1)
+                .minimumScaleFactor(0.7)
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
@@ -872,6 +1131,32 @@ struct MarbleVoyageHostView: View {
                 .overlay(
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
                         .stroke(tint.opacity(0.45), lineWidth: 1)
+                )
+        )
+    }
+
+    /// Single-line Abbie tray stat — never stacks digits vertically when width is tight.
+    private func climbAbbieStatPill(title: String, value: String, tint: Color) -> some View {
+        HStack(spacing: 5) {
+            Text(title)
+                .font(.system(size: 11, weight: .bold, design: .rounded))
+                .tracking(0.6)
+                .foregroundStyle(tint.opacity(0.95))
+            Text(value)
+                .font(.system(size: 16, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
+                .monospacedDigit()
+                .lineLimit(1)
+                .fixedSize(horizontal: true, vertical: false)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 8)
+        .background(
+            Capsule(style: .continuous)
+                .fill(Color.white.opacity(0.1))
+                .overlay(
+                    Capsule(style: .continuous)
+                        .stroke(tint.opacity(0.5), lineWidth: 1)
                 )
         )
     }
@@ -1243,6 +1528,7 @@ struct MarbleVoyageHostView: View {
             .onAppear {
                 dockPulse = true
                 chartContentSize = CGSize(width: contentWidth, height: contentHeight)
+                chartViewportSize = geo.size
                 climbIntroViewportHeight = geo.size.height
                 pulseAtmosphere()
                 playClimbIntro(
@@ -1255,6 +1541,7 @@ struct MarbleVoyageHostView: View {
                 let cols = max((run?.nodes.map(\.column).max() ?? 1) + 1, 2)
                 let resized = MarbleVoyageClimbMap.contentSize(in: newSize, columnCount: cols)
                 chartContentSize = resized
+                chartViewportSize = newSize
                 climbIntroViewportHeight = newSize.height
                 let newMax = max(0, resized.height - newSize.height)
                 let clamped = min(max(0, climbCameraOffset), newMax)
@@ -1570,14 +1857,19 @@ struct MarbleVoyageHostView: View {
             case .miniBoss: roleLabel = "LAND BOSS"
             case .henchman: roleLabel = "FIGHT"
             }
+            let stats = PeglinBattleRules.previewLeadFoeStats(
+                wave: fighter,
+                focus: fighter,
+                role: role
+            )
             return .init(
                 name: fighter.shortName,
                 role: roleLabel,
                 roleKind: role,
                 blurb: fighter.castBlurb,
                 stageTitle: node.title,
-                hp: run.enemyMaxHP(for: node),
-                atk: run.enemyAttack(for: node),
+                hp: stats.hp,
+                atk: stats.atk,
                 threat: node.threat,
                 kind: fighter
             )
@@ -1702,7 +1994,7 @@ struct MarbleVoyageHostView: View {
         guard let run else { return [:] }
         let maxRow = max(run.nodes.map(\.row).max() ?? 1, 1)
         let step = tile * MarbleVoyageArt.chartTileVerticalSpacingFactor
-        let bottomPad = tile * 1.15
+        let bottomPad = tile * 1.15 + MarbleVoyageDesignRules.climbAbbieCardClearance
         var out: [String: CGPoint] = [:]
         for node in run.nodes {
             let y = size.height - bottomPad - step * CGFloat(node.column)
@@ -1731,88 +2023,58 @@ struct MarbleVoyageHostView: View {
             let corner = MarbleVoyageArt.chartTileCorner(for: drawTile)
             let iconSize = MarbleVoyageArt.chartTileIconSize(for: drawTile)
             let fighter = chartFighterKind(for: node, run: run)
-            let chip = VStack(spacing: 4) {
-                if !showPlayer, fighter != nil, let role {
-                    chartFightRoleBanner(role: role, tile: drawTile)
-                        .offset(y: 2)
-                        .zIndex(2)
-                }
-
-                ZStack(alignment: .topLeading) {
-                    RoundedRectangle(cornerRadius: corner, style: .continuous)
-                        .fill(tint.opacity(showPlayer ? 0.98 : (isReachable ? 0.96 : seen ? 0.82 : 0.34)))
-                        .frame(width: drawTile, height: drawTile)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: corner, style: .continuous)
-                                .stroke(
-                                    showPlayer
-                                        ? Color(red: 0.45, green: 0.95, blue: 0.7)
-                                        : (seen && !isReachable
-                                           ? Color(red: 1.0, green: 0.82, blue: 0.22)
-                                           : .white.opacity(isReachable ? 0.95 : 0.4)),
-                                    lineWidth: showPlayer ? 3.5 : (seen && !isReachable ? 3.5 : (isReachable ? 3 : 1.5))
-                                )
-                        )
-                        .shadow(
-                            color: showPlayer
-                                ? Color(red: 0.3, green: 0.95, blue: 0.55).opacity(0.55)
-                                : (isReachable
-                                   ? tint.opacity(0.7)
-                                   : (seen ? Color(red: 1.0, green: 0.82, blue: 0.22).opacity(0.5) : .clear)),
-                            radius: showPlayer || seen || isReachable ? 8 : 0
-                        )
-
-                    if showPlayer {
-                        PeglinAbbieBattlePortrait(state: .happy, size: drawTile * 0.72)
-                            .frame(width: drawTile, height: drawTile)
-                            .shadow(
-                                color: Color(red: 0.3, green: 0.95, blue: 0.55).opacity(0.55),
-                                radius: 8
+            // Portrait / destination art only — role labels (FIGHT, LAND BOSS, TREASURE)
+            // live on the engage / cast battle card, not as floating tile badges.
+            let chip = ZStack(alignment: .topLeading) {
+                RoundedRectangle(cornerRadius: corner, style: .continuous)
+                    .fill(tint.opacity(showPlayer ? 0.98 : (isReachable ? 0.96 : seen ? 0.82 : 0.34)))
+                    .frame(width: drawTile, height: drawTile)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: corner, style: .continuous)
+                            .stroke(
+                                showPlayer
+                                    ? Color(red: 0.45, green: 0.95, blue: 0.7)
+                                    : (seen && !isReachable
+                                       ? Color(red: 1.0, green: 0.82, blue: 0.22)
+                                       : .white.opacity(isReachable ? 0.95 : 0.4)),
+                                lineWidth: showPlayer ? 3.5 : (seen && !isReachable ? 3.5 : (isReachable ? 3 : 1.5))
                             )
-                            .scaleEffect(dockPulse && !reduceMotion ? 1.04 : 1.0)
-                        chartTileNameOverlay("ABBIE", tint: Color(red: 0.55, green: 1.0, blue: 0.7), tile: drawTile)
-                    } else if let fighter {
-                        chartFighterPortrait(
-                            kind: fighter,
-                            tile: drawTile,
-                            ominous: role == .bigBoss || node.kind == .boss
-                        )
+                    )
+                    .shadow(
+                        color: showPlayer
+                            ? Color(red: 0.3, green: 0.95, blue: 0.55).opacity(0.55)
+                            : (isReachable
+                               ? tint.opacity(0.7)
+                               : (seen ? Color(red: 1.0, green: 0.82, blue: 0.22).opacity(0.5) : .clear)),
+                        radius: showPlayer || seen || isReachable ? 8 : 0
+                    )
+
+                if showPlayer {
+                    PeglinAbbieBattlePortrait(state: .happy, size: drawTile * VoyageTileLegibility.chartArtEdgeFraction())
                         .frame(width: drawTile, height: drawTile)
-                        chartTileNameOverlay(
-                            fighter.shortName.uppercased(),
-                            tint: role == .bigBoss
-                                ? Color(red: 1.0, green: 0.45, blue: 0.55)
-                                : (role == .miniBoss
-                                   ? Color(red: 1.0, green: 0.78, blue: 0.35)
-                                   : Color(red: 0.75, green: 0.9, blue: 1.0)),
-                            tile: drawTile
+                        .shadow(
+                            color: Color(red: 0.3, green: 0.95, blue: 0.55).opacity(0.55),
+                            radius: 8
                         )
-                        if seen && !isReachable {
-                            Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: max(16, drawTile * 0.18), weight: .black))
-                                .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.25))
-                                .background(
-                                    Circle()
-                                        .fill(Color.black.opacity(0.55))
-                                        .frame(width: drawTile * 0.22, height: drawTile * 0.22)
-                                )
-                                .offset(x: drawTile * 0.38, y: -drawTile * 0.38)
-                                .frame(width: drawTile, height: drawTile)
-                        }
-                    } else {
-                        chartDestinationArt(kind: node.kind, tile: drawTile, iconSize: iconSize)
-                        chartTileNameOverlay(node.kind.chartLabel, tint: .white, tile: drawTile)
-                        if seen && !isReachable {
-                            Image(systemName: "checkmark.circle.fill")
-                                .font(.system(size: max(16, drawTile * 0.18), weight: .black))
-                                .foregroundStyle(Color(red: 1.0, green: 0.85, blue: 0.25))
-                                .offset(x: drawTile * 0.38, y: -drawTile * 0.38)
-                                .frame(width: drawTile, height: drawTile)
-                        }
+                        .scaleEffect(dockPulse && !reduceMotion ? 1.04 : 1.0)
+                } else if let fighter {
+                    chartFighterPortrait(
+                        kind: fighter,
+                        tile: drawTile,
+                        ominous: role == .bigBoss || node.kind == .boss
+                    )
+                    .frame(width: drawTile, height: drawTile)
+                    if seen && !isReachable {
+                        chartClearedStamp(tile: drawTile)
+                    }
+                } else {
+                    chartDestinationArt(kind: node.kind, tile: drawTile, iconSize: iconSize)
+                    if seen && !isReachable {
+                        chartClearedStamp(tile: drawTile)
                     }
                 }
-                .frame(width: drawTile, height: drawTile)
             }
+            .frame(width: drawTile, height: drawTile)
             .scaleEffect(reachableTileScale(isReachable: isReachable, isBoss: node.kind == .boss))
             .scaleEffect(climbRevealFocusID == node.id ? 1.18 : 1.0)
             .animation(.spring(response: 0.45, dampingFraction: 0.78), value: climbRevealFocusID)
@@ -1842,11 +2104,20 @@ struct MarbleVoyageHostView: View {
                         climbIntroToken &+= 1
                         isClimbIntroPlaying = false
                         climbRevealBeats = []
-                        clearClimbRevealCard()
                     }
-                    climbEngageNodeID = node.id
-                    climbRevealFocusID = node.id
-                    beginClimb(to: node, positions: positions)
+                    // Show the battle card first (fights, treasure, mystery, shrine).
+                    // CTA on the card enters; second tap on the same glowing tile also enters.
+                    if climbEngageNodeID == node.id, !isClimbIntroPlaying {
+                        beginClimb(to: node, positions: positions)
+                    } else {
+                        climbEngageNodeID = node.id
+                        climbRevealFocusID = node.id
+                        if let card = makeEngageCard(for: node, run: run) {
+                            climbRevealLetters = card.name.count
+                        } else {
+                            climbRevealLetters = 0
+                        }
+                    }
                 } label: {
                     chip
                 }
@@ -1856,24 +2127,6 @@ struct MarbleVoyageHostView: View {
                 chip
             }
         }
-    }
-
-    /// Compact name chip inside the portrait — replaces the old under-tile captions.
-    private func chartTileNameOverlay(_ text: String, tint: Color, tile: CGFloat) -> some View {
-        Text(text)
-            .font(.system(size: max(10, tile * 0.11), weight: .black, design: .rounded))
-            .foregroundStyle(tint)
-            .shadow(color: .black.opacity(0.9), radius: 1, y: 1)
-            .padding(.horizontal, max(6, tile * 0.05))
-            .padding(.vertical, max(3, tile * 0.025))
-            .background(
-                Capsule()
-                    .fill(Color.black.opacity(0.55))
-                    .overlay(Capsule().stroke(tint.opacity(0.55), lineWidth: 1))
-            )
-            .padding(max(5, tile * 0.05))
-            .frame(width: tile, height: tile, alignment: .topLeading)
-            .allowsHitTesting(false)
     }
 
     /// Fighter shown on a fight/boss chart tile — henchman, that land's boss, or the summit boss.
@@ -1902,21 +2155,17 @@ struct MarbleVoyageHostView: View {
         return dockPulse ? 1.1 : 0.92
     }
 
-    /// Fight / mini / big-boss chart portrait. Big boss gets ominous glow (no size pulse).
+    /// Fight / mini / big-boss chart portrait. Face fills the tile (same crop as the battle card).
     @ViewBuilder
     private func chartFighterPortrait(kind: PlinkAttackerKind, tile: CGFloat, ominous: Bool) -> some View {
         let glow = ominous && !reduceMotion && dockPulse
+        let edge = tile * VoyageTileLegibility.chartArtEdgeFraction()
         ZStack {
-            if let img = kind.catalogImage(for: .idle) {
-                Image(uiImage: img)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: tile * 0.88, height: tile * 0.88)
-            } else {
-                Image(systemName: kind.isNamedCrew ? "crown.fill" : "skull.fill")
-                    .font(.system(size: MarbleVoyageArt.chartTileIconSize(for: tile), weight: .black))
-                    .foregroundStyle(.white)
-            }
+            PlinkAttackerBattlePortrait(
+                kind: kind,
+                size: edge,
+                stroke: .white.opacity(0.35)
+            )
         }
         .opacity(ominous ? (glow ? 1.0 : 0.72) : 1)
         .shadow(
@@ -1934,6 +2183,33 @@ struct MarbleVoyageHostView: View {
         .accessibilityLabel(ominous ? "Boss \(kind.displayName)" : kind.displayName)
     }
 
+    /// Lasting “done” seal on visited climb tiles (not only a corner checkmark).
+    private func chartClearedStamp(tile: CGFloat) -> some View {
+        let seal = max(28, tile * 0.34)
+        return ZStack {
+            Circle()
+                .fill(Color(red: 0.12, green: 0.1, blue: 0.05).opacity(0.72))
+                .frame(width: seal, height: seal)
+            Circle()
+                .stroke(Color(red: 1.0, green: 0.82, blue: 0.28), lineWidth: max(2, tile * 0.02))
+                .frame(width: seal, height: seal)
+            VStack(spacing: 0) {
+                Image(systemName: "checkmark")
+                    .font(.system(size: max(11, tile * 0.1), weight: .black))
+                Text("DONE")
+                    .font(.system(size: max(8, tile * 0.055), weight: .black, design: .rounded))
+                    .tracking(0.6)
+            }
+            .foregroundStyle(Color(red: 1.0, green: 0.86, blue: 0.32))
+        }
+        .rotationEffect(.degrees(-12))
+        .shadow(color: .black.opacity(0.45), radius: 3, y: 1)
+        .frame(width: tile, height: tile, alignment: .bottomTrailing)
+        .padding(.trailing, tile * 0.04)
+        .padding(.bottom, tile * 0.04)
+        .accessibilityHidden(true)
+    }
+
     /// Treasure / mystery / shrine chart vignette — catalog art when bound, else SF accent.
     @ViewBuilder
     private func chartDestinationArt(kind: MarbleVoyageNodeKind, tile: CGFloat, iconSize: CGFloat) -> some View {
@@ -1942,7 +2218,10 @@ struct MarbleVoyageHostView: View {
             Image(catalog)
                 .resizable()
                 .scaledToFit()
-                .frame(width: tile * 0.78, height: tile * 0.78)
+                .frame(
+                    width: tile * VoyageTileLegibility.chartArtEdgeFraction(),
+                    height: tile * VoyageTileLegibility.chartArtEdgeFraction()
+                )
                 .frame(width: tile, height: tile)
                 .shadow(color: .black.opacity(0.4), radius: 3, y: 1)
         } else {
@@ -1953,50 +2232,6 @@ struct MarbleVoyageHostView: View {
                 .shadow(color: .black.opacity(0.45), radius: 2, y: 1)
                 .frame(width: tile, height: tile)
         }
-    }
-
-    /// Role tab above a fight portrait — who this tile is about.
-    private func chartFightRoleBanner(role: MarbleVoyageGangFightRole, tile: CGFloat) -> some View {
-        let label: String
-        let tint: Color
-        let tilt: Double
-        switch role {
-        case .bigBoss:
-            label = "SUMMIT"
-            tint = Color(red: 0.95, green: 0.25, blue: 0.4)
-            tilt = -3
-        case .miniBoss:
-            label = "LAND BOSS"
-            tint = Color(red: 1.0, green: 0.55, blue: 0.22)
-            tilt = 2.5
-        case .henchman:
-            label = "FIGHT"
-            tint = Color(red: 0.55, green: 0.75, blue: 1.0)
-            tilt = -1.5
-        }
-        return Text(label)
-            .font(.system(size: max(11, tile * 0.07), weight: .black, design: .rounded))
-            .tracking(1.2)
-            .foregroundStyle(.white)
-            .padding(.horizontal, max(10, tile * 0.06))
-            .padding(.vertical, max(4, tile * 0.025))
-            .background(
-                UnevenRoundedRectangle(
-                    cornerRadii: .init(topLeading: 4, bottomLeading: 12, bottomTrailing: 4, topTrailing: 12),
-                    style: .continuous
-                )
-                .fill(tint)
-                .shadow(color: tint.opacity(0.65), radius: 6, y: 2)
-            )
-            .overlay(
-                UnevenRoundedRectangle(
-                    cornerRadii: .init(topLeading: 4, bottomLeading: 12, bottomTrailing: 4, topTrailing: 12),
-                    style: .continuous
-                )
-                .stroke(.white.opacity(0.85), lineWidth: 1.5)
-            )
-            .rotationEffect(.degrees(tilt))
-            .accessibilityHidden(true)
     }
 
     private func climbPlayerToken(size: CGFloat, flashing: Bool) -> some View {
@@ -2073,7 +2308,8 @@ struct MarbleVoyageHostView: View {
         let size = chartContentSize.width > 1
             ? chartContentSize
             : CGSize(width: 700, height: 1600)
-        let tile = MarbleVoyageArt.chartTileSize(forViewportWidth: size.width)
+        let viewportW = chartViewportSize.width > 1 ? chartViewportSize.width : size.width
+        let tile = MarbleVoyageArt.chartTileSize(forViewportWidth: viewportW)
         return nodePositions(in: size, tile: tile)
     }
 
@@ -2081,16 +2317,17 @@ struct MarbleVoyageHostView: View {
 
     private func fightPhase(_ node: MarbleVoyageNode) -> some View {
         let active = run
+        // Lead portrait for mini/summit only — hench fights use the wave attacker as lead.
         let focusCrew: PlinkAttackerKind? = {
             guard let gang = active?.gang else { return nil }
             switch node.gangRole {
             case .bigBoss:
                 return gang.bigBoss
-            case .miniBoss, .henchman:
+            case .miniBoss:
                 guard node.miniArcIndex >= 0 else { return nil }
                 return gang.miniBoss(arcIndex: node.miniArcIndex)
-            case .none:
-                return nil
+            case .henchman, .none:
+                return node.waveAttacker
             }
         }()
         return PlinkBattleHostView(
@@ -2104,25 +2341,32 @@ struct MarbleVoyageHostView: View {
             sceneBackgroundAsset: MarbleVoyageArt.fightPlate(enemy: node.enemyKind),
             playerID: playerID,
             startingPlayerHP: active?.playerHP,
-            overrideEnemyMaxHP: active.map { $0.enemyMaxHP(for: node) },
+            overrideEnemyMaxHP: nil,
             overridePlayerMaxHP: active?.playerMaxHP,
             overrideEnemyAttack: active.map { $0.enemyAttack(for: node) },
             voyageEconomy: active.map { voyageTunables(for: $0, foe: node.waveAttacker) },
             startingDeck: active?.fightDeckOrbIDs,
             startingMarbles: active?.marbleCollection,
             startingBallLevel: active?.ballLevel ?? 1,
+            startingHeroLevel: active?.heroLevel ?? MarbleVoyageHeroLevel.minLevel,
+            startingHeroXPIntoLevel: active?.heroXPIntoLevel ?? 0,
             onExit: {
                 MarbleVoyageAudio.defeat()
                 run?.phase = .defeat
                 run?.lastEventLine = "Left the fight — voyage abandoned."
             },
             onVictory: nil,
-            onBattleEnded: { won, remaining, goldEarned in
+            onBattleEnded: { won, remaining, goldEarned, comboXP in
                 DispatchQueue.main.asyncAfter(deadline: .now() + (won ? 1.35 : 1.0)) {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.84)) {
                         let enemy = node.enemyKind
                         let wasBoss = node.kind == .boss
-                        run?.finishFight(won: won, remainingHP: remaining, goldEarned: goldEarned)
+                        run?.finishFight(
+                            won: won,
+                            remainingHP: remaining,
+                            goldEarned: goldEarned,
+                            comboXP: comboXP
+                        )
                         if won {
                             let pulse = gallery.recordFightWin(
                                 isBoss: wasBoss,
@@ -2208,9 +2452,7 @@ struct MarbleVoyageHostView: View {
         return VStack(spacing: 18) {
             headerBar
             Spacer()
-            Image(systemName: node.kind.systemIcon)
-                .font(.system(size: 64, weight: .black))
-                .foregroundStyle(.white)
+            eventHeroArt(kind: node.kind)
             Text(node.title)
                 .font(.system(size: 32, weight: .black, design: .rounded))
                 .foregroundStyle(.white)
@@ -2269,6 +2511,27 @@ struct MarbleVoyageHostView: View {
             Spacer()
         }
         .accessibilityIdentifier("world2.marbleVoyage.event")
+    }
+
+    /// Treasure / mystery / shrine landing — catalog vignette when bound.
+    @ViewBuilder
+    private func eventHeroArt(kind: MarbleVoyageNodeKind) -> some View {
+        let size: CGFloat = 148
+        if let catalog = MarbleVoyageArt.climbDestinationCatalogName(for: kind),
+           UIImage(named: catalog) != nil {
+            Image(catalog)
+                .resizable()
+                .scaledToFit()
+                .frame(width: size, height: size)
+                .shadow(color: .black.opacity(0.45), radius: 12, y: 4)
+                .accessibilityHidden(true)
+        } else {
+            Image(systemName: MarbleVoyageArt.eventAccentIcon(kind))
+                .font(.system(size: 64, weight: .black))
+                .foregroundStyle(.white)
+                .shadow(color: .black.opacity(0.45), radius: 6, y: 2)
+                .accessibilityHidden(true)
+        }
     }
 
     private func endCard(title: String, body: String, tint: Color) -> some View {
