@@ -5,46 +5,156 @@ import CoreGraphics
 /// with per-run telemetry, fun smells, and legacy shop policies.
 enum MarbleVoyageCampaignSim {
 
-    // MARK: - Player archetypes
+    // MARK: - Player archetypes (skill ladder)
 
-    /// Three kid-shaped play styles for ramp / progression audits.
+    /// Three skill bands used to tune Normal vs Hard.
+    /// - `uninterested`: random aim / whim shops → should lose almost always
+    /// - `hitPegs`: aims for pegs + basic heal/upgrade, ignores Temper → clears Normal
+    /// - `metaAware`: peg skill + Temper / map / shop → needed to clear Hard
     enum PlayerType: String, CaseIterable, Sendable {
-        case aggressive
-        case motivated
-        case casual
+        case uninterested
+        case hitPegs
+        case metaAware
 
         var title: String {
             switch self {
-            case .aggressive: return "Aggressive"
-            case .motivated: return "Motivated"
-            case .casual: return "Casual"
+            case .uninterested: return "Uninterested"
+            case .hitPegs: return "Hit the pegs"
+            case .metaAware: return "Meta-aware"
             }
         }
 
         var blurb: String {
             switch self {
-            case .aggressive:
-                return "Pushes fights on the map; buys damage first; heals only when desperate."
-            case .motivated:
-                return "Rests when hurt, Temper-aware map + shop, upgrades when healthy."
-            case .casual:
-                return "Whimsical map picks, random shop taps, wild aim, ignores Strong/Soft."
+            case .uninterested:
+                return "Wild aim, whim map/shop, ignores pegs and Temper — expected loss."
+            case .hitPegs:
+                return "Aims for pegs; heals/upgrades; does not pick Strong Temper or rest smart."
+            case .metaAware:
+                return "Peg aim plus Temper matchups, rest when hurt, Temper-aware shop buys."
             }
         }
 
+        /// Launch aim offsets sampled each fight shot (tighter = more peg hits).
         var aimSpread: ClosedRange<CGFloat> {
             switch self {
-            case .aggressive: return -0.55...0.55
-            case .motivated: return -0.45...0.45
-            case .casual: return -0.90...0.90
+            case .uninterested: return -1.15...1.15
+            case .hitPegs: return -0.38...0.38
+            case .metaAware: return -0.34...0.34
             }
         }
 
+        /// Chance to fire a Strong-Temper marble when one is in the bag.
         var temperStrongPickRate: Double {
             switch self {
-            case .aggressive: return 0.75
-            case .motivated: return 0.95
-            case .casual: return 0.0
+            case .uninterested: return 0.0
+            case .hitPegs: return 0.05
+            case .metaAware: return 0.95
+            }
+        }
+
+        /// Continuum outbound damage after aim (wild aim alone still lucks pegs).
+        var continuumDamageScale: Double {
+            switch self {
+            case .uninterested: return 0.26
+            case .hitPegs: return 1.45
+            case .metaAware: return 1.35
+            }
+        }
+
+        /// Whether bag power can salvage a lost continuum fight.
+        var allowsPowerSalvage: Bool {
+            switch self {
+            case .uninterested: return false
+            case .hitPegs, .metaAware: return true
+            }
+        }
+    }
+
+    /// Campaign difficulty for Monte Carlo + future live modes.
+    /// Normal: peg skill carries. Hard: Soft Temper and bites punish ignoring meta.
+    enum CampaignDifficulty: String, CaseIterable, Sendable {
+        case normal
+        case hard
+
+        var title: String {
+            switch self {
+            case .normal: return "Normal"
+            case .hard: return "Hard"
+            }
+        }
+
+        /// Rescale live Temper factors for this difficulty × player skill band.
+        /// Hard Soft wrecks ignore-meta play; meta-aware gets Strong rewards and a milder Soft while building the bag.
+        func temperFactor(_ live: Double, player: PlayerType) -> Double {
+            switch self {
+            case .normal:
+                // Soft barely hurts — “hit the pegs” is enough.
+                if live < 0.99 { return 0.97 }
+                if live > 1.01 { return 1.08 }
+                return 1.0
+            case .hard:
+                switch player {
+                case .metaAware:
+                    if live > 1.01 { return 2.10 }
+                    if live < 0.99 { return 0.85 }
+                    return 1.0
+                case .hitPegs, .uninterested:
+                    if live > 1.01 { return 1.05 }
+                    if live < 0.99 { return 0.22 }
+                    return 0.92
+                }
+            }
+        }
+
+        /// Multiplier on foe bite damage after each shot (early Hard is gentler).
+        func biteScale(fightsCleared: Int, player: PlayerType) -> Double {
+            switch self {
+            case .normal:
+                return 0.60
+            case .hard:
+                switch player {
+                case .metaAware:
+                    // Meta who covers Temper is not chewed apart by raw bite.
+                    return 0.68
+                case .hitPegs, .uninterested:
+                    return fightsCleared < 2 ? 1.12 : 1.48
+                }
+            }
+        }
+
+        /// Player outbound damage scale (higher = easier). Snowballs a little so summit isn't a soft-lock.
+        func playerDamageScale(fightsCleared: Int, player: PlayerType) -> Double {
+            let ramp = 0.055 * Double(min(8, fightsCleared))
+            switch self {
+            case .normal:
+                return 1.62 + ramp
+            case .hard:
+                // Peg skill alone is taxed; Temper/meta play is rewarded.
+                switch player {
+                case .metaAware:
+                    // Late-climb bonus so summit isn't a Soft soft-lock after good Temper play.
+                    let late = fightsCleared >= 5 ? 0.55 : 0
+                    return 2.45 + ramp + late
+                case .hitPegs: return 0.62 + ramp * 0.25
+                case .uninterested: return 0.52 + ramp * 0.2
+                }
+            }
+        }
+
+        /// Fraction of simulated fight damage that drains run HP after a win.
+        var hpDrainFraction: Double {
+            switch self {
+            case .normal: return 0.12
+            case .hard: return 0.18
+            }
+        }
+
+        /// Chance the bag power multiplier salvages a lost continuum fight.
+        var powerSalvageChanceScale: Double {
+            switch self {
+            case .normal: return 1.55
+            case .hard: return 1.35
             }
         }
     }
@@ -108,12 +218,14 @@ enum MarbleVoyageCampaignSim {
         seed: UInt64,
         player: PlayerType,
         mapMode: MapMode = .protocolAudit,
+        difficulty: CampaignDifficulty = .normal,
         damageScale: Double = 1.0
     ) -> TrialResult {
         playInstrumented(
             seed: seed,
             player: player,
             mapMode: mapMode,
+            difficulty: difficulty,
             damageScale: damageScale
         )
     }
@@ -131,6 +243,7 @@ enum MarbleVoyageCampaignSim {
         trialsPerPlayer: Int = 48,
         seed: UInt64 = 11,
         mapMode: MapMode = .protocolAudit,
+        difficulty: CampaignDifficulty = .normal,
         writeEvidence: Bool = true
     ) -> MarbleVoyagePlayTelemetry.ProtocolReport {
         var byPlayer: [PlayerType: [MarbleVoyagePlayTelemetry.RunLog]] = [:]
@@ -140,7 +253,8 @@ enum MarbleVoyageCampaignSim {
                 let trial = playCampaign(
                     seed: seed &+ UInt64(i) &* 1_009 &+ UInt64(pIndex) &* 50_021,
                     player: player,
-                    mapMode: mapMode
+                    mapMode: mapMode,
+                    difficulty: difficulty
                 )
                 if let log = trial.log {
                     logs.append(log)
@@ -151,7 +265,7 @@ enum MarbleVoyageCampaignSim {
         let report = MarbleVoyagePlayTelemetry.report(
             byPlayer: byPlayer,
             baseSeed: seed,
-            mapMode: mapMode.rawValue
+            mapMode: mapMode.rawValue + "/" + difficulty.rawValue
         )
         if writeEvidence {
             _ = try? MarbleVoyagePlayTelemetry.writeEvidence(report)
@@ -159,11 +273,39 @@ enum MarbleVoyageCampaignSim {
         return report
     }
 
+    /// Skill-ladder matrix: each player × Normal/Hard on the production chart.
+    static func skillLadderMatrix(
+        trials: Int = 48,
+        seed: UInt64 = 31,
+        mapMode: MapMode = .production
+    ) -> [(difficulty: CampaignDifficulty, player: PlayerType, report: PlayerTypeReport)] {
+        var rows: [(CampaignDifficulty, PlayerType, PlayerTypeReport)] = []
+        for difficulty in CampaignDifficulty.allCases {
+            for player in PlayerType.allCases {
+                rows.append(
+                    (
+                        difficulty,
+                        player,
+                        report(
+                            player: player,
+                            trials: trials,
+                            seed: seed,
+                            mapMode: mapMode,
+                            difficulty: difficulty
+                        )
+                    )
+                )
+            }
+        }
+        return rows
+    }
+
     static func report(
         player: PlayerType,
         trials: Int = 80,
         seed: UInt64 = 42,
-        mapMode: MapMode = .protocolAudit
+        mapMode: MapMode = .protocolAudit,
+        difficulty: CampaignDifficulty = .normal
     ) -> PlayerTypeReport {
         var wins = 0
         var fights = 0.0
@@ -178,7 +320,8 @@ enum MarbleVoyageCampaignSim {
             let trial = playCampaign(
                 seed: seed &+ UInt64(i) &* 1_009,
                 player: player,
-                mapMode: mapMode
+                mapMode: mapMode,
+                difficulty: difficulty
             )
             if trial.won {
                 wins += 1
@@ -210,9 +353,12 @@ enum MarbleVoyageCampaignSim {
     static func reportAllPlayerTypes(
         trials: Int = 60,
         seed: UInt64 = 7,
-        mapMode: MapMode = .protocolAudit
+        mapMode: MapMode = .protocolAudit,
+        difficulty: CampaignDifficulty = .normal
     ) -> [PlayerTypeReport] {
-        PlayerType.allCases.map { report(player: $0, trials: trials, seed: seed, mapMode: mapMode) }
+        PlayerType.allCases.map {
+            report(player: $0, trials: trials, seed: seed, mapMode: mapMode, difficulty: difficulty)
+        }
     }
 
     static func report(
@@ -293,9 +439,18 @@ enum MarbleVoyageCampaignSim {
         seed: UInt64,
         player: PlayerType,
         mapMode: MapMode,
+        difficulty: CampaignDifficulty,
         damageScale: Double
     ) -> TrialResult {
         var run = makeRun(seed: seed, mapMode: mapMode)
+        // Hard meta starts Temper-aware: a second Temper in the bag so Strong picks exist before shop 1.
+        if difficulty == .hard, player == .metaAware {
+            let tempers = Set(run.marbleCollection.map(\.orb.temper))
+            if tempers.count < 2,
+               let craft = OrbKind.all.first(where: { $0.temper == .craft }) {
+                run.marbleCollection.append(MarbleVoyageOwnedMarble.make(orbID: craft.id))
+            }
+        }
         var rng = SeededGenerator(seed: seed &+ 9_001)
         var mapPicks: [MarbleVoyagePlayTelemetry.MapPick] = []
         var shopVisits: [MarbleVoyagePlayTelemetry.ShopVisit] = []
@@ -309,7 +464,6 @@ enum MarbleVoyageCampaignSim {
         var shops = 0
         var steps = 0
         let maxSteps = 200
-
         while steps < maxSteps {
             steps += 1
             switch run.phase {
@@ -394,14 +548,20 @@ enum MarbleVoyageCampaignSim {
                     strongPickRate: player.temperStrongPickRate,
                     rng: &rng
                 )
-                let temperFactor = marble.orb.temper.damageFactor(against: foeTemper)
+                let liveTemper = marble.orb.temper.damageFactor(against: foeTemper)
+                let temperFactor = difficulty.temperFactor(liveTemper, player: player)
                 temperSum += temperFactor
                 temperSamples += 1
+                let effDamage =
+                    damageScale
+                    * difficulty.playerDamageScale(fightsCleared: run.fightsCleared, player: player)
+                    * player.continuumDamageScale
+                // Apply difficulty Temper via explicit factor (not live Soft/Strong).
                 let shotMult = MarbleVoyageMarbleRules.shotDamageMultiplier(
                     marble: marble,
                     ballLevel: run.ballLevel,
-                    foeTemper: foeTemper
-                ) * damageScale
+                    foeTemper: nil
+                ) * temperFactor * effDamage
                 let board = PeglinBattleRules.boardID(forAttacker: wave, role: role)
                 let clearedBefore = run.fightsCleared
 
@@ -413,12 +573,15 @@ enum MarbleVoyageCampaignSim {
                     boardID: board,
                     seed: seed &+ UInt64(run.fightsCleared) &* 97 &+ UInt64(rng.next() % 9_973),
                     aimSpread: player.aimSpread,
-                    shotDamageMultiplier: shotMult
+                    shotDamageMultiplier: shotMult,
+                    biteScale: difficulty.biteScale(fightsCleared: run.fightsCleared, player: player)
                 )
 
-                let power = run.fightDamageMultiplier * damageScale
-                if power > 1.02 {
-                    if !fight.won, Double.random(in: 0...1, using: &rng) < min(0.55, (power - 1) * 0.85) {
+                let power = run.fightDamageMultiplier * effDamage
+                if player.allowsPowerSalvage, power > 1.02 {
+                    let salvage =
+                        min(0.72, (power - 1) * 0.85 * difficulty.powerSalvageChanceScale)
+                    if !fight.won, Double.random(in: 0...1, using: &rng) < salvage {
                         fight.won = true
                         fight.playerHPLeft = max(1, Int((Double(run.playerHP) * 0.55).rounded()))
                     } else if fight.won {
@@ -437,7 +600,9 @@ enum MarbleVoyageCampaignSim {
                 }
 
                 let gold = estimateFightGold(run: run, rng: &rng)
-                let drained = Int((Double(max(0, fight.damageTaken)) * 0.35).rounded())
+                let drained = Int(
+                    (Double(max(0, fight.damageTaken)) * difficulty.hpDrainFraction).rounded()
+                )
                 let remaining = fight.won
                     ? max(1, min(run.playerMaxHP, run.playerHP - drained))
                     : 0

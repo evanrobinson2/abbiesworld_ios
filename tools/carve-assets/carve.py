@@ -116,14 +116,24 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     reports, failures = [], []
-    for path in sorted(source_dir.glob("*.png")):
+    # Art-director drops are often JPEG on flat plates — accept both.
+    sources = sorted(
+        {
+            *source_dir.glob("*.png"),
+            *source_dir.glob("*.jpg"),
+            *source_dir.glob("*.jpeg"),
+        }
+    )
+    for path in sources:
         try:
             carved, report = carve(path, args.size)
         except Exception as error:  # noqa: BLE001 - report and keep going
             failures.append({"source": path.name, "error": str(error)})
             print(f"  FAIL {path.name}: {error}")
             continue
-        carved.save(out_dir / path.name, optimize=True)
+        out_name = path.stem + ".png"
+        carved.save(out_dir / out_name, optimize=True)
+        report["outputFile"] = out_name
         reports.append(report)
         print(
             f"  ok   {path.name:34s} bg=rgb{tuple(report['background'])} "

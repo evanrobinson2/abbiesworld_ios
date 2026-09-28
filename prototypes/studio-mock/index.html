@@ -82,7 +82,8 @@
       padding: 0 12px;
       white-space: nowrap;
     }
-    #asset-jobs-link {
+    #asset-jobs-link,
+    #library-link {
       display: inline-flex;
       align-items: center;
       border: 1px solid var(--line);
@@ -95,7 +96,8 @@
       white-space: nowrap;
       font-weight: 600;
     }
-    #asset-jobs-link:hover {
+    #asset-jobs-link:hover,
+    #library-link:hover {
       border-color: var(--line-strong);
       background: color-mix(in srgb, var(--raised) 80%, #fff 4%);
     }
@@ -1991,6 +1993,7 @@
     <button id="save" type="button" data-action="save">Save to game</button>
     <button id="completions-open" type="button" data-action="completions-open">Completions</button>
     <button id="copy-mcp-token" type="button" data-action="copy-mcp-token" title="Copy the Auth0 token ChatGPT needs for world tools">Copy MCP token</button>
+    <a id="library-link" href="/library.html" title="Browse registered assets and create portfolios">Library</a>
     <a id="asset-jobs-link" href="/assets.html" title="Browse and create asset generation jobs">Asset jobs</a>
   </header>
   <div id="workspace">

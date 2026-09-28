@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-rugscushions-06-pink-shell-cushion",
+  "latencyMs": 3143,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.98,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Low decorative cushion with a ring of plush pink scalloped lobes surrounding a domed coral-orange center with pronounced vertical shell-like ribs.",
+    "suggestedScale": 0.75
+  },
+  "responseId": "chatcmpl-ESoBMOiOYjdQz84rPGU8LrSrQYTlc",
+  "timestamp": "2026-09-27T18:46:35.047262+00:00",
+  "pngSha256": "5b74d3147a88d8625ed80c7a74e5f83c67f7b66060a7e73be52c294680c7f0a9"
+}

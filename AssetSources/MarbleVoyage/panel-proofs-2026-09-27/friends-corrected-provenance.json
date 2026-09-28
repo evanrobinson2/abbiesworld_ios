@@ -1,0 +1,34 @@
+{
+  "status": "review_only",
+  "approved": false,
+  "model": "Midjourney v7",
+  "promptFile": "friends-corrected-prompt.txt",
+  "job": "26f634dd-a4a5-482b-a98e-e06b29e1990e",
+  "change": "Removed composite identity reference; used newly generated hare rendering study at lower style weight; closed mouths and targeted negatives for gear/fangs. Identity fidelity remains unaccepted.",
+  "assets": [
+    {
+      "file": "friends-corrected-0.jpg",
+      "index": 0,
+      "sha256": "3b341be11be62922e8859376a106e6516cf6854da7d7d5736f41d4a95a753381",
+      "url": "https://cdn.midjourney.com/26f634dd-a4a5-482b-a98e-e06b29e1990e/0_0.jpeg"
+    },
+    {
+      "file": "friends-corrected-1.jpg",
+      "index": 1,
+      "sha256": "6167f3679ebf1ea7d8658e56f4b339a902c4efde2edc250d04cd0e3085cee7ca",
+      "url": "https://cdn.midjourney.com/26f634dd-a4a5-482b-a98e-e06b29e1990e/0_1.jpeg"
+    },
+    {
+      "file": "friends-corrected-2.jpg",
+      "index": 2,
+      "sha256": "4cebf895a41822b117321b34b9635455300ab1ca2aae668b063de3114f4fa9b8",
+      "url": "https://cdn.midjourney.com/26f634dd-a4a5-482b-a98e-e06b29e1990e/0_2.jpeg"
+    },
+    {
+      "file": "friends-corrected-3.jpg",
+      "index": 3,
+      "sha256": "977aefb5f11abd1b49b5498312654c4fde8e8271f6e39bfc2299784fd7311f90",
+      "url": "https://cdn.midjourney.com/26f634dd-a4a5-482b-a98e-e06b29e1990e/0_3.jpeg"
+    }
+  ]
+}

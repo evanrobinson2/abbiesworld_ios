@@ -377,15 +377,24 @@ struct World2POIInstanceMarker: View {
         let artH: CGFloat = (isLandmark ? 275 : 255) * markerScale
         return TimelineView(.animation(minimumInterval: 1.0 / 30.0, paused: reduceMotion || isEditable)) { timeline in
             let t = timeline.date.timeIntervalSinceReferenceDate
+            let isAbbieHome = archetype.id == World2POIRegistry.abbieTreehouseID
             let glowPulse = reduceMotion || isEditable || !presentation.glowEnabled
                 ? (presentation.glowEnabled ? 0.40 : 0)
                 : 0.32 + 0.28 * (0.5 + 0.5 * sin((t * 1.6) + dancePhase))
+            // Abbie's cottage: gentle “dancing” breath — slower scale + tiny bob.
             let selectedGrow: CGFloat = {
                 if isEditable || reduceMotion { return 1 }
+                if isAbbieHome && isPulsing {
+                    return 1.0 + 0.035 * (0.5 + 0.5 * sin(t * 0.85 + dancePhase))
+                }
                 if isSelected {
                     return 1.0 + 0.08 * (0.5 + 0.5 * sin(t * 2.4))
                 }
                 return isPulsing ? (0.98 + 0.08 * (0.5 + 0.5 * sin(t * 1.15 + dancePhase))) : 1
+            }()
+            let abbieBob: CGFloat = {
+                guard isAbbieHome, isPulsing, !reduceMotion, !isEditable else { return 0 }
+                return CGFloat(sin(t * 0.95 + dancePhase)) * artH * 0.012
             }()
 
             ZStack {
@@ -396,9 +405,12 @@ struct World2POIInstanceMarker: View {
                     .blur(radius: 1.5)
                     .offset(y: artH * 0.42)
 
-                if presentation.glowEnabled && !isLandmark {
+                if (presentation.glowEnabled || isAbbieHome) && !isLandmark {
                     Ellipse()
-                        .fill(glowColor.opacity(max(0.06, glowPulse) * (isSelected ? 0.55 : 0.28)))
+                        .fill(
+                            (isAbbieHome ? Color.pink : glowColor)
+                                .opacity(max(0.06, glowPulse) * (isAbbieHome ? 0.22 : (isSelected ? 0.55 : 0.28)))
+                        )
                         .frame(width: artW * 0.55, height: artH * 0.12)
                         .blur(radius: isSelected ? 4 : 3)
                         .offset(y: artH * 0.40)
@@ -410,6 +422,7 @@ struct World2POIInstanceMarker: View {
                         height: artH,
                         alignment: .center
                     )
+                    .offset(y: abbieBob)
                     // Hairline contact shadow — almost on the sprite.
                     .shadow(
                         color: .black.opacity(isSelected ? 0.38 : 0.26),
@@ -420,9 +433,11 @@ struct World2POIInstanceMarker: View {
                         World2PlantSway(
                             date: timeline.date,
                             phase: dancePhase,
-                            intensity: reduceMotion || isEditable || !presentation.swayEnabled
+                            intensity: reduceMotion || isEditable
                                 ? 0
-                                : World2BuildingSway.intensity
+                                : (isAbbieHome
+                                    ? World2BuildingSway.intensity * 0.55
+                                    : (presentation.swayEnabled ? World2BuildingSway.intensity : 0))
                         )
                     )
                     .colorMultiply(

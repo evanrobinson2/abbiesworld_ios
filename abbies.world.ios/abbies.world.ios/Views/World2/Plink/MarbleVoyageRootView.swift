@@ -79,6 +79,8 @@ struct MarbleVoyageRootView: View {
             }
         }
         .ignoresSafeArea()
+        // Keep child battle/chart ids visible to XCTest / VoiceOver (don't flatten into root).
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("marbleVoyage.root")
         .task {
             await AssetBootstrapService.shared.bootstrap()

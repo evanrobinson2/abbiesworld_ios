@@ -131,6 +131,14 @@ struct World2RootView: View {
                     onClose: viewModel.exitPOI
                 )
 
+            case .worldSwitcher:
+                World2WorldSwitcherView(
+                    entries: viewModel.worldSwitcherEntries,
+                    onSelect: viewModel.selectWorldSwitcherEntry,
+                    onOpenPlayerMenu: viewModel.requestPlayerMenu,
+                    onClose: viewModel.exitPOI
+                )
+
             case .whizbang:
                 IncredimachineView(
                     onDismiss: viewModel.exitPOI,
@@ -190,6 +198,14 @@ struct World2RootView: View {
                 MarbleVoyageHostView(
                     playerID: viewModel.currentPlayerId?.rawValue,
                     onExit: viewModel.exitPOI
+                )
+
+            case .worldBookUnlock:
+                WorldBookUnlockHostView(
+                    playerID: viewModel.currentPlayerId?.rawValue,
+                    voyageAlreadyUnlocked: viewModel.isMarbleVoyageUnlocked,
+                    onPutDown: viewModel.putDownWorldBook,
+                    onAllSolved: viewModel.completeWorldBookUnlock
                 )
 
             case .planningDept:
@@ -322,6 +338,12 @@ struct World2RootView: View {
         .background(Color.black.ignoresSafeArea())
         .ignoresSafeArea()
         .statusBarHidden(true)
+        .fullScreenCover(item: $viewModel.voyageOpening) { request in
+            VoyageOpeningView(request: request) { watched in
+                viewModel.finishVoyageOpening(watchedToEnd: watched)
+            }
+            .interactiveDismissDisabled()
+        }
         .sheet(isPresented: $showingMusicPlayer) {
             MusicPlayerView {
                 showingMusicPlayer = false
@@ -350,6 +372,7 @@ struct World2RootView: View {
                         anywhereDecorating = false
                         anywhereSelectedFurnitureID = nil
                         anywhereSelectedCatalogID = nil
+                        viewModel.setDecorateModeActive(false)
                     }
                 )
                 .zIndex(35)
@@ -445,6 +468,7 @@ struct World2RootView: View {
                 anywhereSelectedFurnitureID = highlight
             }
             anywhereDecorating = true
+            viewModel.setDecorateModeActive(true)
             viewModel.dismissInventReadyPrompt()
         }
         .onChange(of: viewModel.sandboxInventTick) { _, _ in
@@ -531,8 +555,9 @@ struct World2RootView: View {
     }
 
     private var showsPlayerMenu: Bool {
+        if anywhereDecorating || viewModel.isDecorateModeActive { return false }
         switch viewModel.currentScreen {
-        case .loading, .playerSelect, .plink, .marbleVoyage:
+        case .loading, .playerSelect, .plink, .marbleVoyage, .worldSwitcher, .worldBookUnlock:
             return false
         default:
             return viewModel.currentPlayerId != nil
@@ -541,8 +566,10 @@ struct World2RootView: View {
 
     private var showsSandboxToolRail: Bool {
         guard showsPlayerMenu else { return false }
+        // Decorate mode owns the chrome — no utility rail competing with the drawer.
+        if anywhereDecorating || viewModel.isDecorateModeActive { return false }
         switch viewModel.currentScreen {
-        case .plink, .pegMonastery, .marbleVoyage, .loading, .playerSelect:
+        case .plink, .pegMonastery, .marbleVoyage, .worldSwitcher, .worldBookUnlock, .loading, .playerSelect:
             return false
         case .fallingTargets:
             return false
@@ -1099,6 +1126,7 @@ private extension World2Screen {
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse,
              .characterStudio, .figurineExplorer, .sceneBuilder, .worldTeleporter,
+             .worldSwitcher, .worldBookUnlock,
              .whizbang, .planningDept, .plink, .pegMonastery, .marbleVoyage, .rooms,
              .sceneCreator, .beacon, .daddyWelcome:
             return false

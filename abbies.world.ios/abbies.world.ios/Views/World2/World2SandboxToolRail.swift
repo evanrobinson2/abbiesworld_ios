@@ -2,8 +2,8 @@
 //  World2SandboxToolRail.swift
 //  abbies.world.ios
 //
-//  Dockable left tool rail. Expanded: character tile + tools.
-//  Docked: a bottom bump-out (under the character tile) pulls it back open.
+//  Dockable left tool rail. Expanded: tools only (no character portrait).
+//  Docked: a bottom bump-out pulls it back open.
 //
 
 import SwiftUI
@@ -15,8 +15,6 @@ struct World2SandboxToolRail: View {
     @AppStorage("world2.sandbox.toolRail.docked") private var isDocked = false
 
     var isBuilding: Bool = false
-    /// Optional avatar art for the character tile beside the rail.
-    var characterCatalogName: String? = PeglinAbbieArt.mapCatalogName
     let onEdit: () -> Void
     let onInvent: () -> Void
     let onDecorate: () -> Void
@@ -45,7 +43,7 @@ struct World2SandboxToolRail: View {
         .accessibilityIdentifier("world2.sandbox.toolRail")
     }
 
-    /// Mini bump under the character-tile band — the only chrome when docked.
+    /// Mini bump — the only chrome when docked.
     private var dockedHook: some View {
         Button {
             isDocked = false
@@ -88,99 +86,69 @@ struct World2SandboxToolRail: View {
     }
 
     private var expandedRail: some View {
-        HStack(alignment: .top, spacing: 8) {
-            VStack(spacing: 8) {
+        VStack(spacing: 8) {
+            railButton(
+                symbol: "hammer.fill",
+                tint: isBuilding ? .orange : Color(white: 0.22),
+                label: isBuilding ? "Building" : "Build is off",
+                id: "edit",
+                dimmed: !isBuilding,
+                action: onEdit
+            )
+            railButton(
+                symbol: "wand.and.stars",
+                tint: .purple,
+                label: "Invent props",
+                id: "invent",
+                badge: invent.history.count,
+                action: onInvent
+            )
+            if let onCompletions {
                 railButton(
-                    symbol: "hammer.fill",
-                    tint: isBuilding ? .orange : Color(white: 0.22),
-                    label: isBuilding ? "Building" : "Build is off",
-                    id: "edit",
-                    dimmed: !isBuilding,
-                    action: onEdit
+                    symbol: "photo.on.rectangle.angled",
+                    tint: .indigo,
+                    label: "Completions",
+                    id: "completions",
+                    badge: completionCount,
+                    action: onCompletions
                 )
-                railButton(
-                    symbol: "wand.and.stars",
-                    tint: .purple,
-                    label: "Invent props",
-                    id: "invent",
-                    badge: invent.history.count,
-                    action: onInvent
-                )
-                if let onCompletions {
-                    railButton(
-                        symbol: "photo.on.rectangle.angled",
-                        tint: .indigo,
-                        label: "Completions",
-                        id: "completions",
-                        badge: completionCount,
-                        action: onCompletions
-                    )
-                }
-                if let onOpenMinimap {
-                    railButton(
-                        symbol: "map.fill",
-                        tint: .teal,
-                        label: "Minimap",
-                        id: "minimap",
-                        action: onOpenMinimap
-                    )
-                }
-                railButton(
-                    symbol: "paintbrush.pointed.fill",
-                    tint: world.accentColor(.pink),
-                    label: "Decorate scene",
-                    id: "decorate",
-                    action: onDecorate
-                )
-
-                // Dock control sits at the bottom of the tool stack.
-                Button {
-                    isDocked = true
-                } label: {
-                    Image(systemName: "chevron.left")
-                        .font(.system(size: 13, weight: .black))
-                        .foregroundStyle(.white.opacity(0.85))
-                        .frame(width: 44, height: 28)
-                        .background(Color.white.opacity(0.12), in: Capsule())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("Hide tools")
-                .accessibilityIdentifier("world2.sandbox.toolRail.dock")
             }
-            .padding(8)
-            .background(.black.opacity(0.42), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .overlay(
-                RoundedRectangle(cornerRadius: 18, style: .continuous)
-                    .stroke(.white.opacity(0.28), lineWidth: 1)
+            if let onOpenMinimap {
+                railButton(
+                    symbol: "map.fill",
+                    tint: .teal,
+                    label: "Minimap",
+                    id: "minimap",
+                    action: onOpenMinimap
+                )
+            }
+            railButton(
+                symbol: "paintbrush.pointed.fill",
+                tint: world.accentColor(.pink),
+                label: "Decorate scene",
+                id: "decorate",
+                action: onDecorate
             )
 
-            characterTile
-        }
-    }
-
-    private var characterTile: some View {
-        Group {
-            if let name = characterCatalogName, UIImage(named: name) != nil {
-                Image(name)
-                    .resizable()
-                    .scaledToFill()
-            } else {
-                Image(systemName: "person.crop.square.fill")
-                    .font(.system(size: 36, weight: .bold))
+            Button {
+                isDocked = true
+            } label: {
+                Image(systemName: "chevron.left")
+                    .font(.system(size: 13, weight: .black))
                     .foregroundStyle(.white.opacity(0.85))
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color(red: 0.2, green: 0.45, blue: 0.55))
+                    .frame(width: 44, height: 28)
+                    .background(Color.white.opacity(0.12), in: Capsule())
             }
+            .buttonStyle(.plain)
+            .accessibilityLabel("Hide tools")
+            .accessibilityIdentifier("world2.sandbox.toolRail.dock")
         }
-        .frame(width: 72, height: 72)
-        .clipped()
-        .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .padding(8)
+        .background(.black.opacity(0.42), in: RoundedRectangle(cornerRadius: 18, style: .continuous))
         .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
-                .stroke(Color(red: 0.55, green: 0.9, blue: 0.65).opacity(0.85), lineWidth: 2)
+            RoundedRectangle(cornerRadius: 18, style: .continuous)
+                .stroke(.white.opacity(0.28), lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.35), radius: 8, y: 3)
-        .accessibilityHidden(true)
     }
 
     private func railButton(

@@ -13,6 +13,7 @@ struct World2PlayerHomeView: View {
     @State private var selectedFurnitureID: String?
     @State private var selectedCatalogItemID: String?
     @State private var decorateFilter: DecorateFilterID = .all
+    @State private var decorateDrawerExpanded = true
     @State private var activeRoom: TreehouseRoomID = .default
     @State private var awardedStarterPack: FurnitureStarterPack?
     @State private var starterPackBurst = false
@@ -55,6 +56,12 @@ struct World2PlayerHomeView: View {
     var body: some View {
         GeometryReader { room in
             let canvasSize = CGSize(width: room.size.width, height: room.size.height)
+            let drawerLane = decorateDrawerExpanded
+                ? World2DecorateTray.expandedWidth
+                : World2DecorateTray.minimizedWidth
+            let returnZoneMinX: CGFloat? = isArrangingFurniture
+                ? max(0, canvasSize.width - drawerLane)
+                : nil
 
             ZStack(alignment: .bottom) {
                 ZStack {
@@ -84,6 +91,12 @@ struct World2PlayerHomeView: View {
                                 )
                             }
                     )
+                    .dropDestination(for: String.self) { items, location in
+                        guard isArrangingFurniture else { return false }
+                        return placeDraggedPayload(items, at: location, canvasSize: canvasSize)
+                    } isTargeted: { targeted in
+                        isRoomDropTargeted = targeted
+                    }
 
                     Color.yellow.opacity(cozyGlow ? 0.18 : 0)
                         .ignoresSafeArea()
@@ -107,6 +120,14 @@ struct World2PlayerHomeView: View {
                                 canvasSize: canvasSize,
                                 onUse: viewModel.openWorldTeleporter
                             )
+                        } else if instance.decorationId == DecorationInstance.marbleVoyageWorldBookID,
+                                  !isArrangingFurniture {
+                            World2PlacedWorldBookView(
+                                instance: instance,
+                                canvasSize: canvasSize,
+                                voyageUnlocked: viewModel.isMarbleVoyageUnlocked,
+                                onOpenBook: viewModel.openWorldBookUnlock
+                            )
                         } else if let piece = World2RoomPiece.resolve(
                             instance.decorationId,
                             player: roomPlayer
@@ -117,7 +138,7 @@ struct World2PlayerHomeView: View {
                                 canvasSize: canvasSize,
                                 isArranging: isArrangingFurniture,
                                 isSelected: selectedFurnitureID == instance.id,
-                                returnZoneMinX: nil,
+                                returnZoneMinX: returnZoneMinX,
                                 onSelect: {
                                     if selectedFurnitureID != instance.id {
                                         selectedFurnitureID = instance.id
@@ -165,7 +186,7 @@ struct World2PlayerHomeView: View {
                         if !isArrangingFurniture {
                             header
                         } else {
-                            decorateLockChrome
+                            decorateModeChrome
                         }
                         Spacer()
                         if isReadOnly, !isArrangingFurniture {
@@ -312,13 +333,16 @@ struct World2PlayerHomeView: View {
                 onOpenMusic()
             }
         }
-        .overlay(alignment: .bottom) {
+        .overlay(alignment: .trailing) {
             if isArrangingFurniture {
                 World2DecorateTray(
                     playerName: owner?.displayName ?? "Player",
                     selectedCatalogID: selectedCatalogItemID,
                     selectedInventoryID: selectedFurnitureID,
                     filter: decorateFilter,
+                    isExpanded: $decorateDrawerExpanded,
+                    isReturnTargetActive: draggingPlacedFurnitureID != nil,
+                    catalogPolicy: .abbieCottageOnly,
                     onFilterChange: { decorateFilter = $0 },
                     onSelectCatalog: { item in
                         selectedCatalogItemID = item.id
@@ -328,20 +352,39 @@ struct World2PlayerHomeView: View {
                         selectedFurnitureID = instanceID
                         selectedCatalogItemID = nil
                     },
-                    onDone: {
-                        PlayerStateService.shared.markInventorySeen()
-                        withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
-                            isArrangingFurniture = false
+                    onReturnInventoryID: { instanceID in
+                        PlayerStateService.shared.returnFurnitureToInventory(instanceId: instanceID)
+                        if selectedFurnitureID == instanceID {
                             selectedFurnitureID = nil
-                            selectedCatalogItemID = nil
-                            draggingPlacedFurnitureID = nil
-                            highlightedInventoryID = nil
                         }
-                    }
+                        draggingPlacedFurnitureID = nil
+                    },
+                    onDone: endDecorateMode
                 )
                 .zIndex(80)
+                .allowsHitTesting(true)
             }
         }
+        .onChange(of: isArrangingFurniture) { _, active in
+            viewModel.setDecorateModeActive(active)
+        }
+        .onDisappear {
+            if isArrangingFurniture {
+                viewModel.setDecorateModeActive(false)
+            }
+        }
+    }
+
+    private func endDecorateMode() {
+        PlayerStateService.shared.markInventorySeen()
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
+            isArrangingFurniture = false
+            selectedFurnitureID = nil
+            selectedCatalogItemID = nil
+            draggingPlacedFurnitureID = nil
+            highlightedInventoryID = nil
+        }
+        viewModel.setDecorateModeActive(false)
     }
 
     private var playerHomeThumbActions: [World2ThumbAction] {
@@ -399,18 +442,7 @@ struct World2PlayerHomeView: View {
         let x = Double(location.x / max(canvasSize.width, 1))
         let y = Double(location.y / max(canvasSize.height, 1))
         if let catalogID = selectedCatalogItemID,
-           let item = FurnitureItem.item(id: catalogID)
-            ?? World2WorldSync.shared.props.first(where: { $0.id == catalogID }).map({
-                FurnitureItem(
-                    id: $0.id,
-                    name: $0.name,
-                    category: "Props",
-                    assetName: $0.image,
-                    price: 0,
-                    defaultScale: 0.8,
-                    placementLayer: .floor
-                )
-            }) {
+           let item = catalogItem(id: catalogID) {
             if let id = PlayerStateService.shared.placeCatalogFurniture(
                 item: item,
                 x: x,
@@ -435,40 +467,83 @@ struct World2PlayerHomeView: View {
         }
     }
 
-    private var decorateLockChrome: some View {
+    @discardableResult
+    private func placeDraggedPayload(
+        _ items: [String],
+        at location: CGPoint,
+        canvasSize: CGSize
+    ) -> Bool {
+        guard let raw = items.first,
+              let parsed = World2DecorateDragPayload.parse(raw)
+        else { return false }
+        let x = Double(location.x / max(canvasSize.width, 1))
+        let y = Double(location.y / max(canvasSize.height, 1))
+        switch parsed.kind {
+        case .inventory:
+            PlayerStateService.shared.placeFurniture(
+                instanceId: parsed.id,
+                x: x,
+                y: y,
+                roomId: currentRoomId
+            )
+            selectedFurnitureID = parsed.id
+            selectedCatalogItemID = nil
+            World2Diagnostics.log(
+                "decorate_inventory_drag_place",
+                ["instance": parsed.id, "room": currentRoomId]
+            )
+            return true
+        case .catalog:
+            guard let item = catalogItem(id: parsed.id) else { return false }
+            if let id = PlayerStateService.shared.placeCatalogFurniture(
+                item: item,
+                x: x,
+                y: y,
+                roomId: currentRoomId
+            ) {
+                selectedFurnitureID = id
+                selectedCatalogItemID = nil
+                World2Diagnostics.log(
+                    "decorate_catalog_drag_place",
+                    ["item": item.id, "room": currentRoomId]
+                )
+                return true
+            }
+            return false
+        }
+    }
+
+    private func catalogItem(id: String) -> FurnitureItem? {
+        if let item = FurnitureItem.item(id: id) { return item }
+        guard let prop = World2WorldSync.shared.props.first(where: { $0.id == id }) else {
+            return nil
+        }
+        return FurnitureItem(
+            id: prop.id,
+            name: prop.name,
+            category: "Props",
+            assetName: prop.image,
+            price: 0,
+            defaultScale: 0.8,
+            placementLayer: .floor
+        )
+    }
+
+    /// Decorate-mode chrome: X leaves decorate only — never the treehouse.
+    private var decorateModeChrome: some View {
         HStack {
-            Button {
-                // Mode lock: back only exits decorate, not the treehouse.
-                PlayerStateService.shared.markInventorySeen()
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
-                    isArrangingFurniture = false
-                    selectedFurnitureID = nil
-                    selectedCatalogItemID = nil
-                }
-            } label: {
-                Label("Done", systemImage: "checkmark.circle.fill")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+            Button(action: endDecorateMode) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 16, weight: .black))
                     .foregroundStyle(.white)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
-                    .background(.green.opacity(0.85), in: Capsule())
+                    .frame(width: 40, height: 40)
+                    .background(Color.red.opacity(0.85), in: Circle())
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Close decorate")
             .accessibilityIdentifier("world2.interior.decorateLock.done")
 
             Spacer()
-
-            VStack(alignment: .trailing, spacing: 2) {
-                Text(supportsRooms ? activeRoom.title : (poi?.name ?? "Treehouse"))
-                    .font(.system(size: 15, weight: .black, design: .rounded))
-                Text("Tap art, then tap the room")
-                    .font(.system(size: 11, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.75))
-            }
-            .foregroundStyle(.white)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(.black.opacity(0.35), in: RoundedRectangle(cornerRadius: 12))
         }
         .padding(.horizontal, 18)
         .padding(.top, 14)
@@ -1183,6 +1258,47 @@ private struct World2FurnitureDecoratorDrawer: View {
                 : "Drag into the room, or double tap to place"
         )
         .accessibilityIdentifier("world2.interior.inventory.item.\(instance.id)")
+    }
+}
+
+/// Placed Voyage gateway book — tap opens unlock flow (arrange mode uses normal furniture).
+private struct World2PlacedWorldBookView: View {
+    let instance: DecorationInstance
+    let canvasSize: CGSize
+    let voyageUnlocked: Bool
+    let onOpenBook: () -> Void
+
+    var body: some View {
+        Button(action: onOpenBook) {
+            VStack(spacing: 6) {
+                Image(WorldBookCatalog.closedBook)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 190, height: 175)
+                    .shadow(color: .black.opacity(0.45), radius: 8, y: 5)
+                Text(voyageUnlocked ? "Voyage book" : "Messy book!")
+                    .font(.system(size: 14, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(.black.opacity(0.55), in: Capsule())
+            }
+        }
+        .buttonStyle(.plain)
+        .scaleEffect(instance.scale)
+        .rotationEffect(.degrees(instance.rotation))
+        .position(
+            x: canvasSize.width * instance.x,
+            y: canvasSize.height * instance.y
+        )
+        .zIndex(min(Double(instance.zIndex), 1_000))
+        .accessibilityIdentifier("world2.worldBook.cozyNookBook")
+        .accessibilityLabel(
+            voyageUnlocked
+                ? "Marble Voyage book. Open to replay the puzzle or put it away"
+                : "Messy book. Open to solve the puzzle and unlock Marble Voyage"
+        )
+        .allowsHitTesting(true)
     }
 }
 

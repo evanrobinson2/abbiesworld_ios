@@ -30,7 +30,7 @@ You are not a chatbot bolted on the side. You are a **full editor** of the world
 Treat the world API as Studio: anything Evan can do in the map editor, you can do via tools.
 
 ### Document of record
-Today: `GET|PUT /api/v1/worlds/current` (Auth0 bearer, audience `https://api.abbies.world`) — one focused world per household.  
+Today: multi-world — `GET/POST /api/v1/worlds`, `POST /api/v1/worlds/current` `{worldId}`, `GET|PUT /api/v1/worlds/current` (focused). Auth0 bearer, audience `https://api.abbies.world`.  
 Studio proxy: `prototypes/studio-mock/api/world.js`.  
 iPad: `HouseholdAPIClient.fetchWorld` / `putWorld`.
 

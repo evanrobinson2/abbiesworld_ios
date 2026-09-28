@@ -48,10 +48,14 @@
       "maxDuration": 60
     },
     "api/mcp.js": {
-      "maxDuration": 60,
+      "maxDuration": 120,
       "includeFiles": "api/{mcp-primer.md,lib/**}"
     },
     "api/asset-jobs.js": {
+      "maxDuration": 120,
+      "includeFiles": "api/lib/**"
+    },
+    "api/asset-library.js": {
       "maxDuration": 60,
       "includeFiles": "api/lib/**"
     },

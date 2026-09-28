@@ -555,19 +555,13 @@ final class PeggleScene: SKScene, SKPhysicsContactDelegate {
             guard shotAge >= PlinkGravityWaveRules.armAfterSeconds else { return }
             gravityWavePhase = .ramping(startedAt: shotAge)
             gravityWaveExtra = 0
-            noteHighlight("Gravity rift")
-            statusText = "Gravity rift…"
+            // Silent pull — physics only, no HUD banner / vignette (Evan).
             PlinkSFX.play(.gravity)
             publish()
 
         case .ramping(let started):
             let elapsed = shotAge - started
             gravityWaveExtra = PlinkGravityWaveRules.extraGravity(rampElapsed: elapsed)
-            let label = "Gravity rift · pulling…"
-            if statusText != label {
-                statusText = label
-                publish()
-            }
         }
     }
 

@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-rugscushions-02-lily-pad-flower-rug",
+  "latencyMs": 2507,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "center",
+    "confidence": 0.99,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Round textured green lily pad rug with a wedge-shaped notch and a raised pink water-lily flower with a golden-yellow center.",
+    "suggestedScale": 0.8
+  },
+  "responseId": "chatcmpl-ESoB97qQt0DESOsYjxdI83R7wbJKz",
+  "timestamp": "2026-09-27T18:46:21.036389+00:00",
+  "pngSha256": "5cdf979a2406e83dfb2bc7d972636a5d12d2a55eb028fffc75e1d5df69bd8a9c"
+}

@@ -91,6 +91,43 @@ final class HouseholdAPIClient {
         return try World2WorldDocument.decode(data)
     }
 
+    func listWorlds(accessToken: String) async throws -> World2WorldListResponse {
+        let request = try authorizedRequest(
+            path: "/api/v1/worlds",
+            method: "GET",
+            accessToken: accessToken
+        )
+        let (data, response) = try await session.data(for: request)
+        try throwIfNeeded(data: data, response: response)
+        return try JSONDecoder().decode(World2WorldListResponse.self, from: data)
+    }
+
+    func setCurrentWorld(worldId: String, accessToken: String) async throws -> World2WorldListResponse {
+        var request = try authorizedRequest(
+            path: "/api/v1/worlds/current",
+            method: "POST",
+            accessToken: accessToken
+        )
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: ["worldId": worldId])
+        let (data, response) = try await session.data(for: request)
+        try throwIfNeeded(data: data, response: response)
+        return try JSONDecoder().decode(World2WorldListResponse.self, from: data)
+    }
+
+    func createWorld(name: String, accessToken: String) async throws -> World2WorldDocument {
+        var request = try authorizedRequest(
+            path: "/api/v1/worlds",
+            method: "POST",
+            accessToken: accessToken
+        )
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try JSONSerialization.data(withJSONObject: ["name": name])
+        let (data, response) = try await session.data(for: request)
+        try throwIfNeeded(data: data, response: response)
+        return try World2WorldDocument.decode(data)
+    }
+
     func putWorld(
         _ document: World2WorldDocument,
         expectedRevision: Int,

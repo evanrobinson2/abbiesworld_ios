@@ -56,14 +56,18 @@ struct World2PlayerMenuDrawer: View {
         }
         .animation(.spring(response: 0.32, dampingFraction: 0.84), value: isOpen)
         .accessibilityElement(children: .contain)
+        .onChange(of: viewModel.playerMenuOpenTick) { _, _ in
+            focusedTool = .inventory
+            isOpen = true
+        }
     }
 
     // MARK: - Avatar chip
 
     private var avatarButton: some View {
         Button {
-            focusedTool = .inventory
-            isOpen = true
+            // Abby tap → world switcher (current + unlocked). Long-term home for multi-world.
+            viewModel.openWorldSwitcher()
         } label: {
             ZStack(alignment: .topTrailing) {
                 avatarImage
@@ -95,11 +99,20 @@ struct World2PlayerMenuDrawer: View {
         .buttonStyle(.plain)
         .accessibilityLabel(playerMenuAccessibilityLabel)
         .accessibilityIdentifier("world2.playerMenu.open")
+        .contextMenu {
+            Button("Player menu") {
+                focusedTool = .inventory
+                isOpen = true
+            }
+            Button("Worlds") {
+                viewModel.openWorldSwitcher()
+            }
+        }
     }
 
     private var playerMenuAccessibilityLabel: String {
         let name = playerId?.displayName ?? "Player"
-        var parts = ["\(name) menu"]
+        var parts = ["\(name) worlds"]
         if inventoryBadgeCount > 0 {
             parts.append("\(inventoryBadgeCount) in inventory")
         }

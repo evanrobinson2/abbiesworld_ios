@@ -1,0 +1,26 @@
+{
+  "cropBounds": [
+    20,
+    20,
+    350,
+    500
+  ],
+  "derivativeSha256": "76f876b22c11fb1f3dc9a19d53ae9f28aa2f7bec32ef5438174a16d868300b6c",
+  "packSemanticId": "pack.abbieCottage.stuffies.sheet4",
+  "processing": "existing cottage pipeline component extraction; explicit object cells",
+  "reviewStatus": "pending_visual_review",
+  "semanticId": "decor.abbieCottage.acd-stuffies4-lavender-dragon",
+  "source": {
+    "approval": "Evan: great add #2 and 4 to the game",
+    "candidateIndex": 3,
+    "filename": "stuffies-sheet-4-approved.jpeg",
+    "jobId": "897e3259-3878-40c6-bcf0-ba2dad75a636",
+    "objectCount": 6,
+    "semanticId": "pack.abbieCottage.stuffies.sheet4",
+    "sha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+    "sourceProvider": "Midjourney",
+    "sourceUrl": "https://cdn.midjourney.com/897e3259-3878-40c6-bcf0-ba2dad75a636/0_3.jpeg",
+    "status": "approved_source"
+  },
+  "sourcePath": "AssetSources/World2/cottage-stuffies-2026-09-27/stuffies-sheet-4-approved.jpeg"
+}

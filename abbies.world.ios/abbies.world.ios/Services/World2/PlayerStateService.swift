@@ -32,6 +32,20 @@ class PlayerStateService: ObservableObject {
     private let legacyStateKey = "world2_player_state"
     private var cancellables = Set<AnyCancellable>()
     
+    static let voyageOpeningMilestone = "marbleVoyage.opening.watched.v1"
+
+    func hasWatchedVoyageOpening() -> Bool {
+        currentPlayer?.progression.achievedMilestones.contains(Self.voyageOpeningMilestone) == true
+    }
+
+    func markVoyageOpeningWatched(playerID: PlayerId) {
+        guard var player = currentPlayer, player.playerId == playerID else { return }
+        guard !player.progression.achievedMilestones.contains(Self.voyageOpeningMilestone) else { return }
+        player.progression.achievedMilestones.append(Self.voyageOpeningMilestone)
+        currentPlayer = player
+        saveLocalState()
+    }
+
     @Published private(set) var currentPlayer: PlayerState?
     @Published private(set) var isLoading = false
     @Published private(set) var isSyncing = false
@@ -1297,6 +1311,7 @@ class PlayerStateService: ObservableObject {
         ensureStarterPOIFactory(in: &player)
         ensureStarterWorldSeed(in: &player)
         ensureWorldTeleporter(in: &player)
+        ensureMarbleVoyageWorldBook(in: &player)
         offerJukeboxAsInventory(in: &player)
         return player
     }
@@ -1318,6 +1333,33 @@ class PlayerStateService: ObservableObject {
             return (0.82, generated.placementLayer.homeLayer)
         }
         return nil
+    }
+
+    /// One-time seed: place the Voyage gateway book on the Cozy Nook table.
+    /// After the milestone, respect the player's own placement (including drawer).
+    private static func ensureMarbleVoyageWorldBook(in player: inout PlayerState) {
+        let milestone = PlayerState.marbleVoyageBookSeededMilestone
+        guard !player.progression.achievedMilestones.contains(milestone) else { return }
+
+        let book = DecorationInstance.marbleVoyageWorldBook(for: player.playerId)
+        if !player.decorations.contains(where: { $0.id == book.id }) {
+            player.decorations.append(book)
+        }
+        let alreadyPlaced = player.homeLayout.placedDecorations.contains {
+            $0.decorationInstanceId == book.id
+        }
+        if !alreadyPlaced {
+            player.homeLayout.placedDecorations.append(
+                HomeLayout.PlacedDecoration(
+                    id: "placed_\(book.id)",
+                    decorationInstanceId: book.id,
+                    position: .init(x: book.x, y: book.y),
+                    layer: .floor,
+                    roomId: TreehouseRoomID.cozyNook.rawValue
+                )
+            )
+        }
+        player.progression.achievedMilestones.append(milestone)
     }
 
     /// The starter jukebox used to appear already placed. Old saves get it back in inventory once.

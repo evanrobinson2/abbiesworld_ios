@@ -26,7 +26,9 @@ Documents that describe **one-time problem solving** or processes - risk analyse
 - `current-state/GAME_ASSET_REGISTRY_ADOPTION.md` - Game Asset API v1
 - `studio-mcp-command-dictionary.json` - MCP tool inventory for ChatGPT world authoring
 
-**Studio UI:** `prototypes/studio-mock/assets.html` — browse/submit asset jobs (Bearer from Copy MCP token)
+**Studio UI:**
+- Library shelf: https://studio-mock-iota.vercel.app/library.html (`prototypes/studio-mock/library.html`) — browse registered `abbies-world-2` assets + create draft portfolios
+- Asset jobs: https://studio-mock-iota.vercel.app/assets.html — create → Midjourney → register (Bearer from Copy MCP token)
 
 **Developing Games:**
 - `current-state/STANDALONE_MINIGAME_PATTERN.md` - Self-contained game architecture

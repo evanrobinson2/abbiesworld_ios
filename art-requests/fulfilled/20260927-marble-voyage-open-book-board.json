@@ -1,0 +1,42 @@
+{
+  "priority": "normal",
+  "styleNotes": "Hand-drawn bold ink outlines, flat cel shading, antique teal and ochre book; no text.",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T14:05:29.042Z",
+  "promptSeeds": [],
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/world-book-2026-09-27/provenance.json",
+    "AssetSources/MarbleVoyage/world-book-2026-09-27/HANDOFF.md",
+    "AssetSources/MarbleVoyage/world-book-2026-09-27/open-book-orthographic-candidate-2.jpeg"
+  ],
+  "id": "20260927-marble-voyage-open-book-board",
+  "semanticId": "plate.marbleVoyage.unlock.openBook",
+  "status": "fulfilled",
+  "type": "plate",
+  "aspect": "4:3",
+  "brief": "Full-screen 4:3 open-book interior puzzle board, strictly orthographic to the page, blank central play area. No perspective book object or surrounding background.",
+  "referenceRequestIds": [
+    "20260927-marble-voyage-world-book",
+    "20260927-marble-voyage-puzzle-choice-1",
+    "20260927-marble-voyage-puzzle-choice-2",
+    "20260927-marble-voyage-puzzle-choice-3",
+    "20260927-marble-voyage-puzzle-choice-4"
+  ],
+  "acceptanceCriteria": [
+    "Full-bleed 4:3 interior fills screen",
+    "Strict orthographic view perpendicular to pages; no foreshortening",
+    "Abbies World bold hand-drawn cel-shaded style matching approved book",
+    "Blank middle for separate movable jigsaw assets",
+    "Decoration confined to outer edges"
+  ],
+  "fulfillment": {
+    "completedAt": "2026-09-27T14:09:13.115889+00:00",
+    "completedBy": "Codex Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/world-book-2026-09-27/open-book-orthographic-candidate-2.jpeg",
+    "sourceHashSha256": "426e07a636ab747b05481551b2605333c2ead21a826e637f6a0bc22e86b7a56d",
+    "notes": "Approved full-screen orthographic interior source. Bind as puzzle background with movable pieces separate. Runtime wiring and in-app verification remain builder work."
+  },
+  "sessionNote": "Evan approved the corrected orthographic interior. Source delivered for builder binding.",
+  "productionIntent": "runtime_bind"
+}

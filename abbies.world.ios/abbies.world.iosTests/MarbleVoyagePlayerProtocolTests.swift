@@ -36,21 +36,21 @@ final class MarbleVoyagePlayerProtocolTests: XCTestCase {
             id: "s", kind: .shrine, column: 1, row: 2, title: "Shrine", threat: 3
         )
         let run = MarbleVoyageRun.makeProtocolCampaign(seed: 7)
-        let aggFight = MarbleVoyagePlayerProtocol.mapScore(
-            player: .aggressive, node: fight, hpFrac: 0.4, run: run
+        let pegFight = MarbleVoyagePlayerProtocol.mapScore(
+            player: .hitPegs, node: fight, hpFrac: 0.4, run: run
         )
-        let aggShrine = MarbleVoyagePlayerProtocol.mapScore(
-            player: .aggressive, node: shrine, hpFrac: 0.4, run: run
+        let pegShrine = MarbleVoyagePlayerProtocol.mapScore(
+            player: .hitPegs, node: shrine, hpFrac: 0.4, run: run
         )
-        XCTAssertGreaterThan(aggFight, aggShrine)
+        XCTAssertGreaterThan(pegFight, pegShrine)
 
-        let motShrineHurt = MarbleVoyagePlayerProtocol.mapScore(
-            player: .motivated, node: shrine, hpFrac: 0.3, run: run
+        let metaShrineHurt = MarbleVoyagePlayerProtocol.mapScore(
+            player: .metaAware, node: shrine, hpFrac: 0.3, run: run
         )
-        let motFightHurt = MarbleVoyagePlayerProtocol.mapScore(
-            player: .motivated, node: fight, hpFrac: 0.3, run: run
+        let metaFightHurt = MarbleVoyagePlayerProtocol.mapScore(
+            player: .metaAware, node: fight, hpFrac: 0.3, run: run
         )
-        XCTAssertGreaterThan(motShrineHurt, motFightHurt)
+        XCTAssertGreaterThan(metaShrineHurt, metaFightHurt)
     }
 
     func testProtocolAuditCollectsStatsAndWritesEvidence() throws {
@@ -99,7 +99,7 @@ final class MarbleVoyagePlayerProtocolTests: XCTestCase {
     func testInstrumentedRunLogsMapAndShopDecisions() {
         let trial = MarbleVoyageCampaignSim.playCampaign(
             seed: 101,
-            player: .motivated,
+            player: .metaAware,
             mapMode: .protocolAudit
         )
         let log = try! XCTUnwrap(trial.log)

@@ -12,15 +12,10 @@ enum PeglinCharacterState: String, CaseIterable, Identifiable, Sendable {
     var id: String { rawValue }
 
     /// Catalog imageset for Abbie's elbow-height battle / HUD portrait.
-    /// Happy/idle use the approved regal bust; hurt/defeated/wink keep dedicated sheets
-    /// (older outfits — follow-up art, do not force the regal smile onto them).
+    /// Always the approved regal bust — older casual happy/hurt/wink sheets stay
+    /// in the asset catalog for rollback only (do not show in fight chrome).
     var abbiePortraitCatalogName: String {
-        switch self {
-        case .idle, .happy: return PeglinAbbieArt.portraitCatalogName
-        case .sneakyWink: return "world2_peglin_abbie_sneaky_wink"
-        case .hurt: return "world2_peglin_abbie_hurt"
-        case .defeated: return PeglinAbbieArt.hurtAngryCatalogName
-        }
+        PeglinAbbieArt.portraitCatalogName
     }
 }
 

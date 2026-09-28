@@ -300,6 +300,7 @@ enum World2DebugTicketCodec {
         case .artGarden: return "garden"
         case .evan: return "citadel"
         case .peglinEdition: return "peglin"
+        case .marbleVoyage: return "voyage"
         }
     }
 

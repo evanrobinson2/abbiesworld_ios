@@ -18,17 +18,19 @@ import {
   createJob as createAssetJob,
   getJob as getAssetJob,
   completeJob as completeAssetJob,
+  generateJob as generateAssetJob,
   markBound as markAssetBound,
   listJobs as listAssetJobs,
   createProject as createAssetProject,
   getProject as getAssetProject,
   listProjects as listAssetProjects,
   describeLibrary as describeAssetLibrary,
+  IMAGE_MODEL,
 } from "./lib/asset-jobs-store.js";
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
-const SERVER = { name: "abbies-world", version: "0.3.0" };
+const SERVER = { name: "abbies-world", version: "0.4.0" };
 const MCP_PUBLIC_URL = "https://studio-mock-iota.vercel.app/mcp";
 const OAUTH_RESOURCE_METADATA =
   "https://studio-mock-iota.vercel.app/.well-known/oauth-protected-resource";
@@ -42,7 +44,7 @@ The iPad does not use the Studio map's pixel layout. It plays one scene at a tim
 2. POIs sit on that plate at normalized coordinates: transform.position.x and .y from 0 to 1 (keep 0.12–0.88).
 3. Connect scenes with a place whose behavior is travel:<otherSceneId>. That is the exit. There is no separate edge table on the iPad.
 4. activeSceneID is where play starts.
-5. New art: asset_job_create → Midjourney → asset_job_complete (ingests bytes onto our Game Asset server) → asset_bind(semanticId).
+5. New art: asset_job_create (defaults to OpenAI gpt-image-2 generate) → registered semantic id → asset_bind. Optional: generate:false + asset_job_complete with a temporary https URL.
 
 ### POI capabilities (honest limit)
 A POI is mostly how it looks plus which existing screen it opens.
@@ -59,10 +61,10 @@ You CANNOT invent dialogue, puzzles, quest scripts, or new screens. Story flavor
 Decorations are short labels (≤12 characters) plus a sprite. They are not interactive behaviors yet.
 
 ### Steel-rail habit
-read_primer → world_describe → author_beat (dryRun) → confirm. Prefer semantic asset IDs over Midjourney URLs. Prefer asset_job_create for new plates. Low-level scene_upsert / place_upsert still work. Never wipe players.
+read_primer → world_describe → author_beat (dryRun) → confirm. Prefer semantic asset IDs. Prefer asset_job_create for new plates. Low-level scene_upsert / place_upsert still work. Never wipe players.
 
-### Asset generation habit (ChatGPT)
-asset_project_create (library intent) → asset_job_create → copy midjourneyPrompt into Midjourney → paste https URL with asset_job_complete (server downloads + hosts on Game Asset registry) → asset_bind with semanticId only. Never set Midjourney/CDN URLs on scenes or POIs — the iPad must load from our registry.
+### Asset generation habit (ChatGPT MCP)
+asset_project_create (optional) → asset_job_create with semanticId + brief (server writes imagePrompt, calls OpenAI gpt-image-2, ingests to Game Asset registry, returns status registered) → asset_bind / place_upsert with semanticId only. Never put CDN/Midjourney URLs on scenes or POIs. Midjourney paste remains available via generate:false then asset_job_complete.
 
 ### Dungeon master habit
 read_primer first. world_describe before edits. scene_upsert, then scene_set_background_url when Evan pastes a URL, place_upsert for POIs, scene_connect for exits. vars_apply for counters (server does the math). Do not wipe players.
@@ -109,30 +111,39 @@ function rpcError(id, code, message, data) {
 
 function tokenFrom(request, args) {
   const header = request.headers.get("authorization") || "";
-  if (header.startsWith("Bearer ") && header.length > 16) return header.slice(7).trim();
+  if (header.startsWith("Bearer ") && header.length > 16) {
+    const token = header.slice(7).trim();
+    // Cursor sometimes sends the literal uninterpolated ${env:…} string.
+    if (token.includes("${") || token.includes("ABBIES_WORLD_TOKEN")) return "";
+    return token;
+  }
   const arg = String(args?.accessToken || "").trim();
   if (arg.length > 16) return arg;
   const env = String(process.env.ABBIES_WORLD_TOKEN || "").trim();
   return env;
 }
 
+function prefersHeaderAuth(request) {
+  return String(request.headers.get("x-abbies-auth") || "").toLowerCase() === "bearer";
+}
+
 function wwwAuthenticate() {
   return `Bearer FAKESECRET_g3h4i5j6k7l8m9n0o1p2="${OAUTH_RESOURCE_METADATA}", scope="${OAUTH_SCOPES}"`;
 }
 
-function unauthorizedResponse(description = "No authorization provided") {
+function unauthorizedResponse(description = "No authorization provided", { challengeOAuth = true } = {}) {
+  const headers = cors({ "Content-Type": "application/json" });
+  // Cursor with X-Abbies-Auth: bearer should not be pushed into OAuth (it hangs).
+  if (challengeOAuth) headers["WWW-Authenticate"] = wwwAuthenticate();
   return new Response(
     JSON.stringify({
       error: "invalid_token",
       error_description: description,
+      hint: challengeOAuth
+        ? "Complete OAuth, or pass Studio → Copy MCP token as Authorization Bearer."
+        : "Set Authorization Bearer (run scripts/sync_cursor_mcp_token.sh). Do not use OAuth for Cursor.",
     }),
-    {
-      status: 401,
-      headers: cors({
-        "Content-Type": "application/json",
-        "WWW-Authenticate": wwwAuthenticate(),
-      }),
-    }
+    { status: 401, headers }
   );
 }
 
@@ -161,6 +172,40 @@ function bearerPresent(request, body) {
 async function readWorld(auth) {
   const response = await fetch(`${ORIGIN}/api/v1/worlds/current`, {
     headers: { Authorization: `Bearer ${auth}` },
+  });
+  const text = await response.text();
+  let body = null;
+  try { body = text ? JSON.parse(text) : null; } catch { body = { error: "bad_upstream" }; }
+  return { status: response.status, body };
+}
+
+async function listWorldsUpstream(auth) {
+  const response = await fetch(`${ORIGIN}/api/v1/worlds`, {
+    headers: { Authorization: `Bearer ${auth}` },
+  });
+  const text = await response.text();
+  let body = null;
+  try { body = text ? JSON.parse(text) : null; } catch { body = { error: "bad_upstream" }; }
+  return { status: response.status, body };
+}
+
+async function createWorldUpstream(auth, name) {
+  const response = await fetch(`${ORIGIN}/api/v1/worlds`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${auth}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ name }),
+  });
+  const text = await response.text();
+  let body = null;
+  try { body = text ? JSON.parse(text) : null; } catch { body = { error: "bad_upstream" }; }
+  return { status: response.status, body };
+}
+
+async function setCurrentWorldUpstream(auth, worldId) {
+  const response = await fetch(`${ORIGIN}/api/v1/worlds/current`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${auth}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ worldId }),
   });
   const text = await response.text();
   let body = null;
@@ -502,28 +547,35 @@ const TOOLS = [
   },
   {
     name: "world_list",
-    description: "List worlds. Today there is only the focused /current world.",
+    description: "List household worlds (id, name, revision, isCurrent). Focus is /worlds/current.",
     inputSchema: { type: "object", properties: { accessToken: { type: "string" } } },
   },
   {
     name: "world_create",
-    description: "Multi-world create is not on the server yet. Without confirmReplace this explains that. With confirmReplace:true it replaces /current with an empty named scaffold and KEEPS players. Prefer scene_upsert to add a scene instead.",
+    description: "Create a new empty world document, copy players from the focused world, and set focus to the new id. Prefer this over wiping /current.",
     inputSchema: {
       type: "object",
       properties: {
         accessToken: { type: "string" },
         name: { type: "string" },
-        confirmReplace: { type: "boolean" },
+        confirmReplace: {
+          type: "boolean",
+          description: "Legacy: if true and multi-world create fails, wipe /current into a scaffold (players kept).",
+        },
       },
       required: ["name"],
     },
   },
   {
     name: "world_set_current",
-    description: "Set play/edit focus. Today only /current exists, so this acknowledges focus and does not switch documents.",
+    description: "Set play/edit focus to worldId. /worlds/current then returns that document.",
     inputSchema: {
       type: "object",
-      properties: { accessToken: { type: "string" }, worldId: { type: "string" } },
+      properties: {
+        accessToken: { type: "string" },
+        worldId: { type: "string" },
+      },
+      required: ["worldId"],
     },
   },
   {
@@ -726,7 +778,7 @@ const TOOLS = [
   {
     name: "asset_job_create",
     description:
-      "Create a plate generation job. Pass semanticId (map.* or poi.*.exterior|interior) + brief. Returns midjourneyPrompt (paste into Midjourney) and proofBrief (what to check in the image). Optional projectId groups jobs. Next: asset_job_complete with the https image URL.",
+      "Create a plate generation job. Pass semanticId (map.* or poi.*.exterior|interior) + brief. By default (generate:true) the server writes an imagePrompt and generates with OpenAI gpt-image-2, then registers bytes on the Game Asset API (status registered). Set generate:false to stop at awaiting_image for manual https paste. Returns imagePrompt/proofBrief/bindWith.",
     inputSchema: {
       type: "object",
       properties: {
@@ -739,6 +791,11 @@ const TOOLS = [
         brief: { type: "string", description: "Subject + look in plain language" },
         stylePin: { type: "string" },
         projectId: { type: "string", description: "From asset_project_create" },
+        generate: {
+          type: "boolean",
+          description:
+            "Default true when OPENAI_API_KEY is set. false = prompt only (awaiting_image) for asset_job_complete paste.",
+        },
       },
       required: ["semanticId", "brief"],
     },
@@ -758,7 +815,20 @@ const TOOLS = [
   {
     name: "asset_job_status",
     description:
-      "Read one asset job: status, midjourneyPrompt, proofBrief, stagingUrl, semanticId/registryKey.",
+      "Read one asset job: status, imagePrompt, proofBrief, provider/model, stagingUrl, semanticId/registryKey.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        jobId: { type: "string" },
+      },
+      required: ["jobId"],
+    },
+  },
+  {
+    name: "asset_job_generate",
+    description:
+      `Generate (or re-generate) art for an awaiting_image/failed job with OpenAI ${IMAGE_MODEL}, ingest to Game Asset registry, return status registered + bindWith semanticId.`,
     inputSchema: {
       type: "object",
       properties: {
@@ -771,7 +841,7 @@ const TOOLS = [
   {
     name: "asset_job_complete",
     description:
-      "Paste a temporary Midjourney (or other) https image URL. The MCP downloads the bytes and registers them on the Game Asset API under the job's semanticId/registryKey. Returns bindWith=semanticId. Never put the staging URL on a scene/POI.",
+      "Paste a temporary https image URL (optional Midjourney path). The MCP downloads the bytes and registers them on the Game Asset API under the job's semanticId/registryKey. Prefer asset_job_create with generate:true (gpt-image-2) instead. Never put the staging URL on a scene/POI.",
     inputSchema: {
       type: "object",
       properties: {
@@ -831,6 +901,23 @@ async function inspire(args) {
   return { prompt: payload?.choices?.[0]?.message?.content || "" };
 }
 
+function authorOpRank(op) {
+  switch (op) {
+    case "asset.job_create":
+      return 0;
+    case "scene.upsert":
+    case "scene.set_background_semantic":
+    case "scene.set_background_url":
+    case "place.upsert":
+    case "scene.connect":
+      return 1;
+    case "asset.bind":
+      return 2;
+    default:
+      return 3;
+  }
+}
+
 function applyAssetBind(doc, args) {
   if (args.stagingUrl && !args.semanticId) {
     return {
@@ -859,6 +946,15 @@ function applyAssetBind(doc, args) {
     return { bound: "background", sceneId, asset, warnings: [] };
   }
   const placeId = String(args.placeId || "");
+  if (!placeId) {
+    // Planner often emits bare asset.bind after place.upsert already set exteriorAsset.
+    return {
+      bound: "skipped",
+      reason: "place_id_missing",
+      asset,
+      warnings: ["asset.bind without placeId — rely on place.upsert exteriorAsset or pass placeId+slot"],
+    };
+  }
   const place = (doc.places || []).find((item) => item.id === placeId);
   if (!place) return { error: "place_missing", placeId };
   if (slot === "interior") place.interiorAsset = asset.slice(0, 200);
@@ -908,17 +1004,23 @@ async function runAuthorBeat(auth, args) {
   }
 
   // Side-channel jobs before world mutate (asset store is not the world doc).
+  // Default generate:true so ChatGPT MCP lands registered art without Midjourney.
   for (const step of validated.ops) {
     if (step.op === "asset.job_create") {
-      step._jobResult = await createAssetJob(step.args, {
+      const args = { ...step.args };
+      if (args.generate === undefined) args.generate = true;
+      step._jobResult = await createAssetJob(args, {
         openaiKey: process.env.OPENAI_API_KEY || "",
       });
     }
   }
 
+  // place/scene before asset.bind — bind needs placeId or is a no-op when place.upsert already set exteriorAsset.
+  const orderedOps = [...validated.ops].sort((a, b) => authorOpRank(a.op) - authorOpRank(b.op));
+
   const results = [];
   const saved = await mutate(auth, (doc) => {
-    for (const step of validated.ops) {
+    for (const step of orderedOps) {
       const applied = applyAuthorOp(doc, step);
       results.push(applied);
       if (applied?.error) {
@@ -1043,6 +1145,9 @@ async function callTool(name, args, request) {
     const job = getAssetJob(args.jobId);
     return job || { error: "job_missing", jobId: args.jobId };
   }
+  if (name === "asset_job_generate") {
+    return generateAssetJob(args.jobId, { openaiKey: process.env.OPENAI_API_KEY || "" });
+  }
   if (name === "asset_job_complete") {
     return completeAssetJob(args.jobId, { stagingUrl: args.stagingUrl });
   }
@@ -1056,44 +1161,61 @@ async function callTool(name, args, request) {
     if (current.status !== 200) return { error: "world_unavailable", status: current.status, body: current.body };
     return current.body;
   }
-  if (name === "world_describe" || name === "world_lint" || name === "world_list" || name === "session_get" || name === "vars_get") {
+  if (name === "world_list") {
+    const listing = await listWorldsUpstream(auth);
+    if (listing.status !== 200) {
+      return { error: "world_list_unavailable", status: listing.status, body: listing.body };
+    }
+    return listing.body;
+  }
+
+  if (name === "world_set_current") {
+    const worldId = String(args.worldId || "").trim();
+    if (!worldId) return { error: "world_id_required" };
+    const focused = await setCurrentWorldUpstream(auth, worldId);
+    if (focused.status !== 200) {
+      return { error: "world_set_current_failed", status: focused.status, body: focused.body };
+    }
+    const current = await readWorld(auth);
+    return {
+      ...focused.body,
+      focused: focused.body?.currentWorldId || worldId,
+      describe: current.status === 200 ? describe(current.body) : null,
+    };
+  }
+
+  if (name === "world_create") {
+    const created = await createWorldUpstream(auth, String(args.name || "").trim() || "New world");
+    if (created.status === 201 || created.status === 200) {
+      return {
+        created: {
+          id: created.body?.id,
+          name: created.body?.name,
+          revision: created.body?.revision,
+        },
+        describe: describe(created.body),
+      };
+    }
+    // Legacy fallback only when explicitly requested.
+    if (!args.confirmReplace) {
+      return {
+        error: "world_create_failed",
+        status: created.status,
+        body: created.body,
+        hint: "Server multi-world create failed. Pass confirmReplace:true only to wipe the focused /current world.",
+      };
+    }
+  }
+
+  if (name === "world_describe" || name === "world_lint" || name === "session_get" || name === "vars_get") {
     const current = await readWorld(auth);
     if (current.status !== 200) return { error: "world_unavailable", status: current.status };
     if (name === "world_describe") return describe(current.body);
     if (name === "world_lint") return { revision: current.body.revision, notes: lint(current.body) };
-    if (name === "world_list") {
-      return {
-        worlds: [{
-          id: "current",
-          name: current.body?.scenes?.[current.body.activeSceneID]?.name || "Current world",
-          revision: current.body.revision,
-          isCurrent: true,
-        }],
-        note: "Multi-world list is not on the server yet. Focus is /worlds/current.",
-      };
-    }
     if (name === "session_get") return ensureCreative(structuredClone(current.body)).live;
     const scope = args.scope || "session";
     const bag = scopeBag(structuredClone(current.body), scope, args.playerId);
     return { scope, vars: bag };
-  }
-
-  if (name === "world_set_current") {
-    return {
-      focused: "current",
-      requested: args.worldId || "current",
-      note: "Only one world document exists. Focus stays on /worlds/current until multi-world ships.",
-    };
-  }
-
-  if (name === "world_create" && !args.confirmReplace) {
-    const current = await readWorld(auth);
-    if (current.status !== 200) return { error: "world_unavailable", status: current.status };
-    return {
-      error: "multi_world_not_shipped",
-      hint: "Add a scene with scene_upsert. Pass confirmReplace:true only to wipe /current into a new scaffold (players kept).",
-      current: describe(current.body),
-    };
   }
 
   const saved = await mutate(auth, (doc) => {
@@ -1297,10 +1419,13 @@ export async function POST(request) {
   try { body = await request.json(); } catch {
     return unauthorizedResponse("Parse error / missing body");
   }
-  // ChatGPT OAuth discovery expects HTTP 401 + WWW-Authenticate when unauthenticated
-  // (same pattern as StoryBoard MCP). Cursor sends Authorization via mcp.json.
+  // ChatGPT OAuth discovery expects HTTP 401 + WWW-Authenticate when unauthenticated.
+  // Cursor uses mcp.json Bearer (+ X-Abbies-Auth: bearer) — do not OAuth-challenge it.
   if (!bearerPresent(request, body)) {
-    return unauthorizedResponse("No authorization provided");
+    return unauthorizedResponse(
+      "No authorization provided",
+      { challengeOAuth: !prefersHeaderAuth(request) }
+    );
   }
   if (Array.isArray(body)) {
     const out = [];

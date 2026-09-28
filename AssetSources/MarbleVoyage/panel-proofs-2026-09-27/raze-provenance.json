@@ -1,0 +1,33 @@
+{
+  "status": "review_only",
+  "approved": false,
+  "model": "Midjourney v7",
+  "promptFile": "raze-prompt.txt",
+  "job": "2a24d14f-2850-4424-a1ea-6762c9934f81",
+  "assets": [
+    {
+      "file": "raze-0.jpg",
+      "index": 0,
+      "sha256": "5ac1045bfcb48574a9fa1e1736daf05e15dc477ed9158e60af197973d755ac08",
+      "url": "https://cdn.midjourney.com/2a24d14f-2850-4424-a1ea-6762c9934f81/0_0.jpeg"
+    },
+    {
+      "file": "raze-1.jpg",
+      "index": 1,
+      "sha256": "f090845e2aaeb68276bb7d319efd94c10a7bf3053830ffab0f84af67cb65a8dd",
+      "url": "https://cdn.midjourney.com/2a24d14f-2850-4424-a1ea-6762c9934f81/0_1.jpeg"
+    },
+    {
+      "file": "raze-2.jpg",
+      "index": 2,
+      "sha256": "fea90440d0a5cfa6f334cf2ac328afab71859045a4a002986a6f0fa88ee8e9aa",
+      "url": "https://cdn.midjourney.com/2a24d14f-2850-4424-a1ea-6762c9934f81/0_2.jpeg"
+    },
+    {
+      "file": "raze-3.jpg",
+      "index": 3,
+      "sha256": "72de37d8a9b8981acee0d6805a7ce0acc9de91d811b6257536788b926355f282",
+      "url": "https://cdn.midjourney.com/2a24d14f-2850-4424-a1ea-6762c9934f81/0_3.jpeg"
+    }
+  ]
+}

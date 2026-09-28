@@ -30,6 +30,8 @@ class AssetBootstrapService: ObservableObject {
     private var remoteFetchInFlight: Set<String> = []
     private var remoteFetchFailed: Set<String> = []
     private var pendingRemoteSemanticIDs: Set<String> = []
+    /// semanticId → asset catalog imageset name from `world2_runtime_manifest`.
+    private lazy var bundledCatalogNames: [String: String] = Self.loadRuntimeCatalogNames()
     
     private init() {
         let cachesDir = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask)[0]
@@ -81,6 +83,37 @@ class AssetBootstrapService: ObservableObject {
     }
 
     func image(for semanticName: String) -> UIImage? {
+        // Living-landscape ambient ships a fresh bundled plate; pin map.home so a
+        // stale registry/proxy revision cannot paint over it mid-session.
+        if semanticName == "map.home" {
+            let catalogName = bundledCatalogNames[semanticName] ?? "world2_1002_map_home"
+            if let image = UIImage(named: catalogName) {
+                let prepared = DevAssetCarvingService.cutoutIfNeeded(image, semanticId: semanticName)
+                registryImages[semanticName] = prepared
+                return prepared
+            }
+        }
+        // Fresh Abbie cottage exterior — prefer bundled cutout over stale registry.
+        if semanticName == "poi.abbieTreehouse.exterior" {
+            let catalogName = bundledCatalogNames[semanticName]
+                ?? "world2_1004_poi_abbieTreehouse_exterior"
+            if let image = UIImage(named: catalogName) {
+                let prepared = DevAssetCarvingService.cutoutIfNeeded(image, semanticId: semanticName)
+                registryImages[semanticName] = prepared
+                return prepared
+            }
+        }
+        // Fresh cottage living room (2464 plate) — pin over stale registry/proxy.
+        if semanticName == "poi.abbieTreehouse.interior"
+            || semanticName == "poi.abbieTreehouse.interior.cozyNook"
+        {
+            let catalogName = bundledCatalogNames["poi.abbieTreehouse.interior"]
+                ?? "world2_1005_poi_abbieTreehouse_interior"
+            if let image = UIImage(named: catalogName) {
+                registryImages[semanticName] = image
+                return image
+            }
+        }
         // Server is source of truth: hosted registry bytes, https on the world
         // document, or the household plate proxy. Missing art is
         // `under_construction` at the call site — never a silent wrong plate.
@@ -92,6 +125,26 @@ class AssetBootstrapService: ObservableObject {
         if let bundled = Self.bundledPeglinPlate(for: semanticName) {
             return bundled
         }
+        // Qualified World 2 plates (map.home, treehouses, factory) ship in the
+        // asset catalog under numbered names from world2_runtime_manifest.
+        if let catalogName = bundledCatalogNames[semanticName],
+           let image = UIImage(named: catalogName) {
+            let prepared = DevAssetCarvingService.cutoutIfNeeded(image, semanticId: semanticName)
+            registryImages[semanticName] = prepared
+            return prepared
+        }
+        // Abbie treehouse rooms use local catalog names not yet in the manifest.
+        if let roomName = Self.bundledTreehouseRoomCatalogName(for: semanticName),
+           let image = UIImage(named: roomName) {
+            registryImages[semanticName] = image
+            return image
+        }
+        // Bundled furniture sprites use catalog imageset names directly
+        // (`acd_*`, `cozy_room_*`, `world2_*` props) — not Game Asset semantic IDs.
+        if Self.isBundledCatalogImagesetName(semanticName),
+           let image = UIImage(named: semanticName) {
+            return image
+        }
         if Self.isRemotePlateURL(semanticName) {
             noteHTTPInterest(semanticName)
             return nil
@@ -100,6 +153,15 @@ class AssetBootstrapService: ObservableObject {
         notePlateProxyInterest(semanticName)
         World2Diagnostics.log("asset_placeholder", ["semantic_id": semanticName])
         return nil
+    }
+
+    /// Asset-catalog names for decorate-tray / furniture props (not `map.*` / `poi.*`).
+    private static func isBundledCatalogImagesetName(_ name: String) -> Bool {
+        name.hasPrefix("acd_")
+            || name.hasPrefix("cozy_room_")
+            || name.hasPrefix("world2_2008_")
+            || name.hasPrefix("world2_2009_")
+            || name.hasPrefix("world2_marble_voyage_world_book")
     }
 
     /// `map.peglin.bramble` → `world2_map_peglin_bramble`
@@ -612,6 +674,48 @@ class AssetBootstrapService: ObservableObject {
             return decoded
         }
         return nil
+    }
+
+    private static func bundledTreehouseRoomCatalogName(for semanticName: String) -> String? {
+        switch semanticName {
+        case "poi.abbieTreehouse.interior",
+             "poi.abbieTreehouse.interior.cozyNook":
+            // Living room = approved cottage interior plate (shared).
+            return "world2_1005_poi_abbieTreehouse_interior"
+        case "poi.abbieTreehouse.interior.bedroom":
+            return "abbie_treehouse_room_bedroom"
+        case "poi.abbieTreehouse.interior.playroom":
+            return "abbie_treehouse_room_playroom"
+        case "poi.abbieTreehouse.interior.rooftopLookout":
+            return "abbie_treehouse_room_rooftop_lookout"
+        case "poi.abbieTreehouse.interior.fitnessCenter":
+            return "abbie_treehouse_room_fitness_center"
+        default:
+            return nil
+        }
+    }
+
+    /// `world2_runtime_manifest` dataset: semanticId → assetCatalogName for offline play.
+    private static func loadRuntimeCatalogNames() -> [String: String] {
+        guard let data = NSDataAsset(name: "world2_runtime_manifest")?.data,
+              let root = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
+              let assets = root["assets"] as? [[String: Any]]
+        else {
+            World2Diagnostics.log("runtime_manifest_missing")
+            return [:]
+        }
+        var map: [String: String] = [:]
+        map.reserveCapacity(assets.count)
+        for entry in assets {
+            guard let semantic = entry["semanticId"] as? String,
+                  let catalog = entry["assetCatalogName"] as? String,
+                  !semantic.isEmpty,
+                  !catalog.isEmpty
+            else { continue }
+            map[semantic] = catalog
+        }
+        World2Diagnostics.log("runtime_manifest_loaded", ["plates": String(map.count)])
+        return map
     }
     
     func clearCache() {

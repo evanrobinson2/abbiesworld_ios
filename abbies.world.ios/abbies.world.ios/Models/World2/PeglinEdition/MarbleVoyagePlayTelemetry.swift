@@ -155,14 +155,15 @@ enum MarbleVoyagePlayTelemetry {
             smells.append(.upgradeStarve)
         }
 
-        if log.player == MarbleVoyageCampaignSim.PlayerType.casual.rawValue,
-           log.meanTemperFactor < 0.95,
-           log.fightsCleared >= 3 {
+        let ignoresTemper =
+            log.player == MarbleVoyageCampaignSim.PlayerType.uninterested.rawValue
+            || log.player == MarbleVoyageCampaignSim.PlayerType.hitPegs.rawValue
+        if ignoresTemper, log.meanTemperFactor < 0.95, log.fightsCleared >= 3 {
             smells.append(.temperIgnored)
         }
 
         // Exploit: cleared without ever healing — economy may be too soft.
-        if log.won, log.healsBought == 0, log.player == MarbleVoyageCampaignSim.PlayerType.aggressive.rawValue {
+        if log.won, log.healsBought == 0, log.player == MarbleVoyageCampaignSim.PlayerType.hitPegs.rawValue {
             exploits.append(.noHealClearExploit)
         }
 
@@ -290,14 +291,19 @@ enum MarbleVoyagePlayTelemetry {
             return aggregate(player: type, logs: logs)
         }
         var notes: [String] = []
-        if let agg = players.first(where: { $0.player == "aggressive" }),
-           (agg.exploitRates[MarbleVoyageFunSmell.noHealClearExploit.rawValue] ?? 0) > 0.4 {
-            notes.append("Aggressive no-heal clears are common — economy may be too soft.")
+        if let pegs = players.first(where: { $0.player == "hitPegs" }),
+           (pegs.exploitRates[MarbleVoyageFunSmell.noHealClearExploit.rawValue] ?? 0) > 0.4 {
+            notes.append("Hit-pegs no-heal clears are common — economy may be too soft.")
         }
-        if let mot = players.first(where: { $0.player == "motivated" }),
-           let cas = players.first(where: { $0.player == "casual" }),
-           mot.clearRate + 0.08 < cas.clearRate {
-            notes.append("Motivated clears lag casual — heal/upgrade protocol may be mis-tuned.")
+        if let meta = players.first(where: { $0.player == "metaAware" }),
+           let bored = players.first(where: { $0.player == "uninterested" }),
+           meta.clearRate + 0.08 < bored.clearRate {
+            notes.append("Meta-aware clears lag uninterested — heal/Temper protocol may be mis-tuned.")
+        }
+        if let pegs = players.first(where: { $0.player == "hitPegs" }),
+           let bored = players.first(where: { $0.player == "uninterested" }),
+           pegs.clearRate < bored.clearRate + 0.15 {
+            notes.append("Hit-pegs barely beats uninterested — aim/peg skill ladder is flat.")
         }
         if players.contains(where: { ($0.smellRates[MarbleVoyageFunSmell.lateCollapse.rawValue] ?? 0) > 0.25 }) {
             notes.append("Late-collapse smell elevated — summit after long climb feels punishing.")

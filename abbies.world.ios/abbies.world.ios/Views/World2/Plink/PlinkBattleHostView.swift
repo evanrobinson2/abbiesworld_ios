@@ -1226,10 +1226,7 @@ struct PlinkBattleHostView: View {
                                 .allowsHitTesting(fightIntroProgress > 0.5)
 
                             tiltPowerOverlay
-                            gravityWaveOverlay
-                                .opacity(Double(fightIntroProgress))
-                                .zIndex(14)
-                                .allowsHitTesting(false)
+                            // Gravity rift: physics only — no vignette / banner overlay.
 
                             // Feed / leave / music — single-icon rail on the RIGHT.
                             fightSideDrawer
@@ -1561,55 +1558,6 @@ struct PlinkBattleHostView: View {
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .accessibilityIdentifier("world2.plink.battle.tiltOverlay")
                 .accessibilityLabel(label)
-        }
-    }
-
-    /// Linger-shot gravity rift — vignette + banner while the pull eases in.
-    @ViewBuilder
-    private var gravityWaveOverlay: some View {
-        if tiltPhase == nil, gravityWaveActive {
-            ZStack {
-                // Edge vignette — cool indigo pull, keeps the board readable.
-                RadialGradient(
-                    colors: [
-                        Color.clear,
-                        Color(red: 0.15, green: 0.05, blue: 0.35).opacity(0.18),
-                        Color(red: 0.08, green: 0.02, blue: 0.28).opacity(0.55),
-                    ],
-                    center: .center,
-                    startRadius: 80,
-                    endRadius: 520
-                )
-                .ignoresSafeArea()
-                .allowsHitTesting(false)
-
-                VStack(spacing: 6) {
-                    Text("Gravity rift")
-                        .font(.system(size: MarbleVoyageDesignRules.battleFeedMinBodyFont, weight: .black, design: .rounded))
-                        .foregroundStyle(Color(red: 0.75, green: 0.9, blue: 1.0))
-                        .tracking(0.6)
-                    Text("Pulling…")
-                        .font(.system(size: 26, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
-                        .shadow(color: .black.opacity(0.7), radius: 6, y: 2)
-                }
-                .padding(.horizontal, 22)
-                .padding(.vertical, 12)
-                .background(
-                    RoundedRectangle(cornerRadius: 20, style: .continuous)
-                        .fill(Color.black.opacity(0.55))
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                                .stroke(Color(red: 0.55, green: 0.85, blue: 1.0).opacity(0.8), lineWidth: 2.5)
-                        )
-                )
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .padding(.top, 56)
-            }
-            .allowsHitTesting(false)
-            .accessibilityIdentifier("world2.plink.battle.gravityWaveOverlay")
-            .accessibilityLabel("Gravity rift pulling")
-            .transition(.opacity)
         }
     }
 
@@ -1992,6 +1940,9 @@ struct PlinkBattleHostView: View {
                         .lineLimit(2)
                         .minimumScaleFactor(0.85)
 
+                    fightFoeApproachRail
+                        .frame(maxWidth: .infinity, alignment: .leading)
+
                     fightTemperTipBlock(for: front.kind)
 
                     HStack(alignment: .center, spacing: 8) {
@@ -2049,6 +2000,95 @@ struct PlinkBattleHostView: View {
         )
         .accessibilityIdentifier("world2.plink.battle.foeCounter")
         .accessibilityLabel("\(living) of \(total) foes remaining")
+    }
+
+    /// Mini portraits: approaching queue (left) → defeated with red X pushed aside (right).
+    @ViewBuilder
+    private var fightFoeApproachRail: some View {
+        let frontID = frontFoe?.id
+        let approaching = foeRoster.filter { !$0.isDefeated && $0.id != frontID }
+        let defeated = foeRoster.filter(\.isDefeated)
+        if approaching.isEmpty, defeated.isEmpty { EmptyView() }
+        else {
+            VStack(alignment: .leading, spacing: 6) {
+                if !approaching.isEmpty {
+                    Text("NEXT")
+                        .font(.system(size: 10, weight: .black, design: .rounded))
+                        .tracking(1.0)
+                        .foregroundStyle(Color(red: 1, green: 0.75, blue: 0.45).opacity(0.9))
+                    HStack(spacing: 6) {
+                        ForEach(Array(approaching.enumerated()), id: \.element.id) { index, foe in
+                            fightMiniFoePortrait(foe: foe, size: 44, markedOut: false)
+                                .opacity(1.0 - Double(index) * 0.08)
+                                .accessibilityIdentifier("world2.plink.battle.foe.approach.\(foe.id)")
+                        }
+                        Spacer(minLength: 0)
+                    }
+                }
+                if !defeated.isEmpty {
+                    HStack(alignment: .center, spacing: 8) {
+                        Spacer(minLength: 0)
+                        Text("OUT")
+                            .font(.system(size: 10, weight: .black, design: .rounded))
+                            .tracking(1.0)
+                            .foregroundStyle(Color(red: 1, green: 0.35, blue: 0.35).opacity(0.9))
+                        HStack(spacing: -8) {
+                            ForEach(Array(defeated.enumerated()), id: \.element.id) { index, foe in
+                                fightMiniFoePortrait(foe: foe, size: 36, markedOut: true)
+                                    .zIndex(Double(index))
+                                    .accessibilityIdentifier("world2.plink.battle.foe.out.\(foe.id)")
+                            }
+                        }
+                    }
+                    .animation(.spring(response: 0.42, dampingFraction: 0.82), value: defeated.map(\.id))
+                }
+            }
+            .padding(8)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(Color.white.opacity(0.05))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(Color.white.opacity(0.12), lineWidth: 1)
+            )
+            .accessibilityIdentifier("world2.plink.battle.foeApproachRail")
+        }
+    }
+
+    private func fightMiniFoePortrait(foe: PlinkBattleFoe, size: CGFloat, markedOut: Bool) -> some View {
+        ZStack {
+            PlinkAttackerBattlePortrait(
+                kind: foe.kind,
+                pose: .idle,
+                size: size
+            )
+            .opacity(markedOut ? 0.45 : 0.95)
+            .grayscale(markedOut ? 0.9 : 0)
+            .saturation(markedOut ? 0.2 : 1)
+
+            if markedOut {
+                Image(systemName: "xmark")
+                    .font(.system(size: size * 0.42, weight: .black))
+                    .foregroundStyle(Color(red: 1, green: 0.2, blue: 0.22))
+                    .shadow(color: .black.opacity(0.85), radius: 2, y: 1)
+                    .accessibilityHidden(true)
+            }
+        }
+        .overlay(
+            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                .stroke(
+                    markedOut
+                        ? Color(red: 1, green: 0.25, blue: 0.25).opacity(0.95)
+                        : Color.white.opacity(0.35),
+                    lineWidth: markedOut ? 2.5 : 1.2
+                )
+        )
+        .accessibilityLabel(
+            markedOut
+                ? "\(foe.kind.displayName) defeated"
+                : "\(foe.kind.displayName) approaching"
+        )
     }
 
     private func fightStatChip(label: String, value: String) -> some View {
@@ -3089,12 +3129,9 @@ struct PlinkBattleHostView: View {
         next.onHud = { snap in
             let previousPhase = lastHudPhase
             let apply: () -> Void = {
-                // Keep feed quiet — no "PLAYER TURN" / "RESOLVE SHOT" board chatter.
+                // Keep feed quiet — no "PLAYER TURN" / "RESOLVE SHOT" / gravity banner.
                 if snap.phase == .aim || snap.phase == .won || snap.phase == .lost {
                     statusLine = snap.status
-                } else if snap.gravityWaveActive {
-                    statusLine = snap.status
-                    phaseLabel = "GRAVITY"
                 }
                 ballsLeft = snap.ballsLeft
                 shotScore = snap.shotScore

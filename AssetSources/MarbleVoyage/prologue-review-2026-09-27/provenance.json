@@ -1,0 +1,32 @@
+{
+  "date": "2026-09-27",
+  "approved": false,
+  "scope": "Standalone browser motion study; no game catalog integration or canon changes",
+  "references": [
+    "https://cdn.midjourney.com/7130ba8a-bd25-4cee-be1b-1362c62d15cf/0_0.jpeg",
+    "https://cdn.midjourney.com/db87b2bb-119a-43f6-9f8c-ebfefec5c3b7/0_3.jpeg"
+  ],
+  "assets": [
+    {
+      "file": "game.jpg",
+      "source": "Midjourney",
+      "job": "85999cea-b722-40b5-a148-ee44f6a9c6a6",
+      "index": 2,
+      "url": "https://cdn.midjourney.com/85999cea-b722-40b5-a148-ee44f6a9c6a6/0_2.jpeg",
+      "sha256": "6c9616aaaf579e7f87f61cd4bb031191dd286a0483778fe1fcffdc74a4e1fe0d",
+      "status": "review_only",
+      "notes": "Review candidate: closest of four to the fox/hare identities; still missing clover ornaments and final character approval."
+    },
+    {
+      "file": "detail.jpg",
+      "source": "Midjourney",
+      "job": "7a4273bb-a8a9-4c1e-abea-350bd9e9a247",
+      "index": 3,
+      "url": "https://cdn.midjourney.com/7a4273bb-a8a9-4c1e-abea-350bd9e9a247/0_3.jpeg",
+      "sha256": "6e7ad8fef0f7433f40f3fed1715c09b2b83f9c860f21ac2097aba1b90a9abc30",
+      "status": "review_only",
+      "notes": "Review candidate: macro fox paw/marble insert; color continuity still needs final approval."
+    }
+  ],
+  "raze": "Existing bundled world2_plink_gang_raze.png retained unchanged"
+}

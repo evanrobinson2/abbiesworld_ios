@@ -50,32 +50,30 @@ enum World2SceneCatalog {
     static let homeWorld = World2SceneDefinition(
         id: sceneID(for: .home),
         name: "Home World",
-        summary: "Three welcoming places to explore",
+        summary: "Abbie's cottage on the living hillside — indoors holds the world book",
         backgroundAsset: "map.home",
         hardpoints: [
             World2SceneHardpoint(
                 id: "hardpoint.home.abbiePad",
-                name: "Abbie's dirt pad",
-                position: World2NormalizedPoint(x: 0.326, y: 0.311),
+                name: "Abbie's middle terrace",
+                position: World2NormalizedPoint(x: 0.65, y: 0.64),
                 acceptedSizeClasses: [.medium, .large],
                 isLocked: true,
-                notes: "Painted clearing on the left of the map"
+                notes: "Evan-placed grassy ledge — keep server coords if they diverge"
             ),
             World2SceneHardpoint(
-                id: "hardpoint.home.aniPad",
-                name: "Ani's dirt pad",
-                position: World2NormalizedPoint(x: 0.722, y: 0.443),
+                id: "hardpoint.home.upperTerrace",
+                name: "Upper terrace",
+                position: World2NormalizedPoint(x: 0.48, y: 0.28),
                 acceptedSizeClasses: [.medium, .large],
-                isLocked: true,
-                notes: "Painted clearing on the right of the map"
+                notes: "Open terrace near the great tree roots"
             ),
             World2SceneHardpoint(
-                id: "hardpoint.home.factoryPad",
-                name: "Workshop pad",
-                position: World2NormalizedPoint(x: 0.440, y: 0.685),
+                id: "hardpoint.home.lowerTerrace",
+                name: "Lower terrace",
+                position: World2NormalizedPoint(x: 0.72, y: 0.72),
                 acceptedSizeClasses: [.medium, .large],
-                isLocked: true,
-                notes: "Painted clearing at the bottom of the map"
+                notes: "Open lower-right plateau"
             ),
             World2SceneHardpoint(
                 id: "hardpoint.home.creekPad",
@@ -98,29 +96,9 @@ enum World2SceneCatalog {
                 World2POIRegistry.abbieTreehouseID,
                 scene: sceneID(for: .home),
                 hardpoint: "hardpoint.home.abbiePad",
-                x: 0.326,
-                y: 0.311,
-                scale: 1.00,
-                zIndex: 1
-            ),
-            authored(
-                "instance.home.aniTreehouse",
-                World2POIRegistry.aniTreehouseID,
-                scene: sceneID(for: .home),
-                hardpoint: "hardpoint.home.aniPad",
-                x: 0.722,
-                y: 0.443,
-                scale: 1.00,
-                zIndex: 1
-            ),
-            authored(
-                "instance.home.cardFactory",
-                World2POIRegistry.cardFactoryID,
-                scene: sceneID(for: .home),
-                hardpoint: "hardpoint.home.factoryPad",
-                x: 0.440,
-                y: 0.685,
-                scale: 1.05,
+                x: 0.65,
+                y: 0.64,
+                scale: 1.12,
                 zIndex: 2
             ),
         ],

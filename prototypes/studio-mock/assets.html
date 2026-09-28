@@ -211,10 +211,12 @@
   <header>
     <h1>Asset jobs</h1>
     <p>Create → Midjourney → ingest to Game Asset registry (our server). CDN URLs are intake only.</p>
-    <div class="links"><a href="/sfx.html">SFX browser</a> · 
-      <a href="/">← Studio map</a>
+    <div class="links">
+      <a href="/library.html">Library</a>
       ·
-      <a href="https://studio-mock-iota.vercel.app/assets.html">Deploy</a>
+      <a href="/sfx.html">SFX browser</a>
+      ·
+      <a href="/">← Studio map</a>
     </div>
   </header>
 
@@ -583,6 +585,15 @@
     } else {
       els.apiBase.placeholder = "(same origin)";
     }
+
+    // Deep links from Library: ?semanticId=&projectId=&brief=
+    (function applyQuery() {
+      const q = new URLSearchParams(location.search);
+      const sem = q.get("semanticId");
+      const brief = q.get("brief");
+      if (sem) els.semanticId.value = sem;
+      if (brief) els.brief.value = brief;
+    })();
 
     setupAuth0().then(() => {
       if (token()) refreshJobs();

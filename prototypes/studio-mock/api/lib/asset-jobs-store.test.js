@@ -39,14 +39,26 @@ const job = await createJob(
     projectId: project.id,
     semanticId: "poi.peglin.pegMonastery.exterior",
     brief: "floating white monastery with blue roofs and waterfalls",
+    generate: false,
   },
   { openaiKey: "" }
 );
 assert(job.id?.startsWith("job_"), "job id");
 assert(job.status === "awaiting_image", "awaiting image");
-assert(job.midjourneyPrompt?.includes("monastery"), "prompt has subject");
+assert(job.imagePrompt?.includes("monastery") || job.midjourneyPrompt?.includes("monastery"), "prompt has subject");
 assert(job.proofBrief?.includes("poi.peglin.pegMonastery.exterior"), "proof brief");
 assert(job.registryKey === "pois/peglin/peg-monastery/exterior", "registry key");
+
+const missingKey = await createJob(
+  {
+    semanticId: "poi.tedTalk.openaiProbe.exterior",
+    brief: "tiny glowing lantern token",
+    generate: true,
+  },
+  { openaiKey: "" }
+);
+assert(missingKey.status === "awaiting_image", "generate without key stays awaiting");
+assert(missingKey.error === "openai_missing_for_generate", "flags missing openai");
 
 const listed = listJobs({ projectId: project.id });
 assert(listed.length === 1, "list by project");

@@ -22,6 +22,7 @@ struct World2DaddyWelcomeView: View {
     @State private var selectedFurnitureID: String?
     @State private var selectedCatalogItemID: String?
     @State private var decorateFilter: DecorateFilterID = .mine
+    @State private var decorateDrawerExpanded = true
     @State private var showingSceneInvent = false
 
     private var decorateSurfaceKey: String {
@@ -57,7 +58,15 @@ struct World2DaddyWelcomeView: View {
                     isArranging: isArrangingFurniture,
                     selectedFurnitureID: $selectedFurnitureID,
                     selectedCatalogItemID: $selectedCatalogItemID,
-                    coordinateSpaceName: "world2.daddyHome"
+                    coordinateSpaceName: "world2.daddyHome",
+                    returnZoneMinX: isArrangingFurniture
+                        ? max(
+                            0,
+                            plate.width - (decorateDrawerExpanded
+                                ? World2DecorateTray.expandedWidth
+                                : World2DecorateTray.minimizedWidth)
+                        )
+                        : nil
                 )
                 .zIndex(8)
 
@@ -148,13 +157,14 @@ struct World2DaddyWelcomeView: View {
                 beginDecorating()
             }
         }
-        .overlay(alignment: .bottom) {
+        .overlay(alignment: .trailing) {
             if isArrangingFurniture {
                 World2DecorateTray(
                     playerName: "Daddy's Citadel",
                     selectedCatalogID: selectedCatalogItemID,
                     selectedInventoryID: selectedFurnitureID,
                     filter: decorateFilter,
+                    isExpanded: $decorateDrawerExpanded,
                     onFilterChange: { decorateFilter = $0 },
                     onSelectCatalog: { item in
                         selectedCatalogItemID = item.id
@@ -164,14 +174,22 @@ struct World2DaddyWelcomeView: View {
                         selectedFurnitureID = id
                         selectedCatalogItemID = nil
                     },
+                    onReturnInventoryID: { id in
+                        PlayerStateService.shared.returnFurnitureToInventory(instanceId: id)
+                        if selectedFurnitureID == id { selectedFurnitureID = nil }
+                    },
                     onDone: {
                         isArrangingFurniture = false
                         selectedFurnitureID = nil
                         selectedCatalogItemID = nil
+                        viewModel.setDecorateModeActive(false)
                     }
                 )
                 .zIndex(80)
             }
+        }
+        .onChange(of: isArrangingFurniture) { _, active in
+            viewModel.setDecorateModeActive(active)
         }
     }
 

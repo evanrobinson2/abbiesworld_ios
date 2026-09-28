@@ -127,6 +127,7 @@ enum World2DevTool: String, CaseIterable, Identifiable, Sendable {
 enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
     case pois
     case tunnels
+    case waterfall
 
     var id: String { rawValue }
 
@@ -134,6 +135,7 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .pois: return "Places"
         case .tunnels: return "Tunnels"
+        case .waterfall: return "Waterfall"
         }
     }
 
@@ -141,6 +143,7 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .pois: return "building.2.fill"
         case .tunnels: return "arrow.up.arrow.down.circle"
+        case .waterfall: return "drop.fill"
         }
     }
 
@@ -150,6 +153,8 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
             return "Drag · pinch · twist places on the map"
         case .tunnels:
             return "N/S/E/W expansion doors"
+        case .waterfall:
+            return "Tap to add points · drag handles · FX follows the stroke"
         }
     }
 }

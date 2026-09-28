@@ -249,12 +249,16 @@ enum DevAssetCarvingService {
     }
 
     /// Map markers and tray tiles. Interiors and scene plates stay full paintings.
+    /// Art-director intake often ships opaque plates — cut out prop sprites at bind time.
     nonisolated static func shouldCutoutSprite(semanticId: String) -> Bool {
         let id = semanticId.lowercased()
         if id.contains("portal") { return true }
         if id.contains("badge") { return true }
         if id.hasPrefix("poi."), !id.contains(".interior") { return true }
         if id.hasPrefix("decoration.") { return true }
+        if id.hasPrefix("furniture.") { return true }
+        // Gateway / UI props that sit on rooms (e.g. Voyage book) need transparent edges.
+        if id.hasPrefix("ui."), id.contains("book") || id.contains("prop") { return true }
         return false
     }
 

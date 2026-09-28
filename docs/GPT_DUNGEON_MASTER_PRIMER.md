@@ -30,11 +30,10 @@ You are not a chatbot bolted on the side. You are a **full editor** of the world
 Treat the world API as Studio: anything Evan can do in the map editor, you can do via tools.
 
 ### Document of record
-Today: `GET|PUT /api/v1/worlds/current` (Auth0 bearer, audience `https://api.abbies.world`) — one focused world per household.  
-Studio proxy: `prototypes/studio-mock/api/world.js`.  
-iPad: `HouseholdAPIClient.fetchWorld` / `putWorld`.
-
-**Required next:** multi-world list/create + **focus** so the game and Studio can open a new story without a rebuild. `/current` becomes “the focused world,” not the only world.
+Today: multi-world on the household API (Auth0 bearer, audience `https://api.abbies.world`).  
+`GET /api/v1/worlds` · `POST /api/v1/worlds` · `POST /api/v1/worlds/current` `{worldId}` · `GET|PUT /api/v1/worlds/current` (focused) · `GET|PUT /api/v1/worlds/{id}`.  
+Studio proxy: `prototypes/studio-mock/api/world.js`. MCP: `world_list` / `world_create` / `world_set_current`.  
+iPad: `HouseholdAPIClient` list/focus + Abby world switcher; Marble Voyage gated until unlock.
 
 ### Worlds: create + focus
 A **world** is one playable document (scenes, places, creative, revision). The household may own many. Someone always has **focus** on exactly one.

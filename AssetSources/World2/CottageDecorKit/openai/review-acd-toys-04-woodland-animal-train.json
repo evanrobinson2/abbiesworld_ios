@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-toys-04-woodland-animal-train",
+  "latencyMs": 5007,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.98,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "table",
+    "refinedDescription": "Hand-painted wooden woodland toy train with an orange locomotive, a barrel-shaped carriage illustrated with forest animals, and a small boar-faced end car.",
+    "suggestedScale": 0.85
+  },
+  "pngSha256": "4d886b7063b713d31f42868d37d527294698672e5e9077d7704da80375efc470",
+  "responseId": "chatcmpl-ESoLoSnpaFreRdioo3AWkNcnFCxr7",
+  "timestamp": "2026-09-27T18:57:25.040943+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-rugscushions-05-yellow-flower-floor-cushion",
+  "latencyMs": 2950,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.99,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Large golden-yellow flower-shaped floor cushion with eight broad, ribbed petals and a raised, textured circular center shaded with warm orange tones.",
+    "suggestedScale": 0.85
+  },
+  "responseId": "chatcmpl-ESoBJd0Fo5j7xmRDPemevYlXcSNqZ",
+  "timestamp": "2026-09-27T18:46:31.891031+00:00",
+  "pngSha256": "a66300b177016ab838eef945d7a9a5c9cf19a04f7ba25b6d26c820991087a336"
+}

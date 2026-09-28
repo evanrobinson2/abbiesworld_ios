@@ -8,12 +8,12 @@ enum PeglinEdition {
     /// Crash Land scene id (compiled catalog + seed for household document).
     static let crashLandSceneID = "scene.peglin.crashLand"
 
-    /// When true, login lands here instead of Home / server activeScene.
+    /// When true, login lands on Peglin Crash Land instead of Home / server activeScene.
+    /// Product default is Home (Abbie's World + treehouses); Voyage unlocks via the Cozy Nook book.
     static var isDefaultDestination: Bool {
         if ProcessInfo.processInfo.arguments.contains("-peglinEditionOff") { return false }
         if ProcessInfo.processInfo.arguments.contains("-peglinEditionOn") { return true }
-        // Product default for this release.
-        return true
+        return false
     }
 
     static let displayName = "Peglin Edition"

@@ -6,6 +6,7 @@ import {
   validateAuthorPlan,
   behaviorOk,
   semanticToRegistryKey,
+  registryKeyToSemantic,
   AUTHOR_OPS,
 } from "./steel-rail.js";
 import { planAuthorBeat } from "./author-beat.js";
@@ -20,6 +21,15 @@ assert(
   semanticToRegistryKey("poi.peglin.pegMonastery.exterior") ===
     "pois/peglin/peg-monastery/exterior",
   "registry key mapping"
+);
+assert(
+  registryKeyToSemantic("pois/peglin/peg-monastery/exterior") ===
+    "poi.peglin.pegMonastery.exterior",
+  "registry key → semantic"
+);
+assert(
+  registryKeyToSemantic("maps/peglin/crash-land") === "map.peglin.crashLand",
+  "map registry key → semantic"
 );
 
 const bad = validateAuthorPlan({ ops: [{ op: "hack.world", args: {} }] }, {});

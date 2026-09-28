@@ -1,0 +1,18 @@
+{
+  "assetId": "acd-toys-02-closed-walnut-wardrobe",
+  "latencyMs": 3783,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.98,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Closed walnut-shaped wooden wardrobe with a pointed shell silhouette, two paneled upper doors, and stacked drawers below.",
+    "repairedOnce": true,
+    "suggestedScale": 0.9
+  },
+  "pngSha256": "58f09fb5aacc2b4337a43f5c984634cbe61f66976376f987fc416e4f5bf434f0",
+  "responseId": "chatcmpl-ESoLguzWazmgZSNy2cLJaTWob2oGc",
+  "timestamp": "2026-09-27T18:57:15.979899+00:00"
+}

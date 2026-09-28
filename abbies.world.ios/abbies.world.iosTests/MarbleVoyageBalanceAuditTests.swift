@@ -91,7 +91,7 @@ final class MarbleVoyageBalanceAuditTests: XCTestCase {
                 if trial.won { clears += 1 }
                 fightsSum += Double(trial.fightsCleared)
                 temperSum += trial.meanTemperFactor
-                if player == .motivated {
+                if player == .metaAware {
                     let cleared = trial.fightsCleared
                     for f in 0...cleared {
                         survival[f, default: 0] += 1
@@ -170,7 +170,7 @@ final class MarbleVoyageBalanceAuditTests: XCTestCase {
             "roles": roles,
             "playerTypes": playerTypes,
             "policies": policies,
-            "survivalMotivated": survivalCurve,
+            "survivalMetaAware": survivalCurve,
             "climb": climb,
             "geometryNote": "All pegs are circles (SpriteKit / continuum radius). Peglin Steam used square peg colliders that chain-bounce longer.",
         ]

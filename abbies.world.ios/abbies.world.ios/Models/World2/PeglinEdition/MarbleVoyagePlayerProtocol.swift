@@ -49,9 +49,9 @@ enum MarbleVoyagePlayerProtocol {
         }
         let temperature: Double
         switch player {
-        case .aggressive: temperature = 0.85
-        case .motivated: temperature = 0.55
-        case .casual: temperature = 1.35
+        case .hitPegs: temperature = 0.80
+        case .metaAware: temperature = 0.55
+        case .uninterested: temperature = 1.45
         }
         let picked = softmaxSample(ids: choices.map(\.id), scores: scores, temperature: temperature, rng: &rng)
         let node = choices.first(where: { $0.id == picked }) ?? choices[0]
@@ -63,7 +63,7 @@ enum MarbleVoyagePlayerProtocol {
         )
     }
 
-    /// Aggressive: fights / bosses. Motivated: heal-ish events when hurt, else fair fights. Casual: noisy.
+    /// hitPegs: push fights (no Temper). metaAware: rest + Temper. uninterested: whim.
     static func mapScore(
         player: MarbleVoyageCampaignSim.PlayerType,
         node: MarbleVoyageNode,
@@ -72,42 +72,43 @@ enum MarbleVoyagePlayerProtocol {
     ) -> Double {
         var s = 1.0
         switch player {
-        case .aggressive:
+        case .hitPegs:
+            // Forward pressure — shrine only when near death. No Temper scoring.
             switch node.kind {
-            case .fight: s = 3.0 + Double(node.threat) * 0.05
-            case .boss: s = 4.0
-            case .treasure: s = 1.2
-            case .mystery: s = 0.9
-            case .shrine: s = hpFrac < 0.35 ? 2.0 : 0.4
+            case .fight: s = 2.8 + Double(node.threat) * 0.04
+            case .boss: s = 3.2
+            case .treasure: s = 1.3
+            case .mystery: s = 1.0
+            case .shrine: s = hpFrac < 0.30 ? 2.2 : 0.35
             case .start: s = 0.1
             }
-            if node.gangRole == .miniBoss || node.gangRole == .bigBoss { s += 1.5 }
 
-        case .motivated:
+        case .metaAware:
             switch node.kind {
-            case .shrine: s = hpFrac < 0.65 ? 3.5 : 1.2
+            // Rest only when truly low — over-resting starves Normal clears.
+            case .shrine: s = hpFrac < 0.40 ? 3.2 : 0.9
             case .treasure: s = 2.0
             case .mystery: s = 1.5
             case .fight:
-                s = 2.2
+                s = 2.4
                 // Prefer Strong Temper matchups when known.
                 if let foe = node.waveAttacker?.temper {
                     let hasStrong = run.marbleCollection.contains {
                         $0.orb.temper.matchup(against: foe) == .strong
                     }
-                    s += hasStrong ? 1.2 : -0.6
+                    s += hasStrong ? 1.4 : -0.5
                 }
-                if node.threat >= 6, hpFrac < 0.45 { s -= 1.0 }
-            case .boss: s = hpFrac < 0.5 ? 0.8 : 2.5
+                if node.threat >= 6, hpFrac < 0.40 { s -= 1.0 }
+            case .boss: s = hpFrac < 0.45 ? 0.9 : 2.6
             case .start: s = 0.1
             }
 
-        case .casual:
-            // Nearly flat — slight shiny bias.
+        case .uninterested:
+            // Nearly flat — slight shiny bias; often skips rest.
             switch node.kind {
-            case .treasure: s = 1.4
-            case .mystery: s = 1.3
-            case .shrine: s = 1.2
+            case .treasure: s = 1.5
+            case .mystery: s = 1.4
+            case .shrine: s = 0.7
             case .fight, .boss: s = 1.0
             case .start: s = 0.1
             }
@@ -122,15 +123,15 @@ enum MarbleVoyagePlayerProtocol {
         hpFrac: Double
     ) -> String {
         switch player {
-        case .aggressive:
-            return node.kind == .fight || node.kind == .boss ? "push fight" : "side beat"
-        case .motivated:
+        case .hitPegs:
+            return node.kind == .fight || node.kind == .boss ? "push for pegs" : "side beat"
+        case .metaAware:
             if node.kind == .shrine, hpFrac < 0.65 { return "rest when hurt" }
             if let foe = node.waveAttacker?.temper {
                 return "temper-aware \(foe.title)"
             }
             return "balanced pick"
-        case .casual:
+        case .uninterested:
             return "whim"
         }
     }
@@ -161,26 +162,35 @@ enum MarbleVoyagePlayerProtocol {
         var weights: [ShopIntent: Double] = [:]
 
         switch player {
-        case .aggressive:
-            weights[.ballUpgrade] = 3.5
-            weights[.buyMarble] = shouldBuyTemperMarble(run) ? 3.0 : 1.2
-            weights[.buyCharm] = 1.8
-            weights[.heal] = hpFrac < 0.40 ? 2.5 : 0.15
-            weights[.leave] = hpFrac > 0.35 && run.coins < 20 ? 1.5 : 0.4
+        case .hitPegs:
+            // Sustain + raw power. Random marble buys — no Temper shopping.
+            weights[.ballUpgrade] = 3.6
+            weights[.heal] = hpFrac < 0.55 ? 3.0 : (hpFrac < 0.80 ? 1.0 : 0.15)
+            weights[.buyMarble] = 0.8
+            weights[.buyCharm] = 1.4
+            weights[.leave] = hpFrac > 0.40 && run.coins < 18 ? 1.3 : 0.35
 
-        case .motivated:
-            weights[.ballUpgrade] = hpFrac >= 0.50 ? 3.2 : 1.4
-            weights[.heal] = hpFrac < 0.55 ? 3.5 : (hpFrac < 0.80 ? 1.2 : 0.2)
-            weights[.buyMarble] = shouldBuyTemperMarble(run) ? 2.8 : 0.6
-            weights[.buyCharm] = 1.3
-            weights[.leave] = hpFrac > 0.70 && run.coins < 25 ? 1.2 : 0.35
+        case .metaAware:
+            // Power first, then Temper coverage — buying marbles before ball Lv2 deletes early climbs.
+            weights[.ballUpgrade] = hpFrac >= 0.35 ? 3.8 : 1.8
+            weights[.heal] = hpFrac < 0.45 ? 3.6 : (hpFrac < 0.70 ? 1.4 : 0.25)
+            let wantTemper = shouldBuyTemperMarble(run)
+            if wantTemper, run.ballLevel >= 2, run.fightsCleared >= 1 {
+                weights[.buyMarble] = 3.4
+            } else if wantTemper {
+                weights[.buyMarble] = 0.9
+            } else {
+                weights[.buyMarble] = 0.35
+            }
+            weights[.buyCharm] = 1.2
+            weights[.leave] = hpFrac > 0.70 && run.coins < 25 ? 1.1 : 0.30
 
-        case .casual:
-            weights[.heal] = 1.0
-            weights[.ballUpgrade] = 1.0
+        case .uninterested:
+            weights[.heal] = 0.6
+            weights[.ballUpgrade] = 0.7
             weights[.buyMarble] = 1.0
             weights[.buyCharm] = 1.0
-            weights[.leave] = 1.4
+            weights[.leave] = 2.2
         }
 
         // Zero out unaffordable / invalid.
@@ -202,9 +212,9 @@ enum MarbleVoyagePlayerProtocol {
 
         let temperature: Double
         switch player {
-        case .aggressive: temperature = 0.7
-        case .motivated: temperature = 0.5
-        case .casual: temperature = 1.4
+        case .hitPegs: temperature = 0.65
+        case .metaAware: temperature = 0.5
+        case .uninterested: temperature = 1.5
         }
 
         let intents = ShopIntent.allCases
@@ -237,12 +247,24 @@ enum MarbleVoyagePlayerProtocol {
         case .ballUpgrade:
             return ShopPick(intent: .ballUpgrade, reason: "power up marble", action: .ballUpgrade)
         case .buyMarble:
-            let orbID = strongestAffordableMarbleOffer(run)
-                ?? run.shop?.marbleOffers.randomElement(using: &rng)
+            let orbID: String?
+            switch player {
+            case .metaAware:
+                orbID = strongestAffordableMarbleOffer(run)
+                    ?? run.shop?.marbleOffers.randomElement(using: &rng)
+            case .hitPegs, .uninterested:
+                orbID = run.shop?.marbleOffers.randomElement(using: &rng)
+            }
             if let orbID {
+                let reason: String
+                switch player {
+                case .metaAware: reason = "temper / bag patch"
+                case .hitPegs: reason = "another marble"
+                case .uninterested: reason = "shiny marble"
+                }
                 return ShopPick(
                     intent: .buyMarble,
-                    reason: player == .casual ? "shiny marble" : "temper / bag patch",
+                    reason: reason,
                     action: .buyMarble(orbID: orbID)
                 )
             }
@@ -250,9 +272,9 @@ enum MarbleVoyagePlayerProtocol {
         case .buyCharm:
             let charm: MarbleVoyageCharm?
             switch player {
-            case .aggressive:
+            case .hitPegs:
                 charm = offenseCharm(run) ?? cheapestAffordableCharm(run)
-            case .motivated, .casual:
+            case .metaAware, .uninterested:
                 charm = cheapestAffordableCharm(run)
                     ?? run.shop?.charmOffers.randomElement(using: &rng)
             }
@@ -274,6 +296,9 @@ enum MarbleVoyagePlayerProtocol {
 
     static func shouldBuyTemperMarble(_ run: MarbleVoyageRun) -> Bool {
         guard run.marbleCollection.count < MarbleVoyageMarbleRules.maxBagCount else { return false }
+        let tempers = Set(run.marbleCollection.map(\.orb.temper))
+        // Mono-Temper starter bags must diversify before Hard Soft deletes the climb.
+        if tempers.count < 2 { return true }
         let nextFoe = run.reachableChoices().compactMap(\.waveAttacker).first?.temper
         guard let foeTemper = nextFoe else {
             return PlinkTemperRules.bagStance(in: run.marbleCollection) == nil
