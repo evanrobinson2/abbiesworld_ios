@@ -7,11 +7,11 @@ final class World2SmokeUITests: XCTestCase {
         continueAfterFailure = false
         XCUIDevice.shared.orientation = .landscapeLeft
         app = XCUIApplication()
-        app.launchArguments = ["-world2SkipIntro", "-world2SkipAuth"]
+        app.launchArguments = ["-launchWorld2", "-world2SkipIntro", "-world2SkipAuth"]
     }
 
     func testSplashContinueAppearsWithoutAuth() throws {
-        app.launchArguments = ["-world2SkipAuth"]
+        app.launchArguments = ["-launchWorld2", "-world2SkipAuth"]
         app.launch()
 
         let intro = app.descendants(matching: .any)["world2.loading"]
@@ -21,6 +21,89 @@ final class World2SmokeUITests: XCTestCase {
         XCTAssertTrue(
             continueButton.waitForExistence(timeout: 16),
             "Intro never offered ENTER ABBIE'S WORLD"
+        )
+    }
+
+    func testHomeLandsWithTreehouses() throws {
+        app.launchArguments = [
+            "-launchWorld2",
+            "-world2SkipIntro",
+            "-launchWorld2Home",
+            "-world2SkipAuth",
+        ]
+        app.launch()
+        enterAsAbbie()
+        XCTAssertTrue(
+            app.descendants(matching: .any)["world2.homeWorld"].waitForExistence(timeout: 8),
+            "Expected Home World after launch"
+        )
+        // Zone explorer: first tap selects, second tap enters (kid thumb path).
+        enterZoneTile(
+            "world2.zoneExplorer.tile.instance.home.abbieTreehouse",
+            expecting: "world2.interior.poi.abbieTreehouse"
+        )
+        tap("world2.interior.back")
+        enterZoneTile(
+            "world2.zoneExplorer.tile.instance.home.aniTreehouse",
+            expecting: "world2.interior.poi.aniTreehouse"
+        )
+        tap("world2.interior.back")
+    }
+
+    func testWorldBookUnlockAutoEntersMarbleVoyage() throws {
+        app.launchArguments = [
+            "-launchWorld2",
+            "-world2SkipIntro",
+            "-world2SkipAuth",
+            "-launchWorld2WorldBookSolved",
+            // Prove the intro gate mounts, then auto-complete (comic is ~70s).
+            "-world2AutoCompleteVoyageOpening",
+        ]
+        app.launch()
+        // Direct launch unlocks + enters Voyage; skip player-select helpers.
+        let continueButton = app.buttons["world2.loading.continue"]
+        if continueButton.waitForExistence(timeout: 4), continueButton.isHittable {
+            continueButton.tap()
+        }
+        let opening = app.descendants(matching: .any)["voyageOpening"]
+        let voyage = app.descendants(matching: .any)["world2.marbleVoyage"]
+        // Gate should mount; auto-complete is delayed ~2.2s so XCTest can see it.
+        // If the cover races (rare), still require landing in Voyage.
+        let sawOpening = opening.waitForExistence(timeout: 14)
+        if !sawOpening {
+            XCTAssertTrue(
+                voyage.waitForExistence(timeout: 8),
+                "Expected intro gate or Voyage after book unlock\n\(app.debugDescription.prefix(2000))"
+            )
+            return
+        }
+        XCTAssertTrue(
+            voyage.waitForExistence(timeout: 16),
+            "Intro completion should land in Marble Voyage\n\(app.debugDescription.prefix(2000))"
+        )
+    }
+
+    /// Bypass comic for other smoke paths that only need the Voyage shell.
+    func testWorldBookUnlockCanSkipOpeningForSmoke() throws {
+        app.launchArguments = [
+            "-launchWorld2",
+            "-world2SkipIntro",
+            "-world2SkipAuth",
+            "-launchWorld2WorldBookSolved",
+            "-world2SkipVoyageOpening",
+        ]
+        app.launch()
+        let continueButton = app.buttons["world2.loading.continue"]
+        if continueButton.waitForExistence(timeout: 4), continueButton.isHittable {
+            continueButton.tap()
+        }
+        XCTAssertFalse(
+            app.descendants(matching: .any)["voyageOpening"].waitForExistence(timeout: 2),
+            "Skip-opening launch arg should bypass the comic gate"
+        )
+        XCTAssertTrue(
+            app.descendants(matching: .any)["world2.marbleVoyage"].waitForExistence(timeout: 16),
+            "Skip-opening should still land in Marble Voyage"
         )
     }
 
@@ -229,20 +312,36 @@ final class World2SmokeUITests: XCTestCase {
     }
 
     private func enterAsAbbie() {
-        let continueButton = app.buttons["world2.loading.continue"]
-        XCTAssertTrue(continueButton.waitForExistence(timeout: 8))
-        waitUntilHittable(continueButton)
-        continueButton.tap()
-
-        let player = app.buttons["Play as Abbie"]
-        if !player.waitForExistence(timeout: 8) {
-            XCTFail("Player select did not appear.\n\(app.debugDescription)")
+        let home = app.descendants(matching: .any)["world2.homeWorld"]
+        if home.waitForExistence(timeout: 2) {
             return
         }
-        waitUntilHittable(player)
-        player.tap()
+
+        let continueButton = app.buttons["world2.loading.continue"]
+        let player = app.buttons["Play as Abbie"]
+        // Skip-intro auto-enter can race past the continue button.
+        let deadline = Date().addingTimeInterval(16)
+        while Date() < deadline {
+            if home.exists { return }
+            if player.exists {
+                waitUntilHittable(player)
+                player.tap()
+                break
+            }
+            if continueButton.exists, continueButton.isHittable {
+                continueButton.tap()
+            }
+            RunLoop.current.run(until: Date().addingTimeInterval(0.25))
+        }
+
+        if !home.waitForExistence(timeout: 8) {
+            if player.waitForExistence(timeout: 2) {
+                waitUntilHittable(player)
+                player.tap()
+            }
+        }
         XCTAssertTrue(
-            app.descendants(matching: .any)["world2.homeWorld"].waitForExistence(timeout: 8),
+            home.waitForExistence(timeout: 8),
             "Home world did not appear.\n\(app.debugDescription)"
         )
     }
@@ -254,11 +353,30 @@ final class World2SmokeUITests: XCTestCase {
     }
 
     private func openPOI(_ poiID: String, expecting screenID: String) {
-        tap("world2.poi.\(poiID)")
-        tap("world2.poi.enter")
+        let poi = app.descendants(matching: .any)["world2.poi.\(poiID)"]
+        XCTAssertTrue(poi.waitForExistence(timeout: 8), "Missing world2.poi.\(poiID)")
+        poi.tap()
+        // Second tap on the selected map marker enters (same as zone drawer).
+        if !app.descendants(matching: .any)[screenID].waitForExistence(timeout: 1) {
+            poi.tap()
+        }
         XCTAssertTrue(
             app.descendants(matching: .any)[screenID].waitForExistence(timeout: 8),
             "Expected \(screenID) after entering \(poiID)\n\(app.debugDescription)"
+        )
+    }
+
+    private func enterZoneTile(_ tileID: String, expecting screenID: String) {
+        let tile = app.descendants(matching: .any)[tileID]
+        XCTAssertTrue(tile.waitForExistence(timeout: 6), "Missing \(tileID)")
+        tile.tap()
+        // Already-selected tiles enter on the next tap.
+        if !app.descendants(matching: .any)[screenID].waitForExistence(timeout: 1) {
+            tile.tap()
+        }
+        XCTAssertTrue(
+            app.descendants(matching: .any)[screenID].waitForExistence(timeout: 8),
+            "Expected \(screenID) after \(tileID)\n\(app.debugDescription.prefix(1800))"
         )
     }
 

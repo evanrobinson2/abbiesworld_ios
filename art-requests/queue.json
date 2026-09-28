@@ -1,14 +1,35 @@
 {
-  "updatedAt": "2026-09-27T11:40:30Z",
+  "updatedAt": "2026-09-27T23:53:55Z",
   "sourceOfTruth": "Individual JSON files under art-requests/{open,in_review,fulfilled,wont_fix}/",
   "artDirectorGuide": "art-requests/ART_DIRECTOR_AGENT.md",
   "open": [
+    {
+      "id": "20260927-home-ambient-animation",
+      "semanticId": "map.home",
+      "priority": "high",
+      "type": "fx",
+      "path": "art-requests/open/20260927-home-ambient-animation.json"
+    },
     {
       "id": "20260927-lizard-henchman-idle",
       "semanticId": "token.plink.gang.lizard.idle",
       "priority": "normal",
       "type": "production_sprite",
       "path": "art-requests/open/20260927-lizard-henchman-idle.json"
+    },
+    {
+      "id": "20260927-cottage-stuffies-integration",
+      "semanticId": "pack.abbieCottage.stuffies",
+      "priority": "normal",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-cottage-stuffies-integration.json"
+    },
+    {
+      "id": "20260927-cottage-furniture-integration",
+      "semanticId": "pack.abbieCottage.furniture.sheet4",
+      "priority": "normal",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-cottage-furniture-integration.json"
     },
     {
       "id": "20260926-endless-progress-chrome",
@@ -25,6 +46,13 @@
       "priority": "high",
       "type": "map_token",
       "path": "art-requests/in_review/20260926-climb-sky-dock-tile.json"
+    },
+    {
+      "id": "20260927-cottage-decor-multimodal-ingest",
+      "semanticId": "pack.abbieCottage.decor",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/in_review/20260927-cottage-decor-multimodal-ingest.json"
     },
     {
       "id": "20260926-event-mystery-plate",
@@ -160,6 +188,69 @@
       "priority": "high",
       "type": "character_portrait",
       "path": "art-requests/fulfilled/20260926-abbie-regal-portrait.json"
+    },
+    {
+      "id": "20260927-abbie-cottage-living-room",
+      "semanticId": "poi.abbieTreehouse.interior",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-abbie-cottage-living-room.json"
+    },
+    {
+      "id": "20260927-marble-voyage-open-book-board",
+      "semanticId": "plate.marbleVoyage.unlock.openBook",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-open-book-board.json"
+    },
+    {
+      "id": "20260927-marble-voyage-world-book",
+      "semanticId": "ui.marbleVoyage.worldEntry.book",
+      "priority": "normal",
+      "type": "other",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-world-book.json"
+    },
+    {
+      "id": "20260927-marble-voyage-puzzle-choice-1",
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice1",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-puzzle-choice-1.json"
+    },
+    {
+      "id": "20260927-marble-voyage-puzzle-choice-2",
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice2",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-puzzle-choice-2.json"
+    },
+    {
+      "id": "20260927-marble-voyage-puzzle-choice-3",
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice3",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-puzzle-choice-3.json"
+    },
+    {
+      "id": "20260927-marble-voyage-puzzle-choice-4",
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice4",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-puzzle-choice-4.json"
+    },
+    {
+      "id": "20260927-abbie-cottage-bedroom",
+      "semanticId": "poi.abbieTreehouse.interior.bedroom",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-abbie-cottage-bedroom.json"
+    },
+    {
+      "id": "20260927-abbie-cottage-playroom",
+      "semanticId": "poi.abbieTreehouse.interior.playroom",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-abbie-cottage-playroom.json"
     },
     {
       "id": "20260926-power-icon-bounce",

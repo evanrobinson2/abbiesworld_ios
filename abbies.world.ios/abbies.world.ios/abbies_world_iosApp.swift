@@ -12,20 +12,23 @@ struct abbies_world_iosApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var auth = AuthenticationService.shared
 
-    /// Household Abbie's World — pass `-launchWorld2` to restore full world boot.
-    /// Default is Marble Voyage standalone (intro → voyage chart → battles).
-    private var wantsHouseholdWorld: Bool {
-        ProcessInfo.processInfo.arguments.contains("-launchWorld2")
-            || ProcessInfo.processInfo.arguments.contains("-launchWorld2Home")
+    /// Product default is household Abbie's World (Home + treehouses).
+    /// Standalone Marble Voyage is opt-in for capture / store-demo launches.
+    private var wantsStandaloneMarbleVoyage: Bool {
+        let args = ProcessInfo.processInfo.arguments
+        if args.contains("-launchMarbleVoyage") { return true }
+        if args.contains("-launchWorld2MarbleVoyage") { return true }
+        if MarbleVoyageCapture.isActive { return true }
+        return false
     }
 
     var body: some Scene {
         WindowGroup {
-            if wantsHouseholdWorld {
-                World2RootView()
+            if wantsStandaloneMarbleVoyage {
+                MarbleVoyageRootView()
                     .environmentObject(auth)
             } else {
-                MarbleVoyageRootView()
+                World2RootView()
                     .environmentObject(auth)
             }
         }

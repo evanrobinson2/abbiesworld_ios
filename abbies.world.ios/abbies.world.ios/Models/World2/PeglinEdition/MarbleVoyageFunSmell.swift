@@ -14,7 +14,7 @@ enum MarbleVoyageFunSmell: String, CaseIterable, Codable, Sendable {
     case upgradeStarve
     /// Soft Temper most of the run while Strong options existed in shops.
     case temperIgnored
-    /// Aggressive never-heal path still clears — economy too forgiving.
+    /// Hit-pegs never-heal path still clears — economy too forgiving.
     case noHealClearExploit
     /// Fight dragged past a round budget (slog).
     case fightSlog

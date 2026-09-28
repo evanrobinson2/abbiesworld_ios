@@ -1,0 +1,68 @@
+[
+  {
+    "alias": "Meadow",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_title_skyMeadow.imageset/world2_title_skyMeadow.jpg",
+    "sha256": "d75486de118dfc5956f961c5f97cd4fec067f0a0dcad28975fd9e161149ff2db",
+    "usage": "existing art, temporary storyboard casting"
+  },
+  {
+    "alias": "Abbie",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_peglin_abbie_happy.imageset/abbie-regal-happy.jpeg",
+    "sha256": "638f1f70f93415b2d52a43ba2eb86b2a36c36dccfb67763cb4604d4674962278",
+    "usage": "existing art, temporary storyboard casting"
+  },
+  {
+    "alias": "Fox",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_peglin_fox_happy.imageset/world2_peglin_fox_happy.png",
+    "sha256": "d3cd475a44a24b927127dbaacce634f57dcd934996cd148ce35a8f59f7107df1",
+    "usage": "existing art, temporary storyboard casting"
+  },
+  {
+    "alias": "Bramble",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_peglin_bramble_happy.imageset/world2_peglin_bramble_happy.png",
+    "sha256": "9c8c45496439a58d4931f4124196dcc54ddcbf722d2efd48a01d1b5c22496a0f",
+    "usage": "existing art, temporary storyboard casting"
+  },
+  {
+    "alias": "Stag",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_peglin_stag_happy.imageset/world2_peglin_stag_happy.png",
+    "sha256": "0e46d7f43c2dde7329d129e0c9f81763d497502a2bbaeea3f3ba6f85d8ba3102",
+    "usage": "existing art, temporary storyboard casting"
+  },
+  {
+    "alias": "Villain",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_hyena_idle.imageset/world2_plink_gang_hyena_idle.png",
+    "sha256": "03705e806badca3dacb98fdf90653a6533f13da053129af7c3feafdeb403a2f4",
+    "usage": "existing art, temporary storyboard casting"
+  },
+  {
+    "alias": "Climb",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_map_marbleVoyage_climb.imageset/world2_map_marbleVoyage_climb.jpg",
+    "sha256": "88b5f10efd6cff23a9b0490bbceff5eaea734f2b44f718f34e60fa073a081167",
+    "usage": "existing art, temporary storyboard casting"
+  },
+  {
+    "alias": "Raze",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_raze.imageset/world2_plink_gang_raze.png",
+    "sha256": "2bd6322fbbac8665a5277b6d6ab1290b4c113ac81393a5340e2b60ae25d391ff",
+    "usage": "established named gang, selectable rehearsal casting"
+  },
+  {
+    "alias": "Vix",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_vix.imageset/world2_plink_gang_vix.png",
+    "sha256": "19d43946d238693853b37bdbd07627aa197e80d3474be5cea133574c472fba06",
+    "usage": "established named gang, selectable rehearsal casting"
+  },
+  {
+    "alias": "Morrow",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_morrow.imageset/world2_plink_gang_morrow.png",
+    "sha256": "a4c4bf0c0bd95882fbd058b7cc777b8df4765893a26ee6706b6d4cf38abe7143",
+    "usage": "established named gang, selectable rehearsal casting"
+  },
+  {
+    "alias": "Nib",
+    "source": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_nib.imageset/world2_plink_gang_nib.png",
+    "sha256": "b888dab2f72a08934d17cdc7b400d41282ebd73d8031ae6de7f1d824d45ee767",
+    "usage": "established named gang, selectable rehearsal casting"
+  }
+]

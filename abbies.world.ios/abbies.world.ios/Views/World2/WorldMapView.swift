@@ -19,6 +19,7 @@ struct WorldMapView: View {
     @State private var selectedFurnitureID: String?
     @State private var selectedCatalogItemID: String?
     @State private var decorateFilter: DecorateFilterID = .mine
+    @State private var decorateDrawerExpanded = true
     /// Sandbox Edit from the tool rail (works even without developer session).
     @State private var sandboxEditing = false
     /// The pad lighting up under a live drag, and why it might refuse.
@@ -69,6 +70,13 @@ struct WorldMapView: View {
         isBuildMode && editorLayer == .pois
     }
 
+    private var isEditingWaterfall: Bool {
+        isBuildMode && editorLayer == .waterfall
+            && (scene.backgroundAsset == "map.home"
+                || sceneID == "scene.home"
+                || sceneID == WorldId.home.sceneID)
+    }
+
     private var isEditingHardpoints: Bool {
         false
     }
@@ -99,6 +107,29 @@ struct WorldMapView: View {
                 }
                 placeLayer(mapRect: mapRect, viewSize: geometry.size, aspectRatio: aspectRatio)
                 plantedPlaceLayer(mapRect: mapRect)
+                // Voyage-style vector leaves above hardpoints; never intercepts taps.
+                if scene.backgroundAsset == "map.home"
+                    || sceneID == "scene.home"
+                    || sceneID == WorldId.home.sceneID {
+                    World2HomeAmbientLayer(
+                        mapRect: mapRect,
+                        isActive: !isBuildMode || isEditingWaterfall,
+                        sceneID: sceneID == WorldId.home.sceneID ? "scene.home" : sceneID
+                    )
+                    .position(x: mapRect.midX, y: mapRect.midY)
+                    .allowsHitTesting(false)
+                    .zIndex(17)
+
+                    if isEditingWaterfall {
+                        World2WaterfallStrokeEditor(
+                            sceneID: sceneID == WorldId.home.sceneID ? "scene.home" : sceneID,
+                            mapRect: mapRect,
+                            store: World2WaterfallStrokeStore.shared
+                        )
+                        .position(x: mapRect.midX, y: mapRect.midY)
+                        .zIndex(19)
+                    }
+                }
                 freehandPlantLayer(mapRect: mapRect)
                 cookingBadgeLayer(mapRect: mapRect)
                 World2SceneDecorateLayer(
@@ -109,6 +140,8 @@ struct WorldMapView: View {
                     selectedCatalogItemID: $selectedCatalogItemID
                 )
                 .zIndex(18)
+                // Decorate's clear hit plate must not eat POI taps while idle.
+                .allowsHitTesting(isArrangingFurniture)
                 if World2WorldSync.shared.presentsParty {
                     World2PartyLayer(
                         party: viewModel.party,
@@ -139,13 +172,14 @@ struct WorldMapView: View {
                     .zIndex(45)
                 }
             }
-            .overlay(alignment: .bottom) {
+            .overlay(alignment: .trailing) {
                 if isArrangingFurniture {
                     World2DecorateTray(
                         playerName: scene.name,
                         selectedCatalogID: selectedCatalogItemID,
                         selectedInventoryID: selectedFurnitureID,
                         filter: decorateFilter,
+                        isExpanded: $decorateDrawerExpanded,
                         onFilterChange: { decorateFilter = $0 },
                         onSelectCatalog: { item in
                             selectedCatalogItemID = item.id
@@ -155,15 +189,23 @@ struct WorldMapView: View {
                             selectedFurnitureID = id
                             selectedCatalogItemID = nil
                         },
+                        onReturnInventoryID: { id in
+                            PlayerStateService.shared.returnFurnitureToInventory(instanceId: id)
+                            if selectedFurnitureID == id { selectedFurnitureID = nil }
+                        },
                         onDone: {
                             isArrangingFurniture = false
                             selectedFurnitureID = nil
                             selectedCatalogItemID = nil
+                            viewModel.setDecorateModeActive(false)
                         }
                     )
                     .zIndex(46)
                     .accessibilityIdentifier("world2.map.decorateTray")
                 }
+            }
+            .onChange(of: isArrangingFurniture) { _, active in
+                viewModel.setDecorateModeActive(active)
             }
             .overlay(alignment: .bottomTrailing) {
                 if !isArrangingFurniture, showsThumbControls, !viewModel.zoneInteractions.isEmpty {
@@ -717,15 +759,10 @@ struct WorldMapView: View {
             World2MutableScenePlaceMarker(
                 instance: instance,
                 onEnter: {
-                    if selectedZoneInteractionID == instance.id {
-                        viewModel.enterPlacedPlace(instance.id)
-                    } else {
-                        selectedZoneInteractionID = instance.id
-                        World2WorldSync.shared.markSeen(instance.id)
-                        viewModel.party.walkToPOI(
-                            at: World2NormalizedPoint(x: instance.x, y: instance.y)
-                        )
-                    }
+                    World2WorldSync.shared.markSeen(instance.id)
+                    selectedZoneInteractionID = instance.id
+                    // Tap-only: open immediately. (Party march path is gated off.)
+                    viewModel.enterPlacedPlace(instance.id)
                 },
                 showsTitle: false,
                 showsNewBadge: World2WorldSync.shared.showsNewBadge(for: instance.id)
@@ -798,13 +835,17 @@ struct WorldMapView: View {
     }
 
     private func confirmSelectedZoneInteraction() {
+        // Inspected map POI wins over the zone-explorer highlight — otherwise
+        // tapping Abbie's Treehouse then "Go in" can open a stale zone tile.
+        if let inspection = viewModel.inspectedPOI {
+            viewModel.enterPOI(inspection.poi)
+            return
+        }
         if let id = selectedZoneInteractionID,
            let item = viewModel.zoneInteractions.first(where: { $0.id == id }) {
             viewModel.performZoneInteraction(item)
             return
         }
-        guard let inspection = viewModel.inspectedPOI else { return }
-        viewModel.enterPOI(inspection.poi)
     }
 
     private func enterUnderfootPlace() {
@@ -1069,6 +1110,24 @@ private struct World2PlaceBadge: View {
     }
 
     var body: some View {
+        Group {
+            if poi != nil {
+                Button(action: onEnter) {
+                    badgeChrome
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("\(sceneName), \(placeTitle), \(actionTitle)")
+                .accessibilityIdentifier("world2.poi.enter")
+            } else {
+                badgeChrome
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(sceneName)
+                    .accessibilityIdentifier("world2.place.badge")
+            }
+        }
+    }
+
+    private var badgeChrome: some View {
         HStack(alignment: .center, spacing: 8) {
             logo
             VStack(alignment: .leading, spacing: 1) {
@@ -1079,9 +1138,9 @@ private struct World2PlaceBadge: View {
                     .font(.system(size: 17, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
                     .lineLimit(1)
-                if let poi {
+                if poi != nil {
                     Text(World2ChromeContract.ellipsized(
-                        poi.name,
+                        placeTitle,
                         budget: World2ChromeContract.placeTitleBudget
                     ))
                         .font(.system(size: 13, weight: .semibold, design: .rounded))
@@ -1120,18 +1179,6 @@ private struct World2PlaceBadge: View {
         }
         .shadow(color: .black.opacity(0.22), radius: 8, y: 3)
         .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-        .onTapGesture {
-            guard poi != nil else { return }
-            onEnter()
-        }
-        .accessibilityElement(children: .ignore)
-        .accessibilityLabel(
-            poi == nil
-                ? sceneName
-                : "\(sceneName), \(placeTitle), \(actionTitle)"
-        )
-        .accessibilityIdentifier(poi == nil ? "world2.place.badge" : "world2.poi.enter")
-        .accessibilityAddTraits(poi == nil ? [] : .isButton)
     }
 
     private var logo: some View {

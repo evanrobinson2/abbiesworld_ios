@@ -21,11 +21,12 @@ Keep the prototype app for tuning; ship battles via `PlinkBattleHostView` (dispo
 
 ## Default routing
 
-`PeglinEdition.isDefaultDestination` (default **on**).  
-Override: `-peglinEditionOff` / `-peglinEditionOn`.
+`PeglinEdition.isDefaultDestination` (default **off** — Home / Abbie's World).  
+Override: `-peglinEditionOn` / `-peglinEditionOff`.
 
-Login → Crash World (`scene.peglin.crashLand` / `WorldId.peglinEdition`).  
-Prior worlds remain in catalog + household document.
+Login → Home (`scene.home` when present, else server `activeSceneID`).  
+Marble Voyage unlocks from the Cozy Nook world-entry book, not as the default spawn.  
+Prior Peglin lands remain in catalog + household document.
 
 ## Seed household document (when MCP token is fresh)
 

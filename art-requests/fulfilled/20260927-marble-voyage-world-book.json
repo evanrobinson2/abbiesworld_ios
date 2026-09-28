@@ -1,0 +1,28 @@
+{
+  "priority": "normal",
+  "styleNotes": "Hand-drawn bold ink outlines, flat cel shading, antique teal and ochre book; no text.",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T14:05:29.042Z",
+  "promptSeeds": [],
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/world-book-2026-09-27/provenance.json",
+    "AssetSources/MarbleVoyage/world-book-2026-09-27/HANDOFF.md",
+    "AssetSources/MarbleVoyage/world-book-2026-09-27/marble-voyage-world-book.jpeg"
+  ],
+  "id": "20260927-marble-voyage-world-book",
+  "semanticId": "ui.marbleVoyage.worldEntry.book",
+  "status": "fulfilled",
+  "type": "other",
+  "aspect": "3:4",
+  "brief": "Preserve approved antique closed book as the specific tree-house world-entry asset leading to Marble Voyage.",
+  "targetWorldId": "world.marbleVoyage",
+  "productionIntent": "runtime_bind",
+  "fulfillment": {
+    "completedAt": "2026-09-27T14:05:29.042Z",
+    "completedBy": "Codex Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/world-book-2026-09-27/marble-voyage-world-book.jpeg",
+    "sourceHashSha256": "50f121ddf84e70f2f746e81ee0b0cfdb53afec9bbdad43547f0923f9bcb52dd7",
+    "notes": "Approved original delivered. Builder carved transparent PNG (tools/carve-assets/carve.py), bound as placed Cozy Nook cottage decoration furniture.marbleVoyage.worldBook; tap opens world-book unlock. Not inventory-gifted."
+  }
+}

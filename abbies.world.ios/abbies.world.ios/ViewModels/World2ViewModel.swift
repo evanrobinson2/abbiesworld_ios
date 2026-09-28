@@ -19,6 +19,8 @@ enum World2Screen: Equatable {
     case figurineExplorer
     case sceneBuilder
     case worldTeleporter
+    /// Abby avatar: current world + unlocked worlds (Marble Voyage gated).
+    case worldSwitcher
     case whizbang
     case planningDept
     case plink
@@ -26,6 +28,8 @@ enum World2Screen: Equatable {
     case pegMonastery
     /// FTL-style Marble Voyage — branching map + Plink fights, HP only from heals.
     case marbleVoyage
+    /// Treehouse world-entry book: cinematic + four jigsaw pages.
+    case worldBookUnlock
     case sceneCreator(instanceID: String)
     case beacon(instanceID: String)
     /// Daddy's Citadel POI — welcome plate + always a candy or hug.
@@ -132,6 +136,16 @@ final class World2ViewModel: ObservableObject {
     let party = World2PartyController()
 
     @Published private(set) var currentScreen: World2Screen = .loading
+    @Published var voyageOpening: VoyageOpeningRequest?
+
+    func finishVoyageOpening(watchedToEnd: Bool) {
+        guard let request = voyageOpening,
+              request.allowsFinish(currentPlayerID: currentPlayerId, watchedToEnd: watchedToEnd) else { return }
+        if watchedToEnd { playerService.markVoyageOpeningWatched(playerID: request.playerID) }
+        voyageOpening = nil
+        arriveInUnlockedMarbleVoyage(reason: request.reason)
+    }
+
     @Published private(set) var currentWorld: World?
     /// Scene the player walked to. Nil means the document's active scene.
     @Published private(set) var walkedSceneID: String?
@@ -160,6 +174,8 @@ final class World2ViewModel: ObservableObject {
     @Published private(set) var inventDecorateTick: Int = 0
     /// Bumped when decorate should open on whatever screen is up (POI interiors, minigames, …).
     @Published private(set) var anywhereDecorateTick: Int = 0
+    /// True while a decorate drawer is open — hides sandbox rail / place exits.
+    @Published private(set) var isDecorateModeActive = false
     /// Daddy's interior listens for this — the root overlay does not cover that plate.
     @Published private(set) var daddyHomeDecorateTick: Int = 0
     @Published var anywhereDecorateSurfaceKey: String?
@@ -302,17 +318,44 @@ final class World2ViewModel: ObservableObject {
     }
 
     /// Cardinal exits on the play map — arrow + destination scene thumbnail.
+    /// Abbie's home is cottage-only: no overland Fern Gully / Lego / etc. exits.
     var mapTravelExits: [World2MapTravelExit] {
-        World2MapTravelExit.build(
+        if isAbbieCottageOnlyHome {
+            return []
+        }
+        return World2MapTravelExit.build(
             connectors: worldGraph.connectors(from: playSceneID),
             travelPads: travelPadsOnCurrentScene,
             presentation: travelDestinationPresentation(for:)
         )
+        .filter { exit in
+            // Belt-and-suspenders: never surface Fern / Lego as home exits.
+            !Self.homeSuppressedDestinations.contains(exit.destinationSceneID)
+        }
+    }
+
+    private static let homeSuppressedDestinations: Set<String> = [
+        "scene.studio12", // Fern Gully
+        "scene.legoCitadel",
+        "scene.studio1",
+        "scene.studio3",
+    ]
+
+    /// Home plate is Abbie's cottage world — not a hub of neighbor portals.
+    private var isAbbieCottageOnlyHome: Bool {
+        let id = playSceneID
+        return id == "scene.home"
+            || id == WorldId.home.sceneID
+            || id == "world.home"
+            || currentScene.backgroundAsset == "map.home"
+            || currentScene.id == "scene.home"
     }
 
     /// Cardinal travel exits for the thumb drawer — destination map plate, not path token.
     private var documentTravelExits: [World2ZoneInteraction] {
-        mapTravelExits.map { exit in
+        // Cottage home: drawer lists only on-plate places (treehouse), never Fern/Lego tunnels.
+        guard !isAbbieCottageOnlyHome else { return [] }
+        return mapTravelExits.map { exit in
             World2ZoneInteraction(
                 id: "travel.\(exit.destinationSceneID)",
                 title: exit.title,
@@ -407,9 +450,8 @@ final class World2ViewModel: ObservableObject {
             places: sync.places,
             originSceneID: sync.activeSceneID
         )
-        // Keep walked scene if it exists on the document, or is a Peglin compiled
-        // scene (catalog fallback until MCP seed). Prefer Crash Land when Peglin
-        // Edition is the product default so sync refresh cannot bounce to home.
+        // Keep walked scene if it still exists. When Peglin is not the product
+        // default, prefer the household home plate over Crash Land.
         let valid = walkedSceneID.flatMap { id -> String? in
             if sceneGraph.draftScenes[id] != nil { return id }
             if id.hasPrefix("scene.peglin."), World2SceneCatalog.scene(id) != nil {
@@ -426,7 +468,10 @@ final class World2ViewModel: ObservableObject {
                 ?? sync.activeSceneID
                 ?? sceneGraph.draftScenes.keys.sorted().first
         } else {
+            let homeCandidates = ["scene.home", WorldId.home.sceneID, "world.home"]
+            let homeOnDoc = homeCandidates.first { sceneGraph.draftScenes[$0] != nil }
             walkedSceneID = valid
+                ?? homeOnDoc
                 ?? sync.activeSceneID
                 ?? sceneGraph.draftScenes.keys.sorted().first
         }
@@ -517,6 +562,8 @@ final class World2ViewModel: ObservableObject {
             adoptServerDocument()
             if PeglinEdition.isDefaultDestination {
                 enterPeglinEditionDefault()
+            } else {
+                enterAbbieHomeDefault()
             }
         } else {
             let start = PeglinEdition.isDefaultDestination ? WorldId.peglinEdition : .home
@@ -529,6 +576,26 @@ final class World2ViewModel: ObservableObject {
         }
         setScreen(.homeWorld, reason: "player_selected")
         World2Diagnostics.log("player_selected", ["player": playerId.rawValue])
+    }
+
+    /// Prefer Abbie's World plate with treehouses (product default).
+    private func enterAbbieHomeDefault() {
+        let sync = World2WorldSync.shared
+        playerService.setCurrentWorld(.home)
+        currentWorld = worlds[.home]
+        let homeCandidates = ["scene.home", WorldId.home.sceneID]
+        let homeID = homeCandidates.first { sceneGraph.draftScenes[$0] != nil }
+            ?? sync.activeSceneID
+            ?? homeCandidates[0]
+        walkedSceneID = homeID
+        World2Diagnostics.log(
+            "home_entered",
+            [
+                "scene": homeID,
+                "server_active": sync.activeSceneID ?? "nil",
+                "has_abbie_treehouse": "\(sync.places.contains { $0.id == World2POIRegistry.abbieTreehouseID })",
+            ]
+        )
     }
 
     /// Prefer Crash Land plate (MVP: Peg Monastery → north to Fox).
@@ -610,7 +677,9 @@ final class World2ViewModel: ObservableObject {
         showingPOISheet = true
         World2WorldSync.shared.markSeen(instance.id)
         World2WorldSync.shared.markSeen(instance.archetypeID)
-        party.walkToPOI(at: instance.transform.position)
+        if World2WorldSync.shared.presentsParty {
+            party.walkToPOI(at: instance.transform.position)
+        }
         if archetype.id.hasPrefix("poi.peglin.") {
             PeglinEdition.log(
                 "poi_approached",
@@ -678,9 +747,18 @@ final class World2ViewModel: ObservableObject {
 
     /// Gift flight cue after Daddy's Citadel awards candy/hug.
     @Published var flyingGiftDecoration: World2StoryDecoration?
+    /// Bumped when the world switcher (or other chrome) wants the Abby player menu open.
+    @Published var playerMenuOpenTick: Int = 0
 
     func presentFlyingGift(_ decoration: World2StoryDecoration) {
         flyingGiftDecoration = decoration
+    }
+
+    func requestPlayerMenu() {
+        if currentScreen == .worldSwitcher {
+            setScreen(.homeWorld, reason: "world_switcher_to_menu")
+        }
+        playerMenuOpenTick += 1
     }
 
     func clearFlyingGift() {
@@ -1002,6 +1080,10 @@ final class World2ViewModel: ObservableObject {
         case .planningDept:
             setScreen(.planningDept, reason: "poi_entered")
         case .plink:
+            guard isMarbleVoyageUnlocked else {
+                showToast(WorldId.marbleVoyage.unlockHint ?? "Marble Voyage is locked.")
+                return
+            }
             setScreen(.plink, reason: "poi_entered")
         case .pegMonastery:
             setScreen(.pegMonastery, reason: "poi_entered")
@@ -1019,6 +1101,217 @@ final class World2ViewModel: ObservableObject {
     /// Open the World Teleporter travel screen from inventory (or a placed token).
     func openWorldTeleporter() {
         setScreen(.worldTeleporter, reason: "inventory_use_teleporter")
+    }
+
+    /// Abby avatar → world switcher (current + unlocked worlds).
+    func openWorldSwitcher() {
+        Task { await World2WorldSync.shared.refreshWorldList() }
+        setScreen(.worldSwitcher, reason: "abbie_world_switcher")
+    }
+
+    /// Cozy Nook book → cinematic jigsaw unlock flow.
+    func openWorldBookUnlock() {
+        setScreen(.worldBookUnlock, reason: "treehouse_world_book")
+    }
+
+    func completeWorldBookUnlock() {
+        unlockMarbleVoyage(reason: "world_book_puzzle")
+        showToast("Puzzle solved — Marble Voyage unlocked!")
+        enterUnlockedMarbleVoyage(reason: "world_book_unlocked")
+    }
+
+    func putDownWorldBook() {
+        setScreen(
+            .treehouse(poiId: PlayerId.abbie.homePoiId),
+            reason: "world_book_put_down"
+        )
+    }
+
+    var isMarbleVoyageUnlocked: Bool {
+        playerService.currentPlayer?.progression.unlockedWorlds.contains(.marbleVoyage) == true
+    }
+
+    /// Permanent unlock after the Home puzzle (or a debug grant).
+    func unlockMarbleVoyage(reason: String = "puzzle") {
+        playerService.unlockWorld(.marbleVoyage)
+        World2Diagnostics.log("marble_voyage_unlocked", ["reason": reason])
+    }
+
+    /// After unlock (book or switcher): focus server world when present, then open Voyage.
+    func enterUnlockedMarbleVoyage(reason: String) {
+        guard isMarbleVoyageUnlocked else {
+            showToast(WorldId.marbleVoyage.unlockHint ?? "Marble Voyage is locked.")
+            return
+        }
+        guard let playerID = currentPlayerId else { return }
+        // UITest / capture smoke: skip the ~70s comic without granting the watched milestone.
+        if ProcessInfo.processInfo.arguments.contains("-world2SkipVoyageOpening") {
+            arriveInUnlockedMarbleVoyage(reason: reason)
+            return
+        }
+        voyageOpening = VoyageOpeningRequest(
+            playerID: playerID,
+            canSkip: true,
+            reason: reason
+        )
+    }
+
+    private func arriveInUnlockedMarbleVoyage(reason: String) {
+        guard isMarbleVoyageUnlocked else { return }
+        playerService.setCurrentWorld(.marbleVoyage)
+        currentWorld = worlds[.marbleVoyage]
+        let voyageId = WorldId.marbleVoyage.rawValue
+        if World2WorldSync.shared.serverWorlds.contains(where: { $0.id == voyageId }) {
+            Task {
+                _ = await World2WorldSync.shared.focusWorld(id: voyageId)
+            }
+        }
+        setScreen(.marbleVoyage, reason: reason)
+        World2Diagnostics.log("marble_voyage_entered", ["reason": reason])
+    }
+
+    /// Rows for the Abby world switcher. Locked worlds stay visible with a hint.
+    var worldSwitcherEntries: [World2SwitcherEntry] {
+        let sync = World2WorldSync.shared
+        let focused = sync.focusedWorldId
+        var entries: [World2SwitcherEntry] = []
+        var seen = Set<String>()
+
+        func appendEntry(_ entry: World2SwitcherEntry) {
+            guard !seen.contains(entry.id) else { return }
+            seen.insert(entry.id)
+            entries.append(entry)
+        }
+
+        if sync.usesServerDocument {
+            for world in sync.serverWorlds {
+                let known = WorldId(rawValue: world.id)
+                let unlocked = known.map(isWorldUnlocked) ?? true
+                appendEntry(
+                    World2SwitcherEntry(
+                        id: world.id,
+                        name: world.name,
+                        summary: known?.description ?? "Household world",
+                        kind: known == .marbleVoyage ? .marbleVoyage : .serverDocument,
+                        isCurrent: world.id == focused || world.isCurrent,
+                        isUnlocked: unlocked,
+                        unlockHint: unlocked ? nil : known?.unlockHint,
+                        revision: world.revision
+                    )
+                )
+            }
+        } else {
+            // Catalog play: show home always, plus every unlockable world (locked or not).
+            let catalog: [WorldId] = [.home, .marbleVoyage]
+            for worldId in catalog {
+                guard let world = worlds[worldId] else { continue }
+                let unlocked = isWorldUnlocked(worldId)
+                appendEntry(
+                    World2SwitcherEntry(
+                        id: worldId.rawValue,
+                        name: world.name,
+                        summary: world.description,
+                        kind: worldId == .marbleVoyage ? .marbleVoyage : .serverDocument,
+                        isCurrent: currentWorld?.id == worldId,
+                        isUnlocked: unlocked,
+                        unlockHint: unlocked ? nil : worldId.unlockHint,
+                        revision: nil
+                    )
+                )
+            }
+            for worldId in playerService.currentPlayer?.progression.unlockedWorlds ?? []
+            where !seen.contains(worldId.rawValue) {
+                guard let world = worlds[worldId] else { continue }
+                appendEntry(
+                    World2SwitcherEntry(
+                        id: worldId.rawValue,
+                        name: world.name,
+                        summary: world.description,
+                        kind: worldId == .marbleVoyage ? .marbleVoyage : .serverDocument,
+                        isCurrent: currentWorld?.id == worldId,
+                        isUnlocked: true,
+                        unlockHint: nil,
+                        revision: nil
+                    )
+                )
+            }
+        }
+
+        // Always list Marble Voyage — even with no matching server document yet.
+        if !seen.contains(WorldId.marbleVoyage.rawValue) {
+            let unlocked = isMarbleVoyageUnlocked
+            appendEntry(
+                World2SwitcherEntry(
+                    id: WorldId.marbleVoyage.rawValue,
+                    name: "Marble Voyage",
+                    summary: WorldId.marbleVoyage.description,
+                    kind: .marbleVoyage,
+                    isCurrent: currentScreen == .marbleVoyage || currentScreen == .plink,
+                    isUnlocked: unlocked,
+                    unlockHint: unlocked ? nil : WorldId.marbleVoyage.unlockHint,
+                    revision: nil
+                )
+            )
+        }
+
+        if entries.isEmpty {
+            appendEntry(
+                World2SwitcherEntry(
+                    id: WorldId.home.rawValue,
+                    name: "Abbie's World",
+                    summary: "Home",
+                    kind: .serverDocument,
+                    isCurrent: true,
+                    isUnlocked: true,
+                    unlockHint: nil,
+                    revision: sync.revision
+                )
+            )
+        }
+        return entries.sorted { lhs, rhs in
+            if lhs.isCurrent != rhs.isCurrent { return lhs.isCurrent }
+            if lhs.isUnlocked != rhs.isUnlocked { return lhs.isUnlocked && !rhs.isUnlocked }
+            return lhs.name.localizedCaseInsensitiveCompare(rhs.name) == .orderedAscending
+        }
+    }
+
+    func isWorldUnlocked(_ worldId: WorldId) -> Bool {
+        if !worldId.requiresUnlock { return true }
+        return playerService.currentPlayer?.progression.unlockedWorlds.contains(worldId) == true
+    }
+
+    func selectWorldSwitcherEntry(_ entry: World2SwitcherEntry) {
+        guard entry.isUnlocked else {
+            showToast(entry.unlockHint ?? "That world is still locked.")
+            return
+        }
+        switch entry.kind {
+        case .marbleVoyage:
+            guard isMarbleVoyageUnlocked else {
+                showToast(WorldId.marbleVoyage.unlockHint ?? "Marble Voyage is locked.")
+                return
+            }
+            enterUnlockedMarbleVoyage(reason: "world_switcher_voyage")
+        case .serverDocument:
+            if World2WorldSync.shared.usesServerDocument {
+                Task {
+                    let ok = await World2WorldSync.shared.focusWorld(id: entry.id)
+                    await MainActor.run {
+                        if ok {
+                            if let known = WorldId(rawValue: entry.id) {
+                                playerService.setCurrentWorld(known)
+                            }
+                            setScreen(.homeWorld, reason: "world_switcher_focus")
+                        } else {
+                            showToast("Could not switch worlds.")
+                        }
+                    }
+                }
+            } else if let worldId = WorldId(rawValue: entry.id) {
+                switchWorld(to: worldId)
+            }
+        }
+        World2Diagnostics.log("world_switcher_select", ["world": entry.id])
     }
 
     /// Destinations the teleporter can send you to. Signed-in play lists the
@@ -1057,6 +1350,10 @@ final class World2ViewModel: ObservableObject {
     }
 
     func travelViaTeleporter(to destinationID: String) {
+        if destinationID == WorldId.marbleVoyage.rawValue {
+            enterUnlockedMarbleVoyage(reason: "teleporter_voyage")
+            return
+        }
         if World2WorldSync.shared.usesServerDocument {
             travelToDocumentScene(destinationID)
             World2Diagnostics.log("teleporter_travel", ["scene": destinationID])
@@ -1093,7 +1390,7 @@ final class World2ViewModel: ObservableObject {
         setScreen(.homeWorld, reason: "document_travel")
     }
 
-    /// Thumb-menu / map pick: select the landmark and walk Abbie there.
+    /// Thumb-menu / map pick: select the landmark (walk only when party presents).
     /// Entering the place is a separate confirm (second tap / Place badge Enter).
     func selectZoneInteraction(_ item: World2ZoneInteraction) {
         switch item.kind {
@@ -1110,7 +1407,9 @@ final class World2ViewModel: ObservableObject {
                 return
             }
             World2WorldSync.shared.markSeen(instanceID)
-            party.walkToPOI(at: World2NormalizedPoint(x: planted.x, y: planted.y))
+            if World2WorldSync.shared.presentsParty {
+                party.walkToPOI(at: World2NormalizedPoint(x: planted.x, y: planted.y))
+            }
             World2Diagnostics.log("planted_selected", ["instance": instanceID])
         case .world, .documentTravel:
             // Selection only — second thumb tap / confirm enters.
@@ -1231,6 +1530,15 @@ final class World2ViewModel: ObservableObject {
         inventReadyPrompt = nil
         pendingDecorateTarget = target
         navigateToDecorate(target)
+    }
+
+    func setDecorateModeActive(_ active: Bool) {
+        guard isDecorateModeActive != active else { return }
+        isDecorateModeActive = active
+        World2Diagnostics.log(
+            active ? "decorate_mode_entered" : "decorate_mode_exited",
+            ["screen": currentScreen.diagnosticName]
+        )
     }
 
     /// Enter decorate mode for the scene/POI/room currently under the player.
@@ -1779,6 +2087,13 @@ final class World2ViewModel: ObservableObject {
         } else if arguments.contains("-launchWorld2AbbieTreehouse") {
             selectPlayer(directPlayer)
             setScreen(.treehouse(poiId: PlayerId.abbie.homePoiId), reason: "direct_launch")
+        } else if arguments.contains("-launchWorld2WorldBook") {
+            selectPlayer(directPlayer)
+            setScreen(.treehouse(poiId: PlayerId.abbie.homePoiId), reason: "direct_launch")
+            openWorldBookUnlock()
+        } else if arguments.contains("-launchWorld2WorldBookSolved") {
+            selectPlayer(directPlayer)
+            completeWorldBookUnlock()
         } else if arguments.contains("-launchWorld2AniTreehouse") {
             selectPlayer(directPlayer)
             setScreen(.treehouse(poiId: PlayerId.ani.homePoiId), reason: "direct_launch")
@@ -1795,6 +2110,15 @@ final class World2ViewModel: ObservableObject {
     }
 
     private func setScreen(_ screen: World2Screen, reason: String) {
+        if screen == .marbleVoyage || screen == .plink, !isMarbleVoyageUnlocked,
+           reason != "debug_ticket", reason != "world_book_unlocked" {
+            showToast(WorldId.marbleVoyage.unlockHint ?? "Marble Voyage is locked.")
+            World2Diagnostics.log(
+                "marble_voyage_blocked",
+                ["reason": reason, "screen": screen.diagnosticName]
+            )
+            return
+        }
         currentScreen = screen
         applyMusic(for: screen)
         World2Diagnostics.log(
@@ -1853,7 +2177,7 @@ final class World2ViewModel: ObservableObject {
             songID = World2POIRegistry.peglinPegMonastery.musicTrackID
         case .marbleVoyage:
             songID = "plink_electronic_folk_dance"
-        case .worldTeleporter:
+        case .worldBookUnlock, .worldTeleporter, .worldSwitcher:
             songID = "world2_cliffside_morning"
         case .daddyWelcome:
             songID = World2POIRegistry.treehouse(for: .evan).musicTrackID
@@ -1888,7 +2212,7 @@ final class World2ViewModel: ObservableObject {
             return songID
         }
         switch screen {
-        case .homeWorld, .playerSelect, .blankSlate, .daddyWelcome, .worldTeleporter:
+        case .homeWorld, .playerSelect, .blankSlate, .daddyWelcome, .worldTeleporter, .worldSwitcher:
             return songs.first?.id
                 ?? MusicService.shared.playlist.first(where: { $0.id.hasPrefix("plink_") })?.id
                 ?? MusicService.shared.playlist.first?.id
@@ -1906,7 +2230,7 @@ final class World2ViewModel: ObservableObject {
         case .threeBears: return "world2_family_adventure"
         case .artGarden: return "world2_joyful_bounce"
         case .evan: return "world2_glassy_bells"
-        case .peglinEdition: return "plink_abbies_world"
+        case .peglinEdition, .marbleVoyage: return "plink_abbies_world"
         case .adventure: return "world2_joyful_bounce"
         }
     }
@@ -2025,6 +2349,20 @@ final class World2ViewModel: ObservableObject {
                 mood: "strange but inviting"
             )
         )
+        let marbleVoyage = World(
+            id: .marbleVoyage,
+            name: "Marble Voyage",
+            description: "Climb, fight, and voyage — unlocks from Abbie's World",
+            backgroundAsset: "map.peglin.crashLand",
+            lightMusicTrack: "plink_abbies_world",
+            intenseMusicTrack: "plink_fell_from_the_blue",
+            adjacentWorlds: [],
+            ambiance: .init(
+                primaryColor: "#3D7A4A",
+                secondaryColor: "#F4D35E",
+                mood: "adventurous"
+            )
+        )
         worlds = [
             .home: home,
             .work: work,
@@ -2034,6 +2372,7 @@ final class World2ViewModel: ObservableObject {
             .artGarden: artGarden,
             .evan: daddyCitadel,
             .peglinEdition: peglinEdition,
+            .marbleVoyage: marbleVoyage,
         ]
         currentWorld = PeglinEdition.isDefaultDestination ? peglinEdition : home
     }
@@ -2092,11 +2431,13 @@ extension World2Screen {
         case .figurineExplorer: return "fe"
         case .sceneBuilder: return "sb"
         case .worldTeleporter: return "wt"
+        case .worldSwitcher: return "ws"
         case .whizbang: return "wz"
         case .planningDept: return "pd"
         case .plink: return "pk"
         case .pegMonastery: return "pm"
         case .marbleVoyage: return "mv"
+        case .worldBookUnlock: return "wb"
         case .sceneCreator: return "sc"
         case .beacon: return "bn"
         case .daddyWelcome: return "dw"
@@ -2140,11 +2481,13 @@ extension World2Screen {
         case "fe": return .figurineExplorer
         case "sb": return .sceneBuilder
         case "wt": return .worldTeleporter
+        case "ws": return .worldSwitcher
         case "wz": return .whizbang
         case "pd": return .planningDept
         case "pk": return .plink
         case "pm": return .pegMonastery
         case "mv": return .marbleVoyage
+        case "wb": return .worldBookUnlock
         case "sc":
             guard let routeID, !routeID.isEmpty else { return nil }
             return .sceneCreator(instanceID: routeID)
@@ -2253,11 +2596,13 @@ extension World2Screen {
         case .figurineExplorer: return "figurine_explorer"
         case .sceneBuilder: return "scene_builder"
         case .worldTeleporter: return "world_teleporter"
+        case .worldSwitcher: return "world_switcher"
         case .whizbang: return "whizbang"
         case .planningDept: return "planning_dept"
         case .plink: return "plink"
         case .pegMonastery: return "peg_monastery"
         case .marbleVoyage: return "marble_voyage"
+        case .worldBookUnlock: return "world_book_unlock"
         case .sceneCreator(let instanceID): return "scene_creator:\(instanceID)"
         case .beacon(let instanceID): return "beacon:\(instanceID)"
         case .daddyWelcome: return "daddy_welcome"

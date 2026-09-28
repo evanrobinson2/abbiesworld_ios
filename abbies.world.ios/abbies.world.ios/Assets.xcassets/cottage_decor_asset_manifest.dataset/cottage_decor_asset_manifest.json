@@ -1,0 +1,1523 @@
+{
+  "assetCount": 45,
+  "assets": [
+    {
+      "assetCatalogName": "acd_lamps_01_sleepy_dragon_globe_lamp",
+      "category": "lighting",
+      "defaultScale": 0.8,
+      "description": "A drowsy blue-green dragon curled snugly around a large glowing amber globe, holding it with its forelegs and feet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-lamps-01-sleepy-dragon-globe-lamp",
+      "label": "sleepy dragon globe lamp",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-lamps-01-sleepy-dragon-globe-lamp.json",
+      "pixelSize": {
+        "height": 404,
+        "width": 308
+      },
+      "placementLayer": "table",
+      "pngSha256": "2bee6502bb2a995369fa2b4c39ee9a046fad97546810c88f2ce04fc9ea1394b2",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-lamps-01-sleepy-dragon-globe-lamp",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "tags": [
+        "sleepy dragon",
+        "glowing globe",
+        "painted ceramic",
+        "glass",
+        "lighting",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_lamps_02_bluebell_floor_lamp",
+      "category": "lighting",
+      "defaultScale": 0.9,
+      "description": "A whimsical botanical floor lamp with tall arched green stems, a broad leafy base, and two drooping bluebell-shaped shades glowing warmly from within.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-lamps-02-bluebell-floor-lamp",
+      "label": "bluebell floor lamp",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-lamps-02-bluebell-floor-lamp.json",
+      "pixelSize": {
+        "height": 598,
+        "width": 281
+      },
+      "placementLayer": "floor",
+      "pngSha256": "9c18346f6219cd4cca6e20f6137c14c38674be7c67f37447669dd5986613c995",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-lamps-02-bluebell-floor-lamp",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "tags": [
+        "bluebells",
+        "leaves",
+        "flower stem",
+        "painted metal",
+        "painted ceramic",
+        "lighting",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_lamps_03_mushroom_cottage_lamp",
+      "category": "lighting",
+      "defaultScale": 0.85,
+      "description": "Whimsical white mushroom cottage lamp with a broad red cap roof, glowing amber windows, a rounded wooden door, a curled blue-topped chimney, and tufts of grass around the base.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-lamps-03-mushroom-cottage-lamp",
+      "label": "mushroom cottage lamp",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-lamps-03-mushroom-cottage-lamp.json",
+      "pixelSize": {
+        "height": 413,
+        "width": 290
+      },
+      "placementLayer": "table",
+      "pngSha256": "8b613124388e31d591e98e3945a3d6882b0d7cc3cdccf7a22676f072d1d6b1c6",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-lamps-03-mushroom-cottage-lamp",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "tags": [
+        "mushroom",
+        "cottage",
+        "glowing windows",
+        "grass",
+        "painted ceramic",
+        "glass",
+        "lighting",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_lamps_04_crescent_moon_lantern_lamp",
+      "category": "lighting",
+      "defaultScale": 0.9,
+      "description": "A freestanding pale gold crescent moon lamp with a small root-like base, supporting an ornate glowing amber lantern and a dangling golden star from its upper tip.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-lamps-04-crescent-moon-lantern-lamp",
+      "label": "crescent moon lantern lamp",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-lamps-04-crescent-moon-lantern-lamp.json",
+      "pixelSize": {
+        "height": 431,
+        "width": 314
+      },
+      "placementLayer": "floor",
+      "pngSha256": "d866124c549063b9cfc42a9abdeb4d5a24b47c2d1e92c4346b043e61b0cefab7",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-lamps-04-crescent-moon-lantern-lamp",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "tags": [
+        "crescent moon",
+        "hanging lantern",
+        "star",
+        "painted wood",
+        "painted metal",
+        "glass",
+        "lighting",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_lamps_05_strawberry_frog_nightlight",
+      "category": "lighting",
+      "defaultScale": 0.8,
+      "description": "A whimsical vintage table lamp with a colorful patchwork fabric shade, scalloped cream trim, dangling pull ornaments, and a golden pedestal base resting on a stack of three worn books.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-lamps-05-strawberry-frog-nightlight",
+      "label": "strawberry frog nightlight",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-lamps-05-strawberry-frog-nightlight.json",
+      "pixelSize": {
+        "height": 488,
+        "width": 297
+      },
+      "placementLayer": "table",
+      "pngSha256": "ccf2b0a8ee5527ae28578d4b65a3d27d4c8638bec35ebb0eb6d3b75bcf8a461b",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-lamps-05-strawberry-frog-nightlight",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "tags": [
+        "frog",
+        "strawberry",
+        "leaves",
+        "seeds",
+        "glowing belly",
+        "painted ceramic",
+        "glass",
+        "lighting",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_lamps_06_storybook_patchwork_lamp",
+      "category": "lighting",
+      "defaultScale": 0.8,
+      "description": "A whimsical strawberry-shaped frog lantern with large round eyes, leafy accents, tiny seed details, and a warm glowing belly.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-lamps-06-storybook-patchwork-lamp",
+      "label": "storybook patchwork lamp",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-lamps-06-storybook-patchwork-lamp.json",
+      "pixelSize": {
+        "height": 257,
+        "width": 269
+      },
+      "placementLayer": "table",
+      "pngSha256": "0364391989d176aaac6d451e3a7de59e58f9efe6c127bf857628bed98e06d211",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-lamps-06-storybook-patchwork-lamp",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "tags": [
+        "patchwork",
+        "scalloped shade",
+        "stacked storybooks",
+        "stitching",
+        "fabric",
+        "painted ceramic",
+        "paper",
+        "cord",
+        "lighting",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_01_rainbow_cloud_rug",
+      "category": "rugs",
+      "defaultScale": 0.8,
+      "description": "Tufted arch-shaped rainbow rug with layered pink, coral, yellow, green, and blue braided bands ending in two fluffy pale-blue clouds.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-01-rainbow-cloud-rug",
+      "label": "Rainbow cloud rug",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-01-rainbow-cloud-rug.json",
+      "pixelSize": {
+        "height": 290,
+        "width": 336
+      },
+      "placementLayer": "floor",
+      "pngSha256": "7ff0245054d6d1e46b7032ad97431e6002984bccf0947db9511f869b187c01d3",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-01-rainbow-cloud-rug",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "rainbow",
+        "clouds",
+        "wool",
+        "tufted fabric",
+        "rugs",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_02_lily_pad_flower_rug",
+      "category": "rugs",
+      "defaultScale": 0.8,
+      "description": "Round textured green lily pad rug with a wedge-shaped notch and a raised pink water-lily flower with a golden-yellow center.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-02-lily-pad-flower-rug",
+      "label": "Lily pad flower rug",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-02-lily-pad-flower-rug.json",
+      "pixelSize": {
+        "height": 276,
+        "width": 320
+      },
+      "placementLayer": "floor",
+      "pngSha256": "5cdf979a2406e83dfb2bc7d972636a5d12d2a55eb028fffc75e1d5df69bd8a9c",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-02-lily-pad-flower-rug",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "lily pad",
+        "water lily",
+        "flower",
+        "woven fabric",
+        "wool",
+        "rugs",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_03_sleepy_orange_cat_rug",
+      "category": "rugs",
+      "defaultScale": 0.8,
+      "description": "Sleeping orange tabby cat sprawled across an irregular oval dark-green rug, with closed eyes, extended forepaws, and a large curled tail.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-03-sleepy-orange-cat-rug",
+      "label": "Sleepy orange cat rug",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-03-sleepy-orange-cat-rug.json",
+      "pixelSize": {
+        "height": 285,
+        "width": 357
+      },
+      "placementLayer": "floor",
+      "pngSha256": "b08a5edabdfba8c6b88e83559655c1510ee399507bcda1d42aa674de285b3455",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-03-sleepy-orange-cat-rug",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "sleeping cat",
+        "curled tail",
+        "wool",
+        "tufted fabric",
+        "rugs",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_04_coral_flower_floor_cushion",
+      "category": "seating",
+      "defaultScale": 0.85,
+      "description": "Oversized round flower-shaped floor cushion with layered coral-orange petals, visible stitched edging, and a raised golden-yellow center.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-04-coral-flower-floor-cushion",
+      "label": "Coral flower floor cushion",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-04-coral-flower-floor-cushion.json",
+      "pixelSize": {
+        "height": 325,
+        "width": 335
+      },
+      "placementLayer": "floor",
+      "pngSha256": "27c9812e9361ceced252f4ef8d6562a7c4a0a0a2a1de14c1ea55f59b0898182a",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-04-coral-flower-floor-cushion",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "flower",
+        "petals",
+        "velvet",
+        "stuffed fabric",
+        "seating",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_05_yellow_flower_floor_cushion",
+      "category": "seating",
+      "defaultScale": 0.85,
+      "description": "Large golden-yellow flower-shaped floor cushion with eight broad, ribbed petals and a raised, textured circular center shaded with warm orange tones.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-05-yellow-flower-floor-cushion",
+      "label": "Yellow flower floor cushion",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-05-yellow-flower-floor-cushion.json",
+      "pixelSize": {
+        "height": 340,
+        "width": 347
+      },
+      "placementLayer": "floor",
+      "pngSha256": "a66300b177016ab838eef945d7a9a5c9cf19a04f7ba25b6d26c820991087a336",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-05-yellow-flower-floor-cushion",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "flower",
+        "petals",
+        "corduroy",
+        "stuffed fabric",
+        "seating",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_06_pink_shell_cushion",
+      "category": "seating",
+      "defaultScale": 0.75,
+      "description": "Low decorative cushion with a ring of plush pink scalloped lobes surrounding a domed coral-orange center with pronounced vertical shell-like ribs.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-06-pink-shell-cushion",
+      "label": "Pink shell cushion",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-06-pink-shell-cushion.json",
+      "pixelSize": {
+        "height": 200,
+        "width": 326
+      },
+      "placementLayer": "floor",
+      "pngSha256": "5b74d3147a88d8625ed80c7a74e5f83c67f7b66060a7e73be52c294680c7f0a9",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-06-pink-shell-cushion",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "shell",
+        "scallops",
+        "corduroy",
+        "velvet",
+        "stuffed fabric",
+        "seating",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_07_green_turtle_cushion",
+      "category": "seating",
+      "defaultScale": 0.85,
+      "description": "Soft green turtle-shaped floor cushion with a raised, segmented dark-green shell, extended head, four rounded flippers, a small tail, and subtle stitched facial details.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-07-green-turtle-cushion",
+      "label": "Green turtle cushion",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-07-green-turtle-cushion.json",
+      "pixelSize": {
+        "height": 253,
+        "width": 334
+      },
+      "placementLayer": "floor",
+      "pngSha256": "af70d3d9c0a11d83ad955e29c6eb51b7a5d1b1fbaa28f8fbddc35f190f39533f",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-07-green-turtle-cushion",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "turtle",
+        "segmented shell",
+        "velvet",
+        "stitched fabric",
+        "stuffing",
+        "seating",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_08_round_patchwork_cushion",
+      "category": "seating",
+      "defaultScale": 0.8,
+      "description": "Plump round floor cushion made from irregular stitched patchwork panels in varied greens, with muted mustard-yellow accents and visible dark seam stitching.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-08-round-patchwork-cushion",
+      "label": "Round patchwork cushion",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-08-round-patchwork-cushion.json",
+      "pixelSize": {
+        "height": 270,
+        "width": 276
+      },
+      "placementLayer": "floor",
+      "pngSha256": "5cf549aa671a1c97b348f32b7d7fa8b30f0b9e219426dc868f56a8e2b9d59768",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-08-round-patchwork-cushion",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "patchwork",
+        "checks",
+        "patchwork fabric",
+        "stitched textile",
+        "stuffing",
+        "seating",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_rugscushions_09_crescent_moon_and_stars_cushion",
+      "category": "seating",
+      "defaultScale": 0.75,
+      "description": "Round, textured blue cushion featuring a large raised golden-yellow crescent moon and scattered embroidered yellow stars.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-rugscushions-09-crescent-moon-and-stars-cushion",
+      "label": "Crescent moon and stars cushion",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-rugscushions-09-crescent-moon-and-stars-cushion.json",
+      "pixelSize": {
+        "height": 298,
+        "width": 314
+      },
+      "placementLayer": "floor",
+      "pngSha256": "12647b0e8e2c2854f1640bbffd6b167f97704e739e9e3245820d38a54a370b1d",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-rugscushions-09-crescent-moon-and-stars-cushion",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "tags": [
+        "crescent moon",
+        "stars",
+        "night sky",
+        "corduroy",
+        "embroidered fabric",
+        "stuffing",
+        "seating",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_toys_01_miniature_puppet_theater",
+      "category": "play-stages",
+      "defaultScale": 0.7,
+      "description": "Miniature freestanding wooden puppet theater with a carved scalloped golden-brown frame, shallow stage ledge, and layered yellow, blue, orange, green, and red curtains.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-toys-01-miniature-puppet-theater",
+      "label": "Miniature puppet theater",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-toys-01-miniature-puppet-theater.json",
+      "pixelSize": {
+        "height": 414,
+        "width": 403
+      },
+      "placementLayer": "table",
+      "pngSha256": "f174ea4292af3edacd83bfd069c19d6f034977100e2d4845eec5e709ee8ff1ce",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-toys-01-miniature-puppet-theater",
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "tags": [
+        "scalloped trim",
+        "theater curtains",
+        "storybook carving",
+        "painted wood",
+        "stitched fabric",
+        "play-stages",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_toys_02_closed_walnut_wardrobe",
+      "category": "storage",
+      "defaultScale": 0.9,
+      "description": "Closed walnut-shaped wooden wardrobe with a pointed shell silhouette, two paneled upper doors, and stacked drawers below.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-toys-02-closed-walnut-wardrobe",
+      "label": "Closed walnut wardrobe",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-toys-02-closed-walnut-wardrobe.json",
+      "pixelSize": {
+        "height": 327,
+        "width": 241
+      },
+      "placementLayer": "floor",
+      "pngSha256": "58f09fb5aacc2b4337a43f5c984634cbe61f66976376f987fc416e4f5bf434f0",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-toys-02-closed-walnut-wardrobe",
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "tags": [
+        "walnut shell",
+        "wood grain",
+        "tiny drawers",
+        "carved wood",
+        "storage",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_toys_03_rocking_unicorn",
+      "category": "seating",
+      "defaultScale": 0.8,
+      "description": "Cheerful painted wooden rocking unicorn with a golden horn, flowing rainbow mane and tail, and a curved turquoise rocker base.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-toys-03-rocking-unicorn",
+      "label": "Rocking unicorn",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-toys-03-rocking-unicorn.json",
+      "pixelSize": {
+        "height": 430,
+        "width": 405
+      },
+      "placementLayer": "floor",
+      "pngSha256": "89c1a3568d1089027de0d21039b50f27da8eac29cfd2e4e1660499843332d6e0",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-toys-03-rocking-unicorn",
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "tags": [
+        "unicorn",
+        "rainbow mane",
+        "curved rocker",
+        "painted wood",
+        "yarn",
+        "seating",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_toys_04_woodland_animal_train",
+      "category": "decor",
+      "defaultScale": 0.85,
+      "description": "Hand-painted wooden woodland toy train with an orange locomotive, a barrel-shaped carriage illustrated with forest animals, and a small boar-faced end car.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-toys-04-woodland-animal-train",
+      "label": "Woodland animal train",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-toys-04-woodland-animal-train.json",
+      "pixelSize": {
+        "height": 261,
+        "width": 739
+      },
+      "placementLayer": "table",
+      "pngSha256": "4d886b7063b713d31f42868d37d527294698672e5e9077d7704da80375efc470",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-toys-04-woodland-animal-train",
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "tags": [
+        "steam locomotive",
+        "woodland animals",
+        "elephant",
+        "animal-shaped carriage",
+        "wood grain",
+        "painted wood",
+        "decor",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_toys_05_toy_castle",
+      "category": "play-stages",
+      "defaultScale": 0.8,
+      "description": "Whimsical painted wooden toy castle with four rounded cream-and-gold towers, red domed and peaked roofs, arched windows, a tall central wooden door, rocky tower bases, and a raised bridge connecting the left tower section.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-toys-05-toy-castle",
+      "label": "Toy castle",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-toys-05-toy-castle.json",
+      "pixelSize": {
+        "height": 377,
+        "width": 568
+      },
+      "placementLayer": "floor",
+      "pngSha256": "48146b352e7f673f71cd04110eb8e6a8bbd86a8b6647cc2c1911951988b9afe6",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-toys-05-toy-castle",
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "tags": [
+        "rounded turrets",
+        "arched doorway",
+        "bridge",
+        "storybook castle",
+        "painted wood",
+        "play-stages",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_toys_06_open_dress_up_chest",
+      "category": "storage",
+      "defaultScale": 0.8,
+      "description": "Open wooden dress-up trunk with gray-blue metal bands and corner fittings, filled with a golden crown, pale blue fairy wings, and star-tipped wands.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-toys-06-open-dress-up-chest",
+      "label": "Open dress-up chest",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/openai/metadata-acd-toys-06-open-dress-up-chest.json",
+      "pixelSize": {
+        "height": 410,
+        "width": 382
+      },
+      "placementLayer": "floor",
+      "pngSha256": "615b06de799a0534f81d3d1c7a5e8a98e432bc836e5c75fb44169f7cc3afb91b",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-toys-06-open-dress-up-chest",
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "tags": [
+        "treasure chest",
+        "crown",
+        "fairy wings",
+        "stars",
+        "magic wand",
+        "wood",
+        "metal",
+        "painted wood",
+        "fabric",
+        "storage",
+        "abbie-cottage",
+        "cottage-decor"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_cat_armchair",
+      "category": "seating",
+      "defaultScale": 0.85,
+      "description": "Hand-painted cat armchair from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-cat-armchair",
+      "label": "Cat armchair",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-cat-armchair.json",
+      "pixelSize": {
+        "height": 312,
+        "width": 266
+      },
+      "placementLayer": "floor",
+      "pngSha256": "5d25e4db67e3520516264d2ed4c5a733a3b5e4e75f42a69706b42f1dc89a247b",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-cat-armchair",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "seating",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_mushroom_desk",
+      "category": "crafting",
+      "defaultScale": 0.85,
+      "description": "Hand-painted mushroom desk from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-mushroom-desk",
+      "label": "Mushroom desk",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-mushroom-desk.json",
+      "pixelSize": {
+        "height": 330,
+        "width": 301
+      },
+      "placementLayer": "floor",
+      "pngSha256": "750cf04ebdd5b00a30ceee4a9870a7850a1424930bda3092b04e4cc141ca6c74",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-mushroom-desk",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "crafting",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_rainbow_trampoline",
+      "category": "play-stages",
+      "defaultScale": 0.85,
+      "description": "Hand-painted rainbow trampoline from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-rainbow-trampoline",
+      "label": "Rainbow trampoline",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-rainbow-trampoline.json",
+      "pixelSize": {
+        "height": 371,
+        "width": 372
+      },
+      "placementLayer": "floor",
+      "pngSha256": "39fbbc83b2f5daf48c5e433853c162eaa177b2bc720f7b552753d25d76bdf504",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-rainbow-trampoline",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "play-stages",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_flower_gymnastics_bar",
+      "category": "play-stages",
+      "defaultScale": 0.85,
+      "description": "Hand-painted flower gymnastics bar from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-flower-gymnastics-bar",
+      "label": "Flower gymnastics bar",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-flower-gymnastics-bar.json",
+      "pixelSize": {
+        "height": 236,
+        "width": 455
+      },
+      "placementLayer": "floor",
+      "pngSha256": "03f758d77d31572cb9843734a60fe991611e8119d07148bfeb76a7cf66c1ed65",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-flower-gymnastics-bar",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "play-stages",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_animal_exercise_mat",
+      "category": "rugs",
+      "defaultScale": 0.85,
+      "description": "Hand-painted animal exercise mat from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-animal-exercise-mat",
+      "label": "Animal exercise mat",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-animal-exercise-mat.json",
+      "pixelSize": {
+        "height": 107,
+        "width": 430
+      },
+      "placementLayer": "floor",
+      "pngSha256": "09542a5a03b17d151788a1a06bf53bd2975f99898eb292bd700bcb339823f97c",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-animal-exercise-mat",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "rugs",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_crescent_moon_bed",
+      "category": "beds",
+      "defaultScale": 0.85,
+      "description": "Hand-painted crescent moon bed from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-crescent-moon-bed",
+      "label": "Crescent moon bed",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-crescent-moon-bed.json",
+      "pixelSize": {
+        "height": 315,
+        "width": 483
+      },
+      "placementLayer": "floor",
+      "pngSha256": "7509cf2309b2255ab485a73acf97e4ef1576c6b903e519c006743206f5a1df01",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-crescent-moon-bed",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "beds",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_cottage_bedside_cabinet",
+      "category": "storage",
+      "defaultScale": 0.85,
+      "description": "Hand-painted cottage bedside cabinet from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-cottage-bedside-cabinet",
+      "label": "Cottage bedside cabinet",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-cottage-bedside-cabinet.json",
+      "pixelSize": {
+        "height": 299,
+        "width": 313
+      },
+      "placementLayer": "floor",
+      "pngSha256": "1f8e707e57f1f7dedf6642a9af057ec3e8e8269362e4dd211aaf0b1f62809c4a",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-cottage-bedside-cabinet",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "storage",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_crown_wardrobe",
+      "category": "storage",
+      "defaultScale": 0.85,
+      "description": "Hand-painted crown wardrobe from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-crown-wardrobe",
+      "label": "Crown wardrobe",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-crown-wardrobe.json",
+      "pixelSize": {
+        "height": 340,
+        "width": 271
+      },
+      "placementLayer": "floor",
+      "pngSha256": "1d71adc8382f125d638accfc5ef646a7765c7c6553f78fb60694bc670943a51d",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-crown-wardrobe",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "storage",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_furniture4_turtle_toy_chest",
+      "category": "storage",
+      "defaultScale": 0.85,
+      "description": "Hand-painted turtle toy chest from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-furniture4-turtle-toy-chest",
+      "label": "Turtle toy chest",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-furniture4-turtle-toy-chest.json",
+      "pixelSize": {
+        "height": 247,
+        "width": 331
+      },
+      "placementLayer": "floor",
+      "pngSha256": "c15e92e6489609aac63eac64309409451158580e6c343b38df48390ad41963cb",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-furniture4-turtle-toy-chest",
+      "sourceSha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+      "tags": [
+        "abbie-cottage",
+        "storage",
+        "furniture4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_lavender_dragon",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted lavender dragon stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-lavender-dragon",
+      "label": "Lavender dragon stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-lavender-dragon.json",
+      "pixelSize": {
+        "height": 309,
+        "width": 334
+      },
+      "placementLayer": "floor",
+      "pngSha256": "9bbf448d7c51d35fadef8b0eb23035ad87955d3eb2d149ffc585b7bd98b0a47e",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-lavender-dragon",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_strawberry_frog",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted strawberry frog stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-strawberry-frog",
+      "label": "Strawberry frog stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-strawberry-frog.json",
+      "pixelSize": {
+        "height": 310,
+        "width": 276
+      },
+      "placementLayer": "floor",
+      "pngSha256": "c4a1c41fb4603b7db677a0ebdab2941e1620df717e7cfef445f140853a2742c1",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-strawberry-frog",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_golden_bear",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted golden bear stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-golden-bear",
+      "label": "Golden bear stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-golden-bear.json",
+      "pixelSize": {
+        "height": 321,
+        "width": 299
+      },
+      "placementLayer": "floor",
+      "pngSha256": "2ef205d33c1e2e7e43f00525ca93917764269b6eb8cc793744286b0507f46f77",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-golden-bear",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_shaggy_winged_friend",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted shaggy winged stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-shaggy-winged-friend",
+      "label": "Shaggy winged stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-shaggy-winged-friend.json",
+      "pixelSize": {
+        "height": 288,
+        "width": 306
+      },
+      "placementLayer": "floor",
+      "pngSha256": "f49f19deae59612722bfe2591a0495215b1792710e9f87a672e79486aac89690",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-shaggy-winged-friend",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_sleepy_moth",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted sleepy moth stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-sleepy-moth",
+      "label": "Sleepy moth stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-sleepy-moth.json",
+      "pixelSize": {
+        "height": 294,
+        "width": 305
+      },
+      "placementLayer": "floor",
+      "pngSha256": "0461c0a813ff9936eb2409f1e0746b4a192b634cf1924be34515f090005528c8",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-sleepy-moth",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_star_pajama_bear",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted star pajama bear stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-star-pajama-bear",
+      "label": "Star pajama bear stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-star-pajama-bear.json",
+      "pixelSize": {
+        "height": 296,
+        "width": 296
+      },
+      "placementLayer": "floor",
+      "pngSha256": "2545b3f522b8dec58925b7cd2ee78c36f3d42230f2fa663e44a2f1389e336fdc",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-star-pajama-bear",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_rainbow_puppy",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted rainbow puppy stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-rainbow-puppy",
+      "label": "Rainbow puppy stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-rainbow-puppy.json",
+      "pixelSize": {
+        "height": 284,
+        "width": 254
+      },
+      "placementLayer": "floor",
+      "pngSha256": "ddac870edaed3158d7eef3cac6e8fc87380d2da46fd8497932827fdce835cc8a",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-rainbow-puppy",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_rainbow_dachshund",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted rainbow dachshund stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-rainbow-dachshund",
+      "label": "Rainbow dachshund stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-rainbow-dachshund.json",
+      "pixelSize": {
+        "height": 292,
+        "width": 310
+      },
+      "placementLayer": "floor",
+      "pngSha256": "684ada9daf3490d5b59d38e5ae75ef720d9d45194e7b7efb48a4a45e333274b5",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-rainbow-dachshund",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies2_unicorn_puppy",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted unicorn puppy stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies2-unicorn-puppy",
+      "label": "Unicorn puppy stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies2-unicorn-puppy.json",
+      "pixelSize": {
+        "height": 324,
+        "width": 353
+      },
+      "placementLayer": "floor",
+      "pngSha256": "9ad0deb93cd620ad96c5511254c109608387293032fea036214fcd613b1ce727",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies2-unicorn-puppy",
+      "sourceSha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies2"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies4_lavender_dragon",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted lavender dragon stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies4-lavender-dragon",
+      "label": "Lavender dragon stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies4-lavender-dragon.json",
+      "pixelSize": {
+        "height": 447,
+        "width": 302
+      },
+      "placementLayer": "floor",
+      "pngSha256": "76f876b22c11fb1f3dc9a19d53ae9f28aa2f7bec32ef5438174a16d868300b6c",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies4-lavender-dragon",
+      "sourceSha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies4_strawberry_frog",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted strawberry frog stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies4-strawberry-frog",
+      "label": "Strawberry frog stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies4-strawberry-frog.json",
+      "pixelSize": {
+        "height": 354,
+        "width": 261
+      },
+      "placementLayer": "floor",
+      "pngSha256": "0bceec6660fe2f206216e1feee48287102f307309a646cf0d1fb9bc1847e8320",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies4-strawberry-frog",
+      "sourceSha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies4_sleepy_moth",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted sleepy moth stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies4-sleepy-moth",
+      "label": "Sleepy moth stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies4-sleepy-moth.json",
+      "pixelSize": {
+        "height": 356,
+        "width": 304
+      },
+      "placementLayer": "floor",
+      "pngSha256": "ff6f1ed65764025c34e260c5d583310399f3c217d8351f646c05d7cf5c4626a0",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies4-sleepy-moth",
+      "sourceSha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies4_star_pajama_bear",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted star pajama bear stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies4-star-pajama-bear",
+      "label": "Star pajama bear stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies4-star-pajama-bear.json",
+      "pixelSize": {
+        "height": 456,
+        "width": 300
+      },
+      "placementLayer": "floor",
+      "pngSha256": "ae9ba8c2b9b33b80267b7310f907c6f9eb15733ca1ca12e302979d856c29cf04",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies4-star-pajama-bear",
+      "sourceSha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies4_rainbow_puppy",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted rainbow puppy stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies4-rainbow-puppy",
+      "label": "Rainbow puppy stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies4-rainbow-puppy.json",
+      "pixelSize": {
+        "height": 358,
+        "width": 302
+      },
+      "placementLayer": "floor",
+      "pngSha256": "8f050e057fa75cd86df5bfaac3910406669dbc54460a151504ee030e38b958a8",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies4-rainbow-puppy",
+      "sourceSha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies4"
+      ]
+    },
+    {
+      "assetCatalogName": "acd_stuffies4_unicorn_puppy",
+      "category": "toys",
+      "defaultScale": 0.65,
+      "description": "Hand-painted unicorn puppy stuffie from the approved cottage sheet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "id": "acd-stuffies4-unicorn-puppy",
+      "label": "Unicorn puppy stuffie",
+      "metadataPath": "AssetSources/World2/CottageDecorKit/metadata/acd-stuffies4-unicorn-puppy.json",
+      "pixelSize": {
+        "height": 467,
+        "width": 302
+      },
+      "placementLayer": "floor",
+      "pngSha256": "b545ae99840c046a3f61e812e65914c1e9d1e844ae059d11bb56559fd4d6f00d",
+      "role": "placeable-room-prop",
+      "semanticId": "decor.abbieCottage.acd-stuffies4-unicorn-puppy",
+      "sourceSha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+      "tags": [
+        "abbie-cottage",
+        "toys",
+        "stuffies4"
+      ]
+    }
+  ],
+  "eligibleCottageScenes": [
+    "poi.abbieTreehouse.interior",
+    "poi.abbieTreehouse.interior.cozyNook",
+    "poi.abbieTreehouse.interior.rooftopLookout",
+    "poi.abbieTreehouse.interior.fitnessCenter",
+    "poi.abbieTreehouse.interior.bedroom",
+    "poi.abbieTreehouse.interior.playroom"
+  ],
+  "generatedAt": "2026-09-27T18:57:33.446155+00:00",
+  "pack": "abbie-cottage-decor-2026-09-27",
+  "schemaVersion": 1
+}

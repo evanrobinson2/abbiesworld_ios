@@ -1,0 +1,59 @@
+{
+  "assets": [
+    {
+      "semanticId": "poi.abbieTreehouse.interior",
+      "filename": "living-room-approved.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "ccc49e98-8737-4e99-8acc-55bf4b63abe9",
+      "candidateIndex": 0,
+      "sourceUrl": "https://cdn.midjourney.com/ccc49e98-8737-4e99-8acc-55bf4b63abe9/0_0.jpeg",
+      "sha256": "ec787967fa82411750245fe4fa817d345baa26bacbbeb7c8327f3e8b13f942c0",
+      "dimensions": [
+        2464,
+        1856
+      ],
+      "status": "runtime_bound",
+      "approval": "Evan requested this upscale go to repo as Abbie cottage interior",
+      "promptFile": "living-room-prompt.txt",
+      "runtime": {
+        "catalogPlate": "world2_1005_poi_abbieTreehouse_interior",
+        "filename": "world2_1005_poi_abbieTreehouse_interior-ec787967fa82.png",
+        "derivativeSha256": "8cc58ce39f54ee5ac536d84b050897f6a935caf707c81cef24edd54be23572b9",
+        "cozyNookAlias": "abbie_treehouse_room_cozy_nook",
+        "rollbackDir": "AssetSources/World2/abbie-cottage-rooms-2026-09-27/rollback"
+      }
+    },
+    {
+      "semanticId": "poi.abbieTreehouse.interior.bedroom",
+      "filename": "bedroom-approved.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "afdf50cd-18df-444d-9327-5ea75e94053d",
+      "candidateIndex": 0,
+      "sourceUrl": "https://cdn.midjourney.com/afdf50cd-18df-444d-9327-5ea75e94053d/0_0.jpeg",
+      "sha256": "f957f3bf352c8843156d9b879a5474c613d3583f74d2bcfd5994015dc9619320",
+      "dimensions": [
+        2464,
+        1856
+      ],
+      "status": "approved_source",
+      "approval": "Evan explicitly requested this fully upscaled bedroom be added to repo",
+      "promptFile": "bedroom-prompt.txt"
+    },
+    {
+      "semanticId": "poi.abbieTreehouse.interior.playroom",
+      "filename": "playroom-approved.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "ff837ebc-71a4-4717-9fac-6b6106ce7328",
+      "candidateIndex": 0,
+      "sourceUrl": "https://cdn.midjourney.com/ff837ebc-71a4-4717-9fac-6b6106ce7328/0_0.jpeg",
+      "sha256": "b0d2b69603d5cebaa494e293e83b85f2cb6e827e8a2f35eddd115d38e755536c",
+      "dimensions": [
+        2464,
+        1856
+      ],
+      "status": "approved_source",
+      "approval": "Evan explicitly requested this fully upscaled playroom be added to repo",
+      "promptFile": "playroom-prompt.txt"
+    }
+  ]
+}

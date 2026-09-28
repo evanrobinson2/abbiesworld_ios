@@ -15,6 +15,8 @@ struct World2SceneDecorateLayer: View {
     @Binding var selectedFurnitureID: String?
     @Binding var selectedCatalogItemID: String?
     var coordinateSpaceName: String = "world2.sceneDecorate"
+    /// Right-edge strip (drawer) that accepts a drag-to-put-away.
+    var returnZoneMinX: CGFloat? = nil
 
     @ObservedObject private var playerService = PlayerStateService.shared
 
@@ -29,6 +31,7 @@ struct World2SceneDecorateLayer: View {
             Color.clear
                 .frame(width: mapRect.width, height: mapRect.height)
                 .contentShape(Rectangle())
+                .allowsHitTesting(isArranging)
                 .gesture(
                     DragGesture(minimumDistance: 0, coordinateSpace: .named(coordinateSpaceName))
                         .onEnded { value in
@@ -40,6 +43,10 @@ struct World2SceneDecorateLayer: View {
                             stamp(at: value.location)
                         }
                 )
+                .dropDestination(for: String.self) { items, location in
+                    guard isArranging else { return false }
+                    return stampDragged(items, at: location)
+                }
 
             ForEach(placedFurniture) { instance in
                 if let piece = World2RoomPiece.resolve(
@@ -52,7 +59,7 @@ struct World2SceneDecorateLayer: View {
                         canvasSize: mapRect.size,
                         isArranging: isArranging,
                         isSelected: selectedFurnitureID == instance.id,
-                        returnZoneMinX: nil,
+                        returnZoneMinX: returnZoneMinX,
                         coordinateSpaceName: coordinateSpaceName,
                         onSelect: {
                             selectedFurnitureID = instance.id
@@ -130,7 +137,38 @@ struct World2SceneDecorateLayer: View {
         }
     }
 
+    private func stampDragged(_ items: [String], at location: CGPoint) -> Bool {
+        guard let raw = items.first,
+              let parsed = World2DecorateDragPayload.parse(raw)
+        else { return false }
+        let x = Double(location.x / max(mapRect.width, 1))
+        let y = Double(location.y / max(mapRect.height, 1))
+        switch parsed.kind {
+        case .inventory:
+            playerService.placeFurniture(
+                instanceId: parsed.id, x: x, y: y, roomId: surfaceKey
+            )
+            selectedFurnitureID = parsed.id
+            selectedCatalogItemID = nil
+            return true
+        case .catalog:
+            guard let item = Self.catalogItem(id: parsed.id) else { return false }
+            if let id = playerService.placeCatalogFurniture(
+                item: item, x: x, y: y, roomId: surfaceKey
+            ) {
+                selectedFurnitureID = id
+                selectedCatalogItemID = nil
+                return true
+            }
+            return false
+        }
+    }
+
     private static func catalogItem(id: String) -> FurnitureItem? {
+        resolvedCatalogItem(id: id)
+    }
+
+    static func resolvedCatalogItem(id: String) -> FurnitureItem? {
         if let item = FurnitureItem.item(id: id) { return item }
         guard let prop = World2WorldSync.shared.props.first(where: { $0.id == id }) else {
             return nil
@@ -158,16 +196,22 @@ struct World2AnywhereDecorateOverlay: View {
     @Binding var filter: DecorateFilterID
     let onDone: () -> Void
 
+    @State private var drawerExpanded = true
+
     var body: some View {
         GeometryReader { geo in
             let rect = CGRect(origin: .zero, size: geo.size)
-            ZStack(alignment: .bottom) {
+            let drawerW = drawerExpanded
+                ? World2DecorateTray.expandedWidth
+                : World2DecorateTray.minimizedWidth
+            ZStack(alignment: .trailing) {
                 World2SceneDecorateLayer(
                     surfaceKey: surfaceKey,
                     mapRect: rect,
                     isArranging: isArranging,
                     selectedFurnitureID: $selectedFurnitureID,
-                    selectedCatalogItemID: $selectedCatalogItemID
+                    selectedCatalogItemID: $selectedCatalogItemID,
+                    returnZoneMinX: isArranging ? max(0, rect.width - drawerW) : nil
                 )
                 if isArranging {
                     World2DecorateTray(
@@ -175,6 +219,7 @@ struct World2AnywhereDecorateOverlay: View {
                         selectedCatalogID: selectedCatalogItemID,
                         selectedInventoryID: selectedFurnitureID,
                         filter: filter,
+                        isExpanded: $drawerExpanded,
                         onFilterChange: { filter = $0 },
                         onSelectCatalog: { item in
                             selectedCatalogItemID = item.id
@@ -183,6 +228,10 @@ struct World2AnywhereDecorateOverlay: View {
                         onSelectInventory: { id in
                             selectedFurnitureID = id
                             selectedCatalogItemID = nil
+                        },
+                        onReturnInventoryID: { id in
+                            PlayerStateService.shared.returnFurnitureToInventory(instanceId: id)
+                            if selectedFurnitureID == id { selectedFurnitureID = nil }
                         },
                         onDone: onDone
                     )

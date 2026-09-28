@@ -138,7 +138,8 @@ enum PlinkBattleBalance {
         seed: UInt64,
         maxRounds: Int = 80,
         aimSpread: ClosedRange<CGFloat> = -0.75...0.75,
-        shotDamageMultiplier: Double = 1.0
+        shotDamageMultiplier: Double = 1.0,
+        biteScale: Double = 1.0
     ) -> FightResult {
         var rng = SeededGenerator(seed: seed)
         var roster = PeglinBattleRules.makeRescueRoster(
@@ -226,8 +227,9 @@ enum PlinkBattleBalance {
                 role: role
             )
             if swing.damage > 0 {
-                playerHP = max(0, playerHP - swing.damage)
-                taken += swing.damage
+                let bite = max(1, Int((Double(swing.damage) * max(0.05, biteScale)).rounded()))
+                playerHP = max(0, playerHP - bite)
+                taken += bite
             }
             if playerHP <= 0 {
                 return packResult(won: false)

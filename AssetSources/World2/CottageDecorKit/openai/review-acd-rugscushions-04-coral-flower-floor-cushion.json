@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-rugscushions-04-coral-flower-floor-cushion",
+  "latencyMs": 2923,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.98,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Oversized round flower-shaped floor cushion with layered coral-orange petals, visible stitched edging, and a raised golden-yellow center.",
+    "suggestedScale": 0.85
+  },
+  "responseId": "chatcmpl-ESoBGGTwKnfgZ06GiKt5xj7ZQLN7m",
+  "timestamp": "2026-09-27T18:46:28.939451+00:00",
+  "pngSha256": "27c9812e9361ceced252f4ef8d6562a7c4a0a0a2a1de14c1ea55f59b0898182a"
+}

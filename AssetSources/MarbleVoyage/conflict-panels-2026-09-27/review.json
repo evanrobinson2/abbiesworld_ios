@@ -1,0 +1,150 @@
+{
+  "status": "review candidates, not approved runtime assets",
+  "images": [
+    {
+      "file": "fear-0.jpg",
+      "verdict": "Working cut selection",
+      "notes": "Both friends look upward with wide eyes and open worried mouths. Fox turquoise eyes and hare violet eyes retained; clover on hare face. Ears still upright, proportions younger and flatter than original portraits. Dark teal clearing supports conflict; amber light preserves visibility. Not final character approval.",
+      "job": "741483fa-4835-45cd-b157-bf378c557c1b",
+      "index": 0,
+      "sha256": "2cb025d9b17532792f1b2c49e879059ad31d6ada36823b9b5da3bc32e4f09d78"
+    },
+    {
+      "file": "fear-1.jpg",
+      "verdict": "Reject",
+      "notes": "Hare has turquoise eyes and lacks identifying clover. Expression clearer but character continuity fails.",
+      "job": "741483fa-4835-45cd-b157-bf378c557c1b",
+      "index": 1,
+      "sha256": "86708c84a8265007fae7dcb2376a5bfcc4ea762959e8b373f1fd14fee083f42f"
+    },
+    {
+      "file": "fear-2.jpg",
+      "verdict": "Reject",
+      "notes": "Eye colors swapped; proportions and expression too comically exaggerated.",
+      "job": "741483fa-4835-45cd-b157-bf378c557c1b",
+      "index": 2,
+      "sha256": "62fa843ad11e038eb5890ce264390c3f6cf3eea4d1a44f9f7503d689be325a84"
+    },
+    {
+      "file": "fear-3.jpg",
+      "verdict": "Alternate",
+      "notes": "Readable worried mouths and correct eye colors. Hare lacks clover ornament, ear color and muzzle markings drift.",
+      "job": "741483fa-4835-45cd-b157-bf378c557c1b",
+      "index": 3,
+      "sha256": "3a0f5ad8d72045b7045b680280fb9d1a5c50c99335aac199e88d217cedf09d53"
+    },
+    {
+      "file": "abbie-0.jpg",
+      "verdict": "Alternate",
+      "notes": "Concern readable, but empty white background and upward angle complicate continuity.",
+      "job": "6d3be779-c282-43ed-aa64-23ac5c8aed45",
+      "index": 0,
+      "sha256": "243b0317f4807762e86fc423a9c0b4f4ba56b8e21830186f22b9384746c951a7"
+    },
+    {
+      "file": "abbie-1.jpg",
+      "verdict": "Alternate",
+      "notes": "Strong concern and matching forest; faces viewer rather than the established departure direction.",
+      "job": "6d3be779-c282-43ed-aa64-23ac5c8aed45",
+      "index": 1,
+      "sha256": "c3946267c4f9d924db50df78f3530983d287afee448de43283d5f13c66b7b121"
+    },
+    {
+      "file": "abbie-2.jpg",
+      "verdict": "Alternate",
+      "notes": "Correct rightward eyeline, but invented glove/arm and unfinished white background.",
+      "job": "6d3be779-c282-43ed-aa64-23ac5c8aed45",
+      "index": 2,
+      "sha256": "c223b15e34ab1b52a140f1e713c9bcc04665a1f628eb0b3b233b57350655c282"
+    },
+    {
+      "file": "abbie-3.jpg",
+      "verdict": "Working cut selection",
+      "notes": "Working-cut choice: tense brows, closed worried mouth, rightward eyeline, recognizable curls, turquoise eyes and magenta/gold coat. More polished rendering than friends; generated signature at edge and exact costume details require cleanup.",
+      "job": "6d3be779-c282-43ed-aa64-23ac5c8aed45",
+      "index": 3,
+      "sha256": "9003732e35bb543b516c87e98dccadbbd8cba4d9a9b2550d8aae71a42fce69d3"
+    },
+    {
+      "file": "net-0.jpg",
+      "verdict": "Working cut selection",
+      "notes": "Selected for cut: consistent with fear reaction, matching turquoise/violet eyes and clover. Net clearly frames pair; faces unobstructed. Mesh does not cross front of faces, and exact body/ear proportions still need polish.",
+      "job": "4599d3d0-8cd8-47c0-8ee3-8f2b105dc971",
+      "index": 0,
+      "sha256": "60c47476ae155009a484770ea08d3e3b7433f0652d60c3af5df3b66eed3d91e5"
+    },
+    {
+      "file": "net-1.jpg",
+      "verdict": "Alternate / reject",
+      "notes": "Reject: line and leaf obscure Fox eye; expression edges rough.",
+      "job": "4599d3d0-8cd8-47c0-8ee3-8f2b105dc971",
+      "index": 1,
+      "sha256": "5b9c83489b9a237f8650c45d22bba0472ebd4dba00c930aea162bb701e210562"
+    },
+    {
+      "file": "net-2.jpg",
+      "verdict": "Alternate / reject",
+      "notes": "Alternate: stronger mesh in front, but crosses Fox eye and clover duplicates on ear.",
+      "job": "4599d3d0-8cd8-47c0-8ee3-8f2b105dc971",
+      "index": 2,
+      "sha256": "abb49f19444e9f6d2c4447b1ebe914f696c9bae7f45a57cb5d98953444ca207d"
+    },
+    {
+      "file": "net-3.jpg",
+      "verdict": "Alternate / reject",
+      "notes": "Reject: hare eyes shift turquoise, rope crosses Fox eye.",
+      "job": "4599d3d0-8cd8-47c0-8ee3-8f2b105dc971",
+      "index": 3,
+      "sha256": "3757371b0fa82db50685d9e49f403ea74ad84e92b8397456845ca71bf63a3e96"
+    },
+    {
+      "file": "carry-0.jpg",
+      "verdict": "Reject",
+      "notes": "Reject: friends turn into long-eared animals; baskets replace net.",
+      "job": "e6e4e151-42b5-4709-acbc-518a7fafc00a",
+      "index": 0,
+      "sha256": "657b0686488b3631fb9edbdf4ab9e525d7513cb120665d1fa851d4bd5e6a39db"
+    },
+    {
+      "file": "carry-1.jpg",
+      "verdict": "Reject",
+      "notes": "Reject: friends walk freely outside net and clothing invented.",
+      "job": "e6e4e151-42b5-4709-acbc-518a7fafc00a",
+      "index": 1,
+      "sha256": "42ec359cdfd5dd566581b8ff5b51a5a3219b8052b4c531f49d2dcb033574b405"
+    },
+    {
+      "file": "carry-2.jpg",
+      "verdict": "Partial composition only",
+      "notes": "Raze-only crop used for departure. Original left-side animals rejected: extra character and clothing. Crop must exclude all of them.",
+      "job": "e6e4e151-42b5-4709-acbc-518a7fafc00a",
+      "index": 2,
+      "sha256": "904de5516636da55057a61d9f12173bf9470d0299a9ac733a06894050231087e"
+    },
+    {
+      "file": "carry-3.jpg",
+      "verdict": "Partial composition only",
+      "notes": "Raze-only crop used for capture. Original net contents rejected: distorted animal faces. Paired with independently inspected capture close-up.",
+      "job": "e6e4e151-42b5-4709-acbc-518a7fafc00a",
+      "index": 3,
+      "sha256": "51580b3ae26521623539161d2dbf605afc1ece17b489393aaf853a53b7208854"
+    }
+  ],
+  "rejectedGrids": [
+    {
+      "job": "5ef6a98f-873b-44a1-b703-812280147f2a",
+      "reason": "Smiling play pose copied; no fear."
+    },
+    {
+      "job": "c056148e-3e86-4f9e-b22f-cf88cce56ba0",
+      "reason": "Invented goggles and changed Raze face; friends lose identifying features. Not usable for established cast."
+    }
+  ],
+  "cutLimitations": [
+    "Silent 44-second browser review cut; not production game handoff.",
+    "Approved unicorn Shih Tzu reference not verified; companion not invented.",
+    "Raze action and friends net appear in separate comic panels; combined artwork is not canon-approved.",
+    "Existing climb plate uses more realistic rendering. View excludes foreground figures but route is not gameplay-matched.",
+    "Exact eye/ear rendering and costume details require a final continuity pass."
+  ]
+}

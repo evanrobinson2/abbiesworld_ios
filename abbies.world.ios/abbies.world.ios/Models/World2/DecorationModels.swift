@@ -126,6 +126,7 @@ struct DecorationInstance: Codable, Identifiable {
     }
     
     static let starterJukeboxID = "decoration.jukebox.starter"
+    static let marbleVoyageWorldBookID = FurnitureItem.marbleVoyageWorldBook.id
 
     static func starterJukebox(for playerId: PlayerId) -> DecorationInstance {
         DecorationInstance(
@@ -137,6 +138,24 @@ struct DecorationInstance: Codable, Identifiable {
             rotation: 0,
             zIndex: 10,
             state: DecorationState(isActive: true, customData: ["currentTrack": "music.home.light"])
+        )
+    }
+
+    /// Seeded on the Cozy Nook coffee table — already placed, not an inventory gift.
+    static func marbleVoyageWorldBookInstanceID(for playerId: PlayerId) -> String {
+        "marble_voyage_book_\(playerId.rawValue)"
+    }
+
+    static func marbleVoyageWorldBook(for playerId: PlayerId) -> DecorationInstance {
+        let item = FurnitureItem.marbleVoyageWorldBook
+        return DecorationInstance(
+            id: marbleVoyageWorldBookInstanceID(for: playerId),
+            decorationId: marbleVoyageWorldBookID,
+            x: 0.50,
+            y: 0.56,
+            scale: item.defaultScale,
+            rotation: 0,
+            zIndex: 20
         )
     }
 }

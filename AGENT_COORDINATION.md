@@ -271,3 +271,149 @@ Invoke `$abbies-art-director` in a new chat. The personal skill belongs at `/Use
 ### Iconic event plates active — 2026-09-26
 
 - Codex Art Director: Evan authorized Treasure, Mystery, Shrine 4:3 event plates, one iconic object per scene, quiet space for title/outcome/Continue. Scope sources, provenance, queue handoff. No game edits; preserve concurrent builder changes. Serial Midjourney submissions at least one minute apart.
+
+### Marble Voyage gateway book — active 2026-09-27
+
+- Codex, primary role Art Director: Evan approved job 3259ce19-82be-43bc-8268-3ddae229ff6b candidate 2 (index 1) as the specific book leading from the base-world tree house to Marble Voyage.
+- Scope: preserve exact original, provenance and builder handoff under AssetSources/MarbleVoyage/world-book-2026-09-27; canonical art requests and queue. Generate a matching open-book blank jigsaw board for review. Preserve concurrent world-switching code; runtime wiring remains builder work.
+
+### Marble Voyage gateway book — source delivered 2026-09-27
+
+- Approved closed-book original preserved with SHA-256 and exact prompt; fulfilled source request `ui.marbleVoyage.worldEntry.book` explicitly targets `world.marbleVoyage`. Runtime interaction and transparent derivative remain builder work.
+- Initial open-book perspective rejected by Evan. Corrected full-screen orthographic interior job 5c8714e4-f7e6-4042-807f-e8ba96453484 candidate 2 saved for review under same pack. Request `plate.marbleVoyage.unlock.openBook` remains in_review. No game-code edits, builds, commits or pushes.
+
+### Marble Voyage book pair approved — 2026-09-27
+
+- Evan approved submission of the corrected orthographic interior presented in chat: job 5c8714e4-f7e6-4042-807f-e8ba96453484 candidate 2, index 1. Moved `plate.marbleVoyage.unlock.openBook` to fulfilled for source delivery. Closed entry book `ui.marbleVoyage.worldEntry.book` was already approved.
+- Both exact originals, prompts and hashes are in `AssetSources/MarbleVoyage/world-book-2026-09-27/`; HANDOFF.md identifies the approved files and existing `world.marbleVoyage` destination. Builder retains runtime wiring and verification. No commit/push performed.
+
+### Floating-island puzzle choices — active 2026-09-27
+
+- Codex Art Director: Evan selected all four variants of job 5ae1da8a-2aad-4dcf-a1d0-2c3de327d911 as book-puzzle choices. Scope: exact source JPEGs, provenance, four canonical request records, queue and book handoff. No concurrent game-code changes.
+
+### Floating-island puzzle choices delivered — 2026-09-27
+
+- Saved all four exact originals from job 5ae1da8a-2aad-4dcf-a1d0-2c3de327d911 (indexes 0–3) under `AssetSources/MarbleVoyage/unlock-puzzle-choices-2026-09-27/`. User-approved as four selectable jigsaw pictures.
+- Four source-fulfilled requests `plate.marbleVoyage.unlock.puzzleChoice1` through `puzzleChoice4`, linked to the approved book board. All JPEGs visually inspected, dimensions 1232×928 and hashes verified; request schemas validated.
+- Builder owns selection UI, piece masking/generation, catalogs and runtime verification. No new generation, game-code edits, commit or push.
+
+### Codex — Art Director / standalone comic prologue — 2026-09-27
+
+- Evan requested a standalone Xcode rehearsal app for friends playing marbles, ambush/capture, Abbie and unicorn Shih Tzu arrival, interactive mountain climb, and game handoff.
+- Active scope: prototypes/VoyagePrologue only, plus this appended coordination entry. Existing game implementation and other agents’ files remain owned by their builders.
+- First pass uses existing approved art as explicitly temporary storyboard panels; new cinematic assets require review. Browser generation paced serially; no automatic rerolls.
+- Validation pending: build, simulator launch, visual inspection, interaction and replay checks.
+
+### Codex — prologue animatic first build verified — 2026-09-27
+
+- Standalone prototypes/VoyagePrologue/VoyagePrologue.xcodeproj created, separate world.abbies.VoyagePrologue identity. Build succeeded with Xcode 26.3; installed and launched on iPad A16 simulator. Opening accessibility controls and comic-friends screen visually verified. Full touch path, skip/replay, Reduce Motion and physical-device performance still unverified.
+- Established named gang Raze/Vix/Morrow/Nib replaces alternate hyena casting; Studio permits preview selection. Existing Fox/Bramble/Stag portrait art preserved and provenance recorded. No new canon.
+- Initial seven-shot animatic only: code-driven petals, panels, typography, climb drag/slider, studio timeline and completion callback. Companion, close-up action artwork, final evolving collage choreography, soundtrack and real-game handoff remain production work. No generated art/music, commits or pushes.
+
+### Abbie home ambient animation handoff — 2026-09-27
+
+- Codex, primary role Art Director: Evan finalized job 2695686e-cb10-4a86-87ef-bd1ffd78118c index 0 and requested clouds, waterfall, leaves, foreground reeds and butterflies. Scope: source/provenance, detailed builder brief, open art-request and queue only.
+- See `AssetSources/World2/home-ambient-2026-09-27/HANDOFF.md` and `art-requests/open/20260927-home-ambient-animation.json`. Existing scene.home/map.home identity retained. Opaque blank sky/water require reviewed masks. Builder owns layer production, runtime implementation and device recording. Preserve concurrent home/world code.
+
+### Codex — cinematic redo in browser — 2026-09-27
+
+- Evan rejected the portrait-card animatic as generic. Current scope: new Midjourney scene/action artwork using existing cast references, and an evolving motion-comic localhost preview under prototypes/VoyagePrologue/web. Native prototype retained as superseded rehearsal work.
+- Character canon unchanged. New art is review-only until approved. Separate browser tab, serial deliberate submissions, no reroll loops. Test visual timing in the browser before handoff.
+
+### Codex — new-art browser prologue cut — 2026-09-27
+
+- Generated two serial Midjourney grids using established Fox/Hare references. Review selections: 85999cea-b722-40b5-a148-ee44f6a9c6a6 index 2 (game), 7a4273bb-a8a9-4c1e-abea-350bd9e9a247 index 3 (paw close-up). Source/provenance: AssetSources/MarbleVoyage/prologue-review-2026-09-27. Not canonical approval; missing hare clover detail/color continuity noted. Raze retains existing bundled design.
+- Local browser cut at http://127.0.0.1:8769/: 32-second evolving collage, reaction insert, petals, shadow wipe, Raze entrance, escaping marble; scrub, replay, sound toggle, reduced motion. Source: prototypes/VoyagePrologue/web. Existing native animatic not updated.
+- Verified Chrome full playback reaches 32 seconds; replay resets; sound/reduced-motion controls toggle; all art decodes; no captured console errors. Fixed focus scrolling inside the stage. Visually inspected opening, collage, shadow and entrance, plus iPad landscape; portrait layout has no horizontal overflow. Screenshot: web/review/ipad-collage.png.
+- Remaining: actual capture beat, Abbie and approved companion action art, interactive ascent, finished soundtrack, complete native integration, physical iPad validation. No commits or pushes.
+
+### Codex — semantic storyboard scaffold — active 2026-09-27
+- User requested every planned visual and scene-by-scene narrative before further art. Scope: prototypes/VoyagePrologue/web storyboard data, review UI, and STORYBOARD.md. Preserve previous motion experiment separately. No new generation or production asset approval in this pass.
+
+### Codex — semantic storyboard scaffold delivered — 2026-09-27
+- Default localhost preview now hosts the eight-scene rescue storyboard; earlier collage retained at motion-study.html. STORYBOARD.md lists every planned visual, purpose, movement, sound, text, continuity requirement and missing art. storyboard.json drives selectable/timed review, with reusable treatment identifiers and explicit final preview handoff.
+- visual-review.json records character/emotion/tone/color/shape/action/framing/continuity findings for three inspected images. None promoted to approved story art. Companion and climb references remain pending verification.
+- Verified scene navigation, preview handoff output, initial timing control, loaded DOM and clean console in Chrome. This is a director scaffold, not completed animated story or production integration. No new images, commits or pushes.
+
+### Abbie cottage rooms — active 2026-09-27
+
+- Codex Art Director: Evan approved living-room upscale ccc49e98-8737-4e99-8acc-55bf4b63abe9 index 0 as cottage interior. Save original/provenance under AssetSources/World2/abbie-cottage-rooms-2026-09-27 and canonical request poi.abbieTreehouse.interior.
+- Generate matching bedroom and playroom for USER APPROVAL before making any of three decoration packs (living room, bedroom, playroom). Source work only; preserve concurrent catalog/home code. Builder retains runtime binding.
+
+### Abbie cottage bedroom approved source — 2026-09-27
+
+- Codex Art Director: Evan approved full upscale afdf50cd-18df-444d-9327-5ea75e94053d index 0. Scope: add bedroom original/provenance/request and handoff only; preserve builder modifications to living-room runtime metadata and catalogs.
+- Semantic `poi.abbieTreehouse.interior.bedroom`, source `AssetSources/World2/abbie-cottage-rooms-2026-09-27/bedroom-approved.jpeg`. Builder must add a separate bedroom room mapping and verify in app. No code edits/build/commit/push.
+
+### Abbie cottage playroom approved source — 2026-09-27
+
+- Codex Art Director: Evan approved full upscale ff837ebc-71a4-4717-9fac-6b6106ce7328 index 0. Scope: add playroom original/provenance/request and handoff only; preserve builder modifications to living-room runtime metadata and catalogs.
+- Semantic `poi.abbieTreehouse.interior.playroom`, source `AssetSources/World2/abbie-cottage-rooms-2026-09-27/playroom-approved.jpeg`. Builder must add a separate playroom room mapping and verify in app. No code edits/build/commit/push.
+
+### Codex — panel art proofs in production — 2026-09-27
+- User explicitly asked to stop planning and generate panel art, returning with proofs. Scope: paced Midjourney production in a separate Chrome tab, inspected candidate originals/provenance and local proof gallery. Preserve game and other art-director work. No candidate approval inferred.
+
+### Codex — 16 panel-art proofs delivered — 2026-09-27
+- Four serial Midjourney v7 grids, >=120 seconds apart: Bramble reaction da57d3d3-5b45-4e94-a014-04846a5569e2; rejected shared play 36cab923-f7ee-43fd-96f9-b3aaa4604537; Raze entrance 2a24d14f-2850-4424-a1ea-6762c9934f81; targeted shared-play correction 26f634dd-a4a5-482b-a98e-e06b29e1990e.
+- Original Raze job 9e15f6a1-b72f-4449-bc36-e82d5e74de4d index 0 located and visually matched to bundled portrait. Used separate style/identity controls; diagnosed style-to-content contamination in friends and made one explicit correction. All 16 originals inspected and saved with prompts, hashes, job/index and specific review findings in AssetSources/MarbleVoyage/panel-proofs-2026-09-27.
+- Local proof gallery: http://127.0.0.1:8769/proofs.html, linked from storyboard. Shows references, current candidate selections, rejects and repairs, original MJ links and full-size viewer. Browser checked: image loads, lightbox, no captured console errors. No generated candidate treated as approved or integrated into runtime. Current strongest studies: Bramble index 1, Raze index 0, corrected shared-play index 0; each still has explicit repair needs.
+
+### Codex — conflict panels and assembled cut — active 2026-09-27
+- User explicitly requests completion with frightened friends and more visible bullies. Produce and inspect new fear, confrontation, capture and departure panels; assemble candidates into a watchable review sequence. Scope: isolated prologue assets and web preview only. No production approval inferred.
+
+### Codex — conflict cut assembled and browser verified — 2026-09-27
+- Added 24 Midjourney originals in six serial grids under AssetSources/MarbleVoyage/conflict-panels-2026-09-27. Selected fear reaction, net close-up, Abbie concern and Raze-only action crops after inspecting all candidates. Two complete grids rejected, plus incorrect portions of wide action scenes excluded. Existing Vix portrait retained unchanged. Review notes, source jobs, hashes and prompts preserved.
+- New 44-second silent working cut: http://127.0.0.1:8769/rescue-cut.html. Reusable timed panels, camera moves, names/dialogue, warm opening petals, scene navigation, scrub, replay and reduced motion. New review gallery conflict-review.html. Linked from existing director storyboard; older drafts preserved.
+- Verified actual Chrome playback through all scenes and completion/replay; inspected capture/departure/Abbie screenshots. Fixed dialogue covering Raze’s face. All 12 source references exist, JS syntax valid, latest preview console clean. Checked 1194x834 landscape and 834x1194 portrait (no horizontal overflow); restored viewport.
+- Still a review cut: approved unicorn Shih Tzu reference not located, soundtrack absent, character/prop continuity needs polish, climb not matched to first gameplay frame, no native/production handoff. No new canonical assets, commits or pushes. Browser connection intermittently dropped; recovered and remained with Midjourney, no alternate generator used.
+
+### Codex — Art Director / cottage stuffies delivered — 2026-09-27
+- Evan approved job 897e3259-3878-40c6-bcf0-ba2dad75a636 candidates 2 and 4 (indexes 1, 3). Exact originals and SHA-256 provenance saved under AssetSources/World2/cottage-stuffies-2026-09-27. Both visually inspected: 9 + 6 separate toys; ground shadows require removal.
+- Canonical integration request: art-requests/open/20260927-cottage-stuffies-integration.json. Builder owns extraction, existing CozyRoomKit manifest/catalog extension, decoration tray binding and runtime screenshot. No concurrent code edits, commit or push.
+
+### Codex — layered color and parallax — active 2026-09-27
+- Evan requests rich colored backgrounds panning independently behind pale-background panel artwork. Scope: review player renderer, reusable live paper-key compositing, existing transparent characters and inspected scenic backdrop. Preserve original images and production assets.
+
+### Codex — Art Director / cottage furniture delivered — 2026-09-27
+- Evan approved only job 3798e65b-3825-43ad-82ee-99eba37a85b3 candidate 4 (index 3). Original CDN JPEG inspected and preserved under AssetSources/World2/cottage-furniture-2026-09-27 with hash/provenance and HANDOFF.md.
+- Nine separate furniture/play objects; canonical request art-requests/open/20260927-cottage-furniture-integration.json. Builder owns cutouts, existing CozyRoomKit catalog binding and runtime verification. No game-code edits, commits or pushes.
+
+### Codex — layered color and parallax delivered — 2026-09-27
+- Four working-cut scenes gain independently moving, mood-colored Sky Meadow backgrounds. Raze/Vix reveal uses original transparent portraits. Live WebGL near-white paper compositing added for Bramble/Abbie with protected face regions, feathered outer edges, source fallback and GPU cleanup. Original raster files untouched.
+- Chrome inspected friends, bully and Abbie compositions; corrected face-obscuring dialogue and white patch inside Bramble cutout. Verified independent scenery transform, reduced-motion stationary endpoint, no captured warnings/errors. Screenshots: web/review/depth-friends.png, depth-bullies.png, depth-abbie.png. Existing silent-cut and production-handoff limitations remain.
+
+### Codex — titles, Abbie introduction and full net scenes — 2026-09-27
+- User requested intro/outro titles, Abbie introduction and the actual animals-in-net scenes previously cropped. Working cut expanded to 60 seconds: opening Abbie’s World / Marble Voyage card, full carry-3 capture plate (shown at user request despite retained art-review flaws), full net-2 reaction, magenta ABBIE name reveal, closing rescue invitation.
+- Preserved parallax and existing scene controls; fixed minute rollover to 1:00. Browser inspected title, full capture/net, Abbie label, outro and replay; no captured warnings/errors. Sources all resolve. Full-scene character inconsistencies remain noted in art review; no canonical runtime promotion.
+
+### Codex — Art Director / cutscene polish — active 2026-09-27
+- Scope: rescue-cut preview only. Match native intro animated pink/cyan wordmark, fix viewport framing, remove placeholder petals, substitute original Bramble idle portrait, add timed friendship doodles. Narration deferred.
+
+### Codex — Art Director / cutscene polish delivered — 2026-09-27
+- Preview intro now follows native AnimatedWorld2Title pink/cyan rounded lettering and pastel subtitle, replacing generic title hierarchy and hard shadow. Existing Bramble idle portrait replaces generated close-up at 12–16s. Together gets timed hand-drawn hearts, sparkles and shared underline. Placeholder petals removed; native effect remains future work.
+- Viewport-height bounded frame and stage-relative typography; portrait inset fixed. Chrome inspected title, friendship and replacement portrait; stage fully inside 1194x834 and 834x1194 viewports, no horizontal overflow, no console warnings/errors. Proofs in web/review/{canon-title,friendship-doodles,bramble-replacement}.png. Narration deferred; no native changes.
+
+### Codex — Art Director / drawn story cues and first rescue — active 2026-09-27
+- Scope: preview only. Remove overlapping departure inset, extend semantic hand-drawn marks, bundle licensed Roboto, stage offscreen rock/bonk → Abbie reveal → Fox freed with existing approved portraits and drawn action. No narration or native runtime edits.
+
+### Codex — Marble Voyage intro gate — active 2026-09-27
+- User authorized native integration: book teleporter/world switcher entry presents offline comic, first complete viewing required, later skip allowed per player. Scope: targeted World2ViewModel entry helper, World2RootView cover, PlayerStateService milestone, new VoyageOpeningView and generated resource bundle. Preserving existing concurrent edits. Build verification in progress.
+
+### Codex — native Marble Voyage opening integrated — 2026-09-27
+- Book Begin voyage, world switcher and Marble Voyage teleporter destination use an intro gate before arrival. First viewing has no skip/scrub/dismiss; subsequent viewings have native Skip intro. Completion milestone is saved through existing per-player state + sync, only on end, guarded against player mismatch. Errors retry without granting watched state.
+- Native SwiftUI + offline WKWebView hosts the reviewed 70-second comic. Resources bundled (~6 MB); packaging script preserves relative assets and font license, disables review navigation and wires completion. No remote web dependency. Fixed local WebKit texture loading using an embedded Abbie texture and guarded asynchronous paper-compositing fallback.
+- App simulator build succeeded. Four VoyageOpeningTests passed on booted iPad A16: skip/player rules, save serialization, bundled WebKit/font load, all 13 scenes and one end callback. Full manual teleporter UI playthrough not performed. Narration/native particles remain deferred. See prototypes/VoyagePrologue/INTEGRATION.md. No commits or pushes.
+
+### Codex — Art Director / selected cottage sheets runtime import — active 2026-09-27
+- Evan authorized furniture 3798e65b index 3, stuffies 897e3259 index 1, lamps 4107f91e index 0 as cottage decorations. Scope: preserve sources/provenance, prepare individual sprites, extend existing CottageDecorKit manifest/catalog, validate build and placement availability. Preserve concurrent work and existing candidate-4 lamps. No commit/push requested.
+
+### Codex — selected cottage decorations imported — 2026-09-27
+- Added nine furniture props from 3798e65b index 3 and nine stuffies from 897e3259 index 1 into existing CottageDecorKit plus 18 acd_furniture4/acd_stuffies2 imagesets. Existing FurnitureItem loader and cottage decorate tray consume the extended shared manifest (39 props total). Original source hashes verified; per-item source/crop/derivative provenance recorded. Existing 21 props preserved.
+- Reproducible importer: scripts/cottage_decor_assets/import_selected.py. Existing pipeline now preserves separately imported entries when regenerating its three packs. Contact sheet: AssetSources/World2/CottageDecorKit/review/selected-furniture-stuffies.png. Visual inspection and manifest/hash/alpha/six-room coverage checks passed.
+- Lamp 4107f91e index 0 is NOT imported: direct CDN 403, browser download explicitly denied permission. Requested permission from Evan; no alternate download attempted after denial. Existing index-3 lamps preserved.
+- Build attempted on iPad A16 simulator but stalled at package resolution with auth0.swift-manifest child; terminated only this attempt. No successful app build, placement/reload test or in-game screenshot this pass. Requests remain open for runtime verification (and stuffie sheet 4 from earlier request). No commit/push.
+
+### Cursor — cottage tray + stuffies sheet 4 — 2026-09-27
+- Cottage decorate tray is CottageDecorKit-only (no Cozy Room / remote SF-symbol props); `acd_*` catalog names resolve via AssetBootstrap.
+- Imported stuffies sheet 4 (897e3259 index 3) as six `acd-stuffies4-*` sprites — full 15 approved stuffies now in tray. Catalog **45** props. Contact: `AssetSources/World2/CottageDecorKit/review/selected-stuffies4.png`.
+- Lamps `4107f91e` index 0 still CDN 403; candidate-4 lamps remain in cottage. Device install done; unlock to launch. Placement screenshot still pending to close open art-requests.

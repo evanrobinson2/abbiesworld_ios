@@ -177,6 +177,8 @@ struct World2SceneEditorPanel: View {
                 placesStrip
             case .tunnels:
                 tunnelsStrip
+            case .waterfall:
+                waterfallStrip
             }
 
             autoDecorStrip
@@ -349,6 +351,32 @@ struct World2SceneEditorPanel: View {
                 .accessibilityIdentifier("world2.sceneEditor.openPlanningDept")
             }
         }
+    }
+
+    private var waterfallStrip: some View {
+        let strokeStore = World2WaterfallStrokeStore.shared
+        let count = strokeStore.stroke(for: sceneID).points.count
+        return HStack(spacing: 8) {
+            Image(systemName: "drop.fill")
+                .font(.system(size: 12, weight: .bold))
+                .foregroundStyle(.cyan)
+            Text(count < 2 ? "Tap the fall to place points" : "\(count) points · drag to reshape")
+                .font(.system(size: 12, weight: .bold, design: .rounded))
+            Spacer(minLength: 0)
+            Button("Reset") {
+                strokeStore.resetToSeed(for: sceneID)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+            .accessibilityIdentifier("world2.sceneEditor.waterfall.reset")
+            Button("Clear", role: .destructive) {
+                strokeStore.clear(for: sceneID)
+            }
+            .buttonStyle(.bordered)
+            .controlSize(.small)
+            .accessibilityIdentifier("world2.sceneEditor.waterfall.clear")
+        }
+        .accessibilityIdentifier("world2.sceneEditor.waterfall.strip")
     }
 
     private var validationStrip: some View {

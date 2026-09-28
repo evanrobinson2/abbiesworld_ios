@@ -1,0 +1,33 @@
+{
+  "status": "review_only",
+  "approved": false,
+  "model": "Midjourney v7",
+  "promptFile": "friends-prompt.txt",
+  "job": "36cab923-f7ee-43fd-96f9-b3aaa4604537",
+  "assets": [
+    {
+      "file": "friends-first-0.jpg",
+      "index": 0,
+      "sha256": "c67e07b0ddbf4f1223328bec973bb5dd23a6507eb24c1fd7dba592dd40bf24cf",
+      "url": "https://cdn.midjourney.com/36cab923-f7ee-43fd-96f9-b3aaa4604537/0_0.jpeg"
+    },
+    {
+      "file": "friends-first-1.jpg",
+      "index": 1,
+      "sha256": "f975267f3b7aa71b96ec5b3dc74e4b0474c6fb96869275e905b325e730541eb8",
+      "url": "https://cdn.midjourney.com/36cab923-f7ee-43fd-96f9-b3aaa4604537/0_1.jpeg"
+    },
+    {
+      "file": "friends-first-2.jpg",
+      "index": 2,
+      "sha256": "618f575f5dfc20e1b23bb6b4ccf86f9833c574180ff782ef3bcf7ef88d7e233e",
+      "url": "https://cdn.midjourney.com/36cab923-f7ee-43fd-96f9-b3aaa4604537/0_2.jpeg"
+    },
+    {
+      "file": "friends-first-3.jpg",
+      "index": 3,
+      "sha256": "3fd22eff0b599c6fe226a820428ace9464bfe46b362e00f7962dcb92aa35a325",
+      "url": "https://cdn.midjourney.com/36cab923-f7ee-43fd-96f9-b3aaa4604537/0_3.jpeg"
+    }
+  ]
+}

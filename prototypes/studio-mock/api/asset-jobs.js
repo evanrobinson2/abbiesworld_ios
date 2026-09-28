@@ -8,6 +8,7 @@ import {
   createJob,
   getJob,
   completeJob,
+  generateJob,
   listJobs,
   createProject,
   getProject,
@@ -56,6 +57,17 @@ export async function POST(request) {
   if (body?.complete && body?.id) {
     const done = await completeJob(body.id, { stagingUrl: body.stagingUrl });
     if (done.error === "job_missing" || done.error === "staging_url_required") {
+      return Response.json(done, { status: 400 });
+    }
+    if (done.status === "failed") return Response.json(done, { status: 502 });
+    return Response.json(done);
+  }
+
+  if ((body?.generate === true || body?.op === "generate") && body?.id) {
+    const done = await generateJob(body.id, {
+      openaiKey: process.env.OPENAI_API_KEY || "",
+    });
+    if (done.error === "job_missing" || done.error === "openai_missing") {
       return Response.json(done, { status: 400 });
     }
     if (done.status === "failed") return Response.json(done, { status: 502 });

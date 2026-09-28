@@ -1,0 +1,1243 @@
+{
+  "assets": [
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 75144
+      },
+      "assetCatalogName": "acd_lamps_01_sleepy_dragon_globe_lamp",
+      "category": "lighting",
+      "colors": [
+        "blue",
+        "green",
+        "amber",
+        "yellow",
+        "brown"
+      ],
+      "componentIndex": 1,
+      "description": "A drowsy blue-green dragon sits curled around a large glowing amber globe, gripping it with its forelegs and feet.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "front three-quarter view, facing right",
+      "id": "acd-lamps-01-sleepy-dragon-globe-lamp",
+      "inventoryNotes": "One complete lamp assembly; light is contained within the amber globe.",
+      "label": "sleepy dragon globe lamp",
+      "materials": [
+        "painted ceramic",
+        "glass"
+      ],
+      "motifs": [
+        "sleepy dragon",
+        "glowing globe"
+      ],
+      "packId": "pack.abbieCottage.lamps",
+      "pixelSize": {
+        "height": 404,
+        "width": 308
+      },
+      "placementHints": [
+        "table"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-lamps-01-sleepy-dragon-globe-lamp.png",
+      "pngSha256": "2bee6502bb2a995369fa2b4c39ee9a046fad97546810c88f2ce04fc9ea1394b2",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        45,
+        87,
+        353,
+        491
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/lamps-approved.jpeg",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "subcategory": "character nightlight"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 52556
+      },
+      "assetCatalogName": "acd_lamps_02_bluebell_floor_lamp",
+      "category": "lighting",
+      "colors": [
+        "green",
+        "blue",
+        "gold",
+        "orange"
+      ],
+      "componentIndex": 2,
+      "description": "A tall arched green stem rises from a broad leafy base and supports two drooping bluebell-shaped lights.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "front three-quarter view",
+      "id": "acd-lamps-02-bluebell-floor-lamp",
+      "inventoryNotes": "The two flower shades and leafy stand form one complete lamp assembly.",
+      "label": "bluebell floor lamp",
+      "materials": [
+        "painted metal",
+        "painted ceramic"
+      ],
+      "motifs": [
+        "bluebells",
+        "leaves",
+        "flower stem"
+      ],
+      "packId": "pack.abbieCottage.lamps",
+      "pixelSize": {
+        "height": 598,
+        "width": 281
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-lamps-02-bluebell-floor-lamp.png",
+      "pngSha256": "9c18346f6219cd4cca6e20f6137c14c38674be7c67f37447669dd5986613c995",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        390,
+        16,
+        671,
+        614
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/lamps-approved.jpeg",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "subcategory": "floor lamp"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 75343
+      },
+      "assetCatalogName": "acd_lamps_03_mushroom_cottage_lamp",
+      "category": "lighting",
+      "colors": [
+        "red",
+        "cream",
+        "amber",
+        "green",
+        "blue"
+      ],
+      "componentIndex": 3,
+      "description": "A whimsical white cottage with a broad red mushroom cap roof, multiple amber-lit windows, a rounded door, grass at the base, and a small chimney.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "front three-quarter view, facing left",
+      "id": "acd-lamps-03-mushroom-cottage-lamp",
+      "inventoryNotes": "One complete cottage-shaped bedside lamp with illumination visible through the windows.",
+      "label": "mushroom cottage lamp",
+      "materials": [
+        "painted ceramic",
+        "glass"
+      ],
+      "motifs": [
+        "mushroom",
+        "cottage",
+        "glowing windows",
+        "grass"
+      ],
+      "packId": "pack.abbieCottage.lamps",
+      "pixelSize": {
+        "height": 413,
+        "width": 290
+      },
+      "placementHints": [
+        "table"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-lamps-03-mushroom-cottage-lamp.png",
+      "pngSha256": "8b613124388e31d591e98e3945a3d6882b0d7cc3cdccf7a22676f072d1d6b1c6",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        696,
+        64,
+        986,
+        477
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/lamps-approved.jpeg",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "subcategory": "cottage nightlight"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 55006
+      },
+      "assetCatalogName": "acd_lamps_04_crescent_moon_lantern_lamp",
+      "category": "lighting",
+      "colors": [
+        "cream",
+        "pale yellow",
+        "amber",
+        "brown"
+      ],
+      "componentIndex": 4,
+      "description": "A large pale crescent moon on a small branching base supports a suspended ornate amber lantern, with a tiny dangling star near the upper tip.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "front three-quarter view, crescent opening right",
+      "id": "acd-lamps-04-crescent-moon-lantern-lamp",
+      "inventoryNotes": "The crescent support, lantern, and dangling star are one complete lamp assembly.",
+      "label": "crescent moon lantern lamp",
+      "materials": [
+        "painted wood",
+        "painted metal",
+        "glass"
+      ],
+      "motifs": [
+        "crescent moon",
+        "hanging lantern",
+        "star"
+      ],
+      "packId": "pack.abbieCottage.lamps",
+      "pixelSize": {
+        "height": 431,
+        "width": 314
+      },
+      "placementHints": [
+        "table"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-lamps-04-crescent-moon-lantern-lamp.png",
+      "pngSha256": "d866124c549063b9cfc42a9abdeb4d5a24b47c2d1e92c4346b043e61b0cefab7",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        40,
+        545,
+        354,
+        976
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/lamps-approved.jpeg",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "subcategory": "sculptural table lamp"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 81293
+      },
+      "assetCatalogName": "acd_lamps_05_strawberry_frog_nightlight",
+      "category": "lighting",
+      "colors": [
+        "red",
+        "green",
+        "yellow",
+        "orange",
+        "cream"
+      ],
+      "componentIndex": 5,
+      "description": "A round red strawberry-shaped frog with green limbs, leafy crown, raised circular eyes, seed-like spots, and a luminous oval belly.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "front view",
+      "id": "acd-lamps-05-strawberry-frog-nightlight",
+      "inventoryNotes": "One complete rounded nightlight; light is contained within the belly.",
+      "label": "strawberry frog nightlight",
+      "materials": [
+        "painted ceramic",
+        "glass"
+      ],
+      "motifs": [
+        "frog",
+        "strawberry",
+        "leaves",
+        "seeds",
+        "glowing belly"
+      ],
+      "packId": "pack.abbieCottage.lamps",
+      "pixelSize": {
+        "height": 488,
+        "width": 297
+      },
+      "placementHints": [
+        "table"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-lamps-05-strawberry-frog-nightlight.png",
+      "pngSha256": "ccf2b0a8ee5527ae28578d4b65a3d27d4c8638bec35ebb0eb6d3b75bcf8a461b",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        698,
+        511,
+        995,
+        999
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/lamps-approved.jpeg",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "subcategory": "character nightlight"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 47321
+      },
+      "assetCatalogName": "acd_lamps_06_storybook_patchwork_lamp",
+      "category": "lighting",
+      "colors": [
+        "pink",
+        "yellow",
+        "green",
+        "blue",
+        "cream",
+        "brown",
+        "red"
+      ],
+      "componentIndex": 6,
+      "description": "A small table lamp with a scalloped multicolor patchwork fabric shade and rounded pale base, resting atop a tied stack of three storybooks.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "front three-quarter view, facing right",
+      "id": "acd-lamps-06-storybook-patchwork-lamp",
+      "inventoryNotes": "The lamp and supporting book stack are presented as one complete assembled asset.",
+      "label": "storybook patchwork lamp",
+      "materials": [
+        "fabric",
+        "painted ceramic",
+        "paper",
+        "cord"
+      ],
+      "motifs": [
+        "patchwork",
+        "scalloped shade",
+        "stacked storybooks",
+        "stitching"
+      ],
+      "packId": "pack.abbieCottage.lamps",
+      "pixelSize": {
+        "height": 257,
+        "width": 269
+      },
+      "placementHints": [
+        "table"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-lamps-06-storybook-patchwork-lamp.png",
+      "pngSha256": "0364391989d176aaac6d451e3a7de59e58f9efe6c127bf857628bed98e06d211",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        392,
+        722,
+        661,
+        979
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/lamps-approved.jpeg",
+      "sourceSha256": "f8e754f6a32171d6cec757549b1929082ab044ec0d5c388ee5c364b5113361ca",
+      "subcategory": "table lamp"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 56835
+      },
+      "assetCatalogName": "acd_rugscushions_01_rainbow_cloud_rug",
+      "category": "rugs",
+      "colors": [
+        "pink",
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue",
+        "pale blue"
+      ],
+      "componentIndex": 1,
+      "description": "Tufted arch-shaped rainbow rug with six colorful braided bands and a fluffy pale-blue cloud at each end.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "directly overhead",
+      "id": "acd-rugscushions-01-rainbow-cloud-rug",
+      "inventoryNotes": "The rainbow and its two cloud ends form one complete rug assembly.",
+      "label": "Rainbow cloud rug",
+      "materials": [
+        "wool",
+        "tufted fabric"
+      ],
+      "motifs": [
+        "rainbow",
+        "clouds"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 290,
+        "width": 336
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-01-rainbow-cloud-rug.png",
+      "pngSha256": "7ff0245054d6d1e46b7032ad97431e6002984bccf0947db9511f869b187c01d3",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        10,
+        39,
+        346,
+        329
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "tufted novelty rug"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 61840
+      },
+      "assetCatalogName": "acd_rugscushions_02_lily_pad_flower_rug",
+      "category": "rugs",
+      "colors": [
+        "green",
+        "pink",
+        "yellow",
+        "orange"
+      ],
+      "componentIndex": 2,
+      "description": "Round green lily pad rug with a wedge-shaped notch and a raised woven pink-and-yellow water-lily flower at its center.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "directly overhead",
+      "id": "acd-rugscushions-02-lily-pad-flower-rug",
+      "inventoryNotes": "The central flower is attached as part of the single rug design.",
+      "label": "Lily pad flower rug",
+      "materials": [
+        "woven fabric",
+        "wool"
+      ],
+      "motifs": [
+        "lily pad",
+        "water lily",
+        "flower"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 276,
+        "width": 320
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-02-lily-pad-flower-rug.png",
+      "pngSha256": "5cdf979a2406e83dfb2bc7d972636a5d12d2a55eb028fffc75e1d5df69bd8a9c",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        345,
+        38,
+        665,
+        314
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "botanical novelty rug"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 60034
+      },
+      "assetCatalogName": "acd_rugscushions_03_sleepy_orange_cat_rug",
+      "category": "rugs",
+      "colors": [
+        "orange",
+        "dark green",
+        "red"
+      ],
+      "componentIndex": 3,
+      "description": "Sprawling orange sleeping cat with closed eyes and curled tail resting across an irregular dark-green rug base.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "directly overhead",
+      "id": "acd-rugscushions-03-sleepy-orange-cat-rug",
+      "inventoryNotes": "The cat and green base read as one complete rug assembly.",
+      "label": "Sleepy orange cat rug",
+      "materials": [
+        "wool",
+        "tufted fabric"
+      ],
+      "motifs": [
+        "sleeping cat",
+        "curled tail"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 285,
+        "width": 357
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-03-sleepy-orange-cat-rug.png",
+      "pngSha256": "b08a5edabdfba8c6b88e83559655c1510ee399507bcda1d42aa674de285b3455",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        662,
+        26,
+        1019,
+        311
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "animal novelty rug"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 71975
+      },
+      "assetCatalogName": "acd_rugscushions_04_coral_flower_floor_cushion",
+      "category": "seating",
+      "colors": [
+        "coral",
+        "orange",
+        "yellow"
+      ],
+      "componentIndex": 4,
+      "description": "Oversized squashy flower cushion with layered coral-orange petals, stitched contours, and a raised round yellow center.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "slightly from above",
+      "id": "acd-rugscushions-04-coral-flower-floor-cushion",
+      "inventoryNotes": "One complete flower-shaped cushion.",
+      "label": "Coral flower floor cushion",
+      "materials": [
+        "velvet",
+        "stuffed fabric"
+      ],
+      "motifs": [
+        "flower",
+        "petals"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 325,
+        "width": 335
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-04-coral-flower-floor-cushion.png",
+      "pngSha256": "27c9812e9361ceced252f4ef8d6562a7c4a0a0a2a1de14c1ea55f59b0898182a",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        8,
+        356,
+        343,
+        681
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "flower floor cushion"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 74812
+      },
+      "assetCatalogName": "acd_rugscushions_05_yellow_flower_floor_cushion",
+      "category": "seating",
+      "colors": [
+        "golden yellow",
+        "orange"
+      ],
+      "componentIndex": 5,
+      "description": "Large golden-yellow flower cushion with eight broad ribbed petals and a textured raised circular center.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "slightly from above",
+      "id": "acd-rugscushions-05-yellow-flower-floor-cushion",
+      "inventoryNotes": "A visually distinct second flower cushion.",
+      "label": "Yellow flower floor cushion",
+      "materials": [
+        "corduroy",
+        "stuffed fabric"
+      ],
+      "motifs": [
+        "flower",
+        "petals"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 340,
+        "width": 347
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-05-yellow-flower-floor-cushion.png",
+      "pngSha256": "a66300b177016ab838eef945d7a9a5c9cf19a04f7ba25b6d26c820991087a336",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        338,
+        351,
+        685,
+        691
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "flower floor cushion"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 36836
+      },
+      "assetCatalogName": "acd_rugscushions_06_pink_shell_cushion",
+      "category": "seating",
+      "colors": [
+        "pink",
+        "coral",
+        "orange"
+      ],
+      "componentIndex": 6,
+      "description": "Low pink cushion with a ring of rounded scalloped lobes supporting a domed orange-pink ribbed shell-like center.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "slightly from above",
+      "id": "acd-rugscushions-06-pink-shell-cushion",
+      "inventoryNotes": "One complete assembled cushion with a raised central dome.",
+      "label": "Pink shell cushion",
+      "materials": [
+        "corduroy",
+        "velvet",
+        "stuffed fabric"
+      ],
+      "motifs": [
+        "shell",
+        "scallops"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 200,
+        "width": 326
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-06-pink-shell-cushion.png",
+      "pngSha256": "5b74d3147a88d8625ed80c7a74e5f83c67f7b66060a7e73be52c294680c7f0a9",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        681,
+        416,
+        1007,
+        616
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "shell floor cushion"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 41988
+      },
+      "assetCatalogName": "acd_rugscushions_07_green_turtle_cushion",
+      "category": "seating",
+      "colors": [
+        "light green",
+        "dark green",
+        "yellow"
+      ],
+      "componentIndex": 7,
+      "description": "Turtle-shaped green floor cushion with a segmented dark-green shell, extended head, four flippers, and a small tail.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "slightly from above, head toward the left",
+      "id": "acd-rugscushions-07-green-turtle-cushion",
+      "inventoryNotes": "The body, shell, limbs, and head form one complete turtle cushion.",
+      "label": "Green turtle cushion",
+      "materials": [
+        "velvet",
+        "stitched fabric",
+        "stuffing"
+      ],
+      "motifs": [
+        "turtle",
+        "segmented shell"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 253,
+        "width": 334
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-07-green-turtle-cushion.png",
+      "pngSha256": "af70d3d9c0a11d83ad955e29c6eb51b7a5d1b1fbaa28f8fbddc35f190f39533f",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        22,
+        726,
+        356,
+        979
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "animal floor cushion"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 52107
+      },
+      "assetCatalogName": "acd_rugscushions_08_round_patchwork_cushion",
+      "category": "seating",
+      "colors": [
+        "dark green",
+        "lime green",
+        "mint green",
+        "yellow"
+      ],
+      "componentIndex": 8,
+      "description": "Plump round floor cushion assembled from irregular stitched patchwork squares in several shades of green with muted yellow accents.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "slightly from above",
+      "id": "acd-rugscushions-08-round-patchwork-cushion",
+      "inventoryNotes": "One complete circular cushion.",
+      "label": "Round patchwork cushion",
+      "materials": [
+        "patchwork fabric",
+        "stitched textile",
+        "stuffing"
+      ],
+      "motifs": [
+        "patchwork",
+        "checks"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 270,
+        "width": 276
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-08-round-patchwork-cushion.png",
+      "pngSha256": "5cf549aa671a1c97b348f32b7d7fa8b30f0b9e219426dc868f56a8e2b9d59768",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        373,
+        715,
+        649,
+        985
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "patchwork floor cushion"
+    },
+    {
+      "alpha": {
+        "borderTransparentRatio": 1.0,
+        "contract": "required",
+        "visiblePixels": 66654
+      },
+      "assetCatalogName": "acd_rugscushions_09_crescent_moon_and_stars_cushion",
+      "category": "seating",
+      "colors": [
+        "blue",
+        "golden yellow",
+        "orange"
+      ],
+      "componentIndex": 9,
+      "description": "Round blue cushion decorated with a large raised golden crescent moon and many small embroidered yellow stars.",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ],
+      "facing": "slightly from above",
+      "id": "acd-rugscushions-09-crescent-moon-and-stars-cushion",
+      "inventoryNotes": "One complete round celestial cushion.",
+      "label": "Crescent moon and stars cushion",
+      "materials": [
+        "corduroy",
+        "embroidered fabric",
+        "stuffing"
+      ],
+      "motifs": [
+        "crescent moon",
+        "stars",
+        "night sky"
+      ],
+      "packId": "pack.abbieCottage.rugscushions",
+      "pixelSize": {
+        "height": 298,
+        "width": 314
+      },
+      "placementHints": [
+        "floor"
+      ],
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-rugscushions-09-crescent-moon-and-stars-cushion.png",
+      "pngSha256": "12647b0e8e2c2854f1640bbffd6b167f97704e739e9e3245820d38a54a370b1d",
+      "role": "placeable-room-prop",
+      "sourceBounds": [
+        681,
+        700,
+        995,
+        998
+      ],
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/rugs-cushions-approved.jpeg",
+      "sourceSha256": "1c9c485ba49f8ad8e4141206b503dc93a8661ab2d4d6eadfc0e52bf104c7fa06",
+      "subcategory": "celestial floor cushion"
+    },
+    {
+      "id": "acd-toys-01-miniature-puppet-theater",
+      "assetCatalogName": "acd_toys_01_miniature_puppet_theater",
+      "packId": "pack.abbieCottage.toys",
+      "componentIndex": 1,
+      "label": "Miniature puppet theater",
+      "category": "play-stages",
+      "subcategory": "puppet theater",
+      "description": "Freestanding wooden puppet theater with an ornate scalloped frame, small stage ledge, and layered multicolored fabric curtains.",
+      "materials": [
+        "painted wood",
+        "stitched fabric"
+      ],
+      "colors": [
+        "golden brown",
+        "yellow",
+        "red",
+        "blue",
+        "green",
+        "orange"
+      ],
+      "motifs": [
+        "scalloped trim",
+        "theater curtains",
+        "storybook carving"
+      ],
+      "placementHints": [
+        "floor",
+        "table"
+      ],
+      "facing": "front three-quarter view, slightly facing right",
+      "inventoryNotes": "One complete theater assembly; the curtains and frame are integral components.",
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-toys-01-miniature-puppet-theater.png",
+      "pngSha256": "f174ea4292af3edacd83bfd069c19d6f034977100e2d4845eec5e709ee8ff1ce",
+      "sourceBounds": [
+        20,
+        36,
+        399,
+        426
+      ],
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/toys-approved.jpeg",
+      "pixelSize": {
+        "width": 403,
+        "height": 414
+      },
+      "alpha": {
+        "contract": "required",
+        "borderTransparentRatio": 1.0,
+        "visiblePixels": 92921
+      },
+      "role": "placeable-room-prop",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ]
+    },
+    {
+      "id": "acd-toys-02-closed-walnut-wardrobe",
+      "assetCatalogName": "acd_toys_02_closed_walnut_wardrobe",
+      "packId": "pack.abbieCottage.toys",
+      "componentIndex": 2,
+      "label": "Closed walnut wardrobe",
+      "category": "storage",
+      "subcategory": "miniature wardrobe",
+      "description": "Walnut-shaped wooden cabinet with a pointed shell silhouette, two closed upper doors, and several closed drawers below.",
+      "materials": [
+        "carved wood"
+      ],
+      "colors": [
+        "dark brown",
+        "warm brown"
+      ],
+      "motifs": [
+        "walnut shell",
+        "wood grain",
+        "tiny drawers"
+      ],
+      "placementHints": [
+        "floor",
+        "table"
+      ],
+      "facing": "front three-quarter view, slightly facing left",
+      "inventoryNotes": "Closed storage piece; no furnished rooms or open dollhouse interior are visible.",
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-toys-02-closed-walnut-wardrobe.png",
+      "pngSha256": "c9db238dc81cec1f5145330a89e8beaa92841d118c26a220c9d10edab208be87",
+      "sourceBounds": [
+        418,
+        62,
+        666,
+        393
+      ],
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/toys-approved.jpeg",
+      "pixelSize": {
+        "width": 272,
+        "height": 355
+      },
+      "alpha": {
+        "contract": "required",
+        "borderTransparentRatio": 1.0,
+        "visiblePixels": 50896
+      },
+      "role": "placeable-room-prop",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ]
+    },
+    {
+      "id": "acd-toys-03-rocking-unicorn",
+      "assetCatalogName": "acd_toys_03_rocking_unicorn",
+      "packId": "pack.abbieCottage.toys",
+      "componentIndex": 3,
+      "label": "Rocking unicorn",
+      "category": "seating",
+      "subcategory": "rocking toy",
+      "description": "Cheerful wooden unicorn mounted on a curved turquoise rocker, with a golden horn and a long rainbow-colored yarn-like mane and tail.",
+      "materials": [
+        "painted wood",
+        "yarn"
+      ],
+      "colors": [
+        "cream",
+        "turquoise",
+        "red",
+        "orange",
+        "yellow",
+        "green",
+        "blue"
+      ],
+      "motifs": [
+        "unicorn",
+        "rainbow mane",
+        "curved rocker"
+      ],
+      "placementHints": [
+        "floor"
+      ],
+      "facing": "right-facing three-quarter view",
+      "inventoryNotes": "Counted as one complete rocking-toy assembly.",
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-toys-03-rocking-unicorn.png",
+      "pngSha256": "89c1a3568d1089027de0d21039b50f27da8eac29cfd2e4e1660499843332d6e0",
+      "sourceBounds": [
+        621,
+        64,
+        1002,
+        470
+      ],
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/toys-approved.jpeg",
+      "pixelSize": {
+        "width": 405,
+        "height": 430
+      },
+      "alpha": {
+        "contract": "required",
+        "borderTransparentRatio": 1.0,
+        "visiblePixels": 60086
+      },
+      "role": "placeable-room-prop",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ]
+    },
+    {
+      "id": "acd-toys-04-woodland-animal-train",
+      "assetCatalogName": "acd_toys_04_woodland_animal_train",
+      "packId": "pack.abbieCottage.toys",
+      "componentIndex": 4,
+      "label": "Woodland animal train",
+      "category": "decor",
+      "subcategory": "toy train",
+      "description": "Handmade wooden toy train consisting of a warm orange locomotive and connected woodland-themed carriages, including a long illustrated animal car and a small animal-faced end car.",
+      "materials": [
+        "painted wood"
+      ],
+      "colors": [
+        "orange",
+        "golden brown",
+        "blue",
+        "green",
+        "red",
+        "cream"
+      ],
+      "motifs": [
+        "steam locomotive",
+        "woodland animals",
+        "elephant",
+        "animal-shaped carriage",
+        "wood grain"
+      ],
+      "placementHints": [
+        "floor",
+        "table"
+      ],
+      "facing": "left-facing side and three-quarter view",
+      "inventoryNotes": "The locomotive and connected carriages form one multi-part toy assembly and are counted as one item.",
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-toys-04-woodland-animal-train.png",
+      "pngSha256": "4d886b7063b713d31f42868d37d527294698672e5e9077d7704da80375efc470",
+      "sourceBounds": [
+        20,
+        421,
+        735,
+        658
+      ],
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/toys-approved.jpeg",
+      "pixelSize": {
+        "width": 739,
+        "height": 261
+      },
+      "alpha": {
+        "contract": "required",
+        "borderTransparentRatio": 1.0,
+        "visiblePixels": 103230
+      },
+      "role": "placeable-room-prop",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ]
+    },
+    {
+      "id": "acd-toys-05-toy-castle",
+      "assetCatalogName": "acd_toys_05_toy_castle",
+      "packId": "pack.abbieCottage.toys",
+      "componentIndex": 5,
+      "label": "Toy castle",
+      "category": "play-stages",
+      "subcategory": "toy castle",
+      "description": "Painted wooden fantasy castle with multiple rounded towers, red domed roofs, arched openings, a central doorway, and a small raised bridge between tower sections.",
+      "materials": [
+        "painted wood"
+      ],
+      "colors": [
+        "cream",
+        "tan",
+        "red",
+        "brown",
+        "gray-green"
+      ],
+      "motifs": [
+        "rounded turrets",
+        "arched doorway",
+        "bridge",
+        "storybook castle"
+      ],
+      "placementHints": [
+        "floor",
+        "table"
+      ],
+      "facing": "front three-quarter view, slightly facing right",
+      "inventoryNotes": "One complete castle assembly; the visible bridge and towers are integral parts.",
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-toys-05-toy-castle.png",
+      "pngSha256": "48146b352e7f673f71cd04110eb8e6a8bbd86a8b6647cc2c1911951988b9afe6",
+      "sourceBounds": [
+        20,
+        648,
+        564,
+        1001
+      ],
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/toys-approved.jpeg",
+      "pixelSize": {
+        "width": 568,
+        "height": 377
+      },
+      "alpha": {
+        "contract": "required",
+        "borderTransparentRatio": 1.0,
+        "visiblePixels": 123627
+      },
+      "role": "placeable-room-prop",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ]
+    },
+    {
+      "id": "acd-toys-06-open-dress-up-chest",
+      "assetCatalogName": "acd_toys_06_open_dress_up_chest",
+      "packId": "pack.abbieCottage.toys",
+      "componentIndex": 6,
+      "label": "Open dress-up chest",
+      "category": "storage",
+      "subcategory": "dress-up chest",
+      "description": "Open wooden dress-up trunk with gray-blue metal corner fittings, containing a golden crown, pale blue fairy wings, and star-tipped wands.",
+      "materials": [
+        "wood",
+        "metal",
+        "painted wood",
+        "fabric"
+      ],
+      "colors": [
+        "golden brown",
+        "gray-blue",
+        "gold",
+        "pale blue",
+        "pink",
+        "red"
+      ],
+      "motifs": [
+        "treasure chest",
+        "crown",
+        "fairy wings",
+        "stars",
+        "magic wand"
+      ],
+      "placementHints": [
+        "floor"
+      ],
+      "facing": "front three-quarter view, slightly facing left",
+      "inventoryNotes": "The chest and its contained dress-up accessories are treated as one complete toy set.",
+      "pngPath": "AssetSources/World2/CottageDecorKit/extracted/acd-toys-06-open-dress-up-chest.png",
+      "pngSha256": "615b06de799a0534f81d3d1c7a5e8a98e432bc836e5c75fb44169f7cc3afb91b",
+      "sourceBounds": [
+        655,
+        609,
+        1013,
+        995
+      ],
+      "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6",
+      "sourcePath": "AssetSources/World2/CottageDecorKit/sources/toys-approved.jpeg",
+      "pixelSize": {
+        "width": 382,
+        "height": 410
+      },
+      "alpha": {
+        "contract": "required",
+        "borderTransparentRatio": 1.0,
+        "visiblePixels": 96681
+      },
+      "role": "placeable-room-prop",
+      "eligibleCottageScenes": [
+        "poi.abbieTreehouse.interior",
+        "poi.abbieTreehouse.interior.cozyNook",
+        "poi.abbieTreehouse.interior.rooftopLookout",
+        "poi.abbieTreehouse.interior.fitnessCenter",
+        "poi.abbieTreehouse.interior.bedroom",
+        "poi.abbieTreehouse.interior.playroom"
+      ]
+    }
+  ]
+}

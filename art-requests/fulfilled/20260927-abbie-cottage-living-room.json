@@ -1,0 +1,31 @@
+{
+  "id": "20260927-abbie-cottage-living-room",
+  "semanticId": "poi.abbieTreehouse.interior",
+  "status": "fulfilled",
+  "priority": "high",
+  "type": "plate",
+  "brief": "Approved Abbie cottage living-room upscale; preserve central empty table for the separate Marble Voyage gateway book.",
+  "aspect": "4:3",
+  "styleNotes": "Approved pink ancient-tree interior, child-scaled furniture, hand-drawn painted cel shading.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/living-room-approved.jpeg",
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/provenance.json",
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/HANDOFF.md",
+    "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_1005_poi_abbieTreehouse_interior.imageset",
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/rollback"
+  ],
+  "promptSeeds": [],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T17:12:41.967616+00:00",
+  "productionIntent": "runtime_bind",
+  "fulfillment": {
+    "completedAt": "2026-09-27T17:12:41.967616+00:00",
+    "completedBy": "Codex Art Director",
+    "assetSourcePath": "AssetSources/World2/abbie-cottage-rooms-2026-09-27/living-room-approved.jpeg",
+    "sourceHashSha256": "ec787967fa82411750245fe4fa817d345baa26bacbbeb7c8327f3e8b13f942c0",
+    "notes": "Exact user-approved upscale delivered. Builder bound to world2_1005_poi_abbieTreehouse_interior (2464) and Cozy Nook; old plates under AssetSources/World2/abbie-cottage-rooms-2026-09-27/rollback. Bedroom/playroom pending approval. Decoration packs must wait.",
+    "boundAt": "2026-09-27T17:20:00+00:00",
+    "runtimeCatalog": "world2_1005_poi_abbieTreehouse_interior"
+  }
+}

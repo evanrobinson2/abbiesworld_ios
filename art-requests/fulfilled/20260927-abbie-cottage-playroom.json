@@ -1,0 +1,27 @@
+{
+  "id": "20260927-abbie-cottage-playroom",
+  "semanticId": "poi.abbieTreehouse.interior.playroom",
+  "status": "fulfilled",
+  "priority": "normal",
+  "type": "plate",
+  "brief": "Approved turquoise, tangerine and yellow woodland playroom for Abbie cottage, separate from living room.",
+  "aspect": "4:3",
+  "styleNotes": "Turquoise, tangerine, sunflower yellow and aged tree timber; exact approved upscale.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/playroom-approved.jpeg",
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/provenance.json",
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/HANDOFF.md"
+  ],
+  "promptSeeds": [],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T17:23:11.608284+00:00",
+  "productionIntent": "runtime_bind",
+  "fulfillment": {
+    "completedAt": "2026-09-27T17:23:11.608284+00:00",
+    "completedBy": "Codex Art Director",
+    "assetSourcePath": "AssetSources/World2/abbie-cottage-rooms-2026-09-27/playroom-approved.jpeg",
+    "sourceHashSha256": "b0d2b69603d5cebaa494e293e83b85f2cb6e827e8a2f35eddd115d38e755536c",
+    "notes": "Exact approved upscale delivered. Builder must add playroom room mapping/catalog and verify runtime; no runtime changes in this handoff."
+  }
+}

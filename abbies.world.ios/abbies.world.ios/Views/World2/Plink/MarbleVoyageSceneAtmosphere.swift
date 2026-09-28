@@ -171,6 +171,8 @@ struct MarbleVoyageSceneAtmosphere: View {
     var seed: UInt64 = 42
     /// Briefly boosts leaf opacity after a mood switch (scene change “whoosh”).
     var transitionBoost: Double = 0
+    /// When false, only the vector leaves draw (home map — no shafts/motes wash).
+    var showsShaftsAndMotes: Bool = true
 
     private struct Leaf: Identifiable {
         let id: Int
@@ -203,7 +205,8 @@ struct MarbleVoyageSceneAtmosphere: View {
         reduceMotion: Bool,
         intensity: Double = 1,
         seed: UInt64 = 42,
-        transitionBoost: Double = 0
+        transitionBoost: Double = 0,
+        showsShaftsAndMotes: Bool = true
     ) {
         self.mood = mood
         self.parallax = parallax
@@ -211,6 +214,7 @@ struct MarbleVoyageSceneAtmosphere: View {
         self.intensity = intensity
         self.seed = seed
         self.transitionBoost = transitionBoost
+        self.showsShaftsAndMotes = showsShaftsAndMotes
         var rng = SeededGenerator(seed: seed)
         leaves = (0..<30).map { i in
             Leaf(
@@ -244,8 +248,10 @@ struct MarbleVoyageSceneAtmosphere: View {
             Canvas { context, size in
                 let boost = 1.0 + transitionBoost * 0.55
                 let gain = intensity * boost * (reduceMotion ? 0.45 : 1.0)
-                drawLightShafts(context: &context, size: size, t: t, gain: gain)
-                drawMotes(context: &context, size: size, t: t, gain: gain)
+                if showsShaftsAndMotes {
+                    drawLightShafts(context: &context, size: size, t: t, gain: gain)
+                    drawMotes(context: &context, size: size, t: t, gain: gain)
+                }
                 drawLeaves(context: &context, size: size, t: t, gain: gain)
             }
         }
