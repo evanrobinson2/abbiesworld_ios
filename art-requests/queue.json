@@ -1,0 +1,237 @@
+{
+  "updatedAt": "2026-09-27T11:40:30Z",
+  "sourceOfTruth": "Individual JSON files under art-requests/{open,in_review,fulfilled,wont_fix}/",
+  "artDirectorGuide": "art-requests/ART_DIRECTOR_AGENT.md",
+  "open": [
+    {
+      "id": "20260927-lizard-henchman-idle",
+      "semanticId": "token.plink.gang.lizard.idle",
+      "priority": "normal",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-lizard-henchman-idle.json"
+    },
+    {
+      "id": "20260926-endless-progress-chrome",
+      "semanticId": "ui.marbleVoyage.endless.progress",
+      "priority": "optional",
+      "type": "ui",
+      "path": "art-requests/open/20260926-endless-progress-chrome.json"
+    }
+  ],
+  "inReview": [
+    {
+      "id": "20260926-climb-sky-dock-tile",
+      "semanticId": "token.marbleVoyage.climb.skyDock",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/in_review/20260926-climb-sky-dock-tile.json"
+    },
+    {
+      "id": "20260926-event-mystery-plate",
+      "semanticId": "plate.marbleVoyage.event.mystery",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/in_review/20260926-event-mystery-plate.json"
+    },
+    {
+      "id": "20260926-event-shrine-plate",
+      "semanticId": "plate.marbleVoyage.event.shrine",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/in_review/20260926-event-shrine-plate.json"
+    },
+    {
+      "id": "20260926-event-treasure-plate",
+      "semanticId": "plate.marbleVoyage.event.treasure",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/in_review/20260926-event-treasure-plate.json"
+    },
+    {
+      "id": "20260926-power-icon-empty-slot",
+      "semanticId": "ui.plink.power.icon.emptySlot",
+      "priority": "normal",
+      "type": "ui_icon",
+      "path": "art-requests/in_review/20260926-power-icon-empty-slot.json"
+    },
+    {
+      "id": "20260926-power-icon-lucky",
+      "semanticId": "ui.plink.power.icon.lucky",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/in_review/20260926-power-icon-lucky.json"
+    },
+    {
+      "id": "20260926-power-icon-portal",
+      "semanticId": "ui.plink.power.icon.portal",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/in_review/20260926-power-icon-portal.json"
+    }
+  ],
+  "fulfilled": [
+    {
+      "id": "20260926-bell-market-shop-interior",
+      "semanticId": "plate.marbleVoyage.shop.bellMarket.interior",
+      "priority": "blocker",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260926-bell-market-shop-interior.json"
+    },
+    {
+      "id": "20260926-armadillo-blocker-idle",
+      "semanticId": "token.plink.gang.armadilloBlocker.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/fulfilled/20260926-armadillo-blocker-idle.json"
+    },
+    {
+      "id": "20260926-bat-divekicker-idle",
+      "semanticId": "token.plink.gang.batDivekicker.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/fulfilled/20260926-bat-divekicker-idle.json"
+    },
+    {
+      "id": "20260926-crab-pincher-idle",
+      "semanticId": "token.plink.gang.crabPincher.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/fulfilled/20260926-crab-pincher-idle.json"
+    },
+    {
+      "id": "20260926-grasshopper-kickboxer-idle",
+      "semanticId": "token.plink.gang.grasshopperKickboxer.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/fulfilled/20260926-grasshopper-kickboxer-idle.json"
+    },
+    {
+      "id": "20260926-climb-mystery-tile",
+      "semanticId": "token.marbleVoyage.climb.mystery",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/fulfilled/20260926-climb-mystery-tile.json"
+    },
+    {
+      "id": "20260926-climb-shrine-tile",
+      "semanticId": "token.marbleVoyage.climb.shrine",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/fulfilled/20260926-climb-shrine-tile.json"
+    },
+    {
+      "id": "20260926-climb-treasure-tile",
+      "semanticId": "token.marbleVoyage.climb.treasure",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/fulfilled/20260926-climb-treasure-tile.json"
+    },
+    {
+      "id": "20260926-power-icon-fire",
+      "semanticId": "ui.plink.power.icon.fire",
+      "priority": "high",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-fire.json"
+    },
+    {
+      "id": "20260926-power-icon-refresh",
+      "semanticId": "ui.plink.power.icon.refresh",
+      "priority": "high",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-refresh.json"
+    },
+    {
+      "id": "20260926-power-icon-split",
+      "semanticId": "ui.plink.power.icon.split",
+      "priority": "high",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-split.json"
+    },
+    {
+      "id": "20260926-power-icon-tilt",
+      "semanticId": "ui.plink.power.icon.tilt",
+      "priority": "high",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-tilt.json"
+    },
+    {
+      "id": "20260926-abbie-regal-portrait",
+      "semanticId": "character.peglin.abbie.happy",
+      "priority": "high",
+      "type": "character_portrait",
+      "path": "art-requests/fulfilled/20260926-abbie-regal-portrait.json"
+    },
+    {
+      "id": "20260926-power-icon-bounce",
+      "semanticId": "ui.plink.power.icon.bounce",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-bounce.json"
+    },
+    {
+      "id": "20260926-power-icon-bubble",
+      "semanticId": "ui.plink.power.icon.bubble",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-bubble.json"
+    },
+    {
+      "id": "20260926-power-icon-ghost",
+      "semanticId": "ui.plink.power.icon.ghost",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-ghost.json"
+    },
+    {
+      "id": "20260926-power-icon-giant",
+      "semanticId": "ui.plink.power.icon.giant",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-giant.json"
+    },
+    {
+      "id": "20260926-power-icon-magnet",
+      "semanticId": "ui.plink.power.icon.magnet",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-magnet.json"
+    },
+    {
+      "id": "20260926-power-icon-spark",
+      "semanticId": "ui.plink.power.icon.spark",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-spark.json"
+    }
+  ],
+  "wontFix": [
+    {
+      "id": "20260926-climb-scrap-destination-tiles",
+      "semanticId": "token.marbleVoyage.climb.scrapKit",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/wont_fix/20260926-climb-scrap-destination-tiles.json"
+    },
+    {
+      "id": "20260926-climb-nonfight-token",
+      "semanticId": "token.marbleVoyage.climb.nonFight",
+      "priority": "normal",
+      "type": "decision",
+      "path": "art-requests/wont_fix/20260926-climb-nonfight-token.json"
+    },
+    {
+      "id": "20260926-shop-heal-stall-icon",
+      "semanticId": "ui.marbleVoyage.shop.healBalm",
+      "priority": "optional",
+      "type": "ui_icon",
+      "path": "art-requests/wont_fix/20260926-shop-heal-stall-icon.json"
+    },
+    {
+      "id": "20260926-fight-turbo-meter",
+      "semanticId": "ui.marbleVoyage.fight.turboMeter",
+      "priority": "optional",
+      "type": "decision",
+      "path": "art-requests/wont_fix/20260926-fight-turbo-meter.json"
+    }
+  ]
+}

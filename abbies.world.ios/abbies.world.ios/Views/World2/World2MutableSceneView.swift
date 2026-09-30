@@ -14,6 +14,12 @@ struct World2MutableSceneView: View {
     @State private var backdropURLDraft = ""
     @State private var backdropStatus: String?
     @State private var showingSceneInvent = false
+    @State private var isArrangingFurniture = false
+    @State private var selectedFurnitureID: String?
+    @State private var selectedCatalogItemID: String?
+    @State private var decorateFilter: DecorateFilterID = .mine
+    @State private var lookPan: CGSize = .zero
+    @GestureState private var livePan: CGSize = .zero
 
     private enum LayoutAddMode: String, Identifiable {
         case poiHardpoint
@@ -40,14 +46,10 @@ struct World2MutableSceneView: View {
 
     private var scenePalette: World2ScenePalette {
         let custom = backdropStore.image(forSceneID: viewModel.currentMutableSceneID)
-        let bundled: UIImage? = {
-            let asset = viewModel.currentMutableScene.backgroundAsset
-            if ["map.blankWorld", "map.blankSlate"].contains(asset) {
-                return UIImage(named: "world2_blank_world")
-            }
-            return AssetBootstrapService.shared.image(for: asset)
-        }()
-        return World2ScenePalette.detect(from: custom ?? bundled)
+        let plate = AssetBootstrapService.shared.image(
+            for: viewModel.currentMutableScene.backgroundAsset
+        )
+        return World2ScenePalette.detect(from: custom ?? plate)
     }
 
     private var visiblePlaces: [World2PlacedPlaceInstance] {
@@ -62,28 +64,79 @@ struct World2MutableSceneView: View {
     }
 
     private var visibleExits: [World2SceneExit] {
+        guard !isArrangingFurniture else { return [] }
         guard developerMode else { return viewModel.currentSceneExits }
         return developerSession.showPortals ? viewModel.currentSceneExits : []
     }
 
-    private var visibleHardpoints: [World2SceneHardpoint] {
-        let pads = viewModel.currentMutableScene.hardpoints
-        guard developerMode else {
-            return hasArmedInventoryItem ? viewModel.availableSceneHardpoints : []
-        }
-        return pads.filter { pad in
-            switch pad.purpose {
-            case .place: return developerSession.showPOIHardpoints
-            case .portal: return developerSession.showPortalHardpoints
+    private var visibleHardpoints: [World2SceneHardpoint] { [] }
+
+    private func sceneLabelPass(mapRect: CGRect, viewSize: CGSize) -> some View {
+        TimelineView(.animation(minimumInterval: 1.0 / 20.0)) { timeline in
+            var build = World2SceneLabelBuild()
+            build.addChrome(viewSize: viewSize, includeBottomTray: isArrangingFurniture)
+            for instance in visiblePlaces {
+                let anchor = CGPoint(
+                    x: mapRect.minX + mapRect.width * instance.x,
+                    y: mapRect.minY + mapRect.height * instance.y
+                )
+                build.addAnchoredLabel(
+                    id: "place.\(instance.id)",
+                    text: instance.mapLabel,
+                    anchor: anchor,
+                    footprint: CGSize(width: 170, height: 140),
+                    priority: 2
+                )
             }
+            for exit in visibleExits {
+                let anchor = CGPoint(
+                    x: mapRect.minX + mapRect.width * exit.x,
+                    y: mapRect.minY + mapRect.height * exit.y
+                )
+                build.addArtworkObstacle(
+                    CGRect(x: anchor.x - 100, y: anchor.y - 28, width: 200, height: 56)
+                )
+            }
+            for piece in viewModel.party.pieces(at: timeline.date) {
+                let depth = World2PartyPathfinding.depthScale(forY: piece.position.y)
+                let size = max(128, min(mapRect.width, mapRect.height) * 0.24) * depth
+                let anchor = CGPoint(
+                    x: mapRect.minX + mapRect.width * piece.position.x,
+                    y: mapRect.minY + mapRect.height * piece.position.y - size * 0.28
+                )
+                build.addAnchoredLabel(
+                    id: "party.\(piece.id.rawValue)",
+                    text: piece.displayName,
+                    anchor: anchor,
+                    footprint: CGSize(width: size * 0.62, height: size * 0.78),
+                    priority: 4,
+                    emphasized: piece.isWalking
+                )
+            }
+            return World2SceneLabelPass(
+                items: build.items,
+                obstacles: build.obstacles,
+                bounds: CGRect(origin: .zero, size: viewSize)
+            )
         }
+        .zIndex(22)
+        .allowsHitTesting(false)
     }
 
     var body: some View {
         GeometryReader { geometry in
             let plateSize = plateImageSize()
-            let mapRect = WorldMapView.fittedMapRect(
-                imageSize: plateSize,
+            let covered = WorldMapView.coveredMapRect(imageSize: plateSize, in: geometry.size)
+            let fitted = WorldMapView.fittedMapRect(imageSize: plateSize, in: geometry.size)
+            let overflows = covered.width > geometry.size.width + 2
+                || covered.height > geometry.size.height + 2
+            let baseRect = overflows ? covered : fitted
+            let mapRect = Self.pannedRect(
+                base: baseRect,
+                pan: CGSize(
+                    width: lookPan.width + livePan.width,
+                    height: lookPan.height + livePan.height
+                ),
                 in: geometry.size
             )
 
@@ -100,10 +153,26 @@ struct World2MutableSceneView: View {
                         SpatialTapGesture()
                             .onEnded { tap in
                                 bumpChrome()
-                                // Convert from local plate coords.
                                 handleSceneTap(
                                     at: tap.location,
                                     in: mapRect.size
+                                )
+                            }
+                    )
+                    .simultaneousGesture(
+                        DragGesture()
+                            .updating($livePan) { value, state, _ in
+                                guard overflows else { return }
+                                state = value.translation
+                            }
+                            .onEnded { value in
+                                guard overflows else { return }
+                                lookPan.width += value.translation.width
+                                lookPan.height += value.translation.height
+                                lookPan = Self.clampedPan(
+                                    lookPan,
+                                    base: baseRect,
+                                    in: geometry.size
                                 )
                             }
                     )
@@ -124,10 +193,15 @@ struct World2MutableSceneView: View {
                 }
 
                 ForEach(visiblePlaces) { instance in
-                    World2MutableScenePlaceMarker(instance: instance) {
-                        bumpChrome()
-                        viewModel.enterPlacedPlace(instance.id)
-                    }
+                    World2MutableScenePlaceMarker(
+                        instance: instance,
+                        onEnter: {
+                            bumpChrome()
+                            viewModel.enterPlacedPlace(instance.id)
+                        },
+                        showsTitle: false,
+                        showsNewBadge: World2WorldSync.shared.showsNewBadge(for: instance.id)
+                    )
                     .position(
                         x: mapRect.minX + mapRect.width * instance.x,
                         y: mapRect.minY + mapRect.height * instance.y
@@ -147,25 +221,25 @@ struct World2MutableSceneView: View {
                     .zIndex(12)
                 }
 
-                World2PartyLayer(
-                    party: viewModel.party,
-                    mapRect: mapRect
+                World2SceneDecorateLayer(
+                    surfaceKey: World2DecorateSurface.key(forScene: viewModel.currentMutableSceneID),
+                    mapRect: mapRect,
+                    isArranging: isArrangingFurniture,
+                    selectedFurnitureID: $selectedFurnitureID,
+                    selectedCatalogItemID: $selectedCatalogItemID
                 )
-                .zIndex(18)
+                .zIndex(16)
 
-                if shouldShowHardpoints {
-                    ForEach(visibleHardpoints) { hardpoint in
-                        World2PlaceDropTarget(hardpoint: hardpoint) {
-                            bumpChrome()
-                            placeSelectedItem(on: hardpoint)
-                        }
-                        .position(
-                            x: mapRect.minX + mapRect.width * hardpoint.x,
-                            y: mapRect.minY + mapRect.height * hardpoint.y
-                        )
-                        .zIndex(30)
-                    }
+                if World2WorldSync.shared.presentsParty {
+                    World2PartyLayer(
+                        party: viewModel.party,
+                        mapRect: mapRect,
+                        showsNames: false
+                    )
+                    .zIndex(18)
                 }
+
+                sceneLabelPass(mapRect: mapRect, viewSize: geometry.size)
 
                 // Ephemeral chrome — fades after idle so the scene can breathe.
                 VStack(spacing: 8) {
@@ -199,6 +273,36 @@ struct World2MutableSceneView: View {
                 .animation(.easeOut(duration: 0.2), value: developerSession.layoutDiagMode)
                 .zIndex(50)
             }
+            .overlay(alignment: .bottom) {
+                if World2WorldSync.shared.presentsParty, !isArrangingFurniture {
+                    World2DualStickControls(party: viewModel.party)
+                }
+            }
+            .overlay(alignment: .bottom) {
+                if isArrangingFurniture {
+                    World2DecorateTray(
+                        playerName: viewModel.currentMutableScene.name,
+                        selectedCatalogID: selectedCatalogItemID,
+                        selectedInventoryID: selectedFurnitureID,
+                        filter: decorateFilter,
+                        onFilterChange: { decorateFilter = $0 },
+                        onSelectCatalog: { item in
+                            selectedCatalogItemID = item.id
+                            selectedFurnitureID = nil
+                        },
+                        onSelectInventory: { id in
+                            selectedFurnitureID = id
+                            selectedCatalogItemID = nil
+                        },
+                        onDone: {
+                            isArrangingFurniture = false
+                            selectedFurnitureID = nil
+                            selectedCatalogItemID = nil
+                        }
+                    )
+                    .zIndex(90)
+                }
+            }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }
         .ignoresSafeArea()
@@ -227,9 +331,16 @@ struct World2MutableSceneView: View {
             World2SceneInventDecorationsView(
                 scene: mutable,
                 plateImage: plate,
+                onCarved: { result in
+                    viewModel.notifySceneInventReady(result)
+                },
                 onOpenDecorate: {
                     showingSceneInvent = false
-                    viewModel.openCurrentPlayerTreehouse(startDecorating: true)
+                    beginDecoratingThisScene()
+                },
+                onTravel: { result in
+                    showingSceneInvent = false
+                    viewModel.reopenInventResult(result)
                 },
                 onClose: { showingSceneInvent = false }
             )
@@ -240,10 +351,20 @@ struct World2MutableSceneView: View {
             if viewModel.party.sceneVisitID == 0 {
                 viewModel.party.enterScene(.defaultSpawn)
             }
+            if viewModel.consumeStartSceneDecoratingFlag() {
+                beginDecoratingThisScene()
+            }
+        }
+        .onChange(of: viewModel.sceneDecorateTick) { _, _ in
+            beginDecoratingThisScene()
+        }
+        .onChange(of: viewModel.sandboxInventTick) { _, _ in
+            showingSceneInvent = true
         }
         .onChange(of: viewModel.currentMutableSceneID) {
             viewModel.selectedPlaceInventoryItemID = nil
             layoutAddMode = nil
+            isArrangingFurniture = false
             logSceneState()
             bumpChrome()
         }
@@ -262,11 +383,23 @@ struct World2MutableSceneView: View {
         }
     }
 
-    private var shouldShowHardpoints: Bool {
-        hasArmedInventoryItem || (developerMode && layoutAddMode != nil)
-            || (developerMode && developerSession.activeDevTool != .play
-                && (developerSession.showPOIHardpoints || developerSession.showPortalHardpoints))
-            || (developerMode && developerSession.activeDevTool == .layout)
+    private func beginDecoratingThisScene() {
+        decorateFilter = .mine
+        if let highlight = viewModel.consumeInventoryHighlight() {
+            selectedFurnitureID = highlight
+        }
+        isArrangingFurniture = true
+        bumpChrome()
+        viewModel.dismissInventReadyPrompt()
+        _ = viewModel.consumePendingDecorateTarget()
+        _ = viewModel.consumeStartSceneDecoratingFlag()
+        World2Diagnostics.log(
+            "scene_decorate_opened",
+            [
+                "scene": viewModel.currentMutableSceneID,
+                "surface": World2DecorateSurface.key(forScene: viewModel.currentMutableSceneID),
+            ]
+        )
     }
 
     private var contextualBanner: (text: String, symbol: String, tint: Color)? {
@@ -279,14 +412,34 @@ struct World2MutableSceneView: View {
         return nil
     }
 
+    private static func pannedRect(base: CGRect, pan: CGSize, in viewSize: CGSize) -> CGRect {
+        var origin = CGPoint(
+            x: base.origin.x + pan.width,
+            y: base.origin.y + pan.height
+        )
+        let minX = min(40, viewSize.width - base.width - 40)
+        let maxX = 40.0
+        let minY = min(40, viewSize.height - base.height - 40)
+        let maxY = 40.0
+        origin.x = min(maxX, max(minX, origin.x))
+        origin.y = min(maxY, max(minY, origin.y))
+        return CGRect(origin: origin, size: base.size)
+    }
+
+    private static func clampedPan(_ pan: CGSize, base: CGRect, in viewSize: CGSize) -> CGSize {
+        let minX = min(40, viewSize.width - base.width - 40) - base.origin.x
+        let maxX = 40 - base.origin.x
+        let minY = min(40, viewSize.height - base.height - 40) - base.origin.y
+        let maxY = 40 - base.origin.y
+        return CGSize(
+            width: min(maxX, max(minX, pan.width)),
+            height: min(maxY, max(minY, pan.height))
+        )
+    }
+
     private func plateImageSize() -> CGSize {
         if let custom = backdropStore.image(forSceneID: viewModel.currentMutableSceneID) {
             return custom.size
-        }
-        if ["map.blankWorld", "map.blankSlate"].contains(
-            viewModel.currentMutableScene.backgroundAsset
-        ), let plate = UIImage(named: "world2_blank_world") {
-            return plate.size
         }
         if let painted = AssetBootstrapService.shared.image(
             for: viewModel.currentMutableScene.backgroundAsset
@@ -316,13 +469,6 @@ struct World2MutableSceneView: View {
         ZStack {
             if let custom = backdropStore.image(forSceneID: viewModel.currentMutableSceneID) {
                 Image(uiImage: custom)
-                    .resizable()
-                    .scaledToFit()
-            } else if ["map.blankWorld", "map.blankSlate"].contains(
-                viewModel.currentMutableScene.backgroundAsset
-               ),
-               let plate = UIImage(named: "world2_blank_world") {
-                Image(uiImage: plate)
                     .resizable()
                     .scaledToFit()
             } else if let painted = AssetBootstrapService.shared.image(
@@ -391,13 +537,7 @@ struct World2MutableSceneView: View {
     }
 
     private var placementInstruction: String {
-        if viewModel.currentMutableScene.hardpoints.isEmpty {
-            return "Tap anywhere on the scene to place"
-        }
-        if viewModel.availableSceneHardpoints.isEmpty {
-            return "All hardpoints are occupied"
-        }
-        return "Choose a glowing hardpoint"
+        "Tap anywhere on the scene to place"
     }
 
     /// Flexible title slot + one optional action. Placement status lives in the
@@ -470,18 +610,10 @@ struct World2MutableSceneView: View {
                 visibilityChip("Portals", on: developerSession.showPortals) {
                     developerSession.showPortals.toggle()
                 }
-                visibilityChip("POI pads", on: developerSession.showPOIHardpoints) {
-                    developerSession.showPOIHardpoints.toggle()
-                }
-                visibilityChip("Portal pads", on: developerSession.showPortalHardpoints) {
-                    developerSession.showPortalHardpoints.toggle()
-                }
                 Spacer(minLength: 0)
             }
 
             HStack(spacing: 8) {
-                addModeChip("Add POI pad", mode: .poiHardpoint, symbol: "plus.circle")
-                addModeChip("Add portal pad", mode: .portalHardpoint, symbol: "plus.diamond")
                 addModeChip("Add portal", mode: .portal, symbol: "globe.desk.fill")
                 addModeChip("Place POI", mode: .poi, symbol: "building.2.fill")
                 Button {
@@ -520,10 +652,6 @@ struct World2MutableSceneView: View {
                         bumpChrome()
                         withAnimation(.spring(response: 0.28, dampingFraction: 0.82)) {
                             developerSession.activeDevTool = tool
-                            if tool == .hardpoints {
-                                developerSession.showPOIHardpoints = true
-                                developerSession.showPortalHardpoints = true
-                            }
                             if tool == .play {
                                 layoutAddMode = nil
                             }
@@ -546,6 +674,24 @@ struct World2MutableSceneView: View {
                     }
                     .buttonStyle(.plain)
                     .accessibilityIdentifier("world2.mutableScene.devTool.\(tool.rawValue)")
+                }
+
+                if developerSession.activeDevTool == .layout {
+                    World2DevRefineButton(accessibilityID: "world2.dev.refine.layout") {
+                        guard let id = selectedFurnitureID,
+                              let player = PlayerStateService.shared.currentPlayer,
+                              let instance = player.decorations.first(where: { $0.id == id })
+                        else { return }
+                        let label = World2RoomPiece.resolve(
+                            instance.decorationId,
+                            player: player
+                        )?.name ?? "prop"
+                        World2DevRefine.decoration(
+                            instanceID: id,
+                            label: label,
+                            placeName: viewModel.currentMutableScene.name
+                        )
+                    }
                 }
 
                 Spacer(minLength: 0)
@@ -580,24 +726,12 @@ struct World2MutableSceneView: View {
                     layoutToolbar
                 case .min:
                     HStack(spacing: 8) {
-                        addModeChip("Add POI pad", mode: .poiHardpoint, symbol: "plus.circle")
-                        addModeChip("Add portal pad", mode: .portalHardpoint, symbol: "plus.diamond")
+                        addModeChip("Add portal", mode: .portal, symbol: "globe.desk.fill")
+                        addModeChip("Place POI", mode: .poi, symbol: "building.2.fill")
                         Spacer(minLength: 0)
                     }
                 case .off:
                     EmptyView()
-                }
-            } else if developerSession.activeDevTool == .hardpoints {
-                HStack(spacing: 8) {
-                    visibilityChip("POI pads", on: developerSession.showPOIHardpoints) {
-                        developerSession.showPOIHardpoints.toggle()
-                    }
-                    visibilityChip("Portal pads", on: developerSession.showPortalHardpoints) {
-                        developerSession.showPortalHardpoints.toggle()
-                    }
-                    addModeChip("Add POI pad", mode: .poiHardpoint, symbol: "plus.circle")
-                    addModeChip("Add portal pad", mode: .portalHardpoint, symbol: "plus.diamond")
-                    Spacer(minLength: 0)
                 }
             } else if developerSession.activeDevTool == .invent {
                 HStack(spacing: 8) {
@@ -617,9 +751,9 @@ struct World2MutableSceneView: View {
 
                     Button {
                         bumpChrome()
-                        viewModel.openCurrentPlayerTreehouse(startDecorating: true)
+                        beginDecoratingThisScene()
                     } label: {
-                        Label("Decorate room", systemImage: "paintbrush.pointed.fill")
+                        Label("Decorate scene", systemImage: "paintbrush.pointed.fill")
                             .font(.system(size: 12, weight: .black, design: .rounded))
                             .padding(.horizontal, 12)
                             .padding(.vertical, 8)
@@ -735,20 +869,9 @@ struct World2MutableSceneView: View {
 
         if let layoutAddMode, developerMode {
             switch layoutAddMode {
-            case .poiHardpoint:
-                _ = PlayerStateService.shared.addHardpoint(
-                    to: viewModel.currentMutableSceneID,
-                    purpose: .place,
-                    x: x,
-                    y: y
-                )
-            case .portalHardpoint:
-                _ = PlayerStateService.shared.addHardpoint(
-                    to: viewModel.currentMutableSceneID,
-                    purpose: .portal,
-                    x: x,
-                    y: y
-                )
+            case .poiHardpoint, .portalHardpoint:
+                // POI hardpoints retired — treat pad taps as freehand place.
+                placeFreeformItem(at: point, in: size)
             case .portal:
                 _ = PlayerStateService.shared.addPortalExit(
                     from: viewModel.currentMutableSceneID,
@@ -756,7 +879,6 @@ struct World2MutableSceneView: View {
                     y: y
                 )
             case .poi:
-                // Arm placement: if inventory selected, free-place; else toast.
                 if viewModel.selectedPlaceInventoryItemID != nil {
                     placeFreeformItem(at: point, in: size)
                 } else {
@@ -771,9 +893,7 @@ struct World2MutableSceneView: View {
     }
 
     private func placeFreeformItem(at point: CGPoint, in size: CGSize) {
-        guard viewModel.currentMutableScene.hardpoints.isEmpty
-                || layoutAddMode == .poi,
-              let itemID = viewModel.selectedPlaceInventoryItemID,
+        guard let itemID = viewModel.selectedPlaceInventoryItemID,
               size.width > 0,
               size.height > 0 else {
             return
@@ -887,19 +1007,12 @@ struct World2PlaceInventoryRow: View {
     @ViewBuilder
     private func placeInventoryIcon(for item: World2PlaceInventoryItem) -> some View {
         let template = World2PlaceTemplate.template(for: item.templateID)
-        if let catalog = template.inventoryCatalogName,
-           let image = UIImage(named: catalog) {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
-        } else {
-            World2SemanticImage(
-                semanticName: template.exteriorAsset,
-                fallbackIcon: template.fallbackIcon,
-                fallbackLabel: template.name
-            )
-            .scaledToFit()
-        }
+        World2SemanticImage(
+            semanticName: template.inventorySemanticName,
+            fallbackIcon: template.fallbackIcon,
+            fallbackLabel: template.name
+        )
+        .scaledToFit()
     }
 }
 
@@ -950,38 +1063,14 @@ private struct World2PlaceholderExitMarker: View {
     let onEnter: () -> Void
 
     var body: some View {
-        Button(action: onEnter) {
-            VStack(spacing: 7) {
-                ZStack {
-                    if let portal = UIImage(named: "world2_world_portal") {
-                        Image(uiImage: portal)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 128, height: 128)
-                    } else if let plate = UIImage(named: "under_construction") {
-                        Image(uiImage: plate)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 128, height: 128)
-                    } else {
-                        Image(systemName: "globe.desk.fill")
-                            .font(.system(size: 68, weight: .bold))
-                            .foregroundStyle(.white, .orange)
-                            .frame(width: 116, height: 136)
-                    }
-                }
-                .shadow(color: .orange.opacity(0.45), radius: 12, y: 4)
-
-                Text(exit.name)
-                    .font(.system(size: 14, weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 11)
-                    .padding(.vertical, 6)
-                    .background(.orange.opacity(0.94), in: Capsule())
-            }
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Take exit \(exit.name)")
+        World2ExitMarker(
+            title: exit.name,
+            subtitle: "EXIT",
+            edge: .trailing,
+            tint: .orange,
+            compact: true,
+            action: onEnter
+        )
         .accessibilityHint(exit.summary)
         .accessibilityIdentifier("world2.mutableScene.exit.\(exit.id)")
     }
@@ -990,11 +1079,10 @@ private struct World2PlaceholderExitMarker: View {
 struct World2MutableScenePlaceMarker: View {
     let instance: World2PlacedPlaceInstance
     let onEnter: () -> Void
+    /// False when the scene label pass draws the title instead.
+    var showsTitle: Bool = true
+    var showsNewBadge: Bool = false
     @State private var isPulsing = false
-
-    private var template: World2PlaceTemplate {
-        World2PlaceTemplate.template(for: instance.templateID)
-    }
 
     var body: some View {
         Button(action: onEnter) {
@@ -1009,15 +1097,22 @@ struct World2MutableScenePlaceMarker: View {
                     .scaledToFit()
                     .frame(width: 185, height: 150)
                     .shadow(color: .orange.opacity(0.55), radius: 14, y: 6)
+
+                    if showsNewBadge {
+                        World2NewBadge(size: 52)
+                            .offset(x: 62, y: -58)
+                    }
                 }
                 .scaleEffect(isPulsing ? 1.04 : 0.98)
 
-                Label(markerTitle, systemImage: "door.left.hand.open")
+                Label(instance.mapLabel, systemImage: "door.left.hand.open")
                     .font(.system(size: 14, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
                     .padding(.horizontal, 11)
                     .padding(.vertical, 6)
                     .background(.orange.opacity(0.94), in: Capsule())
+                    .opacity(showsTitle ? 1 : 0)
+                    .accessibilityHidden(!showsTitle)
             }
         }
         .buttonStyle(.plain)
@@ -1026,18 +1121,9 @@ struct World2MutableScenePlaceMarker: View {
             .easeInOut(duration: 1.1).repeatForever(autoreverses: true),
             value: isPulsing
         )
-        .accessibilityLabel("Enter \(markerTitle)")
+        .accessibilityLabel("Enter \(instance.mapLabel)")
         .accessibilityHint("Go inside to use this place")
         .accessibilityIdentifier("world2.placedPlace.\(instance.id)")
-    }
-
-    private var markerTitle: String {
-        switch instance.templateID {
-        case .worldSeed:
-            return instance.seedGrowth == .portal ? "World Portal" : "Seedling"
-        default:
-            return template.name
-        }
     }
 }
 
@@ -1097,19 +1183,12 @@ private struct World2PlaceMapArt: View {
     }
 
     var body: some View {
-        if let catalog = template.mapCatalogName(growth: instance.seedGrowth),
-           let image = UIImage(named: catalog) {
-            Image(uiImage: image)
-                .resizable()
-                .scaledToFit()
-        } else {
-            World2SemanticImage(
-                semanticName: template.exteriorAsset,
-                fallbackIcon: template.fallbackIcon,
-                fallbackLabel: template.name
-            )
-            .scaledToFit()
-        }
+        World2SemanticImage(
+            semanticName: template.mapSemanticName(growth: instance.seedGrowth),
+            fallbackIcon: template.fallbackIcon,
+            fallbackLabel: template.name
+        )
+        .scaledToFit()
     }
 }
 

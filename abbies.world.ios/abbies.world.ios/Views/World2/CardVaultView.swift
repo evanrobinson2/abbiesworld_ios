@@ -62,6 +62,10 @@ struct World2CardVaultView: View {
                 .presentationDetents([.medium, .large])
             }
         }
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.cardVault.exit",
+            onExit: onExit
+        )
     }
     
     private var backgroundGradient: some View {
@@ -77,16 +81,6 @@ struct World2CardVaultView: View {
     
     private var vaultHeader: some View {
         HStack {
-            Button(action: onExit) {
-                HStack(spacing: 8) {
-                    Image(systemName: "arrow.left.circle.fill")
-                        .font(.system(size: 28))
-                    Text("Back to Map")
-                        .font(.system(size: 16, weight: .semibold, design: .rounded))
-                }
-                .foregroundColor(.white)
-            }
-            
             Spacer()
             
             VStack(spacing: 4) {

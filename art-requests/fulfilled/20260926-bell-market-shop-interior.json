@@ -1,0 +1,64 @@
+{
+  "id": "20260926-bell-market-shop-interior",
+  "semanticId": "plate.marbleVoyage.shop.bellMarket.interior",
+  "kind": "plate",
+  "priority": "blocker",
+  "status": "fulfilled",
+  "placeholder": {
+    "type": "none",
+    "detail": "MarbleVoyageShopView uses only a blue LinearGradient \u2014 no shop plate, stall, or interior art"
+  },
+  "keepStockIcon": false,
+  "surface": "Post-fight Bell Market shop screen (full iPad landscape backdrop)",
+  "brief": "4:3 landscape interior plate for Bell Market: cozy comedic fantasy trail shop / bell-keeper stall where Abbie spends coins between climbs. Readable shelves for marbles/charms, warm light, kid-safe. No baked UI text, price tags, or buttons \u2014 chrome is SwiftUI on top. Must feel like a real store so the shop phase is visually obvious after a fight.",
+  "aspect": "4:3",
+  "styleNotes": "Author at ~2048\u00d71536 (MarbleVoyagePlateLayout). Fit/letterbox in app like other voyage plates \u2014 never Fill-crop. Match Marble Voyage / trail-scrap warmth, not generic RPG vendor.",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/MarbleVoyageShopView.swift",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/MarbleVoyagePlateLayout.swift",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/MarbleVoyageShop.swift",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/fox-land.jpg",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/porcupine-boxer.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/index.html",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/README.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "AssetSources/MarbleVoyage/porcupine-boxer/porcupine-boxer.png",
+    "art-requests/ART_DIRECTOR_AGENT.md",
+    "AssetSources/MarbleVoyage/bell-market-2026-09-26/bell-market-interior.jpeg",
+    "AssetSources/MarbleVoyage/bell-market-2026-09-26/provenance.json",
+    "AssetSources/MarbleVoyage/bell-market-2026-09-26/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "Colorful comedic fantasy bell market shop interior for kids game, cozy stall with marble shelves and a brass trail bell, warm lantern light, empty space for UI chrome, 4:3 landscape, no text logos prices --ar 4:3 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:45:00Z",
+  "sessionNote": "Evan: still no visible store art \u2014 shop is gradient-only. Bind as catalog plate after approval.",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:00:15.094595+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/bell-market-2026-09-26/bell-market-interior.jpeg",
+    "sourceHashSha256": "35146cb1847a2d884606655380365f006ee8c0725b3997fc2a4cc0fbf9c6dddf",
+    "notes": "Original plate delivered for builder binding; not runtime-bound or verified in app. Native 1232 x 928 is approximately 4:3, below requested ~2048 x 1536. Preserve original; use Fit/letterbox, never Fill-crop. No upscale was generated. Check shop text contrast over the brighter upper tree and side shelves. Runtime catalog bound as world2_plate_marbleVoyage_shop_bellMarket_interior (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plate_marbleVoyage_shop_bellMarket_interior",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plate_marbleVoyage_shop_bellMarket_interior.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  },
+  "createdAt": "2026-09-26T20:45:00Z",
+  "type": "plate",
+  "gameArea": "Marble Voyage \u2014 post-fight shop",
+  "usage": "Full-bleed 4:3 shop backdrop behind Bell Market UI",
+  "targetPixelSize": "Author ~2048\u00d71536 (MarbleVoyagePlateLayout 4:3)",
+  "expectedBackground": "Painted interior scene (not transparent); leave quiet zones for UI chrome",
+  "characterOrAssetName": "Bell Market interior",
+  "productionIntent": "runtime_bind",
+  "existingAssetSemanticIds": [],
+  "acceptanceCriteria": [
+    "4:3 landscape readable as cozy trail shop / bell stall",
+    "No baked text, logos, or prices",
+    "Empty/quiet regions for shop chrome; Fit/letterbox friendly",
+    "Matches Marble Voyage / trail-scrap warmth (inspect fox-land + cast)"
+  ]
+}

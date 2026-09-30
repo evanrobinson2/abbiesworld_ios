@@ -18,9 +18,19 @@ struct World2DaddyWelcomeView: View {
     @State private var showWelcomeCard = true
     @State private var giftFlight: CGSize = .zero
     @State private var giftOpacity: Double = 1
+    @State private var isArrangingFurniture = false
+    @State private var selectedFurnitureID: String?
+    @State private var selectedCatalogItemID: String?
+    @State private var decorateFilter: DecorateFilterID = .mine
+    @State private var showingSceneInvent = false
+
+    private var decorateSurfaceKey: String {
+        World2DecorateSurface.key(forPOI: World2POIRegistry.evanHomeID)
+    }
 
     var body: some View {
         GeometryReader { geo in
+            let plate = CGRect(origin: .zero, size: geo.size)
             ZStack {
                 World2SemanticImage(
                     semanticName: "poi.evanHome.interior",
@@ -41,30 +51,23 @@ struct World2DaddyWelcomeView: View {
                 )
                 .allowsHitTesting(false)
 
+                World2SceneDecorateLayer(
+                    surfaceKey: decorateSurfaceKey,
+                    mapRect: plate,
+                    isArranging: isArrangingFurniture,
+                    selectedFurnitureID: $selectedFurnitureID,
+                    selectedCatalogItemID: $selectedCatalogItemID,
+                    coordinateSpaceName: "world2.daddyHome"
+                )
+                .zIndex(8)
+
                 VStack(spacing: 18) {
-                    HStack {
-                        Button(action: onExit) {
-                            Image(systemName: "arrow.left.circle.fill")
-                                .font(.system(size: 28, weight: .bold))
-                                .foregroundStyle(.white.opacity(0.92))
-                        }
-                        .buttonStyle(.plain)
-                        .accessibilityLabel("Back to Daddy's Citadel")
-                        .accessibilityIdentifier("world2.daddyWelcome.back")
-                        Spacer()
-                        Text("Look around")
-                            .font(.system(size: 14, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white.opacity(0.8))
-                            .padding(.horizontal, 12)
-                            .padding(.vertical, 8)
-                            .background(.ultraThinMaterial, in: Capsule())
-                    }
-                    .padding(.horizontal, 20)
-                    .padding(.top, 14)
-
                     Spacer()
+                        .allowsHitTesting(false)
 
-                    if showWelcomeCard {
+                    if isArrangingFurniture {
+                        EmptyView()
+                    } else if showWelcomeCard {
                         welcomeCard
                             .transition(.move(edge: .bottom).combined(with: .opacity))
                     } else {
@@ -77,8 +80,9 @@ struct World2DaddyWelcomeView: View {
                             .padding(.bottom, 28)
                     }
                 }
+                .zIndex(12)
 
-                if let awarded, burst {
+                if let awarded, burst, !isArrangingFurniture {
                     World2StoryDecorationArtwork(decoration: awarded)
                         .frame(width: 96, height: 96)
                         .scaleEffect(burst ? 1.15 : 0.4)
@@ -94,7 +98,87 @@ struct World2DaddyWelcomeView: View {
         .accessibilityIdentifier("world2.daddyWelcome")
         .onAppear {
             grantVisitGift()
+            if viewModel.daddyHomeDecorateTick > 0 {
+                beginDecorating()
+            }
         }
+        .onChange(of: viewModel.daddyHomeDecorateTick) { _, _ in
+            beginDecorating()
+        }
+        .onChange(of: viewModel.sandboxInventTick) { _, _ in
+            showingSceneInvent = true
+        }
+        .sheet(isPresented: $showingSceneInvent) {
+            let scene = World2SceneDefinition(
+                id: World2POIRegistry.evanHomeID,
+                name: "Daddy's Citadel",
+                summary: "Inside Daddy's home",
+                backgroundAsset: "poi.evanHome.interior",
+                isMutableByPlayer: true
+            )
+            World2SceneInventDecorationsView(
+                scene: scene,
+                plateImage: AssetBootstrapService.shared.image(for: "poi.evanHome.interior"),
+                onCarved: { viewModel.notifySceneInventReady($0) },
+                onOpenDecorate: {
+                    showingSceneInvent = false
+                    beginDecorating()
+                },
+                onTravel: { result in
+                    showingSceneInvent = false
+                    viewModel.reopenInventResult(result)
+                },
+                onClose: { showingSceneInvent = false }
+            )
+        }
+        .world2InteriorActions(
+            [
+                World2ThumbAction(
+                    id: "decorate",
+                    title: "Decorate",
+                    icon: "paintbrush.pointed.fill"
+                )
+            ],
+            exitTitle: "Exit",
+            exitAccessibilityID: "world2.daddyWelcome.back",
+            enabled: !isArrangingFurniture,
+            onExit: onExit
+        ) { id in
+            if id == "decorate" {
+                beginDecorating()
+            }
+        }
+        .overlay(alignment: .bottom) {
+            if isArrangingFurniture {
+                World2DecorateTray(
+                    playerName: "Daddy's Citadel",
+                    selectedCatalogID: selectedCatalogItemID,
+                    selectedInventoryID: selectedFurnitureID,
+                    filter: decorateFilter,
+                    onFilterChange: { decorateFilter = $0 },
+                    onSelectCatalog: { item in
+                        selectedCatalogItemID = item.id
+                        selectedFurnitureID = nil
+                    },
+                    onSelectInventory: { id in
+                        selectedFurnitureID = id
+                        selectedCatalogItemID = nil
+                    },
+                    onDone: {
+                        isArrangingFurniture = false
+                        selectedFurnitureID = nil
+                        selectedCatalogItemID = nil
+                    }
+                )
+                .zIndex(80)
+            }
+        }
+    }
+
+    private func beginDecorating() {
+        showWelcomeCard = false
+        decorateFilter = .mine
+        isArrangingFurniture = true
     }
 
     private var welcomeCard: some View {

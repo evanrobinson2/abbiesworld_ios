@@ -29,6 +29,11 @@ enum World2SceneCatalog {
         threeBears,
         artGarden,
         evanCitadel,
+        peglinCrashLand,
+        peglinBramble,
+        peglinFoxLand,
+        peglinStagLand,
+        peglinForgottenRealm,
         World2SceneDefinition.blankSlate,
     ]
 
@@ -77,7 +82,7 @@ enum World2SceneCatalog {
                 name: "Creekside spot",
                 position: World2NormalizedPoint(x: 0.152, y: 0.566),
                 acceptedSizeClasses: [.small, .medium],
-                notes: "Planning Department — world graph map room"
+                notes: "Open creekside spot"
             ),
             World2SceneHardpoint(
                 id: "hardpoint.home.hilltopPad",
@@ -117,16 +122,6 @@ enum World2SceneCatalog {
                 y: 0.685,
                 scale: 1.05,
                 zIndex: 2
-            ),
-            authored(
-                "instance.home.planningDept",
-                World2POIRegistry.planningDeptID,
-                scene: sceneID(for: .home),
-                hardpoint: "hardpoint.home.creekPad",
-                x: 0.152,
-                y: 0.566,
-                scale: 0.88,
-                zIndex: 4
             ),
         ],
         showsOpenHardpointsToPlayers: true,
@@ -428,10 +423,185 @@ enum World2SceneCatalog {
                 scale: 1.05,
                 zIndex: 1
             ),
+            authored(
+                "instance.evan.figurineExplorer",
+                World2POIRegistry.figurineExplorerID,
+                scene: sceneID(for: .evan),
+                hardpoint: "hardpoint.evan.lookoutPad",
+                x: 0.72,
+                y: 0.42,
+                scale: 0.85,
+                zIndex: 2
+            ),
         ],
         showsOpenHardpointsToPlayers: true,
         createdAt: .distantPast
     )
+
+    /// Peglin Edition — Crash Land hub (scenery-is-the-machine).
+    static let peglinCrashLand = World2SceneDefinition(
+        id: PeglinEdition.crashLandSceneID,
+        name: PeglinEdition.Land.crashWorld.displayName,
+        summary: PeglinEdition.Land.crashWorld.summary,
+        backgroundAsset: PeglinEdition.Land.crashWorld.mapAsset,
+        hardpoints: [
+            World2SceneHardpoint(
+                id: "hardpoint.peglin.crash.wreck",
+                name: "Wreck pad",
+                // Submarine / crash craft on lower-center grass.
+                position: World2NormalizedPoint(x: 0.36, y: 0.70),
+                acceptedSizeClasses: [.medium, .large],
+                isLocked: true,
+                notes: "South-west — crash vessel (open)"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.peglin.crash.path",
+                name: "Broken path pad",
+                // North ridge toward distant floating lands.
+                position: World2NormalizedPoint(x: 0.52, y: 0.18),
+                acceptedSizeClasses: [.small, .medium],
+                isLocked: true,
+                notes: "North — onward to Bramble"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.peglin.crash.monastery",
+                name: "Monastery terrace",
+                position: World2NormalizedPoint(x: 0.72, y: 0.42),
+                acceptedSizeClasses: [.medium, .large],
+                isLocked: true,
+                notes: "East — Peg Monastery floating isle"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.peglin.crash.crater",
+                name: "Crater rim",
+                position: World2NormalizedPoint(x: 0.50, y: 0.52),
+                acceptedSizeClasses: [.small],
+                notes: "Open — spawn / lookout"
+            ),
+        ],
+        poiInstances: [
+            authored(
+                "instance.peglin.monastery",
+                PeglinEdition.pegMonasteryID,
+                scene: PeglinEdition.crashLandSceneID,
+                hardpoint: "hardpoint.peglin.crash.monastery",
+                x: 0.72, y: 0.42, scale: 1.2, zIndex: 4
+            ),
+            authored(
+                "instance.peglin.brokenPath",
+                PeglinEdition.brokenPathPlaceID,
+                scene: PeglinEdition.crashLandSceneID,
+                hardpoint: "hardpoint.peglin.crash.path",
+                x: 0.52, y: 0.18, scale: 0.95, zIndex: 2
+            ),
+        ],
+        showsOpenHardpointsToPlayers: true,
+        createdAt: .distantPast
+    )
+
+    /// Peglin Edition land scenes — plates are the boards; guardians / orb sit center.
+    static let peglinBramble = peglinLandScene(
+        .bramble,
+        centerArchetype: PeglinEdition.brambleGuardianID,
+        onwardArchetype: PeglinEdition.pathToFoxID,
+        backArchetype: PeglinEdition.pathBackToCrashID
+    )
+
+    static let peglinFoxLand = peglinLandScene(
+        .foxLand,
+        centerArchetype: PeglinEdition.foxGuardianID,
+        onwardArchetype: nil,
+        backArchetype: PeglinEdition.pathFoxToHomeID
+    )
+
+    static let peglinStagLand = peglinLandScene(
+        .stagLand,
+        centerArchetype: PeglinEdition.stagGuardianID,
+        onwardArchetype: PeglinEdition.pathToForgottenID,
+        backArchetype: PeglinEdition.pathBackToFoxID
+    )
+
+    static let peglinForgottenRealm = peglinLandScene(
+        .forgottenRealm,
+        centerArchetype: PeglinEdition.forgottenOrbID,
+        onwardArchetype: nil,
+        backArchetype: PeglinEdition.pathBackToStagID
+    )
+
+    private static func peglinLandScene(
+        _ land: PeglinEdition.Land,
+        centerArchetype: String,
+        onwardArchetype: String?,
+        backArchetype: String
+    ) -> World2SceneDefinition {
+        let sceneID = land.sceneID
+        var hardpoints: [World2SceneHardpoint] = [
+            World2SceneHardpoint(
+                id: "hardpoint.peglin.\(land.rawValue).center",
+                name: "\(land.displayName) approach",
+                // On the painted spirit / orb (¾ view: slightly below center).
+                position: World2NormalizedPoint(x: 0.50, y: 0.52),
+                acceptedSizeClasses: [.small, .medium, .large],
+                isLocked: true,
+                notes: "Landmark on creature / orb"
+            ),
+            World2SceneHardpoint(
+                id: "hardpoint.peglin.\(land.rawValue).back",
+                name: "Path back",
+                position: World2NormalizedPoint(x: 0.50, y: 0.88),
+                acceptedSizeClasses: [.small, .medium],
+                isLocked: true,
+                notes: "South exit — prior land"
+            ),
+        ]
+        var instances: [World2POIInstance] = [
+            authored(
+                "instance.peglin.\(land.rawValue).center",
+                centerArchetype,
+                scene: sceneID,
+                hardpoint: "hardpoint.peglin.\(land.rawValue).center",
+                x: 0.50, y: 0.52, scale: 1.25, zIndex: 3
+            ),
+            authored(
+                "instance.peglin.\(land.rawValue).back",
+                backArchetype,
+                scene: sceneID,
+                hardpoint: "hardpoint.peglin.\(land.rawValue).back",
+                x: 0.50, y: 0.88, scale: 0.95, zIndex: 2
+            ),
+        ]
+        if let onwardArchetype {
+            hardpoints.append(
+                World2SceneHardpoint(
+                    id: "hardpoint.peglin.\(land.rawValue).onward",
+                    name: "Path onward",
+                    position: World2NormalizedPoint(x: 0.50, y: 0.14),
+                    acceptedSizeClasses: [.small, .medium],
+                    isLocked: true,
+                    notes: "North exit — next land"
+                )
+            )
+            instances.append(
+                authored(
+                    "instance.peglin.\(land.rawValue).onward",
+                    onwardArchetype,
+                    scene: sceneID,
+                    hardpoint: "hardpoint.peglin.\(land.rawValue).onward",
+                    x: 0.50, y: 0.14, scale: 0.95, zIndex: 2
+                )
+            )
+        }
+        return World2SceneDefinition(
+            id: sceneID,
+            name: land.displayName,
+            summary: land.summary,
+            backgroundAsset: land.mapAsset,
+            hardpoints: hardpoints,
+            poiInstances: instances,
+            showsOpenHardpointsToPlayers: true,
+            createdAt: .distantPast
+        )
+    }
 
     // MARK: - Authoring helper
 

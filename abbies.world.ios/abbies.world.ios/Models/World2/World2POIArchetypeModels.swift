@@ -60,9 +60,18 @@ enum World2POIRoute: Codable, Equatable, Sendable {
     case placeFactory
     case threeBearsHouse
     case characterStudio
+    case figurineExplorer
     case sceneBuilder
     case whizbang
     case planningDept
+    /// Peglin-inspired marble drop in the Plink Pavilion.
+    case plink
+    /// Peg Monastery — math challenge earns Plink power-ups.
+    case pegMonastery
+    /// Walk to another scene named by the document. `travel:scene.spookyLand`.
+    case travel(sceneID: String)
+    /// A place whose rooms are plates named by the document.
+    case rooms
 
     var diagnosticName: String {
         switch self {
@@ -75,9 +84,14 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .placeFactory: return "place_factory"
         case .threeBearsHouse: return "three_bears_house"
         case .characterStudio: return "character_studio"
+        case .figurineExplorer: return "figurine_explorer"
         case .sceneBuilder: return "scene_builder"
         case .whizbang: return "whizbang"
         case .planningDept: return "planning_dept"
+        case .plink: return "plink"
+        case .pegMonastery: return "peg_monastery"
+        case .travel(let sceneID): return "travel:\(sceneID)"
+        case .rooms: return "rooms"
         }
     }
 
@@ -90,10 +104,47 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .creatureLab: return "creature_lab"
         case .threeBearsHouse: return "just_right_porridge"
         case .characterStudio: return "character_studio"
+        case .figurineExplorer: return "figurine_explorer"
         case .sceneBuilder: return "scene_builder"
         case .whizbang: return "whizbang"
         case .planningDept: return "planning_dept"
-        case .playerHome, .cardFactory, .placeFactory: return nil
+        case .plink: return "plink"
+        case .pegMonastery: return "peg_monastery"
+        case .playerHome, .cardFactory, .placeFactory, .travel, .rooms: return nil
+        }
+    }
+
+    /// Content names a screen that already exists, a scene to walk to, or a
+    /// set of plates. A brand-new screen still needs a build.
+    static func resolved(from behavior: String) -> World2POIRoute? {
+        switch behavior {
+        case "playerHome": return .playerHome
+        case "cardFactory": return .cardFactory
+        case "furnitureStore": return .furnitureStore
+        case "assetWorkbench": return .assetWorkbench
+        case "creatureLab": return .creatureLab
+        case "placeFactory": return .placeFactory
+        case "threeBearsHouse": return .threeBearsHouse
+        case "characterStudio": return .characterStudio
+        case "figurineExplorer": return .figurineExplorer
+        case "sceneBuilder": return .sceneBuilder
+        case "whizbang": return .whizbang
+        case "planningDept": return .planningDept
+        case "plink": return .plink
+        case "pegMonastery": return .pegMonastery
+        case "rooms": return .rooms
+        default:
+            let travel = "travel:"
+            if behavior.hasPrefix(travel) {
+                let sceneID = String(behavior.dropFirst(travel.count))
+                guard !sceneID.isEmpty else { return nil }
+                return .travel(sceneID: sceneID)
+            }
+            let prefix = "fallingTargets:"
+            guard behavior.hasPrefix(prefix) else { return nil }
+            let configurationID = String(behavior.dropFirst(prefix.count))
+            guard !configurationID.isEmpty else { return nil }
+            return .fallingTargets(configurationID: configurationID)
         }
     }
 }

@@ -100,7 +100,6 @@ enum World2LayoutDiagMode: String, CaseIterable, Identifiable, Sendable {
 
 enum World2DevTool: String, CaseIterable, Identifiable, Sendable {
     case play
-    case hardpoints
     case layout
     case invent
 
@@ -109,7 +108,6 @@ enum World2DevTool: String, CaseIterable, Identifiable, Sendable {
     var title: String {
         switch self {
         case .play: return "Play"
-        case .hardpoints: return "Pads"
         case .layout: return "Layout"
         case .invent: return "Invent"
         }
@@ -118,7 +116,6 @@ enum World2DevTool: String, CaseIterable, Identifiable, Sendable {
     var symbolName: String {
         switch self {
         case .play: return "hand.tap.fill"
-        case .hardpoints: return "target"
         case .layout: return "slider.horizontal.3"
         case .invent: return "wand.and.stars"
         }
@@ -129,7 +126,6 @@ enum World2DevTool: String, CaseIterable, Identifiable, Sendable {
 /// a time, which is what keeps a single drag unambiguous.
 enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
     case pois
-    case hardpoints
     case tunnels
 
     var id: String { rawValue }
@@ -137,7 +133,6 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
     var title: String {
         switch self {
         case .pois: return "Places"
-        case .hardpoints: return "Hardpoints"
         case .tunnels: return "Tunnels"
         }
     }
@@ -145,7 +140,6 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
     var symbolName: String {
         switch self {
         case .pois: return "building.2.fill"
-        case .hardpoints: return "target"
         case .tunnels: return "arrow.up.arrow.down.circle"
         }
     }
@@ -154,8 +148,6 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
         switch self {
         case .pois:
             return "Drag · pinch · twist places on the map"
-        case .hardpoints:
-            return "Tap map to add a pad · drag to move"
         case .tunnels:
             return "N/S/E/W expansion doors"
         }
@@ -166,6 +158,10 @@ enum World2SceneEditorLayer: String, CaseIterable, Identifiable, Sendable {
 final class World2SceneGraphStore: ObservableObject {
     private static let schemaVersion = 1
     private static let storeKeyPrefix = "world2.sceneGraph.v1"
+    /// Authored places added after a player already saved a scene override.
+    private static let graftedAuthoredInstanceIDs: Set<String> = [
+        "instance.evan.figurineExplorer"
+    ]
     /// The store this one replaces. Read once, then retired.
     private static let legacyLayoutKeyPrefix = "world2.layout.overrides.v4"
 
@@ -194,6 +190,9 @@ final class World2SceneGraphStore: ObservableObject {
         }
         pendingSave?.cancel()
         playerScope = nextScope
+        if World2WorldSync.shared.usesServerDocument {
+            return
+        }
 
         var loaded = Self.decodeScenes(defaults.data(forKey: storeKey))
         if loaded.isEmpty,
@@ -212,9 +211,25 @@ final class World2SceneGraphStore: ObservableObject {
 
     var hasUnsavedChanges: Bool { draftScenes != savedScenes }
 
-    /// The scene as it should be drawn right now: the developer's override when
-    /// there is one, otherwise the shipped catalog, otherwise a blank slate.
+    /// The scene as it should be drawn right now. Once a signed-in world
+    /// document has been applied, the catalog is not a fallback — except for
+    /// Peglin Edition compiled scenes until the household MCP seed lands.
     func scene(_ sceneID: String) -> World2SceneDefinition {
+        if World2WorldSync.shared.usesServerDocument {
+            if let draft = draftScenes[sceneID] {
+                return draft
+            }
+            if sceneID.hasPrefix("scene.peglin."),
+               let catalog = World2SceneCatalog.scene(sceneID) {
+                return catalog
+            }
+            return World2SceneDefinition(
+                id: sceneID,
+                name: "Open ground",
+                summary: "",
+                isMutableByPlayer: true
+            )
+        }
         var resolved = draftScenes[sceneID]
             ?? World2SceneCatalog.scene(sceneID)
             ?? World2SceneDefinition(
@@ -227,6 +242,26 @@ final class World2SceneGraphStore: ObservableObject {
         if resolved.ambientVideoAsset == nil,
            let catalogAmbient = World2SceneCatalog.scene(sceneID)?.ambientVideoAsset {
             resolved.ambientVideoAsset = catalogAmbient
+        }
+        // New authored places (Figurine Explorer) must appear even when an
+        // older save already overrode this scene.
+        if let catalog = World2SceneCatalog.scene(sceneID) {
+            let have = Set(resolved.poiInstances.map(\.id))
+            for instance in catalog.poiInstances
+            where Self.graftedAuthoredInstanceIDs.contains(instance.id)
+                && !have.contains(instance.id) {
+                resolved.poiInstances.append(instance)
+            }
+        }
+        if sceneID == World2SceneCatalog.sceneID(for: .home) {
+            resolved.poiInstances.removeAll {
+                $0.archetypeID == World2POIRegistry.planningDeptID
+            }
+        }
+        // Salvage power-up retired from Crash / Peglin hub — strip overrides too.
+        resolved.poiInstances.removeAll {
+            $0.id == "instance.peglin.powerUp"
+                || $0.archetypeID == PeglinEdition.wreckPowerUpID
         }
         return resolved
     }
@@ -478,12 +513,11 @@ final class World2SceneGraphStore: ObservableObject {
         return instance
     }
 
-    /// Remove a place. Authored instances are kept so a shipped map cannot be
-    /// emptied out by accident; they can still be moved or swapped.
+    /// Remove a place. Sandbox allows deleting authored instances so kids can
+    /// clear a map; use Reset Scene to restore shipped placements.
     @discardableResult
     func removeInstance(_ instanceID: String, in sceneID: String) -> Bool {
-        guard let instance = scene(sceneID).instance(instanceID),
-              !instance.isAuthored else {
+        guard scene(sceneID).instance(instanceID) != nil else {
             return false
         }
         mutate(sceneID) { scene in
@@ -494,6 +528,35 @@ final class World2SceneGraphStore: ObservableObject {
             ["instance": instanceID, "scene": sceneID]
         )
         return true
+    }
+
+    func setPresentation(
+        _ presentation: World2POIPresentation,
+        instanceID: String,
+        in sceneID: String
+    ) {
+        mutate(sceneID) { scene in
+            guard let index = scene.poiInstances.firstIndex(where: { $0.id == instanceID }) else {
+                return
+            }
+            scene.poiInstances[index].presentation = presentation.clamped()
+        }
+    }
+
+    func resetInstanceVisuals(_ instanceID: String, in sceneID: String) {
+        mutate(sceneID) { scene in
+            guard let index = scene.poiInstances.firstIndex(where: { $0.id == instanceID }) else {
+                return
+            }
+            scene.poiInstances[index].transform.scale = 1
+            scene.poiInstances[index].transform.rotationDegrees = 0
+            scene.poiInstances[index].presentation = .default
+            scene.poiInstances[index].transform = scene.poiInstances[index].transform.clamped()
+        }
+        World2Diagnostics.log(
+            "scene_editor_instance_visuals_reset",
+            ["instance": instanceID, "scene": sceneID]
+        )
     }
 
     func bringInstanceToFront(_ instanceID: String, in sceneID: String) {
@@ -638,12 +701,27 @@ final class World2SceneGraphStore: ObservableObject {
             let data = try Self.encoder.encode(draftScenes)
             defaults.set(data, forKey: storeKey)
             savedScenes = draftScenes
-            saveMessage = "Saved on this device"
+            saveMessage = "Saved"
             print("WORLD2_SCENE_GRAPH_SAVED scenes=\(draftScenes.count)")
+            World2WorldSync.shared.noteLocalChange()
         } catch {
             saveMessage = "Could not save scenes"
             print("WORLD2_SCENE_GRAPH_SAVE_FAILED error=\(error.localizedDescription)")
         }
+    }
+
+    func exportScenes() -> [String: World2SceneDefinition] {
+        draftScenes
+    }
+
+    /// Server document replaces the on-device world. Does not push back.
+    func importScenes(_ scenes: [String: World2SceneDefinition]) {
+        draftScenes = scenes
+        savedScenes = scenes
+        if let data = try? Self.encoder.encode(scenes) {
+            defaults.set(data, forKey: storeKey)
+        }
+        saveMessage = "World loaded"
     }
 
     func discardChanges() {

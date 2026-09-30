@@ -1,0 +1,13 @@
+{
+  "picks": {
+    "decoration": "storybook",
+    "scene": "watercolor",
+    "poi": "clay"
+  },
+  "why": {
+    "decoration": "Storybook sticker. One object, ink outline, reads as a prop you can place.",
+    "scene": "Watercolor plate. A wide land with sky and ground, not a cutout.",
+    "poi": "Clay building. A chunky place you can walk up to."
+  },
+  "styles": ["storybook", "watercolor", "clay", "crayon", "papercut", "pixel"]
+}

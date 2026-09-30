@@ -1,0 +1,24 @@
+---
+description: Live world document updates must be accepted in place, then NEW badges stay until seen.
+globs: abbies.world.ios/**/World2WorldSync.swift,abbies.world.ios/**/World2RootView.swift,abbies.world.ios/**/World2WorldUpdate*.swift,abbies.world.ios/**/WorldMapView.swift,abbies.world.ios/**/World2PlayerMenuDrawer.swift,prototypes/studio-mock/**
+alwaysApply: false
+---
+
+# Live map updates
+
+A studio Save writes `/api/v1/worlds/current` and bumps `revision`. The iPad does not hot-swap until the player **Accept**s the change list.
+
+- Watch that revision while signed in (foreground + ~15s). Offer **Accept** with the named changes. Apply in place. Do not restart or respawn.
+- After Accept (or a launch pull newer than last announced), stamp unseen place/scene ids. Overland markers show a **NEW** badge until that place is seen once.
+- Player menu **Map everything seen** hides notices and badges but keeps the unseen set. New revisions still apply; they just stay quiet.
+- First pull on a device is not What's New.
+- Players stay intact. Do not seed the compiled catalog over the live document.
+
+```swift
+// BAD
+restartPlay(); enterScene(.defaultSpawn)
+
+// GOOD
+acceptPendingWorld() // apply, keep the current scene
+showsNewBadge(for: instance.id) // until markSeen
+```

@@ -70,22 +70,18 @@ struct IncredimachineView: View {
             }
         }
         .animation(.spring(response: 0.42, dampingFraction: 0.74), value: viewModel.phase)
+        .world2InteriorActions(
+            exitTitle: "Exit",
+            exitAccessibilityID: "world2.whizbang.close",
+            onExit: {
+                onDismiss?()
+                dismiss()
+            }
+        )
     }
 
     private var topBar: some View {
         HStack(spacing: 12) {
-            Button {
-                onDismiss?()
-                dismiss()
-            } label: {
-                Image(systemName: "xmark")
-                    .font(.system(size: 22, weight: .heavy))
-                    .frame(width: 52, height: 52)
-                    .background(.white.opacity(0.17), in: Circle())
-                    .overlay(Circle().stroke(.white.opacity(0.45), lineWidth: 2))
-            }
-            .accessibilityLabel("Close Whizbang")
-
             VStack(alignment: .leading, spacing: 0) {
                 Text("Whizbang")
                     .font(.system(size: 30, weight: .black, design: .rounded))

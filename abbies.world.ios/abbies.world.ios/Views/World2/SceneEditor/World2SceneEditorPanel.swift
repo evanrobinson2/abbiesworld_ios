@@ -13,6 +13,8 @@ struct World2SceneEditorPanel: View {
     let sceneID: String
     @ObservedObject var store: World2SceneGraphStore
     @ObservedObject var worldGraph: World2WorldGraphStore
+    @ObservedObject private var invent = World2SceneDecorationInventService.shared
+    @ObservedObject private var worldSync = World2WorldSync.shared
     @Binding var layer: World2SceneEditorLayer
     @Binding var selectedInstanceID: String?
     @Binding var selectedHardpointID: String?
@@ -22,9 +24,18 @@ struct World2SceneEditorPanel: View {
     let onDone: () -> Void
     var onOpenPlanningDept: (() -> Void)? = nil
     var onInventDecorations: (() -> Void)? = nil
-    var onDecorateTreehouse: (() -> Void)? = nil
+    var onDecorateScene: (() -> Void)? = nil
+    var onOpenCompletions: (() -> Void)? = nil
 
     private var scene: World2SceneDefinition { store.scene(sceneID) }
+
+    private var autoDecorPack: World2AutoDecorPack? {
+        worldSync.autoDecorPack(for: sceneID)
+    }
+
+    private var sceneInventHistory: [World2SceneInventHistoryEntry] {
+        invent.history.filter { $0.result.sceneID == sceneID }
+    }
 
     private var selectedInstance: World2POIInstance? {
         selectedInstanceID.flatMap { scene.instance($0) }
@@ -91,15 +102,15 @@ struct World2SceneEditorPanel: View {
                 .accessibilityIdentifier("world2.sceneEditor.invent")
             }
 
-            if onDecorateTreehouse != nil {
+            if onDecorateScene != nil {
                 Button {
-                    onDecorateTreehouse?()
+                    onDecorateScene?()
                 } label: {
                     Image(systemName: "paintbrush.pointed.fill")
                         .font(.system(size: 14, weight: .bold))
                 }
                 .buttonStyle(.plain)
-                .accessibilityLabel("Decorate treehouse")
+                .accessibilityLabel("Decorate this scene")
                 .accessibilityIdentifier("world2.sceneEditor.decorate")
             }
 
@@ -164,11 +175,11 @@ struct World2SceneEditorPanel: View {
             switch layer {
             case .pois:
                 placesStrip
-            case .hardpoints:
-                hardpointsStrip
             case .tunnels:
                 tunnelsStrip
             }
+
+            autoDecorStrip
 
             if !store.validationIssues(for: sceneID).isEmpty {
                 validationStrip
@@ -186,6 +197,79 @@ struct World2SceneEditorPanel: View {
 
     // MARK: - Layer strips (finger-first)
 
+    private var autoDecorStrip: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 8) {
+                Image(systemName: "sparkles")
+                    .font(.system(size: 12, weight: .bold))
+                Text("Auto props")
+                    .font(.system(size: 12, weight: .black, design: .rounded))
+                if let pack = autoDecorPack {
+                    Text(pack.status ?? "ready")
+                        .font(.system(size: 11, weight: .bold, design: .rounded))
+                        .foregroundStyle(.secondary)
+                    Text("· \(pack.keptCount ?? pack.keptLabels.count) kept")
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.secondary)
+                } else if !sceneInventHistory.isEmpty {
+                    Text("· \(sceneInventHistory[0].result.awarded.count) invented")
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.secondary)
+                } else {
+                    Text("· none yet")
+                        .font(.system(size: 11, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.secondary)
+                }
+                Spacer(minLength: 0)
+                if onOpenCompletions != nil {
+                    Button("Gallery") {
+                        onOpenCompletions?()
+                    }
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .buttonStyle(.bordered)
+                    .controlSize(.mini)
+                    .accessibilityIdentifier("world2.sceneEditor.completions")
+                }
+                if onInventDecorations != nil {
+                    Button("Cook") {
+                        onInventDecorations?()
+                    }
+                    .font(.system(size: 11, weight: .bold, design: .rounded))
+                    .buttonStyle(.bordered)
+                    .controlSize(.mini)
+                    .accessibilityIdentifier("world2.sceneEditor.autoDecorCook")
+                }
+            }
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 6) {
+                    if let pack = autoDecorPack {
+                        ForEach(pack.items ?? []) { item in
+                            Text(World2ChromeContract.shortDecorationLabel(item.label))
+                                .font(.system(size: 11, weight: .bold, design: .rounded))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(
+                                    (item.kept == false ? Color.secondary.opacity(0.18) : Color.orange.opacity(0.22)),
+                                    in: Capsule()
+                                )
+                                .opacity(item.kept == false ? 0.45 : 1)
+                                .accessibilityIdentifier("world2.sceneEditor.autoDecor.\(item.id)")
+                        }
+                    } else if let latest = sceneInventHistory.first {
+                        ForEach(latest.result.awarded) { decoration in
+                            Text(World2ChromeContract.shortDecorationLabel(decoration.label))
+                                .font(.system(size: 11, weight: .bold, design: .rounded))
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .background(Color.green.opacity(0.22), in: Capsule())
+                        }
+                    }
+                }
+            }
+            .accessibilityIdentifier("world2.sceneEditor.autoDecorStrip")
+        }
+    }
+
     private var placesStrip: some View {
         HStack(spacing: 8) {
             Text("Drag · pinch · twist on the map")
@@ -195,24 +279,9 @@ struct World2SceneEditorPanel: View {
 
             Spacer(minLength: 0)
 
-            Toggle("Snap", isOn: $snappingEnabled)
-                .toggleStyle(.switch)
-                .labelsHidden()
-                .accessibilityLabel("Snapping")
-                .accessibilityIdentifier("world2.sceneEditor.snapToggle")
-
             addPlaceMenu
 
             if let instance = selectedInstance {
-                if instance.isSnapped {
-                    Button("Unsnap", systemImage: "pin.slash") {
-                        store.unsnapInstance(instance.id, in: sceneID)
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                    .accessibilityIdentifier("world2.sceneEditor.place.unsnap")
-                }
-
                 Button("Remove", systemImage: "trash") {
                     if store.removeInstance(instance.id, in: sceneID) {
                         selectedInstanceID = nil
@@ -221,46 +290,7 @@ struct World2SceneEditorPanel: View {
                 .buttonStyle(.bordered)
                 .controlSize(.small)
                 .tint(.red)
-                .disabled(instance.isAuthored)
                 .accessibilityIdentifier("world2.sceneEditor.place.remove")
-            }
-        }
-    }
-
-    private var hardpointsStrip: some View {
-        HStack(spacing: 8) {
-            Text("Tap map to add · drag pads")
-                .font(.system(size: 12, weight: .semibold, design: .rounded))
-                .foregroundStyle(.secondary)
-                .lineLimit(1)
-
-            Spacer(minLength: 0)
-
-            Button("Add Pad", systemImage: "plus.viewfinder") {
-                let added = store.addHardpoint(in: sceneID, at: .center)
-                selectedHardpointID = added.id
-            }
-            .buttonStyle(.bordered)
-            .controlSize(.small)
-            .accessibilityIdentifier("world2.sceneEditor.addPad")
-
-            if let hardpoint = selectedHardpoint {
-                Toggle("Lock", isOn: lockedBinding(hardpoint))
-                    .toggleStyle(.switch)
-                    .labelsHidden()
-                    .accessibilityLabel("Locked")
-                    .accessibilityIdentifier("world2.sceneEditor.pad.locked")
-
-                Button("Delete", systemImage: "trash") {
-                    if store.removeHardpoint(hardpoint.id, in: sceneID) {
-                        selectedHardpointID = nil
-                    }
-                }
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-                .tint(.red)
-                .disabled(hardpoint.isLocked)
-                .accessibilityIdentifier("world2.sceneEditor.pad.delete")
             }
         }
     }
@@ -361,14 +391,22 @@ struct World2SceneEditorPanel: View {
 
     private var toolsMenu: some View {
         Menu {
+            if onOpenCompletions != nil {
+                Button("Completions Gallery", systemImage: "photo.on.rectangle.angled") {
+                    onOpenCompletions?()
+                }
+            }
             if onInventDecorations != nil {
                 Button("Invent Props for Scene", systemImage: "wand.and.stars") {
                     onInventDecorations?()
                 }
+                Button("Auto Pack Props", systemImage: "sparkles") {
+                    onInventDecorations?()
+                }
             }
-            if onDecorateTreehouse != nil {
-                Button("Decorate Treehouse", systemImage: "paintbrush.pointed.fill") {
-                    onDecorateTreehouse?()
+            if onDecorateScene != nil {
+                Button("Decorate This Scene", systemImage: "paintbrush.pointed.fill") {
+                    onDecorateScene?()
                 }
             }
             Button("Save Locally", systemImage: "internaldrive.fill") {
@@ -406,17 +444,6 @@ struct World2SceneEditorPanel: View {
             }
             .accessibilityIdentifier("world2.sceneEditor.logRigging")
 
-            if let selectedInstance, selectedInstance.isSnapped == false {
-                Button("Snap to Nearest Pad", systemImage: "pin.fill") {
-                    _ = store.snapInstanceToNearestHardpoint(
-                        selectedInstance.id,
-                        in: sceneID,
-                        aspectRatio: aspectRatio
-                    )
-                }
-                .accessibilityIdentifier("world2.sceneEditor.place.snap")
-            }
-
             if let selectedInstance {
                 Menu("Replace With") {
                     ForEach(World2POIRegistry.placeableInEditor) { archetype in
@@ -435,12 +462,5 @@ struct World2SceneEditorPanel: View {
                 .font(.system(size: 16, weight: .semibold))
         }
         .accessibilityIdentifier("world2.sceneEditor.tools")
-    }
-
-    private func lockedBinding(_ hardpoint: World2SceneHardpoint) -> Binding<Bool> {
-        Binding(
-            get: { store.scene(sceneID).hardpoint(hardpoint.id)?.isLocked ?? false },
-            set: { store.setHardpointLocked($0, hardpointID: hardpoint.id, in: sceneID) }
-        )
     }
 }

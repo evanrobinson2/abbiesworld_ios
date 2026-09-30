@@ -2,12 +2,8 @@
 //  World2SceneCookService.swift
 //  abbies.world.ios
 //
-//  Runs Scene Builder cooks. While cooking, the atelier shows a COOKING badge;
-//  when the image is ready the phase flips to ready and a deed can be awarded.
-//
-//  v1 uses a timed local cook that reveals a bundled sample landscape so the
-//  loop is playable offline. Swap the body of `performCook` for a real
-//  generation pipeline without changing the badge / reward surface.
+//  Runs Scene Builder cooks. The watercolor placeholder shows at once.
+//  The finished plate comes from /api/create (a full landscape, not a cutout).
 //
 
 import Combine
@@ -20,6 +16,8 @@ final class World2SceneCookService: ObservableObject {
 
     @Published private(set) var activeJob: World2SceneCookJob?
     @Published private(set) var lastReadyJob: World2SceneCookJob?
+    @Published private(set) var plateImage: UIImage?
+    @Published private(set) var statusMessage = "Generation in progress"
 
     /// Exterior map badge is true whenever a cook is in flight.
     var isCooking: Bool { activeJob?.phase == .cooking }
@@ -42,6 +40,8 @@ final class World2SceneCookService: ObservableObject {
         )
         activeJob = job
         lastReadyJob = nil
+        plateImage = World2PlaceholderPack.image(for: .scene)
+        statusMessage = "Generation in progress"
         World2Diagnostics.log(
             "scene_builder_cook_started",
             ["summary": recipe.summaryLine]
@@ -59,29 +59,37 @@ final class World2SceneCookService: ObservableObject {
     }
 
     private func performCook(jobID: String) async {
-        // Kid-readable wait: long enough to notice the badge, short enough to play.
-        try? await Task.sleep(nanoseconds: 3_200_000_000)
-        guard !Task.isCancelled else { return }
-        guard var job = activeJob, job.id == jobID else { return }
-
-        // Offline-proof result: bundled sample cook. Real generation replaces this.
-        let preview = "world2_scene_builder_sample_cook"
-        if UIImage(named: preview) == nil {
+        guard let recipeLine = activeJob?.recipe.summaryLine, activeJob?.id == jobID else { return }
+        do {
+            let data = try await World2AssetGenerationService.generatePNG(
+                kind: .scene,
+                subject: recipeLine,
+                placeName: recipeLine
+            )
+            guard !Task.isCancelled, var job = activeJob, job.id == jobID else { return }
+            if let image = UIImage(data: data) {
+                plateImage = image
+            }
+            job.phase = .ready
+            job.previewCatalogName = nil
+            job.finishedAt = Date()
+            activeJob = job
+            lastReadyJob = job
+            statusMessage = "Ready"
+            World2Diagnostics.log(
+                "scene_builder_cook_ready",
+                ["preview": "generated", "summary": job.recipe.summaryLine]
+            )
+        } catch {
+            guard !Task.isCancelled, var job = activeJob, job.id == jobID else { return }
             job.phase = .failed
             job.finishedAt = Date()
             activeJob = job
-            World2Diagnostics.log("scene_builder_cook_failed", ["reason": "missing_preview"])
-            return
+            statusMessage = "The picture didn't finish. The placeholder is staying."
+            World2Diagnostics.log(
+                "scene_builder_cook_failed",
+                ["reason": error.localizedDescription]
+            )
         }
-
-        job.phase = .ready
-        job.previewCatalogName = preview
-        job.finishedAt = Date()
-        activeJob = job
-        lastReadyJob = job
-        World2Diagnostics.log(
-            "scene_builder_cook_ready",
-            ["preview": preview, "summary": job.recipe.summaryLine]
-        )
     }
 }

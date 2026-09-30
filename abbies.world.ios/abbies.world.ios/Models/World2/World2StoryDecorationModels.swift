@@ -31,6 +31,8 @@ enum World2StoryArtStyle: String, Codable, Sendable {
     case propertyDeed
     case daddyCandy
     case daddyHug
+    case foxTrophy
+    case wreckPowerUp
 }
 
 /// What tapping Use does for a story item that is not only décor.
@@ -123,16 +125,47 @@ struct World2StoryDecoration: Identifiable, Equatable, Sendable {
         inventoryAction: .none
     )
 
+    /// Fox Land clear — MVP Peglin trophy for the inventory drawer.
+    static let foxTrophy = World2StoryDecoration(
+        id: "decoration.story.foxTrophy",
+        name: "Fox Trophy",
+        shortDescription: "A shiny gold cup from beating the Fox Spirit. Keep it in your inventory forever.",
+        category: "Story Treasure",
+        defaultScale: 0.55,
+        placementLayer: .floor,
+        artStyle: .foxTrophy,
+        badges: [.new, .oneOfAKind, .storyTreasure, .questReward],
+        awardedByArchetypeID: PeglinEdition.foxGuardianID,
+        inventoryAction: .none
+    )
+
+    /// Retired salvage power-up orb — kept only so old inventories still decode.
+    static let wreckPowerUp = World2StoryDecoration(
+        id: "decoration.story.wreckPowerUp",
+        name: "Salvage Orb",
+        shortDescription: "An old humming core from the wreck. No longer awarded — monastery blessings replaced it.",
+        category: "Story Treasure",
+        defaultScale: 0.52,
+        placementLayer: .floor,
+        artStyle: .wreckPowerUp,
+        badges: [.oneOfAKind, .storyTreasure],
+        awardedByArchetypeID: PeglinEdition.wreckPowerUpID,
+        inventoryAction: .none
+    )
+
     static let all: [World2StoryDecoration] = [
         perfectPorridge,
         worldTeleporter,
         propertyDeed,
         daddyCandy,
         daddyHug,
+        foxTrophy,
+        // wreckPowerUp intentionally omitted — not awarded; decode via decoration(id:)
     ]
 
     static func decoration(id: String) -> World2StoryDecoration? {
-        all.first { $0.id == id }
+        if id == wreckPowerUp.id { return wreckPowerUp }
+        return all.first { $0.id == id }
     }
 
     static func isStoryDecoration(_ id: String) -> Bool {

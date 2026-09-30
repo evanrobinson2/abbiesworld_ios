@@ -214,6 +214,11 @@ final class World2AssetWorkbenchViewModel: ObservableObject {
 
     func cancelGeneration() {
         guard phase == .generating else { return }
+        let id = job?.id
+        generationTask?.cancel()
+        if let id {
+            service.cancel(jobID: id)
+        }
         reset()
     }
 

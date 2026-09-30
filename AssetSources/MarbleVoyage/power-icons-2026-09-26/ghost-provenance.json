@@ -1,0 +1,24 @@
+{
+  "semanticId": "ui.plink.power.icon.ghost",
+  "filename": "ghost-original.jpeg",
+  "sourceProvider": "Midjourney",
+  "jobId": "4aa2971f-5a00-423e-b54e-794fbef785df",
+  "candidateIndex": 3,
+  "sourceUrl": "https://cdn.midjourney.com/4aa2971f-5a00-423e-b54e-794fbef785df/0_3.jpeg",
+  "submittedAt": "2026-09-26T21:59:35Z",
+  "sha256": "08a91398baa65c850a10865abe0616dbe59f61e0be7ac961902edb2424568a75",
+  "selection": "Art director selection under user-authorized production; style locked to user-approved Tilt candidate 4.",
+  "promptFile": "ghost-prompt.txt",
+  "derivative": {
+    "filename": "ghost-transparent.png",
+    "sourceProvider": "OpenAI imagegen frame-matched edit",
+    "derivativeOf": "08a91398baa65c850a10865abe0616dbe59f61e0be7ac961902edb2424568a75",
+    "sha256": "687c9a8610ab41c2bb6527deee1c223b907ce68cf813eafd45b9f2d90f6d8625",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "maxCornerAlpha": 0,
+    "notes": "Generated motif edit using approved Tilt frame reference; not pixel-identical. Original preserved. Requested centered 83% diameter with motifs inside rim."
+  }
+}

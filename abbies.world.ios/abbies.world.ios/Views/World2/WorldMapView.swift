@@ -5,6 +5,7 @@ import Combine
 struct WorldMapView: View {
     @ObservedObject var viewModel: World2ViewModel
     @ObservedObject private var developerSession = World2DeveloperSession.shared
+    @ObservedObject private var assets = AssetBootstrapService.shared
 
     @State private var editorLayer: World2SceneEditorLayer = .pois
     @State private var selectedInstanceID: String?
@@ -14,9 +15,16 @@ struct WorldMapView: View {
     @State private var showingEditor = false
     @State private var editorMinimized = true
     @State private var showingSceneInvent = false
+    @State private var isArrangingFurniture = false
+    @State private var selectedFurnitureID: String?
+    @State private var selectedCatalogItemID: String?
+    @State private var decorateFilter: DecorateFilterID = .mine
+    /// Sandbox Edit from the tool rail (works even without developer session).
+    @State private var sandboxEditing = false
     /// The pad lighting up under a live drag, and why it might refuse.
     @State private var candidateHardpointID: String?
     @State private var snapRejection: String?
+    @State private var selectedZoneInteractionID: String?
     /// Art Garden plate is wider than the iPad; drag/pinch to look around.
     @State private var lookZoom: CGFloat = 1
     @State private var lookPan: CGSize = .zero
@@ -27,15 +35,34 @@ struct WorldMapView: View {
 
     private var developerMode: Bool { developerSession.isEnabled }
     private var store: World2SceneGraphStore { viewModel.sceneGraph }
-    private var allowsLookAround: Bool {
-        viewModel.currentWorld?.id == .artGarden && !isBuildMode
+    private var plateImageSize: CGSize {
+        _ = assets.registryGeneration
+        return assets.image(for: scene.backgroundAsset)?.size
+            ?? CGSize(width: 4, height: 3)
     }
-    private var sceneID: String { (viewModel.currentWorld?.id ?? .home).sceneID }
-    private var scene: World2SceneDefinition { store.scene(sceneID) }
+
+    /// Plate is bigger than the viewport (cover), so the player can look around.
+    private func plateOverflowsViewport(in viewSize: CGSize) -> Bool {
+        let covered = Self.coveredMapRect(imageSize: plateImageSize, in: viewSize)
+        return covered.width > viewSize.width + 2 || covered.height > viewSize.height + 2
+    }
+
+    private var decorateSurfaceKey: String {
+        World2DecorateSurface.key(forScene: sceneID)
+    }
+
+    private var allowsLookAround: Bool {
+        !isBuildMode && !isArrangingFurniture
+    }
+
+    /// Compiled worlds use `world.home`. A signed-in document uses `scene.home`.
+    /// The plate has to follow the document, or the map is empty Open ground.
+    private var sceneID: String { viewModel.currentScene.id }
+    private var scene: World2SceneDefinition { viewModel.currentScene }
 
     /// Overland is either Interact (play / march) or Build (scene editor).
     private var isBuildMode: Bool {
-        developerMode && showingEditor
+        viewModel.isSandboxBuilding
     }
 
     private var isEditingPlaces: Bool {
@@ -43,51 +70,120 @@ struct WorldMapView: View {
     }
 
     private var isEditingHardpoints: Bool {
-        isBuildMode && editorLayer == .hardpoints
+        false
     }
 
-    private var worldSubtitle: String {
-        switch viewModel.currentWorld?.id {
-        case .work: return "Help the city's magical machines"
-        case .farm: return "Discover something new in the meadow"
-        case .threeBears: return "Somebody left three bowls out"
-        case .artGarden: return "Drag to look around the garden"
-        case .evan: return "Daddy's glowing mountain base"
-        case .blankSlate: return "Drag to look around"
-        default: return "Choose a place to visit"
-        }
+    private var showsThumbControls: Bool {
+        !isBuildMode
+            && !isArrangingFurniture
+            && viewModel.selectedPlaceInventoryItemID == nil
     }
 
     var body: some View {
         GeometryReader { geometry in
-            let baseRect = Self.mapRect(for: scene, in: geometry.size)
-            let mapRect = lookMapRect(base: baseRect, in: geometry.size)
+            let baseRect = Self.mapRect(
+                for: scene,
+                in: geometry.size,
+                preferCover: scene.id == World2SceneCatalog.sceneID(for: .artGarden)
+            )
+            let displayedOverflows = baseRect.width > geometry.size.width + 2
+                || baseRect.height > geometry.size.height + 2
+            let canLook = allowsLookAround && displayedOverflows
+            let mapRect = lookMapRect(base: baseRect, in: geometry.size, enabled: canLook)
             let aspectRatio = mapRect.height > 1 ? mapRect.width / mapRect.height : 4.0 / 3.0
 
             ZStack {
                 mapBackground(geometry: geometry, mapRect: mapRect)
-                marchTapLayer(mapRect: mapRect)
-                padPlacementLayer(mapRect: mapRect)
-                hardpointLayer(mapRect: mapRect)
+                if World2WorldSync.shared.presentsParty {
+                    marchTapLayer(mapRect: mapRect)
+                }
                 placeLayer(mapRect: mapRect, viewSize: geometry.size, aspectRatio: aspectRatio)
                 plantedPlaceLayer(mapRect: mapRect)
-                plantDropTargetLayer(mapRect: mapRect)
+                freehandPlantLayer(mapRect: mapRect)
                 cookingBadgeLayer(mapRect: mapRect)
-                World2PartyLayer(party: viewModel.party, mapRect: mapRect)
-                    .zIndex(20)
+                World2SceneDecorateLayer(
+                    surfaceKey: decorateSurfaceKey,
+                    mapRect: mapRect,
+                    isArranging: isArrangingFurniture,
+                    selectedFurnitureID: $selectedFurnitureID,
+                    selectedCatalogItemID: $selectedCatalogItemID
+                )
+                .zIndex(18)
+                if World2WorldSync.shared.presentsParty {
+                    World2PartyLayer(
+                        party: viewModel.party,
+                        mapRect: mapRect,
+                        showsNames: false,
+                        usesPeglinPixelAbbie: viewModel.playSceneID.hasPrefix("scene.peglin.")
+                    )
+                        .zIndex(20)
+                }
+                sceneLabelPass(mapRect: mapRect, viewSize: geometry.size)
+                if !isArrangingFurniture {
+                    travelExitLayer(viewSize: geometry.size)
+                }
                 topChrome
-                modeBanner
-                travelNavigation
-                inspectionOverlay
                 snapHintOverlay
                 editorOverlay(aspectRatio: aspectRatio)
+                selectedPOIToolbar(mapRect: mapRect)
             }
             .gesture(
                 lookAroundGesture(fitted: baseRect, in: geometry.size),
-                including: allowsLookAround ? .gesture : .subviews
+                including: canLook ? .gesture : .subviews
             )
+            .overlay(alignment: .bottom) {
+                if showsThumbControls, World2WorldSync.shared.presentsParty {
+                    World2DualStickControls(party: viewModel.party) {
+                        confirmSelectedZoneInteraction()
+                    }
+                    .zIndex(45)
+                }
+            }
+            .overlay(alignment: .bottom) {
+                if isArrangingFurniture {
+                    World2DecorateTray(
+                        playerName: scene.name,
+                        selectedCatalogID: selectedCatalogItemID,
+                        selectedInventoryID: selectedFurnitureID,
+                        filter: decorateFilter,
+                        onFilterChange: { decorateFilter = $0 },
+                        onSelectCatalog: { item in
+                            selectedCatalogItemID = item.id
+                            selectedFurnitureID = nil
+                        },
+                        onSelectInventory: { id in
+                            selectedFurnitureID = id
+                            selectedCatalogItemID = nil
+                        },
+                        onDone: {
+                            isArrangingFurniture = false
+                            selectedFurnitureID = nil
+                            selectedCatalogItemID = nil
+                        }
+                    )
+                    .zIndex(46)
+                    .accessibilityIdentifier("world2.map.decorateTray")
+                }
+            }
+            .overlay(alignment: .bottomTrailing) {
+                if !isArrangingFurniture, showsThumbControls, !viewModel.zoneInteractions.isEmpty {
+                    World2ZoneExploreDrawer(
+                        interactions: viewModel.zoneInteractions,
+                        selectedID: $selectedZoneInteractionID,
+                        onSelect: { id in
+                            guard let item = viewModel.zoneInteractions.first(where: { $0.id == id }) else {
+                                return
+                            }
+                            viewModel.selectZoneInteraction(item)
+                        },
+                        onGo: confirmSelectedZoneInteraction,
+                        liftsForStick: World2WorldSync.shared.presentsParty
+                    )
+                    .zIndex(46)
+                }
+            }
             .onReceive(Timer.publish(every: 0.25, on: .main, in: .common).autoconnect()) { date in
-                guard !isBuildMode else { return }
+                guard !isBuildMode, World2WorldSync.shared.presentsParty else { return }
                 let lead = viewModel.party.pieces(at: date)
                     .first(where: { $0.id == .abbie })?.position
                     ?? viewModel.party.leadPosition
@@ -102,7 +198,17 @@ struct WorldMapView: View {
         .accessibilityIdentifier("world2.homeWorld")
         .onAppear {
             syncEditorSelection()
-            viewModel.party.enterScene(.defaultSpawn, aspectRatio: aspectRatioForCurrentMap())
+            if viewModel.isSandboxBuilding {
+                showingEditor = true
+                sandboxEditing = true
+            }
+            viewModel.party.enterScene(
+                PeglinEdition.partyLanding(for: viewModel.playSceneID),
+                aspectRatio: aspectRatioForCurrentMap()
+            )
+            if viewModel.consumeStartSceneDecoratingFlag() {
+                beginDecoratingThisScene()
+            }
         }
         .onChange(of: viewModel.currentPlayerId) {
             store.selectPlayer(viewModel.currentPlayerId)
@@ -112,16 +218,26 @@ struct WorldMapView: View {
             // Developer mode starts in Interact so play is obvious; Build is opt-in.
             showingEditor = false
             editorMinimized = true
+            viewModel.isSandboxBuilding = false
             syncEditorSelection()
         }
-        .onChange(of: viewModel.currentWorld?.id) {
+        .onChange(of: viewModel.playSceneID) {
             candidateHardpointID = nil
             snapRejection = nil
             lookZoom = 1
             lookPan = .zero
-            viewModel.selectedPlaceInventoryItemID = nil
-            syncEditorSelection()
-            viewModel.party.enterScene(.defaultSpawn, aspectRatio: aspectRatioForCurrentMap())
+            selectedZoneInteractionID = nil
+            World2WorldSync.shared.markSeen(viewModel.playSceneID)
+            viewModel.dismissPOIInspection()
+            viewModel.party.enterScene(
+                PeglinEdition.partyLanding(for: viewModel.playSceneID),
+                aspectRatio: aspectRatioForCurrentMap()
+            )
+        }
+        .onChange(of: viewModel.inspectedPOI?.id) { _, id in
+            if let id {
+                selectedZoneInteractionID = id
+            }
         }
         .onChange(of: editorLayer) {
             candidateHardpointID = nil
@@ -131,14 +247,51 @@ struct WorldMapView: View {
             World2SceneInventDecorationsView(
                 scene: scene,
                 plateImage: AssetBootstrapService.shared.image(for: scene.backgroundAsset),
+                onCarved: { result in
+                    viewModel.notifySceneInventReady(result)
+                },
                 onOpenDecorate: {
                     showingSceneInvent = false
-                    viewModel.openCurrentPlayerTreehouse(startDecorating: true)
+                    beginDecoratingThisScene()
+                },
+                onTravel: { result in
+                    showingSceneInvent = false
+                    viewModel.reopenInventResult(result)
                 },
                 onClose: { showingSceneInvent = false }
             )
         }
+        .onChange(of: viewModel.sceneDecorateTick) { _, _ in
+            beginDecoratingThisScene()
+        }
+        .onChange(of: viewModel.isSandboxBuilding) { _, building in
+            showingEditor = building
+            editorMinimized = true
+            sandboxEditing = building
+            if building {
+                syncEditorSelection()
+            }
+        }
+        .onChange(of: viewModel.sandboxInventTick) { _, _ in
+            showingSceneInvent = true
+        }
         .ignoresSafeArea()
+    }
+
+    private func beginDecoratingThisScene() {
+        showingEditor = false
+        decorateFilter = .mine
+        if let highlight = viewModel.consumeInventoryHighlight() {
+            selectedFurnitureID = highlight
+        }
+        isArrangingFurniture = true
+        viewModel.dismissInventReadyPrompt()
+        _ = viewModel.consumePendingDecorateTarget()
+        _ = viewModel.consumeStartSceneDecoratingFlag()
+        World2Diagnostics.log(
+            "scene_decorate_opened",
+            ["scene": sceneID, "surface": decorateSurfaceKey]
+        )
     }
 
     private func aspectRatioForCurrentMap() -> Double {
@@ -146,8 +299,8 @@ struct WorldMapView: View {
         4.0 / 3.0
     }
 
-    private func lookMapRect(base: CGRect, in viewSize: CGSize) -> CGRect {
-        guard allowsLookAround || lookZoom > 1.01 || abs(lookPan.width) > 1 else {
+    private func lookMapRect(base: CGRect, in viewSize: CGSize, enabled: Bool) -> CGRect {
+        guard enabled || lookZoom > 1.01 || abs(lookPan.width) > 1 else {
             return base
         }
         let zoom = min(max(lookZoom * liveZoom, 1), 2.6)
@@ -213,18 +366,11 @@ struct WorldMapView: View {
                 y: mapRect.minY + CGFloat(instance.transform.position.y) * mapRect.height
             )
             Group {
-                if let badge = UIImage(named: "world2_scene_builder_cooking_badge") {
-                    Image(uiImage: badge)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 88, height: 88)
-                } else {
-                    Text("COOKING")
-                        .font(.system(size: 14, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
-                        .padding(10)
-                        .background(.orange, in: Capsule())
-                }
+                Text("COOKING")
+                    .font(.system(size: 14, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                    .padding(10)
+                    .background(.orange, in: Capsule())
             }
             .position(x: point.x, y: point.y - 70)
             .accessibilityIdentifier("world2.sceneBuilder.mapCookingBadge")
@@ -256,68 +402,6 @@ struct WorldMapView: View {
         }
     }
 
-    /// Big mode chip so Build vs Interact is unmistakable on overland.
-    @ViewBuilder
-    private var modeBanner: some View {
-        if developerMode {
-            HStack(spacing: 0) {
-                modeChip(
-                    title: "Interact",
-                    symbol: "figure.walk",
-                    active: !isBuildMode,
-                    activeColor: .green
-                ) {
-                    withAnimation(.easeOut(duration: 0.2)) {
-                        showingEditor = false
-                        editorMinimized = true
-                    }
-                }
-                modeChip(
-                    title: "Build",
-                    symbol: "hammer.fill",
-                    active: isBuildMode,
-                    activeColor: .orange
-                ) {
-                    withAnimation(.easeOut(duration: 0.2)) {
-                        showingEditor = true
-                        editorMinimized = true
-                        syncEditorSelection()
-                    }
-                }
-            }
-            .background(.black.opacity(0.55), in: Capsule())
-            .overlay(Capsule().stroke(.white.opacity(0.45), lineWidth: 1.5))
-            .padding(.top, 64)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-            .zIndex(45)
-            .accessibilityElement(children: .contain)
-            .accessibilityIdentifier("world2.map.modeBanner")
-        }
-    }
-
-    private func modeChip(
-        title: String,
-        symbol: String,
-        active: Bool,
-        activeColor: Color,
-        action: @escaping () -> Void
-    ) -> some View {
-        Button(action: action) {
-            Label(title, systemImage: symbol)
-                .font(.system(size: 16, weight: .black, design: .rounded))
-                .foregroundStyle(.white)
-                .padding(.horizontal, 18)
-                .padding(.vertical, 12)
-                .background(
-                    active ? activeColor.opacity(0.95) : Color.clear,
-                    in: Capsule()
-                )
-        }
-        .buttonStyle(.plain)
-        .accessibilityAddTraits(active ? .isSelected : [])
-        .accessibilityIdentifier("world2.map.mode.\(title.lowercased())")
-    }
-
     // MARK: - Background
 
     @ViewBuilder
@@ -334,10 +418,10 @@ struct WorldMapView: View {
                 World2SemanticImage(
                     semanticName: scene.backgroundAsset,
                     fallbackIcon: "tree.fill",
-                    fallbackLabel: "\(scene.name) artwork is not bundled"
+                    fallbackLabel: "\(scene.name) is under construction"
                 )
                 .scaledToFill()
-                .frame(width: geometry.size.width, height: geometry.size.height)
+                .frame(width: geometry.size.width, height: geometry.size.height, alignment: .center)
                 .clipped()
                 .overlay(Color.black.opacity(0.42))
                 .ignoresSafeArea()
@@ -362,79 +446,189 @@ struct WorldMapView: View {
                 World2SemanticImage(
                     semanticName: scene.backgroundAsset,
                     fallbackIcon: "tree.fill",
-                    fallbackLabel: "\(scene.name) artwork is not bundled"
+                    fallbackLabel: "\(scene.name) is under construction"
                 )
                 .scaledToFit()
             }
         }
 
         plate
-            .frame(width: mapRect.width, height: mapRect.height)
+            .frame(width: mapRect.width, height: mapRect.height, alignment: .center)
             .clipped()
             .position(x: mapRect.midX, y: mapRect.midY)
             .shadow(color: .black.opacity(0.45), radius: 18, y: 8)
             .accessibilityIdentifier("world2.map.frame")
     }
 
-    // MARK: - Hardpoints
+    // MARK: - Freehand plant (no POI hardpoints)
 
-    /// In the hardpoint layer, a tap on bare map adds a pad where you tapped.
-    /// The pads themselves sit above this, so tapping one still selects it.
+    /// Armed inventory item: tap anywhere on the plate to plant it.
     @ViewBuilder
-    private func padPlacementLayer(mapRect: CGRect) -> some View {
-        if isEditingHardpoints {
+    private func freehandPlantLayer(mapRect: CGRect) -> some View {
+        if viewModel.selectedPlaceInventoryItemID != nil, !isBuildMode {
             Color.clear
                 .contentShape(Rectangle())
                 .onTapGesture(coordinateSpace: .local) { location in
                     guard mapRect.width > 1, mapRect.height > 1 else { return }
-                    let added = store.addHardpoint(
-                        in: sceneID,
-                        at: World2NormalizedPoint(
-                            x: (location.x - mapRect.minX) / mapRect.width,
-                            y: (location.y - mapRect.minY) / mapRect.height
-                        )
-                    )
-                    selectedHardpointID = added.id
+                    let point = World2NormalizedPoint(
+                        x: (location.x - mapRect.minX) / mapRect.width,
+                        y: (location.y - mapRect.minY) / mapRect.height
+                    ).clamped()
+                    plantSelectedInventoryItem(at: point)
                 }
-                .zIndex(1)
-                .accessibilityHidden(true)
+                .frame(width: mapRect.width, height: mapRect.height)
+                .position(x: mapRect.midX, y: mapRect.midY)
+                .zIndex(35)
+                .accessibilityLabel("Plant here")
+                .accessibilityIdentifier("world2.map.freehandPlant")
         }
     }
 
-    /// Open pads are drawn for players as a quiet promise and for developers as
-    /// the full editable target. Occupied pads only appear while editing, so the
-    /// map does not grow rings under every building.
-    @ViewBuilder
-    private func hardpointLayer(mapRect: CGRect) -> some View {
-        let occupancy = scene.occupancy
-        let visible = scene.hardpoints.filter { hardpoint in
-            if isEditingHardpoints { return true }
-            if isEditingPlaces { return occupancy[hardpoint.id] == nil || candidateHardpointID == hardpoint.id }
-            return occupancy[hardpoint.id] == nil && scene.showsOpenHardpointsToPlayers
-        }
+    private func plantSelectedInventoryItem(at point: World2NormalizedPoint) {
+        guard let itemID = viewModel.selectedPlaceInventoryItemID else { return }
+        _ = viewModel.placeInventoryItem(
+            itemID,
+            x: point.x,
+            y: point.y,
+            hardpointID: nil,
+            in: sceneID
+        )
+    }
 
-        ForEach(visible) { hardpoint in
-            World2HardpointMarker(
-                hardpoint: hardpoint,
-                mode: markerMode(for: hardpoint),
-                mapRect: mapRect
-            ) {
-                selectedHardpointID = hardpoint.id
-            } onMove: { position in
-                store.moveHardpoint(hardpoint.id, in: sceneID, to: position)
+    private func sceneLabelPass(mapRect: CGRect, viewSize: CGSize) -> some View {
+        TimelineView(.animation(minimumInterval: 1.0 / 20.0)) { timeline in
+            let build = sceneLabelBuild(
+                mapRect: mapRect,
+                viewSize: viewSize,
+                date: timeline.date
+            )
+            World2SceneLabelPass(
+                items: build.items,
+                obstacles: build.obstacles,
+                bounds: CGRect(origin: .zero, size: viewSize)
+            )
+        }
+        .zIndex(24)
+        .allowsHitTesting(false)
+    }
+
+    private func sceneLabelBuild(
+        mapRect: CGRect,
+        viewSize: CGSize,
+        date: Date
+    ) -> World2SceneLabelBuild {
+        var build = World2SceneLabelBuild()
+        build.addChrome(viewSize: viewSize, includeBottomTray: isArrangingFurniture)
+
+        for instance in scene.instancesInDrawOrder {
+            guard let archetype = World2POIRegistry.archetype(instance.archetypeID) else { continue }
+            let scale = instance.transform.scale * (mapRect.width / max(viewSize.width, 1))
+            let anchor = CGPoint(
+                x: mapRect.minX + mapRect.width * instance.transform.position.x,
+                y: mapRect.minY + mapRect.height * instance.transform.position.y
+            )
+            let showName = isEditingPlaces || viewModel.inspectedPOI?.id == instance.id
+            if showName {
+                build.addAnchoredLabel(
+                    id: "poi.\(instance.id)",
+                    text: archetype.name,
+                    anchor: anchor,
+                    footprint: CGSize(width: 210 * scale, height: 168 * scale),
+                    priority: 2
+                )
+            } else {
+                build.addArtworkObstacle(
+                    CGRect(
+                        x: anchor.x - 105 * scale,
+                        y: anchor.y - 98 * scale,
+                        width: 210 * scale,
+                        height: 168 * scale
+                    )
+                )
             }
-            .zIndex(isEditingHardpoints ? 12 : 2)
+        }
+
+        for instance in viewModel.currentAuthoredMapPlaces {
+            let anchor = CGPoint(
+                x: mapRect.minX + mapRect.width * instance.x,
+                y: mapRect.minY + mapRect.height * instance.y
+            )
+            build.addAnchoredLabel(
+                id: "place.\(instance.id)",
+                text: instance.mapLabel,
+                anchor: anchor,
+                footprint: CGSize(width: 170, height: 140),
+                priority: 2
+            )
+        }
+
+        if World2WorldSync.shared.presentsParty {
+            addPartyLabels(to: &build, mapRect: mapRect, date: date)
+        }
+        return build
+    }
+
+    private func addPartyLabels(
+        to build: inout World2SceneLabelBuild,
+        mapRect: CGRect,
+        date: Date
+    ) {
+        for piece in viewModel.party.pieces(at: date) {
+            let depth = World2PartyPathfinding.depthScale(forY: piece.position.y)
+            let size = max(128, min(mapRect.width, mapRect.height) * 0.24) * depth
+            let anchor = CGPoint(
+                x: mapRect.minX + mapRect.width * piece.position.x,
+                y: mapRect.minY + mapRect.height * piece.position.y - size * 0.28
+            )
+            build.addAnchoredLabel(
+                id: "party.\(piece.id.rawValue)",
+                text: piece.displayName,
+                anchor: anchor,
+                footprint: CGSize(width: size * 0.62, height: size * 0.78),
+                priority: 4,
+                emphasized: piece.isWalking
+            )
         }
     }
 
-    private func markerMode(for hardpoint: World2SceneHardpoint) -> World2HardpointMarkerMode {
-        if isEditingHardpoints {
-            return .editing(isSelected: selectedHardpointID == hardpoint.id)
+    // MARK: - Travel exits (cardinal + destination plate)
+
+    @ViewBuilder
+    private func travelExitLayer(viewSize: CGSize) -> some View {
+        let exits = viewModel.mapTravelExits
+        let grouped = Dictionary(grouping: exits, by: \.direction)
+        let bottomInset: CGFloat = {
+            if showsThumbControls, World2WorldSync.shared.presentsParty { return 168 }
+            if showsThumbControls { return 96 }
+            return 28
+        }()
+        ForEach(exits) { exit in
+            let edge = World2ExitEdge(cardinal: exit.direction)
+            let peers = grouped[exit.direction] ?? [exit]
+            let slot = peers.firstIndex(where: { $0.id == exit.id }) ?? 0
+            let frame = edge.markerFrame(
+                slot: slot,
+                count: peers.count,
+                in: viewSize,
+                topInset: 96,
+                bottomInset: bottomInset
+            )
+            World2ExitMarker(
+                title: exit.title,
+                subtitle: "TO \(exit.direction.displayName.uppercased())",
+                edge: edge,
+                plateAsset: exit.plateAsset.isEmpty ? nil : exit.plateAsset,
+                compact: true,
+                action: {
+                    selectedZoneInteractionID = "travel.\(exit.destinationSceneID)"
+                    viewModel.travelToDocumentScene(exit.destinationSceneID)
+                }
+            )
+            .frame(width: frame.width, height: frame.height)
+            .position(x: frame.midX, y: frame.midY)
+            .zIndex(42)
+            .accessibilityIdentifier("world2.map.travel.\(exit.destinationSceneID)")
         }
-        if isEditingPlaces {
-            return .snapTarget(isCandidate: candidateHardpointID == hardpoint.id)
-        }
-        return .playerHint
     }
 
     // MARK: - Places
@@ -447,54 +641,58 @@ struct WorldMapView: View {
     ) -> some View {
         ForEach(scene.instancesInDrawOrder) { instance in
             if let archetype = World2POIRegistry.archetype(instance.archetypeID) {
-                World2POIInstanceMarker(
-                    archetype: archetype,
-                    instance: instance,
-                    mapRect: mapRect,
-                    viewSize: viewSize,
-                    isEditable: isEditingPlaces,
-                    isSelected: isEditingPlaces
-                        ? selectedInstanceID == instance.id
-                        : viewModel.inspectedPOI?.id == instance.id,
-                    isDimmed: isEditingHardpoints,
-                    onTap: {
-                        if isEditingPlaces {
-                            selectedInstanceID = instance.id
-                        } else {
-                            withAnimation(.spring(response: 0.38, dampingFraction: 0.82)) {
-                                viewModel.inspectPOI(instance: instance)
+                // Travel exits are N/S/E/W edge markers with destination plates — not map POIs.
+                if case .travel = archetype.contract.route {
+                    EmptyView()
+                } else {
+                    World2POIInstanceMarker(
+                        archetype: archetype,
+                        instance: instance,
+                        mapRect: mapRect,
+                        viewSize: viewSize,
+                        isEditable: isEditingPlaces,
+                        isSelected: isEditingPlaces
+                            ? selectedInstanceID == instance.id
+                            : viewModel.inspectedPOI?.id == instance.id,
+                        isDimmed: false,
+                        showsNameLabel: false,
+                        showsNewBadge: false,
+                        onTap: {
+                            if isEditingPlaces {
+                                selectedInstanceID = instance.id
+                            } else if viewModel.inspectedPOI?.id == instance.id {
+                                // Second tap on the selected POI enters it.
+                                confirmSelectedZoneInteraction()
+                            } else {
+                                withAnimation(.spring(response: 0.38, dampingFraction: 0.82)) {
+                                    viewModel.inspectPOI(instance: instance)
+                                    selectedZoneInteractionID = instance.id
+                                }
                             }
+                        },
+                        onDragChanged: { _ in
+                            candidateHardpointID = nil
+                            snapRejection = nil
+                        },
+                        onDragEnded: { position in
+                            store.moveInstance(
+                                instance.id,
+                                in: sceneID,
+                                to: position,
+                                snappingEnabled: false,
+                                aspectRatio: aspectRatio
+                            )
+                            candidateHardpointID = nil
+                            snapRejection = nil
+                        },
+                        onScale: { scale in
+                            store.setScale(scale, instanceID: instance.id, in: sceneID)
+                        },
+                        onRotation: { rotation in
+                            store.setRotation(rotation, instanceID: instance.id, in: sceneID)
                         }
-                    },
-                    onDragChanged: { position in
-                        let preview = store.previewSnap(
-                            instanceID: instance.id,
-                            in: sceneID,
-                            to: position,
-                            snappingEnabled: snappingEnabled,
-                            aspectRatio: aspectRatio
-                        )
-                        candidateHardpointID = preview.highlightedHardpointID
-                        snapRejection = preview.rejection?.explanation
-                    },
-                    onDragEnded: { position in
-                        store.moveInstance(
-                            instance.id,
-                            in: sceneID,
-                            to: position,
-                            snappingEnabled: snappingEnabled,
-                            aspectRatio: aspectRatio
-                        )
-                        candidateHardpointID = nil
-                        snapRejection = nil
-                    },
-                    onScale: { scale in
-                        store.setScale(scale, instanceID: instance.id, in: sceneID)
-                    },
-                    onRotation: { rotation in
-                        store.setRotation(rotation, instanceID: instance.id, in: sceneID)
-                    }
-                )
+                    )
+                }
             }
         }
     }
@@ -516,9 +714,22 @@ struct WorldMapView: View {
         }
 
         ForEach(viewModel.currentAuthoredMapPlaces) { instance in
-            World2MutableScenePlaceMarker(instance: instance) {
-                viewModel.enterPlacedPlace(instance.id)
-            }
+            World2MutableScenePlaceMarker(
+                instance: instance,
+                onEnter: {
+                    if selectedZoneInteractionID == instance.id {
+                        viewModel.enterPlacedPlace(instance.id)
+                    } else {
+                        selectedZoneInteractionID = instance.id
+                        World2WorldSync.shared.markSeen(instance.id)
+                        viewModel.party.walkToPOI(
+                            at: World2NormalizedPoint(x: instance.x, y: instance.y)
+                        )
+                    }
+                },
+                showsTitle: false,
+                showsNewBadge: World2WorldSync.shared.showsNewBadge(for: instance.id)
+            )
             .position(
                 x: mapRect.minX + CGFloat(instance.x) * mapRect.width,
                 y: mapRect.minY + CGFloat(instance.y) * mapRect.height
@@ -528,120 +739,76 @@ struct WorldMapView: View {
         }
     }
 
-    @ViewBuilder
-    private func plantDropTargetLayer(mapRect: CGRect) -> some View {
-        if viewModel.selectedPlaceInventoryItemID != nil,
-           !viewModel.plantableAuthoredHardpoints.isEmpty {
-            ForEach(viewModel.plantableAuthoredHardpoints) { hardpoint in
-                World2PlaceDropTarget(hardpoint: hardpoint) {
-                    plantSelectedInventoryItem(on: hardpoint)
-                }
-                .position(
-                    x: mapRect.minX + CGFloat(hardpoint.x) * mapRect.width,
-                    y: mapRect.minY + CGFloat(hardpoint.y) * mapRect.height
-                )
-                .zIndex(35)
-            }
-        }
-    }
-
-    private func plantSelectedInventoryItem(on hardpoint: World2SceneHardpoint) {
-        guard let itemID = viewModel.selectedPlaceInventoryItemID else { return }
-        _ = viewModel.placeInventoryItem(
-            itemID,
-            x: hardpoint.x,
-            y: hardpoint.y,
-            hardpointID: hardpoint.id,
-            in: sceneID
-        )
-    }
-
     // MARK: - Chrome
 
     private var topChrome: some View {
         VStack {
-            HStack(alignment: .top, spacing: 14) {
-                World2WorldIdentity(
-                    name: viewModel.currentWorld?.name ?? "Abbie's World",
-                    subtitle: worldSubtitle
+            HStack(alignment: .top, spacing: 12) {
+                // Scene chip only — no fake "Open ground" / Go in until a place is selected.
+                World2PlaceBadge(
+                    sceneName: World2WorldSync.shared.usesServerDocument
+                        ? viewModel.currentScene.name
+                        : (viewModel.currentWorld?.name ?? viewModel.currentScene.name),
+                    sceneAsset: viewModel.currentScene.backgroundAsset,
+                    poi: viewModel.inspectedPOI?.poi,
+                    isReadOnlyVisit: viewModel.inspectedPOI.map {
+                        viewModel.isReadOnlyVisit(to: $0.poi.id)
+                    } ?? false,
+                    showsNewBadge: false,
+                    onEnter: { confirmSelectedZoneInteraction() }
                 )
 
                 Spacer(minLength: 8)
 
-                World2GameStatusHUD(
-                    player: viewModel.currentPlayerId,
-                    gems: viewModel.gems,
-                    ingredients: viewModel.totalIngredients,
-                    deck: viewModel.activeDeckCount
-                )
+                if viewModel.playSceneID.hasPrefix("scene.peglin.") {
+                    Button {
+                        viewModel.startMarbleVoyage()
+                    } label: {
+                        Label("Marble Voyage", systemImage: "map.fill")
+                            .font(.system(size: 15, weight: .black, design: .rounded))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                            .background(
+                                Color(red: 0.18, green: 0.42, blue: 0.72).opacity(0.94),
+                                in: Capsule()
+                            )
+                            .overlay(Capsule().stroke(.white.opacity(0.7), lineWidth: 2))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityIdentifier("world2.map.marbleVoyage")
+                    .accessibilityLabel("Start Marble Voyage — Campaign or Endless")
+                }
+
+                // Keep HUD out of Peglin chrome — gems/deck live in the player menu.
+                if !viewModel.playSceneID.hasPrefix("scene.peglin.") {
+                    World2GameStatusHUD(
+                        player: viewModel.currentPlayerId,
+                        gems: viewModel.gems,
+                        ingredients: viewModel.totalIngredients,
+                        deck: viewModel.activeDeckCount
+                    )
+                }
             }
-            .padding(.leading, 18)
-            .padding(.trailing, 132)
-            .padding(.top, 6)
+            .padding(.leading, World2ChromeContract.titleLeading)
+            .padding(.trailing, 18)
+            .padding(.top, World2ChromeContract.titleTop)
             Spacer()
         }
     }
 
-    @ViewBuilder
-    private var travelNavigation: some View {
-        if let world = viewModel.currentWorld {
-            let destinations = viewModel.travelDestinations(from: world.id)
-            if !destinations.isEmpty {
-                World2TravelNavigation(
-                    currentWorld: world.id,
-                    destinations: destinations,
-                    onTravel: viewModel.switchWorld
-                )
-                .zIndex(20)
-            }
+    private func confirmSelectedZoneInteraction() {
+        if let id = selectedZoneInteractionID,
+           let item = viewModel.zoneInteractions.first(where: { $0.id == id }) {
+            viewModel.performZoneInteraction(item)
+            return
         }
+        guard let inspection = viewModel.inspectedPOI else { return }
+        viewModel.enterPOI(inspection.poi)
     }
 
-    @ViewBuilder
-    private var inspectionOverlay: some View {
-        if viewModel.showingPOISheet, let inspection = viewModel.inspectedPOI {
-            Color.black.opacity(0.12)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    withAnimation(.easeOut(duration: 0.2)) {
-                        viewModel.dismissPOIInspection()
-                    }
-                }
-                .zIndex(50)
-                .allowsHitTesting(true)
-
-            World2POIInspectionDrawer(
-                poi: inspection.poi,
-                isReadOnlyVisit: viewModel.isReadOnlyVisit(to: inspection.poi.id),
-                onEnter: { viewModel.enterPOI(inspection.poi) },
-                onDismiss: {
-                    withAnimation(.easeOut(duration: 0.2)) {
-                        viewModel.dismissPOIInspection()
-                    }
-                }
-            )
-            .frame(width: 332)
-            .frame(maxHeight: .infinity)
-            .background {
-                RoundedRectangle(cornerRadius: 28, style: .continuous)
-                    .fill(.ultraThinMaterial)
-                    .opacity(0.88)
-            }
-            .background(Color.white.opacity(0.08), in: RoundedRectangle(cornerRadius: 28))
-            .overlay {
-                RoundedRectangle(cornerRadius: 28)
-                    .stroke(.white.opacity(0.45), lineWidth: 1.5)
-            }
-            .shadow(color: .black.opacity(0.22), radius: 18, x: -6)
-            .padding(.top, 72)
-            .padding(.bottom, 16)
-            .padding(.trailing, 14)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
-            .transition(.move(edge: .trailing))
-            .zIndex(51)
-            .accessibilityElement(children: .contain)
-            .accessibilityIdentifier("world2.poi.drawer")
-        }
+    private func enterUnderfootPlace() {
+        confirmSelectedZoneInteraction()
     }
 
     /// Tells a developer why a drag will not take, instead of failing silently.
@@ -665,7 +832,7 @@ struct WorldMapView: View {
 
     @ViewBuilder
     private func editorOverlay(aspectRatio: Double) -> some View {
-        if developerMode, showingEditor {
+        if (developerMode || sandboxEditing), showingEditor {
             World2SceneEditorPanel(
                 sceneID: sceneID,
                 store: store,
@@ -681,6 +848,8 @@ struct WorldMapView: View {
                     withAnimation(.easeOut(duration: 0.2)) {
                         showingEditor = false
                         editorMinimized = false
+                        sandboxEditing = false
+                        viewModel.isSandboxBuilding = false
                     }
                 },
                 onOpenPlanningDept: {
@@ -689,8 +858,11 @@ struct WorldMapView: View {
                 onInventDecorations: {
                     showingSceneInvent = true
                 },
-                onDecorateTreehouse: {
-                    viewModel.openCurrentPlayerTreehouse(startDecorating: true)
+                onDecorateScene: {
+                    beginDecoratingThisScene()
+                },
+                onOpenCompletions: {
+                    viewModel.openInventHistory()
                 }
             )
             .frame(maxWidth: editorMinimized ? 480 : 720)
@@ -700,59 +872,71 @@ struct WorldMapView: View {
             .transition(.move(edge: .bottom).combined(with: .opacity))
             .zIndex(80)
             .allowsHitTesting(true)
-        } else if developerMode {
-            HStack(spacing: 8) {
-                Button {
-                    showingEditor = true
-                    editorMinimized = true
-                    syncEditorSelection()
-                } label: {
-                    Label("Edit", systemImage: "slider.horizontal.3")
-                        .font(.system(size: 13, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(.orange.opacity(0.85), in: Capsule())
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("world2.sceneEditor.open")
+        }
+    }
 
-                Button {
-                    showingSceneInvent = true
-                } label: {
-                    Label("Invent", systemImage: "wand.and.stars")
-                        .font(.system(size: 13, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(.purple.opacity(0.88), in: Capsule())
+    @ViewBuilder
+    private func selectedPOIToolbar(mapRect: CGRect) -> some View {
+        if isEditingPlaces,
+           let selectedID = selectedInstanceID,
+           let instance = scene.instance(selectedID),
+           let archetype = World2POIRegistry.archetype(instance.archetypeID) {
+            let point = CGPoint(
+                x: mapRect.minX + mapRect.width * instance.transform.position.x,
+                y: mapRect.minY + mapRect.height * instance.transform.position.y - 120
+            )
+            World2SelectedPOIToolbar(
+                name: archetype.name,
+                presentation: instance.resolvedPresentation,
+                onDelete: {
+                    if store.removeInstance(instance.id, in: sceneID) {
+                        selectedInstanceID = nil
+                    }
+                },
+                onToggleGlow: {
+                    var next = instance.resolvedPresentation
+                    next.glowEnabled.toggle()
+                    store.setPresentation(next, instanceID: instance.id, in: sceneID)
+                },
+                onToggleSway: {
+                    var next = instance.resolvedPresentation
+                    next.swayEnabled.toggle()
+                    store.setPresentation(next, instanceID: instance.id, in: sceneID)
+                },
+                onPickSkin: { preset in
+                    var next = instance.resolvedPresentation
+                    next.tintHue = preset.tintHue
+                    store.setPresentation(next, instanceID: instance.id, in: sceneID)
+                    let asset = archetype.exteriorAsset
+                    let subject = "\(archetype.name), \(preset.title) look"
+                    let place = archetype.name
+                    Task {
+                        await World2POIArtwork.generate(
+                            assetKey: asset,
+                            subject: subject,
+                            placeName: place
+                        )
+                    }
+                },
+                onRefine: developerMode ? {
+                    World2DevRefine.poi(
+                        assetKey: archetype.exteriorAsset,
+                        name: archetype.name
+                    )
+                } : nil,
+                onReset: {
+                    store.resetInstanceVisuals(instance.id, in: sceneID)
                 }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("world2.sceneInvent.open")
-
-                Button {
-                    viewModel.openCurrentPlayerTreehouse(startDecorating: true)
-                } label: {
-                    Label("Decorate", systemImage: "paintbrush.pointed.fill")
-                        .font(.system(size: 13, weight: .black, design: .rounded))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 10)
-                        .background(.pink.opacity(0.9), in: Capsule())
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("world2.map.decorateTreehouse")
-            }
-            .padding(.leading, 18)
-            .padding(.bottom, 18)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-            .zIndex(80)
+            )
+            .position(x: point.x, y: max(60, point.y))
+            .zIndex(95)
+            .accessibilityIdentifier("world2.poi.selectedToolbar")
         }
     }
 
     private func syncEditorSelection() {
         store.selectPlayer(viewModel.currentPlayerId)
-        guard developerMode else {
+        guard developerMode || sandboxEditing else {
             selectedInstanceID = nil
             selectedHardpointID = nil
             return
@@ -800,12 +984,15 @@ struct WorldMapView: View {
     }
 
     /// The rectangle every normalized coordinate in this scene is measured
-    /// against. A painted map gets its own letterboxed frame; a scene drawn by
-    /// hand fills the screen, so its pads are laid out against the whole view.
-    /// Art Garden uses cover so the overland plate is bigger than the iPad.
-    static func mapRect(for scene: World2SceneDefinition, in viewSize: CGSize) -> CGRect {
+    /// against. Oversized plates use cover so the player can look around;
+    /// letterbox when the whole painting already fits.
+    static func mapRect(
+        for scene: World2SceneDefinition,
+        in viewSize: CGSize,
+        preferCover: Bool = false
+    ) -> CGRect {
         if let image = AssetBootstrapService.shared.image(for: scene.backgroundAsset) {
-            if scene.id == World2SceneCatalog.sceneID(for: .artGarden) {
+            if preferCover || scene.id == World2SceneCatalog.sceneID(for: .artGarden) {
                 return coveredMapRect(imageSize: image.size, in: viewSize)
             }
             return fittedMapRect(imageSize: image.size, in: viewSize)
@@ -814,135 +1001,6 @@ struct WorldMapView: View {
             return CGRect(origin: .zero, size: viewSize)
         }
         return fittedMapRect(imageSize: CGSize(width: 4, height: 3), in: viewSize)
-    }
-}
-
-/// Travel arrows laid out by index so a world can have any number of
-/// neighbours without two arrows landing on top of each other.
-private struct World2TravelNavigation: View {
-    let currentWorld: WorldId
-    let destinations: [WorldId]
-    let onTravel: (WorldId) -> Void
-
-    private static let slots: [(alignment: Alignment, insets: EdgeInsets)] = [
-        (.bottomLeading, EdgeInsets(top: 0, leading: 18, bottom: 20, trailing: 0)),
-        (.trailing, EdgeInsets(top: 95, leading: 0, bottom: 95, trailing: 18)),
-        (.bottomTrailing, EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 18)),
-        (.topLeading, EdgeInsets(top: 92, leading: 18, bottom: 0, trailing: 0)),
-    ]
-
-    /// Home sits at the origin of the map, so the way back always occupies the
-    /// bottom-left slot no matter which world you are standing in.
-    private var ordered: [WorldId] {
-        destinations.sorted { lhs, rhs in
-            if lhs == .home { return true }
-            if rhs == .home { return false }
-            return lhs.rawValue < rhs.rawValue
-        }
-    }
-
-    var body: some View {
-        ZStack {
-            ForEach(Array(ordered.enumerated()), id: \.element) { index, destination in
-                let slot = Self.slots[index % Self.slots.count]
-                World2TravelArrow(
-                    title: destination.displayName,
-                    direction: destination == .home
-                        ? "BACK HOME"
-                        : (destination.direction?.uppercased() ?? "EXPLORE"),
-                    systemName: icon(for: slot.alignment, destination: destination),
-                    tint: tint(for: destination)
-                ) {
-                    onTravel(destination)
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: slot.alignment)
-                .padding(slot.insets)
-                .accessibilityIdentifier("world2.world.\(destination.rawValue)")
-            }
-        }
-        .accessibilityElement(children: .contain)
-        .accessibilityIdentifier("world2.world.travelArrows")
-    }
-
-    private func tint(for destination: WorldId) -> Color {
-        switch destination {
-        case .farm: return .green
-        case .threeBears: return .brown
-        case .blankSlate: return .cyan
-        default: return .orange
-        }
-    }
-
-    private func icon(for alignment: Alignment, destination: WorldId) -> String {
-        if destination == .home { return "arrow.uturn.left" }
-        switch alignment {
-        case .trailing: return "arrow.right"
-        case .bottomTrailing: return "arrow.down.right"
-        case .topLeading: return "arrow.up.left"
-        default: return "arrow.down.left"
-        }
-    }
-}
-
-private struct World2TravelArrow: View {
-    let title: String
-    let direction: String
-    let systemName: String
-    let tint: Color
-    let action: () -> Void
-
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 10) {
-                Image(systemName: systemName)
-                    .font(.system(size: 25, weight: .black))
-                    .frame(width: 34, height: 34)
-                    .background(.white.opacity(0.20), in: Circle())
-
-                VStack(alignment: .leading, spacing: 0) {
-                    Text(direction)
-                        .font(.system(size: 9, weight: .black, design: .rounded))
-                        .foregroundStyle(.white.opacity(0.72))
-                    Text(title)
-                        .font(.system(size: 16, weight: .black, design: .rounded))
-                }
-            }
-            .foregroundStyle(.white)
-            .padding(.leading, 9)
-            .padding(.trailing, 15)
-            .padding(.vertical, 8)
-            .background(tint.opacity(0.94), in: Capsule())
-            .overlay(Capsule().stroke(.white.opacity(0.72), lineWidth: 2))
-            .shadow(color: tint.opacity(0.75), radius: 13)
-            .contentShape(Capsule())
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel("Travel \(direction.lowercased()) to \(title)")
-        .accessibilityHint("Opens \(title)")
-    }
-}
-
-private struct World2WorldIdentity: View {
-    let name: String
-    let subtitle: String
-
-    var body: some View {
-        VStack(alignment: .leading, spacing: 1) {
-            Text(name)
-                .font(.system(size: 24, weight: .black, design: .rounded))
-            Text(subtitle)
-                .font(.system(size: 11, weight: .bold, design: .rounded))
-                .foregroundStyle(.white.opacity(0.8))
-        }
-        .foregroundStyle(.white)
-        .padding(.horizontal, 15)
-        .padding(.vertical, 10)
-        .background(.black.opacity(0.54), in: RoundedRectangle(cornerRadius: 16))
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(.white.opacity(0.28), lineWidth: 1)
-        )
-        .shadow(color: .black.opacity(0.22), radius: 8, y: 3)
     }
 }
 
@@ -986,150 +1044,107 @@ private struct World2GameStatusHUD: View {
     }
 }
 
-private struct World2POIInspectionDrawer: View {
-    let poi: World2POIArchetype
+private struct World2PlaceBadge: View {
+    let sceneName: String
+    let sceneAsset: String
+    let poi: World2POIArchetype?
     let isReadOnlyVisit: Bool
+    var showsNewBadge: Bool = false
     let onEnter: () -> Void
-    let onDismiss: () -> Void
 
-    private var actionTitle: String {
-        if poi.kind == .home && isReadOnlyVisit {
-            return "Look Around"
-        }
-        return poi.callToAction
+    private var placeTitle: String {
+        poi?.name ?? ""
     }
 
-    private var activityDescription: String {
-        if poi.kind == .home && isReadOnlyVisit {
-            return "Step inside and explore this cozy treehouse."
+    private var actionTitle: String {
+        isReadOnlyVisit ? "Peek" : "Go in"
+    }
+
+    /// Prefer the place's exterior; for Peglin wreck use the crash plate crop token.
+    private var thumbAsset: String {
+        if let poi {
+            return poi.exteriorAsset
         }
-        return poi.activityDescription
+        return sceneAsset
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            previewButton
-
-            VStack(alignment: .leading, spacing: 8) {
-                Text("WHAT'S INSIDE")
-                    .font(.system(size: 12, weight: .black, design: .rounded))
-                    .foregroundStyle(.secondary)
-                Text(poi.name)
-                    .font(.system(size: 26, weight: .black, design: .rounded))
-                Text(activityDescription)
-                    .font(.system(size: 15, weight: .medium, design: .rounded))
-                    .foregroundStyle(.secondary)
-                    .fixedSize(horizontal: false, vertical: true)
-                if let lore = poi.lore {
-                    Text(lore)
+        HStack(alignment: .center, spacing: 8) {
+            logo
+            VStack(alignment: .leading, spacing: 1) {
+                Text(World2ChromeContract.ellipsized(
+                    sceneName,
+                    budget: World2ChromeContract.titleBudget
+                ))
+                    .font(.system(size: 17, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                    .lineLimit(1)
+                if let poi {
+                    Text(World2ChromeContract.ellipsized(
+                        poi.name,
+                        budget: World2ChromeContract.placeTitleBudget
+                    ))
                         .font(.system(size: 13, weight: .semibold, design: .rounded))
-                        .foregroundStyle(.tertiary)
-                        .fixedSize(horizontal: false, vertical: true)
+                        .foregroundStyle(.white.opacity(0.78))
+                        .lineLimit(1)
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            rewardSummary
-
-            Spacer(minLength: 8)
-
-            if isReadOnlyVisit {
-                Label(
-                    "Visiting — look around, but only the owner can make changes.",
-                    systemImage: "eye.fill"
-                )
-                .font(.system(size: 14, weight: .semibold, design: .rounded))
-                .foregroundStyle(.indigo)
-                .multilineTextAlignment(.center)
-                .accessibilityIdentifier("world2.poi.visitorNotice")
-            }
-
-            VStack(spacing: 12) {
-                Button("Not Yet", action: onDismiss)
-                    .buttonStyle(.bordered)
-                    .accessibilityIdentifier("world2.poi.dismiss")
-
-                Button(action: onEnter) {
-                    Label(actionTitle, systemImage: poi.icon)
-                        .font(.system(size: 17, weight: .bold, design: .rounded))
-                }
-                .buttonStyle(.borderedProminent)
-                .controlSize(.large)
-                .accessibilityIdentifier("world2.poi.enter")
-            }
-        }
-        .padding(24)
-    }
-
-    @ViewBuilder
-    private var exteriorPreview: some View {
-        if let drawnArtStyle = poi.drawnArtStyle,
-           AssetBootstrapService.shared.image(for: poi.exteriorAsset) == nil {
-            World2POIDrawnArtwork(style: drawnArtStyle)
-        } else {
-            World2SemanticImage(
-                semanticName: poi.exteriorAsset,
-                fallbackIcon: poi.icon,
-                fallbackLabel: "\(poi.name) artwork is not bundled"
-            )
-            .scaledToFit()
-        }
-    }
-
-    private var previewButton: some View {
-        Button(action: onEnter) {
-            ZStack(alignment: .bottom) {
-                exteriorPreview
-                    .frame(maxWidth: .infinity)
-                    .frame(height: 168)
-
-                Label("Tap to start", systemImage: "play.fill")
-                    .font(.system(size: 11, weight: .bold, design: .rounded))
+            if poi != nil {
+                Text(actionTitle)
+                    .font(.system(size: 12, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
+                    .lineLimit(1)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 6)
-                    .background(.black.opacity(0.68), in: Capsule())
-                    .padding(.bottom, 8)
+                    .background(.white.opacity(0.16), in: Capsule())
+                    .accessibilityIdentifier("world2.poi.action")
             }
-            .contentShape(Rectangle())
+
+            if showsNewBadge {
+                World2NewBadge(size: 36)
+            }
         }
-        .buttonStyle(.plain)
-        .accessibilityLabel("\(actionTitle) at \(poi.name)")
-        .accessibilityIdentifier("world2.poi.preview.start")
+        .padding(.horizontal, 8)
+        .frame(
+            width: World2ChromeContract.titleSlot.width,
+            height: poi == nil ? 56 : World2ChromeContract.titleSlot.height,
+            alignment: .leading
+        )
+        .clipped()
+        .background(.black.opacity(0.54), in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .overlay {
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(.white.opacity(0.28), lineWidth: 1)
+        }
+        .shadow(color: .black.opacity(0.22), radius: 8, y: 3)
+        .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .onTapGesture {
+            guard poi != nil else { return }
+            onEnter()
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(
+            poi == nil
+                ? sceneName
+                : "\(sceneName), \(placeTitle), \(actionTitle)"
+        )
+        .accessibilityIdentifier(poi == nil ? "world2.place.badge" : "world2.poi.enter")
+        .accessibilityAddTraits(poi == nil ? [] : .isButton)
     }
 
-    /// The contract, in child-readable form. A place that gives something says so
-    /// before you walk in.
-    @ViewBuilder
-    private var rewardSummary: some View {
-        if let grant = poi.contract.grants.first {
-            Label(rewardText(for: grant), systemImage: "gift.fill")
-                .font(.system(size: 14, weight: .black, design: .rounded))
-                .foregroundStyle(.white)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 9)
-                .background(.orange.opacity(0.92), in: Capsule())
-                .accessibilityIdentifier("world2.poi.rewardSummary")
-        }
-    }
-
-    private func rewardText(for grant: World2POIGrant) -> String {
-        switch grant {
-        case .storyDecoration(let decorationID):
-            let name = World2StoryDecoration.decoration(id: decorationID)?.name
-                ?? "a treasure"
-            return "Win: \(name)"
-        case .gems(let upTo):
-            return "Win up to \(upTo) gems"
-        case .furnitureIngredients(let upTo):
-            return "Earn up to \(upTo) ingredients"
-        case .generatedDecorations(let count):
-            return "Keep \(count) new creations"
-        case .creatureCards(let count):
-            return "Make \(count) new card"
-        case .placeInventoryItem:
-            return "Take home a new place"
-        }
+    private var logo: some View {
+        World2SemanticImage(
+            semanticName: thumbAsset,
+            fallbackIcon: poi?.icon ?? "map.fill",
+            fallbackLabel: poi?.name ?? sceneName
+        )
+        .scaledToFill()
+        .frame(width: 44, height: 44)
+        .clipped()
+        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+        .accessibilityHidden(true)
     }
 }
 
@@ -1138,16 +1153,21 @@ struct World2SemanticImage: View {
     let fallbackIcon: String
     let fallbackLabel: String
 
-    /// Cake-tower construction plate for POIs that have not been qualified yet.
-    private static let poiPlaceholderCatalogName = "under_construction"
+    @ObservedObject private var plates = World2GeneratedPlateStore.shared
+    @ObservedObject private var assets = AssetBootstrapService.shared
 
     var body: some View {
-        if let image = AssetBootstrapService.shared.image(for: semanticName) {
+        let _ = assets.registryGeneration
+        if let generated = plates.image(for: semanticName) {
+            Image(uiImage: generated)
+                .resizable()
+                .accessibilityLabel(semanticName)
+                .accessibilityIdentifier("world2.asset.generated.\(semanticName)")
+        } else if let image = assets.image(for: semanticName) {
             Image(uiImage: image)
                 .resizable()
                 .accessibilityLabel(semanticName)
-        } else if usesPOIConstructionPlaceholder,
-                  let placeholder = UIImage(named: Self.poiPlaceholderCatalogName) {
+        } else if let placeholder = World2ConstructionArt.image(forSemantic: semanticName) {
             Image(uiImage: placeholder)
                 .resizable()
                 .scaledToFit()
@@ -1173,12 +1193,6 @@ struct World2SemanticImage: View {
             .accessibilityLabel(fallbackLabel)
             .accessibilityIdentifier("world2.asset.placeholder.\(semanticName)")
         }
-    }
-
-    /// Drawn-art POIs still take the nil path above this view; everything else
-    /// under `poi.*` shows the shared under-construction plate.
-    private var usesPOIConstructionPlaceholder: Bool {
-        semanticName.hasPrefix("poi.")
     }
 }
 

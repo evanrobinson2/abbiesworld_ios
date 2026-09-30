@@ -54,6 +54,31 @@ final class HeadDAGService {
         return try await streamCreate(request: request)
     }
 
+    /// Any kid-safe picture via the same `/api/create` path as head drawing.
+    ///
+    /// `gpt-image-2.5-flare` does not stream. `quality: low` is the speed knob.
+    /// `onStatus` only fires if the server sends a progress line; most requests
+    /// stay silent until the image URL arrives.
+    func generatePicture(
+        prompt: String,
+        quality: String? = nil,
+        imageModel: String? = nil,
+        imageWidth: Int? = nil,
+        imageHeight: Int? = nil,
+        onStatus: (@MainActor (String) -> Void)? = nil
+    ) async throws -> UIImage {
+        let request = CreateRequest(
+            recipeItems: [],
+            freeTextDescription: prompt,
+            referenceImageIds: nil,
+            quality: quality,
+            imageModel: imageModel,
+            imageWidth: imageWidth,
+            imageHeight: imageHeight
+        )
+        return try await streamCreate(request: request, onStatus: onStatus).image
+    }
+
     /// Reasoning node. Hits /api/reason so the server can call OpenAIClient.
     /// If that route is missing, fall back to a top-of-frame crop — never call OpenAI here.
     func reasonHeadBox(sourcePath: String?, fallbackImage: UIImage) async -> NormalizedRect {
@@ -172,7 +197,10 @@ final class HeadDAGService {
         return try? JSONDecoder().decode(Envelope.self, from: data).bbox
     }
 
-    private func streamCreate(request: CreateRequest) async throws -> (url: String, image: UIImage) {
+    private func streamCreate(
+        request: CreateRequest,
+        onStatus: (@MainActor (String) -> Void)? = nil
+    ) async throws -> (url: String, image: UIImage) {
         guard let url = URL(string: "\(baseURL)/api/create") else {
             throw URLError(.badURL)
         }
@@ -180,6 +208,7 @@ final class HeadDAGService {
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("text/event-stream", forHTTPHeaderField: "Accept")
+        urlRequest.timeoutInterval = 180
         ServerConfig.shared.addAPIKeyHeader(to: &urlRequest)
         urlRequest.httpBody = try JSONEncoder().encode(request)
 
@@ -202,8 +231,17 @@ final class HeadDAGService {
                       let json = try? JSONSerialization.jsonObject(with: data) as? [String: Any] else {
                     continue
                 }
-                if let message = json["message"] as? String, (json["status"] as? String) == "error" {
+                let status = json["status"] as? String ?? ""
+                if let message = json["message"] as? String, status == "error" {
                     throw NSError(domain: "HeadDAG", code: -1, userInfo: [NSLocalizedDescriptionKey: message])
+                }
+                if let onStatus,
+                   let message = json["message"] as? String,
+                   !message.isEmpty,
+                   message.count < 80,
+                   status != "done",
+                   status != "completed" {
+                    await onStatus(message)
                 }
                 if let imageURL = json["image_url"] as? String {
                     lastURL = imageURL

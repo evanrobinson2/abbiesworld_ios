@@ -77,6 +77,43 @@ final class HouseholdAPIClient {
         return try JSONDecoder().decode(PlayerState.self, from: data)
     }
 
+    func fetchWorld(accessToken: String) async throws -> World2WorldDocument? {
+        let request = try authorizedRequest(
+            path: "/api/v1/worlds/current",
+            method: "GET",
+            accessToken: accessToken
+        )
+        let (data, response) = try await session.data(for: request)
+        if let http = response as? HTTPURLResponse, http.statusCode == 404 {
+            return nil
+        }
+        try throwIfNeeded(data: data, response: response)
+        return try World2WorldDocument.decode(data)
+    }
+
+    func putWorld(
+        _ document: World2WorldDocument,
+        expectedRevision: Int,
+        accessToken: String
+    ) async throws -> World2WorldDocument {
+        var request = try authorizedRequest(
+            path: "/api/v1/worlds/current",
+            method: "PUT",
+            accessToken: accessToken
+        )
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try World2WorldDocument.encodePut(
+            document,
+            expectedRevision: expectedRevision
+        )
+        let (data, response) = try await session.data(for: request)
+        if let http = response as? HTTPURLResponse, http.statusCode == 409 {
+            throw HouseholdAPIError.http(409, String(data: data, encoding: .utf8) ?? "")
+        }
+        try throwIfNeeded(data: data, response: response)
+        return try World2WorldDocument.decode(data)
+    }
+
     private func authorizedRequest(path: String, method: String, accessToken: String) throws -> URLRequest {
         let base = ServerConfig.shared.baseURL.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
         guard let url = URL(string: base + path) else { throw HouseholdAPIError.badURL }

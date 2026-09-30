@@ -23,6 +23,10 @@ final class World2WorldGraphStore: ObservableObject {
     private var playerScope = "unselected"
     private var worldCatalog: [WorldId: World] = [:]
 
+    private var documentMode = false
+    private var documentSceneNames: [String: String] = [:]
+    private var documentOriginSceneID: String?
+
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
     }
@@ -32,12 +36,96 @@ final class World2WorldGraphStore: ObservableObject {
     // MARK: - Bootstrap
 
     func configure(worlds: [WorldId: World], playerID: PlayerId?) {
+        documentMode = false
+        documentSceneNames = [:]
+        documentOriginSceneID = nil
         let nextScope = playerID?.rawValue ?? "unselected"
         worldCatalog = worlds
         if nextScope != playerScope {
             playerScope = nextScope
         }
         reloadFromDiskOrSeed()
+    }
+
+    /// Replace the compiled overland graph with the signed-in document.
+    func loadFromDocument(
+        scenes: [World2SceneDefinition],
+        places: [World2RemotePlace],
+        originSceneID: String?
+    ) {
+        documentMode = true
+        documentSceneNames = Dictionary(uniqueKeysWithValues: scenes.map { ($0.id, $0.name) })
+        // Prefer Peglin Crash as origin when present so the chain draws cleanly.
+        if let crash = scenes.first(where: { $0.id == PeglinEdition.crashLandSceneID })?.id {
+            documentOriginSceneID = originSceneID ?? crash
+        } else {
+            documentOriginSceneID = originSceneID ?? scenes.map(\.id).sorted().first
+        }
+        knownSceneIDs = scenes.map(\.id).sorted()
+        var built: [String: [World2SceneConnector]] = [:]
+        for sceneID in knownSceneIDs {
+            built[sceneID] = World2CardinalDirection.allCases.map { direction in
+                World2SceneConnector(
+                    id: World2SceneConnector.defaultID(sceneID: sceneID, direction: direction),
+                    fromSceneID: sceneID,
+                    direction: direction,
+                    toSceneID: nil
+                )
+            }
+        }
+        let destinations = Dictionary(uniqueKeysWithValues: places.compactMap { place -> (String, String)? in
+            guard case .travel(let sceneID)? = World2POIRoute.resolved(from: place.behavior) else {
+                return nil
+            }
+            return (place.id, sceneID)
+        })
+        // Deduplicate A↔B so we only wire each undirected edge once.
+        var seenPairs = Set<String>()
+        for scene in scenes {
+            for instance in scene.poiInstances {
+                guard let destination = destinations[instance.archetypeID],
+                      knownSceneIDs.contains(destination),
+                      destination != scene.id
+                else { continue }
+                let pairKey = [scene.id, destination].sorted().joined(separator: ">")
+                if seenPairs.contains(pairKey) { continue }
+                seenPairs.insert(pairKey)
+
+                let preferred = World2MinimapAutoLayout.direction(
+                    fromPlateX: instance.transform.position.x,
+                    y: instance.transform.position.y
+                )
+                let direction = firstFreeDirection(
+                    on: scene.id,
+                    preferring: preferred,
+                    in: built
+                ) ?? preferred
+                setTunnel(
+                    from: scene.id,
+                    direction: direction,
+                    to: destination,
+                    reciprocal: true,
+                    locked: true,
+                    into: &built
+                )
+            }
+        }
+        connectorsByScene = built
+    }
+
+    private func firstFreeDirection(
+        on sceneID: String,
+        preferring preferred: World2CardinalDirection,
+        in built: [String: [World2SceneConnector]]
+    ) -> World2CardinalDirection? {
+        let order = [preferred] + World2CardinalDirection.allCases.filter { $0 != preferred }
+        for direction in order {
+            if let slot = built[sceneID]?.first(where: { $0.direction == direction }),
+               slot.toSceneID == nil {
+                return direction
+            }
+        }
+        return nil
     }
 
     /// Scenes that participate in overland travel. Art Garden stays off until
@@ -199,36 +287,36 @@ final class World2WorldGraphStore: ObservableObject {
         )
     }
 
-    /// BFS lattice layout from Home. Enough for the shipped graph + a few adds.
+    /// Lattice layout: Peglin chain on a row, then BFS with collision fill.
     private func layoutNodes() -> [World2WorldGraphNode] {
         guard !knownSceneIDs.isEmpty else { return [] }
-        let origin = WorldId.home.sceneID
-        var positions: [String: (x: Int, y: Int)] = [origin: (0, 0)]
-        var queue = [origin]
-        var visited: Set<String> = [origin]
-
-        while let sceneID = queue.first {
-            queue.removeFirst()
-            let originPos = positions[sceneID] ?? (0, 0)
-            for connector in connectors(from: sceneID) {
-                guard let next = connector.toSceneID else { continue }
-                if visited.contains(next) { continue }
-                let delta = connector.direction.gridDelta
-                positions[next] = (originPos.x + delta.dx, originPos.y + delta.dy)
-                visited.insert(next)
-                queue.append(next)
+        let edges: [World2MinimapAutoLayout.Edge] = knownSceneIDs.flatMap { sceneID in
+            connectors(from: sceneID).compactMap { connector in
+                guard let to = connector.toSceneID else { return nil }
+                // One undirected edge — keep lexicographic half to reduce bias.
+                guard sceneID < to else { return nil }
+                return World2MinimapAutoLayout.Edge(
+                    from: sceneID,
+                    to: to,
+                    direction: connector.direction
+                )
             }
         }
-
-        for sceneID in knownSceneIDs where positions[sceneID] == nil {
-            // Disconnected known scenes sit to the side of the origin.
-            positions[sceneID] = (positions.count, 0)
-        }
-
+        let origin = documentOriginSceneID
+            ?? (knownSceneIDs.contains(PeglinEdition.crashLandSceneID)
+                ? PeglinEdition.crashLandSceneID
+                : nil)
+            ?? (knownSceneIDs.contains(WorldId.home.sceneID) ? WorldId.home.sceneID : knownSceneIDs[0])
+        let positions = World2MinimapAutoLayout.positions(
+            sceneIDs: knownSceneIDs,
+            edges: edges,
+            originSceneID: origin
+        )
         return knownSceneIDs.compactMap { sceneID in
             guard let pos = positions[sceneID] else { return nil }
             let worldID = WorldId.allCases.first { $0.sceneID == sceneID }
-            let name = worldID?.displayName
+            let name = documentSceneNames[sceneID]
+                ?? worldID?.displayName
                 ?? worldCatalog[worldID ?? .home]?.name
                 ?? sceneID
             return World2WorldGraphNode(
@@ -351,6 +439,7 @@ final class World2WorldGraphStore: ObservableObject {
     }
 
     private func persist() {
+        guard !documentMode else { return }
         let payload = PersistedGraph(
             knownSceneIDs: knownSceneIDs,
             connectors: knownSceneIDs.flatMap { connectors(from: $0) }

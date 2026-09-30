@@ -1,0 +1,66 @@
+{
+  "id": "20260926-grasshopper-kickboxer-idle",
+  "semanticId": "token.plink.gang.grasshopperKickboxer.idle",
+  "kind": "token",
+  "priority": "high",
+  "status": "fulfilled",
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "Concept JPEG selected; no runtime imageset / library bind yet"
+  },
+  "keepStockIcon": false,
+  "surface": "Marble Voyage climb foe tile + fight attacker idle (Grasshopper Kickboxer)",
+  "brief": "Transparent idle cutout from selected Grasshopper Kickboxer concept. Resolve six-limb anatomy, hind-leg connections, antenna tips; keep insect proportions; left-facing; readable small.",
+  "aspect": "3:4",
+  "styleNotes": "Same prep rules as HANDOFF.md; do not invent a second silhouette language.",
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/grasshopper-kickboxer.jpeg",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/HANDOFF.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/prompts.json",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "AssetSources/MarbleVoyage/porcupine-boxer/porcupine-boxer.png",
+    "AssetSources/MarbleVoyage/porcupine-boxer/provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/grasshopper-kickboxer-idle.png",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/grasshopper-kickboxer-provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "PREP FIRST \u2014 selected concept committed. Reroll only if limbs fail QA.",
+    "Full-body unnamed male grasshopper henchman for a colorful comedic fantasy game, unmistakably insect anatomy, slender angular lime-green thorax and abdomen, wedge-shaped insect head, two long bent antennae, cocky narrowed eyes, enormous folded violet zigzag hind legs, small coral markings. Tiny battered black leather vest and broad patched kickboxing shin guards. Ridiculous overconfidence. Strict side profile facing left, spring-loaded combat-ready idle stance, both giant hind legs folded and feet grounded, four small forelimbs in a neat fighting guard, no human torso and no human hands. Tall angular silhouette, long hind legs clearly separated from the tiny forelimbs. Bold cel shading with selective painterly wear, strong contours, restrained surface detail, kid-friendly polished 2D game character concept. One character, entire body antennae and feet visible, centered on pure white with generous margins. --no text, logo, UI, scenery --ar 3:4 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:30:00Z",
+  "sessionNote": "Seeded with art-request queue bootstrap.",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:44:29.948828+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/grasshopper-kickboxer-idle.png",
+    "sourceHashSha256": "47f7054cbbdd9f096f28e01d600d13a38328e3ca57c18cd612d31ecbabc2f139",
+    "notes": "Resolved six-limb anatomy into four smaller guarding limbs plus two connected powerful hind legs; shin guards now belong to hind legs. Preserved teal/lime/coral identity, vest and complete antennae; removed white background and ground shadow. Left-oriented idle. Generated anatomy edit rather than exact extraction. RGBA, safe margins and corner alpha verified. Ground/hover anchor in provenance. Builder still owns roster/catalog/semantic wiring, optical scale matching and runtime QA. No attack/defeat poses supplied. Runtime catalog bound as world2_plink_gang_grasshopperKickboxer_idle (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_gang_grasshopperKickboxer_idle",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_grasshopperKickboxer_idle.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  },
+  "createdAt": "2026-09-26T20:30:00Z",
+  "type": "production_sprite",
+  "gameArea": "Marble Voyage \u2014 climb chart foe tile + fight attacker",
+  "usage": "Idle combat silhouette for unnamed henchman",
+  "targetPixelSize": "Master ~928\u00d71232 concept; transparent PNG for ~148\u2013260pt UI",
+  "expectedBackground": "Transparent (RGBA); source concept is pure white",
+  "characterOrAssetName": "Grasshopper Kickboxer",
+  "pose": "idle",
+  "facing": "left",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [
+    "token.plink.gang.porcupineBoxer.idle"
+  ],
+  "acceptanceCriteria": [
+    "Six-limb insect anatomy resolved; hind legs connected and readable",
+    "Left-facing; antenna tips intact; no human torso",
+    "Transparent PNG, no halo; matches porcupine cast language",
+    "Readable at climb tile size"
+  ]
+}

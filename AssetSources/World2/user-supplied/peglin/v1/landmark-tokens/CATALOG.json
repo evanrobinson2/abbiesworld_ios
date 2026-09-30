@@ -1,0 +1,125 @@
+{
+  "carved": {
+    "packA_isometric_fantasy": 21,
+    "packB_teal_lowpoly": "FAILED — teal bg merged with grass; discard for POIs",
+    "packC_teal_grid": 20,
+    "packD_cyan_grid": 20
+  },
+  "outputDir": "AssetSources/World2/user-supplied/peglin/v1/landmark-tokens",
+  "categories": {
+    "portals_travel": [
+      "packA.02 blue portal",
+      "packA.09 golden portal",
+      "packA.11 dark gothic arch",
+      "packA.14 weathered sandstone arch",
+      "packA.19 fortified gate",
+      "packC.01 tropical portal",
+      "packC.07 stone portal",
+      "packC.11 basic stone arch",
+      "packC.17 flower portal",
+      "packC.20 torii portal",
+      "packD.01 blue portal",
+      "packD.04 ruined portal+pool",
+      "packD.07 olive arch",
+      "packD.16 orange desert portal",
+      "packD.17 orange arch"
+    ],
+    "powerup_magic": [
+      "packA.01 pink/cyan crystals",
+      "packA.05 rune tablet",
+      "packA.15 teal eye-spire",
+      "packA.20 purple rune monolith",
+      "packA.21 blue fountain",
+      "packC.05 runic monolith",
+      "packC.06 rock spring",
+      "packD.02 orb shrine",
+      "packD.03 blue crystal pillar",
+      "packD.11 red crystal cluster",
+      "packD.13 jagged blue spire"
+    ],
+    "crash_salvage": [
+      "packA.12 dark stone bunker",
+      "packA.17 orange tent",
+      "packA.18 riverside stall",
+      "packC.03 ruined gatehouse",
+      "packC.15 red campsite",
+      "packC.16 crash-site machine (green glow)",
+      "packD.14 furnace tower"
+    ],
+    "battle_markers": [
+      "packC.12 target post",
+      "packC.19 training ground"
+    ],
+    "wayfinding": [
+      "packA.03 sun banner",
+      "packA.13 small signpost",
+      "packC.02 crane signpost",
+      "packC.08 directional signpost"
+    ],
+    "dwellings_nature": [
+      "packA.04 watchtower",
+      "packA.07 mushroom cave",
+      "packA.08 torii-style gate",
+      "packA.16 treasure grotto",
+      "packC.10 lookout tower",
+      "packC.18 wizard tower",
+      "packD.06 orange pavilion",
+      "packD.08 red tent",
+      "packD.09 lighthouse",
+      "packD.19 circular hut"
+    ]
+  },
+  "peglinAssignments": {
+    "token.peglin.wreck": {
+      "source": "packC_teal_grid/packC_teal_grid_16.png",
+      "why": "Crash-site machine with green glow — reads as wreck salvage"
+    },
+    "token.peglin.battle": {
+      "source": "packC_teal_grid/packC_teal_grid_12.png",
+      "why": "Target post — clear battle/training silhouette"
+    },
+    "token.peglin.workshop": {
+      "source": "packC_teal_grid/packC_teal_grid_15.png",
+      "why": "Red campsite lean-to — improvised salvage workshop"
+    },
+    "token.peglin.path": {
+      "source": "packC_teal_grid/packC_teal_grid_08.png",
+      "why": "Directional signpost — Broken Path / onward"
+    },
+    "token.peglin.travel": {
+      "source": "packA_isometric_fantasy/packA_isometric_fantasy_02.png",
+      "why": "Blue stone portal — inter-land travel"
+    },
+    "token.peglin.challenge": {
+      "source": "packA_isometric_fantasy/packA_isometric_fantasy_01.png",
+      "why": "Crystal cluster — guardian challenge before creature"
+    },
+    "token.peglin.orb": {
+      "source": "packD_cyan_grid/packD_cyan_grid_02.png",
+      "why": "Orb shrine — Forgotten Realm free power-up"
+    },
+    "token.peglin.bramble": {
+      "source": "packA_isometric_fantasy/packA_isometric_fantasy_07.png",
+      "why": "Mushroom cave — fits Bramble burrow/clover lore (optional override)"
+    },
+    "token.peglin.foxLand": {
+      "source": "packD_cyan_grid/packD_cyan_grid_08.png",
+      "why": "Red tent — warm Fox Land palette"
+    },
+    "token.peglin.stagLand": {
+      "source": "packA_isometric_fantasy/packA_isometric_fantasy_11.png",
+      "why": "Dark gothic arch — majestic Stag Land approach"
+    },
+    "token.peglin.forgottenRealm": {
+      "source": "packD_cyan_grid/packD_cyan_grid_03.png",
+      "why": "Blue crystal pillar — power-up land marker"
+    }
+  },
+  "alternatesWorthKeeping": [
+    "packA.21 fountain → orb alternate",
+    "packC.17 flower portal → stag travel",
+    "packC.20 torii → fox travel",
+    "packA.18 riverside stall → workshop alternate",
+    "packD.01 blue portal → travel alternate"
+  ]
+}

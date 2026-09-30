@@ -21,41 +21,15 @@ struct World2PlanningDeptView: View {
     }
 
     private var focusSceneID: String {
-        viewModel.currentWorld?.sceneID ?? WorldId.home.sceneID
+        viewModel.playSceneID
     }
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    Color(red: 0.16, green: 0.22, blue: 0.34),
-                    Color(red: 0.10, green: 0.12, blue: 0.20),
-                ],
-                startPoint: .top,
-                endPoint: .bottom
-            )
-            .ignoresSafeArea()
+            constructionPlate
 
             VStack(spacing: 14) {
                 header
-                ScrollView(.horizontal, showsIndicators: false) {
-                    World2MinimapView(
-                        snapshot: snapshot,
-                        compact: false,
-                        onSelectScene: { sceneID in
-                            if let world = WorldId.allCases.first(where: { $0.sceneID == sceneID }) {
-                                viewModel.switchWorld(to: world)
-                            }
-                        },
-                        onSelectOpenConnector: { connector in
-                            selectedOpen = connector
-                            attachCandidate = ""
-                        }
-                    )
-                    .padding(.horizontal, 12)
-                }
-                .frame(maxHeight: 280)
-
                 connectorLegend
                 if developerSession.isEnabled {
                     developerPanel
@@ -72,21 +46,34 @@ struct World2PlanningDeptView: View {
         .sheet(item: $selectedOpen) { connector in
             expansionSheet(connector)
         }
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.planningDept.exit",
+            onExit: onExit
+        )
+    }
+
+    /// Unqualified room. Server art wins; otherwise the shared construction plate.
+    private var constructionPlate: some View {
+        let image = AssetBootstrapService.shared.image(
+            for: World2POIRegistry.planningDept.exteriorAsset
+        ) ?? UIImage(named: "under_construction")
+        return ZStack {
+            Color.black
+            if let image {
+                Image(uiImage: image)
+                    .resizable()
+                    .scaledToFill()
+                    .accessibilityLabel("Planning Department is under construction")
+                    .accessibilityIdentifier("world2.planningDept.plate")
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .clipped()
+        .ignoresSafeArea()
     }
 
     private var header: some View {
         HStack {
-            Button(action: onExit) {
-                Label("Leave Planning", systemImage: "arrow.left")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 9)
-                    .background(.black.opacity(0.55), in: Capsule())
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("world2.planningDept.exit")
-
             Spacer()
 
             VStack(alignment: .trailing, spacing: 2) {
@@ -135,9 +122,7 @@ struct World2PlanningDeptView: View {
     }
 
     private var playerHint: some View {
-        Text(
-            "Yellow stubs are expansion tunnels — empty N/S/E/W doors waiting for a new land. Solid cyan lines are paths you already know."
-        )
+        Text("This room is still being built. Yellow names are open doors. Cyan names are paths you already know.")
         .font(.system(size: 14, weight: .semibold, design: .rounded))
         .foregroundStyle(.white.opacity(0.82))
         .padding(.horizontal, 18)

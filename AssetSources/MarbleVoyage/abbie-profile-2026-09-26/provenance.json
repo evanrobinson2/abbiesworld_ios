@@ -1,0 +1,23 @@
+{
+  "sourceService": "Midjourney",
+  "sourceJob": "00a6a09a-870c-4dab-9352-4625330acd99",
+  "candidateIndex": 2,
+  "jobUrl": "https://www.midjourney.com/jobs/00a6a09a-870c-4dab-9352-4625330acd99?index=2",
+  "sourceUrl": "https://cdn.midjourney.com/00a6a09a-870c-4dab-9352-4625330acd99/0_2.jpeg",
+  "approvedBy": "Evan, explicit profile-picture selection in 2026-09-26 conversation",
+  "originalSHA256": "181305910edb7603947169fe4f3f11ecc04d5d3b536d29f8c665fa6db3b6d9cf",
+  "catalogSHA256": "181305910edb7603947169fe4f3f11ecc04d5d3b536d29f8c665fa6db3b6d9cf",
+  "width": 1024,
+  "height": 1024,
+  "preparation": "Exact original JPEG; no redraw, crop, background edit or recompression. Square portrait keeps its pale background.",
+  "catalog": "world2_peglin_abbie_happy",
+  "semanticId": "character.peglin.abbie.happy",
+  "runtimeStates": [
+    "idle",
+    "happy"
+  ],
+  "previousPayload": "previous-abbie-happy.png",
+  "previousSHA256": "666eecd207eaffd282c9ca6cfeecbc47d77b1c55a2c3468934274af888d05e22",
+  "remainingWork": "Hurt, defeated and wink portraits still use earlier art and need matching expressions. Runtime build/appearance not verified.",
+  "generationPrompt": "Close up battle profile portrait of Abbie, a six year old girl, straight on head and shoulders framing, face filling most of the image, direct eye contact. Striking strawberry blonde thick wavy curly hair with warm golden, copper, and rosy tones framing her face. Bright blue eyes with lively catchlights, fair skin, rosy cheeks, sweet but determined expression with a slight mischievous smile. Wearing a raspberry pink adventurer jacket with deep plum trim, quilted shoulder guards, tiny gold clasps, cream undershirt, leather cross body battle straps, decorative gem accents, subtle scuffs. Practical whimsical child hero armor, no weapons, no exposed skin beyond normal child clothing. Simple pure white or pale neutral background, no text or UI. Style: polished kid friendly 2D cel shaded game character concept art, bold clean contours, colorful comedic fantasy game look, expressive and graphic, hand drawn feel. Not anime, not photorealistic, not 3D. Readable at small icon size."
+}

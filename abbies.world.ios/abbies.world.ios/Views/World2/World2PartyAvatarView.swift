@@ -2,30 +2,31 @@
 //  World2PartyAvatarView.swift
 //  abbies.world.ios
 //
-//  Meshy USDZ avatar for a party piece. Idle clip while settled; run clip
-//  while walking to a selected POI. Falls back to the 2D figurine if load fails.
+//  Meshy USDZ avatar. Abbie stands in the bind pose when idle because her
+//  clip named Idle is a slow walk. Walk and run are separate files.
 //
 
 import RealityKit
 import SwiftUI
+import UIKit
 import simd
 
 struct World2PartyAvatarViewport: View {
     let actor: World2PartyActorID
-    let isWalking: Bool
-    let facingRight: Bool
+    let gait: World2PartyGait
+    let heading: Float
+    let stride: Double
     let size: CGFloat
 
-    @State private var coordinator = AvatarSceneCoordinator()
+    @State private var coordinator = World2ActorSceneCoordinator()
     @State private var loadFailed = false
 
     var body: some View {
         ZStack {
-            if loadFailed {
+            if loadFailed, !World2WorldSync.shared.usesServerDocument {
                 Image(actor.imageAssetName)
                     .resizable()
                     .scaledToFit()
-                    .scaleEffect(x: facingRight ? 1 : -1, y: 1)
             }
 
             RealityView { content in
@@ -35,8 +36,9 @@ struct World2PartyAvatarViewport: View {
                     content.add(root)
                 }
             } update: { _ in
-                coordinator.setFacingRight(facingRight)
-                coordinator.setWalking(isWalking)
+                coordinator.setYaw(heading - actor.chestYawBias)
+                coordinator.setGait(gait)
+                coordinator.setPlaybackRate(Float(stride))
             }
             .opacity(loadFailed ? 0 : 1)
             .task(id: actor.rawValue) {
@@ -51,15 +53,24 @@ struct World2PartyAvatarViewport: View {
 }
 
 @MainActor
-private final class AvatarSceneCoordinator {
+final class World2ActorSceneCoordinator {
+    private struct ClipBinding {
+        var entity: Entity
+        var host: Entity
+        var resource: AnimationResource
+        var name: String
+    }
+
     private let root = Entity()
-    private var character: Entity?
-    private var idleAnimation: AnimationResource?
-    private var runAnimation: AnimationResource?
+    private var idleClip: ClipBinding?
+    private var walkClip: ClipBinding?
+    private var runClip: ClipBinding?
     private var playback: AnimationPlaybackController?
     private var loadedActor: World2PartyActorID?
-    private var appliedWalking: Bool?
+    private var appliedGait: World2PartyGait?
+    private var frozen = false
     private var didConfigureLights = false
+    private var yaw: Float = 0.72
 
     func ensureRoot() -> Entity {
         if !didConfigureLights {
@@ -87,17 +98,21 @@ private final class AvatarSceneCoordinator {
     }
 
     func load(actor: World2PartyActorID) async -> Bool {
-        if loadedActor == actor, character != nil { return true }
-        character?.removeFromParent()
-        character = nil
-        idleAnimation = nil
-        runAnimation = nil
+        if loadedActor == actor, walkClip != nil, runClip != nil { return true }
+        idleClip?.entity.removeFromParent()
+        walkClip?.entity.removeFromParent()
+        runClip?.entity.removeFromParent()
+        idleClip = nil
+        walkClip = nil
+        runClip = nil
         playback?.stop()
         playback = nil
-        appliedWalking = nil
+        appliedGait = nil
+        frozen = false
         loadedActor = actor
 
-        guard let url = Self.resourceURL(for: actor) else {
+        guard let walkURL = Self.resourceURL(named: actor.walkUSDZResourceName),
+              let runURL = Self.resourceURL(named: actor.runUSDZResourceName) else {
             World2Diagnostics.log(
                 "party_avatar_missing",
                 ["actor": actor.rawValue]
@@ -106,28 +121,41 @@ private final class AvatarSceneCoordinator {
         }
 
         do {
-            let entity = try await Entity(contentsOf: url)
-            normalizeHeight(entity, targetHeight: 1.15)
-            entity.position = .zero
-            _ = ensureRoot()
-            root.addChild(entity)
-            character = entity
+            let walking = try await Entity(contentsOf: walkURL)
+            let running = try await Entity(contentsOf: runURL)
+            guard let walkBinding = bind(walking, hints: actor.walkClipHints),
+                  let runBinding = bind(running, hints: actor.runClipHints) else {
+                World2Diagnostics.log(
+                    "party_avatar_clip_missing",
+                    ["actor": actor.rawValue]
+                )
+                return false
+            }
 
-            var library: [String: AnimationResource] = [:]
-            collectAnimations(from: entity, into: &library)
-            idleAnimation = resolve(hints: actor.idleClipHints, in: library)
-            runAnimation = resolve(hints: actor.runClipHints, in: library)
+            _ = ensureRoot()
+            if let idleName = actor.idleUSDZResourceName,
+               let idleURL = Self.resourceURL(named: idleName),
+               let idleEntity = try? await Entity(contentsOf: idleURL),
+               let idleBinding = bind(idleEntity, hints: actor.idleClipHints) {
+                root.addChild(idleBinding.entity)
+                idleClip = idleBinding
+            }
+            root.addChild(walkBinding.entity)
+            root.addChild(runBinding.entity)
+            walkClip = walkBinding
+            runClip = runBinding
+            applyYaw()
 
             World2Diagnostics.log(
                 "party_avatar_loaded",
                 [
                     "actor": actor.rawValue,
-                    "clips": library.keys.sorted().joined(separator: ","),
-                    "idle": idleAnimation?.name ?? "none",
-                    "run": runAnimation?.name ?? "none",
+                    "idle": idleClip?.name ?? "bind-pose",
+                    "walk": walkBinding.name,
+                    "run": runBinding.name,
                 ]
             )
-            setWalking(false, force: true)
+            setGait(.idle, force: true)
             return true
         } catch {
             World2Diagnostics.log(
@@ -139,24 +167,160 @@ private final class AvatarSceneCoordinator {
     }
 
     func setFacingRight(_ facingRight: Bool) {
-        guard let character else { return }
-        let yaw: Float = facingRight ? 0.55 : (0.55 + .pi)
-        character.orientation = simd_quatf(angle: yaw, axis: [0, 1, 0])
+        let intoScene: Float = 0.72
+        yaw = facingRight ? intoScene : (intoScene + .pi)
+        applyYaw()
     }
 
-    func setWalking(_ isWalking: Bool, force: Bool = false) {
-        guard let character else { return }
-        if !force, appliedWalking == isWalking { return }
-        appliedWalking = isWalking
+    func setYaw(_ yaw: Float) {
+        self.yaw = yaw
+        applyYaw()
+    }
+
+    func setPlaybackRate(_ rate: Float) {
+        let clamped = min(max(rate, 0.55), 1.15)
+        playback?.speed = clamped
+    }
+
+    /// Orbit the studio camera around a figurine that stays put (run in place).
+    func setOrbit(azimuth: Float, elevation: Float) {
+        guard let camera = root.children.first(where: { $0 is PerspectiveCamera }) else { return }
+        let radius: Float = 3.15
+        let elev = min(max(elevation, 0.15), 1.25)
+        let x = radius * cos(elev) * sin(azimuth)
+        let y = 0.55 + radius * sin(elev) * 0.55
+        let z = radius * cos(elev) * cos(azimuth)
+        camera.look(at: [0, 0.62, 0], from: [x, y, z], relativeTo: nil)
+    }
+
+    /// Visual labels for the studio. Clip names now match the motion.
+    var visualGaits: [World2PartyGait] { [.idle, .walk, .run] }
+
+    func playClip(named name: String) {
+        frozen = false
+        setGait(Self.gait(forPresentedName: name, actor: loadedActor), force: true)
+    }
+
+    static func gait(forPresentedName name: String, actor: World2PartyActorID?) -> World2PartyGait {
+        let lowered = name.lowercased()
+        if lowered.contains("run") { return .run }
+        if lowered.contains("walk") { return .walk }
+        return .idle
+    }
+
+    func freeze() {
+        frozen = true
         playback?.stop()
-        // Abbie's Meshy pack has no true idle — freeze when idleAnimation is nil.
-        guard let resource = isWalking ? runAnimation : idleAnimation else { return }
-        // Loop "forever" with a huge repeat count (API takes Int on this SDK).
-        if let looping = try? resource.repeat(count: .max) {
-            playback = character.playAnimation(looping, transitionDuration: 0.18)
-        } else {
-            playback = character.playAnimation(resource, transitionDuration: 0.18)
+        playback = nil
+        appliedGait = nil
+        show(idleClip ?? walkClip)
+    }
+
+    func setGait(_ gait: World2PartyGait, force: Bool = false) {
+        guard walkClip != nil, runClip != nil else { return }
+        if frozen, !force { return }
+        if !force, appliedGait == gait { return }
+        frozen = false
+        appliedGait = gait
+
+        switch gait {
+        case .idle:
+            if let idleClip {
+                show(idleClip)
+                play(idleClip.resource, on: idleClip.host, transition: 0.35)
+            } else if let walkClip {
+                show(walkClip)
+                playback?.stop()
+                playback = nil
+            }
+        case .walk:
+            guard let walkClip else { return }
+            show(walkClip)
+            play(walkClip.resource, on: walkClip.host, transition: 0.2)
+        case .run:
+            guard let runClip else { return }
+            show(runClip)
+            play(runClip.resource, on: runClip.host, transition: 0.15)
         }
+    }
+
+    private func show(_ binding: ClipBinding?) {
+        let shown = binding?.entity
+        idleClip?.entity.isEnabled = idleClip?.entity === shown
+        walkClip?.entity.isEnabled = walkClip?.entity === shown
+        runClip?.entity.isEnabled = runClip?.entity === shown
+    }
+
+    private func applyYaw() {
+        let turn = simd_quatf(angle: yaw, axis: SIMD3<Float>(0, 1, 0))
+        idleClip?.entity.orientation = turn
+        walkClip?.entity.orientation = turn
+        runClip?.entity.orientation = turn
+    }
+
+    private func play(
+        _ resource: AnimationResource,
+        on owner: Entity,
+        transition: TimeInterval
+    ) {
+        playback?.stop()
+        let looping = resource.repeat(count: 10_000)
+        playback = owner.playAnimation(looping, transitionDuration: transition)
+    }
+
+    /// Files are exported Y-up. Measure after load and keep the feet on y = 0.
+    private func bind(_ entity: Entity, hints: [String]) -> ClipBinding? {
+        normalizeHeight(entity, targetHeight: 1.15)
+        entity.position = .zero
+        addFootShadow(to: entity)
+        guard let (host, resource, name) = skeletalClip(in: entity, hints: hints) else {
+            return nil
+        }
+        return ClipBinding(entity: entity, host: host, resource: resource, name: name)
+    }
+
+    /// Contact mark in the same space as the feet. A SwiftUI ellipse on the
+    /// view sat about a body-length below the mesh because the camera frames
+    /// the figurine in the middle of the square.
+    private func addFootShadow(to entity: Entity) {
+        var material = UnlitMaterial()
+        material.color = .init(tint: UIColor.black.withAlphaComponent(0.42))
+        material.blending = .transparent(opacity: .init(scale: 0.55))
+        let shadow = ModelEntity(
+            mesh: .generatePlane(width: 0.46, depth: 0.22, cornerRadius: 0.11),
+            materials: [material]
+        )
+        shadow.name = "footShadow"
+        shadow.position = [0, 0.015, 0]
+        entity.addChild(shadow)
+    }
+
+    private func skeletalClip(
+        in entity: Entity,
+        hints: [String]
+    ) -> (Entity, AnimationResource, String)? {
+        var found: [(Entity, AnimationResource, String)] = []
+        func walk(_ node: Entity) {
+            for animation in node.availableAnimations {
+                let name = animation.name ?? ""
+                guard name.contains("Armature/") else { continue }
+                let short = name.split(separator: "/").last.map(String.init) ?? name
+                let cleaned = short.replacingOccurrences(of: "[0]", with: "")
+                found.append((node, animation, cleaned))
+            }
+            for child in node.children { walk(child) }
+        }
+        walk(entity)
+        guard !found.isEmpty else { return nil }
+        for hint in hints {
+            if let hit = found.first(where: {
+                $0.2.caseInsensitiveCompare(hint) == .orderedSame
+                    || $0.2.localizedCaseInsensitiveContains(hint)
+            }) {
+                return hit
+            }
+        }
+        return found[0]
     }
 
     private func normalizeHeight(_ entity: Entity, targetHeight: Float) {
@@ -168,41 +332,16 @@ private final class AvatarSceneCoordinator {
         entity.position.y -= bounds.min.y * scale
     }
 
-    private func collectAnimations(
-        from entity: Entity,
-        into library: inout [String: AnimationResource]
-    ) {
-        for animation in entity.availableAnimations {
-            let rawName = animation.name ?? ""
-            let name = rawName.isEmpty ? "unnamed_\(library.count)" : rawName
-            library[name] = animation
-        }
-        for child in entity.children {
-            collectAnimations(from: child, into: &library)
-        }
-    }
-
-    private func resolve(
-        hints: [String],
-        in library: [String: AnimationResource]
-    ) -> AnimationResource? {
-        guard !hints.isEmpty else { return nil }
-        let names = Array(library.keys)
-        for hint in hints {
-            if let exact = names.first(where: { $0.caseInsensitiveCompare(hint) == .orderedSame }) {
-                return library[exact]
+    private static func resourceURL(named name: String) -> URL? {
+        if World2WorldSync.shared.usesServerDocument {
+            guard let file = World2WorldSync.shared.clipFile(engineName: name) else {
+                return nil
             }
-            if let partial = names.first(where: {
-                $0.localizedCaseInsensitiveContains(hint)
-            }) {
-                return library[partial]
-            }
+            return AssetBootstrapService.shared.cachedFileURL(named: file)
         }
-        return nil
-    }
-
-    private static func resourceURL(for actor: World2PartyActorID) -> URL? {
-        let name = actor.usdzResourceName
+        if let remote = AssetBootstrapService.shared.cachedFileURL(named: name) {
+            return remote
+        }
         let subdirs = ["World2Actors", "Resources/World2Actors", nil as String?]
         for subdir in subdirs {
             if let subdir,

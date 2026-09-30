@@ -1,0 +1,61 @@
+{
+  "id": "20260926-climb-mystery-tile",
+  "semanticId": "token.marbleVoyage.climb.mystery",
+  "kind": "token",
+  "priority": "high",
+  "status": "fulfilled",
+  "placeholder": {
+    "type": "sf_symbol",
+    "detail": "questionmark.circle.fill on rose chart tile; chartLabel ?"
+  },
+  "keepStockIcon": false,
+  "surface": "Climb chart \u2014 Mystery / ? nodes (kind mystery)",
+  "brief": "Square destination tile for Mystery stops. Chart label is only ?. Art should read as curious scrap / sealed crate / foggy parcel \u2014 optional subtle ? shape in the silhouette, no lettering. Same family as Treasure + Shrine tiles.",
+  "aspect": "1:1",
+  "styleNotes": "Kid-safe; no spooky horror. Trail-scrap / rose chart language.",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/MarbleVoyageHostView.swift",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/fox-land.jpg",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/porcupine-boxer.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/index.html",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/README.md",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/mystery-original.jpeg",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/mystery-transparent.png",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/mystery-provenance.json"
+  ],
+  "promptSeeds": [
+    "Comedic fantasy mystery scrap parcel for climb map tile, curious sealed crate, bold silhouette, pure white bg, no text --ar 1:1 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:45:00Z",
+  "sessionNote": "Player-facing label fixed as ?.",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:29:03.437570+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/mystery-transparent.png",
+    "sourceHashSha256": "3fff91a227754169c3bda7489bb70d8349ef35c2e0dd96bda8de85bcf716ae0e",
+    "notes": "Transparent destination token ready for builder bind. RGBA/corner-alpha checks passed. Square canvas, full silhouette; preserve UI-supplied label. Actual 64\u2013120pt runtime legibility and wiring remain unverified. No catalog or Swift edits. Runtime catalog bound as world2_token_marbleVoyage_climb_mystery (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_token_marbleVoyage_climb_mystery",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_token_marbleVoyage_climb_mystery.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  },
+  "createdAt": "2026-09-26T20:45:00Z",
+  "type": "map_token",
+  "gameArea": "Marble Voyage \u2014 climb chart",
+  "usage": "Square Mystery destination tile (chart label is ?)",
+  "targetPixelSize": "Square token; readable ~64\u2013120pt",
+  "expectedBackground": "Pure white / transparent cutout preferred",
+  "characterOrAssetName": "Mystery stop",
+  "productionIntent": "runtime_bind",
+  "referenceRequestIds": [
+    "20260926-climb-nonfight-token",
+    "20260926-event-mystery-plate"
+  ],
+  "acceptanceCriteria": [
+    "Curious sealed crate/parcel \u2014 not horror",
+    "Optional subtle ? shape only if not competing with UI label",
+    "No other text"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "analysis": {
+    "bicep_mean_rgb": [
+      226.4,
+      106.2,
+      44.5
+    ],
+    "edit_region": {
+      "changed_pct": 82.01,
+      "changed_pixels": 10573,
+      "mean_abs_diff": 0.39,
+      "pixels": 12893
+    },
+    "keep_region": {
+      "changed_pct": 0.45,
+      "changed_pixels": 4671,
+      "mean_abs_diff": 2.25,
+      "pixels": 1035683
+    },
+    "threshold": 18
+  },
+  "api": "openai.images.edit",
+  "condition": "C_mask_fabric",
+  "elapsed_sec": 9.31,
+  "images": [
+    "inputs/humanoid.png",
+    "inputs/fabric.png"
+  ],
+  "mask": "inputs/mask_bicep.png",
+  "mask_convention": "alpha=0 edit / alpha=255 keep",
+  "model": "gpt-image-2.5-flare",
+  "ok": true,
+  "output": "outputs/C_mask_fabric_openai.png",
+  "prompt": "fill ONLY the white mask with this knitted fabric as the bicep / upper sleeve. Do not change the rest of the body.",
+  "quality": "low",
+  "size": "1024x1024"
+}

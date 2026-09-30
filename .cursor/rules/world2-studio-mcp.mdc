@@ -1,0 +1,22 @@
+---
+description: Prefer Studio MCP for live world read/write
+alwaysApply: true
+---
+
+# Studio MCP is the world interface
+
+Live household world mutations for Abbie's World go through the **Studio MCP** (`abbies-world`), not ad-hoc `curl`/`sqlite` against `/api/v1/worlds/current`.
+
+**Endpoint:** `https://studio-mock-iota.vercel.app/api/mcp` (also wired in `.cursor/mcp.json`).
+
+**Habit:** `read_primer` → `world_describe` → **`author_beat` (dryRun)** → confirm → `world_lint`. Prefer `author_beat` + `asset_job_*` / `asset_bind` over ad-hoc low-level edits. Low-level tools (`scene_upsert`, `place_upsert`, `scene_connect`, `vars_apply`) remain for precise patches. Never invent new iPad screens (except when Evan explicitly ships a new `World2POIRoute` like `plink` / `pegMonastery`). Never wipe players (`world_create` needs explicit `confirmReplace`).
+
+**Steel rail:** NL may only emit closed ops (see `docs/current-state/STEEL_RAIL_AUTHORSHIP.md`). Behavior whitelist; semantic asset IDs as SoT; staging https URLs are temporary.
+
+**Asset jobs:** `asset_job_create` → paste MJ URL via `asset_job_complete` → `asset_bind` with semantic ID (`docs/current-state/ASSET_GENERATION_SERVICE.md`).
+
+**Auth:** Auth0 Bearer from Studio **Copy MCP token**, or `ABBIES_WORLD_TOKEN` in the environment (interpolated into MCP headers). Refresh when tools return `auth_required`.
+
+**Asset art:** Register durable plates via Game Asset API semantic IDs (`map.*`, `poi.*.exterior|interior`), then set those IDs on scenes/places through MCP — do not leave Studio CDN plate URLs as source of truth.
+
+**Fallback:** Only use direct world HTTP/sqlite when MCP is down or for registry admin PUTs (asset admin key), and say so.

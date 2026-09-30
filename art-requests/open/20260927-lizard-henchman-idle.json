@@ -1,0 +1,32 @@
+{
+  "id": "20260927-lizard-henchman-idle",
+  "semanticId": "token.plink.gang.lizard.idle",
+  "status": "open",
+  "priority": "normal",
+  "type": "production_sprite",
+  "brief": "Replace the broken lizard henchman idle plate. Current asset is a mismatched composite (two lower bodies / legs stitched together) and was pulled from the climb henchmen pool so it no longer appears on the chart.",
+  "aspect": "3:4",
+  "styleNotes": "Full-body anthropomorphic lizard fighter on solid black, matching crab/bat/porcupine production henchmen. Clean single silhouette, readable at climb-tile size (~180pt).",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_lizard_idle.imageset",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/MarbleVoyageGangRun.swift"
+  ],
+  "promptSeeds": [
+    "anthropomorphic lizard street fighter full body, solid black background, comic game concept art, single clean silhouette"
+  ],
+  "requestedBy": "builder",
+  "createdAt": "2026-09-27T11:40:00Z",
+  "requestedAt": "2026-09-27T11:40:00Z",
+  "gameArea": "marble_voyage_climb",
+  "usage": "Climb chart tile + battle portrait when lizard returns to henchmenPool",
+  "acceptanceCriteria": [
+    "One coherent character, no composite/mismatched limbs",
+    "Solid black background with clean cutout edges",
+    "Readable face and silhouette at ~180pt square tile"
+  ],
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "Removed from MarbleVoyageGangRun.henchmenPool until replaced"
+  }
+}

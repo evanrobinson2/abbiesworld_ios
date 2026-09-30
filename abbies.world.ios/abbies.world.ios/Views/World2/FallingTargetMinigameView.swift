@@ -292,11 +292,16 @@ struct FallingTargetGameHost: View {
                 systemImage: "gearshape.2.fill",
                 description: Text("Its game configuration could not be loaded.")
             )
-            .overlay(alignment: .bottomLeading) {
+            .overlay(alignment: .bottom) {
                 Button("Back to Work Land", action: onExit)
-                    .buttonStyle(.borderedProminent)
+                    .hidden()
+                    .accessibilityHidden(true)
                     .padding(24)
             }
+            .world2InteriorActions(
+                exitAccessibilityID: "world2.fallingTargets.exit",
+                onExit: onExit
+            )
             .accessibilityIdentifier("world2.fallingTargets.configurationError")
         }
     }
@@ -389,6 +394,10 @@ private struct FallingTargetMinigameView: View {
                 session.startRound()
             }
         }
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.fallingTargets.exit",
+            onExit: onExit
+        )
     }
 
     private var machineryOverlay: some View {
@@ -498,20 +507,6 @@ private struct FallingTargetMinigameView: View {
             .padding(.top, 18)
 
             Spacer()
-
-            HStack {
-                Button(action: onExit) {
-                    Label("Work Land", systemImage: "arrow.left.circle.fill")
-                        .font(.system(size: 15, weight: .bold, design: .rounded))
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.black.opacity(0.72))
-                .accessibilityIdentifier("world2.fallingTargets.exit")
-
-                Spacer()
-            }
-            .padding(.horizontal, 24)
-            .padding(.bottom, 22)
         }
     }
 

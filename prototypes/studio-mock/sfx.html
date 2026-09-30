@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SFX · Media browser · Abbie's World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Sans:wght@450;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #152018;
+      --muted: #4a5a4e;
+      --line: #c9d6cc;
+      --paper: #eef4ef;
+      --panel: #f7fbf7;
+      --accent: #1f6b4a;
+      --accent-2: #c45c26;
+      --chip: #dce8df;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(ellipse 70% 45% at 0% 0%, #d8eadc 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 100% 10%, #f0e2d0 0%, transparent 50%),
+        var(--paper);
+    }
+    header {
+      padding: 1.4rem 1.5rem 1rem;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      align-items: flex-end;
+    }
+    header h1 {
+      margin: 0;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.65rem;
+      letter-spacing: -0.02em;
+    }
+    header p { margin: 0; color: var(--muted); max-width: 42rem; }
+    header .links { margin-left: auto; font-size: 0.9rem; }
+    a { color: var(--accent); }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      padding: 1rem 1.5rem 0.25rem;
+      align-items: center;
+    }
+    .toolbar input[type="search"] {
+      flex: 1 1 220px;
+      min-width: 180px;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--panel);
+      font: inherit;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      background: var(--chip);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.4rem 0.85rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .chip[aria-pressed="true"] {
+      background: var(--accent);
+      color: #f4fff8;
+      border-color: var(--accent);
+    }
+    main {
+      padding: 0.75rem 1.5rem 3rem;
+      max-width: 1100px;
+    }
+    .group { margin-top: 1.5rem; }
+    .group h2 {
+      margin: 0 0 0.35rem;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.25rem;
+    }
+    .group .blurb {
+      margin: 0 0 0.85rem;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.85rem;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.9rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .card h3 {
+      margin: 0;
+      font-size: 1rem;
+    }
+    .id {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      font-size: 0.72rem;
+      color: var(--muted);
+      word-break: break-all;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: #e4eee6;
+      padding: 0.18rem 0.45rem;
+      border-radius: 6px;
+      color: var(--muted);
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
+    button.play {
+      border: 0;
+      background: var(--accent);
+      color: #f4fff8;
+      font: inherit;
+      font-weight: 700;
+      border-radius: 9px;
+      padding: 0.45rem 0.75rem;
+      cursor: pointer;
+    }
+    button.play.secondary { background: var(--accent-2); }
+    .thumb {
+      width: 100%;
+      max-height: 140px;
+      object-fit: contain;
+      background: #e7efe9;
+      border-radius: 10px;
+    }
+    .status {
+      padding: 0.75rem 1.5rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .status.err { color: #8b2e2e; }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Semantic media browser</h1>
+      <p>Plink / Marble Voyage SFX and new voyage art — organized by cue id. Play in-browser; agents read the same catalog via <code>/api/media-catalog</code>.</p>
+    </div>
+    <div class="links">
+      <a href="/">Studio</a> ·
+      <a href="/assets.html">Asset jobs</a> ·
+      <a href="/api/media-catalog">JSON</a>
+    </div>
+  </header>
+
+  <div class="toolbar" id="toolbar">
+    <input id="q" type="search" placeholder="Filter by id, title, tag…" autocomplete="off" />
+  </div>
+  <div class="status" id="status">Loading catalog…</div>
+  <main id="root"></main>
+
+  <script>
+    const state = { catalog: null, group: "all", q: "" };
+    let audio;
+
+    async function load() {
+      const status = document.getElementById("status");
+      try {
+        const res = await fetch("/api/media-catalog");
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        state.catalog = await res.json();
+        status.textContent = `${state.catalog.count} entries · v${state.catalog.version}`;
+        buildChips();
+        render();
+      } catch (err) {
+        status.classList.add("err");
+        status.textContent = `Failed to load catalog: ${err.message}`;
+      }
+    }
+
+    function buildChips() {
+      const bar = document.getElementById("toolbar");
+      const existing = bar.querySelectorAll(".chip");
+      existing.forEach((c) => c.remove());
+      const all = document.createElement("button");
+      all.className = "chip";
+      all.type = "button";
+      all.textContent = "All";
+      all.setAttribute("aria-pressed", "true");
+      all.onclick = () => setGroup("all", all);
+      bar.appendChild(all);
+      for (const g of state.catalog.groups || []) {
+        const b = document.createElement("button");
+        b.className = "chip";
+        b.type = "button";
+        b.textContent = g.title;
+        b.setAttribute("aria-pressed", "false");
+        b.onclick = () => setGroup(g.id, b);
+        bar.appendChild(b);
+      }
+    }
+
+    function setGroup(id, btn) {
+      state.group = id;
+      document.querySelectorAll(".chip").forEach((c) => c.setAttribute("aria-pressed", "false"));
+      btn.setAttribute("aria-pressed", "true");
+      render();
+    }
+
+    function matches(entry) {
+      if (state.group !== "all" && entry.group !== state.group) return false;
+      const q = state.q.trim().toLowerCase();
+      if (!q) return true;
+      const hay = [entry.id, entry.title, entry.cue, ...(entry.tags || [])].join(" ").toLowerCase();
+      return hay.includes(q);
+    }
+
+    function play(urls, cycle = false) {
+      if (!urls || !urls.length) return;
+      if (audio) { audio.pause(); audio = null; }
+      const pick = cycle ? urls[Math.floor(Math.random() * urls.length)] : urls[0];
+      audio = new Audio(pick);
+      audio.play().catch((e) => console.warn(e));
+    }
+
+    function render() {
+      const root = document.getElementById("root");
+      root.innerHTML = "";
+      const groups = state.catalog.groups || [];
+      const byGroup = new Map(groups.map((g) => [g.id, []]));
+      for (const e of state.catalog.entries || []) {
+        if (!matches(e)) continue;
+        if (!byGroup.has(e.group)) byGroup.set(e.group, []);
+        byGroup.get(e.group).push(e);
+      }
+      for (const g of groups) {
+        const list = byGroup.get(g.id) || [];
+        if (!list.length) continue;
+        const section = document.createElement("section");
+        section.className = "group";
+        section.innerHTML = `<h2>${g.title}</h2><p class="blurb">${g.blurb || ""}</p>`;
+        const grid = document.createElement("div");
+        grid.className = "grid";
+        for (const e of list) {
+          const card = document.createElement("article");
+          card.className = "card";
+          const tags = (e.tags || []).map((t) => `<span class="tag">${t}</span>`).join("");
+          let media = "";
+          if (e.kind === "image" && e.urls?.[0]) {
+            media = `<img class="thumb" src="${e.urls[0]}" alt="" loading="lazy" />`;
+          }
+          card.innerHTML = `
+            ${media}
+            <h3>${e.title}</h3>
+            <div class="id">${e.id}</div>
+            <div class="tags">${tags}</div>
+            <div class="actions"></div>
+          `;
+          const actions = card.querySelector(".actions");
+          if (e.kind === "sfx" && e.urls?.length) {
+            const b = document.createElement("button");
+            b.className = "play";
+            b.type = "button";
+            b.textContent = e.urls.length > 1 ? "Play (cycle)" : "Play";
+            b.onclick = () => play(e.urls, e.urls.length > 1);
+            actions.appendChild(b);
+            e.urls.forEach((u, i) => {
+              const s = document.createElement("button");
+              s.className = "play secondary";
+              s.type = "button";
+              s.textContent = e.urls.length > 1 ? `Var ${i + 1}` : "Open";
+              s.onclick = () => {
+                if (e.urls.length > 1) play([u]);
+                else window.open(u, "_blank");
+              };
+              actions.appendChild(s);
+            });
+          } else if (e.urls?.[0]) {
+            const a = document.createElement("a");
+            a.href = e.urls[0];
+            a.target = "_blank";
+            a.rel = "noopener";
+            a.textContent = "Open file";
+            actions.appendChild(a);
+          }
+          grid.appendChild(card);
+        }
+        section.appendChild(grid);
+        root.appendChild(section);
+      }
+      if (!root.children.length) {
+        root.innerHTML = `<p class="status">No entries match.</p>`;
+      }
+    }
+
+    document.getElementById("q").addEventListener("input", (ev) => {
+      state.q = ev.target.value;
+      render();
+    });
+
+    load();
+  </script>
+</body>
+</html>

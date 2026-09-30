@@ -1,0 +1,34 @@
+{
+  "semanticId": "ui.plink.power.icon.portal",
+  "sourceProvider": "Midjourney",
+  "jobId": "d2bcb6db-9f56-4e0f-8242-167ad612ed74",
+  "submittedAt": "2026-09-26T22:03:38Z",
+  "promptFile": "portal-prompt.txt",
+  "status": "candidate_review_pending",
+  "candidates": [
+    {
+      "candidateIndex": 0,
+      "filename": "portal-candidate-1-original.jpeg",
+      "sha256": "aeda16b785ddd478fb752b8015f640ee9743b8f87291707ce062baf091265476",
+      "sourceUrl": "https://cdn.midjourney.com/d2bcb6db-9f56-4e0f-8242-167ad612ed74/0_0.jpeg"
+    },
+    {
+      "candidateIndex": 1,
+      "filename": "portal-candidate-2-original.jpeg",
+      "sha256": "b33dfbc1ba321e166f922d779d37c7e55a5d7f2a0a02d0e7c3fe97803d6f8687",
+      "sourceUrl": "https://cdn.midjourney.com/d2bcb6db-9f56-4e0f-8242-167ad612ed74/0_1.jpeg"
+    },
+    {
+      "candidateIndex": 2,
+      "filename": "portal-candidate-3-original.jpeg",
+      "sha256": "ffa2b4f548a72f8e0b457025bf5e531b3da393a2773f7e7cf86e69547ff3670d",
+      "sourceUrl": "https://cdn.midjourney.com/d2bcb6db-9f56-4e0f-8242-167ad612ed74/0_2.jpeg"
+    },
+    {
+      "candidateIndex": 3,
+      "filename": "portal-candidate-4-original.jpeg",
+      "sha256": "4b5d2fec4510ddb8857fc0e352d80ccc152fc467efaa5c1eb9d351d18edb04c5",
+      "sourceUrl": "https://cdn.midjourney.com/d2bcb6db-9f56-4e0f-8242-167ad612ed74/0_3.jpeg"
+    }
+  ]
+}

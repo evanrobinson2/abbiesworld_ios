@@ -1,0 +1,65 @@
+{
+  "id": "20260926-bat-divekicker-idle",
+  "semanticId": "token.plink.gang.batDivekicker.idle",
+  "kind": "token",
+  "priority": "high",
+  "status": "fulfilled",
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "Concept JPEG selected; no runtime imageset / library bind yet"
+  },
+  "keepStockIcon": false,
+  "surface": "Marble Voyage climb foe tile + fight attacker idle (Bat Divekicker)",
+  "brief": "Transparent idle cutout from selected Bat Divekicker concept. Left-facing airborne silhouette; attached far wing; separate feet; clear wing/body gap. Use hover anchor (not grounded foot baseline).",
+  "aspect": "3:4",
+  "styleNotes": "Flying cast \u2014 document hover pivot in provenance.",
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/bat-divekicker.jpeg",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/HANDOFF.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/prompts.json",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "AssetSources/MarbleVoyage/porcupine-boxer/porcupine-boxer.png",
+    "AssetSources/MarbleVoyage/porcupine-boxer/provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/bat-divekicker-idle.png",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/bat-divekicker-provenance.json",
+    "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "PREP FIRST \u2014 selected concept committed.",
+    "Full-body unnamed gender-neutral bat henchperson for a colorful comedic fantasy game, unmistakably bat anatomy, tiny fuzzy cyan body, oversized pointed ears, small pug-like bat nose and a smug mischievous grin, enormous angular wings with hot-coral membranes and violet finger bones. Tiny battered black leather vest with one repair patch and comically heavy simple ankle cuffs on tiny clawed feet. Ridiculous confidence. Strict side profile facing left, airborne combat-ready idle hover, wings lifted into a tall open kite silhouette, face and both small feet clearly readable, wings are the forelimbs, no extra arms, no human torso. Strong open spaces between body wings and feet. Bold cel shading with selective painterly wear, strong contours, restrained surface detail, kid-friendly polished 2D game character concept. One character, complete wings ears and feet visible, centered on pure white with generous margins. --no text, logo, UI, scenery --ar 3:4 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:30:00Z",
+  "sessionNote": "Seeded with art-request queue bootstrap.",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:47:49.034030+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/henchmen-production-2026-09-26/bat-divekicker-idle.png",
+    "sourceHashSha256": "61b5387a6217ca397c5843e7bf0bfe54528df274766aae3d7fba0ac2ff87f8c3",
+    "notes": "Background-only preparation preserves original airborne left-oriented pose, two wings and distinct clawed feet. Far wing root remains occluded by vest as in source; no attachment redesign claimed. White background and floor shadow removed; full ears and wing tips retained. Use hover anchor. Generated derivative, original preserved. RGBA, safe margins and corner alpha verified. Ground/hover anchor in provenance. Builder still owns roster/catalog/semantic wiring, optical scale matching and runtime QA. No attack/defeat poses supplied. Runtime catalog bound as world2_plink_gang_batDivekicker_idle (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_gang_batDivekicker_idle",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_gang_batDivekicker_idle.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  },
+  "createdAt": "2026-09-26T20:30:00Z",
+  "type": "production_sprite",
+  "gameArea": "Marble Voyage \u2014 climb chart foe tile + fight attacker",
+  "usage": "Flying idle / hover silhouette for unnamed henchman",
+  "targetPixelSize": "Master ~928\u00d71232 concept; transparent PNG for ~148\u2013260pt UI",
+  "expectedBackground": "Transparent (RGBA); source concept is pure white",
+  "characterOrAssetName": "Bat Divekicker",
+  "pose": "idle",
+  "facing": "left",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [
+    "token.plink.gang.porcupineBoxer.idle"
+  ],
+  "acceptanceCriteria": [
+    "Airborne left-facing hover; wings attached as forelimbs; feet separate",
+    "Clear wing/body gap; transparent PNG; document hover pivot in provenance",
+    "Matches cast shading language of porcupine"
+  ]
+}

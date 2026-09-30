@@ -37,6 +37,16 @@ struct GameAssetRecord: Decodable {
     let deliveryURL: String?
     let mimeType: String?
     let sha256: String?
+    let metadata: GameAssetSemanticMetadata?
+}
+
+struct GameAssetSemanticMetadata: Decodable {
+    let semanticId: String?
+}
+
+struct GameAssetListPage: Decodable {
+    let assets: [GameAssetRecord]
+    let nextCursor: String?
 }
 
 enum GameAssetLocation: Equatable {
@@ -159,6 +169,43 @@ struct GameAssetRegistryClient {
             throw GameAssetRegistryError.invalidAssetRecord
         }
         return record
+    }
+
+    func listAll() async throws -> [GameAssetRecord] {
+        var cursor: String?
+        var collected: [GameAssetRecord] = []
+        repeat {
+            let page = try await listPage(after: cursor)
+            collected.append(contentsOf: page.assets)
+            cursor = page.nextCursor
+        } while cursor != nil
+        return collected
+    }
+
+    private func listPage(after cursor: String?) async throws -> GameAssetListPage {
+        let url = endpoint(["api", "v1", "games", gameKey, "assets"])
+        guard var components = URLComponents(url: url, resolvingAgainstBaseURL: false) else {
+            throw GameAssetRegistryError.invalidServerURL
+        }
+        var items = [URLQueryItem(name: "limit", value: "200")]
+        if let cursor {
+            items.append(URLQueryItem(name: "after", value: cursor))
+        }
+        components.queryItems = items
+        guard let pageURL = components.url else {
+            throw GameAssetRegistryError.invalidServerURL
+        }
+        var request = URLRequest(url: pageURL)
+        request.timeoutInterval = 20
+        ServerConfig.shared.addAPIKeyHeader(to: &request)
+        let (data, response) = try await session.data(for: request)
+        guard let http = response as? HTTPURLResponse else {
+            throw GameAssetRegistryError.invalidResponse
+        }
+        guard (200..<300).contains(http.statusCode) else {
+            throw GameAssetRegistryError.httpStatus(http.statusCode)
+        }
+        return try JSONDecoder().decode(GameAssetListPage.self, from: data)
     }
 
     func location(for record: GameAssetRecord) throws -> GameAssetLocation {

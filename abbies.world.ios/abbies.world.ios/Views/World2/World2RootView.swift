@@ -4,11 +4,23 @@ import Combine
 
 struct World2RootView: View {
     @StateObject private var viewModel = World2ViewModel()
+    @ObservedObject private var debugOverlay = World2DebugOverlaySettings.shared
     @EnvironmentObject private var auth: AuthenticationService
     @State private var showingMusicPlayer =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Music")
     @State private var showingSettings =
         ProcessInfo.processInfo.arguments.contains("-openWorld2Settings")
+    @State private var anywhereDecorating = false
+    @State private var anywhereSelectedFurnitureID: String?
+    @State private var anywhereSelectedCatalogID: String?
+    @State private var anywhereFilter: DecorateFilterID = .mine
+    @State private var showingAnywhereInvent = false
+    @State private var showingMinimap = false
+    @ObservedObject private var inventCook = World2SceneDecorationInventService.shared
+    @ObservedObject private var worldSync = World2WorldSync.shared
+    @Environment(\.scenePhase) private var scenePhase
+    /// Local latch so Accept disappears even if sync republishes the same notice.
+    @State private var worldNoticesAccepted = false
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -27,6 +39,10 @@ struct World2RootView: View {
                 HouseholdProfileSelectView(auth: auth) { playerId in
                     viewModel.selectPlayer(playerId)
                 }
+                .allowsHitTesting(
+                    worldNoticesAccepted
+                        || (worldSync.whatsNew == nil && worldSync.pendingOffer == nil)
+                )
 
             case .homeWorld:
                 WorldMapView(viewModel: viewModel)
@@ -98,6 +114,9 @@ struct World2RootView: View {
             case .characterStudio:
                 World2CharacterStudioView(onExit: viewModel.exitPOI)
 
+            case .figurineExplorer:
+                World2FigurineExplorerView(onExit: viewModel.exitPOI)
+
             case .sceneBuilder:
                 World2SceneBuilderView(
                     onExit: viewModel.exitPOI,
@@ -107,7 +126,7 @@ struct World2RootView: View {
             case .worldTeleporter:
                 World2WorldTeleporterView(
                     destinations: viewModel.teleporterDestinations,
-                    currentWorldID: viewModel.currentWorld?.id,
+                    currentSceneID: viewModel.playSceneID,
                     onTravel: viewModel.travelViaTeleporter,
                     onClose: viewModel.exitPOI
                 )
@@ -124,8 +143,64 @@ struct World2RootView: View {
                     }
                 )
 
+            case .plink:
+                PlinkBattleHostView(
+                    title: PeglinEnemyKind.fromPeglin(
+                        sceneID: viewModel.playSceneID,
+                        placeID: nil
+                    )?.displayName ?? "Battle Clearing",
+                    enemyKind: PeglinEnemyKind.fromPeglin(
+                        sceneID: viewModel.playSceneID,
+                        placeID: nil
+                    ),
+                    sceneBackgroundAsset: {
+                        let id = viewModel.playSceneID
+                        if let land = PeglinEdition.Land.allCases.first(where: { $0.sceneID == id }) {
+                            return land.mapAsset
+                        }
+                        return viewModel.currentScene.backgroundAsset
+                    }(),
+                    playerID: viewModel.currentPlayerId?.rawValue,
+                    onExit: viewModel.exitPOI,
+                    onVictory: {
+                        if PeglinEnemyKind.fromPeglin(
+                            sceneID: viewModel.playSceneID,
+                            placeID: nil
+                        ) == .foxSpirit {
+                            viewModel.completeFoxSpiritVictory()
+                        } else {
+                            viewModel.completeMinigame(
+                                configurationID: "plink",
+                                score: 1,
+                                rewardGems: 6
+                            )
+                        }
+                    }
+                )
+
+            case .pegMonastery:
+                PegMonasteryView(
+                    playerID: viewModel.currentPlayerId?.rawValue,
+                    playerDisplayName: viewModel.currentPlayerId?.displayName ?? "Abbie",
+                    onExit: viewModel.exitPOI,
+                    onAwarded: { _ in }
+                )
+
+            case .marbleVoyage:
+                MarbleVoyageHostView(
+                    playerID: viewModel.currentPlayerId?.rawValue,
+                    onExit: viewModel.exitPOI
+                )
+
             case .planningDept:
                 World2PlanningDeptView(
+                    viewModel: viewModel,
+                    onExit: viewModel.exitPOI
+                )
+
+            case .rooms(let poiId):
+                World2RoomsView(
+                    placeID: poiId,
                     viewModel: viewModel,
                     onExit: viewModel.exitPOI
                 )
@@ -182,9 +257,66 @@ struct World2RootView: View {
                         .padding(.vertical, 12)
                         .background(.black.opacity(0.8), in: Capsule())
                         .accessibilityIdentifier("world2.toast")
-                        .padding(.bottom, 40)
+                        .padding(.bottom, viewModel.inventReadyPrompt == nil ? 40 : 120)
                 }
                 .frame(maxWidth: .infinity)
+                .allowsHitTesting(false)
+                .zIndex(20_000)
+            }
+
+            if viewModel.inventReadyPrompt == nil, let cook = inventCook.cook {
+                VStack {
+                    TimelineView(.periodic(from: cook.startedAt, by: 0.5)) { context in
+                        World2InventCookToast(cook: cook, now: context.date)
+                    }
+                    .padding(.top, 14)
+                    Spacer()
+                }
+                .frame(maxWidth: .infinity)
+                .allowsHitTesting(false)
+                .zIndex(20_050)
+                .accessibilityIdentifier("world2.inventCook.host")
+            }
+
+            if let prompt = viewModel.inventReadyPrompt {
+                VStack {
+                    Spacer()
+                    HStack(spacing: 12) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(prompt.toastLine)
+                                .font(.system(size: 15, weight: .black, design: .rounded))
+                                .foregroundStyle(.white)
+                            Text("Made for \(prompt.sceneName)")
+                                .font(.system(size: 12, weight: .semibold, design: .rounded))
+                                .foregroundStyle(.white.opacity(0.75))
+                        }
+                        Spacer(minLength: 8)
+                        Button(prompt.decorateButtonTitle) {
+                            viewModel.openDecorateFromInvent()
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .tint(.green)
+                        .accessibilityIdentifier("world2.inventReady.decorate")
+                        Button {
+                            viewModel.dismissInventReadyPrompt()
+                        } label: {
+                            Image(systemName: "xmark.circle.fill")
+                                .font(.title2)
+                                .foregroundStyle(.white.opacity(0.7))
+                        }
+                        .accessibilityLabel("Dismiss")
+                        .accessibilityIdentifier("world2.inventReady.dismiss")
+                    }
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 14)
+                    .background(.black.opacity(0.88), in: RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .padding(.horizontal, 20)
+                    .padding(.bottom, 36)
+                }
+                .frame(maxWidth: .infinity)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .zIndex(20_100)
+                .accessibilityIdentifier("world2.inventReady.banner")
             }
         }
         .background(Color.black.ignoresSafeArea())
@@ -204,7 +336,40 @@ struct World2RootView: View {
             )
             .environmentObject(auth)
         }
-        .overlay(alignment: .leading) {
+        .overlay {
+            if showsPersistentAnywhereDecorate {
+                let surface = viewModel.decorateSurface(for: viewModel.currentScreen)
+                World2AnywhereDecorateOverlay(
+                    title: surface.name,
+                    surfaceKey: surface.key,
+                    isArranging: anywhereDecorating,
+                    selectedFurnitureID: $anywhereSelectedFurnitureID,
+                    selectedCatalogItemID: $anywhereSelectedCatalogID,
+                    filter: $anywhereFilter,
+                    onDone: {
+                        anywhereDecorating = false
+                        anywhereSelectedFurnitureID = nil
+                        anywhereSelectedCatalogID = nil
+                    }
+                )
+                .zIndex(35)
+            }
+        }
+        .overlay(alignment: .topLeading) {
+            if showsSandboxToolRail {
+                World2SandboxToolRail(
+                    isBuilding: viewModel.isSandboxBuilding,
+                    onEdit: { viewModel.toggleSandboxBuild() },
+                    onInvent: { viewModel.requestSandboxInvent() },
+                    onDecorate: { viewModel.beginDecoratingCurrentSurface() },
+                    onCompletions: { viewModel.openInventHistory() },
+                    onOpenMinimap: { showingMinimap = true }
+                )
+                .padding(.leading, 14)
+                .zIndex(40)
+            }
+        }
+        .overlay(alignment: .topTrailing) {
             if showsPlayerMenu {
                 World2PlayerMenuDrawer(
                     viewModel: viewModel,
@@ -214,23 +379,183 @@ struct World2RootView: View {
                         showingMusicPlayer = true
                         World2Diagnostics.log("music_player_opened")
                     },
-                    onOpenWorldMap: { viewModel.openPlanningDept() }
+                    onSwitchProfile: { viewModel.returnToProfileSelect() },
+                    onOpenMinimap: { showingMinimap = true }
                 )
+                .padding(.top, 10)
+                .padding(.trailing, 10)
                 .zIndex(40)
             }
         }
-        .task {
+        // Above chrome overlays so Accept is never under the menu / sticks / rail.
+        .overlay {
+            let showNotices = !worldNoticesAccepted
+                && !worldSync.noticesSuppressed
+                && viewModel.currentScreen != .loading
+            if showNotices, let offer = worldSync.pendingOffer {
+                World2WorldUpdateAcceptCard(
+                    summary: offer.summary,
+                    onAccept: {
+                        worldNoticesAccepted = true
+                        viewModel.acceptPendingWorldUpdate()
+                    }
+                )
+            } else if showNotices, let news = worldSync.whatsNew {
+                World2WorldUpdateAcceptCard(
+                    summary: news,
+                    onAccept: {
+                        worldNoticesAccepted = true
+                        viewModel.dismissWorldWhatsNew()
+                    }
+                )
+            }
+        }
+        .onChange(of: worldSync.whatsNew?.toRevision) { _, newValue in
+            // A genuinely newer notice may show again; same revision stays dismissed.
+            if let newValue, newValue > (UserDefaults.standard.integer(forKey: "world2.world.lastAnnouncedRevision")) {
+                worldNoticesAccepted = false
+            }
+        }
+        .onChange(of: worldSync.pendingOffer?.document.revision) { _, newValue in
+            if let newValue, newValue > worldSync.revision {
+                worldNoticesAccepted = false
+            }
+        }
+        .fullScreenCover(isPresented: $showingMinimap) {
+            World2MinimapScreen(
+                snapshot: viewModel.worldGraphSnapshot,
+                onSelectScene: { sceneID in
+                    viewModel.travelToDocumentScene(sceneID)
+                },
+                onClose: { showingMinimap = false }
+            )
+        }
+        .sheet(isPresented: $viewModel.showingInventHistory) {
+            World2InventHistoryView(
+                onDecorate: { result in
+                    viewModel.showingInventHistory = false
+                    viewModel.reopenInventResult(result)
+                },
+                onClose: { viewModel.showingInventHistory = false }
+            )
+        }
+        .onChange(of: viewModel.anywhereDecorateTick) { _, _ in
+            anywhereFilter = .mine
+            if let highlight = viewModel.consumeInventoryHighlight() {
+                anywhereSelectedFurnitureID = highlight
+            }
+            anywhereDecorating = true
+            viewModel.dismissInventReadyPrompt()
+        }
+        .onChange(of: viewModel.sandboxInventTick) { _, _ in
+            switch viewModel.currentScreen {
+            case .homeWorld, .blankSlate, .treehouse, .daddyWelcome, .rooms:
+                break
+            default:
+                showingAnywhereInvent = true
+            }
+        }
+        .sheet(isPresented: $showingAnywhereInvent) {
+            let scene = viewModel.inventSceneForCurrentScreen()
+            World2SceneInventDecorationsView(
+                scene: scene,
+                plateImage: AssetBootstrapService.shared.image(for: scene.backgroundAsset),
+                onCarved: { result in
+                    viewModel.notifySceneInventReady(result)
+                },
+                onOpenDecorate: {
+                    showingAnywhereInvent = false
+                    viewModel.beginDecoratingCurrentSurface()
+                },
+                onTravel: { result in
+                    showingAnywhereInvent = false
+                    viewModel.reopenInventResult(result)
+                },
+                onClose: { showingAnywhereInvent = false }
+            )
+        }
+        .task(id: auth.isAuthenticated) {
+            guard auth.isAuthenticated else {
+                World2WorldSync.shared.stopRevisionWatch()
+                return
+            }
             await viewModel.startGame()
+            World2WorldSync.shared.startRevisionWatch()
+        }
+        .onChange(of: scenePhase) { _, phase in
+            guard auth.isAuthenticated, phase == .active else { return }
+            Task { await World2WorldSync.shared.checkForNewerWorld() }
         }
         .onAppear {
             // World 2 delegates all music to the established app player.
             World2MusicService.shared.stop()
+            refreshDebugOverlay()
+        }
+        .onOpenURL { url in
+            guard let ticket = World2DebugTicketCodec.decode(url) else { return }
+            viewModel.applyDebugTicket(ticket)
+        }
+        .onChange(of: debugReport) { _, _ in
+            refreshDebugOverlay()
+        }
+        .onChange(of: debugOverlay.isEnabled) { _, _ in
+            refreshDebugOverlay()
+        }
+        .onChange(of: viewModel.debugPresentationRequest) { _, request in
+            guard let request else { return }
+            showingSettings = request.code == "settings"
+            showingMusicPlayer = request.code == "music"
+        }
+    }
+
+    private var debugReport: World2DebugReport {
+        viewModel.debugReport(presentations: debugPresentations)
+    }
+
+    private var debugPresentations: [String] {
+        var items: [String] = []
+        if showingSettings { items.append("settings") }
+        if showingMusicPlayer { items.append("music") }
+        if showingAnywhereInvent { items.append("invent") }
+        if anywhereDecorating { items.append("decorate") }
+        if viewModel.showingPOISheet { items.append("poi") }
+        return items
+    }
+
+    private func refreshDebugOverlay() {
+        if debugOverlay.isEnabled {
+            World2DebugBeacon.shared.publish(debugReport)
+        } else {
+            World2DebugBeacon.shared.clear()
         }
     }
 
     private var showsPlayerMenu: Bool {
         switch viewModel.currentScreen {
-        case .loading, .playerSelect:
+        case .loading, .playerSelect, .plink, .marbleVoyage:
+            return false
+        default:
+            return viewModel.currentPlayerId != nil
+        }
+    }
+
+    private var showsSandboxToolRail: Bool {
+        guard showsPlayerMenu else { return false }
+        switch viewModel.currentScreen {
+        case .plink, .pegMonastery, .marbleVoyage, .loading, .playerSelect:
+            return false
+        case .fallingTargets:
+            return false
+        default:
+            return true
+        }
+    }
+
+    /// Map / treehouse / Daddy already own a decorate layer. Other interiors
+    /// keep stamps on this overlay after Done so they do not vanish with the tray.
+    private var showsPersistentAnywhereDecorate: Bool {
+        switch viewModel.currentScreen {
+        case .loading, .playerSelect, .homeWorld, .blankSlate, .treehouse, .daddyWelcome:
             return false
         default:
             return viewModel.currentPlayerId != nil
@@ -245,6 +570,7 @@ struct BootstrapLoadingView: View {
     let isBootstrapReady: Bool
     let onContinue: () -> Void
     @State private var introStartedAt = ProcessInfo.processInfo.systemUptime
+    @State private var introVisuallyComplete = false
     @StateObject private var introAudio = World2IntroAudioController()
 
     private let statusMessages = [
@@ -258,7 +584,7 @@ struct BootstrapLoadingView: View {
     var body: some View {
         ZStack {
             if let introVideoURL {
-                World2IntroVideo(url: introVideoURL)
+                World2IntroVideo(url: introVideoURL, isPlaying: !introVisuallyComplete)
                     .ignoresSafeArea()
                     .accessibilityHidden(true)
             } else {
@@ -297,20 +623,10 @@ struct BootstrapLoadingView: View {
                     .accessibilityIdentifier("world2.loading.continue")
                 } else {
                     TimelineView(.animation(minimumInterval: 1.0 / 30.0)) { _ in
-                        let timedProgress = min(
-                            max(
-                                (ProcessInfo.processInfo.systemUptime - introStartedAt)
-                                    / 10.0,
-                                0
-                            ),
-                            1
-                        )
-                        let displayedProgress = min(
-                            timedProgress,
-                            max(progress, 0)
-                        )
+                        let elapsed = ProcessInfo.processInfo.systemUptime - introStartedAt
+                        let displayedProgress = min(max(elapsed / 10.0, 0), 0.70)
                         let messageIndex = min(
-                            Int(displayedProgress * Double(statusMessages.count)),
+                            Int((displayedProgress / 0.70) * Double(statusMessages.count)),
                             statusMessages.count - 1
                         )
 
@@ -345,7 +661,13 @@ struct BootstrapLoadingView: View {
         .accessibilityIdentifier("world2.loading")
         .onAppear {
             introStartedAt = ProcessInfo.processInfo.systemUptime
+            introVisuallyComplete = false
             introAudio.play()
+            Task {
+                try? await Task.sleep(for: .seconds(7))
+                introVisuallyComplete = true
+                tryAutoEnter()
+            }
             tryAutoEnter()
         }
         .onChange(of: isBootstrapReady) { _, _ in
@@ -365,7 +687,7 @@ struct BootstrapLoadingView: View {
     }
 
     private var canContinue: Bool {
-        isBootstrapReady && introAudio.didFinish
+        isBootstrapReady && (introVisuallyComplete || shouldAutoEnter)
     }
 
     private var shouldAutoEnter: Bool {
@@ -385,6 +707,7 @@ struct BootstrapLoadingView: View {
 
 private struct World2IntroVideo: UIViewRepresentable {
     let url: URL
+    var isPlaying: Bool = true
 
     func makeUIView(context: Context) -> World2IntroVideoPlayerView {
         let view = World2IntroVideoPlayerView()
@@ -392,7 +715,13 @@ private struct World2IntroVideo: UIViewRepresentable {
         return view
     }
 
-    func updateUIView(_ uiView: World2IntroVideoPlayerView, context: Context) {}
+    func updateUIView(_ uiView: World2IntroVideoPlayerView, context: Context) {
+        if isPlaying {
+            uiView.resume()
+        } else {
+            uiView.pause()
+        }
+    }
 
     static func dismantleUIView(
         _ uiView: World2IntroVideoPlayerView,
@@ -425,6 +754,15 @@ private final class World2IntroVideoPlayerView: UIView {
         )
         queuePlayer = player
         player.play()
+    }
+
+    func pause() {
+        queuePlayer?.pause()
+    }
+
+    func resume() {
+        guard queuePlayer?.rate == 0 else { return }
+        queuePlayer?.play()
     }
 
     func stop() {
@@ -497,41 +835,95 @@ private final class World2IntroAudioController:
 }
 
 private struct AnimatedWorld2Title: View {
-    private let letters = Array("ABBIE'S WORLD")
-
     var body: some View {
         TimelineView(.animation(minimumInterval: 1 / 30)) { timeline in
             let time = timeline.date.timeIntervalSinceReferenceDate
-            HStack(spacing: 1) {
-                ForEach(letters.indices, id: \.self) { index in
-                    let character = letters[index]
-                    Text(String(character))
-                        .font(.system(size: 48, weight: .black, design: .rounded))
-                        .foregroundStyle(
-                            index < 7
-                                ? Color.pink.gradient
-                                : Color.cyan.gradient
-                        )
-                        .offset(
-                            y: character == " "
-                                ? 0
-                                : CGFloat(sin(time * 4.2 + Double(index) * 0.48) * 8)
-                        )
-                        .rotationEffect(
-                            .degrees(
-                                character == " "
-                                    ? 0
-                                    : sin(time * 2.8 + Double(index) * 0.35) * 3
-                            )
-                        )
-                        .shadow(color: .white.opacity(0.7), radius: 2)
-                }
+            VStack(spacing: 10) {
+                AnimatedWorld2MainTitle(time: time)
+                AnimatedMarbleVoyageSubtitle(time: time)
             }
             .padding(.vertical, 18)
             .padding(.horizontal, 28)
-            .background(.black.opacity(0.28), in: Capsule())
-            .overlay(Capsule().stroke(.white.opacity(0.3), lineWidth: 2))
+            .background(.black.opacity(0.28), in: RoundedRectangle(cornerRadius: 28, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 28, style: .continuous)
+                    .stroke(.white.opacity(0.3), lineWidth: 2)
+            )
         }
+        .accessibilityElement(children: .combine)
+        .accessibilityLabel("Abbie's World Marble Voyage")
+    }
+}
+
+private struct AnimatedWorld2MainTitle: View {
+    let time: TimeInterval
+    private let letters = Array("ABBIE'S WORLD")
+
+    var body: some View {
+        HStack(spacing: 1) {
+            ForEach(letters.indices, id: \.self) { index in
+                AnimatedWorld2TitleLetter(
+                    character: letters[index],
+                    index: index,
+                    time: time,
+                    fontSize: 48,
+                    bobAmplitude: 8,
+                    bobSpeed: 4.2,
+                    rotateAmplitude: 3
+                )
+            }
+        }
+    }
+}
+
+private struct AnimatedMarbleVoyageSubtitle: View {
+    let time: TimeInterval
+    private let letters = Array("MARBLE VOYAGE")
+
+    private static let voyageGlow = LinearGradient(
+        colors: [
+            Color(red: 0.45, green: 0.85, blue: 1.0),
+            Color(red: 0.75, green: 0.55, blue: 1.0),
+            Color(red: 1.0, green: 0.55, blue: 0.75),
+        ],
+        startPoint: .leading,
+        endPoint: .trailing
+    )
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(letters.indices, id: \.self) { index in
+                let character = letters[index]
+                Text(String(character))
+                    .font(.system(size: 26, weight: .black, design: .rounded))
+                    .foregroundStyle(Self.voyageGlow)
+                    .shadow(color: Color(red: 0.15, green: 0.25, blue: 0.55).opacity(0.85), radius: 0, x: 0, y: 2)
+                    .shadow(color: Color(red: 0.75, green: 0.9, blue: 1.0).opacity(0.45), radius: 1, x: 0, y: -1)
+                    .offset(y: character == " " ? 0 : CGFloat(sin(time * 3.6 + Double(index) * 0.4) * 3.5))
+            }
+        }
+        .accessibilityLabel("Marble Voyage")
+        .accessibilityIdentifier("world2.loading.marbleVoyage")
+    }
+}
+
+private struct AnimatedWorld2TitleLetter: View {
+    let character: Character
+    let index: Int
+    let time: TimeInterval
+    let fontSize: CGFloat
+    let bobAmplitude: Double
+    let bobSpeed: Double
+    let rotateAmplitude: Double
+
+    var body: some View {
+        let isSpace = character == " "
+        Text(String(character))
+            .font(.system(size: fontSize, weight: .black, design: .rounded))
+            .foregroundStyle(index < 7 ? Color.pink.gradient : Color.cyan.gradient)
+            .offset(y: isSpace ? 0 : CGFloat(sin(time * bobSpeed + Double(index) * 0.48) * bobAmplitude))
+            .rotationEffect(.degrees(isSpace ? 0 : sin(time * 2.8 + Double(index) * 0.35) * rotateAmplitude))
+            .shadow(color: .white.opacity(0.7), radius: 2)
     }
 }
 
@@ -706,8 +1098,8 @@ private extension World2Screen {
         case .loading, .playerSelect, .treehouse, .cardFactory,
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse,
-             .characterStudio, .sceneBuilder, .worldTeleporter,
-             .whizbang, .planningDept,
+             .characterStudio, .figurineExplorer, .sceneBuilder, .worldTeleporter,
+             .whizbang, .planningDept, .plink, .pegMonastery, .marbleVoyage, .rooms,
              .sceneCreator, .beacon, .daddyWelcome:
             return false
         case .homeWorld, .blankSlate:

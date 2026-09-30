@@ -35,7 +35,72 @@ struct World2StoryDecorationArtwork: View {
             World2DaddyCandyToken(isAnimated: isAnimated)
         case .daddyHug:
             World2DaddyHugToken(isAnimated: isAnimated)
+        case .foxTrophy:
+            World2FoxTrophyToken(isAnimated: isAnimated)
+        case .wreckPowerUp:
+            World2WreckPowerUpToken(isAnimated: isAnimated)
         }
+    }
+}
+
+private struct World2WreckPowerUpToken: View {
+    var isAnimated = true
+    @State private var pulse = false
+
+    var body: some View {
+        Group {
+            if UIImage(named: "world2_orb_peglin_bounceberry") != nil {
+                Image("world2_orb_peglin_bounceberry")
+                    .resizable()
+                    .scaledToFit()
+            } else if UIImage(named: "world2_token_peglin_orb") != nil {
+                Image("world2_token_peglin_orb")
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                Image(systemName: "sparkle")
+                    .font(.system(size: 40, weight: .black))
+                    .foregroundStyle(.cyan)
+            }
+        }
+        .frame(width: 56, height: 56)
+        .scaleEffect(pulse && isAnimated ? 1.1 : 1.0)
+        .shadow(color: .cyan.opacity(pulse ? 0.65 : 0.3), radius: pulse ? 10 : 4)
+        .onAppear {
+            guard isAnimated else { return }
+            withAnimation(.easeInOut(duration: 0.8).repeatForever(autoreverses: true)) {
+                pulse = true
+            }
+        }
+    }
+}
+
+private struct World2FoxTrophyToken: View {
+    var isAnimated = true
+    @State private var shine = false
+
+    var body: some View {
+        Image(systemName: "trophy.fill")
+            .font(.system(size: 42, weight: .black))
+            .foregroundStyle(
+                LinearGradient(
+                    colors: [
+                        Color(red: 1.0, green: 0.92, blue: 0.35),
+                        Color(red: 1.0, green: 0.62, blue: 0.18),
+                        Color(red: 0.85, green: 0.45, blue: 0.12),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            )
+            .shadow(color: .orange.opacity(shine ? 0.7 : 0.35), radius: shine ? 12 : 5)
+            .scaleEffect(shine && isAnimated ? 1.08 : 1.0)
+            .onAppear {
+                guard isAnimated else { return }
+                withAnimation(.easeInOut(duration: 0.85).repeatForever(autoreverses: true)) {
+                    shine = true
+                }
+            }
     }
 }
 
@@ -93,93 +158,76 @@ private struct World2DaddyHugToken: View {
     }
 }
 
-/// Painted deed from Scene Builder (`world2_deed_reward`), with a soft parchment fallback.
+/// Drawn deed token. World art is registry-only; this is local UI chrome.
 struct World2PropertyDeedToken: View {
     var isAnimated = true
     @State private var shimmer = false
 
     var body: some View {
-        ZStack {
-            if let painted = UIImage(named: "world2_deed_reward") {
-                Image(uiImage: painted)
-                    .resizable()
-                    .scaledToFit()
-                    .shadow(color: .orange.opacity(shimmer ? 0.55 : 0.2), radius: shimmer ? 10 : 4)
-            } else {
+        RoundedRectangle(cornerRadius: 10)
+            .fill(Color(red: 0.93, green: 0.86, blue: 0.68))
+            .overlay(
                 RoundedRectangle(cornerRadius: 10)
-                    .fill(Color(red: 0.93, green: 0.86, blue: 0.68))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(Color(red: 0.72, green: 0.55, blue: 0.22), lineWidth: 3)
-                    )
-                    .overlay(
-                        Image(systemName: "scroll.fill")
-                            .font(.system(size: 28, weight: .bold))
-                            .foregroundStyle(Color(red: 0.55, green: 0.32, blue: 0.12))
-                    )
+                    .stroke(Color(red: 0.72, green: 0.55, blue: 0.22), lineWidth: 3)
+            )
+            .overlay(
+                Image(systemName: "scroll.fill")
+                    .font(.system(size: 28, weight: .bold))
+                    .foregroundStyle(Color(red: 0.55, green: 0.32, blue: 0.12))
+            )
+            .shadow(color: .orange.opacity(shimmer ? 0.55 : 0.2), radius: shimmer ? 10 : 4)
+            .onAppear {
+                guard isAnimated else { return }
+                withAnimation(.easeInOut(duration: 1.4).repeatForever(autoreverses: true)) {
+                    shimmer = true
+                }
             }
-        }
-        .onAppear {
-            guard isAnimated else { return }
-            withAnimation(.easeInOut(duration: 1.4).repeatForever(autoreverses: true)) {
-                shimmer = true
-            }
-        }
     }
 }
 
-/// Stand-in inventory art for the World Teleporter until a painted asset lands.
-/// Swap in `world2_item_worldTeleporter` when that imageset is supplied.
+/// Drawn teleporter inventory token. World art is registry-only.
 struct World2WorldTeleporterToken: View {
     var isAnimated = true
     @State private var pulse = false
 
     var body: some View {
-        ZStack {
-            if let painted = UIImage(named: "world2_item_worldTeleporter") {
-                Image(uiImage: painted)
-                    .resizable()
-                    .scaledToFit()
-            } else {
+        Circle()
+            .fill(
+                RadialGradient(
+                    colors: [
+                        Color(red: 0.95, green: 0.82, blue: 0.35),
+                        Color(red: 0.55, green: 0.32, blue: 0.12),
+                    ],
+                    center: .center,
+                    startRadius: 4,
+                    endRadius: 54
+                )
+            )
+            .overlay(
                 Circle()
-                    .fill(
-                        RadialGradient(
-                            colors: [
-                                Color(red: 0.95, green: 0.82, blue: 0.35),
-                                Color(red: 0.55, green: 0.32, blue: 0.12),
-                            ],
-                            center: .center,
-                            startRadius: 4,
-                            endRadius: 54
-                        )
+                    .stroke(Color(red: 0.78, green: 0.58, blue: 0.18), lineWidth: 5)
+            )
+            .overlay(
+                Circle()
+                    .stroke(
+                        Color.white.opacity(pulse ? 0.85 : 0.35),
+                        lineWidth: 2
                     )
-                    .overlay(
-                        Circle()
-                            .stroke(Color(red: 0.78, green: 0.58, blue: 0.18), lineWidth: 5)
-                    )
-                    .overlay(
-                        Circle()
-                            .stroke(
-                                Color.white.opacity(pulse ? 0.85 : 0.35),
-                                lineWidth: 2
-                            )
-                            .padding(10)
-                    )
-                    .overlay(
-                        Image(systemName: "globe.americas.fill")
-                            .font(.system(size: 28, weight: .black))
-                            .foregroundStyle(.white)
-                            .shadow(color: .black.opacity(0.35), radius: 2, y: 1)
-                    )
-                    .shadow(color: .orange.opacity(0.55), radius: pulse ? 12 : 4)
+                    .padding(10)
+            )
+            .overlay(
+                Image(systemName: "globe.americas.fill")
+                    .font(.system(size: 28, weight: .black))
+                    .foregroundStyle(.white)
+                    .shadow(color: .black.opacity(0.35), radius: 2, y: 1)
+            )
+            .shadow(color: .orange.opacity(0.55), radius: pulse ? 12 : 4)
+            .onAppear {
+                guard isAnimated else { return }
+                withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
+                    pulse = true
+                }
             }
-        }
-        .onAppear {
-            guard isAnimated else { return }
-            withAnimation(.easeInOut(duration: 1.2).repeatForever(autoreverses: true)) {
-                pulse = true
-            }
-        }
     }
 }
 

@@ -1,0 +1,68 @@
+---
+description: File art-requests for placeholders; check queue before builds and confirm ready art with Evan
+alwaysApply: true
+---
+
+# Art request queue — builders file and check
+
+Repo inbox: `art-requests/` (schema + habit in `art-requests/README.md`).
+
+## When you MUST write a request
+
+In the **same change set** as the placeholder, create or update:
+
+`art-requests/open/<id>.json`
+
+Triggers:
+
+- Content art via `Image(systemName:)` / SF Symbol (climb tokens, foe accents, map marks) — **not** pure chrome
+- `World2PlaceholderPack` or missing catalog / semantic image
+- Provisional reuse of another character’s art as stand-in
+- Temp prototype scrap wired into the app as if real
+
+## When you may skip (or mark keep-stock)
+
+Chevrons, close (`xmark`), speaker, lock, `music.note`, list/bolt chrome used as **controls**.
+
+If unsure: write the request with `"keepStockIcon": true` and `"priority": "optional"` so the art director can `wont_fix` quickly.
+
+## Required fields
+
+Follow `art-requests/schema.json`. Minimum for remote review:
+
+- `id`, `semanticId`, `status`, `priority`, `type`, `brief`, `aspect`, `styleNotes`
+- `keepStockIcon`, `relatedPaths` (**repo-relative only** — never `/Users/…`), `promptSeeds`
+- `requestedBy`, `createdAt` (ISO-8601; `requestedAt` may mirror it)
+- Prefer `acceptanceCriteria`, visual refs under `AssetSources/…`, `gameArea` / `usage`
+
+**Semantic ID is the join key** — use existing conventions (`token.plink.gang.<id>.<pose>`, `map.*`, `poi.*.*`). Do not invent a parallel registry.
+
+After moving requests between folders, run: `python3 scripts/rebuild_art_request_queue.py`
+
+Art directors (remote or local) start at `art-requests/ART_DIRECTOR_AGENT.md`.
+
+## Before / during every major build or playtest handoff
+
+**Always check the queue** — do not wait for Evan to ask:
+
+1. List `art-requests/fulfilled/` — anything not yet bound into catalog / `library.json` / runtime.
+2. List `art-requests/open/` (and `in_review/`) for surfaces in this build — especially `blocker` / `high`.
+3. **Confirm with Evan in the handoff** before treating placeholders as final:
+   - If fulfilled work is ready: name the `id`s / `semanticId`s and ask whether to **bind now** in this build.
+   - If still open: say what’s still placeholder so he isn’t surprised on device.
+4. Do **not** block compile solely on open requests unless priority is `blocker` and Evan said wait.
+
+Example handoff lines:
+
+> Art queue: 2 fulfilled ready to bind (`20260926-crab-pincher-idle`, …) — bind in this build?  
+> Art queue: 3 still open (henchmen cutouts) — shipping SF/placeholder for those.
+
+## Tone when filing
+
+**Silent by default** — write the JSON; do not narrate Midjourney. The build-check lines above are the loud part.
+
+Do not auto-run Midjourney or spend credits from the builder role. Fulfillment is the art director’s job (`art-requests/ART_DIRECTOR_INTAKE.md`).
+
+## After fulfillment lands
+
+When Evan confirms bind: catalog / `library.json` / runtime. Status folder moves are usually the art director’s; update JSON if you complete the bind yourself.

@@ -369,8 +369,10 @@ private struct CozyRoomManifestAsset: Decodable {
 extension PlayerState {
     var furnitureInventory: [DecorationInstance] {
         let generatedIDs = Set(availableGeneratedDecorations.map(\.id))
+        let placedIDs = Set(homeLayout.placedDecorations.map(\.decorationInstanceId))
         return decorations.filter {
-            $0.decorationId == DecorationInstance.starterJukeboxID
+            placedIDs.contains($0.id)
+                || $0.decorationId == DecorationInstance.starterJukeboxID
                 || FurnitureItem.item(id: $0.decorationId) != nil
                 || World2StoryDecoration.isStoryDecoration($0.decorationId)
                 || generatedIDs.contains($0.decorationId)

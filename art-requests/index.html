@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Art requests — Abbie’s World</title>
+  <style>
+    :root {
+      --bg: #1a1410;
+      --panel: #2a2118;
+      --ink: #f3e6d4;
+      --muted: #b9a894;
+      --accent: #e08a4b;
+      --edge: #4a3b2c;
+      --open: #6bcf8e;
+      --review: #e0c15a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      background: radial-gradient(1200px 600px at 20% -10%, #3a2a1c, var(--bg));
+      color: var(--ink);
+      min-height: 100vh;
+      padding: 2rem clamp(1rem, 4vw, 3rem) 4rem;
+    }
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin: 0 0 0.35rem;
+    }
+    .lede {
+      color: var(--muted);
+      max-width: 42rem;
+      line-height: 1.45;
+      margin-bottom: 1.75rem;
+    }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      margin-bottom: 1.25rem;
+    }
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: 1px solid var(--edge);
+      background: var(--panel);
+      color: var(--ink);
+      padding: 0.45rem 0.9rem;
+      border-radius: 4px;
+    }
+    button:hover { border-color: var(--accent); color: #fff; }
+    .counts { color: var(--muted); font-size: 0.95rem; }
+    .counts strong { color: var(--open); }
+    #status { color: var(--muted); font-size: 0.9rem; min-height: 1.2em; }
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+    article {
+      background: var(--panel);
+      border: 1px solid var(--edge);
+      border-radius: 6px;
+      padding: 1rem 1.1rem 1.15rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+    }
+    .pill {
+      border: 1px solid var(--edge);
+      padding: 0.15rem 0.45rem;
+      border-radius: 999px;
+    }
+    .pill.priority-blocker, .pill.priority-high { border-color: var(--accent); color: var(--accent); }
+    .pill.status-open { border-color: var(--open); color: var(--open); }
+    .pill.status-in_review { border-color: var(--review); color: var(--review); }
+    h2 {
+      font-size: 1.15rem;
+      margin: 0.15rem 0;
+      line-height: 1.25;
+    }
+    .semantic {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem;
+      color: #d4c4a8;
+      word-break: break-all;
+    }
+    .brief {
+      color: var(--ink);
+      opacity: 0.92;
+      font-size: 0.95rem;
+      line-height: 1.4;
+      flex: 1;
+    }
+    .paths {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0;
+      padding-left: 1.1rem;
+    }
+    .empty {
+      color: var(--muted);
+      padding: 2rem 0;
+    }
+    code { font-family: ui-monospace, Menlo, monospace; font-size: 0.85em; }
+  </style>
+</head>
+<body>
+  <h1>Art requests</h1>
+  <p class="lede">
+    Open inbox for Abbie’s World. Remote reviewers: start at
+    <code>ART_DIRECTOR_AGENT.md</code>, then <code>queue.json</code>.
+    Coding agents file placeholders here; art directors fulfill via Midjourney / AssetSources,
+    then move JSON to <code>fulfilled/</code>.
+  </p>
+  <div class="toolbar">
+    <button type="button" id="reload">Reload from queue.json</button>
+    <span class="counts" id="counts"></span>
+  </div>
+  <p id="status">Loading…</p>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    // Fallback if queue.json cannot be fetched (file://). Keep in sync via rebuild script.
+    const OPEN_FILES_FALLBACK = [
+      "20260926-endless-progress-chrome.json",
+      "20260926-fight-turbo-meter.json",
+      "20260926-bell-market-shop-interior.json",
+      "20260926-climb-scrap-destination-tiles.json",
+      "20260926-climb-sky-dock-tile.json",
+      "20260926-climb-treasure-tile.json",
+      "20260926-climb-mystery-tile.json",
+      "20260926-climb-shrine-tile.json",
+      "20260926-crab-pincher-idle.json",
+      "20260926-grasshopper-kickboxer-idle.json",
+      "20260926-armadillo-blocker-idle.json",
+      "20260926-bat-divekicker-idle.json",
+      "20260926-event-treasure-plate.json",
+      "20260926-event-mystery-plate.json",
+      "20260926-event-shrine-plate.json",
+      "20260926-shop-heal-stall-icon.json",
+      "20260926-climb-nonfight-token.json"
+    ];
+
+    const grid = document.getElementById("grid");
+    const status = document.getElementById("status");
+    const counts = document.getElementById("counts");
+
+    async function loadOne(relPath) {
+      const res = await fetch("./" + relPath.replace(/^art-requests\//, ""), { cache: "no-store" });
+      if (!res.ok) throw new Error(relPath + " " + res.status);
+      return res.json();
+    }
+
+    function card(req) {
+      const el = document.createElement("article");
+      const paths = (req.relatedPaths || [])
+        .filter((p) => /\.(png|jpe?g|webp|gif)$/i.test(p))
+        .slice(0, 4)
+        .map((p) => "<li>" + escapeHtml(p) + "</li>")
+        .join("");
+      el.innerHTML =
+        '<div class="meta">' +
+        '<span class="pill status-' + escapeAttr(req.status) + '">' + escapeHtml(req.status) + "</span>" +
+        '<span class="pill priority-' + escapeAttr(req.priority) + '">' + escapeHtml(req.priority) + "</span>" +
+        '<span class="pill">' + escapeHtml(req.type || req.kind || "") + "</span>" +
+        (req.keepStockIcon ? '<span class="pill">keep stock?</span>' : "") +
+        "</div>" +
+        "<h2>" + escapeHtml(req.characterOrAssetName || req.id) + "</h2>" +
+        '<div class="semantic">' + escapeHtml(req.semanticId) + "</div>" +
+        '<p class="brief">' + escapeHtml(req.brief) + "</p>" +
+        (paths ? '<ul class="paths">' + paths + "</ul>" : "") +
+        '<p class="brief" style="opacity:0.7;font-size:0.85rem">' +
+        escapeHtml(req.surface || req.gameArea || "") +
+        "</p>";
+      return el;
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+    function escapeAttr(s) {
+      return escapeHtml(s).replace(/'/g, "&#39;");
+    }
+
+    async function openFileList() {
+      try {
+        const res = await fetch("./queue.json", { cache: "no-store" });
+        if (!res.ok) throw new Error("queue " + res.status);
+        const q = await res.json();
+        return (q.open || []).map((row) => row.path.replace(/^art-requests\//, ""));
+      } catch (_) {
+        return OPEN_FILES_FALLBACK.map((n) => "open/" + n);
+      }
+    }
+
+    async function reload() {
+      status.textContent = "Loading open/…";
+      grid.innerHTML = "";
+      const loaded = [];
+      const missing = [];
+      const list = await openFileList();
+      for (const rel of list) {
+        try {
+          loaded.push(await loadOne(rel));
+        } catch (e) {
+          missing.push(rel);
+        }
+      }
+      loaded.sort((a, b) => {
+        const order = { blocker: 0, high: 1, normal: 2, low: 3, optional: 4 };
+        return (order[a.priority] ?? 9) - (order[b.priority] ?? 9);
+      });
+      counts.innerHTML =
+        "<strong>" + loaded.length + "</strong> open" +
+        (missing.length ? " · " + missing.length + " missing" : "");
+      if (!loaded.length) {
+        grid.innerHTML = '<p class="empty">No open requests loaded. On GitHub, read <code>queue.json</code> and <code>open/*.json</code> directly. Locally: <code>python3 -m http.server 8766 --directory art-requests</code>.</p>';
+        status.textContent = missing.length ? "Missing: " + missing.join(", ") : "Empty.";
+        return;
+      }
+      loaded.forEach((r) => grid.appendChild(card(r)));
+      status.textContent =
+        "GitHub: open ART_DIRECTOR_AGENT.md → queue.json → open/*.json. Local board: python3 -m http.server 8766 --directory art-requests";
+    }
+
+    document.getElementById("reload").addEventListener("click", reload);
+    reload();
+  </script>
+</body>
+</html>

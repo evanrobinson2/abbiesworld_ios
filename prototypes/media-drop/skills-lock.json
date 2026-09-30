@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "auth0": {
+      "source": "auth0/agent-skills",
+      "sourceType": "github",
+      "skillPath": "plugins/auth0/skills/auth0/SKILL.md",
+      "computedHash": "b754245df4cdde5cac96afab8c7ca92a8f884b7cc5f10a64b9ded8d85a6fa823"
+    },
+    "auth0-v0-integration": {
+      "source": "auth0-samples/auth0-ai-samples",
+      "sourceType": "github",
+      "skillPath": "skills/auth0-v0-integration/SKILL.md",
+      "computedHash": "621cc7eb52d428c6212894f218be4aae66f8c603f6e6857640f571bcb61051aa"
+    }
+  }
+}
