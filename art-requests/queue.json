@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T23:53:55Z",
+  "updatedAt": "2026-09-28T01:11:32Z",
   "sourceOfTruth": "Individual JSON files under art-requests/{open,in_review,fulfilled,wont_fix}/",
   "artDirectorGuide": "art-requests/ART_DIRECTOR_AGENT.md",
   "open": [
@@ -9,6 +9,97 @@
       "priority": "high",
       "type": "fx",
       "path": "art-requests/open/20260927-home-ambient-animation.json"
+    },
+    {
+      "id": "20260927-carnival-basket-toss-map",
+      "semanticId": "poi.carnival.basketToss.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-basket-toss-map.json"
+    },
+    {
+      "id": "20260927-carnival-hungry-bunnies-map",
+      "semanticId": "poi.carnival.hungryBunnies.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-hungry-bunnies-map.json"
+    },
+    {
+      "id": "20260927-carnival-dummy-launch-map",
+      "semanticId": "poi.carnival.dummyLaunch.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-dummy-launch-map.json"
+    },
+    {
+      "id": "20260927-carnival-plinko-map",
+      "semanticId": "poi.carnival.plinko.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-plinko-map.json"
+    },
+    {
+      "id": "20260927-carnival-prize-shop-map",
+      "semanticId": "poi.carnival.prizeShop.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-prize-shop-map.json"
+    },
+    {
+      "id": "20260927-carnival-basket-toss-kit",
+      "semanticId": "game.carnival.basketToss.kit",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-basket-toss-kit.json"
+    },
+    {
+      "id": "20260927-carnival-hungry-bunnies-kit",
+      "semanticId": "game.carnival.hungryBunnies.kit",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-hungry-bunnies-kit.json"
+    },
+    {
+      "id": "20260927-carnival-dummy-launch-kit",
+      "semanticId": "game.carnival.dummyLaunch.kit",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-dummy-launch-kit.json"
+    },
+    {
+      "id": "20260927-carnival-plinko-kit",
+      "semanticId": "game.carnival.plinko.kit",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-plinko-kit.json"
+    },
+    {
+      "id": "20260927-carnival-prize-shop-interior",
+      "semanticId": "poi.carnival.prizeShop.interior",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260927-carnival-prize-shop-interior.json"
+    },
+    {
+      "id": "20260927-carnival-fresh-prizes",
+      "semanticId": "library.carnival.prizes.v1",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-fresh-prizes.json"
+    },
+    {
+      "id": "20260927-carnival-gift-unwrapping",
+      "semanticId": "fx.carnival.prizeDelivery",
+      "priority": "high",
+      "type": "fx",
+      "path": "art-requests/open/20260927-carnival-gift-unwrapping.json"
+    },
+    {
+      "id": "20260927-carnival-cottage-trophy",
+      "semanticId": "poi.carnival.cottageTrophy",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-cottage-trophy.json"
     },
     {
       "id": "20260927-lizard-henchman-idle",
@@ -53,6 +144,13 @@
       "priority": "high",
       "type": "production_sprite",
       "path": "art-requests/in_review/20260927-cottage-decor-multimodal-ingest.json"
+    },
+    {
+      "id": "20260927-carnival-fairground-map",
+      "semanticId": "poi.carnival.fairground.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/in_review/20260927-carnival-fairground-map.json"
     },
     {
       "id": "20260926-event-mystery-plate",
@@ -195,6 +293,13 @@
       "priority": "high",
       "type": "plate",
       "path": "art-requests/fulfilled/20260927-abbie-cottage-living-room.json"
+    },
+    {
+      "id": "20260927-carnival-hub",
+      "semanticId": "scene.carnival.background",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-carnival-hub.json"
     },
     {
       "id": "20260927-marble-voyage-open-book-board",

@@ -99,6 +99,25 @@ struct FurnitureItem: Identifiable {
             || item.tags.contains(where: { $0.lowercased() == "abbie-cottage" })
     }
 
+    /// What Abbie's cottage "My drawer" may show — not invent leftovers, Peglin
+    /// salvage, or remote props that landed in the global furniture inventory.
+    static func isAbbieCottageDrawerDecoration(_ decorationId: String) -> Bool {
+        if decorationId == DecorationInstance.starterJukeboxID { return true }
+        if let item = item(id: decorationId) {
+            return isAbbieCottageDecor(item)
+        }
+        switch decorationId {
+        case World2StoryDecoration.daddyCandy.id,
+             World2StoryDecoration.daddyHug.id,
+             World2StoryDecoration.perfectPorridge.id,
+             World2StoryDecoration.worldTeleporter.id,
+             World2StoryDecoration.propertyDeed.id:
+            return true
+        default:
+            return false
+        }
+    }
+
     private static let placeableCategoryIDs: Set<String> = [
         "beds",
         "botanical-decor",

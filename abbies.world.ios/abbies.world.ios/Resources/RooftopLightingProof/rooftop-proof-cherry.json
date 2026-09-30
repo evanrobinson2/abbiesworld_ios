@@ -1,0 +1,113 @@
+[
+  {
+    "name": "rooftop-proof-cherry-0",
+    "mesh": "rooftop-proof-cherry-0.rtmesh",
+    "vertices": 33880,
+    "triangles": 30800,
+    "pivot": [
+      -3.55,
+      3.65,
+      0.05
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-1",
+    "mesh": "rooftop-proof-cherry-1.rtmesh",
+    "vertices": 33880,
+    "triangles": 30800,
+    "pivot": [
+      -3.35,
+      3.6,
+      -0.2
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-2",
+    "mesh": "rooftop-proof-cherry-2.rtmesh",
+    "vertices": 33880,
+    "triangles": 30800,
+    "pivot": [
+      -3.4,
+      3.55,
+      0.05
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-3",
+    "mesh": "rooftop-proof-cherry-3.rtmesh",
+    "vertices": 33880,
+    "triangles": 30800,
+    "pivot": [
+      -3.55,
+      4.25,
+      -0.5
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-4",
+    "mesh": "rooftop-proof-cherry-4.rtmesh",
+    "vertices": 33880,
+    "triangles": 30800,
+    "pivot": [
+      -3.55,
+      4.2,
+      -0.5
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-5",
+    "mesh": "rooftop-proof-cherry-5.rtmesh",
+    "vertices": 21780,
+    "triangles": 19800,
+    "pivot": [
+      -3.7,
+      0.18,
+      2.6
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-6",
+    "mesh": "rooftop-proof-cherry-6.rtmesh",
+    "vertices": 21780,
+    "triangles": 19800,
+    "pivot": [
+      -0.7,
+      0.12,
+      -2.5
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-7",
+    "mesh": "rooftop-proof-cherry-7.rtmesh",
+    "vertices": 21780,
+    "triangles": 19800,
+    "pivot": [
+      -1.2,
+      0.4,
+      -2.9
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-8",
+    "mesh": "rooftop-proof-cherry-8.rtmesh",
+    "vertices": 21780,
+    "triangles": 19800,
+    "pivot": [
+      -3.95,
+      0.7,
+      1.3
+    ]
+  },
+  {
+    "name": "rooftop-proof-cherry-leaves",
+    "mesh": "rooftop-proof-cherry-leaves.rtmesh",
+    "vertices": 12012,
+    "triangles": 10920
+  },
+  {
+    "name": "rooftop-proof-cherry-twigs",
+    "mesh": "rooftop-proof-cherry-twigs.rtmesh",
+    "vertices": 10536,
+    "triangles": 15104
+  }
+]

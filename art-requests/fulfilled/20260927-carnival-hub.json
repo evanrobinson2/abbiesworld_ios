@@ -1,0 +1,40 @@
+{
+  "id": "20260927-carnival-hub",
+  "semanticId": "scene.carnival.background",
+  "status": "fulfilled",
+  "priority": "high",
+  "type": "plate",
+  "brief": "Approved panoramic full-size Carnival destination map reached by miniature fair teleporter in Abbie\u2019s playroom.",
+  "aspect": "3:1 ultra-wide panorama",
+  "styleNotes": "For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/generated-candidates/poi.plinkPavilion.exterior/v1/source.png",
+    "AssetSources/World2/user-supplied/peglin/v1/monastery/poi.peglin.pegMonastery.exterior.cutout.png"
+  ],
+  "promptSeeds": [
+    "Carnival interior overland map with five clear non-overlapping tappable booth sites: basket toss, hungry bunnies, dummy launch, Plinko, prize shop. Booths supplied separately; leave their footprints empty. For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes."
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-28T00:55:56.105327+00:00",
+  "productionIntent": "runtime_bind",
+  "surface": "New carnival POI; four ticket games and one prize shop",
+  "placeholder": {
+    "type": "none",
+    "detail": "Requested attraction; not implemented yet."
+  },
+  "acceptanceCriteria": [
+    "Use approved panorama as the destination scene plate",
+    "Miniature fair is a separate playroom teleporter, not this full-size map",
+    "Preserve existing player and home state; provide return to playroom"
+  ],
+  "fulfillment": {
+    "source": "AssetSources/World2/carnival-approved-2026-09-27/destination-approved.jpeg",
+    "provenance": "AssetSources/World2/carnival-approved-2026-09-27/provenance.json",
+    "approvedBy": "Evan",
+    "runtimeStatus": "ready for scene binding; not installed",
+    "destinationSceneId": "scene.carnival",
+    "entrySemanticId": "poi.carnival.fairground.exterior"
+  },
+  "sessionNote": "User approved exact upscale; supersedes prior empty-booth footprint brief. Mini fair is a new playroom teleporter to this panorama."
+}

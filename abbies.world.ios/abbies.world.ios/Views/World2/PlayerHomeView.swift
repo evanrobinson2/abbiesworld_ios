@@ -22,6 +22,8 @@ struct World2PlayerHomeView: View {
     /// The card the drawer should open on, set when a reward sends us here.
     @State private var highlightedInventoryID: String?
     @State private var showingSceneInvent = false
+    @State private var showingToyFair = false
+    @State private var showingRooftop3D = false
 
     private var poi: World2POIArchetype? { viewModel.archetype(poiId) }
     private var owner: PlayerId? { poi?.ownerID.flatMap(PlayerId.init(rawValue:)) }
@@ -167,6 +169,19 @@ struct World2PlayerHomeView: View {
                                         rotation: rotation
                                     )
                                 },
+                                onSkew: { skewX, skewY in
+                                    PlayerStateService.shared.updateFurnitureTransform(
+                                        instanceId: instance.id,
+                                        skewX: skewX,
+                                        skewY: skewY
+                                    )
+                                },
+                                onResetTransform: {
+                                    PlayerStateService.shared.resetFurnitureTransform(
+                                        instanceId: instance.id,
+                                        defaultScale: piece.defaultScale
+                                    )
+                                },
                                 onReturnToInventory: {
                                     PlayerStateService.shared.returnFurnitureToInventory(
                                         instanceId: instance.id
@@ -180,6 +195,33 @@ struct World2PlayerHomeView: View {
                                 }
                             )
                         }
+                    }
+
+                    if supportsRooms, activeRoom == .rooftopLookout, !isArrangingFurniture {
+                        Button { showingRooftop3D = true } label: {
+                            Label("Step into 3D", systemImage: "leaf")
+                                .font(.system(.headline, design: .rounded))
+                                .padding(16).background(.regularMaterial, in: Capsule())
+                        }
+                        .buttonStyle(.plain)
+                        .position(x: canvasSize.width * 0.48, y: canvasSize.height * 0.88)
+                        .accessibilityIdentifier("rooftop3d.enter")
+                    }
+
+                    if supportsRooms, activeRoom == .playroom, !isArrangingFurniture, !isReadOnly {
+                        Button { showingToyFair = true } label: {
+                            VStack(spacing: 0) {
+                                Image("fair_toy_portal").resizable().scaledToFit()
+                                    .frame(width: min(210, canvasSize.width * 0.23))
+                                Label("Toy Fair", systemImage: PlayerStateService.shared.isFairUnlocked ? "sparkles" : "lock.fill")
+                                    .font(.system(.headline, design: .rounded))
+                                    .padding(8).background(.regularMaterial, in: Capsule())
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .position(x: canvasSize.width * 0.68, y: canvasSize.height * 0.71)
+                        .accessibilityLabel("Toy fair. Match marbles with Pip to open the fair.")
+                        .accessibilityIdentifier("fair.playroom.toy")
                     }
 
                     VStack {
@@ -280,6 +322,14 @@ struct World2PlayerHomeView: View {
         .onChange(of: viewModel.sandboxInventTick) { _, _ in
             guard !isReadOnly else { return }
             showingSceneInvent = true
+        }
+        .fullScreenCover(isPresented: $showingRooftop3D) {
+            RooftopLookout3DView(onClose: { showingRooftop3D = false })
+        }
+        .fullScreenCover(isPresented: $showingToyFair) {
+            if let playerID = PlayerStateService.shared.currentPlayer?.playerId {
+                FairWorldView(playerID: playerID, onClose: { showingToyFair = false })
+            }
         }
         .sheet(isPresented: $showingSceneInvent) {
             let roomScene = World2SceneDefinition(
@@ -845,6 +895,8 @@ struct World2PlacedFurnitureView: View {
     let onMove: (Double, Double) -> Void
     let onScale: (Double) -> Void
     let onRotation: (Double) -> Void
+    let onSkew: (Double, Double) -> Void
+    let onResetTransform: () -> Void
     let onReturnToInventory: () -> Void
     let onDragStateChanged: (Bool) -> Void
 
@@ -861,6 +913,7 @@ struct World2PlacedFurnitureView: View {
                 height: piece.category == "Beds" ? 210 : 175
             )
             .scaleEffect(instance.scale * gestureScale)
+            .transformEffect(skewTransform(x: instance.skewX, y: instance.skewY))
             .rotationEffect(.degrees(instance.rotation) + gestureRotation)
             .shadow(
                 color: isSelected ? .yellow.opacity(0.95) : .black.opacity(0.32),
@@ -870,16 +923,18 @@ struct World2PlacedFurnitureView: View {
             .accessibilityLabel(piece.name)
             .accessibilityHint(
                 isArranging
-                    ? "Tap to select, drag to move or put away, pinch to resize, or twist to rotate"
+                    ? "Tap to select, drag to move or put away, pinch to resize, twist to rotate, use side handles to skew, or tap Reset"
                     : "Placed furniture"
             )
             .accessibilityValue(
                 String(
-                    format: "x %.2f, y %.2f, size %.2f, rotation %.0f degrees",
+                    format: "x %.2f, y %.2f, size %.2f, rotation %.0f degrees, skew %.2f %.2f",
                     instance.x,
                     instance.y,
                     instance.scale,
-                    instance.rotation
+                    instance.rotation,
+                    instance.skewX,
+                    instance.skewY
                 )
             )
             .accessibilityIdentifier("world2.interior.placedFurniture.\(instance.id)")
@@ -898,23 +953,19 @@ struct World2PlacedFurnitureView: View {
                         .allowsHitTesting(false)
                 }
             }
-            .overlay(alignment: .trailing) {
+            .overlay {
                 if isArranging && isSelected {
-                    Button(action: onReturnToInventory) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 16, weight: .black))
-                            .foregroundStyle(.white)
-                            .frame(width: 36, height: 36)
-                            .background(.red, in: Circle())
-                            .overlay(Circle().stroke(.white, lineWidth: 3))
-                            .shadow(color: .black.opacity(0.35), radius: 4, y: 2)
-                            .contentShape(Circle())
-                    }
-                    .buttonStyle(.plain)
-                    .offset(x: -4)
-                    .accessibilityLabel("Put \(piece.name) back in the drawer")
-                    .accessibilityIdentifier(
-                        "world2.interior.furniture.remove.\(instance.id)"
+                    World2FurnitureTransformHandles(
+                        instanceID: instance.id,
+                        onSkewDelta: { dx, dy in
+                            onSelect()
+                            onSkew(instance.skewX + dx, instance.skewY + dy)
+                        },
+                        onReset: {
+                            onSelect()
+                            onResetTransform()
+                        },
+                        onReturnToInventory: onReturnToInventory
                     )
                 }
             }
@@ -940,6 +991,12 @@ struct World2PlacedFurnitureView: View {
             .allowsHitTesting(isArranging)
     }
 
+    private func skewTransform(x: Double, y: Double) -> CGAffineTransform {
+        let sx = min(max(x, DecorationInstance.skewRange.lowerBound), DecorationInstance.skewRange.upperBound)
+        let sy = min(max(y, DecorationInstance.skewRange.lowerBound), DecorationInstance.skewRange.upperBound)
+        return CGAffineTransform(a: 1, b: sy, c: sx, d: 1, tx: 0, ty: 0)
+    }
+
     private var dragGesture: some Gesture {
         DragGesture(coordinateSpace: .named(coordinateSpaceName))
             .onChanged { _ in
@@ -961,17 +1018,13 @@ struct World2PlacedFurnitureView: View {
                     onDragStateChanged(false)
                 }
                 guard canvasSize.width > 0, canvasSize.height > 0 else { return }
-                let travel = CGSize(
-                    width: value.location.x - value.startLocation.x,
-                    height: value.location.y - value.startLocation.y
-                )
                 if let returnZoneMinX, value.location.x >= returnZoneMinX {
                     onReturnToInventory()
                     return
                 }
                 onMove(
-                    travel.width / canvasSize.width,
-                    travel.height / canvasSize.height
+                    (value.location.x - value.startLocation.x) / canvasSize.width,
+                    (value.location.y - value.startLocation.y) / canvasSize.height
                 )
             }
     }
@@ -996,6 +1049,97 @@ struct World2PlacedFurnitureView: View {
             .onEnded { value in
                 onRotation(instance.rotation + value.degrees)
             }
+    }
+}
+
+/// Finger handles around a selected piece: side/top skew + clear Reset + put-away.
+private struct World2FurnitureTransformHandles: View {
+    let instanceID: String
+    let onSkewDelta: (Double, Double) -> Void
+    let onReset: () -> Void
+    let onReturnToInventory: () -> Void
+
+    private let handleSize: CGFloat = 44
+    /// Pixels of finger travel → one unit of shear.
+    private let skewPixelsPerUnit: CGFloat = 110
+
+    var body: some View {
+        ZStack {
+            // Horizontal skew — left / right mid-edge.
+            skewHandle(axis: .horizontal, accessibilitySuffix: "skewX.left")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .offset(x: -handleSize * 0.55)
+            skewHandle(axis: .horizontal, accessibilitySuffix: "skewX.right")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+                .offset(x: handleSize * 0.55)
+
+            // Vertical skew — top / bottom mid-edge.
+            skewHandle(axis: .vertical, accessibilitySuffix: "skewY.top")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .offset(y: -handleSize * 0.55)
+            skewHandle(axis: .vertical, accessibilitySuffix: "skewY.bottom")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .offset(y: handleSize * 0.55)
+
+            VStack {
+                Spacer(minLength: 0)
+                HStack(spacing: 10) {
+                    Button(action: onReset) {
+                        Label("Reset", systemImage: "arrow.counterclockwise")
+                            .font(.system(size: 14, weight: .black, design: .rounded))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                            .background(Color.black.opacity(0.82), in: Capsule())
+                            .overlay(Capsule().stroke(.white.opacity(0.85), lineWidth: 2))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Reset size, rotation, and skew")
+                    .accessibilityIdentifier("world2.interior.furniture.reset.\(instanceID)")
+
+                    Button(action: onReturnToInventory) {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 16, weight: .black))
+                            .foregroundStyle(.white)
+                            .frame(width: handleSize, height: handleSize)
+                            .background(.red, in: Circle())
+                            .overlay(Circle().stroke(.white, lineWidth: 3))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Put back in the drawer")
+                    .accessibilityIdentifier("world2.interior.furniture.remove.\(instanceID)")
+                }
+                .offset(y: handleSize * 0.85)
+            }
+        }
+        .padding(-10)
+    }
+
+    private enum SkewAxis { case horizontal, vertical }
+
+    private func skewHandle(axis: SkewAxis, accessibilitySuffix: String) -> some View {
+        Image(systemName: axis == .horizontal ? "arrow.left.and.right" : "arrow.up.and.down")
+            .font(.system(size: 15, weight: .black))
+            .foregroundStyle(.black)
+            .frame(width: handleSize, height: handleSize)
+            .background(Color.yellow, in: Circle())
+            .overlay(Circle().stroke(.white, lineWidth: 3))
+            .shadow(color: .black.opacity(0.35), radius: 4, y: 2)
+            .contentShape(Circle())
+            .gesture(
+                DragGesture(minimumDistance: 1)
+                    .onEnded { value in
+                        switch axis {
+                        case .horizontal:
+                            onSkewDelta(Double(value.translation.width / skewPixelsPerUnit), 0)
+                        case .vertical:
+                            onSkewDelta(0, Double(value.translation.height / skewPixelsPerUnit))
+                        }
+                    }
+            )
+            .accessibilityLabel(axis == .horizontal ? "Skew sideways" : "Skew up and down")
+            .accessibilityHint("Drag with one finger to lean the art")
+            .accessibilityIdentifier("world2.interior.furniture.\(accessibilitySuffix).\(instanceID)")
     }
 }
 
@@ -1241,7 +1385,7 @@ private struct World2FurnitureDecoratorDrawer: View {
                 onPlace(instance.id)
             }
         }
-        .draggable(instance.id) {
+        .draggable(World2DecorateDragPayload.inventory(instance.id)) {
             piece.artwork
                 .frame(width: 120, height: 110)
                 .padding(8)

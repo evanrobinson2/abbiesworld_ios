@@ -1,0 +1,46 @@
+{
+  "provider": "Meshy",
+  "task_id": "01a0e8d1-7ec6-7731-ad00-051a660cc085",
+  "ai_model": "meshy-6",
+  "prompt": "Warm storybook treehouse architectural timber. Weathered dark mulberry-brown cherry wood, subtle dusky plum undertones, fine flowing grain aligned with the length of each beam, small natural knots and fine fissures, softly rubbed reddish amber edges, softly aged handmade joinery. The circular wooden window surround has wood grain that curves around its ring. All surfaces are solid wood, including the thin window lattice bars. Matte satin finish, rich detailed tactile wood but gentle and inviting, refined fantasy illustration realism. Consistent material over all sides. No leaves, flowers, moss, dirt clumps, metal, lettering, ornaments or painted symbols. Neutral even illumination, no baked cast shadows or highlights.",
+  "consumed_credits": 10,
+  "files": [
+    {
+      "file": "window-timber-textured.glb",
+      "sha256": "073f419a6aec7d7cdd0bd5dd6b1b8776faf21279c3f40d111d565d5a7183ff57",
+      "bytes": 14160756,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8d1-7ec6-7731-ad00-051a660cc085/output/model.glb"
+    },
+    {
+      "file": "texture-0-base_color.png",
+      "sha256": "54407ba9421bd49c5f9faf9e70408f3701e61fe072819ff653fdc218165fc300",
+      "bytes": 17396165,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8d1-7ec6-7731-ad00-051a660cc085/output/texture_0.png"
+    },
+    {
+      "file": "texture-0-metallic.png",
+      "sha256": "630a873d5a81bb1cb4dbd3bccced700e27591bcd8d6a35517c021d65457d2a93",
+      "bytes": 18600,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8d1-7ec6-7731-ad00-051a660cc085/output/texture_0_metallic.png"
+    },
+    {
+      "file": "texture-0-roughness.png",
+      "sha256": "0b864176e0fcb446cb8584169aa4679f7f03b1031b80246ac3570e423fe5e34d",
+      "bytes": 726600,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8d1-7ec6-7731-ad00-051a660cc085/output/texture_0_roughness.png"
+    },
+    {
+      "file": "texture-0-normal.png",
+      "sha256": "2ae0e51bcfe3da27c47f9ee280b208fc17272905a063ff6a12007ea80822fc6f",
+      "bytes": 10565399,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8d1-7ec6-7731-ad00-051a660cc085/output/texture_0_normal.png"
+    },
+    {
+      "file": "texture-0-emission.png",
+      "sha256": "15d87fd019545479e500ab575da31914fe42b1a921a378d26d79cc517a1d4b20",
+      "bytes": 185167,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8d1-7ec6-7731-ad00-051a660cc085/output/texture_0_emission.png"
+    }
+  ],
+  "status": "Generated candidate; pending Blender visual review"
+}

@@ -1,0 +1,58 @@
+{
+  "source_parts": 21,
+  "returned_meshes": 1,
+  "expected_dimensions": [
+    2.8000001907348633,
+    0.49800002574920654,
+    3.700000047683716
+  ],
+  "returned_dimensions": [
+    1.5135135650634766,
+    0.26918917894363403,
+    1.9999998807907104
+  ],
+  "uniform_fit_scale": 1.8500001210627486,
+  "fit_axis_ratios": [
+    1.8500000630106224,
+    1.850000166067164,
+    1.8500001341104588
+  ],
+  "maps": [
+    {
+      "material": "Material_0",
+      "image": "Image_3",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "material": "Material_0",
+      "image": "Image_0",
+      "size": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "material": "Material_0",
+      "image": "Image_1",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "material": "Material_0",
+      "image": "Image_2",
+      "size": [
+        4096,
+        4096
+      ]
+    }
+  ],
+  "library_modified": false,
+  "baseline": "../renders/06-timber-before.png",
+  "candidate": "../renders/07-timber-meshy.png",
+  "scene": "../renders/08-timber-scene.png"
+}

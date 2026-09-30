@@ -1,0 +1,17 @@
+{
+  "generator": "built-in image_gen",
+  "date": "2026-09-27",
+  "authorization": "User requested new friendly pictures and implementation; agent selected these new images.",
+  "assets": [
+    {
+      "file": "fair-puzzle.png",
+      "sha256": "1502eb2b3ae7314f224f959a8c99b43a9e4f8e38c0d529198599236537adedfb",
+      "prompt": "Use case: illustration-story. Create a landscape 3:2 children's game background illustration for a friendly toy fair marble matching puzzle, beautifully polished soft storybook gouache with tactile wooden toys. A welcoming miniature fair in a sunny meadow, rounded pastel peach and turquoise striped stalls along the far edges, tiny Ferris wheel at upper left, smiling plush rabbit buddy with little teal scarf at bottom right. Large central 65 percent is a quiet pale cream wooden tabletop with no objects so a real interactive marble grid can be overlaid. Warm daylight, rounded friendly forms suitable for age six, sophisticated hand-painted picture book quality. No text, no letters, no numbers, no actual marble grid, no interface, no scary elements."
+    },
+    {
+      "file": "fair-toy.png",
+      "sha256": "e83dc093e0d04f951274749573d915b77bb67a6ce032136a55644898087cd815",
+      "prompt": "Use case: stylized-concept. A single adorable tabletop miniature toy fair for a six year old girl's playroom game portal. Three-quarter view, entire compact oval wooden base visible, rounded peach and teal striped tent, tiny pastel Ferris wheel and little ticket booth, friendly handcrafted painted wooden toy with soft storybook gouache texture, sunny soft light, clear silhouette at small screen sizes. Isolated on fully transparent background. No text, no labels, no surrounding room, no people. Finished game sprite, everything contained inside image with generous transparent padding."
+    }
+  ]
+}
