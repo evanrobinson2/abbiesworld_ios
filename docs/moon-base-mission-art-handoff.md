@@ -52,3 +52,14 @@ Strict 90-degree top-down orthographic lunar driving board, winding broad trail 
 
 ## Production rule
 Generate abundance. This is an editorial library for Cursor to crop/composite into cutscenes, transitions, dialogue beats, minigames and memories. Reuse strong Abby/Daddy/rocket/base/quadbike images as references. Prioritize continuity over novelty.
+
+## Moon Arrival Gameplay — Guidance / Landing
+After the outbound launch-control minigame and spaceflight cutscene, arrival is interactive rather than passive.
+
+Flow: **Launch controls → spaceflight cutscene → Guidance minigame → successful landing cutscene → Moon Base unlock.**
+
+Guidance is a kid-friendly Lunar Lander-style approach: Abby guides the rocket toward a huge forgiving landing pad using simple left/right correction and braking/thrust. Use approximately three increasingly precise approach gates before touchdown, with Mission Control coaching.
+
+**Failure philosophy: zero punishment.** A miss should produce a funny/gentle bounce or "almost" moment and immediately allow another attempt. Abby can keep trying indefinitely. After a small number of attempts, offer an obvious **Land for me** bypass that plays the successful landing sequence. No lost progress, lives, currency, shame, or lockout. The challenge exists for delight and mastery, never as a gatekeeper.
+
+After landing, the later mission sequence remains: meteor event → electrical repair → radar/search → quadbike traversal → meteor investigation.
