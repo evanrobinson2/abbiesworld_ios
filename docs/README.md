@@ -16,6 +16,7 @@ Documents that describe **one-time problem solving** or processes - risk analyse
 ## Quick Reference
 
 **Product:**
+- `architecture/UNIFIED.md` - **Branch north star:** Abbie’s World as living system; Missions; completion = playable reality
 - `ABBIES_WORLD_2_PRD.md` - The iPad game
 - `STUDIO_PRD.md` - Grown-up studio on the media browser. Draft.
 - `GPT_DUNGEON_MASTER_PRIMER.md` - Zeus/DM: full world editor API, live session JSON, SwiftUI overlay guide
