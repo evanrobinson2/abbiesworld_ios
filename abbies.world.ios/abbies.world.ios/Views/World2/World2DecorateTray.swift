@@ -86,10 +86,15 @@ struct World2DecorateTray: View {
     }
 
     private var inventory: [DecorationInstance] {
-        playerService.unplacedFurnitureInventory.sorted { lhs, rhs in
+        let raw = playerService.unplacedFurnitureInventory.sorted { lhs, rhs in
             if lhs.isUnseen != rhs.isUnseen { return lhs.isUnseen }
             return lhs.acquiredAt > rhs.acquiredAt
         }
+        guard catalogPolicy == .abbieCottageOnly else { return raw }
+        // Cottage Mine used to dump the whole player drawer — invent leftovers
+        // (Chest / Cloud rug / Lantern), Peglin POI keeps (Stag Spirit…), and
+        // Salvage Orb show as shipping-box tiles. Keep cottage décor only.
+        return raw.filter { FurnitureItem.isAbbieCottageDrawerDecoration($0.decorationId) }
     }
 
     private var itemActions: [World2ThumbAction] {
@@ -150,12 +155,9 @@ struct World2DecorateTray: View {
     }
 
     var body: some View {
-        HStack(spacing: 0) {
-            // Clear lane so the room still receives taps / drops.
-            Color.clear
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .allowsHitTesting(false)
-
+        // Only the drawer chrome hit-tests — never a full-screen plate — so
+        // tray→room drops land on the world dropDestination behind this overlay.
+        Group {
             if isExpanded {
                 expandedDrawer
                     .transition(.move(edge: .trailing).combined(with: .opacity))
@@ -164,7 +166,7 @@ struct World2DecorateTray: View {
                     .transition(.move(edge: .trailing).combined(with: .opacity))
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+        .frame(maxHeight: .infinity, alignment: .center)
         .animation(.spring(response: 0.34, dampingFraction: 0.86), value: isExpanded)
         .accessibilityElement(children: .contain)
         .accessibilityLabel("Decorate \(playerName)")
@@ -404,51 +406,53 @@ struct World2DecorateTray: View {
         let isSelected = selectedActionID == item.id
         let dragID: String? = {
             if item.id == "empty" { return nil }
-            if item.id.hasPrefix("inv.") { return item.id }
+            if item.id.hasPrefix("inv.") {
+                return World2DecorateDragPayload.inventory(String(item.id.dropFirst(4)))
+            }
+            if item.id.hasPrefix("cat.") { return item.id }
             return World2DecorateDragPayload.catalog(item.id)
         }()
 
-        return Button {
-            handlePick(item.id)
-        } label: {
-            VStack(spacing: 4) {
-                Group {
-                    if let asset = item.asset, !asset.isEmpty {
-                        World2SemanticImage(
-                            semanticName: asset,
-                            fallbackIcon: item.icon,
-                            fallbackLabel: item.title
-                        )
-                        .scaledToFit()
-                    } else {
-                        Image(systemName: item.icon)
-                            .font(.system(size: 22, weight: .black))
-                    }
-                }
-                .frame(width: 56, height: 56)
-
-                Text(item.title)
-                    .font(.system(size: 10, weight: .bold, design: .rounded))
-                    .lineLimit(2)
-                    .multilineTextAlignment(.center)
-                    .frame(maxWidth: .infinity)
-            }
-            .padding(8)
-            .frame(maxWidth: .infinity)
-            .background(
-                isSelected ? Color.yellow.opacity(0.95) : Color.white.opacity(0.10),
-                in: RoundedRectangle(cornerRadius: 14, style: .continuous)
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 14, style: .continuous)
-                    .stroke(
-                        isSelected ? Color.white : Color.white.opacity(0.2),
-                        lineWidth: isSelected ? 2 : 1
+        return VStack(spacing: 4) {
+            Group {
+                if let asset = item.asset, !asset.isEmpty {
+                    World2SemanticImage(
+                        semanticName: asset,
+                        fallbackIcon: item.icon,
+                        fallbackLabel: item.title
                     )
-            )
-            .foregroundStyle(isSelected ? .black : .white)
+                    .scaledToFit()
+                } else {
+                    Image(systemName: item.icon)
+                        .font(.system(size: 22, weight: .black))
+                }
+            }
+            .frame(width: 56, height: 56)
+
+            Text(item.title)
+                .font(.system(size: 10, weight: .bold, design: .rounded))
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: .infinity)
         }
-        .buttonStyle(.plain)
+        .padding(8)
+        .frame(maxWidth: .infinity)
+        .background(
+            isSelected ? Color.yellow.opacity(0.95) : Color.white.opacity(0.10),
+            in: RoundedRectangle(cornerRadius: 14, style: .continuous)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 14, style: .continuous)
+                .stroke(
+                    isSelected ? Color.white : Color.white.opacity(0.2),
+                    lineWidth: isSelected ? 2 : 1
+                )
+        )
+        .foregroundStyle(isSelected ? .black : .white)
+        .contentShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+        .onTapGesture {
+            handlePick(item.id)
+        }
         .accessibilityLabel(item.title)
         .accessibilityHint("Drag into the room to place")
         .accessibilityIdentifier(item.accessibilityID ?? "world2.interior.decorator.tile.\(item.id)")

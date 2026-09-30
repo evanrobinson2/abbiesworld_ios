@@ -1,0 +1,18 @@
+{
+  "input_model": "tree-bark-input.glb",
+  "input_sha256": "d08065e8916df220c7846882aebe716b43f85e79cf87c635b9fb0028006835b6",
+  "options": {
+    "ai_model": "meshy-6",
+    "text_style_prompt": "Ancient living cherry tree bark, richly detailed natural bark over a sculptural twisted trunk, roots and branching limbs. Deep charcoal brown with dusky violet undertones and muted reddish rose wood on worn ridge tips. Strong irregular lengthwise fissures, layered fibrous bark ridges, small organic knots and scars; grain follows each bending branch and flows around forks. Rough dry matte surface, softly rounded by age, tactile and convincing, refined painterly fantasy realism. Broad readable bark structure plus delicate fine grain. Consistent bark on every side. No leaves, flowers, vines, moss, snow, mushrooms, faces, symbols, carved ornaments, metal or varnish. Neutral even illumination, no baked highlights or cast shadows. Warm inviting enchanted treehouse material.",
+    "enable_original_uv": true,
+    "enable_pbr": true,
+    "texture_resolution": "4k",
+    "remove_lighting": true,
+    "target_formats": [
+      "glb"
+    ]
+  },
+  "documented_credit_cost": 10,
+  "reference": "../references/rooftop-source.png",
+  "reference_used": "Human-readable material description from the reference; image is not uploaded."
+}

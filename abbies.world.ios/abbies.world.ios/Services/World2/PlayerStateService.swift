@@ -32,6 +32,20 @@ class PlayerStateService: ObservableObject {
     private let legacyStateKey = "world2_player_state"
     private var cancellables = Set<AnyCancellable>()
     
+    static let fairUnlockMilestone = "carnival.marbleTeam.unlocked.v1"
+
+    var isFairUnlocked: Bool {
+        currentPlayer?.progression.achievedMilestones.contains(Self.fairUnlockMilestone) == true
+    }
+
+    func unlockFair(playerID: PlayerId) {
+        guard var player = currentPlayer, player.playerId == playerID,
+              !player.progression.achievedMilestones.contains(Self.fairUnlockMilestone) else { return }
+        player.progression.achievedMilestones.append(Self.fairUnlockMilestone)
+        currentPlayer = player
+        saveLocalState()
+    }
+
     static let voyageOpeningMilestone = "marbleVoyage.opening.watched.v1"
 
     func hasWatchedVoyageOpening() -> Bool {
@@ -1053,7 +1067,9 @@ class PlayerStateService: ObservableObject {
         x: Double? = nil,
         y: Double? = nil,
         scale: Double? = nil,
-        rotation: Double? = nil
+        rotation: Double? = nil,
+        skewX: Double? = nil,
+        skewY: Double? = nil
     ) {
         guard var player = currentPlayer,
               let instanceIndex = player.decorations.firstIndex(where: { $0.id == instanceId }),
@@ -1075,12 +1091,35 @@ class PlayerStateService: ObservableObject {
         if let rotation {
             player.decorations[instanceIndex].rotation = rotation
         }
+        if let skewX {
+            player.decorations[instanceIndex].skewX = min(
+                max(skewX, DecorationInstance.skewRange.lowerBound),
+                DecorationInstance.skewRange.upperBound
+            )
+        }
+        if let skewY {
+            player.decorations[instanceIndex].skewY = min(
+                max(skewY, DecorationInstance.skewRange.lowerBound),
+                DecorationInstance.skewRange.upperBound
+            )
+        }
         player.homeLayout.placedDecorations[layoutIndex].position = .init(
             x: player.decorations[instanceIndex].x,
             y: player.decorations[instanceIndex].y
         )
         currentPlayer = player
         saveLocalState()
+    }
+
+    /// Clears scale / rotation / skew back to defaults. Keeps position.
+    func resetFurnitureTransform(instanceId: String, defaultScale: Double = 1.0) {
+        updateFurnitureTransform(
+            instanceId: instanceId,
+            scale: defaultScale,
+            rotation: 0,
+            skewX: 0,
+            skewY: 0
+        )
     }
 
     func bringFurnitureToFront(instanceId: String) {
@@ -1312,6 +1351,7 @@ class PlayerStateService: ObservableObject {
         ensureStarterWorldSeed(in: &player)
         ensureWorldTeleporter(in: &player)
         ensureMarbleVoyageWorldBook(in: &player)
+        settleMarbleVoyageWorldBookOnTable(in: &player)
         offerJukeboxAsInventory(in: &player)
         return player
     }
@@ -1359,6 +1399,46 @@ class PlayerStateService: ObservableObject {
                 )
             )
         }
+        player.progression.achievedMilestones.append(milestone)
+    }
+
+    /// One-shot: slide the seeded Voyage book down onto the Cozy Nook table.
+    /// Skips if the player already moved it away from the old floating seed.
+    private static func settleMarbleVoyageWorldBookOnTable(in player: inout PlayerState) {
+        let milestone = PlayerState.marbleVoyageBookOnTableMilestone
+        guard !player.progression.achievedMilestones.contains(milestone) else { return }
+
+        let bookID = DecorationInstance.marbleVoyageWorldBookInstanceID(for: player.playerId)
+        let target = DecorationInstance.marbleVoyageWorldBook(for: player.playerId)
+
+        if let idx = player.decorations.firstIndex(where: { $0.id == bookID }) {
+            let current = player.decorations[idx]
+            let nearOldSeed = abs(current.x - 0.50) < 0.10 && abs(current.y - 0.56) < 0.10
+            if nearOldSeed {
+                player.decorations[idx].x = target.x
+                player.decorations[idx].y = target.y
+            }
+        }
+        if let layoutIdx = player.homeLayout.placedDecorations.firstIndex(
+            where: { $0.decorationInstanceId == bookID }
+        ) {
+            let pos = player.homeLayout.placedDecorations[layoutIdx].position
+            let nearOldSeed = abs(pos.x - 0.50) < 0.10 && abs(pos.y - 0.56) < 0.10
+            if nearOldSeed {
+                player.homeLayout.placedDecorations[layoutIdx].position = .init(
+                    x: target.x,
+                    y: target.y
+                )
+            }
+            // Keep layout in sync with decoration coords after the nudge.
+            if let deco = player.decorations.first(where: { $0.id == bookID }) {
+                player.homeLayout.placedDecorations[layoutIdx].position = .init(
+                    x: deco.x,
+                    y: deco.y
+                )
+            }
+        }
+
         player.progression.achievedMilestones.append(milestone)
     }
 

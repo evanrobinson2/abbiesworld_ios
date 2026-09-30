@@ -1,0 +1,7 @@
+{
+  "triangles": 337774,
+  "meshGroups": 23,
+  "rgba8TextureBytesBeforeMips": 129236992,
+  "textureBytesEstimateWithMips": 172315989,
+  "note": "Texture estimate excludes generated IBL, post-processing surfaces and renderer allocations."
+}

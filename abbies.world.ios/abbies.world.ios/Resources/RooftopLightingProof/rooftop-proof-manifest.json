@@ -1,0 +1,142 @@
+{
+  "version": 1,
+  "sourceSHA256": "e442e7bcbff2fda56efa31c65208bbabe1baecf3afb3299b1c0e1b8d690e9e34",
+  "coordinates": "meters, Y up; converted from Blender (x,z,-y)",
+  "camera": {
+    "position": [
+      -3.1,
+      2.65,
+      5.8
+    ],
+    "target": [
+      0.7,
+      1.3,
+      -3
+    ],
+    "verticalFOV": 58.91932333166504,
+    "aspect": 1.3278008298755186
+  },
+  "lighting": "Unlit albedo and tangent normals; native shadowed directional light plus pastel environment fill",
+  "parts": [
+    {
+      "name": "architecture",
+      "texture": "rooftop-proof-architecture.png",
+      "mesh": "rooftop-proof-architecture.rtmesh",
+      "size": 2048,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "normal": "rooftop-proof-architecture-normal.png",
+      "ambientOcclusion": "rooftop-proof-architecture-ao.png",
+      "vertices": 14720,
+      "triangles": 7609,
+      "bakeSeconds": 32.5
+    },
+    {
+      "name": "deck",
+      "texture": "rooftop-proof-deck.png",
+      "mesh": "rooftop-proof-deck.rtmesh",
+      "size": 2048,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "normal": "rooftop-proof-deck-normal.png",
+      "ambientOcclusion": "rooftop-proof-deck-ao.png",
+      "vertices": 32251,
+      "triangles": 17198,
+      "bakeSeconds": 18.4
+    },
+    {
+      "name": "branches",
+      "texture": "rooftop-proof-branches.png",
+      "mesh": "rooftop-proof-branches.rtmesh",
+      "size": 1024,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "normal": "rooftop-proof-branches-normal.png",
+      "ambientOcclusion": "rooftop-proof-branches-ao.png",
+      "vertices": 4234,
+      "triangles": 5292,
+      "bakeSeconds": 10.8
+    },
+    {
+      "name": "tree",
+      "texture": "rooftop-proof-tree.png",
+      "mesh": "rooftop-proof-tree.rtmesh",
+      "size": 2048,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "normal": "rooftop-proof-tree-normal.png",
+      "ambientOcclusion": "rooftop-proof-tree-ao.png",
+      "vertices": 16367,
+      "triangles": 24883,
+      "bakeSeconds": 52.1
+    },
+    {
+      "name": "cushions",
+      "texture": "rooftop-proof-cushions.png",
+      "mesh": "rooftop-proof-cushions.rtmesh",
+      "size": 1024,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "normal": "rooftop-proof-cushions-normal.png",
+      "ambientOcclusion": "rooftop-proof-cushions-ao.png",
+      "vertices": 3024,
+      "triangles": 1512,
+      "bakeSeconds": 13.6
+    },
+    {
+      "name": "roof",
+      "texture": "rooftop-proof-roof.png",
+      "mesh": "rooftop-proof-roof.rtmesh",
+      "size": 1024,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "normal": "rooftop-proof-roof-normal.png",
+      "ambientOcclusion": "rooftop-proof-roof-ao.png",
+      "vertices": 11231,
+      "triangles": 5688,
+      "bakeSeconds": 11.0
+    },
+    {
+      "name": "window",
+      "texture": "rooftop-proof-window.png",
+      "mesh": "rooftop-proof-window.rtmesh",
+      "size": 256,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 576,
+      "triangles": 380,
+      "bakeSeconds": 0.5
+    }
+  ],
+  "triangles": 62562,
+  "textureBytesRGBA8": 63176704,
+  "meshBytes": 3387724
+}

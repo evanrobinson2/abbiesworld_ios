@@ -50,6 +50,8 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
 struct PlayerState: Codable, Identifiable {
     static let jukeboxQuestOfferedMilestone = "quest.placeJukebox.inventory"
     static let marbleVoyageBookSeededMilestone = "treehouse.marbleVoyageBook.seeded.v1"
+    /// Nudge the Voyage book from the old mid-air seed onto the coffee table.
+    static let marbleVoyageBookOnTableMilestone = "treehouse.marbleVoyageBook.onTable.v2"
     static func starterJukeboxInstanceID(for playerId: PlayerId) -> String {
         "jukebox_\(playerId.rawValue)"
     }

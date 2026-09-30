@@ -1,0 +1,23 @@
+{
+  "input_image": "../references/rooftop-source.png",
+  "input_sha256": "22b22bec7cce3683d664d35ed256bd209cf78f6614ef97f06ae89a0c108bfa06",
+  "options": {
+    "model_type": "standard",
+    "ai_model": "meshy-7.1",
+    "geometry_resolution": "standard",
+    "should_texture": true,
+    "texture_resolution": "4k",
+    "enable_pbr": true,
+    "should_remesh": false,
+    "image_enhancement": false,
+    "target_formats": [
+      "glb",
+      "usdz"
+    ],
+    "multi_view_thumbnails": true
+  },
+  "documented_credit_cost": 30,
+  "pricing_source": "https://docs.meshy.ai/en/api/pricing",
+  "authorization": "User: give the image to meshy. One direct image-to-3D trial.",
+  "image_use": "Original image bytes sent directly; no crop, enhancement or replacement."
+}

@@ -1,0 +1,29 @@
+{
+  "milestone": "2a",
+  "geometry_source": "rooftop-study.blend",
+  "piece_library": "assets/rooftop-pieces.blend",
+  "camera": {
+    "location": [
+      2.0999999046325684,
+      -8.300000190734863,
+      3.700000047683716
+    ],
+    "target": [
+      -0.05,
+      1.5,
+      2.08
+    ],
+    "lens_mm": 45
+  },
+  "environment_layers": 4,
+  "lighting": "Low amber sun, golden balcony light, pink bounce and dim violet fill",
+  "compositor_glow": true,
+  "animated": false,
+  "native_runtime_verified": false,
+  "pending": [
+    "Bark and timber surfaces",
+    "Blossom density and branch placement",
+    "Final visual approval",
+    "Motion and export"
+  ]
+}

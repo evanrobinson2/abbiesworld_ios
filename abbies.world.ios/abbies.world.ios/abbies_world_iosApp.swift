@@ -11,6 +11,7 @@ import SwiftUI
 struct abbies_world_iosApp: App {
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     @StateObject private var auth = AuthenticationService.shared
+    @State private var rooftopPreviewClosed = false
 
     /// Product default is household Abbie's World (Home + treehouses).
     /// Standalone Marble Voyage is opt-in for capture / store-demo launches.
@@ -22,9 +23,29 @@ struct abbies_world_iosApp: App {
         return false
     }
 
+    private var wantsFairPuzzlePreview: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-launchFairMarbles")
+        #else
+        false
+        #endif
+    }
+
+    private var wantsRooftopPreview: Bool {
+        #if DEBUG
+        ProcessInfo.processInfo.arguments.contains("-launchRooftop3D")
+        #else
+        false
+        #endif
+    }
+
     var body: some Scene {
         WindowGroup {
-            if wantsStandaloneMarbleVoyage {
+            if wantsRooftopPreview && !rooftopPreviewClosed {
+                RooftopLookout3DView(onClose: { rooftopPreviewClosed = true })
+            } else if wantsFairPuzzlePreview {
+                FairMarblePuzzleView(onWin: {}, onClose: {})
+            } else if wantsStandaloneMarbleVoyage {
                 MarbleVoyageRootView()
                     .environmentObject(auth)
             } else {

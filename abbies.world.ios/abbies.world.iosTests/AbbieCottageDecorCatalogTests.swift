@@ -38,4 +38,26 @@ final class AbbieCottageDecorCatalogTests: XCTestCase {
             )
         }
     }
+
+    func testCottageDrawerHidesInventAndPeglinLeftovers() {
+        XCTAssertTrue(
+            FurnitureItem.isAbbieCottageDrawerDecoration(FurnitureItem.abbieStarterBed.id)
+        )
+        XCTAssertTrue(
+            FurnitureItem.isAbbieCottageDrawerDecoration(World2StoryDecoration.daddyCandy.id)
+        )
+        // Scene-invent / Peglin junk that used to fill the cottage Mine tab.
+        XCTAssertFalse(
+            FurnitureItem.isAbbieCottageDrawerDecoration(World2StoryDecoration.wreckPowerUp.id)
+        )
+        XCTAssertFalse(
+            FurnitureItem.isAbbieCottageDrawerDecoration(World2StoryDecoration.foxTrophy.id)
+        )
+        XCTAssertFalse(
+            FurnitureItem.isAbbieCottageDrawerDecoration("invent-scene.peglin.stagLand-0-stag-spirit")
+        )
+        XCTAssertFalse(
+            FurnitureItem.isAbbieCottageDrawerDecoration("crk-s1-01-forest-canopy-bed")
+        )
+    }
 }

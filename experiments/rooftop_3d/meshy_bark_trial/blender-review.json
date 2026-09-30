@@ -1,0 +1,45 @@
+{
+  "returned_meshes": 1,
+  "fit_axis_ratios": [
+    3.790593385696411,
+    3.7905935558884556,
+    3.790593533780448
+  ],
+  "uniform_fit_scale": 3.7905934917884383,
+  "maps": [
+    {
+      "material": "Material_0.001",
+      "image": "Image_3.001",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "material": "Material_0.001",
+      "image": "Image_0.001",
+      "size": [
+        4096,
+        4096
+      ]
+    },
+    {
+      "material": "Material_0.001",
+      "image": "Image_1.001",
+      "size": [
+        2048,
+        2048
+      ]
+    },
+    {
+      "material": "Material_0.001",
+      "image": "Image_2.001",
+      "size": [
+        4096,
+        4096
+      ]
+    }
+  ],
+  "separate_foliage": true,
+  "library_modified": false
+}

@@ -1,0 +1,12 @@
+{
+  "revision": "B07",
+  "source_scene": "../rooftop-current.blend",
+  "original_observer_camera_unchanged": true,
+  "base_tree_vertex_positions_unchanged": true,
+  "base_vertices": 113083,
+  "true_displacement": "BOTH",
+  "render_subdivision_levels": 2,
+  "scan_maps_packed": 3,
+  "paid_generation_jobs": 0,
+  "status": "Material study, not a performance-ready game asset"
+}

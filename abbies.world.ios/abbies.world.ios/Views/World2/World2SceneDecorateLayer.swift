@@ -85,6 +85,19 @@ struct World2SceneDecorateLayer: View {
                                 rotation: rotation
                             )
                         },
+                        onSkew: { skewX, skewY in
+                            playerService.updateFurnitureTransform(
+                                instanceId: instance.id,
+                                skewX: skewX,
+                                skewY: skewY
+                            )
+                        },
+                        onResetTransform: {
+                            playerService.resetFurnitureTransform(
+                                instanceId: instance.id,
+                                defaultScale: piece.defaultScale
+                            )
+                        },
                         onReturnToInventory: {
                             playerService.returnFurnitureToInventory(instanceId: instance.id)
                             if selectedFurnitureID == instance.id {
