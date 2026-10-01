@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-28T01:11:32Z",
+  "updatedAt": "2026-10-01T00:34:06Z",
   "sourceOfTruth": "Individual JSON files under art-requests/{open,in_review,fulfilled,wont_fix}/",
   "artDirectorGuide": "art-requests/ART_DIRECTOR_AGENT.md",
   "open": [
@@ -102,6 +102,111 @@
       "path": "art-requests/open/20260927-carnival-cottage-trophy.json"
     },
     {
+      "id": "20260930-moonbase-earth-cockpit",
+      "semanticId": "plate.moonBase.earthCockpit",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-earth-cockpit.json"
+    },
+    {
+      "id": "20260930-moonbase-exterior-map",
+      "semanticId": "map.moonBase.exterior",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-exterior-map.json"
+    },
+    {
+      "id": "20260930-moonbase-landing-pad",
+      "semanticId": "plate.moonBase.landingPad",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-landing-pad.json"
+    },
+    {
+      "id": "20260930-moonbase-rocket-exterior",
+      "semanticId": "poi.moonBase.rocket.exterior",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-rocket-exterior.json"
+    },
+    {
+      "id": "20260930-moonbase-buggy-course",
+      "semanticId": "plate.moonBase.buggyCourse",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-buggy-course.json"
+    },
+    {
+      "id": "20260930-moonbase-circuit-panel",
+      "semanticId": "plate.moonBase.circuitPanel",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-circuit-panel.json"
+    },
+    {
+      "id": "20260930-moonbase-cockpit-side-calm",
+      "semanticId": "character.moonBase.abby.cockpitSideCalm",
+      "priority": "high",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-cockpit-side-calm.json"
+    },
+    {
+      "id": "20260930-moonbase-control-sheet",
+      "semanticId": "pack.moonBase.rocketControls",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260930-moonbase-control-sheet.json"
+    },
+    {
+      "id": "20260930-moonbase-gem-bug-garden",
+      "semanticId": "plate.moonBase.gemBugGarden",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-gem-bug-garden.json"
+    },
+    {
+      "id": "20260930-moonbase-guidance-rocket",
+      "semanticId": "game.moonBase.guidance.rocket",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260930-moonbase-guidance-rocket.json"
+    },
+    {
+      "id": "20260930-moonbase-hands-on-controls",
+      "semanticId": "pack.moonBase.handsOnControls",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260930-moonbase-hands-on-controls.json"
+    },
+    {
+      "id": "20260930-moonbase-helmet-earth-wonder",
+      "semanticId": "character.moonBase.abby.helmetEarthWonder",
+      "priority": "high",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-helmet-earth-wonder.json"
+    },
+    {
+      "id": "20260930-moonbase-quadbike-pack",
+      "semanticId": "pack.moonBase.quadbike",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260930-moonbase-quadbike-pack.json"
+    },
+    {
+      "id": "20260930-moonbase-radar-plate",
+      "semanticId": "plate.moonBase.radar",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-radar-plate.json"
+    },
+    {
+      "id": "20260930-moonbase-reentry-strain",
+      "semanticId": "character.moonBase.abby.reentryStrain",
+      "priority": "high",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-reentry-strain.json"
+    },
+    {
       "id": "20260927-lizard-henchman-idle",
       "semanticId": "token.plink.gang.lizard.idle",
       "priority": "normal",
@@ -121,6 +226,146 @@
       "priority": "normal",
       "type": "production_sprite",
       "path": "art-requests/open/20260927-cottage-furniture-integration.json"
+    },
+    {
+      "id": "20260930-moonbase-countdown-glow",
+      "semanticId": "character.moonBase.abby.countdownGlow",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-countdown-glow.json"
+    },
+    {
+      "id": "20260930-moonbase-crystal-in-glove",
+      "semanticId": "fx.moonBase.crystalInGlove",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20260930-moonbase-crystal-in-glove.json"
+    },
+    {
+      "id": "20260930-moonbase-daddy-wave",
+      "semanticId": "character.moonBase.daddy.waveThroughGlass",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-daddy-wave.json"
+    },
+    {
+      "id": "20260930-moonbase-earth-curvature",
+      "semanticId": "character.moonBase.abby.earthCurvature",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-earth-curvature.json"
+    },
+    {
+      "id": "20260930-moonbase-first-bootprint",
+      "semanticId": "fx.moonBase.firstBootprint",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20260930-moonbase-first-bootprint.json"
+    },
+    {
+      "id": "20260930-moonbase-interior-cutaway",
+      "semanticId": "plate.moonBase.interior",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-interior-cutaway.json"
+    },
+    {
+      "id": "20260930-moonbase-landing-almost",
+      "semanticId": "character.moonBase.abby.landingAlmost",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-landing-almost.json"
+    },
+    {
+      "id": "20260930-moonbase-liftoff-awe",
+      "semanticId": "character.moonBase.abby.liftoffAwe",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-liftoff-awe.json"
+    },
+    {
+      "id": "20260930-moonbase-low-gravity-joy",
+      "semanticId": "character.moonBase.abby.lowGravityJoy",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-low-gravity-joy.json"
+    },
+    {
+      "id": "20260930-moonbase-meteor-in-visor",
+      "semanticId": "character.moonBase.abby.meteorInVisor",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-meteor-in-visor.json"
+    },
+    {
+      "id": "20260930-moonbase-meteor-site",
+      "semanticId": "plate.moonBase.meteorSite",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-meteor-site.json"
+    },
+    {
+      "id": "20260930-moonbase-moon-ahead",
+      "semanticId": "character.moonBase.abby.moonAhead",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-moon-ahead.json"
+    },
+    {
+      "id": "20260930-moonbase-moon-cockpit",
+      "semanticId": "plate.moonBase.moonCockpit",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-moon-cockpit.json"
+    },
+    {
+      "id": "20260930-moonbase-planting-hands",
+      "semanticId": "fx.moonBase.plantingSeedling",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20260930-moonbase-planting-hands.json"
+    },
+    {
+      "id": "20260930-moonbase-radar-gasp",
+      "semanticId": "character.moonBase.abby.radarGasp",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-radar-gasp.json"
+    },
+    {
+      "id": "20260930-moonbase-repair-laugh",
+      "semanticId": "character.moonBase.duo.repairLaugh",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-repair-laugh.json"
+    },
+    {
+      "id": "20260930-moonbase-reunion-hug",
+      "semanticId": "character.moonBase.duo.helmetHug",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-reunion-hug.json"
+    },
+    {
+      "id": "20260930-moonbase-sofa-asleep",
+      "semanticId": "character.moonBase.duo.sofaAsleep",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-sofa-asleep.json"
+    },
+    {
+      "id": "20260930-moonbase-wheel-dust",
+      "semanticId": "fx.moonBase.quadbikeDust",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20260930-moonbase-wheel-dust.json"
+    },
+    {
+      "id": "20260930-moonbase-window-home",
+      "semanticId": "character.moonBase.abby.windowHome",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-window-home.json"
     },
     {
       "id": "20260926-endless-progress-chrome",
