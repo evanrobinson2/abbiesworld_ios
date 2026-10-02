@@ -68,6 +68,12 @@ enum World2POIRoute: Codable, Equatable, Sendable {
     case plink
     /// Peg Monastery — math challenge earns Plink power-ups.
     case pegMonastery
+    /// Moon Base arrival — kid Lunar Lander approach (retry forever + Land for me).
+    case moonGuidance
+    /// Pink rocket cockpit — Houston sequence memory launch-check (grow to 7).
+    case moonLaunchCheck
+    /// Moon Base arrival plate after a successful landing.
+    case moonBase
     /// Walk to another scene named by the document. `travel:scene.spookyLand`.
     case travel(sceneID: String)
     /// A place whose rooms are plates named by the document.
@@ -90,6 +96,9 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .planningDept: return "planning_dept"
         case .plink: return "plink"
         case .pegMonastery: return "peg_monastery"
+        case .moonGuidance: return "moon_guidance"
+        case .moonLaunchCheck: return "moon_launch_check"
+        case .moonBase: return "moon_base"
         case .travel(let sceneID): return "travel:\(sceneID)"
         case .rooms: return "rooms"
         }
@@ -110,6 +119,9 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .planningDept: return "planning_dept"
         case .plink: return "plink"
         case .pegMonastery: return "peg_monastery"
+        case .moonGuidance: return "moon_guidance"
+        case .moonLaunchCheck: return "moon_launch_check"
+        case .moonBase: return "moon_base"
         case .playerHome, .cardFactory, .placeFactory, .travel, .rooms: return nil
         }
     }
@@ -132,6 +144,9 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case "planningDept": return .planningDept
         case "plink": return .plink
         case "pegMonastery": return .pegMonastery
+        case "moonGuidance": return .moonGuidance
+        case "moonLaunchCheck": return .moonLaunchCheck
+        case "moonBase": return .moonBase
         case "rooms": return .rooms
         default:
             let travel = "travel:"

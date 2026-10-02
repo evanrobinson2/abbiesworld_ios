@@ -3,13 +3,73 @@
 **Companion to:** [`UNIFIED.md`](./UNIFIED.md)  
 **Vertical slice:** Abby & Daddy Moon Base  
 **Maxim:** The user should never again be the integration layer.  
-**Status:** Plan for branch `unified` / Mission OS — not yet implemented.
+**Status:** Spine live (2026-09-30) — Mission on household world + registry art + phone Board/Dump. Director / Midjourney worker / overnight wake still next.
+
+**Shepherd doc:** This file is the **key product document** for durable intent. When the app evolves or Evan expresses new intent in chat, **add to Missions here in spirit** — update this plan when the object model or rails change; do not invent a parallel tracker.
 
 ---
 
 ## 0. One-sentence product
 
 Abbie’s World is a **persistent creative world** with a **Mission** as durable intent. Surfaces (ChatGPT, Studio, iPad, iPhone, Cursor) expose capabilities into that world. A thin **Director** advances Missions through bounded work cycles until **playable reality**, interrupting Evan only for taste, money, new screens, commits, or play.
+
+---
+
+## 0.1 Mission = living intent database (not a sprint board)
+
+**Evan’s call (2026-09-30):** keep Missions alive and **add to them** as the app evolves and as he expresses intent. Shepherd this document. 👍
+
+That is the product: a **growing memory of creative intent**, not a one-shot ticket queue.
+
+### Why not Jira (or Jira-shaped tools) as SoT?
+
+| Fit | Verdict |
+|---|---|
+| Jira / Classic PM DBs | Great for eng chores, sprint status, assignees. Wrong grain for “Abby finds the pink rocket and lands with Daddy.” Turns taste into tickets. Evan already rejected being the bus / Gantt of workers. |
+| Free PM alternatives (Linear free, GitHub Projects, Notion DBs) | Fine as **mirrors** for engineering requirements (`req.eng.*` → Issue). Still not the soul of Abbie’s World. |
+| **Mission objects on the household game server** (what we started) | Right place: same world Abby plays, Auth0 household, survives chat death, phone can Board/Dump into it, ChatGPT/Cursor share one SoT. |
+
+**Rule:** Mission SoT stays in Abbie’s World (server). Optional free tools may **reflect** eng/art chores — they must not become a second brain Evan has to reconcile.
+
+### Living intent (CS)
+
+Mission is a **versioned document** on the household world (`creative.missionOs.missions[id]`), concurrent via world `revision`.
+
+| Piece | Shape |
+|---|---|
+| Intent | Mutable `narrative` / `acceptanceJourney` / `acceptanceTargets` — patch in place |
+| Plan | `beats[]`, `openDecisions[]`, `assumptions[]` |
+| Work | `requirements[]` with `kind`, `status`, optional `blockedBy[]` (DAG) |
+| Evidence | Append-heavy `proofs[]`, `approvals[]`, `verification`, `integration` |
+| Lifecycle | Status on Mission + requirements; playable only by human attest |
+| Growth | Same `missionId`; patches + new rows; optional child Missions by id |
+| Eng mirror | Optional GitHub/Linear links on `req.eng.*` — projection, not SoT |
+
+Prefer extending an existing Mission over a second tracker. Surfaces talk; the document is the memory.
+
+---
+
+### How it grows (operations)
+
+1. Talk → patch Mission intent and/or append requirements (same `missionId`).  
+2. Director proposes requirements; Evan resolves decisions and Board/Dumps proofs.  
+3. New app capabilities appear as new `requirements` (or child Missions), not a second tracker.  
+4. Playable attestation is human-gated; later play signals may spawn child Missions.  
+5. Amend this shepherd doc when the object model or rails change.
+
+**Proved spine (2026-09-30):**  
+`mission.wakeLoop.worldProof.v1` on world `creative.missionOs` → OpenAI plate on Game Asset API → phone `review.html?missionId=…` → Board/Dump → `PUT /api/v1/worlds/current`.
+
+### Phone review — feedback backlog (2026-09-30)
+
+**Scope now:** show the work; optional coarse skim later. Broader nav / gallery organization schemes deferred.
+
+**Parked (build when Evan says go — not blocking):**
+- Title = subject being drawn; canon toggle / PiP / config.
+- Tap → feedback → Return or Revise & resubmit.
+- Stable URL style; MCP phone telemetry (OAuth = Evan) for agent collab.
+- Fluid feedback from phone or chat on the same Mission channel.
+- History mode (past jobs; resubmit with new params; delete when safe).
 
 ---
 
@@ -29,7 +89,9 @@ Abbie’s World is a **persistent creative world** with a **Mission** as durable
 | `creative.live` (vars/flags/hud/beat) | Session bag — **not** Mission store; Mission may *write* unlocks here |
 | WaypointNavigationGame (moonbase art, victory polaroids) | Day-one **reuse** for lunar path / daddy reunion flavor |
 
-**Missing centerpiece:** durable Mission object + Director state machine + playable-completion proofs + sparse notifications.
+**Missing centerpiece (original plan):** durable Mission object + Director state machine + playable-completion proofs + sparse notifications.
+
+**Now present (spine):** Mission object on household world (`creative.missionOs`), MCP create/describe/approve/reject, registry-backed art jobs, phone gesture review writing back to the world. Still missing: Director advance cycles, Midjourney worker URL, sparse push, playable attestation UX.
 
 ---
 
@@ -283,9 +345,12 @@ Observe → Reason → Act → Verify → Record → (sleep or Repeat)
 
 - No Claude→Claude→Claude chains as the architecture. Workers are replaceable (Cursor today, other agent tomorrow).  
 - No worker may mark Mission `playable`.  
-- No auto-commit / auto-push / auto-`confirmReplace` / auto-new-`World2POIRoute`.  
+- No auto-**merge** / auto-push-to-main / auto-`confirmReplace`. Eng **auto-starts** (branch + PR + CI) when `req.eng.*` is open — Evan does **not** ask for the build, including hard physics puzzlers.  
+- No ChatGPT `place_upsert` onto a brand-new `World2POIRoute` until that route ships via merged PR.  
 - No auto Midjourney spend past budget without `decision` approval.  
 - Home-protection flag on Mission: `constraints.doNotTouchScenes: ["scene.home"]` until explicitly cleared (TED-talk pattern).
+
+**Eng auto-dispatch maxim:** Once a Mission has an engineering minigame requirement (`mission_request_minigame` or inferred `req.eng.*`), Cursor/eng **starts without being asked**. Difficulty is a planning hint, not a gate. Evan’s interrupts remain taste, budget, PR merge, and playable attestation — not “please build that.”
 
 ### 4.2 Capability router
 
@@ -318,7 +383,7 @@ Director schedules workers; workers do not schedule Directors.
 1. **Art proofs ready** — gallery of N candidates for requirement set.  
 2. **Creative / gameplay decision** — one question, proposed default.  
 3. **Budget exceed** — proposed spend > remaining.  
-4. **New screen / route needed** — requires explicit `World2POIRoute` authorization.  
+4. **PR ready / route ships** — eng opened a PR that adds a `World2POIRoute` or large surface; Evan merges (or rejects). Starting the build is **not** an interrupt.  
 5. **Playable candidate** — install ready; acceptance journey listed.  
 6. **Regression** — named experience broken (e.g. Marble Voyage).  
 
@@ -361,6 +426,7 @@ mission_patch_intent  # refine narrative / acceptance journey
 mission_answer_decision
 mission_approve_proof # candidate index + note + optional reference image URL
 mission_reject_proof  # note + guidance
+mission_feedback      # durable taste/direction (not Board/Dump); optional proof/requirement/candidate
 mission_attest_playable  # ONLY Evan; ticks acceptance checklist
 mission_advance       # run one Director cycle (or N with budget) — dryRun default
 ```

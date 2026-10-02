@@ -3,6 +3,8 @@
  * ChatGPT developer mode: Authentication OAuth (Auth0).
  * Discovery: /.well-known/oauth-protected-resource + 401 WWW-Authenticate.
  * Bearer from ChatGPT OAuth (aud = MCP URL) or Studio Copy MCP token / accessToken.
+ * World upstream requires household aud `https://api.abbies.world` — ChatGPT MCP
+ * tokens are bridged via ABBIES_WORLD_TOKEN on Studio (same as phone review proxy).
  */
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
@@ -27,10 +29,30 @@ import {
   describeLibrary as describeAssetLibrary,
   IMAGE_MODEL,
 } from "./lib/asset-jobs-store.js";
+import {
+  buildMission,
+  describeMission,
+  attachProof,
+  approveProof,
+  rejectProof,
+  upsertMissionOnDoc,
+  getMissionFromDoc,
+  listMissionsFromDoc,
+  hydrateFromWorld,
+  ensureArtRequirement,
+  deckFromMission,
+  requestMinigame,
+  listEngAutoDispatch,
+  appendMissionFeedback,
+} from "./lib/missions-store.js";
+import { notifyMinigameMaker } from "./lib/eng-dispatch-webhook.js";
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
-const SERVER = { name: "abbies-world", version: "0.4.0" };
+const SERVER = { name: "abbies-world", version: "0.5.9" };
+const HOUSEHOLD_AUDIENCE = "https://api.abbies.world";
+const PLATE_BASE = "https://studio-mock-iota.vercel.app/api/plate";
+const REVIEW_BASE = "https://studio-mock-iota.vercel.app/review.html";
 const MCP_PUBLIC_URL = "https://studio-mock-iota.vercel.app/mcp";
 const OAUTH_RESOURCE_METADATA =
   "https://studio-mock-iota.vercel.app/.well-known/oauth-protected-resource";
@@ -44,7 +66,7 @@ The iPad does not use the Studio map's pixel layout. It plays one scene at a tim
 2. POIs sit on that plate at normalized coordinates: transform.position.x and .y from 0 to 1 (keep 0.12–0.88).
 3. Connect scenes with a place whose behavior is travel:<otherSceneId>. That is the exit. There is no separate edge table on the iPad.
 4. activeSceneID is where play starts.
-5. New art: asset_job_create (defaults to OpenAI gpt-image-2 generate) → registered semantic id → asset_bind. Optional: generate:false + asset_job_complete with a temporary https URL.
+5. New art: asset_job_create (defaults to OpenAI gpt-image-2.5-sunburst generate) → registered semantic id → asset_bind. Optional: generate:false + asset_job_complete with a temporary https URL.
 
 ### POI capabilities (honest limit)
 A POI is mostly how it looks plus which existing screen it opens.
@@ -63,8 +85,11 @@ Decorations are short labels (≤12 characters) plus a sprite. They are not inte
 ### Steel-rail habit
 read_primer → world_describe → author_beat (dryRun) → confirm. Prefer semantic asset IDs. Prefer asset_job_create for new plates. Low-level scene_upsert / place_upsert still work. Never wipe players.
 
+### Mission habit (durable intent)
+Talk that should survive chat death → mission_create (narrative). Resume with mission_describe. Vet art via mission_attach_proof + mission_approve_proof (candidate index). Leave durable taste/direction with mission_feedback (does not Board/Dump by itself). New minigames → mission_request_minigame (tight design). If MINIGAME_MAKER_WEBHOOK_URL is unset, response is honest: saved, blocked: builder not configured — do not imply a worker started. Eng workers open PR (no merge) when the builder is configured — even hard physics puzzlers. Missions live on the household world (creative.missionOs) — not in the chat. Do not mark playable from workers.
+
 ### Asset generation habit (ChatGPT MCP)
-asset_project_create (optional) → asset_job_create with semanticId + brief (server writes imagePrompt, calls OpenAI gpt-image-2, ingests to Game Asset registry, returns status registered) → asset_bind / place_upsert with semanticId only. Never put CDN/Midjourney URLs on scenes or POIs. Midjourney paste remains available via generate:false then asset_job_complete.
+asset_project_create (optional) → asset_job_create with semanticId + brief (server writes imagePrompt, calls OpenAI gpt-image-2.5-sunburst, ingests to Game Asset registry, runs subject/framing sanity, returns registered or needs_review) → asset_bind only when registered. Prefer semantic asset IDs. Never put CDN/Midjourney URLs on scenes or POIs. Midjourney paste remains available via generate:false then asset_job_complete (same sanity). Override model with ASSET_IMAGE_MODEL (e.g. gpt-image-2.5-flare). See docs/architecture/ASSET_SANITY_CORPUS.md.
 
 ### Dungeon master habit
 read_primer first. world_describe before edits. scene_upsert, then scene_set_background_url when Evan pastes a URL, place_upsert for POIs, scene_connect for exits. vars_apply for counters (server does the math). Do not wipe players.
@@ -109,7 +134,7 @@ function rpcError(id, code, message, data) {
   return { jsonrpc: "2.0", id, error: { code, message, data } };
 }
 
-function tokenFrom(request, args) {
+function presentedToken(request, args) {
   const header = request.headers.get("authorization") || "";
   if (header.startsWith("Bearer ") && header.length > 16) {
     const token = header.slice(7).trim();
@@ -118,9 +143,51 @@ function tokenFrom(request, args) {
     return token;
   }
   const arg = String(args?.accessToken || "").trim();
-  if (arg.length > 16) return arg;
+  return arg.length > 16 ? arg : "";
+}
+
+function tokenFrom(request, args) {
+  const presented = presentedToken(request, args);
+  if (presented) return presented;
+  return String(process.env.ABBIES_WORLD_TOKEN || "").trim();
+}
+
+/** Decode JWT payload without verify — only for aud routing. */
+function jwtAudiences(token) {
+  try {
+    const parts = String(token || "").split(".");
+    if (parts.length < 2) return [];
+    const b64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    const pad = "=".repeat((4 - (b64.length % 4)) % 4);
+    const payload = JSON.parse(Buffer.from(b64 + pad, "base64").toString("utf8"));
+    const aud = payload?.aud;
+    if (Array.isArray(aud)) return aud.map(String);
+    if (aud) return [String(aud)];
+  } catch {
+    /* ignore */
+  }
+  return [];
+}
+
+function tokenHasHouseholdAudience(token) {
+  return jwtAudiences(token).includes(HOUSEHOLD_AUDIENCE);
+}
+
+/**
+ * Token for game-server world reads/writes.
+ * ChatGPT OAuth mints aud=MCP URL; household API only accepts api.abbies.world.
+ * When the presented token is MCP-only, use Studio ABBIES_WORLD_TOKEN.
+ */
+function worldTokenFrom(request, args) {
+  const presented = presentedToken(request, args);
   const env = String(process.env.ABBIES_WORLD_TOKEN || "").trim();
-  return env;
+  if (presented && tokenHasHouseholdAudience(presented)) return presented;
+  if (env && (env === "[SENSITIVE]" || env.includes("${"))) {
+    /* ignore bad env placeholders */
+  } else if (env) {
+    return env;
+  }
+  return presented || tokenFrom(request, args);
 }
 
 function prefersHeaderAuth(request) {
@@ -176,6 +243,15 @@ async function readWorld(auth) {
   const text = await response.text();
   let body = null;
   try { body = text ? JSON.parse(text) : null; } catch { body = { error: "bad_upstream" }; }
+  if (response.status === 401 || response.status === 403) {
+    return {
+      status: response.status,
+      body,
+      hint: tokenHasHouseholdAudience(auth)
+        ? "Household token rejected — refresh Studio → Copy MCP token into ABBIES_WORLD_TOKEN."
+        : "Token audience is not https://api.abbies.world. Studio needs ABBIES_WORLD_TOKEN (household) for ChatGPT world tools.",
+    };
+  }
   return { status: response.status, body };
 }
 
@@ -778,7 +854,7 @@ const TOOLS = [
   {
     name: "asset_job_create",
     description:
-      "Create a plate generation job. Pass semanticId (map.* or poi.*.exterior|interior) + brief. By default (generate:true) the server writes an imagePrompt and generates with OpenAI gpt-image-2, then registers bytes on the Game Asset API (status registered). Set generate:false to stop at awaiting_image for manual https paste. Returns imagePrompt/proofBrief/bindWith.",
+      "Create a plate generation job. Pass semanticId (map.* or poi.*.exterior|interior) + brief. By default (generate:true) the server writes an imagePrompt and generates with OpenAI gpt-image-2.5-sunburst, then registers bytes on the Game Asset API (status registered after sanity). Set generate:false to stop at awaiting_image for manual https paste. Returns imagePrompt/proofBrief/bindWith.",
     inputSchema: {
       type: "object",
       properties: {
@@ -791,6 +867,12 @@ const TOOLS = [
         brief: { type: "string", description: "Subject + look in plain language" },
         stylePin: { type: "string" },
         projectId: { type: "string", description: "From asset_project_create" },
+        missionId: {
+          type: "string",
+          description:
+            "Household Mission id. When set and generate registers, attaches a proof on creative.missionOs (game server world) and returns review.html?missionId=…",
+        },
+        requirementId: { type: "string", description: "Optional art requirement id on the Mission" },
         generate: {
           type: "boolean",
           description:
@@ -841,7 +923,7 @@ const TOOLS = [
   {
     name: "asset_job_complete",
     description:
-      "Paste a temporary https image URL (optional Midjourney path). The MCP downloads the bytes and registers them on the Game Asset API under the job's semanticId/registryKey. Prefer asset_job_create with generate:true (gpt-image-2) instead. Never put the staging URL on a scene/POI.",
+      "Paste a temporary https image URL (optional Midjourney path). The MCP downloads the bytes and registers them on the Game Asset API under the job's semanticId/registryKey. Prefer asset_job_create with generate:true (gpt-image-2.5-sunburst) instead. Never put the staging URL on a scene/POI.",
     inputSchema: {
       type: "object",
       properties: {
@@ -870,6 +952,199 @@ const TOOLS = [
         jobId: { type: "string" },
       },
       required: ["semanticId"],
+    },
+  },
+  {
+    name: "midjourney_fill",
+    description:
+      "Remote Midjourney invoke (POC): send a prompt to the household MJ worker (Mac Chrome via Apple Events). Requires MJ_WORKER_URL on Studio pointing at local server.py :8766. Does not wait for the grid — after MJ finishes, paste https into asset_job_complete (or AD harvest).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        prompt: { type: "string", description: "Full Midjourney prompt including --ar etc." },
+        semanticId: {
+          type: "string",
+          description: "Optional: also create generate:false asset job awaiting the later paste",
+        },
+        brief: { type: "string" },
+      },
+      required: ["prompt"],
+    },
+  },
+  {
+    name: "mission_create",
+    description:
+      "Create a durable Mission from narrative intent (survives chat death). Infers plan beats + proposed requirements — no art spend, no world mutation of scenes/POIs. Stored on household world creative.missionOs.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        narrative: {
+          type: "string",
+          description: "What should become playable reality (story + acceptance journey in plain words).",
+        },
+        title: { type: "string", description: "Short Mission title" },
+        missionId: {
+          type: "string",
+          description: "Optional stable id (default mission.<slug>.v1). Re-create with same id overwrites.",
+        },
+        surface: {
+          type: "string",
+          description: "Where talk happened: chatgpt | cursor | studio | voice",
+        },
+        utteranceRef: { type: "string", description: "Optional chat/message id for provenance" },
+      },
+      required: ["narrative"],
+    },
+  },
+  {
+    name: "mission_get",
+    description: "Load one Mission by id from the household Mission store.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        missionId: { type: "string" },
+      },
+      required: ["missionId"],
+    },
+  },
+  {
+    name: "mission_list",
+    description: "List recent Missions on the focused household world (newest first).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        limit: { type: "number" },
+      },
+    },
+  },
+  {
+    name: "mission_describe",
+    description:
+      "One-screen Mission status: intent, requirements, awaiting Evan (decisions/proofs), unread notifications, next act. Prefer this to resume after chat death.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        missionId: {
+          type: "string",
+          description: "Mission id. If omitted, describes the most recently updated Mission.",
+        },
+      },
+    },
+  },
+  {
+    name: "mission_attach_proof",
+    description:
+      "Attach a proof gallery to a requirement (POC: stub candidates if none passed). Sets requirement proofs_ready and queues a notification.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        missionId: { type: "string" },
+        requirementId: { type: "string" },
+        kind: { type: "string", description: "Default art_candidates" },
+        candidates: {
+          type: "array",
+          items: { type: "object" },
+          description: "Optional [{index, url, label}]. Stub 1–4 used if omitted.",
+        },
+      },
+      required: ["missionId", "requirementId"],
+    },
+  },
+  {
+    name: "mission_approve_proof",
+    description:
+      "Put on Board: approve a proof by 1-based candidate index (Voice: “Rocket 3” → candidateIndex 3). Marks requirement done and queues a notification.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        missionId: { type: "string" },
+        proofId: { type: "string" },
+        candidateIndex: { type: "number", description: "1-based index into proof candidates" },
+        note: { type: "string" },
+        surface: { type: "string" },
+      },
+      required: ["missionId", "proofId", "candidateIndex"],
+    },
+  },
+  {
+    name: "mission_reject_proof",
+    description:
+      "Dump: reject a proof (optional candidateIndex). Reopens the art requirement for replacement and queues a notification.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        missionId: { type: "string" },
+        proofId: { type: "string" },
+        candidateIndex: { type: "number", description: "Optional 1-based index that was dumped" },
+        note: { type: "string" },
+        direction: { type: "string", description: "Default replace" },
+        surface: { type: "string" },
+      },
+      required: ["missionId", "proofId"],
+    },
+  },
+  {
+    name: "mission_feedback",
+    description:
+      "Leave durable feedback on a Mission (taste, art direction, eng notes). Survives chat death; shows in mission_describe. Does NOT approve or dump — use mission_approve_proof / mission_reject_proof for Board/Dump. Optional: requirementId, proofId, candidateIndex (1-based).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        missionId: { type: "string" },
+        text: { type: "string", description: "Feedback / direction (required)" },
+        kind: {
+          type: "string",
+          description: "general | art | eng | taste | direction | playtest",
+        },
+        requirementId: { type: "string" },
+        proofId: { type: "string" },
+        candidateIndex: { type: "number", description: "Optional 1-based candidate" },
+        surface: { type: "string", description: "Default chatgpt" },
+      },
+      required: ["missionId", "text"],
+    },
+  },
+  {
+    name: "mission_request_minigame",
+    description:
+      "File a durable eng minigame requirement with tight design params (verb, fail/bypass, onWin, physics, captions). AUTO-DISPATCHES to eng worker — Evan does not ask for the build, including hard physics puzzlers. Worker opens a PR (no auto-merge). Follow GAME_DESIGNER_CORPUS + CUTSCENE_DESIGNER_CORPUS.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        missionId: { type: "string", description: "Existing Mission id" },
+        routeId: {
+          type: "string",
+          description: "Proposed World2POIRoute / behavior id (e.g. moonLaunch, tiltMaze)",
+        },
+        verb: { type: "string", description: "Kid-facing verb, e.g. land rocket on pad" },
+        difficulty: {
+          type: "string",
+          description: "easy | moderate | hard | physics_puzzler — does not block auto-start",
+        },
+        mustBecomeTrue: { type: "string" },
+        requirementId: { type: "string" },
+        design: {
+          type: "object",
+          description:
+            "Tight design: feel, fail, bypass, onWin, teach, artSlots, referenceRoutes, acceptance, physics, captionDefaultTier",
+        },
+        supersedeRequirementIds: {
+          type: "array",
+          items: { type: "string" },
+          description: "Prior eng requirement ids to mark wont_fix (e.g. wrong inferred lander)",
+        },
+      },
+      required: ["missionId", "routeId", "verb"],
     },
   },
 ];
@@ -967,7 +1242,14 @@ async function runAuthorBeat(auth, args) {
   if (!intent) return { error: "intent_required" };
   const dryRun = args.confirm === true ? false : args.dryRun !== false;
   const current = await readWorld(auth);
-  if (current.status !== 200) return { error: "world_unavailable", status: current.status };
+  if (current.status !== 200) {
+    return {
+      error: "world_unavailable",
+      status: current.status,
+      body: current.body,
+      hint: current.hint,
+    };
+  }
 
   const snapshot = describe(current.body);
   const planned = await planAuthorBeat({
@@ -1106,6 +1388,281 @@ function applyAuthorOp(doc, step) {
   return { error: "unknown_op", op };
 }
 
+async function runMissionTool(name, auth, args) {
+  if (name === "mission_get" || name === "mission_list" || name === "mission_describe") {
+    const current = await readWorld(auth);
+    if (current.status !== 200) {
+    return {
+      error: "world_unavailable",
+      status: current.status,
+      body: current.body,
+      hint: current.hint,
+    };
+  }
+    hydrateFromWorld(current.body);
+
+    if (name === "mission_list") {
+      return {
+        durable: "creative.missionOs",
+        missions: listMissionsFromDoc(current.body, { limit: args.limit }),
+      };
+    }
+
+    let missionId = String(args.missionId || "").trim();
+    if (!missionId && name === "mission_describe") {
+      const listed = listMissionsFromDoc(current.body, { limit: 1 });
+      missionId = listed[0]?.id || "";
+    }
+    if (!missionId) {
+      return {
+        error: name === "mission_describe" ? "no_missions" : "mission_id_required",
+        hint: "mission_create first, or pass missionId.",
+      };
+    }
+
+    const mission = getMissionFromDoc(current.body, missionId);
+    if (!mission) return { error: "mission_missing", missionId };
+    if (name === "mission_get") return mission;
+    return describeMission(mission);
+  }
+
+  // Writes: create / attach_proof / approve_proof
+  const saved = await mutate(auth, (doc) => {
+    hydrateFromWorld(doc);
+
+    if (name === "mission_create") {
+      const built = buildMission({
+        narrative: args.narrative,
+        title: args.title,
+        surface: args.surface || "mcp",
+        utteranceRef: args.utteranceRef || null,
+        missionId: args.missionId || null,
+      });
+      if (built.error) {
+        doc.__mcp = built;
+        doc.__abort = true;
+        return doc;
+      }
+      // Preserve createdAt if overwriting same id.
+      const prior = getMissionFromDoc(doc, built.mission.id);
+      if (prior?.createdAt) {
+        built.mission.createdAt = prior.createdAt;
+        built.mission.work = prior.work || built.mission.work;
+        built.mission.approvals = prior.approvals || [];
+        // Keep prior proofs unless this is a fresh narrative replace — POC overwrites plan.
+      }
+      upsertMissionOnDoc(doc, built.mission);
+      const engQueue = listEngAutoDispatch(built.mission);
+      doc.__mcp = {
+        created: true,
+        durable: "creative.missionOs",
+        mission: built.mission,
+        describe: describeMission(built.mission),
+        engAutoDispatch: engQueue,
+      };
+      if (engQueue.length) {
+        doc.__wakeMaker = {
+          missionId: built.mission.id,
+          requirementIds: engQueue.map((e) => e.requirementId),
+          source: "mission_create",
+        };
+      }
+      return doc;
+    }
+
+    const missionId = String(args.missionId || "").trim();
+    const mission = getMissionFromDoc(doc, missionId);
+    if (!mission) {
+      doc.__mcp = { error: "mission_missing", missionId };
+      doc.__abort = true;
+      return doc;
+    }
+
+    if (name === "mission_attach_proof") {
+      const result = attachProof(mission, {
+        requirementId: args.requirementId,
+        kind: args.kind,
+        candidates: args.candidates,
+      });
+      if (result.error) {
+        doc.__mcp = result;
+        doc.__abort = true;
+        return doc;
+      }
+      upsertMissionOnDoc(doc, result.mission);
+      doc.__mcp = {
+        attached: true,
+        proof: result.proof,
+        notification: result.notification,
+        describe: describeMission(result.mission),
+      };
+      return doc;
+    }
+
+    if (name === "mission_approve_proof") {
+      const result = approveProof(mission, {
+        proofId: args.proofId,
+        candidateIndex: args.candidateIndex,
+        note: args.note,
+        surface: args.surface || "mcp",
+      });
+      if (result.error) {
+        doc.__mcp = result;
+        doc.__abort = true;
+        return doc;
+      }
+      upsertMissionOnDoc(doc, result.mission);
+      doc.__mcp = {
+        approved: true,
+        approval: result.approval,
+        notification: result.notification,
+        describe: describeMission(result.mission),
+      };
+      return doc;
+    }
+
+    if (name === "mission_reject_proof") {
+      const result = rejectProof(mission, {
+        proofId: args.proofId,
+        candidateIndex: args.candidateIndex,
+        note: args.note,
+        direction: args.direction,
+        surface: args.surface || "mcp",
+      });
+      if (result.error) {
+        doc.__mcp = result;
+        doc.__abort = true;
+        return doc;
+      }
+      upsertMissionOnDoc(doc, result.mission);
+      doc.__mcp = {
+        dumped: true,
+        approval: result.approval,
+        notification: result.notification,
+        describe: describeMission(result.mission),
+      };
+      return doc;
+    }
+
+    if (name === "mission_feedback") {
+      const result = appendMissionFeedback(mission, {
+        text: args.text,
+        kind: args.kind,
+        requirementId: args.requirementId,
+        proofId: args.proofId,
+        candidateIndex: args.candidateIndex,
+        surface: args.surface || "chatgpt",
+      });
+      if (result.error) {
+        doc.__mcp = result;
+        doc.__abort = true;
+        return doc;
+      }
+      upsertMissionOnDoc(doc, result.mission);
+      doc.__mcp = {
+        feedbackLogged: true,
+        feedback: result.feedback,
+        notification: result.notification,
+        describe: describeMission(result.mission),
+      };
+      return doc;
+    }
+
+    if (name === "mission_request_minigame") {
+      const result = requestMinigame(mission, {
+        routeId: args.routeId,
+        verb: args.verb,
+        design: args.design || {},
+        mustBecomeTrue: args.mustBecomeTrue,
+        requirementId: args.requirementId,
+        difficulty: args.difficulty || "moderate",
+        supersedeRequirementIds: args.supersedeRequirementIds || [],
+      });
+      if (result.error) {
+        doc.__mcp = result;
+        doc.__abort = true;
+        return doc;
+      }
+      const blocked = result.requirement?.dispatch?.status === "blocked_builder_unconfigured";
+      upsertMissionOnDoc(doc, result.mission);
+      doc.__mcp = {
+        requested: true,
+        autoDispatch: !blocked && !!result.builderConfigured,
+        builderConfigured: !!result.builderConfigured,
+        builderDispatch: blocked
+          ? {
+              status: "saved_blocked",
+              reason: "builder not configured",
+              detail: "MINIGAME_MAKER_WEBHOOK_URL unset",
+              message: "saved, blocked: builder not configured",
+            }
+          : { status: "queued_for_wake" },
+        requirement: result.requirement,
+        notification: result.notification,
+        engAutoDispatch: result.engAutoDispatch,
+        describe: describeMission(result.mission),
+        workerContract: blocked
+          ? "Requirement saved. Builder webhook unset — no worker started. Configure MINIGAME_MAKER_WEBHOOK_URL, then re-request or wait for wake."
+          : "Start eng without waiting for Evan. Open PR + CI. Do not merge. Do not mark playable. Difficulty does not gate start.",
+      };
+      doc.__wakeMaker = {
+        missionId: result.mission.id,
+        requirementIds: [result.requirement?.id].filter(Boolean),
+        source: "mission_request_minigame",
+        routeId: result.requirement?.design?.routeId || null,
+        difficulty: result.requirement?.dispatch?.difficulty || null,
+      };
+      return doc;
+    }
+
+    doc.__mcp = { error: "unknown_mission_tool", name };
+    doc.__abort = true;
+    return doc;
+  });
+
+  if (saved.status === 409) return { error: "revision_conflict", body: saved.body };
+  if (saved.status !== 200) return { error: "save_failed", status: saved.status, body: saved.body };
+
+  const wake = saved.body.__wakeMaker;
+  if (saved.body.__wakeMaker) delete saved.body.__wakeMaker;
+  const extra = saved.body.__mcp;
+  if (saved.body.__mcp) delete saved.body.__mcp;
+  if (extra?.error) return extra;
+
+  let makerWake = null;
+  if (wake && !extra?.error) {
+    makerWake = await notifyMinigameMaker(wake);
+  }
+
+  const blockedWake = makerWake?.skipped === true;
+  if (extra && blockedWake) {
+    extra.autoDispatch = false;
+    extra.builderConfigured = false;
+    extra.builderDispatch = {
+      status: "saved_blocked",
+      reason: "builder not configured",
+      detail: makerWake.reason,
+      message: "saved, blocked: builder not configured",
+    };
+    if (extra.workerContract && !String(extra.workerContract).includes("blocked")) {
+      extra.workerContract =
+        "Requirement saved. Builder webhook unset — no worker started. Configure MINIGAME_MAKER_WEBHOOK_URL.";
+    }
+  } else if (extra && makerWake && !makerWake.skipped) {
+    extra.builderConfigured = true;
+    extra.builderDispatch = {
+      status: makerWake.ok ? "woken" : "wake_failed",
+      ...makerWake,
+    };
+  }
+
+  return {
+    revision: saved.body.revision,
+    ...extra,
+    ...(makerWake ? { makerWake } : {}),
+  };
+}
+
 async function callTool(name, args, request) {
   if (name === "read_primer") return { text: primerBody() };
   if (name === "poi_capabilities") {
@@ -1117,8 +1674,16 @@ async function callTool(name, args, request) {
     };
   }
 
-  const auth = tokenFrom(request, args);
-  if (!auth) return { error: "auth_required" };
+  const gate = tokenFrom(request, args);
+  if (!gate) return { error: "auth_required" };
+  // World / mission tools need household API audience; ChatGPT OAuth alone is not enough.
+  const auth = worldTokenFrom(request, args);
+  if (!auth) {
+    return {
+      error: "auth_required",
+      hint: "Set ABBIES_WORLD_TOKEN on Studio (Studio → Copy MCP token), or pass a household-aud Bearer.",
+    };
+  }
 
   if (name === "prompt_inspire_scene") return inspire(args);
 
@@ -1136,7 +1701,88 @@ async function callTool(name, args, request) {
     return { projects: listAssetProjects({ limit: args.limit }) };
   }
   if (name === "asset_job_create") {
-    return createAssetJob(args, { openaiKey: process.env.OPENAI_API_KEY || "" });
+    const job = await createAssetJob(args, { openaiKey: process.env.OPENAI_API_KEY || "" });
+    if (job?.error) return job;
+
+    const missionId = String(args.missionId || "").trim();
+    // Real path: registered art → Mission proof on household WORLD (game server).
+    if (missionId && job.status === "needs_review") {
+      return {
+        ...job,
+        missionId,
+        durable: "creative.missionOs",
+        proofAttached: false,
+        hint:
+          "Sanity failed (subject/framing). Do not Board as final. Regenerate with clearer framing, or human-override after looking at plate.",
+        reviewUrl: `${REVIEW_BASE}?semantic=${encodeURIComponent(job.semanticId)}`,
+      };
+    }
+    if (missionId && (job.status === "registered" || job.status === "bound")) {
+      const plateUrl = `${PLATE_BASE}?semantic=${encodeURIComponent(job.semanticId)}`;
+      const saved = await mutate(auth, (doc) => {
+        hydrateFromWorld(doc);
+        const mission = getMissionFromDoc(doc, missionId);
+        if (!mission) {
+          doc.__mcp = { error: "mission_missing", missionId, job };
+          doc.__abort = true;
+          return doc;
+        }
+        const req = ensureArtRequirement(mission, {
+          requirementId: args.requirementId,
+          semanticId: job.semanticId,
+          mustBecomeTrue: `Art registered as ${job.semanticId}`,
+        });
+        if (!req.links) req.links = {};
+        req.links.assetJobIds = [...(req.links.assetJobIds || []), job.id];
+        const attached = attachProof(mission, {
+          requirementId: req.id,
+          kind: "art_candidates",
+          candidates: [
+            {
+              index: 1,
+              label: "Candidate 1",
+              url: plateUrl,
+              jobId: job.id,
+              semanticId: job.semanticId,
+              registryKey: job.registryKey,
+            },
+          ],
+        });
+        if (attached.error) {
+          doc.__mcp = { ...attached, job };
+          doc.__abort = true;
+          return doc;
+        }
+        upsertMissionOnDoc(doc, attached.mission);
+        doc.__mcp = {
+          job,
+          durable: "creative.missionOs",
+          origin: ORIGIN,
+          proof: attached.proof,
+          deck: deckFromMission(attached.mission, { proofId: attached.proof.id }),
+          reviewUrl: `${REVIEW_BASE}?missionId=${encodeURIComponent(missionId)}`,
+          describe: describeMission(attached.mission),
+        };
+        return doc;
+      });
+      if (saved.status === 409) return { error: "revision_conflict", body: saved.body, job };
+      if (saved.status !== 200) {
+        return { error: "world_save_failed", status: saved.status, body: saved.body, job };
+      }
+      const extra = saved.body.__mcp;
+      if (saved.body.__mcp) delete saved.body.__mcp;
+      if (extra?.error) return extra;
+      return { revision: saved.body.revision, ...extra };
+    }
+
+    // Without missionId: registry-only (still game-server bytes). Caller must mission_attach_proof.
+    return {
+      ...job,
+      hint: missionId
+        ? null
+        : "Pass missionId to attach a proof on the household world. Review: review.html?missionId=…",
+      reviewUrl: null,
+    };
   }
   if (name === "asset_job_list") {
     return { jobs: listAssetJobs({ projectId: args.projectId, limit: args.limit }) };
@@ -1152,13 +1798,70 @@ async function callTool(name, args, request) {
     return completeAssetJob(args.jobId, { stagingUrl: args.stagingUrl });
   }
 
+  if (name === "midjourney_fill") {
+    const prompt = String(args.prompt || "").trim();
+    if (!prompt) return { error: "prompt_required" };
+    let job = null;
+    if (args.semanticId) {
+      job = await createAssetJob(
+        {
+          semanticId: args.semanticId,
+          brief: args.brief || prompt.slice(0, 240),
+          generate: false,
+        },
+        { openaiKey: "" }
+      );
+      if (job?.error) return { error: "job_create_failed", job };
+    }
+    const fill = await fetch("https://studio-mock-iota.vercel.app/api/midjourney/fill", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt }),
+    });
+    const text = await fill.text();
+    let payload = null;
+    try {
+      payload = text ? JSON.parse(text) : null;
+    } catch {
+      payload = { ok: false, message: text.slice(0, 300) };
+    }
+    return {
+      fill: payload,
+      job,
+      next: payload?.ok
+        ? "Wait for Midjourney grid, then asset_job_complete with a candidate https URL (jobId from job)."
+        : "Start Mac helper (server.py :8766), set MJ_WORKER_URL on Vercel, Chrome on midjourney.com/imagine.",
+    };
+  }
+
+  if (
+    name === "mission_create" ||
+    name === "mission_get" ||
+    name === "mission_list" ||
+    name === "mission_describe" ||
+    name === "mission_attach_proof" ||
+    name === "mission_approve_proof" ||
+    name === "mission_reject_proof" ||
+    name === "mission_feedback" ||
+    name === "mission_request_minigame"
+  ) {
+    return runMissionTool(name, auth, args);
+  }
+
   if (name === "author_beat") {
     return runAuthorBeat(auth, args);
   }
 
   if (name === "world_get_current") {
     const current = await readWorld(auth);
-    if (current.status !== 200) return { error: "world_unavailable", status: current.status, body: current.body };
+    if (current.status !== 200) {
+      return {
+        error: "world_unavailable",
+        status: current.status,
+        body: current.body,
+        hint: current.hint,
+      };
+    }
     return current.body;
   }
   if (name === "world_list") {
@@ -1209,7 +1912,14 @@ async function callTool(name, args, request) {
 
   if (name === "world_describe" || name === "world_lint" || name === "session_get" || name === "vars_get") {
     const current = await readWorld(auth);
-    if (current.status !== 200) return { error: "world_unavailable", status: current.status };
+    if (current.status !== 200) {
+    return {
+      error: "world_unavailable",
+      status: current.status,
+      body: current.body,
+      hint: current.hint,
+    };
+  }
     if (name === "world_describe") return describe(current.body);
     if (name === "world_lint") return { revision: current.body.revision, notes: lint(current.body) };
     if (name === "session_get") return ensureCreative(structuredClone(current.body)).live;

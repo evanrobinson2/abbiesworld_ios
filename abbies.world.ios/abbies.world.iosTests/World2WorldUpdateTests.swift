@@ -199,12 +199,13 @@ final class World2WorldUpdateTests: XCTestCase {
             ),
             source: .launchPull
         )
-        XCTAssertNotNil(World2WorldSync.shared.whatsNew)
-        World2WorldSync.shared.acknowledgeWorldNotices()
+        XCTAssertNotNil(World2WorldSync.shared.liveUpdateToast)
+        World2WorldSync.shared.clearLiveUpdateToast()
+        XCTAssertNil(World2WorldSync.shared.liveUpdateToast)
         XCTAssertNil(World2WorldSync.shared.whatsNew)
         XCTAssertNil(World2WorldSync.shared.pendingOffer)
 
-        // Re-applying the same revision must not resurrect the sheet.
+        // Re-applying the same revision must not resurrect the toast.
         World2WorldSync.shared.apply(
             World2WorldDocument(
                 schemaVersion: 1,
@@ -220,6 +221,7 @@ final class World2WorldUpdateTests: XCTestCase {
             ),
             source: .launchPull
         )
+        XCTAssertNil(World2WorldSync.shared.liveUpdateToast)
         XCTAssertNil(World2WorldSync.shared.whatsNew)
         World2WorldSync.shared.resetForTests()
     }

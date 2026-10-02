@@ -19,8 +19,6 @@ struct World2RootView: View {
     @ObservedObject private var inventCook = World2SceneDecorationInventService.shared
     @ObservedObject private var worldSync = World2WorldSync.shared
     @Environment(\.scenePhase) private var scenePhase
-    /// Local latch so Accept disappears even if sync republishes the same notice.
-    @State private var worldNoticesAccepted = false
 
     var body: some View {
         ZStack(alignment: .topTrailing) {
@@ -39,10 +37,6 @@ struct World2RootView: View {
                 HouseholdProfileSelectView(auth: auth) { playerId in
                     viewModel.selectPlayer(playerId)
                 }
-                .allowsHitTesting(
-                    worldNoticesAccepted
-                        || (worldSync.whatsNew == nil && worldSync.pendingOffer == nil)
-                )
 
             case .homeWorld:
                 WorldMapView(viewModel: viewModel)
@@ -193,6 +187,28 @@ struct World2RootView: View {
                     onExit: viewModel.exitPOI,
                     onAwarded: { _ in }
                 )
+
+            case .moonGuidance:
+                MoonGuidanceView(
+                    onExit: viewModel.exitPOI,
+                    onLanded: {
+                        viewModel.unlockMoonBase(reason: "moon_guidance_landed")
+                        viewModel.enterUnlockedMoonBase(reason: "moon_guidance_landed")
+                    }
+                )
+
+            case .moonLaunchCheck:
+                MoonLaunchCheckView(
+                    onExit: viewModel.exitPOI,
+                    onReadyForGuidance: {
+                        viewModel.enterMoonGuidanceFromLaunchCheck(reason: "launch_check_ready")
+                    }
+                )
+
+            case .moonBase:
+                MoonBaseArrivalView(onExit: {
+                    viewModel.switchWorld(to: .home)
+                })
 
             case .marbleVoyage:
                 MarbleVoyageHostView(
@@ -410,39 +426,11 @@ struct World2RootView: View {
                 .zIndex(40)
             }
         }
-        // Above chrome overlays so Accept is never under the menu / sticks / rail.
-        .overlay {
-            let showNotices = !worldNoticesAccepted
-                && !worldSync.noticesSuppressed
-                && viewModel.currentScreen != .loading
-            if showNotices, let offer = worldSync.pendingOffer {
-                World2WorldUpdateAcceptCard(
-                    summary: offer.summary,
-                    onAccept: {
-                        worldNoticesAccepted = true
-                        viewModel.acceptPendingWorldUpdate()
-                    }
-                )
-            } else if showNotices, let news = worldSync.whatsNew {
-                World2WorldUpdateAcceptCard(
-                    summary: news,
-                    onAccept: {
-                        worldNoticesAccepted = true
-                        viewModel.dismissWorldWhatsNew()
-                    }
-                )
-            }
-        }
-        .onChange(of: worldSync.whatsNew?.toRevision) { _, newValue in
-            // A genuinely newer notice may show again; same revision stays dismissed.
-            if let newValue, newValue > (UserDefaults.standard.integer(forKey: "world2.world.lastAnnouncedRevision")) {
-                worldNoticesAccepted = false
-            }
-        }
-        .onChange(of: worldSync.pendingOffer?.document.revision) { _, newValue in
-            if let newValue, newValue > worldSync.revision {
-                worldNoticesAccepted = false
-            }
+        // Above chrome overlays — live world updates toast via viewModel; Accept card retired.
+        .onChange(of: worldSync.liveUpdateToast) { _, message in
+            guard let message, !message.isEmpty else { return }
+            viewModel.showToast(message)
+            worldSync.clearLiveUpdateToast()
         }
         .fullScreenCover(isPresented: $showingMinimap) {
             World2MinimapScreen(
@@ -557,7 +545,7 @@ struct World2RootView: View {
     private var showsPlayerMenu: Bool {
         if anywhereDecorating || viewModel.isDecorateModeActive { return false }
         switch viewModel.currentScreen {
-        case .loading, .playerSelect, .plink, .marbleVoyage, .worldSwitcher, .worldBookUnlock:
+        case .loading, .playerSelect, .plink, .marbleVoyage, .moonGuidance, .moonLaunchCheck, .moonBase, .worldSwitcher, .worldBookUnlock:
             return false
         default:
             return viewModel.currentPlayerId != nil
@@ -569,7 +557,7 @@ struct World2RootView: View {
         // Decorate mode owns the chrome — no utility rail competing with the drawer.
         if anywhereDecorating || viewModel.isDecorateModeActive { return false }
         switch viewModel.currentScreen {
-        case .plink, .pegMonastery, .marbleVoyage, .worldSwitcher, .worldBookUnlock, .loading, .playerSelect:
+        case .plink, .pegMonastery, .marbleVoyage, .moonGuidance, .moonLaunchCheck, .moonBase, .worldSwitcher, .worldBookUnlock, .loading, .playerSelect:
             return false
         case .fallingTargets:
             return false
@@ -1128,7 +1116,7 @@ private extension World2Screen {
              .characterStudio, .figurineExplorer, .sceneBuilder, .worldTeleporter,
              .worldSwitcher, .worldBookUnlock,
              .whizbang, .planningDept, .plink, .pegMonastery, .marbleVoyage, .rooms,
-             .sceneCreator, .beacon, .daddyWelcome:
+             .sceneCreator, .beacon, .daddyWelcome, .moonGuidance, .moonLaunchCheck, .moonBase:
             return false
         case .homeWorld, .blankSlate:
             return true

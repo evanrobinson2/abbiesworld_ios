@@ -22,6 +22,8 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     case peglinEdition = "world.peglinEdition"
     /// Marble Voyage — unlockable play world (gated until the Home puzzle is solved).
     case marbleVoyage = "world.marbleVoyage"
+    /// Abby & Daddy Moon Base — unlocks after a successful rocket landing.
+    case moonBase = "world.moonBase"
     
     var id: String { rawValue }
     
@@ -37,6 +39,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .evan: return "Daddy's Citadel"
         case .peglinEdition: return "Peglin Edition"
         case .marbleVoyage: return "Marble Voyage"
+        case .moonBase: return "Moon Base"
         }
     }
     
@@ -52,6 +55,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .evan: return "A glowing white citadel on the mountain, looking out over the water"
         case .peglinEdition: return "Crash World → Bramble → Fox → Stag → Forgotten Realm"
         case .marbleVoyage: return "Climb, fight, and voyage — unlocks from Abbie's World"
+        case .moonBase: return "Land the pink rocket and visit Abby & Daddy's Moon Base"
         }
     }
     
@@ -67,6 +71,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         case .evan: return "Daddy's Base"
         case .peglinEdition: return "Peglin Edition"
         case .marbleVoyage: return "Marble Voyage"
+        case .moonBase: return "Moon Base"
         }
     }
 
@@ -75,6 +80,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .blankSlate: return World2SceneDefinition.blankSlateSceneID
         case .peglinEdition, .marbleVoyage: return PeglinEdition.crashLandSceneID
+        case .moonBase: return "scene.moonBase"
         default: return rawValue
         }
     }
@@ -82,7 +88,7 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
     /// Worlds that require an explicit unlock before the player can enter.
     var requiresUnlock: Bool {
         switch self {
-        case .marbleVoyage: return true
+        case .marbleVoyage, .moonBase: return true
         default: return false
         }
     }
@@ -92,6 +98,8 @@ enum WorldId: String, Codable, CaseIterable, Identifiable {
         switch self {
         case .marbleVoyage:
             return "Locked — find the messy book in Abbie's Cozy Nook and finish the puzzle."
+        case .moonBase:
+            return "Locked — tap the pink rocket on Home and land on the Moon."
         default:
             return nil
         }
@@ -175,6 +183,7 @@ struct World2SwitcherEntry: Identifiable, Equatable {
     enum Kind: Equatable {
         case serverDocument
         case marbleVoyage
+        case moonBase
     }
 
     var id: String

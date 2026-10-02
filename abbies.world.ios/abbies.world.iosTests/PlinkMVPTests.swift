@@ -5,6 +5,8 @@ final class PlinkMVPTests: XCTestCase {
     func testPlinkRouteResolvesFromWorldBehavior() {
         XCTAssertEqual(World2POIRoute.resolved(from: "plink"), .plink)
         XCTAssertEqual(World2POIRoute.plink.minigameConfigurationID, "plink")
+        XCTAssertEqual(World2POIRoute.resolved(from: "moonGuidance"), .moonGuidance)
+        XCTAssertEqual(World2POIRoute.resolved(from: "moonBase"), .moonBase)
     }
 
     func testRemotePlinkPlaceBecomesPlayableArchetype() {

@@ -74,6 +74,7 @@ Rules:
 - Prefer author_beat over freeform scene/place edits.
 - POIs are a picture + an existing behavior (or travel:<sceneId>). Do not invent new screens, dialogue, or puzzles.
 - Durable art uses semantic ids (map.*, poi.*.exterior|interior). Midjourney https URLs are staging only — create an asset job, paste the URL via asset_job_complete, then asset_bind.
+- Missions survive chat death: mission_create / mission_describe. Use mission_feedback for taste/direction; mission_approve_proof / mission_reject_proof for Board/Dump.
 - Place x,y between 0 and 1 (roughly 0.12–0.88). One scene plate at a time on the iPad.
 - Use vars_apply for counters; do not do the math yourself.
 - Never drop players. Do not world_create with confirmReplace unless I say so.

@@ -199,6 +199,8 @@ final class World2WorldSync: ObservableObject {
     @Published private(set) var documentGeneration = 0
     @Published private(set) var pendingOffer: World2WorldUpdateOffer?
     @Published private(set) var whatsNew: World2WorldUpdateSummary?
+    /// Kid-facing toast when a remote revision auto-applies (no Accept card).
+    @Published private(set) var liveUpdateToast: String?
     @Published private(set) var unseenIDs: Set<String> = []
     @Published private(set) var noticesSuppressed = false
     /// Household world list from `GET /api/v1/worlds`.
@@ -470,10 +472,9 @@ final class World2WorldSync: ObservableObject {
             } else if document.revision > lastAnnouncedRevision {
                 let summary = World2WorldUpdateSummary.diff(from: previous, to: playableSnapshot())
                 rememberUnseen(summary.unseenIDs)
+                lastAnnouncedRevision = document.revision
                 if !noticesSuppressed {
-                    whatsNew = summary
-                } else {
-                    lastAnnouncedRevision = document.revision
+                    liveUpdateToast = summary.headline
                 }
             }
         }
@@ -689,22 +690,25 @@ final class World2WorldSync: ObservableObject {
             from: playableSnapshot(),
             to: World2PlayableSnapshot(document: remote)
         )
-        if noticesSuppressed {
-            apply(remote, source: .acceptedOffer)
-            rememberUnseen(summary.unseenIDs)
-            lastAnnouncedRevision = remote.revision
-            World2Diagnostics.log(
-                "world_update_applied_quietly",
-                ["revision": String(remote.revision)]
-            )
-            return
+        // Auto-apply in place — toast only, no Accept / restart.
+        apply(remote, source: .acceptedOffer)
+        rememberUnseen(summary.unseenIDs)
+        lastAnnouncedRevision = remote.revision
+        if !noticesSuppressed {
+            liveUpdateToast = summary.headline
         }
-        pendingOffer = World2WorldUpdateOffer(document: remote, summary: summary)
         World2Diagnostics.log(
-            "world_update_offered",
-            ["revision": String(remote.revision), "from": String(revision)]
+            "world_update_applied_quietly",
+            [
+                "revision": String(remote.revision),
+                "toast": noticesSuppressed ? "suppressed" : summary.headline,
+            ]
         )
         Task { await World2NewBadgeArtwork.ensure() }
+    }
+
+    func clearLiveUpdateToast() {
+        liveUpdateToast = nil
     }
 
     func resetForTests() {
@@ -721,6 +725,7 @@ final class World2WorldSync: ObservableObject {
         documentGeneration = 0
         pendingOffer = nil
         whatsNew = nil
+        liveUpdateToast = nil
         unseenIDs = []
         noticesSuppressed = false
         announcedRevisionForTests = 0

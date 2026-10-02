@@ -26,6 +26,12 @@ enum World2Screen: Equatable {
     case plink
     /// Peg Monastery — math challenge for Plink power-ups.
     case pegMonastery
+    /// Moon Base rocket landing approach.
+    case moonGuidance
+    /// Pink rocket cockpit launch-check memory game.
+    case moonLaunchCheck
+    /// Moon Base arrival after landing.
+    case moonBase
     /// FTL-style Marble Voyage — branching map + Plink fights, HP only from heals.
     case marbleVoyage
     /// Treehouse world-entry book: cinematic + four jigsaw pages.
@@ -1087,6 +1093,16 @@ final class World2ViewModel: ObservableObject {
             setScreen(.plink, reason: "poi_entered")
         case .pegMonastery:
             setScreen(.pegMonastery, reason: "poi_entered")
+        case .moonGuidance:
+            setScreen(.moonGuidance, reason: "poi_entered")
+        case .moonLaunchCheck:
+            setScreen(.moonLaunchCheck, reason: "poi_entered")
+        case .moonBase:
+            guard isMoonBaseUnlocked else {
+                showToast(WorldId.moonBase.unlockHint ?? "Moon Base is locked.")
+                return
+            }
+            setScreen(.moonBase, reason: "poi_entered")
         case .travel(let sceneID):
             travelToDocumentScene(sceneID)
         case .rooms:
@@ -1131,10 +1147,40 @@ final class World2ViewModel: ObservableObject {
         playerService.currentPlayer?.progression.unlockedWorlds.contains(.marbleVoyage) == true
     }
 
+    var isMoonBaseUnlocked: Bool {
+        playerService.currentPlayer?.progression.unlockedWorlds.contains(.moonBase) == true
+    }
+
     /// Permanent unlock after the Home puzzle (or a debug grant).
     func unlockMarbleVoyage(reason: String = "puzzle") {
         playerService.unlockWorld(.marbleVoyage)
         World2Diagnostics.log("marble_voyage_unlocked", ["reason": reason])
+    }
+
+    /// Successful Moon landing unlocks Moon Base for the current player.
+    func unlockMoonBase(reason: String = "moon_guidance_landed") {
+        playerService.unlockWorld(.moonBase)
+        World2Diagnostics.log("moon_base_unlocked", ["reason": reason])
+        showToast("Moon Base unlocked!")
+    }
+
+    func enterUnlockedMoonBase(reason: String) {
+        guard isMoonBaseUnlocked else {
+            showToast(WorldId.moonBase.unlockHint ?? "Moon Base is locked.")
+            return
+        }
+        playerService.setCurrentWorld(.moonBase)
+        if let world = worlds[.moonBase] {
+            currentWorld = world
+        }
+        setScreen(.moonBase, reason: reason)
+        World2Diagnostics.log("moon_base_entered", ["reason": reason])
+    }
+
+    /// Launch-check chapter handoff → existing lander (no world unlock yet).
+    func enterMoonGuidanceFromLaunchCheck(reason: String) {
+        setScreen(.moonGuidance, reason: reason)
+        World2Diagnostics.log("moon_guidance_from_launch_check", ["reason": reason])
     }
 
     /// After unlock (book or switcher): focus server world when present, then open Voyage.
@@ -1192,7 +1238,7 @@ final class World2ViewModel: ObservableObject {
                         id: world.id,
                         name: world.name,
                         summary: known?.description ?? "Household world",
-                        kind: known == .marbleVoyage ? .marbleVoyage : .serverDocument,
+                        kind: known == .marbleVoyage ? .marbleVoyage : (known == .moonBase ? .moonBase : .serverDocument),
                         isCurrent: world.id == focused || world.isCurrent,
                         isUnlocked: unlocked,
                         unlockHint: unlocked ? nil : known?.unlockHint,
@@ -1202,16 +1248,23 @@ final class World2ViewModel: ObservableObject {
             }
         } else {
             // Catalog play: show home always, plus every unlockable world (locked or not).
-            let catalog: [WorldId] = [.home, .marbleVoyage]
+            let catalog: [WorldId] = [.home, .marbleVoyage, .moonBase]
             for worldId in catalog {
                 guard let world = worlds[worldId] else { continue }
                 let unlocked = isWorldUnlocked(worldId)
+                let kind: World2SwitcherEntry.Kind = {
+                    switch worldId {
+                    case .marbleVoyage: return .marbleVoyage
+                    case .moonBase: return .moonBase
+                    default: return .serverDocument
+                    }
+                }()
                 appendEntry(
                     World2SwitcherEntry(
                         id: worldId.rawValue,
                         name: world.name,
                         summary: world.description,
-                        kind: worldId == .marbleVoyage ? .marbleVoyage : .serverDocument,
+                        kind: kind,
                         isCurrent: currentWorld?.id == worldId,
                         isUnlocked: unlocked,
                         unlockHint: unlocked ? nil : worldId.unlockHint,
@@ -1227,7 +1280,13 @@ final class World2ViewModel: ObservableObject {
                         id: worldId.rawValue,
                         name: world.name,
                         summary: world.description,
-                        kind: worldId == .marbleVoyage ? .marbleVoyage : .serverDocument,
+                        kind: {
+                            switch worldId {
+                            case .marbleVoyage: return .marbleVoyage
+                            case .moonBase: return .moonBase
+                            default: return .serverDocument
+                            }
+                        }(),
                         isCurrent: currentWorld?.id == worldId,
                         isUnlocked: true,
                         unlockHint: nil,
@@ -1249,6 +1308,22 @@ final class World2ViewModel: ObservableObject {
                     isCurrent: currentScreen == .marbleVoyage || currentScreen == .plink,
                     isUnlocked: unlocked,
                     unlockHint: unlocked ? nil : WorldId.marbleVoyage.unlockHint,
+                    revision: nil
+                )
+            )
+        }
+
+        if !seen.contains(WorldId.moonBase.rawValue) {
+            let unlocked = isMoonBaseUnlocked
+            appendEntry(
+                World2SwitcherEntry(
+                    id: WorldId.moonBase.rawValue,
+                    name: "Moon Base",
+                    summary: WorldId.moonBase.description,
+                    kind: .moonBase,
+                    isCurrent: currentScreen == .moonBase || currentScreen == .moonGuidance || currentScreen == .moonLaunchCheck,
+                    isUnlocked: unlocked,
+                    unlockHint: unlocked ? nil : WorldId.moonBase.unlockHint,
                     revision: nil
                 )
             )
@@ -1292,6 +1367,12 @@ final class World2ViewModel: ObservableObject {
                 return
             }
             enterUnlockedMarbleVoyage(reason: "world_switcher_voyage")
+        case .moonBase:
+            guard isMoonBaseUnlocked else {
+                showToast(WorldId.moonBase.unlockHint ?? "Moon Base is locked.")
+                return
+            }
+            enterUnlockedMoonBase(reason: "world_switcher_moon_base")
         case .serverDocument:
             if World2WorldSync.shared.usesServerDocument {
                 Task {
@@ -2175,12 +2256,16 @@ final class World2ViewModel: ObservableObject {
             songID = "plink_cheerful_khorovod"
         case .pegMonastery:
             songID = World2POIRegistry.peglinPegMonastery.musicTrackID
+        case .moonGuidance, .moonLaunchCheck, .moonBase:
+            songID = "music.home.light"
         case .marbleVoyage:
             songID = "plink_electronic_folk_dance"
         case .worldBookUnlock, .worldTeleporter, .worldSwitcher:
             songID = "world2_cliffside_morning"
         case .daddyWelcome:
             songID = World2POIRegistry.treehouse(for: .evan).musicTrackID
+        case .rooms:
+            songID = "world2_cliffside_morning"
         }
         World2MusicService.shared.stop()
         let resolved = resolvedSongID(songID, screen: screen)
@@ -2231,6 +2316,7 @@ final class World2ViewModel: ObservableObject {
         case .artGarden: return "world2_joyful_bounce"
         case .evan: return "world2_glassy_bells"
         case .peglinEdition, .marbleVoyage: return "plink_abbies_world"
+        case .moonBase: return "world2_abbies_world"
         case .adventure: return "world2_joyful_bounce"
         }
     }
@@ -2363,6 +2449,20 @@ final class World2ViewModel: ObservableObject {
                 mood: "adventurous"
             )
         )
+        let moonBase = World(
+            id: .moonBase,
+            name: "Moon Base",
+            description: "Land the pink rocket and visit Abby & Daddy's Moon Base",
+            backgroundAsset: "map.moonBase.exterior",
+            lightMusicTrack: "music.home.light",
+            intenseMusicTrack: "music.home.intense",
+            adjacentWorlds: [.home],
+            ambiance: .init(
+                primaryColor: "#1B3A4B",
+                secondaryColor: "#7FDBFF",
+                mood: "warm and adventurous"
+            )
+        )
         worlds = [
             .home: home,
             .work: work,
@@ -2373,6 +2473,7 @@ final class World2ViewModel: ObservableObject {
             .evan: daddyCitadel,
             .peglinEdition: peglinEdition,
             .marbleVoyage: marbleVoyage,
+            .moonBase: moonBase,
         ]
         currentWorld = PeglinEdition.isDefaultDestination ? peglinEdition : home
     }
@@ -2436,6 +2537,9 @@ extension World2Screen {
         case .planningDept: return "pd"
         case .plink: return "pk"
         case .pegMonastery: return "pm"
+        case .moonGuidance: return "mg"
+        case .moonLaunchCheck: return "mlc"
+        case .moonBase: return "mb"
         case .marbleVoyage: return "mv"
         case .worldBookUnlock: return "wb"
         case .sceneCreator: return "sc"
@@ -2486,6 +2590,9 @@ extension World2Screen {
         case "pd": return .planningDept
         case "pk": return .plink
         case "pm": return .pegMonastery
+        case "mg": return .moonGuidance
+        case "mlc": return .moonLaunchCheck
+        case "mb": return .moonBase
         case "mv": return .marbleVoyage
         case "wb": return .worldBookUnlock
         case "sc":
@@ -2601,6 +2708,9 @@ extension World2Screen {
         case .planningDept: return "planning_dept"
         case .plink: return "plink"
         case .pegMonastery: return "peg_monastery"
+        case .moonGuidance: return "moon_guidance"
+        case .moonLaunchCheck: return "moon_launch_check"
+        case .moonBase: return "moon_base"
         case .marbleVoyage: return "marble_voyage"
         case .worldBookUnlock: return "world_book_unlock"
         case .sceneCreator(let instanceID): return "scene_creator:\(instanceID)"

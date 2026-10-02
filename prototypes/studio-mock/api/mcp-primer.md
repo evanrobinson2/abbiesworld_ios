@@ -23,6 +23,21 @@ You are not a chatbot bolted on the side. You are a **full editor** of the world
 
 **Child device never runs raw model text.** You write structured JSON; the game validates and renders.
 
+### Mission OS (durable intent)
+Long-lived creative intent lives as a **Mission** on the household world (`creative.missionOs`), not in chat history.
+
+| Tool | Use |
+| --- | --- |
+| `mission_create` | Narrative → Mission + inferred plan (no art spend) |
+| `mission_describe` | Resume after chat death — blockers, awaiting Evan, **eng auto-dispatch** |
+| `mission_get` / `mission_list` | Read Mission JSON |
+| `mission_request_minigame` | Tight eng design → wake builder when configured; else **saved, blocked: builder not configured** |
+| `mission_attach_proof` | Stub/real proof gallery on a requirement |
+| `mission_approve_proof` | Approve by 1-based candidate index (“Rocket 3”) |
+| `mission_feedback` | Durable taste/direction notes (not Board/Dump) |
+
+Do **not** declare playable from workers. See `missions/README.md` and `docs/architecture/MISSION_OS.md`.
+
 ---
 
 ## 2. Full editor = World API
@@ -67,7 +82,7 @@ Until multi-world ships, Zeus authors only `/current` and treats “new world”
 ```
 playerHome | cardFactory | furnitureStore | assetWorkbench | creatureLab
 placeFactory | threeBearsHouse | characterStudio | figurineExplorer
-sceneBuilder | whizbang | planningDept | rooms | plink | pegMonastery
+sceneBuilder | whizbang | planningDept | rooms | plink | pegMonastery | moonGuidance | moonLaunchCheck | moonBase
 fallingTargets:<configurationID>
 travel:<sceneId>
 decoration   (Studio decoration child; not a full route)

@@ -147,6 +147,7 @@ struct World2WorldSwitcherView: View {
         if !entry.isUnlocked { return "lock.fill" }
         switch entry.kind {
         case .marbleVoyage: return "circle.grid.cross.fill"
+        case .moonBase: return "airplane"
         case .serverDocument:
             if entry.id.contains("home") { return "house.fill" }
             return "globe.americas.fill"

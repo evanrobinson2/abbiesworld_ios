@@ -1,0 +1,8 @@
+{
+  "images": [
+    { "filename": "world2_moonBase_rocket_exterior-41c436f7a8d1.png", "idiom": "universal", "scale": "1x" },
+    { "idiom": "universal", "scale": "2x" },
+    { "idiom": "universal", "scale": "3x" }
+  ],
+  "info": { "author": "xcode", "version": 1 }
+}

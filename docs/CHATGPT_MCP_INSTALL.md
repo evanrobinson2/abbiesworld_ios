@@ -19,7 +19,9 @@ Remote MCP (Streamable HTTP). Same server for ChatGPT developer mode and Cursor 
 | Continue checkbox | check it |
 
 4. Create → ChatGPT runs `oauth_config` against our MCP, then Auth0 login.  
-5. After connect, tools use the OAuth Bearer automatically (audience = MCP URL). No paste-token needed for normal use.
+5. After connect, tools use the OAuth Bearer automatically (audience = MCP URL). No paste-token needed for **connector** auth.
+
+**World / Mission tools need a second token:** the game server only accepts Auth0 audience `https://api.abbies.world`. Studio bridges ChatGPT → world using the Vercel secret `ABBIES_WORLD_TOKEN` (Studio → **Copy MCP token** → set on `studio-mock` Production). If `world_describe` / `mission_*` return `401 world_unavailable`, refresh that secret and redeploy (or wait for next deploy after env update).
 
 ### What must be live for create to succeed
 
@@ -35,7 +37,7 @@ Auth0 side (already provisioned):
 - App: **ChatGPT MCP Abbie's World** (`7AAx3t0fgolUT125oBNGICidhAW0rVY9`)
 - Callbacks include `https://chatgpt.com/connector_platform_oauth_redirect` and `https://chatgpt.com/connector/oauth/*` (ChatGPT’s per-connector callback IDs)
 
-Cursor still uses `/api/mcp` via `.cursor/mcp.json` (same server) with `ABBIES_WORLD_TOKEN` or OAuth Bearer.
+Cursor still uses `/api/mcp` via `.cursor/mcp.json` (same server) with `ABBIES_WORLD_TOKEN` or household Bearer.
 
 ## Cursor (this repo)
 
@@ -65,6 +67,7 @@ pegMonastery is an allowed behavior for the peg monastery POI.
 Call world_describe before edits. Prefer author_beat (dryRun) then confirm for steel-rail edits.
 For new plates use asset_job_create → Midjourney → asset_job_complete → asset_bind (semantic IDs).
 Use vars_apply for counters; do not do the math yourself.
+Missions: mission_create / mission_describe. Leave taste notes with mission_feedback (does not Board/Dump).
 Never drop players. world_create must not replace the world unless I say confirmReplace.
 ```
 

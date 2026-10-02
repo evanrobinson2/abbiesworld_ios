@@ -20,6 +20,9 @@ export const BEHAVIORS = new Set([
   "decoration",
   "plink",
   "pegMonastery",
+  "moonGuidance",
+  "moonLaunchCheck",
+  "moonBase",
 ]);
 
 /** Ops an NL planner may emit. Anything else is rail_rejected. */

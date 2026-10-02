@@ -29,6 +29,8 @@ enum World2POIRegistry {
     static let sceneBuilderID = "poi.sceneBuilder"
     static let whizbangID = "poi.whizbang"
     static let planningDeptID = "poi.planningDept"
+    static let moonRocketID = "poi.moonBase.rocket"
+    static let moonBaseID = "poi.moonBase"
 
     /// Every registered archetype, keyed by id.
     static let archetypes: [String: World2POIArchetype] = {
@@ -55,6 +57,8 @@ enum World2POIRegistry {
         sceneBuilder,
         whizbang,
         planningDept,
+        moonRocket,
+        moonBase,
         peglinWreck,
         peglinPegMonastery,
         peglinBattleClearing,
@@ -422,6 +426,42 @@ enum World2POIRegistry {
             route: .pegMonastery,
             grants: [.gems(upTo: 2)],
             completionMilestone: "peglin.monastery.blessing"
+        )
+    )
+
+    /// Pink rocket on Home — starts Moon Base guidance landing.
+    static let moonRocket = World2POIArchetype(
+        id: moonRocketID,
+        name: "Pink Rocket",
+        kind: .minigame,
+        sizeClass: .medium,
+        exteriorAsset: "poi.moonBase.rocket.exterior",
+        icon: "airplane",
+        lore: "Abbie's chalk-blueprint rocket — ready for a gentle Moon landing.",
+        activityDescription: "Climb aboard and guide the rocket onto the landing pad.",
+        callToAction: "Launch",
+        musicTrackID: "music.home.light",
+        contract: World2POIContract(
+            route: .moonGuidance,
+            completionMilestone: "moonBase.guidance.opened"
+        )
+    )
+
+    /// Moon Base arrival after unlock (also reachable from World Switcher).
+    static let moonBase = World2POIArchetype(
+        id: moonBaseID,
+        name: "Moon Base",
+        kind: .story,
+        sizeClass: .large,
+        exteriorAsset: "map.moonBase.exterior",
+        icon: "building.2.fill",
+        lore: "Abby & Daddy's Moon Base — blueprint walls until the pretty art lands.",
+        activityDescription: "Visit the base after a successful landing.",
+        callToAction: "Enter Moon Base",
+        musicTrackID: "music.home.light",
+        contract: World2POIContract(
+            route: .moonBase,
+            completionMilestone: "moonBase.visited"
         )
     )
 

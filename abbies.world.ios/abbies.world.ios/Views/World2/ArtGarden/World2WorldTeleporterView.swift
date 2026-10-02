@@ -177,6 +177,7 @@ struct World2WorldTeleporterView: View {
         case .artGarden: return "paintpalette.fill"
         case .evan: return "building.2.fill"
         case .peglinEdition, .marbleVoyage: return "circle.grid.cross.fill"
+        case .moonBase: return "airplane"
         case .none:
             if id.contains("spooky") { return "moon.fill" }
             if id.contains("home") { return "house.fill" }

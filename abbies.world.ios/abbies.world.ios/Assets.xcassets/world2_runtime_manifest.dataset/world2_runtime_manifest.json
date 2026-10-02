@@ -344,6 +344,60 @@
       "semanticId": "poi.abbieTreehouse.interior.playroom",
       "sourceSha256": "b0d2b69603d5cebaa494e293e83b85f2cb6e827e8a2f35eddd115d38e755536c",
       "version": "v1-approved"
+    },
+    {
+      "assetCatalogName": "world2_moonBase_rocket_exterior",
+      "assetId": "moon01",
+      "derivativeSha256": "41c436f7a8d100c4bd3966f791c8a5960265e492cafc1166be094d10ed349aac",
+      "filename": "world2_moonBase_rocket_exterior-41c436f7a8d1.png",
+      "semanticId": "poi.moonBase.rocket.exterior",
+      "sourceSha256": "41c436f7a8d100c4bd3966f791c8a5960265e492cafc1166be094d10ed349aac",
+      "version": "v1-blueprint-chalk"
+    },
+    {
+      "assetCatalogName": "world2_moonBase_landing_pad",
+      "assetId": "moon02",
+      "derivativeSha256": "682a528ca0d9a8866a980dfdf58ccc1f62813bb3925d1da7c9f001b22541dd75",
+      "filename": "world2_moonBase_landing_pad-682a528ca0d9.png",
+      "semanticId": "map.moonBase.landingPad",
+      "sourceSha256": "682a528ca0d9a8866a980dfdf58ccc1f62813bb3925d1da7c9f001b22541dd75",
+      "version": "v1-blueprint-chalk"
+    },
+    {
+      "assetCatalogName": "world2_moonBase_map_exterior",
+      "assetId": "moon03",
+      "derivativeSha256": "c0b5630d9fe4beb34e5e052658c5ac6a10caa913da2b030df4b6e443d2a68129",
+      "filename": "world2_moonBase_map_exterior-c0b5630d9fe4.png",
+      "semanticId": "map.moonBase.exterior",
+      "sourceSha256": "c0b5630d9fe4beb34e5e052658c5ac6a10caa913da2b030df4b6e443d2a68129",
+      "version": "v1-blueprint-chalk"
+    },
+    {
+      "assetCatalogName": "world2_moonBase_earth_cockpit",
+      "assetId": "moon04",
+      "derivativeSha256": "f5639cac35142e84aa2f0d88c9bc45f1f26c2eddb6adb807ec2006877ab5f523",
+      "filename": "world2_moonBase_earth_cockpit-f5639cac3514.png",
+      "semanticId": "poi.moonBase.earthCockpit.interior",
+      "sourceSha256": "f5639cac35142e84aa2f0d88c9bc45f1f26c2eddb6adb807ec2006877ab5f523",
+      "version": "v1-blueprint-chalk"
+    },
+    {
+      "assetCatalogName": "world2_moonBase_landing_pad",
+      "assetId": "moon02",
+      "derivativeSha256": "682a528ca0d9a8866a980dfdf58ccc1f62813bb3925d1da7c9f001b22541dd75",
+      "filename": "world2_moonBase_landing_pad-682a528ca0d9.png",
+      "semanticId": "plate.moonBase.landingPad",
+      "sourceSha256": "682a528ca0d9a8866a980dfdf58ccc1f62813bb3925d1da7c9f001b22541dd75",
+      "version": "v1-blueprint-chalk"
+    },
+    {
+      "assetCatalogName": "world2_moonBase_earth_cockpit",
+      "assetId": "moon04",
+      "derivativeSha256": "f5639cac35142e84aa2f0d88c9bc45f1f26c2eddb6adb807ec2006877ab5f523",
+      "filename": "world2_moonBase_earth_cockpit-f5639cac3514.png",
+      "semanticId": "plate.moonBase.earthCockpit",
+      "sourceSha256": "f5639cac35142e84aa2f0d88c9bc45f1f26c2eddb6adb807ec2006877ab5f523",
+      "version": "v1-blueprint-chalk"
     }
   ],
   "generatedAt": "2026-09-13T21:47:36.861070Z",
