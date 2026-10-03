@@ -3,34 +3,39 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <meta name="theme-color" content="#14181f" />
+  <meta name="theme-color" content="#1a1520" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <title>Finger Lemmings</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --ink: #f3ebe0;
-      --muted: rgba(243, 235, 224, 0.62);
-      --ember: #ffb45a;
-      --moss: #7dcea0;
-      --danger: #e07a6a;
-      --panel: rgba(12, 16, 20, 0.55);
-      --line: rgba(243, 235, 224, 0.12);
+      --ink: #f4efe4;
+      --muted: #9a9080;
+      --ember: #ffb24a;
+      --moss: #6fd08a;
+      --danger: #e45a5a;
+      --panel: #120e18;
+      --frame: #3a3148;
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
-    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; image-rendering: pixelated; }
     html, body {
       margin: 0;
       height: 100%;
       background:
-        radial-gradient(900px 500px at 80% 0%, rgba(255, 170, 70, 0.14), transparent 55%),
-        radial-gradient(700px 500px at 0% 100%, rgba(80, 140, 120, 0.12), transparent 50%),
-        linear-gradient(160deg, #10141a, #17140f 60%, #12161c);
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 3px,
+          rgba(255,255,255,0.015) 3px,
+          rgba(255,255,255,0.015) 4px
+        ),
+        linear-gradient(180deg, #1a1520 0%, #241a14 55%, #151018 100%);
       color: var(--ink);
-      font-family: "Manrope", system-ui, sans-serif;
+      font-family: "VT323", monospace;
       overflow: hidden;
       touch-action: none;
       user-select: none;
@@ -40,8 +45,8 @@
       min-height: 100dvh;
       display: grid;
       grid-template-rows: auto 1fr auto;
-      gap: 0.7rem;
-      padding: calc(0.85rem + var(--safe-top)) 1rem calc(0.85rem + var(--safe-bottom));
+      gap: 0.65rem;
+      padding: calc(0.75rem + var(--safe-top)) 0.85rem calc(0.75rem + var(--safe-bottom));
       max-width: 980px;
       margin: 0 auto;
     }
@@ -50,43 +55,44 @@
       justify-content: space-between;
       gap: 1rem;
       align-items: end;
-      animation: rise 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: blink-in 480ms steps(4, end) both;
     }
     .brand {
       margin: 0;
-      font-family: "Fraunces", Georgia, serif;
-      font-size: clamp(1.7rem, 4vw, 2.4rem);
-      letter-spacing: -0.03em;
-      line-height: 0.95;
+      font-family: "Press Start 2P", monospace;
+      font-size: clamp(0.72rem, 2.4vw, 1.05rem);
+      line-height: 1.35;
+      letter-spacing: 0;
+      text-shadow: 3px 3px 0 #000;
     }
     .brand span {
       display: block;
-      font-size: 0.4em;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
+      font-size: 0.55em;
       color: var(--ember);
-      margin-bottom: 0.3rem;
-      font-weight: 600;
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.08em;
     }
     .lede {
       margin: 0;
-      max-width: 15rem;
+      max-width: 14rem;
       text-align: right;
       color: var(--muted);
-      font-size: 0.9rem;
-      line-height: 1.35;
+      font-size: 1.25rem;
+      line-height: 1.15;
     }
     .chamber {
       position: relative;
       min-height: 0;
       display: grid;
       place-items: center;
-      border-radius: 22px;
-      border: 1px solid var(--line);
+      border: 4px solid var(--frame);
       background: var(--panel);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 60px rgba(0,0,0,0.35);
+      box-shadow:
+        inset 0 0 0 2px #000,
+        0 0 0 2px #000,
+        8px 8px 0 rgba(0,0,0,0.45);
       overflow: hidden;
-      animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: blink-in 560ms steps(4, end) both;
     }
     #stage {
       display: block;
@@ -94,35 +100,40 @@
       max-height: 100%;
       cursor: none;
       touch-action: none;
+      image-rendering: pixelated;
+      image-rendering: crisp-edges;
     }
     .hud {
       position: absolute;
-      inset: 12px 12px auto 12px;
+      inset: 8px 8px auto 8px;
       display: flex;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
       pointer-events: none;
     }
     .pill {
-      padding: 0.45rem 0.7rem;
-      border-radius: 999px;
-      background: rgba(8, 10, 14, 0.55);
-      border: 1px solid var(--line);
-      backdrop-filter: blur(10px);
-      font-size: 0.78rem;
-      font-weight: 600;
+      padding: 0.35rem 0.55rem;
+      background: #000;
+      border: 2px solid var(--frame);
+      font-family: "Press Start 2P", monospace;
+      font-size: 0.48rem;
+      line-height: 1.4;
+      color: var(--ink);
+      box-shadow: 2px 2px 0 #000;
     }
     .pill strong { color: var(--moss); }
     .pill .lost { color: var(--danger); }
     #status {
       position: absolute;
-      left: 12px;
-      right: 12px;
-      bottom: 12px;
+      left: 8px;
+      right: 8px;
+      bottom: 8px;
       text-align: center;
-      font-family: "Fraunces", Georgia, serif;
-      font-size: 1.05rem;
-      text-shadow: 0 2px 14px rgba(0,0,0,0.5);
+      font-family: "Press Start 2P", monospace;
+      font-size: clamp(0.42rem, 1.6vw, 0.58rem);
+      line-height: 1.45;
+      color: var(--ember);
+      text-shadow: 2px 2px 0 #000;
       pointer-events: none;
     }
     #banner {
@@ -130,25 +141,31 @@
       inset: 0;
       display: grid;
       place-items: center;
-      background: rgba(8, 10, 14, 0.62);
-      backdrop-filter: blur(8px);
-      padding: 1.5rem;
+      background: rgba(8, 6, 12, 0.78);
+      padding: 1rem;
     }
     #banner[hidden] { display: none; }
     .card {
-      width: min(92vw, 22rem);
+      width: min(92vw, 20rem);
       text-align: center;
-      padding: 1.4rem 1.2rem;
-      border-radius: 18px;
-      border: 1px solid var(--line);
-      background: rgba(20, 24, 30, 0.92);
+      padding: 1.1rem 0.9rem;
+      border: 4px solid var(--frame);
+      background: #1a1520;
+      box-shadow: 6px 6px 0 #000, inset 0 0 0 2px #000;
     }
     .card h2 {
-      margin: 0 0 0.4rem;
-      font-family: "Fraunces", Georgia, serif;
-      font-size: 1.8rem;
+      margin: 0 0 0.55rem;
+      font-family: "Press Start 2P", monospace;
+      font-size: 0.95rem;
+      color: var(--moss);
+      text-shadow: 2px 2px 0 #000;
     }
-    .card p { margin: 0 0 1rem; color: var(--muted); }
+    .card p {
+      margin: 0 0 1rem;
+      color: var(--muted);
+      font-size: 1.35rem;
+      line-height: 1.15;
+    }
     .card .row { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
     footer {
       display: flex;
@@ -156,28 +173,33 @@
       gap: 0.75rem;
       align-items: center;
       flex-wrap: wrap;
-      animation: rise 950ms cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: blink-in 640ms steps(4, end) both;
     }
     button {
-      font: inherit;
-      font-weight: 700;
-      border: 1px solid var(--line);
-      background: rgba(255,255,255,0.04);
+      font-family: "Press Start 2P", monospace;
+      font-size: 0.55rem;
+      border: 3px solid var(--frame);
+      background: #241c2e;
       color: var(--ink);
-      border-radius: 999px;
-      padding: 0.55rem 1rem;
+      padding: 0.65rem 0.85rem;
       cursor: pointer;
+      box-shadow: 3px 3px 0 #000;
     }
     button.primary {
-      background: linear-gradient(120deg, #ffb45a, #ff8f4a);
+      background: var(--ember);
       color: #1a120c;
-      border-color: transparent;
+      border-color: #8a4a10;
     }
-    button:hover { filter: brightness(1.05); }
-    .hint { color: var(--muted); font-size: 0.82rem; }
-    @keyframes rise {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: none; }
+    button:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 #000; }
+    .hint {
+      color: var(--muted);
+      font-size: 1.2rem;
+      max-width: 18rem;
+      line-height: 1.1;
+    }
+    @keyframes blink-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     @media (max-width: 720px) {
       header { flex-direction: column; align-items: start; }
@@ -188,32 +210,32 @@
 <body>
   <div class="shell">
     <header>
-      <h1 class="brand"><span>Abbie’s World</span>Finger Lemmings</h1>
-      <p class="lede">Hold a light with your finger. Lead the little dots home.</p>
+      <h1 class="brand"><span>ABBIE'S WORLD</span>FINGER LEMMINGS</h1>
+      <p class="lede">Hold light with your finger. Lead the pixels home.</p>
     </header>
 
-    <section class="chamber" aria-label="Maze chamber">
+    <section class="chamber" aria-label="Pixel maze">
       <canvas id="stage" width="640" height="320"></canvas>
       <div class="hud">
-        <div class="pill" id="levelName">1. Warm-up</div>
-        <div class="pill">Home <strong id="saved">0</strong>/<span id="need">5</span> · Lost <span class="lost" id="lost">0</span></div>
+        <div class="pill" id="levelName">1. WARM-UP</div>
+        <div class="pill">HOME <strong id="saved">0</strong>/<span id="need">5</span> · LOST <span class="lost" id="lost">0</span></div>
       </div>
-      <div id="status">Touch to shine. Lead them home.</div>
+      <div id="status">TOUCH TO SHINE · LEAD THEM HOME</div>
       <div id="banner" hidden>
         <div class="card">
-          <h2 id="bannerTitle">Safe</h2>
+          <h2 id="bannerTitle">SAFE</h2>
           <p id="bannerBody"></p>
           <div class="row">
-            <button type="button" id="retryBtn">Retry</button>
-            <button type="button" class="primary" id="nextBtn">Next maze</button>
+            <button type="button" id="retryBtn">RETRY</button>
+            <button type="button" class="primary" id="nextBtn">NEXT</button>
           </div>
         </div>
       </div>
     </section>
 
     <footer>
-      <button type="button" id="restart">Restart level</button>
-      <div class="hint">Press and drag — they follow the glow. Avoid the red pits.</div>
+      <button type="button" id="restart">RESTART</button>
+      <div class="hint">Press &amp; drag — they chase the glow. Avoid red pits.</div>
     </footer>
   </div>
   <script type="module" src="./game.js"></script>

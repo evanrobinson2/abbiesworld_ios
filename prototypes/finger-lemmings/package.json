@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
-  "description": "Finger Lemmings — lead glowing dots through a maze with your light.",
+  "description": "Finger Lemmings — pixel-art maze: lead little dots home with your finger light.",
   "scripts": {
     "dev": "npx --yes serve -l 5178 .",
     "start": "npx --yes serve -l 5178 .",

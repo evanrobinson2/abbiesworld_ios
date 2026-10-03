@@ -1,5 +1,6 @@
 /**
- * Finger Lemmings — canvas render + finger light control.
+ * Finger Lemmings — pixel-art render + finger light control.
+ * Limited palette, nearest-neighbor upscale, chunky sprites.
  */
 import {
   createGame,
@@ -23,31 +24,64 @@ const banner = document.getElementById("banner");
 const bannerTitle = document.getElementById("bannerTitle");
 const bannerBody = document.getElementById("bannerBody");
 
+const PX = 4; // logical pixel size inside a TILE (TILE=40 → 10×10 cells)
+const PAL = {
+  void: "#0c0a10",
+  floorA: "#1a1520",
+  floorB: "#17131c",
+  wall: "#3a4658",
+  wallHi: "#5a6a80",
+  wallLo: "#262e3a",
+  hazard: "#4a1010",
+  hazardCore: "#e45a5a",
+  hazardHot: "#ff9a6a",
+  home: "#1a3a28",
+  homeHi: "#6fd08a",
+  homeMark: "#b8f0c8",
+  light: "#fff3c4",
+  lightMid: "#ffb24a",
+  lightDim: "#8a5a20",
+  spawn: "#5a3a18",
+  ink: "#1a120c",
+};
+
 let game = createGame(0);
 let last = performance.now();
 let pointerDown = false;
+let buffer = null;
+let bctx = null;
+
+function ensureBuffer() {
+  const w = game.level.pixelW;
+  const h = game.level.pixelH;
+  if (!buffer || buffer.width !== w || buffer.height !== h) {
+    buffer = document.createElement("canvas");
+    buffer.width = w;
+    buffer.height = h;
+    bctx = buffer.getContext("2d");
+  }
+  return bctx;
+}
 
 function resize() {
   const frame = canvas.parentElement;
-  const scale = Math.min(
-    frame.clientWidth / game.level.pixelW,
-    frame.clientHeight / game.level.pixelH
+  const scale = Math.max(
+    1,
+    Math.floor(
+      Math.min(
+        frame.clientWidth / game.level.pixelW,
+        frame.clientHeight / game.level.pixelH
+      )
+    )
   );
   const cssW = game.level.pixelW * scale;
   const cssH = game.level.pixelH * scale;
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
   canvas.style.width = `${cssW}px`;
   canvas.style.height = `${cssH}px`;
-  canvas.width = Math.round(cssW * dpr);
-  canvas.height = Math.round(cssH * dpr);
-  ctx.setTransform(
-    (cssW * dpr) / game.level.pixelW,
-    0,
-    0,
-    (cssH * dpr) / game.level.pixelH,
-    0,
-    0
-  );
+  canvas.width = cssW;
+  canvas.height = cssH;
+  ctx.imageSmoothingEnabled = false;
+  ensureBuffer();
 }
 
 function worldPoint(clientX, clientY) {
@@ -58,122 +92,177 @@ function worldPoint(clientX, clientY) {
   };
 }
 
-function drawLevel() {
+function px(n) {
+  return Math.floor(n / PX) * PX;
+}
+
+function fillPx(c, x, y, w = PX, h = PX) {
+  c.fillRect(x, y, w, h);
+}
+
+function drawBrick(c, px0, py0) {
+  c.fillStyle = PAL.wall;
+  fillPx(c, px0, py0, TILE, TILE);
+  c.fillStyle = PAL.wallHi;
+  fillPx(c, px0, py0, TILE, PX);
+  fillPx(c, px0, py0, PX, TILE);
+  c.fillStyle = PAL.wallLo;
+  fillPx(c, px0, py0 + TILE - PX, TILE, PX);
+  fillPx(c, px0 + TILE - PX, py0, PX, TILE);
+  // mortar seam
+  c.fillStyle = PAL.wallLo;
+  fillPx(c, px0 + TILE / 2 - PX / 2, py0 + PX * 2, PX, TILE - PX * 4);
+  fillPx(c, px0 + PX * 2, py0 + TILE / 2 - PX / 2, TILE / 2 - PX * 2, PX);
+}
+
+function drawHazard(c, px0, py0) {
+  c.fillStyle = PAL.hazard;
+  fillPx(c, px0, py0, TILE, TILE);
+  const cx = px0 + TILE / 2 - PX * 2;
+  const cy = py0 + TILE / 2 - PX;
+  c.fillStyle = PAL.hazardCore;
+  fillPx(c, cx, cy, PX * 4, PX * 2);
+  fillPx(c, cx + PX, cy - PX, PX * 2, PX * 4);
+  c.fillStyle = PAL.hazardHot;
+  fillPx(c, cx + PX, cy, PX * 2, PX);
+  // blink sparkle
+  if (Math.floor(game.time * 6) % 2 === 0) {
+    c.fillStyle = PAL.light;
+    fillPx(c, cx + PX, cy, PX, PX);
+  }
+}
+
+function drawHome(c) {
+  const gx = px(game.goal.x - TILE / 2);
+  const gy = px(game.goal.y - TILE / 2);
+  const pulse = Math.floor(game.time * 4) % 2 === 0;
+  c.fillStyle = PAL.home;
+  fillPx(c, gx, gy, TILE, TILE);
+  c.fillStyle = pulse ? PAL.homeHi : PAL.homeMark;
+  // door arch (pixel)
+  fillPx(c, gx + PX * 2, gy + PX, TILE - PX * 4, TILE - PX * 2);
+  c.fillStyle = PAL.void;
+  fillPx(c, gx + PX * 3, gy + PX * 2, TILE - PX * 6, TILE - PX * 3);
+  c.fillStyle = PAL.homeMark;
+  // tiny H marker
+  fillPx(c, gx + PX * 3, gy + PX * 3, PX, PX * 3);
+  fillPx(c, gx + TILE - PX * 4, gy + PX * 3, PX, PX * 3);
+  fillPx(c, gx + PX * 4, gy + PX * 4, TILE - PX * 8, PX);
+}
+
+function drawSpawn(c) {
+  const sx = px(game.spawn.x - PX * 2);
+  const sy = px(game.spawn.y - PX * 2);
+  c.fillStyle = PAL.spawn;
+  fillPx(c, sx, sy, PX * 4, PX);
+  fillPx(c, sx + PX, sy - PX, PX * 2, PX * 3);
+}
+
+function drawLevel(c) {
   const { level } = game;
-  // Chamber backdrop
-  const g = ctx.createLinearGradient(0, 0, 0, level.pixelH);
-  g.addColorStop(0, "#14181f");
-  g.addColorStop(1, "#1c1712");
-  ctx.fillStyle = g;
-  ctx.fillRect(0, 0, level.pixelW, level.pixelH);
+  c.fillStyle = PAL.void;
+  c.fillRect(0, 0, level.pixelW, level.pixelH);
 
   for (let y = 0; y < level.h; y++) {
     for (let x = 0; x < level.w; x++) {
       const kind = level.tiles[y][x];
-      const px = x * TILE;
-      const py = y * TILE;
+      const px0 = x * TILE;
+      const py0 = y * TILE;
       if (kind === "wall") {
-        ctx.fillStyle = "#2a3340";
-        ctx.fillRect(px, py, TILE + 0.5, TILE + 0.5);
-        ctx.fillStyle = "rgba(255,220,170,0.05)";
-        ctx.fillRect(px + 3, py + 3, TILE - 6, 4);
+        drawBrick(c, px0, py0);
       } else if (kind === "hazard") {
-        ctx.fillStyle = "#1a0e0c";
-        ctx.fillRect(px, py, TILE, TILE);
-        ctx.fillStyle = "rgba(220, 70, 50, 0.55)";
-        ctx.beginPath();
-        ctx.ellipse(px + TILE / 2, py + TILE / 2, 11, 8, 0, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.fillStyle = "rgba(255, 140, 90, 0.35)";
-        ctx.beginPath();
-        ctx.ellipse(px + TILE / 2, py + TILE / 2 - 1, 5, 3, 0, 0, Math.PI * 2);
-        ctx.fill();
+        drawHazard(c, px0, py0);
       } else {
-        ctx.fillStyle = (x + y) % 2 === 0 ? "rgba(255,255,255,0.015)" : "rgba(0,0,0,0.04)";
-        ctx.fillRect(px, py, TILE, TILE);
+        c.fillStyle = (x + y) % 2 === 0 ? PAL.floorA : PAL.floorB;
+        fillPx(c, px0, py0, TILE, TILE);
       }
     }
   }
 
-  // Goal
-  const pulse = 0.55 + Math.sin(game.time * 3) * 0.2;
-  const gx = game.goal.x;
-  const gy = game.goal.y;
-  const goalGlow = ctx.createRadialGradient(gx, gy, 4, gx, gy, TILE);
-  goalGlow.addColorStop(0, `rgba(120, 220, 160, ${0.45 * pulse})`);
-  goalGlow.addColorStop(1, "rgba(120, 220, 160, 0)");
-  ctx.fillStyle = goalGlow;
-  ctx.beginPath();
-  ctx.arc(gx, gy, TILE, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.strokeStyle = `rgba(160, 240, 190, ${0.7 * pulse})`;
-  ctx.lineWidth = 3;
-  ctx.beginPath();
-  ctx.arc(gx, gy, 14, 0, Math.PI * 2);
-  ctx.stroke();
-  ctx.fillStyle = "#b8f0c8";
-  ctx.font = "700 11px Manrope, sans-serif";
-  ctx.textAlign = "center";
-  ctx.fillText("HOME", gx, gy + 4);
-
-  // Spawn marker
-  ctx.fillStyle = "rgba(255, 190, 110, 0.25)";
-  ctx.beginPath();
-  ctx.arc(game.spawn.x, game.spawn.y, 10, 0, Math.PI * 2);
-  ctx.fill();
+  drawSpawn(c);
+  drawHome(c);
 }
 
-function drawLight() {
+function drawLight(c) {
   const L = game.light;
   if (!L.active) return;
-  const glow = ctx.createRadialGradient(L.x, L.y, 4, L.x, L.y, L.radius);
-  glow.addColorStop(0, "rgba(255, 220, 140, 0.55)");
-  glow.addColorStop(0.35, "rgba(255, 180, 80, 0.18)");
-  glow.addColorStop(1, "rgba(255, 160, 60, 0)");
-  ctx.fillStyle = glow;
-  ctx.beginPath();
-  ctx.arc(L.x, L.y, L.radius, 0, Math.PI * 2);
-  ctx.fill();
 
-  ctx.beginPath();
-  ctx.arc(L.x, L.y, 10, 0, Math.PI * 2);
-  ctx.fillStyle = "#fff3c4";
-  ctx.fill();
-  ctx.strokeStyle = "rgba(255, 236, 180, 0.8)";
-  ctx.lineWidth = 2;
-  ctx.stroke();
+  const lx = px(L.x);
+  const ly = px(L.y);
+  const r = L.radius;
+
+  // Stepped diamond falloff — pixel glow, one scanline per row
+  const bands = [
+    { d: r, color: "rgba(255,178,74,0.12)" },
+    { d: r * 0.62, color: "rgba(255,178,74,0.20)" },
+    { d: r * 0.34, color: "rgba(255,210,120,0.32)" },
+    { d: r * 0.16, color: "rgba(255,243,196,0.48)" },
+  ];
+
+  for (const band of bands) {
+    const half = Math.max(PX * 2, Math.floor(band.d / PX) * PX);
+    c.fillStyle = band.color;
+    for (let dy = -half; dy <= half; dy += PX) {
+      const row = half - Math.abs(dy);
+      c.fillRect(lx - row, ly + dy, row * 2 + PX, PX);
+    }
+  }
+
+  // Core lamp
+  c.fillStyle = PAL.light;
+  fillPx(c, lx - PX, ly - PX * 2, PX * 2, PX * 4);
+  fillPx(c, lx - PX * 2, ly - PX, PX * 4, PX * 2);
+  c.fillStyle = PAL.lightMid;
+  fillPx(c, lx - PX, ly - PX, PX * 2, PX * 2);
 }
 
-function drawDots() {
+function hueToPixel(hue, lit) {
+  // Map soft-ish hues to a tiny fixed palette
+  if (hue < 36) return lit ? "#ffc86a" : "#d4883a";
+  if (hue < 48) return lit ? "#ffe08a" : "#c8a048";
+  return lit ? "#f0d070" : "#b89040";
+}
+
+function drawDotSprite(c, dot) {
+  const x = px(dot.x - PX * 2);
+  const y = px(dot.y - PX * 2);
+  const lit = dot.follow > 0.2;
+  const body = hueToPixel(dot.hue, lit);
+  const alpha = dot.state === "saved" ? 0.3 : 1;
+  c.globalAlpha = alpha;
+
+  // body 4×4 px
+  c.fillStyle = body;
+  fillPx(c, x + PX, y, PX * 2, PX);
+  fillPx(c, x, y + PX, PX * 4, PX * 2);
+  fillPx(c, x + PX, y + PX * 3, PX * 2, PX);
+
+  // eyes
+  if (dot.state === "live") {
+    c.fillStyle = PAL.ink;
+    const look =
+      game.light.active && Math.abs(game.light.x - dot.x) > 2
+        ? game.light.x > dot.x
+          ? 1
+          : -1
+        : 0;
+    fillPx(c, x + PX + look, y + PX, PX, PX);
+    fillPx(c, x + PX * 2 + look, y + PX, PX, PX);
+
+    // follow sparkle
+    if (lit && Math.floor(game.time * 8 + dot.id) % 2 === 0) {
+      c.fillStyle = PAL.light;
+      fillPx(c, x + PX, y - PX, PX, PX);
+    }
+  }
+
+  c.globalAlpha = 1;
+}
+
+function drawDots(c) {
   for (const dot of game.dots) {
     if (dot.state === "lost") continue;
-    const alpha = dot.state === "saved" ? 0.25 : 1;
-    ctx.globalAlpha = alpha;
-
-    if (dot.follow > 0.05 && dot.state === "live") {
-      ctx.beginPath();
-      ctx.arc(dot.x, dot.y, dot.r + 6 * dot.follow, 0, Math.PI * 2);
-      ctx.fillStyle = `hsla(${dot.hue}, 90%, 60%, ${0.2 * dot.follow})`;
-      ctx.fill();
-    }
-
-    ctx.beginPath();
-    ctx.arc(dot.x, dot.y, dot.r, 0, Math.PI * 2);
-    ctx.fillStyle = `hsl(${dot.hue}, 85%, ${55 + dot.follow * 15}%)`;
-    ctx.fill();
-    ctx.strokeStyle = "rgba(255, 245, 220, 0.55)";
-    ctx.lineWidth = 1.5;
-    ctx.stroke();
-
-    // Tiny eyes
-    if (dot.state === "live") {
-      ctx.fillStyle = "#1a120c";
-      ctx.beginPath();
-      ctx.arc(dot.x - 2.2, dot.y - 1, 1.2, 0, Math.PI * 2);
-      ctx.arc(dot.x + 2.2, dot.y - 1, 1.2, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
+    drawDotSprite(c, dot);
   }
 }
 
@@ -181,23 +270,29 @@ function syncHud() {
   savedEl.textContent = String(game.saved);
   needEl.textContent = String(game.level.need);
   lostEl.textContent = String(game.lost);
-  levelEl.textContent = `${game.levelIndex + 1}. ${game.level.name}`;
-  statusEl.textContent = game.message;
+  levelEl.textContent = `${game.levelIndex + 1}. ${game.level.name.toUpperCase()}`;
+  statusEl.textContent = String(game.message || "").toUpperCase();
 
   if (game.status === "won" || game.status === "lost") {
     banner.hidden = false;
-    bannerTitle.textContent = game.status === "won" ? "Safe" : "Oh no";
+    bannerTitle.textContent = game.status === "won" ? "SAFE" : "OH NO";
     bannerBody.textContent = game.message;
-    document.getElementById("nextBtn").hidden = game.status !== "won" || game.levelIndex >= LEVELS.length - 1;
+    document.getElementById("nextBtn").hidden =
+      game.status !== "won" || game.levelIndex >= LEVELS.length - 1;
   } else {
     banner.hidden = true;
   }
 }
 
 function render() {
-  drawLevel();
-  drawLight();
-  drawDots();
+  const c = ensureBuffer();
+  drawLevel(c);
+  drawLight(c);
+  drawDots(c);
+
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.drawImage(buffer, 0, 0, canvas.width, canvas.height);
   syncHud();
 }
 
