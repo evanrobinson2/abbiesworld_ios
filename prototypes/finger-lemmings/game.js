@@ -208,6 +208,26 @@ function drawGlow(c, lx, ly, r) {
   }
 }
 
+// Chunky side-view flashlight. Lens sits on the light origin.
+// . empty  k outline  h handle  b barrel  z bezel  l lens
+const FLASH_SPRITE = [
+  "..kkkkkkkkk...",
+  ".khhbbbbbzzkk.",
+  "khhhbbbbbzzllk",
+  "khhhbbbbbzzllk",
+  ".khhbbbbbzzkk.",
+  "..kkkkkkkkk...",
+];
+
+function spriteColor(ch, on) {
+  if (ch === "k") return "#0a080c";
+  if (ch === "h") return on ? "#8a5a28" : "#6a441c";
+  if (ch === "b") return on ? "#d0d0da" : "#9a9aa6";
+  if (ch === "z") return on ? "#f0f0f6" : "#c8c8d2";
+  if (ch === "l") return on ? PAL.light : "#2a3344";
+  return null;
+}
+
 function drawFlashlight(c) {
   const L = game.light;
   const lx = px(L.x);
@@ -216,29 +236,23 @@ function drawFlashlight(c) {
 
   if (on) drawGlow(c, lx, ly, L.radius);
 
-  // Handle
-  c.fillStyle = PAL.lampHandle;
-  fillPx(c, lx - PX * 6, ly + PX, PX * 4, PX * 2);
-  fillPx(c, lx - PX * 5, ly + PX * 2, PX * 2, PX * 3);
+  const rows = FLASH_SPRITE;
+  const cols = rows[0].length;
+  const ox = lx - PX * (cols - 3);
+  const oy = ly - PX * Math.floor(rows.length / 2);
 
-  // Barrel
-  c.fillStyle = on ? PAL.lampBody : PAL.lampBodyOff;
-  fillPx(c, lx - PX * 5, ly - PX, PX * 6, PX * 3);
-
-  // Bezel
-  c.fillStyle = on ? PAL.lampBezel : PAL.ink;
-  fillPx(c, lx + PX, ly - PX * 2, PX * 2, PX * 5);
-
-  // Lens — dark when off, bright when on
-  c.fillStyle = on ? PAL.light : PAL.lampLensOff;
-  fillPx(c, lx + PX * 2, ly - PX, PX * 2, PX * 3);
-  if (on) {
-    c.fillStyle = PAL.lightMid;
-    fillPx(c, lx + PX * 3, ly, PX, PX);
-  } else {
-    c.fillStyle = PAL.lightDim;
-    fillPx(c, lx + PX * 2, ly, PX, PX);
+  for (let y = 0; y < rows.length; y++) {
+    for (let x = 0; x < cols; x++) {
+      const color = spriteColor(rows[y][x], on);
+      if (!color) continue;
+      c.fillStyle = color;
+      fillPx(c, ox + x * PX, oy + y * PX);
+    }
   }
+
+  // Dim glass glint even when off, so the lamp reads as a tool
+  c.fillStyle = on ? PAL.lightMid : "#6a8098";
+  fillPx(c, lx, ly - PX, PX, PX);
 }
 
 function hueToPixel(hue, lit) {
@@ -312,8 +326,8 @@ function syncHud() {
 function render() {
   const c = ensureBuffer();
   drawLevel(c);
-  drawFlashlight(c);
   drawDots(c);
+  drawFlashlight(c);
 
   ctx.imageSmoothingEnabled = false;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
