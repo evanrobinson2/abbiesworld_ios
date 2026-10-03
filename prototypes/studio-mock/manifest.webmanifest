@@ -2,7 +2,7 @@
   "name": "Abbie Review",
   "short_name": "Review",
   "description": "Board or Dump art proofs for Abbie’s World",
-  "start_url": "/review.html?v=20261003g",
+  "start_url": "/review.html?v=20261003h",
   "scope": "/",
   "display": "standalone",
   "orientation": "any",

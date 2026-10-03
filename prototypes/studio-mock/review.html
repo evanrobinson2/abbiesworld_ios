@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- review-ui 20261003g -->
+<!-- review-ui 20261003h -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0a0a0c" />
   <meta name="format-detection" content="telephone=no" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <link rel="manifest" href="/manifest.webmanifest?v=20261003g" />
+  <link rel="manifest" href="/manifest.webmanifest?v=20261003h" />
   <link rel="apple-touch-icon" href="/plates/home.jpg" />
   <title>Review · Abbie’s World</title>
   <style>
@@ -89,6 +89,7 @@
     #chrome .top,
     .hist-hints,
     .hist-facet-bar,
+    .hist-filter-bar,
     .hist-chrome,
     .hist-facet.plate .num,
     #drawer {
@@ -102,6 +103,7 @@
     body.zoomed #chrome .top,
     body.zoomed .hist-hints,
     body.zoomed .hist-facet-bar,
+    body.zoomed .hist-filter-bar,
     body.zoomed .hist-chrome,
     body.zoomed #drawer {
       opacity: 0.2;
@@ -464,13 +466,20 @@
     }
     .hist-facet .prompt { font-size: 0.95rem; line-height: 1.4; }
     .hist-facet .meta { color: var(--muted); font-size: 0.8rem; margin-top: 10px; }
-    .hist-facet-bar {
+    .hist-facet-bar,
+    .hist-filter-bar {
       display: flex;
       justify-content: center;
       gap: 8px;
       padding: 10px 0 4px;
+      flex-wrap: wrap;
     }
-    .hist-facet-bar button {
+    .hist-filter-bar {
+      padding: 0 0 2px;
+      gap: 6px;
+    }
+    .hist-facet-bar button,
+    .hist-filter-bar button {
       font: inherit;
       font-size: 0.72rem;
       font-weight: 650;
@@ -483,7 +492,13 @@
       color: var(--muted);
       cursor: pointer;
     }
-    .hist-facet-bar button.on {
+    .hist-filter-bar button {
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      padding: 0.32rem 0.7rem;
+    }
+    .hist-facet-bar button.on,
+    .hist-filter-bar button.on {
       background: rgba(142, 201, 255, 0.2);
       color: var(--ink);
     }
@@ -1138,15 +1153,21 @@
       <div id="hist-viewport">
         <div id="hist-track"></div>
       </div>
+      <div class="hist-filter-bar" role="tablist" aria-label="Archive filters">
+        <button type="button" role="tab" data-filter="all" class="on" aria-selected="true">All</button>
+        <button type="button" role="tab" data-filter="boarded" aria-selected="false">Kept</button>
+        <button type="button" role="tab" data-filter="dumped" aria-selected="false">Dumped</button>
+        <button type="button" role="tab" data-filter="harvested" aria-selected="false">Harvested</button>
+      </div>
       <div class="hist-facet-bar" role="tablist" aria-label="Archive facets">
         <button type="button" role="tab" data-facet="plate" class="on" aria-selected="true">Plate</button>
         <button type="button" role="tab" data-facet="prompt" aria-selected="false">Prompt</button>
         <button type="button" role="tab" data-facet="details" aria-selected="false">Details</button>
       </div>
       <div class="hist-hints">
-        <div>← → tiles</div>
+        <div>← → plates</div>
         <div>↓ Now</div>
-        <div>pinch zoom · tap facets</div>
+        <div>pinch · filters</div>
       </div>
     </div>
 
@@ -1234,10 +1255,12 @@
       toastDrag: null,
       cardAnim: null,
       history: [],
+      historyAll: [],
       historyLoading: false,
       floor: "now",
       histIndex: 0,
       histFacet: "plate",
+      histFilter: "all",
       lastAct: null,
       undoTimer: null,
       pressTimer: null,
@@ -1798,13 +1821,53 @@
       else render();
     }
 
+    function setHistFilter(filter) {
+      const order = ["all", "boarded", "dumped", "harvested"];
+      let next = String(filter || "all");
+      if (!order.includes(next)) next = "all";
+      state.histFilter = next;
+      document.querySelectorAll(".hist-filter-bar [data-filter]").forEach((btn) => {
+        const on = btn.dataset.filter === next;
+        btn.classList.toggle("on", on);
+        btn.setAttribute("aria-selected", on ? "true" : "false");
+      });
+      applyHistoryFilter({ resetIndex: true });
+    }
+
+    function filterHistoryRows(rows, filter) {
+      const list = Array.isArray(rows) ? rows : [];
+      const f = filter || "all";
+      if (f === "all") return list.filter((r) => r?.previewUrl || r?.url);
+      if (f === "boarded") return list.filter((r) => r.status === "boarded" && (r.previewUrl || r.url));
+      if (f === "dumped") return list.filter((r) => r.status === "dumped" && (r.previewUrl || r.url));
+      if (f === "harvested") {
+        return list.filter((r) => r.status === "harvested" && (r.previewUrl || r.url));
+      }
+      return list.filter((r) => r?.previewUrl || r?.url);
+    }
+
+    function applyHistoryFilter({ resetIndex = false } = {}) {
+      const list = filterHistoryRows(state.historyAll, state.histFilter);
+      paintHistory(list, { resetIndex });
+    }
+
     function renderHistory(rows) {
+      state.historyAll = Array.isArray(rows) ? rows : [];
+      applyHistoryFilter({ resetIndex: true });
+    }
+
+    function paintHistory(list, { resetIndex = false } = {}) {
       const track = $("hist-track");
       if (!track) return;
-      const list = Array.isArray(rows) ? rows : [];
       state.history = list;
+      if (resetIndex) state.histIndex = 0;
       if (!list.length) {
-        track.innerHTML = `<div class="hist-card"><div class="hist-facet plate on"><div class="missing">${state.historyLoading ? "Loading…" : "Archive is empty."}</div></div></div>`;
+        const emptyMsg = state.historyLoading
+          ? "Loading…"
+          : state.histFilter === "all"
+            ? "No plates in archive yet."
+            : `No ${state.histFilter} plates.`;
+        track.innerHTML = `<div class="hist-card"><div class="hist-facet plate on"><div class="missing">${emptyMsg}</div></div></div>`;
         state.histIndex = 0;
         snapHistTrack();
         return;
@@ -1845,7 +1908,7 @@
           </div>
         </article>`;
       }).join("");
-      if (state.histIndex >= list.length) state.histIndex = list.length - 1;
+      if (state.histIndex >= list.length) state.histIndex = Math.max(0, list.length - 1);
       snapHistTrack();
     }
 
@@ -2866,6 +2929,12 @@
       e.stopPropagation();
       setHistFacet(btn.dataset.facet);
     });
+    document.querySelector(".hist-filter-bar")?.addEventListener("click", (e) => {
+      const btn = e.target.closest?.("[data-filter]");
+      if (!btn) return;
+      e.stopPropagation();
+      setHistFilter(btn.dataset.filter);
+    });
 
     $("undo-btn").addEventListener("click", (e) => {
       e.stopPropagation();
@@ -2921,7 +2990,7 @@
     }
 
     async function registerReviewWorker() {
-      return navigator.serviceWorker.register("/sw-review.js?v=20261003g", { scope: "/" });
+      return navigator.serviceWorker.register("/sw-review.js?v=20261003h", { scope: "/" });
     }
 
     async function subscribePush() {
