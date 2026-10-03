@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#14181f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>Finger Lemmings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #f3ebe0;
+      --muted: rgba(243, 235, 224, 0.62);
+      --ember: #ffb45a;
+      --moss: #7dcea0;
+      --danger: #e07a6a;
+      --panel: rgba(12, 16, 20, 0.55);
+      --line: rgba(243, 235, 224, 0.12);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      background:
+        radial-gradient(900px 500px at 80% 0%, rgba(255, 170, 70, 0.14), transparent 55%),
+        radial-gradient(700px 500px at 0% 100%, rgba(80, 140, 120, 0.12), transparent 50%),
+        linear-gradient(160deg, #10141a, #17140f 60%, #12161c);
+      color: var(--ink);
+      font-family: "Manrope", system-ui, sans-serif;
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
+    }
+    .shell {
+      height: 100%;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 0.7rem;
+      padding: calc(0.85rem + var(--safe-top)) 1rem calc(0.85rem + var(--safe-bottom));
+      max-width: 980px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      animation: rise 650ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .brand {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.7rem, 4vw, 2.4rem);
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+    }
+    .brand span {
+      display: block;
+      font-size: 0.4em;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ember);
+      margin-bottom: 0.3rem;
+      font-weight: 600;
+    }
+    .lede {
+      margin: 0;
+      max-width: 15rem;
+      text-align: right;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.35;
+    }
+    .chamber {
+      position: relative;
+      min-height: 0;
+      display: grid;
+      place-items: center;
+      border-radius: 22px;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 24px 60px rgba(0,0,0,0.35);
+      overflow: hidden;
+      animation: rise 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    #stage {
+      display: block;
+      max-width: 100%;
+      max-height: 100%;
+      cursor: none;
+      touch-action: none;
+    }
+    .hud {
+      position: absolute;
+      inset: 12px 12px auto 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .pill {
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(8, 10, 14, 0.55);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .pill strong { color: var(--moss); }
+    .pill .lost { color: var(--danger); }
+    #status {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      text-align: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      text-shadow: 0 2px 14px rgba(0,0,0,0.5);
+      pointer-events: none;
+    }
+    #banner {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: rgba(8, 10, 14, 0.62);
+      backdrop-filter: blur(8px);
+      padding: 1.5rem;
+    }
+    #banner[hidden] { display: none; }
+    .card {
+      width: min(92vw, 22rem);
+      text-align: center;
+      padding: 1.4rem 1.2rem;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: rgba(20, 24, 30, 0.92);
+    }
+    .card h2 {
+      margin: 0 0 0.4rem;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.8rem;
+    }
+    .card p { margin: 0 0 1rem; color: var(--muted); }
+    .card .row { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: rise 950ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    button {
+      font: inherit;
+      font-weight: 700;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.55rem 1rem;
+      cursor: pointer;
+    }
+    button.primary {
+      background: linear-gradient(120deg, #ffb45a, #ff8f4a);
+      color: #1a120c;
+      border-color: transparent;
+    }
+    button:hover { filter: brightness(1.05); }
+    .hint { color: var(--muted); font-size: 0.82rem; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (max-width: 720px) {
+      header { flex-direction: column; align-items: start; }
+      .lede { text-align: left; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <h1 class="brand"><span>Abbie’s World</span>Finger Lemmings</h1>
+      <p class="lede">Hold a light with your finger. Lead the little dots home.</p>
+    </header>
+
+    <section class="chamber" aria-label="Maze chamber">
+      <canvas id="stage" width="640" height="320"></canvas>
+      <div class="hud">
+        <div class="pill" id="levelName">1. Warm-up</div>
+        <div class="pill">Home <strong id="saved">0</strong>/<span id="need">5</span> · Lost <span class="lost" id="lost">0</span></div>
+      </div>
+      <div id="status">Touch to shine. Lead them home.</div>
+      <div id="banner" hidden>
+        <div class="card">
+          <h2 id="bannerTitle">Safe</h2>
+          <p id="bannerBody"></p>
+          <div class="row">
+            <button type="button" id="retryBtn">Retry</button>
+            <button type="button" class="primary" id="nextBtn">Next maze</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <button type="button" id="restart">Restart level</button>
+      <div class="hint">Press and drag — they follow the glow. Avoid the red pits.</div>
+    </footer>
+  </div>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>
