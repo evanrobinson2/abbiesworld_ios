@@ -17,12 +17,15 @@ ${[...BEHAVIORS].join(", ")}
 Rules:
 - Prefer semantic asset ids (map.*, poi.*.exterior|interior) over https URLs.
 - If art is missing, emit asset.job_create (server generates via OpenAI gpt-image-2.5-sunburst) then place.upsert with that exteriorAsset/interiorAsset. Optional asset.bind only with placeId+slot (or sceneId+slot background).
-- Order ops: asset.job_create → place.upsert / scene.* → asset.bind last.
+- Order ops: asset.job_create → place.upsert / place.remove / scene.* → asset.bind last.
 - place.upsert needs sceneId, name, behavior, x, y in 0..1 (prefer 0.12..0.88).
+- To remove a POI from a scene, emit place.remove with sceneId plus placeId (preferred) or name. NEVER delete a pin by scene.upsert / rewriting the whole scene.
+- scene.upsert MUST pass args.sceneId (never args.id). Updating scene.home requires sceneId:"scene.home". Omitting sceneId mints a dangerous new scene — forbidden unless create:true and a new name.
+- To delete an accidental scene, emit scene.delete with sceneId. Never delete scene.home.
 - Never invent new behaviors or screens.
 - Never touch players.
 - Keep plans small: 1–6 ops.
-- sceneIds look like scene.peglin.crashLand; placeIds like poi.peglin.pegMonastery.
+- sceneIds look like scene.peglin.crashLand or scene.home; placeIds like poi.peglin.pegMonastery or poi.moonBase.rocket.
 `;
 
 export async function planAuthorBeat({ intent, describe, activeSceneHint, openaiKey }) {
@@ -76,10 +79,43 @@ function heuristicPlan(intent, describe, activeSceneHint) {
   const text = String(intent || "").toLowerCase();
   const scenes = describe?.scenes || [];
   const sceneId =
-    activeSceneHint ||
+    pickSceneId(intent, describe, activeSceneHint) ||
     describe?.activeSceneID ||
     scenes[0]?.id ||
     "scene.home";
+
+  const removeIntent = /\b(remove|delete|drop|omit|unplace|take away|get rid of)\b/.test(text);
+  if (removeIntent) {
+    const ops = [];
+    const accidental = String(intent || "").match(/scene\.mcp[a-z0-9]+/i);
+    if (accidental) {
+      ops.push({
+        op: "scene.delete",
+        args: { sceneId: accidental[0] },
+        note: "remove minted duplicate",
+      });
+    }
+    const pin = pickPlaceRef(intent, describe, sceneId);
+    if (pin) {
+      ops.push({
+        op: "place.remove",
+        args: {
+          sceneId: pin.sceneId,
+          placeId: pin.placeId,
+          name: pin.name || undefined,
+        },
+        note: "drop POI from scene, leave other pins",
+      });
+    }
+    if (ops.length) {
+      const bits = ops.map((step) =>
+        step.op === "scene.delete"
+          ? `Delete ${step.args.sceneId}`
+          : `Remove ${step.args.name || step.args.placeId} from ${step.args.sceneId}`
+      );
+      return { narration: `${bits.join(". ")}.`, ops };
+    }
+  }
 
   if (text.includes("monastery") || text.includes("peg monastery")) {
     return {
@@ -129,6 +165,39 @@ function heuristicPlan(intent, describe, activeSceneHint) {
       },
     ],
   };
+}
+
+function pickSceneId(intent, describe, hint) {
+  const text = String(intent || "");
+  const named = [...text.matchAll(/scene\.[a-zA-Z0-9.]+/g)]
+    .map((m) => m[0])
+    .find((id) => !/^scene\.mcp/i.test(id));
+  if (named) return named;
+  if (hint) return hint;
+  const scenes = describe?.scenes || [];
+  const byName = scenes.find((s) => s.name && text.toLowerCase().includes(String(s.name).toLowerCase()));
+  return byName?.id || describe?.activeSceneID || scenes[0]?.id || "";
+}
+
+function pickPlaceRef(intent, describe, fallbackSceneId) {
+  const text = String(intent || "");
+  const lower = text.toLowerCase();
+  const idMatch = text.match(/poi\.[a-zA-Z0-9.]+/);
+  const scenes = describe?.scenes || [];
+  for (const scene of scenes) {
+    for (const pin of scene.places || []) {
+      if (idMatch && pin.placeId === idMatch[0]) {
+        return { sceneId: scene.id, placeId: pin.placeId, name: pin.name };
+      }
+      if (pin.name && lower.includes(String(pin.name).toLowerCase())) {
+        return { sceneId: scene.id, placeId: pin.placeId, name: pin.name };
+      }
+    }
+  }
+  if (idMatch) {
+    return { sceneId: fallbackSceneId, placeId: idMatch[0], name: "" };
+  }
+  return null;
 }
 
 export function validatePlanAgainstWorld(plan, doc) {

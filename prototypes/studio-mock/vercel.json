@@ -90,6 +90,10 @@
     "api/proof-image.js": {
       "maxDuration": 30,
       "includeFiles": "api/lib/**"
+    },
+    "api/trouble-tickets.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/lib/**"
     }
   }
 }

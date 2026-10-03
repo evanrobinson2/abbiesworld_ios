@@ -48,10 +48,28 @@ import {
 import { notifyMinigameMaker } from "./lib/eng-dispatch-webhook.js";
 import { notifyProofsReady } from "./lib/push.js";
 import { galleryMarkdown, unapprovedImageGallery } from "./lib/proof-display.js";
+import {
+  blankScene,
+  upsertScene,
+  removePlace,
+  deleteScene,
+  verifyAuthorPostconditions,
+  narrationFromVerified,
+  restoreGraph,
+  normalizeSceneArgs,
+} from "./lib/world-ops.js";
+import {
+  createTroubleTicket,
+  getTroubleTicket,
+  listTroubleTickets,
+  commentTroubleTicket,
+  updateTroubleTicketStatus,
+  setTicketGithubUrl,
+} from "./lib/trouble-tickets.js";
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
-const SERVER = { name: "abbies-world", version: "0.5.9" };
+const SERVER = { name: "abbies-world", version: "0.6.0" };
 const HOUSEHOLD_AUDIENCE = "https://api.abbies.world";
 const PLATE_BASE = "https://studio-mock-iota.vercel.app/api/plate";
 const REVIEW_BASE = "https://studio-mock-iota.vercel.app/review.html";
@@ -85,10 +103,13 @@ You CANNOT invent dialogue, puzzles, quest scripts, or new screens. Story flavor
 Decorations are short labels (≤12 characters) plus a sprite. They are not interactive behaviors yet.
 
 ### Steel-rail habit
-read_primer → world_describe → author_beat (dryRun) → confirm. Prefer semantic asset IDs. Prefer asset_job_create for new plates. Low-level scene_upsert / place_upsert still work. Never wipe players.
+read_primer → world_describe → author_beat (dryRun) → confirm. Prefer semantic asset IDs. Prefer asset_job_create for new plates. To drop a POI use place_remove / author_beat place.remove — never rewrite a scene. scene_upsert requires sceneId to update; omitting it creates a new scene. Accidents → scene_delete + trouble_ticket_create. Never wipe players.
 
 ### Mission habit (durable intent)
 Talk that should survive chat death → mission_create (narrative). Resume with mission_describe. Unapproved proof/harvest images come back as public displayUrl markdown — show them in chat. Vet via mission_attach_proof + mission_approve_proof (candidate index). Leave durable taste/direction with mission_feedback (does not Board/Dump by itself). New minigames → mission_request_minigame (tight design). If MINIGAME_MAKER_WEBHOOK_URL is unset, response is honest: saved, blocked: builder not configured — do not imply a worker started. Eng workers open PR (no merge) when the builder is configured — even hard physics puzzlers. Missions live on the household world (creative.missionOs) — not in the chat. Do not mark playable from workers.
+
+### Trouble tickets (durable developer queue)
+When an MCP mutation lies (dry-run looks right, execute reports success, world unchanged, extra objects appear), call trouble_ticket_create. That writes AW-N on household creative.troubleQueue — not chat text. Include expected/actual, relatedIds, plan, results, requestedCleanup. Then trouble_ticket_get / trouble_ticket_list. Do not claim the world changed unless postconditions passed.
 
 ### Asset generation habit (ChatGPT MCP)
 asset_project_create (optional) → asset_job_create with semanticId + brief (server writes imagePrompt, calls OpenAI gpt-image-2.5-sunburst, ingests to Game Asset registry, runs subject/framing sanity, returns registered or needs_review) → asset_bind only when registered. Prefer semantic asset IDs. Never put CDN/Midjourney URLs on scenes or POIs. Midjourney paste remains available via generate:false then asset_job_complete (same sanity). Override model with ASSET_IMAGE_MODEL (e.g. gpt-image-2.5-flare). See docs/architecture/ASSET_SANITY_CORPUS.md.
@@ -98,7 +119,7 @@ midjourney_fill enqueues on household creative.executionCapacity. The Mac sailbo
 
 
 ### Dungeon master habit
-read_primer first. world_describe before edits. scene_upsert, then scene_set_background_url when Evan pastes a URL, place_upsert for POIs, scene_connect for exits. vars_apply for counters (server does the math). Do not wipe players.
+read_primer first. world_describe before edits. place_upsert for POIs, place_remove to drop a pin, scene_connect for exits. vars_apply for counters (server does the math). Do not wipe players. Operational failures → trouble_ticket_create (durable AW-N queue on the household world).
 `;
 
 function primerBody() {
@@ -394,39 +415,6 @@ function ensureCreative(doc) {
   return doc.creative;
 }
 
-function blankScene(id, name) {
-  return {
-    id,
-    name: name || "New scene",
-    summary: "",
-    backgroundAsset: "",
-    hardpoints: [],
-    poiInstances: [],
-    isMutableByPlayer: true,
-    showsOpenHardpointsToPlayers: false,
-    isDeveloperPlaceholder: true,
-    createdAt: new Date().toISOString(),
-  };
-}
-
-function upsertScene(doc, args) {
-  const id = String(args.sceneId || `scene.mcp${Date.now().toString(36)}`);
-  doc.scenes = doc.scenes || {};
-  const scene = doc.scenes[id] || blankScene(id, args.name);
-  if (args.name) scene.name = String(args.name).slice(0, 80);
-  if (args.summary != null) scene.summary = String(args.summary).slice(0, 400);
-  if (args.backgroundAsset != null) {
-    scene.backgroundAsset = String(args.backgroundAsset).slice(0, 2000);
-    scene.isDeveloperPlaceholder = !scene.backgroundAsset;
-  }
-  if (args.musicTrackID != null) scene.musicTrackID = String(args.musicTrackID).slice(0, 80);
-  if (!Array.isArray(scene.poiInstances)) scene.poiInstances = [];
-  if (!Array.isArray(scene.hardpoints)) scene.hardpoints = [];
-  doc.scenes[id] = scene;
-  if (!doc.activeSceneID) doc.activeSceneID = id;
-  return id;
-}
-
 function upsertPlace(doc, args) {
   const sceneId = String(args.sceneId || doc.activeSceneID || "");
   const scene = doc.scenes?.[sceneId];
@@ -662,18 +650,47 @@ const TOOLS = [
   },
   {
     name: "scene_upsert",
-    description: "Create or update a scene the iPad can open: name, summary, optional backgroundAsset URL, optional musicTrackID. Positions of POIs are separate.",
+    description: "Create or update a scene the iPad can open. To UPDATE, pass sceneId (not id). Omitting sceneId creates a new scene. This does not add or remove POIs — use place_upsert / place_remove.",
     inputSchema: {
       type: "object",
       properties: {
         accessToken: { type: "string" },
-        sceneId: { type: "string" },
+        sceneId: { type: "string", description: "Existing scene to update. Alias: id. Required to avoid minting scene.mcp*." },
+        id: { type: "string", description: "Alias for sceneId (normalized server-side)." },
         name: { type: "string" },
         summary: { type: "string" },
         backgroundAsset: { type: "string" },
         musicTrackID: { type: "string" },
       },
-      required: ["name"],
+      required: [],
+    },
+  },
+  {
+    name: "place_remove",
+    description: "Remove a POI pin from one scene. Does not delete the place catalog row or other scenes. Pass sceneId plus placeId, instanceId, or name.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        sceneId: { type: "string" },
+        placeId: { type: "string" },
+        instanceId: { type: "string" },
+        name: { type: "string" },
+      },
+      required: ["sceneId"],
+    },
+  },
+  {
+    name: "scene_delete",
+    description: "Delete a scene. Refuses scene.home unless confirmHome:true. Refuses deleting the last scene. Use this to remove accidental scene.mcp* objects.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        sceneId: { type: "string" },
+        confirmHome: { type: "boolean" },
+      },
+      required: ["sceneId"],
     },
   },
   {
@@ -793,7 +810,7 @@ const TOOLS = [
   {
     name: "author_beat",
     description:
-      "Steel-rail NL world builder. Pass intent; gets a closed-op plan. Defaults dryRun:true. Set confirm:true to execute. Never invents screens; never wipes players. Prefer this over freeform world edits.",
+      "Steel-rail NL world builder. Pass intent; gets a closed-op plan. Defaults dryRun:true. Set confirm:true to execute. Execution verifies postconditions and rolls back if a named scene update would mint scene.mcp* or leave a POI in place. Prefer place.remove to drop pins.",
     inputSchema: {
       type: "object",
       properties: {
@@ -1155,6 +1172,89 @@ const TOOLS = [
       required: ["missionId", "routeId", "verb"],
     },
   },
+  {
+    name: "trouble_ticket_create",
+    description:
+      "File a durable developer trouble ticket (AW-N) on the household world creative.troubleQueue. Use when MCP execution lies, world state is wrong, or cleanup is needed. Not chat text — developers review this queue. Attach plan/results/diff when you have them.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        title: { type: "string" },
+        summary: { type: "string" },
+        severity: { type: "string", description: "low | medium | high | critical" },
+        surface: { type: "string", description: "chatgpt | cursor | studio | ipad | mcp" },
+        operation: { type: "string", description: "e.g. author_beat, scene_upsert" },
+        expectedBehavior: { type: "string" },
+        actualBehavior: { type: "string" },
+        worldRevision: { type: "number" },
+        relatedIds: { type: "array", items: { type: "string" } },
+        diagnosticContext: { type: "object" },
+        requestedCleanup: { type: "string" },
+        plan: { type: "object" },
+        results: { type: "array" },
+        stateDiff: { type: "object" },
+        lint: { type: "array" },
+        error: { type: "string" },
+        beforeRevision: { type: "number" },
+        afterRevision: { type: "number" },
+      },
+      required: ["title"],
+    },
+  },
+  {
+    name: "trouble_ticket_get",
+    description: "Read one AW-N trouble ticket from the household world queue.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        ticketId: { type: "string", description: "e.g. AW-1" },
+      },
+      required: ["ticketId"],
+    },
+  },
+  {
+    name: "trouble_ticket_list",
+    description: "List durable trouble tickets (newest first). Optional status filter: open | in_review | resolved | wont_fix.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        status: { type: "string" },
+        limit: { type: "number" },
+      },
+    },
+  },
+  {
+    name: "trouble_ticket_comment",
+    description: "Append a comment to an existing AW-N ticket.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        ticketId: { type: "string" },
+        text: { type: "string" },
+        author: { type: "string" },
+        surface: { type: "string" },
+      },
+      required: ["ticketId", "text"],
+    },
+  },
+  {
+    name: "trouble_ticket_resolve",
+    description: "Set ticket status to resolved, in_review, open, or wont_fix.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        ticketId: { type: "string" },
+        status: { type: "string" },
+        note: { type: "string" },
+      },
+      required: ["ticketId", "status"],
+    },
+  },
 ];
 
 async function inspire(args) {
@@ -1191,7 +1291,9 @@ function authorOpRank(op) {
     case "scene.upsert":
     case "scene.set_background_semantic":
     case "scene.set_background_url":
+    case "scene.delete":
     case "place.upsert":
+    case "place.remove":
     case "scene.connect":
       return 1;
     case "asset.bind":
@@ -1278,6 +1380,22 @@ async function runAuthorBeat(auth, args) {
     };
   }
 
+  const looksLikeRemoval = /\b(remove|delete|drop|omit|unplace|get rid of)\b/i.test(intent) &&
+    (/\bpoi\./i.test(intent) || /\brocket\b/i.test(intent) || /\bplace\b/i.test(intent) || /scene\.mcp/i.test(intent));
+  if (looksLikeRemoval && !validated.ops.some((s) => s.op === "place.remove" || s.op === "scene.delete")) {
+    return {
+      executed: false,
+      dryRun: true,
+      error: "use_place_remove",
+      detail:
+        "Removing a POI or accidental scene.mcp* must use place.remove / scene.delete. scene.upsert cannot drop pins and must not mint a new scene.",
+      narration: planned.narration || "",
+      plan: { ops: validated.ops },
+      rails: validated.rails,
+      warnings: validated.warnings,
+    };
+  }
+
   const response = {
     executed: false,
     dryRun,
@@ -1329,22 +1447,61 @@ async function runAuthorBeat(auth, args) {
   if (saved.body.__mcp) delete saved.body.__mcp;
   if (extra?.error) return { ...response, ...extra, executed: false };
 
+  const afterDoc = saved.body;
+  const opResults = extra?.results || results;
+  const verified = verifyAuthorPostconditions({
+    beforeDoc: current.body,
+    afterDoc,
+    ops: orderedOps,
+    results: opResults,
+  });
+  if (!verified.ok) {
+    const rolled = await mutate(auth, (doc) => restoreGraph(doc, current.body));
+    return {
+      ...response,
+      executed: false,
+      error: "postcondition_failed",
+      rolledBack: rolled.status === 200,
+      rollbackRevision: rolled.body?.revision ?? null,
+      failures: verified.failures,
+      diff: verified.diff,
+      results: opResults,
+      revision: afterDoc.revision,
+      narration:
+        "Change was not applied. The world did not match the plan, so the mutation was rolled back.",
+      hint: "Use place.remove to drop a POI. scene.upsert requires sceneId (not id). File trouble_ticket_create with this payload.",
+    };
+  }
+
   return {
     ...response,
     executed: true,
     dryRun: false,
+    narration: narrationFromVerified({
+      ops: orderedOps,
+      results: opResults,
+      plannedNarration: planned.narration,
+    }),
     revision: saved.body.revision,
-    results: extra?.results || results,
+    results: opResults,
     lintAfter: extra?.lint || lint(saved.body),
+    diff: verified.diff,
     summary: describe(saved.body),
   };
 }
 
 function applyAuthorOp(doc, step) {
-  const { op, args } = step;
+  const { op } = step;
+  const args = normalizeSceneArgs(step.args || {});
   if (op === "scene.upsert") {
-    const id = upsertScene(doc, args);
-    return { op, sceneId: id };
+    const result = upsertScene(doc, args, { mintIfMissing: false });
+    return result.error ? result : { op, ...result };
+  }
+  if (op === "scene.delete") {
+    return { op, ...deleteScene(doc, args) };
+  }
+  if (op === "place.remove") {
+    return { op, ...removePlace(doc, args) };
   }
   if (op === "scene.set_background_semantic" || op === "scene.set_background_url") {
     const sceneId = String(args.sceneId || doc.activeSceneID || "");
@@ -1692,6 +1849,184 @@ async function runMissionTool(name, auth, args) {
   };
 }
 
+async function maybeOpenGithubIssue(ticket) {
+  const token = String(process.env.GITHUB_TOKEN || process.env.STUDIO_GITHUB_TOKEN || "").trim();
+  if (!token || token === "[SENSITIVE]") return { skipped: true, reason: "no_github_token" };
+  const repo = String(process.env.TROUBLE_TICKET_GITHUB_REPO || "evanrobinson2/abbiesworld_ios").trim();
+  const body = [
+    `**Ticket:** ${ticket.id}`,
+    `**Severity:** ${ticket.severity}`,
+    `**Surface:** ${ticket.surface}`,
+    `**Operation:** ${ticket.operation || "—"}`,
+    `**World revision:** ${ticket.worldRevision ?? "—"}`,
+    "",
+    "## Summary",
+    ticket.summary || ticket.title,
+    "",
+    "## Expected",
+    ticket.expectedBehavior || "—",
+    "",
+    "## Actual",
+    ticket.actualBehavior || "—",
+    "",
+    "## Related ids",
+    (ticket.relatedIds || []).map((id) => `- \`${id}\``).join("\n") || "—",
+    "",
+    "## Requested cleanup",
+    ticket.requestedCleanup || "—",
+    "",
+    "## Auto diagnostics",
+    "```json",
+    JSON.stringify(ticket.auto || {}, null, 2).slice(0, 8000),
+    "```",
+    "",
+    "_Filed via MCP `trouble_ticket_create` onto household `creative.troubleQueue`._",
+  ].join("\n");
+  try {
+    let res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: "application/vnd.github+json",
+        "Content-Type": "application/json",
+        "User-Agent": "abbies-world-mcp",
+      },
+      body: JSON.stringify({
+        title: `[${ticket.id}] ${ticket.title}`,
+        body: body.slice(0, 60000),
+        labels: ["trouble-ticket", ticket.severity].filter(Boolean),
+      }),
+    });
+    let json = await res.json().catch(() => ({}));
+    if (res.status === 422) {
+      res = await fetch(`https://api.github.com/repos/${repo}/issues`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: "application/vnd.github+json",
+          "Content-Type": "application/json",
+          "User-Agent": "abbies-world-mcp",
+        },
+        body: JSON.stringify({
+          title: `[${ticket.id}] ${ticket.title}`,
+          body: body.slice(0, 60000),
+        }),
+      });
+      json = await res.json().catch(() => ({}));
+    }
+    if (!res.ok) return { skipped: true, reason: `github_${res.status}`, detail: json.message || json };
+    return { url: json.html_url, number: json.number, repo };
+  } catch (err) {
+    return { skipped: true, reason: "github_failed", detail: String(err?.message || err) };
+  }
+}
+
+async function runTroubleTool(name, auth, args) {
+  const current = await readWorld(auth);
+  if (current.status !== 200) {
+    return {
+      error: "world_unavailable",
+      status: current.status,
+      body: current.body,
+      hint: current.hint,
+    };
+  }
+
+  if (name === "trouble_ticket_get") {
+    return {
+      durable: "creative.troubleQueue",
+      ...getTroubleTicket(current.body, args.ticketId),
+    };
+  }
+  if (name === "trouble_ticket_list") {
+    return {
+      durable: "creative.troubleQueue",
+      revision: current.body.revision,
+      ...listTroubleTickets(current.body, { status: args.status, limit: args.limit }),
+    };
+  }
+
+  const saved = await mutate(auth, (doc) => {
+    if (name === "trouble_ticket_create") {
+      const built = createTroubleTicket(doc, args, {
+        mcpServer: SERVER.name,
+        mcpVersion: SERVER.version,
+        timestamp: new Date().toISOString(),
+        beforeRevision: args.beforeRevision ?? current.body.revision,
+        afterRevision: args.afterRevision ?? null,
+        plan: args.plan || args.diagnosticContext?.plan || null,
+        results: args.results || args.diagnosticContext?.results || null,
+        stateDiff: args.stateDiff || args.diagnosticContext?.stateDiff || null,
+        lint: args.lint || lint(doc),
+        error: args.error || null,
+        originatingSurface: args.surface || "mcp",
+      });
+      if (built.error) {
+        doc.__mcp = built;
+        doc.__abort = true;
+        return doc;
+      }
+      doc.__mcp = {
+        created: true,
+        durable: "creative.troubleQueue",
+        ticketId: built.ticket.id,
+        status: built.ticket.status,
+        label: `${built.ticket.id} — ${built.ticket.status}`,
+        ticket: built.ticket,
+      };
+      return doc;
+    }
+    if (name === "trouble_ticket_comment") {
+      const result = commentTroubleTicket(doc, args.ticketId, args);
+      if (result.error) {
+        doc.__mcp = result;
+        doc.__abort = true;
+        return doc;
+      }
+      doc.__mcp = { durable: "creative.troubleQueue", commented: true, ...result };
+      return doc;
+    }
+    if (name === "trouble_ticket_resolve") {
+      const result = updateTroubleTicketStatus(doc, args.ticketId, args);
+      if (result.error) {
+        doc.__mcp = result;
+        doc.__abort = true;
+        return doc;
+      }
+      doc.__mcp = { durable: "creative.troubleQueue", updated: true, ...result };
+      return doc;
+    }
+    return doc;
+  });
+
+  if (saved.status === 409) return { error: "revision_conflict", body: saved.body };
+  if (saved.status !== 200) return { error: "save_failed", status: saved.status, body: saved.body };
+  const extra = saved.body.__mcp;
+  if (saved.body.__mcp) delete saved.body.__mcp;
+  if (extra?.error) return extra;
+
+  if (name === "trouble_ticket_create" && extra?.ticket) {
+    extra.github = await maybeOpenGithubIssue(extra.ticket);
+    extra.ticket.githubIssueUrl = extra.github?.url || null;
+    extra.revision = saved.body.revision;
+    extra.label = extra.label || `${extra.ticket.id} — ${extra.ticket.status}`;
+    if (extra.ticket.githubIssueUrl) {
+      const linked = await mutate(auth, (doc) => {
+        const result = setTicketGithubUrl(doc, extra.ticket.id, extra.ticket.githubIssueUrl);
+        if (result.error) {
+          doc.__mcp = result;
+          doc.__abort = true;
+        }
+        return doc;
+      });
+      if (linked.status === 200) extra.revision = linked.body.revision;
+    }
+  } else if (extra) {
+    extra.revision = saved.body.revision;
+  }
+  return extra;
+}
+
 async function callTool(name, args, request) {
   if (name === "read_primer") return { text: primerBody() };
   if (name === "poi_capabilities") {
@@ -1907,6 +2242,16 @@ async function callTool(name, args, request) {
     return runAuthorBeat(auth, args);
   }
 
+  if (
+    name === "trouble_ticket_create" ||
+    name === "trouble_ticket_get" ||
+    name === "trouble_ticket_list" ||
+    name === "trouble_ticket_comment" ||
+    name === "trouble_ticket_resolve"
+  ) {
+    return runTroubleTool(name, auth, args);
+  }
+
   if (name === "world_get_current") {
     const current = await readWorld(auth);
     if (current.status !== 200) {
@@ -1994,7 +2339,21 @@ async function callTool(name, args, request) {
       return doc;
     }
     if (name === "scene_upsert") {
-      upsertScene(doc, args);
+      const result = upsertScene(doc, normalizeSceneArgs(args), { mintIfMissing: true });
+      doc.__mcp = result;
+      if (result?.error) doc.__abort = true;
+      return doc;
+    }
+    if (name === "place_remove") {
+      const result = removePlace(doc, args);
+      doc.__mcp = result;
+      if (result?.error) doc.__abort = true;
+      return doc;
+    }
+    if (name === "scene_delete") {
+      const result = deleteScene(doc, normalizeSceneArgs(args));
+      doc.__mcp = result;
+      if (result?.error) doc.__abort = true;
       return doc;
     }
     if (name === "scene_set_background_url") {
