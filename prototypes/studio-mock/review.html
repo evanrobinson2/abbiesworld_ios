@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- review-ui 20261003e -->
+<!-- review-ui 20261003f -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0a0a0c" />
   <meta name="format-detection" content="telephone=no" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <link rel="manifest" href="/manifest.webmanifest?v=20261003e" />
+  <link rel="manifest" href="/manifest.webmanifest?v=20261003f" />
   <link rel="apple-touch-icon" href="/plates/home.jpg" />
   <title>Review · Abbie’s World</title>
   <style>
@@ -56,7 +56,14 @@
       inset: 0;
       display: grid;
       place-items: center;
+      grid-template: 1fr / 1fr;
       overflow: hidden;
+      background: #111;
+      padding:
+        calc(56px + var(--safe-top))
+        calc(8px + var(--safe-right))
+        calc(52px + var(--safe-bottom))
+        calc(8px + var(--safe-left));
       will-change: transform, opacity;
       transform: translate3d(0, 0, 0);
       backface-visibility: hidden;
@@ -64,19 +71,40 @@
     #plate {
       max-width: 100%;
       max-height: 100%;
-      width: 100%;
-      height: 100%;
-      padding:
-        calc(56px + var(--safe-top))
-        calc(8px + var(--safe-right))
-        calc(52px + var(--safe-bottom))
-        calc(8px + var(--safe-left));
+      width: auto;
+      height: auto;
+      min-width: 0;
+      min-height: 0;
+      padding: 0;
+      display: block;
       object-fit: contain;
       object-position: center;
-      background: #111;
+      background: transparent;
       pointer-events: none;
-      transform-origin: 50% 50%;
+      transform-origin: 0 0;
       will-change: transform;
+    }
+    #numeral,
+    .hint-row,
+    #chrome .top,
+    .hist-hints,
+    .hist-facet-bar,
+    .hist-chrome,
+    .hist-facet.plate .num,
+    #drawer {
+      transition: opacity 160ms ease;
+    }
+    body.zoomed #numeral,
+    body.zoomed .hist-facet.plate .num {
+      opacity: 0.12;
+    }
+    body.zoomed .hint-row,
+    body.zoomed #chrome .top,
+    body.zoomed .hist-hints,
+    body.zoomed .hist-facet-bar,
+    body.zoomed .hist-chrome,
+    body.zoomed #drawer {
+      opacity: 0.2;
     }
     /* Stylized candidate numeral — bold 3-digit with hard drop shadow */
     #numeral {
@@ -390,11 +418,16 @@
       place-items: center;
     }
     .hist-facet.plate img {
-      width: 100%;
-      height: 100%;
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      min-width: 0;
+      min-height: 0;
+      display: block;
       object-fit: contain;
       pointer-events: none;
-      transform-origin: 50% 50%;
+      transform-origin: 0 0;
       will-change: transform;
     }
     .hist-facet.plate .num {
@@ -1113,7 +1146,7 @@
       <div class="hist-hints">
         <div>← → tiles</div>
         <div>↓ Now</div>
-        <div>tap for facets</div>
+        <div>pinch zoom · tap facets</div>
       </div>
     </div>
 
@@ -1225,8 +1258,9 @@
     const thumbs = $("thumbs");
 
     const ZOOM_MIN = 1;
-    const ZOOM_MAX = 4.2;
-    const ZOOM_TAP = 2.35;
+    const ZOOM_MAX = 4.5;
+    const ZOOM_TAP = 2.5;
+    const ZOOM_SNAP_MS = 220;
     const zoom = {
       scale: 1,
       x: 0,
@@ -1234,13 +1268,10 @@
       pinching: false,
       startDist: 1,
       startScale: 1,
-      startX: 0,
-      startY: 0,
-      startTx: 0,
-      startTy: 0,
       pan: null,
       lastTap: 0,
       tapTimer: null,
+      resetTimer: null,
     };
 
     function zoomEl() {
@@ -1257,29 +1288,97 @@
       return zoom.pinching || zoom.scale > 1.03;
     }
 
-    function clampZoomPan() {
-      const max = (zoom.scale - 1) * Math.max(120, Math.min(window.innerWidth, window.innerHeight) * 0.42);
-      zoom.x = Math.max(-max, Math.min(max, zoom.x));
-      zoom.y = Math.max(-max, Math.min(max, zoom.y));
+    function layoutOrigin(el) {
+      const r = el.getBoundingClientRect();
+      return { left: r.left - zoom.x, top: r.top - zoom.y };
     }
 
-    function applyZoom() {
+    function zoomToward(clientX, clientY, nextScale) {
       const el = zoomEl();
       if (!el) return;
-      clampZoomPan();
-      el.style.transform = `translate3d(${zoom.x}px, ${zoom.y}px, 0) scale(${zoom.scale})`;
+      const origin = layoutOrigin(el);
+      const k = nextScale / (zoom.scale || 1);
+      zoom.x = clientX - origin.left - k * (clientX - origin.left - zoom.x);
+      zoom.y = clientY - origin.top - k * (clientY - origin.top - zoom.y);
+      zoom.scale = nextScale;
     }
 
-    function resetZoom() {
+    function clampZoomPan({ rubber = false } = {}) {
+      const el = zoomEl();
+      if (!el) return;
+      const w = el.clientWidth || 1;
+      const h = el.clientHeight || 1;
+      if (zoom.scale <= 1) {
+        const tx = (1 - zoom.scale) * w / 2;
+        const ty = (1 - zoom.scale) * h / 2;
+        zoom.x = tx;
+        zoom.y = ty;
+        return;
+      }
+      const minX = -(zoom.scale - 1) * w;
+      const minY = -(zoom.scale - 1) * h;
+      const maxX = 0;
+      const maxY = 0;
+      const resist = (v, min, max) => {
+        if (v < min) return min + (v - min) * 0.28;
+        if (v > max) return max + (v - max) * 0.28;
+        return v;
+      };
+      zoom.x = rubber ? resist(zoom.x, minX, maxX) : Math.max(minX, Math.min(maxX, zoom.x));
+      zoom.y = rubber ? resist(zoom.y, minY, maxY) : Math.max(minY, Math.min(maxY, zoom.y));
+    }
+
+    function applyZoom({ clamp = true, rubber = false, animate = false } = {}) {
+      const el = zoomEl();
+      if (!el) return;
+      if (clamp) clampZoomPan({ rubber });
+      el.style.transition = animate ? `transform ${ZOOM_SNAP_MS}ms ${EASE_FLY}` : "none";
+      el.style.transform = `translate3d(${zoom.x}px, ${zoom.y}px, 0) scale(${zoom.scale})`;
+      document.body.classList.toggle("zoomed", zoom.pinching || zoom.scale > 1.03);
+    }
+
+    function clearZoomTransforms(keepEl) {
+      const wipe = (img) => {
+        if (!img || img === keepEl) return;
+        img.style.transition = "none";
+        img.style.transform = "";
+      };
+      wipe(plate);
+      document.querySelectorAll(".hist-facet.plate img").forEach(wipe);
+    }
+
+    function resetZoom({ animate = false } = {}) {
+      const el = zoomEl();
       zoom.scale = 1;
       zoom.x = 0;
       zoom.y = 0;
       zoom.pinching = false;
       zoom.pan = null;
-      plate.style.transform = "";
-      document.querySelectorAll(".hist-facet.plate img").forEach((img) => {
-        img.style.transform = "";
-      });
+      document.body.classList.remove("zoomed");
+      clearTimeout(zoom.resetTimer);
+      if (animate && el) {
+        el.style.transition = `transform ${ZOOM_SNAP_MS}ms ${EASE_FLY}`;
+        el.style.transform = "translate3d(0px, 0px, 0) scale(1)";
+        zoom.resetTimer = setTimeout(() => {
+          if (zoom.scale !== 1) return;
+          el.style.transition = "none";
+          el.style.transform = "";
+        }, ZOOM_SNAP_MS + 20);
+      }
+      clearZoomTransforms(animate ? el : null);
+      if (!animate && el) {
+        el.style.transition = "none";
+        el.style.transform = "";
+      }
+    }
+
+    function snapZoom() {
+      if (zoom.scale < 1.04) {
+        resetZoom({ animate: true });
+        return;
+      }
+      zoom.scale = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom.scale));
+      applyZoom({ clamp: true, animate: true });
     }
 
     function touchDist(a, b) {
@@ -1290,55 +1389,101 @@
       return { x: (a.clientX + b.clientX) / 2, y: (a.clientY + b.clientY) / 2 };
     }
 
+    function cancelFloorDrag() {
+      state.dragging = false;
+      state.histDrag = null;
+      clearTimeout(state.pressTimer);
+      state.pressTimer = null;
+      $("veilBoard")?.classList.remove("show");
+      $("veilDump")?.classList.remove("show");
+      $("veilHistory")?.classList.remove("show");
+      if (state.floor !== "history") {
+        card.style.transition = "none";
+        card.style.transform = "translate3d(0px, 0px, 0) rotate(0deg)";
+        if (isEmptyNow()) resetEmptyNudge();
+      }
+    }
+
     function onPinchStart(e) {
       if (!zoomEl() || e.touches.length < 2) return false;
       e.preventDefault();
       e.stopPropagation();
-      state.dragging = false;
-      state.histDrag = null;
-      clearTimeout(state.pressTimer);
+      cancelFloorDrag();
       zoom.pinching = true;
       zoom.pan = null;
       zoom.startDist = touchDist(e.touches[0], e.touches[1]) || 1;
       zoom.startScale = zoom.scale;
-      const m = touchMid(e.touches[0], e.touches[1]);
-      zoom.startX = m.x;
-      zoom.startY = m.y;
-      zoom.startTx = zoom.x;
-      zoom.startTy = zoom.y;
       return true;
     }
 
     function onPinchMove(e) {
-      if (!zoom.pinching || e.touches.length < 2 || !zoomEl()) return false;
-      e.preventDefault();
-      e.stopPropagation();
-      const d = touchDist(e.touches[0], e.touches[1]) || 1;
-      zoom.scale = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom.startScale * (d / zoom.startDist)));
-      const m = touchMid(e.touches[0], e.touches[1]);
-      zoom.x = zoom.startTx + (m.x - zoom.startX);
-      zoom.y = zoom.startTy + (m.y - zoom.startY);
-      applyZoom();
-      return true;
+      if (e.touches.length >= 2 && zoomEl()) {
+        if (!zoom.pinching) onPinchStart(e);
+        if (!zoom.pinching) return false;
+        e.preventDefault();
+        e.stopPropagation();
+        const d = touchDist(e.touches[0], e.touches[1]) || 1;
+        const next = Math.min(ZOOM_MAX + 0.35, Math.max(0.82, zoom.startScale * (d / zoom.startDist)));
+        const m = touchMid(e.touches[0], e.touches[1]);
+        zoomToward(m.x, m.y, next);
+        applyZoom({ clamp: false });
+        return true;
+      }
+      if (zoom.pan && e.touches.length === 1 && zoomEl()) {
+        e.preventDefault();
+        zoom.x = zoom.pan.tx + (e.touches[0].clientX - zoom.pan.x);
+        zoom.y = zoom.pan.ty + (e.touches[0].clientY - zoom.pan.y);
+        applyZoom({ rubber: true });
+        return true;
+      }
+      return false;
     }
 
     function onPinchEnd(e) {
-      if (e.touches.length < 2) zoom.pinching = false;
-      if (e.touches.length === 0) zoom.pan = null;
-      if (zoom.scale < 1.04) resetZoom();
-    }
-
-    function toggleZoomAt() {
-      if (!zoomEl()) return;
-      if (zoom.scale > 1.2) {
-        resetZoom();
+      if (e.touches.length >= 2) return;
+      if (e.touches.length === 1 && zoom.scale > 1.03) {
+        zoom.pinching = false;
+        zoom.pan = {
+          x: e.touches[0].clientX,
+          y: e.touches[0].clientY,
+          tx: zoom.x,
+          ty: zoom.y,
+          pointerId: "touch",
+        };
         return;
       }
-      zoom.scale = ZOOM_TAP;
-      zoom.x = 0;
-      zoom.y = 0;
-      applyZoom();
+      zoom.pinching = false;
+      zoom.pan = null;
+      snapZoom();
+    }
+
+    function toggleZoomAt(clientX, clientY) {
+      const el = zoomEl();
+      if (!el) return;
+      const now = performance.now();
+      if (now - (zoom.lastToggle || 0) < 350) return;
+      zoom.lastToggle = now;
+      if (zoom.scale > 1.2) {
+        resetZoom({ animate: true });
+        return;
+      }
+      const r = el.getBoundingClientRect();
+      const x = Number.isFinite(clientX) ? clientX : r.left + r.width / 2;
+      const y = Number.isFinite(clientY) ? clientY : r.top + r.height / 2;
+      zoomToward(x, y, ZOOM_TAP);
+      applyZoom({ clamp: true, animate: true });
       buzz(8);
+    }
+
+    function maybeDoubleTapZoom(e) {
+      if (!zoomEl() || !e) return false;
+      const now = performance.now();
+      const doubled = now - zoom.lastTap < 280;
+      zoom.lastTap = now;
+      if (!doubled) return false;
+      clearTimeout(zoom.tapTimer);
+      toggleZoomAt(e.clientX, e.clientY);
+      return true;
     }
 
     /** Prefer lighter preview for phone strip; full URL for the hero plate. */
@@ -1635,6 +1780,7 @@
     }
 
     function exitHistory() {
+      resetZoom();
       state.floor = "now";
       document.body.classList.remove("floor-history");
       $("history-floor").classList.remove("show");
@@ -1664,7 +1810,7 @@
         const when = String(row.at || "").replace("T", " ").slice(0, 16);
         const src = row.previewUrl || row.url || "";
         const img = src
-          ? `<img src="${escapeAttr(src)}" alt="" />`
+          ? `<img src="${escapeAttr(src)}" alt="" draggable="false" />`
           : `<div class="missing">No plate bytes</div>`;
         const canUnkeep = st === "boarded" && row.proofId;
         const canRestore = st === "dumped" && row.proofId;
@@ -2180,7 +2326,7 @@
       if (zoom.pan && zoom.pan.pointerId === e.pointerId && zoomEl()) {
         zoom.x = zoom.pan.tx + (e.clientX - zoom.pan.x);
         zoom.y = zoom.pan.ty + (e.clientY - zoom.pan.y);
-        applyZoom();
+        applyZoom({ rubber: true });
         return;
       }
       if (!state.dragging || state.locked) return;
@@ -2210,12 +2356,14 @@
       $("veilHistory")?.classList.toggle("show", down);
     }
 
-    function onPointerUp() {
+    function onPointerUp(e) {
       clearTimeout(state.pressTimer);
       state.pressTimer = null;
       if (zoom.pan) {
+        const moved = e ? Math.hypot(e.clientX - zoom.pan.x, e.clientY - zoom.pan.y) : TAP_SLOP + 1;
         zoom.pan = null;
-        if (zoom.scale < 1.04) resetZoom();
+        if (moved < TAP_SLOP && maybeDoubleTapZoom(e)) return;
+        snapZoom();
         return;
       }
       if (!state.dragging || state.locked) return;
@@ -2228,20 +2376,25 @@
       const empty = isEmptyNow();
 
       if (absX < TAP_SLOP && absY < TAP_SLOP) {
-        const now = performance.now();
-        const doubled = now - zoom.lastTap < 280;
-        zoom.lastTap = now;
-        if (doubled && zoomEl()) {
-          toggleZoomAt();
+        const act = zoneAt(state.startX, state.startY);
+        if (act === "prev") {
+          go(-1);
           return;
         }
-        const act = zoneAt(state.startX, state.startY);
-        if (act === "prev") go(-1);
-        else if (act === "next") go(1);
-        else if (act === "board") {
+        if (act === "next") {
+          go(1);
+          return;
+        }
+        if (act === "board") {
           if (!empty) commit("board");
-        } else if (act === "history" || act === "now") enterHistory();
-        else if (empty) resetEmptyNudge();
+          return;
+        }
+        if (act === "history" || act === "now") {
+          enterHistory();
+          return;
+        }
+        if (maybeDoubleTapZoom(e)) return;
+        if (empty) resetEmptyNudge();
         else resetCard(false);
         return;
       }
@@ -2277,7 +2430,10 @@
     stage.addEventListener("pointercancel", () => {
       clearTimeout(state.pressTimer);
       state.pressTimer = null;
-      zoom.pan = null;
+      if (zoom.pan) {
+        zoom.pan = null;
+        if (!zoom.pinching) snapZoom();
+      }
       if (zoom.pinching) return;
       if (!state.dragging || state.locked) return;
       state.dragging = false;
@@ -2301,13 +2457,15 @@
       if (zoom.pan && zoom.pan.pointerId === e.pointerId && zoomEl()) {
         zoom.x = zoom.pan.tx + (e.clientX - zoom.pan.x);
         zoom.y = zoom.pan.ty + (e.clientY - zoom.pan.y);
-        applyZoom();
+        applyZoom({ rubber: true });
       }
     });
     histFloor.addEventListener("pointerup", (e) => {
       if (zoom.pan) {
+        const moved = Math.hypot(e.clientX - zoom.pan.x, e.clientY - zoom.pan.y);
         zoom.pan = null;
-        if (zoom.scale < 1.04) resetZoom();
+        if (moved < TAP_SLOP && maybeDoubleTapZoom(e)) return;
+        snapZoom();
         return;
       }
       const d = state.histDrag;
@@ -2319,18 +2477,20 @@
       const absY = Math.abs(dy);
       if (absX < TAP_SLOP && absY < TAP_SLOP) {
         const act = zoneAt(e.clientX, e.clientY);
-        if (act === "now" || act === "board") exitHistory();
-        else if (act === "prev") go(-1);
-        else if (act === "next") go(1);
-        else if (e.target.closest?.("button")) return;
-        const now = performance.now();
-        const doubled = now - zoom.lastTap < 280;
-        zoom.lastTap = now;
-        clearTimeout(zoom.tapTimer);
-        if (doubled && zoomEl()) {
-          toggleZoomAt();
+        if (act === "now" || act === "board") {
+          exitHistory();
           return;
         }
+        if (act === "prev") {
+          go(-1);
+          return;
+        }
+        if (act === "next") {
+          go(1);
+          return;
+        }
+        if (e.target.closest?.("button")) return;
+        if (maybeDoubleTapZoom(e)) return;
         if (zoomActive()) return;
         zoom.tapTimer = setTimeout(() => {
           if (state.floor !== "history" || zoomActive()) return;
@@ -2347,6 +2507,13 @@
         go(dx < 0 ? 1 : -1);
       }
     });
+    histFloor.addEventListener("pointercancel", () => {
+      state.histDrag = null;
+      if (zoom.pan) {
+        zoom.pan = null;
+        if (!zoom.pinching) snapZoom();
+      }
+    });
 
     function wirePinch(el) {
       if (!el) return;
@@ -2356,12 +2523,13 @@
       el.addEventListener("touchcancel", onPinchEnd, { capture: true });
       el.addEventListener("wheel", (e) => {
         if (!zoomEl()) return;
-        if (!e.ctrlKey && !zoomActive()) return;
+        if (!e.ctrlKey && !e.metaKey && !zoomActive()) return;
         e.preventDefault();
         const factor = e.deltaY > 0 ? 0.92 : 1.08;
-        zoom.scale = Math.min(ZOOM_MAX, Math.max(ZOOM_MIN, zoom.scale * factor));
-        if (zoom.scale < 1.04) resetZoom();
-        else applyZoom();
+        const next = Math.min(ZOOM_MAX + 0.2, Math.max(0.82, zoom.scale * factor));
+        zoomToward(e.clientX, e.clientY, next);
+        if (next < 1.04) snapZoom();
+        else applyZoom({ clamp: true, rubber: next > ZOOM_MAX });
       }, { passive: false });
     }
     wirePinch(stage);
@@ -2369,12 +2537,13 @@
     stage.addEventListener("dblclick", (e) => {
       if (isEmptyNow() || state.floor === "history") return;
       if (e.target.closest?.("#drawer, #toast-host, #undo-bar")) return;
-      toggleZoomAt();
+      clearTimeout(zoom.tapTimer);
+      toggleZoomAt(e.clientX, e.clientY);
     });
     histFloor.addEventListener("dblclick", (e) => {
       if (e.target.closest?.("button")) return;
       clearTimeout(zoom.tapTimer);
-      toggleZoomAt();
+      toggleZoomAt(e.clientX, e.clientY);
     });
     let suppressHandleClickUntil = 0;
     $("drawer-handle").addEventListener("click", (e) => {
@@ -2436,6 +2605,12 @@
     drawer.addEventListener("pointercancel", endDrawerDrag);
 
     window.addEventListener("keydown", (e) => {
+      if (zoomActive() && e.key !== "Escape") {
+        if (["ArrowUp", "ArrowDown", "ArrowLeft", "ArrowRight", "Backspace", "d"].includes(e.key)) {
+          e.preventDefault();
+          return;
+        }
+      }
       if (e.key === "ArrowLeft") go(-1);
       else if (e.key === "ArrowRight") go(1);
       else if (e.key === "ArrowUp") {
@@ -2461,7 +2636,12 @@
         e.preventDefault();
         setDrawerOpen(!state.drawerOpen);
       }
-      else if (e.key === "Escape" && state.drawerOpen) setDrawerOpen(false);
+      else if (e.key === "Escape") {
+        if (zoomActive()) {
+          e.preventDefault();
+          resetZoom({ animate: true });
+        } else if (state.drawerOpen) setDrawerOpen(false);
+      }
     });
 
     const MISSIONS_API = "https://studio-mock-iota.vercel.app/api/missions";
@@ -2720,7 +2900,7 @@
     }
 
     async function registerReviewWorker() {
-      return navigator.serviceWorker.register("/sw-review.js?v=20261003e", { scope: "/" });
+      return navigator.serviceWorker.register("/sw-review.js?v=20261003f", { scope: "/" });
     }
 
     async function subscribePush() {
