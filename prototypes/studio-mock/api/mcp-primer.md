@@ -55,6 +55,10 @@ Studio list: `/trouble.html`. Never claim a mutation happened unless author_beat
 
 Use `place_remove` / `place_delete` (or author_beat `place.remove`) to drop a pin. `scene_upsert` does **not** replace the place list. `scene_delete` removes accidental `scene.mcp*` objects. `scene.home` is protected.
 
+### Direct art ingest
+
+When ChatGPT, Claude, or Studio already has the picture, call `asset_ingest` with `semanticId` + `kind` and **the image itself** (`imageBase64`, OpenAI `fileId`, or https `fileUrl`). The server runs sanity, PUTs Game Asset API, and returns `bindWith`. Do **not** paste a Midjourney/CDN URL onto a scene. Then `asset_bind`.
+
 ### Midjourney / execution capacity (pull — no tunnel)
 
 `midjourney_fill` enqueues on household `creative.executionCapacity`. A Mac or Windows worker **pulls** jobs outbound (Chrome Midjourney). No `MJ_WORKER_URL`.

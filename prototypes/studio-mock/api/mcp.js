@@ -27,6 +27,7 @@ import {
   getProject as getAssetProject,
   listProjects as listAssetProjects,
   describeLibrary as describeAssetLibrary,
+  ingestImage as ingestAssetImage,
   IMAGE_MODEL,
 } from "./lib/asset-jobs-store.js";
 import {
@@ -69,7 +70,7 @@ import {
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
-const SERVER = { name: "abbies-world", version: "0.6.1" };
+const SERVER = { name: "abbies-world", version: "0.6.2" };
 const HOUSEHOLD_AUDIENCE = "https://api.abbies.world";
 const PLATE_BASE = "https://studio-mock-iota.vercel.app/api/plate";
 const REVIEW_BASE = "https://studio-mock-iota.vercel.app/review.html";
@@ -83,6 +84,7 @@ const COMMAND_CARD = `## Exposed commands (these ARE on this MCP)
 DELETE / REMOVE a POI: place_remove or place_delete (sceneId + placeId, instanceId, or name). Never rewrite a scene to drop a pin.
 DELETE a scene: scene_delete (scene.home is protected). Use this for accidental scene.mcp* objects.
 FEEDBACK / BUG REPORT / ISSUE / TROUBLE TICKET: feedback_report or bug_report or trouble_ticket_create. Writes durable AW-N on household creative.troubleQueue — not chat text. Then trouble_ticket_list / trouble_ticket_get.
+INGEST ART: asset_ingest (imageBase64, OpenAI fileId, or https fileUrl + semanticId + kind) → sanity + Game Asset registry → bindWith. Do not host a temporary CDN URL first.
 NL world edit: author_beat (dryRun first; confirm:true executes; postconditions roll back lies).
 
 `;
@@ -95,7 +97,7 @@ The iPad does not use the Studio map's pixel layout. It plays one scene at a tim
 2. POIs sit on that plate at normalized coordinates: transform.position.x and .y from 0 to 1 (keep 0.12–0.88).
 3. Connect scenes with a place whose behavior is travel:<otherSceneId>. That is the exit. There is no separate edge table on the iPad.
 4. activeSceneID is where play starts.
-5. New art: asset_job_create (defaults to OpenAI gpt-image-2.5-sunburst generate) → registered semantic id → asset_bind. Optional: generate:false + asset_job_complete with a temporary https URL.
+5. New art: asset_ingest (hand the image bytes / fileId) or asset_job_create (server generates) → registered semantic id → asset_bind. Optional: generate:false + asset_job_complete with a temporary https URL.
 
 ### POI capabilities (honest limit)
 A POI is mostly how it looks plus which existing screen it opens.
@@ -121,7 +123,7 @@ Talk that should survive chat death → mission_create (narrative). Resume with 
 When an MCP mutation lies (dry-run looks right, execute reports success, world unchanged, extra objects appear), call trouble_ticket_create. That writes AW-N on household creative.troubleQueue — not chat text. Include expected/actual, relatedIds, plan, results, requestedCleanup. Then trouble_ticket_get / trouble_ticket_list. Do not claim the world changed unless postconditions passed.
 
 ### Asset generation habit (ChatGPT MCP)
-asset_project_create (optional) → asset_job_create with semanticId + brief (server writes imagePrompt, calls OpenAI gpt-image-2.5-sunburst, ingests to Game Asset registry, runs subject/framing sanity, returns registered or needs_review) → asset_bind only when registered. Prefer semantic asset IDs. Never put CDN/Midjourney URLs on scenes or POIs. Midjourney paste remains available via generate:false then asset_job_complete (same sanity). Override model with ASSET_IMAGE_MODEL (e.g. gpt-image-2.5-flare). See docs/architecture/ASSET_SANITY_CORPUS.md.
+asset_ingest (imageBase64 / fileId / https fileUrl + semanticId + kind → Game Asset registry + sanity + bindWith) or asset_project_create (optional) → asset_job_create with semanticId + brief (server writes imagePrompt, calls OpenAI gpt-image-2.5-sunburst, ingests to Game Asset registry, runs subject/framing sanity, returns registered or needs_review) → asset_bind only when registered. Prefer semantic asset IDs. Never put CDN/Midjourney URLs on scenes or POIs. Midjourney paste remains available via generate:false then asset_job_complete (same sanity). Override model with ASSET_IMAGE_MODEL (e.g. gpt-image-2.5-flare). See docs/architecture/ASSET_SANITY_CORPUS.md.
 
 ### Midjourney (pull worker — no tunnel)
 midjourney_fill enqueues on household creative.executionCapacity. The Mac sailboat worker pulls the job outbound, runs Chrome Midjourney, reports candidate URLs. No MJ_WORKER_URL tunnel. Local Mac can also /Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh submit. Poll job via GET /api/execution-capacity?jobId=… or MCP follow-up. Contract: /Users/evanrobinson/abbies.world.ios/docs/architecture/EXECUTION_CAPACITY.md.
@@ -415,6 +417,7 @@ function describe(doc) {
       feedback: "feedback_report",
       bugReport: "bug_report",
       troubleTicket: "trouble_ticket_create",
+      ingest: "asset_ingest",
     },
   };
 }
@@ -884,6 +887,39 @@ const TOOLS = [
     },
   },
   {
+    name: "asset_ingest",
+    description:
+      "INGEST artwork directly: image bytes/base64, an OpenAI fileId, or an uploaded https fileUrl plus semanticId and kind. Runs sanity, stores on the Game Asset API, registers the semantic ID, returns bindWith. Use this when ChatGPT/Claude/Studio already has the image — do not host a temporary CDN URL first.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        semanticId: {
+          type: "string",
+          description: "map.* or poi.*.exterior|interior to register",
+        },
+        kind: { type: "string", enum: ["map", "poi.exterior", "poi.interior"] },
+        brief: { type: "string", description: "What the picture is; used by sanity" },
+        imageBase64: {
+          type: "string",
+          description: "Raw base64 or data:image/png;base64,… Keep under ~3MB for MCP JSON.",
+        },
+        mimeType: { type: "string", description: "image/png, image/jpeg, image/webp" },
+        fileId: {
+          type: "string",
+          description: "OpenAI Files API id (file-…). Studio downloads with OPENAI_API_KEY.",
+        },
+        fileRef: { type: "string", description: "Alias of fileId" },
+        fileUrl: {
+          type: "string",
+          description: "Optional https image URL if bytes are already hosted. Intake only; server re-hosts.",
+        },
+        projectId: { type: "string" },
+      },
+      required: ["semanticId"],
+    },
+  },
+  {
     name: "scene_set_background_url",
     description: "Attach a picture to a scene plate by semantic asset id only. For new Midjourney art use asset_job_complete (server host) then asset_bind — raw https URLs are rejected.",
     inputSchema: {
@@ -1146,8 +1182,12 @@ const TOOLS = [
           type: "string",
           description: "Temporary https image URL — intake only; server re-hosts",
         },
+        imageBase64: { type: "string", description: "Optional direct bytes instead of stagingUrl" },
+        mimeType: { type: "string" },
+        fileId: { type: "string" },
+        fileUrl: { type: "string" },
       },
-      required: ["jobId", "stagingUrl"],
+      required: ["jobId"],
     },
   },
   {
@@ -2283,7 +2323,16 @@ async function callTool(name, args, request) {
     return generateAssetJob(args.jobId, { openaiKey: process.env.OPENAI_API_KEY || "" });
   }
   if (name === "asset_job_complete") {
-    return completeAssetJob(args.jobId, { stagingUrl: args.stagingUrl });
+    return completeAssetJob(args.jobId, {
+      stagingUrl: args.stagingUrl,
+      imageBase64: args.imageBase64,
+      mimeType: args.mimeType,
+      fileId: args.fileId || args.fileRef,
+      fileUrl: args.fileUrl,
+    });
+  }
+  if (name === "asset_ingest") {
+    return ingestAssetImage(args);
   }
 
   if (name === "midjourney_fill") {
@@ -2661,6 +2710,7 @@ export async function GET() {
       deleteScene: ["scene_delete"],
       feedback: ["feedback_report", "bug_report", "trouble_ticket_create"],
       tickets: ["trouble_ticket_get", "trouble_ticket_list", "trouble_ticket_comment", "trouble_ticket_resolve"],
+      ingest: ["asset_ingest"],
     },
   });
 }

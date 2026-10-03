@@ -34,6 +34,7 @@ for (const required of [
   "bug_report",
   "trouble_ticket_create",
   "trouble_ticket_list",
+  "asset_ingest",
 ]) {
   assert(names.includes(required), `missing ${required}`);
 }
@@ -42,6 +43,7 @@ const idx = (name) => names.indexOf(name);
 assert(idx("place_remove") < idx("author_beat"), "place_remove before author_beat");
 assert(idx("feedback_report") < idx("author_beat"), "feedback_report before author_beat");
 assert(idx("trouble_ticket_create") < idx("asset_job_create"), "tickets before asset jobs");
+assert(idx("asset_ingest") < idx("asset_job_create"), "asset_ingest before generate jobs");
 
 for (const tool of tools) {
   walk(tool.inputSchema, tool.name);
