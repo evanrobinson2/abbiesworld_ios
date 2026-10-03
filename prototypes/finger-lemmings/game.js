@@ -5,8 +5,8 @@
 import {
   createGame,
   stepGame,
-  setLight,
-  clearLight,
+  placeLight,
+  toggleLight,
   restartLevel,
   nextLevel,
   TILE,
@@ -41,6 +41,11 @@ const PAL = {
   light: "#fff3c4",
   lightMid: "#ffb24a",
   lightDim: "#8a5a20",
+  lampBody: "#4a4a54",
+  lampBodyOff: "#2e2e36",
+  lampHandle: "#3a2414",
+  lampBezel: "#6a6a74",
+  lampLensOff: "#101014",
   spawn: "#5a3a18",
   ink: "#1a120c",
 };
@@ -48,8 +53,11 @@ const PAL = {
 let game = createGame(0);
 let last = performance.now();
 let pointerDown = false;
+let dragOrigin = null;
+let didDrag = false;
 let buffer = null;
 let bctx = null;
+const DRAG_PX = 10;
 
 function ensureBuffer() {
   const w = game.level.pixelW;
@@ -183,22 +191,13 @@ function drawLevel(c) {
   drawHome(c);
 }
 
-function drawLight(c) {
-  const L = game.light;
-  if (!L.active) return;
-
-  const lx = px(L.x);
-  const ly = px(L.y);
-  const r = L.radius;
-
-  // Stepped diamond falloff — chunky, readable pixel glow
+function drawGlow(c, lx, ly, r) {
   const bands = [
     { d: r, color: "rgba(255,178,74,0.16)" },
     { d: r * 0.62, color: "rgba(255,178,74,0.28)" },
     { d: r * 0.36, color: "rgba(255,210,120,0.42)" },
     { d: r * 0.18, color: "rgba(255,243,196,0.62)" },
   ];
-
   for (const band of bands) {
     const half = Math.max(PX * 2, Math.floor(band.d / PX) * PX);
     c.fillStyle = band.color;
@@ -207,13 +206,39 @@ function drawLight(c) {
       c.fillRect(lx - row, ly + dy, row * 2 + PX, PX);
     }
   }
+}
 
-  // Core lamp — big readable cross
-  c.fillStyle = PAL.light;
-  fillPx(c, lx - PX, ly - PX * 3, PX * 2, PX * 6);
-  fillPx(c, lx - PX * 3, ly - PX, PX * 6, PX * 2);
-  c.fillStyle = PAL.lightMid;
-  fillPx(c, lx - PX, ly - PX, PX * 2, PX * 2);
+function drawFlashlight(c) {
+  const L = game.light;
+  const lx = px(L.x);
+  const ly = px(L.y);
+  const on = L.active;
+
+  if (on) drawGlow(c, lx, ly, L.radius);
+
+  // Handle
+  c.fillStyle = PAL.lampHandle;
+  fillPx(c, lx - PX * 6, ly + PX, PX * 4, PX * 2);
+  fillPx(c, lx - PX * 5, ly + PX * 2, PX * 2, PX * 3);
+
+  // Barrel
+  c.fillStyle = on ? PAL.lampBody : PAL.lampBodyOff;
+  fillPx(c, lx - PX * 5, ly - PX, PX * 6, PX * 3);
+
+  // Bezel
+  c.fillStyle = on ? PAL.lampBezel : PAL.ink;
+  fillPx(c, lx + PX, ly - PX * 2, PX * 2, PX * 5);
+
+  // Lens — dark when off, bright when on
+  c.fillStyle = on ? PAL.light : PAL.lampLensOff;
+  fillPx(c, lx + PX * 2, ly - PX, PX * 2, PX * 3);
+  if (on) {
+    c.fillStyle = PAL.lightMid;
+    fillPx(c, lx + PX * 3, ly, PX, PX);
+  } else {
+    c.fillStyle = PAL.lightDim;
+    fillPx(c, lx + PX * 2, ly, PX, PX);
+  }
 }
 
 function hueToPixel(hue, lit) {
@@ -287,7 +312,7 @@ function syncHud() {
 function render() {
   const c = ensureBuffer();
   drawLevel(c);
-  drawLight(c);
+  drawFlashlight(c);
   drawDots(c);
 
   ctx.imageSmoothingEnabled = false;
@@ -304,30 +329,36 @@ function frame(now) {
   requestAnimationFrame(frame);
 }
 
-function onPointer(e, down) {
+function onPointerDown(e) {
+  e.preventDefault();
   const p = worldPoint(e.clientX, e.clientY);
-  if (down) {
-    pointerDown = true;
-    canvas.setPointerCapture?.(e.pointerId);
-    setLight(game, p.x, p.y, true);
-  } else if (pointerDown) {
-    setLight(game, p.x, p.y, true);
-  }
+  pointerDown = true;
+  didDrag = false;
+  dragOrigin = p;
+  canvas.setPointerCapture?.(e.pointerId);
+  placeLight(game, p.x, p.y);
 }
 
-canvas.addEventListener("pointerdown", (e) => onPointer(e, true));
-canvas.addEventListener("pointermove", (e) => onPointer(e, false));
-canvas.addEventListener("pointerup", () => {
+function onPointerMove(e) {
+  if (!pointerDown || !dragOrigin) return;
+  const p = worldPoint(e.clientX, e.clientY);
+  if (Math.hypot(p.x - dragOrigin.x, p.y - dragOrigin.y) > DRAG_PX) {
+    didDrag = true;
+  }
+  placeLight(game, p.x, p.y);
+}
+
+function onPointerUp() {
+  if (!pointerDown) return;
   pointerDown = false;
-  clearLight(game);
-});
-canvas.addEventListener("pointercancel", () => {
-  pointerDown = false;
-  clearLight(game);
-});
-canvas.addEventListener("pointerleave", () => {
-  if (!pointerDown) clearLight(game);
-});
+  if (!didDrag) toggleLight(game);
+  dragOrigin = null;
+}
+
+canvas.addEventListener("pointerdown", onPointerDown);
+canvas.addEventListener("pointermove", onPointerMove);
+canvas.addEventListener("pointerup", onPointerUp);
+canvas.addEventListener("pointercancel", onPointerUp);
 
 document.getElementById("restart").addEventListener("click", () => {
   game = restartLevel(game);

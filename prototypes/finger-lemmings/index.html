@@ -98,7 +98,7 @@
       display: block;
       max-width: 100%;
       max-height: 100%;
-      cursor: none;
+      cursor: crosshair;
       touch-action: none;
       image-rendering: pixelated;
       image-rendering: crisp-edges;
@@ -211,7 +211,7 @@
   <div class="shell">
     <header>
       <h1 class="brand"><span>ABBIE'S WORLD</span>FINGER LEMMINGS</h1>
-      <p class="lede">Hold light with your finger. Lead the pixels home.</p>
+      <p class="lede">Place the flashlight. Click to shine. Lead the pixels home.</p>
     </header>
 
     <section class="chamber" aria-label="Pixel maze">
@@ -220,7 +220,7 @@
         <div class="pill" id="levelName">1. WARM-UP</div>
         <div class="pill">HOME <strong id="saved">0</strong>/<span id="need">5</span> · LOST <span class="lost" id="lost">0</span></div>
       </div>
-      <div id="status">TOUCH TO SHINE · LEAD THEM HOME</div>
+      <div id="status">PLACE THE FLASHLIGHT · CLICK TO SHINE</div>
       <div id="banner" hidden>
         <div class="card">
           <h2 id="bannerTitle">SAFE</h2>
@@ -235,7 +235,7 @@
 
     <footer>
       <button type="button" id="restart">RESTART</button>
-      <div class="hint">Press &amp; drag — they chase the glow. Avoid red pits.</div>
+      <div class="hint">Drag to place · click to toggle the beam. Avoid red pits.</div>
     </footer>
   </div>
   <script type="module" src="./game.js"></script>

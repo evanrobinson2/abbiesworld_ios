@@ -31,7 +31,7 @@ export function createGame(levelIndex = 0) {
   return {
     levelIndex,
     level,
-    light: { x: spawn.x + 50, y: spawn.y, radius: 120, active: false },
+    light: { x: spawn.x + 56, y: spawn.y, radius: 120, active: false },
     dots: [],
     spawn,
     goal,
@@ -41,7 +41,7 @@ export function createGame(levelIndex = 0) {
     lost: 0,
     time: 0,
     status: "playing", // playing | won | lost
-    message: "Touch to shine. Lead them home.",
+    message: "Place the flashlight. Click to shine.",
   };
 }
 
@@ -110,9 +110,17 @@ function separate(dots, self) {
 }
 
 export function setLight(game, x, y, active = true) {
+  placeLight(game, x, y);
+  game.light.active = active;
+}
+
+export function placeLight(game, x, y) {
   game.light.x = clamp(x, 8, game.level.pixelW - 8);
   game.light.y = clamp(y, 8, game.level.pixelH - 8);
-  game.light.active = active;
+}
+
+export function toggleLight(game) {
+  game.light.active = !game.light.active;
 }
 
 export function clearLight(game) {
@@ -208,7 +216,7 @@ export function stepGame(game, dtRaw) {
   } else if (light.active) {
     game.message = "Leading…";
   } else if (remaining > 0) {
-    game.message = "They’re waiting for light.";
+    game.message = "Flashlight is off. Click to shine.";
   }
 
   return game;
