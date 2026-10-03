@@ -1,0 +1,12 @@
+{
+  "name": "sprout-lab",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Sprout Lab — one living sprout reaching for light. Vercel simulation, iPad path later.",
+  "scripts": {
+    "dev": "npx --yes serve -l 5177 .",
+    "start": "npx --yes serve -l 5177 .",
+    "test": "node sim.test.js"
+  }
+}
