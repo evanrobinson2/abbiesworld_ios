@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- review-ui 20261003h -->
+<!-- review-ui 20261003i -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0a0a0c" />
   <meta name="format-detection" content="telephone=no" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <link rel="manifest" href="/manifest.webmanifest?v=20261003h" />
+  <link rel="manifest" href="/manifest.webmanifest?v=20261003i" />
   <link rel="apple-touch-icon" href="/plates/home.jpg" />
   <title>Review · Abbie’s World</title>
   <style>
@@ -1821,6 +1821,18 @@
       else render();
     }
 
+    function archivePreviewSrc(row) {
+      const semantic = String(row?.semanticId || "").trim();
+      if (semantic) {
+        return `/api/plate?semantic=${encodeURIComponent(semantic)}`;
+      }
+      return row?.previewUrl || row?.url || "";
+    }
+
+    function rowLooksBrowsable(row) {
+      return Boolean(archivePreviewSrc(row));
+    }
+
     function setHistFilter(filter) {
       const order = ["all", "boarded", "dumped", "harvested"];
       let next = String(filter || "all");
@@ -1837,13 +1849,12 @@
     function filterHistoryRows(rows, filter) {
       const list = Array.isArray(rows) ? rows : [];
       const f = filter || "all";
-      if (f === "all") return list.filter((r) => r?.previewUrl || r?.url);
-      if (f === "boarded") return list.filter((r) => r.status === "boarded" && (r.previewUrl || r.url));
-      if (f === "dumped") return list.filter((r) => r.status === "dumped" && (r.previewUrl || r.url));
-      if (f === "harvested") {
-        return list.filter((r) => r.status === "harvested" && (r.previewUrl || r.url));
-      }
-      return list.filter((r) => r?.previewUrl || r?.url);
+      const withPlate = list.filter(rowLooksBrowsable);
+      if (f === "all") return withPlate;
+      if (f === "boarded") return withPlate.filter((r) => r.status === "boarded");
+      if (f === "dumped") return withPlate.filter((r) => r.status === "dumped");
+      if (f === "harvested") return withPlate.filter((r) => r.status === "harvested");
+      return withPlate;
     }
 
     function applyHistoryFilter({ resetIndex = false } = {}) {
@@ -1876,9 +1887,9 @@
         const st = String(row.status || "queued");
         const prompt = String(row.prompt || "").slice(0, 900);
         const when = String(row.at || "").replace("T", " ").slice(0, 16);
-        const src = row.previewUrl || row.url || "";
+        const src = archivePreviewSrc(row);
         const img = src
-          ? `<img src="${escapeAttr(src)}" alt="" draggable="false" />`
+          ? `<img src="${escapeAttr(src)}" alt="" draggable="false" loading="lazy" />`
           : `<div class="missing">No plate bytes</div>`;
         const canUnkeep = st === "boarded" && row.proofId;
         const canRestore = st === "dumped" && row.proofId;
@@ -2990,7 +3001,7 @@
     }
 
     async function registerReviewWorker() {
-      return navigator.serviceWorker.register("/sw-review.js?v=20261003h", { scope: "/" });
+      return navigator.serviceWorker.register("/sw-review.js?v=20261003i", { scope: "/" });
     }
 
     async function subscribePush() {
