@@ -1,3 +1,5 @@
+import { unapprovedImageGallery, galleryMarkdown } from "./proof-display.js";
+
 /**
  * Mission OS — durable intent store (POC).
  *
@@ -459,7 +461,7 @@ export function upsertMissionOnDoc(doc, mission) {
   return mission;
 }
 
-export function describeMission(mission) {
+export function describeMission(mission, { worldDoc = null } = {}) {
   if (!mission) return { error: "mission_missing" };
 
   const reqs = mission.requirements || [];
@@ -558,6 +560,10 @@ export function describeMission(mission) {
       ? awaitingProofs.map((p) => `- proof ${p.id} (${p.kind})`).join("\n")
       : "- (no proofs awaiting approval)",
     "",
+    "## Unapproved images",
+    galleryMarkdown(unapprovedImageGallery(mission, { worldDoc })) ||
+      "- (none — attach proofs or wait for harvest)",
+    "",
     "## Notifications",
     unreadNotes.length
       ? unreadNotes.map((n) => `- [${n.type}] ${n.text}`).join("\n")
@@ -585,6 +591,7 @@ export function describeMission(mission) {
     requirementCounts: byStatus,
     unreadNotifications: unreadNotes.length,
     recentFeedback: (mission.feedback || []).slice(-8),
+    unapprovedImages: unapprovedImageGallery(mission, { worldDoc }),
     text: lines.join("\n"),
   };
 }
@@ -870,6 +877,7 @@ export function deckFromMission(mission, { proofId = null } = {}) {
       index: Number(c.index),
       label: c.label || `Candidate ${c.index}`,
       url: c.url,
+      previewUrl: c.previewUrl || c.thumbUrl || null,
       jobId: c.jobId || null,
     })),
   };
@@ -935,7 +943,7 @@ export function approveProof(
   return { mission, approval, notification };
 }
 
-/** Dump a proof (or one candidate). Reopens art requirement for replacement. */
+/** Dump one candidate (keep the rest) or the whole proof if no index / last remaining. */
 export function rejectProof(
   mission,
   {
@@ -960,10 +968,30 @@ export function rejectProof(
       ? candidates.find((c) => Number(c.index) === idx) || candidates[idx - 1] || null
       : null;
 
-  proof.status = "rejected";
-  proof.rejectedAt = nowIso();
-  proof.rejectedIndex = idx;
-  proof.rejectDirection = String(direction || "replace").slice(0, 40);
+  if (!proof.payload) proof.payload = { candidates: [] };
+  proof.payload.dumped = Array.isArray(proof.payload.dumped) ? proof.payload.dumped : [];
+
+  let remaining = candidates;
+  if (dumped) {
+    remaining = candidates.filter((c) => c !== dumped && Number(c.index) !== Number(dumped.index));
+    proof.payload.candidates = remaining;
+    proof.payload.dumped.push({ ...dumped, dumpedAt: nowIso() });
+  }
+
+  const dumpAll = !dumped || remaining.length === 0;
+  if (dumpAll) {
+    proof.status = "rejected";
+    proof.rejectedAt = nowIso();
+    proof.rejectedIndex = idx;
+    proof.rejectDirection = String(direction || "replace").slice(0, 40);
+    if (!dumped && candidates.length) {
+      proof.payload.dumped.push(...candidates.map((c) => ({ ...c, dumpedAt: nowIso() })));
+      proof.payload.candidates = [];
+    }
+  } else {
+    proof.status = "awaiting_approval";
+    proof.rejectedIndex = idx;
+  }
 
   const approval = {
     id: newId("appr"),
@@ -982,9 +1010,10 @@ export function rejectProof(
 
   const req = (mission.requirements || []).find((r) => r.id === proof.requirementId);
   if (req) {
-    req.status = "open";
+    req.status = dumpAll ? "open" : "proofs_ready";
     if (!req.links) req.links = {};
     req.links.lastDump = { at: approval.at, candidateIndex: idx, note: approval.note };
+    req.links.candidates = proof.payload?.candidates || [];
   }
 
   const notification = {
@@ -1000,7 +1029,137 @@ export function rejectProof(
   mission.notifications.push(notification);
   mission.updatedAt = nowIso();
 
-  return { mission, approval, notification };
+  return { mission, approval, notification, remaining: (proof.payload?.candidates || []).length };
+}
+
+/**
+ * Undo Keep: reopen the proof. Caller deletes registry bytes.
+ */
+export function reverseKeep(
+  mission,
+  { proofId, note = "", surface = "drop", by = "evan" } = {}
+) {
+  const proof = (mission.proofs || []).find((p) => p.id === proofId);
+  if (!proof) return { error: "proof_missing", proofId };
+  if (proof.status !== "approved") {
+    return { error: "proof_not_kept", status: proof.status };
+  }
+
+  const req = (mission.requirements || []).find((r) => r.id === proof.requirementId);
+  const idx = Number(proof.approvedIndex) || null;
+  const chosen =
+    (proof.payload?.candidates || []).find((c) => Number(c.index) === idx) ||
+    req?.links?.approvedCandidate ||
+    null;
+  const semanticId = req?.semanticId || chosen?.semanticId || null;
+  const registryKey = req?.links?.registryIngest?.registryKey || chosen?.registryKey || null;
+
+  proof.status = "awaiting_approval";
+  delete proof.approvedIndex;
+  delete proof.approvedAt;
+  proof.reversedAt = nowIso();
+
+  if (req) {
+    req.status = "proofs_ready";
+    if (!req.links) req.links = {};
+    delete req.links.approvedCandidate;
+    req.links.registryIngest = null;
+  }
+
+  const approval = {
+    id: newId("appr"),
+    proofId,
+    decision: "unkeep",
+    candidateIndex: idx,
+    note: String(note || "").slice(0, 240),
+    by: String(by || "evan").slice(0, 40),
+    at: nowIso(),
+    surface: String(surface || "drop").slice(0, 40),
+    candidate: chosen,
+    semanticId,
+    registryKey,
+  };
+  mission.approvals = mission.approvals || [];
+  mission.approvals.push(approval);
+
+  const notification = {
+    id: newId("note"),
+    type: "proof_unkept",
+    at: nowIso(),
+    text: `${mission.title} — unkept ${proof.requirementId}${idx != null ? ` candidate ${idx}` : ""} (registry bytes pulled)`,
+    read: false,
+    proofId,
+    approvalId: approval.id,
+  };
+  mission.notifications = mission.notifications || [];
+  mission.notifications.push(notification);
+  mission.updatedAt = nowIso();
+
+  return { mission, approval, notification, semanticId, registryKey, candidate: chosen };
+}
+
+/**
+ * Undo Dump: put one candidate back on the live proof.
+ */
+export function restoreDump(
+  mission,
+  { proofId, candidateIndex, note = "", surface = "drop", by = "evan" } = {}
+) {
+  const proof = (mission.proofs || []).find((p) => p.id === proofId);
+  if (!proof) return { error: "proof_missing", proofId };
+  if (!proof.payload) proof.payload = { candidates: [], dumped: [] };
+  const dumped = Array.isArray(proof.payload.dumped) ? proof.payload.dumped : [];
+  const idx = Number(candidateIndex);
+  if (!Number.isFinite(idx) || idx < 1) {
+    return { error: "candidate_index_required" };
+  }
+  const foundI = dumped.findIndex((c) => Number(c.index) === idx);
+  if (foundI < 0) return { error: "dumped_missing", candidateIndex: idx };
+  const [restored] = dumped.splice(foundI, 1);
+  delete restored.dumpedAt;
+  proof.payload.dumped = dumped;
+  proof.payload.candidates = [...(proof.payload.candidates || []), restored].sort(
+    (a, b) => Number(a.index) - Number(b.index)
+  );
+  proof.status = "awaiting_approval";
+  delete proof.rejectedAt;
+  delete proof.rejectedIndex;
+
+  const req = (mission.requirements || []).find((r) => r.id === proof.requirementId);
+  if (req) {
+    req.status = "proofs_ready";
+    if (!req.links) req.links = {};
+    req.links.candidates = proof.payload.candidates;
+  }
+
+  const approval = {
+    id: newId("appr"),
+    proofId,
+    decision: "restore",
+    candidateIndex: idx,
+    note: String(note || "").slice(0, 240),
+    by: String(by || "evan").slice(0, 40),
+    at: nowIso(),
+    surface: String(surface || "drop").slice(0, 40),
+    candidate: restored,
+  };
+  mission.approvals = mission.approvals || [];
+  mission.approvals.push(approval);
+
+  const notification = {
+    id: newId("note"),
+    type: "proof_restored",
+    at: nowIso(),
+    text: `${mission.title} — restored ${proof.requirementId} candidate ${idx}`,
+    read: false,
+    proofId,
+    approvalId: approval.id,
+  };
+  mission.notifications = mission.notifications || [];
+  mission.notifications.push(notification);
+  mission.updatedAt = nowIso();
+
+  return { mission, approval, notification, candidate: restored };
 }
 
 /**
@@ -1078,6 +1237,115 @@ export function appendMissionFeedback(
   mission.updatedAt = at;
 
   return { mission, feedback: entry, notification };
+}
+
+function collectResultUrls(result) {
+  if (!result || typeof result !== "object") return [];
+  const raw = [];
+  if (Array.isArray(result.candidateUrls)) raw.push(...result.candidateUrls);
+  if (Array.isArray(result.urls)) raw.push(...result.urls);
+  if (Array.isArray(result.images)) {
+    raw.push(...result.images.map((x) => (typeof x === "string" ? x : x?.url)).filter(Boolean));
+  }
+  if (typeof result.url === "string") raw.push(result.url);
+  return [...new Set(raw.map((u) => String(u || "").trim()).filter((u) => /^https:\/\//i.test(u)))];
+}
+
+/**
+ * Phone empty-state history: proofs, dumps, boards, Midjourney harvests.
+ */
+export function reviewHistoryFromDoc(doc, { limit = 80 } = {}) {
+  const rows = [];
+  const bag = doc?.creative?.missionOs?.missions || {};
+  for (const m of Object.values(bag)) {
+    if (!m || typeof m !== "object") continue;
+    const reqById = Object.fromEntries((m.requirements || []).map((r) => [r.id, r]));
+    for (const proof of m.proofs || []) {
+      const req = reqById[proof.requirementId] || {};
+      const prompt =
+        req.links?.lastPrompt ||
+        req.mustBecomeTrue ||
+        m.intent ||
+        m.title ||
+        "";
+      const live = (proof.payload?.candidates || []).map((c) => ({ ...c, lane: "live" }));
+      const dumped = (proof.payload?.dumped || []).map((c) => ({ ...c, lane: "dumped" }));
+      for (const c of [...live, ...dumped]) {
+        const idx = Number(c.index);
+        let status = "awaiting";
+        if (c.lane === "dumped") status = "dumped";
+        else if (proof.status === "approved" && Number(proof.approvedIndex) === idx) status = "boarded";
+        else if (proof.status === "approved") status = "runner_up";
+        else if (proof.status === "rejected") status = "dumped";
+        else if (proof.status === "awaiting_approval") status = "awaiting";
+        rows.push({
+          id: `${proof.id}:${idx}:${c.lane}`,
+          at: c.dumpedAt || proof.approvedAt || proof.rejectedAt || proof.createdAt || m.updatedAt,
+          missionId: m.id,
+          missionTitle: m.title,
+          proofId: proof.id,
+          requirementId: proof.requirementId || null,
+          semanticId: req.semanticId || c.semanticId || null,
+          prompt: c.prompt || c.brief || prompt,
+          candidateIndex: idx,
+          url: c.url || null,
+          previewUrl: c.previewUrl || c.thumbUrl || c.url || null,
+          status,
+          jobId: c.jobId || null,
+          source: "mission",
+        });
+      }
+    }
+  }
+
+  const ec = doc?.creative?.executionCapacity?.jobs || {};
+  for (const job of Object.values(ec)) {
+    if (!job || typeof job !== "object") continue;
+    const prompt = job.payload?.prompt || "";
+    const semanticId = job.payload?.semanticId || job.payload?.bindWith || null;
+    const urls = collectResultUrls(job.result);
+    if (!urls.length && job.state !== "completed") {
+      rows.push({
+        id: `ec:${job.id}`,
+        at: job.updatedAt || job.createdAt,
+        missionId: job.payload?.missionId || null,
+        missionTitle: "Midjourney queue",
+        proofId: null,
+        requirementId: job.payload?.requirementId || null,
+        semanticId,
+        prompt,
+        candidateIndex: null,
+        url: null,
+        previewUrl: null,
+        status: job.state || "queued",
+        jobId: job.id,
+        source: "executionCapacity",
+      });
+      continue;
+    }
+    urls.forEach((url, i) => {
+      rows.push({
+        id: `ec:${job.id}:${i + 1}`,
+        at: job.finishedAt || job.updatedAt || job.createdAt,
+        missionId: job.payload?.missionId || null,
+        missionTitle: "Midjourney harvest",
+        proofId: null,
+        requirementId: job.payload?.requirementId || null,
+        semanticId,
+        prompt,
+        candidateIndex: i + 1,
+        url,
+        previewUrl: url,
+        status: "harvested",
+        jobId: job.id,
+        source: "executionCapacity",
+      });
+    });
+  }
+
+  rows.sort((a, b) => String(b.at || "").localeCompare(String(a.at || "")));
+  const cap = Math.min(120, Math.max(1, Number(limit) || 80));
+  return rows.slice(0, cap);
 }
 
 export function __resetMissionsCacheForTests() {

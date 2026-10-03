@@ -6,6 +6,20 @@
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
       ]
+    },
+    {
+      "source": "/sw-review.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Service-Worker-Allowed", "value": "/" },
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/manifest.webmanifest",
+      "headers": [
+        { "key": "Content-Type", "value": "application/manifest+json" }
+      ]
     }
   ],
   "rewrites": [
@@ -59,11 +73,23 @@
       "maxDuration": 60,
       "includeFiles": "api/lib/**"
     },
+    "api/push.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/lib/**"
+    },
+    "api/execution-capacity.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/lib/**"
+    },
     "api/media-catalog.js": {
       "includeFiles": "media/**"
     },
     "api/plate.js": {
       "includeFiles": "api/overrides/**"
+    },
+    "api/proof-image.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/lib/**"
     }
   }
 }

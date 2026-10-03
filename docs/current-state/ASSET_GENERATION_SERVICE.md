@@ -25,12 +25,12 @@ queued → prompting → awaiting_image → ingesting → registered → bound
 | `queued` | Job accepted |
 | `prompting` | Style-safe `imagePrompt` written (OpenAI chat) |
 | `awaiting_image` | Waiting for optional manual https paste (`generate:false`) |
-| `ingesting` | OpenAI `gpt-image-2` (or staging download) → `PUT` Game Asset API |
+| `ingesting` | OpenAI `gpt-image-2.5-sunburst` (or staging download) → `PUT` Game Asset API |
 | `registered` | Bytes live under slash key on `abbies-world-2`; semantic ID is durable |
 | `bound` | World scene/place references **semantic ID only** |
 | `failed` | Terminal; `error` set |
 
-**Default ChatGPT MCP path:** `asset_job_create` with `generate:true` (default when `OPENAI_API_KEY` is set) writes the prompt, calls OpenAI Images (`gpt-image-2`), ingests bytes, returns `registered`. Midjourney is optional via `generate:false` + `asset_job_complete`.
+**Default ChatGPT MCP path:** `asset_job_create` with `generate:true` (default when `OPENAI_API_KEY` is set) writes the prompt, calls OpenAI Images (`gpt-image-2.5-sunburst`; override `ASSET_IMAGE_MODEL`), ingests bytes, runs framing sanity, returns `registered` or `needs_review`. Midjourney is optional via `generate:false` + `asset_job_complete`.
 
 **Hard rule:** world documents and `asset_bind` / `place_upsert` / `scene_set_background_*` must never store Midjourney or other third-party CDN URLs. Staging URLs are intake-only for `asset_job_complete`.
 
@@ -87,7 +87,7 @@ Same Streamable HTTP endpoint as world tools: `/api/mcp` (ChatGPT install: `docs
 | `asset_project_create` | In-memory project + library intent + suggested semantic IDs |
 | `asset_library_describe` | Refresh library intent / suggestions |
 | `asset_project_status` | Read project or list projects |
-| `asset_job_create` | `POST /api/asset-jobs` — prompt + optional OpenAI `gpt-image-2` generate → often `registered` |
+| `asset_job_create` | `POST /api/asset-jobs` — prompt + optional OpenAI `gpt-image-2.5-sunburst` generate → often `registered` |
 | `asset_job_generate` | Re-run Images API for an `awaiting_image` / failed job |
 | `asset_job_list` | `GET /api/asset-jobs` |
 | `asset_job_status` | `GET /api/asset-jobs?id=` |

@@ -36,9 +36,10 @@ export function GET(request) {
       bearer_methods_supported: ["header"],
       resource_documentation: `${base}/api/mcp`,
       abbies_world: {
-        // Household API still accepts this same Auth0 subject; tokens minted for
-        // the MCP resource audience are also accepted by the world server.
+        // ChatGPT OAuth tokens have aud=MCP URL. Studio bridges to the household
+        // API with ABBIES_WORLD_TOKEN (aud=https://api.abbies.world) for world tools.
         household_api_audience: "https://api.abbies.world",
+        world_bridge: "ABBIES_WORLD_TOKEN on Studio (Studio → Copy MCP token)",
         chatgpt_callbacks: [
           "https://chatgpt.com/connector_platform_oauth_redirect",
           "https://chat.openai.com/connector_platform_oauth_redirect",

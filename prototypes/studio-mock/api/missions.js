@@ -9,7 +9,7 @@
  *
  * GET  /api/missions?missionId=…           → review deck from awaiting proof
  * GET  /api/missions?missionId=…&describe=1 → mission_describe JSON
- * POST /api/missions { action: board|dump|feedback, missionId, … }
+ * POST /api/missions { action: board|dump|unkeep|restore|feedback|registry, missionId, … }
  */
 import {
   getMissionFromDoc,
@@ -20,8 +20,13 @@ import {
   describeMission,
   approveProof,
   rejectProof,
+  reverseKeep,
+  restoreDump,
   appendMissionFeedback,
+  reviewHistoryFromDoc,
 } from "./lib/missions-store.js";
+import { registerStagingImage } from "./lib/asset-jobs-store.js";
+import { deleteRegisteredAsset } from "./lib/asset-registry.js";
 
 const ORIGIN = (
   process.env.ABBIES_WORLD_SERVER_URL ||
@@ -130,11 +135,28 @@ export async function GET(request) {
       missions: listMissionsFromDoc(current.body, { limit: 20 }).map((m) => {
         const feedback = m.feedback || [];
         const last = feedback[feedback.length - 1] || null;
+        const awaitingProofs = (m.proofs || []).filter((p) => p.status === "awaiting_approval");
+        const proof = awaitingProofs[awaitingProofs.length - 1] || awaitingProofs[0] || null;
+        const req = proof
+          ? (m.requirements || []).find((r) => r.id === proof.requirementId)
+          : null;
+        const cands = proof?.payload?.candidates || [];
+        const first = cands[0] || null;
         return {
           id: m.id,
           title: m.title,
           status: m.status,
-          awaitingProofs: (m.proofs || []).filter((p) => p.status === "awaiting_approval").length,
+          awaitingProofs: awaitingProofs.length,
+          latestAwaiting: proof
+            ? {
+                proofId: proof.id,
+                requirementId: proof.requirementId || null,
+                semanticId: req?.semanticId || null,
+                candidateCount: cands.length,
+                previewUrl: first?.previewUrl || first?.thumbUrl || first?.url || null,
+                at: proof.createdAt || proof.at || m.updatedAt || null,
+              }
+            : null,
           feedbackCount: feedback.length,
           lastFeedback: last
             ? {
@@ -147,6 +169,7 @@ export async function GET(request) {
           unreadNotifications: (m.notifications || []).filter((n) => !n.read).length,
         };
       }),
+      history: reviewHistoryFromDoc(current.body, { limit: 80 }),
     });
   }
 
@@ -189,14 +212,23 @@ export async function POST(request) {
       ? "board"
       : body.action === "dump"
         ? "dump"
-        : body.action === "feedback"
-          ? "feedback"
-          : "";
-  if (!missionId || !action) {
+        : body.action === "unkeep"
+          ? "unkeep"
+          : body.action === "restore"
+            ? "restore"
+            : body.action === "feedback"
+              ? "feedback"
+              : body.action === "registry"
+                ? "registry"
+                : "";
+  if (!missionId && action !== "registry") {
+    return json({ error: "missionId_action_required" }, 400);
+  }
+  if (!action) {
     return json({ error: "missionId_action_required" }, 400);
   }
   const proofId = String(body.proofId || "").trim();
-  if ((action === "board" || action === "dump") && !proofId) {
+  if ((action === "board" || action === "dump" || action === "unkeep" || action === "restore") && !proofId) {
     return json({ error: "missionId_proofId_action_required" }, 400);
   }
 
@@ -208,6 +240,59 @@ export async function POST(request) {
   const expected = current.body.revision;
   const doc = structuredClone(current.body);
   hydrateFromWorld(doc);
+
+  async function ingestToRegistry({ semanticId, brief, url }) {
+    const sid = String(semanticId || "").trim();
+    const staging = String(url || "").trim();
+    if (!sid) return { error: "semantic_id_required" };
+    if (!/^https:\/\//i.test(staging)) return { error: "image_url_required" };
+    return registerStagingImage({
+      semanticId: sid,
+      brief: String(brief || sid).slice(0, 800),
+      stagingUrl: staging,
+    });
+  }
+
+  if (action === "registry") {
+    let semanticId = body.semanticId;
+    let url = body.url || body.candidateUrl;
+    let brief = body.prompt || body.brief || "";
+    if (missionId) {
+      const mission = getMissionFromDoc(doc, missionId);
+      if (mission) {
+        const proof = proofId
+          ? (mission.proofs || []).find((p) => p.id === proofId)
+          : null;
+        const req = proof
+          ? (mission.requirements || []).find((r) => r.id === proof.requirementId)
+          : (mission.requirements || []).find((r) => r.semanticId === semanticId);
+        const all = [
+          ...(proof?.payload?.candidates || []),
+          ...(proof?.payload?.dumped || []),
+        ];
+        const idx = Number(body.candidateIndex);
+        const chosen =
+          Number.isFinite(idx) && idx >= 1
+            ? all.find((c) => Number(c.index) === idx) || all[idx - 1]
+            : null;
+        semanticId = semanticId || req?.semanticId || chosen?.semanticId;
+        url = url || chosen?.url;
+        brief = brief || req?.mustBecomeTrue || mission.title;
+      }
+    }
+    const registry = await ingestToRegistry({ semanticId, brief, url });
+    return json(
+      {
+        ok: !registry.error,
+        action,
+        origin: ORIGIN,
+        registry,
+        history: reviewHistoryFromDoc(current.body, { limit: 80 }),
+      },
+      registry.error ? 400 : 200
+    );
+  }
+
   const mission = getMissionFromDoc(doc, missionId);
   if (!mission) return json({ error: "mission_missing", missionId }, 404);
 
@@ -226,25 +311,58 @@ export async function POST(request) {
             note: body.note,
             surface: body.surface || "ipad_gesture_review",
           })
-        : appendMissionFeedback(mission, {
-            text: body.text || body.note,
-            kind: body.kind,
-            requirementId: body.requirementId,
-            proofId: proofId || null,
-            candidateIndex: body.candidateIndex,
-            surface: body.surface || "review_sidecar",
-          });
+        : action === "unkeep"
+          ? reverseKeep(mission, {
+              proofId,
+              note: body.note,
+              surface: body.surface || "ipad_gesture_review",
+            })
+          : action === "restore"
+            ? restoreDump(mission, {
+                proofId,
+                candidateIndex: body.candidateIndex,
+                note: body.note,
+                surface: body.surface || "ipad_gesture_review",
+              })
+            : appendMissionFeedback(mission, {
+                text: body.text || body.note,
+                kind: body.kind,
+                requirementId: body.requirementId,
+                proofId: proofId || null,
+                candidateIndex: body.candidateIndex,
+                surface: body.surface || "review_sidecar",
+              });
 
   if (result.error) return json(result, 400);
 
   upsertMissionOnDoc(doc, result.mission);
-  // Preserve players from server read (never wipe).
   doc.players = structuredClone(current.body.players);
 
   const saved = await writeWorld(auth, doc, expected);
   if (saved.status === 409) return json({ error: "revision_conflict", body: saved.body }, 409);
   if (saved.status !== 200) {
     return json({ error: "save_failed", status: saved.status, body: saved.body, origin: ORIGIN }, 502);
+  }
+
+  let registry = null;
+  if (action === "board") {
+    const proof = (result.mission.proofs || []).find((p) => p.id === proofId);
+    const req = (result.mission.requirements || []).find((r) => r.id === proof?.requirementId);
+    const chosen = result.approval?.candidate;
+    const semanticId = req?.semanticId || chosen?.semanticId;
+    if (chosen?.url && semanticId) {
+      registry = await ingestToRegistry({
+        semanticId,
+        brief: req?.mustBecomeTrue || chosen.label || result.mission.title,
+        url: chosen.url,
+      });
+    }
+  }
+  if (action === "unkeep") {
+    registry = await deleteRegisteredAsset({
+      semanticId: result.semanticId,
+      registryKey: result.registryKey,
+    });
   }
 
   return json({
@@ -254,8 +372,12 @@ export async function POST(request) {
     worldRevision: saved.body?.revision ?? null,
     durable: "creative.missionOs",
     approval: result.approval || null,
+    remaining: result.remaining ?? null,
+    candidate: result.candidate || null,
     feedback: result.feedback || null,
     notification: result.notification,
+    registry,
     describe: describeMission(result.mission),
+    history: reviewHistoryFromDoc(saved.body || doc, { limit: 80 }),
   });
 }

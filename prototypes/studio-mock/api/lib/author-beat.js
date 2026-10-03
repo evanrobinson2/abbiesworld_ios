@@ -16,7 +16,7 @@ ${[...BEHAVIORS].join(", ")}
 
 Rules:
 - Prefer semantic asset ids (map.*, poi.*.exterior|interior) over https URLs.
-- If art is missing, emit asset.job_create (server generates via OpenAI gpt-image-2) then place.upsert with that exteriorAsset/interiorAsset. Optional asset.bind only with placeId+slot (or sceneId+slot background).
+- If art is missing, emit asset.job_create (server generates via OpenAI gpt-image-2.5-sunburst) then place.upsert with that exteriorAsset/interiorAsset. Optional asset.bind only with placeId+slot (or sceneId+slot background).
 - Order ops: asset.job_create → place.upsert / scene.* → asset.bind last.
 - place.upsert needs sceneId, name, behavior, x, y in 0..1 (prefer 0.12..0.88).
 - Never invent new behaviors or screens.

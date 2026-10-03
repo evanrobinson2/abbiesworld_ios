@@ -44,6 +44,8 @@ This is already partially present. Studio MCP is the live-world interface (`worl
 
 Those are the beginnings of the operating system for Abbie’s World.
 
+**Durable intent** lives as **Missions** — the living intent database. See [`MISSION_OS.md`](./MISSION_OS.md) (shepherd doc). Not Jira-as-soul; Mission on the household game server, optional free tools only as eng mirrors.
+
 ## 3. “Talk to Abbie’s World”
 
 The north-star interaction is extremely simple:

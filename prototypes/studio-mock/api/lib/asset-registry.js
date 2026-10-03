@@ -244,6 +244,52 @@ export async function ingestBytes({
   };
 }
 
+/** Remove hosted bytes for a semantic / registry key. 404 is success. */
+export async function deleteRegisteredAsset({ semanticId, registryKey } = {}) {
+  const key = adminKey();
+  if (!key) {
+    return {
+      error: "registry_admin_missing",
+      hint: "Set ASSET_REGISTRY_ADMIN_API_KEY on studio-mock (Vercel).",
+    };
+  }
+  const sem = String(semanticId || "").trim();
+  const regKey = String(registryKey || (sem ? semanticToRegistryKey(sem) : "") || "")
+    .trim()
+    .replace(/^\/+|\/+$/g, "");
+  if (!regKey || regKey.includes("..")) return { error: "registry_key_invalid" };
+
+  const encoded = regKey
+    .split("/")
+    .map((part) => encodeURIComponent(part))
+    .join("/");
+  const response = await fetch(
+    `${origin()}/api/v1/games/${encodeURIComponent(GAME_KEY)}/assets/${encoded}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${key}`,
+        "X-Actor-ID": actorId(),
+        Accept: "application/json",
+      },
+    }
+  );
+  if (response.status === 404) {
+    return { ok: true, missing: true, semanticId: sem || null, registryKey: regKey };
+  }
+  if (!response.ok) {
+    const text = await response.text();
+    return {
+      error: "registry_delete_failed",
+      status: response.status,
+      detail: text.slice(0, 240),
+      semanticId: sem || null,
+      registryKey: regKey,
+    };
+  }
+  return { ok: true, deleted: true, semanticId: sem || null, registryKey: regKey };
+}
+
 /**
  * Download a temporary staging HTTPS image and re-host it on the registry.
  * Returns semantic/registry identifiers — never leave the staging URL as SoT.

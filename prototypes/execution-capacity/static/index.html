@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Execution Capacity</title>
+  <style>
+    :root {
+      --bg: #12141a;
+      --panel: #1b1e27;
+      --ink: #f2efe8;
+      --muted: rgba(242, 239, 232, 0.62);
+      --ok: #6bcf8e;
+      --bad: #e07a6a;
+      --warn: #e0b86a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font: 15px/1.4 "SF Pro Text", "Avenir Next", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #24304a 0%, transparent 55%),
+        var(--bg);
+      padding: 24px;
+    }
+    h1 { margin: 0 0 4px; font-size: 1.45rem; letter-spacing: -0.02em; }
+    .sub { color: var(--muted); margin: 0 0 18px; font-size: 0.92rem; }
+    .row { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 16px; }
+    button, .pill {
+      border: 0;
+      border-radius: 999px;
+      padding: 0.55rem 0.95rem;
+      font: inherit;
+      font-weight: 650;
+      cursor: pointer;
+    }
+    button.stop { background: var(--bad); color: #1a1010; }
+    button.resume { background: var(--ok); color: #102016; }
+    button.ghost { background: rgba(242,239,232,0.08); color: var(--ink); }
+    .pill {
+      background: rgba(242,239,232,0.08);
+      color: var(--muted);
+      cursor: default;
+    }
+    .pill.on { color: var(--ok); }
+    .pill.off { color: var(--bad); }
+    .panel {
+      background: var(--panel);
+      border: 1px solid rgba(242,239,232,0.08);
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin-bottom: 14px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
+    .stat strong { display: block; font-size: 1.35rem; }
+    .stat span { color: var(--muted); font-size: 0.78rem; letter-spacing: 0.04em; text-transform: uppercase; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+    th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid rgba(242,239,232,0.06); vertical-align: top; }
+    th { color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .state { font-variant-numeric: tabular-nums; }
+    .state.completed { color: var(--ok); }
+    .state.failed, .state.cancelled { color: var(--bad); }
+    .state.queued, .state.submitted, .state.filled, .state.awaiting_auth { color: var(--warn); }
+    code { font-family: ui-monospace, Menlo, monospace; font-size: 0.8rem; }
+    .err { color: var(--bad); font-size: 0.82rem; }
+    .urls { color: var(--muted); font-size: 0.78rem; word-break: break-all; }
+    label { color: var(--muted); font-size: 0.85rem; }
+    input[type="password"], input[type="number"] {
+      background: #10131a;
+      border: 1px solid rgba(242,239,232,0.12);
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 0.45rem 0.65rem;
+      font: inherit;
+      min-width: 12rem;
+    }
+    @media (max-width: 800px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  </style>
+</head>
+<body>
+  <h1>Execution capacity</h1>
+  <p class="sub">Authorized jobs → local queue → Midjourney worker. Credentials stay in Chrome. Hard stop cancels queued work.</p>
+
+  <div class="row">
+    <span class="pill" id="runPill">…</span>
+    <span class="pill" id="workerPill">worker</span>
+    <button type="button" class="stop" id="btnStop">Stop</button>
+    <button type="button" class="resume" id="btnResume">Resume</button>
+    <button type="button" class="ghost" id="btnRefresh">Refresh</button>
+  </div>
+
+  <div class="panel row" style="margin-bottom:14px">
+    <label>Bearer token (household) <input type="password" id="token" placeholder="from ~/.abbies_world_token" autocomplete="off" /></label>
+    <label>Min gap sec <input type="number" id="gap" min="0" step="1" style="min-width:5rem" /></label>
+    <button type="button" class="ghost" id="btnGap">Save gap</button>
+  </div>
+
+  <div class="panel grid" id="stats">
+    <div class="stat"><strong id="sQueued">0</strong><span>Queued</span></div>
+    <div class="stat"><strong id="sActive">0</strong><span>Active</span></div>
+    <div class="stat"><strong id="sDone">0</strong><span>Completed</span></div>
+    <div class="stat"><strong id="sFail">0</strong><span>Failed</span></div>
+  </div>
+
+  <div class="panel">
+    <div class="sub" id="msg" style="margin:0 0 10px">Loading…</div>
+    <table>
+      <thead>
+        <tr><th>Job</th><th>State</th><th>Capability</th><th>Result / error</th><th></th></tr>
+      </thead>
+      <tbody id="jobs"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const tokenEl = document.getElementById("token");
+    tokenEl.value = localStorage.getItem("ec.token") || "";
+
+    function token() {
+      const t = tokenEl.value.trim();
+      localStorage.setItem("ec.token", t);
+      return t;
+    }
+
+    function headers() {
+      const h = { "Content-Type": "application/json" };
+      const t = token();
+      if (t) h.Authorization = `Bearer ${t}`;
+      return h;
+    }
+
+    async function api(path, opts = {}) {
+      const res = await fetch(path, { ...opts, headers: { ...headers(), ...(opts.headers || {}) } });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || data.message || `http_${res.status}`);
+      return data;
+    }
+
+    function render(status) {
+      const stopped = !!status.stopped;
+      const run = document.getElementById("runPill");
+      run.textContent = stopped ? "STOPPED" : "RUNNING";
+      run.className = "pill " + (stopped ? "off" : "on");
+      const w = status.worker || {};
+      document.getElementById("workerPill").textContent =
+        w.currentJobId ? `job ${w.currentJobId}` : (w.lastMessage || "idle");
+      document.getElementById("msg").textContent = w.lastMessage || "—";
+      document.getElementById("gap").value = status.minGapSec ?? 30;
+      const s = status.summary || {};
+      document.getElementById("sQueued").textContent = s.queued || 0;
+      document.getElementById("sActive").textContent = s.active || 0;
+      document.getElementById("sDone").textContent = s.completed || 0;
+      document.getElementById("sFail").textContent = s.failed || 0;
+
+      const tbody = document.getElementById("jobs");
+      tbody.replaceChildren();
+      (status.jobs || []).forEach((job) => {
+        const tr = document.createElement("tr");
+        const urls = job.result?.candidateUrls || [];
+        const detail = job.error
+          ? `<div class="err">${escapeHtml(job.error)}</div>`
+          : urls.length
+            ? `<div class="urls">${urls.slice(0, 4).map(escapeHtml).join("<br>")}</div>`
+            : "";
+        tr.innerHTML = `
+          <td><code>${escapeHtml(job.id)}</code></td>
+          <td class="state ${escapeHtml(job.state)}">${escapeHtml(job.state)}</td>
+          <td>${escapeHtml(job.capability)}</td>
+          <td>${detail}</td>
+          <td>${job.state === "queued" || job.state === "awaiting_auth" || job.state === "filled" || job.state === "submitted"
+            ? `<button type="button" class="ghost" data-cancel="${escapeHtml(job.id)}">Cancel</button>` : ""}</td>
+        `;
+        tbody.append(tr);
+      });
+      tbody.querySelectorAll("[data-cancel]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          await api(`/v1/jobs/${btn.dataset.cancel}/cancel`, { method: "POST", body: "{}" });
+          refresh();
+        });
+      });
+    }
+
+    function escapeHtml(s) {
+      return String(s || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;");
+    }
+
+    async function refresh() {
+      try {
+        const status = await api("/v1/status");
+        render(status);
+      } catch (err) {
+        document.getElementById("msg").textContent = String(err.message || err);
+      }
+    }
+
+    document.getElementById("btnStop").onclick = async () => {
+      await api("/v1/stop", { method: "POST", body: "{}" });
+      refresh();
+    };
+    document.getElementById("btnResume").onclick = async () => {
+      await api("/v1/resume", { method: "POST", body: "{}" });
+      refresh();
+    };
+    document.getElementById("btnRefresh").onclick = refresh;
+    document.getElementById("btnGap").onclick = async () => {
+      await api("/v1/limits", {
+        method: "POST",
+        body: JSON.stringify({ minGapSec: Number(document.getElementById("gap").value || 30) }),
+      });
+      refresh();
+    };
+    tokenEl.addEventListener("change", refresh);
+    refresh();
+    setInterval(refresh, 2500);
+  </script>
+</body>
+</html>

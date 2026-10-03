@@ -8,6 +8,8 @@ import {
   attachProof,
   approveProof,
   rejectProof,
+  reverseKeep,
+  restoreDump,
   deckFromMission,
   ensureArtRequirement,
   ensureMissionOs,
@@ -17,6 +19,7 @@ import {
   requestMinigame,
   listEngAutoDispatch,
   appendMissionFeedback,
+  reviewHistoryFromDoc,
   __resetMissionsCacheForTests,
 } from "./missions-store.js";
 
@@ -85,6 +88,13 @@ assert(
 );
 
 const attached = attachProof(built.mission, { requirementId: "req.art.rocket.exterior" });
+const descAfterAttach = describeMission(attached.mission);
+assert(descAfterAttach.unapprovedImages.length === 4, "describe lists unapproved candidates");
+assert(
+  descAfterAttach.unapprovedImages[0].displayUrl.includes("/api/proof-image?"),
+  "public proxy displayUrl"
+);
+assert(descAfterAttach.text.includes("![Candidate 1]("), "describe text has markdown images");
 assert(attached.proof?.status === "awaiting_approval", "proof awaiting");
 assert(
   built.mission.requirements.find((r) => r.id === "req.art.rocket.exterior").status === "proofs_ready",
@@ -114,12 +124,66 @@ const dumped = rejectProof(built.mission, {
   surface: "ipad_gesture_review",
 });
 assert(dumped.approval?.decision === "reject", "reject decision");
+assert(dumped.remaining === 3, "dump keeps other candidates");
+assert(
+  built.mission.proofs.find((p) => p.id === attached2.proof.id).status === "awaiting_approval",
+  "proof still awaiting after one dump"
+);
+assert(
+  built.mission.requirements.find((r) => r.id === "req.eng.moonGuidance").status === "proofs_ready",
+  "req stays proofs_ready until last dump"
+);
+assert((attached2.proof.payload.candidates || []).length === 3, "three left");
+
+const dumpedRest = rejectProof(built.mission, {
+  proofId: attached2.proof.id,
+  candidateIndex: attached2.proof.payload.candidates[0].index,
+  note: "Clear rest",
+  surface: "ipad_gesture_review",
+});
+assert(dumpedRest.remaining === 2, "second dump");
+rejectProof(built.mission, {
+  proofId: attached2.proof.id,
+  candidateIndex: attached2.proof.payload.candidates[0].index,
+});
+rejectProof(built.mission, {
+  proofId: attached2.proof.id,
+  candidateIndex: attached2.proof.payload.candidates[0].index,
+});
+assert(
+  built.mission.proofs.find((p) => p.id === attached2.proof.id).status === "rejected",
+  "proof rejected after last candidate"
+);
 assert(
   built.mission.requirements.find((r) => r.id === "req.eng.moonGuidance").status === "open",
-  "req reopened"
+  "req reopened after last dump"
 );
 
 assert(built.mission.notifications.some((n) => n.type === "proof_dumped"), "dump note");
+
+const hist = reviewHistoryFromDoc({
+  creative: { missionOs: { missions: { [built.mission.id]: built.mission } } },
+});
+assert(hist.some((r) => r.status === "boarded"), "history has boarded rocket");
+assert(hist.some((r) => r.status === "dumped"), "history has dumped candidates");
+
+const unkept = reverseKeep(built.mission, { proofId: attached.proof.id, surface: "drop" });
+assert(!unkept.error, "unkeep ok");
+assert(attached.proof.status === "awaiting_approval", "kept proof reopened");
+assert(
+  built.mission.requirements.find((r) => r.id === "req.art.rocket.exterior").status === "proofs_ready",
+  "art req open again"
+);
+assert(unkept.semanticId, "unkeep returns semantic for registry delete");
+
+const restored = restoreDump(built.mission, {
+  proofId: attached2.proof.id,
+  candidateIndex: attached2.proof.payload.dumped[0].index,
+  surface: "drop",
+});
+assert(!restored.error, "restore dump ok");
+assert(attached2.proof.status === "awaiting_approval", "rejected proof live again");
+assert((attached2.proof.payload.candidates || []).length >= 1, "candidate back on deck");
 
 const fresh = buildMission({
   narrative: "Abby rocket moon Daddy lander garden",

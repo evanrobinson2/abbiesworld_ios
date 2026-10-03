@@ -46,6 +46,8 @@ import {
   appendMissionFeedback,
 } from "./lib/missions-store.js";
 import { notifyMinigameMaker } from "./lib/eng-dispatch-webhook.js";
+import { notifyProofsReady } from "./lib/push.js";
+import { galleryMarkdown, unapprovedImageGallery } from "./lib/proof-display.js";
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
@@ -86,10 +88,14 @@ Decorations are short labels (≤12 characters) plus a sprite. They are not inte
 read_primer → world_describe → author_beat (dryRun) → confirm. Prefer semantic asset IDs. Prefer asset_job_create for new plates. Low-level scene_upsert / place_upsert still work. Never wipe players.
 
 ### Mission habit (durable intent)
-Talk that should survive chat death → mission_create (narrative). Resume with mission_describe. Vet art via mission_attach_proof + mission_approve_proof (candidate index). Leave durable taste/direction with mission_feedback (does not Board/Dump by itself). New minigames → mission_request_minigame (tight design). If MINIGAME_MAKER_WEBHOOK_URL is unset, response is honest: saved, blocked: builder not configured — do not imply a worker started. Eng workers open PR (no merge) when the builder is configured — even hard physics puzzlers. Missions live on the household world (creative.missionOs) — not in the chat. Do not mark playable from workers.
+Talk that should survive chat death → mission_create (narrative). Resume with mission_describe. Unapproved proof/harvest images come back as public displayUrl markdown — show them in chat. Vet via mission_attach_proof + mission_approve_proof (candidate index). Leave durable taste/direction with mission_feedback (does not Board/Dump by itself). New minigames → mission_request_minigame (tight design). If MINIGAME_MAKER_WEBHOOK_URL is unset, response is honest: saved, blocked: builder not configured — do not imply a worker started. Eng workers open PR (no merge) when the builder is configured — even hard physics puzzlers. Missions live on the household world (creative.missionOs) — not in the chat. Do not mark playable from workers.
 
 ### Asset generation habit (ChatGPT MCP)
 asset_project_create (optional) → asset_job_create with semanticId + brief (server writes imagePrompt, calls OpenAI gpt-image-2.5-sunburst, ingests to Game Asset registry, runs subject/framing sanity, returns registered or needs_review) → asset_bind only when registered. Prefer semantic asset IDs. Never put CDN/Midjourney URLs on scenes or POIs. Midjourney paste remains available via generate:false then asset_job_complete (same sanity). Override model with ASSET_IMAGE_MODEL (e.g. gpt-image-2.5-flare). See docs/architecture/ASSET_SANITY_CORPUS.md.
+
+### Midjourney (pull worker — no tunnel)
+midjourney_fill enqueues on household creative.executionCapacity. The Mac sailboat worker pulls the job outbound, runs Chrome Midjourney, reports candidate URLs. No MJ_WORKER_URL tunnel. Local Mac can also /Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh submit. Poll job via GET /api/execution-capacity?jobId=… or MCP follow-up. Contract: /Users/evanrobinson/abbies.world.ios/docs/architecture/EXECUTION_CAPACITY.md.
+
 
 ### Dungeon master habit
 read_primer first. world_describe before edits. scene_upsert, then scene_set_background_url when Evan pastes a URL, place_upsert for POIs, scene_connect for exits. vars_apply for counters (server does the math). Do not wipe players.
@@ -957,7 +963,7 @@ const TOOLS = [
   {
     name: "midjourney_fill",
     description:
-      "Remote Midjourney invoke (POC): send a prompt to the household MJ worker (Mac Chrome via Apple Events). Requires MJ_WORKER_URL on Studio pointing at local server.py :8766. Does not wait for the grid — after MJ finishes, paste https into asset_job_complete (or AD harvest).",
+      "Enqueue a Midjourney.imagine job on the household cloud queue (creative.executionCapacity). The Mac execution-capacity worker pulls it outbound — no tunnel. Does not wait for the grid; poll GET /api/execution-capacity?jobId=… or wait for candidateUrls then asset_job_complete / mission_attach_proof.",
     inputSchema: {
       type: "object",
       properties: {
@@ -968,6 +974,8 @@ const TOOLS = [
           description: "Optional: also create generate:false asset job awaiting the later paste",
         },
         brief: { type: "string" },
+        missionId: { type: "string", description: "Optional Mission id to stamp on the job payload" },
+        requirementId: { type: "string" },
       },
       required: ["prompt"],
     },
@@ -1024,7 +1032,7 @@ const TOOLS = [
   {
     name: "mission_describe",
     description:
-      "One-screen Mission status: intent, requirements, awaiting Evan (decisions/proofs), unread notifications, next act. Prefer this to resume after chat death.",
+      "One-screen Mission status: intent, requirements, awaiting Evan (decisions/proofs), unread notifications, next act, and public unapprovedImages displayUrl markdown so ChatGPT can show Board/Dump candidates. Prefer this to resume after chat death.",
     inputSchema: {
       type: "object",
       properties: {
@@ -1422,8 +1430,13 @@ async function runMissionTool(name, auth, args) {
 
     const mission = getMissionFromDoc(current.body, missionId);
     if (!mission) return { error: "mission_missing", missionId };
-    if (name === "mission_get") return mission;
-    return describeMission(mission);
+    if (name === "mission_get") {
+      return {
+        ...mission,
+        unapprovedImages: unapprovedImageGallery(mission, { worldDoc: current.body }),
+      };
+    }
+    return describeMission(mission, { worldDoc: current.body });
   }
 
   // Writes: create / attach_proof / approve_proof
@@ -1457,7 +1470,7 @@ async function runMissionTool(name, auth, args) {
         created: true,
         durable: "creative.missionOs",
         mission: built.mission,
-        describe: describeMission(built.mission),
+        describe: describeMission(built.mission, { worldDoc: doc }),
         engAutoDispatch: engQueue,
       };
       if (engQueue.length) {
@@ -1494,7 +1507,8 @@ async function runMissionTool(name, auth, args) {
         attached: true,
         proof: result.proof,
         notification: result.notification,
-        describe: describeMission(result.mission),
+        describe: describeMission(result.mission, { worldDoc: doc }),
+        unapprovedImages: unapprovedImageGallery(result.mission, { worldDoc: doc }),
       };
       return doc;
     }
@@ -1516,7 +1530,7 @@ async function runMissionTool(name, auth, args) {
         approved: true,
         approval: result.approval,
         notification: result.notification,
-        describe: describeMission(result.mission),
+        describe: describeMission(result.mission, { worldDoc: doc }),
       };
       return doc;
     }
@@ -1539,7 +1553,7 @@ async function runMissionTool(name, auth, args) {
         dumped: true,
         approval: result.approval,
         notification: result.notification,
-        describe: describeMission(result.mission),
+        describe: describeMission(result.mission, { worldDoc: doc }),
       };
       return doc;
     }
@@ -1563,7 +1577,7 @@ async function runMissionTool(name, auth, args) {
         feedbackLogged: true,
         feedback: result.feedback,
         notification: result.notification,
-        describe: describeMission(result.mission),
+        describe: describeMission(result.mission, { worldDoc: doc }),
       };
       return doc;
     }
@@ -1600,7 +1614,7 @@ async function runMissionTool(name, auth, args) {
         requirement: result.requirement,
         notification: result.notification,
         engAutoDispatch: result.engAutoDispatch,
-        describe: describeMission(result.mission),
+        describe: describeMission(result.mission, { worldDoc: doc }),
         workerContract: blocked
           ? "Requirement saved. Builder webhook unset — no worker started. Configure MINIGAME_MAKER_WEBHOOK_URL, then re-request or wait for wake."
           : "Start eng without waiting for Evan. Open PR + CI. Do not merge. Do not mark playable. Difficulty does not gate start.",
@@ -1634,6 +1648,20 @@ async function runMissionTool(name, auth, args) {
     makerWake = await notifyMinigameMaker(wake);
   }
 
+  let pushWake = null;
+  if (name === "mission_attach_proof" && extra?.attached && extra?.proof && !extra?.error) {
+    try {
+      pushWake = await notifyProofsReady(saved.body, {
+        missionTitle: extra.describe?.title || extra.proof?.requirementId || "Art ready",
+        missionId: extra.describe?.id || args.missionId,
+        proofId: extra.proof.id,
+        candidateCount: (extra.proof.payload?.candidates || []).length,
+      });
+    } catch (err) {
+      pushWake = { skipped: true, reason: String(err?.message || err).slice(0, 120) };
+    }
+  }
+
   const blockedWake = makerWake?.skipped === true;
   if (extra && blockedWake) {
     extra.autoDispatch = false;
@@ -1660,6 +1688,7 @@ async function runMissionTool(name, auth, args) {
     revision: saved.body.revision,
     ...extra,
     ...(makerWake ? { makerWake } : {}),
+    ...(pushWake ? { pushWake } : {}),
   };
 }
 
@@ -1761,7 +1790,8 @@ async function callTool(name, args, request) {
           proof: attached.proof,
           deck: deckFromMission(attached.mission, { proofId: attached.proof.id }),
           reviewUrl: `${REVIEW_BASE}?missionId=${encodeURIComponent(missionId)}`,
-          describe: describeMission(attached.mission),
+          describe: describeMission(attached.mission, { worldDoc: doc }),
+          unapprovedImages: unapprovedImageGallery(attached.mission, { worldDoc: doc }),
         };
         return doc;
       });
@@ -1772,7 +1802,18 @@ async function callTool(name, args, request) {
       const extra = saved.body.__mcp;
       if (saved.body.__mcp) delete saved.body.__mcp;
       if (extra?.error) return extra;
-      return { revision: saved.body.revision, ...extra };
+      let pushWake = null;
+      try {
+        pushWake = await notifyProofsReady(saved.body, {
+          missionTitle: extra.describe?.title || missionId,
+          missionId,
+          proofId: extra.proof?.id,
+          candidateCount: (extra.proof?.payload?.candidates || []).length,
+        });
+      } catch (err) {
+        pushWake = { skipped: true, reason: String(err?.message || err).slice(0, 120) };
+      }
+      return { revision: saved.body.revision, ...extra, pushWake };
     }
 
     // Without missionId: registry-only (still game-server bytes). Caller must mission_attach_proof.
@@ -1815,8 +1856,19 @@ async function callTool(name, args, request) {
     }
     const fill = await fetch("https://studio-mock-iota.vercel.app/api/midjourney/fill", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ prompt }),
+      headers: {
+        "Content-Type": "application/json",
+        // auth is the raw JWT (same as other world tools) — fill.js only
+        // accepts Authorization that starts with "Bearer ", else it falls
+        // through to Studio ABBIES_WORLD_TOKEN (often stale).
+        ...(auth ? { Authorization: `Bearer ${auth}` } : {}),
+      },
+      body: JSON.stringify({
+        prompt,
+        missionId: args.missionId,
+        requirementId: args.requirementId,
+        semanticId: args.semanticId,
+      }),
     });
     const text = await fill.text();
     let payload = null;
@@ -1825,12 +1877,15 @@ async function callTool(name, args, request) {
     } catch {
       payload = { ok: false, message: text.slice(0, 300) };
     }
+    const jobId = payload?.job?.id || null;
     return {
       fill: payload,
       job,
+      cloudJobId: jobId,
+      model: "pull",
       next: payload?.ok
-        ? "Wait for Midjourney grid, then asset_job_complete with a candidate https URL (jobId from job)."
-        : "Start Mac helper (server.py :8766), set MJ_WORKER_URL on Vercel, Chrome on midjourney.com/imagine.",
+        ? `Queued ${jobId || ""}. Mac worker pulls outbound. Poll GET https://studio-mock-iota.vercel.app/api/execution-capacity?jobId=${jobId || "…"} then asset_job_complete / mission_attach_proof with candidate https URLs.`
+        : "Enqueue failed — check household auth / world write. Local fallback: /Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh submit",
     };
   }
 
@@ -2039,8 +2094,17 @@ async function callTool(name, args, request) {
   };
 }
 
+function extractUnapprovedImages(value) {
+  if (!value || typeof value !== "object") return [];
+  if (Array.isArray(value.unapprovedImages)) return value.unapprovedImages;
+  if (Array.isArray(value.describe?.unapprovedImages)) return value.describe.unapprovedImages;
+  return [];
+}
+
 function toolText(value) {
-  const text = typeof value === "string" ? value : JSON.stringify(value, null, 2);
+  const gallery = galleryMarkdown(extractUnapprovedImages(value));
+  const json = typeof value === "string" ? value : JSON.stringify(value, null, 2);
+  const text = (gallery ? `${gallery}\n\n` : "") + json;
   return {
     content: [{ type: "text", text: text.slice(0, 100000) }],
     isError: !!(value && typeof value === "object" && (value.error === "auth_required" || value.error)),

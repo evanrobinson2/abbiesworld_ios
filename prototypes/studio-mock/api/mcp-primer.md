@@ -29,7 +29,7 @@ Long-lived creative intent lives as a **Mission** on the household world (`creat
 | Tool | Use |
 | --- | --- |
 | `mission_create` | Narrative → Mission + inferred plan (no art spend) |
-| `mission_describe` | Resume after chat death — blockers, awaiting Evan, **eng auto-dispatch** |
+| `mission_describe` | Resume after chat death — blockers, awaiting Evan, **eng auto-dispatch**, public **unapprovedImages** (`displayUrl` + markdown) so ChatGPT can render Board/Dump candidates |
 | `mission_get` / `mission_list` | Read Mission JSON |
 | `mission_request_minigame` | Tight eng design → wake builder when configured; else **saved, blocked: builder not configured** |
 | `mission_attach_proof` | Stub/real proof gallery on a requirement |
@@ -37,6 +37,18 @@ Long-lived creative intent lives as a **Mission** on the household world (`creat
 | `mission_feedback` | Durable taste/direction notes (not Board/Dump) |
 
 Do **not** declare playable from workers. See `missions/README.md` and `docs/architecture/MISSION_OS.md`.
+
+### Midjourney / execution capacity (pull — no tunnel)
+
+`midjourney_fill` enqueues on household `creative.executionCapacity`. A Mac or Windows worker **pulls** jobs outbound (Chrome Midjourney). No `MJ_WORKER_URL`.
+
+Local shortcut:
+
+1. Mac: `/Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh start` · Windows: `.\scripts\execution_capacity.ps1 start`
+2. Submit: same scripts with `submit "<prompt>" [job-id]`
+3. Poll local `http://127.0.0.1:8780/v1/jobs/<id>` or cloud `GET /api/execution-capacity?jobId=…`
+4. Contract: `/Users/evanrobinson/abbies.world.ios/docs/architecture/EXECUTION_CAPACITY.md`
+
 
 ---
 

@@ -115,6 +115,17 @@ asset_job_complete jobId <id> stagingUrl <https://cdn.midjourney.com/…>
 Then asset_bind that semanticId onto the place exterior (or scene background).
 ```
 
+**Midjourney / execution capacity (ChatGPT desktop — dumb worker)**
+
+Evan does not want to talk about this. Accept the prompt and run absolute paths:
+
+```
+/Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh start
+/Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh submit "<prompt>" [job-id]
+```
+
+Poll `http://127.0.0.1:8780/v1/jobs/<id>`. One-line result. Contract: `/Users/evanrobinson/abbies.world.ios/docs/architecture/EXECUTION_CAPACITY.md`.
+
 **Travel exit**
 
 ```
