@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- review-ui 20261003d -->
+<!-- review-ui 20261003e -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0a0a0c" />
   <meta name="format-detection" content="telephone=no" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <link rel="manifest" href="/manifest.webmanifest?v=20261003d" />
+  <link rel="manifest" href="/manifest.webmanifest?v=20261003e" />
   <link rel="apple-touch-icon" href="/plates/home.jpg" />
   <title>Review · Abbie’s World</title>
   <style>
@@ -2326,12 +2326,16 @@
         const now = performance.now();
         const doubled = now - zoom.lastTap < 280;
         zoom.lastTap = now;
+        clearTimeout(zoom.tapTimer);
         if (doubled && zoomEl()) {
           toggleZoomAt();
           return;
         }
         if (zoomActive()) return;
-        setHistFacet(null, { cycle: true });
+        zoom.tapTimer = setTimeout(() => {
+          if (state.floor !== "history" || zoomActive()) return;
+          setHistFacet(null, { cycle: true });
+        }, 260);
         return;
       }
       if (zoomActive()) return;
@@ -2362,6 +2366,16 @@
     }
     wirePinch(stage);
     wirePinch(histFloor);
+    stage.addEventListener("dblclick", (e) => {
+      if (isEmptyNow() || state.floor === "history") return;
+      if (e.target.closest?.("#drawer, #toast-host, #undo-bar")) return;
+      toggleZoomAt();
+    });
+    histFloor.addEventListener("dblclick", (e) => {
+      if (e.target.closest?.("button")) return;
+      clearTimeout(zoom.tapTimer);
+      toggleZoomAt();
+    });
     let suppressHandleClickUntil = 0;
     $("drawer-handle").addEventListener("click", (e) => {
       e.stopPropagation();
@@ -2706,7 +2720,7 @@
     }
 
     async function registerReviewWorker() {
-      return navigator.serviceWorker.register("/sw-review.js?v=20261003d", { scope: "/" });
+      return navigator.serviceWorker.register("/sw-review.js?v=20261003e", { scope: "/" });
     }
 
     async function subscribePush() {
