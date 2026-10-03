@@ -1539,6 +1539,7 @@
     }
 
     async function loadHistory() {
+      if (state.lockHistory) return;
       state.historyLoading = true;
       try {
         const res = await fetch(MISSIONS_API);
@@ -2261,6 +2262,7 @@
           )}`;
         state.deck = { id: "preview.archive", title: "Mission inbox", candidates: [] };
         state.decisions = [];
+        state.lockHistory = true;
         setDrawerOpen(false, { animate: false });
         showEmptyNow({
           history: [
