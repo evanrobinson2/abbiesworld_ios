@@ -191,12 +191,12 @@ function drawLight(c) {
   const ly = px(L.y);
   const r = L.radius;
 
-  // Stepped diamond falloff — pixel glow, one scanline per row
+  // Stepped diamond falloff — chunky, readable pixel glow
   const bands = [
-    { d: r, color: "rgba(255,178,74,0.12)" },
-    { d: r * 0.62, color: "rgba(255,178,74,0.20)" },
-    { d: r * 0.34, color: "rgba(255,210,120,0.32)" },
-    { d: r * 0.16, color: "rgba(255,243,196,0.48)" },
+    { d: r, color: "rgba(255,178,74,0.16)" },
+    { d: r * 0.62, color: "rgba(255,178,74,0.28)" },
+    { d: r * 0.36, color: "rgba(255,210,120,0.42)" },
+    { d: r * 0.18, color: "rgba(255,243,196,0.62)" },
   ];
 
   for (const band of bands) {
@@ -208,10 +208,10 @@ function drawLight(c) {
     }
   }
 
-  // Core lamp
+  // Core lamp — big readable cross
   c.fillStyle = PAL.light;
-  fillPx(c, lx - PX, ly - PX * 2, PX * 2, PX * 4);
-  fillPx(c, lx - PX * 2, ly - PX, PX * 4, PX * 2);
+  fillPx(c, lx - PX, ly - PX * 3, PX * 2, PX * 6);
+  fillPx(c, lx - PX * 3, ly - PX, PX * 6, PX * 2);
   c.fillStyle = PAL.lightMid;
   fillPx(c, lx - PX, ly - PX, PX * 2, PX * 2);
 }
