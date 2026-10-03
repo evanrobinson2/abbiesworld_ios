@@ -9,8 +9,8 @@ export const LEVELS = [
   {
     id: 1,
     name: "Warm-up corridor",
-    need: 5,
-    spawnEvery: 0.55,
+    need: 4,
+    spawnEvery: 0.45,
     maxDots: 8,
     map: [
       "################",

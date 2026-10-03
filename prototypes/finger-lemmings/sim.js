@@ -150,28 +150,28 @@ export function stepGame(game, dtRaw) {
     let ay = 0;
 
     if (inBeam) {
-      const pull = 220 * dot.follow;
-      ax += ((light.x - dot.x) / Math.max(12, dLight)) * pull;
-      ay += ((light.y - dot.y) / Math.max(12, dLight)) * pull;
+      const pull = 340 * (0.35 + dot.follow);
+      ax += ((light.x - dot.x) / Math.max(10, dLight)) * pull;
+      ay += ((light.y - dot.y) / Math.max(10, dLight)) * pull;
       // Slight orbit so they don't stack perfectly on the finger.
-      ax += Math.cos(dot.wobble) * 18;
-      ay += Math.sin(dot.wobble) * 18;
+      ax += Math.cos(dot.wobble) * 22;
+      ay += Math.sin(dot.wobble) * 22;
     } else {
       // Idle wander — lemming shuffle.
-      ax += Math.cos(dot.wobble * 0.35) * 28;
-      ay += Math.sin(dot.wobble * 0.5) * 18;
+      ax += Math.cos(dot.wobble * 0.35) * 34;
+      ay += Math.sin(dot.wobble * 0.5) * 22;
       // Mild gravity toward open corridors (downward bias like classic lemmings).
-      ay += 12;
+      ay += 16;
     }
 
     const sep = separate(game.dots, dot);
     ax += sep.x;
     ay += sep.y;
 
-    dot.vx = clamp(dot.vx + ax * dt, -140, 140);
-    dot.vy = clamp(dot.vy + ay * dt, -140, 140);
+    dot.vx = clamp(dot.vx + ax * dt, -190, 190);
+    dot.vy = clamp(dot.vy + ay * dt, -190, 190);
     // Friction
-    const damp = inBeam ? 0.90 : 0.86;
+    const damp = inBeam ? 0.92 : 0.86;
     dot.vx *= Math.pow(damp, dt * 60);
     dot.vy *= Math.pow(damp, dt * 60);
 
