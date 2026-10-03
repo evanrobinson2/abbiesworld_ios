@@ -61,6 +61,8 @@ When ChatGPT, Claude, or Studio already has the picture, call `asset_ingest` wit
 
 ### Midjourney / execution capacity (pull — no tunnel)
 
+`execution_capacity_status` / `mj_workers_alive` returns `mjWorkersAliveLast5Minutes` — workers whose `lastSeenAt` is within 5 minutes. Same field on `GET /api/execution-capacity` and on `midjourney_fill`.
+
 `midjourney_fill` enqueues on household `creative.executionCapacity`. A Mac or Windows worker **pulls** jobs outbound (Chrome Midjourney). No `MJ_WORKER_URL`.
 
 Local shortcut:

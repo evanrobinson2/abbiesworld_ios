@@ -61,10 +61,35 @@ export async function POST(request) {
   );
 }
 
-export async function GET() {
+export async function GET(request) {
+  const origin = new URL(request.url).origin;
+  const authHeader = request.headers.get("authorization") || "";
+  const envToken = String(process.env.ABBIES_WORLD_TOKEN || "").trim();
+  const headers = { Accept: "application/json" };
+  if (authHeader.startsWith("Bearer ")) headers.Authorization = authHeader;
+  else if (envToken && envToken !== "[SENSITIVE]" && !envToken.includes("${")) {
+    headers.Authorization = `Bearer ${envToken}`;
+  }
+  let mjWorkersAliveLast5Minutes = null;
+  let aliveWorkers = [];
+  if (headers.Authorization) {
+    try {
+      const status = await fetch(`${origin}/api/execution-capacity`, { headers });
+      const payload = await status.json().catch(() => ({}));
+      if (status.ok) {
+        mjWorkersAliveLast5Minutes = payload.mjWorkersAliveLast5Minutes ?? payload.summary?.mjWorkersAliveLast5Minutes ?? 0;
+        aliveWorkers = payload.summary?.aliveWorkers || [];
+      }
+    } catch {
+      /* household world optional on GET */
+    }
+  }
   return Response.json({
     configured: true,
     model: "pull",
-    note: "POST { prompt } enqueues on creative.executionCapacity; Mac workers claim outbound.",
+    mjWorkersAliveLast5Minutes,
+    aliveWindowMs: 5 * 60 * 1000,
+    aliveWorkers,
+    note: "POST { prompt } enqueues on creative.executionCapacity; Mac workers claim outbound. mjWorkersAliveLast5Minutes = workers with lastSeenAt in the last 5 minutes.",
   });
 }

@@ -35,6 +35,8 @@ for (const required of [
   "trouble_ticket_create",
   "trouble_ticket_list",
   "asset_ingest",
+  "execution_capacity_status",
+  "mj_workers_alive",
 ]) {
   assert(names.includes(required), `missing ${required}`);
 }

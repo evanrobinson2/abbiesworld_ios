@@ -67,10 +67,11 @@ import {
   updateTroubleTicketStatus,
   setTicketGithubUrl,
 } from "./lib/trouble-tickets.js";
+import { summarize as summarizeExecutionCapacity } from "./lib/execution-capacity-store.js";
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
-const SERVER = { name: "abbies-world", version: "0.6.2" };
+const SERVER = { name: "abbies-world", version: "0.6.3" };
 const HOUSEHOLD_AUDIENCE = "https://api.abbies.world";
 const PLATE_BASE = "https://studio-mock-iota.vercel.app/api/plate";
 const REVIEW_BASE = "https://studio-mock-iota.vercel.app/review.html";
@@ -86,6 +87,7 @@ DELETE a scene: scene_delete (scene.home is protected). Use this for accidental 
 FEEDBACK / BUG REPORT / ISSUE / TROUBLE TICKET: feedback_report or bug_report or trouble_ticket_create. Writes durable AW-N on household creative.troubleQueue — not chat text. Then trouble_ticket_list / trouble_ticket_get.
 INGEST ART: asset_ingest (imageBase64, OpenAI fileId, or https fileUrl + semanticId + kind) → sanity + Game Asset registry → bindWith. Do not host a temporary CDN URL first.
 NL world edit: author_beat (dryRun first; confirm:true executes; postconditions roll back lies).
+MJ WORKER ALIVE: execution_capacity_status or mj_workers_alive. Count of Midjourney pull workers seen in the last 5 minutes (creative.executionCapacity.workers lastSeenAt). Also on GET /api/execution-capacity and midjourney_fill.
 
 `;
 
@@ -126,7 +128,7 @@ When an MCP mutation lies (dry-run looks right, execute reports success, world u
 asset_ingest (imageBase64 / fileId / https fileUrl + semanticId + kind → Game Asset registry + sanity + bindWith) or asset_project_create (optional) → asset_job_create with semanticId + brief (server writes imagePrompt, calls OpenAI gpt-image-2.5-sunburst, ingests to Game Asset registry, runs subject/framing sanity, returns registered or needs_review) → asset_bind only when registered. Prefer semantic asset IDs. Never put CDN/Midjourney URLs on scenes or POIs. Midjourney paste remains available via generate:false then asset_job_complete (same sanity). Override model with ASSET_IMAGE_MODEL (e.g. gpt-image-2.5-flare). See docs/architecture/ASSET_SANITY_CORPUS.md.
 
 ### Midjourney (pull worker — no tunnel)
-midjourney_fill enqueues on household creative.executionCapacity. The Mac sailboat worker pulls the job outbound, runs Chrome Midjourney, reports candidate URLs. No MJ_WORKER_URL tunnel. Local Mac can also /Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh submit. Poll job via GET /api/execution-capacity?jobId=… or MCP follow-up. Contract: /Users/evanrobinson/abbies.world.ios/docs/architecture/EXECUTION_CAPACITY.md.
+Check workers first: execution_capacity_status / mj_workers_alive (count seen in last 5 minutes). midjourney_fill enqueues on household creative.executionCapacity and returns the same alive count. The Mac sailboat worker pulls the job outbound, runs Chrome Midjourney, reports candidate URLs. No MJ_WORKER_URL tunnel. Local Mac can also /Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh submit. Poll job via GET /api/execution-capacity?jobId=… or MCP follow-up. Contract: /Users/evanrobinson/abbies.world.ios/docs/architecture/EXECUTION_CAPACITY.md.
 
 
 ### Dungeon master habit
@@ -411,6 +413,7 @@ function describe(doc) {
     live: doc?.creative?.live || null,
     vars: doc?.creative?.vars || null,
     poiLimit: "POIs are picture + whitelisted behavior + x/y. No custom gameplay scripts.",
+    mjWorkersAliveLast5Minutes: summarizeExecutionCapacity(doc).mjWorkersAliveLast5Minutes,
     can: {
       deletePlace: "place_remove",
       deleteScene: "scene_delete",
@@ -418,6 +421,7 @@ function describe(doc) {
       bugReport: "bug_report",
       troubleTicket: "trouble_ticket_create",
       ingest: "asset_ingest",
+      mjWorkersAlive: "execution_capacity_status",
     },
   };
 }
@@ -1208,9 +1212,31 @@ const TOOLS = [
     },
   },
   {
+    name: "execution_capacity_status",
+    description:
+      "MJ WORKER ALIVE count: how many Midjourney pull workers were seen in the last 5 minutes (creative.executionCapacity.workers lastSeenAt). Also returns queued/claimed jobs. Same number as GET /api/execution-capacity mjWorkersAliveLast5Minutes.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+      },
+    },
+  },
+  {
+    name: "mj_workers_alive",
+    description:
+      "Alias of execution_capacity_status. Count of Midjourney workers alive in the last 5 minutes.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+      },
+    },
+  },
+  {
     name: "midjourney_fill",
     description:
-      "Enqueue a Midjourney.imagine job on the household cloud queue (creative.executionCapacity). The Mac execution-capacity worker pulls it outbound — no tunnel. Does not wait for the grid; poll GET /api/execution-capacity?jobId=… or wait for candidateUrls then asset_job_complete / mission_attach_proof.",
+      "Enqueue a Midjourney.imagine job on the household cloud queue (creative.executionCapacity). The Mac execution-capacity worker pulls it outbound — no tunnel. Does not wait for the grid; poll GET /api/execution-capacity?jobId=… or wait for candidateUrls then asset_job_complete / mission_attach_proof. Response includes mjWorkersAliveLast5Minutes.",
     inputSchema: {
       type: "object",
       properties: {
@@ -2374,14 +2400,41 @@ async function callTool(name, args, request) {
       payload = { ok: false, message: text.slice(0, 300) };
     }
     const jobId = payload?.job?.id || null;
+    const alive =
+      payload?.mjWorkersAliveLast5Minutes ??
+      payload?.summary?.mjWorkersAliveLast5Minutes ??
+      null;
     return {
       fill: payload,
       job,
       cloudJobId: jobId,
       model: "pull",
+      mjWorkersAliveLast5Minutes: alive,
       next: payload?.ok
-        ? `Queued ${jobId || ""}. Mac worker pulls outbound. Poll GET https://studio-mock-iota.vercel.app/api/execution-capacity?jobId=${jobId || "…"} then asset_job_complete / mission_attach_proof with candidate https URLs.`
+        ? `Queued ${jobId || ""}. ${alive === 0 ? "No MJ worker seen in the last 5 minutes — start the sailboat worker." : `${alive} MJ worker(s) alive in the last 5 minutes.`} Poll GET https://studio-mock-iota.vercel.app/api/execution-capacity?jobId=${jobId || "…"} then asset_job_complete / mission_attach_proof with candidate https URLs.`
         : "Enqueue failed — check household auth / world write. Local fallback: /Users/evanrobinson/abbies.world.ios/scripts/execution_capacity.sh submit",
+    };
+  }
+
+  if (name === "execution_capacity_status" || name === "mj_workers_alive") {
+    const current = await readWorld(auth);
+    if (current.status !== 200) {
+      return {
+        error: "world_unavailable",
+        status: current.status,
+        body: current.body,
+        hint: current.hint,
+      };
+    }
+    const summary = summarizeExecutionCapacity(current.body);
+    return {
+      mjWorkersAliveLast5Minutes: summary.mjWorkersAliveLast5Minutes,
+      aliveWindowMs: summary.aliveWindowMs,
+      aliveWorkers: summary.aliveWorkers,
+      queued: summary.queued,
+      claimed: summary.claimed,
+      summary,
+      durable: "creative.executionCapacity",
     };
   }
 
@@ -2711,6 +2764,7 @@ export async function GET() {
       feedback: ["feedback_report", "bug_report", "trouble_ticket_create"],
       tickets: ["trouble_ticket_get", "trouble_ticket_list", "trouble_ticket_comment", "trouble_ticket_resolve"],
       ingest: ["asset_ingest"],
+      mjWorkersAlive: ["execution_capacity_status", "mj_workers_alive"],
     },
   });
 }
