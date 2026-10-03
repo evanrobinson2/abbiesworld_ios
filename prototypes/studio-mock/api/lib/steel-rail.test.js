@@ -65,4 +65,48 @@ const ok = validateAuthorPlan(planned, { scenes: {} });
 assert(ok.ok, "heuristic monastery plan ok");
 assert(ok.ops.every((s) => AUTHOR_OPS.has(s.op)), "all ops closed");
 
+const aliased = validateAuthorPlan(
+  { ops: [{ op: "scene.upsert", args: { id: "scene.home", name: "Home" } }] },
+  { scenes: { "scene.home": { poiInstances: [] } } }
+);
+assert(aliased.ok, "args.id aliases to sceneId");
+assert(aliased.ops[0].args.sceneId === "scene.home", "sceneId present");
+assert(!aliased.ops[0].args.id, "id stripped");
+assert(aliased.warnings.includes("normalized_id_to_sceneId"), "warn about alias");
+
+const mint = validateAuthorPlan(
+  { ops: [{ op: "scene.upsert", args: { name: "Ghost" } }] },
+  { scenes: { "scene.home": {} } }
+);
+assert(mint.error === "scene_id_required", "bare scene.upsert rejected");
+
+const rocketPlan = await planAuthorBeat({
+  intent: "Remove poi.moonBase.rocket Pink Rocket from scene.home. Delete accidental scene.mcpmusm14y7.",
+  describe: {
+    activeSceneID: "scene.home",
+    scenes: [
+      {
+        id: "scene.home",
+        name: "Home",
+        places: [
+          { placeId: "poi.abbie.treehouse", name: "Abbie’s Treehouse" },
+          { placeId: "poi.moonBase.rocket", name: "Pink Rocket" },
+        ],
+      },
+    ],
+  },
+  openaiKey: "",
+});
+const rocketOk = validateAuthorPlan(rocketPlan, {
+  scenes: { "scene.home": {}, "scene.mcpmusm14y7": {} },
+});
+assert(rocketOk.ok, "cleanup plan ok");
+assert(rocketOk.ops.some((s) => s.op === "place.remove" && s.args.placeId === "poi.moonBase.rocket"), "place.remove rocket");
+assert(
+  rocketOk.ops.some((s) => s.op === "place.remove" && s.args.sceneId === "scene.home"),
+  "place.remove targets scene.home even when a scene.mcp* id is mentioned first"
+);
+assert(rocketOk.ops.some((s) => s.op === "scene.delete" && s.args.sceneId === "scene.mcpmusm14y7"), "delete ghost scene");
+assert(AUTHOR_OPS.has("place.remove") && AUTHOR_OPS.has("scene.delete"), "new ops closed");
+
 console.log("steel-rail.test.js OK");

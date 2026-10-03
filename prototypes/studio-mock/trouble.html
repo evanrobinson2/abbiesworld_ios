@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Trouble queue · Abbie’s World</title>
+  <style>
+    :root { color-scheme: dark; --ink: #f7f1e8; --muted: #9a9288; --bg: #0a0a0c; --card: #16151a; --crit: #e07a6a; --ok: #6bcf8e; }
+    body { margin: 0; font: 16px/1.4 "SF Pro Text", system-ui, sans-serif; background: var(--bg); color: var(--ink); }
+    main { max-width: 52rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    h1 { font-size: 1.4rem; margin: 0 0 0.35rem; }
+    .sub { color: var(--muted); margin: 0 0 1.5rem; }
+    .ticket { background: var(--card); border: 1px solid rgba(247,241,232,0.08); border-radius: 14px; padding: 1rem 1.1rem; margin: 0 0 0.85rem; }
+    .row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+    .id { font-variant-numeric: tabular-nums; font-weight: 700; }
+    .sev { font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase; }
+    .sev.critical, .sev.high { color: var(--crit); }
+    .sev.resolved { color: var(--ok); }
+    pre { white-space: pre-wrap; color: var(--muted); font-size: 0.82rem; }
+    .err { color: var(--crit); }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Developer trouble queue</h1>
+    <p class="sub">Durable AW-N tickets on the household world (<code>creative.troubleQueue</code>). Filed via MCP <code>trouble_ticket_create</code>.</p>
+    <div id="list">Loading…</div>
+  </main>
+  <script>
+    async function load() {
+      const el = document.getElementById("list");
+      try {
+        const res = await fetch("/api/trouble-tickets", { credentials: "include" });
+        const data = await res.json();
+        if (!res.ok) {
+          el.innerHTML = `<p class="err">${data.error || res.status}: ${data.hint || "Need Studio household token."}</p>`;
+          return;
+        }
+        const rows = data.tickets || [];
+        if (!rows.length) {
+          el.innerHTML = "<p class=\"sub\">No tickets yet.</p>";
+          return;
+        }
+        el.innerHTML = rows.map((t) => `
+          <article class="ticket">
+            <div class="row">
+              <div class="id">${t.id}</div>
+              <div class="sev ${t.status} ${t.severity}">${t.status} · ${t.severity}</div>
+            </div>
+            <h2 style="font-size:1.05rem;margin:0.35rem 0 0.4rem">${escapeHtml(t.title)}</h2>
+            <p style="margin:0 0 0.5rem">${escapeHtml(t.summary || "")}</p>
+            <pre>${escapeHtml((t.relatedIds || []).join(" · "))}
+${escapeHtml(t.requestedCleanup || "")}</pre>
+          </article>
+        `).join("");
+      } catch (err) {
+        el.innerHTML = `<p class="err">${escapeHtml(String(err))}</p>`;
+      }
+    }
+    function escapeHtml(s) {
+      return String(s || "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+    }
+    load();
+  </script>
+</body>
+</html>
