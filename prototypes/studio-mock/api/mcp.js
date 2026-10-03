@@ -69,7 +69,7 @@ import {
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
-const SERVER = { name: "abbies-world", version: "0.6.0" };
+const SERVER = { name: "abbies-world", version: "0.6.1" };
 const HOUSEHOLD_AUDIENCE = "https://api.abbies.world";
 const PLATE_BASE = "https://studio-mock-iota.vercel.app/api/plate";
 const REVIEW_BASE = "https://studio-mock-iota.vercel.app/review.html";
@@ -78,7 +78,16 @@ const OAUTH_RESOURCE_METADATA =
   "https://studio-mock-iota.vercel.app/.well-known/oauth-protected-resource";
 const OAUTH_SCOPES = "openid profile email offline_access read:world write:world";
 
-const IPAD_LAYOUT = `## How to create things the iPad can show
+const COMMAND_CARD = `## Exposed commands (these ARE on this MCP)
+
+DELETE / REMOVE a POI: place_remove or place_delete (sceneId + placeId, instanceId, or name). Never rewrite a scene to drop a pin.
+DELETE a scene: scene_delete (scene.home is protected). Use this for accidental scene.mcp* objects.
+FEEDBACK / BUG REPORT / ISSUE / TROUBLE TICKET: feedback_report or bug_report or trouble_ticket_create. Writes durable AW-N on household creative.troubleQueue — not chat text. Then trouble_ticket_list / trouble_ticket_get.
+NL world edit: author_beat (dryRun first; confirm:true executes; postconditions roll back lies).
+
+`;
+
+const IPAD_LAYOUT = `${COMMAND_CARD}## How to create things the iPad can show
 
 The iPad does not use the Studio map's pixel layout. It plays one scene at a time:
 
@@ -400,7 +409,37 @@ function describe(doc) {
     live: doc?.creative?.live || null,
     vars: doc?.creative?.vars || null,
     poiLimit: "POIs are picture + whitelisted behavior + x/y. No custom gameplay scripts.",
+    can: {
+      deletePlace: "place_remove",
+      deleteScene: "scene_delete",
+      feedback: "feedback_report",
+      bugReport: "bug_report",
+      troubleTicket: "trouble_ticket_create",
+    },
   };
+}
+
+function strictSchema(schema) {
+  if (!schema || typeof schema !== "object") return schema;
+  const out = { ...schema };
+  if (out.type === "array") {
+    out.items = strictSchema(out.items || { type: "object", additionalProperties: true });
+  }
+  if (out.type === "object") {
+    const props = out.properties && typeof out.properties === "object" ? out.properties : {};
+    out.properties = Object.fromEntries(
+      Object.entries(props).map(([key, value]) => [key, strictSchema(value)])
+    );
+    if (out.additionalProperties == null) out.additionalProperties = true;
+  }
+  return out;
+}
+
+export function publicTools() {
+  return TOOLS.map((tool) => ({
+    ...tool,
+    inputSchema: strictSchema(tool.inputSchema || { type: "object", properties: {} }),
+  }));
 }
 
 function ensureCreative(doc) {
@@ -599,7 +638,7 @@ const TOOLS = [
   {
     name: "poi_capabilities",
     description:
-      "What a POI can and cannot do. Look + whitelisted behavior + position. No custom scripts. Includes pegMonastery, plink, travel:<sceneId>, and other closed behaviors.",
+      "What a POI can and cannot do. Look + whitelisted behavior + position. No custom scripts. Includes pegMonastery, plink, travel:<sceneId>, and other closed behaviors. DELETE a pin with place_remove / place_delete. FEEDBACK / bug report: feedback_report.",
     inputSchema: { type: "object", properties: {}, additionalProperties: false },
   },
   {
@@ -612,7 +651,7 @@ const TOOLS = [
   },
   {
     name: "world_describe",
-    description: "Compact map: scenes, plates, POIs with x/y and behavior, exits, live session, vars.",
+    description: "Compact map: scenes, plates, POIs with x/y and behavior, exits, live session, vars. Includes can.deletePlace / can.feedback tool names.",
     inputSchema: { type: "object", properties: { accessToken: { type: "string" } } },
   },
   {
@@ -667,7 +706,22 @@ const TOOLS = [
   },
   {
     name: "place_remove",
-    description: "Remove a POI pin from one scene. Does not delete the place catalog row or other scenes. Pass sceneId plus placeId, instanceId, or name.",
+    description: "DELETE/REMOVE a POI pin from one scene. Does not delete the catalog row or other scenes. Pass sceneId plus placeId, instanceId, or name. Alias: place_delete.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        sceneId: { type: "string" },
+        placeId: { type: "string" },
+        instanceId: { type: "string" },
+        name: { type: "string" },
+      },
+      required: ["sceneId"],
+    },
+  },
+  {
+    name: "place_delete",
+    description: "DELETE a POI from a scene. Same as place_remove. Pass sceneId plus placeId, instanceId, or name.",
     inputSchema: {
       type: "object",
       properties: {
@@ -682,7 +736,7 @@ const TOOLS = [
   },
   {
     name: "scene_delete",
-    description: "Delete a scene. Refuses scene.home unless confirmHome:true. Refuses deleting the last scene. Use this to remove accidental scene.mcp* objects.",
+    description: "DELETE a scene. Refuses scene.home unless confirmHome:true. Refuses deleting the last scene. Use this to remove accidental scene.mcp* objects.",
     inputSchema: {
       type: "object",
       properties: {
@@ -691,6 +745,142 @@ const TOOLS = [
         confirmHome: { type: "boolean" },
       },
       required: ["sceneId"],
+    },
+  },
+  {
+    name: "feedback_report",
+    description:
+      "FEEDBACK / BUG REPORT / ISSUE. Files a durable developer trouble ticket (AW-N) on household creative.troubleQueue — not chat text. Alias of trouble_ticket_create. Use when MCP lies, world state is wrong, or cleanup is needed.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        title: { type: "string" },
+        summary: { type: "string" },
+        severity: { type: "string", description: "low | medium | high | critical" },
+        surface: { type: "string", description: "chatgpt | cursor | studio | ipad | mcp" },
+        operation: { type: "string", description: "e.g. author_beat, scene_upsert" },
+        expectedBehavior: { type: "string" },
+        actualBehavior: { type: "string" },
+        worldRevision: { type: "number" },
+        relatedIds: { type: "array", items: { type: "string" } },
+        diagnosticContext: { type: "object", additionalProperties: true },
+        requestedCleanup: { type: "string" },
+        plan: { type: "object", additionalProperties: true },
+        results: { type: "array", items: { type: "object", additionalProperties: true } },
+        stateDiff: { type: "object", additionalProperties: true },
+        lint: { type: "array", items: { type: "object", additionalProperties: true } },
+        error: { type: "string" },
+        beforeRevision: { type: "number" },
+        afterRevision: { type: "number" },
+      },
+      required: ["title"],
+    },
+  },
+  {
+    name: "bug_report",
+    description:
+      "BUG REPORT / trouble ticket / issue. Same as feedback_report and trouble_ticket_create. Writes AW-N on creative.troubleQueue for developers to review.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        title: { type: "string" },
+        summary: { type: "string" },
+        severity: { type: "string" },
+        surface: { type: "string" },
+        operation: { type: "string" },
+        expectedBehavior: { type: "string" },
+        actualBehavior: { type: "string" },
+        worldRevision: { type: "number" },
+        relatedIds: { type: "array", items: { type: "string" } },
+        diagnosticContext: { type: "object", additionalProperties: true },
+        requestedCleanup: { type: "string" },
+      },
+      required: ["title"],
+    },
+  },
+  {
+    name: "trouble_ticket_create",
+    description:
+      "File a durable developer trouble ticket (AW-N) on the household world creative.troubleQueue. FEEDBACK / bug report / issue. Not chat text — developers review this queue. Attach plan/results/diff when you have them.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        title: { type: "string" },
+        summary: { type: "string" },
+        severity: { type: "string", description: "low | medium | high | critical" },
+        surface: { type: "string", description: "chatgpt | cursor | studio | ipad | mcp" },
+        operation: { type: "string", description: "e.g. author_beat, scene_upsert" },
+        expectedBehavior: { type: "string" },
+        actualBehavior: { type: "string" },
+        worldRevision: { type: "number" },
+        relatedIds: { type: "array", items: { type: "string" } },
+        diagnosticContext: { type: "object", additionalProperties: true },
+        requestedCleanup: { type: "string" },
+        plan: { type: "object", additionalProperties: true },
+        results: { type: "array", items: { type: "object", additionalProperties: true } },
+        stateDiff: { type: "object", additionalProperties: true },
+        lint: { type: "array", items: { type: "object", additionalProperties: true } },
+        error: { type: "string" },
+        beforeRevision: { type: "number" },
+        afterRevision: { type: "number" },
+      },
+      required: ["title"],
+    },
+  },
+  {
+    name: "trouble_ticket_get",
+    description: "Read one AW-N trouble ticket (feedback/bug report) from the household world queue.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        ticketId: { type: "string", description: "e.g. AW-1" },
+      },
+      required: ["ticketId"],
+    },
+  },
+  {
+    name: "trouble_ticket_list",
+    description: "List durable feedback / bug-report / trouble tickets (newest first). Optional status filter: open | in_review | resolved | wont_fix.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        status: { type: "string" },
+        limit: { type: "number" },
+      },
+    },
+  },
+  {
+    name: "trouble_ticket_comment",
+    description: "Append a comment to an existing AW-N ticket.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        ticketId: { type: "string" },
+        text: { type: "string" },
+        author: { type: "string" },
+        surface: { type: "string" },
+      },
+      required: ["ticketId", "text"],
+    },
+  },
+  {
+    name: "trouble_ticket_resolve",
+    description: "Set ticket status to resolved, in_review, open, or wont_fix.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        accessToken: { type: "string" },
+        ticketId: { type: "string" },
+        status: { type: "string" },
+        note: { type: "string" },
+      },
+      required: ["ticketId", "status"],
     },
   },
   {
@@ -775,7 +965,7 @@ const TOOLS = [
       type: "object",
       properties: {
         accessToken: { type: "string" },
-        patch: { type: "object" },
+        patch: { type: "object", additionalProperties: true },
       },
       required: ["patch"],
     },
@@ -801,8 +991,8 @@ const TOOLS = [
         accessToken: { type: "string" },
         scope: { type: "string" },
         playerId: { type: "string" },
-        ops: { type: "array" },
-        gates: { type: "array" },
+        ops: { type: "array", items: { type: "object", additionalProperties: true } },
+        gates: { type: "array", items: { type: "object", additionalProperties: true } },
       },
       required: ["ops"],
     },
@@ -1170,89 +1360,6 @@ const TOOLS = [
         },
       },
       required: ["missionId", "routeId", "verb"],
-    },
-  },
-  {
-    name: "trouble_ticket_create",
-    description:
-      "File a durable developer trouble ticket (AW-N) on the household world creative.troubleQueue. Use when MCP execution lies, world state is wrong, or cleanup is needed. Not chat text — developers review this queue. Attach plan/results/diff when you have them.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        accessToken: { type: "string" },
-        title: { type: "string" },
-        summary: { type: "string" },
-        severity: { type: "string", description: "low | medium | high | critical" },
-        surface: { type: "string", description: "chatgpt | cursor | studio | ipad | mcp" },
-        operation: { type: "string", description: "e.g. author_beat, scene_upsert" },
-        expectedBehavior: { type: "string" },
-        actualBehavior: { type: "string" },
-        worldRevision: { type: "number" },
-        relatedIds: { type: "array", items: { type: "string" } },
-        diagnosticContext: { type: "object" },
-        requestedCleanup: { type: "string" },
-        plan: { type: "object" },
-        results: { type: "array" },
-        stateDiff: { type: "object" },
-        lint: { type: "array" },
-        error: { type: "string" },
-        beforeRevision: { type: "number" },
-        afterRevision: { type: "number" },
-      },
-      required: ["title"],
-    },
-  },
-  {
-    name: "trouble_ticket_get",
-    description: "Read one AW-N trouble ticket from the household world queue.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        accessToken: { type: "string" },
-        ticketId: { type: "string", description: "e.g. AW-1" },
-      },
-      required: ["ticketId"],
-    },
-  },
-  {
-    name: "trouble_ticket_list",
-    description: "List durable trouble tickets (newest first). Optional status filter: open | in_review | resolved | wont_fix.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        accessToken: { type: "string" },
-        status: { type: "string" },
-        limit: { type: "number" },
-      },
-    },
-  },
-  {
-    name: "trouble_ticket_comment",
-    description: "Append a comment to an existing AW-N ticket.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        accessToken: { type: "string" },
-        ticketId: { type: "string" },
-        text: { type: "string" },
-        author: { type: "string" },
-        surface: { type: "string" },
-      },
-      required: ["ticketId", "text"],
-    },
-  },
-  {
-    name: "trouble_ticket_resolve",
-    description: "Set ticket status to resolved, in_review, open, or wont_fix.",
-    inputSchema: {
-      type: "object",
-      properties: {
-        accessToken: { type: "string" },
-        ticketId: { type: "string" },
-        status: { type: "string" },
-        note: { type: "string" },
-      },
-      required: ["ticketId", "status"],
     },
   },
 ];
@@ -2028,11 +2135,16 @@ async function runTroubleTool(name, auth, args) {
 }
 
 async function callTool(name, args, request) {
+  if (name === "place_delete") name = "place_remove";
+  if (name === "feedback_report" || name === "bug_report") name = "trouble_ticket_create";
   if (name === "read_primer") return { text: primerBody() };
   if (name === "poi_capabilities") {
     return {
       can: ["name", "exteriorAsset", "interiorAsset", "x", "y", "scale", "behavior from whitelist", "travel:<sceneId>"],
       cannot: ["custom dialogue", "puzzles", "new screens", "freeform scripts"],
+      deletePlace: "place_remove or place_delete",
+      deleteScene: "scene_delete",
+      feedback: "feedback_report or bug_report or trouble_ticket_create",
       behaviors: [...BEHAVIORS, "travel:<sceneId>", "fallingTargets:<configurationID>"],
       layout: "x and y are 0–1 on the scene plate. The iPad shows that plate full screen.",
     };
@@ -2479,13 +2591,13 @@ async function handleRpc(message, request) {
     const requested = params?.protocolVersion || PROTOCOL;
     return rpcResult(id, {
       protocolVersion: requested === "2025-06-18" ? requested : PROTOCOL,
-      capabilities: { tools: { listChanged: false }, resources: { listChanged: false } },
+      capabilities: { tools: { listChanged: true }, resources: { listChanged: false } },
       serverInfo: SERVER,
       instructions: IPAD_LAYOUT,
     });
   }
   if (method === "ping") return rpcResult(id, {});
-  if (method === "tools/list") return rpcResult(id, { tools: TOOLS });
+  if (method === "tools/list") return rpcResult(id, { tools: publicTools() });
   if (method === "resources/list") {
     return rpcResult(id, {
       resources: [
@@ -2544,6 +2656,12 @@ export async function GET() {
       audience: MCP_PUBLIC_URL,
     },
     tools: TOOLS.map((tool) => tool.name),
+    commands: {
+      deletePlace: ["place_remove", "place_delete"],
+      deleteScene: ["scene_delete"],
+      feedback: ["feedback_report", "bug_report", "trouble_ticket_create"],
+      tickets: ["trouble_ticket_get", "trouble_ticket_list", "trouble_ticket_comment", "trouble_ticket_resolve"],
+    },
   });
 }
 

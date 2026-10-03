@@ -44,7 +44,7 @@ Operational failures belong on the household world (`creative.troubleQueue`), no
 
 | Tool | Use |
 | --- | --- |
-| `trouble_ticket_create` | File AW-N with expected/actual, relatedIds, plan, results, requestedCleanup |
+| `feedback_report` / `bug_report` / `trouble_ticket_create` | File AW-N with expected/actual, relatedIds, plan, results, requestedCleanup |
 | `trouble_ticket_get` / `trouble_ticket_list` | Read the queue |
 | `trouble_ticket_comment` | Append a note |
 | `trouble_ticket_resolve` | Mark resolved / in_review / wont_fix |
@@ -53,7 +53,7 @@ Studio list: `/trouble.html`. Never claim a mutation happened unless author_beat
 
 ### POI remove / accidental scenes
 
-Use `place_remove` (or author_beat `place.remove`) to drop a pin. `scene_upsert` does **not** replace the place list. `scene_delete` removes accidental `scene.mcp*` objects. `scene.home` is protected.
+Use `place_remove` / `place_delete` (or author_beat `place.remove`) to drop a pin. `scene_upsert` does **not** replace the place list. `scene_delete` removes accidental `scene.mcp*` objects. `scene.home` is protected.
 
 ### Midjourney / execution capacity (pull — no tunnel)
 

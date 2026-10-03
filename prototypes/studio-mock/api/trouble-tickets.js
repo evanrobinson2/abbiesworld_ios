@@ -125,7 +125,7 @@ export async function POST(request) {
   } else {
     extra = createTroubleTicket(next, body, {
       mcpServer: "abbies-world",
-      mcpVersion: "0.6.0",
+      mcpVersion: "0.6.1",
       originatingSurface: body.surface || "studio",
       beforeRevision: current.body.revision,
     });
