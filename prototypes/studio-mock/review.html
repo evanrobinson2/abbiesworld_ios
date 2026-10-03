@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- review-ui 20261003f -->
+<!-- review-ui 20261003g -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -10,7 +10,7 @@
   <meta name="theme-color" content="#0a0a0c" />
   <meta name="format-detection" content="telephone=no" />
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <link rel="manifest" href="/manifest.webmanifest?v=20261003f" />
+  <link rel="manifest" href="/manifest.webmanifest?v=20261003g" />
   <link rel="apple-touch-icon" href="/plates/home.jpg" />
   <title>Review · Abbie’s World</title>
   <style>
@@ -1293,6 +1293,11 @@
       return { left: r.left - zoom.x, top: r.top - zoom.y };
     }
 
+    function clipRect(el) {
+      const clip = el.closest("#card, .hist-facet") || el.parentElement || el;
+      return clip.getBoundingClientRect();
+    }
+
     function zoomToward(clientX, clientY, nextScale) {
       const el = zoomEl();
       if (!el) return;
@@ -1303,29 +1308,29 @@
       zoom.scale = nextScale;
     }
 
+    function axisBounds(vis, pStart, pEnd, originStart) {
+      const pSize = pEnd - pStart;
+      if (vis >= pSize - 0.5) {
+        return { min: pEnd - originStart - vis, max: pStart - originStart };
+      }
+      const centered = pStart + (pSize - vis) / 2 - originStart;
+      return { min: centered, max: centered };
+    }
+
     function clampZoomPan({ rubber = false } = {}) {
       const el = zoomEl();
       if (!el) return;
-      const w = el.clientWidth || 1;
-      const h = el.clientHeight || 1;
-      if (zoom.scale <= 1) {
-        const tx = (1 - zoom.scale) * w / 2;
-        const ty = (1 - zoom.scale) * h / 2;
-        zoom.x = tx;
-        zoom.y = ty;
-        return;
-      }
-      const minX = -(zoom.scale - 1) * w;
-      const minY = -(zoom.scale - 1) * h;
-      const maxX = 0;
-      const maxY = 0;
+      const origin = layoutOrigin(el);
+      const p = clipRect(el);
+      const bx = axisBounds(el.clientWidth * zoom.scale, p.left, p.right, origin.left);
+      const by = axisBounds(el.clientHeight * zoom.scale, p.top, p.bottom, origin.top);
       const resist = (v, min, max) => {
         if (v < min) return min + (v - min) * 0.28;
         if (v > max) return max + (v - max) * 0.28;
         return v;
       };
-      zoom.x = rubber ? resist(zoom.x, minX, maxX) : Math.max(minX, Math.min(maxX, zoom.x));
-      zoom.y = rubber ? resist(zoom.y, minY, maxY) : Math.max(minY, Math.min(maxY, zoom.y));
+      zoom.x = rubber ? resist(zoom.x, bx.min, bx.max) : Math.max(bx.min, Math.min(bx.max, zoom.x));
+      zoom.y = rubber ? resist(zoom.y, by.min, by.max) : Math.max(by.min, Math.min(by.max, zoom.y));
     }
 
     function applyZoom({ clamp = true, rubber = false, animate = false } = {}) {
@@ -2916,7 +2921,7 @@
     }
 
     async function registerReviewWorker() {
-      return navigator.serviceWorker.register("/sw-review.js?v=20261003f", { scope: "/" });
+      return navigator.serviceWorker.register("/sw-review.js?v=20261003g", { scope: "/" });
     }
 
     async function subscribePush() {
