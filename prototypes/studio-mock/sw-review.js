@@ -1,4 +1,4 @@
-/* Abbie Review — sparse Web Push + open Board/Dump. v=20261003c */
+/* Abbie Review — sparse Web Push + open Board/Dump. v=20261003d */
 self.addEventListener("install", (event) => {
   self.skipWaiting();
 });
@@ -31,7 +31,7 @@ self.addEventListener("push", (event) => {
     tag: data.tag || "abbies-review",
     renotify: true,
     data: {
-      url: data.url || "/review.html?v=20261003c",
+      url: data.url || "/review.html?v=20261003d",
       missionId: data.missionId || null,
       proofId: data.proofId || null,
     },
@@ -42,7 +42,7 @@ self.addEventListener("push", (event) => {
 
 self.addEventListener("notificationclick", (event) => {
   event.notification.close();
-  const target = event.notification.data?.url || "/review.html?v=20261003c";
+  const target = event.notification.data?.url || "/review.html?v=20261003d";
   event.waitUntil(
     (async () => {
       const all = await self.clients.matchAll({ type: "window", includeUncontrolled: true });
