@@ -89,29 +89,20 @@ struct World2PlaceTemplate: Identifiable, Equatable {
         }
     }
 
-    /// Catalog image for inventory / map by template + optional seed growth.
-    func mapCatalogName(growth: World2WorldSeedGrowth?) -> String? {
+    /// Semantic asset for map markers by template + optional seed growth.
+    func mapSemanticName(growth: World2WorldSeedGrowth?) -> String {
         switch id {
         case .worldSeed:
             switch growth {
-            case .portal: return "world2_world_portal"
-            case .seedling, .none: return "world2_world_seedling"
+            case .portal: return "poi.worldSeed.portal"
+            case .seedling, .none: return "poi.worldSeed.seedling"
             }
-        case .sceneCreator: return "world2_world_portal"
-        case .sceneKit: return "world2_world_seed"
-        case .beacon: return "world2_world_seedling"
-        case .selfReplicatingFactory: return nil
+        case .sceneCreator, .sceneKit, .beacon, .selfReplicatingFactory:
+            return exteriorAsset
         }
     }
 
-    var inventoryCatalogName: String? {
-        switch id {
-        case .worldSeed, .sceneKit: return "world2_world_seed"
-        case .sceneCreator: return "world2_world_portal"
-        case .beacon: return "world2_world_seedling"
-        case .selfReplicatingFactory: return nil
-        }
-    }
+    var inventorySemanticName: String { exteriorAsset }
 }
 
 struct World2PlaceInventoryItem: Codable, Identifiable, Equatable {
@@ -193,6 +184,15 @@ struct World2PlacedPlaceInstance: Codable, Identifiable, Equatable {
     var message: String?
     /// Optional per-instance embellishment override. Nil = use template defaults.
     var embellishments: [World2PlaceEmbellishment]?
+
+    var mapLabel: String {
+        switch templateID {
+        case .worldSeed:
+            return seedGrowth == .portal ? "World Portal" : "Seedling"
+        default:
+            return World2PlaceTemplate.template(for: templateID).name
+        }
+    }
 
     init(
         id: String = UUID().uuidString,

@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-toys-05-toy-castle",
+  "latencyMs": 4742,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.94,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Whimsical painted wooden toy castle with four rounded cream-and-gold towers, red domed and peaked roofs, arched windows, a tall central wooden door, rocky tower bases, and a raised bridge connecting the left tower section.",
+    "suggestedScale": 0.8
+  },
+  "pngSha256": "48146b352e7f673f71cd04110eb8e6a8bbd86a8b6647cc2c1911951988b9afe6",
+  "responseId": "chatcmpl-ESoLtVRiYnTmr670wyjwGetHHIsdZ",
+  "timestamp": "2026-09-27T18:57:29.787003+00:00"
+}

@@ -1,0 +1,19 @@
+{
+  "saved_scene_reopened": true,
+  "camera": "CAM 07 \u00b7 Sheltered reference composition",
+  "libraries_resolved": 1,
+  "separate_structural_collections": [
+    "tree.bare.refined",
+    "ceiling.timber",
+    "deck.reference",
+    "railing.reference",
+    "tree.alcove.surround"
+  ],
+  "independent_blossom_placements": 21,
+  "independent_cushions": 9,
+  "packed_texture_images": 8,
+  "uploaded_tree_hash_unchanged": true,
+  "single_pillow_move_isolated": true,
+  "native_runtime_verified": false,
+  "camera_fit_is_approximate": true
+}

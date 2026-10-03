@@ -1,0 +1,34 @@
+{
+  "id": "20260927-cottage-furniture-integration",
+  "semanticId": "pack.abbieCottage.furniture.sheet4",
+  "status": "open",
+  "priority": "normal",
+  "type": "production_sprite",
+  "brief": "Extract and bind nine cottage furniture and play objects from approved candidate 4 only.",
+  "aspect": "individual cutouts",
+  "styleNotes": "Approved painted style. Transparent backgrounds, no shadows, no overlap.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/cottage-furniture-2026-09-27/furniture-sheet-4-approved.jpeg",
+    "AssetSources/World2/cottage-furniture-2026-09-27/provenance.json",
+    "AssetSources/World2/cottage-furniture-2026-09-27/HANDOFF.md",
+    "AssetSources/CozyRoomKit/HANDOFF.md"
+  ],
+  "promptSeeds": [],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T18:18:24.140242+00:00",
+  "productionIntent": "runtime_bind",
+  "acceptanceCriteria": [
+    "Nine independently selectable props in existing decoration tray",
+    "Clean transparent edges and no ground shadows",
+    "Placement and reload verified in game with screenshot"
+  ],
+  "sessionNote": "Imported as nine acd-furniture4-* sprites. 2026-09-27: cottage decorate tray scoped to CottageDecorKit only (no Cozy Room / remote props); AssetBootstrap resolves acd_* catalog names. Device install done; unlock + placement screenshot still needed.",
+  "integrationProgress": {
+    "catalog": "cottage_decor_asset_manifest",
+    "importedIDPrefix": "acd-furniture4-",
+    "importedCount": 9,
+    "verification": "unit tests AbbieCottageDecorCatalogTests green; tray policy abbieCottageOnly",
+    "runtimeVerified": false
+  }
+}

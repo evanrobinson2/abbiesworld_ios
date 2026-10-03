@@ -1,0 +1,15 @@
+{
+  "contactSheet": "AssetSources/World2/CottageDecorKit/review/contact-sheet.png",
+  "eligibleScenes": [
+    "poi.abbieTreehouse.interior",
+    "poi.abbieTreehouse.interior.cozyNook",
+    "poi.abbieTreehouse.interior.rooftopLookout",
+    "poi.abbieTreehouse.interior.fitnessCenter",
+    "poi.abbieTreehouse.interior.bedroom",
+    "poi.abbieTreehouse.interior.playroom"
+  ],
+  "imagesetsPresent": 21,
+  "manifestAssetCount": 21,
+  "status": "catalog_ready_awaiting_device_screenshots",
+  "timestamp": "2026-09-27T18:57:33.881197+00:00"
+}

@@ -1,0 +1,221 @@
+{
+  "level": "Trail scrap",
+  "campaignNode": "land0_poi1",
+  "boardID": "fox.pawPrint",
+  "boardName": "Fox Paw",
+  "hostage": "foxSpirit",
+  "frontFoe": "porcupineBoxer",
+  "frontHP": 44,
+  "frontATK": 12,
+  "playerHP": 120,
+  "playerMaxHP": 120,
+  "referenceWidth": 1000,
+  "referenceHeight": 900,
+  "boardAspect": "4:3",
+  "pegRadiusRef": 10,
+  "pegs": [
+    {
+      "nx": 0.5,
+      "ny": 0.441,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.5778,
+      "ny": 0.47,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.61,
+      "ny": 0.54,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.5778,
+      "ny": 0.61,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.5,
+      "ny": 0.639,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.4222,
+      "ny": 0.61,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.39,
+      "ny": 0.54,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.4222,
+      "ny": 0.47,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.5,
+      "ny": 0.54,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.28,
+      "ny": 0.2705,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.3323,
+      "ny": 0.3047,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.3123,
+      "ny": 0.36,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.2477,
+      "ny": 0.36,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.2277,
+      "ny": 0.3047,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.42,
+      "ny": 0.2105,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.4723,
+      "ny": 0.2447,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.4523,
+      "ny": 0.3,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.3877,
+      "ny": 0.3,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.3677,
+      "ny": 0.2447,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.58,
+      "ny": 0.2105,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.6323,
+      "ny": 0.2447,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.6123,
+      "ny": 0.3,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.5477,
+      "ny": 0.3,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.5277,
+      "ny": 0.2447,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.72,
+      "ny": 0.2705,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.7723,
+      "ny": 0.3047,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.7523,
+      "ny": 0.36,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.6877,
+      "ny": 0.36,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.6677,
+      "ny": 0.3047,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.5,
+      "ny": 0.7,
+      "kind": "orange"
+    },
+    {
+      "nx": 0.22,
+      "ny": 0.54,
+      "kind": "blue"
+    },
+    {
+      "nx": 0.78,
+      "ny": 0.54,
+      "kind": "blue"
+    },
+    {
+      "nx": 0.36,
+      "ny": 0.48,
+      "kind": "bomb"
+    },
+    {
+      "nx": 0.64,
+      "ny": 0.48,
+      "kind": "bomb"
+    }
+  ],
+  "buckets": [
+    {
+      "nx": 0.2,
+      "ny": 0.92,
+      "radius": 0.05
+    },
+    {
+      "nx": 0.4,
+      "ny": 0.92,
+      "radius": 0.05
+    },
+    {
+      "nx": 0.6,
+      "ny": 0.92,
+      "radius": 0.05
+    },
+    {
+      "nx": 0.8,
+      "ny": 0.92,
+      "radius": 0.05
+    }
+  ],
+  "assets": {
+    "plate": "assets/fox-land.jpg",
+    "abbie": "assets/abbie.jpeg",
+    "porcupine": "assets/porcupine-boxer.png",
+    "fox": "assets/fox-happy.png",
+    "orb": "assets/orb-sparkle.png",
+    "powerRefresh": "assets/power-refresh.png",
+    "powerFire": "assets/power-fire.png",
+    "powerSplit": "assets/power-split.png"
+  },
+  "notes": "Static layout mock. Pegs match BoardLevel.fox.pawPrint after spaced(). Not wired into the iOS app."
+}

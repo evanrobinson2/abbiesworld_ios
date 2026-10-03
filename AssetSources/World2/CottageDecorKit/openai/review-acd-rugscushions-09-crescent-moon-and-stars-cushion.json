@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-rugscushions-09-crescent-moon-and-stars-cushion",
+  "latencyMs": 3634,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.99,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Round, textured blue cushion featuring a large raised golden-yellow crescent moon and scattered embroidered yellow stars.",
+    "suggestedScale": 0.75
+  },
+  "responseId": "chatcmpl-ESoBVPWxrn7MBxgg4xlP29q6Y2Us2",
+  "timestamp": "2026-09-27T18:46:44.652029+00:00",
+  "pngSha256": "12647b0e8e2c2854f1640bbffd6b167f97704e739e9e3245820d38a54a370b1d"
+}

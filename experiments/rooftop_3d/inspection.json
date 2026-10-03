@@ -1,0 +1,24 @@
+{
+  "blender": "5.2.1 LTS",
+  "assembly_instances": 30,
+  "unique_assets": 24,
+  "evaluated_triangles": 94436,
+  "ground_petals": false,
+  "vegetation_in_deck": false,
+  "assets_linked_from_library": true,
+  "cameras": [
+    [
+      7.199999809265137,
+      -10.399999618530273,
+      5.699999809265137
+    ],
+    [
+      3.700000047683716,
+      -10.699999809265137,
+      4.900000095367432
+    ]
+  ],
+  "uses_reference_as_backdrop": false,
+  "mobile_ready": false,
+  "note": "Independent asset definitions and placement transforms. Procedural study materials still require runtime preparation."
+}

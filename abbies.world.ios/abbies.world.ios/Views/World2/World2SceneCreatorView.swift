@@ -24,37 +24,16 @@ struct World2SceneCreatorView: View {
             )
             .ignoresSafeArea()
 
-            if let plate = UIImage(named: "world2_blank_world") {
-                Image(uiImage: plate)
-                    .resizable()
-                    .scaledToFill()
-                    .opacity(0.35)
-                    .ignoresSafeArea()
-            }
-
             VStack(spacing: 22) {
-                HStack {
-                    Button(action: onExit) {
-                        Label("Leave Workshop", systemImage: "arrow.left")
-                            .font(.system(size: 15, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 10)
-                            .background(.black.opacity(0.55), in: Capsule())
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier("world2.sceneCreator.exit")
-                    Spacer()
-                }
-
                 Spacer()
 
-                if let seed = UIImage(named: "world2_world_portal") {
-                    Image(uiImage: seed)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(maxWidth: 280, maxHeight: 240)
-                }
+                World2SemanticImage(
+                    semanticName: "poi.sceneCreator.exterior",
+                    fallbackIcon: "hammer.fill",
+                    fallbackLabel: "Scene Creator"
+                )
+                .scaledToFit()
+                .frame(maxWidth: 280, maxHeight: 240)
 
                 Text("Scene Creator")
                     .font(.system(size: 34, weight: .black, design: .rounded))
@@ -66,22 +45,28 @@ struct World2SceneCreatorView: View {
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 36)
 
-                Button(action: onTakeKit) {
-                    Label("Take Scene Kit", systemImage: "shippingbox.fill")
-                        .font(.system(size: 18, weight: .black, design: .rounded))
-                        .frame(maxWidth: 320)
-                        .padding(.vertical, 16)
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(.cyan)
-                .accessibilityIdentifier("world2.sceneCreator.takeKit")
-
                 Spacer()
             }
             .padding(24)
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.sceneCreator.interior")
+        .world2InteriorActions(
+            [
+                World2ThumbAction(
+                    id: "take-kit",
+                    title: "Take Scene Kit",
+                    icon: "shippingbox.fill",
+                    accessibilityID: "world2.sceneCreator.takeKit"
+                )
+            ],
+            exitAccessibilityID: "world2.sceneCreator.exit",
+            onExit: onExit
+        ) { id in
+            if id == "take-kit" {
+                onTakeKit()
+            }
+        }
     }
 }
 
@@ -94,20 +79,6 @@ struct World2BeaconView: View {
             Color(red: 0.12, green: 0.18, blue: 0.22).ignoresSafeArea()
 
             VStack(spacing: 20) {
-                HStack {
-                    Button(action: onExit) {
-                        Label("Back", systemImage: "arrow.left")
-                            .font(.system(size: 15, weight: .bold, design: .rounded))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 14)
-                            .padding(.vertical, 10)
-                            .background(.black.opacity(0.55), in: Capsule())
-                    }
-                    .buttonStyle(.plain)
-                    .accessibilityIdentifier("world2.beacon.exit")
-                    Spacer()
-                }
-
                 Spacer()
 
                 Image(systemName: "light.beacon.max.fill")
@@ -131,5 +102,9 @@ struct World2BeaconView: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.beacon.interior")
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.beacon.exit",
+            onExit: onExit
+        )
     }
 }

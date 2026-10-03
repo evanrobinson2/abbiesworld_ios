@@ -1,0 +1,30 @@
+{
+  "cropBounds": [
+    325,
+    10,
+    626,
+    344
+  ],
+  "derivativeSha256": "750cf04ebdd5b00a30ceee4a9870a7850a1424930bda3092b04e4cc141ca6c74",
+  "packSemanticId": "pack.abbieCottage.furniture.sheet4",
+  "processing": "existing cottage pipeline component extraction; explicit object cells",
+  "reviewStatus": "pending_visual_review",
+  "semanticId": "decor.abbieCottage.acd-furniture4-mushroom-desk",
+  "source": {
+    "approval": "Evan: just 4 in this batch.. the one on my screen",
+    "candidateIndex": 3,
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "filename": "furniture-sheet-4-approved.jpeg",
+    "jobId": "3798e65b-3825-43ad-82ee-99eba37a85b3",
+    "retrieval": "Original CDN image exported through browser pageAssets",
+    "semanticId": "pack.abbieCottage.furniture.sheet4",
+    "sha256": "ba682994aa85a5cd72bc6a2dd9609d5211b849820511bdf71cc157a7f83c9541",
+    "sourceProvider": "Midjourney",
+    "sourceUrl": "https://cdn.midjourney.com/3798e65b-3825-43ad-82ee-99eba37a85b3/0_3.jpeg",
+    "status": "approved_source"
+  },
+  "sourcePath": "AssetSources/World2/cottage-furniture-2026-09-27/furniture-sheet-4-approved.jpeg"
+}

@@ -40,13 +40,25 @@ enum World2SceneBuilderSlot: String, CaseIterable, Identifiable, Sendable {
     }
 
     var assetCatalogName: String {
+        // UI chrome only — not world art. Prefer drawn labels over catalog plates.
         switch self {
-        case .place: return "world2_scene_place_selector"
-        case .theme: return "world2_scene_theme_selector"
-        case .atmosphere: return "world2_scene_atmosphere_selector"
-        case .specialFeature: return "world2_scene_special_feature_selector"
-        case .vibe: return "world2_scene_vibe_selector"
-        case .hardpoints: return "world2_hardpoint_selector"
+        case .place: return ""
+        case .theme: return ""
+        case .atmosphere: return ""
+        case .specialFeature: return ""
+        case .vibe: return ""
+        case .hardpoints: return ""
+        }
+    }
+
+    var systemIcon: String {
+        switch self {
+        case .place: return "map.fill"
+        case .theme: return "paintpalette.fill"
+        case .atmosphere: return "cloud.sun.fill"
+        case .specialFeature: return "sparkles"
+        case .vibe: return "heart.fill"
+        case .hardpoints: return "circle.grid.3x3.fill"
         }
     }
 

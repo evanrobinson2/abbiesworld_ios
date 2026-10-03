@@ -1,0 +1,91 @@
+{
+  "$id": "https://abbies.world/schemas/dev-asset-library.json",
+  "title": "Dev Asset Library",
+  "type": "object",
+  "required": ["version", "cdn", "assets"],
+  "properties": {
+    "version": { "type": "integer", "minimum": 1 },
+    "generatedAt": { "type": ["string", "null"] },
+    "cdn": {
+      "type": "object",
+      "required": ["provider"],
+      "properties": {
+        "provider": { "type": "string" },
+        "baseUrlEnv": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    },
+    "assets": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/asset" }
+    }
+  },
+  "$defs": {
+    "asset": {
+      "type": "object",
+      "required": ["id", "kind", "status", "dag", "storage"],
+      "properties": {
+        "id": { "type": "string" },
+        "semanticId": { "type": ["string", "null"] },
+        "name": { "type": "string" },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "sceneArt",
+            "decoration",
+            "characterArt",
+            "interfaceArt",
+            "ingredient",
+            "rawMaterial",
+            "craftingItem",
+            "card",
+            "reference"
+          ]
+        },
+        "family": { "type": ["string", "null"] },
+        "tags": { "type": "array", "items": { "type": "string" } },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "dag_pending", "vetted", "shipped", "rejected"]
+        },
+        "storage": {
+          "type": "object",
+          "required": ["localPath"],
+          "properties": {
+            "localPath": { "type": "string" },
+            "cdnKey": { "type": ["string", "null"] },
+            "cdnUrl": { "type": ["string", "null"] },
+            "sha256": { "type": ["string", "null"] },
+            "bundleCatalogName": { "type": ["string", "null"] }
+          }
+        },
+        "dag": {
+          "type": "object",
+          "required": ["pipeline", "nodes"],
+          "properties": {
+            "pipeline": { "type": "string" },
+            "nodes": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["id", "status"],
+                "properties": {
+                  "id": { "type": "string" },
+                  "status": {
+                    "type": "string",
+                    "enum": ["pending", "ok", "skipped", "failed"]
+                  },
+                  "detail": { "type": "string" },
+                  "at": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "prompt": { "type": ["string", "null"] },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "revision": "B05",
+  "one_continuous_tree_component": true,
+  "tree_open_boundary_edges": 0,
+  "couch_back_contacts": [
+    {
+      "cushion": "B back cushion 0",
+      "soft_contact_m": -0.012
+    },
+    {
+      "cushion": "B back cushion 1",
+      "soft_contact_m": -0.012
+    },
+    {
+      "cushion": "B back cushion 2",
+      "soft_contact_m": -0.012
+    }
+  ],
+  "planks_trimmed_to_tree": 81,
+  "integral_bearing_limbs": 3,
+  "bearing_surface_z": -0.59,
+  "foreground_foliage_is_separate": true,
+  "scope": "Geometric scene checks; final organic surface polish and native integration remain open.",
+  "geometry_vertices": 113083
+}

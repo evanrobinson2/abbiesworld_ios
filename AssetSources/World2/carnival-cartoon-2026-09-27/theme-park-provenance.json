@@ -1,0 +1,11 @@
+{
+  "semanticId": "scene.carnival.background",
+  "sourceProvider": "Midjourney Niji 7",
+  "jobId": "34a9e6b7-0e1f-4ee8-8c4c-02372df4c5a6",
+  "candidateIndex": 0,
+  "sourceUrl": "https://cdn.midjourney.com/34a9e6b7-0e1f-4ee8-8c4c-02372df4c5a6/0_0.jpeg",
+  "sha256": "313675ff9eb08a44cc3a5f63e167365a336fe21dc9434fcd01675b85072bb5e3",
+  "promptFile": "theme-park-prompt.txt",
+  "status": "concept pending review; not runtime-bound",
+  "notes": "User requested giant background roller coasters and whole-park depth. This pass achieves sprawling park composition; booth clarity and more saturated color remain review points."
+}

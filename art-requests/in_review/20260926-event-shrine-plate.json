@@ -1,0 +1,47 @@
+{
+  "id": "20260926-event-shrine-plate",
+  "semanticId": "plate.marbleVoyage.event.shrine",
+  "kind": "plate",
+  "priority": "normal",
+  "status": "in_review",
+  "placeholder": {
+    "type": "sf_symbol",
+    "detail": "eventPhase SF Symbol only for shrine rests"
+  },
+  "keepStockIcon": false,
+  "surface": "Shrine / rest event resolve screen",
+  "brief": "4:3 encounter plate for shrine/rest: soft trail bell or glowing stone alcove, heal-friendly mood. Room for HP/charm outcome chrome. No text in art. Distinct from Bell Market shop interior.",
+  "aspect": "4:3",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/MarbleVoyageHostView.swift",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/fox-land.jpg",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/porcupine-boxer.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/index.html",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/README.md",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg"
+  ],
+  "promptSeeds": [
+    "Comedic fantasy trail shrine encounter backdrop small glowing bell alcove, warm soft light, 4:3 landscape, no text --ar 4:3 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:45:00Z",
+  "sessionNote": "Evan authorized production with iconic single-object compositions, restrained atmosphere and quiet UI space. Not elaborate scenic backgrounds.",
+  "fulfillment": null,
+  "createdAt": "2026-09-26T20:45:00Z",
+  "type": "plate",
+  "styleNotes": "Match Marble Voyage trail-scrap / porcupine cast language.",
+  "gameArea": "Marble Voyage \u2014 event resolve",
+  "usage": "4:3 backdrop for shrine/rest",
+  "targetPixelSize": "~2048\u00d71536 4:3",
+  "expectedBackground": "Painted soft alcove / trail bell scene",
+  "characterOrAssetName": "Shrine encounter plate",
+  "productionIntent": "runtime_bind",
+  "referenceRequestIds": [
+    "20260926-climb-shrine-tile",
+    "20260926-bell-market-shop-interior"
+  ],
+  "acceptanceCriteria": [
+    "Heal-friendly mood; distinct from treasure/mystery plates",
+    "No text"
+  ]
+}

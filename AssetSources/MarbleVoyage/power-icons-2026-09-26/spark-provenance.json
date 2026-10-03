@@ -1,0 +1,24 @@
+{
+  "semanticId": "ui.plink.power.icon.spark",
+  "filename": "spark-original.jpeg",
+  "sourceProvider": "Midjourney",
+  "jobId": "da3943fc-eca2-4e16-a573-051d39014a13",
+  "candidateIndex": 0,
+  "sourceUrl": "https://cdn.midjourney.com/da3943fc-eca2-4e16-a573-051d39014a13/0_0.jpeg",
+  "submittedAt": "2026-09-26T22:01:11Z",
+  "sha256": "541b86ca9922cd618992ee590d1b34b11f2fa1e27c94e448caa8df16f70a3f8b",
+  "selection": "Evan explicitly selected candidate 1 (index 0); other variants rejected as compass-like.",
+  "promptFile": "spark-prompt.txt",
+  "derivative": {
+    "filename": "spark-transparent.png",
+    "sourceProvider": "OpenAI imagegen background extraction",
+    "derivativeOf": "541b86ca9922cd618992ee590d1b34b11f2fa1e27c94e448caa8df16f70a3f8b",
+    "sha256": "3b5fa259ddb9f07264fec2c4b7df0435280cde892235f96c0eac8d196351ada9",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "maxCornerAlpha": 0,
+    "notes": "Generated transparent derivative preserving approved irregular six-point burst; not pixel-identical. Original preserved. No Tilt frame replacement was requested for this approved source."
+  }
+}

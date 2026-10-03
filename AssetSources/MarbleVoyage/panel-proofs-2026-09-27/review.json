@@ -1,0 +1,163 @@
+{
+  "groups": [
+    {
+      "title": "01 \u00b7 Bramble\u2019s reaction",
+      "summary": "Separate character and style references. Four original results, inspected rather than silently accepted. Candidate 2 is the strongest expression study; none is final story-ready art.",
+      "images": [
+        {
+          "file": "proofs/bramble-0.jpg",
+          "title": "Bramble 1",
+          "verdict": "Repair gaze",
+          "notes": "Amethyst eye, clovers and angular shading retained. Mouth reads as a grin rather than shared laughter; gaze is up-right rather than down-left.",
+          "source": "https://www.midjourney.com/jobs/da57d3d3-5b45-4e94-a014-04846a5569e2?index=0"
+        },
+        {
+          "file": "proofs/bramble-1.jpg",
+          "title": "Bramble 2",
+          "verdict": "Best expression candidate",
+          "notes": "Open smile and readable violet eyes; recognizable clovered long-eared hare. Needs down-left eyeline and lavender inner-ear color restored; background has unfinished white areas.",
+          "source": "https://www.midjourney.com/jobs/da57d3d3-5b45-4e94-a014-04846a5569e2?index=1"
+        },
+        {
+          "file": "proofs/bramble-2.jpg",
+          "title": "Bramble 3",
+          "verdict": "Reject for this shot",
+          "notes": "Blue eye is an identity failure. Closed-mouth expression does not communicate laughter.",
+          "source": "https://www.midjourney.com/jobs/da57d3d3-5b45-4e94-a014-04846a5569e2?index=2"
+        },
+        {
+          "file": "proofs/bramble-3.jpg",
+          "title": "Bramble 4",
+          "verdict": "Alternate smile study",
+          "notes": "Friendly face with violet eyes and clovers, but closed mouth and upward gaze weaken the intended laughing reaction. Orange inner ears drift from the lavender reference.",
+          "source": "https://www.midjourney.com/jobs/da57d3d3-5b45-4e94-a014-04846a5569e2?index=3"
+        }
+      ]
+    },
+    {
+      "title": "02 \u00b7 Shared play \u2014 rejected first pass",
+      "summary": "The style reference contaminated identity and expression. These are retained as proof of inspection, not offered as finished story art. A targeted correction is in progress.",
+      "images": [
+        {
+          "file": "proofs/friends-first-0.jpg",
+          "title": "Shared play 1",
+          "verdict": "Reject",
+          "notes": "Hare has an extra ear-like shape and toothy mouth; fox lacks pink tone. This reads as aggressive, not gentle shared fun.",
+          "source": "https://www.midjourney.com/jobs/36cab923-f7ee-43fd-96f9-b3aaa4604537?index=0"
+        },
+        {
+          "file": "proofs/friends-first-1.jpg",
+          "title": "Shared play 2",
+          "verdict": "Reject",
+          "notes": "Invented backpack and gear on Fox; excessive teeth in both mouths. The shared pose is readable but not compatible with the cast.",
+          "source": "https://www.midjourney.com/jobs/36cab923-f7ee-43fd-96f9-b3aaa4604537?index=1"
+        },
+        {
+          "file": "proofs/friends-first-2.jpg",
+          "title": "Shared play 3",
+          "verdict": "Reject",
+          "notes": "Invented jewelry and equipment; extra marbles and oversized central marble. Smile is too sharp.",
+          "source": "https://www.midjourney.com/jobs/36cab923-f7ee-43fd-96f9-b3aaa4604537?index=2"
+        },
+        {
+          "file": "proofs/friends-first-3.jpg",
+          "title": "Shared play 4",
+          "verdict": "Reject",
+          "notes": "Invented shoulder gear and oversized toothy mouth. Concentration still dominates instead of mutual laughter.",
+          "source": "https://www.midjourney.com/jobs/36cab923-f7ee-43fd-96f9-b3aaa4604537?index=3"
+        }
+      ]
+    },
+    {
+      "title": "03 \u00b7 Raze enters",
+      "summary": "The full-body silhouette and established outfit carry across. Candidate 1 is the best entrance pose; the requested scuff is not yet explicit, and the clearing must be matched.",
+      "images": [
+        {
+          "file": "proofs/raze-0.jpg",
+          "title": "Raze 1",
+          "verdict": "Entrance candidate",
+          "notes": "Readable step, both boots, recognizable mask/muzzle and orange-teal outfit. Needs actual ground scuff and matching clearing; lower-body clothing is a new proposal.",
+          "source": "https://www.midjourney.com/jobs/2a24d14f-2850-4424-a1ea-6762c9934f81?index=0"
+        },
+        {
+          "file": "proofs/raze-1.jpg",
+          "title": "Raze 2",
+          "verdict": "Standing pose study",
+          "notes": "Identity and silhouette hold, but no interruption action. Body proportions differ from candidate 1.",
+          "source": "https://www.midjourney.com/jobs/2a24d14f-2850-4424-a1ea-6762c9934f81?index=1"
+        },
+        {
+          "file": "proofs/raze-2.jpg",
+          "title": "Raze 3",
+          "verdict": "Wrong action",
+          "notes": "Crouching rather than stepping through the circle. Useful pose reference only; not the planned beat.",
+          "source": "https://www.midjourney.com/jobs/2a24d14f-2850-4424-a1ea-6762c9934f81?index=2"
+        },
+        {
+          "file": "proofs/raze-3.jpg",
+          "title": "Raze 4",
+          "verdict": "Wrong action",
+          "notes": "Hands-in-pockets stance reads as posing. Marbles too large, geography incomplete.",
+          "source": "https://www.midjourney.com/jobs/2a24d14f-2850-4424-a1ea-6762c9934f81?index=3"
+        }
+      ]
+    },
+    {
+      "title": "04 \u00b7 Shared play \u2014 targeted correction",
+      "summary": "The teeth and equipment are gone, and the faces read more gently. These remain setup studies: action, exact anatomy and eye rendering still need correction.",
+      "images": [
+        {
+          "file": "proofs/friends-corrected-0.jpg",
+          "title": "Corrected shared play 1",
+          "verdict": "Quiet setup candidate",
+          "notes": "Gentle expressions and clear pair; restores lavender ears and clover motif. Extra leafy collar, weak pupils, fur markings and static pose still need correction; marbles are oversized.",
+          "source": "https://www.midjourney.com/jobs/26f634dd-a4a5-482b-a98e-e06b29e1990e?index=0"
+        },
+        {
+          "file": "proofs/friends-corrected-1.jpg",
+          "title": "Corrected shared play 2",
+          "verdict": "Reject identity drift",
+          "notes": "Hare muzzle becomes fox-like and eye blue; Fox acquires clover. Good simplification of shape cannot compensate for wrong identity.",
+          "source": "https://www.midjourney.com/jobs/26f634dd-a4a5-482b-a98e-e06b29e1990e?index=1"
+        },
+        {
+          "file": "proofs/friends-corrected-2.jpg",
+          "title": "Corrected shared play 3",
+          "verdict": "Composition study",
+          "notes": "Readable violet-eyed hare with clovers; friendlier mouths. Eyes too luminous, paws and markings need cleanup; black painted edges need layout review.",
+          "source": "https://www.midjourney.com/jobs/26f634dd-a4a5-482b-a98e-e06b29e1990e?index=2"
+        },
+        {
+          "file": "proofs/friends-corrected-3.jpg",
+          "title": "Corrected shared play 4",
+          "verdict": "Reject anatomy drift",
+          "notes": "Hare acquires a long fox-like tail. It cannot be used as Bramble despite improved mood.",
+          "source": "https://www.midjourney.com/jobs/26f634dd-a4a5-482b-a98e-e06b29e1990e?index=3"
+        }
+      ]
+    }
+  ],
+  "highlights": [
+    {
+      "file": "proofs/friends-corrected-0.jpg",
+      "title": "Corrected shared play 1",
+      "verdict": "Quiet setup candidate",
+      "notes": "Gentle expressions and clear pair; restores lavender ears and clover motif. Extra leafy collar, weak pupils, fur markings and static pose still need correction; marbles are oversized.",
+      "source": "https://www.midjourney.com/jobs/26f634dd-a4a5-482b-a98e-e06b29e1990e?index=0"
+    },
+    {
+      "file": "proofs/bramble-1.jpg",
+      "title": "Bramble 2",
+      "verdict": "Best expression candidate",
+      "notes": "Open smile and readable violet eyes; recognizable clovered long-eared hare. Needs down-left eyeline and lavender inner-ear color restored; background has unfinished white areas.",
+      "source": "https://www.midjourney.com/jobs/da57d3d3-5b45-4e94-a014-04846a5569e2?index=1"
+    },
+    {
+      "file": "proofs/raze-0.jpg",
+      "title": "Raze 1",
+      "verdict": "Entrance candidate",
+      "notes": "Readable step, both boots, recognizable mask/muzzle and orange-teal outfit. Needs actual ground scuff and matching clearing; lower-body clothing is a new proposal.",
+      "source": "https://www.midjourney.com/jobs/2a24d14f-2850-4424-a1ea-6762c9934f81?index=0"
+    }
+  ]
+}

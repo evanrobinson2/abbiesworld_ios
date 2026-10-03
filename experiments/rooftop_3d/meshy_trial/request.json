@@ -1,0 +1,18 @@
+{
+  "input_model": "window-timber-input.glb",
+  "input_sha256": "9c20ef40fd1262db2df8d08ebe33480b65237e554ba65b05b7f91083ee17d783",
+  "options": {
+    "ai_model": "meshy-6",
+    "text_style_prompt": "Warm storybook treehouse architectural timber. Weathered dark mulberry-brown cherry wood, subtle dusky plum undertones, fine flowing grain aligned with the length of each beam, small natural knots and fine fissures, softly rubbed reddish amber edges, softly aged handmade joinery. The circular wooden window surround has wood grain that curves around its ring. All surfaces are solid wood, including the thin window lattice bars. Matte satin finish, rich detailed tactile wood but gentle and inviting, refined fantasy illustration realism. Consistent material over all sides. No leaves, flowers, moss, dirt clumps, metal, lettering, ornaments or painted symbols. Neutral even illumination, no baked cast shadows or highlights.",
+    "enable_original_uv": true,
+    "enable_pbr": true,
+    "texture_resolution": "4k",
+    "remove_lighting": true,
+    "target_formats": [
+      "glb"
+    ]
+  },
+  "documented_credit_cost": 10,
+  "reference": "../references/rooftop-source.png",
+  "reference_used": "Human-readable material description from the reference; image is not uploaded."
+}

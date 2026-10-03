@@ -1,0 +1,172 @@
+=== Marble Voyage build ===
+device: iPad (A16)
+capture: yes
+opening-dag: skip
+
+Monitoring boot status for iPad (A16) (507FB1E0-2F05-4B38-8BC4-90418D7695F2).
+Device already booted, nothing to do.
+
+→ xcodebuild (abbies.world.ios)
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/MarbleVoyagePlayTelemetry.swift:197:13: warning: variable 'stats' was never mutated; consider changing to 'let' constant
+        var stats: [String: StatMean] = [
+        ~~~ ^
+        let
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/ViewModels/World2ViewModel.swift:1910:74: warning: main actor-isolated static property 'propertyDeed' can not be referenced from a nonisolated context
+    func completeSceneBuilderDeed(_ decoration: World2StoryDecoration = .propertyDeed) {
+                                                                         ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Models/World2/World2StoryDecorationModels.swift:87:16: note: static property declared here
+    static let propertyDeed = World2StoryDecoration(
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/AssetBootstrapService.swift:870:42: warning: call to main actor-isolated static method 'kebab' in a synchronous nonisolated context
+        let tail = parts.dropFirst().map(kebab).joined(separator: "/")
+                                         ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/AssetBootstrapService.swift:888:25: note: calls to static method 'kebab' from outside of its actor context are implicitly asynchronous
+    private static func kebab(_ token: String) -> String {
+                        ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2AssetGenerationService.swift:50:27: warning: main actor-isolated static property 'quickQuality' can not be referenced from a nonisolated context
+        quality: String = quickQuality,
+                          ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2AssetGenerationService.swift:18:16: note: static property declared here
+    static let quickQuality = "low"
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2AssetGenerationService.swift:76:27: warning: main actor-isolated static property 'quickQuality' can not be referenced from a nonisolated context
+        quality: String = quickQuality,
+                          ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2AssetGenerationService.swift:18:16: note: static property declared here
+    static let quickQuality = "low"
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2GeneratedPlateStore.swift:79:56: warning: main actor-isolated static property 'quickQuality' can not be referenced from a nonisolated context
+        quality: String = World2AssetGenerationService.quickQuality
+                                                       ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2AssetGenerationService.swift:18:16: note: static property declared here
+    static let quickQuality = "low"
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2PartyController.swift:52:51: warning: main actor-isolated static property 'defaultSpawn' can not be referenced from a nonisolated context
+        _ contract: World2PartyLandingContract = .defaultSpawn,
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Models/World2/World2PartyModels.swift:111:16: note: static property declared here
+    static var defaultSpawn: World2PartyLandingContract {
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneDecorationInventService.swift:169:51: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        into playerService: PlayerStateService = .shared
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/PlayerStateService.swift:14:16: note: static property declared here
+    static let shared = PlayerStateService()
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneDecorationInventService.swift:234:51: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        into playerService: PlayerStateService = .shared
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/PlayerStateService.swift:14:16: note: static property declared here
+    static let shared = PlayerStateService()
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneDecorationInventService.swift:341:51: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        into playerService: PlayerStateService = .shared
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/PlayerStateService.swift:14:16: note: static property declared here
+    static let shared = PlayerStateService()
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneGraphStore.swift:476:49: warning: main actor-isolated static property 'center' can not be referenced from a nonisolated context
+        near position: World2NormalizedPoint = .center,
+                                                ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Models/World2/World2SceneGraphModels.swift:26:16: note: static property declared here
+    static let center = World2NormalizedPoint(x: 0.5, y: 0.5)
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneGraphStore.swift:584:77: warning: main actor-isolated static property 'anySizeClass' can not be referenced from a nonisolated context
+        acceptedSizeClasses: Set<World2POISizeClass> = World2SceneHardpoint.anySizeClass
+                                                                            ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Models/World2/World2SceneGraphModels.swift:104:16: note: static property declared here
+    static let anySizeClass: Set<World2POISizeClass> = Set(World2POISizeClass.allCases)
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/ViewModels/World2ViewModel.swift:1910:74: warning: main actor-isolated static property 'propertyDeed' can not be referenced from a nonisolated context
+    func completeSceneBuilderDeed(_ decoration: World2StoryDecoration = .propertyDeed) {
+                                                                         ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Models/World2/World2StoryDecorationModels.swift:87:16: note: static property declared here
+    static let propertyDeed = World2StoryDecoration(
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2GeneratedPlateStore.swift:79:56: warning: main actor-isolated static property 'quickQuality' can not be referenced from a nonisolated context
+        quality: String = World2AssetGenerationService.quickQuality
+                                                       ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2AssetGenerationService.swift:18:16: note: static property declared here
+    static let quickQuality = "low"
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneDecorationInventService.swift:169:51: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        into playerService: PlayerStateService = .shared
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/PlayerStateService.swift:14:16: note: static property declared here
+    static let shared = PlayerStateService()
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneDecorationInventService.swift:234:51: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        into playerService: PlayerStateService = .shared
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/PlayerStateService.swift:14:16: note: static property declared here
+    static let shared = PlayerStateService()
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneDecorationInventService.swift:341:51: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        into playerService: PlayerStateService = .shared
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/PlayerStateService.swift:14:16: note: static property declared here
+    static let shared = PlayerStateService()
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2AssetGenerationService.swift:76:27: warning: main actor-isolated static property 'quickQuality' can not be referenced from a nonisolated context
+        quality: String = quickQuality,
+                          ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2AssetGenerationService.swift:18:16: note: static property declared here
+    static let quickQuality = "low"
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2WorldSync.swift:136:48: warning: call to main actor-isolated static method 'decode' in a synchronous nonisolated context
+        decoder.dateDecodingStrategy = .custom(World2JSONDates.decode)
+                                               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2WorldSync.swift:805:17: note: calls to static method 'decode' from outside of its actor context are implicitly asynchronous
+    static func decode(_ decoder: Decoder) throws -> Date {
+                ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneDecorationInventService.swift:169:51: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        into playerService: PlayerStateService = .shared
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/PlayerStateService.swift:14:16: note: static property declared here
+    static let shared = PlayerStateService()
+               ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/World2SceneDecorationInventService.swift:234:51: warning: main actor-isolated static property 'shared' can not be referenced from a nonisolated context; this is an error in the Swift 6 language mode
+        into playerService: PlayerStateService = .shared
+                                                  ^
+/Users/evanrobinson/abbies.world.ios/abbies.world.ios/abbies.world.ios/Services/World2/PlayerStateService.swift:14:16: note: static property declared here
+    static let shared = PlayerStateService()
+               ^
+note: Run script build phase 'Stamp debug build' will be run during every build because the option to run the script phase "Based on dependency analysis" is unchecked. (in target 'abbies.world.ios' from project 'abbies.world.ios')
+BUILD OK — /Users/evanrobinson/abbies.world.ios/DerivedData/voyage-capture/Build/Products/Debug-iphonesimulator/abbies.world.ios.app
+
+→ voyage capture (reuses this build)
+=== Marble Voyage capture ===
+stages: title,chart,fight,shop,event
+seed:   42
+out:    /Users/evanrobinson/abbies.world.ios/artifacts/voyage-capture/20260927T201101Z
+
+simulator: iPad (A16) (507FB1E0-2F05-4B38-8BC4-90418D7695F2)
+Monitoring boot status for iPad (A16) (507FB1E0-2F05-4B38-8BC4-90418D7695F2).
+Device already booted, nothing to do.
+
+app: /Users/evanrobinson/abbies.world.ios/DerivedData/voyage-capture/Build/Products/Debug-iphonesimulator/abbies.world.ios.app
+→ install
+
+→ capture title
+evan-personal.abbies-world-ios: 9762
+Detected file type 'PNG' from extension
+Wrote screenshot to: /Users/evanrobinson/abbies.world.ios/artifacts/voyage-capture/20260927T201101Z/title.png
+  wrote /Users/evanrobinson/abbies.world.ios/artifacts/voyage-capture/20260927T201101Z/title.png
+
+→ capture chart
+evan-personal.abbies-world-ios: 9841
+Detected file type 'PNG' from extension
+Wrote screenshot to: /Users/evanrobinson/abbies.world.ios/artifacts/voyage-capture/20260927T201101Z/chart.png
+  wrote /Users/evanrobinson/abbies.world.ios/artifacts/voyage-capture/20260927T201101Z/chart.png
+
+→ capture fight
+evan-personal.abbies-world-ios: 9924
+Detected file type 'PNG' from extension
+Wrote screenshot to: /Users/evanrobinson/abbies.world.ios/artifacts/voyage-capture/20260927T201101Z/fight.png
+  wrote /Users/evanrobinson/abbies.world.ios/artifacts/voyage-capture/20260927T201101Z/fight.png
+
+→ capture shop
+evan-personal.abbies-world-ios: 10003
+  FAIL: timed out waiting for voyage.capture READY (shop)
+Detected file type 'PNG' from extension
+Wrote screenshot to: /Users/evanrobinson/abbies.world.ios/artifacts/voyage-capture/20260927T201101Z/shop-TIMEOUT.png

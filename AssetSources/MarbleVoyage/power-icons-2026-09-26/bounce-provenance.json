@@ -1,0 +1,24 @@
+{
+  "semanticId": "ui.plink.power.icon.bounce",
+  "filename": "bounce-original.jpeg",
+  "sourceProvider": "Midjourney",
+  "jobId": "90afc9eb-fe45-4532-b2a8-b58cbe1fcc33",
+  "candidateIndex": 1,
+  "sourceUrl": "https://cdn.midjourney.com/90afc9eb-fe45-4532-b2a8-b58cbe1fcc33/0_1.jpeg",
+  "submittedAt": "2026-09-26T21:56:59Z",
+  "sha256": "3e95f258d748ec7ac6d9e8376eb9b79d1c2794187b9736dcbcba3bdfa4c73701",
+  "selection": "Art director selection under user-authorized production; style locked to user-approved Tilt candidate 4.",
+  "promptFile": "bounce-prompt.txt",
+  "derivative": {
+    "filename": "bounce-transparent.png",
+    "sourceProvider": "OpenAI imagegen frame-matched edit",
+    "derivativeOf": "3e95f258d748ec7ac6d9e8376eb9b79d1c2794187b9736dcbcba3bdfa4c73701",
+    "sha256": "a573924be9e8e0956535d29f31adfb8b58cfc495f90ce525769ec4af03efd5d9",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "maxCornerAlpha": 0,
+    "notes": "Generated motif edit using approved Tilt frame reference; not pixel-identical. Original preserved. Requested centered 83% diameter with motifs inside rim."
+  }
+}

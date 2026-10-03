@@ -1,0 +1,19 @@
+{
+  "name": "Abbie Review",
+  "short_name": "Review",
+  "description": "Board or Dump art proofs for Abbie’s World",
+  "start_url": "/review.html",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0a0c",
+  "theme_color": "#0a0a0c",
+  "icons": [
+    {
+      "src": "/plates/home.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

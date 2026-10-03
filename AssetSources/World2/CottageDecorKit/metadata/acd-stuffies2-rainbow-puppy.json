@@ -1,0 +1,26 @@
+{
+  "cropBounds": [
+    35,
+    675,
+    318,
+    974
+  ],
+  "derivativeSha256": "ddac870edaed3158d7eef3cac6e8fc87380d2da46fd8497932827fdce835cc8a",
+  "packSemanticId": "pack.abbieCottage.stuffies.sheet2",
+  "processing": "existing cottage pipeline component extraction; explicit object cells",
+  "reviewStatus": "pending_visual_review",
+  "semanticId": "decor.abbieCottage.acd-stuffies2-rainbow-puppy",
+  "source": {
+    "approval": "Evan: great add #2 and 4 to the game",
+    "candidateIndex": 1,
+    "filename": "stuffies-sheet-2-approved.jpeg",
+    "jobId": "897e3259-3878-40c6-bcf0-ba2dad75a636",
+    "objectCount": 9,
+    "semanticId": "pack.abbieCottage.stuffies.sheet2",
+    "sha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+    "sourceProvider": "Midjourney",
+    "sourceUrl": "https://cdn.midjourney.com/897e3259-3878-40c6-bcf0-ba2dad75a636/0_1.jpeg",
+    "status": "approved_source"
+  },
+  "sourcePath": "AssetSources/World2/cottage-stuffies-2026-09-27/stuffies-sheet-2-approved.jpeg"
+}

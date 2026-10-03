@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Library · Abbie's World Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #1c1814;
+      --muted: #5c534a;
+      --line: #d9d0c4;
+      --paper: #f7f2ea;
+      --panel: #fffdf8;
+      --accent: #2f6f5e;
+      --accent-ink: #f4fff9;
+      --warn: #8a4b1f;
+      --bad: #8b2e2e;
+      --ok: #1f6b45;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Instrument Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse 80% 50% at 10% -10%, #e8f0ea 0%, transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 0%, #f0e6d8 0%, transparent 50%),
+        var(--paper);
+    }
+    a { color: var(--accent); }
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 0.75rem 1.25rem;
+      padding: 1.25rem 1.5rem 0.75rem;
+      border-bottom: 1px solid var(--line);
+    }
+    header h1 { margin: 0; font-size: 1.35rem; letter-spacing: -0.02em; }
+    header p { margin: 0; color: var(--muted); font-size: 0.95rem; max-width: 38rem; }
+    header .links { margin-left: auto; font-size: 0.9rem; }
+    main {
+      display: grid;
+      grid-template-columns: minmax(280px, 340px) 1fr;
+      gap: 1.25rem;
+      padding: 1.25rem 1.5rem 2.5rem;
+      max-width: 1280px;
+    }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 1rem 1.1rem 1.15rem;
+    }
+    section h2 { margin: 0 0 0.75rem; font-size: 1.05rem; }
+    label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0.65rem 0 0.3rem;
+    }
+    input, select, textarea, button { font: inherit; }
+    input, select, textarea {
+      width: 100%;
+      padding: 0.55rem 0.65rem;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--ink);
+    }
+    textarea { min-height: 88px; resize: vertical; }
+    .row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.85rem; }
+    button {
+      cursor: pointer;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 0.5rem 0.85rem;
+      background: #fff;
+      color: var(--ink);
+      font-weight: 600;
+    }
+    button.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-ink);
+    }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    .hint { margin: 0.55rem 0 0; font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
+    .status { margin-top: 0.75rem; font-size: 0.9rem; min-height: 1.3em; }
+    .status.bad { color: var(--bad); }
+    .status.ok { color: var(--ok); }
+    .status.warn { color: var(--warn); }
+    .mono { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: 0.82rem; word-break: break-word; }
+    .rail {
+      margin: 0 0 0.85rem;
+      padding: 0.65rem 0.75rem;
+      border-radius: 8px;
+      background: #e8f2ec;
+      border: 1px solid #c5ddd0;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      color: #1f4d3c;
+    }
+    .chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0.5rem 0 0; }
+    .chip {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 0.25rem 0.7rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .chip.active { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 0.75rem;
+    }
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fff;
+      overflow: hidden;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .card.selected { outline: 2px solid var(--accent); }
+    .card .thumb {
+      aspect-ratio: 16 / 10;
+      background:
+        linear-gradient(45deg, #eee8de 25%, transparent 25%),
+        linear-gradient(-45deg, #eee8de 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #eee8de 75%),
+        linear-gradient(-45deg, transparent 75%, #eee8de 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .card .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .card .meta { padding: 0.55rem 0.65rem 0.7rem; }
+    .card h3 {
+      margin: 0;
+      font-size: 0.78rem;
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      line-height: 1.35;
+      word-break: break-word;
+    }
+    .card p { margin: 0.3rem 0 0; font-size: 0.78rem; color: var(--muted); }
+    .pill {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 0.12rem 0.4rem;
+      border-radius: 999px;
+      background: #eee8de;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+    .detail {
+      margin-top: 1rem;
+      border-top: 1px solid var(--line);
+      padding-top: 0.85rem;
+    }
+    .detail-grid {
+      display: grid;
+      gap: 0.35rem 1rem;
+      grid-template-columns: auto 1fr;
+      font-size: 0.9rem;
+    }
+    .detail-grid dt { color: var(--muted); }
+    .detail-grid dd { margin: 0; }
+    .id-list { list-style: none; margin: 0.5rem 0 0; padding: 0; display: flex; flex-direction: column; gap: 0.4rem; }
+    .id-list li {
+      display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center;
+      border: 1px solid var(--line); border-radius: 8px; padding: 0.45rem 0.55rem; background: #fff;
+    }
+    .empty { color: var(--muted); font-size: 0.95rem; margin: 0.25rem 0; }
+    .preview {
+      width: 100%;
+      max-height: 220px;
+      object-fit: contain;
+      border-radius: 8px;
+      background: #f0ebe2;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Library</h1>
+    <p>Browse registered Game Asset plates. Open a portfolio to batch the next set of doodads — dad-approved shelf for Abbie’s worlds.</p>
+    <div class="links">
+      <a href="/">← Studio map</a>
+      ·
+      <a href="/assets.html">Asset jobs</a>
+    </div>
+  </header>
+
+  <main>
+    <section aria-label="Auth and portfolios">
+      <h2>Auth</h2>
+      <p class="hint">Same Bearer as Studio → Copy MCP token. Registry reads use the server key; tokens never leave this page for admin writes.</p>
+      <label for="api-base">API base</label>
+      <input id="api-base" type="url" placeholder="https://studio-mock-iota.vercel.app" />
+      <label for="token">Bearer token</label>
+      <textarea id="token" placeholder="Paste Auth0 access token…" spellcheck="false"></textarea>
+      <div class="row">
+        <button type="button" id="btn-signin" hidden>Sign in with Auth0</button>
+        <button type="button" id="btn-use-auth0" hidden>Use Auth0 session</button>
+        <button type="button" id="btn-refresh">Refresh shelf</button>
+      </div>
+      <p id="auth-status" class="status" role="status"></p>
+
+      <h2 style="margin-top:1.35rem">New portfolio</h2>
+      <p class="hint">A portfolio is a library intent + suggested semantic IDs. Draft only until the durable job store ships.</p>
+      <label for="portfolio-name">name</label>
+      <input id="portfolio-name" placeholder="Peg monastery pack" />
+      <label for="portfolio-intent">library intent</label>
+      <textarea id="portfolio-intent" placeholder="floating peg monastery exterior + interior + crash land map for Abbie's World"></textarea>
+      <div class="row">
+        <button type="button" class="primary" id="btn-portfolio">Create portfolio</button>
+      </div>
+      <p id="portfolio-status" class="status" role="status"></p>
+      <div id="portfolio-result" hidden>
+        <p class="hint">Suggested semantic IDs</p>
+        <ul id="suggest-list" class="id-list"></ul>
+        <div class="row">
+          <a id="link-jobs" href="/assets.html">Open Asset jobs →</a>
+        </div>
+      </div>
+
+      <h2 style="margin-top:1.35rem">Draft portfolios</h2>
+      <p id="projects-status" class="status" role="status"></p>
+      <ul id="project-list" class="id-list"></ul>
+    </section>
+
+    <section aria-label="Registry shelf">
+      <h2>Registered shelf · <span class="mono">abbies-world-2</span></h2>
+      <p class="rail">
+        Thumbs load through Studio (<span class="mono">/api/asset-library?thumb=1</span>) so you do not need the household LAN URL.
+        Bind worlds with <strong>semantic IDs</strong>, never Midjourney links.
+      </p>
+      <div class="chips" id="prefix-chips" role="group" aria-label="Prefix filters">
+        <button type="button" class="chip active" data-prefix="">all</button>
+        <button type="button" class="chip" data-prefix="maps">maps</button>
+        <button type="button" class="chip" data-prefix="pois">pois</button>
+        <button type="button" class="chip" data-prefix="tokens">tokens</button>
+        <button type="button" class="chip" data-prefix="furniture">furniture</button>
+        <button type="button" class="chip" data-prefix="ui">ui</button>
+      </div>
+      <label for="search">filter</label>
+      <input id="search" placeholder="semantic or registry key…" autocomplete="off" />
+      <p id="list-status" class="status" role="status"></p>
+      <p id="empty" class="empty" hidden>No assets for this prefix. Create a job and register one, or widen the filter.</p>
+      <div id="grid" class="grid"></div>
+
+      <div id="selected" class="detail" hidden>
+        <h2>Selected</h2>
+        <img id="selected-preview" class="preview" alt="" hidden />
+        <dl class="detail-grid" id="selected-meta"></dl>
+        <div class="row">
+          <button type="button" id="btn-copy-semantic">Copy semanticId</button>
+          <button type="button" id="btn-copy-key">Copy registry key</button>
+          <a id="link-new-job" href="/assets.html">New job like this →</a>
+        </div>
+        <p id="selected-status" class="status" role="status"></p>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/2.27.0/auth0-spa-js.production.js"></script>
+  <script src="/live.js"></script>
+  <script>
+    const DEFAULT_DEPLOY = "https://studio-mock-iota.vercel.app";
+    const els = {
+      apiBase: document.getElementById("api-base"),
+      token: document.getElementById("token"),
+      authStatus: document.getElementById("auth-status"),
+      listStatus: document.getElementById("list-status"),
+      portfolioStatus: document.getElementById("portfolio-status"),
+      projectsStatus: document.getElementById("projects-status"),
+      selectedStatus: document.getElementById("selected-status"),
+      grid: document.getElementById("grid"),
+      empty: document.getElementById("empty"),
+      selected: document.getElementById("selected"),
+      selectedMeta: document.getElementById("selected-meta"),
+      selectedPreview: document.getElementById("selected-preview"),
+      search: document.getElementById("search"),
+      portfolioName: document.getElementById("portfolio-name"),
+      portfolioIntent: document.getElementById("portfolio-intent"),
+      portfolioResult: document.getElementById("portfolio-result"),
+      suggestList: document.getElementById("suggest-list"),
+      projectList: document.getElementById("project-list"),
+      linkJobs: document.getElementById("link-jobs"),
+      linkNewJob: document.getElementById("link-new-job"),
+      btnSignin: document.getElementById("btn-signin"),
+      btnUseAuth0: document.getElementById("btn-use-auth0"),
+      btnRefresh: document.getElementById("btn-refresh"),
+      btnPortfolio: document.getElementById("btn-portfolio"),
+      btnCopySemantic: document.getElementById("btn-copy-semantic"),
+      btnCopyKey: document.getElementById("btn-copy-key"),
+      prefixChips: document.getElementById("prefix-chips"),
+    };
+
+    let prefix = "";
+    let assets = [];
+    let selectedKey = null;
+    let selectedAsset = null;
+
+    function apiRoot() {
+      const raw = (els.apiBase.value || "").trim().replace(/\/$/, "");
+      if (raw) return raw;
+      if (location.hostname === "127.0.0.1" || location.hostname === "localhost") {
+        return DEFAULT_DEPLOY;
+      }
+      return "";
+    }
+
+    function token() {
+      return (els.token.value || "").trim();
+    }
+
+    function setStatus(el, text, kind) {
+      el.textContent = text || "";
+      el.className = "status" + (kind ? " " + kind : "");
+    }
+
+    function escapeHtml(s) {
+      return String(s)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    async function api(path, options = {}) {
+      const t = token();
+      if (!t) throw new Error("Paste a Bearer token (or pull one from Auth0).");
+      const root = apiRoot();
+      const url = (root || "") + path;
+      const headers = {
+        Authorization: `Bearer ${t}`,
+        ...(options.headers || {}),
+      };
+      if (options.body && !headers["Content-Type"]) {
+        headers["Content-Type"] = "application/json";
+      }
+      const res = await fetch(url, { ...options, headers });
+      const ct = res.headers.get("content-type") || "";
+      if (!ct.includes("application/json")) {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res;
+      }
+      let body = {};
+      try { body = await res.json(); } catch { body = {}; }
+      if (!res.ok) {
+        const detail = body.error || body.message || `HTTP ${res.status}`;
+        const err = new Error(typeof detail === "string" ? detail : JSON.stringify(detail));
+        err.status = res.status;
+        err.body = body;
+        throw err;
+      }
+      return body;
+    }
+
+    function thumbSrc(asset) {
+      const root = apiRoot();
+      const path = asset.thumbURL || `/api/asset-library?thumb=1&key=${encodeURIComponent(asset.key)}`;
+      // Auth headers cannot be set on <img>; use blob fetch instead when rendering.
+      return { path: (root || "") + path, key: asset.key };
+    }
+
+    const thumbCache = new Map();
+
+    async function loadThumbBlob(asset) {
+      if (thumbCache.has(asset.key)) return thumbCache.get(asset.key);
+      const { path } = thumbSrc(asset);
+      const res = await fetch(path, { headers: { Authorization: `Bearer ${token()}` } });
+      if (!res.ok) return null;
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      thumbCache.set(asset.key, url);
+      return url;
+    }
+
+    function filteredAssets() {
+      const q = els.search.value.trim().toLowerCase();
+      if (!q) return assets;
+      return assets.filter((a) => {
+        const hay = `${a.key} ${a.semanticId || ""} ${a.brief || ""} ${a.role || ""}`.toLowerCase();
+        return hay.includes(q);
+      });
+    }
+
+    async function renderGrid() {
+      const rows = filteredAssets();
+      els.grid.innerHTML = "";
+      els.empty.hidden = rows.length > 0;
+      for (const asset of rows) {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "card" + (asset.key === selectedKey ? " selected" : "");
+        btn.innerHTML = `
+          <div class="thumb" data-thumb></div>
+          <div class="meta">
+            <h3>${escapeHtml(asset.semanticId || asset.key)}</h3>
+            <p class="mono">${escapeHtml(asset.key)}</p>
+            <span class="pill">rev ${escapeHtml(asset.revision != null ? String(asset.revision) : "?")}</span>
+          </div>
+        `;
+        btn.addEventListener("click", () => selectAsset(asset.key));
+        els.grid.appendChild(btn);
+        loadThumbBlob(asset).then((url) => {
+          if (!url) return;
+          const holder = btn.querySelector("[data-thumb]");
+          if (!holder) return;
+          const img = document.createElement("img");
+          img.src = url;
+          img.alt = asset.semanticId || asset.key;
+          holder.appendChild(img);
+        });
+      }
+    }
+
+    async function selectAsset(key) {
+      selectedKey = key;
+      selectedAsset = assets.find((a) => a.key === key) || null;
+      for (const node of els.grid.children) {
+        node.classList.toggle("selected", node.querySelector("h3")?.textContent === (selectedAsset?.semanticId || selectedAsset?.key));
+      }
+      if (!selectedAsset) {
+        els.selected.hidden = true;
+        return;
+      }
+      els.selected.hidden = false;
+      els.selectedMeta.innerHTML = `
+        <dt>semanticId</dt><dd class="mono">${escapeHtml(selectedAsset.semanticId || "—")}</dd>
+        <dt>registryKey</dt><dd class="mono">${escapeHtml(selectedAsset.key)}</dd>
+        <dt>revision</dt><dd class="mono">${escapeHtml(selectedAsset.revision != null ? String(selectedAsset.revision) : "—")}</dd>
+        <dt>role</dt><dd class="mono">${escapeHtml(selectedAsset.role || "—")}</dd>
+        <dt>brief</dt><dd>${escapeHtml(selectedAsset.brief || "—")}</dd>
+        <dt>mime</dt><dd class="mono">${escapeHtml(selectedAsset.mimeType || "—")}</dd>
+        <dt>bindWith</dt><dd class="mono">${escapeHtml(selectedAsset.bindWith || selectedAsset.semanticId || "—")}</dd>
+      `;
+      const url = await loadThumbBlob(selectedAsset);
+      if (url) {
+        els.selectedPreview.hidden = false;
+        els.selectedPreview.src = url;
+        els.selectedPreview.alt = selectedAsset.semanticId || selectedAsset.key;
+      } else {
+        els.selectedPreview.hidden = true;
+      }
+      const sem = encodeURIComponent(selectedAsset.semanticId || "");
+      els.linkNewJob.href = `/assets.html?semanticId=${sem}`;
+      setStatus(els.selectedStatus, "");
+    }
+
+    async function refreshShelf() {
+      setStatus(els.listStatus, "Loading registry…");
+      try {
+        const q = new URLSearchParams();
+        if (prefix) q.set("prefix", prefix);
+        q.set("limit", "120");
+        const data = await api(`/api/asset-library?${q}`);
+        assets = Array.isArray(data.assets) ? data.assets : [];
+        setStatus(els.listStatus, `${assets.length} asset(s)${prefix ? ` under ${prefix}` : ""}`, "ok");
+        await renderGrid();
+        if (selectedKey) await selectAsset(selectedKey);
+      } catch (err) {
+        setStatus(els.listStatus, err.message || String(err), "bad");
+      }
+    }
+
+    async function refreshProjects() {
+      setStatus(els.projectsStatus, "Loading…");
+      try {
+        const data = await api("/api/asset-library?projects=1");
+        const projects = Array.isArray(data.projects) ? data.projects : [];
+        els.projectList.innerHTML = "";
+        if (!projects.length) {
+          setStatus(els.projectsStatus, data.note || "No draft portfolios on this instance.", "warn");
+          return;
+        }
+        setStatus(els.projectsStatus, `${projects.length} draft portfolio(s) (not durable)`, "warn");
+        for (const p of projects) {
+          const li = document.createElement("li");
+          li.innerHTML = `
+            <strong>${escapeHtml(p.name)}</strong>
+            <span class="mono">${escapeHtml(p.id)}</span>
+            <span class="hint" style="margin:0">${escapeHtml((p.libraryIntent || "").slice(0, 80))}</span>
+          `;
+          li.addEventListener("click", () => showPortfolio(p));
+          els.projectList.appendChild(li);
+        }
+      } catch (err) {
+        setStatus(els.projectsStatus, err.message || String(err), "bad");
+      }
+    }
+
+    function showPortfolio(project) {
+      els.portfolioResult.hidden = false;
+      els.suggestList.innerHTML = "";
+      const ids = Array.isArray(project.suggestedSemanticIds) ? project.suggestedSemanticIds : [];
+      for (const id of ids) {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span class="mono">${escapeHtml(id)}</span>
+          <a href="/assets.html?semanticId=${encodeURIComponent(id)}&projectId=${encodeURIComponent(project.id || "")}">Create job</a>
+        `;
+        els.suggestList.appendChild(li);
+      }
+      if (!ids.length) {
+        els.suggestList.innerHTML = `<li class="hint">No suggestions yet — try “peg monastery” or “plink” in the intent.</li>`;
+      }
+      els.linkJobs.href = `/assets.html?projectId=${encodeURIComponent(project.id || "")}`;
+      setStatus(els.portfolioStatus, `Portfolio ${project.id} (${ids.length} suggestions)`, "ok");
+    }
+
+    async function createPortfolio() {
+      const name = els.portfolioName.value.trim();
+      const libraryIntent = els.portfolioIntent.value.trim();
+      if (!libraryIntent) {
+        setStatus(els.portfolioStatus, "library intent is required.", "warn");
+        return;
+      }
+      setStatus(els.portfolioStatus, "Creating…");
+      try {
+        const data = await api("/api/asset-library", {
+          method: "POST",
+          body: JSON.stringify({ name: name || "Asset pack", libraryIntent }),
+        });
+        showPortfolio(data.project || data);
+        await refreshProjects();
+      } catch (err) {
+        setStatus(els.portfolioStatus, err.message || String(err), "bad");
+      }
+    }
+
+    async function setupAuth0() {
+      if (!window.StudioLive) return;
+      try {
+        const ready = await StudioLive.prepare();
+        if (ready !== true) {
+          setStatus(els.authStatus, "Auth0 not configured on this origin — paste a token.", "warn");
+          return;
+        }
+        els.btnSignin.hidden = false;
+        els.btnUseAuth0.hidden = false;
+        if (await StudioLive.signedIn()) {
+          els.token.value = await StudioLive.token();
+          setStatus(els.authStatus, "Auth0 session ready.", "ok");
+        } else {
+          setStatus(els.authStatus, "Sign in or paste a token.", "warn");
+        }
+      } catch (err) {
+        setStatus(els.authStatus, `Auth0 skip: ${err.message || err}`, "warn");
+      }
+    }
+
+    els.prefixChips.addEventListener("click", (ev) => {
+      const btn = ev.target.closest(".chip");
+      if (!btn) return;
+      prefix = btn.dataset.prefix || "";
+      for (const chip of els.prefixChips.querySelectorAll(".chip")) {
+        chip.classList.toggle("active", chip === btn);
+      }
+      refreshShelf();
+    });
+    els.search.addEventListener("input", () => { renderGrid(); });
+    els.btnRefresh.addEventListener("click", () => { refreshShelf(); refreshProjects(); });
+    els.btnPortfolio.addEventListener("click", createPortfolio);
+    els.btnCopySemantic.addEventListener("click", async () => {
+      const text = selectedAsset?.bindWith || selectedAsset?.semanticId || "";
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus(els.selectedStatus, `Copied ${text}`, "ok");
+      } catch {
+        setStatus(els.selectedStatus, "Could not copy.", "bad");
+      }
+    });
+    els.btnCopyKey.addEventListener("click", async () => {
+      const text = selectedAsset?.key || "";
+      try {
+        await navigator.clipboard.writeText(text);
+        setStatus(els.selectedStatus, `Copied ${text}`, "ok");
+      } catch {
+        setStatus(els.selectedStatus, "Could not copy.", "bad");
+      }
+    });
+    els.btnSignin.addEventListener("click", () => StudioLive.signIn());
+    els.btnUseAuth0.addEventListener("click", async () => {
+      try {
+        els.token.value = await StudioLive.token();
+        setStatus(els.authStatus, "Token loaded from Auth0.", "ok");
+        await refreshShelf();
+        await refreshProjects();
+      } catch (err) {
+        setStatus(els.authStatus, err.message || String(err), "bad");
+      }
+    });
+
+    if (location.hostname === "127.0.0.1" || location.hostname === "localhost") {
+      els.apiBase.value = DEFAULT_DEPLOY;
+      setStatus(els.authStatus, "Local page → deploy API. Paste MCP token.", "warn");
+    } else {
+      els.apiBase.placeholder = "(same origin)";
+    }
+
+    setupAuth0().then(() => {
+      if (token()) {
+        refreshShelf();
+        refreshProjects();
+      }
+    });
+  </script>
+</body>
+</html>

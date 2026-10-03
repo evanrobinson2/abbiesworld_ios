@@ -1,0 +1,44 @@
+{
+  "id": "20260930-moonbase-exterior-map",
+  "semanticId": "map.moonBase.exterior",
+  "status": "open",
+  "priority": "high",
+  "type": "plate",
+  "brief": "Construction-blueprint / chalk-draw intentional overland plate of moon base exterior: dome habitat, tubes, dish, distant pad with rocket stub, craters. Labels MOON BASE (TBD), DOME, PAD. Alias poi.moonBase.base.exterior.",
+  "aspect": "3:2",
+  "styleNotes": "Cyan blueprint paper with light cyan grid; white chalk outlines and chalk-dust labels; intentional unfinished construction plan look. No photorealism, no painted textures, no characters, no faces, no Daddy portraits.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/map.moonBase.exterior.png",
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/provenance.json",
+    "AssetSources/MoonBase/blueprints-2026-09-30/mcp-registered/provenance.json",
+    "AssetSources/MoonBase/blueprints-2026-09-30/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "Cyan blueprint chalk sketch moon base exterior dome tubes satellite dish landing pad MOON BASE (TBD) overland plate construction plan not final no faces"
+  ],
+  "requestedBy": "Art callsign / Moon Base MVP",
+  "createdAt": "2026-09-30T20:06:00-04:00",
+  "requestedAt": "2026-09-30T20:06:00-04:00",
+  "productionIntent": "concept_only",
+  "gameArea": "moonBase",
+  "usage": "Moon base overland / exterior map plate for Moon Base MVP scaffolding",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Local chalk PNG + MCP-registered gpt-image-2 revision; Swift bind deferred."
+  },
+  "acceptanceCriteria": [
+    "Reads as chalk-on-blueprint construction plan, not polished final",
+    "Dome + pad readable as overland landmarks",
+    "No faces / no Daddy portraits"
+  ],
+  "existingAssetSemanticIds": [
+    "map.moonBase.exterior"
+  ],
+  "fulfillment": {
+    "mcpJobId": "job_muorv6kj_hedkvi",
+    "registryRevision": 1,
+    "localChalk": "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/map.moonBase.exterior.png",
+    "alias": "poi.moonBase.base.exterior"
+  }
+}

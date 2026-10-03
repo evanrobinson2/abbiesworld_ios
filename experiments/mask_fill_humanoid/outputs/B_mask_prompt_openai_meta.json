@@ -1,0 +1,36 @@
+{
+  "analysis": {
+    "bicep_mean_rgb": [
+      218.6,
+      97.4,
+      48.6
+    ],
+    "edit_region": {
+      "changed_pct": 77.65,
+      "changed_pixels": 10012,
+      "mean_abs_diff": 0.46,
+      "pixels": 12893
+    },
+    "keep_region": {
+      "changed_pct": 0.22,
+      "changed_pixels": 2295,
+      "mean_abs_diff": 1.97,
+      "pixels": 1035683
+    },
+    "threshold": 18
+  },
+  "api": "openai.images.edit",
+  "condition": "B_mask_prompt",
+  "elapsed_sec": 7.91,
+  "images": [
+    "inputs/humanoid.png"
+  ],
+  "mask": "inputs/mask_bicep.png",
+  "mask_convention": "alpha=0 edit / alpha=255 keep",
+  "model": "gpt-image-2.5-flare",
+  "ok": true,
+  "output": "outputs/B_mask_prompt_openai.png",
+  "prompt": "Fill ONLY the masked left-upper-arm / bicep region of this clay kid figure with a knitted orange sweater sleeve. Do not change the rest of the body, face, or background.",
+  "quality": "low",
+  "size": "1024x1024"
+}

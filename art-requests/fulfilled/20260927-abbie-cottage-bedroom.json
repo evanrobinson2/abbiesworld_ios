@@ -1,0 +1,27 @@
+{
+  "id": "20260927-abbie-cottage-bedroom",
+  "semanticId": "poi.abbieTreehouse.interior.bedroom",
+  "status": "fulfilled",
+  "priority": "normal",
+  "type": "plate",
+  "brief": "Approved rainbow, stars and unicorns bedroom for Abbie cottage, separate from living room.",
+  "aspect": "4:3",
+  "styleNotes": "Cream, sky blue, rainbow accents and aged tree timber; exact approved upscale.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/bedroom-approved.jpeg",
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/provenance.json",
+    "AssetSources/World2/abbie-cottage-rooms-2026-09-27/HANDOFF.md"
+  ],
+  "promptSeeds": [],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T17:19:22.842082+00:00",
+  "productionIntent": "runtime_bind",
+  "fulfillment": {
+    "completedAt": "2026-09-27T17:19:22.842082+00:00",
+    "completedBy": "Codex Art Director",
+    "assetSourcePath": "AssetSources/World2/abbie-cottage-rooms-2026-09-27/bedroom-approved.jpeg",
+    "sourceHashSha256": "f957f3bf352c8843156d9b879a5474c613d3583f74d2bcfd5994015dc9619320",
+    "notes": "Exact approved upscale delivered. Builder must add bedroom room mapping/catalog and verify runtime; no runtime changes in this handoff."
+  }
+}

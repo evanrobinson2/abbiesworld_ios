@@ -1,0 +1,43 @@
+{
+  "id": "20260930-moonbase-rocket-exterior",
+  "semanticId": "poi.moonBase.rocket.exterior",
+  "status": "open",
+  "priority": "high",
+  "type": "plate",
+  "brief": "Construction-blueprint / chalk-draw intentional plate of an upright cartoon rocket (landing legs, hatch, nose). Labels like ROCKET (TBD), NOSE, HATCH?. Kid-readable silhouette only — NOT pretty final art.",
+  "aspect": "3:2",
+  "styleNotes": "Cyan blueprint paper with light cyan grid; white chalk outlines and chalk-dust labels; intentional unfinished construction plan look. No photorealism, no painted textures, no characters, no faces, no Daddy portraits.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/poi.moonBase.rocket.exterior.png",
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/provenance.json",
+    "AssetSources/MoonBase/blueprints-2026-09-30/mcp-registered/provenance.json",
+    "AssetSources/MoonBase/blueprints-2026-09-30/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "Cyan blueprint paper chalk sketch upright cartoon rocket landing legs ROCKET (TBD) HATCH? NOSE kid-readable silhouette construction plan not final art no faces"
+  ],
+  "requestedBy": "Art callsign / Moon Base MVP",
+  "createdAt": "2026-09-30T20:06:00-04:00",
+  "requestedAt": "2026-09-30T20:06:00-04:00",
+  "productionIntent": "concept_only",
+  "gameArea": "moonBase",
+  "usage": "Rocket POI exterior construction plate for Moon Base MVP scaffolding",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Local chalk PNG + MCP-registered gpt-image-2 revision; Swift bind deferred."
+  },
+  "acceptanceCriteria": [
+    "Reads as chalk-on-blueprint construction plan, not polished final",
+    "Rocket silhouette clear at small map-token scale",
+    "No faces / no Daddy portraits"
+  ],
+  "existingAssetSemanticIds": [
+    "poi.moonBase.rocket.exterior"
+  ],
+  "fulfillment": {
+    "mcpJobId": "job_muorv49x_j9s3to",
+    "registryRevision": 1,
+    "localChalk": "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/poi.moonBase.rocket.exterior.png"
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "pack": "henchmen-concepts-2026-09-26",
+  "updatedAt": "2026-09-26T21:00:00Z",
+  "notes": "White-background Midjourney concept masters for unnamed Marble Voyage henchmen. Porcupine is production-approved; the other four are art-director selections awaiting transparent cutouts + runtime bind. Temporary CDN URLs are recorded for provenance but SHA-256 of committed JPEGs is durable SoT.",
+  "styleLock": {
+    "semanticId": "token.plink.gang.porcupineBoxer.idle",
+    "filename": "porcupine-boxer.jpeg",
+    "alsoSee": "AssetSources/MarbleVoyage/porcupine-boxer/provenance.json"
+  },
+  "assets": [
+    {
+      "semanticId": "token.plink.gang.porcupineBoxer.idle",
+      "filename": "porcupine-boxer.jpeg",
+      "characterOrAssetName": "Porcupine Boxer",
+      "sourceProvider": "Midjourney",
+      "midjourneyJobId": "881f3b1d-cbd4-4a5a-ab80-b3f28f63ec12",
+      "candidateIndex": 3,
+      "sourceUrl": "https://cdn.midjourney.com/881f3b1d-cbd4-4a5a-ab80-b3f28f63ec12/0_3.jpeg",
+      "sha256": "7a242a5dce7b965a335a16fa23b880a05d31017552afbd7d52a1beadf02cd7aa",
+      "productionStatus": "concept_master_plus_runtime_cutout",
+      "derivativeOf": null,
+      "notes": "Approved opener. Transparent cutout + catalog live under AssetSources/MarbleVoyage/porcupine-boxer/."
+    },
+    {
+      "semanticId": "token.plink.gang.crabPincher.idle",
+      "filename": "crab-pincher.jpeg",
+      "characterOrAssetName": "Crab Pincher",
+      "sourceProvider": "Midjourney",
+      "midjourneyJobId": "4340a20f-3a14-47a6-8b1c-118429e415f7",
+      "candidateIndex": 1,
+      "sourceUrl": "https://cdn.midjourney.com/4340a20f-3a14-47a6-8b1c-118429e415f7/0_1.jpeg",
+      "sha256": "cb420efb996d07966de8ec855989724185ae767a8a43231deb22574a0dd65f4d",
+      "productionStatus": "concept_selected",
+      "derivativeOf": null,
+      "notes": "Art-director selected. Needs transparent idle cutout before runtime bind."
+    },
+    {
+      "semanticId": "token.plink.gang.grasshopperKickboxer.idle",
+      "filename": "grasshopper-kickboxer.jpeg",
+      "characterOrAssetName": "Grasshopper Kickboxer",
+      "sourceProvider": "Midjourney",
+      "midjourneyJobId": "b5057390-412d-4590-bacb-86253a70d7e0",
+      "candidateIndex": 3,
+      "sourceUrl": "https://cdn.midjourney.com/b5057390-412d-4590-bacb-86253a70d7e0/0_3.jpeg",
+      "sha256": "c81e120e585b63b023be3d49910313a0c483341451944be4f7fd2ae544bd5ef4",
+      "productionStatus": "concept_selected",
+      "derivativeOf": null,
+      "notes": "Watch six-limb anatomy and hind-leg connections during prep."
+    },
+    {
+      "semanticId": "token.plink.gang.armadilloBlocker.idle",
+      "filename": "armadillo-blocker.jpeg",
+      "characterOrAssetName": "Armadillo Blocker",
+      "sourceProvider": "Midjourney",
+      "midjourneyJobId": "0a66e0ea-5685-4cc2-8f6e-0f1c31377ba7",
+      "candidateIndex": 3,
+      "sourceUrl": "https://cdn.midjourney.com/0a66e0ea-5685-4cc2-8f6e-0f1c31377ba7/0_3.jpeg",
+      "sha256": "f5a2c63ce4b45c233647d8ac6b61016300a0f24c232e8f950edac8b8caa0ee4c",
+      "productionStatus": "concept_selected",
+      "derivativeOf": null,
+      "notes": "Grounded cast; four limbs + readable shell."
+    },
+    {
+      "semanticId": "token.plink.gang.batDivekicker.idle",
+      "filename": "bat-divekicker.jpeg",
+      "characterOrAssetName": "Bat Divekicker",
+      "sourceProvider": "Midjourney",
+      "midjourneyJobId": "8cbf59e5-f849-45c2-8072-5d6c9258e87e",
+      "candidateIndex": 3,
+      "sourceUrl": "https://cdn.midjourney.com/8cbf59e5-f849-45c2-8072-5d6c9258e87e/0_3.jpeg",
+      "sha256": "a9de4272ae2b5df82588e4fa8e427cd0463ad9727e94308905ab5a59d3c3bfa7",
+      "productionStatus": "concept_selected",
+      "derivativeOf": null,
+      "notes": "Flying cast — document hover pivot when cut out."
+    }
+  ]
+}

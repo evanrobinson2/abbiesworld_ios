@@ -1,0 +1,17 @@
+{
+  "semanticId": "plate.marbleVoyage.shop.bellMarket.interior",
+  "filename": "bell-market-interior.jpeg",
+  "sourceProvider": "Midjourney",
+  "jobId": "9b609bdc-3a96-4d83-8973-2ab8e02a3275",
+  "candidateIndex": 2,
+  "candidateNumber": 3,
+  "sourceUrl": "https://cdn.midjourney.com/9b609bdc-3a96-4d83-8973-2ab8e02a3275/0_2.jpeg",
+  "jobUrl": "https://www.midjourney.com/jobs/9b609bdc-3a96-4d83-8973-2ab8e02a3275?index=2",
+  "retrievedAt": "2026-09-26T21:00:15.094595+00:00",
+  "sha256": "35146cb1847a2d884606655380365f006ee8c0725b3997fc2a4cc0fbf9c6dddf",
+  "pixelWidth": 1232,
+  "pixelHeight": 928,
+  "authorization": "User requested recovery of this selected image to fulfill the existing request.",
+  "retrievalMethod": "Chrome pageAssets inventory and bundle",
+  "notes": "Original plate delivered for builder binding; not runtime-bound or verified in app. Native 1232 x 928 is approximately 4:3, below requested ~2048 x 1536. Preserve original; use Fit/letterbox, never Fill-crop. No upscale was generated. Check shop text contrast over the brighter upper tree and side shelves."
+}

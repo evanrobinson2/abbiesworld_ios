@@ -1,0 +1,246 @@
+{
+  "revision": "B04",
+  "purpose": "Complete modular scene built around the user's beside-the-tree viewpoint",
+  "units": "Adopted scene metres; not a measured building",
+  "camera_intent": "Tree close on the left and overhead, couch leading to the door, open mountain view to the right. Tripod is a metaphor, not a measurement.",
+  "alcove": {
+    "origin": [
+      -2.5,
+      3.0,
+      0
+    ],
+    "yaw_degrees": 6
+  },
+  "deck": {
+    "origin": [
+      -0.75,
+      2.65,
+      0
+    ],
+    "yaw_degrees": -45,
+    "x_min": -4.0,
+    "x_max": 6.15,
+    "y_min": -6.8,
+    "y_max": 0.13,
+    "board_width": 0.28,
+    "gap": 0.007,
+    "thickness": 0.07
+  },
+  "railing": {
+    "start_u": 0,
+    "end_u": 6.03,
+    "v": 0,
+    "height": 1.16
+  },
+  "sofa": {
+    "center": [
+      -3.15,
+      -0.5,
+      0
+    ],
+    "width": 1.15,
+    "length": 3.4
+  },
+  "tree": {
+    "foreground_path": [
+      [
+        -4.65,
+        -2.65,
+        -1.1
+      ],
+      [
+        -4.55,
+        -2.5,
+        0
+      ],
+      [
+        -4.68,
+        -2.0,
+        1.15
+      ],
+      [
+        -4.35,
+        -1.2,
+        2.65
+      ],
+      [
+        -3.9,
+        -0.3,
+        3.75
+      ],
+      [
+        -2.8,
+        0.8,
+        4.7
+      ],
+      [
+        -1.4,
+        1.6,
+        4.9
+      ],
+      [
+        0.5,
+        2.2,
+        5.0
+      ],
+      [
+        3.0,
+        2.7,
+        5.05
+      ],
+      [
+        5.5,
+        3.5,
+        5.6
+      ]
+    ],
+    "foreground_radii": [
+      0.7200000000000001,
+      0.5599999999999999,
+      0.496,
+      0.44800000000000006,
+      0.40800000000000003,
+      0.36000000000000004,
+      0.288,
+      0.22400000000000003,
+      0.15200000000000002,
+      0.028000000000000004
+    ],
+    "clearance_radius": 0.76,
+    "enclosing_levels": [
+      [
+        -12,
+        -3.0,
+        2.2,
+        3.6,
+        5.0
+      ],
+      [
+        -6,
+        -3.25,
+        1.9,
+        3.5,
+        4.95
+      ],
+      [
+        -2.5,
+        -3.5,
+        1.45,
+        3.3,
+        4.85
+      ],
+      [
+        -0.7,
+        -3.8,
+        1.5,
+        2.95,
+        4.75
+      ],
+      [
+        0,
+        -3.9,
+        1.55,
+        2.8,
+        4.65
+      ],
+      [
+        1.2,
+        -4.0,
+        1.65,
+        2.67,
+        4.4
+      ],
+      [
+        2.6,
+        -3.75,
+        1.8,
+        2.75,
+        4.05
+      ],
+      [
+        3.7,
+        -3.4,
+        1.8,
+        2.85,
+        3.75
+      ],
+      [
+        4.7,
+        -2.85,
+        2.1,
+        2.85,
+        3.5
+      ],
+      [
+        6.2,
+        -2.7,
+        2.7,
+        2.75,
+        3.3
+      ],
+      [
+        8.2,
+        -2.9,
+        3.0,
+        2.5,
+        3.1
+      ]
+    ],
+    "room_void_outline": [
+      [
+        -3.72,
+        -6.0
+      ],
+      [
+        8,
+        -6.0
+      ],
+      [
+        8,
+        3.42
+      ],
+      [
+        -3.84,
+        3.42
+      ],
+      [
+        -3.79,
+        1.1
+      ],
+      [
+        -3.74,
+        -1.0
+      ],
+      [
+        -3.73,
+        -2.3
+      ]
+    ],
+    "room_void_floor_z": -0.59,
+    "integral_bearing_limbs": 3
+  },
+  "camera": {
+    "location": [
+      -4.0,
+      -8.0,
+      3.0
+    ],
+    "target": [
+      0.3,
+      3.0,
+      1.0
+    ],
+    "lens_mm": 32,
+    "shift_x": 0,
+    "shift_y": 0
+  },
+  "rules": [
+    "Geometry is defined in world coordinates, independently of cameras",
+    "Boards and main railing share local X; joists cross at 90 degrees",
+    "Timber, bark, cushions, blossoms, lanterns and environment remain separate",
+    "Retain original architectural alcove bearing geometry through a rigid placement",
+    "No literal tripod constraint",
+    "Foreground platform boundary is the extent of this room study; adjacent circulation is unfinished"
+  ],
+  "material_revision": "Darker irregular bark, lower foreground fill, dense connected canopy, staggered board joints"
+}

@@ -459,6 +459,14 @@ final class InventoryBadgeTests: XCTestCase {
             }
         )
         XCTAssertEqual(World2POIRegistry.characterStudio.route, .characterStudio)
+        XCTAssertEqual(World2POIRegistry.figurineExplorer.route, .figurineExplorer)
+        XCTAssertTrue(
+            World2SceneCatalog.evanCitadel.poiInstances.contains {
+                $0.id == "instance.evan.figurineExplorer"
+                    && $0.archetypeID == World2POIRegistry.figurineExplorerID
+                    && $0.hardpointID == "hardpoint.evan.lookoutPad"
+            }
+        )
         XCTAssertEqual(World2POIRegistry.sceneBuilder.route, .sceneBuilder)
         XCTAssertEqual(
             World2POIRegistry.sceneBuilder.contract.grants,

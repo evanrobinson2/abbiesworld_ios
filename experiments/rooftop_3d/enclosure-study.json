@@ -1,0 +1,27 @@
+{
+  "source": "bark-material-study.blend",
+  "camera": {
+    "location": [
+      5.226101398468018,
+      -3.0,
+      4.199999809265137
+    ],
+    "lens": 30.0,
+    "shift_y": -0.25043201446533203,
+    "rotation": [
+      1.5707961320877075,
+      1.388761603493549e-07,
+      0.7293448448181152
+    ]
+  },
+  "new_components": [
+    "ceiling.timber",
+    "tree.alcove.surround",
+    "deck.reference",
+    "railing.reference"
+  ],
+  "source_library_unchanged": true,
+  "source_tree_unchanged": true,
+  "foliage_separate": true,
+  "native_integration": false
+}

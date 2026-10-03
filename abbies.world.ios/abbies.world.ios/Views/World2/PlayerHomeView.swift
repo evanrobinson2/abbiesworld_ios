@@ -13,6 +13,7 @@ struct World2PlayerHomeView: View {
     @State private var selectedFurnitureID: String?
     @State private var selectedCatalogItemID: String?
     @State private var decorateFilter: DecorateFilterID = .all
+    @State private var decorateDrawerExpanded = true
     @State private var activeRoom: TreehouseRoomID = .default
     @State private var awardedStarterPack: FurnitureStarterPack?
     @State private var starterPackBurst = false
@@ -21,6 +22,8 @@ struct World2PlayerHomeView: View {
     /// The card the drawer should open on, set when a reward sends us here.
     @State private var highlightedInventoryID: String?
     @State private var showingSceneInvent = false
+    @State private var showingToyFair = false
+    @State private var showingRooftop3D = false
 
     private var poi: World2POIArchetype? { viewModel.archetype(poiId) }
     private var owner: PlayerId? { poi?.ownerID.flatMap(PlayerId.init(rawValue:)) }
@@ -55,13 +58,19 @@ struct World2PlayerHomeView: View {
     var body: some View {
         GeometryReader { room in
             let canvasSize = CGSize(width: room.size.width, height: room.size.height)
+            let drawerLane = decorateDrawerExpanded
+                ? World2DecorateTray.expandedWidth
+                : World2DecorateTray.minimizedWidth
+            let returnZoneMinX: CGFloat? = isArrangingFurniture
+                ? max(0, canvasSize.width - drawerLane)
+                : nil
 
             ZStack(alignment: .bottom) {
                 ZStack {
                     World2SemanticImage(
                         semanticName: interiorSemanticName,
                         fallbackIcon: "house.fill",
-                        fallbackLabel: "\(poi?.name ?? "Treehouse") interior artwork is not bundled"
+                        fallbackLabel: "\(poi?.name ?? "Treehouse") is under construction"
                     )
                     .scaledToFill()
                     .frame(width: room.size.width, height: room.size.height)
@@ -84,6 +93,12 @@ struct World2PlayerHomeView: View {
                                 )
                             }
                     )
+                    .dropDestination(for: String.self) { items, location in
+                        guard isArrangingFurniture else { return false }
+                        return placeDraggedPayload(items, at: location, canvasSize: canvasSize)
+                    } isTargeted: { targeted in
+                        isRoomDropTargeted = targeted
+                    }
 
                     Color.yellow.opacity(cozyGlow ? 0.18 : 0)
                         .ignoresSafeArea()
@@ -107,6 +122,14 @@ struct World2PlayerHomeView: View {
                                 canvasSize: canvasSize,
                                 onUse: viewModel.openWorldTeleporter
                             )
+                        } else if instance.decorationId == DecorationInstance.marbleVoyageWorldBookID,
+                                  !isArrangingFurniture {
+                            World2PlacedWorldBookView(
+                                instance: instance,
+                                canvasSize: canvasSize,
+                                voyageUnlocked: viewModel.isMarbleVoyageUnlocked,
+                                onOpenBook: viewModel.openWorldBookUnlock
+                            )
                         } else if let piece = World2RoomPiece.resolve(
                             instance.decorationId,
                             player: roomPlayer
@@ -117,7 +140,7 @@ struct World2PlayerHomeView: View {
                                 canvasSize: canvasSize,
                                 isArranging: isArrangingFurniture,
                                 isSelected: selectedFurnitureID == instance.id,
-                                returnZoneMinX: nil,
+                                returnZoneMinX: returnZoneMinX,
                                 onSelect: {
                                     if selectedFurnitureID != instance.id {
                                         selectedFurnitureID = instance.id
@@ -146,6 +169,19 @@ struct World2PlayerHomeView: View {
                                         rotation: rotation
                                     )
                                 },
+                                onSkew: { skewX, skewY in
+                                    PlayerStateService.shared.updateFurnitureTransform(
+                                        instanceId: instance.id,
+                                        skewX: skewX,
+                                        skewY: skewY
+                                    )
+                                },
+                                onResetTransform: {
+                                    PlayerStateService.shared.resetFurnitureTransform(
+                                        instanceId: instance.id,
+                                        defaultScale: piece.defaultScale
+                                    )
+                                },
                                 onReturnToInventory: {
                                     PlayerStateService.shared.returnFurnitureToInventory(
                                         instanceId: instance.id
@@ -161,60 +197,48 @@ struct World2PlayerHomeView: View {
                         }
                     }
 
+                    if supportsRooms, activeRoom == .rooftopLookout, !isArrangingFurniture {
+                        Button { showingRooftop3D = true } label: {
+                            Label("Step into 3D", systemImage: "leaf")
+                                .font(.system(.headline, design: .rounded))
+                                .padding(16).background(.regularMaterial, in: Capsule())
+                        }
+                        .buttonStyle(.plain)
+                        .position(x: canvasSize.width * 0.48, y: canvasSize.height * 0.88)
+                        .accessibilityIdentifier("rooftop3d.enter")
+                    }
+
+                    if supportsRooms, activeRoom == .playroom, !isArrangingFurniture, !isReadOnly {
+                        Button { showingToyFair = true } label: {
+                            VStack(spacing: 0) {
+                                Image("fair_toy_portal").resizable().scaledToFit()
+                                    .frame(width: min(210, canvasSize.width * 0.23))
+                                Label("Toy Fair", systemImage: PlayerStateService.shared.isFairUnlocked ? "sparkles" : "lock.fill")
+                                    .font(.system(.headline, design: .rounded))
+                                    .padding(8).background(.regularMaterial, in: Capsule())
+                            }
+                        }
+                        .buttonStyle(.plain)
+                        .position(x: canvasSize.width * 0.68, y: canvasSize.height * 0.71)
+                        .accessibilityLabel("Toy fair. Match marbles with Pip to open the fair.")
+                        .accessibilityIdentifier("fair.playroom.toy")
+                    }
+
                     VStack {
                         if !isArrangingFurniture {
                             header
                         } else {
-                            decorateLockChrome
+                            decorateModeChrome
                         }
                         Spacer()
-                        if !isArrangingFurniture {
-                            controls
+                        if isReadOnly, !isArrangingFurniture {
+                            visitorBanner
                         }
                     }
                     .zIndex(10_000)
                 }
                 .frame(width: room.size.width, height: room.size.height)
                 .clipped()
-
-                if isArrangingFurniture {
-                    World2DecorateTray(
-                        playerName: owner?.displayName ?? "Player",
-                        selectedCatalogID: selectedCatalogItemID,
-                        selectedInventoryID: selectedFurnitureID,
-                        filter: decorateFilter,
-                        onFilterChange: { decorateFilter = $0 },
-                        onSelectCatalog: { item in
-                            selectedCatalogItemID = item.id
-                            selectedFurnitureID = nil
-                        },
-                        onSelectInventory: { instanceID in
-                            selectedFurnitureID = instanceID
-                            selectedCatalogItemID = nil
-                        },
-                        onDone: {
-                            PlayerStateService.shared.markInventorySeen()
-                            withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
-                                isArrangingFurniture = false
-                                selectedFurnitureID = nil
-                                selectedCatalogItemID = nil
-                                draggingPlacedFurnitureID = nil
-                                highlightedInventoryID = nil
-                            }
-                        },
-                        onInventForScene: {
-                            showingSceneInvent = true
-                        }
-                    )
-                    .transition(.move(edge: .bottom).combined(with: .opacity))
-                    .zIndex(80)
-                }
-
-                if supportsRooms, !isReadOnly {
-                    roomSwitcher
-                        .padding(.bottom, isArrangingFurniture ? 150 : 110)
-                        .zIndex(90)
-                }
 
                 if let awardedStarterPack {
                     starterPackCelebration(awardedStarterPack)
@@ -242,6 +266,9 @@ struct World2PlayerHomeView: View {
             let rewardID: String? = isReadOnly
                 ? nil
                 : viewModel.consumeInventoryHighlight()
+            if let room = viewModel.consumePendingTreehouseRoom(), supportsRooms {
+                activeRoom = room
+            }
             if let rewardID {
                 highlightedInventoryID = rewardID
                 decorateFilter = .mine
@@ -288,6 +315,22 @@ struct World2PlayerHomeView: View {
                 isArrangingFurniture = true
             }
         }
+        .onChange(of: viewModel.inventDecorateTick) { _, _ in
+            guard !isReadOnly else { return }
+            applyInventDecorateIntent()
+        }
+        .onChange(of: viewModel.sandboxInventTick) { _, _ in
+            guard !isReadOnly else { return }
+            showingSceneInvent = true
+        }
+        .fullScreenCover(isPresented: $showingRooftop3D) {
+            RooftopLookout3DView(onClose: { showingRooftop3D = false })
+        }
+        .fullScreenCover(isPresented: $showingToyFair) {
+            if let playerID = PlayerStateService.shared.currentPlayer?.playerId {
+                FairWorldView(playerID: playerID, onClose: { showingToyFair = false })
+            }
+        }
         .sheet(isPresented: $showingSceneInvent) {
             let roomScene = World2SceneDefinition(
                 id: "treehouse.\(poiId).\(activeRoom.rawValue)",
@@ -300,21 +343,156 @@ struct World2PlayerHomeView: View {
                 scene: roomScene,
                 plateImage: AssetBootstrapService.shared.image(for: activeRoom.semanticInteriorAsset)
                     ?? UIImage(named: activeRoom.catalogImageName),
+                onCarved: { result in
+                    viewModel.notifySceneInventReady(result)
+                },
                 onOpenDecorate: {
                     showingSceneInvent = false
-                    decorateFilter = .mine
-                    isArrangingFurniture = true
+                    applyInventDecorateIntent()
+                },
+                onTravel: { result in
+                    showingSceneInvent = false
+                    viewModel.reopenInventResult(result)
                 },
                 onClose: { showingSceneInvent = false }
             )
         }
+        .world2InteriorActions(
+            playerHomeThumbActions,
+            selectedID: supportsRooms ? activeRoom.rawValue : nil,
+            exitAccessibilityID: "world2.interior.back",
+            enabled: !isArrangingFurniture,
+            onExit: onExit
+        ) { id in
+            if let room = TreehouseRoomID(rawValue: id) {
+                withAnimation(.easeInOut(duration: 0.22)) {
+                    activeRoom = room
+                    selectedFurnitureID = nil
+                    selectedCatalogItemID = nil
+                }
+                World2Diagnostics.log(
+                    "treehouse_room_switched",
+                    ["room": room.rawValue, "poi": poiId]
+                )
+            } else if id == "decorate" {
+                withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
+                    isArrangingFurniture = true
+                    selectedFurnitureID = placedFurniture.last?.id
+                }
+            } else if id == "music" {
+                onOpenMusic()
+            }
+        }
+        .overlay(alignment: .trailing) {
+            if isArrangingFurniture {
+                World2DecorateTray(
+                    playerName: owner?.displayName ?? "Player",
+                    selectedCatalogID: selectedCatalogItemID,
+                    selectedInventoryID: selectedFurnitureID,
+                    filter: decorateFilter,
+                    isExpanded: $decorateDrawerExpanded,
+                    isReturnTargetActive: draggingPlacedFurnitureID != nil,
+                    catalogPolicy: .abbieCottageOnly,
+                    onFilterChange: { decorateFilter = $0 },
+                    onSelectCatalog: { item in
+                        selectedCatalogItemID = item.id
+                        selectedFurnitureID = nil
+                    },
+                    onSelectInventory: { instanceID in
+                        selectedFurnitureID = instanceID
+                        selectedCatalogItemID = nil
+                    },
+                    onReturnInventoryID: { instanceID in
+                        PlayerStateService.shared.returnFurnitureToInventory(instanceId: instanceID)
+                        if selectedFurnitureID == instanceID {
+                            selectedFurnitureID = nil
+                        }
+                        draggingPlacedFurnitureID = nil
+                    },
+                    onDone: endDecorateMode
+                )
+                .zIndex(80)
+                .allowsHitTesting(true)
+            }
+        }
+        .onChange(of: isArrangingFurniture) { _, active in
+            viewModel.setDecorateModeActive(active)
+        }
+        .onDisappear {
+            if isArrangingFurniture {
+                viewModel.setDecorateModeActive(false)
+            }
+        }
+    }
+
+    private func endDecorateMode() {
+        PlayerStateService.shared.markInventorySeen()
+        withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
+            isArrangingFurniture = false
+            selectedFurnitureID = nil
+            selectedCatalogItemID = nil
+            draggingPlacedFurnitureID = nil
+            highlightedInventoryID = nil
+        }
+        viewModel.setDecorateModeActive(false)
+    }
+
+    private var playerHomeThumbActions: [World2ThumbAction] {
+        var items: [World2ThumbAction] = []
+        if supportsRooms {
+            items.append(contentsOf: TreehouseRoomID.allCases.map { room in
+                World2ThumbAction(
+                    id: room.rawValue,
+                    title: room.title,
+                    icon: room.symbolName,
+                    asset: room.semanticInteriorAsset,
+                    accessibilityID: "world2.interior.room.\(room.rawValue)"
+                )
+            })
+        }
+        if !isReadOnly {
+            items.append(
+                World2ThumbAction(
+                    id: "decorate",
+                    title: viewModel.unseenInventoryCount > 0
+                        ? "Decorate (\(viewModel.unseenInventoryCount) new)"
+                        : "Decorate",
+                    icon: "paintbrush.pointed.fill",
+                    accessibilityID: "world2.interior.arrangeFurniture"
+                )
+            )
+        }
+        items.append(
+            World2ThumbAction(
+                id: "music",
+                title: "Music",
+                icon: "music.note",
+                accessibilityID: "world2.interior.music"
+            )
+        )
+        return items
+    }
+
+    /// Shared path for invent CTA whether we just opened the treehouse or were already inside.
+    private func applyInventDecorateIntent() {
+        if let room = viewModel.consumePendingTreehouseRoom(), supportsRooms {
+            activeRoom = room
+        }
+        _ = viewModel.consumeStartDecoratingFlag()
+        if let rewardID = viewModel.consumeInventoryHighlight() {
+            highlightedInventoryID = rewardID
+            selectedFurnitureID = rewardID
+        }
+        decorateFilter = .mine
+        isArrangingFurniture = true
+        viewModel.dismissInventReadyPrompt()
     }
 
     private func stampAt(location: CGPoint, canvasSize: CGSize) {
         let x = Double(location.x / max(canvasSize.width, 1))
         let y = Double(location.y / max(canvasSize.height, 1))
         if let catalogID = selectedCatalogItemID,
-           let item = FurnitureItem.item(id: catalogID) {
+           let item = catalogItem(id: catalogID) {
             if let id = PlayerStateService.shared.placeCatalogFurniture(
                 item: item,
                 x: x,
@@ -339,79 +517,83 @@ struct World2PlayerHomeView: View {
         }
     }
 
-    private var roomSwitcher: some View {
-        HStack(spacing: 10) {
-            ForEach(TreehouseRoomID.allCases) { room in
-                Button {
-                    withAnimation(.easeInOut(duration: 0.22)) {
-                        activeRoom = room
-                        selectedFurnitureID = nil
-                        selectedCatalogItemID = nil
-                    }
-                    World2Diagnostics.log(
-                        "treehouse_room_switched",
-                        ["room": room.rawValue, "poi": poiId]
-                    )
-                } label: {
-                    Image(systemName: room.symbolName)
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundStyle(activeRoom == room ? .white : .white.opacity(0.75))
-                        .frame(width: 48, height: 48)
-                        .background(
-                            activeRoom == room
-                                ? Color.pink.opacity(0.88)
-                                : Color.black.opacity(0.42),
-                            in: Circle()
-                        )
-                        .overlay(
-                            Circle().stroke(.white.opacity(activeRoom == room ? 0.7 : 0.25), lineWidth: 1.5)
-                        )
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel(room.title)
-                .accessibilityAddTraits(activeRoom == room ? .isSelected : [])
-                .accessibilityIdentifier("world2.interior.room.\(room.rawValue)")
+    @discardableResult
+    private func placeDraggedPayload(
+        _ items: [String],
+        at location: CGPoint,
+        canvasSize: CGSize
+    ) -> Bool {
+        guard let raw = items.first,
+              let parsed = World2DecorateDragPayload.parse(raw)
+        else { return false }
+        let x = Double(location.x / max(canvasSize.width, 1))
+        let y = Double(location.y / max(canvasSize.height, 1))
+        switch parsed.kind {
+        case .inventory:
+            PlayerStateService.shared.placeFurniture(
+                instanceId: parsed.id,
+                x: x,
+                y: y,
+                roomId: currentRoomId
+            )
+            selectedFurnitureID = parsed.id
+            selectedCatalogItemID = nil
+            World2Diagnostics.log(
+                "decorate_inventory_drag_place",
+                ["instance": parsed.id, "room": currentRoomId]
+            )
+            return true
+        case .catalog:
+            guard let item = catalogItem(id: parsed.id) else { return false }
+            if let id = PlayerStateService.shared.placeCatalogFurniture(
+                item: item,
+                x: x,
+                y: y,
+                roomId: currentRoomId
+            ) {
+                selectedFurnitureID = id
+                selectedCatalogItemID = nil
+                World2Diagnostics.log(
+                    "decorate_catalog_drag_place",
+                    ["item": item.id, "room": currentRoomId]
+                )
+                return true
             }
+            return false
         }
-        .padding(.horizontal, 14)
-        .padding(.vertical, 8)
-        .background(.black.opacity(0.28), in: Capsule())
     }
 
-    private var decorateLockChrome: some View {
+    private func catalogItem(id: String) -> FurnitureItem? {
+        if let item = FurnitureItem.item(id: id) { return item }
+        guard let prop = World2WorldSync.shared.props.first(where: { $0.id == id }) else {
+            return nil
+        }
+        return FurnitureItem(
+            id: prop.id,
+            name: prop.name,
+            category: "Props",
+            assetName: prop.image,
+            price: 0,
+            defaultScale: 0.8,
+            placementLayer: .floor
+        )
+    }
+
+    /// Decorate-mode chrome: X leaves decorate only — never the treehouse.
+    private var decorateModeChrome: some View {
         HStack {
-            Button {
-                // Mode lock: back only exits decorate, not the treehouse.
-                PlayerStateService.shared.markInventorySeen()
-                withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
-                    isArrangingFurniture = false
-                    selectedFurnitureID = nil
-                    selectedCatalogItemID = nil
-                }
-            } label: {
-                Label("Done", systemImage: "checkmark.circle.fill")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
+            Button(action: endDecorateMode) {
+                Image(systemName: "xmark")
+                    .font(.system(size: 16, weight: .black))
                     .foregroundStyle(.white)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 10)
-                    .background(.green.opacity(0.85), in: Capsule())
+                    .frame(width: 40, height: 40)
+                    .background(Color.red.opacity(0.85), in: Circle())
             }
             .buttonStyle(.plain)
+            .accessibilityLabel("Close decorate")
             .accessibilityIdentifier("world2.interior.decorateLock.done")
 
             Spacer()
-
-            VStack(alignment: .trailing, spacing: 2) {
-                Text(supportsRooms ? activeRoom.title : (poi?.name ?? "Treehouse"))
-                    .font(.system(size: 15, weight: .black, design: .rounded))
-                Text("Tap art, then tap the room")
-                    .font(.system(size: 11, weight: .semibold, design: .rounded))
-                    .foregroundStyle(.white.opacity(0.75))
-            }
-            .foregroundStyle(.white)
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
-            .background(.black.opacity(0.35), in: RoundedRectangle(cornerRadius: 12))
         }
         .padding(.horizontal, 18)
         .padding(.top, 14)
@@ -508,16 +690,6 @@ struct World2PlayerHomeView: View {
 
     private var header: some View {
         HStack(alignment: .top) {
-            Button(action: onExit) {
-                Image(systemName: "arrow.left.circle.fill")
-                    .font(.system(size: 28, weight: .bold))
-                    .foregroundStyle(.white.opacity(0.92))
-                    .shadow(color: .black.opacity(0.45), radius: 4, y: 1)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Home World")
-            .accessibilityIdentifier("world2.interior.back")
-
             Spacer(minLength: 8)
 
             VStack(spacing: 1) {
@@ -532,115 +704,24 @@ struct World2PlayerHomeView: View {
             .accessibilityIdentifier("world2.interior.title")
 
             Spacer(minLength: 8)
-
-            // Keep a tiny music affordance; settings live in the avatar menu.
-            Button(action: onOpenMusic) {
-                Image(systemName: "music.note")
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundStyle(.white.opacity(0.85))
-                    .frame(width: 36, height: 36)
-                    .background(.white.opacity(0.12), in: Circle())
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Open music player")
-            .accessibilityIdentifier("world2.interior.music")
         }
         .padding(.horizontal, 18)
         .padding(.top, 10)
         .zIndex(20)
     }
 
-    private func interiorMenuButton(
-        systemName: String,
-        label: String,
-        identifier: String,
-        action: @escaping () -> Void
-    ) -> some View {
-        Button(action: action) {
-            Image(systemName: systemName)
-                .font(.system(size: 20, weight: .bold))
-                .foregroundStyle(.white)
-                .frame(width: 48, height: 48)
-                .background(.ultraThinMaterial, in: Circle())
-                .overlay(Circle().stroke(.white.opacity(0.42), lineWidth: 1.5))
-                .contentShape(Circle())
-        }
-        .buttonStyle(.plain)
-        .accessibilityLabel(label)
-        .accessibilityIdentifier(identifier)
-    }
-
-    @ViewBuilder
-    private var controls: some View {
-        if isReadOnly {
-            Label(
-                "You're visiting \(owner?.displayName ?? "a friend"). Looking around is welcome; changes are owner-only.",
-                systemImage: "eye.fill"
-            )
-            .font(.system(size: 16, weight: .bold, design: .rounded))
-            .foregroundStyle(.white)
-            .padding(.horizontal, 22)
-            .padding(.vertical, 14)
-            .background(.indigo.opacity(0.88), in: Capsule())
-            .accessibilityIdentifier("world2.interior.readOnly")
-            .padding(.bottom, 34)
-        } else if !isArrangingFurniture {
-            HStack(spacing: 10) {
-                Button {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.82)) {
-                        isArrangingFurniture = true
-                        selectedFurnitureID = placedFurniture.last?.id
-                    }
-                } label: {
-                    Label(
-                        "Decorate My Room",
-                        systemImage: "paintbrush.pointed.fill"
-                    )
-                }
-                .tint(.indigo)
-                .overlay(alignment: .topTrailing) {
-                    if viewModel.unseenInventoryCount > 0 {
-                        Text("\(viewModel.unseenInventoryCount) NEW!")
-                            .font(.system(size: 10, weight: .black, design: .rounded))
-                            .foregroundStyle(.white)
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 4)
-                            .background(.pink, in: Capsule())
-                            .overlay(Capsule().stroke(.white, lineWidth: 1.5))
-                            .offset(x: 12, y: -10)
-                            .accessibilityIdentifier("world2.interior.newItemsPip")
-                    }
-                }
-                .accessibilityLabel(
-                    viewModel.unseenInventoryCount > 0
-                        ? "Decorate my room, \(viewModel.unseenInventoryCount) new items"
-                        : "Decorate my room"
-                )
-                .accessibilityIdentifier("world2.interior.arrangeFurniture")
-
-                Button {
-                    cozyGlow.toggle()
-                    World2Diagnostics.log(
-                        "treehouse_glow_changed",
-                        ["enabled": String(cozyGlow), "poi": poiId]
-                    )
-                } label: {
-                    Image(systemName: cozyGlow ? "lightbulb.fill" : "lightbulb")
-                        .accessibilityLabel(
-                            cozyGlow ? "Turn off cozy glow" : "Turn on cozy glow"
-                        )
-                }
-                .tint(.orange)
-            }
-            .font(.system(size: 15, weight: .black, design: .rounded))
-            .buttonStyle(.borderedProminent)
-            .controlSize(.large)
-            .foregroundStyle(.white)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 10)
-            .background(.black.opacity(0.58), in: Capsule())
-            .padding(.bottom, 34)
-        }
+    private var visitorBanner: some View {
+        Label(
+            "You're visiting \(owner?.displayName ?? "a friend"). Looking around is welcome; changes are owner-only.",
+            systemImage: "eye.fill"
+        )
+        .font(.system(size: 16, weight: .bold, design: .rounded))
+        .foregroundStyle(.white)
+        .padding(.horizontal, 22)
+        .padding(.vertical, 14)
+        .background(.indigo.opacity(0.88), in: Capsule())
+        .accessibilityIdentifier("world2.interior.readOnly")
+        .padding(.bottom, 34)
     }
 
     private var interiorSubtitle: String {
@@ -757,6 +838,15 @@ struct World2RoomPiece {
                 placementLayer: generated.placementLayer.homeLayer
             )
         }
+        if let prop = World2WorldSync.shared.props.first(where: { $0.id == decorationId }) {
+            return World2RoomPiece(
+                name: prop.name,
+                catalogAssetName: prop.image,
+                category: "Props",
+                defaultScale: 0.8,
+                placementLayer: .floor
+            )
+        }
         return nil
     }
 
@@ -777,24 +867,36 @@ struct World2RoomPiece {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(.indigo.opacity(0.9), in: RoundedRectangle(cornerRadius: 12))
         } else if let catalogAssetName {
-            Image(catalogAssetName)
-                .resizable()
+            if let named = UIImage(named: catalogAssetName) {
+                Image(uiImage: named)
+                    .resizable()
+                    .scaledToFit()
+            } else {
+                World2SemanticImage(
+                    semanticName: catalogAssetName,
+                    fallbackIcon: "shippingbox.fill",
+                    fallbackLabel: name
+                )
                 .scaledToFit()
+            }
         }
     }
 }
 
-private struct World2PlacedFurnitureView: View {
+struct World2PlacedFurnitureView: View {
     let instance: DecorationInstance
     let piece: World2RoomPiece
     let canvasSize: CGSize
     let isArranging: Bool
     let isSelected: Bool
     let returnZoneMinX: CGFloat?
+    var coordinateSpaceName: String = "world2.room"
     let onSelect: () -> Void
     let onMove: (Double, Double) -> Void
     let onScale: (Double) -> Void
     let onRotation: (Double) -> Void
+    let onSkew: (Double, Double) -> Void
+    let onResetTransform: () -> Void
     let onReturnToInventory: () -> Void
     let onDragStateChanged: (Bool) -> Void
 
@@ -802,6 +904,7 @@ private struct World2PlacedFurnitureView: View {
     @GestureState private var gestureScale = 1.0
     @GestureState private var gestureRotation = Angle.zero
     @State private var isDragging = false
+    @ObservedObject private var developerSession = World2DeveloperSession.shared
 
     var body: some View {
         piece.artwork
@@ -810,6 +913,7 @@ private struct World2PlacedFurnitureView: View {
                 height: piece.category == "Beds" ? 210 : 175
             )
             .scaleEffect(instance.scale * gestureScale)
+            .transformEffect(skewTransform(x: instance.skewX, y: instance.skewY))
             .rotationEffect(.degrees(instance.rotation) + gestureRotation)
             .shadow(
                 color: isSelected ? .yellow.opacity(0.95) : .black.opacity(0.32),
@@ -819,16 +923,18 @@ private struct World2PlacedFurnitureView: View {
             .accessibilityLabel(piece.name)
             .accessibilityHint(
                 isArranging
-                    ? "Tap to select, drag to move or put away, pinch to resize, or twist to rotate"
+                    ? "Tap to select, drag to move or put away, pinch to resize, twist to rotate, use side handles to skew, or tap Reset"
                     : "Placed furniture"
             )
             .accessibilityValue(
                 String(
-                    format: "x %.2f, y %.2f, size %.2f, rotation %.0f degrees",
+                    format: "x %.2f, y %.2f, size %.2f, rotation %.0f degrees, skew %.2f %.2f",
                     instance.x,
                     instance.y,
                     instance.scale,
-                    instance.rotation
+                    instance.rotation,
+                    instance.skewX,
+                    instance.skewY
                 )
             )
             .accessibilityIdentifier("world2.interior.placedFurniture.\(instance.id)")
@@ -847,24 +953,32 @@ private struct World2PlacedFurnitureView: View {
                         .allowsHitTesting(false)
                 }
             }
-            .overlay(alignment: .trailing) {
+            .overlay {
                 if isArranging && isSelected {
-                    Button(action: onReturnToInventory) {
-                        Image(systemName: "xmark")
-                            .font(.system(size: 16, weight: .black))
-                            .foregroundStyle(.white)
-                            .frame(width: 36, height: 36)
-                            .background(.red, in: Circle())
-                            .overlay(Circle().stroke(.white, lineWidth: 3))
-                            .shadow(color: .black.opacity(0.35), radius: 4, y: 2)
-                            .contentShape(Circle())
-                    }
-                    .buttonStyle(.plain)
-                    .offset(x: -4)
-                    .accessibilityLabel("Put \(piece.name) back in the drawer")
-                    .accessibilityIdentifier(
-                        "world2.interior.furniture.remove.\(instance.id)"
+                    World2FurnitureTransformHandles(
+                        instanceID: instance.id,
+                        onSkewDelta: { dx, dy in
+                            onSelect()
+                            onSkew(instance.skewX + dx, instance.skewY + dy)
+                        },
+                        onReset: {
+                            onSelect()
+                            onResetTransform()
+                        },
+                        onReturnToInventory: onReturnToInventory
                     )
+                }
+            }
+            .overlay(alignment: .topLeading) {
+                if developerSession.isEnabled, isArranging, isSelected {
+                    World2DevRefineButton(accessibilityID: "world2.dev.refine.furniture.\(instance.id)") {
+                        World2DevRefine.decoration(
+                            instanceID: instance.id,
+                            label: piece.name,
+                            placeName: "this place"
+                        )
+                    }
+                    .offset(x: 4, y: 4)
                 }
             }
             .position(
@@ -877,8 +991,14 @@ private struct World2PlacedFurnitureView: View {
             .allowsHitTesting(isArranging)
     }
 
+    private func skewTransform(x: Double, y: Double) -> CGAffineTransform {
+        let sx = min(max(x, DecorationInstance.skewRange.lowerBound), DecorationInstance.skewRange.upperBound)
+        let sy = min(max(y, DecorationInstance.skewRange.lowerBound), DecorationInstance.skewRange.upperBound)
+        return CGAffineTransform(a: 1, b: sy, c: sx, d: 1, tx: 0, ty: 0)
+    }
+
     private var dragGesture: some Gesture {
-        DragGesture(coordinateSpace: .named("world2.room"))
+        DragGesture(coordinateSpace: .named(coordinateSpaceName))
             .onChanged { _ in
                 onSelect()
                 if !isDragging {
@@ -898,17 +1018,13 @@ private struct World2PlacedFurnitureView: View {
                     onDragStateChanged(false)
                 }
                 guard canvasSize.width > 0, canvasSize.height > 0 else { return }
-                let travel = CGSize(
-                    width: value.location.x - value.startLocation.x,
-                    height: value.location.y - value.startLocation.y
-                )
                 if let returnZoneMinX, value.location.x >= returnZoneMinX {
                     onReturnToInventory()
                     return
                 }
                 onMove(
-                    travel.width / canvasSize.width,
-                    travel.height / canvasSize.height
+                    (value.location.x - value.startLocation.x) / canvasSize.width,
+                    (value.location.y - value.startLocation.y) / canvasSize.height
                 )
             }
     }
@@ -936,7 +1052,98 @@ private struct World2PlacedFurnitureView: View {
     }
 }
 
-private struct World2AnimatedSelectionLasso: View {
+/// Finger handles around a selected piece: side/top skew + clear Reset + put-away.
+private struct World2FurnitureTransformHandles: View {
+    let instanceID: String
+    let onSkewDelta: (Double, Double) -> Void
+    let onReset: () -> Void
+    let onReturnToInventory: () -> Void
+
+    private let handleSize: CGFloat = 44
+    /// Pixels of finger travel → one unit of shear.
+    private let skewPixelsPerUnit: CGFloat = 110
+
+    var body: some View {
+        ZStack {
+            // Horizontal skew — left / right mid-edge.
+            skewHandle(axis: .horizontal, accessibilitySuffix: "skewX.left")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                .offset(x: -handleSize * 0.55)
+            skewHandle(axis: .horizontal, accessibilitySuffix: "skewX.right")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .trailing)
+                .offset(x: handleSize * 0.55)
+
+            // Vertical skew — top / bottom mid-edge.
+            skewHandle(axis: .vertical, accessibilitySuffix: "skewY.top")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .offset(y: -handleSize * 0.55)
+            skewHandle(axis: .vertical, accessibilitySuffix: "skewY.bottom")
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .offset(y: handleSize * 0.55)
+
+            VStack {
+                Spacer(minLength: 0)
+                HStack(spacing: 10) {
+                    Button(action: onReset) {
+                        Label("Reset", systemImage: "arrow.counterclockwise")
+                            .font(.system(size: 14, weight: .black, design: .rounded))
+                            .foregroundStyle(.white)
+                            .padding(.horizontal, 14)
+                            .padding(.vertical, 10)
+                            .background(Color.black.opacity(0.82), in: Capsule())
+                            .overlay(Capsule().stroke(.white.opacity(0.85), lineWidth: 2))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Reset size, rotation, and skew")
+                    .accessibilityIdentifier("world2.interior.furniture.reset.\(instanceID)")
+
+                    Button(action: onReturnToInventory) {
+                        Image(systemName: "xmark")
+                            .font(.system(size: 16, weight: .black))
+                            .foregroundStyle(.white)
+                            .frame(width: handleSize, height: handleSize)
+                            .background(.red, in: Circle())
+                            .overlay(Circle().stroke(.white, lineWidth: 3))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel("Put back in the drawer")
+                    .accessibilityIdentifier("world2.interior.furniture.remove.\(instanceID)")
+                }
+                .offset(y: handleSize * 0.85)
+            }
+        }
+        .padding(-10)
+    }
+
+    private enum SkewAxis { case horizontal, vertical }
+
+    private func skewHandle(axis: SkewAxis, accessibilitySuffix: String) -> some View {
+        Image(systemName: axis == .horizontal ? "arrow.left.and.right" : "arrow.up.and.down")
+            .font(.system(size: 15, weight: .black))
+            .foregroundStyle(.black)
+            .frame(width: handleSize, height: handleSize)
+            .background(Color.yellow, in: Circle())
+            .overlay(Circle().stroke(.white, lineWidth: 3))
+            .shadow(color: .black.opacity(0.35), radius: 4, y: 2)
+            .contentShape(Circle())
+            .gesture(
+                DragGesture(minimumDistance: 1)
+                    .onEnded { value in
+                        switch axis {
+                        case .horizontal:
+                            onSkewDelta(Double(value.translation.width / skewPixelsPerUnit), 0)
+                        case .vertical:
+                            onSkewDelta(0, Double(value.translation.height / skewPixelsPerUnit))
+                        }
+                    }
+            )
+            .accessibilityLabel(axis == .horizontal ? "Skew sideways" : "Skew up and down")
+            .accessibilityHint("Drag with one finger to lean the art")
+            .accessibilityIdentifier("world2.interior.furniture.\(accessibilitySuffix).\(instanceID)")
+    }
+}
+
+struct World2AnimatedSelectionLasso: View {
     var body: some View {
         TimelineView(.animation(minimumInterval: 1.0 / 30.0)) { timeline in
             let phase = timeline.date.timeIntervalSinceReferenceDate
@@ -1118,10 +1325,10 @@ private struct World2FurnitureDecoratorDrawer: View {
         return VStack(spacing: 6) {
             piece.artwork
                 .frame(height: 78)
-            Text(piece.name)
+            Text(World2ChromeContract.shortDecorationLabel(piece.name))
                 .font(.system(size: 11, weight: .black, design: .rounded))
                 .multilineTextAlignment(.center)
-                .lineLimit(2)
+                .lineLimit(1)
             if !badges.isEmpty {
                 HStack(spacing: 3) {
                     ForEach(badges, id: \.self) { badge in
@@ -1178,7 +1385,7 @@ private struct World2FurnitureDecoratorDrawer: View {
                 onPlace(instance.id)
             }
         }
-        .draggable(instance.id) {
+        .draggable(World2DecorateDragPayload.inventory(instance.id)) {
             piece.artwork
                 .frame(width: 120, height: 110)
                 .padding(8)
@@ -1195,6 +1402,47 @@ private struct World2FurnitureDecoratorDrawer: View {
                 : "Drag into the room, or double tap to place"
         )
         .accessibilityIdentifier("world2.interior.inventory.item.\(instance.id)")
+    }
+}
+
+/// Placed Voyage gateway book — tap opens unlock flow (arrange mode uses normal furniture).
+private struct World2PlacedWorldBookView: View {
+    let instance: DecorationInstance
+    let canvasSize: CGSize
+    let voyageUnlocked: Bool
+    let onOpenBook: () -> Void
+
+    var body: some View {
+        Button(action: onOpenBook) {
+            VStack(spacing: 6) {
+                Image(WorldBookCatalog.closedBook)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 190, height: 175)
+                    .shadow(color: .black.opacity(0.45), radius: 8, y: 5)
+                Text(voyageUnlocked ? "Voyage book" : "Messy book!")
+                    .font(.system(size: 14, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(.black.opacity(0.55), in: Capsule())
+            }
+        }
+        .buttonStyle(.plain)
+        .scaleEffect(instance.scale)
+        .rotationEffect(.degrees(instance.rotation))
+        .position(
+            x: canvasSize.width * instance.x,
+            y: canvasSize.height * instance.y
+        )
+        .zIndex(min(Double(instance.zIndex), 1_000))
+        .accessibilityIdentifier("world2.worldBook.cozyNookBook")
+        .accessibilityLabel(
+            voyageUnlocked
+                ? "Marble Voyage book. Open to replay the puzzle or put it away"
+                : "Messy book. Open to solve the puzzle and unlock Marble Voyage"
+        )
+        .allowsHitTesting(true)
     }
 }
 

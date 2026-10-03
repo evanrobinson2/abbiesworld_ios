@@ -1,0 +1,12 @@
+{
+  "simulatorTestsPassed": 9,
+  "simulatorTestsFailed": 0,
+  "testsResult": "/tmp/rooftop-proof-final-tests.xcresult",
+  "finalLeafRefinement": "Simulator and device builds succeeded; vertex/index/normal validation passed; final simulator render visually inspected.",
+  "baselineInstalledAndLaunchedOnIPad": true,
+  "latestInstalledOnIPad": true,
+  "latestIPadLaunch": "Not verified: first denied because device locked; final retry failed because the device tunnel disconnected.",
+  "physicalUITests": "Blocked by missing signing profile for separate UI test runner. App signing/install works.",
+  "visualStatus": "Rendering proof; not claimed to match the original illustration or meet release performance targets.",
+  "finalImage": "../evidence/lighting-proof-dense-blossoms.png"
+}

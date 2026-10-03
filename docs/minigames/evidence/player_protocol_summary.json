@@ -1,0 +1,786 @@
+{
+  "baseSeed" : 19,
+  "crossPlayerNotes" : [
+
+  ],
+  "generatedAtISO8601" : "2026-09-27T01:30:14Z",
+  "mapMode" : "protocolAudit",
+  "players" : [
+    {
+      "clearRate" : 0.8333333333333334,
+      "exploitRates" : {
+
+      },
+      "finalFightAttempts" : 10,
+      "finalFightWinRate" : 1,
+      "lateCollapseRate" : 0,
+      "player" : "aggressive",
+      "smellRates" : {
+        "coinHoardDeath" : 0,
+        "fightSlog" : 0,
+        "lateCollapse" : 0,
+        "longHangFewPegs" : 0,
+        "noHealClearExploit" : 0,
+        "temperIgnored" : 0,
+        "upgradeStarve" : 0,
+        "zeroHitSpam" : 0
+      },
+      "stats" : {
+        "ballLevel" : {
+          "mean" : 8.416666666666666,
+          "n" : 12,
+          "p10" : 3,
+          "p50" : 9,
+          "p90" : 11
+        },
+        "branchedMapPicks" : {
+          "mean" : 7.833333333333333,
+          "n" : 12,
+          "p10" : 2,
+          "p50" : 9,
+          "p90" : 9
+        },
+        "charmsBought" : {
+          "mean" : 0.5833333333333334,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 2
+        },
+        "coins" : {
+          "mean" : 31,
+          "n" : 12,
+          "p10" : 8,
+          "p50" : 32,
+          "p90" : 40
+        },
+        "fightRounds" : {
+          "mean" : 6.342948717948718,
+          "n" : 12,
+          "p10" : 5.666666666666667,
+          "p50" : 6.6923076923076925,
+          "p90" : 7.153846153846154
+        },
+        "fightsCleared" : {
+          "mean" : 11,
+          "n" : 12,
+          "p10" : 2,
+          "p50" : 13,
+          "p90" : 13
+        },
+        "healsBought" : {
+          "mean" : 2.0833333333333335,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 2,
+          "p90" : 3
+        },
+        "longHangFewPegShots" : {
+          "mean" : 0.08333333333333333,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 0
+        },
+        "mapChoiceCount" : {
+          "mean" : 2,
+          "n" : 12,
+          "p10" : 2,
+          "p50" : 2,
+          "p90" : 2
+        },
+        "marbleMeanLevel" : {
+          "mean" : 2.5972222222222223,
+          "n" : 12,
+          "p10" : 1.5,
+          "p50" : 2.8,
+          "p90" : 3
+        },
+        "marblesBought" : {
+          "mean" : 0.6666666666666666,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 1,
+          "p90" : 1
+        },
+        "maxShotDuration" : {
+          "mean" : 7.959860220797772,
+          "n" : 12,
+          "p10" : 7.014583333333406,
+          "p50" : 8.13611111111112,
+          "p90" : 8.97243589743595
+        },
+        "meanPegHits" : {
+          "mean" : 7.009945590674757,
+          "n" : 12,
+          "p10" : 4.666666666666667,
+          "p50" : 7.421947496947496,
+          "p90" : 8.112454212454212
+        },
+        "meanShotDuration" : {
+          "mean" : 4.990963912309422,
+          "n" : 12,
+          "p10" : 3.924621212121231,
+          "p50" : 5.165358119889391,
+          "p90" : 5.504302410552449
+        },
+        "meanTemperFactor" : {
+          "mean" : 1.0886485042735041,
+          "n" : 12,
+          "p10" : 1.0307692307692307,
+          "p50" : 1.1230769230769229,
+          "p90" : 1.15
+        },
+        "upgradesBought" : {
+          "mean" : 6.583333333333333,
+          "n" : 12,
+          "p10" : 2,
+          "p50" : 7,
+          "p90" : 9
+        },
+        "zeroHitShots" : {
+          "mean" : 0,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 0
+        }
+      },
+      "survivalByFights" : [
+        {
+          "id" : "fights>=0",
+          "label" : "Cleared ≥ 0 fights",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "fights>=1",
+          "label" : "Cleared ≥ 1 fights",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "fights>=2",
+          "label" : "Cleared ≥ 2 fights",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "fights>=3",
+          "label" : "Cleared ≥ 3 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=4",
+          "label" : "Cleared ≥ 4 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=5",
+          "label" : "Cleared ≥ 5 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=6",
+          "label" : "Cleared ≥ 6 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=7",
+          "label" : "Cleared ≥ 7 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=8",
+          "label" : "Cleared ≥ 8 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=9",
+          "label" : "Cleared ≥ 9 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=10",
+          "label" : "Cleared ≥ 10 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=11",
+          "label" : "Cleared ≥ 11 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=12",
+          "label" : "Cleared ≥ 12 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=13",
+          "label" : "Cleared ≥ 13 fights",
+          "rate" : 0.6666666666666666,
+          "reached" : 8
+        }
+      ],
+      "survivalByStage" : [
+        {
+          "id" : "land0_boss",
+          "label" : "Land 1 mini-boss",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "land1_boss",
+          "label" : "Land 2 mini-boss",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "land2_boss",
+          "label" : "Land 3 mini-boss",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "summit",
+          "label" : "Summit",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "clear",
+          "label" : "Cleared climb",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        }
+      ],
+      "trials" : 12
+    },
+    {
+      "clearRate" : 0.9166666666666666,
+      "exploitRates" : {
+
+      },
+      "finalFightAttempts" : 11,
+      "finalFightWinRate" : 1,
+      "lateCollapseRate" : 0,
+      "player" : "motivated",
+      "smellRates" : {
+        "coinHoardDeath" : 0,
+        "fightSlog" : 0,
+        "lateCollapse" : 0,
+        "longHangFewPegs" : 0.08333333333333333,
+        "noHealClearExploit" : 0,
+        "temperIgnored" : 0,
+        "upgradeStarve" : 0,
+        "zeroHitSpam" : 0
+      },
+      "stats" : {
+        "ballLevel" : {
+          "mean" : 8.166666666666666,
+          "n" : 12,
+          "p10" : 8,
+          "p50" : 9,
+          "p90" : 9
+        },
+        "branchedMapPicks" : {
+          "mean" : 8.416666666666666,
+          "n" : 12,
+          "p10" : 9,
+          "p50" : 9,
+          "p90" : 9
+        },
+        "charmsBought" : {
+          "mean" : 0.16666666666666666,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 1
+        },
+        "coins" : {
+          "mean" : 32.666666666666664,
+          "n" : 12,
+          "p10" : 24,
+          "p50" : 32,
+          "p90" : 46
+        },
+        "fightRounds" : {
+          "mean" : 7.274959531209531,
+          "n" : 12,
+          "p10" : 5.7,
+          "p50" : 7.625,
+          "p90" : 8.384615384615385
+        },
+        "fightsCleared" : {
+          "mean" : 10.083333333333334,
+          "n" : 12,
+          "p10" : 8,
+          "p50" : 11,
+          "p90" : 12
+        },
+        "healsBought" : {
+          "mean" : 2.6666666666666665,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 3,
+          "p90" : 5
+        },
+        "longHangFewPegShots" : {
+          "mean" : 0.6666666666666666,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 2
+        },
+        "mapChoiceCount" : {
+          "mean" : 2,
+          "n" : 12,
+          "p10" : 2,
+          "p50" : 2,
+          "p90" : 2
+        },
+        "marbleMeanLevel" : {
+          "mean" : 2.7458333333333336,
+          "n" : 12,
+          "p10" : 2.6,
+          "p50" : 3,
+          "p90" : 3
+        },
+        "marblesBought" : {
+          "mean" : 0.3333333333333333,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 1
+        },
+        "maxShotDuration" : {
+          "mean" : 8.717918379845514,
+          "n" : 12,
+          "p10" : 7.1888888888889255,
+          "p50" : 8.870833333333392,
+          "p90" : 9.988541666666714
+        },
+        "meanPegHits" : {
+          "mean" : 7.374748724725051,
+          "n" : 12,
+          "p10" : 6.472319347319346,
+          "p50" : 7.615310846560846,
+          "p90" : 8.28531746031746
+        },
+        "meanShotDuration" : {
+          "mean" : 5.279753149782922,
+          "n" : 12,
+          "p10" : 5.08178295855381,
+          "p50" : 5.4477984389348215,
+          "p90" : 5.68570684523811
+        },
+        "meanTemperFactor" : {
+          "mean" : 1.1508354377104375,
+          "n" : 12,
+          "p10" : 1.1041666666666667,
+          "p50" : 1.1874999999999998,
+          "p90" : 1.2449999999999999
+        },
+        "upgradesBought" : {
+          "mean" : 6.666666666666667,
+          "n" : 12,
+          "p10" : 6,
+          "p50" : 7,
+          "p90" : 8
+        },
+        "zeroHitShots" : {
+          "mean" : 0,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 0
+        }
+      },
+      "survivalByFights" : [
+        {
+          "id" : "fights>=0",
+          "label" : "Cleared ≥ 0 fights",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "fights>=1",
+          "label" : "Cleared ≥ 1 fights",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "fights>=2",
+          "label" : "Cleared ≥ 2 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=3",
+          "label" : "Cleared ≥ 3 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=4",
+          "label" : "Cleared ≥ 4 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=5",
+          "label" : "Cleared ≥ 5 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=6",
+          "label" : "Cleared ≥ 6 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=7",
+          "label" : "Cleared ≥ 7 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=8",
+          "label" : "Cleared ≥ 8 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=9",
+          "label" : "Cleared ≥ 9 fights",
+          "rate" : 0.8333333333333334,
+          "reached" : 10
+        },
+        {
+          "id" : "fights>=10",
+          "label" : "Cleared ≥ 10 fights",
+          "rate" : 0.75,
+          "reached" : 9
+        },
+        {
+          "id" : "fights>=11",
+          "label" : "Cleared ≥ 11 fights",
+          "rate" : 0.5833333333333334,
+          "reached" : 7
+        },
+        {
+          "id" : "fights>=12",
+          "label" : "Cleared ≥ 12 fights",
+          "rate" : 0.4166666666666667,
+          "reached" : 5
+        },
+        {
+          "id" : "fights>=13",
+          "label" : "Cleared ≥ 13 fights",
+          "rate" : 0.08333333333333333,
+          "reached" : 1
+        }
+      ],
+      "survivalByStage" : [
+        {
+          "id" : "land0_boss",
+          "label" : "Land 1 mini-boss",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "land1_boss",
+          "label" : "Land 2 mini-boss",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "land2_boss",
+          "label" : "Land 3 mini-boss",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "summit",
+          "label" : "Summit",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "clear",
+          "label" : "Cleared climb",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        }
+      ],
+      "trials" : 12
+    },
+    {
+      "clearRate" : 0.5833333333333334,
+      "exploitRates" : {
+
+      },
+      "finalFightAttempts" : 7,
+      "finalFightWinRate" : 1,
+      "lateCollapseRate" : 0.08333333333333333,
+      "player" : "casual",
+      "smellRates" : {
+        "coinHoardDeath" : 0,
+        "fightSlog" : 0,
+        "lateCollapse" : 0.08333333333333333,
+        "longHangFewPegs" : 0,
+        "noHealClearExploit" : 0,
+        "temperIgnored" : 0,
+        "upgradeStarve" : 0.08333333333333333,
+        "zeroHitSpam" : 0
+      },
+      "stats" : {
+        "ballLevel" : {
+          "mean" : 3.25,
+          "n" : 12,
+          "p10" : 1,
+          "p50" : 4,
+          "p90" : 5
+        },
+        "branchedMapPicks" : {
+          "mean" : 7.333333333333333,
+          "n" : 12,
+          "p10" : 5,
+          "p50" : 9,
+          "p90" : 9
+        },
+        "charmsBought" : {
+          "mean" : 1.0833333333333333,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 1,
+          "p90" : 3
+        },
+        "coins" : {
+          "mean" : 26.083333333333332,
+          "n" : 12,
+          "p10" : 9,
+          "p50" : 28,
+          "p90" : 44
+        },
+        "fightRounds" : {
+          "mean" : 7.669543650793652,
+          "n" : 12,
+          "p10" : 6.6,
+          "p50" : 7.444444444444445,
+          "p90" : 9.9
+        },
+        "fightsCleared" : {
+          "mean" : 7.416666666666667,
+          "n" : 12,
+          "p10" : 4,
+          "p50" : 8,
+          "p90" : 10
+        },
+        "healsBought" : {
+          "mean" : 1.8333333333333333,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 2,
+          "p90" : 4
+        },
+        "longHangFewPegShots" : {
+          "mean" : 0.25,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 1
+        },
+        "mapChoiceCount" : {
+          "mean" : 2,
+          "n" : 12,
+          "p10" : 2,
+          "p50" : 2,
+          "p90" : 2
+        },
+        "marbleMeanLevel" : {
+          "mean" : 1.5017857142857143,
+          "n" : 12,
+          "p10" : 1,
+          "p50" : 1.6666666666666667,
+          "p90" : 1.8
+        },
+        "marblesBought" : {
+          "mean" : 1.3333333333333333,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 1,
+          "p90" : 3
+        },
+        "maxShotDuration" : {
+          "mean" : 8.865739638448012,
+          "n" : 12,
+          "p10" : 7.718750000000058,
+          "p50" : 8.887500000000017,
+          "p90" : 9.807500000000061
+        },
+        "meanPegHits" : {
+          "mean" : 7.07592576276604,
+          "n" : 12,
+          "p10" : 5.262049062049063,
+          "p50" : 7.508333333333334,
+          "p90" : 8.896419552669553
+        },
+        "meanShotDuration" : {
+          "mean" : 5.220499776907785,
+          "n" : 12,
+          "p10" : 4.62976388888891,
+          "p50" : 5.498148148148181,
+          "p90" : 5.721723214285747
+        },
+        "meanTemperFactor" : {
+          "mean" : 1.101812169312169,
+          "n" : 12,
+          "p10" : 0.9928571428571429,
+          "p50" : 1.0899999999999999,
+          "p90" : 1.1666666666666667
+        },
+        "upgradesBought" : {
+          "mean" : 2.25,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 3,
+          "p90" : 4
+        },
+        "zeroHitShots" : {
+          "mean" : 0,
+          "n" : 12,
+          "p10" : 0,
+          "p50" : 0,
+          "p90" : 0
+        }
+      },
+      "survivalByFights" : [
+        {
+          "id" : "fights>=0",
+          "label" : "Cleared ≥ 0 fights",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "fights>=1",
+          "label" : "Cleared ≥ 1 fights",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "fights>=2",
+          "label" : "Cleared ≥ 2 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=3",
+          "label" : "Cleared ≥ 3 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=4",
+          "label" : "Cleared ≥ 4 fights",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "fights>=5",
+          "label" : "Cleared ≥ 5 fights",
+          "rate" : 0.75,
+          "reached" : 9
+        },
+        {
+          "id" : "fights>=6",
+          "label" : "Cleared ≥ 6 fights",
+          "rate" : 0.75,
+          "reached" : 9
+        },
+        {
+          "id" : "fights>=7",
+          "label" : "Cleared ≥ 7 fights",
+          "rate" : 0.6666666666666666,
+          "reached" : 8
+        },
+        {
+          "id" : "fights>=8",
+          "label" : "Cleared ≥ 8 fights",
+          "rate" : 0.6666666666666666,
+          "reached" : 8
+        },
+        {
+          "id" : "fights>=9",
+          "label" : "Cleared ≥ 9 fights",
+          "rate" : 0.4166666666666667,
+          "reached" : 5
+        },
+        {
+          "id" : "fights>=10",
+          "label" : "Cleared ≥ 10 fights",
+          "rate" : 0.25,
+          "reached" : 3
+        },
+        {
+          "id" : "fights>=11",
+          "label" : "Cleared ≥ 11 fights",
+          "rate" : 0.08333333333333333,
+          "reached" : 1
+        },
+        {
+          "id" : "fights>=12",
+          "label" : "Cleared ≥ 12 fights",
+          "rate" : 0.08333333333333333,
+          "reached" : 1
+        }
+      ],
+      "survivalByStage" : [
+        {
+          "id" : "land0_boss",
+          "label" : "Land 1 mini-boss",
+          "rate" : 1,
+          "reached" : 12
+        },
+        {
+          "id" : "land1_boss",
+          "label" : "Land 2 mini-boss",
+          "rate" : 0.9166666666666666,
+          "reached" : 11
+        },
+        {
+          "id" : "land2_boss",
+          "label" : "Land 3 mini-boss",
+          "rate" : 0.6666666666666666,
+          "reached" : 8
+        },
+        {
+          "id" : "summit",
+          "label" : "Summit",
+          "rate" : 0.5833333333333334,
+          "reached" : 7
+        },
+        {
+          "id" : "clear",
+          "label" : "Cleared climb",
+          "rate" : 0.5833333333333334,
+          "reached" : 7
+        }
+      ],
+      "trials" : 12
+    }
+  ],
+  "schemaVersion" : 1,
+  "trialsPerPlayer" : 12
+}

@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-lamps-03-mushroom-cottage-lamp",
+  "latencyMs": 4124,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.94,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "table",
+    "refinedDescription": "Whimsical white mushroom cottage lamp with a broad red cap roof, glowing amber windows, a rounded wooden door, a curled blue-topped chimney, and tufts of grass around the base.",
+    "suggestedScale": 0.85
+  },
+  "responseId": "chatcmpl-ESoAp7Zx4kjBI5g6UPesPwpOruPmT",
+  "timestamp": "2026-09-27T18:46:02.996156+00:00",
+  "pngSha256": "8b613124388e31d591e98e3945a3d6882b0d7cc3cdccf7a22676f072d1d6b1c6"
+}

@@ -1,0 +1,311 @@
+{
+  "revision": "A01",
+  "name": "Rooftop Lookout \u2014 architectural basis",
+  "units": "metres; adopted game-scene scale",
+  "scope": "Rooftop terrace and its tree enclosure, not the whole multi-room house",
+  "datum": "finished deck Z=0; world X across platform, Y toward rear; local U along alcove, V into trunk",
+  "deck": {
+    "outline": [
+      [
+        -3.4,
+        -2.6
+      ],
+      [
+        3.4,
+        -2.6
+      ],
+      [
+        3.4,
+        2.6
+      ],
+      [
+        -0.4,
+        2.6
+      ],
+      [
+        -3.4,
+        -0.4
+      ]
+    ],
+    "board_thickness": 0.055,
+    "board_width": 0.22,
+    "board_gap": 0.006,
+    "joist_width": 0.1,
+    "joist_depth": 0.22,
+    "joist_spacing": 0.44,
+    "girder_width": 0.18,
+    "girder_depth": 0.3,
+    "board_axis": [
+      0,
+      1,
+      0
+    ],
+    "joist_axis": [
+      1,
+      0,
+      0
+    ],
+    "girder_axis": [
+      0,
+      1,
+      0
+    ],
+    "girder_centers_x": [
+      -2.28,
+      0,
+      2.8
+    ],
+    "tree_opening_clear_radius": 0.61,
+    "tree_opening_frame_half_width": 0.65
+  },
+  "alcove": {
+    "origin": [
+      -1.925,
+      1.075,
+      0
+    ],
+    "yaw_degrees": 45,
+    "post_centers_u": [
+      -1.32,
+      1.32
+    ],
+    "post_v": -0.36,
+    "post_width": 0.18,
+    "post_depth": 0.22,
+    "header_bottom": 3.25,
+    "header_depth": 0.24,
+    "panel_width": 2.46,
+    "panel_bottom": 1.05,
+    "panel_top": 3.25,
+    "panel_v": 0.05,
+    "panel_thickness": 0.14,
+    "window_center_z": 2.28,
+    "window_outer_radius": 0.61,
+    "window_inner_radius": 0.52,
+    "sill_top": 1.05,
+    "sill_depth": 0.14,
+    "bench_width": 2.3,
+    "bench_depth": 0.48,
+    "bench_top": 0.43,
+    "bench_v": -0.43,
+    "interpretation": "Fixed round-window recess above a bench. No usable doorway or threshold is visible in the reference; circulation is left off-camera."
+  },
+  "roof": {
+    "u_min": -1.62,
+    "u_max": 1.62,
+    "rear_v": -0.2,
+    "front_v": -1.95,
+    "rear_beam_v": -0.36,
+    "front_beam_v": -1.79,
+    "rear_beam_bottom": 3.25,
+    "beam_depth": 0.24,
+    "beam_width": 0.22,
+    "slope_dz_per_minus_v": 0.26,
+    "rafter_width": 0.09,
+    "rafter_depth": 0.16,
+    "rafter_count": 7,
+    "boarding_thickness": 0.045,
+    "boarding_width": 0.18,
+    "boarding_gap": 0.004,
+    "brace_u": [
+      -1.32,
+      1.32
+    ],
+    "brace_post_z": 2.24,
+    "brace_width": 0.13
+  },
+  "tree": {
+    "center_v": 0.85,
+    "shell_thickness": 0.3,
+    "levels": [
+      [
+        -1.5,
+        2.5,
+        1.65
+      ],
+      [
+        0,
+        2.3,
+        1.55
+      ],
+      [
+        1.4,
+        2.12,
+        1.45
+      ],
+      [
+        2.7,
+        2.02,
+        1.42
+      ],
+      [
+        3.5,
+        1.96,
+        1.36
+      ],
+      [
+        4.5,
+        1.72,
+        1.24
+      ],
+      [
+        5.1,
+        1.52,
+        1.12
+      ]
+    ],
+    "opening_width": 3.04,
+    "opening_head": 3.52,
+    "opening_back_v": 0.52,
+    "fork_path_uvz": [
+      [
+        -2.2,
+        0.45,
+        -1.2
+      ],
+      [
+        -2.7,
+        -0.85,
+        -0.1
+      ],
+      [
+        -2.85,
+        -1.1,
+        1.2
+      ],
+      [
+        -2.9,
+        -0.95,
+        2.35
+      ],
+      [
+        -2.6,
+        -0.95,
+        3.5
+      ],
+      [
+        -1.25,
+        -1.2,
+        4.5
+      ],
+      [
+        0.2,
+        -0.9,
+        4.7
+      ],
+      [
+        2.0,
+        -0.2,
+        4.95
+      ],
+      [
+        3.0,
+        1.0,
+        5.5
+      ]
+    ],
+    "fork_radii": [
+      0.58,
+      0.49,
+      0.4,
+      0.38,
+      0.34,
+      0.29,
+      0.22,
+      0.14,
+      0.025
+    ],
+    "roof_pocket": {
+      "u_width": 3.5,
+      "v_front": -0.56,
+      "v_back": 0.16,
+      "z_bottom": 3.48,
+      "z_top": 3.88
+    }
+  },
+  "railing": {
+    "height": 1.16,
+    "post_width": 0.1,
+    "top_depth": 0.1,
+    "baluster_width": 0.035,
+    "bay_spacing": 0.9,
+    "edge_inset": 0.11,
+    "reference_run": [
+      [
+        -0.45,
+        2.49
+      ],
+      [
+        3.29,
+        2.49
+      ]
+    ],
+    "return_run": [
+      [
+        3.29,
+        2.49
+      ],
+      [
+        3.29,
+        -2.49
+      ]
+    ]
+  },
+  "seat": {
+    "center": [
+      -2.17,
+      -1.15,
+      0
+    ],
+    "width": 0.88,
+    "length": 2.3,
+    "top": 0.34,
+    "cushion_thickness": 0.16
+  },
+  "camera": {
+    "location": [
+      6.8,
+      -8.0,
+      3.15
+    ],
+    "target": [
+      -0.65,
+      0.1,
+      1.95
+    ],
+    "lens_mm": 40,
+    "shift_y": 0,
+    "role": "Review only. Geometry must not depend on camera settings."
+  },
+  "evidence": {
+    "visible": [
+      "Timber deck and open rail",
+      "Round grid window in rose recess above a bench",
+      "Bark at both sides and overhead",
+      "Timber ceiling seen from below",
+      "Cushions and hanging lanterns"
+    ],
+    "inferred": [
+      "Chamfered rear corner",
+      "Continuous hollow trunk behind recess",
+      "Posts, braces and canopy bearing relationships",
+      "Subfloor joists, girders and tree attachment zones"
+    ],
+    "unresolved": [
+      "Exact trunk cross-section and hidden circulation",
+      "Final camera agreement with painted perspective",
+      "Branch growth and bark surface fidelity",
+      "Whole-house connection outside this terrace"
+    ]
+  },
+  "rules": [
+    "One design specification generates the model and measured drawings.",
+    "Deck boards run along Y; joists cross along X; primary girders run along Y. Rear guard is X, return guard is Y.",
+    "Architecture and tree are authored in world/local coordinates, never screen coordinates.",
+    "Changing camera must not change a vertex or piece placement.",
+    "Roof boarding sits on rafters; rafters sit on beams; beams land on posts or braces.",
+    "Bark, ceiling, structure, deck, furniture and vegetation stay independent.",
+    "Window panel is fixed until a separate circulation design establishes a real door.",
+    "Foreground trunk has a deck-edge opening with doubled trimmers and an inner header; furniture remains clear of the fork."
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "revision": "B03",
+  "checks": {
+    "boards_parallel_to_handrail": true,
+    "joists_perpendicular_to_boards": true,
+    "individual_planks": 125,
+    "four_tree_opening_trimmers": true,
+    "tree_opening_header": true,
+    "deck_joist_girder_bearing_levels": true,
+    "alcove_posts_meet_header": true,
+    "camera_does_not_change_geometry": true,
+    "geometry_sha256": "e2408c8ffce5f81954d003ee668efacbf10f304789548e9989fd63015369b5a4",
+    "cushions_move_independently": true,
+    "blossoms_separate_from_deck_and_tree": true,
+    "lantern_sway_changes_transform": true,
+    "lantern_pivot_stays_fixed": true,
+    "petals_have_motion": true,
+    "missing_external_assets": []
+  },
+  "scope": "Geometry, modularity, saved camera and motion checks; not a final visual approval or native runtime test.",
+  "source_reference": "../references/rooftop-source.png",
+  "files": [
+    "rooftop-scene-b03.blend",
+    "B03-assembled.png",
+    "B03-depth.png",
+    "B03-wireframe.png"
+  ],
+  "open_work": [
+    "Organic tree branch transitions and detailed bark fidelity",
+    "More natural distant landscape",
+    "Final art polish",
+    "iPad export, profiling and integration"
+  ]
+}

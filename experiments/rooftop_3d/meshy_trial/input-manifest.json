@@ -1,0 +1,47 @@
+{
+  "input_model": "window-timber-input.glb",
+  "input_sha256": "9c20ef40fd1262db2df8d08ebe33480b65237e554ba65b05b7f91083ee17d783",
+  "origin_blender_z_up": [
+    -1.9900000095367432,
+    2.430000066757202,
+    1.850000023841858
+  ],
+  "source_objects": [
+    "Door jamb structural left",
+    "Door jamb inset left",
+    "Door jamb narrow shadow bead left",
+    "Door jamb structural right",
+    "Door jamb inset right",
+    "Door jamb narrow shadow bead right",
+    "Door lintel structural",
+    "Door lintel inset",
+    "Door sill continuous crossbeam",
+    "Door sill worn upper lip",
+    "Door jamb wooden peg",
+    "Door jamb wooden peg.001",
+    "Door jamb wooden peg.002",
+    "Door jamb wooden peg.003",
+    "Round timber broad surround",
+    "Round timber inner reveal",
+    "Window upright",
+    "Window upright.001",
+    "Window upright.002",
+    "Window crossbar",
+    "Window crossbar.001"
+  ],
+  "triangles": 11628,
+  "bounds_local": {
+    "min": [
+      -1.399999976158142,
+      -0.32300013303756714,
+      -1.8350000381469727
+    ],
+    "max": [
+      1.4000000953674316,
+      0.1749999076128006,
+      1.8650000095367432
+    ]
+  },
+  "scope": "Only window timber; existing rose panel, glass, scene and asset library remain unchanged",
+  "uv": "Blender Smart Project with margins; preserved by retexture request"
+}

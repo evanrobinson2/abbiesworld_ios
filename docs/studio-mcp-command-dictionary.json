@@ -1,0 +1,626 @@
+{
+  "title": "Abbie's World Studio — command dictionary for MCP",
+  "purpose": "Inventory of world/scene operations ChatGPT (or any agent) should eventually call via MCP while conversing with Evan. Target: auto-generate scene data from chat, upsert the live world document, and reflect it in Studio + iPad.",
+  "updated": "2026-09-20",
+  "sources": [
+    "prototypes/studio-mock (editor + /api/*)",
+    "GET|PUT /api/v1/worlds/current (live)",
+    "docs/STUDIO_PRD.md (multi-world list planned)",
+    "HouseholdAPIClient / World2WorldDocument"
+  ],
+  "northStar": {
+    "flow": [
+      "ChatGPT (Zeus / dungeon master) has full editor access to the world API",
+      "Household can create many worlds; player, Studio, and Zeus can set focus (world.set_current)",
+      "Also reads/writes live session JSON (HUD, beat, flags) for real-time household play",
+      "Counters/gates via vars.apply — server calculates; GPT never invents totals",
+      "May propose SwiftUI overlays that mount into World 2 chrome (see GPT_DUNGEON_MASTER_PRIMER.md)",
+      "ChatGPT proposes a scene (name, summary, plate URL or prompt, song idea, places)",
+      "MCP upserts that scene into the focused world document with expectedRevision",
+      "Studio reloads / shows the graph; Save is either the MCP upsert itself or a confirm step",
+      "iPad offers What's new on the new revision; live patches fan out without a full world rewrite"
+    ],
+    "documentOfRecord": "World2WorldDocument — many per household; /worlds/current is the focused one (PRD multi-world)",
+    "liveDocument": "Small session JSON (revisioned patches) per focused worldId — see GPT_DUNGEON_MASTER_PRIMER.md §3",
+    "primer": "docs/GPT_DUNGEON_MASTER_PRIMER.md"
+  },
+  "mcpSuitabilityScale": {
+    "ready": "Callable today as a thin MCP tool over existing HTTP or a small Studio bridge",
+    "shape_ok": "Clear tool shape; needs a thin server or Studio bridge (not exposed as agent API yet)",
+    "ui_only": "Exists in Studio UI; extract to API before MCP",
+    "planned": "Specified in PRD / product intent; not shipped",
+    "unsuitable": "Human/GUI or external product — keep out of MCP or wrap carefully"
+  },
+  "commands": [
+    {
+      "id": "world.get_current",
+      "intent": "Load the live world document the iPad will play",
+      "group": "world",
+      "inputs": {},
+      "outputs": ["World2WorldDocument (scenes, places, songs, actors, props, skin, revision, activeSceneID)"],
+      "status": "live",
+      "transport": "GET /api/v1/worlds/current (Auth0 bearer) via Studio /api/world",
+      "mcp": "ready",
+      "chatgptRole": "Ground truth before proposing edits"
+    },
+    {
+      "id": "world.put_current",
+      "intent": "Upsert the full world document (optimistic concurrency)",
+      "group": "world",
+      "inputs": {
+        "document": "World2WorldDocument fields without revision",
+        "expectedRevision": "int — must match server"
+      },
+      "outputs": ["saved World2WorldDocument with new revision"],
+      "status": "live",
+      "transport": "PUT /api/v1/worlds/current",
+      "mcp": "ready",
+      "chatgptRole": "Commit agent-built graph; server preserves players; 409 → reload and retry",
+      "notes": "Studio collectLiveDocument() is the reference serializer. Never drop players."
+    },
+    {
+      "id": "world.describe",
+      "intent": "Return editor-friendly summary of the loaded world",
+      "group": "world",
+      "inputs": {
+        "worldId": "optional; default current"
+      },
+      "outputs": [
+        "revision",
+        "sceneCount",
+        "activeSceneID",
+        "scenes[{id,name,backgroundAsset,musicTrackID,poiCount}]",
+        "lint notes",
+        "creative trail tail"
+      ],
+      "status": "partial",
+      "transport": "Derived from world.get_current + Studio lintWorld(); not a dedicated endpoint",
+      "mcp": "shape_ok",
+      "chatgptRole": "What ChatGPT should see after every mutate — compact, not the full JSON dump"
+    },
+    {
+      "id": "world.list",
+      "intent": "List worlds for this household (id, name, revision, focused?)",
+      "group": "world",
+      "inputs": {},
+      "outputs": ["[{id, name, revision, updatedAt, isCurrent}]"],
+      "status": "planned",
+      "transport": "GET /api/v1/worlds (PRD)",
+      "mcp": "planned",
+      "chatgptRole": "Pick which world to edit or play; show focus"
+    },
+    {
+      "id": "world.create",
+      "intent": "Create a new empty world for the household (game, Studio, or Zeus)",
+      "group": "world",
+      "inputs": {
+        "name": "string",
+        "setFocus": "bool — if true, also mark as /current (default true for new stories)"
+      },
+      "outputs": ["{id, name, revision, isCurrent}"],
+      "status": "planned",
+      "transport": "POST /api/v1/worlds (PRD); iPad New World / Studio New world both call this",
+      "mcp": "planned",
+      "chatgptRole": "Start a fresh story document — required for DM episodes, not erase-in-place",
+      "notes": "Scaffold may include one placeholder scene. Does not delete other worlds."
+    },
+    {
+      "id": "world.get",
+      "intent": "Load a specific world by id into the agent/editor",
+      "group": "world",
+      "inputs": {
+        "worldId": "string"
+      },
+      "outputs": ["World2WorldDocument"],
+      "status": "planned",
+      "transport": "GET /api/v1/worlds/{id} (PRD); /current remains the focused world",
+      "mcp": "planned",
+      "chatgptRole": "Inspect a non-focused world without stealing focus"
+    },
+    {
+      "id": "world.put",
+      "intent": "Upsert a specific world by id",
+      "group": "world",
+      "inputs": {
+        "worldId": "string",
+        "document": "object",
+        "expectedRevision": "int"
+      },
+      "outputs": ["saved document + revision"],
+      "status": "planned",
+      "transport": "PUT /api/v1/worlds/{id} (PRD)",
+      "mcp": "planned",
+      "chatgptRole": "Save without clobbering another world's document"
+    },
+    {
+      "id": "world.set_current",
+      "intent": "Set household focus: /worlds/current and play/edit target become this worldId",
+      "group": "world",
+      "inputs": {
+        "worldId": "string"
+      },
+      "outputs": ["ok + focused world summarize"],
+      "status": "planned",
+      "transport": "PUT /api/v1/worlds/current/focus or POST …/set-current (PRD); iPad teleporter/picker + Studio load both use this",
+      "mcp": "planned",
+      "chatgptRole": "Point game + Studio at the story you are narrating; session/vars follow this id",
+      "notes": "Player and editor must both be able to set focus. Zeus asks in copilot mode."
+    },
+    {
+      "id": "world.erase_reset",
+      "intent": "Erase live world back to starter scaffold (Studio Erase world)",
+      "group": "world",
+      "inputs": {
+        "confirm": "bool"
+      },
+      "outputs": ["starter document, new revision"],
+      "status": "live",
+      "transport": "Studio eraseOrReset → PUT starterLiveDocument",
+      "mcp": "shape_ok",
+      "chatgptRole": "Destructive; require explicit confirm in chat"
+    },
+    {
+      "id": "editor.load_world",
+      "intent": "Load a world document into the Studio map editor UI",
+      "group": "editor",
+      "inputs": {
+        "worldId": "optional; default current"
+      },
+      "outputs": ["editor state: scenes layout, selection, notice"],
+      "status": "live",
+      "transport": "Studio applyLiveDocument(loadWorld()) — browser only today",
+      "mcp": "ui_only",
+      "chatgptRole": "Needs a Studio bridge (WS/SSE or poll) so MCP mutations refresh the open tab"
+    },
+    {
+      "id": "editor.focus_scene",
+      "intent": "Select a scene on the map / details record",
+      "group": "editor",
+      "inputs": {
+        "sceneId": "string"
+      },
+      "outputs": ["selection + details snapshot"],
+      "status": "live",
+      "transport": "Studio selectScene",
+      "mcp": "ui_only",
+      "chatgptRole": "Optional chrome; agents usually mutate by id without focus"
+    },
+    {
+      "id": "editor.fit_map",
+      "intent": "Fit/arrange/zoom the world graph camera",
+      "group": "editor",
+      "inputs": {
+        "mode": "fit|arrange|zoom"
+      },
+      "outputs": ["camera"],
+      "status": "live",
+      "transport": "Studio UI only",
+      "mcp": "unsuitable",
+      "chatgptRole": "Human chrome — skip for MCP"
+    },
+    {
+      "id": "scene.upsert",
+      "intent": "Create or update a scene on the world document (name, summary, plate, song, flags)",
+      "group": "scene",
+      "inputs": {
+        "sceneId": "string — omit to allocate scene.studioN",
+        "name": "string",
+        "summary": "string",
+        "backgroundAsset": "semantic id OR https URL (Midjourney CDN allowed)",
+        "musicTrackID": "optional song id",
+        "isDeveloperPlaceholder": "bool"
+      },
+      "outputs": ["scene record + world.describe delta"],
+      "status": "partial",
+      "transport": "Studio invent/finishInvent/assignScenePlate then world.put_current; no atomic scene PATCH yet",
+      "mcp": "shape_ok",
+      "chatgptRole": "Primary mutate for chat-authored places. Prefer patch-then-put helper over raw full-doc rewrites."
+    },
+    {
+      "id": "scene.set_background_url",
+      "intent": "Attach a remote plate URL to a scene (the paste-link path)",
+      "group": "scene",
+      "inputs": {
+        "sceneId": "string",
+        "url": "https://…"
+      },
+      "outputs": ["backgroundAsset = url", "preview plate"],
+      "status": "live",
+      "transport": "Studio inventApplyUrl / assignScenePlate; persisted via world.put_current",
+      "mcp": "shape_ok",
+      "chatgptRole": "After Midjourney finishes, agent pastes CDN URL into the scene"
+    },
+    {
+      "id": "scene.set_background_semantic",
+      "intent": "Point a scene at a registry semantic plate (map.*)",
+      "group": "scene",
+      "inputs": {
+        "sceneId": "string",
+        "semantic": "map.home | map.spookyLand | …"
+      },
+      "outputs": ["backgroundAsset"],
+      "status": "live",
+      "transport": "Studio library / plateURL proxy",
+      "mcp": "shape_ok",
+      "chatgptRole": "Use when art is already in the registry"
+    },
+    {
+      "id": "scene.delete",
+      "intent": "Remove a scene and clean travel edges/places",
+      "group": "scene",
+      "inputs": {
+        "sceneId": "string"
+      },
+      "outputs": ["updated document"],
+      "status": "live",
+      "transport": "Studio deleteScene → save",
+      "mcp": "shape_ok",
+      "chatgptRole": "Destructive; confirm"
+    },
+    {
+      "id": "scene.duplicate",
+      "intent": "Copy a scene node (plate + places scaffolding)",
+      "group": "scene",
+      "inputs": {
+        "sceneId": "string"
+      },
+      "outputs": ["new sceneId"],
+      "status": "live",
+      "transport": "Studio copyScene",
+      "mcp": "shape_ok",
+      "chatgptRole": "Variant forks in chat"
+    },
+    {
+      "id": "scene.connect",
+      "intent": "Add travel between two scenes (portal place + edge)",
+      "group": "graph",
+      "inputs": {
+        "fromSceneId": "string",
+        "toSceneId": "string",
+        "oneWay": "bool default false"
+      },
+      "outputs": ["portal place + edge"],
+      "status": "live",
+      "transport": "Studio ensureTravel / addLink",
+      "mcp": "shape_ok",
+      "chatgptRole": "Wire the walk graph the agent invents"
+    },
+    {
+      "id": "scene.disconnect",
+      "intent": "Remove travel between two scenes",
+      "group": "graph",
+      "inputs": {
+        "fromSceneId": "string",
+        "toSceneId": "string"
+      },
+      "outputs": ["updated edges/places"],
+      "status": "live",
+      "transport": "Studio unlink",
+      "mcp": "shape_ok",
+      "chatgptRole": "Fix mistaken connections"
+    },
+    {
+      "id": "place.upsert",
+      "intent": "Add or update a POI/decoration/portal on a scene",
+      "group": "place",
+      "inputs": {
+        "sceneId": "string",
+        "placeId": "optional archetype id",
+        "instanceId": "optional",
+        "name": "string",
+        "behavior": "rooms|decoration|travel:sceneId|known complex behaviors",
+        "exteriorAsset": "semantic or URL",
+        "interiorAsset": "optional",
+        "x": "0..1",
+        "y": "0..1"
+      },
+      "outputs": ["place + poiInstance"],
+      "status": "partial",
+      "transport": "Studio addSceneChild / liveDocument.places; save via world.put_current",
+      "mcp": "shape_ok",
+      "chatgptRole": "Drop story objects ChatGPT invents onto the plate"
+    },
+    {
+      "id": "place.delete",
+      "intent": "Remove a place instance (and unused archetype)",
+      "group": "place",
+      "inputs": {
+        "instanceId": "string"
+      },
+      "outputs": ["updated document"],
+      "status": "live",
+      "transport": "Studio deletePlace",
+      "mcp": "shape_ok",
+      "chatgptRole": "Cleanup"
+    },
+    {
+      "id": "place.set_behavior",
+      "intent": "Bind a place to an existing iPad screen / travel target",
+      "group": "place",
+      "inputs": {
+        "instanceId": "string",
+        "behavior": "string"
+      },
+      "outputs": ["place"],
+      "status": "live",
+      "transport": "Studio details select",
+      "mcp": "shape_ok",
+      "chatgptRole": "New screen kinds still need an iPad build — agent may only pick known behaviors"
+    },
+    {
+      "id": "prompt.inspire_scene",
+      "intent": "Turn plain language into a Midjourney scene-plate prompt",
+      "group": "prompt",
+      "inputs": {
+        "inspiration": "string",
+        "sceneName": "optional",
+        "neighbors": "string[]",
+        "prior": "optional",
+        "revise": "optional"
+      },
+      "outputs": ["midjourney prompt text (stream)"],
+      "status": "live",
+      "transport": "POST /api/inspire (Studio)",
+      "mcp": "ready",
+      "chatgptRole": "Either ChatGPT writes the MJ prompt itself, or calls this for house style rules"
+    },
+    {
+      "id": "prompt.inspire_song",
+      "intent": "Turn plain language into a Suno music prompt (Abbie's World music standard)",
+      "group": "prompt",
+      "inputs": {
+        "inspiration": "string",
+        "sceneName": "optional",
+        "gameFunction": "OVERLAND|…",
+        "revise": "optional"
+      },
+      "outputs": ["suno prompt text"],
+      "status": "live",
+      "transport": "POST /api/compose-music",
+      "mcp": "ready",
+      "chatgptRole": "Song ideation before a human (or later agent) pastes into Suno"
+    },
+    {
+      "id": "prompt.open_midjourney",
+      "intent": "Open Midjourney Imagine and optionally fill the bar via local helper",
+      "group": "prompt",
+      "inputs": {
+        "prompt": "string"
+      },
+      "outputs": ["opened tab / fill result"],
+      "status": "partial",
+      "transport": "Studio inventSendMidjourney + /api/midjourney/fill (+ local :8766 AppleScript)",
+      "mcp": "unsuitable",
+      "chatgptRole": "Human/desktop helper — agent should return the prompt text instead"
+    },
+    {
+      "id": "song.attach",
+      "intent": "Attach a song id to a scene",
+      "group": "song",
+      "inputs": {
+        "sceneId": "string",
+        "songId": "string",
+        "name": "optional",
+        "page": "optional Suno URL"
+      },
+      "outputs": ["musicTrackID on scene; songs[] entry"],
+      "status": "live",
+      "transport": "Studio composer song apply → document.songs",
+      "mcp": "shape_ok",
+      "chatgptRole": "Wire audio after a track exists in inventory"
+    },
+    {
+      "id": "song.ingest_links",
+      "intent": "Parse pasted Suno links into the song inventory",
+      "group": "song",
+      "inputs": {
+        "text": "paste blob"
+      },
+      "outputs": ["added tracks[]"],
+      "status": "live",
+      "transport": "Studio grab-paste / suno pull",
+      "mcp": "shape_ok",
+      "chatgptRole": "Secondary; human usually pastes Suno results"
+    },
+    {
+      "id": "plate.resolve",
+      "intent": "Resolve a semantic plate id to image bytes/URL for preview",
+      "group": "media",
+      "inputs": {
+        "semantic": "string"
+      },
+      "outputs": ["image bytes or redirect"],
+      "status": "live",
+      "transport": "GET /api/plate?semantic=",
+      "mcp": "ready",
+      "chatgptRole": "Preview registry art; remote https plates skip this"
+    },
+    {
+      "id": "world.lint",
+      "intent": "Validate walkability, missing plates/songs, placeholders",
+      "group": "qa",
+      "inputs": {
+        "worldId": "optional"
+      },
+      "outputs": ["[{code, text}]"],
+      "status": "live",
+      "transport": "Studio lintWorld()",
+      "mcp": "shape_ok",
+      "chatgptRole": "Agent self-check before put"
+    },
+    {
+      "id": "creative.append_event",
+      "intent": "Append invent/prompt/sample events to document.creative trail",
+      "group": "creative",
+      "inputs": {
+        "sceneId": "string",
+        "event": "object"
+      },
+      "outputs": ["creative.scenes[id].events"],
+      "status": "live",
+      "transport": "Studio ensureCreative; preserved on PUT if client omits creative",
+      "mcp": "shape_ok",
+      "chatgptRole": "Provenance for chat-authored scenes"
+    },
+    {
+      "id": "auth.whoami",
+      "intent": "Confirm Studio/household identity",
+      "group": "auth",
+      "inputs": {},
+      "outputs": ["household snapshot"],
+      "status": "live",
+      "transport": "GET /api/v1/me",
+      "mcp": "ready",
+      "chatgptRole": "Session sanity; not for children"
+    },
+    {
+      "id": "asset.publish_bytes",
+      "intent": "Upload image/audio/model bytes to Game Asset registry under a semantic key",
+      "group": "media",
+      "inputs": {
+        "semantic": "string",
+        "bytes": "file",
+        "mime": "string"
+      },
+      "outputs": ["asset record + deliveryURL"],
+      "status": "partial",
+      "transport": "Game Asset API v1 (admin key server-side); Studio does not yet publish from the browser for chat plates",
+      "mcp": "planned",
+      "chatgptRole": "Promote a Midjourney CDN URL into a durable registry key before ship, if desired"
+    },
+    {
+      "id": "session.get",
+      "intent": "Read live session JSON (beat, hud, flags, vars, actors)",
+      "group": "session",
+      "inputs": {
+        "worldId": "optional; default current"
+      },
+      "outputs": ["live document + revision"],
+      "status": "planned",
+      "transport": "GET /api/v1/live/{worldId} (planned); until then Studio/iPad local live blob",
+      "mcp": "shape_ok",
+      "chatgptRole": "Orient before narrating; include vars"
+    },
+    {
+      "id": "session.patch",
+      "intent": "Merge-patch live session (hud, beat, flags, soft highlights)",
+      "group": "session",
+      "inputs": {
+        "expectedRevision": "int",
+        "patch": "JSON Merge Patch object"
+      },
+      "outputs": ["live document + revision"],
+      "status": "planned",
+      "transport": "PATCH /api/v1/live/{worldId}",
+      "mcp": "shape_ok",
+      "chatgptRole": "Stage directions; not for counters — use vars.apply"
+    },
+    {
+      "id": "session.event",
+      "intent": "Game reports a play event to Zeus (entered scene, tapped place)",
+      "group": "session",
+      "inputs": {
+        "type": "string",
+        "payload": "object"
+      },
+      "outputs": ["ack; optional suggested vars.apply"],
+      "status": "planned",
+      "transport": "POST /api/v1/live/{worldId}/events",
+      "mcp": "shape_ok",
+      "chatgptRole": "Trigger narrative / vars ops from real play"
+    },
+    {
+      "id": "vars.get",
+      "intent": "Read counters/flags for a scope (session|player|world)",
+      "group": "vars",
+      "inputs": {
+        "scope": "session|player|world",
+        "playerId": "optional when scope=player",
+        "keys": "optional string[] filter"
+      },
+      "outputs": ["{ scope, vars, revision }"],
+      "status": "planned",
+      "transport": "GET /api/v1/vars or embedded in session.get / player.state",
+      "mcp": "shape_ok",
+      "chatgptRole": "Read before gating; never invent totals"
+    },
+    {
+      "id": "vars.apply",
+      "intent": "Apply whitelisted ops and evaluate gates server-side; return authoritative vars + effects",
+      "group": "vars",
+      "inputs": {
+        "scope": "session|player|world (default session; per-op scope override allowed)",
+        "playerId": "optional",
+        "expectedRevision": "int",
+        "ops": "[{op:inc|dec|set|add|min|max|clamp, key, by?, value?, min?, max?, scope?}]",
+        "gates": "optional [{when: tiny expr, then: effect string[]}]"
+      },
+      "outputs": ["{ vars, player?, effects[], revision }"],
+      "status": "planned",
+      "transport": "POST /api/v1/vars/apply — server is calculator; GPT never does mental math",
+      "mcp": "shape_ok",
+      "chatgptRole": "Primary tool for counters, trust meters, story gates. Narrate from response only.",
+      "notes": "Bridge key gems to PlayerState.gems when scope=player. Tiny when forms only: key>=n, flag==true|false, key==string. See GPT_DUNGEON_MASTER_PRIMER.md §4."
+    },
+    {
+      "id": "vars.define",
+      "intent": "Register a var key (type, default, clamp, scope) before first use",
+      "group": "vars",
+      "inputs": {
+        "scope": "session|player|world",
+        "key": "string",
+        "type": "int|bool|string",
+        "default": "any",
+        "min": "optional number",
+        "max": "optional number"
+      },
+      "outputs": ["definition + vars snapshot"],
+      "status": "planned",
+      "transport": "PUT /api/v1/vars/define",
+      "mcp": "shape_ok",
+      "chatgptRole": "Optional schema for story-specific counters"
+    }
+  ],
+  "recommendedMcpV1": {
+    "goal": "Dungeon master: create/focus worlds, full editor, live session R/W, server-side vars",
+    "tools": [
+      "world.list",
+      "world.create",
+      "world.set_current",
+      "world.get_current",
+      "world.describe",
+      "scene.upsert",
+      "scene.set_background_url",
+      "scene.connect",
+      "place.upsert",
+      "world.lint",
+      "world.put_current",
+      "prompt.inspire_scene",
+      "session.get",
+      "session.patch",
+      "session.event",
+      "vars.get",
+      "vars.apply"
+    ],
+    "deferred": [
+      "prompt.open_midjourney",
+      "editor.* chrome",
+      "asset.publish_bytes",
+      "scene.generate_plate (authorized image gen)",
+      "story.evaluate / story.propose_episode",
+      "vars.define"
+    ],
+    "implementationNote": "Game and Studio must call world.create + world.set_current (player/editor focus). Prefer patch helpers that load focused world → mutate one scene/place → put with expectedRevision → return world.describe. Session/vars are scoped to focused worldId. Counters use vars.apply only. UI proposals follow docs/GPT_DUNGEON_MASTER_PRIMER.md §6."
+  },
+  "chatgptInteractionPattern": {
+    "turns": [
+      "Human: new story / paste Midjourney link / kid taps a POI / switch world",
+      "Agent: world.list → world.create? → world.set_current → world.describe + session.get / vars.get",
+      "Human: confirm beat / paste plate URL",
+      "Agent: scene.upsert + scene.set_background_url + optional place.upsert/scene.connect",
+      "Agent: vars.apply (inc/gates) → session HUD effects from response",
+      "Agent: world.lint → world.put_current → return worldId + revision + vars delta",
+      "Human: check Studio map / iPad focus / live HUD"
+    ]
+  }
+}

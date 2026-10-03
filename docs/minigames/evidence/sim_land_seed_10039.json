@@ -1,0 +1,193 @@
+{
+  "ballLevel": 2,
+  "charmStacks": {},
+  "coins": 15,
+  "economy": {
+    "ballUpgradePrice": 25,
+    "goldPegPrevalence": 0.15,
+    "goldPegValue": 6,
+    "healFraction": 0.2,
+    "healPrice": 25,
+    "shopInflation": 1.25
+  },
+  "events": [],
+  "fights": [
+    {
+      "boardPegs": 34,
+      "damageDealt": 0,
+      "damageTaken": 8,
+      "fightSeed": 10039,
+      "foes": [],
+      "goldEarned": 12,
+      "goldPegHits": 2,
+      "hpAfter": 112,
+      "hpBefore": 120,
+      "nodeID": "land0_poi1",
+      "pegsLit": 21,
+      "role": "henchman",
+      "rounds": 6,
+      "title": "L1 POI1 Warmup",
+      "waveAttacker": null,
+      "won": true
+    },
+    {
+      "boardPegs": 34,
+      "damageDealt": 0,
+      "damageTaken": 20,
+      "fightSeed": 10056,
+      "foes": [],
+      "goldEarned": 18,
+      "goldPegHits": 3,
+      "hpAfter": 92,
+      "hpBefore": 112,
+      "nodeID": "land0_poi2",
+      "pegsLit": 29,
+      "role": "henchman",
+      "rounds": 8,
+      "title": "L1 POI2 Battle",
+      "waveAttacker": null,
+      "won": true
+    },
+    {
+      "boardPegs": 34,
+      "damageDealt": 0,
+      "damageTaken": 17,
+      "fightSeed": 10073,
+      "foes": [],
+      "goldEarned": 30,
+      "goldPegHits": 5,
+      "hpAfter": 75,
+      "hpBefore": 92,
+      "nodeID": "land0_poi3",
+      "pegsLit": 34,
+      "role": "henchman",
+      "rounds": 8,
+      "title": "L1 POI3 Hard",
+      "waveAttacker": null,
+      "won": true
+    },
+    {
+      "boardPegs": 34,
+      "damageDealt": 0,
+      "damageTaken": 38,
+      "fightSeed": 10090,
+      "foes": [],
+      "goldEarned": 30,
+      "goldPegHits": 5,
+      "hpAfter": 61,
+      "hpBefore": 99,
+      "nodeID": "land0_boss",
+      "pegsLit": 34,
+      "role": "miniBoss",
+      "rounds": 9,
+      "title": "L1 Boss",
+      "waveAttacker": null,
+      "won": true
+    }
+  ],
+  "finishedAtISO8601": "2026-09-26T13:20:42Z",
+  "gang": null,
+  "kind": "simulation",
+  "mode": "campaign",
+  "notes": "gold economy sim policy=greedy_sustain lands=1 landGold=[90] marbles=[2, 1, 1, 1, 1, 1] dmgMult=1.071",
+  "outcome": "ongoing",
+  "path": [
+    {
+      "from": "start",
+      "kind": "fight",
+      "title": "L1 POI1 Warmup",
+      "to": "land0_poi1"
+    },
+    {
+      "from": "land0_poi1",
+      "kind": "fight",
+      "title": "L1 POI2 Battle",
+      "to": "land0_poi2"
+    },
+    {
+      "from": "land0_poi2",
+      "kind": "fight",
+      "title": "L1 POI3 Hard",
+      "to": "land0_poi3"
+    },
+    {
+      "from": "land0_poi3",
+      "kind": "fight",
+      "title": "L1 Boss",
+      "to": "land0_boss"
+    }
+  ],
+  "playerHP": 85,
+  "playerMaxHP": 120,
+  "schemaVersion": 1,
+  "seed": 10039,
+  "shops": [
+    {
+      "afterNodeID": "land0_poi1",
+      "charmOffers": [
+        "prismBurst",
+        "moonGleam"
+      ],
+      "hpAfter": 112,
+      "hpBefore": 112,
+      "purchases": [],
+      "walletAfter": 12,
+      "walletBefore": 12
+    },
+    {
+      "afterNodeID": "land0_poi2",
+      "charmOffers": [
+        "cycle",
+        "bloom"
+      ],
+      "hpAfter": 92,
+      "hpBefore": 92,
+      "purchases": [
+        {
+          "detail": "marble0 \u2192 Lv2",
+          "pricePaid": 25,
+          "sku": "ballUpgrade"
+        }
+      ],
+      "walletAfter": 5,
+      "walletBefore": 30
+    },
+    {
+      "afterNodeID": "land0_poi3",
+      "charmOffers": [
+        "lullaby",
+        "bloom"
+      ],
+      "hpAfter": 99,
+      "hpBefore": 75,
+      "purchases": [
+        {
+          "detail": "+24 HP",
+          "pricePaid": 25,
+          "sku": "heal"
+        }
+      ],
+      "walletAfter": 10,
+      "walletBefore": 35
+    },
+    {
+      "afterNodeID": "land0_boss",
+      "charmOffers": [
+        "prismBurst",
+        "softPurr"
+      ],
+      "hpAfter": 85,
+      "hpBefore": 61,
+      "purchases": [
+        {
+          "detail": "+24 HP",
+          "pricePaid": 25,
+          "sku": "heal"
+        }
+      ],
+      "walletAfter": 15,
+      "walletBefore": 40
+    }
+  ],
+  "startedAtISO8601": "2026-09-26T13:20:42Z"
+}

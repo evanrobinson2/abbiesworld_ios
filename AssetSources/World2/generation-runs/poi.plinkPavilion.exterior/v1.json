@@ -1,0 +1,8 @@
+{
+  "semanticId": "poi.plinkPavilion.exterior",
+  "version": "v1",
+  "model": "gpt-image-1",
+  "promptPath": "AssetSources/World2/prompts/generated/poi.plinkPavilion.exterior/v1.txt",
+  "sha256": "5058d486b64716827af2d92fcf16dec86a9c6bec6bcb6fead8e75b4773e4d20c",
+  "note": "Lego Citadel Plink Pavilion exterior candidate. Parent qualification still required before Game Asset registry bind."
+}

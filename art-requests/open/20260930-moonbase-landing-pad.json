@@ -1,0 +1,45 @@
+{
+  "id": "20260930-moonbase-landing-pad",
+  "semanticId": "plate.moonBase.landingPad",
+  "status": "open",
+  "priority": "high",
+  "type": "plate",
+  "brief": "Construction-blueprint / chalk-draw intentional plate of moon landing pad: circular pad with dashed rings, rocket stub, crater marks. Labels LANDING PAD (TBD), PAD EDGE. No faces.",
+  "aspect": "3:2",
+  "styleNotes": "Cyan blueprint paper with light cyan grid; white chalk outlines and chalk-dust labels; intentional unfinished construction plan look. No photorealism, no painted textures, no characters, no faces, no Daddy portraits.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/plate.moonBase.landingPad.png",
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/provenance.json",
+    "AssetSources/MoonBase/blueprints-2026-09-30/mcp-registered/provenance.json",
+    "AssetSources/MoonBase/blueprints-2026-09-30/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "Cyan blueprint chalk sketch moon landing pad dashed rings rocket stub craters LANDING PAD (TBD) PAD EDGE construction plan not final no faces"
+  ],
+  "requestedBy": "Art callsign / Moon Base MVP",
+  "createdAt": "2026-09-30T20:06:00-04:00",
+  "requestedAt": "2026-09-30T20:06:00-04:00",
+  "productionIntent": "concept_only",
+  "gameArea": "moonBase",
+  "usage": "Landing pad plate for Moon Base MVP scaffolding",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Local chalk PNG keyed to plate.*; MCP registered under map.moonBase.landingPad (plate.* invalid on MCP)."
+  },
+  "acceptanceCriteria": [
+    "Reads as chalk-on-blueprint construction plan, not polished final",
+    "Pad rings readable as landing target",
+    "No faces / no Daddy portraits"
+  ],
+  "existingAssetSemanticIds": [
+    "map.moonBase.landingPad"
+  ],
+  "fulfillment": {
+    "mcpJobId": "job_muorw6xa_n4z2v5",
+    "registrySemanticId": "map.moonBase.landingPad",
+    "registryRevision": 1,
+    "localChalk": "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/plate.moonBase.landingPad.png",
+    "note": "Stable forever ID plate.moonBase.landingPad; registry bridge map.moonBase.landingPad"
+  }
+}

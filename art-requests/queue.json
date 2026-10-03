@@ -1,0 +1,678 @@
+{
+  "updatedAt": "2026-10-01T00:34:06Z",
+  "sourceOfTruth": "Individual JSON files under art-requests/{open,in_review,fulfilled,wont_fix}/",
+  "artDirectorGuide": "art-requests/ART_DIRECTOR_AGENT.md",
+  "open": [
+    {
+      "id": "20260927-home-ambient-animation",
+      "semanticId": "map.home",
+      "priority": "high",
+      "type": "fx",
+      "path": "art-requests/open/20260927-home-ambient-animation.json"
+    },
+    {
+      "id": "20260927-carnival-basket-toss-map",
+      "semanticId": "poi.carnival.basketToss.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-basket-toss-map.json"
+    },
+    {
+      "id": "20260927-carnival-hungry-bunnies-map",
+      "semanticId": "poi.carnival.hungryBunnies.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-hungry-bunnies-map.json"
+    },
+    {
+      "id": "20260927-carnival-dummy-launch-map",
+      "semanticId": "poi.carnival.dummyLaunch.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-dummy-launch-map.json"
+    },
+    {
+      "id": "20260927-carnival-plinko-map",
+      "semanticId": "poi.carnival.plinko.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-plinko-map.json"
+    },
+    {
+      "id": "20260927-carnival-prize-shop-map",
+      "semanticId": "poi.carnival.prizeShop.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/open/20260927-carnival-prize-shop-map.json"
+    },
+    {
+      "id": "20260927-carnival-basket-toss-kit",
+      "semanticId": "game.carnival.basketToss.kit",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-basket-toss-kit.json"
+    },
+    {
+      "id": "20260927-carnival-hungry-bunnies-kit",
+      "semanticId": "game.carnival.hungryBunnies.kit",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-hungry-bunnies-kit.json"
+    },
+    {
+      "id": "20260927-carnival-dummy-launch-kit",
+      "semanticId": "game.carnival.dummyLaunch.kit",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-dummy-launch-kit.json"
+    },
+    {
+      "id": "20260927-carnival-plinko-kit",
+      "semanticId": "game.carnival.plinko.kit",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-plinko-kit.json"
+    },
+    {
+      "id": "20260927-carnival-prize-shop-interior",
+      "semanticId": "poi.carnival.prizeShop.interior",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260927-carnival-prize-shop-interior.json"
+    },
+    {
+      "id": "20260927-carnival-fresh-prizes",
+      "semanticId": "library.carnival.prizes.v1",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-fresh-prizes.json"
+    },
+    {
+      "id": "20260927-carnival-gift-unwrapping",
+      "semanticId": "fx.carnival.prizeDelivery",
+      "priority": "high",
+      "type": "fx",
+      "path": "art-requests/open/20260927-carnival-gift-unwrapping.json"
+    },
+    {
+      "id": "20260927-carnival-cottage-trophy",
+      "semanticId": "poi.carnival.cottageTrophy",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-carnival-cottage-trophy.json"
+    },
+    {
+      "id": "20260930-moonbase-earth-cockpit",
+      "semanticId": "plate.moonBase.earthCockpit",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-earth-cockpit.json"
+    },
+    {
+      "id": "20260930-moonbase-exterior-map",
+      "semanticId": "map.moonBase.exterior",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-exterior-map.json"
+    },
+    {
+      "id": "20260930-moonbase-landing-pad",
+      "semanticId": "plate.moonBase.landingPad",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-landing-pad.json"
+    },
+    {
+      "id": "20260930-moonbase-rocket-exterior",
+      "semanticId": "poi.moonBase.rocket.exterior",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-rocket-exterior.json"
+    },
+    {
+      "id": "20260930-moonbase-buggy-course",
+      "semanticId": "plate.moonBase.buggyCourse",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-buggy-course.json"
+    },
+    {
+      "id": "20260930-moonbase-circuit-panel",
+      "semanticId": "plate.moonBase.circuitPanel",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-circuit-panel.json"
+    },
+    {
+      "id": "20260930-moonbase-cockpit-side-calm",
+      "semanticId": "character.moonBase.abby.cockpitSideCalm",
+      "priority": "high",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-cockpit-side-calm.json"
+    },
+    {
+      "id": "20260930-moonbase-control-sheet",
+      "semanticId": "pack.moonBase.rocketControls",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260930-moonbase-control-sheet.json"
+    },
+    {
+      "id": "20260930-moonbase-gem-bug-garden",
+      "semanticId": "plate.moonBase.gemBugGarden",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-gem-bug-garden.json"
+    },
+    {
+      "id": "20260930-moonbase-guidance-rocket",
+      "semanticId": "game.moonBase.guidance.rocket",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260930-moonbase-guidance-rocket.json"
+    },
+    {
+      "id": "20260930-moonbase-hands-on-controls",
+      "semanticId": "pack.moonBase.handsOnControls",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260930-moonbase-hands-on-controls.json"
+    },
+    {
+      "id": "20260930-moonbase-helmet-earth-wonder",
+      "semanticId": "character.moonBase.abby.helmetEarthWonder",
+      "priority": "high",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-helmet-earth-wonder.json"
+    },
+    {
+      "id": "20260930-moonbase-quadbike-pack",
+      "semanticId": "pack.moonBase.quadbike",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260930-moonbase-quadbike-pack.json"
+    },
+    {
+      "id": "20260930-moonbase-radar-plate",
+      "semanticId": "plate.moonBase.radar",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-radar-plate.json"
+    },
+    {
+      "id": "20260930-moonbase-reentry-strain",
+      "semanticId": "character.moonBase.abby.reentryStrain",
+      "priority": "high",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-reentry-strain.json"
+    },
+    {
+      "id": "20260927-lizard-henchman-idle",
+      "semanticId": "token.plink.gang.lizard.idle",
+      "priority": "normal",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-lizard-henchman-idle.json"
+    },
+    {
+      "id": "20260927-cottage-stuffies-integration",
+      "semanticId": "pack.abbieCottage.stuffies",
+      "priority": "normal",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-cottage-stuffies-integration.json"
+    },
+    {
+      "id": "20260927-cottage-furniture-integration",
+      "semanticId": "pack.abbieCottage.furniture.sheet4",
+      "priority": "normal",
+      "type": "production_sprite",
+      "path": "art-requests/open/20260927-cottage-furniture-integration.json"
+    },
+    {
+      "id": "20260930-moonbase-countdown-glow",
+      "semanticId": "character.moonBase.abby.countdownGlow",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-countdown-glow.json"
+    },
+    {
+      "id": "20260930-moonbase-crystal-in-glove",
+      "semanticId": "fx.moonBase.crystalInGlove",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20260930-moonbase-crystal-in-glove.json"
+    },
+    {
+      "id": "20260930-moonbase-daddy-wave",
+      "semanticId": "character.moonBase.daddy.waveThroughGlass",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-daddy-wave.json"
+    },
+    {
+      "id": "20260930-moonbase-earth-curvature",
+      "semanticId": "character.moonBase.abby.earthCurvature",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-earth-curvature.json"
+    },
+    {
+      "id": "20260930-moonbase-first-bootprint",
+      "semanticId": "fx.moonBase.firstBootprint",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20260930-moonbase-first-bootprint.json"
+    },
+    {
+      "id": "20260930-moonbase-interior-cutaway",
+      "semanticId": "plate.moonBase.interior",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-interior-cutaway.json"
+    },
+    {
+      "id": "20260930-moonbase-landing-almost",
+      "semanticId": "character.moonBase.abby.landingAlmost",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-landing-almost.json"
+    },
+    {
+      "id": "20260930-moonbase-liftoff-awe",
+      "semanticId": "character.moonBase.abby.liftoffAwe",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-liftoff-awe.json"
+    },
+    {
+      "id": "20260930-moonbase-low-gravity-joy",
+      "semanticId": "character.moonBase.abby.lowGravityJoy",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-low-gravity-joy.json"
+    },
+    {
+      "id": "20260930-moonbase-meteor-in-visor",
+      "semanticId": "character.moonBase.abby.meteorInVisor",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-meteor-in-visor.json"
+    },
+    {
+      "id": "20260930-moonbase-meteor-site",
+      "semanticId": "plate.moonBase.meteorSite",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-meteor-site.json"
+    },
+    {
+      "id": "20260930-moonbase-moon-ahead",
+      "semanticId": "character.moonBase.abby.moonAhead",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-moon-ahead.json"
+    },
+    {
+      "id": "20260930-moonbase-moon-cockpit",
+      "semanticId": "plate.moonBase.moonCockpit",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/open/20260930-moonbase-moon-cockpit.json"
+    },
+    {
+      "id": "20260930-moonbase-planting-hands",
+      "semanticId": "fx.moonBase.plantingSeedling",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20260930-moonbase-planting-hands.json"
+    },
+    {
+      "id": "20260930-moonbase-radar-gasp",
+      "semanticId": "character.moonBase.abby.radarGasp",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-radar-gasp.json"
+    },
+    {
+      "id": "20260930-moonbase-repair-laugh",
+      "semanticId": "character.moonBase.duo.repairLaugh",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-repair-laugh.json"
+    },
+    {
+      "id": "20260930-moonbase-reunion-hug",
+      "semanticId": "character.moonBase.duo.helmetHug",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-reunion-hug.json"
+    },
+    {
+      "id": "20260930-moonbase-sofa-asleep",
+      "semanticId": "character.moonBase.duo.sofaAsleep",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-sofa-asleep.json"
+    },
+    {
+      "id": "20260930-moonbase-wheel-dust",
+      "semanticId": "fx.moonBase.quadbikeDust",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20260930-moonbase-wheel-dust.json"
+    },
+    {
+      "id": "20260930-moonbase-window-home",
+      "semanticId": "character.moonBase.abby.windowHome",
+      "priority": "normal",
+      "type": "character_concept",
+      "path": "art-requests/open/20260930-moonbase-window-home.json"
+    },
+    {
+      "id": "20260926-endless-progress-chrome",
+      "semanticId": "ui.marbleVoyage.endless.progress",
+      "priority": "optional",
+      "type": "ui",
+      "path": "art-requests/open/20260926-endless-progress-chrome.json"
+    }
+  ],
+  "inReview": [
+    {
+      "id": "20260926-climb-sky-dock-tile",
+      "semanticId": "token.marbleVoyage.climb.skyDock",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/in_review/20260926-climb-sky-dock-tile.json"
+    },
+    {
+      "id": "20260927-cottage-decor-multimodal-ingest",
+      "semanticId": "pack.abbieCottage.decor",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/in_review/20260927-cottage-decor-multimodal-ingest.json"
+    },
+    {
+      "id": "20260927-carnival-fairground-map",
+      "semanticId": "poi.carnival.fairground.exterior",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/in_review/20260927-carnival-fairground-map.json"
+    },
+    {
+      "id": "20260926-event-mystery-plate",
+      "semanticId": "plate.marbleVoyage.event.mystery",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/in_review/20260926-event-mystery-plate.json"
+    },
+    {
+      "id": "20260926-event-shrine-plate",
+      "semanticId": "plate.marbleVoyage.event.shrine",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/in_review/20260926-event-shrine-plate.json"
+    },
+    {
+      "id": "20260926-event-treasure-plate",
+      "semanticId": "plate.marbleVoyage.event.treasure",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/in_review/20260926-event-treasure-plate.json"
+    },
+    {
+      "id": "20260926-power-icon-empty-slot",
+      "semanticId": "ui.plink.power.icon.emptySlot",
+      "priority": "normal",
+      "type": "ui_icon",
+      "path": "art-requests/in_review/20260926-power-icon-empty-slot.json"
+    },
+    {
+      "id": "20260926-power-icon-lucky",
+      "semanticId": "ui.plink.power.icon.lucky",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/in_review/20260926-power-icon-lucky.json"
+    },
+    {
+      "id": "20260926-power-icon-portal",
+      "semanticId": "ui.plink.power.icon.portal",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/in_review/20260926-power-icon-portal.json"
+    }
+  ],
+  "fulfilled": [
+    {
+      "id": "20260926-bell-market-shop-interior",
+      "semanticId": "plate.marbleVoyage.shop.bellMarket.interior",
+      "priority": "blocker",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260926-bell-market-shop-interior.json"
+    },
+    {
+      "id": "20260926-armadillo-blocker-idle",
+      "semanticId": "token.plink.gang.armadilloBlocker.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/fulfilled/20260926-armadillo-blocker-idle.json"
+    },
+    {
+      "id": "20260926-bat-divekicker-idle",
+      "semanticId": "token.plink.gang.batDivekicker.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/fulfilled/20260926-bat-divekicker-idle.json"
+    },
+    {
+      "id": "20260926-crab-pincher-idle",
+      "semanticId": "token.plink.gang.crabPincher.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/fulfilled/20260926-crab-pincher-idle.json"
+    },
+    {
+      "id": "20260926-grasshopper-kickboxer-idle",
+      "semanticId": "token.plink.gang.grasshopperKickboxer.idle",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/fulfilled/20260926-grasshopper-kickboxer-idle.json"
+    },
+    {
+      "id": "20260926-climb-mystery-tile",
+      "semanticId": "token.marbleVoyage.climb.mystery",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/fulfilled/20260926-climb-mystery-tile.json"
+    },
+    {
+      "id": "20260926-climb-shrine-tile",
+      "semanticId": "token.marbleVoyage.climb.shrine",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/fulfilled/20260926-climb-shrine-tile.json"
+    },
+    {
+      "id": "20260926-climb-treasure-tile",
+      "semanticId": "token.marbleVoyage.climb.treasure",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/fulfilled/20260926-climb-treasure-tile.json"
+    },
+    {
+      "id": "20260926-power-icon-fire",
+      "semanticId": "ui.plink.power.icon.fire",
+      "priority": "high",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-fire.json"
+    },
+    {
+      "id": "20260926-power-icon-refresh",
+      "semanticId": "ui.plink.power.icon.refresh",
+      "priority": "high",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-refresh.json"
+    },
+    {
+      "id": "20260926-power-icon-split",
+      "semanticId": "ui.plink.power.icon.split",
+      "priority": "high",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-split.json"
+    },
+    {
+      "id": "20260926-power-icon-tilt",
+      "semanticId": "ui.plink.power.icon.tilt",
+      "priority": "high",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-tilt.json"
+    },
+    {
+      "id": "20260926-abbie-regal-portrait",
+      "semanticId": "character.peglin.abbie.happy",
+      "priority": "high",
+      "type": "character_portrait",
+      "path": "art-requests/fulfilled/20260926-abbie-regal-portrait.json"
+    },
+    {
+      "id": "20260927-abbie-cottage-living-room",
+      "semanticId": "poi.abbieTreehouse.interior",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-abbie-cottage-living-room.json"
+    },
+    {
+      "id": "20260927-carnival-hub",
+      "semanticId": "scene.carnival.background",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-carnival-hub.json"
+    },
+    {
+      "id": "20260927-marble-voyage-open-book-board",
+      "semanticId": "plate.marbleVoyage.unlock.openBook",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-open-book-board.json"
+    },
+    {
+      "id": "20260927-marble-voyage-world-book",
+      "semanticId": "ui.marbleVoyage.worldEntry.book",
+      "priority": "normal",
+      "type": "other",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-world-book.json"
+    },
+    {
+      "id": "20260927-marble-voyage-puzzle-choice-1",
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice1",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-puzzle-choice-1.json"
+    },
+    {
+      "id": "20260927-marble-voyage-puzzle-choice-2",
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice2",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-puzzle-choice-2.json"
+    },
+    {
+      "id": "20260927-marble-voyage-puzzle-choice-3",
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice3",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-puzzle-choice-3.json"
+    },
+    {
+      "id": "20260927-marble-voyage-puzzle-choice-4",
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice4",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-marble-voyage-puzzle-choice-4.json"
+    },
+    {
+      "id": "20260927-abbie-cottage-bedroom",
+      "semanticId": "poi.abbieTreehouse.interior.bedroom",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-abbie-cottage-bedroom.json"
+    },
+    {
+      "id": "20260927-abbie-cottage-playroom",
+      "semanticId": "poi.abbieTreehouse.interior.playroom",
+      "priority": "normal",
+      "type": "plate",
+      "path": "art-requests/fulfilled/20260927-abbie-cottage-playroom.json"
+    },
+    {
+      "id": "20260926-power-icon-bounce",
+      "semanticId": "ui.plink.power.icon.bounce",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-bounce.json"
+    },
+    {
+      "id": "20260926-power-icon-bubble",
+      "semanticId": "ui.plink.power.icon.bubble",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-bubble.json"
+    },
+    {
+      "id": "20260926-power-icon-ghost",
+      "semanticId": "ui.plink.power.icon.ghost",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-ghost.json"
+    },
+    {
+      "id": "20260926-power-icon-giant",
+      "semanticId": "ui.plink.power.icon.giant",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-giant.json"
+    },
+    {
+      "id": "20260926-power-icon-magnet",
+      "semanticId": "ui.plink.power.icon.magnet",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-magnet.json"
+    },
+    {
+      "id": "20260926-power-icon-spark",
+      "semanticId": "ui.plink.power.icon.spark",
+      "priority": "low",
+      "type": "ui_icon",
+      "path": "art-requests/fulfilled/20260926-power-icon-spark.json"
+    }
+  ],
+  "wontFix": [
+    {
+      "id": "20260926-climb-scrap-destination-tiles",
+      "semanticId": "token.marbleVoyage.climb.scrapKit",
+      "priority": "high",
+      "type": "map_token",
+      "path": "art-requests/wont_fix/20260926-climb-scrap-destination-tiles.json"
+    },
+    {
+      "id": "20260926-climb-nonfight-token",
+      "semanticId": "token.marbleVoyage.climb.nonFight",
+      "priority": "normal",
+      "type": "decision",
+      "path": "art-requests/wont_fix/20260926-climb-nonfight-token.json"
+    },
+    {
+      "id": "20260926-shop-heal-stall-icon",
+      "semanticId": "ui.marbleVoyage.shop.healBalm",
+      "priority": "optional",
+      "type": "ui_icon",
+      "path": "art-requests/wont_fix/20260926-shop-heal-stall-icon.json"
+    },
+    {
+      "id": "20260926-fight-turbo-meter",
+      "semanticId": "ui.marbleVoyage.fight.turboMeter",
+      "priority": "optional",
+      "type": "decision",
+      "path": "art-requests/wont_fix/20260926-fight-turbo-meter.json"
+    }
+  ]
+}

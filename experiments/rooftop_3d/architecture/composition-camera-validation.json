@@ -1,0 +1,199 @@
+{
+  "geometry_unchanged": true,
+  "geometry_sha256": "5a62dc2a88f1228ae33976bace7cb31241d9f2fd5cbed10d4891b06e7bd4ad48",
+  "camera_projection_verified_in_blender": true,
+  "landmarks": [
+    {
+      "label": "Window centre",
+      "actual_uv": [
+        0.2819807529449463,
+        0.368141770362854
+      ],
+      "target_uv": [
+        0.245,
+        0.367
+      ]
+    },
+    {
+      "label": "Window left",
+      "actual_uv": [
+        0.22539032995700836,
+        0.3693035840988159
+      ],
+      "target_uv": [
+        0.19,
+        0.367
+      ]
+    },
+    {
+      "label": "Window right",
+      "actual_uv": [
+        0.3348582983016968,
+        0.36705613136291504
+      ],
+      "target_uv": [
+        0.3,
+        0.367
+      ]
+    },
+    {
+      "label": "Window top",
+      "actual_uv": [
+        0.2819618284702301,
+        0.2611026167869568
+      ],
+      "target_uv": [
+        0.245,
+        0.301
+      ]
+    },
+    {
+      "label": "Window bottom",
+      "actual_uv": [
+        0.2819996774196625,
+        0.47512131929397583
+      ],
+      "target_uv": [
+        0.245,
+        0.435
+      ]
+    },
+    {
+      "label": "Sill left",
+      "actual_uv": [
+        0.1733555942773819,
+        0.6055178940296173
+      ],
+      "target_uv": [
+        0.15,
+        0.516
+      ]
+    },
+    {
+      "label": "Sill right",
+      "actual_uv": [
+        0.406954824924469,
+        0.5687952935695648
+      ],
+      "target_uv": [
+        0.35,
+        0.518
+      ]
+    },
+    {
+      "label": "Right post foot",
+      "actual_uv": [
+        0.4191754460334778,
+        0.7431979179382324
+      ],
+      "target_uv": [
+        0.382,
+        0.652
+      ]
+    },
+    {
+      "label": "Right post head",
+      "actual_uv": [
+        0.41927221417427063,
+        0.20568037033081055
+      ],
+      "target_uv": [
+        0.378,
+        0.235
+      ]
+    },
+    {
+      "label": "Rail rear start",
+      "actual_uv": [
+        0.44286397099494934,
+        0.5486415326595306
+      ],
+      "target_uv": [
+        0.403,
+        0.517
+      ]
+    },
+    {
+      "label": "Rail rear end",
+      "actual_uv": [
+        0.874200165271759,
+        0.5446383059024811
+      ],
+      "target_uv": [
+        0.943,
+        0.611
+      ]
+    },
+    {
+      "label": "Rail corner foot",
+      "actual_uv": [
+        0.8739668726921082,
+        0.7157036364078522
+      ],
+      "target_uv": [
+        0.938,
+        0.779
+      ]
+    },
+    {
+      "label": "Near cushion front",
+      "actual_uv": [
+        0.2528035044670105,
+        0.7958829402923584
+      ],
+      "target_uv": [
+        0.25,
+        0.84
+      ]
+    },
+    {
+      "label": "Far cushion back",
+      "actual_uv": [
+        0.19716067612171173,
+        0.6523157060146332
+      ],
+      "target_uv": [
+        0.13,
+        0.625
+      ]
+    },
+    {
+      "label": "Foreground trunk low",
+      "actual_uv": [
+        0.07678884267807007,
+        0.8884228765964508
+      ],
+      "target_uv": [
+        0.14,
+        0.87
+      ]
+    },
+    {
+      "label": "Foreground trunk middle",
+      "actual_uv": [
+        0.06202572211623192,
+        0.36115026473999023
+      ],
+      "target_uv": [
+        0.105,
+        0.32
+      ]
+    },
+    {
+      "label": "Overhead living arm",
+      "actual_uv": [
+        0.2782389521598816,
+        -0.07167279720306396
+      ],
+      "target_uv": [
+        0.33,
+        0.055
+      ]
+    }
+  ],
+  "image": "A06-camera-wireframe.png",
+  "source_scene": "treehouse-architecture.blend",
+  "scene": "treehouse-composition-scene.blend",
+  "wire_scene": "treehouse-composition-wireframe.blend",
+  "notes": "Approximate reference camera on fixed architecture. Materials are overridden only for wire review. Organic fork and branch masses remain schematic. No new texture jobs."
+}

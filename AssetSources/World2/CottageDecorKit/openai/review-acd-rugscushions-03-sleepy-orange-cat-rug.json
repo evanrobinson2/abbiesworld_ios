@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-rugscushions-03-sleepy-orange-cat-rug",
+  "latencyMs": 4973,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.98,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Sleeping orange tabby cat sprawled across an irregular oval dark-green rug, with closed eyes, extended forepaws, and a large curled tail.",
+    "suggestedScale": 0.8
+  },
+  "responseId": "chatcmpl-ESoBB96oExQAeMlprfOjBraPgUI7z",
+  "timestamp": "2026-09-27T18:46:26.012251+00:00",
+  "pngSha256": "b08a5edabdfba8c6b88e83559655c1510ee399507bcda1d42aa674de285b3455"
+}

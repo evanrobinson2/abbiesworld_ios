@@ -1,0 +1,95 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/sw-review.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Service-Worker-Allowed", "value": "/" },
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" }
+      ]
+    },
+    {
+      "source": "/manifest.webmanifest",
+      "headers": [
+        { "key": "Content-Type", "value": "application/manifest+json" }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/.well-known/oauth-protected-resource",
+      "destination": "/api/oauth-protected-resource"
+    },
+    {
+      "source": "/.well-known/oauth-protected-resource/(.*)",
+      "destination": "/api/oauth-protected-resource"
+    },
+    {
+      "source": "/.well-known/oauth-authorization-server",
+      "destination": "/api/oauth-authorization-server"
+    },
+    {
+      "source": "/.well-known/openid-configuration",
+      "destination": "/api/oauth-authorization-server"
+    },
+    {
+      "source": "/mcp",
+      "destination": "/api/mcp"
+    },
+    {
+      "source": "/mcp/(.*)",
+      "destination": "/api/mcp"
+    }
+  ],
+  "functions": {
+    "api/inspire.js": {
+      "maxDuration": 60
+    },
+    "api/compose-music.js": {
+      "maxDuration": 60
+    },
+    "api/suggest.js": {
+      "maxDuration": 60
+    },
+    "api/autodecor.js": {
+      "maxDuration": 60
+    },
+    "api/mcp.js": {
+      "maxDuration": 120,
+      "includeFiles": "api/{mcp-primer.md,lib/**}"
+    },
+    "api/asset-jobs.js": {
+      "maxDuration": 120,
+      "includeFiles": "api/lib/**"
+    },
+    "api/asset-library.js": {
+      "maxDuration": 60,
+      "includeFiles": "api/lib/**"
+    },
+    "api/push.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/lib/**"
+    },
+    "api/execution-capacity.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/lib/**"
+    },
+    "api/media-catalog.js": {
+      "includeFiles": "media/**"
+    },
+    "api/plate.js": {
+      "includeFiles": "api/overrides/**"
+    },
+    "api/proof-image.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/lib/**"
+    }
+  }
+}

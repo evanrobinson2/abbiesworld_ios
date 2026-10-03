@@ -1,0 +1,35 @@
+{
+  "status": "review_only",
+  "approved": false,
+  "styleReference": "https://cdn.midjourney.com/9e15f6a1-b72f-4449-bc36-e82d5e74de4d/0_0.jpeg",
+  "characterReference": "https://cdn.midjourney.com/db87b2bb-119a-43f6-9f8c-ebfefec5c3b7/0_3.jpeg",
+  "model": "Midjourney v7",
+  "promptFile": "bramble-prompt.txt",
+  "job": "da57d3d3-5b45-4e94-a014-04846a5569e2",
+  "assets": [
+    {
+      "file": "bramble-0.jpg",
+      "index": 0,
+      "sha256": "9fc1539deb8e5286c7c6cbdb9beaf7940717d14c686ebde9eb67d6ff1a4bab54",
+      "url": "https://cdn.midjourney.com/da57d3d3-5b45-4e94-a014-04846a5569e2/0_0.jpeg"
+    },
+    {
+      "file": "bramble-1.jpg",
+      "index": 1,
+      "sha256": "9d034ed89c8d809394bfd4f7523909fdb33c6674ff2ab6f4522327428f671031",
+      "url": "https://cdn.midjourney.com/da57d3d3-5b45-4e94-a014-04846a5569e2/0_1.jpeg"
+    },
+    {
+      "file": "bramble-2.jpg",
+      "index": 2,
+      "sha256": "9e8c1608246ac15aa06d3cbc5c3d304658c5aa0906ef469a9d314da3b2ad25fe",
+      "url": "https://cdn.midjourney.com/da57d3d3-5b45-4e94-a014-04846a5569e2/0_2.jpeg"
+    },
+    {
+      "file": "bramble-3.jpg",
+      "index": 3,
+      "sha256": "b12f9afadc8b9fe467c24f5720d470cf058b49ba8630b920b71ca56d43cc24ee",
+      "url": "https://cdn.midjourney.com/da57d3d3-5b45-4e94-a014-04846a5569e2/0_3.jpeg"
+    }
+  ]
+}

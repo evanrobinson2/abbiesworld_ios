@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Plink — pink vs blue</title>
+  <style>
+    :root {
+      --ink: #2a1830;
+      --paper: #fff6ea;
+      --pink: #ff6aa8;
+      --pink-deep: #d63d7a;
+      --blue: #5a9dff;
+      --blue-deep: #2f6fd6;
+      --gold: #f4c430;
+      --mint: #7ed9b8;
+      --line: #4a2250;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; height: 100%;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(ellipse at top, #ffe8f2 0%, #fff6ea 45%, #d9f5ec 100%);
+      color: var(--ink);
+      overflow: hidden;
+      touch-action: none;
+      user-select: none;
+    }
+    #app { height: 100%; display: grid; place-items: center; padding: 12px; }
+    .panel {
+      width: min(920px, 100%);
+      height: min(700px, 100%);
+      background: color-mix(in srgb, var(--paper) 92%, white);
+      border: 3px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 18px 40px rgba(42, 24, 48, 0.18);
+      display: flex; flex-direction: column; overflow: hidden;
+    }
+    header {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 10px 14px; border-bottom: 3px solid var(--line);
+      background: linear-gradient(90deg, #ffe0ef, #e8f8ff);
+    }
+    header h1 { margin: 0; font-size: 1.15rem; letter-spacing: 0.02em; }
+    header .hint { font-size: 0.82rem; opacity: 0.75; }
+    header .track { font-size: 0.78rem; font-weight: 700; opacity: 0.7; margin-top: 2px; }
+    button {
+      font: inherit; font-weight: 700; cursor: pointer;
+      border: 2.5px solid var(--line); border-radius: 999px;
+      padding: 8px 14px; background: white; color: var(--ink);
+    }
+    button:hover { transform: translateY(-1px); }
+    button.primary { background: var(--pink); color: white; }
+    button:disabled { opacity: 0.4; cursor: default; transform: none; }
+
+    /* —— Level select —— */
+    #levels { flex: 1; padding: 18px; overflow: auto; }
+    .grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px; margin-top: 14px;
+    }
+    .level-card {
+      text-align: left; padding: 14px; border-radius: 14px;
+      border: 3px solid var(--line); background: white; width: 100%;
+    }
+    .level-card .who { display: flex; align-items: center; gap: 10px; margin: 8px 0; }
+    .level-card small { opacity: 0.7; }
+
+    /* —— Battle —— */
+    #battle { flex: 1; display: none; flex-direction: column; min-height: 0; }
+    .fighters {
+      display: grid; grid-template-columns: 1fr auto 1fr;
+      align-items: end; gap: 8px; padding: 10px 16px 6px;
+      border-bottom: 2px dashed color-mix(in srgb, var(--line) 35%, transparent);
+      min-height: 92px;
+    }
+    .fighter { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .fighter.blue { align-items: flex-end; }
+    .fighter.pink { align-items: flex-start; }
+    .name { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; }
+    .hearts { display: flex; gap: 3px; flex-wrap: wrap; max-width: 160px; }
+    .heart {
+      width: 12px; height: 12px; image-rendering: pixelated;
+      background: currentColor;
+      clip-path: polygon(50% 100%, 0 35%, 18% 0, 50% 18%, 82% 0, 100% 35%);
+    }
+    .fighter.pink { color: var(--pink-deep); }
+    .fighter.blue { color: var(--blue-deep); }
+    .vs { font-weight: 900; opacity: 0.45; padding-bottom: 28px; }
+    .sprite {
+      width: 48px; height: 48px; image-rendering: pixelated;
+      transition: transform 0.12s ease, filter 0.12s ease;
+    }
+    .sprite.hit { transform: translateX(6px) scale(1.05); filter: brightness(1.4); }
+    .sprite.hurt { transform: translateX(-6px); filter: saturate(0.4); }
+    .status {
+      text-align: center; font-size: 0.92rem; font-weight: 700;
+      padding: 4px 12px 8px; min-height: 1.6em;
+    }
+
+    .stage-wrap { flex: 1; position: relative; min-height: 0; margin: 0 12px 12px; }
+    canvas {
+      width: 100%; height: 100%; display: block;
+      border: 3px solid var(--line); border-radius: 14px;
+      background:
+        linear-gradient(180deg, #b8ecff 0%, #ffe9f4 38%, #c8f5d8 100%);
+      cursor: crosshair; touch-action: none;
+    }
+    .banner {
+      position: absolute; inset: 0; display: none; place-items: center;
+      background: rgba(42, 24, 48, 0.45); border-radius: 14px;
+    }
+    .banner.show { display: grid; }
+    .banner .card {
+      background: white; border: 3px solid var(--line); border-radius: 16px;
+      padding: 18px 22px; text-align: center; max-width: 280px;
+    }
+    .banner h2 { margin: 0 0 8px; }
+    .banner p { margin: 0 0 14px; }
+    .row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div class="panel">
+      <header>
+        <div>
+          <h1>Plink</h1>
+          <div class="hint">Aim · drop · bounce · pink beats blue</div>
+          <div class="track" id="track-label">♪ Abbie's World</div>
+        </div>
+        <button type="button" id="btn-levels" hidden>Levels</button>
+      </header>
+      <audio id="plink-audio" preload="auto"></audio>
+
+      <section id="levels">
+        <p>Pick a board. Each shot hurts Blue. Blue hits back when the dewdrop lands. Clear Blue’s hearts to win.</p>
+        <div class="grid" id="level-grid"></div>
+      </section>
+
+      <section id="battle">
+        <div class="fighters">
+          <div class="fighter pink">
+            <div class="name">You · Pink</div>
+            <div class="hearts" id="pink-hearts"></div>
+            <svg class="sprite" id="pink-sprite" viewBox="0 0 16 16" aria-hidden="true">
+              <rect width="16" height="16" fill="transparent"/>
+              <rect x="4" y="2" width="8" height="6" fill="#ff6aa8"/>
+              <rect x="5" y="3" width="2" height="2" fill="#2a1830"/>
+              <rect x="9" y="3" width="2" height="2" fill="#2a1830"/>
+              <rect x="6" y="6" width="4" height="1" fill="#d63d7a"/>
+              <rect x="3" y="8" width="10" height="5" fill="#ff8fbf"/>
+              <rect x="2" y="9" width="2" height="3" fill="#ff6aa8"/>
+              <rect x="12" y="9" width="2" height="3" fill="#ff6aa8"/>
+              <rect x="4" y="13" width="3" height="2" fill="#d63d7a"/>
+              <rect x="9" y="13" width="3" height="2" fill="#d63d7a"/>
+            </svg>
+          </div>
+          <div class="vs">VS</div>
+          <div class="fighter blue">
+            <div class="name">Blue</div>
+            <div class="hearts" id="blue-hearts"></div>
+            <svg class="sprite" id="blue-sprite" viewBox="0 0 16 16" aria-hidden="true">
+              <rect width="16" height="16" fill="transparent"/>
+              <rect x="4" y="2" width="8" height="6" fill="#5a9dff"/>
+              <rect x="5" y="3" width="2" height="2" fill="#2a1830"/>
+              <rect x="9" y="3" width="2" height="2" fill="#2a1830"/>
+              <rect x="6" y="6" width="4" height="1" fill="#2f6fd6"/>
+              <rect x="3" y="8" width="10" height="5" fill="#8bb8ff"/>
+              <rect x="2" y="9" width="2" height="3" fill="#5a9dff"/>
+              <rect x="12" y="9" width="2" height="3" fill="#5a9dff"/>
+              <rect x="4" y="13" width="3" height="2" fill="#2f6fd6"/>
+              <rect x="9" y="13" width="3" height="2" fill="#2f6fd6"/>
+            </svg>
+          </div>
+        </div>
+        <div class="status" id="status">Drag to aim. Release to drop.</div>
+        <div class="stage-wrap">
+          <canvas id="board" width="720" height="520"></canvas>
+          <div class="banner" id="banner">
+            <div class="card">
+              <h2 id="banner-title">Win</h2>
+              <p id="banner-body"></p>
+              <div class="row">
+                <button type="button" class="primary" id="btn-again">Again</button>
+                <button type="button" id="btn-back">Levels</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <script>
+    const PHYS = {
+      ballR: 0.022,
+      pegR: 0.028,
+      gravity: 1.55,
+      restitution: 0.78,
+      airDrag: 0.12,
+      maxSpeed: 1.65,
+      launch: 1.05,
+      fountain: { x: 0.5, y: 0.08 },
+      floorY: 0.92,
+      dt: 1 / 120,
+      playRate: 0.32,
+    };
+
+    const LEVELS = [
+      {
+        id: "nursery",
+        name: "Dewdrop Nursery",
+        blurb: "Warm-up. Soft Blue.",
+        playerHp: 8,
+        enemyHp: 10,
+        enemyAtk: 1,
+        pegs: [
+          ...ring(0.5, 0.38, 0.16, 6, "seed"),
+          { x: 0.35, y: 0.55, kind: "glow" },
+          { x: 0.65, y: 0.55, kind: "glow" },
+          { x: 0.5, y: 0.68, kind: "seed" },
+        ],
+      },
+      {
+        id: "lattice",
+        name: "Berry Lattice",
+        blurb: "Two columns. Aim between.",
+        playerHp: 8,
+        enemyHp: 14,
+        enemyAtk: 1,
+        pegs: [
+          ...column(0.32, 0.28, 0.1, 5, "seed"),
+          ...column(0.68, 0.28, 0.1, 5, "seed"),
+          { x: 0.5, y: 0.42, kind: "glow" },
+          { x: 0.5, y: 0.58, kind: "glow" },
+          { x: 0.5, y: 0.74, kind: "glow" },
+        ],
+      },
+      {
+        id: "arch",
+        name: "Rainbow Arch",
+        blurb: "Curve of glow seeds.",
+        playerHp: 9,
+        enemyHp: 16,
+        enemyAtk: 2,
+        pegs: [
+          ...arc(0.5, 0.55, 0.28, -Math.PI * 0.85, Math.PI * 0.85, 9, "glow"),
+          ...arc(0.5, 0.55, 0.14, -Math.PI * 0.7, Math.PI * 0.7, 5, "seed"),
+          { x: 0.5, y: 0.55, kind: "bomb" },
+        ],
+      },
+      {
+        id: "mill",
+        name: "Marble Mill",
+        blurb: "Busy board. Blue hits harder.",
+        playerHp: 10,
+        enemyHp: 20,
+        enemyAtk: 2,
+        pegs: [
+          ...grid(0.22, 0.28, 0.14, 0.12, 5, 4, (c, r) => (c + r) % 2 ? "glow" : "seed"),
+          { x: 0.5, y: 0.78, kind: "bomb" },
+        ],
+      },
+      {
+        id: "finale",
+        name: "Blue’s Keep",
+        blurb: "Tough Blue. Find the bombs.",
+        playerHp: 12,
+        enemyHp: 28,
+        enemyAtk: 3,
+        pegs: [
+          ...ring(0.5, 0.4, 0.22, 10, "seed"),
+          ...ring(0.5, 0.4, 0.12, 6, "glow"),
+          { x: 0.5, y: 0.4, kind: "bomb" },
+          { x: 0.28, y: 0.7, kind: "bomb" },
+          { x: 0.72, y: 0.7, kind: "bomb" },
+          { x: 0.5, y: 0.78, kind: "glow" },
+        ],
+      },
+    ];
+
+    function ring(cx, cy, r, n, kind) {
+      return Array.from({ length: n }, (_, i) => {
+        const a = (i / n) * Math.PI * 2 - Math.PI / 2;
+        return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r * 0.85, kind };
+      });
+    }
+    function column(x, y0, step, n, kind) {
+      return Array.from({ length: n }, (_, i) => ({ x, y: y0 + i * step, kind }));
+    }
+    function arc(cx, cy, r, a0, a1, n, kind) {
+      return Array.from({ length: n }, (_, i) => {
+        const t = n === 1 ? 0.5 : i / (n - 1);
+        const a = a0 + (a1 - a0) * t;
+        return { x: cx + Math.cos(a) * r, y: cy + Math.sin(a) * r * 0.75, kind };
+      });
+    }
+    function grid(x0, y0, dx, dy, cols, rows, kindFn) {
+      const out = [];
+      for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+          out.push({ x: x0 + c * dx, y: y0 + r * dy, kind: kindFn(c, r) });
+        }
+      }
+      return out;
+    }
+
+    const DAMAGE = { seed: 1, glow: 2, bomb: 4 };
+
+    const els = {
+      levels: document.getElementById("levels"),
+      battle: document.getElementById("battle"),
+      grid: document.getElementById("level-grid"),
+      canvas: document.getElementById("board"),
+      status: document.getElementById("status"),
+      pinkHearts: document.getElementById("pink-hearts"),
+      blueHearts: document.getElementById("blue-hearts"),
+      pinkSprite: document.getElementById("pink-sprite"),
+      blueSprite: document.getElementById("blue-sprite"),
+      banner: document.getElementById("banner"),
+      bannerTitle: document.getElementById("banner-title"),
+      bannerBody: document.getElementById("banner-body"),
+      btnLevels: document.getElementById("btn-levels"),
+      btnAgain: document.getElementById("btn-again"),
+      btnBack: document.getElementById("btn-back"),
+    };
+    const ctx = els.canvas.getContext("2d");
+
+    let state = null;
+    let aim = 0;
+    let dragging = false;
+    let lastTs = 0;
+    let raf = 0;
+
+    function clonePegs(level) {
+      return level.pegs.map((p, i) => ({
+        id: i,
+        x: p.x,
+        y: p.y,
+        kind: p.kind,
+        alive: true,
+        hit: false,
+      }));
+    }
+
+    const MUSIC = {
+      safari: {
+        id: "abbies-world",
+        title: "Abbie's World",
+        src: "music/plink_abbies_world.mp3",
+      },
+      board: [
+        {
+          id: "cheerful-khorovod",
+          title: "Cheerful Round Dance",
+          src: "music/plink_cheerful_khorovod.mp3",
+        },
+        {
+          id: "electronic-folk-dance",
+          title: "Electronic Folk Dance",
+          src: "music/plink_electronic_folk_dance.mp3",
+        },
+      ],
+    };
+    const audioEl = document.getElementById("plink-audio");
+    const trackLabel = document.getElementById("track-label");
+    let boardTrackIndex = 0;
+    let musicMode = "safari";
+
+    function setTrackLabel(title) {
+      if (trackLabel) trackLabel.textContent = "♪ " + title;
+    }
+
+    function playSafariMusic() {
+      musicMode = "safari";
+      audioEl.loop = true;
+      audioEl.src = MUSIC.safari.src;
+      setTrackLabel(MUSIC.safari.title);
+      audioEl.play().catch(() => {});
+    }
+
+    function playBoardMusic() {
+      musicMode = "board";
+      const track = MUSIC.board[boardTrackIndex % MUSIC.board.length];
+      audioEl.loop = false;
+      audioEl.src = track.src;
+      setTrackLabel(track.title);
+      audioEl.play().catch(() => {});
+    }
+
+    audioEl.addEventListener("ended", () => {
+      if (musicMode !== "board") return;
+      boardTrackIndex = (boardTrackIndex + 1) % MUSIC.board.length;
+      playBoardMusic();
+    });
+
+    function showLevels() {
+      cancelAnimationFrame(raf);
+      state = null;
+      els.levels.style.display = "block";
+      els.battle.style.display = "none";
+      els.btnLevels.hidden = true;
+      els.banner.classList.remove("show");
+      playSafariMusic();
+    }
+
+    function startLevel(level) {
+      state = {
+        level,
+        pegs: clonePegs(level),
+        pinkHp: level.playerHp,
+        blueHp: level.enemyHp,
+        phase: "aim", // aim | falling | resolve | over
+        ball: null,
+        status: "Drag to aim. Release to drop.",
+        outcome: null,
+      };
+      aim = 0;
+      els.levels.style.display = "none";
+      els.battle.style.display = "flex";
+      els.btnLevels.hidden = false;
+      els.banner.classList.remove("show");
+      paintHud();
+      els.status.textContent = state.status;
+      playBoardMusic();
+      lastTs = performance.now();
+      loop(lastTs);
+    }
+
+    function paintHud() {
+      if (!state) return;
+      const hearts = (n, max, el) => {
+        el.innerHTML = "";
+        for (let i = 0; i < max; i++) {
+          const h = document.createElement("div");
+          h.className = "heart";
+          h.style.opacity = i < n ? "1" : "0.18";
+          el.appendChild(h);
+        }
+      };
+      hearts(state.pinkHp, state.level.playerHp, els.pinkHearts);
+      hearts(state.blueHp, state.level.enemyHp, els.blueHearts);
+    }
+
+    function flash(who, cls) {
+      const node = who === "pink" ? els.pinkSprite : els.blueSprite;
+      node.classList.remove("hit", "hurt");
+      void node.offsetWidth;
+      node.classList.add(cls);
+      setTimeout(() => node.classList.remove(cls), 180);
+    }
+
+    function clampAim(a) {
+      return Math.max(-1.15, Math.min(1.15, a));
+    }
+
+    function pegColor(kind, hit) {
+      const base = kind === "glow" ? "#f4c430" : kind === "bomb" ? "#3d8b4f" : "#ff6aa8";
+      return hit ? base + "55" : base;
+    }
+
+    function draw() {
+      const w = els.canvas.width;
+      const h = els.canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      // soft hills
+      ctx.fillStyle = "rgba(255,255,255,0.35)";
+      ctx.beginPath();
+      ctx.ellipse(w * 0.2, h * 0.18, 70, 28, 0, 0, Math.PI * 2);
+      ctx.ellipse(w * 0.75, h * 0.14, 90, 32, 0, 0, Math.PI * 2);
+      ctx.fill();
+
+      // floor bowls
+      const bowls = [
+        { x: 0.18, label: "" },
+        { x: 0.38, label: "" },
+        { x: 0.62, label: "" },
+        { x: 0.82, label: "" },
+      ];
+      bowls.forEach((b) => {
+        const bw = w * 0.14;
+        const bx = b.x * w - bw / 2;
+        const by = PHYS.floorY * h;
+        ctx.fillStyle = "rgba(255,255,255,0.72)";
+        roundRect(bx, by, bw, h - by - 8, 12);
+        ctx.fill();
+        ctx.strokeStyle = "#4a2250";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      });
+
+      if (!state) return;
+
+      // pegs (SVG-ish circles with rim)
+      for (const peg of state.pegs) {
+        if (!peg.alive) continue;
+        const px = peg.x * w;
+        const py = peg.y * h;
+        const r = Math.max(10, PHYS.pegR * Math.min(w, h));
+        ctx.beginPath();
+        ctx.arc(px, py, r, 0, Math.PI * 2);
+        ctx.fillStyle = pegColor(peg.kind, peg.hit);
+        ctx.fill();
+        ctx.strokeStyle = "#4a2250";
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+        if (peg.kind === "bomb") {
+          ctx.fillStyle = "#fff";
+          ctx.font = `bold ${Math.floor(r)}px sans-serif`;
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText("!", px, py + 1);
+        } else if (peg.kind === "glow") {
+          ctx.fillStyle = "rgba(255,255,255,0.7)";
+          ctx.beginPath();
+          ctx.arc(px - r * 0.25, py - r * 0.25, r * 0.28, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // fountain
+      const fx = PHYS.fountain.x * w;
+      const fy = PHYS.fountain.y * h;
+      ctx.fillStyle = "#d63d7a";
+      ctx.beginPath();
+      ctx.ellipse(fx, fy + 8, 22, 10, 0, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = "#ff6aa8";
+      ctx.beginPath();
+      ctx.arc(fx, fy, 14, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.strokeStyle = "#4a2250";
+      ctx.lineWidth = 2.5;
+      ctx.stroke();
+
+      if (state.phase === "aim") {
+        const len = 70;
+        ctx.strokeStyle = "rgba(74,34,80,0.7)";
+        ctx.lineWidth = 3;
+        ctx.setLineDash([6, 6]);
+        ctx.beginPath();
+        ctx.moveTo(fx, fy);
+        ctx.lineTo(fx + Math.sin(aim) * len, fy + Math.cos(aim) * len);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      }
+
+      const ball = state.ball || {
+        x: PHYS.fountain.x,
+        y: PHYS.fountain.y,
+        alive: state.phase !== "falling",
+      };
+      if (ball.alive !== false || state.phase === "aim") {
+        const br = Math.max(12, PHYS.ballR * Math.min(w, h) * 2.2);
+        const bx = (state.phase === "falling" ? state.ball.x : PHYS.fountain.x) * w;
+        const by = (state.phase === "falling" ? state.ball.y : PHYS.fountain.y) * h;
+        const grd = ctx.createRadialGradient(bx - br * 0.3, by - br * 0.3, 2, bx, by, br);
+        grd.addColorStop(0, "#c8f7ff");
+        grd.addColorStop(1, "#3eb8c8");
+        ctx.beginPath();
+        ctx.arc(bx, by, br, 0, Math.PI * 2);
+        ctx.fillStyle = grd;
+        ctx.fill();
+        ctx.strokeStyle = "#4a2250";
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+      }
+    }
+
+    function roundRect(x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function fire() {
+      if (!state || state.phase !== "aim") return;
+      const a = clampAim(aim);
+      state.ball = {
+        x: PHYS.fountain.x,
+        y: PHYS.fountain.y,
+        vx: Math.sin(a) * PHYS.launch,
+        vy: Math.cos(a) * PHYS.launch,
+        alive: true,
+      };
+      state.phase = "falling";
+      state.status = "The dewdrop is falling…";
+      els.status.textContent = state.status;
+    }
+
+    function stepBall(dt) {
+      const b = state.ball;
+      if (!b?.alive) return;
+      const drag = Math.max(0, 1 - PHYS.airDrag * dt);
+      b.vy += PHYS.gravity * dt;
+      b.vx *= drag;
+      b.vy *= drag;
+      const speed = Math.hypot(b.vx, b.vy);
+      if (speed > PHYS.maxSpeed) {
+        b.vx *= PHYS.maxSpeed / speed;
+        b.vy *= PHYS.maxSpeed / speed;
+      }
+      b.x += b.vx * dt;
+      b.y += b.vy * dt;
+
+      const r = PHYS.ballR;
+      if (b.x < r) { b.x = r; b.vx = Math.abs(b.vx) * PHYS.restitution; }
+      else if (b.x > 1 - r) { b.x = 1 - r; b.vx = -Math.abs(b.vx) * PHYS.restitution; }
+      if (b.y < r) { b.y = r; b.vy = Math.abs(b.vy) * PHYS.restitution; }
+
+      const minD = r + PHYS.pegR;
+      for (const peg of state.pegs) {
+        if (!peg.alive) continue;
+        const dx = b.x - peg.x;
+        const dy = b.y - peg.y;
+        const dist = Math.hypot(dx, dy);
+        if (dist <= 0 || dist >= minD) continue;
+        const nx = dx / dist;
+        const ny = dy / dist;
+        b.x = peg.x + nx * minD;
+        b.y = peg.y + ny * minD;
+        const dot = b.vx * nx + b.vy * ny;
+        b.vx = (b.vx - 2 * dot * nx) * PHYS.restitution;
+        b.vy = (b.vy - 2 * dot * ny) * PHYS.restitution;
+        peg.hit = true;
+        if (Math.abs(b.vx) < 0.08) b.vx += b.x >= peg.x ? 0.12 : -0.12;
+      }
+
+      if ((b.y + r >= PHYS.floorY && b.vy > 0) || b.y > 1.08) {
+        b.alive = false;
+        settleShot();
+      }
+    }
+
+    function settleShot() {
+      let dmg = 0;
+      let hits = 0;
+      for (const peg of state.pegs) {
+        if (!peg.hit || !peg.alive) continue;
+        peg.alive = false;
+        peg.hit = false;
+        hits += 1;
+        dmg += DAMAGE[peg.kind] || 1;
+      }
+
+      state.blueHp = Math.max(0, state.blueHp - dmg);
+      paintHud();
+      if (dmg > 0) flash("blue", "hurt");
+
+      let msg = dmg > 0
+        ? `Pink hit for ${dmg}! (${hits} seeds)`
+        : "No seeds. Blue shrugs.";
+
+      if (state.blueHp <= 0) {
+        endBattle("win", `${state.level.name} cleared! Blue is out.`);
+        return;
+      }
+
+      // Blue strikes back
+      state.pinkHp = Math.max(0, state.pinkHp - state.level.enemyAtk);
+      paintHud();
+      flash("pink", "hurt");
+      flash("blue", "hit");
+      msg += ` Blue hits back for ${state.level.enemyAtk}.`;
+
+      if (state.pinkHp <= 0) {
+        endBattle("lose", "Pink is out. Try another aim — or another board.");
+        return;
+      }
+
+      // Board refill if emptied but fight continues (Peglin-ish)
+      if (state.pegs.every((p) => !p.alive)) {
+        state.pegs = clonePegs(state.level);
+        msg += " Board resets!";
+      }
+
+      state.phase = "aim";
+      state.ball = null;
+      state.status = msg + ` Pink ${state.pinkHp} · Blue ${state.blueHp}`;
+      els.status.textContent = state.status;
+    }
+
+    function endBattle(outcome, body) {
+      state.phase = "over";
+      state.outcome = outcome;
+      state.ball = null;
+      state.status = body;
+      els.status.textContent = body;
+      els.bannerTitle.textContent = outcome === "win" ? "You win!" : "Blue wins";
+      els.bannerBody.textContent = body;
+      els.banner.classList.add("show");
+    }
+
+    function loop(ts) {
+      if (!state || state.phase === "over") {
+        draw();
+        return;
+      }
+      const elapsed = Math.min(0.05, (ts - lastTs) / 1000);
+      lastTs = ts;
+      if (state.phase === "falling") {
+        let left = elapsed * PHYS.playRate;
+        while (left >= PHYS.dt && state.ball?.alive) {
+          left -= PHYS.dt;
+          stepBall(PHYS.dt);
+        }
+      }
+      draw();
+      raf = requestAnimationFrame(loop);
+    }
+
+    function pointerToAim(clientX, clientY) {
+      const rect = els.canvas.getBoundingClientRect();
+      const x = (clientX - rect.left) / rect.width;
+      const y = (clientY - rect.top) / rect.height;
+      return clampAim(Math.atan2(x - PHYS.fountain.x, y - PHYS.fountain.y));
+    }
+
+    els.canvas.addEventListener("pointerdown", (e) => {
+      if (!state || state.phase !== "aim") return;
+      dragging = true;
+      els.canvas.setPointerCapture(e.pointerId);
+      aim = pointerToAim(e.clientX, e.clientY);
+      draw();
+    });
+    els.canvas.addEventListener("pointermove", (e) => {
+      if (!dragging || !state || state.phase !== "aim") return;
+      aim = pointerToAim(e.clientX, e.clientY);
+      draw();
+    });
+    els.canvas.addEventListener("pointerup", (e) => {
+      if (!dragging) return;
+      dragging = false;
+      fire();
+    });
+    els.canvas.addEventListener("pointercancel", () => { dragging = false; });
+
+    els.btnLevels.addEventListener("click", showLevels);
+    els.btnBack.addEventListener("click", showLevels);
+    els.btnAgain.addEventListener("click", () => {
+      if (state?.level) startLevel(state.level);
+    });
+
+    // Unlock audio on first gesture (browser autoplay policy).
+    const unlockOnce = () => {
+      playSafariMusic();
+      window.removeEventListener("pointerdown", unlockOnce);
+    };
+    window.addEventListener("pointerdown", unlockOnce, { once: true });
+    playSafariMusic();
+
+    // Build level cards
+    LEVELS.forEach((level) => {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "level-card";
+      btn.innerHTML = `
+        <strong>${level.name}</strong>
+        <div class="who">
+          <svg width="28" height="28" viewBox="0 0 16 16"><rect x="4" y="2" width="8" height="6" fill="#ff6aa8"/><rect x="3" y="8" width="10" height="5" fill="#ff8fbf"/></svg>
+          <span>vs</span>
+          <svg width="28" height="28" viewBox="0 0 16 16"><rect x="4" y="2" width="8" height="6" fill="#5a9dff"/><rect x="3" y="8" width="10" height="5" fill="#8bb8ff"/></svg>
+        </div>
+        <small>${level.blurb}<br/>Blue ${level.enemyHp}♥ · hits ${level.enemyAtk}</small>
+      `;
+      btn.addEventListener("click", () => startLevel(level));
+      els.grid.appendChild(btn);
+    });
+
+    draw();
+  </script>
+</body>
+</html>

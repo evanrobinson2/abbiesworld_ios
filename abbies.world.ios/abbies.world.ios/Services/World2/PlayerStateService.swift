@@ -32,6 +32,34 @@ class PlayerStateService: ObservableObject {
     private let legacyStateKey = "world2_player_state"
     private var cancellables = Set<AnyCancellable>()
     
+    static let fairUnlockMilestone = "carnival.marbleTeam.unlocked.v1"
+
+    var isFairUnlocked: Bool {
+        currentPlayer?.progression.achievedMilestones.contains(Self.fairUnlockMilestone) == true
+    }
+
+    func unlockFair(playerID: PlayerId) {
+        guard var player = currentPlayer, player.playerId == playerID,
+              !player.progression.achievedMilestones.contains(Self.fairUnlockMilestone) else { return }
+        player.progression.achievedMilestones.append(Self.fairUnlockMilestone)
+        currentPlayer = player
+        saveLocalState()
+    }
+
+    static let voyageOpeningMilestone = "marbleVoyage.opening.watched.v1"
+
+    func hasWatchedVoyageOpening() -> Bool {
+        currentPlayer?.progression.achievedMilestones.contains(Self.voyageOpeningMilestone) == true
+    }
+
+    func markVoyageOpeningWatched(playerID: PlayerId) {
+        guard var player = currentPlayer, player.playerId == playerID else { return }
+        guard !player.progression.achievedMilestones.contains(Self.voyageOpeningMilestone) else { return }
+        player.progression.achievedMilestones.append(Self.voyageOpeningMilestone)
+        currentPlayer = player
+        saveLocalState()
+    }
+
     @Published private(set) var currentPlayer: PlayerState?
     @Published private(set) var isLoading = false
     @Published private(set) var isSyncing = false
@@ -51,6 +79,19 @@ class PlayerStateService: ObservableObject {
     }
     var unplacedFurnitureInventory: [DecorationInstance] {
         currentPlayer?.unplacedFurnitureInventory ?? []
+    }
+
+    /// Furniture already stamped onto a decorate surface (treehouse room / scene / POI).
+    func placedFurniture(onSurface surfaceKey: String) -> [DecorationInstance] {
+        guard let player = currentPlayer else { return [] }
+        let placedIDs = Set(
+            player.homeLayout.placedDecorations
+                .filter { $0.resolvedRoomId == surfaceKey }
+                .map(\.decorationInstanceId)
+        )
+        return player.furnitureInventory
+            .filter { placedIDs.contains($0.id) }
+            .sorted { $0.zIndex < $1.zIndex }
     }
     var furnitureIngredients: Int {
         currentPlayer?.availableFurnitureIngredientCount ?? 0
@@ -179,9 +220,8 @@ class PlayerStateService: ObservableObject {
         let item = inventory[itemIndex]
         let mutable = scene(sceneID)
 
-        // Mutable player scenes take freehand / pad placement. Authored overland
-        // maps (Home, Daddy's Citadel, …) accept World Seeds and placeable POIs
-        // onto open scene-graph pads — that is how a factory lands in Daddy's world.
+        // Mutable player scenes and authored overland maps both take freehand
+        // placement. POI hardpoints are retired — tap where it should go.
         let target: (x: Double, y: Double, hardpointID: String?)
         if let mutable {
             let allowedOnImmutable =
@@ -190,31 +230,16 @@ class PlayerStateService: ObservableObject {
             guard mutable.isMutableByPlayer || allowedOnImmutable else {
                 return nil
             }
-            if mutable.hardpoints.isEmpty {
-                target = (
-                    min(max(x, 0.10), 0.90),
-                    min(max(y, 0.24), 0.86),
-                    nil
-                )
-            } else {
-                guard let hardpointID,
-                      let hardpoint = availableHardpoints(in: sceneID).first(
-                        where: { $0.id == hardpointID }
-                      ) else {
-                    return nil
-                }
-                target = (hardpoint.x, hardpoint.y, hardpoint.id)
-            }
-        } else if Self.canPlantOnAuthoredMap(item.templateID) {
-            guard let hardpointID else { return nil }
-            let alreadyPlanted = (player.placedPlaces ?? []).contains {
-                $0.sceneID == sceneID && $0.hardpointID == hardpointID
-            }
-            guard !alreadyPlanted else { return nil }
             target = (
                 min(max(x, 0.05), 0.95),
-                min(max(y, 0.10), 0.92),
-                hardpointID
+                min(max(y, 0.08), 0.92),
+                nil
+            )
+        } else if Self.canPlantOnAuthoredMap(item.templateID) {
+            target = (
+                min(max(x, 0.05), 0.95),
+                min(max(y, 0.08), 0.92),
+                nil
             )
         } else {
             return nil
@@ -747,6 +772,83 @@ class PlayerStateService: ObservableObject {
         return added
     }
 
+    @discardableResult
+    func replaceGeneratedDecorationArtwork(id: String, png: Data) -> Bool {
+        guard var player = currentPlayer,
+              var catalog = player.generatedDecorations,
+              let index = catalog.firstIndex(where: { $0.id == id }),
+              let hash = World2GeneratedDecorationImageStore.shared.replace(png, decorationID: id) else {
+            return false
+        }
+        let old = catalog[index]
+        catalog[index] = World2GeneratedDecoration(
+            id: old.id,
+            packID: old.packID,
+            label: old.label,
+            registryKey: old.registryKey,
+            registryRevision: old.registryRevision,
+            sha256: hash,
+            placementLayer: old.placementLayer,
+            recipe: old.recipe,
+            awardedAt: old.awardedAt
+        )
+        player.generatedDecorations = catalog
+        currentPlayer = player
+        saveLocalState()
+        return true
+    }
+
+    /// Swap a highlighted prop's picture for a new carved PNG.
+    /// Existing inventions keep their id. Anything else becomes a generated prop.
+    @discardableResult
+    func applyRefinedPicture(instanceID: String, png: Data, label: String) -> Bool {
+        guard var player = currentPlayer,
+              let index = player.decorations.firstIndex(where: { $0.id == instanceID }) else {
+            return false
+        }
+        let instance = player.decorations[index]
+        if player.generatedDecoration(id: instance.decorationId) != nil {
+            return replaceGeneratedDecorationArtwork(id: instance.decorationId, png: png)
+        }
+
+        let store = World2GeneratedDecorationImageStore.shared
+        let decorationID = "refine-\(instance.id)"
+        let decoration = World2GeneratedDecoration(
+            id: decorationID,
+            packID: "dev-refine",
+            label: label,
+            registryKey: "preview/refine/\(decorationID)",
+            registryRevision: 1,
+            sha256: store.digest(png),
+            placementLayer: .floor,
+            recipe: World2AssetWorkbenchRecipe(
+                finishID: "finish.hand-painted",
+                objectFamilyID: "object.furniture",
+                personalityID: "personality.storybook"
+            ),
+            awardedAt: Date()
+        )
+        guard store.store(png, for: decoration) else { return false }
+        var catalog = player.generatedDecorations ?? []
+        catalog.removeAll { $0.id == decorationID }
+        catalog.append(decoration)
+        player.generatedDecorations = catalog
+        player.decorations[index] = DecorationInstance(
+            id: instance.id,
+            decorationId: decorationID,
+            x: instance.x,
+            y: instance.y,
+            scale: instance.scale,
+            rotation: instance.rotation,
+            zIndex: instance.zIndex,
+            state: instance.state,
+            badges: instance.badges
+        )
+        currentPlayer = player
+        saveLocalState()
+        return true
+    }
+
     /// Always mint a fresh inventory copy (Daddy's candy / hug every visit).
     @discardableResult
     func awardRepeatableStoryDecoration(
@@ -965,7 +1067,9 @@ class PlayerStateService: ObservableObject {
         x: Double? = nil,
         y: Double? = nil,
         scale: Double? = nil,
-        rotation: Double? = nil
+        rotation: Double? = nil,
+        skewX: Double? = nil,
+        skewY: Double? = nil
     ) {
         guard var player = currentPlayer,
               let instanceIndex = player.decorations.firstIndex(where: { $0.id == instanceId }),
@@ -987,12 +1091,35 @@ class PlayerStateService: ObservableObject {
         if let rotation {
             player.decorations[instanceIndex].rotation = rotation
         }
+        if let skewX {
+            player.decorations[instanceIndex].skewX = min(
+                max(skewX, DecorationInstance.skewRange.lowerBound),
+                DecorationInstance.skewRange.upperBound
+            )
+        }
+        if let skewY {
+            player.decorations[instanceIndex].skewY = min(
+                max(skewY, DecorationInstance.skewRange.lowerBound),
+                DecorationInstance.skewRange.upperBound
+            )
+        }
         player.homeLayout.placedDecorations[layoutIndex].position = .init(
             x: player.decorations[instanceIndex].x,
             y: player.decorations[instanceIndex].y
         )
         currentPlayer = player
         saveLocalState()
+    }
+
+    /// Clears scale / rotation / skew back to defaults. Keeps position.
+    func resetFurnitureTransform(instanceId: String, defaultScale: Double = 1.0) {
+        updateFurnitureTransform(
+            instanceId: instanceId,
+            scale: defaultScale,
+            rotation: 0,
+            skewX: 0,
+            skewY: 0
+        )
     }
 
     func bringFurnitureToFront(instanceId: String) {
@@ -1119,6 +1246,37 @@ class PlayerStateService: ObservableObject {
         } catch {
             self.error = "Your latest progress could not be saved."
             print("PLAYER_STATE_SAVE_FAILED error=\(error.localizedDescription)")
+            return
+        }
+        World2WorldSync.shared.noteLocalChange()
+    }
+
+    func exportPlayers() -> [String: PlayerState] {
+        var exported: [String: PlayerState] = [:]
+        for playerId in PlayerId.allCases {
+            if case .loaded(let player) = loadPlayerState(for: playerId) {
+                exported[playerId.rawValue] = player
+            }
+        }
+        if let currentPlayer {
+            exported[currentPlayer.playerId.rawValue] = currentPlayer
+        }
+        return exported
+    }
+
+    func replaceStoredPlayers(_ players: [String: PlayerState]) {
+        for (_, player) in players {
+            let stored = StoredPlayerState(
+                schemaVersion: Self.playerStateSchemaVersion,
+                player: player
+            )
+            if let data = try? JSONEncoder().encode(stored) {
+                UserDefaults.standard.set(data, forKey: playerStateKey(for: player.playerId))
+            }
+        }
+        if let current = currentPlayer,
+           let updated = players[current.playerId.rawValue] {
+            currentPlayer = updated
         }
     }
     
@@ -1192,6 +1350,8 @@ class PlayerStateService: ObservableObject {
         ensureStarterPOIFactory(in: &player)
         ensureStarterWorldSeed(in: &player)
         ensureWorldTeleporter(in: &player)
+        ensureMarbleVoyageWorldBook(in: &player)
+        settleMarbleVoyageWorldBookOnTable(in: &player)
         offerJukeboxAsInventory(in: &player)
         return player
     }
@@ -1213,6 +1373,73 @@ class PlayerStateService: ObservableObject {
             return (0.82, generated.placementLayer.homeLayer)
         }
         return nil
+    }
+
+    /// One-time seed: place the Voyage gateway book on the Cozy Nook table.
+    /// After the milestone, respect the player's own placement (including drawer).
+    private static func ensureMarbleVoyageWorldBook(in player: inout PlayerState) {
+        let milestone = PlayerState.marbleVoyageBookSeededMilestone
+        guard !player.progression.achievedMilestones.contains(milestone) else { return }
+
+        let book = DecorationInstance.marbleVoyageWorldBook(for: player.playerId)
+        if !player.decorations.contains(where: { $0.id == book.id }) {
+            player.decorations.append(book)
+        }
+        let alreadyPlaced = player.homeLayout.placedDecorations.contains {
+            $0.decorationInstanceId == book.id
+        }
+        if !alreadyPlaced {
+            player.homeLayout.placedDecorations.append(
+                HomeLayout.PlacedDecoration(
+                    id: "placed_\(book.id)",
+                    decorationInstanceId: book.id,
+                    position: .init(x: book.x, y: book.y),
+                    layer: .floor,
+                    roomId: TreehouseRoomID.cozyNook.rawValue
+                )
+            )
+        }
+        player.progression.achievedMilestones.append(milestone)
+    }
+
+    /// One-shot: slide the seeded Voyage book down onto the Cozy Nook table.
+    /// Skips if the player already moved it away from the old floating seed.
+    private static func settleMarbleVoyageWorldBookOnTable(in player: inout PlayerState) {
+        let milestone = PlayerState.marbleVoyageBookOnTableMilestone
+        guard !player.progression.achievedMilestones.contains(milestone) else { return }
+
+        let bookID = DecorationInstance.marbleVoyageWorldBookInstanceID(for: player.playerId)
+        let target = DecorationInstance.marbleVoyageWorldBook(for: player.playerId)
+
+        if let idx = player.decorations.firstIndex(where: { $0.id == bookID }) {
+            let current = player.decorations[idx]
+            let nearOldSeed = abs(current.x - 0.50) < 0.10 && abs(current.y - 0.56) < 0.10
+            if nearOldSeed {
+                player.decorations[idx].x = target.x
+                player.decorations[idx].y = target.y
+            }
+        }
+        if let layoutIdx = player.homeLayout.placedDecorations.firstIndex(
+            where: { $0.decorationInstanceId == bookID }
+        ) {
+            let pos = player.homeLayout.placedDecorations[layoutIdx].position
+            let nearOldSeed = abs(pos.x - 0.50) < 0.10 && abs(pos.y - 0.56) < 0.10
+            if nearOldSeed {
+                player.homeLayout.placedDecorations[layoutIdx].position = .init(
+                    x: target.x,
+                    y: target.y
+                )
+            }
+            // Keep layout in sync with decoration coords after the nudge.
+            if let deco = player.decorations.first(where: { $0.id == bookID }) {
+                player.homeLayout.placedDecorations[layoutIdx].position = .init(
+                    x: deco.x,
+                    y: deco.y
+                )
+            }
+        }
+
+        player.progression.achievedMilestones.append(milestone)
     }
 
     /// The starter jukebox used to appear already placed. Old saves get it back in inventory once.

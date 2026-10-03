@@ -1,0 +1,33 @@
+{
+  "id": "20260927-carnival-basket-toss-map",
+  "semanticId": "poi.carnival.basketToss.exterior",
+  "status": "open",
+  "priority": "high",
+  "type": "map_token",
+  "brief": "Basket-toss booth with a basketball-style basket and a ball clearly above it. The illustrated building itself is the tappable POI, not a floating logo badge.",
+  "aspect": "1:1",
+  "styleNotes": "For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/generated-candidates/poi.plinkPavilion.exterior/v1/source.png",
+    "AssetSources/World2/user-supplied/peglin/v1/monastery/poi.peglin.pegMonastery.exterior.cutout.png"
+  ],
+  "promptSeeds": [
+    "Basket-toss booth with a basketball-style basket and a ball clearly above it. The illustrated building itself is the tappable POI, not a floating logo badge. For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes."
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-28T00:55:56.105317+00:00",
+  "productionIntent": "production_sprite",
+  "surface": "New carnival POI; four ticket games and one prize shop",
+  "placeholder": {
+    "type": "none",
+    "detail": "Requested attraction; not implemented yet."
+  },
+  "acceptanceCriteria": [
+    "Transparent production cutout; full silhouette inside canvas",
+    "Consistent three-quarter overland perspective, scale and lighting across all six",
+    "Recognizable at 96px and 160px; no tiny text needed",
+    "Supply contact sheet on actual map plus individual source/provenance"
+  ],
+  "fulfillment": null
+}

@@ -1,0 +1,1082 @@
+{
+  "schema": 1,
+  "units": "meters",
+  "up_axis": "Z",
+  "library": "assets/rooftop-pieces.blend",
+  "assets": [
+    {
+      "asset_id": "deck",
+      "collection": "ASSET \u00b7 deck",
+      "role": "Bare platform only \u2014 no cushions, vegetation or loose petals",
+      "pivot": "deck surface at center, Z=0",
+      "instances": 1
+    },
+    {
+      "asset_id": "doorway.frame",
+      "collection": "ASSET \u00b7 doorway.frame",
+      "role": "Stationary doorway shell",
+      "pivot": "threshold center",
+      "instances": 1
+    },
+    {
+      "asset_id": "doorway.panel",
+      "collection": "ASSET \u00b7 doorway.panel",
+      "role": "Recessed rose window panel; three vertical and two horizontal bars; no invented handle",
+      "pivot": "panel lower-left corner above crossbeam",
+      "instances": 1
+    },
+    {
+      "asset_id": "bench",
+      "collection": "ASSET \u00b7 bench",
+      "role": "Low window bench beneath continuous crossbeam",
+      "pivot": "floor contact center",
+      "instances": 1
+    },
+    {
+      "asset_id": "railing",
+      "collection": "ASSET \u00b7 railing",
+      "role": "Railing assembly independent of deck",
+      "pivot": "left foot contact",
+      "instances": 1
+    },
+    {
+      "asset_id": "roof.slats",
+      "collection": "ASSET \u00b7 roof.slats",
+      "role": "Shelter roof slats",
+      "pivot": "support plane center",
+      "instances": 1
+    },
+    {
+      "asset_id": "tree.bare",
+      "collection": "ASSET \u00b7 tree.bare",
+      "role": "Bare tree and woody branches; no flowers",
+      "pivot": "root base",
+      "instances": 1
+    },
+    {
+      "asset_id": "seat.base",
+      "collection": "ASSET \u00b7 seat.base",
+      "role": "Low wooden seat base",
+      "pivot": "floor contact center",
+      "instances": 1
+    },
+    {
+      "asset_id": "cushion.seat",
+      "collection": "ASSET \u00b7 cushion.seat",
+      "role": "Independently placed reusable cushion",
+      "pivot": "local bottom center",
+      "instances": 3
+    },
+    {
+      "asset_id": "cushion.back",
+      "collection": "ASSET \u00b7 cushion.back",
+      "role": "Independently placed reusable cushion",
+      "pivot": "local bottom center",
+      "instances": 3
+    },
+    {
+      "asset_id": "cushion.loose",
+      "collection": "ASSET \u00b7 cushion.loose",
+      "role": "Independently placed reusable cushion",
+      "pivot": "local bottom center",
+      "instances": 3
+    },
+    {
+      "asset_id": "lantern.0",
+      "collection": "ASSET \u00b7 lantern.0",
+      "role": "Hanging lantern, cord, ribs and its own light",
+      "pivot": "cord suspension point",
+      "instances": 1
+    },
+    {
+      "asset_id": "lantern.1",
+      "collection": "ASSET \u00b7 lantern.1",
+      "role": "Hanging lantern, cord, ribs and its own light",
+      "pivot": "cord suspension point",
+      "instances": 1
+    },
+    {
+      "asset_id": "lantern.2",
+      "collection": "ASSET \u00b7 lantern.2",
+      "role": "Hanging lantern, cord, ribs and its own light",
+      "pivot": "cord suspension point",
+      "instances": 1
+    },
+    {
+      "asset_id": "lantern.3",
+      "collection": "ASSET \u00b7 lantern.3",
+      "role": "Hanging lantern, cord, ribs and its own light",
+      "pivot": "cord suspension point",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.0",
+      "collection": "ASSET \u00b7 blossom.cluster.0",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.1",
+      "collection": "ASSET \u00b7 blossom.cluster.1",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.2",
+      "collection": "ASSET \u00b7 blossom.cluster.2",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.3",
+      "collection": "ASSET \u00b7 blossom.cluster.3",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.4",
+      "collection": "ASSET \u00b7 blossom.cluster.4",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.5",
+      "collection": "ASSET \u00b7 blossom.cluster.5",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.6",
+      "collection": "ASSET \u00b7 blossom.cluster.6",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.7",
+      "collection": "ASSET \u00b7 blossom.cluster.7",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    },
+    {
+      "asset_id": "blossom.cluster.8",
+      "collection": "ASSET \u00b7 blossom.cluster.8",
+      "role": "Separate removable blossom cluster",
+      "pivot": "cluster center; attachment adjustment remains editable",
+      "instances": 1
+    }
+  ],
+  "placements": [
+    {
+      "instance_id": "deck \u00b7 1",
+      "asset_id": "deck",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "doorway.frame \u00b7 1",
+      "asset_id": "doorway.frame",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -1.9500000476837158
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.509999990463257
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.12999999523162842
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "doorway.panel \u00b7 1",
+      "asset_id": "doorway.panel",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -3.065000057220459
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.509999990463257
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          1.0800000429153442
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "bench \u00b7 1",
+      "asset_id": "bench",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -1.9900000095367432
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.1600000858306885
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "railing \u00b7 1",
+      "asset_id": "railing",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.8299999833106995
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.619999885559082
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "roof.slats \u00b7 1",
+      "asset_id": "roof.slats",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -1.2999999523162842
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.4800000190734863
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          3.950000047683716
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "tree.bare \u00b7 1",
+      "asset_id": "tree.bare",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -3.2300000190734863
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -2.3399999141693115
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          -0.8999999761581421
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "seat.base \u00b7 1",
+      "asset_id": "seat.base",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -2.450000047683716
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.7699999809265137
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.seat \u00b7 1",
+      "asset_id": "cushion.seat",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -2.4200000762939453
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -1.6799999475479126
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2549999952316284
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.back \u00b7 1",
+      "asset_id": "cushion.back",
+      "matrix_world": [
+        [
+          0.9800665974617004,
+          0.0,
+          -0.19866932928562164,
+          -2.763512134552002
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -1.6799999475479126
+        ],
+        [
+          0.19866932928562164,
+          0.0,
+          0.9800665974617004,
+          0.4126743972301483
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.seat \u00b7 2",
+      "asset_id": "cushion.seat",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -2.4200000762939453
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.7799999713897705
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2549999952316284
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.back \u00b7 2",
+      "asset_id": "cushion.back",
+      "matrix_world": [
+        [
+          0.9800665974617004,
+          0.0,
+          -0.19866932928562164,
+          -2.763512134552002
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          -0.7799999713897705
+        ],
+        [
+          0.19866932928562164,
+          0.0,
+          0.9800665974617004,
+          0.4126743972301483
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.seat \u00b7 3",
+      "asset_id": "cushion.seat",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -2.4200000762939453
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.11999999731779099
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.2549999952316284
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.back \u00b7 3",
+      "asset_id": "cushion.back",
+      "matrix_world": [
+        [
+          0.9800665974617004,
+          0.0,
+          -0.19866932928562164,
+          -2.763512134552002
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.11999999731779099
+        ],
+        [
+          0.19866932928562164,
+          0.0,
+          0.9800665974617004,
+          0.4126743972301483
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.loose \u00b7 1",
+      "asset_id": "cushion.loose",
+      "matrix_world": [
+        [
+          0.9838436841964722,
+          -0.02852267026901245,
+          -0.17674288153648376,
+          -2.229628324508667
+        ],
+        [
+          0.0,
+          0.9872272610664368,
+          -0.159318208694458,
+          -1.6845942735671997
+        ],
+        [
+          0.17902958393096924,
+          0.15674421191215515,
+          0.9712773561477661,
+          0.513185977935791
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.loose \u00b7 2",
+      "asset_id": "cushion.loose",
+      "matrix_world": [
+        [
+          0.9579355120658875,
+          -0.252837210893631,
+          -0.1357676386833191,
+          -2.331306219100952
+        ],
+        [
+          0.2242942452430725,
+          0.9547275304794312,
+          -0.1954161822795868,
+          0.29569360613822937
+        ],
+        [
+          0.17902958393096924,
+          0.15674421191215515,
+          0.9712773561477661,
+          0.513185977935791
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "cushion.loose \u00b7 3",
+      "asset_id": "cushion.loose",
+      "matrix_world": [
+        [
+          0.8815755844116211,
+          -0.4638355076313019,
+          -0.0876418873667717,
+          -0.6250220537185669
+        ],
+        [
+          0.4367755651473999,
+          0.8719449043273926,
+          -0.2212221473455429,
+          2.3730483055114746
+        ],
+        [
+          0.17902958393096924,
+          0.15674421191215515,
+          0.9712773561477661,
+          0.013185948133468628
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "lantern.0 \u00b7 1",
+      "asset_id": "lantern.0",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.20000000298023224
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.0799999237060547
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.039999961853027
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "lantern.1 \u00b7 1",
+      "asset_id": "lantern.1",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.75
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.180000066757202
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.039999961853027
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "lantern.2 \u00b7 1",
+      "asset_id": "lantern.2",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.7200000286102295
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.0999999046325684
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.039999961853027
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "lantern.3 \u00b7 1",
+      "asset_id": "lantern.3",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          2.7699999809265137
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.109999895095825
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.039999961853027
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.0 \u00b7 1",
+      "asset_id": "blossom.cluster.0",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -3.2410929203033447
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.9517024755477905
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.280935287475586
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.1 \u00b7 1",
+      "asset_id": "blossom.cluster.1",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -2.388716220855713
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.803788661956787
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.235952377319336
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.2 \u00b7 1",
+      "asset_id": "blossom.cluster.2",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -1.5497889518737793
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.8492183685302734
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.24470329284668
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.3 \u00b7 1",
+      "asset_id": "blossom.cluster.3",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          -0.6747424006462097
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.8966201543807983
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.271272659301758
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.4 \u00b7 1",
+      "asset_id": "blossom.cluster.4",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.06765224039554596
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.003225326538086
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.318686485290527
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.5 \u00b7 1",
+      "asset_id": "blossom.cluster.5",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.9032912850379944
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.840482234954834
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.1886701583862305
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.6 \u00b7 1",
+      "asset_id": "blossom.cluster.6",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          1.767000436782837
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.9386147260665894
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.310250759124756
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.7 \u00b7 1",
+      "asset_id": "blossom.cluster.7",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          2.565891742706299
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          2.0216357707977295
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.27462100982666
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    },
+    {
+      "instance_id": "blossom.cluster.8 \u00b7 1",
+      "asset_id": "blossom.cluster.8",
+      "matrix_world": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          3.392085552215576
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          1.8414276838302612
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          4.279006004333496
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  ],
+  "ground_petals": false,
+  "vegetation_in_deck": false,
+  "assembly_method": "linked collection instances; asset geometry in local coordinates",
+  "effects": "falling petals are a future optional effect; no petals embedded in the base"
+}

@@ -1,0 +1,23 @@
+{
+  "revision": "B10",
+  "geometry_revision": "B09",
+  "interior_fill_before_watts": {
+    "B08 amber grazing bounce": 200.0,
+    "B09 soft ceiling bounce": 110.0,
+    "B soft rosy foreground": 360.0,
+    "B cool sheltered bark fill": 260.0,
+    "B open sky bounce": 2350.0
+  },
+  "interior_fill_after_watts": {
+    "B08 amber grazing bounce": 0,
+    "B09 soft ceiling bounce": 0,
+    "B soft rosy foreground": 70,
+    "B cool sheltered bark fill": 170,
+    "B open sky bounce": 1800
+  },
+  "sun_position_and_direction_unchanged": true,
+  "camera_unchanged": true,
+  "exposure_and_bloom_unchanged": true,
+  "comparison": "B10-roof-on.png versus B10-roof-off.png changes only visibility of the B14 timber roof collection",
+  "mobile_integration": false
+}

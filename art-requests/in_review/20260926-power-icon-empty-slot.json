@@ -1,0 +1,33 @@
+{
+  "id": "20260926-power-icon-empty-slot",
+  "semanticId": "ui.plink.power.icon.emptySlot",
+  "status": "in_review",
+  "priority": "normal",
+  "type": "ui_icon",
+  "kind": "ui",
+  "brief": "Neutral empty power-slot candidates matching approved teal enamel and brass-rim power icon family. Quiet recessed center, no active power motif. Must visually overlap/interchange with filled chips without obvious frame or scale changes.",
+  "aspect": "1:1",
+  "styleNotes": "Match Tilt canvas, circle diameter, rim weight and padding. Transparent corners. Subdued dark teal center. No text, plus sign, lock or purchase cue.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-transparent.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md"
+  ],
+  "promptSeeds": [
+    "Empty circular dark teal enamel power socket with warm brass rim, recessed center, no symbol, match approved Tilt icon."
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-26T21:50:12.210628+00:00",
+  "productionIntent": "concept_only",
+  "expectedBackground": "True RGBA transparency outside common circular frame",
+  "targetPixelSize": "Same square canvas and optical circle diameter as power family; runtime 56\u201372pt",
+  "acceptanceCriteria": [
+    "Several reviewed empty-slot candidates",
+    "Same frame silhouette, rim weight and placement as power icons",
+    "Neutral empty state, no false action cue",
+    "No baked text; transparent corners for selected derivative"
+  ],
+  "fulfillment": null,
+  "sessionNote": " Evan paused further generation. Prompt prepared, no candidates generated yet."
+}

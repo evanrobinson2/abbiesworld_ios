@@ -1,0 +1,34 @@
+{
+  "id": "20260927-carnival-basket-toss-kit",
+  "semanticId": "game.carnival.basketToss.kit",
+  "status": "open",
+  "priority": "high",
+  "type": "production_sprite",
+  "brief": "Layered target-toss game: ball, basket rim/backboard, rear basket and foreground rim separately, cheerful booth backdrop. Moving basket starts stationary then goes side-to-side and nearer/farther. Clear aiming area.",
+  "aspect": "Separate transparent sprites plus 4:3 backdrop",
+  "styleNotes": "For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/generated-candidates/poi.plinkPavilion.exterior/v1/source.png",
+    "AssetSources/World2/user-supplied/peglin/v1/monastery/poi.peglin.pegMonastery.exterior.cutout.png"
+  ],
+  "promptSeeds": [
+    "Layered target-toss game: ball, basket rim/backboard, rear basket and foreground rim separately, cheerful booth backdrop. Moving basket starts stationary then goes side-to-side and nearer/farther. Clear aiming area. For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes."
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-28T00:55:56.105329+00:00",
+  "productionIntent": "production_sprite",
+  "surface": "New carnival POI; four ticket games and one prize shop",
+  "placeholder": {
+    "type": "none",
+    "detail": "Requested attraction; not implemented yet."
+  },
+  "acceptanceCriteria": [
+    "Deliver individually named sprites, not just a flattened illustration",
+    "Identify collision shapes, pivots, layer order and safe play bounds",
+    "Consistent style with booth exterior",
+    "Inspect expressions, color contrast and small-size readability",
+    "Source originals and provenance retained"
+  ],
+  "fulfillment": null
+}

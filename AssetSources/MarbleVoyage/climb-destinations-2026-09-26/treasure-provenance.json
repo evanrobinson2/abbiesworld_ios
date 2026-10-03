@@ -1,0 +1,24 @@
+{
+  "semanticId": "token.marbleVoyage.climb.treasure",
+  "filename": "treasure-original.jpeg",
+  "sourceProvider": "Midjourney",
+  "jobId": "c12d4505-487d-4b82-b8b5-f5409247fa9e",
+  "candidateIndex": 0,
+  "sourceUrl": "https://cdn.midjourney.com/c12d4505-487d-4b82-b8b5-f5409247fa9e/0_0.jpeg",
+  "submittedAt": "2026-09-26T21:25:22Z",
+  "sha256": "b13e743bc3e04fdedb4f95bd6a1bcd7e3be30521618c5c9e2270f405e2076859",
+  "selection": "Art director selection under user-authorized queue production.",
+  "promptFile": "treasure-prompt.txt",
+  "derivative": {
+    "filename": "treasure-transparent.png",
+    "sourceProvider": "OpenAI imagegen background extraction",
+    "derivativeOf": "b13e743bc3e04fdedb4f95bd6a1bcd7e3be30521618c5c9e2270f405e2076859",
+    "sha256": "8dab3a964b4156cf8170c0a71467e7624c8847ba88730a9298bed9529ef908b7",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "maxCornerAlpha": 0,
+    "notes": "Generated extraction is not pixel-identical; original preserved."
+  }
+}

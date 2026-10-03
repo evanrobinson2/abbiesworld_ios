@@ -1,0 +1,48 @@
+{
+  "createdAt": "2026-09-27T14:05:29.042Z",
+  "assets": [
+    {
+      "semanticId": "ui.marbleVoyage.worldEntry.book",
+      "filename": "marble-voyage-world-book.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "3259ce19-82be-43bc-8268-3ddae229ff6b",
+      "candidateIndex": 1,
+      "sourceUrl": "https://cdn.midjourney.com/3259ce19-82be-43bc-8268-3ddae229ff6b/0_1.jpeg",
+      "sha256": "50f121ddf84e70f2f746e81ee0b0cfdb53afec9bbdad43547f0923f9bcb52dd7",
+      "approval": "Evan: yes this one is perfect; put into repo as the specific asset linking to Marble Voyage",
+      "targetWorldId": "world.marbleVoyage",
+      "promptFile": "closed-book-prompt.txt",
+      "status": "approved_source",
+      "background": "opaque ivory; not a transparent sprite",
+      "cutoutFilename": "marble-voyage-world-book-transparent.png",
+      "cutoutSha256": "090ddf19ecec253f04f9132584be8df7d8bc200af0d1d49311a0dd6553726a3f",
+      "cutoutPipeline": "tools/carve-assets/carve.py (border flood, size=None)",
+      "cutoutNotes": "Builder intake 2026-09-27: ivory plate removed for cottage placement sprite; original JPEG preserved."
+    },
+    {
+      "semanticId": "plate.marbleVoyage.unlock.openBook",
+      "filename": "open-book-board-candidate-2.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "d1512849-e8a0-450d-bdc6-b3426b1325b2",
+      "candidateIndex": 1,
+      "sourceUrl": "https://cdn.midjourney.com/d1512849-e8a0-450d-bdc6-b3426b1325b2/0_1.jpeg",
+      "sha256": "9b9be3654734c3b58b4b6995169fc488f2a61e60a441b759cead518044ba6a22",
+      "promptFile": "open-book-prompt.txt",
+      "status": "rejected",
+      "approval": "Rejected by Evan: needs full-screen 4:3 strictly orthographic page interior",
+      "styleReference": "ui.marbleVoyage.worldEntry.book"
+    },
+    {
+      "semanticId": "plate.marbleVoyage.unlock.openBook",
+      "filename": "open-book-orthographic-candidate-2.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "5c8714e4-f7e6-4042-807f-e8ba96453484",
+      "candidateIndex": 1,
+      "sourceUrl": "https://cdn.midjourney.com/5c8714e4-f7e6-4042-807f-e8ba96453484/0_1.jpeg",
+      "sha256": "426e07a636ab747b05481551b2605333c2ead21a826e637f6a0bc22e86b7a56d",
+      "promptFile": "open-book-orthographic-prompt.txt",
+      "status": "approved_source",
+      "approval": "Evan approved the corrected orthographic interior presented in chat: okay that is fine, submit it (2026-09-27)."
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-lamps-04-crescent-moon-lantern-lamp",
+  "latencyMs": 3036,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.99,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "A freestanding pale gold crescent moon lamp with a small root-like base, supporting an ornate glowing amber lantern and a dangling golden star from its upper tip.",
+    "suggestedScale": 0.9
+  },
+  "responseId": "chatcmpl-ESoAttRrplmSqsIHtoIFibz1ZKdi6",
+  "timestamp": "2026-09-27T18:46:06.035035+00:00",
+  "pngSha256": "d866124c549063b9cfc42a9abdeb4d5a24b47c2d1e92c4346b043e61b0cefab7"
+}

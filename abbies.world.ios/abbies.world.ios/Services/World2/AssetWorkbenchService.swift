@@ -16,6 +16,8 @@ protocol World2AssetWorkbenchServing {
     func imageData(
         for candidate: World2AssetWorkbenchCandidate
     ) async throws -> Data
+
+    func cancel(jobID: String)
 }
 
 @MainActor
@@ -97,6 +99,8 @@ final class World2AssetWorkbenchHTTPService: World2AssetWorkbenchServing {
         return try await registry.data(for: record)
     }
 
+    func cancel(jobID: String) {}
+
     private var jobsURL: URL {
         var url = baseURL
         for component in [
@@ -132,22 +136,23 @@ final class World2AssetWorkbenchHTTPService: World2AssetWorkbenchServing {
 
 @MainActor
 final class World2AssetWorkbenchPreviewService: World2AssetWorkbenchServing {
-    private struct PreviewJob {
-        let recipe: World2AssetWorkbenchRecipe
-        var stageIndex: Int
+    private struct LiveJob {
+        var stage: World2AssetWorkbenchJobStage
+        var progress: Double
+        var pack: World2AssetWorkbenchPack?
+        var errorCode: String?
     }
 
-    private var jobs: [String: PreviewJob] = [:]
+    private var jobs: [String: LiveJob] = [:]
+    private var tasks: [String: Task<Void, Never>] = [:]
     private var candidateData: [String: Data] = [:]
     let isPreview = true
-    private let stageSequence: [World2AssetWorkbenchJobStage] = [
-        .queued,
-        .generating,
-        .carving,
-        .qualifying,
-        .publishing,
-        .ready,
-    ]
+
+    func cancel(jobID: String) {
+        tasks[jobID]?.cancel()
+        tasks[jobID] = nil
+        jobs[jobID] = nil
+    }
 
     func startGeneration(
         recipe: World2AssetWorkbenchRecipe,
@@ -157,20 +162,18 @@ final class World2AssetWorkbenchPreviewService: World2AssetWorkbenchServing {
             throw World2AssetWorkbenchError.invalidRecipe
         }
         let id = "preview-\(UUID().uuidString.lowercased())"
-        jobs[id] = PreviewJob(recipe: recipe, stageIndex: 0)
-        return .init(id: id, stage: .queued, progress: 0.05, pack: nil, errorCode: nil)
+        jobs[id] = LiveJob(stage: .queued, progress: 0.05, pack: nil, errorCode: nil)
+        tasks[id] = Task { [weak self] in
+            await self?.run(id: id, recipe: recipe)
+        }
+        return snapshot(id)
     }
 
     func job(id: String) async throws -> World2AssetWorkbenchJob {
-        guard var preview = jobs[id] else {
-            throw World2AssetWorkbenchError.invalidServerResponse
+        guard jobs[id] != nil else {
+            return .init(id: id, stage: .failed, progress: 1, pack: nil, errorCode: "cancelled")
         }
-        preview.stageIndex = min(preview.stageIndex + 1, stageSequence.count - 1)
-        jobs[id] = preview
-        let stage = stageSequence[preview.stageIndex]
-        let progress = Double(preview.stageIndex + 1) / Double(stageSequence.count)
-        let pack = stage == .ready ? makePack(id: id, recipe: preview.recipe) : nil
-        return .init(id: id, stage: stage, progress: progress, pack: pack, errorCode: nil)
+        return snapshot(id)
     }
 
     func imageData(
@@ -182,9 +185,82 @@ final class World2AssetWorkbenchPreviewService: World2AssetWorkbenchServing {
         return data
     }
 
+    private func snapshot(_ id: String) -> World2AssetWorkbenchJob {
+        let live = jobs[id]
+        return .init(
+            id: id,
+            stage: live?.stage ?? .failed,
+            progress: live?.progress ?? 0,
+            pack: live?.pack,
+            errorCode: live?.errorCode
+        )
+    }
+
+    private func run(id: String, recipe: World2AssetWorkbenchRecipe) async {
+        guard jobs[id] != nil else { return }
+        jobs[id]?.stage = .generating
+        jobs[id]?.progress = 0.2
+
+        let object = World2WorkbenchIdeaCatalog.card(id: recipe.objectFamilyID)?.title ?? "Decoration"
+        let finish = World2WorkbenchIdeaCatalog.card(id: recipe.finishID)?.title ?? "handmade"
+        let personality = World2WorkbenchIdeaCatalog.card(id: recipe.personalityID)?.title ?? "playful"
+        let count = World2AssetWorkbenchContract.candidateCount
+        var raw: [Int: Data] = [:]
+
+        await withTaskGroup(of: (Int, Data)?.self) { group in
+            for index in 1...count {
+                let subject = "\(finish) \(object) with a \(personality) personality. Variation \(index) of \(count), a different shape and color."
+                group.addTask {
+                    do {
+                        let data = try await World2AssetGenerationService.fetchPNG(
+                            kind: .decoration,
+                            subject: subject,
+                            placeName: "the workbench"
+                        )
+                        return (index, data)
+                    } catch {
+                        return nil
+                    }
+                }
+            }
+            for await item in group {
+                if let (index, data) = item {
+                    raw[index] = data
+                }
+            }
+        }
+
+        guard !Task.isCancelled, jobs[id] != nil else { return }
+        guard raw.count == count else {
+            jobs[id]?.stage = .failed
+            jobs[id]?.progress = 1
+            jobs[id]?.errorCode = "generation-failed"
+            return
+        }
+
+        jobs[id]?.stage = .carving
+        jobs[id]?.progress = 0.72
+        var carved: [Int: Data] = [:]
+        for index in 1...count {
+            guard let data = raw[index] else { continue }
+            carved[index] = World2AssetGenerationService.finish(data, kind: .decoration)
+        }
+        guard !Task.isCancelled, jobs[id] != nil, carved.count == count else {
+            jobs[id]?.stage = .failed
+            jobs[id]?.errorCode = "carve-failed"
+            return
+        }
+
+        jobs[id]?.pack = makePack(id: id, recipe: recipe, images: carved)
+        jobs[id]?.stage = .ready
+        jobs[id]?.progress = 1
+        World2Diagnostics.log("asset_workbench_generated", ["job": id])
+    }
+
     private func makePack(
         id: String,
-        recipe: World2AssetWorkbenchRecipe
+        recipe: World2AssetWorkbenchRecipe,
+        images: [Int: Data]
     ) -> World2AssetWorkbenchPack {
         let objectName =
             World2WorkbenchIdeaCatalog.card(id: recipe.objectFamilyID)?.title
@@ -194,26 +270,22 @@ final class World2AssetWorkbenchPreviewService: World2AssetWorkbenchServing {
         var candidates: [World2AssetWorkbenchCandidate] = []
         for index in 1...World2AssetWorkbenchContract.candidateCount {
             let candidateID = "\(id)-candidate-\(index)"
-            let data = makePreviewImageData(
-                index: index,
-                placement: placement
-            )
+            let data = images[index] ?? Data()
             candidateData[candidateID] = data
-            let digest = SHA256.hash(data: data)
-            var sha256 = ""
-            for byte in digest {
-                sha256 += String(format: "%02x", byte)
-            }
+            let sha256 = SHA256.hash(data: data)
+                .map { String(format: "%02x", $0) }
+                .joined()
+            let pixels = pixelSize(of: data)
             candidates.append(
                 World2AssetWorkbenchCandidate(
                     id: candidateID,
-                    label: "\(objectName) Idea \(index)",
+                    label: "\(objectName) \(index)",
                     registryKey: "preview/workbench/packs/\(id)/candidates/\(index)",
                     registryRevision: 1,
                     sha256: sha256,
                     mimeType: "image/png",
-                    pixelWidth: 1024,
-                    pixelHeight: 1024,
+                    pixelWidth: pixels.0,
+                    pixelHeight: pixels.1,
                     placementLayer: placement,
                     qualificationState: .qualified
                 )
@@ -227,72 +299,11 @@ final class World2AssetWorkbenchPreviewService: World2AssetWorkbenchServing {
         )
     }
 
-    private func makePreviewImageData(
-        index: Int,
-        placement: World2WorkbenchPlacementLayer
-    ) -> Data {
-        let colors: [(UIColor, UIColor)] = [
-            (.systemPink, .systemPurple),
-            (.systemTeal, .systemBlue),
-            (.systemOrange, .systemPink),
-            (.systemIndigo, .systemTeal),
-            (.systemYellow, .systemOrange),
-            (.systemPurple, .systemPink),
-        ]
-        let pair = colors[(index - 1) % colors.count]
-        let symbolName = placement == .wall
-            ? "photo.artframe"
-            : (placement == .hanging ? "lamp.ceiling.fill" : "chair.lounge.fill")
-        let format = UIGraphicsImageRendererFormat()
-        format.opaque = false
-        format.scale = 1
-        return UIGraphicsImageRenderer(
-            size: CGSize(width: 1024, height: 1024),
-            format: format
-        ).pngData { context in
-            context.cgContext.clear(CGRect(x: 0, y: 0, width: 1024, height: 1024))
-            context.cgContext.setShadow(
-                offset: CGSize(width: 0, height: 22),
-                blur: 26,
-                color: UIColor.black.withAlphaComponent(0.25).cgColor
-            )
-            pair.0.withAlphaComponent(0.94).setFill()
-            UIBezierPath(
-                roundedRect: CGRect(x: 170, y: 185, width: 684, height: 654),
-                cornerRadius: CGFloat(120 + (index * 7))
-            ).fill()
-            context.cgContext.setShadow(offset: .zero, blur: 0)
-
-            pair.1.setStroke()
-            let border = UIBezierPath(
-                roundedRect: CGRect(x: 190, y: 205, width: 644, height: 614),
-                cornerRadius: CGFloat(105 + (index * 7))
-            )
-            border.lineWidth = 24
-            border.stroke()
-
-            let configuration = UIImage.SymbolConfiguration(
-                pointSize: 360,
-                weight: .bold
-            )
-            if let symbol = UIImage(systemName: symbolName, withConfiguration: configuration)?
-                .withTintColor(.white, renderingMode: .alwaysOriginal) {
-                symbol.draw(
-                    in: CGRect(x: 282, y: 290, width: 460, height: 420),
-                    blendMode: .normal,
-                    alpha: 0.94
-                )
-            }
-
-            UIColor.white.withAlphaComponent(0.92).setFill()
-            for sparkle in 0..<6 {
-                let x = CGFloat(238 + ((sparkle * 113 + index * 41) % 548))
-                let y = CGFloat(230 + ((sparkle * 97 + index * 53) % 540))
-                let diameter = CGFloat(18 + ((sparkle + index) % 3) * 8)
-                UIBezierPath(
-                    ovalIn: CGRect(x: x, y: y, width: diameter, height: diameter)
-                ).fill()
-            }
-        }
+    private func pixelSize(of data: Data) -> (Int, Int) {
+        guard let image = UIImage(data: data) else { return (1, 1) }
+        return (
+            max(1, Int(image.size.width * image.scale)),
+            max(1, Int(image.size.height * image.scale))
+        )
     }
 }

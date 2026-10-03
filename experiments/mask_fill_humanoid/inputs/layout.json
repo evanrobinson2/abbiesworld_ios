@@ -1,0 +1,119 @@
+{
+  "size": 1024,
+  "character_left_is_image_right": true,
+  "torso": {
+    "center": [
+      512,
+      560
+    ],
+    "width": 210,
+    "height": 290
+  },
+  "head": {
+    "center": [
+      512,
+      292
+    ],
+    "radius": 92
+  },
+  "neck": {
+    "start": [
+      512,
+      372
+    ],
+    "end": [
+      512,
+      410
+    ],
+    "radius": 28
+  },
+  "hips": {
+    "center": [
+      512,
+      710
+    ],
+    "width": 168,
+    "height": 70
+  },
+  "char_left_arm": {
+    "shoulder": [
+      628,
+      438
+    ],
+    "elbow": [
+      792,
+      508
+    ],
+    "wrist": [
+      908,
+      618
+    ],
+    "radius": 36
+  },
+  "char_right_arm": {
+    "shoulder": [
+      396,
+      438
+    ],
+    "elbow": [
+      232,
+      508
+    ],
+    "wrist": [
+      116,
+      618
+    ],
+    "radius": 36
+  },
+  "char_left_leg": {
+    "hip": [
+      568,
+      740
+    ],
+    "knee": [
+      592,
+      868
+    ],
+    "ankle": [
+      604,
+      980
+    ],
+    "radius": 38
+  },
+  "char_right_leg": {
+    "hip": [
+      456,
+      740
+    ],
+    "knee": [
+      432,
+      868
+    ],
+    "ankle": [
+      420,
+      980
+    ],
+    "radius": 38
+  },
+  "bicep": {
+    "label": "character-left upper arm / bicep (image-right)",
+    "start_t": 0.08,
+    "end_t": 0.62,
+    "radius": 40,
+    "start_xy": [
+      641.1,
+      443.6
+    ],
+    "end_xy": [
+      729.7,
+      481.4
+    ],
+    "radius_px": 40
+  },
+  "mask_convention_used_for_api": {
+    "api": "OpenAI images.edit",
+    "edit_region": "fully transparent (alpha=0)",
+    "keep_region": "opaque (alpha=255)",
+    "note": "This is the opposite of a white=edit / black=keep bitmap. mask_bicep.png follows OpenAI. mask_bicep_white_hypothesis.png is the white-bicep visual only."
+  }
+}

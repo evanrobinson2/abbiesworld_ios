@@ -1,0 +1,16 @@
+{
+  "revision": "B08",
+  "bark_branches": [
+    "B Right hanging canopy",
+    "B Canopy cross limb",
+    "B Far right drooping limb"
+  ],
+  "fairy_bulbs": 37,
+  "world_space_lighting": true,
+  "separate_distant_volume": true,
+  "blossom_translucency": true,
+  "bloom_passes": 2,
+  "saturation": 1.12,
+  "exposure": 0.3,
+  "mobile_integration": false
+}

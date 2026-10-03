@@ -1,0 +1,14 @@
+{
+  "kind": "foxSpirit",
+  "displayName": "Fox Spirit",
+  "species": "fox",
+  "states": {
+    "idle": "world2_peglin_fox_idle",
+    "happy": "world2_peglin_fox_happy",
+    "sneaky_wink": "world2_peglin_fox_sneaky_wink",
+    "hurt": "world2_peglin_fox_hurt",
+    "defeated": "world2_peglin_fox_defeated"
+  },
+  "semanticPattern": "enemy.peglin.foxSpirit.<state>",
+  "sourceDir": "AssetSources/World2/user-supplied/peglin/v1/enemies/foxSpirit"
+}

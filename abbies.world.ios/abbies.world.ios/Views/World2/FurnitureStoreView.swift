@@ -71,12 +71,6 @@ struct World2FurnitureStoreView: View {
                 .padding(.top, 12)
                 .padding(.bottom, 18)
 
-                backButton
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomLeading)
-                    .padding(.leading, 22)
-                    .padding(.bottom, 20)
-                    .zIndex(20)
-
                 if showingCraft {
                     craftCelebration
                         .transition(.scale.combined(with: .opacity))
@@ -89,6 +83,21 @@ struct World2FurnitureStoreView: View {
         .ignoresSafeArea()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.furnitureStore")
+        .world2InteriorActions(
+            [
+                World2ThumbAction(
+                    id: "decorate-home",
+                    title: "Decorate home",
+                    icon: "paintbrush.pointed.fill"
+                )
+            ],
+            exitAccessibilityID: "world2.furnitureStore.back",
+            onExit: onExit
+        ) { id in
+            if id == "decorate-home" {
+                onDecorateHome()
+            }
+        }
         .onAppear {
             World2Diagnostics.log(
                 "furniture_store_opened",
@@ -408,19 +417,6 @@ struct World2FurnitureStoreView: View {
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
         }
-    }
-
-    private var backButton: some View {
-        Button(action: onExit) {
-            Label("Farm Land", systemImage: "arrow.left.circle.fill")
-                .font(.system(size: 16, weight: .black, design: .rounded))
-                .foregroundStyle(.white)
-                .padding(.horizontal, 15)
-                .padding(.vertical, 11)
-                .background(.black.opacity(0.72), in: Capsule())
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("world2.furnitureStore.back")
     }
 
     private var craftCelebration: some View {

@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "abbies-world": {
+      "url": "https://studio-mock-iota.vercel.app/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${env:ABBIES_WORLD_TOKEN}",
+        "X-Abbies-Auth": "bearer"
+      }
+    }
+  }
+}

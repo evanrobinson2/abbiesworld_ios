@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-toys-03-rocking-unicorn",
+  "latencyMs": 4051,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.98,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Cheerful painted wooden rocking unicorn with a golden horn, flowing rainbow mane and tail, and a curved turquoise rocker base.",
+    "suggestedScale": 0.8
+  },
+  "pngSha256": "89c1a3568d1089027de0d21039b50f27da8eac29cfd2e4e1660499843332d6e0",
+  "responseId": "chatcmpl-ESoLkOMjAm5kSa6lp5EGIIXaKsHKQ",
+  "timestamp": "2026-09-27T18:57:20.032541+00:00"
+}
