@@ -1,33 +1,39 @@
 /**
- * Headless smoke for Finger Lemmings.
+ * Headless smoke + scripted escort to HOME.
  * Run: node sim.test.js
  */
-import { createGame, stepGame, setLight } from "./sim.js";
+import { createGame, stepGame, setLight, TILE } from "./sim.js";
 
 function assert(cond, msg) {
   if (!cond) throw new Error(msg);
+}
+
+function center(tx, ty) {
+  return { x: tx * TILE + TILE / 2, y: ty * TILE + TILE / 2 };
 }
 
 const game = createGame(0);
 assert(game.level.spawns.length === 1, "has spawn");
 assert(game.level.goals.length === 1, "has goal");
 
-setLight(game, game.spawn.x + 30, game.spawn.y, true);
-for (let i = 0; i < 180; i++) stepGame(game, 1 / 30);
-assert(game.dots.length > 0, "spawned dots");
-assert(game.dots.some((d) => d.state === "live"), "live dots present");
-
-// Lead toward goal roughly along first corridor
 const path = [
-  [game.spawn.x + 80, game.spawn.y],
-  [game.spawn.x + 160, game.spawn.y],
-  [game.spawn.x + 200, game.spawn.y + 40],
+  center(1, 1),
+  center(6, 1),
+  center(12, 1),
+  center(12, 3),
+  center(12, 5),
+  center(11, 5),
 ];
-for (const [x, y] of path) {
-  setLight(game, x, y, true);
-  for (let i = 0; i < 40; i++) stepGame(game, 1 / 30);
+
+for (const p of path) {
+  setLight(game, p.x, p.y, true);
+  for (let i = 0; i < 90; i++) stepGame(game, 1 / 30);
 }
-assert(game.dots.every((d) => d.state !== "lost") || true, "ran without crash");
+setLight(game, game.goal.x, game.goal.y, true);
+for (let i = 0; i < 180; i++) stepGame(game, 1 / 30);
+
+assert(game.dots.length > 0, "spawned dots");
+assert(game.saved >= 1, `at least one saved (got ${game.saved})`);
 
 const g2 = createGame(1);
 assert(g2.level.hazards.length > 0, "level 2 has hazards");
@@ -35,5 +41,6 @@ assert(g2.level.hazards.length > 0, "level 2 has hazards");
 console.log("finger-lemmings sim.test.js OK", {
   dots: game.dots.length,
   saved: game.saved,
-  level: game.level.name,
+  lost: game.lost,
+  status: game.status,
 });

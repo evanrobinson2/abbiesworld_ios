@@ -31,7 +31,7 @@ export function createGame(levelIndex = 0) {
   return {
     levelIndex,
     level,
-    light: { x: spawn.x + 50, y: spawn.y, radius: 88, active: false },
+    light: { x: spawn.x + 50, y: spawn.y, radius: 120, active: false },
     dots: [],
     spawn,
     goal,
@@ -144,34 +144,36 @@ export function stepGame(game, dtRaw) {
 
     const dLight = dist(dot.x, dot.y, light.x, light.y);
     const inBeam = light.active && dLight < light.radius;
-    dot.follow = inBeam ? clamp(1 - dLight / light.radius, 0, 1) : Math.max(0, dot.follow - dt * 1.6);
+    const seek = light.active ? 1 / (1 + dLight / 220) : 0;
+    dot.follow = light.active
+      ? clamp(Math.max(seek, inBeam ? 1 - dLight / light.radius : 0), 0, 1)
+      : Math.max(0, dot.follow - dt * 1.8);
 
     let ax = 0;
     let ay = 0;
 
-    if (inBeam) {
-      const pull = 340 * (0.35 + dot.follow);
-      ax += ((light.x - dot.x) / Math.max(10, dLight)) * pull;
-      ay += ((light.y - dot.y) / Math.max(10, dLight)) * pull;
-      // Slight orbit so they don't stack perfectly on the finger.
-      ax += Math.cos(dot.wobble) * 22;
-      ay += Math.sin(dot.wobble) * 22;
+    if (light.active) {
+      // While the finger is down, always pursue the light — herd can catch up.
+      const pull = 460 * seek + (inBeam ? 280 : 120);
+      ax += ((light.x - dot.x) / Math.max(6, dLight)) * pull;
+      ay += ((light.y - dot.y) / Math.max(6, dLight)) * pull;
+      if (inBeam) {
+        ax += Math.cos(dot.wobble) * 14;
+        ay += Math.sin(dot.wobble) * 14;
+      }
     } else {
-      // Idle wander — lemming shuffle.
-      ax += Math.cos(dot.wobble * 0.35) * 34;
-      ay += Math.sin(dot.wobble * 0.5) * 22;
-      // Mild gravity toward open corridors (downward bias like classic lemmings).
-      ay += 16;
+      ax += Math.cos(dot.wobble * 0.35) * 28;
+      ay += Math.sin(dot.wobble * 0.5) * 16;
+      ay += 8;
     }
 
     const sep = separate(game.dots, dot);
-    ax += sep.x;
-    ay += sep.y;
+    ax += sep.x * 0.55;
+    ay += sep.y * 0.55;
 
-    dot.vx = clamp(dot.vx + ax * dt, -190, 190);
-    dot.vy = clamp(dot.vy + ay * dt, -190, 190);
-    // Friction
-    const damp = inBeam ? 0.92 : 0.86;
+    dot.vx = clamp(dot.vx + ax * dt, -300, 300);
+    dot.vy = clamp(dot.vy + ay * dt, -300, 300);
+    const damp = light.active ? 0.95 : 0.88;
     dot.vx *= Math.pow(damp, dt * 60);
     dot.vy *= Math.pow(damp, dt * 60);
 
@@ -185,7 +187,7 @@ export function stepGame(game, dtRaw) {
     }
 
     // Goal
-    if (dist(dot.x, dot.y, game.goal.x, game.goal.y) < TILE * 0.55) {
+    if (dist(dot.x, dot.y, game.goal.x, game.goal.y) < TILE * 0.75) {
       dot.state = "saved";
       game.saved += 1;
     }
