@@ -2716,11 +2716,27 @@
       const deckUrl = params.get("deck");
       let raw;
 
+      const previewSvg = (label, fill) =>
+        `data:image/svg+xml,${encodeURIComponent(
+          `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200"><rect fill="${fill}" width="900" height="1200"/><text x="450" y="620" fill="#f7f1e8" text-anchor="middle" font-size="48" font-family="sans-serif">${label}</text></svg>`
+        )}`;
+
+      if (params.get("preview") === "now") {
+        state.deck = {
+          id: "preview.now",
+          title: "Review",
+          semanticId: "preview.now.plate",
+          candidates: [
+            { index: 12, label: "Now plate", url: previewSvg("now plate", "#1b2a33") },
+            { index: 13, label: "Next plate", url: previewSvg("next plate", "#243018") },
+          ],
+        };
+        state.decisions = [];
+        render();
+        return;
+      }
+
       if (params.get("preview") === "archive") {
-        const svg = (label, fill) =>
-          `data:image/svg+xml,${encodeURIComponent(
-            `<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200"><rect fill="${fill}" width="900" height="1200"/><text x="450" y="620" fill="#f7f1e8" text-anchor="middle" font-size="48" font-family="sans-serif">${label}</text></svg>`
-          )}`;
         state.deck = { id: "preview.archive", title: "Mission inbox", candidates: [] };
         state.decisions = [];
         state.lockHistory = true;
@@ -2733,7 +2749,7 @@
               semanticId: "poi.moonBase.rocket.exterior",
               status: "failed",
               candidateIndex: 0,
-              previewUrl: svg("rocket", "#1b2a33"),
+              previewUrl: previewSvg("rocket", "#1b2a33"),
               at: "2026-10-03T12:24:00Z",
             },
             {
@@ -2742,7 +2758,7 @@
               semanticId: "map.moonBase.exterior",
               status: "boarded",
               candidateIndex: 1,
-              previewUrl: svg("moon base", "#243018"),
+              previewUrl: previewSvg("moon base", "#243018"),
               at: "2026-10-03T12:10:00Z",
             },
           ],
