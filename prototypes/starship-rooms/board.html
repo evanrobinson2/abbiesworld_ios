@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#03080c" />
+  <title>AW-Prospect · Deck Leaderboard</title>
+  <link rel="stylesheet" href="./ship.css" />
+  <link rel="stylesheet" href="./board.css" />
+</head>
+<body class="board-body">
+  <div class="board">
+    <div class="board-frame">
+      <div class="board-corners"><span></span><span></span></div>
+
+      <header class="board-head">
+        <div>
+          <h1>SHIPBOARD · ROOM LEADERBOARD</h1>
+          <p class="sub">
+            Sci-fi status board for AW-Prospect decks. Select a row to preview the
+            HTML/CSS-composed interior — shells, apertures, heroes, PIPs, live light.
+          </p>
+        </div>
+        <div class="board-status">
+          <div class="live"><i></i> LINK NOMINAL</div>
+          <div>VESSEL AW-PROSPECT</div>
+          <div>MODE // INTERIOR SURVEY</div>
+          <div id="clock">00:00:00 ZULU</div>
+        </div>
+      </header>
+
+      <nav class="board-links">
+        <a href="./css.html">CSS WALKER</a>
+        <a href="./css-readout.html">CSS PLATES</a>
+        <a href="./readout.html">CANVAS READOUT</a>
+        <a href="./">CANVAS WALKER</a>
+      </nav>
+
+      <table class="lb" id="leaderboard" aria-label="Room leaderboard">
+        <thead>
+          <tr>
+            <th>RANK</th>
+            <th>ID</th>
+            <th>ROOM</th>
+            <th>DECK</th>
+            <th>DISTRICT</th>
+            <th>STATUS</th>
+            <th>INTEGRITY</th>
+          </tr>
+        </thead>
+        <tbody id="lbBody"></tbody>
+      </table>
+
+      <section class="board-preview" id="preview">
+        <div class="preview-label">
+          <strong id="prevTitle">SELECT A ROW</strong>
+          <span id="prevPurpose">—</span>
+        </div>
+        <div class="stage" id="stage"></div>
+        <div class="callouts" id="callouts"></div>
+      </section>
+
+      <div class="board-ticker">
+        <span>
+          // SPINE ACTIVE · OBS-01 → CMD-02 → CONN-01 → SCI-04 → CREW-07 → ENG-01 ·
+          TRAVERSAL CLEAR · PIP FEEDS ONLINE · NO HULL BREACH · DECK ELEVATORS STANDBY ·
+          ART-DIRECTION: OPTIMISTIC STARSHIP · RENDER: HTML/CSS LAYERS ·
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { ROOMS, roomHtml } from "./room-dom.js";
+
+    const meta = {
+      "OBS-01": { status: "MONITOR", statusClass: "status--mon", integrity: 98, callouts: ["Gallery window + ledge", "Soft vista spill", "Sky PIP", "2× bay"] },
+      "CMD-02": { status: "PRIORITY", statusClass: "status--pri", integrity: 96, callouts: ["Holomap table", "Cyan holo glow", "Tactical PIP", "1× chamber"] },
+      "CONN-01": { status: "NOMINAL", statusClass: "status--ok", integrity: 99, callouts: ["Door rhythm", "Artery strip", "Directory PIP", "1× spine"] },
+      "SCI-04": { status: "MONITOR", statusClass: "status--mon", integrity: 94, callouts: ["Analyzer pedestal", "Cyan emissive", "Spectrum PIP", "1× lab"] },
+      "CREW-07": { status: "NOMINAL", statusClass: "status--ok", integrity: 97, callouts: ["Lounge berth", "Warm pink bounce", "Schedule PIP", "1× nook"] },
+      "ENG-01": { status: "PRIORITY", statusClass: "status--pri", integrity: 91, callouts: ["Core column", "Amber pulse", "Telemetry pair", "2× bay"] },
+    };
+
+    // Rank by deck descending (higher decks first — obs/command prestige)
+    const ranked = [...ROOMS].sort((a, b) => b.deck - a.deck);
+
+    const body = document.getElementById("lbBody");
+    const stage = document.getElementById("stage");
+    const callouts = document.getElementById("callouts");
+    const prevTitle = document.getElementById("prevTitle");
+    const prevPurpose = document.getElementById("prevPurpose");
+
+    function select(id, row) {
+      document.querySelectorAll(".lb tbody tr").forEach((r) => r.classList.remove("is-active"));
+      row.classList.add("is-active");
+      const room = ROOMS.find((r) => r.id === id);
+      const m = meta[id];
+      stage.classList.toggle("stage--wide", room.format === "tile-2x");
+      stage.innerHTML = roomHtml(room, { active: true, showHud: false });
+      prevTitle.textContent = `${room.id} · ${room.name.toUpperCase()}`;
+      prevPurpose.textContent = room.purpose.toUpperCase();
+      const labels = ["HERO", "LIGHTING", "PIP", "TRAVERSAL"];
+      callouts.innerHTML = m.callouts
+        .map(
+          (v, i) =>
+            `<div class="callout"><span class="k">${labels[i]}</span><span class="v">${v}</span></div>`
+        )
+        .join("");
+    }
+
+    ranked.forEach((room, i) => {
+      const m = meta[room.id];
+      const tr = document.createElement("tr");
+      tr.dataset.id = room.id;
+      tr.innerHTML = `
+        <td class="rank">#${String(i + 1).padStart(2, "0")}</td>
+        <td class="room-id">${room.id}</td>
+        <td class="name">${room.name}</td>
+        <td class="deck">D${room.deck}</td>
+        <td class="district">${room.district}</td>
+        <td class="status ${m.statusClass}">${m.status}</td>
+        <td><div class="bar" title="${m.integrity}%"><i style="width:${m.integrity}%"></i></div></td>`;
+      tr.addEventListener("click", () => select(room.id, tr));
+      body.appendChild(tr);
+    });
+
+    // Default select top row
+    const first = body.querySelector("tr");
+    if (first) select(first.dataset.id, first);
+
+    function tick() {
+      const d = new Date();
+      const z = (n) => String(n).padStart(2, "0");
+      document.getElementById("clock").textContent =
+        `${z(d.getUTCHours())}:${z(d.getUTCMinutes())}:${z(d.getUTCSeconds())} ZULU`;
+    }
+    tick();
+    setInterval(tick, 1000);
+  </script>
+</body>
+</html>
