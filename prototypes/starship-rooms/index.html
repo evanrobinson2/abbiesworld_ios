@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0e14" />
+  <title>Starship Rooms — AW-Prospect</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #f3ebe0;
+      --muted: rgba(243, 235, 224, 0.62);
+      --guide: #5ec8d8;
+      --amber: #e0a45a;
+      --panel: rgba(12, 14, 18, 0.72);
+      --line: rgba(243, 235, 224, 0.12);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(900px 500px at 80% -10%, rgba(94, 200, 216, 0.12), transparent 55%),
+        radial-gradient(700px 480px at 0% 100%, rgba(224, 164, 90, 0.1), transparent 50%),
+        linear-gradient(165deg, #0b0e14, #141018 55%, #0c1018);
+      overflow: hidden;
+    }
+    .shell {
+      height: 100%;
+      min-height: 100dvh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 0.75rem;
+      padding: calc(0.85rem + var(--safe-top)) 1rem calc(0.85rem + var(--safe-bottom));
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      animation: rise 700ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .brand {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(1.6rem, 3.5vw, 2.3rem);
+      letter-spacing: -0.03em;
+      line-height: 0.95;
+    }
+    .brand span {
+      display: block;
+      font-size: 0.38em;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--guide);
+      margin-bottom: 0.35rem;
+      font-weight: 600;
+      font-family: "IBM Plex Sans", sans-serif;
+    }
+    .lede {
+      margin: 0;
+      max-width: 16rem;
+      text-align: right;
+      color: var(--muted);
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+    .chamber {
+      position: relative;
+      min-height: 0;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: #07080c;
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 24px 60px rgba(0,0,0,0.45);
+      overflow: hidden;
+      animation: rise 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    #stage {
+      display: block;
+      width: 100%;
+      height: 100%;
+      cursor: crosshair;
+      touch-action: none;
+    }
+    .hud {
+      position: absolute;
+      inset: 12px 12px auto 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .pill {
+      padding: 0.5rem 0.75rem;
+      border-radius: 12px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+    .pill strong { color: var(--guide); }
+    .purpose {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      text-align: center;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.05rem;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.55);
+      pointer-events: none;
+      color: rgba(243, 235, 224, 0.9);
+    }
+    footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: center;
+      flex-wrap: wrap;
+      animation: rise 1000ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .jumps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    button {
+      font: inherit;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.04);
+      color: var(--ink);
+      border-radius: 999px;
+      padding: 0.45rem 0.75rem;
+      cursor: pointer;
+    }
+    button:hover { border-color: rgba(94, 200, 216, 0.45); }
+    .hint { color: var(--muted); font-size: 0.82rem; max-width: 18rem; }
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (max-width: 720px) {
+      header { flex-direction: column; align-items: start; }
+      .lede { text-align: left; max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <header>
+      <h1 class="brand"><span id="ship">AW-Prospect</span>Starship Rooms</h1>
+      <p class="lede">Composed interiors — vector shell, live light, walkable floors. <a href="./readout.html" style="color:var(--guide)">Visual readout →</a></p>
+    </header>
+
+    <section class="chamber" aria-label="Starship room">
+      <canvas id="stage" width="960" height="540"></canvas>
+      <div class="hud">
+        <div class="pill" id="deck">DECK 14 · CMD-02</div>
+        <div class="pill"><strong id="roomName">Bridge Ante-Chamber</strong></div>
+      </div>
+      <div class="purpose" id="purpose">Receive the briefing</div>
+    </section>
+
+    <footer>
+      <div class="jumps">
+        <button type="button" data-jump="OBS-01">OBS</button>
+        <button type="button" data-jump="CMD-02">CMD</button>
+        <button type="button" data-jump="CONN-01">CONN</button>
+        <button type="button" data-jump="SCI-04">SCI</button>
+        <button type="button" data-jump="CREW-07">CREW</button>
+        <button type="button" data-jump="ENG-01">ENG</button>
+      </div>
+      <div class="hint">← → or tap to walk · enter doorways to traverse the spine</div>
+    </footer>
+  </div>
+  <script type="module" src="./game.js"></script>
+</body>
+</html>

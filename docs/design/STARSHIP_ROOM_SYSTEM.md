@@ -1,8 +1,10 @@
 # A+ Traversible Starship Room System
 
-**Status:** Design proposal  
+**Status:** Design proposal + living prototype  
 **Audience:** Art direction, engineering, generative pipelines  
 **Goal:** Game-ready traversible interiors that scale from a sample pack to an “infinite ship,” without raster-only AI backgrounds or generic sci-fi clutter.
+
+**Prototype:** `prototypes/starship-rooms/` — composed vector shells, aperture vistas, hero props, PIP scanline panels, bloom/light shafts, and L→R walkable traversal across the six-room spine.
 
 ---
 
