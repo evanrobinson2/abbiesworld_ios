@@ -1,0 +1,420 @@
+{
+  "packId": "starship.sample.v1",
+  "title": "Sample Traversible Room Pack",
+  "ship": "AW-Prospect",
+  "tile": { "base": "4:3", "formats": ["tile-1x", "tile-2x"] },
+  "spine": [
+    "ship.deck.16.room.OBS-01",
+    "ship.deck.14.room.CMD-02",
+    "ship.deck.12.room.CONN-01",
+    "ship.deck.11.room.SCI-04",
+    "ship.deck.9.room.CREW-07",
+    "ship.deck.3.room.ENG-01"
+  ],
+  "rooms": [
+    {
+      "id": "ship.deck.14.room.CMD-02",
+      "code": "CMD-02",
+      "name": "Bridge Ante-Chamber",
+      "deck": 14,
+      "district": "cmd",
+      "category": "chamber",
+      "purpose": "receive the briefing",
+      "format": "tile-1x",
+      "apertureMode": "slit",
+      "shell": {
+        "moduleKit": "hull-warm-v1",
+        "floorY": 0.8,
+        "doorLeft": true,
+        "doorRight": true
+      },
+      "hero": {
+        "propId": "prop.holomap.table",
+        "anchor": { "x": 0.5, "y": 0.64 }
+      },
+      "supports": [
+        { "propId": "prop.stool.low", "anchor": { "x": 0.38, "y": 0.78 } },
+        { "propId": "prop.display.strip", "anchor": { "x": 0.72, "y": 0.36 } }
+      ],
+      "signage": [
+        {
+          "text": "DECK 14 · CMD-02",
+          "sub": "Bridge Ante",
+          "anchor": { "x": 0.84, "y": 0.26 }
+        }
+      ],
+      "pips": [
+        {
+          "id": "pip.tactical",
+          "rect": { "x": 0.1, "y": 0.2, "w": 0.2, "h": 0.16 },
+          "content": "tactical"
+        }
+      ],
+      "lighting": {
+        "profile": "cmd-cyan",
+        "emissives": ["hero", "pip.tactical"]
+      },
+      "traversal": {
+        "floorPoly": [
+          [0.08, 0.82],
+          [0.92, 0.82],
+          [0.92, 0.95],
+          [0.08, 0.95]
+        ],
+        "doors": {
+          "left": {
+            "to": "ship.deck.16.room.OBS-01",
+            "anchor": { "x": 0.06, "y": 0.88 }
+          },
+          "right": {
+            "to": "ship.deck.12.room.CONN-01",
+            "anchor": { "x": 0.94, "y": 0.88 }
+          }
+        }
+      },
+      "interactives": [
+        { "id": "brief", "anchor": { "x": 0.5, "y": 0.7 }, "verb": "brief" }
+      ]
+    },
+    {
+      "id": "ship.deck.12.room.CONN-01",
+      "code": "CONN-01",
+      "name": "Pressure Spine",
+      "deck": 12,
+      "district": "conn",
+      "category": "artery",
+      "purpose": "connect the districts",
+      "format": "tile-1x",
+      "apertureMode": "none",
+      "shell": {
+        "moduleKit": "hull-warm-v1",
+        "floorY": 0.8,
+        "doorLeft": true,
+        "doorRight": true
+      },
+      "hero": {
+        "propId": "prop.door.sequence",
+        "anchor": { "x": 0.5, "y": 0.5 }
+      },
+      "supports": [
+        { "propId": "prop.hatch.utility", "anchor": { "x": 0.3, "y": 0.55 } }
+      ],
+      "signage": [
+        {
+          "text": "DECK 12 · CONN-01",
+          "sub": "Spine",
+          "anchor": { "x": 0.5, "y": 0.22 }
+        }
+      ],
+      "pips": [
+        {
+          "id": "pip.directory",
+          "rect": { "x": 0.42, "y": 0.28, "w": 0.16, "h": 0.12 },
+          "content": "directory"
+        }
+      ],
+      "lighting": {
+        "profile": "artery-neutral",
+        "emissives": ["pip.directory"]
+      },
+      "traversal": {
+        "floorPoly": [
+          [0.05, 0.82],
+          [0.95, 0.82],
+          [0.95, 0.95],
+          [0.05, 0.95]
+        ],
+        "doors": {
+          "left": {
+            "to": "ship.deck.14.room.CMD-02",
+            "anchor": { "x": 0.05, "y": 0.88 }
+          },
+          "right": {
+            "to": "ship.deck.11.room.SCI-04",
+            "anchor": { "x": 0.95, "y": 0.88 }
+          }
+        }
+      },
+      "interactives": []
+    },
+    {
+      "id": "ship.deck.11.room.SCI-04",
+      "code": "SCI-04",
+      "name": "Spectrometry",
+      "deck": 11,
+      "district": "sci",
+      "category": "chamber",
+      "purpose": "sample the anomaly",
+      "format": "tile-1x",
+      "apertureMode": "port",
+      "shell": {
+        "moduleKit": "hull-warm-v1",
+        "floorY": 0.8,
+        "doorLeft": true,
+        "doorRight": true
+      },
+      "hero": {
+        "propId": "prop.analyzer.pedestal",
+        "anchor": { "x": 0.52, "y": 0.62 }
+      },
+      "supports": [
+        {
+          "propId": "prop.cabinet.glass",
+          "anchor": { "x": 0.78, "y": 0.55 }
+        }
+      ],
+      "signage": [
+        {
+          "text": "DECK 11 · SCI-04",
+          "sub": "Spectrometry",
+          "anchor": { "x": 0.86, "y": 0.28 }
+        }
+      ],
+      "pips": [
+        {
+          "id": "pip.analysis",
+          "rect": { "x": 0.12, "y": 0.22, "w": 0.22, "h": 0.18 },
+          "content": "spectrum"
+        }
+      ],
+      "vista": {
+        "rect": { "x": 0.7, "y": 0.18, "w": 0.12, "h": 0.16 },
+        "style": "filtered-stars"
+      },
+      "lighting": {
+        "profile": "lab-cyan",
+        "emissives": ["hero", "pip.analysis"]
+      },
+      "traversal": {
+        "floorPoly": [
+          [0.08, 0.82],
+          [0.92, 0.82],
+          [0.92, 0.95],
+          [0.08, 0.95]
+        ],
+        "doors": {
+          "left": {
+            "to": "ship.deck.12.room.CONN-01",
+            "anchor": { "x": 0.06, "y": 0.88 }
+          },
+          "right": {
+            "to": "ship.deck.9.room.CREW-07",
+            "anchor": { "x": 0.94, "y": 0.88 }
+          }
+        }
+      },
+      "interactives": [
+        {
+          "id": "analyze",
+          "anchor": { "x": 0.52, "y": 0.7 },
+          "verb": "sample"
+        }
+      ]
+    },
+    {
+      "id": "ship.deck.9.room.CREW-07",
+      "code": "CREW-07",
+      "name": "Hab Nook",
+      "deck": 9,
+      "district": "crew",
+      "category": "nook",
+      "purpose": "rest the crew",
+      "format": "tile-1x",
+      "apertureMode": "port",
+      "shell": {
+        "moduleKit": "hull-warm-v1",
+        "floorY": 0.8,
+        "doorLeft": true,
+        "doorRight": true
+      },
+      "hero": {
+        "propId": "prop.berth.lounge",
+        "anchor": { "x": 0.62, "y": 0.66 }
+      },
+      "supports": [
+        { "propId": "prop.lamp.soft", "anchor": { "x": 0.78, "y": 0.5 } },
+        { "propId": "prop.shelf.personal", "anchor": { "x": 0.28, "y": 0.48 } }
+      ],
+      "signage": [
+        {
+          "text": "DECK 9 · CREW-07",
+          "sub": "Hab Nook",
+          "anchor": { "x": 0.18, "y": 0.26 }
+        }
+      ],
+      "pips": [
+        {
+          "id": "pip.schedule",
+          "rect": { "x": 0.14, "y": 0.34, "w": 0.14, "h": 0.1 },
+          "content": "schedule"
+        }
+      ],
+      "vista": {
+        "rect": { "x": 0.74, "y": 0.2, "w": 0.14, "h": 0.22 },
+        "style": "curtain-stars"
+      },
+      "lighting": {
+        "profile": "crew-warm",
+        "emissives": ["prop.lamp.soft"]
+      },
+      "traversal": {
+        "floorPoly": [
+          [0.08, 0.82],
+          [0.92, 0.82],
+          [0.92, 0.95],
+          [0.08, 0.95]
+        ],
+        "doors": {
+          "left": {
+            "to": "ship.deck.11.room.SCI-04",
+            "anchor": { "x": 0.06, "y": 0.88 }
+          },
+          "right": {
+            "to": "ship.deck.3.room.ENG-01",
+            "anchor": { "x": 0.94, "y": 0.88 }
+          }
+        }
+      },
+      "interactives": [
+        { "id": "rest", "anchor": { "x": 0.62, "y": 0.78 }, "verb": "rest" }
+      ]
+    },
+    {
+      "id": "ship.deck.3.room.ENG-01",
+      "code": "ENG-01",
+      "name": "Core Systems Bay",
+      "deck": 3,
+      "district": "eng",
+      "category": "bay",
+      "purpose": "tune the core",
+      "format": "tile-2x",
+      "apertureMode": "none",
+      "shell": {
+        "moduleKit": "hull-deep-v1",
+        "floorY": 0.8,
+        "doorLeft": true,
+        "doorRight": true
+      },
+      "hero": {
+        "propId": "prop.core.column",
+        "anchor": { "x": 0.5, "y": 0.48 }
+      },
+      "supports": [
+        { "propId": "prop.rail.catwalk", "anchor": { "x": 0.5, "y": 0.72 } },
+        { "propId": "prop.conduit.bundle", "anchor": { "x": 0.22, "y": 0.4 } }
+      ],
+      "signage": [
+        {
+          "text": "DECK 3 · ENG-01",
+          "sub": "Core Bay",
+          "anchor": { "x": 0.12, "y": 0.22 }
+        }
+      ],
+      "pips": [
+        {
+          "id": "pip.tele.a",
+          "rect": { "x": 0.12, "y": 0.3, "w": 0.12, "h": 0.14 },
+          "content": "telemetry"
+        },
+        {
+          "id": "pip.tele.b",
+          "rect": { "x": 0.76, "y": 0.3, "w": 0.12, "h": 0.14 },
+          "content": "telemetry"
+        }
+      ],
+      "lighting": {
+        "profile": "eng-amber",
+        "emissives": ["hero", "pip.tele.a", "pip.tele.b"]
+      },
+      "traversal": {
+        "floorPoly": [
+          [0.04, 0.82],
+          [0.96, 0.82],
+          [0.96, 0.95],
+          [0.04, 0.95]
+        ],
+        "doors": {
+          "left": {
+            "to": "ship.deck.9.room.CREW-07",
+            "anchor": { "x": 0.04, "y": 0.88 }
+          },
+          "right": {
+            "to": "ship.deck.12.room.CONN-01",
+            "anchor": { "x": 0.96, "y": 0.88 }
+          }
+        }
+      },
+      "interactives": [
+        { "id": "tune", "anchor": { "x": 0.5, "y": 0.7 }, "verb": "tune" }
+      ]
+    },
+    {
+      "id": "ship.deck.16.room.OBS-01",
+      "code": "OBS-01",
+      "name": "Observation Gallery",
+      "deck": 16,
+      "district": "obs",
+      "category": "bay",
+      "purpose": "watch the stars",
+      "format": "tile-2x",
+      "apertureMode": "gallery",
+      "shell": {
+        "moduleKit": "hull-warm-v1",
+        "floorY": 0.8,
+        "doorLeft": true,
+        "doorRight": true
+      },
+      "hero": {
+        "propId": "prop.window.gallery",
+        "anchor": { "x": 0.55, "y": 0.42 }
+      },
+      "supports": [
+        { "propId": "prop.bench.ledge", "anchor": { "x": 0.55, "y": 0.78 } },
+        { "propId": "prop.scope.mount", "anchor": { "x": 0.3, "y": 0.58 } }
+      ],
+      "signage": [
+        {
+          "text": "DECK 16 · OBS-01",
+          "sub": "Gallery",
+          "anchor": { "x": 0.12, "y": 0.24 }
+        }
+      ],
+      "pips": [
+        {
+          "id": "pip.sky",
+          "rect": { "x": 0.12, "y": 0.34, "w": 0.14, "h": 0.12 },
+          "content": "sky"
+        }
+      ],
+      "vista": {
+        "rect": { "x": 0.28, "y": 0.12, "w": 0.56, "h": 0.48 },
+        "style": "open-stars"
+      },
+      "lighting": {
+        "profile": "obs-soft",
+        "emissives": ["pip.sky"]
+      },
+      "traversal": {
+        "floorPoly": [
+          [0.04, 0.82],
+          [0.96, 0.82],
+          [0.96, 0.95],
+          [0.04, 0.95]
+        ],
+        "doors": {
+          "left": {
+            "to": "ship.deck.14.room.CMD-02",
+            "anchor": { "x": 0.04, "y": 0.88 }
+          },
+          "right": {
+            "to": "ship.deck.14.room.CMD-02",
+            "anchor": { "x": 0.96, "y": 0.88 }
+          }
+        }
+      },
+      "interactives": [
+        { "id": "look", "anchor": { "x": 0.55, "y": 0.7 }, "verb": "look" }
+      ]
+    }
+  ]
+}
