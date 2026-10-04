@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0e14" />
+  <title>Starship Rooms — HTML/CSS Readout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./ship.css" />
+</head>
+<body>
+  <div class="readout-wrap">
+    <header class="readout-mast">
+      <div class="eyebrow">AW-Prospect · HTML / CSS Readout</div>
+      <h1>Composed in the document</h1>
+      <p>
+        Each plate is real DOM: shell, aperture, hero, PIP, signage, actor, shafts —
+        lit with CSS gradients, shadows, blend modes, and keyframes. No canvas.
+      </p>
+      <nav class="nav-row" style="margin-top:0.75rem">
+        <a href="./board.html">Sci-fi leaderboard</a>
+        <a href="./css.html">HTML/CSS walker</a>
+        <a href="./readout.html">Canvas readout</a>
+        <a href="#OBS-01">OBS</a>
+        <a href="#CMD-02">CMD</a>
+        <a href="#SCI-04">SCI</a>
+        <a href="#ENG-01">ENG</a>
+      </nav>
+    </header>
+
+    <div id="plates"></div>
+
+    <section class="legend">
+      <h3>CSS composition stack</h3>
+      <ul>
+        <li><strong>.vista</strong> — gradient sky + star nodes + optional planet</li>
+        <li><strong>.shell-wall / .modules / .floor / .door</strong> — vector-like geometry via border-radius &amp; grids</li>
+        <li><strong>.aperture</strong> — clipped glass, sheen, light spill</li>
+        <li><strong>.hero-*</strong> — purpose object with box-shadow bloom</li>
+        <li><strong>.pip</strong> — bezel + scanlines + sweep animation</li>
+        <li><strong>.shaft / .vignette</strong> — mix-blend-mode screen shafts + radial falloff</li>
+      </ul>
+    </section>
+  </div>
+
+  <script type="module">
+    import { ROOMS, roomHtml } from "./room-dom.js";
+
+    const callouts = {
+      "OBS-01": ["Gallery window + ledge", "Soft vista spill, cool bloom", "Sky annotation", "2× bay · L/R to CMD"],
+      "CMD-02": ["Holomap table", "Cyan guidance + holo glow", "Approach tactical", "1× chamber · OBS ↔ CONN"],
+      "CONN-01": ["Door rhythm / hatch", "Neutral artery strip", "Directory", "1× spine · CMD ↔ SCI"],
+      "SCI-04": ["Analyzer pedestal", "Cyan instrument emissive", "Spectrum bars", "1× lab · CONN ↔ CREW"],
+      "CREW-07": ["Lounge berth + lamp", "Warm pink bounce", "Crew schedule", "1× nook · SCI ↔ ENG"],
+      "ENG-01": ["Core column", "Amber pulse + dual PIPs", "Telemetry pair", "2× bay · CREW ↔ CONN"],
+    };
+
+    const root = document.getElementById("plates");
+    for (const room of ROOMS) {
+      const c = callouts[room.id];
+      const wide = room.format === "tile-2x";
+      const plate = document.createElement("article");
+      plate.className = "plate";
+      plate.id = room.id;
+      plate.innerHTML = `
+        <div class="plate-head">
+          <div>
+            <div class="meta">DECK ${room.deck} · ${room.id} · ${room.district.toUpperCase()}</div>
+            <h2>${room.name}</h2>
+          </div>
+          <p class="note" style="margin:0;color:var(--muted)">${room.purpose}</p>
+        </div>
+        <div class="stage ${wide ? "stage--wide" : ""}">${roomHtml(room, { active: true, showHud: false })}</div>
+        <div class="callouts">
+          <div class="callout"><span class="k">Hero</span><span class="v">${c[0]}</span></div>
+          <div class="callout"><span class="k">Lighting</span><span class="v">${c[1]}</span></div>
+          <div class="callout"><span class="k">PIP</span><span class="v">${c[2]}</span></div>
+          <div class="callout"><span class="k">Traversal</span><span class="v">${c[3]}</span></div>
+        </div>`;
+      root.appendChild(plate);
+    }
+  </script>
+</body>
+</html>
