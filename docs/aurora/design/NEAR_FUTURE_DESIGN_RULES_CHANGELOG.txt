@@ -1,5 +1,13 @@
 AURORA NEAR-FUTURE DESIGN RULES — CHANGELOG
 
+1.1.0 — 2026-10-05
+Scope reconciliation with Cockpit production/category/token guides v1.2 and
+independent visual review v1.0. Limits earlier cool palette to reference study;
+records room-numeral direction tension without silently resolving user intent.
+Adds category routing, authority hashes and three-failed-review stop rule.
+Preserves latest explicit exploration/discovery mission with navigation central.
+No biography, plot, asset rebuild or retrospective certification.
+
 1.0.0 — 2026-10-05
 Initial authored baseline for recognizable near-future humans.
 Captures purposeful construction, human use, restrained room composition,
