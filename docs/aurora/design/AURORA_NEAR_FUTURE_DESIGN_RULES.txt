@@ -1,0 +1,69 @@
+AURORA — NEAR-FUTURE HUMAN DESIGN RULES
+Version 1.0.0 • 2026-10-05 • Owner: 001 Ship Builder
+Status: initial authored baseline; subject to Evan's visual review.
+Art direction and final hero-image acceptance remain with Cockpit.
+
+1. THE PREMISE
+Design for recognizable, Earth-origin humans a few generations ahead. No specific calendar year is assumed. Technology has advanced; human bodies, fatigue, privacy, habits, sentiment and the need for understandable tools remain familiar. Preserve the project's established spacecraft premise. Do not invent new speculative technology merely to decorate a room.
+
+A space should communicate its purpose before the viewer reads its label. A flight deck is for sustained attention; quarters provide retreat; a workshop supports work in progress. Each room must feel like part of the same ship while serving a different human activity.
+
+2. COMPOSITION BEFORE DETAIL
+Retain the approved architectural envelope, entrances and circulation. Start with a clear focal activity, large shapes, readable depth and areas of visual rest. For the reference-inspired room bay, prioritize substantial overhead structure, integrated equipment, deep door and viewport frames, a dark exterior view and a restrained blue-white palette.
+
+Do not substitute extra objects or panel lines for a convincing room. A broad quiet cover, a recessed workstation and a well-supported overhead assembly can carry more visual weight than dozens of small decorative parts. Judge the room from inside at human eye level; use cutaways and orthographic views to explain layout.
+
+3. DESIGN AS SOMETHING PEOPLE COULD BUILD
+Every major object needs an intelligible assembly: enclosure, cover, seam or gasket, attachment, support and access where appropriate. Vary their depth and scale. Panels should look removable; drawers should have room to open; lamps should have housings and diffusers; counters should transfer their load into supports.
+
+Use a shared family of fasteners, corner treatments, fixtures and interfaces across the ship. Design bespoke silhouettes where function warrants them. Avoid the repeated beveled-box look and arbitrary science-fiction surface clutter. A plain object with convincing construction is preferable to unexplained complexity.
+
+4. HUMAN SCALE AND USE
+Check reach, seating, sightlines, headroom, storage access and maintenance access using explicit scale references. Keep doors and working paths clear. Furniture must support plausible human poses, not merely fit inside a floor polygon. Record unresolved compromises rather than hiding them in a favorable camera view.
+
+The current six-person berth allocation is one captain, two officers and three crew. Treat this as the current project requirement, not a universal style rule. Architecture remains authoritative for dimensions and allocation. Visual checks do not certify ergonomics or operational safety.
+
+5. MATERIALS HAVE DISTINCT JOBS
+Assign materials by fabrication and use: coated panels, exposed metal edges, rubber seals, glass, woven fabric, molded controls and resilient floor surfaces. Distinguish them through roughness, reflectance, thickness and scale before adding texture noise. Metal should not resemble painted plastic; fabric should not resemble a solid glossy block.
+
+Use subtle, correctly scaled surface variation. Concentrate wear at handles, feet, edges, tool contact and cleaning paths. Avoid identical scratches everywhere. Preserve quiet surfaces. Procedural Blender materials and game-export materials must be evaluated separately; a good Blender render does not prove exported parity.
+
+6. TYPOGRAPHY AND PAINT
+Use large, thick italic room numerals, clear sans-serif operational labels and broad deliberate painted streaks or directional bands, following Evan's stated preference. Numbers should read as applied graphics with intentional placement, not floating text or tiny labels added afterward.
+
+Reserve the largest type for room identity and navigation. Keep controls legible from their intended viewing distance. Maintain a consistent label hierarchy, contrast and orientation. Check that beams, props and camera framing do not obscure essential information. Do not fill screens with meaningless pseudo-text.
+
+7. LIGHT HAS A SOURCE AND A PURPOSE
+Begin with believable practical fixtures: overhead illumination, task lights, display glow and restrained status indicators. Preserve cool white and slate-blue as the common ship language; use warmer local light where a human activity justifies it. Surface color should remain distinguishable.
+
+Build separation between foreground, working area and background. Preserve dark recesses and the viewport. Emissives, reflections, bloom and any volumetric treatment should support physical depth without washing out construction. One presentation stage owns exposure and tone mapping so independent passes do not compound adjustments.
+
+8. LIFE IS AUTHORED, NOT SCATTERED
+Give each space a specific occupant or current activity. Select a few meaningful objects: a maintained plant, a personal photograph, a thematic poster, a ship model on a secure base, a folded garment, a repair tray or an unfinished meal. Explain their placement through reach, storage and use.
+
+Add a usage layer after furnishing: a chair pulled back, a crease in bedding, a marked maintenance sheet, localized abrasion or a partly completed job. Keep decoration restrained where operations require clarity. Plants need plausible containers and placement; loose objects need restraint where ship operations require it. Do not use random clutter as a proxy for life.
+
+9. ROOM CHARACTER
+Command: readable instruments, controlled reflections, disciplined arrangement.
+Quarters: privacy, textiles, personal storage and individual identity.
+Galley/mess: shared rituals, food preparation, cleanable surfaces and social seating.
+Hygiene/medical: privacy, cleanable construction, understandable equipment storage.
+Life support/engineering: service access, traceable systems, purposeful identification.
+Cargo/workshop: robust storage, work surfaces and evidence of a specific repair.
+Airlock/suit preparation: clear preparation sequence, equipment access and restraint.
+These are briefs for design choices, not a license to alter approved architecture.
+
+10. SHOW THE IDEA EARLY
+Each stage should produce the cheapest useful visual forecast: a concept image, annotated plan, shell view, furniture silhouette, material swatch or room preview. Label invented concepts separately from renders of the actual source scene. Connect each forecast to its intended implementation and record time from brief to first useful visual.
+
+Show composition and a representative furniture grouping before repeating detailed fabrication throughout the room. Continue authorized reversible work; do not invent approval pauses. Surface major uncertainty early, and batch minor cosmetic decisions. Use fixed-camera comparisons when evaluating a specific change, plus the human-eye-level room view for coherence.
+
+11. ACCEPTANCE AND ACCOUNTABILITY
+Track feedback against an artifact and revision, with states: act now, batch, deferred, canceled and resolved. A canceled request stays canceled unless explicitly reopened. Report completed work, evidence, remaining work and limitations each turn.
+
+Check normals, support, bounds, intersections and entrances before delivery. Inspect actual renders as well as reports. Technical checks and visual acceptance are separate. State whether a delivery is a concept, furnished visual pass, close-view asset, assembled scene or game-ready asset; do not imply one proves the others. Game readiness needs its own material, performance and integration validation.
+
+12. VERSIONING
+This document is the canonical design baseline, tracked in Git. Update it in place with an incremented version and an entry in its companion changelog. Major versions change the premise or governing direction; minor versions add design guidance; patches clarify wording. Scene manifests should record the design-rule version and Git commit actually used. Existing scenes are not retroactively certified against new rules.
+
+Changes to the guide do not automatically authorize rebuilding completed scenes. Preserve earlier artifacts and record any intentional exception with its rationale. The first baseline consolidates Evan's feedback and the builder team's retrospective; further aesthetic acceptance belongs to Evan and Cockpit.
