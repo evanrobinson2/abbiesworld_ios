@@ -250,3 +250,35 @@ button.hotspot:hover:not(:disabled), button.hotspot.focus, .hotspot:focus-visibl
 @media (prefers-reduced-motion: reduce) { .credits { overflow-y: auto; pointer-events: auto !important; } .credits-roll { animation: none; padding-top: 0; } }
 .menu-box.death { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 70%; }
 .vault-room:hover, .vault-room:focus { outline: none; }
+
+.story-menu { position: absolute; left: 2.5%; top: 43%; }
+button:focus-visible { outline: 2px solid var(--cyan); outline-offset: 2px; }
+
+@media (max-width: 700px) {
+  html, body { overflow-y: auto; height: auto; min-height: 100%; }
+  #app { min-height: 100dvh; height: auto; justify-content: flex-start; }
+  #stage { height: auto; min-height: calc(180px * var(--s)); font-size: 14px; }
+  #screen { height: calc(180px * var(--s)); }
+  #stage[data-screen="TitleScreen"] #overlay,
+  #stage[data-screen="StoryScreen"] #overlay,
+  #stage[data-screen="BattleScreen"] #overlay { position: relative; }
+  .dialog, .battle-ui { position: relative; inset: auto; max-height: none; margin: 0; padding: 12px; }
+  .dialog .choices button, .dialog .more, .menu-box button { min-height: 44px; }
+  .scene-title { top: auto; bottom: 100%; right: 8px; font-size: 12px; }
+  .story-menu { top: auto; bottom: calc(100% + 4px); left: 8px; min-height: 36px; }
+  .battle-ui { font-size: 13px; }
+  .battle-ui .hand { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .battle-ui .card { min-height: 125px; overflow: visible; padding: 8px; }
+  .battle-ui .card-art { width: 42px; height: 42px; }
+  .battle-ui .bar { flex-direction: column; }
+  .battle-ui .btns { flex-direction: row; flex-wrap: wrap; }
+  .battle-ui .btns button { min-height: 44px; }
+  #modal { position: fixed; z-index: 10; padding: 12px; }
+  .menu-box { font-size: 14px; max-height: 90dvh; overflow-y: auto; }
+  .title-menu { position: relative; inset: auto; transform: none; margin: 8px 16px; gap: 6px; }
+  .title-menu button { font-size: 14px; min-height: 44px; }
+  .credit { position: relative; font-size: 10px; padding: 8px; }
+  .hotspot .pin { font-size: 9px; }
+  .city-name, .map-hint { font-size: 10px; }
+  #toast { font-size: 12px; max-width: 90%; z-index: 11; }
+}

@@ -1681,15 +1681,30 @@
    },
    "mystery": {
     "text": "A cave mouth in the hillside, closed by a door of old grey metal with no handle and no hinges you can see. Someone has scratched a little lantern symbol into the rock beside it.",
-    "leaveText": "Leave it for now"
+    "leaveText": "Leave it for now",
+    "effects": [
+     {
+      "set": "saw_cave"
+     }
+    ]
    },
    "noword": {
     "text": "The grey door. Now that you know what to look for, you see the panel beside it: a lens for an eye and a grille for a voice. Your father's message said a word would open it. The scratches on the disk ate the word.",
-    "leaveText": "Leave it for now"
+    "leaveText": "Leave it for now",
+    "effects": [
+     {
+      "set": "saw_cave"
+     }
+    ]
    },
    "noeye": {
     "text": "You have the word. The panel wants an eye as well, and not yours: it ignores you completely. {mentor_first} would know what to do with it.",
-    "leaveText": "Leave it for now"
+    "leaveText": "Leave it for now",
+    "effects": [
+     {
+      "set": "saw_cave"
+     }
+    ]
    },
    "guard": {
     "portrait": "portrait.mentor",
@@ -1711,10 +1726,18 @@
       "text": "Pull back for now",
       "exit": true
      }
+    ],
+    "effects": [
+     {
+      "set": "saw_cave"
+     }
     ]
    },
    "guard_won": {
     "effects": [
+     {
+      "set": "saw_cave"
+     },
      {
       "set": "cave_guard_won"
      },
@@ -1729,7 +1752,12 @@
    },
    "guard_lost": {
     "text": "Your machine sounds like a kettle full of gravel. You pull back into the trees and the {slot7} does not follow; it is guarding, not hunting. It will still be there.",
-    "leaveText": "Retreat"
+    "leaveText": "Retreat",
+    "effects": [
+     {
+      "set": "saw_cave"
+     }
+    ]
    },
    "door": {
     "portrait": "portrait.mentor",
@@ -1756,6 +1784,11 @@
       ],
       "exit": true
      }
+    ],
+    "effects": [
+     {
+      "set": "saw_cave"
+     }
     ]
    },
    "open": {
@@ -1775,6 +1808,11 @@
      {
       "text": "Not yet",
       "exit": true
+     }
+    ],
+    "effects": [
+     {
+      "set": "saw_cave"
      }
     ]
    }
@@ -2263,7 +2301,12 @@
      "You leave your machine under a tarp in the yard outside the wall, among a hundred freight walkers and loader frames.",
      "At the gate the sentry looks at your cadet jacket for a long, slow moment. \"School's out, cadet,\" he says. \"Permanently. Walk around like that in here and somebody will take an interest. Find a tailor.\""
     ],
-    "leaveText": "Into the port town"
+    "leaveText": "Into the port town",
+    "effects": [
+     {
+      "set": "port_seen"
+     }
+    ]
    }
   }
  },

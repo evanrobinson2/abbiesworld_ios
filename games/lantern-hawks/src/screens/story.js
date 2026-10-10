@@ -40,7 +40,7 @@ export class StoryScreen {
       box.append(list);
     }
     this.box = box;
-    g.overlay.append(box);
+    g.overlay.append(box, el('button', { class: 'story-menu', onclick: () => g.openMenu() }, 'Menu'));
   }
 
   advance() {

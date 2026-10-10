@@ -361,5 +361,6 @@ export function decide(b, endOfRound) {
   if (pOut && !eOut) b.result = 'lose';
   else if (eOut && !pOut) b.result = 'win';
   else b.result = armorFraction(b.player) > armorFraction(b.enemy) ? 'win' : 'lose';
-  b.log.push({ who: 'ref', text: b.result === 'win' ? 'Referee: bout to you.' : `Referee: bout to the ${b.enemy.label}.` });
+  const judge = b.def.referee === 'practice' ? 'Referee' : 'Combat result';
+  b.log.push({ who: 'ref', text: b.result === 'win' ? `${judge}: victory.` : `${judge}: defeat against ${b.enemy.label}.` });
 }

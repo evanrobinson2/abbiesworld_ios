@@ -47,7 +47,7 @@ export class BattleScreen {
     if (b.over) {
       const win = b.result === 'win';
       this.panel.append(el('div', { class: 'battle-over' },
-        el('div', { class: win ? 'win' : 'lose' }, win ? 'Victory: the referee calls it for you.' : 'Defeat: the bout goes to your opponent.'),
+        el('div', { class: win ? 'win' : 'lose' }, win ? 'Victory — encounter won.' : 'Defeat — encounter lost.'),
         el('div', { class: 'log' }, ...b.log.slice(-3).map(l => el('div', { class: l.who }, l.text))),
         el('button', { onclick: () => g.endBattle(this.id, this.def, b.result) }, 'Continue'),
       ));
@@ -77,7 +77,8 @@ export class BattleScreen {
         this.explainEl,
         el('div', { class: 'btns' },
           el('button', { class: 'end', onclick: () => this.end() }, 'End turn (E)'),
-          el('button', { onclick: () => g.showBattleHelp() }, 'Rules ?')),
+          el('button', { onclick: () => g.showBattleHelp() }, 'Rules ?'),
+          g.sampleMode ? el('button', { onclick: () => g.titleScreen() }, 'Exit demo') : null),
       ),
       el('div', { class: 'log' }, ...b.log.slice(-3).map(l => el('div', { class: l.who }, l.text))),
     );

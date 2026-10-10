@@ -26,3 +26,21 @@ test('broken or blocked storage never throws', () => {
   assert.equal(loadGame(blocked), null);
   assert.equal(hasSave(blocked), false);
 });
+
+test('malformed saves do not offer Continue', () => {
+  for (const patch of [{party:null}, {party:[]}, {pos:{}}, {items:{}}, {collection:[null]}, {money:'lots'}, {flags:[]}]) {
+    const st=mem();
+    st.setItem(SAVE_KEY,JSON.stringify({version:1,state:{...newGame(load('names.json'),load('data/world.json')),...patch}}));
+    assert.equal(loadGame(st),null);
+    assert.equal(hasSave(st),false);
+  }
+});
+
+
+test('unclaimed booster packs survive a save with the same cards', () => {
+  const storage=mem();
+  const state=newGame(load('names.json'),load('data/world.json'));
+  state.pendingBoosters=[['advance','aim','advance']];
+  assert.ok(saveGame(storage,state));
+  assert.deepEqual(loadGame(storage).pendingBoosters,state.pendingBoosters);
+});

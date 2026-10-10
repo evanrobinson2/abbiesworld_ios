@@ -164,6 +164,24 @@ export class Story {
     this.waiting = null; // 'battle' while a battle runs
   }
 
+  snapshot() {
+    if (!this.node() || this.waiting) return null;
+    return { sceneId: this.sceneId, nodeId: this.nodeId, page: this.page };
+  }
+
+  restore(saved) {
+    const node = this.scenes[saved?.sceneId]?.nodes[saved?.nodeId];
+    const pages = Array.isArray(node?.text) ? node.text.length : 1;
+    if (!node || !Number.isInteger(saved.page) || saved.page < 0 || saved.page >= pages) return false;
+    // Entry effects already happened before saving. Never grant them twice.
+    this.sceneId = saved.sceneId;
+    this.nodeId = saved.nodeId;
+    this.page = saved.page;
+    this.waiting = null;
+    this.events = [];
+    return true;
+  }
+
   ctx() {
     return { party: this.party, dict: this.dict };
   }
@@ -197,9 +215,11 @@ export class Story {
       if (!n) throw new Error(`scene "${this.sceneId}" has no node "${id}"`);
       this.nodeId = id;
       this.page = 0;
-      this.push(applyEffects(n.effects, this.state, this.rng, this.ctx()));
       const hit = (n.redirect || []).find(r => evalCond(r.if, this.state));
-      if (!hit) return;
+      if (!hit) {
+        this.push(applyEffects(n.effects, this.state, this.rng, this.ctx()));
+        return;
+      }
       if (hit.scene) {
         this.sceneId = hit.scene;
         id = hit.goto || this.scenes[hit.scene].start || 'start';

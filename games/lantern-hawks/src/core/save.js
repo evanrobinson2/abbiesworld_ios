@@ -26,7 +26,7 @@ export function loadGame(storage) {
 
 export function hasSave(storage) {
   try {
-    return !!storage.getItem(SAVE_KEY);
+    return loadGame(storage) !== null;
   } catch {
     return false;
   }

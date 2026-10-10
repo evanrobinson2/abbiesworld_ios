@@ -6,6 +6,7 @@ import { nameDict, mechName } from './core/names.js';
 import { newGame, migrate } from './core/state.js';
 import { Story, evalCond } from './core/script.js';
 import { saveGame, loadGame, hasSave } from './core/save.js';
+import { openBooster as rollBooster } from './core/cards.js';
 import { parseWorld, coverAt } from './core/hex.js';
 import { TitleScreen } from './screens/title.js';
 import { MapScreen } from './screens/map.js';
@@ -59,6 +60,7 @@ class Game {
     if (this.screen?.exit) this.screen.exit();
     this.overlay.innerHTML = '';
     this.screen = screen;
+    document.getElementById('stage').dataset.screen = screen.constructor.name;
     if (screen.enter) screen.enter();
     window.LH_SCREEN?.(screen, this);
     this.refreshStatus();
@@ -85,6 +87,7 @@ class Game {
 
   startStory(state) {
     this.state = state;
+    this.boosterActive = false;
     this.sampleMode = false;
     migrate(state);
     this.story = new Story({ scenes: this.data.scenes, state, dict: this.dict, party: this.data.party });
@@ -93,6 +96,7 @@ class Game {
   newGame() {
     this.startStory(newGame(this.data.names, this.data.world));
     this.toLocation();
+    this.save(true);
     this.toast('Day 1. Visit the cadet school to start training.');
   }
 
@@ -100,21 +104,28 @@ class Game {
     const s = this.storage && loadGame(this.storage);
     if (!s || !s.location) { this.toast('No save found'); return false; }
     this.startStory(s);
-    this.toLocation();
+    if (!s.flags.game_won && this.story.restore(s.resume?.story)) {
+      this.returnFrom = s.resume.from;
+      this.setScreen(new StoryScreen(this));
+    } else this.toLocation();
+    if (s.pendingBoosters?.length) this.openBooster(0);
     this.toast(`Loaded: day ${s.day}`);
     return true;
   }
 
   save(quiet = false) {
     if (!this.state || this.sampleMode) return;
-    const ok = this.storage && saveGame(this.storage, this.state);
+    const snapshot = this.screen instanceof StoryScreen ? this.story.snapshot() : null;
+    const state = { ...this.state, resume: snapshot ? { story: snapshot, from: this.returnFrom } : null };
+    const ok = this.storage && saveGame(this.storage, state);
     if (!quiet || !ok) this.toast(ok ? 'Game saved' : 'Saving is not available in this browser');
   }
 
   // Go wherever state.location says: the hex map or a city.
   toLocation() {
+    if (this.state.flags.game_won) { this.setScreen(new EndingScreen(this)); return; }
     const loc = this.state.location || 'map';
-    if (loc.startsWith('city:')) this.setScreen(new CityScreen(this, loc.slice(5)));
+    if (loc.startsWith('city:') && this.data.cities[loc.slice(5)]) this.setScreen(new CityScreen(this, loc.slice(5)));
     else if (loc === 'vault') this.setScreen(new VaultScreen(this));
     else this.setScreen(new MapScreen(this));
   }
@@ -149,6 +160,7 @@ class Game {
     else if (this.returnFrom?.kind === 'vault') this.state.location = 'vault';
     this.returnFrom = null;
     this.toLocation();
+    this.save(true);
   }
 
   // cover 'map': a fight on the hex board. The enemy has the cover of the
@@ -194,6 +206,13 @@ class Game {
   }
 
   openBooster(n, onDone) {
+    if (!this.sampleMode) {
+      this.state.pendingBoosters ??= [];
+      for (let i = 0; i < n; i++) this.state.pendingBoosters.push(rollBooster(this.data.cards, Math.random));
+      this.save(true);
+    }
+    if (this.boosterActive) return;
+    this.boosterActive = true;
     const run = () => openBoosterModal(this, n, onDone);
     if (this.modal.hidden) run(); else this.modalQueue.push(run);
   }
@@ -210,7 +229,7 @@ class Game {
     this.last = t;
     this.time += dt;
     if (this.screen) {
-      this.screen.update?.(dt);
+      if (this.modal.hidden && !document.hidden) this.screen.update?.(dt);
       this.g.setTransform(1, 0, 0, 1, 0, 0);
       this.g.imageSmoothingEnabled = false;
       this.screen.render?.(this.g);
@@ -222,7 +241,7 @@ class Game {
 function fit() {
   const statusH = document.getElementById('status').offsetHeight || 0;
   const avail = Math.min(window.innerWidth / W, (window.innerHeight - statusH - 16) / H);
-  const s = avail >= 2 ? Math.floor(avail) : Math.max(1, Math.floor(avail * 4) / 4);
+  const s = window.innerWidth <= 700 ? window.innerWidth / W : (avail >= 2 ? Math.floor(avail) : Math.max(0.5, Math.floor(avail * 4) / 4));
   document.documentElement.style.setProperty('--s', s);
 }
 
@@ -233,6 +252,7 @@ function wireInput(game) {
       return;
     }
     if (e.key === 'Escape' && game.state && game.screen?.allowMenu) { game.openMenu(); e.preventDefault(); return; }
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.closest?.('button, input, select, textarea')) return;
     if (game.screen?.key?.(e.key, e, true)) e.preventDefault();
   });
   window.addEventListener('keyup', (e) => game.screen?.key?.(e.key, e, false));
@@ -241,10 +261,12 @@ function wireInput(game) {
     return { x: ((e.clientX - r.left) / r.width) * W, y: ((e.clientY - r.top) / r.height) * H };
   };
   game.canvas.addEventListener('pointerdown', (e) => {
+    if (!game.modal.hidden) return;
     const p = toCanvas(e);
     game.screen?.pointer?.(p.x, p.y, e);
   });
   game.canvas.addEventListener('pointermove', (e) => {
+    if (!game.modal.hidden) return;
     const p = toCanvas(e);
     game.screen?.move?.(p.x, p.y, e);
   });

@@ -23,7 +23,9 @@ Run the tests (Node 20 or newer):
 - **Story panels:** read, then pick a numbered choice (mouse, or keys 1-9; Enter or Space moves on).
 - **Card battles:** see below. Esc opens the menu (save, load, deck, help, quit).
 
-The story covers beats 1 to 4: the first training mission, the dream, the practice duel and the invitation, the night at the Lamplight, and the raid that leaves the town occupied. After the raid the town art, the hex map (burning town, patrols) and every building's scene switch to their ruined versions. The east road ends the round.
+The complete 12-beat campaign follows cadet training, the raid and occupation, an escape through the port, recruiting the lanterns, the inventor's questions, the guarded cave, a key-card vault and the final decision. Optional road encounters, the stockade rescue and the hidden hangar extend the journey. Follow the objective below the scene when you need direction.
+
+Progress saves when leaving a scene, at major story moments and when collecting cards. Menu → Save game also preserves the current conversation page. Continue returns to that page without replaying rewards; completing the campaign preserves the ending. Saves belong to this browser and address. Battles must be resolved before saving.
 
 ## Card battles
 
@@ -121,22 +123,16 @@ Every picture is looked up by role: `hex.forest`, `scene.city.home.day`, `scene.
 
 No code changes. Hex art is drawn 48 px wide (height keeps its aspect) with rows 32 px apart, back to front, so tiles with an earth edge overlap correctly. A missing key draws a magenta checker and logs a warning rather than nothing. The burning town hex is the real city tile plus animated fire; set `hex.city_burning` in the manifest to replace that.
 
-## Done in round 1
+## Completion pass
 
-- Title screen with starfield, ringed planet, chrome title and the homage credit.
-- Overland hex board using the real hex art, a squad figurine that hops hex to hex with click-to-path, terrain names and cover on hover, special hexes, post-raid patrols and a burning town.
-- Citadel Town as one scene image (intact and ruined) with 13 clickable places and people.
-- Story panels with portraits and typewriter text, driven by the data-file script runner.
-- Beats 1-4 in new writing, with the town switching to its occupied version after the raid.
-- Card battles: practice duel (story) and a sample battle against a Harrier (title screen), with decks, hand, heat budget, visible dice, itemised odds, enemy AI and booster rewards.
-- Save and load (localStorage, autosave at story beats and when leaving town), status panel with money, day, skills, mech, items, deck size, current beat and objective.
-- 39 tests over the script runner, rules, battles, cards, hex math, saves and data contracts (including a ban on the original's names).
+- Full campaign route checked from new game to the independent-unit ending, using actual card battles with a seeded strategy bot.
+- Dialogue saves preserve scene, page and return location; entry rewards are not repeated on load. Invalid save files do not offer Continue.
+- Redirect checks now precede node rewards: incorrect vault codes stay locked, and ruins pay out once.
+- Pause menus suspend map movement. Focused buttons respond to Enter without also triggering a story shortcut.
+- Booster rewards are saved before selection and retained after collection.
+- Story and battle panels flow below the artwork on narrow screens, with larger controls and scrollable content.
+- The existing original art and soundtrack remain in place.
 
-## Known gaps and next rounds
+## Verification and limits
 
-- **Beats 5-12:** clothes, the port, the inauguration, the holodisk, recruiting three agents, the inventor's hut, the cave and the vault, the ending. The cave hex and the brass token are already planted.
-- **More cities:** the port and other towns, each a scene image plus hotspots in `cities.json`.
-- **Battles:** hex terrain cover feeding the to-hit number (cover values are already in `world.json`), criticals, road encounters with the patrols, battles on foot, enemy decks per mech, more booster cards, card upgrades.
-- **Real art:** portraits, city and place scenes, figurines, mechs and card art all still use placeholders. Real road hex art runs diagonally while the map's road runs east-west.
-- **Systems:** stock market, healing by Medical skill, hiring party members, a second save slot.
-- **Small screens:** at phone width the canvas scales down but the story and battle panels get cramped; a portrait layout is still to do.
+Run `node --test` for the logic and data checks, including the main campaign, puzzle failure/recovery, one-time rewards and dialogue recovery. The campaign helper checks routes and destination scenes; it does not trigger every intermediate road encounter. Browser smoke checks cover launch, town, story, save/reload and battle controls. This is a local browser release, not an exhaustive test of every optional branch or device. Storage is one local save slot; clearing browser data removes it.

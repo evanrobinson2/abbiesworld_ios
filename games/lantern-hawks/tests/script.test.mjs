@@ -106,3 +106,20 @@ test('unknown placeholders stay visible', () => {
   assert.equal(nameDict(names).father_first, 'Elias');
   assert.equal(nameDict(names).slot5, 'Mantis');
 });
+
+test('dialogue resumes at its saved page without repeating rewards or events', () => {
+  const state=fresh();
+  const scenes={test:{nodes:{start:{text:['First','Second'],effects:[{money:50},{save:true}],next:'end'},end:{text:'Done'}}}};
+  const original=new Story({scenes,state,dict:{}});
+  original.enter('test'); original.next();
+  const saved=JSON.parse(JSON.stringify({state,story:original.snapshot()}));
+  const resumed=new Story({scenes,state:saved.state,dict:{}});
+  assert.ok(resumed.restore(saved.story));
+  assert.equal(resumed.view().text,'Second');
+  assert.equal(saved.state.money,70);
+  assert.deepEqual(resumed.takeEvents(),[]);
+  assert.equal(resumed.restore({sceneId:'missing',nodeId:'start',page:0}),false);
+  assert.equal(resumed.restore({...saved.story,page:99}),false);
+  original.waiting='battle';
+  assert.equal(original.snapshot(),null);
+});

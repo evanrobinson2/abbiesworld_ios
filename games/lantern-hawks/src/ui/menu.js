@@ -7,6 +7,8 @@ import { buildDeck, openBooster as rollBooster, addToCollection, toggleInDeck, p
 function show(game, box, { closable = true } = {}) {
   game.modal.innerHTML = '';
   game.modal.hidden = false;
+  game.overlay.inert = true;
+  game.statusEl.inert = true;
   game.modal.dataset.closable = closable ? '1' : '';
   game.modal.append(box);
   box.querySelector('button')?.focus();
@@ -14,6 +16,8 @@ function show(game, box, { closable = true } = {}) {
 
 export function closeModal(game) {
   game.modal.hidden = true;
+  game.overlay.inert = false;
+  game.statusEl.inert = false;
   game.modal.innerHTML = '';
   const next = game.modalQueue?.shift();
   if (next) next();
@@ -36,7 +40,7 @@ export function showHelp(game) {
     el('h2', {}, 'How to play'),
     el('p', {}, 'Map: click a hex to move your squad figurine. Click the town hex (or stand on it and press Enter) to go in.'),
     el('p', {}, 'Town: click any labelled place to visit it. People and places talk in story panels; pick a numbered choice (or press 1-9).'),
-    el('p', {}, 'Battles: see "Rules ?" on the battle screen. Esc opens the menu (save, load, deck).'),
+    el('p', {}, 'Battles: see "Rules ?" on the battle screen. Outside combat, Esc opens the menu (save, load, deck).'),
     el('button', { onclick: () => closeModal(game) }, 'Close'),
   ));
 }
@@ -47,7 +51,7 @@ export function showBattleHelp(game) {
     el('p', {}, 'Each round you draw up to 5 cards. Play as many as you like, one at a time, then End turn. Unplayed cards are discarded; your deck reshuffles when it runs out.'),
     el('p', {}, 'Heat is your budget. Every card shows the heat it adds. At the end of each round your heat sinks cool you. Heat 8+ makes shots harder. End a round above the red line (20) and the excess damages your centre torso; reach 30 and you shut down and lose a turn. Vent cards cool you at once.'),
     el('p', {}, 'Hit chance: each attack shows its odds before you play it. It is the 2d6 target number from range, your movement, the target\'s movement, your heat and your Gunnery (Piloting for fists and kicks). Aim makes the next shot easier; Evasive Step makes the enemy\'s shots harder. Every shot rolls two dice on screen.'),
-    el('p', {}, 'Move cards (Advance, Withdraw, Charge, Evasive Step) change the range; one per round. Fists and kicks need range 1. The referee calls the bout when a mech is down to half armour, or loses its head or centre-torso armour.'),
+    el('p', {}, 'Move cards (Advance, Withdraw, Charge, Evasive Step) change the range; one per round. Fists and kicks need range 1. An encounter ends when a mech is down to half armour, or loses its head or centre-torso armour. At the round limit, the higher remaining armour percentage wins.'),
     el('p', {}, 'Boosters: win fights or buy packs at the arms dealer. A pack has 3 cards; keep the ones you want and put them in your deck from the Deck screen.'),
     el('button', { onclick: () => closeModal(game) }, 'Back to the fight'),
   ));
@@ -80,7 +84,7 @@ export function openDeck(game) {
           control: el('button', { onclick: () => { if (!toggleInDeck(s, i, cd.maxExtras)) game.toast('Deck extras are full'); render(); } }, c.inDeck ? 'In deck: remove' : 'Add to deck'),
         })))
         : el('p', {}, 'No booster cards yet. Win a fight or buy a pack at the arms dealer.'),
-      el('button', { onclick: () => { closeModal(game); game.refreshStatus(); } }, 'Done'),
+      el('button', { onclick: () => { closeModal(game); game.refreshStatus(); game.save(true); } }, 'Done'),
     ));
   };
   render();
@@ -89,7 +93,7 @@ export function openDeck(game) {
 // Open n boosters one after another; each lets you keep 1 to 3 cards.
 export function openBoosterModal(game, n = 1, onDone) {
   const cd = game.data.cards;
-  const pack = rollBooster(cd, Math.random);
+  const pack = game.state?.pendingBoosters?.[0] || rollBooster(cd, Math.random);
   const keep = new Set([0, 1, 2]);
   const render = () => {
     show(game, el('div', { class: 'menu-box booster' },
@@ -101,10 +105,14 @@ export function openBoosterModal(game, n = 1, onDone) {
       el('button', {
         onclick: () => {
           if (game.state) addToCollection(game.state, [...keep].map(i => pack[i]), cd.maxExtras);
+          if (!game.sampleMode) game.state.pendingBoosters?.shift();
+          game.save(true);
           game.toast(`${keep.size} card${keep.size > 1 ? 's' : ''} added`);
+          const more = game.sampleMode ? n > 1 : game.state.pendingBoosters?.length;
+          if (!more) game.boosterActive = false;
           closeModal(game);
           game.refreshStatus();
-          if (n > 1) openBoosterModal(game, n - 1, onDone);
+          if (game.sampleMode ? n > 1 : game.state.pendingBoosters?.length) openBoosterModal(game, n - 1, onDone);
           else onDone?.();
         },
       }, `Take ${keep.size}`),

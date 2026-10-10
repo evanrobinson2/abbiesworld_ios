@@ -49,5 +49,16 @@ export function serialize(state) {
 export function deserialize(text) {
   const data = JSON.parse(text);
   if (!data || data.version !== SAVE_VERSION || !data.state) throw new Error('save from another version');
-  return data.state;
+  const s = data.state;
+  if (!s || typeof s.location !== 'string' || !Number.isFinite(s.money) ||
+      !Number.isFinite(s.day) || !Number.isInteger(s.pos?.q) || !Number.isInteger(s.pos?.r) ||
+      !Array.isArray(s.party) || !s.party.length ||
+      s.party.some(p => !p || typeof p.id !== 'string' || !Number.isFinite(p.health) || !Number.isFinite(p.maxHealth)) ||
+      (s.items != null && !Array.isArray(s.items)) ||
+      (s.collection != null && (!Array.isArray(s.collection) || s.collection.some(c => !c || typeof c.id !== 'string'))) ||
+      (s.pendingBoosters != null && (!Array.isArray(s.pendingBoosters) || s.pendingBoosters.some(pack => !Array.isArray(pack) || pack.length !== 3 || pack.some(id => typeof id !== 'string')))) ||
+      (s.flags != null && (typeof s.flags !== 'object' || Array.isArray(s.flags)))) {
+    throw new Error('Invalid save data');
+  }
+  return s;
 }

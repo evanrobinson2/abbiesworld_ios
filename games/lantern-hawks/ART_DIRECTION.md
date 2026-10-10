@@ -1,6 +1,6 @@
 # Art direction (decided by Evan, 2026-10-10)
 
-Three looks, each with one job. Every design is our own: no BattleTech mechs, emblems, names or text.
+Three looks, each with one job. Every design is our own: no borrowed franchise mechs, emblems, names or text.
 
 | Use | Look | Reference proof |
 |---|---|---|
