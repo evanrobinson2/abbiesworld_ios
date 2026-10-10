@@ -1,0 +1,350 @@
+{
+  "_note": "Battle cards. heat = what playing the card costs (heat is the budget). effect kinds: attack {weapon}, melee {damage, tnBase}, move {move, dir, squares?}, aim {tn}, evade {tn, squares}, brace {reduce}, vent {cool}, laserBonus {damage}, laserMult {mult}, repair {armor}. aim may also carry damage (added to the next hit of any weapon); vent may carry sinks (added to your sinks for the rest of the bout). rarity: party cards come only from party members; base cards come from loadout/basics/skills only; common/uncommon/rare can drop from boosters. art is an asset-registry key.",
+  "cards": {
+    "small_laser": {
+      "name": "Small Laser",
+      "heat": 1,
+      "rarity": "base",
+      "art": "card.laser",
+      "effect": {
+        "kind": "attack",
+        "weapon": "SmallLaser"
+      },
+      "text": "3 damage. Short range."
+    },
+    "medium_laser": {
+      "name": "Medium Laser",
+      "heat": 3,
+      "rarity": "base",
+      "art": "card.laser",
+      "effect": {
+        "kind": "attack",
+        "weapon": "MediumLaser"
+      },
+      "text": "5 damage."
+    },
+    "large_laser": {
+      "name": "Large Laser",
+      "heat": 8,
+      "rarity": "base",
+      "art": "card.laser",
+      "effect": {
+        "kind": "attack",
+        "weapon": "LargeLaser"
+      },
+      "text": "8 damage. Long reach, runs hot."
+    },
+    "mg_burst": {
+      "name": "Machine Gun",
+      "heat": 0,
+      "rarity": "base",
+      "art": "card.gun",
+      "effect": {
+        "kind": "attack",
+        "weapon": "MachineGun"
+      },
+      "text": "2 damage. No heat. Uses ammo."
+    },
+    "srm_salvo": {
+      "name": "Missile Salvo",
+      "heat": 2,
+      "rarity": "base",
+      "art": "card.missile",
+      "effect": {
+        "kind": "attack",
+        "weapon": "SRM2"
+      },
+      "text": "2 missiles, 2 damage each if they hit."
+    },
+    "punch": {
+      "name": "Fist",
+      "heat": 0,
+      "rarity": "base",
+      "art": "card.fist",
+      "effect": {
+        "kind": "melee",
+        "damage": "tons/10",
+        "tnBase": 2
+      },
+      "text": "Point blank only. Uses Piloting."
+    },
+    "kick": {
+      "name": "Kick",
+      "heat": 1,
+      "rarity": "base",
+      "art": "card.boot",
+      "effect": {
+        "kind": "melee",
+        "damage": "tons/5",
+        "tnBase": 4
+      },
+      "text": "Point blank only. Big hit, hard to land."
+    },
+    "advance": {
+      "name": "Advance",
+      "heat": 1,
+      "rarity": "common",
+      "art": "card.move",
+      "effect": {
+        "kind": "move",
+        "move": "walk",
+        "dir": -1
+      },
+      "text": "Walk in. Close the range."
+    },
+    "withdraw": {
+      "name": "Withdraw",
+      "heat": 1,
+      "rarity": "common",
+      "art": "card.move",
+      "effect": {
+        "kind": "move",
+        "move": "walk",
+        "dir": 1
+      },
+      "text": "Walk back. Open the range."
+    },
+    "charge": {
+      "name": "Charge",
+      "heat": 2,
+      "rarity": "uncommon",
+      "art": "card.move",
+      "effect": {
+        "kind": "move",
+        "move": "run",
+        "dir": -1
+      },
+      "text": "Run in. Harder for you to aim this turn."
+    },
+    "brace": {
+      "name": "Brace",
+      "heat": 0,
+      "rarity": "common",
+      "art": "card.shield",
+      "effect": {
+        "kind": "brace",
+        "reduce": 2
+      },
+      "text": "Each hit on you this round does 2 less."
+    },
+    "vent": {
+      "name": "Vent",
+      "heat": 0,
+      "rarity": "common",
+      "art": "card.vent",
+      "effect": {
+        "kind": "vent",
+        "cool": 6
+      },
+      "text": "Dump 6 heat now."
+    },
+    "aim": {
+      "name": "Aim",
+      "heat": 0,
+      "rarity": "common",
+      "art": "card.aim",
+      "effect": {
+        "kind": "aim",
+        "tn": 2
+      },
+      "text": "Your next shot is 2 easier."
+    },
+    "evasive_step": {
+      "name": "Evasive Step",
+      "heat": 1,
+      "rarity": "common",
+      "art": "card.move",
+      "effect": {
+        "kind": "evade",
+        "tn": 2,
+        "squares": 3
+      },
+      "text": "Counts as your move. Enemy shots 2 harder until your next turn."
+    },
+    "coolant_purge": {
+      "name": "Coolant Purge",
+      "heat": 0,
+      "rarity": "uncommon",
+      "art": "card.vent",
+      "effect": {
+        "kind": "vent",
+        "cool": 11
+      },
+      "text": "Dump 11 heat now."
+    },
+    "target_lock": {
+      "name": "Target Lock",
+      "heat": 1,
+      "rarity": "uncommon",
+      "art": "card.aim",
+      "effect": {
+        "kind": "aim",
+        "tn": 3
+      },
+      "text": "Your next shot is 3 easier."
+    },
+    "focus_lens": {
+      "name": "Focusing Lens",
+      "heat": 1,
+      "rarity": "uncommon",
+      "art": "card.laser",
+      "effect": {
+        "kind": "laserBonus",
+        "damage": 2
+      },
+      "text": "Your next laser hit does 2 more."
+    },
+    "reflex_dodge": {
+      "name": "Reflex Dodge",
+      "heat": 2,
+      "rarity": "uncommon",
+      "art": "card.move",
+      "effect": {
+        "kind": "evade",
+        "tn": 3,
+        "squares": 4
+      },
+      "text": "Counts as your move. Enemy shots 3 harder."
+    },
+    "overcharge": {
+      "name": "Overcharge",
+      "heat": 4,
+      "rarity": "rare",
+      "art": "card.bolt",
+      "effect": {
+        "kind": "laserMult",
+        "mult": 2
+      },
+      "text": "Your next laser hit does double damage."
+    },
+    "field_patch": {
+      "name": "Field Patch",
+      "heat": 0,
+      "rarity": "rare",
+      "art": "card.wrench",
+      "effect": {
+        "kind": "repair",
+        "armor": 5
+      },
+      "text": "Put 5 armour back on your most damaged location."
+    },
+    "ac_burst": {
+      "name": "Autocannon",
+      "heat": 1,
+      "rarity": "base",
+      "art": "card.gun",
+      "effect": {
+        "kind": "attack",
+        "weapon": "Autocannon"
+      },
+      "text": "5 damage. Uses ammo."
+    },
+    "field_repair": {
+      "name": "Field Repair",
+      "heat": 0,
+      "rarity": "party",
+      "art": "card.wrench",
+      "effect": {
+        "kind": "repair",
+        "armor": 6
+      },
+      "text": "The doctor talks you through it: 6 armour back on your worst spot."
+    },
+    "coolant_flush": {
+      "name": "Coolant Flush",
+      "heat": 0,
+      "rarity": "party",
+      "art": "card.vent",
+      "effect": {
+        "kind": "vent",
+        "cool": 5,
+        "sinks": 1
+      },
+      "text": "Dump 5 heat now. Your sinks cool 1 more each round for the rest of the bout."
+    },
+    "veteran_shot": {
+      "name": "Veteran Shot",
+      "heat": 1,
+      "rarity": "party",
+      "art": "card.aim",
+      "effect": {
+        "kind": "aim",
+        "tn": 3,
+        "damage": 2
+      },
+      "text": "Your next shot is 3 easier and does 2 more if it hits."
+    }
+  },
+  "loadout": {
+    "SmallLaser": {
+      "card": "small_laser",
+      "perWeapon": 1
+    },
+    "MediumLaser": {
+      "card": "medium_laser",
+      "perWeapon": 3
+    },
+    "LargeLaser": {
+      "card": "large_laser",
+      "perWeapon": 2
+    },
+    "MachineGun": {
+      "card": "mg_burst",
+      "perWeapon": 1
+    },
+    "SRM2": {
+      "card": "srm_salvo",
+      "perWeapon": 2
+    },
+    "Fist": {
+      "card": "punch",
+      "perWeapon": 2
+    },
+    "Autocannon": {
+      "card": "ac_burst",
+      "perWeapon": 2
+    }
+  },
+  "basics": [
+    "advance",
+    "advance",
+    "withdraw",
+    "brace",
+    "vent",
+    "vent",
+    "kick"
+  ],
+  "skillCards": [
+    {
+      "skill": "gunnery",
+      "gte": 1,
+      "card": "aim"
+    },
+    {
+      "skill": "gunnery",
+      "gte": 3,
+      "card": "target_lock"
+    },
+    {
+      "skill": "piloting",
+      "gte": 1,
+      "card": "evasive_step"
+    },
+    {
+      "skill": "piloting",
+      "gte": 2,
+      "card": "charge"
+    }
+  ],
+  "booster": {
+    "size": 3,
+    "weights": {
+      "common": 70,
+      "uncommon": 25,
+      "rare": 5
+    },
+    "price": 30
+  },
+  "hand": 5,
+  "maxExtras": 8
+}

@@ -1,0 +1,25 @@
+{
+  "_note": "Our own names for the homage. Every name here is a placeholder Evan can change; the game reads them from this file only.",
+  "title": "Lantern Hawks",
+  "subtitle": "an homage to a 1988 classic",
+  "planet": "Verdance",
+  "houses": {
+    "defenders": {"name": "Aldern Concord", "emblem": "mountain peak with a rising star in a shield", "colours": ["silver", "royal blue"]},
+    "occupiers": {"name": "Wyrmhold Dominion", "emblem": "coiled three-headed wyrm in a hexagon", "colours": ["crimson", "black"]}
+  },
+  "cast": {
+    "hero": "Rook Calder", "father": "Marshal Elias Calder", "regent": "Regent Sera Vale",
+    "mentor": "Dax Morrow", "rival": "Juno Hart", "tinker": "Oswin the tinker",
+    "doctor": "Dr. Ama Reyes", "tech": "Pell Okafor", "prisoner": "Vesna Kroll"
+  },
+  "unit": "the Lantern Hawks",
+  "mechs": [
+    {"role": "trainer, humanoid, laser and fist", "name": "Mantis", "replaces_slot": 5},
+    {"role": "fastest scout, bird legs, no hands", "name": "Wisp", "replaces_slot": 1},
+    {"role": "light striker with missiles", "name": "Kestrel", "replaces_slot": 2},
+    {"role": "jumping skirmisher", "name": "Spur", "replaces_slot": 3},
+    {"role": "missile-heavy raider", "name": "Ranger", "replaces_slot": 4},
+    {"role": "fast hunter, the main enemy light mech", "name": "Harrier", "replaces_slot": 6},
+    {"role": "slow armoured city brawler", "name": "Bulwark", "replaces_slot": 7}
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "name": "lantern-hawks",
+  "private": true,
+  "type": "module",
+  "description": "A free homage browser game. No build step; this file only names the test command.",
+  "scripts": {
+    "test": "node --test",
+    "serve": "python3 -m http.server 5178"
+  }
+}

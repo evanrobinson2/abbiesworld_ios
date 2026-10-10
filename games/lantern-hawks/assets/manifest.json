@@ -1,0 +1,385 @@
+{
+ "_note": "Real art that replaces procedural placeholders. key -> file path, or {src, rect:[x,y,w,h]} for a sprite-sheet cell, or {src, fit:[w,h]} to resample a large painting smoothly to the size it is drawn at. Any key in src/gfx/keys.js can be listed here. Art log: assets/ART_LOG.md.",
+ "images": {
+  "hex.plains": "assets/hex/plains.png",
+  "hex.forest": "assets/hex/forest.png",
+  "hex.dense_forest": "assets/hex/dense_forest.png",
+  "hex.hills": "assets/hex/hills.png",
+  "hex.mountains": "assets/hex/mountains.png",
+  "hex.river": "assets/hex/river.png",
+  "hex.lake": "assets/hex/lake.png",
+  "hex.road": "assets/hex/road.png",
+  "hex.bridge": "assets/hex/bridge.png",
+  "hex.ruins": "assets/hex/ruins.png",
+  "hex.city": "assets/hex/city.png",
+  "hex.cave": "assets/hex/cave.png",
+  "scene.city.home.day": {
+   "src": "assets/scenes/city_home_day.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.city.home.ruined": {
+   "src": "assets/scenes/city_home_ruined.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.training": {
+   "src": "assets/scenes/poi_training.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.hall": {
+   "src": "assets/scenes/poi_hall.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.barracks": {
+   "src": "assets/scenes/poi_barracks.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.citadel": {
+   "src": "assets/scenes/poi_citadel.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.comms": {
+   "src": "assets/scenes/poi_comms.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.arms": {
+   "src": "assets/scenes/poi_arms.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.outfitter": {
+   "src": "assets/scenes/poi_outfitter.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.lounge": {
+   "src": "assets/scenes/poi_lounge.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.garage": {
+   "src": "assets/scenes/poi_garage.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.field": {
+   "src": "assets/scenes/poi_field.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.street": {
+   "src": "assets/scenes/poi_street.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.poi.hospital": {
+   "src": "assets/scenes/poi_hospital.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.story.dream": {
+   "src": "assets/scenes/story_dream.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.title": {
+   "src": "assets/scenes/title.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.story.raid": {
+   "src": "assets/scenes/story_raid.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.story.ruins": {
+   "src": "assets/scenes/story_ruins.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.story.road": {
+   "src": "assets/scenes/story_road.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "portrait.barkeep": {
+   "src": "assets/portraits/barkeep.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.cadet": {
+   "src": "assets/portraits/cadet.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.clerk": {
+   "src": "assets/portraits/clerk.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.crewchief": {
+   "src": "assets/portraits/crewchief.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.drillmaster": {
+   "src": "assets/portraits/drillmaster.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.drunk": {
+   "src": "assets/portraits/drunk.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.father": {
+   "src": "assets/portraits/father.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.hero": {
+   "src": "assets/portraits/hero.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.mechanic": {
+   "src": "assets/portraits/mechanic.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.medic": {
+   "src": "assets/portraits/medic.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.regent": {
+   "src": "assets/portraits/regent.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.rival": {
+   "src": "assets/portraits/rival.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.sentry": {
+   "src": "assets/portraits/sentry.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.shopkeep": {
+   "src": "assets/portraits/shopkeep.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.soldier": {
+   "src": "assets/portraits/soldier.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "mech.mantis": "assets/mechs/mantis.png",
+  "mech.trainer": "assets/mechs/mantis.png",
+  "mech.wisp": "assets/mechs/wisp.png",
+  "mech.scout": "assets/mechs/wisp.png",
+  "mech.kestrel": "assets/mechs/kestrel.png",
+  "mech.spur": "assets/mechs/spur.png",
+  "mech.ranger": "assets/mechs/ranger.png",
+  "mech.harrier": "assets/mechs/harrier.png",
+  "mech.hunter": "assets/mechs/harrier.png",
+  "mech.bulwark": "assets/mechs/bulwark.png",
+  "fig.squad": "assets/figures/squad.png",
+  "fig.mech.mantis": "assets/figures/mantis.png",
+  "fig.mech.wisp": "assets/figures/wisp.png",
+  "fig.mech.kestrel": "assets/figures/kestrel.png",
+  "fig.mech.spur": "assets/figures/spur.png",
+  "fig.mech.ranger": "assets/figures/ranger.png",
+  "fig.mech.harrier": "assets/figures/harrier.png",
+  "fig.mech.bulwark": "assets/figures/bulwark.png",
+  "card.aim": "assets/cards/aim.png",
+  "card.bolt": "assets/cards/bolt.png",
+  "card.boot": "assets/cards/boot.png",
+  "card.fist": "assets/cards/fist.png",
+  "card.gun": "assets/cards/gun.png",
+  "card.laser": "assets/cards/laser.png",
+  "card.missile": "assets/cards/missile.png",
+  "card.move": "assets/cards/move.png",
+  "card.shield": "assets/cards/shield.png",
+  "card.vent": "assets/cards/vent.png",
+  "card.wrench": "assets/cards/wrench.png",
+  "hex.port": "assets/hex/port.png",
+  "scene.city.port.day": {
+   "src": "assets/scenes/city_port_day.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.city.port.occupied": {
+   "src": "assets/scenes/city_port_occupied.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.city.stockade.day": {
+   "src": "assets/scenes/city_stockade_day.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.city.stockade.occupied": {
+   "src": "assets/scenes/city_stockade_occupied.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.city.hut.day": {
+   "src": "assets/scenes/city_hut_day.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.city.hut.dusk": {
+   "src": "assets/scenes/city_hut_dusk.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.cave.door": {
+   "src": "assets/scenes/cave_door.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.port.street": {
+   "src": "assets/scenes/port_street.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "scene.vault.hangar": {
+   "src": "assets/scenes/vault_hangar.jpg",
+   "fit": [
+    320,
+    180
+   ]
+  },
+  "portrait.doctor": {
+   "src": "assets/portraits/doctor.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.mentor": {
+   "src": "assets/portraits/mentor.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.prisoner": {
+   "src": "assets/portraits/prisoner.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.tech": {
+   "src": "assets/portraits/tech.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "portrait.tinker": {
+   "src": "assets/portraits/tinker.jpg",
+   "fit": [
+    64,
+    64
+   ]
+  },
+  "mech.striker": "assets/mechs/kestrel.png",
+  "mech.jumper": "assets/mechs/spur.png"
+ }
+}

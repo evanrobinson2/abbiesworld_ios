@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Lantern Hawks</title>
+  <meta name="description" content="A free homage browser game inspired by a 1988 classic. Not affiliated with any rights holder.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="stage">
+      <canvas id="screen" width="320" height="180" aria-label="Game screen"></canvas>
+      <div id="overlay"></div>
+      <div id="modal" hidden></div>
+      <div id="toast" aria-live="polite"></div>
+    </div>
+    <div id="status" aria-live="polite"></div>
+  </div>
+  <noscript>Lantern Hawks needs JavaScript.</noscript>
+  <script type="module" src="src/main.js"></script>
+</body>
+</html>

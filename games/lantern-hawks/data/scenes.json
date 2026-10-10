@@ -1,0 +1,4636 @@
+{
+ "_note": "Story scenes for beats 1-4 plus town interiors. Format: README.md > Adding scenes. All text is original to this homage. {placeholders} come from names.json.",
+ "training": {
+  "title": "Cadet School",
+  "bg": "scene.poi.training",
+  "portrait": "portrait.drillmaster",
+  "speaker": "Drillmaster",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "flag": "visited_school"
+       }
+      },
+      "goto": "first"
+     },
+     {
+      "goto": "hub"
+     }
+    ]
+   },
+   "first": {
+    "effects": [
+     {
+      "set": "visited_school"
+     }
+    ],
+    "text": [
+     "Chalk dust, cold coffee and the hum of a simulator nobody switched off. The Drillmaster does not look up.",
+     "\"{hero_last}. The Marshal's boy. I won't pretend I'm not curious, and I won't pretend it buys you anything in here.\"",
+     "\"You've got a {slot5} in the shed with a governed reactor and paint that's seen better decades. Learn to walk it before you learn to shoot it. Missions are posted on the board. One a day; I need my sleep too.\""
+    ],
+    "next": "hub"
+   },
+   "hub": {
+    "text": "\"Well? The board's there. So is the door.\"",
+    "choices": [
+     {
+      "text": "Read the mission board",
+      "goto": "mission"
+     },
+     {
+      "text": "Sign up for a combat class",
+      "goto": "classes"
+     },
+     {
+      "text": "Walk the Hall of Honours",
+      "goto": "hall"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "mission": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "trained_today"
+      },
+      "goto": "done_today"
+     },
+     {
+      "if": {
+       "flag": "met_juno"
+      },
+      "goto": "final_brief"
+     },
+     {
+      "if": {
+       "flag": "duel_won"
+      },
+      "goto": "wait_juno"
+     },
+     {
+      "if": {
+       "flag": "duel_ready"
+      },
+      "goto": "duel_reminder"
+     },
+     {
+      "if": {
+       "all": [
+        {
+         "flag": "training_passed",
+         "gte": 1
+        },
+        {
+         "not": {
+          "flag": "rested"
+         }
+        }
+       ]
+      },
+      "goto": "need_rest"
+     },
+     {
+      "if": {
+       "flag": "training_passed",
+       "gte": 1
+      },
+      "goto": "duel_brief"
+     },
+     {
+      "goto": "course_brief"
+     }
+    ]
+   },
+   "course_brief": {
+    "text": [
+     "MISSION ONE: THE LONG MILE. The board shows a strip of practice field, a slalom of concrete posts, and a beacon at the far end.",
+     "\"Get from the shed to that beacon without knocking anything over. Speed counts. Dignity counts more. Pays 150 if you finish upright.\""
+    ],
+    "choices": [
+     {
+      "text": "Climb into the {slot5}",
+      "goto": "course_run"
+     },
+     {
+      "text": "Not today",
+      "goto": "hub"
+     }
+    ]
+   },
+   "course_run": {
+    "bg": "scene.poi.field",
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": [
+     "The cockpit smells of old sweat and new solder. The reactor comes up with a cough, then a purr, and the whole machine leans forward as if it has been waiting all week for you.",
+     "The first step is a stagger. The second is a step. By the fifth post the {slot5} has stopped arguing with you, and the beacon blinks at the end of the field."
+    ],
+    "choices": [
+     {
+      "text": "Open the throttle and trust your feet",
+      "goto": "course_fast"
+     },
+     {
+      "text": "Pick a careful line between the posts",
+      "goto": "course_careful"
+     }
+    ]
+   },
+   "course_fast": {
+    "bg": "scene.poi.field",
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "effects": [
+     {
+      "set": "trained_today"
+     },
+     {
+      "add": "training_passed",
+      "n": 1
+     },
+     {
+      "money": 150
+     },
+     {
+      "skill": "piloting",
+      "add": 1,
+      "max": 3
+     }
+    ],
+    "text": "You let the {slot5} run. One post clips your hip with a bang you feel in your teeth, but you keep your balance and slap the beacon at a dead sprint. Somewhere in the stands, someone whistles.",
+    "next": "course_debrief"
+   },
+   "course_careful": {
+    "bg": "scene.poi.field",
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "effects": [
+     {
+      "set": "trained_today"
+     },
+     {
+      "add": "training_passed",
+      "n": 1
+     },
+     {
+      "money": 150
+     },
+     {
+      "skill": "piloting",
+      "add": 1,
+      "max": 3
+     }
+    ],
+    "text": "You thread the posts like a needle, never touching one, and settle beside the beacon with the reactor barely warm. Slow. Clean. The Drillmaster will have opinions.",
+    "next": "course_debrief"
+   },
+   "course_debrief": {
+    "text": [
+     "\"Upright. Mostly. I've seen worse from people whose fathers aren't famous.\"",
+     "\"That's one. Go get some sleep; the next one bites back. And the Regent was asking after you, for reasons I can't fathom.\""
+    ],
+    "next": "hub"
+   },
+   "need_rest": {
+    "text": "\"You look like a reactor at heat thirty. Go to the bunks and sleep. Mission two is not something you do on no sleep.\"",
+    "next": "hub"
+   },
+   "duel_brief": {
+    "text": [
+     "MISSION TWO: FIRST BLOOD. Live duel at training power against a school drone, one {slot1} with its targeting suite pulled out.",
+     "\"Your lasers are throttled and so is your coolant. Every shot heats you up and the heat will ruin your aim, so learn when to vent. The referee calls it when someone's armour drops to half. Pays 250. The field gate's open when you are.\""
+    ],
+    "choices": [
+     {
+      "text": "Accept the duel",
+      "effects": [
+       {
+        "set": "duel_ready"
+       }
+      ],
+      "goto": "duel_accepted"
+     },
+     {
+      "text": "Not yet",
+      "goto": "hub"
+     }
+    ]
+   },
+   "duel_accepted": {
+    "text": "\"Gate's on the main street, west side. Don't keep the drone waiting. It doesn't mind, but I do.\"",
+    "next": "hub"
+   },
+   "duel_reminder": {
+    "text": "\"The drone's still standing in the field, {hero_last}. That's your mission. Go and knock it down.\"",
+    "next": "hub"
+   },
+   "wait_juno": {
+    "text": "\"Nothing posted for you. And {rival_first} was looking for you after the duel. I'd go and find out why before the night's gone.\"",
+    "next": "hub"
+   },
+   "done_today": {
+    "text": "\"One mission a day. Go and eat something. Go and sleep. Come back tomorrow.\"",
+    "next": "hub"
+   },
+   "final_brief": {
+    "text": [
+     "MISSION THREE: LAMPLIGHTER. A dusk walk around the town perimeter, lighting the beacon posts as you pass them. A child could do it. Several have.",
+     "\"Routine. I mean it. If anything exciting happens out there, it'll be the first time in eleven years.\""
+    ],
+    "choices": [
+     {
+      "text": "Walk the {slot5} out to the perimeter",
+      "scene": "raid"
+     },
+     {
+      "text": "Not yet",
+      "goto": "hub"
+     }
+    ]
+   },
+   "classes": {
+    "portrait": "portrait.drillmaster",
+    "text": "\"Tuition is 125 for every level you already have, plus 75. One class a day. I'd start with whatever stops you dying on foot.\"",
+    "choices": [
+     {
+      "text": "Bow & Blade class",
+      "if": {
+       "skill": "blade",
+       "lt": 4
+      },
+      "requires": {
+       "not": {
+        "flag": "class_today"
+       }
+      },
+      "lockedText": "One class a day",
+      "cost": {
+       "tuition": "blade"
+      },
+      "effects": [
+       {
+        "skill": "blade",
+        "add": 1
+       },
+       {
+        "set": "class_today"
+       }
+      ],
+      "goto": "class_done"
+     },
+     {
+      "text": "Pistol class",
+      "if": {
+       "skill": "pistol",
+       "lt": 4
+      },
+      "requires": {
+       "not": {
+        "flag": "class_today"
+       }
+      },
+      "lockedText": "One class a day",
+      "cost": {
+       "tuition": "pistol"
+      },
+      "effects": [
+       {
+        "skill": "pistol",
+        "add": 1
+       },
+       {
+        "set": "class_today"
+       }
+      ],
+      "goto": "class_done"
+     },
+     {
+      "text": "Rifle class",
+      "if": {
+       "skill": "rifle",
+       "lt": 4
+      },
+      "requires": {
+       "not": {
+        "flag": "class_today"
+       }
+      },
+      "lockedText": "One class a day",
+      "cost": {
+       "tuition": "rifle"
+      },
+      "effects": [
+       {
+        "skill": "rifle",
+        "add": 1
+       },
+       {
+        "set": "class_today"
+       }
+      ],
+      "goto": "class_done"
+     },
+     {
+      "text": "Back",
+      "goto": "hub"
+     }
+    ]
+   },
+   "class_done": {
+    "text": "Two hours of drills, a bruise in a new place, and a grudging nod from the range officer. You are a little more dangerous than you were this morning.",
+    "next": "hub"
+   },
+   "hall": {
+    "bg": "scene.poi.hall",
+    "portrait": null,
+    "speaker": "",
+    "effects": [
+     {
+      "set": "hall_seen"
+     }
+    ],
+    "text": [
+     "The Hall of Honours is a long gallery of polished plaques and one dented cockpit hatch on a stand. Most of the names you know from school. One you know from breakfast.",
+     "MARSHAL {father}. Twelve campaigns. A citation for holding a pass with two machines against eight. Under it someone has pinned a newer note: ON SURVEY, NORTHERN RIDGES.",
+     "Beside it, a smaller case: a brass lock as big as a fist, all gears and teeth. The card reads: Gift of {tinker}, who swears it cannot be opened by anyone who has not been invited."
+    ],
+    "next": "hub"
+   }
+  }
+ },
+ "raid": {
+  "title": "Lamplighter",
+  "bg": "scene.story.raid",
+  "portrait": "portrait.hero",
+  "speaker": "{hero}",
+  "start": "r1",
+  "nodes": {
+   "r1": {
+    "text": [
+     "The sun drops behind the ridge and the first beacon post flares orange at your touch. Then the second. You are humming. You will remember, later, that you were humming.",
+     "At the fifth post the town sirens start. Not the noon test. The other one, the one you have only ever heard in drills."
+    ],
+    "next": "r2"
+   },
+   "r2": {
+    "text": [
+     "Light splits the clouds: drop pods, a dozen, burning down on long tails of fire. They crack open on the hills above the citadel and long-legged machines unfold out of them, painted crimson and black.",
+     "A coiled three-headed wyrm on every hull. The {occupiers}. Their lead machines are {slot6}s, fast and ugly, and they are already running."
+    ],
+    "choices": [
+     {
+      "text": "Bring your throttled lasers up anyway",
+      "goto": "r3a"
+     },
+     {
+      "text": "Turn and wave the cadets on the road to cover",
+      "goto": "r3b"
+     }
+    ]
+   },
+   "r3a": {
+    "text": "You put the reticle on the nearest {slot6} and fire. At training power the beam barely scorches its paint. It turns its head, almost curious, and comes for you.",
+    "next": "r4"
+   },
+   "r3b": {
+    "text": "You plant the {slot5} between the road and the hill and flap its arm like an idiot until the cadets scatter into the culvert. The nearest {slot6} notices the only machine on the field still standing up.",
+    "next": "r4"
+   },
+   "r4": {
+    "text": [
+     "The hit lifts your {slot5} off its feet. The world spins, the straps bite, and then you are on your back with the canopy full of sky.",
+     "The sky goes dark. A foot. A {slot6}'s foot, three-toed and steaming, hanging over the canopy glass close enough to count the rivets.",
+     "It holds there for one heartbeat. Two. Then something on the radio calls it away, and it steps over you and is gone toward the citadel."
+    ],
+    "next": "r5"
+   },
+   "r5": {
+    "bg": "scene.story.ruins",
+    "text": [
+     "You crawl out through the emergency hatch. The citadel is burning. The school roof is open to the stars. Somewhere a bell is ringing that should not be able to ring anymore.",
+     "Behind a wall, two of the town guard are arguing in the hoarse whisper of people who have been shouting all night."
+    ],
+    "next": "r6"
+   },
+   "r6": {
+    "bg": "scene.story.ruins",
+    "portrait": "portrait.soldier",
+    "speaker": "Town guard",
+    "text": [
+     "\"...Regent's shuttle got off the pad. That's something.\"",
+     "\"And the Marshal? {hero_last}?\"",
+     "\"Survey team went quiet four days before this. Nothing since. They're saying missing. They're saying presumed.\""
+    ],
+    "next": "r7"
+   },
+   "r7": {
+    "bg": "scene.story.ruins",
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "effects": [
+     {
+      "set": "raid_happened"
+     },
+     {
+      "variant": "ruined"
+     },
+     {
+      "useMech": "trainer_patched",
+      "replace": "trainer"
+     },
+     {
+      "save": true
+     }
+    ],
+    "text": [
+     "Presumed. You turn the word over until it stops meaning anything.",
+     "Not dead. Not yet. Your father never once did what anyone presumed. If there is a ship, a message, a single person on {planet} who knows where his survey went, they will be at the port, east along the road past the river.",
+     "You wipe the soot off your face, and you start walking."
+    ],
+    "leaveText": "Into the burning town"
+   }
+  }
+ },
+ "training_ruin": {
+  "title": "Cadet School (ruined)",
+  "bg": "scene.story.ruins",
+  "portrait": null,
+  "speaker": "",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "The school is a shell. The mission board lies face down in a puddle. The simulator that nobody ever switched off has finally been switched off, by a {slot6}'s laser.",
+     "The Hall of Honours took the worst of it. You find your father's plaque in the rubble, unbroken, and you put it in your pack."
+    ],
+    "effects": [
+     {
+      "item": "plaque"
+     }
+    ]
+   }
+  }
+ },
+ "barracks": {
+  "title": "Barracks",
+  "bg": "scene.poi.barracks",
+  "portrait": null,
+  "speaker": "",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "training_passed",
+       "eq": 0
+      },
+      "goto": "no_sleep"
+     },
+     {
+      "goto": "bunk"
+     }
+    ]
+   },
+   "no_sleep": {
+    "text": "Rows of bunks, every blanket folded to regulation. Yours too, for now. You can hear the Drillmaster already: nobody sleeps on my time until they've run the course.",
+    "choices": [
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "bunk": {
+    "text": "Your bunk, your locker, the window that never quite shuts. Someone has left a ration bar on your pillow. Possibly a kindness. Possibly a dare.",
+    "choices": [
+     {
+      "text": "Sleep until morning",
+      "effects": [
+       {
+        "day": 1
+       },
+       {
+        "heal": "full"
+       }
+      ],
+      "goto": "sleep"
+     },
+     {
+      "text": "Check your locker",
+      "goto": "locker"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "locker": {
+    "text": "Spare uniform, a holo of your father squinting into the sun on some forgotten ridge, and a cadet's pay chit.",
+    "next": "bunk"
+   },
+   "sleep": {
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "flag": "dreamt"
+       }
+      },
+      "goto": "dream1"
+     }
+    ],
+    "text": "You sleep like a dropped tool. In the morning the window is still not shut and the ration bar is gone.",
+    "effects": [
+     {
+      "save": true
+     }
+    ],
+    "next": "bunk"
+   },
+   "dream1": {
+    "bg": "scene.story.dream",
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": [
+     "In the dream you are taller than the citadel. Your machine is silver and blue and it moves the way you think, with no throttle and no cough.",
+     "Below you a glass bridge spans a river of fire, and on the bridge a single carriage is racing for the far bank. You know without being told who rides in it."
+    ],
+    "next": "dream2"
+   },
+   "dream2": {
+    "bg": "scene.story.dream",
+    "portrait": "portrait.regent",
+    "speaker": "{regent}",
+    "text": [
+     "Shapes rise out of the fire: long necks, three of them, scaled in black and crimson, weaving toward the bridge.",
+     "\"Hold the bridge, Cadet,\" says a voice you know from the citadel. \"Just until we're across. That is all anyone will ever ask of you.\""
+    ],
+    "choices": [
+     {
+      "text": "Plant your feet on the glass",
+      "goto": "dream3"
+     },
+     {
+      "text": "Step off the bridge and meet them in the fire",
+      "goto": "dream3"
+     }
+    ]
+   },
+   "dream3": {
+    "bg": "scene.story.dream",
+    "portrait": "portrait.father",
+    "speaker": "{father}",
+    "text": [
+     "The necks strike and the glass cracks under you in a spider web of light. The carriage is across. You are not.",
+     "As the bridge falls, a hand settles on the back of your seat. \"Steady, {hero_first},\" your father says, from somewhere close and very far away. \"Steady. Wake up.\""
+    ],
+    "next": "dream4"
+   },
+   "dream4": {
+    "portrait": "portrait.cadet",
+    "speaker": "Cadet",
+    "effects": [
+     {
+      "set": "dreamt"
+     },
+     {
+      "set": "rested"
+     },
+     {
+      "save": true
+     }
+    ],
+    "text": [
+     "Someone is hammering on the door. It is morning and you are tangled in the blanket like a fish in a net.",
+     "\"{hero_last}! Drillmaster wants you at the school. Mission two is up and it's got your name on it. And you were shouting in your sleep, by the way.\""
+    ],
+    "next": "bunk"
+   }
+  }
+ },
+ "barracks_ruin": {
+  "title": "Barracks (damaged)",
+  "bg": "scene.story.ruins",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Half the roof is in the bunks. Your locker is crushed flat. Someone has rigged a tarp over the far corner, and under it, still plugged into a car battery, sits the old holo projector the cadets used for watching races.",
+    "choices": [
+     {
+      "text": "Play the cracked disk on the old projector",
+      "if": {
+       "all": [
+        {
+         "item": "damaged_disk"
+        },
+        {
+         "not": {
+          "flag": "saw_damaged_disk"
+         }
+        }
+       ]
+      },
+      "scene": "holodisk"
+     },
+     {
+      "text": "Play the disk again",
+      "if": {
+       "flag": "saw_damaged_disk"
+      },
+      "scene": "holodisk",
+      "goto": "again"
+     },
+     {
+      "text": "Sleep under the tarp",
+      "effects": [
+       {
+        "day": 1
+       },
+       {
+        "heal": "full"
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "slept"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "slept": {
+    "text": "You sleep badly and wake to the sound of crimson-and-black patrols on the main street. Nobody has come to tell you anything. Nobody is going to.",
+    "next": "start"
+   }
+  }
+ },
+ "field": {
+  "title": "Practice Field",
+  "bg": "scene.poi.field",
+  "portrait": null,
+  "speaker": "",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "all": [
+        {
+         "flag": "duel_ready"
+        },
+        {
+         "not": {
+          "flag": "duel_won"
+         }
+        },
+        {
+         "flag": "trained_today"
+        }
+       ]
+      },
+      "goto": "closed_today"
+     },
+     {
+      "if": {
+       "all": [
+        {
+         "flag": "duel_ready"
+        },
+        {
+         "not": {
+          "flag": "duel_won"
+         }
+        }
+       ]
+      },
+      "goto": "ready"
+     }
+    ],
+    "text": "Packed sand, scorch marks, a ring of concrete posts and a scoreboard with three bulbs out. A good place to be terrible at something in private.",
+    "choices": [
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "closed_today": {
+    "text": "The gate is chained. A note in the Drillmaster's blocky hand: ONE BOUT A DAY. SLEEP. TRY AGAIN.",
+    "choices": [
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "ready": {
+    "text": [
+     "At the far end of the field the drone {slot1} stands on its bird legs, head cocked, waiting. With its targeting suite pulled it can still shoot; it just isn't good at it.",
+     "Your {slot5} is fuelled and warm in the gate bay. The referee's light is amber."
+    ],
+    "choices": [
+     {
+      "text": "Mount up and start the duel",
+      "effects": [
+       {
+        "battle": "duel1"
+       }
+      ]
+     },
+     {
+      "text": "Not yet",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "portrait": "portrait.rival",
+    "speaker": "{rival}",
+    "text": [
+     "The referee's light goes green and the drone kneels, smoking politely. As you climb down, a senior cadet in a scuffed flight jacket is leaning on the gate, clapping slowly.",
+     "\"{rival}. Fourth year. I've watched a lot of first-years fight that drone and most of them fight it like it owes them money. You fought it like you were bored. I liked it.\"",
+     "\"Lamplight, tonight. First round's on me. Don't make me come and find you.\"",
+     "(The school pays winners in sim cartridges too: a booster pack of battle cards is yours.)"
+    ],
+    "leaveText": "Leave the field"
+   },
+   "lost": {
+    "portrait": "portrait.drillmaster",
+    "speaker": "Drillmaster",
+    "text": [
+     "The referee's light goes red. Over the radio: \"Well. The drone has asked me to tell you it enjoyed that.\"",
+     "\"Watch your heat. A hot machine can't hit a barn. Vent before you need to, not after. Sleep, and the gate opens again tomorrow.\""
+    ],
+    "leaveText": "Leave the field"
+   }
+  }
+ },
+ "field_ruin": {
+  "title": "Practice Field (ruined)",
+  "bg": "scene.story.ruins",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "A long gouge in the sand where your {slot5} lay on its back. The crew chief's people hauled it back to the garage in the night. The drone {slot1} is gone too; someone has already sold it for parts. The scoreboard still reads zero to zero.",
+    "leaveText": "Leave"
+   }
+  }
+ },
+ "citadel": {
+  "title": "The Citadel",
+  "bg": "scene.poi.citadel",
+  "portrait": "portrait.regent",
+  "speaker": "{regent}",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "flag": "regent_met"
+       }
+      },
+      "goto": "meet"
+     },
+     {
+      "if": {
+       "flag": "training_passed",
+       "eq": 0
+      },
+      "goto": "nudge"
+     },
+     {
+      "if": {
+       "flag": "duel_won"
+      },
+      "goto": "proud"
+     },
+     {
+      "goto": "progress"
+     }
+    ]
+   },
+   "meet": {
+    "effects": [
+     {
+      "set": "regent_met"
+     }
+    ],
+    "text": [
+     "The audience hall is cold stone and silver-blue banners: a mountain peak with a star rising behind it, the crest of the {defenders}. The Regent is reading three reports at once and finishes all of them before she looks up.",
+     "\"Cadet {hero_last}. Your father asked me to keep an eye on you while he is up in the northern ridges, so consider yourself watched.\"",
+     "\"He tells me you are stubborn and fond of machines. Good. {planet} needs both. Go and earn your place at the school.\""
+    ],
+    "next": "menu"
+   },
+   "nudge": {
+    "text": "\"The Drillmaster tells me your {slot5} has not yet left its shed. I would hate to report that to your father. Go and run the course, Cadet.\"",
+    "next": "menu"
+   },
+   "progress": {
+    "text": "\"You ran the course. I watched some of it from the wall, and I will say only that you did not fall down. Your father will be pleased when his signal comes in. It is late, which is not like him.\"",
+    "next": "menu"
+   },
+   "proud": {
+    "text": [
+     "\"I hear you beat the drone. Well done, though I am told the drone is not a gracious loser.\"",
+     "\"Between us: the pickets have seen ships at the edge of the system flying no colours they will admit to. Keep your boots by your bed, Cadet.\""
+    ],
+    "next": "menu"
+   },
+   "menu": {
+    "choices": [
+     {
+      "text": "Ask about your father",
+      "goto": "father"
+     },
+     {
+      "text": "Ask about the {defenders}",
+      "goto": "concord"
+     },
+     {
+      "text": "Take your leave",
+      "exit": true
+     }
+    ],
+    "text": "\"Was there something else?\""
+   },
+   "father": {
+    "text": "\"He is chasing an old rumour in the ridges. He has chased it for longer than you have been alive. He will not tell even me what it is, only that if he is right, nobody will ever take this world from us.\"",
+    "next": "menu"
+   },
+   "concord": {
+    "text": "\"A handful of worlds that agreed, a long time ago, to stand back to back. {planet} is the smallest of them and the closest to the {occupiers}. That has always made the Concord nervous and the Dominion hungry.\"",
+    "next": "menu"
+   }
+  }
+ },
+ "citadel_ruin": {
+  "title": "The Citadel (occupied)",
+  "bg": "scene.story.ruins",
+  "portrait": "portrait.sentry",
+  "speaker": "Sentry",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "The silver-blue banners are gone. In their place hang crimson-and-black ones: a coiled wyrm with three heads, inside a hexagon.",
+     "\"Cadet uniform,\" says the sentry, without much interest. \"Turn around, cadet. The citadel is closed to locals until the new governor says otherwise.\""
+    ],
+    "choices": [
+     {
+      "text": "Back away",
+      "exit": true
+     }
+    ]
+   }
+  }
+ },
+ "comms": {
+  "title": "Comms Tower",
+  "bg": "scene.poi.comms",
+  "portrait": "portrait.clerk",
+  "speaker": "Relay clerk",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "The tower hums. A clerk sits under a dish the size of a pond, wearing two headsets and an expression of deep patience.",
+    "choices": [
+     {
+      "text": "Send a message north to your father",
+      "cost": 5,
+      "goto": "message"
+     },
+     {
+      "text": "Check the exchange board",
+      "goto": "exchange"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "message": {
+    "effects": [
+     {
+      "add": "messages_sent",
+      "n": 1
+     }
+    ],
+    "text": "The clerk keys it in and sends it to the northern relay. The light blinks, waits, and blinks again. \"Relay took it. Whether anyone up there picks it up is another matter. Their end has been quiet for days.\"",
+    "next": "start"
+   },
+   "exchange": {
+    "text": "Three listed outfits scroll across the exchange board: a defence contractor, a shipping line and a drug company that is either about to make everyone rich or go broke. The terminal blinks: TRADING SUSPENDED. RESUMES SOON.",
+    "next": "start"
+   }
+  }
+ },
+ "comms_ruin": {
+  "title": "Comms Tower (toppled)",
+  "bg": "scene.story.ruins",
+  "portrait": null,
+  "speaker": "",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "The great dish lies across the street like a dropped plate. The clerk is gone. A hand-painted sign on the door: ALL OFF-WORLD TRAFFIC THROUGH THE PORT. BY ORDER.",
+    "choices": [
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   }
+  }
+ },
+ "hospital": {
+  "title": "Town Hospital",
+  "bg": "scene.poi.hospital",
+  "portrait": "portrait.medic",
+  "speaker": "Duty medic",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Clean tile, bright lamps and the smell of something that kills germs and probably eyebrows. The duty medic looks you over with professional suspicion.",
+    "choices": [
+     {
+      "text": "Get patched up",
+      "cost": 25,
+      "effects": [
+       {
+        "heal": "full"
+       }
+      ],
+      "goto": "healed"
+     },
+     {
+      "text": "Attend the medical seminar",
+      "if": {
+       "not": {
+        "flag": "seminar_medical"
+       }
+      },
+      "cost": 500,
+      "effects": [
+       {
+        "skill": "medical",
+        "add": 1
+       },
+       {
+        "set": "seminar_medical"
+       }
+      ],
+      "goto": "seminar"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "healed": {
+    "text": "Stitches, a cold pack and a lecture. You feel better than you deserve to.",
+    "next": "start"
+   },
+   "seminar": {
+    "text": "A long afternoon of anatomy diagrams and bandaging a dummy that keeps falling off the table. You come out knowing exactly where everything goes.",
+    "next": "start"
+   }
+  }
+ },
+ "hospital_ruin": {
+  "title": "Town Hospital (overflowing)",
+  "bg": "scene.poi.hospital",
+  "portrait": "portrait.medic",
+  "speaker": "Duty medic",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Every bed is full and the corridor is full of people who wanted a bed. The duty medic has not slept. \"If you're walking, you're not my problem. If you're bleeding, it's 25 and get in line.\"",
+    "choices": [
+     {
+      "text": "Get patched up",
+      "cost": 25,
+      "effects": [
+       {
+        "heal": "full"
+       }
+      ],
+      "goto": "healed"
+     },
+     {
+      "text": "Search the medical records",
+      "if": {
+       "not": {
+        "flag": "met_doctor"
+       }
+      },
+      "goto": "records"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "healed": {
+    "text": "Fast, rough and effective. \"Next.\"",
+    "next": "start"
+   },
+   "records": {
+    "redirect": [
+     {
+      "if": {
+       "member": "mentor"
+      },
+      "goto": "doctor1"
+     }
+    ],
+    "text": "You get as far as the filing room before an orderly steers you out by the elbow. \"Records are for staff. Are you staff? You are not staff.\"",
+    "next": "start"
+   },
+   "doctor1": {
+    "portrait": "portrait.doctor",
+    "speaker": "{doctor}",
+    "text": [
+     "The filing room is dark except for one lamp, and under it a woman in a stained coat is rewriting patient cards by hand. She looks up at you, then past you, at {mentor_first} filling the doorway.",
+     "\"Well,\" she says. \"I was told you were dead. I was told that twice, and both times I had a drink about it.\" She puts down the pen. \"{doctor}. I stitched your father up after the mess at the river crossing, {hero_first}. He talked about you the whole time. It was very annoying.\""
+    ],
+    "next": "doctor2"
+   },
+   "doctor2": {
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": "\"We're gathering the lanterns,\" {mentor_first} says quietly. \"All of them that are left.\" She looks at the overflowing corridor for a long moment, then hangs her coat on the back of the door and picks up her bag.",
+    "choices": [
+     {
+      "text": "Welcome her aboard",
+      "effects": [
+       {
+        "recruit": "doctor"
+       },
+       {
+        "set": "met_doctor"
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "doctor3"
+     }
+    ]
+   },
+   "doctor3": {
+    "portrait": "portrait.doctor",
+    "speaker": "{doctor}",
+    "text": "\"If you're going to get shot at, I'm going to want to be standing nearby. Medically speaking.\" In a fight she will talk you through field repairs over the radio: her card goes into your deck.",
+    "leaveText": "Leave together"
+   }
+  }
+ },
+ "arms": {
+  "title": "Arms Dealer",
+  "bg": "scene.poi.arms",
+  "portrait": "portrait.shopkeep",
+  "speaker": "Arms dealer",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Racks of blades, a locked case of sidearms and a sign that says NO DEMONSTRATIONS INDOORS with a hole through the middle of it.",
+    "choices": [
+     {
+      "text": "Buy a knife",
+      "if": {
+       "not": {
+        "item": "knife"
+       }
+      },
+      "cost": 2,
+      "effects": [
+       {
+        "item": "knife"
+       },
+       {
+        "equip": "Knife"
+       }
+      ],
+      "goto": "bought"
+     },
+     {
+      "text": "Buy a pistol",
+      "if": {
+       "not": {
+        "item": "pistol"
+       }
+      },
+      "cost": 40,
+      "effects": [
+       {
+        "item": "pistol"
+       },
+       {
+        "equip": "Pistol"
+       }
+      ],
+      "goto": "bought"
+     },
+     {
+      "text": "Buy a flak vest",
+      "if": {
+       "not": {
+        "item": "flak_vest"
+       }
+      },
+      "cost": 50,
+      "effects": [
+       {
+        "item": "flak_vest"
+       },
+       {
+        "wear": "Flak Vest"
+       }
+      ],
+      "goto": "bought"
+     },
+     {
+      "text": "Buy a booster pack of battle cards",
+      "cost": 30,
+      "effects": [
+       {
+        "booster": 1
+       }
+      ],
+      "goto": "booster"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "bought": {
+    "text": "\"Pleasure. Point it away from the shop.\"",
+    "next": "start"
+   },
+   "booster": {
+    "text": "\"Combat-sim cartridges. Kids trade them like sweets. Three programs a pack: load the ones you like into your machine's tactical deck.\"",
+    "next": "start"
+   }
+  }
+ },
+ "outfitter": {
+  "title": "Outfitter",
+  "bg": "scene.poi.outfitter",
+  "portrait": "portrait.shopkeep",
+  "speaker": "Outfitter",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "variant": "ruined"
+      },
+      "goto": "ruined"
+     }
+    ],
+    "text": "Bolts of cloth, a mirror with a crack in it and an outfitter who measures you with his eyes before you are through the door.",
+    "choices": [
+     {
+      "text": "Buy plain civilian clothes",
+      "if": {
+       "not": {
+        "item": "clothes"
+       }
+      },
+      "cost": 35,
+      "effects": [
+       {
+        "item": "clothes"
+       },
+       {
+        "set": "civilian_clothes"
+       }
+      ],
+      "goto": "bought"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "ruined": {
+    "text": "The outfitter is boarding up the window. He sees your uniform and winces. \"Son, a cadet's jacket on the street right now is a target painted on your back. Let me sell you something forgettable.\"",
+    "choices": [
+     {
+      "text": "Buy plain civilian clothes",
+      "if": {
+       "not": {
+        "item": "clothes"
+       }
+      },
+      "cost": 35,
+      "effects": [
+       {
+        "item": "clothes"
+       },
+       {
+        "set": "civilian_clothes"
+       }
+      ],
+      "goto": "bought"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "bought": {
+    "text": "Grey trousers, a brown coat, a cap that makes you look like nobody's son at all.",
+    "next": "start"
+   }
+  }
+ },
+ "lounge": {
+  "title": "The Lamplight",
+  "bg": "scene.poi.lounge",
+  "portrait": "portrait.barkeep",
+  "speaker": "Barkeep",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "all": [
+        {
+         "flag": "juno_invite"
+        },
+        {
+         "not": {
+          "flag": "met_juno"
+         }
+        }
+       ]
+      },
+      "goto": "juno1"
+     }
+    ],
+    "text": "Low lamps, old music and a floor that sticks a little. The barkeep wipes the same glass she was wiping last week.",
+    "choices": [
+     {
+      "text": "Listen to the room",
+      "goto": "rumour"
+     },
+     {
+      "text": "Buy a fizz",
+      "cost": 3,
+      "effects": [
+       {
+        "heal": 5
+       }
+      ],
+      "goto": "drink"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "rumour": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "duel_won"
+      },
+      "goto": "rumour2"
+     }
+    ],
+    "text": "Two techs at the bar are arguing about whether the {slot5} trainers are older than the school. The consensus is yes, and also older than the techs.",
+    "next": "start"
+   },
+   "rumour2": {
+    "text": "A freighter pilot in the corner says the port has turned back two ships this week, both flying no colours. Nobody at her table laughs.",
+    "next": "start"
+   },
+   "drink": {
+    "text": "Something green and fizzy that tastes of ginger and regret. Oddly restorative.",
+    "next": "start"
+   },
+   "juno1": {
+    "portrait": "portrait.rival",
+    "speaker": "{rival}",
+    "text": [
+     "{rival_first} has a booth at the back and two glasses already poured. \"There he is. The boy who bored a drone to death.\"",
+     "She talks fast and listens faster: the school, the {slot5} trainers held together with tape, which instructors cheat at cards. When you mention your father she goes quiet for half a beat, then moves on."
+    ],
+    "next": "juno2"
+   },
+   "juno2": {
+    "portrait": "portrait.drunk",
+    "speaker": "Drunk mechanic",
+    "text": [
+     "A shadow falls over the booth: a mechanic in oil-black coveralls, swaying gently, like a tree in no wind.",
+     "\"{hero_last}'s kid. The Marshal's own. Beat a drone with no eyes and now he drinks with the big kids. Bet you've never even been past the town wall, have you, little Marshal?\""
+    ],
+    "choices": [
+     {
+      "text": "Let it slide",
+      "goto": "juno3"
+     },
+     {
+      "text": "\"The drone had better manners than you.\"",
+      "goto": "juno3b"
+     }
+    ]
+   },
+   "juno3": {
+    "portrait": "portrait.rival",
+    "speaker": "{rival}",
+    "text": "{rival_first} doesn't stand up. She just says his name, quietly, and something about his shift tomorrow and who signs his hours. He remembers somewhere else he needs to be.",
+    "next": "juno4"
+   },
+   "juno3b": {
+    "portrait": "portrait.rival",
+    "speaker": "{rival}",
+    "text": "The mechanic blinks, opens his mouth, and {rival_first} laughs so loudly the whole bar turns to look. Faced with an audience, he decides he has somewhere else to be.",
+    "next": "juno4"
+   },
+   "juno4": {
+    "portrait": "portrait.rival",
+    "speaker": "{rival}",
+    "effects": [
+     {
+      "set": "met_juno"
+     },
+     {
+      "item": "brass_token"
+     }
+    ],
+    "text": [
+     "\"Ignore him. Half this town thinks your name is a door that opens itself. It isn't, is it?\"",
+     "She presses something into your hand: a brass disc the size of a coin, warm from her pocket, with a tiny glass eye set in the middle. \"Old gadget. It doesn't do anything yet. Carry it anyway. Humour me.\"",
+     "\"Get some sleep, {hero_last}. Your next mission's just a walk round the perimeter. Even you can't make that interesting.\""
+    ],
+    "leaveText": "Head out into the night"
+   }
+  }
+ },
+ "lounge_ruin": {
+  "title": "The Lamplight (after the raid)",
+  "bg": "scene.poi.lounge",
+  "portrait": "portrait.barkeep",
+  "speaker": "Barkeep",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "mentor_joined"
+      },
+      "goto": "later"
+     }
+    ],
+    "text": [
+     "The windows are boarded and the music is off. At the good tables, three soldiers in crimson and black are drinking on credit the barkeep will never see.",
+     "She pours you a fizz without being asked and says, barely moving her lips: \"Port's still running. They're checking papers and they're checking faces. Lose the jacket before you go.\""
+    ],
+    "choices": [
+     {
+      "text": "Leave quietly",
+      "exit": true
+     }
+    ]
+   },
+   "later": {
+    "text": "The barkeep sees {mentor_first} behind you and very nearly smiles. \"Thought you were dead,\" she tells him. \"Everyone's dead this month, apparently, and yet the tab keeps growing.\" She slides two fizzes across and leans in. \"Word is the hospital's got a doctor nobody can account for, and the stockade down south took in a pilot nobody will name.\"",
+    "choices": [
+     {
+      "text": "Drink up",
+      "effects": [
+       {
+        "heal": 10
+       }
+      ],
+      "exit": true
+     }
+    ]
+   }
+  }
+ },
+ "garage": {
+  "title": "Mech Garage",
+  "bg": "scene.poi.garage",
+  "portrait": "portrait.crewchief",
+  "speaker": "Crew chief",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Three {slot5} trainers in a row, each with its chest open and a tech's legs sticking out of it. The crew chief wipes her hands on a rag that makes them dirtier.",
+    "choices": [
+     {
+      "text": "Ask about your {slot5}",
+      "goto": "mech"
+     },
+     {
+      "text": "Ask about the road east",
+      "goto": "road"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "mech": {
+    "text": "\"Fifty tons, a large laser, a medium, four smalls, two chatterguns and a fist for when all else fails. We governor the reactor and throttle the coolant for cadets, so it runs hot. Don't fire the big laser every turn unless you want to cook.\"",
+    "next": "start"
+   },
+   "road": {
+    "text": "\"East road runs past the creek to the port. Cadets need a pass to go through the checkpoint, and you haven't got one. Don't look at me like that. I don't make the rules, I just fix the things that break them.\"",
+    "next": "start"
+   }
+  }
+ },
+ "garage_ruin": {
+  "title": "Mech Garage (gutted)",
+  "bg": "scene.story.ruins",
+  "portrait": "portrait.crewchief",
+  "speaker": "Crew chief",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "The bay doors are buckled and every trainer is a heap except one. The crew chief is sitting on an upturned toolbox, staring at it.",
+     "\"Yours. We dragged it off the field in the night. The right arm is gone and the big laser went with it, but it walks. I pulled the cadet governor off the reactor while I was in there. Nobody here is going to tell me not to.\""
+    ],
+    "choices": [
+     {
+      "text": "Ask about the port",
+      "goto": "port"
+     },
+     {
+      "text": "Ask what the machine can still do",
+      "goto": "mech"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "port": {
+    "text": "\"East road, over the bridge, all the way to the port town. The {occupiers} have patrols on it. If you fight one, fight it from the trees, not from the middle of the road. And wear something that doesn't say school on the back.\"",
+    "next": "start"
+   },
+   "mech": {
+    "text": "\"One medium laser, four smalls, two chatterguns. No fist, so forget punching. It runs cooler than it did, but not cool. Spend your heat like it's money, because it is.\"",
+    "next": "start"
+   }
+  }
+ },
+ "road_out": {
+  "title": "Port checkpoint",
+  "bg": "scene.story.road",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "The east road ends at a barrier, a bored guard and a sign: PORT TOWN. CADETS REQUIRE A PASS. Beyond it, the landing lights. You do not have a pass.",
+    "leaveText": "Turn back"
+   }
+  }
+ },
+ "npc_cadet": {
+  "bg": "scene.poi.street",
+  "portrait": "portrait.cadet",
+  "speaker": "Cadet",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "duel_won"
+      },
+      "goto": "after"
+     }
+    ],
+    "text": "\"First week? Word of advice: the {slot5}'s left foot sticks. Lean right. Everybody leans right. That's why they all walk in circles.\"",
+    "leaveText": "Thanks"
+   },
+   "after": {
+    "text": "\"You beat the drone? Lucky. It's had a cough in its left hip all month. Don't tell the Drillmaster I told you.\"",
+    "leaveText": "Thanks"
+   }
+  }
+ },
+ "npc_cadet_ruin": {
+  "bg": "scene.story.ruins",
+  "portrait": "portrait.cadet",
+  "speaker": "Cadet",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "\"They took the instructors to the citadel. They didn't take us. I don't know if that's good. Are you leaving? You look like you're leaving.\"",
+    "leaveText": "Leave"
+   }
+  }
+ },
+ "npc_vendor": {
+  "bg": "scene.poi.street",
+  "portrait": "portrait.shopkeep",
+  "speaker": "Fruit seller",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "\"Hill plums, two for a bit! No? The Marshal always bought plums. Tell him I said the price is going up while he's away.\"",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "npc_vendor_ruin": {
+  "bg": "scene.story.ruins",
+  "portrait": "portrait.shopkeep",
+  "speaker": "Fruit seller",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "\"No plums. The wyrm soldiers took the cart. Took the plums, too, and they didn't even pay the old price.\"",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "npc_mechanic": {
+  "bg": "scene.poi.street",
+  "portrait": "portrait.mechanic",
+  "speaker": "Mechanic",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "\"If you're after the crew chief she's inside, elbow deep in something. Ask her about the coolant throttles. Actually, don't. She'll talk for an hour.\"",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "npc_mechanic_ruin": {
+  "bg": "scene.story.ruins",
+  "portrait": "portrait.mechanic",
+  "speaker": "Mechanic",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "\"I saw one of those {slot6}s up close. Fast as anything, thin in the arms. If I had a working machine I'd go for the arms.\"",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "hex_ridges": {
+  "title": "Northern Ridges",
+  "bg": "scene.story.road",
+  "portrait": null,
+  "speaker": "",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Grey ridges stacked like broken teeth, snow on the high saddles. Somewhere up there is your father's survey camp. There is no road in that a cadet on foot could take, not yet.",
+    "choices": [
+     {
+      "text": "Turn back",
+      "exit": true
+     }
+    ]
+   }
+  }
+ },
+ "hex_cave": {
+  "title": "Cave mouth",
+  "bg": "scene.cave.door",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "effects": [
+     {
+      "set": "saw_cave"
+     }
+    ],
+    "redirect": [
+     {
+      "if": {
+       "flag": "cave_open"
+      },
+      "goto": "open"
+     },
+     {
+      "if": {
+       "not": {
+        "flag": "saw_damaged_disk"
+       }
+      },
+      "goto": "mystery"
+     },
+     {
+      "if": {
+       "not": {
+        "flag": "has_password"
+       }
+      },
+      "goto": "noword"
+     },
+     {
+      "if": {
+       "not": {
+        "member": "mentor"
+       }
+      },
+      "goto": "noeye"
+     },
+     {
+      "if": {
+       "not": {
+        "flag": "cave_guard_won"
+       }
+      },
+      "goto": "guard"
+     },
+     {
+      "goto": "door"
+     }
+    ]
+   },
+   "mystery": {
+    "text": "A cave mouth in the hillside, closed by a door of old grey metal with no handle and no hinges you can see. Someone has scratched a little lantern symbol into the rock beside it.",
+    "leaveText": "Leave it for now"
+   },
+   "noword": {
+    "text": "The grey door. Now that you know what to look for, you see the panel beside it: a lens for an eye and a grille for a voice. Your father's message said a word would open it. The scratches on the disk ate the word.",
+    "leaveText": "Leave it for now"
+   },
+   "noeye": {
+    "text": "You have the word. The panel wants an eye as well, and not yours: it ignores you completely. {mentor_first} would know what to do with it.",
+    "leaveText": "Leave it for now"
+   },
+   "guard": {
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": [
+     "A {slot7} squats in front of the cave mouth like a toad on a doorstep, armour thick enough to shrug off a small laser. Fresh tracks lead in from the forest. They followed someone here.",
+     "\"They don't know what's behind the door,\" {mentor_first} says, \"or they'd have brought a lot more than one. We are not letting them find out. Stay in the rocks; make it come to you.\""
+    ],
+    "choices": [
+     {
+      "text": "Fight it from the rocks",
+      "effects": [
+       {
+        "battle": "cave_guard"
+       }
+      ]
+     },
+     {
+      "text": "Pull back for now",
+      "exit": true
+     }
+    ]
+   },
+   "guard_won": {
+    "effects": [
+     {
+      "set": "cave_guard_won"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": "The {slot7} topples backwards into the scree and lies there ticking. \"Good,\" {mentor_first} says. \"Now nobody's watching the door.\"",
+    "next": "door"
+   },
+   "guard_lost": {
+    "text": "Your machine sounds like a kettle full of gravel. You pull back into the trees and the {slot7} does not follow; it is guarding, not hunting. It will still be there.",
+    "leaveText": "Retreat"
+   },
+   "door": {
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": [
+     "{mentor_first} puts his eye to the lens. Something behind the rock hums, considers him and chimes.",
+     "You lean to the grille and say the word {tinker_first} gave back to you. For a moment nothing happens. Then the grey door slides into the hill with a sigh of air that has not moved in a very long time."
+    ],
+    "choices": [
+     {
+      "text": "Go down into the dark",
+      "effects": [
+       {
+        "set": "cave_open"
+       },
+       {
+        "save": true
+       },
+       {
+        "place": {
+         "location": "vault"
+        }
+       }
+      ],
+      "exit": true
+     }
+    ]
+   },
+   "open": {
+    "text": "The grey door stands open. Cold air breathes out of the hill.",
+    "choices": [
+     {
+      "text": "Go down into the vault",
+      "effects": [
+       {
+        "place": {
+         "location": "vault"
+        }
+       }
+      ],
+      "exit": true
+     },
+     {
+      "text": "Not yet",
+      "exit": true
+     }
+    ]
+   }
+  }
+ },
+ "hex_oldruins": {
+  "title": "Old ruins",
+  "bg": "scene.story.ruins",
+  "portrait": null,
+  "speaker": "",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Toppled pillars from some older town, long before the citadel. Kids dare each other to sleep here. In the grass you find a few coins someone dropped on a dare.",
+    "redirect": [
+     {
+      "if": {
+       "flag": "ruins_looted"
+      },
+      "goto": "empty"
+     }
+    ],
+    "effects": [
+     {
+      "set": "ruins_looted"
+     },
+     {
+      "money": 12
+     }
+    ],
+    "leaveText": "Move on"
+   },
+   "empty": {
+    "text": "Toppled pillars and long grass. Nothing left to find but the view.",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "hex_pads": {
+  "title": "Landing pads",
+  "bg": "scene.story.road",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "variant": "intact"
+      },
+      "goto": "before"
+     }
+    ],
+    "text": "Fences, floodlights and crimson shuttles squatting on the pads like ticks. Every ship in the sky goes up or comes down by the {occupiers}' leave. Not here, then. Not this way.",
+    "leaveText": "Back off"
+   },
+   "before": {
+    "text": "Freighters and passenger shuttles rise on pale columns of light. Cadets watch them from the fence and pretend not to.",
+    "leaveText": "Back off"
+   }
+  }
+ },
+ "hex_stockade_closed": {
+  "title": "Stockade Town",
+  "bg": "scene.story.road",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "A boundary post and a bored constable. \"Work camp and mine town, cadet. Nothing down here for you but a long walk back.\" He is right, for now.",
+    "leaveText": "Turn back"
+   }
+  }
+ },
+ "hex_southruins": {
+  "title": "Old ruins",
+  "bg": "scene.story.ruins",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "southruins_looted"
+      },
+      "goto": "empty"
+     }
+    ],
+    "effects": [
+     {
+      "set": "southruins_looted"
+     },
+     {
+      "money": 25
+     }
+    ],
+    "text": "A half-buried gatehouse, older than anything in the stockade. Someone has used it as a smuggler's drop and left in a hurry: under a loose flagstone, a tin with a few C-bills in it.",
+    "leaveText": "Move on"
+   },
+   "empty": {
+    "text": "The gatehouse, the flagstone, the empty tin. The wind does the rest.",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "patrol_a": {
+  "title": "Patrol on the east road",
+  "bg": "scene.story.road",
+  "portrait": "portrait.sentry",
+  "speaker": "Patrol",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "A {slot1} scout stands in the road west of the bridge, sensor head turning slowly, a pair of soldiers smoking in its shadow.",
+     "Fight from the hex you came in from: trees, ruins or rubble behind you make their shots harder. Open road gives you nothing."
+    ],
+    "choices": [
+     {
+      "text": "Attack",
+      "effects": [
+       {
+        "battle": "patrol_scout",
+        "cover": "map"
+       }
+      ]
+     },
+     {
+      "text": "Slip past while they look the other way",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "effects": [
+     {
+      "set": "patrol_a_down"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "The patrol machine folds at the knees and its pilot bails out and runs for the trees. You strip what you can carry from the wreck: coolant, cartridges, a strongbox with some C-bills in it.",
+    "leaveText": "Move on"
+   },
+   "lost": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "Warning lights everywhere. You break off and limp into the brush until the patrol loses interest. They are still out there.",
+    "leaveText": "Get clear"
+   }
+  }
+ },
+ "patrol_b": {
+  "title": "Patrol at the crossroads",
+  "bg": "scene.story.road",
+  "portrait": "portrait.sentry",
+  "speaker": "Patrol",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "A {slot6} is parked across the crossroads east of the bridge, crimson paint scorched black at the elbows. Its pilot is awake.",
+     "Fight from the hex you came in from: trees, ruins or rubble behind you make their shots harder. Open road gives you nothing."
+    ],
+    "choices": [
+     {
+      "text": "Attack",
+      "effects": [
+       {
+        "battle": "patrol_harrier",
+        "cover": "map"
+       }
+      ]
+     },
+     {
+      "text": "Slip past while they look the other way",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "effects": [
+     {
+      "set": "patrol_b_down"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "The patrol machine folds at the knees and its pilot bails out and runs for the trees. You strip what you can carry from the wreck: coolant, cartridges, a strongbox with some C-bills in it.",
+    "leaveText": "Move on"
+   },
+   "lost": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "Warning lights everywhere. You break off and limp into the brush until the patrol loses interest. They are still out there.",
+    "leaveText": "Get clear"
+   }
+  }
+ },
+ "patrol_c": {
+  "title": "Patrol on the south road",
+  "bg": "scene.story.road",
+  "portrait": "portrait.sentry",
+  "speaker": "Patrol",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "A {slot2} with a missile rack on its hip walks the south road, back and forth, back and forth.",
+     "Fight from the hex you came in from: trees, ruins or rubble behind you make their shots harder. Open road gives you nothing."
+    ],
+    "choices": [
+     {
+      "text": "Attack",
+      "effects": [
+       {
+        "battle": "patrol_striker",
+        "cover": "map"
+       }
+      ]
+     },
+     {
+      "text": "Slip past while they look the other way",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "effects": [
+     {
+      "set": "patrol_c_down"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "The patrol machine folds at the knees and its pilot bails out and runs for the trees. You strip what you can carry from the wreck: coolant, cartridges, a strongbox with some C-bills in it.",
+    "leaveText": "Move on"
+   },
+   "lost": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "Warning lights everywhere. You break off and limp into the brush until the patrol loses interest. They are still out there.",
+    "leaveText": "Get clear"
+   }
+  }
+ },
+ "patrol_d": {
+  "title": "Patrol at the town gate",
+  "bg": "scene.story.road",
+  "portrait": "portrait.sentry",
+  "speaker": "Patrol",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "Since the ceremony they have put a {slot6} on the road outside your own town. It is looking for someone. It is looking for you.",
+     "Fight from the hex you came in from: trees, ruins or rubble behind you make their shots harder. Open road gives you nothing."
+    ],
+    "choices": [
+     {
+      "text": "Attack",
+      "effects": [
+       {
+        "battle": "patrol_harrier",
+        "cover": "map"
+       }
+      ]
+     },
+     {
+      "text": "Slip past while they look the other way",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "effects": [
+     {
+      "set": "patrol_d_down"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "The patrol machine folds at the knees and its pilot bails out and runs for the trees. You strip what you can carry from the wreck: coolant, cartridges, a strongbox with some C-bills in it.",
+    "leaveText": "Move on"
+   },
+   "lost": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "Warning lights everywhere. You break off and limp into the brush until the patrol loses interest. They are still out there.",
+    "leaveText": "Get clear"
+   }
+  }
+ },
+ "patrol_e": {
+  "title": "Patrol near the stockade",
+  "bg": "scene.story.road",
+  "portrait": "portrait.sentry",
+  "speaker": "Patrol",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "A {slot1} scout and a truck full of soldiers, checking everyone on the road to the stockade.",
+     "Fight from the hex you came in from: trees, ruins or rubble behind you make their shots harder. Open road gives you nothing."
+    ],
+    "choices": [
+     {
+      "text": "Attack",
+      "effects": [
+       {
+        "battle": "patrol_scout",
+        "cover": "map"
+       }
+      ]
+     },
+     {
+      "text": "Slip past while they look the other way",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "effects": [
+     {
+      "set": "patrol_e_down"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "The patrol machine folds at the knees and its pilot bails out and runs for the trees. You strip what you can carry from the wreck: coolant, cartridges, a strongbox with some C-bills in it.",
+    "leaveText": "Move on"
+   },
+   "lost": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "Warning lights everywhere. You break off and limp into the brush until the patrol loses interest. They are still out there.",
+    "leaveText": "Get clear"
+   }
+  }
+ },
+ "patrol_f": {
+  "title": "Hunters in the deep forest",
+  "bg": "scene.story.road",
+  "portrait": "portrait.sentry",
+  "speaker": "Patrol",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "A {slot2} stalks the deep forest near the cave, sensors sweeping. Someone told them where to look.",
+     "Fight from the hex you came in from: trees, ruins or rubble behind you make their shots harder. Open road gives you nothing."
+    ],
+    "choices": [
+     {
+      "text": "Attack",
+      "effects": [
+       {
+        "battle": "patrol_striker",
+        "cover": "map"
+       }
+      ]
+     },
+     {
+      "text": "Slip past while they look the other way",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "effects": [
+     {
+      "set": "patrol_f_down"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "The patrol machine folds at the knees and its pilot bails out and runs for the trees. You strip what you can carry from the wreck: coolant, cartridges, a strongbox with some C-bills in it.",
+    "leaveText": "Move on"
+   },
+   "lost": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "Warning lights everywhere. You break off and limp into the brush until the patrol loses interest. They are still out there.",
+    "leaveText": "Get clear"
+   }
+  }
+ },
+ "holodisk": {
+  "title": "The damaged disk",
+  "bg": "scene.story.holodisk",
+  "portrait": "portrait.father",
+  "speaker": "{father}",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "effects": [
+     {
+      "set": "saw_damaged_disk"
+     },
+     {
+      "save": true
+     }
+    ],
+    "text": [
+     "The disk catches, stutters and throws your father into the air above the projector, a hand tall and the colour of weak tea. A scratch runs across him like a scar.",
+     "\"{hero_first}. If {mentor_first} has given you this, then I didn't come back from the ridges, and I'm sorry. I always meant to tell you this in person, over something better than a recording.\"",
+     "\"There is a vault under the hills. The {defenders} built it before you were born and then forgot they had. I have spent twelve years finding it and the last two guarding it. What's inside could keep {planet} free. It could also hand {planet} to whoever opens it first.\"",
+     "\"The lock was built by {tinker}. Mad as a box of frogs and the best engineer I ever met. His hut is in the far northwest. The lock wants two things: {mentor_first}'s eye, and a word. The word is...\"",
+     "The scratch crosses his mouth. His lips move. The sound is a long hiss like rain on a roof, and when it clears he is saying, \"...and don't let anyone talk you out of it. I'm proud of you, kid.\""
+    ],
+    "next": "after"
+   },
+   "again": {
+    "text": "You play it again. The scratch eats the word again. Your father is proud of you again. You stop it before the end this time.",
+    "leaveText": "Switch it off"
+   },
+   "after": {
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "member": "mentor"
+       }
+      },
+      "goto": "alone"
+     }
+    ],
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": "{mentor_first} has been standing in the doorway the whole time. \"His last signal came out of the northwest,\" he says. \"Before we knock on that tinker's door, we gather our people. The doctor first. Then the tech at the port. Then whoever they're holding in the stockade.\"",
+    "leaveText": "Switch it off"
+   },
+   "alone": {
+    "text": "The image folds itself away. Northwest, then. The tinker.",
+    "leaveText": "Switch it off"
+   }
+  }
+ },
+ "port_arrival": {
+  "title": "The Port",
+  "bg": "scene.port.gate",
+  "portrait": "portrait.official",
+  "speaker": "Gate sentry",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "effects": [
+     {
+      "set": "port_seen"
+     }
+    ],
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "flag": "civilian_clothes"
+       }
+      },
+      "goto": "uniform"
+     }
+    ],
+    "text": [
+     "You leave your machine under a tarp in the yard outside the wall, among a hundred freight walkers and loader frames. Nobody looks twice at one more.",
+     "At the gate a sentry in crimson glances at your grey coat and your forgettable cap, decides you are nobody, and waves you through into the port town."
+    ],
+    "leaveText": "Into the port town"
+   },
+   "uniform": {
+    "text": [
+     "You leave your machine under a tarp in the yard outside the wall, among a hundred freight walkers and loader frames.",
+     "At the gate the sentry looks at your cadet jacket for a long, slow moment. \"School's out, cadet,\" he says. \"Permanently. Walk around like that in here and somebody will take an interest. Find a tailor.\""
+    ],
+    "leaveText": "Into the port town"
+   }
+  }
+ },
+ "port_hall": {
+  "title": "Inaugural Hall",
+  "bg": "scene.port.hall",
+  "portrait": "portrait.worker",
+  "speaker": "Banner hanger",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "mentor_joined"
+      },
+      "goto": "after"
+     },
+     {
+      "if": {
+       "not": {
+        "flag": "civilian_clothes"
+       }
+      },
+      "goto": "uniform"
+     },
+     {
+      "if": {
+       "not": {
+        "flag": "inauguration_known"
+       }
+      },
+      "goto": "worker"
+     },
+     {
+      "goto": "waiting"
+     }
+    ]
+   },
+   "uniform": {
+    "portrait": "portrait.official",
+    "speaker": "Door steward",
+    "text": "A steward with a clipboard steps into your path before you reach the steps. \"Concord cadets are not on the list. Concord cadets are not on any list. Off you go.\"",
+    "leaveText": "Back off"
+   },
+   "worker": {
+    "effects": [
+     {
+      "set": "inauguration_known"
+     }
+    ],
+    "text": [
+     "A worker on a ladder is hanging crimson banners down the front of the hall, cursing each one individually.",
+     "\"Tonight,\" she says, when you ask. \"The new governor. Lord of {planet}, by grace of the {occupiers}, with a string quartet and little sandwiches. Whole town's invited, which means nobody is.\" She spits, carefully, so it misses the banner.",
+     "\"The doors open at dusk. Any fool with a clean coat can walk in with the caterers. Not that I'm saying anything.\""
+    ],
+    "next": "waiting"
+   },
+   "waiting": {
+    "portrait": null,
+    "speaker": "",
+    "text": "The hall waits for dusk. Lanterns are going up along the steps. A string quartet is tuning somewhere inside, badly.",
+    "choices": [
+     {
+      "text": "Wait across the street until dusk",
+      "if": {
+       "partySize": {
+        "lte": 1
+       }
+      },
+      "effects": [
+       {
+        "set": "inauguration_dusk"
+       }
+      ],
+      "goto": "crash1"
+     },
+     {
+      "text": "Wait until dusk",
+      "if": {
+       "partySize": {
+        "gt": 1
+       }
+      },
+      "requires": {
+       "partySize": {
+        "lte": 1
+       }
+      },
+      "lockedText": "The caterers let in one more face, not a crowd. Come alone."
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "crash1": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": [
+     "At dusk you pick up a tray of little sandwiches from a stack by the kitchen door and walk in with the caterers. Nobody stops a tray.",
+     "The hall is full of crimson and black. On a stage under the wyrm banner a thin man with a soft voice is thanking {planet} for its warm welcome. The room applauds, carefully.",
+     "He says the {defenders} abandoned this world. He says its Marshal fled into the hills like a bandit and will be hunted like one."
+    ],
+    "choices": [
+     {
+      "text": "Shout your father's name at the stage",
+      "goto": "crash2"
+     },
+     {
+      "text": "Put down the tray and push toward the stage",
+      "goto": "crash2"
+     }
+    ]
+   },
+   "crash2": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "You get three steps. Then a hand the size of a shovel closes on the back of your collar and a very large man in a bouncer's jacket says, \"Party's over for you, son,\" and walks you backwards out of the side door without your feet touching the floor once.",
+    "choices": [
+     {
+      "text": "...",
+      "scene": "port_alley"
+     }
+    ]
+   },
+   "after": {
+    "portrait": null,
+    "speaker": "",
+    "text": "The hall is locked and the banners are coming down; someone has painted a small lantern on the steps in the night. The soldiers at the door are scraping at it with knives.",
+    "leaveText": "Leave"
+   }
+  }
+ },
+ "port_alley": {
+  "title": "Behind the hall",
+  "bg": "scene.story.alley",
+  "portrait": "portrait.mentor",
+  "speaker": "The bouncer",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "He puts you against the wall of the alley, not roughly, and looks up and down it twice. Then he holds up a card. It lights at his touch: a hawk's head inside a lantern, gold on black.",
+     "\"{mentor},\" he says. \"I flew with your father for nineteen years, and you were about to get yourself shot in front of three hundred witnesses. He would never have forgiven me.\""
+    ],
+    "next": "explain"
+   },
+   "explain": {
+    "speaker": "{mentor}",
+    "text": [
+     "\"Listen, because we don't have long. Your father guarded a vault for the {defenders}: old machines, old parts, things this world forgot it ever made. He called the people who helped him the lanterns. Me. A few others.\"",
+     "\"The vault door wants my eye and a word that only you can give it. He made sure of that. Inside is a relay strong enough to call the Regent home from wherever she ran to.\"",
+     "\"So: we find the lanterns who are still alive and still free, we find the vault, we call her in. And we are careful who we trust, because the {occupiers} have turned people before, and they will try it again.\"",
+     "\"There's a {slot3} in bay four of the garage with your name on it. Well. With my name on it. Close enough.\""
+    ],
+    "next": "box"
+   },
+   "box": {
+    "speaker": "{mentor}",
+    "text": [
+     "He takes a steel box out of his coat, the size of a book, with a lens set in the lid. \"He left this with me. It only opens for one eye, and it isn't mine.\"",
+     "You look into the lens. The lid clicks. Inside, on grey foam: a biochip on a chain, warm as if someone has just taken it off, and a holodisk with a crack running right across it."
+    ],
+    "choices": [
+     {
+      "text": "Hang the chip round your neck and pocket the disk",
+      "effects": [
+       {
+        "item": "biochip"
+       },
+       {
+        "item": "damaged_disk"
+       },
+       {
+        "set": "box_opened"
+       },
+       {
+        "recruit": "mentor"
+       }
+      ],
+      "goto": "storm"
+     }
+    ]
+   },
+   "storm": {
+    "speaker": "{mentor}",
+    "text": [
+     "Boots at both ends of the alley. Torches. Someone shouting for the boy with the sandwiches. And over the rooftops, the long legs and narrow head of a {slot6}, turning toward you.",
+     "\"Garage,\" {mentor_first} says. \"Bay four. Run.\""
+    ],
+    "choices": [
+     {
+      "text": "Run for the {slot3}",
+      "effects": [
+       {
+        "battle": "alley_ambush"
+       }
+      ]
+     }
+    ]
+   },
+   "won": {
+    "effects": [
+     {
+      "set": "alley_won"
+     },
+     {
+      "set": "mentor_joined"
+     },
+     {
+      "useMech": "jumper"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": [
+     "The {slot6} goes down across two market stalls and does not get up. The soldiers decide they have urgent business elsewhere.",
+     "\"Your father's kid, all right,\" {mentor_first} says over the radio. \"The {slot3} is yours. The garage will keep your old machine too; swap whenever you like.\"",
+     "\"Now. That disk needs a viewer. The old projector in your barracks, if it survived. Or the mayor of the stockade town has a good one, and fewer friends than he thinks.\""
+    ],
+    "leaveText": "Slip away into the port"
+   },
+   "lost": {
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": "\"We're pinned!\" The {slot6} has the alley mouth and your armour is in rags. {mentor_first} is on the radio: \"Either we take it now or we go down the storm drain and live to be embarrassed about it.\"",
+    "choices": [
+     {
+      "text": "Take it now",
+      "effects": [
+       {
+        "battle": "alley_ambush"
+       }
+      ]
+     },
+     {
+      "text": "Down the storm drain",
+      "goto": "escape"
+     }
+    ]
+   },
+   "escape": {
+    "effects": [
+     {
+      "set": "alley_won"
+     },
+     {
+      "set": "mentor_joined"
+     },
+     {
+      "useMech": "jumper"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": [
+     "You climb down, out and away through a drain that smells of every meal the port has ever eaten. The {slot3} walks it bent double, scraping the roof.",
+     "\"Not glorious,\" {mentor_first} says, \"but alive. The {slot3} is yours; the garage will keep your old machine too. Now, that disk needs a viewer. The old projector in your barracks, if it survived, or the stockade mayor's.\""
+    ],
+    "leaveText": "Back into the port"
+   }
+  }
+ },
+ "port_garage": {
+  "title": "Mech Garage",
+  "bg": "scene.port.garage",
+  "portrait": "portrait.crewchief",
+  "speaker": "Garage boss",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "flag": "mentor_joined"
+       }
+      },
+      "goto": "before"
+     }
+    ],
+    "text": "Bay four has a lantern chalked on its door now. The garage boss looks the other way so hard you can hear it. \"Swap machines, refit, whatever you need. I never saw you.\"",
+    "choices": [
+     {
+      "text": "Pilot the {slot3}",
+      "if": {
+       "all": [
+        {
+         "mech": "jumper"
+        },
+        {
+         "not": {
+          "activeMech": "jumper"
+         }
+        }
+       ]
+      },
+      "effects": [
+       {
+        "useMech": "jumper"
+       }
+      ],
+      "goto": "swapped"
+     },
+     {
+      "text": "Pilot your patched {slot5}",
+      "if": {
+       "all": [
+        {
+         "mech": "trainer_patched"
+        },
+        {
+         "not": {
+          "activeMech": "trainer_patched"
+         }
+        }
+       ]
+      },
+      "effects": [
+       {
+        "useMech": "trainer_patched"
+       }
+      ],
+      "goto": "swapped"
+     },
+     {
+      "text": "Pilot the {slot2}",
+      "if": {
+       "all": [
+        {
+         "mech": "striker"
+        },
+        {
+         "not": {
+          "activeMech": "striker"
+         }
+        }
+       ]
+      },
+      "effects": [
+       {
+        "useMech": "striker"
+       }
+      ],
+      "goto": "swapped"
+     },
+     {
+      "text": "Pilot your father's {slot4}",
+      "if": {
+       "all": [
+        {
+         "mech": "ranger"
+        },
+        {
+         "not": {
+          "activeMech": "ranger"
+         }
+        }
+       ]
+      },
+      "effects": [
+       {
+        "useMech": "ranger"
+       }
+      ],
+      "goto": "swapped"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "before": {
+    "text": "\"Work machines park in the yard, combat machines don't park at all, by order. Yours is a work machine, isn't it?\" He winks so slowly it barely counts. Bay four is shut, and someone has chalked a small lantern on the door.",
+    "leaveText": "Leave"
+   },
+   "swapped": {
+    "text": "The crew swap the cockpit settings over in ten minutes flat and pretend they were never there.",
+    "next": "start"
+   }
+  }
+ },
+ "port_repair": {
+  "title": "Repair Shop",
+  "bg": "scene.port.repair",
+  "portrait": "portrait.mechanic",
+  "speaker": "Shop foreman",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Actuators hang from the ceiling like hams. A foreman with burned eyebrows is shouting at a gyro that is not listening.",
+    "choices": [
+     {
+      "text": "Ask to apprentice",
+      "if": {
+       "not": {
+        "flag": "met_tech"
+       }
+      },
+      "goto": "ask"
+     },
+     {
+      "text": "Ask about work machines",
+      "goto": "work"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "work": {
+    "text": "\"Half my customers are wyrm officers now. They pay on time, which I hate.\" He hits the gyro. It starts spinning. \"There. Everyone listens eventually.\"",
+    "next": "start"
+   },
+   "ask": {
+    "redirect": [
+     {
+      "if": {
+       "member": "mentor"
+      },
+      "goto": "tech1"
+     }
+    ],
+    "text": "\"Apprentice? We don't take strays off the street. Not this month. Not with the inspectors in and out.\" He points at the door with a wrench.",
+    "next": "start"
+   },
+   "tech1": {
+    "portrait": "portrait.tech",
+    "speaker": "{tech}",
+    "text": [
+     "Before the foreman can answer, a lanky tech slides out from under a loader frame on a creeper board, sees {mentor_first}, and drops a socket wrench on his own foot.",
+     "\"Oh, no,\" he says, delighted. \"Oh, no, no. The foreman is going to dock me for this.\" He wipes his hands on his overalls, which makes them worse. \"{tech}. I tuned your father's reactor once. He said if I ever made it run that cool again he'd have me knighted. The {defenders} don't do knights. I asked.\""
+    ],
+    "next": "tech2"
+   },
+   "tech2": {
+    "portrait": "portrait.tech",
+    "speaker": "{tech}",
+    "text": "\"Gathering the lanterns, are we? Good. I was getting very tired of fixing their machines.\" He shoulders a toolbag bigger than his torso.",
+    "choices": [
+     {
+      "text": "Welcome him aboard",
+      "effects": [
+       {
+        "recruit": "tech"
+       },
+       {
+        "set": "met_tech"
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "tech3"
+     }
+    ]
+   },
+   "tech3": {
+    "portrait": "portrait.tech",
+    "speaker": "{tech}",
+    "text": "\"I'll be on your coolant lines in a fight. Flush them right and your sinks remember it.\" His card goes into your deck.",
+    "leaveText": "Leave together"
+   }
+  }
+ },
+ "port_clinic": {
+  "title": "Port Clinic",
+  "bg": "scene.port.clinic",
+  "portrait": "portrait.medic",
+  "speaker": "Clinic nurse",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "White tile, soft music and a price list in three languages. The {occupiers}' officers get seen first; there is a sign saying so.",
+    "choices": [
+     {
+      "text": "Get treated",
+      "cost": 40,
+      "effects": [
+       {
+        "heal": "full"
+       }
+      ],
+      "goto": "healed"
+     },
+     {
+      "text": "Take the field medicine course",
+      "if": {
+       "not": {
+        "flag": "seminar_medical2"
+       }
+      },
+      "cost": 400,
+      "effects": [
+       {
+        "skill": "medical",
+        "add": 1,
+        "max": 4
+       },
+       {
+        "set": "seminar_medical2"
+       }
+      ],
+      "goto": "course"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "healed": {
+    "text": "They are gentle, quick and expensive. You leave feeling new and somewhat poorer.",
+    "next": "start"
+   },
+   "course": {
+    "text": "Two days of splints, tourniquets and a mannequin called Gerald. You will never look at Gerald the same way.",
+    "next": "start"
+   }
+  }
+ },
+ "port_tailor": {
+  "title": "Tailor",
+  "bg": "scene.port.tailor",
+  "portrait": "portrait.shopkeep",
+  "speaker": "Tailor",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Bolts of grey and brown cloth. The tailor is pinning a crimson officer's jacket on a dummy with an expression of mild disgust.",
+    "choices": [
+     {
+      "text": "Buy plain civilian clothes",
+      "if": {
+       "not": {
+        "item": "clothes"
+       }
+      },
+      "cost": 35,
+      "effects": [
+       {
+        "item": "clothes"
+       },
+       {
+        "set": "civilian_clothes"
+       }
+      ],
+      "goto": "bought"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "bought": {
+    "text": "\"There. Now you look like you sell insurance. Nobody shoots people who sell insurance. They just avoid them.\"",
+    "next": "start"
+   }
+  }
+ },
+ "port_bar": {
+  "title": "Dockside bar",
+  "bg": "scene.port.bar",
+  "portrait": "portrait.barkeep",
+  "speaker": "Barman",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "all": [
+        {
+         "flag": "mentor_joined"
+        },
+        {
+         "not": {
+          "flag": "stranger_met"
+         }
+        }
+       ]
+      },
+      "goto": "stranger1"
+     }
+    ],
+    "text": "Freight crews, dock clerks and a few off-duty soldiers who sit with their backs to the wall. The barman polishes a glass with great suspicion.",
+    "choices": [
+     {
+      "text": "Listen to the room",
+      "goto": "rumour"
+     },
+     {
+      "text": "Buy a drink",
+      "cost": 4,
+      "effects": [
+       {
+        "heal": 5
+       }
+      ],
+      "goto": "drink"
+     },
+     {
+      "text": "Have a quiet word with the stranger",
+      "if": {
+       "member": "stranger"
+      },
+      "goto": "stranger_talk"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "rumour": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "has_password"
+      },
+      "goto": "rumour3"
+     },
+     {
+      "if": {
+       "flag": "mentor_joined"
+      },
+      "goto": "rumour2"
+     }
+    ],
+    "text": "A dock clerk says the new governor is being sworn in at the big hall any day now, and that they have hired extra bouncers. Very large ones.",
+    "next": "start"
+   },
+   "rumour2": {
+    "text": "Two crews argue about the lantern somebody painted on the hall steps. One says it was kids. The other says kids don't knock down a {slot6}.",
+    "next": "start"
+   },
+   "rumour3": {
+    "text": "A pilot says the {occupiers} are sending machines into the northwest forest, looking for something under the hills. \"Rocks,\" she says. \"They're looking for rocks. Very important rocks.\"",
+    "next": "start"
+   },
+   "drink": {
+    "text": "It tastes of engine and something trying hard to be lime.",
+    "next": "start"
+   },
+   "stranger1": {
+    "effects": [
+     {
+      "set": "stranger_met"
+     }
+    ],
+    "portrait": "portrait.stranger",
+    "speaker": "A stranger",
+    "text": [
+     "A man in a good grey coat slides into your booth as if he were expected. \"You're the Marshal's boy. Don't look round. I was on his survey team in the ridges until the end. I saw the lantern on the steps and I knew.\"",
+     "\"I can fly. I can fix a radio. I know the hills. Let me come with you. I owe him that much.\""
+    ],
+    "next": "stranger2"
+   },
+   "stranger2": {
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": "{mentor_first} studies him over the rim of his glass. \"I don't know your face,\" he says at last. \"But I didn't know everyone. Your call, {hero_first}.\"",
+    "choices": [
+     {
+      "text": "Take him on",
+      "effects": [
+       {
+        "recruit": "stranger"
+       }
+      ],
+      "goto": "stranger_yes"
+     },
+     {
+      "text": "Thank him and turn him down",
+      "goto": "stranger_no"
+     }
+    ]
+   },
+   "stranger_yes": {
+    "portrait": "portrait.stranger",
+    "speaker": "The stranger",
+    "text": "\"You won't regret it.\" He shakes your hand warmly, then {mentor_first}'s. {mentor_first} counts his fingers afterwards, not quite as a joke.",
+    "next": "start"
+   },
+   "stranger_no": {
+    "portrait": "portrait.stranger",
+    "speaker": "The stranger",
+    "text": "\"Of course. Careful is wise.\" He smiles, finishes his drink and leaves. You do not see where he goes.",
+    "next": "start"
+   },
+   "stranger_talk": {
+    "portrait": "portrait.stranger",
+    "speaker": "The stranger",
+    "redirect": [
+     {
+      "if": {
+       "member": "doctor"
+      },
+      "goto": "stranger_doubt"
+     }
+    ],
+    "text": "\"Something on your mind, {hero_last}?\" He smiles the way people smile in photographs. \"We should get moving. Which way are we headed next? I like to know the plan.\"",
+    "choices": [
+     {
+      "text": "Tell him he is out",
+      "goto": "stranger_out"
+     },
+     {
+      "text": "Never mind",
+      "goto": "start"
+     }
+    ]
+   },
+   "stranger_doubt": {
+    "portrait": "portrait.doctor",
+    "speaker": "{doctor}",
+    "text": [
+     "{doctor_first} catches your sleeve before you reach him. \"A word first. He told me he served on your father's survey team in the ridges. Three weeks in the snow, he says.\"",
+     "\"His hands have never held an ice axe and his boots have never seen mud. And he asks where we are going next. Every day. Twice.\""
+    ],
+    "choices": [
+     {
+      "text": "Tell him he is out",
+      "goto": "stranger_out"
+     },
+     {
+      "text": "Keep him close for now",
+      "goto": "start"
+     }
+    ]
+   },
+   "stranger_out": {
+    "effects": [
+     {
+      "dismiss": "stranger"
+     },
+     {
+      "set": "stranger_gone"
+     }
+    ],
+    "portrait": "portrait.stranger",
+    "speaker": "The stranger",
+    "text": "For a moment the smile stays where it is and the eyes behind it do arithmetic. Then he shrugs, collects his coat and goes, without a word to anyone. {mentor_first} watches the door for a long time after it closes.",
+    "next": "start"
+   }
+  }
+ },
+ "port_arena": {
+  "title": "Arena",
+  "bg": "scene.port.arena",
+  "portrait": "portrait.bookie",
+  "speaker": "Arena bookie",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "A sand pit behind a chain fence, floodlights and a chalkboard of odds. The bookie lights a new cigarette off the old one. \"Two-fifty buys you a bout with the house champion. Win and you walk off with five hundred. Lose and you walk off. Mostly.\"",
+    "choices": [
+     {
+      "text": "Put down the deposit and fight",
+      "if": {
+       "not": {
+        "flag": "arena_today"
+       }
+      },
+      "cost": 250,
+      "effects": [
+       {
+        "set": "arena_today"
+       },
+       {
+        "battle": "arena_bout"
+       }
+      ]
+     },
+     {
+      "text": "Fight again",
+      "if": {
+       "flag": "arena_today"
+      },
+      "requires": {
+       "not": {
+        "flag": "arena_today"
+       }
+      },
+      "lockedText": "One bout a day. Sleep first."
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "text": "The crowd boos the champion, which is how they cheer here. The bookie counts five hundred into your hand and looks at you like a horse he should have bet on.",
+    "next": "start"
+   },
+   "lost": {
+    "text": "\"Better luck tomorrow, hero.\" The deposit stays with the house. The house always has room for deposits.",
+    "next": "start"
+   }
+  }
+ },
+ "port_arms": {
+  "title": "Arms broker",
+  "bg": "scene.port.arms",
+  "portrait": "portrait.shopkeep",
+  "speaker": "Arms broker",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Everything here is legal, the broker assures you, at least until somebody asks.",
+    "choices": [
+     {
+      "text": "Buy a booster pack of battle cards",
+      "cost": 30,
+      "effects": [
+       {
+        "booster": 1
+       }
+      ],
+      "goto": "booster"
+     },
+     {
+      "text": "Buy a pistol",
+      "if": {
+       "not": {
+        "item": "pistol"
+       }
+      },
+      "cost": 40,
+      "effects": [
+       {
+        "item": "pistol"
+       },
+       {
+        "equip": "Pistol"
+       }
+      ],
+      "goto": "bought"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "booster": {
+    "text": "\"Fresh cartridges, straight off a freighter. Do not ask which freighter.\"",
+    "next": "start"
+   },
+   "bought": {
+    "text": "\"Lovely. It has never been fired. By me.\"",
+    "next": "start"
+   }
+  }
+ },
+ "port_relay": {
+  "title": "Relay office",
+  "bg": "scene.port.relay",
+  "portrait": "portrait.clerk",
+  "speaker": "Relay clerk",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "A row of booths, half of them sealed with crimson tape. The clerk has the look of someone who reads every message twice now, once for the customer and once for the {occupiers}.",
+    "choices": [
+     {
+      "text": "Try to send a message to the Regent",
+      "goto": "jammed"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "jammed": {
+    "text": "\"Off-world? Everything off-world goes through the governor's office now.\" He lowers his voice. \"And everything the governor's office doesn't like gets lost. You'd need one of the old deep relays to punch through their jamming. Nobody's built one of those since my grandmother was a girl.\"",
+    "next": "start"
+   }
+  }
+ },
+ "npc_dockhand": {
+  "title": "",
+  "bg": "scene.port.street",
+  "portrait": "portrait.dockhand",
+  "speaker": "Dockhand",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "mentor_joined"
+      },
+      "goto": "later"
+     }
+    ],
+    "text": "\"Hall's been hiring all week. Waiters, bouncers, a string quartet. Ask at the hall if you want work. Ask the big fella at the side door if you want trouble.\"",
+    "leaveText": "Move on"
+   },
+   "later": {
+    "text": "\"South road goes to the stockade town. Mines and a prison, and the prison's the nicer half. And out northwest there's a hermit who builds gadgets. Throws them at people, I heard.\"",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "npc_hawker": {
+  "title": "",
+  "bg": "scene.port.street",
+  "portrait": "portrait.shopkeep",
+  "speaker": "Noodle hawker",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "\"Noodles! Noodles with a sauce! Noodles that the governor's own guards eat, and they are only slightly poisoned!\" He lowers his voice. \"That last part is a joke. Mostly.\"",
+    "choices": [
+     {
+      "text": "Buy a bowl",
+      "cost": 2,
+      "effects": [
+       {
+        "heal": 8
+       }
+      ],
+      "goto": "ate"
+     },
+     {
+      "text": "Move on",
+      "exit": true
+     }
+    ]
+   },
+   "ate": {
+    "text": "Hot, salty and very good. You feel a little more like a person.",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "stockade_arrival": {
+  "title": "Stockade Town",
+  "bg": "scene.stockade.street",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "effects": [
+     {
+      "set": "stockade_seen"
+     }
+    ],
+    "text": "A mine town in a fold of the hills: slag heaps, a single street and, at the top of it, the stockade, a grey wall with towers. Crimson armbands at every corner. People here keep their heads down and their voices lower.",
+    "leaveText": "Walk in"
+   }
+  }
+ },
+ "stockade_jail": {
+  "title": "The Stockade",
+  "bg": "scene.stockade.jail",
+  "portrait": "portrait.jailer",
+  "speaker": "Gate guard",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "The stockade gate stands open in the daytime, because nobody walks in who expects to walk out. A guard in a crimson armband leans on it.",
+    "choices": [
+     {
+      "text": "Walk in",
+      "goto": "enter"
+     },
+     {
+      "text": "Keep walking",
+      "exit": true
+     }
+    ]
+   },
+   "enter": {
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "flag": "civilian_clothes"
+       }
+      },
+      "goto": "uniform"
+     },
+     {
+      "if": {
+       "traitor": true
+      },
+      "goto": "betrayed"
+     },
+     {
+      "if": {
+       "flag": "jailbreak_done"
+      },
+      "goto": "known"
+     },
+     {
+      "if": {
+       "partySize": {
+        "lte": 1
+       }
+      },
+      "goto": "alone"
+     },
+     {
+      "goto": "inside"
+     }
+    ]
+   },
+   "uniform": {
+    "text": "The guard takes one look at your cadet jacket and laughs. \"The school sent us a volunteer! No, son. Go home and change, and then think very hard about coming back.\"",
+    "leaveText": "Back off"
+   },
+   "alone": {
+    "portrait": "portrait.jailer",
+    "speaker": "Jailkeeper",
+    "text": [
+     "The jailkeeper is a heavy man with a ledger. He listens to your question about prisoners with his head on one side, then turns the ledger round so you can see the page.",
+     "\"Name?\" he says. \"For the book. Everyone who comes in asking about prisoners goes in the book.\" The gate shuts behind you. Nobody here knows you, and nobody will come looking."
+    ],
+    "choices": [
+     {
+      "text": "...",
+      "effects": [
+       {
+        "end": "death",
+        "text": "Taken in at the stockade as a Concord spy. Nobody walks in there alone and walks out."
+       }
+      ]
+     }
+    ]
+   },
+   "betrayed": {
+    "portrait": "portrait.stranger",
+    "speaker": "The stranger",
+    "text": [
+     "At the gate the stranger in the grey coat steps away from you and nods to the guard, the way you nod to an old colleague.",
+     "\"The Marshal's boy,\" he says pleasantly. \"And the Marshal's friend. As promised.\" The gate shuts behind you all. {mentor_first} looks at you once, and there is no blame in it at all, which is worse."
+    ],
+    "choices": [
+     {
+      "text": "...",
+      "effects": [
+       {
+        "end": "death",
+        "text": "Betrayed at the stockade gate by the man in the grey coat. The double agent was the one you trusted on a smile."
+       }
+      ]
+     }
+    ]
+   },
+   "known": {
+    "portrait": "portrait.jailer",
+    "speaker": "Jailkeeper",
+    "text": "The jailkeeper looks up from his ledger. He has a fresh bruise on his jaw the exact shape of {mentor_first}'s fist, and he recognises you at once. So does everyone else.",
+    "choices": [
+     {
+      "text": "...",
+      "effects": [
+       {
+        "end": "death",
+        "text": "Recognised at the stockade after the jailbreak. Some doors you only walk through once."
+       }
+      ]
+     }
+    ]
+   },
+   "inside": {
+    "portrait": "portrait.jailer",
+    "speaker": "Jailkeeper",
+    "text": "The jailkeeper is a heavy man with a ledger, a cold cup of tea and no curiosity at all. \"Visiting hours are never,\" he says. \"What do you want?\"",
+    "choices": [
+     {
+      "text": "Ask about {mentor_first}'s friend",
+      "if": {
+       "member": "mentor"
+      },
+      "goto": "break1"
+     },
+     {
+      "text": "Nothing. Leave.",
+      "exit": true
+     }
+    ]
+   },
+   "break1": {
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": [
+     "{mentor_first} leans on the desk. \"Tall woman, scar through one eyebrow, brought in after the raid. Pilot. You'll have her down as a smuggler.\" The jailkeeper reaches for his whistle.",
+     "He does not reach it. {mentor_first} hits him once, very precisely, and catches the tea before it spills. \"Keys,\" he says to you. \"Third ring on his belt. Quickly.\""
+    ],
+    "next": "break2"
+   },
+   "break2": {
+    "portrait": "portrait.prisoner",
+    "speaker": "{prisoner}",
+    "text": [
+     "The cell at the end. A woman is doing push-ups on the stone floor and does not stop when the door opens. \"If this is a rescue,\" she says, between counts, \"you're late. If it's an execution, you're early.\"",
+     "She sees {mentor_first} and gets up. \"Oh, it's you. Then it's a rescue.\" She looks you over. \"And you're the Marshal's. Same jaw. {prisoner}. They took my {slot2}; it's in the impound yard down the street, if you fancy stealing it back.\""
+    ],
+    "choices": [
+     {
+      "text": "Get her out",
+      "effects": [
+       {
+        "recruit": "prisoner"
+       },
+       {
+        "set": "jailbreak_done"
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "break3"
+     }
+    ]
+   },
+   "break3": {
+    "portrait": "portrait.prisoner",
+    "speaker": "{prisoner}",
+    "text": "You walk out through the gate in a group, as if you had every right to. Nobody stops a group. \"I shoot better than either of you,\" {prisoner_first} says on the way. \"I'm not boasting. I'm giving you information.\" Her card goes into your deck.",
+    "leaveText": "Out, fast"
+   }
+  }
+ },
+ "stockade_yard": {
+  "title": "Impound yard",
+  "bg": "scene.stockade.yard",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "kestrel_won"
+      },
+      "goto": "empty"
+     },
+     {
+      "if": {
+       "member": "prisoner"
+      },
+      "goto": "steal"
+     }
+    ],
+    "text": "Behind a wire fence, a row of confiscated machines rust politely. A {slot7} stands guard at the gate, bored and enormous.",
+    "leaveText": "Leave"
+   },
+   "steal": {
+    "portrait": "portrait.prisoner",
+    "speaker": "{prisoner}",
+    "text": "\"There. Third from the end. My {slot2}.\" {prisoner_first} looks at the {slot7} at the gate. \"It's slow and it's thick and it hits like a falling house. Keep it busy, stay behind the scrap, and I'll be in my cockpit before it turns round.\"",
+    "choices": [
+     {
+      "text": "Take on the guard",
+      "effects": [
+       {
+        "battle": "impound_yard"
+       }
+      ]
+     },
+     {
+      "text": "Not today",
+      "exit": true
+     }
+    ]
+   },
+   "won": {
+    "effects": [
+     {
+      "set": "kestrel_won"
+     },
+     {
+      "save": true
+     }
+    ],
+    "portrait": "portrait.prisoner",
+    "speaker": "{prisoner}",
+    "text": "The {slot7} sits down hard in a cloud of rust. {prisoner_first} is already climbing into her {slot2}, patting the console like a horse. \"Hello, gorgeous. Did they hurt you?\" The {slot2} joins the unit; swap machines at the port garage.",
+    "leaveText": "Leave"
+   },
+   "lost": {
+    "text": "The {slot7} drives you back behind the scrap heaps with its autocannon and the yard sirens start. You get out with your skin. The {slot2} stays where it is, for now.",
+    "leaveText": "Leave"
+   },
+   "empty": {
+    "text": "A gap in the row of impounded machines where the {slot2} used to be, and a {slot7} sitting in the mud with a dented head.",
+    "leaveText": "Leave"
+   }
+  }
+ },
+ "stockade_mayor": {
+  "title": "The Mayor's house",
+  "bg": "scene.stockade.mayor",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "mayor_broken"
+      },
+      "goto": "later"
+     }
+    ],
+    "text": "A tall house with lace curtains, the only painted building on the street. A note on the door: GONE TO THE PORT FOR THE GOVERNOR'S BUSINESS. BACK TOMORROW. The back window is open half an inch.",
+    "choices": [
+     {
+      "text": "Climb in through the back window",
+      "effects": [
+       {
+        "set": "mayor_broken"
+       }
+      ],
+      "goto": "inside"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "inside": {
+    "text": "A parlour full of clocks, a framed portrait of the mayor shaking hands with a crimson officer, and in the corner, a very good holoviewer.",
+    "choices": [
+     {
+      "text": "Read the newspaper on the table",
+      "goto": "paper"
+     },
+     {
+      "text": "Play the cracked disk on the holoviewer",
+      "if": {
+       "item": "damaged_disk"
+      },
+      "scene": "holodisk"
+     },
+     {
+      "text": "Help yourself to the sandwich in the kitchen",
+      "goto": "sandwich"
+     },
+     {
+      "text": "Get out while you can",
+      "exit": true
+     }
+    ]
+   },
+   "paper": {
+    "text": "THE GAZETTE (by permission). NEW GOVERNOR WELCOMES PEACEFUL TRANSITION. Page two: MARSHAL STILL AT LARGE, BELIEVED IN NORTHWEST. REWARD. Page three: a crossword, already half done, mostly wrong.",
+    "next": "inside"
+   },
+   "sandwich": {
+    "text": [
+     "A thick sandwich and a glass of orange juice on a tray, under a cloth. You have not eaten properly in days. You eat the sandwich.",
+     "A key in the front door. You dive into the pantry. The mayor bustles in, back early, sees the empty plate, and stares at it. Then at the orange juice. \"I knew it,\" he whispers to the juice. \"I knew you were up to something.\" He pours it down the sink, and leaves again, muttering."
+    ],
+    "effects": [
+     {
+      "heal": 15
+     }
+    ],
+    "next": "inside"
+   },
+   "later": {
+    "text": "The back window is nailed shut now, and there is a new lock on the pantry. The mayor has a new glass of orange juice on the windowsill, where he can keep an eye on it.",
+    "leaveText": "Leave"
+   }
+  }
+ },
+ "stockade_store": {
+  "title": "General store",
+  "bg": "scene.stockade.store",
+  "portrait": "portrait.shopkeep",
+  "speaker": "Storekeeper",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "Picks, lamps, tinned beans and, in a glass case by the till, battle-card cartridges for the miners' kids.",
+    "choices": [
+     {
+      "text": "Buy a booster pack of battle cards",
+      "cost": 30,
+      "effects": [
+       {
+        "booster": 1
+       }
+      ],
+      "goto": "booster"
+     },
+     {
+      "text": "Buy a medkit and use it",
+      "cost": 15,
+      "effects": [
+       {
+        "heal": 30
+       }
+      ],
+      "goto": "medkit"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "booster": {
+    "text": "\"Last of the shipment. Kids round here trade them for beans.\"",
+    "next": "start"
+   },
+   "medkit": {
+    "text": "Gauze, tape and a sting of antiseptic. Better.",
+    "next": "start"
+   }
+  }
+ },
+ "stockade_inn": {
+  "title": "The Inn",
+  "bg": "scene.stockade.inn",
+  "portrait": "portrait.innkeeper",
+  "speaker": "Innkeeper",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "A low room with a fire, miners at the long table and an innkeeper who has heard everything twice.",
+    "choices": [
+     {
+      "text": "Take a room for the night",
+      "cost": 10,
+      "effects": [
+       {
+        "day": 1
+       },
+       {
+        "heal": "full"
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "slept"
+     },
+     {
+      "text": "Ask about the stockade",
+      "goto": "stockade"
+     },
+     {
+      "text": "Have a quiet word with the stranger",
+      "if": {
+       "member": "stranger"
+      },
+      "goto": "stranger_talk"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "slept": {
+    "text": "A lumpy bed, a quiet night, a breakfast of beans. You wake up stronger.",
+    "next": "start"
+   },
+   "stockade": {
+    "text": [
+     "\"The stockade?\" She lowers her voice. \"Last week a boy walked in alone asking after a prisoner. He's in the cell next to hers now. Nobody walks in there alone and walks out.\"",
+     "\"And watch who you walk in with. The wyrms pay well for friends.\""
+    ],
+    "next": "start"
+   },
+   "stranger_talk": {
+    "portrait": "portrait.stranger",
+    "speaker": "The stranger",
+    "redirect": [
+     {
+      "if": {
+       "member": "doctor"
+      },
+      "goto": "stranger_doubt"
+     }
+    ],
+    "text": "\"Something on your mind, {hero_last}?\" He smiles the way people smile in photographs. \"We should get moving. Which way are we headed next? I like to know the plan.\"",
+    "choices": [
+     {
+      "text": "Tell him he is out",
+      "goto": "stranger_out"
+     },
+     {
+      "text": "Never mind",
+      "goto": "start"
+     }
+    ]
+   },
+   "stranger_doubt": {
+    "portrait": "portrait.doctor",
+    "speaker": "{doctor}",
+    "text": [
+     "{doctor_first} catches your sleeve before you reach him. \"A word first. He told me he served on your father's survey team in the ridges. Three weeks in the snow, he says.\"",
+     "\"His hands have never held an ice axe and his boots have never seen mud. And he asks where we are going next. Every day. Twice.\""
+    ],
+    "choices": [
+     {
+      "text": "Tell him he is out",
+      "goto": "stranger_out"
+     },
+     {
+      "text": "Keep him close for now",
+      "goto": "start"
+     }
+    ]
+   },
+   "stranger_out": {
+    "effects": [
+     {
+      "dismiss": "stranger"
+     },
+     {
+      "set": "stranger_gone"
+     }
+    ],
+    "portrait": "portrait.stranger",
+    "speaker": "The stranger",
+    "text": "For a moment the smile stays where it is and the eyes behind it do arithmetic. Then he shrugs, collects his coat and goes, without a word to anyone. {mentor_first} watches the door for a long time after it closes.",
+    "next": "start"
+   }
+  }
+ },
+ "npc_townsman": {
+  "title": "",
+  "bg": "scene.stockade.street",
+  "portrait": "portrait.cadet",
+  "speaker": "Young miner",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": "\"The tinker in the northwest? My uncle sold him copper once. Said the hut asked him riddles and threw him in a ditch when he got one wrong. My uncle was bad at riddles. He said you'd want someone clever with machines and someone clever with medicine, both, to get past the door.\"",
+    "leaveText": "Move on"
+   }
+  }
+ },
+ "hut_door": {
+  "title": "The tinker's hut",
+  "bg": "scene.hut.outside",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "tinker_done"
+      },
+      "goto": "after"
+     },
+     {
+      "if": {
+       "not": {
+        "flag": "mentor_joined"
+       }
+      },
+      "goto": "sign"
+     },
+     {
+      "goto": "q0"
+     }
+    ]
+   },
+   "sign": {
+    "text": "A crooked hut of corrugated iron and stained glass, with a sign on the door: NO CALLERS. NO SALESMEN. NO EXCEPTIONS. A camera on a stalk follows you as you leave.",
+    "leaveText": "Leave"
+   },
+   "q0": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hologram",
+    "speaker": "The face",
+    "text": [
+     "The door opens on its own. Inside, the whole back wall is a face: a giant, flickering, hollow-cheeked face of light, with eyebrows like hedges.",
+     "\"FOUR QUESTIONS,\" it booms, rattling the glass. \"ANSWER ALL FOUR, OR LEAVE THE WAY THE LAST ONES DID.\" Two gun barrels slide out of the ceiling and point at the floor in front of you, helpfully."
+    ],
+    "next": "q1"
+   },
+   "q1": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hologram",
+    "speaker": "The face",
+    "text": "\"FIRST. A REACTOR IS COLD. ITS SINKS ARE FULL OF COOLANT. WHY DOES IT STILL OVERHEAT THE MOMENT IT IS FIRED IN THE SNOW?\"",
+    "choices": [
+     {
+      "text": "Let your best mechanic answer (needs Tech 4 in the party)",
+      "requires": {
+       "partySkill": "tech",
+       "gte": 4
+      },
+      "lockedText": "Nobody in the party knows machines well enough (Tech 4)",
+      "goto": "a1"
+     },
+     {
+      "text": "Have a guess",
+      "goto": "shot_tech"
+     }
+    ]
+   },
+   "a1": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.tech",
+    "speaker": "Your mechanic",
+    "text": "\"Because cold coolant thickens and the pumps cavitate, so the sinks look full and do nothing. You bleed the lines warm before a cold start. Everyone knows that. Well. Everyone who's blown one up.\"",
+    "next": "q2"
+   },
+   "shot_tech": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hologram",
+    "speaker": "The face",
+    "text": "\"WRONG.\" The guns open up, aimed carefully at the floor around your feet, and keep at it until you are outside in the ditch.",
+    "choices": [
+     {
+      "text": "Out, in the ditch",
+      "effects": [
+       {
+        "hurt": 10
+       }
+      ],
+      "exit": true
+     }
+    ]
+   },
+   "q2": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hologram",
+    "speaker": "The face",
+    "text": "\"SECOND. A PILOT IS PULLED FROM A BURNING COCKPIT. HIS SKIN IS DRY AND HOT AND HE HAS STOPPED SWEATING. WHAT DO YOU DO FIRST, AND WHY NOT GIVE HIM WATER?\"",
+    "choices": [
+     {
+      "text": "Let your best medic answer (needs Medical 4 in the party)",
+      "requires": {
+       "partySkill": "medical",
+       "gte": 4
+      },
+      "lockedText": "Nobody in the party knows medicine well enough (Medical 4)",
+      "goto": "a2"
+     },
+     {
+      "text": "Have a guess",
+      "goto": "shot_med"
+     }
+    ]
+   },
+   "a2": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.doctor",
+    "speaker": "Your medic",
+    "text": "\"Heatstroke. Cool him first: shade, wet cloth, air, ice at the neck and armpits. If he can't swallow properly, water goes in his lungs instead of his stomach. Sips once he's talking sense.\"",
+    "next": "q3"
+   },
+   "shot_med": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hologram",
+    "speaker": "The face",
+    "text": "\"WRONG.\" A panel in the floor tips up and slides you neatly out of a hatch at the back, into the nettles.",
+    "choices": [
+     {
+      "text": "Out, in the nettles",
+      "effects": [
+       {
+        "hurt": 10
+       }
+      ],
+      "exit": true
+     }
+    ]
+   },
+   "q3": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hologram",
+    "speaker": "The face",
+    "text": "\"THIRD. TWENTY YEARS AGO, AT THE PASS BELOW THE NORTHERN RIDGES, SIX MACHINES HELD OFF TWENTY FOR A NIGHT AND A DAY. WHO GAVE THE ORDER TO FALL BACK, AND WHY?\"",
+    "choices": [
+     {
+      "text": "Look at {mentor_first}",
+      "goto": "a3"
+     }
+    ]
+   },
+   "a3": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.mentor",
+    "speaker": "{mentor}",
+    "text": "{mentor_first} answers without looking up. \"Nobody gave it. The Marshal's radio was shot away, so I gave it, in his voice, because we were out of ammunition and he would have stood there until they buried him. He didn't speak to me for a month.\" A pause. \"Then he bought me a drink.\"",
+    "next": "q4"
+   },
+   "q4": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hologram",
+    "speaker": "The face",
+    "text": "\"FOURTH, {hero_last} BOY.\" The face leans closer, enormous. \"WHERE IS YOUR FATHER?\"",
+    "choices": [
+     {
+      "text": "Fire at the face",
+      "goto": "snap"
+     },
+     {
+      "text": "Tell it you don't know",
+      "goto": "snap2"
+     }
+    ]
+   },
+   "snap2": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hologram",
+    "speaker": "The face",
+    "text": "\"DON'T KNOW? DON'T KNOW? WHAT KIND OF SON DOESN'T KNOW?\" It laughs, a great booming laugh, on and on.",
+    "choices": [
+     {
+      "text": "Fire at the face",
+      "goto": "snap"
+     }
+    ]
+   },
+   "snap": {
+    "bg": "scene.hut.face",
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "You do not remember deciding to do it. The shot goes straight through the face's nose and into the projector behind the wall, and the whole face pops like a soap bubble and is gone. The guns droop. Something behind the wall says, quite clearly, \"Ow.\"",
+    "next": "reveal1"
+   },
+   "reveal1": {
+    "bg": "scene.hut.workshop",
+    "portrait": "portrait.tinker",
+    "speaker": "{tinker}",
+    "text": [
+     "A door you had not noticed opens and a small old man comes out, still wearing half the face's make-up: hedge eyebrows of glued crepe and a nose of putty, one side of it scorched.",
+     "\"Yes, yes, well done, very dramatic, that was my best projector.\" He peels off an eyebrow. \"{tinker_first}. I built your father's lock. I had to be sure.\"",
+     "\"Sure you had real friends with you, that knew real things. And sure you were his son and not something the wyrms dressed up. A copy answers the last question. A son shoots the question.\" He sniffs. \"He did exactly the same, thirty years ago.\""
+    ],
+    "next": "reveal2"
+   },
+   "reveal2": {
+    "bg": "scene.hut.workshop",
+    "portrait": "portrait.tinker",
+    "speaker": "{tinker}",
+    "text": [
+     "\"Give me that disk.\" He holds it up to the light, tuts, and runs it through a machine that sounds like a bee in a jar. \"Scratches are only missing information, and missing information is only information that is shy.\"",
+     "Your father appears over the bench again, clear this time, and says the word. It is a small word. You laugh out loud when you hear it, because it is the name of the dog you had when you were six.",
+     "\"The vault is in the cave just southeast of here,\" {tinker_first} says. \"Door with a lantern scratched beside it. Go on. And bring me back a projector.\""
+    ],
+    "choices": [
+     {
+      "text": "Thank him",
+      "effects": [
+       {
+        "set": "tinker_done"
+       },
+       {
+        "set": "has_password"
+       },
+       {
+        "set": "saw_damaged_disk"
+       },
+       {
+        "booster": 1
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "after"
+     }
+    ]
+   },
+   "after": {
+    "bg": "scene.hut.workshop",
+    "portrait": "portrait.tinker",
+    "speaker": "{tinker}",
+    "text": "{tinker_first} is gluing his projector back together and does not look up. \"Southeast. Cave. Lantern. Why are you still here?\"",
+    "leaveText": "Leave"
+   }
+  }
+ },
+ "hut_mast": {
+  "title": "Antenna mast",
+  "bg": "scene.hut.outside",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "has_password"
+      },
+      "goto": "later"
+     }
+    ],
+    "text": "A tall mast of welded pipe, hung with wind chimes, dishes and what looks like a bicycle wheel. It hums when the wind blows.",
+    "leaveText": "Leave"
+   },
+   "later": {
+    "text": "The dishes on the mast have all swung round to point southeast, at a hill with a dark mouth in its side.",
+    "leaveText": "Leave"
+   }
+  }
+ },
+ "hut_shed": {
+  "title": "Workshop shed",
+  "bg": "scene.hut.workshop",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "tinker_done"
+      },
+      "goto": "open"
+     }
+    ],
+    "text": "A padlocked shed. Through the gap in the boards: shelves of jars, each holding one small, carefully labelled machine part.",
+    "leaveText": "Leave"
+   },
+   "open": {
+    "portrait": "portrait.tinker",
+    "speaker": "{tinker}",
+    "text": "\"Tactical cartridges,\" {tinker_first} says, waving at a crate. \"I write them in the evenings. Better than anything those children trade. Twenty-five a pack, and it's robbery, and you're welcome.\"",
+    "choices": [
+     {
+      "text": "Buy a pack",
+      "cost": 25,
+      "effects": [
+       {
+        "booster": 1
+       }
+      ],
+      "goto": "bought"
+     },
+     {
+      "text": "Leave",
+      "exit": true
+     }
+    ]
+   },
+   "bought": {
+    "portrait": "portrait.tinker",
+    "speaker": "{tinker}",
+    "text": "\"Don't load them upside down.\"",
+    "next": "open"
+   }
+  }
+ },
+ "vault_entry": {
+  "title": "Antechamber",
+  "bg": "scene.vault.entry",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "note_read"
+      },
+      "goto": "again"
+     }
+    ],
+    "text": [
+     "Lights come on one by one down a long room of poured stone. Three doors lead off it, each with a coloured stripe: red, blue, yellow. A fourth door, plain white, has no handle at all.",
+     "On a shelf by the entrance, in a plastic sleeve, an envelope with your name on it in your father's square handwriting."
+    ],
+    "choices": [
+     {
+      "text": "Open the envelope",
+      "goto": "note"
+     }
+    ]
+   },
+   "note": {
+    "portrait": "portrait.father",
+    "speaker": "{father}",
+    "text": [
+     "\"{hero_first}. If you are reading this, you got past {tinker_first}, which means you shot his face. Good. He'll get over it.\"",
+     "\"The doors are keyed by colour. The red card is in this envelope. Each room holds the card for the next. I'm sorry about the treasure hunt: if someone takes you prisoner, I want the vault to be slow to give itself up.\"",
+     "\"The white door is the one that matters. Behind it is the deep relay. It answers to the lamps on the map table, read the way I taught you to read a map: start at the top, and go round the way the sun goes.\"",
+     "\"The relay needs power. The breakers are in the storeroom, past the hangar. Leave the hangar alone if you like. Or don't. You always did go where I told you not to.\""
+    ],
+    "choices": [
+     {
+      "text": "Take the red card",
+      "effects": [
+       {
+        "set": "note_read"
+       },
+       {
+        "set": "key_red"
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "again"
+     }
+    ]
+   },
+   "again": {
+    "text": "The antechamber. Your father's envelope sits back on its shelf, empty. Doors to the red, blue and yellow rooms, and the white door that has no handle.",
+    "choices": [
+     {
+      "text": "Read his note again",
+      "goto": "note"
+     },
+     {
+      "text": "Back to the vault map",
+      "exit": true
+     }
+    ]
+   }
+  }
+ },
+ "vault_maproom": {
+  "title": "Map room",
+  "bg": "scene.vault.maproom",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "A table the size of a bed, with all of {planet} raised on it in painted plaster: the ridges, the river, the port, the stockade, your own small town.",
+     "Four lamps stand on the map, glowing. A yellow lamp over the port in the east. A red lamp over the citadel in the west. A blue lamp on the northern ridges. A white lamp over the stockade in the south."
+    ],
+    "choices": [
+     {
+      "text": "Take the blue card hanging from the blue lamp",
+      "if": {
+       "not": {
+        "flag": "key_blue"
+       }
+      },
+      "effects": [
+       {
+        "set": "key_blue"
+       }
+      ],
+      "goto": "card"
+     },
+     {
+      "text": "Back to the vault map",
+      "exit": true
+     }
+    ]
+   },
+   "card": {
+    "text": "The blue card comes free with a click. The blue lamp keeps burning.",
+    "next": "start"
+   }
+  }
+ },
+ "vault_codepanel": {
+  "title": "The white door",
+  "bg": "scene.vault.entry",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "effects": [
+     {
+      "clear": "code_bad"
+     }
+    ],
+    "text": "Beside the white door, a panel with four round buttons: red, blue, yellow and white. Above them, four small dark lights. The relay answers to the lamps on the map table, your father wrote.",
+    "next": "p1"
+   },
+   "p1": {
+    "text": "First light.",
+    "choices": [
+     {
+      "text": "Red",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p2"
+     },
+     {
+      "text": "Blue",
+      "goto": "p2"
+     },
+     {
+      "text": "Yellow",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p2"
+     },
+     {
+      "text": "White",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p2"
+     },
+     {
+      "text": "Step back",
+      "exit": true
+     }
+    ]
+   },
+   "p2": {
+    "text": "One light glows. Second light.",
+    "choices": [
+     {
+      "text": "Red",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p3"
+     },
+     {
+      "text": "Blue",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p3"
+     },
+     {
+      "text": "Yellow",
+      "goto": "p3"
+     },
+     {
+      "text": "White",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p3"
+     }
+    ]
+   },
+   "p3": {
+    "text": "Two lights glow. Third light.",
+    "choices": [
+     {
+      "text": "Red",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p4"
+     },
+     {
+      "text": "Blue",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p4"
+     },
+     {
+      "text": "Yellow",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "p4"
+     },
+     {
+      "text": "White",
+      "goto": "p4"
+     }
+    ]
+   },
+   "p4": {
+    "text": "Three lights glow. Last light.",
+    "choices": [
+     {
+      "text": "Red",
+      "goto": "check"
+     },
+     {
+      "text": "Blue",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "check"
+     },
+     {
+      "text": "Yellow",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "check"
+     },
+     {
+      "text": "White",
+      "effects": [
+       {
+        "set": "code_bad"
+       }
+      ],
+      "goto": "check"
+     }
+    ]
+   },
+   "check": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "code_bad"
+      },
+      "goto": "wrong"
+     }
+    ],
+    "effects": [
+     {
+      "set": "code_solved"
+     },
+     {
+      "save": true
+     },
+     {
+      "toast": "The white door slides open"
+     }
+    ],
+    "text": "All four lights burn steady white. Somewhere deep in the rock a bolt the size of a tree trunk slides back, and the white door opens.",
+    "leaveText": "Back to the vault map"
+   },
+   "wrong": {
+    "effects": [
+     {
+      "clear": "code_bad"
+     }
+    ],
+    "text": "The four lights flash red together and go dark. The panel buzzes, like a teacher who expected better. Read the map the way he taught you: start at the top.",
+    "choices": [
+     {
+      "text": "Try again",
+      "goto": "p1"
+     },
+     {
+      "text": "Step back",
+      "exit": true
+     }
+    ]
+   }
+  }
+ },
+ "vault_workshop": {
+  "title": "Workshop",
+  "bg": "scene.vault.workshop",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "text": [
+     "Your father's workshop. You would know it anywhere: the tools hung in outline on the board, the coffee rings, the radio tuned to nothing.",
+     "Pinned over the bench is a photograph of you, aged about nine, asleep in the cockpit of a loader frame with your mouth open. You had no idea he kept it."
+    ],
+    "choices": [
+     {
+      "text": "Open the bench drawer",
+      "if": {
+       "not": {
+        "flag": "key_yellow"
+       }
+      },
+      "effects": [
+       {
+        "set": "key_yellow"
+       }
+      ],
+      "goto": "card"
+     },
+     {
+      "text": "Back to the vault map",
+      "exit": true
+     }
+    ]
+   },
+   "card": {
+    "text": "Pencils, fuses, a broken watch, and the yellow card, tucked into a birthday card he never sent you. It says \"Fourteen! Don't tell your mother I let you drive.\"",
+    "next": "start"
+   }
+  }
+ },
+ "vault_hangar": {
+  "title": "Hangar",
+  "bg": "scene.vault.hangar",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "found_father_mech"
+      },
+      "goto": "claimed"
+     }
+    ],
+    "text": [
+     "A cavern of a room with a gantry down the middle. In the gantry stands a {slot4} painted silver-blue, a mountain and a rising star on its chest. Your father's machine. You thought it was lost with him.",
+     "As you walk under it, the biochip round your neck grows warm and the cockpit lights flicker on by themselves."
+    ],
+    "choices": [
+     {
+      "text": "Climb up into the cockpit",
+      "goto": "cockpit"
+     },
+     {
+      "text": "Leave it be",
+      "exit": true
+     }
+    ]
+   },
+   "cockpit": {
+    "portrait": "portrait.hero",
+    "speaker": "Cockpit voice",
+    "text": [
+     "The canopy seals. The console reads the chip and a calm voice says, \"Welcome back, Marshal. It has been nine days.\"",
+     "Nine days. The raid was eleven days ago. He was here after the raid. He walked this machine home, parked it, and left on foot, and he did it on purpose."
+    ],
+    "choices": [
+     {
+      "text": "Claim the {slot4} for the unit",
+      "effects": [
+       {
+        "addMech": "ranger"
+       },
+       {
+        "set": "found_father_mech"
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "claimed"
+     },
+     {
+      "text": "Leave it where he put it",
+      "effects": [
+       {
+        "set": "saw_father_mech"
+       }
+      ],
+      "goto": "leftit"
+     }
+    ]
+   },
+   "claimed": {
+    "text": "The {slot4} stands in its gantry, warm and waiting. It will walk out with you. Swap into it at the port garage.",
+    "leaveText": "Back to the vault map"
+   },
+   "leftit": {
+    "text": "You climb down and leave it in its gantry, the way he left it. But you know now. Nine days.",
+    "leaveText": "Back to the vault map"
+   }
+  }
+ },
+ "vault_storeroom": {
+  "title": "Storeroom",
+  "bg": "scene.vault.storeroom",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "flag": "power_on"
+      },
+      "goto": "lit"
+     }
+    ],
+    "text": [
+     "The storeroom goes back further than your lamp does. Crates stacked to the roof, stencilled with the {defenders}' old star. Racks of actuators still in grease. Rows of machines standing asleep under dust sheets, more than you can count. Enough to arm a world.",
+     "On the near wall, a bank of breakers, every one switched off."
+    ],
+    "choices": [
+     {
+      "text": "Throw the breakers",
+      "effects": [
+       {
+        "set": "power_on"
+       },
+       {
+        "set": "storeroom_seen"
+       },
+       {
+        "save": true
+       }
+      ],
+      "goto": "lit"
+     },
+     {
+      "text": "Back to the vault map",
+      "exit": true
+     }
+    ]
+   },
+   "lit": {
+    "text": "The lights are on all the way to the far wall now, row after row after row. Somewhere above you, the relay is warming up with a deep, slow hum.",
+    "leaveText": "Back to the vault map"
+   }
+  }
+ },
+ "vault_relay": {
+  "title": "Relay room",
+  "bg": "scene.vault.relay",
+  "start": "start",
+  "nodes": {
+   "start": {
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "flag": "power_on"
+       }
+      },
+      "goto": "dark"
+     }
+    ],
+    "text": "A round room, a single chair and a console. The deep relay hums under the floor like a held breath. One channel is already tagged in your father's handwriting: REGENT. PRIVATE.",
+    "choices": [
+     {
+      "text": "Call the Regent",
+      "scene": "ending"
+     },
+     {
+      "text": "Not yet",
+      "exit": true
+     }
+    ]
+   },
+   "dark": {
+    "text": "A round room, a single chair and a dead console. The relay needs power, your father wrote. The breakers are in the storeroom.",
+    "leaveText": "Back to the vault map"
+   }
+  }
+ },
+ "ending": {
+  "title": "The call",
+  "bg": "scene.vault.relay",
+  "portrait": "portrait.hero",
+  "speaker": "{hero}",
+  "start": "call",
+  "nodes": {
+   "call": {
+    "effects": [
+     {
+      "set": "relay_sent"
+     }
+    ],
+    "text": [
+     "You key the channel. The relay draws so much power that the lights in the storeroom dim, row by row, and somewhere very far away, past the {occupiers}' jamming and past the edge of the system, something answers.",
+     "Static. Then a voice you know, older and more tired than you remember. \"This is {regent}. Who is on this channel?\""
+    ],
+    "next": "call2"
+   },
+   "call2": {
+    "text": [
+     "You tell her. All of it: the raid, the alley, the lanterns, the vault.",
+     "There is a long silence. Then: \"Stay where you are, {hero_last}. Three days.\""
+    ],
+    "next": "landing"
+   },
+   "landing": {
+    "bg": "scene.story.landing",
+    "portrait": "portrait.regent",
+    "speaker": "{regent}",
+    "text": [
+     "On the third night a dropship comes down out of the clouds with its running lights dark and settles in the forest below the cave, flattening an acre of trees. The {occupiers}' garrison sees it land and wisely decides it has not.",
+     "The Regent walks up the hill in a plain coat. She looks at the storeroom for a long time without speaking, then at you.",
+     "\"Your father did this,\" she says. \"And you finished it. The {defenders} owes the {hero_last} family more than it can easily say.\""
+    ],
+    "next": "offer"
+   },
+   "offer": {
+    "portrait": "portrait.regent",
+    "speaker": "{regent}",
+    "text": "\"So let me say it the easy way. I am offering you a lieutenant's commission, {hero_last}. You, {mentor_first} and your people, in Concord blue, under my command. With what is in this hill we take {planet} back inside a year.\"",
+    "choices": [
+     {
+      "text": "Refuse: in Concord blue, every raid we make is an act of war",
+      "goto": "refuse1"
+     },
+     {
+      "text": "Refuse: the lanterns were my father's, and they answer to the people here",
+      "goto": "refuse2"
+     }
+    ]
+   },
+   "refuse1": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "\"With respect, Regent, no. If we wear your colours, the {occupiers} can call every shot we fire an act of war by the {defenders}, and every farmer who feeds us a collaborator. If we wear nobody's colours, we're just trouble. They can't hang a whole world for trouble.\"",
+    "next": "evidence"
+   },
+   "refuse2": {
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "\"With respect, Regent, no. My father's people stayed when the {defenders} left. They're not soldiers waiting for orders, they're the reason there's anything here to take back. They should answer to the people of {planet}, not to a flag that flew away.\"",
+    "next": "evidence"
+   },
+   "evidence": {
+    "redirect": [
+     {
+      "if": {
+       "not": {
+        "flag": "found_father_mech"
+       }
+      },
+      "goto": "decision"
+     }
+    ],
+    "portrait": "portrait.hero",
+    "speaker": "{hero}",
+    "text": "\"And there is something else. His {slot4} is in the hangar. It knew the chip. It says he walked it in nine days ago, after the raid. He isn't dead, Regent. He's hiding, on purpose, and a free unit can go looking for him where a Concord one can't.\"",
+    "next": "evidence2"
+   },
+   "evidence2": {
+    "portrait": "portrait.regent",
+    "speaker": "{regent}",
+    "text": "For the first time the Regent's composure slips, just a little. \"Nine days,\" she says. \"That stubborn, impossible man.\" She very nearly smiles.",
+    "next": "decision"
+   },
+   "decision": {
+    "portrait": "portrait.regent",
+    "speaker": "{regent}",
+    "text": [
+     "The Regent looks at {mentor_first}, who shrugs: \"He's his father's.\" She looks at the storeroom. She looks, for a long time, at you.",
+     "\"Very well. Then I will not command you. The {defenders} will supply you from this vault, and I will deny you exist at every summit I attend. From today you answer to no flag but your own.\"",
+     "\"Go and find a name for yourselves.\"",
+     "{mentor_first} takes the lantern card out of his coat and holds it up to the light. Nobody needs to say it. {unit}."
+    ],
+    "choices": [
+     {
+      "text": "The end",
+      "effects": [
+       {
+        "set": "game_won"
+       },
+       {
+        "end": "victory",
+        "text": "The unit is independent. {unit} answer to no flag but their own."
+       }
+      ]
+     }
+    ]
+   }
+  }
+ }
+}

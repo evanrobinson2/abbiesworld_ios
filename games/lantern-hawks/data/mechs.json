@@ -1,0 +1,483 @@
+{
+  "_note": "Mech and weapon data. Numbers follow the engine notes (re/engine/ENGINE.md). Display names come from names.json by nameSlot, so nothing here carries a name. Mantis structure is our own: the source template's structure is 0/1, which would make every limb fall off at once.",
+  "weapons": {
+    "SmallLaser": {
+      "label": "Small Laser",
+      "kind": "laser",
+      "damage": 3,
+      "heat": 1,
+      "short": 6,
+      "medium": 9,
+      "long": 12,
+      "skill": "gunnery"
+    },
+    "MediumLaser": {
+      "label": "Medium Laser",
+      "kind": "laser",
+      "damage": 5,
+      "heat": 3,
+      "short": 12,
+      "medium": 21,
+      "long": 30,
+      "skill": "gunnery"
+    },
+    "LargeLaser": {
+      "label": "Large Laser",
+      "kind": "laser",
+      "damage": 8,
+      "heat": 8,
+      "short": 18,
+      "medium": 33,
+      "long": 48,
+      "skill": "gunnery"
+    },
+    "MachineGun": {
+      "label": "Machine Gun",
+      "kind": "ballistic",
+      "damage": 2,
+      "heat": 0,
+      "short": 6,
+      "medium": 9,
+      "long": 12,
+      "skill": "gunnery",
+      "ammo": 100
+    },
+    "SRM2": {
+      "label": "Short-range Missiles x2",
+      "kind": "missile",
+      "damage": 2,
+      "missiles": 2,
+      "heat": 2,
+      "short": 12,
+      "medium": 21,
+      "long": 30,
+      "skill": "gunnery",
+      "ammo": 50
+    },
+    "Fist": {
+      "label": "Fist",
+      "kind": "melee",
+      "damage": "tons/10",
+      "heat": 0,
+      "short": 2,
+      "medium": 2,
+      "long": 2,
+      "skill": "piloting"
+    },
+    "Autocannon": {
+      "label": "Autocannon",
+      "kind": "ballistic",
+      "damage": 5,
+      "heat": 1,
+      "short": 9,
+      "medium": 18,
+      "long": 27,
+      "skill": "gunnery",
+      "ammo": 20
+    }
+  },
+  "mechs": {
+    "trainer": {
+      "nameSlot": 5,
+      "tons": 50,
+      "walk": 6,
+      "jump": 6,
+      "sinks": 10,
+      "hands": true,
+      "armor": {
+        "LA": 10,
+        "LT": 10,
+        "LL": 12,
+        "H": 9,
+        "CT": 16,
+        "RA": 10,
+        "RT": 10,
+        "RL": 12
+      },
+      "structure": {
+        "LA": 8,
+        "LT": 12,
+        "LL": 12,
+        "H": 3,
+        "CT": 16,
+        "RA": 8,
+        "RT": 12,
+        "RL": 12
+      },
+      "weapons": [
+        {
+          "w": "LargeLaser",
+          "loc": "RA"
+        },
+        {
+          "w": "MediumLaser",
+          "loc": "LA"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "LT"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "LT"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "RT"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "RT"
+        },
+        {
+          "w": "MachineGun",
+          "loc": "CT"
+        },
+        {
+          "w": "MachineGun",
+          "loc": "CT"
+        },
+        {
+          "w": "Fist",
+          "loc": "RA"
+        }
+      ]
+    },
+    "scout": {
+      "nameSlot": 1,
+      "tons": 20,
+      "walk": 8,
+      "jump": 0,
+      "sinks": 10,
+      "hands": false,
+      "armor": {
+        "LA": 4,
+        "LT": 8,
+        "LL": 8,
+        "H": 8,
+        "CT": 10,
+        "RA": 4,
+        "RT": 8,
+        "RL": 8
+      },
+      "structure": {
+        "LA": 3,
+        "LT": 5,
+        "LL": 4,
+        "H": 3,
+        "CT": 6,
+        "RA": 3,
+        "RT": 5,
+        "RL": 4
+      },
+      "weapons": [
+        {
+          "w": "MachineGun",
+          "loc": "LA"
+        },
+        {
+          "w": "MachineGun",
+          "loc": "RA"
+        },
+        {
+          "w": "MediumLaser",
+          "loc": "CT"
+        }
+      ]
+    },
+    "striker": {
+      "nameSlot": 2,
+      "tons": 20,
+      "walk": 6,
+      "jump": 6,
+      "sinks": 10,
+      "hands": true,
+      "armor": {
+        "LA": 4,
+        "LT": 6,
+        "LL": 5,
+        "H": 4,
+        "CT": 6,
+        "RA": 4,
+        "RT": 6,
+        "RL": 5
+      },
+      "structure": {
+        "LA": 3,
+        "LT": 5,
+        "LL": 4,
+        "H": 3,
+        "CT": 6,
+        "RA": 3,
+        "RT": 5,
+        "RL": 4
+      },
+      "weapons": [
+        {
+          "w": "MediumLaser",
+          "loc": "RA"
+        },
+        {
+          "w": "SRM2",
+          "loc": "LL"
+        }
+      ]
+    },
+    "hunter": {
+      "nameSlot": 6,
+      "tons": 35,
+      "walk": 7,
+      "jump": 5,
+      "sinks": 10,
+      "hands": false,
+      "armor": {
+        "LA": 4,
+        "LT": 8,
+        "LL": 6,
+        "H": 7,
+        "CT": 10,
+        "RA": 4,
+        "RT": 8,
+        "RL": 6
+      },
+      "structure": {
+        "LA": 6,
+        "LT": 8,
+        "LL": 8,
+        "H": 3,
+        "CT": 11,
+        "RA": 6,
+        "RT": 8,
+        "RL": 8
+      },
+      "weapons": [
+        {
+          "w": "MediumLaser",
+          "loc": "LA"
+        },
+        {
+          "w": "MediumLaser",
+          "loc": "LA"
+        },
+        {
+          "w": "MediumLaser",
+          "loc": "RA"
+        },
+        {
+          "w": "MediumLaser",
+          "loc": "RA"
+        }
+      ]
+    },
+    "trainer_patched": {
+      "nameSlot": 5,
+      "tons": 50,
+      "walk": 6,
+      "jump": 6,
+      "sinks": 10,
+      "hands": true,
+      "note": "The hero's trainer after the raid: right arm torn off (large laser and fist gone), armour patched with whatever the crew chief had.",
+      "armor": {
+        "LA": 9,
+        "LT": 9,
+        "LL": 11,
+        "H": 8,
+        "CT": 14,
+        "RA": 2,
+        "RT": 9,
+        "RL": 11
+      },
+      "structure": {
+        "LA": 8,
+        "LT": 12,
+        "LL": 12,
+        "H": 3,
+        "CT": 16,
+        "RA": 3,
+        "RT": 12,
+        "RL": 12
+      },
+      "weapons": [
+        {
+          "w": "MediumLaser",
+          "loc": "LA"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "LT"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "LT"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "RT"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "RT"
+        },
+        {
+          "w": "MachineGun",
+          "loc": "CT"
+        },
+        {
+          "w": "MachineGun",
+          "loc": "CT"
+        }
+      ]
+    },
+    "jumper": {
+      "nameSlot": 3,
+      "tons": 25,
+      "walk": 6,
+      "jump": 6,
+      "sinks": 10,
+      "hands": true,
+      "armor": {
+        "LA": 6,
+        "LT": 8,
+        "LL": 8,
+        "H": 7,
+        "CT": 11,
+        "RA": 6,
+        "RT": 8,
+        "RL": 8
+      },
+      "structure": {
+        "LA": 4,
+        "LT": 6,
+        "LL": 6,
+        "H": 3,
+        "CT": 8,
+        "RA": 4,
+        "RT": 6,
+        "RL": 6
+      },
+      "weapons": [
+        {
+          "w": "MediumLaser",
+          "loc": "RA"
+        },
+        {
+          "w": "MediumLaser",
+          "loc": "LA"
+        },
+        {
+          "w": "SRM2",
+          "loc": "LT"
+        },
+        {
+          "w": "SRM2",
+          "loc": "RT"
+        }
+      ]
+    },
+    "ranger": {
+      "nameSlot": 4,
+      "tons": 45,
+      "walk": 6,
+      "jump": 4,
+      "sinks": 14,
+      "hands": true,
+      "note": "The Marshal's own machine, left in the vault.",
+      "armor": {
+        "LA": 10,
+        "LT": 12,
+        "LL": 12,
+        "H": 9,
+        "CT": 16,
+        "RA": 10,
+        "RT": 12,
+        "RL": 12
+      },
+      "structure": {
+        "LA": 7,
+        "LT": 11,
+        "LL": 11,
+        "H": 3,
+        "CT": 14,
+        "RA": 7,
+        "RT": 11,
+        "RL": 11
+      },
+      "weapons": [
+        {
+          "w": "MediumLaser",
+          "loc": "RA"
+        },
+        {
+          "w": "MediumLaser",
+          "loc": "LA"
+        },
+        {
+          "w": "SRM2",
+          "loc": "LT"
+        },
+        {
+          "w": "SRM2",
+          "loc": "LT"
+        },
+        {
+          "w": "SRM2",
+          "loc": "RT"
+        },
+        {
+          "w": "SRM2",
+          "loc": "RT"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "H"
+        }
+      ]
+    },
+    "bulwark": {
+      "nameSlot": 7,
+      "tons": 40,
+      "walk": 3,
+      "jump": 0,
+      "sinks": 10,
+      "hands": true,
+      "armor": {
+        "LA": 9,
+        "LT": 11,
+        "LL": 11,
+        "H": 8,
+        "CT": 15,
+        "RA": 9,
+        "RT": 11,
+        "RL": 11
+      },
+      "structure": {
+        "LA": 6,
+        "LT": 10,
+        "LL": 10,
+        "H": 3,
+        "CT": 13,
+        "RA": 6,
+        "RT": 10,
+        "RL": 10
+      },
+      "weapons": [
+        {
+          "w": "Autocannon",
+          "loc": "RA"
+        },
+        {
+          "w": "MediumLaser",
+          "loc": "LA"
+        },
+        {
+          "w": "MachineGun",
+          "loc": "CT"
+        },
+        {
+          "w": "SmallLaser",
+          "loc": "H"
+        }
+      ]
+    }
+  }
+}

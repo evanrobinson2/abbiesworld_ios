@@ -1,0 +1,429 @@
+{
+ "_note": "Battle definitions. win/lose name the scene and node the story resumes at; their effects run first. player.sinks lets a battle throttle the player's cooling (the school governs cadet coolant). enemy.basics replaces the default basic cards in the enemy's deck. enemy.hand sets how many cards the enemy draws each round (default 4). player.mech 'active' means the mech the player is piloting (state.mech). win/lose scene '@here' resumes in the scene that started the battle (shared road-patrol fights). cover { player, enemy } is terrain cover for a fight not on the hex map; a battle effect with cover 'map' takes it from the hexes instead. enemy.extras adds cards to the enemy deck. Balance (tests/balance.test.mjs, 'sensible' bot, 400 seeded fights): story fights alley_ambush and cave_guard 60-75%; patrols 55-90%.",
+ "duel1": {
+  "title": "Practice duel",
+  "player": {
+   "mech": "trainer",
+   "sinks": 5
+  },
+  "enemy": {
+   "mech": "scout",
+   "gunnery": 3,
+   "piloting": 2,
+   "label": "school drone",
+   "basics": [
+    "advance",
+    "advance",
+    "evasive_step",
+    "vent"
+   ],
+   "hand": 6
+  },
+  "startRange": 32,
+  "referee": "practice",
+  "maxTurns": 20,
+  "win": {
+   "scene": "field",
+   "node": "won",
+   "effects": [
+    {
+     "set": "duel_won",
+     "value": 1
+    },
+    {
+     "set": "juno_invite",
+     "value": 1
+    },
+    {
+     "set": "trained_today",
+     "value": 1
+    },
+    {
+     "money": 250
+    },
+    {
+     "add": "training_passed",
+     "n": 1
+    },
+    {
+     "skill": "gunnery",
+     "add": 1,
+     "max": 4
+    },
+    {
+     "booster": 1
+    }
+   ]
+  },
+  "lose": {
+   "scene": "field",
+   "node": "lost",
+   "effects": [
+    {
+     "set": "trained_today",
+     "value": 1
+    },
+    {
+     "add": "duel_losses",
+     "n": 1
+    }
+   ]
+  },
+  "bg": "scene.poi.field"
+ },
+ "sample": {
+  "title": "Sample battle",
+  "sample": true,
+  "bg": "scene.story.raid",
+  "player": {
+   "mech": "trainer"
+  },
+  "enemy": {
+   "mech": "hunter",
+   "gunnery": 2,
+   "piloting": 3,
+   "basics": [
+    "advance",
+    "advance",
+    "brace",
+    "vent",
+    "evasive_step"
+   ]
+  },
+  "hero": {
+   "gunnery": 2,
+   "piloting": 2
+  },
+  "startRange": 26,
+  "maxTurns": 15,
+  "win": {
+   "effects": [
+    {
+     "booster": 1
+    }
+   ]
+  },
+  "lose": {
+   "effects": []
+  }
+ },
+ "patrol_scout": {
+  "title": "Road patrol",
+  "bg": "scene.story.road",
+  "player": {
+   "mech": "active"
+  },
+  "enemy": {
+   "mech": "scout",
+   "gunnery": 4,
+   "piloting": 3,
+   "label": "patrol",
+   "basics": [
+    "advance",
+    "advance",
+    "brace",
+    "vent",
+    "evasive_step"
+   ]
+  },
+  "startRange": 30,
+  "maxTurns": 16,
+  "win": {
+   "scene": "@here",
+   "node": "won",
+   "effects": [
+    {
+     "money": 60
+    },
+    {
+     "booster": 1
+    }
+   ]
+  },
+  "lose": {
+   "scene": "@here",
+   "node": "lost",
+   "effects": [
+    {
+     "hurt": 10
+    }
+   ]
+  }
+ },
+ "patrol_harrier": {
+  "title": "Road patrol",
+  "bg": "scene.story.road",
+  "player": {
+   "mech": "active"
+  },
+  "enemy": {
+   "mech": "hunter",
+   "gunnery": 1,
+   "piloting": 3,
+   "label": "patrol",
+   "basics": [
+    "advance",
+    "advance",
+    "brace",
+    "vent",
+    "evasive_step"
+   ],
+   "hand": 3
+  },
+  "startRange": 30,
+  "maxTurns": 16,
+  "win": {
+   "scene": "@here",
+   "node": "won",
+   "effects": [
+    {
+     "money": 90
+    },
+    {
+     "booster": 1
+    }
+   ]
+  },
+  "lose": {
+   "scene": "@here",
+   "node": "lost",
+   "effects": [
+    {
+     "hurt": 10
+    }
+   ]
+  }
+ },
+ "patrol_striker": {
+  "title": "Road patrol",
+  "bg": "scene.story.road",
+  "player": {
+   "mech": "active"
+  },
+  "enemy": {
+   "mech": "striker",
+   "gunnery": 4,
+   "piloting": 3,
+   "label": "patrol",
+   "basics": [
+    "advance",
+    "advance",
+    "brace",
+    "vent",
+    "evasive_step"
+   ],
+   "hand": 5
+  },
+  "startRange": 28,
+  "maxTurns": 16,
+  "win": {
+   "scene": "@here",
+   "node": "won",
+   "effects": [
+    {
+     "money": 70
+    },
+    {
+     "booster": 1
+    }
+   ]
+  },
+  "lose": {
+   "scene": "@here",
+   "node": "lost",
+   "effects": [
+    {
+     "hurt": 10
+    }
+   ]
+  }
+ },
+ "alley_ambush": {
+  "title": "Ambush in the alley",
+  "bg": "scene.story.alley",
+  "player": {
+   "mech": "jumper"
+  },
+  "enemy": {
+   "mech": "hunter",
+   "gunnery": 2,
+   "piloting": 2,
+   "label": "occupier hunter",
+   "basics": [
+    "advance",
+    "advance",
+    "brace",
+    "vent",
+    "evasive_step"
+   ],
+   "hand": 3
+  },
+  "cover": {
+   "player": 1,
+   "enemy": 1
+  },
+  "startRange": 18,
+  "maxTurns": 18,
+  "win": {
+   "scene": "port_alley",
+   "node": "won",
+   "effects": [
+    {
+     "money": 120
+    },
+    {
+     "booster": 1
+    },
+    {
+     "skill": "gunnery",
+     "add": 1,
+     "max": 4
+    }
+   ]
+  },
+  "lose": {
+   "scene": "port_alley",
+   "node": "lost",
+   "effects": [
+    {
+     "hurt": 15
+    }
+   ]
+  }
+ },
+ "arena_bout": {
+  "title": "Arena bout",
+  "bg": "scene.port.arena",
+  "player": {
+   "mech": "active"
+  },
+  "enemy": {
+   "mech": "hunter",
+   "gunnery": 3,
+   "piloting": 3,
+   "label": "house champion",
+   "basics": [
+    "advance",
+    "advance",
+    "brace",
+    "vent",
+    "evasive_step"
+   ],
+   "hand": 3
+  },
+  "startRange": 24,
+  "maxTurns": 16,
+  "win": {
+   "scene": "port_arena",
+   "node": "won",
+   "effects": [
+    {
+     "money": 500
+    },
+    {
+     "booster": 1
+    }
+   ]
+  },
+  "lose": {
+   "scene": "port_arena",
+   "node": "lost",
+   "effects": []
+  }
+ },
+ "impound_yard": {
+  "title": "Impound yard",
+  "bg": "scene.stockade.yard",
+  "player": {
+   "mech": "active"
+  },
+  "enemy": {
+   "mech": "bulwark",
+   "gunnery": 1,
+   "piloting": 2,
+   "label": "yard guard",
+   "basics": [
+    "advance",
+    "brace",
+    "brace",
+    "vent"
+   ]
+  },
+  "cover": {
+   "player": 1,
+   "enemy": 1
+  },
+  "startRange": 16,
+  "maxTurns": 16,
+  "win": {
+   "scene": "stockade_yard",
+   "node": "won",
+   "effects": [
+    {
+     "addMech": "striker"
+    },
+    {
+     "money": 80
+    },
+    {
+     "booster": 1
+    }
+   ]
+  },
+  "lose": {
+   "scene": "stockade_yard",
+   "node": "lost",
+   "effects": [
+    {
+     "hurt": 10
+    }
+   ]
+  }
+ },
+ "cave_guard": {
+  "title": "At the cave mouth",
+  "bg": "scene.cave.door",
+  "player": {
+   "mech": "active"
+  },
+  "enemy": {
+   "mech": "bulwark",
+   "gunnery": 4,
+   "piloting": 2,
+   "label": "occupier hunter-killer",
+   "basics": [
+    "advance",
+    "advance",
+    "brace",
+    "vent"
+   ]
+  },
+  "cover": {
+   "player": 1,
+   "enemy": 0
+  },
+  "startRange": 26,
+  "maxTurns": 18,
+  "win": {
+   "scene": "hex_cave",
+   "node": "guard_won",
+   "effects": [
+    {
+     "money": 150
+    },
+    {
+     "booster": 1
+    }
+   ]
+  },
+  "lose": {
+   "scene": "hex_cave",
+   "node": "guard_lost",
+   "effects": [
+    {
+     "hurt": 15
+    }
+   ]
+  }
+ }
+}

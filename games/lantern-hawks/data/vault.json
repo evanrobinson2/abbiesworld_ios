@@ -1,0 +1,92 @@
+{
+ "_note": "The vault under the cave: a small node map. Click a linked room to walk there; arriving opens its scene. lock: the room is shut until flag is set; lockScene (optional) opens instead of the 'locked' message. exit: the room you can leave from, and the hex you come out on.",
+ "title": "The vault",
+ "bg": "scene.vault.map",
+ "start": "entry",
+ "exit": {
+  "node": "entry",
+  "q": 0,
+  "r": 1
+ },
+ "nodes": {
+  "entry": {
+   "label": "Antechamber",
+   "x": 0.13,
+   "y": 0.52,
+   "links": [
+    "maproom",
+    "workshop"
+   ],
+   "scene": "vault_entry"
+  },
+  "maproom": {
+   "label": "Map room",
+   "x": 0.4,
+   "y": 0.24,
+   "links": [
+    "entry",
+    "relay"
+   ],
+   "scene": "vault_maproom",
+   "lock": {
+    "flag": "key_red",
+    "color": "red",
+    "label": "The red door"
+   }
+  },
+  "workshop": {
+   "label": "Workshop",
+   "x": 0.4,
+   "y": 0.8,
+   "links": [
+    "entry",
+    "hangar"
+   ],
+   "scene": "vault_workshop",
+   "lock": {
+    "flag": "key_blue",
+    "color": "blue",
+    "label": "The blue door"
+   }
+  },
+  "hangar": {
+   "label": "Hangar",
+   "x": 0.66,
+   "y": 0.8,
+   "links": [
+    "workshop",
+    "storeroom"
+   ],
+   "scene": "vault_hangar",
+   "lock": {
+    "flag": "key_yellow",
+    "color": "yellow",
+    "label": "The yellow door"
+   }
+  },
+  "storeroom": {
+   "label": "Storeroom",
+   "x": 0.87,
+   "y": 0.54,
+   "links": [
+    "hangar"
+   ],
+   "scene": "vault_storeroom"
+  },
+  "relay": {
+   "label": "Relay room",
+   "x": 0.68,
+   "y": 0.22,
+   "links": [
+    "maproom"
+   ],
+   "scene": "vault_relay",
+   "lock": {
+    "flag": "code_solved",
+    "color": "white",
+    "label": "The code door",
+    "lockScene": "vault_codepanel"
+   }
+  }
+ }
+}

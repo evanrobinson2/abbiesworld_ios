@@ -1,0 +1,71 @@
+{
+ "_note": "People who can join the party. name is a names.json placeholder. skills count toward party checks (the best in the party). cards go into the battle deck while the member travels with you. traitor: the double agent; walking into the stockade with one in the party is fatal.",
+ "mentor": {
+  "name": "{mentor}",
+  "skills": {
+   "blade": 2,
+   "pistol": 3,
+   "rifle": 2,
+   "gunnery": 4,
+   "piloting": 4,
+   "tech": 2,
+   "medical": 1
+  },
+  "cards": [
+   "target_lock"
+  ],
+  "health": 90
+ },
+ "doctor": {
+  "name": "{doctor}",
+  "skills": {
+   "pistol": 1,
+   "tech": 1,
+   "medical": 5
+  },
+  "cards": [
+   "field_repair"
+  ],
+  "health": 60
+ },
+ "tech": {
+  "name": "{tech}",
+  "skills": {
+   "gunnery": 1,
+   "piloting": 1,
+   "tech": 5,
+   "medical": 1
+  },
+  "cards": [
+   "coolant_flush"
+  ],
+  "health": 70
+ },
+ "prisoner": {
+  "name": "{prisoner}",
+  "skills": {
+   "blade": 2,
+   "rifle": 3,
+   "gunnery": 3,
+   "piloting": 4
+  },
+  "cards": [
+   "veteran_shot"
+  ],
+  "health": 80
+ },
+ "stranger": {
+  "name": "the stranger",
+  "skills": {
+   "pistol": 3,
+   "piloting": 2,
+   "tech": 2,
+   "medical": 2
+  },
+  "cards": [
+   "overcharge"
+  ],
+  "health": 70,
+  "traitor": true
+ }
+}

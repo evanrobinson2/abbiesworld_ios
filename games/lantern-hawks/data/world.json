@@ -1,0 +1,331 @@
+{
+ "_note": "Overland hex board, odd-r offset layout (odd rows shifted right half a hex). rows: one terrain code per hex, space separated. specials add cities, scenes and blocks to single hexes; 'if' gates a special on a condition (script-runner syntax). Terrain art keys: hex.<art> (one image, from assets/manifest.json) with procedural hex.<art>.<variant> as fallback. Terrain 'link' marks hexes a road joins (road, bridge, towns); 'axisArt' marks art drawn along one axis (the road), which the renderer turns to match its links, over the named base terrain. Patrol specials carry 'patrol' (an id); beating one sets flag patrol_<id>_down, which hides it.",
+ "cols": 16,
+ "rows": [
+  "h F h m m m m h f f m m h f f F",
+  "v F h p f p h w p f f h p p F f",
+  "F p f p p f l w p p p p f p P P",
+  "p f c r r r r b r r r r r C P P",
+  "f p p f p u p w p f r p f p P f",
+  "f F p f f p p w f F r f p f f F",
+  "p f p h p f p w p f f r p h f F",
+  "F f p p f p f w p f p r f p f F",
+  "f F p p u p p w p p f J p f F F",
+  "F F f p p p f w f p f p f F F F"
+ ],
+ "terrain": {
+  "p": {
+   "name": "Plains",
+   "art": "plains",
+   "passable": true
+  },
+  "f": {
+   "name": "Forest",
+   "art": "forest",
+   "passable": true,
+   "cover": 1
+  },
+  "h": {
+   "name": "Hills",
+   "art": "hills",
+   "passable": true,
+   "cover": 1
+  },
+  "m": {
+   "name": "Ridges",
+   "art": "mountains",
+   "passable": false
+  },
+  "w": {
+   "name": "River",
+   "art": "river",
+   "passable": false
+  },
+  "b": {
+   "name": "Bridge",
+   "art": "bridge",
+   "passable": true,
+   "link": true
+  },
+  "r": {
+   "name": "Road",
+   "art": "road",
+   "passable": true,
+   "link": true,
+   "axisArt": "plains"
+  },
+  "u": {
+   "name": "Old ruins",
+   "art": "ruins",
+   "passable": true,
+   "cover": 2
+  },
+  "v": {
+   "name": "Cave",
+   "art": "cave",
+   "passable": true
+  },
+  "c": {
+   "name": "Town",
+   "art": "city",
+   "passable": true,
+   "ruinedArt": "city_burning",
+   "link": true,
+   "cover": 1
+  },
+  "P": {
+   "name": "Port",
+   "art": "port",
+   "passable": false,
+   "link": false
+  },
+  "F": {
+   "name": "Deep forest",
+   "art": "dense_forest",
+   "passable": true,
+   "cover": 2
+  },
+  "l": {
+   "name": "Lake",
+   "art": "lake",
+   "passable": false
+  },
+  "C": {
+   "name": "Port town",
+   "art": "city",
+   "passable": true,
+   "link": true,
+   "cover": 1
+  },
+  "J": {
+   "name": "Stockade town",
+   "art": "city",
+   "passable": true,
+   "link": true,
+   "cover": 1
+  }
+ },
+ "start": {
+  "q": 2,
+  "r": 3
+ },
+ "startLocation": "city:home",
+ "specials": [
+  {
+   "q": 2,
+   "r": 3,
+   "city": "home",
+   "label": "Citadel Town"
+  },
+  {
+   "q": 13,
+   "r": 3,
+   "city": "port",
+   "label": "The Port",
+   "if": {
+    "variant": "ruined"
+   }
+  },
+  {
+   "q": 13,
+   "r": 3,
+   "scene": "road_out",
+   "label": "The Port"
+  },
+  {
+   "q": 14,
+   "r": 3,
+   "scene": "hex_pads",
+   "label": "Landing pads"
+  },
+  {
+   "q": 11,
+   "r": 8,
+   "city": "stockade",
+   "label": "Stockade Town",
+   "if": {
+    "variant": "ruined"
+   }
+  },
+  {
+   "q": 11,
+   "r": 8,
+   "scene": "hex_stockade_closed",
+   "label": "Stockade Town"
+  },
+  {
+   "q": 0,
+   "r": 0,
+   "city": "hut",
+   "label": "Tinker's hut"
+  },
+  {
+   "q": 0,
+   "r": 1,
+   "scene": "hex_cave",
+   "label": "Cave"
+  },
+  {
+   "q": 5,
+   "r": 4,
+   "scene": "hex_oldruins",
+   "label": "Old ruins"
+  },
+  {
+   "q": 4,
+   "r": 8,
+   "scene": "hex_southruins",
+   "label": "Old ruins"
+  },
+  {
+   "q": 2,
+   "r": 0,
+   "scene": "hex_ridges",
+   "label": "Northern ridges"
+  },
+  {
+   "q": 3,
+   "r": 0,
+   "scene": "hex_ridges",
+   "label": "Northern ridges"
+  },
+  {
+   "q": 4,
+   "r": 0,
+   "scene": "hex_ridges",
+   "label": "Northern ridges"
+  },
+  {
+   "q": 5,
+   "r": 0,
+   "scene": "hex_ridges",
+   "label": "Northern ridges"
+  },
+  {
+   "q": 6,
+   "r": 0,
+   "scene": "hex_ridges",
+   "label": "Northern ridges"
+  },
+  {
+   "q": 5,
+   "r": 3,
+   "scene": "patrol_a",
+   "if": {
+    "all": [
+     {
+      "variant": "ruined"
+     },
+     {
+      "not": {
+       "flag": "patrol_a_down"
+      }
+     }
+    ]
+   },
+   "figure": "fig.mech.harrier",
+   "label": "Patrol",
+   "patrol": "a"
+  },
+  {
+   "q": 10,
+   "r": 3,
+   "scene": "patrol_b",
+   "if": {
+    "all": [
+     {
+      "variant": "ruined"
+     },
+     {
+      "not": {
+       "flag": "patrol_b_down"
+      }
+     }
+    ]
+   },
+   "figure": "fig.mech.harrier",
+   "label": "Patrol",
+   "patrol": "b"
+  },
+  {
+   "q": 10,
+   "r": 5,
+   "scene": "patrol_c",
+   "if": {
+    "all": [
+     {
+      "variant": "ruined"
+     },
+     {
+      "not": {
+       "flag": "patrol_c_down"
+      }
+     }
+    ]
+   },
+   "figure": "fig.mech.harrier",
+   "label": "Patrol",
+   "patrol": "c"
+  },
+  {
+   "q": 3,
+   "r": 3,
+   "scene": "patrol_d",
+   "if": {
+    "all": [
+     {
+      "flag": "mentor_joined"
+     },
+     {
+      "not": {
+       "flag": "patrol_d_down"
+      }
+     }
+    ]
+   },
+   "figure": "fig.mech.harrier",
+   "label": "Patrol",
+   "patrol": "d"
+  },
+  {
+   "q": 11,
+   "r": 7,
+   "scene": "patrol_e",
+   "if": {
+    "all": [
+     {
+      "flag": "mentor_joined"
+     },
+     {
+      "not": {
+       "flag": "patrol_e_down"
+      }
+     }
+    ]
+   },
+   "figure": "fig.mech.harrier",
+   "label": "Patrol",
+   "patrol": "e"
+  },
+  {
+   "q": 1,
+   "r": 1,
+   "scene": "patrol_f",
+   "if": {
+    "all": [
+     {
+      "flag": "has_password"
+     },
+     {
+      "not": {
+       "flag": "patrol_f_down"
+      }
+     }
+    ]
+   },
+   "figure": "fig.mech.harrier",
+   "label": "Patrol",
+   "patrol": "f"
+  }
+ ]
+}

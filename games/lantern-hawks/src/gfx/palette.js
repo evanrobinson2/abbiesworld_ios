@@ -1,0 +1,20 @@
+// One small palette for every procedural placeholder: 16-bit era, rich but limited.
+export const P = {
+  ink: '#14101c', inkSoft: '#2a2236', white: '#f4f0e8', black: '#000000',
+  grass: '#3f8a3a', grassD: '#2e6b2f', grassL: '#62ad48', flower1: '#f0d24a', flower2: '#e86a8a',
+  road: '#9b8a6a', roadD: '#7a6a50', roadL: '#b9a882',
+  stone: '#8c8fa0', stoneD: '#6c6f80', stoneL: '#b0b3c2',
+  water: '#2f5fa8', waterD: '#1f3f78', waterL: '#5c8fd6', foam: '#a8d0f0',
+  leaf: '#2f6d36', leafD: '#1f4a2a', leafL: '#4f9a44', trunk: '#5a3a22',
+  sand: '#c9b27a', sandD: '#a88f58', sandL: '#e0cc96',
+  scorch: '#3a3330', scorchL: '#55483f', ember: '#e0662a', fire: '#ffb040',
+  wall: '#d8cfb8', wallD: '#a89e86', wallL: '#efe8d6',
+  lit: '#ffd77a', glass: '#3a4a6a', glassL: '#6a86b0',
+  blue: '#3a5fb0', blueD: '#26407c', blueL: '#6a8ee0', silver: '#b8c0cc', silverD: '#8a93a3', silverL: '#e2e6ee',
+  red: '#a83a3a', redD: '#6e2226', crimson: '#c0202a', brown: '#7a4e2e', brownD: '#553420', brownL: '#a06c42',
+  teal: '#2f8a88', tealD: '#1f5f60', amber: '#d89a3a', amberD: '#a06a20', purple: '#6a4aa0', purpleD: '#44306e',
+  olive: '#6a7a3a', oliveD: '#4a5626', orange: '#d8702a', yellow: '#f0d040',
+  skin1: '#f0c8a0', skin1D: '#c89a78', skin2: '#c8936a', skin2D: '#9a6a48', skin3: '#8a5a3a', skin3D: '#643e26',
+  hairBrown: '#3a2618', hairBlond: '#d8b040', hairRed: '#b8482a', hairBlack: '#202028', hairGrey: '#b8b8c0',
+  neonPink: '#ff4fd8', neonCyan: '#4fe8ff', neonViolet: '#8a5cff', night: '#0a0820', nightL: '#1c1446',
+};
