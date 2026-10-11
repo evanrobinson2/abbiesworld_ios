@@ -8,7 +8,7 @@
   "productionIntent": "production_sprite",
   "existingAssetSemanticIds": [],
   "fulfillment": null,
-  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "sessionNote": "Evan authorized generation on 2026-10-11. POST https://studio-mock-iota.vercel.app/api/midjourney/fill returned 401 invalid access token. The Studio production ABBIES_WORLD_TOKEN is not readable from this cloud agent (Vercel decrypt false) and the stored token is rejected by the household API. No Midjourney job was created and no credits were spent. Next submit is promptSeeds[0] only, job id worms-abbie-idle-20261011, after the household token is refreshed. Land originals under AssetSources/AbbiesWorms/garden-v1/. Do not bind into Swift.",
   "placeholder": {
     "type": "temp_prototype",
     "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
