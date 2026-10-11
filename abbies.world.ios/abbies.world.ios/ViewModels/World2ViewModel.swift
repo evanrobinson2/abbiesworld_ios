@@ -19,6 +19,7 @@ enum World2Screen: Equatable {
     case sceneBuilder
     case worldTeleporter
     case whizbang
+    case microscope
     case planningDept
     case sceneCreator(instanceID: String)
     case beacon(instanceID: String)
@@ -611,6 +612,8 @@ final class World2ViewModel: ObservableObject {
             setScreen(.characterStudio, reason: "poi_entered")
         case .sceneBuilder:
             setScreen(.sceneBuilder, reason: "poi_entered")
+        case .microscope:
+            setScreen(.microscope, reason: "poi_entered")
         case .whizbang:
             setScreen(.whizbang, reason: "poi_entered")
         case .planningDept:
@@ -989,6 +992,8 @@ final class World2ViewModel: ObservableObject {
             songID = World2POIRegistry.characterStudio.musicTrackID
         case .sceneBuilder:
             songID = World2POIRegistry.sceneBuilder.musicTrackID
+        case .microscope:
+            songID = World2POIRegistry.microscope.musicTrackID
         case .whizbang:
             songID = World2POIRegistry.whizbang.musicTrackID
         case .planningDept:
@@ -1180,6 +1185,7 @@ private extension World2Screen {
         case .sceneBuilder: return "scene_builder"
         case .worldTeleporter: return "world_teleporter"
         case .whizbang: return "whizbang"
+        case .microscope: return "microscope"
         case .planningDept: return "planning_dept"
         case .sceneCreator(let instanceID): return "scene_creator:\(instanceID)"
         case .beacon(let instanceID): return "beacon:\(instanceID)"

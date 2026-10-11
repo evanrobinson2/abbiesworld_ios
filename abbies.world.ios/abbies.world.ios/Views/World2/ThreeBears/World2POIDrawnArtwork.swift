@@ -17,6 +17,8 @@ struct World2POIDrawnArtwork: View {
 
     var body: some View {
         switch style {
+        case .microscope:
+            World2MicroscopeArtwork()
         case .bearsCottage:
             World2BearsCottage()
         case .whizbangGadgetBarn:
@@ -255,4 +257,40 @@ private struct Triangle: Shape {
     World2POIDrawnArtwork(style: .bearsCottage)
         .frame(width: 240, height: 210)
         .background(Color(red: 0.32, green: 0.48, blue: 0.32))
+}
+
+/// A brass microscope on a wooden table, readable at map-marker scale.
+private struct World2MicroscopeArtwork: View {
+    var body: some View {
+        GeometryReader { g in
+            let w = g.size.width
+            let h = g.size.height
+            ZStack {
+                Ellipse().fill(.black.opacity(0.18))
+                    .frame(width: w * 0.84, height: h * 0.12).offset(y: h * 0.40)
+                RoundedRectangle(cornerRadius: 7).fill(Color(red: 0.40, green: 0.24, blue: 0.13))
+                    .frame(width: w * 0.78, height: h * 0.12).offset(y: h * 0.30)
+                ForEach([-1.0, 1.0], id: \.self) { side in
+                    Capsule().fill(Color(red: 0.31, green: 0.19, blue: 0.11))
+                        .frame(width: w * 0.07, height: h * 0.18)
+                        .offset(x: w * 0.27 * side, y: h * 0.39)
+                }
+                Path { p in
+                    p.move(to: CGPoint(x: w * 0.63, y: h * 0.70))
+                    p.addCurve(to: CGPoint(x: w * 0.51, y: h * 0.17),
+                               control1: CGPoint(x: w * 0.89, y: h * 0.46),
+                               control2: CGPoint(x: w * 0.76, y: h * 0.13))
+                }.stroke(Color(red: 0.73, green: 0.49, blue: 0.17), style: StrokeStyle(lineWidth: w * 0.10, lineCap: .round))
+                Capsule().fill(Color(red: 0.22, green: 0.34, blue: 0.29))
+                    .frame(width: w * 0.54, height: h * 0.07).offset(y: h * 0.18)
+                RoundedRectangle(cornerRadius: 3).fill(.mint.opacity(0.8))
+                    .frame(width: w * 0.23, height: h * 0.025).offset(x: -w * 0.06, y: h * 0.12)
+                Capsule().fill(LinearGradient(colors: [.yellow.opacity(0.85), .brown], startPoint: .leading, endPoint: .trailing))
+                    .frame(width: w * 0.14, height: h * 0.40)
+                    .rotationEffect(.degrees(28)).offset(x: -w * 0.04, y: -h * 0.17)
+                Circle().fill(.teal).overlay(Circle().stroke(.yellow.opacity(0.7), lineWidth: 3))
+                    .frame(width: w * 0.10).offset(x: w * 0.23, y: -h * 0.08)
+            }.frame(width: w, height: h)
+        }.accessibilityLabel("A brass microscope on a little wooden table")
+    }
 }

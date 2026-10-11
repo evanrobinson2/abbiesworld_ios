@@ -112,6 +112,12 @@ struct World2RootView: View {
                     onClose: viewModel.exitPOI
                 )
 
+            case .microscope:
+                AmberShallowsView(
+                    saveScope: "\(auth.household?.householdId ?? "local").\(auth.activeProfile?.id ?? viewModel.currentPlayerId?.rawValue ?? "guest")",
+                    onDismiss: viewModel.exitPOI
+                )
+
             case .whizbang:
                 IncredimachineView(
                     onDismiss: viewModel.exitPOI,
@@ -230,7 +236,7 @@ struct World2RootView: View {
 
     private var showsPlayerMenu: Bool {
         switch viewModel.currentScreen {
-        case .loading, .playerSelect:
+        case .loading, .playerSelect, .microscope:
             return false
         default:
             return viewModel.currentPlayerId != nil
@@ -707,7 +713,7 @@ private extension World2Screen {
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse,
              .characterStudio, .sceneBuilder, .worldTeleporter,
-             .whizbang, .planningDept,
+             .whizbang, .microscope, .planningDept,
              .sceneCreator, .beacon, .daddyWelcome:
             return false
         case .homeWorld, .blankSlate:

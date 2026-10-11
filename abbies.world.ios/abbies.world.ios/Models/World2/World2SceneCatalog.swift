@@ -45,9 +45,16 @@ enum World2SceneCatalog {
     static let homeWorld = World2SceneDefinition(
         id: sceneID(for: .home),
         name: "Home World",
-        summary: "Three welcoming places to explore",
+        summary: "Treehouses, workshops, and a tiny world beneath a microscope",
         backgroundAsset: "map.home",
         hardpoints: [
+            World2SceneHardpoint(
+                id: "hardpoint.home.microscopePad",
+                name: "Microscope table",
+                position: World2NormalizedPoint(x: 0.63, y: 0.72),
+                acceptedSizeClasses: [.small],
+                notes: "A pond-water microscope for Abbie’s tiny living garden"
+            ),
             World2SceneHardpoint(
                 id: "hardpoint.home.abbiePad",
                 name: "Abbie's dirt pad",
@@ -88,6 +95,13 @@ enum World2SceneCatalog {
             ),
         ],
         poiInstances: [
+            authored(
+                "instance.home.microscope",
+                World2POIRegistry.microscopeID,
+                scene: sceneID(for: .home),
+                hardpoint: "hardpoint.home.microscopePad",
+                x: 0.63, y: 0.72, scale: 0.85, zIndex: 4
+            ),
             authored(
                 "instance.home.abbieTreehouse",
                 World2POIRegistry.abbieTreehouseID,

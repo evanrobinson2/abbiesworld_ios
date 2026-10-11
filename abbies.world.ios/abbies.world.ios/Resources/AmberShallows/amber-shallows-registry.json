@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "gameKey": "amber-shallows",
+  "key": "runtime/microscope",
+  "revision": 1,
+  "source": {
+    "type": "bundled",
+    "bundleName": "amber-shallows.html"
+  },
+  "mimeType": "text/html",
+  "sha256": "49cbc68d8fbda2d50c626822d0cc6d12d9475715451d1141eaf685648daf9249",
+  "metadata": {
+    "sourceRepository": "https://github.com/evanrobinson2/3d-tardigrade-demo",
+    "sourceRevision": "5276f83",
+    "offline": true
+  }
+}

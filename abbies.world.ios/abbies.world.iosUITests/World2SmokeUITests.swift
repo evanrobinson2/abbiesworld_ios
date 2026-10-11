@@ -24,6 +24,16 @@ final class World2SmokeUITests: XCTestCase {
         )
     }
 
+    func testMicroscopeOpensGameAndReturnsHome() throws {
+        app.launch()
+        enterAsAbbie()
+        openPOI("poi.microscope", expecting: "world2.microscope")
+        XCTAssertTrue(app.webViews.firstMatch.waitForExistence(timeout: 10))
+        XCTAssertTrue(app.webViews.staticTexts["The Amber Shallows"].waitForExistence(timeout: 20))
+        tap("world2.microscope.exit")
+        XCTAssertTrue(app.descendants(matching: .any)["world2.poi.poi.microscope"].waitForExistence(timeout: 5))
+    }
+
     func testMainPlacesAreReachable() throws {
         app.launch()
         enterAsAbbie()

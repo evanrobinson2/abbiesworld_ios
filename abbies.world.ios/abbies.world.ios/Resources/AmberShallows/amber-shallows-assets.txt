@@ -1,0 +1,15 @@
+Amber Shallows — rendering study
+
+Moss 01 by Rob Tuytel / Poly Haven
+https://polyhaven.com/a/moss_01
+CC0: https://polyhaven.com/license
+Downloaded 1k glTF, binary, diffuse, normal, ARM and opacity maps.
+The moss uses textured cutout mesh fronds, instanced in 3D.
+
+Water bear: original joined Blender mesh, saved as assets/water-bear.blend; exported as indexed geometry.
+Other stems, vesicles, claws, internal bodies and suspended motes: procedural geometry.
+Three.js r180: vendor/LICENSE.
+
+No generated background image is loaded by the current scene.
+Depth of field and bloom are screen-space approximations. Transparent layers share limitations of a single depth buffer. Water lighting is an approximate 16-step unshadowed volume integration, not full fluid or light-transport simulation. The creature membrane combines transparent surface shading with view-dependent edge opacity; it is an artistic approximation, not physically complete tissue refraction.
+Temperature and scale indicators are illustrative. No ecological simulation yet.
