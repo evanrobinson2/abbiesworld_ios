@@ -1,0 +1,12 @@
+{
+  "name": "starship-rooms",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "A+ traversible starship interiors — composed shells, shader-like lighting, walkable rooms.",
+  "scripts": {
+    "dev": "npx --yes serve -l 5180 .",
+    "start": "npx --yes serve -l 5180 .",
+    "test": "node rooms.test.js"
+  }
+}

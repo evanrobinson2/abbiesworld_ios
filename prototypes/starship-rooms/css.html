@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0e14" />
+  <title>Starship Rooms — HTML/CSS</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./ship.css" />
+</head>
+<body>
+  <div class="shell">
+    <header class="mast">
+      <h1 class="brand"><span>AW-Prospect · HTML/CSS</span>Starship Rooms</h1>
+      <p class="lede">
+        Pure DOM composition — layers, CSS light, SVG-free vector shapes via CSS.
+        <a href="./board.html">Sci-fi board →</a>
+        <a href="./css-readout.html">Readout →</a>
+      </p>
+    </header>
+
+    <nav class="nav-row" id="jumps" aria-label="Rooms"></nav>
+
+    <section class="stage" id="stage" aria-label="Starship room"></section>
+    <p class="hint">Rooms are HTML nodes styled in CSS — click a district to switch. <a href="./" style="color:var(--guide)">Canvas walker</a> · <a href="./readout.html" style="color:var(--guide)">Canvas readout</a></p>
+  </div>
+
+  <script type="module">
+    import { ROOMS, mountRoom } from "./room-dom.js";
+
+    const stage = document.getElementById("stage");
+    const jumps = document.getElementById("jumps");
+    let current = "CMD-02";
+
+    function show(id) {
+      current = id;
+      const room = ROOMS.find((r) => r.id === id);
+      stage.classList.toggle("stage--wide", room.format === "tile-2x");
+      mountRoom(stage, id, { showHud: true });
+      jumps.querySelectorAll("button").forEach((b) => {
+        b.classList.toggle("is-active", b.dataset.jump === id);
+      });
+    }
+
+    for (const room of ROOMS) {
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.dataset.jump = room.id;
+      btn.textContent = room.id.split("-")[0];
+      btn.addEventListener("click", () => show(room.id));
+      jumps.appendChild(btn);
+    }
+
+    show(current);
+  </script>
+</body>
+</html>

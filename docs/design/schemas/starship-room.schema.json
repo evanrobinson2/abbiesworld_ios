@@ -1,0 +1,199 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abbies.world/schemas/starship-room.schema.json",
+  "title": "StarshipRoom",
+  "type": "object",
+  "required": [
+    "id",
+    "code",
+    "name",
+    "deck",
+    "district",
+    "category",
+    "purpose",
+    "format",
+    "apertureMode",
+    "shell",
+    "hero",
+    "traversal"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^ship\\.deck\\.[0-9]+\\.room\\.[A-Z]+-[0-9]{2}$",
+      "description": "Canonical address, e.g. ship.deck.11.room.SCI-04"
+    },
+    "code": {
+      "type": "string",
+      "pattern": "^[A-Z]+-[0-9]{2}$"
+    },
+    "name": { "type": "string", "minLength": 1 },
+    "deck": { "type": "integer", "minimum": 1 },
+    "district": {
+      "type": "string",
+      "enum": ["cmd", "conn", "sci", "crew", "eng", "obs"]
+    },
+    "category": {
+      "type": "string",
+      "enum": ["chamber", "artery", "nook", "bay", "node"]
+    },
+    "purpose": {
+      "type": "string",
+      "maxLength": 48,
+      "description": "verb + object, e.g. sample the anomaly"
+    },
+    "format": {
+      "type": "string",
+      "enum": ["tile-1x", "tile-2x", "tile-0.5x"]
+    },
+    "apertureMode": {
+      "type": "string",
+      "enum": ["none", "port", "gallery", "slit"]
+    },
+    "shell": {
+      "type": "object",
+      "required": ["moduleKit", "floorY", "doorLeft", "doorRight"],
+      "properties": {
+        "moduleKit": { "type": "string" },
+        "floorY": { "type": "number", "minimum": 0.7, "maximum": 0.9 },
+        "doorLeft": { "type": "boolean" },
+        "doorRight": { "type": "boolean" }
+      }
+    },
+    "hero": {
+      "type": "object",
+      "required": ["propId", "anchor"],
+      "properties": {
+        "propId": { "type": "string" },
+        "anchor": { "$ref": "#/$defs/point" }
+      }
+    },
+    "supports": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["propId", "anchor"],
+        "properties": {
+          "propId": { "type": "string" },
+          "anchor": { "$ref": "#/$defs/point" }
+        }
+      }
+    },
+    "signage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["text", "anchor"],
+        "properties": {
+          "text": { "type": "string" },
+          "sub": { "type": "string" },
+          "anchor": { "$ref": "#/$defs/point" }
+        }
+      }
+    },
+    "pips": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "required": ["id", "rect", "content"],
+        "properties": {
+          "id": { "type": "string" },
+          "rect": { "$ref": "#/$defs/rect" },
+          "content": {
+            "type": "string",
+            "enum": [
+              "spectrum",
+              "telemetry",
+              "directory",
+              "tactical",
+              "schedule",
+              "sky"
+            ]
+          }
+        }
+      }
+    },
+    "vista": {
+      "type": "object",
+      "properties": {
+        "rect": { "$ref": "#/$defs/rect" },
+        "style": { "type": "string" }
+      }
+    },
+    "lighting": {
+      "type": "object",
+      "properties": {
+        "profile": { "type": "string" },
+        "emissives": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "traversal": {
+      "type": "object",
+      "required": ["floorPoly", "doors"],
+      "properties": {
+        "floorPoly": {
+          "type": "array",
+          "minItems": 3,
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "type": "number" }
+          }
+        },
+        "doors": {
+          "type": "object",
+          "properties": {
+            "left": { "$ref": "#/$defs/door" },
+            "right": { "$ref": "#/$defs/door" }
+          }
+        }
+      }
+    },
+    "interactives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "anchor", "verb"],
+        "properties": {
+          "id": { "type": "string" },
+          "anchor": { "$ref": "#/$defs/point" },
+          "verb": { "type": "string" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "point": {
+      "type": "object",
+      "required": ["x", "y"],
+      "properties": {
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "rect": {
+      "type": "object",
+      "required": ["x", "y", "w", "h"],
+      "properties": {
+        "x": { "type": "number", "minimum": 0, "maximum": 1 },
+        "y": { "type": "number", "minimum": 0, "maximum": 1 },
+        "w": { "type": "number", "minimum": 0, "maximum": 1 },
+        "h": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "door": {
+      "type": "object",
+      "required": ["to", "anchor"],
+      "properties": {
+        "to": { "type": "string" },
+        "anchor": { "$ref": "#/$defs/point" }
+      }
+    }
+  }
+}

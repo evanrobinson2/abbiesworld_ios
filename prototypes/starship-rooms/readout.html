@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0e14" />
+  <title>Starship Rooms — Visual Readout</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #f3ebe0;
+      --muted: rgba(243, 235, 224, 0.62);
+      --guide: #5ec8d8;
+      --amber: #e0a45a;
+      --life: #e8b0b8;
+      --panel: rgba(14, 16, 22, 0.88);
+      --line: rgba(243, 235, 224, 0.14);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      background:
+        radial-gradient(1000px 600px at 100% 0%, rgba(94, 200, 216, 0.1), transparent 50%),
+        radial-gradient(800px 500px at 0% 40%, rgba(224, 164, 90, 0.08), transparent 45%),
+        #0b0e14;
+      line-height: 1.45;
+    }
+    .wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .mast {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+    }
+    .mast .eyebrow {
+      color: var(--guide);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+    .mast h1 {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .mast p {
+      margin: 0;
+      max-width: 38rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .links a {
+      color: var(--ink);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    .links a:hover { border-color: var(--guide); color: var(--guide); }
+    .spine {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0.4rem;
+      margin: 0 0 2.5rem;
+    }
+    .spine a {
+      text-align: center;
+      text-decoration: none;
+      color: var(--muted);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 0.55rem 0.2rem;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.02);
+    }
+    .spine a:hover { color: var(--guide); border-color: rgba(94,200,216,0.4); }
+    @media (max-width: 720px) {
+      .spine { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    .plate {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 2.75rem;
+      padding: 1rem;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--panel);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.28);
+    }
+    .plate-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: end;
+      flex-wrap: wrap;
+    }
+    .plate-head h2 {
+      margin: 0;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.55rem;
+      letter-spacing: -0.02em;
+    }
+    .plate-head .meta {
+      color: var(--guide);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .stage-frame {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #07080c;
+      border: 1px solid rgba(255,255,255,0.06);
+      aspect-ratio: 16 / 9;
+    }
+    .stage-frame.wide { aspect-ratio: 21 / 9; }
+    .stage-frame canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .callouts {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0.65rem;
+    }
+    @media (max-width: 800px) {
+      .callouts { grid-template-columns: repeat(2, 1fr); }
+    }
+    .callout {
+      padding: 0.7rem 0.75rem;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,0.25);
+    }
+    .callout .k {
+      display: block;
+      color: var(--amber);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.25rem;
+    }
+    .callout .v {
+      font-size: 0.88rem;
+      color: var(--ink);
+    }
+    .note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .legend {
+      margin-top: 3rem;
+      padding: 1.25rem;
+      border-radius: 16px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.02);
+    }
+    .legend h3 {
+      margin: 0 0 0.5rem;
+      font-family: "Fraunces", Georgia, serif;
+    }
+    .legend ul {
+      margin: 0;
+      padding-left: 1.1rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="mast">
+      <div class="eyebrow">AW-Prospect · Visual Readout Mockup</div>
+      <h1>Composed starship interiors</h1>
+      <p>
+        Each plate is rendered live: vector shell, aperture vista, hero prop, PIP panel,
+        signage, bloom, and light shafts — not a flat background image.
+      </p>
+      <div class="links">
+        <a href="./">Walk the rooms</a>
+        <a href="#OBS-01">OBS</a>
+        <a href="#CMD-02">CMD</a>
+        <a href="#SCI-04">SCI</a>
+        <a href="#ENG-01">ENG</a>
+      </div>
+    </header>
+
+    <nav class="spine" aria-label="Room spine">
+      <a href="#OBS-01">OBS-01</a>
+      <a href="#CMD-02">CMD-02</a>
+      <a href="#CONN-01">CONN-01</a>
+      <a href="#SCI-04">SCI-04</a>
+      <a href="#CREW-07">CREW-07</a>
+      <a href="#ENG-01">ENG-01</a>
+    </nav>
+
+    <div id="plates"></div>
+
+    <section class="legend">
+      <h3>What you’re looking at</h3>
+      <ul>
+        <li><strong>Shell</strong> — modular wall kit, floor band, door lips, ceiling rail</li>
+        <li><strong>Aperture</strong> — port / slit / gallery with glass sheen + light spill</li>
+        <li><strong>Hero</strong> — one purpose-defining object with emissive treatment</li>
+        <li><strong>PIP</strong> — live readout panel with scanlines (not baked UI art)</li>
+        <li><strong>Lighting</strong> — shafts, floor specular under actor, bloom pass, vignette</li>
+      </ul>
+    </section>
+  </div>
+
+  <script type="module">
+    import { ROOMS, SHIP } from "./rooms.js";
+    import { createRenderer } from "./renderer.js";
+
+    const calloutMap = {
+      "OBS-01": {
+        hero: "Gallery window + ledge",
+        light: "Soft vista spill, cool bloom",
+        pip: "Sky annotation",
+        traverse: "2× bay · L/R to CMD",
+      },
+      "CMD-02": {
+        hero: "Holomap table",
+        light: "Cyan guidance + holo glow",
+        pip: "Approach tactical",
+        traverse: "1× chamber · OBS ↔ CONN",
+      },
+      "CONN-01": {
+        hero: "Door rhythm / hatch",
+        light: "Neutral artery strip",
+        pip: "Directory",
+        traverse: "1× spine · CMD ↔ SCI",
+      },
+      "SCI-04": {
+        hero: "Analyzer pedestal",
+        light: "Cyan instrument emissive",
+        pip: "Spectrum bars",
+        traverse: "1× lab · CONN ↔ CREW",
+      },
+      "CREW-07": {
+        hero: "Lounge berth + lamp",
+        light: "Warm pink bounce",
+        pip: "Crew schedule",
+        traverse: "1× nook · SCI ↔ ENG",
+      },
+      "ENG-01": {
+        hero: "Core column",
+        light: "Amber pulse + dual PIPs",
+        pip: "Telemetry pair",
+        traverse: "2× bay · CREW ↔ CONN",
+      },
+    };
+
+    const root = document.getElementById("plates");
+    const renderers = [];
+
+    for (const room of ROOMS) {
+      const plate = document.createElement("article");
+      plate.className = "plate";
+      plate.id = room.id;
+
+      const c = calloutMap[room.id];
+      const wide = room.format === "tile-2x";
+
+      plate.innerHTML = `
+        <div class="plate-head">
+          <div>
+            <div class="meta">DECK ${room.deck} · ${room.id} · ${room.district.toUpperCase()}</div>
+            <h2>${room.name}</h2>
+          </div>
+          <p class="note">${room.purpose}</p>
+        </div>
+        <div class="stage-frame ${wide ? "wide" : ""}">
+          <canvas width="960" height="${wide ? 420 : 540}"></canvas>
+        </div>
+        <div class="callouts">
+          <div class="callout"><span class="k">Hero</span><span class="v">${c.hero}</span></div>
+          <div class="callout"><span class="k">Lighting</span><span class="v">${c.light}</span></div>
+          <div class="callout"><span class="k">PIP</span><span class="v">${c.pip}</span></div>
+          <div class="callout"><span class="k">Traversal</span><span class="v">${c.traverse}</span></div>
+        </div>
+      `;
+      root.appendChild(plate);
+
+      const canvas = plate.querySelector("canvas");
+      const frame = plate.querySelector(".stage-frame");
+      const renderer = createRenderer(canvas);
+      renderers.push({ renderer, canvas, frame, room });
+    }
+
+    function paintAll(time) {
+      for (const item of renderers) {
+        const rect = item.frame.getBoundingClientRect();
+        const w = Math.max(320, Math.floor(rect.width));
+        const h = Math.max(180, Math.floor(rect.height));
+        item.renderer.resize(w, h);
+        item.renderer.renderPlate({
+          room: item.room,
+          viewW: w,
+          viewH: h,
+          time,
+          showActor: true,
+        });
+      }
+    }
+
+    let t0 = performance.now();
+    function loop(now) {
+      const time = (now - t0) / 1000;
+      paintAll(time);
+      requestAnimationFrame(loop);
+    }
+    window.addEventListener("resize", () => paintAll((performance.now() - t0) / 1000));
+    requestAnimationFrame(loop);
+  </script>
+</body>
+</html>
