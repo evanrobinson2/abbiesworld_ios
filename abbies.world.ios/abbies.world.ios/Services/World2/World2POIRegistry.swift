@@ -26,6 +26,7 @@ enum World2POIRegistry {
     static let threeBearsHouseID = "poi.threeBearsHouse"
     static let characterStudioID = "poi.characterStudio"
     static let sceneBuilderID = "poi.sceneBuilder"
+    static let microscopeID = "poi.microscope"
     static let whizbangID = "poi.whizbang"
     static let planningDeptID = "poi.planningDept"
 
@@ -52,6 +53,7 @@ enum World2POIRegistry {
         characterStudio,
         sceneBuilder,
         whizbang,
+        microscope,
         planningDept,
     ]
 
@@ -297,6 +299,21 @@ enum World2POIRegistry {
             grants: [.storyDecoration(decorationID: World2StoryDecoration.propertyDeed.id)],
             completionMilestone: "minigame.sceneBuilder.completed"
         )
+    )
+
+    static let microscope = World2POIArchetype(
+        id: microscopeID,
+        name: "Abbie’s Microscope",
+        kind: .minigame,
+        sizeClass: .small,
+        exteriorAsset: "poi.microscope.exterior",
+        drawnArtStyle: .microscope,
+        icon: "sparkle.magnifyingglass",
+        lore: "A drop of pond water holds a whole little world.",
+        activityDescription: "Peek at the water bears, offer a tiny treat, and watch the garden grow.",
+        callToAction: "Look through the microscope",
+        musicTrackID: "world2_cliffside_morning",
+        contract: World2POIContract(route: .microscope)
     )
 
     static let whizbang = World2POIArchetype(

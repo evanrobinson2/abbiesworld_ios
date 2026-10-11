@@ -62,6 +62,7 @@ enum World2POIRoute: Codable, Equatable, Sendable {
     case characterStudio
     case sceneBuilder
     case whizbang
+    case microscope
     case planningDept
 
     var diagnosticName: String {
@@ -77,6 +78,7 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .characterStudio: return "character_studio"
         case .sceneBuilder: return "scene_builder"
         case .whizbang: return "whizbang"
+        case .microscope: return "amber-shallows"
         case .planningDept: return "planning_dept"
         }
     }
@@ -92,6 +94,7 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .characterStudio: return "character_studio"
         case .sceneBuilder: return "scene_builder"
         case .whizbang: return "whizbang"
+        case .microscope: return "amber-shallows"
         case .planningDept: return "planning_dept"
         case .playerHome, .cardFactory, .placeFactory: return nil
         }
@@ -181,6 +184,7 @@ struct World2POIContract: Codable, Equatable, Sendable {
 /// like a missing asset.
 enum World2POIArtStyle: String, Codable, Sendable {
     case bearsCottage
+    case microscope
     case whizbangGadgetBarn
 }
 

@@ -204,8 +204,30 @@ final class World2SceneGraphStore: ObservableObject {
                 ["player": playerScope, "scenes": "\(migrated.count)"]
             )
         }
+        // Add the new microscope once to pre-existing home-map overrides.
+        // Dedicated IDs preserve every authored/developer placement and open pad.
+        let microscopeMigrationKey = "\(storeKey).microscope.v1"
+        let needsMicroscopeMigration = !defaults.bool(forKey: microscopeMigrationKey)
+        let originalLoaded = loaded
+        if needsMicroscopeMigration,
+           var home = loaded[World2SceneCatalog.homeWorld.id],
+           !home.poiInstances.contains(where: { $0.archetypeID == World2POIRegistry.microscopeID }) {
+            let catalog = World2SceneCatalog.homeWorld
+            if let instance = catalog.poiInstances.first(where: { $0.archetypeID == World2POIRegistry.microscopeID }),
+               let padID = instance.hardpointID,
+               let pad = catalog.hardpoints.first(where: { $0.id == padID }),
+               !home.hardpoints.contains(where: { $0.id == padID }) {
+                home.hardpoints.append(pad)
+                home.poiInstances.append(instance)
+                loaded[home.id] = home
+            }
+        }
         draftScenes = loaded
-        savedScenes = loaded
+        savedScenes = originalLoaded
+        if needsMicroscopeMigration {
+            if hasUnsavedChanges { save() }
+            if !hasUnsavedChanges { defaults.set(true, forKey: microscopeMigrationKey) }
+        }
         saveMessage = "No unsaved scene changes"
         logValidation()
     }
