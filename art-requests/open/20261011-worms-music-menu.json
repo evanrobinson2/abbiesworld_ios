@@ -1,0 +1,43 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-music-menu",
+  "semanticId": "music.worms.menu",
+  "priority": "normal",
+  "type": "music",
+  "kind": "music",
+  "brief": "Menu loop. Small acoustic garden waltz, warm and unhurried, no vocals, seamless loop around ninety seconds. A recorded or generated ensemble stem, not a single sine-wave lead.",
+  "aspect": "n/a",
+  "targetPixelSize": "n/a",
+  "expectedBackground": "n/a",
+  "styleNotes": "Production music bed. Acoustic mallets, soft bass, a little woodwind. Kid-safe, no lyrics, no jump-scare stinger, no chiptune lead.",
+  "usage": "Menu and cast gallery bed. Loops cleanly.",
+  "characterOrAssetName": "menu music",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md"
+  ],
+  "promptSeeds": [
+    "Seamless 90-second loop, small acoustic ensemble, garden waltz in 3/4, marimba and soft woodwind, warm upright bass, gentle and curious, no vocals, no lyrics, no chiptune, no drum machine, family-game menu music"
+  ],
+  "acceptanceCriteria": [
+    "Seamless loop",
+    "No vocals or lyrics",
+    "Stereo audio file, not a MIDI rendering made of oscillators",
+    "Sits under UI taps without masking them"
+  ],
+  "referenceRequestIds": [
+    "20261011-worms-music-match"
+  ]
+}

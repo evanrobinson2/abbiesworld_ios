@@ -1,0 +1,48 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-abbie-aim",
+  "semanticId": "token.worms.cast.abbie.aim",
+  "priority": "high",
+  "type": "production_sprite",
+  "kind": "token",
+  "brief": "Aiming. Body leaned, eyes along a raised sightline toward the upper right, bow still attached and readable. Deliver a transparent cutout an artist can trace into a layered SVG (body, face, bow).",
+  "aspect": "1:1",
+  "targetPixelSize": "1024x1024",
+  "expectedBackground": "transparent",
+  "styleNotes": "Original peach earthworm character named Abbie, side view facing right, full body, pink bow, large readable eyes, small smile lines, storybook cutout with clean ink and warm cel shading. This is not the human child Abbie and not a spacesuit. Transparent background. No ground, no cast shadow baked into the silhouette, no text. Same body proportions across idle, aim, hurt, and win so the drawings can swap.",
+  "usage": "Battlefield cutout swapped on the locked Abbie body.",
+  "characterOrAssetName": "Abbie the worm",
+  "pose": "aim",
+  "facing": "right",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md",
+    "AssetSources/MarbleVoyage/abbie-portrait-2026-09-26/abbie-portrait-canonical.jpeg"
+  ],
+  "promptSeeds": [
+    "Same peach earthworm with the same pink bow, side view facing right, leaning into an aim toward the upper right, focused eyes, full body, transparent background, no weapon prop, no ground, no text --ar 1:1"
+  ],
+  "acceptanceCriteria": [
+    "Side view, facing right, full body in frame",
+    "Pink bow present and recognizable",
+    "Transparent background, no ground ellipse",
+    "Same body proportions as the other Abbie poses",
+    "No text, logo, or weapon",
+    "Kind and kid-safe"
+  ],
+  "referenceRequestIds": [
+    "20261011-worms-abbie-idle"
+  ]
+}

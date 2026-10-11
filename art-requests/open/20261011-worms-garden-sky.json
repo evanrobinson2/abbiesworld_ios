@@ -1,0 +1,48 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-garden-sky",
+  "semanticId": "plate.worms.garden.sky",
+  "priority": "high",
+  "type": "plate",
+  "kind": "plate",
+  "brief": "Far sky plate for the garden battlefield. Opaque 4:3 landscape. Soft cream clouds, a warm sun, a distant wooden fence and the tops of far trees. The middle two-thirds stays open and quiet so worms and shots read.",
+  "aspect": "4:3",
+  "targetPixelSize": "2048x1536",
+  "expectedBackground": "opaque illustration",
+  "styleNotes": "Detailed gouache storybook battlefield, side-on, from the height of a friendly earthworm. Warm butter light, sage leaves, peach terracotta pots, cream clouds, overlapping plants with real depth. Readable shapes and a clear empty play lane. Premium hand-drawn family-game illustration. Not a flat vector infographic, not clay 3D, not a photograph, not a UI mockup. No characters, no weapons, no text, no letters, no logo, no watermark.",
+  "usage": "Back layer of the battlefield composite. Parallax 0.15.",
+  "characterOrAssetName": "garden sky",
+  "pose": "empty battlefield",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md",
+    "AssetSources/MarbleVoyage/abbie-portrait-2026-09-26/abbie-portrait-canonical.jpeg",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/shrine-original.jpeg"
+  ],
+  "promptSeeds": [
+    "Wide side-on view of a tiny backyard garden sky from earthworm height, distant wooden fence and soft tree tops along the lower fifth, warm butter sunlight, sage greens far away, cream clouds, open quiet middle for gameplay, detailed gouache storybook illustration, rich overlapping atmosphere, no characters, no ground close-up, no weapons, no text, no logo --ar 4:3"
+  ],
+  "acceptanceCriteria": [
+    "2048x1536 landscape, full-bleed opaque paint",
+    "Open middle; distant fence and trees stay low",
+    "No characters, weapons, words, or UI",
+    "Detailed painted light, not a flat gradient"
+  ],
+  "referenceRequestIds": [
+    "20261011-worms-garden-mid",
+    "20261011-worms-garden-near",
+    "20261011-worms-garden-soil"
+  ]
+}

@@ -1,8 +1,15 @@
 {
-  "updatedAt": "2026-10-01T00:34:06Z",
+  "updatedAt": "2026-10-11T21:24:41Z",
   "sourceOfTruth": "Individual JSON files under art-requests/{open,in_review,fulfilled,wont_fix}/",
   "artDirectorGuide": "art-requests/ART_DIRECTOR_AGENT.md",
   "open": [
+    {
+      "id": "20261011-worms-abbie-idle",
+      "semanticId": "token.worms.cast.abbie.idle",
+      "priority": "blocker",
+      "type": "production_sprite",
+      "path": "art-requests/open/20261011-worms-abbie-idle.json"
+    },
     {
       "id": "20260927-home-ambient-animation",
       "semanticId": "map.home",
@@ -207,6 +214,55 @@
       "path": "art-requests/open/20260930-moonbase-reentry-strain.json"
     },
     {
+      "id": "20261011-worms-abbie-aim",
+      "semanticId": "token.worms.cast.abbie.aim",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20261011-worms-abbie-aim.json"
+    },
+    {
+      "id": "20261011-worms-abbie-hurt",
+      "semanticId": "token.worms.cast.abbie.hurt",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20261011-worms-abbie-hurt.json"
+    },
+    {
+      "id": "20261011-worms-abbie-win",
+      "semanticId": "token.worms.cast.abbie.win",
+      "priority": "high",
+      "type": "production_sprite",
+      "path": "art-requests/open/20261011-worms-abbie-win.json"
+    },
+    {
+      "id": "20261011-worms-garden-mid",
+      "semanticId": "plate.worms.garden.mid",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20261011-worms-garden-mid.json"
+    },
+    {
+      "id": "20261011-worms-garden-near",
+      "semanticId": "plate.worms.garden.near",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20261011-worms-garden-near.json"
+    },
+    {
+      "id": "20261011-worms-garden-sky",
+      "semanticId": "plate.worms.garden.sky",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20261011-worms-garden-sky.json"
+    },
+    {
+      "id": "20261011-worms-garden-soil",
+      "semanticId": "plate.worms.garden.soil",
+      "priority": "high",
+      "type": "plate",
+      "path": "art-requests/open/20261011-worms-garden-soil.json"
+    },
+    {
       "id": "20260927-lizard-henchman-idle",
       "semanticId": "token.plink.gang.lizard.idle",
       "priority": "normal",
@@ -366,6 +422,27 @@
       "priority": "normal",
       "type": "character_concept",
       "path": "art-requests/open/20260930-moonbase-window-home.json"
+    },
+    {
+      "id": "20261011-worms-fx-motes",
+      "semanticId": "fx.worms.garden.motes",
+      "priority": "normal",
+      "type": "fx",
+      "path": "art-requests/open/20261011-worms-fx-motes.json"
+    },
+    {
+      "id": "20261011-worms-music-match",
+      "semanticId": "music.worms.match",
+      "priority": "normal",
+      "type": "music",
+      "path": "art-requests/open/20261011-worms-music-match.json"
+    },
+    {
+      "id": "20261011-worms-music-menu",
+      "semanticId": "music.worms.menu",
+      "priority": "normal",
+      "type": "music",
+      "path": "art-requests/open/20261011-worms-music-menu.json"
     },
     {
       "id": "20260926-endless-progress-chrome",

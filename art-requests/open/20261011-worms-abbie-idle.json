@@ -1,0 +1,46 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Evan authorized generation on 2026-10-11. POST https://studio-mock-iota.vercel.app/api/midjourney/fill returned 401 invalid access token. The Studio production ABBIES_WORLD_TOKEN is not readable from this cloud agent (Vercel decrypt false) and the stored token is rejected by the household API. No Midjourney job was created and no credits were spent. Next submit is promptSeeds[0] only, job id worms-abbie-idle-20261011, after the household token is refreshed. Land originals under AssetSources/AbbiesWorms/garden-v1/. Do not bind into Swift.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-abbie-idle",
+  "semanticId": "token.worms.cast.abbie.idle",
+  "priority": "blocker",
+  "type": "production_sprite",
+  "kind": "token",
+  "brief": "Standing idle. Weight settled, bow neat, calm happy face, eyes toward the right. Deliver a transparent cutout an artist can trace into a layered SVG (body, face, bow).",
+  "aspect": "1:1",
+  "targetPixelSize": "1024x1024",
+  "expectedBackground": "transparent",
+  "styleNotes": "Original peach earthworm character named Abbie, side view facing right, full body, pink bow, large readable eyes, small smile lines, storybook cutout with clean ink and warm cel shading. This is not the human child Abbie and not a spacesuit. Transparent background. No ground, no cast shadow baked into the silhouette, no text. Same body proportions across idle, aim, hurt, and win so the drawings can swap.",
+  "usage": "Battlefield and menu cutout. Style lock for the rest of the cast.",
+  "characterOrAssetName": "Abbie the worm",
+  "pose": "idle",
+  "facing": "right",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md",
+    "AssetSources/MarbleVoyage/abbie-portrait-2026-09-26/abbie-portrait-canonical.jpeg"
+  ],
+  "promptSeeds": [
+    "Side-view peach earthworm girl character with a pink bow, standing idle, facing right, full body, large kind eyes, clean ink, warm cel shading, transparent background, no ground, no text --ar 1:1"
+  ],
+  "acceptanceCriteria": [
+    "Side view, facing right, full body in frame",
+    "Pink bow present and recognizable",
+    "Transparent background, no ground ellipse",
+    "Same body proportions as the other Abbie poses",
+    "No text, logo, or weapon",
+    "Kind and kid-safe"
+  ],
+  "referenceRequestIds": []
+}
