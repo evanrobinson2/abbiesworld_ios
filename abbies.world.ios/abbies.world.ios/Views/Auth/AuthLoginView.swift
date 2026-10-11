@@ -1,66 +1,265 @@
 import SwiftUI
+#if canImport(UIKit)
+import UIKit
+#endif
 
+/// Standard OAuth welcome — full-bleed plate + clean sign-in card.
 struct AuthLoginView: View {
     @ObservedObject var auth: AuthenticationService
+    /// When true, lean into Marble Voyage copy/art; World 2 uses household wording.
+    var voyageStyle: Bool = false
+    @State private var showSimulatorTools = false
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @State private var cardAppeared = false
 
     var body: some View {
-        ZStack {
-            LinearGradient(
-                colors: [Color(red: 0.18, green: 0.42, blue: 0.55), Color(red: 0.10, green: 0.22, blue: 0.30)],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+        GeometryReader { geo in
+            ZStack {
+                loginBackdrop(size: geo.size)
 
-            VStack(spacing: 28) {
-                Spacer()
-                Text("Abbie's World")
-                    .font(.system(size: 48, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                Text("Sign in with your Google account so this iPad can keep your family's worlds in sync.")
-                    .font(.title3)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.white.opacity(0.9))
-                    .padding(.horizontal, 48)
+                // Soft vignette so the card reads cleanly over bright plates.
+                LinearGradient(
+                    colors: [
+                        Color.black.opacity(0.15),
+                        Color.black.opacity(0.45),
+                        Color.black.opacity(0.62),
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                .ignoresSafeArea()
 
-                #if targetEnvironment(simulator)
-                Text("Simulator tip: finish sign-in inside the sheet on this Mac. If Google opens on your iPhone and sits on Connecting…, cancel on the phone — that page cannot hand back to the Simulator.")
-                    .font(.footnote)
-                    .multilineTextAlignment(.center)
-                    .foregroundStyle(.yellow.opacity(0.95))
-                    .padding(.horizontal, 40)
-                #endif
+                VStack(spacing: 0) {
+                    Spacer(minLength: 24)
 
-                if let error = auth.lastError {
-                    Text(error)
-                        .font(.callout)
-                        .foregroundStyle(Color.orange)
-                        .padding(.horizontal, 40)
+                    brandHeader
+                        .padding(.bottom, 28)
+
+                    signInCard
+                        .frame(maxWidth: min(geo.size.width - 64, 440))
+                        .scaleEffect(cardAppeared || reduceMotion ? 1 : 0.96)
+                        .opacity(cardAppeared || reduceMotion ? 1 : 0)
+
+                    Spacer(minLength: 24)
+
+                    Text("Protected by Auth0 · Your family’s worlds stay private")
+                        .font(.system(size: 12, weight: .semibold, design: .rounded))
+                        .foregroundStyle(.white.opacity(0.55))
+                        .padding(.bottom, 20)
                 }
-
-                Button {
-                    Task { await auth.login() }
-                } label: {
-                    HStack {
-                        if auth.isBusy {
-                            ProgressView()
-                                .tint(.white)
-                        }
-                        Text(auth.isBusy ? "Opening sign-in…" : "Sign in with Google / Auth0")
-                            .font(.headline)
-                    }
-                    .frame(maxWidth: 420)
-                    .padding(.vertical, 16)
-                    .background(Color.white.opacity(0.18))
-                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                }
-                .disabled(auth.isBusy)
-                .accessibilityIdentifier("auth0_sign_in")
-
-                Spacer()
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .padding(.horizontal, 24)
             }
-            .padding()
+            .frame(width: geo.size.width, height: geo.size.height)
         }
+        .ignoresSafeArea()
+        .accessibilityIdentifier("auth0.login")
+        .onAppear {
+            guard !reduceMotion else {
+                cardAppeared = true
+                return
+            }
+            withAnimation(.spring(response: 0.55, dampingFraction: 0.86)) {
+                cardAppeared = true
+            }
+        }
+        #if targetEnvironment(simulator)
+        .task {
+            await auth.loginWithSimulatorSavedTokenIfNeeded()
+        }
+        #endif
+    }
+
+    // MARK: - Backdrop
+
+    @ViewBuilder
+    private func loginBackdrop(size: CGSize) -> some View {
+        let catalog = voyageStyle ? "world2_title_marbleVoyage" : nil
+        if let catalog, UIImage(named: catalog) != nil {
+            Image(catalog)
+                .resizable()
+                .scaledToFill()
+                .frame(width: size.width, height: size.height)
+                .clipped()
+        } else {
+            World2SemanticImage(
+                semanticName: voyageStyle ? MarbleVoyageArt.titleBackdrop : "title.background",
+                fallbackIcon: "globe.americas.fill",
+                fallbackLabel: "Abbie's World"
+            )
+            .scaledToFill()
+            .frame(width: size.width, height: size.height)
+            .clipped()
+        }
+    }
+
+    // MARK: - Brand
+
+    private var brandHeader: some View {
+        VStack(spacing: 10) {
+            AbbiesWorldLogoWatermark(size: 72, opacity: 0.95)
+                .allowsHitTesting(false)
+
+            Text("ABBIE’S WORLD")
+                .font(.system(size: 13, weight: .black, design: .rounded))
+                .tracking(3.2)
+                .foregroundStyle(.white.opacity(0.88))
+
+            Text(voyageStyle ? MarbleVoyageArt.productTitle : "Welcome back")
+                .font(.system(size: voyageStyle ? 42 : 36, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
+                .shadow(color: .black.opacity(0.45), radius: 12, y: 4)
+
+            Text(
+                voyageStyle
+                    ? "Sign in to save your voyage, trophies, and family progress."
+                    : "Sign in to keep your family’s worlds in sync on this iPad."
+            )
+            .font(.system(size: 16, weight: .semibold, design: .rounded))
+            .foregroundStyle(.white.opacity(0.9))
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: 420)
+        }
+    }
+
+    // MARK: - Card
+
+    private var signInCard: some View {
+        VStack(spacing: 18) {
+            Text("Sign in")
+                .font(.system(size: 22, weight: .black, design: .rounded))
+                .foregroundStyle(Color(red: 0.12, green: 0.18, blue: 0.24))
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            Text("Use the account your family already trusts.")
+                .font(.system(size: 14, weight: .medium, design: .rounded))
+                .foregroundStyle(Color(red: 0.28, green: 0.34, blue: 0.40))
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            if let error = auth.lastError {
+                Text(error)
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(red: 0.75, green: 0.22, blue: 0.18))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(12)
+                    .background(Color(red: 1, green: 0.92, blue: 0.9), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+            }
+
+            // Primary OAuth CTA — white Google-style button
+            Button {
+                Task { await auth.login() }
+            } label: {
+                HStack(spacing: 12) {
+                    if auth.isBusy {
+                        ProgressView()
+                            .tint(Color(red: 0.25, green: 0.3, blue: 0.35))
+                    } else {
+                        googleGMark
+                    }
+                    Text(auth.isBusy ? "Opening Google…" : "Continue with Google")
+                        .font(.system(size: 17, weight: .semibold, design: .rounded))
+                        .foregroundStyle(Color(red: 0.18, green: 0.2, blue: 0.22))
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 15)
+                .background(Color.white, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .stroke(Color.black.opacity(0.12), lineWidth: 1)
+                )
+                .shadow(color: .black.opacity(0.08), radius: 8, y: 3)
+            }
+            .buttonStyle(.plain)
+            .disabled(auth.isBusy)
+            .accessibilityIdentifier("auth0_sign_in")
+
+            // Secondary Auth0 path (email / other IdPs inside the hosted page)
+            Button {
+                Task { await auth.login() }
+            } label: {
+                Text("Or continue with email")
+                    .font(.system(size: 15, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(red: 0.15, green: 0.42, blue: 0.58))
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 12)
+            }
+            .buttonStyle(.plain)
+            .disabled(auth.isBusy)
+            .accessibilityIdentifier("auth0_sign_in_email")
+
+            Text("You’ll finish in a secure browser window, then return here.")
+                .font(.system(size: 12, weight: .medium, design: .rounded))
+                .foregroundStyle(Color(red: 0.4, green: 0.45, blue: 0.5))
+                .multilineTextAlignment(.center)
+
+            #if targetEnvironment(simulator)
+            DisclosureGroup(isExpanded: $showSimulatorTools) {
+                VStack(alignment: .leading, spacing: 10) {
+                    Text("Simulator tip: finish Google on this Mac — don’t scan the phone QR.")
+                        .font(.system(size: 12, weight: .medium, design: .rounded))
+                        .foregroundStyle(Color(red: 0.35, green: 0.4, blue: 0.45))
+
+                    Button {
+                        Task {
+                            let token = UIPasteboard.general.string ?? ""
+                            await auth.loginWithPastedAccessToken(token)
+                        }
+                    } label: {
+                        Text("Paste Studio token")
+                            .font(.system(size: 14, weight: .bold, design: .rounded))
+                            .foregroundStyle(Color(red: 0.1, green: 0.45, blue: 0.55))
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 11)
+                            .background(Color(red: 0.88, green: 0.96, blue: 0.98), in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(auth.isBusy)
+                    .accessibilityIdentifier("auth0_paste_studio_token")
+                }
+                .padding(.top, 8)
+            } label: {
+                Text("Simulator tools")
+                    .font(.system(size: 13, weight: .semibold, design: .rounded))
+                    .foregroundStyle(Color(red: 0.4, green: 0.45, blue: 0.5))
+            }
+            .tint(Color(red: 0.3, green: 0.45, blue: 0.55))
+            #endif
+        }
+        .padding(24)
+        .background(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(Color.white.opacity(0.96))
+                .shadow(color: .black.opacity(0.28), radius: 28, y: 14)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .stroke(Color.white.opacity(0.7), lineWidth: 1)
+        )
+    }
+
+    /// Simple multicolor “G” mark without bundling Google assets.
+    private var googleGMark: some View {
+        ZStack {
+            Circle()
+                .strokeBorder(
+                    AngularGradient(
+                        colors: [
+                            Color(red: 0.26, green: 0.52, blue: 0.96),
+                            Color(red: 0.22, green: 0.73, blue: 0.39),
+                            Color(red: 0.98, green: 0.74, blue: 0.02),
+                            Color(red: 0.92, green: 0.26, blue: 0.21),
+                            Color(red: 0.26, green: 0.52, blue: 0.96),
+                        ],
+                        center: .center
+                    ),
+                    lineWidth: 2.5
+                )
+                .frame(width: 22, height: 22)
+            Text("G")
+                .font(.system(size: 14, weight: .bold, design: .rounded))
+                .foregroundStyle(Color(red: 0.26, green: 0.52, blue: 0.96))
+        }
+        .accessibilityHidden(true)
     }
 }
 

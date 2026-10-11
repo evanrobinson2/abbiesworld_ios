@@ -1,0 +1,36 @@
+{
+  "semanticId": "token.plink.gang.batDivekicker.idle",
+  "filename": "bat-divekicker-idle.png",
+  "sourceProvider": "Midjourney",
+  "jobId": "8cbf59e5-f849-45c2-8072-5d6c9258e87e",
+  "candidateIndex": 3,
+  "sourceUrl": "https://cdn.midjourney.com/8cbf59e5-f849-45c2-8072-5d6c9258e87e/0_3.jpeg",
+  "derivativeProvider": "OpenAI built-in imagegen",
+  "derivativeOf": "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/bat-divekicker.jpeg",
+  "parentSHA256": "a9de4272ae2b5df82588e4fa8e427cd0463ad9727e94308905ab5a59d3c3bfa7",
+  "sha256": "61b5387a6217ca397c5843e7bf0bfe54528df274766aae3d7fba0ac2ff87f8c3",
+  "generatedAt": "2026-09-26T21:47:49.033292+00:00",
+  "dimensions": [
+    1089,
+    1445
+  ],
+  "mode": "RGBA",
+  "maxCornerAlpha": 0,
+  "visibleAlphaBounds": [
+    93,
+    37,
+    1026,
+    1408
+  ],
+  "anchor": {
+    "coordinateSystem": "normalized image coordinates, top-left origin",
+    "kind": "hover-center",
+    "x": 0.5,
+    "y": 0.55,
+    "notes": "Suggested hover pivot; builder tune body alignment visually."
+  },
+  "facing": "left-oriented three-quarter",
+  "notes": "Background-only preparation preserves original airborne left-oriented pose, two wings and distinct clawed feet. Far wing root remains occluded by vest as in source; no attachment redesign claimed. White background and floor shadow removed; full ears and wing tips retained. Use hover anchor. Generated derivative, original preserved.",
+  "runtimeStatus": "Not bound or verified in app; idle sprite only.",
+  "preparationInstructions": "preparation-instructions.json"
+}

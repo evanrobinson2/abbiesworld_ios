@@ -49,6 +49,9 @@ enum PlayerId: String, Codable, CaseIterable, Identifiable {
 
 struct PlayerState: Codable, Identifiable {
     static let jukeboxQuestOfferedMilestone = "quest.placeJukebox.inventory"
+    static let marbleVoyageBookSeededMilestone = "treehouse.marbleVoyageBook.seeded.v1"
+    /// Nudge the Voyage book from the old mid-air seed onto the coffee table.
+    static let marbleVoyageBookOnTableMilestone = "treehouse.marbleVoyageBook.onTable.v2"
     static func starterJukeboxInstanceID(for playerId: PlayerId) -> String {
         "jukebox_\(playerId.rawValue)"
     }
@@ -126,6 +129,17 @@ struct PlayerState: Codable, Identifiable {
     
     static func newPlayer(id: PlayerId) -> PlayerState {
         let teleporter = World2StoryDecoration.worldTeleporter
+        let voyageBook = DecorationInstance.marbleVoyageWorldBook(for: id)
+        var layout = HomeLayout.default(for: id)
+        layout.placedDecorations = [
+            HomeLayout.PlacedDecoration(
+                id: "placed_\(voyageBook.id)",
+                decorationInstanceId: voyageBook.id,
+                position: .init(x: voyageBook.x, y: voyageBook.y),
+                layer: .floor,
+                roomId: TreehouseRoomID.cozyNook.rawValue
+            ),
+        ]
         return PlayerState(
             playerId: id,
             name: id.displayName,
@@ -137,6 +151,7 @@ struct PlayerState: Codable, Identifiable {
             cardCollection: CardCollection(playerId: id.rawValue, cards: [], activeDeck: []),
             decorations: [
                 DecorationInstance.starterJukebox(for: id),
+                voyageBook,
                 DecorationInstance(
                     id: "story_\(id.rawValue)_\(teleporter.id)",
                     decorationId: teleporter.id,
@@ -155,11 +170,12 @@ struct PlayerState: Codable, Identifiable {
             placedPlaces: [],
             createdScenes: [],
             sceneExits: [],
-            homeLayout: HomeLayout.default(for: id),
+            homeLayout: layout,
             unlockedMusic: ["music.home.light", "music.home.intense"],
             progression: PlayerProgression(
                 achievedMilestones: [
                     PlayerState.jukeboxQuestOfferedMilestone,
+                    PlayerState.marbleVoyageBookSeededMilestone,
                     "inventory.worldTeleporter.offered.v1",
                     "place_factory_starter_received.v1",
                     "place_world_seed_starter_received.v1",

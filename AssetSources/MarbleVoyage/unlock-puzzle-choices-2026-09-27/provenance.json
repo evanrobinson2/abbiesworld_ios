@@ -1,0 +1,74 @@
+{
+  "assets": [
+    {
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice1",
+      "filename": "floating-island-choice-1.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "5ae1da8a-2aad-4dcf-a1d0-2c3de327d911",
+      "candidateIndex": 0,
+      "choiceNumber": 1,
+      "sourceUrl": "https://cdn.midjourney.com/5ae1da8a-2aad-4dcf-a1d0-2c3de327d911/0_0.jpeg",
+      "sha256": "edad6d90239bcebc49f461799470b1aede18f52b0d3382e978b2e671cb54d579",
+      "status": "approved_source",
+      "approval": "Evan: use these four floating island variants as puzzle choices.",
+      "dimensions": [
+        1232,
+        928
+      ],
+      "reviewLabel": "Tree and glowing clearing"
+    },
+    {
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice2",
+      "filename": "floating-island-choice-2.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "5ae1da8a-2aad-4dcf-a1d0-2c3de327d911",
+      "candidateIndex": 1,
+      "choiceNumber": 2,
+      "sourceUrl": "https://cdn.midjourney.com/5ae1da8a-2aad-4dcf-a1d0-2c3de327d911/0_1.jpeg",
+      "sha256": "b62086ea740ba8abb17e257a71547a68a095b412e4ee1bc920ac6468a9e4184f",
+      "status": "approved_source",
+      "approval": "Evan: use these four floating island variants as puzzle choices.",
+      "dimensions": [
+        1232,
+        928
+      ],
+      "reviewLabel": "Ancient arches and waterfall"
+    },
+    {
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice3",
+      "filename": "floating-island-choice-3.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "5ae1da8a-2aad-4dcf-a1d0-2c3de327d911",
+      "candidateIndex": 2,
+      "choiceNumber": 3,
+      "sourceUrl": "https://cdn.midjourney.com/5ae1da8a-2aad-4dcf-a1d0-2c3de327d911/0_2.jpeg",
+      "sha256": "0b2049c72a2c3c608615627ae12c7f551c788d69d26be2b676d06d231110e314",
+      "status": "approved_source",
+      "approval": "Evan: use these four floating island variants as puzzle choices.",
+      "dimensions": [
+        1232,
+        928
+      ],
+      "reviewLabel": "Root-grown sanctuary"
+    },
+    {
+      "semanticId": "plate.marbleVoyage.unlock.puzzleChoice4",
+      "filename": "floating-island-choice-4.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "5ae1da8a-2aad-4dcf-a1d0-2c3de327d911",
+      "candidateIndex": 3,
+      "choiceNumber": 4,
+      "sourceUrl": "https://cdn.midjourney.com/5ae1da8a-2aad-4dcf-a1d0-2c3de327d911/0_3.jpeg",
+      "sha256": "827f195478e04e5bc399e211fcf184a152c60d6f6fc607df24200c8729768669",
+      "status": "approved_source",
+      "approval": "Evan: use these four floating island variants as puzzle choices.",
+      "dimensions": [
+        1232,
+        928
+      ],
+      "reviewLabel": "Sky bridge and tree"
+    }
+  ],
+  "promptFile": "prompt.txt",
+  "usage": "Four alternative jigsaw picture choices inside the approved book board. Separate artwork from board and puzzle-piece geometry."
+}

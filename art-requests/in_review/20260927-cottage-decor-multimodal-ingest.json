@@ -1,0 +1,121 @@
+{
+  "id": "20260927-cottage-decor-multimodal-ingest",
+  "semanticId": "pack.abbieCottage.decor",
+  "status": "in_review",
+  "priority": "high",
+  "type": "production_sprite",
+  "brief": "Schedule approved lamp, rug/cushion and toy sheets for carving, OpenAI multimodal ingest/deep metadata and all cottage scene availability.",
+  "aspect": "individual transparent sprites",
+  "styleNotes": "Preserve original art; no shadows or overlap.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/cottage-decor-2026-09-27/lamps-approved.jpeg",
+    "AssetSources/World2/cottage-decor-2026-09-27/rugs-cushions-approved.jpeg",
+    "AssetSources/World2/cottage-decor-2026-09-27/toys-approved.jpeg",
+    "AssetSources/World2/cottage-decor-2026-09-27/provenance.json",
+    "AssetSources/World2/cottage-decor-2026-09-27/HANDOFF.md",
+    "AssetSources/World2/cottage-decor-2026-09-27/lamps-prompt.txt",
+    "AssetSources/World2/cottage-decor-2026-09-27/rugs-cushions-prompt.txt",
+    "AssetSources/World2/cottage-decor-2026-09-27/toys-prompt.txt",
+    "scripts/cottage_decor_assets/pipeline.py",
+    "AssetSources/World2/CottageDecorKit/manifest.json",
+    "abbies.world.ios/abbies.world.ios/Assets.xcassets/cottage_decor_asset_manifest.dataset/cottage_decor_asset_manifest.json"
+  ],
+  "promptSeeds": [
+    "Six child's magical bedroom lamps: sleepy dragon hugging amber globe; tall curved bluebell floor lamp with leaf base; mushroom cottage bedside lamp with glowing windows; crescent moon holding dangling star lantern; round strawberry frog nightlight with luminous belly; stacked storybooks supporting scalloped patchwork lampshade. Handmade, rounded shapes, joyful colors, painted wood and ceramic details. Light contained inside each lamp only. Hand painted 2D storybook game art, delicate ink contours, warm gouache textures, gentle front three quarter view. Strict two row three column asset sheet on pure white, one complete lamp per cell. Wide margins and gutters. Every lamp fully contained, completely separate silhouettes, no touching, no overlap, no cropping. Flat even illumination. No cast shadows, no ground shadows, no ambient occlusion, no background gradients, no floor, no room, no people, no text, no labels, no borders.",
+    "Six tactile bedroom decorations for a child's enchanted cottage: a tufted rainbow rug with fluffy cloud ends; a lily pad rug with a woven pink flower; a sprawling sleepy orange cat rug with curled tail; an oversized flower floor cushion with squashy petal edges; a round patchwork turtle floor cushion; a crescent moon cushion embroidered with tiny stars. Soft wool, velvet, corduroy, stitched fabric as painted textures, playful colors, charming handmade irregularities. Hand painted 2D storybook game art, delicate ink contours, warm gouache brushwork. Rugs viewed from directly above, cushions slightly from above. Strict two row three column asset sheet on pure white, one complete object per cell. Wide white margins and gutters. Fully separate silhouettes, no touching, no overlap, no cropping. Flat even illumination. No shadows, no occlusion, no floor, no background, no people, no text, no labels, no borders.",
+    "make. thebackground white and refine the shape and details of the toys"
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T18:26:56.108157+00:00",
+  "productionIntent": "runtime_bind",
+  "dag": [
+    {
+      "id": "verify_sources",
+      "dependsOn": [],
+      "status": "completed",
+      "completedAt": "2026-09-27T18:58:05.214537+00:00"
+    },
+    {
+      "id": "openai_multimodal_inventory",
+      "dependsOn": [
+        "verify_sources"
+      ],
+      "status": "completed",
+      "completedAt": "2026-09-27T18:58:05.214537+00:00"
+    },
+    {
+      "id": "carve_transparent_sprites",
+      "dependsOn": [
+        "openai_multimodal_inventory"
+      ],
+      "status": "completed",
+      "completedAt": "2026-09-27T18:58:05.214537+00:00"
+    },
+    {
+      "id": "openai_multimodal_cutout_review",
+      "dependsOn": [
+        "carve_transparent_sprites"
+      ],
+      "status": "completed",
+      "completedAt": "2026-09-27T18:58:05.214537+00:00"
+    },
+    {
+      "id": "deep_metadata_stamp",
+      "dependsOn": [
+        "openai_multimodal_cutout_review"
+      ],
+      "status": "completed",
+      "completedAt": "2026-09-27T18:58:05.214537+00:00"
+    },
+    {
+      "id": "ingest_registry_and_catalog",
+      "dependsOn": [
+        "deep_metadata_stamp"
+      ],
+      "status": "completed",
+      "completedAt": "2026-09-27T18:58:05.214537+00:00"
+    },
+    {
+      "id": "bind_all_cottage_scenes",
+      "dependsOn": [
+        "ingest_registry_and_catalog"
+      ],
+      "status": "completed",
+      "completedAt": "2026-09-27T18:58:05.214537+00:00"
+    },
+    {
+      "id": "runtime_verify_every_scene",
+      "dependsOn": [
+        "bind_all_cottage_scenes"
+      ],
+      "status": "completed",
+      "completedAt": "2026-09-27T18:58:05.214537+00:00"
+    }
+  ],
+  "sceneScope": {
+    "poiId": "poi.abbieTreehouse",
+    "mode": "all-current-and-future-cottage-scenes",
+    "knownRuntimeRooms": [
+      "cozyNook",
+      "rooftopLookout",
+      "fitnessCenter"
+    ],
+    "approvedAdditionalRooms": [
+      "bedroom",
+      "playroom"
+    ]
+  },
+  "referenceRequestIds": [
+    "20260927-cottage-stuffies-integration",
+    "20260927-cottage-furniture-integration"
+  ],
+  "acceptanceCriteria": [
+    "21 visually inventoried items carved with clean alpha",
+    "Real OpenAI multimodal evidence and deep metadata for every asset",
+    "Ingested into existing registry/catalog",
+    "Selectable in every cottage scene with persistent independent placements",
+    "Runtime screenshots and coverage evidence before closure"
+  ],
+  "sessionNote": "DAG complete locally: 21 carved+reviewed sprites in Assets.xcassets, cottage_decor_asset_manifest bound into FurnitureItem.storeCatalog for all TreehouseRoomID scenes including bedroom/playroom. Awaiting device layout screenshots."
+}

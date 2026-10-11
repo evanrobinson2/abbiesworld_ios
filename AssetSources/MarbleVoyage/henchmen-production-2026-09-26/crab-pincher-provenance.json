@@ -1,0 +1,36 @@
+{
+  "semanticId": "token.plink.gang.crabPincher.idle",
+  "filename": "crab-pincher-idle.png",
+  "sourceProvider": "Midjourney",
+  "jobId": "4340a20f-3a14-47a6-8b1c-118429e415f7",
+  "candidateIndex": 1,
+  "sourceUrl": "https://cdn.midjourney.com/4340a20f-3a14-47a6-8b1c-118429e415f7/0_1.jpeg",
+  "derivativeProvider": "OpenAI built-in imagegen",
+  "derivativeOf": "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/crab-pincher.jpeg",
+  "parentSHA256": "cb420efb996d07966de8ec855989724185ae767a8a43231deb22574a0dd65f4d",
+  "sha256": "ea7d389f867efe563d60155136639817bbfc7b8bdf18ef8a96fe46ac8327f7d9",
+  "generatedAt": "2026-09-26T21:43:23.145190+00:00",
+  "dimensions": [
+    1086,
+    1448
+  ],
+  "mode": "RGBA",
+  "maxCornerAlpha": 0,
+  "visibleAlphaBounds": [
+    34,
+    245,
+    1047,
+    1244
+  ],
+  "anchor": {
+    "coordinateSystem": "normalized image coordinates, top-left origin",
+    "kind": "ground-contact",
+    "x": 0.5,
+    "y": 0.858425,
+    "notes": "Align this image-space baseline to the same ground line as Porcupine; do not align canvas bottoms."
+  },
+  "facing": "left-oriented three-quarter",
+  "notes": "Preserved squat teal carapace, oversized coral cuffed pincer and tiny opposing claw; cleaned walking-leg separation, removed white background and cast shadow. Both claws and full body visible; left-oriented three-quarter guard. Generated preparation derivative, not pixel-identical extraction.",
+  "runtimeStatus": "Not bound or verified in app; idle sprite only.",
+  "preparationInstructions": "preparation-instructions.json"
+}

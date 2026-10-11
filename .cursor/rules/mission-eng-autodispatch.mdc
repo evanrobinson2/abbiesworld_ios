@@ -1,0 +1,28 @@
+---
+description: Standing order — auto-start eng when Mission has open minigame/dispatch reqs
+alwaysApply: true
+---
+
+# Mission eng auto-dispatch
+
+Evan does **not** ask for minigames to be built. Difficulty (including physics puzzlers) is not a gate.
+
+## When you see this
+
+- `mission_describe` / `mission_list` shows **Eng auto-dispatch** or `engAutoDispatch[]`
+- Notification type `eng_auto_dispatch`
+- Requirement `kind: engineering` with `dispatch.autoStart` (default true) and status not `done` / `wont_fix`
+
+## You do (without waiting)
+
+1. Claim the requirement (set `dispatch.status: in_progress` via Mission write when practical).
+2. Implement against `docs/architecture/GAME_DESIGNER_CORPUS.md` + `CUTSCENE_DESIGNER_CORPUS.md` and the requirement’s `design` block.
+3. Open a **PR** (branch + tests). Attach `prUrl` / evidence on the requirement when you can.
+4. Ping Evan only for: taste, budget, **merge**, playable walkthrough, or regression.
+
+## You never
+
+- Wait for “please build the physics puzzler”
+- Auto-merge to main
+- Mark Mission `playable`
+- Invent a live `behavior` on the world before the route exists in a merged build

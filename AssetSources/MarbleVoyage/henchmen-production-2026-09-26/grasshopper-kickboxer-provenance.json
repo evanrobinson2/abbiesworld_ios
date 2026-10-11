@@ -1,0 +1,36 @@
+{
+  "semanticId": "token.plink.gang.grasshopperKickboxer.idle",
+  "filename": "grasshopper-kickboxer-idle.png",
+  "sourceProvider": "Midjourney",
+  "jobId": "b5057390-412d-4590-bacb-86253a70d7e0",
+  "candidateIndex": 3,
+  "sourceUrl": "https://cdn.midjourney.com/b5057390-412d-4590-bacb-86253a70d7e0/0_3.jpeg",
+  "derivativeProvider": "OpenAI built-in imagegen",
+  "derivativeOf": "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/grasshopper-kickboxer.jpeg",
+  "parentSHA256": "c81e120e585b63b023be3d49910313a0c483341451944be4f7fd2ae544bd5ef4",
+  "sha256": "47f7054cbbdd9f096f28e01d600d13a38328e3ca57c18cd612d31ecbabc2f139",
+  "generatedAt": "2026-09-26T21:44:29.947963+00:00",
+  "dimensions": [
+    1086,
+    1448
+  ],
+  "mode": "RGBA",
+  "maxCornerAlpha": 1,
+  "visibleAlphaBounds": [
+    154,
+    17,
+    1055,
+    1414
+  ],
+  "anchor": {
+    "coordinateSystem": "normalized image coordinates, top-left origin",
+    "kind": "ground-contact",
+    "x": 0.5,
+    "y": 0.975829,
+    "notes": "Align this image-space baseline to the same ground line as Porcupine; do not align canvas bottoms."
+  },
+  "facing": "left-oriented three-quarter",
+  "notes": "Resolved six-limb anatomy into four smaller guarding limbs plus two connected powerful hind legs; shin guards now belong to hind legs. Preserved teal/lime/coral identity, vest and complete antennae; removed white background and ground shadow. Left-oriented idle. Generated anatomy edit rather than exact extraction.",
+  "runtimeStatus": "Not bound or verified in app; idle sprite only.",
+  "preparationInstructions": "preparation-instructions.json"
+}

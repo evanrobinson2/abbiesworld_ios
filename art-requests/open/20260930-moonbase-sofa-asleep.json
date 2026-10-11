@@ -1,0 +1,49 @@
+{
+  "id": "20260930-moonbase-sofa-asleep",
+  "semanticId": "character.moonBase.duo.sofaAsleep",
+  "status": "open",
+  "priority": "normal",
+  "type": "character_concept",
+  "brief": "After the mission. Abbie asleep against Daddy, helmets off, her curls on his sweater, his arm around her, a mug nearby, both peaceful. Warm bokeh so it can sit in the living nook.",
+  "aspect": "16:9",
+  "styleNotes": "Same Abby across the batch: strawberry-blonde curls, blue eyes, pink-cream-cyan chunky suit. Kid-safe wonder, effort, giggle, or sleepy calm. Never horror, shame, or a failed-hero scolding. Chalk blueprint requests stay untouched; these are final-looking editorial and game layers. thick clean ink outlines, polished cel shading, rounded chunky forms, pink cream and cyan accents, premium hand-drawn family-game illustration, warm and adventurous, whimsical retro-future, not sterile NASA, not photoreal, not horror, no text, no letters, no watermark, no UI",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MoonBase/blueprints-2026-09-30/HANDOFF.md",
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/poi.moonBase.rocket.exterior.png",
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/plate.moonBase.earthCockpit.png",
+    "AssetSources/MoonBase/observation-review-2026-09-30/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "Quiet medium shot, Abby, a six-year-old girl, strawberry-blonde curly hair, bright blue eyes, round cheeks, small nose, chunky pink-and-cream spacesuit with cyan bands and a big round helmet without her helmet asleep against Daddy, a kind grown-up, blue eyes, short salt-and-pepper beard, gentle face, never stern, her strawberry-blonde curls on his cream sweater, his salt-and-pepper beard, his arm around her, a simple rounded mug nearby, eyes closed, safe and exhausted, background melted into soft creamy bokeh with no readable place, subject ready to cut out and composite over any Moon Base plate, thick clean ink outlines, polished cel shading, rounded chunky forms, pink cream and cyan accents, premium hand-drawn family-game illustration, warm and adventurous, whimsical retro-future, not sterile NASA, not photoreal, not horror, no text, no letters, no watermark, no UI --ar 16:9"
+  ],
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-09-30T20:40:00-04:00",
+  "requestedAt": "2026-09-30T20:40:00-04:00",
+  "productionIntent": "concept_only",
+  "gameArea": "moonBase",
+  "usage": "Ending polaroid / living-quarters beat",
+  "expectedBackground": "warm bokeh",
+  "characterOrAssetName": "Abby and Daddy",
+  "placeholder": {
+    "type": "none",
+    "detail": "Generation request for the MJ agent. Chalk MVP plates remain the runtime placeholders."
+  },
+  "acceptanceCriteria": [
+    "Helmets off so hair and beard read",
+    "Mood is safety, not sadness",
+    "No words, letters, logos, or UI chrome baked into the image",
+    "Kid-safe: wonder, effort, giggle, or rest \u2014 never horror or shame",
+    "Abby continuity when she appears: strawberry-blonde curls, blue eyes, pink-cream-cyan suit"
+  ],
+  "referenceRequestIds": [
+    "20260930-moonbase-rocket-exterior",
+    "20260930-moonbase-earth-cockpit",
+    "20260930-moonbase-landing-pad",
+    "20260930-moonbase-exterior-map"
+  ],
+  "sessionNote": "MJ batch moonBase.emotional.v1. Serial only. Submit promptSeeds in order, one job at a time, \u226530s apart (\u2265120s between four-candidate grids). No auto-reroll. For singles, promptSeeds[0] is the composite to run; later seeds are optional finished-plate alternates. For packs (semanticId starts with pack. or game.), every promptSeed is its own asset. Land originals under AssetSources/MoonBase/emotional-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not replace chalk plates.",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "pose": "asleep together"
+}

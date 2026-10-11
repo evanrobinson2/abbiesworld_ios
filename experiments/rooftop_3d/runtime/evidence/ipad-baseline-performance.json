@@ -1,0 +1,11 @@
+{
+  "batches" : 18,
+  "lowPowerMode" : false,
+  "motionCPUmsMean" : 1.1881625361387831,
+  "note" : "Scene update cadence and CPU motion cost, not a GPU benchmark or release approval.",
+  "petals" : 32,
+  "sampleFrames" : 601,
+  "thermalState" : 0,
+  "triangles" : 164797,
+  "updateIntervalP95ms" : 16.756040975451469
+}

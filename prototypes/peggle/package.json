@@ -1,0 +1,10 @@
+{
+  "name": "plink-mvp",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Tiny Peglin-inspired Plink MVP — pink vs blue, five boards.",
+  "scripts": {
+    "dev": "npx --yes serve -l 5174 public",
+    "start": "npx --yes serve -l 5174 public"
+  }
+}

@@ -2,22 +2,28 @@
   "purpose": "Meshy animated avatars for Abbie and Daddy on World 2 maps",
   "actors": {
     "abbie": {
-      "usdz": "abbie.usdz",
+      "idle_usdz": "abbie_idle.usdz",
+      "walk_usdz": "abbie.usdz",
+      "run_usdz": "abbie_run.usdz",
       "fallback_image": "world2_actor_abbie",
-      "idle_clip_hints": [],
-      "idle_note": "Abbie pack has no true idle — freeze when settled",
-      "run_clip_hints": ["Casual_Walk", "Casual Walk", "Run_02", "Run 2", "Run"]
+      "idle_clip": "Idle",
+      "walk_clip": "Casual_Walk",
+      "run_clip": "Run_02"
     },
     "daddy": {
-      "usdz": "daddy.usdz",
+      "idle_usdz": "daddy.usdz",
+      "walk_usdz": "daddy_walk.usdz",
+      "run_usdz": "daddy_run.usdz",
       "fallback_image": "world2_actor_daddy",
-      "idle_clip_hints": ["Idle"],
-      "run_clip_hints": ["Run_02", "Run 2", "Run", "Casual_Walk", "Casual Walk"]
+      "idle_clip": "Idle",
+      "walk_clip": "Casual_Walk",
+      "run_clip": "Run_02"
     }
   },
   "behavior": {
     "spawn": "bottom-left staging corner unless scene exit partyLanding says otherwise",
-    "on_poi_select": "run straight to approach point south of the POI",
-    "on_arrive": "switch to idle clip (or freeze)"
+    "sticks": "left stick moves, right stick aims; soft deflection walks, full deflection runs",
+    "on_poi_select": "play the walk clip while marching",
+    "on_arrive": "play each actor's idle clip"
   }
 }

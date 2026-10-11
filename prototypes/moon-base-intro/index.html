@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Moon Base · First Light</title>
+  <style>
+    :root { color-scheme: dark; --mint:#a9f1df; --gold:#ffd591; --ink:#07111f; }
+    * { box-sizing:border-box }
+    html,body { margin:0; min-height:100%; background:#07111f; color:#fff; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif }
+    body { min-height:100vh; display:grid; place-items:center; padding:20px }
+    .wrap { width:min(1440px,100%); }
+    .stage { position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; isolation:isolate; background:#071b33; border:1px solid #354f66; border-radius:18px; box-shadow:0 28px 90px #0009; }
+    .sky { position:absolute; inset:-3%; overflow:hidden; z-index:-4; background:radial-gradient(ellipse at 32% 42%,#183f64 0,#0a2038 44%,#07111f 80%); }
+    .sky img { width:100%;height:100%;object-fit:cover; opacity:.82; filter:saturate(.9) brightness(.78); transform:scale(1.04); animation:sky-drift 12s ease-in-out infinite alternate; }
+    .starveil { position:absolute;inset:0;z-index:-3; background:linear-gradient(180deg,#07111f20 0%,#10294722 48%,#07111f88 100%); }
+    .grain { position:absolute;inset:0;z-index:8;pointer-events:none;opacity:.08;mix-blend-mode:screen; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.34'/%3E%3C/svg%3E"); }
+    .orbit-lines { position:absolute;inset:0;z-index:-2;opacity:.45;pointer-events:none; }
+    .caption { position:absolute;z-index:10;left:8%;top:16%;max-width:48%;text-transform:uppercase;pointer-events:none; }
+    .eyebrow { display:flex;align-items:center;gap:11px;color:var(--mint);font-size:clamp(10px,1.1vw,14px);font-weight:850;letter-spacing:.24em; }
+    .eyebrow::before { content:"";width:32px;height:2px;background:var(--mint);box-shadow:0 0 14px var(--mint); }
+    .title { margin:14px 0 0;font-size:clamp(34px,6.5vw,88px);line-height:.88;letter-spacing:-.075em;font-weight:950;text-shadow:0 6px 30px #03101dcc; }
+    .title span { display:block; }
+    .title .accent { color:var(--gold); }
+    .cap { opacity:0;transform:translate3d(-32px,12px,0) scale(.97);filter:blur(8px); }
+    .cap-intro { animation:caption-in .55s .08s cubic-bezier(.2,.8,.2,1) forwards,caption-out .32s 1.55s ease-in forwards; }
+    .cap-intro .eyebrow,.cap-intro .title span { opacity:0;transform:translate3d(-26px,8px,0);filter:blur(8px); }
+    .cap-intro .eyebrow { animation:caption-in .48s .18s cubic-bezier(.2,.8,.2,1) forwards; }
+    .cap-intro .title span:first-child { animation:caption-in .55s .3s cubic-bezier(.2,.8,.2,1) forwards; }
+    .cap-intro .title span:last-child { animation:caption-in .55s .48s cubic-bezier(.2,.8,.2,1) forwards; }
+    .cap-touchdown { top:auto;bottom:23%;left:8%;animation:caption-in .38s 1.98s ease-out forwards,caption-out .3s 3.38s ease-in forwards; }
+    .cap-touchdown .eyebrow,.cap-touchdown .title { opacity:0;transform:translate3d(-26px,8px,0);filter:blur(8px); }
+    .cap-touchdown .title { font-size:clamp(38px,7vw,94px); }
+    .cap-touchdown .title { animation:impact-in .42s 2.2s cubic-bezier(.15,1.35,.32,1) forwards; }
+    .cap-touchdown .eyebrow { animation:caption-in .35s 2.05s ease-out forwards; }
+    .cap-finale { left:auto;right:8%;top:16%;bottom:auto;text-align:right;max-width:48%;animation:caption-in .5s 4.3s ease-out forwards; }
+    .cap-finale .eyebrow,.cap-finale .title { opacity:0;transform:translate3d(-26px,8px,0);filter:blur(8px); }
+    .cap-finale .eyebrow { justify-content:flex-end; }
+    .cap-finale .eyebrow::before { order:2; }
+    .cap-finale .title { font-size:clamp(42px,8vw,112px); }
+    .cap-finale .title { animation:impact-in .58s 4.55s cubic-bezier(.16,1.25,.3,1) forwards; }
+    .cap-finale .subline { opacity:0;transform:translateY(12px);margin-top:14px;color:#e4f5ff;font-size:clamp(11px,1.4vw,17px);font-weight:750;letter-spacing:.16em;animation:caption-in .5s 5.05s ease-out forwards; }
+    .cap-finale .eyebrow { animation:caption-in .4s 4.4s ease-out forwards; }
+    .landscape { position:absolute;inset:0;z-index:1;pointer-events:none; }
+    .moon-far { opacity:.72;transform:translateY(5%);animation:far-rise 1.2s 2.7s ease-out forwards; }
+    .moon-near { transform:translateY(18%);animation:near-rise 1.25s 2.75s cubic-bezier(.18,.68,.2,1) forwards; }
+    .base { transform-origin:900px 680px;opacity:0;transform:translateY(34px) scale(.94);animation:base-arrive 1.05s 3.35s cubic-bezier(.2,.75,.2,1) forwards; }
+    .base-light { opacity:0;animation:lights-on .6s 4.15s ease-out forwards; }
+    .landed-rocket { transform:translate(0,-185px);animation:lander-drop 2.4s .35s cubic-bezier(.45,.05,.22,1) forwards; }
+    .engine { animation:engine-fade 2.25s .3s ease-in forwards; }
+    .dust { opacity:0;transform-origin:1170px 656px;animation:dust-ring .9s 2.45s ease-out forwards; }
+    .dust2 { animation-delay:2.58s; }
+    .trace { stroke-dasharray:900;stroke-dashoffset:900;animation:trace-on 1.2s 3.45s ease-out forwards; }
+    .callout { opacity:0;transform:translateY(8px);animation:caption-in .35s 4.2s ease-out forwards; }
+    .hud { position:absolute;z-index:20;left:24px;right:24px;top:20px;display:flex;align-items:center;justify-content:space-between;pointer-events:none; }
+    .brand { color:#d6edffb8;font-size:11px;font-weight:800;letter-spacing:.2em;text-transform:uppercase; }
+    .chapter { border:1px solid #c6eaff55;border-radius:999px;padding:7px 12px;color:#e4f4ffb8;font-size:10px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;background:#06152677;backdrop-filter:blur(10px); }
+    .controls { display:flex;justify-content:center;align-items:center;gap:12px;margin-top:14px; }
+    button { cursor:pointer;border:1px solid #b6d8ec45;border-radius:999px;padding:11px 17px;background:#142a3ccc;color:#eaf6ff;font:700 12px/1 system-ui,sans-serif;letter-spacing:.04em; }
+    button:hover { border-color:#a9f1df; }
+    button.primary { color:#081321;background:var(--mint);border-color:var(--mint); }
+    .note { margin:12px 0 0;text-align:center;color:#9cafc0;font-size:11px;letter-spacing:.06em; }
+    .status { position:absolute;z-index:21;right:22px;bottom:18px;color:#c6d9e4a8;font-size:10px;letter-spacing:.13em;text-transform:uppercase; }
+    .stage.finished .cap-intro,.stage.finished .cap-touchdown { opacity:0!important; }
+    .stage.finished .cap-finale,.stage.finished .cap-finale .eyebrow,.stage.finished .cap-finale .title,.stage.finished .cap-finale .subline { opacity:1;transform:none;filter:none; }
+    .stage.finished .base { opacity:1;transform:none; }
+    .stage.finished .moon-far,.stage.finished .moon-near { transform:none; }
+    .stage.finished .landed-rocket { transform:none; }
+    .stage.finished .base-light,.stage.finished .callout { opacity:1;transform:none; }
+    .stage.finished .dust { animation:none;opacity:.8;transform:scale(1); }
+    @keyframes sky-drift { to { transform:scale(1.12) translate3d(-1.5%,.5%,0) } }
+    @keyframes caption-in { to { opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0) } }
+    @keyframes caption-out { to { opacity:0;transform:translate3d(0,-10px,0) scale(.99);filter:blur(5px) } }
+    @keyframes impact-in { 0% { opacity:0;transform:translate3d(-42px,20px,0) scale(.82);filter:blur(12px) } 72% { opacity:1;transform:translate3d(0,-5px,0) scale(1.035);filter:blur(0) } 100% { opacity:1;transform:none;filter:none } }
+    @keyframes far-rise { to { transform:translateY(0) } }
+    @keyframes near-rise { 65% { transform:translateY(-1%) } 100% { transform:translateY(0) } }
+    @keyframes base-arrive { to { opacity:1;transform:none } }
+    @keyframes lights-on { 0% { opacity:0;filter:brightness(2) } 45% { opacity:.55 } 100% { opacity:1;filter:none } }
+    @keyframes lander-drop { 0% { transform:translate(0,-185px) } 84% { transform:translate(0,5px) } 92% { transform:translate(0,-3px) } 100% { transform:none } }
+    @keyframes engine-fade { 0% { opacity:1 } 72% { opacity:.85 } 100% { opacity:0 } }
+    @keyframes dust-ring { 0% { opacity:0;transform:scale(.6) } 22% { opacity:.7 } 100% { opacity:0;transform:scale(1.8) } }
+    @keyframes trace-on { to { stroke-dashoffset:0 } }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation-duration:.01ms!important;animation-delay:0ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important; }
+      .cap,.cap-intro .eyebrow,.cap-intro .title span,.cap-touchdown .title,.cap-touchdown .eyebrow,.cap-finale .title,.cap-finale .eyebrow,.cap-finale .subline,.base,.moon-far,.moon-near,.landed-rocket,.engine,.base-light,.callout,.dust { opacity:1!important;transform:none!important;filter:none!important; }
+    }
+    @media (max-width:700px) { body{padding:8px}.stage{border-radius:10px}.hud{left:12px;right:12px;top:11px}.brand{font-size:8px}.chapter{font-size:8px;padding:6px 9px}.caption{left:6%;top:17%;max-width:60%}.cap-touchdown{bottom:24%}.cap-finale{right:6%;bottom:12%;max-width:58%}.status{right:10px;bottom:10px;font-size:8px} }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <section class="stage playing" id="stage" aria-label="Moon Base arrival introduction">
+      <div class="sky" aria-hidden="true"><img src="assets/earth-arrival.png" alt=""></div>
+      <div class="starveil"></div>
+      <svg class="orbit-lines" viewBox="0 0 1600 900" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M-30 260 C300 30 690 55 930 225" fill="none" stroke="#a7e9f5" stroke-opacity=".12" stroke-width="1.5" stroke-dasharray="4 14"/>
+        <path d="M85 725 C480 618 905 720 1590 570" fill="none" stroke="#cceeff" stroke-opacity=".14" stroke-width="1"/>
+        <circle cx="310" cy="183" r="2" fill="#d6f8ff"/><circle cx="1005" cy="174" r="2" fill="#d6f8ff"/><circle cx="1360" cy="248" r="2" fill="#d6f8ff"/>
+      </svg>
+
+      <svg class="landscape" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="regolith" x2="0" y2="1"><stop stop-color="#8195a6"/><stop offset=".12" stop-color="#4b6074"/><stop offset="1" stop-color="#18293e"/></linearGradient>
+          <linearGradient id="dome" x2="1" y2="1"><stop stop-color="#9de4df" stop-opacity=".48"/><stop offset=".48" stop-color="#274f73" stop-opacity=".92"/><stop offset="1" stop-color="#152d47"/></linearGradient>
+          <linearGradient id="window" x2="0" y2="1"><stop stop-color="#ffe0a3" stop-opacity=".85"/><stop offset="1" stop-color="#ef9e68" stop-opacity=".25"/></linearGradient>
+          <radialGradient id="engineGlow"><stop stop-color="#fff3bf"/><stop offset=".28" stop-color="#ffc875" stop-opacity=".92"/><stop offset="1" stop-color="#ff8c57" stop-opacity="0"/></radialGradient>
+          <filter id="softGlow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="12"/></filter>
+        </defs>
+        <g class="moon-far">
+          <path d="M0 632 Q120 573 244 624 T480 620 Q590 569 716 626 T956 611 Q1100 552 1230 615 T1600 596 L1600 900 L0 900Z" fill="#485f78" fill-opacity=".72"/>
+          <path d="M0 680 Q188 622 356 672 T681 653 Q845 621 1022 666 T1300 650 Q1434 617 1600 651 L1600 900 L0 900Z" fill="#263d55" fill-opacity=".82"/>
+          <g fill="#b1c1cd" fill-opacity=".16"><ellipse cx="220" cy="720" rx="74" ry="15"/><ellipse cx="590" cy="745" rx="48" ry="10"/><ellipse cx="1410" cy="714" rx="91" ry="17"/></g>
+        </g>
+        <g class="moon-near">
+          <path d="M0 728 Q170 685 335 727 Q470 759 617 722 Q781 680 940 727 Q1100 765 1258 719 Q1420 671 1600 726 L1600 900 L0 900Z" fill="url(#regolith)"/>
+          <path d="M0 758 Q150 718 319 755 M1154 760 Q1360 713 1600 761" fill="none" stroke="#ced9d9" stroke-opacity=".35" stroke-width="3"/>
+          <g fill="#d2dce2" fill-opacity=".23"><ellipse cx="122" cy="810" rx="42" ry="8"/><ellipse cx="420" cy="788" rx="27" ry="6"/><ellipse cx="1462" cy="822" rx="65" ry="11"/></g>
+        </g>
+
+        <!-- Base appears as the provisional chalk-plan architecture resolves into a lit habitat. -->
+        <g class="base">
+          <ellipse cx="890" cy="716" rx="333" ry="29" fill="#071321" fill-opacity=".5"/>
+          <!-- Habitat connector and secondary module -->
+          <path d="M998 617 L1110 617 Q1130 617 1130 637 L1130 684 L1032 684 L1032 661 L998 661Z" fill="#344e65" stroke="#c6d5da" stroke-opacity=".5" stroke-width="3"/>
+          <path d="M1021 628 L1108 628 L1108 655 L1021 655Z" fill="url(#window)" opacity=".82"/>
+          <path d="M1036 628 V655 M1079 628 V655" stroke="#30435b" stroke-width="5"/>
+          <path d="M1112 642 Q1140 622 1170 642 L1210 658 L1210 690 L1112 690Z" fill="#3a526a" stroke="#b7c7d1" stroke-opacity=".58" stroke-width="3"/>
+          <path d="M1150 649 h42 v26 h-42z" fill="url(#window)"/>
+          <path d="M1171 649 v26" stroke="#3a4d62" stroke-width="5"/>
+          <!-- Main pressure dome -->
+          <path d="M612 686 C618 552 713 466 839 451 C961 435 1041 526 1051 686Z" fill="url(#dome)" stroke="#d4e6e9" stroke-opacity=".78" stroke-width="5"/>
+          <path d="M638 685 C645 572 721 493 838 478 C947 464 1013 540 1025 685" fill="none" stroke="#c2d8de" stroke-opacity=".65" stroke-width="3"/>
+          <path d="M838 457 V686 M710 509 Q756 562 761 685 M960 505 Q914 558 911 685" fill="none" stroke="#c2d8de" stroke-opacity=".34" stroke-width="3"/>
+          <path d="M652 612 Q833 585 1039 613 M626 660 Q835 637 1046 659" fill="none" stroke="#c2d8de" stroke-opacity=".25" stroke-width="2"/>
+          <path d="M720 650 h47 v36 h-47z M790 643 h64 v43 h-64z M878 648 h41 v38 h-41z" fill="url(#window)" opacity=".86"/>
+          <path d="M742 650 v36 M822 643 v43 M899 648 v38" stroke="#26405a" stroke-width="4"/>
+          <!-- Antenna / landing beacon -->
+          <path d="M692 475 L692 422 M674 429 Q692 405 710 429 M679 437 Q692 420 705 437" fill="none" stroke="#b9d8dd" stroke-width="4" stroke-linecap="round"/>
+          <circle cx="692" cy="417" r="6" fill="#a9f1df" class="base-light"/>
+          <!-- Ring pad and approach markings -->
+          <ellipse cx="1180" cy="715" rx="185" ry="31" fill="#334b61" stroke="#d3dfe0" stroke-opacity=".72" stroke-width="4"/>
+          <ellipse cx="1180" cy="715" rx="144" ry="19" fill="none" stroke="#a9f1df" stroke-opacity=".7" stroke-width="2" stroke-dasharray="13 14" class="trace"/>
+          <path d="M1180 695 V681 M1164 690 L1180 678 L1196 690" fill="none" stroke="#ffd591" stroke-width="4" stroke-linecap="round" class="base-light"/>
+          <!-- Warm habitation lights -->
+          <g class="base-light" fill="#ffd591" filter="url(#softGlow)" opacity=".72"><circle cx="742" cy="666" r="18"/><circle cx="822" cy="662" r="20"/><circle cx="899" cy="667" r="16"/><circle cx="1065" cy="641" r="11"/><circle cx="1170" cy="660" r="12"/></g>
+          <g class="base-light" fill="#ffe1aa"><circle cx="742" cy="666" r="5"/><circle cx="822" cy="662" r="6"/><circle cx="899" cy="667" r="5"/><circle cx="1065" cy="641" r="4"/><circle cx="1170" cy="660" r="4"/></g>
+          <path d="M674 700 H1040 M1040 700 H1215" fill="none" stroke="#d0dce2" stroke-opacity=".58" stroke-width="4"/>
+          <!-- small planted dome silhouettes suggest a living base -->
+          <g fill="#8dbbaa" stroke="#d0e1d4" stroke-opacity=".6" stroke-width="2"><path d="M573 700 Q577 674 592 700Z"/><path d="M581 698 Q581 680 570 672 Q587 677 585 699Z"/><path d="M1248 701 Q1252 675 1268 701Z"/><path d="M1257 699 Q1256 681 1246 674 Q1262 677 1261 700Z"/></g>
+          <g class="callout" fill="#d8eaf1" font-size="12" font-weight="800" letter-spacing="2"><text x="680" y="738">GROW</text><text x="822" y="738">LIVE</text><text x="1138" y="760">LANDING PAD</text></g>
+        </g>
+
+        <!-- Simple lander silhouette: image-level movement only, not a character rig. -->
+        <g class="landed-rocket" transform-box="view-box">
+          <g class="engine" opacity=".9"><ellipse cx="1180" cy="684" rx="58" ry="77" fill="url(#engineGlow)" filter="url(#softGlow)"/><path d="M1165 622 Q1180 661 1173 683 L1187 683 Q1180 651 1197 622Z" fill="#ffe6aa" opacity=".72"/></g>
+          <path d="M1180 482 C1147 523 1144 581 1152 627 L1208 627 C1216 581 1213 523 1180 482Z" fill="#d4dde3" stroke="#fff2cf" stroke-width="4"/>
+          <path d="M1153 582 H1207 V619 H1153Z" fill="#516d84" stroke="#eef4ec" stroke-width="3"/>
+          <path d="M1160 626 L1142 682 L1157 682 L1172 632 M1200 626 L1218 682 L1203 682 L1188 632" fill="none" stroke="#dce4e5" stroke-width="8" stroke-linecap="round"/>
+          <path d="M1167 529 H1193 M1160 552 H1200" stroke="#9cb3c1" stroke-width="4"/>
+          <circle cx="1180" cy="565" r="9" fill="#a9f1df" stroke="#fff" stroke-width="2"/>
+        </g>
+        <g class="dust"><ellipse cx="1180" cy="703" rx="120" ry="17" fill="none" stroke="#e7d6b5" stroke-opacity=".55" stroke-width="8"/></g>
+        <g class="dust dust2"><ellipse cx="1180" cy="704" rx="82" ry="10" fill="none" stroke="#b7d8df" stroke-opacity=".5" stroke-width="5"/></g>
+      </svg>
+
+      <div class="hud"><span class="brand">ABBIE'S WORLD · MOON BASE</span><span class="chapter">01 — FIRST LIGHT</span></div>
+      <div class="caption cap cap-intro"><div class="eyebrow">LOG 001 · ARRIVAL</div><h1 class="title"><span>EARTH,</span><span class="accent">BEHIND YOU.</span></h1></div>
+      <div class="caption cap cap-touchdown"><div class="eyebrow">LANDER · STABLE</div><h2 class="title accent">TOUCHDOWN.</h2></div>
+      <div class="caption cap cap-finale"><div class="eyebrow">NEW WORLD · NEW BEGINNING</div><h2 class="title"><span>MOON</span><span class="accent">BASE.</span></h2><div class="subline">YOUR NEXT ADVENTURE STARTS HERE.</div></div>
+      <div class="status">PROVISIONAL SCENE ART · NOT A FINAL BASE DESIGN</div>
+      <div class="grain"></div>
+    </section>
+    <div class="controls"><button class="primary" id="replay">Replay intro</button><button id="skip">Skip to arrival</button></div>
+    <p class="note">6.4-second motion-comic prototype · captions remain editable · scene parts are vector layers</p>
+  </main>
+  <script>
+    const stage = document.getElementById('stage');
+    let endTimer;
+    function play() {
+      clearTimeout(endTimer);
+      stage.classList.remove('finished','playing');
+      stage.querySelectorAll('*').forEach(element => { element.style.animation = 'none'; });
+      void stage.offsetWidth;
+      stage.querySelectorAll('*').forEach(element => { element.style.removeProperty('animation'); });
+      stage.classList.add('playing');
+      endTimer = setTimeout(() => { stage.classList.add('finished'); stage.classList.remove('playing'); }, 6400);
+    }
+    document.getElementById('replay').addEventListener('click', play);
+    document.getElementById('skip').addEventListener('click', () => {
+      clearTimeout(endTimer);
+      stage.classList.remove('playing');
+      stage.classList.add('finished');
+    });
+    play();
+  </script>
+</body>
+</html>

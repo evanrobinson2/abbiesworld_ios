@@ -1,0 +1,35 @@
+{
+  "id": "20260927-carnival-cottage-trophy",
+  "semanticId": "poi.carnival.cottageTrophy",
+  "status": "open",
+  "priority": "high",
+  "type": "production_sprite",
+  "brief": "A small toy-like carnival trophy placed inside Abbie\u2019s cottage. It is the tappable entrance object that starts the trip to the fair. A playful miniature carnival tent with bunting on a sturdy trophy base; inviting and recognizable as a toy keepsake rather than a realistic sports cup. Proposed design, subject to art review. No baked-in text. This is a room object, distinct from the overland fairground entrance.",
+  "aspect": "1:1 transparent cutout",
+  "styleNotes": "For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/generated-candidates/poi.plinkPavilion.exterior/v1/source.png",
+    "AssetSources/World2/user-supplied/peglin/v1/monastery/poi.peglin.pegMonastery.exterior.cutout.png"
+  ],
+  "promptSeeds": [
+    "A small toy-like carnival trophy placed inside Abbie\u2019s cottage. It is the tappable entrance object that starts the trip to the fair. A playful miniature carnival tent with bunting on a sturdy trophy base; inviting and recognizable as a toy keepsake rather than a realistic sports cup. Proposed design, subject to art review. No baked-in text. This is a room object, distinct from the overland fairground entrance. For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes."
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-28T00:56:10.790419+00:00",
+  "productionIntent": "production_sprite",
+  "surface": "Abbie cottage interior \u2192 carnival travel entry",
+  "placeholder": {
+    "type": "none",
+    "detail": "Requested attraction; not implemented yet."
+  },
+  "acceptanceCriteria": [
+    "Fit naturally on a cottage shelf or table; inspect against actual room artwork",
+    "Entire object visible with clean alpha and room-perspective lighting",
+    "Clear silhouette at small size with generous tappable footprint",
+    "Separate optional highlight layer; do not bake interaction glow into base art",
+    "Tapping initiates fair travel; game builder supplies behavior and return-home route",
+    "Preserve source provenance and bind this semantic ID through the existing POI pipeline"
+  ],
+  "fulfillment": null
+}

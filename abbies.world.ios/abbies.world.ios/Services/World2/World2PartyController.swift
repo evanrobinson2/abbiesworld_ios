@@ -24,6 +24,11 @@ final class World2PartyController: ObservableObject {
     private var walkFacingRight = true
     private var aspectRatio: Double = 4.0 / 3.0
     private var didFinishWalk = false
+    private var moveStick = World2StickVector.zero
+    private var faceStick = World2StickVector.zero
+    private var stickDriving = false
+    private var lastStickTick: Date?
+    private var loggedStickGait: World2PartyGait?
 
     init() {
         let spawn = World2PartyLandingContract.defaultSpawn
@@ -36,7 +41,7 @@ final class World2PartyController: ObservableObject {
                 id: actor,
                 position: formation[actor] ?? spawn.landing,
                 facingRight: true,
-                isWalking: false
+                gait: .idle
             )
         }
     }
@@ -49,6 +54,9 @@ final class World2PartyController: ObservableObject {
     ) {
         self.aspectRatio = aspectRatio > 0.01 ? aspectRatio : 4.0 / 3.0
         cancelWalk()
+        stickDriving = false
+        lastStickTick = nil
+        loggedStickGait = nil
         sceneVisitID += 1
 
         let formation = World2PartyPathfinding.formation(
@@ -60,7 +68,7 @@ final class World2PartyController: ObservableObject {
                 id: actor,
                 position: formation[actor] ?? contract.landing,
                 facingRight: true,
-                isWalking: false
+                gait: .idle
             )
         }
 
@@ -96,7 +104,7 @@ final class World2PartyController: ObservableObject {
         // does not snap back to the previous landing.
         settledPieces = current.map { piece in
             var next = piece
-            next.isWalking = false
+            next.gait = .idle
             return next
         }
 
@@ -150,7 +158,7 @@ final class World2PartyController: ObservableObject {
                             ?? settledPieces.first(where: { $0.id == actor })?.position
                             ?? World2PartyLandingContract.bottomLeftStaging,
                         facingRight: walkFacingRight,
-                        isWalking: false
+                        gait: .idle
                     )
                 }
                 // Defer publish so TimelineView body stays pure.
@@ -162,7 +170,7 @@ final class World2PartyController: ObservableObject {
                 var next = piece
                 next.position = walkDestination[piece.id] ?? piece.position
                 next.facingRight = walkFacingRight
-                next.isWalking = false
+                next.gait = .idle
                 return next
             }
         }
@@ -172,15 +180,21 @@ final class World2PartyController: ObservableObject {
                 ?? settledPieces.first(where: { $0.id == actor })?.position
                 ?? World2PartyLandingContract.bottomLeftStaging
             let to = walkDestination[actor] ?? from
+            let position = World2PartyPathfinding.interpolate(
+                from: from,
+                to: to,
+                progress: progress
+            )
             return World2PartyPieceState(
                 id: actor,
-                position: World2PartyPathfinding.interpolate(
-                    from: from,
-                    to: to,
-                    progress: progress
-                ),
+                position: position,
                 facingRight: walkFacingRight,
-                isWalking: true
+                gait: .walk,
+                heading: World2PartyPathfinding.headingForTravel(
+                    dx: to.x - from.x,
+                    dy: to.y - from.y
+                ),
+                stride: 1
             )
         }
     }
@@ -188,6 +202,100 @@ final class World2PartyController: ObservableObject {
     var leadPosition: World2NormalizedPoint {
         settledPieces.first(where: { $0.id == .abbie })?.position
             ?? World2PartyLandingContract.bottomLeftStaging
+    }
+
+    func setMoveStick(_ vector: World2StickVector) {
+        moveStick = vector
+    }
+
+    func setFaceStick(_ vector: World2StickVector) {
+        faceStick = vector
+    }
+
+    /// Advance stick motion once per frame. Safe to call from a TimelineView
+    /// body: a second call with the same timestamp is a no-op.
+    func tickSticks(at date: Date) {
+        let magnitude = moveStick.magnitude
+        if magnitude < World2PartyPathfinding.stickDeadzone {
+            guard stickDriving else { return }
+            let live = pieces(at: date)
+            stickDriving = false
+            lastStickTick = nil
+            loggedStickGait = .idle
+            cancelWalk()
+            settledPieces = live.map { piece in
+                var next = piece
+                next.gait = .idle
+                return next
+            }
+            World2Diagnostics.log(
+                "party_stick",
+                [
+                    "gait": World2PartyGait.idle.rawValue,
+                    "x": String(format: "%.3f", leadPosition.x),
+                    "y": String(format: "%.3f", leadPosition.y),
+                ]
+            )
+            return
+        }
+
+        if !stickDriving {
+            let live = pieces(at: date)
+            cancelWalk()
+            settledPieces = live.map { piece in
+                var next = piece
+                next.gait = .idle
+                return next
+            }
+            stickDriving = true
+            lastStickTick = date
+            return
+        }
+
+        guard let last = lastStickTick else {
+            lastStickTick = date
+            return
+        }
+        var dt = date.timeIntervalSince(last)
+        if dt < 0.0008 { return }
+        if dt > 0.05 { dt = 0.05 }
+        lastStickTick = date
+
+        let step = World2PartyPathfinding.stickStep(
+            lead: leadPosition,
+            facingRight: settledPieces.first(where: { $0.id == .abbie })?.facingRight ?? true,
+            heading: settledPieces.first(where: { $0.id == .abbie })?.heading ?? 0.72,
+            move: moveStick,
+            face: faceStick,
+            dt: dt
+        )
+        let formation = World2PartyPathfinding.formation(
+            around: step.lead,
+            facingRight: step.facingRight
+        )
+        settledPieces = World2PartyActorID.allCases.map { actor in
+            World2PartyPieceState(
+                id: actor,
+                position: formation[actor] ?? step.lead,
+                facingRight: step.facingRight,
+                gait: step.gait,
+                heading: step.heading,
+                stride: step.stride
+            )
+        }
+
+        if loggedStickGait != step.gait {
+            loggedStickGait = step.gait
+            World2Diagnostics.log(
+                "party_stick",
+                [
+                    "gait": step.gait.rawValue,
+                    "x": String(format: "%.3f", step.lead.x),
+                    "y": String(format: "%.3f", step.lead.y),
+                    "facing_right": step.facingRight ? "true" : "false",
+                ]
+            )
+        }
     }
 
     private func settle(_ pieces: [World2PartyPieceState]) {

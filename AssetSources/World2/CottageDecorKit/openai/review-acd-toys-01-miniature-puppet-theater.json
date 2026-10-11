@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-toys-01-miniature-puppet-theater",
+  "latencyMs": 8212,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.96,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "table",
+    "refinedDescription": "Miniature freestanding wooden puppet theater with a carved scalloped golden-brown frame, shallow stage ledge, and layered yellow, blue, orange, green, and red curtains.",
+    "suggestedScale": 0.7
+  },
+  "pngSha256": "f174ea4292af3edacd83bfd069c19d6f034977100e2d4845eec5e709ee8ff1ce",
+  "responseId": "chatcmpl-ESoLVzA7jbr7kNoZokxnYghyasdYN",
+  "timestamp": "2026-09-27T18:57:07.549313+00:00"
+}

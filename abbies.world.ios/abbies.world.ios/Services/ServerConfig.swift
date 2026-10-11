@@ -33,6 +33,20 @@ class ServerConfig {
         // 3. Default fallback
         return "http://abbies.world:8000"
     }
+
+    /// Household plate proxy: resolves semantic ids to the same bytes the Game
+    /// Asset registry hosts, without requiring a device-local registry API key.
+    /// Auth0 can load `/worlds/current`; registry reads still want an API key.
+    /// Studio's `/api/plate` bridges that gap so the iPad matches the server.
+    var plateProxyURL: String {
+        if let override = UserDefaults.standard.string(forKey: "PlateProxyBaseURL"), !override.isEmpty {
+            return override
+        }
+        if let info = Bundle.main.object(forInfoDictionaryKey: "PlateProxyBaseURL") as? String, !info.isEmpty {
+            return info
+        }
+        return "https://studio-mock-iota.vercel.app/api/plate"
+    }
     
     /// Server hostname (extracted from baseURL)
     var hostname: String {

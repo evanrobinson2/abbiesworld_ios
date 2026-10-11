@@ -1,0 +1,87 @@
+{
+  "alphaBounds": {
+    "borderTransparentRatio": 1.0,
+    "contract": "required",
+    "visiblePixels": 50406
+  },
+  "assetCatalogName": "acd_toys_02_closed_walnut_wardrobe",
+  "category": "storage",
+  "colors": [
+    "dark brown",
+    "warm brown"
+  ],
+  "detailedVisualDescription": "Closed walnut-shaped wooden wardrobe with a pointed shell silhouette, two paneled upper doors, and stacked drawers below.",
+  "eligibleCottageScenes": [
+    "poi.abbieTreehouse.interior",
+    "poi.abbieTreehouse.interior.cozyNook",
+    "poi.abbieTreehouse.interior.rooftopLookout",
+    "poi.abbieTreehouse.interior.fitnessCenter",
+    "poi.abbieTreehouse.interior.bedroom",
+    "poi.abbieTreehouse.interior.playroom"
+  ],
+  "hashes": {
+    "derivativeSha256": "58f09fb5aacc2b4337a43f5c984634cbe61f66976376f987fc416e4f5bf434f0",
+    "sourceSha256": "244dc865229f6985d3f253bc6a4059a54ed52794cb72ce65a2f65ee575b376e6"
+  },
+  "id": "acd-toys-02-closed-walnut-wardrobe",
+  "intendedUse": "decorative room prop for Abbie cottage decorate mode",
+  "interactionAffordances": {
+    "implemented": [
+      "place",
+      "move",
+      "scale",
+      "return-to-inventory"
+    ],
+    "visualInferenceOnly": "Closed storage piece; no furnished rooms or open dollhouse interior are visible."
+  },
+  "label": "Closed walnut wardrobe",
+  "materials": [
+    "carved wood"
+  ],
+  "modelEvidence": {
+    "cutoutReviewModel": "gpt-5.6-sol",
+    "cutoutReviewPath": "AssetSources/World2/CottageDecorKit/openai/review-acd-toys-02-closed-walnut-wardrobe.json",
+    "inventoryModel": "gpt-5.6-sol"
+  },
+  "motifs": [
+    "walnut shell",
+    "wood grain",
+    "tiny drawers"
+  ],
+  "pixelSize": {
+    "height": 327,
+    "width": 241
+  },
+  "placement": {
+    "anchor": "bottom-center",
+    "defaultScale": 0.9,
+    "facing": "front three-quarter view, slightly facing left",
+    "hints": [
+      "floor",
+      "table"
+    ],
+    "layer": "floor"
+  },
+  "provenance": {
+    "candidateIndex": 3,
+    "jobId": "fc9e02ac-89bd-4564-ab9a-e61c73cfde48",
+    "originalCreativeBrief": "Six enchanting handmade toys for a child's magical playroom: a miniature puppet theater with scalloped wooden trim and colorful curtains; a walnut shell dollhouse with tiny furnished rooms; a rocking unicorn with rainbow yarn mane; a wooden woodland train with three animal shaped carriages; a toy castle with rounded turrets and working drawbridge; a dress up chest with crown, fairy wings, and star wand inside. Sturdy, cheerful, expressive handmade details, painted wood and stitched fabric. Hand painted 2D storybook artwork, delicate ink contours, warm gouache textures, gentle front three quarter view. Strict two row three column asset sheet on pure white, one complete toy per cell. Wide margins and gutters. All components contained within their cell. Completely separate silhouettes, no touching or overlap, no cropping. Flat even illumination. No shadows, no floor, no background, no scenery, no people, no text, no labels, no borders.",
+    "packSemanticId": "pack.abbieCottage.toys",
+    "prompt": "make. thebackground white and refine the shape and details of the toys",
+    "promptFile": "toys-prompt.txt",
+    "requestedSourceUrl": "https://cdn.midjourney.com/fc9e02ac-89bd-4564-ab9a-e61c73cfde48/0_3.png",
+    "retrievedSourceUrl": "https://cdn.midjourney.com/fc9e02ac-89bd-4564-ab9a-e61c73cfde48/0_3.jpeg"
+  },
+  "reviewStatus": "accepted",
+  "role": "placeable-room-prop",
+  "schemaVersion": 1,
+  "semanticId": "decor.abbieCottage.acd-toys-02-closed-walnut-wardrobe",
+  "sourceCropBounds": [
+    418,
+    62,
+    666,
+    393
+  ],
+  "style": "hand-painted 2D storybook / gouache",
+  "subcategory": "miniature wardrobe"
+}

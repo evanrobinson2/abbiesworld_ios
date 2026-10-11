@@ -1,0 +1,65 @@
+{
+  "status": "fulfilled",
+  "priority": "high",
+  "type": "ui_icon",
+  "kind": "ui",
+  "keepStockIcon": false,
+  "aspect": "1:1",
+  "requestedBy": "cursor",
+  "createdAt": "2026-09-26T21:10:00Z",
+  "requestedAt": "2026-09-26T21:10:00Z",
+  "gameArea": "Marble Voyage / Plink battle power tray",
+  "expectedBackground": "Transparent RGBA \u2014 clear corners required (design gate maxCornerAlpha \u2264 16)",
+  "targetPixelSize": "Circular chip ~128\u2013256px master; runtime ~56\u201372pt",
+  "productionIntent": "runtime_bind",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:23:29.504845+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/split-transparent.png",
+    "sourceHashSha256": "4bd4ce24634df0451bd472b0024b616127719716957763399a06dc854888d5c2",
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_split. RGBA/corner-alpha checks passed. Runtime catalog replacement, scale consistency and in-app 56pt legibility remain unverified; no Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_split (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_split",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_split.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  },
+  "styleNotes": "Approved Tilt style lock: dark teal enamel disc, warm brass rim, bold contours, chunky hand-painted forms, restrained cel shading. True transparent corners; no checkerboard or opaque square. Match motif weight at 56\u201372pt.",
+  "id": "20260926-power-icon-split",
+  "semanticId": "ui.plink.power.icon.split",
+  "characterOrAssetName": "Split power icon",
+  "surface": "Battle power tray \u2014 Split",
+  "brief": "Replace provisional Cursor-pipeline Split chip. Motif: one marble becoming three. Circular transparent chip.",
+  "usage": "Replace Assets.xcassets/world2_plink_power_icon_split.imageset payload",
+  "promptSeeds": [
+    "Circular kid game power icon, one marble splitting into three, bold cel shaded, transparent background, no text --ar 1:1 --stylize 150"
+  ],
+  "relatedPaths": [
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-refresh.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-fire.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-split.png",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "art-requests/ART_DIRECTOR_AGENT.md",
+    "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_split.imageset/world2_plink_power_icon_split.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-split.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/split-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/split-transparent.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/split-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md"
+  ],
+  "existingAssetSemanticIds": [
+    "ui.plink.power.icon.split"
+  ],
+  "acceptanceCriteria": [
+    "Replaces deprecated pipeline PNG",
+    "True transparent corners",
+    "Readable as Split at 56pt"
+  ],
+  "sessionNote": "Existing catalog PNG is provisional from deprecated Cursor asset pipeline.",
+  "placeholder": {
+    "type": "provisional_reuse",
+    "detail": "world2_plink_power_icon_split.png from deprecated pipeline"
+  }
+}

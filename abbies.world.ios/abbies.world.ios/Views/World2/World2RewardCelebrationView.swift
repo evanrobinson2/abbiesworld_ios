@@ -53,17 +53,45 @@ struct World2RewardCelebrationView: View {
                 .font(.system(size: 40, weight: .black, design: .rounded))
                 .foregroundStyle(.white)
                 .shadow(color: .orange.opacity(0.9), radius: 14)
+                .multilineTextAlignment(.center)
                 .accessibilityIdentifier("world2.reward.headline")
 
-            World2PorridgeBowl(isMagical: true)
-                .frame(width: 220, height: 220)
-                .accessibilityIdentifier("world2.reward.artwork")
+            ZStack {
+                Circle()
+                    .fill(
+                        RadialGradient(
+                            colors: [
+                                Color(red: 1, green: 0.85, blue: 0.4).opacity(0.5),
+                                Color.clear,
+                            ],
+                            center: .center,
+                            startRadius: 20,
+                            endRadius: 130
+                        )
+                    )
+                    .frame(width: 260, height: 260)
+                World2StoryDecorationArtwork(decoration: celebration.decoration)
+                    .frame(width: 200, height: 200)
+                    .scaleEffect(artworkScale)
+            }
+            .accessibilityIdentifier("world2.reward.artwork")
 
             Text(celebration.decoration.name.uppercased())
                 .font(.system(size: 26, weight: .black, design: .rounded))
                 .foregroundStyle(.white)
                 .multilineTextAlignment(.center)
                 .accessibilityIdentifier("world2.reward.itemName")
+
+            if celebration.earnedPerfectly {
+                Text("CEREMONIAL AWARD")
+                    .font(.system(size: 13, weight: .black, design: .rounded))
+                    .tracking(2)
+                    .foregroundStyle(Color(red: 1, green: 0.88, blue: 0.4))
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 6)
+                    .background(Color.white.opacity(0.12), in: Capsule())
+                    .overlay(Capsule().stroke(Color(red: 1, green: 0.85, blue: 0.35).opacity(0.7), lineWidth: 1.5))
+            }
 
             badgeRow
 
@@ -99,6 +127,16 @@ struct World2RewardCelebrationView: View {
         .padding(.horizontal, 28)
     }
 
+    /// Hand-drawn tokens vary in native size — scale so the ceremony reads large.
+    private var artworkScale: CGFloat {
+        switch celebration.decoration.artStyle {
+        case .perfectPorridge: return 1.0
+        case .foxTrophy, .wreckPowerUp: return 3.4
+        case .propertyDeed, .worldTeleporter: return 2.6
+        case .daddyCandy, .daddyHug: return 2.8
+        }
+    }
+
     private var badgeRow: some View {
         HStack(spacing: 8) {
             ForEach(
@@ -113,7 +151,7 @@ struct World2RewardCelebrationView: View {
 
     private var inventoryNotice: some View {
         Label(
-            "It is in \(playerName)'s treehouse drawer now.",
+            "Officially placed in \(playerName)'s treehouse drawer.",
             systemImage: "shippingbox.fill"
         )
         .font(.system(size: 17, weight: .black, design: .rounded))

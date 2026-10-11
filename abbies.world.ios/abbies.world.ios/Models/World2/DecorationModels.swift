@@ -85,29 +85,70 @@ struct DecorationInstance: Codable, Identifiable {
     var y: Double
     var scale: Double
     var rotation: Double
+    /// Horizontal shear (affine `c`). 0 = upright. Clamped in the decorator.
+    var skewX: Double
+    /// Vertical shear (affine `b`). 0 = upright.
+    var skewY: Double
     var zIndex: Int
     var state: DecorationState?
     /// Ribbons shown on this item's card in the drawer. Optional so saves
     /// written before badges existed still decode.
     var badges: [World2InventoryBadge]?
     let acquiredAt: Date
-    
+
+    /// Finger-friendly shear limits for decorate handles.
+    static let skewRange: ClosedRange<Double> = -0.72...0.72
+
     struct DecorationState: Codable {
         var isActive: Bool
         var customData: [String: String]?
     }
-    
-    init(id: String? = nil, decorationId: String, x: Double, y: Double, scale: Double = 1.0, rotation: Double = 0, zIndex: Int = 0, state: DecorationState? = nil, badges: [World2InventoryBadge]? = nil) {
+
+    enum CodingKeys: String, CodingKey {
+        case id, decorationId, x, y, scale, rotation, skewX, skewY, zIndex, state, badges, acquiredAt
+    }
+
+    init(
+        id: String? = nil,
+        decorationId: String,
+        x: Double,
+        y: Double,
+        scale: Double = 1.0,
+        rotation: Double = 0,
+        skewX: Double = 0,
+        skewY: Double = 0,
+        zIndex: Int = 0,
+        state: DecorationState? = nil,
+        badges: [World2InventoryBadge]? = nil
+    ) {
         self.id = id ?? UUID().uuidString
         self.decorationId = decorationId
         self.x = x
         self.y = y
         self.scale = scale
         self.rotation = rotation
+        self.skewX = skewX
+        self.skewY = skewY
         self.zIndex = zIndex
         self.state = state
         self.badges = badges
         self.acquiredAt = Date()
+    }
+
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        id = try c.decode(String.self, forKey: .id)
+        decorationId = try c.decode(String.self, forKey: .decorationId)
+        x = try c.decode(Double.self, forKey: .x)
+        y = try c.decode(Double.self, forKey: .y)
+        scale = try c.decode(Double.self, forKey: .scale)
+        rotation = try c.decode(Double.self, forKey: .rotation)
+        skewX = try c.decodeIfPresent(Double.self, forKey: .skewX) ?? 0
+        skewY = try c.decodeIfPresent(Double.self, forKey: .skewY) ?? 0
+        zIndex = try c.decode(Int.self, forKey: .zIndex)
+        state = try c.decodeIfPresent(DecorationState.self, forKey: .state)
+        badges = try c.decodeIfPresent([World2InventoryBadge].self, forKey: .badges)
+        acquiredAt = try c.decodeIfPresent(Date.self, forKey: .acquiredAt) ?? Date()
     }
 
     var displayBadges: [World2InventoryBadge] {
@@ -126,6 +167,7 @@ struct DecorationInstance: Codable, Identifiable {
     }
     
     static let starterJukeboxID = "decoration.jukebox.starter"
+    static let marbleVoyageWorldBookID = FurnitureItem.marbleVoyageWorldBook.id
 
     static func starterJukebox(for playerId: PlayerId) -> DecorationInstance {
         DecorationInstance(
@@ -137,6 +179,25 @@ struct DecorationInstance: Codable, Identifiable {
             rotation: 0,
             zIndex: 10,
             state: DecorationState(isActive: true, customData: ["currentTrack": "music.home.light"])
+        )
+    }
+
+    /// Seeded on the Cozy Nook coffee table — already placed, not an inventory gift.
+    static func marbleVoyageWorldBookInstanceID(for playerId: PlayerId) -> String {
+        "marble_voyage_book_\(playerId.rawValue)"
+    }
+
+    static func marbleVoyageWorldBook(for playerId: PlayerId) -> DecorationInstance {
+        let item = FurnitureItem.marbleVoyageWorldBook
+        return DecorationInstance(
+            id: marbleVoyageWorldBookInstanceID(for: playerId),
+            decorationId: marbleVoyageWorldBookID,
+            x: 0.50,
+            // Coffee-table surface in Cozy Nook (was 0.56 — floated mid-air).
+            y: 0.73,
+            scale: item.defaultScale,
+            rotation: 0,
+            zIndex: 20
         )
     }
 }

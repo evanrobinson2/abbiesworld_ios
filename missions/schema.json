@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abbies.world/schemas/abbie-mission.json",
+  "title": "AbbieMission",
+  "description": "Durable creative Mission — SoT on household world creative.missionOs (POC). Git mirror for review only.",
+  "type": "object",
+  "required": ["id", "title", "status", "intent", "createdAt", "updatedAt"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^mission\\." },
+    "title": { "type": "string", "maxLength": 120 },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "blocked", "playable_candidate", "playable", "archived"]
+    },
+    "createdAt": { "type": "string", "format": "date-time" },
+    "updatedAt": { "type": "string", "format": "date-time" },
+    "createdFrom": {
+      "type": "object",
+      "properties": {
+        "surface": { "type": "string" },
+        "utteranceRef": { "type": ["string", "null"] }
+      }
+    },
+    "intent": {
+      "type": "object",
+      "required": ["narrative"],
+      "properties": {
+        "narrative": { "type": "string" },
+        "acceptanceJourney": { "type": "array", "items": { "type": "string" } },
+        "acceptanceTargets": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "plan": { "type": "object" },
+    "requirements": { "type": "array" },
+    "work": { "type": "object" },
+    "proofs": { "type": "array" },
+    "approvals": { "type": "array" },
+    "notifications": { "type": "array" },
+    "integration": { "type": "object" },
+    "verification": { "type": "object" },
+    "playable": { "type": "object" },
+    "signals": { "type": "object" }
+  }
+}

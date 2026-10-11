@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marble Voyage · Opening Screen Audit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=IBM+Plex+Sans:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #142033;
+      --paper: #f3efe6;
+      --panel: #fffdf8;
+      --accent: #d4552a;
+      --ok: #1f7a4c;
+      --warn: #a86b12;
+      --line: rgba(20, 32, 51, 0.12);
+      --sky: #7eb7d4;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #d9eef8 0%, transparent 55%),
+        radial-gradient(900px 500px at 100% 0%, #f7d8c4 0%, transparent 50%),
+        var(--paper);
+      min-height: 100vh;
+    }
+    header {
+      padding: 2.5rem 1.5rem 1rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-family: Fraunces, Georgia, serif;
+      font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin: 0 0 0.4rem;
+      letter-spacing: -0.02em;
+    }
+    .lede { max-width: 42rem; opacity: 0.85; line-height: 1.45; }
+    .rate-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 0.75rem;
+      margin: 1.5rem 0 0.5rem;
+    }
+    .stat {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem 1.1rem;
+    }
+    .stat b {
+      display: block;
+      font-family: Fraunces, Georgia, serif;
+      font-size: 1.8rem;
+      line-height: 1.1;
+    }
+    .stat span { font-size: 0.85rem; opacity: 0.7; }
+    .stat.accent b { color: var(--accent); }
+    .stat.ok b { color: var(--ok); }
+    main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+      display: grid;
+      gap: 1.25rem;
+    }
+    section {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 1.15rem 1.25rem 1.35rem;
+    }
+    section h2 {
+      font-family: Fraunces, Georgia, serif;
+      margin: 0 0 0.85rem;
+      font-size: 1.35rem;
+    }
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-bottom: 1rem;
+    }
+    .tabs button {
+      border: 1px solid var(--line);
+      background: #f7f3ea;
+      border-radius: 999px;
+      padding: 0.4rem 0.85rem;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .tabs button[aria-selected="true"] {
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
+    }
+    .screen-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 1rem;
+    }
+    @media (max-width: 800px) {
+      .screen-grid { grid-template-columns: 1fr; }
+    }
+    .still {
+      width: 100%;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: #0d1520;
+      aspect-ratio: 4 / 3;
+      object-fit: contain;
+    }
+    .still.missing {
+      display: grid;
+      place-items: center;
+      color: #c9d5e4;
+      font-weight: 600;
+    }
+    .meta p { margin: 0.35rem 0; line-height: 1.4; }
+    .pill {
+      display: inline-block;
+      padding: 0.15rem 0.55rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .pill.pass { background: #d7f0e2; color: var(--ok); }
+    .pill.fail { background: #f8d9d0; color: var(--accent); }
+    .corrections { display: grid; gap: 0.75rem; }
+    .fix {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.85rem 1rem;
+      background: #fbf8f1;
+    }
+    .fix h3 { margin: 0 0 0.35rem; font-size: 1.05rem; }
+    .fix .before, .fix .after {
+      font-size: 0.92rem;
+      line-height: 1.4;
+    }
+    .fix .before { opacity: 0.75; }
+    .fix .after { color: var(--ok); font-weight: 600; }
+    .portraits {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.75rem;
+    }
+    .portrait {
+      text-align: center;
+      cursor: pointer;
+      border: 1px solid transparent;
+      border-radius: 14px;
+      padding: 0.45rem;
+      background: #f7f3ea;
+    }
+    .portrait[aria-pressed="true"] {
+      border-color: var(--accent);
+      background: #fff;
+      box-shadow: 0 0 0 2px rgba(212, 85, 42, 0.2);
+    }
+    .portrait img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #1a2433;
+    }
+    .portrait figcaption {
+      margin-top: 0.4rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+    .portrait small { display: block; opacity: 0.65; font-weight: 500; }
+    .focus-shot {
+      margin-top: 1rem;
+      display: none;
+      grid-template-columns: 180px 1fr;
+      gap: 1rem;
+      align-items: center;
+    }
+    .focus-shot.on { display: grid; }
+    .focus-shot img {
+      width: 180px;
+      aspect-ratio: 1;
+      object-fit: contain;
+      border-radius: 16px;
+      background: #1a2433;
+    }
+    footer {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 2.5rem;
+      opacity: 0.65;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Opening screen audit</h1>
+    <p class="lede" id="lede">Loading report…</p>
+    <div class="rate-row" id="rates"></div>
+  </header>
+  <main>
+    <section>
+      <h2>Screens</h2>
+      <div class="tabs" id="tabs" role="tablist"></div>
+      <div class="screen-grid">
+        <div id="stillWrap"></div>
+        <div class="meta" id="screenMeta"></div>
+      </div>
+    </section>
+    <section>
+      <h2>OpenAI multimodal reasoning</h2>
+      <p class="lede" id="multiLede" style="margin-top:0"></p>
+      <div class="rate-row" id="multiRates"></div>
+      <div id="multiScreens"></div>
+    </section>
+    <section>
+      <h2>Corrections this pass</h2>
+      <div class="corrections" id="corrections"></div>
+    </section>
+    <section>
+      <h2>Portraits in play</h2>
+      <p class="lede" style="margin-top:0">Tap a portrait to focus it. Opening fight lead is Porcupine; pack mates rotate from the hench pool.</p>
+      <div class="portraits" id="portraits"></div>
+      <div class="focus-shot" id="focusShot">
+        <img alt="" id="focusImg" />
+        <div>
+          <h3 id="focusLabel"></h3>
+          <p id="focusRole"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer id="foot"></footer>
+  <script>
+    async function load() {
+      const report = await fetch("report.json").then((r) => r.json());
+      document.getElementById("lede").textContent =
+        report.summary.defectRateLabel + ". " + report.summary.postFixLabel + ".";
+      const rates = document.getElementById("rates");
+      rates.innerHTML = [
+        ["Defect rate", Math.round(report.summary.defectRate * 100) + "%", "accent"],
+        ["Found", report.summary.defectsFound, ""],
+        ["Fixed", report.summary.defectsFixed, "ok"],
+        ["Open", report.summary.defectsOpen, "ok"],
+        ["Predictions", report.summary.predictionsChecked, ""],
+      ]
+        .map(
+          ([k, v, c]) =>
+            `<div class="stat ${c}"><b>${v}</b><span>${k}</span></div>`
+        )
+        .join("");
+
+      const tabs = document.getElementById("tabs");
+      const stillWrap = document.getElementById("stillWrap");
+      const screenMeta = document.getElementById("screenMeta");
+      let active = report.screens.find((s) => s.still)?.id || report.screens[0].id;
+
+      function renderScreen(id) {
+        active = id;
+        [...tabs.querySelectorAll("button")].forEach((b) =>
+          b.setAttribute("aria-selected", String(b.dataset.id === id))
+        );
+        const s = report.screens.find((x) => x.id === id);
+        if (s.still) {
+          stillWrap.innerHTML = `<img class="still" src="${s.still}" alt="${s.label} still" />`;
+        } else {
+          stillWrap.innerHTML = `<div class="still missing">No still captured yet<br/><small>Source DAG passed</small></div>`;
+        }
+        screenMeta.innerHTML = `
+          <p><span class="pill ${s.status}">${s.status}</span></p>
+          <p><strong>${s.label}</strong></p>
+          <p>${s.notes}</p>
+          <p><strong>Predictions</strong><br/>${s.predictions.map((p) => "• " + p).join("<br/>")}</p>
+        `;
+      }
+
+      tabs.innerHTML = report.screens
+        .map(
+          (s) =>
+            `<button type="button" role="tab" data-id="${s.id}" aria-selected="false">${s.label}</button>`
+        )
+        .join("");
+      tabs.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-id]");
+        if (btn) renderScreen(btn.dataset.id);
+      });
+      renderScreen(active);
+
+      
+      const multi = report.multimodal;
+      if (multi) {
+        document.getElementById("multiLede").textContent =
+          (multi.defectRateLabel || "") + ". " + (multi.note || "") + " Model: " + multi.model;
+        document.getElementById("multiRates").innerHTML = [
+          ["MM defect rate", Math.round((multi.defectRate || 0) * 100) + "%", "accent"],
+          ["Fails", multi.predictionFail ?? 0, ""],
+          ["Uncertain", multi.predictionUncertain ?? 0, ""],
+          ["Anomalies", multi.anomalyCount ?? 0, ""],
+        ].map(([k,v,c]) => `<div class="stat ${c}"><b>${v}</b><span>${k}</span></div>`).join("");
+        const wrap = document.getElementById("multiScreens");
+        wrap.innerHTML = Object.entries(multi.screens || {}).map(([id, s]) => `
+          <article class="fix" style="margin-bottom:0.75rem">
+            <h3>${id} · <span class="pill ${s.decision === "pass" ? "pass" : "fail"}">${s.decision || "?"}</span></h3>
+            <p>${s.summary || ""}</p>
+            <p><strong>Reasoning</strong><br/>${(s.reasoning || []).map(r => "• " + r).join("<br/>") || "—"}</p>
+            <p><strong>Predictions</strong><br/>${(s.predictionFindings || []).map(f =>
+              `• <em>${f.status}</em> — ${f.prediction}<br/><span style="opacity:.75">${f.evidence || ""}</span>`
+            ).join("<br/>") || "—"}</p>
+          </article>`).join("");
+      }
+
+      document.getElementById("corrections").innerHTML = report.corrections
+        .map(
+          (c) => `
+        <article class="fix">
+          <h3>${c.title}</h3>
+          <p class="before"><strong>Before:</strong> ${c.before}</p>
+          <p class="after"><strong>After:</strong> ${c.after}</p>
+          <p><small>${c.screen} · ${c.files.join(", ")}</small></p>
+        </article>`
+        )
+        .join("");
+
+      const portraits = document.getElementById("portraits");
+      const focusShot = document.getElementById("focusShot");
+      portraits.innerHTML = report.portraits
+        .map(
+          (p) => `
+        <figure class="portrait" data-id="${p.id}" aria-pressed="false">
+          <img src="${p.src}" alt="${p.label}" loading="lazy" />
+          <figcaption>${p.label}</figcaption>
+          <small>${p.role}</small>
+        </figure>`
+        )
+        .join("");
+      portraits.addEventListener("click", (e) => {
+        const fig = e.target.closest(".portrait");
+        if (!fig) return;
+        const p = report.portraits.find((x) => x.id === fig.dataset.id);
+        [...portraits.querySelectorAll(".portrait")].forEach((el) =>
+          el.setAttribute("aria-pressed", String(el === fig))
+        );
+        focusShot.classList.add("on");
+        document.getElementById("focusImg").src = p.src;
+        document.getElementById("focusImg").alt = p.label;
+        document.getElementById("focusLabel").textContent = p.label;
+        document.getElementById("focusRole").textContent = p.role;
+      });
+
+      document.getElementById("foot").textContent =
+        `${report.title} · ${report.generatedAt} · seed ${report.seed}`;
+    }
+    load().catch((err) => {
+      document.getElementById("lede").textContent = String(err);
+    });
+  </script>
+</body>
+</html>

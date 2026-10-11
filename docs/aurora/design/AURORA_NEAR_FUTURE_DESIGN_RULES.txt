@@ -1,0 +1,97 @@
+AURORA — NEAR-FUTURE HUMAN DESIGN RULES
+Version 1.1.0 • 2026-10-05 • Owner: 001 Ship Builder
+Status: initial authored baseline; subject to Evan's visual review.
+Art direction and final hero-image acceptance remain with Cockpit.
+
+1. THE PREMISE
+Design for recognizable, Earth-origin humans a few generations ahead. No specific calendar year is assumed. Technology has advanced; human bodies, fatigue, privacy, habits, sentiment and the need for understandable tools remain familiar. Preserve the project's established spacecraft premise. Do not invent new speculative technology merely to decorate a room.
+
+Evan’s latest explicit mission direction is exploration and discovery, with navigation central to the ship. Evaluate room and equipment decisions against that mission. This is a functional design requirement; crew biography and story plot belong in separate records. The builder’s subsequent illustrative ship description is not an approved equipment specification.
+
+A space should communicate its purpose before the viewer reads its label. A flight deck is for sustained attention; quarters provide retreat; a workshop supports work in progress. Each room must feel like part of the same ship while serving a different human activity.
+
+2. COMPOSITION BEFORE DETAIL
+Retain the approved architectural envelope, entrances and circulation. Start with a clear focal activity, large shapes, readable depth and areas of visual rest. For the reference-inspired room bay, prioritize substantial overhead structure, integrated equipment, deep door and viewport frames, a dark exterior view and the restrained blue-white palette of that original reference study. This palette is scoped to that study, not a mandatory finish for every Aurora asset; see section 13.
+
+Do not substitute extra objects or panel lines for a convincing room. A broad quiet cover, a recessed workstation and a well-supported overhead assembly can carry more visual weight than dozens of small decorative parts. Judge the room from inside at human eye level; use cutaways and orthographic views to explain layout.
+
+3. DESIGN AS SOMETHING PEOPLE COULD BUILD
+Every major object needs an intelligible assembly: enclosure, cover, seam or gasket, attachment, support and access where appropriate. Vary their depth and scale. Panels should look removable; drawers should have room to open; lamps should have housings and diffusers; counters should transfer their load into supports.
+
+Use a shared family of fasteners, corner treatments, fixtures and interfaces across the ship. Design bespoke silhouettes where function warrants them. Avoid the repeated beveled-box look and arbitrary science-fiction surface clutter. A plain object with convincing construction is preferable to unexplained complexity.
+
+4. HUMAN SCALE AND USE
+Check reach, seating, sightlines, headroom, storage access and maintenance access using explicit scale references. Keep doors and working paths clear. Furniture must support plausible human poses, not merely fit inside a floor polygon. Record unresolved compromises rather than hiding them in a favorable camera view.
+
+The current six-person berth allocation is one captain, two officers and three crew. Treat this as the current project requirement, not a universal style rule. Architecture remains authoritative for dimensions and allocation. Visual checks do not certify ergonomics or operational safety.
+
+5. MATERIALS HAVE DISTINCT JOBS
+Assign materials by fabrication and use: coated panels, exposed metal edges, rubber seals, glass, woven fabric, molded controls and resilient floor surfaces. Distinguish them through roughness, reflectance, thickness and scale before adding texture noise. Metal should not resemble painted plastic; fabric should not resemble a solid glossy block.
+
+Use subtle, correctly scaled surface variation. Concentrate wear at handles, feet, edges, tool contact and cleaning paths. Avoid identical scratches everywhere. Preserve quiet surfaces. Procedural Blender materials and game-export materials must be evaluated separately; a good Blender render does not prove exported parity.
+
+6. TYPOGRAPHY AND PAINT
+Evan requested larger thick italic numbers, sans-serif lettering and broad painted streaks during the original room study. Preserve that preference as provenance, not a universal recipe for all text. Production category rules v1.2 distinguish slanted equipment-panel identifiers from upright operational labels, room entrance plates, safety markings and personal-item identification. Apply the category recipe before choosing size or placement; never derive a compartment address from a decorative panel number.
+
+Broad painted markings remain available within an approved room or asset brief, with a clear visual purpose. Check real reading distance, approach angle, open-door visibility, glare and occlusion. Required operational information takes precedence over decorative identity. The earlier room-numeral preference versus the panel-only numeral scope remains a recorded direction question for future room decoration; do not silently migrate either into the other. Section 13 records the boundary.
+
+7. LIGHT HAS A SOURCE AND A PURPOSE
+Begin with believable practical fixtures: overhead illumination, task lights, display glow and restrained status indicators. Choose color and temperature from the approved room brief and applicable fixture family. Cool white/slate-blue belongs to the original reference-room study. The registered panel family instead uses its v1.2 warm-ambient/neutral-task lighting defaults; do not recolor that family by inheriting the earlier study. Surface color should remain distinguishable.
+
+Build separation between foreground, working area and background. Preserve dark recesses and the viewport. Emissives, reflections, bloom and any volumetric treatment should support physical depth without washing out construction. One presentation stage owns exposure and tone mapping so independent passes do not compound adjustments.
+
+8. LIFE IS AUTHORED, NOT SCATTERED
+Give each space a specific occupant or current activity. Select a few meaningful objects: a maintained plant, a personal photograph, a thematic poster, a ship model on a secure base, a folded garment, a repair tray or an unfinished meal. Explain their placement through reach, storage and use.
+
+Add a usage layer after furnishing: a chair pulled back, a crease in bedding, a marked maintenance sheet, localized abrasion or a partly completed job. Keep decoration restrained where operations require clarity. Plants need plausible containers and placement; loose objects need restraint where ship operations require it. Do not use random clutter as a proxy for life.
+
+9. ROOM CHARACTER
+Command: readable instruments, controlled reflections, disciplined arrangement.
+Quarters: privacy, textiles, personal storage and individual identity.
+Galley/mess: shared rituals, food preparation, cleanable surfaces and social seating.
+Hygiene/medical: privacy, cleanable construction, understandable equipment storage.
+Life support/engineering: service access, traceable systems, purposeful identification.
+Cargo/workshop: robust storage, work surfaces and evidence of a specific repair.
+Airlock/suit preparation: clear preparation sequence, equipment access and restraint.
+These are briefs for design choices, not a license to alter approved architecture.
+
+10. SHOW THE IDEA EARLY
+Each stage should produce the cheapest useful visual forecast: a concept image, annotated plan, shell view, furniture silhouette, material swatch or room preview. Label invented concepts separately from renders of the actual source scene. Connect each forecast to its intended implementation and record time from brief to first useful visual.
+
+Show composition and a representative furniture grouping before repeating detailed fabrication throughout the room. Continue authorized reversible work; do not invent approval pauses. Surface major uncertainty early, and batch minor cosmetic decisions. Use fixed-camera comparisons when evaluating a specific change, plus the human-eye-level room view for coherence.
+
+11. ACCEPTANCE AND ACCOUNTABILITY
+Track feedback against an artifact and revision, with states: act now, batch, deferred, canceled and resolved. A canceled request stays canceled unless explicitly reopened. Report completed work, evidence, remaining work and limitations each turn.
+
+Check normals, support, bounds, intersections and entrances before delivery. Inspect actual renders as well as reports. Technical checks and visual acceptance are separate. State whether a delivery is a concept, furnished visual pass, close-view asset, assembled scene or game-ready asset; do not imply one proves the others. Game readiness needs its own material, performance and integration validation.
+
+12. VERSIONING
+This document is the canonical human-design and builder-process baseline, tracked in Git; it is not the sole authority for asset styling. Section 13 names the complementary scoped authorities. Update it in place with an incremented version and an entry in its companion changelog. Major versions change the premise or governing direction; minor versions add design guidance; patches clarify wording. Scene manifests should record the design-rule version and Git commit actually used. Existing scenes are not retroactively certified against new rules.
+
+Changes to the guide do not automatically authorize rebuilding completed scenes. Preserve earlier artifacts and record any intentional exception with its rationale. The first baseline consolidates Evan's feedback and the builder team's retrospective; further aesthetic acceptance belongs to Evan and Cockpit.
+
+13. SCOPED AUTHORITIES AND OPEN DIRECTION QUESTIONS
+Use the latest explicit user requirement for the affected scope. Then resolve registered category rules and named exceptions, inherited family rules and applicable defaults. This human-design baseline supplies purpose, construction, scale, material reasoning and production process. Approved architecture supplies room envelopes and locations. Cockpit owns shared visual recipes and final art direction. Version numbers from different guides are independent, not a global precedence ranking.
+
+Pinned complementary authorities for this revision:
+- Aurora Production Style Guide v1.2: /Users/evanrobinson/Documents/Codex/2026-10-04/w/outputs/aurora-style-guide/production-guide.txt
+- Tokens v1.2: /Users/evanrobinson/Documents/Codex/2026-10-04/w/outputs/aurora-style-guide/tokens.json
+- Category registry v1.2: /Users/evanrobinson/Documents/Codex/2026-10-04/w/outputs/aurora-style-guide/category-rules.json
+- Independent Visual Acceptance v1.0: /Users/evanrobinson/Documents/Codex/2026-10-04/w/outputs/asset-worker-protocol/references/visual-review.txt
+A companion authority-lock JSON records exact source hashes; if a file changes without a version increment, report that mismatch before claiming the same rules were used.
+
+Category routing:
+equipment.panel — v1.2 panel construction, cream/graphite/orange functional palette, scoped identity grid, slanted identifier and integrated light recipe.
+equipment.control — v1.2 upright functional labels adjacent to controls, inherited parent identity, no repeated oversized panel numeral.
+room.entrance — v1.2 operational plate with separate closure, room-name and resolved compartment fields; no guessed addresses or panel identity grid.
+safety.egress / safety.hazard — v1.2 destination/action, arrow or symbol and legibility rules; decorative identifiers cannot replace directions or warnings.
+personal.crew_issued — v1.2 category-sized owner front/code back treatment, with ownership sourced from the separate assigned crew registry; no biography copied here.
+Furniture, unregistered scientific instruments, decorative room graphics and other uncatalogued families — this baseline governs human purpose and fabrication reasoning; their missing visual recipe is a centrally registered rule-gap, not permission to force the panel grid onto them.
+
+Direction record:
+A. Palette/lighting: the original user brief requested a restrained blue-white reference-room composition. Cockpit v1.2 supplies cream/graphite/orange and warmer panel lights as art-direction defaults. These can coexist as different scopes. An asset explicitly required to satisfy both incompatible treatments needs a recorded scope decision; this revision does not assert that Evan rescinded the original reference brief.
+B. Numerals: Evan’s earlier large thick italic number preference was interpreted in v1.0.0 as room numerals. The user-requested category guide v1.2 restricts its angular/slanted identity recipe to equipment panels and keeps operational signs upright. Preserve both records. Operational category signage follows v1.2; extending slanted decorative identity to room-scale artwork remains unresolved until the design owner records the scope, returning consequential changes to Evan. No existing numeral or sign is rebuilt by this document update.
+
+Acceptance follows the independent-review protocol for the assigned delivery profile. Reviewer must be independent of the author/repairer, inspect exact-revision visual evidence and retain PASS/FAIL/UNVERIFIED findings. After three failed independent review verdicts against the current brief, stop automatic repair/render cycles and request human review; changing revision or reviewer does not reset that count. General encouragement to continue reversible work does not override this explicit stop rule.
+
+Future briefs and manifests record the human-design version/commit, category ID, production-guide/category/token versions and hashes, review-protocol version, exceptions and unresolved decisions. These are documentation requirements, not a claim that an automatic enforcement system exists. Adoption creates no build authorization and no retroactive acceptance.

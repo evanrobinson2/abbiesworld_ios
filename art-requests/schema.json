@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://abbies.world/schemas/art-request.json",
+  "title": "AbbieArtRequest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "id",
+    "semanticId",
+    "status",
+    "priority",
+    "type",
+    "brief",
+    "aspect",
+    "styleNotes",
+    "keepStockIcon",
+    "relatedPaths",
+    "promptSeeds",
+    "requestedBy",
+    "createdAt"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Filename stem without .json. Prefer YYYYMMDD-short-kebab.",
+      "pattern": "^[a-z0-9][a-z0-9-]{2,80}$"
+    },
+    "semanticId": {
+      "type": "string",
+      "description": "Stable Game Asset / local library semantic ID (join key)."
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "character_concept",
+        "production_sprite",
+        "plate",
+        "map_token",
+        "ui_icon",
+        "fx",
+        "sfx",
+        "music",
+        "decision",
+        "other"
+      ]
+    },
+    "kind": {
+      "type": "string",
+      "description": "Legacy coarse bucket; prefer type. Kept for older tooling.",
+      "enum": ["token", "plate", "portrait", "ui", "fx", "sfx", "music", "other"]
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["blocker", "high", "normal", "low", "optional"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "in_review", "fulfilled", "wont_fix"]
+    },
+    "placeholder": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "sf_symbol",
+            "world2_placeholder_pack",
+            "missing_catalog",
+            "provisional_reuse",
+            "temp_prototype",
+            "none"
+          ]
+        },
+        "detail": { "type": "string" }
+      }
+    },
+    "keepStockIcon": { "type": "boolean" },
+    "surface": { "type": "string" },
+    "brief": { "type": "string" },
+    "aspect": { "type": "string" },
+    "styleNotes": { "type": "string" },
+    "relatedPaths": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Repo-relative paths only. Prefer committed images + provenance."
+    },
+    "promptSeeds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "requestedBy": { "type": "string" },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "requestedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Legacy alias of createdAt."
+    },
+    "gameArea": { "type": "string" },
+    "usage": { "type": "string" },
+    "targetPixelSize": { "type": "string" },
+    "expectedBackground": { "type": "string" },
+    "characterOrAssetName": { "type": "string" },
+    "pose": { "type": "string" },
+    "facing": { "type": "string" },
+    "productionIntent": {
+      "type": "string",
+      "enum": [
+        "concept_only",
+        "production_sprite",
+        "runtime_bind",
+        "verified_in_app",
+        "keep_stock_decision"
+      ]
+    },
+    "existingAssetSemanticIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "referenceRequestIds": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "acceptanceCriteria": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "sessionNote": { "type": "string" },
+    "fulfillment": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "completedAt": { "type": "string", "format": "date-time" },
+        "completedBy": { "type": "string" },
+        "assetSourcePath": { "type": "string" },
+        "catalogOrLibraryPath": { "type": "string" },
+        "sourceHashSha256": { "type": "string" },
+        "notes": { "type": "string" }
+      }
+    }
+  }
+}

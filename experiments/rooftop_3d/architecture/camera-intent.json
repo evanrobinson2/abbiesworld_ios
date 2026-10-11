@@ -1,0 +1,14 @@
+{
+  "status": "User camera direction; supersedes literal tripod interpretation",
+  "intent": "The viewer feels beside the foreground tree, near the support arm under the couch, looking toward the doorway and mountains.",
+  "tripod": "A spatial metaphor. No four-foot height or literal support-branch constraint.",
+  "composition_priorities": [
+    "Tree is close in the left foreground and curves overhead.",
+    "Couch leads away from the viewer on the left.",
+    "Door/window recess sits beyond the couch, left of centre.",
+    "Canopy underside is visible overhead.",
+    "Open deck and mountain view extend to the right."
+  ],
+  "workflow": "Judge these relationships together; treat adopted model layout as revisable. Do not ask the user for azimuth or technical camera settings.",
+  "diagnostic": "A06 adds foreground tree and couch landmarks, but is not an approved camera or geometry match. Its lens and shift reach bounds, and the adopted alcove remains too oblique."
+}

@@ -1,0 +1,2361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="theme-color" content="#0a0a0c" />
+  <meta name="format-detection" content="telephone=no" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/plates/home.jpg" />
+  <title>Review · Abbie’s World</title>
+  <style>
+    :root {
+      --ink: #f7f1e8;
+      --muted: rgba(247, 241, 232, 0.62);
+      --board: #6bcf8e;
+      --dump: #e07a6a;
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+      --safe-left: env(safe-area-inset-left, 0px);
+      --safe-right: env(safe-area-inset-right, 0px);
+      --app-height: 100dvh;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    html, body {
+      margin: 0;
+      height: 100%;
+      height: var(--app-height);
+      overflow: hidden;
+      background: #0a0a0c;
+      color: var(--ink);
+      font-family: "SF Pro Display", "Avenir Next", system-ui, sans-serif;
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+      overscroll-behavior: none;
+      -webkit-text-size-adjust: 100%;
+    }
+    #stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      height: var(--app-height);
+      overflow: hidden;
+      background: #0a0a0c;
+    }
+    #card {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      will-change: transform, opacity;
+      transform: translate3d(0, 0, 0);
+      backface-visibility: hidden;
+    }
+    #plate {
+      max-width: 100%;
+      max-height: 100%;
+      width: 100%;
+      height: 100%;
+      padding:
+        calc(56px + var(--safe-top))
+        calc(8px + var(--safe-right))
+        calc(52px + var(--safe-bottom))
+        calc(8px + var(--safe-left));
+      object-fit: contain;
+      object-position: center;
+      background: #111;
+      pointer-events: none;
+    }
+    /* Stylized candidate numeral — bold 3-digit with hard drop shadow */
+    #numeral {
+      position: absolute;
+      left: calc(18px + var(--safe-left));
+      bottom: calc(64px + var(--safe-bottom));
+      z-index: 6;
+      margin: 0;
+      padding: 0;
+      pointer-events: none;
+      font-family: "SF Pro Display", "Avenir Next Condensed", "Avenir Next", system-ui, sans-serif;
+      font-size: clamp(4.2rem, 18vw, 7.5rem);
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.04em;
+      line-height: 0.85;
+      color: #fff8ef;
+      -webkit-text-stroke: 1.5px rgba(8, 6, 4, 0.55);
+      text-shadow:
+        0 1px 0 rgba(8, 6, 4, 0.95),
+        0 3px 0 rgba(8, 6, 4, 0.88),
+        0 6px 0 rgba(8, 6, 4, 0.72),
+        0 10px 0 rgba(8, 6, 4, 0.45),
+        0 18px 28px rgba(0, 0, 0, 0.55);
+      transform: rotate(-4deg);
+      opacity: 0.96;
+    }
+    @media (max-width: 520px) {
+      #numeral {
+        font-size: clamp(3.4rem, 22vw, 5.2rem);
+        bottom: calc(72px + var(--safe-bottom));
+        left: calc(14px + var(--safe-left));
+      }
+    }
+    .veil {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 80ms linear;
+    }
+    .veil.board { background: linear-gradient(180deg, rgba(107,207,142,0.55), rgba(107,207,142,0.08) 45%, transparent); }
+    .veil.dump { background: linear-gradient(0deg, rgba(224,122,106,0.55), rgba(224,122,106,0.08) 45%, transparent); }
+    .veil.history { background: linear-gradient(0deg, rgba(120,180,255,0.4), rgba(120,180,255,0.06) 45%, transparent); }
+    .veil.show { opacity: 1; }
+
+    #chrome {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding:
+        calc(12px + var(--safe-top))
+        calc(18px + var(--safe-right))
+        calc(18px + var(--safe-bottom))
+        calc(18px + var(--safe-left));
+    }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.75);
+    }
+    .title {
+      font-size: clamp(1rem, 2.2vw, 1.35rem);
+      font-weight: 650;
+      letter-spacing: 0.01em;
+      max-width: 70vw;
+      line-height: 1.2;
+    }
+    .semantic {
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-family: ui-monospace, Menlo, monospace;
+      margin-top: 0.25rem;
+      word-break: break-all;
+    }
+    .counter {
+      font-variant-numeric: tabular-nums;
+      font-size: 1.1rem;
+      font-weight: 600;
+      opacity: 0.9;
+      white-space: nowrap;
+    }
+
+    .hint-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 12px;
+      /* Sit above the collapsed drawer handle */
+      padding-bottom: calc(28px + var(--safe-bottom));
+    }
+    @media (max-width: 520px) {
+      .hint { font-size: 0.62rem; letter-spacing: 0.1em; }
+      .title { max-width: 64vw; font-size: 1.05rem; }
+      .semantic { font-size: 0.65rem; }
+      .thumb { width: 96px; height: 64px; }
+    }
+    .hint {
+      font-size: 0.7rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.8);
+    }
+    .hint strong { color: var(--ink); font-weight: 650; letter-spacing: 0.08em; }
+    .hint.board strong { color: var(--board); }
+    .hint.dump strong { color: var(--dump); }
+    .hint.center {
+      text-align: center;
+      flex: 1;
+    }
+
+    #flash {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.92);
+      transition: opacity 120ms ease, transform 120ms ease;
+      font-size: clamp(2rem, 8vw, 4rem);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-shadow: 0 4px 24px rgba(0,0,0,0.55);
+    }
+    #flash.show { opacity: 1; transform: scale(1); }
+    #flash.board { color: var(--board); }
+    #flash.dump { color: var(--dump); }
+
+    #done {
+      position: absolute;
+      inset: 0;
+      display: none;
+      place-items: start center;
+      background: #0a0a0c;
+      padding:
+        calc(1.25rem + var(--safe-top))
+        1rem
+        calc(1.5rem + var(--safe-bottom));
+      text-align: center;
+      z-index: 40;
+      overflow: auto;
+      pointer-events: auto;
+      touch-action: pan-y;
+    }
+    #done.show { display: grid; }
+    #done > div {
+      width: min(96vw, 52rem);
+    }
+    #done h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+    }
+    #done p { color: var(--muted); margin: 0 0 1rem; max-width: 40rem; margin-left: auto; margin-right: auto; line-height: 1.4; }
+    #done .log { display: none; }
+    #history-floor {
+      position: absolute;
+      inset: 0;
+      z-index: 12;
+      display: none;
+      flex-direction: column;
+      background: #0a0a0c;
+      padding:
+        calc(10px + var(--safe-top))
+        calc(8px + var(--safe-right))
+        calc(12px + var(--safe-bottom))
+        calc(8px + var(--safe-left));
+    }
+    #history-floor.show { display: flex; }
+    #history-floor .hist-chrome {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    #history-floor .title { font-weight: 700; font-size: 1.05rem; }
+    #history-floor .semantic { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+    #history-floor .counter { color: var(--muted); font-variant-numeric: tabular-nums; }
+    #hist-refresh {
+      font: inherit;
+      font-size: 0.72rem;
+      font-weight: 650;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.35rem 0.65rem;
+      background: rgba(247, 241, 232, 0.1);
+      color: var(--ink);
+      cursor: pointer;
+    }
+    #hist-viewport {
+      flex: 1;
+      overflow: hidden;
+      min-height: 0;
+    }
+    #hist-track {
+      display: flex;
+      height: 100%;
+      will-change: transform;
+    }
+    .hist-card {
+      flex: 0 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 8px;
+      height: 100%;
+      padding: 4px 2px 8px;
+      align-items: stretch;
+      box-sizing: border-box;
+    }
+    .hist-pane, .hist-mini {
+      border: 1px solid rgba(247, 241, 232, 0.1);
+      border-radius: 12px;
+      background: #16151a;
+      overflow: hidden;
+      min-width: 0;
+    }
+    .hist-pane {
+      padding: 10px;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .hist-pane .k {
+      color: var(--muted);
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .hist-pane .prompt { font-size: 0.82rem; line-height: 1.35; }
+    .hist-pane .meta { color: var(--muted); font-size: 0.75rem; margin-top: 8px; }
+    .hist-mini {
+      display: grid;
+      place-items: center;
+      position: relative;
+      background: #111;
+    }
+    .hist-mini img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+    }
+    .hist-mini .num {
+      position: absolute;
+      left: 8px;
+      bottom: 8px;
+      font-weight: 900;
+      font-size: 2.2rem;
+      line-height: 0.85;
+      color: #fff8ef;
+      pointer-events: none;
+    }
+    .hist-acts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .hist-acts button {
+      font: inherit;
+      font-weight: 650;
+      font-size: 0.78rem;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.5rem 0.7rem;
+      cursor: pointer;
+      background: var(--ink);
+      color: #111;
+    }
+    .hist-acts button.ghost {
+      background: rgba(247, 241, 232, 0.1);
+      color: var(--ink);
+    }
+    .hist-acts button.dump {
+      background: var(--dump);
+      color: #1a0d0a;
+    }
+    .hist-hints {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.72rem;
+      padding-top: 8px;
+    }
+    #undo-bar {
+      position: absolute;
+      left: 50%;
+      bottom: calc(18px + var(--safe-bottom));
+      transform: translateX(-50%);
+      z-index: 16;
+      display: none;
+      align-items: center;
+      gap: 12px;
+      background: #1c1b20;
+      border: 1px solid rgba(247, 241, 232, 0.14);
+      border-radius: 999px;
+      padding: 0.45rem 0.5rem 0.45rem 0.9rem;
+      color: var(--ink);
+      font-size: 0.85rem;
+    }
+    #undo-bar.show { display: flex; }
+    #undo-bar button {
+      font: inherit;
+      font-weight: 700;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.4rem 0.75rem;
+      background: var(--board);
+      color: #102016;
+      cursor: pointer;
+    }
+    body.floor-history .edge-btn.up { /* Now */ }
+    body.floor-history #chrome, body.floor-history #card, body.floor-history #drawer { visibility: hidden; }
+    #history {
+      text-align: left;
+      width: 100%;
+      max-height: min(62vh, 640px);
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 12px;
+      background: #16151a;
+      border: 1px solid rgba(247, 241, 232, 0.08);
+    }
+    #history table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.82rem;
+    }
+    #history th {
+      position: sticky;
+      top: 0;
+      background: #1d1c22;
+      color: var(--muted);
+      font-weight: 650;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-size: 0.65rem;
+      padding: 0.65rem 0.7rem;
+      text-align: left;
+    }
+    #history td {
+      padding: 0.55rem 0.7rem;
+      border-top: 1px solid rgba(247, 241, 232, 0.06);
+      vertical-align: top;
+      color: #e8e0d4;
+    }
+    #history .thumb {
+      width: 56px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #111;
+      display: block;
+    }
+    #history .prompt {
+      max-width: 22rem;
+      line-height: 1.35;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    #history .meta {
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 0.68rem;
+      color: #9aa3ad;
+    }
+    #history .st {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.15rem 0.4rem;
+      border-radius: 999px;
+      background: #2a2830;
+    }
+    #history .st.boarded, #history .st.registered { color: var(--board); }
+    #history .st.dumped { color: var(--dump); }
+    #history .st.harvested, #history .st.awaiting { color: #8ec9ff; }
+    #history .acts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    #history .acts button {
+      margin: 0;
+      padding: 0.4rem 0.7rem;
+      font-size: 0.72rem;
+    }
+    #history .acts button.ghost {
+      background: transparent;
+      color: var(--ink);
+      box-shadow: inset 0 0 0 1px rgba(247, 241, 232, 0.28);
+    }
+    #history .empty {
+      padding: 1.1rem 0.9rem;
+      color: var(--muted);
+    }
+    #done .feedback {
+      text-align: left;
+      max-width: 36rem;
+      width: min(92vw, 36rem);
+      margin: 0 0 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      background: #16151a;
+      color: #cfc4b4;
+      font-size: 0.85rem;
+      line-height: 1.35;
+      max-height: 36vh;
+      overflow: auto;
+    }
+    #done .feedback .row {
+      margin: 0 0 0.65rem;
+    }
+    #done .feedback .row:last-child { margin-bottom: 0; }
+    #done .feedback .kind {
+      color: #8ec9ff;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+    #done button {
+      pointer-events: auto;
+      margin-top: 1.25rem;
+      font: inherit;
+      font-weight: 650;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.7rem 1.4rem;
+      background: var(--ink);
+      color: #111;
+      cursor: pointer;
+    }
+
+    /* Cross hitboxes — adjacent, never overlapping (Mac overlay must match). */
+    :root {
+      --hit-side: 14%;
+      --hit-top: 15%;
+      --hit-bottom: 13%;
+      --hit-gap: 10px;
+      --hit-bottom-clear: calc(36px + var(--safe-bottom));
+    }
+    .edge-btn {
+      pointer-events: none;
+      position: absolute;
+      border: 0;
+      background: transparent;
+      color: transparent;
+      cursor: pointer;
+      z-index: 5;
+    }
+    .edge-btn.left,
+    .edge-btn.right {
+      width: var(--hit-side);
+      top: calc(var(--hit-top) + var(--hit-gap));
+      bottom: calc(var(--hit-bottom-clear) + var(--hit-bottom) + var(--hit-gap));
+      height: auto;
+    }
+    .edge-btn.left { left: 0; }
+    .edge-btn.right { right: 0; }
+    .edge-btn.up {
+      left: calc(var(--hit-side) + var(--hit-gap));
+      right: calc(var(--hit-side) + var(--hit-gap));
+      width: auto;
+      height: var(--hit-top);
+      top: 0;
+      padding-top: var(--safe-top);
+    }
+    .edge-btn.down {
+      left: calc(var(--hit-side) + var(--hit-gap));
+      right: calc(var(--hit-side) + var(--hit-gap));
+      width: auto;
+      height: var(--hit-bottom);
+      top: auto;
+      bottom: var(--hit-bottom-clear);
+      padding-bottom: 0;
+    }
+    @media (hover: hover) and (pointer: fine) {
+      body:not(.hide-hitboxes) .edge-btn.left,
+      body:not(.hide-hitboxes) .edge-btn.right {
+        background: rgba(120, 180, 255, 0.22);
+        box-shadow: inset 0 0 0 1px rgba(120, 180, 255, 0.55);
+      }
+      body:not(.hide-hitboxes) .edge-btn.up {
+        background: rgba(107, 207, 142, 0.22);
+        box-shadow: inset 0 0 0 1px rgba(107, 207, 142, 0.55);
+      }
+      body:not(.hide-hitboxes) .edge-btn.down {
+        background: rgba(224, 122, 106, 0.22);
+        box-shadow: inset 0 0 0 1px rgba(224, 122, 106, 0.55);
+      }
+    }
+    body.show-hitboxes .edge-btn.left,
+    body.show-hitboxes .edge-btn.right {
+      background: rgba(120, 180, 255, 0.22);
+      box-shadow: inset 0 0 0 1px rgba(120, 180, 255, 0.55);
+    }
+    body.show-hitboxes .edge-btn.up {
+      background: rgba(107, 207, 142, 0.22);
+      box-shadow: inset 0 0 0 1px rgba(107, 207, 142, 0.55);
+    }
+    body.show-hitboxes .edge-btn.down {
+      background: rgba(224, 122, 106, 0.22);
+      box-shadow: inset 0 0 0 1px rgba(224, 122, 106, 0.55);
+    }
+
+    /* Bottom drawer — closed = low-profile handle only */
+    #drawer {
+      --drawer-closed: 28px;
+      --drawer-open: 118px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 20;
+      height: calc(var(--drawer-closed) + var(--safe-bottom));
+      padding-bottom: var(--safe-bottom);
+      background: linear-gradient(180deg, transparent, rgba(8, 8, 10, 0.72) 28%, rgba(10, 10, 12, 0.94));
+      transition: height 200ms cubic-bezier(0.2, 0.9, 0.2, 1);
+      pointer-events: auto;
+      touch-action: none;
+    }
+    #drawer.open {
+      height: calc(var(--drawer-open) + var(--safe-bottom));
+      background: linear-gradient(180deg, rgba(8, 8, 10, 0.15), rgba(10, 10, 12, 0.96) 22%);
+    }
+    #drawer.dragging { transition: none; }
+    #drawer-handle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 28px;
+      width: 100%;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      color: inherit;
+    }
+    #drawer-handle .grip {
+      width: 42px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(247, 241, 232, 0.38);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.35);
+      transition: background 120ms ease, width 120ms ease;
+    }
+    #drawer.open #drawer-handle .grip,
+    #drawer-handle:active .grip {
+      background: rgba(247, 241, 232, 0.72);
+      width: 52px;
+    }
+    #thumbs {
+      display: flex;
+      gap: 10px;
+      padding: 0 16px 10px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x proximity;
+      -webkit-overflow-scrolling: touch;
+      touch-action: pan-x;
+      scrollbar-width: none;
+      height: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: height 200ms cubic-bezier(0.2, 0.9, 0.2, 1), opacity 140ms ease;
+    }
+    #thumbs::-webkit-scrollbar { display: none; }
+    #drawer.open #thumbs {
+      height: 82px;
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .thumb {
+      flex: 0 0 auto;
+      width: 112px;
+      height: 72px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      background: #1a1a1e;
+      padding: 0;
+      cursor: pointer;
+      scroll-snap-align: center;
+      position: relative;
+    }
+    .thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+    .thumb.active {
+      border-color: rgba(247, 241, 232, 0.92);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.4);
+    }
+    .thumb .n {
+      position: absolute;
+      left: 5px;
+      bottom: 3px;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+      color: #fff8ef;
+      text-shadow:
+        0 1px 0 rgba(0,0,0,0.95),
+        0 2px 0 rgba(0,0,0,0.75),
+        0 4px 8px rgba(0,0,0,0.65);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Latest toast — home-screen open surface */
+    #toast-host {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      padding:
+        0
+        calc(14px + var(--safe-right))
+        calc(14px + var(--safe-bottom))
+        calc(14px + var(--safe-left));
+      pointer-events: none;
+    }
+    #toast {
+      pointer-events: auto;
+      width: min(100%, 26rem);
+      border-radius: 22px;
+      background: rgba(28, 27, 32, 0.92);
+      border: 1px solid rgba(247, 241, 232, 0.12);
+      box-shadow:
+        0 18px 48px rgba(0, 0, 0, 0.55),
+        0 1px 0 rgba(255, 255, 255, 0.06) inset;
+      backdrop-filter: blur(22px) saturate(1.2);
+      -webkit-backdrop-filter: blur(22px) saturate(1.2);
+      color: var(--ink);
+      transform: translate3d(0, 120%, 0);
+      opacity: 0;
+      transition:
+        transform 320ms cubic-bezier(0.2, 0.9, 0.2, 1),
+        opacity 220ms ease;
+      will-change: transform, opacity;
+      touch-action: none;
+    }
+    #toast.show {
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+    }
+    #toast.dragging { transition: none; }
+    #toast .grab {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0 2px;
+    }
+    #toast .grab span {
+      width: 36px;
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(247, 241, 232, 0.28);
+    }
+    #toast .body {
+      display: grid;
+      grid-template-columns: 64px 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 4px 14px 12px;
+    }
+    #toast .preview {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #141418;
+      border: 1px solid rgba(247, 241, 232, 0.1);
+    }
+    #toast .preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    #toast .preview.empty {
+      display: grid;
+      place-items: center;
+      color: var(--muted);
+      font-size: 1.4rem;
+    }
+    #toast .copy { min-width: 0; }
+    #toast .kicker {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--board);
+      margin: 0 0 0.2rem;
+      font-weight: 650;
+    }
+    #toast.feedback .kicker { color: #8ec9ff; }
+    #toast .headline {
+      font-size: 1.02rem;
+      font-weight: 650;
+      line-height: 1.2;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    #toast .sub {
+      margin: 0.25rem 0 0;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    #toast .dismiss-x {
+      align-self: start;
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(247, 241, 232, 0.08);
+      color: var(--muted);
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+    #toast .actions {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 8px;
+      padding: 0 14px 14px;
+    }
+    #toast .actions button {
+      font: inherit;
+      font-weight: 650;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.72rem 0.9rem;
+      cursor: pointer;
+    }
+    #toast .actions .later {
+      background: rgba(247, 241, 232, 0.08);
+      color: var(--ink);
+    }
+    #toast .actions .review {
+      background: var(--ink);
+      color: #111;
+    }
+    #done.quiet {
+      background: radial-gradient(ellipse at 50% 30%, #16151c 0%, #0a0a0c 65%);
+    }
+    #done.quiet h1 { font-size: clamp(1.35rem, 3.5vw, 1.9rem); opacity: 0.92; }
+    #done.quiet .log { opacity: 0.72; max-height: 28vh; }
+
+    #push-banner {
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      z-index: 45;
+      display: none;
+      padding:
+        calc(10px + var(--safe-top))
+        calc(14px + var(--safe-right))
+        10px
+        calc(14px + var(--safe-left));
+      pointer-events: none;
+    }
+    #push-banner.show { display: block; }
+    #push-banner .card {
+      pointer-events: auto;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: center;
+      max-width: 26rem;
+      margin: 0 auto;
+      padding: 12px 14px;
+      border-radius: 18px;
+      background: rgba(28, 27, 32, 0.94);
+      border: 1px solid rgba(247, 241, 232, 0.12);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    #push-banner .copy {
+      min-width: 0;
+    }
+    #push-banner .kicker {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #8ec9ff;
+      font-weight: 650;
+      margin: 0 0 0.15rem;
+    }
+    #push-banner p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.3;
+      color: var(--ink);
+    }
+    #push-banner .hint {
+      margin-top: 0.2rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    #push-banner .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    #push-banner button {
+      font: inherit;
+      font-weight: 650;
+      font-size: 0.82rem;
+      border: 0;
+      border-radius: 999px;
+      padding: 0.55rem 0.85rem;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+    #push-banner .enable {
+      background: var(--ink);
+      color: #111;
+    }
+    #push-banner .skip {
+      background: rgba(247, 241, 232, 0.08);
+      color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="card">
+      <img id="plate" alt="Candidate" draggable="false" />
+      <div class="veil board" id="veilBoard"></div>
+      <div class="veil dump" id="veilDump"></div>
+      <div class="veil history" id="veilHistory"></div>
+      <p id="numeral" aria-hidden="true">001</p>
+    </div>
+
+    <div id="chrome">
+      <div class="top">
+        <div>
+          <div class="title" id="title">Loading…</div>
+          <div class="semantic" id="semantic"></div>
+        </div>
+        <div class="counter" id="counter">–/–</div>
+      </div>
+      <div class="hint-row">
+        <div class="hint">← → <strong>browse</strong></div>
+        <div class="hint center board">↑ <strong>Keep</strong></div>
+        <div class="hint dump">↓ <strong>History</strong></div>
+      </div>
+    </div>
+
+    <div id="flash"></div>
+
+    <button type="button" class="edge-btn left" aria-label="Previous candidate" data-act="prev"></button>
+    <button type="button" class="edge-btn right" aria-label="Next candidate" data-act="next"></button>
+    <button type="button" class="edge-btn up" aria-label="Keep" data-act="board"></button>
+    <button type="button" class="edge-btn down" aria-label="History" data-act="history"></button>
+
+    <div id="drawer" aria-expanded="false">
+      <button type="button" id="drawer-handle" aria-label="Open candidate strip">
+        <span class="grip" aria-hidden="true"></span>
+      </button>
+      <div id="thumbs" role="listbox" aria-label="Candidates"></div>
+    </div>
+
+    <div id="history-floor" hidden>
+      <div class="hist-chrome">
+        <div>
+          <div class="title" id="histTitle">History</div>
+          <div class="semantic" id="histSub">Prompt · plate · details</div>
+        </div>
+        <div class="counter" id="histCounter">–/–</div>
+        <button type="button" id="hist-refresh" class="hist-refresh">Refresh</button>
+      </div>
+      <div id="hist-viewport">
+        <div id="hist-track"></div>
+      </div>
+      <div class="hist-hints">
+        <div>← → plates</div>
+        <div>↑ Now</div>
+        <div>Unkeep pulls registry bytes</div>
+      </div>
+    </div>
+
+    <div id="undo-bar" hidden>
+      <span id="undo-label">Kept</span>
+      <button type="button" id="undo-btn">Undo</button>
+    </div>
+
+    <div id="done">
+      <div>
+        <h1 id="doneTitle">Deck clear</h1>
+        <p id="doneBlurb">Nothing waiting to swipe. History is the carousel.</p>
+        <div class="feedback" id="feedbackBox" hidden></div>
+        <div id="history" hidden aria-hidden="true"></div>
+        <pre class="log" id="log"></pre>
+        <button type="button" id="reset">Refresh inbox</button>
+      </div>
+    </div>
+
+    <div id="push-banner" aria-live="polite">
+      <div class="card">
+        <div class="copy">
+          <div class="kicker">Notifications</div>
+          <p id="pushCopy">Alert me when art is ready to Board/Dump</p>
+          <div class="hint" id="pushHint">Works from Safari home screen on iPhone</div>
+        </div>
+        <div class="actions">
+          <button type="button" class="enable" id="pushEnable">Enable</button>
+          <button type="button" class="skip" id="pushSkip">Not now</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="toast-host" aria-live="polite">
+      <div id="toast" role="dialog" aria-modal="false" aria-labelledby="toastHeadline" hidden>
+        <div class="grab" aria-hidden="true"><span></span></div>
+        <div class="body">
+          <div class="preview empty" id="toastPreview" aria-hidden="true">✦</div>
+          <div class="copy">
+            <div class="kicker" id="toastKicker">Ready to review</div>
+            <p class="headline" id="toastHeadline">Latest</p>
+            <p class="sub" id="toastSub"></p>
+          </div>
+          <button type="button" class="dismiss-x" id="toastClose" aria-label="Dismiss">×</button>
+        </div>
+        <div class="actions">
+          <button type="button" class="later" id="toastLater">Later</button>
+          <button type="button" class="review" id="toastReview">Review</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const THRESH = 56;
+    const VELOCITY = 0.28;
+    const TAP_SLOP = 14;
+    const SNAP_MS = 120;
+    const FLY_MS = 260;
+    const BROWSE_MS = 170;
+    const LONG_PRESS_MS = 520;
+    const UNDO_MS = 4000;
+    const EASE_SNAP = "cubic-bezier(0.25, 0.1, 0.25, 1)";
+    const EASE_FLY = "cubic-bezier(0.22, 1, 0.36, 1)";
+    const STORAGE_KEY = "abbies.mission.review.decisions.v1";
+    const TOAST_DISMISS_KEY = "abbies.mission.review.toastDismissed.v1";
+    const PUSH_SKIP_KEY = "abbies.mission.review.pushSkip.v1";
+    const DRAWER_CLOSED = 28;
+    const DRAWER_OPEN = 118;
+
+    const state = {
+      deck: null,
+      index: 0,
+      decisions: [],
+      dragging: false,
+      startX: 0,
+      startY: 0,
+      dx: 0,
+      dy: 0,
+      t0: 0,
+      locked: false,
+      drawerOpen: false,
+      drawerDrag: null,
+      toast: null,
+      toastDrag: null,
+      cardAnim: null,
+      history: [],
+      historyLoading: false,
+      floor: "now",
+      histIndex: 0,
+      lastAct: null,
+      undoTimer: null,
+      pressTimer: null,
+    };
+
+    (function applyHitboxMode() {
+      const q = new URLSearchParams(location.search);
+      if (q.get("hitboxes") === "1") document.body.classList.add("show-hitboxes");
+      if (q.get("hitboxes") === "0") document.body.classList.add("hide-hitboxes");
+    })();
+
+    const $ = (id) => document.getElementById(id);
+    const card = $("card");
+    const plate = $("plate");
+    const flash = $("flash");
+    const done = $("done");
+    const drawer = $("drawer");
+    const thumbs = $("thumbs");
+
+    /** Prefer lighter preview for phone strip; full URL for the hero plate. */
+    function mediaUrl(c, kind = "full") {
+      if (!c) return "";
+      if (kind === "thumb") {
+        return c.previewUrl || c.thumbUrl || c.url || "";
+      }
+      return c.url || c.previewUrl || c.thumbUrl || "";
+    }
+
+    function pad3(n) {
+      const v = Math.max(0, Math.floor(Number(n) || 0));
+      return String(v).padStart(3, "0");
+    }
+
+    function syncAppHeight() {
+      // iOS Safari: keep the stage inside the visible viewport (not 100% of layout viewport).
+      const h = window.visualViewport?.height || window.innerHeight;
+      document.documentElement.style.setProperty("--app-height", `${Math.round(h)}px`);
+    }
+    syncAppHeight();
+    window.addEventListener("resize", syncAppHeight);
+    window.addEventListener("resize", () => {
+      if (state.floor === "history") snapHistTrack();
+    });
+    window.visualViewport?.addEventListener("resize", syncAppHeight);
+
+    function buzz(ms = 12) {
+      try { navigator.vibrate?.(ms); } catch { /* ignore */ }
+    }
+
+    function drawerHeights() {
+      const safe = parseFloat(getComputedStyle(document.documentElement).getPropertyValue("--safe-bottom")) || 0;
+      // safe-area is in env(); use padding from drawer itself
+      const pad = parseFloat(getComputedStyle(drawer).paddingBottom) || 0;
+      return {
+        closed: DRAWER_CLOSED + pad,
+        open: DRAWER_OPEN + pad,
+      };
+    }
+
+    function setDrawerOpen(open, { animate = true } = {}) {
+      state.drawerOpen = !!open;
+      if (!animate) drawer.classList.add("dragging");
+      drawer.classList.toggle("open", state.drawerOpen);
+      drawer.setAttribute("aria-expanded", state.drawerOpen ? "true" : "false");
+      $("drawer-handle").setAttribute(
+        "aria-label",
+        state.drawerOpen ? "Close candidate strip" : "Open candidate strip"
+      );
+      if (!animate) {
+        requestAnimationFrame(() => drawer.classList.remove("dragging"));
+      }
+      if (state.drawerOpen) {
+        const active = thumbs.querySelector(".thumb.active");
+        active?.scrollIntoView({ inline: "center", block: "nearest", behavior: "smooth" });
+      }
+      buzz(8);
+    }
+
+    function loadDecisions() {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveDecision(entry) {
+      state.decisions.push(entry);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(state.decisions));
+    }
+
+    function current() {
+      return state.deck?.candidates?.[state.index] || null;
+    }
+
+    function renderThumbs() {
+      thumbs.replaceChildren();
+      if (!state.deck?.candidates?.length) return;
+      state.deck.candidates.forEach((c, i) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "thumb" + (i === state.index ? " active" : "");
+        btn.setAttribute("role", "option");
+        btn.setAttribute("aria-selected", i === state.index ? "true" : "false");
+        btn.dataset.index = String(i);
+        const img = document.createElement("img");
+        img.src = mediaUrl(c, "thumb");
+        img.alt = c.label || `Candidate ${c.index}`;
+        img.draggable = false;
+        img.loading = "lazy";
+        img.decoding = "async";
+        const n = document.createElement("span");
+        n.className = "n";
+        n.textContent = pad3(c.index);
+        btn.append(img, n);
+        btn.addEventListener("click", (e) => {
+          e.stopPropagation();
+          jumpTo(i);
+        });
+        thumbs.append(btn);
+      });
+    }
+
+    function render() {
+      const c = current();
+      if (!c) {
+        setDrawerOpen(false, { animate: true });
+        showDone();
+        return;
+      }
+      done.classList.remove("show");
+      $("title").textContent = state.deck.title || "Review";
+      $("semantic").textContent = state.deck.semanticId || "";
+      $("counter").textContent = `${state.index + 1}/${state.deck.candidates.length}`;
+      $("numeral").textContent = pad3(c.index);
+      plate.decoding = "async";
+      plate.src = mediaUrl(c, "full");
+      plate.alt = c.label || `Candidate ${c.index}`;
+      renderThumbs();
+      resetCard(false);
+      const next = state.deck.candidates[state.index + 1];
+      if (next) {
+        const warm = new Image();
+        warm.decoding = "async";
+        warm.src = mediaUrl(next, "full");
+      }
+    }
+
+    function resetCard(animate) {
+      $("veilBoard").classList.remove("show");
+      $("veilDump").classList.remove("show");
+      $("veilHistory")?.classList.remove("show");
+      state.dx = 0;
+      state.dy = 0;
+      const home = { transform: "translate3d(0px, 0px, 0) rotate(0deg)", opacity: 1 };
+      if (animate) {
+        return animateCard(home, SNAP_MS, EASE_SNAP);
+      }
+      cancelCardAnim();
+      card.style.transform = home.transform;
+      card.style.opacity = "1";
+      return Promise.resolve();
+    }
+
+    function renderFeedback(items) {
+      const box = $("feedbackBox");
+      const list = Array.isArray(items) ? items.filter(Boolean) : [];
+      if (!list.length) {
+        box.hidden = true;
+        box.replaceChildren();
+        return;
+      }
+      box.hidden = false;
+      box.replaceChildren();
+      const head = document.createElement("div");
+      head.className = "kind";
+      head.textContent = "ChatGPT / Mission feedback";
+      box.append(head);
+      list.slice(-8).forEach((f) => {
+        const row = document.createElement("div");
+        row.className = "row";
+        const kind = document.createElement("div");
+        kind.className = "kind";
+        kind.textContent = f.kind || f.surface || "general";
+        const text = document.createElement("div");
+        text.textContent = f.text || "";
+        row.append(kind, text);
+        box.append(row);
+      });
+    }
+
+    function showDone(opts = {}) {
+      done.classList.remove("show");
+      if (opts.title) $("histTitle").textContent = opts.title;
+      if (opts.history) renderHistory(opts.history);
+      enterHistory({ load: !opts.history });
+    }
+
+    function histRow() {
+      return (state.history || [])[state.histIndex] || null;
+    }
+
+    function snapHistTrack() {
+      const track = $("hist-track");
+      const viewport = $("hist-viewport");
+      if (!track) return;
+      const n = Math.max(1, (state.history || []).length);
+      state.histIndex = Math.min(Math.max(0, state.histIndex), n - 1);
+      const vw = viewport?.clientWidth || window.innerWidth;
+      track.querySelectorAll(".hist-card").forEach((el) => {
+        el.style.width = `${vw}px`;
+      });
+      track.style.transition = `transform ${BROWSE_MS}ms ${EASE_FLY}`;
+      track.style.transform = `translate3d(${-state.histIndex * vw}px, 0, 0)`;
+      $("histCounter").textContent = `${state.history.length ? state.histIndex + 1 : 0}/${state.history.length || 0}`;
+      const row = histRow();
+      $("histSub").textContent = row
+        ? `${row.semanticId || "—"} · ${row.status || ""}`
+        : "No plates yet";
+    }
+
+    function enterHistory({ load = false } = {}) {
+      state.floor = "history";
+      document.body.classList.add("floor-history");
+      const el = $("history-floor");
+      el.hidden = false;
+      el.classList.add("show");
+      document.querySelector(".edge-btn.up")?.setAttribute("aria-label", "Now");
+      document.querySelector(".edge-btn.up")?.setAttribute("data-act", "now");
+      if (load || !state.history.length) loadHistory();
+      else snapHistTrack();
+    }
+
+    function exitHistory() {
+      const live = (state.deck?.candidates || []).length;
+      if (!live) {
+        buzz(8);
+        return;
+      }
+      state.floor = "now";
+      document.body.classList.remove("floor-history");
+      $("history-floor").classList.remove("show");
+      $("history-floor").hidden = true;
+      const up = document.querySelector(".edge-btn.up");
+      up?.setAttribute("aria-label", "Keep");
+      up?.setAttribute("data-act", "board");
+      done.classList.remove("show");
+      render();
+    }
+
+    function renderHistory(rows) {
+      const track = $("hist-track");
+      if (!track) return;
+      const list = Array.isArray(rows) ? rows : [];
+      state.history = list;
+      if (!list.length) {
+        track.innerHTML = `<div class="hist-card"><div class="hist-pane"><div class="k">History</div><div class="prompt">${state.historyLoading ? "Loading…" : "No harvested plates yet."}</div></div></div>`;
+        state.histIndex = 0;
+        snapHistTrack();
+        return;
+      }
+      track.innerHTML = list.map((row) => {
+        const st = String(row.status || "queued");
+        const prompt = String(row.prompt || "").slice(0, 420);
+        const when = String(row.at || "").replace("T", " ").slice(0, 16);
+        const img = row.previewUrl || row.url
+          ? `<img src="${escapeAttr(row.previewUrl || row.url)}" alt="" />`
+          : "";
+        const canUnkeep = st === "boarded" && row.proofId;
+        const canRestore = st === "dumped" && row.proofId;
+        const canOpen = Boolean(row.missionId && row.proofId && (st === "awaiting" || canRestore));
+        const canReg = Boolean(row.url && row.semanticId);
+        return `<article class="hist-card" data-id="${escapeAttr(row.id)}">
+          <div class="hist-pane">
+            <div class="k">Prompt</div>
+            <div class="prompt">${escapeHtml(prompt || "(no prompt)")}</div>
+          </div>
+          <div class="hist-mini">
+            ${img}
+            <div class="num">${pad3(row.candidateIndex)}</div>
+          </div>
+          <div class="hist-pane">
+            <div class="k">Details</div>
+            <div class="prompt">${escapeHtml(st)}</div>
+            <div class="meta">${escapeHtml(row.semanticId || "—")}</div>
+            <div class="meta">${escapeHtml(when)} · #${row.candidateIndex || "–"}</div>
+            <div class="meta">${st === "boarded" ? "Awaiting MCP wire" : ""}</div>
+            <div class="hist-acts">
+              ${canUnkeep ? `<button type="button" data-hist="unkeep" data-id="${escapeAttr(row.id)}">Unkeep · delete bytes</button>` : ""}
+              ${canRestore ? `<button type="button" class="ghost" data-hist="restore" data-id="${escapeAttr(row.id)}">Restore to Now</button>` : ""}
+              ${canOpen && st === "awaiting" ? `<button type="button" class="ghost" data-hist="open" data-id="${escapeAttr(row.id)}">Open Now</button>` : ""}
+              ${canReg && !canUnkeep ? `<button type="button" class="ghost" data-hist="registry" data-id="${escapeAttr(row.id)}">Resend registry</button>` : ""}
+            </div>
+          </div>
+        </article>`;
+      }).join("");
+      if (state.histIndex >= list.length) state.histIndex = list.length - 1;
+      snapHistTrack();
+    }
+
+    function escapeHtml(s) {
+      return String(s || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+    function escapeAttr(s) {
+      return escapeHtml(s).replace(/'/g, "&#39;");
+    }
+
+    async function loadHistory() {
+      state.historyLoading = true;
+      try {
+        const res = await fetch(MISSIONS_API);
+        const payload = await res.json().catch(() => ({}));
+        if (res.ok) renderHistory(payload.history || []);
+        else renderHistory([]);
+      } catch {
+        renderHistory([]);
+      } finally {
+        state.historyLoading = false;
+      }
+    }
+
+    function showUndo(act) {
+      state.lastAct = act;
+      clearTimeout(state.undoTimer);
+      const bar = $("undo-bar");
+      $("undo-label").textContent = act.action === "board" ? "Kept" : "Dumped";
+      bar.hidden = false;
+      bar.classList.add("show");
+      state.undoTimer = setTimeout(() => hideUndo(), UNDO_MS);
+    }
+
+    function hideUndo() {
+      clearTimeout(state.undoTimer);
+      state.undoTimer = null;
+      $("undo-bar").classList.remove("show");
+      $("undo-bar").hidden = true;
+    }
+
+    async function undoLast() {
+      const act = state.lastAct;
+      hideUndo();
+      if (!act) return;
+      const reverse = act.action === "board" ? "unkeep" : "restore";
+      await postReverse(reverse, act);
+    }
+
+    async function postReverse(action, row) {
+      if (!row?.missionId || !row?.proofId) {
+        flashLabel("dump", "Local only");
+        return;
+      }
+      try {
+        const res = await fetch(MISSIONS_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            missionId: row.missionId,
+            proofId: row.proofId,
+            action,
+            candidateIndex: row.candidateIndex,
+            surface: "mobile",
+          }),
+        });
+        const payload = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          flashLabel("dump", "Undo fail");
+          console.warn("[review] reverse", res.status, payload);
+          return;
+        }
+        flashLabel("board", action === "unkeep" ? "Unkept" : "Restored");
+        if (payload.history) renderHistory(payload.history);
+        const all = loadDecisions().filter((d) => !(
+          d.deckId === row.deckId &&
+          d.candidateIndex === row.candidateIndex &&
+          (d.action === "board" || d.action === "dump")
+        ));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+        if (row.missionId) {
+          const qs = new URLSearchParams({ missionId: row.missionId, proofId: row.proofId });
+          history.replaceState({}, "", `${location.pathname}?${qs}`);
+        }
+        await boot();
+      } catch (err) {
+        console.warn("[review] reverse failed", err);
+        flashLabel("dump", "Undo fail");
+      }
+    }
+
+    async function sendToRegistry(row) {
+      if (!row?.url || !row.semanticId) {
+        flashLabel("dump", "Need id");
+        return;
+      }
+      flashLabel("board", "Registry…");
+      try {
+        const res = await fetch(MISSIONS_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            action: "registry",
+            missionId: row.missionId || undefined,
+            proofId: row.proofId || undefined,
+            candidateIndex: row.candidateIndex,
+            semanticId: row.semanticId,
+            url: row.url,
+            prompt: row.prompt,
+            surface: "ipad_history",
+          }),
+        });
+        const payload = await res.json().catch(() => ({}));
+        if (!res.ok || payload.registry?.error) {
+          flashLabel("dump", "Registry fail");
+          console.warn("[review] registry", res.status, payload);
+          return;
+        }
+        flashLabel("board", payload.registry?.status === "needs_review" ? "Needs review" : "Registered");
+        if (payload.history) renderHistory(payload.history);
+      } catch (err) {
+        console.warn("[review] registry failed", err);
+        flashLabel("dump", "Registry fail");
+      }
+    }
+
+    function loadToastDismissed() {
+      try {
+        return JSON.parse(localStorage.getItem(TOAST_DISMISS_KEY) || "{}");
+      } catch {
+        return {};
+      }
+    }
+
+    function markToastDismissed(key) {
+      if (!key) return;
+      const map = loadToastDismissed();
+      map[key] = new Date().toISOString();
+      localStorage.setItem(TOAST_DISMISS_KEY, JSON.stringify(map));
+    }
+
+    function isToastDismissed(key) {
+      if (!key) return false;
+      return Boolean(loadToastDismissed()[key]);
+    }
+
+    function pickLatestToast(missions) {
+      const awaiting = (missions || [])
+        .filter((m) => m.awaitingProofs > 0 && m.latestAwaiting?.proofId)
+        .sort((a, b) => String(b.latestAwaiting.at || "").localeCompare(String(a.latestAwaiting.at || "")));
+      for (const m of awaiting) {
+        const key = `proof:${m.id}:${m.latestAwaiting.proofId}`;
+        if (isToastDismissed(key)) continue;
+        const n = m.latestAwaiting.candidateCount || 0;
+        return {
+          key,
+          kind: "proof",
+          missionId: m.id,
+          proofId: m.latestAwaiting.proofId,
+          title: m.title || "Art ready",
+          kicker: "Ready to review",
+          sub:
+            (n ? `${n} candidate${n === 1 ? "" : "s"}` : "Candidates ready") +
+            (m.latestAwaiting.semanticId ? ` · ${m.latestAwaiting.semanticId}` : ""),
+          previewUrl: m.latestAwaiting.previewUrl || null,
+          reviewLabel: "Review",
+        };
+      }
+
+      const withFb = (missions || [])
+        .filter((m) => m.lastFeedback?.text)
+        .sort((a, b) => String(b.lastFeedback.at || "").localeCompare(String(a.lastFeedback.at || "")));
+      for (const m of withFb) {
+        const key = `feedback:${m.id}:${m.lastFeedback.at || m.lastFeedback.text}`;
+        if (isToastDismissed(key)) continue;
+        return {
+          key,
+          kind: "feedback",
+          missionId: m.id,
+          proofId: null,
+          title: m.title || "Mission note",
+          kicker: "ChatGPT note",
+          sub: m.lastFeedback.text,
+          previewUrl: null,
+          reviewLabel: "Open",
+        };
+      }
+      return null;
+    }
+
+    function hideToast({ animate = true } = {}) {
+      const el = $("toast");
+      if (!el) return;
+      state.toast = null;
+      el.classList.remove("show", "dragging", "feedback");
+      el.style.transform = "";
+      el.style.opacity = "";
+      if (!animate) {
+        el.hidden = true;
+        return;
+      }
+      setTimeout(() => {
+        if (!state.toast) el.hidden = true;
+      }, 280);
+    }
+
+    function showToast(item) {
+      const el = $("toast");
+      if (!item || !el) {
+        hideToast({ animate: false });
+        return;
+      }
+      state.toast = item;
+      el.hidden = false;
+      el.classList.toggle("feedback", item.kind === "feedback");
+      $("toastKicker").textContent = item.kicker;
+      $("toastHeadline").textContent = item.title;
+      $("toastSub").textContent = item.sub || "";
+      $("toastReview").textContent = item.reviewLabel || "Review";
+      const preview = $("toastPreview");
+      preview.replaceChildren();
+      if (item.previewUrl) {
+        preview.classList.remove("empty");
+        const img = document.createElement("img");
+        img.src = item.previewUrl;
+        img.alt = "";
+        img.decoding = "async";
+        preview.append(img);
+      } else {
+        preview.classList.add("empty");
+        preview.textContent = item.kind === "feedback" ? "✦" : "▣";
+      }
+      requestAnimationFrame(() => {
+        el.classList.add("show");
+      });
+      buzz(10);
+    }
+
+    async function openToastTarget() {
+      const item = state.toast;
+      if (!item?.missionId) return;
+      if (item.kind === "feedback" && !item.proofId) {
+        markToastDismissed(item.key);
+        hideToast({ animate: true });
+        buzz(10);
+        return;
+      }
+      hideToast({ animate: true });
+      const qs = new URLSearchParams({ missionId: item.missionId });
+      if (item.proofId) qs.set("proofId", item.proofId);
+      history.replaceState({}, "", `${location.pathname}?${qs}`);
+      await boot();
+    }
+
+    function dismissToast() {
+      const item = state.toast;
+      if (item?.key) markToastDismissed(item.key);
+      hideToast({ animate: true });
+      buzz(8);
+    }
+
+    function wireToast() {
+      const el = $("toast");
+      $("toastClose").addEventListener("click", (e) => {
+        e.stopPropagation();
+        dismissToast();
+      });
+      $("toastLater").addEventListener("click", (e) => {
+        e.stopPropagation();
+        dismissToast();
+      });
+      $("toastReview").addEventListener("click", (e) => {
+        e.stopPropagation();
+        openToastTarget();
+      });
+
+      el.addEventListener("pointerdown", (e) => {
+        if (e.target.closest?.("button")) return;
+        state.toastDrag = {
+          startY: e.clientY,
+          dy: 0,
+          pointerId: e.pointerId,
+        };
+        el.classList.add("dragging");
+        el.setPointerCapture?.(e.pointerId);
+      });
+      el.addEventListener("pointermove", (e) => {
+        const d = state.toastDrag;
+        if (!d || d.pointerId !== e.pointerId) return;
+        d.dy = Math.max(0, e.clientY - d.startY);
+        el.style.transform = `translate3d(0, ${d.dy}px, 0)`;
+        el.style.opacity = String(Math.max(0.35, 1 - d.dy / 180));
+      });
+      function endToastDrag(e) {
+        const d = state.toastDrag;
+        if (!d) return;
+        if (e && d.pointerId !== e.pointerId) return;
+        el.classList.remove("dragging");
+        const dy = d.dy;
+        state.toastDrag = null;
+        if (dy > 72) {
+          dismissToast();
+          return;
+        }
+        el.style.transform = "";
+        el.style.opacity = "";
+      }
+      el.addEventListener("pointerup", endToastDrag);
+      el.addEventListener("pointercancel", endToastDrag);
+    }
+
+    function flashLabel(kind, text) {
+      flash.textContent = text;
+      flash.className = `show ${kind}`;
+      setTimeout(() => { flash.className = ""; }, FLY_MS);
+    }
+
+    function cancelCardAnim() {
+      state.cardAnim?.cancel();
+      state.cardAnim = null;
+    }
+
+    function motionOf(el) {
+      const cs = getComputedStyle(el);
+      return {
+        transform: cs.transform === "none" ? "translate3d(0px, 0px, 0)" : cs.transform,
+        opacity: Number(cs.opacity),
+      };
+    }
+
+    function animateCard(to, duration, easing) {
+      cancelCardAnim();
+      const from = motionOf(card);
+      const anim = card.animate(
+        [
+          { transform: from.transform, opacity: from.opacity },
+          { transform: to.transform, opacity: to.opacity },
+        ],
+        { duration, easing, fill: "forwards" }
+      );
+      state.cardAnim = anim;
+      return anim.finished.then(() => {
+        if (state.cardAnim !== anim) return;
+        card.style.transform = to.transform;
+        card.style.opacity = String(to.opacity);
+        try { anim.commitStyles(); } catch { /* ignore */ }
+        anim.cancel();
+        state.cardAnim = null;
+      }).catch(() => {});
+    }
+
+    function zoneAt(x, y) {
+      for (const btn of document.querySelectorAll(".edge-btn")) {
+        const r = btn.getBoundingClientRect();
+        if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) {
+          return btn.dataset.act;
+        }
+      }
+      return null;
+    }
+
+    function jumpTo(i) {
+      if (state.locked || !state.deck) return;
+      if (i < 0 || i >= state.deck.candidates.length) return;
+      state.index = i;
+      buzz(10);
+      render();
+    }
+
+    async function go(delta) {
+      if (state.floor === "history") {
+        const next = state.histIndex + delta;
+        if (!state.history.length || next < 0 || next >= state.history.length) {
+          buzz(8);
+          return;
+        }
+        buzz(10);
+        state.histIndex = next;
+        snapHistTrack();
+        return;
+      }
+      if (state.locked || !state.deck) return;
+      const next = state.index + delta;
+      if (next < 0 || next >= state.deck.candidates.length) {
+        buzz(8);
+        await resetCard(true);
+        return;
+      }
+      state.locked = true;
+      const dir = delta > 0 ? -1 : 1;
+      const x = dir * Math.round(window.innerWidth * 0.88);
+      buzz(10);
+      await animateCard(
+        { transform: `translate3d(${x}px, 0px, 0) rotate(${dir * 5}deg)`, opacity: 0 },
+        BROWSE_MS,
+        EASE_FLY
+      );
+      state.index = next;
+      state.locked = false;
+      render();
+    }
+
+    async function commit(action) {
+      if (state.locked || !current()) return;
+      state.locked = true;
+      setDrawerOpen(false);
+      const c = current();
+      const flyY = action === "board" ? -window.innerHeight * 1.05 : window.innerHeight * 1.05;
+      flashLabel(action === "board" ? "board" : "dump", action === "board" ? "Kept" : "Dumped");
+      buzz(action === "board" ? 18 : 24);
+      await animateCard(
+        { transform: `translate3d(0px, ${flyY}px, 0) rotate(${action === "board" ? -6 : 6}deg)`, opacity: 0 },
+        FLY_MS,
+        EASE_FLY
+      );
+
+      const entry = {
+        at: new Date().toISOString(),
+        action,
+        deckId: state.deck.id,
+        missionId: state.deck.missionId || null,
+        proofId: state.deck.proofId || null,
+        requirementId: state.deck.requirementId || null,
+        semanticId: state.deck.semanticId || null,
+        candidateIndex: c.index,
+        candidateUrl: c.url,
+        surface: "mobile",
+      };
+      saveDecision(entry);
+      postDecision(entry);
+
+      window.__lastReviewDecision = entry;
+      console.log("[review]", entry);
+      showUndo(entry);
+
+      state.deck.candidates.splice(state.index, 1);
+      if (state.index >= state.deck.candidates.length) state.index = Math.max(0, state.deck.candidates.length - 1);
+      state.locked = false;
+      render();
+    }
+
+    function onPointerDown(e) {
+      if (e.target.closest?.("#undo-bar")) return;
+      if (e.target.closest?.("#history-floor")) return;
+      if (state.floor === "history") return;
+      if (state.locked || done.classList.contains("show")) return;
+      if (e.target.closest?.("#drawer")) return;
+      if (e.target.closest?.("#toast-host")) return;
+      cancelCardAnim();
+      state.dragging = true;
+      state.startX = e.clientX;
+      state.startY = e.clientY;
+      state.t0 = performance.now();
+      state.dx = 0;
+      state.dy = 0;
+      card.style.transition = "none";
+      stage.setPointerCapture?.(e.pointerId);
+      clearTimeout(state.pressTimer);
+      state.pressTimer = setTimeout(() => {
+        if (!state.dragging || state.locked) return;
+        if (Math.abs(state.dx) > TAP_SLOP || Math.abs(state.dy) > TAP_SLOP) return;
+        state.pressTimer = null;
+        state.dragging = false;
+        $("veilDump").classList.add("show");
+        commit("dump");
+      }, LONG_PRESS_MS);
+    }
+
+    function onPointerMove(e) {
+      if (!state.dragging || state.locked) return;
+      state.dx = e.clientX - state.startX;
+      state.dy = e.clientY - state.startY;
+      if (Math.abs(state.dx) > TAP_SLOP || Math.abs(state.dy) > TAP_SLOP) {
+        clearTimeout(state.pressTimer);
+        state.pressTimer = null;
+      }
+      const rot = state.dx * 0.04;
+      card.style.transform = `translate3d(${state.dx}px, ${state.dy}px, 0) rotate(${rot}deg)`;
+      const up = state.dy < -28;
+      const down = state.dy > 28;
+      $("veilBoard").classList.toggle("show", up);
+      $("veilHistory")?.classList.toggle("show", down);
+      $("veilDump").classList.remove("show");
+    }
+
+    function onPointerUp() {
+      clearTimeout(state.pressTimer);
+      state.pressTimer = null;
+      if (!state.dragging || state.locked) return;
+      state.dragging = false;
+      const dt = Math.max(16, performance.now() - state.t0);
+      const vx = state.dx / dt;
+      const vy = state.dy / dt;
+      const absX = Math.abs(state.dx);
+      const absY = Math.abs(state.dy);
+
+      if (absX < TAP_SLOP && absY < TAP_SLOP) {
+        const act = zoneAt(state.startX, state.startY);
+        if (act === "prev") go(-1);
+        else if (act === "next") go(1);
+        else if (act === "board") commit("board");
+        else if (act === "history" || act === "now") enterHistory();
+        else resetCard(false);
+        return;
+      }
+
+      if (absY > absX && (absY > THRESH || Math.abs(vy) > VELOCITY)) {
+        if (state.dy < 0 || vy < -VELOCITY) commit("board");
+        else enterHistory();
+        return;
+      }
+      if (absX > absY && (absX > THRESH || Math.abs(vx) > VELOCITY)) {
+        if (state.dx < 0 || vx < -VELOCITY) go(1);
+        else go(-1);
+        return;
+      }
+      resetCard(true);
+    }
+
+    const stage = $("stage");
+    stage.addEventListener("pointerdown", onPointerDown);
+    stage.addEventListener("pointermove", onPointerMove);
+    stage.addEventListener("pointerup", onPointerUp);
+    stage.addEventListener("pointercancel", () => {
+      clearTimeout(state.pressTimer);
+      state.pressTimer = null;
+      if (!state.dragging || state.locked) return;
+      state.dragging = false;
+      resetCard(true);
+    });
+
+    const histFloor = $("history-floor");
+    histFloor.addEventListener("pointerdown", (e) => {
+      if (e.target.closest?.("button")) return;
+      state.histDrag = { x: e.clientX, y: e.clientY, t: performance.now(), pointerId: e.pointerId };
+      histFloor.setPointerCapture?.(e.pointerId);
+    });
+    histFloor.addEventListener("pointerup", (e) => {
+      const d = state.histDrag;
+      state.histDrag = null;
+      if (!d) return;
+      const dx = e.clientX - d.x;
+      const dy = e.clientY - d.y;
+      const absX = Math.abs(dx);
+      const absY = Math.abs(dy);
+      if (absX < TAP_SLOP && absY < TAP_SLOP) {
+        const act = zoneAt(e.clientX, e.clientY);
+        if (act === "now" || act === "board") exitHistory();
+        else if (act === "prev") go(-1);
+        else if (act === "next") go(1);
+        return;
+      }
+      if (absY > absX && dy < -THRESH) {
+        exitHistory();
+        return;
+      }
+      if (absX > absY && absX > THRESH) {
+        go(dx < 0 ? 1 : -1);
+      }
+    });
+
+    // Drawer: tap handle toggles; drag handle/sheet vertically to open/close
+    let suppressHandleClickUntil = 0;
+    $("drawer-handle").addEventListener("click", (e) => {
+      e.stopPropagation();
+      if (performance.now() < suppressHandleClickUntil) return;
+      setDrawerOpen(!state.drawerOpen);
+    });
+
+    drawer.addEventListener("pointerdown", (e) => {
+      if (e.target.closest?.(".thumb")) return;
+      if (e.target.closest?.("#thumbs") && state.drawerOpen) return;
+      const { closed, open } = drawerHeights();
+      state.drawerDrag = {
+        startY: e.clientY,
+        startH: state.drawerOpen ? open : closed,
+        moved: false,
+        pointerId: e.pointerId,
+      };
+      drawer.classList.add("dragging");
+      drawer.setPointerCapture?.(e.pointerId);
+      e.stopPropagation();
+    });
+
+    drawer.addEventListener("pointermove", (e) => {
+      const d = state.drawerDrag;
+      if (!d || d.pointerId !== e.pointerId) return;
+      const { closed, open } = drawerHeights();
+      const dy = d.startY - e.clientY; // up = positive = taller
+      if (Math.abs(dy) > 6) d.moved = true;
+      const h = Math.min(open, Math.max(closed, d.startH + dy));
+      drawer.style.height = `${h}px`;
+      const progress = (h - closed) / Math.max(1, open - closed);
+      thumbs.style.height = `${Math.round(82 * progress)}px`;
+      thumbs.style.opacity = String(progress);
+      e.stopPropagation();
+    });
+
+    function endDrawerDrag(e) {
+      const d = state.drawerDrag;
+      if (!d) return;
+      if (e && d.pointerId !== e.pointerId) return;
+      const { closed, open } = drawerHeights();
+      const currentH = parseFloat(drawer.style.height) || (state.drawerOpen ? open : closed);
+      drawer.style.height = "";
+      thumbs.style.height = "";
+      thumbs.style.opacity = "";
+      drawer.classList.remove("dragging");
+      if (d.moved) {
+        suppressHandleClickUntil = performance.now() + 280;
+        const shouldOpen = currentH > (closed + open) / 2;
+        state.drawerDrag = null;
+        setDrawerOpen(shouldOpen);
+      } else {
+        state.drawerDrag = null;
+      }
+    }
+
+    drawer.addEventListener("pointerup", endDrawerDrag);
+    drawer.addEventListener("pointercancel", endDrawerDrag);
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") go(-1);
+      else if (e.key === "ArrowRight") go(1);
+      else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (state.floor === "history") exitHistory();
+        else commit("board");
+      }
+      else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (state.floor !== "history") enterHistory();
+      }
+      else if (e.key === "Backspace" || e.key === "d") {
+        e.preventDefault();
+        if (state.floor === "now") commit("dump");
+      }
+      else if (e.key === "z" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        undoLast();
+      }
+      else if (e.key === " " || e.key === "t") {
+        e.preventDefault();
+        setDrawerOpen(!state.drawerOpen);
+      }
+      else if (e.key === "Escape" && state.drawerOpen) setDrawerOpen(false);
+    });
+
+    const MISSIONS_API = "https://studio-mock-iota.vercel.app/api/missions";
+    const PLATE_BASE = "https://studio-mock-iota.vercel.app/api/plate";
+
+    async function postDecision(entry) {
+      const missionId = state.deck?.missionId;
+      const proofId = state.deck?.proofId;
+      if (!missionId || !proofId) {
+        console.warn("[review] missing missionId/proofId — decision local only");
+        return;
+      }
+      try {
+        const res = await fetch(MISSIONS_API, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            missionId,
+            proofId,
+            action: entry.action,
+            candidateIndex: entry.candidateIndex,
+            surface: "mobile",
+          }),
+        });
+        const payload = await res.json().catch(() => ({}));
+        if (!res.ok) {
+          console.warn("[review] world decide failed", res.status, payload);
+          flashLabel("dump", res.status === 401 ? "Auth" : "Save fail");
+        } else {
+          console.log("[review] world saved", payload.worldRevision, payload.remaining);
+          if (entry.action === "board" && payload.registry?.status) {
+            flashLabel(
+              payload.registry.status === "registered" || payload.registry.status === "bound"
+                ? "board"
+                : "dump",
+              payload.registry.status === "registered" ? "Registered" : String(payload.registry.status)
+            );
+          }
+          if (payload.history) state.history = payload.history;
+        }
+      } catch (err) {
+        console.warn("[review] world post failed", err);
+      }
+    }
+
+    function deckFromSemantic(semantic, title) {
+      const id = `deck.semantic.${String(semantic).replace(/\./g, "_")}`;
+      return {
+        id,
+        title: title || semantic,
+        semanticId: semantic,
+        missionId: null,
+        proofId: null,
+        requirementId: null,
+        status: "open",
+        provider: "legacy_semantic",
+        candidates: [
+          {
+            index: 1,
+            label: "Candidate 1",
+            url: `${PLATE_BASE}?semantic=${encodeURIComponent(semantic)}`,
+          },
+        ],
+      };
+    }
+
+    async function boot() {
+      const params = new URLSearchParams(location.search);
+      const missionId = params.get("missionId");
+      const proofId = params.get("proofId");
+      const semantic = params.get("semantic");
+      const deckUrl = params.get("deck");
+      let raw;
+
+      if (missionId) {
+        const qs = new URLSearchParams({ missionId });
+        if (proofId) qs.set("proofId", proofId);
+        const res = await fetch(`${MISSIONS_API}?${qs}`);
+        raw = await res.json();
+        if (!res.ok) {
+          throw new Error(
+            raw?.hint ||
+              raw?.error ||
+              `mission_deck_failed ${res.status} — need Auth0 on Studio (ABBIES_WORLD_TOKEN) or Bearer`
+          );
+        }
+      } else if (deckUrl) {
+        const res = await fetch(deckUrl);
+        if (!res.ok) throw new Error(`deck_load_failed ${res.status}`);
+        raw = await res.json();
+      } else if (semantic) {
+        // Legacy plate-only view — not world SoT.
+        raw = deckFromSemantic(semantic, params.get("title") || "");
+      } else {
+        // Inbox: list missions + ChatGPT feedback (sidecar check surface).
+        const res = await fetch(MISSIONS_API);
+        const payload = await res.json();
+        if (!res.ok) {
+          throw new Error(
+            payload?.hint ||
+              payload?.error ||
+              `mission_list_failed ${res.status} — refresh Studio ABBIES_WORLD_TOKEN`
+          );
+        }
+        const missions = payload.missions || [];
+        const withFb = missions.filter((m) => m.lastFeedback);
+        const awaiting = missions.filter((m) => m.awaitingProofs > 0);
+        const lines = missions
+          .slice(0, 12)
+          .map((m) => {
+            const bits = [`${m.title} [${m.status}]`];
+            if (m.awaitingProofs) bits.push(`${m.awaitingProofs} awaiting`);
+            if (m.lastFeedback) bits.push(`fb: ${m.lastFeedback.text.slice(0, 80)}`);
+            return bits.join(" — ");
+          });
+        state.deck = {
+          id: "inbox",
+          title: "Mission inbox",
+          candidates: [],
+          recentFeedback: withFb.map((m) => ({
+            kind: m.lastFeedback.kind,
+            text: `${m.title}: ${m.lastFeedback.text}`,
+            surface: m.lastFeedback.surface,
+            at: m.lastFeedback.at,
+          })),
+        };
+        state.decisions = [];
+        setDrawerOpen(false, { animate: false });
+        const toastItem = pickLatestToast(missions);
+        showDone({
+          quiet: true,
+          title: awaiting.length ? `${awaiting.length} awaiting review` : "All clear",
+          blurb: awaiting.length
+            ? "Toast or Review opens the swipe deck. History is every prompt and plate — Registry puts it on the Game Asset registry."
+            : "Nothing to swipe. History is every prompt and plate from Missions and Midjourney — tap Registry to re-send.",
+          feedback: state.deck.recentFeedback,
+          log: lines.join("\n") || "(no missions)",
+          history: payload.history || [],
+        });
+        showToast(toastItem);
+        return;
+      }
+
+      state.deck = structuredClone(raw);
+      state.decisions = loadDecisions().filter((d) => d.deckId === state.deck.id);
+      state.deck.candidates = (state.deck.candidates || []).filter(
+        (c) =>
+          !state.decisions.some(
+            (d) => d.candidateIndex === c.index && (d.action === "board" || d.action === "dump")
+          )
+      );
+      state.index = 0;
+      setDrawerOpen(false, { animate: false });
+      hideToast({ animate: false });
+      done.classList.remove("quiet");
+      state.floor = "now";
+      document.body.classList.remove("floor-history");
+      $("history-floor").classList.remove("show");
+      $("history-floor").hidden = true;
+      const up = document.querySelector(".edge-btn.up");
+      up?.setAttribute("aria-label", "Keep");
+      up?.setAttribute("data-act", "board");
+      render();
+    }
+
+    $("reset").addEventListener("click", async () => {
+      const all = loadDecisions().filter((d) => d.deckId !== state.deck?.id);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(all));
+      state.decisions = [];
+      history.replaceState({}, "", location.pathname);
+      await boot();
+    });
+    $("hist-refresh")?.addEventListener("click", (e) => {
+      e.stopPropagation();
+      $("reset").click();
+    });
+
+    $("undo-btn").addEventListener("click", (e) => {
+      e.stopPropagation();
+      undoLast();
+    });
+
+    $("hist-track").addEventListener("click", (e) => {
+      const btn = e.target.closest?.("button[data-hist]");
+      if (!btn) return;
+      e.stopPropagation();
+      const row = (state.history || []).find((r) => r.id === btn.dataset.id);
+      if (!row) return;
+      if (btn.dataset.hist === "registry") sendToRegistry(row);
+      if (btn.dataset.hist === "unkeep") postReverse("unkeep", row);
+      if (btn.dataset.hist === "restore") postReverse("restore", row);
+      if (btn.dataset.hist === "open" && row.missionId && row.proofId) {
+        const qs = new URLSearchParams({ missionId: row.missionId, proofId: row.proofId });
+        history.replaceState({}, "", `${location.pathname}?${qs}`);
+        boot();
+      }
+    });
+
+    function urlBase64ToUint8Array(base64String) {
+      const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
+      const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+      const raw = atob(base64);
+      const out = new Uint8Array(raw.length);
+      for (let i = 0; i < raw.length; i += 1) out[i] = raw.charCodeAt(i);
+      return out;
+    }
+
+    function isStandaloneDisplay() {
+      return (
+        window.matchMedia?.("(display-mode: standalone)")?.matches ||
+        window.navigator.standalone === true
+      );
+    }
+
+    function pushSupported() {
+      return "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+    }
+
+    function showPushBanner(opts = {}) {
+      const el = $("push-banner");
+      if (!el) return;
+      if (opts.copy) $("pushCopy").textContent = opts.copy;
+      if (opts.hint) $("pushHint").textContent = opts.hint;
+      el.classList.add("show");
+    }
+
+    function hidePushBanner() {
+      $("push-banner")?.classList.remove("show");
+    }
+
+    async function registerReviewWorker() {
+      return navigator.serviceWorker.register("/sw-review.js", { scope: "/" });
+    }
+
+    async function subscribePush() {
+      const cfgRes = await fetch(`${location.origin}/api/push`);
+      const cfg = await cfgRes.json().catch(() => ({}));
+      if (!cfg.configured || !cfg.publicKey) {
+        throw new Error(cfg.hint || "Push not configured on Studio");
+      }
+      const reg = await registerReviewWorker();
+      await navigator.serviceWorker.ready;
+      const permission = await Notification.requestPermission();
+      if (permission !== "granted") {
+        throw new Error("Permission denied");
+      }
+      let sub = await reg.pushManager.getSubscription();
+      if (!sub) {
+        sub = await reg.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(cfg.publicKey),
+        });
+      }
+      const save = await fetch(`${location.origin}/api/push`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ op: "subscribe", subscription: sub.toJSON() }),
+      });
+      const payload = await save.json().catch(() => ({}));
+      if (!save.ok) {
+        throw new Error(payload.hint || payload.error || `subscribe_failed ${save.status}`);
+      }
+      return payload;
+    }
+
+    async function maybeOfferPush() {
+      if (!pushSupported()) {
+        if (isStandaloneDisplay()) {
+          showPushBanner({
+            copy: "This browser can’t do Web Push",
+            hint: "Re-add from Safari → Share → Add to Home Screen",
+          });
+          $("pushEnable").hidden = true;
+        }
+        return;
+      }
+      if (Notification.permission === "granted") {
+        try {
+          await registerReviewWorker();
+          const reg = await navigator.serviceWorker.ready;
+          const existing = await reg.pushManager.getSubscription();
+          if (!existing) await subscribePush();
+        } catch (err) {
+          console.warn("[review] push quiet re-sub failed", err);
+        }
+        hidePushBanner();
+        return;
+      }
+      if (Notification.permission === "denied") {
+        showPushBanner({
+          copy: "Notifications blocked for this app",
+          hint: "iPhone Settings → Notifications → Review → Allow",
+        });
+        $("pushEnable").hidden = true;
+        return;
+      }
+      if (localStorage.getItem(PUSH_SKIP_KEY) === "1" && !isStandaloneDisplay()) {
+        return;
+      }
+      if (!isStandaloneDisplay()) {
+        showPushBanner({
+          copy: "Add from Safari for lock-screen alerts",
+          hint: "Share → Add to Home Screen, then open & Enable",
+        });
+        return;
+      }
+      showPushBanner({
+        copy: "Alert me when art is ready to Board/Dump",
+        hint: "Sparse — proofs only, not worker chatter",
+      });
+    }
+
+    $("pushEnable")?.addEventListener("click", async () => {
+      const btn = $("pushEnable");
+      btn.disabled = true;
+      btn.textContent = "…";
+      try {
+        if (!isStandaloneDisplay()) {
+          $("pushCopy").textContent = "Open the Safari home-screen icon first";
+          $("pushHint").textContent = "Chrome shortcuts on iPhone usually can’t receive push";
+          btn.disabled = false;
+          btn.textContent = "Enable";
+          return;
+        }
+        await subscribePush();
+        localStorage.removeItem(PUSH_SKIP_KEY);
+        hidePushBanner();
+        flashLabel("board", "Alerts on");
+      } catch (err) {
+        $("pushCopy").textContent = String(err?.message || err).slice(0, 120);
+        $("pushHint").textContent = "Try again from the Safari home-screen app";
+        btn.disabled = false;
+        btn.textContent = "Retry";
+      }
+    });
+
+    $("pushSkip")?.addEventListener("click", () => {
+      localStorage.setItem(PUSH_SKIP_KEY, "1");
+      hidePushBanner();
+    });
+
+    wireToast();
+    maybeOfferPush().catch((err) => console.warn("[review] push offer", err));
+    boot().catch((err) => {
+      $("title").textContent = "Could not load deck";
+      $("semantic").textContent = String(err?.message || err);
+    });
+  </script>
+</body>
+</html>

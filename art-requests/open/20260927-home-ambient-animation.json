@@ -1,0 +1,33 @@
+{
+  "id": "20260927-home-ambient-animation",
+  "semanticId": "map.home",
+  "status": "open",
+  "priority": "high",
+  "type": "fx",
+  "brief": "Animate the approved Abbie home landscape with drifting clouds, masked flowing waterfall, falling leaves, swaying close-up reed tips and occasional wandering butterflies. Preserve three home hardpoints.",
+  "aspect": "77:58",
+  "styleNotes": "Match approved illustrated magical landscape; calm layered motion, stable terrain and camera.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/home-ambient-2026-09-27/home-animation-source.jpeg",
+    "AssetSources/World2/home-ambient-2026-09-27/provenance.json",
+    "AssetSources/World2/home-ambient-2026-09-27/HANDOFF.md",
+    "abbies.world.ios/abbies.world.ios/Views/World2/World2HomeAmbientLayer.swift",
+    "abbies.world.ios/abbies.world.ios/Models/World2/World2HomeAmbientConfig.swift",
+    "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_1002_map_home.imageset",
+    "artifacts/home-ambient/01-loading-or-home.png"
+  ],
+  "promptSeeds": [],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T15:30:03.129793+00:00",
+  "productionIntent": "runtime_bind",
+  "surface": "scene.home / existing map.home background",
+  "acceptanceCriteria": [
+    "All five requested effects implemented with aligned layers",
+    "Water and clouds correctly occluded by terrain and bridges",
+    "Three home hardpoints remain clear and tappable",
+    "Reduce Motion, scene lifecycle and target-device performance verified",
+    "In-game recording supplied before fulfillment"
+  ],
+  "fulfillment": null
+}

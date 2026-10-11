@@ -19,7 +19,7 @@ struct World2CardFactoryView: View {
                 World2SemanticImage(
                     semanticName: "poi.cardFactory.interior",
                     fallbackIcon: "wand.and.stars",
-                    fallbackLabel: "Card Factory interior artwork is not bundled"
+                    fallbackLabel: "Card Factory is under construction"
                 )
                 .scaledToFill()
                 .frame(width: screen.size.width, height: screen.size.height)
@@ -112,16 +112,6 @@ struct World2CardFactoryView: View {
                     )
                     .accessibilityIdentifier("world2.factory.historyHandle")
 
-                backButton
-                    .frame(
-                        maxWidth: .infinity,
-                        maxHeight: .infinity,
-                        alignment: .bottomLeading
-                    )
-                    .padding(.leading, 22)
-                    .padding(.bottom, 22)
-                    .zIndex(20)
-
                 if let preview = factory.previewCard {
                     decisionPanel(card: preview)
                         .transition(.scale.combined(with: .opacity))
@@ -137,6 +127,13 @@ struct World2CardFactoryView: View {
         .onAppear {
             factory.start(catalog: viewModel.ingredientCatalog)
         }
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.factory.back",
+            onExit: {
+                World2Diagnostics.log("factory_exit")
+                onExit()
+            }
+        )
     }
 
     private var header: some View {
@@ -144,22 +141,6 @@ struct World2CardFactoryView: View {
             .font(.system(size: 28, weight: .black, design: .rounded))
             .foregroundStyle(.white)
             .frame(maxWidth: .infinity)
-    }
-
-    private var backButton: some View {
-        Button {
-            World2Diagnostics.log("factory_exit")
-            onExit()
-        } label: {
-            Label("Home World", systemImage: "arrow.left.circle.fill")
-                .font(.system(size: 17, weight: .bold, design: .rounded))
-                .foregroundStyle(.white)
-                .padding(.horizontal, 15)
-                .padding(.vertical, 10)
-                .background(.black.opacity(0.65), in: Capsule())
-        }
-        .buttonStyle(.plain)
-        .accessibilityIdentifier("world2.factory.back")
     }
 
     private func factoryCarousel(

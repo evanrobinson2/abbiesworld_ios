@@ -1,0 +1,64 @@
+{
+  "status": "fulfilled",
+  "priority": "high",
+  "type": "ui_icon",
+  "kind": "ui",
+  "keepStockIcon": false,
+  "aspect": "1:1",
+  "requestedBy": "cursor",
+  "createdAt": "2026-09-26T21:10:00Z",
+  "requestedAt": "2026-09-26T21:10:00Z",
+  "gameArea": "Marble Voyage / Plink battle power tray",
+  "expectedBackground": "Transparent RGBA \u2014 clear corners required (design gate maxCornerAlpha \u2264 16)",
+  "targetPixelSize": "Circular chip ~128\u2013256px master; runtime ~56\u201372pt",
+  "productionIntent": "runtime_bind",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:20:09.994602+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/fire-transparent.png",
+    "sourceHashSha256": "faf7a0b3279e6bfa1c180974aa1e0e46164fc4a6365659e0d37cfbdedb73b140",
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_fire. RGBA/corner-alpha checks passed. Runtime catalog replacement, scale consistency and in-app 56pt legibility remain unverified; no Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_fire (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_fire",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_fire.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  },
+  "styleNotes": "Approved Tilt style lock: dark teal enamel disc, warm brass rim, bold contours, chunky hand-painted forms, restrained cel shading. True transparent corners; no checkerboard or opaque square. Match motif weight at 56\u201372pt.",
+  "id": "20260926-power-icon-fire",
+  "semanticId": "ui.plink.power.icon.fire",
+  "characterOrAssetName": "Fire power icon",
+  "surface": "Battle power tray \u2014 Fire",
+  "brief": "Replace provisional Cursor-pipeline Fire chip. Motif: flame marble / burning peg. Circular transparent chip; match sibling weight.",
+  "usage": "Replace Assets.xcassets/world2_plink_power_icon_fire.imageset payload",
+  "promptSeeds": [
+    "Circular kid game power icon, fiery marble flame burning a peg, bold cel shaded, transparent background, no text --ar 1:1 --stylize 150"
+  ],
+  "relatedPaths": [
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-refresh.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-fire.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-split.png",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "art-requests/ART_DIRECTOR_AGENT.md",
+    "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_fire.imageset/world2_plink_power_icon_fire.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-fire.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/fire-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/fire-transparent.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/fire-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg"
+  ],
+  "existingAssetSemanticIds": [
+    "ui.plink.power.icon.fire"
+  ],
+  "acceptanceCriteria": [
+    "Replaces deprecated pipeline PNG",
+    "True transparent corners",
+    "Readable as Fire at 56pt"
+  ],
+  "sessionNote": "Existing catalog PNG is provisional from deprecated Cursor asset pipeline.",
+  "placeholder": {
+    "type": "provisional_reuse",
+    "detail": "world2_plink_power_icon_fire.png from deprecated pipeline"
+  }
+}

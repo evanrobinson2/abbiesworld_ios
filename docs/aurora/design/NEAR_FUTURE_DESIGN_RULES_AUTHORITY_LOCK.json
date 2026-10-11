@@ -1,0 +1,29 @@
+{
+  "human_design_version": "1.1.0",
+  "authorities": [
+    {
+      "id": "production-guide",
+      "version": "1.2",
+      "path": "/Users/evanrobinson/Documents/Codex/2026-10-04/w/outputs/aurora-style-guide/production-guide.txt",
+      "sha256": "98d97fd9768d14b8cfedc6a79ddc938bf8ad61ce123e8c2c2c415a1f53f88c17"
+    },
+    {
+      "id": "tokens",
+      "version": "1.2",
+      "path": "/Users/evanrobinson/Documents/Codex/2026-10-04/w/outputs/aurora-style-guide/tokens.json",
+      "sha256": "567e85720a5a39c41766573be9fd637962486b956fff2e716484ad88fba0f267"
+    },
+    {
+      "id": "categories",
+      "version": "1.2",
+      "path": "/Users/evanrobinson/Documents/Codex/2026-10-04/w/outputs/aurora-style-guide/category-rules.json",
+      "sha256": "2177992b2b07a3251bec4c2ead5c048070879d5f23af1a14e5e7436d726922dc"
+    },
+    {
+      "id": "review",
+      "version": "1.0",
+      "path": "/Users/evanrobinson/Documents/Codex/2026-10-04/w/outputs/asset-worker-protocol/references/visual-review.txt",
+      "sha256": "c4c4b37ce9e7c092e7e16b563cf69241970a9c3aecc918ddefb49a8bfd1d96cb"
+    }
+  ]
+}

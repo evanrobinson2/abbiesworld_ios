@@ -1,0 +1,12 @@
+{
+  "semanticId": "scene.carnival.background",
+  "sourceProvider": "Midjourney",
+  "jobId": "b623d082-0e48-4a69-8239-ca4ac981e3bc",
+  "candidateIndex": 0,
+  "sourceUrl": "https://cdn.midjourney.com/b623d082-0e48-4a69-8239-ca4ac981e3bc/0_0.jpeg",
+  "filename": "carnival-0.jpeg",
+  "sha256": "8bf3b6883e965b8703bd5dacb72be79feba9d7fd055063a4fdc073006873e9db",
+  "status": "rejected by user: too realistic",
+  "aspect": "3:1 requested",
+  "notes": "User asked for full carnival first, super wide. Existing home art used as style reference. Booth-specific identities need separate art; not a finished interactive map."
+}

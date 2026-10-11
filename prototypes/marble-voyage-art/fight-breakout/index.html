@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Marble Voyage · Fight breakout storyboard</title>
+  <style>
+    :root {
+      --navy: #0a1a2e;
+      --grid: rgba(120, 200, 255, 0.12);
+      --rose: #942a52;
+      --cyan: #5ef0c0;
+      --orange: #f08d49;
+      --ink: #061018;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; height: 100%;
+      background: #050b14;
+      color: #e8f4ff;
+      font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+    }
+    body {
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      min-height: 100vh;
+    }
+    header {
+      padding: 14px 22px 8px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      font-weight: 800;
+    }
+    header p {
+      margin: 4px 0 0;
+      opacity: 0.65;
+      font-size: 0.85rem;
+    }
+    #stage {
+      position: relative;
+      margin: 16px auto;
+      width: min(1100px, 96vw);
+      aspect-ratio: 16 / 10;
+      border-radius: 18px;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, #183a5c 0%, #0d2440 55%, #091828 100%);
+      box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+      isolation: isolate;
+    }
+    #stage::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .beat-label {
+      position: absolute;
+      top: 14px; left: 50%;
+      transform: translateX(-50%);
+      z-index: 20;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    /* Map tiles */
+    .tile {
+      position: absolute;
+      width: 132px; height: 132px;
+      border-radius: 22px;
+      background: var(--rose);
+      border: 3px solid rgba(255,255,255,0.85);
+      box-shadow: 0 0 18px rgba(255,120,180,0.45);
+      display: grid;
+      place-items: center;
+      transition: transform 1.15s ease-in-out, box-shadow 0.3s;
+    }
+    .tile .face {
+      width: 88%; height: 88%;
+      border-radius: 16px;
+      background: radial-gradient(circle at 40% 30%, #7ad0ff, #2a4a6a 70%);
+      display: grid; place-items: center;
+      font-weight: 900; font-size: 0.85rem;
+      letter-spacing: 0.06em;
+    }
+    .tile.abbie { left: 58%; top: 62%; border-color: var(--cyan); }
+    .tile.foe { left: 28%; top: 28%; }
+    .token {
+      position: absolute;
+      width: 54px; height: 54px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #b8ffd8, #1fa86a);
+      border: 3px solid #fff;
+      box-shadow: 0 0 16px rgba(80,255,180,0.7);
+      left: calc(58% + 39px);
+      top: calc(62% + 39px);
+      transform: translate(-50%, -50%);
+      z-index: 5;
+      opacity: 0;
+      transition: left 1.15s ease-in-out, top 1.15s ease-in-out, opacity 0.2s;
+    }
+    .path {
+      position: absolute;
+      left: 34%; top: 38%;
+      width: 34%; height: 2px;
+      border-top: 4px dashed rgba(180,230,255,0.55);
+      transform: rotate(-38deg);
+      transform-origin: left center;
+      z-index: 1;
+    }
+    /* Curtain */
+    .curtain {
+      position: absolute; inset: 0;
+      background: #000;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 30;
+      transition: opacity 0.35s ease;
+    }
+    .curtain .glow {
+      position: absolute; inset: 0;
+      background: radial-gradient(circle at 50% 45%, rgba(90,220,255,0.4), transparent 55%);
+    }
+    /* Versus splash */
+    .versus {
+      position: absolute; inset: 0;
+      z-index: 40;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 18px 24px 20px;
+      background: rgba(0,0,0,0.55);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease;
+    }
+    .versus.on { opacity: 1; }
+    .versus .title {
+      text-align: center;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      font-weight: 800;
+      opacity: 0.7;
+    }
+    .versus .row {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: end;
+      gap: 12px;
+      min-height: 0;
+    }
+    .side {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.2, 1);
+    }
+    .side.bad { transform: translateX(-120%); }
+    .side.good { transform: translateX(120%); }
+    .versus.in .side.bad,
+    .versus.in .side.good { transform: translateX(0); }
+    .bust {
+      width: 120px; height: 140px;
+      border-radius: 16px;
+      border: 3px solid #fff;
+      display: grid; place-items: center;
+      font-weight: 900;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+    }
+    .bust.foe { background: linear-gradient(160deg, #ff6a3a, #6a1020); }
+    .bust.friend { background: linear-gradient(160deg, #5ad8e8, #1a5a6a); width: 150px; height: 170px; }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      padding: 5px 10px;
+      border-radius: 8px;
+      color: #fff;
+    }
+    .tag.bad { background: #ff6a3a; transform: rotate(-3deg); }
+    .tag.good { background: #3ec8c0; transform: rotate(3deg); }
+    .stamp {
+      align-self: center;
+      text-align: center;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: rgba(0,0,0,0.55);
+      border: 3px solid #fff;
+      transform: rotate(-4deg) scale(0.2);
+      opacity: 0;
+      transition: transform 0.42s cubic-bezier(0.2, 1.4, 0.3, 1), opacity 0.25s;
+      z-index: 2;
+    }
+    .versus.in .stamp { transform: rotate(-4deg) scale(1); opacity: 1; }
+    .stamp .small { font-size: 0.85rem; letter-spacing: 0.18em; font-weight: 800; }
+    .stamp .big {
+      font-size: 2.4rem;
+      font-weight: 900;
+      line-height: 1;
+      background: linear-gradient(120deg, #6ef0ff, #4fd88a);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: none;
+      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.55));
+    }
+    .versus .hint {
+      text-align: center;
+      opacity: 0;
+      font-weight: 700;
+      transition: opacity 0.35s;
+    }
+    .versus.hold .hint { opacity: 0.55; }
+    /* Iris cutaway */
+    .iris {
+      position: absolute; inset: 0;
+      z-index: 45;
+      pointer-events: none;
+      opacity: 0;
+      background: #000;
+      transition: opacity 0.15s;
+    }
+    .iris.on { opacity: 1; }
+    .iris .hole {
+      position: absolute;
+      left: 50%; top: 48%;
+      width: 0; height: 0;
+      border-radius: 50%;
+      background: transparent;
+      box-shadow: 0 0 0 200vmax #000;
+      transform: translate(-50%, -50%);
+      transition: width 0.55s ease-in, height 0.55s ease-in;
+    }
+    .iris.open .hole {
+      width: 220vmax;
+      height: 220vmax;
+    }
+    /* Board peek */
+    .board {
+      position: absolute; inset: 0;
+      z-index: 10;
+      opacity: 0;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(80,160,200,0.25), transparent 40%),
+        linear-gradient(180deg, #102030, #081018);
+      display: grid;
+      place-items: center;
+      transition: opacity 0.4s ease;
+    }
+    .board.on { opacity: 1; }
+    .board .pegfield {
+      width: 55%; height: 70%;
+      border: 3px solid rgba(120,255,200,0.55);
+      border-radius: 22px;
+      background: rgba(20,40,55,0.55);
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 18px;
+      padding: 28px;
+      align-content: center;
+    }
+    .peg {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      justify-self: center;
+      background: #ff9a3a;
+      box-shadow: 0 0 10px rgba(255,150,60,0.6);
+    }
+    .peg:nth-child(3n) { background: #ffe66a; }
+    .peg:nth-child(5n) { background: #6dff9a; }
+    footer {
+      padding: 12px 22px 18px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    button {
+      appearance: none;
+      border: 0;
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      background: linear-gradient(120deg, #3ec8c0, #5a9dff);
+      color: #041018;
+    }
+    button.ghost {
+      background: rgba(255,255,255,0.08);
+      color: #e8f4ff;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .steps {
+      flex: 1;
+      min-width: 220px;
+      font-size: 0.8rem;
+      opacity: 0.7;
+      line-height: 1.45;
+    }
+    .steps strong { color: var(--cyan); opacity: 1; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Fight breakout · expected animation</h1>
+    <p>What the iPad should play after you tap a glowing fight tile: march → hard curtain → COMING TO RESCUE slam → iris cutaway → peg board.</p>
+  </header>
+
+  <div id="stage" aria-live="polite">
+    <div class="beat-label" id="beatLabel">IDLE · press Play</div>
+    <div class="path" id="path"></div>
+    <div class="tile foe" id="foeTile"><div class="face">MORROW</div></div>
+    <div class="tile abbie" id="abbieTile"><div class="face">ABBIE</div></div>
+    <div class="token" id="token"></div>
+
+    <div class="board" id="board">
+      <div class="pegfield">
+        <div class="peg"></div><div class="peg"></div><div class="peg"></div><div class="peg"></div><div class="peg"></div>
+        <div class="peg"></div><div class="peg"></div><div class="peg"></div><div class="peg"></div><div class="peg"></div>
+        <div class="peg"></div><div class="peg"></div><div class="peg"></div><div class="peg"></div><div class="peg"></div>
+      </div>
+    </div>
+
+    <div class="curtain" id="curtain"><div class="glow"></div></div>
+
+    <div class="versus" id="versus">
+      <div class="title">MORROW’S GATE</div>
+      <div class="row">
+        <div class="side bad" id="badSide">
+          <span class="tag bad">BAD GUYS:</span>
+          <div class="bust foe">MORROW</div>
+        </div>
+        <div class="stamp" id="stamp">
+          <div class="small">COMING TO</div>
+          <div class="big">RESCUE!</div>
+        </div>
+        <div class="side good" id="goodSide">
+          <span class="tag good">RESCUE:</span>
+          <div class="bust friend">FOX</div>
+        </div>
+      </div>
+      <div class="hint">Defeat every bad guy · free the friend</div>
+    </div>
+
+    <div class="iris" id="iris"><div class="hole"></div></div>
+  </div>
+
+  <footer>
+    <button type="button" id="play">Play breakout</button>
+    <button type="button" class="ghost" id="reset">Reset</button>
+    <div class="steps" id="steps">
+      Beats: <strong>1</strong> Abbie marches to the tile ·
+      <strong>2</strong> solid black curtain (must be obvious) ·
+      <strong>3</strong> comic RESCUE splash ·
+      <strong>4</strong> iris opens onto the board
+    </div>
+  </footer>
+
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const timers = [];
+    function later(ms, fn) {
+      timers.push(setTimeout(fn, ms));
+    }
+    function clearTimers() {
+      while (timers.length) clearTimeout(timers.pop());
+    }
+    function setBeat(text) {
+      $("beatLabel").textContent = text;
+    }
+
+    function reset() {
+      clearTimers();
+      $("token").style.opacity = "0";
+      $("token").style.left = "calc(58% + 39px)";
+      $("token").style.top = "calc(62% + 39px)";
+      $("curtain").style.opacity = "0";
+      $("versus").className = "versus";
+      $("iris").className = "iris";
+      $("board").className = "board";
+      $("foeTile").style.transform = "";
+      setBeat("IDLE · press Play");
+    }
+
+    function play() {
+      reset();
+      setBeat("1 · MARCH toward the foe");
+      $("token").style.opacity = "1";
+      // force reflow then march
+      void $("token").offsetWidth;
+      later(40, () => {
+        $("token").style.left = "calc(28% + 66px)";
+        $("token").style.top = "calc(28% + 66px)";
+        $("foeTile").style.transform = "scale(1.12)";
+      });
+
+      later(1200, () => {
+        setBeat("2 · HARD CURTAIN (solid black slam)");
+        $("curtain").style.opacity = "1";
+      });
+
+      later(1550, () => {
+        setBeat("3 · COMING TO RESCUE splash");
+        $("board").className = "board on"; // board waits under splash
+        $("versus").className = "versus on";
+        void $("versus").offsetWidth;
+        $("versus").classList.add("in");
+      });
+
+      later(2100, () => {
+        $("versus").classList.add("hold");
+        setBeat("3 · hold · tap-skip would live here");
+      });
+
+      later(2800, () => {
+        setBeat("4 · IRIS cutaway → board");
+        $("curtain").style.opacity = "0";
+        $("iris").className = "iris on";
+        void $("iris").offsetWidth;
+        $("iris").classList.add("open");
+        $("versus").style.opacity = "0";
+      });
+
+      later(3400, () => {
+        $("iris").className = "iris";
+        $("versus").className = "versus";
+        setBeat("5 · BOARD live · aim a marble");
+      });
+    }
+
+    $("play").addEventListener("click", play);
+    $("reset").addEventListener("click", reset);
+  </script>
+</body>
+</html>

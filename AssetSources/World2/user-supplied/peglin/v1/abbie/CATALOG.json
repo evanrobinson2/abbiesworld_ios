@@ -1,0 +1,30 @@
+{
+  "abbie": {
+    "map_fight_body": "world2_peglin_abbie_map",
+    "portraits": {
+      "happy": "world2_peglin_abbie_happy",
+      "sneaky_wink": "world2_peglin_abbie_sneaky_wink",
+      "hurt": "world2_peglin_abbie_hurt",
+      "hurt_grim": "world2_peglin_abbie_hurt_grim",
+      "hurt_angry": "world2_peglin_abbie_hurt_angry"
+    },
+    "sourceDir": "AssetSources/World2/user-supplied/peglin/v1/abbie"
+  },
+  "enemies": {
+    "states": [
+      "idle",
+      "happy",
+      "sneaky_wink",
+      "hurt",
+      "defeated"
+    ],
+    "shipped": [
+      "brambleSpirit",
+      "foxSpirit",
+      "stagSpirit"
+    ],
+    "owed": [],
+    "notes": {},
+    "semanticPattern": "enemy.peglin.<kind>.<state>"
+  }
+}

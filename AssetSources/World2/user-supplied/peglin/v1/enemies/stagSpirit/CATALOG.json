@@ -1,0 +1,14 @@
+{
+  "kind": "stagSpirit",
+  "displayName": "Stag Spirit",
+  "species": "stag",
+  "states": {
+    "idle": "world2_peglin_stag_idle",
+    "happy": "world2_peglin_stag_happy",
+    "sneaky_wink": "world2_peglin_stag_sneaky_wink",
+    "hurt": "world2_peglin_stag_hurt",
+    "defeated": "world2_peglin_stag_defeated"
+  },
+  "semanticPattern": "enemy.peglin.stagSpirit.<state>",
+  "sourceDir": "AssetSources/World2/user-supplied/peglin/v1/enemies/stagSpirit"
+}

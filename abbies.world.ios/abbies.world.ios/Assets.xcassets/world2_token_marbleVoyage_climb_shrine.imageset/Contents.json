@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "world2_token_marbleVoyage_climb_shrine.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

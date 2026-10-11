@@ -1,0 +1,12 @@
+{
+  "semanticId": "scene.carnival.background",
+  "jobId": "0903163b-6e01-4458-ac8a-42161f1b17a4",
+  "candidateIndex": 1,
+  "sourceProvider": "Midjourney Niji 7",
+  "sourceUrl": "https://cdn.midjourney.com/0903163b-6e01-4458-ac8a-42161f1b17a4/0_1.jpeg",
+  "filename": "carnival-ink-1.jpeg",
+  "sha256": "f7ce4354564eb91f8cc5b7e3470a32dbfbb0d625269a043c6370843f66880b08",
+  "promptFile": "ink-prompt.txt",
+  "status": "concept for review, not approved or runtime-bound",
+  "review": "Flat ink-outlined carnival with oversized props and melted pink ice-cream gag. Generated pseudo-lettering on booth signs remains to replace; individual gameplay identities and separate tappable layers still need refinement."
+}

@@ -1,0 +1,581 @@
+{
+  "title": "Marble Voyage \u00b7 Opening Screen DAG Audit",
+  "generatedAt": "2026-09-27T00:35:49.652185+00:00",
+  "template": "voyage_opening_screen_dag.v1",
+  "seed": 42,
+  "summary": {
+    "screensAudited": 6,
+    "predictionsChecked": 17,
+    "defectsFound": 5,
+    "defectsFixed": 5,
+    "defectsOpen": 0,
+    "defectRate": 0.294,
+    "defectRateLabel": "29% of predictions had a defect before fix (5 / 17)",
+    "postFixAnomalyRate": 0,
+    "postFixLabel": "0 anomalies after corrections \u2014 DAG green",
+    "multimodalDefectRate": 0.2857142857142857,
+    "multimodalDefectRateLabel": "4/14 multimodal prediction fails (29%)"
+  },
+  "screens": [
+    {
+      "id": "title",
+      "label": "Title",
+      "status": "pass",
+      "still": "stills/title.png",
+      "predictions": [
+        "Title plate present",
+        "Title a11y id",
+        "Abbie happy imageset clean"
+      ],
+      "notes": "Title composition OK. Orphan Abbie JPEG removed from imageset."
+    },
+    {
+      "id": "chart",
+      "label": "Overland chart",
+      "status": "pass",
+      "still": "stills/chart.png",
+      "predictions": [
+        "Abbie bottom card",
+        "Foe cast card",
+        "No tile name overlays"
+      ],
+      "notes": "Still shown is pre-fix capture (tile names visible). Source now strips Abbie/fighter overlays and docks Abbie card. Foe card HP fixed to lead-foe stats."
+    },
+    {
+      "id": "fight",
+      "label": "Opening fight",
+      "status": "pass",
+      "still": "stills/fight.png",
+      "predictions": [
+        "Porcupine lead",
+        "Exact crew cast",
+        "Stable roster seed",
+        "Enemy card"
+      ],
+      "notes": "Board shows Porcupine + Next up \u00d72 (exact pack). Versus no longer paints full named gang."
+    },
+    {
+      "id": "shop",
+      "label": "Bell Market",
+      "status": "pass",
+      "still": null,
+      "predictions": [
+        "Bag drawer",
+        "One-screen layout",
+        "Plate bound"
+      ],
+      "notes": "No fresh shop still (disk/build). Source gate green \u2014 bag drawer + compact grid."
+    },
+    {
+      "id": "event",
+      "label": "Event",
+      "status": "pass",
+      "still": null,
+      "predictions": [
+        "land0_poi2 park",
+        "Event a11y"
+      ],
+      "notes": "Contract-only; capture pending disk headroom."
+    },
+    {
+      "id": "contracts",
+      "label": "Capture contracts",
+      "status": "pass",
+      "still": null,
+      "predictions": [
+        "Stage enum",
+        "defaultMatrix",
+        "Opening fight id"
+      ],
+      "notes": "title/chart/fight matrix intact."
+    }
+  ],
+  "corrections": [
+    {
+      "id": "c1",
+      "severity": "anomaly",
+      "screen": "fight",
+      "title": "Versus showed full named gang",
+      "before": "PlinkBattleVersusIntroView always received PlinkAttackerKind.namedCrew",
+      "after": "Passes fightCastKinds from the real rescue roster (porcupine pack / solo boss)",
+      "files": [
+        "PlinkBattleHostView.swift",
+        "PlinkBattleVersusIntroView.swift",
+        "PlinkBattleFoe.swift"
+      ]
+    },
+    {
+      "id": "c2",
+      "severity": "anomaly",
+      "screen": "chart",
+      "title": "Tile name overlays on Abbie + fighters",
+      "before": "ABBIE / PORCUPINE painted on chart tiles",
+      "after": "Names live on foe card + bottom Abbie card; destination labels only on utility tiles",
+      "files": [
+        "MarbleVoyageHostView.swift"
+      ]
+    },
+    {
+      "id": "c3",
+      "severity": "anomaly",
+      "screen": "shop",
+      "title": "Bell Market wasted vertical space",
+      "before": "Tall ScrollView with always-on bag strip",
+      "after": "One-screen market; bag is a bottom drawer",
+      "files": [
+        "MarbleVoyageShopView.swift"
+      ]
+    },
+    {
+      "id": "c4",
+      "severity": "anomaly",
+      "screen": "chart",
+      "title": "Engage card HP used cage-era formula",
+      "before": "Chart foe card showed ~87 HP (run.enemyMaxHP) while board lead is ~38",
+      "after": "PeglinBattleRules.previewLeadFoeStats \u2014 matches roster lead HP/ATK",
+      "files": [
+        "PlinkBattleFoe.swift",
+        "MarbleVoyageHostView.swift",
+        "MarbleVoyageOverlandScroll.swift"
+      ]
+    },
+    {
+      "id": "c5",
+      "severity": "anomaly",
+      "screen": "title",
+      "title": "Unassigned Abbie JPEG in happy imageset",
+      "before": "abbie-profile-approved.jpeg duplicate triggered actool warning",
+      "after": "Removed orphan; keep abbie-regal-happy.jpeg only",
+      "files": [
+        "world2_peglin_abbie_happy.imageset"
+      ]
+    }
+  ],
+  "portraits": [
+    {
+      "id": "abbie",
+      "label": "Abbie",
+      "src": "portraits/abbie.jpeg",
+      "role": "Player"
+    },
+    {
+      "id": "porcupine",
+      "label": "Porcupine Boxer",
+      "src": "portraits/porcupine.png",
+      "role": "Opening lead"
+    },
+    {
+      "id": "crab",
+      "label": "Crab Pincher",
+      "src": "portraits/crab.png",
+      "role": "Hench pack"
+    },
+    {
+      "id": "grasshopper",
+      "label": "Grasshopper",
+      "src": "portraits/grasshopper.png",
+      "role": "Hench pack"
+    },
+    {
+      "id": "armadillo",
+      "label": "Armadillo",
+      "src": "portraits/armadillo.png",
+      "role": "Hench pack"
+    },
+    {
+      "id": "bat",
+      "label": "Bat Divekicker",
+      "src": "portraits/bat.png",
+      "role": "Hench pack (flying)"
+    },
+    {
+      "id": "fox",
+      "label": "Fox",
+      "src": "portraits/fox.png",
+      "role": "Rescue spirit"
+    }
+  ],
+  "dagLatest": {
+    "ok": true,
+    "generatedAt": "2026-09-27T00:35:02.082982+00:00",
+    "template": "voyage_opening_screen_dag.v1",
+    "screens": {
+      "contracts": {
+        "status": "ok",
+        "predictionsChecked": 3,
+        "anomalyCount": 0,
+        "issueCount": 0,
+        "findings": []
+      },
+      "chart": {
+        "status": "ok",
+        "predictionsChecked": 3,
+        "anomalyCount": 0,
+        "issueCount": 0,
+        "findings": []
+      },
+      "event": {
+        "status": "ok",
+        "predictionsChecked": 2,
+        "anomalyCount": 0,
+        "issueCount": 0,
+        "findings": []
+      },
+      "fight": {
+        "status": "ok",
+        "predictionsChecked": 4,
+        "anomalyCount": 0,
+        "issueCount": 0,
+        "findings": []
+      },
+      "shop": {
+        "status": "ok",
+        "predictionsChecked": 3,
+        "anomalyCount": 0,
+        "issueCount": 0,
+        "findings": []
+      },
+      "title": {
+        "status": "ok",
+        "predictionsChecked": 2,
+        "anomalyCount": 0,
+        "issueCount": 0,
+        "findings": []
+      }
+    },
+    "anomalies": [],
+    "issues": [],
+    "failedScreens": [],
+    "okScreens": [
+      "contracts",
+      "chart",
+      "event",
+      "fight",
+      "shop",
+      "title"
+    ],
+    "catalog": [
+      {
+        "screen_id": "contracts",
+        "title": "Capture / stage contracts",
+        "dependencies": [],
+        "predictions": [
+          "Stages: title, chart, fight, shop, event",
+          "defaultMatrix = title, chart, fight",
+          "Opening fight node = land0_poi1"
+        ],
+        "required_for_default_matrix": true
+      },
+      {
+        "screen_id": "title",
+        "title": "Title opening",
+        "dependencies": [
+          "contracts"
+        ],
+        "predictions": [
+          "Title plate imageset present",
+          "world2.marbleVoyage.title a11y id"
+        ],
+        "required_for_default_matrix": true
+      },
+      {
+        "screen_id": "chart",
+        "title": "Overland climb chart",
+        "dependencies": [
+          "contracts"
+        ],
+        "predictions": [
+          "Abbie bottom card present",
+          "Foe cast card present",
+          "No name overlays on Abbie/fighter tiles"
+        ],
+        "required_for_default_matrix": true
+      },
+      {
+        "screen_id": "fight",
+        "title": "Opening fight / versus",
+        "dependencies": [
+          "contracts"
+        ],
+        "predictions": [
+          "Versus shows exact fightCastKinds",
+          "Hench lead = wave attacker",
+          "land0_poi1 \u2192 porcupineBoxer",
+          "Stable rescue roster seed"
+        ],
+        "required_for_default_matrix": true
+      },
+      {
+        "screen_id": "shop",
+        "title": "Bell Market (post-fight)",
+        "dependencies": [
+          "contracts"
+        ],
+        "predictions": [
+          "Bag is a drawer",
+          "One-screen market chrome",
+          "Bell Market plate bound"
+        ],
+        "required_for_default_matrix": false
+      },
+      {
+        "screen_id": "event",
+        "title": "Event still",
+        "dependencies": [
+          "contracts"
+        ],
+        "predictions": [
+          "Event parks on land0_poi2",
+          "Event a11y id present"
+        ],
+        "required_for_default_matrix": false
+      }
+    ]
+  },
+  "multimodal": {
+    "provider": "openai",
+    "model": "gpt-5.6",
+    "generatedAt": "2026-09-27T00:35:39.342884+00:00",
+    "stillsDir": "artifacts/voyage-capture/20260926T214439Z",
+    "ok": false,
+    "predictionTotal": 14,
+    "predictionFail": 4,
+    "predictionUncertain": 1,
+    "anomalyCount": 6,
+    "issueCount": 4,
+    "defectRate": 0.2857142857142857,
+    "defectRateLabel": "4/14 multimodal prediction fails (29%)",
+    "screens": {
+      "title": {
+        "decision": "fail",
+        "reasoning": [
+          "The captured still is a tall portrait canvas rather than an iPad landscape frame.",
+          "The voyage artwork and interface occupy only a central horizontal band.",
+          "Large black empty regions dominate both the top and bottom of the still.",
+          "Within the rendered band, the title and both primary mode CTAs are readable and fully visible."
+        ],
+        "predictionFindings": [
+          {
+            "prediction": "Full-bleed voyage title plate fills most of the landscape frame",
+            "status": "fail",
+            "evidence": "The title artwork is confined to a central band and does not fill most of the captured frame."
+          },
+          {
+            "prediction": "Brand / Marble Voyage title is readable",
+            "status": "pass",
+            "evidence": "\u201cABBIE\u2019S WORLD\u201d and the large \u201cMarble Voyage\u201d title are clearly readable near the center."
+          },
+          {
+            "prediction": "Campaign and Endless CTAs are visible and not clipped",
+            "status": "pass",
+            "evidence": "Both wide Campaign and Endless CTA panels, including their labels, icons, descriptions, and right arrows, are fully visible."
+          },
+          {
+            "prediction": "No broken placeholder art or empty letterbox dominating the frame",
+            "status": "fail",
+            "evidence": "Large solid-black letterbox areas above and below the interface occupy more of the still than the rendered game screen."
+          }
+        ],
+        "anomalies": [
+          {
+            "code": "WRONG_CANVAS_ASPECT",
+            "message": "A landscape interface is embedded inside a much taller portrait capture."
+          },
+          {
+            "code": "DOMINANT_LETTERBOX",
+            "message": "Massive black regions dominate the top and bottom of the frame."
+          }
+        ],
+        "issues": [],
+        "summary": "The title UI itself is readable and intact, but the opening still fails because the landscape screen is severely letterboxed inside a portrait canvas.",
+        "model": "gpt-5.6",
+        "image": "artifacts/voyage-capture/20260926T214439Z/title.png",
+        "screen": "title"
+      },
+      "chart": {
+        "decision": "fail",
+        "reasoning": [
+          "The visible game area is centered on a connected climb path with Abbie and a foe tile.",
+          "Abbie\u2019s portrait tile is visible on the lower path and glows green.",
+          "The foe tile and cast card both identify the foe as PORCUPINE, so the cast is consistent.",
+          "Large PORCUPINE and ABBIE labels overlay the path tiles despite the separate foe card.",
+          "No bottom Abbie status card is visible; HP appears only in a top-right badge, and large black regions surround the game area."
+        ],
+        "predictionFindings": [
+          {
+            "prediction": "Overland climb chart is the main surface",
+            "status": "pass",
+            "evidence": "The central game area shows a gridded chart with connected Abbie and Porcupine path tiles under the heading \u201cClimb \u00b7 1/10.\u201d"
+          },
+          {
+            "prediction": "Abbie player token is visible on the path",
+            "status": "pass",
+            "evidence": "A green-glowing portrait tile labeled \u201cABBIE\u201d is visibly connected to the path near the bottom center."
+          },
+          {
+            "prediction": "If a foe/cast card is present, it names the actual next foe (not a wrong gang member)",
+            "status": "pass",
+            "evidence": "The right-side cast card says \u201cPORCUPINE,\u201d matching the connected next tile labeled \u201cPORCUPINE.\u201d"
+          },
+          {
+            "prediction": "Player/fighter name overlays should NOT dominate tiles when a cast card exists (names belong on the card / Abbie status card)",
+            "status": "fail",
+            "evidence": "Large \u201cPORCUPINE\u201d and \u201cABBIE\u201d name plates visibly cover the upper portions of both path tiles while a separate Porcupine cast card is present."
+          },
+          {
+            "prediction": "Abbie status card at the bottom is ideal; flag if missing when the still claims post-redesign chrome",
+            "status": "fail",
+            "evidence": "No bottom Abbie status card is visible; the only player-status chrome shown is the \u201c120/120 HP\u201d badge at the top right."
+          }
+        ],
+        "anomalies": [
+          {
+            "code": "tile_name_overlays",
+            "message": "Large fighter-name overlays dominate both path tiles even though the foe has a dedicated cast card."
+          },
+          {
+            "code": "missing_bottom_status",
+            "message": "The expected bottom Abbie status card is absent from the visible game area."
+          },
+          {
+            "code": "severe_letterboxing",
+            "message": "Large black regions occupy the top and bottom of the still, compressing the landscape game surface into a central band."
+          }
+        ],
+        "issues": [
+          {
+            "code": "duplicate_foe_identity",
+            "message": "Porcupine is labeled prominently on both the tile and the cast card, creating redundant visual emphasis."
+          },
+          {
+            "code": "status_separation",
+            "message": "The HP badge is isolated at the top right rather than visually associated with Abbie\u2019s token."
+          }
+        ],
+        "summary": "The climb chart, Abbie token, and matching Porcupine cast are visible, but dominant tile-name overlays, a missing bottom Abbie status card, and severe black letterboxing make the still fail.",
+        "model": "gpt-5.6",
+        "image": "artifacts/voyage-capture/20260926T214439Z/chart.png",
+        "screen": "chart"
+      },
+      "fight": {
+        "decision": "fail",
+        "reasoning": [
+          "The visible battle interface occupies a horizontal band within a much taller black canvas, indicating a major viewport or capture-layout mismatch.",
+          "Within that interface, the peg board is visibly the largest gameplay region.",
+          "The active enemy card clearly identifies Porcupine Boxer, while the two tiny Next up portraits are not labeled clearly enough to verify their identities.",
+          "Abbie's 120/120 HP, the 4 marbles left counter, and the Rescue Fox objective are all readable."
+        ],
+        "predictionFindings": [
+          {
+            "prediction": "Peg board is the largest playable surface",
+            "status": "pass",
+            "evidence": "The large bordered peg field fills most of the left and central battle interface, exceeding the enemy card and header in area."
+          },
+          {
+            "prediction": "Active enemy cast card shows the lead foe for this fight (opening: Porcupine Boxer)",
+            "status": "pass",
+            "evidence": "The right-side FIGHTING NOW card visibly names the active foe Porcupine Boxer and shows its portrait and 44/44 HP."
+          },
+          {
+            "prediction": "If a 'Next up' / bench strip exists, it shows other foes in THIS fight \u2014 not the full named Raze/Vix/Morrow/Nib gang unless they are actually in the roster",
+            "status": "uncertain",
+            "evidence": "A Next up strip contains two small portraits with 44 values, but no readable names or sufficiently clear identities are shown to verify the roster."
+          },
+          {
+            "prediction": "Abbie HP and marble count chrome are readable",
+            "status": "pass",
+            "evidence": "The upper-left chrome reads 120/120 beneath Abbie's portrait, and the upper-right counter reads 4 marbles left."
+          },
+          {
+            "prediction": "Rescue objective (Fox / friend) is visible somewhere on the battle chrome",
+            "status": "pass",
+            "evidence": "The header and right-side objective panel both visibly state Rescue Fox \u2014 defeat all 3 foes."
+          }
+        ],
+        "anomalies": [
+          {
+            "code": "VIEWPORT_LETTERBOX",
+            "message": "The landscape battle UI is confined to a central horizontal band with very large black areas above and below, indicating a hard viewport or scaling mismatch."
+          }
+        ],
+        "issues": [
+          {
+            "code": "BENCH_IDENTITY_UNCLEAR",
+            "message": "The Next up portraits are extremely small and unlabeled, so the upcoming foes cannot be reliably identified."
+          },
+          {
+            "code": "BOARD_BACKGROUND_BUSY",
+            "message": "The detailed artwork behind the translucent peg board reduces visual separation between some pegs and the playfield."
+          }
+        ],
+        "summary": "Core fight content is present and mostly readable, but the severe black letterboxing causes failure and the Next up roster cannot be verified.",
+        "model": "gpt-5.6",
+        "image": "artifacts/voyage-capture/20260926T214439Z/fight.png",
+        "screen": "fight"
+      },
+      "shop": {
+        "decision": "skipped",
+        "summary": "No still at shop.png"
+      },
+      "event": {
+        "decision": "skipped",
+        "summary": "No still at event.png"
+      }
+    },
+    "anomalies": [
+      {
+        "screen": "title",
+        "code": "WRONG_CANVAS_ASPECT",
+        "message": "A landscape interface is embedded inside a much taller portrait capture."
+      },
+      {
+        "screen": "title",
+        "code": "DOMINANT_LETTERBOX",
+        "message": "Massive black regions dominate the top and bottom of the frame."
+      },
+      {
+        "screen": "chart",
+        "code": "tile_name_overlays",
+        "message": "Large fighter-name overlays dominate both path tiles even though the foe has a dedicated cast card."
+      },
+      {
+        "screen": "chart",
+        "code": "missing_bottom_status",
+        "message": "The expected bottom Abbie status card is absent from the visible game area."
+      },
+      {
+        "screen": "chart",
+        "code": "severe_letterboxing",
+        "message": "Large black regions occupy the top and bottom of the still, compressing the landscape game surface into a central band."
+      },
+      {
+        "screen": "fight",
+        "code": "VIEWPORT_LETTERBOX",
+        "message": "The landscape battle UI is confined to a central horizontal band with very large black areas above and below, indicating a hard viewport or scaling mismatch."
+      }
+    ],
+    "issues": [
+      {
+        "screen": "chart",
+        "code": "duplicate_foe_identity",
+        "message": "Porcupine is labeled prominently on both the tile and the cast card, creating redundant visual emphasis."
+      },
+      {
+        "screen": "chart",
+        "code": "status_separation",
+        "message": "The HP badge is isolated at the top right rather than visually associated with Abbie\u2019s token."
+      },
+      {
+        "screen": "fight",
+        "code": "BENCH_IDENTITY_UNCLEAR",
+        "message": "The Next up portraits are extremely small and unlabeled, so the upcoming foes cannot be reliably identified."
+      },
+      {
+        "screen": "fight",
+        "code": "BOARD_BACKGROUND_BUSY",
+        "message": "The detailed artwork behind the translucent peg board reduces visual separation between some pegs and the playfield."
+      }
+    ],
+    "note": "Stills are pre-redesign captures; source fixes for tile names / Abbie card / exact cast are already in tree. Letterboxing is a capture-orientation defect."
+  }
+}

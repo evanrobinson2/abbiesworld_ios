@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-lamps-02-bluebell-floor-lamp",
+  "latencyMs": 3971,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.98,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "A whimsical botanical floor lamp with tall arched green stems, a broad leafy base, and two drooping bluebell-shaped shades glowing warmly from within.",
+    "suggestedScale": 0.9
+  },
+  "pngSha256": "9c18346f6219cd4cca6e20f6137c14c38674be7c67f37447669dd5986613c995",
+  "responseId": "chatcmpl-ESoDTxX2O70aRQ7uAgDwQwYgkqbAr",
+  "timestamp": "2026-09-27T18:48:46.869169+00:00"
+}

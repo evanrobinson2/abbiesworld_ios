@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "world2_plink_gang_crabPincher_idle.png",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

@@ -1,0 +1,199 @@
+{
+  "ballLevel": 3,
+  "charmStacks": {},
+  "coins": 14,
+  "economy": {
+    "ballUpgradePrice": 25,
+    "goldPegPrevalence": 0.15,
+    "goldPegValue": 6,
+    "healFraction": 0.2,
+    "healPrice": 25,
+    "shopInflation": 1.25
+  },
+  "events": [],
+  "fights": [
+    {
+      "boardPegs": 34,
+      "damageDealt": 0,
+      "damageTaken": 12,
+      "fightSeed": 10030,
+      "foes": [],
+      "goldEarned": 30,
+      "goldPegHits": 5,
+      "hpAfter": 108,
+      "hpBefore": 120,
+      "nodeID": "land0_poi1",
+      "pegsLit": 34,
+      "role": "henchman",
+      "rounds": 9,
+      "title": "L1 POI1 Warmup",
+      "waveAttacker": null,
+      "won": true
+    },
+    {
+      "boardPegs": 34,
+      "damageDealt": 0,
+      "damageTaken": 23,
+      "fightSeed": 10047,
+      "foes": [],
+      "goldEarned": 30,
+      "goldPegHits": 5,
+      "hpAfter": 85,
+      "hpBefore": 108,
+      "nodeID": "land0_poi2",
+      "pegsLit": 34,
+      "role": "henchman",
+      "rounds": 8,
+      "title": "L1 POI2 Battle",
+      "waveAttacker": null,
+      "won": true
+    },
+    {
+      "boardPegs": 34,
+      "damageDealt": 0,
+      "damageTaken": 22,
+      "fightSeed": 10064,
+      "foes": [],
+      "goldEarned": 24,
+      "goldPegHits": 4,
+      "hpAfter": 63,
+      "hpBefore": 85,
+      "nodeID": "land0_poi3",
+      "pegsLit": 27,
+      "role": "henchman",
+      "rounds": 8,
+      "title": "L1 POI3 Hard",
+      "waveAttacker": null,
+      "won": true
+    },
+    {
+      "boardPegs": 34,
+      "damageDealt": 0,
+      "damageTaken": 36,
+      "fightSeed": 10081,
+      "foes": [],
+      "goldEarned": 30,
+      "goldPegHits": 5,
+      "hpAfter": 51,
+      "hpBefore": 87,
+      "nodeID": "land0_boss",
+      "pegsLit": 34,
+      "role": "miniBoss",
+      "rounds": 7,
+      "title": "L1 Boss",
+      "waveAttacker": null,
+      "won": true
+    }
+  ],
+  "finishedAtISO8601": "2026-09-26T13:20:42Z",
+  "gang": null,
+  "kind": "simulation",
+  "mode": "campaign",
+  "notes": "gold economy sim policy=greedy_sustain lands=1 landGold=[114] marbles=[2, 2, 1, 1, 1, 1] dmgMult=1.144",
+  "outcome": "ongoing",
+  "path": [
+    {
+      "from": "start",
+      "kind": "fight",
+      "title": "L1 POI1 Warmup",
+      "to": "land0_poi1"
+    },
+    {
+      "from": "land0_poi1",
+      "kind": "fight",
+      "title": "L1 POI2 Battle",
+      "to": "land0_poi2"
+    },
+    {
+      "from": "land0_poi2",
+      "kind": "fight",
+      "title": "L1 POI3 Hard",
+      "to": "land0_poi3"
+    },
+    {
+      "from": "land0_poi3",
+      "kind": "fight",
+      "title": "L1 Boss",
+      "to": "land0_boss"
+    }
+  ],
+  "playerHP": 75,
+  "playerMaxHP": 120,
+  "schemaVersion": 1,
+  "seed": 10030,
+  "shops": [
+    {
+      "afterNodeID": "land0_poi1",
+      "charmOffers": [
+        "hover",
+        "sockSnatch"
+      ],
+      "hpAfter": 108,
+      "hpBefore": 108,
+      "purchases": [
+        {
+          "detail": "marble0 \u2192 Lv2",
+          "pricePaid": 25,
+          "sku": "ballUpgrade"
+        }
+      ],
+      "walletAfter": 5,
+      "walletBefore": 30
+    },
+    {
+      "afterNodeID": "land0_poi2",
+      "charmOffers": [
+        "moonGleam",
+        "lullaby"
+      ],
+      "hpAfter": 85,
+      "hpBefore": 85,
+      "purchases": [
+        {
+          "detail": "marble1 \u2192 Lv2",
+          "pricePaid": 25,
+          "sku": "ballUpgrade"
+        }
+      ],
+      "walletAfter": 10,
+      "walletBefore": 35
+    },
+    {
+      "afterNodeID": "land0_poi3",
+      "charmOffers": [
+        "bloom",
+        "hover"
+      ],
+      "hpAfter": 87,
+      "hpBefore": 63,
+      "purchases": [
+        {
+          "detail": "+24 HP",
+          "pricePaid": 25,
+          "sku": "heal"
+        }
+      ],
+      "walletAfter": 9,
+      "walletBefore": 34
+    },
+    {
+      "afterNodeID": "land0_boss",
+      "charmOffers": [
+        "prismBurst",
+        "cycle"
+      ],
+      "hpAfter": 75,
+      "hpBefore": 51,
+      "purchases": [
+        {
+          "detail": "+24 HP",
+          "pricePaid": 25,
+          "sku": "heal"
+        }
+      ],
+      "walletAfter": 14,
+      "walletBefore": 39
+    }
+  ],
+  "startedAtISO8601": "2026-09-26T13:20:42Z"
+}

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Movement lab</title>
+  <style>
+    :root { --bg:#12141a; --ink:#e8eef7; --muted:#8b98ab; --bad:#e86a6a; --ok:#5dca8a; --hot:#e89a3c; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink);
+      font: 13px/1.35 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    #layout { display: grid; grid-template-columns: 1fr 380px; height: 100%; }
+    #stage { position: relative; min-width: 0; }
+    canvas#view { width: 100%; height: 100%; display: block; }
+    #arrow {
+      position: absolute; left: 50%; top: 42%; width: 0; height: 0; pointer-events: none;
+      transform-origin: 50% 80%;
+    }
+    #arrow i {
+      position: absolute; left: -7px; top: -70px; width: 14px; height: 70px;
+      background: #ffd23a; border-radius: 7px;
+      box-shadow: 0 0 0 3px #1a1208;
+    }
+    #arrow i:after {
+      content: ""; position: absolute; left: -11px; top: -16px;
+      border: 18px solid transparent; border-bottom-color: #ffd23a;
+    }
+    #side { overflow: auto; padding: 12px; border-left: 1px solid #2a3140; }
+    h1 { margin: 0 0 6px; font-size: 14px; }
+    p.note { color: var(--muted); margin: 0 0 10px; }
+    button, select {
+      appearance: none; border: 0; border-radius: 8px; padding: 7px 10px;
+      background: #1c2736; color: var(--ink); font: inherit; cursor: pointer; margin: 0 6px 6px 0;
+    }
+    button.on { background: var(--hot); color: #1a1208; font-weight: 700; }
+    #map { width: 100%; height: 220px; background: #1a2030; border-radius: 10px; display: block; }
+    table { width: 100%; border-collapse: collapse; margin-top: 8px; }
+    td, th { text-align: left; padding: 3px 4px; border-bottom: 1px solid #2a3140; }
+    .bad { color: var(--bad); } .ok { color: var(--ok); }
+    #status { color: var(--muted); min-height: 2.6em; }
+    pre { white-space: pre-wrap; color: var(--muted); font: inherit; }
+  </style>
+</head>
+<body>
+  <div id="layout">
+    <div id="stage">
+      <canvas id="view"></canvas>
+      <div id="arrow" hidden><i></i></div>
+    </div>
+    <aside id="side">
+      <h1>Movement lab</h1>
+      <p class="note">Same camera and heading math as the iPad. Yellow arrow is stick travel. The mesh is the Meshy GLB, not a preview MP4.</p>
+      <div id="status">Loading GLBs…</div>
+      <div>
+        <button data-dir="n">North</button>
+        <button data-dir="e">East</button>
+        <button data-dir="s">South</button>
+        <button data-dir="w">West</button>
+        <button data-dir="stop">Stop</button>
+      </div>
+      <div>
+        <button id="mode-shipped" class="on">Shipped yaw</button>
+        <button id="mode-flipx">Flip X yaw</button>
+      </div>
+      <div>
+        <button id="form-mirror">Daddy mirrors</button>
+        <button id="form-trail" class="on">Daddy trails</button>
+      </div>
+      <canvas id="map" width="680" height="440"></canvas>
+      <table id="score"></table>
+      <pre id="readout"></pre>
+    </aside>
+  </div>
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.170.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.170.0/examples/jsm/"
+    }
+  }
+  </script>
+  <script type="module">
+    import * as THREE from "three";
+    import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
+
+    const DIRS = {
+      n: { x: 0, y: 1, label: "North" },
+      e: { x: 1, y: 0, label: "East" },
+      s: { x: 0, y: -1, label: "South" },
+      w: { x: -1, y: 0, label: "West" },
+      stop: { x: 0, y: 0, label: "Stop" },
+    };
+
+    const state = {
+      ready: false,
+      dir: "stop",
+      mode: "shipped",
+      formation: "trail",
+      actors: {},
+      lead: { x: 0.45, y: 0.55 },
+    };
+    window.__lab = state;
+
+    function headingForTravel(dx, dy, mode) {
+      // Shipped: +Z chest, camera (2.6, 2.4, 2.6). flipx is the old basis
+      // that faced left when the stick went right.
+      if (mode === "flipx") {
+        const ox = dx * 0.7071 + dy * 0.7071;
+        const oz = dx * -0.7071 + dy * 0.7071;
+        return Math.atan2(-ox, -oz);
+      }
+      const wx = 0.7071 * dx + 0.7771 * dy;
+      const wz = -0.7071 * dx + 0.6293 * dy;
+      if (Math.hypot(wx, wz) < 0.0001) return 0.72;
+      return Math.atan2(wx, wz);
+    }
+
+    function stickPose(move, mode, formation) {
+      const mag = Math.hypot(move.x, move.y);
+      if (mag < 0.16) {
+        return { gait: "idle", heading: 0.72, facingRight: true, dx: 0, dy: 0 };
+      }
+      const dx = move.x;
+      const dy = -move.y;
+      return {
+        gait: mag >= 0.62 ? "run" : "walk",
+        heading: headingForTravel(dx, dy, mode),
+        facingRight: dx >= 0,
+        dx, dy,
+      };
+    }
+
+    const canvas = document.getElementById("view");
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color("#1b2230");
+    const camera = new THREE.PerspectiveCamera(32, 1, 0.05, 40);
+    window.__THREE = THREE;
+    window.__camera = camera;
+    camera.position.set(2.6, 2.4, 2.6);
+    camera.lookAt(0, 0.55, 0);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.85));
+    const sun = new THREE.DirectionalLight(0xffffff, 1.4);
+    sun.position.set(3, 6, 2);
+    scene.add(sun);
+    const ground = new THREE.Mesh(
+      new THREE.CircleGeometry(1.4, 48),
+      new THREE.MeshStandardMaterial({ color: "#2a3344", roughness: 1 })
+    );
+    ground.rotation.x = -Math.PI / 2;
+    scene.add(ground);
+    const ring = new THREE.PolarGridHelper(1.2, 8, 4, 32, 0x445066, 0x2c3548);
+    ring.position.y = 0.002;
+    scene.add(ring);
+
+    function resize() {
+      const w = canvas.clientWidth, h = canvas.clientHeight;
+      renderer.setSize(w, h, false);
+      camera.aspect = w / Math.max(1, h);
+      camera.updateProjectionMatrix();
+    }
+    addEventListener("resize", resize);
+
+    function fitHeight(root, height) {
+      const box = new THREE.Box3().setFromObject(root);
+      const size = box.getSize(new THREE.Vector3());
+      const s = height / Math.max(0.001, size.y);
+      root.scale.setScalar(s);
+      root.updateMatrixWorld(true);
+      const fitted = new THREE.Box3().setFromObject(root);
+      root.position.y -= fitted.min.y;
+    }
+
+    function localForward(root) {
+      root.updateMatrixWorld(true);
+      const hips = root.getObjectByName("Hips");
+      const left = root.getObjectByName("LeftShoulder");
+      const right = root.getObjectByName("RightShoulder");
+      const head = root.getObjectByName("Head");
+      if (!hips || !left || !right || !head) return new THREE.Vector3(0, 0, -1);
+      const hp = new THREE.Vector3(), lp = new THREE.Vector3(), rp = new THREE.Vector3(), up = new THREE.Vector3();
+      hips.getWorldPosition(hp);
+      left.getWorldPosition(lp);
+      right.getWorldPosition(rp);
+      head.getWorldPosition(up);
+      const across = rp.sub(lp);
+      const sky = up.sub(hp);
+      // Right shoulder minus left, crossed with up, points out the back.
+      const forward = new THREE.Vector3().crossVectors(sky, across).normalize();
+      const tip = hp.clone().add(forward);
+      const localTip = root.worldToLocal(tip);
+      const localHip = root.worldToLocal(hp);
+      return localTip.sub(localHip).setY(0).normalize();
+    }
+
+    async function loadActor(url, clipName) {
+      const gltf = await new GLTFLoader().loadAsync(url);
+      const root = gltf.scene;
+      fitHeight(root, 1.15);
+      const forward = localForward(root);
+      const mixer = new THREE.AnimationMixer(root);
+      const clip = gltf.animations.find((a) => a.name === clipName || a.name.includes(clipName)) || gltf.animations[0];
+      const action = mixer.clipAction(clip);
+      action.play();
+      const pivot = new THREE.Group();
+      pivot.add(root);
+      scene.add(pivot);
+      const marker = new THREE.Mesh(
+        new THREE.SphereGeometry(0.045, 12, 12),
+        new THREE.MeshBasicMaterial({ color: 0xff4d6a })
+      );
+      marker.position.copy(forward).multiplyScalar(0.42);
+      marker.position.y = 0.95;
+      root.add(marker);
+      return { pivot, root, mixer, forward, clip: clip?.name || "?" };
+    }
+
+    function project(v) {
+      const p = v.clone().project(camera);
+      return { x: p.x, y: -p.y };
+    }
+
+    function noseScreen(actor) {
+      const tip = actor.forward.clone().multiplyScalar(1.2);
+      tip.y = 0.7;
+      const world = actor.root.localToWorld(tip);
+      const hip = actor.root.localToWorld(new THREE.Vector3(0, 0.7, 0));
+      const a = project(hip);
+      const b = project(world);
+      return { x: b.x - a.x, y: b.y - a.y };
+    }
+
+    function alignScore(nose, travel) {
+      const nl = Math.hypot(nose.x, nose.y) || 1;
+      const tl = Math.hypot(travel.x, travel.y) || 1;
+      return (nose.x / nl) * (travel.x / tl) + (nose.y / nl) * (travel.y / tl);
+    }
+
+    function daddyOffset(facingRight, formation, heading) {
+      if (formation === "mirror") {
+        const mirror = facingRight ? 1 : -1;
+        return { x: -0.07 * mirror, y: 0.04 };
+      }
+      return { x: -0.07, y: 0.04 };
+    }
+
+    function drawMap(pose) {
+      const c = document.getElementById("map");
+      const g = c.getContext("2d");
+      g.clearRect(0, 0, c.width, c.height);
+      g.fillStyle = "#243044";
+      g.fillRect(0, 0, c.width, c.height);
+      const daddy = daddyOffset(pose.facingRight, state.formation, pose.heading);
+      const pts = [
+        { name: "Abbie", x: state.lead.x, y: state.lead.y, color: "#ff8ad4" },
+        { name: "Daddy", x: state.lead.x + daddy.x, y: state.lead.y + daddy.y, color: "#9db7ff" },
+      ];
+      for (const p of pts) {
+        const sx = p.x * c.width;
+        const sy = p.y * c.height;
+        g.fillStyle = p.color;
+        g.beginPath();
+        g.arc(sx, sy, 16, 0, Math.PI * 2);
+        g.fill();
+        g.fillStyle = "#fff";
+        g.font = "16px sans-serif";
+        g.fillText(p.name, sx + 20, sy + 4);
+      }
+      if (pose.dx || pose.dy) {
+        const sx = state.lead.x * c.width;
+        const sy = state.lead.y * c.height;
+        g.strokeStyle = "#ffd23a";
+        g.lineWidth = 4;
+        g.beginPath();
+        g.moveTo(sx, sy);
+        g.lineTo(sx + pose.dx * 70, sy + pose.dy * 70);
+        g.stroke();
+      }
+      g.fillStyle = "#8b98ab";
+      g.font = "14px sans-serif";
+      const flip = state.formation === "mirror" && pose.dx < 0;
+      g.fillText(flip ? "Daddy just swapped sides" : "Daddy holds his side", 16, 28);
+    }
+
+    function applyPose() {
+      const move = DIRS[state.dir];
+      const pose = stickPose(move, state.mode, state.formation);
+      for (const actor of Object.values(state.actors)) {
+        actor.pivot.rotation.y = pose.heading - (actor.yawBias || 0);
+        actor.mixer.timeScale = pose.gait === "idle" ? 1 : 1;
+      }
+      const arrow = document.getElementById("arrow");
+      if (!pose.dx && !pose.dy) {
+        arrow.hidden = true;
+      } else {
+        arrow.hidden = false;
+        const angle = Math.atan2(pose.dx, -pose.dy);
+        arrow.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`;
+      }
+      drawMap(pose);
+      const abbie = state.actors.abbie;
+      let score = null;
+      if (abbie && (pose.dx || pose.dy)) {
+        score = alignScore(noseScreen(abbie), { x: pose.dx, y: pose.dy });
+      }
+      const verdict = score == null ? "standing" : score > 0.5 ? "nose matches travel" : score < -0.5 ? "nose is backwards" : "nose is sideways";
+      document.getElementById("readout").textContent =
+        `${DIRS[state.dir].label}  yaw ${(pose.heading * 180 / Math.PI).toFixed(0)}°  facingRight ${pose.facingRight}\n` +
+        `travel map (${pose.dx.toFixed(2)}, ${pose.dy.toFixed(2)})  ${verdict}` +
+        (score == null ? "" : `  (${score.toFixed(2)})`);
+      state.last = { pose, score, verdict };
+      return state.last;
+    }
+
+    function scoreTable() {
+      const rows = [["dir", "shipped", "flip X"]];
+      for (const key of ["n", "e", "s", "w"]) {
+        const move = DIRS[key];
+        const cells = [DIRS[key].label];
+        for (const mode of ["shipped", "flipx"]) {
+          state.dir = key;
+          state.mode = mode;
+          const result = applyPose();
+          const mark = result.score > 0.5 ? "match" : result.score < -0.5 ? "backwards" : "sideways";
+          cells.push(`${mark} ${result.score.toFixed(2)}`);
+        }
+        rows.push(cells);
+      }
+      state.dir = new URLSearchParams(location.search).get("shot") || "e";
+      state.mode = "shipped";
+      document.querySelectorAll("[data-dir]").forEach((b) => b.classList.toggle("on", b.dataset.dir === state.dir));
+      const table = document.getElementById("score");
+      table.innerHTML = rows.map((r, i) =>
+        `<tr>${r.map((c) => i ? `<td class="${String(c).startsWith("match") ? "ok" : "bad"}">${c}</td>` : `<th>${c}</th>`).join("")}</tr>`
+      ).join("");
+      applyPose();
+    }
+
+    document.querySelectorAll("[data-dir]").forEach((b) => {
+      b.onclick = () => {
+        state.dir = b.dataset.dir;
+        document.querySelectorAll("[data-dir]").forEach((n) => n.classList.toggle("on", n === b));
+        applyPose();
+      };
+    });
+    document.getElementById("mode-shipped").onclick = () => setMode("shipped");
+    document.getElementById("mode-flipx").onclick = () => setMode("flipx");
+    function setMode(mode) {
+      state.mode = mode;
+      document.getElementById("mode-shipped").classList.toggle("on", mode === "shipped");
+      document.getElementById("mode-flipx").classList.toggle("on", mode === "flipx");
+      applyPose();
+    }
+    document.getElementById("form-mirror").onclick = () => setForm("mirror");
+    document.getElementById("form-trail").onclick = () => setForm("trail");
+    function setForm(formation) {
+      state.formation = formation;
+      document.getElementById("form-mirror").classList.toggle("on", formation === "mirror");
+      document.getElementById("form-trail").classList.toggle("on", formation === "trail");
+      applyPose();
+    }
+
+    const clock = new THREE.Clock();
+    function frame() {
+      resize();
+      const dt = clock.getDelta();
+      for (const actor of Object.values(state.actors)) actor.mixer.update(dt);
+      renderer.render(scene, camera);
+      requestAnimationFrame(frame);
+    }
+
+    try {
+      state.actors.abbie = await loadActor("../output/redo/abbie/abbie_walk.glb", "Casual_Walk");
+      state.actors.abbie.yawBias = 0.378;
+      state.actors.daddy = await loadActor("../output/redo/daddy/daddy_walk.glb", "Casual_Walk");
+      state.actors.daddy.pivot.position.set(-0.55, 0, 0.15);
+      state.actors.daddy.pivot.scale.setScalar(0.72);
+      document.getElementById("status").textContent =
+        `Abbie walk clip ${state.actors.abbie.clip}. Daddy walk clip ${state.actors.daddy.clip}.`;
+      state.ready = true;
+      scoreTable();
+    } catch (err) {
+      document.getElementById("status").textContent = String(err);
+    }
+    frame();
+  </script>
+</body>
+</html>

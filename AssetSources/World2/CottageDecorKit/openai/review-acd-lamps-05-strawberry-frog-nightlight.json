@@ -1,0 +1,19 @@
+{
+  "assetId": "acd-lamps-05-strawberry-frog-nightlight",
+  "latencyMs": 4790,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.99,
+    "issues": [
+      "The claimed strawberry frog description does not match the depicted asset."
+    ],
+    "pass": true,
+    "placementLayer": "table",
+    "refinedDescription": "A whimsical vintage table lamp with a colorful patchwork fabric shade, scalloped cream trim, dangling pull ornaments, and a golden pedestal base resting on a stack of three worn books.",
+    "suggestedScale": 0.8
+  },
+  "responseId": "chatcmpl-ESoAwLppOwh0FNYDKZ55iNn7TKeQj",
+  "timestamp": "2026-09-27T18:46:10.827100+00:00",
+  "pngSha256": "ccf2b0a8ee5527ae28578d4b65a3d27d4c8638bec35ebb0eb6d3b75bcf8a461b"
+}

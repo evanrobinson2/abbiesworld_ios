@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-rugscushions-07-green-turtle-cushion",
+  "latencyMs": 3871,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.97,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Soft green turtle-shaped floor cushion with a raised, segmented dark-green shell, extended head, four rounded flippers, a small tail, and subtle stitched facial details.",
+    "suggestedScale": 0.85
+  },
+  "responseId": "chatcmpl-ESoBPOv0tUsu29rNXLdMLVFSRADWC",
+  "timestamp": "2026-09-27T18:46:38.921560+00:00",
+  "pngSha256": "af70d3d9c0a11d83ad955e29c6eb51b7a5d1b1fbaa28f8fbddc35f190f39533f"
+}

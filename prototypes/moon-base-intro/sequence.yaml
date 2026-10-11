@@ -1,0 +1,33 @@
+sequence:
+  id: moon-base-first-light
+  purpose: Welcome the player to the Moon Base and make arrival feel like the beginning of an adventure.
+  canvas: { aspect: 16:9, safeInset: 0.06 }
+  duration: 6.4
+  cast:
+    - id: lander
+      art: inline-vector-silhouette
+      parts: []
+      note: Whole-object descent only; not an articulated model.
+  layers: [existing-space-intro-video, starveil, far-lunar-ridge, near-regolith, habitat-vector-layers, lander, caption-overlays, grain]
+  beats:
+    - at: 0.0
+      duration: 2.0
+      intent: establish
+      camera: { move: slow-push, from: 1.04, to: 1.10 }
+      actions: [{ target: lander, move: enter, settle: 0.1 }]
+      caption: { text: "EARTH, BEHIND YOU.", entrance: staggered-snap, hold: 1.2, exit: cut }
+    - at: 2.0
+      duration: 1.5
+      intent: impact
+      camera: { move: hold }
+      actions: [{ target: lander, move: land-and-settle }, { target: regolith, move: dust-ring }]
+      caption: { text: "TOUCHDOWN.", entrance: impact-slam, hold: 0.9, exit: cut }
+    - at: 3.5
+      duration: 2.9
+      intent: handoff
+      camera: { move: settle }
+      actions: [{ target: habitat, move: draw-on-and-light }, { target: landing-pad, move: beacon-on }]
+      transition: blueprint-lines-to-warm-habitat-lights
+      caption: { text: "MOON BASE. YOUR NEXT ADVENTURE STARTS HERE.", entrance: two-stage-title-slam, hold: 1.35, exit: none }
+  audioCues: []
+  accessibility: { skippable: true, reducedMotion: resolve-to-arrival-frame }
