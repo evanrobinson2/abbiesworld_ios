@@ -225,6 +225,16 @@ struct World2RootView: View {
                 .zIndex(40)
             }
         }
+        .overlay(alignment: .trailing) {
+            if auth.isAuthenticated,
+               viewModel.currentPlayerId != nil,
+               viewModel.currentScreen == .homeWorld || viewModel.currentScreen == .blankSlate {
+                World2MicroscopeWidget {
+                    viewModel.enterPOI(World2POIRegistry.microscope)
+                }
+                .padding(.trailing, 16)
+            }
+        }
         .task {
             await viewModel.startGame()
         }

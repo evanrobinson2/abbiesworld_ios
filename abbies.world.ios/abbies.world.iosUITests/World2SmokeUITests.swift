@@ -24,6 +24,16 @@ final class World2SmokeUITests: XCTestCase {
         )
     }
 
+    func testMicroscopeWidgetOpensAndReturnsToMap() throws {
+        app.launch()
+        enterAsAbbie()
+        tap("world2.microscope.widget")
+        XCTAssertTrue(app.descendants(matching: .any)["world2.microscope"].waitForExistence(timeout: 5))
+        XCTAssertFalse(app.buttons["world2.microscope.widget"].exists)
+        tap("world2.microscope.exit")
+        XCTAssertTrue(app.buttons["world2.microscope.widget"].waitForExistence(timeout: 5))
+    }
+
     func testMicroscopeOpensGameAndReturnsHome() throws {
         app.launch()
         enterAsAbbie()
