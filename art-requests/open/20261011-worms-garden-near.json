@@ -1,0 +1,45 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-garden-near",
+  "semanticId": "plate.worms.garden.near",
+  "priority": "high",
+  "type": "plate",
+  "kind": "plate",
+  "brief": "Near vignette. Large leaves and a peach pot at the left and right edges, a little overhang at the top corners. The center 60 percent is empty flat key color so shots and worms stay visible.",
+  "aspect": "4:3",
+  "targetPixelSize": "2048x1536",
+  "expectedBackground": "flat chroma key #00b140 in the open center",
+  "styleNotes": "Detailed gouache storybook battlefield, side-on, from the height of a friendly earthworm. Warm butter light, sage leaves, peach terracotta pots, cream clouds, overlapping plants with real depth. Readable shapes and a clear empty play lane. Premium hand-drawn family-game illustration. Not a flat vector infographic, not clay 3D, not a photograph, not a UI mockup. No characters, no weapons, no text, no letters, no logo, no watermark. Paint only the frame. Center is flat #00b140. Leaves overlap as if they are in front of the camera.",
+  "usage": "Front battlefield layer. Parallax 1.35.",
+  "characterOrAssetName": "garden near frame",
+  "pose": "vignette",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/shrine-original.jpeg"
+  ],
+  "promptSeeds": [
+    "Extreme foreground leaves and one peach terracotta flowerpot framing the left and right edges of a wide garden view, a few leaves in the top corners, center sixty percent a single flat chroma green #00b140, detailed gouache, worm's-eye scale, no characters, no sky, no ground, no text --ar 4:3"
+  ],
+  "acceptanceCriteria": [
+    "Center stays empty flat #00b140",
+    "Foliage confined to the outer edges",
+    "No characters, words, or UI",
+    "Reads as a near frame over a separate background"
+  ],
+  "referenceRequestIds": [
+    "20261011-worms-garden-sky"
+  ]
+}

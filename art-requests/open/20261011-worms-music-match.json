@@ -1,0 +1,43 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-music-match",
+  "semanticId": "music.worms.match",
+  "priority": "normal",
+  "type": "music",
+  "kind": "music",
+  "brief": "Match loop. Same ensemble as the menu, a little more pulse, still quiet enough that a launch and an explosion can duck over it. No vocals. Seamless loop.",
+  "aspect": "n/a",
+  "targetPixelSize": "n/a",
+  "expectedBackground": "n/a",
+  "styleNotes": "Production music bed for play. Same instruments as the menu. Leave headroom for explosion and splash effects.",
+  "usage": "In-match bed. Ducked under launch, explosion, and victory stingers.",
+  "characterOrAssetName": "match music",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md"
+  ],
+  "promptSeeds": [
+    "Seamless 90-second loop, same small acoustic garden ensemble as a menu waltz but with a slightly steadier pulse, marimba, soft woodwind, warm bass, playful and unhurried, no vocals, no lyrics, no chiptune, headroom for sound effects, family-game match music"
+  ],
+  "acceptanceCriteria": [
+    "Seamless loop",
+    "No vocals or lyrics",
+    "Same ensemble family as the menu loop",
+    "Quiet enough to duck under explosion effects"
+  ],
+  "referenceRequestIds": [
+    "20261011-worms-music-menu"
+  ]
+}

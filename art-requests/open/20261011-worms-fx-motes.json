@@ -1,0 +1,44 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-fx-motes",
+  "semanticId": "fx.worms.garden.motes",
+  "priority": "normal",
+  "type": "fx",
+  "kind": "fx",
+  "brief": "Sprite sheet of battlefield motes: pollen specks, a few leaf flecks, and one soft dust puff for craters. Separate cells on a grid, transparent background, no scene behind them.",
+  "aspect": "1:1",
+  "targetPixelSize": "1024x1024",
+  "expectedBackground": "transparent",
+  "styleNotes": "Effects only. Soft painted particles that match the gouache garden. Even grid, consistent cell size, nothing touching the cell edge.",
+  "usage": "Parallax motes and crater dust. Cells played by the battlefield, not a single illustration.",
+  "characterOrAssetName": "garden motes",
+  "pose": "sprite sheet",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md"
+  ],
+  "promptSeeds": [
+    "Game sprite sheet on a transparent background, even 4 by 4 grid, each cell a single soft gouache particle: pollen dots, tiny leaf flecks, and one round dust puff, warm cream and sage, no scenery, no character, no text, cells not touching"
+  ],
+  "acceptanceCriteria": [
+    "Even grid of separate cells",
+    "Transparent background",
+    "No scenery, character, or text",
+    "Particles readable at battlefield scale"
+  ],
+  "referenceRequestIds": [
+    "20261011-worms-garden-sky"
+  ]
+}

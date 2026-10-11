@@ -1,0 +1,44 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-garden-soil",
+  "semanticId": "plate.worms.garden.soil",
+  "priority": "high",
+  "type": "plate",
+  "kind": "plate",
+  "brief": "Tileable soil cutaway. Straight grass lip along the top edge, rich earth and small stones through the body, a thin water band along the bottom. The game clips this texture to a heightfield, so the top must stay level and the pattern must repeat horizontally.",
+  "aspect": "4:1",
+  "targetPixelSize": "2048x512",
+  "expectedBackground": "opaque tile",
+  "styleNotes": "Detailed gouache storybook battlefield, side-on, from the height of a friendly earthworm. Warm butter light, sage leaves, peach terracotta pots, cream clouds, overlapping plants with real depth. Readable shapes and a clear empty play lane. Premium hand-drawn family-game illustration. Not a flat vector infographic, not clay 3D, not a photograph, not a UI mockup. No characters, no weapons, no text, no letters, no logo, no watermark. Orthographic cutaway, not a landscape. Top edge is a level grass crust. Horizontally tileable, no obvious seam, no hill, no character.",
+  "usage": "Destructible ground texture. Masked by the heightfield. Parallax 1.00.",
+  "characterOrAssetName": "garden soil",
+  "pose": "cutaway strip",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md"
+  ],
+  "promptSeeds": [
+    "Orthographic cross-section strip of backyard garden earth, perfectly level grass crust along the top edge, warm brown soil with pebbles and tiny roots, thin blue-green water band along the bottom edge, seamless horizontally tileable texture, detailed gouache, no hill silhouette, no sky, no plants sticking up, no characters, no text --ar 4:1"
+  ],
+  "acceptanceCriteria": [
+    "2048x512, level top edge",
+    "Horizontally tileable with no obvious seam",
+    "Grass lip, soil body, thin water band",
+    "No hill, character, crater, words, or UI"
+  ],
+  "referenceRequestIds": [
+    "20261011-worms-garden-sky"
+  ]
+}

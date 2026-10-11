@@ -1,0 +1,45 @@
+{
+  "status": "open",
+  "keepStockIcon": false,
+  "requestedBy": "Evan via Cursor",
+  "createdAt": "2026-10-11T21:30:00Z",
+  "requestedAt": "2026-10-11T21:30:00Z",
+  "gameArea": "abbiesWorms",
+  "productionIntent": "production_sprite",
+  "existingAssetSemanticIds": [],
+  "fulfillment": null,
+  "sessionNote": "Filing only. Do not spend Midjourney or music credits until Evan authorizes this batch. Submit promptSeeds one job at a time. Land originals under AssetSources/AbbiesWorms/garden-v1/ with job id, candidate index, and sha256. Do not bind into Swift. Do not import the browser prototype.",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Browser prototype at local commit 4c12824 is a rules checkpoint outside this repo. Do not bind it."
+  },
+  "id": "20261011-worms-garden-mid",
+  "semanticId": "plate.worms.garden.mid",
+  "priority": "high",
+  "type": "plate",
+  "kind": "plate",
+  "brief": "Mid-distance garden layer. Flower beds, oversized daisies, and a far path that sit behind the destructible ground. Empty regions are one flat key color so the sky plate shows through. No hill silhouette, because the heightfield owns the ground.",
+  "aspect": "4:3",
+  "targetPixelSize": "2048x1536",
+  "expectedBackground": "flat chroma key #00b140 in empty regions",
+  "styleNotes": "Detailed gouache storybook battlefield, side-on, from the height of a friendly earthworm. Warm butter light, sage leaves, peach terracotta pots, cream clouds, overlapping plants with real depth. Readable shapes and a clear empty play lane. Premium hand-drawn family-game illustration. Not a flat vector infographic, not clay 3D, not a photograph, not a UI mockup. No characters, no weapons, no text, no letters, no logo, no watermark. Empty sky and empty foreground are a single flat #00b140. Do not paint clouds or a playable hill into this layer.",
+  "usage": "Second battlefield layer. Parallax 0.40. Keyed to alpha over the sky plate.",
+  "characterOrAssetName": "garden mid ground",
+  "pose": "empty battlefield",
+  "relatedPaths": [
+    "docs/minigames/ABBIES_WORMS_PLATE_SPEC.md",
+    "AssetSources/MarbleVoyage/climb-destinations-2026-09-26/shrine-original.jpeg"
+  ],
+  "promptSeeds": [
+    "Side-on mid-distance backyard garden layer, oversized daisies and soft flower beds along a far path, plants only in the lower half, large empty regions filled with one flat chroma green #00b140, detailed gouache, no sky, no clouds, no close ground, no hill that fills the frame, no characters, no text --ar 4:3"
+  ],
+  "acceptanceCriteria": [
+    "Empty regions are one flat #00b140, not painted sky",
+    "No baked hill or crater",
+    "Flowers read at battlefield scale",
+    "No characters, words, or UI"
+  ],
+  "referenceRequestIds": [
+    "20261011-worms-garden-sky"
+  ]
+}
