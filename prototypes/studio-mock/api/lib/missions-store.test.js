@@ -167,6 +167,64 @@ const hist = reviewHistoryFromDoc({
 assert(hist.some((r) => r.status === "boarded"), "history has boarded rocket");
 assert(hist.some((r) => r.status === "dumped"), "history has dumped candidates");
 
+const withFailedQueue = reviewHistoryFromDoc(
+  {
+    creative: {
+      missionOs: { missions: {} },
+      executionCapacity: {
+        jobs: {
+          ecjob_fail: {
+            id: "ecjob_fail",
+            state: "failed",
+            updatedAt: "2026-10-03T15:22:00.000Z",
+            payload: {
+              semanticId: "poi.moonBase.rocket.exterior.pink",
+              prompt: "failed pink rocket",
+            },
+            result: {},
+          },
+          ecjob_ok: {
+            id: "ecjob_ok",
+            state: "completed",
+            finishedAt: "2026-10-03T12:00:00.000Z",
+            payload: { semanticId: "map.garden", prompt: "garden plate" },
+            result: { candidateUrls: ["https://cdn.example/garden.webp"] },
+          },
+        },
+      },
+    },
+  },
+  { platesOnly: true }
+);
+assert(
+  !withFailedQueue.some((r) => r.status === "failed"),
+  "platesOnly hides failed Midjourney jobs with no bytes"
+);
+assert(
+  withFailedQueue.some((r) => r.status === "harvested" && r.semanticId === "map.garden"),
+  "platesOnly keeps harvested plates"
+);
+const includeEmpty = reviewHistoryFromDoc(
+  {
+    creative: {
+      missionOs: { missions: {} },
+      executionCapacity: {
+        jobs: {
+          ecjob_fail: {
+            id: "ecjob_fail",
+            state: "failed",
+            updatedAt: "2026-10-03T15:22:00.000Z",
+            payload: { semanticId: "poi.x", prompt: "x" },
+            result: {},
+          },
+        },
+      },
+    },
+  },
+  { platesOnly: false }
+);
+assert(includeEmpty.some((r) => r.status === "failed"), "platesOnly:false keeps queue failures");
+
 const unkept = reverseKeep(built.mission, { proofId: attached.proof.id, surface: "drop" });
 assert(!unkept.error, "unkeep ok");
 assert(attached.proof.status === "awaiting_approval", "kept proof reopened");

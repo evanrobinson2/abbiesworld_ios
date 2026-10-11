@@ -12,7 +12,7 @@
  */
 
 import { semanticToRegistryKey, isSemanticAssetId } from "./steel-rail.js";
-import { ingestStagingUrl, ingestBytes } from "./asset-registry.js";
+import { ingestBytes } from "./asset-registry.js";
 import { runAssetSanityCheck, framingPromptAddon } from "./asset-vision-sanity.js";
 
 const jobs = new Map();
@@ -386,6 +386,253 @@ function inferKind(semanticId) {
   return "poi.exterior";
 }
 
+function sniffImageMime(bytes) {
+  if (!bytes || bytes.length < 12) return "";
+  if (bytes[0] === 0x89 && bytes[1] === 0x50 && bytes[2] === 0x4e && bytes[3] === 0x47) return "image/png";
+  if (bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[2] === 0xff) return "image/jpeg";
+  if (bytes[0] === 0x47 && bytes[1] === 0x49 && bytes[2] === 0x46) return "image/gif";
+  if (bytes[0] === 0x52 && bytes[1] === 0x49 && bytes[2] === 0x46 && bytes[8] === 0x57) return "image/webp";
+  return "";
+}
+
+function decodeBase64Image(raw, mimeHint) {
+  let text = String(raw || "").trim();
+  if (!text) return { error: "image_required" };
+  let mime = String(mimeHint || "").split(";")[0].trim();
+  const dataUrl = text.match(/^data:(image\/[a-zA-Z0-9.+-]+);base64,(.+)$/s);
+  if (dataUrl) {
+    mime = mime || dataUrl[1];
+    text = dataUrl[2];
+  }
+  text = text.replace(/\s+/g, "");
+  let bytes;
+  try {
+    bytes = Buffer.from(text, "base64");
+  } catch {
+    return { error: "image_base64_invalid" };
+  }
+  if (!bytes.length || bytes.length > 25 * 1024 * 1024) {
+    return { error: "staging_bytes_invalid", size: bytes.length };
+  }
+  const sniffed = sniffImageMime(bytes);
+  if (!sniffed && mime && !mime.toLowerCase().startsWith("image/")) {
+    return { error: "staging_not_image", contentType: mime };
+  }
+  if (!sniffed && !mime) return { error: "staging_not_image" };
+  return {
+    ok: true,
+    bytes,
+    contentType: sniffed || mime || "image/png",
+    source: "base64",
+  };
+}
+
+async function fetchOpenAiFile(fileId) {
+  const key = String(process.env.OPENAI_API_KEY || "").trim();
+  if (!key) {
+    return {
+      error: "file_fetch_failed",
+      fileId,
+      hint: "Set OPENAI_API_KEY to resolve fileId uploads, or pass imageBase64.",
+    };
+  }
+  const response = await fetch(`https://api.openai.com/v1/files/${encodeURIComponent(fileId)}/content`, {
+    headers: { Authorization: `Bearer ${key}` },
+  });
+  if (!response.ok) {
+    return { error: "file_fetch_failed", status: response.status, fileId };
+  }
+  const bytes = Buffer.from(await response.arrayBuffer());
+  const headerType = String(response.headers.get("content-type") || "").split(";")[0].trim();
+  const sniffed = sniffImageMime(bytes);
+  if (!sniffed && !headerType.toLowerCase().startsWith("image/")) {
+    return { error: "staging_not_image", contentType: headerType, fileId };
+  }
+  return {
+    ok: true,
+    bytes,
+    contentType: sniffed || headerType || "image/png",
+    source: `openai-file:${fileId}`,
+  };
+}
+
+/**
+ * Resolve image bytes from MCP/HTTP args: base64, data URL, OpenAI file id, or https.
+ */
+export async function resolveImageBytes(args = {}) {
+  const nested = args.image && typeof args.image === "object" ? args.image : null;
+  const mimeHint =
+    args.mimeType || args.contentType || nested?.mimeType || nested?.mediaType || nested?.contentType || "";
+  const b64 =
+    args.imageBase64 ||
+    args.base64 ||
+    (typeof args.bytes === "string" ? args.bytes : "") ||
+    args.data ||
+    nested?.data ||
+    nested?.base64 ||
+    nested?.imageBase64 ||
+    "";
+  if (typeof b64 === "string" && b64.trim().length > 32) {
+    return decodeBase64Image(b64, mimeHint);
+  }
+  if (Buffer.isBuffer(args.bytes) || args.bytes instanceof Uint8Array) {
+    const bytes = Buffer.from(args.bytes);
+    const sniffed = sniffImageMime(bytes);
+    if (!sniffed) return { error: "staging_not_image" };
+    return { ok: true, bytes, contentType: sniffed, source: "bytes" };
+  }
+  const fileId = String(
+    args.fileId || args.file_id || args.uploadedFile || args.fileRef || nested?.fileId || nested?.file_id || ""
+  ).trim();
+  if (fileId) return fetchOpenAiFile(fileId);
+
+  const url = String(args.fileUrl || args.url || args.stagingUrl || nested?.url || "").trim();
+  if (/^https:\/\//i.test(url)) {
+    try {
+      const download = await fetch(url, { headers: { Accept: "image/*,*/*" }, redirect: "follow" });
+      if (!download.ok) return { error: "staging_download_failed", status: download.status };
+      const bytes = Buffer.from(await download.arrayBuffer());
+      const headerType = String(download.headers.get("content-type") || "").split(";")[0].trim();
+      const sniffed = sniffImageMime(bytes);
+      if (!sniffed && !headerType.toLowerCase().startsWith("image/")) {
+        return { error: "staging_not_image", contentType: headerType };
+      }
+      let host = "https";
+      try {
+        host = new URL(url).host;
+      } catch {
+        /* keep */
+      }
+      return {
+        ok: true,
+        bytes,
+        contentType: sniffed || headerType || "image/png",
+        source: `https:${host}`,
+        sourceUrl: url,
+      };
+    } catch (err) {
+      return { error: "staging_download_failed", detail: String(err?.message || err).slice(0, 200) };
+    }
+  }
+  return {
+    error: "image_required",
+    hint: "Pass imageBase64 (or a data URL), fileId (OpenAI file-…), or https fileUrl.",
+  };
+}
+
+async function finishIngest(job, { bytes, contentType, provenance, openaiKey } = {}) {
+  job.status = "ingesting";
+  job.error = null;
+  job.stagingUrl = String(provenance || job.stagingUrl || "direct").slice(0, 2000);
+  job.updatedAt = new Date().toISOString();
+
+  const ingested = await ingestBytes({
+    bytes,
+    contentType: contentType || "image/png",
+    semanticId: job.semanticId,
+    registryKey: job.registryKey,
+    kind: job.kind,
+    brief: job.brief,
+    source: "studio-mcp-ingest",
+    stagingSourceHost: String(provenance || "bytes").replace(/^[a-z]+:/, "").slice(0, 80) || "bytes",
+  });
+
+  if (ingested.error) {
+    job.status = "failed";
+    job.error = ingested.error;
+    job.updatedAt = new Date().toISOString();
+    return { ...publicJob(job), ingest: ingested };
+  }
+
+  job.deliveryURL = ingested.deliveryURL || null;
+  job.registryRevision = ingested.revision ?? null;
+  const key = String(openaiKey || process.env.OPENAI_API_KEY || "").trim();
+  await applySanityToJob(job, {
+    openaiKey: key,
+    bytes,
+    contentType: contentType || "image/png",
+    imageUrl: job.deliveryURL,
+  });
+  return {
+    ...publicJob(job),
+    ingest: ingested,
+    hint:
+      job.status === "needs_review"
+        ? "Sanity failed — do not Board/bind as final. Fix the image or regenerate (see job.sanity)."
+        : "Asset is on the Game Asset registry. Call asset_bind with bindWith / semanticId — never a CDN URL.",
+  };
+}
+
+/**
+ * Intake a temporary https image (Midjourney etc.), re-host on Game Asset API,
+ * and mark the job `registered`. World bind must use semanticId only.
+ * Also accepts imageBase64 / fileId so agents need not host a public URL.
+ */
+export async function completeJob(id, input = {}) {
+  const job = jobs.get(String(id || ""));
+  if (!job) return { error: "job_missing", id };
+  if (input.stagingUrl || input.fileUrl) {
+    job.stagingUrl = String(input.stagingUrl || input.fileUrl).slice(0, 2000);
+    job.updatedAt = new Date().toISOString();
+  }
+  const resolved = input.bytes
+    ? {
+        ok: true,
+        bytes: Buffer.isBuffer(input.bytes) ? input.bytes : Buffer.from(input.bytes),
+        contentType: input.contentType || sniffImageMime(Buffer.from(input.bytes)) || "image/png",
+        source: input.stagingUrl || "bytes",
+      }
+    : await resolveImageBytes(input);
+  if (resolved.error) {
+    job.status = "failed";
+    job.error = resolved.error;
+    job.updatedAt = new Date().toISOString();
+    return { ...publicJob(job), ...resolved };
+  }
+
+  return finishIngest(job, {
+    bytes: resolved.bytes,
+    contentType: resolved.contentType,
+    provenance: resolved.sourceUrl || resolved.source || input.stagingUrl,
+  });
+}
+
+/**
+ * Direct ingest: image bytes in, semantic id out. No public HTTPS host required.
+ * Runs the same Game Asset PUT + sanity pipeline as generate / complete.
+ */
+export async function ingestImage(args = {}) {
+  const semanticId = String(args.semanticId || "").trim();
+  if (!isSemanticAssetId(semanticId)) {
+    return { error: "semantic_id_invalid", semanticId };
+  }
+  const resolved = await resolveImageBytes(args);
+  if (resolved.error) return resolved;
+
+  const created = await createJob(
+    {
+      semanticId,
+      kind: args.kind || inferKind(semanticId),
+      brief: String(args.brief || semanticId).slice(0, 800),
+      projectId: args.projectId,
+      generate: false,
+    },
+    {}
+  );
+  if (created.error) return created;
+
+  const done = await completeJob(created.id, {
+    bytes: resolved.bytes,
+    contentType: resolved.contentType,
+    stagingUrl: resolved.sourceUrl || resolved.source || "direct",
+  });
+  return {
+    ...done,
+    bindWith: done.semanticId || semanticId,
+    ingestedFrom: resolved.source || "direct",
+  };
+}
+
 async function writePrompt(key, brief, kind, style) {
   const upstream = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
@@ -463,53 +710,6 @@ async function generateOpenAIImage(key, prompt) {
     contentType: "image/png",
     model: IMAGE_MODEL,
     via: "b64",
-  };
-}
-
-/**
- * Intake a temporary https image (Midjourney etc.), re-host on Game Asset API,
- * and mark the job `registered`. World bind must use semanticId only.
- */
-export async function completeJob(id, { stagingUrl } = {}) {
-  const job = jobs.get(String(id || ""));
-  if (!job) return { error: "job_missing", id };
-  const url = String(stagingUrl || "").trim();
-  if (!/^https:\/\//i.test(url)) return { error: "staging_url_required" };
-
-  job.stagingUrl = url.slice(0, 2000);
-  job.status = "ingesting";
-  job.error = null;
-  job.updatedAt = new Date().toISOString();
-
-  const ingested = await ingestStagingUrl({
-    stagingUrl: url,
-    semanticId: job.semanticId,
-    registryKey: job.registryKey,
-    kind: job.kind,
-    brief: job.brief,
-  });
-
-  if (ingested.error) {
-    job.status = "failed";
-    job.error = ingested.error;
-    job.updatedAt = new Date().toISOString();
-    return { ...publicJob(job), ingest: ingested };
-  }
-
-  job.deliveryURL = ingested.deliveryURL || null;
-  job.registryRevision = ingested.revision ?? null;
-  const key = String(process.env.OPENAI_API_KEY || "").trim();
-  await applySanityToJob(job, {
-    openaiKey: key,
-    imageUrl: job.deliveryURL || url,
-  });
-  return {
-    ...publicJob(job),
-    ingest: ingested,
-    hint:
-      job.status === "needs_review"
-        ? "Sanity failed — do not Board/bind as final. Regenerate or fix framing (see job.sanity)."
-        : "Asset is on the Game Asset registry. Call asset_bind with semanticId only (never the Midjourney URL).",
   };
 }
 

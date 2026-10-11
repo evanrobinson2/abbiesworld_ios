@@ -9,6 +9,8 @@ import {
   listJobs,
   getJob,
   completeJob,
+  ingestImage,
+  resolveImageBytes,
   __resetAssetStoreForTests,
 } from "./asset-jobs-store.js";
 
@@ -73,5 +75,28 @@ assert(done.error, "error set on failed ingest");
 
 const bad = await createJob({ semanticId: "not-a-key", brief: "x" }, { openaiKey: "" });
 assert(bad.error === "semantic_id_invalid", "rejects bad semantic id");
+
+const png =
+  "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==";
+const decoded = await resolveImageBytes({ imageBase64: png, mimeType: "image/png" });
+assert(decoded.ok && decoded.bytes.length > 32, "decodes tiny png");
+assert(decoded.contentType === "image/png", "png mime");
+
+const dataUrl = await resolveImageBytes({
+  imageBase64: `data:image/png;base64,${png}`,
+});
+assert(dataUrl.ok && dataUrl.bytes.equals(decoded.bytes), "data URL");
+
+const missing = await resolveImageBytes({});
+assert(missing.error === "image_required", "bytes required");
+
+const direct = await ingestImage({
+  semanticId: "poi.ingest.probe.exterior",
+  kind: "poi.exterior",
+  brief: "one-pixel probe",
+  imageBase64: png,
+});
+assert(direct.error === "registry_admin_missing" || direct.status === "failed", "ingest fail-closed without admin key");
+assert(direct.bindWith === "poi.ingest.probe.exterior" || !direct.bindWith || direct.error, "bindWith named on success path");
 
 console.log("asset-jobs-store.test.js OK");

@@ -30,7 +30,9 @@ export const AUTHOR_OPS = new Set([
   "scene.upsert",
   "scene.set_background_semantic",
   "scene.set_background_url",
+  "scene.delete",
   "place.upsert",
+  "place.remove",
   "scene.connect",
   "asset.job_create",
   "asset.bind",
@@ -144,7 +146,70 @@ export function validateAuthorPlan(plan, doc) {
         allowed: [...AUTHOR_OPS],
       };
     }
-    const args = raw.args && typeof raw.args === "object" ? { ...raw.args } : {};
+    const rawArgs = raw.args && typeof raw.args === "object" ? { ...raw.args } : {};
+    const args =
+      op === "scene.upsert" || op === "scene.delete" || op === "place.remove" || op === "scene.set_background_semantic"
+        ? { ...rawArgs, ...(rawArgs.id && !rawArgs.sceneId ? { sceneId: rawArgs.id } : {}) }
+        : rawArgs;
+    if (args.id && args.sceneId) delete args.id;
+
+    if (op === "scene.upsert") {
+      if (args.id && !args.sceneId) args.sceneId = args.id;
+      delete args.id;
+      const sceneId = String(args.sceneId || "").trim();
+      if (!sceneId && args.create !== true) {
+        return {
+          ok: false,
+          ops: [],
+          rails,
+          warnings,
+          error: "scene_id_required",
+          detail: "scene.upsert to change an existing scene must pass sceneId (not id). Use place.remove to drop a POI.",
+        };
+      }
+      if (sceneId && doc?.scenes && !doc.scenes[sceneId] && args.create !== true) {
+        return {
+          ok: false,
+          ops: [],
+          rails,
+          warnings,
+          error: "scene_missing",
+          sceneId,
+          detail: "Unknown sceneId — refusing to mint scene.mcp*. Pass create:true only when creating a scene.",
+        };
+      }
+      if (rawArgs.id && rawArgs.id !== args.sceneId) {
+        warnings.push("normalized_id_to_sceneId");
+      } else if (rawArgs.id && !rawArgs.sceneId) {
+        warnings.push("normalized_id_to_sceneId");
+      }
+    }
+    if (op === "place.remove") {
+      if (!String(args.sceneId || "").trim()) {
+        return { ok: false, ops: [], rails, warnings, error: "scene_id_required", detail: "place.remove needs sceneId." };
+      }
+      if (!String(args.placeId || args.instanceId || args.name || "").trim()) {
+        return {
+          ok: false,
+          ops: [],
+          rails,
+          warnings,
+          error: "place_ref_required",
+          detail: "place.remove needs placeId, instanceId, or name.",
+        };
+      }
+    }
+    if (op === "scene.delete") {
+      const sceneId = String(args.sceneId || args.id || "").trim();
+      args.sceneId = sceneId;
+      delete args.id;
+      if (!sceneId) {
+        return { ok: false, ops: [], rails, warnings, error: "scene_id_required", detail: "scene.delete needs sceneId." };
+      }
+      if (sceneId === "scene.home" && args.confirmHome !== true) {
+        return { ok: false, ops: [], rails, warnings, error: "home_protected", sceneId };
+      }
+    }
 
     if (op === "place.upsert" || op === "scene.connect") {
       if (args.behavior != null && !behaviorOk(args.behavior)) {
@@ -203,9 +268,6 @@ export function validateAuthorPlan(plan, doc) {
         error: "semantic_id_invalid",
         semanticId: args.semanticId,
       };
-    }
-    if (op === "scene.upsert" && args.sceneId && doc?.scenes && !doc.scenes[args.sceneId]) {
-      // creating new scene is fine
     }
     normalized.push({ op, args, note: raw.note ? String(raw.note).slice(0, 200) : undefined });
   }

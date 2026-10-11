@@ -57,8 +57,10 @@ POST /api/execution-capacity
 {"op":"complete","jobId":"…","workerId":"…","result":{"candidateUrls":["https://…"]}}
 
 GET  /api/execution-capacity?jobId=…
-GET  /api/execution-capacity   → summary + recent jobs
+GET  /api/execution-capacity   → summary + recent jobs + mjWorkersAliveLast5Minutes
 ```
+
+`mjWorkersAliveLast5Minutes` = workers whose `lastSeenAt` is within the last 5 minutes. Same number on MCP `execution_capacity_status` / `mj_workers_alive` and on `midjourney_fill`.
 
 MCP tool `midjourney_fill` = enqueue (pull model).
 

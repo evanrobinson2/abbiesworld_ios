@@ -14,6 +14,7 @@ import {
   getProject,
   listProjects,
   describeLibrary,
+  ingestImage,
 } from "./lib/asset-jobs-store.js";
 import { pushFromJob } from "./lib/review-inbox.js";
 
@@ -71,8 +72,26 @@ export async function POST(request) {
   }
 
   if (body?.complete && body?.id) {
-    const done = await completeJob(body.id, { stagingUrl: body.stagingUrl });
-    if (done.error === "job_missing" || done.error === "staging_url_required") {
+    const done = await completeJob(body.id, {
+      stagingUrl: body.stagingUrl,
+      imageBase64: body.imageBase64,
+      mimeType: body.mimeType,
+      fileId: body.fileId || body.fileRef,
+      fileUrl: body.fileUrl,
+      bytes: body.bytes,
+      contentType: body.contentType,
+    });
+    if (done.error === "job_missing" || done.error === "staging_url_required" || done.error === "image_required") {
+      return Response.json(done, { status: 400 });
+    }
+    if (done.status === "failed") return Response.json(done, { status: 502 });
+    const review = maybeInbox(done);
+    return Response.json({ ...done, reviewDeck: review?.deck || null, reviewUrl: review?.reviewUrl || null });
+  }
+
+  if (body?.op === "ingest" || body?.ingest === true) {
+    const done = await ingestImage(body);
+    if (done.error === "semantic_id_invalid" || done.error === "image_required" || done.error === "brief_required") {
       return Response.json(done, { status: 400 });
     }
     if (done.status === "failed") return Response.json(done, { status: 502 });

@@ -144,10 +144,13 @@ export async function GET(request) {
     if (!job) return json({ error: "job_missing", jobId }, 404);
     return json({ job, durable: "creative.executionCapacity" });
   }
+  const summary = summarize(body);
   return json({
     ok: true,
     model: "pull",
-    summary: summarize(body),
+    mjWorkersAliveLast5Minutes: summary.mjWorkersAliveLast5Minutes,
+    aliveWindowMs: summary.aliveWindowMs,
+    summary,
     jobs: listJobs(body, { limit: Number(url.searchParams.get("limit") || 20) }),
     durable: "creative.executionCapacity",
   });
@@ -174,10 +177,13 @@ export async function POST(request) {
         maxAttempts: body.maxAttempts,
       });
       if (created.error) return { error: created.error, persist: false, status: 400 };
+      const summary = summarize(doc);
       return {
         ok: true,
         duplicate: created.duplicate,
         job: created.job,
+        summary,
+        mjWorkersAliveLast5Minutes: summary.mjWorkersAliveLast5Minutes,
         next: "Local Mac execution-capacity worker will claim this job (pull). No tunnel.",
       };
     });

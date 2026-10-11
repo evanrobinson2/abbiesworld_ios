@@ -1251,10 +1251,16 @@ function collectResultUrls(result) {
   return [...new Set(raw.map((u) => String(u || "").trim()).filter((u) => /^https:\/\//i.test(u)))];
 }
 
+function rowHasPlate(row) {
+  return Boolean(row?.previewUrl || row?.url);
+}
+
 /**
- * Phone empty-state history: proofs, dumps, boards, Midjourney harvests.
+ * Phone Archive history: proofs, dumps, boards, Midjourney harvests.
+ * Default platesOnly — skip failed/cancelled/queued jobs with no image bytes
+ * so Archive is a usable photo stream, not a job console.
  */
-export function reviewHistoryFromDoc(doc, { limit = 80 } = {}) {
+export function reviewHistoryFromDoc(doc, { limit = 80, platesOnly = true } = {}) {
   const rows = [];
   const bag = doc?.creative?.missionOs?.missions || {};
   for (const m of Object.values(bag)) {
@@ -1278,7 +1284,7 @@ export function reviewHistoryFromDoc(doc, { limit = 80 } = {}) {
         else if (proof.status === "approved") status = "runner_up";
         else if (proof.status === "rejected") status = "dumped";
         else if (proof.status === "awaiting_approval") status = "awaiting";
-        rows.push({
+        const row = {
           id: `${proof.id}:${idx}:${c.lane}`,
           at: c.dumpedAt || proof.approvedAt || proof.rejectedAt || proof.createdAt || m.updatedAt,
           missionId: m.id,
@@ -1293,7 +1299,9 @@ export function reviewHistoryFromDoc(doc, { limit = 80 } = {}) {
           status,
           jobId: c.jobId || null,
           source: "mission",
-        });
+        };
+        if (platesOnly && !rowHasPlate(row)) continue;
+        rows.push(row);
       }
     }
   }
@@ -1305,6 +1313,8 @@ export function reviewHistoryFromDoc(doc, { limit = 80 } = {}) {
     const semanticId = job.payload?.semanticId || job.payload?.bindWith || null;
     const urls = collectResultUrls(job.result);
     if (!urls.length && job.state !== "completed") {
+      // Failed / cancelled / queued Midjourney — no plate to browse.
+      if (platesOnly) continue;
       rows.push({
         id: `ec:${job.id}`,
         at: job.updatedAt || job.createdAt,

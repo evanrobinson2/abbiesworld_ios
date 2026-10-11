@@ -5,8 +5,37 @@
  * then complete/fail. No inbound tunnel.
  */
 
+export const ALIVE_WINDOW_MS = 5 * 60 * 1000;
+
 function nowIso() {
   return new Date().toISOString();
+}
+
+export function isWorkerAlive(worker, { now = Date.now(), windowMs = ALIVE_WINDOW_MS } = {}) {
+  const seen = Date.parse(worker?.lastSeenAt || "");
+  return Number.isFinite(seen) && now - seen >= 0 && now - seen <= windowMs;
+}
+
+export function countAliveWorkers(doc, { now = Date.now(), windowMs = ALIVE_WINDOW_MS, capability = null } = {}) {
+  const bag = doc?.creative?.executionCapacity;
+  const list = bag?.workers && typeof bag.workers === "object" ? Object.values(bag.workers) : [];
+  const workers = list.filter((w) => {
+    if (!isWorkerAlive(w, { now, windowMs })) return false;
+    if (capability && !(w.capabilities || []).includes(capability)) return false;
+    return true;
+  });
+  return {
+    count: workers.length,
+    windowMs,
+    windowMinutes: windowMs / 60000,
+    workers: workers.map((w) => ({
+      id: w.id,
+      lastSeenAt: w.lastSeenAt,
+      capabilities: w.capabilities || [],
+      currentJobId: w.currentJobId || null,
+      lastMessage: w.lastMessage || null,
+    })),
+  };
 }
 
 function newId(prefix = "ecjob") {
@@ -116,6 +145,7 @@ export function summarize(doc) {
     currentJobId: w.currentJobId || null,
     lastMessage: w.lastMessage || null,
   }));
+  const alive = countAliveWorkers(doc);
   return {
     byState,
     queued: byState.queued || 0,
@@ -123,6 +153,10 @@ export function summarize(doc) {
     completed: byState.completed || 0,
     failed: byState.failed || 0,
     workers,
+    aliveLast5Minutes: alive.count,
+    mjWorkersAliveLast5Minutes: alive.count,
+    aliveWindowMs: alive.windowMs,
+    aliveWorkers: alive.workers,
     updatedAt: bag.updatedAt,
   };
 }

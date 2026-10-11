@@ -9,6 +9,9 @@ import {
   completeJob,
   failJob,
   summarize,
+  heartbeatWorker,
+  countAliveWorkers,
+  ALIVE_WINDOW_MS,
 } from "./execution-capacity-store.js";
 
 const doc = { creative: {} };
@@ -48,5 +51,21 @@ assert.equal(failed.job.state, "queued");
 const summary = summarize(doc);
 assert.ok(summary.completed >= 1);
 assert.ok(summary.workers.some((w) => w.id === "mac.test"));
+assert.equal(summary.mjWorkersAliveLast5Minutes, 2, "claim heartbeats count as alive");
+assert.equal(summary.aliveLast5Minutes, summary.mjWorkersAliveLast5Minutes);
+
+const liveness = { creative: { executionCapacity: { jobs: {}, workers: {} } } };
+ensureExecutionCapacity(liveness);
+heartbeatWorker(liveness, { workerId: "mac.fresh" });
+const staleAt = new Date(Date.now() - ALIVE_WINDOW_MS - 1000).toISOString();
+liveness.creative.executionCapacity.workers["mac.stale"] = {
+  id: "mac.stale",
+  lastSeenAt: staleAt,
+  capabilities: ["midjourney.imagine"],
+};
+const alive = countAliveWorkers(liveness);
+assert.equal(alive.count, 1, "stale worker older than 5 minutes is not alive");
+assert.equal(alive.workers[0].id, "mac.fresh");
+assert.equal(summarize(liveness).mjWorkersAliveLast5Minutes, 1);
 
 console.log("execution-capacity-store ok");
