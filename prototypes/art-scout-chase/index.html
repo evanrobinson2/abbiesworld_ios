@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>Art Scout Chase — Playthrough Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app" data-scene="brand" aria-label="Art Scout Chase">
+    <!-- Ambient sparkles -->
+    <div class="sparkle-layer" aria-hidden="true"></div>
+
+    <!-- BEAT 0: Brand -->
+    <section class="scene active" data-scene-panel="brand" id="scene-brand">
+      <div class="plate plate-lookout" role="img" aria-label="Scout Lookout at dusk"></div>
+      <div class="brand-stack">
+        <p class="brand-mark">ART SCOUT</p>
+        <p class="brand-line">Follow the sparkles.</p>
+      </div>
+      <button class="cta primary pulse-idle" data-action="start" type="button">GO</button>
+    </section>
+
+    <!-- BEAT 1: Briefing -->
+    <section class="scene" data-scene-panel="briefing" id="scene-briefing">
+      <div class="plate plate-lookout dim" role="img" aria-label="Scout Lookout"></div>
+      <div class="painting-frame" data-action="follow" role="button" tabindex="0" aria-label="Painting with missing moonbeam">
+        <div class="plate plate-missing-moon"></div>
+        <div class="moon-hole" aria-hidden="true"></div>
+      </div>
+      <div class="guide">
+        <div class="guide-face" aria-hidden="true"></div>
+        <p class="guide-bubble">Moonbeam went walking!</p>
+      </div>
+      <button class="cta primary" data-action="follow" type="button">Follow</button>
+    </section>
+
+    <!-- BEAT 2: Travel -->
+    <section class="scene" data-scene-panel="travel" id="scene-travel">
+      <div class="travel-stage">
+        <div class="plate travel-plate" id="travel-plate" role="img" aria-label="Destination artwork"></div>
+        <button class="chevron left" data-action="prev-destination" type="button" aria-label="Previous place">‹</button>
+        <button class="chevron right" data-action="next-destination" type="button" aria-label="Next place">›</button>
+      </div>
+      <div class="travel-chrome">
+        <p class="place-name" id="place-name">Candy Harbor</p>
+        <div class="sparkle-progress" id="sparkle-progress" aria-label="Clues found">
+          <span class="dot" data-dot="0"></span>
+          <span class="dot" data-dot="1"></span>
+          <span class="dot" data-dot="2"></span>
+        </div>
+        <button class="cta primary" data-action="go-destination" type="button">Go here</button>
+      </div>
+    </section>
+
+    <!-- BEAT 3–5: Investigation -->
+    <section class="scene" data-scene-panel="investigate" id="scene-investigate">
+      <div class="plate investigate-plate" id="investigate-plate" role="img" aria-label="Investigation artwork">
+        <button class="hotspot" data-clue-id="red-hat" type="button" aria-label="Red hat" style="display:none"></button>
+        <button class="hotspot" data-clue-id="striped-scarf" type="button" aria-label="Striped scarf" style="display:none"></button>
+        <button class="hotspot" data-clue-id="fox-friend" type="button" aria-label="Fox friend" style="display:none"></button>
+      </div>
+      <p class="status-phrase" id="status-phrase">Find the red hat.</p>
+      <button class="satchel" data-action="peek-lookbook" type="button" aria-label="Look Book">
+        <span class="satchel-count" id="satchel-count">0</span>
+      </button>
+      <div class="hint-path" id="hint-path" hidden></div>
+    </section>
+
+    <!-- BEAT 6: Look Book assemble -->
+    <section class="scene" data-scene-panel="assemble" id="scene-assemble">
+      <div class="plate plate-mossy dim" role="img" aria-label="Dimmed library"></div>
+      <div class="felt-table">
+        <p class="status-phrase">Build who did it!</p>
+        <div class="silhouette" id="silhouette" data-assembled="false">
+          <button class="socket" data-socket="hat" type="button" aria-label="Hat socket"></button>
+          <button class="socket" data-socket="scarf" type="button" aria-label="Scarf socket"></button>
+          <button class="socket" data-socket="friend" type="button" aria-label="Friend socket"></button>
+          <div class="trickster-reveal" id="trickster-reveal" hidden></div>
+        </div>
+        <div class="chip-tray" id="chip-tray">
+          <button class="chip" data-chip-id="red-hat" data-fits="hat" type="button">🎩</button>
+          <button class="chip" data-chip-id="striped-scarf" data-fits="scarf" type="button">🧣</button>
+          <button class="chip" data-chip-id="fox-friend" data-fits="friend" type="button">🦊</button>
+          <button class="chip decoy" data-chip-id="banana" data-fits="decoy" type="button">🍌</button>
+        </div>
+        <button class="cta primary" data-action="find-them" type="button" hidden id="find-them-btn">Find them!</button>
+      </div>
+    </section>
+
+    <!-- BEAT 7: Panorama find -->
+    <section class="scene" data-scene-panel="panorama" id="scene-panorama">
+      <p class="status-phrase">Where are they hiding?</p>
+      <div class="panorama-scroller" id="panorama-scroller">
+        <div class="plate plate-panorama" role="img" aria-label="Panorama showcase">
+          <button class="hotspot trickster-spot" data-clue-id="trickster" type="button" aria-label="The Trickster"></button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEAT 8: Celebrate -->
+    <section class="scene" data-scene-panel="celebrate" id="scene-celebrate">
+      <div class="plate plate-lookout soft" role="img" aria-label="Lookout calm"></div>
+      <div class="celebrate-stack">
+        <p class="brand-mark small">ART SCOUT</p>
+        <p class="status-phrase big">Moonbeam came home!</p>
+        <div class="gallery-strip" id="gallery-strip" aria-label="Places you visited">
+          <div class="gallery-thumb plate-candy" data-gallery="candy_harbor"></div>
+          <div class="gallery-thumb plate-cloud" data-gallery="cloud_kitchen"></div>
+          <div class="gallery-thumb plate-mossy" data-gallery="mossy_library"></div>
+          <div class="gallery-thumb plate-panorama-mini" data-gallery="panorama_find"></div>
+        </div>
+        <div class="cta-row">
+          <button class="cta secondary" data-action="again" type="button">Again</button>
+          <button class="cta primary" data-action="done" type="button">Done</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Done idle -->
+    <section class="scene" data-scene-panel="done" id="scene-done">
+      <div class="plate plate-lookout" role="img" aria-label="Quiet lookout"></div>
+      <div class="brand-stack">
+        <p class="brand-mark">ART SCOUT</p>
+        <p class="brand-line">See you next sparkle.</p>
+      </div>
+      <button class="cta primary" data-action="again" type="button">Play again</button>
+    </section>
+
+    <pre id="debug-state" aria-label="Debug state for textual inspection"></pre>
+  </div>
+
+  <script src="./game.js"></script>
+</body>
+</html>
