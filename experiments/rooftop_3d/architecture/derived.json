@@ -1,0 +1,10 @@
+{
+  "roof_pitch_degrees": 14.574216198038739,
+  "roof_rear_underside_z": 3.25,
+  "roof_front_underside_z": 3.6218,
+  "roof_board_top_front_z": 4.070215698190668,
+  "joist_top_z": -0.055,
+  "joist_bottom_z": -0.275,
+  "girder_bottom_z": -0.575,
+  "parts": 171
+}

@@ -1,0 +1,249 @@
+{
+  "title": "Let\u2019s rescue our friends",
+  "status": "Narrative and blocking scaffold \u2014 not finished art",
+  "principle": "Friends enjoy playing; bullies interrupt and capture them; Abbie and her dog set out to rescue them. No additional mythology.",
+  "scenes": [
+    {
+      "id": "together",
+      "title": "An afternoon together",
+      "seconds": 7,
+      "understand": "These friends enjoy being together.",
+      "emotion": "Warm, safe, playful",
+      "technique": "living-scene",
+      "actors": [
+        "Fox",
+        "Bramble"
+      ],
+      "action": "Fox lines up a shot. Bramble leans in, then looks at Fox with a friendly challenge.",
+      "visuals": [
+        "Wide view of one clearing beneath the flowering tree; establishes the place we will return to.",
+        "Fox at left and Bramble at right, full bodies and readable faces; establishes the existing friends.",
+        "A small scratched play circle and a few ordinary-sized marbles between them; explains their activity without becoming the subject.",
+        "A few petals falling from the visible flowering canopy; connects motion to the setting.",
+        "Soft afternoon light and a dark teal root framing the pair; keeps faces readable."
+      ],
+      "text": "None.",
+      "sound": "Leaf rustle, small movement sounds, a light playful musical phrase.",
+      "motion": "Slow lateral drift of no more than 2%; sparse petals. No zoom into a marble.",
+      "transition": "A reaction panel opens from the side toward which Fox looks.",
+      "needs": [
+        "New wide action plate with BOTH approved character designs, relaxed posture, matching eyelines and full paws."
+      ],
+      "reference": "game",
+      "verdict": "Composition and palette reference only. Existing image reads as concentration; it lacks clear shared enjoyment and Bramble\u2019s clover details."
+    },
+    {
+      "id": "play",
+      "title": "A little friendly teasing",
+      "seconds": 7,
+      "understand": "They are having fun with each other, not merely staring at objects.",
+      "emotion": "Amusement, affection",
+      "technique": "reaction-pair",
+      "actors": [
+        "Fox",
+        "Bramble"
+      ],
+      "action": "Fox takes a shot and misses. Fox makes a sheepish face. Bramble laughs kindly; Fox joins in.",
+      "visuals": [
+        "The same clearing remains behind the action to preserve location.",
+        "Medium shot of Fox making the shot; the paw belongs visibly to Fox, with the face still readable.",
+        "One narrow insert of the missed shot, less than a second, only if needed to explain the reaction.",
+        "Bramble\u2019s laughing reaction panel followed by Fox\u2019s sheepish smile; supplies cause and effect.",
+        "Consistent marbles, tree roots, screen positions and light; no unexplained scene change."
+      ],
+      "text": "None. Expressions carry this beat.",
+      "sound": "One quiet marble click, a short shared laugh; music continues.",
+      "motion": "Two panels enter in sequence, following shot \u2192 miss \u2192 reaction. Hold the expressions long enough to read.",
+      "transition": "The laughter cuts off when Bramble looks beyond Fox.",
+      "needs": [
+        "Fox shot pose and sheepish reaction.",
+        "Bramble laughing reaction with matching gaze and recognizable clover ornaments."
+      ],
+      "reference": "detail",
+      "verdict": "Current paw insert is too dominant and does not show a miss. Do not use it as proof of this action."
+    },
+    {
+      "id": "notice",
+      "title": "Someone blocks the light",
+      "seconds": 4,
+      "understand": "Someone unwelcome has arrived.",
+      "emotion": "Surprise, unease; not horror",
+      "technique": "shadow-reaction",
+      "actors": [
+        "Fox",
+        "Bramble",
+        "Offscreen bullies"
+      ],
+      "action": "Bramble stops laughing and looks up. Fox follows that gaze.",
+      "visuals": [
+        "Same medium two-shot with both friends; their changed expressions are the subject.",
+        "A directional shadow crosses the play circle from the entrance side; it is cast by the approaching bullies.",
+        "Petals continue moving normally; the world does not magically freeze.",
+        "A restrained close-up of Bramble looking up; establishes the next cut\u2019s eyeline."
+      ],
+      "text": "None.",
+      "sound": "Music pauses; footsteps enter from the shadow side.",
+      "motion": "Shadow crosses once. Camera settles. No blackout, screen shake, or ominous particle change.",
+      "transition": "Eyeline cut to the approaching bullies.",
+      "needs": [
+        "Surprised but unharmed Fox/Bramble reactions.",
+        "Shadow layer matching the bully silhouettes and scene lighting."
+      ],
+      "reference": null,
+      "verdict": "Missing. Smiling or concentrated portraits cannot substitute for surprised reactions."
+    },
+    {
+      "id": "interrupt",
+      "title": "The bullies spoil the game",
+      "seconds": 6,
+      "understand": "These bullies deliberately interrupt the friends\u2019 fun.",
+      "emotion": "Rude, unfair, mildly threatening",
+      "technique": "frame-intrusion",
+      "actors": [
+        "Raze",
+        "Vix",
+        "Fox",
+        "Bramble"
+      ],
+      "action": "Raze steps between the friends and scuffs the play circle. Vix blocks the way out. The friends draw together.",
+      "visuals": [
+        "Raze enters from the established shadow side in the same clearing.",
+        "Raze\u2019s foot disturbs the ring and moves a few marbles a short distance; shows the interruption without a hero-marble shot.",
+        "Vix is visible behind, blocking the path; makes the group threat legible.",
+        "Fox and Bramble together on the opposite side; preserves geography and their friendship.",
+        "One angled panel edge breaks the previously calm layout as Raze intrudes; visual emphasis belongs to his action."
+      ],
+      "text": "Optional short line from Raze: \u201cGame\u2019s over.\u201d No name card or narrator.",
+      "sound": "Footstep, scuff, one short low musical accent.",
+      "motion": "Raze crosses the panel boundary once; avoid repeated shakes or flashing.",
+      "transition": "Cut on Vix moving toward the friends; do not skip the capture action.",
+      "needs": [
+        "Raze full-body intrusion/scuff pose.",
+        "Vix blocking pose.",
+        "Friends\u2019 wary two-shot."
+      ],
+      "reference": "raze",
+      "verdict": "Existing Raze portrait is an identity reference only. Folded arms do not communicate the scuff or capture."
+    },
+    {
+      "id": "capture",
+      "title": "The friends are taken",
+      "seconds": 7,
+      "understand": "The friends have been captured and are being taken up the path.",
+      "emotion": "Unfairness, concern; clearly safe to rescue",
+      "technique": "action-triptych",
+      "actors": [
+        "Raze",
+        "Vix",
+        "Fox",
+        "Bramble"
+      ],
+      "action": "Vix drops a loose rope net around both friends. Raze and Vix lead them up the path. Bramble looks back.",
+      "visuals": [
+        "Panel one: net visibly descends around the friends; establishes how capture happens.",
+        "Panel two: both friends visible and unharmed inside roomy mesh, faces unobstructed; avoid constriction, pain or violent struggle.",
+        "Panel three: the same bullies and captured friends move uphill, in the same screen direction.",
+        "The play area is left behind in the lower foreground; links the loss to the fun we just saw."
+      ],
+      "text": "Bramble calls \u201cAbbie!\u201d once. No explanatory caption.",
+      "sound": "Soft rope movement, footsteps, the call; restrained music.",
+      "motion": "Three deliberate cuts: capture \u2192 readable result \u2192 departure. No impact flash or comic violence.",
+      "transition": "The call bridges to Abbie\u2019s arrival at the clearing.",
+      "needs": [
+        "Three matching action plates with net continuity and all four established characters.",
+        "Net is a proposed staging prop, not a new magical power or piece of lore."
+      ],
+      "reference": null,
+      "verdict": "Missing. Do not imply capture using smiling portraits, generic silhouettes, or a cut straight to empty ground."
+    },
+    {
+      "id": "arrive",
+      "title": "Abbie sees what happened",
+      "seconds": 6,
+      "understand": "Abbie knows her friends need help and where they were taken.",
+      "emotion": "Concern turning to resolve",
+      "technique": "eyeline-pair",
+      "actors": [
+        "Abbie",
+        "Unicorn Shih Tzu",
+        "Friends uphill"
+      ],
+      "action": "Abbie and her dog enter the clearing as the call reaches them. She sees her friends being led away, then turns toward the path.",
+      "visuals": [
+        "Abbie and her established unicorn Shih Tzu enter as a pair; exact approved designs required.",
+        "Disturbed play circle sits small in the foreground; continuity clue, not a mystery to solve.",
+        "Over Abbie\u2019s shoulder, the friends and bullies remain visible on the near uphill path; provides direct evidence, not inferred tracking.",
+        "Close-up of Abbie\u2019s face changing from concern to determination.",
+        "Dog looks along the same path beside her; establishes companionship without inventing powers."
+      ],
+      "text": "None.",
+      "sound": "The distant call, a small concerned dog sound, a hopeful musical phrase begins.",
+      "motion": "Cut along Abbie\u2019s eyeline, then return to her resolved expression.",
+      "transition": "Follow Abbie and the dog turning toward the mountain.",
+      "needs": [
+        "Abbie/dog arrival two-shot and Abbie concerned/resolved expressions.",
+        "Verify an approved companion reference before generating; do not improvise its design.",
+        "Over-shoulder plate preserving departure direction."
+      ],
+      "reference": null,
+      "verdict": "Missing. Happy Abbie portrait is not an adequate concerned reaction; companion reference still needs verification."
+    },
+    {
+      "id": "look-up",
+      "title": "There\u2019s the way up",
+      "seconds": 6,
+      "understand": "The rescue route goes up this mountain.",
+      "emotion": "Determination, inviting adventure",
+      "technique": "vertical-reveal",
+      "actors": [
+        "Abbie",
+        "Unicorn Shih Tzu"
+      ],
+      "action": "Abbie and her dog face the path. The camera follows it upward, then settles back at the first playable stretch.",
+      "visuals": [
+        "Abbie and dog small at the foot of the climb; provides scale and a clear starting point.",
+        "A continuous winding route climbs through the established mountain environment.",
+        "Cloud layers obscure portions of the higher route naturally; communicates distance without inventing a floating kingdom.",
+        "Return or dissolve to the matching first gameplay location; the mountain view must agree with the actual world."
+      ],
+      "text": "Abbie: \u201cCome on. Let\u2019s get our friends.\u201d",
+      "sound": "Hopeful phrase rises; wind replaces clearing ambience.",
+      "motion": "One controlled upward pan, about four seconds. Reduced motion uses three stationary views.",
+      "transition": "Match the path position and horizon to the game camera.",
+      "needs": [
+        "Reviewed tall climb plate with legible continuous route.",
+        "Matching foreground Abbie/dog layers and first gameplay frame."
+      ],
+      "reference": null,
+      "verdict": "Existing tall climb art must be inspected for route and color continuity before use; not cleared by filename alone."
+    },
+    {
+      "id": "rescue",
+      "title": "The player takes over",
+      "seconds": 4,
+      "understand": "I am helping Abbie rescue her friends.",
+      "emotion": "Agency, readiness",
+      "technique": "game-handoff",
+      "actors": [
+        "Abbie",
+        "Unicorn Shih Tzu"
+      ],
+      "action": "The camera rests at the start. Abbie is ready. The player taps to begin.",
+      "visuals": [
+        "The real first gameplay view, sharing the preceding path alignment.",
+        "Abbie and dog in their starting positions if supported by the actual game scene.",
+        "One large accessible button: \u201cLet\u2019s rescue them.\u201d",
+        "Normal game controls appear only after the tap; no fake gameplay or unexplained collectibles."
+      ],
+      "text": "Button only: \u201cLet\u2019s rescue them.\u201d",
+      "sound": "Music continues across the handoff without restarting.",
+      "motion": "Letterbox edges withdraw gently; input transfers exactly once. Reduced motion cuts directly.",
+      "transition": "Emit the standalone completion event; production host owns starting gameplay.",
+      "needs": [
+        "Verified first gameplay view and host completion callback."
+      ],
+      "reference": null,
+      "verdict": "Scaffold can emit a completion event, but production game integration remains absent."
+    }
+  ]
+}

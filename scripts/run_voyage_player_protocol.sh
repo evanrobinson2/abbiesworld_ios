@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Run player-protocol Monte Carlo (aggressive / motivated / casual) and write
-# docs/minigames/evidence/player_protocol_summary.json via XCTest.
+# Run player-protocol Monte Carlo (uninterested / hitPegs / metaAware) × Normal/Hard
+# and write docs/minigames/evidence/player_protocol_summary.json via XCTest.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
@@ -12,6 +12,7 @@ xcodebuild test \
   -scheme abbies.world.ios \
   -destination "$DEST" \
   -derivedDataPath "$DD" \
+  -only-testing:abbies.world.iosTests/MarbleVoyageCampaignSimTests/testSkillLadderClearBands \
   -only-testing:abbies.world.iosTests/MarbleVoyagePlayerProtocolTests/testProtocolAuditCollectsStatsAndWritesEvidence
 
 echo "Evidence: $ROOT/docs/minigames/evidence/player_protocol_summary.json"

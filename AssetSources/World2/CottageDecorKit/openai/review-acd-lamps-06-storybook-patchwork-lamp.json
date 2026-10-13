@@ -1,0 +1,19 @@
+{
+  "assetId": "acd-lamps-06-storybook-patchwork-lamp",
+  "latencyMs": 3786,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.98,
+    "issues": [
+      "The artwork does not match the claimed storybook patchwork lamp description."
+    ],
+    "pass": true,
+    "placementLayer": "table",
+    "refinedDescription": "A whimsical strawberry-shaped frog lantern with large round eyes, leafy accents, tiny seed details, and a warm glowing belly.",
+    "suggestedScale": 0.8
+  },
+  "responseId": "chatcmpl-ESoB1um29DRZbN3aMlZi5HEo2Gk2Z",
+  "timestamp": "2026-09-27T18:46:14.622551+00:00",
+  "pngSha256": "0364391989d176aaac6d451e3a7de59e58f9efe6c127bf857628bed98e06d211"
+}

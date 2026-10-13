@@ -1,0 +1,37 @@
+{
+  "revision": "B08",
+  "saved_scene_reopened": true,
+  "tree_base_geometry_sha256": "cafa3dc15c9e545cb98658f0ad38b7ce4244bc40a22db78cf69d1e70c168468c",
+  "base_tree_unchanged_from_B06": true,
+  "tree_components": 1,
+  "tree_open_boundary_edges": 0,
+  "original_camera_preserved": true,
+  "architecture_and_upholstery_objects_unchanged": 232,
+  "couch_contacts": [
+    {
+      "cushion": "B back cushion 0",
+      "soft_contact_m": -0.012,
+      "maximum_contact_displacement_mask": 0.0
+    },
+    {
+      "cushion": "B back cushion 1",
+      "soft_contact_m": -0.012,
+      "maximum_contact_displacement_mask": 0.0
+    },
+    {
+      "cushion": "B back cushion 2",
+      "soft_contact_m": -0.012,
+      "maximum_contact_displacement_mask": 0.0
+    }
+  ],
+  "bearing_plane_vertices_protected": 608,
+  "packed_unique_4k_maps": 3,
+  "actual_displacement_method": "BOTH",
+  "lantern_and_petal_motion_verified": true,
+  "separate_foliage_preserved": true,
+  "limitations": [
+    "Cycles render displacement is not baked for mobile.",
+    "This proves base-mesh closure and protected contacts, not structural engineering.",
+    "Bark shading, lighting and atmosphere are revised; remaining scene assets are still art in progress."
+  ]
+}

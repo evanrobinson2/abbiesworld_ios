@@ -1,0 +1,77 @@
+{
+  "provider": "Meshy",
+  "task_id": "01a0eaa7-fc10-7740-9978-5294513ad617",
+  "ai_model": "meshy-7.1",
+  "input_sha256": "22b22bec7cce3683d664d35ed256bd209cf78f6614ef97f06ae89a0c108bfa06",
+  "consumed_credits": 30,
+  "files": [
+    {
+      "file": "rooftop-meshy.glb",
+      "sha256": "4dd64f714de26cdea2d1b4fced378b933e98289bf520d0ea65a8db7c3c751c28",
+      "bytes": 36753468,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/model.glb"
+    },
+    {
+      "file": "rooftop-meshy.usdz",
+      "sha256": "4fdf889bf862e8e6f27e787aabb5b4518ff24d57e12fee552920b953d99476da",
+      "bytes": 38999361,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/model.usdz"
+    },
+    {
+      "file": "preview.png",
+      "sha256": "ec38e0f3e423ecb812d271cefff57f26a0f9504b16924b14e1b93e68ea8a854a",
+      "bytes": 28495,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/preview.png"
+    },
+    {
+      "file": "preview-back.png",
+      "sha256": "721f46a5cdad582e13f70a59c7faed1a80fdce4649b1db86fbfe8b3b00409607",
+      "bytes": 33697,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/preview_back.png"
+    },
+    {
+      "file": "preview-front.png",
+      "sha256": "ec38e0f3e423ecb812d271cefff57f26a0f9504b16924b14e1b93e68ea8a854a",
+      "bytes": 28495,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/preview_front.png"
+    },
+    {
+      "file": "preview-left.png",
+      "sha256": "55942b827849db00477c2285b5d364dcb55b699248c9653fd080285209f9200c",
+      "bytes": 15861,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/preview_left.png"
+    },
+    {
+      "file": "preview-right.png",
+      "sha256": "4eccc6c554ce4f5c1172bdeedff41a61eca97e588fbe31a4c6ec2bc02a6f2716",
+      "bytes": 17713,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/preview_right.png"
+    },
+    {
+      "file": "texture-0-base_color.png",
+      "sha256": "80e79ccc999769d92fb8dafe4ece2b35e4ac8ff2470a8cbc789d933e2c21015a",
+      "bytes": 15235564,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/texture_0.png"
+    },
+    {
+      "file": "texture-0-metallic.png",
+      "sha256": "24b1ab492e67f18fd1d32b7f7e89eb919afaa0bd9d25fc9975aa8ba03433c3f9",
+      "bytes": 48938,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/texture_0_metallic.png"
+    },
+    {
+      "file": "texture-0-roughness.png",
+      "sha256": "372c28c86b978cd30630d04045572c221016e1816f338d3d949dd8b7ad9769f9",
+      "bytes": 1177740,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/texture_0_roughness.png"
+    },
+    {
+      "file": "texture-0-normal.png",
+      "sha256": "815686ddbebb29a6b5efb190722d14beae17c19c6441c7d90b9c6c5437e0340b",
+      "bytes": 11816376,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0eaa7-fc10-7740-9978-5294513ad617/output/texture_0_normal.png"
+    }
+  ],
+  "status": "Generated candidate. Separate experiment; not integrated into game.",
+  "review": "Whole-scene reconstruction failed visually: returned a nearly flat rectangular frame with scattered blossoms, omitting the treehouse. Confirmed by provider previews and independent Blender import/render; not a thumbnail-only issue."
+}

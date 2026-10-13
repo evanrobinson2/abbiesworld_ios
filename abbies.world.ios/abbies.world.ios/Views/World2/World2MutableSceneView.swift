@@ -18,6 +18,7 @@ struct World2MutableSceneView: View {
     @State private var selectedFurnitureID: String?
     @State private var selectedCatalogItemID: String?
     @State private var decorateFilter: DecorateFilterID = .mine
+    @State private var decorateDrawerExpanded = true
     @State private var lookPan: CGSize = .zero
     @GestureState private var livePan: CGSize = .zero
 
@@ -278,13 +279,14 @@ struct World2MutableSceneView: View {
                     World2DualStickControls(party: viewModel.party)
                 }
             }
-            .overlay(alignment: .bottom) {
+            .overlay(alignment: .trailing) {
                 if isArrangingFurniture {
                     World2DecorateTray(
                         playerName: viewModel.currentMutableScene.name,
                         selectedCatalogID: selectedCatalogItemID,
                         selectedInventoryID: selectedFurnitureID,
                         filter: decorateFilter,
+                        isExpanded: $decorateDrawerExpanded,
                         onFilterChange: { decorateFilter = $0 },
                         onSelectCatalog: { item in
                             selectedCatalogItemID = item.id
@@ -294,14 +296,22 @@ struct World2MutableSceneView: View {
                             selectedFurnitureID = id
                             selectedCatalogItemID = nil
                         },
+                        onReturnInventoryID: { id in
+                            PlayerStateService.shared.returnFurnitureToInventory(instanceId: id)
+                            if selectedFurnitureID == id { selectedFurnitureID = nil }
+                        },
                         onDone: {
                             isArrangingFurniture = false
                             selectedFurnitureID = nil
                             selectedCatalogItemID = nil
+                            viewModel.setDecorateModeActive(false)
                         }
                     )
                     .zIndex(90)
                 }
+            }
+            .onChange(of: isArrangingFurniture) { _, active in
+                viewModel.setDecorateModeActive(active)
             }
             .frame(width: geometry.size.width, height: geometry.size.height)
         }

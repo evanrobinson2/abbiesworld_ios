@@ -27,7 +27,7 @@ struct OrbKind: Identifiable, Equatable, Hashable {
     static let sparkle = OrbKind(
         id: "sparkle",
         name: "Sparkle",
-        blurb: "Peglin default SO — e1 · g1.2 · no drag",
+        blurb: "Balanced starter marble — good on any trail.",
         fireForce: 480, gravityScale: 1.2, bounciness: 1.0, mass: 1.0, radius: 11,
         trail: .motionBlur(
             tint: (1.0, 0.92, 0.55),
@@ -39,7 +39,7 @@ struct OrbKind: Identifiable, Equatable, Hashable {
     static let bounceberry = OrbKind(
         id: "bounceberry",
         name: "Bounceberry",
-        blurb: "Super bouncy lateral chaos",
+        blurb: "Super bouncy — zigs sideways a lot.",
         fireForce: 460, gravityScale: 1.0, bounciness: 1.0, mass: 1.0, radius: 11,
         trail: .motionBlur(
             tint: (0.95, 0.45, 0.75),
@@ -51,7 +51,7 @@ struct OrbKind: Identifiable, Equatable, Hashable {
     static let pebble = OrbKind(
         id: "pebble",
         name: "Pebble",
-        blurb: "Dense — drops deep, still snappy",
+        blurb: "Heavy pebble — drops deep, still snappy.",
         fireForce: 620, gravityScale: 1.25, bounciness: 1.0, mass: 1.35, radius: 12,
         trail: .motionBlur(
             tint: (0.55, 0.5, 0.42),
@@ -64,7 +64,7 @@ struct OrbKind: Identifiable, Equatable, Hashable {
     static let zipbolt = OrbKind(
         id: "zipbolt",
         name: "Zipbolt",
-        blurb: "Huge force · low g · laserish",
+        blurb: "Fast zip — floats longer, shoots straight.",
         fireForce: 700, gravityScale: 0.35, bounciness: 1.0, mass: 0.9, radius: 9,
         trail: .motionBlur(
             tint: (0.35, 0.9, 1.0),
@@ -77,7 +77,7 @@ struct OrbKind: Identifiable, Equatable, Hashable {
     static let puff = OrbKind(
         id: "puff",
         name: "Puff",
-        blurb: "Big soft catcher — fills gaps",
+        blurb: "Big soft puff — fills gaps between pegs.",
         fireForce: 520, gravityScale: 0.9, bounciness: 1.0, mass: 0.85, radius: 15,
         trail: .motionBlur(
             tint: (0.85, 0.88, 1.0),

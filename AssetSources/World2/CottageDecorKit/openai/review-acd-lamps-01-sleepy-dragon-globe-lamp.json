@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-lamps-01-sleepy-dragon-globe-lamp",
+  "latencyMs": 5615,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.99,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "table",
+    "refinedDescription": "A drowsy blue-green dragon curled snugly around a large glowing amber globe, holding it with its forelegs and feet.",
+    "suggestedScale": 0.8
+  },
+  "pngSha256": "2bee6502bb2a995369fa2b4c39ee9a046fad97546810c88f2ce04fc9ea1394b2",
+  "responseId": "chatcmpl-ESoDQEfiRTNKy0GdwoFNbgyQgwWlu",
+  "timestamp": "2026-09-27T18:48:42.894054+00:00"
+}

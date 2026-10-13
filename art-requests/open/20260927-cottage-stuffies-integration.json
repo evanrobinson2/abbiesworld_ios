@@ -1,0 +1,36 @@
+{
+  "id": "20260927-cottage-stuffies-integration",
+  "semanticId": "pack.abbieCottage.stuffies",
+  "status": "open",
+  "priority": "normal",
+  "type": "production_sprite",
+  "brief": "Extract and bind all 15 stuffies from two user-approved sheets into cottage decoration tray.",
+  "aspect": "individual cutouts",
+  "styleNotes": "Preserve approved painted style and colors. Transparent background; no shadows or overlapping silhouettes.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/cottage-stuffies-2026-09-27/stuffies-sheet-2-approved.jpeg",
+    "AssetSources/World2/cottage-stuffies-2026-09-27/stuffies-sheet-4-approved.jpeg",
+    "AssetSources/World2/cottage-stuffies-2026-09-27/provenance.json",
+    "AssetSources/World2/cottage-stuffies-2026-09-27/HANDOFF.md",
+    "AssetSources/CozyRoomKit/HANDOFF.md"
+  ],
+  "promptSeeds": [],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T18:15:56.709865+00:00",
+  "productionIntent": "runtime_bind",
+  "acceptanceCriteria": [
+    "All 15 approved toys individually selectable",
+    "Transparent clean cutouts without ground shadows",
+    "Existing CozyRoomKit manifest extended",
+    "In-game placement and persistence verified with screenshot"
+  ],
+  "sessionNote": "Both approved sheets imported: 9× acd-stuffies2-* + 6× acd-stuffies4-* (15 toys). Cottage tray CottageDecorKit-only. Placement screenshot still pending for close.",
+  "integrationProgress": {
+    "catalog": "cottage_decor_asset_manifest",
+    "importedIDPrefixes": ["acd-stuffies2-", "acd-stuffies4-"],
+    "importedCount": 15,
+    "verification": "AbbieCottageDecorCatalogTests; contact sheet AssetSources/World2/CottageDecorKit/review/selected-stuffies4.png",
+    "runtimeVerified": false
+  }
+}

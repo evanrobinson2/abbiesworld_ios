@@ -1,0 +1,251 @@
+{
+  "latencyMs": 16945,
+  "model": "gpt-5.6-sol",
+  "packId": "pack.abbieCottage.rugscushions",
+  "parsed": {
+    "confidence": 0.99,
+    "items": [
+      {
+        "category": "rugs",
+        "colors": [
+          "pink",
+          "red",
+          "orange",
+          "yellow",
+          "green",
+          "blue",
+          "pale blue"
+        ],
+        "detailedDescription": "Tufted arch-shaped rainbow rug with six colorful braided bands and a fluffy pale-blue cloud at each end.",
+        "facing": "directly overhead",
+        "index": 1,
+        "label": "Rainbow cloud rug",
+        "materials": [
+          "wool",
+          "tufted fabric"
+        ],
+        "motifs": [
+          "rainbow",
+          "clouds"
+        ],
+        "notes": "The rainbow and its two cloud ends form one complete rug assembly.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "tufted novelty rug"
+      },
+      {
+        "category": "rugs",
+        "colors": [
+          "green",
+          "pink",
+          "yellow",
+          "orange"
+        ],
+        "detailedDescription": "Round green lily pad rug with a wedge-shaped notch and a raised woven pink-and-yellow water-lily flower at its center.",
+        "facing": "directly overhead",
+        "index": 2,
+        "label": "Lily pad flower rug",
+        "materials": [
+          "woven fabric",
+          "wool"
+        ],
+        "motifs": [
+          "lily pad",
+          "water lily",
+          "flower"
+        ],
+        "notes": "The central flower is attached as part of the single rug design.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "botanical novelty rug"
+      },
+      {
+        "category": "rugs",
+        "colors": [
+          "orange",
+          "dark green",
+          "red"
+        ],
+        "detailedDescription": "Sprawling orange sleeping cat with closed eyes and curled tail resting across an irregular dark-green rug base.",
+        "facing": "directly overhead",
+        "index": 3,
+        "label": "Sleepy orange cat rug",
+        "materials": [
+          "wool",
+          "tufted fabric"
+        ],
+        "motifs": [
+          "sleeping cat",
+          "curled tail"
+        ],
+        "notes": "The cat and green base read as one complete rug assembly.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "animal novelty rug"
+      },
+      {
+        "category": "seating",
+        "colors": [
+          "coral",
+          "orange",
+          "yellow"
+        ],
+        "detailedDescription": "Oversized squashy flower cushion with layered coral-orange petals, stitched contours, and a raised round yellow center.",
+        "facing": "slightly from above",
+        "index": 4,
+        "label": "Coral flower floor cushion",
+        "materials": [
+          "velvet",
+          "stuffed fabric"
+        ],
+        "motifs": [
+          "flower",
+          "petals"
+        ],
+        "notes": "One complete flower-shaped cushion.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "flower floor cushion"
+      },
+      {
+        "category": "seating",
+        "colors": [
+          "golden yellow",
+          "orange"
+        ],
+        "detailedDescription": "Large golden-yellow flower cushion with eight broad ribbed petals and a textured raised circular center.",
+        "facing": "slightly from above",
+        "index": 5,
+        "label": "Yellow flower floor cushion",
+        "materials": [
+          "corduroy",
+          "stuffed fabric"
+        ],
+        "motifs": [
+          "flower",
+          "petals"
+        ],
+        "notes": "A visually distinct second flower cushion.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "flower floor cushion"
+      },
+      {
+        "category": "seating",
+        "colors": [
+          "pink",
+          "coral",
+          "orange"
+        ],
+        "detailedDescription": "Low pink cushion with a ring of rounded scalloped lobes supporting a domed orange-pink ribbed shell-like center.",
+        "facing": "slightly from above",
+        "index": 6,
+        "label": "Pink shell cushion",
+        "materials": [
+          "corduroy",
+          "velvet",
+          "stuffed fabric"
+        ],
+        "motifs": [
+          "shell",
+          "scallops"
+        ],
+        "notes": "One complete assembled cushion with a raised central dome.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "shell floor cushion"
+      },
+      {
+        "category": "seating",
+        "colors": [
+          "light green",
+          "dark green",
+          "yellow"
+        ],
+        "detailedDescription": "Turtle-shaped green floor cushion with a segmented dark-green shell, extended head, four flippers, and a small tail.",
+        "facing": "slightly from above, head toward the left",
+        "index": 7,
+        "label": "Green turtle cushion",
+        "materials": [
+          "velvet",
+          "stitched fabric",
+          "stuffing"
+        ],
+        "motifs": [
+          "turtle",
+          "segmented shell"
+        ],
+        "notes": "The body, shell, limbs, and head form one complete turtle cushion.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "animal floor cushion"
+      },
+      {
+        "category": "seating",
+        "colors": [
+          "dark green",
+          "lime green",
+          "mint green",
+          "yellow"
+        ],
+        "detailedDescription": "Plump round floor cushion assembled from irregular stitched patchwork squares in several shades of green with muted yellow accents.",
+        "facing": "slightly from above",
+        "index": 8,
+        "label": "Round patchwork cushion",
+        "materials": [
+          "patchwork fabric",
+          "stitched textile",
+          "stuffing"
+        ],
+        "motifs": [
+          "patchwork",
+          "checks"
+        ],
+        "notes": "One complete circular cushion.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "patchwork floor cushion"
+      },
+      {
+        "category": "seating",
+        "colors": [
+          "blue",
+          "golden yellow",
+          "orange"
+        ],
+        "detailedDescription": "Round blue cushion decorated with a large raised golden crescent moon and many small embroidered yellow stars.",
+        "facing": "slightly from above",
+        "index": 9,
+        "label": "Crescent moon and stars cushion",
+        "materials": [
+          "corduroy",
+          "embroidered fabric",
+          "stuffing"
+        ],
+        "motifs": [
+          "crescent moon",
+          "stars",
+          "night sky"
+        ],
+        "notes": "One complete round celestial cushion.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "celestial floor cushion"
+      }
+    ],
+    "observedCount": 9
+  },
+  "responseId": "chatcmpl-ESo0O2WkuC3mKFgRtT1rvdiL13f9r",
+  "system": "You inventory Midjourney asset sheets for a children's game. Return JSON only. Count every visually distinct complete object. Pixels win over the prompt count. Do not invent physics or interactive behavior. If a walnut/seed wardrobe is closed, say closed — do not call it an open dollhouse. Keep multi-part toys that are one assembly as one item.",
+  "timestamp": "2026-09-27T18:35:28.622663+00:00",
+  "user": "Pack: pack.abbieCottage.rugscushions\nExpected visual count hint: 9\nExact Midjourney prompt:\nSix tactile bedroom decorations for a child's enchanted cottage: a tufted rainbow rug with fluffy cloud ends; a lily pad rug with a woven pink flower; a sprawling sleepy orange cat rug with curled tail; an oversized flower floor cushion with squashy petal edges; a round patchwork turtle floor cushion; a crescent moon cushion embroidered with tiny stars. Soft wool, velvet, corduroy, stitched fabric as painted textures, playful colors, charming handmade irregularities. Hand painted 2D storybook game art, delicate ink contours, warm gouache brushwork. Rugs viewed from directly above, cushions slightly from above. Strict two row three column asset sheet on pure white, one complete object per cell. Wide white margins and gutters. Fully separate silhouettes, no touching, no overlap, no cropping. Flat even illumination. No shadows, no occlusion, no floor, no background, no people, no text, no labels, no borders.\n\nOriginal creative brief (if different):\n\n\nReturn JSON: {\n  \"observedCount\": int,\n  \"confidence\": 0-1,\n  \"items\": [{\n    \"index\": 1-based reading order left-to-right top-to-bottom,\n    \"label\": short name,\n    \"detailedDescription\": string,\n    \"category\": lighting|rugs|seating|play-stages|storage|decor,\n    \"subcategory\": string,\n    \"materials\": [string],\n    \"colors\": [string],\n    \"motifs\": [string],\n    \"placementHints\": [\"floor\"|\"wall\"|\"table\"],\n    \"facing\": string,\n    \"notes\": string\n  }]\n}"
+}

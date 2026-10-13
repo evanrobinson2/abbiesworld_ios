@@ -1,0 +1,28 @@
+{
+  "assets": [
+    {
+      "semanticId": "pack.abbieCottage.stuffies.sheet2",
+      "filename": "stuffies-sheet-2-approved.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "897e3259-3878-40c6-bcf0-ba2dad75a636",
+      "candidateIndex": 1,
+      "sourceUrl": "https://cdn.midjourney.com/897e3259-3878-40c6-bcf0-ba2dad75a636/0_1.jpeg",
+      "sha256": "2828e36436ea6f87745f8d9dba85653b6d5884462c939179c7e4b55740d32049",
+      "approval": "Evan: great add #2 and 4 to the game",
+      "status": "approved_source",
+      "objectCount": 9
+    },
+    {
+      "semanticId": "pack.abbieCottage.stuffies.sheet4",
+      "filename": "stuffies-sheet-4-approved.jpeg",
+      "sourceProvider": "Midjourney",
+      "jobId": "897e3259-3878-40c6-bcf0-ba2dad75a636",
+      "candidateIndex": 3,
+      "sourceUrl": "https://cdn.midjourney.com/897e3259-3878-40c6-bcf0-ba2dad75a636/0_3.jpeg",
+      "sha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+      "approval": "Evan: great add #2 and 4 to the game",
+      "status": "approved_source",
+      "objectCount": 6
+    }
+  ]
+}

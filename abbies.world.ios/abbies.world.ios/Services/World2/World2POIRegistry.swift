@@ -17,6 +17,7 @@ enum World2POIRegistry {
     static let abbieTreehouseID = "poi.abbieTreehouse"
     static let aniTreehouseID = "poi.aniTreehouse"
     static let evanHomeID = "poi.evanHome"
+    static let cafeID = "poi.cafe"
     static let cardFactoryID = "poi.cardFactory"
     static let letterWorksID = "poi.letterWorks"
     static let furnitureStoreID = "poi.furnitureStore"
@@ -44,6 +45,7 @@ enum World2POIRegistry {
         treehouse(for: .ani),
         treehouse(for: .evan),
         cardFactory,
+        cafe,
         letterWorks,
         furnitureStore,
         assetWorkbench,
@@ -147,6 +149,15 @@ enum World2POIRegistry {
     }
 
     // MARK: - Home World
+
+    static let cafe = World2POIArchetype(
+        id: cafeID, name: "Little Café", kind: .minigame, sizeClass: .medium,
+        exteriorAsset: "poi.cafe.exterior", interiorAsset: "poi.cafe.interior",
+        icon: "cup.and.saucer.fill", lore: "A warm café for making and sharing treats.",
+        activityDescription: "Stock the pastry counter and prepare each customer's order.",
+        callToAction: "Visit the Café", musicTrackID: "",
+        contract: World2POIContract(route: .cafe, grants: [])
+    )
 
     static let cardFactory = World2POIArchetype(
         id: cardFactoryID,

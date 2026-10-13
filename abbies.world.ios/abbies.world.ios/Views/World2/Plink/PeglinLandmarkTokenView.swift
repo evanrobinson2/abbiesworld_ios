@@ -168,7 +168,7 @@ private struct PeglinMapPinShape: Shape {
 struct PeglinAbbieBattlePortrait: View {
     var state: PeglinCharacterState = .happy
     var size: CGFloat = 120
-    /// Prefer the approved regal bust for happy/idle chrome (avoid wink regression).
+    /// Always the approved regal bust — never swap to older casual sheets.
     var preferRegalBust: Bool = true
 
     var body: some View {
@@ -183,18 +183,42 @@ struct PeglinAbbieBattlePortrait: View {
             faceCrop: false,
             contentMode: .fit
         )
+        // Mood is a light tint only — no outfit/expression sheet swaps (Evan 2026-09-27).
+        .saturation(moodSaturation)
+        .brightness(moodBrightness)
+        .colorMultiply(moodMultiply)
     }
 
     private var abbieUIImage: UIImage? {
-        // HUD chrome stays on the regal bust unless hurt/defeated.
-        let catalog: String
-        if preferRegalBust, state == .idle || state == .happy || state == .sneakyWink {
-            catalog = PeglinAbbieArt.portraitCatalogName
-        } else {
-            catalog = state.abbiePortraitCatalogName
+        // Regal bust is the only battle Abbie art until matching expression sheets land.
+        UIImage(named: PeglinAbbieArt.portraitCatalogName)
+    }
+
+    private var moodSaturation: Double {
+        guard preferRegalBust else { return 1 }
+        switch state {
+        case .hurt: return 0.72
+        case .defeated: return 0.35
+        default: return 1
         }
-        return UIImage(named: catalog)
-            ?? UIImage(named: PeglinAbbieArt.portraitCatalogName)
+    }
+
+    private var moodBrightness: Double {
+        guard preferRegalBust else { return 0 }
+        switch state {
+        case .hurt: return -0.04
+        case .defeated: return -0.12
+        default: return 0
+        }
+    }
+
+    private var moodMultiply: Color {
+        guard preferRegalBust else { return .white }
+        switch state {
+        case .hurt: return Color(red: 1.0, green: 0.82, blue: 0.82)
+        case .defeated: return Color(red: 0.75, green: 0.72, blue: 0.78)
+        default: return .white
+        }
     }
 }
 

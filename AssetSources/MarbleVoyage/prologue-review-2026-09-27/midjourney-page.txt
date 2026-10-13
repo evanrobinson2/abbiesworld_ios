@@ -1,0 +1,195 @@
+- navigation:
+  - link "MJ":
+    - /url: /explore?tab=top
+  - link:
+    - /url: /explore?tab=top
+  - link:
+    - /url: /imagine
+  - link:
+    - /url: /editor/new
+  - link:
+    - /url: /organize
+  - link:
+    - /url: /personalize
+  - link:
+    - /url: /moodboards
+  - link:
+    - /url: /style-creator
+  - link:
+    - /url: /tasks
+  - link:
+    - /url: /help
+  - link:
+    - /url: /updates
+  - button:
+- heading "V8 personalization is live!" [level=1]
+- paragraph: Create a profile to teach Midjourney your taste.
+- button "Create your profile"
+- button "Remind me later"
+- generic: Imagine
+- button:
+- button:
+- button:
+- button "https://s.mj.run/kLld1FvNggI":
+  - img "https://s.mj.run/kLld1FvNggI"
+- generic: Extreme macro action insert for the same fantasy comic. Only one pink-orange fox front paw nudging a tiny turquoise glass marble across ochre earth, three small glass marbles nearby, fallen pink rose petals, diagonal motion composition, marble and paw occupy the lower two thirds, dark teal tree roots softly behind. No faces, no full animals. Irregular heavy ink lines, coral pink and deep teal, warm honey highlights, crisp cel shading, hand-drawn graphic novel brushwork, tactile paper. Tight cinematic closeup, no text
+- button "--ar 3:4":
+  - generic: "--ar"
+  - generic: 3:4
+- button "--raw":
+  - generic: "--raw"
+- button "--v 7":
+  - generic: "--v"
+  - generic: "7"
+- link:
+  - /url: /jobs/7a4273bb-a8a9-4c1e-abea-350bd9e9a247?index=0
+- button "Trash image":
+- button "Like image (L)":
+- link:
+  - /url: /jobs/7a4273bb-a8a9-4c1e-abea-350bd9e9a247?index=1
+- button "Trash image":
+- button "Like image (L)":
+- link:
+  - /url: /jobs/7a4273bb-a8a9-4c1e-abea-350bd9e9a247?index=2
+- button "Trash image":
+- button "Like image (L)":
+- link [active]:
+  - /url: /jobs/7a4273bb-a8a9-4c1e-abea-350bd9e9a247?index=3
+- button "Trash image":
+- button "Like image (L)":
+- generic: Imagine
+- button:
+- button:
+- button:
+- button "https://s.mj.run/DsEpfxUO_lY":
+  - img "https://s.mj.run/DsEpfxUO_lY"
+- generic: Ground-level cinematic comic panel, two animal friends absorbed in a game of glass marbles beneath enormous flowering tree roots. The pink-orange fox with turquoise eyes and cream muzzle crouches at left, the mint-white long-eared hare with lavender shading, amethyst eyes and clover ornaments crouches at right. Paws poised around a small circle scratched in ochre earth. One enormous sharply focused glass marble in extreme foreground reflecting the friends, playful competitive expressions, scattered rose petals. Dramatic low camera, asymmetrical composition, deep teal shadows, coral pink and honey gold light. Premium hand-inked fantasy graphic novel, bold irregular black contours, expressive brushwork, flat cel shading, tactile paper grain. A real narrative action scene, full environment, no portrait framing, no lettering, no interface
+- button "--ar 4:3":
+  - generic: "--ar"
+  - generic: 4:3
+- button "--raw":
+  - generic: "--raw"
+- button "--v 7":
+  - generic: "--v"
+  - generic: "7"
+- button "--stylize 150":
+  - generic: "--stylize"
+  - generic: "150"
+- link:
+  - /url: /jobs/85999cea-b722-40b5-a148-ee44f6a9c6a6?index=0
+- button "Trash image":
+- button "Like image (L)":
+- link:
+  - /url: /jobs/85999cea-b722-40b5-a148-ee44f6a9c6a6?index=1
+- button "Trash image":
+- button "Like image (L)":
+- link:
+  - /url: /jobs/85999cea-b722-40b5-a148-ee44f6a9c6a6?index=2
+- button "Trash image":
+- button "Like image (L)":
+- link:
+  - /url: /jobs/85999cea-b722-40b5-a148-ee44f6a9c6a6?index=3
+- button "Trash image":
+- button "Like image (L)":
+- generic: Upscale (S)
+- button:
+- button:
+- button:
+- button "https://s.mj.run/mWHjcAfUknk":
+  - img "https://s.mj.run/mWHjcAfUknk"
+- generic: redraw without the floating embellishments
+- button "--ar 77:58":
+  - generic: "--ar"
+  - generic: 77:58
+- link:
+  - /url: /jobs/9b505188-c0ee-4031-843c-4df5fc065d27?index=0
+- button "Trash image":
+- button "Like image (L)":
+- generic: Imagine
+- button:
+- button:
+- button:
+- button "https://s.mj.run/KDqTr4wuy_Y":
+  - img "https://s.mj.run/KDqTr4wuy_Y"
+- generic: draw only the midground mountains
+- button "--ar 77:58":
+  - generic: "--ar"
+  - generic: 77:58
+- link:
+  - /url: /jobs/9a81e671-e921-421e-b086-06c8c3982d95?index=0
+- button "Trash image":
+- button "Like image (L)":
+- link:
+  - /url: /jobs/9a81e671-e921-421e-b086-06c8c3982d95?index=1
+- button "Trash image":
+- button "Like image (L)":
+- link:
+  - /url: /jobs/9a81e671-e921-421e-b086-06c8c3982d95?index=2
+- button "Trash image":
+- button "Like image (L)":
+- link:
+  - /url: /jobs/9a81e671-e921-421e-b086-06c8c3982d95?index=3
+- button "Trash image":
+- button "Like image (L)":
+- generic: Looking for more...
+- text: Looking for more...
+- button "Add images":
+- textbox "What would you like to imagine?"
+- button:
+- button:
+- button "P":
+  - generic: P
+- button:
+- button "Draft Mode Explore at draft quality and refine with variations.":
+  - generic: Draft Mode
+  - generic: Explore at draft quality and refine with variations.
+- button "Conversational Mode Refine your prompt using text or voice.":
+  - generic: Conversational Mode
+  - generic: Refine your prompt using text or voice.
+- button:
+- button "Close":
+- paragraph: Imagine
+- generic "Sep 27, 12:04 PM":
+  - generic: 1m
+- button "Options":
+- button "Download image":
+- button "Spotlight image":
+- button "Like image (L)":
+- paragraph: Extreme macro action insert for the same fantasy comic. Only one pink-orange fox front paw nudging a tiny turquoise glass marble across ochre earth, three small glass marbles nearby, fallen pink rose petals, diagonal motion composition, marble and paw occupy the lower two thirds, dark teal tree roots softly behind. No faces, no full animals. Irregular heavy ink lines, coral pink and deep teal, warm honey highlights, crisp cel shading, hand-drawn graphic novel brushwork, tactile paper. Tight cinematic closeup, no text
+- generic: + use text
+- button "https://s.mj.run/kLld1FvNggI":
+  - img "https://s.mj.run/kLld1FvNggI"
+- button "--ar 3:4 ar 3:4":
+  - generic: "--ar 3:4"
+  - generic: ar 3:4
+- button "--raw raw":
+  - generic: "--raw"
+  - generic: raw
+- button "--v 7 v 7":
+  - generic: "--v 7"
+  - generic: v 7
+- button "Add to folder":
+- heading "Creation actions" [level=2]
+- button "More options"
+- link "Vary":
+  - /url: https://docs.midjourney.com/hc/en-us/articles/32692978437005-Variations
+- button "Subtle"
+- button "Strong"
+- link "Upscale":
+  - /url: https://docs.midjourney.com/hc/en-us/articles/32804058614669-Upscalers
+- button "Subtle"
+- button "Creative"
+- link "More":
+  - /url: https://docs.midjourney.com/hc/en-us/articles/33329329805581-Modifying-Your-Creations
+- button "Rerun"
+- link "Use":
+  - /url: https://docs.midjourney.com/hc/en-us/articles/33329329805581-Modifying-Your-Creations#h_01JHGVTXE8P1AF1V3M5X7DQHF1
+- button "Style"
+- button "Prompt"
+- link "Edit":
+  - /url: https://docs.midjourney.com/hc/en-us/articles/32764383466893-Full-Editor
+- button "Quick Edit"
+- button "Open Editor":
+  - text: Open Editor
+- button "Animate image":
+  - heading "Animate image" [level=2]

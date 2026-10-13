@@ -1,0 +1,33 @@
+{
+  "revision": "B06",
+  "one_continuous_tree_component": true,
+  "tree_open_boundary_edges": 0,
+  "couch_back_contacts": [
+    {
+      "cushion": "B back cushion 0",
+      "soft_contact_m": -0.012
+    },
+    {
+      "cushion": "B back cushion 1",
+      "soft_contact_m": -0.012
+    },
+    {
+      "cushion": "B back cushion 2",
+      "soft_contact_m": -0.012
+    }
+  ],
+  "planks_trimmed_to_tree": 81,
+  "integral_bearing_limbs": 3,
+  "bearing_surface_z": -0.59,
+  "foreground_foliage_is_separate": true,
+  "scope": "Geometric scene checks; final organic surface polish and native integration remain open.",
+  "geometry_vertices": 113083,
+  "tree_geometry_independent_of_camera": true,
+  "tree_geometry_sha256": "478763b2f046640b90269c02f453da9a854f7da80536f1d40810282cc69f181f",
+  "lantern_and_petal_motion_verified": true,
+  "foreground_foliage_collection": "B12 Foreground foliage layer",
+  "canopy_blossom_collection": "B07 Separate blossoms",
+  "right_bark_return": "The continuous trunk widens behind the right jamb; facade and camera are unchanged.",
+  "scene_objects": 772,
+  "foliage_twigs_anchored_to_parent_branch": 14
+}

@@ -23,12 +23,14 @@ queued → prompting → awaiting_image → ingesting → registered → bound
 | State | Meaning |
 | --- | --- |
 | `queued` | Job accepted |
-| `prompting` | Style-safe prompt written (OpenAI) |
-| `awaiting_image` | Waiting for author to paste a temporary https image URL |
-| `ingesting` | MCP downloading staging bytes and `PUT`ting hosted file to Game Asset API |
+| `prompting` | Style-safe `imagePrompt` written (OpenAI chat) |
+| `awaiting_image` | Waiting for optional manual https paste (`generate:false`) |
+| `ingesting` | OpenAI `gpt-image-2` (or staging download) → `PUT` Game Asset API |
 | `registered` | Bytes live under slash key on `abbies-world-2`; semantic ID is durable |
 | `bound` | World scene/place references **semantic ID only** |
 | `failed` | Terminal; `error` set |
+
+**Default ChatGPT MCP path:** `asset_job_create` with `generate:true` (default when `OPENAI_API_KEY` is set) writes the prompt, calls OpenAI Images (`gpt-image-2`), ingests bytes, returns `registered`. Midjourney is optional via `generate:false` + `asset_job_complete`.
 
 **Hard rule:** world documents and `asset_bind` / `place_upsert` / `scene_set_background_*` must never store Midjourney or other third-party CDN URLs. Staging URLs are intake-only for `asset_job_complete`.
 
@@ -85,10 +87,11 @@ Same Streamable HTTP endpoint as world tools: `/api/mcp` (ChatGPT install: `docs
 | `asset_project_create` | In-memory project + library intent + suggested semantic IDs |
 | `asset_library_describe` | Refresh library intent / suggestions |
 | `asset_project_status` | Read project or list projects |
-| `asset_job_create` | `POST /api/asset-jobs` — returns `midjourneyPrompt` + `proofBrief` |
+| `asset_job_create` | `POST /api/asset-jobs` — prompt + optional OpenAI `gpt-image-2` generate → often `registered` |
+| `asset_job_generate` | Re-run Images API for an `awaiting_image` / failed job |
 | `asset_job_list` | `GET /api/asset-jobs` |
 | `asset_job_status` | `GET /api/asset-jobs?id=` |
-| `asset_job_complete` | Download staging https → multipart `PUT` Game Asset API (`ASSET_REGISTRY_ADMIN_API_KEY`) → status `registered` |
+| `asset_job_complete` | Optional: download staging https → multipart `PUT` Game Asset API → `registered` |
 | `asset_bind` | World mutate: set scene/place to **semantic ID only** (CDN rejected) |
 
 Steel-rail `author_beat` may emit `asset.job_create` + `asset.bind` only — never freeform bytes.

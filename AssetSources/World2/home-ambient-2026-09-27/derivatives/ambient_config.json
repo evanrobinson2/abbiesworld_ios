@@ -1,0 +1,160 @@
+{
+  "semanticId": "map.home",
+  "sourceSha256": "a5ef522305e14c8c6655863cf58002416832f55cf6b681ba1a2643e71a38324a",
+  "dimensions": [
+    2464,
+    1856
+  ],
+  "aspect": 1.3275862068965518,
+  "clouds": [
+    {
+      "sprite": "world2_map_home_cloud_0",
+      "y": 0.1,
+      "scale": 0.55,
+      "duration": 140,
+      "phase": 0.0,
+      "opacity": 0.55
+    },
+    {
+      "sprite": "world2_map_home_cloud_1",
+      "y": 0.18,
+      "scale": 0.7,
+      "duration": 170,
+      "phase": 0.37,
+      "opacity": 0.45
+    },
+    {
+      "sprite": "world2_map_home_cloud_2",
+      "y": 0.08,
+      "scale": 0.4,
+      "duration": 110,
+      "phase": 0.71,
+      "opacity": 0.5
+    }
+  ],
+  "waterfall": {
+    "scrollSeconds": 1.9,
+    "opacity": 0.69,
+    "mist": [
+      {
+        "x": 0.22,
+        "y": 0.92,
+        "r": 0.06
+      },
+      {
+        "x": 0.24,
+        "y": 0.78,
+        "r": 0.04
+      }
+    ]
+  },
+  "leaves": {
+    "maxVisible": 5,
+    "spawnInterval": [
+      3.0,
+      7.0
+    ],
+    "life": [
+      6.0,
+      12.0
+    ],
+    "canopyEmitters": [
+      {
+        "x": 0.55,
+        "y": 0.12
+      },
+      {
+        "x": 0.68,
+        "y": 0.1
+      },
+      {
+        "x": 0.78,
+        "y": 0.16
+      },
+      {
+        "x": 0.48,
+        "y": 0.18
+      },
+      {
+        "x": 0.62,
+        "y": 0.22
+      }
+    ],
+    "wind": {
+      "dx": 0.08,
+      "dy": 0.22
+    }
+  },
+  "reeds": [
+    {
+      "x": 0.08,
+      "y": 1.02,
+      "scale": 0.95,
+      "phase": 0.0,
+      "swaySeconds": 4.2
+    },
+    {
+      "x": 0.18,
+      "y": 1.04,
+      "scale": 0.8,
+      "phase": 0.4,
+      "swaySeconds": 5.1
+    },
+    {
+      "x": 0.92,
+      "y": 1.03,
+      "scale": 0.9,
+      "phase": 0.7,
+      "swaySeconds": 3.8
+    }
+  ],
+  "butterflies": {
+    "maxVisible": 3,
+    "spawnInterval": [
+      5.0,
+      12.0
+    ],
+    "life": [
+      8.0,
+      16.0
+    ],
+    "spawns": [
+      {
+        "x": 0.3,
+        "y": 0.55
+      },
+      {
+        "x": 0.7,
+        "y": 0.48
+      },
+      {
+        "x": 0.55,
+        "y": 0.62
+      },
+      {
+        "x": 0.22,
+        "y": 0.7
+      }
+    ]
+  },
+  "hardpointsClear": [
+    {
+      "id": "abbie",
+      "x": 0.326,
+      "y": 0.311,
+      "r": 0.08
+    },
+    {
+      "id": "ani",
+      "x": 0.722,
+      "y": 0.443,
+      "r": 0.08
+    },
+    {
+      "id": "cardFactory",
+      "x": 0.44,
+      "y": 0.685,
+      "r": 0.08
+    }
+  ]
+}

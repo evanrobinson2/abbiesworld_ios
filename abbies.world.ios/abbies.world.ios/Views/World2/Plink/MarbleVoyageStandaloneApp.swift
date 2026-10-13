@@ -2,13 +2,13 @@
 //  MarbleVoyageStandaloneApp.swift
 //  abbies.world.ios
 //
-//  Standalone entry is now the default via abbies_world_iosApp → MarbleVoyageRootView.
-//  Keep this file for a future dedicated App Store target.
+//  Dedicated App Store target entry. Household app defaults to World2RootView;
+//  pass `-launchMarbleVoyage` for standalone voyage from the main target.
 //
 
 import SwiftUI
 
-// @main — use abbies_world_iosApp (defaults to Marble Voyage).
+// @main — use abbies_world_iosApp (household Home by default).
 struct MarbleVoyageStandaloneApp: App {
     @StateObject private var auth = AuthenticationService.shared
 

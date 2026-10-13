@@ -53,6 +53,7 @@ enum World2POIKind: String, Codable, CaseIterable, Sendable {
 enum World2POIRoute: Codable, Equatable, Sendable {
     case playerHome
     case cardFactory
+    case cafe
     case furnitureStore
     case assetWorkbench
     case creatureLab
@@ -77,6 +78,7 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         switch self {
         case .playerHome: return "player_home"
         case .cardFactory: return "card_factory"
+        case .cafe: return "cafe"
         case .furnitureStore: return "furniture_store"
         case .assetWorkbench: return "asset_workbench"
         case .creatureLab: return "creature_lab"
@@ -110,7 +112,7 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         case .planningDept: return "planning_dept"
         case .plink: return "plink"
         case .pegMonastery: return "peg_monastery"
-        case .playerHome, .cardFactory, .placeFactory, .travel, .rooms: return nil
+        case .playerHome, .cafe, .cardFactory, .placeFactory, .travel, .rooms: return nil
         }
     }
 
@@ -120,6 +122,7 @@ enum World2POIRoute: Codable, Equatable, Sendable {
         switch behavior {
         case "playerHome": return .playerHome
         case "cardFactory": return .cardFactory
+        case "cafe": return .cafe
         case "furnitureStore": return .furnitureStore
         case "assetWorkbench": return .assetWorkbench
         case "creatureLab": return .creatureLab

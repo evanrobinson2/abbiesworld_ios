@@ -1,0 +1,41 @@
+[
+  {
+    "file": "art/game.jpg",
+    "use": "composition reference only",
+    "character": "Fox recognizable; hare missing clover ornaments; exact designs not approved.",
+    "emotion": "Both concentrated, not laughing or surprised.",
+    "tone": "Warm fantasy, slightly intense expressions.",
+    "color": "Coral and teal; hare warmer than mint-white reference.",
+    "shape": "Readable fox and long-eared hare silhouettes; dense foliage detail.",
+    "action": "Looking at marbles; no visible shot, miss, laughter or capture.",
+    "framing": "Balanced pair, faces readable; works as broad spatial reference.",
+    "continuity": "Full action set and consistent props still missing.",
+    "approval": "review only"
+  },
+  {
+    "file": "art/detail.jpg",
+    "use": "do not feature; possible brief insert only after action review",
+    "character": "Single paw lacks enough context to establish identity.",
+    "emotion": "No expression visible.",
+    "tone": "Tactile and intimate, but gives the object excess importance.",
+    "color": "Coral/teal matches wide candidate approximately; paw fur differs.",
+    "shape": "Oversized foreground paw and marbles dominate frame.",
+    "action": "Paw beside marbles; image does not establish a shot or a miss.",
+    "framing": "Macro vertical panel overwhelms friendship beat if held.",
+    "continuity": "Marble count/layout not matched to wide shot.",
+    "approval": "review only"
+  },
+  {
+    "file": "art/raze.png",
+    "use": "identity reference only",
+    "character": "Existing bundled Raze design, no redesign.",
+    "emotion": "Confident smirk.",
+    "tone": "Swaggering bully; useful attitude reference.",
+    "color": "Ochre/teal; lighting must be matched to clearing.",
+    "shape": "Distinct ears, muzzle, jacket; folded arms.",
+    "action": "Static folded arms, cannot depict scuff, net or departure.",
+    "framing": "Portrait crop lacks feet and full action context.",
+    "continuity": "Requires full-body pose in established scene direction.",
+    "approval": "existing bundled source; suitability for new shot not approved"
+  }
+]

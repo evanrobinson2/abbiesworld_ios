@@ -1,0 +1,58 @@
+:root{color-scheme:dark;font-family:system-ui,sans-serif;background:#101819;color:#f6edda}*{box-sizing:border-box}body{margin:0}header{height:62px;display:flex;align-items:center;justify-content:space-between;padding:0 4vw;gap:20px;font-size:12px;color:#aaa99b}a{color:inherit;text-decoration:none}header a:first-child{color:#f6edda;font-family:Georgia,serif;font-size:21px}main{max-width:1440px;margin:auto;padding:12px 3vw 24px}#screen{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;background:#efe5cf;box-shadow:0 20px 80px #0008;border:1px solid #52605b}#stage{position:absolute;inset:0;overflow:hidden}.panel{position:absolute;overflow:hidden;background:#182729;border:5px solid #111e23;box-shadow:0 5px 20px #0005}.panel img{width:100%;height:100%;object-fit:cover;display:block}.panel.cutout img{object-fit:contain}.caption{position:absolute;z-index:10;margin:0;background:#ffefd1;color:#17282a;border:3px solid #17282a;padding:1.1% 2%;font:italic 700 clamp(16px,3vw,42px)/1.1 Georgia,serif;max-width:55%;box-shadow:5px 5px #17282a}.name{background:#d96136;color:#fff3d9;font:900 clamp(22px,6vw,78px)/1 system-ui;letter-spacing:-.06em;transform:rotate(-5deg);box-shadow:7px 7px #102b30}#end{position:absolute;inset:0;background:#10272ae8;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px}#end[hidden]{display:none}#end p{letter-spacing:.3em;font-size:12px}#end h1{font:italic 600 clamp(28px,5vw,66px) Georgia,serif;margin:0}#end small{color:#bec9c3}button{font:inherit;color:inherit;background:#24383a;border:1px solid #566967;border-radius:5px;min-height:44px;padding:8px 17px;cursor:pointer}button:hover{background:#3e5554}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #e9b970;outline-offset:3px}.controls{display:flex;gap:10px;align-items:center;margin:20px 0}#play{min-width:82px;background:#eee0bd;color:#15292b}input[type=range]{flex:1;min-width:50px;accent-color:#e9b970}output{font-variant-numeric:tabular-nums;font-size:12px;width:36px}.controls label{font-size:12px;white-space:nowrap}#chapters{display:flex;gap:8px;flex-wrap:wrap}#chapters button{font-size:12px;border:0;background:#1c2c2d;color:#b5c4bc}#chapters button[aria-current=true]{background:#e1af73;color:#172a2b}.note{font-size:12px;color:#849891;line-height:1.6}@media(max-width:650px){header{height:54px}header span{display:none}.controls{flex-wrap:wrap;gap:6px}.controls label{width:100%}main{padding:8px 10px}#chapters{gap:4px}#chapters button{padding:5px 9px}.panel{border-width:3px}.caption{border-width:2px}.note{font-size:11px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+
+.missing-art{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:12%;text-align:center;color:#dbd2bd}.missing-art small{letter-spacing:.2em;font-size:10px;color:#b59b73}.missing-art p{font:italic clamp(20px,3vw,40px)/1.3 Georgia,serif}.missing img[hidden]{display:none}
+
+/* The scenery moves independently of characters and comic inserts. */
+#stage.depth{isolation:isolate;background:#243d50}
+.scenery{position:absolute;inset:-5%;background:url('conflict/meadow.jpg') center 57% / cover no-repeat;will-change:transform;filter:saturate(1.38) contrast(1.05)}
+.scene-light{position:absolute;inset:-8%;pointer-events:none;background:linear-gradient(118deg,#efae6966,transparent 42%,#377d8b55);mix-blend-mode:soft-light}
+.threat .scenery{filter:saturate(1.3) brightness(.61) hue-rotate(5deg)}
+.resolve .scenery{filter:saturate(1.3) brightness(.82)}
+.depth .panel.cutout,.depth .panel.paper{border:0;background:transparent;box-shadow:none;overflow:visible;filter:drop-shadow(9px 12px 6px #07182445)}
+.paper-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:none}
+.paper-art.ready{display:block}.keyed-source{visibility:hidden}
+.depth .panel:not(.paper):not(.cutout){box-shadow:8px 10px 0 #0d293a66;border-color:#172e3b}
+
+.depth .panel.paper{mask-image:linear-gradient(to right,#000 0 86%,transparent 100%);-webkit-mask-image:linear-gradient(to right,#000 0 86%,transparent 100%)}
+
+.story-card{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:linear-gradient(110deg,#102c4677,#142c4944);color:#fff0c9;text-shadow:4px 5px 0 #172c43;z-index:3;pointer-events:none}
+.story-card p{font-size:clamp(10px,1.5vw,20px);letter-spacing:.32em;font-weight:800;margin:0 0 3%}
+.story-card h1{white-space:pre-line;font:950 clamp(35px,8vw,108px)/.91 system-ui;letter-spacing:-.055em;margin:0;transform:rotate(-3deg)}
+.story-card.closing h1{font:italic 700 clamp(28px,6vw,80px)/1.04 Georgia,serif;letter-spacing:-.035em;transform:rotate(-2deg)}
+.story-card.closing{padding-bottom:9%;background:linear-gradient(110deg,#102c46aa,#142c4977)}
+.caption.hero{background:#a12b58;color:#fff0c9;border-color:#351e37;box-shadow:7px 7px #351e37}
+#end{inset:auto 0 0;height:27%;background:transparent;justify-content:center;gap:7px;z-index:15}
+#end button{background:#f7e7bb;color:#172b39;border-color:#f7e7bb;font-weight:700}
+#end small{text-shadow:0 1px 3px #000;color:#f2ead8}
+
+/* Preview framing is sized to the available viewport, not an assumed iPad port. */
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+main{width:min(1440px,100%,calc((100svh - 240px)*16/9 + 48px));padding:12px 24px 24px}
+#screen{container-type:inline-size;box-shadow:none}
+#stage{container-type:inline-size}
+.controls{margin:12px 0;flex-wrap:wrap}
+#chapters{gap:6px}#chapters button{min-height:36px;padding:6px 11px}
+.story-card{text-shadow:none;padding:6%;background:linear-gradient(110deg,#102c4699,#142c4966)}
+.canon-logo{display:flex;white-space:nowrap;font-family:ui-rounded,'SF Pro Rounded','Arial Rounded MT Bold',system-ui,sans-serif;font-size:7cqw;font-weight:950;letter-spacing:-.045em;margin:0 0 4%;line-height:1.3}
+.canon-logo span{display:inline-block;white-space:pre}
+.canon-logo .pink{color:#ff4f91;background:linear-gradient(#ff8bb5,#ff2d78);background-clip:text;-webkit-text-fill-color:transparent}
+.canon-logo .cyan{color:#32d5f3;background:linear-gradient(#7ceaff,#13b8e0);background-clip:text;-webkit-text-fill-color:transparent}
+.story-card.opening h1{font:950 4cqw/1.2 ui-rounded,'Arial Rounded MT Bold',system-ui;letter-spacing:.035em;transform:none;background:linear-gradient(90deg,#73d9ff,#bf8cff,#ff8cbf);background-clip:text;-webkit-text-fill-color:transparent}
+.story-card.closing h1{font-size:6cqw}
+.story-card p{font-size:1.7cqw}
+.caption{font-size:3cqw;max-width:88%;box-shadow:none}
+.caption.name{font-size:6cqw;box-shadow:none}
+.caption.hero{box-shadow:none}
+.friendship-doodles{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
+.friendship-doodles path{fill:none;stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+@media(max-width:650px){main{width:100%;padding:8px 12px 20px}.canon-logo{font-size:7cqw}.controls label{width:auto}.controls{gap:6px}header{padding:0 14px}.caption{font-size:3.5cqw}}
+
+@font-face{font-family:Roboto;src:url('fonts/Roboto.ttf') format('truetype');font-weight:100 900;font-style:normal;font-display:swap}
+:root{font-family:Roboto,Arial,sans-serif;font-weight:700}
+header a:first-child,.caption,.name,.caption.hero,.story-card h1,.story-card.opening h1,.story-card.closing h1,#end h1,.missing-art p{font-family:Roboto,Arial,sans-serif;font-style:normal;font-weight:900}
+.story-card.closing h1{line-height:1.08;transform:none;letter-spacing:-.025em}
+.story-ink{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5}
+.ink-label{font:900 43px Roboto,Arial,sans-serif;fill:#fff6dd;stroke:#183242;stroke-width:5px;paint-order:stroke;stroke-linejoin:round;letter-spacing:1px}
+/* Extra rescue chapters wrap below the frame, keeping the stage fully visible. */
+main{width:min(1440px,100%,calc((100svh - 280px)*16/9 + 48px))}
+@media(max-width:650px){main{width:100%}}

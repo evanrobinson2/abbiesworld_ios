@@ -201,6 +201,9 @@ final class World2WorldSync: ObservableObject {
     @Published private(set) var whatsNew: World2WorldUpdateSummary?
     @Published private(set) var unseenIDs: Set<String> = []
     @Published private(set) var noticesSuppressed = false
+    /// Household world list from `GET /api/v1/worlds`.
+    @Published private(set) var serverWorlds: [World2ServerWorldSummary] = []
+    @Published private(set) var focusedWorldId: String?
 
     private var pushTask: Task<Void, Never>?
     private var watchTask: Task<Void, Never>?
@@ -237,14 +240,20 @@ final class World2WorldSync: ObservableObject {
         // Signed in means the compiled catalog is not playable, even before bytes arrive.
         setAuthority(true)
         do {
+            await refreshWorldList(token: token)
             if let remote = try await HouseholdAPIClient.shared.fetchWorld(accessToken: token) {
                 apply(remote, source: .launchPull)
                 World2Diagnostics.log(
                     "world_pulled",
-                    ["revision": String(remote.revision), "scenes": String(remote.scenes.count)]
+                    [
+                        "revision": String(remote.revision),
+                        "scenes": String(remote.scenes.count),
+                        "world": focusedWorldId ?? "?",
+                    ]
                 )
             } else {
                 try await pushEmpty(token: token)
+                await refreshWorldList(token: token)
             }
         } catch {
             lastError = error.localizedDescription
@@ -252,6 +261,53 @@ final class World2WorldSync: ObservableObject {
                 sceneGraph.importScenes([:])
             }
             World2Diagnostics.log("world_pull_failed", ["error": error.localizedDescription])
+        }
+    }
+
+    func refreshWorldList(token: String? = nil) async {
+        guard !AuthenticationService.shared.shouldSkipAuthForAutomation else { return }
+        let access: String
+        if let token {
+            access = token
+        } else if let fetched = await AuthenticationService.shared.accessToken() {
+            access = fetched
+        } else {
+            return
+        }
+        do {
+            let listing = try await HouseholdAPIClient.shared.listWorlds(accessToken: access)
+            serverWorlds = listing.worlds
+            focusedWorldId = listing.currentWorldId
+                ?? listing.worlds.first(where: \.isCurrent)?.id
+        } catch {
+            World2Diagnostics.log("world_list_failed", ["error": error.localizedDescription])
+        }
+    }
+
+    /// Focus a household world on the server, then pull its document into play.
+    @discardableResult
+    func focusWorld(id worldId: String) async -> Bool {
+        guard !AuthenticationService.shared.shouldSkipAuthForAutomation else { return false }
+        guard let token = await AuthenticationService.shared.accessToken() else { return false }
+        do {
+            let listing = try await HouseholdAPIClient.shared.setCurrentWorld(
+                worldId: worldId,
+                accessToken: token
+            )
+            serverWorlds = listing.worlds
+            focusedWorldId = listing.currentWorldId ?? worldId
+            if let remote = try await HouseholdAPIClient.shared.fetchWorld(accessToken: token) {
+                apply(remote, source: .launchPull)
+            }
+            World2Diagnostics.log("world_focus", ["world": worldId])
+            return true
+        } catch {
+            lastError = error.localizedDescription
+            World2Diagnostics.log(
+                "world_focus_failed",
+                ["world": worldId, "error": error.localizedDescription]
+            )
+            return false
         }
     }
 
@@ -265,9 +321,10 @@ final class World2WorldSync: ObservableObject {
         }
     }
 
-    /// No character models means no portrait and no sticks. Tap the places.
+    /// Tap-only overland: no 3D Abbie/Daddy, no sticks, no march-to-ground.
+    /// Places open on tap. Party models stay in the codebase for Figurine Explorer / future use.
     var presentsParty: Bool {
-        !usesServerDocument || !actors.isEmpty
+        false
     }
 
     func accentColor(_ fallback: Color) -> Color {
@@ -308,14 +365,37 @@ final class World2WorldSync: ObservableObject {
         let home = World2SceneDefinition(
             id: "scene.home",
             name: "Abbie's World",
-            summary: "A brand-new world. Invent the first place.",
-            backgroundAsset: "",
+            summary: "Abbie's cottage — go indoors for the world book",
+            backgroundAsset: "map.home",
             hardpoints: [],
-            poiInstances: [],
+            poiInstances: [
+                World2POIInstance(
+                    id: "instance.home.abbieTreehouse",
+                    archetypeID: World2POIRegistry.abbieTreehouseID,
+                    sceneID: "scene.home",
+                    transform: World2POITransform(
+                        position: World2NormalizedPoint(x: 0.65, y: 0.64),
+                        scale: 1.12,
+                        rotationDegrees: 0
+                    ),
+                    zIndex: 3,
+                    isAuthored: true
+                ),
+            ],
             isMutableByPlayer: true,
             showsOpenHardpointsToPlayers: true,
-            isDeveloperPlaceholder: true
+            isDeveloperPlaceholder: false
         )
+        let places: [World2RemotePlace] = [
+            World2RemotePlace(
+                id: World2POIRegistry.abbieTreehouseID,
+                name: "Abbie's Treehouse",
+                behavior: "playerHome",
+                exteriorAsset: "poi.abbieTreehouse.exterior",
+                interiorAsset: "poi.abbieTreehouse.interior",
+                musicTrackID: "music.abbieTreehouse.light"
+            ),
+        ]
         return World2WorldDocument(
             schemaVersion: 1,
             revision: 0,
@@ -323,7 +403,7 @@ final class World2WorldSync: ObservableObject {
             players: [:],
             skin: nil,
             props: [],
-            places: [],
+            places: places,
             songs: [],
             actors: [],
             activeSceneID: home.id,

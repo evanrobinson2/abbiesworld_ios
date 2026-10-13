@@ -1,0 +1,33 @@
+{
+  "id": "20260927-carnival-fairground-map",
+  "semanticId": "poi.carnival.fairground.exterior",
+  "status": "in_review",
+  "priority": "high",
+  "type": "map_token",
+  "brief": "A miniature toy carnival POI placed in the playroom. Tapping it teleports to scene.carnival using the approved full-size destination panorama.",
+  "aspect": "1:1",
+  "styleNotes": "For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/World2/carnival-approved-2026-09-27/mini-fair-candidate-4.jpeg"
+  ],
+  "promptSeeds": [
+    "A welcoming carnival tent with bunting, the entrance to a fair with four game booths and a prize shop. The illustrated building itself is the tappable POI, not a floating logo badge. For six-year-olds: exuberant 2D children\u2019s illustrated storybook / comic art, thick dark ink outlines, flat vibrant candy colors, hard-edged cel shading, wonky exaggerated proportions, playful oversized props and readable visual gags. No photorealism, realistic landscaping, cinematic lighting or detailed painted textures. Preserve clear small-scale silhouettes."
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-28T00:55:56.104995+00:00",
+  "productionIntent": "production_sprite",
+  "surface": "Abbie cottage playroom: miniature carnival teleporter",
+  "placeholder": {
+    "type": "none",
+    "detail": "Requested attraction; not implemented yet."
+  },
+  "acceptanceCriteria": [
+    "Transparent production cutout; full silhouette inside canvas",
+    "Consistent three-quarter overland perspective, scale and lighting across all six",
+    "Recognizable at 96px and 160px; no tiny text needed",
+    "Supply contact sheet on actual map plus individual source/provenance"
+  ],
+  "fulfillment": null,
+  "sessionNote": "Four generated candidates, index 3 selected for animation trial. Artwork awaits Evan approval; loop job 423da72f-2222-49cb-a2b4-4ccbb0f3324d. Preserve normal playroom decorations."
+}

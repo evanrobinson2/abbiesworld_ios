@@ -71,6 +71,9 @@ struct World2RootView: View {
                     onExit: viewModel.exitPOI
                 )
 
+            case .cafe:
+                World2CafeView(onExit: viewModel.exitPOI)
+
             case .cardFactory:
                 World2CardFactoryView(
                     viewModel: viewModel,
@@ -128,6 +131,14 @@ struct World2RootView: View {
                     destinations: viewModel.teleporterDestinations,
                     currentSceneID: viewModel.playSceneID,
                     onTravel: viewModel.travelViaTeleporter,
+                    onClose: viewModel.exitPOI
+                )
+
+            case .worldSwitcher:
+                World2WorldSwitcherView(
+                    entries: viewModel.worldSwitcherEntries,
+                    onSelect: viewModel.selectWorldSwitcherEntry,
+                    onOpenPlayerMenu: viewModel.requestPlayerMenu,
                     onClose: viewModel.exitPOI
                 )
 
@@ -190,6 +201,14 @@ struct World2RootView: View {
                 MarbleVoyageHostView(
                     playerID: viewModel.currentPlayerId?.rawValue,
                     onExit: viewModel.exitPOI
+                )
+
+            case .worldBookUnlock:
+                WorldBookUnlockHostView(
+                    playerID: viewModel.currentPlayerId?.rawValue,
+                    voyageAlreadyUnlocked: viewModel.isMarbleVoyageUnlocked,
+                    onPutDown: viewModel.putDownWorldBook,
+                    onAllSolved: viewModel.completeWorldBookUnlock
                 )
 
             case .planningDept:
@@ -322,6 +341,12 @@ struct World2RootView: View {
         .background(Color.black.ignoresSafeArea())
         .ignoresSafeArea()
         .statusBarHidden(true)
+        .fullScreenCover(item: $viewModel.voyageOpening) { request in
+            VoyageOpeningView(request: request) { watched in
+                viewModel.finishVoyageOpening(watchedToEnd: watched)
+            }
+            .interactiveDismissDisabled()
+        }
         .sheet(isPresented: $showingMusicPlayer) {
             MusicPlayerView {
                 showingMusicPlayer = false
@@ -350,6 +375,7 @@ struct World2RootView: View {
                         anywhereDecorating = false
                         anywhereSelectedFurnitureID = nil
                         anywhereSelectedCatalogID = nil
+                        viewModel.setDecorateModeActive(false)
                     }
                 )
                 .zIndex(35)
@@ -445,6 +471,7 @@ struct World2RootView: View {
                 anywhereSelectedFurnitureID = highlight
             }
             anywhereDecorating = true
+            viewModel.setDecorateModeActive(true)
             viewModel.dismissInventReadyPrompt()
         }
         .onChange(of: viewModel.sandboxInventTick) { _, _ in
@@ -531,8 +558,9 @@ struct World2RootView: View {
     }
 
     private var showsPlayerMenu: Bool {
+        if anywhereDecorating || viewModel.isDecorateModeActive { return false }
         switch viewModel.currentScreen {
-        case .loading, .playerSelect, .plink, .marbleVoyage:
+        case .loading, .playerSelect, .plink, .marbleVoyage, .worldSwitcher, .worldBookUnlock:
             return false
         default:
             return viewModel.currentPlayerId != nil
@@ -541,8 +569,10 @@ struct World2RootView: View {
 
     private var showsSandboxToolRail: Bool {
         guard showsPlayerMenu else { return false }
+        // Decorate mode owns the chrome — no utility rail competing with the drawer.
+        if anywhereDecorating || viewModel.isDecorateModeActive { return false }
         switch viewModel.currentScreen {
-        case .plink, .pegMonastery, .marbleVoyage, .loading, .playerSelect:
+        case .plink, .pegMonastery, .marbleVoyage, .worldSwitcher, .worldBookUnlock, .loading, .playerSelect:
             return false
         case .fallingTargets:
             return false
@@ -662,7 +692,7 @@ struct BootstrapLoadingView: View {
         .onAppear {
             introStartedAt = ProcessInfo.processInfo.systemUptime
             introVisuallyComplete = false
-            introAudio.play()
+            if !shouldAutoEnter { introAudio.play() }
             Task {
                 try? await Task.sleep(for: .seconds(7))
                 introVisuallyComplete = true
@@ -691,11 +721,12 @@ struct BootstrapLoadingView: View {
     }
 
     private var shouldAutoEnter: Bool {
-        ProcessInfo.processInfo.arguments.contains("-world2SkipIntro")
+        !ProcessInfo.processInfo.arguments.contains("-world2ShowIntro")
     }
 
     private var introVideoURL: URL? {
-        Bundle.main.url(
+        guard !shouldAutoEnter else { return nil }
+        return Bundle.main.url(
             forResource: "world2_intro",
             withExtension: "mp4",
             subdirectory: "Resources/World2"
@@ -1095,10 +1126,11 @@ private struct PlayerSelectButton: View {
 private extension World2Screen {
     var showsGlobalHUD: Bool {
         switch self {
-        case .loading, .playerSelect, .treehouse, .cardFactory,
+        case .loading, .playerSelect, .treehouse, .cardFactory, .cafe,
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse,
              .characterStudio, .figurineExplorer, .sceneBuilder, .worldTeleporter,
+             .worldSwitcher, .worldBookUnlock,
              .whizbang, .planningDept, .plink, .pegMonastery, .marbleVoyage, .rooms,
              .sceneCreator, .beacon, .daddyWelcome:
             return false

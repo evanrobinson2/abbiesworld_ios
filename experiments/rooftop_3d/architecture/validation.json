@@ -1,0 +1,20 @@
+{
+  "revision": "A01",
+  "all_checks_passed": true,
+  "checks": {
+    "deck_boards_axis_Y": 31,
+    "joists_axis_X_and_contact_board_underside": 15,
+    "primary_girders_axis_Y_and_contact_joists": 3,
+    "rear_rail_perpendicular_to_boards": true,
+    "side_rail_parallel_to_boards": true,
+    "both_posts_bear_directly_under_shared_header": true,
+    "rafters_with_two_fitted_beam_seats": 7,
+    "ceiling_boards_contact_rafter_top_plane": 10,
+    "tree_opening_has_four_trimmers_and_inner_header": true,
+    "measured_tree_to_seating_clearance_m": 0.0995,
+    "tree_shell_open_boundary_edges": 0,
+    "geometry_unchanged_after_camera_change": true,
+    "geometry_sha256": "5a62dc2a88f1228ae33976bace7cb31241d9f2fd5cbed10d4891b06e7bd4ad48"
+  },
+  "scope": "Geometric architecture checks for a game model; material finish, tree joinery and real-world engineering are not established."
+}

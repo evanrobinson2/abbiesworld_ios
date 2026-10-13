@@ -22,19 +22,25 @@ final class World2ContentAuthorityTests: XCTestCase {
         return store
     }
 
-    func testNewAccountDocumentIsSingleConstructionScene() throws {
+    func testNewAccountDocumentLandsOnHomeWithTreehouses() throws {
         let document = World2WorldSync.shared.documentForNewAccount()
         XCTAssertEqual(Array(document.scenes.keys), ["scene.home"])
         let home = try XCTUnwrap(document.scenes["scene.home"])
         XCTAssertEqual(home.name, "Abbie's World")
-        XCTAssertEqual(home.backgroundAsset, "")
-        XCTAssertTrue(home.poiInstances.isEmpty)
+        XCTAssertEqual(home.backgroundAsset, "map.home")
+        let arch = Set(home.poiInstances.map(\.archetypeID))
+        XCTAssertTrue(arch.contains(World2POIRegistry.abbieTreehouseID))
+        XCTAssertFalse(arch.contains(World2POIRegistry.aniTreehouseID))
+        XCTAssertFalse(arch.contains(World2POIRegistry.cardFactoryID))
+        XCTAssertEqual(arch.count, 1)
         XCTAssertEqual(document.activeSceneID, "scene.home")
         XCTAssertFalse(document.scenes.keys.contains("world.home"))
         XCTAssertFalse(document.scenes.keys.contains("world.evan"))
-        XCTAssertEqual(document.places, [])
+        let placeIDs = Set((document.places ?? []).map(\.id))
+        XCTAssertTrue(placeIDs.contains(World2POIRegistry.abbieTreehouseID))
         XCTAssertEqual(document.songs, [])
         XCTAssertEqual(document.actors, [])
+        // Construction plates remain available as fallback art for missing assets.
         XCTAssertNotNil(UIImage(named: "under_construction_scene"))
         XCTAssertNotNil(UIImage(named: "under_construction_poi"))
         XCTAssertNotNil(World2ConstructionArt.image(forSemantic: "map.home"))
@@ -148,7 +154,8 @@ final class World2ContentAuthorityTests: XCTestCase {
         XCTAssertEqual(World2WorldSync.shared.archetype("place.lantern")?.route, .figurineExplorer)
         XCTAssertNil(World2POIRegistry.archetype(World2POIRegistry.figurineExplorerID))
         XCTAssertEqual(World2WorldSync.shared.clipFile(engineName: "daddy_walk"), "daddy_custom")
-        XCTAssertTrue(World2WorldSync.shared.presentsParty)
+        // Overland is tap-only — actors may still resolve clip files, but the party never presents.
+        XCTAssertFalse(World2WorldSync.shared.presentsParty)
         XCTAssertNil(World2WorldSync.shared.clipFile(engineName: "abbie"))
         XCTAssertEqual(World2WorldSync.shared.skin.accent, "#112233")
         XCTAssertEqual(World2WorldSync.shared.activeSceneID, "scene.lantern")

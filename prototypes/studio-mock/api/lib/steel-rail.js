@@ -77,6 +77,36 @@ function camelToKebab(s) {
     .toLowerCase();
 }
 
+function kebabToCamel(s) {
+  return String(s).replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
+}
+
+/**
+ * Registry slash key → play semantic (best-effort inverse of semanticToRegistryKey).
+ * maps/peglin/crash-land → map.peglin.crashLand
+ * pois/asset-maker/e2e-probe3/exterior → poi.assetMaker.e2eProbe3.exterior
+ */
+export function registryKeyToSemantic(registryKey) {
+  const key = String(registryKey || "")
+    .trim()
+    .replace(/^\/+|\/+$/g, "");
+  if (!key || key.includes("..")) return "";
+  const parts = key.split("/").filter(Boolean);
+  if (parts.length < 2) return "";
+  const [head, ...rest] = parts;
+  const camelRest = rest.map(kebabToCamel);
+  const prefixes = {
+    maps: "map",
+    pois: "poi",
+    tokens: "token",
+    ui: "ui",
+    furniture: "furniture",
+    backgrounds: "title",
+  };
+  const semanticHead = prefixes[head] || head;
+  return [semanticHead, ...camelRest].join(".");
+}
+
 export function isSemanticAssetId(value) {
   const v = String(value || "");
   return /^(map|poi|token|ui|furniture|title)\./.test(v);
