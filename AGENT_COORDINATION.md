@@ -577,3 +577,7 @@ Invoke `$abbies-art-director` in a new chat. The personal skill belongs at `/Use
 ### Codex — Direct Meshy scene trial — completed 2026-09-28
 - Sent exact original rooftop-source.png bytes to Meshy 7.1 image-to-3D; one job, ID 01a0eaa7-fc10-7740-9978-5294513ad617. Provider SUCCEEDED, actual cost 30 credits. Downloaded GLB, USDZ, four cardinal preview images, base color/normal/roughness/metallic maps and redacted provenance to experiments/rooftop_3d/meshy_scene_trial. Credentials not persisted.
 - Visual failure: output is a nearly flat rectangular frame with a few blossom fragments, not the treehouse. Verified the actual GLB in Blender and rendered independently; 1 mesh / 727,956 triangles / dimensions 1.903 × 1.859 × 0.060. Source scene and app unchanged. No reroll, paid follow-up, commit or push. Reproducible clients and review script remain with the experiment.
+
+
+### Codex — Café iPad space and native drawer — 2026-10-13
+Completed scope: World2CafeView.swift. Replaced permanent exit bar with48pt native menu and adaptive side/bottom drawer; underlying game viewport stays stable, touch/accessibility blocked while drawer is open. Reduced-motion support and focus/escape handling added. Simulator-target build passed; physical device and rendered corner-overlap review remain pending. Hosted game remains web-based, not a full Swift game rewrite.
