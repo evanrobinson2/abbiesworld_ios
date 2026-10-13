@@ -9,6 +9,7 @@ enum World2Screen: Equatable {
     case blankSlate
     case treehouse(poiId: String)
     case cardFactory
+    case cafe
     case selfReplicatingFactory(instanceID: String)
     case furnitureStore
     case assetWorkbench
@@ -244,7 +245,13 @@ final class World2ViewModel: ObservableObject {
 
     /// The scene backing the map the player is looking at.
     var currentScene: World2SceneDefinition {
-        sceneGraph.scene(playSceneID)
+        var scene = sceneGraph.scene(playSceneID)
+        if currentWorld?.id == .home && !scene.poiInstances.contains(where: { $0.archetypeID == World2POIRegistry.cafeID }) {
+            scene.poiInstances.append(World2POIInstance(id: "instance.home.cafe", archetypeID: World2POIRegistry.cafeID,
+                sceneID: scene.id, transform: World2POITransform(x: 0.48, y: 0.28, scale: 0.8),
+                hardpointID: nil, zIndex: 2, createdAt: .distantPast, isAuthored: true))
+        }
+        return scene
     }
 
     /// Compiled worlds use `world.home`. A signed-in document uses `scene.home`.
@@ -1054,6 +1061,8 @@ final class World2ViewModel: ObservableObject {
             } else {
                 setScreen(.treehouse(poiId: archetype.id), reason: "poi_entered")
             }
+        case .cafe:
+            setScreen(.cafe, reason: "poi_entered")
         case .cardFactory:
             setScreen(.cardFactory, reason: "poi_entered")
         case .furnitureStore:
@@ -2148,6 +2157,8 @@ final class World2ViewModel: ObservableObject {
             songID = worldSongID(.blankSlate)
         case .treehouse(let poiId):
             songID = World2POIRegistry.archetype(poiId)?.musicTrackID
+        case .cafe:
+            songID = nil
         case .cardFactory:
             songID = World2POIRegistry.cardFactory.musicTrackID
         case .furnitureStore:
@@ -2421,6 +2432,7 @@ extension World2Screen {
         case .blankSlate: return "bs"
         case .treehouse: return "th"
         case .cardFactory: return "cf"
+        case .cafe: return "cafe"
         case .selfReplicatingFactory: return "srf"
         case .furnitureStore: return "fs"
         case .assetWorkbench: return "aw"
@@ -2467,6 +2479,7 @@ extension World2Screen {
             guard let routeID, !routeID.isEmpty else { return nil }
             return .treehouse(poiId: routeID)
         case "cf": return .cardFactory
+        case "cafe": return .cafe
         case "srf":
             guard let routeID, !routeID.isEmpty else { return nil }
             return .selfReplicatingFactory(instanceID: routeID)
@@ -2584,6 +2597,7 @@ extension World2Screen {
         case .blankSlate: return "blank_slate"
         case .treehouse(let poiId): return "treehouse:\(poiId)"
         case .cardFactory: return "card_factory"
+        case .cafe: return "cafe"
         case .selfReplicatingFactory(let instanceID):
             return "self_replicating_factory:\(instanceID)"
         case .furnitureStore: return "furniture_store"

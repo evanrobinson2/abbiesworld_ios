@@ -71,6 +71,9 @@ struct World2RootView: View {
                     onExit: viewModel.exitPOI
                 )
 
+            case .cafe:
+                World2CafeView(onExit: viewModel.exitPOI)
+
             case .cardFactory:
                 World2CardFactoryView(
                     viewModel: viewModel,
@@ -689,7 +692,7 @@ struct BootstrapLoadingView: View {
         .onAppear {
             introStartedAt = ProcessInfo.processInfo.systemUptime
             introVisuallyComplete = false
-            introAudio.play()
+            if !shouldAutoEnter { introAudio.play() }
             Task {
                 try? await Task.sleep(for: .seconds(7))
                 introVisuallyComplete = true
@@ -718,11 +721,12 @@ struct BootstrapLoadingView: View {
     }
 
     private var shouldAutoEnter: Bool {
-        ProcessInfo.processInfo.arguments.contains("-world2SkipIntro")
+        !ProcessInfo.processInfo.arguments.contains("-world2ShowIntro")
     }
 
     private var introVideoURL: URL? {
-        Bundle.main.url(
+        guard !shouldAutoEnter else { return nil }
+        return Bundle.main.url(
             forResource: "world2_intro",
             withExtension: "mp4",
             subdirectory: "Resources/World2"
