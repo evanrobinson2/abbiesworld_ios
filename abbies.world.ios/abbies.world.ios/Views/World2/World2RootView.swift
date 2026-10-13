@@ -1126,7 +1126,7 @@ private struct PlayerSelectButton: View {
 private extension World2Screen {
     var showsGlobalHUD: Bool {
         switch self {
-        case .loading, .playerSelect, .treehouse, .cardFactory,
+        case .loading, .playerSelect, .treehouse, .cardFactory, .cafe,
              .selfReplicatingFactory, .furnitureStore, .assetWorkbench,
              .creatureLab, .fallingTargets, .threeBearsHouse,
              .characterStudio, .figurineExplorer, .sceneBuilder, .worldTeleporter,
