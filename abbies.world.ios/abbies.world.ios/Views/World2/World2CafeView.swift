@@ -12,10 +12,6 @@ struct World2CafeView: View {
             Color.black.ignoresSafeArea()
             CafeWebView(active: scenePhase == .active, onError: { failed = true })
                 .id(reloadID)
-            Button(action: onExit) { Label("Back to World", systemImage: "arrow.left") }
-                .buttonStyle(.borderedProminent).padding(12)
-                .accessibilityIdentifier("cafe.backToWorld")
-                .zIndex(2)
             if failed {
                 VStack(spacing: 16) {
                     Text("The café needs an internet connection.")
@@ -23,7 +19,20 @@ struct World2CafeView: View {
                 }.padding().background(.regularMaterial).frame(maxWidth: .infinity, maxHeight: .infinity)
                     .allowsHitTesting(true)
             }
-        }.accessibilityIdentifier("world2.cafe")
+        }
+        .safeAreaInset(edge: .top, spacing: 0) {
+            HStack {
+                Button(action: onExit) { Label("Back to World", systemImage: "arrow.left") }
+                    .buttonStyle(.borderedProminent)
+                    .frame(minHeight: 44)
+                    .accessibilityIdentifier("cafe.backToWorld")
+                Spacer()
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 4)
+            .background(Color.black)
+        }
+        .accessibilityIdentifier("world2.cafe")
     }
 }
 
@@ -40,6 +49,13 @@ private struct CafeWebView: UIViewRepresentable {
         let web = WKWebView(frame: .zero, configuration: configuration)
         web.navigationDelegate = context.coordinator
         web.scrollView.bounces = false
+        // SwiftUI reserves the safe area and exit bar. Web content receives
+        // exactly the remaining viewport, without a second UIKit inset.
+        web.scrollView.contentInsetAdjustmentBehavior = .never
+        web.scrollView.contentInset = .zero
+        web.scrollView.scrollIndicatorInsets = .zero
+        web.scrollView.showsHorizontalScrollIndicator = false
+        web.scrollView.showsVerticalScrollIndicator = false
         web.isOpaque = false
         web.backgroundColor = .black
         web.load(URLRequest(url: url))
