@@ -1,0 +1,112 @@
+[
+  {
+    "path": "Evidence/easy/cliff-level-start.png",
+    "sha256": "de0f5204a7ca39067ec92a2bc5a1c0986009aede593f0305c2c0242e5e354e41",
+    "bytes": 615497
+  },
+  {
+    "path": "Evidence/easy/cliff-level-win.png",
+    "sha256": "5688f002e5355e89341fdb304a3edb103c6eaef7102a4687e1ec59ff0bd9e440",
+    "bytes": 339901
+  },
+  {
+    "path": "Evidence/easy/cliff-playthrough.txt",
+    "sha256": "a7c888bded4ed5eca204b90e9b986d2f25b745164a54ea21a3c366d1493d1f57",
+    "bytes": 169
+  },
+  {
+    "path": "Evidence/easy/fog-recovery-proof.png",
+    "sha256": "8bbaf147dab25ce411c31ebea6345962881f20db58a400ff9f72b731b7b5b025",
+    "bytes": 628912
+  },
+  {
+    "path": "Evidence/hard/cliff-level-start.png",
+    "sha256": "55754b00e92d46a5e97f69d7de3a5c8c1db65ccc74b72153732bb0c156d0d9b9",
+    "bytes": 615382
+  },
+  {
+    "path": "Evidence/hard/cliff-level-win.png",
+    "sha256": "ff0dd607f7bbe6fea699c862bd5b927081941efab544f176ac26a3388f50d15c",
+    "bytes": 335361
+  },
+  {
+    "path": "Evidence/hard/cliff-playthrough.txt",
+    "sha256": "e879162fa0164a86f2b7631c46e454a07874224607bb71f0b5d95962e5a1d2f0",
+    "bytes": 169
+  },
+  {
+    "path": "Evidence/hard/fog-recovery-proof.png",
+    "sha256": "cec68b650bc386f93667703311a873edb14200eb0cc433bb1091d642f2f254da",
+    "bytes": 628483
+  },
+  {
+    "path": "Evidence/medium/cliff-level-start.png",
+    "sha256": "50dac51ca145dcce0073848799f3233f1cef78aab1db70c5b8209aef43dfee1a",
+    "bytes": 615587
+  },
+  {
+    "path": "Evidence/medium/cliff-level-win.png",
+    "sha256": "2aafad1ac48017cf47f28f9360671566eeb7487554f978a4d0efb478954a35a5",
+    "bytes": 333879
+  },
+  {
+    "path": "Evidence/medium/cliff-playthrough.txt",
+    "sha256": "688d8fc1d135b1f836810814cb7fb9c9a7e43a0bbb5e3c0e2b3f1dc3332a56de",
+    "bytes": 171
+  },
+  {
+    "path": "Evidence/medium/fog-recovery-proof.png",
+    "sha256": "04a29011e5cc5c5de1fda75848bc81f606f02ebe2cbed22551001cf6dc8d7642",
+    "bytes": 627179
+  },
+  {
+    "path": "Evidence/menu/difficulty-menu.png",
+    "sha256": "7a0c8aa51a622a2d88296b6d2e3231060b81ee61c0bd2f4cf92a53dc7ee6fec9",
+    "bytes": 272825
+  },
+  {
+    "path": "Evidence/menu/menu-controls-qa.txt",
+    "sha256": "7c05504c1f603abbcdf89a9ff51c56e288d90d855d58c197ef0bba8e4c28d29b",
+    "bytes": 159
+  },
+  {
+    "path": "Evidence/packaged-easy/cliff-level-start.png",
+    "sha256": "0f774ccc2ec6e04c638aa025f568ff38af5108859763ced64eec567df5aa2153",
+    "bytes": 615462
+  },
+  {
+    "path": "Evidence/packaged-easy/cliff-level-win.png",
+    "sha256": "65e48fc8e53277cccbe0124c548d44c057270aa402083cd0c94116bc5df28b11",
+    "bytes": 339938
+  },
+  {
+    "path": "Evidence/packaged-easy/cliff-playthrough.txt",
+    "sha256": "a7c888bded4ed5eca204b90e9b986d2f25b745164a54ea21a3c366d1493d1f57",
+    "bytes": 169
+  },
+  {
+    "path": "Evidence/packaged-easy/fog-recovery-proof.png",
+    "sha256": "65bded5224aac3c70cfa12c4960089ca252011d866c6ecf120f913339328a58c",
+    "bytes": 628411
+  },
+  {
+    "path": "Evidence/verification.json",
+    "sha256": "ff686c44e87eaa545091be57f8fcf551c24ca3e336891cf2061390fd06d00378",
+    "bytes": 1879
+  },
+  {
+    "path": "Glass-reference.md",
+    "sha256": "b32320cad0930f32352f51c72b83cf73b52ce4b5f0398ef73a648bdeb9912be5",
+    "bytes": 4389
+  },
+  {
+    "path": "README.md",
+    "sha256": "015d8ba762c949eb2f2a2052efa2f7a2166f22aca5f8a41680010592afee4127",
+    "bytes": 994
+  },
+  {
+    "path": "Source/AbbiesWorld/SPMAdventure.h",
+    "sha256": "0ec3ae5faffad3822607c34a09b19eb73c0f39531efa3421d031c6024775f6ed",
+    "bytes": 39071
+  }
+]

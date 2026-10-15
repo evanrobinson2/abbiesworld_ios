@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "version": "0.3.1",
+  "engine": "UE 5.4.4",
+  "platform": "Windows",
+  "reference_branch": "review/marble-voyage-plink",
+  "reference_commit": "169c404ccf0b3f108f4a161580197046251eb7b4",
+  "reference_path": "abbies.world.ios/abbies.world.ios/Views/World2/Plink/Core/PeggleScene.swift",
+  "source_effect": "drawBackdrop: Gaussian blur 5.5, full-board dark wash and pale translucent glass",
+  "tests": {
+    "easy": "PASS: EASY seed 1337; far-click rejected; one-cell movement; fog reveal heals once and restores wounded goons; collected, brewed, fought and won via live click handlers.",
+    "medium": "PASS: MEDIUM seed 1338; far-click rejected; one-cell movement; fog reveal heals once and restores wounded goons; collected, brewed, fought and won via live click handlers.",
+    "hard": "PASS: HARD seed 1339; far-click rejected; one-cell movement; fog reveal heals once and restores wounded goons; collected, brewed, fought and won via live click handlers.",
+    "menu": "PASS: Easy/Medium/Hard/Surprise choices; retry preserves seed; victory replay changes seed; terminal input blocked; help consumes click without using a potion."
+  },
+  "packaged_exe_sha256": "8ea959500ec302dfc601dbc1e60b19c21e0250de520ab8c3992039c5a850c7bd",
+  "limits": [
+    "Swift Core Image and Unreal Slate blur are different renderer implementations; visually reviewed Windows preview, no claim of pixel-identical output.",
+    "User visual approval and shared world integration pending.",
+    "No iOS device verification."
+  ],
+  "test_environment": "All three tiers and menu in native editor game mode; Easy additionally replayed in the packaged executable.",
+  "packaged_easy": "PASS: EASY seed 1337; far-click rejected; one-cell movement; fog reveal heals once and restores wounded goons; collected, brewed, fought and won via live click handlers."
+}
