@@ -1,0 +1,9 @@
+{
+  "domain": "dev-33h7qd4ytudlk0ls.us.auth0.com",
+  "client_id": "kmRL2wGH2NhSxIqCXyMpx4UEQDy74QKS",
+  "api_base": "https://abbies.world",
+  "callback": "http://127.0.0.1:8769/auth/callback",
+  "audience": "https://api.abbies.world",
+  "status": "Trusted HTTPS verified; native PKCE authorization reaches Auth0 login. Live account sign-in pending.",
+  "registration_payload": "Auth0/windows-native-client.json"
+}
