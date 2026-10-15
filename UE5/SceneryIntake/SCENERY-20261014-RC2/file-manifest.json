@@ -1,0 +1,332 @@
+[
+  {
+    "path": "asset-manifest.json",
+    "bytes": 103808,
+    "sha256": "0681b03128f4df60a49db1d43634985f5d4945b24049dcaa62f6272d7862979c"
+  },
+  {
+    "path": "browser-validation.json",
+    "bytes": 44489,
+    "sha256": "586d0d4e49a9ad62ce2ed9a7a56ab0f027c7076812d5847d1acdc73da7f692d5"
+  },
+  {
+    "path": "BrowserReference/candyland.mjs",
+    "bytes": 4977,
+    "sha256": "05766aea2492fd3600e5bd4e28d0e95b03f37fbd0c483da990b7823f18cdc400"
+  },
+  {
+    "path": "BrowserReference/tiltshift.mjs",
+    "bytes": 2484,
+    "sha256": "e9643d8a40db140647e02d20dd0aa59ce790e0ecb67585e04763eba5290a0dd6"
+  },
+  {
+    "path": "README.txt",
+    "bytes": 789,
+    "sha256": "dae2f709dfc20d1a1340c94b945dfda6f6e0db32ba564f1366e44de66c06daf5"
+  },
+  {
+    "path": "SourceAssets/HalloweenCandyland/AW-HW-CAFE-001-v0.2.glb",
+    "bytes": 1505568,
+    "sha256": "5a80520ca79318de95e070dc70a0e3c9e290c65c6f5064a799de7529a0156b7a"
+  },
+  {
+    "path": "SourceAssets/HalloweenCandyland/AW-HW-CASTLE-001-v0.2.glb",
+    "bytes": 1705264,
+    "sha256": "b92e91addf902b1866b89c0a8f3aa4470b4d683758d6cdf61e7f25b4b112e657"
+  },
+  {
+    "path": "SourceAssets/HalloweenCandyland/AW-HW-CLIFF-001-v0.2.glb",
+    "bytes": 1127288,
+    "sha256": "128004f5cbfae4fcf11c7dad16c7194f49c23dd54944ec920bbcedf664cada8c"
+  },
+  {
+    "path": "SourceAssets/HalloweenCandyland/AW-HW-CORN-001-v0.2.glb",
+    "bytes": 896176,
+    "sha256": "04395ed6bc68812c200aa0e0926cebbb9b239dd003416a37135cff7468c34001"
+  },
+  {
+    "path": "SourceAssets/HalloweenCandyland/AW-HW-HOUSE-001-v0.2.glb",
+    "bytes": 1356960,
+    "sha256": "2b1a9bdab95f629fdffc265d774a052b6ae038dbc6689338dc88af83941b441c"
+  },
+  {
+    "path": "SourceAssets/HalloweenCandyland/AW-HW-PUMPKIN-001-v0.2.glb",
+    "bytes": 1355580,
+    "sha256": "fa98b884ab7e093b3d1cdff526500aae77309de1d73c91d5925dd8ee59aed920"
+  },
+  {
+    "path": "SourceAssets/HalloweenCandyland/AW-HW-SPRUCE-001-v0.2.glb",
+    "bytes": 1146688,
+    "sha256": "b2884976321ddada16758eefccf225cde92d41bbefb5eee5569985453800964f"
+  },
+  {
+    "path": "SourceAssets/HalloweenCandyland/AW-HW-TREE-001-v0.2.glb",
+    "bytes": 1361584,
+    "sha256": "a10ec8766f8d65ea9871b3308adc9012e20278a96f4bff7a19ff9d73889f8ef8"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-CLIFF-001-v0.2.glb",
+    "bytes": 818608,
+    "sha256": "60f2d113a6710a7ee8330594412840b8438df4621af1c819ca295cefec33e517"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-CLIFF-002-v0.2.glb",
+    "bytes": 714636,
+    "sha256": "4b815896ef8df5b37d65d291d1112cd25bd3b0635d31956f61dda1f6f4cc361f"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-CLOVER-001-v0.2.glb",
+    "bytes": 566116,
+    "sha256": "1bc35e2ab5ebf48c800cdd8e239b2dbc5249454a8d151fd6177045987bf8fe66"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-DEER-001-v0.2.glb",
+    "bytes": 1020544,
+    "sha256": "b1a031625ab7a6c19db68cada70c488e7239209674802ceb50d95c25923d43a9"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-FLOWER-001-v0.2.glb",
+    "bytes": 541380,
+    "sha256": "e8e0d1965050edb3764aacfa4edf2613c37c17ab1e2e1619b5b6a35086ceebb8"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-FLOWER-002-v0.2.glb",
+    "bytes": 717184,
+    "sha256": "b5654fb45040c4259bdcf09659b4a4e556ef6b5cab4a7df24a1436dd2e831fa2"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-GRASS-001-v0.2.glb",
+    "bytes": 617452,
+    "sha256": "283aee815b0fe699a6c9a7cea6758c303fb05197a27da348a6b70e42f5c64757"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-HOUSE-001-v0.2.glb",
+    "bytes": 859216,
+    "sha256": "e61b25b64736a7d278b9abf5d17e19e7b1808859c71a5f82cf0c7695fbe76d26"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-ICE-001-v0.2.glb",
+    "bytes": 549080,
+    "sha256": "e4df2084df8a2e4cb4b9d6d38f56edccc398528b949413927af9e6d336f3fb2b"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-MARSH-TREE-001-v0.2.glb",
+    "bytes": 595244,
+    "sha256": "9518f3036517f6bc011237a3cdda1caf0e850e45cb9a42208a4cf152b245b864"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-MARSH-TREE-002-v0.2.glb",
+    "bytes": 849268,
+    "sha256": "8eb5a8288250211e42bb9ba9fdbbcdc7c874a4d50d4e8557054117f80e721c39"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-MUSHROOM-001-v0.2.glb",
+    "bytes": 541040,
+    "sha256": "f512979e27a6d4bef69706c104b1ce8eadb7e0ec60106f7fbf956cff9353fa0b"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-ROCK-001-v0.2.glb",
+    "bytes": 430988,
+    "sha256": "87f584be27dd30027b1d25598e49c4c329f9b5dc6781077baaa136c9b6a74c9f"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-ROCK-002-v0.2.glb",
+    "bytes": 648968,
+    "sha256": "987cafdd3b962f5fdfbe13073c8c65bea0ed96204bb654df8c826ba5aec70c51"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-ROCK-003-v0.2.glb",
+    "bytes": 637912,
+    "sha256": "62131d8aee74494e6dd5b45ce1b2491fc6bcff63476fb86f65750db1e2b22fc7"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-TAVERN-001-v0.2.glb",
+    "bytes": 1097960,
+    "sha256": "c74fec25fad7655339ffdc10e469753cc8bb5a0b4a0e61f6309824fc12fd06b0"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-TREE-001-v0.2.glb",
+    "bytes": 621900,
+    "sha256": "cd2c836f99ceb2500e54ec6c98358133168a400e30eb6e28ed65bb4552dd2cab"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-TREE-002-v0.2.glb",
+    "bytes": 623280,
+    "sha256": "4b058c71596770b604f2ea5a736e0fafa58d66de0ce4f6ee077d0f55d28bcfec"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-TREE-003-v0.2.glb",
+    "bytes": 788288,
+    "sha256": "dfd37a6051cae58f0dae8fc368359ff6d336b71672336060ae88d2f8b1cbd975"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-TREE-004-v0.2.glb",
+    "bytes": 800812,
+    "sha256": "57de308903d2d6cac80fac5a6aca98f7c9f23a990810abcea105c6c80ee30c9b"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-BUILD-001-v0.2.glb",
+    "bytes": 957864,
+    "sha256": "250b9ea98dc59d76248d8bec1fb404cc014eae663cb7d2487ddab391bfa70a21"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-BUILD-002-v0.2.glb",
+    "bytes": 944208,
+    "sha256": "6a222fa542aa2fcf4f5174f63c370efb85758ebd5d2bc343ce4bcf5b1edb2c63"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-BUILD-003-v0.2.glb",
+    "bytes": 907772,
+    "sha256": "9d396fd5d1696a068d87922b77b2569ac7a8bf597c18aa5df118f9065342dde0"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-BUILD-004-v0.2.glb",
+    "bytes": 708704,
+    "sha256": "49567f8af0dab59c84c0656796f4756a771a2ae126d1917641ecb8d440357806"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-FLORA-001-v0.2.glb",
+    "bytes": 696020,
+    "sha256": "2ac43df76ae542ccec3a2a17446f39e9e22ef88c494d0503bd38f61342094717"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-FLORA-002-v0.2.glb",
+    "bytes": 665400,
+    "sha256": "a89d5781f5f6483d147b6749bd68e6aa4872ab67e8bb5920d413444b26b18a51"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-FLORA-003-v0.2.glb",
+    "bytes": 776948,
+    "sha256": "6eb15a5f8fe5e7ddc2a3a94724bc97819a2085d1fccc156e24247ed514e0a095"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-FLORA-004-v0.2.glb",
+    "bytes": 712868,
+    "sha256": "c95bbd19d2ee39b13343d32b35eb857cf64df4b963f5bc9f8292e31d50f12a69"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-FLORA-005-v0.2.glb",
+    "bytes": 829676,
+    "sha256": "9b26f0598d52d2f45ceca2cfdd169ded3ed72fb652d1375191eb8b2cfddc0bc8"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-FLORA-006-v0.2.glb",
+    "bytes": 661348,
+    "sha256": "2f972c91bc87e205ceee8471a57f9912ae329663d2ec156c0e8df76c84e9fbb6"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-FLORA-007-v0.2.glb",
+    "bytes": 727096,
+    "sha256": "b1fc32b7f22efb25e5a02878880a199ad9dc6a5802fb5543e3d4037d27cb80a9"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-FLORA-008-v0.2.glb",
+    "bytes": 857924,
+    "sha256": "7bf25637ac5e7c83a0e446ff4ff87a3ad23f9a0d32f3537262f99b8de339c57c"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-PROP-001-v0.2.glb",
+    "bytes": 473856,
+    "sha256": "a207e2540e81e97bcc9cb865b1fe64f08df2f4500a3e04393fb1380c015541b4"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-PROP-002-v0.2.glb",
+    "bytes": 545540,
+    "sha256": "caded769acaae400d4076f88e4cb11a0b704e1825d9b1589a34be9737a8d8f17"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-PROP-003-v0.2.glb",
+    "bytes": 725312,
+    "sha256": "96982320bda894ec7e11ebd9d15ce89a8d94861fd444411e7076a3301d1e8cf5"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-PROP-004-v0.2.glb",
+    "bytes": 686852,
+    "sha256": "ebe11ea7e6d7ea9ae11fafb5560e9787fb2ae3e52c8340ea6a7ee9f35285fa85"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-TREE-001-v0.2.glb",
+    "bytes": 708648,
+    "sha256": "6e15e98eaa82825c0681cedf05ecaa73a72188734cb9f2aa2a7649c748856c94"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-TREE-002-v0.2.glb",
+    "bytes": 721880,
+    "sha256": "94484c7cf55a7a23f1d83756153bb662a85ed3543dd02b1f005b368bd868797e"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-TREE-003-v0.2.glb",
+    "bytes": 894980,
+    "sha256": "9d2aa2667c0062dc03c1f09d4e2dabbd29ea61c3ec87f54786c19135fb6caf2d"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-TREE-004-v0.2.glb",
+    "bytes": 738624,
+    "sha256": "e3787d885cc97e472d8d761533563452afc4e3e3f6b3580d9c0c0d6239b8cc76"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-TREE-005-v0.2.glb",
+    "bytes": 687960,
+    "sha256": "e97bca405c7fba411f810f22a572c38141994fa9a0968e126924e2631cbfafde"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-TREE-006-v0.2.glb",
+    "bytes": 774020,
+    "sha256": "fa7cccdabbac270e829bfe8d53b63c8bb7fbb9d48cb1877e67ef693c0b3c847e"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-TREE-007-v0.2.glb",
+    "bytes": 823400,
+    "sha256": "dcc07315c71526475a2442f9f0e549b163c9b76be49df645053f3c5ed2dc7bd2"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-VAR-TREE-008-v0.2.glb",
+    "bytes": 676696,
+    "sha256": "7c478b58d762fd457208d085f276a78c2f3b15ac0aed8bb8b21a9332c0f8dd8a"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-WATERPLANT-001-v0.2.glb",
+    "bytes": 611688,
+    "sha256": "5e938e27ec9d998bc6ccbaa3a2b5b6f1983ea55278483ac4f9ed3b51623ed942"
+  },
+  {
+    "path": "SourceAssets/Papercraft/AW-WATERPLANT-002-v0.2.glb",
+    "bytes": 740040,
+    "sha256": "3c80b4574471d1837a57a037cc069c7ba9419ec17eb4b7f0d9358bd9ad466de0"
+  },
+  {
+    "path": "SourceAssets/Terrain/AW-HEX-AUTUMN-v0.1.glb",
+    "bytes": 5792,
+    "sha256": "e1c19bdf7a81da0cf7b87b8a3060a54482afa599b166fe14cdf409ba6ca2ab55"
+  },
+  {
+    "path": "SourceAssets/Terrain/AW-HEX-FOREST-v0.1.glb",
+    "bytes": 5792,
+    "sha256": "af83a59407c4e787e75b599266fb6c0b19d2eee2ddcc25e571bfdb2e6eed5478"
+  },
+  {
+    "path": "SourceAssets/Terrain/AW-HEX-HIGHLAND-v0.1.glb",
+    "bytes": 5800,
+    "sha256": "a6ce8f6cba8a19fbb57721fb6538c4ff29089585a74bf952d0e59cae7aaa301d"
+  },
+  {
+    "path": "SourceAssets/Terrain/AW-HEX-MARSH-v0.1.glb",
+    "bytes": 5792,
+    "sha256": "1c34f7b496e687a73118aba8083eb9dd95c6fc7c523105cab30525dd73d855d2"
+  },
+  {
+    "path": "SourceAssets/Terrain/AW-HEX-MEADOW-v0.1.glb",
+    "bytes": 5792,
+    "sha256": "02e7ceb46f6d41d58ed9e3c5b7ae3d603fa73223adb5c09bd536316c2c8a6f73"
+  },
+  {
+    "path": "SourceAssets/Terrain/AW-HEX-SNOW-v0.1.glb",
+    "bytes": 5784,
+    "sha256": "661c91f493c36dce4934c1d91174e1d9a7d1a413344f6dfb05c4b510a1f6633e"
+  },
+  {
+    "path": "SourceAssets/Terrain/AW-HEX-WATER-v0.1.glb",
+    "bytes": 5504,
+    "sha256": "62dc04348d3b324386bf02d75609bc85d17ffc44ae359b32c58602329502c2de"
+  }
+]
