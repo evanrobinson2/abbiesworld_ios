@@ -1,0 +1,22 @@
+[
+  {
+    "relative_path": "create-graybox-assets.py",
+    "sha256": "76fdbc5bc443a1401203899e4b918ddd2d2f5d766a7019afe037a409a25fada4",
+    "bytes": 662
+  },
+  {
+    "relative_path": "integration-deltas.md",
+    "sha256": "554e8cd21cef6d1d0d984411f49fed6ccee5285b7c9802ff73b9220f71b3781f",
+    "bytes": 2208
+  },
+  {
+    "relative_path": "Source/AbbiesWorld/AWRestaurantMode.cpp",
+    "sha256": "90e51272ee561d004f6b8108d4b49276ce72ff9f1d9ff505d6d10b1668c735ad",
+    "bytes": 33490
+  },
+  {
+    "relative_path": "Source/AbbiesWorld/AWRestaurantMode.h",
+    "sha256": "f99bf85668bbfeea3ed083a3653db328425ae3a7612ada1ca2bc17cae32e0ca9",
+    "bytes": 3955
+  }
+]
