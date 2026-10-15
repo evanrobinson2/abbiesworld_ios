@@ -1,0 +1,503 @@
+{
+  "pack": "Potion Meadow v1",
+  "engine": "Unreal Engine 5.4.4",
+  "generator": "built-in image_gen",
+  "asset_type": "static 2D cutouts and ground textures, not rigged 3D characters",
+  "assets": [
+    {
+      "name": "Abbie",
+      "semantic_id": "potionMeadow.Abbie",
+      "file": "SourceArt/T_PM_Abbie.png",
+      "width": 1024,
+      "height": 1536,
+      "category": "character",
+      "alpha_bounds": [
+        71,
+        157,
+        985,
+        1426
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "c606dbd5457181c9c2680615dfbc5cdb1b43e478e49ea8eac9876b74aac0f1a2",
+      "height_cm": 120,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Abbie",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Abbie",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Daddy",
+      "semantic_id": "potionMeadow.Daddy",
+      "file": "SourceArt/T_PM_Daddy.png",
+      "width": 1024,
+      "height": 1536,
+      "category": "character",
+      "alpha_bounds": [
+        114,
+        76,
+        909,
+        1490
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "2b75bacdb67b84308538301d0428e2b054099bb1df57f7e58758815fd6eef710",
+      "height_cm": 185,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Daddy",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Daddy",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Mommy",
+      "semantic_id": "potionMeadow.Mommy",
+      "file": "SourceArt/T_PM_Mommy.png",
+      "width": 1024,
+      "height": 1536,
+      "category": "character",
+      "alpha_bounds": [
+        129,
+        60,
+        975,
+        1498
+      ],
+      "alpha_extrema": [
+        0,
+        254
+      ],
+      "sha256": "07b6feb083e435b8b66a57712a28a98044270057e05f26ed744f1c6bed5ba5bf",
+      "height_cm": 180,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Mommy",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Mommy",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Goon0",
+      "semantic_id": "potionMeadow.Goon0",
+      "file": "SourceArt/T_PM_Goon0.png",
+      "width": 1402,
+      "height": 1122,
+      "category": "character",
+      "alpha_bounds": [
+        300,
+        200,
+        1088,
+        970
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "48796245127ed6f1ff6f7cba5b4cc8164fdc23f1916783c67e5426a92c351e7e",
+      "height_cm": 65,
+      "animation": "static",
+      "level": 0,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Goon0",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Goon0",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Goon1",
+      "semantic_id": "potionMeadow.Goon1",
+      "file": "SourceArt/T_PM_Goon1.png",
+      "width": 1222,
+      "height": 1287,
+      "category": "character",
+      "alpha_bounds": [
+        107,
+        97,
+        1130,
+        1210
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "b020f830caf01b62e9e6dff3a2b31189a63d941878925b75aa576ba57045841b",
+      "height_cm": 95,
+      "animation": "static",
+      "level": 1,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Goon1",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Goon1",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Goon2",
+      "semantic_id": "potionMeadow.Goon2",
+      "file": "SourceArt/T_PM_Goon2.png",
+      "width": 1327,
+      "height": 1186,
+      "category": "character",
+      "alpha_bounds": [
+        187,
+        99,
+        1154,
+        1101
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "efb5218f61a04c803a1268dce89caf7559d9e7d33cb9025faed43fdf6e7430bc",
+      "height_cm": 130,
+      "animation": "static",
+      "level": 2,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Goon2",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Goon2",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Goon3",
+      "semantic_id": "potionMeadow.Goon3",
+      "file": "SourceArt/T_PM_Goon3.png",
+      "width": 1374,
+      "height": 1145,
+      "category": "character",
+      "alpha_bounds": [
+        126,
+        47,
+        1275,
+        1097
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "f06f0cd090f0ad1f31f4160d118e539d215c7dcc5e00b81fcc85dccd24838671",
+      "height_cm": 170,
+      "animation": "static",
+      "level": 3,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Goon3",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Goon3",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "PotionHealth",
+      "semantic_id": "potionMeadow.PotionHealth",
+      "file": "SourceArt/T_PM_PotionHealth.png",
+      "width": 1322,
+      "height": 1190,
+      "category": "prop",
+      "alpha_bounds": [
+        270,
+        111,
+        1103,
+        1068
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "c228f70176e2e2481f219198406524d90f5deb014b32bd352428a90693c6cc48",
+      "height_cm": 32,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_PotionHealth",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_PotionHealth",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "PotionMagic",
+      "semantic_id": "potionMeadow.PotionMagic",
+      "file": "SourceArt/T_PM_PotionMagic.png",
+      "width": 1278,
+      "height": 1230,
+      "category": "prop",
+      "alpha_bounds": [
+        278,
+        152,
+        1007,
+        1078
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "6138413cfc32c65e9ed942e7d5331ee9db05cd0c5800fccaaaefa79f3201c051",
+      "height_cm": 32,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_PotionMagic",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_PotionMagic",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "BerryIngredient",
+      "semantic_id": "potionMeadow.BerryIngredient",
+      "file": "SourceArt/T_PM_BerryIngredient.png",
+      "width": 1448,
+      "height": 1086,
+      "category": "prop",
+      "alpha_bounds": [
+        331,
+        119,
+        1184,
+        920
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "12e1fbb8965e91484736ce7f3ca1c64b53c93a47cf4df274ec5b9faf1b883827",
+      "height_cm": 25,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_BerryIngredient",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_BerryIngredient",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "MoonflowerIngredient",
+      "semantic_id": "potionMeadow.MoonflowerIngredient",
+      "file": "SourceArt/T_PM_MoonflowerIngredient.png",
+      "width": 1298,
+      "height": 1212,
+      "category": "prop",
+      "alpha_bounds": [
+        193,
+        125,
+        1106,
+        1075
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "97696359d1cd5fe6a93cc8910e27fc7f9d81e2fe3a13bc088e91585fe0450f58",
+      "height_cm": 35,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_MoonflowerIngredient",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_MoonflowerIngredient",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Cauldron",
+      "semantic_id": "potionMeadow.Cauldron",
+      "file": "SourceArt/T_PM_Cauldron.png",
+      "width": 1368,
+      "height": 1150,
+      "category": "prop",
+      "alpha_bounds": [
+        222,
+        50,
+        1146,
+        1032
+      ],
+      "alpha_extrema": [
+        0,
+        255
+      ],
+      "sha256": "fa9e7d9159e09e79353bc7ff58831fb8b626908b3d945b002a330a3af980d181",
+      "height_cm": 100,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Cauldron",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Cauldron",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Grass",
+      "semantic_id": "potionMeadow.Grass",
+      "file": "SourceArt/T_PM_Grass.png",
+      "width": 1254,
+      "height": 1254,
+      "category": "terrain",
+      "alpha_bounds": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "sha256": "65548be185d6b9686056aac17df3af56cf4a165536218533d9bcf5845c16f2b7",
+      "height_cm": 100,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Grass",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Grass",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Path",
+      "semantic_id": "potionMeadow.Path",
+      "file": "SourceArt/T_PM_Path.png",
+      "width": 1254,
+      "height": 1254,
+      "category": "terrain",
+      "alpha_bounds": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "sha256": "72a2e95d7a97e602db13ed081f48bfdaa4723cb6b9bfb1f229af9c2b9329bc4f",
+      "height_cm": 100,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Path",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Path",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "Stone",
+      "semantic_id": "potionMeadow.Stone",
+      "file": "SourceArt/T_PM_Stone.png",
+      "width": 1254,
+      "height": 1254,
+      "category": "terrain",
+      "alpha_bounds": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "alpha_extrema": [
+        255,
+        255
+      ],
+      "sha256": "ce8f75a9ffce03e5eb9a746a08bac399df73ea5b879e0f53bd7d5a8cd95d2908",
+      "height_cm": 100,
+      "animation": "static",
+      "level": null,
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_Stone",
+      "native_material": "/Game/PotionMeadow/Materials/M_PM_Stone",
+      "texture_sampling": "sRGB, UI group, bilinear, never-stream, simple-average mipmaps",
+      "pivot": "alpha bounds for card grounding; abstract UI sprite centered above grid cell",
+      "axes": "world X/Y grid, Z up; fixed front-view cutouts",
+      "collision": "none on preview cards; walkability is grid-authoritative"
+    },
+    {
+      "name": "BoardBackground",
+      "semantic_id": "potionMeadow.BoardBackground",
+      "file": "SourceArt/T_PM_BoardBackground.png",
+      "native_texture": "/Game/PotionMeadow/Textures/T_PM_BoardBackground",
+      "rig": "none",
+      "animation": "static painted background plus runtime overlay effects",
+      "view": "1280x960 aspect-preserving Slate canvas; background at (96,140), size1088x680"
+    }
+  ],
+  "audio": [
+    {
+      "id": "potionMeadow.sfx.Brew",
+      "file": "OriginalAudio/S_PM_Brew.wav",
+      "native_asset": "/Game/PotionMeadow/Audio/S_PM_Brew",
+      "duration_seconds": 0.42,
+      "peak": 0.21685791015625,
+      "provenance": "Original mathematical sine-wave synthesis for this task"
+    },
+    {
+      "id": "potionMeadow.sfx.Drink",
+      "file": "OriginalAudio/S_PM_Drink.wav",
+      "native_asset": "/Game/PotionMeadow/Audio/S_PM_Drink",
+      "duration_seconds": 0.33,
+      "peak": 0.213836669921875,
+      "provenance": "Original mathematical sine-wave synthesis for this task"
+    },
+    {
+      "id": "potionMeadow.sfx.Hit",
+      "file": "OriginalAudio/S_PM_Hit.wav",
+      "native_asset": "/Game/PotionMeadow/Audio/S_PM_Hit",
+      "duration_seconds": 0.15,
+      "peak": 0.1947021484375,
+      "provenance": "Original mathematical sine-wave synthesis for this task"
+    },
+    {
+      "id": "potionMeadow.sfx.Level",
+      "file": "OriginalAudio/S_PM_Level.wav",
+      "native_asset": "/Game/PotionMeadow/Audio/S_PM_Level",
+      "duration_seconds": 0.58,
+      "peak": 0.22491455078125,
+      "provenance": "Original mathematical sine-wave synthesis for this task"
+    },
+    {
+      "id": "potionMeadow.sfx.Pop",
+      "file": "OriginalAudio/S_PM_Pop.wav",
+      "native_asset": "/Game/PotionMeadow/Audio/S_PM_Pop",
+      "duration_seconds": 0.16,
+      "peak": 0.19671630859375,
+      "provenance": "Original mathematical sine-wave synthesis for this task"
+    },
+    {
+      "id": "potionMeadow.sfx.Rest",
+      "file": "OriginalAudio/S_PM_Rest.wav",
+      "native_asset": "/Game/PotionMeadow/Audio/S_PM_Rest",
+      "duration_seconds": 0.52,
+      "peak": 0.22381591796875,
+      "provenance": "Original mathematical sine-wave synthesis for this task"
+    },
+    {
+      "id": "potionMeadow.sfx.Step",
+      "file": "OriginalAudio/S_PM_Step.wav",
+      "native_asset": "/Game/PotionMeadow/Audio/S_PM_Step",
+      "duration_seconds": 0.06,
+      "peak": 0.17279052734375,
+      "provenance": "Original mathematical sine-wave synthesis for this task"
+    },
+    {
+      "id": "potionMeadow.sfx.Win",
+      "file": "OriginalAudio/S_PM_Win.wav",
+      "native_asset": "/Game/PotionMeadow/Audio/S_PM_Win",
+      "duration_seconds": 1.17,
+      "peak": 0.233428955078125,
+      "provenance": "Original mathematical sine-wave synthesis for this task"
+    }
+  ]
+}

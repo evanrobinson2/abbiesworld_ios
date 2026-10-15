@@ -1,0 +1,512 @@
+[
+  {
+    "path": "asset-manifest.json",
+    "bytes": 18035,
+    "sha256": "63339679c5bee5af02f539d143de266a01130966193ef2b4c94325af4e757543"
+  },
+  {
+    "path": "Evidence/clean-content-validation.json",
+    "bytes": 12727,
+    "sha256": "d493c297b6aa957d4893afb7219cfc373c7b8a0a505a9ad02ee4b9549069df1a"
+  },
+  {
+    "path": "Evidence/easy/cliff-level-start.png",
+    "bytes": 1642558,
+    "sha256": "f1ad01351d04372e24a677c5793def0c45c556bcb363a0b95404965e51c7e168"
+  },
+  {
+    "path": "Evidence/easy/cliff-level-win.png",
+    "bytes": 820694,
+    "sha256": "67044179c3ee7dc8e7a7a9ba2137a37547d71c59f9bef905f26f5b1df29d6110"
+  },
+  {
+    "path": "Evidence/easy/cliff-playthrough.txt",
+    "bytes": 133,
+    "sha256": "e33626c4cdb2ac6138d071e2db95d7b394264b1585617f87cd5b53f13945e520"
+  },
+  {
+    "path": "Evidence/hard/cliff-level-start.png",
+    "bytes": 1618308,
+    "sha256": "d3f7609ec36e05204bd49a282bd83268d6fc1fb631de3a45dd6a80f504177c2a"
+  },
+  {
+    "path": "Evidence/hard/cliff-level-win.png",
+    "bytes": 817443,
+    "sha256": "4dbea3697b2d587c5651fd348c54098a9eba044c09a5662ba16be2d72d48a02c"
+  },
+  {
+    "path": "Evidence/hard/cliff-playthrough.txt",
+    "bytes": 133,
+    "sha256": "604668bfe55719353dc6bc746adb7ed31b8a869ded11f94e1b1e39e2bec11791"
+  },
+  {
+    "path": "Evidence/medium/cliff-level-start.png",
+    "bytes": 1632940,
+    "sha256": "9cf7bdb1ae01194d9fc01d78982a3b69c4b6902860c502213461ead2ab6918b0"
+  },
+  {
+    "path": "Evidence/medium/cliff-level-win.png",
+    "bytes": 817400,
+    "sha256": "05bbc0b933eaf346fc34cffaa580b062a82273d000bc1b2decffb9fe82585414"
+  },
+  {
+    "path": "Evidence/medium/cliff-playthrough.txt",
+    "bytes": 135,
+    "sha256": "a3b169ed271dd267930e4196e54c9ee9b697ff1c7fed5df18be8aa89ce691f40"
+  },
+  {
+    "path": "Evidence/menu/difficulty-menu.png",
+    "bytes": 682491,
+    "sha256": "1d01c29bf50a0e7d129c4af618454474f5abae4a266bbc2f1b56cfa102bc154f"
+  },
+  {
+    "path": "Evidence/menu/menu-controls-qa.txt",
+    "bytes": 159,
+    "sha256": "7c05504c1f603abbcdf89a9ff51c56e288d90d855d58c197ef0bba8e4c28d29b"
+  },
+  {
+    "path": "Evidence/packaged-qa-summary.json",
+    "bytes": 1103,
+    "sha256": "6b70638e355b001c88967690305760673d545630ffbe90fbce3806f7823df5e8"
+  },
+  {
+    "path": "Evidence/random-boards-qa.txt",
+    "bytes": 200,
+    "sha256": "e0a23253af80dff65d5732302d30116da53f09d6b3d920294fec2999fc24d952"
+  },
+  {
+    "path": "OriginalAudio/S_PM_Brew.wav",
+    "bytes": 20204,
+    "sha256": "860745215fc6af6c07e5f558dfab7521816c4297f798b11ee7d041505be480c5"
+  },
+  {
+    "path": "OriginalAudio/S_PM_Drink.wav",
+    "bytes": 15884,
+    "sha256": "cad3db1bf822339021e8ed0becbc03a80ef53280b91d1ecb1225bee2fde7e72e"
+  },
+  {
+    "path": "OriginalAudio/S_PM_Hit.wav",
+    "bytes": 7244,
+    "sha256": "60a95da99d75a2efb6fde3b43be518e96b42b43b0cee34d7fc3ef2696426f6b1"
+  },
+  {
+    "path": "OriginalAudio/S_PM_Level.wav",
+    "bytes": 27884,
+    "sha256": "a3d2f433526ccf44434d43c689048688f8cc6b2a8e721ea361322b2e43a8cbe3"
+  },
+  {
+    "path": "OriginalAudio/S_PM_Pop.wav",
+    "bytes": 7724,
+    "sha256": "34dc96d1bc4ea66441a7b9e8c49aae9c15cd97d3256c9c1d818616560ff7ec8e"
+  },
+  {
+    "path": "OriginalAudio/S_PM_Rest.wav",
+    "bytes": 25004,
+    "sha256": "7d7c2a79ef42fe9873d1fb4c2bdfdf37a431b73c031f5e3778fe9eb7ee06470d"
+  },
+  {
+    "path": "OriginalAudio/S_PM_Step.wav",
+    "bytes": 2924,
+    "sha256": "94074dad9641ed588fc404f66bb09fb343d2e32c8bc40923e45e09ff85dfa53e"
+  },
+  {
+    "path": "OriginalAudio/S_PM_Win.wav",
+    "bytes": 56204,
+    "sha256": "b90a789c51594a2079679c52c9d25b14a6acb63fe26bc53d54f3190c81b9c12e"
+  },
+  {
+    "path": "Project/Config/DefaultEngine.ini",
+    "bytes": 813,
+    "sha256": "b72f29a3dec127300b099a2b087691f84bcefb0f00f1998b14ca1ca668aa47b5"
+  },
+  {
+    "path": "Project/Config/DefaultGame.ini",
+    "bytes": 425,
+    "sha256": "d962dabf83e4cd308933702f16309d91464ff6bbf94d1779ed0ab8fc89eb6434"
+  },
+  {
+    "path": "Project/Config/DefaultGameUserSettings.ini",
+    "bytes": 207,
+    "sha256": "6240ed293493987c723c223629ff63dfe40aafc3b3bc5ff21d13d1ea087b2b0b"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Audio/S_PM_Brew.uasset",
+    "bytes": 14813,
+    "sha256": "eb99c9475b4af99d66e007106b795a83e81653bb95525a008e4ff299f4dc6971"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Audio/S_PM_Drink.uasset",
+    "bytes": 12265,
+    "sha256": "db8936fd4d7341427a18cb1c08fc16f91e20260bc105c9722afc532d5601a285"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Audio/S_PM_Hit.uasset",
+    "bytes": 6698,
+    "sha256": "764fa2104a97f8c12273e7f84aff5206e43368cab8253f657f90d7f7411add3b"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Audio/S_PM_Level.uasset",
+    "bytes": 18999,
+    "sha256": "bedb60f53798bf449155f48fca23dc925a301c91c51a9bb83975573ec045b372"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Audio/S_PM_Pop.uasset",
+    "bytes": 7646,
+    "sha256": "dfc7bdf2b23788dd4859fdc273abbf71bcd56a067f8d55c60e4b60170caeea07"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Audio/S_PM_Rest.uasset",
+    "bytes": 15650,
+    "sha256": "0036928f1ed17bfdf04594a3ea5bdae075bc06229151b7d14e82cc79f1481a56"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Audio/S_PM_Step.uasset",
+    "bytes": 4558,
+    "sha256": "adf5e7b01f2f5beb6158df10d60e5f4d8556fa15c47982e7285eed1c528d12ce"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Audio/S_PM_Win.uasset",
+    "bytes": 34615,
+    "sha256": "b3e6a9b6c6209b4def157843c3a97f16ae3047279267336c0f616c2893757835"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Maps/L_PM_AssetGallery.umap",
+    "bytes": 71937,
+    "sha256": "4378bb0aa253c046303e1d2f2f3f29f0658da512419e44d89ec73df8d3f09507"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Maps/L_PM_CliffMeadow.umap",
+    "bytes": 88826,
+    "sha256": "7bf11d888f2ec0a76b59f4b72d52e29ec823e180f1236f19c45514dd31ac9555"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Abbie.uasset",
+    "bytes": 5112,
+    "sha256": "e71b1764a1cc633402b87a5da584c5602c0a3199f289bb0f9bdd3fafa17ae684"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_BerryIngredient.uasset",
+    "bytes": 5182,
+    "sha256": "00d5f2649b9150466bf7f9f76ea8f1677c2d048b5f3b5ac2b1b4c8b083e68c9d"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Cauldron.uasset",
+    "bytes": 5133,
+    "sha256": "84acc8f5f05575210a778e62dd2542d4da9cd8bab56db6a14c5233f0c5b2e52b"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Daddy.uasset",
+    "bytes": 5112,
+    "sha256": "1c5ba509680724d151fa5cb2e3237c56195e7aa23d38c65c1a46737c38869fce"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Goon0.uasset",
+    "bytes": 5112,
+    "sha256": "dc2919cc6139d90e644820782c303b93a22d373cb41a3755c5cccc0212fdaeff"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Goon1.uasset",
+    "bytes": 5112,
+    "sha256": "d65f40167d2588e6b8fdf3dc0ef404cbc0895609e612d97956affaeae3e8bd10"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Goon2.uasset",
+    "bytes": 5112,
+    "sha256": "2c5adae590f818cfa22aa4d464e7e981e0a249b0d1928bad62231d99c9a862e2"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Goon3.uasset",
+    "bytes": 5112,
+    "sha256": "b25bbb881486ccb3063cc636df28a04c1b77a6280e6a06d019d5cc1ec73c249f"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Grass.uasset",
+    "bytes": 4857,
+    "sha256": "eb315efbe7f9eded959215072c7245d7f431148a28fd41a7198ba2a854de7ba5"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Mommy.uasset",
+    "bytes": 5112,
+    "sha256": "98732b8eb5e21d19979c8690958a8150704cc581cc4a17b992326123c2b2c328"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_MoonflowerIngredient.uasset",
+    "bytes": 5217,
+    "sha256": "98a00616e4364913bad841450ead0d4493bd5a102909f0fa90d4319bb448bf56"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Path.uasset",
+    "bytes": 4850,
+    "sha256": "daa06578cf63698379c4610fb82f60d2f17b0bf43f656c818a788accd7a4c43c"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_PotionHealth.uasset",
+    "bytes": 5161,
+    "sha256": "356461df7febe051698948e7c89984be4a61b8a851420b073dcbf895aa3b24ac"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_PotionMagic.uasset",
+    "bytes": 5154,
+    "sha256": "ae136addaedd059df40623568adca8653d129968a25ef37c20bf6c4167fb3943"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Materials/M_PM_Stone.uasset",
+    "bytes": 4857,
+    "sha256": "50757472704e4599a96d6e25241769ada9c98e593b5dde910d2dd1db1384c730"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Abbie.uasset",
+    "bytes": 2077053,
+    "sha256": "fb12865d3206b02cdd5739d387dbb30650b2d733c4ba2ad46f5814e53ae95811"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_BerryIngredient.uasset",
+    "bytes": 780175,
+    "sha256": "e67febe2814ad2cd9975bc493137dc844d625d389784a5c64127d4cd6dd3c179"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_BoardBackground.uasset",
+    "bytes": 3438688,
+    "sha256": "58c82c9a50110f9c4afcd3f87b6aabedcc3752026190ca2ce18c6dde7e46cb21"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Cauldron.uasset",
+    "bytes": 1044547,
+    "sha256": "342aa5da9f88c2af7f42584a335b2f981cc6526cf47d00cb1faa1d538f242e14"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Daddy.uasset",
+    "bytes": 2021624,
+    "sha256": "c79f6fbd9b6413a2e2d3929ebf04fad7a5166343f8dbcd0e5e522b92fe8f9e30"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Goon0.uasset",
+    "bytes": 904748,
+    "sha256": "2f4977cbdc82f77c42972cc5a13ba31cfeef4c4ceaf53fae270ce19fb41880d4"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Goon1.uasset",
+    "bytes": 1109598,
+    "sha256": "8ebd317e02e616b85d9e5ff5413132f64d429d87158ff3c19672b87629c4c683"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Goon2.uasset",
+    "bytes": 1413490,
+    "sha256": "8614dcf368a43f65a8854ab4d79d0237cb7c41c361e8b6fe055adca495697fdf"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Goon3.uasset",
+    "bytes": 1618640,
+    "sha256": "a4a476b9321f39e7daef116968f7cd4b1808b0745f7a54001123e381abdccc35"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Grass.uasset",
+    "bytes": 2517121,
+    "sha256": "3af8cbb66d1c39c1f89951765eecac82d6cc13fae0663c5ba08f5029b1315049"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Mommy.uasset",
+    "bytes": 2079788,
+    "sha256": "e67b6ebf96dab382cf85e5e1618762d54b4bbd9b20fbfff0ce413c1f1ca9fa8b"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_MoonflowerIngredient.uasset",
+    "bytes": 992499,
+    "sha256": "1c2530d6584bcd81613b703fb3a00f498db8de536fd2f6d4f16af7d2ae87dd87"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Path.uasset",
+    "bytes": 2625166,
+    "sha256": "0d634f314bf26d1faf394355ec4ce17ea365af04a0647a4437bf4beef13f8cc0"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_PotionHealth.uasset",
+    "bytes": 1023287,
+    "sha256": "2149ec56d19f79b08d4231461ab64dc3bb29db9136e22acfb98c2e03480ec527"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_PotionMagic.uasset",
+    "bytes": 1011600,
+    "sha256": "f1188cd51ebaf2280b8f5f84cf6d533013c92154dcf7cbe6e5c3edd94f9a7921"
+  },
+  {
+    "path": "Project/Content/PotionMeadow/Textures/T_PM_Stone.uasset",
+    "bytes": 2822932,
+    "sha256": "e42ba45e125617b96a392d7c4c09cf8e5c9f3db3ae299e4c4738408262942cfa"
+  },
+  {
+    "path": "Project/PotionMeadow.uproject",
+    "bytes": 254,
+    "sha256": "8a9ea756bc332d4af975ad8eb9b22cb21151337a4e05a20f880ce260730f78a2"
+  },
+  {
+    "path": "Project/Source/AbbiesWorld/AbbiesWorld.Build.cs",
+    "bytes": 344,
+    "sha256": "2c50bd753fab86e5ead578273469e753dff5775fa094e3f0f7f585cbf0474be3"
+  },
+  {
+    "path": "Project/Source/AbbiesWorld/AbbiesWorld.cpp",
+    "bytes": 119,
+    "sha256": "44d5350eee1f5eb79ac621bb8248032dab22671586b18e3a2c19809293248163"
+  },
+  {
+    "path": "Project/Source/AbbiesWorld/AWPotionMode.cpp",
+    "bytes": 3752,
+    "sha256": "beb37ba7288a4a62968324336030b5e34890a55504ad0f88315f0fb92d331d98"
+  },
+  {
+    "path": "Project/Source/AbbiesWorld/AWPotionMode.h",
+    "bytes": 830,
+    "sha256": "4835eb5e3f4a0ead4cc833eeab397bb44e2f20abc3b132bdcbecb014521f3cb5"
+  },
+  {
+    "path": "Project/Source/AbbiesWorld/PMAdventureModel.h",
+    "bytes": 5353,
+    "sha256": "92773b0f03d86aa2c6ebf46b0034be019f861cf974017f73d56f0d60acbf823f"
+  },
+  {
+    "path": "Project/Source/AbbiesWorld/PMRules.h",
+    "bytes": 1354,
+    "sha256": "091f9f8b1ef77183347aff080f2b00077f4e1d32b8e39bf0b8667e6b69da3956"
+  },
+  {
+    "path": "Project/Source/AbbiesWorld/SPMAdventure.h",
+    "bytes": 29161,
+    "sha256": "7a252c6046501a99fded200230b2ea09c9a5d3ccd60756f11f45cdb53b62c667"
+  },
+  {
+    "path": "Project/Source/PotionMeadow.Target.cs",
+    "bytes": 282,
+    "sha256": "577cffa3e8e3530bce755dccabbcf533d93aa137da53548115edcec1fef15a25"
+  },
+  {
+    "path": "Project/Source/PotionMeadowEditor.Target.cs",
+    "bytes": 296,
+    "sha256": "22869c30267d2b1fdfff27c635cc895d5f76d02ca3bf4a74bfd1346994dccf5b"
+  },
+  {
+    "path": "Provenance/family-meadow-reference.png",
+    "bytes": 3175460,
+    "sha256": "045cc7f90bab46991c5a5d1e07b56781141d2784fdf6ccd56ab1f2d2837f4f0b"
+  },
+  {
+    "path": "Provenance/prompts.json",
+    "bytes": 13540,
+    "sha256": "303bc46e701514746fee58aca9464b0fa33276fcd11ac37a63f62c944ce0eda0"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1342,
+    "sha256": "49f5782213c4e652ef2bb502b782c81f0135931fb578d01097b8522a3d70a573"
+  },
+  {
+    "path": "Replayable game guide.md",
+    "bytes": 3460,
+    "sha256": "66f053a71affc0592b20f53b859c2feb74b3aaa6b55c2416afcd89e84f67cce4"
+  },
+  {
+    "path": "Scripts/import_audio.py",
+    "bytes": 468,
+    "sha256": "57e6625fb26b73a6fb25b3c0c673f48e6dc9734304bbef1523c155a48b6bde34"
+  },
+  {
+    "path": "Scripts/original_audio_recipe.py",
+    "bytes": 1261,
+    "sha256": "39e7886689c14c9f4f76d0bc47d254b2a5560c26f9048fa84a7eea02961d04cd"
+  },
+  {
+    "path": "Scripts/run_cliff_qa.ps1",
+    "bytes": 1657,
+    "sha256": "fd3d664cf44f39ea3685fba04c1b3d3345e26237672a161028ec3a9cb675f0e1"
+  },
+  {
+    "path": "Scripts/validate_clean_content.py",
+    "bytes": 1862,
+    "sha256": "ac3bab8f08ee001b65dcd458430dbb1cbb7bb1d04d16849114d30c8af4e9e16e"
+  },
+  {
+    "path": "SourceArt/T_PM_Abbie.png",
+    "bytes": 1996508,
+    "sha256": "c606dbd5457181c9c2680615dfbc5cdb1b43e478e49ea8eac9876b74aac0f1a2"
+  },
+  {
+    "path": "SourceArt/T_PM_BerryIngredient.png",
+    "bytes": 736553,
+    "sha256": "12e1fbb8965e91484736ce7f3ca1c64b53c93a47cf4df274ec5b9faf1b883827"
+  },
+  {
+    "path": "SourceArt/T_PM_BoardBackground.png",
+    "bytes": 2876462,
+    "sha256": "3bec26d1e8eb9be2a773758fdb02f21d9d028813a3358ee28740e74b46ab014c"
+  },
+  {
+    "path": "SourceArt/T_PM_Cauldron.png",
+    "bytes": 979577,
+    "sha256": "fa9e7d9159e09e79353bc7ff58831fb8b626908b3d945b002a330a3af980d181"
+  },
+  {
+    "path": "SourceArt/T_PM_Daddy.png",
+    "bytes": 1917302,
+    "sha256": "2b75bacdb67b84308538301d0428e2b054099bb1df57f7e58758815fd6eef710"
+  },
+  {
+    "path": "SourceArt/T_PM_Goon0.png",
+    "bytes": 862824,
+    "sha256": "48796245127ed6f1ff6f7cba5b4cc8164fdc23f1916783c67e5426a92c351e7e"
+  },
+  {
+    "path": "SourceArt/T_PM_Goon1.png",
+    "bytes": 1053255,
+    "sha256": "b020f830caf01b62e9e6dff3a2b31189a63d941878925b75aa576ba57045841b"
+  },
+  {
+    "path": "SourceArt/T_PM_Goon2.png",
+    "bytes": 1317894,
+    "sha256": "efb5218f61a04c803a1268dce89caf7559d9e7d33cb9025faed43fdf6e7430bc"
+  },
+  {
+    "path": "SourceArt/T_PM_Goon3.png",
+    "bytes": 1525042,
+    "sha256": "f06f0cd090f0ad1f31f4160d118e539d215c7dcc5e00b81fcc85dccd24838671"
+  },
+  {
+    "path": "SourceArt/T_PM_Grass.png",
+    "bytes": 2062807,
+    "sha256": "65548be185d6b9686056aac17df3af56cf4a165536218533d9bcf5845c16f2b7"
+  },
+  {
+    "path": "SourceArt/T_PM_Mommy.png",
+    "bytes": 2044245,
+    "sha256": "07b6feb083e435b8b66a57712a28a98044270057e05f26ed744f1c6bed5ba5bf"
+  },
+  {
+    "path": "SourceArt/T_PM_MoonflowerIngredient.png",
+    "bytes": 890661,
+    "sha256": "97696359d1cd5fe6a93cc8910e27fc7f9d81e2fe3a13bc088e91585fe0450f58"
+  },
+  {
+    "path": "SourceArt/T_PM_Path.png",
+    "bytes": 2106777,
+    "sha256": "72a2e95d7a97e602db13ed081f48bfdaa4723cb6b9bfb1f229af9c2b9329bc4f"
+  },
+  {
+    "path": "SourceArt/T_PM_PotionHealth.png",
+    "bytes": 931509,
+    "sha256": "c228f70176e2e2481f219198406524d90f5deb014b32bd352428a90693c6cc48"
+  },
+  {
+    "path": "SourceArt/T_PM_PotionMagic.png",
+    "bytes": 905516,
+    "sha256": "6138413cfc32c65e9ed942e7d5331ee9db05cd0c5800fccaaaefa79f3201c051"
+  },
+  {
+    "path": "SourceArt/T_PM_Stone.png",
+    "bytes": 2618858,
+    "sha256": "ce8f75a9ffce03e5eb9a746a08bac399df73ea5b879e0f53bd7d5a8cd95d2908"
+  },
+  {
+    "path": "UE5 integration contract.md",
+    "bytes": 4040,
+    "sha256": "ad4716bdd0b19091226e17841e392ea74ad674784c2118a21161327afe212ca8"
+  }
+]

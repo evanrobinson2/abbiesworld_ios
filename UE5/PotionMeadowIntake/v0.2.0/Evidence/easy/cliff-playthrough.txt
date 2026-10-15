@@ -1,0 +1,1 @@
+PASS: EASY seed 1337; collected ingredients, brewed potions, fought all goons, reached level 3 and won using the live click handlers.

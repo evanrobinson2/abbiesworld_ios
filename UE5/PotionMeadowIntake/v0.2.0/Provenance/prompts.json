@@ -1,0 +1,98 @@
+[
+  {
+    "name": "Abbie",
+    "prompt": "Use case: stylized-concept. Generate a SINGLE production game character cutout for Abbie's World Unreal PC edition. Reference image is STYLE AND CHARACTER DESIGN reference only. Abbie alone, six-year-old little halfling girl, curly strawberry-blonde hair, bright BLUE eyes, pointed ears, forest green tunic dress, mustard yellow cloak, brown boots and satchel with red and blue potion bottles, cheerful adventuring idle pose, small wooden walking stick. Match the reference's original chunky ink outlines, hand-painted storybook fantasy, warm natural colors and rounded readable silhouette. Full body including feet, front three-quarter view facing slightly right, camera near eye level, centered with generous transparent margins, feet together on same baseline. One character only. Real transparent background, no ground, no cast shadow, no scene, no text, no border, no other characters. Clear blue irises. Static idle asset, no animation sheet.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "Daddy",
+    "prompt": "Use case: stylized-concept. Generate a SINGLE production game character cutout for Abbie's World Unreal PC edition. Reference image is STYLE AND CHARACTER DESIGN reference only. Daddy alone, friendly adult rogue, BLUE eyes, brown hair and short beard, navy blue baseball ball cap with distinct curved brim, green cloak, leather vest, trousers, boots, coiled rope at belt, relaxed adventuring idle pose. Match the reference's original chunky ink outlines, hand-painted storybook fantasy, warm natural colors and rounded readable silhouette. Full body including feet, front three-quarter view facing slightly right, camera near eye level, centered with generous transparent margins, feet together on same baseline. One character only. Real transparent background, no ground, no cast shadow, no scene, no text, no border, no other characters. Clear blue irises. Static idle asset, no animation sheet.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "Mommy",
+    "prompt": "Use case: stylized-concept. Generate a SINGLE production game character cutout for Abbie's World Unreal PC edition. Reference image is STYLE AND CHARACTER DESIGN reference only. Mommy alone, friendly adult cleric healer, BLUE eyes, long wavy brown hair, ivory robe with gold sun embroidery, brown boots and belt, holds wooden sun-topped healing staff, relaxed adventuring idle pose. Match the reference's original chunky ink outlines, hand-painted storybook fantasy, warm natural colors and rounded readable silhouette. Full body including feet, front three-quarter view facing slightly right, camera near eye level, centered with generous transparent margins, feet together on same baseline. One character only. Real transparent background, no ground, no cast shadow, no scene, no text, no border, no other characters. Clear blue irises. Static idle asset, no animation sheet.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "Goon0",
+    "prompt": "Use case: stylized-concept. One standalone original game enemy sprite cutout. tiny round moss puff creature with two stone feet, little daisies in moss, huge friendly eyes. Match attached art reference's specific creature design and chunky inked hand-painted storybook fantasy style. Funny and approachable for a six-year-old, no menace or weapons. Full body isolated, front three-quarter camera facing slightly left, relaxed idle stance, clear silhouette and generous transparent margins, feet near bottom center. Actual transparent background. No ground or shadow, no scene, no writing, no level sign, no UI, no other creature, no sprite sheet.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "Goon1",
+    "prompt": "Use case: stylized-concept. One standalone original game enemy sprite cutout. small twig and stone woodland creature, round pale pebble face, branch arms and legs, sprout on head. Match attached art reference's specific creature design and chunky inked hand-painted storybook fantasy style. Funny and approachable for a six-year-old, no menace or weapons. Full body isolated, front three-quarter camera facing slightly left, relaxed idle stance, clear silhouette and generous transparent margins, feet near bottom center. Actual transparent background. No ground or shadow, no scene, no writing, no level sign, no UI, no other creature, no sprite sheet.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "Goon2",
+    "prompt": "Use case: stylized-concept. One standalone original game enemy sprite cutout. stout stone and moss creature wearing red mushroom cap with ivory spots, rounded rock hands and feet. Match attached art reference's specific creature design and chunky inked hand-painted storybook fantasy style. Funny and approachable for a six-year-old, no menace or weapons. Full body isolated, front three-quarter camera facing slightly left, relaxed idle stance, clear silhouette and generous transparent margins, feet near bottom center. Actual transparent background. No ground or shadow, no scene, no writing, no level sign, no UI, no other creature, no sprite sheet.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "Goon3",
+    "prompt": "Use case: stylized-concept. One standalone original game enemy sprite cutout. large friendly pumpkin armored woodland goon, smiling jack-o-lantern orange head, BLUE eyes, chunky stone hands and feet, brown leather armor and leafy branch shoulders. Match attached art reference's specific creature design and chunky inked hand-painted storybook fantasy style. Funny and approachable for a six-year-old, no menace or weapons. Full body isolated, front three-quarter camera facing slightly left, relaxed idle stance, clear silhouette and generous transparent margins, feet near bottom center. Actual transparent background. No ground or shadow, no scene, no writing, no level sign, no UI, no other creature, no sprite sheet.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "PotionHealth",
+    "prompt": "Use case: stylized-concept. One original in-game collectible or prop cutout for Abbie's World. a single small round clear glass potion flask filled with ruby red liquid, cork stopper, cream heart symbol hanging tag, chunky leather neck tie. Match attached reference chunky dark ink outlines, warm hand-painted storybook fantasy shading, simple readable silhouette. Full object centered, three-quarter front view slightly from above, generous empty transparent margins. True transparent background; no shadow, no floor, no extra objects, no lettering, no UI, no frame.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "PotionMagic",
+    "prompt": "Use case: stylized-concept. One original in-game collectible or prop cutout for Abbie's World. a single small round clear glass potion flask filled with glowing sapphire blue liquid, cork stopper, cream star symbol hanging tag, chunky leather neck tie. Match attached reference chunky dark ink outlines, warm hand-painted storybook fantasy shading, simple readable silhouette. Full object centered, three-quarter front view slightly from above, generous empty transparent margins. True transparent background; no shadow, no floor, no extra objects, no lettering, no UI, no frame.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "BerryIngredient",
+    "prompt": "Use case: stylized-concept. One original in-game collectible or prop cutout for Abbie's World. one small cluster of three ripe red berries attached to two green leaves. Match attached reference chunky dark ink outlines, warm hand-painted storybook fantasy shading, simple readable silhouette. Full object centered, three-quarter front view slightly from above, generous empty transparent margins. True transparent background; no shadow, no floor, no extra objects, no lettering, no UI, no frame.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "MoonflowerIngredient",
+    "prompt": "Use case: stylized-concept. One original in-game collectible or prop cutout for Abbie's World. one luminous blue five petalled moonflower with small green leaves and short stem. Match attached reference chunky dark ink outlines, warm hand-painted storybook fantasy shading, simple readable silhouette. Full object centered, three-quarter front view slightly from above, generous empty transparent margins. True transparent background; no shadow, no floor, no extra objects, no lettering, no UI, no frame.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "Cauldron",
+    "prompt": "Use case: stylized-concept. One original in-game collectible or prop cutout for Abbie's World. one squat black iron brewing cauldron with two side handles on three stubby feet, purple bubbling potion and a small curved wisp of steam, no fire or furniture. Match attached reference chunky dark ink outlines, warm hand-painted storybook fantasy shading, simple readable silhouette. Full object centered, three-quarter front view slightly from above, generous empty transparent margins. True transparent background; no shadow, no floor, no extra objects, no lettering, no UI, no frame.",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  },
+  {
+    "name": "Grass",
+    "prompt": "Use case: stylized-concept. Square seamless game ground texture: soft green meadow grass, sparse tiny blades and subtle warm painterly variation. Original hand painted storybook fantasy, simplified chunky painted detail matching a cheerful illustrated dungeon adventure. Orthographic straight-down flat material texture filling every pixel edge to edge. Seamless on all four sides. Soft evenly lit albedo, no directional shadow, no objects, no perspective, no raised block, no border, no UI, no lettering. This is a repeatable surface texture to apply on square 100 cm Unreal ground tiles.",
+    "mode": "built-in image_gen",
+    "reference": null
+  },
+  {
+    "name": "Path",
+    "prompt": "Use case: stylized-concept. Square seamless game ground texture: warm ochre compacted earth footpath texture, a few small flat stones, no grass. Original hand painted storybook fantasy, simplified chunky painted detail matching a cheerful illustrated dungeon adventure. Orthographic straight-down flat material texture filling every pixel edge to edge. Seamless on all four sides. Soft evenly lit albedo, no directional shadow, no objects, no perspective, no raised block, no border, no UI, no lettering. This is a repeatable surface texture to apply on square 100 cm Unreal ground tiles.",
+    "mode": "built-in image_gen",
+    "reference": null
+  },
+  {
+    "name": "Stone",
+    "prompt": "Use case: stylized-concept. Square seamless game ground texture: grey warm stone paving, large irregular square flagstones, subtle moss in joints. Original hand painted storybook fantasy, simplified chunky painted detail matching a cheerful illustrated dungeon adventure. Orthographic straight-down flat material texture filling every pixel edge to edge. Seamless on all four sides. Soft evenly lit albedo, no directional shadow, no objects, no perspective, no raised block, no border, no UI, no lettering. This is a repeatable surface texture to apply on square 100 cm Unreal ground tiles.",
+    "mode": "built-in image_gen",
+    "reference": null
+  },
+  {
+    "name": "BoardBackground",
+    "prompt": "Use case: stylized-concept. Generate an original polished 2D gameboard BACKGROUND for Abbie's World, a child-friendly cliff region fantasy adventure, same chunky ink-outlined hand painted storybook style as reference. Landscape overhead map, camera straight down with slight illustrated depth at outer cliffs, no characters, no monsters, no items, no words or interface. A single large broad grassy rectangular plateau with irregular rocky cliff rim on all outer edges overlooking distant blue sea, waterfalls and soft cloud mist far below. Important composition for gameplay: plateau usable surface occupies x6% to94%, y10% to90% of image; a narrow straight vertical turquoise stream occupies x50% to56% from top to bottom, separating left and right grassland. ONE stone bridge crosses this stream horizontally at y55% to60%. Broad open walkable grasslands on both sides, ochre winding footpaths connect left-lower camp area to middle bridge and right-upper picnic clearing. Keep all walkable areas open and uncluttered, sparse small flowers near outer perimeter only. Beautiful warm afternoon light, faceted slate cliffs, readable grassy surface. Natural art without any grid lines, those will be drawn by the game. NO trees or rocks blocking the interior. Whole map visible, no fog of war. This is gameplay board art, not promotional poster. Wide 16:10 composition.\n",
+    "mode": "built-in image_gen",
+    "reference": "Provenance/family-meadow-reference.png"
+  }
+]

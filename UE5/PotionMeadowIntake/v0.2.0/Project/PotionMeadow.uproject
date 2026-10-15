@@ -1,0 +1,7 @@
+{
+  "FileVersion": 3,
+  "EngineAssociation": "5.4",
+  "Category": "Games",
+  "Description": "Abbie's Potion Meadow - original cliff-region adventure staging project",
+  "Modules": [{"Name": "AbbiesWorld", "Type": "Runtime", "LoadingPhase": "Default"}]
+}

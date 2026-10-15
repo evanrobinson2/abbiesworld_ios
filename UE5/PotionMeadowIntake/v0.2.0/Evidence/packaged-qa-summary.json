@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "build_type": "native Windows Development package",
+  "engine": "5.4.4",
+  "executable_sha256": "976bfa6db479d47a0e086f7fba34c4adf951384f758500b2dfcd6c6cec30b96b",
+  "live_playthroughs": {
+    "easy": "PASS: EASY seed 1337; collected ingredients, brewed potions, fought all goons, reached level 3 and won using the live click handlers.",
+    "medium": "PASS: MEDIUM seed 1338; collected ingredients, brewed potions, fought all goons, reached level 3 and won using the live click handlers.",
+    "hard": "PASS: HARD seed 1339; collected ingredients, brewed potions, fought all goons, reached level 3 and won using the live click handlers.",
+    "menu": "PASS: Easy/Medium/Hard/Surprise choices; retry preserves seed; victory replay changes seed; terminal input blocked; help consumes click without using a potion."
+  },
+  "representative_seeds": [
+    1337,
+    1338,
+    1339
+  ],
+  "render_size": [
+    1280,
+    960
+  ],
+  "audio_import_verified": true,
+  "listening_test": false,
+  "device_validation": "Windows PC; no iOS/Metal/touch-device validation"
+}

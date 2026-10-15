@@ -1,0 +1,308 @@
+{
+  "passed": true,
+  "engine": "5.4.4",
+  "original_content_root": "/Game/PotionMeadow",
+  "asset_count": 41,
+  "external_game_packages": [],
+  "allowed_external_roots": [
+    "/Engine",
+    "/Script"
+  ],
+  "audio_count_with_positive_duration": 8,
+  "map_reloaded": true,
+  "game_mode": "/Script/AbbiesWorld.AWPotionMode",
+  "packages": [
+    {
+      "package": "/Game/PotionMeadow/Audio/S_PM_Win",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C535C) {package_name: \"/Script/Engine\", asset_name: \"SoundWave\"}>",
+      "dependencies": []
+    },
+    {
+      "package": "/Game/PotionMeadow/Audio/S_PM_Step",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C50DC) {package_name: \"/Script/Engine\", asset_name: \"SoundWave\"}>",
+      "dependencies": []
+    },
+    {
+      "package": "/Game/PotionMeadow/Audio/S_PM_Rest",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C4EFC) {package_name: \"/Script/Engine\", asset_name: \"SoundWave\"}>",
+      "dependencies": []
+    },
+    {
+      "package": "/Game/PotionMeadow/Audio/S_PM_Pop",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD525A6BC) {package_name: \"/Script/Engine\", asset_name: \"SoundWave\"}>",
+      "dependencies": []
+    },
+    {
+      "package": "/Game/PotionMeadow/Audio/S_PM_Level",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C3F5C) {package_name: \"/Script/Engine\", asset_name: \"SoundWave\"}>",
+      "dependencies": []
+    },
+    {
+      "package": "/Game/PotionMeadow/Audio/S_PM_Hit",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C503C) {package_name: \"/Script/Engine\", asset_name: \"SoundWave\"}>",
+      "dependencies": []
+    },
+    {
+      "package": "/Game/PotionMeadow/Audio/S_PM_Drink",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C521C) {package_name: \"/Script/Engine\", asset_name: \"SoundWave\"}>",
+      "dependencies": []
+    },
+    {
+      "package": "/Game/PotionMeadow/Audio/S_PM_Brew",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C55DC) {package_name: \"/Script/Engine\", asset_name: \"SoundWave\"}>",
+      "dependencies": []
+    },
+    {
+      "package": "/Game/PotionMeadow/Maps/L_PM_CliffMeadow",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C57BC) {package_name: \"/Script/Engine\", asset_name: \"World\"}>",
+      "dependencies": [
+        "/Script/NavigationSystem",
+        "/Engine/BasicShapes/Plane",
+        "/Script/AbbiesWorld",
+        "/Game/PotionMeadow/Materials/M_PM_Stone",
+        "/Game/PotionMeadow/Materials/M_PM_Path",
+        "/Game/PotionMeadow/Materials/M_PM_Grass"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Maps/L_PM_AssetGallery",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C5ADC) {package_name: \"/Script/Engine\", asset_name: \"World\"}>",
+      "dependencies": [
+        "/Script/NavigationSystem",
+        "/Engine/BasicShapes/Plane",
+        "/Game/PotionMeadow/Materials/M_PM_Stone",
+        "/Game/PotionMeadow/Materials/M_PM_PotionMagic",
+        "/Game/PotionMeadow/Materials/M_PM_PotionHealth",
+        "/Game/PotionMeadow/Materials/M_PM_Path",
+        "/Game/PotionMeadow/Materials/M_PM_MoonflowerIngredient",
+        "/Game/PotionMeadow/Materials/M_PM_Mommy",
+        "/Game/PotionMeadow/Materials/M_PM_Grass",
+        "/Game/PotionMeadow/Materials/M_PM_Goon3",
+        "/Game/PotionMeadow/Materials/M_PM_Goon2",
+        "/Game/PotionMeadow/Materials/M_PM_Goon1",
+        "/Game/PotionMeadow/Materials/M_PM_Goon0",
+        "/Game/PotionMeadow/Materials/M_PM_Daddy",
+        "/Game/PotionMeadow/Materials/M_PM_Cauldron",
+        "/Game/PotionMeadow/Materials/M_PM_BerryIngredient",
+        "/Game/PotionMeadow/Materials/M_PM_Abbie"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Stone",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C5D5C) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Stone"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_PotionMagic",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C5B7C) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_PotionMagic"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_PotionHealth",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C58FC) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_PotionHealth"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Path",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C567C) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Path"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_MoonflowerIngredient",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C549C) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_MoonflowerIngredient"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Mommy",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C535C) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Mommy"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Grass",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C50DC) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Grass"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Goon3",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD525B7FC) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Goon3"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Goon2",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C4EFC) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Goon2"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Goon1",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C3F5C) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Goon1"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Goon0",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C503C) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Goon0"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Daddy",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C521C) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Daddy"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Cauldron",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C55DC) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Cauldron"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_BerryIngredient",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C57BC) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_BerryIngredient"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Materials/M_PM_Abbie",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C5ADC) {package_name: \"/Script/Engine\", asset_name: \"Material\"}>",
+      "dependencies": [
+        "/Game/PotionMeadow/Textures/T_PM_Abbie"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Stone",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C5D5C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_PotionMagic",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C5B7C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_PotionHealth",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C58FC) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Path",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C567C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_MoonflowerIngredient",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C549C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Mommy",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C535C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Grass",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD525ACBC) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Goon3",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C50DC) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Goon2",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C4EFC) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Goon1",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C3F5C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Goon0",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C503C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Daddy",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C521C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Cauldron",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C55DC) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_BoardBackground",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C57BC) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_BerryIngredient",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C5ADC) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    },
+    {
+      "package": "/Game/PotionMeadow/Textures/T_PM_Abbie",
+      "class": "<Struct 'TopLevelAssetPath' (0x0000077FD51C5D5C) {package_name: \"/Script/Engine\", asset_name: \"Texture2D\"}>",
+      "dependencies": [
+        "/Script/InterchangeEngine"
+      ]
+    }
+  ]
+}
