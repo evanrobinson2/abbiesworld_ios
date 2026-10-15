@@ -1,0 +1,122 @@
+[
+  {
+    "path": "Board-design.md",
+    "sha256": "f5e3eb655696a27ab0c383877462e0c33de748ec8f3378e2c9573cee8c3e18e9",
+    "bytes": 1226
+  },
+  {
+    "path": "Evidence/easy/cliff-level-start.png",
+    "sha256": "6181e287913ce19026bb076a2290bbf531ba1142326b8d53ab49a7ff7f6a4c9f",
+    "bytes": 701457
+  },
+  {
+    "path": "Evidence/easy/cliff-level-win.png",
+    "sha256": "25fbf4f43d5de6006d7af641e71ced5755099defbe8194668507cb1d0b129fde",
+    "bytes": 486087
+  },
+  {
+    "path": "Evidence/easy/cliff-playthrough.txt",
+    "sha256": "a7c888bded4ed5eca204b90e9b986d2f25b745164a54ea21a3c366d1493d1f57",
+    "bytes": 169
+  },
+  {
+    "path": "Evidence/easy/fog-recovery-proof.png",
+    "sha256": "f4c1836bce656582f760c7646290c1e820c15769515b57327f747a16f3e4bee6",
+    "bytes": 714607
+  },
+  {
+    "path": "Evidence/hard/cliff-level-start.png",
+    "sha256": "ac9238cbdc1fc4ead609150fb09cc163e61aad0f86e52bf2a11c20f39b4ddc59",
+    "bytes": 701173
+  },
+  {
+    "path": "Evidence/hard/cliff-level-win.png",
+    "sha256": "419f0a772548c8bb90c0d476cbbefbbb7791e2b4dc073505f53c562e7b2d1d8e",
+    "bytes": 476345
+  },
+  {
+    "path": "Evidence/hard/cliff-playthrough.txt",
+    "sha256": "e879162fa0164a86f2b7631c46e454a07874224607bb71f0b5d95962e5a1d2f0",
+    "bytes": 169
+  },
+  {
+    "path": "Evidence/hard/fog-recovery-proof.png",
+    "sha256": "a63057332ebff5c98e03794583362f00167c6883a0c07661cc4cceb35dab4014",
+    "bytes": 714650
+  },
+  {
+    "path": "Evidence/medium/cliff-level-start.png",
+    "sha256": "a6c38273f903036f43b932677a6abc5f7e144bc615cda55e90f24c0874055a6e",
+    "bytes": 701455
+  },
+  {
+    "path": "Evidence/medium/cliff-level-win.png",
+    "sha256": "e934e900525321a459333aae9f150118091c645f193d389b10a40d90d90fc04c",
+    "bytes": 480766
+  },
+  {
+    "path": "Evidence/medium/cliff-playthrough.txt",
+    "sha256": "688d8fc1d135b1f836810814cb7fb9c9a7e43a0bbb5e3c0e2b3f1dc3332a56de",
+    "bytes": 171
+  },
+  {
+    "path": "Evidence/medium/fog-recovery-proof.png",
+    "sha256": "1ac60d7f561a68d6a14231a9ec23c19b09a4483e89e6b8ff19dbd8b3d4ed3118",
+    "bytes": 715372
+  },
+  {
+    "path": "Evidence/menu/difficulty-menu.png",
+    "sha256": "0e383fc6ca6ab9e1c3555d7835238dc97d7aed37bca6ece17a61769d9eba9d6c",
+    "bytes": 371753
+  },
+  {
+    "path": "Evidence/menu/menu-controls-qa.txt",
+    "sha256": "7c05504c1f603abbcdf89a9ff51c56e288d90d855d58c197ef0bba8e4c28d29b",
+    "bytes": 159
+  },
+  {
+    "path": "Evidence/packaged-easy/cliff-level-start.png",
+    "sha256": "442f5d9444a195d0cf1badd1bbd80dcfb95898e9756703d1292709ecc093bbb3",
+    "bytes": 1146770
+  },
+  {
+    "path": "Evidence/packaged-easy/cliff-level-win.png",
+    "sha256": "5d1726b269fee5c35eea729ce9095e89a1e47bab991c6125013fafa73fef910e",
+    "bytes": 591330
+  },
+  {
+    "path": "Evidence/packaged-easy/cliff-playthrough.txt",
+    "sha256": "a7c888bded4ed5eca204b90e9b986d2f25b745164a54ea21a3c366d1493d1f57",
+    "bytes": 169
+  },
+  {
+    "path": "Evidence/packaged-easy/fog-recovery-proof.png",
+    "sha256": "01bf750e60984e40bce674851176a16d26d2860baaedb3c330edbd8f2c0d1b80",
+    "bytes": 1164819
+  },
+  {
+    "path": "Evidence/verification.json",
+    "sha256": "07181fb91863bf1f5a3a248a8a50b26171eabf6f4a962035b16056586f8d1d25",
+    "bytes": 1837
+  },
+  {
+    "path": "Evidence-random-boards.txt",
+    "sha256": "ffaa504eea637e6f44d6a4351a789f30342af62f4613ee38bd2e79cc104cdd41",
+    "bytes": 200
+  },
+  {
+    "path": "README.md",
+    "sha256": "385e5e625b92cfc67dd956d77107516c767b186d10fe6ec9859e28be35560eeb",
+    "bytes": 373
+  },
+  {
+    "path": "Source/AbbiesWorld/PMAdventureModel.h",
+    "sha256": "65a305ae9354981464b1e08752b70d5a217e3df75ada49270d8b18af93d401ba",
+    "bytes": 6430
+  },
+  {
+    "path": "Source/AbbiesWorld/SPMAdventure.h",
+    "sha256": "c60d73f1b670f35e3064b799e97603f0b6b69e3986b79218fca508fbe7fb3b0e",
+    "bytes": 39626
+  }
+]

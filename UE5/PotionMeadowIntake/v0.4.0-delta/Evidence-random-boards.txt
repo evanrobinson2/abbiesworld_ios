@@ -1,0 +1,1 @@
+PASS: 3000 boards across Easy/Medium/Hard; 1592 distinct encounter layouts; connected traversable regions; reachable ingredients, cauldron and goal; deterministic seeds; replayed winning potion plans.

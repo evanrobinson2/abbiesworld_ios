@@ -1,0 +1,1 @@
+Apply SPMAdventure.h and PMAdventureModel.h to a fresh working copy of v0.3.1 (coordinator a4e3c43), then build and recook. Preserve frozen intakes. No asset, rules, shared config or hook changes. Board is now square with square cells, no river or bridge bottleneck; goal is (10,1). See Board-design.md and Evidence. User visual acceptance and parent/device checks pending.
