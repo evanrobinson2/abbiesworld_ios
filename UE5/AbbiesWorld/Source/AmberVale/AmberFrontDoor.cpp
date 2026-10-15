@@ -54,6 +54,7 @@ void AAmberHUD::ShowMenu(){
  auto Add=[this](TSharedRef<SWidget> W){MenuItems->AddSlot().AutoHeight().Padding(0,6)[W];};
  Add(Label(TEXT("ABBIE'S WORLD"),14,FLinearColor(.29,.48,.38)));Add(Label(TEXT("Your next adventure."),30));Add(Label(TEXT("The Amber Vale  /  Overland edition"),16));
  if(ResumeAvailable)Add(Action(TEXT("Continue"),[this](){ResumeGame();}));
+ else {Add(Action(TEXT("Close"),[this](){EscapeUI();}));Add(Label(TEXT("Close or Escape explores locally until you join a shared universe."),14));}
  if(Identity->SignedIn){
   Add(Label(Identity->Status,16));
   if(!Identity->ActiveName.IsEmpty()){
@@ -86,7 +87,7 @@ void AAmberHUD::ResumeGame(){
  CloseFrontDoor();GameStarted=true;FrontStage=2;if(DrawerShell)DrawerShell->SetVisibility(EVisibility::Collapsed);if(Scrim)Scrim->SetVisibility(EVisibility::Collapsed);GetOwningPlayerController()->SetInputMode(FInputModeGameAndUI());
 }
 void AAmberHUD::EscapeUI(){
- if(FrontDoor.IsValid()){if(ResumeAvailable)ResumeGame();else if(FrontStage!=1)ShowMenu();return;}
+ if(FrontDoor.IsValid()){if(ResumeAvailable)ResumeGame();else if(FrontStage==1)StartGame(true);else ShowMenu();return;}
  if(DrawerShell&&DrawerShell->GetVisibility()==EVisibility::Visible){DrawerShell->SetVisibility(EVisibility::Collapsed);if(Scrim)Scrim->SetVisibility(EVisibility::Collapsed);return;}
  ShowMenu();
 }
@@ -109,10 +110,10 @@ void AAmberHUD::ShowSettings(){
 }
 void AAmberHUD::TickFrontDoor(float Dt){
  if(FParse::Param(FCommandLine::Get(),TEXT("CameraUIProof"))){
-  static int32 Stage=0,SavedTurn=0,SavedStep=0;static bool DrawerClosed=false,SettingsOpened=false,SettingsClosed=false,MenuClosed=false,PositionPreserved=false;
-  if(Clock>3&&Stage==0){StartGame(true);SavedTurn=Turn;SavedStep=Step;DrawerShell->SetVisibility(EVisibility::Visible);Scrim->SetVisibility(EVisibility::Visible);EscapeUI();DrawerClosed=GameStarted&&DrawerShell->GetVisibility()==EVisibility::Collapsed&&Scrim->GetVisibility()==EVisibility::Collapsed;if(auto PC=Cast<AAmberController>(GetOwningPlayerController()))PC->SettingsKey();SettingsOpened=FrontStage==3&&FrontDoor.IsValid()&&!GameStarted;Stage=1;}
+  static int32 Stage=0,SavedTurn=0,SavedStep=0;static bool EntryClosed=false,DrawerClosed=false,SettingsOpened=false,SettingsClosed=false,MenuClosed=false,PositionPreserved=false;
+  if(Clock>3&&Stage==0){ResumeAvailable=false;GameStarted=false;ShowMenu();EscapeUI();EntryClosed=GameStarted&&DeveloperMode&&!FrontDoor.IsValid();Turn=3;Step=FMath::Min(2,Route.Num()-1);SavedTurn=Turn;SavedStep=Step;DrawerShell->SetVisibility(EVisibility::Visible);Scrim->SetVisibility(EVisibility::Visible);EscapeUI();DrawerClosed=GameStarted&&DrawerShell->GetVisibility()==EVisibility::Collapsed&&Scrim->GetVisibility()==EVisibility::Collapsed;if(auto PC=Cast<AAmberController>(GetOwningPlayerController()))PC->SettingsKey();SettingsOpened=FrontStage==3&&FrontDoor.IsValid()&&!GameStarted;Stage=1;}
   if(Clock>6&&Stage==1){FScreenshotRequest::RequestScreenshot(FPaths::ProjectDir()/TEXT("native-camera-settings.png"),true,false);Stage=2;}
-  if(Clock>8&&Stage==2){if(auto PC=Cast<AAmberController>(GetOwningPlayerController()))PC->SettingsKey();SettingsClosed=GameStarted&&!FrontDoor.IsValid();ShowMenu();EscapeUI();MenuClosed=GameStarted&&!FrontDoor.IsValid();ShowSettings();EscapeUI();SettingsClosed=SettingsClosed&&GameStarted&&!FrontDoor.IsValid();PositionPreserved=Turn==SavedTurn&&Step==SavedStep;FString Result=FString::Printf(TEXT("{\"drawer_escape\":%s,\"f2_settings_open\":%s,\"settings_close\":%s,\"menu_escape_resume\":%s,\"position_preserved\":%s}"),DrawerClosed?TEXT("true"):TEXT("false"),SettingsOpened?TEXT("true"):TEXT("false"),SettingsClosed?TEXT("true"):TEXT("false"),MenuClosed?TEXT("true"):TEXT("false"),PositionPreserved?TEXT("true"):TEXT("false"));FFileHelper::SaveStringToFile(Result,*(FPaths::ProjectDir()/TEXT("camera-ui-proof.json")));Stage=3;}
+  if(Clock>8&&Stage==2){if(auto PC=Cast<AAmberController>(GetOwningPlayerController()))PC->SettingsKey();SettingsClosed=GameStarted&&!FrontDoor.IsValid();ShowMenu();EscapeUI();MenuClosed=GameStarted&&!FrontDoor.IsValid();ShowSettings();EscapeUI();SettingsClosed=SettingsClosed&&GameStarted&&!FrontDoor.IsValid();PositionPreserved=Turn==SavedTurn&&Step==SavedStep;FString Result=FString::Printf(TEXT("{\"entry_menu_escape\":%s,\"drawer_escape\":%s,\"f2_settings_open\":%s,\"settings_close\":%s,\"menu_escape_resume\":%s,\"position_preserved\":%s}"),EntryClosed?TEXT("true"):TEXT("false"),DrawerClosed?TEXT("true"):TEXT("false"),SettingsOpened?TEXT("true"):TEXT("false"),SettingsClosed?TEXT("true"):TEXT("false"),MenuClosed?TEXT("true"):TEXT("false"),PositionPreserved?TEXT("true"):TEXT("false"));FFileHelper::SaveStringToFile(Result,*(FPaths::ProjectDir()/TEXT("camera-ui-proof.json")));Stage=3;}
   if(Clock>10&&Stage==3)GetOwningPlayerController()->ConsoleCommand(TEXT("quit"));
  }
 
