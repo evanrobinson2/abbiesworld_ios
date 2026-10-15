@@ -1,0 +1,11 @@
+{
+  "reason": "cover dark triangular surface artifacts in original generated liquid",
+  "raw_source_unchanged": true,
+  "ellipse_radii_m": [
+    0.17,
+    0.195
+  ],
+  "height_m": 0.2455,
+  "material": "M_BrothSurface",
+  "added_triangles": 62
+}

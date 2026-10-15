@@ -1,0 +1,12 @@
+[
+  {
+    "file": "AmberGameMode.h",
+    "source_sha256": "cadc4ca05c569c3c51e380f7747d4e5cfc6bea84754a3ac1ec2ada4140627c22",
+    "status": "review_only_not_applied_or_compiled_in_shared_project"
+  },
+  {
+    "file": "AmberGameMode.cpp",
+    "source_sha256": "e40f1b24dd8b3c52f27e8b2ee9a066802f28ad274d069024c03a7de6e70316ea",
+    "status": "review_only_not_applied_or_compiled_in_shared_project"
+  }
+]

@@ -1,0 +1,89 @@
+{
+  "name": "Abby and Ani's Noodle House",
+  "status": "packaged_local_technical_proof_verified_not_integrated_online",
+  "engine": "5.4.4",
+  "package_material_shader_errors": [],
+  "packaged_service": {
+    "served": 12,
+    "score": 1088,
+    "missed": 0,
+    "players": 3,
+    "native_assets_ready": true
+  },
+  "packaged_remote_cook_host": {
+    "authority": true,
+    "snapshots": 0,
+    "sequence": 1618,
+    "served": 2,
+    "score": 156,
+    "remote_commands": 3655
+  },
+  "packaged_remote_cook_client": {
+    "authority": false,
+    "snapshots": 1360,
+    "sequence": 1381,
+    "served": 2,
+    "score": 156,
+    "remote_commands": 0
+  },
+  "network_proof_scope": "separate localhost packaged processes with remote cooking RPCs; before final lighting-only rebuild; gameplay network methods unchanged",
+  "landing_gate": {
+    "passed": 39,
+    "total": 39,
+    "scope": "native landing gate; overworld callback integration pending"
+  },
+  "packaged_calibration": {
+    "passed": true,
+    "shots": [
+      {
+        "direction": "Right",
+        "mesh_forward_matches_movement": true,
+        "carry_follows_facing": true,
+        "plate_surface_gap_cm": 0.6
+      },
+      {
+        "direction": "Up",
+        "mesh_forward_matches_movement": true,
+        "carry_follows_facing": true,
+        "plate_surface_gap_cm": 0.6
+      },
+      {
+        "direction": "Left",
+        "mesh_forward_matches_movement": true,
+        "carry_follows_facing": true,
+        "plate_surface_gap_cm": 0.6
+      },
+      {
+        "direction": "Down",
+        "mesh_forward_matches_movement": true,
+        "carry_follows_facing": true,
+        "plate_surface_gap_cm": 0.6
+      }
+    ]
+  },
+  "admission_without_dev_bypass": "rejected_verified",
+  "artist_mesh_roles": [
+    "ChefAbbie",
+    "ChefDaddy",
+    "ChefMommy",
+    "Counter",
+    "NoodleBowl",
+    "BrothPot",
+    "Garnish",
+    "NoodleHouse"
+  ],
+  "native_uassets": 120,
+  "cooked_private_commercial_assets": 0,
+  "executable_sha256": "67919f75c0191c0793ad38fc20f53f0153e195b3b1d3078eb8d867a8ce0da7ab",
+  "blocked_dependencies": [
+    "authoritative shared-world placement and completed-landing dispatcher",
+    "account-bound session broker and HTTPS API/Supabase activation",
+    "deployed host/relay and real-account/device internet verification",
+    "profile figurine binding, lifecycle/rewards/exact return adapter",
+    "human art acceptance and final modular/station/animation polish"
+  ],
+  "overland_adapter_applied": false,
+  "appearance_approved": false,
+  "ipad_tested": false,
+  "physical_controllers_tested": false
+}

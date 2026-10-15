@@ -1,0 +1,586 @@
+{
+  "batch": "FOREST-FAIRY-ARTIST-20261015-B01",
+  "status": "artist_meshy_raw_export_review_handoff",
+  "source_project": "https://www.meshy.ai/agent/nzkG5wa7H4QSHk-xWsuz-?chat=dCBDCIgf1IJvvMfMUqpUt",
+  "workflow": "originalgpt-image-2-5-flarereference9credits\u2192MeshyT2.5SmartTopologytextured15creditsperasset",
+  "credits_spent": 96,
+  "credits_before": 2737,
+  "credits_after": 2641,
+  "purchases": 0,
+  "appearance_approved": false,
+  "static_only": true,
+  "integration_owner": "ForestFairyBurgerJointchat: normalization,FBX,front+X,Carry/Worktopanchors,Unrealimport/nativeproof",
+  "scale_targets_only_not_applied": {
+    "Abbie_height_m": 1.5,
+    "Daddy_height_m": 1.85,
+    "Mommy_height_m": 1.5,
+    "counter_usable_worktop_height_m": 0.9
+  },
+  "counter_worktop": "DoNOTusemaxheight; raisedjars/backsplash/rootextremitiesexceedusableworktop. Nativeownermeasureactualmeshandauthoranchor.",
+  "assets": [
+    {
+      "id": "FF-CHAR-ABBIE-UNICORN-001",
+      "raw_file": "raw\\FF-CHAR-ABBIE-UNICORN-001.glb",
+      "sha256": "1f23981266bc057acb0695f96bc5a7de1f7763f4cce34ba1e232f607eeb9b338",
+      "bytes": 8466496,
+      "triangles": 15727,
+      "materials": [
+        {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "metallicFactor": 1.0,
+            "roughnessFactor": 1.0,
+            "baseColorTexture": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1,
+              "texCoord": 0
+            }
+          },
+          "normalTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "textures": [
+        {
+          "image_index": 0,
+          "file": "textures\\FF-CHAR-ABBIE-UNICORN-001\\image-0.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "1ffe2b48320478e96bfbf3c0013eb8e061ab4b8169c78c0c4fb361510c263302",
+          "mimeType": "image/jpeg"
+        },
+        {
+          "image_index": 1,
+          "file": "textures\\FF-CHAR-ABBIE-UNICORN-001\\image-1.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "991fc888f24145f24ba261e8cd5a2587e70b571190ed1a23a386f8c808474369",
+          "mimeType": "image/jpeg"
+        },
+        {
+          "image_index": 2,
+          "file": "textures\\FF-CHAR-ABBIE-UNICORN-001\\image-2.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "c0e9f8bf69cf14aae5d7b456efe62c2f04331a9c62b9d79745217572faf586cd",
+          "mimeType": "image/jpeg"
+        }
+      ],
+      "bounds_source_xyz": [
+        {
+          "min": [
+            -0.25854501128196716,
+            -0.4753420054912567,
+            -0.15649400651454926
+          ],
+          "max": [
+            0.25756800174713135,
+            0.4753420054912567,
+            0.15698200464248657
+          ]
+        }
+      ],
+      "nodes": [
+        {
+          "mesh": 0,
+          "matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "skins": 0,
+      "animation_clips": 0,
+      "source_units": "notdeclared; raw~0.95normalizedextent,NOTauthoredmeters",
+      "source_pivot": "asdownloaded; centeredorigin; nativeownerwillground",
+      "front_axis": "pendingactual3Dinspectionbynativeowner",
+      "vendor_reported_artifact_id": "glb_ff-char-abbie-unicorn-001_1fdeb9cb",
+      "artifact_id_verification": "vendorchatreportedonly; notindependentlyverifiedtaskUUID",
+      "generation_task_id": null,
+      "appearance_approved": false,
+      "native_import": "pending"
+    },
+    {
+      "id": "FF-CHAR-DADDY-FOX-001",
+      "raw_file": "raw\\FF-CHAR-DADDY-FOX-001.glb",
+      "sha256": "c23b1d0a6aeda696b7b3f3a12bdd37a684fd0f63bd495c731a2079713cdbbab2",
+      "bytes": 8700168,
+      "triangles": 15524,
+      "materials": [
+        {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "metallicFactor": 1.0,
+            "roughnessFactor": 1.0,
+            "baseColorTexture": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1,
+              "texCoord": 0
+            }
+          },
+          "normalTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "textures": [
+        {
+          "image_index": 0,
+          "file": "textures\\FF-CHAR-DADDY-FOX-001\\image-0.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "11d6a0412bad16e50835fff785d7acfaaf8324d8ecc1986dc7372131e8162914",
+          "mimeType": "image/jpeg"
+        },
+        {
+          "image_index": 1,
+          "file": "textures\\FF-CHAR-DADDY-FOX-001\\image-1.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "5daceacb3640bd9cf4332e9faf23a1af30e0054e960a9e37e2952c1546ead732",
+          "mimeType": "image/jpeg"
+        },
+        {
+          "image_index": 2,
+          "file": "textures\\FF-CHAR-DADDY-FOX-001\\image-2.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "f19d0713a414ac3f2ff5dc61574ec562abf58e49fbc3d340b9a9fb8d6dac3e1c",
+          "mimeType": "image/jpeg"
+        }
+      ],
+      "bounds_source_xyz": [
+        {
+          "min": [
+            -0.22973600029945374,
+            -0.4753420054912567,
+            -0.1735839992761612
+          ],
+          "max": [
+            0.22973600029945374,
+            0.4748539924621582,
+            0.1735839992761612
+          ]
+        }
+      ],
+      "nodes": [
+        {
+          "mesh": 0,
+          "matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "skins": 0,
+      "animation_clips": 0,
+      "source_units": "notdeclared; raw~0.95normalizedextent,NOTauthoredmeters",
+      "source_pivot": "asdownloaded; centeredorigin; nativeownerwillground",
+      "front_axis": "pendingactual3Dinspectionbynativeowner",
+      "vendor_reported_artifact_id": "glb_ff-char-daddy-fox-001_617acf75",
+      "artifact_id_verification": "vendorchatreportedonly; notindependentlyverifiedtaskUUID",
+      "generation_task_id": null,
+      "appearance_approved": false,
+      "native_import": "pending"
+    },
+    {
+      "id": "FF-CHAR-MOMMY-SNAIL-001",
+      "raw_file": "raw\\FF-CHAR-MOMMY-SNAIL-001.glb",
+      "sha256": "4e7f8d47a9668935bb0de81024ce5cdcd3cdce6b468deb40054d495f48063404",
+      "bytes": 7839292,
+      "triangles": 15437,
+      "materials": [
+        {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "metallicFactor": 1.0,
+            "roughnessFactor": 1.0,
+            "baseColorTexture": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1,
+              "texCoord": 0
+            }
+          },
+          "normalTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "textures": [
+        {
+          "image_index": 0,
+          "file": "textures\\FF-CHAR-MOMMY-SNAIL-001\\image-0.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "7fb994dafd288cf2c9ddbc4a103d2d3a9742dc379d7967378fdbbdcffefaeeb5",
+          "mimeType": "image/jpeg"
+        },
+        {
+          "image_index": 1,
+          "file": "textures\\FF-CHAR-MOMMY-SNAIL-001\\image-1.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "8ac2b31034309be4496bcdd456247886969f77b597243dc60f0ebad0fcac760c",
+          "mimeType": "image/jpeg"
+        },
+        {
+          "image_index": 2,
+          "file": "textures\\FF-CHAR-MOMMY-SNAIL-001\\image-2.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "20390d449e8705d8d4b7978254f7e3cc3feb3770c193b0b45a9015c3b10050fd",
+          "mimeType": "image/jpeg"
+        }
+      ],
+      "bounds_source_xyz": [
+        {
+          "min": [
+            -0.33569300174713135,
+            -0.47582998871803284,
+            -0.4201659858226776
+          ],
+          "max": [
+            0.3342289924621582,
+            0.47631800174713135,
+            0.41723600029945374
+          ]
+        }
+      ],
+      "nodes": [
+        {
+          "mesh": 0,
+          "matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "skins": 0,
+      "animation_clips": 0,
+      "source_units": "notdeclared; raw~0.95normalizedextent,NOTauthoredmeters",
+      "source_pivot": "asdownloaded; centeredorigin; nativeownerwillground",
+      "front_axis": "pendingactual3Dinspectionbynativeowner",
+      "vendor_reported_artifact_id": "glb_ff-char-mommy-snail-001_1869055f",
+      "artifact_id_verification": "vendorchatreportedonly; notindependentlyverifiedtaskUUID",
+      "generation_task_id": null,
+      "appearance_approved": false,
+      "native_import": "pending"
+    },
+    {
+      "id": "FF-KITCHEN-WOODLAND-COUNTER-001",
+      "raw_file": "raw\\FF-KITCHEN-WOODLAND-COUNTER-001.glb",
+      "sha256": "16e0d53ee802efa55ad076cf04f369e1de5bde3243e15616ec75c8282917f648",
+      "bytes": 7498004,
+      "triangles": 15185,
+      "materials": [
+        {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "metallicFactor": 1.0,
+            "roughnessFactor": 1.0,
+            "baseColorTexture": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1,
+              "texCoord": 0
+            }
+          },
+          "normalTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "textures": [
+        {
+          "image_index": 0,
+          "file": "textures\\FF-KITCHEN-WOODLAND-COUNTER-001\\image-0.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "21e83bc85c866d69210c5c61c1d1ad117074e6300305f555e0b0f3bdbf9507a4",
+          "mimeType": "image/jpeg"
+        },
+        {
+          "image_index": 1,
+          "file": "textures\\FF-KITCHEN-WOODLAND-COUNTER-001\\image-1.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "d99532b11ea3e7780aa78d1382112588ca99d9f1931838b5adedc6b9506673a1",
+          "mimeType": "image/jpeg"
+        },
+        {
+          "image_index": 2,
+          "file": "textures\\FF-KITCHEN-WOODLAND-COUNTER-001\\image-2.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "053c23ef5330d88534d603eabfdb85bc6d988d5ec2c90272f019e0c2ccaae24b",
+          "mimeType": "image/jpeg"
+        }
+      ],
+      "bounds_source_xyz": [
+        {
+          "min": [
+            -0.4782710075378418,
+            -0.3347170054912567,
+            -0.2819820046424866
+          ],
+          "max": [
+            0.47582998871803284,
+            0.32788100838661194,
+            0.27709999680519104
+          ]
+        }
+      ],
+      "nodes": [
+        {
+          "mesh": 0,
+          "matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "skins": 0,
+      "animation_clips": 0,
+      "source_units": "notdeclared; raw~0.95normalizedextent,NOTauthoredmeters",
+      "source_pivot": "asdownloaded; centeredorigin; nativeownerwillground",
+      "front_axis": "pendingactual3Dinspectionbynativeowner",
+      "vendor_reported_artifact_id": "glb_ff-kitchen-woodland-counter-001_54c3de7e",
+      "artifact_id_verification": "vendorchatreportedonly; notindependentlyverifiedtaskUUID",
+      "generation_task_id": null,
+      "appearance_approved": false,
+      "native_import": "pending"
+    }
+  ],
+  "release_id": "FOREST-FAIRY-ARTIST-20261015-B01",
+  "files": [
+    {
+      "path": "abbie-actual-mesh-proof.png",
+      "bytes": 35747,
+      "sha256": "3100adc8098bc114305abcc145bacb0b05720777846481e7956ca5fd2647d0a9"
+    },
+    {
+      "path": "FF-CHAR-ABBIE-UNICORN-001-reference.webp",
+      "bytes": 14596,
+      "sha256": "492afc6c3868b548f5cc61a8c82e0d858b4a6d7860136a333848d122af2f125e"
+    },
+    {
+      "path": "FF-CHAR-DADDY-FOX-001-reference.webp",
+      "bytes": 17640,
+      "sha256": "f014af5373c9dc89b68bdd95010d350c7229e5ff7ebf64f55587abc68fe4203e"
+    },
+    {
+      "path": "FF-CHAR-MOMMY-SNAIL-001-reference.webp",
+      "bytes": 23544,
+      "sha256": "198e82e052b6441f4a60a341a051258ac73bc865a6c2f7d02a26f59d27d7c550"
+    },
+    {
+      "path": "FF-KITCHEN-WOODLAND-COUNTER-001-reference.webp",
+      "bytes": 32186,
+      "sha256": "53bdc2976c55265f5c4630a9f6e233485ff16c35f9fe4b6c59626e4013d349bf"
+    },
+    {
+      "path": "raw\\FF-CHAR-ABBIE-UNICORN-001.glb",
+      "bytes": 8466496,
+      "sha256": "1f23981266bc057acb0695f96bc5a7de1f7763f4cce34ba1e232f607eeb9b338"
+    },
+    {
+      "path": "raw\\FF-CHAR-DADDY-FOX-001.glb",
+      "bytes": 8700168,
+      "sha256": "c23b1d0a6aeda696b7b3f3a12bdd37a684fd0f63bd495c731a2079713cdbbab2"
+    },
+    {
+      "path": "raw\\FF-CHAR-MOMMY-SNAIL-001.glb",
+      "bytes": 7839292,
+      "sha256": "4e7f8d47a9668935bb0de81024ce5cdcd3cdce6b468deb40054d495f48063404"
+    },
+    {
+      "path": "raw\\FF-KITCHEN-WOODLAND-COUNTER-001.glb",
+      "bytes": 7498004,
+      "sha256": "16e0d53ee802efa55ad076cf04f369e1de5bde3243e15616ec75c8282917f648"
+    },
+    {
+      "path": "textures\\FF-CHAR-ABBIE-UNICORN-001\\image-0.jpg",
+      "bytes": 3644483,
+      "sha256": "1ffe2b48320478e96bfbf3c0013eb8e061ab4b8169c78c0c4fb361510c263302"
+    },
+    {
+      "path": "textures\\FF-CHAR-ABBIE-UNICORN-001\\image-1.jpg",
+      "bytes": 1635251,
+      "sha256": "991fc888f24145f24ba261e8cd5a2587e70b571190ed1a23a386f8c808474369"
+    },
+    {
+      "path": "textures\\FF-CHAR-ABBIE-UNICORN-001\\image-2.jpg",
+      "bytes": 2605068,
+      "sha256": "c0e9f8bf69cf14aae5d7b456efe62c2f04331a9c62b9d79745217572faf586cd"
+    },
+    {
+      "path": "textures\\FF-CHAR-DADDY-FOX-001\\image-0.jpg",
+      "bytes": 3757093,
+      "sha256": "11d6a0412bad16e50835fff785d7acfaaf8324d8ecc1986dc7372131e8162914"
+    },
+    {
+      "path": "textures\\FF-CHAR-DADDY-FOX-001\\image-1.jpg",
+      "bytes": 1616507,
+      "sha256": "5daceacb3640bd9cf4332e9faf23a1af30e0054e960a9e37e2952c1546ead732"
+    },
+    {
+      "path": "textures\\FF-CHAR-DADDY-FOX-001\\image-2.jpg",
+      "bytes": 2589791,
+      "sha256": "f19d0713a414ac3f2ff5dc61574ec562abf58e49fbc3d340b9a9fb8d6dac3e1c"
+    },
+    {
+      "path": "textures\\FF-CHAR-MOMMY-SNAIL-001\\image-0.jpg",
+      "bytes": 3333667,
+      "sha256": "7fb994dafd288cf2c9ddbc4a103d2d3a9742dc379d7967378fdbbdcffefaeeb5"
+    },
+    {
+      "path": "textures\\FF-CHAR-MOMMY-SNAIL-001\\image-1.jpg",
+      "bytes": 1597961,
+      "sha256": "8ac2b31034309be4496bcdd456247886969f77b597243dc60f0ebad0fcac760c"
+    },
+    {
+      "path": "textures\\FF-CHAR-MOMMY-SNAIL-001\\image-2.jpg",
+      "bytes": 2283964,
+      "sha256": "20390d449e8705d8d4b7978254f7e3cc3feb3770c193b0b45a9015c3b10050fd"
+    },
+    {
+      "path": "textures\\FF-KITCHEN-WOODLAND-COUNTER-001\\image-0.jpg",
+      "bytes": 3051484,
+      "sha256": "21e83bc85c866d69210c5c61c1d1ad117074e6300305f555e0b0f3bdbf9507a4"
+    },
+    {
+      "path": "textures\\FF-KITCHEN-WOODLAND-COUNTER-001\\image-1.jpg",
+      "bytes": 1686124,
+      "sha256": "d99532b11ea3e7780aa78d1382112588ca99d9f1931838b5adedc6b9506673a1"
+    },
+    {
+      "path": "textures\\FF-KITCHEN-WOODLAND-COUNTER-001\\image-2.jpg",
+      "bytes": 2056041,
+      "sha256": "053c23ef5330d88534d603eabfdb85bc6d988d5ec2c90272f019e0c2ccaae24b"
+    }
+  ]
+}

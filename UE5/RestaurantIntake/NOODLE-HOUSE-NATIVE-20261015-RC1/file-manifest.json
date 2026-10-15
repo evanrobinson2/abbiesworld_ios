@@ -1,0 +1,1054 @@
+{
+  "files": [
+    {
+      "path": "ArtistProvenance/FOREST-FAIRY-ARTIST-20261015-B01/handoff.json",
+      "bytes": 17812,
+      "sha256": "3f207f92b5b4507040eb638f055246e12cdc3a20a675c60b1177d63b2df2e55f"
+    },
+    {
+      "path": "ArtistProvenance/NOODLE-HOUSE-20261015-B02/handoff.json",
+      "bytes": 18413,
+      "sha256": "97e8ffb2b5b4c8293655f98ec8f06bdc5cd6c684dfc5422e00575b6499025289"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_Artist_BrothPot.uasset",
+      "bytes": 6112,
+      "sha256": "ab1665c12d3f5a06bf6a845202b5f01ec527879a311d3c0f28b2787d44a335e6"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_Artist_ChefAbbie.uasset",
+      "bytes": 6119,
+      "sha256": "62f65f70a3a3e945ab169dae3b07bb2c7b863083c5ded6b5f7ef364d5a6cbfda"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_Artist_ChefDaddy.uasset",
+      "bytes": 6119,
+      "sha256": "8ccaeb24cbb861f9ea5dda7c4cf7a2606a2ce1f5010494b7b1eaeec9e2ebacc8"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_Artist_ChefMommy.uasset",
+      "bytes": 6119,
+      "sha256": "5875ff64b2313f0f799c673c98453165344e215a47942128196f74086262a78f"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_Artist_Counter.uasset",
+      "bytes": 6105,
+      "sha256": "598f183a221fa81b766770c7810f6dd12fd48b0f06b580438e0a5b259026d32b"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_Artist_Garnish.uasset",
+      "bytes": 6105,
+      "sha256": "a7eb12a706c0e51c75ad857ed6cd96f84396f5550f0aab28465972a21d73e848"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_Artist_NoodleBowl.uasset",
+      "bytes": 6126,
+      "sha256": "3296c0a8c314742f9ad81c40f92556f7427e70400642695a38a8efeffd0963b3"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_Artist_NoodleHouse.uasset",
+      "bytes": 6133,
+      "sha256": "4e35e98486afb70051d83e0e22cc52d88eb97d40f0d75125ae189d78d3604c72"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_BrothSurface.uasset",
+      "bytes": 4847,
+      "sha256": "337c182710122a1db2d43077b2c400465ba7700adbb67cfc01f767f6ec73bfc4"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_Artist_Material_0.uasset",
+      "bytes": 5640,
+      "sha256": "e1c6f70ce41248f0d8cd4f9fc78651a3260914bfc20c1568d90a7f3688f5bb13"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_Artist_Material_0_001.uasset",
+      "bytes": 5676,
+      "sha256": "936ef21846b246959a9b300c74dc74719207967ec7e425994df9711a4082db87"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_Artist_Material_0_002.uasset",
+      "bytes": 5676,
+      "sha256": "761b3b6197c5443b4a6574ab01dfb5e33afe0318562c0816111bf2c432e7f9a6"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_Artist_Material_0_003.uasset",
+      "bytes": 5676,
+      "sha256": "6dad713e4d68b136127c2865b1e042ee4fb8c03dfb955fa606fa62b6e8cf0558"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_black.uasset",
+      "bytes": 5472,
+      "sha256": "462cf3cfde21f50e17172a864e79be8e7900471b0eed281bb00267c31c4f7036"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_blue.uasset",
+      "bytes": 5467,
+      "sha256": "1901a5a3d84974e23f6d7ddb49553d70b7cf5db438762690423d9a6ab4bfa453"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_brass.uasset",
+      "bytes": 5501,
+      "sha256": "169247bfd0f5d6f6f673e228642be64c68718695ced25b9c89a78e249ff150fd"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_bread.uasset",
+      "bytes": 5472,
+      "sha256": "cc0df0c0bc97b5a392bec4cb1fb75787e4844b34cc63c38297baf33fb1696829"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_breadlight.uasset",
+      "bytes": 5497,
+      "sha256": "bc975abb0a539e7d51ef07f548559586432e4f772b221ed3f71ded5d0629a618"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_charcoal.uasset",
+      "bytes": 5487,
+      "sha256": "6336d134d3a2c507773c70e8d16ff332d18b867a83535e69c8b4c3a1b188eefe"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_cheese.uasset",
+      "bytes": 5477,
+      "sha256": "74880969497711fd0d946f2bf01227fae109e15ff670e97f06ee7104ac96517f"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_cream.uasset",
+      "bytes": 5472,
+      "sha256": "8a407cbf3a40686e53eff8769668c7039d8894f124c1829cb27eb082053d6f6a"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_foxcream.uasset",
+      "bytes": 5487,
+      "sha256": "fafce34f7c5ec3169be05881f820abadf6efbdcda12b35251fb2670befd270b1"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_glitter.uasset",
+      "bytes": 5511,
+      "sha256": "5d1cbeaa7bfcbd3d8ef849274421e5c0b8412aee00a08213c06b4727d5279ce0"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_glow.uasset",
+      "bytes": 5467,
+      "sha256": "3c9b7c498dd6642ee18a1f5ce47b99b1e4f87fd8dcd586a05b857176d34442a9"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_gold.uasset",
+      "bytes": 5467,
+      "sha256": "a6026a87481cc8d8b2c8a683f22eb4cf84a2a8cbb55b3d21c1053c2753a78149"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_lavender.uasset",
+      "bytes": 5487,
+      "sha256": "d7583f1bbc5d12e682562932afeba1c0fe368601e3f4b386ffe2a7a95905f086"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_leaf.uasset",
+      "bytes": 5467,
+      "sha256": "b21201bca3fa651d1fc8f848920946d1c3268ac77bc9d266eca65e3d3a99d557"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_lettuce.uasset",
+      "bytes": 5482,
+      "sha256": "1507842ab17ad88983d756d70dae16efe564596fe2f48ab07bce9e0ed50df2d0"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_moss.uasset",
+      "bytes": 5467,
+      "sha256": "019b3028d75a1ea9d350645a3c974bae69a34a8c112e4e923405754e25372697"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_nose.uasset",
+      "bytes": 5467,
+      "sha256": "1e40d20b9fe531fae9a7faaf478d2c140e62f6a3527d06c5432c1923a9450432"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_oak.uasset",
+      "bytes": 5462,
+      "sha256": "8db167df99ea645feb250869b3985626df12a0cb88b2956f3860dfd481bd31cc"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_orange.uasset",
+      "bytes": 5477,
+      "sha256": "3459d1f0e28ffa7d3019df0c32022bb69e512fa6702449c5ad2ebc5fe1d69fe2"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_patty.uasset",
+      "bytes": 5472,
+      "sha256": "77c8c57807fc3820226577241a353b91677cb42398ef4db1e458afe3d40c877a"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_pink.uasset",
+      "bytes": 5467,
+      "sha256": "96447887ed82bf64302e61ee51b124443fc464984d9730bc811b6f0b367697d3"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_rainblue.uasset",
+      "bytes": 5487,
+      "sha256": "c5df47dcc8a5c9b0e4e253f45a01a95206a524a5d78eaf3f927f0bc4a6189d3c"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_raingreen.uasset",
+      "bytes": 5492,
+      "sha256": "67aac0ff696e101c39714c8f0be08f6b5d42f6962de29aac5930c13e61e13c25"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_rainorange.uasset",
+      "bytes": 5497,
+      "sha256": "1af5185c306363ebd2b839ea3ff2c93bb0caf775cb9611f12bb22239d263fd92"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_rainpurple.uasset",
+      "bytes": 5497,
+      "sha256": "a0df2dcf47874b8d72ddf3dc94955613981fc2e3c5b5dec4cc92c3fd038cfba3"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_rainyellow.uasset",
+      "bytes": 5497,
+      "sha256": "6dbbb62d0efa46da9c13357c9a3ade28762c88364e0f780595559b91422de589"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_raw.uasset",
+      "bytes": 5462,
+      "sha256": "02377ab120ed2b49df8f6fd946a28c246d35d30b52bde2f0e5be61f7d1772066"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_red.uasset",
+      "bytes": 5462,
+      "sha256": "b65e66af9067e45a75eefca910a3351fbf0c5730d033bfe425a6e964e670a666"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_skin.uasset",
+      "bytes": 5467,
+      "sha256": "e88ccc1f28945164a7b9890e3d9838ebc520fd414234cc348322685acf777cc9"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_skin2.uasset",
+      "bytes": 5472,
+      "sha256": "998982a253b59fc517991719625f0b4d87d0e99a164abec96a5c4c859e1dcc21"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_teal.uasset",
+      "bytes": 5467,
+      "sha256": "67058465fa27a0d4f1ff48d06987a555c169888ce94456b900140b320b33ab25"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_tomato.uasset",
+      "bytes": 5477,
+      "sha256": "bf1a399d6546ce5e05e91fd1a4611cc62abd624d7fd8ce47fcd60a3710e93879"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_white.uasset",
+      "bytes": 5472,
+      "sha256": "a75ab2040cdc3d4b4e0c857de90189a1a6e90678847e14b9e21f8bf18e11bee6"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_wood.uasset",
+      "bytes": 5467,
+      "sha256": "fdc04fbd739b530d851252ee083b04c8b985b3744fd677b9383634b63db4e840"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_wooddark.uasset",
+      "bytes": 5487,
+      "sha256": "edfe6d32d8a637cb3b2a00cfbc337166e279c931836bbd96284ae4e02bbde2ba"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/M_FF_woodlight.uasset",
+      "bytes": 5492,
+      "sha256": "d1e369bf466641b32ac266936326e6f6c9ed69cb38d860e9a219624012f4819e"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/S_Chop.uasset",
+      "bytes": 4766,
+      "sha256": "aca7cf6aad19c954a2df4647ffa7fbffde13e3dc6069b6ba11f6bc0e62c235c0"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/S_Finish.uasset",
+      "bytes": 20394,
+      "sha256": "83027de872fba01441d4bb167e97eefab296215d7067c1d64de25743b52971e4"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/S_Place.uasset",
+      "bytes": 5022,
+      "sha256": "f84e48e962daba3e944e9f9619a028fd5a75f38bd8d117cb09e008d27573dc2e"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/S_Serve.uasset",
+      "bytes": 13061,
+      "sha256": "a4cfc306b1e40cb8f74929a8f3fac5a8dac5b3171c0366d980c8f1398cc23929"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Bin.uasset",
+      "bytes": 32412,
+      "sha256": "73a9ac5ea647007742ed509dc9ee63b80055f0b42d23bad04cf1ddbac643f05f"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Board.uasset",
+      "bytes": 29419,
+      "sha256": "7ccad02aec5fd00655dec9c4b323179cf3b8a52544b051fbb1a050c08c9f3ff9"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_BrothPot.uasset",
+      "bytes": 814228,
+      "sha256": "9a4d78d5c8131e97494a701e793d41a4dbaa27680b82d5a4aaa443abae498273"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Bun.uasset",
+      "bytes": 48742,
+      "sha256": "e554d7350dc1c18b561e38dc49ffbe7a1d973dea71ec7a93461960fc84f1ffc3"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_BunBase.uasset",
+      "bytes": 14318,
+      "sha256": "7db0ded19bd6606ec852eba16240d089985fd269b8d7fb43d228e19dbebd8936"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_BurgerBun.uasset",
+      "bytes": 31106,
+      "sha256": "3a5de4e8f9988e4d2c7dbc0bfd0bdc38b7a6796771089dbf505cbb613d3a0d69"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_BurgerCheese.uasset",
+      "bytes": 88860,
+      "sha256": "b7b2de536009de63a3ee0dc099ad2eb55cccdaa20aa7bb3539a8d95e76db38ce"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_BurgerClassic.uasset",
+      "bytes": 81525,
+      "sha256": "ee358aab6ae03c70d7f2ba91c6d228aa93ad2caa2fdbc4236ffa404d95ba0624"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_BurgerDeluxe.uasset",
+      "bytes": 94345,
+      "sha256": "5893362323eb03084df13a2a96c69a85685d3fa255236dea3e6860a79b07fa70"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_BurgerTomato.uasset",
+      "bytes": 90590,
+      "sha256": "f475876db87ea0f33a708c538fcf022764383cffc46b87a4e8cbdbeda78eb9cb"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Cheese.uasset",
+      "bytes": 13859,
+      "sha256": "b1c7eab2ec4c2da94244794f7b434dc7a6b26ff5fadc183e36b1e7a5c9564d56"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_ChefAbbie.uasset",
+      "bytes": 771098,
+      "sha256": "825d7a40aae41e3a28a078938117d1efaa585154c33283f97b51c43010ec10b2"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_ChefDaddy.uasset",
+      "bytes": 975352,
+      "sha256": "8bec08ce29ef9004b6a147829b89a8849fb68add1943b3f35da1ddcb679da53a"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_ChefMommy.uasset",
+      "bytes": 802284,
+      "sha256": "a7c801ceb3f3e54c961150b21335520408915d4ba027c56048fe84989031d260"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Cooker.uasset",
+      "bytes": 76541,
+      "sha256": "c994ab90c7691a2e85d324de99e50c810122803f68f3116d6012ee0ba08978d7"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Counter.uasset",
+      "bytes": 828132,
+      "sha256": "c90b7203e84a7f2b034d5df788c015fb948b754ecc2a80083c0ea867cacc506e"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Crate.uasset",
+      "bytes": 48107,
+      "sha256": "fd5f2142fdf23859bf84f1f88f846e0151458eb7b97f6a7b5a5764580bcb9824"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_DirtyPlate.uasset",
+      "bytes": 42260,
+      "sha256": "0b8be2556dcdcd4ba23e9f414a98116ed57253ced5df0123d579e64b5f68c581"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Floor.uasset",
+      "bytes": 23635,
+      "sha256": "9f26f2234ce525187b45d3aad53558a1af7925aca234ff391d6fff15b017a87d"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_ForestFlower.uasset",
+      "bytes": 56499,
+      "sha256": "14712ab98599b83567900938ce4abdb6552e2f55d4de5e2a8fb7ab7e1f0655d5"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_ForestMushroom.uasset",
+      "bytes": 66413,
+      "sha256": "8d4647abc14d2d2461be4de11ad0a7416739da2194969b15ab779326badb7c1f"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_ForestRock.uasset",
+      "bytes": 72539,
+      "sha256": "db7bad2315c01829f63042576a2b411abb6cce79326a11553fee9c8510ce3cb6"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_ForestTree.uasset",
+      "bytes": 146332,
+      "sha256": "700ec72536c0076689dc65ece900bac2862dc0957c8aabec58036c12db204fbc"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_GardenBase.uasset",
+      "bytes": 17920,
+      "sha256": "7072110f0572d2fbed10707bdf3998edbb3622a645394b8bd4c109c2cb1ad855"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Garnish.uasset",
+      "bytes": 859812,
+      "sha256": "2f9c34db8544e1ff22a1d362d1f4d8e34ec6fc91bdca6080984e226de496bd15"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Lettuce.uasset",
+      "bytes": 47204,
+      "sha256": "79fc8b967b29940a6ae6b519a6599c09c61ab2f3e3f577302db565955406f18f"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_LettuceChopped.uasset",
+      "bytes": 34677,
+      "sha256": "7921bc4a1b4724834227c1696d26a088ad5a9ad86cd3f3e04e737e2350db49f4"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_NoodleBowl.uasset",
+      "bytes": 805462,
+      "sha256": "970d5dfc26f31fb87906d36690e3b476f0f8d32ca3e03ba182d9012e0a5df516"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_NoodleHouse.uasset",
+      "bytes": 883924,
+      "sha256": "e47a4eccf6b8b327e08f684ff36244ad5aba7202e085701d2ac6e4bef1bbf6ea"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Pass.uasset",
+      "bytes": 61671,
+      "sha256": "2b1f76e05d46e04b2db0fd0e146fff123c28ac8ee3f5e117ec1b3158736c78cd"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Patty.uasset",
+      "bytes": 14167,
+      "sha256": "763cef37bdaa9b8aa1a3573911f8c84a92a356db0f4fba60a603e9425d9088d7"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_PattyBurnt.uasset",
+      "bytes": 23181,
+      "sha256": "bb9860ae0b299e59a02bab7996073e3135d2720c8ab79a1c04c9dfd2ba35092b"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_PattyCooked.uasset",
+      "bytes": 23181,
+      "sha256": "53948f98dace175888c26f77b35d95e15d4d85def9ceb8b32bfff29b7f4859d3"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Plate.uasset",
+      "bytes": 27802,
+      "sha256": "657493a08e69ea8ae293c701dd86ad7efe7e9ef4ec213a0cb4920d64829f377c"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Pot.uasset",
+      "bytes": 40768,
+      "sha256": "df10a48a890282dd60d7cb809d0771a05120d559b30fe74bb78703ed476d4e53"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Sink.uasset",
+      "bytes": 20698,
+      "sha256": "874d0c871e48060322c76780b7829bf0fcf3297db970528c66d2047be41fc04d"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_Tomato.uasset",
+      "bytes": 42445,
+      "sha256": "70f3ce27e713e6379e5928617dd67514dd38b52a940385a760ee7506c3cf881b"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/SM_TomatoChopped.uasset",
+      "bytes": 21608,
+      "sha256": "0eb20065046ac60ff9abc0b9fde694115afbe13a4f4adcd56a4be7446bab5a5e"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_AmbientCube.uasset",
+      "bytes": 3744,
+      "sha256": "783d68b77dca507f2faef991795ad1b389a34dcd0e9152aebb5f24e2a7f92531"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_BrothPot_0.uasset",
+      "bytes": 6214336,
+      "sha256": "2e672e7871c345fd801a27e8205f2b27c37e5bfffb042a8e24b3b47b6814a0b7"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_BrothPot_1.uasset",
+      "bytes": 3260769,
+      "sha256": "e191b8df2886733af9465ac8872fb9939f2726a0a5b0190b3a8d3fdb555838a3"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_BrothPot_2.uasset",
+      "bytes": 3305117,
+      "sha256": "1aef531620eb0841ee07750fab43416df397ad92550099446eacd77ac3dbadc0"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefAbbie_0.uasset",
+      "bytes": 6060532,
+      "sha256": "79d0c6f7551c23951cb7125109537fc6201afe294daefa6154430a41841dd3d1"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefAbbie_1.uasset",
+      "bytes": 2563160,
+      "sha256": "4f144689327c200383c687f10dcc1176207f7b0a62e85020e9dbb02c42045be6"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefAbbie_2.uasset",
+      "bytes": 4339120,
+      "sha256": "68bed3e6b00ad30d211144980c9572e5b91ec2b4ac98c2e2aba103a721022a38"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefDaddy_0.uasset",
+      "bytes": 6291825,
+      "sha256": "b801bf634ea39e39e0b0923acd15e733f4dc66995bd7d9bb8558aa50f0f34ed9"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefDaddy_1.uasset",
+      "bytes": 2390333,
+      "sha256": "889db896ad0e632ae510682ec347b3135bc4ff9fc2df6431249c92fc3ca2cff9"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefDaddy_2.uasset",
+      "bytes": 4205900,
+      "sha256": "291e1f14a4124b4909bb06ef124768444509943023c98458112776f271c3c752"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefMommy_0.uasset",
+      "bytes": 5915658,
+      "sha256": "2de1e5d1b467c1ee640914869c5fd0f099217d8c056ae11120f2b8be50657f3f"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefMommy_1.uasset",
+      "bytes": 2302035,
+      "sha256": "1d6c1f875bbe6f839de2daa1bd07521cc8f8a477f4eac2ec5f4c07bc3333a5f8"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_ChefMommy_2.uasset",
+      "bytes": 3458130,
+      "sha256": "9ee2385d8edff96728469e5d8e9ed6ed729b383c77d322d0dd751e3d16440328"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_Counter_0.uasset",
+      "bytes": 4676289,
+      "sha256": "15639090d1d2c47d79cdc1b221df49c26a1f8b749fb82cda8a574ac94a894a70"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_Counter_1.uasset",
+      "bytes": 2141905,
+      "sha256": "ad27fdfed51f6a2149b6dadf817e06a43bb9f2d9bbe9f9be917cbf847318ca84"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_Counter_2.uasset",
+      "bytes": 2473495,
+      "sha256": "e9cfed04967b462ceb37efaf08d671923c2c806aa95aec709ef1b4a50cad7fd5"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_Garnish_0.uasset",
+      "bytes": 6375549,
+      "sha256": "f99212d98e11241527db13224c4dfa0388b3a636a03ec079414966d6ca2cf33a"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_Garnish_1.uasset",
+      "bytes": 2758888,
+      "sha256": "884539b6557f469e7eac94ddd81cb06eabb02f34b32338bfafcbc661815d92da"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_Garnish_2.uasset",
+      "bytes": 4021176,
+      "sha256": "73854457701db94826fc6eaee83a57bc03776d97162893e115af9951fea7fd1a"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_NoodleBowl_0.uasset",
+      "bytes": 6197608,
+      "sha256": "865e67152578e509e1056c2d45dd7fb9b17942cf2c9eecca077c30fa46826769"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_NoodleBowl_1.uasset",
+      "bytes": 2496134,
+      "sha256": "47047a3759ccf2edecc48e31d55fa265c015a540240836d095bdffaa3caf7847"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_NoodleBowl_2.uasset",
+      "bytes": 3296253,
+      "sha256": "8910e8ec4f6847ae7f48a67a0d687f7b40e0759fc0d223ec7544db62f1515221"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_NoodleHouse_0.uasset",
+      "bytes": 6835402,
+      "sha256": "1cf16ea742d9c7fc476682011b88b27bb8f23f7f21652dd826031864090b80ce"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_NoodleHouse_1.uasset",
+      "bytes": 4222925,
+      "sha256": "026a77045e385a4a4b939a077e0c4312ee1345572c157a07912914bfd6ba0470"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_Artist_NoodleHouse_2.uasset",
+      "bytes": 4434034,
+      "sha256": "30141d17efa02ee2ede83968c9e1f2828f69aee0873462aba35deee42fcdaa3e"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_FF_Artist_Material_0.uasset",
+      "bytes": 1272518,
+      "sha256": "a58be5cd1fdaadfe1663fb4bbfec8102084530aceb6f88c3aca96c76485eae50"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_FF_Artist_Material_0_001.uasset",
+      "bytes": 1350518,
+      "sha256": "abf36e0c9aec00980113a6e49b53fdaab0dd023db83836ef93c1583b88e0e7a0"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_FF_Artist_Material_0_002.uasset",
+      "bytes": 1258481,
+      "sha256": "201082058e88bf28fb7ee3284e46863d1e7db227ec819ba8cc1ef8ae337516cb"
+    },
+    {
+      "path": "Content/AbbiesRestaurant/T_FF_Artist_Material_0_003.uasset",
+      "bytes": 975579,
+      "sha256": "2107a0c44d4a148c8f64f5785482edce666756d56b40c36b9e8c158cb0399766"
+    },
+    {
+      "path": "encounter-session-contract.md",
+      "bytes": 4098,
+      "sha256": "6e30201a2e8786d4582bb64008a7de512077193165707b97709bcb60b73e473c"
+    },
+    {
+      "path": "evidence/Abbie-native-facing-detail.png",
+      "bytes": 125115,
+      "sha256": "e72d650fb6a02974c9b50bbbccb8a480ed46a1e16c7c4d86bb22d9c0a4fbafd3"
+    },
+    {
+      "path": "evidence/CalibrationDown.png",
+      "bytes": 1002941,
+      "sha256": "6d27c77b63c496adbc1f126db190a3c4db2aadd0c320a9008dc220fd402f1e77"
+    },
+    {
+      "path": "evidence/CalibrationLeft.png",
+      "bytes": 991068,
+      "sha256": "5024fe74b01679da38177ed54e17fcfc6e53b75495557ea515fbd5113f506c82"
+    },
+    {
+      "path": "evidence/CalibrationRight.png",
+      "bytes": 979067,
+      "sha256": "ff98e4c430df3b9380f7f10bd76c6e21ebaa2cec10812092b2db1d80f3083997"
+    },
+    {
+      "path": "evidence/CalibrationUp.png",
+      "bytes": 987775,
+      "sha256": "8e787581f6cd15e61dd652b0f4a315aeeb796e6d90f23216f7f29068a3bf7016"
+    },
+    {
+      "path": "evidence/EncounterGateResult.json",
+      "bytes": 94,
+      "sha256": "aab327647b5858a8de973f8df208cf875bd060e6d8c85caaf8f39ac724260c7e"
+    },
+    {
+      "path": "evidence/NetworkClient.json",
+      "bytes": 119,
+      "sha256": "58eb2b038571f1f4326f7074a42e9dd71a1e27314bc421c64b38d4fb5af1ca2f"
+    },
+    {
+      "path": "evidence/NetworkHost.json",
+      "bytes": 119,
+      "sha256": "8639cf6893fca04e413aba26cfc83a48592afc73e0539f7ed01f838c9aaa0eff"
+    },
+    {
+      "path": "evidence/PackagedCalibration.json",
+      "bytes": 484,
+      "sha256": "887ff90755784ac8330ea3d7416ae4bd6d1242c331cb42cdbc46fafce1875d70"
+    },
+    {
+      "path": "evidence/PackagedRemoteCookClient.json",
+      "bytes": 121,
+      "sha256": "d271eaa8a734fffb04208585b87d0558e70ad6998b6c56e2f314bb0408c4c4d4"
+    },
+    {
+      "path": "evidence/PackagedRemoteCookHost.json",
+      "bytes": 120,
+      "sha256": "4c50cd604078b15d91b605bff59119e25d311804014fb4f96311047024816ef5"
+    },
+    {
+      "path": "evidence/PackagedService.json",
+      "bytes": 76,
+      "sha256": "a3007d11b289e8ed822c1bfd73d3aa0e90e063efa0b278ec960b65aef89b4311"
+    },
+    {
+      "path": "evidence/RemoteCookClient.json",
+      "bytes": 121,
+      "sha256": "9f440d90bdc91ec7acdb770b57625d228d8c09ff9e32b23e23e5f9022621aa11"
+    },
+    {
+      "path": "evidence/RemoteCookHost.json",
+      "bytes": 120,
+      "sha256": "11af4c81e0ba3040179975b1dde04faf0a075fa9339b6868d3965af0a6b95057"
+    },
+    {
+      "path": "HANDOFF.md",
+      "bytes": 1202,
+      "sha256": "39a62e5ccda7b733f70c3c557ff835b9aee1ef9345f2826f0b9f991d4efaced6"
+    },
+    {
+      "path": "material-repair.json",
+      "bytes": 473,
+      "sha256": "f6989a55fc09b85869d6f5dca07e270862935e42c644753953fbc2bb2d9fb015"
+    },
+    {
+      "path": "OverlandAdapter/AmberGameMode.cpp",
+      "bytes": 26890,
+      "sha256": "0d2227431b6ccee019384b537f71f22f9bf7ef86b113159067ee4f0db65729fb"
+    },
+    {
+      "path": "OverlandAdapter/AmberGameMode.h",
+      "bytes": 3533,
+      "sha256": "3ede4abf427fb8de546dd6b00ffc68695b0cfbffee2d6876f9c6ff26f4a37203"
+    },
+    {
+      "path": "OverlandAdapter/landing-hook.patch",
+      "bytes": 16037,
+      "sha256": "79553e6a522222256a4222312f0ec359cb8a10278bfb970a9a5daae076dc7a55"
+    },
+    {
+      "path": "OverlandAdapter/README.md",
+      "bytes": 825,
+      "sha256": "0f84d1be9ca5def712322a3d6607efc239186b5a9d7694eb00c7382cfa11c9a0"
+    },
+    {
+      "path": "OverlandAdapter/source-baseline.json",
+      "bytes": 413,
+      "sha256": "3376c4d0fd870c450bf4ee2240406127a69f34ece525ad62b73698e6bc9bc10f"
+    },
+    {
+      "path": "README.md",
+      "bytes": 4618,
+      "sha256": "306182cbb92c5e64f0507f4888d0c69df6a7e273c53fc29947e71f509f27f227"
+    },
+    {
+      "path": "Source/AbbiesWorld/AbbiesWorld.Build.cs",
+      "bytes": 425,
+      "sha256": "2e42ac114bb1830359956cfcfad70cbf6708638c3e59be48985cea979fcab0d6"
+    },
+    {
+      "path": "Source/AbbiesWorld/AWRestaurantEncounter.h",
+      "bytes": 3960,
+      "sha256": "16aa266bd74f0b2fc19d44c1e6779af469dd9b6c9378b27abf236417a9458c8f"
+    },
+    {
+      "path": "Source/AbbiesWorld/AWRestaurantMode.cpp",
+      "bytes": 57640,
+      "sha256": "07ef251e354a376b9b50ddd1b3923818d93f5a65b79c7968fea7260aea24a87a"
+    },
+    {
+      "path": "Source/AbbiesWorld/AWRestaurantMode.h",
+      "bytes": 5467,
+      "sha256": "f4497358c465cf6a2574e4a870c912f9738380dcbc57f4ae2bdaae9f8c0c798c"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-exterior/derived-manifest.json",
+      "bytes": 790,
+      "sha256": "c51b7f5cb5730b6e05abd085f2e4e0282f65603d2735270dc4952264060a85d8"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-exterior/NoodleHouse-model.png",
+      "bytes": 513096,
+      "sha256": "36034a10e6f1931a13b207edf4e202024af77331bc0f6a8fe52405d9a8d03d39"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-exterior/SM_NoodleHouse.fbx",
+      "bytes": 871468,
+      "sha256": "6503a60992eef87995879e942c0f9d05430b1b43f40183d5be26053f07011290"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-exterior/T_Artist_NoodleHouse_0.png",
+      "bytes": 781199,
+      "sha256": "fcf394f24299e7982b23c8c8ec6560f626850ba2b21821d6fcbd64275c714b5b"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-exterior/T_Artist_NoodleHouse_1.png",
+      "bytes": 342154,
+      "sha256": "8b69e34caef7da169545a4dfbec99c4f9512221629195d65e21abf7e8e79e8f3"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-exterior/T_Artist_NoodleHouse_2.png",
+      "bytes": 357777,
+      "sha256": "1692e049d87bdd7c651146248a8ecc5a4a1401704a3cc630c2345b0b6e09bf93"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-exterior/unreal-import-results.json",
+      "bytes": 310,
+      "sha256": "09b6440d9d8282d93f7258c618cbd36c0d91f12fb0486729878692b1f48f6317"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/broth-surface-repair.json",
+      "bytes": 255,
+      "sha256": "d1801bfdc9dbaa60066924898a4ba08a55ed831281357fde2101d5af76becab1"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/BrothPot-model.png",
+      "bytes": 525044,
+      "sha256": "5ded744ea53a0bba35ab7c02828993aa9e907d6d6bf7cac4a2e158da154b03f6"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/derived-manifest.json",
+      "bytes": 2319,
+      "sha256": "dac1a2db330e6d3a7e2d45969fa1c18720f132db09d1b0804f6492e5609a0fae"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/Garnish-model.png",
+      "bytes": 499473,
+      "sha256": "26bb7849a660b9112e0cfd1fc4d26f1195b489f9471bd081b9a7643aab509d84"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/NoodleBowl-model.png",
+      "bytes": 547797,
+      "sha256": "2c7dda26d34ce5a60e1b4733c156f6c5d7605d390656195cdd9c1e5a5452d7dc"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/SM_BrothPot.fbx",
+      "bytes": 728476,
+      "sha256": "80e56deeba6c4277ea3ea87147908a79622260e5b9be0a3346f6bcc0b37409ab"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/SM_Garnish.fbx",
+      "bytes": 766316,
+      "sha256": "55332332c2c11eedfdfc227970297432569c90782d956050a6dd4ad90f4b357c"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/SM_NoodleBowl.fbx",
+      "bytes": 688828,
+      "sha256": "d6db6afe662b68be71f53dfb1754411e1954025b1dc70edf6e7a5bb74e8b92e8"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_BrothPot_0.png",
+      "bytes": 601430,
+      "sha256": "e7ae741f77ced5e762ece58236513359fef4837ebdaef9a7df13ae19f93febee"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_BrothPot_1.png",
+      "bytes": 226538,
+      "sha256": "8ac151785785a0ea66a638a5672f6c63dbd79119d4f8791ebe6f4874527fac47"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_BrothPot_2.png",
+      "bytes": 252224,
+      "sha256": "773bd120cbf66f00eff7747d504a7f9bfa010429f1c0246a97370f5e33569d54"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_Garnish_0.png",
+      "bytes": 637161,
+      "sha256": "7caabdb4b6687905cd06a5d660ea7934d55ebcb7828b5baad87731df1a8e6fd2"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_Garnish_1.png",
+      "bytes": 204729,
+      "sha256": "1e22393772ba8f7c769076097cf3b46b1d02730e889f66e51d70bd213ed98b80"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_Garnish_2.png",
+      "bytes": 285916,
+      "sha256": "20d7b6c01e6d36f8e620d6ad1a144a87d221fdda7fdd6e8df39b66c300e90713"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_NoodleBowl_0.png",
+      "bytes": 564552,
+      "sha256": "8532670679491b30b8a6cc75e7b1aaae01d751f348f1bb07879d7fbfb4c17bc1"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_NoodleBowl_1.png",
+      "bytes": 191045,
+      "sha256": "8bcfd1292d981fa6c3b37e0687f4bd41b3745dbb24d6a74692b6c9f912ff0911"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/T_Artist_NoodleBowl_2.png",
+      "bytes": 238489,
+      "sha256": "5f28ad98647ebf5ba14668cd2ae50e6b997c4ad2205672fcbfc763293906bf3f"
+    },
+    {
+      "path": "SourceAssets/artist-noodle-intake/unreal-import-results.json",
+      "bytes": 898,
+      "sha256": "5064682593950ab1b8b966351aa4121eeeeff290c596ead437c824764a78679b"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/ChefAbbie-model.png",
+      "bytes": 429632,
+      "sha256": "8cade30eee026b2615318d218be221fbebfc511cbb9dcdb6e4d72bf3ab890371"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/ChefDaddy-model.png",
+      "bytes": 428639,
+      "sha256": "8329432070adc82de60ba71d55a6ef4daf301f3de90b33c169dd76bdcf7b379e"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/ChefMommy-model.png",
+      "bytes": 511688,
+      "sha256": "f18c81f480f375a0b5efef42ed626c3d1c8627a76cdfb26b5a6504a6b41beef7"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/Counter-model.png",
+      "bytes": 781817,
+      "sha256": "7418e95987a5ea4f00d8f48539516e4318b1044594e8e7321dd4dc946c99926a"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/counter-worktop-measurements.json",
+      "bytes": 463,
+      "sha256": "f5cc881994d3ba45de6905da528038e41082e2d584b1e2dbfbdac81784a65721"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/derived-manifest.json",
+      "bytes": 3105,
+      "sha256": "67ef759a129bc8efe92dc054a31bddafea7df849a5578eb8c552007a227f2dfb"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/SM_ChefAbbie.fbx",
+      "bytes": 687420,
+      "sha256": "f1bd0e6597a749711d5152120127be3600c95b107b1f164711b74a612a9b9ef7"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/SM_ChefDaddy.fbx",
+      "bytes": 808412,
+      "sha256": "786bb7d7fdf17a30bae08f4ec11980fd2d7bc21554ef5e102442a93549ef0340"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/SM_ChefMommy.fbx",
+      "bytes": 724076,
+      "sha256": "ade4ba97db897544c0ff5db34b73094d8d533f32d66ce488701a34b2512d2d41"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/SM_Counter.fbx",
+      "bytes": 785740,
+      "sha256": "cd18c955299be35ebae606188506e013ca00d8f1a33492732412121a595d3c74"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefAbbie_0.png",
+      "bytes": 721411,
+      "sha256": "db793004109f6c6c4db8e036209c3ec5293850a9b4cdb66e233cdddaebcc9fbe"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefAbbie_1.png",
+      "bytes": 194751,
+      "sha256": "0b724edb69cf14e08e8c5cbf169f0fa24846074e53e7fa5683fc5636bcd3069e"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefAbbie_2.png",
+      "bytes": 324480,
+      "sha256": "dd5777aabc40991046a888b277cca49dc96069cded12d4c4650e1069a0f7b62b"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefDaddy_0.png",
+      "bytes": 737317,
+      "sha256": "9738c7ff9dbde39b6ebcc61fb3ffa0ec5f948e4fca1b8f174652dcfba1182b11"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefDaddy_1.png",
+      "bytes": 195395,
+      "sha256": "03773a61f751933fe65012b7adbbaa75a40dc82c07935a79cdbab5c387a00c43"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefDaddy_2.png",
+      "bytes": 323776,
+      "sha256": "654f4524166d5bb283dc4fd5e42f99c159185cf24c85e0c8411bf19969621aab"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefMommy_0.png",
+      "bytes": 622213,
+      "sha256": "65a74985887933855e63cdfb90fa405ad55eb947453cd7426afe305caa04cc0c"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefMommy_1.png",
+      "bytes": 182250,
+      "sha256": "9acb55c0194018f4f52e2d5148a42cd44e0d80170ece2ff382ba913b057754bf"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_ChefMommy_2.png",
+      "bytes": 265567,
+      "sha256": "f5ba53d18cbedd7607f9b15d5a0071c8f1eda046470b2d49bce0429b2bdfe8b2"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_Counter_0.png",
+      "bytes": 578735,
+      "sha256": "dd63874548fdf82c614f00406ad311547456c2acbdcb3ab7c9caa7290c0b5453"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_Counter_1.png",
+      "bytes": 198178,
+      "sha256": "dfe4a72bd69afe215ae5a8ce761686446380f8dab737911d2b51292b15f8ddb7"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/T_Artist_Counter_2.png",
+      "bytes": 225479,
+      "sha256": "6030b493904231118c132e2d49298b7f08c7e037e445c4135857b2c0e65da9a7"
+    },
+    {
+      "path": "SourceAssets/artist-restaurant-intake/unreal-import-results.json",
+      "bytes": 1215,
+      "sha256": "42ce24cdb766f373423e8ad00f19f4185c52a92366500fe699c59403b4422122"
+    },
+    {
+      "path": "Tools/convert-artist-noodle-exterior.py",
+      "bytes": 3566,
+      "sha256": "86da86841fac750ec9fd7b1415206f02b3e1b59e5530af1155f513571c567769"
+    },
+    {
+      "path": "Tools/convert-artist-noodles.py",
+      "bytes": 3719,
+      "sha256": "ef75955e6d51ef7e6e3579f5595da22ee6427e7bb8b710b193611f5dbd7d3eec"
+    },
+    {
+      "path": "Tools/convert-artist-restaurant.py",
+      "bytes": 3665,
+      "sha256": "fb740d84f81a6a4ed57f8904b98de8279cbb0e844aa4868fe25aea8d1134273d"
+    },
+    {
+      "path": "Tools/create-noodle-ambient.py",
+      "bytes": 310,
+      "sha256": "5ea9f60945523594f6fcb9268dbc3f4645f777cf5221ee926d1b4c06df4fa95e"
+    },
+    {
+      "path": "Tools/import-artist-noodle-exterior.py",
+      "bytes": 3337,
+      "sha256": "0ba79be8304098fa667b7217409b7db8e19cefbac9b4a874d8bc86aeff059d88"
+    },
+    {
+      "path": "Tools/import-artist-noodles.py",
+      "bytes": 3335,
+      "sha256": "10d4bea8fae10444c08466893a3bf1066f6f7671ecd28e61a8aba6c482bbace5"
+    },
+    {
+      "path": "Tools/import-artist-restaurant.py",
+      "bytes": 3339,
+      "sha256": "26546ef2fd5b1cadb5a20e5f01a5b13348fcde0c528da34ab1b6dc5499a93b96"
+    },
+    {
+      "path": "Tools/import-broth-repair.py",
+      "bytes": 1737,
+      "sha256": "8f4dda7512b436500c632481c230b91fa6a4f5fc1bbaa90bd553f63d2e7a965b"
+    },
+    {
+      "path": "Tools/inspect-artist-glb.py",
+      "bytes": 1862,
+      "sha256": "db5b210da2c538ecd7f4ff1908f7862689b4d26dfea34fc242f1daff92217cc8"
+    },
+    {
+      "path": "Tools/repair-broth-surface.py",
+      "bytes": 1414,
+      "sha256": "3294007a24e5ebd860d9a1532e149b1e5106c1a355bdfb2a617e931c59f85223"
+    },
+    {
+      "path": "Tools/repair-noodle-materials.py",
+      "bytes": 1614,
+      "sha256": "bc664b22dd4812163bda1128e7e4f2e9d47f2e2f5f8490e0198323c78ef8e71a"
+    },
+    {
+      "path": "Tools/verify-noodle-release.py",
+      "bytes": 3305,
+      "sha256": "93c0a3a453e94e6e6e0221a74e33adab507485b658a92ecf2c9b4f64d2e78db8"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 2678,
+      "sha256": "231e458512c1450a89f3e4486673d7cf611efbaa0b3e3d9e2b666cbede53dea5"
+    }
+  ]
+}

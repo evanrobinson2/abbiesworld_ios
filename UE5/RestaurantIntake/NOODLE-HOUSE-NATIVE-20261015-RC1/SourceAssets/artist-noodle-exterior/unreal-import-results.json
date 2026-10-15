@@ -1,0 +1,13 @@
+[
+  {
+    "role": "NoodleHouse",
+    "asset": "/Game/AbbiesRestaurant/SM_NoodleHouse",
+    "dimensions_cm": [
+      770.0050964355469,
+      866.4214172363281,
+      522.3299932479858
+    ],
+    "carry_socket": false,
+    "status": "imported_awaiting_native_visual_and_attachment_calibration"
+  }
+]

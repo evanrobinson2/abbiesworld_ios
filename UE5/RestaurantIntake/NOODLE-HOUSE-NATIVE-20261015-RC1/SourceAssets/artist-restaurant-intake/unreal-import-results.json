@@ -1,0 +1,46 @@
+[
+  {
+    "role": "ChefAbbie",
+    "asset": "/Game/AbbiesRestaurant/SM_ChefAbbie",
+    "dimensions_cm": [
+      37.919790267944336,
+      62.431888580322266,
+      115.00001358985901
+    ],
+    "carry_socket": true,
+    "status": "imported_awaiting_native_visual_and_attachment_calibration"
+  },
+  {
+    "role": "ChefDaddy",
+    "asset": "/Game/AbbiesRestaurant/SM_ChefDaddy",
+    "dimensions_cm": [
+      42.01692771911621,
+      55.60881996154785,
+      115.00000762939453
+    ],
+    "carry_socket": true,
+    "status": "imported_awaiting_native_visual_and_attachment_calibration"
+  },
+  {
+    "role": "ChefMommy",
+    "asset": "/Game/AbbiesRestaurant/SM_ChefMommy",
+    "dimensions_cm": [
+      101.14102172851562,
+      80.91287231445312,
+      114.99999403953552
+    ],
+    "carry_socket": true,
+    "status": "imported_awaiting_native_visual_and_attachment_calibration"
+  },
+  {
+    "role": "Counter",
+    "asset": "/Game/AbbiesRestaurant/SM_Counter",
+    "dimensions_cm": [
+      80.15837860107422,
+      136.79425048828125,
+      95.00000762939453
+    ],
+    "carry_socket": false,
+    "status": "imported_awaiting_native_visual_and_attachment_calibration"
+  }
+]

@@ -1,0 +1,126 @@
+[
+  {
+    "id": "FF-CHAR-ABBIE-UNICORN-001",
+    "role": "ChefAbbie",
+    "fbx": "SM_ChefAbbie.fbx",
+    "materials": [
+      {
+        "name": "M_Artist_ChefAbbie_0",
+        "textures": [
+          {
+            "file": "T_Artist_ChefAbbie_0.png",
+            "colorspace": "sRGB"
+          },
+          {
+            "file": "T_Artist_ChefAbbie_1.png",
+            "colorspace": "Non-Color"
+          },
+          {
+            "file": "T_Artist_ChefAbbie_2.png",
+            "colorspace": "Non-Color"
+          }
+        ]
+      }
+    ],
+    "bounds_cm": [
+      37.919795513153076,
+      62.43188977241516,
+      115.00000953674316
+    ],
+    "forward_assumption": "+X after GLB+Z-to-Blender-Y rotation; inspect render",
+    "static": true
+  },
+  {
+    "id": "FF-CHAR-DADDY-FOX-001",
+    "role": "ChefDaddy",
+    "fbx": "SM_ChefDaddy.fbx",
+    "materials": [
+      {
+        "name": "M_Artist_ChefDaddy_0",
+        "textures": [
+          {
+            "file": "T_Artist_ChefDaddy_0.png",
+            "colorspace": "sRGB"
+          },
+          {
+            "file": "T_Artist_ChefDaddy_1.png",
+            "colorspace": "Non-Color"
+          },
+          {
+            "file": "T_Artist_ChefDaddy_2.png",
+            "colorspace": "Non-Color"
+          }
+        ]
+      }
+    ],
+    "bounds_cm": [
+      42.016929388046265,
+      55.60882091522217,
+      115.00000953674316
+    ],
+    "forward_assumption": "+X after GLB+Z-to-Blender-Y rotation; inspect render",
+    "static": true
+  },
+  {
+    "id": "FF-CHAR-MOMMY-SNAIL-001",
+    "role": "ChefMommy",
+    "fbx": "SM_ChefMommy.fbx",
+    "materials": [
+      {
+        "name": "M_Artist_ChefMommy_0",
+        "textures": [
+          {
+            "file": "T_Artist_ChefMommy_0.png",
+            "colorspace": "sRGB"
+          },
+          {
+            "file": "T_Artist_ChefMommy_1.png",
+            "colorspace": "Non-Color"
+          },
+          {
+            "file": "T_Artist_ChefMommy_2.png",
+            "colorspace": "Non-Color"
+          }
+        ]
+      }
+    ],
+    "bounds_cm": [
+      101.14102363586426,
+      80.91287016868591,
+      114.99998569488525
+    ],
+    "forward_assumption": "+X after GLB+Z-to-Blender-Y rotation; inspect render",
+    "static": true
+  },
+  {
+    "id": "FF-KITCHEN-WOODLAND-COUNTER-001",
+    "role": "Counter",
+    "fbx": "SM_Counter.fbx",
+    "materials": [
+      {
+        "name": "M_Artist_Counter_0",
+        "textures": [
+          {
+            "file": "T_Artist_Counter_0.png",
+            "colorspace": "sRGB"
+          },
+          {
+            "file": "T_Artist_Counter_1.png",
+            "colorspace": "Non-Color"
+          },
+          {
+            "file": "T_Artist_Counter_2.png",
+            "colorspace": "Non-Color"
+          }
+        ]
+      }
+    ],
+    "bounds_cm": [
+      80.15838861465454,
+      136.7942452430725,
+      95.00000476837158
+    ],
+    "forward_assumption": "+X after GLB+Z-to-Blender-Y rotation; inspect render",
+    "static": true
+  }
+]

@@ -1,0 +1,95 @@
+[
+  {
+    "id": "NH-FOOD-NOODLE-BOWL-001",
+    "role": "NoodleBowl",
+    "fbx": "SM_NoodleBowl.fbx",
+    "materials": [
+      {
+        "name": "M_Artist_NoodleBowl_0",
+        "textures": [
+          {
+            "file": "T_Artist_NoodleBowl_0.png",
+            "colorspace": "sRGB"
+          },
+          {
+            "file": "T_Artist_NoodleBowl_1.png",
+            "colorspace": "Non-Color"
+          },
+          {
+            "file": "T_Artist_NoodleBowl_2.png",
+            "colorspace": "Non-Color"
+          }
+        ]
+      }
+    ],
+    "bounds_cm": [
+      29.831719398498535,
+      29.999998211860657,
+      18.128487467765808
+    ],
+    "forward_assumption": "+X after GLB+Z-to-Blender-Y rotation; inspect render",
+    "static": true
+  },
+  {
+    "id": "NH-KITCHEN-BROTH-POT-001",
+    "role": "BrothPot",
+    "fbx": "SM_BrothPot.fbx",
+    "materials": [
+      {
+        "name": "M_Artist_BrothPot_0",
+        "textures": [
+          {
+            "file": "T_Artist_BrothPot_0.png",
+            "colorspace": "sRGB"
+          },
+          {
+            "file": "T_Artist_BrothPot_1.png",
+            "colorspace": "Non-Color"
+          },
+          {
+            "file": "T_Artist_BrothPot_2.png",
+            "colorspace": "Non-Color"
+          }
+        ]
+      }
+    ],
+    "bounds_cm": [
+      44.05650496482849,
+      55.000001192092896,
+      28.249329328536987
+    ],
+    "forward_assumption": "+X after GLB+Z-to-Blender-Y rotation; inspect render",
+    "static": true
+  },
+  {
+    "id": "NH-FOOD-GARNISH-001",
+    "role": "Garnish",
+    "fbx": "SM_Garnish.fbx",
+    "materials": [
+      {
+        "name": "M_Artist_Garnish_0",
+        "textures": [
+          {
+            "file": "T_Artist_Garnish_0.png",
+            "colorspace": "sRGB"
+          },
+          {
+            "file": "T_Artist_Garnish_1.png",
+            "colorspace": "Non-Color"
+          },
+          {
+            "file": "T_Artist_Garnish_2.png",
+            "colorspace": "Non-Color"
+          }
+        ]
+      }
+    ],
+    "bounds_cm": [
+      21.898889541625977,
+      21.99999988079071,
+      7.460677623748779
+    ],
+    "forward_assumption": "+X after GLB+Z-to-Blender-Y rotation; inspect render",
+    "static": true
+  }
+]

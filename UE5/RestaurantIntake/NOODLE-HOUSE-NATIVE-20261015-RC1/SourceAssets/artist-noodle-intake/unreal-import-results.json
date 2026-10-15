@@ -1,0 +1,35 @@
+[
+  {
+    "role": "NoodleBowl",
+    "asset": "/Game/AbbiesRestaurant/SM_NoodleBowl",
+    "dimensions_cm": [
+      29.831721305847168,
+      29.999998092651367,
+      18.12848663330078
+    ],
+    "carry_socket": false,
+    "status": "imported_awaiting_native_visual_and_attachment_calibration"
+  },
+  {
+    "role": "BrothPot",
+    "asset": "/Game/AbbiesRestaurant/SM_BrothPot",
+    "dimensions_cm": [
+      44.05650329589844,
+      55.0,
+      28.24932861328125
+    ],
+    "carry_socket": false,
+    "status": "imported_awaiting_native_visual_and_attachment_calibration"
+  },
+  {
+    "role": "Garnish",
+    "asset": "/Game/AbbiesRestaurant/SM_Garnish",
+    "dimensions_cm": [
+      21.89888858795166,
+      22.000000953674316,
+      7.460677996277809
+    ],
+    "carry_socket": false,
+    "status": "imported_awaiting_native_visual_and_attachment_calibration"
+  }
+]

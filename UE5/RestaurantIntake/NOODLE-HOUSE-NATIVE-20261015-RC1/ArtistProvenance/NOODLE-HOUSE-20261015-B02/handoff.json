@@ -1,0 +1,650 @@
+{
+  "batch": "NOODLE-HOUSE-20261015-B02",
+  "status": "source assets verified; native integration and human appearance review pending",
+  "source_project": "https://www.meshy.ai/agent/c8zS-hULtf6Z3KnLXefPI?chat=0h17TT6F-4ZbLrUURcDpi",
+  "workflow": "4 original reference images9credits each \u2192 4 textured Meshy T2.5 Smart Topology15credits each",
+  "credits": {
+    "cap": 96,
+    "spent": 96,
+    "before": 2617,
+    "after": 2521,
+    "verified_by": "Meshy visible balance + task report",
+    "purchases": 0,
+    "retries": 0,
+    "rigging": 0
+  },
+  "provenance": "Original Meshy food references; exterior new original reinterpretation of user-requested MJ concept/art direction. No commercial mesh uploaded.",
+  "vendor_artifact_ids": "Chat-reported artifact strings retained in completed-generation-dom.txt; not independently verified task UUIDs. Actual payloads independently SHA256 audited.",
+  "up": "+Y",
+  "front": "+Z",
+  "units": "meters in normalized game/ files; raw files as downloaded",
+  "pivot": "ground centered XZ",
+  "four_hex_occupancy": {
+    "axial_offsets": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        1
+      ]
+    ],
+    "hex_radius_m": 2.2,
+    "pointy_top": true,
+    "centered_centers_xz_m": [
+      [
+        -2.857883832488648,
+        -1.65
+      ],
+      [
+        0.9526279441628825,
+        -1.65
+      ],
+      [
+        -0.9526279441628825,
+        1.65
+      ],
+      [
+        2.857883832488648,
+        1.65
+      ]
+    ],
+    "geometry_boundary_verified": false
+  },
+  "warnings": [
+    "Raw and normalized derivatives are static meshes; no skins, clips or rigging.",
+    "Native kitchen/cooking/network integration belongs to restaurant thread and is not verified by this source handoff.",
+    "Broth pot has visible dark triangular artifacts on its fused liquid surface; use/review a separate runtime broth surface before final approval.",
+    "Exterior is a new original reference interpretation of the authorized visual direction, not exact conversion of the Midjourney image.",
+    "Exterior base has an approximate four-lobed hex silhouette; exact regular four-hex perimeter/collision alignment is NOT certified.",
+    "Sign contains two illustrated faces, but likeness, eye colors and neon behavior are not human-approved."
+  ],
+  "human_appearance_approved": false,
+  "assets": [
+    {
+      "id": "NH-FOOD-GARNISH-001",
+      "raw_file": "raw\\NH-FOOD-GARNISH-001.glb",
+      "sha256": "979ce1b1b64ee8cb1921907c95baaeb53a712c3000fafe82fb1dd0a9f8cf741d",
+      "bytes": 8148172,
+      "triangles": 15700,
+      "textures": [
+        {
+          "image_index": 0,
+          "file": "textures\\NH-FOOD-GARNISH-001\\image-0.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "3ce71a326b9745d1db32f9f923ee8308223519a28f928cfce1decf9c3bec8c84"
+        },
+        {
+          "image_index": 1,
+          "file": "textures\\NH-FOOD-GARNISH-001\\image-1.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "2e7b773b6f9e02047f9699cdf0f2acf5aeafc00051243863a9865eceed4dc224"
+        },
+        {
+          "image_index": 2,
+          "file": "textures\\NH-FOOD-GARNISH-001\\image-2.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "805c787accb7abad90c848cfffbcda3981f1f434e9c4cd03ecfa4ae673db8c28"
+        }
+      ],
+      "materials": [
+        {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "metallicFactor": 1.0,
+            "roughnessFactor": 1.0,
+            "baseColorTexture": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1,
+              "texCoord": 0
+            }
+          },
+          "normalTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "nodes": [
+        {
+          "mesh": 0,
+          "matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "source_bounds_accessors": [
+        {
+          "bufferView": 1,
+          "byteOffset": 0,
+          "componentType": 5126,
+          "normalized": false,
+          "count": 14656,
+          "type": "VEC3",
+          "max": [
+            0.47729501128196716,
+            0.1579589992761612,
+            0.4748539924621582
+          ],
+          "min": [
+            -0.4787600040435791,
+            -0.1662600040435791,
+            -0.47680699825286865
+          ]
+        }
+      ],
+      "skins": 0,
+      "animation_clips": 0,
+      "human_appearance_approved": false,
+      "normalized": {
+        "id": "NH-FOOD-GARNISH-001",
+        "file": "game\\NH-FOOD-GARNISH-001-v0.1.glb",
+        "sha256": "844c0782059f13050fa4002dcd45ab3026c3ea7195b843d830d2201f88339548",
+        "dimensions_xyz_m": [
+          0.22,
+          0.07460677428281144,
+          0.21898888097565694
+        ],
+        "root_uniform_scale": 0.2301122806464101,
+        "source_world_bounds": [
+          [
+            -0.4787600040435791,
+            -0.1662600040435791,
+            -0.47680699825286865
+          ],
+          [
+            0.47729501128196716,
+            0.1579589992761612,
+            0.4748539924621582
+          ]
+        ],
+        "pivot": "ground centered XZ",
+        "up": "+Y",
+        "front_axis": "+Z presentation convention; rotational or tabletop prop",
+        "texture_bytes_preserved": true,
+        "geometry_bytes_preserved": true,
+        "native_import": "pending",
+        "directional_proofs": [
+          "NH-FOOD-GARNISH-001-v0.1-front_plusZ.png",
+          "NH-FOOD-GARNISH-001-v0.1-back_minusZ.png"
+        ],
+        "human_appearance_approved": false
+      }
+    },
+    {
+      "id": "NH-FOOD-NOODLE-BOWL-001",
+      "raw_file": "raw\\NH-FOOD-NOODLE-BOWL-001.glb",
+      "sha256": "cef46e92927e8011cf41c6267fe071fc99d5991658fec88c7236f7d90877e2a1",
+      "bytes": 7706900,
+      "triangles": 15300,
+      "textures": [
+        {
+          "image_index": 0,
+          "file": "textures\\NH-FOOD-NOODLE-BOWL-001\\image-0.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "17276f90ed302e9c6c76f793dbfe78d1a3b35db00ab2e96af3376d37b29b166f"
+        },
+        {
+          "image_index": 1,
+          "file": "textures\\NH-FOOD-NOODLE-BOWL-001\\image-1.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "fefa358eaa4f48ba8461cd9976f9f5f53c0aa0ffd1b2229c33e851815002cbcb"
+        },
+        {
+          "image_index": 2,
+          "file": "textures\\NH-FOOD-NOODLE-BOWL-001\\image-2.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "c4edaa0554bb05c2fcbbbee334efb3d209d0e1ad11d31572b8ba09bd53b59d63"
+        }
+      ],
+      "materials": [
+        {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "metallicFactor": 1.0,
+            "roughnessFactor": 1.0,
+            "baseColorTexture": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1,
+              "texCoord": 0
+            }
+          },
+          "normalTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "nodes": [
+        {
+          "mesh": 0,
+          "matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "source_bounds_accessors": [
+        {
+          "bufferView": 1,
+          "byteOffset": 0,
+          "componentType": 5126,
+          "normalized": false,
+          "count": 12374,
+          "type": "VEC3",
+          "max": [
+            0.4787600040435791,
+            0.28881800174713135,
+            0.4748539924621582
+          ],
+          "min": [
+            -0.4787600040435791,
+            -0.28979501128196716,
+            -0.47729501128196716
+          ]
+        }
+      ],
+      "skins": 0,
+      "animation_clips": 0,
+      "human_appearance_approved": false,
+      "normalized": {
+        "id": "NH-FOOD-NOODLE-BOWL-001",
+        "file": "game\\NH-FOOD-NOODLE-BOWL-001-v0.1.glb",
+        "sha256": "bfbcaa36be9821cbf217f5514fe43e4b459aff3bdda48e03a5d9333a994fd7da",
+        "dimensions_xyz_m": [
+          0.3,
+          0.18128488432894352,
+          0.29831721395970745
+        ],
+        "root_uniform_scale": 0.3133093799254506,
+        "source_world_bounds": [
+          [
+            -0.4787600040435791,
+            -0.28979501128196716,
+            -0.47729501128196716
+          ],
+          [
+            0.4787600040435791,
+            0.28881800174713135,
+            0.4748539924621582
+          ]
+        ],
+        "pivot": "ground centered XZ",
+        "up": "+Y",
+        "front_axis": "+Z presentation convention; rotational or tabletop prop",
+        "texture_bytes_preserved": true,
+        "geometry_bytes_preserved": true,
+        "native_import": "pending",
+        "directional_proofs": [
+          "NH-FOOD-NOODLE-BOWL-001-v0.1-front_plusZ.png",
+          "NH-FOOD-NOODLE-BOWL-001-v0.1-back_minusZ.png"
+        ],
+        "human_appearance_approved": false
+      }
+    },
+    {
+      "id": "NH-KITCHEN-BROTH-POT-001",
+      "raw_file": "raw\\NH-KITCHEN-BROTH-POT-001.glb",
+      "sha256": "9c310615848cfa02e7d9b0b708a33d7d7e0026607420b1797f78c0b9d6d76d7a",
+      "bytes": 7964460,
+      "triangles": 15160,
+      "textures": [
+        {
+          "image_index": 0,
+          "file": "textures\\NH-KITCHEN-BROTH-POT-001\\image-0.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "8a4b000c6cff79a8d5d2e1514c8b1c7fcf77ee2488a98010963a19eb6faca1bd"
+        },
+        {
+          "image_index": 1,
+          "file": "textures\\NH-KITCHEN-BROTH-POT-001\\image-1.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "95cd0d659cad58fa156a243a3fed65a4a4b548d9b66c09a88e768009560b109a"
+        },
+        {
+          "image_index": 2,
+          "file": "textures\\NH-KITCHEN-BROTH-POT-001\\image-2.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "2fcf7af444f9c2d00d3d9be815d191b96d0dd1abcb83587248e385ed85427982"
+        }
+      ],
+      "materials": [
+        {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "metallicFactor": 1.0,
+            "roughnessFactor": 1.0,
+            "baseColorTexture": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1,
+              "texCoord": 0
+            }
+          },
+          "normalTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "nodes": [
+        {
+          "mesh": 0,
+          "matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "source_bounds_accessors": [
+        {
+          "bufferView": 1,
+          "byteOffset": 0,
+          "componentType": 5126,
+          "normalized": false,
+          "count": 14250,
+          "type": "VEC3",
+          "max": [
+            0.4748539924621582,
+            0.2443850040435791,
+            0.3801270127296448
+          ],
+          "min": [
+            -0.4748539924621582,
+            -0.2434079945087433,
+            -0.3806149959564209
+          ]
+        }
+      ],
+      "skins": 0,
+      "animation_clips": 0,
+      "human_appearance_approved": false,
+      "normalized": {
+        "id": "NH-KITCHEN-BROTH-POT-001",
+        "file": "game\\NH-KITCHEN-BROTH-POT-001-v0.1.glb",
+        "sha256": "5048a1e844f35d0dac65ea7b35954d92511aff5a4c11b284918f87b83d3bf0b2",
+        "dimensions_xyz_m": [
+          0.55,
+          0.28249330685069207,
+          0.44056500673802346
+        ],
+        "root_uniform_scale": 0.5791253824656748,
+        "source_world_bounds": [
+          [
+            -0.4748539924621582,
+            -0.2434079945087433,
+            -0.3806149959564209
+          ],
+          [
+            0.4748539924621582,
+            0.2443850040435791,
+            0.3801270127296448
+          ]
+        ],
+        "pivot": "ground centered XZ",
+        "up": "+Y",
+        "front_axis": "+Z presentation convention; rotational or tabletop prop",
+        "texture_bytes_preserved": true,
+        "geometry_bytes_preserved": true,
+        "native_import": "pending",
+        "directional_proofs": [
+          "NH-KITCHEN-BROTH-POT-001-v0.1-front_plusZ.png",
+          "NH-KITCHEN-BROTH-POT-001-v0.1-back_minusZ.png"
+        ],
+        "human_appearance_approved": false
+      }
+    },
+    {
+      "id": "NH-POI-NOODLE-HOUSE-001",
+      "raw_file": "raw\\NH-POI-NOODLE-HOUSE-001.glb",
+      "sha256": "d74e0b049c7c01796fc335c0b6b48c2dd9637521a81d5c2b5e2c82f0b6a02fc6",
+      "bytes": 9530368,
+      "triangles": 13421,
+      "textures": [
+        {
+          "image_index": 0,
+          "file": "textures\\NH-POI-NOODLE-HOUSE-001\\image-0.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "98f28f8753bc32c27a8e4d799eb5dd9c1999ea245adba77d183b166e39122151"
+        },
+        {
+          "image_index": 1,
+          "file": "textures\\NH-POI-NOODLE-HOUSE-001\\image-1.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "0568b31c2b04b9522e838f63bef142ebd037569a1b914e2198422ff6ed045b8c"
+        },
+        {
+          "image_index": 2,
+          "file": "textures\\NH-POI-NOODLE-HOUSE-001\\image-2.jpg",
+          "dimensions": [
+            2048,
+            2048
+          ],
+          "sha256": "97aa2a6492ed6873a3f6c85f9f1ab37b0f90d028a84cba61e9aa92d67e237b04"
+        }
+      ],
+      "materials": [
+        {
+          "pbrMetallicRoughness": {
+            "baseColorFactor": [
+              1.0,
+              1.0,
+              1.0,
+              1.0
+            ],
+            "metallicFactor": 1.0,
+            "roughnessFactor": 1.0,
+            "baseColorTexture": {
+              "index": 0,
+              "texCoord": 0
+            },
+            "metallicRoughnessTexture": {
+              "index": 1,
+              "texCoord": 0
+            }
+          },
+          "normalTexture": {
+            "index": 2,
+            "texCoord": 0
+          },
+          "alphaMode": "OPAQUE",
+          "doubleSided": true
+        }
+      ],
+      "nodes": [
+        {
+          "mesh": 0,
+          "matrix": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ]
+        }
+      ],
+      "source_bounds_accessors": [
+        {
+          "bufferView": 1,
+          "byteOffset": 0,
+          "componentType": 5126,
+          "normalized": false,
+          "count": 20790,
+          "type": "VEC3",
+          "max": [
+            0.4782710075378418,
+            0.2878420054912567,
+            0.4240719974040985
+          ],
+          "min": [
+            -0.4782710075378418,
+            -0.28881800174713135,
+            -0.42602500319480896
+          ]
+        }
+      ],
+      "skins": 0,
+      "animation_clips": 0,
+      "human_appearance_approved": false,
+      "normalized": {
+        "id": "NH-POI-NOODLE-HOUSE-001",
+        "file": "game\\NH-POI-NOODLE-HOUSE-001-v0.1.glb",
+        "sha256": "23e24187b2dff2771f0f0287a165cbf8ba8c63ed2ce485b4f22f7c672611c31b",
+        "dimensions_xyz_m": [
+          8.664156573771859,
+          5.223265171630221,
+          7.7
+        ],
+        "root_uniform_scale": 9.057789869362228,
+        "source_world_bounds": [
+          [
+            -0.4782710075378418,
+            -0.28881800174713135,
+            -0.42602500319480896
+          ],
+          [
+            0.4782710075378418,
+            0.2878420054912567,
+            0.4240719974040985
+          ]
+        ],
+        "pivot": "ground centered XZ",
+        "up": "+Y",
+        "front_axis": "+Z; verified by directional render",
+        "texture_bytes_preserved": true,
+        "geometry_bytes_preserved": true,
+        "native_import": "pending",
+        "directional_proofs": [
+          "NH-POI-NOODLE-HOUSE-001-v0.1-front_plusZ.png",
+          "NH-POI-NOODLE-HOUSE-001-v0.1-back_minusZ.png"
+        ],
+        "human_appearance_approved": false
+      }
+    }
+  ]
+}

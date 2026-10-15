@@ -1,0 +1,13 @@
+{
+  "materials": [
+    "/Game/AbbiesRestaurant/M_Artist_ChefAbbie",
+    "/Game/AbbiesRestaurant/M_Artist_ChefDaddy",
+    "/Game/AbbiesRestaurant/M_Artist_ChefMommy",
+    "/Game/AbbiesRestaurant/M_Artist_Counter",
+    "/Game/AbbiesRestaurant/M_Artist_NoodleBowl",
+    "/Game/AbbiesRestaurant/M_Artist_BrothPot",
+    "/Game/AbbiesRestaurant/M_Artist_Garnish",
+    "/Game/AbbiesRestaurant/M_Artist_NoodleHouse"
+  ],
+  "roughness_metallic_sampler": "Linear Color"
+}

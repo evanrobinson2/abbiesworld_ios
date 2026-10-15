@@ -1,0 +1,33 @@
+[
+  {
+    "id": "NH-POI-NOODLE-HOUSE-001",
+    "role": "NoodleHouse",
+    "fbx": "SM_NoodleHouse.fbx",
+    "materials": [
+      {
+        "name": "M_Artist_NoodleHouse_0",
+        "textures": [
+          {
+            "file": "T_Artist_NoodleHouse_0.png",
+            "colorspace": "sRGB"
+          },
+          {
+            "file": "T_Artist_NoodleHouse_1.png",
+            "colorspace": "Non-Color"
+          },
+          {
+            "file": "T_Artist_NoodleHouse_2.png",
+            "colorspace": "Non-Color"
+          }
+        ]
+      }
+    ],
+    "bounds_cm": [
+      770.0051307678223,
+      866.4214134216309,
+      522.3299980163574
+    ],
+    "forward_assumption": "+X after GLB+Z-to-Blender-Y rotation; inspect render",
+    "static": true
+  }
+]
