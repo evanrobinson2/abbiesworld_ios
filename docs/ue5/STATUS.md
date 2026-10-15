@@ -17,3 +17,7 @@ All workstreams still need actual iOS/Metal/touch validation. Human visual appro
 Retain the AbbiesWorld runtime module for existing Potion Meadow class references. Preserve /Game/PotionMeadow, /Game/AbbiesRestaurant and /Game/AbbiesWorld package paths on initial assembly. Review shared Build.cs, startup map, menu and cook changes together. Never overwrite parent configuration with standalone test settings. Keep static native Overland scenes and browser-only features labeled by actual implementation status.
 
 See COOPERATION.md and each intake's integration contract/INTAKE.md for ownership, dependencies and warnings. Earlier releases are immutable historical evidence; changes belong in a working project or new release.
+
+## Restaurant art correction
+
+Evan rejected the procedural family figures. Do not promote outputs/forest-fairy-originals or FOREST-FAIRY-20261015-RC1 as production art; they are rejected technical stand-ins with no appearance approval. They have not been intaken into this branch. The 3D Artist owns the actual production/handoff for unicorn Abbie, fox Daddy, rainbow-glitter snail Mommy and the woodland burger counter. Wait for the artist-owned handoff and review before asset release. Restaurant RC1/RC2 gameplay source remains accepted for source intake only; no final art approval is implied.
