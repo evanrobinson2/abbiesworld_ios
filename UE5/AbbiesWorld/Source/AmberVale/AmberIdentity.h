@@ -13,14 +13,18 @@ public:
  int32 UniverseRevision=0;
  TSharedPtr<class FJsonObject> UniverseState;
  bool SavingUniverse=false,UniverseSaveFailed=false;
- bool Busy=false,SignedIn=false;
+ bool Busy=false,SignedIn=false,SessionRemembered=false;
  TFunction<void()> Changed;
- void Login(); void Choose(const FString& Id); void Cancel(); void Tick();
+ void Restore(); void Logout(); void ChangePlayer(); void Login(); void Choose(const FString& Id); void Cancel(); void Tick();
  void FetchUniverses(); void JoinUniverse(const FString& Id); void LeaveUniverse();
  void SaveUniverseProgress(int32 Turn,int32 Step);
  ~FAmberIdentity(){Cancel();}
 private:
- FString Domain,Client,Api,Verifier,State,Token; double Started=0,Expires=0;
+ FString Domain,Client,Api,Verifier,State,Token,RefreshToken,PreferredProfileId;
+ double Started=0,Expires=0,RetryAt=0; uint64 Generation=0;
+ bool Restoring=false,Refreshing=false,ExplicitLogout=false,RequireLogin=false;
+ bool LoadConfig(); FString CredentialTarget() const; bool SaveSession();
+ void RefreshSession(); void AcceptTokens(const TSharedPtr<FJsonObject>& Response); void Notify();
  TSharedPtr<class IHttpRouter> Router; FHttpRouteHandle Route;
  void Exchange(const FString& Code); void FetchHousehold(); void Fail(const FString& Message);
 };

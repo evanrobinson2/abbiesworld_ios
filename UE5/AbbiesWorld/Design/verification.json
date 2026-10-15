@@ -1,0 +1,85 @@
+{
+  "remember-login-proof": {
+    "signed_in": true,
+    "remembered": true,
+    "profiles_loaded": 3
+  },
+  "restore-login-proof": {
+    "signed_in": true,
+    "remembered": true,
+    "profiles_loaded": 3
+  },
+  "refresh-login-proof": {
+    "signed_in": true,
+    "remembered": true,
+    "profiles_loaded": 3
+  },
+  "perspective-proof": {
+    "cinematic_entered": true,
+    "overland_returned": true,
+    "camera_position_restored": true
+  },
+  "credential_lifecycle_automation": "passed",
+  "hero_material_channels": [
+    {
+      "id": "AW-HOUSE-001",
+      "material": "/Game/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/Material_0.Material_0",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "AW-TAVERN-001",
+      "material": "/Game/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/Material_0.Material_0",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "AW-HW-CASTLE-001",
+      "material": "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/Material_0.Material_0",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "AW-HW-CAFE-001",
+      "material": "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/Material_0.Material_0",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "AW-HW-HOUSE-001",
+      "material": "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/Material_0.Material_0",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "AW-HW-MEGA-CASTLE-001",
+      "material": "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/Material_0.Material_0",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "AW-MOON-GREENHOUSE-001",
+      "material": "/Game/AbbiesWorld/Scenery/MoonBase/AW_MOON_GREENHOUSE_001/M_AW_MOON_GREENHOUSE_001.M_AW_MOON_GREENHOUSE_001",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "AW-XMAS-CASTLE-001",
+      "material": "/Game/AbbiesWorld/Scenery/Christmas/AW_XMAS_CASTLE_001/M_AW_XMAS_CASTLE_001.M_AW_XMAS_CASTLE_001",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "AW-XMAS-BAKERY-001",
+      "material": "/Game/AbbiesWorld/Scenery/Christmas/AW_XMAS_BAKERY_001/M_AW_XMAS_BAKERY_001.M_AW_XMAS_BAKERY_001",
+      "channels": [],
+      "status": "already connected"
+    },
+    {
+      "id": "DADDYS-BUNKER-EXACT",
+      "material": "/Game/AbbiesWorld/Scenery/ExactDaddyBunker/BakedMaterial.BakedMaterial",
+      "channels": [],
+      "status": "already connected"
+    }
+  ]
+}

@@ -10,3 +10,8 @@ DerivedDataCache/
 .env*
 /camera-ui-proof.json
 /native-*.png
+/perspective-*.png
+/perspective-proof.json
+/remember-login-proof.json
+/restore-login-proof.json
+/refresh-login-proof.json

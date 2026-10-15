@@ -1,0 +1,82 @@
+[
+  {
+    "id": "AW-HOUSE-001",
+    "folder": "/Game/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001",
+    "maps": {
+      "normal": "AW-HOUSE-001-normal.jpg",
+      "orm": "AW-HOUSE-001-orm.jpg"
+    }
+  },
+  {
+    "id": "AW-TAVERN-001",
+    "folder": "/Game/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001",
+    "maps": {
+      "normal": "AW-TAVERN-001-normal.jpg",
+      "orm": "AW-TAVERN-001-orm.jpg"
+    }
+  },
+  {
+    "id": "AW-HW-CASTLE-001",
+    "folder": "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001",
+    "maps": {
+      "normal": "AW-HW-CASTLE-001-normal.jpg",
+      "orm": "AW-HW-CASTLE-001-orm.jpg"
+    }
+  },
+  {
+    "id": "AW-HW-CAFE-001",
+    "folder": "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001",
+    "maps": {
+      "normal": "AW-HW-CAFE-001-normal.jpg",
+      "orm": "AW-HW-CAFE-001-orm.jpg"
+    }
+  },
+  {
+    "id": "AW-HW-HOUSE-001",
+    "folder": "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001",
+    "maps": {
+      "normal": "AW-HW-HOUSE-001-normal.jpg",
+      "orm": "AW-HW-HOUSE-001-orm.jpg"
+    }
+  },
+  {
+    "id": "AW-HW-MEGA-CASTLE-001",
+    "folder": "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001",
+    "maps": {
+      "normal": "AW-HW-MEGA-CASTLE-001-normal.jpg",
+      "orm": "AW-HW-MEGA-CASTLE-001-orm.jpg"
+    }
+  },
+  {
+    "id": "AW-MOON-GREENHOUSE-001",
+    "folder": "/Game/AbbiesWorld/Scenery/MoonBase/AW_MOON_GREENHOUSE_001",
+    "maps": {
+      "normal": "AW-MOON-GREENHOUSE-001-normal.jpg",
+      "orm": "AW-MOON-GREENHOUSE-001-orm.jpg"
+    }
+  },
+  {
+    "id": "AW-XMAS-CASTLE-001",
+    "folder": "/Game/AbbiesWorld/Scenery/Christmas/AW_XMAS_CASTLE_001",
+    "maps": {
+      "normal": "AW-XMAS-CASTLE-001-normal.jpg",
+      "orm": "AW-XMAS-CASTLE-001-orm.jpg"
+    }
+  },
+  {
+    "id": "AW-XMAS-BAKERY-001",
+    "folder": "/Game/AbbiesWorld/Scenery/Christmas/AW_XMAS_BAKERY_001",
+    "maps": {
+      "normal": "AW-XMAS-BAKERY-001-normal.jpg",
+      "orm": "AW-XMAS-BAKERY-001-orm.jpg"
+    }
+  },
+  {
+    "id": "DADDYS-BUNKER-EXACT",
+    "folder": "/Game/AbbiesWorld/Scenery/ExactDaddyBunker",
+    "material": "BakedMaterial",
+    "maps": {
+      "orm": "bunker-orm.png"
+    }
+  }
+]

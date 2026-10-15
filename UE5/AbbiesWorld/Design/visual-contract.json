@@ -1,0 +1,48 @@
+{
+  "status": "visual direction approved by Evan in chat; native implementation in progress",
+  "reference": "approved-ui-art-direction.png",
+  "ui": {
+    "style": "warm charcoal translucent surfaces, cream text, restrained amber highlights; world dominates",
+    "menu_actions": "one word; explicit logout; F2 settings; Escape dismisses",
+    "proposed_modules": [
+      "Map",
+      "Journal",
+      "Bag",
+      "Friends"
+    ],
+    "modules_implemented_now": [
+      "Menu",
+      "Settings",
+      "Overland",
+      "Cinematic",
+      "Walk"
+    ],
+    "rule": "Do not add inert buttons or invent quest, inventory, friendship, time, or weather state."
+  },
+  "perspectives": {
+    "identity": "One persistent tile and world state, two camera perspectives",
+    "overland": "Navigation-scale composition, readable routes and silhouettes",
+    "cinematic": "Closer lower-angle framing, smooth transitions, preserve selected tile and restore prior overview",
+    "implemented": "V and bottom action buttons; tile fallback framing and nearby POI bounds",
+    "remaining": "Authored entry/approach camera positions and bespoke cinematic interactions per hero tile"
+  },
+  "asset_tiers": {
+    "houses": "Hero: authored roof tiles, timber joinery, bevels, windows, doors, porch, material separation, near-view geometry",
+    "major_pois": "Ultra hero: retain architectural identity, dedicated close LOD, entrance, functional parts, authored lighting, terrain integration",
+    "bunker": "Keep 48 door, roof skylights, chimney, piers and secondary entry; do not regenerate a generic substitute",
+    "lod_contract": "Retain high-detail masters; derive overland LODs separately. Do not use overland reductions as cinematic masters.",
+    "materials": "Restore source normal and roughness/metallic maps with correct linear color space. No upscaled-texture or subdivision claims of restored detail.",
+    "performance": "Measure each target platform at representative close and overland views before setting per-tier budgets."
+  },
+  "blockers": [
+    "Full-detail bunker master referenced in handoff is unavailable locally; provided Meshy canvas does not load.",
+    "Other high-detail building masters are not present in the supplied release; existing files are reduced generated models."
+  ],
+  "acceptance": [
+    "Review each house/POI close-up and overland",
+    "Check doors, roofline, materials, scale, pivot, collision and source provenance",
+    "Check smooth perspective change and stable selected tile",
+    "Check daylight and night readability without obscuring fog",
+    "Validate desktop performance; validate iOS separately"
+  ]
+}

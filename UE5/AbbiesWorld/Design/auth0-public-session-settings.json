@@ -1,0 +1,16 @@
+{
+  "tenant": "dev-33h7qd4ytudlk0ls.us.auth0.com",
+  "client_id": "kmRL2wGH2NhSxIqCXyMpx4UEQDy74QKS",
+  "app_type": "native",
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "audience": "https://api.abbies.world",
+  "api_allow_offline_access": true,
+  "client_refresh_idle_lifetime_enabled": false,
+  "client_refresh_max_lifetime_enabled": false,
+  "checked_in_dashboard": true,
+  "actual_refresh_token_exchange_verified": true,
+  "secrets_in_repository": false
+}
