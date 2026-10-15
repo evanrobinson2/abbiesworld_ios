@@ -1,0 +1,112 @@
+[
+  {
+    "id": "AW-HOUSE-001",
+    "name": "Lantern porch cottage",
+    "source": "SourceAssets\\Papercraft\\AW-HOUSE-001-v0.2.glb",
+    "triangles": 6097,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-TAVERN-001",
+    "name": "Courtyard inn",
+    "source": "SourceAssets\\Papercraft\\AW-TAVERN-001-v0.2.glb",
+    "triangles": 6971,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "ultra-hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-HW-CASTLE-001",
+    "name": "Cocoa wafer castle",
+    "source": "SourceAssets\\HalloweenCandyland\\AW-HW-CASTLE-001-v0.2.glb",
+    "triangles": 11079,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "ultra-hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-HW-CAFE-001",
+    "name": "Gingerbread coffee shop",
+    "source": "SourceAssets\\HalloweenCandyland\\AW-HW-CAFE-001-v0.2.glb",
+    "triangles": 6886,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "ultra-hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-HW-HOUSE-001",
+    "name": "Purple icing cottage",
+    "source": "SourceAssets\\HalloweenCandyland\\AW-HW-HOUSE-001-v0.2.glb",
+    "triangles": 5143,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-HW-MEGA-CASTLE-001",
+    "name": "Colossal five tower confectionery castle",
+    "source": "SourceAssets\\HalloweenCandyland\\AW-HW-MEGA-CASTLE-001-v0.2.glb",
+    "triangles": 17119,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "ultra-hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-MOON-GREENHOUSE-001",
+    "name": "Bluegreen dome greenhouse",
+    "source": "SourceAssets\\MoonBase\\AW-MOON-GREENHOUSE-001-v0.2.glb",
+    "triangles": 8137,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-XMAS-CASTLE-001",
+    "name": "Festive gingerbread palace",
+    "source": "SourceAssets\\Christmas\\AW-XMAS-CASTLE-001-v0.2.glb",
+    "triangles": 19059,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "ultra-hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-XMAS-BAKERY-001",
+    "name": "Gingerbread bakery",
+    "source": "SourceAssets\\Christmas\\AW-XMAS-BAKERY-001-v0.2.glb",
+    "triangles": 9116,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  },
+  {
+    "id": "AW-LANDMARK-DADDYS-BUNKER-001",
+    "name": "Daddy's Bunker \u2014 textured architectural model",
+    "source": "SourceAssets\\Papercraft\\AW-LANDMARK-DADDYS-BUNKER-001-v0.3.glb",
+    "triangles": 15951,
+    "materials": 1,
+    "normal_maps": 1,
+    "metallic_roughness_maps": 1,
+    "tier": "ultra-hero",
+    "upgrade_status": "Material channels repaired or verified; cinematic replacement geometry pending"
+  }
+]
