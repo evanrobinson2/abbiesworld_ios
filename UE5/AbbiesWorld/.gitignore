@@ -8,3 +8,5 @@ DerivedDataCache/
 *.log
 *.pid
 .env*
+/camera-ui-proof.json
+/native-*.png
