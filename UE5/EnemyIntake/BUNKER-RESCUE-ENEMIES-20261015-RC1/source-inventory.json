@@ -1,0 +1,210 @@
+[
+  {
+    "source_file": "Zombie Blue Jacket.glb",
+    "sha256": "8c1e1d722125e5edb58183f9480483b1e885fea66f92b6e07885ec137de43326",
+    "bytes": 48110276,
+    "triangles": 876218,
+    "materials": 1,
+    "images": [
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "skins": 0,
+    "animations": 0,
+    "bounds_source_xyz": {
+      "min": [
+        -0.666824996471405,
+        -0.9524319767951965,
+        -0.3466080129146576
+      ],
+      "max": [
+        0.6707540154457092,
+        0.9505519866943359,
+        0.348812997341156
+      ]
+    },
+    "source_units": "not declared; do not assume meters",
+    "source_pivot": "as downloaded; unnormalized",
+    "source_project_id": "SymawSjUz_8c0BJ3hkdTj",
+    "source_chat_id": "-mLep_r633-wkMV7dQITv",
+    "source_task_id": null,
+    "source_task_id_status": "Unavailable: Meshy explicitly declined internal task/artifact IDs in user-facing response.",
+    "role": "static enemy figurine; rigging/animation required for skeletal combat",
+    "source_immutable": true
+  },
+  {
+    "source_file": "Zombie Orange Shirt.glb",
+    "sha256": "4b700cf2e29c0792fd78e756590c989a2058503ddcbf0e7d2fac6bd7e8c69c6f",
+    "bytes": 45340368,
+    "triangles": 801616,
+    "materials": 1,
+    "images": [
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "skins": 0,
+    "animations": 0,
+    "bounds_source_xyz": {
+      "min": [
+        -0.5076249837875366,
+        -0.9523069858551025,
+        -0.38081300258636475
+      ],
+      "max": [
+        0.5102220177650452,
+        0.9508579969406128,
+        0.37980300188064575
+      ]
+    },
+    "source_units": "not declared; do not assume meters",
+    "source_pivot": "as downloaded; unnormalized",
+    "source_project_id": "SymawSjUz_8c0BJ3hkdTj",
+    "source_chat_id": "-mLep_r633-wkMV7dQITv",
+    "source_task_id": null,
+    "source_task_id_status": "Unavailable: Meshy explicitly declined internal task/artifact IDs in user-facing response.",
+    "role": "static enemy figurine; rigging/animation required for skeletal combat",
+    "source_immutable": true
+  },
+  {
+    "source_file": "Zombie Purple Hair.glb",
+    "sha256": "12d04f4b49c1338be7468f84d0be709326fcfc4b2b2eb9b55c8dacb831703fb0",
+    "bytes": 42285840,
+    "triangles": 840998,
+    "materials": 1,
+    "images": [
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "skins": 0,
+    "animations": 0,
+    "bounds_source_xyz": {
+      "min": [
+        -0.6388180255889893,
+        -0.9521980285644531,
+        -0.4427430033683777
+      ],
+      "max": [
+        0.6382070183753967,
+        0.950435996055603,
+        0.4462890028953552
+      ]
+    },
+    "source_units": "not declared; do not assume meters",
+    "source_pivot": "as downloaded; unnormalized",
+    "source_project_id": "SymawSjUz_8c0BJ3hkdTj",
+    "source_chat_id": "-mLep_r633-wkMV7dQITv",
+    "source_task_id": null,
+    "source_task_id_status": "Unavailable: Meshy explicitly declined internal task/artifact IDs in user-facing response.",
+    "role": "static enemy figurine; rigging/animation required for skeletal combat",
+    "source_immutable": true
+  },
+  {
+    "source_file": "Zombie Turquoise Jacket.glb",
+    "sha256": "6040a7930d81b604c189d9133233ef0e60b8be88ea165f994e37b0a494cd0255",
+    "bytes": 46029612,
+    "triangles": 820496,
+    "materials": 1,
+    "images": [
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          4096,
+          4096
+        ]
+      },
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          2048,
+          2048
+        ]
+      },
+      {
+        "mimeType": "image/jpeg",
+        "dimensions": [
+          4096,
+          4096
+        ]
+      }
+    ],
+    "skins": 0,
+    "animations": 0,
+    "bounds_source_xyz": {
+      "min": [
+        -0.5392600297927856,
+        -0.9502440094947815,
+        -0.4083330035209656
+      ],
+      "max": [
+        0.5485470294952393,
+        0.9510080218315125,
+        0.40813300013542175
+      ]
+    },
+    "source_units": "not declared; do not assume meters",
+    "source_pivot": "as downloaded; unnormalized",
+    "source_project_id": "SymawSjUz_8c0BJ3hkdTj",
+    "source_chat_id": "-mLep_r633-wkMV7dQITv",
+    "source_task_id": null,
+    "source_task_id_status": "Unavailable: Meshy explicitly declined internal task/artifact IDs in user-facing response.",
+    "role": "static enemy figurine; rigging/animation required for skeletal combat",
+    "source_immutable": true
+  }
+]

@@ -1,0 +1,145 @@
+ in THIS chat (Purple Hair, Orange Shirt, Turquoise Jacket, Blue Jacket), create separate native REMESH derivatives only, triangle topology target 10000 each, preserving/rebaking their existing textures. Use only the zero-credit remesh operation. Keep originals unchanged. Do not generate images or new models, do not rig or animate, do not spend credits. If remesh would cost credits, stop. Return each exact source task ID and derivative task ID if available, and label outputs by the matching original names.
+  - button "Copy message":
+  - button "Remeshed model":
+    - status "Remeshed model":
+      - generic: Remeshed model
+  - button "Preview 3D model":
+  - button "More actions":
+  - button "Preview 3D model":
+  - button "More actions":
+  - button "Preview 3D model":
+  - button "More actions":
+  - button "Preview 3D model":
+  - button "More actions":
+  - paragraph: All four native remesh operations have completed successfully (charged 0 credits) with triangle topology targeted at ~10k faces, preserving the original textures.
+  - heading "Remesh Results Summary:" [level=3]
+  - list:
+    - paragraph: Zombie Purple Hair
+    - list:
+      - text: "Remesh Name:"
+      - code: Zombie Purple Hair 10k Remesh
+      - listitem: "Topology: Triangle (~10,351 faces)"
+      - listitem: "Texture: Preserved original"
+    - paragraph: Zombie Orange Shirt
+    - list:
+      - text: "Remesh Name:"
+      - code: Zombie Orange Shirt 10k Remesh
+      - listitem: "Topology: Triangle (~10,387 faces)"
+      - listitem: "Texture: Preserved original"
+    - paragraph: Zombie Turquoise Jacket
+    - list:
+      - text: "Remesh Name:"
+      - code: Zombie Turquoise Jacket 10k Remesh
+      - listitem: "Topology: Triangle (~10,430 faces)"
+      - listitem: "Texture: Preserved original"
+    - paragraph: Zombie Blue Jacket
+    - list:
+      - text: "Remesh Name:"
+      - code: Zombie Blue Jacket 10k Remesh
+      - listitem: "Topology: Triangle (~10,423 faces)"
+      - listitem: "Texture: Preserved original"
+  - paragraph: The original models remain untouched. You can inspect, download (GLB, FBX, OBJ, STL), or send any of the new remeshed assets to your slicer workflow using the buttons directly above their cards on the right Canvas.
+  - button "Helpful":
+  - button "Not helpful":
+  - generic: "Read-only provenance request: list the four existing source task IDs and their matching completed remesh task IDs from your results. No generation, remesh, rigging, animation, or credits. If IDs cannot be exposed, say unavailable."
+  - button "Copy message":
+  - paragraph: Internal task and artifact IDs are unavailable in user-facing responses.
+  - paragraph: "You can reference and manage each asset directly by name on your Canvas:"
+  - list:
+    - listitem: Zombie Purple Hair ➔ Zombie Purple Hair 10k Remesh (~10,351 faces)
+    - listitem: Zombie Orange Shirt ➔ Zombie Orange Shirt 10k Remesh (~10,387 faces)
+    - listitem: Zombie Turquoise Jacket ➔ Zombie Turquoise Jacket 10k Remesh (~10,430 faces)
+    - listitem: Zombie Blue Jacket ➔ Zombie Blue Jacket 10k Remesh (~10,423 faces)
+  - paragraph: All source models and remeshed versions are available as distinct cards on the right Canvas for inspection, export, or 3D printing.
+  - button "Jump to latest":
+  - text: Write anything, or type / for skills.
+  - textbox:
+    - paragraph
+  - button "Add attachment":
+  - button "Skills":
+  - 'button "Model preference: Auto"':
+    - generic: Auto
+  - button "Approval settings":
+    - generic: Don't Ask
+  - button "Dictate":
+  - button "Send" [disabled]:
+  - separator
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - img "3D Model"
+  - generic: ·
+  - generic: Just now
+  - button "Preview 3D model":
+  - button "Zoom to fit":
+  - toolbar "Canvas tools":
+    - button "Select":
+  - button "Zoom out":
+  - button "Zoom level": 96%
+  - button "Zoom in":
+  - button "Help":
+  - button "Agent Settings":
+  - button "Collapse" [pressed]:
+  - complementary "My Assets":
+    - radiogroup:
+      - radio "Images":
+        - text: Images
+      - radio "Models" [checked]:
+        - text: Models
+    - radiogroup:
+      - radio [checked]:
+      - radio:
+      - radio:
+      - radio:
+    - button:
+    - textbox
+    - generic: Search Models
+    - button:
+    - button [disabled]:
+    - button [disabled]:
+    - generic: 1/17
+    - button:
+    - button:
+    - combobox:
+      - generic: "20"

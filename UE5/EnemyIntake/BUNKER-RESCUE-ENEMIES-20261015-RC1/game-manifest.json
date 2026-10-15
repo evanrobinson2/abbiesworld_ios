@@ -1,0 +1,174 @@
+[
+  {
+    "name": "Zombie Blue Jacket 10k Remesh",
+    "file": "game/Zombie Blue Jacket 10k Remesh-game.glb",
+    "sha256": "ca44e6747ef42d61e80339652892321d7694d1c7d5e04ec27f6e630185d86f05",
+    "bytes": 3126308,
+    "triangles": 10423,
+    "dimensions_xyz_m": [
+      1.2659071843577514,
+      1.8,
+      0.6580704394544975
+    ],
+    "up": "+Y",
+    "pivot": "groundcenterXZ",
+    "front_axis": "+Z; visually verified in front-facing browser lineup",
+    "textures": [
+      {
+        "before": [
+          4096,
+          4096
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          4096,
+          4096
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "skins": 0,
+    "animation_clips": 0,
+    "geometry_preserved": true,
+    "native_import": "pending",
+    "browser_import": "passed; triangles and1.8mheight checked",
+    "appearance_approved": false
+  },
+  {
+    "name": "Zombie Orange Shirt 10k Remesh",
+    "file": "game/Zombie Orange Shirt 10k Remesh-game.glb",
+    "sha256": "384c07f4b47272b90de47533c3f78a233dc24ab7834aeda8a5839f1812d07b7a",
+    "bytes": 3026492,
+    "triangles": 10387,
+    "dimensions_xyz_m": [
+      0.9617778715120784,
+      1.8,
+      0.7160297778083542
+    ],
+    "up": "+Y",
+    "pivot": "groundcenterXZ",
+    "front_axis": "+Z; visually verified in front-facing browser lineup",
+    "textures": [
+      {
+        "before": [
+          4096,
+          4096
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          4096,
+          4096
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "skins": 0,
+    "animation_clips": 0,
+    "geometry_preserved": true,
+    "native_import": "pending",
+    "browser_import": "passed; triangles and1.8mheight checked",
+    "appearance_approved": false
+  },
+  {
+    "name": "Zombie Purple Hair 10k Remesh",
+    "file": "game/Zombie Purple Hair 10k Remesh-game.glb",
+    "sha256": "5faf0d8fa23061a665197a8b279df81f894517b2f6f07de38f634d72be911676",
+    "bytes": 2751456,
+    "triangles": 10351,
+    "dimensions_xyz_m": [
+      1.208210138515874,
+      1.8,
+      0.8386835273665486
+    ],
+    "up": "+Y",
+    "pivot": "groundcenterXZ",
+    "front_axis": "+Z; visually verified in front-facing browser lineup",
+    "textures": [
+      {
+        "before": [
+          4096,
+          4096
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          4096,
+          4096
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "skins": 0,
+    "animation_clips": 0,
+    "geometry_preserved": true,
+    "native_import": "pending",
+    "browser_import": "passed; triangles and1.8mheight checked",
+    "appearance_approved": false
+  },
+  {
+    "name": "Zombie Turquoise Jacket 10k Remesh",
+    "file": "game/Zombie Turquoise Jacket 10k Remesh-game.glb",
+    "sha256": "d4b3a2b66797f4135a8bd9a1b14398a7b97f51d99e6a866c2713fa88b46c4a65",
+    "bytes": 3162856,
+    "triangles": 10430,
+    "dimensions_xyz_m": [
+      1.0285174356161662,
+      1.8,
+      0.7711528951608013
+    ],
+    "up": "+Y",
+    "pivot": "groundcenterXZ",
+    "front_axis": "+Z; visually verified in front-facing browser lineup",
+    "textures": [
+      {
+        "before": [
+          4096,
+          4096
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      },
+      {
+        "before": [
+          4096,
+          4096
+        ],
+        "after": [
+          1024,
+          1024
+        ]
+      }
+    ],
+    "skins": 0,
+    "animation_clips": 0,
+    "geometry_preserved": true,
+    "native_import": "pending",
+    "browser_import": "passed; triangles and1.8mheight checked",
+    "appearance_approved": false
+  }
+]
