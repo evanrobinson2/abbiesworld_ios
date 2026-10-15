@@ -1,0 +1,2197 @@
+{
+  "target": "Three.js 0.160.0 isolated staging scene",
+  "results": [
+    {
+      "id": "AW-HEX-MEADOW",
+      "path": "terrain/AW-HEX-MEADOW-v0.1.glb",
+      "before": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "after": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HEX-FOREST",
+      "path": "terrain/AW-HEX-FOREST-v0.1.glb",
+      "before": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "after": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HEX-AUTUMN",
+      "path": "terrain/AW-HEX-AUTUMN-v0.1.glb",
+      "before": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "after": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HEX-HIGHLAND",
+      "path": "terrain/AW-HEX-HIGHLAND-v0.1.glb",
+      "before": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "after": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HEX-SNOW",
+      "path": "terrain/AW-HEX-SNOW-v0.1.glb",
+      "before": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "after": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HEX-MARSH",
+      "path": "terrain/AW-HEX-MARSH-v0.1.glb",
+      "before": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "after": {
+        "triangles": 46,
+        "vertices": 96,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5350000001490116,
+          4.400000095367432
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HEX-WATER",
+      "path": "terrain/AW-HEX-WATER-v0.1.glb",
+      "before": {
+        "triangles": 46,
+        "vertices": 85,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5,
+          4.400000095367432
+        ]
+      },
+      "after": {
+        "triangles": 46,
+        "vertices": 85,
+        "meshes": 4,
+        "materials": 4,
+        "bounds": [
+          3.810511827468872,
+          1.5,
+          4.400000095367432
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-TREE-001",
+      "path": "exports/AW-TREE-001-v0.2.glb",
+      "before": {
+        "triangles": 2420,
+        "vertices": 2663,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.692710929615352,
+          4.2,
+          2.425283524945229
+        ]
+      },
+      "after": {
+        "triangles": 2420,
+        "vertices": 2663,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.692710929615352,
+          4.2,
+          2.4252835249452316
+        ]
+      },
+      "max_bounds_error_m": 2.6645352591003757e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-TREE-002",
+      "path": "exports/AW-TREE-002-v0.2.glb",
+      "before": {
+        "triangles": 2486,
+        "vertices": 2814,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.285844707396541,
+          4.6,
+          1.3281015318735925
+        ]
+      },
+      "after": {
+        "triangles": 2486,
+        "vertices": 2814,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.285844707396541,
+          4.6,
+          1.3281015318735907
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-TREE-003",
+      "path": "exports/AW-TREE-003-v0.2.glb",
+      "before": {
+        "triangles": 2171,
+        "vertices": 4104,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.919999837239507,
+          4,
+          0.6358969519498174
+        ]
+      },
+      "after": {
+        "triangles": 2171,
+        "vertices": 4104,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.919999837239507,
+          4,
+          0.6358969519498159
+        ]
+      },
+      "max_bounds_error_m": 1.5543122344752192e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-TREE-004",
+      "path": "exports/AW-TREE-004-v0.2.glb",
+      "before": {
+        "triangles": 2083,
+        "vertices": 4080,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.804711587381938,
+          4.8,
+          2.4356711501788837
+        ]
+      },
+      "after": {
+        "triangles": 2083,
+        "vertices": 4080,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.8047115873819375,
+          4.8,
+          2.4356711501788837
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-MARSH-TREE-001",
+      "path": "exports/AW-MARSH-TREE-001-v0.2.glb",
+      "before": {
+        "triangles": 2586,
+        "vertices": 2949,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.671320861782748,
+          3.8,
+          2.4566433476208047
+        ]
+      },
+      "after": {
+        "triangles": 2586,
+        "vertices": 2949,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.671320861782747,
+          3.8,
+          2.456643347620803
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-MARSH-TREE-002",
+      "path": "exports/AW-MARSH-TREE-002-v0.2.glb",
+      "before": {
+        "triangles": 1789,
+        "vertices": 2678,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.8215021600116224,
+          3.2,
+          1.2256028193783237
+        ]
+      },
+      "after": {
+        "triangles": 1789,
+        "vertices": 2678,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.821502160011621,
+          3.2,
+          1.225602819378326
+        ]
+      },
+      "max_bounds_error_m": 2.220446049250313e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-ROCK-001",
+      "path": "exports/AW-ROCK-001-v0.2.glb",
+      "before": {
+        "triangles": 853,
+        "vertices": 1872,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.4461801952785915,
+          0.85,
+          0.9990454090966132
+        ]
+      },
+      "after": {
+        "triangles": 853,
+        "vertices": 1872,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.4461801952785915,
+          0.85,
+          0.9990454090966119
+        ]
+      },
+      "max_bounds_error_m": 1.3322676295501878e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-ROCK-002",
+      "path": "exports/AW-ROCK-002-v0.2.glb",
+      "before": {
+        "triangles": 813,
+        "vertices": 1181,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.89164044216135,
+          0.5999999999999999,
+          1.1643095129454366
+        ]
+      },
+      "after": {
+        "triangles": 813,
+        "vertices": 1181,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.8916404421613502,
+          0.5999999999999999,
+          1.1643095129454362
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-ROCK-003",
+      "path": "exports/AW-ROCK-003-v0.2.glb",
+      "before": {
+        "triangles": 1054,
+        "vertices": 1599,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.703077159272254,
+          1.5,
+          0.7038459443762868
+        ]
+      },
+      "after": {
+        "triangles": 1054,
+        "vertices": 1599,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.703077159272254,
+          1.5,
+          0.7038459443762886
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-CLIFF-001",
+      "path": "exports/AW-CLIFF-001-v0.2.glb",
+      "before": {
+        "triangles": 2632,
+        "vertices": 2933,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.73231796849055,
+          4.199999999999999,
+          5.171479090358233
+        ]
+      },
+      "after": {
+        "triangles": 2632,
+        "vertices": 2933,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.73231796849055,
+          4.199999999999999,
+          5.171479090358234
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-CLIFF-002",
+      "path": "exports/AW-CLIFF-002-v0.2.glb",
+      "before": {
+        "triangles": 2637,
+        "vertices": 3329,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          6.289356689602418,
+          3.4,
+          2.795631560552547
+        ]
+      },
+      "after": {
+        "triangles": 2637,
+        "vertices": 3329,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          6.289356689602419,
+          3.4,
+          2.795631560552547
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-ICE-001",
+      "path": "exports/AW-ICE-001-v0.2.glb",
+      "before": {
+        "triangles": 1001,
+        "vertices": 1660,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.0123706402637236,
+          1.3000000000000003,
+          1.0330588892680765
+        ]
+      },
+      "after": {
+        "triangles": 1001,
+        "vertices": 1660,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.012370640263722,
+          1.3000000000000003,
+          1.0330588892680783
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-GRASS-001",
+      "path": "exports/AW-GRASS-001-v0.2.glb",
+      "before": {
+        "triangles": 486,
+        "vertices": 1118,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.360696014109422,
+          0.4,
+          0.1465713298389204
+        ]
+      },
+      "after": {
+        "triangles": 486,
+        "vertices": 1118,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.36069601410942237,
+          0.4,
+          0.1465713298389213
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-CLOVER-001",
+      "path": "exports/AW-CLOVER-001-v0.2.glb",
+      "before": {
+        "triangles": 582,
+        "vertices": 949,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.23642439138693883,
+          0.25,
+          0.08324799772168845
+        ]
+      },
+      "after": {
+        "triangles": 582,
+        "vertices": 949,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.23642439138693888,
+          0.25,
+          0.0832479977216877
+        ]
+      },
+      "max_bounds_error_m": 7.494005416219807e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-FLOWER-001",
+      "path": "exports/AW-FLOWER-001-v0.2.glb",
+      "before": {
+        "triangles": 706,
+        "vertices": 1194,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.45023069311672836,
+          0.6,
+          0.28846749337631294
+        ]
+      },
+      "after": {
+        "triangles": 706,
+        "vertices": 1194,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.4502306931167286,
+          0.6,
+          0.28846749337631095
+        ]
+      },
+      "max_bounds_error_m": 1.9984014443252818e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-FLOWER-002",
+      "path": "exports/AW-FLOWER-002-v0.2.glb",
+      "before": {
+        "triangles": 746,
+        "vertices": 1281,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.39153839496556664,
+          0.5,
+          0.24179486794255212
+        ]
+      },
+      "after": {
+        "triangles": 746,
+        "vertices": 1281,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.3915383949655675,
+          0.5,
+          0.24179486794255245
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-WATERPLANT-001",
+      "path": "exports/AW-WATERPLANT-001-v0.2.glb",
+      "before": {
+        "triangles": 1008,
+        "vertices": 1500,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.4363417124207185,
+          1.2,
+          0.8407317343308556
+        ]
+      },
+      "after": {
+        "triangles": 1008,
+        "vertices": 1500,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.4363417124207176,
+          1.2,
+          0.8407317343308565
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-WATERPLANT-002",
+      "path": "exports/AW-WATERPLANT-002-v0.2.glb",
+      "before": {
+        "triangles": 1026,
+        "vertices": 1862,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.7287477179183508,
+          1.2,
+          0.18418876642450144
+        ]
+      },
+      "after": {
+        "triangles": 1026,
+        "vertices": 1862,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.728747717918353,
+          1.2,
+          0.18418876642450208
+        ]
+      },
+      "max_bounds_error_m": 2.220446049250313e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-MUSHROOM-001",
+      "path": "exports/AW-MUSHROOM-001-v0.2.glb",
+      "before": {
+        "triangles": 930,
+        "vertices": 1337,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.5028195385225658,
+          0.6,
+          0.46007227243661397
+        ]
+      },
+      "after": {
+        "triangles": 930,
+        "vertices": 1337,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.5028195385225664,
+          0.6,
+          0.4600722724366153
+        ]
+      },
+      "max_bounds_error_m": 1.3322676295501878e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HOUSE-001",
+      "path": "exports/AW-HOUSE-001-v0.2.glb",
+      "before": {
+        "triangles": 6097,
+        "vertices": 7562,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          6.28685018374269,
+          4.3,
+          4.991357999215486
+        ]
+      },
+      "after": {
+        "triangles": 6097,
+        "vertices": 7562,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          6.28685018374269,
+          4.3,
+          4.991357999215486
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-TAVERN-001",
+      "path": "exports/AW-TAVERN-001-v0.2.glb",
+      "before": {
+        "triangles": 6971,
+        "vertices": 7569,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          5.209138204287772,
+          4.5,
+          7.295061662959361
+        ]
+      },
+      "after": {
+        "triangles": 6971,
+        "vertices": 7569,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          5.209138204287772,
+          4.5,
+          7.295061662959361
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-DEER-001",
+      "path": "exports/AW-DEER-001-v0.2.glb",
+      "before": {
+        "triangles": 6179,
+        "vertices": 5883,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.9766626568981618,
+          2.6,
+          2.1821909428834605
+        ]
+      },
+      "after": {
+        "triangles": 6179,
+        "vertices": 5883,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.9766626568981622,
+          2.6,
+          2.1821909428834605
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-TREE-001",
+      "path": "exports/AW-VAR-TREE-001-v0.2.glb",
+      "before": {
+        "triangles": 2125,
+        "vertices": 3034,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.4050231564615974,
+          2.2,
+          1.115223455787488
+        ]
+      },
+      "after": {
+        "triangles": 2125,
+        "vertices": 3034,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.4050231564615976,
+          2.2,
+          1.1152234557874885
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-TREE-002",
+      "path": "exports/AW-VAR-TREE-002-v0.2.glb",
+      "before": {
+        "triangles": 2614,
+        "vertices": 2608,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          5.185187074967786,
+          5,
+          2.8306898904825175
+        ]
+      },
+      "after": {
+        "triangles": 2614,
+        "vertices": 2608,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          5.185187074967784,
+          5,
+          2.8306898904825175
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-TREE-003",
+      "path": "exports/AW-VAR-TREE-003-v0.2.glb",
+      "before": {
+        "triangles": 2239,
+        "vertices": 3507,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.2909828092231113,
+          6,
+          0.7131131828808392
+        ]
+      },
+      "after": {
+        "triangles": 2239,
+        "vertices": 3507,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.2909828092231126,
+          6,
+          0.7131131828808394
+        ]
+      },
+      "max_bounds_error_m": 1.3322676295501878e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-TREE-004",
+      "path": "exports/AW-VAR-TREE-004-v0.2.glb",
+      "before": {
+        "triangles": 2010,
+        "vertices": 3500,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.723505742228493,
+          4.5,
+          1.8594476682454237
+        ]
+      },
+      "after": {
+        "triangles": 2010,
+        "vertices": 3500,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.723505742228493,
+          4.5,
+          1.8594476682454246
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-TREE-005",
+      "path": "exports/AW-VAR-TREE-005-v0.2.glb",
+      "before": {
+        "triangles": 2283,
+        "vertices": 3196,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.946156450080966,
+          3,
+          1.2061528630900993
+        ]
+      },
+      "after": {
+        "triangles": 2283,
+        "vertices": 3196,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.9461564500809656,
+          3,
+          1.2061528630900988
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-TREE-006",
+      "path": "exports/AW-VAR-TREE-006-v0.2.glb",
+      "before": {
+        "triangles": 2095,
+        "vertices": 3479,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.8543630375928233,
+          4,
+          1.0605158224326843
+        ]
+      },
+      "after": {
+        "triangles": 2095,
+        "vertices": 3479,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.8543630375928224,
+          4,
+          1.060515822432684
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-TREE-007",
+      "path": "exports/AW-VAR-TREE-007-v0.2.glb",
+      "before": {
+        "triangles": 2628,
+        "vertices": 3959,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.7707701685682267,
+          3.8,
+          0.7599975914577035
+        ]
+      },
+      "after": {
+        "triangles": 2628,
+        "vertices": 3959,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.7707701685682253,
+          3.8,
+          0.7599975914577033
+        ]
+      },
+      "max_bounds_error_m": 1.3322676295501878e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-TREE-008",
+      "path": "exports/AW-VAR-TREE-008-v0.2.glb",
+      "before": {
+        "triangles": 1036,
+        "vertices": 1639,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.265682056456379,
+          0.7,
+          0.49852371530596956
+        ]
+      },
+      "after": {
+        "triangles": 1036,
+        "vertices": 1639,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.2656820564563804,
+          0.7,
+          0.49852371530596956
+        ]
+      },
+      "max_bounds_error_m": 1.3322676295501878e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-FLORA-001",
+      "path": "exports/AW-VAR-FLORA-001-v0.2.glb",
+      "before": {
+        "triangles": 873,
+        "vertices": 1749,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.6080754555827497,
+          0.65,
+          0.23008192899450403
+        ]
+      },
+      "after": {
+        "triangles": 873,
+        "vertices": 1749,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.6080754555827488,
+          0.65,
+          0.23008192899450403
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-FLORA-002",
+      "path": "exports/AW-VAR-FLORA-002-v0.2.glb",
+      "before": {
+        "triangles": 648,
+        "vertices": 1253,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.40490787621968893,
+          0.5999999999999999,
+          0.36104297112687256
+        ]
+      },
+      "after": {
+        "triangles": 648,
+        "vertices": 1253,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.4049078762196891,
+          0.5999999999999999,
+          0.36104297112687256
+        ]
+      },
+      "max_bounds_error_m": 1.6653345369377348e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-FLORA-003",
+      "path": "exports/AW-VAR-FLORA-003-v0.2.glb",
+      "before": {
+        "triangles": 916,
+        "vertices": 1439,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.4940538777218695,
+          0.85,
+          0.15640711480874803
+        ]
+      },
+      "after": {
+        "triangles": 916,
+        "vertices": 1439,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.4940538777218697,
+          0.85,
+          0.15640711480874803
+        ]
+      },
+      "max_bounds_error_m": 2.220446049250313e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-FLORA-004",
+      "path": "exports/AW-VAR-FLORA-004-v0.2.glb",
+      "before": {
+        "triangles": 683,
+        "vertices": 1212,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.34949921842964393,
+          0.3,
+          0.33164432540646926
+        ]
+      },
+      "after": {
+        "triangles": 683,
+        "vertices": 1212,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.34949921842964515,
+          0.3,
+          0.33164432540646926
+        ]
+      },
+      "max_bounds_error_m": 1.2212453270876722e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-FLORA-005",
+      "path": "exports/AW-VAR-FLORA-005-v0.2.glb",
+      "before": {
+        "triangles": 741,
+        "vertices": 1501,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.46855862464934717,
+          0.6500000000000001,
+          0.2974184302167747
+        ]
+      },
+      "after": {
+        "triangles": 741,
+        "vertices": 1501,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.4685586246493443,
+          0.6500000000000001,
+          0.2974184302167747
+        ]
+      },
+      "max_bounds_error_m": 2.886579864025407e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-FLORA-006",
+      "path": "exports/AW-VAR-FLORA-006-v0.2.glb",
+      "before": {
+        "triangles": 712,
+        "vertices": 1118,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.39182357742821594,
+          0.35,
+          0.2985707270884639
+        ]
+      },
+      "after": {
+        "triangles": 712,
+        "vertices": 1118,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.39182357742821744,
+          0.35,
+          0.2985707270884639
+        ]
+      },
+      "max_bounds_error_m": 1.4988010832439613e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-FLORA-007",
+      "path": "exports/AW-VAR-FLORA-007-v0.2.glb",
+      "before": {
+        "triangles": 682,
+        "vertices": 1471,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.6286007157848221,
+          0.7,
+          0.412967789682984
+        ]
+      },
+      "after": {
+        "triangles": 682,
+        "vertices": 1471,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.6286007157848226,
+          0.7,
+          0.4129677896829842
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-FLORA-008",
+      "path": "exports/AW-VAR-FLORA-008-v0.2.glb",
+      "before": {
+        "triangles": 1242,
+        "vertices": 1769,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.8821123685913044,
+          1,
+          0.5781651961072622
+        ]
+      },
+      "after": {
+        "triangles": 1242,
+        "vertices": 1769,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.8821123685913039,
+          1,
+          0.5781651961072618
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-BUILD-001",
+      "path": "exports/AW-VAR-BUILD-001-v0.2.glb",
+      "before": {
+        "triangles": 4694,
+        "vertices": 5143,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.4935880505104375,
+          4.5,
+          2.179582006181181
+        ]
+      },
+      "after": {
+        "triangles": 4694,
+        "vertices": 5143,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.4935880505104375,
+          4.5,
+          2.179582006181181
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-BUILD-002",
+      "path": "exports/AW-VAR-BUILD-002-v0.2.glb",
+      "before": {
+        "triangles": 4632,
+        "vertices": 6020,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.108695321262456,
+          3.5,
+          3.0920906682842464
+        ]
+      },
+      "after": {
+        "triangles": 4632,
+        "vertices": 6020,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.108695321262456,
+          3.5,
+          3.0920906682842455
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-BUILD-003",
+      "path": "exports/AW-VAR-BUILD-003-v0.2.glb",
+      "before": {
+        "triangles": 4670,
+        "vertices": 5230,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.697657289529284,
+          3.8,
+          3.3692177445106717
+        ]
+      },
+      "after": {
+        "triangles": 4670,
+        "vertices": 5230,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.697657289529284,
+          3.8,
+          3.3692177445106717
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-BUILD-004",
+      "path": "exports/AW-VAR-BUILD-004-v0.2.glb",
+      "before": {
+        "triangles": 3765,
+        "vertices": 5122,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.8085119714557507,
+          3,
+          3.3829758406518096
+        ]
+      },
+      "after": {
+        "triangles": 3765,
+        "vertices": 5122,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.8085119714557525,
+          3,
+          3.3829758406518096
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-PROP-001",
+      "path": "exports/AW-VAR-PROP-001-v0.2.glb",
+      "before": {
+        "triangles": 777,
+        "vertices": 1180,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.5881291819127696,
+          0.7,
+          0.5913669409305271
+        ]
+      },
+      "after": {
+        "triangles": 777,
+        "vertices": 1180,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.5881291819127683,
+          0.7,
+          0.5913669409305258
+        ]
+      },
+      "max_bounds_error_m": 1.3322676295501878e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-PROP-002",
+      "path": "exports/AW-VAR-PROP-002-v0.2.glb",
+      "before": {
+        "triangles": 1305,
+        "vertices": 1511,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.3632226297465806,
+          1.1999999999999997,
+          2.6656076344759363
+        ]
+      },
+      "after": {
+        "triangles": 1305,
+        "vertices": 1511,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.3632226297465806,
+          1.1999999999999997,
+          2.6656076344759367
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-PROP-003",
+      "path": "exports/AW-VAR-PROP-003-v0.2.glb",
+      "before": {
+        "triangles": 2452,
+        "vertices": 3449,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.7961607614379176,
+          1.1999999999999997,
+          1.542860502880945
+        ]
+      },
+      "after": {
+        "triangles": 2452,
+        "vertices": 3449,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.796160761437917,
+          1.1999999999999997,
+          1.5428605028809455
+        ]
+      },
+      "max_bounds_error_m": 4.440892098500626e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-VAR-PROP-004",
+      "path": "exports/AW-VAR-PROP-004-v0.2.glb",
+      "before": {
+        "triangles": 1856,
+        "vertices": 2556,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.908781555981328,
+          1.2,
+          1.6865295270029428
+        ]
+      },
+      "after": {
+        "triangles": 1856,
+        "vertices": 2556,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.908781555981327,
+          1.2,
+          1.6865295270029432
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-TREE-001",
+      "path": "exports/AW-HW-TREE-001-v0.2.glb",
+      "before": {
+        "triangles": 3186,
+        "vertices": 3289,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.872887481245204,
+          4,
+          1.314197645186196
+        ]
+      },
+      "after": {
+        "triangles": 3186,
+        "vertices": 3289,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.872887481245206,
+          4,
+          1.3141976451861965
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-CLIFF-001",
+      "path": "exports/AW-HW-CLIFF-001-v0.2.glb",
+      "before": {
+        "triangles": 4155,
+        "vertices": 3800,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.576924005091273,
+          3,
+          2.956922681097261
+        ]
+      },
+      "after": {
+        "triangles": 4155,
+        "vertices": 3800,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.576924005091273,
+          3,
+          2.956922681097262
+        ]
+      },
+      "max_bounds_error_m": 1.3322676295501878e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-PUMPKIN-001",
+      "path": "exports/AW-HW-PUMPKIN-001-v0.2.glb",
+      "before": {
+        "triangles": 1578,
+        "vertices": 1770,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.8713499124294639,
+          0.8,
+          0.8664447512232307
+        ]
+      },
+      "after": {
+        "triangles": 1578,
+        "vertices": 1770,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.8713499124294638,
+          0.8,
+          0.8664447512232301
+        ]
+      },
+      "max_bounds_error_m": 6.661338147750939e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-CORN-001",
+      "path": "exports/AW-HW-CORN-001-v0.2.glb",
+      "before": {
+        "triangles": 1002,
+        "vertices": 1459,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.6619493052091396,
+          0.55,
+          0.5768945081215264
+        ]
+      },
+      "after": {
+        "triangles": 1002,
+        "vertices": 1459,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          0.6619493052091399,
+          0.55,
+          0.5768945081215284
+        ]
+      },
+      "max_bounds_error_m": 1.9984014443252818e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-CASTLE-001",
+      "path": "exports/AW-HW-CASTLE-001-v0.2.glb",
+      "before": {
+        "triangles": 11079,
+        "vertices": 8848,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          9.899383494867596,
+          12,
+          9.086243040959097
+        ]
+      },
+      "after": {
+        "triangles": 11079,
+        "vertices": 8848,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          9.899383494867596,
+          12,
+          9.086243040959097
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-CAFE-001",
+      "path": "exports/AW-HW-CAFE-001-v0.2.glb",
+      "before": {
+        "triangles": 6886,
+        "vertices": 9667,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.768086906061898,
+          4.5,
+          2.779884684557164
+        ]
+      },
+      "after": {
+        "triangles": 6886,
+        "vertices": 9667,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.768086906061898,
+          4.5,
+          2.779884684557163
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-HOUSE-001",
+      "path": "exports/AW-HW-HOUSE-001-v0.2.glb",
+      "before": {
+        "triangles": 5143,
+        "vertices": 4502,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.092980900748831,
+          3.5,
+          2.9441568812385945
+        ]
+      },
+      "after": {
+        "triangles": 5143,
+        "vertices": 4502,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.0929809007488314,
+          3.5,
+          2.9441568812385936
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-SPRUCE-001",
+      "path": "exports/AW-HW-SPRUCE-001-v0.2.glb",
+      "before": {
+        "triangles": 3228,
+        "vertices": 5062,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.145790786800717,
+          4,
+          2.3223812631368155
+        ]
+      },
+      "after": {
+        "triangles": 3228,
+        "vertices": 5062,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          2.145790786800717,
+          4,
+          2.3223812631368137
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-TREE-002",
+      "path": "exports/AW-HW-TREE-002-v0.2.glb",
+      "before": {
+        "triangles": 3666,
+        "vertices": 3505,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.442278223213399,
+          4.5,
+          3.082348150911624
+        ]
+      },
+      "after": {
+        "triangles": 3666,
+        "vertices": 3505,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.442278223213399,
+          4.5,
+          3.082348150911624
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-TREE-003",
+      "path": "exports/AW-HW-TREE-003-v0.2.glb",
+      "before": {
+        "triangles": 2891,
+        "vertices": 4662,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          5.4694471149216355,
+          5,
+          2.3111117380402924
+        ]
+      },
+      "after": {
+        "triangles": 2891,
+        "vertices": 4662,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          5.469447114921635,
+          5,
+          2.3111117380402932
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-TREE-004",
+      "path": "exports/AW-HW-TREE-004-v0.2.glb",
+      "before": {
+        "triangles": 3758,
+        "vertices": 4092,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.0699647053229207,
+          5.5,
+          1.1445410448438231
+        ]
+      },
+      "after": {
+        "triangles": 3758,
+        "vertices": 4092,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.0699647053229207,
+          5.5,
+          1.1445410448438238
+        ]
+      },
+      "max_bounds_error_m": 6.661338147750939e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-TREE-005",
+      "path": "exports/AW-HW-TREE-005-v0.2.glb",
+      "before": {
+        "triangles": 2640,
+        "vertices": 2622,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.195898185173551,
+          4,
+          1.6553855177904246
+        ]
+      },
+      "after": {
+        "triangles": 2640,
+        "vertices": 2622,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.1958981851735517,
+          4,
+          1.655385517790426
+        ]
+      },
+      "max_bounds_error_m": 1.3322676295501878e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-GRAVE-001",
+      "path": "exports/AW-HW-GRAVE-001-v0.2.glb",
+      "before": {
+        "triangles": 1937,
+        "vertices": 2184,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.5385891678309918,
+          1.1,
+          0.6582742288996997
+        ]
+      },
+      "after": {
+        "triangles": 1937,
+        "vertices": 2184,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          1.5385891678309933,
+          1.1,
+          0.6582742288996977
+        ]
+      },
+      "max_bounds_error_m": 1.9984014443252818e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-CRYPT-001",
+      "path": "exports/AW-HW-CRYPT-001-v0.2.glb",
+      "before": {
+        "triangles": 5794,
+        "vertices": 7799,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.0971225927866204,
+          3.5,
+          3.1672628044906403
+        ]
+      },
+      "after": {
+        "triangles": 5794,
+        "vertices": 7799,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.097122592786622,
+          3.5,
+          3.1672628044906412
+        ]
+      },
+      "max_bounds_error_m": 1.7763568394002505e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-GATE-001",
+      "path": "exports/AW-HW-GATE-001-v0.2.glb",
+      "before": {
+        "triangles": 5186,
+        "vertices": 5577,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.728546790554004,
+          3,
+          0.8239018671335714
+        ]
+      },
+      "after": {
+        "triangles": 5186,
+        "vertices": 5577,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          3.7285467905540033,
+          3,
+          0.8239018671335709
+        ]
+      },
+      "max_bounds_error_m": 8.881784197001252e-16,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-MAUSOLEUM-001",
+      "path": "exports/AW-HW-MAUSOLEUM-001-v0.2.glb",
+      "before": {
+        "triangles": 6519,
+        "vertices": 6209,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.360883350300771,
+          5,
+          4.489219619880117
+        ]
+      },
+      "after": {
+        "triangles": 6519,
+        "vertices": 6209,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          4.360883350300771,
+          5,
+          4.489219619880114
+        ]
+      },
+      "max_bounds_error_m": 3.552713678800501e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-MEGA-CASTLE-001",
+      "path": "exports/AW-HW-MEGA-CASTLE-001-v0.2.glb",
+      "before": {
+        "triangles": 17119,
+        "vertices": 25277,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          32.28544171337568,
+          36,
+          18.018508125507815
+        ]
+      },
+      "after": {
+        "triangles": 17119,
+        "vertices": 25277,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          32.28544171337568,
+          36,
+          18.018508125507815
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-MANOR-001",
+      "path": "exports/AW-HW-MANOR-001-v0.2.glb",
+      "before": {
+        "triangles": 13816,
+        "vertices": 20271,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          13.74358977736682,
+          15,
+          9.26516155675834
+        ]
+      },
+      "after": {
+        "triangles": 13816,
+        "vertices": 20271,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          13.74358977736682,
+          15,
+          9.26516155675834
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-BELLTOWER-001",
+      "path": "exports/AW-HW-BELLTOWER-001-v0.2.glb",
+      "before": {
+        "triangles": 8832,
+        "vertices": 11225,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          6.824858865275752,
+          22,
+          6.824858520444515
+        ]
+      },
+      "after": {
+        "triangles": 8832,
+        "vertices": 11225,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          6.8248588652757505,
+          22,
+          6.824858520444511
+        ]
+      },
+      "max_bounds_error_m": 3.552713678800501e-15,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    },
+    {
+      "id": "AW-HW-CAROUSEL-001",
+      "path": "exports/AW-HW-CAROUSEL-001-v0.2.glb",
+      "before": {
+        "triangles": 13597,
+        "vertices": 17388,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          10.601623640855546,
+          10,
+          10.558265858065056
+        ]
+      },
+      "after": {
+        "triangles": 13597,
+        "vertices": 17388,
+        "meshes": 1,
+        "materials": 1,
+        "bounds": [
+          10.601623640855546,
+          10,
+          10.558265858065056
+        ]
+      },
+      "max_bounds_error_m": 0,
+      "round_trip_valid": true,
+      "scene_visible": true,
+      "appearance_approved": false
+    }
+  ],
+  "production_integrated": false,
+  "appearance_approved": false
+}
