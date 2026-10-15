@@ -1,0 +1,11 @@
+{
+  "indicators": 48,
+  "families": 8,
+  "per_family": 6,
+  "pois": 24,
+  "per_round": 8,
+  "unique_ids": true,
+  "indicator_references_resolve": true,
+  "native_validated": false,
+  "gameplay_implemented": false
+}

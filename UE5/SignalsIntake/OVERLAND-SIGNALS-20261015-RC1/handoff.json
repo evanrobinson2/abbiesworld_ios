@@ -1,0 +1,58 @@
+{
+  "snapshot": "OVERLAND-SIGNALS-20261015-RC1",
+  "directory": "C:\\Users\\Evan Robinson\\Documents\\Codex\\2026-10-14\\abbies-original-scenery-library\\outputs\\releases\\OVERLAND-SIGNALS-20261015-RC1",
+  "files": [
+    {
+      "path": "indicator-catalog.json",
+      "bytes": 48875,
+      "sha256": "6a13dce79627e29809919f0ffce0dc53b5c63280f0ee4a09187e981dc63534fe"
+    },
+    {
+      "path": "map-signals.mjs",
+      "bytes": 7315,
+      "sha256": "91ef07872b330f7e719bd4f5992b2c8debaaed00a06b22a21af1058c3ae62ee4"
+    },
+    {
+      "path": "poi-catalog.json",
+      "bytes": 26467,
+      "sha256": "4b8b2b5f4c6ca289e64678569df39d961f2c3de501cd71576d1a4dedc8b1edea"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3121,
+      "sha256": "fcf90f742e263e4b4d0ca882bdfce521ab7ea0dd6f6178b2865fdfda47e14d6c"
+    },
+    {
+      "path": "summerland-signals-proof.png",
+      "bytes": 102144,
+      "sha256": "49ca2d3189d91fd02f5003f932f3c272c10df3bbc50bc00a195ee621085f6926"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 224,
+      "sha256": "1cc96cd074077ef5678a60dfaa325e3dc700dd39d7f60b7db5b20288c475c1a6"
+    }
+  ],
+  "indicator_types": 48,
+  "semantic_poi_roles": 24,
+  "review_rounds": 3,
+  "originality": "Original semantic definitions and browser renderer; familiar general game-map conventions; no proprietary graphics used.",
+  "namespace": "AW-IND semantic types with AW-MARKER renderer aliases; AW-POI semantic roles.",
+  "verified_browser_behaviors": [
+    "Layer toggle",
+    "Round selection",
+    "Unknown identities hidden",
+    "Discovery reveals named glyph",
+    "Click opens details",
+    "Poison state changed to active in preview"
+  ],
+  "runtime_event": "abbies-world:signal-preview; preview_only true; no game effects connected",
+  "native_gameplay_implemented": false,
+  "native_validated": false,
+  "physical_poi_models": "12 contracts prepared separately; not generated yet",
+  "producer_ownership": "Catalog/design and renderer reference; Overland owns real runtime state,placement,turn integration andUI composition",
+  "dependencies": [
+    "Browser reference requires Three.js camera/orbit; use catalogs for native renderer",
+    "Relative catalog fetch paths refer to producer outputs/expansion/overland-pois; configure paths during intake"
+  ]
+}

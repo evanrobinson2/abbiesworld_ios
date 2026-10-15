@@ -1,0 +1,726 @@
+{
+  "schema_version": "1.0.0",
+  "catalog_id": "AW-OVERLAND-POIS-001",
+  "native_validated": false,
+  "rounds": [
+    {
+      "id": 1,
+      "label": "Exploration and economy",
+      "poi_count": 8
+    },
+    {
+      "id": 2,
+      "label": "Hazard and magic",
+      "poi_count": 8
+    },
+    {
+      "id": 3,
+      "label": "Quests and events",
+      "poi_count": 8
+    }
+  ],
+  "event_payload_proposed": {
+    "poi_id": "stable catalog ID",
+    "instance_id": "unique placed instance ID",
+    "indicator_id": "stable catalog ID",
+    "state": "known applicable state",
+    "position": "world-space location supplied by engine",
+    "evidence": "optional discovered facts supplied by gameplay",
+    "request_id": "optional tracked quest ID"
+  },
+  "implementation_status": "Semantic proposals only; hook names have no registered handlers in this deliverable.",
+  "pois": [
+    {
+      "id": "AW-POI-CACHE",
+      "label": "Treasure cache",
+      "round": 1,
+      "description": "A modest concealed stash with an inspectable clue.",
+      "indicator_ids": [
+        "AW-IND-CACHE",
+        "AW-IND-SECRET"
+      ],
+      "primary_indicator_id": "AW-IND-CACHE",
+      "preview_summary": "preview inventory slots and eligibility",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "depleted"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_cache",
+        "on_confirm": "overland.claim_cache",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-RUIN",
+      "label": "Quiet ruin",
+      "round": 1,
+      "description": "A partially collapsed structure offering discovery.",
+      "indicator_ids": [
+        "AW-IND-RUIN",
+        "AW-IND-RELIC"
+      ],
+      "primary_indicator_id": "AW-IND-RUIN",
+      "preview_summary": "preview entry requirements and known findings",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_ruin",
+        "on_confirm": "overland.explore_ruin",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-LOOKOUT",
+      "label": "Hilltop lookout",
+      "round": 1,
+      "description": "A broad overlook suitable for mapping the surroundings.",
+      "indicator_ids": [
+        "AW-IND-VISTA"
+      ],
+      "primary_indicator_id": "AW-IND-VISTA",
+      "preview_summary": "preview visible terrain and survey opportunity",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_lookout",
+        "on_confirm": "overland.survey_area",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-TIMBER",
+      "label": "Managed timber stand",
+      "round": 1,
+      "description": "A compact stand suitable for sustainable wood gathering.",
+      "indicator_ids": [
+        "AW-IND-TIMBER"
+      ],
+      "primary_indicator_id": "AW-IND-TIMBER",
+      "preview_summary": "preview yield and recovery information if supplied",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "depleted"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_timber",
+        "on_confirm": "overland.harvest_timber",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-QUARRY",
+      "label": "Mineral outcrop",
+      "round": 1,
+      "description": "An exposed seam with readable resource quality.",
+      "indicator_ids": [
+        "AW-IND-ORE"
+      ],
+      "primary_indicator_id": "AW-IND-ORE",
+      "preview_summary": "preview tool requirements and known resource type",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "depleted"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_outcrop",
+        "on_confirm": "overland.mine_outcrop",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-GARDEN",
+      "label": "Forager garden",
+      "round": 1,
+      "description": "A small patch of useful edible and medicinal growth.",
+      "indicator_ids": [
+        "AW-IND-HERBS",
+        "AW-IND-FOOD"
+      ],
+      "primary_indicator_id": "AW-IND-HERBS",
+      "preview_summary": "preview identified plants and safe gathering options",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "depleted"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_garden",
+        "on_confirm": "overland.gather_plants",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-TRADEPOST",
+      "label": "Wayside tradepost",
+      "round": 1,
+      "description": "A small exchange point on a travelled route.",
+      "indicator_ids": [
+        "AW-IND-TRADE",
+        "AW-IND-SETTLEMENT"
+      ],
+      "primary_indicator_id": "AW-IND-TRADE",
+      "preview_summary": "preview service hours and categories if supplied",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_tradepost",
+        "on_confirm": "overland.open_trade",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-WORKSHOP",
+      "label": "Repair workshop",
+      "round": 1,
+      "description": "A sheltered place for equipment maintenance and crafting.",
+      "indicator_ids": [
+        "AW-IND-REPAIR",
+        "AW-IND-BUILD"
+      ],
+      "primary_indicator_id": "AW-IND-REPAIR",
+      "preview_summary": "preview offered services and costs if supplied",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_workshop",
+        "on_confirm": "overland.use_workshop",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-PORTAL",
+      "label": "Paired portal",
+      "round": 2,
+      "description": "A magical connection with a destination that must be identified.",
+      "indicator_ids": [
+        "AW-IND-PORTAL"
+      ],
+      "primary_indicator_id": "AW-IND-PORTAL",
+      "preview_summary": "preview known destination and activation requirements",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_portal",
+        "on_confirm": "overland.activate_portal",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-SANCTUARY",
+      "label": "Ward sanctuary",
+      "round": 2,
+      "description": "A calm protected place with a possible beneficial effect.",
+      "indicator_ids": [
+        "AW-IND-WARD",
+        "AW-IND-BOON",
+        "AW-IND-SHELTER"
+      ],
+      "primary_indicator_id": "AW-IND-WARD",
+      "preview_summary": "preview effect duration and conditions if known",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_sanctuary",
+        "on_confirm": "overland.request_blessing",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-TOXICMARSH",
+      "label": "Tainted marsh",
+      "round": 2,
+      "description": "A marsh pocket with an uncertain contamination source.",
+      "indicator_ids": [
+        "AW-IND-POISON",
+        "AW-IND-HERBS"
+      ],
+      "primary_indicator_id": "AW-IND-POISON",
+      "preview_summary": "preview exposure evidence and protection requirements",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_marsh",
+        "on_confirm": "overland.investigate_contamination",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-TRAPFIELD",
+      "label": "Old mechanism field",
+      "round": 2,
+      "description": "A passage dotted with suspected mechanical hazards.",
+      "indicator_ids": [
+        "AW-IND-TRAP",
+        "AW-IND-CROSSING"
+      ],
+      "primary_indicator_id": "AW-IND-TRAP",
+      "preview_summary": "preview detected devices and route alternatives",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_mechanisms",
+        "on_confirm": "overland.disarm_mechanisms",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-RIFT",
+      "label": "Resonance rift",
+      "round": 2,
+      "description": "A fluctuating magical fracture that changes local conditions.",
+      "indicator_ids": [
+        "AW-IND-RIFT",
+        "AW-IND-DRAIN"
+      ],
+      "primary_indicator_id": "AW-IND-RIFT",
+      "preview_summary": "preview observed effects and unknowns",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_rift",
+        "on_confirm": "overland.stabilize_rift",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-CURSEDGROVE",
+      "label": "Bound grove",
+      "round": 2,
+      "description": "A grove whose boundary carries a persistent magical burden.",
+      "indicator_ids": [
+        "AW-IND-CURSE",
+        "AW-IND-DREAM"
+      ],
+      "primary_indicator_id": "AW-IND-CURSE",
+      "preview_summary": "preview discovered binding clues",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_grove",
+        "on_confirm": "overland.lift_binding",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-CRYSTAL",
+      "label": "Crystal spring",
+      "round": 2,
+      "description": "A spring beside a resonant mineral growth.",
+      "indicator_ids": [
+        "AW-IND-CRYSTAL",
+        "AW-IND-WATER"
+      ],
+      "primary_indicator_id": "AW-IND-CRYSTAL",
+      "preview_summary": "preview known water quality and resource status",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "depleted"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_spring",
+        "on_confirm": "overland.gather_crystal",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-COLLAPSE",
+      "label": "Fractured crossing",
+      "round": 2,
+      "description": "A damaged crossing with unstable supports.",
+      "indicator_ids": [
+        "AW-IND-UNSTABLE",
+        "AW-IND-DANGER",
+        "AW-IND-CROSSING"
+      ],
+      "primary_indicator_id": "AW-IND-UNSTABLE",
+      "preview_summary": "preview stability evidence and passage restrictions",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_crossing",
+        "on_confirm": "overland.repair_crossing",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-REQUEST",
+      "label": "Notice clearing",
+      "round": 3,
+      "description": "A meeting place where a local request may be discovered.",
+      "indicator_ids": [
+        "AW-IND-QUEST",
+        "AW-IND-DIALOGUE"
+      ],
+      "primary_indicator_id": "AW-IND-QUEST",
+      "preview_summary": "preview request terms without accepting",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_request",
+        "on_confirm": "overland.accept_request",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-RESCUE",
+      "label": "Assistance camp",
+      "round": 3,
+      "description": "A small camp with an active request for help.",
+      "indicator_ids": [
+        "AW-IND-HELP",
+        "AW-IND-OBJECTIVE"
+      ],
+      "primary_indicator_id": "AW-IND-HELP",
+      "preview_summary": "preview needs and assistance options",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_assistance",
+        "on_confirm": "overland.offer_assistance",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-MEETING",
+      "label": "Companion rendezvous",
+      "round": 3,
+      "description": "An agreed meeting place for a friendly encounter.",
+      "indicator_ids": [
+        "AW-IND-COMPANION",
+        "AW-IND-DIALOGUE"
+      ],
+      "primary_indicator_id": "AW-IND-COMPANION",
+      "preview_summary": "preview participant identity only if discovered",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_rendezvous",
+        "on_confirm": "overland.start_conversation",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-TURNIN",
+      "label": "Return rendezvous",
+      "round": 3,
+      "description": "A destination for reporting a completed tracked task.",
+      "indicator_ids": [
+        "AW-IND-RETURN",
+        "AW-IND-OBJECTIVE"
+      ],
+      "primary_indicator_id": "AW-IND-RETURN",
+      "preview_summary": "preview completion evidence and reward terms",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_return",
+        "on_confirm": "overland.turn_in_task",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-CARAVAN",
+      "label": "Caravan halt",
+      "round": 3,
+      "description": "A temporary stop for a travelling merchant group.",
+      "indicator_ids": [
+        "AW-IND-CARAVAN",
+        "AW-IND-TRADE"
+      ],
+      "primary_indicator_id": "AW-IND-CARAVAN",
+      "preview_summary": "preview remaining availability if supplied",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_caravan",
+        "on_confirm": "overland.meet_caravan",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-FESTIVAL",
+      "label": "Seasonal fair",
+      "round": 3,
+      "description": "A temporary local celebration with optional activities.",
+      "indicator_ids": [
+        "AW-IND-FESTIVAL",
+        "AW-IND-SETTLEMENT"
+      ],
+      "primary_indicator_id": "AW-IND-FESTIVAL",
+      "preview_summary": "preview available activities without enrolling",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_fair",
+        "on_confirm": "overland.join_activity",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-STORMREFUGE",
+      "label": "Storm refuge",
+      "round": 3,
+      "description": "A shelter whose value changes with weather exposure.",
+      "indicator_ids": [
+        "AW-IND-STORM",
+        "AW-IND-SHELTER",
+        "AW-IND-SNOW"
+      ],
+      "primary_indicator_id": "AW-IND-STORM",
+      "preview_summary": "preview weather conditions and shelter capacity",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_refuge",
+        "on_confirm": "overland.enter_refuge",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    },
+    {
+      "id": "AW-POI-WATCHPOST",
+      "label": "Contested watchpost",
+      "round": 3,
+      "description": "A visible landmark with a changing control dispute.",
+      "indicator_ids": [
+        "AW-IND-CONTESTED",
+        "AW-IND-CLAIM",
+        "AW-IND-SURGE"
+      ],
+      "primary_indicator_id": "AW-IND-CONTESTED",
+      "preview_summary": "preview known parties and active local event",
+      "discovery_policy": "Conceal identity and outcomes until discovered; unknown marker shows family only.",
+      "initial_state": "unknown",
+      "states": [
+        "unknown",
+        "discovered",
+        "active",
+        "resolved"
+      ],
+      "integration_hooks_proposed": {
+        "on_inspect": "overland.inspect_watchpost",
+        "on_confirm": "overland.negotiate_control",
+        "on_state_changed": "overland.poi_state_changed",
+        "on_indicator_changed": "overland.indicator_state_changed"
+      },
+      "hook_status": "proposed_not_implemented",
+      "commit_requires_separate_confirmation_in_game": true,
+      "native_validated": false
+    }
+  ]
+}
