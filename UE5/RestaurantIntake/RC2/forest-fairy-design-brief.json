@@ -1,0 +1,62 @@
+{
+  "status": "user_direction_recorded_art_first_mechanics_next",
+  "character_cast": [
+    {
+      "id": "AW-KITCHEN-ABBIE",
+      "design": "Abbie wearing a unicorn suit"
+    },
+    {
+      "id": "AW-KITCHEN-DADDY",
+      "design": "Daddy wearing a fox costume"
+    },
+    {
+      "id": "AW-KITCHEN-MOMMY",
+      "design": "Cute snail Mommy with rainbow glitter shell"
+    }
+  ],
+  "motif": "Cozy woodland fairy burger restaurant: leaves, mushrooms, fairy lights, tactile welcoming materials; compatible with Abbie\u2019s World",
+  "workflow": [
+    "Calibrate current facing and plate placement",
+    "3D Artist supplies original character and kitchen proofs/exports",
+    "Review original kit in the real arena",
+    "Rebuild mechanics around compact left-entering order tickets and actual fill state"
+  ],
+  "order_contract": {
+    "incoming": "Tickets enter from left and show dish plus ingredient requirements",
+    "states": [
+      "waiting",
+      "preparing",
+      "partly_plated",
+      "ready_to_serve",
+      "served",
+      "expired"
+    ],
+    "progress_evidence": "Only mark an ingredient filled when it is actually part of the plate assigned to that ticket; preparation work can be shown separately. Do not count a shared ingredient twice.",
+    "deadline": "Visible countdown per order; deliver matching completed plate before expiry",
+    "cooperation": "Family shares the kitchen; both preparation and final plate status are visible"
+  },
+  "bonk_proposal": {
+    "status": "proposed_for_our_game_not_claim_about_original",
+    "trigger": "Repeated meaningful chef collisions, not simply standing nearby",
+    "meter": "Three playful bonk pips; decay while moving without collisions",
+    "at_limit": "Recoverable drop of held item with clear bounce/sound/feedback",
+    "tuning": "Forgiving cooldown between counted bumps; no forced chain drops or permanent order loss from one collision",
+    "implementation": "Deferred until original art phase as requested"
+  },
+  "art_generation": "Owned by 3D Artist; existing authorized credits only; no extracted commercial references uploaded",
+  "animation_contract": "Idle, locomotion/glide, carry, chop, wash, throw, catch, dash, celebrate; rig status explicit and held-item sockets calibrated",
+  "restaurant_name": "Forest Fairy Burger Joint",
+  "food_kit": [
+    "bun base",
+    "bun top",
+    "raw patty",
+    "cooked patty",
+    "burnt patty",
+    "whole/chopped lettuce",
+    "whole/chopped tomato",
+    "cheese slice",
+    "assembled burgers",
+    "clean/dirty plate or tray"
+  ],
+  "reference_demo": "Current fish/rice proof remains temporary native calibration; original art and later mechanics use burgers."
+}

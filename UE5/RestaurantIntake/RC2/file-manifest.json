@@ -1,0 +1,27 @@
+[
+  {
+    "relative_path": "create-graybox-assets.py",
+    "sha256": "76fdbc5bc443a1401203899e4b918ddd2d2f5d766a7019afe037a409a25fada4",
+    "bytes": 662
+  },
+  {
+    "relative_path": "forest-fairy-design-brief.json",
+    "sha256": "1a12e9e8418bd3cf0a06562a33f3079b6d7d50a729f65544a3aad6674296f5b0",
+    "bytes": 2748
+  },
+  {
+    "relative_path": "integration-deltas.md",
+    "sha256": "7e92d4f217a826f6f395f52c334200f77e6e5b28a707e3d040001b4fd81584fc",
+    "bytes": 3654
+  },
+  {
+    "relative_path": "Source/AbbiesWorld/AWRestaurantMode.cpp",
+    "sha256": "0432e972a3a3a91f3164e7cf1edd8d90611b08a74435e4b1094ca583ee1188e4",
+    "bytes": 37697
+  },
+  {
+    "relative_path": "Source/AbbiesWorld/AWRestaurantMode.h",
+    "sha256": "7e91e2f3fa14a98c3aaccbff604200a9507e135b1493c69df24e2e5c2cfcc022",
+    "bytes": 4126
+  }
+]
