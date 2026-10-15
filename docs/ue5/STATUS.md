@@ -21,3 +21,17 @@ See COOPERATION.md and each intake's integration contract/INTAKE.md for ownershi
 ## Restaurant art correction
 
 Evan rejected the procedural family figures. Do not promote outputs/forest-fairy-originals or FOREST-FAIRY-20261015-RC1 as production art; they are rejected technical stand-ins with no appearance approval. They have not been intaken into this branch. The 3D Artist owns the actual production/handoff for unicorn Abbie, fox Daddy, rainbow-glitter snail Mommy and the woodland burger counter. Wait for the artist-owned handoff and review before asset release. Restaurant RC1/RC2 gameplay source remains accepted for source intake only; no final art approval is implied.
+
+## Noodle House staging dependencies
+
+Restaurant owner reports the current direction as Abby and Ani's Noodle House, a cooperative encounter entered after a completed landing within a placed four-hex mega tile. This is reported steering from a separate voice chat; no canonical promotion or appearance approval is established here.
+
+Reported isolated proof: replicated server-owned encounter state, per-controller input, separate packaged host/client cooking test (two dishes, 156 points), 1360 client snapshots and 39 landing/placement checks. These are producer reports, not independently replayed coordinator tests. Final visual recook and a frozen handoff remain pending.
+
+Required before production integration:
+- Shared API/Supabase session broker and authenticated encounter admission. Current PreLogin fails closed unless a development/proof flag is set.
+- Authoritative placed-mega-tile registry and completed-landing callback from Overland; preserve the four-hex boundary and prevent premature entry.
+- Reviewed encounter lifecycle adapter, return path and ownership of replicated state, session cleanup and rewards.
+- Final native visual QA, original asset/provenance audit and human appearance review. Exterior exact four-hex fit and broth artifact review remain tracked until resolved.
+
+Adapter proposal is local restaurant output noodle-house-multiplayer/encounter-session-contract.md, awaiting frozen handoff. Existing artist B01 and Noodle House B02 assets are staging candidates. Rejected procedural family assets remain excluded. No production online or iOS readiness claim follows from the isolated host/client proof.
