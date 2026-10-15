@@ -35,3 +35,9 @@ Required before production integration:
 - Final native visual QA, original asset/provenance audit and human appearance review. Exterior exact four-hex fit and broth artifact review remain tracked until resolved.
 
 Adapter proposal is local restaurant output noodle-house-multiplayer/encounter-session-contract.md, awaiting frozen handoff. Existing artist B01 and Noodle House B02 assets are staging candidates. Rejected procedural family assets remain excluded. No production online or iOS readiness claim follows from the isolated host/client proof.
+
+## Accepted Noodle House technical archive
+
+UE5/RestaurantIntake/NOODLE-HOUSE-NATIVE-20261015-RC1 now holds the frozen technical review source, 120 native assets, artist provenance, contract, evidence and unapplied adapter. All 210 producer payload hashes were verified against staged Git blobs. This is not an approved canonical runtime or final art release. Earlier Restaurant RC1/RC2 and the rejected procedural family decision remain preserved. Production online dependencies above remain open; review the new INTAKE.md before integration.
+
+Latest Potion Meadow archive is v0.4.0-delta (apply after earlier deltas); human visual and parent/device approval remain pending. The earlier table names historical bases and must not be interpreted as final gameplay acceptance.
