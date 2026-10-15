@@ -1,0 +1,23 @@
+{
+  "revision": "R2-sanitized",
+  "removed_config_sections": [
+    "[/Script/AndroidFileServerEditor.AndroidFileServerRuntimeSettings]"
+  ],
+  "helper_scripts": "Local-only absolute-path Python helpers deliberately excluded; native Content maps can open directly.",
+  "provenance": "Selected original producer RC2/RC3 assets; original authored terrain. No extracted commercial scenery or private character model in Content.",
+  "quarantine": "AW-HW-CLIFF-001 excluded from selected intake and native Content.",
+  "groundcover_warnings": {
+    "deprecated_editor_scripting_APIs": 3,
+    "lookup_before_creation_missing_foliage_asset_messages": 12,
+    "volumetric_fog_scalability_setting_lower_priority": 1,
+    "errors": 0,
+    "note": "Four new foliage assets were successfully created/saved after their initial existence probes. Separate render map-check warnings about instancing material usage still require packaged validation."
+  },
+  "appearance_issues": [
+    "Highland ground too pale",
+    "Halloween tree silhouettes repetitive",
+    "Water basic and flat",
+    "Central bunker rectangular blockout"
+  ],
+  "scope": "Static editor preview. Native gameplay, packaged performance, iOS and per-asset human approval pending."
+}

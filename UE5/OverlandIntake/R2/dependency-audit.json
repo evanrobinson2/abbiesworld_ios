@@ -1,0 +1,638 @@
+{
+  "packages": 185,
+  "dependencies": {
+    "/Game/AbbiesWorld/Overland/Foliage/FT_GroundCover_HalloweenCandyland_AW_CLOVER_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/SM_AW_CLOVER_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_GroundCover_HalloweenCandyland_AW_GRASS_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/SM_AW_GRASS_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_GroundCover_Papercraft_AW_CLOVER_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/SM_AW_CLOVER_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_GroundCover_Papercraft_AW_GRASS_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/SM_AW_GRASS_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLIFF_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/SM_AW_CLIFF_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLIFF_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/SM_AW_CLIFF_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLOVER_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/SM_AW_CLOVER_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_CORN_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/SM_AW_HW_CORN_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_PUMPKIN_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/SM_AW_HW_PUMPKIN_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_SPRUCE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/SM_AW_HW_SPRUCE_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/SM_AW_HW_TREE_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_002": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/SM_AW_HW_TREE_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_003": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/SM_AW_HW_TREE_003",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_004": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/SM_AW_HW_TREE_004",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_005": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/SM_AW_HW_TREE_005",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ICE_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/SM_AW_ICE_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/SM_AW_ROCK_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/SM_AW_ROCK_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_003": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/SM_AW_ROCK_003",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_WATERPLANT_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/SM_AW_WATERPLANT_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_WATERPLANT_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/SM_AW_WATERPLANT_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLIFF_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/SM_AW_CLIFF_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLIFF_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/SM_AW_CLIFF_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLOVER_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/SM_AW_CLOVER_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_FLOWER_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/SM_AW_FLOWER_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_FLOWER_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/SM_AW_FLOWER_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ICE_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/SM_AW_ICE_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MARSH_TREE_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/SM_AW_MARSH_TREE_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MARSH_TREE_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/SM_AW_MARSH_TREE_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MUSHROOM_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/SM_AW_MUSHROOM_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/SM_AW_ROCK_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/SM_AW_ROCK_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_003": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/SM_AW_ROCK_003",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/SM_AW_TREE_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/SM_AW_TREE_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_003": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/SM_AW_TREE_003",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_004": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/SM_AW_TREE_004",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_WATERPLANT_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/SM_AW_WATERPLANT_001",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_WATERPLANT_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/SM_AW_WATERPLANT_002",
+      "/Script/Foliage"
+    ],
+    "/Game/AbbiesWorld/Overland/Maps/AmberVale_HalloweenCandyland": [
+      "/Engine/BasicShapes/Cube",
+      "/Engine/BasicShapes/Plane",
+      "/Engine/EditorResources/LightIcons/S_LightError",
+      "/Engine/EngineMaterials/WorldGridMaterial",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_GroundCover_HalloweenCandyland_AW_CLOVER_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_GroundCover_HalloweenCandyland_AW_GRASS_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLIFF_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLIFF_002",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLOVER_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_CORN_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_PUMPKIN_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_SPRUCE_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ICE_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_002",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_003",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_WATERPLANT_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_WATERPLANT_002",
+      "/Game/AbbiesWorld/Overland/Materials/M_Bunker",
+      "/Game/AbbiesWorld/Overland/Materials/M_BunkerDoor",
+      "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_0",
+      "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_1",
+      "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_2",
+      "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_3",
+      "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_4",
+      "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_5",
+      "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_6",
+      "/Game/AbbiesWorld/Overland/Materials/M_Road_HalloweenCandyland",
+      "/Game/AbbiesWorld/Overland/Materials/M_Water_HalloweenCandyland",
+      "/Game/AbbiesWorld/Overland/Terrain/SM_AmberValeNatural",
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/SM_AW_HW_CAFE_001",
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/SM_AW_HW_CASTLE_001",
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/SM_AW_HW_CORN_001",
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/SM_AW_HW_HOUSE_001",
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/SM_AW_HW_PUMPKIN_001",
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/SM_AW_HW_SPRUCE_001",
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/SM_AW_HW_TREE_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/SM_AW_CLIFF_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/SM_AW_CLIFF_002",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/SM_AW_CLOVER_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/SM_AW_GRASS_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/SM_AW_ICE_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/SM_AW_ROCK_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/SM_AW_ROCK_002",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/SM_AW_ROCK_003",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/SM_AW_WATERPLANT_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/SM_AW_WATERPLANT_002",
+      "/Script/CinematicCamera",
+      "/Script/Foliage",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Overland/Maps/AmberVale_Papercraft": [
+      "/Engine/BasicShapes/Cube",
+      "/Engine/BasicShapes/Plane",
+      "/Engine/EditorResources/LightIcons/S_LightError",
+      "/Engine/EngineMaterials/WorldGridMaterial",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_GroundCover_Papercraft_AW_CLOVER_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_GroundCover_Papercraft_AW_GRASS_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLIFF_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLIFF_002",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLOVER_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_FLOWER_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_FLOWER_002",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ICE_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MARSH_TREE_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MARSH_TREE_002",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MUSHROOM_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_002",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_003",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_002",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_003",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_004",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_WATERPLANT_001",
+      "/Game/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_WATERPLANT_002",
+      "/Game/AbbiesWorld/Overland/Materials/M_Bunker",
+      "/Game/AbbiesWorld/Overland/Materials/M_BunkerDoor",
+      "/Game/AbbiesWorld/Overland/Materials/M_Road_Papercraft",
+      "/Game/AbbiesWorld/Overland/Materials/M_Water_Papercraft",
+      "/Game/AbbiesWorld/Overland/Terrain/SM_AmberValeNatural",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/SM_AW_CLIFF_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/SM_AW_CLIFF_002",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/SM_AW_CLOVER_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/SM_AW_FLOWER_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/SM_AW_FLOWER_002",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/SM_AW_GRASS_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/SM_AW_HOUSE_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/SM_AW_ICE_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/SM_AW_MARSH_TREE_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/SM_AW_MARSH_TREE_002",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/SM_AW_MUSHROOM_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/SM_AW_ROCK_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/SM_AW_ROCK_002",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/SM_AW_ROCK_003",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/SM_AW_TAVERN_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/SM_AW_TREE_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/SM_AW_TREE_002",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/SM_AW_TREE_003",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/SM_AW_TREE_004",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/SM_AW_WATERPLANT_001",
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/SM_AW_WATERPLANT_002",
+      "/Script/CinematicCamera",
+      "/Script/Foliage",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Overland/Materials/M_Bunker": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_BunkerDoor": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_0": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_1": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_2": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_3": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_4": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_5": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_HW_Terrain_6": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_Road_HalloweenCandyland": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_Road_Papercraft": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_Water_HalloweenCandyland": [],
+    "/Game/AbbiesWorld/Overland/Materials/M_Water_Papercraft": [],
+    "/Game/AbbiesWorld/Overland/Terrain/EarthSide": [],
+    "/Game/AbbiesWorld/Overland/Terrain/SM_AmberValeNatural": [
+      "/Game/AbbiesWorld/Overland/Terrain/EarthSide",
+      "/Game/AbbiesWorld/Overland/Terrain/autumn",
+      "/Game/AbbiesWorld/Overland/Terrain/forest",
+      "/Game/AbbiesWorld/Overland/Terrain/highland",
+      "/Game/AbbiesWorld/Overland/Terrain/marsh",
+      "/Game/AbbiesWorld/Overland/Terrain/meadow",
+      "/Game/AbbiesWorld/Overland/Terrain/snow",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Overland/Terrain/autumn": [],
+    "/Game/AbbiesWorld/Overland/Terrain/forest": [],
+    "/Game/AbbiesWorld/Overland/Terrain/highland": [],
+    "/Game/AbbiesWorld/Overland/Terrain/marsh": [],
+    "/Game/AbbiesWorld/Overland/Terrain/meadow": [],
+    "/Game/AbbiesWorld/Overland/Terrain/snow": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_BELLTOWER_001/AW-HW-BELLTOWER-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_BELLTOWER_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_BELLTOWER_001/AW-HW-BELLTOWER-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_BELLTOWER_001/SM_AW_HW_BELLTOWER_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_BELLTOWER_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/AW-HW-CAFE-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/AW-HW-CAFE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/SM_AW_HW_CAFE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAROUSEL_001/AW-HW-CAROUSEL-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAROUSEL_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAROUSEL_001/AW-HW-CAROUSEL-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAROUSEL_001/SM_AW_HW_CAROUSEL_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAROUSEL_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/AW-HW-CASTLE-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/AW-HW-CASTLE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/SM_AW_HW_CASTLE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/AW-HW-CORN-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/AW-HW-CORN-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/SM_AW_HW_CORN_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CRYPT_001/AW-HW-CRYPT-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CRYPT_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CRYPT_001/AW-HW-CRYPT-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CRYPT_001/SM_AW_HW_CRYPT_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CRYPT_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GATE_001/AW-HW-GATE-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GATE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GATE_001/AW-HW-GATE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GATE_001/SM_AW_HW_GATE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GATE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GRAVE_001/AW-HW-GRAVE-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GRAVE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GRAVE_001/AW-HW-GRAVE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GRAVE_001/SM_AW_HW_GRAVE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GRAVE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/AW-HW-HOUSE-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/AW-HW-HOUSE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/SM_AW_HW_HOUSE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MANOR_001/AW-HW-MANOR-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MANOR_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MANOR_001/AW-HW-MANOR-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MANOR_001/SM_AW_HW_MANOR_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MANOR_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MAUSOLEUM_001/AW-HW-MAUSOLEUM-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MAUSOLEUM_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MAUSOLEUM_001/AW-HW-MAUSOLEUM-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MAUSOLEUM_001/SM_AW_HW_MAUSOLEUM_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MAUSOLEUM_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/AW-HW-MEGA-CASTLE-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/AW-HW-MEGA-CASTLE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/SM_AW_HW_MEGA_CASTLE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/AW-HW-PUMPKIN-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/AW-HW-PUMPKIN-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/SM_AW_HW_PUMPKIN_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/AW-HW-SPRUCE-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/AW-HW-SPRUCE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/SM_AW_HW_SPRUCE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/AW-HW-TREE-001": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/AW-HW-TREE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/SM_AW_HW_TREE_001": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/AW-HW-TREE-002": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/AW-HW-TREE-002"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/SM_AW_HW_TREE_002": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/AW-HW-TREE-003": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/AW-HW-TREE-003"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/SM_AW_HW_TREE_003": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/AW-HW-TREE-004": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/AW-HW-TREE-004"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/SM_AW_HW_TREE_004": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/AW-HW-TREE-005": [],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/Material_0": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/AW-HW-TREE-005"
+    ],
+    "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/SM_AW_HW_TREE_005": [
+      "/Game/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/AW-CLIFF-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/AW-CLIFF-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/SM_AW_CLIFF_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/AW-CLIFF-002": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/AW-CLIFF-002"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/SM_AW_CLIFF_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/AW-CLOVER-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/AW-CLOVER-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/SM_AW_CLOVER_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_DEER_001/AW-DEER-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_DEER_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_DEER_001/AW-DEER-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_DEER_001/SM_AW_DEER_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_DEER_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/AW-FLOWER-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/AW-FLOWER-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/SM_AW_FLOWER_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/AW-FLOWER-002": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/AW-FLOWER-002"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/SM_AW_FLOWER_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/AW-GRASS-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/AW-GRASS-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/SM_AW_GRASS_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/AW-HOUSE-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/AW-HOUSE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/SM_AW_HOUSE_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/AW-ICE-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/AW-ICE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/SM_AW_ICE_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/AW-MARSH-TREE-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/AW-MARSH-TREE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/SM_AW_MARSH_TREE_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/AW-MARSH-TREE-002": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/AW-MARSH-TREE-002"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/SM_AW_MARSH_TREE_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/AW-MUSHROOM-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/AW-MUSHROOM-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/SM_AW_MUSHROOM_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/AW-ROCK-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/AW-ROCK-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/SM_AW_ROCK_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/AW-ROCK-002": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/AW-ROCK-002"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/SM_AW_ROCK_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/AW-ROCK-003": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/AW-ROCK-003"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/SM_AW_ROCK_003": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/AW-TAVERN-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/AW-TAVERN-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/SM_AW_TAVERN_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/AW-TREE-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/AW-TREE-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/SM_AW_TREE_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/AW-TREE-002": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/AW-TREE-002"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/SM_AW_TREE_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/AW-TREE-003": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/AW-TREE-003"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/SM_AW_TREE_003": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/AW-TREE-004": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/AW-TREE-004"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/SM_AW_TREE_004": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/AW-WATERPLANT-001": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/AW-WATERPLANT-001"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/SM_AW_WATERPLANT_001": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/Material_0",
+      "/Script/NavigationSystem"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/AW-WATERPLANT-002": [],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/Material_0": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/AW-WATERPLANT-002"
+    ],
+    "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/SM_AW_WATERPLANT_002": [
+      "/Game/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/Material_0",
+      "/Script/NavigationSystem"
+    ]
+  },
+  "external_packages": [
+    "/Engine/BasicShapes/Cube",
+    "/Engine/BasicShapes/Plane",
+    "/Engine/EditorResources/LightIcons/S_LightError",
+    "/Engine/EngineMaterials/WorldGridMaterial",
+    "/Script/CinematicCamera",
+    "/Script/Foliage",
+    "/Script/NavigationSystem"
+  ],
+  "external_game_packages": [],
+  "quarantined_cliff_packages": []
+}

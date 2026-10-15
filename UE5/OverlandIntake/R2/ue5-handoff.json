@@ -1,0 +1,1025 @@
+{
+  "revision": "OVERLAND-NATIVE-R2-SANITIZED",
+  "engine": "5.4.4",
+  "scope": "Original-only static native editor preview",
+  "supersedes": "outputs/ue5-handoff.json; earlier snapshot preserved unchanged",
+  "project_descriptor": {
+    "path": "AbbiesWorldPreview.uproject",
+    "bytes": 389,
+    "sha256": "88fc36116440b1c80b7aaea584b2cbead7809a1d923f63a6190d36ce87c103cc"
+  },
+  "audit": "dependency-audit.json",
+  "review_and_warning_categories": "REVIEW.json",
+  "files": [
+    {
+      "path": "AbbiesWorldPreview.uproject",
+      "bytes": 389,
+      "sha256": "88fc36116440b1c80b7aaea584b2cbead7809a1d923f63a6190d36ce87c103cc"
+    },
+    {
+      "path": "Config/DefaultEngine.ini",
+      "bytes": 399,
+      "sha256": "dff5df7ef47e6a91fc4b9093415771f67c2e5e4313a41f95d2142e00bee74e95"
+    },
+    {
+      "path": "Config/DefaultInput.ini",
+      "bytes": 9102,
+      "sha256": "b3803838878714fa53454fab854333b0eefce223672864e65ee1cb9904cb1706"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_GroundCover_HalloweenCandyland_AW_CLOVER_001.uasset",
+      "bytes": 2794,
+      "sha256": "b9998771b365e7463322d851fc1c0f72f6e0aa925fd45a54c8f2289be9bd3d00"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_GroundCover_HalloweenCandyland_AW_GRASS_001.uasset",
+      "bytes": 2787,
+      "sha256": "47ee32f1863136c26db23acff73cfc6a0f6a5eb399da6a80df84cda02f49f938"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_GroundCover_Papercraft_AW_CLOVER_001.uasset",
+      "bytes": 2762,
+      "sha256": "5f7eb5bdb69bf2c57f1946cf7983387253e972028d559a37ed316680828527ea"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_GroundCover_Papercraft_AW_GRASS_001.uasset",
+      "bytes": 2755,
+      "sha256": "f353d914bb6ca19a876aefedb6142eea7bc0ba27f7b07b1fc65185f8540451ed"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLIFF_001.uasset",
+      "bytes": 2739,
+      "sha256": "308d823ec9d7302293bb498bbee11ca7325c16a46e585df80c464a9c18a8542c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLIFF_002.uasset",
+      "bytes": 2739,
+      "sha256": "fba6a4ff35c4c461ffac1eb6adf2b33a03580beff0532b177b30fd857c358a3b"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_CLOVER_001.uasset",
+      "bytes": 2746,
+      "sha256": "8ba30337956696669590ad4bb61da3cb7141dd5d9959712b29fbdab06623c183"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_CORN_001.uasset",
+      "bytes": 2761,
+      "sha256": "f1ae1012ee9b83f3d5bc98605c264462917a2500eceb6a73c13ede2e9e13dd12"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_PUMPKIN_001.uasset",
+      "bytes": 2782,
+      "sha256": "026d94e28c0b4de4550e259440aed6fa85d66c5b9780cc01c33bc50ca22526cd"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_SPRUCE_001.uasset",
+      "bytes": 2775,
+      "sha256": "a96cf2c3f06461b7794fa3484f5b2aa30df58cae5770c707c63d1fc54937daff"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_001.uasset",
+      "bytes": 2761,
+      "sha256": "52db798546031f237f160bd0845079a7f47ee8999e887fbc1a6550fbeb5006cc"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_002.uasset",
+      "bytes": 2761,
+      "sha256": "2a16bff39eeb6356a5903287be50b14bd2251bda32c4c62872ccd3e5c794bbaf"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_003.uasset",
+      "bytes": 2761,
+      "sha256": "0f151bbfc34cc928ecfdd9daee5f78140208bcf27d12710955fc701f6799693d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_004.uasset",
+      "bytes": 2761,
+      "sha256": "c1d3f964f9650a80c61a2f264181602994b2a28841a06dd0d046ec5d6801e8ef"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_HW_TREE_005.uasset",
+      "bytes": 2761,
+      "sha256": "59dad61be8088297d7a0b9a93858f7cb85f257f449bee77f18cbdeecfce99caa"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ICE_001.uasset",
+      "bytes": 2725,
+      "sha256": "56e03022ebde938b41b920bff19f0e540d052ef9359bc81e033fe4f0c1c35642"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_001.uasset",
+      "bytes": 2732,
+      "sha256": "2f159b347155205ac11af52229b50f90917c7c4d2d6907ec6718dc0c29338d23"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_002.uasset",
+      "bytes": 2732,
+      "sha256": "40e9a53e826eec7a2d08ccf06c748e2da63ac1da8effd0444702bdf0c22b93e4"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_ROCK_003.uasset",
+      "bytes": 2732,
+      "sha256": "05b02eafe852db6e92b4560e8dd34f42620f6ed01d41ef2ccfe5b40a460ddb2f"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_WATERPLANT_001.uasset",
+      "bytes": 2774,
+      "sha256": "f0f5dfb71273ccaff8b98ad892bd1f5e17f881b329e172f931813fe8f9c28b57"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_HalloweenCandyland_AW_WATERPLANT_002.uasset",
+      "bytes": 2774,
+      "sha256": "712d677713478c00fe69aba99eba263755b483f67fc20ab0938e29482ef2aeeb"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLIFF_001.uasset",
+      "bytes": 2707,
+      "sha256": "a942b36d341efca33447e795c6e64c40f7ee9c0e359eb3fac208c761f081d82c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLIFF_002.uasset",
+      "bytes": 2707,
+      "sha256": "a3f1fc85f35f1670a148518a9254484e556a95a792c27047248467e0f3838b3a"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_CLOVER_001.uasset",
+      "bytes": 2714,
+      "sha256": "7b194513f2638414087081f9689646db1c24d071d66ba8f3295855eae331dff7"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_FLOWER_001.uasset",
+      "bytes": 2714,
+      "sha256": "10029e4c353c5acc9f7ef6dec03a004ec1a2eb0cf4c030c57b8d9b6b2a712fb9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_FLOWER_002.uasset",
+      "bytes": 2714,
+      "sha256": "044cdd536f32e48bc653afd8f21cc6b25b33dcb52aaec698a3901ad795bede0c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ICE_001.uasset",
+      "bytes": 2693,
+      "sha256": "067ff4f2a7d15c1b5f90e33df961dc319a07d88e8f088bbc84107586e3dd5955"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MARSH_TREE_001.uasset",
+      "bytes": 2742,
+      "sha256": "8e5d93633e97fc50e6240bfe9e6d998309d9132b8f491120565005577460e2f2"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MARSH_TREE_002.uasset",
+      "bytes": 2742,
+      "sha256": "2bfbbd35ec254e027ec65b48d335c0d179b5586aa68890b3aab666143866db11"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_MUSHROOM_001.uasset",
+      "bytes": 2728,
+      "sha256": "d42dd318377281d5370c5018ba014d0669c11ed561bc95615f8c13f55f946ef6"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_001.uasset",
+      "bytes": 2700,
+      "sha256": "0e840cfa6b04255f309fbd197a8236d0d58d053a327c35142fdee177af79f3fe"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_002.uasset",
+      "bytes": 2700,
+      "sha256": "acff6b0b05eb7268e29bc90324dc6381ef0df00bf8daa12841a016ed64c712ed"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_ROCK_003.uasset",
+      "bytes": 2700,
+      "sha256": "b87b6a9c6cdecdd0f4a0cdbd77ecd28a55a6363a2e4502ac75ca88dcc714b1be"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_001.uasset",
+      "bytes": 2700,
+      "sha256": "7e1157ceefc76fb90b7ddf53c721d1bc3c0c61887f5621c87c2411d8c03eada0"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_002.uasset",
+      "bytes": 2700,
+      "sha256": "6fa9cd8e69139b56f7265e46c980fc933fd0b65e0e43fbe7e6622df7ff47deaa"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_003.uasset",
+      "bytes": 2700,
+      "sha256": "1d159c739821457f9c391a1299835af5d4bbc761f94e23b6a123e2ad4bc34376"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_TREE_004.uasset",
+      "bytes": 2700,
+      "sha256": "1da2a0e6de94de62f40b26389260907fc5cdf0e22e9196a805e78dd5dc6704bf"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_WATERPLANT_001.uasset",
+      "bytes": 2742,
+      "sha256": "8ae625437f028a82d498f65410c864ccab486a30a8a8f9d0814bbfc92e548484"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Foliage/FT_Papercraft_AW_WATERPLANT_002.uasset",
+      "bytes": 2742,
+      "sha256": "5f1938b0fd33f5b55c3e34e708a38fc462844be47e346d75e44b5dc8e5d2c5b2"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Maps/AmberVale_HalloweenCandyland.umap",
+      "bytes": 970589,
+      "sha256": "0f5c24a2f24fd6849a9bfc9f17794972b49f8bef8546f7d71785c997a1307e23"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Maps/AmberVale_Papercraft.umap",
+      "bytes": 963568,
+      "sha256": "c3cb61e7105a10e96a41ae47524c458829c83785377ab327e6d39468e3b22cd6"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_Bunker.uasset",
+      "bytes": 4845,
+      "sha256": "7eac6e855aac27c5239acf9b519468028f98f7517f8651a990580582777a2abe"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_BunkerDoor.uasset",
+      "bytes": 4865,
+      "sha256": "27c71194eaff2bda1f4ad3afe1e375900a96490b903e5ce4e2ea386bb151fa63"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_HW_Terrain_0.uasset",
+      "bytes": 4871,
+      "sha256": "4747e6bf843e3512ed16d3948cfedcb14da56dbb4b81a08badd6e45a253f69f4"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_HW_Terrain_1.uasset",
+      "bytes": 4871,
+      "sha256": "81e10236054815dfc1ba3bc080ab5caf60d8514137197fcb3bfcf29f4ccd0435"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_HW_Terrain_2.uasset",
+      "bytes": 4871,
+      "sha256": "927cb81fa8de0f050de1986388f926ea039d3ef2304bb602516af3c39b61b0ae"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_HW_Terrain_3.uasset",
+      "bytes": 4871,
+      "sha256": "73a871938f8eb95770a4c29a32e2286af4d392d351bdb0fe27587d5cef320278"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_HW_Terrain_4.uasset",
+      "bytes": 4871,
+      "sha256": "fe9a8ec670189e40b2ff95d33bb52b403dd4d365e864a89dcba5f5ac172bf93a"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_HW_Terrain_5.uasset",
+      "bytes": 4871,
+      "sha256": "8aaeaf995d796984120f79b2a5520dd8ed38ab57e1362b841e10475f8b7a4a90"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_HW_Terrain_6.uasset",
+      "bytes": 4871,
+      "sha256": "620d5e9101d7fde790c21050b871600d449899511e437aef14c9f87c179b8dd5"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_Road_HalloweenCandyland.uasset",
+      "bytes": 4930,
+      "sha256": "850faaada269a1dbec28ef0f3c9d6eb50b54bb8d646054ea17825e3fdb3f22c6"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_Road_Papercraft.uasset",
+      "bytes": 4890,
+      "sha256": "566141a6375dae428c82eec94d25679601ea6bddd966a1073f1c44727a04ad28"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_Water_HalloweenCandyland.uasset",
+      "bytes": 4935,
+      "sha256": "a492cadf8496c41da094faca367733f9d6c09b6601037bf6cbd462c51d1342c5"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Materials/M_Water_Papercraft.uasset",
+      "bytes": 4895,
+      "sha256": "25d34b6b23051ce3fac0d21971c500d3aad94cca41ae11296dfc89f91ad7a2df"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Terrain/autumn.uasset",
+      "bytes": 4642,
+      "sha256": "36806645c3f4e3ee3d239f824348ae3ce49275c106c4af1cb8780ed38d73030d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Terrain/EarthSide.uasset",
+      "bytes": 4657,
+      "sha256": "18d2a6c2545a65aa3737e7f3ef795ed6f45208f41fc9b85f74ea112618df1c93"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Terrain/forest.uasset",
+      "bytes": 4642,
+      "sha256": "916cca124defb3daa9742becdf90ee0c06ff9bb80b607b7cedd844b585268476"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Terrain/highland.uasset",
+      "bytes": 4652,
+      "sha256": "ab991bb36a2094e3c386cf3862edddc7fce75c90ce3252bfcbf65331d6d714bd"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Terrain/marsh.uasset",
+      "bytes": 4637,
+      "sha256": "e3303659da32725d4cea6118cce54d90a4572a34ea487ab62c6b1369c4cb3dc4"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Terrain/meadow.uasset",
+      "bytes": 4642,
+      "sha256": "b2d1720b1a1cca141a1b6cdd0d8723824fa3fbdc19a4b5694ae482cab8ca8e38"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Terrain/SM_AmberValeNatural.uasset",
+      "bytes": 422342,
+      "sha256": "59df774f074ae29e372754f73a77f9a6f691b44be9145529dd3820bff83d9db9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Overland/Terrain/snow.uasset",
+      "bytes": 4632,
+      "sha256": "3ad1d01f02c97e796c4bf0b31f95a7e718f87c8d1c5867ba0a09511b44d8fabe"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_BELLTOWER_001/AW-HW-BELLTOWER-001.uasset",
+      "bytes": 555722,
+      "sha256": "df02057fbc1e1b2ead1134f30d108b35840ac4314a25224c03ec621694ad3df9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_BELLTOWER_001/Material_0.uasset",
+      "bytes": 4616,
+      "sha256": "5972ba7d510c4077ec03aae48f63689d4cb461d195140812a219fad83103de8d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_BELLTOWER_001/SM_AW_HW_BELLTOWER_001.uasset",
+      "bytes": 537085,
+      "sha256": "fa1e85a7173400f016817ce7ed228f2f949802766a4935962728ebab395b8b76"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/AW-HW-CAFE-001.uasset",
+      "bytes": 524875,
+      "sha256": "a7fc5c1fb844081078ccda7a14091959af2095dc58a0bb5376d78e0d98c286b6"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/Material_0.uasset",
+      "bytes": 4624,
+      "sha256": "6ea9b1b969ea69d23bf40ffa1befbf522bd2d6d1f15633c5e61bb9a586688421"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAFE_001/SM_AW_HW_CAFE_001.uasset",
+      "bytes": 465040,
+      "sha256": "7a2032dcf8b814ea0781316ef750b69f41a0c7fc195a4789821e4f9405f82e5e"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAROUSEL_001/AW-HW-CAROUSEL-001.uasset",
+      "bytes": 698119,
+      "sha256": "bd3d1272817624dbce05c4d47e74c9f793b0612d5a58dd2cc85d435e15aa9681"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAROUSEL_001/Material_0.uasset",
+      "bytes": 4611,
+      "sha256": "defc39bb7974df904ad7580cba9ca5893ec45fa0aa1190b05833b4dcbc47d60a"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CAROUSEL_001/SM_AW_HW_CAROUSEL_001.uasset",
+      "bytes": 799904,
+      "sha256": "cd3a8221bf207e86f6eed88a45bde461b2ed4cbc06dea0f6396c371c9af242b0"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/AW-HW-CASTLE-001.uasset",
+      "bytes": 599118,
+      "sha256": "15bbb61bdea78ab92199662a6b6a13d6cb8dc17da3f71cd7c3e831200fb143bf"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/Material_0.uasset",
+      "bytes": 4634,
+      "sha256": "987968d784f12608e738ba47f012e2b93e001726ae3bf60b1dfad497e4091ff7"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CASTLE_001/SM_AW_HW_CASTLE_001.uasset",
+      "bytes": 598315,
+      "sha256": "c70b1e181c58077ce952bc4f975d0718386b46fa0055cda8f1494da3547bcd2b"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/AW-HW-CORN-001.uasset",
+      "bytes": 437245,
+      "sha256": "e63545e970b048c1d4e2c34aff2c2dd336aae2121717c5af039cf105a396cbc2"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/Material_0.uasset",
+      "bytes": 4624,
+      "sha256": "a01b9adba67381051aa3ba4418db68177e2de3521a0526de9af2030b63d9fef1"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CORN_001/SM_AW_HW_CORN_001.uasset",
+      "bytes": 74133,
+      "sha256": "432a541f681a94c6f5b46cca69ccef496bf7e150cab300d9f5221b40a101825c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CRYPT_001/AW-HW-CRYPT-001.uasset",
+      "bytes": 530802,
+      "sha256": "1bba990a8ed1fbc097b54299dfd740ca44fcfcc2cbdcf6d951d18d1e7c24b6f3"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CRYPT_001/Material_0.uasset",
+      "bytes": 4596,
+      "sha256": "7b82506ecd7c86a4264ca5a9430141ea4bf3a8e555b0001bb27f68cd28dccea9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_CRYPT_001/SM_AW_HW_CRYPT_001.uasset",
+      "bytes": 383272,
+      "sha256": "96f8e5da634e9f238752cd4a34f329786b000a3143922e6ebf20009c317e531e"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GATE_001/AW-HW-GATE-001.uasset",
+      "bytes": 249516,
+      "sha256": "5a3c07efbfca7f11f62c2451a01df06403c3810d04a9785c8810079954ba29d9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GATE_001/Material_0.uasset",
+      "bytes": 4591,
+      "sha256": "b4ba2bc1929b475d700c749c1d16bac3dbe00731a3372919de60913f53848b19"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GATE_001/SM_AW_HW_GATE_001.uasset",
+      "bytes": 304391,
+      "sha256": "bcf8b3ea13656da2a665b0220033b0c517976f3f3468ab9da990058b6704457b"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GRAVE_001/AW-HW-GRAVE-001.uasset",
+      "bytes": 398961,
+      "sha256": "02b548f1150c798f962629ccf8cbc0dfec5e2ddfae7f54057038078f7a9b3457"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GRAVE_001/Material_0.uasset",
+      "bytes": 4596,
+      "sha256": "aae3ce1194962d9d61eb00daec533d5fa071307b83922a606bfb442811c9df9b"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_GRAVE_001/SM_AW_HW_GRAVE_001.uasset",
+      "bytes": 127214,
+      "sha256": "23cd6a39c158d51f8eed038a65be1bdf8bf0366250ba6459ebc1f44537688da6"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/AW-HW-HOUSE-001.uasset",
+      "bytes": 579157,
+      "sha256": "f16a69ac18ce0cb56697e50db4c05a7652b95989e8f9524f27096f0e06472ece"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/Material_0.uasset",
+      "bytes": 4629,
+      "sha256": "360673487a6d90c8dc816fe68311e3aaabea89416ba1d8ff6e77f35c5094671e"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_HOUSE_001/SM_AW_HW_HOUSE_001.uasset",
+      "bytes": 259298,
+      "sha256": "a7e56b9c9bdd97f36dc8e797057ab688ccef4cb056fe21a4ae6927baa5c8e2f2"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MANOR_001/AW-HW-MANOR-001.uasset",
+      "bytes": 686425,
+      "sha256": "69c9c59f174e0168f6334a9fb472931a9f4604c8ec2a10f37f59ed7a6c076f76"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MANOR_001/Material_0.uasset",
+      "bytes": 4596,
+      "sha256": "503b8992e16743f487cb7038ec202641a5b2493b5dbb394596d0d1c12201b2c5"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MANOR_001/SM_AW_HW_MANOR_001.uasset",
+      "bytes": 941177,
+      "sha256": "1a1441fe3159f195908622eff231a538e7813532f435e8ce01c5d9191693eb97"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MAUSOLEUM_001/AW-HW-MAUSOLEUM-001.uasset",
+      "bytes": 571689,
+      "sha256": "e8d758318730a88a73d933d55b0a03498e423a0e8995bcdfb5ddb6d3a7125495"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MAUSOLEUM_001/Material_0.uasset",
+      "bytes": 4616,
+      "sha256": "2e6839eea61fa90e4867cf5bcaadb8322476b852ba9a1ca72a105c9b06f2affd"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MAUSOLEUM_001/SM_AW_HW_MAUSOLEUM_001.uasset",
+      "bytes": 381514,
+      "sha256": "c05bbd257df3b7dc66f2f635590986cdc8089dfa9918191faf94d3b99f611623"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/AW-HW-MEGA-CASTLE-001.uasset",
+      "bytes": 795044,
+      "sha256": "d5b229c87a41a9c1906acb9623df9ddd9a79e1de3acb87cc80b28b2db49bc321"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/Material_0.uasset",
+      "bytes": 4626,
+      "sha256": "c9cc84f7534f14646586203656c3e1036aca94a567dd6fca11f0318a755c1cc9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_MEGA_CASTLE_001/SM_AW_HW_MEGA_CASTLE_001.uasset",
+      "bytes": 1167567,
+      "sha256": "1525c037bf1e5fe6a02a6a7c55f855a9fc287ae08533cd360f6186e98ec7f87f"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/AW-HW-PUMPKIN-001.uasset",
+      "bytes": 668047,
+      "sha256": "7a804881a5ca66a642651b463ea69ab849b41e63c7df8c213abcc351a64992b1"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/Material_0.uasset",
+      "bytes": 4639,
+      "sha256": "f40d212f8e884ef2facc7f80e6824fd74882c0aa94e26890b7e8a8e6e17558e6"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_PUMPKIN_001/SM_AW_HW_PUMPKIN_001.uasset",
+      "bytes": 105348,
+      "sha256": "6d7c06aeab52cdc8d14004d20049e932a15f82593494b1eec5dfe8f7595d182e"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/AW-HW-SPRUCE-001.uasset",
+      "bytes": 437534,
+      "sha256": "e3373678b9c9927573d616b087fb18d8c1cc1c35c6a61e7aa5f922c4ddde70a9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/Material_0.uasset",
+      "bytes": 4634,
+      "sha256": "fb700983827a97116ee9a113c313169a9fc6e0bf57349c9ef0241509102fe068"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_SPRUCE_001/SM_AW_HW_SPRUCE_001.uasset",
+      "bytes": 233700,
+      "sha256": "5d79406d4d1552711e1adf58a77ac8daf3e835c512938b7b0a5c3bd4746c7761"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/AW-HW-TREE-001.uasset",
+      "bytes": 563821,
+      "sha256": "586225a15c87355cabd57ab31365d5e93f0b8b8297b2ea59295a045d3ed9f419"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/Material_0.uasset",
+      "bytes": 4624,
+      "sha256": "e5188fc9d83c7352a03291c871a1ad34139d0fbf46a516bf74cbe4aae97fd864"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_001/SM_AW_HW_TREE_001.uasset",
+      "bytes": 196704,
+      "sha256": "3d03cb7db7a4e97e93aa0b3f140d7b87210e666fad01fbd19def2846249c6d83"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/AW-HW-TREE-002.uasset",
+      "bytes": 562232,
+      "sha256": "efe80fef470626fd8e12787913013b9c3222c6bc8927540bba5a4215b24a06b6"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/Material_0.uasset",
+      "bytes": 4591,
+      "sha256": "6d830b7bcd28e77f8ec0915d944c7b39896c1dd91fb7f276d73e3ff5aa6e6729"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_002/SM_AW_HW_TREE_002.uasset",
+      "bytes": 222053,
+      "sha256": "e4078d031a424b96fb23ec8aefbd9f52af03f6bbe57b9349bac0a6f5cd89e152"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/AW-HW-TREE-003.uasset",
+      "bytes": 522554,
+      "sha256": "34739dd299cb028ec6e4349181e2a63d7452424c6e3c1e17e374c5bfdd205690"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/Material_0.uasset",
+      "bytes": 4591,
+      "sha256": "873a9aa7935c7f04ad554def87429761eb787cfc4a2f81758c9c90fe795af3af"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_003/SM_AW_HW_TREE_003.uasset",
+      "bytes": 208433,
+      "sha256": "2b8b115c7811fc64add59e9bfcc4b915d6079dcf3d59dbf94ffea152f09d44f4"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/AW-HW-TREE-004.uasset",
+      "bytes": 464954,
+      "sha256": "9cb7119400726043f026fc542950eaafa57549593cb71773d81082f3bb5bb7c1"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/Material_0.uasset",
+      "bytes": 4591,
+      "sha256": "07c6eeb0ccf07bad987a1e99de0f42d3eb2d4573173a06e2a26e60197401a605"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_004/SM_AW_HW_TREE_004.uasset",
+      "bytes": 222095,
+      "sha256": "22b1c28f7c28910f1c2451acca14048ffcf1a62a8b0189e792b18b0669d07758"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/AW-HW-TREE-005.uasset",
+      "bytes": 526881,
+      "sha256": "05e739ff12c892827655c47382e6c95e891ef5cdf10a02284ea90ecad09f1f13"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/Material_0.uasset",
+      "bytes": 4591,
+      "sha256": "11ee757f732766ed5cc7c855e16791cd3008833b122f017dae4d169544031c74"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/HalloweenCandyland/AW_HW_TREE_005/SM_AW_HW_TREE_005.uasset",
+      "bytes": 160605,
+      "sha256": "b5c86f8bb3f3df81675cbdca1d455be077c1e84e019ab624cce1b48e6e6263d7"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/AW-CLIFF-001.uasset",
+      "bytes": 353464,
+      "sha256": "51960548bdef6f07377640be83d9264dc9ac1ea605345eeebf3c2ea8e43d2565"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/Material_0.uasset",
+      "bytes": 4590,
+      "sha256": "02a3742b6036c9969c407d58f85a6d58acbafc9d65519fb6c782096554a10dab"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_001/SM_AW_CLIFF_001.uasset",
+      "bytes": 167053,
+      "sha256": "df65a7a08f543e1630a561781a2d26b1ac0968b1edae4d223103a409115939bf"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/AW-CLIFF-002.uasset",
+      "bytes": 300802,
+      "sha256": "4343955e8c31c728d69e1c02e27f07707546c2fb9ac6dc16368c990cf18ff8d3"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/Material_0.uasset",
+      "bytes": 4590,
+      "sha256": "a89d4a43aae8691997808f3551759d9c7fd96c902b6e1e4cbf1a0ac13f9433a9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLIFF_002/SM_AW_CLIFF_002.uasset",
+      "bytes": 169537,
+      "sha256": "de9f9868ec97baa103d88c2010f7cc5255909574f50362c1a978d7d486728703"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/AW-CLOVER-001.uasset",
+      "bytes": 270265,
+      "sha256": "8d3d0e1bb4d57e4bff7e3d7f5cf145008d9a21e619dc9e818800fbc5dc217434"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/Material_0.uasset",
+      "bytes": 4595,
+      "sha256": "2c8f0bcc6601a48d3c1b5905e66a07b1dc05594eddc861474d323181d8f2e7e6"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_CLOVER_001/SM_AW_CLOVER_001.uasset",
+      "bytes": 50615,
+      "sha256": "756fff23a0ed4a135b773fa6b4925100d0c9957fa27a7b4b69176e6a603442e1"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_DEER_001/AW-DEER-001.uasset",
+      "bytes": 398097,
+      "sha256": "8db11af56536dddb541bf3c2a094e9cf74ae26238d212d8fec8fd597b2ea0626"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_DEER_001/Material_0.uasset",
+      "bytes": 4585,
+      "sha256": "015d1190e9655ff9e12eab49cf716df473e598a3145d5e91d9ac814ec9237f72"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_DEER_001/SM_AW_DEER_001.uasset",
+      "bytes": 341614,
+      "sha256": "eea696f1808d6bd87ed2f178d4d4d12a6b2ca5e024ff39c01bed9f8044eb9b6d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/AW-FLOWER-001.uasset",
+      "bytes": 270452,
+      "sha256": "f64bbbcc81c47f4d81cd28e4c3dd2fc5a0264f2f32d81128f58bdac34472961c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/Material_0.uasset",
+      "bytes": 4595,
+      "sha256": "b2fd9bb039c803cbc1e0783bb21b79f32b1f7ca756edb1f7d05432cd4d53dbc4"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_001/SM_AW_FLOWER_001.uasset",
+      "bytes": 59025,
+      "sha256": "6a76514fe5bdbda559a5c550a54a1cafe946316b8806edb2537aad382e8d8976"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/AW-FLOWER-002.uasset",
+      "bytes": 322431,
+      "sha256": "beb66970ad8d10d52e9f2b705f8a7110921538c14b57a39a979ea4b20fc4d8dc"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/Material_0.uasset",
+      "bytes": 4595,
+      "sha256": "97755c9b86673fe4217eb3fac61628285ddae84b470b760ad92e28628a7c6493"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_FLOWER_002/SM_AW_FLOWER_002.uasset",
+      "bytes": 61867,
+      "sha256": "8dc8b74c3245e80857d596bbbda02b566e82db2d8ca5e992bb865444560d920d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/AW-GRASS-001.uasset",
+      "bytes": 288994,
+      "sha256": "d64ef5c45088d55ccb181c3fe0e03773699de4d8f9f6623aeec35c8acd44a1cc"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/Material_0.uasset",
+      "bytes": 4590,
+      "sha256": "6a69b9c53fcd4ea2e04409a829c9d637479fdd74c5ce005e1389b36561fec6f4"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_GRASS_001/SM_AW_GRASS_001.uasset",
+      "bytes": 49544,
+      "sha256": "610c62fc0ccb0df23513e509ee85af1155d189055fc6f780e676f642ac70ebc8"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/AW-HOUSE-001.uasset",
+      "bytes": 278819,
+      "sha256": "df0ce6497982898f19d55f2a755d173a15688518c7653b0c901d301af58a8855"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/Material_0.uasset",
+      "bytes": 4590,
+      "sha256": "ee2116902d485964ced7c0c53066eb87bf1330c247a6d70d9f3cd7814f254a2f"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_HOUSE_001/SM_AW_HOUSE_001.uasset",
+      "bytes": 354079,
+      "sha256": "1e5afbddf5a1a59febd094cf47cdd29cbfc6ce0ec384d1c8f4ff15cad5686bd9"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/AW-ICE-001.uasset",
+      "bytes": 232892,
+      "sha256": "e74903201d0ae334feba095f54d6aa239ca5efb511b10ae1c70261342a6d7c6b"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/Material_0.uasset",
+      "bytes": 4580,
+      "sha256": "949604c3e13996ab35676ae29a4a83c4d4e6fb4d61640d1277de341c66d0e213"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ICE_001/SM_AW_ICE_001.uasset",
+      "bytes": 77165,
+      "sha256": "66c9b57f4f96d206c8ab26c73b1136be1f5f06a3fbe3d30b8f99f17109f5b6a2"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/AW-MARSH-TREE-001.uasset",
+      "bytes": 236029,
+      "sha256": "0820ed358d8bb95bc6a53d6ef96cb2584b6efbb27a7dbe251f7dd85cb0327ed7"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/Material_0.uasset",
+      "bytes": 4615,
+      "sha256": "e1a82a880c099256a6a68379e331c3bab8a2dae5b48af8b0a82e05c311b57ec0"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_001/SM_AW_MARSH_TREE_001.uasset",
+      "bytes": 167558,
+      "sha256": "4959ce15acd636ff44848feef43ca0bebdec7a7ba8072c65d6ccba9633379d48"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/AW-MARSH-TREE-002.uasset",
+      "bytes": 350533,
+      "sha256": "e23eee3db33ced620e5f2cbaf835c706a13a0fe31efaf5f5c4dcca9cebab9fce"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/Material_0.uasset",
+      "bytes": 4615,
+      "sha256": "2f542ccd42f0ec863a36a28fdc4122574a5d439c856ba7a1d9b95c4203799e90"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MARSH_TREE_002/SM_AW_MARSH_TREE_002.uasset",
+      "bytes": 134782,
+      "sha256": "d9163f45eecabcb29cca33e430cba5f4ae90f84d0a44ed6d26adc916948d66c2"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/AW-MUSHROOM-001.uasset",
+      "bytes": 259355,
+      "sha256": "fe7105f78b32c64729461233d602d1c25b5b20fd032ad3839be7246b810db27d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/Material_0.uasset",
+      "bytes": 4605,
+      "sha256": "257e5fcc64e5e42e4ec2d922a68b8a8fffe0f06cfcbce3fb17c241267aae6eed"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_MUSHROOM_001/SM_AW_MUSHROOM_001.uasset",
+      "bytes": 68996,
+      "sha256": "a79ee87bf812dcf1456ae1e97d90ff1345ac920eecaddd2d16bad2f9d0b6af08"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/AW-ROCK-001.uasset",
+      "bytes": 183853,
+      "sha256": "ccf612f7d7fee42c9f83416e55560dba62914c883a4e5d9ab8a1541cf50f7cde"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/Material_0.uasset",
+      "bytes": 4585,
+      "sha256": "fb6c0003644c4165053e468f3e7b91ac48d7ee2d2c8e617efe0dbd2700bc6e60"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_001/SM_AW_ROCK_001.uasset",
+      "bytes": 75141,
+      "sha256": "70977cb9d5805e2100d5063bdd722f08f2de9b787f310fc6378b829c1cd4c70c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/AW-ROCK-002.uasset",
+      "bytes": 316356,
+      "sha256": "e11c53e2880babf3681052ec68c0e98f9b2f906663fa9960c34608f889f134a8"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/Material_0.uasset",
+      "bytes": 4585,
+      "sha256": "7e52d75341493fe9646bbaaead29ae0c861fa424ba819678d64006b81defa582"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_002/SM_AW_ROCK_002.uasset",
+      "bytes": 62757,
+      "sha256": "d65679d2684be563d631d21ca59db9caf8c105db17a15905146bae2ae815a0cb"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/AW-ROCK-003.uasset",
+      "bytes": 294804,
+      "sha256": "cd70dc85059b848439eac5c4826203183ae5b7acc4263c7afde6e35131e3244c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/Material_0.uasset",
+      "bytes": 4585,
+      "sha256": "90ca7aa887e809f768996c37d9836c958585043bc0e1bf31e5fa84c1daae0eaf"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_ROCK_003/SM_AW_ROCK_003.uasset",
+      "bytes": 76172,
+      "sha256": "c5e482ac5dfd7dfe8e68bf6a2ab075acae70a14d2508bab198e2addc35d6a9c3"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/AW-TAVERN-001.uasset",
+      "bytes": 351342,
+      "sha256": "6c0f1ff89903266157bd2f3f4be8755dadef5deb79b4b9b30d485c5586fa760d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/Material_0.uasset",
+      "bytes": 4595,
+      "sha256": "82eecaf2739773449ff7d82b7a17558dd795cf208595d3c30022e785752059be"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TAVERN_001/SM_AW_TAVERN_001.uasset",
+      "bytes": 423421,
+      "sha256": "298eb8dba3377093b34541e243a0d9b479e17a4f65961e935dd5180fff6e934c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/AW-TREE-001.uasset",
+      "bytes": 254669,
+      "sha256": "f35f7110915ab85781fc192d0b655f18ddc779ef6cc1f586c8a465495831f421"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/Material_0.uasset",
+      "bytes": 4585,
+      "sha256": "193731f8ade72087205c82faae402a2872a15a3e3baa76ee23b1d1f5a4d9c220"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_001/SM_AW_TREE_001.uasset",
+      "bytes": 148543,
+      "sha256": "3eac956acebcd0ea019d3d9022e8d7fcc960363271879896bc9e7f8f6f07c755"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/AW-TREE-002.uasset",
+      "bytes": 271221,
+      "sha256": "927a854ed69a35ec4651833eee64dc4ddf4ba6980be475f13a9f4dc4caa54499"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/Material_0.uasset",
+      "bytes": 4585,
+      "sha256": "4fbb36bb2bae1ef0e6c8bd774ed4d483712e8088745708e365f34492f2e1fa9d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_002/SM_AW_TREE_002.uasset",
+      "bytes": 148000,
+      "sha256": "849c5ad7ec4930fa7e09aca362def7ec94dd63b7757b22168c6b7b24c9be2996"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/AW-TREE-003.uasset",
+      "bytes": 352868,
+      "sha256": "68c0636c060b19c12081681b06652850368a14ade9a8e9425ffea1dc7d08c477"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/Material_0.uasset",
+      "bytes": 4585,
+      "sha256": "0b8c03d215dbab6552d2554ac8760457628c949423ab3b68564cefd677052bc5"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_003/SM_AW_TREE_003.uasset",
+      "bytes": 167816,
+      "sha256": "8e2b0868c769bba04f64a8c8fcb230f601e5f6ab4fb64f8489639ed878312219"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/AW-TREE-004.uasset",
+      "bytes": 321344,
+      "sha256": "4c4acd6e4ab4c17d3741ec7bce6f86aa54a3b36c06816746cd5c5b03f868d71d"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/Material_0.uasset",
+      "bytes": 4585,
+      "sha256": "f237e259ccace4a5ed88e0714988c73e04495f25d03a2b8a4af1a0923056d304"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_TREE_004/SM_AW_TREE_004.uasset",
+      "bytes": 165995,
+      "sha256": "b6471f19d9aaf93b7f921794373d0fe128328c6cab78c3b21be44f25031281a8"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/AW-WATERPLANT-001.uasset",
+      "bytes": 294506,
+      "sha256": "81076878f19045af9263158d354a6b25fcd2c9d2b21d0274d1ae0a9e301fc157"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/Material_0.uasset",
+      "bytes": 4615,
+      "sha256": "fe65b42edf2a8e5272ca70aa5773cbbda01356afbb7b69c8ca1d69ef5d912054"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_001/SM_AW_WATERPLANT_001.uasset",
+      "bytes": 74342,
+      "sha256": "b3a5fc472d7fab80ad8c54cb21b6bb1875333ab5c053f088ec0b96cc868d839b"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/AW-WATERPLANT-002.uasset",
+      "bytes": 343407,
+      "sha256": "9fb1c945e596f537c43ce2acff10de1638a15653347ae282db43afcc574fda3c"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/Material_0.uasset",
+      "bytes": 4615,
+      "sha256": "3dbf76400fa43fe892382cfd8e35a16b5fb18f2cf0beb5523884c4b5a14f2744"
+    },
+    {
+      "path": "Content/AbbiesWorld/Scenery/Papercraft/AW_WATERPLANT_002/SM_AW_WATERPLANT_002.uasset",
+      "bytes": 81102,
+      "sha256": "07096ccb0ad3a47d22d391c0820ebc6bdcb6334b19b8823dc6440b348d7b9613"
+    },
+    {
+      "path": "Content/Maps/AmberVale.umap",
+      "bytes": 18102,
+      "sha256": "feb0bd25e19d8379b311dd3897e2a7905e45fb407bac61b09725669f04deaa2e"
+    },
+    {
+      "path": "Content/World/AmberValeTerrain.uasset",
+      "bytes": 342774,
+      "sha256": "d5127796a87ca2180151e9b9cb10e4a1828111378500dbb315443c654fe44b0d"
+    },
+    {
+      "path": "Content/World/autumn.uasset",
+      "bytes": 4563,
+      "sha256": "d47ce77b86ff17a857a73c85ae43f89538d2f6281982fe436b0e7c6d5b794c15"
+    },
+    {
+      "path": "Content/World/EarthSide.uasset",
+      "bytes": 4578,
+      "sha256": "3f7daf153bf56757275cb75aec6927b722bbde205e0cfcc91a4076b52c380555"
+    },
+    {
+      "path": "Content/World/forest.uasset",
+      "bytes": 4563,
+      "sha256": "3043a6fa972f3c2eb19fd0d3ea1c62ef933caa57e36bb86c3a79edf1f8a790c4"
+    },
+    {
+      "path": "Content/World/highland.uasset",
+      "bytes": 4573,
+      "sha256": "c19ae14fbf5c5d8cee97f8842473325de9d42979d2ed1716a1ebfe98a00979eb"
+    },
+    {
+      "path": "Content/World/M_ValeWater.uasset",
+      "bytes": 4810,
+      "sha256": "eb397f5b2278bf00721630f7ae1385280aed71977870639e32a0cfd47c5349f7"
+    },
+    {
+      "path": "Content/World/marsh.uasset",
+      "bytes": 4558,
+      "sha256": "e60fc4414911d898e9b13411f0eaf1f9aacc9a145eb382fcdb58bc7285eed83e"
+    },
+    {
+      "path": "Content/World/meadow.uasset",
+      "bytes": 4563,
+      "sha256": "6415d0436863f7c4294e231194686fcc9bf6765a0beb1e1f62e4d71a3f23061b"
+    },
+    {
+      "path": "Content/World/snow.uasset",
+      "bytes": 4553,
+      "sha256": "24f3eabde0894600d89c4d09401d0806b8d43cd7d63c16711a9193cd39d4c8f8"
+    },
+    {
+      "path": "dependency-audit.json",
+      "bytes": 35587,
+      "sha256": "3464c75fa7fadd6ea02616b47098ae1a115a294efb6869ada009519791182e9e"
+    },
+    {
+      "path": "native-HalloweenCandyland.png",
+      "bytes": 2611839,
+      "sha256": "1054d2fb00f69e30cf4f269f30ef326f79cc00ffb2ef60c08450ebba432f56e9"
+    },
+    {
+      "path": "native-Papercraft.png",
+      "bytes": 2784841,
+      "sha256": "893703ffae22556155a58af3a8ddd964c0b906de30ee952afe0070d0ef1c6263"
+    },
+    {
+      "path": "REVIEW.json",
+      "bytes": 1256,
+      "sha256": "3b8d6ee0c7a23bd53613c797661fe296fc6ff3f23c05eee54cd8ec80e33abbf3"
+    }
+  ]
+}
