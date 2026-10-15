@@ -1,0 +1,1 @@
+PASS: HARD seed 1339; far-click rejected; one-cell movement; fog reveal heals once and restores wounded goons; collected, brewed, fought and won via live click handlers.

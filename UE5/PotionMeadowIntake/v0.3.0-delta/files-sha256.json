@@ -1,0 +1,107 @@
+[
+  {
+    "path": "Evidence/easy/cliff-level-start.png",
+    "bytes": 1109996,
+    "sha256": "4af7405f645134c7aa69b916ba42d5e53a3e8ce4433cef549f243c723a1afce0"
+  },
+  {
+    "path": "Evidence/easy/cliff-level-win.png",
+    "bytes": 642774,
+    "sha256": "015a42246fd28a06de100b60def119c7d881ce29f7dd2ba5e7924566ed968f1b"
+  },
+  {
+    "path": "Evidence/easy/cliff-playthrough.txt",
+    "bytes": 169,
+    "sha256": "a7c888bded4ed5eca204b90e9b986d2f25b745164a54ea21a3c366d1493d1f57"
+  },
+  {
+    "path": "Evidence/easy/fog-recovery-proof.png",
+    "bytes": 1143045,
+    "sha256": "f0fd146855b62d3fe0bd2f1d93911fe7bb547ee993bc57935a5cf63d8415f32f"
+  },
+  {
+    "path": "Evidence/hard/cliff-level-start.png",
+    "bytes": 1109723,
+    "sha256": "48188ce933f4211e3e8f2d269fb732cf6652903550d95962b83dffce0a9c9824"
+  },
+  {
+    "path": "Evidence/hard/cliff-level-win.png",
+    "bytes": 636086,
+    "sha256": "640bba2ebefc18d62e0739b0c138f914bcb1514bc1ecc9fde5a879e4e0a89bef"
+  },
+  {
+    "path": "Evidence/hard/cliff-playthrough.txt",
+    "bytes": 169,
+    "sha256": "e879162fa0164a86f2b7631c46e454a07874224607bb71f0b5d95962e5a1d2f0"
+  },
+  {
+    "path": "Evidence/hard/fog-recovery-proof.png",
+    "bytes": 1143042,
+    "sha256": "f240a24146c8715abf5a89d5ae7b8fcb7ff08b3e347182909c360d5bb0217ff3"
+  },
+  {
+    "path": "Evidence/medium/cliff-level-start.png",
+    "bytes": 1110107,
+    "sha256": "778a6bc55ea516a5e672268114a75ecae46f96d56d93a16e2ec6fc86bac7fd8a"
+  },
+  {
+    "path": "Evidence/medium/cliff-level-win.png",
+    "bytes": 642911,
+    "sha256": "22ecd3f2bee8fe3021a3c9c534bc2ea2b44b76fca74e379fdde29ae9a4b0756b"
+  },
+  {
+    "path": "Evidence/medium/cliff-playthrough.txt",
+    "bytes": 171,
+    "sha256": "688d8fc1d135b1f836810814cb7fb9c9a7e43a0bbb5e3c0e2b3f1dc3332a56de"
+  },
+  {
+    "path": "Evidence/medium/fog-recovery-proof.png",
+    "bytes": 1143166,
+    "sha256": "dbe939810f814dc36084f9e8c35ff8212307e4fb49f9673c2ef129c89deea80f"
+  },
+  {
+    "path": "Evidence/menu/difficulty-menu.png",
+    "bytes": 504380,
+    "sha256": "429c0aa380376163c8783ac7b334c4d32548e22367a903d370345226ab5d09b7"
+  },
+  {
+    "path": "Evidence/menu/menu-controls-qa.txt",
+    "bytes": 159,
+    "sha256": "7c05504c1f603abbcdf89a9ff51c56e288d90d855d58c197ef0bba8e4c28d29b"
+  },
+  {
+    "path": "Evidence/random-boards-qa.txt",
+    "bytes": 200,
+    "sha256": "39082445918266836f4d927140427c310ffa556c34911f5395880773c2ed7364"
+  },
+  {
+    "path": "Evidence/verification.json",
+    "bytes": 1829,
+    "sha256": "4cb3332f5e86f4d9a57d1b4322a830001f8a03f9ddac22cf981b4ffe7f95533c"
+  },
+  {
+    "path": "Gameplay.md",
+    "bytes": 2799,
+    "sha256": "127606cdbb9e22eb7652aae1f34a8d62feea3ec127b6071b77d058307ad3dcae"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1438,
+    "sha256": "4a10435660d609617f4ed5335e4377fddac637350991f47a68f6f5cdfc96593e"
+  },
+  {
+    "path": "Source/AbbiesWorld/PMAdventureModel.h",
+    "bytes": 6491,
+    "sha256": "793ae11bad42d7d897c64f6e6d366fd9d30f46667d1bf009724b6362087099ea"
+  },
+  {
+    "path": "Source/AbbiesWorld/PMRules.h",
+    "bytes": 1796,
+    "sha256": "d86fcdfe0ca05cac088b203b2d8fc74e084d31f3e3807187ae33e03c5ad26611"
+  },
+  {
+    "path": "Source/AbbiesWorld/SPMAdventure.h",
+    "bytes": 38430,
+    "sha256": "265fb88057bfe8f8fccddd4994870e13d7173f848875dc2a915e53ef73c174e6"
+  }
+]

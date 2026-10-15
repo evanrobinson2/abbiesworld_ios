@@ -1,0 +1,35 @@
+{
+  "passed": true,
+  "engine": "5.4.4",
+  "build": "native Windows Development package",
+  "packaged_executable_sha256": "33dc424b35160817876e3f10c73183adab64702ac5c9084ce173e3282dc9d090",
+  "random_boards": 3000,
+  "native_assets_unchanged": 41,
+  "live_tests": {
+    "easy": "PASS: EASY seed 1337; far-click rejected; one-cell movement; fog reveal heals once and restores wounded goons; collected, brewed, fought and won via live click handlers.",
+    "medium": "PASS: MEDIUM seed 1338; far-click rejected; one-cell movement; fog reveal heals once and restores wounded goons; collected, brewed, fought and won via live click handlers.",
+    "hard": "PASS: HARD seed 1339; far-click rejected; one-cell movement; fog reveal heals once and restores wounded goons; collected, brewed, fought and won via live click handlers.",
+    "menu": "PASS: Easy/Medium/Hard/Surprise choices; retry preserves seed; victory replay changes seed; terminal input blocked; help consumes click without using a potion."
+  },
+  "behavior": [
+    "Far clicks rejected without movement or reveal",
+    "At most one cardinal step queued",
+    "Only adjacent fog can be revealed",
+    "Unknown goons/items/rocks hidden",
+    "Discovery does not automatically attack",
+    "One-use exploration heal capped at max HP",
+    "Living wounded enemies recover one, capped at original max",
+    "Defeated goons not revived",
+    "Cleared squares cannot regenerate resources",
+    "All difficulty tiers have winning plans even without exploration recovery"
+  ],
+  "render_size": [
+    1280,
+    960
+  ],
+  "limits": [
+    "Windows PC only; no iOS or touch-device test",
+    "Parent-world and style approval remain with coordinator",
+    "Marble Voyage source was not found; floor glaze recreated as an original UI treatment"
+  ]
+}
