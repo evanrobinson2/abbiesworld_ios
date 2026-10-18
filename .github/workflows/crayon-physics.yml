@@ -20,6 +20,14 @@ jobs:
       - name: Build and test on an available iPad simulator
         working-directory: Games/CrayonPhysics
         run: bash tools/verify-on-mac.sh
+      - name: Export UI screenshots
+        if: always()
+        working-directory: Games/CrayonPhysics
+        run: |
+          for result in verification/*.xcresult; do
+            [ -d "$result" ] || continue
+            xcrun xcresulttool export attachments --path "$result" --output-path verification/screenshots
+          done
       - name: Package simulator app
         if: success()
         working-directory: Games/CrayonPhysics
