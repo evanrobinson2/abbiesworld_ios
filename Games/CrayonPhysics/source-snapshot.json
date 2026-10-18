@@ -12,7 +12,7 @@
     "CrayonPhysics/LevelData.swift": "55db4e58e164ab3792abea065fed7c80bc25312c7931d24e74580d2219dfa914",
     "CrayonPhysics/Presentation.swift": "c86d7eba0d29b6a55f47fb86a3764e640354357f5097acb48030ba510a06178b",
     "CrayonPhysics/StrokeRecognizer.swift": "4d836e597dab7c65987ba6225a853d20fd983b90d457c21b34d213298076fb10",
-    "CrayonPhysicsTests/ReferenceTests.swift": "62f1040b524b984bce0bc551718388a3b7ce0c5b117dac79262c19864e72d500",
+    "CrayonPhysicsTests/ReferenceTests.swift": "107800bae41203f1369acac29d8f1f4074dc851bda641a51e3766d86aee2f083",
     "CrayonPhysicsUITests/LaunchTests.swift": "e3904548a6c439dfba251b8c83cee3349209096755b6bdc6c6be7b26aecd3d08",
     "Standalone/CrayonPhysicsApp.swift": "9b61fdf6a0a1568a9286c50df06dc5cd12028d5f598f4173d1d01807ad046456",
     "tools/import_reference.py": "caf22b31fbe1fc08dfc0b70f70deae734cbb21d11e2d8c9fd7686658e2bf3fb0",

@@ -23,8 +23,9 @@ final class ReferenceTests: XCTestCase {
         XCTAssertEqual(shape.size.width * shape.size.height, 5000, accuracy: 300)
     }
     func testSourceCandidateFamilies() {
-        let rectangle = [CGPoint(x: 100, y: 100), CGPoint(x: 200, y: 100),
-                         CGPoint(x: 200, y: 150), CGPoint(x: 100, y: 150), CGPoint(x: 100, y: 100)]
+        // Four distinct extrema do not qualify for the thin-stroke family.
+        let rectangle = [CGPoint(x: 100, y: 125), CGPoint(x: 150, y: 100),
+                         CGPoint(x: 200, y: 125), CGPoint(x: 150, y: 150)]
         let candidates = StrokeRecognizer.sourceCandidates(rectangle)
         XCTAssertEqual(candidates.count, 11) // seven axis-aligned + four rotated
         XCTAssertEqual(candidates[1].size.width, 95, accuracy: 0.001)
@@ -33,6 +34,19 @@ final class ReferenceTests: XCTestCase {
         let line = StrokeRecognizer.sourceCandidates([CGPoint(x: 0, y: 0), CGPoint(x: 50, y: 50), CGPoint(x: 100, y: 100)])
         XCTAssertEqual(line.count, 22) // eleven additional thin-stroke proposals
         XCTAssertEqual(line.first?.size.height, 2)
+    }
+    func testCornerTiesAlsoProposeThinRectangles() {
+        // Source tests extrema proximity, not whether a path is closed. With
+        // earliest left/top and latest right/bottom, these corners form a diagonal.
+        let corners = [CGPoint(x: 100, y: 100), CGPoint(x: 200, y: 100),
+                       CGPoint(x: 200, y: 150), CGPoint(x: 100, y: 150), CGPoint(x: 100, y: 100)]
+        let candidates = StrokeRecognizer.sourceCandidates(corners)
+        XCTAssertEqual(candidates.count, 22)
+        XCTAssertEqual(candidates[0].size.width, hypot(100, 50) + 5, accuracy: 0.001)
+        XCTAssertEqual(candidates[0].size.height, 2)
+        XCTAssertEqual(candidates[11].size.width, 100)
+        XCTAssertEqual(candidates[11].size.height, 50)
+        XCTAssertEqual(candidates[12].size.width, 95, accuracy: 0.001)
     }
     @MainActor
     func testLevelPickerReturnsToPausedMenu() throws {
