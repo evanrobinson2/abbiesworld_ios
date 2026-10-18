@@ -2,6 +2,12 @@ import XCTest
 @testable import CrayonPhysicsKit
 
 final class ReferenceTests: XCTestCase {
+    func testHostBoxArtworkDecodesFromFrameworkBundle() throws {
+        let image = try XCTUnwrap(CrayonBoxArtwork.loadImage())
+        let pixels = try XCTUnwrap(image.cgImage)
+        XCTAssertEqual(pixels.width, 512)
+        XCTAssertEqual(pixels.height, 512)
+    }
     func testSourceCoordinates() {
         let origin = WorldCoordinates.point(SourceVector(x: 0, y: 0))
         XCTAssertEqual(origin.x, 400)
