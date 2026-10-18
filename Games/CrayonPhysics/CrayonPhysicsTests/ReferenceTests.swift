@@ -2,6 +2,7 @@ import XCTest
 @testable import CrayonPhysicsKit
 
 final class ReferenceTests: XCTestCase {
+    @MainActor
     func testHostBoxArtworkDecodesFromFrameworkBundle() throws {
         let image = try XCTUnwrap(CrayonBoxArtwork.loadImage())
         let pixels = try XCTUnwrap(image.cgImage)

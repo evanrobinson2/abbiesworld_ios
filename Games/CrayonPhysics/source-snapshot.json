@@ -19,7 +19,7 @@
     "CrayonPhysicsCore/CircleCollision.cpp": "11539e4343eb9e801c1e8d6855b15cc38262aeb14e38335c248d70a0316db73b",
     "CrayonPhysicsCore/CrayonPhysicsCore.cpp": "cb941c7b8eb22fca16934420431ba70d470bbcd0cffc50a95e0b4726d922b4eb",
     "CrayonPhysicsCore/PROVENANCE.txt": "fd2c222aa8b61088ed33d63b566a3ad7918f6ac9879e0e363c1d48d57a9782ee",
-    "CrayonPhysicsTests/ReferenceTests.swift": "fd722fddd02a5e4e3886002da8600e02c58d5aba1990967b7312cb0b8e07855d",
+    "CrayonPhysicsTests/ReferenceTests.swift": "3773db365cb9afcffd3ca64b4a791ab3382c6aace01e737f6a09e5923b36bb09",
     "CrayonPhysicsTests/SolutionReplayTests.swift": "d1aa4e720444edfebc2bb42f77a225f8535b34136ccd85877f4b6043e6cf075c",
     "CrayonPhysicsUITests/LaunchTests.swift": "b8ff21c7a5e414b44e3385b2ace3d356d2172b367c137df82cca72e0066ead81",
     "Standalone/CrayonPhysicsApp.swift": "9b61fdf6a0a1568a9286c50df06dc5cd12028d5f598f4173d1d01807ad046456",
