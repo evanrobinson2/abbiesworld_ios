@@ -21,6 +21,7 @@ struct World2PlayerHomeView: View {
     /// The card the drawer should open on, set when a reward sends us here.
     @State private var highlightedInventoryID: String?
     @State private var showingSceneInvent = false
+    @State private var showingCrayonPhysics = false
 
     private var poi: World2POIArchetype? { viewModel.archetype(poiId) }
     private var owner: PlayerId? { poi?.ownerID.flatMap(PlayerId.init(rawValue:)) }
@@ -161,6 +162,15 @@ struct World2PlayerHomeView: View {
                         }
                     }
 
+                    // The Cozy Nook is Abbie's existing default room; keep the
+                    // game entry here instead of inventing a parallel playroom.
+                    if poiId == "poi.abbieTreehouse", activeRoom == .cozyNook,
+                       !isReadOnly, !isArrangingFurniture {
+                        World2CrayonBoxButton(onOpen: openCrayonPhysics)
+                            .position(x: room.size.width * 0.78, y: room.size.height * 0.64)
+                            .zIndex(9_000)
+                    }
+
                     VStack {
                         if !isArrangingFurniture {
                             header
@@ -230,6 +240,12 @@ struct World2PlayerHomeView: View {
         .ignoresSafeArea()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.interior.\(poiId)")
+        .fullScreenCover(isPresented: $showingCrayonPhysics, onDismiss: {
+            MusicService.shared.setGameActive(false)
+            World2Diagnostics.log("crayon_physics_closed", ["poi": poiId, "room": currentRoomId])
+        }) {
+            CrayonPhysicsHostView { showingCrayonPhysics = false }
+        }
         .onAppear {
             World2Diagnostics.log(
                 "treehouse_opened",
@@ -308,6 +324,15 @@ struct World2PlayerHomeView: View {
                 onClose: { showingSceneInvent = false }
             )
         }
+    }
+
+    private func openCrayonPhysics() {
+        guard !showingCrayonPhysics, !isArrangingFurniture, !isReadOnly else { return }
+        // Pause once before the game can start its own music. Resume only after
+        // the cover has disappeared and the game's cleanup has stopped playback.
+        MusicService.shared.setGameActive(true)
+        showingCrayonPhysics = true
+        World2Diagnostics.log("crayon_physics_opened", ["poi": poiId, "room": currentRoomId])
     }
 
     private func stampAt(location: CGPoint, canvasSize: CGSize) {

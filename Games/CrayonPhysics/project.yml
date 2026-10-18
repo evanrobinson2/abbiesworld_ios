@@ -55,10 +55,20 @@ targets:
     settings:
       base:
         GENERATE_INFOPLIST_FILE: true
+  CrayonPhysicsUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources: [CrayonPhysicsUITests]
+    dependencies:
+      - target: CrayonPhysics
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        TEST_TARGET_NAME: CrayonPhysics
 schemes:
   CrayonPhysics:
     build:
       targets:
         CrayonPhysics: all
     test:
-      targets: [CrayonPhysicsTests]
+      targets: [CrayonPhysicsTests, CrayonPhysicsUITests]

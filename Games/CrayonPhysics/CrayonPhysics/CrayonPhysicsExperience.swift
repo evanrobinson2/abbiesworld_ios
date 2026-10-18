@@ -6,7 +6,7 @@ enum GameResources {
     static let bundle = Bundle(for: CrayonResourceAnchor.self)
 }
 
-public enum CrayonPhysicsLaunchContext {
+public enum CrayonPhysicsLaunchContext: Equatable {
     case standalone
     case playroom
 }
@@ -21,6 +21,7 @@ public struct CrayonPhysicsExperience: View {
     public init(context: CrayonPhysicsLaunchContext, onExit: @escaping () -> Void) {
         _session = StateObject(wrappedValue: GameSession(
             exitLabel: context == .playroom ? "Back to Playroom" : "Close Game",
+            managesAudioSession: context == .standalone,
             onExit: onExit
         ))
     }

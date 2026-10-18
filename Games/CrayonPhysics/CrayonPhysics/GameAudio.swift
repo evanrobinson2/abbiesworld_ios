@@ -4,13 +4,15 @@ import AVFoundation
 final class GameAudio {
     private var player: AVAudioPlayer?
     private var entered = false
+    private let managesAudioSession: Bool
     private var cues: [String: AVAudioPlayer] = [:]
     private var drawIdleTask: Task<Void, Never>?
     var soundsMuted = false { didSet { if soundsMuted { stopCues() } } }
-    var muted = false { didSet { player?.volume = muted ? 0 : 0.65 } }
+    var muted = false { didSet { player?.volume = muted ? 0 : 0.25 } }
     private(set) var status = "No production music supplied"
 
-    init(presentation: Presentation = .vanilla) {
+    init(presentation: Presentation = .vanilla, managesAudioSession: Bool = true) {
+        self.managesAudioSession = managesAudioSession
         for (name, filename) in presentation.cueFilenames {
             if let url = GameResources.bundle.url(forResource: filename, withExtension: nil),
                let cue = try? AVAudioPlayer(contentsOf: url) {
@@ -29,15 +31,17 @@ final class GameAudio {
     }
     func enter() {
         entered = true
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch { status = "Audio session failed: \(error.localizedDescription)" }
+        if managesAudioSession {
+            do {
+                try AVAudioSession.sharedInstance().setCategory(.ambient, mode: .default)
+                try AVAudioSession.sharedInstance().setActive(true)
+            } catch { status = "Audio session failed: \(error.localizedDescription)" }
+        }
         resume()
     }
     func resume() {
         guard entered else { return }
-        player?.volume = muted ? 0 : 0.65
+        player?.volume = muted ? 0 : 0.25
         player?.play()
     }
     func cue(_ name: String) {
@@ -68,6 +72,8 @@ final class GameAudio {
         player?.stop()
         stopCues()
         player?.currentTime = 0
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        if managesAudioSession {
+            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        }
     }
 }

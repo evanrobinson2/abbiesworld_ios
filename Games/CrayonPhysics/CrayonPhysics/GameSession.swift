@@ -23,12 +23,13 @@ final class GameSession: ObservableObject {
     private var levelPickerOrigin: Screen = .title
 
     init(defaults: UserDefaults = .standard, presentation: Presentation = .vanilla,
-         exitLabel: String = "Back to Playroom", onExit: @escaping () -> Void = {}) {
+         exitLabel: String = "Back to Playroom", managesAudioSession: Bool = true,
+         onExit: @escaping () -> Void = {}) {
         self.defaults = defaults
         self.exitLabel = exitLabel
         self.onExit = onExit
         self.presentation = presentation
-        audio = GameAudio(presentation: presentation)
+        audio = GameAudio(presentation: presentation, managesAudioSession: managesAudioSession)
         completed = Set(defaults.stringArray(forKey: "completedSourceLevels") ?? [])
         muted = defaults.bool(forKey: "musicMuted")
         soundsMuted = defaults.bool(forKey: "soundsMuted")
