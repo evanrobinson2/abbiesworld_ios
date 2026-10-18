@@ -1,0 +1,36 @@
+{
+  "source": "C:\\Users\\Evan Robinson\\OneDrive\\Documents\\ChatGPT\\Abbie Crayon Physics\\assets\\default-original\\data\\gfx\\level_01_background.jpg",
+  "sourceSHA256": "a1d888bb823f51fe88b9229cd061ac1dabb942a9196fa7c478977032862fe615",
+  "provider": "Midjourney editor",
+  "jobId": "e294763a-8662-4bea-9466-a8ecb49efd42",
+  "index": 2,
+  "editorId": "2bab069c-e5d5-4bce-bf95-6be506fbf0fa",
+  "originalDownload": "C:\\Users\\Evan Robinson\\OneDrive\\Documents\\ChatGPT\\Abbie Crayon Physics\\assets\\provider-production\\midjourney\\originals\\carpetshark2_Restore_only_blank_warm_yellow_aged_drawing_pape_e294763a-8662-4bea-9466-a8ecb49efd42_2.png",
+  "originalDownloadSHA256": "6aa68f053f9dd62373fa4accd6d2a0ee37c444c7d6b32326db0776c72725aeb2",
+  "file": "level_01_background_touch.png",
+  "sha256": "6f68e8ce25a445f184d269b8f2e6076ae2eb7e68a6463fe794e5ab0f4aa245ca",
+  "size": [
+    800,
+    600
+  ],
+  "changedRegionBounds": [
+    [
+      512,
+      0,
+      800,
+      130
+    ],
+    [
+      270,
+      199,
+      534,
+      351
+    ]
+  ],
+  "unchangedOutsideRegions": true,
+  "changes": "Removed RIGHT CLICK TO ERASE, ESC-MENU and SPACE-RESET; no replacement text; original draw/collect illustrations and ground retained.",
+  "finishing": "Resize provider edit to original800x600, composite only paper-restoration regions with bounded2px feather; untouched archival original.",
+  "prompt": "Restore only blank warm yellow aged drawing paper in the erased regions. Match the surrounding paper grain, stains, color and fold creases seamlessly. No writing, no letters, no symbols, no objects. Preserve all unmasked artwork exactly.",
+  "license": "Derivative of supplied Petri Purho artwork; retain original CC BY-NC-SA2.0 attribution and terms.",
+  "collisionChanges": false
+}

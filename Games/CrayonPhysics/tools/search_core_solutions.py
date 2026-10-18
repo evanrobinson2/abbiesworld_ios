@@ -40,6 +40,7 @@ def main():
     parser.add_argument('--replay', type=Path)
     parser.add_argument('--extend', type=Path)
     parser.add_argument('--target-x', type=float)
+    parser.add_argument('--robust', action='store_true', help='Require the solution to tolerate small fitted-angle changes.')
     args = parser.parse_args()
     lib = load_library(args.library)
     levels = json.loads((Path(__file__).resolve().parents[1] / 'CrayonPhysics/Resources/levels.json').read_text())['levels'][:7]
@@ -83,6 +84,16 @@ def main():
                 prefix = json.loads(args.extend.read_text())['results'][0]['actions']
                 actions = prefix + [{'step': rng.randrange(700, 850), 'box': [rng.uniform(-11, -7), rng.uniform(-9, -4), rng.uniform(1, 5), rng.uniform(0.5, 3), rng.uniform(-0.6, 0.6)]}]
             collected = run(lib, level, actions)
+            if args.robust and collected and len(collected) == len(level['stars']):
+                stable = True
+                for offset in (-0.0001, -0.00001, 0.00001, 0.0001):
+                    perturbed = [dict(a, box=a['box'][:4] + [a['box'][4] + offset]) for a in actions]
+                    result_stars = run(lib, level, perturbed)
+                    if not result_stars or len(result_stars) != len(level['stars']):
+                        stable = False
+                        break
+                if not stable:
+                    continue
             if args.target_x is not None and not any(abs(s['star']['x'] - args.target_x) < 0.01 for s in collected or []):
                 continue
             if collected and len(collected) > best_count:

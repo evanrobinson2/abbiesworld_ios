@@ -12,7 +12,7 @@
     "CrayonPhysics/GameSession.swift": "42995b00b0dbd86ab963f4d05407dcfce01ae93467926ca5c3914e33d6ff0a18",
     "CrayonPhysics/GameView.swift": "09ade64d7d3112a5374c7acece982b259baccab850f8f075d586b6d66a56f5a7",
     "CrayonPhysics/LevelData.swift": "d03f941821ab9812efcdf0b3ad7b9eaaa27011ab7b7e7399d06d0c7053f7c0e3",
-    "CrayonPhysics/Presentation.swift": "c86d7eba0d29b6a55f47fb86a3764e640354357f5097acb48030ba510a06178b",
+    "CrayonPhysics/Presentation.swift": "f9c8e3cc3517ac9ea7b1df17e4ad764b0d135af470a545e4da92424c1547f0aa",
     "CrayonPhysics/SourcePhysics.swift": "49ee8cfa0b9b38521b1b9228ef04f162af343b4bbf466c0b765946005edb7a86",
     "CrayonPhysics/StrokeRecognizer.swift": "4d836e597dab7c65987ba6225a853d20fd983b90d457c21b34d213298076fb10",
     "CrayonPhysicsCore/CircleCollision.cpp": "11539e4343eb9e801c1e8d6855b15cc38262aeb14e38335c248d70a0316db73b",
@@ -26,7 +26,7 @@
     "tools/import_reference.py": "bbe02769a9962558f396d6c9f928c8289649417a51ee4a3e5c2ef8f2f7fbd897",
     "tools/inspect_reference.py": "66f8cd153141b11944c099e6ff096fbc5ab19b27d2bce96ab04df085614da2ff",
     "tools/integrate_media.py": "c7626a33b00d93f9c013c7ed0dcd31f66e3d8a13796ba5441c7623827b8b22bc",
-    "tools/search_core_solutions.py": "3d51291f2f3e51ab9aec02a27c6020cfa74873555bb0615f0a4b830f147cc842",
+    "tools/search_core_solutions.py": "d5ae04bc9d1cc0845d28ae1da2160acf92d2086212ddca11a2218b38d956f6ad",
     "tools/verify-on-mac.sh": "4f05f00b156f6d39e86c1fa347ecf3857bd88c8d244264219b325064102c35d5",
     "tools/verify_physics.py": "8bf514f374d68082976209aac9aaa3de493f858ffcf9885d27bd968842d7cbb6",
     "tools/verify_resources.py": "16ab596fbca13d0e940e70ecd170217ec09946ec91e594bb66e5b9b3e1ebbb7b",
@@ -44,6 +44,7 @@
     "CrayonPhysics/Resources/erase.wav": "86cd91ddcf6519d401a20ae1d316686e3e0c8d3888aa5e025616202cc704ca2d",
     "CrayonPhysics/Resources/levels.json": "0c272434df64492a67c4b45ee78c99edb0dab282c4f82d8121a0a91a8d59aebe",
     "CrayonPhysics/Resources/level_01_background.jpg": "a1d888bb823f51fe88b9229cd061ac1dabb942a9196fa7c478977032862fe615",
+    "CrayonPhysics/Resources/level_01_background_touch.png": "6f68e8ce25a445f184d269b8f2e6076ae2eb7e68a6463fe794e5ab0f4aa245ca",
     "CrayonPhysics/Resources/level_02_background.jpg": "b3f0183fb2babc4e583a65584ec225615b6c89e9f9e1ae21332061fd38276eaa",
     "CrayonPhysics/Resources/level_04_background.jpg": "bb129a5b7a296b36b7341c91ddd7d4520e7afbffc752d40726807a751ac76a82",
     "CrayonPhysics/Resources/level_05_background.jpg": "057cfabe32a86118df0c5a3bc5f930f345808b89b6549dc100541d276065fe14",
@@ -69,6 +70,7 @@
     "CrayonPhysics/Resources/the_ball.png": "865bd2ab7718d99f85ffa60fc405da93f1ddbe2d8e16fa9f12b63456165bcc0b",
     "CrayonPhysics/Resources/title_screen.jpg": "78cf1a700c7afbbb1f293a8394f7e3b78c2cffd5b68360ba1857ee61ba473654",
     "CrayonPhysics/Resources/tree_01.png": "a17208c9d5436192646ea073f08c0447b83a1bbdb92428daedd2ce45f65444af",
+    "CrayonPhysics/Resources/tutorial-provenance.json": "c3c36920762c865522aaade0488a679af835a749830456af09a5b4edd462dab6",
     "CrayonPhysicsCore/include/CrayonPhysicsCore.h": "ea88d88bcc5d50f7c41d9ba8d3e7469f7407dbdf1577eea21a116e5ca3db8d9d",
     "CrayonPhysicsCore/Vendor/src/Arbiter.cpp": "ed0e85d28cffe1c140e8dc6add112b167fc79e99921f776d139fb7242e223a18",
     "CrayonPhysicsCore/Vendor/src/Body.cpp": "67394ca40999841c9e7198e5a1da74c79c2fdadd7d619533944844902d228ebc",
@@ -80,6 +82,6 @@
     "CrayonPhysicsCore/Vendor/include/box2d-lite/Joint.h": "735ac0a2bde2acfe1d749196dbf07a316fd0eef774d84fc52aac60c7a6f977f5",
     "CrayonPhysicsCore/Vendor/include/box2d-lite/MathUtils.h": "7f95801aefd5b4dd8630cc1afd55b4139f9d87859ff8241a43cd3e2dadcb0bad",
     "CrayonPhysicsCore/Vendor/include/box2d-lite/World.h": "d1f9289b9c6c740edf0dae15311fc0d189d6cd85ddeb2012f955a9d0f70ce576",
-    "CrayonPhysicsTests/Fixtures/solutions.json": "50af3b7cc5a06203e9a415979ab9ef2fd74de09a7dd83df1f6390c21c7e4048b"
+    "CrayonPhysicsTests/Fixtures/solutions.json": "12019ac0caa73b309ab69ed7c22be46072a6fa103eae67a10cea6dccab17d64f"
   }
 }

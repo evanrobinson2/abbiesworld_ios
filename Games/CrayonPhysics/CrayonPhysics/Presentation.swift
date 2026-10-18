@@ -4,7 +4,10 @@ import UIKit
 /// Cosmetic configuration cannot change level bodies, joints, goals or input geometry.
 struct Presentation {
     static let vanilla = Presentation()
-    var spriteImages: [String: String] = [:] // source sprite definition ID -> replacement filename
+    // Touch tutorial removes obsolete desktop-key hints; source geometry is unchanged.
+    var spriteImages: [String: String] = [
+        "data/gfx/level_01_background.xml": "level_01_background_touch.png"
+    ] // source sprite definition ID -> replacement filename
     var paper = UIColor(red: 247 / 255, green: 241 / 255, blue: 227 / 255, alpha: 1)
     var ink = UIColor(red: 0.15, green: 0.27, blue: 0.55, alpha: 1)
     var brushWidth: CGFloat = 3
