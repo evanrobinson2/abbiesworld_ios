@@ -71,6 +71,18 @@ jobs:
           set -o pipefail
           mkdir -p verification
           xcodebuild -project abbies.world.ios/abbies.world.ios.xcodeproj -scheme abbies.world.ios -destination 'generic/platform=iOS Simulator' -derivedDataPath HostDerivedData CODE_SIGNING_ALLOWED=NO build 2>&1 | tee verification/host-build.log
+      - name: Verify real room entry and return
+        shell: bash
+        run: |
+          set -o pipefail
+          simulator_id=$(xcrun simctl list devices available --json | python3 -c 'import json,sys; print(next(d["udid"] for group in json.load(sys.stdin)["devices"].values() for d in group if d.get("isAvailable") and "iPad" in d["name"]))')
+          xcodebuild -project abbies.world.ios/abbies.world.ios.xcodeproj -scheme abbies.world.ios -destination "platform=iOS Simulator,id=$simulator_id" -derivedDataPath HostDerivedData -resultBundlePath verification/host-ui.xcresult -only-testing:abbies.world.iosUITests/CrayonPhysicsIntegrationUITests CODE_SIGNING_ALLOWED=NO test 2>&1 | tee verification/host-ui.log
+      - name: Export host screenshots
+        if: always()
+        run: |
+          if [ -d verification/host-ui.xcresult ]; then
+            xcrun xcresulttool export attachments --path verification/host-ui.xcresult --output-path verification/screenshots
+          fi
       - name: Package integrated simulator app
         if: success()
         run: ditto -c -k --sequesterRsrc --keepParent HostDerivedData/Build/Products/Debug-iphonesimulator/abbies.world.ios.app verification/AbbiesWorld-simulator.zip
