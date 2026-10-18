@@ -72,7 +72,12 @@ struct GameView: View {
                 VStack(spacing: 8) { toolButtons }
             }.padding(10)
             if session.levelIndex == 0 {
-                Button("How to play", action: session.pause).padding(8)
+                Text("Draw a shape to move the ball to the star. Tap Erase, then tap a drawing to remove it.")
+                    .font(.system(size: instructionSize))
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 8)
             }
         }
     }

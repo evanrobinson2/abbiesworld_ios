@@ -10,6 +10,8 @@ Local adaptations for Crayon Physics Release 1:
 - Joint accumulated impulse multiplied by serialized relaxation (FUN_004ccde8).
 - Both serialized local anchors and initial accumulated impulse loaded directly.
 - Fixed float timestep 1/60 and source solver iteration count.
+- Contact and joint correction bias0.1 (source constant004f7774=-0.1),
+  rather than the upstream revision's0.2 default.
 - C handle bridge owns bodies/joints and safely removes cached contacts.
 - Contact ordering uses monotonically increasing insertion IDs instead of heap
   addresses, making repeated replays independent of allocator reuse. This is an

@@ -29,7 +29,7 @@ void Joint::Set(Body* b1, Body* b2, const Vec2& anchor)
 	P.Set(0.0f, 0.0f);
 
 	softness = 0.0f;
-	biasFactor = 0.2f;
+	biasFactor = 0.1f; // Release 1 FUN_004ccde8, constant004f7774.
 }
 
 void Joint::PreStep(float inv_dt)

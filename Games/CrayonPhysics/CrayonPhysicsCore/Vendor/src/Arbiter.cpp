@@ -83,7 +83,8 @@ void Arbiter::Update(Contact* newContacts, int numNewContacts)
 void Arbiter::PreStep(float inv_dt)
 {
 	const float k_allowedPenetration = 0.01f;
-	float k_biasFactor = World::positionCorrection ? 0.2f : 0.0f;
+	// Release 1 FUN_004c5d09 uses -0.1f at executable address004f7774.
+	float k_biasFactor = World::positionCorrection ? 0.1f : 0.0f;
 
 	for (int i = 0; i < numContacts; ++i)
 	{

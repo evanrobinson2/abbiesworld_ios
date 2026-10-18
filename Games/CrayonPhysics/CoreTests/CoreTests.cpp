@@ -2,6 +2,7 @@
 #include <cassert>
 #include <cmath>
 #include <cstdio>
+#include <vector>
 
 static CPBodyDefinition body(float x, float y, float w, float h, int shape = 0, bool fixed = false) {
     CPBodyDefinition d{};
@@ -14,6 +15,21 @@ static CPBodyState state(CPWorld* world, int handle) {
 }
 static void near(float actual, float expected, float tolerance = 0.0001f) {
     assert(std::isfinite(actual)); assert(std::fabs(actual - expected) < tolerance);
+}
+static std::vector<CPBodyState> replay() {
+    auto world = CPWorldCreate(0, 10, 10);
+    CPWorldAddBody(world, body(0, 5, 20, 1, 0, true));
+    int ball = CPWorldAddBody(world, body(-2, 0, 1, 1, 1));
+    auto weight = body(-2.4f, -3, 2, 2);
+    weight.rotation = 0.3f;
+    CPWorldAddBody(world, weight);
+    std::vector<CPBodyState> states;
+    for (int i = 0; i < 300; ++i) {
+        CPWorldStep(world);
+        states.push_back(state(world, ball));
+    }
+    CPWorldDestroy(world);
+    return states;
 }
 int main() {
     // Semi-implicit Euler, exactly 60 steps, no damping or velocity caps.
@@ -50,5 +66,19 @@ int main() {
     for (int i = 0; i < 60; ++i) CPWorldStep(world);
     near(state(world, hanging).vy, 10);
     CPWorldDestroy(world);
-    std::puts("PASS: fixed step, free fall, circle-floor contacts, local-anchor joint, removal");
+    const auto expected = replay();
+    for (int repeat = 0; repeat < 10; ++repeat) {
+        // Perturb allocator reuse between otherwise identical contact-rich runs.
+        auto unrelated = CPWorldCreate(0, 10, 10);
+        for (int i = 0; i < repeat + 1; ++i) CPWorldAddBody(unrelated, body(float(i), 0, 1, 1));
+        const auto actual = replay();
+        for (size_t i = 0; i < expected.size(); ++i) {
+            assert(actual[i].x == expected[i].x && actual[i].y == expected[i].y);
+            assert(actual[i].vx == expected[i].vx && actual[i].vy == expected[i].vy);
+            assert(actual[i].rotation == expected[i].rotation);
+            assert(actual[i].angularVelocity == expected[i].angularVelocity);
+        }
+        CPWorldDestroy(unrelated);
+    }
+    std::puts("PASS: fixed step, free fall, circle-floor contacts, local-anchor joint, removal, allocator-independent replay");
 }
