@@ -1,8 +1,8 @@
 # Crayon Physics delivery
 
-**Ready for Mac/device testing:** `d2c35dfcf7070c67888fbb9c1393ea174725ee4b`. [Apple verification run](https://github.com/evanrobinson2/abbiesworld_ios/actions/runs/39141465376) passed native checks, nine unit tests (including all seven recognized solution fixtures and framework artwork decode), two standalone UI tests and integrated room entry/return/reopen. Actual screenshots confirm touch tutorial, star and host crayon-box artwork.
+**Ready for Mac/device testing:** `c7f47341e6a19dfec9edb037956320474852f097`. [Apple verification run](https://github.com/evanrobinson2/abbiesworld_ios/actions/runs/39144006673) passed native checks, 13 unit tests (including all seven recognized solution fixtures, artwork decode and music lifecycle), three standalone UI tests and integrated room entry/return/reopen. Actual screenshots confirm touch tutorial, star and host crayon-box artwork.
 
-This is a tested device candidate, not full physical-device acceptance. It uses the baseline soundtrack. The newly selected four canonical songs are a separate media update and are not included in this pinned revision.
+This is a tested device candidate, not full physical-device acceptance. It includes the four canonical tracks: Normal (default), Tense, French House and Pop. Choose Music style in the paused menu; the choice persists and remains independent of mute. There is no automatic tension trigger. Earlier baseline d2c35df remains available in Git history.
 
 Both apps compile the same CrayonPhysicsKit framework. The standalone app starts directly at the game title. In Abbie's World, open Abbie's Cozy Nook and tap the crayon box; closing the game returns to that existing room.
 
@@ -15,7 +15,7 @@ The integration is currently on PR #39. In your existing `abbiesworld_ios` check
 ```sh
 git clone --branch codex/crayon-physics-integration https://github.com/evanrobinson2/abbiesworld_ios.git
 cd abbiesworld_ios
-git checkout d2c35dfcf7070c67888fbb9c1393ea174725ee4b
+git checkout c7f47341e6a19dfec9edb037956320474852f097
 ```
 
 From the repository root:
@@ -51,7 +51,8 @@ Evan owns signing and installation on his Mac. After installing both targets:
 
 - Play the complete seven-puzzle campaign through the ending and replay.
 - Check real finger and Pencil drawing/erasing, reset and rotation.
-- Check music/sound mute, interruptions, background/resume and host music after returning.
+- Check music/sound mute, all four styles, interruptions, background/resume and host music after returning. Listen to the full tracks for accidental vocals and musical loop joins; these full-track exports are not listening-approved seamless loops.
+- Check Music style is comfortable to tap at default text size.
 - Inspect enlarged-text completion, ending and error states that are not covered by the current captured layouts.
 
 
