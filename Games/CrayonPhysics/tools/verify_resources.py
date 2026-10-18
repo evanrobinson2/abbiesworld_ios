@@ -26,8 +26,11 @@ for level in catalog['levels']:
             assert imported[tag[0].lower() + tag[1:]] == float(original_body.findtext(tag))
     ids = {b['id'] for b in level['bodies']}
     assert len(level['joints']) == len(original.findall('World/Joint'))
-    for joint in level['joints']:
+    for joint, source_joint in zip(level['joints'], original.findall('World/Joint')):
         assert joint['body1'] in ids and joint['body2'] in ids
+        for key, tag in [('anchor1', 'LocalAnchor1'), ('anchor2', 'LocalAnchor2'), ('accumulatedImpulse', 'AccumulatedImpulse')]:
+            assert joint[key] == {axis: float(source_joint.find(tag).get(axis)) for axis in ('x', 'y')}
+        assert joint['relaxation'] == float(source_joint.findtext('Relaxation'))
     assert len(level['stars']) == len(original.findall('Collectable'))
     assert level['id'] == 'the_end' or sum(b['special'] == 'da_ball' for b in level['bodies']) == 1
 for sprite in catalog['sprites'].values():

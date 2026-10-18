@@ -17,6 +17,12 @@ jobs:
           sparse-checkout: Games/CrayonPhysics
       - name: Install project generator
         run: brew install xcodegen
+      - name: Verify native physics core
+        working-directory: Games/CrayonPhysics
+        run: |
+          mkdir -p verification
+          clang++ -std=c++17 -I CrayonPhysicsCore/include -I CrayonPhysicsCore/Vendor/include CrayonPhysicsCore/CrayonPhysicsCore.cpp CrayonPhysicsCore/CircleCollision.cpp CrayonPhysicsCore/Vendor/src/*.cpp CoreTests/CoreTests.cpp -o verification/core-tests
+          verification/core-tests | tee verification/core-tests.log
       - name: Build and test on an available iPad simulator
         working-directory: Games/CrayonPhysics
         run: bash tools/verify-on-mac.sh

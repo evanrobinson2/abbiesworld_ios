@@ -78,6 +78,7 @@ def main():
                            'anchor1': vector(joint.find('LocalAnchor1')),
                            'anchor2': vector(joint.find('LocalAnchor2')),
                            'relaxation': float(joint.findtext('Relaxation', '1')),
+                           'accumulatedImpulse': vector(joint.find('AccumulatedImpulse')),
                            'sourceXML': ET.tostring(joint, encoding='unicode')})
         stars = [{'position': vector(c.find('Position')), 'radius': float(c.findtext('Radius')),
                   'sprite': sprite(c.get('gfx_file'))} for c in root.findall('Collectable')]

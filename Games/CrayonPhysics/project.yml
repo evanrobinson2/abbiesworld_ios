@@ -16,6 +16,7 @@ targets:
     sources: [Standalone]
     dependencies:
       - target: CrayonPhysicsKit
+      - target: CrayonPhysicsCore
     info:
       path: Generated/Info.plist
       properties:
@@ -32,7 +33,29 @@ targets:
         PRODUCT_BUNDLE_IDENTIFIER: com.abbiesworld.crayonphysics
         GENERATE_INFOPLIST_FILE: false
         CODE_SIGN_STYLE: Automatic
+  CrayonPhysicsCore:
+    type: framework
+    platform: iOS
+    sources:
+      - path: CrayonPhysicsCore
+        excludes: [include, Vendor/include]
+      - path: CrayonPhysicsCore/include
+        headerVisibility: public
+      - path: CrayonPhysicsCore/Vendor/include
+        headerVisibility: project
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: true
+        PRODUCT_BUNDLE_IDENTIFIER: com.abbiesworld.crayonphysics.core
+        DEFINES_MODULE: true
+        CLANG_CXX_LANGUAGE_STANDARD: c++17
+        HEADER_SEARCH_PATHS:
+          - $(inherited)
+          - $(SRCROOT)/CrayonPhysicsCore/include
+          - $(SRCROOT)/CrayonPhysicsCore/Vendor/include
   CrayonPhysicsKit:
+    dependencies:
+      - target: CrayonPhysicsCore
     type: framework
     platform: iOS
     sources:
@@ -52,6 +75,7 @@ targets:
     sources: [CrayonPhysicsTests]
     dependencies:
       - target: CrayonPhysicsKit
+      - target: CrayonPhysicsCore
     settings:
       base:
         GENERATE_INFOPLIST_FILE: true

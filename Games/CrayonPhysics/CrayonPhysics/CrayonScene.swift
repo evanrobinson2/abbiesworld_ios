@@ -1,8 +1,7 @@
 import SpriteKit
 import UIKit
 
-/// SpriteKit is the first integration backend, not a claim of Box2D parity.
-/// Source geometry is kept independent so the solver can be replaced after tracing.
+/// SpriteKit renders/input only; source-unit Box2D-Lite advances at fixed 1/60.
 @MainActor
 final class CrayonScene: SKScene {
     let level: SourceLevel
@@ -23,13 +22,16 @@ final class CrayonScene: SKScene {
     private var finished = false
     private var built = false
     private var cleanupFrames = 0
-    private var physicsPointsPerMeter: CGFloat = 1
-    private static let physical: UInt32 = 1
+    private let solver: SourcePhysics
+    private var physicsHandles: [ObjectIdentifier: Int32] = [:]
+    private var lastUpdate: TimeInterval?
+    private var accumulatedTime: TimeInterval = 0
 
     init(level: SourceLevel, sprites: [String: SourceSprite], presentation: Presentation = .vanilla) {
         self.level = level
         self.sprites = sprites
         self.presentation = presentation
+        solver = SourcePhysics(level: level)
         super.init(size: CGSize(width: 800, height: 600))
         backgroundColor = presentation.paper
     }
@@ -39,14 +41,6 @@ final class CrayonScene: SKScene {
         guard !built else { return }
         built = true
         view.isMultipleTouchEnabled = true
-        // SpriteKit gravity/forces use SI units while nodes/velocity use scene points.
-        // Derive its length conversion from its public area (square meters), rather
-        // than assuming a private fixed points-per-meter constant.
-        let probe = SKPhysicsBody(rectangleOf: CGSize(width: 100, height: 100))
-        physicsPointsPerMeter = sqrt(10000 / probe.area)
-        let acceleration = WorldCoordinates.vector(level.gravity)
-        physicsWorld.gravity = CGVector(dx: acceleration.dx / physicsPointsPerMeter,
-                                        dy: acceleration.dy / physicsPointsPerMeter)
         if let background = makeSprite(level.background) {
             background.position = CGPoint(x: 400, y: 300)
             background.size = size
@@ -54,15 +48,6 @@ final class CrayonScene: SKScene {
             addChild(background)
         }
         for source in level.bodies { addBody(source) }
-        for joint in level.joints {
-            guard let first = bodyNodes[joint.body1], let second = bodyNodes[joint.body2],
-                  let bodyA = first.physicsBody, let bodyB = second.physicsBody else { continue }
-            let local = CGPoint(x: CGFloat(joint.anchor1.x) * WorldCoordinates.scale,
-                                y: -CGFloat(joint.anchor1.y) * WorldCoordinates.scale)
-            let anchor = first.convert(local, to: self)
-            let pin = SKPhysicsJointPin.joint(withBodyA: bodyA, bodyB: bodyB, anchor: anchor)
-            physicsWorld.add(pin)
-        }
         // The ending contains a deliberately off-screen collectable and no tagged ball.
         if !level.isEnding {
             for source in level.stars {
@@ -88,32 +73,8 @@ final class CrayonScene: SKScene {
         node.zRotation = -CGFloat(source.rotation)
         node.name = "source-\(source.id)"
         if let key = source.sprite, let art = makeSprite(key) { node.addChild(art) }
-        // Static source geometry is already depicted in the background artwork.
-        // The XML tag is misleading: source body width is halved in collision code.
-        let halfWidth = CGFloat(source.radius.x) * WorldCoordinates.scale / 2
-        let halfHeight = CGFloat(source.radius.y) * WorldCoordinates.scale / 2
-        let body = source.shape == 1
-            ? SKPhysicsBody(circleOfRadius: halfWidth)
-            : SKPhysicsBody(rectangleOf: CGSize(width: 2 * halfWidth, height: 2 * halfHeight))
-        body.isDynamic = !source.isStatic
-        body.friction = CGFloat(source.friction)
-        body.restitution = 0
-        body.linearDamping = 0
-        body.angularDamping = 0
-        if !source.isStatic { body.mass = CGFloat(source.mass) }
-        body.velocity = WorldCoordinates.vector(source.velocity)
-        body.angularVelocity = -CGFloat(source.angularVelocity)
-        body.categoryBitMask = Self.physical
-        body.collisionBitMask = Self.physical
-        body.usesPreciseCollisionDetection = true
-        node.physicsBody = body
+        physicsHandles[ObjectIdentifier(node)] = solver.handle(for: source.id)
         addChild(node)
-        if !source.isStatic {
-            let force = WorldCoordinates.vector(source.force)
-            body.applyForce(CGVector(dx: force.dx / physicsPointsPerMeter, dy: force.dy / physicsPointsPerMeter))
-            let factor = WorldCoordinates.scale / physicsPointsPerMeter
-            body.applyTorque(-CGFloat(source.torque) * factor * factor)
-        }
         bodyNodes[source.id] = node
         if source.special == "da_ball" { ball = node }
     }
@@ -229,18 +190,7 @@ final class CrayonScene: SKScene {
         node.position = rectangle.center
         node.zRotation = rectangle.angle
         node.zPosition = 20
-        // Source emits rectangle bodies. Fitting/raster scoring remains approximate.
-        let body = SKPhysicsBody(rectangleOf: rectangle.size)
-        // FUN_004c9840: mass = 2 * width * height, in world units.
-        body.mass = 2 * rectangle.size.width * rectangle.size.height / (WorldCoordinates.scale * WorldCoordinates.scale)
-        body.friction = 0.2
-        body.restitution = 0
-        body.linearDamping = 0
-        body.angularDamping = 0
-        body.categoryBitMask = Self.physical
-        body.collisionBitMask = Self.physical
-        body.usesPreciseCollisionDetection = true
-        node.physicsBody = body
+        physicsHandles[ObjectIdentifier(node)] = solver.addDrawing(rectangle)
         addChild(node)
         drawnNodes.append(node)
         drawingBounds[ObjectIdentifier(node)] = bounds
@@ -255,11 +205,33 @@ final class CrayonScene: SKScene {
         }) else { return }
         let removed = drawnNodes.remove(at: index)
         drawingBounds.removeValue(forKey: ObjectIdentifier(removed))
-        removed.removeFromParent()
+        removePhysicalNode(removed)
         onCue?("erase")
     }
 
-    override func didSimulatePhysics() {
+    override var isPaused: Bool {
+        didSet { lastUpdate = nil; accumulatedTime = 0 }
+    }
+
+    override func update(_ currentTime: TimeInterval) {
+        guard built, !finished, !isPaused else { lastUpdate = nil; return }
+        defer { lastUpdate = currentTime }
+        guard let previous = lastUpdate else { return }
+        // Discard suspended time; bound catch-up after a transient rendering stall.
+        accumulatedTime += min(max(currentTime - previous, 0), 0.1)
+        while accumulatedTime >= 1.0 / 60.0 && !finished {
+            accumulatedTime -= 1.0 / 60.0
+            solver.step()
+            for node in Array(bodyNodes.values) + drawnNodes {
+                guard let handle = physicsHandles[ObjectIdentifier(node)], let state = solver.state(handle) else { continue }
+                node.position = WorldCoordinates.point(SourceVector(x: Double(state.x), y: Double(state.y)))
+                node.zRotation = -CGFloat(state.rotation)
+            }
+            checkProgress()
+        }
+    }
+
+    private func checkProgress() {
         cleanupFrames += 1
         if cleanupFrames > 100 { cleanupFrames = 0; cleanFallenBodies() }
         guard !finished, !level.isEnding, let ball else { return }
@@ -284,19 +256,23 @@ final class CrayonScene: SKScene {
         // FUN_004c9360 restores the tagged ball below world Y=15 and removes bodies below Y=30.
         if let ball, ball.position.y < 100 - 15 * WorldCoordinates.scale,
            let source = level.bodies.first(where: { $0.special == "da_ball" }) {
+            solver.restoreBall(source)
             ball.position = WorldCoordinates.point(source.position)
-            ball.physicsBody?.velocity = WorldCoordinates.vector(source.velocity)
-            ball.physicsBody?.angularVelocity = -CGFloat(source.angularVelocity)
         }
         let cutoff = 100 - 30 * WorldCoordinates.scale
-        for node in bodyNodes.values where node !== ball && node.position.y < cutoff { node.removeFromParent() }
+        for node in bodyNodes.values where node !== ball && node.position.y < cutoff { removePhysicalNode(node) }
         drawnNodes.removeAll { node in
             if node.position.y < cutoff {
                 drawingBounds.removeValue(forKey: ObjectIdentifier(node))
-                node.removeFromParent()
+                removePhysicalNode(node)
                 return true
             }
             return false
         }
+    }
+
+    private func removePhysicalNode(_ node: SKNode) {
+        if let handle = physicsHandles.removeValue(forKey: ObjectIdentifier(node)) { solver.remove(handle) }
+        node.removeFromParent()
     }
 }

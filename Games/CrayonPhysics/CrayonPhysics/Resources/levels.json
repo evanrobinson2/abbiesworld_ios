@@ -459,6 +459,10 @@
             "y": 1.0
           },
           "relaxation": 1.0,
+          "accumulatedImpulse": {
+            "x": 1.62522,
+            "y": -1.54257
+          },
           "sourceXML": "<Joint body1_id=\"1\" body2_id=\"2\">\n\t\t\t<M x1=\"8.51216\" x2=\"-0.428653\" y1=\"-0.428653\" y2=\"9.8765\">\n\t\t\t</M>\n\t\t\t<LocalAnchor1 x=\"-4.1\" y=\"-1\">\n\t\t\t</LocalAnchor1>\n\t\t\t<LocalAnchor2 x=\"0\" y=\"1\">\n\t\t\t</LocalAnchor2>\n\t\t\t<R1 x=\"-4.1\" y=\"-1\">\n\t\t\t</R1>\n\t\t\t<R2 x=\"-0.276844\" y=\"0.960915\">\n\t\t\t</R2>\n\t\t\t<Bias x=\"5.72205e-006\" y=\"0\">\n\t\t\t</Bias>\n\t\t\t<AccumulatedImpulse x=\"1.62522\" y=\"-1.54257\">\n\t\t\t</AccumulatedImpulse>\n\t\t\t<Relaxation>\n\t\t\t\t1\n\t\t\t</Relaxation>\n\t\t</Joint>\n\t\t"
         },
         {
@@ -473,6 +477,10 @@
             "y": 1.0
           },
           "relaxation": 1.0,
+          "accumulatedImpulse": {
+            "x": -1.57781,
+            "y": -1.55358
+          },
           "sourceXML": "<Joint body1_id=\"1\" body2_id=\"3\">\n\t\t\t<M x1=\"8.50243\" x2=\"0.412765\" y1=\"0.412765\" y2=\"9.88623\">\n\t\t\t</M>\n\t\t\t<LocalAnchor1 x=\"4.1\" y=\"-1\">\n\t\t\t</LocalAnchor1>\n\t\t\t<LocalAnchor2 x=\"0\" y=\"1\">\n\t\t\t</LocalAnchor2>\n\t\t\t<R1 x=\"4.1\" y=\"-1\">\n\t\t\t</R1>\n\t\t\t<R2 x=\"0.265716\" y=\"0.964051\">\n\t\t\t</R2>\n\t\t\t<Bias x=\"2.86102e-006\" y=\"0\">\n\t\t\t</Bias>\n\t\t\t<AccumulatedImpulse x=\"-1.57781\" y=\"-1.55358\">\n\t\t\t</AccumulatedImpulse>\n\t\t\t<Relaxation>\n\t\t\t\t1\n\t\t\t</Relaxation>\n\t\t</Joint>\n\t"
         }
       ],
@@ -862,6 +870,10 @@
             "y": 0.0
           },
           "relaxation": 1.0,
+          "accumulatedImpulse": {
+            "x": 0.0,
+            "y": -20.0
+          },
           "sourceXML": "<Joint body1_id=\"1\" body2_id=\"2\">\n\t\t\t<M x1=\"100\" x2=\"0\" y1=\"0\" y2=\"100\">\n\t\t\t</M>\n\t\t\t<LocalAnchor1 x=\"-6\" y=\"43.5\">\n\t\t\t</LocalAnchor1>\n\t\t\t<LocalAnchor2 x=\"0\" y=\"0\">\n\t\t\t</LocalAnchor2>\n\t\t\t<R1 x=\"-6\" y=\"43.5\">\n\t\t\t</R1>\n\t\t\t<R2 x=\"0\" y=\"0\">\n\t\t\t</R2>\n\t\t\t<Bias x=\"0\" y=\"0\">\n\t\t\t</Bias>\n\t\t\t<AccumulatedImpulse x=\"0\" y=\"-20\">\n\t\t\t</AccumulatedImpulse>\n\t\t\t<Relaxation>\n\t\t\t\t1\n\t\t\t</Relaxation>\n\t\t</Joint>\n\t\t"
         },
         {
@@ -876,6 +888,10 @@
             "y": 0.0
           },
           "relaxation": 1.0,
+          "accumulatedImpulse": {
+            "x": -1.31098e-21,
+            "y": -16.6667
+          },
           "sourceXML": "<Joint body1_id=\"1\" body2_id=\"3\">\n\t\t\t<M x1=\"100\" x2=\"0\" y1=\"0\" y2=\"100\">\n\t\t\t</M>\n\t\t\t<LocalAnchor1 x=\"0\" y=\"43.5\">\n\t\t\t</LocalAnchor1>\n\t\t\t<LocalAnchor2 x=\"0\" y=\"0\">\n\t\t\t</LocalAnchor2>\n\t\t\t<R1 x=\"0\" y=\"43.5\">\n\t\t\t</R1>\n\t\t\t<R2 x=\"0\" y=\"0\">\n\t\t\t</R2>\n\t\t\t<Bias x=\"1.17988e-022\" y=\"0\">\n\t\t\t</Bias>\n\t\t\t<AccumulatedImpulse x=\"-1.31098e-021\" y=\"-16.6667\">\n\t\t\t</AccumulatedImpulse>\n\t\t\t<Relaxation>\n\t\t\t\t1\n\t\t\t</Relaxation>\n\t\t</Joint>\n\t\t"
         },
         {
@@ -890,6 +906,10 @@
             "y": 0.0
           },
           "relaxation": 1.0,
+          "accumulatedImpulse": {
+            "x": 0.0,
+            "y": -16.6667
+          },
           "sourceXML": "<Joint body1_id=\"1\" body2_id=\"4\">\n\t\t\t<M x1=\"100\" x2=\"0\" y1=\"0\" y2=\"100\">\n\t\t\t</M>\n\t\t\t<LocalAnchor1 x=\"6\" y=\"43.5\">\n\t\t\t</LocalAnchor1>\n\t\t\t<LocalAnchor2 x=\"0\" y=\"0\">\n\t\t\t</LocalAnchor2>\n\t\t\t<R1 x=\"6\" y=\"43.5\">\n\t\t\t</R1>\n\t\t\t<R2 x=\"0\" y=\"0\">\n\t\t\t</R2>\n\t\t\t<Bias x=\"0\" y=\"0\">\n\t\t\t</Bias>\n\t\t\t<AccumulatedImpulse x=\"0\" y=\"-16.6667\">\n\t\t\t</AccumulatedImpulse>\n\t\t\t<Relaxation>\n\t\t\t\t1\n\t\t\t</Relaxation>\n\t\t</Joint>\n\t"
         }
       ],

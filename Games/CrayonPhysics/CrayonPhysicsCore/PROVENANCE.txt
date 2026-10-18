@@ -1,0 +1,18 @@
+Base: Erin Catto's Box2D-Lite, https://github.com/erincatto/box2d-lite
+Revision: 227b71b6974ea57ab7e96d40f6374287bd6a0e77
+Copied: Body, Joint, World, Arbiter, Collide and MathUtils only.
+Original permissive copyright/license notices are retained in every vendor file.
+
+Local adaptations for Crayon Physics Release 1:
+- Body shape discriminator and circle/box-circle dispatch (FUN_004c7fc8).
+- Circle collisions reconstructed from FUN_004c7ab5 and FUN_004c7c7c.
+- Normalize zero vector to zero (FUN_004c84d0).
+- Joint accumulated impulse multiplied by serialized relaxation (FUN_004ccde8).
+- Both serialized local anchors and initial accumulated impulse loaded directly.
+- Fixed float timestep 1/60 and source solver iteration count.
+- C handle bridge owns bodies/joints and safely removes cached contacts.
+
+Known fidelity limits: this upstream revision is not recovered original source;
+circle contact feature IDs are uncertain in decompilation and use a stable zero;
+pointer-based contact ordering and float math can differ across platforms. No
+bit-for-bit or original executable solution-parity claim is made.

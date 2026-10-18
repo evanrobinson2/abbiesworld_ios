@@ -29,6 +29,7 @@ struct SourceJoint: Codable {
     let anchor1: SourceVector
     let anchor2: SourceVector
     let relaxation: Double
+    let accumulatedImpulse: SourceVector
 }
 
 struct SourceStar: Codable {
