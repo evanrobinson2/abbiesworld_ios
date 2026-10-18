@@ -146,6 +146,7 @@ struct GameView: View {
                 .pickerStyle(.menu)
                 .labelsHidden()
                 .accessibilityLabel("Music style")
+                .accessibilityValue(session.musicStyle.title)
                 .accessibilityHint("Choose the music to hear when you resume with music on.")
                 .font(.system(size: buttonSize, weight: .semibold))
                 .frame(minHeight: 56)

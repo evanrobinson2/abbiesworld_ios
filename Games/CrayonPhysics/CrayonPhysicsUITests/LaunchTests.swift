@@ -75,6 +75,7 @@ final class LaunchTests: XCTestCase {
             let choice = app.buttons[style]
             XCTAssertTrue(choice.waitForExistence(timeout: 5), app.debugDescription)
             choice.tap()
+            waitForDismissal(choice)
             XCTAssertTrue(picker.waitForExistence(timeout: 5))
             XCTAssertTrue(picker.label.contains(style) || String(describing: picker.value).contains(style), picker.debugDescription)
         }
@@ -97,11 +98,18 @@ final class LaunchTests: XCTestCase {
         picker.tap()
         XCTAssertTrue(app.buttons["French House"].waitForExistence(timeout: 5))
         capture("\(name)-music-options")
-        app.buttons["French House"].tap()
+        let choice = app.buttons["French House"]
+        choice.tap()
+        waitForDismissal(choice)
         capture("\(name)-French-House")
         let exit = app.buttons["Close Game"]
         if !exit.isHittable { app.swipeUp() }
         XCTAssertTrue(exit.isHittable, app.debugDescription)
+    }
+
+    @MainActor private func waitForDismissal(_ element: XCUIElement) {
+        let expectation = XCTNSPredicateExpectation(predicate: NSPredicate(format: "exists == false"), object: element)
+        XCTAssertEqual(XCTWaiter.wait(for: [expectation], timeout: 5), .completed)
     }
 
     @MainActor private func capture(_ name: String) {
