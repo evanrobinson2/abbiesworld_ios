@@ -1,5 +1,7 @@
 # Crayon Physics delivery
 
+**Custom-art revision in verification:** the next build replaces all gameplay images with our art while preserving source physics. Do not treat the prior mixed-art build below as final art acceptance. Apple checks and package-image audit must pass before the pinned checkout is updated.
+
 **Ready for Mac/device testing:** `c7f47341e6a19dfec9edb037956320474852f097`. [Apple verification run](https://github.com/evanrobinson2/abbiesworld_ios/actions/runs/39144006673) passed native checks, 13 unit tests (including all seven recognized solution fixtures, artwork decode and music lifecycle), three standalone UI tests and integrated room entry/return/reopen. Actual screenshots confirm touch tutorial, star and host crayon-box artwork.
 
 This is a tested device candidate, not full physical-device acceptance. It includes the four canonical tracks: Normal (default), Tense, French House and Pop. Choose Music style in the paused menu; the choice persists and remains independent of mute. There is no automatic tension trigger. Earlier baseline d2c35df remains available in Git history.
