@@ -1,0 +1,88 @@
+{
+  "status": "Export-complete integration candidates; aesthetic approval remains separate",
+  "star": {
+    "file": "collectable-remaster.png",
+    "size": [
+      310,
+      75
+    ],
+    "cellSize": [
+      62,
+      75
+    ],
+    "frameRects": [
+      [
+        0,
+        0,
+        62,
+        75
+      ],
+      [
+        62,
+        0,
+        62,
+        75
+      ],
+      [
+        124,
+        0,
+        62,
+        75
+      ],
+      [
+        186,
+        0,
+        62,
+        75
+      ],
+      [
+        248,
+        0,
+        62,
+        75
+      ]
+    ],
+    "sequence": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      3,
+      2,
+      1
+    ],
+    "frameMilliseconds": 100,
+    "pivotPerCell": [
+      31,
+      37.5
+    ],
+    "method": "Five subtle yellow pigment brightness states from one Midjourney source; invariant alpha/outline/silhouette; no physical changes",
+    "sourceJob": "bec5c938-7512-461f-afca-b9353f8a41ff",
+    "sourceIndex": 1,
+    "sha256": "72f18245869da54ab0cfd7cae2e0510f327616742fed75ebc17979a985341f75",
+    "uniqueFrames": 5,
+    "identicalAlphaAcrossFrames": true
+  },
+  "box": {
+    "file": "crayon-box-closed.png",
+    "size": [
+      512,
+      512
+    ],
+    "pivot": [
+      256,
+      256
+    ],
+    "visibleBounds": [
+      64,
+      142,
+      448,
+      369
+    ],
+    "sourceJob": "3056f8d0-0b92-45c2-9cf4-bbd71eb56929",
+    "sourceIndex": 2,
+    "sha256": "19d77b0a6e4fe0ba4e758b3eafcd933c60724d5c17ff62f1a12855e2ad307c6c",
+    "status": "Complete static closed state; no animation required by this export"
+  }
+}

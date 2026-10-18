@@ -1,0 +1,61 @@
+[
+  {
+    "id": "draw-loop",
+    "path": "draw-loop.wav",
+    "status": "candidate; technical validation passed; listening review pending",
+    "channels": 1,
+    "sample_rate": 48000,
+    "bit_depth": 16,
+    "frames": 72000,
+    "duration_seconds": 1.5,
+    "peak_dbfs": -15.92,
+    "loop": {
+      "start_frame": 0,
+      "end_frame_exclusive": 72000
+    },
+    "sha256": "76897e873f895a72ca3d33e186fa82d824d329dbf363c417a254ec53ea5954bc",
+    "provenance": "Original deterministic procedural synthesis, make_sound_cues.py, seed 20261018. No third-party samples."
+  },
+  {
+    "id": "erase",
+    "path": "erase.wav",
+    "status": "candidate; technical validation passed; listening review pending",
+    "channels": 1,
+    "sample_rate": 48000,
+    "bit_depth": 16,
+    "frames": 15360,
+    "duration_seconds": 0.32,
+    "peak_dbfs": -13.98,
+    "loop": null,
+    "sha256": "86cd91ddcf6519d401a20ae1d316686e3e0c8d3888aa5e025616202cc704ca2d",
+    "provenance": "Original deterministic procedural synthesis, make_sound_cues.py, seed 20261018. No third-party samples."
+  },
+  {
+    "id": "paper-tap",
+    "path": "paper-tap.wav",
+    "status": "candidate; technical validation passed; listening review pending",
+    "channels": 1,
+    "sample_rate": 48000,
+    "bit_depth": 16,
+    "frames": 8640,
+    "duration_seconds": 0.18,
+    "peak_dbfs": -12.4,
+    "loop": null,
+    "sha256": "fcf75c7997a968e82e1db40ae4f9bd974f226e4444638a21f86e64a8d38b759c",
+    "provenance": "Original deterministic procedural synthesis, make_sound_cues.py, seed 20261018. No third-party samples."
+  },
+  {
+    "id": "star",
+    "path": "star.wav",
+    "status": "candidate; technical validation passed; listening review pending",
+    "channels": 1,
+    "sample_rate": 48000,
+    "bit_depth": 16,
+    "frames": 31200,
+    "duration_seconds": 0.65,
+    "peak_dbfs": -12.4,
+    "loop": null,
+    "sha256": "eee67d0497f932eb4addc37e6854bdb2f0834873373fcdcc0211e9addfcfe56d",
+    "provenance": "Original deterministic procedural synthesis, make_sound_cues.py, seed 20261018. No third-party samples."
+  }
+]

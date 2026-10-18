@@ -1,0 +1,12 @@
+{
+  "music": {
+    "author": "_ghost",
+    "title": "Lullaby",
+    "license": "CC BY-NC 2.5",
+    "source": "C:\\Users\\Evan Robinson\\Downloads\\crayon\\data\\sfx\\_ghost_-_lullaby.ogg",
+    "sourceSHA256": "add5bdeef9cbf2e39243b3cbc6deb02b930b39d81362c928e636d181c0d02a45",
+    "outputSHA256": "8971094f50d475eafcd4e2930c83bae67ac8dee08f09a7f962a34d74d7dba702",
+    "conversion": "FFmpeg AAC 192 kbps; original supplied music, not Suno production"
+  },
+  "sounds": "paper-pluck licensed integration candidate; not accepted final; board is audition. Rejected procedural cues excluded."
+}

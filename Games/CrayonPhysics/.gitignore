@@ -1,0 +1,6 @@
+Generated/
+*.xcodeproj/
+DerivedData/
+verification/
+__pycache__/
+.DS_Store
