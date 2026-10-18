@@ -1,10 +1,10 @@
 # Crayon Physics delivery
 
-**Custom-art revision in verification:** the next build replaces all gameplay images with our art while preserving source physics. Do not treat the prior mixed-art build below as final art acceptance. Apple checks and package-image audit must pass before the pinned checkout is updated.
+**Custom-art build ready for Mac/device testing:** `6243f1555d4c93cac85a00e47fe347ffb6ef3885`. [Apple verification run](https://github.com/evanrobinson2/abbiesworld_ios/actions/runs/39148992847) passed native checks, 15 unit tests (seven recognized solutions, custom artwork decode/coverage and legacy-image absence, music lifecycle), four standalone UI tests and integrated room entry/return/reopen.
 
-**Ready for Mac/device testing:** `c7f47341e6a19dfec9edb037956320474852f097`. [Apple verification run](https://github.com/evanrobinson2/abbiesworld_ios/actions/runs/39144006673) passed native checks, 13 unit tests (including all seven recognized solution fixtures, artwork decode and music lifecycle), three standalone UI tests and integrated room entry/return/reopen. Actual screenshots confirm touch tutorial, star and host crayon-box artwork.
+All gameplay presentation uses our custom paper, ball, trees, stars, crayon textures and boxes. Source physics and puzzle geometry are unchanged. Both actual simulator packages were audited: all ten bundled raster files match their custom sources after Apple PNG decoding, with exact alpha and at most one premultiplied-channel rounding value difference; catalogs match the canonical source and no unexpected game image files remain. Title, all seven puzzles and ending captures were reviewed.
 
-This is a tested device candidate, not full physical-device acceptance. It includes the four canonical tracks: Normal (default), Tense, French House and Pop. Choose Music style in the paused menu; the choice persists and remains independent of mute. There is no automatic tension trigger. Earlier baseline d2c35df remains available in Git history.
+This is a tested device candidate, not physical-device acceptance. Four canonical tracks remain Normal (default), Tense, French House and Pop, selected manually in the paused menu and persisted independently of mute. Previous c7f4734 remains a mechanics-tested mixed-art baseline, superseded for presentation.
 
 Both apps compile the same CrayonPhysicsKit framework. The standalone app starts directly at the game title. In Abbie's World, open Abbie's Cozy Nook and tap the crayon box; closing the game returns to that existing room.
 
@@ -17,7 +17,7 @@ The integration is currently on PR #39. In your existing `abbiesworld_ios` check
 ```sh
 git clone --branch codex/crayon-physics-integration https://github.com/evanrobinson2/abbiesworld_ios.git
 cd abbiesworld_ios
-git checkout c7f47341e6a19dfec9edb037956320474852f097
+git checkout 6243f1555d4c93cac85a00e47fe347ffb6ef3885
 ```
 
 From the repository root:
@@ -41,7 +41,7 @@ Run standalone unit/UI checks:
 bash Games/CrayonPhysics/tools/verify-on-mac.sh
 ```
 
-The UI tests open all seven puzzle screens and capture portrait, landscape and large-text screenshots. A separate unit test replays seven solution fixtures through the Swift stroke recognizer and native solver. Neither establishes original-executable parity or replaces drawing with a finger or Pencil. The integrated-host CI test enters through the crayon box, returns to the room and reopens the game. Logs and xcresult bundles are in `Games/CrayonPhysics/verification`.
+The UI tests open all seven puzzle screens and capture portrait, landscape and large-text screenshots, including the custom ending and scrolling to replay. Ending captures use a DEBUG-only test launch route, not a claim of physical end-to-end campaign play. A separate unit test replays seven solution fixtures through the Swift stroke recognizer and native solver. Neither establishes original-executable parity or replaces drawing with a finger or Pencil. The integrated-host CI test enters through the crayon box, returns to the room and reopens the game. Logs and xcresult bundles are in `Games/CrayonPhysics/verification`.
 
 ## Build artifacts
 
@@ -55,6 +55,7 @@ Evan owns signing and installation on his Mac. After installing both targets:
 - Check real finger and Pencil drawing/erasing, reset and rotation.
 - Check music/sound mute, all four styles, interruptions, background/resume and host music after returning. Listen to the full tracks for accidental vocals and musical loop joins; these full-track exports are not listening-approved seamless loops.
 - Check Music style is comfortable to tap at default text size.
+- Check terrain/prop stroke visibility on the actual screen and the large-text ending Close Game button near the home indicator. The label is untruncated, but comfortable bottom-edge touch spacing remains unverified.
 - Inspect enlarged-text completion, ending and error states that are not covered by the current captured layouts.
 
 
