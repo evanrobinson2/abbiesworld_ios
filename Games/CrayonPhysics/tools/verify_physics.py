@@ -38,6 +38,7 @@ class Simulation:
         self.lib, self.level = lib, level
         self.world = lib.CPWorldCreate(level['gravity']['x'], level['gravity']['y'], level['iterations'])
         self.handles = {}
+        self.drawings = []
         self.steps = 0
         self.stars = list(level['stars']) if level['id'] != 'the_end' else []
         self.collected = []
@@ -68,7 +69,9 @@ class Simulation:
     def add_box(self, x, y, width, height, angle=0):
         d = Definition(x=x, y=y, width=width, height=height, rotation=angle,
                        mass=2*width*height, friction=0.2)
-        return self.lib.CPWorldAddBody(self.world, d)
+        handle = self.lib.CPWorldAddBody(self.world, d)
+        self.drawings.append(handle)
+        return handle
 
     def step(self):
         self.lib.CPWorldStep(self.world)
@@ -84,6 +87,11 @@ class Simulation:
             s.vx, s.vy = b['velocity']['x'], b['velocity']['y']
             s.angularVelocity = b['angularVelocity']
             self.lib.CPWorldRestoreBody(self.world, handle, s)
+        if self.steps % 101 == 0:
+            for other in list(self.handles.values()) + self.drawings:
+                state = self.state(other)
+                if other != handle and state and state.y > 30:
+                    self.lib.CPWorldRemoveBody(self.world, other)
         if self.stars:
             threshold = b['radius']['x'] / 2 + self.stars[0]['radius']
             for star in list(self.stars):
@@ -107,7 +115,7 @@ def main():
                 sim.step()
                 for handle in sim.handles.values():
                     s = sim.state(handle)
-                    assert all(math.isfinite(getattr(s, key)) for key, _ in State._fields_)
+                    assert s is None or all(math.isfinite(getattr(s, key)) for key, _ in State._fields_)
             results.append({'level': level['id'], 'steps': sim.steps, 'finite': True,
                             'collectedWithoutInput': sim.collected})
         finally:

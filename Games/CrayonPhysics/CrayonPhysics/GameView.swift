@@ -185,6 +185,12 @@ struct GameView: View {
                 Link("Graphics license", destination: URL(string: "https://creativecommons.org/licenses/by-nc-sa/2.0/")!)
                 Link("Music and attribution", destination: URL(string: "https://ccmixter.org/media/files/_ghost/3631")!)
                 Link("Music license", destination: URL(string: "https://creativecommons.org/licenses/by-nc/2.5/")!)
+                Text("Physics credits").font(.title2)
+                Text("Physics: adapted Box2D-Lite, Erin Catto.")
+                if let url = GameResources.bundle.url(forResource: "physics-license", withExtension: "txt"),
+                   let license = try? String(contentsOf: url, encoding: .utf8) {
+                    Text(license).textSelection(.enabled)
+                }
                 Text("Sound credits").font(.title2)
                 if let url = GameResources.bundle.url(forResource: "sound-attribution", withExtension: "txt"),
                    let attribution = try? String(contentsOf: url, encoding: .utf8) {
