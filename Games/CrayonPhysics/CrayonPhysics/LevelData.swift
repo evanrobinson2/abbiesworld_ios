@@ -51,7 +51,8 @@ struct SourceLevel: Codable, Identifiable {
 
 struct SpriteRect: Codable { let x, y, w, h: Double }
 struct SpriteFrame: Codable { let rect: SpriteRect; let duration: Double }
-struct SourceSprite: Codable { let image: String; let rect: SpriteRect?; let frames: [SpriteFrame] }
+struct SpriteDisplaySize: Codable { let w, h: Double }
+struct SourceSprite: Codable { let image: String; let rect: SpriteRect?; let frames: [SpriteFrame]; let render: String?; let displaySize: SpriteDisplaySize? }
 struct LevelCatalog: Codable {
     let levels: [SourceLevel]
     let sprites: [String: SourceSprite]
@@ -63,6 +64,10 @@ struct LevelCatalog: Codable {
         let catalog = try JSONDecoder().decode(Self.self, from: Data(contentsOf: url))
         guard catalog.levels.map(\.id) == ["level_01", "level_02", "level_07", "level_05", "level_06", "level_04", "level_03", "the_end"] else {
             throw CatalogError.invalidOrder
+        }
+        guard catalog.sprites.values.allSatisfy({ $0.image.hasPrefix("custom-") && bundle.url(forResource: $0.image, withExtension: nil) != nil }),
+              bundle.url(forResource: "custom-brush.png", withExtension: nil) != nil else {
+            throw CatalogError.missingArt
         }
         for level in catalog.levels {
             let ids = Set(level.bodies.map(\.id))
@@ -77,9 +82,10 @@ struct LevelCatalog: Codable {
     }
 
     enum CatalogError: LocalizedError {
-        case missing, invalidOrder, invalidGeometry(String)
+        case missing, missingArt, invalidOrder, invalidGeometry(String)
         var errorDescription: String? {
             switch self {
+            case .missingArt: return "The custom artwork is missing from this build."
             case .missing: return "The level resources are missing from this build."
             case .invalidOrder: return "The original puzzle sequence could not be loaded."
             case .invalidGeometry(let id): return "The geometry for \(id) is invalid."

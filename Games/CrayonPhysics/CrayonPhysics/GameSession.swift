@@ -54,6 +54,13 @@ final class GameSession: ObservableObject {
         screen = .title
         audio.enter()
         audio.cue("tap")
+        #if DEBUG
+        // UI-test fixture only: no release argument or on-screen shortcut.
+        if ProcessInfo.processInfo.environment["CRAYON_UI_TEST_ENDING"] == "1",
+           let index = catalog?.levels.firstIndex(where: { $0.isEnding }) {
+            start(index)
+        }
+        #endif
     }
     func retryLoad() {
         do { catalog = try LevelCatalog.load(); error = nil; screen = .title; audio.enter() }

@@ -1,0 +1,451 @@
+{
+  "direction": "All gameplay rasters are our Midjourney production; exact terrain uses our custom pigment brush. Reference geometry unchanged.",
+  "files": {
+    "custom-paper.png": {
+      "source": "assets\\provider-production\\worlds\\sketchbook.png",
+      "sha256": "440d1818ff5f2089ea26930b3cd679509a1e337d17071675c03c10059868953f"
+    },
+    "custom-brush.png": {
+      "source": "assets\\provider-production\\sprites\\crayon-brush.png",
+      "sha256": "522f5fea474894cf511cb40047cedaedb802b66862fa62867d0f5395640fd6e2"
+    },
+    "custom-ball.png": {
+      "source": "assets\\provider-production\\sprites\\native\\the_ball.png",
+      "sha256": "fdea237443d6ff67eead395ff8ce13794e667c0b255b2b38bb800fa9c0b6d6bc"
+    },
+    "custom-tree.png": {
+      "source": "assets\\provider-production\\sprites\\native\\tree_01.png",
+      "sha256": "98fc7532590b85414c638d5668a64c3ee0f2b4d25cb91537ee69b617f2132167"
+    },
+    "custom-star.png": {
+      "source": "assets\\provider-production\\v1-ready\\collectable-remaster.png",
+      "sha256": "72f18245869da54ab0cfd7cae2e0510f327616742fed75ebc17979a985341f75"
+    },
+    "custom-ending-ball.png": {
+      "source": "assets\\provider-production\\sprites\\ball.png",
+      "sha256": "286d27c41e63296662aaedbb4f0b7317e4483425f1ad60bb89a5b9bf51de8ca7"
+    },
+    "custom-box-closed.png": {
+      "source": "assets\\provider-production\\v1-ready\\crayon-box-closed.png",
+      "sha256": "19d77b0a6e4fe0ba4e758b3eafcd933c60724d5c17ff62f1a12855e2ad307c6c"
+    },
+    "custom-box-open.png": {
+      "source": "assets\\provider-production\\sprites\\box-open.png",
+      "sha256": "2490511581f25f51db1b073ce228004fea28c632977431ce417f90841fe57346"
+    },
+    "oga-crayon.wav": {
+      "source": "ios\\CrayonPhysics\\Resources\\oga-crayon.wav",
+      "sha256": "7ee6f271c0603c9c88c0855ce8cf166c490da442a77997fe08607fda18fbd9e8"
+    },
+    "oga-paper-rub.wav": {
+      "source": "ios\\CrayonPhysics\\Resources\\oga-paper-rub.wav",
+      "sha256": "2aea2bd2c979cb4f4a5b0dd99940004fce2975c1e2f1f537a6cf1a67aa2403e6"
+    },
+    "oga-click.wav": {
+      "source": "ios\\CrayonPhysics\\Resources\\oga-click.wav",
+      "sha256": "263947f8a9a7151e0dd2ae999ed171b5978d0225696ef6efe59b90f3ba8175a2"
+    },
+    "oga-pluck.wav": {
+      "source": "ios\\CrayonPhysics\\Resources\\oga-pluck.wav",
+      "sha256": "e37801e046920e7386910850d92ca23b47720d6a1e3ac897ef413fdd43c29651"
+    },
+    "sound-attribution.txt": {
+      "source": "ios\\CrayonPhysics\\Resources\\sound-attribution.txt",
+      "sha256": "d5cb230b4a75527c73fcb7472470f24fd455d47c2fedc0cfb1fcd6dc0166a285"
+    },
+    "physics-license.txt": {
+      "source": "ios\\CrayonPhysics\\Resources\\physics-license.txt",
+      "sha256": "f68b9461e0ffc96eb943e795a0f00b007d04f1942dae5548650cacd6a7ffb46d"
+    },
+    "original-readme.html": {
+      "source": "ios\\CrayonPhysics\\Resources\\original-readme.html",
+      "sha256": "0c17ae254d493b36faab441231f11d1da950de362fb3fdb18b7f2fedd5a9e5b4"
+    },
+    "canonical-music-provenance.json": {
+      "source": "ios\\CrayonPhysics\\Resources\\canonical-music-provenance.json",
+      "sha256": "f92248ea6cdf78a2a528fb6c6b269fb3158836e5ab1b3b878ed2f91a102a9a9f"
+    },
+    "music-normal.m4a": {
+      "source": "ios\\CrayonPhysics\\Resources\\music-normal.m4a",
+      "sha256": "a0d68e86ecc5aed2af864d39a66f3187d80f98299a58c0c35daf3d173483a256"
+    },
+    "music-tense.m4a": {
+      "source": "ios\\CrayonPhysics\\Resources\\music-tense.m4a",
+      "sha256": "4e49a7e949f3034dbef13b20aab4d6c42321f16c682a5e5ce990f9dbef3d534f"
+    },
+    "music-french-house.m4a": {
+      "source": "ios\\CrayonPhysics\\Resources\\music-french-house.m4a",
+      "sha256": "99c3fe2f7bb22d1c34a6a8642d48e83e678e9cc17164f3f9c2d60e74259b55b2"
+    },
+    "music-pop.m4a": {
+      "source": "ios\\CrayonPhysics\\Resources\\music-pop.m4a",
+      "sha256": "c50ac0ecd327c3d5edec72cc5870c4dff2ff2c67e030a5e63145fedd16d24d34"
+    }
+  },
+  "providers": {
+    "paper": [
+      {
+        "id": "sketchbook",
+        "provider": "Midjourney",
+        "jobId": "737fa50c-fc52-4175-810b-0c104d82842b",
+        "index": 0,
+        "url": "https://www.midjourney.com/jobs/737fa50c-fc52-4175-810b-0c104d82842b?index=0",
+        "original": "assets\\provider-production\\midjourney\\originals\\carpetshark2_Flat_scanned_sheet_of_softly_warm_ivory_drawing__737fa50c-fc52-4175-810b-0c104d82842b_0.png",
+        "originalSize": [
+          1232,
+          928
+        ],
+        "originalSHA256": "44d1e465d73c157a8c601b5724b4573c90c3b3e63779526d87a40e30493e946f",
+        "file": "assets\\provider-production\\worlds\\sketchbook.png",
+        "size": [
+          2048,
+          1536
+        ],
+        "status": "Illustration candidate; physics implementation is separate",
+        "finishing": "RGB conversion and Lanczos resize only"
+      },
+      {
+        "id": "moon",
+        "provider": "Midjourney",
+        "jobId": "2e0b4e27-5ed2-4888-904c-87c339656cae",
+        "index": 1,
+        "url": "https://www.midjourney.com/jobs/2e0b4e27-5ed2-4888-904c-87c339656cae?index=1",
+        "original": "assets\\provider-production\\midjourney\\originals\\carpetshark2_A_sparse_crayon_moon_landscape_on_warm_ivory_tex_2e0b4e27-5ed2-4888-904c-87c339656cae_1.png",
+        "originalSize": [
+          1232,
+          928
+        ],
+        "originalSHA256": "b5a1904775b11719ec2f404e2a23c47b14af66a05638d31961aa97494b550bba",
+        "file": "assets\\provider-production\\worlds\\moon.png",
+        "size": [
+          2048,
+          1536
+        ],
+        "status": "Illustration candidate; physics implementation is separate",
+        "finishing": "RGB conversion and Lanczos resize only"
+      },
+      {
+        "id": "upward-sky",
+        "provider": "Midjourney",
+        "jobId": "2f903bb9-dcb7-483b-908d-c1fc1726240f",
+        "index": 1,
+        "url": "https://www.midjourney.com/jobs/2f903bb9-dcb7-483b-908d-c1fc1726240f?index=1",
+        "original": "assets\\provider-production\\midjourney\\originals\\carpetshark2_Sparse_upward_sky_background_for_a_childrens_dra_2f903bb9-dcb7-483b-908d-c1fc1726240f_1.png",
+        "originalSize": [
+          1232,
+          928
+        ],
+        "originalSHA256": "a752ab2acf7cbe45c52127fd25d63f5f82e7084b3631c17fa3f7e6efda4dcbd9",
+        "file": "assets\\provider-production\\worlds\\upward-sky.png",
+        "size": [
+          2048,
+          1536
+        ],
+        "status": "Illustration candidate; physics implementation is separate",
+        "finishing": "RGB conversion and Lanczos resize only"
+      },
+      {
+        "id": "windy-meadow",
+        "provider": "Midjourney",
+        "jobId": "38e192dc-28b9-4add-8cbe-0e37ecffd48c",
+        "index": 0,
+        "url": "https://www.midjourney.com/jobs/38e192dc-28b9-4add-8cbe-0e37ecffd48c?index=0",
+        "original": "assets\\provider-production\\midjourney\\originals\\carpetshark2_Sparse_windy_meadow_background_for_a_childrens_d_38e192dc-28b9-4add-8cbe-0e37ecffd48c_0.png",
+        "originalSize": [
+          1232,
+          928
+        ],
+        "originalSHA256": "fabc7d4e3aad07a62058fb6b2ec271b9f620fb7fd7334f16f83b7f5100737a08",
+        "file": "assets\\provider-production\\worlds\\windy-meadow.png",
+        "size": [
+          2048,
+          1536
+        ],
+        "status": "Illustration candidate; physics implementation is separate",
+        "finishing": "RGB conversion and Lanczos resize only"
+      },
+      {
+        "id": "ice-pond",
+        "provider": "Midjourney",
+        "jobId": "3a52b9bb-94cf-4810-834a-31fb3dc349ee",
+        "index": 1,
+        "url": "https://www.midjourney.com/jobs/3a52b9bb-94cf-4810-834a-31fb3dc349ee?index=1",
+        "original": "assets\\provider-production\\midjourney\\originals\\carpetshark2_Sparse_ice_pond_background_for_a_childrens_drawi_3a52b9bb-94cf-4810-834a-31fb3dc349ee_1.png",
+        "originalSize": [
+          1232,
+          928
+        ],
+        "originalSHA256": "d91e5dc58cc13b7a33199e67531e43b1179aeeb70c65228f0fef6eb387100bd3",
+        "file": "assets\\provider-production\\worlds\\ice-pond.png",
+        "size": [
+          2048,
+          1536
+        ],
+        "status": "Illustration candidate; physics implementation is separate",
+        "finishing": "RGB conversion and Lanczos resize only"
+      },
+      {
+        "id": "bounce-garden",
+        "provider": "Midjourney",
+        "jobId": "c91a961b-e222-431e-8142-a54fa6c8eaea",
+        "index": 1,
+        "url": "https://www.midjourney.com/jobs/c91a961b-e222-431e-8142-a54fa6c8eaea?index=1",
+        "original": "assets\\provider-production\\midjourney\\originals\\carpetshark2_Sparse_bounce_garden_background_for_a_childrens__c91a961b-e222-431e-8142-a54fa6c8eaea_1.png",
+        "originalSize": [
+          1232,
+          928
+        ],
+        "originalSHA256": "fbe226bc1237ff1050013e77450306bddd098bb0309d45cc691b38457fb1a98e",
+        "file": "assets\\provider-production\\worlds\\bounce-garden.png",
+        "size": [
+          2048,
+          1536
+        ],
+        "status": "Illustration candidate; physics implementation is separate",
+        "finishing": "RGB conversion and Lanczos resize only"
+      }
+    ],
+    "sprites": [
+      {
+        "id": "ball",
+        "provider": "Midjourney",
+        "jobId": "a8414e81-4965-409d-97ba-05cba0428632",
+        "index": 1,
+        "url": "https://www.midjourney.com/jobs/a8414e81-4965-409d-97ba-05cba0428632?index=1",
+        "original": "midjourney\\originals\\carpetshark2_One_simple_hand_drawn_red_wax_crayon_circle_outl_a8414e81-4965-409d-97ba-05cba0428632_1.png",
+        "originalSHA256": "506a2b20c81c2a547c931372f491e0a116e812d60265e8dfeea46988006e4d53",
+        "file": "sprites/ball.png",
+        "size": [
+          256,
+          256
+        ],
+        "pivot": [
+          128.0,
+          128.0
+        ],
+        "status": "Exported candidate; renderer and visual fit review pending",
+        "finishing": "Pigment matte extraction and edge decontamination; boxes use manually traced object silhouettes; crop and Lanczos fit"
+      },
+      {
+        "id": "star",
+        "provider": "Midjourney",
+        "jobId": "bec5c938-7512-461f-afca-b9353f8a41ff",
+        "index": 1,
+        "url": "https://www.midjourney.com/jobs/bec5c938-7512-461f-afca-b9353f8a41ff?index=1",
+        "original": "midjourney\\originals\\carpetshark2_One_simple_friendly_five_pointed_yellow_wax_cray_bec5c938-7512-461f-afca-b9353f8a41ff_1.png",
+        "originalSHA256": "ca19589bcb7986e1e35099822ca32b482635da1789ab7a8b6bb1c532b3030060",
+        "file": "sprites/star.png",
+        "size": [
+          128,
+          128
+        ],
+        "pivot": [
+          64.0,
+          64.0
+        ],
+        "status": "Exported candidate; renderer and visual fit review pending",
+        "finishing": "Pigment matte extraction and edge decontamination; boxes use manually traced object silhouettes; crop and Lanczos fit"
+      },
+      {
+        "id": "tree",
+        "provider": "Midjourney",
+        "jobId": "79fc0d75-f68a-4c4b-b8cc-c95ab8291fac",
+        "index": 2,
+        "url": "https://www.midjourney.com/jobs/79fc0d75-f68a-4c4b-b8cc-c95ab8291fac?index=2",
+        "original": "midjourney\\originals\\carpetshark2_One_very_simple_bare_tree_drawn_with_brown_wax_c_79fc0d75-f68a-4c4b-b8cc-c95ab8291fac_2.png",
+        "originalSHA256": "ee0b382d0cb0802495323a8562212d1b37beba9a50ed9ba6ef497e45eb9aa74f",
+        "file": "sprites/tree.png",
+        "size": [
+          256,
+          512
+        ],
+        "pivot": [
+          128.0,
+          256.0
+        ],
+        "status": "Exported candidate; renderer and visual fit review pending",
+        "finishing": "Pigment matte extraction and edge decontamination; boxes use manually traced object silhouettes; crop and Lanczos fit"
+      },
+      {
+        "id": "crayon-brush",
+        "provider": "Midjourney",
+        "jobId": "d98a3554-21b5-4443-b528-c2c04b75ae37",
+        "index": 1,
+        "url": "https://www.midjourney.com/jobs/d98a3554-21b5-4443-b528-c2c04b75ae37?index=1",
+        "original": "midjourney\\originals\\carpetshark2_One_small_round_wax_crayon_pigment_dab_irregular_d98a3554-21b5-4443-b528-c2c04b75ae37_1.png",
+        "originalSHA256": "8785e56ea745c7c9da89ccd180e7b114d7ce39cd6dadb8ca709ab157b0a9380c",
+        "file": "sprites/crayon-brush.png",
+        "size": [
+          64,
+          64
+        ],
+        "pivot": [
+          32.0,
+          32.0
+        ],
+        "status": "Exported candidate; renderer and visual fit review pending",
+        "finishing": "Pigment matte extraction and edge decontamination; boxes use manually traced object silhouettes; crop and Lanczos fit"
+      },
+      {
+        "id": "box-closed",
+        "provider": "Midjourney",
+        "jobId": "3056f8d0-0b92-45c2-9cf4-bbd71eb56929",
+        "index": 2,
+        "url": "https://www.midjourney.com/jobs/3056f8d0-0b92-45c2-9cf4-bbd71eb56929?index=2",
+        "original": "midjourney\\originals\\carpetshark2_A_single_small_closed_cardboard_crayon_box_warm__3056f8d0-0b92-45c2-9cf4-bbd71eb56929_2.png",
+        "originalSHA256": "b2bffdec2df3f12939dec0dbf064edca577a2df4b5aa06b281773ae3f3c6b880",
+        "file": "sprites/box-closed.png",
+        "size": [
+          512,
+          512
+        ],
+        "pivot": [
+          256.0,
+          256.0
+        ],
+        "status": "Exported candidate; renderer and visual fit review pending",
+        "finishing": "Pigment matte extraction and edge decontamination; boxes use manually traced object silhouettes; crop and Lanczos fit"
+      },
+      {
+        "id": "box-open",
+        "provider": "Midjourney",
+        "jobId": "50955743-d167-4efd-a31d-7cc7fb4f83cf",
+        "index": 1,
+        "url": "https://www.midjourney.com/jobs/50955743-d167-4efd-a31d-7cc7fb4f83cf?index=1",
+        "original": "midjourney\\originals\\carpetshark2_httpss.mj.runBRGKTQMX_Ag_The_same_small_cream_an_50955743-d167-4efd-a31d-7cc7fb4f83cf_1.png",
+        "originalSHA256": "95a696bc45193455e421a5f611e5e0804bf9eb5ef4ec0ec2d5fa98fd77349d36",
+        "file": "sprites/box-open.png",
+        "size": [
+          512,
+          512
+        ],
+        "pivot": [
+          256.0,
+          256.0
+        ],
+        "status": "Exported candidate; renderer and visual fit review pending",
+        "finishing": "Pigment matte extraction and edge decontamination; boxes use manually traced object silhouettes; crop and Lanczos fit"
+      },
+      {
+        "id": "native-compatibility",
+        "ballRect": [
+          0,
+          0,
+          54,
+          49
+        ],
+        "treeRect": [
+          0,
+          0,
+          107,
+          250
+        ],
+        "starCell": [
+          62,
+          75
+        ],
+        "starCells": 5,
+        "starSequence": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          3,
+          2,
+          1
+        ],
+        "starFrameMs": 100,
+        "status": "Static star repeated in existing slots; animated pigment variation is unfinished"
+      }
+    ],
+    "finished": {
+      "status": "Export-complete integration candidates; aesthetic approval remains separate",
+      "star": {
+        "file": "collectable-remaster.png",
+        "size": [
+          310,
+          75
+        ],
+        "cellSize": [
+          62,
+          75
+        ],
+        "frameRects": [
+          [
+            0,
+            0,
+            62,
+            75
+          ],
+          [
+            62,
+            0,
+            62,
+            75
+          ],
+          [
+            124,
+            0,
+            62,
+            75
+          ],
+          [
+            186,
+            0,
+            62,
+            75
+          ],
+          [
+            248,
+            0,
+            62,
+            75
+          ]
+        ],
+        "sequence": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          3,
+          2,
+          1
+        ],
+        "frameMilliseconds": 100,
+        "pivotPerCell": [
+          31,
+          37.5
+        ],
+        "method": "Five subtle yellow pigment brightness states from one Midjourney source; invariant alpha/outline/silhouette; no physical changes",
+        "sourceJob": "bec5c938-7512-461f-afca-b9353f8a41ff",
+        "sourceIndex": 1,
+        "sha256": "72f18245869da54ab0cfd7cae2e0510f327616742fed75ebc17979a985341f75",
+        "uniqueFrames": 5,
+        "identicalAlphaAcrossFrames": true
+      },
+      "box": {
+        "file": "crayon-box-closed.png",
+        "size": [
+          512,
+          512
+        ],
+        "pivot": [
+          256,
+          256
+        ],
+        "visibleBounds": [
+          64,
+          142,
+          448,
+          369
+        ],
+        "sourceJob": "3056f8d0-0b92-45c2-9cf4-bbd71eb56929",
+        "sourceIndex": 2,
+        "sha256": "19d77b0a6e4fe0ba4e758b3eafcd933c60724d5c17ff62f1a12855e2ad307c6c",
+        "status": "Complete static closed state; no animation required by this export"
+      }
+    }
+  }
+}

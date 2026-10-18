@@ -72,7 +72,19 @@ final class CrayonScene: SKScene {
         node.position = WorldCoordinates.point(source.position)
         node.zRotation = -CGFloat(source.rotation)
         node.name = "source-\(source.id)"
-        if let key = source.sprite, let art = makeSprite(key) { node.addChild(art) }
+        if source.sprite == nil || source.sprite.flatMap({ sprites[$0]?.render }) == "body-brush" {
+            let width = CGFloat(source.radius.x) * WorldCoordinates.scale
+            let height = CGFloat(source.radius.y) * WorldCoordinates.scale
+            let outline = SKShapeNode(rect: CGRect(x: -width / 2, y: -height / 2, width: width, height: height))
+            let moving = source.sprite != nil
+            let pigment = moving ? UIColor(red: 165/255, green: 106/255, blue: 50/255, alpha: 1)
+                                 : UIColor(red: 101/255, green: 80/255, blue: 68/255, alpha: 1)
+            outline.strokeColor = pigment
+            outline.lineWidth = 3
+            outline.strokeTexture = brushTexture()
+            outline.fillColor = moving ? pigment.withAlphaComponent(0.1) : .clear
+            node.addChild(outline)
+        } else if let key = source.sprite, let art = makeSprite(key) { node.addChild(art) }
         physicsHandles[ObjectIdentifier(node)] = solver.handle(for: source.id)
         addChild(node)
         bodyNodes[source.id] = node
@@ -84,12 +96,16 @@ final class CrayonScene: SKScene {
               let url = GameResources.bundle.url(forResource: presentation.spriteImages[key] ?? definition.image, withExtension: nil),
               let image = UIImage(contentsOfFile: url.path) else { return nil }
         let whole = SKTexture(image: image)
+        if key == level.background {
+            let crop = SKTexture(rect: CGRect(x: 0.015, y: 0.015, width: 0.97, height: 0.97), in: whole)
+            return SKSpriteNode(texture: crop, size: size)
+        }
         if let r = definition.rect {
             let bounds = CGRect(x: CGFloat(r.x) / image.size.width,
                                 y: CGFloat(1) - CGFloat(r.y + r.h) / image.size.height,
                                 width: CGFloat(r.w) / image.size.width, height: CGFloat(r.h) / image.size.height)
             let texture = SKTexture(rect: bounds, in: whole)
-            let node = SKSpriteNode(texture: texture, size: CGSize(width: CGFloat(r.w), height: CGFloat(r.h)))
+            let node = SKSpriteNode(texture: texture, size: CGSize(width: CGFloat(definition.displaySize?.w ?? r.w), height: CGFloat(definition.displaySize?.h ?? r.h)))
             if !definition.frames.isEmpty {
                 let steps = definition.frames.map { frame -> SKAction in
                     let r = frame.rect

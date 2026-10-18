@@ -34,6 +34,9 @@ for level in catalog['levels']:
     assert len(level['stars']) == len(original.findall('Collectable'))
     assert level['id'] == 'the_end' or sum(b['special'] == 'da_ball' for b in level['bodies']) == 1
 for sprite in catalog['sprites'].values():
+    if sprite.get('render') == 'body-brush':
+        assert sprite['image'] == 'custom-brush.png'
+        continue
     with Image.open(resources / sprite['image']) as image:
         for rect in [sprite['rect']] + [f['rect'] for f in sprite['frames']]:
             if rect:

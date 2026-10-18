@@ -38,3 +38,7 @@ The bundle contains original `_ghost — Lullaby`, converted to `music-main.m4a`
 For automated Mac compilation and XCTest execution, run `bash tools/verify-on-mac.sh`. It selects an available iPad simulator (or honors `SIMULATOR_DESTINATION`) and preserves logs/results. GitHub Actions now supplies Apple CI. Physical-device signing/delivery remains DevEx's outstanding work.
 
 Build specification follows the [XcodeGen project specification](https://github.com/yonaskolb/XcodeGen/blob/master/Docs/ProjectSpec.md).
+
+## Complete custom-art revision
+
+The current presentation replaces all gameplay rasters with our Midjourney paper, sprites and brush. Static and moving platform art is drawn from exact collision bounds. After any reference re-import, run workspace-root `python tools/import-web-game.py` and `python tools/apply-custom-native-art.py` before building. The custom catalog is shared with the browser; no physics records change. Native Apple compilation and rendered review for this presentation revision are separate from the previously verified c7f4734 mechanics baseline.

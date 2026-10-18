@@ -44,7 +44,7 @@ struct GameView: View {
 
     private var title: some View {
         ScrollView { VStack(spacing: 20) {
-            if let url = GameResources.bundle.url(forResource: "title_screen.jpg", withExtension: nil),
+            if let url = GameResources.bundle.url(forResource: "custom-box-closed.png", withExtension: nil),
                let image = UIImage(contentsOfFile: url.path) {
                 Image(uiImage: image).resizable().scaledToFit().frame(maxHeight: 220)
                     .accessibilityHidden(true)
@@ -119,6 +119,12 @@ struct GameView: View {
     private var ending: some View {
         ScrollView { VStack(spacing: 16) {
                     Text("The end").font(.largeTitle).accessibilityFocused($headingFocused)
+                    if let url = GameResources.bundle.url(forResource: "custom-box-open.png", withExtension: nil),
+                       let image = UIImage(contentsOfFile: url.path) {
+                        Image(uiImage: image).resizable().scaledToFit().frame(maxHeight: 160)
+                            .accessibilityHidden(true)
+                            .allowsHitTesting(false)
+                    }
                     playfield
                     Button("Play again") { session.start() }
                     Button("Levels", action: session.selectLevels)
@@ -200,11 +206,11 @@ struct GameView: View {
             VStack(alignment: .leading, spacing: 20) {
                 Text("Crayon Physics — Release 1").font(.largeTitle).accessibilityFocused($headingFocused)
                 Text("Original game design, code and graphics: Petri Purho. Original physics: Erin Catto’s Box2D.")
-                Text("Reference graphics: Creative Commons Attribution–NonCommercial–ShareAlike 2.0. Background texture based on Felipe Skroski’s ‘One for SXC’. Some modified textures from Image After.")
+                Text("Current artwork: custom Midjourney-produced paper, crayon marks, ball, stars, props and crayon boxes for Abbie’s World. Original game artwork is retained only as reference evidence, not displayed in gameplay.")
                 Text("Original Release 1 soundtrack: _ghost — Lullaby, Creative Commons Attribution–NonCommercial 2.5. Retained here as original-game attribution; it is not the current soundtrack.")
                 Text("Current music: Normal, Tense, French House and Pop. Choose a style in the paused menu; styles do not switch automatically.")
                 Link("Original game", destination: URL(string: "https://www.kloonigames.com/blog/games/crayon/")!)
-                Link("Graphics license", destination: URL(string: "https://creativecommons.org/licenses/by-nc-sa/2.0/")!)
+                Link("Original reference graphics license", destination: URL(string: "https://creativecommons.org/licenses/by-nc-sa/2.0/")!)
                 Link("Original soundtrack attribution", destination: URL(string: "https://ccmixter.org/media/files/_ghost/3631")!)
                 Link("Original soundtrack license", destination: URL(string: "https://creativecommons.org/licenses/by-nc/2.5/")!)
                 Text("Physics credits").font(.title2)
@@ -219,7 +225,7 @@ struct GameView: View {
                     Text(attribution).textSelection(.enabled)
                 }
                 Text("Licensed sound integration candidate: Paper & pluck. Audition is ongoing; this is not an accepted final selection.").font(.caption)
-                Text("This remaster uses original reference artwork with presentation updates. Physics runs in CrayonPhysicsCore, adapted from Box2D-Lite; SpriteKit handles rendering and input. Full behavior parity with the original game remains unverified.").font(.caption)
+                Text("The mechanics and puzzle layouts derive from Crayon Physics — Release 1. Physics runs in CrayonPhysicsCore, adapted from Box2D-Lite; SpriteKit handles rendering and input. Full behavior parity with the original game remains unverified.").font(.caption)
                 Button("Back") { session.screen = .title }
             }.padding(28)
         }

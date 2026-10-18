@@ -1,4 +1,5 @@
 import XCTest
+import UIKit
 
 final class LaunchTests: XCTestCase {
     @MainActor
@@ -89,6 +90,30 @@ final class LaunchTests: XCTestCase {
         XCTAssertTrue(picker.waitForExistence(timeout: 5))
         XCTAssertTrue(picker.label.contains("Pop") || String(describing: picker.value).contains("Pop"), picker.debugDescription)
         capture("Music-style-restored")
+    }
+
+    @MainActor
+    func testCustomEndingPortraitLandscapeAndLargeText() {
+        continueAfterFailure = false
+        let app = XCUIApplication()
+        app.launchEnvironment["CRAYON_UI_TEST_ENDING"] = "1"
+        defer { XCUIDevice.shared.orientation = .portrait }
+        for (name, orientation, large) in [("Portrait", UIDeviceOrientation.portrait, false),
+                                           ("Landscape", .landscapeLeft, false),
+                                           ("Large-text", .portrait, true)] {
+            XCUIDevice.shared.orientation = orientation
+            app.launchArguments = large ? ["-UIPreferredContentSizeCategoryName", "UICTContentSizeCategoryAccessibilityXXXL"] : []
+            app.launch()
+            XCTAssertTrue(app.staticTexts["The end"].waitForExistence(timeout: 15))
+            capture("Custom-ending-\(name)")
+            let replay = app.buttons["Play again"]
+            for _ in 0..<5 { if replay.isHittable { break }; app.swipeUp() }
+            XCTAssertTrue(replay.isHittable, app.debugDescription)
+            capture("Custom-ending-controls-\(name)")
+            replay.tap()
+            XCTAssertTrue(app.staticTexts["Puzzle 1 of 7"].waitForExistence(timeout: 5))
+            app.terminate()
+        }
     }
 
     @MainActor private func inspectMusicPicker(_ app: XCUIApplication, name: String) {
