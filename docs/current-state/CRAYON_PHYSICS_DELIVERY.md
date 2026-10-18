@@ -6,6 +6,15 @@ Both apps compile the same CrayonPhysicsKit framework. The standalone app starts
 
 Requires Xcode with iOS 18.5+ SDK for the host, an installed iPad simulator runtime, XcodeGen and Ruby xcodeproj 1.27.0.
 
+The integration is currently on PR #39. In your existing `abbiesworld_ios` checkout, fetch and check out `codex/crayon-physics-integration`; or create a separate checkout:
+
+```sh
+git clone --branch codex/crayon-physics-integration https://github.com/evanrobinson2/abbiesworld_ios.git
+cd abbiesworld_ios
+```
+
+From the repository root:
+
 ```sh
 brew install xcodegen
 gem install xcodeproj -v 1.27.0 --user-install
@@ -25,7 +34,7 @@ Run standalone unit/UI checks:
 bash Games/CrayonPhysics/tools/verify-on-mac.sh
 ```
 
-The UI test opens all seven puzzle screens and captures screenshots. It does not solve them or establish reference-physics parity. Logs and xcresult bundles are in `Games/CrayonPhysics/verification`.
+The UI tests open all seven puzzle screens and capture portrait, landscape and large-text screenshots. A separate unit test replays seven solution fixtures through the Swift stroke recognizer and native solver. Neither establishes original-executable parity or replaces drawing with a finger or Pencil. The integrated-host CI test enters through the crayon box, returns to the room and reopens the game. Logs and xcresult bundles are in `Games/CrayonPhysics/verification`.
 
 ## Build artifacts
 
