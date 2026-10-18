@@ -13,6 +13,7 @@
 #define ARBITER_H
 
 #include "MathUtils.h"
+#include "Body.h"
 
 struct Body;
 
@@ -48,7 +49,7 @@ struct ArbiterKey
 {
 	ArbiterKey(Body* b1, Body* b2)
 	{
-		if (b1 < b2)
+		if (b1->order < b2->order)
 		{
 			body1 = b1; body2 = b2;
 		}
@@ -86,10 +87,10 @@ struct Arbiter
 // This is used by std::set
 inline bool operator < (const ArbiterKey& a1, const ArbiterKey& a2)
 {
-	if (a1.body1 < a2.body1)
+	if (a1.body1->order < a2.body1->order)
 		return true;
 
-	if (a1.body1 == a2.body1 && a1.body2 < a2.body2)
+	if (a1.body1 == a2.body1 && a1.body2->order < a2.body2->order)
 		return true;
 
 	return false;

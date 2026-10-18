@@ -7,7 +7,7 @@ from pathlib import Path
 from verify_physics import Simulation, load_library
 
 
-def run(lib, level, actions, frames=900):
+def run(lib, level, actions, frames=1800, trace=False):
     sim = Simulation(lib, level)
     try:
         for frame in range(frames):
@@ -15,6 +15,9 @@ def run(lib, level, actions, frames=900):
                 if action['step'] == frame:
                     sim.add_box(*action['box'])
             sim.step()
+            if trace and frame % 60 == 0:
+                state = sim.state(sim.handles[sim.ball['id']])
+                print(frame, round(state.x, 3), round(state.y, 3), sim.collected, flush=True)
             if not sim.stars:
                 return sim.collected
         return sim.collected or None
@@ -28,10 +31,17 @@ def main():
     parser.add_argument('--attempts', type=int, default=2000)
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--level')
+    parser.add_argument('--replay', type=Path)
+    parser.add_argument('--extend', type=Path)
     args = parser.parse_args()
     lib = load_library(args.library)
     levels = json.loads((Path(__file__).resolve().parents[1] / 'CrayonPhysics/Resources/levels.json').read_text())['levels'][:7]
     rng = random.Random(20261018)
+    if args.replay:
+        record = json.loads(args.replay.read_text())['results'][0]
+        level = next(l for l in levels if l['id'] == record['level'])
+        print(run(lib, level, record['actions'], trace=True))
+        return
     results = []
     for level in levels:
         if args.level and args.level != level['id']:
@@ -62,6 +72,9 @@ def main():
                     {'step': rng.randrange(320, 440), 'box': [rng.uniform(7, 11), rng.uniform(-12, -9), rng.uniform(0.5, 3), rng.uniform(1, 4), rng.uniform(-0.5, 0.5)]},
                     {'step': rng.randrange(500, 800), 'box': [rng.uniform(-2, 1), rng.uniform(-5, -2), rng.uniform(18, 22), rng.uniform(0.2, 1), rng.uniform(0.15, 0.4)]}
                 ]
+            if args.extend:
+                prefix = json.loads(args.extend.read_text())['results'][0]['actions']
+                actions = prefix + [{'step': rng.randrange(700, 850), 'box': [rng.uniform(-11, -7), rng.uniform(-9, -4), rng.uniform(1, 5), rng.uniform(0.5, 3), rng.uniform(-0.6, 0.6)]}]
             collected = run(lib, level, actions)
             if collected and len(collected) > best_count:
                 best_count = len(collected)

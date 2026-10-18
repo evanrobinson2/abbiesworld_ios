@@ -17,6 +17,7 @@
 struct Body
 {
 	int shape = 0; // Release 1: 0 rectangle, 1 circle (width.x is diameter).
+	unsigned long long order = 0; // Stable allocation order across platforms/replays.
 	Body();
 	void Set(const Vec2& w, float m);
 

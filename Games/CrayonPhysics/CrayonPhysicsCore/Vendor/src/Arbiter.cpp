@@ -15,7 +15,7 @@
 
 Arbiter::Arbiter(Body* b1, Body* b2)
 {
-	if (b1 < b2)
+	if (b1->order < b2->order)
 	{
 		body1 = b1;
 		body2 = b2;

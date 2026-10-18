@@ -191,7 +191,7 @@ struct GameView: View {
                     Text(attribution).textSelection(.enabled)
                 }
                 Text("Licensed sound integration candidate: Paper & pluck. Audition is ongoing; this is not an accepted final selection.").font(.caption)
-                Text("This implementation currently uses original reference artwork and music with a provisional physics backend.").font(.caption)
+                Text("This remaster uses original reference artwork and music. Physics runs in CrayonPhysicsCore, adapted from Box2D-Lite; SpriteKit handles rendering and input. Full behavior parity with the original game remains unverified.").font(.caption)
                 Button("Back") { session.screen = .title }
             }.padding(28)
         }

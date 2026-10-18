@@ -21,6 +21,7 @@ int32_t CPWorldAddBody(CPWorld* world, CPBodyDefinition d) {
     auto body = std::make_unique<Body>();
     body->Set(Vec2(d.width, d.height), d.isStatic ? FLT_MAX : d.mass);
     body->shape = d.shape;
+    body->order = world->bodies.size();
     body->position.Set(d.x, d.y); body->rotation = d.rotation;
     body->velocity.Set(d.vx, d.vy); body->angularVelocity = d.angularVelocity;
     body->force.Set(d.forceX, d.forceY); body->torque = d.torque;
