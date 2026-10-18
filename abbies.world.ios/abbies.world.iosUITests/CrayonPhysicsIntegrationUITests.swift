@@ -8,8 +8,15 @@ final class CrayonPhysicsIntegrationUITests: XCTestCase {
         app.launchArguments = ["-world2SkipIntro", "-launchWorld2AbbieTreehouse", "-world2SkipAuth"]
         app.launch()
         let proceed = app.buttons["world2.loading.continue"]
-        XCTAssertTrue(proceed.waitForExistence(timeout: 30))
-        proceed.tap()
+        // The existing skip-intro fixture may enter the room directly.
+        if proceed.waitForExistence(timeout: 3) { proceed.tap() }
+        let welcome = app.buttons["world2.interior.starterPack.openInventory"]
+        if welcome.waitForExistence(timeout: 3) {
+            welcome.tap()
+            let done = app.buttons["world2.interior.decorator.done"]
+            XCTAssertTrue(done.waitForExistence(timeout: 5))
+            done.tap()
+        }
         let box = app.buttons["world2.crayonPhysics.box"]
         XCTAssertTrue(box.waitForExistence(timeout: 20), app.debugDescription)
         capture("Abbie-room-crayon-box")
