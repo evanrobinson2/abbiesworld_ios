@@ -124,19 +124,20 @@ final class CrayonScene: SKScene {
               let image = UIImage(contentsOfFile: url.path) else { return nil }
         let whole = SKTexture(image: image)
         if let r = definition.rect {
-            let bounds = CGRect(x: r.x / image.size.width,
-                                y: 1 - (r.y + r.h) / image.size.height,
-                                width: r.w / image.size.width, height: r.h / image.size.height)
+            let bounds = CGRect(x: CGFloat(r.x) / image.size.width,
+                                y: CGFloat(1) - CGFloat(r.y + r.h) / image.size.height,
+                                width: CGFloat(r.w) / image.size.width, height: CGFloat(r.h) / image.size.height)
             let texture = SKTexture(rect: bounds, in: whole)
-            let node = SKSpriteNode(texture: texture, size: CGSize(width: r.w, height: r.h))
+            let node = SKSpriteNode(texture: texture, size: CGSize(width: CGFloat(r.w), height: CGFloat(r.h)))
             if !definition.frames.isEmpty {
                 let steps = definition.frames.map { frame -> SKAction in
                     let r = frame.rect
-                    let crop = CGRect(x: r.x / image.size.width, y: 1 - (r.y + r.h) / image.size.height,
-                                      width: r.w / image.size.width, height: r.h / image.size.height)
-                    return .sequence([.setTexture(SKTexture(rect: crop, in: whole)), .wait(forDuration: frame.duration)])
+                    let crop = CGRect(x: CGFloat(r.x) / image.size.width,
+                                      y: CGFloat(1) - CGFloat(r.y + r.h) / image.size.height,
+                                      width: CGFloat(r.w) / image.size.width, height: CGFloat(r.h) / image.size.height)
+                    return SKAction.sequence([SKAction.setTexture(SKTexture(rect: crop, in: whole)), SKAction.wait(forDuration: frame.duration)])
                 }
-                node.run(.repeatForever(.sequence(steps)))
+                node.run(SKAction.repeatForever(SKAction.sequence(steps)))
             }
             return node
         }
