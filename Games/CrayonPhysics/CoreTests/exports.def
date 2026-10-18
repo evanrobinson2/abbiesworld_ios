@@ -1,0 +1,10 @@
+LIBRARY CrayonPhysicsCore
+EXPORTS
+CPWorldCreate
+CPWorldDestroy
+CPWorldAddBody
+CPWorldRemoveBody
+CPWorldGetBody
+CPWorldRestoreBody
+CPWorldAddJoint
+CPWorldStep

@@ -15,6 +15,8 @@ cd ../..
 ruby scripts/link-crayon-physics.rb
 ```
 
+Or run `bash scripts/prepare-crayon-physics.sh standalone` (use `host` for the integrated app); it prepares both projects and opens the chosen one without changing signing.
+
 Open `Games/CrayonPhysics/CrayonPhysics.xcodeproj` for standalone development, or `abbies.world.ios/abbies.world.ios.xcodeproj` for the host. The linking script is idempotent and must be run after generating the shared project in a new checkout.
 
 Run standalone unit/UI checks:
