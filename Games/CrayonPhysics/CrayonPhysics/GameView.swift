@@ -136,6 +136,21 @@ struct GameView: View {
             Button("Levels", action: session.selectLevels)
             Toggle("Music", isOn: Binding(get: { !session.muted }, set: { session.muted = !$0 }))
                 .frame(minHeight: 56)
+            VStack(alignment: .leading, spacing: 8) {
+                Text("Music style").font(.headline)
+                Picker("Music style", selection: $session.musicStyle) {
+                    ForEach(MusicStyle.allCases) { style in
+                        Text(style.title).tag(style)
+                    }
+                }
+                .pickerStyle(.menu)
+                .labelsHidden()
+                .accessibilityLabel("Music style")
+                .accessibilityHint("Choose the music to hear when you resume with music on.")
+                .font(.system(size: buttonSize, weight: .semibold))
+                .frame(minHeight: 56)
+                .accessibilityIdentifier("music-style-picker")
+            }.frame(maxWidth: .infinity, alignment: .leading)
             Toggle("Sound effects", isOn: Binding(get: { !session.soundsMuted }, set: { session.soundsMuted = !$0 }))
                 .frame(minHeight: 56)
             Button(session.exitLabel, action: session.returnToPlayroom)
@@ -185,11 +200,12 @@ struct GameView: View {
                 Text("Crayon Physics — Release 1").font(.largeTitle).accessibilityFocused($headingFocused)
                 Text("Original game design, code and graphics: Petri Purho. Original physics: Erin Catto’s Box2D.")
                 Text("Reference graphics: Creative Commons Attribution–NonCommercial–ShareAlike 2.0. Background texture based on Felipe Skroski’s ‘One for SXC’. Some modified textures from Image After.")
-                Text("Music: _ghost — Lullaby, Creative Commons Attribution–NonCommercial 2.5. Converted from the supplied original for iPad playback.")
+                Text("Original Release 1 soundtrack: _ghost — Lullaby, Creative Commons Attribution–NonCommercial 2.5. Retained here as original-game attribution; it is not the current soundtrack.")
+                Text("Current music: Normal, Tense, French House and Pop. Choose a style in the paused menu; styles do not switch automatically.")
                 Link("Original game", destination: URL(string: "https://www.kloonigames.com/blog/games/crayon/")!)
                 Link("Graphics license", destination: URL(string: "https://creativecommons.org/licenses/by-nc-sa/2.0/")!)
-                Link("Music and attribution", destination: URL(string: "https://ccmixter.org/media/files/_ghost/3631")!)
-                Link("Music license", destination: URL(string: "https://creativecommons.org/licenses/by-nc/2.5/")!)
+                Link("Original soundtrack attribution", destination: URL(string: "https://ccmixter.org/media/files/_ghost/3631")!)
+                Link("Original soundtrack license", destination: URL(string: "https://creativecommons.org/licenses/by-nc/2.5/")!)
                 Text("Physics credits").font(.title2)
                 Text("Physics: adapted Box2D-Lite, Erin Catto.")
                 if let url = GameResources.bundle.url(forResource: "physics-license", withExtension: "txt"),
@@ -202,7 +218,7 @@ struct GameView: View {
                     Text(attribution).textSelection(.enabled)
                 }
                 Text("Licensed sound integration candidate: Paper & pluck. Audition is ongoing; this is not an accepted final selection.").font(.caption)
-                Text("This remaster uses original reference artwork and music. Physics runs in CrayonPhysicsCore, adapted from Box2D-Lite; SpriteKit handles rendering and input. Full behavior parity with the original game remains unverified.").font(.caption)
+                Text("This remaster uses original reference artwork with presentation updates. Physics runs in CrayonPhysicsCore, adapted from Box2D-Lite; SpriteKit handles rendering and input. Full behavior parity with the original game remains unverified.").font(.caption)
                 Button("Back") { session.screen = .title }
             }.padding(28)
         }

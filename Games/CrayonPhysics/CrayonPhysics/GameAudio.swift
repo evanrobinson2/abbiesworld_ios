@@ -4,6 +4,11 @@ import AVFoundation
 final class GameAudio {
     private var player: AVAudioPlayer?
     private var entered = false
+    private(set) var playbackRequested = false
+    private(set) var musicStyle: MusicStyle = .normal
+    var isMusicPlaying: Bool { player?.isPlaying ?? false }
+    var musicDuration: TimeInterval { player?.duration ?? 0 }
+    var musicVolume: Float { player?.volume ?? 0 }
     private let managesAudioSession: Bool
     private var cues: [String: AVAudioPlayer] = [:]
     private var drawIdleTask: Task<Void, Never>?
@@ -11,7 +16,7 @@ final class GameAudio {
     var muted = false { didSet { player?.volume = muted ? 0 : 0.25 } }
     private(set) var status = "No production music supplied"
 
-    init(presentation: Presentation = .vanilla, managesAudioSession: Bool = true) {
+    init(presentation: Presentation = .vanilla, managesAudioSession: Bool = true, musicStyle: MusicStyle = .normal) {
         self.managesAudioSession = managesAudioSession
         for (name, filename) in presentation.cueFilenames {
             if let url = GameResources.bundle.url(forResource: filename, withExtension: nil),
@@ -21,12 +26,26 @@ final class GameAudio {
                 cues[name] = cue
             }
         }
-        guard let url = GameResources.bundle.url(forResource: presentation.musicFilename, withExtension: nil) else { return }
+        selectMusic(musicStyle)
+    }
+
+    func selectMusic(_ style: MusicStyle) {
+        guard player == nil || style != musicStyle else { return }
+        guard let url = GameResources.bundle.url(forResource: style.filename, withExtension: nil) else {
+            status = "Music file is missing: \(style.title)"
+            return
+        }
         do {
-            player = try AVAudioPlayer(contentsOf: url)
-            player?.numberOfLoops = -1
-            player?.prepareToPlay()
-            status = "Music ready"
+            let replacement = try AVAudioPlayer(contentsOf: url)
+            replacement.numberOfLoops = -1
+            replacement.volume = muted ? 0 : 0.25
+            replacement.prepareToPlay()
+            player?.stop()
+            player = replacement
+            musicStyle = style
+            status = "Music ready: \(style.title)"
+            // A choice in a paused menu changes the prepared track, not playback.
+            if entered && playbackRequested { replacement.play() }
         } catch { status = "Music failed to load: \(error.localizedDescription)" }
     }
     func enter() {
@@ -41,6 +60,7 @@ final class GameAudio {
     }
     func resume() {
         guard entered else { return }
+        playbackRequested = true
         player?.volume = muted ? 0 : 0.25
         player?.play()
     }
@@ -66,9 +86,10 @@ final class GameAudio {
     }
     func stopDrawing() { drawIdleTask?.cancel(); drawIdleTask = nil; cues["draw"]?.stop() }
     private func stopCues() { stopDrawing(); for cue in cues.values { cue.stop() } }
-    func pause() { player?.pause(); stopCues() }
+    func pause() { playbackRequested = false; player?.pause(); stopCues() }
     func leave() {
         entered = false
+        playbackRequested = false
         player?.stop()
         stopCues()
         player?.currentTime = 0

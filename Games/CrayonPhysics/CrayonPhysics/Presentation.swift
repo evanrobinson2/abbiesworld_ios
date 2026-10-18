@@ -14,7 +14,6 @@ struct Presentation {
     var brushWidth: CGFloat = 3
     var brushFilename = "crayon_brush_03.png"
     var displayFont: String? = nil
-    var musicFilename = "music-main.m4a"
     // A/V's licensed paper-pluck integration candidate. Board audition is ongoing;
     // this is not an accepted final selection. Rejected procedural cues are excluded.
     var cueFilenames = ["draw": "oga-crayon.wav", "erase": "oga-paper-rub.wav",

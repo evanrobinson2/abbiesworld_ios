@@ -1,0 +1,72 @@
+{
+  "canonicalDirection": "Four instrumental Abbie world arrangements mandated by Evan 2026-10-18; replaces Paper Daydream direction.",
+  "provider": "Suno v6 Cover, local signed-in UI",
+  "referenceURL": "https://suno.com/song/51b29b53-96c2-4484-9e16-9b7035255793",
+  "lyrics": "",
+  "vocalExclusions": "No lyrics, singing, rap, speech, vocal chops, humming or choir. French-house and pop additionally exclude vocoder.",
+  "selection": "One exported take per canonical style; alternates preserved as provider links. Selection is administrative, not a listening-based ranking.",
+  "processing": "Full-length AAC192k, 48k stereo, loudnorm target -23LUFS/-3dBTP/LRA9. Original WAV untouched. No loop edit or gameplay trigger added.",
+  "verification": "WAV decoded and AAC encoded successfully. No audio-listening capability available: vocal absence and musical quality require audition.",
+  "tracks": [
+    {
+      "id": "normal",
+      "title": "Abbie's World Crayon Physics - 01 Normal",
+      "sourceURL": "https://suno.com/song/0a4216dc-a18c-4d7e-b8aa-404b86f074a3",
+      "alternateURL": "https://suno.com/song/4dfb984b-4550-483e-9bc5-86e35e3d4175",
+      "promptTempoBPM": 88,
+      "original": "originals/normal.wav",
+      "playback": "playback/normal.m4a",
+      "originalSHA256": "7f635e6f7b8b7d94065783a9a427a0e32266f26594ad05331146edabec6db91f",
+      "playbackSHA256": "a0d68e86ecc5aed2af864d39a66f3187d80f98299a58c0c35daf3d173483a256",
+      "durationSeconds": 202.8,
+      "sampleRate": 48000,
+      "channels": 2,
+      "bundledFilename": "music-normal.m4a"
+    },
+    {
+      "id": "tense",
+      "title": "Abbie's World Crayon Physics - 02 Tense",
+      "sourceURL": "https://suno.com/song/a5e67fdd-b936-4ad4-8993-cc66061e6659",
+      "alternateURL": "https://suno.com/song/15de25fd-e8d9-4b92-a272-2e55cb434faf",
+      "promptTempoBPM": 94,
+      "original": "originals/tense.wav",
+      "playback": "playback/tense.m4a",
+      "originalSHA256": "8dd946fdbd7f6c4992a7184bc8338168f5f9b77e93497b488737643535703f17",
+      "playbackSHA256": "4e49a7e949f3034dbef13b20aab4d6c42321f16c682a5e5ce990f9dbef3d534f",
+      "durationSeconds": 203.96,
+      "sampleRate": 48000,
+      "channels": 2,
+      "bundledFilename": "music-tense.m4a"
+    },
+    {
+      "id": "french-house",
+      "title": "Abbie's World Crayon Physics - 03 French House",
+      "sourceURL": "https://suno.com/song/8055c535-3c9a-43fa-823e-5ef2933028a8",
+      "alternateURL": "https://suno.com/song/307c8d49-9fae-47dc-b5af-7e6122750e0f",
+      "promptTempoBPM": 112,
+      "original": "originals/french-house.wav",
+      "playback": "playback/french-house.m4a",
+      "originalSHA256": "cb5b46b97b47dc1243b712986c0f5c706fae84fffaeefd1807e81f9ca6d7b6e2",
+      "playbackSHA256": "99c3fe2f7bb22d1c34a6a8642d48e83e678e9cc17164f3f9c2d60e74259b55b2",
+      "durationSeconds": 182.4,
+      "sampleRate": 48000,
+      "channels": 2,
+      "bundledFilename": "music-french-house.m4a"
+    },
+    {
+      "id": "pop",
+      "title": "Abbie's World Crayon Physics - 04 Pop",
+      "sourceURL": "https://suno.com/song/bdc689fe-6134-4bf8-a212-8d28ea92f282",
+      "alternateURL": "https://suno.com/song/9338863b-8a41-405c-84b2-7772bca88eb2",
+      "promptTempoBPM": 102,
+      "original": "originals/pop.wav",
+      "playback": "playback/pop.m4a",
+      "originalSHA256": "8c6b81437acc5972e258dc711abf40e852b2af074fd075761c7032c9c52cf741",
+      "playbackSHA256": "c50ac0ecd327c3d5edec72cc5870c4dff2ff2c67e030a5e63145fedd16d24d34",
+      "durationSeconds": 183.16,
+      "sampleRate": 48000,
+      "channels": 2,
+      "bundledFilename": "music-pop.m4a"
+    }
+  ]
+}

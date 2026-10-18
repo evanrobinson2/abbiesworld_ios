@@ -13,6 +13,13 @@ final class GameSession: ObservableObject {
     @Published var error: String?
     @Published var muted: Bool { didSet { defaults.set(muted, forKey: "musicMuted"); audio.muted = muted } }
     @Published var soundsMuted: Bool { didSet { defaults.set(soundsMuted, forKey: "soundsMuted"); audio.soundsMuted = soundsMuted } }
+    @Published var musicStyle: MusicStyle {
+        didSet {
+            guard musicStyle != oldValue else { return }
+            defaults.set(musicStyle.rawValue, forKey: "musicStyle")
+            audio.selectMusic(musicStyle)
+        }
+    }
     @Published private(set) var catalog: LevelCatalog?
     let presentation: Presentation
     let audio: GameAudio
@@ -29,7 +36,9 @@ final class GameSession: ObservableObject {
         self.exitLabel = exitLabel
         self.onExit = onExit
         self.presentation = presentation
-        audio = GameAudio(presentation: presentation, managesAudioSession: managesAudioSession)
+        let savedStyle = MusicStyle(rawValue: defaults.string(forKey: "musicStyle") ?? "") ?? .normal
+        musicStyle = savedStyle
+        audio = GameAudio(presentation: presentation, managesAudioSession: managesAudioSession, musicStyle: savedStyle)
         completed = Set(defaults.stringArray(forKey: "completedSourceLevels") ?? [])
         muted = defaults.bool(forKey: "musicMuted")
         soundsMuted = defaults.bool(forKey: "soundsMuted")

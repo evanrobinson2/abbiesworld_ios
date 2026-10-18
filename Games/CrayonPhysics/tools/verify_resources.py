@@ -48,4 +48,9 @@ for cue in candidate['cues'].values():
 assert candidate['id'] == 'paper-pluck'
 audio = json.loads((resources / 'audio-provenance.json').read_text())['music']
 assert hashlib.sha256((resources / 'music-main.m4a').read_bytes()).hexdigest() == audio['outputSHA256']
-print('PASS: 8 scenes, 34 complete body records, 5 linked joints, star counts, sprite crops, source provenance, 4 licensed candidate cues and converted music.')
+canonical = json.loads((resources / 'canonical-music-provenance.json').read_text(encoding='utf-8'))
+assert [track['id'] for track in canonical['tracks']] == ['normal', 'tense', 'french-house', 'pop']
+for track in canonical['tracks']:
+    assert track['bundledFilename'] == f'music-{track["id"]}.m4a'
+    assert hashlib.sha256((resources / track['bundledFilename']).read_bytes()).hexdigest() == track['playbackSHA256']
+print('PASS: 8 scenes, 34 complete body records, 5 linked joints, star counts, sprite crops, source provenance, 4 licensed candidate cues, reference music and 4 canonical tracks.')
