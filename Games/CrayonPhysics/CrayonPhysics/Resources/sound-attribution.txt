@@ -1,0 +1,26 @@
+oga-pluck
+Kenney — https://opengameart.org/content/interface-sounds — CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Edited for level, filtering and duration; drawing excerpt looped.
+
+oga-glass
+Kenney — https://opengameart.org/content/interface-sounds — CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Edited for level, filtering and duration; drawing excerpt looped.
+
+oga-completion
+Brandon Morris (submitted by HaelDB) — https://opengameart.org/content/completion-sound — CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Edited for level, filtering and duration; drawing excerpt looped.
+
+oga-bell
+PWL — https://opengameart.org/content/bell-dingschimes — CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Edited for level, filtering and duration; drawing excerpt looped.
+
+oga-crayon
+Wandering Door Games — https://opengameart.org/content/writing-scribbles — CC-BY-SA-4.0 (https://creativecommons.org/licenses/by-sa/4.0/). Edited for level, filtering and duration; drawing excerpt looped.
+
+oga-paper-rub
+Luckius — https://opengameart.org/content/various-paper-sound-effects — CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Edited for level, filtering and duration; drawing excerpt looped.
+
+oga-click
+Kenney — https://opengameart.org/content/interface-sounds — CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Edited for level, filtering and duration; drawing excerpt looped.
+
+oga-paper-turn
+Luckius — https://opengameart.org/content/various-paper-sound-effects — CC0-1.0 (https://creativecommons.org/publicdomain/zero/1.0/). Edited for level, filtering and duration; drawing excerpt looped.
+
+Writing Scribbles original attribution: "Writing Scribbles" by Wandering Door Games is licensed under CC-BY-SA 4.0 https://wanderingdoorgames.obviousgain.ca/
+The adapted crayon recording remains CC-BY-SA 4.0. Other selected candidates use CC0 1.0; credits retained voluntarily.

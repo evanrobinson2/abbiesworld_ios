@@ -1,0 +1,33 @@
+name: Crayon Physics Apple build
+on:
+  workflow_dispatch:
+  push:
+    branches: [codex/crayon-physics-integration]
+    paths: ['Games/CrayonPhysics/**', '.github/workflows/crayon-physics.yml']
+permissions:
+  contents: read
+jobs:
+  standalone:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          sparse-checkout: Games/CrayonPhysics
+      - name: Install project generator
+        run: brew install xcodegen
+      - name: Build and test on an available iPad simulator
+        working-directory: Games/CrayonPhysics
+        run: bash tools/verify-on-mac.sh
+      - name: Package simulator app
+        if: success()
+        working-directory: Games/CrayonPhysics
+        run: ditto -c -k --sequesterRsrc --keepParent DerivedData/Build/Products/Debug-iphonesimulator/CrayonPhysics.app verification/CrayonPhysics-simulator.zip
+      - name: Preserve Apple build and test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: crayon-physics-apple-evidence
+          path: Games/CrayonPhysics/verification/
+          retention-days: 14
