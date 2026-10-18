@@ -6,7 +6,8 @@ struct Presentation {
     static let vanilla = Presentation()
     // Touch tutorial removes obsolete desktop-key hints; source geometry is unchanged.
     var spriteImages: [String: String] = [
-        "data/gfx/level_01_background.xml": "level_01_background_touch.png"
+        "data/gfx/level_01_background.xml": "level_01_background_touch.png",
+        "data/gfx/collectable.xml": "collectable-remaster.png"
     ] // source sprite definition ID -> replacement filename
     var paper = UIColor(red: 247 / 255, green: 241 / 255, blue: 227 / 255, alpha: 1)
     var ink = UIColor(red: 0.15, green: 0.27, blue: 0.55, alpha: 1)

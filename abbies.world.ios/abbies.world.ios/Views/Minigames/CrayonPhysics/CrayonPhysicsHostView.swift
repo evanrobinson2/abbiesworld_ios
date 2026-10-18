@@ -13,20 +13,14 @@ struct CrayonPhysicsHostView: View {
     }
 }
 
-/// Functional native entry control pending final box artwork. It is an actual
-/// room action, not a replacement room scene or an invented game location.
+/// The room owns the action; shared game resources supply the box artwork.
 struct World2CrayonBoxButton: View {
     let onOpen: () -> Void
     var body: some View {
         Button(action: onOpen) {
             VStack(spacing: 4) {
-                ZStack {
-                    Image(systemName: "shippingbox.fill")
-                        .font(.system(size: 52)).foregroundStyle(.orange)
-                    Image(systemName: "pencil.tip.crop.circle.fill")
-                        .font(.system(size: 28)).foregroundStyle(.blue, .white)
-                        .offset(y: -6)
-                }
+                CrayonBoxArtwork()
+                    .frame(width: 96, height: 96)
                 Text("Crayon box").font(.system(size: 18, weight: .semibold, design: .rounded))
                     .foregroundStyle(.primary)
             }
