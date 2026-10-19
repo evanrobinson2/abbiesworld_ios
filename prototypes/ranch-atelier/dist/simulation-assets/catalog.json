@@ -1,0 +1,1945 @@
+[
+  {
+    "id": "shelter-planned",
+    "label": "Shelter \u00b7 planned",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/shelter-planned.json",
+    "glb": "/simulation-assets/buildings/shelter-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "shelter-foundation",
+    "label": "Shelter \u00b7 foundation",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/shelter-foundation.json",
+    "glb": "/simulation-assets/buildings/shelter-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "shelter-frame",
+    "label": "Shelter \u00b7 frame",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/shelter-frame.json",
+    "glb": "/simulation-assets/buildings/shelter-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "shelter-roof",
+    "label": "Shelter \u00b7 roof",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/shelter-roof.json",
+    "glb": "/simulation-assets/buildings/shelter-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "shelter-complete",
+    "label": "Shelter \u00b7 complete",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/shelter-complete.json",
+    "glb": "/simulation-assets/buildings/shelter-complete.glb",
+    "triangles": 5432,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-planned",
+    "label": "Family Home \u00b7 planned",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/family-home-planned.json",
+    "glb": "/simulation-assets/buildings/family-home-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-foundation",
+    "label": "Family Home \u00b7 foundation",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/family-home-foundation.json",
+    "glb": "/simulation-assets/buildings/family-home-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-frame",
+    "label": "Family Home \u00b7 frame",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/family-home-frame.json",
+    "glb": "/simulation-assets/buildings/family-home-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-roof",
+    "label": "Family Home \u00b7 roof",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/family-home-roof.json",
+    "glb": "/simulation-assets/buildings/family-home-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-complete",
+    "label": "Family Home \u00b7 complete",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/family-home-complete.json",
+    "glb": "/simulation-assets/buildings/family-home-complete.glb",
+    "triangles": 7460,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-planned",
+    "label": "Feed Store \u00b7 planned",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/feed-store-planned.json",
+    "glb": "/simulation-assets/buildings/feed-store-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-foundation",
+    "label": "Feed Store \u00b7 foundation",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/feed-store-foundation.json",
+    "glb": "/simulation-assets/buildings/feed-store-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-frame",
+    "label": "Feed Store \u00b7 frame",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/feed-store-frame.json",
+    "glb": "/simulation-assets/buildings/feed-store-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-roof",
+    "label": "Feed Store \u00b7 roof",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/feed-store-roof.json",
+    "glb": "/simulation-assets/buildings/feed-store-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-complete",
+    "label": "Feed Store \u00b7 complete",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/feed-store-complete.json",
+    "glb": "/simulation-assets/buildings/feed-store-complete.glb",
+    "triangles": 6084,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-planned",
+    "label": "Water Point \u00b7 planned",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/water-point-planned.json",
+    "glb": "/simulation-assets/buildings/water-point-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-foundation",
+    "label": "Water Point \u00b7 foundation",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/water-point-foundation.json",
+    "glb": "/simulation-assets/buildings/water-point-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-frame",
+    "label": "Water Point \u00b7 frame",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/water-point-frame.json",
+    "glb": "/simulation-assets/buildings/water-point-frame.glb",
+    "triangles": 1692,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-roof",
+    "label": "Water Point \u00b7 roof",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/water-point-roof.json",
+    "glb": "/simulation-assets/buildings/water-point-roof.glb",
+    "triangles": 3008,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-complete",
+    "label": "Water Point \u00b7 complete",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/water-point-complete.json",
+    "glb": "/simulation-assets/buildings/water-point-complete.glb",
+    "triangles": 3364,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-planned",
+    "label": "Cattle Shelter \u00b7 planned",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/cattle-shelter-planned.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-foundation",
+    "label": "Cattle Shelter \u00b7 foundation",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/cattle-shelter-foundation.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-frame",
+    "label": "Cattle Shelter \u00b7 frame",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/cattle-shelter-frame.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-roof",
+    "label": "Cattle Shelter \u00b7 roof",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/cattle-shelter-roof.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-complete",
+    "label": "Cattle Shelter \u00b7 complete",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/cattle-shelter-complete.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-complete.glb",
+    "triangles": 5808,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-planned",
+    "label": "Goat Shelter \u00b7 planned",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/goat-shelter-planned.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-foundation",
+    "label": "Goat Shelter \u00b7 foundation",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/goat-shelter-foundation.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-frame",
+    "label": "Goat Shelter \u00b7 frame",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/goat-shelter-frame.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-roof",
+    "label": "Goat Shelter \u00b7 roof",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/goat-shelter-roof.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-complete",
+    "label": "Goat Shelter \u00b7 complete",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/goat-shelter-complete.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-complete.glb",
+    "triangles": 5808,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-planned",
+    "label": "Chicken Coop \u00b7 planned",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/chicken-coop-planned.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-foundation",
+    "label": "Chicken Coop \u00b7 foundation",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/chicken-coop-foundation.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-frame",
+    "label": "Chicken Coop \u00b7 frame",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/chicken-coop-frame.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-roof",
+    "label": "Chicken Coop \u00b7 roof",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/chicken-coop-roof.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-complete",
+    "label": "Chicken Coop \u00b7 complete",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/chicken-coop-complete.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-complete.glb",
+    "triangles": 6936,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "kitchen-garden-planned",
+    "label": "Kitchen Garden \u00b7 planned",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/kitchen-garden-planned.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "planned",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "kitchen-garden-foundation",
+    "label": "Kitchen Garden \u00b7 foundation",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/kitchen-garden-foundation.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "foundation",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "kitchen-garden-frame",
+    "label": "Kitchen Garden \u00b7 frame",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/kitchen-garden-frame.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-frame.glb",
+    "triangles": 2820,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "frame",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "kitchen-garden-roof",
+    "label": "Kitchen Garden \u00b7 roof",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/kitchen-garden-roof.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-roof.glb",
+    "triangles": 3760,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "roof",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "kitchen-garden-complete",
+    "label": "Kitchen Garden \u00b7 complete",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/kitchen-garden-complete.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-complete.glb",
+    "triangles": 5264,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "complete",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "horse-idle",
+    "label": "Horse \u00b7 Idle",
+    "category": "organics",
+    "subject": "horse",
+    "state": "idle",
+    "json": "/simulation-assets/organics/horse-idle.json",
+    "glb": "/simulation-assets/organics/horse-idle.glb",
+    "triangles": 5376,
+    "simulationMapping": {
+      "species": "horse",
+      "activities": [
+        "explore",
+        "settling-in"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.567
+  },
+  {
+    "id": "horse-feeding",
+    "label": "Horse \u00b7 Feeding",
+    "category": "organics",
+    "subject": "horse",
+    "state": "feeding",
+    "json": "/simulation-assets/organics/horse-feeding.json",
+    "glb": "/simulation-assets/organics/horse-feeding.glb",
+    "triangles": 5376,
+    "simulationMapping": {
+      "species": "horse",
+      "activities": [
+        "forage",
+        "browse",
+        "scratch",
+        "drink",
+        "supplemental-feeding"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.204
+  },
+  {
+    "id": "horse-rest",
+    "label": "Horse \u00b7 Rest",
+    "category": "organics",
+    "subject": "horse",
+    "state": "rest",
+    "json": "/simulation-assets/organics/horse-rest.json",
+    "glb": "/simulation-assets/organics/horse-rest.glb",
+    "triangles": 5376,
+    "simulationMapping": {
+      "species": "horse",
+      "activities": [
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.251
+  },
+  {
+    "id": "cow-idle",
+    "label": "Cow \u00b7 Idle",
+    "category": "organics",
+    "subject": "cow",
+    "state": "idle",
+    "json": "/simulation-assets/organics/cow-idle.json",
+    "glb": "/simulation-assets/organics/cow-idle.glb",
+    "triangles": 3864,
+    "simulationMapping": {
+      "species": "cow",
+      "activities": [
+        "explore",
+        "settling-in"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.22
+  },
+  {
+    "id": "cow-feeding",
+    "label": "Cow \u00b7 Feeding",
+    "category": "organics",
+    "subject": "cow",
+    "state": "feeding",
+    "json": "/simulation-assets/organics/cow-feeding.json",
+    "glb": "/simulation-assets/organics/cow-feeding.glb",
+    "triangles": 3864,
+    "simulationMapping": {
+      "species": "cow",
+      "activities": [
+        "forage",
+        "browse",
+        "scratch",
+        "drink",
+        "supplemental-feeding"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.242
+  },
+  {
+    "id": "cow-rest",
+    "label": "Cow \u00b7 Rest",
+    "category": "organics",
+    "subject": "cow",
+    "state": "rest",
+    "json": "/simulation-assets/organics/cow-rest.json",
+    "glb": "/simulation-assets/organics/cow-rest.glb",
+    "triangles": 3864,
+    "simulationMapping": {
+      "species": "cow",
+      "activities": [
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.284
+  },
+  {
+    "id": "goat-idle",
+    "label": "Goat \u00b7 Idle",
+    "category": "organics",
+    "subject": "goat",
+    "state": "idle",
+    "json": "/simulation-assets/organics/goat-idle.json",
+    "glb": "/simulation-assets/organics/goat-idle.glb",
+    "triangles": 4032,
+    "simulationMapping": {
+      "species": "goat",
+      "activities": [
+        "explore",
+        "settling-in"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.309
+  },
+  {
+    "id": "goat-feeding",
+    "label": "Goat \u00b7 Feeding",
+    "category": "organics",
+    "subject": "goat",
+    "state": "feeding",
+    "json": "/simulation-assets/organics/goat-feeding.json",
+    "glb": "/simulation-assets/organics/goat-feeding.glb",
+    "triangles": 4032,
+    "simulationMapping": {
+      "species": "goat",
+      "activities": [
+        "forage",
+        "browse",
+        "scratch",
+        "drink",
+        "supplemental-feeding"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.339
+  },
+  {
+    "id": "goat-rest",
+    "label": "Goat \u00b7 Rest",
+    "category": "organics",
+    "subject": "goat",
+    "state": "rest",
+    "json": "/simulation-assets/organics/goat-rest.json",
+    "glb": "/simulation-assets/organics/goat-rest.glb",
+    "triangles": 4032,
+    "simulationMapping": {
+      "species": "goat",
+      "activities": [
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.37
+  },
+  {
+    "id": "chicken-idle",
+    "label": "Chicken \u00b7 Idle",
+    "category": "organics",
+    "subject": "chicken",
+    "state": "idle",
+    "json": "/simulation-assets/organics/chicken-idle.json",
+    "glb": "/simulation-assets/organics/chicken-idle.glb",
+    "triangles": 3732,
+    "simulationMapping": {
+      "species": "chicken",
+      "activities": [
+        "explore",
+        "settling-in"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.411
+  },
+  {
+    "id": "chicken-feeding",
+    "label": "Chicken \u00b7 Feeding",
+    "category": "organics",
+    "subject": "chicken",
+    "state": "feeding",
+    "json": "/simulation-assets/organics/chicken-feeding.json",
+    "glb": "/simulation-assets/organics/chicken-feeding.glb",
+    "triangles": 3732,
+    "simulationMapping": {
+      "species": "chicken",
+      "activities": [
+        "forage",
+        "browse",
+        "scratch",
+        "drink",
+        "supplemental-feeding"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.414
+  },
+  {
+    "id": "chicken-rest",
+    "label": "Chicken \u00b7 Rest",
+    "category": "organics",
+    "subject": "chicken",
+    "state": "rest",
+    "json": "/simulation-assets/organics/chicken-rest.json",
+    "glb": "/simulation-assets/organics/chicken-rest.glb",
+    "triangles": 2388,
+    "simulationMapping": {
+      "species": "chicken",
+      "activities": [
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.289
+  },
+  {
+    "id": "tree-standing",
+    "label": "Tree \u00b7 Standing",
+    "category": "organics",
+    "subject": "tree",
+    "state": "standing",
+    "json": "/simulation-assets/organics/tree-standing.json",
+    "glb": "/simulation-assets/organics/tree-standing.glb",
+    "triangles": 2016,
+    "simulationMapping": {
+      "species": "tree",
+      "activities": [
+        "vegetation"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.25
+  },
+  {
+    "id": "tree-stump",
+    "label": "Tree \u00b7 Stump",
+    "category": "organics",
+    "subject": "tree",
+    "state": "stump",
+    "json": "/simulation-assets/organics/tree-stump.json",
+    "glb": "/simulation-assets/organics/tree-stump.glb",
+    "triangles": 840,
+    "simulationMapping": {
+      "species": "tree",
+      "activities": [
+        "cleared"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.116
+  },
+  {
+    "id": "marley-idle",
+    "label": "Marley \u00b7 Idle",
+    "category": "organics",
+    "subject": "marley",
+    "state": "idle",
+    "json": "/simulation-assets/organics/marley-idle.json",
+    "glb": "/simulation-assets/organics/marley-idle.glb",
+    "triangles": 5232,
+    "simulationMapping": {
+      "actor": "marley",
+      "species": "dog",
+      "activities": [
+        "walking",
+        "walking-home",
+        "idle"
+      ],
+      "kind": "static-pose",
+      "note": "Retriever worker; carried pose shows one small stick for cargo > 0. Not an animation."
+    },
+    "generationSeconds": 0.678
+  },
+  {
+    "id": "marley-carried",
+    "label": "Marley \u00b7 Carried",
+    "category": "organics",
+    "subject": "marley",
+    "state": "carried",
+    "json": "/simulation-assets/organics/marley-carried.json",
+    "glb": "/simulation-assets/organics/marley-carried.glb",
+    "triangles": 5568,
+    "simulationMapping": {
+      "actor": "marley",
+      "species": "dog",
+      "activities": [
+        "hauling",
+        "carrying"
+      ],
+      "kind": "static-pose",
+      "note": "Retriever worker; carried pose shows one small stick for cargo > 0. Not an animation."
+    },
+    "generationSeconds": 0.205
+  },
+  {
+    "id": "marley-rest",
+    "label": "Marley \u00b7 Rest",
+    "category": "organics",
+    "subject": "marley",
+    "state": "rest",
+    "json": "/simulation-assets/organics/marley-rest.json",
+    "glb": "/simulation-assets/organics/marley-rest.glb",
+    "triangles": 5232,
+    "simulationMapping": {
+      "actor": "marley",
+      "species": "dog",
+      "activities": [
+        "resting",
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Retriever worker; carried pose shows one small stick for cargo > 0. Not an animation."
+    },
+    "generationSeconds": 0.229
+  },
+  {
+    "id": "wood-full",
+    "label": "Timber \u00b7 full",
+    "category": "supplies",
+    "subject": "wood",
+    "state": "full",
+    "json": "/simulation-assets/supplies/wood-full.json",
+    "glb": "/simulation-assets/supplies/wood-full.glb",
+    "triangles": 9308,
+    "simulationMapping": {
+      "resources": [
+        "wood"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "sources[].stock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "wood-partial",
+    "label": "Timber \u00b7 partial",
+    "category": "supplies",
+    "subject": "wood",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/wood-partial.json",
+    "glb": "/simulation-assets/supplies/wood-partial.glb",
+    "triangles": 3980,
+    "simulationMapping": {
+      "resources": [
+        "wood"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "sources[].stock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "wood-empty",
+    "label": "Timber \u00b7 empty",
+    "category": "supplies",
+    "subject": "wood",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/wood-empty.json",
+    "glb": "/simulation-assets/supplies/wood-empty.glb",
+    "triangles": 1316,
+    "simulationMapping": {
+      "resources": [
+        "wood"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "sources[].stock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "wood-carried",
+    "label": "Timber \u00b7 carried",
+    "category": "supplies",
+    "subject": "wood",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/wood-carried.json",
+    "glb": "/simulation-assets/supplies/wood-carried.glb",
+    "triangles": 2664,
+    "simulationMapping": {
+      "resources": [
+        "wood"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "sources[].stock"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "hay-full",
+    "label": "Hay feeder \u00b7 full",
+    "category": "supplies",
+    "subject": "hay",
+    "state": "full",
+    "json": "/simulation-assets/supplies/hay-full.json",
+    "glb": "/simulation-assets/supplies/hay-full.glb",
+    "triangles": 6400,
+    "simulationMapping": {
+      "resources": [
+        "forage",
+        "equine-fibre",
+        "cattle-forage",
+        "goat-forage",
+        "sheep-forage",
+        "camelid-forage",
+        "rabbit-hay-and-ration"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "hay-partial",
+    "label": "Hay feeder \u00b7 partial",
+    "category": "supplies",
+    "subject": "hay",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/hay-partial.json",
+    "glb": "/simulation-assets/supplies/hay-partial.glb",
+    "triangles": 6400,
+    "simulationMapping": {
+      "resources": [
+        "forage",
+        "equine-fibre",
+        "cattle-forage",
+        "goat-forage",
+        "sheep-forage",
+        "camelid-forage",
+        "rabbit-hay-and-ration"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "hay-empty",
+    "label": "Hay feeder \u00b7 empty",
+    "category": "supplies",
+    "subject": "hay",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/hay-empty.json",
+    "glb": "/simulation-assets/supplies/hay-empty.glb",
+    "triangles": 3964,
+    "simulationMapping": {
+      "resources": [
+        "forage",
+        "equine-fibre",
+        "cattle-forage",
+        "goat-forage",
+        "sheep-forage",
+        "camelid-forage",
+        "rabbit-hay-and-ration"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "hay-carried",
+    "label": "Hay feeder \u00b7 carried",
+    "category": "supplies",
+    "subject": "hay",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/hay-carried.json",
+    "glb": "/simulation-assets/supplies/hay-carried.glb",
+    "triangles": 764,
+    "simulationMapping": {
+      "resources": [
+        "forage",
+        "equine-fibre",
+        "cattle-forage",
+        "goat-forage",
+        "sheep-forage",
+        "camelid-forage",
+        "rabbit-hay-and-ration"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "ration-full",
+    "label": "Ration sack \u00b7 full",
+    "category": "supplies",
+    "subject": "ration",
+    "state": "full",
+    "json": "/simulation-assets/supplies/ration-full.json",
+    "glb": "/simulation-assets/supplies/ration-full.glb",
+    "triangles": 1736,
+    "simulationMapping": {
+      "resources": [
+        "pig-ration",
+        "chicken-ration",
+        "turkey-ration",
+        "duck-ration",
+        "goose-ration",
+        "dog-food"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "ration-partial",
+    "label": "Ration sack \u00b7 partial",
+    "category": "supplies",
+    "subject": "ration",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/ration-partial.json",
+    "glb": "/simulation-assets/supplies/ration-partial.glb",
+    "triangles": 1736,
+    "simulationMapping": {
+      "resources": [
+        "pig-ration",
+        "chicken-ration",
+        "turkey-ration",
+        "duck-ration",
+        "goose-ration",
+        "dog-food"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "ration-empty",
+    "label": "Ration sack \u00b7 empty",
+    "category": "supplies",
+    "subject": "ration",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/ration-empty.json",
+    "glb": "/simulation-assets/supplies/ration-empty.glb",
+    "triangles": 896,
+    "simulationMapping": {
+      "resources": [
+        "pig-ration",
+        "chicken-ration",
+        "turkey-ration",
+        "duck-ration",
+        "goose-ration",
+        "dog-food"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "ration-carried",
+    "label": "Ration sack \u00b7 carried",
+    "category": "supplies",
+    "subject": "ration",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/ration-carried.json",
+    "glb": "/simulation-assets/supplies/ration-carried.glb",
+    "triangles": 1736,
+    "simulationMapping": {
+      "resources": [
+        "pig-ration",
+        "chicken-ration",
+        "turkey-ration",
+        "duck-ration",
+        "goose-ration",
+        "dog-food"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-trough-full",
+    "label": "Water trough \u00b7 full",
+    "category": "supplies",
+    "subject": "water-trough",
+    "state": "full",
+    "json": "/simulation-assets/supplies/water-trough-full.json",
+    "glb": "/simulation-assets/supplies/water-trough-full.glb",
+    "triangles": 1792,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-trough-partial",
+    "label": "Water trough \u00b7 partial",
+    "category": "supplies",
+    "subject": "water-trough",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/water-trough-partial.json",
+    "glb": "/simulation-assets/supplies/water-trough-partial.glb",
+    "triangles": 1792,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-trough-empty",
+    "label": "Water trough \u00b7 empty",
+    "category": "supplies",
+    "subject": "water-trough",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/water-trough-empty.json",
+    "glb": "/simulation-assets/supplies/water-trough-empty.glb",
+    "triangles": 1316,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-bucket-full",
+    "label": "Water bucket \u00b7 full",
+    "category": "supplies",
+    "subject": "water-bucket",
+    "state": "full",
+    "json": "/simulation-assets/supplies/water-bucket-full.json",
+    "glb": "/simulation-assets/supplies/water-bucket-full.glb",
+    "triangles": 6824,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-bucket-partial",
+    "label": "Water bucket \u00b7 partial",
+    "category": "supplies",
+    "subject": "water-bucket",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/water-bucket-partial.json",
+    "glb": "/simulation-assets/supplies/water-bucket-partial.glb",
+    "triangles": 6824,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-bucket-empty",
+    "label": "Water bucket \u00b7 empty",
+    "category": "supplies",
+    "subject": "water-bucket",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/water-bucket-empty.json",
+    "glb": "/simulation-assets/supplies/water-bucket-empty.glb",
+    "triangles": 6572,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-bucket-carried",
+    "label": "Water bucket \u00b7 carried",
+    "category": "supplies",
+    "subject": "water-bucket",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/water-bucket-carried.json",
+    "glb": "/simulation-assets/supplies/water-bucket-carried.glb",
+    "triangles": 6824,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "compost-full",
+    "label": "Compost bin \u00b7 full",
+    "category": "supplies",
+    "subject": "compost",
+    "state": "full",
+    "json": "/simulation-assets/supplies/compost-full.json",
+    "glb": "/simulation-assets/supplies/compost-full.glb",
+    "triangles": 2592,
+    "simulationMapping": {
+      "resources": [
+        "manure"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "compost",
+        "cleaningJobs"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "compost-partial",
+    "label": "Compost bin \u00b7 partial",
+    "category": "supplies",
+    "subject": "compost",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/compost-partial.json",
+    "glb": "/simulation-assets/supplies/compost-partial.glb",
+    "triangles": 2592,
+    "simulationMapping": {
+      "resources": [
+        "manure"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "compost",
+        "cleaningJobs"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "compost-empty",
+    "label": "Compost bin \u00b7 empty",
+    "category": "supplies",
+    "subject": "compost",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/compost-empty.json",
+    "glb": "/simulation-assets/supplies/compost-empty.glb",
+    "triangles": 2256,
+    "simulationMapping": {
+      "resources": [
+        "manure"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "compost",
+        "cleaningJobs"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "compost-carried",
+    "label": "Compost bin \u00b7 carried",
+    "category": "supplies",
+    "subject": "compost",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/compost-carried.json",
+    "glb": "/simulation-assets/supplies/compost-carried.glb",
+    "triangles": 356,
+    "simulationMapping": {
+      "resources": [
+        "manure"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "compost",
+        "cleaningJobs"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "abbie-idle",
+    "label": "Abbie \u00b7 idle",
+    "category": "workers",
+    "subject": "abbie",
+    "state": "idle",
+    "json": "/simulation-assets/workers/abbie-idle.json",
+    "glb": "/simulation-assets/workers/abbie-idle.glb",
+    "triangles": 6444,
+    "simulationMapping": {
+      "workerName": "Abbie",
+      "sourceAppearance": "/simulation-characters/abbie.svg",
+      "relativeHeight": 0.88,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "abbie-carry",
+    "label": "Abbie \u00b7 carry",
+    "category": "workers",
+    "subject": "abbie",
+    "state": "carry",
+    "json": "/simulation-assets/workers/abbie-carry.json",
+    "glb": "/simulation-assets/workers/abbie-carry.glb",
+    "triangles": 6800,
+    "simulationMapping": {
+      "workerName": "Abbie",
+      "sourceAppearance": "/simulation-characters/abbie.svg",
+      "relativeHeight": 0.88,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "abbie-work",
+    "label": "Abbie \u00b7 work",
+    "category": "workers",
+    "subject": "abbie",
+    "state": "work",
+    "json": "/simulation-assets/workers/abbie-work.json",
+    "glb": "/simulation-assets/workers/abbie-work.glb",
+    "triangles": 6444,
+    "simulationMapping": {
+      "workerName": "Abbie",
+      "sourceAppearance": "/simulation-characters/abbie.svg",
+      "relativeHeight": 0.88,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "ani-idle",
+    "label": "Ani \u00b7 idle",
+    "category": "workers",
+    "subject": "ani",
+    "state": "idle",
+    "json": "/simulation-assets/workers/ani-idle.json",
+    "glb": "/simulation-assets/workers/ani-idle.glb",
+    "triangles": 6256,
+    "simulationMapping": {
+      "workerName": "Ani",
+      "sourceAppearance": "/simulation-characters/ani.svg",
+      "relativeHeight": 0.88,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "ani-carry",
+    "label": "Ani \u00b7 carry",
+    "category": "workers",
+    "subject": "ani",
+    "state": "carry",
+    "json": "/simulation-assets/workers/ani-carry.json",
+    "glb": "/simulation-assets/workers/ani-carry.glb",
+    "triangles": 6612,
+    "simulationMapping": {
+      "workerName": "Ani",
+      "sourceAppearance": "/simulation-characters/ani.svg",
+      "relativeHeight": 0.88,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "ani-work",
+    "label": "Ani \u00b7 work",
+    "category": "workers",
+    "subject": "ani",
+    "state": "work",
+    "json": "/simulation-assets/workers/ani-work.json",
+    "glb": "/simulation-assets/workers/ani-work.glb",
+    "triangles": 6256,
+    "simulationMapping": {
+      "workerName": "Ani",
+      "sourceAppearance": "/simulation-characters/ani.svg",
+      "relativeHeight": 0.88,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "mommy-idle",
+    "label": "Mommy \u00b7 idle",
+    "category": "workers",
+    "subject": "mommy",
+    "state": "idle",
+    "json": "/simulation-assets/workers/mommy-idle.json",
+    "glb": "/simulation-assets/workers/mommy-idle.glb",
+    "triangles": 5248,
+    "simulationMapping": {
+      "workerName": "Mommy",
+      "sourceAppearance": "/simulation-characters/mommy.svg",
+      "relativeHeight": 1.0,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "mommy-carry",
+    "label": "Mommy \u00b7 carry",
+    "category": "workers",
+    "subject": "mommy",
+    "state": "carry",
+    "json": "/simulation-assets/workers/mommy-carry.json",
+    "glb": "/simulation-assets/workers/mommy-carry.glb",
+    "triangles": 5604,
+    "simulationMapping": {
+      "workerName": "Mommy",
+      "sourceAppearance": "/simulation-characters/mommy.svg",
+      "relativeHeight": 1.0,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "mommy-work",
+    "label": "Mommy \u00b7 work",
+    "category": "workers",
+    "subject": "mommy",
+    "state": "work",
+    "json": "/simulation-assets/workers/mommy-work.json",
+    "glb": "/simulation-assets/workers/mommy-work.glb",
+    "triangles": 5248,
+    "simulationMapping": {
+      "workerName": "Mommy",
+      "sourceAppearance": "/simulation-characters/mommy.svg",
+      "relativeHeight": 1.0,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "daddy-idle",
+    "label": "Daddy \u00b7 idle",
+    "category": "workers",
+    "subject": "daddy",
+    "state": "idle",
+    "json": "/simulation-assets/workers/daddy-idle.json",
+    "glb": "/simulation-assets/workers/daddy-idle.glb",
+    "triangles": 5396,
+    "simulationMapping": {
+      "workerName": "Daddy",
+      "sourceAppearance": "/simulation-characters/daddy.svg",
+      "relativeHeight": 1.04,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "daddy-carry",
+    "label": "Daddy \u00b7 carry",
+    "category": "workers",
+    "subject": "daddy",
+    "state": "carry",
+    "json": "/simulation-assets/workers/daddy-carry.json",
+    "glb": "/simulation-assets/workers/daddy-carry.glb",
+    "triangles": 5752,
+    "simulationMapping": {
+      "workerName": "Daddy",
+      "sourceAppearance": "/simulation-characters/daddy.svg",
+      "relativeHeight": 1.04,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "daddy-work",
+    "label": "Daddy \u00b7 work",
+    "category": "workers",
+    "subject": "daddy",
+    "state": "work",
+    "json": "/simulation-assets/workers/daddy-work.json",
+    "glb": "/simulation-assets/workers/daddy-work.glb",
+    "triangles": 5396,
+    "simulationMapping": {
+      "workerName": "Daddy",
+      "sourceAppearance": "/simulation-characters/daddy.svg",
+      "relativeHeight": 1.04,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "jeff-idle",
+    "label": "Jeff \u00b7 idle",
+    "category": "workers",
+    "subject": "jeff",
+    "state": "idle",
+    "json": "/simulation-assets/workers/jeff-idle.json",
+    "glb": "/simulation-assets/workers/jeff-idle.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Jeff",
+      "sourceAppearance": "/simulation-characters/jeff.svg",
+      "relativeHeight": 1.02,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "jeff-carry",
+    "label": "Jeff \u00b7 carry",
+    "category": "workers",
+    "subject": "jeff",
+    "state": "carry",
+    "json": "/simulation-assets/workers/jeff-carry.json",
+    "glb": "/simulation-assets/workers/jeff-carry.glb",
+    "triangles": 6276,
+    "simulationMapping": {
+      "workerName": "Jeff",
+      "sourceAppearance": "/simulation-characters/jeff.svg",
+      "relativeHeight": 1.02,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "jeff-work",
+    "label": "Jeff \u00b7 work",
+    "category": "workers",
+    "subject": "jeff",
+    "state": "work",
+    "json": "/simulation-assets/workers/jeff-work.json",
+    "glb": "/simulation-assets/workers/jeff-work.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Jeff",
+      "sourceAppearance": "/simulation-characters/jeff.svg",
+      "relativeHeight": 1.02,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "alexis-idle",
+    "label": "Alexis \u00b7 idle",
+    "category": "workers",
+    "subject": "alexis",
+    "state": "idle",
+    "json": "/simulation-assets/workers/alexis-idle.json",
+    "glb": "/simulation-assets/workers/alexis-idle.glb",
+    "triangles": 5248,
+    "simulationMapping": {
+      "workerName": "Alexis",
+      "sourceAppearance": "/simulation-characters/alexis.svg",
+      "relativeHeight": 1.0,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "alexis-carry",
+    "label": "Alexis \u00b7 carry",
+    "category": "workers",
+    "subject": "alexis",
+    "state": "carry",
+    "json": "/simulation-assets/workers/alexis-carry.json",
+    "glb": "/simulation-assets/workers/alexis-carry.glb",
+    "triangles": 5604,
+    "simulationMapping": {
+      "workerName": "Alexis",
+      "sourceAppearance": "/simulation-characters/alexis.svg",
+      "relativeHeight": 1.0,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "alexis-work",
+    "label": "Alexis \u00b7 work",
+    "category": "workers",
+    "subject": "alexis",
+    "state": "work",
+    "json": "/simulation-assets/workers/alexis-work.json",
+    "glb": "/simulation-assets/workers/alexis-work.glb",
+    "triangles": 5248,
+    "simulationMapping": {
+      "workerName": "Alexis",
+      "sourceAppearance": "/simulation-characters/alexis.svg",
+      "relativeHeight": 1.0,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "pearl-idle",
+    "label": "Pearl \u00b7 idle",
+    "category": "workers",
+    "subject": "pearl",
+    "state": "idle",
+    "json": "/simulation-assets/workers/pearl-idle.json",
+    "glb": "/simulation-assets/workers/pearl-idle.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Pearl",
+      "sourceAppearance": "/simulation-characters/pearl.svg",
+      "relativeHeight": 0.72,
+      "pose": "idle",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "pearl-carry",
+    "label": "Pearl \u00b7 carry",
+    "category": "workers",
+    "subject": "pearl",
+    "state": "carry",
+    "json": "/simulation-assets/workers/pearl-carry.json",
+    "glb": "/simulation-assets/workers/pearl-carry.glb",
+    "triangles": 6276,
+    "simulationMapping": {
+      "workerName": "Pearl",
+      "sourceAppearance": "/simulation-characters/pearl.svg",
+      "relativeHeight": 0.72,
+      "pose": "carry",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  },
+  {
+    "id": "pearl-work",
+    "label": "Pearl \u00b7 work",
+    "category": "workers",
+    "subject": "pearl",
+    "state": "work",
+    "json": "/simulation-assets/workers/pearl-work.json",
+    "glb": "/simulation-assets/workers/pearl-work.glb",
+    "triangles": 5920,
+    "simulationMapping": {
+      "workerName": "Pearl",
+      "sourceAppearance": "/simulation-characters/pearl.svg",
+      "relativeHeight": 0.72,
+      "pose": "work",
+      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
+    }
+  }
+]

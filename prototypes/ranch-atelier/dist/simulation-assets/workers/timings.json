@@ -1,0 +1,90 @@
+{
+  "assets": [
+    {
+      "id": "abbie-idle",
+      "seconds": 0.587
+    },
+    {
+      "id": "abbie-carry",
+      "seconds": 0.298
+    },
+    {
+      "id": "abbie-work",
+      "seconds": 0.35
+    },
+    {
+      "id": "ani-idle",
+      "seconds": 0.408
+    },
+    {
+      "id": "ani-carry",
+      "seconds": 0.501
+    },
+    {
+      "id": "ani-work",
+      "seconds": 0.642
+    },
+    {
+      "id": "mommy-idle",
+      "seconds": 0.516
+    },
+    {
+      "id": "mommy-carry",
+      "seconds": 0.674
+    },
+    {
+      "id": "mommy-work",
+      "seconds": 0.632
+    },
+    {
+      "id": "daddy-idle",
+      "seconds": 0.861
+    },
+    {
+      "id": "daddy-carry",
+      "seconds": 0.984
+    },
+    {
+      "id": "daddy-work",
+      "seconds": 0.998
+    },
+    {
+      "id": "jeff-idle",
+      "seconds": 1.274
+    },
+    {
+      "id": "jeff-carry",
+      "seconds": 1.431
+    },
+    {
+      "id": "jeff-work",
+      "seconds": 1.414
+    },
+    {
+      "id": "alexis-idle",
+      "seconds": 1.507
+    },
+    {
+      "id": "alexis-carry",
+      "seconds": 1.558
+    },
+    {
+      "id": "alexis-work",
+      "seconds": 1.547
+    },
+    {
+      "id": "pearl-idle",
+      "seconds": 1.929
+    },
+    {
+      "id": "pearl-carry",
+      "seconds": 2.196
+    },
+    {
+      "id": "pearl-work",
+      "seconds": 2.307
+    }
+  ],
+  "totalSeconds": 22.639,
+  "excludes": "authoring, review, rendering and deployment"
+}

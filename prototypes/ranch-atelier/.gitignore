@@ -1,0 +1,9 @@
+.env*
+.vercel/
+.openai/
+node_modules/
+__pycache__/
+*.pyc
+*.log
+*.blend1
+*.blend2

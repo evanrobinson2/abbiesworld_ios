@@ -1,0 +1,40 @@
+{
+  "rewrites": [
+    {
+      "source": "/mood-board",
+      "destination": "/mood-board.html"
+    },
+    {
+      "source": "/3d",
+      "destination": "/3d.html"
+    },
+    {
+      "source": "/3d/barn-builder",
+      "destination": "/barn-builder.html"
+    },
+    {
+      "source": "/procedural",
+      "destination": "/procedural.html"
+    },
+    {
+      "source": "/simulation",
+      "destination": "/simulation.html"
+    },
+    {
+      "source": "/3d/asset-studies",
+      "destination": "/asset-studies.html"
+    },
+    {
+      "source": "/3d/simulation-assets",
+      "destination": "/simulation-assets.html"
+    },
+    {
+      "source": "/themes",
+      "destination": "/themes.html"
+    },
+    {
+      "source": "/scene-generator",
+      "destination": "/scene-generator.html"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "count": 10,
+  "note": "Three existing subject builders and seven newly scripted prop builders; static meshes, no rigging or production acceptance.",
+  "model_seconds": 0.21371699999997418,
+  "export_seconds": 1.7229663000001665,
+  "blend_save_seconds": 0.0018281000000115455,
+  "script_seconds": 1.9507306999998946,
+  "assets": [
+    {
+      "name": "horse",
+      "model_seconds": 0.025874100000010003,
+      "export_seconds": 1.645956100000035,
+      "triangles": 1676,
+      "bytes": 93860
+    },
+    {
+      "name": "shelter",
+      "model_seconds": 0.027999700000009398,
+      "export_seconds": 0.01371130000006815,
+      "triangles": 1448,
+      "bytes": 104596
+    },
+    {
+      "name": "tree",
+      "model_seconds": 0.017159600000013597,
+      "export_seconds": 0.010526000000027125,
+      "triangles": 700,
+      "bytes": 32568
+    },
+    {
+      "name": "trough",
+      "model_seconds": 0.01881720000005771,
+      "export_seconds": 0.0076245999999855485,
+      "triangles": 648,
+      "bytes": 47868
+    },
+    {
+      "name": "hay-bale",
+      "model_seconds": 0.011459899999977097,
+      "export_seconds": 0.005206399999906353,
+      "triangles": 324,
+      "bytes": 24308
+    },
+    {
+      "name": "bucket",
+      "model_seconds": 0.007753200000024663,
+      "export_seconds": 0.007497499999999491,
+      "triangles": 176,
+      "bytes": 13432
+    },
+    {
+      "name": "crate",
+      "model_seconds": 0.05240409999998974,
+      "export_seconds": 0.011186700000052952,
+      "triangles": 1404,
+      "bytes": 100264
+    },
+    {
+      "name": "fence",
+      "model_seconds": 0.014701099999911094,
+      "export_seconds": 0.007430600000020604,
+      "triangles": 304,
+      "bytes": 23164
+    },
+    {
+      "name": "barrel",
+      "model_seconds": 0.008053799999970579,
+      "export_seconds": 0.006391200000052777,
+      "triangles": 132,
+      "bytes": 10048
+    },
+    {
+      "name": "bench",
+      "model_seconds": 0.0294943000000103,
+      "export_seconds": 0.0074359000000185915,
+      "triangles": 648,
+      "bytes": 47128
+    }
+  ]
+}

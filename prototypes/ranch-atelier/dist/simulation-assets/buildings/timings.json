@@ -1,0 +1,46 @@
+{
+  "families": [
+    {
+      "family": "shelter",
+      "seconds": 1.197,
+      "assets": 5
+    },
+    {
+      "family": "family-home",
+      "seconds": 1.781,
+      "assets": 5
+    },
+    {
+      "family": "feed-store",
+      "seconds": 2.543,
+      "assets": 5
+    },
+    {
+      "family": "water-point",
+      "seconds": 2.31,
+      "assets": 5
+    },
+    {
+      "family": "cattle-shelter",
+      "seconds": 4.262,
+      "assets": 5
+    },
+    {
+      "family": "goat-shelter",
+      "seconds": 4.848,
+      "assets": 5
+    },
+    {
+      "family": "chicken-coop",
+      "seconds": 6.421,
+      "assets": 5
+    },
+    {
+      "family": "kitchen-garden",
+      "seconds": 6.987,
+      "assets": 5
+    }
+  ],
+  "generationExportSeconds": 30.361,
+  "includes": "Model construction, bevel/normal evaluation, GLB and JSON export; excludes authoring and review"
+}

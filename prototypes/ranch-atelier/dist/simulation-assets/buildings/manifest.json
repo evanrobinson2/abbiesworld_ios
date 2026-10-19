@@ -1,0 +1,692 @@
+[
+  {
+    "id": "shelter-planned",
+    "label": "Shelter \u00b7 planned",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/shelter-planned.json",
+    "glb": "/simulation-assets/buildings/shelter-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "shelter-foundation",
+    "label": "Shelter \u00b7 foundation",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/shelter-foundation.json",
+    "glb": "/simulation-assets/buildings/shelter-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "shelter-frame",
+    "label": "Shelter \u00b7 frame",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/shelter-frame.json",
+    "glb": "/simulation-assets/buildings/shelter-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "shelter-roof",
+    "label": "Shelter \u00b7 roof",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/shelter-roof.json",
+    "glb": "/simulation-assets/buildings/shelter-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "shelter-complete",
+    "label": "Shelter \u00b7 complete",
+    "category": "buildings",
+    "subject": "shelter",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/shelter-complete.json",
+    "glb": "/simulation-assets/buildings/shelter-complete.glb",
+    "triangles": 5432,
+    "simulationMapping": {
+      "buildingIds": [
+        "shelter",
+        "build-*"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-planned",
+    "label": "Family Home \u00b7 planned",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/family-home-planned.json",
+    "glb": "/simulation-assets/buildings/family-home-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-foundation",
+    "label": "Family Home \u00b7 foundation",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/family-home-foundation.json",
+    "glb": "/simulation-assets/buildings/family-home-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-frame",
+    "label": "Family Home \u00b7 frame",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/family-home-frame.json",
+    "glb": "/simulation-assets/buildings/family-home-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-roof",
+    "label": "Family Home \u00b7 roof",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/family-home-roof.json",
+    "glb": "/simulation-assets/buildings/family-home-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "family-home-complete",
+    "label": "Family Home \u00b7 complete",
+    "category": "buildings",
+    "subject": "family-home",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/family-home-complete.json",
+    "glb": "/simulation-assets/buildings/family-home-complete.glb",
+    "triangles": 7460,
+    "simulationMapping": {
+      "buildingIds": [
+        "abbie-home",
+        "ani-home"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-planned",
+    "label": "Feed Store \u00b7 planned",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/feed-store-planned.json",
+    "glb": "/simulation-assets/buildings/feed-store-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-foundation",
+    "label": "Feed Store \u00b7 foundation",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/feed-store-foundation.json",
+    "glb": "/simulation-assets/buildings/feed-store-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-frame",
+    "label": "Feed Store \u00b7 frame",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/feed-store-frame.json",
+    "glb": "/simulation-assets/buildings/feed-store-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-roof",
+    "label": "Feed Store \u00b7 roof",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/feed-store-roof.json",
+    "glb": "/simulation-assets/buildings/feed-store-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "feed-store-complete",
+    "label": "Feed Store \u00b7 complete",
+    "category": "buildings",
+    "subject": "feed-store",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/feed-store-complete.json",
+    "glb": "/simulation-assets/buildings/feed-store-complete.glb",
+    "triangles": 6084,
+    "simulationMapping": {
+      "buildingIds": [
+        "feed"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-planned",
+    "label": "Water Point \u00b7 planned",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/water-point-planned.json",
+    "glb": "/simulation-assets/buildings/water-point-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-foundation",
+    "label": "Water Point \u00b7 foundation",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/water-point-foundation.json",
+    "glb": "/simulation-assets/buildings/water-point-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-frame",
+    "label": "Water Point \u00b7 frame",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/water-point-frame.json",
+    "glb": "/simulation-assets/buildings/water-point-frame.glb",
+    "triangles": 1692,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-roof",
+    "label": "Water Point \u00b7 roof",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/water-point-roof.json",
+    "glb": "/simulation-assets/buildings/water-point-roof.glb",
+    "triangles": 3008,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "water-point-complete",
+    "label": "Water Point \u00b7 complete",
+    "category": "buildings",
+    "subject": "water-point",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/water-point-complete.json",
+    "glb": "/simulation-assets/buildings/water-point-complete.glb",
+    "triangles": 3364,
+    "simulationMapping": {
+      "buildingIds": [
+        "water"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-planned",
+    "label": "Cattle Shelter \u00b7 planned",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/cattle-shelter-planned.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-foundation",
+    "label": "Cattle Shelter \u00b7 foundation",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/cattle-shelter-foundation.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-frame",
+    "label": "Cattle Shelter \u00b7 frame",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/cattle-shelter-frame.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-roof",
+    "label": "Cattle Shelter \u00b7 roof",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/cattle-shelter-roof.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "cattle-shelter-complete",
+    "label": "Cattle Shelter \u00b7 complete",
+    "category": "buildings",
+    "subject": "cattle-shelter",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/cattle-shelter-complete.json",
+    "glb": "/simulation-assets/buildings/cattle-shelter-complete.glb",
+    "triangles": 5808,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-cow-*"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-planned",
+    "label": "Goat Shelter \u00b7 planned",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/goat-shelter-planned.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-foundation",
+    "label": "Goat Shelter \u00b7 foundation",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/goat-shelter-foundation.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-frame",
+    "label": "Goat Shelter \u00b7 frame",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/goat-shelter-frame.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-roof",
+    "label": "Goat Shelter \u00b7 roof",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/goat-shelter-roof.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "goat-shelter-complete",
+    "label": "Goat Shelter \u00b7 complete",
+    "category": "buildings",
+    "subject": "goat-shelter",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/goat-shelter-complete.json",
+    "glb": "/simulation-assets/buildings/goat-shelter-complete.glb",
+    "triangles": 5808,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-goat-*"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-planned",
+    "label": "Chicken Coop \u00b7 planned",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/chicken-coop-planned.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "planned",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-foundation",
+    "label": "Chicken Coop \u00b7 foundation",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/chicken-coop-foundation.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "foundation",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-frame",
+    "label": "Chicken Coop \u00b7 frame",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/chicken-coop-frame.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-frame.glb",
+    "triangles": 3196,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "frame",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-roof",
+    "label": "Chicken Coop \u00b7 roof",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/chicken-coop-roof.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-roof.glb",
+    "triangles": 4136,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "roof",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "chicken-coop-complete",
+    "label": "Chicken Coop \u00b7 complete",
+    "category": "buildings",
+    "subject": "chicken-coop",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/chicken-coop-complete.json",
+    "glb": "/simulation-assets/buildings/chicken-coop-complete.glb",
+    "triangles": 6936,
+    "simulationMapping": {
+      "buildingIds": [
+        "build-chicken-*"
+      ],
+      "stage": "complete",
+      "stageNote": ""
+    }
+  },
+  {
+    "id": "kitchen-garden-planned",
+    "label": "Kitchen Garden \u00b7 planned",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "planned",
+    "json": "/simulation-assets/buildings/kitchen-garden-planned.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-planned.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "planned",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "kitchen-garden-foundation",
+    "label": "Kitchen Garden \u00b7 foundation",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "foundation",
+    "json": "/simulation-assets/buildings/kitchen-garden-foundation.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-foundation.glb",
+    "triangles": 1504,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "foundation",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "kitchen-garden-frame",
+    "label": "Kitchen Garden \u00b7 frame",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "frame",
+    "json": "/simulation-assets/buildings/kitchen-garden-frame.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-frame.glb",
+    "triangles": 2820,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "frame",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "kitchen-garden-roof",
+    "label": "Kitchen Garden \u00b7 roof",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "roof",
+    "json": "/simulation-assets/buildings/kitchen-garden-roof.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-roof.glb",
+    "triangles": 3760,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "roof",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  },
+  {
+    "id": "kitchen-garden-complete",
+    "label": "Kitchen Garden \u00b7 complete",
+    "category": "buildings",
+    "subject": "kitchen-garden",
+    "state": "complete",
+    "json": "/simulation-assets/buildings/kitchen-garden-complete.json",
+    "glb": "/simulation-assets/buildings/kitchen-garden-complete.glb",
+    "triangles": 5264,
+    "simulationMapping": {
+      "buildingIds": [
+        "garden"
+      ],
+      "stage": "complete",
+      "stageNote": "Simulator roof phase means finishing trellis and bed preparation; no roof or plant growth implied"
+    }
+  }
+]

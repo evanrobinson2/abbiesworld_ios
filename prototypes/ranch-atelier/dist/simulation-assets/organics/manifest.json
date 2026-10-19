@@ -1,0 +1,352 @@
+[
+  {
+    "id": "horse-idle",
+    "label": "Horse \u00b7 Idle",
+    "category": "organics",
+    "subject": "horse",
+    "state": "idle",
+    "json": "/simulation-assets/organics/horse-idle.json",
+    "glb": "/simulation-assets/organics/horse-idle.glb",
+    "triangles": 5376,
+    "simulationMapping": {
+      "species": "horse",
+      "activities": [
+        "explore",
+        "settling-in"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.567
+  },
+  {
+    "id": "horse-feeding",
+    "label": "Horse \u00b7 Feeding",
+    "category": "organics",
+    "subject": "horse",
+    "state": "feeding",
+    "json": "/simulation-assets/organics/horse-feeding.json",
+    "glb": "/simulation-assets/organics/horse-feeding.glb",
+    "triangles": 5376,
+    "simulationMapping": {
+      "species": "horse",
+      "activities": [
+        "forage",
+        "browse",
+        "scratch",
+        "drink",
+        "supplemental-feeding"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.204
+  },
+  {
+    "id": "horse-rest",
+    "label": "Horse \u00b7 Rest",
+    "category": "organics",
+    "subject": "horse",
+    "state": "rest",
+    "json": "/simulation-assets/organics/horse-rest.json",
+    "glb": "/simulation-assets/organics/horse-rest.glb",
+    "triangles": 5376,
+    "simulationMapping": {
+      "species": "horse",
+      "activities": [
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.251
+  },
+  {
+    "id": "cow-idle",
+    "label": "Cow \u00b7 Idle",
+    "category": "organics",
+    "subject": "cow",
+    "state": "idle",
+    "json": "/simulation-assets/organics/cow-idle.json",
+    "glb": "/simulation-assets/organics/cow-idle.glb",
+    "triangles": 3864,
+    "simulationMapping": {
+      "species": "cow",
+      "activities": [
+        "explore",
+        "settling-in"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.22
+  },
+  {
+    "id": "cow-feeding",
+    "label": "Cow \u00b7 Feeding",
+    "category": "organics",
+    "subject": "cow",
+    "state": "feeding",
+    "json": "/simulation-assets/organics/cow-feeding.json",
+    "glb": "/simulation-assets/organics/cow-feeding.glb",
+    "triangles": 3864,
+    "simulationMapping": {
+      "species": "cow",
+      "activities": [
+        "forage",
+        "browse",
+        "scratch",
+        "drink",
+        "supplemental-feeding"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.242
+  },
+  {
+    "id": "cow-rest",
+    "label": "Cow \u00b7 Rest",
+    "category": "organics",
+    "subject": "cow",
+    "state": "rest",
+    "json": "/simulation-assets/organics/cow-rest.json",
+    "glb": "/simulation-assets/organics/cow-rest.glb",
+    "triangles": 3864,
+    "simulationMapping": {
+      "species": "cow",
+      "activities": [
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.284
+  },
+  {
+    "id": "goat-idle",
+    "label": "Goat \u00b7 Idle",
+    "category": "organics",
+    "subject": "goat",
+    "state": "idle",
+    "json": "/simulation-assets/organics/goat-idle.json",
+    "glb": "/simulation-assets/organics/goat-idle.glb",
+    "triangles": 4032,
+    "simulationMapping": {
+      "species": "goat",
+      "activities": [
+        "explore",
+        "settling-in"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.309
+  },
+  {
+    "id": "goat-feeding",
+    "label": "Goat \u00b7 Feeding",
+    "category": "organics",
+    "subject": "goat",
+    "state": "feeding",
+    "json": "/simulation-assets/organics/goat-feeding.json",
+    "glb": "/simulation-assets/organics/goat-feeding.glb",
+    "triangles": 4032,
+    "simulationMapping": {
+      "species": "goat",
+      "activities": [
+        "forage",
+        "browse",
+        "scratch",
+        "drink",
+        "supplemental-feeding"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.339
+  },
+  {
+    "id": "goat-rest",
+    "label": "Goat \u00b7 Rest",
+    "category": "organics",
+    "subject": "goat",
+    "state": "rest",
+    "json": "/simulation-assets/organics/goat-rest.json",
+    "glb": "/simulation-assets/organics/goat-rest.glb",
+    "triangles": 4032,
+    "simulationMapping": {
+      "species": "goat",
+      "activities": [
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.37
+  },
+  {
+    "id": "chicken-idle",
+    "label": "Chicken \u00b7 Idle",
+    "category": "organics",
+    "subject": "chicken",
+    "state": "idle",
+    "json": "/simulation-assets/organics/chicken-idle.json",
+    "glb": "/simulation-assets/organics/chicken-idle.glb",
+    "triangles": 3732,
+    "simulationMapping": {
+      "species": "chicken",
+      "activities": [
+        "explore",
+        "settling-in"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.411
+  },
+  {
+    "id": "chicken-feeding",
+    "label": "Chicken \u00b7 Feeding",
+    "category": "organics",
+    "subject": "chicken",
+    "state": "feeding",
+    "json": "/simulation-assets/organics/chicken-feeding.json",
+    "glb": "/simulation-assets/organics/chicken-feeding.glb",
+    "triangles": 3732,
+    "simulationMapping": {
+      "species": "chicken",
+      "activities": [
+        "forage",
+        "browse",
+        "scratch",
+        "drink",
+        "supplemental-feeding"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.414
+  },
+  {
+    "id": "chicken-rest",
+    "label": "Chicken \u00b7 Rest",
+    "category": "organics",
+    "subject": "chicken",
+    "state": "rest",
+    "json": "/simulation-assets/organics/chicken-rest.json",
+    "glb": "/simulation-assets/organics/chicken-rest.glb",
+    "triangles": 2388,
+    "simulationMapping": {
+      "species": "chicken",
+      "activities": [
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.289
+  },
+  {
+    "id": "tree-standing",
+    "label": "Tree \u00b7 Standing",
+    "category": "organics",
+    "subject": "tree",
+    "state": "standing",
+    "json": "/simulation-assets/organics/tree-standing.json",
+    "glb": "/simulation-assets/organics/tree-standing.glb",
+    "triangles": 2016,
+    "simulationMapping": {
+      "species": "tree",
+      "activities": [
+        "vegetation"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.25
+  },
+  {
+    "id": "tree-stump",
+    "label": "Tree \u00b7 Stump",
+    "category": "organics",
+    "subject": "tree",
+    "state": "stump",
+    "json": "/simulation-assets/organics/tree-stump.json",
+    "glb": "/simulation-assets/organics/tree-stump.glb",
+    "triangles": 840,
+    "simulationMapping": {
+      "species": "tree",
+      "activities": [
+        "cleared"
+      ],
+      "kind": "static-pose",
+      "note": "Static pose only; movement remains simulation-driven. Tree stump is available visual, not automatic regrowth."
+    },
+    "generationSeconds": 0.116
+  },
+  {
+    "id": "marley-idle",
+    "label": "Marley \u00b7 Idle",
+    "category": "organics",
+    "subject": "marley",
+    "state": "idle",
+    "json": "/simulation-assets/organics/marley-idle.json",
+    "glb": "/simulation-assets/organics/marley-idle.glb",
+    "triangles": 5232,
+    "simulationMapping": {
+      "actor": "marley",
+      "species": "dog",
+      "activities": [
+        "walking",
+        "walking-home",
+        "idle"
+      ],
+      "kind": "static-pose",
+      "note": "Retriever worker; carried pose shows one small stick for cargo > 0. Not an animation."
+    },
+    "generationSeconds": 0.678
+  },
+  {
+    "id": "marley-carried",
+    "label": "Marley \u00b7 Carried",
+    "category": "organics",
+    "subject": "marley",
+    "state": "carried",
+    "json": "/simulation-assets/organics/marley-carried.json",
+    "glb": "/simulation-assets/organics/marley-carried.glb",
+    "triangles": 5568,
+    "simulationMapping": {
+      "actor": "marley",
+      "species": "dog",
+      "activities": [
+        "hauling",
+        "carrying"
+      ],
+      "kind": "static-pose",
+      "note": "Retriever worker; carried pose shows one small stick for cargo > 0. Not an animation."
+    },
+    "generationSeconds": 0.205
+  },
+  {
+    "id": "marley-rest",
+    "label": "Marley \u00b7 Rest",
+    "category": "organics",
+    "subject": "marley",
+    "state": "rest",
+    "json": "/simulation-assets/organics/marley-rest.json",
+    "glb": "/simulation-assets/organics/marley-rest.glb",
+    "triangles": 5232,
+    "simulationMapping": {
+      "actor": "marley",
+      "species": "dog",
+      "activities": [
+        "resting",
+        "rest"
+      ],
+      "kind": "static-pose",
+      "note": "Retriever worker; carried pose shows one small stick for cargo > 0. Not an animation."
+    },
+    "generationSeconds": 0.229
+  }
+]

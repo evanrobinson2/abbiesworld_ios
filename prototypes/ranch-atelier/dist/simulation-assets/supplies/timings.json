@@ -1,0 +1,98 @@
+{
+  "assets": [
+    {
+      "id": "wood-full",
+      "generationAndExportSeconds": 0.667
+    },
+    {
+      "id": "wood-partial",
+      "generationAndExportSeconds": 0.164
+    },
+    {
+      "id": "wood-empty",
+      "generationAndExportSeconds": 0.074
+    },
+    {
+      "id": "wood-carried",
+      "generationAndExportSeconds": 0.111
+    },
+    {
+      "id": "hay-full",
+      "generationAndExportSeconds": 0.33
+    },
+    {
+      "id": "hay-partial",
+      "generationAndExportSeconds": 0.39
+    },
+    {
+      "id": "hay-empty",
+      "generationAndExportSeconds": 0.271
+    },
+    {
+      "id": "hay-carried",
+      "generationAndExportSeconds": 0.049
+    },
+    {
+      "id": "ration-full",
+      "generationAndExportSeconds": 0.129
+    },
+    {
+      "id": "ration-partial",
+      "generationAndExportSeconds": 0.136
+    },
+    {
+      "id": "ration-empty",
+      "generationAndExportSeconds": 0.085
+    },
+    {
+      "id": "ration-carried",
+      "generationAndExportSeconds": 0.142
+    },
+    {
+      "id": "water-trough-full",
+      "generationAndExportSeconds": 0.182
+    },
+    {
+      "id": "water-trough-partial",
+      "generationAndExportSeconds": 0.196
+    },
+    {
+      "id": "water-trough-empty",
+      "generationAndExportSeconds": 0.171
+    },
+    {
+      "id": "water-bucket-full",
+      "generationAndExportSeconds": 0.699
+    },
+    {
+      "id": "water-bucket-partial",
+      "generationAndExportSeconds": 0.813
+    },
+    {
+      "id": "water-bucket-empty",
+      "generationAndExportSeconds": 0.886
+    },
+    {
+      "id": "water-bucket-carried",
+      "generationAndExportSeconds": 1.055
+    },
+    {
+      "id": "compost-full",
+      "generationAndExportSeconds": 0.5
+    },
+    {
+      "id": "compost-partial",
+      "generationAndExportSeconds": 0.499
+    },
+    {
+      "id": "compost-empty",
+      "generationAndExportSeconds": 0.448
+    },
+    {
+      "id": "compost-carried",
+      "generationAndExportSeconds": 0.071
+    }
+  ],
+  "totalSeconds": 8.092,
+  "excludes": "script authoring, visual review, deployment"
+}

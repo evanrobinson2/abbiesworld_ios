@@ -1,0 +1,548 @@
+[
+  {
+    "id": "wood-full",
+    "label": "Timber \u00b7 full",
+    "category": "supplies",
+    "subject": "wood",
+    "state": "full",
+    "json": "/simulation-assets/supplies/wood-full.json",
+    "glb": "/simulation-assets/supplies/wood-full.glb",
+    "triangles": 9308,
+    "simulationMapping": {
+      "resources": [
+        "wood"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "sources[].stock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "wood-partial",
+    "label": "Timber \u00b7 partial",
+    "category": "supplies",
+    "subject": "wood",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/wood-partial.json",
+    "glb": "/simulation-assets/supplies/wood-partial.glb",
+    "triangles": 3980,
+    "simulationMapping": {
+      "resources": [
+        "wood"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "sources[].stock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "wood-empty",
+    "label": "Timber \u00b7 empty",
+    "category": "supplies",
+    "subject": "wood",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/wood-empty.json",
+    "glb": "/simulation-assets/supplies/wood-empty.glb",
+    "triangles": 1316,
+    "simulationMapping": {
+      "resources": [
+        "wood"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "sources[].stock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "wood-carried",
+    "label": "Timber \u00b7 carried",
+    "category": "supplies",
+    "subject": "wood",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/wood-carried.json",
+    "glb": "/simulation-assets/supplies/wood-carried.glb",
+    "triangles": 2664,
+    "simulationMapping": {
+      "resources": [
+        "wood"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "sources[].stock"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "hay-full",
+    "label": "Hay feeder \u00b7 full",
+    "category": "supplies",
+    "subject": "hay",
+    "state": "full",
+    "json": "/simulation-assets/supplies/hay-full.json",
+    "glb": "/simulation-assets/supplies/hay-full.glb",
+    "triangles": 6400,
+    "simulationMapping": {
+      "resources": [
+        "forage",
+        "equine-fibre",
+        "cattle-forage",
+        "goat-forage",
+        "sheep-forage",
+        "camelid-forage",
+        "rabbit-hay-and-ration"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "hay-partial",
+    "label": "Hay feeder \u00b7 partial",
+    "category": "supplies",
+    "subject": "hay",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/hay-partial.json",
+    "glb": "/simulation-assets/supplies/hay-partial.glb",
+    "triangles": 6400,
+    "simulationMapping": {
+      "resources": [
+        "forage",
+        "equine-fibre",
+        "cattle-forage",
+        "goat-forage",
+        "sheep-forage",
+        "camelid-forage",
+        "rabbit-hay-and-ration"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "hay-empty",
+    "label": "Hay feeder \u00b7 empty",
+    "category": "supplies",
+    "subject": "hay",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/hay-empty.json",
+    "glb": "/simulation-assets/supplies/hay-empty.glb",
+    "triangles": 3964,
+    "simulationMapping": {
+      "resources": [
+        "forage",
+        "equine-fibre",
+        "cattle-forage",
+        "goat-forage",
+        "sheep-forage",
+        "camelid-forage",
+        "rabbit-hay-and-ration"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "hay-carried",
+    "label": "Hay feeder \u00b7 carried",
+    "category": "supplies",
+    "subject": "hay",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/hay-carried.json",
+    "glb": "/simulation-assets/supplies/hay-carried.glb",
+    "triangles": 764,
+    "simulationMapping": {
+      "resources": [
+        "forage",
+        "equine-fibre",
+        "cattle-forage",
+        "goat-forage",
+        "sheep-forage",
+        "camelid-forage",
+        "rabbit-hay-and-ration"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "ration-full",
+    "label": "Ration sack \u00b7 full",
+    "category": "supplies",
+    "subject": "ration",
+    "state": "full",
+    "json": "/simulation-assets/supplies/ration-full.json",
+    "glb": "/simulation-assets/supplies/ration-full.glb",
+    "triangles": 1736,
+    "simulationMapping": {
+      "resources": [
+        "pig-ration",
+        "chicken-ration",
+        "turkey-ration",
+        "duck-ration",
+        "goose-ration",
+        "dog-food"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "ration-partial",
+    "label": "Ration sack \u00b7 partial",
+    "category": "supplies",
+    "subject": "ration",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/ration-partial.json",
+    "glb": "/simulation-assets/supplies/ration-partial.glb",
+    "triangles": 1736,
+    "simulationMapping": {
+      "resources": [
+        "pig-ration",
+        "chicken-ration",
+        "turkey-ration",
+        "duck-ration",
+        "goose-ration",
+        "dog-food"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "ration-empty",
+    "label": "Ration sack \u00b7 empty",
+    "category": "supplies",
+    "subject": "ration",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/ration-empty.json",
+    "glb": "/simulation-assets/supplies/ration-empty.glb",
+    "triangles": 896,
+    "simulationMapping": {
+      "resources": [
+        "pig-ration",
+        "chicken-ration",
+        "turkey-ration",
+        "duck-ration",
+        "goose-ration",
+        "dog-food"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "ration-carried",
+    "label": "Ration sack \u00b7 carried",
+    "category": "supplies",
+    "subject": "ration",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/ration-carried.json",
+    "glb": "/simulation-assets/supplies/ration-carried.glb",
+    "triangles": 1736,
+    "simulationMapping": {
+      "resources": [
+        "pig-ration",
+        "chicken-ration",
+        "turkey-ration",
+        "duck-ration",
+        "goose-ration",
+        "dog-food"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].foodStock"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-trough-full",
+    "label": "Water trough \u00b7 full",
+    "category": "supplies",
+    "subject": "water-trough",
+    "state": "full",
+    "json": "/simulation-assets/supplies/water-trough-full.json",
+    "glb": "/simulation-assets/supplies/water-trough-full.glb",
+    "triangles": 1792,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-trough-partial",
+    "label": "Water trough \u00b7 partial",
+    "category": "supplies",
+    "subject": "water-trough",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/water-trough-partial.json",
+    "glb": "/simulation-assets/supplies/water-trough-partial.glb",
+    "triangles": 1792,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-trough-empty",
+    "label": "Water trough \u00b7 empty",
+    "category": "supplies",
+    "subject": "water-trough",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/water-trough-empty.json",
+    "glb": "/simulation-assets/supplies/water-trough-empty.glb",
+    "triangles": 1316,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-bucket-full",
+    "label": "Water bucket \u00b7 full",
+    "category": "supplies",
+    "subject": "water-bucket",
+    "state": "full",
+    "json": "/simulation-assets/supplies/water-bucket-full.json",
+    "glb": "/simulation-assets/supplies/water-bucket-full.glb",
+    "triangles": 6824,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-bucket-partial",
+    "label": "Water bucket \u00b7 partial",
+    "category": "supplies",
+    "subject": "water-bucket",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/water-bucket-partial.json",
+    "glb": "/simulation-assets/supplies/water-bucket-partial.glb",
+    "triangles": 6824,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-bucket-empty",
+    "label": "Water bucket \u00b7 empty",
+    "category": "supplies",
+    "subject": "water-bucket",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/water-bucket-empty.json",
+    "glb": "/simulation-assets/supplies/water-bucket-empty.glb",
+    "triangles": 6572,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "water-bucket-carried",
+    "label": "Water bucket \u00b7 carried",
+    "category": "supplies",
+    "subject": "water-bucket",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/water-bucket-carried.json",
+    "glb": "/simulation-assets/supplies/water-bucket-carried.glb",
+    "triangles": 6824,
+    "simulationMapping": {
+      "resources": [
+        "water"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "careStock",
+        "habitats[].waterStock"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "compost-full",
+    "label": "Compost bin \u00b7 full",
+    "category": "supplies",
+    "subject": "compost",
+    "state": "full",
+    "json": "/simulation-assets/supplies/compost-full.json",
+    "glb": "/simulation-assets/supplies/compost-full.glb",
+    "triangles": 2592,
+    "simulationMapping": {
+      "resources": [
+        "manure"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "compost",
+        "cleaningJobs"
+      ],
+      "stateRule": "stock above midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "compost-partial",
+    "label": "Compost bin \u00b7 partial",
+    "category": "supplies",
+    "subject": "compost",
+    "state": "partial",
+    "json": "/simulation-assets/supplies/compost-partial.json",
+    "glb": "/simulation-assets/supplies/compost-partial.glb",
+    "triangles": 2592,
+    "simulationMapping": {
+      "resources": [
+        "manure"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "compost",
+        "cleaningJobs"
+      ],
+      "stateRule": "stock positive below midpoint",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "compost-empty",
+    "label": "Compost bin \u00b7 empty",
+    "category": "supplies",
+    "subject": "compost",
+    "state": "empty",
+    "json": "/simulation-assets/supplies/compost-empty.json",
+    "glb": "/simulation-assets/supplies/compost-empty.glb",
+    "triangles": 2256,
+    "simulationMapping": {
+      "resources": [
+        "manure"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "compost",
+        "cleaningJobs"
+      ],
+      "stateRule": "stock zero",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  },
+  {
+    "id": "compost-carried",
+    "label": "Compost bin \u00b7 carried",
+    "category": "supplies",
+    "subject": "compost",
+    "state": "carried",
+    "json": "/simulation-assets/supplies/compost-carried.json",
+    "glb": "/simulation-assets/supplies/compost-carried.glb",
+    "triangles": 356,
+    "simulationMapping": {
+      "resources": [
+        "manure"
+      ],
+      "source": "simulation-worker.js",
+      "stockFields": [
+        "compost",
+        "cleaningJobs"
+      ],
+      "stateRule": "worker cargo positive",
+      "note": "Visual stock thresholds are presentation choices, not new simulation mechanics."
+    }
+  }
+]

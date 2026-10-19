@@ -1,0 +1,21 @@
+{
+  "assets": 14,
+  "generationAndExportSeconds": 4.283,
+  "excludes": "Script authoring, visual review and rendering",
+  "perAsset": {
+    "horse-idle": 0.567,
+    "horse-feeding": 0.204,
+    "horse-rest": 0.251,
+    "cow-idle": 0.22,
+    "cow-feeding": 0.242,
+    "cow-rest": 0.284,
+    "goat-idle": 0.309,
+    "goat-feeding": 0.339,
+    "goat-rest": 0.37,
+    "chicken-idle": 0.411,
+    "chicken-feeding": 0.414,
+    "chicken-rest": 0.289,
+    "tree-standing": 0.25,
+    "tree-stump": 0.116
+  }
+}
