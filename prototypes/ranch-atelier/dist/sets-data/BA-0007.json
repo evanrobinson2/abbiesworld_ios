@@ -1,0 +1,51 @@
+{
+  "id": "aw.ranch.asset.ba-0007",
+  "name": "Market canopy corner",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 37,
+    "triangles": 1020,
+    "bounds_min": [
+      -0.10200000554323196,
+      -0.10200000554323196,
+      0.0
+    ],
+    "bounds_max": [
+      1.6988908052444458,
+      1.6988908052444458,
+      2.903456211090088
+    ],
+    "dimensions_m": [
+      1.8009,
+      1.8009,
+      2.9035
+    ],
+    "material_slots": [
+      "Timber",
+      "TimberLight",
+      "Rope",
+      "Reed"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "Timber",
+    "TimberLight",
+    "Rope",
+    "Reed"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0007",
+  "intent": "A corner roof piece connecting two perpendicular stall fronts.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0007",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

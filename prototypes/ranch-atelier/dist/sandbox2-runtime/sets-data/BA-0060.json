@@ -1,0 +1,57 @@
+{
+  "id": "aw.ranch.asset.ba-0060",
+  "name": "Bead merchant display",
+  "dependencies": [
+    "BA-0029"
+  ],
+  "geometry": {
+    "mesh_objects": 51,
+    "triangles": 5860,
+    "bounds_min": [
+      -0.3425000011920929,
+      -0.23250000178813934,
+      0.0
+    ],
+    "bounds_max": [
+      0.3425000011920929,
+      0.23250000178813934,
+      0.10999999940395355
+    ],
+    "dimensions_m": [
+      0.685,
+      0.465,
+      0.11
+    ],
+    "material_slots": [
+      "Rope",
+      "Bead",
+      "Timber",
+      "ClayLight",
+      "TimberLight",
+      "Stone"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 6
+  },
+  "materials": [
+    "Rope",
+    "Bead",
+    "Timber",
+    "ClayLight",
+    "TimberLight",
+    "Stone"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Bead strings have modeled beads but no drilled bores.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0060",
+  "intent": "Bead strings, loose beads, and small sample stones in trays.",
+  "family": "Craft displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0060",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

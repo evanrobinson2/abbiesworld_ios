@@ -1,0 +1,49 @@
+{
+  "id": "aw.ranch.asset.ba-0002",
+  "name": "Cloth shade stall",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 60,
+    "triangles": 3464,
+    "bounds_min": [
+      -1.663131594657898,
+      -1.1831201314926147,
+      -0.0006375906523317099
+    ],
+    "bounds_max": [
+      1.663131594657898,
+      1.1843398809432983,
+      2.643839120864868
+    ],
+    "dimensions_m": [
+      3.3263,
+      2.3675,
+      2.6445
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Rope",
+      "Timber",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "TimberLight",
+    "Rope",
+    "Timber",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0002",
+  "intent": "Four freestanding posts, fabric canopy, and visible rope ties.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0002",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

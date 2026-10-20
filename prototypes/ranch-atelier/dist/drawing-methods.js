@@ -43,7 +43,43 @@ const groups=[[28,51,14,13],[38,33,16,15],[56,24,18,14],[77,29,17,15],[91,45,16,
 for(const [xx,yy,rx,ry]of groups){const x=xx+(r()-.5)*4,y=yy+(r()-.5)*3,pts=[];for(let i=0;i<30;i++){const a=i/30*Math.PI*2,q=.89+r()*.13;pts.push([x+Math.cos(a)*rx*q,y+Math.sin(a)*ry*q]);}poly(pts,autumn?'#d6a248':'#84965a','wash','Mass foliage before details');const lower=pts.slice(0,16).concat(pts.slice(0,16).reverse().map(([px,py])=>[x+(px-x)*.75,y+(py-y)*.45-1]));poly(lower,autumn?'#ab653e':'#566b44','shade','Sheltered lower canopy');for(let k=0;k<36;k++){const a=r()*6.283,rr=Math.sqrt(r()),lx=x+Math.cos(a)*rx*rr,ly=y+Math.sin(a)*ry*rr;mapleLeaf(lx,ly,1.2+r()*1.3,(r()-.5)*1.7,autumn?['#d6ac4a','#c9823e','#b85f36'][k%3]:['#78914c','#95a765','#587640'][k%3]);if(k%5===0)stroke([lx-1,ly],[lx,ly+.6],[lx+1.3,ly-.3],.16,autumn?'#8c613c':'#4f6540','detail','line','Selective leaf overlap');}}
 }else for(const [x,y]of tips){line([x,y],[x-.5,y-1.1],.25,'#79664c','detail','Pointed winter bud');}
 for(let i=0;i<13;i++){const y=77+r()*20,x=56+r()*5;stroke([x,y],[x-.5,y-2],[x+.3,y-4-r()*3],.15,'#5e5b4c','detail','hatch','Long discontinuous bark furrow');}}
-if(id.startsWith('maple'))maple();
+
+// Map icons: connected branch gestures, then loaded brush sweeps; no leaf stamps.
+function paintedTree(cedar=false){
+const autumn=id==='maple-autumn';
+const paint=(a,c,b,w,col,layer='wash')=>{stroke(a,c,b,w,col,layer,'paint','Loaded brush follows foliage volume');items.at(-1).brush='dry';};
+paint([37,100],[60,97],[83,100],3,'#b5af89');
+if(cedar){
+limb([58,98],[68,79],[57,61],10);limb([60,83],[44,68],[40,44],6);
+limb([61,79],[76,63],[78,43],4.8);limb([58,64],[62,46],[54,27],4);
+limb([48,65],[33,56],[22,47],3.2);limb([64,58],[78,48],[96,43],2.6);
+limb([58,96],[46,99],[34,100],3);limb([61,95],[70,99],[81,100],2);
+}else{
+limb([59,99],[55,80],[59,56],7);limb([58,79],[43,65],[32,47],4);
+limb([58,71],[74,60],[84,43],3.5);limb([58,62],[52,44],[52,29],3);
+limb([58,61],[68,42],[71,30],2.6);limb([58,97],[48,100],[40,101],2.5);
+limb([60,97],[68,100],[77,100],1.8);
+}
+const groups=cedar?[[29,43,17,8],[48,30,19,11],[69,29,18,10],[86,39,17,9],[73,49,19,10],[43,48,18,9]]:[[31,53,15,14],[36,35,16,15],[54,25,17,15],[73,29,16,15],[88,45,15,16],[77,58,16,12],[51,49,20,17],[43,62,16,10]];
+// Each mass is interwoven sweeps with a shared light direction. Lifted tips break the silhouette.
+for(const [cx,cy,rx,ry] of groups){
+for(let pass=0;pass<3;pass++){
+const count=pass===0?12:pass===1?16:11;
+for(let j=0;j<count;j++){
+const a=r()*Math.PI*2,rad=Math.sqrt(r()),x=cx+Math.cos(a)*rx*rad*.85,y=cy+Math.sin(a)*ry*rad*.8;
+const lit=(cy-y)/ry;const colors=autumn?['#99603b','#bb7c3d','#d2a352','#e0ba69']:cedar?['#465a43','#627351','#83906a','#a5ac81']:['#50623e','#71814b','#95a45f','#b4bc7c'];
+const index=pass===0?1:pass===1?(lit<-.1?0:1):(lit<-.2?1:lit>.15?3:2);
+const len=(cedar?6:4)+r()*5,dir=x<cx?-1:1;
+paint([x-dir*len*.5,y+1.5],[x,y-1-r()*2],[x+dir*len*.6,y-(cedar?1.2:2.8)],(pass===0?7:pass===1?4.6:3)*( .65+r()*.6),colors[index],pass===0?'wash':pass===1?'shade':'detail');
+}
+}
+}
+// A few exposed twig gestures at the edge; the crown conceals the rest.
+if(cedar)for(const [a,c,b] of [[[40,56],[30,58],[22,54]],[[76,57],[86,53],[91,48]],[[56,34],[43,32],[37,29]]])stroke(a,c,b,.3,'#68664c','detail','line','Exposed tapering twig');
+}
+
+if(['old-tree','maple','maple-autumn'].includes(id))paintedTree(id==='old-tree');
+else if(id.startsWith('maple'))maple();
 else if(['old-tree','pine','broadleaf','shrub','willow'].includes(id))tree(id);
 else if(id==='fern')fern();
 else if(id==='barn'||id==='farmhouse'){ground(60,92,45);building(26,91,1.02,id==='farmhouse');}
@@ -53,11 +89,23 @@ else if(id==='garden'){for(let i=0;i<4;i++){const x=17+i%2*49,y=30+Math.floor(i/
 else if(id==='rocks'){ground();for(const [x,y,w]of [[33,80,22],[80,86,23],[64,53,16]]){const a=[x-w,y],b=[x-w*.6,y-w*.8],c=[x+w*.3,y-w],d=[x+w,y-w*.2],e=[x+w*.6,y+3],f=[x-w*.5,y+4],mid=[x,y-w*.3];poly([a,b,c,d,e,f],'#b9b9a1');poly([mid,c,d,e,f],'#8d9b88','shade');for(const [p,q]of [[a,b],[b,c],[d,e],[e,f],[f,a],[c,mid],[mid,e]])line(p,q,.25,'#697560');for(let j=0;j<7;j++)line([mid[0]+j,mid[1]+j*.6],[mid[0]+j+3,mid[1]+j*.6+5],.13,'#788572','detail');}}
 else if(id==='brook'||id==='path')stream(id==='path');
 else if(id==='map-study'){poly([[8,12],[112,12],[112,101],[8,101]],'#e3dfbf');poly([[12,16],[48,20],[42,44],[10,38]],'#bcc18d');poly([[77,69],[109,62],[109,96],[80,99]],'#c4c79b');poly([[53,12],[60,12],[57,38],[69,64],[57,101],[49,101],[61,64],[49,38]],'#a6c4bd');stroke([25,101],[29,61],[98,42],2.8,'#ccb58b','wash','line','Route connects farm and crossing');stroke([25,101],[29,61],[98,42],.25,'#9b8968','ink');for(let i=0;i<5;i++)line([55+i*2,56],[58+i*2,65],.55,'#736b4f','ink','Bridge deck');building(78,41,.4);for(let i=0;i<14;i++){const x=14+r()*29,y=16+r()*25;crown(x,y,3.5,2.8);line([x,y+2],[x,y+5],.25);}for(let i=0;i<7;i++)line([80,74+i*3],[106,67+i*3],.2,'#9aa16d','detail','Cultivated field rows');for(let i=0;i<12;i++)grass(15+r()*31,62+r()*27,.6);}
-return {id,seed,items};}
+return {id,seed,items,painterly:['old-tree','maple','maple-autumn'].includes(id)};}
 function render(plan,method,tool='brush'){const layers={structure:[],wash:[],shade:[],ink:[],detail:[]},strokes=[],r=rand(plan.seed+7001),sim=method==='simulation';const mark=(tag,a)=>({tag,a}),path=pts=>'M'+pts.map(p=>p.map(v=>v.toFixed(3)).join(',')).join('L');
 // Texture is deposited inside the same shape as its parent wash.
 const inside=(p,poly)=>{let hit=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if((a[1]>p[1])!==(b[1]>p[1])&&p[0]<(b[0]-a[0])*(p[1]-a[1])/(b[1]-a[1])+a[0])hit=!hit;}return hit;};
-for(const item of plan.items){const {points,width,color,kind,layer}=item;let marks=[];if(kind==='wash'){const rounded=item.purpose==='Mass foliage before details';const d=rounded?'M'+lerp(points.at(-1),points[0],.5).join(',')+points.map((p,i)=>'Q'+p.join(',')+' '+lerp(p,points[(i+1)%points.length],.5).join(',')).join('')+'Z':path(points)+'Z';marks.push(mark('path',{d,fill:color,opacity:sim&&tool==='brush'?.38:method==='current'?.65:.58}));if(sim&&tool==='brush'){
+for(const item of plan.items){const {points,width,color,kind,layer}=item;let marks=[];if(kind==='paint'&&(!sim||tool==='brush')){
+const [a,c,b]=points,phase=r()*6.28;
+// Broken bristle ribbons share the same trajectory and pressure envelope.
+for(let br=0;br<9;br++){
+const left=[],right=[],offset=(br-4)/9,bristle=.065+r()*.055;
+for(let j=0;j<=24;j++){const t=j/24,u=1-t,dx=2*u*(c[0]-a[0])+2*t*(b[0]-c[0]),dy=2*u*(c[1]-a[1])+2*t*(b[1]-c[1]),len=Math.hypot(dx,dy)||1,nx=-dy/len,ny=dx/len;
+const pressure=Math.pow(Math.sin(Math.PI*(.035+t*.94)),.55)*(1+.13*Math.sin(t*19+phase+br*.6));
+const x=u*u*a[0]+2*u*t*c[0]+t*t*b[0],y=u*u*a[1]+2*u*t*c[1]+t*t*b[1],w=width*pressure;
+left.push([x+nx*w*(offset+bristle),y+ny*w*(offset+bristle)]);right.unshift([x+nx*w*(offset-bristle),y+ny*w*(offset-bristle)]);
+}marks.push(mark('path',{d:path(left.concat(right))+'Z',fill:color,opacity:.26+r()*.18}));
+}
+layers.structure.push(mark('path',{d:'M'+a+'Q'+c+' '+b,fill:'none',stroke:'#9c9072','stroke-width':.12,opacity:.35}));
+}else if(kind==='wash'){const rounded=item.purpose==='Mass foliage before details';const d=rounded?'M'+lerp(points.at(-1),points[0],.5).join(',')+points.map((p,i)=>'Q'+p.join(',')+' '+lerp(p,points[(i+1)%points.length],.5).join(',')).join('')+'Z':path(points)+'Z';marks.push(mark('path',{d,fill:color,opacity:sim&&tool==='brush'?.38:method==='current'?.65:.58}));if(sim&&tool==='brush'){
 // Wet pigment settles selectively on the lower edge, without outlining every plane.
 const cy=points.reduce((v,p)=>v+p[1],0)/points.length;
 for(let j=0;j<points.length;j++){const a=points[j],b=points[(j+1)%points.length];if((a[1]+b[1])/2>cy)marks.push(mark('path',{d:path([a,b]),fill:'none',stroke:color,'stroke-width':.22,opacity:.15,'stroke-linecap':'round'}));}
@@ -73,7 +121,7 @@ if(sim&&tool!=='brush')for(const m of marks){if(m.a.fill&&m.a.fill!=='none')m.a.
 if(item.obscured)for(const m of marks)m.a.opacity=(m.a.opacity||1)*.08;
 const rec={...item,marks,tool:sim?tool:'pen + wash',duration:kind==='wash'?900:Math.max(100,Math.hypot(points.at(-1)[0]-points[0][0],points.at(-1)[1]-points[0][1])*30),brush:item.brush};strokes.push(rec);layers[layer].push(...marks);}
 // A painter lays broad masses before shade, contours and finishing accents.
-const order=['wash','shade','ink','detail'];strokes.sort((a,b)=>order.indexOf(a.layer)-order.indexOf(b.layer));return {id:plan.id,seed:plan.seed,layers,strokes,method,tool};}
+const order=['wash','shade','ink','detail'];if(!plan.painterly)strokes.sort((a,b)=>order.indexOf(a.layer)-order.indexOf(b.layer));return {id:plan.id,seed:plan.seed,layers,strokes,method,tool};}
 function build(id,seed,method='gesture',tool='brush'){if(method==='current'&&D.subjects.some(s=>s.id===id))return D.build(id,seed);return render(plan(id,seed),method,tool);}
 root.DrawingMethods={subjects,methods,descriptions,plan,render,build};if(typeof module!=='undefined')module.exports=root.DrawingMethods;
 })(typeof window!=='undefined'?window:globalThis);

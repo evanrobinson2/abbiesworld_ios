@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0017",
+  "name": "Bronze goods display board",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 17,
+    "triangles": 636,
+    "bounds_min": [
+      -0.5950000286102295,
+      -0.26499998569488525,
+      0.0
+    ],
+    "bounds_max": [
+      0.5950000286102295,
+      0.38499999046325684,
+      1.4549999237060547
+    ],
+    "dimensions_m": [
+      1.19,
+      0.65,
+      1.455
+    ],
+    "material_slots": [
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0017",
+  "intent": "A plain timber panel with pegs and resting ledges for tools.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0017",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

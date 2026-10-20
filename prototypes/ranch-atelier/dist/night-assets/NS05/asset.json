@@ -1,0 +1,1254 @@
+{
+  "name": "Weathered Blue Street Mailbox",
+  "rationale": "A full-scale public mailbox with a segmented barrel-curved roof, open deposit slot, inset service door, exposed hinges, blank letter plate and recessed lock. Folded seams, substantial legs, muted hardware and localized paint wear provide readable construction detail without text. The slot remains an actual opening between separate structural pieces, with a recessed internal baffle.",
+  "dimensionsM": {
+    "width": 0.5,
+    "depth": 0.46,
+    "height": 1.05,
+    "rotationUnits": "degrees",
+    "coordinateSystem": "X and Y horizontal, Z up",
+    "groundZ": 0,
+    "frontDirection": [
+      0,
+      -1,
+      0
+    ]
+  },
+  "animation": {
+    "implemented": false,
+    "partAxes": [
+      {
+        "part": "access_door",
+        "motion": "hinged rotation",
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "pivot": [
+          -0.198,
+          -0.22,
+          0.5
+        ],
+        "rangeDegrees": [
+          -105,
+          0
+        ],
+        "attachedParts": [
+          "blank_letter_plate",
+          "plate_fastener_left",
+          "plate_fastener_right",
+          "lock_bezel",
+          "lock_core",
+          "lock_keyway",
+          "door_lower_paint_loss",
+          "door_edge_scuff",
+          "hinge_leaf_upper",
+          "hinge_leaf_lower"
+        ]
+      }
+    ]
+  },
+  "parts": [
+    {
+      "name": "body_left_wall",
+      "primitive": "box",
+      "colorhex": "#35576B",
+      "location": [
+        -0.238,
+        0,
+        0.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.024,
+        0.42,
+        0.62
+      ]
+    },
+    {
+      "name": "body_right_wall",
+      "primitive": "box",
+      "colorhex": "#3B5E72",
+      "location": [
+        0.238,
+        0,
+        0.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.024,
+        0.42,
+        0.62
+      ]
+    },
+    {
+      "name": "rear_wall",
+      "primitive": "box",
+      "colorhex": "#345569",
+      "location": [
+        0,
+        0.198,
+        0.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.452,
+        0.024,
+        0.62
+      ]
+    },
+    {
+      "name": "body_bottom_pan",
+      "primitive": "box",
+      "colorhex": "#294452",
+      "location": [
+        0,
+        0,
+        0.232
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.476,
+        0.408,
+        0.024
+      ]
+    },
+    {
+      "name": "left_curved_end_panel",
+      "primitive": "cylinder",
+      "colorhex": "#3C5F73",
+      "location": [
+        -0.238,
+        0,
+        0.838
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.203,
+      "depth": 0.024
+    },
+    {
+      "name": "right_curved_end_panel",
+      "primitive": "cylinder",
+      "colorhex": "#42677A",
+      "location": [
+        0.238,
+        0,
+        0.838
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.203,
+      "depth": 0.024
+    },
+    {
+      "name": "roof_segment_front_steep",
+      "primitive": "box",
+      "colorhex": "#3C6075",
+      "location": [
+        0,
+        -0.2035,
+        0.8685
+      ],
+      "rotation": [
+        79.9,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.076,
+        0.018
+      ]
+    },
+    {
+      "name": "roof_segment_front_upper",
+      "primitive": "box",
+      "colorhex": "#42677B",
+      "location": [
+        0,
+        -0.179,
+        0.937
+      ],
+      "rotation": [
+        60.64,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.0755,
+        0.018
+      ]
+    },
+    {
+      "name": "roof_segment_front_shoulder",
+      "primitive": "box",
+      "colorhex": "#486D80",
+      "location": [
+        0,
+        -0.133,
+        0.9925
+      ],
+      "rotation": [
+        40,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.075,
+        0.018
+      ]
+    },
+    {
+      "name": "roof_segment_front_crown",
+      "primitive": "box",
+      "colorhex": "#4B7082",
+      "location": [
+        0,
+        -0.07075,
+        1.0285
+      ],
+      "rotation": [
+        20.05,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.075,
+        0.018
+      ]
+    },
+    {
+      "name": "roof_segment_crown",
+      "primitive": "box",
+      "colorhex": "#4D7183",
+      "location": [
+        0,
+        0,
+        1.041
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.075,
+        0.018
+      ]
+    },
+    {
+      "name": "roof_segment_rear_crown",
+      "primitive": "box",
+      "colorhex": "#476B7D",
+      "location": [
+        0,
+        0.07075,
+        1.0285
+      ],
+      "rotation": [
+        -20.05,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.075,
+        0.018
+      ]
+    },
+    {
+      "name": "roof_segment_rear_shoulder",
+      "primitive": "box",
+      "colorhex": "#406477",
+      "location": [
+        0,
+        0.133,
+        0.9925
+      ],
+      "rotation": [
+        -40,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.075,
+        0.018
+      ]
+    },
+    {
+      "name": "roof_segment_rear_upper",
+      "primitive": "box",
+      "colorhex": "#395D71",
+      "location": [
+        0,
+        0.179,
+        0.937
+      ],
+      "rotation": [
+        -60.64,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.0755,
+        0.018
+      ]
+    },
+    {
+      "name": "roof_segment_rear_steep",
+      "primitive": "box",
+      "colorhex": "#34566A",
+      "location": [
+        0,
+        0.2035,
+        0.8685
+      ],
+      "rotation": [
+        -79.9,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.5,
+        0.076,
+        0.018
+      ]
+    },
+    {
+      "name": "front_left_frame_stile",
+      "primitive": "box",
+      "colorhex": "#35596F",
+      "location": [
+        -0.226,
+        -0.199,
+        0.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.048,
+        0.022,
+        0.62
+      ]
+    },
+    {
+      "name": "front_right_frame_stile",
+      "primitive": "box",
+      "colorhex": "#3B6075",
+      "location": [
+        0.226,
+        -0.199,
+        0.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.048,
+        0.022,
+        0.62
+      ]
+    },
+    {
+      "name": "front_lower_sill",
+      "primitive": "box",
+      "colorhex": "#2D4D60",
+      "location": [
+        0,
+        -0.199,
+        0.245
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.404,
+        0.022,
+        0.05
+      ]
+    },
+    {
+      "name": "door_header_and_slot_sill",
+      "primitive": "box",
+      "colorhex": "#3D6277",
+      "location": [
+        0,
+        -0.199,
+        0.751
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.404,
+        0.022,
+        0.042
+      ]
+    },
+    {
+      "name": "slot_upper_header",
+      "primitive": "box",
+      "colorhex": "#35576C",
+      "location": [
+        0,
+        -0.199,
+        0.829
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.404,
+        0.022,
+        0.022
+      ]
+    },
+    {
+      "name": "slot_left_jamb",
+      "primitive": "box",
+      "colorhex": "#304F61",
+      "location": [
+        -0.191,
+        -0.199,
+        0.795
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.022,
+        0.022,
+        0.046
+      ]
+    },
+    {
+      "name": "slot_right_jamb",
+      "primitive": "box",
+      "colorhex": "#304F61",
+      "location": [
+        0.191,
+        -0.199,
+        0.795
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.022,
+        0.022,
+        0.046
+      ]
+    },
+    {
+      "name": "slot_projecting_rain_lip",
+      "primitive": "box",
+      "colorhex": "#42677A",
+      "location": [
+        0,
+        -0.221,
+        0.822
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.404,
+        0.038,
+        0.008
+      ]
+    },
+    {
+      "name": "slot_worn_lower_edge",
+      "primitive": "box",
+      "colorhex": "#788181",
+      "location": [
+        0,
+        -0.211,
+        0.772
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.36,
+        0.008,
+        0.006
+      ]
+    },
+    {
+      "name": "internal_deposit_chute",
+      "primitive": "box",
+      "colorhex": "#263640",
+      "location": [
+        0,
+        -0.128,
+        0.753
+      ],
+      "rotation": [
+        -15,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.37,
+        0.16,
+        0.008
+      ]
+    },
+    {
+      "name": "recessed_slot_security_baffle",
+      "primitive": "box",
+      "colorhex": "#202C33",
+      "location": [
+        0,
+        -0.045,
+        0.802
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.39,
+        0.012,
+        0.12
+      ]
+    },
+    {
+      "name": "access_door",
+      "primitive": "box",
+      "colorhex": "#3D6278",
+      "location": [
+        0,
+        -0.203,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.39,
+        0.018,
+        0.45
+      ]
+    },
+    {
+      "name": "door_recess_left_return",
+      "primitive": "box",
+      "colorhex": "#243D4B",
+      "location": [
+        -0.2,
+        -0.181,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.012,
+        0.028,
+        0.46
+      ]
+    },
+    {
+      "name": "door_recess_right_return",
+      "primitive": "box",
+      "colorhex": "#243D4B",
+      "location": [
+        0.2,
+        -0.181,
+        0.5
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.012,
+        0.028,
+        0.46
+      ]
+    },
+    {
+      "name": "door_recess_top_return",
+      "primitive": "box",
+      "colorhex": "#243D4B",
+      "location": [
+        0,
+        -0.181,
+        0.728
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.4,
+        0.028,
+        0.012
+      ]
+    },
+    {
+      "name": "door_recess_bottom_return",
+      "primitive": "box",
+      "colorhex": "#243D4B",
+      "location": [
+        0,
+        -0.181,
+        0.272
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.4,
+        0.028,
+        0.012
+      ]
+    },
+    {
+      "name": "blank_letter_plate",
+      "primitive": "box",
+      "colorhex": "#A0A298",
+      "location": [
+        0,
+        -0.216,
+        0.655
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.008,
+        0.052
+      ]
+    },
+    {
+      "name": "plate_fastener_left",
+      "primitive": "cylinder",
+      "colorhex": "#666E6D",
+      "location": [
+        -0.071,
+        -0.221,
+        0.655
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.004,
+      "depth": 0.003
+    },
+    {
+      "name": "plate_fastener_right",
+      "primitive": "cylinder",
+      "colorhex": "#666E6D",
+      "location": [
+        0.071,
+        -0.221,
+        0.655
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.004,
+      "depth": 0.003
+    },
+    {
+      "name": "lock_bezel",
+      "primitive": "cylinder",
+      "colorhex": "#747B78",
+      "location": [
+        0.135,
+        -0.216,
+        0.495
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.008
+    },
+    {
+      "name": "lock_core",
+      "primitive": "cylinder",
+      "colorhex": "#969B91",
+      "location": [
+        0.135,
+        -0.222,
+        0.495
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.011,
+      "depth": 0.005
+    },
+    {
+      "name": "lock_keyway",
+      "primitive": "box",
+      "colorhex": "#222A2D",
+      "location": [
+        0.135,
+        -0.225,
+        0.495
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.003,
+        0.0015,
+        0.011
+      ]
+    },
+    {
+      "name": "hinge_barrel_upper",
+      "primitive": "cylinder",
+      "colorhex": "#596969",
+      "location": [
+        -0.198,
+        -0.22,
+        0.64
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.01,
+      "depth": 0.066
+    },
+    {
+      "name": "hinge_barrel_lower",
+      "primitive": "cylinder",
+      "colorhex": "#5B6866",
+      "location": [
+        -0.198,
+        -0.22,
+        0.35
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.01,
+      "depth": 0.066
+    },
+    {
+      "name": "hinge_leaf_upper",
+      "primitive": "box",
+      "colorhex": "#4E646B",
+      "location": [
+        -0.179,
+        -0.214,
+        0.64
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.032,
+        0.005,
+        0.046
+      ]
+    },
+    {
+      "name": "hinge_leaf_lower",
+      "primitive": "box",
+      "colorhex": "#4C6066",
+      "location": [
+        -0.179,
+        -0.214,
+        0.35
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.032,
+        0.005,
+        0.046
+      ]
+    },
+    {
+      "name": "rear_folded_vertical_seam",
+      "primitive": "box",
+      "colorhex": "#2D4D60",
+      "location": [
+        0.173,
+        0.212,
+        0.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.018,
+        0.016,
+        0.604
+      ]
+    },
+    {
+      "name": "left_lower_folded_hem",
+      "primitive": "box",
+      "colorhex": "#2A4858",
+      "location": [
+        -0.239,
+        0,
+        0.247
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.022,
+        0.408,
+        0.028
+      ]
+    },
+    {
+      "name": "right_lower_folded_hem",
+      "primitive": "box",
+      "colorhex": "#2E4E5E",
+      "location": [
+        0.239,
+        0,
+        0.247
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.022,
+        0.408,
+        0.028
+      ]
+    },
+    {
+      "name": "leg_front_left",
+      "primitive": "box",
+      "colorhex": "#304C59",
+      "location": [
+        -0.18,
+        -0.145,
+        0.139
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.055,
+        0.055,
+        0.23
+      ]
+    },
+    {
+      "name": "leg_front_right",
+      "primitive": "box",
+      "colorhex": "#355260",
+      "location": [
+        0.18,
+        -0.145,
+        0.139
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.055,
+        0.055,
+        0.23
+      ]
+    },
+    {
+      "name": "leg_rear_left",
+      "primitive": "box",
+      "colorhex": "#2C4754",
+      "location": [
+        -0.18,
+        0.145,
+        0.139
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.055,
+        0.055,
+        0.23
+      ]
+    },
+    {
+      "name": "leg_rear_right",
+      "primitive": "box",
+      "colorhex": "#304C59",
+      "location": [
+        0.18,
+        0.145,
+        0.139
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.055,
+        0.055,
+        0.23
+      ]
+    },
+    {
+      "name": "foot_front_left",
+      "primitive": "box",
+      "colorhex": "#454E4D",
+      "location": [
+        -0.18,
+        -0.145,
+        0.012
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.085,
+        0.08,
+        0.024
+      ]
+    },
+    {
+      "name": "foot_front_right",
+      "primitive": "box",
+      "colorhex": "#48514F",
+      "location": [
+        0.18,
+        -0.145,
+        0.012
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.085,
+        0.08,
+        0.024
+      ]
+    },
+    {
+      "name": "foot_rear_left",
+      "primitive": "box",
+      "colorhex": "#414B49",
+      "location": [
+        -0.18,
+        0.145,
+        0.012
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.085,
+        0.08,
+        0.024
+      ]
+    },
+    {
+      "name": "foot_rear_right",
+      "primitive": "box",
+      "colorhex": "#444E4C",
+      "location": [
+        0.18,
+        0.145,
+        0.012
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.085,
+        0.08,
+        0.024
+      ]
+    },
+    {
+      "name": "left_underbody_mounting_rail",
+      "primitive": "box",
+      "colorhex": "#293E48",
+      "location": [
+        -0.18,
+        0,
+        0.213
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.07,
+        0.36,
+        0.026
+      ]
+    },
+    {
+      "name": "right_underbody_mounting_rail",
+      "primitive": "box",
+      "colorhex": "#293E48",
+      "location": [
+        0.18,
+        0,
+        0.213
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.07,
+        0.36,
+        0.026
+      ]
+    },
+    {
+      "name": "door_lower_paint_loss",
+      "primitive": "box",
+      "colorhex": "#6D6A5D",
+      "location": [
+        -0.073,
+        -0.2125,
+        0.293
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.116,
+        0.0015,
+        0.009
+      ]
+    },
+    {
+      "name": "door_edge_scuff",
+      "primitive": "box",
+      "colorhex": "#657A82",
+      "location": [
+        0.187,
+        -0.2125,
+        0.417
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.008,
+        0.0015,
+        0.104
+      ]
+    },
+    {
+      "name": "left_lower_seam_oxidation",
+      "primitive": "box",
+      "colorhex": "#665548",
+      "location": [
+        -0.2495,
+        -0.079,
+        0.255
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.001,
+        0.132,
+        0.008
+      ]
+    },
+    {
+      "name": "right_side_faded_scrape",
+      "primitive": "box",
+      "colorhex": "#647C85",
+      "location": [
+        0.2495,
+        -0.018,
+        0.451
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.001,
+        0.155,
+        0.012
+      ]
+    },
+    {
+      "name": "front_left_leg_oxidized_base",
+      "primitive": "box",
+      "colorhex": "#65584B",
+      "location": [
+        -0.18,
+        -0.173,
+        0.044
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.047,
+        0.002,
+        0.018
+      ]
+    },
+    {
+      "name": "front_right_leg_base_scuff",
+      "primitive": "box",
+      "colorhex": "#66706B",
+      "location": [
+        0.18,
+        -0.173,
+        0.039
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.044,
+        0.002,
+        0.01
+      ]
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 109.15721225738525,
+    "usage": {
+      "prompt_tokens": 211,
+      "completion_tokens": 6849,
+      "total_tokens": 7060,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1536,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

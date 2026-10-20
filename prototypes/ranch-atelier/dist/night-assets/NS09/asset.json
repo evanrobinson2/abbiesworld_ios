@@ -1,0 +1,1411 @@
+{
+  "name": "Abandoned Rust-Red Compact Sedan",
+  "rationale": "Full-scale, low-roof three-box sedan with its front toward +X. Four grounded tires rotate about Y-aligned axles. Individually constructed cabin pillars, smoky glazing, door skins, raised side belts and inset chassis preserve readable window openings and wheel clearances. Subdued rust-red panels, exposed corrosion, dark trim, clouded lamps and a tilted rear bumper communicate abandonment without scene dressing. The 64 connected components emphasize silhouette and construction details readable from approximately 25 m.",
+  "dimensionsM": {
+    "x": 4.0,
+    "y": 1.75,
+    "z": 1.4
+  },
+  "rotationUnits": "degrees",
+  "animation": {
+    "implemented": false,
+    "partAxes": [
+      {
+        "part": "front_left_tire",
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "motion": "wheel rotation"
+      },
+      {
+        "part": "front_right_tire",
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "motion": "wheel rotation"
+      },
+      {
+        "part": "rear_left_tire",
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "motion": "wheel rotation"
+      },
+      {
+        "part": "rear_right_tire",
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "motion": "wheel rotation"
+      }
+    ]
+  },
+  "parts": [
+    {
+      "name": "inset_underbody_chassis",
+      "primitive": "box",
+      "colorhex": "#393735",
+      "location": [
+        0,
+        0,
+        0.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.5,
+        1.35,
+        0.18
+      ]
+    },
+    {
+      "name": "central_lower_body",
+      "primitive": "box",
+      "colorhex": "#65443C",
+      "location": [
+        0,
+        0,
+        0.55
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.78,
+        1.52,
+        0.34
+      ]
+    },
+    {
+      "name": "long_low_hood",
+      "primitive": "box",
+      "colorhex": "#79483E",
+      "location": [
+        1.19,
+        0,
+        0.83
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.34,
+        1.61,
+        0.15
+      ]
+    },
+    {
+      "name": "short_trunk_lid",
+      "primitive": "box",
+      "colorhex": "#704139",
+      "location": [
+        -1.54,
+        0,
+        0.8
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.7,
+        1.61,
+        0.16
+      ]
+    },
+    {
+      "name": "low_cabin_roof",
+      "primitive": "box",
+      "colorhex": "#795047",
+      "location": [
+        -0.24,
+        0,
+        1.355
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.08,
+        1.36,
+        0.09
+      ]
+    },
+    {
+      "name": "left_upper_fender_and_belt",
+      "primitive": "box",
+      "colorhex": "#70443B",
+      "location": [
+        0,
+        -0.775,
+        0.725
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.72,
+        0.1,
+        0.16
+      ]
+    },
+    {
+      "name": "right_upper_fender_and_belt",
+      "primitive": "box",
+      "colorhex": "#76483D",
+      "location": [
+        0,
+        0.775,
+        0.725
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.72,
+        0.1,
+        0.16
+      ]
+    },
+    {
+      "name": "front_fascia",
+      "primitive": "box",
+      "colorhex": "#704137",
+      "location": [
+        1.87,
+        0,
+        0.61
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.16,
+        1.61,
+        0.3
+      ]
+    },
+    {
+      "name": "rear_fascia",
+      "primitive": "box",
+      "colorhex": "#633E36",
+      "location": [
+        -1.88,
+        0,
+        0.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.14,
+        1.61,
+        0.3
+      ]
+    },
+    {
+      "name": "front_rubber_bumper",
+      "primitive": "box",
+      "colorhex": "#3F4140",
+      "location": [
+        1.955,
+        0,
+        0.47
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.09,
+        1.69,
+        0.15
+      ]
+    },
+    {
+      "name": "sagging_rear_bumper",
+      "primitive": "box",
+      "colorhex": "#494541",
+      "location": [
+        -1.94,
+        0,
+        0.365
+      ],
+      "rotation": [
+        -5,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        1.69,
+        0.14
+      ]
+    },
+    {
+      "name": "rear_bumper_left_mount",
+      "primitive": "beam",
+      "colorhex": "#55504A",
+      "location": [
+        -1.875,
+        -0.68,
+        0.457
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -1.81,
+        -0.68,
+        0.49
+      ],
+      "end": [
+        -1.94,
+        -0.68,
+        0.424
+      ],
+      "radius": 0.025
+    },
+    {
+      "name": "rear_bumper_bent_right_mount",
+      "primitive": "beam",
+      "colorhex": "#654C3B",
+      "location": [
+        -1.875,
+        0.68,
+        0.398
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -1.81,
+        0.68,
+        0.49
+      ],
+      "end": [
+        -1.94,
+        0.68,
+        0.306
+      ],
+      "radius": 0.025
+    },
+    {
+      "name": "recessed_dark_front_grille",
+      "primitive": "box",
+      "colorhex": "#292C2B",
+      "location": [
+        1.956,
+        0,
+        0.665
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.016,
+        0.83,
+        0.17
+      ]
+    },
+    {
+      "name": "left_clouded_headlamp",
+      "primitive": "box",
+      "colorhex": "#AAA898",
+      "location": [
+        1.955,
+        -0.61,
+        0.675
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.04,
+        0.32,
+        0.16
+      ]
+    },
+    {
+      "name": "right_clouded_headlamp",
+      "primitive": "box",
+      "colorhex": "#999B91",
+      "location": [
+        1.955,
+        0.61,
+        0.675
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.04,
+        0.32,
+        0.16
+      ]
+    },
+    {
+      "name": "left_faded_tail_lamp",
+      "primitive": "box",
+      "colorhex": "#683C35",
+      "location": [
+        -1.955,
+        -0.61,
+        0.675
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.025,
+        0.32,
+        0.14
+      ]
+    },
+    {
+      "name": "right_faded_tail_lamp",
+      "primitive": "box",
+      "colorhex": "#714039",
+      "location": [
+        -1.955,
+        0.61,
+        0.675
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.025,
+        0.32,
+        0.14
+      ]
+    },
+    {
+      "name": "blank_weathered_front_plate",
+      "primitive": "box",
+      "colorhex": "#858276",
+      "location": [
+        1.999,
+        0,
+        0.47
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.002,
+        0.42,
+        0.105
+      ]
+    },
+    {
+      "name": "blank_weathered_rear_plate",
+      "primitive": "box",
+      "colorhex": "#77756B",
+      "location": [
+        -1.957,
+        0,
+        0.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.014,
+        0.42,
+        0.11
+      ]
+    },
+    {
+      "name": "smoky_front_windshield",
+      "primitive": "box",
+      "colorhex": "#394548",
+      "location": [
+        0.46,
+        0,
+        1.11
+      ],
+      "rotation": [
+        0,
+        -40,
+        0
+      ],
+      "dimensions": [
+        0.04,
+        1.36,
+        0.56
+      ]
+    },
+    {
+      "name": "smoky_rear_windshield",
+      "primitive": "box",
+      "colorhex": "#354144",
+      "location": [
+        -0.965,
+        0,
+        1.105
+      ],
+      "rotation": [
+        0,
+        44,
+        0
+      ],
+      "dimensions": [
+        0.04,
+        1.36,
+        0.6
+      ]
+    },
+    {
+      "name": "left_front_smoky_side_glass",
+      "primitive": "box",
+      "colorhex": "#344044",
+      "location": [
+        0.09,
+        -0.708,
+        1.105
+      ],
+      "rotation": [
+        0,
+        -18,
+        0
+      ],
+      "dimensions": [
+        0.42,
+        0.025,
+        0.34
+      ]
+    },
+    {
+      "name": "right_front_smoky_side_glass",
+      "primitive": "box",
+      "colorhex": "#3C4749",
+      "location": [
+        0.09,
+        0.708,
+        1.105
+      ],
+      "rotation": [
+        0,
+        -18,
+        0
+      ],
+      "dimensions": [
+        0.42,
+        0.025,
+        0.34
+      ]
+    },
+    {
+      "name": "left_rear_smoky_side_glass",
+      "primitive": "box",
+      "colorhex": "#303B3E",
+      "location": [
+        -0.55,
+        -0.708,
+        1.105
+      ],
+      "rotation": [
+        0,
+        18,
+        0
+      ],
+      "dimensions": [
+        0.45,
+        0.025,
+        0.33
+      ]
+    },
+    {
+      "name": "right_rear_smoky_side_glass",
+      "primitive": "box",
+      "colorhex": "#374144",
+      "location": [
+        -0.55,
+        0.708,
+        1.105
+      ],
+      "rotation": [
+        0,
+        18,
+        0
+      ],
+      "dimensions": [
+        0.45,
+        0.025,
+        0.33
+      ]
+    },
+    {
+      "name": "left_front_a_pillar",
+      "primitive": "beam",
+      "colorhex": "#784B40",
+      "location": [
+        0.47,
+        -0.72,
+        1.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.65,
+        -0.76,
+        0.88
+      ],
+      "end": [
+        0.29,
+        -0.68,
+        1.32
+      ],
+      "radius": 0.04
+    },
+    {
+      "name": "right_front_a_pillar",
+      "primitive": "beam",
+      "colorhex": "#784B40",
+      "location": [
+        0.47,
+        0.72,
+        1.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.65,
+        0.76,
+        0.88
+      ],
+      "end": [
+        0.29,
+        0.68,
+        1.32
+      ],
+      "radius": 0.04
+    },
+    {
+      "name": "left_rear_c_pillar",
+      "primitive": "beam",
+      "colorhex": "#70483D",
+      "location": [
+        -0.975,
+        -0.72,
+        1.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -1.19,
+        -0.76,
+        0.88
+      ],
+      "end": [
+        -0.76,
+        -0.68,
+        1.32
+      ],
+      "radius": 0.045
+    },
+    {
+      "name": "right_rear_c_pillar",
+      "primitive": "beam",
+      "colorhex": "#70483D",
+      "location": [
+        -0.975,
+        0.72,
+        1.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -1.19,
+        0.76,
+        0.88
+      ],
+      "end": [
+        -0.76,
+        0.68,
+        1.32
+      ],
+      "radius": 0.045
+    },
+    {
+      "name": "left_center_b_pillar",
+      "primitive": "beam",
+      "colorhex": "#4A3C37",
+      "location": [
+        -0.22,
+        -0.72,
+        1.055
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.22,
+        -0.76,
+        0.79
+      ],
+      "end": [
+        -0.22,
+        -0.68,
+        1.32
+      ],
+      "radius": 0.042
+    },
+    {
+      "name": "right_center_b_pillar",
+      "primitive": "beam",
+      "colorhex": "#4A3C37",
+      "location": [
+        -0.22,
+        0.72,
+        1.055
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.22,
+        0.76,
+        0.79
+      ],
+      "end": [
+        -0.22,
+        0.68,
+        1.32
+      ],
+      "radius": 0.042
+    },
+    {
+      "name": "left_roof_gutter",
+      "primitive": "beam",
+      "colorhex": "#60534A",
+      "location": [
+        -0.24,
+        -0.68,
+        1.34
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.78,
+        -0.68,
+        1.34
+      ],
+      "end": [
+        0.3,
+        -0.68,
+        1.34
+      ],
+      "radius": 0.028
+    },
+    {
+      "name": "right_roof_gutter",
+      "primitive": "beam",
+      "colorhex": "#60534A",
+      "location": [
+        -0.24,
+        0.68,
+        1.34
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.78,
+        0.68,
+        1.34
+      ],
+      "end": [
+        0.3,
+        0.68,
+        1.34
+      ],
+      "radius": 0.028
+    },
+    {
+      "name": "left_corroded_rocker",
+      "primitive": "box",
+      "colorhex": "#594237",
+      "location": [
+        0,
+        -0.78,
+        0.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.76,
+        0.1,
+        0.12
+      ]
+    },
+    {
+      "name": "right_corroded_rocker",
+      "primitive": "box",
+      "colorhex": "#604537",
+      "location": [
+        0,
+        0.78,
+        0.4
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.76,
+        0.1,
+        0.12
+      ]
+    },
+    {
+      "name": "left_front_door_skin",
+      "primitive": "box",
+      "colorhex": "#78483E",
+      "location": [
+        0.38,
+        -0.79,
+        0.63
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.83,
+        0.055,
+        0.38
+      ]
+    },
+    {
+      "name": "right_front_door_skin",
+      "primitive": "box",
+      "colorhex": "#75473C",
+      "location": [
+        0.38,
+        0.79,
+        0.63
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.83,
+        0.055,
+        0.38
+      ]
+    },
+    {
+      "name": "left_rear_door_skin",
+      "primitive": "box",
+      "colorhex": "#6A4038",
+      "location": [
+        -0.49,
+        -0.79,
+        0.63
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.85,
+        0.055,
+        0.38
+      ]
+    },
+    {
+      "name": "right_rear_door_skin",
+      "primitive": "box",
+      "colorhex": "#70443A",
+      "location": [
+        -0.49,
+        0.79,
+        0.63
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.85,
+        0.055,
+        0.38
+      ]
+    },
+    {
+      "name": "left_front_door_handle",
+      "primitive": "box",
+      "colorhex": "#575753",
+      "location": [
+        0.04,
+        -0.837,
+        0.76
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.14,
+        0.03,
+        0.035
+      ]
+    },
+    {
+      "name": "right_front_door_handle",
+      "primitive": "box",
+      "colorhex": "#575753",
+      "location": [
+        0.04,
+        0.837,
+        0.76
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.14,
+        0.03,
+        0.035
+      ]
+    },
+    {
+      "name": "left_rear_door_handle",
+      "primitive": "box",
+      "colorhex": "#52524E",
+      "location": [
+        -0.77,
+        -0.837,
+        0.76
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.14,
+        0.03,
+        0.035
+      ]
+    },
+    {
+      "name": "right_rear_door_handle",
+      "primitive": "box",
+      "colorhex": "#52524E",
+      "location": [
+        -0.77,
+        0.837,
+        0.76
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.14,
+        0.03,
+        0.035
+      ]
+    },
+    {
+      "name": "front_left_tire",
+      "primitive": "cylinder",
+      "colorhex": "#292A28",
+      "location": [
+        1.25,
+        -0.745,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.31,
+      "depth": 0.26
+    },
+    {
+      "name": "front_right_tire",
+      "primitive": "cylinder",
+      "colorhex": "#2D2E2B",
+      "location": [
+        1.25,
+        0.745,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.31,
+      "depth": 0.26
+    },
+    {
+      "name": "rear_left_tire",
+      "primitive": "cylinder",
+      "colorhex": "#292A28",
+      "location": [
+        -1.25,
+        -0.745,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.31,
+      "depth": 0.26
+    },
+    {
+      "name": "rear_right_tire",
+      "primitive": "cylinder",
+      "colorhex": "#2C2D2A",
+      "location": [
+        -1.25,
+        0.745,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.31,
+      "depth": 0.26
+    },
+    {
+      "name": "front_left_oxidized_wheel_hub",
+      "primitive": "cylinder",
+      "colorhex": "#74716A",
+      "location": [
+        1.25,
+        -0.859,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.175,
+      "depth": 0.032
+    },
+    {
+      "name": "front_right_oxidized_wheel_hub",
+      "primitive": "cylinder",
+      "colorhex": "#77746B",
+      "location": [
+        1.25,
+        0.859,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.175,
+      "depth": 0.032
+    },
+    {
+      "name": "rear_left_rusted_wheel_hub",
+      "primitive": "cylinder",
+      "colorhex": "#716154",
+      "location": [
+        -1.25,
+        -0.859,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.175,
+      "depth": 0.032
+    },
+    {
+      "name": "rear_right_oxidized_wheel_hub",
+      "primitive": "cylinder",
+      "colorhex": "#6C6B63",
+      "location": [
+        -1.25,
+        0.859,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.175,
+      "depth": 0.032
+    },
+    {
+      "name": "front_y_axis_axle",
+      "primitive": "cylinder",
+      "colorhex": "#45433E",
+      "location": [
+        1.25,
+        0,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.045,
+      "depth": 1.49
+    },
+    {
+      "name": "rear_y_axis_axle",
+      "primitive": "cylinder",
+      "colorhex": "#49433B",
+      "location": [
+        -1.25,
+        0,
+        0.31
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.045,
+      "depth": 1.49
+    },
+    {
+      "name": "left_dark_side_mirror",
+      "primitive": "box",
+      "colorhex": "#444644",
+      "location": [
+        0.48,
+        -0.815,
+        0.98
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.16,
+        0.12,
+        0.1
+      ]
+    },
+    {
+      "name": "right_dark_side_mirror",
+      "primitive": "box",
+      "colorhex": "#4A4B47",
+      "location": [
+        0.48,
+        0.815,
+        0.98
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.16,
+        0.12,
+        0.1
+      ]
+    },
+    {
+      "name": "left_resting_windshield_wiper",
+      "primitive": "beam",
+      "colorhex": "#303330",
+      "location": [
+        0.5525,
+        -0.31,
+        1.0175
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.622,
+        -0.5,
+        0.935
+      ],
+      "end": [
+        0.483,
+        -0.12,
+        1.1
+      ],
+      "radius": 0.009
+    },
+    {
+      "name": "right_resting_windshield_wiper",
+      "primitive": "beam",
+      "colorhex": "#303330",
+      "location": [
+        0.5525,
+        0.29,
+        1.0175
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.622,
+        0.1,
+        0.935
+      ],
+      "end": [
+        0.483,
+        0.48,
+        1.1
+      ],
+      "radius": 0.009
+    },
+    {
+      "name": "rear_exhaust_tailpipe",
+      "primitive": "beam",
+      "colorhex": "#56544C",
+      "location": [
+        -1.715,
+        0.5,
+        0.305
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -1.48,
+        0.5,
+        0.32
+      ],
+      "end": [
+        -1.95,
+        0.5,
+        0.29
+      ],
+      "radius": 0.035
+    },
+    {
+      "name": "hood_exposed_corrosion",
+      "primitive": "box",
+      "colorhex": "#67503C",
+      "location": [
+        1.33,
+        -0.32,
+        0.908
+      ],
+      "rotation": [
+        0,
+        0,
+        7
+      ],
+      "dimensions": [
+        0.5,
+        0.42,
+        0.006
+      ]
+    },
+    {
+      "name": "trunk_exposed_corrosion",
+      "primitive": "box",
+      "colorhex": "#70513D",
+      "location": [
+        -1.56,
+        0.27,
+        0.883
+      ],
+      "rotation": [
+        0,
+        0,
+        -8
+      ],
+      "dimensions": [
+        0.33,
+        0.39,
+        0.006
+      ]
+    },
+    {
+      "name": "left_front_door_corrosion",
+      "primitive": "box",
+      "colorhex": "#614A36",
+      "location": [
+        0.3,
+        -0.819,
+        0.62
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.36,
+        0.006,
+        0.16
+      ]
+    },
+    {
+      "name": "front_grille_dull_crossbar",
+      "primitive": "beam",
+      "colorhex": "#686B65",
+      "location": [
+        1.963,
+        0,
+        0.665
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        1.963,
+        -0.4,
+        0.665
+      ],
+      "end": [
+        1.963,
+        0.4,
+        0.665
+      ],
+      "radius": 0.012
+    },
+    {
+      "name": "right_rear_fuel_filler_door",
+      "primitive": "box",
+      "colorhex": "#5E3C34",
+      "location": [
+        -1.1,
+        0.828,
+        0.73
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.22,
+        0.006,
+        0.13
+      ]
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 118.23746728897095,
+    "usage": {
+      "prompt_tokens": 242,
+      "completion_tokens": 8035,
+      "total_tokens": 8277,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1949,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

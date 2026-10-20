@@ -21,3 +21,7 @@ body.drawer-layout #app-controls>#app-controls-toggle{position:absolute;right:10
 .drawer-chevron{font:24px Arial,sans-serif;line-height:1}
 #app-controls-toggle[aria-expanded=true] .drawer-chevron{transform:rotate(180deg)}
 @media(max-width:799px){body.drawer-layout #app-controls{width:min(370px,calc(100vw - 44px));max-width:calc(100vw - 44px)}}
+
+/* Keep the last action clear of browser chrome and device safe areas. */
+body.drawer-layout #app-controls-content{padding-bottom:calc(48px + env(safe-area-inset-bottom,0px));scroll-padding-bottom:48px}
+#app-controls p:not([role="status"]):not(:has(button,input,select,a,output)),#app-controls .help,#app-controls .hint,#app-controls small:not(:has(output)){display:none!important}

@@ -19,7 +19,7 @@
     },
     {
       "id": "ani",
-      "name": "Ani / Annie",
+      "name": "Ani",
       "src": "ani.svg"
     },
     {
@@ -41,11 +41,6 @@
       "id": "alexis",
       "name": "Alexis",
       "src": "alexis.svg"
-    },
-    {
-      "id": "pearl",
-      "name": "Pearl",
-      "src": "pearl.svg"
     },
     {
       "id": "marley",

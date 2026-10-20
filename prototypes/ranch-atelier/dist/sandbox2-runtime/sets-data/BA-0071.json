@@ -1,0 +1,43 @@
+{
+  "id": "aw.ranch.asset.ba-0071",
+  "name": "Packed earth market tile",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 1,
+    "triangles": 44,
+    "bounds_min": [
+      -2.0,
+      -2.0,
+      -0.11999999731779099
+    ],
+    "bounds_max": [
+      2.0,
+      2.0,
+      0.0
+    ],
+    "dimensions_m": [
+      4.0,
+      4.0,
+      0.12
+    ],
+    "material_slots": [
+      "Path"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 1
+  },
+  "materials": [
+    "Path"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0071",
+  "intent": "A seamless compacted surface with subdued foot wear.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0071",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

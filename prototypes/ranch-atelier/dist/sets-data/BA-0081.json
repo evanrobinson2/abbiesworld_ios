@@ -1,0 +1,66 @@
+{
+  "id": "aw.ranch.asset.ba-0081",
+  "name": "Ranch produce seller",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 205,
+    "triangles": 9234,
+    "bounds_min": [
+      -0.37064629793167114,
+      -0.5768654346466064,
+      0.0
+    ],
+    "bounds_max": [
+      0.37064629793167114,
+      0.2199999988079071,
+      1.690000057220459
+    ],
+    "dimensions_m": [
+      0.7413,
+      0.7969,
+      1.69
+    ],
+    "material_slots": [
+      "CharacterLinen",
+      "CharacterReed",
+      "CharacterWood",
+      "CharacterHair",
+      "CharacterSkinWarm",
+      "CharacterEye",
+      "CharacterLeaf",
+      "CharacterLeather",
+      "CharacterOchre",
+      "CharacterClay"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 10
+  },
+  "materials": [
+    "CharacterLinen",
+    "CharacterReed",
+    "CharacterWood",
+    "CharacterHair",
+    "CharacterSkinWarm",
+    "CharacterEye",
+    "CharacterLeaf",
+    "CharacterLeather",
+    "CharacterOchre",
+    "CharacterClay"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0081",
+  "intent": "Practical work clothing, carrying apron, and a recognizable produce basket.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0081",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

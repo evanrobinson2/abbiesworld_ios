@@ -1,3 +1,5 @@
+importScripts('/property-planner.js');
+importScripts('/neighborhood-mission.js');
 'use strict';(()=>{const modules={"./terrain-source.cjs":function(module,exports,require){
 /* Seeded world construction. No network, model calls or prompt interpretation. */
 (function(root){
@@ -55,19 +57,23 @@ const dist=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 const rect=b=>[[b.x,b.y],[b.x+b.w,b.y],[b.x+b.w,b.y+b.h],[b.x,b.y+b.h]];
 const center=b=>[b.x+b.w/2,b.y+b.h/2];
 const overlap=(a,b,p=0)=>a.x<b.x+b.w+p&&a.x+a.w+p>b.x&&a.y<b.y+b.h+p&&a.y+a.h+p>b.y;
-function environment(seed,size){const w=terrain.landscape(seed),scale=size/180;w.bounds={width:size,depth:size};w.terrain.grid.spacing*=scale;w.water.brook.centerline=w.water.brook.centerline.map(([x,y,z])=>[x*scale,y*scale,z]);w.vegetation=w.vegetation.map(t=>({...t,position:[t.position[0]*scale,t.position[1]*scale,t.position[2]]}));w.parcels=[];const g=w.terrain.grid;
+function environment(seed,size,topology=4){const w=terrain.landscape(seed),scale=size/180;w.bounds={width:size,depth:size};w.terrain.grid.spacing*=scale;w.water.brook.centerline=w.water.brook.centerline.map(([x,y,z])=>[x*scale,y*scale,z]);w.vegetation=w.vegetation.map(t=>({...t,position:[t.position[0]*scale,t.position[1]*scale,t.position[2]]}));w.parcels=[];const g=w.terrain.grid;
+ const level=Number.isInteger(topology)?Math.max(1,Math.min(9,topology)):4,base=103,relief=[0,.2,.55,1,1.35,1.8,2.2,2.8,3.4][level-1],amplitude=[0,0,0,0,4,10,22,40,70][level-1],phase=(seed>>>0)*.000137;
+ if(level!==4){for(let j=0;j<g.rows;j++)for(let i=0;i<g.cols;i++){const x=i/(g.cols-1),z=j/(g.rows-1),warp=level>=8?.24*Math.sin(z*17+phase):0,broad=Math.sin((x+warp)*11+phase)*Math.cos(z*9-phase*.7),detail=Math.sin(x*27+z*19+phase)*.24,peak=Math.max(0,broad+detail);g.heights[j][i]=base+(g.heights[j][i]-base)*relief+amplitude*peak**3;}
+ w.water.brook.centerline=w.water.brook.centerline.map(p=>[p[0],p[1],base+(p[2]-base)*relief]);}
+ w.terrain.topology={level,seed,algorithm:'terrain-levels-v1'};
  const waterY=x=>{let q=Math.max(0,Math.min(35.999,x/g.spacing)),i=Math.floor(q);return w.water.brook.centerline[i][1]*(1-q+i)+w.water.brook.centerline[i+1][1]*(q-i)};
  const height=(x,y)=>{let a=Math.max(0,Math.min(35.999,x/g.spacing)),b=Math.max(0,Math.min(35.999,y/g.spacing)),i=Math.floor(a),j=Math.floor(b),u=a-i,v=b-j,h=g.heights;return(h[j][i]*(1-u)+h[j][i+1]*u)*(1-v)+(h[j+1][i]*(1-u)+h[j+1][i+1]*u)*v};
  const dry=(x,y)=>x>=8&&y>=8&&x<size-8&&y<size-8&&Math.abs(y-waterY(x))>12;
  const slope=(x,y)=>Math.hypot(height(x+3,y)-height(x-3,y),height(x,y+3)-height(x,y-3))/6;
  return {w,size,waterY,height,dry,slope};}
-function plan(config){const c={seed:54,size:360,horses:6,mode:'hay',strategy:'yard',...config},e=environment(c.seed,c.size),r=rng(c.seed^12345),buildings=[],events=[],failures=[],step=4,n=Math.floor(c.size/step),key=(x,y)=>y*n+x,pt=k=>[(k%n+.5)*step,(Math.floor(k/n)+.5)*step],cell=p=>key(Math.min(n-1,Math.max(0,Math.floor(p[0]/step))),Math.min(n-1,Math.max(0,Math.floor(p[1]/step)))),trees=e.w.vegetation;
+function legacyPlan(config){const c={seed:54,size:360,horses:6,mode:'hay',strategy:'yard',...config},e=environment(c.seed,c.size),r=rng(c.seed^12345),buildings=[],events=[],failures=[],step=4,n=Math.floor(c.size/step),key=(x,y)=>y*n+x,pt=k=>[(k%n+.5)*step,(Math.floor(k/n)+.5)*step],cell=p=>key(Math.min(n-1,Math.max(0,Math.floor(p[0]/step))),Math.min(n-1,Math.max(0,Math.floor(p[1]/step)))),trees=e.w.vegetation;
  const forest=(x,y)=>x<c.size*.14||x>c.size*.86||y>c.size*.86;
  let candidates=[];for(let y=28;y<c.size-28;y+=8)for(let x=28;x<c.size-28;x+=8){if(!e.dry(x,y)||forest(x,y)||Math.abs(y-e.waterY(x))<32)continue;const waterDistance=Math.abs(y-e.waterY(x));candidates.push({p:[x,y],score:-e.slope(x,y)*150-Math.abs(waterDistance-55)*.12-dist([x,y],[c.size*.5,c.size*.35])*.025+r()*5});}
  candidates.sort((a,b)=>b.score-a.score);if(!candidates.length)return {config:c,failures:['No suitable core'],valid:false};const core=candidates[Math.min(c.coreRank??0,candidates.length-1)].p,yard={id:'yard',x:core[0]-12,y:core[1]-12,w:24,h:24};
  events.push({agent:'site',action:'reserve-yard',position:core,reason:'Dry, gentle ground near water with room around a shared working yard'});
  const specs=[{id:'shelter',name:'Animal shelter',w:28,h:16,capacity:c.horses,wood:180,work:70},{id:'abbie-home',name:"Abbie�s family home",w:18,h:16,beds:4,wood:150,work:60},{id:'ani-home',name:"Ani�s family home",w:18,h:16,beds:4,wood:150,work:60},{id:'feed',name:'Feed store',w:12,h:10,wood:70,work:25},{id:'water',name:'Water supply point',w:8,h:8,wood:25,work:15},{id:'garden',name:'Kitchen garden',w:20,h:16,wood:30,work:20}];
- for(const spec of specs){let choices=[];for(let y=12;y<c.size-28;y+=4)for(let x=12;x<c.size-28;x+=4)for(let rot=0;rot<2;rot++){const b={...spec,x,y,w:rot?spec.h:spec.w,h:rot?spec.w:spec.h};if(x+b.w>c.size-12||y+b.h>c.size-12||overlap(b,yard,3)||buildings.some(a=>overlap(a,b,8)))continue;const p=center(b),corners=rect(b);if(!corners.every(q=>e.dry(...q)&&Math.sign(q[1]-e.waterY(q[0]))===Math.sign(core[1]-e.waterY(core[0]))&&!forest(...q))||e.slope(...p)>.12)continue;let target=core;if(spec.id==='feed'&&buildings[0])target=center(buildings[0]);if(spec.id==='garden'&&buildings[1])target=center(buildings[1]);let score=-dist(p,target)-e.slope(...p)*100+r()*3;if(c.strategy==='spread')score=-Math.abs(dist(p,target)-65)+r()*3;if(c.strategy==='water')score-=Math.abs(p[1]-e.waterY(p[0]))*.7;choices.push({b,score});}
+ for(const spec of specs){let choices=[];for(let y=12;y<c.size-28;y+=4)for(let x=12;x<c.size-28;x+=4)for(let rot=0;rot<2;rot++){const b={...spec,x,y,w:rot?spec.h:spec.w,h:rot?spec.w:spec.h};if(x+b.w>c.size-12||y+b.h>c.size-12||overlap(b,yard,3)||buildings.some(a=>overlap(a,b,c.buildingGap??8)))continue;const p=center(b),corners=rect(b);if(!corners.every(q=>e.dry(...q)&&Math.sign(q[1]-e.waterY(q[0]))===Math.sign(core[1]-e.waterY(core[0]))&&!forest(...q))||e.slope(...p)>.12)continue;let target=core;if(spec.id==='feed'&&buildings[0])target=center(buildings[0]);if(spec.id==='garden'&&buildings[1])target=center(buildings[1]);let score=-dist(p,target)-e.slope(...p)*100+r()*3;if(c.strategy==='spread')score=-Math.abs(dist(p,target)-65)+r()*3;if(c.strategy==='water')score-=Math.abs(p[1]-e.waterY(p[0]))*.7;choices.push({b,score});}
  choices.sort((a,b)=>b.score-a.score);if(!choices.length){failures.push('Cannot place '+spec.id);continue}const b=choices[0].b;let doors=[[b.x+b.w/2,b.y-3],[b.x+b.w/2,b.y+b.h+3],[b.x-3,b.y+b.h/2],[b.x+b.w+3,b.y+b.h/2]];doors.sort((a,d)=>dist(a,core)-dist(d,core));b.door=doors[0];buildings.push(b);events.push({agent:spec.id.includes('home')?'household':spec.id,action:'place',id:b.id,position:center(b),reason:'Best feasible location relative to yard and related facilities'});}
  const blocked=k=>{let p=pt(k);return !e.dry(...p)||buildings.some(b=>p[0]>b.x-1&&p[0]<b.x+b.w+1&&p[1]>b.y-1&&p[1]<b.y+b.h+1)};
  function route(start,goal){let s=cell(start),g=cell(goal);if(blocked(s)||blocked(g))return null;let queue=[s],prev=new Int32Array(n*n).fill(-1);prev[s]=s;for(let i=0;i<queue.length;i++){let k=queue[i];if(k===g){let a=[];while(k!==s){a.push(pt(k));k=prev[k]}a.push(pt(s));return a.reverse()}let x=k%n,y=Math.floor(k/n);for(const [dx,dy]of [[1,0],[-1,0],[0,1],[0,-1]]){let xx=x+dx,yy=y+dy;if(xx<0||yy<0||xx>=n||yy>=n)continue;let j=key(xx,yy);if(prev[j]!==-1||blocked(j)||Math.abs(e.height(...pt(k))-e.height(...pt(j)))>1)continue;prev[j]=k;queue.push(j)}}return null;}
@@ -88,8 +94,9 @@ function plan(config){const c={seed:54,size:360,horses:6,mode:'hay',strategy:'ya
  const world={...e.w,name:"Abbie & Ani�s two-family ranch",buildings:buildings.filter(b=>b.beds||b.id==='shelter'||b.id==='feed').map(b=>({...b,polygon:rect(b),kind:b.beds?'house':'barn',baseZ:e.height(b.x,b.y),height:4})),paths,actors:[],grown:true};
  const jobs=buildings.map(b=>({id:b.id,position:b.door,wood:b.wood,work:b.work,remaining:b.work}));jobs.push({id:'pasture',position:pasture.gate||core,wood:100,work:35,remaining:35});jobs.push({id:'access',position:core,wood:20,work:25,remaining:25});
  return {config:c,core,yard,buildings,pasture,paths,world,events,failures,valid:failures.length===0,jobs,route};}
-function grow(config, attempts=8){const trials=[];let best;for(let i=0;i<attempts;i++){const p=plan({...config,coreRank:i*12});const score=(p.valid?1e6:0)+Math.min(1,p.pasture.area/p.pasture.target)*10000-p.paths.reduce((a,b)=>a+b.length,0);trials.push({attempt:i,core:p.core,valid:p.valid,issues:p.failures,score});if(!best||score>best.score)best={score,p};}best.p.events.unshift({agent:"coordinator",action:"compare-and-revise",attempts:trials,reason:"Keep terrain fixed; compare alternative ranch cores against unmet land requirements and route length"});best.p.trials=trials;return best.p;}
-function simulate(plan,options={}){if(!plan.valid)return {completed:false,reason:'Layout requirements unmet',days:0};const days=options.days??90,speed=options.speed??1.2,supplyPerDay=options.supplyPerDay??60,people=options.people??['Abbie','Ani','Mommy','Daddy','Jeff','Alexis','Pearl','Marley'];let roster=people.map(name=>({name,role:name==='Marley'?'retriever':name==='Pearl'?'light-work':'general',rate:name==='Marley'?.3:name==='Pearl'?.5:1,hours:0,travelHours:0,tasks:0}));const jobs=structuredClone(plan.jobs),events=[],stock={wood:80,staged:0},delivered={wood:0},used={wood:0};let day=0;
+function plan(config){return FarmProperty.plan(config,environment);}
+function grow(config,attempts=8){let best;for(let i=0;i<attempts;i++){const p=plan({...config,coreRank:i*3});if(!best||p.pasture.area>best.pasture.area)best=p;if(p.valid)return p;}return best;}
+function simulate(plan,options={}){if(!plan.valid)return {completed:false,reason:'Layout requirements unmet',days:0};const days=options.days??90,speed=options.speed??1.2,supplyPerDay=options.supplyPerDay??60,people=options.people??['Abbie','Ani','Mommy','Daddy','Jeff','Alexis','Marley'];let roster=people.map(name=>({name,role:name==='Marley'?'retriever':'general',rate:name==='Marley'?.3:1,hours:0,travelHours:0,tasks:0}));const jobs=structuredClone(plan.jobs),events=[],stock={wood:80,staged:0},delivered={wood:0},used={wood:0};let day=0;
  for(day=1;day<=days;day++){stock.wood+=supplyPerDay;delivered.wood+=supplyPerDay;for(const a of roster){let hours=6;if(a.role==='retriever'){// Dog fetches small staged supplies; never manufactures materials.
  const fetch=Math.min(stock.wood,2);stock.wood-=fetch;stock.staged+=fetch;a.hours+=.5;a.tasks++;events.push({day,actor:a.name,action:'retrieve-small-supplies',amount:fetch});continue;}
  for(const j of jobs){if(j.remaining<=0)continue;let p=plan.paths.find(p=>p.id===j.id),travel=(p?.length||0)*2/(speed*3600);if(travel>=hours)continue;if(!j.started){if(stock.wood+stock.staged<j.wood)continue;const staged=Math.min(stock.staged,j.wood);stock.staged-=staged;stock.wood-=j.wood-staged;used.wood+=j.wood;j.started=true;events.push({day,actor:a.name,action:'start',job:j.id});}let effort=Math.min(j.remaining,(hours-travel)*a.rate);events.push({day,actor:a.name,action:a.role==='light-work'?'assist':'work',job:j.id,effort,travelHours:travel});j.remaining-=effort;a.hours+=effort/a.rate;a.travelHours+=travel;hours-=effort/a.rate+travel;a.tasks++;if(j.remaining<1e-8){j.remaining=0;events.push({day,actor:a.name,action:'finish',job:j.id});}if(hours<.05)break;}}
@@ -110,7 +117,7 @@ const key=p=>p.join(',');
 function create(plan,options={}){
  const cfg={tickMinutes:10,horses:plan.config.horses,foodPerDay:10,waterPerDay:40,speed:1,capacityPerM2:.2,initialPerM2:.12,residualPerM2:.04,growthPerM2Day:.004,moisture:1,waterPerDaySupply:300,hayPerDay:0,gateOpen:true,roadMultiplier:1,...options};
  for(const k of ['tickMinutes','speed','capacityPerM2'])if(!(cfg[k]>0))throw Error('Invalid '+k);
- const env=environment(plan.config.seed,plan.config.size),nodes=new Map(),pastureKeys=new Set(plan.pasture.cells.map(key));
+ const env=environment(plan.config.seed,plan.config.size,plan.config.topology),nodes=new Map(),pastureKeys=new Set(plan.pasture.cells.map(key));
  for(const p of plan.pasture.cells)nodes.set(key(p),{p,grass:cfg.initialPerM2*16,pasture:true});
  for(const path of plan.paths)for(const p of path.points){const k=key(p);if(!nodes.has(k))nodes.set(k,{p,grass:0,pasture:false});nodes.get(k).road=true;}
  const gates=plan.pasture.fences.filter(f=>f.gate),crossesGate=(a,b)=>{const mid=[(a[0]+b[0])/2,(a[1]+b[1])/2];return cfg.gateOpen&&gates.some(g=>Math.abs(mid[0]-(g.points[0][0]+g.points[1][0])/2)<.01&&Math.abs(mid[1]-(g.points[0][1]+g.points[1][1])/2)<.01)};
@@ -201,20 +208,10 @@ module.exports={profiles,create,request,prepare,admit,step,interact,inspect,requ
 const M=require('./sanctuary.cjs'), A=require('./animals.cjs');
 function create(plan,options={}){
  const graph=A.create(plan,{horses:0});
- return {version:1,minute:0,tickMinutes:10,speed:options.speed??1,manager:M.create(),nodes:graph.nodes,habitats:{},reserved:{},projects:[],traffic:{},ledger:{natural:0,ration:0,water:0,waterDelivered:0,backupVisits:0},daily:[]};
+ return {version:1,minute:0,tickMinutes:10,property:plan.world.property,env:require('./sim.cjs').environment(plan.config.seed,plan.config.size,plan.config.topology),speed:options.speed??1,manager:M.create(),nodes:graph.nodes,habitats:{},reserved:{},projects:[],traffic:{},ledger:{natural:0,ration:0,water:0,waterDelivered:0,backupVisits:0},daily:[]};
 }
 // Connected, disjoint paddocks: boundaries are enforced in routing, not rendered fences.
-function allocate(s,species,count){
- const required=Math.ceil(M.profiles[species].space*count*8),free=Object.keys(s.nodes).filter(k=>s.nodes[k].pasture&&!s.reserved[k]);
- const visited=new Set();
- for(const seed of free){
-  if(visited.has(seed))continue;
-  const queue=[seed];visited.add(seed);
-  for(let i=0;i<queue.length&&queue.length<required;i++)for(const e of s.nodes[queue[i]].edges)if(s.nodes[e.to].pasture&&!s.reserved[e.to]&&!visited.has(e.to)){visited.add(e.to);queue.push(e.to);if(queue.length===required)break;}
-  if(queue.length>=required)return queue.slice(0,required);
- }
- return null;
-}
+function allocate(s,species,count,attempt=0){return FarmProperty.allocateHabitat(s,species,count,M.profiles[species].space,attempt);}
 function command(s,c){
  if(c.type==='give-joy')return M.interact(s.manager,c.resident,c.action);
  if(c.type==='inspect'){
@@ -222,7 +219,7 @@ function command(s,c){
   return {...info,position:A.position(s,r),habitat:r.habitat};
  }
  if(c.type==='add-animals'){
-  const req=M.request(s.manager,c.species,c.count),cells=allocate(s,c.species,c.count);
+  const req=M.request(s.manager,c.species,c.count),cells=allocate(s,c.species,c.count,c._placementAttempt||0);
   req.status='waiting-for-preparation';req.missing=cells?['habitat-preparation']:['connected-land'];
   if(cells){const id='habitat-'+req.id;for(const k of cells)s.reserved[k]=id;s.projects.push({id,request:req.id,species:c.species,count:c.count,cells,remaining:Math.max(60,cells.length*2),status:'building'});}
   return req;
@@ -237,7 +234,7 @@ function command(s,c){
 }
 function finish(s,p){
  if(p.habitat){const h=s.habitats[p.habitat];h.level++;for(const k of h.cells)s.nodes[k].resourceCapacity=4*h.level;return;}
- const profile=M.profiles[p.species],h={id:p.id,species:p.species,cells:p.cells,shelter:p.cells[0],water:p.cells[Math.min(1,p.cells.length-1)],level:1};s.habitats[h.id]=h;
+ const profile=M.profiles[p.species],h={id:p.id,species:p.species,cells:p.cells,shelter:p.cells[0],water:p.waterAt||p.cells[Math.min(1,p.cells.length-1)],level:1,gate:p.gateInside,buildingId:p.buildingId,fences:p.fences};s.habitats[h.id]=h;
  for(const k of h.cells){s.nodes[k].resources=Object.fromEntries(profile.natural.map(r=>[r,4]));s.nodes[k].resourceCapacity=4;}
  const req=s.manager.requests.find(r=>r.id===p.request),need=M.requirements(s.manager,Array.from({length:p.count},()=>({species:p.species})));
  const before=s.manager.residents.length;
@@ -312,8 +309,8 @@ const edgeKey=(a,b)=>a<b?a+'|'+b:b+'|'+a;
 function create(plan,options={}){
  const cfg={tickSeconds:10,supplyPerDay:60,initialStock:80,speed:1.2,trailGain:.025,trailDecay:.85,...options};
  if(!(cfg.tickSeconds>0&&cfg.tickSeconds<=60&&86400%cfg.tickSeconds===0&&cfg.speed>0&&cfg.supplyPerDay>=0&&cfg.initialStock>=0))throw Error('Invalid worker configuration');
- const env=environment(plan.config.seed,plan.config.size),nodes={};
- const clear=(x,z)=>env.dry(x,z)&&env.slope(x,z)<.3&&!plan.buildings.some(b=>x>=b.x-1&&x<=b.x+b.w+1&&z>=b.y-1&&z<=b.y+b.h+1);
+ const env=environment(plan.config.seed,plan.config.size,plan.config.topology),nodes={};
+ const clear=(x,z)=>env.dry(x,z)&&env.slope(x,z)<.3&&!plan.buildings.some(b=>FarmProperty.contains(b,x,z,1.2));
  for(let z=10;z<plan.config.size-8;z+=4)for(let x=10;x<plan.config.size-8;x+=4)if(clear(x,z))nodes[key(x,z)]={position:[x,env.height(x,z),z],edges:[]};
  for(const [id,n]of Object.entries(nodes))for(const [dx,dz]of [[4,0],[-4,0],[0,4],[0,-4],[4,4],[4,-4],[-4,4],[-4,-4]]){
   const [x,,z]=n.position,to=key(x+dx,z+dz),other=nodes[to];if(!other)continue;
@@ -324,10 +321,11 @@ function create(plan,options={}){
   n.edges.push({to,distance,terrain:1+8*slope});
  }
  const nearest=p=>Object.keys(nodes).reduce((best,k)=>!best||Math.hypot(nodes[k].position[0]-p[0],nodes[k].position[2]-p[1])<Math.hypot(nodes[best].position[0]-p[0],nodes[best].position[2]-p[1])?k:best,null);
- const depot=nearest(plan.core),jobs=plan.buildings.map(b=>({id:b.id,name:b.name,footprint:{x:b.x,z:b.y,width:b.w,depth:b.h},at:nearest(b.door),wood:b.wood,work:b.work*3600,done:0,delivered:0,used:0,reserved:0,status:'planned',completedAt:null}));
- const names=['Abbie','Ani','Mommy','Daddy','Jeff','Alexis','Pearl','Marley'];
- const workers=names.map((name,i)=>({id:name.toLowerCase(),name,at:depot,edge:null,path:[],task:null,cargo:0,capacity:name==='Marley'?1:name==='Pearl'?2:8,buildRate:name==='Marley'?0:name==='Pearl'?.35:1,speed:cfg.speed*(.9+(i%3)*.1),activity:'resting',workedSeconds:0,travelSeconds:0,trips:0,restUntil:0}));
- const s={version:1,config:cfg,seed:plan.config.seed,seconds:0,nodes,depot,sources:[{id:'depot',at:depot,stock:cfg.initialStock}],jobs,workers,trails:{},ledger:{initial:cfg.initialStock,delivered:0,used:0},events:[],daily:[],terrain:env.w.terrain,water:env.w.water};
+ const lane=new Set(plan.paths.flatMap(p=>p.points.map(p=>key(p[0],p[1]))));for(const [id,n]of Object.entries(nodes))for(const edge of n.edges)if(lane.has(id)&&lane.has(edge.to))edge.terrain*=.7;
+ const depot=nearest(plan.core),jobs=plan.buildings.map(b=>({id:b.id,name:b.name,footprint:{x:b.cx-b.width/2,z:b.cz-b.depth/2,width:b.width,depth:b.depth,angle:b.angle,polygon:b.polygon},at:nearest(b.door),wood:b.wood,work:b.work*3600,done:0,delivered:0,used:0,reserved:0,status:'planned',completedAt:null}));
+ const names=['Abbie','Ani','Mommy','Daddy','Jeff','Alexis','Marley'];
+ const workers=names.map((name,i)=>({id:name.toLowerCase(),name,at:depot,edge:null,path:[],task:null,cargo:0,capacity:name==='Marley'?1:8,buildRate:name==='Marley'?0:1,speed:cfg.speed*(.9+(i%3)*.1),activity:'resting',workedSeconds:0,travelSeconds:0,trips:0,restUntil:0}));
+ const s={version:1,config:cfg,seed:plan.config.seed,seconds:0,nodes,depot,sources:[{id:'depot',at:depot,stock:cfg.initialStock}],jobs,workers,trails:{},ledger:{initial:cfg.initialStock,delivered:0,used:0},events:[],daily:[],terrain:env.w.terrain,water:env.w.water,property:plan.world.property};
  for(const j of jobs)if(!route(s,depot,j.at))throw Error('Unreachable construction site '+j.id);
  return s;
 }
@@ -376,6 +374,8 @@ function assign(s,w){
   const builders=s.workers.filter(a=>a.task?.kind==='build'&&a.task.job===j.id).length;
   if(w.buildRate>0&&j.delivered-j.used>1e-7&&builders<2&&go(s,w,j.at)){w.task={kind:'build',job:j.id};w.activity='walking-to-build';return;}
  }
+ const stops=s.jobs.filter(j=>j.status==='complete');const next=stops[(Math.floor(s.seconds/300)+s.workers.indexOf(w))%Math.max(1,stops.length)];
+ if(next&&go(s,w,next.at)){w.activity='walking-to-inspect';w.restUntil=s.seconds+300;return;}
  w.activity='waiting-for-work-or-materials';w.restUntil=s.seconds+60;
 }
 function step(s){
@@ -386,7 +386,7 @@ function step(s){
   w.motion=[];
   if(!shift){
    // Finish an in-flight haul before resting so carried materials are not teleported.
-   if(!w.task){if(w.at!==s.depot&&!w.edge&&!w.path.length)go(s,w,s.depot);if(w.edge||w.path.length){w.activity='walking-home';travel(s,w,dt);}else w.activity='resting';continue;}
+   if(!w.task){const homeId=['abbie','mommy','daddy','marley'].includes(w.id)?'abbie-home':'ani-home',home=s.jobs.find(j=>j.id===homeId&&j.status==='complete')?.at||s.depot;if(w.at!==home&&!w.edge&&!w.path.length)go(s,w,home);if(w.edge||w.path.length){w.activity='walking-home';travel(s,w,dt);}else w.activity='resting';continue;}
    if(w.task.kind==='build'){w.task=null;w.path=[];if(w.edge){w.path=[];travel(s,w,dt);}continue;}
   }
   if(!w.task){if(w.edge||w.path.length){travel(s,w,dt);continue;}if(s.seconds<w.restUntil)continue;assign(s,w);if(!w.task)continue;}
@@ -474,7 +474,7 @@ function review(s,adopt){const p=s.planner;if(!p||s.seconds<p.nextReview)return;
  const jobs=s.workers.jobs,active=jobs.filter(j=>j.status!=='queued'&&j.status!=='complete');if(active.length>=3)return;
  let decision;const ready=['water','feed'].every(id=>jobs.find(j=>j.id===id)?.status==='complete');
  if(ready&&p.adoptions.length&&!s.links.some(l=>!l.admittedAt)){
-  const next=p.adoptions[0],req=adopt(next);p.adoptions.shift();decision={kind:'prepare-animal-home',species:next.species,count:next.count,request:req.id,reason:'Water and feed facilities are ready; the previous arrivals are settled. Prepare the next habitat before inviting animals.'};
+  const next=p.adoptions[0],req=adopt(next);if(s.links.some(l=>l.request===req.id))p.adoptions.shift();decision={kind:'prepare-animal-home',species:next.species,count:next.count,request:req.id,reason:'Water and feed facilities are ready; the previous arrivals are settled. Prepare the next habitat before inviting animals.'};
  }else{const order=['water','feed','abbie-home','ani-home','shelter','garden'],job=order.map(id=>jobs.find(j=>j.id===id&&j.status==='queued')).find(Boolean);if(!job)return;job.status='planned';job.issuedAt=s.seconds;decision={kind:'issue-construction',job:job.id,reason:job.id==='water'?'Establish a reliable water point first.':job.id==='feed'?'Prepare safe feed storage before animals arrive.':'The workforce has room for another project; build the family and farm facilities.'};}
  if(daddy.task?.kind==='build'){daddy.task=null;daddy.path=[];}p.lastDecision=s.seconds;p.busyUntil=s.seconds+600;daddy.activity='planning-the-farm';const event={time:s.seconds,type:'planner-decision',actor:'daddy',...decision};p.decisions.push(event);s.events.push(event);
 }
@@ -500,25 +500,47 @@ function command(s,c){
  if(!p)return req;
  const pending=s.links.reduce((n,l)=>n+l.count,0);
  if(pending+c.count>s.config.maxResidents){p.status='waiting';req.missing=['care-capacity'];for(const k of p.cells)delete a.reserved[k];return req;}
- // Reserve a leaf cell for a small shelter footprint, preserving connected animal ground.
- let site=null,entrance=null;
- for(const k of [...p.cells].reverse()){
-  const neighbors=a.nodes[k].edges.filter(e=>p.cells.includes(e.to));
-  if(!w.nodes[k]||neighbors.length!==1||!w.nodes[neighbors[0].to])continue;
-  if(w.workers.some(r=>r.at===k||r.edge?.to===k||r.path.includes(k)))continue;
-  site=k;entrance=neighbors[0].to;break;
+ // Grow the new paddock from the service edge; every crossing uses its actual gate.
+ const member=new Set(p.cells),anchor=c.species==='horse'?a.property.barn.turnout:c.species==='chicken'?a.property.domestic[0]:a.property.barn.service;
+ const edgeCandidates=[];
+ for(const k of p.cells){const [x,z]=a.nodes[k].p;for(const [dx,dz]of [[4,0],[-4,0],[0,4],[0,-4]]){const outside=`${x+dx},${z+dz}`;if(member.has(outside)||!w.nodes[k]||!w.nodes[outside]||a.reserved[outside])continue;edgeCandidates.push({inside:k,outside,dx,dz,score:Math.hypot(x-anchor[0],z-anchor[1])});}}
+ edgeCandidates.sort((x,y)=>x.score-y.score);
+ let gate,job,shape;
+ const canService=(candidate,trial)=>{
+  const seen=new Set([w.depot]),queue=[w.depot];
+  const clearEdge=(k,e)=>{const n=w.nodes[k],to=w.nodes[e.to];return to&&(member.has(k)===member.has(e.to)||(k===candidate.inside&&e.to===candidate.outside)||(k===candidate.outside&&e.to===candidate.inside))&&(!trial||[0,.25,.5,.75,1].every(t=>!FarmProperty.contains(trial,n.position[0]+(to.position[0]-n.position[0])*t,n.position[2]+(to.position[2]-n.position[2])*t,1.2)));};
+  for(let i=0;i<queue.length;i++)for(const e of w.nodes[queue[i]].edges)if(!seen.has(e.to)&&clearEdge(queue[i],e)){seen.add(e.to);queue.push(e.to);}
+  return seen.has(candidate.inside)&&w.jobs.every(j=>seen.has(j.at))&&w.careJobs.every(j=>seen.has(j.at));
+ };
+ const reuse=c.species==='horse'&&!s.links.some(l=>l.species==='horse');
+ for(const candidate of edgeCandidates){
+  if(reuse){if(!canService(candidate,null))continue;gate=candidate;job=w.jobs.find(j=>j.id==='shelter');break;}
+  const [x,z]=a.nodes[candidate.inside].p,dims={cow:[10,7],goat:[7,5],chicken:[5,4]}[c.species]||[7,5],normal=[candidate.dx/4,candidate.dz/4];
+  const center=[x+normal[0]*(dims[1]/2+8),z+normal[1]*(dims[1]/2+8)],angle=Math.atan2(-normal[0],normal[1]);
+  const trial={cx:center[0],cz:center[1],width:dims[0],depth:dims[1],angle};const poly=FarmProperty.polygon(trial,2);
+  if(!poly.every(q=>a.env.dry(...q)&&Math.abs(q[1]-a.env.waterY(q[0]))>19&&a.env.slope(...q)<.1))continue;
+  if(w.jobs.some(j=>{const q=j.footprint;return q&&FarmProperty.intersects(trial,{cx:q.x+q.width/2,cz:q.z+q.depth/2,width:q.width,depth:q.depth,angle:q.angle||0},4);}))continue;
+  if(Object.entries(a.reserved).some(([k])=>FarmProperty.contains(trial,...a.nodes[k].p,2)))continue;
+  if(w.workers.some(r=>[r.at,r.edge?.to,...r.path].filter(Boolean).some(k=>{const n=w.nodes[k];return n&&FarmProperty.contains(trial,n.position[0],n.position[2],2)})))continue;
+  if(!canService(candidate,trial))continue;gate=candidate;shape=trial;break;
  }
- if(!site){p.status='waiting';req.missing=['shelter-site'];for(const k of p.cells)delete a.reserved[k];return req;}
- const [x,,z]=w.nodes[site].position;
- p.cells=p.cells.filter(k=>k!==site);p.cells=[entrance,...p.cells.filter(k=>k!==entrance)];
- // Remove the building footprint and diagonals that cut its corners from human navigation.
- delete w.nodes[site];for(const n of Object.values(w.nodes))n.edges=n.edges.filter(e=>e.to!==site&&!(Math.abs(n.position[0]-w.nodes[e.to].position[0])>0&&Math.abs(n.position[2]-w.nodes[e.to].position[2])>0&&((n.position[0]===x&&w.nodes[e.to].position[2]===z)||(n.position[2]===z&&w.nodes[e.to].position[0]===x))));
- for(const k of p.cells)a.nodes[k].edges=a.nodes[k].edges.filter(e=>e.to!==site);
- const job={id:'build-'+p.id,name:M.profiles[c.species].shelter,footprint:{x:x-1.5,z:z-1.5,width:3,depth:3},at:entrance,wood:20+c.count*5,work:(4+c.count)*3600,done:0,delivered:0,used:0,reserved:0,status:'planned',completedAt:null};
- if(!W.route(w,w.depot,entrance))throw Error('Shelter cannot be serviced');
- w.jobs.push(job);
- const waterAt=p.cells[Math.min(1,p.cells.length-1)];
- if(!w.nodes[waterAt]||!W.route(w,w.depot,waterAt))throw Error('Water point cannot be serviced');
+ if(!gate){p.status='waiting';req.missing=['accessible-paddock-service-edge'];for(const k of p.cells)delete a.reserved[k];if((c._placementAttempt||0)<16){req.status='replanned';a.projects=a.projects.filter(q=>q!==p);return command(s,{...c,_placementAttempt:(c._placementAttempt||0)+1});}return req;}
+ const entrance=gate.inside;
+ p.cells=[entrance,...p.cells.filter(k=>k!==entrance)];
+ p.gateInside=gate.inside;p.gateOutside=gate.outside;
+ p.fences=FarmProperty.boundary(p.cells.map(k=>a.nodes[k].p),a.nodes[entrance].p.map((v,i)=>v+[gate.dx,gate.dz][i]/2));
+ if(!job){
+  const removed=new Set(Object.keys(w.nodes).filter(k=>FarmProperty.contains(shape,w.nodes[k].position[0],w.nodes[k].position[2],1.2)));
+  for(const [id,t]of Object.entries(w.trails))if(removed.has(t.a)||removed.has(t.b))delete w.trails[id];for(const k of removed){delete w.nodes[k];if(a.nodes[k])a.nodes[k].pasture=false;}for(const n of Object.values(a.nodes))n.edges=n.edges.filter(e=>!removed.has(e.to));for(const n of Object.values(w.nodes))n.edges=n.edges.filter(e=>!removed.has(e.to)&&[.25,.5,.75].every(t=>{const q=w.nodes[e.to].position;return !FarmProperty.contains(shape,n.position[0]+(q[0]-n.position[0])*t,n.position[2]+(q[2]-n.position[2])*t,1.2)}));
+  job={id:'build-'+p.id,name:M.profiles[c.species].shelter,footprint:{x:shape.cx-shape.width/2,z:shape.cz-shape.depth/2,width:shape.width,depth:shape.depth,angle:shape.angle,polygon:FarmProperty.polygon(shape)},at:gate.outside,wood:20+c.count*5,work:(4+c.count)*3600,done:0,delivered:0,used:0,reserved:0,status:'planned',completedAt:null};w.jobs.push(job);
+ }else if(job.status==='queued'){job.status='planned';job.issuedAt=s.seconds;}
+ p.buildingId=job.id;
+ // Fence edges affect human routing too; no walking through a completed field boundary.
+ for(const [k,n]of Object.entries(w.nodes))n.edges=n.edges.filter(e=>member.has(k)===member.has(e.to)||(k===gate.inside&&e.to===gate.outside)||(k===gate.outside&&e.to===gate.inside));
+ for(const actor of w.workers){const goal=actor.path.at(-1);if(goal){const path=W.route(w,actor.edge?.to||actor.at,goal);if(path)actor.path=path;else throw Error('New paddock blocks an existing task');}}
+ const waterAt=p.cells.find(k=>k!==entrance&&w.nodes[k]&&W.route(w,entrance,k))||entrance;
+ if(!W.route(w,w.depot,entrance)||!W.route(w,w.depot,waterAt))throw Error('Paddock gate cannot be serviced');
+ p.waterAt=waterAt;
  const link={id:p.id,request:req.id,job:job.id,species:c.species,count:c.count,admittedAt:null};s.links.push(link);
  w.cleaningJobs.push({id:p.id+'-clean',habitat:p.id,at:entrance,dirty:0,reserved:0});
  for(const [kind,resource,at]of [['food',M.profiles[c.species].food,entrance],['water','water',waterAt]])w.careJobs.push({id:p.id+'-'+kind,habitat:p.id,kind,resource,at,enabled:false,target:0,delivered:0,reserved:0,transferred:0});
@@ -586,32 +608,86 @@ function balances(s){
 function frame(s){
  const f=W.frame(s.workers);
  for(const r of f.workers){const actual=s.workers.workers.find(w=>w.id===r.id);if(['care','clean'].includes(actual.task?.kind))r.carrying.material=actual.task.resource;}
- return {...f,paused:s.paused,animals:s.animals.manager.residents.map(r=>{const [x,z]=A.position(s.animals,r),n=s.workers.nodes[r.at];return {id:r.id,name:r.name,species:r.species,position:[x,r.edge?(n.position[1]+(s.workers.nodes[r.edge.to].position[1]-n.position[1])*(1-r.edge.remaining/r.edge.total)):n.position[1],z],activity:r.activity,happiness:r.happiness,habitat:r.habitat,arrivedAt:r.arrivedAt};}),habitats:Object.values(s.animals.habitats).map(h=>({id:h.id,foodStock:h.foodStock,waterStock:h.waterStock,shelter:s.workers.nodes[h.shelter].position,water:s.workers.nodes[h.water].position})),careStock:structuredClone(s.workers.careStock),careJobs:structuredClone(s.workers.careJobs),cleaningJobs:structuredClone(s.workers.cleaningJobs),compost:s.workers.compost,balances:balances(s)};
+ return {...f,paddocks:s.animals.projects.filter(p=>p.cells&&p.fences).map(p=>({id:p.id,species:p.species,buildingId:p.buildingId,stage:s.workers.jobs.find(j=>j.id===p.buildingId)?.status||p.status,fences:p.fences,gate:s.animals.nodes[p.gateInside].p,area:p.cells.length*16})),paused:s.paused,animals:s.animals.manager.residents.map(r=>{const [x,z]=A.position(s.animals,r),n=s.workers.nodes[r.at];return {id:r.id,name:r.name,species:r.species,position:[x,r.edge?(n.position[1]+(s.workers.nodes[r.edge.to].position[1]-n.position[1])*(1-r.edge.remaining/r.edge.total)):n.position[1],z],activity:r.activity,happiness:r.happiness,habitat:r.habitat,arrivedAt:r.arrivedAt};}),habitats:Object.values(s.animals.habitats).map(h=>({id:h.id,foodStock:h.foodStock,waterStock:h.waterStock,shelter:s.workers.nodes[h.shelter].position,water:s.workers.nodes[h.water].position})),careStock:structuredClone(s.workers.careStock),careJobs:structuredClone(s.workers.careJobs),cleaningJobs:structuredClone(s.workers.cleaningJobs),compost:s.workers.compost,balances:balances(s)};
 }
 module.exports={create,command,step,frame,balances};
 
 
 },
+"./scene-state.cjs":function(module,exports,require){
+const R=require('./ranch.cjs'),W=require('./workers.cjs'),{environment}=require('./sim.cjs');
+function checkpoint(state,plan){
+ // Environment methods are reconstructed from the terrain recipe; all mutable state is retained.
+ const {env,...animals}=state.animals;
+ return {schema:'ranch-scene-initial-conditions',version:1,planConfig:structuredClone(plan.config),world:structuredClone(plan.world),state:structuredClone({...state,animals})};
+}
+function restore(input){
+ if(input?.schema!=='ranch-scene-initial-conditions'||input.version!==1||!input.state?.workers?.nodes||!input.state?.animals?.nodes||!Number.isFinite(input.state.seconds)||!input.planConfig)throw Error('Choose a supported ranch starting snapshot.');
+ const s=structuredClone(input.state),c=input.planConfig;
+ if(s.seconds!==s.workers.seconds||s.animals.minute*60!==s.seconds)throw Error('Starting snapshot clocks are inconsistent.');
+ s.animals.env=environment(c.seed,c.size,c.topology);
+ return s;
+}
+function describe(s){return {seconds:s.seconds,buildings:s.workers.jobs.filter(j=>j.status==='complete').length,planned:s.workers.jobs.length,residents:s.animals.manager.residents.length,people:s.workers.workers.filter(w=>w.id!=='marley').length,habitats:Object.keys(s.animals.habitats).length,depot:structuredClone(s.workers.careStock),wood:s.workers.sources.reduce((n,x)=>n+x.stock,0)};}
+async function simulate(input,options={},progress=()=>{}){
+ const s=restore(input),days=Number(options.days??1);
+ if(![1,3,7].includes(days))throw Error('Choose one, three or seven days.');
+ if(s.paused)throw Error('This starting snapshot needs care before it can run. Build a healthy ranch first.');
+ const start=s.seconds,initial=describe(s),eventStart=s.workers.events.length;
+ s.config.careSupply=options.deliveries!==false;
+ s.workers.config.scheduledSupplyPerDay ??= s.workers.config.supplyPerDay;
+ s.workers.config.supplyPerDay=options.deliveries===false?0:s.workers.config.scheduledSupplyPerDay;
+ const frame=()=>{const f=R.frame(s);f.neighborhood=s.neighborhood?NeighborhoodMission.inspect(s.neighborhood):null;for(const w of f.workers)w.offsite=!!s.workers.workers.find(a=>a.id===w.id).offsite;for(const a of f.animals)a.motion=s.animals.manager.residents.find(r=>r.id===a.id).motion||[];return f;};
+ const frames=[frame()],samples=[],animalSamples=[];
+ const record=()=>{samples.push({seconds:s.seconds-start,workers:s.workers.workers.map(w=>({id:w.id,name:w.name,position:W.position(s.workers,w),activity:w.activity,offsite:!!w.offsite,motion:(w.motion||[]).map(p=>({...p,seconds:p.seconds-start}))}))});};
+ const recordAnimals=()=>animalSamples.push({seconds:s.seconds-start,animals:frame().animals.map(a=>({...a,motion:(a.motion||[]).map(p=>({...p,seconds:p.seconds-start}))}))});
+ record();recordAnimals();
+ while(s.seconds<start+days*86400&&!s.paused){
+  const roster=s.workers.workers,held=s.neighborhood?NeighborhoodMission.tick(s,W):new Set();
+  s.workers.workers=roster.filter(w=>!held.has(w.id));
+  try{R.step(s);}finally{s.workers.workers=roster;}
+  record();
+  if((s.seconds-start)%600===0)recordAnimals();
+  if((s.seconds-start)%3600===0){frames.push(frame());progress({type:'progress',message:'Running this ranch: '+((s.seconds-start)/3600)+' / '+days*24+' hours',progress:(s.seconds-start)/(days*86400)});await new Promise(r=>setTimeout(r,0));}
+ }
+ if(frames.at(-1).seconds!==s.seconds)frames.push(frame());
+ const after=describe(s),elapsed=s.seconds-start,events=[...s.workers.events.slice(eventStart),...(s.neighborhood?.events||[]).filter(e=>e.time>=start)];
+ return {version:2,neighborhood:s.neighborhood?NeighborhoodMission.inspect(s.neighborhood):null,giftBalances:s.neighborhood?NeighborhoodMission.balance(s.neighborhood):null,seed:input.planConfig.seed,world:structuredClone(input.world),frames,tracks:[],events,duration:s.seconds,startSeconds:start,elapsed,paused:s.paused,initialConditions:checkpoint(s,{config:input.planConfig,world:input.world}),initialSummary:initial,scenario:{days,deliveries:options.deliveries!==false},summary:{animals:after.residents,completed:after.buildings,total:after.planned,care:events.filter(e=>e.type==='care-delivery').length,cleanups:events.filter(e=>e.type==='cleaning-complete').length},activityLoop:{duration:elapsed,startSeconds:start,playbackSeconds:300,samples,animalSamples,paused:s.paused},balances:R.balances(s)};
+}
+module.exports={checkpoint,restore,describe,simulate};
+},
 "./browser-entry.cjs":function(module,exports,require){
 const P=require('./planner.cjs'),R=require('./ranch.cjs'),W=require('./workers.cjs'),{environment,grow}=require('./sim.cjs');
 function capture(s){const f=R.frame(s);f.planner=s.planner?{actor:s.planner.actor,lastDecision:s.planner.decisions.at(-1),pending:s.planner.adoptions.length}:null;for(const a of f.animals)a.motion=s.animals.manager.residents.find(r=>r.id===a.id).motion||[];return f;}
+let dayReady;
 self.onmessage=async({data})=>{
+ if(data.type==='day-rendered'){dayReady?.();return;}
  try{
-  const seed=data.seed>>>0,size=data.size==='large'?764:540,factor=data.size==='large'?2:1;
+  if(data.type==='simulate-scene'){const run=await require('./scene-state.cjs').simulate(data.initialConditions,data,postMessage);postMessage({type:'result',run});return;}
+  const seed=data.seed>>>0,size=(data.size==='large'?764:540)*(data.sceneOnly?[1,1.25,1.5].includes(Number(data.area))?Number(data.area):1:1),factor=data.size==='large'?2:1;
   if(data.type==='territory'){postMessage({type:'territory',world:environment(seed,size).w,seed});return;}
   postMessage({type:'progress',message:'Finding room for both families…',progress:0});
-  const plan=grow({seed,size,horses:6*factor,mode:'grazing'},8);if(!plan.valid)throw Error('This territory needs more suitable land. Try a new territory.');
-  const s=R.create(plan);s.config.horseActivities=true;P.start(s,[['horse',6],['cow',2],['goat',2],['chicken',6]].map(([species,count])=>({species,count:count*factor})));
+  const type=data.sceneOnly?data.farmType:'mixed',mix=type==='horses'?[['horse',16]]:type==='smallstock'?[['goat',8],['chicken',8]]:[['horse',6],['cow',2],['goat',2],['chicken',6]];
+  const plan=grow({seed,size,topology:data.sceneOnly?data.topology:4,horses:6*factor,mode:'grazing',buildingGap:data.sceneOnly?({compact:4,balanced:8,spread:16}[data.density]??8):8,strategy:data.sceneOnly&&data.density==='spread'?'spread':'yard'},8);if(!plan.valid)throw Error('This territory needs more suitable land. Try a new territory.');
+  const s=R.create(plan);s.config.horseActivities=true;P.start(s,mix.map(([species,count])=>({species,count:count*factor})));
   const frames=[capture(s)],tracks=[],events=[],last={},duration=(factor===2?30:20)*86400;
   for(let i=0;i<duration/10&&!s.paused;i++){
    R.step(s);
-   for(const w of s.workers.workers){const value={id:w.id,position:W.position(s.workers,w),activity:w.activity,cargo:w.cargo,material:w.task?.resource||'wood',job:w.task?.job||null};const stamp=JSON.stringify(value);if(last[w.id]!==stamp){tracks.push({seconds:s.seconds,...value,motion:w.motion||[]});last[w.id]=stamp;}}
-   if(s.seconds%600===0)frames.push(capture(s));
-   if(s.seconds%86400===0){postMessage({type:'progress',message:`Simulating day ${s.seconds/86400} of ${duration/86400}…`,progress:s.seconds/duration});await new Promise(r=>setTimeout(r,0));}
+   for(const w of (data.sceneOnly?[]:s.workers.workers)){const value={id:w.id,position:W.position(s.workers,w),activity:w.activity,cargo:w.cargo,material:w.task?.resource||'wood',job:w.task?.job||null};const stamp=JSON.stringify(value);if(last[w.id]!==stamp){tracks.push({seconds:s.seconds,...value,motion:w.motion||[]});last[w.id]=stamp;}}
+   if(s.seconds%(data.sceneOnly?3600:600)===0)frames.push(capture(s));
+   if(s.seconds%86400===0){postMessage({type:'progress',message:`Simulating day ${s.seconds/86400} of ${duration/86400}…`,progress:s.seconds/duration});if(data.sceneOnly&&data.dailyPreview){await new Promise(resolve=>{const timeout=setTimeout(resolve,5000);dayReady=()=>{clearTimeout(timeout);resolve()};postMessage({type:'day',run:{seed,world:plan.world,frames:[capture(s)],duration:s.seconds,paused:s.paused,summary:{animals:s.animals.manager.residents.length,completed:s.workers.jobs.filter(j=>j.status==='complete').length,total:s.workers.jobs.length,care:s.workers.events.filter(e=>e.type==='care-delivery').length}}});});dayReady=null;}else await new Promise(r=>setTimeout(r,0));}
   }
   if(frames.at(-1).seconds!==s.seconds)frames.push(capture(s));
   for(const [source,list]of [['workers',s.workers.events],['animals',s.animals.manager.events],['ranch',s.events]])for(const e of list)events.push({source,...e});
-  postMessage({type:'result',run:{version:1,id:crypto.randomUUID(),seed,sizeLabel:factor===2?'Large':'Small',size,objective:{animals:16*factor,description:'Build shelters and sustain '+16*factor+' sanctuary animals'},created:new Date().toISOString(),world:environment(seed,size).w,frames,tracks,events,duration:s.seconds,paused:s.paused,summary:{animals:s.animals.manager.residents.length,completed:s.workers.jobs.filter(j=>j.status==='complete').length,total:s.workers.jobs.length,care:s.workers.events.filter(e=>e.type==='care-delivery').length,cleanups:s.workers.events.filter(e=>e.type==='cleaning-complete').length},sampling:'Workers and route waypoints at 10 seconds; animal and world snapshots at 10 minutes.'}});
+  const initialConditions=data.checkpoint?require('./scene-state.cjs').checkpoint(s,plan):null;
+  let activityLoop=null;
+  if(data.activityLoop&&!s.paused){
+   postMessage({type:'progress',message:'Preparing a day of farm life...',progress:1});
+   const start=s.workers.seconds,samples=[];const record=()=>({seconds:s.workers.seconds-start,workers:s.workers.workers.map(w=>({id:w.id,position:W.position(s.workers,w),activity:w.activity,motion:(w.motion||[]).map(p=>({...p,seconds:p.seconds-start}))}))});
+   samples.push(record());for(let t=0;t<8640;t++){W.step(s.workers);samples.push(record());if(t%360===0)await new Promise(r=>setTimeout(r,0));}
+   activityLoop={duration:86400,playbackSeconds:300,samples};
+  }
+  postMessage({type:'result',run:{initialConditions,activityLoop,version:1,id:crypto.randomUUID(),seed,sizeLabel:factor===2?'Large':'Small',size,objective:{animals:16*factor,description:'Build shelters and sustain '+16*factor+' sanctuary animals'},created:new Date().toISOString(),world:plan.world,frames,tracks,events,duration:s.seconds,paused:s.paused,summary:{animals:s.animals.manager.residents.length,completed:s.workers.jobs.filter(j=>j.status==='complete').length,total:s.workers.jobs.length,care:s.workers.events.filter(e=>e.type==='care-delivery').length,cleanups:s.workers.events.filter(e=>e.type==='cleaning-complete').length},sampling:'Workers and route waypoints at 10 seconds; animal and world snapshots at 10 minutes.'}});
  }catch(e){postMessage({type:'error',message:e.message});}
 };
 

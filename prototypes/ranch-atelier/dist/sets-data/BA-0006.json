@@ -1,0 +1,49 @@
+{
+  "id": "aw.ranch.asset.ba-0006",
+  "name": "Folded traveling stall frame",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 21,
+    "triangles": 672,
+    "bounds_min": [
+      -1.1000001430511475,
+      -0.5099999904632568,
+      0.00599999725818634
+    ],
+    "bounds_max": [
+      1.100000023841858,
+      0.3198994994163513,
+      0.43959781527519226
+    ],
+    "dimensions_m": [
+      2.2,
+      0.8299,
+      0.4336
+    ],
+    "material_slots": [
+      "Rope",
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Rope",
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0006",
+  "intent": "A tied bundle of poles and folding supports ready for transport.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0006",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

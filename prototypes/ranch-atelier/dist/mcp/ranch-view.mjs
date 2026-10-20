@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { createHash, randomUUID } from 'node:crypto';
 import os from 'node:os';
 import path from 'node:path';
 import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
@@ -33,4 +34,19 @@ server.registerTool('get_view_image', { description: 'See the latest captured Ra
   const { image, ...context } = view;
   return { content: [text(context), ...(image ? [{ type: 'image', mimeType: 'image/jpeg', data: image.split(',')[1] }] : [text({ message: 'No image available. Check sharing and captureError.' })])] };
 });
+const targetSchema=z.object({sessionId:z.string(),documentId:z.string(),slug:z.string(),search:z.string(),buildId:z.string()});
+async function actionRequest(url,body){
+  const token=body?createHash('sha256').update('ranch-actions-v1:'+credentials.writeKey).digest('hex'):credentials.readKey;
+  const response=await fetch(new URL(url,credentials.url),{method:body?'POST':'GET',headers:{Authorization:'Bearer '+token,'Content-Type':'application/json'},...(body?{body:JSON.stringify(body)}:{}),signal:AbortSignal.timeout(20000)});
+  const data=await response.json();if(!response.ok)throw Error(data.error||'Action transport HTTP '+response.status);return data;
+}
+server.registerTool('list_actions',{description:'Discover typed actions actually registered by a specific paired app tab. Returns exact target, provider revisions, schemas and disabled reasons. Does not mutate the app.',annotations,inputSchema:{sessionId:z.string()}},async({sessionId})=>{
+  const view=(await read(sessionId)).views[0];return {content:[text({stale:view?.stale??true,capturedAt:view?.capturedAt,...(view?.actions||{providers:[],message:'No action providers on this page/build'})})]};
+});
+server.registerTool('execute_action',{description:'Submit a typed action advertised by list_actions. Use its exact target and provider revision. Reuse commandId for retries; accepted means queued, not completed. Inspect get_action_result and fresh state/image to verify completion.',annotations:{readOnlyHint:false,destructiveHint:true,idempotentHint:true,openWorldHint:false},inputSchema:{target:targetSchema,action:z.string(),arguments:z.record(z.string(),z.unknown()),expectedRevision:z.union([z.number(),z.string()]),commandId:z.string().regex(/^[a-zA-Z0-9-]{16,80}$/).optional()}},async(args)=>{
+  if(!credentials.writeKey)throw Error('Mutation pairing credential unavailable');
+  const command={id:args.commandId||randomUUID(),target:args.target,action:args.action,arguments:args.arguments,expectedRevision:args.expectedRevision,expiresAt:Date.now()+30000};
+  return {content:[text(await actionRequest('/api/app-actions',{command}))]};
+});
+server.registerTool('get_action_result',{description:'Read the queued, expired, succeeded or failed result of a command. A successful receipt includes resulting state and revisions. Does not resubmit or execute.',annotations,inputSchema:{sessionId:z.string(),commandId:z.string()}},async({sessionId,commandId})=>({content:[text(await actionRequest('/api/app-actions?sessionId='+encodeURIComponent(sessionId)+'&id='+encodeURIComponent(commandId)))]}));
 await server.connect(new StdioServerTransport());

@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0069",
+  "name": "Lost goods keeping shelf",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 29,
+    "triangles": 1100,
+    "bounds_min": [
+      -0.675000011920929,
+      -0.33500000834465027,
+      0.0
+    ],
+    "bounds_max": [
+      0.675000011920929,
+      0.33500000834465027,
+      1.3700000047683716
+    ],
+    "dimensions_m": [
+      1.35,
+      0.67,
+      1.37
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Timber"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "TimberLight",
+    "Timber"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0069",
+  "intent": "An open shelf in the fictional market steward's sheltered space.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0069",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

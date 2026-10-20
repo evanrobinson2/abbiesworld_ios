@@ -1,30 +1,9 @@
 import * as T from 'three';
 // Original ranch materials: broad values, subtle pigment, restrained ink.
 // Inspired by the recovered Dorf study; no game textures or meshes used here.
-const ramp=new T.DataTexture(new Uint8Array([105,180,245]),3,1,T.RedFormat);
-ramp.minFilter=ramp.magFilter=T.NearestFilter;ramp.generateMipmaps=false;ramp.needsUpdate=true;
-export function storyMaterial(color,kind='wood'){
- const m=new T.MeshToonMaterial({color,gradientMap:ramp});
- m.userData.storyKind=kind;
- return m;
-}
-const outline=new T.MeshBasicMaterial({color:'#233327',side:T.BackSide});
-outline.onBeforeCompile=s=>{
- s.vertexShader=s.vertexShader.replace('#include <begin_vertex>','#include <begin_vertex>\ntransformed += normal * 0.035;');
-};
-outline.customProgramCacheKey=()=> 'ranch-ink-shell-v1';
-export function inkEdges(object){
- if(object.material.userData.storyKind==='ground')return;
- if(object.geometry instanceof T.IcosahedronGeometry || object.geometry instanceof T.CylinderGeometry){
-  const shell=new T.Mesh(object.geometry,outline);shell.raycast=()=>{};object.add(shell);
- }
- if(object.geometry instanceof T.BoxGeometry){
-  const size=new T.Box3().setFromObject(object).getSize(new T.Vector3());
-  if(Math.max(size.x,size.y,size.z)<.7)return;
-  const ink=new T.LineSegments(new T.EdgesGeometry(object.geometry,35),new T.LineBasicMaterial({color:'#293227'}));
-  ink.raycast=()=>{};object.add(ink);
- }
-}
+import {ranchMaterial} from './tile-materials.js';
+export function storyMaterial(color,kind='wood'){return ranchMaterial(color,kind==='wood'?'timber':kind);}
+export function inkEdges(object){} // Shared renderer adds scale-independent ink.
 export function meadowPatches(scene){
  const patch=(points,color,y=.018)=>{const shape=new T.Shape();points.forEach(([x,z],i)=>i?shape.lineTo(x,-z):shape.moveTo(x,-z));shape.closePath();const geom=new T.ShapeGeometry(shape);geom.rotateX(-Math.PI/2);const o=new T.Mesh(geom,storyMaterial(color,'ground'));o.position.y=y;o.receiveShadow=true;scene.add(o);};
  patch([[-23,-2],[-20,-9],[-14,-13],[-7,-10],[-9,-3],[-15,2]],'#94a667');

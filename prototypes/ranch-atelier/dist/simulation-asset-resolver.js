@@ -4,11 +4,11 @@ const stages = new Set(['planned', 'foundation', 'frame', 'roof', 'complete']);
 const baseBuildings = { shelter: 'shelter', 'abbie-home': 'family-home', 'ani-home': 'family-home', feed: 'feed-store', water: 'water-point', garden: 'kitchen-garden' };
 const shelters = { horse: 'shelter', cow: 'cattle-shelter', goat: 'goat-shelter', chicken: 'chicken-coop' };
 const buildingNames = { 'equine-shelter': 'shelter', 'cattle-shelter': 'cattle-shelter', 'goat-shelter': 'goat-shelter', 'secure-coop': 'chicken-coop' };
-const workers = new Set(['abbie', 'ani', 'mommy', 'daddy', 'jeff', 'alexis', 'pearl']);
+const workers = new Set(['abbie', 'ani', 'mommy', 'daddy', 'jeff', 'alexis']);
 const animalSubjects = new Set(['horse', 'cow', 'goat', 'chicken']);
 const feeding = new Set(['forage', 'graze', 'browse', 'scratch', 'supplemental-feeding', 'hay', 'drink']);
 const idleAnimals = new Set(['explore', 'settling-in']);
-const workerIdle = new Set(['resting', 'waiting-for-work-or-materials', 'walking-home', 'walking-to-care-supplies', 'walking-to-clean', 'walking-to-materials', 'walking-to-build', 'walking-to-horse']);
+const workerIdle = new Set(['resting', 'waiting-for-work-or-materials', 'walking-home', 'walking-to-inspect', 'walking-to-care-supplies', 'walking-to-clean', 'walking-to-materials', 'walking-to-build', 'walking-to-horse']);
 const workerWork = new Set(['building', 'cleaning', 'composting', 'collecting', 'unloading', 'collecting-food', 'collecting-water', 'replenishing-food', 'replenishing-water']);
 const own = (object, key) => Object.prototype.hasOwnProperty.call(object || {}, key) ? object[key] : undefined;
 

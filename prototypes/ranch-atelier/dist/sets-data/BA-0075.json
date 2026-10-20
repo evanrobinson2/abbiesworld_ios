@@ -1,0 +1,45 @@
+{
+  "id": "aw.ranch.asset.ba-0075",
+  "name": "Trampled straw ground scatter",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 63,
+    "triangles": 896,
+    "bounds_min": [
+      -0.7689603567123413,
+      -0.6021407246589661,
+      0.007146449293941259
+    ],
+    "bounds_max": [
+      0.7533035278320312,
+      0.6135030388832092,
+      0.02099931612610817
+    ],
+    "dimensions_m": [
+      1.5223,
+      1.2156,
+      0.0139
+    ],
+    "material_slots": [
+      "Reed"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 1
+  },
+  "materials": [
+    "Reed"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0075",
+  "intent": "Short broken straw and chaff concentrated near produce stalls.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0075",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

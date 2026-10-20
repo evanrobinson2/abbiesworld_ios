@@ -1,0 +1,157 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-002",
+  "name": "Raised planting bed",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Hold cultivated soil with reachable rows and working paths.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-002",
+  "biome": "settled-river-valley",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 22,
+    "triangles": 544,
+    "bounds_min": [
+      -1.3299999237060547,
+      -0.7649998068809509,
+      -2.561137080192566e-09
+    ],
+    "bounds_max": [
+      1.3359249830245972,
+      0.7650002241134644,
+      0.4329964220523834
+    ],
+    "dimensions_m": [
+      2.66592,
+      1.53,
+      0.433
+    ]
+  },
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "cultivation",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "sow",
+      "weed",
+      "harvest"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "work",
+        "position_blender_m": [
+          0.0,
+          -1.0,
+          0.0015688117127865553
+        ],
+        "role": "work"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "garden work paths",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "prepared",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "sown",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "weedy",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "fallow",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Hold cultivated soil with reachable rows and working paths. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See bed(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/build_garden.py",
+    "entry_point": "bed",
+    "source_sha256": "b061c981f1ad506b83f25c9f8865a4df33d289443c03ad60c1af047efa13c137",
+    "rebuild": "blender --background --python garden-farm/build_garden.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "reviewed base silhouette, readable materials, diorama fit; 2026-10-18",
+    "deployed": false,
+    "normalization_verification": "Blender glTF reimport passed; measured vertices and preserved wearable fitting origin"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-002.glb",
+    "sha256": "72b93f0f6fd9fb0ab1ab922981b91a10cc69664fa38e06ce4aad26bcef08298b",
+    "bytes": 41464
+  }
+}

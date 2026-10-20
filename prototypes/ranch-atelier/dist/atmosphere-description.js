@@ -1,0 +1,9 @@
+export function rng(seed){let n=2166136261;for(const c of String(seed))n=Math.imul(n^c.charCodeAt(0),16777619);return()=>{n+=0x6D2B79F5;let t=n;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
+export function atmosphere({environment='earth',seed=43,time='night',weather='clear',intensity=.5,reducedMotion=false}={}){
+ if(!['earth','vacuum','interior'].includes(environment)||!['day','dusk','night'].includes(time)||!['clear','clouds','rain','snow','mist'].includes(weather)||!Number.isFinite(intensity)||intensity<0||intensity>1)throw Error('Invalid atmosphere controls');
+ const random=rng('sky|'+seed),effective=environment==='earth'&&intensity>0?weather:'clear',night=time==='night',hidden=environment==='interior';
+ const stars=night&&!hidden?Array.from({length:180},(_,i)=>{const a=random()*Math.PI*2,e=.15+random()*1.25;return{id:'star-'+i,position:{x:Math.cos(a)*Math.cos(e)*110,y:Math.sin(e)*110,z:Math.sin(a)*Math.cos(e)*110},size:.12+random()*.22};}):[];
+ const clouds=effective!=='clear'&&!hidden?Array.from({length:Math.ceil(3+intensity*6)},(_,i)=>({id:'cloud-'+i,position:{x:(random()-.5)*65,y:19+random()*7,z:-15-random()*30},scale:3+random()*3,phase:random()*6.28})):[];
+ const particles=['rain','snow'].includes(effective)?Array.from({length:Math.round(80+intensity*160)},()=>({x:(random()-.5)*85,y:random()*40+2,z:(random()-.5)*85})):[];
+ return{schemaVersion:1,environment,seed,time,requestedWeather:weather,weather:effective,intensity,reducedMotion,stars,clouds,particles,moon:night&&!hidden?{position:{x:-14,y:21,z:-18},radius:2}:null,windMetresPerSecond:reducedMotion?0:1.5*intensity,fog:effective==='mist'?{near:65,far:190}:null,uniqueBaseIncrement:0,gameplayEffects:[],notes:environment!=='earth'&&weather!=='clear'?['Atmospheric weather suppressed outside terrestrial exterior']:[]};
+}

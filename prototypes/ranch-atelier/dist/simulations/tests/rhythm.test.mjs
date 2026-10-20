@@ -1,0 +1,7 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {schedule,animalSchedule,dayName,ACTIVITY_RATE,DAY_SECONDS} from '../ranch-rhythm.mjs';import {advanceClock} from '../ranch-clock.mjs';
+const p={id:'child',alive:true,age:9};
+test('weekday school, Saturday play and Sunday play',()=>{assert.equal(schedule(p,{day:1,hour:10}).id,'school');assert.equal(schedule(p,{day:6,hour:10}).id,'play');assert.equal(schedule(p,{day:7,hour:10}).id,'play');assert.equal(dayName(8),'Monday');});
+test('a shared day includes waking meals work breaks and sleep',()=>{const a={id:'adult',alive:true,age:30,occupation:'ranch'};assert.equal(schedule(a,{day:1,hour:6.8}).id,'meal');assert.equal(schedule(a,{day:1,hour:8}).id,'care');assert.equal(schedule(a,{day:1,hour:12.5}).id,'lunch');assert.equal(schedule(a,{day:1,hour:18}).id,'social');assert.equal(schedule(a,{day:1,hour:23}).id,'sleep');});
+test('travel fits the day and animal routines repeat',()=>{assert.ok(50/(1.6*ACTIVITY_RATE)<DAY_SECONDS/24);assert.deepEqual(advanceClock({day:1,hour:0},DAY_SECONDS),{day:2,hour:0});assert.equal(animalSchedule('chicken',22),'Roosting');assert.equal(animalSchedule('chicken',10),'Scratching');assert.equal(animalSchedule('horse',7),'Feeding');});
+import {farmhandsNeeded} from '../ranch-generations.mjs';
+test('sheltering residents do not mask a rain-day care shortage',()=>{const adults=[{id:'adult',alive:true,age:30,occupation:'ranch'}];assert.equal(farmhandsNeeded(adults,11,6,true,1,'rain'),1);assert.equal(farmhandsNeeded(adults,23,6,true,1,'clear'),1);});

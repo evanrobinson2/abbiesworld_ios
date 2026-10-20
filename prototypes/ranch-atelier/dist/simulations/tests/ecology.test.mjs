@@ -1,0 +1,4 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {plantCycle,patchState,renewAnimal} from '../ranch-ecology-state.mjs';
+test('plant lifecycle renews at the same anchor every year',()=>{for(const phase of [.1,.3,.6,.9]){const a=plantCycle(phase,0),b=plantCycle(phase+1,0);assert.equal(a.stage,b.stage);assert.ok(Math.abs(a.scale-b.scale)<1e-8);}});
+test('grazed pasture thins but survives and regrows',()=>{const p={cover:1};patchState(p,1000,10,false);assert.equal(p.cover,.12);patchState(p,1000,0,true);assert.equal(p.cover,1);});
+test('animals renew in place without creating a growing list of objects',()=>{const a={id:'goat-1',species:'goat'};renewAnimal(a,0);const born=a.birthYear;renewAnimal(a,100);assert.equal(a.id,'goat-1');assert.ok(a.generation>1);assert.ok(a.age<14);assert.ok(a.birthYear>born);});

@@ -1,0 +1,55 @@
+{
+  "id": "aw.ranch.asset.ba-0066",
+  "name": "Vendor handwashing station",
+  "dependencies": [
+    "BA-0024"
+  ],
+  "geometry": {
+    "mesh_objects": 17,
+    "triangles": 2540,
+    "bounds_min": [
+      -0.6700000166893005,
+      -0.36000001430511475,
+      -0.0031054113060235977
+    ],
+    "bounds_max": [
+      0.9279999732971191,
+      0.36000001430511475,
+      1.0299999713897705
+    ],
+    "dimensions_m": [
+      1.598,
+      0.72,
+      1.0331
+    ],
+    "material_slots": [
+      "Clay",
+      "ClayLight",
+      "TimberLight",
+      "Timber",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 5
+  },
+  "materials": [
+    "Clay",
+    "ClayLight",
+    "TimberLight",
+    "Timber",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0066",
+  "intent": "Pouring jug, catch basin, and a cloth on a simple peg.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0066",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

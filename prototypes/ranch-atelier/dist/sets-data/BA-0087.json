@@ -1,0 +1,62 @@
+{
+  "id": "aw.ranch.asset.ba-0087",
+  "name": "Market porter",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 303,
+    "triangles": 10732,
+    "bounds_min": [
+      -0.9352028965950012,
+      -0.23970000445842743,
+      0.0
+    ],
+    "bounds_max": [
+      0.9352028965950012,
+      0.22630281746387482,
+      1.7238000631332397
+    ],
+    "dimensions_m": [
+      1.8704,
+      0.466,
+      1.7238
+    ],
+    "material_slots": [
+      "CharacterReed",
+      "CharacterWood",
+      "CharacterHair",
+      "CharacterSkinDeep",
+      "CharacterEye",
+      "CharacterLeather",
+      "CharacterClay",
+      "CharacterLinen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 8
+  },
+  "materials": [
+    "CharacterReed",
+    "CharacterWood",
+    "CharacterHair",
+    "CharacterSkinDeep",
+    "CharacterEye",
+    "CharacterLeather",
+    "CharacterClay",
+    "CharacterLinen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0087",
+  "intent": "A carrying pad and pole with an unobstructed load bearing silhouette.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0087",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

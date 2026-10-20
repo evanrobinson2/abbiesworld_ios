@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "status": "comparison protocol; tactile profile not yet supplied or implemented",
+  "baselineBuild": "1b2b881d0d",
+  "layout": {
+    "seed": 43,
+    "abundance": "balanced",
+    "instanceScales": "identical from frozen recipe",
+    "simulationTimeSeconds": 0,
+    "paused": true
+  },
+  "camera": {
+    "type": "orthographic",
+    "position": [
+      46,
+      54,
+      64
+    ],
+    "target": [
+      0,
+      1.5,
+      0
+    ],
+    "zoom": 1,
+    "framing": "same stage aspect and frustum in both captures"
+  },
+  "viewports": [
+    {
+      "width": 1280,
+      "height": 900
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "profileOwner": "Scene Generator / Steamworld Effects",
+  "allowedDifferences": [
+    "lighting and exposure declared in versioned profile",
+    "role materials and calibrated material scale",
+    "contact treatment and restrained contours"
+  ],
+  "holdConstant": [
+    "source hashes",
+    "geometry",
+    "instance transforms",
+    "terrain and paths",
+    "simulation state",
+    "crop growth",
+    "camera matrix",
+    "viewport",
+    "pixel ratio"
+  ],
+  "defer": [
+    "bloom",
+    "depth of field",
+    "unrelated model replacements",
+    "PC distance compression"
+  ],
+  "acceptance": [
+    "source anchors remain visually aligned",
+    "supports grounded without dark halos",
+    "material roles readable at gameplay camera",
+    "same silhouette and spatial layout",
+    "record frame timing and visual evidence before claiming improvement"
+  ],
+  "effects": "state-driven only; missing source sockets fail closed"
+}

@@ -1,0 +1,62 @@
+{
+  "id": "aw.ranch.asset.ba-0090",
+  "name": "Child accompanying a shopper",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 197,
+    "triangles": 7776,
+    "bounds_min": [
+      -0.22199159860610962,
+      -0.20885662734508514,
+      0.0
+    ],
+    "bounds_max": [
+      0.23056165874004364,
+      0.10159771889448166,
+      1.047800064086914
+    ],
+    "dimensions_m": [
+      0.4526,
+      0.3105,
+      1.0478
+    ],
+    "material_slots": [
+      "CharacterReed",
+      "CharacterWood",
+      "CharacterHair",
+      "CharacterSkinWarm",
+      "CharacterEye",
+      "CharacterLeather",
+      "CharacterClay",
+      "CharacterLinen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 8
+  },
+  "materials": [
+    "CharacterReed",
+    "CharacterWood",
+    "CharacterHair",
+    "CharacterSkinWarm",
+    "CharacterEye",
+    "CharacterLeather",
+    "CharacterClay",
+    "CharacterLinen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0090",
+  "intent": "A child scaled outfit and small basket; shares the household's visual language.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0090",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

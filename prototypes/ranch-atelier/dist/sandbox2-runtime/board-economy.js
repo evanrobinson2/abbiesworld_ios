@@ -1,0 +1,19 @@
+import {containsBoardPoint} from './board-bounds.js';
+import {allowsCoastDressing} from './coast-surface.js';
+import {simulationBoard,cellWorld,cardKey,HEX_RADIUS} from './playground-model.js';
+import {BOARD_CELLS,boardTiles} from './board-terrain.js';
+import {createJoinVerifier} from './board-join-verifier.js';
+import {resolveAssemblyAccess,resolvedAssemblyObstacles} from './board-resolved-access.js';
+import {dressingPlan,landscapeSettings} from './tile-landscape.js';
+import {withAllocatedSupplies,createSupplies,DEMO_SUPPLY_RESERVE,allocateBoardSupplies} from './board-supplies.js';
+import {createVillageState,inspectVillage,advanceVillage,claimVillageGoal} from './village-simulation.js';
+export function resolveBoardEconomy(board,assembly,heightAt,assetIndex,dimensions){
+ heightAt=heightAt.cached||heightAt; // Exact immutable terrain samples only; proofs remain revision-bound.
+ const inventory=resolvedAssemblyObstacles(assembly,item=>{if(item.asset==='soil'||item.asset==='roof')return {passable:true};const b=assetIndex[item.asset]?.bounds;return b?{kind:'box',w:2*Math.max(Math.abs(b.min[0]),Math.abs(b.max[0])),d:2*Math.max(Math.abs(b.min[1]),Math.abs(b.max[1]))}:null;});
+ const tiles=boardTiles(board);for(const plan of assembly.plans){const tile=tiles.find(t=>t.id===plan.id),instance=board.instances.find(i=>i.instanceId===tile.instanceId),card=board.cards[cardKey(instance.cardId,instance.cardRevision)];for(const d of dressingPlan(plan,landscapeSettings({landscape:card.recipe.landscape}))){if(d.kind==='grass'||!allowsCoastDressing(heightAt,plan,d))continue;let radius;if(d.kind==='tree'||d.kind==='prop'){const size=(plan.renderedDimensions||dimensions)[d.model||'tree-standing'];if(!size){inventory.complete=false;inventory.warnings.push({reason:'Missing dressing footprint',model:d.model||'tree-standing'});continue;}radius=Math.hypot(size.w,size.d)/2*(d.kind==='tree'?d.size:1);}else radius=d.kind==='rock'?.55+ .45*d.size:.55+.9*d.size;inventory.obstacles.push({kind:'circle',x:plan.center.x+d.x,z:plan.center.z+d.z,radius});}}
+ const contains=containsBoardPoint;
+ const verify=createJoinVerifier({boardId:board.id,boardRevision:board.revision,heightAt,contains,obstacles:inventory.obstacles,obstaclesComplete:inventory.complete&&heightAt.grading?.valid!==false});
+ const access=resolveAssemblyAccess({board,assembly,heightAt,verifySegment:verify}),model=withAllocatedSupplies(simulationBoard(board,{resolvedPortsByInstance:access.resolvedPortsByInstance,verifyJoin:verify}),board.supplies);
+ const state=board.simulation||createVillageState(model),report=inspectVillage(state,model);return {model,state,report,accessWarnings:[...(heightAt.grading?.warnings||[]),...inventory.warnings,...access.warnings]};
+}
+export function evolveBoardEconomy(board,resolved,action,args={}){if(resolved.model.id!==board.id||resolved.model.revision!==board.revision)throw Error('Village access is stale; inspect the current board first');let next={...board,revision:board.revision+1};if(action==='day')next.simulation=advanceVillage(resolved.state,resolved.model,{days:args.days??1});else if(action==='claim')next.simulation=claimVillageGoal(resolved.state,resolved.model,args.goalId);else if(action==='supplies'){if(board.supplies)throw Error('Starting supplies already initialized');const pottery=board.instances.find(i=>board.cards[cardKey(i.cardId,i.cardRevision)].capabilities?.pottery>0);if(!pottery)throw Error('Place a pottery workshop first');next=allocateBoardSupplies({...board,supplies:createSupplies(board.id,DEMO_SUPPLY_RESERVE)},pottery.instanceId,{clay:30});}else throw Error('Unknown village action');if(next.simulation)next.simulation={...next.simulation,boardRevision:next.revision};return next;}

@@ -1,0 +1,6 @@
+import {applyGardenAssembly} from './garden-adapter.js';
+import {planAssembly,AFFINITIES} from './tile-adapter.js';
+import {boardTiles,rawTerrain} from './board-terrain.js';
+import {cardKey} from './playground-model.js';
+import {domesticRequirements,completeDomesticPaths,DOMESTIC_AFFINITIES} from './domestic-scenes.js';
+export function planComposition(board,dimensions={}){const tiles=boardTiles(board),source=t=>{const i=board.instances.find(i=>i.instanceId===t.instanceId);return board.cards[cardKey(i.cardId,i.cardRevision)];};const assembly=completeDomesticPaths(planAssembly({tiles},{dimensions,affinities:{...AFFINITIES,...DOMESTIC_AFFINITIES},dimensionsByTile:Object.fromEntries(tiles.map(t=>[t.id,source(t).normalizedDimensions||dimensions])),requirementsByTile:Object.fromEntries(tiles.filter(t=>source(t).recipe.generator!=='ranch-composer').map(t=>[t.id,source(t).recipe.requirements||domesticRequirements(t.type,source(t).recipe.preset)])),siteCost:(p,c,req)=>{const x=p.center.x+c.x,z=p.center.z+c.z,d=req.radius;return (Math.abs(rawTerrain(x+d,z)-rawTerrain(x-d,z))+Math.abs(rawTerrain(x,z+d)-rawTerrain(x,z-d)))*2;}}));applyGardenAssembly(assembly,p=>source(tiles.find(t=>t.id===p.id)).recipe);return {tiles,assembly,source};}

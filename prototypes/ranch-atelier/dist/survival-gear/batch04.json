@@ -1,0 +1,894 @@
+{
+  "schemaVersion": 1,
+  "pack": "Zombie survival gear",
+  "batch": 4,
+  "count": 10,
+  "items": [
+    {
+      "id": "ZG031",
+      "name": "A-frame shelter",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG031.glb",
+      "preview": "/survival-gear/output/ZG031.png",
+      "dimensions": {
+        "x": 2.0402,
+        "y": 2.05,
+        "z": 1.3798,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.040177822113037,
+        2.0500001907348633,
+        1.3797613382339478
+      ],
+      "reimportDimensionsM": [
+        2.040178060531616,
+        2.0500001907348633,
+        1.3797613382339478
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG031.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 31,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Open entrance A-frame field shelter with canopy, separate door flaps and support poles.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.270682
+    },
+    {
+      "id": "ZG032",
+      "name": "Camp stove",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG032.glb",
+      "preview": "/survival-gear/output/ZG032.png",
+      "dimensions": {
+        "x": 0.6,
+        "y": 0.3,
+        "z": 0.27,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.27000001072883606
+      ],
+      "reimportDimensionsM": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.27000001072883606
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG032.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 32,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Twin-burner camp stove with pot rails and fuel bottle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.2709918
+    },
+    {
+      "id": "ZG033",
+      "name": "Bedroll",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG033.glb",
+      "preview": "/survival-gear/output/ZG033.png",
+      "dimensions": {
+        "x": 0.65,
+        "y": 1.85,
+        "z": 0.251,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6499999761581421,
+        1.850000023841858,
+        0.2510000169277191
+      ],
+      "reimportDimensionsM": [
+        0.6499999761581421,
+        1.850000023841858,
+        0.2510000169277191
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement to distinguish bedroll silhouette from emergency blanket roll",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG033.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_bedroll.py",
+        "assetIndex": 33,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Unrolled sleeping bag on full length mat, with pillow, zipper rail and visible quilting.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271198
+    },
+    {
+      "id": "ZG034",
+      "name": "Water jerrycan",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG034.glb",
+      "preview": "/survival-gear/output/ZG034.png",
+      "dimensions": {
+        "x": 0.34,
+        "y": 0.176,
+        "z": 0.575,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3400000035762787,
+        0.17600001394748688,
+        0.5750000476837158
+      ],
+      "reimportDimensionsM": [
+        0.3400000035762787,
+        0.17600001394748688,
+        0.5750000476837158
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG034.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 34,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Water jerrycan with molded rib, screw cap and carry handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271394
+    },
+    {
+      "id": "ZG035",
+      "name": "Solar charging stand",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG035.glb",
+      "preview": "/survival-gear/output/ZG035.png",
+      "dimensions": {
+        "x": 0.85,
+        "y": 0.42,
+        "z": 1.0051,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.8500000238418579,
+        0.42000001668930054,
+        1.0051153898239136
+      ],
+      "reimportDimensionsM": [
+        0.8500000238418579,
+        0.42000001668930054,
+        1.0051153898239136
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG035.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 35,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 10,
+      "brief": "Solar panel on support stand with battery unit beneath.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271761
+    },
+    {
+      "id": "ZG036",
+      "name": "Supply crate",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG036.glb",
+      "preview": "/survival-gear/output/ZG036.png",
+      "dimensions": {
+        "x": 0.72,
+        "y": 0.5105,
+        "z": 0.5325,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.7200000286102295,
+        0.5104999542236328,
+        0.5324999690055847
+      ],
+      "reimportDimensionsM": [
+        0.7200000286102295,
+        0.5104999542236328,
+        0.5324999690055847
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG036.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 36,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Reinforced timber supply crate with separate lid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271987
+    },
+    {
+      "id": "ZG037",
+      "name": "Cooking tripod",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG037.glb",
+      "preview": "/survival-gear/output/ZG037.png",
+      "dimensions": {
+        "x": 0.7313,
+        "y": 0.8446,
+        "z": 1.1189,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.7312753200531006,
+        0.844630241394043,
+        1.1189316511154175
+      ],
+      "reimportDimensionsM": [
+        0.7312753200531006,
+        0.844630241394043,
+        1.1189316511154175
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG037.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 37,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Three-leg cooking tripod suspending a round pot.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272193
+    },
+    {
+      "id": "ZG038",
+      "name": "Folding camp chair",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG038.glb",
+      "preview": "/survival-gear/output/ZG038.png",
+      "dimensions": {
+        "x": 0.5,
+        "y": 0.5262,
+        "z": 0.9823,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.5,
+        0.5262305736541748,
+        0.9823284149169922
+      ],
+      "reimportDimensionsM": [
+        0.5,
+        0.5262306332588196,
+        0.9823284149169922
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG038.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 38,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Folding canvas chair with crossed metal legs and back frame.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272394
+    },
+    {
+      "id": "ZG039",
+      "name": "Rain collector",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG039.glb",
+      "preview": "/survival-gear/output/ZG039.png",
+      "dimensions": {
+        "x": 1.2,
+        "y": 1.2,
+        "z": 1.55,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.5499999523162842
+      ],
+      "reimportDimensionsM": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.5499999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG039.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 39,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Elevated funnel collector draining toward storage barrel.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272576
+    },
+    {
+      "id": "ZG040",
+      "name": "Portable workbench",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG040.glb",
+      "preview": "/survival-gear/output/ZG040.png",
+      "dimensions": {
+        "x": 1.35,
+        "y": 0.697,
+        "z": 1.08,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.350000023841858,
+        0.6970000267028809,
+        1.0800000429153442
+      ],
+      "reimportDimensionsM": [
+        1.350000023841858,
+        0.6970000267028809,
+        1.0800000429153442
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG040.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 40,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Portable wood workbench with lower shelf and mounted vice.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272814
+    }
+  ],
+  "assets": [
+    {
+      "id": "ZG031",
+      "name": "A-frame shelter",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG031.glb",
+      "preview": "/survival-gear/output/ZG031.png",
+      "dimensions": {
+        "x": 2.0402,
+        "y": 2.05,
+        "z": 1.3798,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.040177822113037,
+        2.0500001907348633,
+        1.3797613382339478
+      ],
+      "reimportDimensionsM": [
+        2.040178060531616,
+        2.0500001907348633,
+        1.3797613382339478
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG031.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 31,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Open entrance A-frame field shelter with canopy, separate door flaps and support poles.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.270682
+    },
+    {
+      "id": "ZG032",
+      "name": "Camp stove",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG032.glb",
+      "preview": "/survival-gear/output/ZG032.png",
+      "dimensions": {
+        "x": 0.6,
+        "y": 0.3,
+        "z": 0.27,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.27000001072883606
+      ],
+      "reimportDimensionsM": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.27000001072883606
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG032.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 32,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Twin-burner camp stove with pot rails and fuel bottle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.2709918
+    },
+    {
+      "id": "ZG033",
+      "name": "Bedroll",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG033.glb",
+      "preview": "/survival-gear/output/ZG033.png",
+      "dimensions": {
+        "x": 0.65,
+        "y": 1.85,
+        "z": 0.251,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6499999761581421,
+        1.850000023841858,
+        0.2510000169277191
+      ],
+      "reimportDimensionsM": [
+        0.6499999761581421,
+        1.850000023841858,
+        0.2510000169277191
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement to distinguish bedroll silhouette from emergency blanket roll",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG033.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_bedroll.py",
+        "assetIndex": 33,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Unrolled sleeping bag on full length mat, with pillow, zipper rail and visible quilting.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271198
+    },
+    {
+      "id": "ZG034",
+      "name": "Water jerrycan",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG034.glb",
+      "preview": "/survival-gear/output/ZG034.png",
+      "dimensions": {
+        "x": 0.34,
+        "y": 0.176,
+        "z": 0.575,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3400000035762787,
+        0.17600001394748688,
+        0.5750000476837158
+      ],
+      "reimportDimensionsM": [
+        0.3400000035762787,
+        0.17600001394748688,
+        0.5750000476837158
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG034.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 34,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Water jerrycan with molded rib, screw cap and carry handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271394
+    },
+    {
+      "id": "ZG035",
+      "name": "Solar charging stand",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG035.glb",
+      "preview": "/survival-gear/output/ZG035.png",
+      "dimensions": {
+        "x": 0.85,
+        "y": 0.42,
+        "z": 1.0051,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.8500000238418579,
+        0.42000001668930054,
+        1.0051153898239136
+      ],
+      "reimportDimensionsM": [
+        0.8500000238418579,
+        0.42000001668930054,
+        1.0051153898239136
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG035.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 35,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 10,
+      "brief": "Solar panel on support stand with battery unit beneath.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271761
+    },
+    {
+      "id": "ZG036",
+      "name": "Supply crate",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG036.glb",
+      "preview": "/survival-gear/output/ZG036.png",
+      "dimensions": {
+        "x": 0.72,
+        "y": 0.5105,
+        "z": 0.5325,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.7200000286102295,
+        0.5104999542236328,
+        0.5324999690055847
+      ],
+      "reimportDimensionsM": [
+        0.7200000286102295,
+        0.5104999542236328,
+        0.5324999690055847
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG036.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 36,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Reinforced timber supply crate with separate lid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271987
+    },
+    {
+      "id": "ZG037",
+      "name": "Cooking tripod",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG037.glb",
+      "preview": "/survival-gear/output/ZG037.png",
+      "dimensions": {
+        "x": 0.7313,
+        "y": 0.8446,
+        "z": 1.1189,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.7312753200531006,
+        0.844630241394043,
+        1.1189316511154175
+      ],
+      "reimportDimensionsM": [
+        0.7312753200531006,
+        0.844630241394043,
+        1.1189316511154175
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG037.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 37,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Three-leg cooking tripod suspending a round pot.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272193
+    },
+    {
+      "id": "ZG038",
+      "name": "Folding camp chair",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG038.glb",
+      "preview": "/survival-gear/output/ZG038.png",
+      "dimensions": {
+        "x": 0.5,
+        "y": 0.5262,
+        "z": 0.9823,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.5,
+        0.5262305736541748,
+        0.9823284149169922
+      ],
+      "reimportDimensionsM": [
+        0.5,
+        0.5262306332588196,
+        0.9823284149169922
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG038.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 38,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Folding canvas chair with crossed metal legs and back frame.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272394
+    },
+    {
+      "id": "ZG039",
+      "name": "Rain collector",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG039.glb",
+      "preview": "/survival-gear/output/ZG039.png",
+      "dimensions": {
+        "x": 1.2,
+        "y": 1.2,
+        "z": 1.55,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.5499999523162842
+      ],
+      "reimportDimensionsM": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.5499999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG039.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 39,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Elevated funnel collector draining toward storage barrel.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272576
+    },
+    {
+      "id": "ZG040",
+      "name": "Portable workbench",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG040.glb",
+      "preview": "/survival-gear/output/ZG040.png",
+      "dimensions": {
+        "x": 1.35,
+        "y": 0.697,
+        "z": 1.08,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.350000023841858,
+        0.6970000267028809,
+        1.0800000429153442
+      ],
+      "reimportDimensionsM": [
+        1.350000023841858,
+        0.6970000267028809,
+        1.0800000429153442
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG040.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 40,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Portable wood workbench with lower shelf and mounted vice.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272814
+    }
+  ]
+}

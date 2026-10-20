@@ -1,0 +1,17 @@
+{
+  "seconds": 7.206155061721802,
+  "parts": 64,
+  "dimensionsM": [
+    3.990000009536743,
+    1.7500001192092896,
+    1.3999999818406224
+  ],
+  "reimportDimensionsM": [
+    3.990000009536743,
+    1.7500001192092896,
+    1.4000000234271148
+  ],
+  "scalePassed": true,
+  "gameplayImplemented": false,
+  "animationClips": 0
+}

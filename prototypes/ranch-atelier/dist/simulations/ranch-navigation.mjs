@@ -1,0 +1,19 @@
+const distance=(a,b)=>Math.hypot(a.x-b.x,a.z-b.z);
+export function boxObstacle(x,z,w,d,angle=0){return {x,z,w,d,angle};}
+export function overlaps(p,r,o){if(o.radius!==undefined){const reach=r+o.radius;if(Math.abs(p.x-o.x)>reach||Math.abs(p.z-o.z)>reach)return false;return distance(p,o)<reach;}const c=Math.cos(o.angle||0),s=Math.sin(o.angle||0),dx=p.x-o.x,dz=p.z-o.z,x=dx*c-dz*s,z=dx*s+dz*c;return Math.hypot(Math.max(0,Math.abs(x)-o.w/2),Math.max(0,Math.abs(z)-o.d/2))<r;}
+export function clearPoint(p,r,obstacles,bounds=()=>true){return bounds(p,r)&&!obstacles.some(o=>overlaps(p,r,o));}
+export function clearSegment(a,b,r,obstacles,bounds){const n=Math.max(1,Math.ceil(distance(a,b)/Math.max(.08,r*.5)));for(let i=0;i<=n;i++)if(!clearPoint({x:a.x+(b.x-a.x)*i/n,z:a.z+(b.z-a.z)*i/n},r,obstacles,bounds))return false;return true;}
+export function freePoint(p,r,obstacles,bounds,peers=[]){for(let ring=0;ring<30;ring++)for(let i=0;i<(ring?24:1);i++){const a=i*Math.PI/12,q={x:p.x+Math.cos(a)*ring*.25,z:p.z+Math.sin(a)*ring*.25};if(clearPoint(q,r,obstacles,bounds)&&peers.every(o=>distance(q,o)>=r+o.radius+.08))return q;}return null;}
+// A bounded visibility-checked grid repairs only obstructed stretches of the authored path.
+export function detour(a,b,r,obstacles,bounds){if(clearSegment(a,b,r,obstacles,bounds))return [b];const step=.7,key=(x,z)=>x+','+z,open=[{x:0,z:0,g:0,f:distance(a,b)}],seen=new Map([[key(0,0),0]]);let visits=0;
+ while(open.length&&visits++<6000){open.sort((a,b)=>b.f-a.f);const n=open.pop(),p={x:a.x+n.x*step,z:a.z+n.z*step};if(distance(p,b)<step*1.5&&clearSegment(p,b,r,obstacles,bounds)){const route=[b];for(let q=n;q.parent;q=q.parent)route.unshift({x:a.x+q.x*step,z:a.z+q.z*step});return route;}
+ for(const [dx,dz]of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){const x=n.x+dx,z=n.z+dz,q={x:a.x+x*step,z:a.z+z*step},g=n.g+Math.hypot(dx,dz)*step,k=key(x,z);if(g>distance(a,b)+35||g>=(seen.get(k)??Infinity)||!clearSegment(p,q,r,obstacles,bounds))continue;seen.set(k,g);open.push({x,z,g,f:g+distance(q,b),parent:n});}}
+ return null;}
+export function safeRoute(start,points,r,obstacles,bounds){let p=start;const route=[];for(const target of points){const part=detour(p,target,r,obstacles,bounds);if(!part)return null;route.push(...part);p=target;}return route;}
+// Swept tests prevent tunnelling; a consistent right-hand preference lets agents pass.
+export function avoidStep(position,target,step,r,obstacles,peers=[],bounds=()=>true){const d=distance(position,target);if(d<.001)return {...position};// Exclude only peers that cannot contribute collision or pressure anywhere in this step.
+ // Keep original peer order and the exact narrow-phase and score arithmetic.
+ const reach=Math.abs(Math.min(step,d));peers=peers.filter(o=>{const limit=reach+r+o.radius+.8+1e-9;return Math.abs(position.x-o.x)<=limit&&Math.abs(position.z-o.z)<=limit;});
+ const heading=Math.atan2(target.z-position.z,target.x-position.x);let best=null,bestScore=Infinity;
+ for(const turn of [0,.35,-.35,.7,-.7,1.1,-1.1,1.55,-1.55,2.1,-2.1,2.6,-2.6,Math.PI]){const a=heading+turn,q={x:position.x+Math.cos(a)*Math.min(step,d),z:position.z+Math.sin(a)*Math.min(step,d)};if(!clearSegment(position,q,r,obstacles,bounds))continue;let valid=true,pressure=0;for(const o of peers){const gap=distance(q,o)-(r+o.radius);if(!clearSegment(position,q,r,[o])){valid=false;break;}pressure+=Math.max(0,.8-gap)*.1;}if(!valid)continue;const score=distance(q,target)+Math.abs(turn)*step*.12+pressure+(turn<0?.015*step:0);if(score<bestScore){best=q;bestScore=score;}}
+ return best||{...position};}

@@ -1,0 +1,192 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-191",
+  "name": "Enclosed courtyard household",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Home entry and sheltered rooms around an open domestic yard.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-191",
+  "biome": "garden-farm",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 54,
+    "triangles": 1592,
+    "bounds_min": [
+      -2.8000001907348633,
+      -2.375,
+      0.0
+    ],
+    "bounds_max": [
+      2.8000001907348633,
+      2.306227445602417,
+      2.5362253189086914
+    ],
+    "dimensions_m": [
+      5.6,
+      4.68123,
+      2.53623
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": [
+      "domestic",
+      "household"
+    ],
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "approach",
+      "use",
+      "maintain",
+      "leave"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "courtyard",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.07999999821186066
+        ],
+        "role": "courtyard"
+      },
+      {
+        "id": "dropoff",
+        "position_blender_m": [
+          -1.649999976158142,
+          0.10000000149011612,
+          0.07999999821186066
+        ],
+        "role": "dropoff"
+      },
+      {
+        "id": "entry",
+        "position_blender_m": [
+          0.0,
+          -2.5,
+          0.0
+        ],
+        "role": "entry"
+      },
+      {
+        "id": "worker_stand",
+        "position_blender_m": [
+          0.0,
+          -1.0,
+          0.0
+        ],
+        "role": "worker_stand"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for garden-farm",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "in_use",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "clean",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "weathered",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "stored",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Home entry and sheltered rooms around an open domestic yard. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See house(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/batch_domestic_20.py",
+    "entry_point": "house",
+    "source_sha256": "5d3a1d7c13795ba96aefa6af3d2b7c7a87602231d9bc58fa41950a733a4612bb",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- garden-farm batch_domestic_20.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "GF-191"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Actual rendered card inspected: coherent hollow forms, continuous details, clear domestic purpose; static geometry only",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Actual rendered card inspected: coherent hollow forms, continuous details, clear domestic purpose; static geometry only"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-191.glb",
+    "sha256": "9e8d5a67c95bb2bcfada1994ba9d9bdcbf5fdc8c09c16ed50f9124c2659a14b7",
+    "bytes": 94000
+  }
+}

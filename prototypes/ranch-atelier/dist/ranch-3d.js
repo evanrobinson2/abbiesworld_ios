@@ -1,13 +1,14 @@
+import {RanchRenderer} from './ranch-renderer.js';
 import {storyMaterial,inkEdges,meadowPatches} from './storybook-materials.js?v=2';
 import * as T from 'three';
 import {OrbitControls} from './vendor/OrbitControls.js';
 const host=document.querySelector('#scene'),builder=location.pathname.includes('barn-builder');
 let seed=41;const rand=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296;};
 const scene=new T.Scene();scene.background=new T.Color('#e5e7da');scene.fog=new T.Fog('#e5e7da',220,350);
-const camera=new T.PerspectiveCamera(32,1,.1,400),renderer=new T.WebGLRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;host.prepend(renderer.domElement);renderer.domElement.setAttribute('aria-label','Interactive 3D ranch scene');renderer.domElement.tabIndex=0;
+const camera=new T.PerspectiveCamera(32,1,.1,400),renderer=new RanchRenderer({antialias:true,alpha:false,preserveDrawingBuffer:true});renderer.setPixelRatio(Math.min(devicePixelRatio,1.6));renderer.shadowMap.enabled=true;renderer.shadowMap.type=T.PCFSoftShadowMap;renderer.outputColorSpace=T.SRGBColorSpace;host.prepend(renderer.domElement);renderer.domElement.setAttribute('aria-label','Interactive 3D ranch scene');renderer.domElement.tabIndex=0;
 const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.maxPolarAngle=Math.PI*.47;controls.minDistance=9;controls.maxDistance=240;controls.target.set(0,2,0);
 scene.add(new T.HemisphereLight('#fff1d2','#7a8874',(builder?2.3:1.25)));const sun=new T.DirectionalLight('#fff0cd',builder?3:2.1);sun.position.set(-25,40,24);sun.castShadow=true;sun.shadow.mapSize.set(2048,2048);Object.assign(sun.shadow.camera,{left:-38,right:38,top:38,bottom:-38,far:100});sun.shadow.normalBias=.035;scene.add(sun);
-function painted(base,kind='wood'){if(!builder)return storyMaterial(base,kind);let c=document.createElement('canvas');c.width=c.height=256;let x=c.getContext('2d');x.fillStyle=base;x.fillRect(0,0,256,256);for(let i=0;i<550;i++){let a=rand()*256,b=rand()*256;x.strokeStyle=i%2?'#fff8dc18':'#253a2c18';x.lineWidth=.4+rand()*3;x.beginPath();x.moveTo(a,b);x.lineTo(a+(kind==='ground'?rand()*34:rand()*3),b+8+rand()*45);x.stroke();}const tex=new T.CanvasTexture(c);tex.colorSpace=T.SRGBColorSpace;tex.wrapS=tex.wrapT=T.RepeatWrapping;return new T.MeshStandardMaterial({map:tex,roughness:1,color:0xffffff});}
+function painted(base,kind='wood'){return storyMaterial(base,kind);}
 const wood=painted('#95866a'),trim=painted('#e6d6af'),red=painted(builder?'#c38365':'#d5764f'),roof=painted(builder?'#557f80':'#338e91'),ground=painted('#a9b778','ground'),soil=painted('#9c8e66','ground');const dark=new T.MeshStandardMaterial({color:'#354a3e',roughness:1}),leaves=['#39804f','#529c58','#77b667'].map(x=>painted(x,builder?'ground':'foliage'));
 function mesh(g,m,x=0,y=0,z=0,parent=scene){const a=new T.Mesh(g,m);a.position.set(x,y,z);a.castShadow=true;a.receiveShadow=true;parent.add(a);if(!builder)inkEdges(a);return a;}
 function box(w,h,d,x,y,z,m=wood,parent=scene){return mesh(new T.BoxGeometry(w,h,d),m,x,y,z,parent);}

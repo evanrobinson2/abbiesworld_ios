@@ -41,10 +41,10 @@ test('most recently interacted tab wins over background heartbeat; paused and ol
   await request('POST', 'write-test-key', { ...base, sessionId: 'background-123456789', lastActiveAt: 1 });
   assert.equal((await request('GET', 'read-test-key')).body.views[0].sessionId, base.sessionId);
   await request('POST', 'write-test-key', { ...base, sharing: false, image: null });
-  assert.equal((await request('GET', 'read-test-key')).body.views[0].stale, true);
+  assert.equal((await request('GET', 'read-test-key')).body.views.find(v => v.sessionId === base.sessionId).stale, true);
   const key = 'ranch-view/v1/' + base.sessionId + '.json';
   const record = JSON.parse(records.get(key).body);
   record.sharing = true; record.receivedAt = new Date(Date.now() - 120000).toISOString();
   records.get(key).body = JSON.stringify(record);
-  assert.equal((await request('GET', 'read-test-key')).body.views[0].stale, true);
+  assert.equal((await request('GET', 'read-test-key')).body.views.find(v => v.sessionId === base.sessionId).stale, true);
 });

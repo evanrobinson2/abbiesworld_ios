@@ -61,7 +61,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/shelter-roof.json",
     "glb": "/simulation-assets/buildings/shelter-roof.glb",
-    "triangles": 4136,
+    "triangles": 6972,
     "simulationMapping": {
       "buildingIds": [
         "shelter",
@@ -79,7 +79,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/shelter-complete.json",
     "glb": "/simulation-assets/buildings/shelter-complete.glb",
-    "triangles": 5432,
+    "triangles": 8268,
     "simulationMapping": {
       "buildingIds": [
         "shelter",
@@ -151,7 +151,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/family-home-roof.json",
     "glb": "/simulation-assets/buildings/family-home-roof.glb",
-    "triangles": 4136,
+    "triangles": 4152,
     "simulationMapping": {
       "buildingIds": [
         "abbie-home",
@@ -169,7 +169,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/family-home-complete.json",
     "glb": "/simulation-assets/buildings/family-home-complete.glb",
-    "triangles": 7460,
+    "triangles": 7476,
     "simulationMapping": {
       "buildingIds": [
         "abbie-home",
@@ -238,7 +238,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/feed-store-roof.json",
     "glb": "/simulation-assets/buildings/feed-store-roof.glb",
-    "triangles": 4136,
+    "triangles": 5280,
     "simulationMapping": {
       "buildingIds": [
         "feed"
@@ -255,7 +255,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/feed-store-complete.json",
     "glb": "/simulation-assets/buildings/feed-store-complete.glb",
-    "triangles": 6084,
+    "triangles": 7228,
     "simulationMapping": {
       "buildingIds": [
         "feed"
@@ -408,7 +408,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/cattle-shelter-roof.json",
     "glb": "/simulation-assets/buildings/cattle-shelter-roof.glb",
-    "triangles": 4136,
+    "triangles": 5280,
     "simulationMapping": {
       "buildingIds": [
         "build-cow-*"
@@ -425,7 +425,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/cattle-shelter-complete.json",
     "glb": "/simulation-assets/buildings/cattle-shelter-complete.glb",
-    "triangles": 5808,
+    "triangles": 6952,
     "simulationMapping": {
       "buildingIds": [
         "build-cow-*"
@@ -493,7 +493,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/goat-shelter-roof.json",
     "glb": "/simulation-assets/buildings/goat-shelter-roof.glb",
-    "triangles": 4136,
+    "triangles": 5280,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
@@ -510,7 +510,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/goat-shelter-complete.json",
     "glb": "/simulation-assets/buildings/goat-shelter-complete.glb",
-    "triangles": 5808,
+    "triangles": 6952,
     "simulationMapping": {
       "buildingIds": [
         "build-goat-*"
@@ -578,7 +578,7 @@
     "state": "roof",
     "json": "/simulation-assets/buildings/chicken-coop-roof.json",
     "glb": "/simulation-assets/buildings/chicken-coop-roof.glb",
-    "triangles": 4136,
+    "triangles": 4152,
     "simulationMapping": {
       "buildingIds": [
         "build-chicken-*"
@@ -595,7 +595,7 @@
     "state": "complete",
     "json": "/simulation-assets/buildings/chicken-coop-complete.json",
     "glb": "/simulation-assets/buildings/chicken-coop-complete.glb",
-    "triangles": 6936,
+    "triangles": 6952,
     "simulationMapping": {
       "buildingIds": [
         "build-chicken-*"
@@ -1593,11 +1593,11 @@
     "state": "idle",
     "json": "/simulation-assets/workers/abbie-idle.json",
     "glb": "/simulation-assets/workers/abbie-idle.glb",
-    "triangles": 6444,
+    "triangles": 5920,
     "simulationMapping": {
       "workerName": "Abbie",
       "sourceAppearance": "/simulation-characters/abbie.svg",
-      "relativeHeight": 0.88,
+      "relativeHeight": 0.72,
       "pose": "idle",
       "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
     }
@@ -1610,11 +1610,11 @@
     "state": "carry",
     "json": "/simulation-assets/workers/abbie-carry.json",
     "glb": "/simulation-assets/workers/abbie-carry.glb",
-    "triangles": 6800,
+    "triangles": 6276,
     "simulationMapping": {
       "workerName": "Abbie",
       "sourceAppearance": "/simulation-characters/abbie.svg",
-      "relativeHeight": 0.88,
+      "relativeHeight": 0.72,
       "pose": "carry",
       "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
     }
@@ -1627,11 +1627,11 @@
     "state": "work",
     "json": "/simulation-assets/workers/abbie-work.json",
     "glb": "/simulation-assets/workers/abbie-work.glb",
-    "triangles": 6444,
+    "triangles": 5920,
     "simulationMapping": {
       "workerName": "Abbie",
       "sourceAppearance": "/simulation-characters/abbie.svg",
-      "relativeHeight": 0.88,
+      "relativeHeight": 0.72,
       "pose": "work",
       "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
     }
@@ -1644,11 +1644,11 @@
     "state": "idle",
     "json": "/simulation-assets/workers/ani-idle.json",
     "glb": "/simulation-assets/workers/ani-idle.glb",
-    "triangles": 6256,
+    "triangles": 5920,
     "simulationMapping": {
       "workerName": "Ani",
       "sourceAppearance": "/simulation-characters/ani.svg",
-      "relativeHeight": 0.88,
+      "relativeHeight": 0.72,
       "pose": "idle",
       "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
     }
@@ -1661,11 +1661,11 @@
     "state": "carry",
     "json": "/simulation-assets/workers/ani-carry.json",
     "glb": "/simulation-assets/workers/ani-carry.glb",
-    "triangles": 6612,
+    "triangles": 6276,
     "simulationMapping": {
       "workerName": "Ani",
       "sourceAppearance": "/simulation-characters/ani.svg",
-      "relativeHeight": 0.88,
+      "relativeHeight": 0.72,
       "pose": "carry",
       "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
     }
@@ -1678,11 +1678,11 @@
     "state": "work",
     "json": "/simulation-assets/workers/ani-work.json",
     "glb": "/simulation-assets/workers/ani-work.glb",
-    "triangles": 6256,
+    "triangles": 5920,
     "simulationMapping": {
       "workerName": "Ani",
       "sourceAppearance": "/simulation-characters/ani.svg",
-      "relativeHeight": 0.88,
+      "relativeHeight": 0.72,
       "pose": "work",
       "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
     }
@@ -1887,57 +1887,6 @@
       "workerName": "Alexis",
       "sourceAppearance": "/simulation-characters/alexis.svg",
       "relativeHeight": 1.0,
-      "pose": "work",
-      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
-    }
-  },
-  {
-    "id": "pearl-idle",
-    "label": "Pearl \u00b7 idle",
-    "category": "workers",
-    "subject": "pearl",
-    "state": "idle",
-    "json": "/simulation-assets/workers/pearl-idle.json",
-    "glb": "/simulation-assets/workers/pearl-idle.glb",
-    "triangles": 5920,
-    "simulationMapping": {
-      "workerName": "Pearl",
-      "sourceAppearance": "/simulation-characters/pearl.svg",
-      "relativeHeight": 0.72,
-      "pose": "idle",
-      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
-    }
-  },
-  {
-    "id": "pearl-carry",
-    "label": "Pearl \u00b7 carry",
-    "category": "workers",
-    "subject": "pearl",
-    "state": "carry",
-    "json": "/simulation-assets/workers/pearl-carry.json",
-    "glb": "/simulation-assets/workers/pearl-carry.glb",
-    "triangles": 6276,
-    "simulationMapping": {
-      "workerName": "Pearl",
-      "sourceAppearance": "/simulation-characters/pearl.svg",
-      "relativeHeight": 0.72,
-      "pose": "carry",
-      "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
-    }
-  },
-  {
-    "id": "pearl-work",
-    "label": "Pearl \u00b7 work",
-    "category": "workers",
-    "subject": "pearl",
-    "state": "work",
-    "json": "/simulation-assets/workers/pearl-work.json",
-    "glb": "/simulation-assets/workers/pearl-work.glb",
-    "triangles": 5920,
-    "simulationMapping": {
-      "workerName": "Pearl",
-      "sourceAppearance": "/simulation-characters/pearl.svg",
-      "relativeHeight": 0.72,
       "pose": "work",
       "note": "Static pose, no rig or animation. Carry parcel is a visual placeholder for worker cargo."
     }

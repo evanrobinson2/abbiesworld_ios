@@ -1,0 +1,7 @@
+const test=require('node:test'),assert=require('node:assert/strict');
+test('drag copies use physical tile occupancy, preserve world positions and restore originals',async()=>{
+ const T=await import('../vendor/three.module.js'),{captureDragActors}=await import('../drag-actors.mjs'),{collectInertia,stepInertia}=await import('../inertia-layers.mjs');
+ const present=new T.Group(),away=new T.Group(),dead=new T.Group();present.position.set(12,3,2);present.userData.home='elsewhere';present.userData.worldEntityId='actor';away.position.set(120,0,0);dead.visible=false;
+ const snapshot=captureDragActors([present,away,dead],{origin:{x:10,z:0},centers:[{x:10,z:0}],radius:50,scale:.1});assert.equal(snapshot.group.children.length,1);assert.equal(present.visible,false);assert.equal(away.visible,true);const copy=snapshot.group.children[0];assert.deepEqual(copy.position.toArray(),[2,3,2]);const records=collectInertia(snapshot.group);stepInertia(records,.016,{dx:1});assert.equal(records[0].layer,'people');assert.deepEqual(present.position.toArray(),[12,3,2]);snapshot.release();assert.equal(present.visible,true);assert.equal(present.userData.dragHidden,undefined);assert.equal(dead.visible,false);
+});
+test('hex occupancy rejects bounding-box corners and distant cells',async()=>{const {onDraggedTiles}=await import('../drag-actors.mjs');assert(onDraggedTiles({x:0,z:49},[{x:0,z:0}],50));assert(!onDraggedTiles({x:43,z:49},[{x:0,z:0}],50));assert(!onDraggedTiles({x:200,z:0},[{x:0,z:0}],50));});

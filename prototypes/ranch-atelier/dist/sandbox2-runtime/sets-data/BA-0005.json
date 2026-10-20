@@ -1,0 +1,53 @@
+{
+  "id": "aw.ranch.asset.ba-0005",
+  "name": "Double bay market shelter",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 189,
+    "triangles": 7252,
+    "bounds_min": [
+      -2.9137752056121826,
+      -1.2858996391296387,
+      0.0
+    ],
+    "bounds_max": [
+      2.862971782684326,
+      1.2858997583389282,
+      2.884999990463257
+    ],
+    "dimensions_m": [
+      5.7767,
+      2.5718,
+      2.885
+    ],
+    "material_slots": [
+      "Timber",
+      "Rope",
+      "Reed",
+      "TimberLight",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 5
+  },
+  "materials": [
+    "Timber",
+    "Rope",
+    "Reed",
+    "TimberLight",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0005",
+  "intent": "Two adjoining vendor bays with a shared central support.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0005",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

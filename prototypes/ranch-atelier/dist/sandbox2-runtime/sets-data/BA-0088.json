@@ -1,0 +1,64 @@
+{
+  "id": "aw.ranch.asset.ba-0088",
+  "name": "Household shopper",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 195,
+    "triangles": 8700,
+    "bounds_min": [
+      -0.35173171758651733,
+      -0.23699088394641876,
+      0.0
+    ],
+    "bounds_max": [
+      0.46739086508750916,
+      0.17759999632835388,
+      1.6224000453948975
+    ],
+    "dimensions_m": [
+      0.8191,
+      0.4146,
+      1.6224
+    ],
+    "material_slots": [
+      "CharacterReed",
+      "CharacterWood",
+      "CharacterHair",
+      "CharacterSkinWarm",
+      "CharacterEye",
+      "CharacterLeather",
+      "CharacterClay",
+      "CharacterSage",
+      "CharacterLinen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 9
+  },
+  "materials": [
+    "CharacterReed",
+    "CharacterWood",
+    "CharacterHair",
+    "CharacterSkinWarm",
+    "CharacterEye",
+    "CharacterLeather",
+    "CharacterClay",
+    "CharacterSage",
+    "CharacterLinen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0088",
+  "intent": "Everyday clothing and a removable shoulder basket.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0088",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,12 +1,11 @@
 const fs=require('fs'),path=require('path');
 const people=[
- ['abbie','Abbie','#e5b68d','#82472f','#bc625c','#718b83','braids','overalls','straw',.88],
- ['ani','Ani / Annie','#bd8866','#473c32','#ddb650','#5c8793','bob','overalls','cap',.88],
+ ['abbie','Abbie','#e6bba0','#a77843','#c38f9b','#879cb0','bob','overalls','none',.72],
+ ['ani','Ani','#cfaa87','#a77843','#c38f9b','#879cb0','bob','overalls','none',.72],
  ['mommy','Mommy','#d8a781','#5b4535','#6d927c','#6b7c87','bun','apron','none',1],
  ['daddy','Daddy','#bf9276','#654b38','#759199','#947c61','short','suspenders','straw',1.04],
  ['jeff','Jeff','#d5aa85','#54463d','#b77953','#6c7d80','short','overalls','cap',1.02],
- ['alexis','Alexis','#b67f62','#46362f','#9b7e9f','#7f927c','braid','apron','none',1],
- ['pearl','Pearl','#e6bba0','#a77843','#c38f9b','#879cb0','bob','overalls','none',.72]
+ ['alexis','Alexis','#b67f62','#46362f','#9b7e9f','#7f927c','braid','apron','none',1]
 ];
 const style=`<style>
  .ink{stroke:var(--ink,#465046);stroke-width:1.25;stroke-linecap:round;stroke-linejoin:round}

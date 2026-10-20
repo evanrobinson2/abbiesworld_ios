@@ -2,45 +2,45 @@
   "families": [
     {
       "family": "shelter",
-      "seconds": 1.197,
+      "seconds": 2.019,
       "assets": 5
     },
     {
       "family": "family-home",
-      "seconds": 1.781,
+      "seconds": 2.648,
       "assets": 5
     },
     {
       "family": "feed-store",
-      "seconds": 2.543,
+      "seconds": 4.663,
       "assets": 5
     },
     {
       "family": "water-point",
-      "seconds": 2.31,
+      "seconds": 4.249,
       "assets": 5
     },
     {
       "family": "cattle-shelter",
-      "seconds": 4.262,
+      "seconds": 7.188,
       "assets": 5
     },
     {
       "family": "goat-shelter",
-      "seconds": 4.848,
+      "seconds": 8.942,
       "assets": 5
     },
     {
       "family": "chicken-coop",
-      "seconds": 6.421,
+      "seconds": 8.716,
       "assets": 5
     },
     {
       "family": "kitchen-garden",
-      "seconds": 6.987,
+      "seconds": 9.864,
       "assets": 5
     }
   ],
-  "generationExportSeconds": 30.361,
+  "generationExportSeconds": 48.308,
   "includes": "Model construction, bevel/normal evaluation, GLB and JSON export; excludes authoring and review"
 }

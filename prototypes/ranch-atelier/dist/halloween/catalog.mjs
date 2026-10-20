@@ -1,0 +1,35 @@
+export const FAMILIES=['Restless spirits','Bones & bandages','Night neighbours','Harvest folk','Little familiars','Odd inhabitants'];
+const rows=[
+['sheet-ghost','Sheet ghost',0,'ghost','Ivory drifter','floats','A shy visitor who holds your place in the queue.'],
+['lantern-wisp','Lantern wisp',0,'wisp','Amber glow','floats','Lights the last stretch of the lane.'],
+['banshee','Moon singer',0,'ghost','Moonlit lilac','sways','Rehearses very softly after closing time.'],
+['spectral-butler','Spectral butler',0,'spirit','Mint waistcoat','floats','Keeps an impeccable guest book.'],
+['marsh-spirit','Marsh spirit',0,'wisp','Bog green','floats','Returns lost boots, usually in pairs.'],
+['skeleton','Skeleton',1,'skeleton','Chalk bones','rattles','A cheerful night porter with excellent posture.'],
+['bone-musician','Bone musician',1,'skeleton','Copper bow tie','rattles','Counts everyone into the midnight dance.'],
+['mummy','Bandage wanderer',1,'mummy','Linen wraps','shuffles','Repairs old books with remarkable patience.'],
+['bone-guard','Bone watchkeeper',1,'skeleton','Blue watch cap','rattles','Makes sure nobody misses the last tram.'],
+['patchwork-mummy','Patchwork mummy',1,'mummy','Rose linen','shuffles','Always has spare fabric for a neighbour.'],
+['vampire','Velvet vampire',2,'vampire','Wine velvet','struts','Runs the evening lending library.'],
+['witch','Neighbourhood witch',2,'witch','Plum wool','struts','Trades jam recipes and weather forecasts.'],
+['werewolf','Werewolf',2,'wolf','Russet fur','bounds','Delivers bread before the morning rush.'],
+['stitched-giant','Stitched giant',2,'giant','Moss coat','stomps','Moves furniture without scratching the floor.'],
+['moon-witch','Moon witch',2,'witch','Midnight blue','struts','Keeps the observatory tea kettle warm.'],
+['pumpkin','Pumpkin person',3,'pumpkin','Harvest orange','bounces','Tends the town allotment after sunset.'],
+['scarecrow','Scarecrow',3,'scarecrow','Ochre patches','sways','Knows every bird by its preferred seed.'],
+['gourdling','Gourdling',3,'pumpkin','Buttercup gold','bounces','Collects fallen leaves for the noticeboard.'],
+['mushroom','Mushroom neighbour',3,'mushroom','Scarlet cap','bounces','Organises picnics under the hedgerow.'],
+['thorn-sprite','Thorn sprite',3,'tree','Bramble green','sways','Mends fences with very careful hands.'],
+['black-cat','Midnight cat',4,'cat','Ink & gold','pads','Inspects every warm windowsill.'],
+['bat','Little bat',4,'bat','Mulberry wings','flaps','Carries tiny invitations across the square.'],
+['owl','Moon owl',4,'owl','Silver feathers','flaps','Remembers where every street begins.'],
+['spider','Velvet spider',4,'spider','Violet velvet','scuttles','Weaves bunting for the autumn fair.'],
+['toad','Garden toad',4,'toad','Sage green','hops','Has strong opinions about the pond choir.'],
+['gargoyle','Gargoyle',5,'gargoyle','Weathered stone','stomps','Watches the bakery roof and enjoys the smell.'],
+['slime','Jelly visitor',5,'slime','Apple jelly','squishes','Polishes cobbles wherever it wanders.'],
+['mimic','Friendly mimic',5,'mimic','Old chestnut','chomps','Offers a safe place to put your shopping.'],
+['clockwork','Clockwork imp',5,'robot','Aged brass','ticks','Repairs the town clocks, one minute at a time.'],
+['candle','Candle keeper',5,'candle','Honey wax','sways','Welcomes late arrivals with a warm light.']
+];
+export const CREATURES=rows.map(([id,name,family,shape,palette,motion,story],i)=>({id,name,family:FAMILIES[family],shape,palette,motion,story,index:i,pack:'halloween-v1',height:shape==='giant'?2.3:['cat','toad','spider','slime'].includes(shape)?.7:['bat','owl','wisp'].includes(shape)?1.1:1.75}));
+export const PACK={id:'halloween-v1',name:'The Midnight Neighbours',version:1,units:'metres',creatures:CREATURES,variants:['Original','Moonlight','Candy'],animations:['idle','walk','greet'],note:'Procedural Three.js models; reusable runtime recipes, not GLB files. Story prompts are optional flavour, not generated canon.'};

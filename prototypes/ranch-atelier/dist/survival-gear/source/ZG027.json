@@ -1,0 +1,62 @@
+{
+  "id": "ZG027",
+  "name": "Emergency blanket roll",
+  "authoring": "local Blender procedural geometry",
+  "units": "metres",
+  "parts": [
+    {
+      "name": "foil blanket roll",
+      "location": [
+        0.0,
+        0.0,
+        0.10999999940395355
+      ],
+      "rotation": [
+        0.0,
+        1.5707963705062866,
+        0.0
+      ],
+      "dimensions": [
+        0.2199999988079071,
+        0.2199999988079071,
+        0.3799999952316284
+      ]
+    },
+    {
+      "name": "retaining band",
+      "location": [
+        -0.10999999940395355,
+        0.0,
+        0.10999999940395355
+      ],
+      "rotation": [
+        0.0,
+        1.5707963705062866,
+        0.0
+      ],
+      "dimensions": [
+        0.25,
+        0.25,
+        0.024000000208616257
+      ]
+    },
+    {
+      "name": "retaining band.001",
+      "location": [
+        0.10999999940395355,
+        0.0,
+        0.10999999940395355
+      ],
+      "rotation": [
+        0.0,
+        1.5707963705062866,
+        0.0
+      ],
+      "dimensions": [
+        0.25,
+        0.25,
+        0.024000000208616257
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "aw.ranch.asset.ba-0063",
+  "name": "Market animal watering trough",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 4,
+    "triangles": 402,
+    "bounds_min": [
+      -1.1157642602920532,
+      -0.517302393913269,
+      0.0
+    ],
+    "bounds_max": [
+      1.1157642602920532,
+      0.517302393913269,
+      0.5600000023841858
+    ],
+    "dimensions_m": [
+      2.2315,
+      1.0346,
+      0.56
+    ],
+    "material_slots": [
+      "Stone",
+      "Water"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Stone",
+    "Water"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0063",
+  "intent": "A broad shallow trough placed away from foot traffic.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0063",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

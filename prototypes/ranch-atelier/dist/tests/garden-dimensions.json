@@ -1,0 +1,22 @@
+{
+  "garden-growing-plot": {
+    "w": 2.666,
+    "d": 1.53,
+    "h": 0.9
+  },
+  "feed-store-complete": {
+    "w": 4.63516,
+    "h": 4.99,
+    "d": 4.12
+  },
+  "water-trough-full": {
+    "w": 1.79,
+    "h": 0.66,
+    "d": 0.89
+  },
+  "compost-full": {
+    "w": 1.31,
+    "h": 0.664,
+    "d": 0.91
+  }
+}

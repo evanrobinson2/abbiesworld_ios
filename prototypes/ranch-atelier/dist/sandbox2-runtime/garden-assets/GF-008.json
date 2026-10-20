@@ -1,0 +1,167 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-008",
+  "name": "Garden tender",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 1,
+  "category": "animate",
+  "intent": "Inspect crop health and connect water, tools and harvest work.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-008",
+  "biome": "settled-river-valley",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 18,
+    "triangles": 672,
+    "bounds_min": [
+      -0.38638705015182495,
+      -0.2682788074016571,
+      0.0
+    ],
+    "bounds_max": [
+      0.38638705015182495,
+      0.13500000536441803,
+      1.5950000286102295
+    ],
+    "dimensions_m": [
+      0.77277,
+      0.40328,
+      1.595
+    ]
+  },
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "worker",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "walk",
+      "inspect",
+      "water",
+      "harvest"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "left-hand",
+        "position_blender_m": [
+          -0.2800000011920929,
+          -0.23000000417232513,
+          0.8399999737739563
+        ],
+        "role": "left-hand"
+      },
+      {
+        "id": "right-hand",
+        "position_blender_m": [
+          0.2800000011920929,
+          -0.23000000417232513,
+          0.8399999737739563
+        ],
+        "role": "right-hand"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "reachable work and resting places",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "working",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "resting",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "injured",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "deceased",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Inspect crop health and connect water, tools and harvest work. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See gardener(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/build_garden.py",
+    "entry_point": "gardener",
+    "source_sha256": "b061c981f1ad506b83f25c9f8865a4df33d289443c03ad60c1af047efa13c137",
+    "rebuild": "blender --background --python garden-farm/build_garden.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "reviewed base silhouette, readable materials, diorama fit; 2026-10-18",
+    "deployed": false,
+    "normalization_verification": "Blender glTF reimport passed; measured vertices and preserved wearable fitting origin"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-008.glb",
+    "sha256": "aebcfb51f7804697eb6f134ab222cbe34d15abe6877dc2940b30876ecbedc6ab",
+    "bytes": 52788
+  }
+}

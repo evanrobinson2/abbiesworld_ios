@@ -1,0 +1,53 @@
+{
+  "id": "aw.ranch.asset.ba-0004",
+  "name": "Low ground selling shelter",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 181,
+    "triangles": 4844,
+    "bounds_min": [
+      -1.6277432441711426,
+      -1.2280000448226929,
+      -0.003783178050071001
+    ],
+    "bounds_max": [
+      1.657743215560913,
+      1.034873366355896,
+      1.8437925577163696
+    ],
+    "dimensions_m": [
+      3.2855,
+      2.2629,
+      1.8476
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Rope",
+      "Timber",
+      "Reed",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 5
+  },
+  "materials": [
+    "TimberLight",
+    "Rope",
+    "Timber",
+    "Reed",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0004",
+  "intent": "A shallow canopy over a woven ground mat for small traders.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0004",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

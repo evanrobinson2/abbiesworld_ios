@@ -1,0 +1,1219 @@
+{
+  "name": "Weathered Repair Garage Frontage",
+  "rationale": "Full-scale, freestanding garage frontage with a genuinely open 3 m-wide vehicle passage and 2.5 m clearance beneath the raised shutter rail. Concrete piers, narrow brick side panels and an overhead lintel carry the frontage without a floor, rear wall or infill across the opening. A partially exposed rolled shutter, galvanized guides, faded blank sign, electrical enclosure and clipped service pipes provide readable industrial detail. Broad material variation and restrained sign wear remain legible at approximately 25 m.",
+  "dimensionsM": {
+    "widthX": 4.4,
+    "depthY": 1.1,
+    "heightZ": 3.1,
+    "groundZ": 0,
+    "frontDirection": "negativeY",
+    "doorwayClearWidth": 3.0,
+    "doorwayClearHeight": 2.5,
+    "rotationUnits": "degrees"
+  },
+  "animation": {
+    "implemented": false,
+    "metadataOnly": true,
+    "partAxes": [
+      {
+        "partName": "shutter_roll",
+        "motion": "rotation",
+        "axis": "X",
+        "pivot": [
+          0,
+          0.23,
+          2.69
+        ],
+        "purpose": "Shutter winding axis; no rig, deformation or keyframes implemented."
+      }
+    ]
+  },
+  "parts": [
+    {
+      "name": "left_concrete_pier",
+      "primitive": "box",
+      "colorhex": "#88877F",
+      "location": [
+        -1.71,
+        0.04,
+        1.41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.26,
+        1.02,
+        2.82
+      ]
+    },
+    {
+      "name": "right_concrete_pier",
+      "primitive": "box",
+      "colorhex": "#8E8C82",
+      "location": [
+        1.71,
+        0.04,
+        1.41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.26,
+        1.02,
+        2.82
+      ]
+    },
+    {
+      "name": "left_brick_panel_mortar_core",
+      "primitive": "box",
+      "colorhex": "#777369",
+      "location": [
+        -2.02,
+        0.06,
+        1.41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.36,
+        0.98,
+        2.82
+      ]
+    },
+    {
+      "name": "right_brick_panel_mortar_core",
+      "primitive": "box",
+      "colorhex": "#79746A",
+      "location": [
+        2.02,
+        0.06,
+        1.41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.36,
+        0.98,
+        2.82
+      ]
+    },
+    {
+      "name": "continuous_concrete_lintel",
+      "primitive": "box",
+      "colorhex": "#929087",
+      "location": [
+        0,
+        0.04,
+        2.96
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        4.4,
+        1.02,
+        0.28
+      ]
+    },
+    {
+      "name": "left_shutter_guide",
+      "primitive": "box",
+      "colorhex": "#545B5A",
+      "location": [
+        -1.54,
+        -0.24,
+        1.41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.08,
+        0.32,
+        2.82
+      ]
+    },
+    {
+      "name": "right_shutter_guide",
+      "primitive": "box",
+      "colorhex": "#59605E",
+      "location": [
+        1.54,
+        -0.24,
+        1.41
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.08,
+        0.32,
+        2.82
+      ]
+    },
+    {
+      "name": "shutter_frame_head",
+      "primitive": "box",
+      "colorhex": "#505755",
+      "location": [
+        0,
+        -0.24,
+        2.815
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.16,
+        0.32,
+        0.07
+      ]
+    },
+    {
+      "name": "shutter_roll",
+      "primitive": "cylinder",
+      "colorhex": "#6A706D",
+      "location": [
+        0,
+        0.23,
+        2.69
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.12,
+      "depth": 3.08
+    },
+    {
+      "name": "left_roll_bearing_bracket",
+      "primitive": "box",
+      "colorhex": "#4D5351",
+      "location": [
+        -1.56,
+        0.23,
+        2.7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.08,
+        0.3,
+        0.28
+      ]
+    },
+    {
+      "name": "right_roll_bearing_bracket",
+      "primitive": "box",
+      "colorhex": "#505653",
+      "location": [
+        1.56,
+        0.23,
+        2.7
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.08,
+        0.3,
+        0.28
+      ]
+    },
+    {
+      "name": "raised_shutter_curtain",
+      "primitive": "box",
+      "colorhex": "#7B8079",
+      "location": [
+        0,
+        -0.23,
+        2.68
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.04,
+        0.07,
+        0.3
+      ]
+    },
+    {
+      "name": "shutter_corrugation_01",
+      "primitive": "box",
+      "colorhex": "#8B8F86",
+      "location": [
+        0,
+        -0.275,
+        2.575
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.02,
+        0.04,
+        0.025
+      ]
+    },
+    {
+      "name": "shutter_corrugation_02",
+      "primitive": "box",
+      "colorhex": "#83897F",
+      "location": [
+        0,
+        -0.275,
+        2.625
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.02,
+        0.04,
+        0.025
+      ]
+    },
+    {
+      "name": "shutter_corrugation_03",
+      "primitive": "box",
+      "colorhex": "#8A8E85",
+      "location": [
+        0,
+        -0.275,
+        2.675
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.02,
+        0.04,
+        0.025
+      ]
+    },
+    {
+      "name": "shutter_corrugation_04",
+      "primitive": "box",
+      "colorhex": "#7E847B",
+      "location": [
+        0,
+        -0.275,
+        2.725
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.02,
+        0.04,
+        0.025
+      ]
+    },
+    {
+      "name": "shutter_corrugation_05",
+      "primitive": "box",
+      "colorhex": "#888D83",
+      "location": [
+        0,
+        -0.275,
+        2.775
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.02,
+        0.04,
+        0.025
+      ]
+    },
+    {
+      "name": "shutter_bottom_rail",
+      "primitive": "box",
+      "colorhex": "#525B56",
+      "location": [
+        0,
+        -0.245,
+        2.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        3.04,
+        0.13,
+        0.06
+      ]
+    },
+    {
+      "name": "blank_faded_signboard",
+      "primitive": "box",
+      "colorhex": "#646F69",
+      "location": [
+        0,
+        -0.475,
+        2.95
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        4.18,
+        0.1,
+        0.24
+      ]
+    },
+    {
+      "name": "sign_top_edge",
+      "primitive": "box",
+      "colorhex": "#4D5550",
+      "location": [
+        0,
+        -0.525,
+        3.06
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        4.18,
+        0.035,
+        0.02
+      ]
+    },
+    {
+      "name": "sign_bottom_edge",
+      "primitive": "box",
+      "colorhex": "#535750",
+      "location": [
+        0,
+        -0.525,
+        2.84
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        4.18,
+        0.035,
+        0.02
+      ]
+    },
+    {
+      "name": "sign_left_edge",
+      "primitive": "box",
+      "colorhex": "#515852",
+      "location": [
+        -2.08,
+        -0.525,
+        2.95
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.02,
+        0.035,
+        0.24
+      ]
+    },
+    {
+      "name": "sign_right_edge",
+      "primitive": "box",
+      "colorhex": "#515852",
+      "location": [
+        2.08,
+        -0.525,
+        2.95
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.02,
+        0.035,
+        0.24
+      ]
+    },
+    {
+      "name": "sign_fastener_upper_left",
+      "primitive": "cylinder",
+      "colorhex": "#88877B",
+      "location": [
+        -1.98,
+        -0.53,
+        3.025
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.013,
+      "depth": 0.014
+    },
+    {
+      "name": "sign_fastener_lower_left",
+      "primitive": "cylinder",
+      "colorhex": "#807C70",
+      "location": [
+        -1.98,
+        -0.53,
+        2.875
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.013,
+      "depth": 0.014
+    },
+    {
+      "name": "sign_fastener_upper_right",
+      "primitive": "cylinder",
+      "colorhex": "#88877B",
+      "location": [
+        1.98,
+        -0.53,
+        3.025
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.013,
+      "depth": 0.014
+    },
+    {
+      "name": "sign_fastener_lower_right",
+      "primitive": "cylinder",
+      "colorhex": "#807C70",
+      "location": [
+        1.98,
+        -0.53,
+        2.875
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.013,
+      "depth": 0.014
+    },
+    {
+      "name": "left_brick_course_01",
+      "primitive": "box",
+      "colorhex": "#72564A",
+      "location": [
+        -2.02,
+        -0.445,
+        0.17
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "left_brick_course_02",
+      "primitive": "box",
+      "colorhex": "#866252",
+      "location": [
+        -2.02,
+        -0.445,
+        0.51
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "left_brick_course_03",
+      "primitive": "box",
+      "colorhex": "#795A4B",
+      "location": [
+        -2.02,
+        -0.445,
+        0.85
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "left_brick_course_04",
+      "primitive": "box",
+      "colorhex": "#8A6857",
+      "location": [
+        -2.02,
+        -0.445,
+        1.19
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "left_brick_course_05",
+      "primitive": "box",
+      "colorhex": "#7C5C50",
+      "location": [
+        -2.02,
+        -0.445,
+        1.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "left_brick_course_06",
+      "primitive": "box",
+      "colorhex": "#886352",
+      "location": [
+        -2.02,
+        -0.445,
+        1.87
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "left_brick_course_07",
+      "primitive": "box",
+      "colorhex": "#765B4F",
+      "location": [
+        -2.02,
+        -0.445,
+        2.21
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "left_brick_course_08",
+      "primitive": "box",
+      "colorhex": "#846656",
+      "location": [
+        -2.02,
+        -0.445,
+        2.55
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "left_brick_top_closer",
+      "primitive": "box",
+      "colorhex": "#7A5C4F",
+      "location": [
+        -2.02,
+        -0.445,
+        2.77
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.1
+      ]
+    },
+    {
+      "name": "right_brick_course_01",
+      "primitive": "box",
+      "colorhex": "#75584A",
+      "location": [
+        2.02,
+        -0.445,
+        0.17
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "right_brick_course_02",
+      "primitive": "box",
+      "colorhex": "#80604F",
+      "location": [
+        2.02,
+        -0.445,
+        0.51
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "right_brick_course_03",
+      "primitive": "box",
+      "colorhex": "#8A6553",
+      "location": [
+        2.02,
+        -0.445,
+        0.85
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "right_brick_course_04",
+      "primitive": "box",
+      "colorhex": "#785B4E",
+      "location": [
+        2.02,
+        -0.445,
+        1.19
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "right_brick_course_05",
+      "primitive": "box",
+      "colorhex": "#856454",
+      "location": [
+        2.02,
+        -0.445,
+        1.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "right_brick_course_06",
+      "primitive": "box",
+      "colorhex": "#76584B",
+      "location": [
+        2.02,
+        -0.445,
+        1.87
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "right_brick_course_07",
+      "primitive": "box",
+      "colorhex": "#8B6958",
+      "location": [
+        2.02,
+        -0.445,
+        2.21
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "right_brick_course_08",
+      "primitive": "box",
+      "colorhex": "#7C5E51",
+      "location": [
+        2.02,
+        -0.445,
+        2.55
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.32
+      ]
+    },
+    {
+      "name": "right_brick_top_closer",
+      "primitive": "box",
+      "colorhex": "#826252",
+      "location": [
+        2.02,
+        -0.445,
+        2.77
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.35,
+        0.05,
+        0.1
+      ]
+    },
+    {
+      "name": "electrical_junction_box",
+      "primitive": "box",
+      "colorhex": "#606864",
+      "location": [
+        -1.71,
+        -0.495,
+        1.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.23,
+        0.09,
+        0.38
+      ]
+    },
+    {
+      "name": "junction_box_cover",
+      "primitive": "box",
+      "colorhex": "#747B72",
+      "location": [
+        -1.71,
+        -0.54,
+        1.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.21,
+        0.012,
+        0.35
+      ]
+    },
+    {
+      "name": "junction_box_latch",
+      "primitive": "box",
+      "colorhex": "#484D49",
+      "location": [
+        -1.635,
+        -0.546,
+        1.65
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.025,
+        0.008,
+        0.055
+      ]
+    },
+    {
+      "name": "electrical_conduit_lower",
+      "primitive": "cylinder",
+      "colorhex": "#666C65",
+      "location": [
+        -1.71,
+        -0.478,
+        1.005
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.93
+    },
+    {
+      "name": "electrical_conduit_upper",
+      "primitive": "cylinder",
+      "colorhex": "#71766D",
+      "location": [
+        -1.71,
+        -0.478,
+        2.34
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 1.02
+    },
+    {
+      "name": "right_vertical_service_pipe",
+      "primitive": "cylinder",
+      "colorhex": "#665F51",
+      "location": [
+        2.04,
+        -0.505,
+        1.45
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.025,
+      "depth": 2.54
+    },
+    {
+      "name": "service_pipe_upper_return",
+      "primitive": "beam",
+      "colorhex": "#6F6757",
+      "location": [
+        1.87,
+        -0.505,
+        2.72
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        2.04,
+        -0.505,
+        2.72
+      ],
+      "end": [
+        1.7,
+        -0.505,
+        2.72
+      ],
+      "radius": 0.025
+    },
+    {
+      "name": "service_pipe_lower_clip",
+      "primitive": "box",
+      "colorhex": "#4F5550",
+      "location": [
+        2.04,
+        -0.49,
+        0.42
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        0.09,
+        0.045
+      ]
+    },
+    {
+      "name": "service_pipe_middle_clip",
+      "primitive": "box",
+      "colorhex": "#555A53",
+      "location": [
+        2.04,
+        -0.49,
+        1.42
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        0.09,
+        0.045
+      ]
+    },
+    {
+      "name": "service_pipe_upper_clip",
+      "primitive": "box",
+      "colorhex": "#555A53",
+      "location": [
+        2.04,
+        -0.49,
+        2.42
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.1,
+        0.09,
+        0.045
+      ]
+    },
+    {
+      "name": "left_pier_base_repair",
+      "primitive": "box",
+      "colorhex": "#6D706A",
+      "location": [
+        -1.71,
+        0.02,
+        0.08
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.26,
+        1.06,
+        0.16
+      ]
+    },
+    {
+      "name": "right_pier_base_repair",
+      "primitive": "box",
+      "colorhex": "#74756D",
+      "location": [
+        1.71,
+        0.02,
+        0.08
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.26,
+        1.06,
+        0.16
+      ]
+    },
+    {
+      "name": "sign_lower_edge_exposed_undercoat",
+      "primitive": "box",
+      "colorhex": "#7C7D6D",
+      "location": [
+        -1.31,
+        -0.526,
+        2.859
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.66,
+        0.004,
+        0.018
+      ]
+    },
+    {
+      "name": "sign_upper_edge_faded_paint",
+      "primitive": "box",
+      "colorhex": "#737C71",
+      "location": [
+        0.92,
+        -0.526,
+        3.04
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.93,
+        0.004,
+        0.022
+      ]
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 110.07149314880371,
+    "usage": {
+      "prompt_tokens": 242,
+      "completion_tokens": 6645,
+      "total_tokens": 6887,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1377,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

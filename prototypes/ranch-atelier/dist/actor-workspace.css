@@ -1,0 +1,38 @@
+/* Actor scenes retain the shared camera and drawer controls in one compact bar. */
+body.actor-workspace #sandbox-version{display:none!important}
+body.actor-workspace #sandbox-tools{position:fixed!important;top:12px!important;left:190px!important;right:70px;max-width:calc(100vw - 270px)!important;width:max-content;flex-wrap:nowrap!important;z-index:40;align-items:center}
+body.actor-workspace #pull-hint{top:72px}
+body.actor-workspace #create-drawer>.drawer-head{position:sticky;top:-18px;background:var(--app-paper,#fffaf0);z-index:3;padding:12px 0}
+@media(max-width:799px){
+ body.actor-workspace header .brand{display:none!important}
+ body.actor-workspace #sandbox-tools{top:12px!important;left:66px!important;right:64px;max-width:none!important;width:auto;gap:3px;justify-content:space-between}
+ body.actor-workspace #sandbox-tools>button,body.actor-workspace #inertia-layers>summary{font-size:10px!important;padding:4px!important;min-height:44px;height:44px;line-height:1.1;border-radius:12px}
+ body.actor-workspace #sandbox-tools>button{flex:1;min-width:0;max-width:56px}
+ body.actor-workspace #inertia-layers>summary{min-width:44px}
+ body.actor-workspace #inertia-layers>summary:after{margin-left:2px}
+ body.actor-workspace #create-drawer{top:auto!important;bottom:8px!important;left:8px!important;right:8px!important;width:calc(100vw - 16px)!important;height:48dvh!important;max-height:48dvh!important;padding:14px;border-radius:20px}
+ body.actor-workspace #create-drawer>.drawer-head{top:-14px;padding:8px 0}
+ body.actor-workspace #outbreak-panel{padding:8px}
+}
+
+/* Keep encounter controls visible before the scrollable scenario list. */
+body.actor-workspace #create-drawer{max-height:calc(100dvh - 84px);bottom:12px}
+body.actor-workspace #outbreak-panel>.outbreak-kicker,body.actor-workspace #outbreak-panel>h2,body.actor-workspace #outbreak-panel>p:first-of-type{display:none}
+body.actor-workspace #outbreak-panel>.outbreak-time{order:-2}
+body.actor-workspace #outbreak-panel>#outbreak-clock{order:-1}
+body.actor-workspace #outbreak-panel .outbreak-start{grid-template-columns:1fr 1fr}
+body.actor-workspace #outbreak-panel .outbreak-start button{min-height:44px;line-height:1.2}
+/* Keep world controls near the working surface; longer encounter lists disclose. */
+body.actor-workspace #outbreak-score{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+body.actor-workspace #outbreak-score div{padding:7px;min-width:0}
+body.actor-workspace #outbreak-score strong{font-size:22px}
+body.actor-workspace #outbreak-score span{font-size:9px;line-height:1.3}
+body.actor-workspace #outbreak-panel label{font-size:11px}
+body.actor-workspace #outbreak-new>label{display:block;margin-top:10px}
+body.actor-workspace #outbreak-new>button{width:100%;margin:8px 0}
+body.actor-workspace #outbreak-condition-fields{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+body.actor-workspace #outbreak-condition-fields label:last-child{grid-column:1/-1}
+body.actor-workspace #outbreak-panel output{display:block;font-size:11px;line-height:1.5}
+body.actor-workspace #outbreak-profiles label{display:block;margin:8px 0}
+body.actor-workspace .board-heading{display:none}
+@media(max-width:799px){body.board-workspace.actor-workspace:not(.board3) #create-drawer{top:auto!important;bottom:8px!important}}

@@ -1,0 +1,49 @@
+{
+  "id": "aw.ranch.asset.ba-0043",
+  "name": "Flatbread selling tray",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 21,
+    "triangles": 796,
+    "bounds_min": [
+      -0.35750001668930054,
+      -0.24500000476837158,
+      0.0
+    ],
+    "bounds_max": [
+      0.35750001668930054,
+      0.24500000476837158,
+      0.1119999960064888
+    ],
+    "dimensions_m": [
+      0.715,
+      0.49,
+      0.112
+    ],
+    "material_slots": [
+      "Grain",
+      "TimberLight",
+      "Bread",
+      "Timber"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "Grain",
+    "TimberLight",
+    "Bread",
+    "Timber"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0043",
+  "intent": "A woven tray holding overlapping flat loaves and a covering cloth.",
+  "family": "Food displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0043",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

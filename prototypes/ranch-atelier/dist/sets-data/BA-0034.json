@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0034",
+  "name": "Grain capacity measure",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 15,
+    "triangles": 1184,
+    "bounds_min": [
+      -0.16200000047683716,
+      -0.16200000047683716,
+      0.0
+    ],
+    "bounds_max": [
+      0.16200000047683716,
+      0.16200000047683716,
+      0.23999999463558197
+    ],
+    "dimensions_m": [
+      0.324,
+      0.324,
+      0.24
+    ],
+    "material_slots": [
+      "Rope",
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Rope",
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0034",
+  "intent": "An open cylinder with a straight rim for leveling grain.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0034",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

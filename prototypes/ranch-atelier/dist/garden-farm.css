@@ -1,0 +1,19 @@
+.garden-actions{display:flex;gap:8px}.garden-actions button{flex:1}.garden-check{display:flex;gap:10px;align-items:center;min-height:44px}.garden-check input{width:20px;height:20px}#garden-status{font-weight:600}#garden-sentence,#garden-purpose,#garden-activity{line-height:1.55}#garden-purpose{border-left:3px solid #799877;padding-left:10px}.garden-labels{position:absolute;inset:0;pointer-events:none;overflow:hidden}.garden-label{position:absolute;transform:translate(-50%,-50%);font:11px system-ui;background:#fff9e7e8;border:1px solid #a8b497;border-radius:6px;padding:3px 6px;white-space:nowrap}.garden-label.active{background:#f2d48a;border-color:#aa792d}.scene-caption{max-width:460px;pointer-events:none}.scene-caption p{max-width:400px;font-size:12px}.scene-controls details summary{min-height:44px;cursor:pointer;padding-top:12px}#garden-seed{min-height:44px;width:100%;box-sizing:border-box}#scene-viewport canvas{touch-action:none}@media(max-width:799px){.scene-caption{max-width:75vw}.scene-caption h1{font-size:21px}.scene-caption p{font-size:11px;max-width:72vw}.garden-label{font-size:9px;padding:2px 4px}}
+body #app-controls #app-controls-content .scene-controls p{display:block!important}
+
+.garden-presets{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.garden-presets button{margin:0!important;min-height:44px!important;padding:8px!important;font-size:13px!important}.garden-presets button[aria-pressed=true]{background:#3f614e!important;color:#fff!important}#garden-layout[hidden],#generator-description{display:none!important}body #app-controls .scene-controls{padding:12px!important}body #app-controls .scene-controls h2{font-size:19px;margin:8px 0}body #app-controls .scene-controls label{margin:6px 0 4px!important}body #app-controls .scene-controls select,body #app-controls .scene-controls input{min-height:40px!important;padding:8px!important;margin-bottom:5px!important}body #app-controls .scene-controls details summary{min-height:36px;padding:8px 0;font-size:13px}body #app-controls .scene-controls #garden-status{font-size:12px;line-height:1.3;margin:8px 0}.scene-caption h1{font-size:24px;max-width:340px}.scene-caption small{font-size:9px}.scene-caption{top:90px}.scene-caption p{font-size:11px}
+
+body #app-controls #app-controls-content .scene-controls #generator-description{display:none!important}
+body #app-controls #app-controls-content .garden-presets{display:grid!important;grid-template-columns:1fr 1fr!important;gap:6px!important}
+body #app-controls #app-controls-content .scene-controls{gap:6px!important}
+body main .scene-caption h1{font-size:24px!important;max-width:340px}
+
+body:has(.garden-presets) #app-controls-content{padding:12px 14px max(12px,env(safe-area-inset-bottom))!important;gap:0!important}
+body #app-controls #app-controls-content .scene-controls{padding:0!important}
+body #app-controls #app-controls-content .scene-controls h2{display:none}
+body #app-controls #app-controls-content .scene-controls details summary{min-height:36px!important;padding:6px 0!important}
+
+body main .scene-caption{top:18px}
+@media(max-width:799px){body main .scene-caption h1{font-size:20px!important;max-width:280px}body main .scene-caption small{font-size:8px}}
+
+body #app-controls #app-controls-content .scene-controls details:not([open])>:not(summary){display:none!important}

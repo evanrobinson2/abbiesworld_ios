@@ -1,0 +1,50 @@
+{
+  "id": "aw.ranch.asset.ba-0049",
+  "name": "Leafy herb selling bundles",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 147,
+    "triangles": 16844,
+    "bounds_min": [
+      -0.23999999463558197,
+      -0.23999999463558197,
+      0.0
+    ],
+    "bounds_max": [
+      0.23999999463558197,
+      0.23999999463558197,
+      0.25999999046325684
+    ],
+    "dimensions_m": [
+      0.48,
+      0.48,
+      0.26
+    ],
+    "material_slots": [
+      "Rope",
+      "Leaf",
+      "Clay",
+      "Water"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "Rope",
+    "Leaf",
+    "Clay",
+    "Water"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0049",
+  "intent": "Several tied herb bundles in a shallow water dish.",
+  "family": "Food displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0049",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}
