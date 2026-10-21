@@ -7,3 +7,7 @@ __pycache__/
 *.log
 *.blend1
 *.blend2
+
+# Generated production build
+dist/public-build/
+engine-work/release-concurrent/

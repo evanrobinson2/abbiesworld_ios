@@ -1,3 +1,4 @@
+require('node:child_process').execFileSync(process.execPath,['./scripts/check-navigation-build.mjs'],{stdio:'inherit'});
 require('node:child_process').execFileSync(process.execPath,['--no-warnings','--experimental-loader','./scripts/character-motion-loader.mjs','./scripts/check-character-motion.mjs'],{stdio:'inherit'});
 const fs = require('node:fs');
 const path = require('node:path');
