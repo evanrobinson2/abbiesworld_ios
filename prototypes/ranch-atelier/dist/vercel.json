@@ -1,6 +1,18 @@
 {
   "rewrites": [
     {
+      "source": "/sandbox/Claude",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/Claude/",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/claude",
+      "destination": "/simulations/index.html"
+    },
+    {
       "source": "/moon",
       "destination": "/moon/index.html"
     },

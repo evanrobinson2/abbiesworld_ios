@@ -1,0 +1,131 @@
+[
+  {
+    "page": "chart",
+    "device": "desktop",
+    "allModes": true,
+    "compact": true
+  },
+  {
+    "page": "chart",
+    "device": "phone",
+    "allModes": true,
+    "compact": true
+  },
+  {
+    "page": "runtime",
+    "variant": "desktop",
+    "start": {
+      "seconds": 9.3,
+      "engine": {
+        "backend": "wasm-c",
+        "compiledCalls": 312,
+        "numericalFallbacks": 37,
+        "compiledError": null,
+        "full": 12,
+        "coarse": 0
+      },
+      "animals": 12,
+      "people": 3,
+      "ground": [
+        0.02703001352321266,
+        0.013164863389232728
+      ]
+    },
+    "away": {
+      "seconds": 13.20000000000001,
+      "engine": {
+        "backend": "wasm-c",
+        "compiledCalls": 347,
+        "numericalFallbacks": 37,
+        "compiledError": null,
+        "full": 0,
+        "coarse": 12
+      },
+      "animals": 12,
+      "people": 3,
+      "ground": [
+        0.011727058581792349,
+        0.02902786356412168
+      ]
+    },
+    "errors": []
+  },
+  {
+    "page": "runtime",
+    "variant": "phone",
+    "start": {
+      "seconds": 9.600000000000001,
+      "engine": {
+        "backend": "wasm-c",
+        "compiledCalls": 321,
+        "numericalFallbacks": 37,
+        "compiledError": null,
+        "full": 12,
+        "coarse": 0
+      },
+      "animals": 12,
+      "people": 3,
+      "ground": [
+        0.021769376908837845,
+        0.009703619312071421
+      ]
+    },
+    "away": {
+      "seconds": 13.50000000000001,
+      "engine": {
+        "backend": "wasm-c",
+        "compiledCalls": 357,
+        "numericalFallbacks": 37,
+        "compiledError": null,
+        "full": 0,
+        "coarse": 12
+      },
+      "animals": 12,
+      "people": 3,
+      "ground": [
+        0.016923547936348537,
+        0.03584503919584048
+      ]
+    },
+    "errors": []
+  },
+  {
+    "page": "runtime",
+    "variant": "fallback",
+    "start": {
+      "seconds": 9.600000000000001,
+      "engine": {
+        "backend": "javascript",
+        "compiledCalls": 0,
+        "numericalFallbacks": 0,
+        "compiledError": "TypeError: Failed to fetch",
+        "full": 12,
+        "coarse": 0
+      },
+      "animals": 12,
+      "people": 3,
+      "ground": [
+        0.021769376908837845,
+        0.009703619312071421
+      ]
+    },
+    "away": {
+      "seconds": 13.50000000000001,
+      "engine": {
+        "backend": "javascript",
+        "compiledCalls": 0,
+        "numericalFallbacks": 0,
+        "compiledError": "TypeError: Failed to fetch",
+        "full": 0,
+        "coarse": 12
+      },
+      "animals": 12,
+      "people": 3,
+      "ground": [
+        0.016923547936348537,
+        0.03584503919584048
+      ]
+    },
+    "errors": []
+  }
+]

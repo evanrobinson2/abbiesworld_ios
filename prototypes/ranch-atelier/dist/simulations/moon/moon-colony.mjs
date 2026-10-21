@@ -1,5 +1,5 @@
 import {createIndividual,experience,relate} from '../simulation/life-story.mjs';
-import {safeRoute} from '../ranch-navigation.mjs';
+import {safeRoute,freePoint} from '../ranch-navigation.mjs';
 import {hexBounds} from '../simulation/spatial-bounds.mjs';
 import {slopeAt} from '../new-england-terrain.mjs';
 export function rocketPhase(seconds){
@@ -23,7 +23,18 @@ export function initializeColony(state,plan){
 const routeContexts=new WeakMap();
 export function advanceColony(state,plan,dt){
  let context=routeContexts.get(plan);if(!context){const contains=hexBounds(plan.radius),samples=new Map();context={obstacles:plan.placements.map(p=>({...p})),bounds:(p,r)=>{if(!contains(p,r))return false;const key=p.x.toFixed(3)+','+p.z.toFixed(3);if(!samples.has(key)){if(samples.size>20000)samples.clear();samples.set(key,slopeAt(plan.heightAt,p.x,p.z)<.3);}return samples.get(key);}};routeContexts.set(plan,context);}const {bounds,obstacles}=context;
- for(const person of state.colony.residents){
+ for(const [residentIndex,person] of state.colony.residents.entries()){
+  const vip=state.rocket.vip,welcome=vip&&['waiting-for-pad','descending','disembarking','greeting','celebrating'].includes(vip.phase);
+  if(welcome&&person.welcomeAttempt!==vip.id){
+   const entry=vip.boarding.at(-1),target={x:entry.x+2.2+(residentIndex%2)*.8,z:entry.z+(Math.floor(residentIndex/2)-1)*1.5};
+   person.welcomeAttempt=vip.id;const accessible=freePoint(target,.3,obstacles,bounds);const route=accessible&&safeRoute(person.position,[accessible],.3,obstacles,bounds);
+   if(route){person.path=route;person.index=0;person.phase='walking';person.nextActivity='Welcoming the VIP visitors';person.activity='Walking to welcome the VIPs';person.welcomeVisit=vip.id;}
+  }
+  if(welcome&&person.welcomeVisit===vip.id&&person.phase!=='walking'){
+   person.phase='welcoming';person.activity=vip.phase==='celebrating'?'Cheering for the VIP visitors':'Waiting to greet the VIP visitors';person.heading=Math.atan2(vip.people[0].position.x-person.position.x,vip.people[0].position.z-person.position.z);continue;
+  }
+  if(!welcome&&person.phase==='welcoming'){person.phase='activity';person.wait=1;person.activity='Returning to daily life';}
+
   if(person.phase==='walking'){
    let remaining=dt*(person.child?.75:1.05);
    while(remaining>0&&person.index<person.path.length){const p=person.path[person.index],dx=p.x-person.position.x,dz=p.z-person.position.z,d=Math.hypot(dx,dz),step=Math.min(d,remaining);if(d){person.heading=Math.atan2(dx,dz);person.position.x+=dx/d*step;person.position.z+=dz/d*step;}remaining-=step;if(d<=step)person.index++;else break;}

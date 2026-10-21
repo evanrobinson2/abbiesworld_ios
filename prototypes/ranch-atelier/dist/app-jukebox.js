@@ -12,11 +12,24 @@ export function mountJukebox(tracks) {
   audio.loop = saved.repeat === true;
   const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = '/app-jukebox.css'; document.head.append(link);
   const toggle = document.createElement('button');
-  toggle.id = 'app-jukebox-toggle'; toggle.type = 'button'; toggle.textContent = '♫';
+  toggle.id = 'app-jukebox-toggle'; toggle.type = 'button'; toggle.innerHTML = '<svg class="ui-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13M9 9l12-2"/><ellipse cx="6" cy="18" rx="3" ry="2.5"/><ellipse cx="18" cy="16" rx="3" ry="2.5"/></svg>';
   toggle.setAttribute('aria-label', 'Open jukebox'); toggle.setAttribute('aria-haspopup', 'dialog'); toggle.setAttribute('aria-expanded', 'false');
   const drawer = document.createElement('dialog'); drawer.id = 'app-jukebox'; drawer.setAttribute('aria-label', 'Abbie’s jukebox');
   drawer.innerHTML = `<div class="jukebox-heading"><strong>Abbie’s Jukebox</strong><button type="button" data-close aria-label="Close jukebox">×</button></div><p data-status role="status"></p><label>Track<select data-track></select></label><div class="jukebox-transport"><button type="button" data-prev aria-label="Previous track">Previous</button><button type="button" data-play>Play</button><button type="button" data-next aria-label="Next track">Next</button></div><label>Volume<input data-volume type="range" min="0" max="1" step=".01"></label><label class="jukebox-repeat"><input data-repeat type="checkbox">Repeat this track</label>`;
   document.body.append(toggle, drawer);
+  // Join the actual toolbar group; never float over another toolbar control.
+  function attachToToolbar(){
+    const tools=document.getElementById('toolbar-tools');
+    if(!tools)return false;
+    const settings=tools.querySelector('#app-settings-toggle');
+    if(toggle.parentElement!==tools)tools.insertBefore(toggle,settings);
+    return true;
+  }
+  if(!attachToToolbar()){
+    const observer=new MutationObserver(()=>{if(attachToToolbar())observer.disconnect();});
+    observer.observe(document.body,{childList:true,subtree:true});
+    window.addEventListener('pagehide',()=>observer.disconnect(),{once:true});
+  }
   const $ = key => drawer.querySelector(`[data-${key}]`);
   tracks.forEach((track, i) => { const option = document.createElement('option'); option.value = i; option.textContent = track.title; $('track').append(option); });
   function save() { try { localStorage.setItem('abbies-jukebox-v1', JSON.stringify({track: tracks[index]?.id, volume: audio.volume, repeat: audio.loop})); } catch {} }

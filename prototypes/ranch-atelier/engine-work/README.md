@@ -33,7 +33,7 @@ The randomized C/JS test covers 20,000 crowded/boundary cases, plus an actual ra
 `benchmark.cjs` runs the actual browser and real saved generator output at 1280x720, DPR1. Both variants use the optimized renderer. Each measured sample restores the identical starting checkpoint after warmup. Both paired scenes remain allocated; only the measured page renders. Absolute FPS applies to this harness/device. Repeated samples alternate before/after order. It records FPS, p95 frame time, actual animals/people, camera, WASM/LOD diagnostics, simulation-clock progress, backlog, resource balance drift, host load and module hashes. Profiling is disabled during timing.
 
 ```
-SECONDS=15 node engine-work/benchmark.cjs
+SECONDS=10 node engine-work/benchmark.cjs
 ```
 
 The main curve is asset count vs FPS. Overview covers all seven actual counts through1000; close and camera-away stress cases cover100,520,1000. Camera-away measures hidden simulation work, not visible scene performance. Older renderer/neighbor-reuse curves were measured in different sessions (including a30 FPS ceiling and contention), so they are historical context, not a controlled speedup comparison.
@@ -41,3 +41,5 @@ The main curve is asset count vs FPS. Overview covers all seven actual counts th
 Interrupted timing evidence is retained as `fps-rejected-lifecycle.json`: it exposed delayed identity initialization in the first offscreen tick after restoring an older save. Those samples are excluded from the published comparison. Lifecycle now advances every tick independently of movement detail, with a saved-record regression test. Other `fps-smoke*` runs are harness checks, not chart data.
 
 `fps-pre-root-fix.json` retains the complete diagnostic run before correcting a redundant full scene-graph update in frustum classification. It is not published as the final result. The final run uses10-second samples, three alternating repeats per cell, with the same five-second warmup.
+
+The measured candidate source is commit7be0ce2. To reproduce that exact application envelope after later shared-app releases, set SOURCE_ROOT to its dist directory in a separate checkout; the benchmark driver and fixtures may remain in the final branch. PLAYWRIGHT_MODULE can point to another installed Playwright package.
