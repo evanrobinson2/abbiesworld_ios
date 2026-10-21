@@ -1,0 +1,18 @@
+{
+  "before": {
+    "seconds": 0,
+    "animals": 12
+  },
+  "after": {
+    "seconds": 1.2000000000000002,
+    "animals": 12,
+    "calendar": {
+      "hour": 7.026666666666667,
+      "day": 1,
+      "year": 0.0004166666666666667,
+      "hoursPerSecond": 0.13333333333333333,
+      "daysPerYear": 2.6666666666666665
+    }
+  },
+  "errors": []
+}

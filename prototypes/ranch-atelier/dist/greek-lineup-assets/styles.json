@@ -1,0 +1,74 @@
+[
+  {
+    "id": "faceted",
+    "name": "Faceted bronze",
+    "difficulty": 2,
+    "animation": 4,
+    "simulation": 5,
+    "recognition": 4,
+    "faces": 682
+  },
+  {
+    "id": "peg",
+    "name": "Painted wooden peg",
+    "difficulty": 1,
+    "animation": 5,
+    "simulation": 5,
+    "recognition": 4,
+    "faces": 2090
+  },
+  {
+    "id": "toy",
+    "name": "Chunky toy soldier",
+    "difficulty": 2,
+    "animation": 5,
+    "simulation": 5,
+    "recognition": 5,
+    "faces": 2440
+  },
+  {
+    "id": "chibi",
+    "name": "Chibi guardian",
+    "difficulty": 3,
+    "animation": 4,
+    "simulation": 4,
+    "recognition": 5,
+    "faces": 2274
+  },
+  {
+    "id": "clay",
+    "name": "Soft clay",
+    "difficulty": 3,
+    "animation": 3,
+    "simulation": 4,
+    "recognition": 4,
+    "faces": 3402
+  },
+  {
+    "id": "voxel",
+    "name": "Voxel soldier",
+    "difficulty": 2,
+    "animation": 4,
+    "simulation": 5,
+    "recognition": 4,
+    "faces": 180
+  },
+  {
+    "id": "paper",
+    "name": "Folded paper",
+    "difficulty": 2,
+    "animation": 3,
+    "simulation": 3,
+    "recognition": 3,
+    "faces": 272
+  },
+  {
+    "id": "miniature",
+    "name": "Stylized miniature",
+    "difficulty": 4,
+    "animation": 3,
+    "simulation": 4,
+    "recognition": 3,
+    "faces": 762
+  }
+]

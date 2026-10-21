@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RE-001",
+  "name": "Modular hull inspection barrel",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocketship-exterior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Modular hull inspection barrel; original static scientific-fiction prototype, not certified engineering.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-exterior/re-001",
+  "biome": "rocketship-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 15,
+    "triangles": 2204,
+    "bounds_min": [
+      -1.1399999856948853,
+      -1.1399999856948853,
+      0.0
+    ],
+    "bounds_max": [
+      1.909999966621399,
+      1.1399999856948853,
+      2.194999933242798
+    ],
+    "dimensions_m": [
+      3.05,
+      2.28,
+      2.195
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "hull",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "attach",
+      "service"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "opening",
+        "position_blender_m": [
+          0.0,
+          -1.2000000476837158,
+          1.0700000524520874
+        ],
+        "role": "opening"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "bare",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "covered",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "service-open",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "weathered",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Modular hull inspection barrel; original static scientific-fiction prototype, not certified engineering. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See hull(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-exterior/batch_rocket_exterior.py",
+    "entry_point": "hull",
+    "source_sha256": "337f99464b537d9bb8ca9636b39ce259592bb94143201791f09153ed35984fe3",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-exterior batch_rocket_exterior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RE-001"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RE-001.glb",
+    "sha256": "d2f0b8897c784edd83c2a384d432a45c70d14c53aa51dcb34fb5d945aa881e35",
+    "bytes": 93400
+  }
+}

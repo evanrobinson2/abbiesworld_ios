@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "ME-028",
+  "name": "Regolith oxygen-extraction furnace concept",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-exterior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Insulated vessel, loading door and offgas outlet depict a processing stage. Static scientific-fiction concept, not certified engineering.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-exterior/me-028",
+  "biome": "moon-base-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 41,
+    "triangles": 1260,
+    "bounds_min": [
+      -0.625,
+      -0.44999998807907104,
+      0.0
+    ],
+    "bounds_max": [
+      0.6399999856948853,
+      0.44999998807907104,
+      1.590000033378601
+    ],
+    "dimensions_m": [
+      1.265,
+      0.9,
+      1.59
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "resource-processing",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "load",
+      "process",
+      "service"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "load",
+        "position_blender_m": [
+          0.0,
+          -0.44999998807907104,
+          0.75
+        ],
+        "role": "load"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "idle",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "loaded",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "processing",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "isolated",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Insulated vessel, loading door and offgas outlet depict a processing stage. Static scientific-fiction concept, not certified engineering. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See furnace(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-exterior/batch_moon_exterior_3.py",
+    "entry_point": "furnace",
+    "source_sha256": "8ce07e07c658eba03120bf3b0dd6bdd799966b68eb9cb205f3530723b68b40a9",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-exterior batch_moon_exterior_3.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "ME-028"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered inspection card checked: readable coherent base geometry and materials; static prototype",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered inspection card checked: readable coherent base geometry and materials; static prototype"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "ME-028.glb",
+    "sha256": "91f0e0843b7a4a0d479f1ffe08f4c8321f1760a9b7eeac5ffb1aab39d0a79dbb",
+    "bytes": 68824
+  }
+}

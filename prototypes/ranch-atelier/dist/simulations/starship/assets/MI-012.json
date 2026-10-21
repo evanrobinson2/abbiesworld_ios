@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "MI-012",
+  "name": "Restrained sanitation seat",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-interior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Restrained sanitation seat; fictional visual prototype, not certified hardware.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-interior/mi-012",
+  "biome": "moon-base-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 9,
+    "triangles": 544,
+    "bounds_min": [
+      -0.4050000011920929,
+      -0.32499998807907104,
+      0.0
+    ],
+    "bounds_max": [
+      0.4050000011920929,
+      0.3999999761581421,
+      1.0549999475479126
+    ],
+    "dimensions_m": [
+      0.81,
+      0.725,
+      1.055
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "sanitation",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "use",
+      "clean",
+      "service"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "service.001",
+        "position_blender_m": [
+          0.0,
+          -0.699999988079071,
+          0.0
+        ],
+        "role": "service"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "ready",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "in-use",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "service-open",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "isolated",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Restrained sanitation seat; fictional visual prototype, not certified hardware. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See sanitation(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-interior/batch_moon_interior_2.py",
+    "entry_point": "sanitation",
+    "source_sha256": "27360d3434313395ccd3a1cac6779277ef2894221ff6c4e0ea0fd481a669d1fe",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-interior batch_moon_interior_2.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "MI-012"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "MI-012.glb",
+    "sha256": "a97b6a2dbba85bd95c5b1cce3c2db8eef80b8eaac17ed95d1491586e435226f3",
+    "bytes": 32572
+  }
+}

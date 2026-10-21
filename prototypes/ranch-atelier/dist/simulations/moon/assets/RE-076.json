@@ -1,0 +1,560 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RE-076",
+  "name": "USS Aurora fitted cabin cutaway",
+  "version": "0.1.3",
+  "auxiliary": true,
+  "set": "rocketship-exterior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Human-scale cabin fitted within RE-073 pressure hull: two pilot seats, four passenger seats, two berths, galley and washroom, with clear aisle and entry steps.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-exterior/re-076",
+  "biome": "rocketship-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 125,
+    "triangles": 19408,
+    "bounds_min": [
+      -6.328115463256836,
+      -6.266313552856445,
+      0.0
+    ],
+    "bounds_max": [
+      6.328115463256836,
+      6.272913455963135,
+      4.619999885559082
+    ],
+    "dimensions_m": [
+      12.656230926513672,
+      12.53922700881958,
+      4.619999885559082
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "Inspectable large ferry interior",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "show-interior"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "cabin-floor",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          2.5999999046325684
+        ],
+        "role": "cabin-floor"
+      },
+      {
+        "id": "cockpit-door",
+        "position_blender_m": [
+          0.0,
+          -2.4000000953674316,
+          2.5999999046325684
+        ],
+        "role": "cockpit-door"
+      },
+      {
+        "id": "entry",
+        "position_blender_m": [
+          2.75,
+          -1.2999999523162842,
+          2.5999999046325684
+        ],
+        "role": "entry"
+      },
+      {
+        "id": "passenger-port-aft",
+        "position_blender_m": [
+          -1.9500000476837158,
+          1.25,
+          3.0799999237060547
+        ],
+        "role": "passenger-port-aft"
+      },
+      {
+        "id": "passenger-port-front",
+        "position_blender_m": [
+          -1.9500000476837158,
+          -0.05000000074505806,
+          3.0799999237060547
+        ],
+        "role": "passenger-port-front"
+      },
+      {
+        "id": "passenger-starboard-aft",
+        "position_blender_m": [
+          1.9500000476837158,
+          1.25,
+          3.0799999237060547
+        ],
+        "role": "passenger-starboard-aft"
+      },
+      {
+        "id": "passenger-starboard-front",
+        "position_blender_m": [
+          1.9500000476837158,
+          -0.05000000074505806,
+          3.0799999237060547
+        ],
+        "role": "passenger-starboard-front"
+      },
+      {
+        "id": "pilot-left",
+        "position_blender_m": [
+          -0.8999999761581421,
+          -3.3499999046325684,
+          3.0799999237060547
+        ],
+        "role": "pilot-left"
+      },
+      {
+        "id": "pilot-right",
+        "position_blender_m": [
+          0.8999999761581421,
+          -3.3499999046325684,
+          3.0799999237060547
+        ],
+        "role": "pilot-right"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "cutaway",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Human-scale cabin fitted within RE-073 pressure hull: two pilot seats, four passenger seats, two berths, galley and washroom, with clear aisle and entry steps. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See build(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-exterior/batch_shell_interior.py",
+    "entry_point": "build",
+    "source_sha256": "4cd195659aae802be7f2bef6bf33313631ee136146453d461f0adda8732b02f5",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-exterior batch_shell_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RE-076",
+    "build_inputs_sha256": {
+      "rocketship-exterior/batch_shell_interior.py": "4cd195659aae802be7f2bef6bf33313631ee136146453d461f0adda8732b02f5",
+      "production/build_scene_batch.py": "ee9388985dec24b324d75e81fb867e92abc6b13da47e412fd128ea824e2b1b4d",
+      "production/render_micro.py": "6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449",
+      "garden-farm/build_garden.py": "2917c0fe1f3e25850af16986dacde582013f4dfe4ab08018c78b6431864ca32b",
+      "market-village/build_market.py": "70c1bc50a2a77f6dcb69c02842a7e7901bd12aebcd7a66912f5308832178a420",
+      "market-village/asset_helpers.py": "113ec16c31b088557de6e6589c950f575dc37a2dd96577b3bba01415967ffd3e",
+      "market-village/architecture.py": "7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3"
+    },
+    "source_snapshots": {
+      "rocketship-exterior/batch_shell_interior.py": "production/source-snapshots/4cd195659aae802be7f2bef6bf33313631ee136146453d461f0adda8732b02f5.py",
+      "production/build_scene_batch.py": "production/source-snapshots/ee9388985dec24b324d75e81fb867e92abc6b13da47e412fd128ea824e2b1b4d.py",
+      "production/render_micro.py": "production/source-snapshots/6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449.py",
+      "garden-farm/build_garden.py": "production/source-snapshots/2917c0fe1f3e25850af16986dacde582013f4dfe4ab08018c78b6431864ca32b.py",
+      "market-village/build_market.py": "production/source-snapshots/70c1bc50a2a77f6dcb69c02842a7e7901bd12aebcd7a66912f5308832178a420.py",
+      "market-village/asset_helpers.py": "production/source-snapshots/113ec16c31b088557de6e6589c950f575dc37a2dd96577b3bba01415967ffd3e.py",
+      "market-village/architecture.py": "production/source-snapshots/7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3.py"
+    },
+    "profile_evidence": "moon-interior-release/profiles/20261021T065855Z-4808b8"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Pass after independent inspection of the final raw card and all four rendered views. The repaired bunk rack posts connect both berth frames to the deck, ladder stiles connect the treads, and footrest legs visibly connect the plates to the deck. Muted ivory/teal fittings read coherently against the inherited Aurora shell. Six seats, the central aisle, cockpit access, galley, compact washroom and entry steps form a credible static arrangement. Full-size 1.9 m ME-008 guides fit the seats and two full-length berths without avatar shrinking or obvious body/furniture intersections in the reviewed views. The upper and lower bunks remain compact rotating-use berths, not six private sleeping quarters. Approval covers visual construction and static human-scale fit only; it does not certify engineering, animated boarding, pathfinding, onboard routines or runtime camera behavior. Database registration and runtime integration gates remain separate.",
+    "deployed": false,
+    "catalog_include": true,
+    "visual_review_passed": true,
+    "review_note": "Pass after independent inspection of the final raw card and all four rendered views. The repaired bunk rack posts connect both berth frames to the deck, ladder stiles connect the treads, and footrest legs visibly connect the plates to the deck. Muted ivory/teal fittings read coherently against the inherited Aurora shell. Six seats, the central aisle, cockpit access, galley, compact washroom and entry steps form a credible static arrangement. Full-size 1.9 m ME-008 guides fit the seats and two full-length berths without avatar shrinking or obvious body/furniture intersections in the reviewed views. The upper and lower bunks remain compact rotating-use berths, not six private sleeping quarters. Approval covers visual construction and static human-scale fit only; it does not certify engineering, animated boarding, pathfinding, onboard routines or runtime camera behavior. Database registration and runtime integration gates remain separate."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    },
+    {
+      "version": "0.1.1",
+      "change": "Rebuilt authored geometry/metadata; review must be renewed.",
+      "createdAt": 1792565608.198036,
+      "previous_glb_sha256": "57eff8447987b98d3ba3cf30c89999bee5ae50f97710b620e52d5e7c957acae4",
+      "source_sha256": "8e83baf8f0f5401d3098757c697ba16adcb6cac0e5cd24428205b9dda7638d96"
+    },
+    {
+      "version": "0.1.2",
+      "change": "Rebuilt authored geometry/metadata; review must be renewed.",
+      "createdAt": 1792565668.274216,
+      "previous_glb_sha256": "283a57f61bb17fa7dc65b79fa1091f7d69cb66e7841ca661a2f25aba992ca733",
+      "source_sha256": "032c93a42f7132904eeb440a280d8ae951e2e874a61f8fa384ab7d97477c8cd9"
+    },
+    {
+      "version": "0.1.3",
+      "change": "Rebuilt authored geometry/metadata; review must be renewed.",
+      "createdAt": 1792565937.531601,
+      "previous_glb_sha256": "62b5be04eb2cb8a8f1c05d35d685a35f35f68e19731ee2fb2bd92dc70c98c79b",
+      "source_sha256": "4cd195659aae802be7f2bef6bf33313631ee136146453d461f0adda8732b02f5"
+    }
+  ],
+  "authoredSpec": {
+    "id": "RE-076",
+    "name": "USS Aurora fitted cabin cutaway",
+    "category": "structure",
+    "intent": "Human-scale cabin fitted within RE-073 pressure hull: two pilot seats, four passenger seats, two berths, galley and washroom, with clear aisle and entry steps.",
+    "role": "Inspectable large ferry interior",
+    "actions": [
+      "inspect",
+      "show-interior"
+    ],
+    "anchors": [
+      [
+        "cabin-floor",
+        [
+          0,
+          0,
+          2.6
+        ]
+      ],
+      [
+        "entry",
+        [
+          2.75,
+          -1.3,
+          2.6
+        ]
+      ],
+      [
+        "cockpit-door",
+        [
+          0,
+          -2.4,
+          2.6
+        ]
+      ],
+      [
+        "pilot-left",
+        [
+          -0.9,
+          -3.35,
+          3.08
+        ]
+      ],
+      [
+        "pilot-right",
+        [
+          0.9,
+          -3.35,
+          3.08
+        ]
+      ],
+      [
+        "passenger-port-front",
+        [
+          -1.95,
+          -0.05,
+          3.08
+        ]
+      ],
+      [
+        "passenger-port-aft",
+        [
+          -1.95,
+          1.25,
+          3.08
+        ]
+      ],
+      [
+        "passenger-starboard-front",
+        [
+          1.95,
+          -0.05,
+          3.08
+        ]
+      ],
+      [
+        "passenger-starboard-aft",
+        [
+          1.95,
+          1.25,
+          3.08
+        ]
+      ]
+    ],
+    "variants": [
+      "cutaway"
+    ],
+    "base_increment": 0,
+    "canonical_base_id": "RE-073",
+    "lineage_reason": "Furnished inspection cutaway of registered large ferry",
+    "limitations": [
+      "Static furnished interior; no onboard NPC routine simulation",
+      "Two berths, six seats; not six private sleeping quarters",
+      "Cutaway removes roof for inspection; closed flight shell remains RE-073"
+    ]
+  },
+  "baseIncrement": 0,
+  "derivation": {},
+  "lineage": {
+    "uniqueBaseIncrement": false,
+    "canonicalBaseId": "RE-073",
+    "relationship": "Furnished inspection cutaway of registered large ferry"
+  },
+  "files": {
+    "glb": "RE-076.glb",
+    "sha256": "7bf883ec5a2ad3c54a33259de1697975e4cfbb0456d2a9c56f61c44dbdefe898",
+    "bytes": 1110396
+  },
+  "human_fit": {
+    "asset": "RE-076",
+    "humanAsset": "ME-008",
+    "humanDimensionsMetres": [
+      0.95021,
+      0.47276,
+      1.9
+    ],
+    "units": "metres; no avatar rescaling",
+    "capacity": {
+      "seats": 6,
+      "berths": 2
+    },
+    "clearancesMetres": {
+      "mainAisleMarkedWidth": 1.24,
+      "cockpitDoorWidth": 1.26,
+      "seatArmrestInnerGap": 0.98,
+      "mattressLength": 2.12,
+      "mattressWidth": 0.94,
+      "entryTreadWidth": 1.24,
+      "entryRiser": 0.225,
+      "entryTreadGoing": 0.27,
+      "seatFootrestTopAboveFloor": 0.26
+    },
+    "hullCheck": "Conservative pressure-body ellipsoid from original shell generator; exterior pods excluded; q <=1 is inside",
+    "standingRouteMaxHullFraction": 0.7422125472464532,
+    "humans": [
+      {
+        "role": "pilot-left",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "rigid limb articulation using existing game hip/knee/shoulder pivots",
+        "boundsMin": [
+          -1.3751057386398315,
+          -4.110000133514404,
+          2.859999895095825
+        ],
+        "boundsMax": [
+          -0.42489421367645264,
+          -3.2300000190734863,
+          4.329999923706055
+        ],
+        "maxHullEnvelopeFraction": 0.6719064294735537
+      },
+      {
+        "role": "pilot-right",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "rigid limb articulation using existing game hip/knee/shoulder pivots",
+        "boundsMin": [
+          0.42489421367645264,
+          -4.110000133514404,
+          2.859999895095825
+        ],
+        "boundsMax": [
+          1.3751057386398315,
+          -3.2300000190734863,
+          4.329999923706055
+        ],
+        "maxHullEnvelopeFraction": 0.6719064294735537
+      },
+      {
+        "role": "passenger-port-front",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "rigid limb articulation using existing game hip/knee/shoulder pivots",
+        "boundsMin": [
+          -2.069999933242798,
+          -0.5251057744026184,
+          2.859999895095825
+        ],
+        "boundsMax": [
+          -1.1899999380111694,
+          0.4251057803630829,
+          4.329999923706055
+        ],
+        "maxHullEnvelopeFraction": 0.3303160000504701
+      },
+      {
+        "role": "passenger-port-aft",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "rigid limb articulation using existing game hip/knee/shoulder pivots",
+        "boundsMin": [
+          -2.069999933242798,
+          0.7748942375183105,
+          2.859999895095825
+        ],
+        "boundsMax": [
+          -1.1899999380111694,
+          1.7251057624816895,
+          4.329999923706055
+        ],
+        "maxHullEnvelopeFraction": 0.3804997935599965
+      },
+      {
+        "role": "passenger-starboard-front",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "rigid limb articulation using existing game hip/knee/shoulder pivots",
+        "boundsMin": [
+          1.1899999380111694,
+          -0.5251057744026184,
+          2.859999895095825
+        ],
+        "boundsMax": [
+          2.069999933242798,
+          0.4251057803630829,
+          4.329999923706055
+        ],
+        "maxHullEnvelopeFraction": 0.3303160000504701
+      },
+      {
+        "role": "passenger-starboard-aft",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "rigid limb articulation using existing game hip/knee/shoulder pivots",
+        "boundsMin": [
+          1.1899999380111694,
+          0.7748942375183105,
+          2.859999895095825
+        ],
+        "boundsMax": [
+          2.069999933242798,
+          1.7251057624816895,
+          4.329999923706055
+        ],
+        "maxHullEnvelopeFraction": 0.3804997935599965
+      },
+      {
+        "role": "aisle",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "original standing",
+        "maxHullEnvelopeFraction": 0.2797236754749861
+      },
+      {
+        "role": "cockpit-door",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "original standing",
+        "maxHullEnvelopeFraction": 0.44219249088427787
+      },
+      {
+        "role": "galley",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "original standing",
+        "maxHullEnvelopeFraction": 0.5908483885996152
+      },
+      {
+        "role": "washroom",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "original standing",
+        "maxHullEnvelopeFraction": 0.7393369351493111
+      },
+      {
+        "role": "lower-berth",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "original human lying face-up",
+        "boundsMin": [
+          0.904894232749939,
+          2.450000047683716,
+          3.2100000381469727
+        ],
+        "boundsMax": [
+          1.8551057577133179,
+          4.349999904632568,
+          3.6827595233917236
+        ],
+        "maxHullEnvelopeFraction": 0.6698635419533681
+      },
+      {
+        "role": "upper-berth",
+        "source": "ME-008",
+        "scale": 1,
+        "pose": "original human lying face-up",
+        "boundsMin": [
+          0.904894232749939,
+          2.450000047683716,
+          4.260000228881836
+        ],
+        "boundsMax": [
+          1.8551057577133179,
+          4.349999904632568,
+          4.732759475708008
+        ],
+        "maxHullEnvelopeFraction": 0.6341083627164613
+      }
+    ],
+    "limitations": [
+      "Static layout; no passenger AI or boarding animation",
+      "Six travel seats but only two rotating-use berths",
+      "Human guides are review evidence, not baked occupants"
+    ],
+    "passed": true
+  }
+}

@@ -1,0 +1,137 @@
+{
+  "alias": [
+    "abbies-ranch-atelier-evan-8467.vercel.app"
+  ],
+  "aliasAssigned": false,
+  "automaticAliases": [
+    "abbies-ranch-atelier-evan-8467.vercel.app"
+  ],
+  "bootedAt": 1792565170252,
+  "buildingAt": 1792565170252,
+  "buildSkipped": false,
+  "createdAt": 1792565170252,
+  "creator": {
+    "uid": "Ihqc7u1QAtveVmiVHJGzMYhF",
+    "username": "evanr2-2946"
+  },
+  "duration": {},
+  "id": "dpl_9Xecg8oD5jLXBA7RS22PJRC8JuMB",
+  "name": "abbies-ranch-atelier",
+  "meta": {
+    "feature": "conservative-neighbor-reuse",
+    "baseline": "dpl_5hfMQkNrsSDJrsei6ovuiREkazXy"
+  },
+  "originCacheRegion": "iad1",
+  "project": {
+    "id": "prj_BVnIsSnrYu2TkFgLpWiJrLW6NfzI",
+    "name": "abbies-ranch-atelier",
+    "framework": null
+  },
+  "public": false,
+  "readyState": "INITIALIZING",
+  "regions": [
+    "iad1"
+  ],
+  "source": "cli",
+  "status": "INITIALIZING",
+  "target": "production",
+  "team": {
+    "id": "team_oyQ4CUAshGOCQbr5KHu1jYec",
+    "name": "Evan",
+    "slug": "evan-8467"
+  },
+  "type": "LAMBDAS",
+  "url": "abbies-ranch-atelier-p6riyy25m-evan-8467.vercel.app",
+  "version": 2,
+  "previewCommentsEnabled": true,
+  "oidcTokenClaims": {
+    "sub": "owner:evan-8467:project:abbies-ranch-atelier:environment:production",
+    "iss": "https://oidc.vercel.com/evan-8467",
+    "scope": "owner:evan-8467:project:abbies-ranch-atelier:environment:production",
+    "aud": "https://vercel.com/evan-8467",
+    "owner": "evan-8467",
+    "owner_id": "team_oyQ4CUAshGOCQbr5KHu1jYec",
+    "project": "abbies-ranch-atelier",
+    "project_id": "prj_BVnIsSnrYu2TkFgLpWiJrLW6NfzI",
+    "environment": "production",
+    "plan": "pro"
+  },
+  "lambdas": [
+    {
+      "id": "bld_22t2s5640",
+      "createdAt": 1792565169778,
+      "entrypoint": ".",
+      "readyState": "READY",
+      "readyStateAt": 1792565169778,
+      "output": []
+    }
+  ],
+  "aliasAssignedAt": null,
+  "build": {
+    "env": []
+  },
+  "builds": [],
+  "createdIn": "sfo1",
+  "env": [],
+  "functions": null,
+  "inspectorUrl": "https://vercel.com/evan-8467/abbies-ranch-atelier/9Xecg8oD5jLXBA7RS22PJRC8JuMB",
+  "isInConcurrentBuildsQueue": false,
+  "isInSystemBuildsQueue": true,
+  "ownerId": "team_oyQ4CUAshGOCQbr5KHu1jYec",
+  "plan": "pro",
+  "projectId": "prj_BVnIsSnrYu2TkFgLpWiJrLW6NfzI",
+  "resourceConfig": {
+    "buildMachine": {
+      "cores": 8,
+      "memory": 16384,
+      "defaultPurchaseType": "standard",
+      "purchaseType": "enhanced",
+      "machineSelectionType": "elastic",
+      "selectionSource": "elastic-algorithm"
+    }
+  },
+  "projectSettings": {
+    "buildCommand": "npm run build",
+    "devCommand": null,
+    "framework": null,
+    "commandForIgnoringBuildStep": null,
+    "installCommand": null,
+    "outputDirectory": "public-build",
+    "speedInsights": {
+      "id": "r7GJuQkxU9qWqd90gWINXjpX6jJ",
+      "hasData": false
+    },
+    "webAnalytics": {
+      "id": "lnLkfjqTBWnomvSfq4ipIyQBy"
+    },
+    "nodeVersion": "24.x"
+  },
+  "routes": null,
+  "config": {
+    "version": 1,
+    "secureComputePrimaryRegion": null,
+    "secureComputeFallbackRegion": null,
+    "functionTimeout": 300,
+    "functionType": "fluid",
+    "functionMemoryType": "standard",
+    "isUsingActiveCPU": true,
+    "resourceConfig": {
+      "buildMachine": {
+        "defaultPurchaseType": "standard",
+        "purchaseType": "enhanced",
+        "machineSelectionType": "elastic",
+        "selectionSource": "elastic-algorithm"
+      },
+      "buildQueue": {
+        "configuration": "SKIP_NAMESPACE_QUEUE"
+      },
+      "elasticConcurrency": "PROJECT_SETTING"
+    }
+  },
+  "checks": {
+    "deployment-alias": {
+      "state": "pending",
+      "startedAt": 1792565170268
+    }
+  }
+}

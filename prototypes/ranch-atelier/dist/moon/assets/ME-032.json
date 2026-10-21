@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "ME-032",
+  "name": "Bucket-wheel regolith excavator",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-exterior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Crawler base carries an eight-cup excavation wheel on a boom. Static scientific-fiction concept, not certified engineering.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-exterior/me-032",
+  "biome": "moon-base-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 86,
+    "triangles": 2984,
+    "bounds_min": [
+      -0.7250000238418579,
+      -0.5900000333786011,
+      0.0
+    ],
+    "bounds_max": [
+      1.6800000667572021,
+      0.5900000333786011,
+      1.1899999380111694
+    ],
+    "dimensions_m": [
+      2.405,
+      1.18,
+      1.19
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "excavation",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "drive",
+      "dig",
+      "discharge"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "wheel",
+        "position_blender_m": [
+          1.149999976158142,
+          0.0,
+          0.690000057220459
+        ],
+        "role": "wheel"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "parked",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "digging",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "traveling",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "service",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Crawler base carries an eight-cup excavation wheel on a boom. Static scientific-fiction concept, not certified engineering. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See excavator(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-exterior/batch_moon_exterior_4.py",
+    "entry_point": "excavator",
+    "source_sha256": "f9254a2b0de056e1e7c721c87fb1796a7bf62062315067a1832690556b71ee10",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-exterior batch_moon_exterior_4.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "ME-032"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered inspection card checked: readable coherent base geometry and materials; static prototype",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered inspection card checked: readable coherent base geometry and materials; static prototype"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "ME-032.glb",
+    "sha256": "bd0def8ad0b675ae8b71738699566b9c5c979cc783aea7ff26be7a96fbe51fe7",
+    "bytes": 166128
+  }
+}

@@ -23,7 +23,7 @@ function requirements(type,dimensions){
  if(type==='pond')return [{role:'water',w:32,d:26,radius:21}];
  return [];
 }
-export function planAssembly(board,{dimensions={},dimensionsByTile={},requirementsByType={},requirementsByTile={},siteCost=()=>0,affinities=AFFINITIES,connectionTree=false}={}){
+export function planAssembly(board,{dimensions={},dimensionsByTile={},requirementsByType={},requirementsByTile={},siteCost=()=>0,siteAllowed=()=>true,affinities=AFFINITIES,connectionTree=false,pruneEmptyBranches=false}={}){
  R=RADIUS_METRES;A=R*Math.sqrt(3)/2;
  const reqs=p=>requirementsByTile[p.id]||requirementsByType[p.type]||requirements(p.type,dimensionsByTile[p.id]||dimensions);
  const rotate=(point,p)=>{const a=(p.rotation||0)*Math.PI/3;return {x:point.x*Math.cos(a)+point.z*Math.sin(a),z:-point.x*Math.sin(a)+point.z*Math.cos(a)};};
@@ -34,6 +34,15 @@ export function planAssembly(board,{dimensions={},dimensionsByTile={},requiremen
   // Prefer shorter useful connections, then stable seed variation for equal edges.
   const by=new Map(plans.map(p=>[p.id,p]));links.sort((a,b)=>{const cost=l=>dist(by.get(l.a).center,by.get(l.b).center)+(random(by.get(l.a).seed^by.get(l.b).seed)()*.1);return cost(a)-cost(b);});
   const tree=links.filter(l=>{const a=root(l.a),b=root(l.b);if(a===b)return false;parent.set(a,b);return true;});links.splice(0,links.length,...tree);
+ }
+ // Habitat-only tiles are not destinations. Keep them only as through routes
+ // between required sites; peel unused leaves from the connection graph.
+ if(pruneEmptyBranches){
+  const destinations=new Set(plans.filter(p=>reqs(p).length>0).map(p=>p.id));
+  let changed=true;
+  while(changed){changed=false;const degree=new Map();for(const link of links){degree.set(link.a,(degree.get(link.a)||0)+1);degree.set(link.b,(degree.get(link.b)||0)+1);}
+   for(let i=links.length-1;i>=0;i--){const link=links[i];if([link.a,link.b].some(id=>!destinations.has(id)&&degree.get(id)===1)){links.splice(i,1);changed=true;}}
+  }
  }
  const byId=Object.fromEntries(plans.map(p=>[p.id,p]));
  for(const p of plans){const neighbors=links.filter(l=>l.a===p.id||l.b===p.id).map(l=>byId[l.a===p.id?l.b:l.a]);if(neighbors.length){p.hub={x:neighbors.reduce((s,n)=>s+(n.center.x-p.center.x),0)/neighbors.length*.075,z:neighbors.reduce((s,n)=>s+(n.center.z-p.center.z),0)/neighbors.length*.075};}}
@@ -56,7 +65,7 @@ export function planAssembly(board,{dimensions={},dimensionsByTile={},requiremen
    }
    const weights=affinities[req.role]||{};let tx=0,tz=0,total=0;for(const other of plans){if(other===p)continue;const weight=weights[other.type]||0;if(!weight)continue;const d=dist(p.center,other.center);tx+=(other.center.x-p.center.x)/d*weight;tz+=(other.center.z-p.center.z)/d*weight;total+=weight;}
    const preferred=total?{x:tx/total*24,z:tz/total*24}:{x:Math.sin(angle+index*2.4)*22,z:Math.cos(angle+index*2.4)*22};
-   const available=candidates.filter(c=>inside(c,req.radius+2)&&dist(c,p.hub)>req.radius+4&&p.placements.every(o=>dist(c,o)>req.radius+o.radius+2)&&p.paths.filter(path=>path.kind==='connector').every(path=>segmentDistance(c,...path.points)>req.radius+2));
+   const available=candidates.filter(c=>inside(c,req.radius+2)&&dist(c,p.hub)>req.radius+4&&p.placements.every(o=>dist(c,o)>req.radius+o.radius+2)&&p.paths.filter(path=>path.kind==='connector').every(path=>segmentDistance(c,...path.points)>req.radius+2)&&siteAllowed(p,c,req));
    available.sort((a,b)=>(dist(a,preferred)+a.tie*.6+siteCost(p,a,req))-(dist(b,preferred)+b.tie*.6+siteCost(p,b,req)));
    if(!available.length){p.warnings.push('No clear space for '+req.role);continue;}
    const c=available[0],orientation=Math.atan2(p.hub.x-c.x,p.hub.z-c.z),dir={x:Math.sin(orientation),z:Math.cos(orientation)},item={...req,id:p.id+'-'+index,x:c.x,z:c.z,angle:orientation,reason:total?'Prefers nearby '+Object.keys(weights).join(' / '):'Faces the shared yard'};

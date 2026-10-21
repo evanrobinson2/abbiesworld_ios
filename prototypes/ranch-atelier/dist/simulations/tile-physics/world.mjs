@@ -1,9 +1,10 @@
+import {PLANET_GRAVITY} from '../planet-gravity.mjs';
 import {compileTriangles} from './collider.mjs';
 import {Vector3 as V,Quaternion as Q,Triangle,Matrix4} from './three.mjs';
 const vec=a=>new V(...a),quat=a=>new Q(...a).normalize(),clone=structuredClone;
 const finite=(a,n)=>Array.isArray(a)&&a.length===n&&a.every(Number.isFinite);
 const check=(ok,message)=>{if(!ok)throw Error(message);};
-export const PROFILES=Object.freeze({earth:Object.freeze({gravity:[0,-9.81,0],gravityFrame:'world',drag:0,restitution:.08,friction:.65}),moon:Object.freeze({gravity:[0,-1.62,0],gravityFrame:'world',drag:0,restitution:.08,friction:.65})});
+export const PROFILES=Object.freeze(Object.fromEntries(Object.entries(PLANET_GRAVITY).map(([name,g])=>[name,Object.freeze({gravity:Object.freeze([0,-g,0]),gravityFrame:'world',drag:0,restitution:.08,friction:.65})])));
 export function profile(spec){const p={...PROFILES.earth,...clone(spec)};check(finite(p.gravity,3)&&['world','tile'].includes(p.gravityFrame),'Invalid gravity');check([p.drag,p.restitution,p.friction].every(x=>Number.isFinite(x)&&x>=0)&&p.restitution<=1,'Invalid material');return p;}
 export function frame(spec={}){const f={position:[0,0,0],rotation:[0,0,0,1],velocity:[0,0,0],angularVelocity:[0,0,0],...clone(spec)};check(['position','velocity','angularVelocity'].every(k=>finite(f[k],3))&&finite(f.rotation,4)&&Math.hypot(...f.rotation)>0,'Invalid frame');f.rotation=quat(f.rotation).toArray();return f;}
 export function worldPoint(f,p){return vec(p).applyQuaternion(quat(f.rotation)).add(vec(f.position)).toArray();}

@@ -1,0 +1,3 @@
+// Small reproducible inheritance; schemas belong to species adapters, not the core.
+function unit(key){let n=2166136261;for(const c of String(key)){n^=c.charCodeAt(0);n=Math.imul(n,16777619);}return (n>>>0)/4294967296;}
+export function inheritTraits(schema,parents,key){const result={};for(const [name,rule]of Object.entries(schema)){const values=parents.map(p=>p?.[name]).filter(v=>v!==undefined);if(rule.values){result[name]=values.length?values[Math.floor(unit(key+name)*values.length)]:rule.default;continue;}const base=values.length?values.reduce((n,v)=>n+v,0)/values.length:rule.default;result[name]=Math.round(Math.max(rule.min,Math.min(rule.max,base+(unit(key+name)-.5)*2*(rule.variation||0)))*1000)/1000;}return result;}

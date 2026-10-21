@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "SI-001",
+  "name": "Restrained sample laboratory bench",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "space-station-interior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Restrained sample laboratory bench; static scientific fiction, not certified engineering or medical equipment.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/space-station-interior/si-001",
+  "biome": "space-station-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 16,
+    "triangles": 768,
+    "bounds_min": [
+      -0.8500000238418579,
+      -0.47499996423721313,
+      0.0
+    ],
+    "bounds_max": [
+      0.8500000238418579,
+      0.4000000059604645,
+      1.3049999475479126
+    ],
+    "dimensions_m": [
+      1.7,
+      0.875,
+      1.305
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "laboratory",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "sample",
+      "inspect",
+      "clean"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "work",
+        "position_blender_m": [
+          0.0,
+          -0.6499999761581421,
+          0.8999999761581421
+        ],
+        "role": "work"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for space-station-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "loaded",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "empty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "analysis",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "cleaning",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Restrained sample laboratory bench; static scientific fiction, not certified engineering or medical equipment. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See bench(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "space-station-interior/batch_station_interior.py",
+    "entry_point": "bench",
+    "source_sha256": "e430c7b849abc332c69e8e1d3b2291bbec4af92911a8ace3650541efb28a3967",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- space-station-interior batch_station_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "SI-001"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "SI-001.glb",
+    "sha256": "02c0c0a911050eb8d234b1a952226466a0a0fdffae7439e4d2dc3a38bd3f7b94",
+    "bytes": 45160
+  }
+}

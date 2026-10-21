@@ -1,0 +1,69 @@
+[
+  {
+    "seed": 214,
+    "requested": 100,
+    "sampleSeconds": 20,
+    "populationKey": "single-100",
+    "id": "single-100-third",
+    "renderer": "after",
+    "fixture": "single-100.json"
+  },
+  {
+    "seed": 214,
+    "requested": 250,
+    "sampleSeconds": 20,
+    "populationKey": "single-250",
+    "id": "single-250-third",
+    "renderer": "after",
+    "fixture": "single-250.json"
+  },
+  {
+    "seed": 214,
+    "requested": 500,
+    "sampleSeconds": 20,
+    "populationKey": "single-500",
+    "id": "single-500-third",
+    "renderer": "after",
+    "fixture": "single-500.json"
+  },
+  {
+    "seed": 214,
+    "requested": 1000,
+    "sampleSeconds": 20,
+    "populationKey": "single-1000",
+    "id": "single-1000-third",
+    "renderer": "after",
+    "fixture": "single-1000.json"
+  },
+  {
+    "seed": 214,
+    "requested": 520,
+    "sampleSeconds": 20,
+    "populationKey": "expanded-520",
+    "perTile": 40,
+    "biodiversity": 0,
+    "id": "expanded-520-third",
+    "renderer": "after",
+    "fixture": "expanded-520.json"
+  },
+  {
+    "seed": 214,
+    "requested": 760,
+    "sampleSeconds": 20,
+    "populationKey": "expanded-760",
+    "perTile": 40,
+    "biodiversity": 0,
+    "id": "expanded-760-third",
+    "renderer": "after",
+    "fixture": "expanded-760.json"
+  },
+  {
+    "seed": 214,
+    "requested": 1000,
+    "sampleSeconds": 20,
+    "populationKey": "expanded-1000",
+    "fixture": "expanded-1000.json",
+    "id": "expanded-1000-third",
+    "renderer": "after"
+  }
+]

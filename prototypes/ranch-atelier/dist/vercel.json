@@ -1,6 +1,30 @@
 {
   "rewrites": [
     {
+      "source": "/moon",
+      "destination": "/moon/index.html"
+    },
+    {
+      "source": "/moon/",
+      "destination": "/moon/index.html"
+    },
+    {
+      "source": "/cemetery/",
+      "destination": "/cemetery/index.html"
+    },
+    {
+      "source": "/cemetery",
+      "destination": "/cemetery/index.html"
+    },
+    {
+      "source": "/starship/",
+      "destination": "/starship/index.html"
+    },
+    {
+      "source": "/starship",
+      "destination": "/starship/index.html"
+    },
+    {
       "source": "/simulations/",
       "destination": "/simulations/index.html"
     },
@@ -38,7 +62,7 @@
     },
     {
       "source": "/sandbox",
-      "destination": "/board3.html"
+      "destination": "/simulations/index.html"
     },
     {
       "source": "/sandbox/outbreak",

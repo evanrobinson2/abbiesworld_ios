@@ -1,0 +1,66 @@
+[
+  {
+    "id": "broad",
+    "name": "Broad shieldbearer",
+    "difficulty": 3,
+    "animation": 4,
+    "simulation": 5,
+    "recognition": 5
+  },
+  {
+    "id": "bighead",
+    "name": "Big-head scout",
+    "difficulty": 3,
+    "animation": 4,
+    "simulation": 4,
+    "recognition": 5
+  },
+  {
+    "id": "pear",
+    "name": "Pear-shaped keeper",
+    "difficulty": 3,
+    "animation": 4,
+    "simulation": 4,
+    "recognition": 5
+  },
+  {
+    "id": "tall",
+    "name": "Long-limbed lookout",
+    "difficulty": 3,
+    "animation": 3,
+    "simulation": 4,
+    "recognition": 3
+  },
+  {
+    "id": "squat",
+    "name": "Squat bulwark",
+    "difficulty": 2,
+    "animation": 4,
+    "simulation": 5,
+    "recognition": 5
+  },
+  {
+    "id": "jointed",
+    "name": "Jointed wooden toy",
+    "difficulty": 2,
+    "animation": 5,
+    "simulation": 5,
+    "recognition": 4
+  },
+  {
+    "id": "floating",
+    "name": "Floating charm",
+    "difficulty": 2,
+    "animation": 5,
+    "simulation": 5,
+    "recognition": 5
+  },
+  {
+    "id": "tapered",
+    "name": "Tapered storybook hero",
+    "difficulty": 3,
+    "animation": 4,
+    "simulation": 4,
+    "recognition": 4
+  }
+]

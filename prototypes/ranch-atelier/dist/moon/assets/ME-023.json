@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.1.0",
+  "id": "ME-023",
+  "name": "Deployable subsurface thermal probe",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-exterior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Sensor-banded rod lies beside its surface logger ready for emplacement. Static scientific-fiction concept, not certified engineering.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-exterior/me-023",
+  "biome": "moon-base-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 12,
+    "triangles": 336,
+    "bounds_min": [
+      -0.1899999976158142,
+      -0.7019010782241821,
+      0.0
+    ],
+    "bounds_max": [
+      0.4050000011920929,
+      0.699999988079071,
+      0.3100000023841858
+    ],
+    "dimensions_m": [
+      0.595,
+      1.4019,
+      0.31
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "thermal-science",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "emplace",
+      "measure",
+      "retrieve"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "probe",
+        "position_blender_m": [
+          0.3799999952316284,
+          0.0,
+          0.03999999910593033
+        ],
+        "role": "probe"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "laid-out",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "installed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "recording",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "retrieved",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Sensor-banded rod lies beside its surface logger ready for emplacement. Static scientific-fiction concept, not certified engineering. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See heatprobe(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-exterior/batch_moon_exterior_3.py",
+    "entry_point": "heatprobe",
+    "source_sha256": "8ce07e07c658eba03120bf3b0dd6bdd799966b68eb9cb205f3530723b68b40a9",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-exterior batch_moon_exterior_3.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "ME-023"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered inspection card checked: readable coherent base geometry and materials; static prototype",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered inspection card checked: readable coherent base geometry and materials; static prototype"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "ME-023.glb",
+    "sha256": "22659524a34bd7a826a42c5ed6d531d43f249bf7c726bac2e45e927943be4e93",
+    "bytes": 25316
+  }
+}
