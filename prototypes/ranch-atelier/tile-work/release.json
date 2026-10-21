@@ -1,0 +1,15 @@
+{
+  "deployment": "dpl_EWD3qNQbWLYj28Kgb39ccpK2iqxx",
+  "readyState": "READY",
+  "canonicalVerified": true,
+  "baseline": "dpl_CAac7W7y1xq1hKFmhdzzCguRECVk",
+  "unchangedFiles": 3541,
+  "changedFiles": [
+    "simulations/lab.mjs",
+    "simulations/tile-chooser.mjs",
+    "simulations/live-tray-preview.mjs",
+    "simulations/tile-placement-feedback.mjs",
+    "tests/tile-placement-feedback.test.cjs"
+  ],
+  "publicHashesVerified": true
+}

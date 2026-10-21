@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "desktopClick": true,
+  "desktopDrag": true,
+  "immediatePreview": true,
+  "invalidAndEscape": true,
+  "modifiedGesture": true,
+  "touchPlacement": true,
+  "multiTouchCancel": true,
+  "reducedMotion320": true,
+  "errors": []
+}

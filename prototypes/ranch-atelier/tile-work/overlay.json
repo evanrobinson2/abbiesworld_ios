@@ -1,0 +1,17 @@
+{
+  "baseline": "dpl_CAac7W7y1xq1hKFmhdzzCguRECVk",
+  "files": [
+    "simulations/lab.mjs",
+    "simulations/tile-chooser.mjs",
+    "simulations/live-tray-preview.mjs",
+    "simulations/tile-placement-feedback.mjs",
+    "tests/tile-placement-feedback.test.cjs"
+  ],
+  "sourceHashes": {
+    "simulations/lab.mjs": "652f97593148ba8580bffe0d8954ee1e1cbd86ee",
+    "simulations/tile-chooser.mjs": "d3e1dbce711c99c9b695c0158ffafd426967d7d5",
+    "simulations/live-tray-preview.mjs": "6bd8cc841bd491aa8db8fcc5f230324dde3bfb6f",
+    "simulations/tile-placement-feedback.mjs": "a626f9c82e3b86721657ee6a417d4b81bef0b84b",
+    "tests/tile-placement-feedback.test.cjs": "eacf7f89e17325ec02c1e8948e9df7e1db3f0b2c"
+  }
+}
