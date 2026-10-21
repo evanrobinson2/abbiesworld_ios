@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Articulated reusable body and separately named ochre-shirt/slate-trouser clothing meshes; in-place walk and breathing idle at 24 fps.",
+  "blenderVersion": "5.2.1 LTS"
+}

@@ -1,0 +1,3673 @@
+{
+  "updatedAt": "2026-10-21T12:18:34.759403+00:00",
+  "status": "Complete",
+  "cashUSD": 22.19,
+  "creditPurchaseUSD": 20,
+  "purchaseFeesAndTaxUSD": 2.19,
+  "usageUSD": 12.1067906,
+  "reservedUSD": 0,
+  "acceptedCount": 16,
+  "briefs": {
+    "trough": "Ranch water trough",
+    "coop": "Ranch chicken coop",
+    "goat": "Animated ranch goat",
+    "chibi": "Modular chibi ranch worker",
+    "rounded": "Rounded character kit seed",
+    "foreman": "Detailed stylized ranch foreman",
+    "root-tree": "Hearthroot central tree"
+  },
+  "models": {
+    "openai/gpt-6-luna": "GPT-6 Luna",
+    "google/gemini-3.8-flash": "Gemini 3.8 Flash",
+    "openai/gpt-6.1-sol": "GPT-6.1 Sol",
+    "anthropic/claude-sonnet-5.5": "Claude Sonnet 5.5",
+    "openai/gpt-6-astra": "GPT-6 Astra"
+  },
+  "modelCosts": [
+    {
+      "id": "openai/gpt-6-luna",
+      "label": "GPT-6 Luna",
+      "costUSD": 0.10134760000000001,
+      "accepted": 5,
+      "attempts": 23,
+      "unknownCostAttempts": 0
+    },
+    {
+      "id": "google/gemini-3.8-flash",
+      "label": "Gemini 3.8 Flash",
+      "costUSD": 1.1558609999999998,
+      "accepted": 0,
+      "attempts": 17,
+      "unknownCostAttempts": 0
+    },
+    {
+      "id": "openai/gpt-6.1-sol",
+      "label": "GPT-6.1 Sol",
+      "costUSD": 1.6124119999999997,
+      "accepted": 7,
+      "attempts": 18,
+      "unknownCostAttempts": 0
+    },
+    {
+      "id": "anthropic/claude-sonnet-5.5",
+      "label": "Claude Sonnet 5.5",
+      "costUSD": 1.8738400000000002,
+      "accepted": 1,
+      "attempts": 14,
+      "unknownCostAttempts": 0
+    },
+    {
+      "id": "openai/gpt-6-astra",
+      "label": "GPT-6 Astra",
+      "costUSD": 7.3633299999999995,
+      "accepted": 3,
+      "attempts": 16,
+      "unknownCostAttempts": 0
+    }
+  ],
+  "runs": [
+    {
+      "id": "gpt-6-luna--trough--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.006067,
+      "reservationUSD": 0.026513,
+      "verdict": "Failed",
+      "review": "EOL while scanning string literal (<unknown>, line 96)",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.906037167,
+      "generationSeconds": 171.669568791,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-astra--trough--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.6043,
+      "reservationUSD": 0.67132,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.606815833,
+      "generationSeconds": 268.337322959,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "claude-sonnet-5.5--trough--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.07499,
+      "reservationUSD": 0.150264,
+      "verdict": "Rejected",
+      "review": "Empty state leaves a visible water film. Superseded by repair 1.",
+      "issues": [],
+      "glb": "assets/claude-sonnet-5.5--trough--r0/model.glb",
+      "images": [
+        "assets/claude-sonnet-5.5--trough--r0/front.png",
+        "assets/claude-sonnet-5.5--trough--r0/back.png",
+        "assets/claude-sonnet-5.5--trough--r0/side.png"
+      ],
+      "triangles": 2444,
+      "materials": 5,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 0.937696125,
+      "generationSeconds": 57.258372792,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.8300000429153442,
+        0.7300000190734863,
+        0.6499999761581421
+      ],
+      "references": [],
+      "reasoningEffort": "high",
+      "source": "assets/claude-sonnet-5.5--trough--r0/candidate.py",
+      "sha256": "40e3a8df5440d42470386c9dd0f7a3f44087809005c3b7d0380dbc32aa5bc47a",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gemini-3.8-flash--trough--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.04550025,
+      "reservationUSD": 0.068849,
+      "verdict": "Failed",
+      "review": "invalid syntax (<unknown>, line 1)",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.5950979160000001,
+      "generationSeconds": 101.966569834,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6.1-sol--trough--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.12024,
+      "reservationUSD": 0.150264,
+      "verdict": "Accepted",
+      "review": "Well-constructed tapered timber basin, braces, metal liner and bolts. Hollow interior and empty state inspected.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--trough--r0/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--trough--r0/front.png",
+        "assets/gpt-6.1-sol--trough--r0/back.png",
+        "assets/gpt-6.1-sol--trough--r0/side.png"
+      ],
+      "triangles": 3892,
+      "materials": 8,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 2.876287167,
+      "generationSeconds": 238.742091292,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.7999999523162842,
+        0.7091720104217529,
+        0.6499999761581421
+      ],
+      "references": [],
+      "reasoningEffort": "high",
+      "source": "assets/gpt-6.1-sol--trough--r0/candidate.py",
+      "sha256": "ada164ca7d640892b34f2e2cd51abf1c5246856c201cb80e5c0bb7364aff24be",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6.1-sol--trough--r0"
+    },
+    {
+      "id": "claude-sonnet-5.5--coop--r0",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.242268,
+      "reservationUSD": 0.270512,
+      "verdict": "Failed",
+      "review": "unexpected EOF while parsing (<unknown>, line 144)",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.390434875,
+      "generationSeconds": 193.142754,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6.1-sol--coop--r0",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.145828,
+      "reservationUSD": 0.270512,
+      "verdict": "Accepted",
+      "review": "Strongest coop: purposeful joinery, real entry, grounded cleated ramp, thick teal roof, service door and vents.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--coop--r0/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--coop--r0/front.png",
+        "assets/gpt-6.1-sol--coop--r0/back.png",
+        "assets/gpt-6.1-sol--coop--r0/side.png"
+      ],
+      "triangles": 11736,
+      "materials": 11,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 3.4641751249999997,
+      "generationSeconds": 297.988885625,
+      "finishReason": "stop",
+      "dimensionsM": [
+        2.5519206523895264,
+        3.4724998474121094,
+        2.584456443786621
+      ],
+      "references": [],
+      "reasoningEffort": "high",
+      "source": "assets/gpt-6.1-sol--coop--r0/candidate.py",
+      "sha256": "26ee4cb5b16d07461723a714dbf2ef74c8ccd404c47b74b2f6f46b0fd3514588",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6.1-sol--coop--r0"
+    },
+    {
+      "id": "gemini-3.8-flash--coop--r0",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.176925,
+      "reservationUSD": 0.113942,
+      "verdict": "Failed",
+      "review": "unexpected EOF while parsing (<unknown>, line 268)",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.610074292,
+      "generationSeconds": 328.69391545900004,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-luna--coop--r0",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.0110844,
+      "reservationUSD": 0.032526,
+      "verdict": "Rejected",
+      "review": "Ramp cleats face underneath and the approach does not meet the ground correctly. Superseded by repair 1.",
+      "issues": [],
+      "glb": "assets/gpt-6-luna--coop--r0/model.glb",
+      "images": [
+        "assets/gpt-6-luna--coop--r0/front.png",
+        "assets/gpt-6-luna--coop--r0/back.png",
+        "assets/gpt-6-luna--coop--r0/side.png"
+      ],
+      "triangles": 8908,
+      "materials": 10,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 2.859066667,
+      "generationSeconds": 335.172901125,
+      "finishReason": "stop",
+      "dimensionsM": [
+        2.565000057220459,
+        2.3085334300994873,
+        2.5172109603881836
+      ],
+      "references": [],
+      "reasoningEffort": "high",
+      "source": "assets/gpt-6-luna--coop--r0/candidate.py",
+      "sha256": "b7b9061e71b7f597bd5cb856af540b9e81814daaabe1cbc47029e1ad87c9a8a6",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gpt-6-astra--coop--r0",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0,
+      "reservationUSD": 1.27256,
+      "verdict": "Failed",
+      "review": "RemoteDisconnected: Remote end closed connection without response",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 340.047272916,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-luna--goat--r0",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0,
+      "reservationUSD": 0.032539,
+      "verdict": "Failed",
+      "review": "timeout: The read operation timed out",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 900.348772167,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gemini-3.8-flash--goat--r0",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.09053625,
+      "reservationUSD": 0.11404,
+      "verdict": "Failed",
+      "review": "ConnectionResetError: [Errno 54] Connection reset by peer",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 185.175188,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-luna--trough--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.008057675,
+      "reservationUSD": 0.032969,
+      "verdict": "Failed",
+      "review": "ConnectionResetError: [Errno 54] Connection reset by peer",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 164.07169075000002,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-astra--trough--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.40923,
+      "reservationUSD": 1.45389,
+      "verdict": "Accepted",
+      "review": "Constructed basin and water states are usable. Diagonal wear marks are visually awkward; cosmetic cleanup remains optional.",
+      "issues": [],
+      "glb": "assets/gpt-6-astra--trough--r1/model.glb",
+      "images": [
+        "assets/gpt-6-astra--trough--r1/front.png",
+        "assets/gpt-6-astra--trough--r1/back.png",
+        "assets/gpt-6-astra--trough--r1/side.png"
+      ],
+      "triangles": 4284,
+      "materials": 8,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 1.3450784999999998,
+      "generationSeconds": 51.654066917,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.7999999523162842,
+        0.699999988079071,
+        0.6499999761581421
+      ],
+      "references": [],
+      "reasoningEffort": "high",
+      "source": "assets/gpt-6-astra--trough--r1/candidate.py",
+      "sha256": "ac951ca050ad3bb0c88e51362d4c159244cab3524cb89ac632a20b6033cb609c",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6-astra--trough--r1"
+    },
+    {
+      "id": "gemini-3.8-flash--trough--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0909255,
+      "reservationUSD": 0.114871,
+      "verdict": "Failed",
+      "review": "ConnectionResetError: [Errno 54] Connection reset by peer",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 164.02050525,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6.1-sol--goat--r0",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.208378,
+      "reservationUSD": 0.270774,
+      "verdict": "Failed",
+      "review": "timeout: The read operation timed out",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 900.404277875,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "claude-sonnet-5.5--goat--r0",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.24238,
+      "reservationUSD": 0.270774,
+      "verdict": "Failed",
+      "review": "ConnectionResetError: [Errno 54] Connection reset by peer",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 150.12564879200005,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-astra--goat--r0",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0,
+      "reservationUSD": 1.27387,
+      "verdict": "Failed",
+      "review": "timeout: The read operation timed out",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 900.099739583,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gemini-3.8-flash--chibi--r0",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.09302475,
+      "reservationUSD": 0.187849,
+      "verdict": "Failed",
+      "review": "invalid syntax (<unknown>, line 1)",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.335718166,
+      "generationSeconds": 193.11543075000003,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-luna--chibi--r0",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.00998705,
+      "reservationUSD": 0.04238,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 1.4451841250000002,
+      "generationSeconds": 305.098203292,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6.1-sol--chibi--r0",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0,
+      "reservationUSD": 0.467596,
+      "verdict": "Failed",
+      "review": "RemoteDisconnected: Remote end closed connection without response",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 340.95430012500003,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "claude-sonnet-5.5--chibi--r0",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.256326,
+      "reservationUSD": 0.467596,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 1.0007400419999999,
+      "generationSeconds": 219.83632958299995,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gemini-3.8-flash--coop--r1",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0927345,
+      "reservationUSD": 0.275275,
+      "verdict": "Failed",
+      "review": "invalid syntax (<unknown>, line 1)",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.9686049170000001,
+      "generationSeconds": 188.649637375,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-astra--coop--r1",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0,
+      "reservationUSD": 1.27256,
+      "verdict": "Failed",
+      "review": "RemoteDisconnected: Remote end closed connection without response",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 340.053657333,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "claude-sonnet-5.5--coop--r1",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.17193,
+      "reservationUSD": 0.282656,
+      "verdict": "Prototype",
+      "review": "Usable file, but ramp support and cleat construction are not sufficiently believable for approval.",
+      "issues": [],
+      "glb": "assets/claude-sonnet-5.5--coop--r1/model.glb",
+      "images": [
+        "assets/claude-sonnet-5.5--coop--r1/front.png",
+        "assets/claude-sonnet-5.5--coop--r1/back.png",
+        "assets/claude-sonnet-5.5--coop--r1/side.png"
+      ],
+      "triangles": 2964,
+      "materials": 9,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 0.9083357080000001,
+      "generationSeconds": 119.724511208,
+      "finishReason": "stop",
+      "dimensionsM": [
+        2.859380006790161,
+        3.248018264770508,
+        2.4848527908325195
+      ],
+      "references": [],
+      "reasoningEffort": "high",
+      "source": "assets/claude-sonnet-5.5--coop--r1/candidate.py",
+      "sha256": "6ecd32c1e15eb3505b825d814a923ea788aecaaa28bd24af91849003b537de19",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gpt-6-luna--coop--r1",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.004501675,
+      "reservationUSD": 0.034204,
+      "verdict": "Accepted",
+      "review": "Ramp repair corrects underside cleats and ground contact. A simpler usable coop with all-around geometry.",
+      "issues": [],
+      "glb": "assets/gpt-6-luna--coop--r1/model.glb",
+      "images": [
+        "assets/gpt-6-luna--coop--r1/front.png",
+        "assets/gpt-6-luna--coop--r1/back.png",
+        "assets/gpt-6-luna--coop--r1/side.png"
+      ],
+      "triangles": 8908,
+      "materials": 10,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 2.810504625,
+      "generationSeconds": 79.52921737499999,
+      "finishReason": "stop",
+      "dimensionsM": [
+        2.565000057220459,
+        2.348456382751465,
+        2.5172109603881836
+      ],
+      "references": [],
+      "reasoningEffort": "high",
+      "source": "assets/gpt-6-luna--coop--r1/candidate.py",
+      "sha256": "fd780d7a75950a6eb31564f87234f2586625bdf789916e28f2920ffb33ea534c",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6-luna--coop--r1"
+    },
+    {
+      "id": "gemini-3.8-flash--trough--r2",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.01845675,
+      "reservationUSD": 0.270604,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.627897916,
+      "generationSeconds": 31.666227333000002,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--chibi--r1",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0050528,
+      "reservationUSD": 0.044338,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded",
+        "Dimensions exceed brief",
+        "Geometry below ground"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 35120,
+      "materials": 16,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 1.739814209,
+      "generationSeconds": 41.218975750000006,
+      "finishReason": "stop",
+      "dimensionsM": [
+        2.997849941253662,
+        2.5994956493377686,
+        3.9997494220733643
+      ],
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--trough--r2",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.0015263,
+      "reservationUSD": 0.032964,
+      "verdict": "Accepted",
+      "review": "Simple reusable trough with hollow liner, grounded supports and working water level. Less detailed than Sol.",
+      "issues": [],
+      "glb": "assets/gpt-6-luna--trough--r2/model.glb",
+      "images": [
+        "assets/gpt-6-luna--trough--r2/front.png",
+        "assets/gpt-6-luna--trough--r2/back.png",
+        "assets/gpt-6-luna--trough--r2/side.png"
+      ],
+      "triangles": 2520,
+      "materials": 6,
+      "clips": 1,
+      "animationRanges": {},
+      "buildSeconds": 1.874814375,
+      "generationSeconds": 20.524401458000003,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.8100000619888306,
+        0.7200000286102295,
+        0.6449999809265137
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-luna--trough--r2/candidate.py",
+      "sha256": "e7dcf6b29b44e18c819e69687d8b0309138df48b12afa663697790dd6a6c6fd2",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6-luna--trough--r2"
+    },
+    {
+      "id": "gpt-6-astra--chibi--r0",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 1.288355,
+      "reservationUSD": 2.25798,
+      "verdict": "Failed",
+      "review": "RemoteDisconnected: Remote end closed connection without response",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 341.013801083,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-luna--rounded--r0",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.01083205,
+      "reservationUSD": 0.035817,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.854854,
+      "generationSeconds": 313.51936883400003,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        2
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "claude-sonnet-5.5--trough--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.04355,
+      "reservationUSD": 0.282998,
+      "verdict": "Accepted",
+      "review": "Repair removes the residual water at the empty state. Construction and all-around geometry are usable.",
+      "issues": [],
+      "glb": "assets/claude-sonnet-5.5--trough--r1/model.glb",
+      "images": [
+        "assets/claude-sonnet-5.5--trough--r1/front.png",
+        "assets/claude-sonnet-5.5--trough--r1/back.png",
+        "assets/claude-sonnet-5.5--trough--r1/side.png"
+      ],
+      "triangles": 2444,
+      "materials": 5,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 0.974035125,
+      "generationSeconds": 18.50553174999999,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.8300000429153442,
+        0.7300000190734863,
+        0.6499999761581421
+      ],
+      "references": [],
+      "reasoningEffort": "high",
+      "source": "assets/claude-sonnet-5.5--trough--r1/candidate.py",
+      "sha256": "da79b987ab11f4e771b16591b7b6f1d5ebe9389eb7cd23f4c25612a2baba0b03",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.claude-sonnet-5.5--trough--r1"
+    },
+    {
+      "id": "gemini-3.8-flash--chibi--r1",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.04325325,
+      "reservationUSD": 0.34509,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.573643709,
+      "generationSeconds": 67.492792417,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gemini-3.8-flash--goat--r1",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.02991375,
+      "reservationUSD": 0.269796,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Exported animation does not move geometry"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 681,
+      "materials": 5,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 1.602033625,
+      "generationSeconds": 50.954887917,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.47999998927116394,
+        1.320000171661377,
+        1.4129999876022339
+      ],
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "claude-sonnet-5.5--goat--r1",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.05338,
+      "reservationUSD": 0.270774,
+      "verdict": "Rejected",
+      "review": "Primitive anatomy and straight horns fail the requested animal design quality.",
+      "issues": [],
+      "glb": "assets/claude-sonnet-5.5--goat--r1/model.glb",
+      "images": [
+        "assets/claude-sonnet-5.5--goat--r1/front.png",
+        "assets/claude-sonnet-5.5--goat--r1/back.png",
+        "assets/claude-sonnet-5.5--goat--r1/side.png"
+      ],
+      "triangles": 9592,
+      "materials": 6,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 3.343993833,
+      "generationSeconds": 35.99427945800001,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.5861654281616211,
+        1.6305668354034424,
+        1.2962666749954224
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/claude-sonnet-5.5--goat--r1/candidate.py",
+      "sha256": "a692b0e95ca377804ece562cdfbf20e949985c08ff93d27a9684b78f40545f53",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "claude-sonnet-5.5--chibi--r1",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.055862,
+      "reservationUSD": 0.46833,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Dimensions exceed brief",
+        "Asset floats above ground"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 6044,
+      "materials": 12,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 1.2716183330000002,
+      "generationSeconds": 25.37429325,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.2350000143051147,
+        1.0,
+        3.5099995136260986
+      ],
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6.1-sol--chibi--r1",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.059821,
+      "reservationUSD": 0.467596,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 28104,
+      "materials": 16,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 2.693014792,
+      "generationSeconds": 73.838711625,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.9149883389472961,
+        0.7960000038146973,
+        1.49399995803833
+      ],
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gemini-3.8-flash--coop--r2",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.035934,
+      "reservationUSD": 0.275285,
+      "verdict": "Rejected",
+      "review": "Roof planes are inverted/open, leaving the coop unroofed. Technical export success does not fix construction.",
+      "issues": [],
+      "glb": "assets/gemini-3.8-flash--coop--r2/model.glb",
+      "images": [
+        "assets/gemini-3.8-flash--coop--r2/front.png",
+        "assets/gemini-3.8-flash--coop--r2/back.png",
+        "assets/gemini-3.8-flash--coop--r2/side.png"
+      ],
+      "triangles": 1320,
+      "materials": 8,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 0.971123,
+      "generationSeconds": 58.080781833,
+      "finishReason": "stop",
+      "dimensionsM": [
+        2.4662513732910156,
+        2.632267713546753,
+        2.75
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gemini-3.8-flash--coop--r2/candidate.py",
+      "sha256": "2fa7db38eb43709885625bced976a10fcf3a96152d007ac873c28b433980eddb",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gemini-3.8-flash--rounded--r0",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.09135,
+      "reservationUSD": 0.138627,
+      "verdict": "Failed",
+      "review": "invalid syntax (<unknown>, line 2)",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 1.073771917,
+      "generationSeconds": 191.85174491599992,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [
+        2
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6.1-sol--rounded--r0",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.244021,
+      "reservationUSD": 0.33634,
+      "verdict": "Failed",
+      "review": "RemoteDisconnected: Remote end closed connection without response",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 340.364881167,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [
+        2
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "claude-sonnet-5.5--rounded--r0",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.248202,
+      "reservationUSD": 0.33634,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 1.195604375,
+      "generationSeconds": 202.4547359579999,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [
+        2
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-astra--rounded--r0",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 1.190255,
+      "reservationUSD": 1.6017,
+      "verdict": "Failed",
+      "review": "RemoteDisconnected: Remote end closed connection without response",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 340.36307424999995,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [
+        2
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-luna--foreman--r0",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.0120956,
+      "reservationUSD": 0.035821,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Asset floats above ground",
+        "Exported animation does not move geometry"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 984,
+      "materials": 3,
+      "clips": 1,
+      "animationRanges": {},
+      "buildSeconds": 1.795983833,
+      "generationSeconds": 298.3751855830001,
+      "finishReason": "length",
+      "dimensionsM": [
+        0.550000011920929,
+        0.3078042268753052,
+        0.5050000548362732
+      ],
+      "references": [
+        1
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gemini-3.8-flash--foreman--r0",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.091353,
+      "reservationUSD": 0.138655,
+      "verdict": "Failed",
+      "review": "invalid syntax (<unknown>, line 1)",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.352108583,
+      "generationSeconds": 194.41540450000002,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [
+        1
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6.1-sol--foreman--r0",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.215752,
+      "reservationUSD": 0.336414,
+      "verdict": "Failed",
+      "review": "RemoteDisconnected: Remote end closed connection without response",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 340.05846391700015,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [
+        1
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gpt-6-luna--chibi--r2",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.003907175,
+      "reservationUSD": 0.044304,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded",
+        "Dimensions exceed brief",
+        "Geometry below ground"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 19346,
+      "materials": 16,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 6.095566499999999,
+      "generationSeconds": 36.737804417,
+      "finishReason": "stop",
+      "dimensionsM": [
+        2.8471322059631348,
+        2.5809686183929443,
+        3.9865832328796387
+      ],
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6.1-sol--chibi--r2",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.0706885,
+      "reservationUSD": 0.493848,
+      "verdict": "Prototype",
+      "review": "Usable animated prototype with verified head_socket and hand_socket, removable hat and bucket. Attractive at game scale, but facial finish, hair/hat intersections and 120 mesh objects fall short of the polished reference target. Not counted as an accepted production character.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--chibi--r2/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--chibi--r2/front.png",
+        "assets/gpt-6.1-sol--chibi--r2/back.png",
+        "assets/gpt-6.1-sol--chibi--r2/side.png"
+      ],
+      "triangles": 15734,
+      "materials": 16,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 11.443825291,
+      "generationSeconds": 60.034462125000005,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.9148067831993103,
+        0.7960000038146973,
+        1.49399995803833
+      ],
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6.1-sol--chibi--r2/candidate.py",
+      "sha256": "6ec451ddb36a62e163c066ab012afcf1d03384b5ab81d7cbaf7f19e5042b580c",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "claude-sonnet-5.5--chibi--r2",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.0771,
+      "reservationUSD": 0.484166,
+      "verdict": "Rejected",
+      "review": "Floating eyebrow/bandana details and clipping facial/hair forms; does not meet the character target.",
+      "issues": [],
+      "glb": "assets/claude-sonnet-5.5--chibi--r2/model.glb",
+      "images": [
+        "assets/claude-sonnet-5.5--chibi--r2/front.png",
+        "assets/claude-sonnet-5.5--chibi--r2/back.png",
+        "assets/claude-sonnet-5.5--chibi--r2/side.png"
+      ],
+      "triangles": 6044,
+      "materials": 12,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 4.57792475,
+      "generationSeconds": 33.569017875,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.0937669277191162,
+        1.0,
+        1.4800000190734863
+      ],
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/claude-sonnet-5.5--chibi--r2/candidate.py",
+      "sha256": "aa9fb809400eb0ab5f44cf77cb9cb4001fdaaf5fcbadee35da789a8e8432381d",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "claude-sonnet-5.5--foreman--r0",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 0.242916,
+      "reservationUSD": 0.336414,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.532716708,
+      "generationSeconds": 214.48640087500007,
+      "finishReason": "length",
+      "dimensionsM": null,
+      "references": [
+        1
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gemini-3.8-flash--chibi--r2",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.0557445,
+      "reservationUSD": 0.363384,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 3.476307583,
+      "generationSeconds": 70.13440666700001,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-astra--root-tree--r0",
+      "brief": "root-tree",
+      "name": "Hearthroot central tree",
+      "tier": "reach",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 0,
+      "stage": "repeatAndTree",
+      "costUSD": 0.36132,
+      "reservationUSD": 1.27524,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 34864,
+      "materials": 11,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 3.6008364999999998,
+      "generationSeconds": 133.937962583,
+      "finishReason": "stop",
+      "dimensionsM": [
+        8.381269454956055,
+        8.20168685913086,
+        9.945439338684082
+      ],
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--trough-repeat1--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "repeatAndTree",
+      "costUSD": 0.0015028,
+      "reservationUSD": 0.032521,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.9507264170000003,
+      "generationSeconds": 27.037575042,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6.1-sol--root-tree--r0",
+      "brief": "root-tree",
+      "name": "Hearthroot central tree",
+      "tier": "reach",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "repeatAndTree",
+      "costUSD": 0.041604,
+      "reservationUSD": 0.271048,
+      "verdict": "Accepted",
+      "review": "Tapered branching trunk, connected root flare entering soil and usable hollow. Canopy remains stylized, suitable as a generator asset foundation.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--root-tree--r0/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--root-tree--r0/front.png",
+        "assets/gpt-6.1-sol--root-tree--r0/back.png",
+        "assets/gpt-6.1-sol--root-tree--r0/side.png"
+      ],
+      "triangles": 25270,
+      "materials": 11,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 6.746117042,
+      "generationSeconds": 75.59963595800001,
+      "finishReason": "stop",
+      "dimensionsM": [
+        8.253137588500977,
+        8.348785400390625,
+        10.354440689086914
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6.1-sol--root-tree--r0/candidate.py",
+      "sha256": "a08e781201eab2dc88caa1be840d9bd698ffdc8e539e3c9b113ff6bdfb6c906f",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6.1-sol--root-tree--r0"
+    },
+    {
+      "id": "gpt-6-astra--foreman--r0",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 0,
+      "stage": "screen",
+      "costUSD": 1.19786,
+      "reservationUSD": 1.60207,
+      "verdict": "Failed",
+      "review": "RemoteDisconnected: Remote end closed connection without response",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": null,
+      "generationSeconds": 340.071551709,
+      "finishReason": null,
+      "dimensionsM": null,
+      "references": [
+        1
+      ],
+      "reasoningEffort": "high"
+    },
+    {
+      "id": "gemini-3.8-flash--goat--r2",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.08429175,
+      "reservationUSD": 0.284902,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Exported animation does not move geometry"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 631,
+      "materials": 5,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 2.431225709,
+      "generationSeconds": 142.903551791,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.4099999666213989,
+        1.0099999904632568,
+        1.2190001010894775
+      ],
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--rounded--r1",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.00516305,
+      "reservationUSD": 0.038242,
+      "verdict": "Rejected",
+      "review": "Disconnected hips and knees are visible in the exported figure.",
+      "issues": [],
+      "glb": "assets/gpt-6-luna--rounded--r1/model.glb",
+      "images": [
+        "assets/gpt-6-luna--rounded--r1/front.png",
+        "assets/gpt-6-luna--rounded--r1/back.png",
+        "assets/gpt-6-luna--rounded--r1/side.png"
+      ],
+      "triangles": 14012,
+      "materials": 16,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 7.952423583999999,
+      "generationSeconds": 48.5173145,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.7039999961853027,
+        0.6878094673156738,
+        1.6620004177093506
+      ],
+      "references": [
+        2
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-luna--rounded--r1/candidate.py",
+      "sha256": "e0f2e59eb4be134ba9ff852f71277a6514adeb07fabca52256b2b518bd75ffa4",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gpt-6.1-sol--trough-repeat1--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "repeatAndTree",
+      "costUSD": 0.028976,
+      "reservationUSD": 0.270412,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 6124,
+      "materials": 7,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 7.398227207999999,
+      "generationSeconds": 51.990821125000004,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.7999999523162842,
+        0.706732988357544,
+        0.6499999761581421
+      ],
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gemini-3.8-flash--rounded--r1",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.028383,
+      "reservationUSD": 0.296548,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 5.072478083,
+      "generationSeconds": 46.12040108400001,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        2
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--trough-repeat2--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "repeatAndTree",
+      "costUSD": 0.0017268,
+      "reservationUSD": 0.032521,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 4.333816958,
+      "generationSeconds": 28.787893166999993,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--goat--r1",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0012644,
+      "reservationUSD": 0.032539,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.0649182920000007,
+      "generationSeconds": 20.876338790999995,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6.1-sol--trough-repeat2--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "repeatAndTree",
+      "costUSD": 0.033226,
+      "reservationUSD": 0.270412,
+      "verdict": "Accepted",
+      "review": "Independent repeated brief. Hollow basin, grounded construction, full/mid/empty states and all-around geometry inspected. Includes the cost of its failed predecessor where applicable.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--trough-repeat2--r0/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--trough-repeat2--r0/front.png",
+        "assets/gpt-6.1-sol--trough-repeat2--r0/back.png",
+        "assets/gpt-6.1-sol--trough-repeat2--r0/side.png"
+      ],
+      "triangles": 4734,
+      "materials": 6,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 1.5006323750000001,
+      "generationSeconds": 59.69766224999999,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.7983756065368652,
+        0.7177435755729675,
+        0.6547625660896301
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6.1-sol--trough-repeat2--r0/candidate.py",
+      "sha256": "a83b2c93d4f40500c5891fd09d5648eb9358528bee490c64ff51a91104b49f7f",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6.1-sol--trough-repeat2--r0"
+    },
+    {
+      "id": "gpt-6-luna--trough-repeat3--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 0,
+      "stage": "repeatAndTree",
+      "costUSD": 0.0013133,
+      "reservationUSD": 0.032521,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.580234542,
+      "generationSeconds": 23.450813499999995,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6.1-sol--goat--r1",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.037288,
+      "reservationUSD": 0.270774,
+      "verdict": "Accepted",
+      "review": "Recognizable goat with connected limbs, cloven hooves and curved horns. Exported walk and idle work; motion remains stylized.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--goat--r1/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--goat--r1/front.png",
+        "assets/gpt-6.1-sol--goat--r1/back.png",
+        "assets/gpt-6.1-sol--goat--r1/side.png"
+      ],
+      "triangles": 7232,
+      "materials": 9,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 1.8180732499999999,
+      "generationSeconds": 67.884799458,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.5561949014663696,
+        1.0441322326660156,
+        1.3217886686325073
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6.1-sol--goat--r1/candidate.py",
+      "sha256": "6ea3534d02a3ca6ced9e2510a6a31df027ffb7319a1f950d94ffe50f42fec88e",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6.1-sol--goat--r1"
+    },
+    {
+      "id": "gpt-6.1-sol--trough-repeat3--r0",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 0,
+      "stage": "repeatAndTree",
+      "costUSD": 0.034936,
+      "reservationUSD": 0.270412,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 12262,
+      "materials": 7,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 2.5009133329999997,
+      "generationSeconds": 64.38237883400001,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.8036164045333862,
+        0.7089216709136963,
+        0.6497855186462402
+      ],
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-astra--chibi--r1",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.344855,
+      "reservationUSD": 2.25798,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 31120,
+      "materials": 16,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 5.4741543329999995,
+      "generationSeconds": 90.88535408300001,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.8967444896697998,
+        0.6600000262260437,
+        1.4980000257492065
+      ],
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-astra--goat--r1",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.21394,
+      "reservationUSD": 1.27387,
+      "verdict": "Accepted",
+      "review": "Recognizable connected goat with lateral pupils, beard, horns and cloven hooves. Exported walk and idle work.",
+      "issues": [],
+      "glb": "assets/gpt-6-astra--goat--r1/model.glb",
+      "images": [
+        "assets/gpt-6-astra--goat--r1/front.png",
+        "assets/gpt-6-astra--goat--r1/back.png",
+        "assets/gpt-6-astra--goat--r1/side.png"
+      ],
+      "triangles": 9206,
+      "materials": 9,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 3.59030825,
+      "generationSeconds": 83.133213833,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.5839999914169312,
+        1.0589189529418945,
+        1.3227217197418213
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-astra--goat--r1/candidate.py",
+      "sha256": "5087a65a7cdcfb7e7e23af76c4766a8d65c81f73a3533800e65e01437c14a080",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6-astra--goat--r1"
+    },
+    {
+      "id": "gpt-6.1-sol--foreman--r1",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.110162,
+      "reservationUSD": 0.336414,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.181207958,
+      "generationSeconds": 182.982316084,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--foreman--r1",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0028966,
+      "reservationUSD": 0.035821,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 3.0419302079999997,
+      "generationSeconds": 55.349010625,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gemini-3.8-flash--foreman--r1",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.038373,
+      "reservationUSD": 0.294412,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 2.065667542,
+      "generationSeconds": 60.041855708,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "claude-sonnet-5.5--foreman--r1",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.070166,
+      "reservationUSD": 0.336414,
+      "verdict": "Rejected",
+      "review": "Blocky facial features and primitive disconnected-looking anatomy do not meet the reach target.",
+      "issues": [],
+      "glb": "assets/claude-sonnet-5.5--foreman--r1/model.glb",
+      "images": [
+        "assets/claude-sonnet-5.5--foreman--r1/front.png",
+        "assets/claude-sonnet-5.5--foreman--r1/back.png",
+        "assets/claude-sonnet-5.5--foreman--r1/side.png"
+      ],
+      "triangles": 1731,
+      "materials": 9,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 1.867257458,
+      "generationSeconds": 47.033419833,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.8500000238418579,
+        0.5945947170257568,
+        1.9144943952560425
+      ],
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/claude-sonnet-5.5--foreman--r1/candidate.py",
+      "sha256": "f3d7ac46f33419f746255e927e201a20e39fcd9d1910928c0b0cad098d9ccac8",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gpt-6-astra--foreman--r1",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.47061,
+      "reservationUSD": 1.60207,
+      "verdict": "Prototype",
+      "review": "A detailed animated prototype with recognizable costume and face. Anatomical joins, facial planes and garment finish remain below reference 1. The hidden importer-helper issue was a harness defect, not model geometry.",
+      "issues": [],
+      "glb": "assets/gpt-6-astra--foreman--r1/model.glb",
+      "images": [
+        "assets/gpt-6-astra--foreman--r1/front.png",
+        "assets/gpt-6-astra--foreman--r1/back.png",
+        "assets/gpt-6-astra--foreman--r1/side.png"
+      ],
+      "triangles": 11821,
+      "materials": 20,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 3.440865916,
+      "generationSeconds": 168.23167104200002,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.8284450769424438,
+        0.8587406873703003,
+        1.8031671047210693
+      ],
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-astra--foreman--r1/candidate.py",
+      "sha256": "f5556b9a560c5fdce607cc34e47b85ede973d4242e5d8fd77609e9dd384d1dbe",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gpt-6.1-sol--rounded--r1",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.067751,
+      "reservationUSD": 0.33634,
+      "verdict": "Prototype",
+      "review": "Articulated kit seed prototype; recognizable design, but shoulder joins, knees and sculptural finish are below the cohesive reference kit. Outfit variants were not advanced before approving a base body.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--rounded--r1/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--rounded--r1/front.png",
+        "assets/gpt-6.1-sol--rounded--r1/back.png",
+        "assets/gpt-6.1-sol--rounded--r1/side.png"
+      ],
+      "triangles": 15788,
+      "materials": 13,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 2.996986958,
+      "generationSeconds": 96.41261008400001,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.7003514170646667,
+        0.3069998621940613,
+        1.6456528902053833
+      ],
+      "references": [
+        2
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6.1-sol--rounded--r1/candidate.py",
+      "sha256": "b026bfbe466bc0dd5f6fbdbe668376e07917917d4d54c9aeed31a2db3fbadfbf",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "claude-sonnet-5.5--rounded--r1",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.029812,
+      "reservationUSD": 0.33634,
+      "verdict": "Rejected",
+      "review": "Coarse primitive body and facial construction do not meet the rounded character-kit target.",
+      "issues": [],
+      "glb": "assets/claude-sonnet-5.5--rounded--r1/model.glb",
+      "images": [
+        "assets/claude-sonnet-5.5--rounded--r1/front.png",
+        "assets/claude-sonnet-5.5--rounded--r1/back.png",
+        "assets/claude-sonnet-5.5--rounded--r1/side.png"
+      ],
+      "triangles": 6252,
+      "materials": 6,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 2.096626416,
+      "generationSeconds": 14.566781333999984,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.5299999713897705,
+        0.320000022649765,
+        1.715000033378601
+      ],
+      "references": [
+        2
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/claude-sonnet-5.5--rounded--r1/candidate.py",
+      "sha256": "4e861f90b902d92103e4f0a323f90451f739eea866d2de8c936b4b33c3fe1af7",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gpt-6-astra--rounded--r1",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.305805,
+      "reservationUSD": 1.6017,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 18618,
+      "materials": 13,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 3.2769636249999996,
+      "generationSeconds": 90.25068458300001,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.7100302577018738,
+        0.7702373266220093,
+        1.6313087940216064
+      ],
+      "references": [
+        2
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--trough-repeat2--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0019038,
+      "reservationUSD": 0.033411,
+      "verdict": "Accepted",
+      "review": "Independent repeated brief. Hollow basin, grounded construction, full/mid/empty states and all-around geometry inspected. Includes the cost of its failed predecessor where applicable.",
+      "issues": [],
+      "glb": "assets/gpt-6-luna--trough-repeat2--r1/model.glb",
+      "images": [
+        "assets/gpt-6-luna--trough-repeat2--r1/front.png",
+        "assets/gpt-6-luna--trough-repeat2--r1/back.png",
+        "assets/gpt-6-luna--trough-repeat2--r1/side.png"
+      ],
+      "triangles": 3978,
+      "materials": 6,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 2.474776125,
+      "generationSeconds": 21.742568458,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.8219999074935913,
+        0.7179999947547913,
+        0.6654999852180481
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-luna--trough-repeat2--r1/candidate.py",
+      "sha256": "7ab03b30c5bc20d4ca54e31cb1d8561f828208f96973a586ad9031086fc04939",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6-luna--trough-repeat2--r1"
+    },
+    {
+      "id": "gpt-6-luna--trough-repeat3--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0015173,
+      "reservationUSD": 0.033241,
+      "verdict": "Accepted",
+      "review": "Independent repeated brief. Hollow basin, grounded construction, full/mid/empty states and all-around geometry inspected. Includes the cost of its failed predecessor where applicable.",
+      "issues": [],
+      "glb": "assets/gpt-6-luna--trough-repeat3--r1/model.glb",
+      "images": [
+        "assets/gpt-6-luna--trough-repeat3--r1/front.png",
+        "assets/gpt-6-luna--trough-repeat3--r1/back.png",
+        "assets/gpt-6-luna--trough-repeat3--r1/side.png"
+      ],
+      "triangles": 4150,
+      "materials": 6,
+      "clips": 1,
+      "animationRanges": {},
+      "buildSeconds": 2.384366125,
+      "generationSeconds": 17.813218166,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.840000033378601,
+        0.6970000267028809,
+        0.6734016537666321
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-luna--trough-repeat3--r1/candidate.py",
+      "sha256": "65a30431b38bb3c81bcc690cb95b6c7ec6a1e066570a10bdfa4b1d00b53754a7",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6-luna--trough-repeat3--r1"
+    },
+    {
+      "id": "gpt-6-luna--trough-repeat1--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.00143355,
+      "reservationUSD": 0.033293,
+      "verdict": "Accepted",
+      "review": "Independent repeated brief. Hollow basin, grounded construction, full/mid/empty states and all-around geometry inspected. Includes the cost of its failed predecessor where applicable.",
+      "issues": [],
+      "glb": "assets/gpt-6-luna--trough-repeat1--r1/model.glb",
+      "images": [
+        "assets/gpt-6-luna--trough-repeat1--r1/front.png",
+        "assets/gpt-6-luna--trough-repeat1--r1/back.png",
+        "assets/gpt-6-luna--trough-repeat1--r1/side.png"
+      ],
+      "triangles": 2556,
+      "materials": 5,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 3.1995901250000003,
+      "generationSeconds": 15.775152542,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.840000033378601,
+        0.8600000143051147,
+        0.6600000262260437
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-luna--trough-repeat1--r1/candidate.py",
+      "sha256": "111304057e2bb5ab7b5a01c3ee65c09498f99be70f358043e3fbae6f6fc24e6f",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6-luna--trough-repeat1--r1"
+    },
+    {
+      "id": "gpt-6-astra--root-tree--r1",
+      "brief": "root-tree",
+      "name": "Hearthroot central tree",
+      "tier": "reach",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.358905,
+      "reservationUSD": 1.45832,
+      "verdict": "Accepted",
+      "review": "LOD repair meets the triangle budget while retaining connected roots, trunk hollow and asymmetric canopy.",
+      "issues": [],
+      "glb": "assets/gpt-6-astra--root-tree--r1/model.glb",
+      "images": [
+        "assets/gpt-6-astra--root-tree--r1/front.png",
+        "assets/gpt-6-astra--root-tree--r1/back.png",
+        "assets/gpt-6-astra--root-tree--r1/side.png"
+      ],
+      "triangles": 27300,
+      "materials": 11,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 3.221693459,
+      "generationSeconds": 78.153277083,
+      "finishReason": "stop",
+      "dimensionsM": [
+        8.372844696044922,
+        8.157585144042969,
+        9.882047653198242
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-astra--root-tree--r1/candidate.py",
+      "sha256": "70569544644fd2e9d91b0eec7ecab4a0dfeb190eb0fa4722ef433c04186fdcb5",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6-astra--root-tree--r1"
+    },
+    {
+      "id": "gpt-6.1-sol--trough-repeat1--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0305735,
+      "reservationUSD": 0.287962,
+      "verdict": "Accepted",
+      "review": "Independent repeated brief. Hollow basin, grounded construction, full/mid/empty states and all-around geometry inspected. Includes the cost of its failed predecessor where applicable.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--trough-repeat1--r1/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--trough-repeat1--r1/front.png",
+        "assets/gpt-6.1-sol--trough-repeat1--r1/back.png",
+        "assets/gpt-6.1-sol--trough-repeat1--r1/side.png"
+      ],
+      "triangles": 3948,
+      "materials": 7,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 2.059676666,
+      "generationSeconds": 28.718645292,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.7999999523162842,
+        0.706732988357544,
+        0.6499999761581421
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6.1-sol--trough-repeat1--r1/candidate.py",
+      "sha256": "0e314c14a382f19d1c9a3202d7b0605b05bd143d19f378aa7ab310547f4025ef",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6.1-sol--trough-repeat1--r1"
+    },
+    {
+      "id": "gpt-6.1-sol--trough-repeat3--r1",
+      "brief": "trough",
+      "name": "Ranch water trough",
+      "tier": "easy",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 1,
+      "stage": "repair",
+      "costUSD": 0.0375385,
+      "reservationUSD": 0.289206,
+      "verdict": "Accepted",
+      "review": "Independent repeated brief. Hollow basin, grounded construction, full/mid/empty states and all-around geometry inspected. Includes the cost of its failed predecessor where applicable.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--trough-repeat3--r1/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--trough-repeat3--r1/front.png",
+        "assets/gpt-6.1-sol--trough-repeat3--r1/back.png",
+        "assets/gpt-6.1-sol--trough-repeat3--r1/side.png"
+      ],
+      "triangles": 2918,
+      "materials": 7,
+      "clips": 1,
+      "animationRanges": {
+        "water_state": [
+          1,
+          60
+        ]
+      },
+      "buildSeconds": 2.69752325,
+      "generationSeconds": 38.960556333,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.8036164045333862,
+        0.7089216709136963,
+        0.6497855186462402
+      ],
+      "references": [],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6.1-sol--trough-repeat3--r1/candidate.py",
+      "sha256": "a0b1793bc75e9668de8d641e14d58698b12c9a45f387c54228021425355270e7",
+      "profileCheckPassed": true,
+      "registeredAssetId": "gateway3d.gpt-6.1-sol--trough-repeat3--r1"
+    },
+    {
+      "id": "gpt-6-luna--goat--r2",
+      "brief": "goat",
+      "name": "Animated ranch goat",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.001671175,
+      "reservationUSD": 0.033329,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded",
+        "Dimensions exceed brief"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 12568,
+      "materials": 7,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 3.122293417,
+      "generationSeconds": 21.018240833000004,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.9532226324081421,
+        1.9299999475479126,
+        1.6762175559997559
+      ],
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--rounded--r2",
+      "brief": "rounded",
+      "name": "Rounded character kit seed",
+      "tier": "nice-to-have",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.004507175,
+      "reservationUSD": 0.037954,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 1.62648125,
+      "generationSeconds": 50.09893500000001,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        2
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6-luna--foreman--r2",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "openai/gpt-6-luna",
+      "modelLabel": "GPT-6 Luna",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.003335925,
+      "reservationUSD": 0.037504,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Dimensions exceed brief",
+        "Geometry below ground"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 22583,
+      "materials": 19,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 3.1228335,
+      "generationSeconds": 36.712672250000004,
+      "finishReason": "stop",
+      "dimensionsM": [
+        1.1344337463378906,
+        0.4449999928474426,
+        2.621000051498413
+      ],
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gemini-3.8-flash--foreman--r2",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "google/gemini-3.8-flash",
+      "modelLabel": "Gemini 3.8 Flash",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.04916175,
+      "reservationUSD": 0.314063,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [],
+      "glb": null,
+      "images": [],
+      "triangles": null,
+      "materials": null,
+      "clips": null,
+      "animationRanges": {},
+      "buildSeconds": 0.8801007500000001,
+      "generationSeconds": 61.483816667,
+      "finishReason": "stop",
+      "dimensionsM": null,
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "claude-sonnet-5.5--foreman--r2",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "anthropic/claude-sonnet-5.5",
+      "modelLabel": "Claude Sonnet 5.5",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.064958,
+      "reservationUSD": 0.355182,
+      "verdict": "Rejected",
+      "review": "Same quality limitation as repair 1. This extra call was prompted by an importer-helper harness error; retain its cost as experiment overhead.",
+      "issues": [],
+      "glb": "assets/claude-sonnet-5.5--foreman--r2/model.glb",
+      "images": [
+        "assets/claude-sonnet-5.5--foreman--r2/front.png",
+        "assets/claude-sonnet-5.5--foreman--r2/back.png",
+        "assets/claude-sonnet-5.5--foreman--r2/side.png"
+      ],
+      "triangles": 1731,
+      "materials": 9,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 1.861542583,
+      "generationSeconds": 29.871389084,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.8500000238418579,
+        0.5296362638473511,
+        1.905823826789856
+      ],
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/claude-sonnet-5.5--foreman--r2/candidate.py",
+      "sha256": "266067fcb0684ddd547890f4ea772dca8b6da81e1dd90a9f2e7079e6fcddca41",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gpt-6-astra--coop--r2",
+      "brief": "coop",
+      "name": "Ranch chicken coop",
+      "tier": "existing-game",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.21004,
+      "reservationUSD": 1.27256,
+      "verdict": "Failed",
+      "review": "Build failed.",
+      "issues": [
+        "Triangle limit exceeded"
+      ],
+      "glb": null,
+      "images": [],
+      "triangles": 25944,
+      "materials": 9,
+      "clips": 0,
+      "animationRanges": {},
+      "buildSeconds": 6.398774375,
+      "generationSeconds": 79.26877758399999,
+      "finishReason": "stop",
+      "dimensionsM": [
+        2.5450000762939453,
+        3.274369239807129,
+        2.5980000495910645
+      ],
+      "references": [],
+      "reasoningEffort": "low"
+    },
+    {
+      "id": "gpt-6.1-sol--foreman--r2",
+      "brief": "foreman",
+      "name": "Detailed stylized ranch foreman",
+      "tier": "reach",
+      "model": "openai/gpt-6.1-sol",
+      "modelLabel": "GPT-6.1 Sol",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.1256285,
+      "reservationUSD": 0.397398,
+      "verdict": "Prototype",
+      "review": "Detailed animated prototype after replacing a disallowed dynamic property setter. Face, anatomy and clothing finish still fall short of the reach reference. A production price at that quality is not established.",
+      "issues": [],
+      "glb": "assets/gpt-6.1-sol--foreman--r2/model.glb",
+      "images": [
+        "assets/gpt-6.1-sol--foreman--r2/front.png",
+        "assets/gpt-6.1-sol--foreman--r2/back.png",
+        "assets/gpt-6.1-sol--foreman--r2/side.png"
+      ],
+      "triangles": 20177,
+      "materials": 19,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 4.929386792000001,
+      "generationSeconds": 111.3969795,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.8436828851699829,
+        1.078231930732727,
+        1.8330854177474976
+      ],
+      "references": [
+        1
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6.1-sol--foreman--r2/candidate.py",
+      "sha256": "ce79e87802aab8f3b84b5624e3f4616729c3552c3b8e86aa9adae08f19ec6da9",
+      "profileCheckPassed": true
+    },
+    {
+      "id": "gpt-6-astra--chibi--r2",
+      "brief": "chibi",
+      "name": "Modular chibi ranch worker",
+      "tier": "expected-baseline",
+      "model": "openai/gpt-6-astra",
+      "modelLabel": "GPT-6 Astra",
+      "round": 2,
+      "stage": "repair",
+      "costUSD": 0.407855,
+      "reservationUSD": 2.41149,
+      "verdict": "Prototype",
+      "review": "LOD repair produces an animated prototype with sockets and attached bucket. Surface intersections, primitive clothing joins and 136 mesh objects need finishing. Does not establish reference-quality character production.",
+      "issues": [],
+      "glb": "assets/gpt-6-astra--chibi--r2/model.glb",
+      "images": [
+        "assets/gpt-6-astra--chibi--r2/front.png",
+        "assets/gpt-6-astra--chibi--r2/back.png",
+        "assets/gpt-6-astra--chibi--r2/side.png"
+      ],
+      "triangles": 15292,
+      "materials": 16,
+      "clips": 1,
+      "animationRanges": {
+        "walk": [
+          1,
+          25
+        ],
+        "idle": [
+          31,
+          79
+        ]
+      },
+      "buildSeconds": 6.921095707999999,
+      "generationSeconds": 72.15042075,
+      "finishReason": "stop",
+      "dimensionsM": [
+        0.8186215162277222,
+        0.6600000262260437,
+        1.4980000257492065
+      ],
+      "references": [
+        3,
+        4,
+        5
+      ],
+      "reasoningEffort": "low",
+      "source": "assets/gpt-6-astra--chibi--r2/candidate.py",
+      "sha256": "4f4d1ae676fcbebac0d47486c6852f679c17addb5622d3d34488b12ba95dd865",
+      "profileCheckPassed": true
+    }
+  ],
+  "summary": "Generation complete: 88 attempts, 83 billed requests and 5 unbilled connection failures. 31 valid GLB exports; art approval is separate. Props and stylized goats/trees are usable candidates. Polished character reference quality and a full cohesive kit remain unproven.",
+  "costNotes": [
+    {
+      "title": "What the unit costs include",
+      "text": "Chain costs include every attempt for that model and brief, including failures and model-assisted corrections. Repeat costs include all failed first attempts. They exclude the separately disclosed shared harness and orchestration effort."
+    },
+    {
+      "title": "Cleanup is not free",
+      "text": "No human artist performed cleanup. Human finishing time is unmeasured. At $25 / $50 / $100 per hour, 10 minutes per asset adds $4.17 / $8.33 / $16.67. For ten assets, that adds $41.67 / $83.33 / $166.67. Thirty minutes triples those figures. Gateway totals are not all-in production quotes."
+    },
+    {
+      "title": "Scene labor scenario",
+      "text": "For the 25-subject Ranch inventory, an assumed 10 minutes of finishing per subject is 4.17 hours: $104.17 / $208.33 / $416.67 at $25 / $50 / $100 per hour. Generator integration, collision/interaction setup, animation binding and QA remain unmeasured and additional. This scenario is not an estimate of actual artist time."
+    },
+    {
+      "title": "Adaptive workflow, small sample",
+      "text": "The initial trough pilot used high reasoning/12000 tokens; other initial briefs used high/24000. Later repairs and independent repeats used low/24000 and streaming. This is a workflow study, not an identical-compute model ranking. Only two models received three independent easy-asset repeats."
+    },
+    {
+      "title": "Harness work and failed builds",
+      "text": "All 128 Blender invocations were profiled, including 60 failures. Recorded machine wall time totals 472.8s across setup, builds, rebuilds and inspections; this is not human labor. Scene export, root-ground allowance and hidden importer helpers required harness corrections. Original evidence is preserved. A Sonnet foreman correction prompted by the helper bug cost $0.064958 and remains included."
+    },
+    {
+      "title": "Production limitations",
+      "text": "All 31 valid exports are registered in the existing asset database. Accepted means reusable candidate approval at current game-scale art quality; it does not bind a replacement into Sandbox. Character prototypes use up to 136 mesh objects, so draw-call batching and scene-scale performance still need work. Polished kit variants were not advanced from an unapproved base."
+    },
+    {
+      "title": "Payment and reconciliation",
+      "text": "One $20 credit purchase cost $22.19: $0.88 processing fee and $1.31 tax. Auto-reload remained off. Dedicated-key usage reconciles to $12.1067906 for 83 served requests; 5 connection failures have no recorded charge. Remaining team balance is reported separately because it also includes prior/unrelated activity. Model token usage and failed calls are counted; orchestration subscription usage, electricity and hardware depreciation are not metered here. Existing Vercel hosting/build usage is not attributed to this task; those costs are not included in the Gateway-only figures."
+    }
+  ],
+  "protocol": {
+    "version": 3,
+    "authorizedDate": "2026-10-21",
+    "cashCeilingUSD": 50,
+    "generationCeilingUSD": 45,
+    "automaticTopup": false,
+    "models": [
+      "openai/gpt-6-luna",
+      "google/gemini-3.8-flash",
+      "openai/gpt-6.1-sol",
+      "anthropic/claude-sonnet-5.5",
+      "openai/gpt-6-astra"
+    ],
+    "reasoningEffort": "high",
+    "maxCompletionTokens": 24000,
+    "maxCorrectionRounds": 2,
+    "stages": {
+      "screen": 15,
+      "repair": 15,
+      "repeatAndTree": 10,
+      "integration": 5
+    },
+    "method": "Identical brief and reference inputs. Gateway writes Blender Python. Frozen common harness validates, exports, reimports and renders. No orchestrator-authored geometry repairs. Fixed provider per model; no model fallbacks or automatic retries.",
+    "acceptance": "Technical validity AND visual/art review AND required runtime behavior. GLB export alone is not acceptance. Failures remain in denominator and cost. Accepted outputs require existing asset database registration before game integration.",
+    "accounting": "Actual Gateway generation cost including reasoning, failures and repair calls. Unresolved requests retain worst-case reservation. Cash top-ups/fees/tax shown separately from consumed credits. Local machine wall time is not human labor. Human cleanup minutes are separate; dollar scenarios at 25/50/100 per hour. Orchestrator subscription usage not observable, not claimed free or included in Gateway spend.",
+    "scope": "Production asset-making benchmark; not a promise to recreate all ranch assets for $50. Scene estimate will use frozen production inventory and distinguish unique assets, variants, states and placed instances.",
+    "pilotAdjustment": "All five trough pilot calls used high effort and 12000 maximum completion tokens. Observed Luna used10789 thinking tokens and Gemini11521 and both truncated. Remaining briefs and correction rounds use24000 uniformly. Original calls and charges preserved.",
+    "correctionReasoningEffort": "low",
+    "correctionAdjustment": "Starting after repair-jobs-2 was launched, further correction requests use low reasoning with the same 24000-token cap, for all models. Several high-effort responses consumed the allowance before producing complete code. Existing high-effort attempts remain billed and visible. New requests stream to preserve generation IDs and avoid long silent connections. This is an adaptive workflow benchmark, not a ranking from identical compute.",
+    "closed": true,
+    "closedAt": "2026-10-21T09:04:33.123239+00:00",
+    "closeReason": "Paid experiment complete:88 attempts,83 billed requests,finalreview."
+  },
+  "remainingTeamCreditUSD": 7.84604739,
+  "billingAsOf": "2026-10-21T08:53:08.682672+00:00",
+  "chains": [
+    {
+      "model": "openai/gpt-6-luna",
+      "brief": "trough",
+      "attempts": 3,
+      "costUSD": 0.015650975,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "brief": "coop",
+      "attempts": 2,
+      "costUSD": 0.015586075,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "brief": "goat",
+      "attempts": 3,
+      "costUSD": 0.002935575,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "brief": "chibi",
+      "attempts": 3,
+      "costUSD": 0.018947025,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "brief": "rounded",
+      "attempts": 3,
+      "costUSD": 0.020502275,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-luna",
+      "brief": "foreman",
+      "attempts": 3,
+      "costUSD": 0.018328125,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "brief": "trough",
+      "attempts": 3,
+      "costUSD": 0.1548825,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "brief": "coop",
+      "attempts": 3,
+      "costUSD": 0.3055935,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "brief": "goat",
+      "attempts": 3,
+      "costUSD": 0.20474175,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "brief": "chibi",
+      "attempts": 3,
+      "costUSD": 0.1920225,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "brief": "rounded",
+      "attempts": 2,
+      "costUSD": 0.119733,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "google/gemini-3.8-flash",
+      "brief": "foreman",
+      "attempts": 3,
+      "costUSD": 0.17888775,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "brief": "trough",
+      "attempts": 1,
+      "costUSD": 0.12024,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "brief": "coop",
+      "attempts": 1,
+      "costUSD": 0.145828,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "brief": "goat",
+      "attempts": 2,
+      "costUSD": 0.245666,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "brief": "chibi",
+      "attempts": 3,
+      "costUSD": 0.1305095,
+      "outcome": "Prototype",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "brief": "rounded",
+      "attempts": 2,
+      "costUSD": 0.311772,
+      "outcome": "Prototype",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "brief": "foreman",
+      "attempts": 3,
+      "costUSD": 0.45154249999999996,
+      "outcome": "Prototype",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "brief": "root-tree",
+      "attempts": 1,
+      "costUSD": 0.041604,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5",
+      "brief": "trough",
+      "attempts": 2,
+      "costUSD": 0.11854,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5",
+      "brief": "coop",
+      "attempts": 2,
+      "costUSD": 0.414198,
+      "outcome": "Prototype",
+      "sampleCount": 1
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5",
+      "brief": "goat",
+      "attempts": 2,
+      "costUSD": 0.29576,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5",
+      "brief": "chibi",
+      "attempts": 3,
+      "costUSD": 0.389288,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5",
+      "brief": "rounded",
+      "attempts": 2,
+      "costUSD": 0.278014,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "anthropic/claude-sonnet-5.5",
+      "brief": "foreman",
+      "attempts": 3,
+      "costUSD": 0.37804,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-astra",
+      "brief": "trough",
+      "attempts": 2,
+      "costUSD": 1.0135299999999998,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-astra",
+      "brief": "coop",
+      "attempts": 3,
+      "costUSD": 0.21004,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-astra",
+      "brief": "goat",
+      "attempts": 2,
+      "costUSD": 0.21394,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-astra",
+      "brief": "chibi",
+      "attempts": 3,
+      "costUSD": 2.041065,
+      "outcome": "Prototype",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-astra",
+      "brief": "rounded",
+      "attempts": 2,
+      "costUSD": 1.49606,
+      "outcome": "Rejected",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-astra",
+      "brief": "foreman",
+      "attempts": 2,
+      "costUSD": 1.66847,
+      "outcome": "Prototype",
+      "sampleCount": 1
+    },
+    {
+      "model": "openai/gpt-6-astra",
+      "brief": "root-tree",
+      "attempts": 2,
+      "costUSD": 0.7202249999999999,
+      "outcome": "Accepted",
+      "sampleCount": 1
+    }
+  ],
+  "repeatability": [
+    {
+      "model": "openai/gpt-6-luna",
+      "independentBriefs": 3,
+      "calls": 6,
+      "firstPassSuccesses": 0,
+      "afterRepairSuccesses": 3,
+      "costUSD": 0.00939755,
+      "costPerAcceptedUSD": 0.0031325166666666664,
+      "tenAssetsExtrapolationUSD": 0.03132516666666667
+    },
+    {
+      "model": "openai/gpt-6.1-sol",
+      "independentBriefs": 3,
+      "calls": 5,
+      "firstPassSuccesses": 1,
+      "afterRepairSuccesses": 3,
+      "costUSD": 0.16525,
+      "costPerAcceptedUSD": 0.05508333333333334,
+      "tenAssetsExtrapolationUSD": 0.5508333333333334
+    }
+  ],
+  "machine": {
+    "runs": 128,
+    "failures": 60,
+    "wallSeconds": 472.8110209570001,
+    "cpuSeconds": 358.91137000000003,
+    "peakRSSBytes": 703234048
+  },
+  "sceneProjection": {
+    "uniqueSubjects": 25,
+    "catalogRecords": 98,
+    "sharedCatalogSubjects": 26,
+    "rows": [
+      {
+        "group": "Six core buildings",
+        "count": 6,
+        "proxy": "Sol coop, one observed chain",
+        "unitUSD": 0.145828
+      },
+      {
+        "group": "Six supplies/props",
+        "count": 6,
+        "proxy": "Sol repeated trough mean, n=3",
+        "unitUSD": 0.05508333333333334
+      },
+      {
+        "group": "Five animal species",
+        "count": 5,
+        "proxy": "Sol goat; other four species untested",
+        "unitUSD": 0.245666
+      },
+      {
+        "group": "One tree",
+        "count": 1,
+        "proxy": "Sol Hearthroot tree; ranch tree simpler",
+        "unitUSD": 0.041604
+      },
+      {
+        "group": "Six residents",
+        "count": 6,
+        "proxy": "Sol chibi PROTOTYPE; production character quality not achieved",
+        "unitUSD": 0.1305095
+      },
+      {
+        "group": "Kitchen garden",
+        "count": 1,
+        "proxy": "Untested; no measured proxy assigned",
+        "unitUSD": null
+      }
+    ],
+    "partialPrototypeInferenceUSD": 3.258459,
+    "qualifiedProductionPriceUSD": null,
+    "warning": "This is an illustrative 24-subject prototype inference subtotal plus an unpriced garden, NOT the cost of an accepted complete scene. Repeated placements are free reuse; new state modeling, untested species, character finishing, scene integration and QA are additional. The general shelter is excluded because the Ranch core uses its six specific buildings."
+  },
+  "recommendation": "Use Sol as the default for constructed assets; Luna can be useful for simple props with explicit validation and repair. Astra did not justify its higher cost in this sample. Do not promise reference-quality characters from this workflow yet."
+}

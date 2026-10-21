@@ -1,0 +1,16 @@
+import {planCity as legacyPlan} from './city-legacy-plan.mjs';
+import {citySettings} from './city-settings.mjs';
+import {planCity,cityRoute} from './city-plan.mjs';
+import {createResourceState,advanceResources,reserveDelivery,collectDelivery,finishDelivery,cancelDelivery,resourceBalance} from '../simulation/resource-loop.mjs';
+import {stepDelivery} from '../simulation/delivery-workflow.mjs';
+export function createCitySimulation(seed,options={},saved){
+ const plan=saved?.plan?structuredClone(saved.plan):saved?.version===1?legacyPlan(seed,saved.options):planCity(seed,options);plan.settings??=citySettings(saved?.options||options);plan.districts??=[{id:0,center:{x:0,z:0},turn:plan.turn,roads:plan.roads,nodeOffset:0}];plan.connectors??=[];const sites=plan.destinations.map(p=>({id:p.id,capacity:12,node:p.node}));
+ const state=saved?structuredClone(saved.state):createResourceState({parcels:{initialStock:160,initialAtSite:2,stockCapacity:160,replenishRate:0,refillBelow:4,carryCapacity:6,priority:1}},sites);
+ const home=plan.nodes[plan.depot.node];
+ let workers=saved?structuredClone(saved.workers):Array.from({length:3},(_,i)=>({id:'courier-'+i,name:['Mira','Otto','Inez'][i],phase:'idle',timer:0,position:{...home},path:[],index:0,job:null,distance:0}));
+ for(const w of workers)if(w.job)w.job=state.activeJobs[w.job.id];
+ const residents=saved?structuredClone(saved.residents):plan.destinations.slice(0,16).map((p,i)=>({id:'resident-'+i,name:['Ada','Jun','Sol','Bea','Kit','Noor','Leo','Rae'][i%8]+' '+(i+1),home:p.node,position:{...plan.nodes[p.node]},path:[],index:0,phase:'rest',timer:2+i,visits:0,heading:0}));
+ function move(w,dt,speed=1.4){let budget=dt*speed,moved=0;while(budget>0&&w.index<w.path.length){const p=w.path[w.index],dx=p.x-w.position.x,dz=p.z-w.position.z,d=Math.hypot(dx,dz),step=Math.min(d,budget);if(d>0){w.position.x+=dx/d*step;w.position.z+=dz/d*step;w.heading=Math.atan2(dx,dz);}budget-=step;moved+=step;if(d<=step+1e-8)w.index++;else break;}w.distance=(w.distance||0)+moved;return {moved,arrived:w.index>=w.path.length};}
+ const hooks={reserve:w=>reserveDelivery(state,w.id),source:()=>home,destination:j=>plan.nodes[state.sites.find(s=>s.id===j.siteId).node],home:()=>home,route(w,target,phase){w.path=cityRoute(plan,w.position,target);w.index=0;w.phase=phase;return true;},move,collect:j=>collectDelivery(state,j),deliver:j=>finishDelivery(state,j),cancel:j=>cancelDelivery(state,j),collectSeconds:2,deliverSeconds:2,restSeconds:6};
+ return {plan,state,workers,residents,update(dt){if(!Number.isFinite(dt)||dt<0||dt>60)throw new RangeError('City dt 0–60');advanceResources(state,dt);for(const w of workers)stepDelivery(w,dt,hooks);for(const p of residents){if(p.phase==='walking'){if(move(p,dt,1.1).arrived){p.visits++;p.phase='rest';p.timer=7;}}else{p.timer-=dt;if(p.timer<=0){const target=p.visits%2? p.home:plan.destinations[(Number(p.id.split('-')[1])+3)%plan.destinations.length].node;p.path=cityRoute(plan,p.position,target);p.index=0;p.phase='walking';}}}},snapshot:()=>structuredClone({version:2,seed,options:plan.settings,plan,state,workers,residents}),balance:()=>resourceBalance(state,'parcels'),dispose(){for(const w of workers)cancelDelivery(state,w.job);}};
+}

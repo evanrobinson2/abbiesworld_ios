@@ -13,7 +13,9 @@ export function activityPose(person,state,moving){
 }
 export function poseAt(kind,gait,time,accessory){
  const s=Math.sin(gait),beat=Math.sin(time*2.7);
- const pose={arms:[0,0],legs:[0,0],head:0,bob:0,lean:0};
+ // Every living pose retains gentle presentation motion, even while waiting.
+ const breath=Math.sin(time*1.7),glance=Math.sin(time*.63);
+ const pose={arms:[breath*.018,-breath*.018],legs:[0,0],head:glance*.065,bob:breath*.009,lean:Math.sin(time*.85)*.008};
  if(kind==='walk'||kind==='carry'){
   pose.legs=[s*.38,-s*.38];pose.arms=[-s*.30,s*.30];pose.bob=.025*(1-Math.cos(gait*2));
   if(kind==='carry')pose.arms[1]=-.25;

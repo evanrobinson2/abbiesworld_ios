@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RI-004",
+  "name": "Strapped cargo case rack",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocketship-interior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Secure different cargo cases on shelves with visible retention paths.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-interior/ri-004",
+  "biome": "rocketship-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 21,
+    "triangles": 764,
+    "bounds_min": [
+      -0.699999988079071,
+      -0.42500004172325134,
+      0.0
+    ],
+    "bounds_max": [
+      0.699999988079071,
+      0.38999998569488525,
+      1.850000023841858
+    ],
+    "dimensions_m": [
+      1.4,
+      0.815,
+      1.85
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "cargo-storage",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "load",
+      "secure",
+      "inspect",
+      "unload"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "access",
+        "position_blender_m": [
+          0.0,
+          -0.8999999761581421,
+          0.0
+        ],
+        "role": "access"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "empty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "loaded",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "secured",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "open",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "damaged",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "repaired",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Secure different cargo cases on shelves with visible retention paths. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See rack(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-interior/batch_rocket_interior.py",
+    "entry_point": "rack",
+    "source_sha256": "1a50ca93954f9acebd495f308fa094a17f866c3ead457bda637408ac8b65e94c",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-interior batch_rocket_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RI-004"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RI-004.glb",
+    "sha256": "de665a4d97014b2480055c0739fc33c9b12cb1600eabb22159d0c81a5c46738e",
+    "bytes": 49312
+  }
+}

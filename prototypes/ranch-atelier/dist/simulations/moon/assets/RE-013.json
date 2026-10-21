@@ -1,0 +1,171 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RE-013",
+  "name": "Split payload fairing",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocketship-exterior",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Two hollow shell halves expose the payload volume. Static scientific-fiction concept, not certified engineering.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-exterior/re-013",
+  "biome": "rocketship-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 4,
+    "triangles": 720,
+    "bounds_min": [
+      -1.100000023841858,
+      -0.9348920583724976,
+      -4.8615333980706055e-11
+    ],
+    "bounds_max": [
+      1.1349999904632568,
+      0.9348920583724976,
+      2.234539747238159
+    ],
+    "dimensions_m": [
+      2.235,
+      1.86978,
+      2.23454
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "payload-protection",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "attach",
+      "operate",
+      "service"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "mount.002",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.009999869391322136
+        ],
+        "role": "mount"
+      },
+      {
+        "id": "service.002",
+        "position_blender_m": [
+          0.0,
+          -0.5,
+          0.40999987721443176
+        ],
+        "role": "service"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "stowed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "deployed",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "servicing",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "isolated",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Two hollow shell halves expose the payload volume. Static scientific-fiction concept, not certified engineering. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See petals(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-exterior/batch_rocket_exterior_2.py",
+    "entry_point": "petals",
+    "source_sha256": "03ef2ad851baf3f24f61f0f877e14525563c068a4b82847cc1b0a562def2d122",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-exterior batch_rocket_exterior_2.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RE-013"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Actual preview inspected in contact sheet: distinct coherent silhouette and readable component organization consistent with the named static fictional part.",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Actual preview inspected in contact sheet: distinct coherent silhouette and readable component organization consistent with the named static fictional part."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RE-013.glb",
+    "sha256": "209903a319430ea1d9c853c91f265faa594077a02b30318ebee638c197eb11ad",
+    "bytes": 43120
+  }
+}

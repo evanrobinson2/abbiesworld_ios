@@ -1,0 +1,10 @@
+{
+  "animationRanges": {
+    "water_state": [
+      1,
+      60
+    ]
+  },
+  "notes": "Open timber trough with solid hollow galvanized liner. Single-segment edge bevels keep geometry economical. Water descends and contracts inside the lining, ending fully concealed within its solid floor at frame 60.",
+  "blenderVersion": "5.2.1 LTS"
+}

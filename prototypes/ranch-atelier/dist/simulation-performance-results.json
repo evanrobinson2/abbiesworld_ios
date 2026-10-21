@@ -1,0 +1,198 @@
+{
+  "rows": [
+    {
+      "seed": 214,
+      "requested": 100,
+      "active": 100,
+      "workers": 11,
+      "control": {
+        "fps": 59.000742725049854,
+        "medianMs": 16.69999999999891,
+        "p95Ms": 16.799999999999272,
+        "p99Ms": 33.29999999999927
+      },
+      "candidate": {
+        "fps": 56.33568065336055,
+        "medianMs": 16.69999999999891,
+        "p95Ms": 33.29999999999927,
+        "p99Ms": 33.400000000001455
+      }
+    },
+    {
+      "seed": 214,
+      "requested": 500,
+      "active": 306,
+      "workers": 11,
+      "control": {
+        "fps": 27.001125046876957,
+        "medianMs": 33.39999999999782,
+        "p95Ms": 50.0,
+        "p99Ms": 66.69999999999891
+      },
+      "candidate": {
+        "fps": 28.21191391621311,
+        "medianMs": 33.30000000000109,
+        "p95Ms": 50.0,
+        "p99Ms": 66.69999999999982
+      }
+    },
+    {
+      "seed": 214,
+      "requested": 1000,
+      "active": 395,
+      "workers": 11,
+      "control": {
+        "fps": 19.94531659034813,
+        "medianMs": 50.0,
+        "p95Ms": 66.69999999999891,
+        "p99Ms": 66.70000000000073
+      },
+      "candidate": {
+        "fps": 21.02586264211156,
+        "medianMs": 50.0,
+        "p95Ms": 66.69999999999982,
+        "p99Ms": 83.39999999999964
+      }
+    },
+    {
+      "seed": 815,
+      "requested": 100,
+      "active": 100,
+      "workers": 11,
+      "control": {
+        "fps": 58.08575357306555,
+        "medianMs": 16.69999999999891,
+        "p95Ms": 16.800000000000182,
+        "p99Ms": 33.399999999999636
+      },
+      "candidate": {
+        "fps": 59.91916329847077,
+        "medianMs": 16.69999999999891,
+        "p95Ms": 16.700000000000728,
+        "p99Ms": 16.80000000000109
+      }
+    },
+    {
+      "seed": 815,
+      "requested": 500,
+      "active": 307,
+      "workers": 11,
+      "control": {
+        "fps": 27.58448268677862,
+        "medianMs": 33.30000000000291,
+        "p95Ms": 50.0,
+        "p99Ms": 50.100000000000364
+      },
+      "candidate": {
+        "fps": 17.179136063737083,
+        "medianMs": 66.59999999999854,
+        "p95Ms": 66.70000000000073,
+        "p99Ms": 83.39999999999964
+      }
+    },
+    {
+      "seed": 815,
+      "requested": 1000,
+      "active": 389,
+      "workers": 11,
+      "control": {
+        "fps": 20.555583295883892,
+        "medianMs": 50.0,
+        "p95Ms": 66.60000000000036,
+        "p99Ms": 66.70000000000073
+      },
+      "candidate": {
+        "fps": 21.917579899162465,
+        "medianMs": 50.0,
+        "p95Ms": 50.100000000000364,
+        "p99Ms": 66.60000000000036
+      }
+    }
+  ],
+  "paired": [
+    {
+      "seed": 214,
+      "active": 100,
+      "calls": 60630,
+      "before": 2537.900000460446,
+      "after": 2045.3999993875623,
+      "mismatches": 0
+    },
+    {
+      "seed": 214,
+      "active": 306,
+      "calls": 52504,
+      "before": 3136.0999998301268,
+      "after": 2574.700000345707,
+      "mismatches": 0
+    },
+    {
+      "seed": 815,
+      "active": 100,
+      "calls": 51178,
+      "before": 2497.899999730289,
+      "after": 2069.9000001251698,
+      "mismatches": 0
+    },
+    {
+      "seed": 815,
+      "active": 307,
+      "calls": 63354,
+      "before": 2965.0000007748604,
+      "after": 2365.899999946356,
+      "mismatches": 0
+    }
+  ],
+  "source": {
+    "baseline": {
+      "lab.mjs": "b41ee299a8fb8f19d505cbabbd301722e1821213fde196d7bbb3320d658401ab",
+      "ranch-life.mjs": "093840305c3a796325951235e6e3cab5797ed34757912294c4b5449d9f9a6bf9",
+      "ranch-navigation.mjs": "7e11badb5eed661ab625b638fe3bff2d22e66dea4efd9764c634874865604b04"
+    },
+    "candidate": {
+      "lab.mjs": "c0fa00375dbc23dc10c271a788c154630b02a5d72aa70e48e14d3713422c1fec",
+      "ranch-life.mjs": "7f45bc8e239449ab851a2b7e5308e46eb4a730705128c838ef65490626ed1201",
+      "ranch-navigation.mjs": "e1a5933e68b1646cd3da6763eb5569b14c82e83f2696937c9943ccee55532a34"
+    }
+  },
+  "workload": {
+    "warmupSeconds": 5,
+    "sampleSeconds": 12,
+    "seeds": [
+      214,
+      815
+    ],
+    "requestedAnimals": [
+      100,
+      500,
+      1000
+    ],
+    "profileEnabled": false,
+    "order": "control sweep then candidate sweep, followed by reverse-order outlier repeat",
+    "preset": "homestead",
+    "sizeMetres": 100,
+    "complexity": 1,
+    "biodiversity": 3,
+    "clock": "normal",
+    "travelMultiplier": 6
+  },
+  "date": "2026-10-20",
+  "device": "Apple M5, 16 GB, Chrome 155, 1280\u00d7720 DPR1",
+  "limitations": [
+    "Not a city or 1,000-active-entity demonstration",
+    "One ordinary frame sweep per variant/seed/population; workstation variability",
+    "307-active candidate repeat 35.8 fps; control repeat 26.1 fps; initial candidate outlier 17.2 fps",
+    "No GPU timing or mobile capacity measurement",
+    "No new physical manipulation burst benchmark",
+    "Crowded habitats exceed care capacity; persisted counts are not moving bodies"
+  ],
+  "correctness": {
+    "pairedCalls": 227666,
+    "pairedMismatches": 0,
+    "randomizedComparisons": 201000,
+    "fullStateFixtures": 4,
+    "stepsPerFixture": 360,
+    "exactJSONRestore": true
+  },
+  "implementation": "Conservative rectangle broad-phase rejection in obstacle-local coordinates. Existing narrow phase and movement scoring unchanged. Opt-in browser CPU diagnostics. No fidelity or update cadence change."
+}

@@ -194,3 +194,187 @@ body.simulation-workspace>header.grouped-toolbar #app-settings-toggle{padding:7p
  #ranch-notices{top:66px}
 }
 @media(max-width:360px){body.simulation-workspace>header.grouped-toolbar .toolbar-group button,body.simulation-workspace>header.grouped-toolbar #app-settings-toggle{width:36px!important;min-width:36px!important;padding:6px!important}}
+/* Weather stays in the existing bar; the choices scroll within short screens. */
+#weather-toggle-choices{max-height:calc(100dvh - 90px);overflow-y:auto;overscroll-behavior:contain}
+@media(max-width:360px){body.simulation-workspace>header.grouped-toolbar .toolbar-group button,body.simulation-workspace>header.grouped-toolbar #app-settings-toggle{width:32px!important;min-width:32px!important;padding:5px!important}}
+/* One lower-left tile tool, with a bounded preview above it. */
+#tile-chooser-toggle{position:fixed;left:14px;bottom:14px;width:46px;height:46px;padding:10px;display:grid;place-items:center;border:1px solid var(--app-border,#d8cfb5);border-radius:12px;background:var(--app-paper,#fff9ed);color:var(--app-ink,#43513d);z-index:35}#tile-chooser-toggle svg{width:24px;height:24px}#tile-chooser{position:fixed;inset:auto auto 70px 14px;margin:0;width:min(310px,calc(100vw - 28px));max-height:calc(100dvh - 140px);overflow:auto;border:1px solid var(--app-border,#d8cfb5);border-radius:16px;padding:10px;background:var(--app-paper,#fff9ed);color:var(--app-ink,#43513d);box-shadow:0 6px 22px #0002}#tile-chooser::backdrop{background:transparent}.tile-options{display:flex;gap:4px}.tile-options button{flex:1;font:12px Manrope,sans-serif;min-height:40px;padding:5px}.tile-options button[aria-pressed=true]{background:var(--app-accent,#b84931);color:var(--app-paper,#fff9ed)}.tile-preview{height:210px;margin-top:8px;border-radius:10px;overflow:hidden}.tile-preview canvas{display:block;touch-action:none}.tile-preview-status{font:12px/1.5 Manrope,sans-serif;margin:8px 0}.tile-preview-actions{display:flex;align-items:center;gap:5px;font-size:11px}.tile-preview-actions button{min-height:40px}.tile-preview-actions .add-tile{margin-left:auto;background:var(--app-accent,#b84931);color:var(--app-paper,#fff9ed)}body[data-family=moon] #tile-chooser-toggle{display:none!important}@media(max-width:700px){#tile-chooser-toggle{bottom:94px}#tile-chooser{bottom:148px;max-height:calc(100dvh - 215px)}.tile-preview{height:170px}}
+
+#tile-chooser-toggle{bottom:94px}#tile-chooser{bottom:148px;max-height:calc(100dvh - 215px)}
+/* Expansion is a bounded palette over the working surface, not a second viewer. */
+#tile-chooser:not([hidden]){display:block;position:fixed;inset:auto auto 148px 14px;margin:0;z-index:36;padding:12px;border:1px solid var(--app-border,#d9cfb0);border-radius:18px;background:var(--app-paper,#fff9ed);box-shadow:0 8px 28px #343a2420;width:min(310px,calc(100vw - 28px));max-height:calc(100dvh - 220px);overflow:auto}
+#tile-chooser[hidden],#tile-chooser [hidden]{display:none!important}
+.tile-expand-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}.tile-expand-heading button{min-width:40px;min-height:40px;font-size:24px}.tile-options button{touch-action:none;min-height:44px;cursor:grab}.tile-options button:active{cursor:grabbing}#tile-chooser>.add-tile{width:100%;min-height:44px}#tile-chooser-toggle[aria-expanded=true]{background:var(--app-accent,#b84931);color:#fff}
+
+.place-name-row{display:flex;align-items:center;gap:4px;min-width:0}.place-name-row #label{min-width:0;flex:0 1 auto}header.grouped-toolbar #site-warning{flex:0 0 28px;display:grid;place-items:center;min-width:28px;width:28px;height:28px;padding:5px!important;border:0;background:transparent;color:var(--app-accent,#b84931);border-radius:8px}header.grouped-toolbar #site-warning[hidden]{display:none!important}#site-warning svg{width:16px;height:16px}#site-warning:focus-visible{outline:2px solid currentColor;outline-offset:1px}#site-warning-details{position:fixed;inset:70px auto auto 16px;margin:0;width:min(300px,calc(100vw - 32px));box-sizing:border-box;padding:12px 14px;border:1px solid var(--app-border,#d8cfb5);border-radius:12px;background:var(--app-paper,#fff9ed);color:var(--app-ink,#43513d);font:12px/1.5 Manrope,sans-serif;box-shadow:0 6px 22px #0002}#site-warning-details::backdrop{background:transparent}
+
+/* Generator selection owns the single lower tray while placing tiles. */
+#tile-chooser-toggle svg{width:34px;height:30px}#tile-chooser-toggle{padding:5px}
+#scene-generator-picker{position:fixed;left:14px;bottom:148px;z-index:40;width:190px;max-height:45dvh;overflow:auto;padding:8px;border:1px solid var(--app-border);border-radius:14px;background:var(--app-paper);box-shadow:0 8px 28px #0002}#scene-generator-picker button{display:block;width:100%;min-height:44px;text-align:left;border:0;background:transparent;padding:10px 12px;color:var(--app-ink);font:13px var(--app-font)}#scene-generator-picker button[aria-pressed=true]{color:var(--app-accent);font-weight:700}body[data-tile-tray=open] #panel{visibility:hidden;pointer-events:none}
+#tile-chooser:not([hidden]){inset:auto auto 10px 50%;transform:translateX(-50%);width:min(760px,calc(100vw - 20px));box-sizing:border-box;max-height:160px;padding:10px 12px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;overflow:visible}
+#tile-chooser .tile-expand-heading{position:absolute;right:4px;top:-40px;margin:0}#tile-chooser .tile-expand-heading span{display:none}#tile-chooser .tile-expand-heading button{background:var(--app-paper);border:1px solid var(--app-border);border-radius:10px;min-height:32px;height:32px;min-width:32px;font-size:20px}
+#tile-chooser .tile-options{grid-column:1;overflow-x:auto;overscroll-behavior:contain;min-width:0;gap:8px}#tile-chooser .tile-options button{flex:1 0 82px;min-height:48px;border-radius:10px;border:1px solid var(--app-border);background:transparent;color:var(--app-ink);font:12px var(--app-font)}#tile-chooser .tile-options button[aria-pressed=true]{background:var(--app-accent);color:var(--app-paper)}#tile-chooser>.add-tile{grid-column:2;grid-row:1;min-height:44px;width:auto}#tile-chooser .tile-preview-status{grid-column:1/-1;margin:0;font-size:11px;line-height:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#current-scene-type{position:fixed;left:50%;bottom:86px;transform:translateX(-50%);width:min(736px,calc(100vw - 44px));font:600 13px var(--app-font);color:var(--app-ink);pointer-events:none;z-index:34}body[data-tile-tray=open] #current-scene-type{bottom:104px}body[data-family=moon] #current-scene-type{display:none}
+
+/* The scene-generator control belongs to the bottom bar in both modes. */
+body.simulation-workspace #panel{grid-template-columns:44px 44px minmax(0,1fr) 44px!important}
+#panel #tile-chooser-toggle{grid-column:1;grid-row:1}#panel #shape-open{grid-column:2;grid-row:1}#panel #configuration-slot>.sliders{grid-column:3;grid-row:1}#panel #advanced-open{grid-column:4;grid-row:1}
+#panel #tile-chooser-toggle,#tile-chooser #tile-chooser-toggle{position:static;inset:auto;transform:none;width:44px;height:44px;min-width:44px;margin:0;padding:5px;border-radius:10px;align-self:center}
+#tile-chooser:not([hidden]){grid-template-columns:44px minmax(0,1fr) auto}#tile-chooser #tile-chooser-toggle{grid-column:1;grid-row:1}#tile-chooser .tile-options{grid-column:2}#tile-chooser>.add-tile{grid-column:3}#tile-chooser .tile-preview-status{grid-column:2/-1}
+@media(max-width:600px){body.simulation-workspace #panel{grid-template-columns:40px 40px minmax(0,1fr) 40px!important;gap:5px}#panel #tile-chooser-toggle{width:40px;min-width:40px}#configuration-slot>.sliders{gap:4px}}
+
+/* Icon-only weather facets retain names for assistive tech and hover. */
+#weather-toggle-choices.iconic-picker{width:200px;min-width:0;box-sizing:border-box;padding:8px;grid-template-columns:repeat(4,1fr);gap:4px}#weather-toggle-choices.iconic-picker:popover-open{display:grid}#weather-toggle-choices button{width:42px;min-width:42px;height:44px;min-height:44px;padding:9px;display:grid;place-items:center}#weather-toggle-choices svg{width:24px;height:24px}
+#simulation-speed{position:relative;display:grid!important;place-items:center;min-width:44px!important;width:44px;height:44px;padding:6px!important}#simulation-speed>.ui-icon{width:25px;height:25px;margin-top:-5px}#simulation-speed .pace-badge{position:absolute;bottom:2px;left:0;width:100%;text-align:center;font:700 9px/11px var(--app-font);font-variant-numeric:tabular-nums}#simulation-speed-choices button{display:flex;align-items:center;gap:10px;min-height:44px}#simulation-speed-choices .ui-icon{width:22px;height:22px;flex:none}
+
+/* Garden controls stay within the existing bounded placement tray. */
+#tile-chooser .tile-options button{flex:0 0 132px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:76px;padding:4px}#tile-chooser .tile-options img{width:120px;height:64px;object-fit:contain;pointer-events:none}#tile-chooser .garden-facets{grid-column:2/-1;display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;align-items:center}#tile-chooser .garden-facets label{display:grid;gap:3px;font:11px var(--app-font);min-width:0}#tile-chooser .garden-facets select{width:100%;min-height:36px;font:12px var(--app-font)}#tile-chooser .garden-facets input{width:100%;min-width:0;accent-color:var(--app-accent)}#tile-chooser:not([hidden]){max-height:min(240px,40dvh);overflow:auto}#tile-chooser .tile-expand-heading{position:fixed;right:4px;top:4px}#tile-chooser>.add-tile{align-self:center;margin-right:26px}#tile-chooser .tile-preview-status{white-space:normal;max-height:32px;overflow:auto}@media(max-width:600px){#tile-chooser .garden-facets{gap:8px;grid-column:1/-1}#tile-chooser .tile-options button{flex-basis:116px}#tile-chooser .tile-options img{width:108px;height:60px}#tile-chooser>.add-tile{font-size:12px;padding:5px;margin-right:24px}}
+
+/* The shape picker is inside .profiles; the sliders must occupy the flexible track. */
+body[data-family=ranch] #panel .profiles{grid-column:2!important;grid-row:1!important;min-width:0}
+body[data-family=ranch] #panel #configuration-slot>.sliders{grid-column:3!important;grid-row:1!important;min-width:0;width:100%;grid-template-columns:repeat(2,minmax(0,1fr))}
+body[data-family=ranch] #panel #configuration-slot>.sliders input{width:100%;min-width:0;max-width:100%;height:44px}
+@media(max-width:380px){body[data-family=ranch] #panel #configuration-slot>.sliders label{grid-template-columns:12px minmax(0,1fr) 12px;gap:2px}body[data-family=ranch] #configuration-slot .slider-endpoint,body[data-family=ranch] #configuration-slot .slider-endpoint svg{width:12px;height:20px}}
+/* Passive information is inset into the scene; actions retain one compact bar. */
+body[data-family=ranch] header.grouped-toolbar{left:auto!important;right:12px!important;top:12px!important;width:auto!important;max-width:calc(100vw - 24px)!important;min-height:48px!important;padding:5px!important;gap:4px!important;border-radius:18px!important;display:flex!important;flex-wrap:nowrap!important}
+body[data-family=ranch] header.grouped-toolbar .toolbar-group{gap:3px!important;padding:0 4px!important;min-width:0!important}
+body[data-family=ranch] header.grouped-toolbar button{width:40px!important;height:40px!important;min-width:40px!important;padding:8px!important;border-radius:12px!important}
+body[data-family=ranch] header #playback-label,body[data-family=ranch] header .button-label,body[data-family=ranch] header .clock-copy,body[data-family=ranch] header #season-toggle>span{display:none!important}
+body[data-family=ranch] header #simulation-speed{position:relative}
+body[data-family=ranch] header #simulation-speed .pace-badge{position:absolute;bottom:1px;right:2px;font-size:9px;line-height:11px;background:var(--app-paper,#fff9ec);padding:0 2px;border-radius:3px}
+#scene-readouts{position:fixed;z-index:12;left:22px;top:18px;pointer-events:none;max-width:min(460px,calc(100vw - 460px));color:var(--app-ink,#433c2b);text-shadow:0 1px 3px var(--app-paper,#fff9ec)}
+#scene-readouts .live-status{position:static!important;display:block!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0!important;max-width:100%!important;color:inherit!important}
+#scene-readouts #label{font-size:24px!important;line-height:1.15!important;margin:0 0 4px!important;white-space:normal!important}
+#scene-readouts .live-status button{pointer-events:auto}
+.scene-widgets{display:flex;gap:24px;margin-top:14px;align-items:center}
+.scene-clock,.scene-weather{display:flex;gap:9px;align-items:center}
+.scene-widgets strong,.scene-widgets small{display:block;font-size:15px;line-height:1.5}
+.scene-widgets small{font-size:12px;opacity:.8}
+.scene-clock>svg{width:42px;height:42px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round}
+.weather-symbol svg{width:38px;height:38px}
+#scene-readouts .live-status #summary{font-size:12px!important}
+body:not([data-family=ranch]) #scene-readouts .scene-widgets{display:none}
+body:not([data-family=ranch]) #scene-readouts{top:80px;max-width:320px}
+#scene-build-progress{position:fixed;z-index:35;left:50%;bottom:122px;transform:translateX(-50%);width:min(300px,calc(100vw - 36px));padding:10px 14px;border-radius:12px;background:var(--app-paper,#fff9ec);color:var(--app-ink,#433c2b);box-shadow:0 4px 20px #0002;pointer-events:none}
+#scene-build-progress[hidden]{display:none!important}
+#scene-build-progress span{display:block;font-size:12px;margin-bottom:5px}
+#scene-build-progress progress{display:block;width:100%;height:6px;accent-color:var(--app-accent,#b84c30)}
+@media(max-width:760px){
+ body[data-family=ranch] header.grouped-toolbar{right:8px!important;top:8px!important;padding:3px!important;gap:1px!important}
+ body[data-family=ranch] header.grouped-toolbar .toolbar-group{gap:1px!important;padding:0 2px!important}
+ body[data-family=ranch] header.grouped-toolbar button{width:36px!important;min-width:36px!important;height:40px!important;padding:8px!important}
+ #scene-readouts{left:16px;top:76px;max-width:calc(100vw - 32px)}
+ #scene-readouts #label{font-size:21px!important}
+ .scene-widgets{margin-top:10px;gap:22px}
+ #scene-build-progress{bottom:108px}
+}
+@media(max-width:360px){body[data-family=ranch] header.grouped-toolbar button{width:32px!important;min-width:32px!important;padding:6px!important}.scene-widgets{gap:16px}}
+#scene-readouts #label{font-family:var(--app-heading,serif)!important}
+.scene-widgets{font-family:var(--app-font,sans-serif)}
+/* Append to the current workspace stylesheet; preserve layout and saved theme. */
+body.simulation-workspace :is(button,select,input,textarea){font-family:var(--app-font);accent-color:var(--app-accent)}
+body.simulation-workspace :is(select,input:not([type=range]):not([type=checkbox]):not([type=radio]),textarea){background:var(--app-paper);color:var(--app-ink);border-color:var(--app-border)}
+body.simulation-workspace select option{background:var(--app-paper);color:var(--app-ink)}
+body.simulation-workspace :is(button,select,input,textarea):focus-visible{outline:2px solid var(--app-accent);outline-offset:3px}
+body.simulation-workspace :is(button,select,input):disabled{opacity:.5;cursor:not-allowed}
+body.simulation-workspace>header :is(#pause,#generate,#settings){color:var(--app-ink)}
+body.simulation-workspace #library-open{font-family:var(--app-heading)}
+body.simulation-workspace #panel .sliders input{accent-color:var(--app-accent)}
+body.simulation-workspace #panel summary{color:var(--app-muted)}
+body.simulation-workspace #panel .animal-controls[open]{border-color:var(--app-border)}
+body.simulation-workspace #panel .profile span{--label-outline:var(--app-paper)}
+body.simulation-workspace #panel .profile svg{fill:var(--app-paper);stroke:var(--app-muted)}
+body.simulation-workspace #panel .profile[aria-pressed=true] svg{fill:var(--app-accent);stroke:var(--app-ink)}
+body.simulation-workspace #shape-dialog [data-shape][aria-selected=true]{background:var(--app-accent);color:var(--app-paper)}
+body.simulation-workspace #shape-dialog [data-shape][aria-selected=true] svg{fill:var(--app-paper);stroke:var(--app-paper)}
+body.simulation-workspace :is(.tile-options button,.tile-preview-status,.tile-preview-actions,#site-warning-details){font-family:var(--app-font)}
+body.simulation-workspace>header #pause{color:var(--app-on-accent,#fffdf4)}
+/* One Ranch-style placement bar; additional settings rise from its right edge. */
+#tile-chooser:not([hidden]){width:min(900px,calc(100vw - 20px));max-height:none;overflow:visible;grid-template-columns:44px 44px minmax(160px,1fr) 88px 44px 44px;align-items:center;gap:6px;padding:10px 12px}
+#tile-chooser #tile-chooser-toggle{grid-column:1;grid-row:1}
+#tile-chooser .placement-facet{grid-column:2;grid-row:1;position:relative;display:grid;place-items:center;width:44px;height:44px;border:1px solid var(--app-border);border-radius:10px;background:var(--app-paper)}
+.placement-facet>svg{width:28px;height:28px;color:var(--app-ink)}
+#tile-chooser .placement-facet select{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer}
+.placement-facet:focus-within{outline:2px solid var(--app-accent);outline-offset:2px}
+#tile-chooser .placement-axes{grid-column:3;grid-row:1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;min-width:0}
+.placement-axes label{display:grid;grid-template-columns:22px minmax(0,1fr) 26px;align-items:center;gap:5px;min-width:0}
+.placement-axes input{width:100%;min-width:0;height:44px;accent-color:var(--app-accent)}
+.placement-axes svg{width:100%;height:28px;color:var(--app-ink)}
+#tile-chooser .tile-options{grid-column:4;grid-row:1;overflow:visible}
+#tile-chooser .tile-options button{flex:0 0 88px;width:88px;min-height:48px;height:48px;padding:2px;background:var(--app-paper);color:var(--app-ink);border-color:var(--app-border)}
+#tile-chooser .tile-options img{width:80px;height:40px}
+#tile-chooser .tile-options img:not([hidden])+span{display:none}
+#tile-chooser>.add-tile{grid-column:5;grid-row:1;width:44px;height:44px;margin:0;padding:8px;background:var(--app-accent);color:var(--app-on-accent);border-radius:10px;border:1px solid var(--app-border)}
+#tile-chooser>.add-tile svg{width:25px;height:25px}
+#tile-chooser .placement-advanced{grid-column:6;grid-row:1;width:44px;height:44px;padding:8px;border:1px solid var(--app-border);border-radius:10px;background:var(--app-paper);color:var(--app-ink)}
+.placement-advanced svg{width:26px;height:26px}
+#tile-chooser .tile-preview-status{grid-column:1/-1;grid-row:2;font-size:11px;max-height:30px;line-height:15px;margin:0}
+#tile-chooser .tile-expand-heading{position:absolute;top:-39px;right:0}
+#tile-chooser .placement-details{position:absolute;bottom:calc(100% + 8px);right:42px;width:280px;max-width:calc(100vw - 42px);max-height:min(400px,55dvh);overflow:auto;overscroll-behavior:contain;box-sizing:border-box;padding:16px;border:1px solid var(--app-border);border-radius:16px;background:var(--app-paper);color:var(--app-ink);box-shadow:0 6px 24px #0002;font-family:var(--app-font)}
+.placement-details strong{display:block;font:600 17px var(--app-heading)}
+.placement-details p{font-size:12px;line-height:1.5}
+.placement-details label{display:grid;gap:4px;margin-top:12px;font-size:12px}
+.placement-details input{width:100%;height:44px;accent-color:var(--app-accent)}
+@media(max-width:650px){
+ #tile-chooser:not([hidden]){grid-template-columns:44px 44px minmax(0,1fr) 44px 44px;gap:6px;padding:8px 10px}
+ #tile-chooser .placement-axes{grid-column:1/-1;grid-row:2;gap:12px}
+ #tile-chooser .tile-options{grid-column:3;justify-content:center}
+ #tile-chooser>.add-tile{grid-column:4}
+ #tile-chooser .placement-advanced{grid-column:5}
+ #tile-chooser .tile-preview-status{grid-row:3;max-height:30px}
+ #tile-chooser .placement-details{right:0;max-height:min(360px,45dvh);width:min(300px,calc(100vw - 20px))}
+}
+
+/* Scene selection stays in the tray; only a deliberate drag/drop places it. */
+#tile-chooser:not([hidden]){grid-template-columns:44px 44px minmax(160px,1fr) 160px 44px}
+#tile-chooser>.add-tile{display:none!important}
+#tile-chooser .placement-advanced{grid-column:5}
+#tile-chooser .tile-options button{width:160px;flex-basis:160px;height:96px;min-height:96px;cursor:grab;touch-action:none;user-select:none}
+#tile-chooser .tile-options button:active{cursor:grabbing}
+#tile-chooser .tile-options button:disabled{cursor:progress;opacity:.55}
+#tile-chooser .tile-options img{width:152px;height:86px;pointer-events:none;-webkit-user-drag:none}
+#scene-drag-ghost{position:fixed;width:144px;height:81px;object-fit:contain;transform:translate(-50%,-72%);pointer-events:none;z-index:110;background:var(--app-paper);border:2px solid var(--app-accent);border-radius:12px;opacity:.85;box-shadow:0 4px 16px #0003}
+#scene-tray-tooltip{position:fixed;z-index:120;max-width:min(280px,calc(100vw - 16px));padding:7px 10px;border-radius:8px;border:1px solid var(--app-border);background:var(--app-ink);color:var(--app-paper);font:12px/1.4 var(--app-font);pointer-events:none;box-shadow:0 3px 12px #0002}
+@media(max-width:600px){
+ #tile-chooser:not([hidden]){grid-template-columns:40px 40px minmax(0,1fr) 40px;gap:6px}
+ #tile-chooser .tile-options{grid-column:3}
+ #tile-chooser .tile-options button{width:132px;flex-basis:132px;height:80px;min-height:80px;max-width:100%}
+ #tile-chooser .tile-options img{width:124px;height:70px;max-width:100%}
+ #tile-chooser .placement-advanced{grid-column:4;width:40px}
+}
+
+
+/* Keep control surfaces and their currentColor icons on the same theme. */
+body.simulation-workspace #panel,
+body.simulation-workspace #advanced-panel,
+body.simulation-workspace #shape-dialog{background:var(--app-paper);color:var(--app-ink);border-color:var(--app-border)}
+body.simulation-workspace #panel #shape-open,
+body.simulation-workspace #panel #advanced-open{background:var(--app-paper);color:var(--app-ink);border-color:var(--app-border)}
+body.simulation-workspace #panel #shape-open:hover,
+body.simulation-workspace #panel #advanced-open:hover{background:var(--app-canvas)}
+body.simulation-workspace #panel .sliders input,
+body.simulation-workspace #advanced-panel input[type=range]{accent-color:var(--app-accent)}
+
+/* Readable scene annotations and one shared card palette. */
+body[data-family=ranch] #toolbar-calendar,body[data-family=ranch] #generate,body[data-family=ranch] #notice-toggle,body[data-family=ranch] #ranch-notices{display:none!important}
+body.simulation-workspace #scene-readouts{color:var(--app-ink)!important;text-shadow:none!important;background:color-mix(in srgb,var(--app-paper) 96%,transparent);border:1px solid var(--app-border);border-radius:16px;padding:12px 16px;max-width:min(460px,calc(100vw - 260px));box-shadow:0 3px 18px #00000012}
+body.simulation-workspace #scene-readouts *{text-shadow:none!important;filter:none!important}
+body.simulation-workspace #scene-readouts :is(#stats,#summary,small){color:var(--app-ink)!important;opacity:1}
+body.simulation-workspace #scene-readouts .scene-widgets{gap:20px;margin-top:10px}
+body.simulation-workspace #scene-readouts button{pointer-events:auto;border:0;background:transparent;color:inherit;box-shadow:none;padding:0;text-align:left;font-family:var(--app-font);cursor:pointer;min-height:44px;border-radius:6px}
+body.simulation-workspace #scene-readouts button:hover{background:color-mix(in srgb,var(--app-ink) 7%,transparent)}
+body.simulation-workspace #scene-readouts strong{font:600 15px var(--app-font)}
+body.simulation-workspace #scene-readouts .scene-weather{position:relative;display:grid;gap:0;padding-left:42px}
+body.simulation-workspace #scene-readouts #scene-weather-control{min-height:24px}
+body.simulation-workspace #scene-readouts .weather-symbol{position:absolute;left:0;top:4px;pointer-events:none}
+body.simulation-workspace #scene-readouts #scene-season-control{font-size:12px;min-height:24px}
+body.simulation-workspace #inspection{background:var(--app-paper)!important;color:var(--app-ink)!important;border:1px solid var(--app-border)!important;border-radius:16px!important;box-shadow:0 4px 18px #0002!important;font-family:var(--app-font)!important}
+body.simulation-workspace #inspection #inspect-name{font-family:var(--app-heading)!important;color:var(--app-ink)!important}
+body.simulation-workspace #inspection #inspect-status{border:0!important;border-left:2px solid var(--app-accent)!important;background:color-mix(in srgb,var(--app-accent) 8%,var(--app-paper))!important;color:var(--app-ink)!important;border-radius:6px}
+body.simulation-workspace #inspection #inspect-hero{border:1px solid var(--app-border)!important;box-shadow:none!important;border-radius:8px!important;background:var(--app-paper)!important}
+body.simulation-workspace #inspection .inspect-actions{border-top:1px solid var(--app-border);padding-top:6px;gap:6px}
+body.simulation-workspace #inspection .inspect-actions button{color:var(--app-ink)!important;font-family:var(--app-font);min-height:36px;padding:4px 8px;border-radius:8px}
+body.simulation-workspace #inspection :is(#inspect-details,#inspect-live){border-color:var(--app-border);color:var(--app-ink)}
+body.simulation-workspace #inspection #close-inspection span{background:var(--app-border)}
+@media(max-width:760px){body.simulation-workspace #scene-readouts{left:10px;top:64px;max-width:calc(100vw - 20px);padding:9px 12px}body.simulation-workspace #scene-readouts #label{font-size:18px!important}body.simulation-workspace #scene-readouts .scene-widgets{margin-top:6px;gap:18px}}
+@media(max-width:760px){body.simulation-workspace #inspection{top:auto!important;bottom:104px!important;left:10px!important;right:10px!important;width:auto!important;max-width:none!important;max-height:35dvh!important;overflow:auto!important}body.simulation-workspace #scene-readouts #scene-weather-control,body.simulation-workspace #scene-readouts #scene-season-control{min-height:32px}}

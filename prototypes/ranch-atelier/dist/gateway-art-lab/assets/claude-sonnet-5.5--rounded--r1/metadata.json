@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Armature-driven rounded character; separate Clothing_* meshes for outfit variants.",
+  "blenderVersion": "5.2.1 LTS"
+}

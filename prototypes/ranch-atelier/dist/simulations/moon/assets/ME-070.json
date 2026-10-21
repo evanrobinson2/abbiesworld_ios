@@ -1,0 +1,249 @@
+{
+  "schema_version": "1.1.0",
+  "id": "ME-070",
+  "name": "Vented peripheral lunar landing pad",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-exterior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Central landing deck and outer walkway connected by beams over actual peripheral vent gaps; no landing, dust or blast simulation.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-exterior/me-070",
+  "biome": "moon-base-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 27,
+    "triangles": 2504,
+    "bounds_min": [
+      -4.0,
+      -4.0,
+      0.0
+    ],
+    "bounds_max": [
+      4.0,
+      4.0,
+      0.6000000238418579
+    ],
+    "dimensions_m": [
+      8.0,
+      8.0,
+      0.6000000238418579
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "proposed fictional lunar habitation input",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "place",
+      "service"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "origin.001",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "role": "origin"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "idle",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "in-use",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "service",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Central landing deck and outer walkway connected by beams over actual peripheral vent gaps; no landing, dust or blast simulation. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See checked(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-exterior/batch_moon_exterior_7.py",
+    "entry_point": "checked",
+    "source_sha256": "c03a519d8a71686aa6dd188a1211e6a72c9588b792131c768186c7668887e693",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-exterior batch_moon_exterior_7.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "ME-070",
+    "build_inputs_sha256": {
+      "moon-base-exterior/batch_moon_exterior_7.py": "c03a519d8a71686aa6dd188a1211e6a72c9588b792131c768186c7668887e693",
+      "production/build_scene_batch.py": "aaa1e940dec87f38ba1a367b89cd66e0cdb4bdd566f22e13235150b7d178880f",
+      "production/render_micro.py": "6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449",
+      "garden-farm/build_garden.py": "b8dbd05c75d2424dea65d4235b1059df2f1e0983416f9ff33ebf4e916b7b2e8a",
+      "market-village/build_market.py": "a74af121a32bd7a36958f85a82c2991a421c405f17541ebb2ff470636eb809e9",
+      "market-village/architecture.py": "7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3"
+    },
+    "source_snapshots": {
+      "moon-base-exterior/batch_moon_exterior_7.py": "production/source-snapshots/c03a519d8a71686aa6dd188a1211e6a72c9588b792131c768186c7668887e693.py",
+      "production/build_scene_batch.py": "production/source-snapshots/aaa1e940dec87f38ba1a367b89cd66e0cdb4bdd566f22e13235150b7d178880f.py",
+      "production/render_micro.py": "production/source-snapshots/6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449.py",
+      "garden-farm/build_garden.py": "production/source-snapshots/b8dbd05c75d2424dea65d4235b1059df2f1e0983416f9ff33ebf4e916b7b2e8a.py",
+      "market-village/build_market.py": "production/source-snapshots/a74af121a32bd7a36958f85a82c2991a421c405f17541ebb2ff470636eb809e9.py",
+      "market-village/architecture.py": "production/source-snapshots/7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3.py"
+    }
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: actual PNG inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "visual_review_note": "Vented annular landing pad has connected radial spans and central platform."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "authoredSpec": {
+    "id": "ME-070",
+    "name": "Vented peripheral lunar landing pad",
+    "category": "structure",
+    "intent": "Central landing deck and outer walkway connected by beams over actual peripheral vent gaps; no landing, dust or blast simulation.",
+    "role": "proposed fictional lunar habitation input",
+    "actions": [
+      "inspect",
+      "place",
+      "service"
+    ],
+    "variants": [
+      "idle",
+      "in-use",
+      "service"
+    ],
+    "anchors": [
+      [
+        "origin",
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    ],
+    "authorModel": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "construction_notes": "Central landing deck and outer walkway connected by beams over actual peripheral vent gaps; no landing, dust or blast simulation.",
+    "rationale": "Central landing deck and outer walkway connected by beams over actual peripheral vent gaps; no landing, dust or blast simulation.",
+    "parameters": {
+      "units": "metres",
+      "up": "Z",
+      "seed": null,
+      "deterministic": true
+    },
+    "intended_longest_dimension_range_m": [
+      7.95,
+      8.15
+    ],
+    "decoration_reason": "Pad alignment markers identify proposed approach geometry",
+    "decoration_status": "Functional alignment marks only",
+    "animation": {
+      "implemented": false,
+      "primaryMethod": "static",
+      "rig": null,
+      "clips": [],
+      "suggestedMotions": [],
+      "proposedParts": [],
+      "preparationRequired": [
+        "Separate moving components from merged GLB",
+        "Verify pivots, contacts, limits and coupling; fixed surface infrastructure remains anchored"
+      ],
+      "noAutomaticRootMotion": true
+    },
+    "variant_status": {
+      "implemented": [
+        "static base"
+      ],
+      "proposed": [
+        "in-use",
+        "service"
+      ]
+    },
+    "placement_requirements": {
+      "setting": "fictional lunar surface infrastructure",
+      "not_implemented": "Landing, locomotion, generation, radiation, propulsion, communications, measurement, thermal process or economy"
+    },
+    "limitations": [
+      "Static visual model only; no implemented chemistry, economy, life support, protection or medical behavior.",
+      "No engineering or physiological performance is specified."
+    ],
+    "canonical_review_notes": "Audited against all existing sidecar names/intents; excludes prior helix, dipole, dish, heliostat, trough, radiator, open rover and flame-deflector families. Repeated parts add no bases; canonical review ongoing."
+  },
+  "baseIncrement": 1,
+  "derivation": {},
+  "lineage": {},
+  "files": {
+    "glb": "ME-070.glb",
+    "sha256": "649154a6b0bd3a62cf5dc5651a0b6ef50203a123d352aa16ca6454c03912d8d9",
+    "bytes": 124812
+  }
+}

@@ -1,3 +1,4 @@
+import {SUGAR_SHACK} from './poi/sugar-shack-spec.mjs';
 import {goatPlaySpec} from './ranch-play-spec.mjs';
 import {habitat} from './ranch-habitat.mjs?cows=1';
 export const RANCH_MODELS=['family-home-complete','feed-store-complete','water-point-complete','cattle-shelter-complete','goat-shelter-complete','chicken-coop-complete'];
@@ -7,9 +8,10 @@ export function spaceRequirements(dimensions,level,diameter,counts,preset){
  const home=[model('home','family-home-complete','Family home'),model('water-source','water-point-complete','Shared water point'),model('store','feed-store-complete','Feed store')];
  const pens=[pen('horse',counts.horses),pen('goat',counts.goats),pen('chicken',counts.chickens),pen('cow',counts.cows??2)].filter(p=>p.count>0);
  const supports=[model('coop','chicken-coop-complete','Chicken coop'),model('shelter','goat-shelter-complete','Goat shelter'),model('stable','cattle-shelter-complete','Horse shelter')];
+ const poi={...SUGAR_SHACK};
  const garden={role:'field',label:'Kitchen garden',w:6,d:5,radius:4,spaceTag:true};
  const extra=Array.from({length:Math.max(0,level-1)},()=>model('home','family-home-complete','Family home'));
- return {ranch:[...home,...(preset==='homestead'?pens:[]),garden,...extra,...((counts.playground??1)>0?[{role:'playground',label:'Children’s playground',level:counts.playground??1,w:7*(.8+(counts.playground??1)*.15)+2,d:5.5*(.8+(counts.playground??1)*.15)+2,radius:Math.hypot(7*(.8+(counts.playground??1)*.15)+2,5.5*(.8+(counts.playground??1)*.15)+2)/2}]:[])],paddock:[...pens],crop:[garden,{...garden,label:'Second growing plot'},model('store','feed-store-complete','Garden store')]};
+ return {ranch:[...home,poi,...(preset==='homestead'?pens:[]),garden,...extra,...((counts.playground??1)>0?[{role:'playground',label:'Children’s playground',level:counts.playground??1,w:7*(.8+(counts.playground??1)*.15)+2,d:5.5*(.8+(counts.playground??1)*.15)+2,radius:Math.hypot(7*(.8+(counts.playground??1)*.15)+2,5.5*(.8+(counts.playground??1)*.15)+2)/2}]:[])],paddock:[...pens],crop:[garden,{...garden,label:'Second growing plot'},model('store','feed-store-complete','Garden store')]};
 }
 export function ranchSiteCost(plan,candidate,req){
  const find=role=>plan.placements.find(p=>p.role===role),distance=p=>Math.hypot(candidate.x-p.x,candidate.z-p.z);

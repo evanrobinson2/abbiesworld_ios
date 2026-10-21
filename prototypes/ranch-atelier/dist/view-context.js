@@ -181,3 +181,6 @@
 
 // Shared appearance settings are available on every app page.
 if(typeof document!=='undefined'){const loadAppearance=()=>{if(document.querySelector('script[data-app-appearance]'))return;const s=document.createElement('script');s.type='module';s.src='/app-appearance.js';s.setAttribute('data-app-appearance','true');s.onload=()=>s.setAttribute('data-loaded','true');document.head.append(s);};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',loadAppearance,{once:true});else loadAppearance();}
+
+// Shared jukebox uses registered music assets and starts on user gesture.
+if(typeof document!=='undefined'){const loadJukebox=()=>{if(document.querySelector('script[data-app-jukebox]'))return;const s=document.createElement('script');s.type='module';s.src='/app-jukebox.js';s.dataset.appJukebox='true';document.head.append(s);};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',loadJukebox,{once:true});else loadJukebox();}

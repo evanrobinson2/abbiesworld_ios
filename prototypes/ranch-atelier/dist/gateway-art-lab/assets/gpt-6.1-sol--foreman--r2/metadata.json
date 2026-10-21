@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "1.85 m stylized ranch foreman. Skinned FK skeleton with articulated fingers; in-place looping walk and breathing idle. Layered cotton, folded scarf, stitched leather suspenders, sculpted angular face and swept hair. Front is -Y.",
+  "blenderVersion": "5.2.1 LTS"
+}

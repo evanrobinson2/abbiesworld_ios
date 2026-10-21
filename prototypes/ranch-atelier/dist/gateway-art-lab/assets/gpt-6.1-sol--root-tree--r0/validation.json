@@ -1,0 +1,32 @@
+{
+  "dimensionsM": [
+    8.253137588500977,
+    8.348785400390625,
+    10.354440689086914
+  ],
+  "boundsMin": [
+    -4.235413551330566,
+    -3.864978075027466,
+    -0.03487193584442139
+  ],
+  "boundsMax": [
+    4.01772403717041,
+    4.483807563781738,
+    10.319568634033203
+  ],
+  "triangles": 25270,
+  "materials": 11,
+  "meshObjects": 161,
+  "exportedTriangles": 25270,
+  "bytes": 1718756,
+  "animationClips": 0,
+  "animationChannels": 0,
+  "reimportDimensionsM": [
+    8.253137588500977,
+    8.348785400390625,
+    10.354440689086914
+  ],
+  "motionChanges": false,
+  "issues": [],
+  "technicalPass": true
+}

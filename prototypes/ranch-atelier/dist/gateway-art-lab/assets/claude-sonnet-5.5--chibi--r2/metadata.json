@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Parent inverse matrices fix double offsets; ~1.48m tall with hat, boots on ground. Empties head_socket and hand_socket; hat and bucket are separate parented groups.",
+  "blenderVersion": "5.2.1 LTS"
+}

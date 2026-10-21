@@ -5,7 +5,7 @@
 const applied=new WeakSet();
 export function applyDorfRanch(group){let count=0;
  group.traverse(o=>{if(!o.isMesh)return;for(const m of Array.isArray(o.material)?o.material:[o.material]){const role=m?.userData?.dorfRole;
- if(!['foliage','roof','plaster','timber','clay','ground'].includes(role))continue;count++;if(applied.has(m))continue;applied.add(m);
+ if(!['foliage','roof','plaster','timber','clay','ground'].includes(role))continue;count++;if(applied.has(m)||m.userData.dorfReconstruction==='ranch-adaptation-v1')continue;applied.add(m);
  const previous=m.onBeforeCompile,key=m.customProgramCacheKey();
  m.onBeforeCompile=function(s,r){previous.call(this,s,r);
  s.vertexShader='varying vec3 vDorfPosition; varying float vDorfUp;\n'+s.vertexShader;

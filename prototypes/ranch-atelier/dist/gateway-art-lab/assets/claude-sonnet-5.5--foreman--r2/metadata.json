@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Lofted custom meshes, rigid-weighted to an armature; parent inverse identity, gentler walk swing.",
+  "blenderVersion": "5.2.1 LTS"
+}
