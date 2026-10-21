@@ -1,5 +1,7 @@
 # Ranch Atelier
 
+Read [Development practices](DEVELOPMENT-PRACTICES.md) before extending the Ranch/Sandbox app. It consolidates the project decisions through 2026-10-21 and distinguishes requirements from proposals and dated implementation evidence. Later explicit user instructions take precedence over older notes.
+
 The deployed app source is `dist/`, production https://abbies-ranch-atelier.vercel.app.
 The project contains existing uncommitted work from multiple slug chats. Preserve it.
 

@@ -1,5 +1,7 @@
 # Ranch Atelier
 
+Start with [Development practices](DEVELOPMENT-PRACTICES.md) for the shared generator, simulation, asset, UX, verification and release workflow. The [production snapshot manifest](production-snapshot.json) identifies the 2026-10-21 live-source checkpoint; later production releases may differ.
+
 Snapshot of the Ranch Atelier web prototype, imported into Abbie's World iOS for continued development. This is a standalone web app; it is not yet wired into the native iOS target.
 
 - Web source and Vercel project root: `dist/`
