@@ -1,3 +1,4 @@
+require('node:child_process').execFileSync(process.execPath,['--no-warnings','--experimental-loader','./scripts/character-motion-loader.mjs','./scripts/check-character-motion.mjs'],{stdio:'inherit'});
 const fs = require('node:fs');
 const path = require('node:path');
 const { root } = require('./check-mcp.cjs');
