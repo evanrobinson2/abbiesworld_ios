@@ -930,6 +930,372 @@
    ]
   },
   {
+   "id": "cartel-tycoon",
+   "file": "docs/oracle/identity/examples/cartel-tycoon.json",
+   "schema_version": "1.0",
+   "game": {
+    "title": "Cartel Tycoon",
+    "steam_appid": 1220140,
+    "developer": "Moon Moose",
+    "publisher": "tinyBuild",
+    "release": "2022",
+    "early_access": "2021",
+    "engine": {
+     "value": "Unity",
+     "source": "estimate",
+     "confidence": 0.5,
+     "method": "prior knowledge of public footage; to be confirmed from install file names once installed on the E: drive Steam library"
+    }
+   },
+   "core": {
+    "fantasy": "You are an upstart boss who grows a tiny farm into a region-spanning logistics empire, one route and one district at a time.",
+    "pillars": [
+     "Production chains you can see moving on the map",
+     "Expansion district by district, each with its own loyalty",
+     "Pressure that grows with success, so growth must be managed"
+    ],
+    "signature_moment": "Zooming out to see trucks streaming from plantations through labs and warehouses to an airfield, the whole chain humming, just before pressure forces you to reroute.",
+    "anti_goals": [
+     "no direct unit combat control",
+     "no city-building aesthetics for their own sake"
+    ],
+    "signatures": [
+     {
+      "id": "visible_supply_chain",
+      "layer": "mechanics",
+      "description": "Raw goods are grown, carried by visible vehicles to processing buildings, stored, then carried to export points; every link is a building or a route on the map.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "two_currencies",
+      "layer": "mechanics",
+      "description": "Earnings arrive in a currency you can't spend directly and must convert through slower front businesses before you can build.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "heat_pressure",
+      "layer": "dynamics",
+      "description": "Activity raises attention per district; high attention brings raids that disrupt the chain unless you spread out or lie low.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "district_expansion",
+      "layer": "pacing",
+      "description": "The map is divided into towns and districts you take over one at a time; each unlocks land, buildings and new routes.",
+      "class": "style",
+      "confidence": 0.7
+     },
+     {
+      "id": "successor_lieutenants",
+      "layer": "narrative",
+      "description": "Named lieutenants with traits run parts of the operation; when the leader falls, one of them takes over and play continues.",
+      "class": "style",
+      "confidence": 0.6
+     },
+     {
+      "id": "narco_80s_setting",
+      "layer": "narrative",
+      "description": "A fictionalised 1980s Latin American drug-trade setting, with its characters, comic-style portraits, story and soundtrack.",
+      "class": "expression",
+      "confidence": 0.9
+     }
+    ],
+    "recognisability": {
+     "value": 0.6,
+     "source": "estimate",
+     "confidence": 0.3,
+     "method": "prior knowledge of public footage and store page; to be measured"
+    }
+   },
+   "layers": {
+    "aesthetics": {
+     "fun_mix": {
+      "challenge": 0.35,
+      "discovery": 0.15,
+      "expression": 0.15,
+      "fantasy": 0.25,
+      "narrative": 0.1
+     },
+     "motivations": {
+      "strategy": 0.8,
+      "mastery": 0.6,
+      "achievement": 0.6,
+      "creativity": 0.3,
+      "immersion": 0.5,
+      "social": 0
+     }
+    },
+    "mechanics": {
+     "verbs": [
+      {
+       "verb": "build production building",
+       "input": "click to place on plot"
+      },
+      {
+       "verb": "set or extend a route",
+       "input": "click buildings to link"
+      },
+      {
+       "verb": "convert earnings through fronts",
+       "input": "menu"
+      },
+      {
+       "verb": "take over a district",
+       "input": "click target, assign lieutenant"
+      },
+      {
+       "verb": "lie low or move operations",
+       "input": "menu"
+      }
+     ],
+     "core_loop": {
+      "steps": [
+       "grow raw goods",
+       "process and store",
+       "ship to an export point",
+       "convert earnings",
+       "build and expand",
+       "manage rising pressure"
+      ],
+      "period_s": {
+       "value": 120,
+       "source": "estimate",
+       "confidence": 0.3,
+       "method": "prior knowledge of public footage; to be measured in play",
+       "unit": "s"
+      }
+     },
+     "meta_loop": {
+      "steps": [
+       "take a new district",
+       "unlock buildings and upgrades",
+       "story chapters or sandbox goals"
+      ]
+     },
+     "rules": {
+      "failure_model": "soft",
+      "win": "story goals or sandbox targets",
+      "loss": "leader falls (a lieutenant takes over); survival mode ends the run"
+     },
+     "randomness": {
+      "amount": 0.3,
+      "kind": "output"
+     },
+     "information": "partial",
+     "systems": [
+      "production chains",
+      "logistics routes and vehicles",
+      "storage capacity",
+      "dual currency conversion",
+      "district attention and raids",
+      "district loyalty",
+      "lieutenants with traits",
+      "rival factions"
+     ]
+    },
+    "dynamics": {
+     "emergent_behaviours": [
+      "bottlenecks at storage and export points",
+      "spreading production to keep attention low",
+      "rerouting around raided districts"
+     ],
+     "decision_density_per_min": {
+      "value": 4,
+      "source": "estimate",
+      "confidence": 0.3,
+      "method": "prior knowledge of public footage; to be measured",
+      "unit": "/min"
+     },
+     "skill_strategy_chance": {
+      "skill": 0,
+      "strategy": 0.75,
+      "chance": 0.25
+     }
+    },
+    "interaction": {
+     "input": {
+      "devices": [
+       "mouse",
+       "keyboard"
+      ],
+      "mapping": "cursor"
+     },
+     "camera": {
+      "model": "isometric",
+      "constrained": true
+     },
+     "forgiveness": {
+      "snapping": "slots",
+      "undo": "none",
+      "preview_before_commit": true
+     },
+     "juice": {
+      "particles": 0.3,
+      "screen_shake": 0.1,
+      "scale_pop": 0.3,
+      "sound_on_action": 0.6,
+      "hit_stop": 0
+     }
+    },
+    "art": {
+     "rendering": {
+      "style": "stylised_pbr"
+     },
+     "proportion_and_scale": {
+      "stylisation": 0.6,
+      "toyness": 0.5
+     },
+     "references": [
+      "board-game map with miniature buildings",
+      "comic-style character portraits"
+     ]
+    },
+    "assets": {
+     "kit": "modular",
+     "materials": {
+      "texture_strategy": "hand_painted"
+     }
+    },
+    "interface": {
+     "ui_mode_mix": {
+      "diegetic": 0.3,
+      "non_diegetic": 0.6,
+      "spatial": 0.1,
+      "meta": 0
+     },
+     "onboarding": "scripted_levels"
+    },
+    "audio": {
+     "sfx_character": "mixed"
+    },
+    "narrative": {
+     "narrative_mode": {
+      "evoked": 0.3,
+      "enacted": 0.3,
+      "embedded": 0.1,
+      "emergent": 0.3
+     },
+     "tone": {
+      "cozy_tense": 0.6,
+      "whimsical_grounded": 0.3,
+      "earnest_ironic": 0.3
+     },
+     "themes": [
+      "crime",
+      "power",
+      "succession",
+      "logistics"
+     ]
+    },
+    "pacing": {
+     "structure": "mixed",
+     "tension_curve": "sawtooth",
+     "failure_cost": "lose_progress",
+     "unlocks": [
+      "districts",
+      "buildings",
+      "upgrades",
+      "lieutenants"
+     ]
+    },
+    "market": {
+     "steam_tags": [
+      "Simulation",
+      "Strategy",
+      "Management",
+      "Economy",
+      "Indie"
+     ],
+     "steam_genres": [
+      "Action",
+      "Indie",
+      "Simulation",
+      "Strategy"
+     ]
+    }
+   },
+   "ledger": {
+    "style": [
+     "visible production chain from field to export, with vehicles on routes",
+     "storage and route capacity as the main bottleneck",
+     "earn one currency, convert it slowly into a spendable one",
+     "expansion by districts that each unlock land and routes",
+     "attention that rises with activity and is managed by spreading out",
+     "named helpers with traits who can take over"
+    ],
+    "expression": [
+     "the drug-trade, crime and violence theme and setting",
+     "its characters, names, portraits, dialogue and story",
+     "its map, buildings, vehicles, UI art, music and sound"
+    ]
+   },
+   "assimilation": {
+    "take": [
+     {
+      "layer": "mechanics",
+      "target": "Oracle rules",
+      "setting": "Ranch supply chains: fields and animals produce raw goods (wheat, milk, wool, apples), workshops turn them into products (bread, cheese, yarn, pies), carts carry them along roads to a market stall or the station.",
+      "from_signature": "visible_supply_chain"
+     },
+     {
+      "layer": "dynamics",
+      "target": "Oracle rules",
+      "setting": "Bottlenecks are the puzzle: barns and carts have capacity, so a child sees goods pile up and fixes it by building another cart or a bigger barn.",
+      "from_signature": "visible_supply_chain"
+     },
+     {
+      "layer": "mechanics",
+      "target": "Oracle rules",
+      "setting": "Two kinds of reward: coins from selling, and 'thank-you stars' from neighbours you deliver to. Stars unlock new building types; coins build them.",
+      "from_signature": "two_currencies"
+     },
+     {
+      "layer": "pacing",
+      "target": "Oracle rules",
+      "setting": "Expansion by valleys: helping a neighbouring valley (delivering what it asks for) opens its land, new crops and a new road.",
+      "from_signature": "district_expansion"
+     },
+     {
+      "layer": "dynamics",
+      "target": "Oracle rules",
+      "setting": "Gentle pressure instead of raids: the weather and the seasons (a rainy week floods a road, winter slows fields), so players spread out and plan ahead. Nothing is lost; things just slow down.",
+      "from_signature": "heat_pressure"
+     },
+     {
+      "layer": "narrative",
+      "target": "Oracle rules",
+      "setting": "Ranch hands with traits (fast, careful, loves animals) run a building or a cart; one can be put in charge of a valley.",
+      "from_signature": "successor_lieutenants"
+     },
+     {
+      "layer": "interaction",
+      "target": "camera preset",
+      "setting": "Zoom-out 'whole valley' view that shows every cart moving along its road, the payoff shot of a working chain.",
+      "from_signature": "visible_supply_chain"
+     }
+    ],
+    "leave": [
+     "the drug, crime, violence, police and corruption theme, entirely",
+     "money laundering as a concept (the two rewards are gifts and coins, nothing hidden)",
+     "raids, rival gangs and any loss of what the player built",
+     "leader death and succession (helpers can be promoted, nobody dies)",
+     "its characters, setting, art, music and text"
+    ]
+   },
+   "sources": [
+    "Steam store page and API (app 1220140), read 2026-10-22",
+    "prior knowledge of public gameplay footage"
+   ],
+   "history": [
+    {
+     "note": "First pass from public material on 2026-10-22 before the game was installed. Engine, timings and UI coverage are estimates to replace with measurements from play once it is installed on the E: drive Steam library."
+    }
+   ]
+  },
+  {
    "id": "dorfromantik",
    "file": "docs/oracle/identity/examples/dorfromantik.json",
    "schema_version": "1.0",
