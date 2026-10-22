@@ -28,7 +28,7 @@ export function advanceColony(state,plan,dt){
   if(welcome&&person.welcomeAttempt!==vip.id){
    const entry=vip.boarding.at(-1),target={x:entry.x+2.2+(residentIndex%2)*.8,z:entry.z+(Math.floor(residentIndex/2)-1)*1.5};
    person.welcomeAttempt=vip.id;const accessible=freePoint(target,.3,obstacles,bounds);const route=accessible&&safeRoute(person.position,[accessible],.3,obstacles,bounds);
-   if(route){person.path=route;person.index=0;person.phase='walking';person.nextActivity='Welcoming the VIP visitors';person.activity='Walking to welcome the VIPs';person.welcomeVisit=vip.id;}
+   if(route){person.inside=null;person.destination=null;person.path=route;person.index=0;person.phase='walking';person.nextActivity='Welcoming the VIP visitors';person.activity='Walking to welcome the VIPs';person.welcomeVisit=vip.id;}
   }
   if(welcome&&person.welcomeVisit===vip.id&&person.phase!=='walking'){
    person.phase='welcoming';person.activity=vip.phase==='celebrating'?'Cheering for the VIP visitors':'Waiting to greet the VIP visitors';person.heading=Math.atan2(vip.people[0].position.x-person.position.x,vip.people[0].position.z-person.position.z);continue;
@@ -38,15 +38,15 @@ export function advanceColony(state,plan,dt){
   if(person.phase==='walking'){
    let remaining=dt*(person.child?.75:1.05);
    while(remaining>0&&person.index<person.path.length){const p=person.path[person.index],dx=p.x-person.position.x,dz=p.z-person.position.z,d=Math.hypot(dx,dz),step=Math.min(d,remaining);if(d){person.heading=Math.atan2(dx,dz);person.position.x+=dx/d*step;person.position.z+=dz/d*step;}remaining-=step;if(d<=step)person.index++;else break;}
-   if(person.index===person.path.length){person.phase='activity';person.wait=12;person.activity=person.nextActivity;person.visits++;state.colony.completed[person.activity]=(state.colony.completed[person.activity]||0)+1;experience(state.lifeStories,person.id,'daily-activity',state.seconds,{activity:person.activity});}
+   if(person.index===person.path.length){person.phase='activity';person.inside=person.destination||null;person.wait=12;person.activity=person.nextActivity;person.visits++;state.colony.completed[person.activity]=(state.colony.completed[person.activity]||0)+1;experience(state.lifeStories,person.id,'daily-activity',state.seconds,{activity:person.activity});}
    continue;
   }
   person.wait-=dt;if(person.wait>0)continue;
   const phase=Math.floor(state.seconds/45)%4;
   const targetId=phase===0?person.home:phase===1?(person.child?'habitat':'lab'):phase===2?(person.child?'habitat':'workshop'):person.home;
-  const place=plan.placements.find(p=>p.id===targetId),target={x:place.x,z:place.z+place.radius+1};
+  const place=plan.placements.find(p=>p.id===targetId),target={x:place.x,z:place.z+place.radius+.35};
   const route=safeRoute(person.position,[target],.3,obstacles,bounds);
   if(!route){person.phase='blocked';person.activity='Route blocked';person.wait=8;continue;}
-  person.path=route;person.index=0;person.phase='walking';person.nextActivity=phase===0||phase===3?'Family time':person.child?'Learning at community dome':phase===1?'Research shift':'Equipment inspection';person.activity='Walking · '+person.nextActivity;
+  person.inside=null;person.destination=targetId;person.path=route;person.index=0;person.phase='walking';person.nextActivity=phase===0||phase===3?'Family time':person.child?'Learning at community dome':phase===1?'Research shift':'Equipment inspection';person.activity='Walking · '+person.nextActivity;
  }
 }

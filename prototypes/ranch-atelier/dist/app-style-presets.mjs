@@ -58,5 +58,6 @@ export const themes=[
 ["Sunshine Builders", "Golden sunshine and rounded letters for a bright first building set.", "Fredoka", "Nunito", "#f7e9b6", "#fffbed", "#514626", "#7c7358", "#dcd7c5", "#916215", "#ffffff", "#bed08a", "#99cbd7", "#d0a564", "18px", "Kids"],
 ["Pencil Case", "Notebook blue, purple-pencil accents, and relaxed handwritten headings.", "Patrick Hand", "Quicksand", "#e3e7f4", "#f9faff", "#414b66", "#6f778c", "#d4d7e0", "#5658a3", "#ffffff", "#b3c898", "#a1c7db", "#9c98c4", "18px", "Kids"],
 ["Jungle Jam", "Lively leafy greens and cheerful, chunky lettering for a jungle full of stories.", "Chewy", "Nunito", "#d9e9bf", "#f4ffe4", "#36512b", "#667c59", "#cedcbf", "#507725", "#ffffff", "#a4c873", "#8fc6bf", "#c6a26a", "18px", "Kids"],
-["Bedtime Village", "Gentle lavender twilight and storybook letters for a calm little village.", "Bree Serif", "Nunito", "#e6e1f3", "#f9f6ff", "#494264", "#756f8b", "#d6d2e0", "#7055a0", "#ffffff", "#b8c6ab", "#a4bddc", "#b49fca", "18px", "Kids"]
+["Bedtime Village", "Gentle lavender twilight and storybook letters for a calm little village.", "Bree Serif", "Nunito", "#e6e1f3", "#f9f6ff", "#494264", "#756f8b", "#d6d2e0", "#7055a0", "#ffffff", "#b8c6ab", "#a4bddc", "#b49fca", "18px", "Kids"],
+["Cartoon Pop","Electric meadows, coral rooftops and a cloud-wrapped mountain valley.","Fredoka","Nunito","#91d9ee","#fff9ef","#253444","#526078","#adcddc","#b52b72","#ffffff","#68d52c","#14bde3","#f45b64","18px","Silly"]
 ];

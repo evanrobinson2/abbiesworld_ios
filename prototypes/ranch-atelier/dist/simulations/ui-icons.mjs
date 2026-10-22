@@ -2,6 +2,19 @@
 const cube=(x,y,s=1)=>`<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 4 7 0 14 4 14 12 7 16 0 12Z" fill="currentColor" fill-opacity=".1"/><path d="m0 4 7 4 7-4M7 8v8"/></g>`;
 const gear=Array.from({length:32},(_,i)=>{const a=(i*11.25-5.625)*Math.PI/180,r=i%4===0||i%4===3?8:10;return `${i?'L':'M'}${12+Math.cos(a)*r},${12+Math.sin(a)*r}`;}).join('')+'Z';
 const paths={
+ tiles:'<path d="m12 3 9 5-9 5-9-5 9-5ZM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+ ranch:'<path d="m3 11 9-8 9 8M5 10v11h14V10M9 21v-7h6v7M10 9h4"/>',
+ garden:'<path d="M4 20h16M7 20v-5m5 5V9m5 11v-5M12 9C6 9 5 5 6 3c4 0 6 2 6 6Zm0 3c0-5 3-7 7-7 0 4-2 7-7 7Z"/>',
+ meadow:'<path d="M3 20h18M7 20c0-5-1-8-4-10m9 10V5m5 15c0-6 1-9 4-12M12 12c-4 0-6-3-6-6 4 0 6 2 6 6Z"/>',
+ rocket:'<path d="M9 15c-2-5 0-10 8-12 1 7-1 11-6 13l-2-1ZM9 9 5 10l-2 5 5-1m6 1-1 5-5 1 2-5M5 18l-2 3"/><circle cx="13" cy="8" r="1.5"/>',
+ supply:'<path d="m3 7 9-4 9 4v13H3V7Zm0 0h18M12 3v17M8 12h8m-4-4v8"/>',
+ follow:'<circle cx="12" cy="12" r="6"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/>',
+ interior:'<path d="M4 21V3h16v18M9 21V7h7v14M2 21h20M12 13h1"/>',
+
+ sparkles:'<path d="m12 2 3 7 7 3-7 3-3 7-3-7-7-3 7-3Z"/>',
+ city:'<path d="M3 21V10h6v11m0 0V3h7v18m0 0V8h5v13M2 21h20M12 6h1m-1 4h1m-1 4h1M5 13h1m-1 4h1m12-6h1m-1 4h1"/>',
+ moon:'<path d="M3 17h18M5 17a7 7 0 0 1 14 0M12 10v7M8 21h8M18 3v5m-2-3h4"/>',
+
  automatic:'<path d="M19 7a8 8 0 0 0-13-1L3 9m0-6v6h6M5 17a8 8 0 0 0 13 1l3-3m0 6v-6h-6"/>',
  speed:'<path d="M4 18a9 9 0 1 1 16 0M5 12h2m10 0h2M8 6l1 2m7-2-1 2M12 14l4-4"/><circle cx="12" cy="14" r="2"/>',
  slow:'<path d="m9 5 9 7-9 7ZM4 5v14"/>',
@@ -23,7 +36,7 @@ const paths={
  season:'<path d="M20 3C9 2 3 7 4 14c1 7 11 8 14 1 2-4 2-8 2-12Z M4 21 15 10"/>',
  nature:'<path d="M12 21V10m0 6C4 17 2 11 3 7c6 0 9 3 9 9Zm0-3c0-6 4-9 9-10 1 7-2 11-9 10Z"/>',
 
- settings:`<path d="${gear}"/><circle cx="12" cy="12" r="3"/>`,
+ settings:'<path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3" fill="var(--app-paper,#fffcf0)"/><circle cx="15" cy="17" r="3" fill="var(--app-paper,#fffcf0)"/>',
  sliders:'<path d="M3 6h18M3 12h18M3 18h18"/><path d="M8 3v6M16 9v6M8 15v6"/>',
  pause:'<path d="M8 5v14M16 5v14"/>',
  play:'<path d="m7 4 13 8-13 8Z"/>',

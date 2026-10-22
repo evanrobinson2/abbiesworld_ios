@@ -378,3 +378,25 @@ body.simulation-workspace #inspection :is(#inspect-details,#inspect-live){border
 body.simulation-workspace #inspection #close-inspection span{background:var(--app-border)}
 @media(max-width:760px){body.simulation-workspace #scene-readouts{left:10px;top:64px;max-width:calc(100vw - 20px);padding:9px 12px}body.simulation-workspace #scene-readouts #label{font-size:18px!important}body.simulation-workspace #scene-readouts .scene-widgets{margin-top:6px;gap:18px}}
 @media(max-width:760px){body.simulation-workspace #inspection{top:auto!important;bottom:104px!important;left:10px!important;right:10px!important;width:auto!important;max-width:none!important;max-height:35dvh!important;overflow:auto!important}body.simulation-workspace #scene-readouts #scene-weather-control,body.simulation-workspace #scene-readouts #scene-season-control{min-height:32px}}
+
+/* Generator-owned hero cards form the Sandbox shelf, matching the control-bar height. */
+#current-scene-type{display:flex;align-items:stretch;gap:5px;pointer-events:auto;height:var(--hero-height,66px);max-height:100px;font:600 12px var(--app-font);z-index:36}
+.generator-hero-track{display:flex;flex:1;gap:8px;min-width:0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;scrollbar-width:none;overscroll-behavior-x:contain}
+.generator-hero-track::-webkit-scrollbar{display:none}
+#current-scene-type .generator-hero{position:relative;flex:0 0 calc(var(--hero-height,66px)*2.1);height:100%;min-height:0;display:flex;align-items:center;gap:9px;padding:9px 12px;box-sizing:border-box;border:1px solid var(--app-border,#d8cfb5);border-radius:15px;background:var(--app-paper,#fff9ed);color:var(--app-ink,#43513d);scroll-snap-align:start;touch-action:pan-x;user-select:none;cursor:grab;overflow:hidden;text-align:left}
+#current-scene-type .generator-hero[aria-pressed=true]{border:2px solid var(--app-accent,#b84931);background:#f5efda;color:var(--app-ink,#43513d)}
+.generator-hero-art{flex:0 0 44px;height:44px;display:grid;place-items:center}.generator-hero-art svg{width:44px;height:42px}.generator-hero-name{position:relative;z-index:2;line-height:1.2;font-size:12px;pointer-events:none}
+#current-scene-type .generator-carousel-arrow{flex:0 0 28px;padding:0;border:0;border-radius:10px;background:var(--app-paper,#fff9ed);color:var(--app-ink,#43513d);font-size:24px;min-width:28px;min-height:44px}
+#current-scene-type .generator-hero .live-tray-canvas{width:65%;height:100%;position:absolute;left:0;top:0;pointer-events:none;background:transparent}
+#current-scene-type .generator-hero:has(.live-tray-canvas) .generator-hero-art{visibility:hidden;flex-basis:52%}
+#current-scene-type .generator-hero[aria-busy=true]:after{content:'Preparing…';position:absolute;bottom:2px;left:10px;font-size:9px;background:var(--app-paper,#fff9ed);padding:1px 4px;border-radius:4px}
+body.scene-dropper-hidden #current-scene-type{display:none!important}
+#tile-chooser:not([hidden]){width:min(760px,calc(100vw - 20px));height:66px;min-height:66px;padding:10px 12px;grid-template-columns:44px 44px minmax(0,1fr) 44px;gap:8px}
+#tile-chooser .tile-options,#tile-chooser .tile-expand-heading{display:none!important}
+#tile-chooser .placement-axes{grid-column:3;grid-row:1;gap:8px}#tile-chooser .placement-advanced{grid-column:4;grid-row:1}
+#tile-chooser .tile-preview-status{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+@media(max-width:600px){#tile-chooser:not([hidden]){grid-template-columns:40px 40px minmax(0,1fr) 40px;padding:10px;gap:5px}#tile-chooser .placement-axes{grid-column:3;grid-row:1;gap:4px}#tile-chooser .placement-facet{width:40px;height:40px}.generator-hero-name{font-size:11px}}
+
+#current-scene-type .generator-hero[aria-pressed=true]{background:#f5efda!important;color:var(--app-ink,#43513d)!important}
+#current-scene-type .generator-hero .live-tray-canvas{display:none}
+#current-scene-type .generator-hero:has(.live-tray-canvas) .generator-hero-art{visibility:visible;flex-basis:44px}

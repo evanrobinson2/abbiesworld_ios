@@ -4,8 +4,9 @@ import {planAssembly,inside} from './tile-adapter.js';
 import {newEnglandTerrain,assessRanchTerrain,slopeAt} from './new-england-terrain.mjs';
 import {TILE_RADIUS_METRES} from './tile-metrics.js';
 import {safeRoute} from './ranch-navigation.mjs';
+const WALK_PROBES=[[0,0],[1,0],[-1,0],[0,1],[0,-1]];
 export function terrainWalkable(h,p,r=0){
- for(const [x,z] of [[0,0],[r,0],[-r,0],[0,r],[0,-r]])if(!Number.isFinite(h(p.x+x,p.z+z))||slopeAt(h,p.x+x,p.z+z)>.25)return false;
+ for(const [dx,dz] of WALK_PROBES){const x=p.x+dx*r,z=p.z+dz*r;if(!Number.isFinite(h(x,z))||slopeAt(h,x,z)>.25)return false;}
  return true;
 }
 export function footprintFits(h,plan,candidate,req){
