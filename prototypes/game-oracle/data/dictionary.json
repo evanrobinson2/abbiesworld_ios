@@ -1,0 +1,145 @@
+[
+  {
+    "term": "pixel art",
+    "aliases": [
+      "pixel",
+      "pixels",
+      "pixelated",
+      "sprite",
+      "sprites",
+      "retro pixels"
+    ],
+    "field": "rendering"
+  },
+  {
+    "term": "hand-drawn",
+    "aliases": [
+      "drawn",
+      "illustrated",
+      "illustration",
+      "sketch",
+      "storybook"
+    ],
+    "field": "rendering"
+  },
+  {
+    "term": "cartoon",
+    "aliases": [
+      "cartoony",
+      "cartoons",
+      "toon",
+      "playful"
+    ],
+    "field": "rendering"
+  },
+  {
+    "term": "stylized",
+    "aliases": [
+      "stylised",
+      "nonphotorealistic",
+      "non-photorealistic"
+    ],
+    "field": "rendering"
+  },
+  {
+    "term": "realistic",
+    "aliases": [
+      "realism",
+      "photorealistic",
+      "naturalistic"
+    ],
+    "field": "rendering"
+  },
+  {
+    "term": "isometric",
+    "aliases": [
+      "iso",
+      "axonometric",
+      "diorama"
+    ],
+    "field": "perspective"
+  },
+  {
+    "term": "top-down",
+    "aliases": [
+      "topdown",
+      "overhead",
+      "birds eye",
+      "birdseye"
+    ],
+    "field": "perspective"
+  },
+  {
+    "term": "side-view",
+    "aliases": [
+      "side view",
+      "side-scroller",
+      "sidescroller",
+      "side scrolling",
+      "side-on"
+    ],
+    "field": "perspective"
+  },
+  {
+    "term": "first-person",
+    "aliases": [
+      "first person",
+      "fps"
+    ],
+    "field": "perspective"
+  },
+  {
+    "term": "third-person",
+    "aliases": [
+      "third person",
+      "thirdperson"
+    ],
+    "field": "perspective"
+  },
+  {
+    "term": "colorful",
+    "aliases": [
+      "colourful",
+      "bright",
+      "vibrant",
+      "saturated"
+    ],
+    "field": "palette"
+  },
+  {
+    "term": "voxel",
+    "aliases": [
+      "voxels",
+      "blocky",
+      "blocks"
+    ],
+    "field": "rendering"
+  },
+  {
+    "term": "2D",
+    "aliases": [
+      "two dimensional",
+      "two-dimensional",
+      "2d"
+    ],
+    "field": "dimension"
+  },
+  {
+    "term": "3D",
+    "aliases": [
+      "three dimensional",
+      "three-dimensional",
+      "3d"
+    ],
+    "field": "dimension"
+  },
+  {
+    "term": "Hybrid",
+    "aliases": [
+      "2.5d",
+      "hybrid",
+      "mixed dimensional"
+    ],
+    "field": "dimension"
+  }
+]

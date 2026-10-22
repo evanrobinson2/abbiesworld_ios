@@ -1,0 +1,12 @@
+{
+  "name": "abbies-game-oracle",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node sync-repo-data.mjs && node --check anatomy.js && node --test test.mjs anatomy.test.mjs director.test.mjs && node build.mjs",
+    "test": "node --test test.mjs anatomy.test.mjs director.test.mjs"
+  },
+  "engines": {
+    "node": "24.x"
+  }
+}

@@ -119,3 +119,7 @@ If the work cannot be done, post `"kind":"failed"` with the reason and what woul
 
 Every run must end with exactly one of `completed`, `question` or `failed` for its `rev`, unless the
 duplicate check told you to stop silently.
+
+## Game design requests
+
+When a dispatch asks for a game, mini-game, scene or story, ask the Game Oracle first: `POST https://abbies-game-oracle.vercel.app/api/consult {"idea": ..., "audience": "kid|family|maker"}` (or the `consult_oracle` tool on its MCP at `/api/mcp`). Build from its plan (rules, beats, choices, presentation style, factory requests), and record the plan with the work. See `prototypes/game-oracle/README.md`.
