@@ -45,7 +45,7 @@ export function ridgeHelmet({ berkasovo = false, scale = 1, color = C.iron } = {
     }
   }
   g.scale.setScalar(scale);
-  g.userData.role = "story-helmet";
+  g.userData.role = berkasovo ? "story-helmet" : "ridge-helmet";
   return g;
 }
 
@@ -80,71 +80,101 @@ export function roundShield(color = C.woodDark) {
   return g;
 }
 
+// A cloak: a partial cone wrapped round the back, with alternating pleat depth so it reads as folded cloth.
+export function cloakGeo(rTop, rBot, h, n = 14, wrap = 1.35, depth = 0.025) {
+  const pos = [], a0 = Math.PI / 2 + (Math.PI * wrap) / 2;
+  const P = (i, y) => { const a = a0 - (i / n) * Math.PI * wrap, k = y / -h, r = rTop + (rBot - rTop) * k + (i % 2 ? depth * (0.4 + k) : 0);
+    return [Math.cos(a) * r, y, -Math.sin(a) * r]; };
+  for (let i = 0; i < n; i++) { const a = P(i, 0), b = P(i + 1, 0), c = P(i + 1, -h), d = P(i, -h); pos.push(...a, ...d, ...c, ...a, ...c, ...b); }
+  const g = new THREE.BufferGeometry(); g.setAttribute("position", new THREE.Float32BufferAttribute(pos, 3)); return g;
+}
+
 // A papercraft person. Joints are groups so the scene can animate them.
 // kind: "goth" | "roman" | "child" | "woman"
 export function figure({ kind = "goth", height = 1.78, tunic = C.wool, cloak = C.brown, trousers = C.brown, hair = C.hair,
-  helmet = null, shield = null, spear = false, wound = false, seed = 1 } = {}) {
+  helmet = null, shield = null, spear = false, wound = false, beard = null, seed = 1 } = {}) {
   const s = height / 1.78, child = kind === "child", r = rng(seed);
   const root = new THREE.Group(), hips = new THREE.Group(); root.add(hips);
-  const legLen = 0.86 * s, torso = 0.6 * s;
+  const legLen = (child ? 0.8 : 0.86) * s, torso = (child ? 0.62 : 0.6) * s, sw = child ? 0.85 : kind === "woman" ? 0.88 : 1;
   hips.position.y = legLen;
   const legs = [];
   for (const side of [-1, 1]) {
     const hip = new THREE.Group(); hip.position.x = side * 0.1 * s; hips.add(hip);
-    const thigh = prism(0.07 * s, 0.055 * s, legLen * 0.5, trousers, 5, { seed: seed + side }); thigh.position.y = -legLen * 0.25; hip.add(thigh);
+    const thigh = prism(0.075 * s, 0.058 * s, legLen * 0.5, trousers, 6, { seed: seed + side }); thigh.position.y = -legLen * 0.25; hip.add(thigh);
     const knee = new THREE.Group(); knee.position.y = -legLen * 0.5; hip.add(knee);
-    const shin = prism(0.055 * s, 0.045 * s, legLen * 0.46, trousers, 5); shin.position.y = -legLen * 0.23; knee.add(shin);
-    const boot = block(0.1 * s, 0.07 * s, 0.2 * s, C.woodDark); boot.position.set(0, -legLen * 0.47, 0.04 * s); knee.add(boot);
+    const shin = prism(0.058 * s, 0.045 * s, legLen * 0.46, trousers, 6); shin.position.y = -legLen * 0.23; knee.add(shin);
+    // leg wrappings: two thin hemmed bands
+    for (const k of [0.3, 0.6]) { const w = prism(0.06 * s, 0.06 * s, 0.025 * s, C.woodDark, 6); w.position.y = -legLen * 0.46 * k; knee.add(w); }
+    const boot = paper(new THREE.BoxGeometry(0.1 * s, 0.08 * s, 0.22 * s, 1, 1, 2), C.woodDark, { crumple: 0.08, seed }); boot.position.set(0, -legLen * 0.47, 0.045 * s); knee.add(boot);
     legs.push({ hip, knee });
   }
   const chest = new THREE.Group(); hips.add(chest);
-  const body = creases(paper(new THREE.CylinderGeometry(0.17 * s, 0.15 * s, torso, 6, 2), tunic, { crumple: 0.06, seed }), 35, 0x2a2420, 0.2);
+  const bodyGeo = new THREE.CylinderGeometry(0.21 * s * sw, 0.15 * s * sw, torso, 7, 2); bodyGeo.scale(1, 1, 0.72);
+  const body = creases(paper(bodyGeo, tunic, { crumple: 0.07, seed }), 35, 0x2a2420, 0.22);
   body.position.y = torso / 2; chest.add(body);
-  const skirt = pleats(0.42 * s, (kind === "woman" ? 0.75 : 0.32) * s, tunic, 10, 0.03 * s, 0.25);
-  const skirtB = skirt.clone(); skirt.position.set(0, 0.04 * s, 0.13 * s); skirtB.position.set(0, 0.04 * s, -0.13 * s);
-  const skirtL = skirt.clone(); skirtL.rotation.y = Math.PI / 2; skirtL.position.set(0.15 * s, 0.04 * s, 0); skirtL.scale.x = 0.62;
-  const skirtR = skirtL.clone(); skirtR.position.x = -0.15 * s;
-  chest.add(skirt, skirtB, skirtL, skirtR);
-  const belt = prism(0.165 * s, 0.165 * s, 0.05 * s, kind === "roman" ? C.gilt : C.woodDark, 6); belt.position.y = 0.06 * s; chest.add(belt);
+  // tunic skirt: a flared pleated ring
+  const skirtGeo = cloakGeo(0.16 * s * sw, (kind === "woman" ? 0.3 : 0.24) * s, (kind === "woman" ? 0.78 : 0.34) * s, 14, 2, 0.02 * s);
+  const skirt = paper(skirtGeo, tunic, { crumple: 0 }); skirt.position.y = 0.06 * s; skirt.scale.z = 0.8; chest.add(skirt);
   if (kind === "roman") {
-    // mail shirt over the tunic: a shingled grey band
-    const mail = paper(new THREE.CylinderGeometry(0.18 * s, 0.17 * s, torso * 0.75, 7, 3), 0x8a8f92, { crumple: 0.12, seed: seed + 3 });
+    // woven roundels on the tunic: cut-paper appliqué at the skirt hem
+    for (const x of [-1, 1]) { const o = paper(new THREE.CircleGeometry(0.035 * s, 7), 0x6e2a4a, { crumple: 0 }); o.position.set(x * 0.12 * s, -0.2 * s, 0.19 * s); chest.add(o); }
+    const mail = paper(new THREE.CylinderGeometry(0.22 * s, 0.17 * s, torso * 0.8, 9, 4).scale(1, 1, 0.75), 0x7f8589, { crumple: 0.16, seed: seed + 3 });
     mail.position.y = torso * 0.55; chest.add(mail);
   }
-  // cloak: a pleated sheet hung from the shoulders
-  const cl = pleats(0.5 * s, (child ? 0.6 : 1.05) * s, cloak, 9, 0.04 * s, 0.35);
-  cl.position.set(0, torso + 0.02, -0.16 * s); cl.rotation.x = 0.08; chest.add(cl);
-  const brooch = paper(new THREE.OctahedronGeometry(0.025 * s, 0), kind === "roman" ? C.gilt : 0xb7b0a0, { crumple: 0 });
-  brooch.position.set(0.12 * s, torso - 0.02, 0.12 * s); chest.add(brooch);
+  const belt = paper(new THREE.CylinderGeometry(0.162 * s * sw, 0.162 * s * sw, 0.05 * s, 8).scale(1, 1, 0.74), kind === "roman" ? C.gilt : C.woodDark, { crumple: 0 }); belt.position.y = 0.06 * s; chest.add(belt);
+  const buckle = plate(0.05 * s, 0.045 * s, kind === "roman" ? C.gilt : 0xb7a77a, 0.2); buckle.position.set(0, 0.06 * s, 0.125 * s); chest.add(buckle);
+  // cloak wrapped round the back and pinned at the right shoulder
+  const cl = creases(paper(cloakGeo(0.2 * s * sw, 0.3 * s, (child ? 0.62 : 1.05) * s, 16, 1.3, 0.03 * s), cloak, { crumple: 0 }), 40, 0x2a2018, 0.3);
+  cl.position.set(0, torso + 0.02, -0.02 * s); cl.scale.z = 0.85; cl.rotation.x = 0.06; chest.add(cl);
+  const collar = paper(new THREE.TorusGeometry(0.13 * s, 0.035 * s, 4, 9).rotateX(Math.PI / 2), cloak, { crumple: 0.1, seed }); collar.position.y = torso; chest.add(collar);
+  const brooch = paper(new THREE.OctahedronGeometry(0.03 * s, 0), kind === "roman" ? C.gilt : 0xc9c0a8, { crumple: 0, roughness: 0.5 });
+  brooch.position.set(0.13 * s, torso - 0.02, 0.1 * s); chest.add(brooch);
   const arms = [];
   for (const side of [-1, 1]) {
-    const sh = new THREE.Group(); sh.position.set(side * 0.22 * s, torso - 0.06 * s, 0); chest.add(sh);
-    const upper = prism(0.055 * s, 0.045 * s, 0.3 * s, tunic, 5); upper.position.y = -0.15 * s; sh.add(upper);
+    const sh = new THREE.Group(); sh.position.set(side * 0.24 * s * sw, torso - 0.07 * s, 0); chest.add(sh);
+    const cap = paper(new THREE.IcosahedronGeometry(0.07 * s, 0), tunic, { crumple: 0 }); sh.add(cap);
+    const upper = prism(0.06 * s, 0.05 * s, 0.3 * s, tunic, 6); upper.position.y = -0.15 * s; sh.add(upper);
     const elbow = new THREE.Group(); elbow.position.y = -0.3 * s; sh.add(elbow);
-    const fore = prism(0.045 * s, 0.04 * s, 0.27 * s, tunic, 5); fore.position.y = -0.13 * s; elbow.add(fore);
-    const hand = paper(new THREE.IcosahedronGeometry(0.045 * s, 0), C.skin, { crumple: 0 }); hand.position.y = -0.29 * s; elbow.add(hand);
+    const fore = prism(0.05 * s, 0.042 * s, 0.26 * s, tunic, 6); fore.position.y = -0.13 * s; elbow.add(fore);
+    const hand = paper(new THREE.BoxGeometry(0.07 * s, 0.1 * s, 0.045 * s, 1, 2, 1), C.skin, { crumple: 0.1, seed: seed + side }); hand.position.y = -0.3 * s; elbow.add(hand);
     arms.push({ sh, elbow, hand });
   }
   const neck = new THREE.Group(); neck.position.y = torso; chest.add(neck);
-  const headSize = (child ? 0.13 : 0.115) * s * (child ? 1.25 : 1);
-  const head = creases(paper(new THREE.IcosahedronGeometry(headSize, 1), C.skin, { crumple: 0.1, seed: seed + 9 }), 30, 0x3a2a20, 0.25);
-  head.scale.set(0.92, 1.1, 1); head.position.y = headSize * 1.25; neck.add(head);
-  const hairCap = paper(new THREE.SphereGeometry(headSize * 1.06, 7, 4, 0, Math.PI * 2, 0, Math.PI * 0.55), hair, { crumple: 0.15, seed: seed + 5 });
-  hairCap.position.copy(head.position); hairCap.position.y += headSize * 0.08; hairCap.rotation.x = -0.35; neck.add(hairCap);
-  if (kind !== "roman") {
-    const long = pleats(headSize * 1.7, headSize * (kind === "woman" ? 2.6 : 1.6), hair, 6, 0.02, 0.2);
-    long.position.set(0, head.position.y + headSize * 0.4, -headSize * 0.75); neck.add(long);
+  const neckM = prism(0.05 * s, 0.055 * s, 0.08 * s, C.skin, 6); neckM.position.y = 0.03 * s; neck.add(neckM);
+  const headSize = (child ? 0.15 : 0.115) * s;
+  const headG = new THREE.Group(); headG.position.y = headSize * 1.2; neck.add(headG);
+  const head = creases(paper(new THREE.IcosahedronGeometry(headSize, 1), C.skin, { crumple: 0.06, seed: seed + 9 }), 30, 0x3a2a20, 0.18);
+  head.scale.set(0.9, 1.08, 0.98); headG.add(head);
+  // face: a folded nose, brow ledge, eyes as cut-paper dots, cheeks
+  const nose = paper(new THREE.ConeGeometry(headSize * 0.17, headSize * 0.42, 3), C.skin, { crumple: 0 }); nose.rotation.x = Math.PI / 2 + 0.25; nose.position.set(0, -headSize * 0.05, headSize * 0.98); headG.add(nose);
+  const brow = plate(headSize * 1.1, headSize * 0.16, C.skin, 0.25); brow.position.set(0, headSize * 0.22, headSize * 0.86); brow.rotation.x = -0.2; headG.add(brow);
+  for (const x of [-1, 1]) {
+    const eye = paper(new THREE.CircleGeometry(headSize * (child ? 0.13 : 0.1), 6), 0x2a1e18, { crumple: 0, roughness: 0.5 }); eye.position.set(x * headSize * 0.36, headSize * 0.08, headSize * 0.9); eye.rotation.y = x * 0.3; headG.add(eye);
+    const glint = paper(new THREE.CircleGeometry(headSize * 0.035, 4), 0xffffff, { crumple: 0 }); glint.position.set(x * headSize * 0.36 + headSize * 0.03, headSize * 0.11, headSize * 0.92); headG.add(glint);
+    if (child) { const cheek = paper(new THREE.CircleGeometry(headSize * 0.12, 6), 0xe59a86, { crumple: 0 }); cheek.position.set(x * headSize * 0.52, -headSize * 0.22, headSize * 0.78); cheek.rotation.y = x * 0.6; headG.add(cheek); }
   }
-  if (helmet) { helmet.position.set(0, head.position.y + headSize * 0.25, 0); helmet.scale.multiplyScalar(s * headSize / 0.13); neck.add(helmet); hairCap.visible = false; }
+  const hairCap = creases(paper(new THREE.SphereGeometry(headSize * 1.08, 8, 5, 0, Math.PI * 2, 0, Math.PI * 0.52), hair, { crumple: 0.14, seed: seed + 5 }), 30, 0x2a1e14, 0.3);
+  hairCap.position.y = headSize * 0.1; hairCap.rotation.x = -0.3; headG.add(hairCap);
+  if (kind !== "roman") {
+    const long = paper(cloakGeo(headSize * 0.95, headSize * 1.15, headSize * (kind === "woman" ? 2.6 : child ? 1.1 : 1.7), 10, 1.0, 0.02), hair, { crumple: 0 });
+    long.position.set(0, headSize * 0.5, -headSize * 0.1); headG.add(long);
+  }
+  if (beard) {
+    const bd = creases(paper(cloakGeo(headSize * 0.8, headSize * 0.35, headSize * 1.1, 8, 0.75, 0.02), beard, { crumple: 0 }), 40, 0x2a1e14, 0.3);
+    bd.rotation.y = Math.PI; bd.position.set(0, -headSize * 0.2, headSize * 0.1); headG.add(bd);
+    const mo = plate(headSize * 0.7, headSize * 0.12, beard, 0.3); mo.position.set(0, -headSize * 0.3, headSize * 0.95); headG.add(mo);
+  }
+  if (helmet) { helmet.position.set(0, headSize * 0.2, 0); helmet.scale.multiplyScalar(s * headSize / 0.115 * 0.95); headG.add(helmet); hairCap.visible = false; }
   if (shield) { shield.position.set(-0.08 * s, -0.05 * s, 0.12 * s); shield.rotation.y = 0.2; arms[0].elbow.add(shield); }
   if (spear) {
-    const sp = prism(0.015, 0.015, 2.4 * s, C.wood, 4); const tip = paper(new THREE.ConeGeometry(0.03, 0.2, 4), C.iron, { crumple: 0 });
+    const sp = prism(0.015, 0.015, 2.4 * s, C.wood, 4); const tip = paper(new THREE.ConeGeometry(0.03, 0.22, 4), C.iron, { crumple: 0 });
     tip.position.y = 1.25 * s; sp.add(tip); sp.position.set(0, 0.35 * s, 0.05); arms[1].hand.add(sp);
   }
   if (wound) {
-    const stain = plate(0.12 * s, 0.16 * s, C.blood, 0.1); stain.position.set(-0.08 * s, torso * 0.35, 0.16 * s); chest.add(stain);
+    const stain = plate(0.13 * s, 0.18 * s, C.blood, 0.1); stain.position.set(-0.09 * s, torso * 0.35, 0.155 * s); chest.add(stain);
+    const band = paper(new THREE.TorusGeometry(headSize * 0.98, headSize * 0.07, 3, 10).rotateX(Math.PI / 2), 0xe8dcc4, { crumple: 0 }); band.position.y = headSize * 0.25; band.rotation.z = 0.15; headG.add(band);
   }
-  root.userData.rig = { hips, chest, legs, arms, neck, head, s, legLen };
+  root.userData.rig = { hips, chest, legs, arms, neck, head: headG, s, legLen };
   root.traverse(o => { if (o.isMesh) o.castShadow = true; });
   return root;
 }
@@ -278,12 +308,15 @@ export function gatehouse({ length = 70 } = {}) {
     const roof = paper(new THREE.ConeGeometry(2.6, 2.0, 4), C.madder, { crumple: 0.1, seed: 20 + s }); roof.rotation.y = Math.PI / 4; roof.position.set(s * (gateW / 2 + towerW / 4 + 0.6), H + 4.6, 1.6); roof.scale.z = 1.6; g.add(roof);
     const win = block(0.5, 0.9, 0.1, 0x2a221c); win.position.set(s * (gateW / 2 + towerW / 4 + 0.6), H + 1.2, 4.36); g.add(win);
   }
-  // timber doors, one half open
+  // timber doors; g.userData.open(0..1) swings them
+  const doors = [];
   for (const s of [-1, 1]) {
     const d = creases(block(gateW / 2 - 0.05, gateH - 0.6, 0.12, C.woodDark, { seed: 30 + s }));
     const hinge = new THREE.Group(); hinge.position.set(s * gateW / 2, 0, T / 2 + 0.2); g.add(hinge);
-    d.position.set(-s * (gateW / 4), (gateH - 0.6) / 2, 0); hinge.add(d); hinge.rotation.y = s > 0 ? -1.2 : 0.15;
+    d.position.set(-s * (gateW / 4), (gateH - 0.6) / 2, 0); hinge.add(d); hinge.userData.side = s; doors.push(hinge);
   }
+  g.userData.open = k => { for (const h of doors) h.rotation.y = h.userData.side * 1.25 * k; };
+  g.userData.open(0);
   // inner glow so the opening reads as a lit town behind
   const glow = new THREE.Mesh(new THREE.PlaneGeometry(gateW, gateH), new THREE.MeshBasicMaterial({ color: 0xffb46a }));
   glow.position.set(0, gateH / 2, -T / 2 - 0.4); g.add(glow);

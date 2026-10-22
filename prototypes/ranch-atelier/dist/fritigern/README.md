@@ -6,13 +6,15 @@ Open `/fritigern/` on the Atelier site. Everything is built procedurally in the 
 
 - `paper.js`: the papercraft construction grammar (facet, tint, plate, strip, pleats, creases), ported from `tools/paper-warrior/paper.py`.
 - `props.js`: era props built only from the grammar: ridge helmets (Intercisa and Berkasovo types), oval and round shields, figures, ox wagon, ox, tent, campfire, gatehouse, torch.
-- `scene.js`: layout, 40-second timeline, camera shots, atmosphere and the sightline test.
+- `scene.js`: layout, 42-second timeline, the director's cut (`CUT`), camera moves, atmosphere and the sightline test.
+- `overlays.js`: presentation styles over the same scene: `clean`, `cinema`, `storybook`, `hud`, `telltale`.
+- `assets/ridge_helmet.glb`: the guards' Intercisa ridge helmet from the paper helmet study (`tools/paper-helmet`).
 - `provenance.json`: what every asset is and where it came from.
 - Era reference: `docs/fritigern/EQUIPMENT.md` at the repo root.
 
 ## Query parameters
 
-`?shot=director|wide|alaric|over|reverse|follow|helmet|plan|orbit`, `&t=` seconds (pauses there), `&ui=0` hides the overlay, `&rays=1` draws the sightline, `&layout=a|b` picks one of two wagon placements.
+`?shot=director|establish|face|push|track|two|wide|alaric|over|reverse|follow|helmet|plan|orbit`, `&style=clean|cinema|storybook|hud|telltale`, `&manual=1` (render only on `__scene.renderAt(t)`, for capture), `&t=` seconds (pauses there), `&ui=0` hides the overlay, `&rays=1` draws the sightline, `&layout=a|b` picks one of two wagon placements.
 
 ## Sightline test
 
