@@ -1,3 +1,4 @@
+import '/model-store.mjs'; // models come from R2 (tools/model-store), bundled files are the fallback
 import {compactWorkspace} from './compact-workspace.mjs';
 import {createAICompositionUI} from './ai-composition-ui.mjs';
 import {constructionBoundary,materialize} from './ai-construction.mjs';

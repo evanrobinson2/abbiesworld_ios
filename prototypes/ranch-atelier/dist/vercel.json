@@ -1,6 +1,10 @@
 {
   "rewrites": [
     {
+      "source": "/r2/:path*",
+      "destination": "https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev/:path*"
+    },
+    {
       "source": "/models",
       "destination": "/models/index.html"
     },
