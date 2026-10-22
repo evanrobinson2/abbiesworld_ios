@@ -95,7 +95,7 @@ const firstNames=['Robin','Alex','Morgan','Jamie','Evelyn','Francis','Ruth','Sam
 const surnames=['Bell','Reed','Ellis','Ward','Hayes','Lane','Wells','Brooks','Green','Bennett','Gray','Morgan','Hill','Parker','Cole','Shaw'];
 export function inventIdentity(person){const key=`${person.world}:${person.id}`,role=roleOf(person),society=SOCIETIES[person.society];
  return {version:1,id:person.id,world:person.world,role:person.role,society:person.society,household:person.household,
- name:`${pick(firstNames,key+'first')} ${pick(surnames,person.world+person.household)}`,age:person.age,
+ name:person.storyName||`${pick(firstNames,key+'first')} ${pick(surnames,person.world+person.household)}`,age:person.age,
  disposition:pick(['patient and observant','warm and practical','quietly humorous','curious and methodical','reserved and dependable','outgoing and thoughtful'],key+'temperament'),
  interest:pick(['sketching local buildings','growing kitchen herbs','listening to radio plays','repairing old bicycles','singing with neighbors','reading adventure stories','keeping a garden notebook','playing board games'],key+'interest'),
  aspiration:person.age<18?'Learn a new skill with friends':pick(['Organize a neighborhood picnic','Make more time for an evening class','Help a neighbor finish a home project','Save for a visit to a distant friend'],key+'wish'),

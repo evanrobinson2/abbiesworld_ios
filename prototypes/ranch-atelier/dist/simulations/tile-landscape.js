@@ -22,7 +22,7 @@ export function dressingPlan(plan,settings,heightAt){
   items.push({...p,habitat:field?.kind,kind,radius,size:(mountain&&kind==='tree'?1.15:.7)+rng()*.7,angle:rng()*Math.PI*2});
  }
  if(settings.props)for(const o of plan.placements.filter(o=>['barn','store','home','shelter'].includes(o.role))){
-  for(let i=0;i<3;i++){const a=o.angle+Math.PI/2+i*.24,p={x:o.x+Math.sin(a)*(o.radius+2.5),z:o.z+Math.cos(a)*(o.radius+2.5)};if(clear(p,.6))items.push({...p,kind:'prop',role:o.role,slot:i,model:KIT_PROPS?KIT_PROPS[(i+Math.round(Math.abs(o.x*7+o.z*3)))%KIT_PROPS.length]:o.role==='home'?'wood-partial':i%2?'hay-partial':'ration-full',size:1,angle:o.angle});}
+  for(let i=0;i<3;i++){const a=o.angle+Math.PI/2+i*.24,p={x:o.x+Math.sin(a)*(o.radius+2.5),z:o.z+Math.cos(a)*(o.radius+2.5)};if(clear(p,.6))items.push({...p,kind:'prop',model:KIT_PROPS?KIT_PROPS[(i+Math.round(Math.abs(o.x*7+o.z*3)))%KIT_PROPS.length]:o.role==='home'?'wood-partial':i%2?'hay-partial':'ration-full',size:1,angle:o.angle});}
  }
  return items;
 }

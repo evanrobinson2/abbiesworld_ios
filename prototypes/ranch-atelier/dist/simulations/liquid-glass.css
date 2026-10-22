@@ -1,0 +1,24 @@
+/* Liquid glass for the floating control layer, in every app style.
+   Panels tint with the style's own paper colour, blur and saturate the world behind them,
+   carry a bright rim and a soft drop, and catch a highlight that follows the pointer.
+   Chromium desktop also bends the world at the panel edges (see liquid-glass.mjs).
+   The world itself and tile content stay opaque and crisp. */
+:root{--lg-tint:color-mix(in srgb,var(--app-paper,#fffcf0) var(--lg-mix,42%),transparent);--lg-tint-strong:color-mix(in srgb,var(--app-paper,#fffcf0) var(--lg-mix-strong,62%),transparent);--lg-rim:color-mix(in srgb,#fff 78%,transparent);--lg-edge:color-mix(in srgb,var(--app-ink,#253444) 14%,transparent);--lg-blur:blur(16px) saturate(1.8) brightness(1.04)}
+html:root:not(#lg) body.simulation-workspace :is(header.grouped-toolbar,#scene-tools-drawer,#inspection,#advanced-panel,.facet-picker,#ranch-notices,#compact-controls,#scene-build-progress,#site-warning-details,#scene-generator-picker,#tile-chooser,#developer-overlay,#compact-scene-summary,#saved-scenes,#app-settings,#app-jukebox,.tile-carry-label){
+ background:linear-gradient(160deg,color-mix(in srgb,#fff 30%,transparent),transparent 42%),var(--lg-tint)!important;
+ -webkit-backdrop-filter:var(--lg-blur)!important;backdrop-filter:var(--lg-blur)!important;
+ border:1px solid var(--lg-rim)!important;
+ box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 95%,transparent),inset 0 -1px 1px var(--lg-edge),inset 0 0 0 .5px color-mix(in srgb,#fff 40%,transparent),0 1px 2px color-mix(in srgb,#000 10%,transparent),0 10px 34px color-mix(in srgb,#0c2030 22%,transparent)!important;
+ isolation:isolate}
+/* Larger reading surfaces keep a little more tint so labels stay legible over a busy scene. */
+html:root:not(#lg) body.simulation-workspace :is(#scene-tools-drawer,#inspection,#advanced-panel,#saved-scenes,#app-settings,#app-jukebox,#tile-chooser){background:linear-gradient(160deg,color-mix(in srgb,#fff 26%,transparent),transparent 38%),var(--lg-tint-strong)!important}
+/* Moving specular highlight. --lg-x/--lg-y are set per panel by liquid-glass.mjs. */
+html:root:not(#lg) body.simulation-workspace .lg-glass::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:2;mix-blend-mode:soft-light;opacity:var(--lg-shine,0);transition:opacity .35s ease;background:radial-gradient(260px circle at var(--lg-x,30%) var(--lg-y,0%),color-mix(in srgb,#fff 90%,transparent),transparent 62%)}
+/* Glass inside glass would blur only its parent; let the outer pane do the work. */
+html:root:not(#lg) body.simulation-workspace :is(#scene-tools-drawer,#saved-scenes,#app-settings) :is(#tile-chooser,#scene-generator-picker,.facet-picker){-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background:transparent!important;box-shadow:none!important;border-color:transparent!important}
+/* Buttons on glass read as raised glass chips rather than flat paper. */
+html:root:not(#lg) body.simulation-workspace header.grouped-toolbar button:not([aria-pressed=true]):not(.primary):not(#pause):not(#compact-scene-title){background:color-mix(in srgb,#fff 34%,transparent)!important;border-color:var(--lg-rim)!important;box-shadow:inset 0 1px 0 color-mix(in srgb,#fff 90%,transparent),0 1px 3px color-mix(in srgb,#000 8%,transparent)!important}
+html:root:not(#lg) body.simulation-workspace header.grouped-toolbar #compact-scene-title{background:transparent!important;box-shadow:none!important}
+/* Edge refraction (Chromium desktop only; each panel gets its own lens filter). */
+html.lg-refract:not(#lg):not(#lg2) body.simulation-workspace .lg-glass[data-lg-filter]{-webkit-backdrop-filter:var(--lg-refract)!important;backdrop-filter:var(--lg-refract)!important}
+@media(prefers-reduced-transparency:reduce),(prefers-contrast:more){html:root:not(#lg):not(#lg2) body.simulation-workspace .lg-glass{background:var(--app-paper,#fffcf0)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}html:root:not(#lg) body.simulation-workspace .lg-glass::after{display:none}}
