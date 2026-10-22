@@ -1,0 +1,30 @@
+{
+ "dial": "low",
+ "cfg": {
+  "model": "haiku",
+  "effort": "low",
+  "rounds": 6,
+  "level": 0,
+  "px": 192,
+  "samples": 12,
+  "max_edits": 6,
+  "es_iters": 0,
+  "es_groups": "",
+  "v2": true
+ },
+ "start_loss": 0.4780027343523164,
+ "final_loss": 0.43424021560101406,
+ "final_terms": {
+  "sil": 0.24466326457270182,
+  "cham": 0.014055400218503437,
+  "ssim": 0.3153355799133213,
+  "edge": 0.9385782875000748,
+  "tone": 0.11619083180147056,
+  "total": 0.43424021560101406,
+  "secs": 1.12
+ },
+ "llm_cost_usd": 0.0284,
+ "llm_secs": 108.5,
+ "wall_secs": 116.2,
+ "best_prefix": "r06"
+}

@@ -1,6 +1,6 @@
 // /models renders from a catalogue fetched at load, so a model added to the catalogue (database or R2 URLs) appears with no rebuild.
 // Catalogue sources, first that answers wins: window.MODELS_CATALOG_URL, /api/models, then the bundled /models/manifest.json.
-import {mountViewer} from '/models/viewer.js?v=2';
+import {mountViewer} from '/models/viewer.js?v=3';
 
 const SOURCES = [window.MODELS_CATALOG_URL, '/api/models', '/models/manifest.json'].filter(Boolean);
 const LABEL = {good:'Close match', partial:'Partial match', weak:'Weak match'};
@@ -58,7 +58,7 @@ function model(list, id){
       <figure class="pane"><img src="${esc(m.urls.ref)}" alt="Your reference image of the ${nm}"><figcaption>Your image</figcaption></figure>
       <figure class="pane viewer" data-src="${esc(m.urls.glb)}" data-theta="${+theta}" data-phi="${+phi}">
         <div class="stage"><canvas aria-label="Interactive 3D model of the ${nm}"></canvas><div class="msg">Loading 3D model…</div></div>
-        <figcaption><span>My 3D model · drag to turn, scroll or pinch to zoom</span><span class="btns"><button type="button" class="reset">Reset view</button><button type="button" class="spin" aria-pressed="false">Spin</button></span></figcaption>
+        <figcaption><span>My 3D model · drag to turn, scroll or pinch to zoom</span><span class="btns"><button type="button" class="reset">Reset view</button><button type="button" class="motion" aria-pressed="true" hidden>Motion</button><button type="button" class="spin" aria-pressed="false">Spin</button></span></figcaption>
       </figure>
     </div>
     <div class="grid3">

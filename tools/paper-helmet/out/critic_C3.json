@@ -1,0 +1,166 @@
+{
+ "model": "opus",
+ "cost_usd": 0.897,
+ "rounds": [
+  {
+   "round": 0,
+   "diagnosis": "The reference crest leans forward and its front blades hook over the brow, but our crest is an upright fan that leans backward. That fan causes the red/blue fringe around the top-left of the silhouette. The dome reads too tall and boxy, and the front of the brow lacks the V-shaped forehead plate, but the crest mass and curl is the bigger silhouette error, so fix it first.",
+   "edits": [
+    {
+     "path": "shape.crest.curl",
+     "value": -0.35,
+     "why": "positive curl tips the front blades backward; the reference front blades hook forward over the brow"
+    },
+    {
+     "path": "shape.crest.a0",
+     "value": -55,
+     "why": "start the crest further forward so it overhangs the brow as in the reference"
+    },
+    {
+     "path": "shape.crest.rake",
+     "value": 0.8,
+     "why": "less backward tilt overall; the reference crest is more upright-to-forward, not a swept-back fan"
+    },
+    {
+     "path": "shape.crest.peak_at",
+     "value": 0.3,
+     "why": "the longest reference blades sit front-of-centre, not at the very front tip"
+    },
+    {
+     "path": "shape.crest.taper",
+     "value": 0.6,
+     "why": "keep the front and rear ends a bit fuller so the arc stays a solid mass as it curls"
+    }
+   ],
+   "loss_before": 0.493,
+   "loss_after": 0.648,
+   "kept": false
+  },
+  {
+   "round": 1,
+   "diagnosis": "The silhouette is already close (sil 0.09), but the brow is wrong. Ours is a flat band of even height with a ledge that sticks out all round, and the red fringe down the front-left of the dome shows that ledge projecting at the sides. The reference has a deep V-shaped forehead plate that drops low at the front, juts forward there, and leaves a dark eye slot under it. Last round's big crest re-curl raised the loss badly, so this round fixes only the forehead plate and leaves the crest alone.",
+   "edits": [
+    {
+     "path": "shape.band_front",
+     "value": 0.22,
+     "why": "deeper forehead plate at the front, for the V-shaped brow piece in the reference"
+    },
+    {
+     "path": "shape.front_drop",
+     "value": 0.05,
+     "why": "the reference band dips lower over the face than at the sides"
+    },
+    {
+     "path": "shape.lip_front",
+     "value": 0.1,
+     "why": "the reference ledge juts out most at the front, over the eyes"
+    },
+    {
+     "path": "shape.lip",
+     "value": -0.07,
+     "why": "the ledge sticks out less at the sides, to remove the red fringe on the front-left of the dome"
+    },
+    {
+     "path": "shape.eye_gap",
+     "value": 0.04,
+     "why": "open a visible eye slot under the brow, like the dark recess in the reference"
+    }
+   ],
+   "loss_before": 0.493,
+   "loss_after": 0.5161,
+   "kept": false
+  },
+  {
+   "round": 2,
+   "diagnosis": "The silhouette is close (sil 0.09). The weakest parts are the neck guard (IoU 0.80) and the far cheek (IoU 0.87). The overlay shows red along the lower rear edge, where our rear shell and far cheek hang too low and too far back, and blue at the back-right tip, where the reference's neck guard flares out wider and longer than our thin spike. The two earlier rounds that changed the crest and the brow both raised the loss, so this round only fixes the lower rear: shorten the rear shell and enlarge the flared neck guard.",
+   "edits": [
+    {
+     "path": "shape.low_back",
+     "value": 0.13,
+     "why": "the red band along the lower rear edge shows our rear shell drops too far below the reference"
+    },
+    {
+     "path": "shape.neck_len",
+     "value": 0.72,
+     "why": "the blue at the back-right tip shows the reference neck guard reaches further out"
+    },
+    {
+     "path": "shape.neck_w",
+     "value": 31.0,
+     "why": "the reference neck guard is a broad flared plate, not a narrow spike"
+    },
+    {
+     "path": "shape.cheek_back_len",
+     "value": 0.5,
+     "why": "the far cheek's back edge should rise toward the back; it currently adds red along the lower rear"
+    },
+    {
+     "path": "shape.taper",
+     "value": 0.17,
+     "why": "pull the lower shell in slightly to trim the red fringe down the lower left and right edges"
+    }
+   ],
+   "loss_before": 0.493,
+   "loss_after": 0.5489,
+   "kept": false
+  },
+  {
+   "round": 3,
+   "diagnosis": "The silhouette is already tight (sil 0.09, part IoUs 0.80-0.96), and the last three rounds changed crest, brow and rear-shell geometry; every one raised the loss, so the outline is near a local optimum. The biggest remaining gap is surface style (ssim 0.23, style 0.33, parts_iou 0.10). The reference's cheek guards and forehead plate have deep centre folds, raised bevelled hem borders and sharply creased crest blades. Ours are flat, smooth plates. This round changes only the papercraft grammar and leaves the silhouette alone.",
+   "edits": [
+    {
+     "path": "grammar.plate_fold",
+     "value": 0.13,
+     "why": "the reference cheek guards and forehead plate have a strong centre fold; ours read as flat sheets"
+    },
+    {
+     "path": "grammar.hem_h",
+     "value": 0.05,
+     "why": "the reference plates have a clearly raised bevelled border that casts a thin shadow line"
+    },
+    {
+     "path": "grammar.hem_w",
+     "value": 0.26,
+     "why": "the reference hem bands are a bit wider, especially round the cheek guard edges"
+    },
+    {
+     "path": "grammar.ridge",
+     "value": 0.55,
+     "why": "each reference crest blade has a sharp centre crease that catches light; ours look nearly flat"
+    },
+    {
+     "path": "grammar.dome_v",
+     "value": 4,
+     "why": "the reference dome shows more stacked facet rows between the brow and the crest holder"
+    }
+   ],
+   "loss_before": 0.493,
+   "loss_after": 0.5974,
+   "kept": false
+  },
+  {
+   "round": 4,
+   "diagnosis": "The silhouette has thin red bands on both sides at once: the left edge of the dome and the lower front, and the right edge of the crest and the lower rear. So the model is slightly oversized overall, and it is turned a little too far into profile, which also hides too much of the far cheek guard (far-cheek IoU 0.87). The reference shows more of the face opening and the far cheek. Every local edit to the crest, brow, rear shell and fold style raised the loss, so this round adjusts only the pose: a small scale-down and a slight turn toward the camera.",
+   "edits": [
+    {
+     "path": "place.scale",
+     "value": 1.07,
+     "why": "red fringe on both the left and right silhouette edges means the model is slightly too large"
+    },
+    {
+     "path": "place.yaw",
+     "value": -36.0,
+     "why": "turn a few degrees toward the camera to show more of the face opening and the far cheek, as in the reference"
+    },
+    {
+     "path": "place.x",
+     "value": 0.07,
+     "why": "re-centre slightly after the yaw change so the left (front) edge doesn't overshoot"
+    }
+   ],
+   "loss_before": 0.493,
+   "loss_after": 0.5758,
+   "kept": false
+  }
+ ]
+}

@@ -599,6 +599,1165 @@
      "22 Oct 2026"
     ]
    ]
+  },
+  {
+   "id": "mc-balance-upgrade",
+   "name": "Portable beam balance · Upgrade",
+   "group": "Model challenge · Upgrade",
+   "subject": "Portable beam balance (BA-0031), upgrade style",
+   "outline": 0.621,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-balance-upgrade/ref.jpg",
+    "render": "/models/mc-balance-upgrade/render.jpg",
+    "overlay": "/models/mc-balance-upgrade/overlay.png",
+    "glb": "/models/mc-balance-upgrade/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.61,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Side outline",
+     "value": 0.72,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.532,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.473,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.48,
+    "after": 0.626,
+    "note": "outline overlap over 9 rounds (higher is better)"
+   },
+   "good": [
+    "Front and side silhouettes line up well: crossbeam, Y braces, finial, hanger knots and pan rims sit where the sheet has them (side 0.72 IoU; front 0.61 after the hero-led round 9).",
+    "The motion reads clearly: the beam tips 6.5 degrees one way, 5.5 the other, then damps out over 100 frames, and the finial needle rides with the beam so it acts as the pointer.",
+    "Verified after re-importing the GLB: the hangers' world rotation is 0 at frames 1, 16, 36, 60 and 120.",
+    "2,950 triangles, just under the 3k budget, in 5 meshes: stand, beam, hanger_left, hanger_right, stone_weights.",
+    "Real scale: 1.16 m tall at the finial tip, 0.99 m across the pans, origin at the centre of the footprint on the ground, front faces -Y."
+   ],
+   "off": [
+    "The back view is the weakest at 0.57 IoU. The sheet draws the back with an asymmetric perspective (the beam and pans sit off-centre), which one symmetric model can't match on both front and back.",
+    "The stones contradict each other: the sheet's front view puts them in front of the base, its side view puts them behind, and the hero puts a single big stone on top of the base. I followed the hero (a stone on the base, front-left) and put the small weight stack behind the base, where the side view shows it.",
+    "The hero's beam passes through a mortise below a carved post cap. I used the sheet's beam-on-top layout with yoke cheeks, because a beam fixed in a mortise couldn't tip.",
+    "Round 9 deliberately follows the hero over the sheet: the stand is wider and the pans bigger than the orthographic sheet, so mean IoU went from 0.652 to 0.626.",
+    "The timber is still flat colour with darker chamfers. The illustration's carved grain and split end-grain would need textures or many more triangles."
+   ],
+   "steps": [
+    [
+     "Fixed the views",
+     "The turnaround's left/middle/right panels are front/side/back as labelled, but the bright floor glow and soft floor shadows were being counted as object in the target masks (the front mask spanned the full panel width). views/ holds copies with the floor below the base and the low-chroma floor shadows painted to background; all scores use score r views."
+    ],
+    [
+     "Silhouette first",
+     "Built the T-post on a two-layer plank base, the lashed crossbeam with chunky end caps and a raised centre hump, the Y-shaped knee braces, the pointed iron finial, and two shallow pans each on one hanger rope that splits into three cords at a knot."
+    ],
+    [
+     "Mechanism",
+     "The beam is its own object pivoting on a bronze pin held between two carved yoke cheeks on the post top. Each hanger (rope, knot, three cords, pan) is a child of the beam with its origin at the tie-on point, and is keyed with the exact opposite angle on the same frames, so the pans stay plumb on every frame."
+    ],
+    [
+     "Joinery and craft",
+     "Bevelled, slightly jittered timbers, a rope collar binding the post foot with a loose rope tail and coil on the base, rope lashings at both hang points and around the beam centre, rolled pan rims with a lighter bronze inside, and a bronze pin head."
+    ],
+    [
+     "One clip",
+     "All three animated objects share one action, exported with export_anim_scene_split_object=False so the GLB carries a single 120-frame clip instead of one clip per object."
+    ],
+    [
+     "Art director round",
+     "Moved the proportions toward the hero illustration (taller and more open, bigger and deeper pans, a broad, thick plank base with the stone resting on it), added the four-turn rope wrap on the post foot and knotted beam-end lashings as low-poly torus rings, and gave every bevelled edge a darker chamfer material so the wood reads two-tone. Still flat colours, no textures."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "2,950"
+    ],
+    [
+     "Size",
+     "0.99 × 0.54 × 1.17 m"
+    ],
+    [
+     "Moving parts",
+     "One 120-frame clip at 24 fps that loops seamlessly (rest pose at frames 1 and 102-120). The beam rocks about its bronze pin (local Y axis at z = 0.98 m): +6.5 degrees at f16, -5.5 at f36, +3.5 at f53, -2.0 at f68, +1.0 at f81, -0.35 at f92, then 0 from f102. hanger_left and hanger_right are children of the beam, pivoting at their tie-on points, and are keyed with the exact negative angle on the same frames and interpolation, so the pans swing up and down on the beam ends but always hang straight down. The iron finial is part of the beam and acts as the pointer needle."
+    ],
+    [
+     "Set piece",
+     "BA-0031 Portable beam balance"
+    ],
+    [
+     "Tests",
+     "mechatronics"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/balance-upgrade/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "The knee braces double as tilt stops: their pads sit just under the beam, so at full tilt the beam nearly touches them, which explains why the swing is limited. I added a bronze pivot pin through carved yoke cheeks, rope lashings at each hang point, little binding knots on every cord, rolled pan rims with a lighter bronze inner face, a rope collar and loose rope tail with a coil at the post foot (from the hero), and a stack of flat stone weights behind the base for the merchant."
+    ]
+   ]
+  },
+  {
+   "id": "mc-balance-whimsical",
+   "name": "Portable beam balance · Whimsical",
+   "group": "Model challenge · Whimsical",
+   "subject": "Portable beam balance (BA-0031), whimsical style",
+   "outline": 0.254,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-balance-whimsical/ref.jpg",
+    "render": "/models/mc-balance-whimsical/render.jpg",
+    "overlay": "/models/mc-balance-whimsical/overlay.png",
+    "glb": "/models/mc-balance-whimsical/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.136,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.125,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.254,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.339,
+    "after": 0.131,
+    "note": "outline overlap over 8 rounds (higher is better)"
+   },
+   "good": [
+    "The 3/4 view now reads like the hero: the big wooden saucer platform as the main mass, wavy arms with cradles, the layered teacup stack with a visible handle, and the bell on top.",
+    "Bright toy palette of teal, red, cream and mustard with wood; 0.975 m tall and 1.26 times taller than wide, with the pivot at 75% of the height. Origin on the ground.",
+    "The pans hang plumb through the whole loop and never touch their cradles (the gap is asserted in build.py). The loop is seamless."
+   ],
+   "off": [
+    "Mean IoU against the turnaround sheet is low (0.149), because the sheet draws a different, spindly design: a small disc, a single pan and no arms. The art director asked to follow the hero over the sheet.",
+    "In the hero, the arms visibly cradle the pans from below. Here the pans hang a few cm above the cradles so they can swing, so the arms read as stops rather than holders.",
+    "No smiley on the arrow-flag (the brief says no faces).",
+    "At 3187 triangles the model is over the original 3k budget, within the art director's 3.5k allowance."
+   ],
+   "steps": [
+    [
+     "Views",
+     "Cleaned view_front/view_back into views/ (views/make_views.py paints out the floor shadow streak) and dropped view_side: it is a third front-on pose, not a +X side. After the art director's round 7 notes the hero is the target: the sheet's tall single-spindle layout is no longer followed, so IoU against the sheet fell on purpose."
+    ],
+    [
+     "Structure (round 7, follows the hero)",
+     "Following the hero's proportions (round 8): H 0.975 m by W 0.77 m (1.26:1). A thin, flat turned teal base plate (3 cm thick, 0.36 m across); a slender turned wooden neck with a small teal bead up to 0.20 m; a thin shallow dish platform (4 cm, 0.46 m across, about 70% of the beam's length) with a teal underside and a wood top; a taller turned spindle with a red collar; a red bead; the hub and pivot at 0.75 m; the bell at about 0.85 m; and a finial pin with a mustard knob on top."
+    ],
+    [
+     "Toy arms",
+     "Two thicker wavy arms (1.6 cm) rise in a lazy S from under the platform rim, swing out past it and curl back in to small teal cradle dishes under each pan. The cradles sit 3.5 cm (left) and 3.0 cm (right) below each pan's lowest point over the whole loop, and build.py asserts this gap every frame."
+    ],
+    [
+     "Pans",
+     "Left: a chunky stack of a teal saucer with a mustard plate layer, a red bowl, and a cream teacup tipped 17 degrees with its handle turned toward the 3/4 camera. It hangs from a spring and a brass spreader bar so the cords clear the cup. Right: a mustard bowl on a long coil and a three-cord bridle."
+    ],
+    [
+     "Beam and bell",
+     "A pale teal beam with a curl on the left end, red collars, a mustard arrow-flag on the right end (no smiley), and a pointer needle under the hub. The brass bell hangs from a wooden crook on a red spring above the hub."
+    ],
+    [
+     "Mechatronics",
+     "The beam is keyed every frame from a damped sine: it rests 3 degrees toward the teacup, is kicked at frame 8, tips about +7 / -8 / +4 degrees and fades back to rest by frame 120. The pans' locations follow the rotated hang points with zero rotation, so they hang plumb, plus a small spring bounce. The bell wiggles on whole-cycle sines plus a share of the beam tilt. One 'Scene' clip, 1 to 120 at 24 fps, seamless."
+    ],
+    [
+     "Budget",
+     "3187 triangles (the art director allowed up to 3.5k for the thicker arms). The beam has no bevel, only the base plate keeps one, the springs use 3-sided wire, and the cradles use 8 segments."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "3,187"
+    ],
+    [
+     "Size",
+     "0.77 × 0.46 × 0.98 m"
+    ],
+    [
+     "Moving parts",
+     "beam (seesaws on the hub: kicked, tips one way, the other, settles to a 3 deg lean toward the teacup); pan_left and pan_right (locations follow the beam ends, rotation held at zero so they hang straight down, a small springy bounce, and they always clear their arm cradles); bell (wiggles on its crook, rung by the beam). All on one 120-frame scene clip."
+    ],
+    [
+     "Set piece",
+     "BA-0031 Portable beam balance"
+    ],
+    [
+     "Tests",
+     "mechatronics"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/balance-whimsical/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "A toy contraption: wavy arms whose cradles act as stops under the pans, a beam that 'rings' the bell as it swings, a curly scroll end, a pointer needle under the hub, coiled spring cords that bounce, and a brass spreader bar so the teacup sits clear of its cords. The heavy teacup stack against the light mustard bowl gives the balance a reason to lean."
+    ]
+   ]
+  },
+  {
+   "id": "mc-barn-upgrade",
+   "name": "Barn · Upgrade",
+   "group": "Model challenge · Upgrade",
+   "subject": "Barn (R-02), upgrade style",
+   "outline": 0.822,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-barn-upgrade/ref.jpg",
+    "render": "/models/mc-barn-upgrade/render.jpg",
+    "overlay": "/models/mc-barn-upgrade/overlay.png",
+    "glb": "/models/mc-barn-upgrade/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Side outline",
+     "value": 0.822,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.574,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.844,
+    "after": 0.918,
+    "note": "outline overlap over 7 rounds (higher is better)"
+   },
+   "good": [
+    "Side (+X gable) silhouette IoU 0.918 at 768 px: gambrel curve, eave flare, cupola and vane all line up.",
+    "Hero read: teal shingle texture, red board-and-batten, cream X doors on a dark rail, hay hoist with chain, stone base, all as in the illustration.",
+    "Doors really slide on their rails and reveal a dark interior; nothing intersects (doors sit proud of window trim and corner posts)."
+   ],
+   "off": [
+    "The hero's walls are lower relative to the roof than the turnaround's; I compromised (eave/ridge 0.51) so the barn reads a touch taller and boxier than the hero.",
+    "The -X gable check is only 0.81: mj view_front draws a much bigger bellcast roof flare than view_back, and I matched the hero/view_back flare instead.",
+    "Only one harness view has a usable target, so mean IoU is that single view; the long side was matched by eye against the hero.",
+    "Cupola base rises less out of the ridge than in the hero; shingles read slightly more patchy than the hero's even courses."
+   ],
+   "steps": [
+    [
+     "Orientation",
+     "The hero wins: the long side with the big X-braced sliding doors faces -Y (front), the hayloft/hoist gable is +X (the hero's right face, matches mj view_back), and the turnaround's X-door gable (mj view_front) became the far -X end with its own pair of sliding doors."
+    ],
+    [
+     "Views",
+     "views/view_side.png is mj view_back with the sheet's ground horizon line cleaned off (it ran to the crop edge and inflated the target box); view_front (the -X gable) is scored separately by gable_check.py against its left half mirrored, because the split cut its right side into the fantasy L-barn; the side/L-shaped view and a long-side target are dropped (no orthographic long side exists)."
+    ],
+    [
+     "Massing",
+     "8.4 x 6.2 m footprint, 4.45 m eaves, 8.68 m ridge, gambrel profile from the hero (steep lower slope, ~36 deg upper slope, soft bellcast kick at the eave) kept as a parameter list so revisions are number edits."
+    ],
+    [
+     "Craft",
+     "Board-and-batten walls with a slightly irregular rhythm, ~690 individually laid shingle tabs in staggered courses with jittered butts and two teal tones, cream barge boards and fascia, beveled corner posts, a two-row stone foundation, muntined windows, louvered cupola with a flared hip roof and rooster weathervane."
+    ],
+    [
+     "Game readiness",
+     "8,692 triangles (budget 10k), 15 named meshes, origin at footprint centre on the ground, Z up, metres, flat Principled materials named by what they are, modifiers applied on export, one 120-frame clip (barn_doors_loop) at 24 fps."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "8,692"
+    ],
+    [
+     "Size",
+     "10.56 × 7.62 × 11.50 m"
+    ],
+    [
+     "Moving parts",
+     "One 120-frame loop: the front pair of X doors (door_left, door_right) slides apart 1.85 m along the iron rail (open 12-44, hold, close 72-104); the -X gable pair (end_door_left, end_door_right) does the same 6 frames later along Y; the rooster weathervane swings +/-30 deg in the breeze; the hoist hook and chain sway +/-5 deg."
+    ],
+    [
+     "Set piece",
+     "R-02 Barn"
+    ],
+    [
+     "Tests",
+     "complexity"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/barn-upgrade/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "Second set of sliding doors on the far gable (from the turnaround), working rail hangers and trolleys on each door leaf, dark interior revealed when open, swinging hoist chain, wind-swung weathervane, hay-hood beam at the peak, stone door thresholds, grass tufts and a low turf patch so it sits in the diorama."
+    ]
+   ]
+  },
+  {
+   "id": "mc-barn-whimsical",
+   "name": "Barn · Whimsical",
+   "group": "Model challenge · Whimsical",
+   "subject": "Barn (R-02), whimsical style",
+   "outline": 0.708,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-barn-whimsical/ref.jpg",
+    "render": "/models/mc-barn-whimsical/render.jpg",
+    "overlay": "/models/mc-barn-whimsical/overlay.png",
+    "glb": "/models/mc-barn-whimsical/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.709,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Side outline",
+     "value": 0.742,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.674,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.738,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.644,
+    "after": 0.708,
+    "note": "outline overlap over 5 rounds (higher is better)"
+   },
+   "good": [
+    "Reads as the hero at a glance: tall leaning bell gambrel, cream trim, coral shingles, fat silo with a red dome, crooked cupola with a rooster.",
+    "9,656 triangles (under the 10k budget) in 14 named meshes; origin on the ground at the footprint centre, Z up, front -Y, 15.2 m tall to the rooster.",
+    "Mean IoU went from 0.644 to 0.708 over five measured rounds."
+   ],
+   "off": [
+    "The turnaround views are tall, narrow and inconsistent with each other and with the hero (no annex, a wooden-banded red silo, a sloped fantasy roof in the side view). I scored against them as given but followed the hero, so the annex and the cream silo show as blue (render only) in the front and back overlays, and the flat ridge in the side view does not match the sheet's sloping one.",
+    "The hero's shingles are bigger and more hand-cut; mine are tidier and smaller per tab to stay in budget.",
+    "No recessed porch between the main barn and the annex, and the hero's barrels, mailbox-like posts and the flower beds along the stone base are simplified to a few bushes.",
+    "Planks are only battens on the front gable; side walls are plain."
+   ],
+   "steps": [
+    [
+     "Silhouette first",
+     "Main barn is a 4.8 m wide, 7 m long body under a tall bell-curved gambrel (Catmull-Rom profile with flared eaves) rising to a 10.1 m ridge, with a crooked cupola and rooster vane on top; the shape is then sheared so the whole barn leans 1.1 m toward the silo."
+    ],
+    [
+     "Chunky shingles",
+     "Every roof (main, annex, cupola) is covered by procedural courses of rounded hexagonal tabs, staggered every other row, lifted at the butt so they overlap, with random jitter and two shingle colours. They are single-sided plus a thick butt skirt, so each tab is 10 triangles."
+    ],
+    [
+     "Storybook front",
+     "Round-top double doors in a cream arch frame, two small arched windows and a tall arched window with flower boxes, an oval loft window, plank battens, cream barge boards and corner posts, and a stone sill."
+    ],
+    [
+     "Annex and silo",
+     "A lower +X wing with its own curvy gable, round window, round-top doors and a coral ramp; behind it a fat, slightly barrel-shaped cream silo with a teal band, red dome, teal finial and two framed windows."
+    ],
+    [
+     "Hoist beam and lantern",
+     "A teal hay-hoist beam with a scroll end pokes out over the front gable, and a glowing lantern hangs from it."
+    ],
+    [
+     "Base",
+     "A wobbly grass island with stepping stones to the big doors and flowering bushes."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "9,656"
+    ],
+    [
+     "Size",
+     "9.86 × 10.47 × 15.15 m"
+    ],
+    [
+     "Moving parts",
+     "One 120-frame scene clip at 24 fps, seamless. The main round-top doors (door_left, door_right) swing outward on their hinge edges to 100 degrees with a small overshoot, hold, then swing shut with a little bounce; the annex doors (annex_door_left/right) do the same 8 frames later. The weathervane (rooster plus arrow, parented to the tilted cupola) turns a full 360 degrees in gusty steps with back-swings, and the lantern under the hoist beam sways +-7 degrees."
+    ],
+    [
+     "Set piece",
+     "R-02 Barn"
+    ],
+    [
+     "Tests",
+     "complexity"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/barn-whimsical/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "The whole barn leans as one sheared body while the cupola tilts the other way; a scroll-ended teal hoist beam with a glowing lantern that sways; stepping-stone path to the doors; flower bushes on a wobbly grass island; gusty weathervane motion instead of a constant spin."
+    ]
+   ]
+  },
+  {
+   "id": "mc-cedar-upgrade",
+   "name": "Old cedar · Upgrade",
+   "group": "Model challenge · Upgrade",
+   "subject": "Old cedar (R-03), upgrade style",
+   "outline": 0.611,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-cedar-upgrade/ref.jpg",
+    "render": "/models/mc-cedar-upgrade/render.jpg",
+    "overlay": "/models/mc-cedar-upgrade/overlay.png",
+    "glb": "/models/mc-cedar-upgrade/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.66,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Side outline",
+     "value": 0.546,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.626,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.375,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.652,
+    "after": 0.611,
+    "note": "outline overlap over 10 rounds (higher is better)"
+   },
+   "good": [
+    "The hero gesture now matches: a long, massive red trunk visible between the tiers and up to the crown, big alternating flat-topped drooping sprays, a narrow leaning top, and crooked dead branches at mid height.",
+    "The sprays read as fans of jagged, drooping fronds in dark-to-light layers, with no spheres and no boxes.",
+    "7,211 triangles (budget 8k), 15.4 m tall, origin at the trunk centre on the ground, all materials flat Principled colours."
+   ],
+   "off": [
+    "The side view (0.52) scores lowest, because the turnaround's side tree has a broad umbrella top and sprays facing the viewer, which conflict with the hero; I followed the hero.",
+    "The root flare is a smooth lobed skirt rather than distinct gnarled roots.",
+    "The fronds are single blades, not the illustration's finely divided feathery fronds, so up close each frond reads as one serrated strip."
+   ],
+   "steps": [
+    [
+     "Views cleaned",
+     "The turnaround views include the sheet's tan ground band, which the target mask counted as part of the tree; fix_views.py paints the band back to sky colour (keeping the root pixels) and crops below the root line into models/cedar-upgrade/views/, which is what I scored against. The labels (front, side, back) were fine."
+    ],
+    [
+     "Trunk",
+     "One fluted, tapering trunk mesh (24 sides, 11 flutes that twist slightly with height) that stays thick all the way up (0.3 m radius at the top), leans gently left, and has 7 lobed buttress roots built into the radius function. It uses warm red-brown CedarBark #8A4A35, with a lighter BarkStreak material on 7 flute columns for vertical streaks."
+    ],
+    [
+     "Feathery frond sprays",
+     "Each spray is a fan of flattened, tapered frond blades (wide at the base, pointed and drooping at the tip, arched over a raised midrib, with backward-pointing serration teeth on both edges), splayed outward like fingers in 4 stacked layers: dark below, then dark, mid and light on top, each layer shorter, narrower and lifted. A few short strands hang under some lower-layer tips. The silhouette edge is jagged and pointy, not straight-cut."
+    ],
+    [
+     "Tiers (hero gesture)",
+     "The foliage follows the hero: big sprays alternating left/right up the trunk (low W at 6.2 m, low E 7.9, mid W 10.0, mid E 11.4, plus a smaller back spray for depth), with sky and red trunk between them, and the top 25% a dense, slightly lopsided cluster of 6 frond sprays (one radiating all the way round) that hides the trunk tip."
+    ],
+    [
+     "Dead branches",
+     "Seven thin, crooked bare branches (3 kinked segments each, plus forked twigs) stick out of the trunk between the tiers, mostly at mid height, as in the hero, in a greyer DeadWood material."
+    ],
+    [
+     "Animation",
+     "crown_pivot (an empty at z 8.4) carries the upper trunk, the upper sprays and the upper dead branches, and rocks about 0.9 degrees; every one of the 11 spray clumps nods about 3 degrees about its own limb root on two axes with offset phases (alternating 1 and 2 cycles per loop). Frames 1 to 121 keyed, so the 120-frame loop is seamless; exports as one 'Scene' clip."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "7,211"
+    ],
+    [
+     "Size",
+     "10.79 × 7.39 × 15.42 m"
+    ],
+    [
+     "Moving parts",
+     "crown_pivot rocks the upper trunk, the upper sprays and the upper dead branches about 0.9 degrees. Each of the 11 spray_* clumps nods about 3 degrees on its own limb pivot, on two axes, with offset phases (alternating 1 and 2 cycles per loop). The lower trunk and the lower dead branches stay still. 120-frame seamless loop at 24 fps, exported as one clip."
+    ],
+    [
+     "Set piece",
+     "R-03 Old cedar"
+    ],
+    [
+     "Tests",
+     "organic form"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/cedar-upgrade/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "Each spray has three colour layers, so light catches the top fronds while the undersides stay shadowed. Lighter streak flutes run up the bark. The dead branches end in forked twigs, a low dead branch near the base adds age, and the root buttresses are part of the trunk mesh."
+    ]
+   ]
+  },
+  {
+   "id": "mc-cedar-whimsical",
+   "name": "Old cedar · Whimsical",
+   "group": "Model challenge · Whimsical",
+   "subject": "Old cedar (R-03), whimsical style",
+   "outline": 0.506,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-cedar-whimsical/ref.jpg",
+    "render": "/models/mc-cedar-whimsical/render.jpg",
+    "overlay": "/models/mc-cedar-whimsical/overlay.png",
+    "glb": "/models/mc-cedar-whimsical/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.518,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Side outline",
+     "value": 0.583,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.418,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.59,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.495,
+    "after": 0.506,
+    "note": "outline overlap over 8 rounds (higher is better)"
+   },
+   "good": [
+    "Plump S-twisting trunk with root flare and the door at its roots reads as the hero's storybook tree.",
+    "Tiered flat-bottomed cloud pads with a lighter top and a leafy fringe give the bonsai and cloud look.",
+    "7,625 triangles (under the 8k budget), 14.6 m tall, origin at trunk base on the ground, front faces -Y."
+   ],
+   "off": [
+    "The pads are smooth puff clusters. The hero's carved swirl relief and fine leaf texture are not modelled.",
+    "Mean IoU fell from 0.570 to 0.506 over the art-director rounds. Following the hero's wide S-gesture, its far-out swing and rounder pad lumps moves the silhouette away from the turnaround, which draws a narrower, straighter four-tier tree with spiky leaf fringes and the swing close to the trunk (back view 0.42).",
+    "The greens are now mid-green, but the shading between lobes is shallower than the hero's sculpted canopy.",
+    "The bark has no grooves or streaks beyond the twisted flutes.",
+    "After round 8, at the art director's request, the 0.72/0.85 pre-darkening was reverted so the GLB holds the true palette; the harness's bright lighting makes the final renders look more lime than the palette (a harness lighting issue, not the asset)."
+   ],
+   "steps": [
+    [
+     "Views",
+     "The turnaround labels are right (front and side show the door, back shows the swing), but each crop had the sheet's shadow band and a sliver of the neighbouring tree; prep_views.py cleans them into views/ and scoring uses that folder."
+    ],
+    [
+     "Trunk",
+     "A custom swept spline (Catmull-Rom, parallel-transport frames) tapering from 2.55 m to 0.42 m, with five flutes twisting 1.1 turns. It follows the hero's big S: hard right at the base (+2.3 m), back left through the middle (-1.2 m), right again into the crown. The flared base is about 5 m wide and swallows the door; four tapered roots."
+    ],
+    [
+     "Canopy",
+     "Three tiers of cloud pads. Each pad is 6 to 9 overlapping flattened UV-sphere puffs of varied size, smooth shaded: a raised central dome, then a ring of smaller lumps with squashed, rounded undersides that make a bulging lip, so no edge is a vertical wall. The crown is 9.9 m wide and 2.7 m deep (3.6:1). Up-facing faces get LeafLight."
+    ],
+    [
+     "Branches",
+     "Each pad sits on its own tapered swept arm from the trunk, with two forked twigs reaching into the pad."
+    ],
+    [
+     "Swing",
+     "The low branch reaches 5.6 m out to the left with its own small plate. The two knotted ropes and the bevelled seat hang 3.7 m from it, well clear of the trunk."
+    ],
+    [
+     "Base",
+     "Arched red plank door with iron hinges and knob in a dark recess between two roots at the front (-Y), a grass disc, bushes, rocks and a stepping-stone path to the door."
+    ],
+    [
+     "Colours",
+     "Art-director palette, stored exactly in the GLB (sRGB hex converted to linear with c^2.2): Leaf #4F8A3C, LeafLight #7DAF55, Bark #8B7A70, Grass #5E9A3F."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "7,625"
+    ],
+    [
+     "Size",
+     "13.22 × 10.40 × 14.66 m"
+    ],
+    [
+     "Moving parts",
+     "Every pad and its branch hangs under its own pivot (sway_crown, sway_left, sway_right, sway_back, sway_swing) at the branch root. Each one sways 1.6 to 2.6 degrees on two axes with offset phases. The rope swing (swing_pivot, a child of sway_swing) swings +-22 degrees about its branch, twice per loop. Frames 1 to 120 at 24 fps, all sine-based, so the loop is seamless, and it exports as one 'Scene' clip."
+    ],
+    [
+     "Set piece",
+     "R-03 Old cedar"
+    ],
+    [
+     "Tests",
+     "organic form"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/cedar-whimsical/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "Stepping-stone path leading to the door, iron hinges and a knob on the door, knots where the swing ropes meet the branch, small bushes and rocks around the roots, a back plate so the tree reads in the round, and the swing riding on its swaying branch (the hierarchy makes the two motions combine)."
+    ]
+   ]
+  },
+  {
+   "id": "mc-hamper-upgrade",
+   "name": "Lidded reed hamper · Upgrade",
+   "group": "Model challenge · Upgrade",
+   "subject": "Lidded reed hamper (BA-0023), upgrade style",
+   "outline": 0.945,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-hamper-upgrade/ref.jpg",
+    "render": "/models/mc-hamper-upgrade/render.jpg",
+    "overlay": "/models/mc-hamper-upgrade/overlay.png",
+    "glb": "/models/mc-hamper-upgrade/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.958,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Side outline",
+     "value": 0.918,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.958,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.54,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.798,
+    "after": 0.945,
+    "note": "outline overlap over 10 rounds (higher is better)"
+   },
+   "good": [
+    "Fine, even wicker on the walls and lid at 4,178 triangles: strands at twice the earlier density with soft over/under contrast.",
+    "The lid sits fitted on top and actually opens on its back hinge, which fixes the live version's bug where the lid lies flat beside the box.",
+    "The silhouette still matches the sheet: front/back IoU 0.958, end 0.918.",
+    "The body is hollow (dark interior and floor), so the open lid shows a real basket and not a solid block."
+   ],
+   "off": [
+    "The fatter overhanging lid band and base roll cost a little IoU on the end view (0.937 to 0.918), because the sheet's end view has a slimmer lid lip. I kept them because the art director asked for them and the hero shows them.",
+    "Only the lowest lid band carries wrap ridges; the other rims are smooth tubes.",
+    "On the lid top, the over/under steps leave small dark diamonds between rows, which read slightly more like openwork than the hero's dense lid weave.",
+    "Handles follow the turnaround (angled out and up from the end rims) more than the hero, where one handle stands upright above the lid.",
+    "The back view is the mirrored front because the sheet has none, so the 'back' IoU just repeats the front."
+   ],
+   "steps": [
+    [
+     "Views relabelled",
+     "Midjourney drew end | long face | end, so views/ uses the long latch face as front (-Y), the left end as side (+X), and the long face mirrored as back (the sheet has no back view); prep_views.py also clips the cast shadows that touched the image edges and would have counted as object."
+    ],
+    [
+     "Woven geometry, not a texture",
+     "Every weft strand is a thin one-quad strip (1.5 cm tall, twice the rows of the first pass) whose depth goes over and under at each 5 cm stake, offset one stake per row and per face. The diving half of each cell is a ReedShade about 12% darker, and a mid-tone core behind the gaps keeps them as fine lines. The result reads as fine, even wicker rather than a checkerboard."
+    ],
+    [
+     "Lid on top, on a hinge",
+     "The lid is a separate pivot at the back edge of the rim. It has a fat rolled bottom band (3.1 cm) that overhangs the body, two stepped-in bands above it for a rounded shoulder, a domed woven top, a top roll and rope lashings at the hinge. A matching fat rolled band runs round the base."
+    ],
+    [
+     "Rims, handles, latch",
+     "The rope is laid-rope style: a 6-sided twisting profile with fat bulges and tight pinches. Handles are knotted through both ends. The latch is a loop tied to the lid front that drops over a wooden toggle, ending in a coiled knot and a tapering hanging tail."
+    ],
+    [
+     "Proportions",
+     "0.70 m long body (0.87 m with handles), 0.33 m deep, 0.44 m tall, slight inward taper to the base; measured from the turnaround and tuned on IoU."
+    ],
+    [
+     "Colour",
+     "Honey wicker #B9763F for the reed (the render's mean comes out at sRGB 183,118,72), with rims a little darker and a 12% darker under-shade."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "4,178"
+    ],
+    [
+     "Size",
+     "0.88 × 0.43 × 0.44 m"
+    ],
+    [
+     "Moving parts",
+     "One 120-frame, 24 fps seamless clip ('Scene'). The lid rotates on a hinge at the back edge of the rim: it rests (1-18), lifts 72 degrees (18-44), holds open (44-76), closes (76-102) with a small landing bounce (102-112), and rests to 120. The latch loop hangs from a pivot at its knot on the lid front: it lags behind the lid, swings past plumb, settles hanging down while the lid is open, and drops back over the toggle peg as the lid closes."
+    ],
+    [
+     "Set piece",
+     "BA-0023 Lidded reed hamper"
+    ],
+    [
+     "Tests",
+     "craft and material"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/hamper-upgrade/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "Real over/under strand geometry instead of a flat colour; a hollow interior; rope lashings at the hinge; a wrapped lid band; a latch knot with a hanging tail; the latch loop's lagging swing; a domed lid top."
+    ]
+   ]
+  },
+  {
+   "id": "mc-hamper-whimsical",
+   "name": "Lidded reed hamper · Whimsical",
+   "group": "Model challenge · Whimsical",
+   "subject": "Lidded reed hamper (BA-0023), whimsical style",
+   "outline": 0.707,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-hamper-whimsical/ref.jpg",
+    "render": "/models/mc-hamper-whimsical/render.jpg",
+    "overlay": "/models/mc-hamper-whimsical/overlay.png",
+    "glb": "/models/mc-hamper-whimsical/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.664,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Side outline",
+     "value": 0.701,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.756,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.562,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.703,
+    "after": 0.707,
+    "note": "outline overlap over 8 rounds (higher is better)"
+   },
+   "good": [
+    "Reads like the hero: a squat woven pot with a pillowy lid, a tall fat plait and a big wooden toggle (art director round).",
+    "The weave is chunky modelled blocks in staggered rows with alternating shades, at 3982 triangles, under the 4k budget.",
+    "Straw colour comes from the hero, not the darker sheet.",
+    "The lid opens without passing through anything because the handle rides with the lid."
+   ],
+   "off": [
+    "IoU against the sheet fell from 0.802 to 0.707. This is deliberate: the sheet draws a taller gourd, and the art director asked for the hero's squat pot. The front and side views lose most (0.66 and 0.70).",
+    "The handle is carried by the lid, not the body, so a hinged lid can open without passing through it.",
+    "The back view of the sheet shows a flat lid with no dome or sprout; the hero wins.",
+    "The plait is a lobed, bulging tube, not separate interleaved strands; it reads as chunky segments at game distance but not up close.",
+    "The model is 0.82 m across including the toggle peg, a little over the 0.7 m nominal hamper length, because of the wider belly.",
+    "Colour distance to the sheet views stays high by design: the sheet is dark brown, the model uses the hero's straw."
+   ],
+   "steps": [
+    [
+     "Views",
+     "The sheet's labels were right (front | side | back as drawn), but the cast shadows ran to the crop edges and counted as object, so prep_views.py paints the low-saturation shadow band out into views/; scores are against views/ (the raw mj folder gives 0.739 for the final model)."
+    ],
+    [
+     "Silhouette",
+     "After the art director's round, the hero's proportions win over the sheet: a squat round pot whose belly is 0.77 m across (25% wider), about 15% lower, widest about 40% up, with a tucked-in foot. A small collar sits under a lid that overhangs it. The handle top is 1.13 m, about 0.47 of the total height above the lid top."
+    ],
+    [
+     "Weave as geometry",
+     "Every weft row is its own ring strip of 12 puffy blocks (4 vertex rings by 3 columns per block, grooves sunk, crests flat), offset half a block on alternate rows. Blocks alternate over/under puff depth and two straw shades, and are smooth shaded as soft pillows. The lid dome uses the same weave with a slight lumpy irregularity."
+    ],
+    [
+     "Handle and hardware",
+     "The lid is one plump, slightly lumpy pillow: a fat rolled edge overhangs the collar and the woven dome rises out of it. The fat plait handle is three twisted lobes that turn a third per segment, with 16 segment bulges, lashed to lugs on the lid. A big wooden toggle ring (0.25 m across) with a chunky peg sits on the front-right shoulder where the 3/4 view sees it, and rope lashings at the back act as the hinge."
+    ],
+    [
+     "Animation",
+     "lid_hinge (an empty on the back hinge line, axis X) carries the lid, brim, handle, lugs and sprout: it rests 3 degrees ajar, lifts to 38 degrees by frame 36, wobbles and holds, drops shut with a small bounce at frame 88-98 and settles ajar again at 110-120. The sprout bobs on its own origin (scale and sway, four bobs per loop). One 120-frame 24 fps clip."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "3,982"
+    ],
+    [
+     "Size",
+     "0.81 × 0.78 × 1.13 m"
+    ],
+    [
+     "Moving parts",
+     "lid_hinge (empty on the back hinge line) rotates about X: 3 degrees ajar at rest, lifts to 38 degrees (frames 14-36), holds with a small wobble, drops shut with a bounce (88-98), settles ajar (110-120); the pillow lid, rolled edge, plait handle, lugs and sprout ride on it. The sprout bobs and sways on its own origin with four bobs per loop. Frames 1-120 at 24 fps, seamless, exported as one clip."
+    ],
+    [
+     "Set piece",
+     "BA-0023 Lidded reed hamper"
+    ],
+    [
+     "Tests",
+     "craft and material"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/hamper-whimsical/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "Over/under weave with alternating straw shades and puff depths; a shadowed inside of the basket and lid underside that show when the lid opens; rope hinge lashings at the back; a little wooden latch loop opposite the big toggle; the lid's closing bounce."
+    ]
+   ]
+  },
+  {
+   "id": "mc-seller-upgrade",
+   "name": "Ranch produce seller · Upgrade",
+   "group": "Model challenge · Upgrade",
+   "subject": "Ranch produce seller (BA-0081), upgrade style",
+   "outline": 0.764,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-seller-upgrade/ref.jpg",
+    "render": "/models/mc-seller-upgrade/render.jpg",
+    "overlay": "/models/mc-seller-upgrade/overlay.png",
+    "glb": "/models/mc-seller-upgrade/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.797,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Side outline",
+     "value": 0.697,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.798,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.626,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.698,
+    "after": 0.76,
+    "note": "outline overlap over 6 rounds (higher is better)"
+   },
+   "good": [
+    "It reads like the hero: an ochre apron over a white blouse and cream skirt, a striped head wrap with curls showing, and a woven basket of pale onions, orange carrots and green tops carried on the bent arm.",
+    "Official IoU 0.760 (front 0.797, side 0.685, back 0.797) and shadow-cleaned 0.764.",
+    "It is light: 5,402 triangles against a 12k budget, 13 meshes, flat Principled materials named by what they are, 1.69 m tall, origin at the feet, front facing -Y.",
+    "One seamless 'idle' clip, and the basket stays hooked on the forearm because it is parented under the right shoulder pivot."
+   ],
+   "off": [
+    "The face is still simple low-poly (eyes, brows, nose plane, mouth) and stays small at game distance. The wrap's front edge shades the eyes in the 3/4 view.",
+    "The turnaround's hanging free arm and smaller basket no longer match, because the hero pose won. The side view is the weakest (0.69).",
+    "The ground shadow in the turnaround target masks still distorts the official IoU. views/ holds shadow-cleaned copies, and r/views_clean/ has that score.",
+    "The colour distance against the turnaround is higher now (0.27 to 0.53), because the colours follow the hero rather than the sheet's rust and dark-hair palette.",
+    "Carrots mostly show as crowns and tops above the onions, not as long orange bodies."
+   ],
+   "steps": [
+    [
+     "Silhouette first",
+     "Measured the turnaround silhouettes row by row (1 px is about 1.1 mm at 1.65 m) and built the silhouette features first: the A-line linen dress, the bib apron wrapping the front, the A-pose arms with rolled sleeves, the head wrap with its knot and tails, the low bun, sandals, and the oval basket on the right hip with onions in front and carrots and greens behind."
+    ],
+    [
+     "Parametric lofts",
+     "build.py builds every part from elliptic lofts, polyline tubes and icospheres driven by a parameter dict at the top (skirt, torso, head and wrap rings, arm joints, basket rings), so each revision was a parameter edit."
+    ],
+    [
+     "Layered clothing",
+     "Linen dress with soft pleats (alternating ring radii), a rust apron skirt and bib solidified as separate cloth panels, a pocket with a stitched lip, a leather belt with a bronze buckle and hanging ties, apron straps over the shoulders, a crossbody basket strap, and a leather pouch on the left hip (from the back view)."
+    ],
+    [
+     "Basket and produce",
+     "Oval tapered wicker basket with a two-tone brick weave (material per face), a rim, a foot ring, a handle and a dark fill, then onions with pointed tips, carrots and fanned leaf blades."
+    ],
+    [
+     "Rig and idle",
+     "Rigid parts in a hierarchy of empties: seller > hips > chest > shoulders, head_pivot > wrap_tails, plus basket_pivot on the hip. A 120-frame loop at 24 fps, exported as one 'idle' clip (export_anim_scene_split_object=False, so SCENE mode does not split it per node)."
+    ],
+    [
+     "Shadow-free check views",
+     "The sheet's ground shadow is part of the target mask: it spans the whole crop at foot level, so it stretches the target's bounding box and offsets the figure. I kept the official score against mj/ and also scored against shadow-cleaned copies in views/ (shadow pixels below the hem repainted to the background colour, figure untouched) to steer the shape work."
+    ],
+    [
+     "Hero-led final pass",
+     "On the art director's notes I switched the palette and pose from the turnaround to the hero: an ochre apron, a striped cream and tan wrap, curly brown hair, a white blouse, a bigger head with a clearer face, a bigger basket carried on the bent forearm with colourful produce, and the free hand on the belt."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "5,402"
+    ],
+    [
+     "Size",
+     "0.79 × 0.70 × 1.69 m"
+    ],
+    [
+     "Moving parts",
+     "One 120-frame 'idle' clip at 24 fps that loops seamlessly. The hips bob 6 mm twice per loop and sway slightly. The chest pitches with the breath, and the bodice and bib scale with two breaths per loop. The head turns about 16 degrees left and right once per loop and nods slightly. The wrap tails flutter. The basket swings a few degrees on a pivot at its handle, which hangs on the right forearm and so also follows the arm's sway. The left arm, with its hand on the belt, shifts slightly on its shoulder pivot. The legs stay planted."
+    ],
+    [
+     "Set piece",
+     "BA-0081 Ranch produce seller"
+    ],
+    [
+     "Tests",
+     "character"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/seller-upgrade/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "A leather pouch with a flap on the left hip and a crossbody strap (from the back view), a bronze belt buckle with hanging belt ties, a stitched pocket lip, a dress hem band, pleated linen, sandal straps with ankle rings, a hair fringe under the wrap, onion tips, and a basket foot ring and handle."
+    ]
+   ]
+  },
+  {
+   "id": "mc-seller-whimsical",
+   "name": "Ranch produce seller · Whimsical",
+   "group": "Model challenge · Whimsical",
+   "subject": "Ranch produce seller (BA-0081), whimsical style",
+   "outline": 0.707,
+   "orbit": [
+    38,
+    76
+   ],
+   "date": "2026-10-22",
+   "urls": {
+    "ref": "/models/mc-seller-whimsical/ref.jpg",
+    "render": "/models/mc-seller-whimsical/render.jpg",
+    "overlay": "/models/mc-seller-whimsical/overlay.png",
+    "glb": "/models/mc-seller-whimsical/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Front outline",
+     "value": 0.72,
+     "help": "Silhouette overlap with the Midjourney front view"
+    },
+    {
+     "label": "Side outline",
+     "value": 0.705,
+     "help": "Silhouette overlap with the Midjourney side view"
+    },
+    {
+     "label": "Back outline",
+     "value": 0.696,
+     "help": "Silhouette overlap with the Midjourney back view"
+    },
+    {
+     "label": "Hero outline",
+     "value": 0.656,
+     "help": "Overlap with the 3/4 illustration (camera not matched, so a loose check)"
+    }
+   ],
+   "loss": {
+    "before": 0.655,
+    "after": 0.707,
+    "note": "outline overlap over 18 rounds (higher is better)"
+   },
+   "good": [
+    "The chibi reads at a glance: a huge hat, a big round face with dot eyes and rosy cheeks, a tiny bell body and stubby feet. The hat is the widest thing on her, as in both illustrations.",
+    "Final mean IoU 0.707 against the cleaned views (front 0.72, side 0.705, back 0.696), at 768 px and 48 samples.",
+    "7,630 triangles, well under the 12k budget. 1.24 m tall to the carrot leaves (1.17 m to the crown), origin at the centre of the footprint on the ground, front faces -Y.",
+    "The animation was checked after re-importing the GLB: one clip over frames 1 to 120. The body bounces, the neck tilts, the brim flops and the tub sways on every frame, and frame 120 runs smoothly into frame 1.",
+    "The front brim curls up, so the face stays visible from the elevated hero camera. A level brim hid the eyes."
+   ],
+   "off": [
+    "The sheet carries the vegetable tub on her back. I followed the hero and put it on her right hip, so the front and back views have extra tub on one side and are missing the big backpack mass. This is the biggest remaining IoU gap (the back view is the weakest at 0.70). A large back satchel of greens recovers part of it.",
+    "The carrot sits on the left back of the crown, as in the hero, while the sheet puts it on the right. Moving it from the sheet side to the hero side cost about 0.05 mean IoU before the lean-out placement won back about half of that.",
+    "Curling the front brim up so the face shows from the elevated hero camera costs about 0.01 IoU. I kept it because the face matters more.",
+    "Colours are flat, and the smock still reads a little paler and yellower than the illustration's warm beige (mean colour distance 0.20 to 0.32). There is no straw weave or wood grain, only geometry facets.",
+    "The hero's open-mouth grin is a small dark oval, and the hands are simple mitts with a thumb, with no fingers.",
+    "The hood is a cut sphere shell behind the face, so from some angles its inner side reads as a darker ring around the face."
+   ],
+   "steps": [
+    [
+     "Fixed the views",
+     "The sheet's views touch: the front hat overlaps the side view's basket in x, and the side hat touches the back hat. The floor contact shadow also counted as object, so the side view picked up a sliver of the front hat and the front mask ran the full panel width. prep_views.py rebuilds views/ from turnaround.png. It fits the backdrop gradient, paints out the floor shadow under the feet, makes clean cuts between views, and darkens cream areas inside the silhouette slightly so the harness keeps them. It also mirrors the side view, because the sheet draws her right side and the harness side camera looks at her left. All scores use `score r views`."
+    ],
+    [
+     "Silhouette first",
+     "Built the signature shapes first: a big round head (0.47 m wide, about 30% of the height and about 45% with the hat crown) in a cream hood, a giant floppy straw hat (0.88 m brim, wider than the body) with a wavy brim that droops at the sides and back and curls up at the front, a carrot tucked in the rust band, a bell-shaped smock over a green skirt, stubby legs with pointed boots, and a staved wooden tub piled with vegetables and big leafy greens."
+    ],
+    [
+     "Storybook details",
+     "Dot eyes, rosy cheeks, a small open smile and a button nose; a ragged smock hem with ochre patches; a leather band across the chest and a pouch; a leather satchel of greens on her back; green sleeve cuffs; a tub with two hoops, a rim and a handle."
+    ],
+    [
+     "Rig and idle loop",
+     "Rigid parts in a hierarchy: seller > body > neck (head, hood, face, hat > hat_brim_pivot > hat_brim, carrot), shoulders > arms, tub > bucket and veg, satchel, smock, skirt, strap. The legs stay planted on the ground. Each frame of the 120-frame loop is keyed from periodic functions, so frame 120 runs straight back into frame 1. It exports as one 'Scene' clip."
+    ],
+    [
+     "Hero over sheet",
+     "The hero and the sheet disagree in two places, and I followed the hero both times. The hero holds the tub on her right hip at the front with a satchel behind, while the sheet wears the tub as a backpack. The hero tucks the carrot on the left back of the crown, while the sheet tucks it on the right. Both choices cost IoU on the sheet views (see 'off')."
+    ]
+   ],
+   "details": [
+    [
+     "Triangles",
+     "7,630"
+    ],
+    [
+     "Size",
+     "0.95 × 0.95 × 1.24 m"
+    ],
+    [
+     "Moving parts",
+     "One 120-frame seamless idle clip at 24 fps. body: four happy hops per loop (up to 3.5 cm), with a small squash and stretch on landing and a slow body twist; the legs stay planted. neck (head, hood, face and hat): a slow side-to-side head tilt (about 9 degrees) and turn (6 degrees), with a little nod on each landing. hat: lags the head by a few degrees. hat_brim_pivot: the brim's droop deepens and relaxes by about 24% twice per loop, so the brim flops after each hop. tub: sways on her hip (3 to 4 degrees, offset phases)."
+    ],
+    [
+     "Set piece",
+     "BA-0081 Ranch produce seller"
+    ],
+    [
+     "Tests",
+     "character"
+    ],
+    [
+     "Source",
+     "tools/model-challenge/models/seller-whimsical/build.py in abbiesworld_ios"
+    ],
+    [
+     "Made with",
+     "Blender 5.2 (bpy), built from Python by the modeler, directed by the art director"
+    ],
+    [
+     "Added beyond the picture",
+     "The brim is generated as a wavy disc that curls up at the front to frame the face and flops at the sides and back, on its own pivot so it can flop in the idle. A leather satchel of greens on her back nods to the sheet's backpack basket. Red peppers and carrots poke out between the tomatoes, onions, cabbage and pumpkin in the tub. A hood ribbon knot under the chin and a bow with ribbon tails on the hat band. Ragged scalloped smock hem with ochre patches."
+    ]
+   ]
   }
  ]
 }

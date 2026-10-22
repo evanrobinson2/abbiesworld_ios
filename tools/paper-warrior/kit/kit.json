@@ -1,0 +1,157 @@
+{
+ "schemaVersion": 1,
+ "character": "romanPaperWarrior",
+ "style": "papercraft-v1",
+ "sockets": {
+  "head": {
+   "joint": "head",
+   "location": [
+    -0.0523,
+    0.01,
+    1.6027
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "chest": {
+   "joint": "chest",
+   "location": [
+    -0.0598,
+    -0.031,
+    1.414
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "waist": {
+   "joint": "pelvis",
+   "location": [
+    -0.0397,
+    0.0,
+    1.0
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "pelvis": {
+   "joint": "pelvis",
+   "location": [
+    -0.0397,
+    0.0,
+    1.0
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "l_hand": {
+   "joint": "l_hand",
+   "location": [
+    0.3149,
+    -0.115,
+    0.9339
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "r_hand": {
+   "joint": "r_hand",
+   "location": [
+    -0.3876,
+    -0.1047,
+    0.9597
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "l_shoulder": {
+   "joint": "l_shoulder",
+   "location": [
+    0.0817,
+    0.0449,
+    1.3529
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "r_shoulder": {
+   "joint": "r_shoulder",
+   "location": [
+    -0.1548,
+    -0.1364,
+    1.457
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "back": {
+   "joint": "chest",
+   "location": [
+    -0.1204,
+    0.1171,
+    1.414
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "l_foot": {
+   "joint": "l_ankle",
+   "location": [
+    0.1619,
+    0.1308,
+    0.1323
+   ],
+   "yaw_deg": 22.241658899438512
+  },
+  "r_foot": {
+   "joint": "r_ankle",
+   "location": [
+    -0.2614,
+    0.0661,
+    0.1205
+   ],
+   "yaw_deg": 22.241658899438512
+  }
+ },
+ "parts": [
+  {
+   "part": "body",
+   "socket": null,
+   "file": "body.glb",
+   "triangles": 8486,
+   "sha256": "b057567c2457756ca8e4d8aebe41c741576ac03393515f7cff1bc28b9a9f87e3"
+  },
+  {
+   "part": "skirt",
+   "socket": "waist",
+   "file": "skirt.glb",
+   "triangles": 1280,
+   "sha256": "2e59d328b6d0054959f09873b28a874df37dc06cf4c76da41507fa3afaf781ff"
+  },
+  {
+   "part": "shoulder_guards",
+   "socket": "chest",
+   "file": "shoulder_guards.glb",
+   "triangles": 1024,
+   "sha256": "e0ec9cc0c745afacdf775d34a22dbc2522777e607abb6abb00ff2e691624344d"
+  },
+  {
+   "part": "bands",
+   "socket": "pelvis",
+   "file": "bands.glb",
+   "triangles": 228,
+   "sha256": "489be4fde74cb586221a88c92d50a33a4aecb4a800987a6304c8b31d29edf444"
+  },
+  {
+   "part": "helmet",
+   "socket": "head",
+   "file": "helmet.glb",
+   "triangles": 414,
+   "sha256": "2551500ed40d7775fba55ce75c8f2457e20ecf321310da020b75bafd9a21ddfc"
+  },
+  {
+   "part": "shield",
+   "socket": "l_hand",
+   "file": "shield.glb",
+   "triangles": 664,
+   "sha256": "4e1f4b3b35f9aa1ab5ea3a3eb48ec02fabc505f6bc4f813d3eafe9a13584cdb2"
+  },
+  {
+   "part": "sash",
+   "socket": "chest",
+   "file": "sash.glb",
+   "triangles": 84,
+   "sha256": "2c0fbcefe63b6ef1162c7b2ba3e46f6992d45196c2f8c593889e38f1cd20084f"
+  }
+ ]
+}

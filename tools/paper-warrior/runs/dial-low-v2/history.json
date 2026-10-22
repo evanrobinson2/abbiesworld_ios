@@ -1,0 +1,525 @@
+{
+ "dial": "low",
+ "cfg": {
+  "model": "haiku",
+  "effort": "low",
+  "rounds": 6,
+  "level": 0,
+  "px": 192,
+  "samples": 12,
+  "max_edits": 6,
+  "es_iters": 0,
+  "es_groups": "",
+  "v2": true
+ },
+ "hist": [
+  {
+   "round": 0,
+   "accepted": true,
+   "loss": 0.4780027343523164,
+   "terms": {
+    "sil": 0.2854020400052987,
+    "cham": 0.01875611479065642,
+    "ssim": 0.30289247147545295,
+    "edge": 1.0415452844536253,
+    "tone": 0.11952039930555554,
+    "total": 0.4780027343523164,
+    "secs": 2.74
+   },
+   "edits": [],
+   "cost": 0.0
+  },
+  {
+   "round": 1,
+   "accepted": true,
+   "loss": 0.4682645757857447,
+   "terms": {
+    "sil": 0.3067737579074561,
+    "cham": 0.01734656401215441,
+    "ssim": 0.31341963906040926,
+    "edge": 0.9733844961415652,
+    "tone": 0.11473300908905228,
+    "total": 0.4682645757857447,
+    "secs": 0.9
+   },
+   "edits": [
+    {
+     "path": "cam.dist",
+     "old": 4.4050626578702525,
+     "new": 4.9,
+     "why": "Pull the camera back so the full figure and feet fit in frame and the red overspill on the legs and skirt shrinks."
+    },
+    {
+     "path": "shield.w",
+     "old": 0.62,
+     "new": 0.72,
+     "why": "The reference shield is wider; blue on its right edge means the model is missing area there."
+    },
+    {
+     "path": "shield.off.0",
+     "old": 0.08,
+     "new": 0.11,
+     "why": "Shift the shield outward to match its position in the reference, further from the body."
+    },
+    {
+     "path": "crest.a0",
+     "old": -30,
+     "new": -40,
+     "why": "Sweep the plume further toward the front-left so the blue missing area at the top of the crest is covered."
+    }
+   ],
+   "cost": 0.0049708600000000006,
+   "llm_secs": 19.6,
+   "diagnosis": "The render is too large in frame: the feet are cropped at the bottom edge and the legs and skirt sides spill outside the reference silhouette (red), while the reference shows the whole figure with floor shadow below it. The reference shield also sits further right and wider than the render, leaving blue along its outer edge, and the reference plume leans further left at the top.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 15247,
+    "cache_read_input_tokens": 60346,
+    "output_tokens": 1337,
+    "output_tokens_details": {
+     "thinking_tokens": 873
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 15247,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1159,
+      "cache_read_input_tokens": 37371,
+      "cache_creation_input_tokens": 851,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 851
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": null,
+   "best_after": 0.4682645757857447
+  },
+  {
+   "round": 2,
+   "accepted": true,
+   "loss": 0.45954807541177695,
+   "terms": {
+    "sil": 0.27990276685493676,
+    "cham": 0.016805878187776808,
+    "ssim": 0.3147425133888464,
+    "edge": 0.9780973295632875,
+    "tone": 0.11567063674428106,
+    "total": 0.45954807541177695,
+    "secs": 1.01
+   },
+   "edits": [
+    {
+     "path": "joints.r_hand.0",
+     "old": -0.36,
+     "new": -0.4,
+     "why": "Swing the right hand outward so the blue on the outer edge of the reference arm gets covered."
+    },
+    {
+     "path": "joints.r_wrist.0",
+     "old": -0.34,
+     "new": -0.38,
+     "why": "Move the wrist out with the hand so the forearm follows the reference's outward angle and the red inside the arm shrinks."
+    },
+    {
+     "path": "shield.off.2",
+     "old": 0.0,
+     "new": -0.03,
+     "why": "Drop the shield so its top stops overshooting (red) and its lower-right edge fills in (blue)."
+    },
+    {
+     "path": "shield.off.0",
+     "old": 0.11,
+     "new": 0.13,
+     "why": "Nudge the shield a little further outward to close the blue along its right edge."
+    }
+   ],
+   "cost": 0.00437593,
+   "llm_secs": 16.2,
+   "diagnosis": "The render's helmet and crest sit slightly high and to the right, so blue shows up on the top-left of the crest. The biggest mismatch is the reference's right arm (image left), which hangs further out and lower than the model's, leaving blue on its outer edge and red inside. The reference shield also sits lower and a little further out than the model's, so the model's top edge overshoots while its bottom-right edge falls short.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 12329,
+    "cache_read_input_tokens": 63873,
+    "output_tokens": 1477,
+    "output_tokens_details": {
+     "thinking_tokens": 972
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 12329,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1326,
+      "cache_read_input_tokens": 37689,
+      "cache_creation_input_tokens": 824,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 824
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": null,
+   "best_after": 0.45954807541177695
+  },
+  {
+   "round": 3,
+   "accepted": true,
+   "loss": 0.4465167162867909,
+   "terms": {
+    "sil": 0.2668012691087396,
+    "cham": 0.015120459309699207,
+    "ssim": 0.31121565540338825,
+    "edge": 0.9604273573976917,
+    "tone": 0.1142779181985294,
+    "total": 0.4465167162867909,
+    "secs": 1.74
+   },
+   "edits": [
+    {
+     "path": "shield.off.2",
+     "old": -0.03,
+     "new": -0.05,
+     "why": "Lower the shield: red at its top-right means the top sits too high, and blue at its bottom-right means the reference reaches lower."
+    },
+    {
+     "path": "shield.w",
+     "old": 0.72,
+     "new": 0.78,
+     "why": "Widen the shield so the blue band along its right edge is covered."
+    },
+    {
+     "path": "joints.r_shoulder.0",
+     "old": -0.21,
+     "new": -0.23,
+     "why": "Push the right shoulder outward to fill the blue missing area at the upper-left of the reference silhouette."
+    },
+    {
+     "path": "joints.r_elbow.0",
+     "old": -0.3,
+     "new": -0.32,
+     "why": "Follow the shoulder outward with the elbow so the upper arm keeps the reference's outward line."
+    },
+    {
+     "path": "joints.l_toe.0",
+     "old": 0.3,
+     "new": 0.32,
+     "why": "Move the left toe slightly outward to cover the blue at the bottom-right of the left foot."
+    }
+   ],
+   "cost": 0.00464931,
+   "llm_secs": 18.6,
+   "diagnosis": "The render is a little narrow on the figure's right side: blue shows the reference's upper arm and shoulder reaching further out, and the left foot sits slightly inside the reference's toe. The shield is too high at its top-right (red) and short at its lower-right (blue), and its right edge is still thin.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 12684,
+    "cache_read_input_tokens": 64201,
+    "output_tokens": 1809,
+    "output_tokens_details": {
+     "thinking_tokens": 1280
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 12684,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1631,
+      "cache_read_input_tokens": 38017,
+      "cache_creation_input_tokens": 851,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 851
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": null,
+   "best_after": 0.4465167162867909
+  },
+  {
+   "round": 4,
+   "accepted": false,
+   "loss": 0.44684242725945184,
+   "terms": {
+    "sil": 0.26100966702470463,
+    "cham": 0.015201150313796503,
+    "ssim": 0.3123385882008919,
+    "edge": 0.9661157695156593,
+    "tone": 0.11565978604983661,
+    "total": 0.44684242725945184,
+    "secs": 0.78
+   },
+   "edits": [
+    {
+     "path": "helmet.r.0",
+     "old": 0.12,
+     "new": 0.13,
+     "why": "Widen the helmet dome on the figure's right, where blue shows the reference head is wider."
+    },
+    {
+     "path": "joints.r_elbow.0",
+     "old": -0.32,
+     "new": -0.34,
+     "why": "Push the right elbow further out to fill the blue along the outer upper arm."
+    },
+    {
+     "path": "joints.l_ankle.0",
+     "old": 0.2,
+     "new": 0.22,
+     "why": "Move the left ankle outward so the blue along the bottom-right of the left leg is covered."
+    },
+    {
+     "path": "joints.l_toe.0",
+     "old": 0.32,
+     "new": 0.34,
+     "why": "Extend the left toe outward to match the reference foot's lower-right edge."
+    },
+    {
+     "path": "shield.h",
+     "old": 1.0,
+     "new": 1.04,
+     "why": "Lengthen the shield a little so the blue along its lower-right edge is covered."
+    }
+   ],
+   "cost": 0.0048578,
+   "llm_secs": 18.3,
+   "diagnosis": "The render is slightly narrow on the figure's right side (image left): blue sits along the upper outer arm and the helmet's left flank, so the reference is wider there. The left foot (image right) also runs short at the bottom edge, while the shield's lower-right edge is still short, and the reference reaches lower.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 13057,
+    "cache_read_input_tokens": 64600,
+    "output_tokens": 1990,
+    "output_tokens_details": {
+     "thinking_tokens": 1484
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 13057,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1838,
+      "cache_read_input_tokens": 38416,
+      "cache_creation_input_tokens": 825,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 825
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": null,
+   "best_after": 0.4465167162867909
+  },
+  {
+   "round": 5,
+   "accepted": true,
+   "loss": 0.44205721005617743,
+   "terms": {
+    "sil": 0.2558554698657527,
+    "cham": 0.014788157848305967,
+    "ssim": 0.31482736748456397,
+    "edge": 0.9521431447932943,
+    "tone": 0.11589562908496731,
+    "total": 0.44205721005617743,
+    "secs": 1.07
+   },
+   "edits": [
+    {
+     "path": "shield.off.0",
+     "old": 0.13,
+     "new": 0.15,
+     "why": "Blue band along the shield's right edge means the reference shield sits further out; push it outward."
+    },
+    {
+     "path": "shield.w",
+     "old": 0.78,
+     "new": 0.82,
+     "why": "Widen the shield so the reference's right-edge silhouette is covered."
+    },
+    {
+     "path": "joints.r_shoulder.0",
+     "old": -0.23,
+     "new": -0.25,
+     "why": "Blue on the outer upper arm and shoulder; push the right shoulder further out, as the earlier outward shoulder move was accepted."
+    },
+    {
+     "path": "crest.a0",
+     "old": -40,
+     "new": -50,
+     "why": "Blue at the top-left of the plume means the reference crest sweeps further toward the front-left."
+    }
+   ],
+   "cost": 0.00477532,
+   "llm_secs": 17.0,
+   "diagnosis": "The biggest misses are on the shield, whose right edge is blue (reference is wider and sits further out), and on the figure's right arm and upper shoulder, where blue shows the reference arm sits further outward. The helmet plume also leans further toward the front-left in the reference, which leaves blue at the top-left of the crest. Leg and foot edges are close enough that I'm leaving them alone this round.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 13433,
+    "cache_read_input_tokens": 64942,
+    "output_tokens": 1601,
+    "output_tokens_details": {
+     "thinking_tokens": 1102
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 13433,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1415,
+      "cache_read_input_tokens": 38758,
+      "cache_creation_input_tokens": 859,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 859
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": null,
+   "best_after": 0.44205721005617743
+  },
+  {
+   "round": 6,
+   "accepted": true,
+   "loss": 0.43424021560101406,
+   "terms": {
+    "sil": 0.24466326457270182,
+    "cham": 0.014055400218503437,
+    "ssim": 0.3153355799133213,
+    "edge": 0.9385782875000748,
+    "tone": 0.11619083180147056,
+    "total": 0.43424021560101406,
+    "secs": 1.12
+   },
+   "edits": [
+    {
+     "path": "joints.r_knee.0",
+     "old": -0.15,
+     "new": -0.17,
+     "why": "Blue down the outer edge of the right leg means the reference knee sits further out."
+    },
+    {
+     "path": "joints.r_ankle.0",
+     "old": -0.17,
+     "new": -0.19,
+     "why": "Follow the knee outward so the lower right leg covers the blue along its outer edge."
+    },
+    {
+     "path": "joints.l_knee.0",
+     "old": 0.16,
+     "new": 0.15,
+     "why": "Red on the inside of the left leg means the knee sits slightly too far out."
+    },
+    {
+     "path": "crest.lift",
+     "old": 0.03,
+     "new": 0.05,
+     "why": "Blue above the helmet means the reference plume rises higher than the model's."
+    },
+    {
+     "path": "shoulders.rows.0.spread",
+     "old": 150,
+     "new": 160,
+     "why": "Blue at the upper-left shoulder means the reference pauldron strips spread wider."
+    }
+   ],
+   "cost": 0.004798190000000001,
+   "llm_secs": 18.9,
+   "diagnosis": "The overlay shows blue along the outer edge of the figure's right (image-left) leg and upper shoulder, so the reference stands wider and fuller there. Red sits just inside the figure's left leg and above the crest, so the left leg is slightly too wide and the plume sits too low.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 13448,
+    "cache_read_input_tokens": 64949,
+    "output_tokens": 1637,
+    "output_tokens_details": {
+     "thinking_tokens": 1139
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 13448,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1443,
+      "cache_read_input_tokens": 38765,
+      "cache_creation_input_tokens": 867,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 867
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": null,
+   "best_after": 0.43424021560101406
+  }
+ ]
+}

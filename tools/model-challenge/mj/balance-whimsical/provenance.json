@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "balance-whimsical",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a whimsical toy contraption beam balance, a bendy wooden stand, mismatched pans (a teacup and a little bowl), a seesaw beam with a cheerful pointer, springy cords, a tiny bell on top, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "dc6285b2-a542-413b-91bb-e948274c83bd",
+      "grid_url": "https://www.midjourney.com/jobs/dc6285b2-a542-413b-91bb-e948274c83bd?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "48adfb76-ab8d-4f12-9ec5-f2c051656797",
+      "upscale_mode": "Upscale (Subtle)"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a whimsical toy contraption beam balance, a bendy wooden stand, mismatched pans (a teacup and a little bowl), a seesaw beam with a cheerful pointer, springy cords, a tiny bell on top, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "c63722ca-8bef-4545-abbc-b5b8e9a8f86c",
+      "grid_url": "https://www.midjourney.com/jobs/c63722ca-8bef-4545-abbc-b5b8e9a8f86c?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "ac68fc93-a6dc-4848-a13d-08f29c5fadb8",
+      "upscale_mode": "Upscale (Subtle)"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "2da50f80def429a07a3f34b1623e07a2db4768c2c16624f915c7f1b0238c4f42",
+      "bytes": 3549923,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/48adfb76-ab8d-4f12-9ec5-f2c051656797/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "81f8bbe64400f734eb142fa9f1fbc55625220e8f1fb0f0c09cd56dfa81e2924a",
+      "bytes": 6850103,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/ac68fc93-a6dc-4848-a13d-08f29c5fadb8/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "68669eb2840ac4d24e75a24f4208e92d4dac750c8ba20e8fd5af1f431a78350d",
+      "bytes": 2022971,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "7506da025cba9150f8e11f4ace82af32afb1eb84d1a80d458a2d022201c79b04",
+      "bytes": 2026386,
+      "pixels": [
+        962,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    },
+    "view_back.png": {
+      "sha256": "5e679d71c91af21b5f70947dbc795116c237068924f6d1ea4c82fc45cf998f8b",
+      "bytes": 2009289,
+      "pixels": [
+        963,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "split_views.py (front 0 971; side 971 1941; back 1941 2912), 4 px trimmed each side"
+    }
+  },
+  "notes": "Hero pick 1 has the bell on top, the smiling arrow pointer, a teacup and a bowl, springy cords and a bendy stand. Turnaround pick 1 is three evenly spaced views of one design; the side view shows the beam end-on with the bell."
+}

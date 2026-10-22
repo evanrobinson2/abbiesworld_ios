@@ -1,0 +1,21 @@
+{
+ "front": {
+  "iou": 0.518,
+  "aspect_target": 1.275,
+  "aspect_render": 1.114,
+  "mean_color_dist": 0.259
+ },
+ "side": {
+  "iou": 0.583,
+  "aspect_target": 1.436,
+  "aspect_render": 1.414,
+  "mean_color_dist": 0.237
+ },
+ "back": {
+  "iou": 0.418,
+  "aspect_target": 1.591,
+  "aspect_render": 1.114,
+  "mean_color_dist": 0.107
+ },
+ "mean_iou": 0.506
+}

@@ -1,0 +1,20 @@
+# Process notes (raw, for critique)
+- download.blender.org blocked by egress; pip bpy 5.2.3 works; EEVEE needs libEGL (crashes), Cycles CPU fine.
+- Mask: naive teal-chroma threshold ate shaded edges (teal bounce light on figure). Fitted cubic background + chroma/luminance deviation fixed edges but floor shadow got included; split rule below y=880 (must be brighter than bg). Mask still trims part of right foot.
+- Camera fit 500 ES iters: sil loss .218->.137. Camera ended low (0.69 m) with 51mm: reference is a low hero angle.
+- Pose ES 1500 iters .137->.1145; shape ES slower gains.
+- Lighting: AgX washed out; Standard view + exposure -1.3 closer. Initial big key near floor = hot floor.
+- edge term near 1.0 (no correlation) early: misaligned silhouettes dominate gradient maps; blurred sigma 1->2.
+- Haiku round 1: sensible diagnosis citing pixel offsets; cost ~$0.009/round, 16s.
+- Dial low (Haiku): 6 rounds, 4 accepted, $0.028; diagnoses pixel-level & plausible; small consistent gains.
+- Dial mid (Sonnet+ES150): 6 rounds, only 2 LLM edits accepted; most gain came from numeric ES polish after round 1. Sonnet over-edited (8-10 edits at once) and noticed itself in round 5 "changed too many things at once". $0.51 (first call $0.16 cache creation).
+- NONE of the revisers noticed the global 3/4 turn problem (my eye did: crest seen edge-on means body yaw has wrong sign). The overlay invites local patching; global pose errors need a different view (e.g., a side-by-side of only the crest/feet orientation, or explicitly asking "is the figure's facing right?").
+- Silhouette-only ES at LOD0 overfits: limbs get fat to cover pose errors; sil at LOD1 worse than at LOD0 (0.209 vs 0.234).
+- Restart at yaw +30 (my eye) -> sil 0.069 vs 0.10 with yaw -12; the ES never crossed the yaw basin on its own.
+- Silhouette ambiguity: camera height went to 1.62 m with 49mm (ES), earlier 0.69 m with 51mm. Silhouette barely constrains camera height; my eye says ~1.3-1.4.
+- Lighting ES (100 renders): .315 -> .280, mostly tone .097->.066 and ssim .306->.262. Raised world strength, lowered paper albedo .6->.57, roughness .85->.44 (paper is not glossy - loss picked a shinier paper to get contrast).
+- Detail pass (pecs, abs, nose, fingers, greaves, solid sash, helmet cheeks, crest width, more facets) improved the look visibly but moved loss only .2794->.2788: loss blind to readable detail at 256px.
+- Reviser prompt v2: coarse-to-fine, check facing/camera/proportions, one idea per round.
+- Turntable at LOD2 with crumple 1.6: reads as clay/rock, not paper. Per-vertex noise on a dense mesh makes lumps; paper needs FEW large flat planes with crisp creases. The loss at 256px could not see this (front view only, too small). Fix: crumple 0.6, lower lod2 ratio.
+- Shield turned out the right curvature from the side, but viewed from front it's a flat plate.
+- Master Opus v2 caught "reads as seen from behind: no visor/face" and reduced yaw 30->18: accepted. v2 prompt made it reason globally.

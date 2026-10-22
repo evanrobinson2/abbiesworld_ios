@@ -1,0 +1,91 @@
+{
+ "model": "opus",
+ "cost_usd": 0.157,
+ "checks": [
+  {
+   "id": "c1",
+   "part": "silhouette",
+   "check": "The whole helmet, crest included, is clearly taller than it is wide, about 1.5 times as tall as wide."
+  },
+  {
+   "id": "c2",
+   "part": "silhouette",
+   "check": "The lowest points in the picture are the two pointed cheek-guard tips, and they hang well below where the neck guard ends at the back."
+  },
+  {
+   "id": "c3",
+   "part": "crest",
+   "check": "The crest rises above the dome by at least a quarter of the helmet's total height and runs as an arch from front to back over the top of the dome."
+  },
+  {
+   "id": "c4",
+   "part": "crest",
+   "check": "Seen from this camera, the crest is a fan of about 8 to 14 separate rectangular blades whose squared tips form a jagged, stepped outer edge."
+  },
+  {
+   "id": "c5",
+   "part": "crest",
+   "check": "Inside the ring of blades there is a smooth, curved inner band (a second layer of the crest) that follows the arch below the blade tips."
+  },
+  {
+   "id": "c6",
+   "part": "dome",
+   "check": "The dome is a low, faceted cap whose top sits clearly below the crest and whose curve is built from a few large flat facets, not a smooth sphere."
+  },
+  {
+   "id": "c7",
+   "part": "brow plate",
+   "check": "A distinct brow band runs across the front of the dome as a raised ledge with an angular, beak-like corner at the front-left."
+  },
+  {
+   "id": "c8",
+   "part": "eye opening",
+   "check": "There is an arch-shaped opening between the two cheek guards, below the brow band, and through it the dark inside of the helmet shows."
+  },
+  {
+   "id": "c9",
+   "part": "cheek guards",
+   "check": "There are two separate cheek guards, near and far, each a long plate tapering to a point at the bottom, and the near one is the larger in the image."
+  },
+  {
+   "id": "c10",
+   "part": "cheek guards",
+   "check": "The cheek guards are taller, top to bottom, than the dome is from the brow band up to its top (not counting the crest)."
+  },
+  {
+   "id": "c11",
+   "part": "neck guard",
+   "check": "At the back right, the neck guard flares out and ends in a pointed tip that turns upward, sticking out past the back of the dome."
+  },
+  {
+   "id": "c12",
+   "part": "bosses",
+   "check": "At the temple, between the back of the near cheek guard and the crest's rear root, there are two small raised round bosses (rivets) side by side."
+  },
+  {
+   "id": "c13",
+   "part": "depth: overhang",
+   "check": "The brow band sticks out over the face opening and casts a visible shadow, or shows a step in the normals, along its lower edge."
+  },
+  {
+   "id": "c14",
+   "part": "depth: thickness",
+   "check": "The crest is thin side to side compared with the width of the dome: it reads as a narrow wall standing on the dome, not a wide block."
+  },
+  {
+   "id": "c15",
+   "part": "depth: recess",
+   "check": "The face opening is a real hollow: the inside surface behind it is darker, or faces a clearly different way in the normal image, than the outer cheek-guard surfaces around it."
+  },
+  {
+   "id": "c16",
+   "part": "construction: hemmed edges",
+   "check": "The cheek guards' outer edges have a raised border strip (a hem) that runs along the rim like a frame and sits at a different angle from the plate inside it."
+  },
+  {
+   "id": "c17",
+   "part": "construction: flat planes",
+   "check": "Every surface is made of flat polygon facets joined at straight, sharp creases, with no smooth curves and no crumpled noise, so the normal image shows flat patches of solid colour."
+  }
+ ]
+}

@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "tool": "Midjourney V8 web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time",
+  "prompt": "character turnaround sheet, three views of the same figure side by side, front view, side view, back view, full body, a Roman legionary soldier made of matte white folded papercraft, faceted paper folds with crisp creases, overlapping folded paper armor plates, helmet with tall brush crest, segmented paper lorica, paper strip skirt, large oval shield, short gladius, neutral standing pose, orthographic, identical proportions in every view, evenly spaced, soft teal backdrop, soft diffuse studio light --ar 16:9 --style raw --no text, labels",
+  "jobs": {
+    "grid": {
+      "job_id": "3bc5823d-956d-4155-8795-9fe69db59e5f",
+      "url": "https://www.midjourney.com/jobs/3bc5823d-956d-4155-8795-9fe69db59e5f?index=3",
+      "picked_index": 3,
+      "why": "only one of the four with a true side profile (shield in profile); the others show front, three-quarter and back"
+    },
+    "upscale": {
+      "job_id": "9a563437-96d8-4e14-8ec1-911f762628db",
+      "url": "https://www.midjourney.com/jobs/9a563437-96d8-4e14-8ec1-911f762628db?index=0",
+      "mode": "Upscale (Subtle)",
+      "parent": "3bc5823d-956d-4155-8795-9fe69db59e5f index 3"
+    }
+  },
+  "files": {
+    "turnaround_grid_pick.png": {
+      "sha256": "de90f88c4497d41d439ed6e2c470741e76f0a2037698538988f60f56bb7185f7",
+      "bytes": 1367893,
+      "pixels": [
+        1456,
+        816
+      ],
+      "source": "https://cdn.midjourney.com/3bc5823d-956d-4155-8795-9fe69db59e5f/0_3.png"
+    },
+    "turnaround_upscaled.png": {
+      "sha256": "10fedfd2d7b8fae2e7442d4ef90b92559d12f4c3800f9e3896c5c090c38ce8d9",
+      "bytes": 7129955,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/9a563437-96d8-4e14-8ec1-911f762628db/0_0.png"
+    },
+    "view_back.png": {
+      "sha256": "ed70d3c6618dae5b8378cbc1c3c3048ba6012fbcf7947771b266667127f37dd1",
+      "bytes": 2225535,
+      "derived_from": "turnaround_upscaled.png",
+      "method": "split_views.py, equal thirds (cuts at x=0/970/1941/2912), 4 px trimmed each side"
+    },
+    "view_front.png": {
+      "sha256": "c52808af9185adea0a6e2583f6a11ea208e8dade870a375869864daf8a728f9d",
+      "bytes": 2234409,
+      "derived_from": "turnaround_upscaled.png",
+      "method": "split_views.py, equal thirds (cuts at x=0/970/1941/2912), 4 px trimmed each side"
+    },
+    "view_side.png": {
+      "sha256": "bdd506f613836b164cc6630f873d14b0e4775a7d11eb7271d5a2b4752075c965",
+      "bytes": 2250337,
+      "derived_from": "turnaround_upscaled.png",
+      "method": "split_views.py, equal thirds (cuts at x=0/970/1941/2912), 4 px trimmed each side"
+    }
+  },
+  "use": "multi-view image targets (front, side, back) for the paper warrior image-to-3D loop in tools/paper-warrior",
+  "notes": "Midjourney turnarounds are not true orthographic: the side view is close to profile but slightly turned, and the crest is drawn thinner in the back view than in the side view. Treat the views as consistent in design, not in exact geometry."
+}

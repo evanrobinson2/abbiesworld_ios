@@ -1,0 +1,267 @@
+{
+  "schemaVersion": 1,
+  "date_collected": "2026-10-22",
+  "source": "Evan's Midjourney account history (Midjourney V8.2 web app), read through the site's own /api/imagine listing in his signed-in Chrome via Claude in Chrome; every image downloaded at full size from cdn.midjourney.com",
+  "selection": "The six wearable/held items Evan picked for the Roman soldier: helmet, body armour, shoulder plates, belt, gladius, sandals. Newest job for each part; all four variants of each grid kept.",
+  "gaps": "the centurion belt came out bronze rather than ivory white (the earlier plain belt, job 0a66a466, is ivory but was not chosen)",
+  "jobs": [
+    {
+      "part": "Helmet",
+      "job_id": "615426e3-b07e-4a37-b351-6e4d34a5b0fc",
+      "created": "2026-10-22T15:48:05.194012+00:00",
+      "job_type": "v8-2_diffusion",
+      "parent": null,
+      "size": [
+        1024,
+        1024
+      ],
+      "prompt": "A single stylized low-poly white Roman centurion helmet, helmet only, empty wearable armor piece with open underside, prominent sculpted transverse crest, angular cheek guards and neck guard, elegant ivory-white monochromatic material, clean faceted polygonal geometry, strong readable silhouette, charming strategy-game asset, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, head, face, body, bust, pedestal, text, scenery --ar 1:1 --v 8.2",
+      "job_url": "https://www.midjourney.com/jobs/615426e3-b07e-4a37-b351-6e4d34a5b0fc",
+      "images": [
+        {
+          "file": "images/615426e3_0.png",
+          "index": 1,
+          "source": "https://cdn.midjourney.com/615426e3-b07e-4a37-b351-6e4d34a5b0fc/0_0.png",
+          "sha256": "893722f57fdcfa49b1cc86aed9047e53336dec60cc4541fbb4df0efc7995ea5c",
+          "bytes": 701786
+        },
+        {
+          "file": "images/615426e3_1.png",
+          "index": 2,
+          "source": "https://cdn.midjourney.com/615426e3-b07e-4a37-b351-6e4d34a5b0fc/0_1.png",
+          "sha256": "e2b5ad9c1244d9c92181ecfda3c28524c7524440323c7a2e68e85f450cdf0802",
+          "bytes": 1226256
+        },
+        {
+          "file": "images/615426e3_2.png",
+          "index": 3,
+          "source": "https://cdn.midjourney.com/615426e3-b07e-4a37-b351-6e4d34a5b0fc/0_2.png",
+          "sha256": "2cecbd82a9154d7e510b40c74ac742bfdf69828e0a0e33887f0ce612af222ffd",
+          "bytes": 1019516
+        },
+        {
+          "file": "images/615426e3_3.png",
+          "index": 4,
+          "source": "https://cdn.midjourney.com/615426e3-b07e-4a37-b351-6e4d34a5b0fc/0_3.png",
+          "sha256": "661fb2cf45be039f81d565d69f59727531ef0735e16786ece7bc92c322e066c0",
+          "bytes": 1012618
+        }
+      ]
+    },
+    {
+      "part": "Body armour (cuirass)",
+      "job_id": "699aa058-fefe-4cb2-a644-9a16c372d524",
+      "created": "2026-10-22T15:54:39.677389+00:00",
+      "job_type": "v8-2_diffusion",
+      "parent": null,
+      "size": [
+        1024,
+        1024
+      ],
+      "prompt": "A single segmented Roman torso cuirass only, hollow empty chest and back shell with overlapping horizontal armor bands, open neck and arm holes, no attached shoulder armor or skirt, stylized low-poly strategy-game equipment asset, elegant ivory-white monochromatic material, clean angular faceted polygonal geometry, strong readable silhouette, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, figure, mannequin, anatomy, skin, head, face, body, pedestal, text, scenery, helmet --ar 1:1 --v 8.2",
+      "job_url": "https://www.midjourney.com/jobs/699aa058-fefe-4cb2-a644-9a16c372d524",
+      "images": [
+        {
+          "file": "images/699aa058_0.png",
+          "index": 1,
+          "source": "https://cdn.midjourney.com/699aa058-fefe-4cb2-a644-9a16c372d524/0_0.png",
+          "sha256": "2f71a8f0598c4b3c14f45d64b662ceae34fb66eba9a41139890399be829a6dad",
+          "bytes": 953935
+        },
+        {
+          "file": "images/699aa058_1.png",
+          "index": 2,
+          "source": "https://cdn.midjourney.com/699aa058-fefe-4cb2-a644-9a16c372d524/0_1.png",
+          "sha256": "5ab2ce880182308a3ccd355ee177064ce6ccc0129461a601dee41db227cf1f65",
+          "bytes": 1027875
+        },
+        {
+          "file": "images/699aa058_2.png",
+          "index": 3,
+          "source": "https://cdn.midjourney.com/699aa058-fefe-4cb2-a644-9a16c372d524/0_2.png",
+          "sha256": "6a106122267cd871bd34a7f9c15b56fd63a7d1ca0c836db037d47dfccb95a8f2",
+          "bytes": 885556
+        },
+        {
+          "file": "images/699aa058_3.png",
+          "index": 4,
+          "source": "https://cdn.midjourney.com/699aa058-fefe-4cb2-a644-9a16c372d524/0_3.png",
+          "sha256": "a49dff4857a92183759d22480fbe276e9711013173b4f421640c30ed5f0a2b6e",
+          "bytes": 968655
+        }
+      ]
+    },
+    {
+      "part": "Shoulder plates (pair)",
+      "job_id": "b767ad24-f814-4666-aee6-bdda30ecb239",
+      "created": "2026-10-22T15:54:54.830208+00:00",
+      "job_type": "v8-2_diffusion",
+      "parent": null,
+      "size": [
+        1024,
+        1024
+      ],
+      "prompt": "A matched pair of Roman shoulder armor pieces only, separate left and right curved overlapping segmented shoulder plates, hollow empty undersides, stylized low-poly strategy-game equipment asset, elegant ivory-white monochromatic material, clean angular faceted polygonal geometry, strong readable silhouette, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, figure, mannequin, anatomy, skin, head, face, body, pedestal, text, scenery, helmet --ar 1:1 --v 8.2",
+      "job_url": "https://www.midjourney.com/jobs/b767ad24-f814-4666-aee6-bdda30ecb239",
+      "images": [
+        {
+          "file": "images/b767ad24_0.png",
+          "index": 1,
+          "source": "https://cdn.midjourney.com/b767ad24-f814-4666-aee6-bdda30ecb239/0_0.png",
+          "sha256": "12689a8ede5f2c9b541979c22c8e3d0dcf0a7092b89cd0bdc623d7c3f37e7b28",
+          "bytes": 840705
+        },
+        {
+          "file": "images/b767ad24_1.png",
+          "index": 2,
+          "source": "https://cdn.midjourney.com/b767ad24-f814-4666-aee6-bdda30ecb239/0_1.png",
+          "sha256": "281f62330990b8896e424fdd52f3265bdd3f3701e623c8b09de2eecf9c39a983",
+          "bytes": 978896
+        },
+        {
+          "file": "images/b767ad24_2.png",
+          "index": 3,
+          "source": "https://cdn.midjourney.com/b767ad24-f814-4666-aee6-bdda30ecb239/0_2.png",
+          "sha256": "e47760be6b3506403cbfd2091762aa479bc33d168a327a1caa53af5f5d35a651",
+          "bytes": 971530
+        },
+        {
+          "file": "images/b767ad24_3.png",
+          "index": 4,
+          "source": "https://cdn.midjourney.com/b767ad24-f814-4666-aee6-bdda30ecb239/0_3.png",
+          "sha256": "d6506e7b270966566c8462a1390f837b8efa3ba094c971330de674a9795a8970",
+          "bytes": 894182
+        }
+      ]
+    },
+    {
+      "part": "Belt (centurion)",
+      "job_id": "3c090e7c-775d-4813-ac52-023fb472271e",
+      "created": "2026-10-22T15:56:50.487920+00:00",
+      "job_type": "v8-2_diffusion",
+      "parent": null,
+      "size": [
+        1024,
+        1024
+      ],
+      "prompt": "A single stylish Roman centurion military belt only, cingulum, fastened into an empty wearable oval, bold sculpted geometric buckle with an abstract sunburst emblem, broad tapered band, alternating beveled armor plaques with restrained embossed laurel motifs, elegant raised edge trim, strong rhythmic design and confident proportions, premium heroic strategy-game equipment, stylized low-poly with deliberate broad planar facets, ivory-white monochromatic material throughout, decorative detail sculpted into the geometry, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, standalone equipment reference for a game-ready 3D mesh --no person, figure, mannequin, anatomy, skin, head, face, body, pedestal, text, scenery, helmet, skirt, tassels --ar 1:1 --stylize 200 --v 8.2",
+      "job_url": "https://www.midjourney.com/jobs/3c090e7c-775d-4813-ac52-023fb472271e",
+      "images": [
+        {
+          "file": "images/3c090e7c_0.png",
+          "index": 1,
+          "source": "https://cdn.midjourney.com/3c090e7c-775d-4813-ac52-023fb472271e/0_0.png",
+          "sha256": "09200eb55370ad23d3ab63c5744e1966e32ee8d63252892cd0bd05b19eec4676",
+          "bytes": 999224
+        },
+        {
+          "file": "images/3c090e7c_1.png",
+          "index": 2,
+          "source": "https://cdn.midjourney.com/3c090e7c-775d-4813-ac52-023fb472271e/0_1.png",
+          "sha256": "33c09d8cff423711aa8534b664b20c034f14198a2cab9de70afda0ec2073ca06",
+          "bytes": 1223112
+        },
+        {
+          "file": "images/3c090e7c_2.png",
+          "index": 3,
+          "source": "https://cdn.midjourney.com/3c090e7c-775d-4813-ac52-023fb472271e/0_2.png",
+          "sha256": "2a15b74be3ed5bb3e795c0b747916a79948678b88445c2a2cd49f0c9faad02bb",
+          "bytes": 1158643
+        },
+        {
+          "file": "images/3c090e7c_3.png",
+          "index": 4,
+          "source": "https://cdn.midjourney.com/3c090e7c-775d-4813-ac52-023fb472271e/0_3.png",
+          "sha256": "8f8e409ba1e29d4946f841a5e4fc477970ed13c7f4c079981f1516cafaa853b1",
+          "bytes": 905621
+        }
+      ]
+    },
+    {
+      "part": "Gladius",
+      "job_id": "75c42e65-c7a9-46c3-aa78-d8c1520b43b5",
+      "created": "2026-10-22T15:58:02.979521+00:00",
+      "job_type": "v8-2_diffusion",
+      "parent": null,
+      "size": [
+        1024,
+        1024
+      ],
+      "prompt": "A single stylish Roman gladius sword only, entire sword visible from pommel to tip, short broad straight double-edged blade with a sharply tapered triangular point and bold central ridge, compact sculpted crossguard, elegantly faceted grip with subtle geometric grooves, distinctive angular rounded pommel, restrained embossed laurel motif on the guard, heroic proportions and strong readable silhouette, premium strategy-game equipment asset, stylized low-poly with deliberate clean broad planar facets, elegant ivory-white monochromatic material throughout, three-quarter orthographic product view, diagonally composed and centered with generous margins, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, figure, hand, mannequin, anatomy, body, pedestal, text, scenery, scabbard, shield, multiple swords --ar 1:1 --stylize 200 --v 8.2",
+      "job_url": "https://www.midjourney.com/jobs/75c42e65-c7a9-46c3-aa78-d8c1520b43b5",
+      "images": [
+        {
+          "file": "images/75c42e65_0.png",
+          "index": 1,
+          "source": "https://cdn.midjourney.com/75c42e65-c7a9-46c3-aa78-d8c1520b43b5/0_0.png",
+          "sha256": "a25ff28e415ced2b6deaefcfbb0b92536d6e26cbb8b27044545c65c1abe637e6",
+          "bytes": 898097
+        },
+        {
+          "file": "images/75c42e65_1.png",
+          "index": 2,
+          "source": "https://cdn.midjourney.com/75c42e65-c7a9-46c3-aa78-d8c1520b43b5/0_1.png",
+          "sha256": "63cfd2f2ad0d9eb94efb0f73dc9219c35a8a146899f12961de9f53ffe52d2ea0",
+          "bytes": 894712
+        },
+        {
+          "file": "images/75c42e65_2.png",
+          "index": 3,
+          "source": "https://cdn.midjourney.com/75c42e65-c7a9-46c3-aa78-d8c1520b43b5/0_2.png",
+          "sha256": "4c7f2c37cfa872610104267e0c378731d9397587a713c60b008a83bec3be146b",
+          "bytes": 944381
+        },
+        {
+          "file": "images/75c42e65_3.png",
+          "index": 4,
+          "source": "https://cdn.midjourney.com/75c42e65-c7a9-46c3-aa78-d8c1520b43b5/0_3.png",
+          "sha256": "8c33409b0a1134b4793e49280cbc62bbd44ce776cb799360b60039746f4dcc8d",
+          "bytes": 516216
+        }
+      ]
+    },
+    {
+      "part": "Sandals (pair)",
+      "job_id": "5756e8ae-95c4-418f-afc7-3b9743e671da",
+      "created": "2026-10-22T15:54:59.992781+00:00",
+      "job_type": "v8-2_diffusion",
+      "parent": null,
+      "size": [
+        1024,
+        1024
+      ],
+      "prompt": "A matched pair of Roman military sandals only, left and right caligae, thick soles and broad simplified open lattice straps, visibly empty foot openings, stylized low-poly strategy-game equipment asset, elegant ivory-white monochromatic material, clean angular faceted polygonal geometry, strong readable silhouette, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, figure, mannequin, anatomy, skin, head, face, body, pedestal, text, scenery, helmet --ar 1:1 --v 8.2",
+      "job_url": "https://www.midjourney.com/jobs/5756e8ae-95c4-418f-afc7-3b9743e671da",
+      "images": [
+        {
+          "file": "images/5756e8ae_0.png",
+          "index": 1,
+          "source": "https://cdn.midjourney.com/5756e8ae-95c4-418f-afc7-3b9743e671da/0_0.png",
+          "sha256": "96037d78d0b318dab2fe96bf0443a2d983712a5998e5746d62ce8964ea30af8c",
+          "bytes": 973283
+        },
+        {
+          "file": "images/5756e8ae_1.png",
+          "index": 2,
+          "source": "https://cdn.midjourney.com/5756e8ae-95c4-418f-afc7-3b9743e671da/0_1.png",
+          "sha256": "438ca1959fd72ff002a899d03f75073370d46d2e8d78bc3b96c9b5c349d9eed4",
+          "bytes": 955986
+        },
+        {
+          "file": "images/5756e8ae_2.png",
+          "index": 3,
+          "source": "https://cdn.midjourney.com/5756e8ae-95c4-418f-afc7-3b9743e671da/0_2.png",
+          "sha256": "7f10f41d9bf6b6eb4a96743dc479bdd9fba2527e572d0cc823a5e0d3c6d9ea8f",
+          "bytes": 1122032
+        },
+        {
+          "file": "images/5756e8ae_3.png",
+          "index": 4,
+          "source": "https://cdn.midjourney.com/5756e8ae-95c4-418f-afc7-3b9743e671da/0_3.png",
+          "sha256": "4005bbf3ee517f91bb3dbacd3b870320ab11b4950fe9252cee16967080dc237b",
+          "bytes": 990581
+        }
+      ]
+    }
+  ]
+}
