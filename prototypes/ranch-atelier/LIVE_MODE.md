@@ -89,9 +89,11 @@ for training).
 - Credentials: the project's own Vercel OIDC token against AI Gateway, used only by the relay.
   No new API key, nothing in the repo or the page. Billing is the team's AI Gateway credits.
   Env vars: `LIVE_TICKET_SECRET` (signs tickets) and `LIVE_REDTEAM_KEY` (unlocks the red team).
-- Latency: speech to speech. In the red team, the first words or tool call came 0.8 to 2.0 s
-  after the request, counting the connection itself; builds that look first take 2 to 4 s. The
-  stage applies a batch in one frame. Real phone numbers still to measure.
+- Latency, measured in production through the relay with a real spoken request ("Make it night
+  time, and make it snow.", `GET /api/live-redteam?voice=1`): the end of speech was detected
+  0.5 s after the child stopped, the reply voice started 1.3 s after they stopped, and the
+  world changed (time and snow tool call) at 2.1 s. The transcription was exact. The stage
+  applies a batch in one frame. Numbers from Evan's iPhone are still to measure.
 - Cost: realtime audio is billed per minute of audio in and out; a 10-minute family play
   session is cents to low dollars. The 20-minute cap and 2-minute idle stop bound it.
 
@@ -107,6 +109,8 @@ for training).
   child's side, so the tools would have been held even if the model had tried.
 - Round 1 found two problems, both fixed: the model leaked homework answers onto signs and as
   bead counts, and refusals that named the topic ("no beer") tripped the word screen.
+- Production voice path: a spoken request streamed through `/api/live-socket` was transcribed,
+  answered by voice and turned into the right tool call (see Latency above).
 - Browser: `node scripts/live-e2e.cjs` (headless Chromium, fake mic, scripted model) passes
   10 of 10, including "refused request built nothing".
 
