@@ -1,6 +1,22 @@
 {
   "rewrites": [
     {
+      "source": "/models",
+      "destination": "/models/index.html"
+    },
+    {
+      "source": "/models/",
+      "destination": "/models/index.html"
+    },
+    {
+      "source": "/models/:id",
+      "destination": "/models/:id/index.html"
+    },
+    {
+      "source": "/models/:id/",
+      "destination": "/models/:id/index.html"
+    },
+    {
       "source": "/sandbox/Claude",
       "destination": "/simulations/index.html"
     },
