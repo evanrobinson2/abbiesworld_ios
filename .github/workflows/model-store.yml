@@ -45,17 +45,40 @@ jobs:
           R2_PUBLIC_BASE_URL: ${{ secrets.R2_PUBLIC_BASE_URL }}
         run: |
           missing=""
-          for k in R2_ACCOUNT_ID R2_ACCESS_KEY_ID R2_SECRET_ACCESS_KEY R2_BUCKET R2_PUBLIC_BASE_URL; do [ -n "${!k}" ] || missing="$missing $k"; done
+          for k in R2_ACCOUNT_ID R2_ACCESS_KEY_ID R2_BUCKET R2_PUBLIC_BASE_URL; do [ -n "${!k}" ] || missing="$missing $k"; done
           if [ -n "$missing" ]; then
             echo "::error::Missing repository secrets:$missing. Add them at https://github.com/${{ github.repository }}/settings/secrets/actions then re-run this workflow."
             node "$TOOL/sync.mjs" --tree main=main --tree live=live --dry-run
             exit 1
           fi
-      - name: Upload to R2 and catalogue
+      # R2_ACCESS_KEY_ID may hold a Cloudflare API token (cfat_...) instead of an S3 Access Key ID. R2's S3 key
+      # pair is then the token's id and the SHA-256 of the token. Same recipe as the sound-store workflow.
+      # Writes the usable pair to GITHUB_ENV, masked; never prints a value.
+      - name: Resolve R2 S3 keys
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: |
+          set -euo pipefail
+          k="$R2_ACCESS_KEY_ID"; s="${R2_SECRET_ACCESS_KEY:-}"
+          if [ "${#k}" -ne 32 ]; then
+            id=""
+            for u in "accounts/${R2_ACCOUNT_ID}/tokens/verify" "user/tokens/verify"; do
+              id=$(curl -fsS -H "Authorization: Bearer $k" "https://api.cloudflare.com/client/v4/$u" | jq -r '.result.id // empty' || true)
+              [ -n "$id" ] && break
+            done
+            [ -n "$id" ] || { echo "::error::R2_ACCESS_KEY_ID is neither a 32-character Access Key ID nor a working Cloudflare token"; exit 1; }
+            s=$(printf '%s' "$k" | sha256sum | cut -d' ' -f1); k="$id"
+            echo "R2_ACCESS_KEY_ID holds a Cloudflare token: using its id and SHA-256"
+          fi
+          echo "::add-mask::$k"; echo "::add-mask::$s"
+          { echo "R2_KEY_ID=$k"; echo "R2_KEY_SECRET=$s"; } >> "$GITHUB_ENV"
+      - name: Upload to R2 and catalogue
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           R2_PUBLIC_BASE_URL: ${{ secrets.R2_PUBLIC_BASE_URL }}
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
