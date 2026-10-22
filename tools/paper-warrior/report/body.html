@@ -1,0 +1,164 @@
+
+<div class="wrap">
+<div class="eyebrow">Imagination machine · test case 01 · updated 22 Oct 2026</div>
+<h1>Paper Warrior Studies</h1>
+<p class="lede">Can one Midjourney image become a game-ready model that is faithfully the same object, not just "inspired by" it? This test case is a folded-paper Roman legionary, taken through two rounds and then broken into parts. Every pass is rendered from the reference camera, scored against the image, and logged.</p>
+
+<div class="hero">
+  <figure><img src="img/ref.jpg" alt="Reference image: faceted white paper Roman warrior with a crested helmet, a sash, a pleated skirt and a large curved shield, on a soft teal backdrop"><figcaption>Reference (Evan's upload, used only as the loss target)</figcaption></figure>
+  <figure><img src="img/proof_c.jpg" alt="Current best: the round 2 hybrid paper warrior rendered from the reference camera"><figcaption>Current best: round 2 hybrid (C), from the fitted camera</figcaption></figure>
+</div>
+
+<nav class="toc" aria-label="Rounds">
+  <a href="#round1" class="r1"><b>Round 1 · Fit the image</b><span>One procedural builder, a numeric loss, and a fidelity dial of Haiku, Sonnet and Opus.</span><div class="st">Done · loss 0.469 → 0.267</div></a>
+  <a href="#round2" class="r2"><b>Round 2 · Keep the style</b><span>Your feedback: silhouette over detail, deliberate folds, rules not models. Three competing experiments.</span><div class="st">Done · hybrid wins</div></a>
+  <a href="#offshoots" class="r3"><b>Offshoots · Parts and kit</b><span>The helmet study, five props fitted on their own, and a socketed kit.</span><div class="st">In progress</div></a>
+</nav>
+
+<div class="stats">
+  <div class="stat"><b>~21,600</b><span>scored evaluations logged, all rounds</span></div>
+  <div class="stat"><b>0.447 → 0.306</b><span>round 2 judged loss, round 1 final to hybrid</span></div>
+  <div class="stat"><b>5 / 5</b><span>props built, fitted twice and snapped onto the body</span></div>
+  <div class="stat"><b>$4.42</b><span>reviser model spend so far, all in round 1</span></div>
+</div>
+<p class="note">Where it stands: the silhouette, camera, pose and light match well, and round 2 made the figure read as paper rather than clay. It is still a close cousin of the reference, not the same model. A person notices four gaps first: the shield is a flat slab, the crest goes dark from behind, the skirt is thin strips instead of wide tabs, and the face plate is weak (it now has its own study). The props show that the parts approach works, and that each part needs a second round.</p>
+
+<!-- ============================================================ ROUND 1 -->
+<section class="round r1" id="round1">
+<header>
+  <div class="eyebrow">Round 1 · 22 Oct, morning</div>
+  <h2>Fit the image</h2>
+  <div class="verdict"><span>Judged loss <b>0.469 → 0.267</b></span><span>Silhouette IoU <b>71% → 85%</b></span><span>3 LODs · 1,449 / 3,510 / 8,060 tris</span><span>Status <b>done</b></span></div>
+</header>
+<div class="col"><p>The first question was whether a loop could pull one exact model out of one picture. I wrote one parametric builder for an armoured humanoid, defined a loss against the image, and let an optimizer and three Claude models revise it. It found the pose, camera and light. It did not find the style: the surface came out as noise instead of folds. Round 2 is about that.</p></div>
+{R1}
+</section>
+
+<!-- ============================================================ ROUND 2 -->
+<section class="round r2" id="round2">
+<header>
+  <div class="eyebrow">Round 2 · 22 Oct, afternoon · after Evan's feedback</div>
+  <h2>Keep the style</h2>
+  <div class="verdict"><span>Judged loss v2 <b>0.447 → 0.306</b></span><span>Winner <b>C, hybrid</b></span><span>Status <b>done, with known gaps</b></span></div>
+</header>
+
+<h3>What you asked for</h3>
+<div class="col">
+<p>Your read of round 1 was that the geometry was good but the art style didn't survive. Three things carry the look:</p>
+<ul>
+<li>The <b>silhouette</b> of the crest, shoulders, shield and skirt matters more than any small detail.</li>
+<li>The <b>surface</b> has to be deliberate folds and overlapping plates, not arbitrary triangles.</li>
+<li><b>Art direction is not polygon reduction.</b> Fewer triangles does not make paper.</li>
+</ul>
+<p>The bigger point was about architecture. Don't reconstruct the finished model; reconstruct the rules. That means a papercraft construction grammar that could turn any asset into this style, from a knight to a London street. A shader can't fake a folded silhouette, so the rules have to make geometry. You asked for three competing experiments (geometry-first, procedural papercraft and a hybrid) and bet on the hybrid.</p>
+<p>You also asked whether the mesh is generated from scratch or optimised from an existing one. It is generated: every piece is Python in Blender, with no third-party mesh anywhere.</p>
+</div>
+
+<h3>What changed in the machine</h3>
+<div class="col">
+<p><b>A loss that looks where you look.</b> Loss v2 keeps the whole-figure terms and adds 512 px crops of the five parts you named (crest and helmet, shoulders, shield, skirt, legs and feet). Each crop is scored on overlap and structure. It also adds a style term that compares the distribution of edge strength and edge coherence inside the figure. Folded paper is mostly flat planes with a tail of strong, straight creases. Crumple noise is lots of medium, incoherent edges. That term lets the loss tell paper from clay, which round 1's edge term couldn't.</p>
+<p><b>A grammar instead of a model.</b> <code>paper.py</code> holds style rules that run on any mesh, whatever it depicts:</p>
+</div>
+<div class="tbl"><table>
+<tr><th>Rule</th><th>What it does</th><th>Applied to</th></tr>
+<tr><td><code>facet</code></td><td>Re-triangulates to a target edge length, then crumples by a fraction of the local edge, so the paper reads the same at any scale or detail level</td><td>Body skin, trim</td></tr>
+<tr><td><code>bands</code></td><td>Cuts the surface with straight, tilted planes, splits it along the cuts and lifts alternate bands, so armour reads as overlapping paper strips with clean seams</td><td>Torso armour</td></tr>
+<tr><td><code>plates</code></td><td>Clusters faces into plates, flattens each one, folds a ridge down its middle and overlaps them like shingles</td><td>Tried on the torso, then switched off (see below)</td></tr>
+<tr><td><code>stiffen</code></td><td>Gives sheet parts paper thickness and a slight hand-made twist per piece</td><td>Skirt tabs, shoulder flaps</td></tr>
+<tr><td>material</td><td>Matte paper: high roughness, a faint sheen and a tiny fibre bump. No fake folds in the shader.</td><td>Everything</td></tr>
+</table></div>
+
+<h3>Three experiments</h3>
+<div class="col"><p><b>A, geometry-first</b>: refit the plain builder with the part-crop loss and no grammar. <b>B, procedural papercraft</b>: keep round 1's geometry and run it through the grammar. <b>C, hybrid</b>: A's refitted geometry, then B's grammar. All three were judged on the same settings: loss v2, LOD2, 512 px, 48 samples.</p></div>
+<div class="wide"><img src="img/abc_full.jpg" alt="Four panels: the reference, then experiments A, B and C from the reference camera"><figcaption>Reference · A geometry-first · B papercraft grammar · C hybrid</figcaption></div>
+<div class="tbl"><table>
+<tr><th>Version</th><th>Judged total</th><th>Whole silhouette</th><th>Crest</th><th>Shoulders</th><th>Shield</th><th>Skirt</th><th>Legs</th><th>Style</th></tr>
+<tr><td>Round 1 final</td><td class="n">0.447</td><td class="n">0.148</td><td class="n">84%</td><td class="n">88%</td><td class="n">88%</td><td class="n">93%</td><td class="n">72%</td><td class="n">0.49</td></tr>
+<tr><td>A · geometry-first</td><td class="n">0.365</td><td class="n">0.105</td><td class="n">86%</td><td class="n">93%</td><td class="n">92%</td><td class="n">96%</td><td class="n">83%</td><td class="n">0.35</td></tr>
+<tr><td>B · papercraft grammar</td><td class="n">0.319</td><td class="n">0.172</td><td class="n">83%</td><td class="n">87%</td><td class="n">86%</td><td class="n">91%</td><td class="n">70%</td><td class="n">0.09</td></tr>
+<tr class="best"><td>C · hybrid</td><td class="n">0.306</td><td class="n">0.110</td><td class="n">85%</td><td class="n">94%</td><td class="n">92%</td><td class="n">95%</td><td class="n">81%</td><td class="n">0.19</td></tr>
+</table></div>
+<div class="col"><p class="muted" style="font-size:15px">Lower is better for the total, the whole silhouette (1 − IoU) and style. The part columns are silhouette overlap inside each crop, where higher is better.</p>
+<p>The numbers say what you predicted. Geometry alone fixes the silhouette but not the look. The grammar alone fixes the look and scores by far the most paper-like, but it sits on round 1's lumpier geometry, so it loses on every part crop. The hybrid keeps nearly all of A's silhouette and most of B's style, and wins overall.</p></div>
+<div class="wide" style="margin-top:12px"><img src="img/abc_torso.jpg" alt="Torso close-ups of the reference and the three experiments"><figcaption>Torso close-ups, same order. This is where the banding rule shows.</figcaption></div>
+<div class="two" style="margin-top:16px">
+  <div class="wide"><img src="img/spin_C.gif" alt="Turntable of the hybrid warrior C"><figcaption>C, hybrid, turntable</figcaption></div>
+  <div class="wide"><img src="img/spin_all.jpg" alt="Six turntable views each of A, B and C in three rows"><figcaption>Rows A, B, C, six angles each. The reference never showed the back, so the back is invented.</figcaption></div>
+</div>
+
+<h3>Critique of round 2</h3>
+<h4>What worked</h4>
+<div class="col">
+<p>Separating style from shape was the right cut. Once the grammar was its own module, the style term could reward it independently of the silhouette, and the two could be combined without refitting. The part crops did what they were meant to. The shoulders went from 88% to 94% and the legs from 72% to 81%, changes a whole-figure loss had been too coarse to notice.</p>
+</div>
+<h4>What didn't</h4>
+<div class="col">
+<p><b>Clustered plates.</b> My first plate rule grouped faces with k-means and folded each group. The groups follow the triangulation, so the seams came out ragged and stair-stepped, the opposite of a deliberate fold. I replaced it with straight-seam bands. Those are clean, but too subtle at this lift: from the reference camera they barely show.</p>
+<p><b>The shield.</b> It is still a thick slab with a rim. The reference shield is one smooth, curved oval sheet with crisp edge facets. The builder has no single-curved-sheet primitive, so no amount of fitting can reach it.</p>
+<p><b>The crest.</b> It's built from two layers of blades, and from behind the inner faces fall into shadow, so it reads as a dark brush. The reference crest is light from every side.</p>
+<p><b>The skirt.</b> It's many thin strips, where the reference has fewer, wider tabs that overlap. That's as much a parameter-range problem as a builder one.</p>
+<p><b>The loss still prefers some crumple.</b> Even with the style term, the best-scoring version carries more surface noise than I'd ship. The style term measures edge statistics, not whether the edges line up into folds. It judges better than round 1's term, but it isn't the final judge.</p>
+</div>
+<h4>What I learned</h4>
+<div class="col">
+<p>A style is a set of construction rules plus a vocabulary of primitives, and the primitives set the ceiling. The grammar can only make the shapes it is allowed to make: a curved sheet, a wide tab, a single-layer crest. The cheapest next win is adding those primitives, not more optimisation. That's also why splitting the character into parts is the right next move: each part needs only a small, specific vocabulary.</p>
+</div>
+</section>
+
+<!-- ============================================================ OFFSHOOTS -->
+<section class="round r3" id="offshoots">
+<header>
+  <div class="eyebrow">Offshoots · 22 Oct, late afternoon</div>
+  <h2>Parts and kit</h2>
+  <div class="verdict"><span>Helmet <b>own study, in progress</b></span><span>Props <b>5 fitted twice</b></span><span>Composed <b>first pass</b></span><span>Kit <b>body + 6 socketed parts</b></span><span>Status <b>in progress</b></span></div>
+</header>
+<div class="col"><p>Your idea was piecemeal design: supply simpler props and make the character composable. Each part gets its own builder in the same paper grammar, its own reference image and loss, and a socket on the body. The helmet became a separate study because the face plate is the hardest single piece.</p></div>
+
+<h3>Helmet study</h3>
+<div class="col"><p>This is running separately, against your helmet image, with the face plate as the focus. Its results will be added here when it's done.</p></div>
+
+<h3>Five props, two fits each</h3>
+<div class="col"><p>Each prop has its own builder:</p>
+<ul>
+<li>Cuirass: lorica hoops with chest plates and layered shoulder guards.</li>
+<li>Pauldrons: rimmed arches stacked on each other.</li>
+<li>Belt: a band with a buckle frame.</li>
+<li>Sandals: a sole with crossing straps.</li>
+<li>Greaves: faceted shells.</li>
+</ul>
+<p>The fit is round 2's recipe in miniature. It tries three camera turns, fits camera and shape on the silhouette for 300 steps, then fits light and paper over 20 renders. Every step goes into the same loss log, about 3,200 evaluations over both fits.</p><p>The second fit kept the camera inside a sensible range for each prop, switched to cream paper, rebuilt the pauldrons as three nested domes, and thinned the sandal straps. All five scores went down.</p></div>
+<div class="wide"><img src="img/props_fit2.jpg" alt="Four rows by five columns: the reference images of cuirass, pauldrons, belt, sandals and greaves; the first fit; the second fit; and the second fit's silhouette overlay"><figcaption>Rows: your references · first fit · second fit · second-fit overlay (white matches, blue is missing, red is extra).</figcaption></div>
+<div class="tbl"><table>
+<tr><th>Prop</th><th>Fit 1</th><th>Fit 2</th><th>Read by eye after fit 2</th></tr>
+<tr><td>Greaves</td><td class="n">0.205</td><td class="n">0.200</td><td>Closest. The shape and facet size are right. The back plate's edge doesn't show, and the colour should be cream.</td></tr>
+<tr><td>Cuirass</td><td class="n">0.292</td><td class="n">0.277</td><td>Good outline and hoops. The chest plates split at the centre and the shoulder guards are too flat. The reference hoops are deeper and more stepped.</td></tr>
+<tr><td>Sandals</td><td class="n">0.298</td><td class="n">0.279</td><td>Right layout, but the soles are too thick and the straps too chunky and crumpled. The reference straps are clean, smooth loops.</td></tr>
+<tr><td>Belt</td><td class="n">0.314</td><td class="n">0.310</td><td>The ring is right, but it's too thin and tilted. The buckle is an H instead of a rectangle with a tongue, and the tail doesn't show.</td></tr>
+<tr><td>Pauldrons</td><td class="n">0.317</td><td class="n">0.291</td><td>Biggest change. Now three nested domes, as in the reference, but one cap still drifts away from its pair, and the domes are too flat at the crown.</td></tr>
+</table></div>
+<h4>What the props taught me</h4>
+<div class="col">
+<p>Small, specific builders fit fast: each prop took about six minutes with no model calls. Where the builder's vocabulary matches the object, as with the greaves and the cuirass, one pass gets close. Where it doesn't, as with the pauldrons' nested domes and the belt's buckle, the optimizer makes up for it by moving the camera. That's round 1's lesson again at a smaller scale. Two fixes follow. First, lock the camera to a sensible range for each prop. Second, use Opus once per prop to read the reference and choose the builder's structure before any fitting, the "spend the expensive model on judgement" idea from round 1.</p>
+<p>Cream paper helped the tone score on every prop, but the gains in the second fit are small (0.004 to 0.026). Most of what is left is structure, not tuning: the belt needs a real buckle and tongue, the cuirass a closed front, and the sandal straps smooth loops. Those are builder changes.</p>
+</div>
+
+<h3>The composed warrior</h3>
+<div class="col"><p>Each second-fit prop is rebuilt and snapped onto the hybrid body. The body's own shoulder flaps and leg bands come off, and the props replace them. A prop isn't sized from the joints alone. It's sized to wrap the actual body mesh: the cuirass to the torso's cross-section, the greaves to the shin's radius, the sandals to the foot. Each prop is also exported as its own GLB with its origin at its socket.</p></div>
+<div class="two"><div class="wide"><img src="img/composed.jpg" alt="The hybrid warrior wearing the fitted cuirass, belt, pauldrons, greaves and sandals, from the reference camera"><figcaption>Composed, from the reference camera</figcaption></div><div class="wide"><img src="img/ref.jpg" alt="Reference image"><figcaption>Reference</figcaption></div></div>
+<div class="wide" style="margin-top:12px"><img src="img/composed_views.jpg" alt="The composed warrior from four sides"><figcaption>Four turns. Only the first view has the fitted light; the other three show the stage edge.</figcaption></div>
+<div class="col" style="margin-top:12px"><p><b>Honest read:</b> the mechanics work. Every part lands on its socket, and the cuirass hoops, the belt and the greaves read clearly. It doesn't look better than the one-piece hybrid yet. The body underneath is still the bulky round-1 mesh, so the props sit on a figure that's too thick. The pauldrons come out small, and the sandals mostly disappear into the feet. The fix is to slim the body into a mannequin that the parts dress, instead of armour layered over armour.</p></div>
+
+<h3>The socketed kit</h3>
+<div class="col"><p>The hybrid warrior is also exported as a kit. It has a body with named socket points (head, chest, waist, hands, shoulders, back, feet) and one GLB per part. Each part's origin sits at its socket, and every part is listed in <code>kit.json</code> with a hash. The props will snap onto these sockets next.</p></div>
+<div class="wide" style="max-width:560px"><img src="img/kit_exploded.jpg" alt="Exploded view of the warrior kit: helmet, shoulder flaps, sash, skirt, shield and leg bands pulled away from the body"><figcaption>Exploded kit: body, helmet, shoulder guards, sash, skirt, bands, shield</figcaption></div>
+
+<h3>Next</h3>
+<ol class="next">
+<li><b>A slim mannequin body</b> for the parts to dress, then refit the composed figure against the original image as one score.</li>
+<li><b>Builder fixes per prop</b>: a buckle with a tongue, a closed cuirass front, smooth sandal loops and domed pauldron crowns. Then add the helmet once its study lands.</li>
+<li><b>New primitives in the grammar</b>: a single curved sheet for the shield, wide overlapping tabs for the skirt, and a single-layer crest that stays light from behind.</li>
+</ol>
+</section>
+
+<h2>Provenance</h2>
+<div class="col"><p>This applies to every round. All code, parameters, GLBs and logs are in the <code>abbiesworld_ios</code> repo under <code>tools/paper-warrior</code>.</p></div>

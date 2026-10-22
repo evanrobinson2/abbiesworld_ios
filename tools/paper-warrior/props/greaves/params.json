@@ -1,0 +1,75 @@
+{
+ "place": {
+  "x": 0,
+  "y": 0,
+  "z": 0,
+  "yaw": 0
+ },
+ "material": {
+  "albedo": 0.62,
+  "rough": 0.85,
+  "sheen": 0.2,
+  "fibre": 0.15
+ },
+ "exposure": -1.2,
+ "light": {
+  "key_az": 45,
+  "key_el": 40,
+  "key_dist": 6,
+  "key_size": 2.0,
+  "key_power": 1500,
+  "fill_az": -80,
+  "fill_el": 20,
+  "fill_power": 120,
+  "world_color": [
+   0.8,
+   0.8,
+   0.8
+  ],
+  "world_strength": 0.5
+ },
+ "prop": "greaves",
+ "bg": [
+  0.62,
+  0.62,
+  0.63
+ ],
+ "cam": {
+  "az": -30,
+  "el": 8,
+  "dist": 1.8,
+  "focal": 50,
+  "tx": 0,
+  "tz": 0.2
+ },
+ "shape": {
+  "h": 0.4,
+  "r0": 0.05,
+  "r1": 0.065,
+  "calf": 0.08,
+  "span": 230,
+  "back_span": 120,
+  "slant": 0.05,
+  "thick": 0.005,
+  "edge": 0.035,
+  "crumple": 0.1,
+  "sep": 0.2,
+  "yaw": -20
+ },
+ "shape_steps": {
+  "shape.h": 0.02,
+  "shape.r0": 0.004,
+  "shape.r1": 0.004,
+  "shape.slant": 0.01,
+  "shape.sep": 0.01,
+  "shape.yaw": 5,
+  "shape.span": 8
+ },
+ "iters": 300,
+ "light_iters": 20,
+ "az_starts": [
+  -60,
+  -30,
+  0
+ ]
+}

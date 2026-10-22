@@ -1,0 +1,20 @@
+{
+ "lod0": {
+  "tris": 1449,
+  "path": "paper_warrior_lod0.glb",
+  "bytes": 95272,
+  "sha256": "75b279f50d5f8cc4ce73c1236c52fdea6e169b9e09043aaf8897df7bc487be49"
+ },
+ "lod1": {
+  "tris": 3510,
+  "path": "paper_warrior_lod1.glb",
+  "bytes": 240120,
+  "sha256": "4ef1f073340798cf6f0aeef34ed0d166928f75146ac54bd1b2f190b8a1d429b9"
+ },
+ "lod2": {
+  "tris": 8060,
+  "path": "paper_warrior_lod2.glb",
+  "bytes": 569992,
+  "sha256": "45b6211e04dfe8f61ff3c6b64bb9b636db3a7de24034780ad65833508cf2f682"
+ }
+}

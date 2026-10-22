@@ -1,0 +1,129 @@
+{
+ "schemaVersion": 1,
+ "common": {
+  "date": "2026-10-22",
+  "tool": "Blender 5.2.3 LTS (bpy module from PyPI), Cycles CPU renderer, run headless in a Claude Code cloud container",
+  "generator": "pw/build.py: procedural metaball body plus bmesh armour pieces, all generated from numbers in params.json; no external meshes, textures or third-party assets are loaded",
+  "reference": {
+   "path": "ref/target.png",
+   "sha256": "dbcde4e5e876e51e9b20d13201a35dffd24b53b9c9f787a908dff257e7fda3ac",
+   "origin": "user-supplied upload by Evan (paper-warrior-target.png), used only as the image target for the loss; not copied into any asset"
+  },
+  "models": {
+   "fitter": "Claude Opus 5.5 (this session): wrote the builder, the loss and the loop, chose the restarts and the detail pass",
+   "reviser": "Claude Opus 5.5 via the Claude Code CLI (claude -p --model opus --effort high), prompt v2, 8 rounds",
+   "numeric": "(1+1) evolution strategy on silhouette loss (pw/opt.py)"
+  },
+  "prompt": {
+   "path": "pw/reviser.py (SYSTEM and V2 strings) + pw/schema.md",
+   "sha256": "583980e4469dbe81c4ce3f7a9da4736b7ffa421e13d55850a28956fc9e4d902e"
+  },
+  "scripts": {
+   "build.py": "f8f52c3c0b618f9c3b4d06d7dd1bc928adbd10c87d5a51dba533d896719850b8",
+   "finals.py": "d764a7783dc1916cce99b6dd2ac59ee3b20c0b1ee5d17ce84d7744258959cabd",
+   "judge.py": "126a9a8eb119f996bcad51924b03391e1f334882276662ac8c9a7605833d26d6",
+   "loss.py": "0018a4b44fb549baebe101b638fb5b6d2953de824f930536b232d674e1b56182",
+   "opt.py": "45fc2ee0b8e01296c4f449fa8a96f42c89fe8e7618f5b1de3df5c5616ebe0bb0",
+   "provenance.py": "fdfca4a1fbbb99c9ddc772bcc1c041623c887f3284710b4835f169dfd70cb5e6",
+   "reviser.py": "583980e4469dbe81c4ce3f7a9da4736b7ffa421e13d55850a28956fc9e4d902e",
+   "run.py": "16c57426f97a385efdd17b10cfb2345b59ec7491b10f56f4267f9c03ced77375",
+   "sbs.py": "3257b1f27d33026a246d7686981f94bafbefc0a9565196f1dff392b9bcdaa3e4",
+   "views.py": "6fb1b2791b3ef47aa3cd421de4bd0e0db0ebaa90ea43f5947b97770df902566a",
+   "schema.md": "0ed64d14504293d00c21ae7525c4120a1e908723fe73e31ea6f4f443aaaea7cf"
+  },
+  "params": {
+   "path": "best_params.json",
+   "sha256": "6877ca1af8c004675fbb67639f2f0016cc6535a892531503214c102b42866a72"
+  },
+  "loss": {
+   "definition": "pw/loss.py: 0.35*(1-IoU) + 2.0*chamfer + 0.2*(1-SSIM) + 0.2*(1-edge corr) + 0.6*tone MAE, at 256 px",
+   "judged_final": {
+    "sil": 0.15157832042882668,
+    "cham": 0.00855733067940646,
+    "ssim": 0.2592753514067546,
+    "edge": 0.5833084491268763,
+    "tone": 0.06532692504084968,
+    "total": 0.27787998864013824,
+    "secs": 8.62
+   },
+   "judged_start": {
+    "sil": 0.28844135397533455,
+    "cham": 0.019199082244577198,
+    "ssim": 0.30473746378322686,
+    "edge": 0.9797459045370586,
+    "tone": 0.12095237183415031,
+    "total": 0.4688207351450688,
+    "secs": 7.69
+   }
+  },
+  "llm_cost_usd": {
+   "master_reviser": 1.2517
+  },
+  "grade": "study",
+  "shippable": false
+ },
+ "assets": [
+  {
+   "semanticId": "character.romanPaperWarrior.lod0",
+   "kind": "mesh",
+   "format": "glb",
+   "version": "v1",
+   "file": "paper_warrior_lod0.glb",
+   "sha256": "75b279f50d5f8cc4ce73c1236c52fdea6e169b9e09043aaf8897df7bc487be49",
+   "triangles": 1449,
+   "bytes": 95272
+  },
+  {
+   "semanticId": "character.romanPaperWarrior.lod1",
+   "kind": "mesh",
+   "format": "glb",
+   "version": "v1",
+   "file": "paper_warrior_lod1.glb",
+   "sha256": "4ef1f073340798cf6f0aeef34ed0d166928f75146ac54bd1b2f190b8a1d429b9",
+   "triangles": 3510,
+   "bytes": 240120
+  },
+  {
+   "semanticId": "character.romanPaperWarrior.lod2",
+   "kind": "mesh",
+   "format": "glb",
+   "version": "v1",
+   "file": "paper_warrior_lod2.glb",
+   "sha256": "45b6211e04dfe8f61ff3c6b64bb9b636db3a7de24034780ad65833508cf2f682",
+   "triangles": 8060,
+   "bytes": 569992
+  },
+  {
+   "semanticId": "character.romanPaperWarrior.proof_matched_1024",
+   "kind": "render",
+   "format": "png",
+   "version": "v1",
+   "file": "proof_matched_1024.png",
+   "sha256": "409973405442ad95923a496c4943d6d2f831bcd0a48efd8c15cbe00107a5da9d"
+  },
+  {
+   "semanticId": "character.romanPaperWarrior.turntable",
+   "kind": "render",
+   "format": "gif",
+   "version": "v1",
+   "file": "turntable.gif",
+   "sha256": "eb54045afb8b1b1197a6b60b6def0f6aa446164cdd7769de7306fba7cd1c86c0"
+  },
+  {
+   "semanticId": "character.romanPaperWarrior.turntable_sheet",
+   "kind": "render",
+   "format": "jpg",
+   "version": "v1",
+   "file": "turntable_sheet.jpg",
+   "sha256": "e7cde30ebc2439277b0ba0fce06701350f1c4edc607a778c2cf74720e0466347"
+  },
+  {
+   "semanticId": "character.romanPaperWarrior.lods",
+   "kind": "render",
+   "format": "jpg",
+   "version": "v1",
+   "file": "lods.jpg",
+   "sha256": "2d34acb423fa02c497b1b41f34aa49467928bb5c8dea62193ed40f33df727393"
+  }
+ ]
+}

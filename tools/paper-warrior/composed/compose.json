@@ -1,0 +1,111 @@
+{
+ "schemaVersion": 1,
+ "character": "romanPaperWarrior",
+ "composedFrom": "C_final.json",
+ "replaced": {
+  "shoulder_guards": "pauldrons",
+  "bands": "greaves and sandals"
+ },
+ "props": [
+  {
+   "part": "cuirass",
+   "socket": "chest",
+   "location": [
+    -0.0479,
+    0.0156,
+    1.07
+   ],
+   "file": "cuirass.glb",
+   "triangles": 2768,
+   "sha256": "a77feb3c91ffd12374f87b4d4de2ea164ff0b2c1daf62a083382baa9b97cb8e1"
+  },
+  {
+   "part": "belt",
+   "socket": "waist",
+   "location": [
+    0.0117,
+    -0.0078,
+    1.05
+   ],
+   "file": "belt.glb",
+   "triangles": 376,
+   "sha256": "df1739b12fa178fcf468f39fb0fe486da2b3ce2e31d4ee8992e4431b619535ab"
+  },
+  {
+   "part": "pauldron_r",
+   "socket": "r_shoulder",
+   "location": [
+    -0.1107,
+    -0.1374,
+    1.4172
+   ],
+   "file": "pauldron_r.glb",
+   "triangles": 404,
+   "sha256": "0dfb8d1524107e25b92ec366e8fcc4a130a002876b549e7f4f440c36bba35f0c"
+  },
+  {
+   "part": "pauldron_l",
+   "socket": "l_shoulder",
+   "location": [
+    0.0816,
+    0.003,
+    1.3072
+   ],
+   "file": "pauldron_l.glb",
+   "triangles": 404,
+   "sha256": "98d1d6c2c687849613245356a2c74473b92656d8fb276165b7fe96fa53271d27"
+  },
+  {
+   "part": "greave_r",
+   "socket": "r_shin",
+   "location": [
+    -0.2532,
+    0.0532,
+    0.1681
+   ],
+   "file": "greave_r.glb",
+   "triangles": 584,
+   "sha256": "ed8b46e48205249db581a3c1a1317d9065efdab98e86891eb49f37d80da2b0eb"
+  },
+  {
+   "part": "greave_l",
+   "socket": "l_shin",
+   "location": [
+    0.1552,
+    0.118,
+    0.1802
+   ],
+   "file": "greave_l.glb",
+   "triangles": 584,
+   "sha256": "b9db3079652d99b0e61243fdd5b094cdddc5c7b80949677b9b1ca7538b0c631d"
+  },
+  {
+   "part": "sandal_r",
+   "socket": "r_foot",
+   "location": [
+    -0.2457,
+    0.0063,
+    0.0
+   ],
+   "file": "sandal_r.glb",
+   "triangles": 250,
+   "sha256": "39564d4bccb1f55819761dfe409d6f9b5849ed3eb40a9ba79e82ba9da3de2a8e"
+  },
+  {
+   "part": "sandal_l",
+   "socket": "l_foot",
+   "location": [
+    0.1924,
+    0.1221,
+    0.0
+   ],
+   "file": "sandal_l.glb",
+   "triangles": 250,
+   "sha256": "64d03c15cea8e4d4bd4f6ac402ba2ff159ca9a60c94878f3987251e6a72f80ed"
+  }
+ ],
+ "composed": {
+  "file": "composed.glb",
+  "sha256": "144493fb8b74889236c231294e18f559c89aacf5cf7371457c58d16abcc73330"
+ }
+}

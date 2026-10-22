@@ -1,0 +1,30 @@
+{
+ "dial": "high",
+ "cfg": {
+  "model": "opus",
+  "effort": "high",
+  "rounds": 8,
+  "level": 1,
+  "px": 256,
+  "samples": 24,
+  "max_edits": 16,
+  "es_iters": 300,
+  "es_groups": "pose,shield,radii,helmet,skirt",
+  "v2": true
+ },
+ "start_loss": 0.280541363573028,
+ "final_loss": 0.26876440947079466,
+ "final_terms": {
+  "sil": 0.15427302996670367,
+  "cham": 0.008648569009050006,
+  "ssim": 0.26647455474013726,
+  "edge": 0.5228275509394478,
+  "tone": 0.06601881638071895,
+  "total": 0.26876440947079466,
+  "secs": 1.9
+ },
+ "llm_cost_usd": 1.2517,
+ "llm_secs": 240.0,
+ "wall_secs": 511.6,
+ "best_prefix": "r06"
+}
