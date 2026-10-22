@@ -80,7 +80,8 @@ def main():
                 audio, song = compose(key, body, a.format)
             except urllib.error.HTTPError as e:
                 if e.code != 422:
-                    raise
+                    sys.exit(f'{c["id"]}: ElevenLabs said {e.code}: {e.read()[:400].decode(errors="replace")}'
+                             + (' (Music needs a paid plan, Starter or higher)' if e.code == 402 else ''))
                 print(f'  {c["id"]}: plan rejected ({e.read()[:200]!r}), using a prompt instead')
                 body = {'prompt': prompt(c, briefs['palette']), 'model_id': a.model, 'force_instrumental': True,
                         'music_length_ms': sum(s[2] for s in c['sections'])}
