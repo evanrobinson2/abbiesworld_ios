@@ -1,0 +1,19 @@
+{
+ "id": "sting-small-win",
+ "take": 1,
+ "title": "Small Win",
+ "kind": "sting",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "s717D1iooAadUJhN85IV",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, tiny happy flourish, flute and glockenspiel, well done. Sting: very short. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 3000
+ },
+ "date": "2026-10-22",
+ "sha256": "1bd4a11fed06dcb22101676b2daa58a2353a28d120a1c0b5e1145c2cac5ef2dd",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-1.master.mp3"
+}

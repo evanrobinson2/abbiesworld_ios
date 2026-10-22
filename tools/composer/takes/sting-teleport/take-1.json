@@ -1,0 +1,19 @@
+{
+ "id": "sting-teleport",
+ "take": 1,
+ "title": "Teleport",
+ "kind": "sting",
+ "provider": "elevenlabs",
+ "model": "music_v2_5",
+ "song_id": "Uu2nicSp5kQWRzXqHOuC",
+ "request": {
+  "prompt": "cinematic orchestral, warm chamber orchestra, intimate, hand-played acoustic instruments, AAA game soundtrack, gentle wonder, clear melody, instrumental, rising shimmering strings and celesta, magical whoosh made by the orchestra, lifts off then resolves. Sting: short, complete musical gesture. No vocals, no lyrics, no choir words, no EDM, no trap, no dubstep, no heavy drums, no distorted guitar, no cheesy, no kazoo, no nursery rhyme, no 8-bit, no lo-fi hiss",
+  "model_id": "music_v2_5",
+  "force_instrumental": true,
+  "music_length_ms": 4000
+ },
+ "date": "2026-10-22",
+ "sha256": "948c0d6f484d3a4f737bfb7c65005b872861bb1cfc215e8c50b98d7bfd3f1c0c",
+ "licence": "ElevenLabs Music Terms, paid plan: commercial use incl. indie games (<$500k revenue)",
+ "master": "take-1.master.mp3"
+}
