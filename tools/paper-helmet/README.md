@@ -6,6 +6,7 @@ Three competing ways to rebuild one Midjourney helmet in a folded-paper style, s
 - `hloss.py`: silhouette, chamfer, 6 landmarks, 5 part crops, SSIM, tone, style, crease and straight-crease terms.
 - `fit.py`: (1+1)-ES with fast silhouette or full-render scoring; `RULES` are the style invariants the fit may not break.
 - `study.py start A B C R`: the experiments. `critic.py`: Opus critic rounds. `judge.py`: 768 px final scores. `ridge.py`: late-Roman ridge helmet from the same grammar.
+- `lossv3.py`: Loss v3 (gate + Opus-written checklist + order-swapped votes, plus developability and toon terms) and the replay test of the rejected Opus edits. Results in `out/v3/RESULTS.md`.
 - Results page: https://claude.ai/artifact/TXjyaZgNac1Q4cSb7aTUnP
 
 Needs `pip install bpy==5.2.3 scikit-image rembg onnxruntime`.
