@@ -26,7 +26,7 @@ test('build turns into valid holodeck ops with parts hung on an anchor',async()=
 
 test('live tools are well formed and only expose scene ops',async()=>{
  const {TOOLS,LIVE_OPS,INSTRUCTIONS}=await policy();
- assert.deepEqual(TOOLS.map(t=>t.name).sort(),['build','catalog','change_world','goodbye','look','order_model']);
+ assert.deepEqual(TOOLS.map(t=>t.name).sort(),['build','catalog','change_world','control_app','goodbye','look','order_model']);
  for(const t of TOOLS){assert.equal(t.type,'function');assert.equal(t.parameters.type,'object');}
  for(const forbidden of ['screenshot','narrate','state'])assert.ok(!LIVE_OPS.includes(forbidden));
  assert.match(INSTRUCTIONS,/not a general-purpose assistant/);assert.match(INSTRUCTIONS,/grown-up/);
@@ -36,6 +36,26 @@ test('tool texts collect every label, name and order description',async()=>{
  const {toolTexts}=await policy();
  assert.deepEqual(toolTexts('change_world',{ops:[{op:'spawn',args:{id:'x',label:'Hi',person:{role:'child',name:'Pip'}}}]}),['x','Hi','Pip']);
  assert.deepEqual(toolTexts('order_model',{description:'a unicorn'}),['a unicorn']);
+ assert.deepEqual(toolTexts('control_app',{action:'save_scene',args:{name:'Pony Land'}}),['Pony Land']);
+});
+
+test('app controls stay on the whitelist and the world brief covers the game',async()=>{
+ const {TOOLS,APP_ACTIONS,APP_WORLDS,INSTRUCTIONS}=await policy();
+ const app=TOOLS.find(t=>t.name==='control_app');
+ assert.deepEqual(app.parameters.properties.action.enum,Object.keys(APP_ACTIONS));
+ for(const never of ['remove','rename','import','export','copy','developer','eval','click','selector'])assert.ok(!Object.keys(APP_ACTIONS).some(a=>a.includes(never)),never);
+ assert.ok(!APP_WORLDS.includes('cemetery'));
+ for(const fact of [/horses/,/Moonbase/,/Futurama/,/Halloween/,/Starship/,/Moon Science Base/,/chicken coop/,/storybook/,/season/i])assert.match(INSTRUCTIONS,fact);
+});
+
+test('catalog search finds ranch models and library models by plain words',async()=>{
+ const {searchModels}=await policy();
+ const ranch=require('../simulation-assets/catalog.json'),library=require('../models/manifest.json').models;
+ assert.ok(searchModels(ranch,library,{query:'goats'}).models.some(m=>m.id==='goat-idle'));
+ assert.ok(searchModels(ranch,library,{query:'barn'}).models.every(m=>m.id.startsWith('lib-')&&m.kind==='library'));
+ assert.equal(searchModels(ranch,library,{kind:'workers'}).models.every(m=>m.kind==='workers'),true);
+ assert.equal(searchModels(ranch,library,{query:'zzz'}).count,0);
+ for(const m of searchModels(ranch,library).models)assert.match(m.id,/^[a-z0-9-]{1,64}$/);
 });
 
 test('sessions only start from the app itself',async()=>{

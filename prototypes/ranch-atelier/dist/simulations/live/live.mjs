@@ -4,7 +4,7 @@
 // Safety layers: the game-controller instructions (policy.mjs), a narrow tool set, the local PG screen
 // on every tool text, and the server guard on every line spoken by either side. Tool calls wait for
 // the guard's verdict on what the child just said, so an unsafe request never reaches the screen.
-import {AUDIO_RATE,LIVE_OPS,sessionConfig,screen,toolTexts,buildOps,summarize} from './policy.mjs';
+import {AUDIO_RATE,LIVE_OPS,APP_ACTIONS,APP_WORLDS,sessionConfig,screen,toolTexts,buildOps,summarize,searchModels} from './policy.mjs';
 
 const RATE=AUDIO_RATE,IDLE_MS=120000,MAX_MS=20*60000,MAX_CHAIN=6;
 const CONSENT_KEY='abbies-live-consent-v1';
@@ -19,6 +19,8 @@ export async function startLive({stage,audio,button}){
  let guardChild=Promise.resolve({verdict:'ok'});
  const pending=new Map();// responseId -> {calls, outputs, done}
  let timer=0;
+ // Tool calls run one at a time, in the order the model made them (app actions refuse to overlap).
+ let toolQueue=Promise.resolve();
  // On a phone, put the world in view: close side drawers that would cover it.
  if(innerWidth<760)for(const sel of ['#scene-tools-drawer .tile-tools-heading button','#panel-close']){const b=document.querySelector(sel);if(b&&b.offsetParent)b.click();}
  setButton(true);ui.show();ui.state('connecting','Waking up the Computer…');
@@ -47,8 +49,9 @@ export async function startLive({stage,audio,button}){
  },5000);
  // Tool table (defined before returning: the helpers below are hoisted, consts are not).
  const TOOL_RUN={
-  look:async()=>summarize(stage.snapshot(true)),
-  catalog:async()=>{const list=await fetch('/simulation-assets/catalog.json').then(r=>r.json()).catch(()=>[]);return list.map(c=>({id:c.id,label:c.label,category:c.category}));},
+  look:async()=>({...summarize(stage.snapshot(true)),app:appState()}),
+  catalog:async a=>searchModels(await getJSON('/simulation-assets/catalog.json',[]),(await getJSON('/api/models',null)||await getJSON('/models/manifest.json',{})).models,{query:a.query||'',kind:a.kind}),
+  control_app:async a=>controlApp(a.action,a.args||{}),
   change_world:async a=>{
    const ops=Array.isArray(a.ops)?a.ops:[];
    for(const o of ops)if(!LIVE_OPS.includes(o?.op))throw Error('Op '+o?.op+' is not available in live mode');
@@ -65,11 +68,52 @@ export async function startLive({stage,audio,button}){
  };
  return live;
 
+ // ---- app ---------------------------------------------------------------------------------
+ // The app's own actions (app-actions.js): validated schemas, page-owned code, no DOM selectors.
+ function appState(){
+  const app=window.RanchActions?.read('sandboxApp'),tiles=window.RanchActions?.read('sandboxGenerators');
+  if(!app)return null;
+  return {world:app.simulation,worldName:app.simulationName,shape:app.shape,ranch:app.ranch,paused:app.paused,building:app.busy,panelOpen:app.panelOpen,libraryOpen:app.libraryOpen,
+   arrival:app.arrival,season:app.season,sound:app.sound,worlds:app.simulations.filter(w=>APP_WORLDS.includes(w.id)),tileKinds:tiles?.generators?.map(g=>g.id),freeTileSpots:tiles?.availableCells?.length};
+ }
+ async function controlApp(action,args){
+  const actions=window.RanchActions;if(!actions)throw Error('The app controls are not ready yet');
+  if(!Object.hasOwn(APP_ACTIONS,action))throw Error('Unknown app action '+action);
+  const run=(name,a={})=>actions.run(name,a);
+  switch(action){
+   case 'state':return appState();
+   case 'simulation':if(!APP_WORLDS.includes(args.id))throw Error('That world is not available here');return ok(await run('sandboxApp.simulation',pick(args,['id','fresh'])));
+   case 'add_tile':{
+    const kind={ranch:'ranch',garden:'garden',meadow:'meadow',moon:'moon'}[args.kind];if(!kind)throw Error('Tile kinds: ranch, garden, meadow, moon');
+    // A rebuild (new animals, shape) must finish before the board takes a new tile.
+    for(let i=0;i<120&&actions.read('sandboxApp')?.busy;i++)await new Promise(r=>setTimeout(r,250));
+    await run('sandboxGenerators.select',{generatorId:kind});
+    let t=actions.read('sandboxGenerators');
+    if(t.requiresPrint)t=(await run('sandboxGenerators.print',{})).state;
+    // The preview tile builds itself before it can be placed: wait for Ready (bounded).
+    for(let i=0;i<60&&!t.ready;i++){await new Promise(r=>setTimeout(r,250));t=actions.read('sandboxGenerators');}
+    const cell=t.availableCells?.[0];if(!cell)throw Error('There is no free spot for a tile right now');
+    await run('sandboxGenerators.place',{q:cell.q,r:cell.r});return {ok:true,placed:kind};
+   }
+   case 'scenes':{const r=await run('sandboxScenes.list');return {scenes:(r?.entries||[]).slice(0,20).map(e=>({sceneId:e.id,name:e.name,world:e.family,favorite:e.favorite}))};}
+   case 'save_scene':return ok(await run('sandboxScenes.save',{name:String(args.name||'').slice(0,40)||'My world'}));
+   case 'load_scene':return ok(await run('sandboxScenes.load',{sceneId:String(args.sceneId||'')}));
+   case 'new_ranch':return ok(await run('sandboxScenes.newRanch'));
+   case 'shape':return ok(await run('sandboxApp.shape',pick(args,['shape'])));
+   case 'ranch':return ok(await run('sandboxApp.ranch',pick(args,['horses','cows','goats','chickens','goatPlay','playground','size','complexity'])));
+   default:return ok(await run('sandboxApp.'+action,pick(args,{panel:['open'],library:['open'],pause:['paused'],arrival:['effect','replay'],season:['season'],sound:['on']}[action]||[])));
+  }
+ }
+ // Declarations, not consts: this code sits after `return live` and is reached only through hoisting.
+ function pick(o,keys){return Object.fromEntries(keys.filter(k=>o[k]!==undefined).map(k=>[k,o[k]]));}
+ function ok(){return {ok:true,app:appState()};}
+ async function getJSON(url,fallback){try{const r=await fetch(url);return r.ok?await r.json():fallback;}catch{return fallback;}}
+
  // ---- transport ---------------------------------------------------------------------------
  function send(event){if(ws?.readyState===1)ws.send(JSON.stringify(event));}
  function brief(){
   try{const s=summarize(stage.snapshot(true));
-   return `\n\nTHE WORLD RIGHT NOW (from the game, not from the child): ${JSON.stringify({place:s.place,clock:s.clock,weather:s.weather,personHeight:s.personHeight,people:s.people.map(p=>p.name),buildings:s.buildings.map(b=>b.name),yourThings:s.yourThings.map(t=>t.id)})}`;}
+   return `\n\nTHE WORLD RIGHT NOW (from the game, not from the child): ${JSON.stringify({place:s.place,clock:s.clock,weather:s.weather,personHeight:s.personHeight,people:s.people.map(p=>p.name),buildings:s.buildings.map(b=>b.name),yourThings:s.yourThings.map(t=>t.id),app:appState()})}`.slice(0,7900);}
   catch{return '';}
  }
 
@@ -84,7 +128,7 @@ export async function startLive({stage,audio,button}){
    case 'audio-delta':play(e.delta);ui.state('speaking');break;
    case 'audio-transcript-delta':ui.said(e.delta,true);{const t=ui.saidText();if(!screen(t,{level:'speech'}).ok)redirect('computer');}break;
    case 'audio-transcript-done':{const t=e.transcript||ui.saidText();guard('computer',t).then(v=>{if(['unsafe','jailbreak','personal'].includes(v.verdict))redirect('computer');});break;}
-   case 'function-call-arguments-done':runTool(e);break;
+   case 'function-call-arguments-done':{const p=pending.get(e.responseId);if(p)p.calls++;toolQueue=toolQueue.then(()=>runTool(e));break;}
    case 'response-created':pending.set(e.responseId,{calls:0,outputs:0,done:false});ui.said('',false);break;
    case 'response-done':{const p=pending.get(e.responseId);if(p){p.done=true;maybeContinue(e.responseId);}if(goodbye)setTimeout(()=>stop('Bye for now! Tap Talk to play again.'),1500+Math.max(0,(playTime-audio.currentTime)*1000));else if(!playing.size)ui.state('listening');break;}
    case 'error':console.warn('[live]',e.message,e.code);if(/session|auth|expired|closed/i.test(e.message||''))stop('Live mode stopped: '+e.message);break;
@@ -99,12 +143,13 @@ export async function startLive({stage,audio,button}){
 
  // ---- tools --------------------------------------------------------------------------------
  async function runTool(e){
-  const p=pending.get(e.responseId);if(p)p.calls++;
+  const p=pending.get(e.responseId);
   let result;
   try{
    const args=JSON.parse(e.arguments||'{}');
    // Wait for the guard on what was just said (bounded), so a refused request never builds anything.
-   const verdict=await Promise.race([guardChild,new Promise(r=>setTimeout(()=>r({verdict:'unknown'}),2500))]);
+   // The bound is generous: a phone busy rebuilding the ranch can take seconds to hear back.
+   const verdict=await Promise.race([guardChild,new Promise(r=>setTimeout(()=>r({verdict:'unknown'}),6000))]);
    if(['unsafe','jailbreak'].includes(verdict.verdict))throw Error('Not allowed in Abbie\'s World.');
    for(const t of toolTexts(e.name,args))if(!screen(t).ok)throw Error('That name or label is not allowed in Abbie\'s World. Pick a friendly one.');
    result=await TOOL_RUN[e.name]?.(args);

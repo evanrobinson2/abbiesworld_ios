@@ -46,9 +46,23 @@ THE WORLD
 - The world is a miniature. Shapes and people at scale 1 are about one person tall; read scaleHint.personHeight to convert. Place things with near (a person, building or your own thing) or at (from lastTap.point).
 - Give everything you make a short id ("rainbow-bridge") so you can change it later. Reusing an id replaces that thing.
 - Use build for anything made of several parts (a castle, a rocket, an abacus with beads that slide). Parts are positioned in the thing's own space: [0,1,0] is the top of a scale-1 thing and part scale 0.2 is a fifth of its size. Move a bead later with change_world move using the part's full id (thing-id.part-id) and a "to" in the same space.
-- Registered models (catalog) look nicer than shapes for buildings, plants and props; use them when one fits.
+- Real models look nicer than shapes. Before building something from shapes, call catalog with a word or two ("barn", "goat", "tree") and spawn a match with change_world spawn {asset: id}. Ranch models arrive at their true ranch size (scale 1). Library models (ids starting "lib-") arrive one person tall, so scale them: a barn about 8, a tree about 6, a basket about 0.4.
 - When the family asks for something that needs a real new model (a detailed unicorn, a real red barn), build a quick version from shapes now and call order_model so the workshop makes a proper one later.
-- When someone says goodbye, stop, or that they are done, say a short goodbye and call goodbye.`;
+- When someone says goodbye, stop, or that they are done, say a short goodbye and call goodbye.
+
+THE GAME WORLD (what you know about Abbie's World)
+- The main place is the Ranch: a miniature farm on hexagon tiles. Residents live there and do their rounds: they carry hay, wood, rations and water, fill troughs, care for the animals and build. Tap a person or thing to see what it is doing. Stores refill on their own.
+- Ranch animals: horses (0-4), cows (0-6), goats (0-8) and chickens (0-12). There is goat play (0-3) and a playground (0-3). The ranch has a size (50-180 metres across each hex) and a complexity (1-4). Ranch shapes: Single, Pair, Cluster, Line, Elbow, Zigzag, Fork, Diamond, Crescent and Flower. Changing any of these rebuilds the ranch with a fresh layout.
+- Ranch buildings: family home, shelter, feed store, water point, cattle shelter, goat shelter, chicken coop and kitchen garden, plus the sugar shack. Each can be shown planned, as a foundation, as a frame, with a roof, or complete. Supplies: wood, hay, rations, water troughs, water buckets and compost, each full, part full or empty. The ranch family has its own figures: Abbie, Ani, Mommy, Daddy, Jeff and Alexis, and Marley the pet.
+- New hex tiles can join the board: more Ranch, a Garden with crops, a Meadow, or a Moonbase.
+- Time runs on its own: a whole day passes in about three minutes, the sky turns golden, then night with lights on. Seasons go round in a living year (spring, summer, autumn, winter) or can be held on one season. Weather: auto, clear, cloudy, rain, wind, hail, snow or heat.
+- When the ranch appears, it arrives with an effect: hologram, laser printed, flying in from space, quantum parts, storybook page or organic time-lapse.
+- Other worlds in the simulation library: the Futurama diorama (a retro-future city with deliveries), the Halloween neighborhood (trick-or-treat night), the Aurora Starship (twenty crew around a giant reactor) and the Moon Science Base (scientists, rovers and Earth supply runs). Switching keeps each world's progress.
+- The world is saved on this device as you play. Scenes can be saved with a name and opened again.
+
+THE APP (control_app)
+- You also run the app around the world: open or close the settings panel and the simulation library, switch worlds, change the ranch's shape, animals, size and complexity, make a fresh layout, frame the whole world (fit), pause or resume, pick and replay the arrival effect, choose the season, turn ambient sound on or off, add a tile, and save or open scenes.
+- Ask before anything that replaces the whole world (a new ranch, a fresh layout, switching worlds, opening a saved scene) unless the child clearly asked for exactly that.`;
 
 // The scene ops the voice may use. state, screenshot and narrate stay with the Creator (it speaks for itself).
 export const LIVE_OPS=['spawn','remove','move','transform','style','animate','camera','time','people','weather'];
@@ -72,6 +86,29 @@ const part={type:'object',required:['id','shape'],properties:{
  opacity:{type:'number',minimum:0,maximum:1},behavior:{type:'string',enum:BEHAVIORS.filter(b=>b!=='chase')}
 }};
 
+// App facets the voice may drive. Each runs a page-owned action (app-actions.js), never a DOM selector.
+// Deleting, renaming, importing or exporting scenes and the developer overlay stay out of reach.
+export const APP_ACTIONS={
+ state:'Read the app: which world, ranch shape, animals, panels, arrival, season, sound, tile kinds. No args.',
+ panel:'Open or close the settings panel. {open:boolean}',
+ library:'Open or close the simulation library. {open:boolean}',
+ simulation:'Switch world. {id:"ranch"|"city"|"suburban"|"starship"|"moon", fresh?:boolean} (fresh starts a new copy)',
+ shape:'Ranch shape. {shape:"homestead"|"pasture"|"working"|"line"|"elbow"|"zigzag"|"fork"|"diamond"|"crescent"|"flower"} (Single, Pair, Cluster, ...)',
+ ranch:'Ranch animals and layout, any of {horses:0-4, cows:0-6, goats:0-8, chickens:0-12, goatPlay:0-3, playground:0-3, size:50-180, complexity:1-4}',
+ regenerate:'A fresh random layout of the same world. No args.',
+ fit:'Frame the whole world in view. No args.',
+ pause:'Pause or resume the world. {paused:boolean}',
+ arrival:'Arrival effect. {effect?:"hologram"|"laser"|"space"|"quantum"|"storybook"|"organic", replay?:boolean}',
+ season:'{season:"auto"|"spring"|"summer"|"autumn"|"winter"} (auto is the living year)',
+ sound:'Ambient ranch sound. {on:boolean}',
+ add_tile:'Add a hex tile beside the board. {kind:"ranch"|"garden"|"meadow"|"moon"}',
+ scenes:'List saved scenes. No args.',
+ save_scene:'Save this world as a scene. {name:string}',
+ load_scene:'Open a saved scene. {sceneId:string from scenes}',
+ new_ranch:'Start a brand-new plain ranch. No args.'
+};
+export const APP_WORLDS=['ranch','city','suburban','starship','moon'];
+
 export const TOOLS=[
  {type:'function',name:'look',description:'See the world right now: the place, time, weather, the people who live here, the buildings, everything you have made (ids and parts), the size of a person, and where the child last tapped.',parameters:{type:'object',properties:{}}},
  {type:'function',name:'change_world',description:'Change the world in one go. All ops apply in the same frame.\n'+opsGuide+'\nShapes: '+SHAPES.join(', ')+'. Behaviours: '+BEHAVIORS.join(', ')+'. Weather: '+WEATHER.join(', ')+'. Colours are hex like "#ff8800".',parameters:{type:'object',required:['ops'],properties:{ops:{type:'array',minItems:1,maxItems:40,items:{type:'object',required:['op','args'],properties:{op:{type:'string',enum:LIVE_OPS},args:{type:'object',description:'Arguments for the op, as listed above'}}}}}}},
@@ -85,7 +122,11 @@ export const TOOLS=[
   behavior:{type:'string',enum:BEHAVIORS,description:'Whole-thing behaviour'},
   parts:{type:'array',minItems:1,maxItems:40,items:part}
  }}},
- {type:'function',name:'catalog',description:'List the registered models (buildings, plants, props) you can place with change_world spawn {asset: id}.',parameters:{type:'object',properties:{}}},
+ {type:'function',name:'catalog',description:'Search the model library: ranch buildings, animals, supplies, family figures and the workshop library. Place a result with change_world spawn {asset: id}.',parameters:{type:'object',properties:{
+  query:{type:'string',maxLength:40,description:'A word or two, e.g. "barn", "goat", "tree". Leave out to list everything.'},
+  kind:{type:'string',enum:['buildings','organics','supplies','workers','library'],description:'Only this kind'}}}},
+ {type:'function',name:'control_app',description:'Control the app around the world. Actions:\n'+Object.entries(APP_ACTIONS).map(([k,v])=>'- '+k+': '+v).join('\n'),parameters:{type:'object',required:['action'],properties:{
+  action:{type:'string',enum:Object.keys(APP_ACTIONS)},args:{type:'object',description:'Arguments for the action, as listed above'}}}},
  {type:'function',name:'order_model',description:'Ask the workshop to make a proper new 3D model of something for this world. It takes a while; build a quick shape version now.',parameters:{type:'object',required:['description'],properties:{description:{type:'string',minLength:3,maxLength:300,description:'What to make, in plain words, e.g. "a friendly purple unicorn with a rainbow mane"'},for:{type:'string',maxLength:32,description:'The id of the quick version it will replace'}}}},
  {type:'function',name:'goodbye',description:'End live mode, after saying goodbye.',parameters:{type:'object',properties:{}}}
 ];
@@ -119,7 +160,7 @@ export function screen(text,{level='all'}={}){
 export function toolTexts(name,args){
  const out=[];const add=v=>{if(typeof v==='string')out.push(v);};
  if(!args||typeof args!=='object')return out;
- add(args.id);add(args.label);add(args.description);add(args.near);
+ add(args.id);add(args.label);add(args.description);add(args.near);add(args.args?.name);
  for(const p of Array.isArray(args.parts)?args.parts:[])add(p?.id);
  for(const o of Array.isArray(args.ops)?args.ops:[]){const a=o?.args||{};add(a.id);add(a.label);add(a.near);add(a.focus);add(a.target);add(a.person?.name);}
  return out;
@@ -147,4 +188,14 @@ export function summarize(state){
   buildings:world.filter(w=>w.kind!=='person').slice(0,30).map(t=>({name:t.name,position:t.position})),
   yourThings:(state.entities||[]).slice(0,80).map(e=>({id:e.id,parent:e.parent,type:e.type,position:e.position,behavior:e.behavior,label:e.label})),
   lastTap:state.lastTap,camera:{target:state.camera?.target}};
+}
+
+// Catalog search across the ranch models and the model library. Pure, so the server can test it.
+const KIND_NOTE={buildings:'ranch building',organics:'animal or plant',supplies:'ranch supply',workers:'ranch family figure'};
+export function searchModels(ranch,library,{query='',kind}={},limit=60){
+ const all=[...(ranch||[]).map(c=>({id:c.id,label:c.label,kind:c.category,about:KIND_NOTE[c.category]||c.category,text:[c.id,c.label,c.subject,c.category].join(' ')})),
+  ...(library||[]).filter(m=>m.urls?.glb&&/^[a-z0-9-]{1,60}$/.test(m.id)).map(m=>({id:'lib-'+m.id,label:m.name,kind:'library',about:(m.subject||m.group||'').slice(0,80)+' (arrives one person tall)',text:[m.id,m.name,m.group,m.subject].join(' ')}))];
+ const words=String(query).toLowerCase().split(/[^a-z0-9]+/).filter(Boolean).map(w=>w.replace(/(es|s)$/,''));
+ const hits=all.filter(m=>(!kind||m.kind===kind)&&words.every(w=>m.text.toLowerCase().includes(w)));
+ return {count:hits.length,models:hits.slice(0,limit).map(({text,...m})=>m)};
 }
