@@ -21,6 +21,7 @@
  */
 import { createHash, randomBytes } from "node:crypto";
 
+export const MODES = ["auto", "quick", "standard", "bespoke"];
 export const STATUSES = ["submitted", "acknowledged", "running", "blocked", "completed", "failed"];
 export const MESSAGE_KINDS = ["ack", "progress", "question", "completed", "failed", "note"];
 const TERMINAL = new Set(["completed", "failed"]);
@@ -89,7 +90,7 @@ function event(record, type, detail, now) {
   if (record.history.length > 400) record.history.splice(0, record.history.length - 400);
 }
 
-export function buildRecord({ request, context, requester, idemKey, now = Date.now(), id }) {
+export function buildRecord({ request, context, requester, idemKey, now = Date.now(), id, mode, references }) {
   const text = String(request || "").trim();
   if (!text) throw Object.assign(new Error("request is required"), { code: "request_required" });
   const dispatchId = id || newDispatchId(now);
@@ -100,6 +101,11 @@ export function buildRecord({ request, context, requester, idemKey, now = Date.n
     verified: false,
     request: clip(text, LIMITS.requestChars),
     context: context ? clip(context, LIMITS.contextChars) : null,
+    mode: MODES.includes(mode) ? mode : "auto",
+    references: (Array.isArray(references) ? references : [])
+      .map((r) => ({ label: clip(r?.label || "", 80), url: String(r?.url || r || "") }))
+      .filter((r) => /^https:\/\//.test(r.url))
+      .slice(0, 20),
     requester: requester || null,
     idempotencyKey: idemKey || null,
     createdAt: nowIso(now),
@@ -141,6 +147,8 @@ export function firePayload(record, { reason = "new", now = Date.now() } = {}) {
     revision: record.revision,
     request: record.request,
     context: record.context,
+    mode: record.mode || "auto",
+    references: record.references || [],
     revisions: record.revisions.map((r) => ({ n: r.n, at: r.at, instructions: r.instructions })),
     branch: record.git.branch,
     github_issue: record.git.issue,
@@ -289,6 +297,46 @@ export function applyClaudeMessage(record, source, { now = Date.now() } = {}) {
     source: sourceKey,
     acknowledged: false,
   };
+  const images = (Array.isArray(marker.images) ? marker.images : [])
+    .map((img) => ({ label: clip(img?.label || "", 80), url: String(img?.url || img || "") }))
+    .filter((img) => /^https:\/\//.test(img.url))
+    .slice(0, 12);
+  if (images.length) msg.images = images;
+  const models = (Array.isArray(marker.models) ? marker.models : [])
+    .map((m) => ({ label: clip(m?.label || "", 80), url: String(m?.url || m || "") }))
+    .filter((m) => /^https:\/\//.test(m.url))
+    .slice(0, 8);
+  if (models.length) msg.models = models;
+  if (typeof marker.stage === "string" && marker.stage.trim()) {
+    msg.stage = clip(marker.stage.trim().toLowerCase(), 40);
+    record.stage = msg.stage;
+    record.stages = record.stages || [];
+    if (!record.stages.some((st) => st.name === msg.stage)) record.stages.push({ name: msg.stage, at });
+  }
+  // Partial progress on long jobs: {"progress":{"done":3,"total":8,"unit":"parts","note":"…"}}
+  const pr = marker.progress;
+  if (pr && typeof pr === "object" && Number.isFinite(Number(pr.done)) && Number.isFinite(Number(pr.total)) && Number(pr.total) > 0) {
+    msg.progress = {
+      done: Math.max(0, Number(pr.done)),
+      total: Number(pr.total),
+      unit: clip(pr.unit || "steps", 24),
+      note: pr.note ? clip(pr.note, 160) : null,
+    };
+    msg.progress.fraction = Math.min(1, msg.progress.done / msg.progress.total);
+    record.progress = { ...msg.progress, at, stage: msg.stage || record.stage || null };
+  }
+  if (images.length || models.length) {
+    record.artifacts = record.artifacts || [];
+    for (const it of images) record.artifacts.push({ type: "image", ...it, at, stage: msg.stage || null, message: msg.id });
+    for (const it of models) record.artifacts.push({ type: "model", ...it, at, stage: msg.stage || null, message: msg.id });
+    if (record.artifacts.length > 60) record.artifacts.splice(0, record.artifacts.length - 60);
+  }
+  if (typeof marker.checkpoint === "string") {
+    msg.checkpoint = clip(marker.checkpoint, 40);
+    record.checkpoints = record.checkpoints || [];
+    record.checkpoints.push({ name: msg.checkpoint, at, message: msg.id, images });
+    if (record.checkpoints.length > 30) record.checkpoints.shift();
+  }
 
   const forOldRevision = msg.revision != null && msg.revision < record.revision;
   record.lastActivityAt = nowIso(now);
@@ -326,6 +374,12 @@ export function applyClaudeMessage(record, source, { now = Date.now() } = {}) {
       record.status = "failed";
       record.error = clip(text, 1200);
     }
+  }
+  if (!forOldRevision && msg.revision === record.revision && record.pendingRevision) {
+    // A running session reported against the newest revision: it took it in mid-run.
+    record.pendingRevision = false;
+    record.delivery.deliveredRevision = record.revision;
+    event(record, "revision_taken_in_run", { revision: record.revision }, now);
   }
   if (forOldRevision) {
     msg.note = `reported against revision ${msg.revision}; current revision is ${record.revision}`;
@@ -383,6 +437,28 @@ export function watchdogAction(record, now = Date.now()) {
   return null;
 }
 
+/**
+ * Revisions a running Claude session should see now, on its GitHub issue (posted by the relay workflow),
+ * so Evan can steer mid-run (e.g. after concept art) without waiting for the run to end.
+ */
+export function revisionsToPost(record) {
+  if (!record.pendingRevision || !record.git.issue) return [];
+  if (!["acknowledged", "running"].includes(record.status)) return [];
+  return record.revisions
+    .filter((r) => !r.postedAt && r.n > (record.delivery.deliveredRevision ?? -1))
+    .map((r) => ({ dispatch_id: record.id, issue: record.git.issue, revision: r.n, instructions: r.instructions }));
+}
+
+export function markRevisionPosted(record, n, commentUrl, now = Date.now()) {
+  const r = record.revisions.find((x) => x.n === n);
+  if (!r || r.postedAt) return false;
+  r.postedAt = nowIso(now);
+  r.commentUrl = commentUrl || null;
+  event(record, "revision_posted_to_issue", { revision: n }, now);
+  record.updatedAt = nowIso(now);
+  return true;
+}
+
 export function giveUp(record, note, now = Date.now()) {
   record.status = "failed";
   record.error = note;
@@ -405,6 +481,7 @@ export function summarize(record) {
     status: record.status,
     verified: record.verified,
     request: clip(record.request, 280),
+    mode: record.mode || "auto",
     revision: record.revision,
     pending_revision: record.pendingRevision,
     delivery: {
@@ -427,7 +504,43 @@ export function summarize(record) {
       links: record.git.links.slice(-10),
     },
     verification: record.verification || null,
+    checkpoints: (record.checkpoints || []).slice(-5).map((c) => ({ name: c.name, at: c.at, images: c.images })),
     unread_messages: unread,
+  };
+}
+
+/** A dispatch as a work parcel moving through the factory, for the phone app's activity center. */
+export function parcelView(record, now = Date.now()) {
+  const lastSession = record.delivery.sessions[record.delivery.sessions.length - 1] || null;
+  const quietMs = now - Date.parse(record.lastActivityAt || record.updatedAt);
+  const working = ["acknowledged", "running"].includes(record.status) || (record.status === "submitted" && record.delivery.state === "fired");
+  return {
+    parcel_id: record.id,
+    title: clip(record.request.split("\n")[0], 90),
+    mode: record.mode || "auto",
+    references: record.references || [],
+    status: record.status,
+    verified: record.verified,
+    stage: record.stage || (record.status === "submitted" ? "queued" : null),
+    stages: record.stages || [],
+    progress: record.progress || null,
+    revision: record.revision,
+    needs_input: record.needsInput,
+    last_progress: record.lastProgress,
+    started_at: record.createdAt,
+    last_activity_at: record.lastActivityAt,
+    artifacts: (record.artifacts || []).slice(-12),
+    machine: {
+      kind: "claude",
+      state: working ? (quietMs > 20 * 60 * 1000 ? "quiet" : "working") : record.status === "blocked" ? "waiting_for_evan" : "idle",
+      session_started_at: lastSession?.at || null,
+      deliveries: record.delivery.attempts,
+    },
+    links: {
+      issue: record.git.issueUrl,
+      prs: record.git.prs.map((n) => `https://github.com/evanrobinson2/abbiesworld_ios/pull/${n}`),
+      other: record.git.links.slice(-5),
+    },
   };
 }
 
@@ -442,6 +555,11 @@ export function publicMessage(record, msg) {
     url: msg.url || null,
     revision: msg.revision ?? null,
     note: msg.note || undefined,
+    checkpoint: msg.checkpoint || undefined,
+    images: msg.images || undefined,
+    models: msg.models || undefined,
+    stage: msg.stage || undefined,
+    progress: msg.progress || undefined,
     acknowledged: msg.acknowledged,
   };
 }

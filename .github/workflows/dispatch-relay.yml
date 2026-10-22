@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
-  issues: read
+  issues: write
   pull-requests: read
   id-token: write
 concurrency:
@@ -139,4 +139,16 @@ jobs:
               });
               for (const c of comments) await relayItem('comment', c, issue);
             }
-            await post({ op: 'sweep' });
+            const swept = await post({ op: 'sweep' });
+            // Steering for running sessions: post queued revisions on their issues so Claude sees them
+            // at its next checkpoint, then tell the MCP they're posted.
+            let pending = [];
+            try { pending = JSON.parse(swept.text).post_revisions || []; } catch {}
+            for (const r of pending) {
+              const marker = JSON.stringify({ id: r.dispatch_id, rev: r.revision });
+              const { data } = await github.rest.issues.createComment({
+                owner, repo, issue_number: r.issue,
+                body: `<!-- abbies-dispatch-revision:v1 ${marker} -->\n**Change from Evan (revision ${r.revision}):**\n\n${r.instructions}`,
+              });
+              await post({ op: 'revision_posted', dispatch_id: r.dispatch_id, revision: r.revision, comment_url: data.html_url });
+            }

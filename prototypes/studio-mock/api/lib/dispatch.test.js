@@ -159,6 +159,42 @@ await Promise.all([1, 2, 3, 4, 5].map((n) => svc.relay(comment(b7.dispatch_id, "
 const rec7 = await store.get(b7.dispatch_id);
 assert(rec7.messages.length === 5, `concurrent relays kept: ${rec7.messages.length}`);
 
+// 14. factory feed: stages, partial progress, concept art and models, mid-run steering, phone alerts.
+const alerts = [];
+const svc2 = createDispatchService({ store, fire, now, notify: async (rec, msg) => { alerts.push({ id: rec.id, kind: msg.kind, checkpoint: msg.checkpoint }); return { sent: 1 }; } });
+const f = await svc2.build({ request: "Roman watchtower with soldiers" });
+const fid = f.dispatch_id;
+await svc2.relay(comment(fid, "ack", { cid: "g1" }));
+await svc2.relay(comment(fid, "progress", { cid: "g2", text: "Concept art ready", marker: {
+  stage: "concept", checkpoint: "concept_art",
+  images: [{ label: "front", url: "https://raw.githubusercontent.com/evanrobinson2/abbiesworld_ios/x/front.png" }, "http://insecure/x.png"],
+  progress: { done: 1, total: 5, unit: "stages" },
+} }));
+let fd = await svc2.feed({});
+let parcel = fd.parcels.find((p) => p.parcel_id === fid);
+assert(parcel.stage === "concept" && parcel.artifacts.length === 1 && parcel.artifacts[0].type === "image", "concept art on parcel (https only)");
+assert(parcel.progress.fraction === 0.2 && parcel.machine.state === "working", "partial progress + machine working");
+assert(fd.machines.some((m) => m.parcel_id === fid), "machine listed");
+assert(alerts.some((a) => a.id === fid && a.checkpoint === "concept_art"), "phone alert for concept art");
+const ev = fd.events.filter((e) => e.dispatch_id === fid);
+assert(ev.length === 2 && ev[1].images.length === 1 && ev[1].checkpoint === "concept_art", "feed events carry images");
+// Evan steers mid-run from the app: queued, posted to the issue, then taken in by the running session.
+await svc2.revise({ dispatch_id: fid, instructions: "Make the roof red", requester: { via: "app" } });
+let posts = await svc2.pendingIssuePosts();
+let mine = posts.filter((p) => p.dispatch_id === fid);
+assert(mine.length === 1 && mine[0].issue === 90 && mine[0].revision === 1, "revision to post on issue");
+await svc2.revisionPosted({ dispatch_id: fid, revision: 1, comment_url: "https://github.com/x#c" });
+posts = await svc2.pendingIssuePosts();
+assert(!posts.some((p) => p.dispatch_id === fid), "posted once");
+await svc2.relay(comment(fid, "progress", { cid: "g3", rev: 1, text: "Red roof applied", marker: { stage: "model", models: [{ label: "tower", url: "https://example.com/tower.glb" }], progress: { done: 3, total: 5 } } }));
+let rec = await store.get(fid);
+assert(!rec.pendingRevision && rec.status === "running" && rec.stage === "model", "revision taken in mid-run");
+fd = await svc2.feed({ dispatch_id: fid });
+parcel = fd.parcels[0];
+assert(parcel.artifacts.some((a) => a.type === "model") && parcel.stages.map((x) => x.name).join(",") === "concept,model", "models + stage history");
+const since = fd.next_since;
+assert((await svc2.feed({ since })).events.length === 0, "feed since cursor");
+
 /* auth */
 const { publicKey, privateKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const jwk = { ...publicKey.export({ format: "jwk" }), kid: "k1", alg: "RS256", use: "sig" };

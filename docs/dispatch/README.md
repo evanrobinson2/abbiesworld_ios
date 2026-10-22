@@ -26,10 +26,29 @@ GitHub is the return channel because Claude's cloud sessions cannot reach `*.ver
 
 | Tool | What it does |
 | --- | --- |
-| `build(request, context?, idempotency_key?)` | Stores the request, fires Claude, returns `dispatch_id` at once. Same request within 15 min (or same key, ever) returns the existing dispatch. |
+| `build(request, context?, idempotency_key?, mode?, references?)` | `mode` defaults to `auto` (Claude picks quick, standard or bespoke); `references` are photo URLs for bespoke replicas. Stores the request, fires Claude, returns `dispatch_id` at once. Same request within 15 min (or same key, ever) returns the existing dispatch. |
 | `status(dispatch_id?)` | One dispatch, or all active ones: status, verified, delivery, last progress, last activity, branch, commits, PRs, links, errors, the question waiting for Evan. |
 | `revise(dispatch_id, instructions)` | Change order or answer. Idle dispatch: fires a new Claude run on the same branch/issue. Running: queued and sent when that run reports in. History is kept. |
 | `inbox(since?, unread_only?, acknowledge?, dispatch_id?)` | Claude's new messages; marks them read by default so ChatGPT doesn't repeat news. |
+
+## Factory feed for the phone app
+
+`GET /api/dispatch-feed?since=ISO` (Bearer: household or MCP Auth0 token) gives the phone app
+everything it needs to show the factory at work without Claude or ChatGPT on the phone:
+
+- `parcels`: each dispatch as a work parcel: `mode` (auto/quick/standard/bespoke), current `stage`
+  and stages passed, partial `progress` (`done/total`, `fraction`), the latest concept art and models
+  (`artifacts`: images and GLB URLs), what it needs from Evan, and its `machine` (the Claude session:
+  working / quiet / waiting_for_evan / idle).
+- `machines`: Claude sessions working on parcels plus the Midjourney workers (the Mac).
+- `events`: every message as it arrives (ack, progress, checkpoints with images/models, questions,
+  completion), with `next_since` as the cursor.
+
+`POST /api/dispatch-feed {dispatch_id, instructions}` steers a parcel from the app (same as `revise`).
+A running session gets it on its issue at the next relay sweep and folds it in before its next stage.
+Checkpoints with images or models, questions, completions and failures also send a Web Push to the
+app's existing subscribers (`api/lib/dispatch-notify.js`). How the app presents all this is owned by
+the iPhone app work; this endpoint is the contract.
 
 ## Lifecycle and what each state proves
 
