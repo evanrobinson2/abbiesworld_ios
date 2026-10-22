@@ -1,14 +1,36 @@
 {
- "updated": "2026-10-22T22:06:58.437Z",
+ "updated": "2026-10-22T22:15:13.848Z",
  "slots": 379,
- "filled": 334,
+ "filled": 364,
  "picks": {
   "chicks": {
    "slot": "chicks",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2024/2",
+     "path": "Mechanical Wave - Farm Animals/BIRDFowl_Chick Squawks-02_MWSFX_FA.wav",
+     "trim": [
+      0,
+      1.077
+     ],
+     "fade": 0.01,
+     "duration": 10
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2024/2",
+     "path": "Mechanical Wave - Farm Animals/BIRDFowl_Chick Squawks-02_MWSFX_FA.wav",
+     "title": "Chick Squawks 02",
+     "publisher": "Mechanical Wave",
+     "category": "Birds",
+     "score": 13,
+     "duration": 10,
+     "why": "name has \"chick\", Birds"
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 1 matching file; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -2200,10 +2222,53 @@
   },
   "monkey": {
    "slot": "monkey",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2020/8",
+     "path": "Pole Position - Piaggio Ape tm P703V 1993/Ape_P703V_t10_Ext_Idle_Various_Wide_AB_MKH8060.wav",
+     "trim": [
+      0.433,
+      3.433
+     ],
+     "fade": 0.12,
+     "duration": 46.83,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2020/8",
+     "path": "Pole Position - Piaggio Ape tm P703V 1993/Ape_P703V_t10_Ext_Idle_Various_Wide_AB_MKH8060.wav",
+     "title": "Ape P703V t10 Ext Idle Various Wide AB MKH8060",
+     "publisher": "Pole Position",
+     "category": "Other",
+     "score": 9,
+     "duration": 46.83,
+     "why": "name has \"ape\""
+    },
+    {
+     "ref": "gdc2020/8",
+     "path": "Pole Position - Piaggio Ape tm P703V 1993/Ape_P703V_t14_Var_SFX_Throttle_XY_RSM191.wav",
+     "title": "Ape P703V t14 Var SFX Throttle XY RSM191",
+     "publisher": "Pole Position",
+     "category": "Other",
+     "score": 9,
+     "duration": 13.27,
+     "why": "name has \"ape\""
+    },
+    {
+     "ref": "gdc2020/8",
+     "path": "Pole Position - Piaggio Ape tm P703V 1993/Ape_P703V_t3_Onbrd_Start_Fast_Drive_Stop_Reverse_Stop_Drive_Stop_Off_Engine_Intake_DPA4062.wav",
+     "title": "Ape P703V t3 Onbrd Start Fast Drive Stop Reverse Stop Drive Stop Off Engine Intake DPA4062",
+     "publisher": "Pole Position",
+     "category": "Other",
+     "score": 9,
+     "duration": 179.84,
+     "why": "name has \"ape\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 3 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -3176,19 +3241,124 @@
   },
   "goblin": {
    "slot": "goblin",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/SoundMorph - Monster Within/Monster Within - Small Creature - Spawn_Up600_02.wav",
+     "trim": [
+      0,
+      3
+     ],
+     "fade": 0.12,
+     "duration": 3.35,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/SoundMorph - Monster Within/Monster Within - Small Creature - Spawn_Up600_02.wav",
+     "title": "Monster Within Small Creature Spawn Up600 02",
+     "publisher": "SoundMorph",
+     "category": "Creatures",
+     "score": 15,
+     "duration": 3.35,
+     "why": "name has \"small creature\", Creatures"
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 1 matching file; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
   "giant-steps": {
    "slot": "giant-steps",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2024/1",
+     "path": "DavidDumais - Robotic Creatures Sound FX/CREAMisc_Heavy Mechanical Footsteps 03_DDUMAIS_MCSFX.wav",
+     "trim": [
+      0,
+      1.125
+     ],
+     "fade": 0.01,
+     "duration": 8.93
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2024/1",
+     "path": "DavidDumais - Robotic Creatures Sound FX/CREAMisc_Heavy Mechanical Footsteps 03_DDUMAIS_MCSFX.wav",
+     "title": "Heavy Mechanical Footsteps 03",
+     "publisher": "DavidDumais",
+     "category": "Creatures",
+     "score": 15,
+     "duration": 8.93,
+     "why": "name has \"heavy footstep\", Creatures"
+    },
+    {
+     "ref": "gdc2018/1",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 1of8/Alexander Fokshtein - Snow Steps/Snow Impact Stomp Hard.wav",
+     "title": "Snow Impact Stomp Hard",
+     "publisher": "Alexander Fokshtein",
+     "category": "Footsteps",
+     "score": 8.6,
+     "duration": 4.8,
+     "why": "name has \"stomp\""
+    },
+    {
+     "ref": "gdc2017/3",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 3of9/Eiravaein Sound - Gravitas/Gravitas,bridge,stomp,large,arched,wood,metal,heavyiron,deepstream,greenway,strong,resonant,loose,XY.wav",
+     "title": "Gravitas,bridge,stomp,large,arched,wood,metal,heavyiron,deepstream,greenway,strong,resonant,loose,XY",
+     "publisher": "Eiravaein Sound",
+     "category": "Wood",
+     "score": 8.6,
+     "duration": 5,
+     "why": "name has \"stomp\""
+    },
+    {
+     "ref": "gdc2017/3",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 3of9/Eiravaein Sound - Gravitas/Gravitas,bridge,stomp,small,flat,wood,gully,streamlet,dry,ruralpark,strong,rattle,gritty,top.wav",
+     "title": "Gravitas,bridge,stomp,small,flat,wood,gully,streamlet,dry,ruralpark,strong,rattle,gritty,top",
+     "publisher": "Eiravaein Sound",
+     "category": "Water",
+     "score": 8.6,
+     "duration": 1,
+     "why": "name has \"stomp\""
+    },
+    {
+     "ref": "gdc2017/3",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 3of9/Eiravaein Sound - Gravitas/Gravitas,bridge,stomp,xlarge,arched,wood,heavyiron,stream,urbanpark,strong,clatter,staggered,XY.wav",
+     "title": "Gravitas,bridge,stomp,xlarge,arched,wood,heavyiron,stream,urbanpark,strong,clatter,staggered,XY",
+     "publisher": "Eiravaein Sound",
+     "category": "Water",
+     "score": 8.6,
+     "duration": 2,
+     "why": "name has \"stomp\""
+    },
+    {
+     "ref": "gdc2016/2",
+     "path": "Filmnoise - Unusual Footsteps and Movements Vol.1/SOCKS LINOLEUM FOOT SCRAPE STOMP STRUGGLE FIGHTING BEING PUT IN A REVERSED CHOKE HOLD GROUND WORK.wav",
+     "title": "SOCKS LINOLEUM FOOT SCRAPE STOMP STRUGGLE FIGHTING BEING PUT IN A REVERSED CHOKE HOLD GROUND WORK",
+     "publisher": "Filmnoise",
+     "category": "Other",
+     "score": 8.6,
+     "duration": 33.73,
+     "why": "name has \"stomp\""
+    },
+    {
+     "ref": "gdc2018/3",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 3of8/Gamemaster Audio - Footstep and Foley Sounds/foley_soldier_gear_equipment_metal_cloth_heavy_movement_light_08.wav",
+     "title": "foley soldier gear equipment metal cloth heavy movement light 08",
+     "publisher": "Gamemaster Audio",
+     "category": "Footsteps",
+     "score": 6,
+     "duration": null,
+     "why": "name and folder have \"heavy footstep\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 7 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -6684,10 +6854,62 @@
   },
   "fireplace": {
    "slot": "fireplace",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2023/13",
+     "path": "Stefano Cremona - Pure Nature Ambiences/Campfire.wav",
+     "trim": [
+      5.95,
+      50.95
+     ],
+     "fade": 2,
+     "duration": 59.47
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2023/13",
+     "path": "Stefano Cremona - Pure Nature Ambiences/Campfire.wav",
+     "title": "Campfire",
+     "publisher": "Stefano Cremona",
+     "category": "Ambience",
+     "score": 9.4,
+     "duration": 59.47,
+     "why": "name has \"campfire\""
+    },
+    {
+     "ref": "gdc2026/3",
+     "path": "Ivo Vicic - Campfire - Bonfire FX/24 Campfire, Dropping Fresh Pine Branches in Fire, Crackling, Sizzling Strong, Close 02.wav",
+     "title": "24 Campfire, Dropping Fresh Pine Branches in Fire, Crackling, Sizzling Strong, Close 02",
+     "publisher": "Ivo Vicic",
+     "category": "Fire",
+     "score": 8.4,
+     "duration": 120.58,
+     "why": "name has \"campfire\", Fire"
+    },
+    {
+     "ref": "gdc2026/3",
+     "path": "Ivo Vicic - Campfire FX - Ambisonic/Camp fire, crackling, putting oil in fire, close, night_B-format, Ambix.wav",
+     "title": "Camp fire, crackling, putting oil in fire, close, night B format, Ambix",
+     "publisher": "Ivo Vicic",
+     "category": "Fire",
+     "score": 6.4,
+     "duration": 76.52,
+     "why": "folder has \"campfire\", Fire"
+    },
+    {
+     "ref": "gdc2026/3",
+     "path": "Ivo Vicic - Campfire - Bonfire FX/42 Campfire, Putting Out Fire, Water from Bottle, Variation, Close.wav",
+     "title": "42 Campfire, Putting Out Fire, Water from Bottle, Variation, Close",
+     "publisher": "Ivo Vicic",
+     "category": "Water",
+     "score": 4.4,
+     "duration": 30.89,
+     "why": "name has \"campfire\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 4 matching files; best name match with a long enough stretch to loop."
    ],
    "date": "2026-10-22"
   },
@@ -7663,10 +7885,32 @@
   },
   "graveyard": {
    "slot": "graveyard",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2019/5",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 5of8/Rock The Speakerbox - Hero/HERO - DESIGNED - TOMB Slide Open.wav",
+     "trim": [
+      2.48,
+      22.82
+     ],
+     "fade": 2,
+     "duration": 24.82
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2019/5",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 5of8/Rock The Speakerbox - Hero/HERO - DESIGNED - TOMB Slide Open.wav",
+     "title": "HERO DESIGNED TOMB Slide Open",
+     "publisher": "Rock The Speakerbox",
+     "category": "Other",
+     "score": 9,
+     "duration": 24.82,
+     "why": "name has \"tomb\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 1 matching file; best name match with a long enough stretch to loop."
    ],
    "date": "2026-10-22"
   },
@@ -10509,10 +10753,52 @@
   },
   "fireball": {
    "slot": "fireball",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2018/3",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 3of8/Gregor Quendel – Designed Fire/Designed Fire - Swooshes - Burst, evolving 34.wav",
+     "trim": [
+      0.36,
+      0.538
+     ],
+     "fade": 0.01,
+     "duration": 10.32
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2018/3",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 3of8/Gregor Quendel – Designed Fire/Designed Fire - Swooshes - Burst, evolving 34.wav",
+     "title": "Designed Fire Swooshes Burst, evolving 34",
+     "publisher": "Gregor Quendel – Designed Fire",
+     "category": "Fire",
+     "score": 15,
+     "duration": 10.32,
+     "why": "name has \"fire burst\", Fire"
+    },
+    {
+     "ref": "gdc2020/2",
+     "path": "Bluezone - Mountain Dweller - Orc Sound Effects/Bluezone_BC0261_mountain_dweller_texture_fire_whoosh_003.wav",
+     "title": "Bluezone BC0261 mountain dweller texture fire whoosh 003",
+     "publisher": "Bluezone",
+     "category": "Other",
+     "score": 11.8,
+     "duration": 2.25,
+     "why": "name has \"fire whoosh\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Epic Stock Media - Elemental Mutation Whooshes and Impacts/FIREWhsh_Whoosh Fire Deep Growl Monster Saturated Crisp 03_ESM_EMWI.wav",
+     "title": "Whoosh Fire Deep Growl Monster Saturated Crisp 03",
+     "publisher": "Epic Stock Media",
+     "category": "Fire",
+     "score": 10.8,
+     "duration": 2.48,
+     "why": "name has \"fire whoosh\", Fire"
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 3 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -12092,10 +12378,53 @@
   },
   "hooves-cobble": {
    "slot": "hooves-cobble",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2023/2",
+     "path": "Dramatic Cat - Horse Carriage - Draft Horse/FEETHors_Draft Horse Walk On On Grass And Dirt MONO_DRCA_HOCA_MKH416.wav",
+     "trim": [
+      0,
+      5
+     ],
+     "fade": 0.12,
+     "duration": 14.68,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2023/2",
+     "path": "Dramatic Cat - Horse Carriage - Draft Horse/FEETHors_Draft Horse Walk On On Grass And Dirt MONO_DRCA_HOCA_MKH416.wav",
+     "title": "Draft Horse Walk On On Grass And Dirt MONO",
+     "publisher": "Dramatic Cat",
+     "category": "Footsteps",
+     "score": 9.6,
+     "duration": 14.68,
+     "why": "name has \"horse walk\", Footsteps"
+    },
+    {
+     "ref": "gdc2017/4",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 4of9/G4F SFX - Horses/G4F SFX06 - HORSES - Walking on stone 03.wav",
+     "title": "G4F SFX06 HORSES Walking on stone 03",
+     "publisher": "G4F SFX",
+     "category": "Animals",
+     "score": 9.6,
+     "duration": 26.27,
+     "why": "name has \"horse walk\", Animals"
+    },
+    {
+     "ref": "gdc2023/13",
+     "path": "TheWorkRoom Audio Post - Animal Footsteps Foley - Hooves/ANF082.wav",
+     "title": "ANF082",
+     "publisher": "TheWorkRoom Audio Post",
+     "category": "Animals",
+     "score": 6,
+     "duration": 18.29,
+     "why": "folder has \"hooves\", Animals"
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 3 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -14330,54 +14659,34 @@
    "slot": "axe",
    "takes": [
     {
-     "ref": "gdc2024/2",
-     "path": "Justsoundeffects - Melee Weapons/WEAPAxe_Long Two-Handed Axe Flesh Hit_JSE_MW.wav",
+     "ref": "gdc2020/2",
+     "path": "Bluezone - Mountain Dweller - Orc Sound Effects/Bluezone_BC0261_mountain_dweller_tool_axe_whoosh_impact_003.wav",
      "trim": [
       0,
-      0.721
+      0.66
      ],
      "fade": 0.01,
-     "duration": 12
+     "duration": 0.91
     },
     {
-     "ref": "gdc2024/2",
-     "path": "Justsoundeffects - Melee Weapons/WEAPAxe_Long Two-Handed Axe Flesh Hit_JSE_MW.wav",
+     "ref": "gdc2017/8",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 8of9/Soundopolis - Heavy Metal!/Metal Bang_Collins Axe + Chains_MK4_Fienup_002.wav",
      "trim": [
-      2.429,
-      3.171
+      0,
+      0.874
      ],
      "fade": 0.01,
-     "duration": 12
+     "duration": 14.93
     }
    ],
    "candidates": [
-    {
-     "ref": "gdc2024/2",
-     "path": "Justsoundeffects - Melee Weapons/WEAPAxe_Long Two-Handed Axe Flesh Hit_JSE_MW.wav",
-     "title": "Long Two Handed Axe Flesh Hit",
-     "publisher": "Justsoundeffects",
-     "category": "Weapons",
-     "score": 3.4,
-     "duration": 12,
-     "why": "name has \"axe\""
-    },
-    {
-     "ref": "gdc2024/2",
-     "path": "Justsoundeffects - Melee Weapons/WEAPAxe_One-Handed Axe Drops_JSE_MW.wav",
-     "title": "One Handed Axe Drops",
-     "publisher": "Justsoundeffects",
-     "category": "Weapons",
-     "score": 3.4,
-     "duration": 24,
-     "why": "name has \"axe\""
-    },
     {
      "ref": "gdc2020/2",
      "path": "Bluezone - Mountain Dweller - Orc Sound Effects/Bluezone_BC0261_mountain_dweller_tool_axe_whoosh_impact_003.wav",
      "title": "Bluezone BC0261 mountain dweller tool axe whoosh impact 003",
      "publisher": "Bluezone",
      "category": "Other",
-     "score": 3.4,
+     "score": 9.4,
      "duration": 0.91,
      "why": "name has \"axe\""
     },
@@ -14387,7 +14696,7 @@
      "title": "Metal Bang Collins Axe + Chains MK4 Fienup 002",
      "publisher": "Soundopolis",
      "category": "Other",
-     "score": 3.4,
+     "score": 9.4,
      "duration": 14.93,
      "why": "name has \"axe\""
     },
@@ -14397,7 +14706,7 @@
      "title": "axe ice 005",
      "publisher": "3maze",
      "category": "Other",
-     "score": 3.4,
+     "score": 9.4,
      "duration": 0.52,
      "why": "name has \"axe\""
     },
@@ -14407,7 +14716,7 @@
      "title": "Electric Mower Engine turn on turn off start stop mowing grass cutting branches trimming engine running chopping Long 02",
      "publisher": "Matt Script",
      "category": "Other",
-     "score": 3,
+     "score": 9,
      "duration": 82.48,
      "why": "name has \"chopping\""
     },
@@ -14417,14 +14726,23 @@
      "title": "SHANGHAI walla interior market vegetables meat fish lively close voices chinese plastic bags chopping",
      "publisher": "Sun-Smile-Island",
      "category": "Ambience",
-     "score": 3,
-     "duration": null,
+     "score": 9,
+     "duration": 137.19,
      "why": "name has \"chopping\""
+    },
+    {
+     "ref": "gdc2024/2",
+     "path": "Justsoundeffects - Melee Weapons/WEAPAxe_One-Handed Axe Drops_JSE_MW.wav",
+     "title": "One Handed Axe Drops",
+     "publisher": "Justsoundeffects",
+     "category": "Weapons",
+     "score": 4.4,
+     "duration": 24,
+     "why": "name has \"axe\""
     }
    ],
    "notes": [
-    "Picked from 7 matching files; best name match with a clean take.",
-    "The variants are separate takes from one recording, so they sound like a set."
+    "Picked from 6 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -14849,10 +15167,72 @@
   },
   "build-complete": {
    "slot": "build-complete",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2019/2",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 2of8/Impact Soundworks - Super FX 8 and 16-bit Video Game SFX/UI_Level_Up.wav",
+     "trim": [
+      0,
+      2.432
+     ],
+     "fade": 0.01,
+     "duration": 3.66
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2019/2",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 2of8/Impact Soundworks - Super FX 8 and 16-bit Video Game SFX/UI_Level_Up.wav",
+     "title": "Level",
+     "publisher": "Impact Soundworks",
+     "category": "User interface",
+     "score": 10.2,
+     "duration": 3.66,
+     "why": "name has \"level up\""
+    },
+    {
+     "ref": "gdc2026/1",
+     "path": "344 Audio - Anime Fight Voices Vol. 1/VOXMale_Boxer Level Up 1_344 Audio_Anime Fight Voices.wav",
+     "title": "Boxer Level Up 1",
+     "publisher": "344 Audio",
+     "category": "Voices",
+     "score": 5.2,
+     "duration": 5.2,
+     "why": "name has \"level up\""
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "RYK-Sounds - Retro Game SFX/power up_level up-sound 2.wav",
+     "title": "power up level up sound 2",
+     "publisher": "RYK-Sounds",
+     "category": "Other",
+     "score": 5.2,
+     "duration": 1.5,
+     "why": "name has \"level up\""
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "SHhh! Listen SFX Libraries - Optometrist Equipment/Terminal,Motor,Running,Vertical,Up,Down,Pneumatic - Terminal Machine adjusting height to match patient level.wav",
+     "title": "Terminal,Motor,Running,Vertical,Up,Down,Pneumatic Terminal Machine adjusting height to match patient level",
+     "publisher": "SHhh! Listen SFX Libraries",
+     "category": "Other",
+     "score": 5.2,
+     "duration": 15.35,
+     "why": "name has \"level up\""
+    },
+    {
+     "ref": "gdc2019/2",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 2of8/Chris Logsdon - Ambient Puzzle SFX Pack/Success 2a.wav",
+     "title": "Success 2a",
+     "publisher": "Chris Logsdon",
+     "category": "Ambience",
+     "score": 3.6,
+     "duration": 2.57,
+     "why": "name has \"success\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 5 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -19530,10 +19910,52 @@
   },
   "oars": {
    "slot": "oars",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2023/4",
+     "path": "Pole Position Production - Audi RS 4 2013/Audi RS4 - t14 - VAR SFX - Gear Shift Paddle - MS Decoded - RSM191.wav",
+     "trim": [
+      0,
+      0.483
+     ],
+     "fade": 0.01,
+     "duration": 14.62
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2023/4",
+     "path": "Pole Position Production - Audi RS 4 2013/Audi RS4 - t14 - VAR SFX - Gear Shift Paddle - MS Decoded - RSM191.wav",
+     "title": "Audi RS4 t14 VAR SFX Gear Shift Paddle MS Decoded RSM191",
+     "publisher": "Pole Position Production",
+     "category": "Other",
+     "score": 9,
+     "duration": 14.62,
+     "why": "name has \"paddle\""
+    },
+    {
+     "ref": "gdc2018/3",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 3of8/Eiravaein Works - Vaeyan IV/AMB,urban,day,kayaking,ColoradoRiver,Austin,TX,tandemkayak,paddle,calm,relaxingspeed,waterlevel,facingfront,XY.WAV",
+     "title": "AMB,urban,day,kayaking,ColoradoRiver,Austin,TX,tandemkayak,paddle,calm,relaxingspeed,waterlevel,facingfront,XY",
+     "publisher": "Eiravaein Works",
+     "category": "Water",
+     "score": 6,
+     "duration": 191.82,
+     "why": "name has \"paddle\""
+    },
+    {
+     "ref": "gdc2020/12",
+     "path": "Soundholder - Abstract Aqua/boat plastic foley using paddles swimming interior 2 stereo AB.wav",
+     "title": "boat plastic foley using paddles swimming interior 2 stereo AB",
+     "publisher": "Soundholder",
+     "category": "Other",
+     "score": 4,
+     "duration": 42.24,
+     "why": "name has \"paddle\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 3 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -20547,10 +20969,102 @@
   },
   "heal": {
    "slot": "heal",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2019/5",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 5of8/Sound Spark LLC – Magic Spells, Buffs and Attacks/Ice_Spell_Ice_Spell_Buff_Positive_02.wav",
+     "trim": [
+      0,
+      0.827
+     ],
+     "fade": 0.01,
+     "duration": 1.88
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2019/5",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 5of8/Sound Spark LLC – Magic Spells, Buffs and Attacks/Ice_Spell_Ice_Spell_Buff_Positive_02.wav",
+     "title": "Ice Spell Ice Spell Buff Positive 02",
+     "publisher": "Sound Spark LLC – Magic Spells, Buffs and Attacks",
+     "category": "Magic",
+     "score": 12.6,
+     "duration": 1.88,
+     "why": "name has \"buff\", Magic"
+    },
+    {
+     "ref": "gdc2020/3",
+     "path": "Effectsworks - Tech Future/Computer Device Power Up Activation Conformation Lo-Fi 06.wav",
+     "title": "Computer Device Power Up Activation Conformation Lo Fi 06",
+     "publisher": "Effectsworks",
+     "category": "Other",
+     "score": 11,
+     "duration": 1.98,
+     "why": "name has \"power up\""
+    },
+    {
+     "ref": "gdc2020/5",
+     "path": "Matt Script - Sputter! Glug! Sutter! Chug!/Coolspring_Power_Museum_Snow_Engine_600_hp_starting_up_motor_gas_natural.wav",
+     "title": "Coolspring Power Museum Snow Engine 600 hp starting up motor gas natural",
+     "publisher": "Matt Script",
+     "category": "Other",
+     "score": 11,
+     "duration": 18.88,
+     "why": "name has \"power up\""
+    },
+    {
+     "ref": "gdc2018/3",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 3of8/Gamemaster Audio - Sci-Fi Sounds and Sci-Fi Weapons/sci-fi_device_item_power_up_flash_01.wav",
+     "title": "sci fi device item power up flash 01",
+     "publisher": "Gamemaster Audio",
+     "category": "Weapons",
+     "score": 11,
+     "duration": 1.2,
+     "why": "name has \"power up\""
+    },
+    {
+     "ref": "gdc2018/6",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 6of8/The Chris Alan - Hand-to-Hand Combat - Body Hits & Vocal Excursions/Hand-to-Hand Combat - Vocal Excursion - Male - Powering Up 14.wav",
+     "title": "Hand to Hand Combat Vocal Excursion Male Powering Up 14",
+     "publisher": "The Chris Alan",
+     "category": "Other",
+     "score": 11,
+     "duration": 2.13,
+     "why": "name has \"power up\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Epic Stock Media - Anime Game/DSGNStngr_Power Up Bright Positive Successful Light Saturation Crash Shimmer 05_ESM_AG.wav",
+     "title": "Power Up Bright Positive Successful Light Saturation Crash Shimmer 05",
+     "publisher": "Epic Stock Media",
+     "category": "Designed",
+     "score": 10,
+     "duration": 1.52,
+     "why": "name has \"power up\""
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "RYK-Sounds - Retro Game SFX/power up_level up-sound 2.wav",
+     "title": "power up level up sound 2",
+     "publisher": "RYK-Sounds",
+     "category": "Other",
+     "score": 6,
+     "duration": null,
+     "why": "name has \"power up\""
+    },
+    {
+     "ref": "gdc2019/5",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 5of8/Sound Spark LLC – Magic Spells, Buffs and Attacks/Dark_Spell_Life_Tap_03.wav",
+     "title": "Dark Spell Life Tap 03",
+     "publisher": "Sound Spark LLC – Magic Spells, Buffs and Attacks",
+     "category": "Magic",
+     "score": 5.6,
+     "duration": null,
+     "why": "folder has \"buff\", Magic"
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 8 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -20698,10 +21212,92 @@
   },
   "fairy": {
    "slot": "fairy",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2020/12",
+     "path": "Sound Villain – Fireworks Malta/033_Strong blast with sparkle.wav",
+     "trim": [
+      1.829,
+      2.083
+     ],
+     "fade": 0.01,
+     "duration": 30.89
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2020/12",
+     "path": "Sound Villain – Fireworks Malta/033_Strong blast with sparkle.wav",
+     "title": "033 Strong blast with sparkle",
+     "publisher": "Sound Villain – Fireworks Malta",
+     "category": "Fire",
+     "score": 9.4,
+     "duration": 30.89,
+     "why": "name has \"sparkle\""
+    },
+    {
+     "ref": "gdc2020/12",
+     "path": "Sound Villain – Fireworks Malta/053_Very strong blast, crackles, sparkle.wav",
+     "title": "053 Very strong blast, crackles, sparkle",
+     "publisher": "Sound Villain – Fireworks Malta",
+     "category": "Fire",
+     "score": 9.4,
+     "duration": 22.2,
+     "why": "name has \"sparkle\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Cinematic Sound Design - User Interface/Button Arp Twinkle.wav",
+     "title": "Button Arp Twinkle",
+     "publisher": "Cinematic Sound Design",
+     "category": "User interface",
+     "score": 9,
+     "duration": 1.81,
+     "why": "name has \"twinkle\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Epic Stock Media - Anime Game/DSGNStngr_Power Up Bright Positive Successful Light Saturation Crash Shimmer 05_ESM_AG.wav",
+     "title": "Power Up Bright Positive Successful Light Saturation Crash Shimmer 05",
+     "publisher": "Epic Stock Media",
+     "category": "Designed",
+     "score": 7.6,
+     "duration": 1.52,
+     "why": "name has \"shimmer\""
+    },
+    {
+     "ref": "gdc2020/1",
+     "path": "Articulated Sounds - Magic Elements vol.2/MAGIC GENERIC Texture, Shimmer, Processed Glass, Reversed Layer, Disturbing, High.wav",
+     "title": "MAGIC GENERIC Texture, Shimmer, Processed Glass, Reversed Layer, Disturbing, High",
+     "publisher": "Articulated Sounds",
+     "category": "Magic",
+     "score": 7.6,
+     "duration": 22.13,
+     "why": "name has \"shimmer\", Magic"
+    },
+    {
+     "ref": "gdc2019/7",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 7of8/2496SoundEffects - Sound Design FX Super Pack 1/Drone shimmer 3.wav",
+     "title": "Drone shimmer 3",
+     "publisher": "2496SoundEffects",
+     "category": "Magic",
+     "score": 7.6,
+     "duration": 30.88,
+     "why": "name has \"shimmer\", Magic"
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Epic Stock Media - Strange Game Ambient Loops 3/MAGShim_Shimmer Loop Small Bell Metal Taps_ESM_SGA3.wav",
+     "title": "MAGShim Shimmer Loop Small Bell Metal Taps ESM SGA3",
+     "publisher": "Epic Stock Media",
+     "category": "Ambience",
+     "score": 3.6,
+     "duration": null,
+     "why": "name has \"shimmer\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 7 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -22917,34 +23513,24 @@
    "slot": "armour",
    "takes": [
     {
-     "ref": "gdc2024/6",
-     "path": "Pole Position - The Warfare 2 Library/Ak 5 - FIRING - Hit Metal Armor Plate - Single Shots 2 - HANDHELD NEAR SHOOTER - MS - 418-S.wav",
+     "ref": "gdc2020/9",
+     "path": "SmartSoundFX – Medieval/ARMOR Body Drop Chain Leather Short 02.wav",
      "trim": [
-      0.764,
-      1.22
+      0.255,
+      0.494
      ],
      "fade": 0.01,
-     "duration": 59.98
+     "duration": 2.01
     }
    ],
    "candidates": [
-    {
-     "ref": "gdc2024/6",
-     "path": "Pole Position - The Warfare 2 Library/Ak 5 - FIRING - Hit Metal Armor Plate - Single Shots 2 - HANDHELD NEAR SHOOTER - MS - 418-S.wav",
-     "title": "Ak 5 FIRING Hit Metal Armor Plate Single Shots 2 HANDHELD NEAR SHOOTER MS 418 S",
-     "publisher": "Pole Position",
-     "category": "Weapons",
-     "score": 4.2,
-     "duration": 59.98,
-     "why": "name has \"armor\""
-    },
     {
      "ref": "gdc2020/9",
      "path": "SculpTunes - HHDoors - Household Doors and furnitures/HHDoors  Armored Door - Metal and wood Fron door - Unlock and Lock by the Key.wav",
      "title": "HHDoors Armored Door Metal and wood Fron door Unlock and Lock by the Key",
      "publisher": "SculpTunes",
      "category": "Doors",
-     "score": 4.2,
+     "score": 10.2,
      "duration": 74.35,
      "why": "name has \"armor\""
     },
@@ -22954,7 +23540,7 @@
      "title": "ARMOR Body Drop Chain Leather Short 02",
      "publisher": "SmartSoundFX – Medieval",
      "category": "Other",
-     "score": 4.2,
+     "score": 10.2,
      "duration": 2.01,
      "why": "name has \"armor\""
     },
@@ -22964,7 +23550,7 @@
      "title": "HERO CK ARMOR Leather Walk",
      "publisher": "Rock The Speakerbox",
      "category": "Footsteps",
-     "score": 4.2,
+     "score": 10.2,
      "duration": 18.3,
      "why": "name has \"armor\""
     },
@@ -22974,7 +23560,7 @@
      "title": "Monster Tail Hit on Chainmail",
      "publisher": "Olivier Girardot",
      "category": "Creatures",
-     "score": 3.4,
+     "score": 9.4,
      "duration": 2.48,
      "why": "name has \"chainmail\""
     },
@@ -22984,7 +23570,7 @@
      "title": "Chainmail Impact Hard 03",
      "publisher": "Double Trouble Audio",
      "category": "Other",
-     "score": 3.4,
+     "score": 9.4,
      "duration": 0.64,
      "why": "name has \"chainmail\""
     },
@@ -22994,8 +23580,8 @@
      "title": "LeatherArmor Rustle 03",
      "publisher": "Double Trouble Audio",
      "category": "Other",
-     "score": -2.8,
-     "duration": null,
+     "score": 3.2,
+     "duration": 0.93,
      "why": "folder has \"armor\""
     },
     {
@@ -23004,7 +23590,17 @@
      "title": "Plate Impact Hard 02",
      "publisher": "Double Trouble Audio",
      "category": "Other",
-     "score": -2.8,
+     "score": 3.2,
+     "duration": null,
+     "why": "folder has \"armor\""
+    },
+    {
+     "ref": "gdc2017/6",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 6of9/Pole Position - M8 Greyhound Armored Car\t/M8_t2_onbrd_startup_blips_steady_rpms_in_neutral_shutdown_engine_PZM.wav",
+     "title": "M8 t2 onbrd startup blips steady rpms in neutral shutdown engine PZM",
+     "publisher": "Pole Position",
+     "category": "Vehicles",
+     "score": 3.2,
      "duration": null,
      "why": "folder has \"armor\""
     }
@@ -23170,101 +23766,70 @@
    "slot": "bow",
    "takes": [
     {
-     "ref": "gdc2023/1",
-     "path": "344 Audio - Cymbals From Hell/Bowed Alien Metals 02.wav",
+     "ref": "gdc2020/9",
+     "path": "SmartSoundFX – Medieval/BOW Arrow Hit 05.wav",
      "trim": [
-      0.285,
-      3.285
+      0,
+      0.814
      ],
-     "fade": 0.12,
-     "duration": 8.45,
-     "cutShort": true
+     "fade": 0.01,
+     "duration": 1.56
     }
    ],
    "candidates": [
-    {
-     "ref": "gdc2023/1",
-     "path": "344 Audio - Cymbals From Hell/Bowed Alien Metals 02.wav",
-     "title": "Bowed Alien Metals 02",
-     "publisher": "344 Audio",
-     "category": "Other",
-     "score": 3,
-     "duration": 8.45,
-     "why": "name has \"bow\""
-    },
     {
      "ref": "gdc2020/9",
      "path": "SmartSoundFX – Medieval/BOW Arrow Hit 05.wav",
      "title": "BOW Arrow Hit 05",
      "publisher": "SmartSoundFX – Medieval",
      "category": "Other",
-     "score": 3,
+     "score": 9,
      "duration": 1.56,
      "why": "name has \"bow\""
     },
     {
-     "ref": "gdc2020/12",
-     "path": "Soundopolis - Bowed Cymbal 2 HD/Bowed Cymbal 2_Highs Mids Lows_Fienup_003.wav",
-     "title": "Bowed Cymbal 2 Highs Mids Lows Fienup 003",
-     "publisher": "Soundopolis",
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Articulated Sounds - Special Double Bass Fx/INSTRU STRING Double Bass, Hit, Bow Impact, Muted String, Bounce 01.wav",
+     "title": "INSTRU STRING Double Bass, Hit, Bow Impact, Muted String, Bounce 01",
+     "publisher": "Articulated Sounds",
      "category": "Other",
-     "score": 3,
-     "duration": 10.47,
+     "score": 9,
+     "duration": 1.59,
      "why": "name has \"bow\""
     },
     {
-     "ref": "gdc2020/12",
-     "path": "Soundopolis - Bowed Cymbal 2 HD/Bowed Cymbal 2_Highs Mids_Fienup_033.wav",
-     "title": "Bowed Cymbal 2 Highs Mids Fienup 033",
-     "publisher": "Soundopolis",
-     "category": "Other",
-     "score": 3,
-     "duration": 17.64,
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Vehicles Boats 1 Ferry/Boat,Ferry,C Class,7 Ton,12000 hp,Bow,Ext POV,Cars Exit over Metal Grate - a few faint voices.wav",
+     "title": "Boat,Ferry,C Class,7 Ton,12000 hp,Bow,Ext POV,Cars Exit over Metal Grate a few faint voices",
+     "publisher": "Airborne Sound",
+     "category": "Vehicles",
+     "score": 9,
+     "duration": 119.05,
      "why": "name has \"bow\""
     },
     {
-     "ref": "gdc2020/12",
-     "path": "Soundopolis - Bowed Cymbal 2 HD/Bowed Cymbal 2_Highs_Fienup_005.wav",
-     "title": "Bowed Cymbal 2 Highs Fienup 005",
-     "publisher": "Soundopolis",
-     "category": "Other",
-     "score": 3,
-     "duration": 10.97,
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Vehicles Boats 1 Ferry/Boat,Bow Wash,Ferry,Midship,Whine,Deep,Slosh.wav",
+     "title": "Boat,Bow Wash,Ferry,Midship,Whine,Deep,Slosh",
+     "publisher": "Airborne Sound",
+     "category": "Vehicles",
+     "score": 9,
+     "duration": 16.94,
      "why": "name has \"bow\""
     },
     {
-     "ref": "gdc2020/12",
-     "path": "Soundopolis - Bowed Cymbal HD/Bowed Cymbal_13HH_Highs Mids Lows_Fienup_016.wav",
-     "title": "Bowed Cymbal 13HH Highs Mids Lows Fienup 016",
-     "publisher": "Soundopolis",
+     "ref": "gdc2019/7",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 7of8/2496SoundEffects - Super Heroes Sound Design/Hawk's Arrow Flies Bow and Arrow shoot 2.wav",
+     "title": "Hawk's Arrow Flies Bow and Arrow shoot 2",
+     "publisher": "2496SoundEffects",
      "category": "Other",
-     "score": 3,
-     "duration": 10.2,
-     "why": "name has \"bow\""
-    },
-    {
-     "ref": "gdc2020/12",
-     "path": "Soundopolis - Bowed Cymbal HD/Bowed Cymbal_13HH_Highs Mids Lows_Fienup_021.wav",
-     "title": "Bowed Cymbal 13HH Highs Mids Lows Fienup 021",
-     "publisher": "Soundopolis",
-     "category": "Other",
-     "score": 3,
-     "duration": null,
-     "why": "name has \"bow\""
-    },
-    {
-     "ref": "gdc2020/12",
-     "path": "Soundopolis - Bowed Cymbal HD/Bowed Cymbal_17Crash_Mids_Fienup_003.wav",
-     "title": "Bowed Cymbal 17Crash Mids Fienup 003",
-     "publisher": "Soundopolis",
-     "category": "Other",
-     "score": 3,
-     "duration": null,
+     "score": 9,
+     "duration": 1.65,
      "why": "name has \"bow\""
     }
    ],
    "notes": [
-    "Picked from 8 matching files; best name match with a clean take."
+    "Picked from 5 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -26844,10 +27409,42 @@
   },
   "sleigh-bells": {
    "slot": "sleigh-bells",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2020/3",
+     "path": "Conor Bradley - Metal Chains/Jingle_Chain-Sustained_Foley.wav",
+     "trim": [
+      0,
+      0.643
+     ],
+     "fade": 0.01,
+     "duration": 10.4
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2020/3",
+     "path": "Conor Bradley - Metal Chains/Jingle_Chain-Sustained_Foley.wav",
+     "title": "Jingle Chain Sustained Foley",
+     "publisher": "Conor Bradley",
+     "category": "Other",
+     "score": 9.4,
+     "duration": 10.4,
+     "why": "name has \"jingle\""
+    },
+    {
+     "ref": "gdc2018/3",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 3of8/Effectsworks - COINAGE/Coins_Hand_Jingle_Movement_Takes_6.wav",
+     "title": "Coins Hand Jingle Movement Takes 6",
+     "publisher": "Effectsworks",
+     "category": "Other",
+     "score": 9.4,
+     "duration": 4.83,
+     "why": "name has \"jingle\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 2 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -27016,14 +27613,15 @@
    "slot": "drag",
    "takes": [
     {
-     "ref": "gdc2024/1",
-     "path": "Dramatic Cat - SVD Dragunov/GUNMech_SVD Dragunov 7.62×54R SOURCE Magazine Insert Slow_DRCA_DRAG_CO-100K.wav",
+     "ref": "gdc2020/3",
+     "path": "Coll Anderson - Metal Movement/EFX INT Metal Drag Slide Fast In Smash 02 A.wav",
      "trim": [
-      0.244,
-      0.753
+      0.693,
+      1.693
      ],
-     "fade": 0.01,
-     "duration": 17.3
+     "fade": 0.12,
+     "duration": 18.18,
+     "cutShort": true
     }
    ],
    "candidates": [
@@ -27033,38 +27631,8 @@
      "title": "Large Metal Box, Drag, Geofon",
      "publisher": "344 Audio",
      "category": "Metal",
-     "score": 4.2,
+     "score": 10.2,
      "duration": 67.28,
-     "why": "name has \"drag\""
-    },
-    {
-     "ref": "gdc2024/1",
-     "path": "Dramatic Cat - SVD Dragunov/GUNMech_SVD Dragunov 7.62×54R SOURCE Magazine Insert Slow_DRCA_DRAG_CO-100K.wav",
-     "title": "SVD Dragunov 7.62×54R SOURCE Magazine Insert Slow",
-     "publisher": "Dramatic Cat",
-     "category": "Guns",
-     "score": 4.2,
-     "duration": 17.3,
-     "why": "name has \"drag\""
-    },
-    {
-     "ref": "gdc2024/1",
-     "path": "Dramatic Cat - SVD Dragunov/GUNRif_SVD Dragunov 7.62×54R DESIGNED Single Shot Core Long_DRCA_DRAG_Stereo_05.wav",
-     "title": "SVD Dragunov 7.62×54R DESIGNED Single Shot Core Long",
-     "publisher": "Dramatic Cat",
-     "category": "Guns",
-     "score": 4.2,
-     "duration": 2.62,
-     "why": "name has \"drag\""
-    },
-    {
-     "ref": "gdc2024/1",
-     "path": "Dramatic Cat - SVD Dragunov/GUNRif_SVD Dragunov 7.62×54R SOURCE Single Shots 30m Front MikroUsi_DRCA_DRAG_AB.wav",
-     "title": "SVD Dragunov 7.62×54R SOURCE Single Shots 30m Front MikroUsi",
-     "publisher": "Dramatic Cat",
-     "category": "Guns",
-     "score": 4.2,
-     "duration": 34.24,
      "why": "name has \"drag\""
     },
     {
@@ -27073,18 +27641,8 @@
      "title": "EFX INT Metal Drag Slide Fast In Smash 02 A",
      "publisher": "Coll Anderson",
      "category": "Other",
-     "score": 4.2,
+     "score": 10.2,
      "duration": 18.18,
-     "why": "name has \"drag\""
-    },
-    {
-     "ref": "gdc2020/5",
-     "path": "PMSFX - STEPS Dry Grass & Shrubs/PM_SDGS_213 Footstep Step Dry Grass Skid Drag.wav",
-     "title": "PM SDGS 213 Footstep Step Dry Grass Skid Drag",
-     "publisher": "PMSFX",
-     "category": "Footsteps",
-     "score": 4.2,
-     "duration": 1.47,
      "why": "name has \"drag\""
     },
     {
@@ -27093,8 +27651,8 @@
      "title": "Drag Boat t10 Onbrd Medium Drive Various Engine Intake DPA4062",
      "publisher": "Pole Position",
      "category": "Other",
-     "score": 4.2,
-     "duration": null,
+     "score": 10.2,
+     "duration": 207.62,
      "why": "name has \"drag\""
     },
     {
@@ -27103,7 +27661,47 @@
      "title": "Drag Boat t6 Onbrd Start Drive Ramps Stop Off Engine Left MKH8020",
      "publisher": "Pole Position",
      "category": "Other",
-     "score": 4.2,
+     "score": 10.2,
+     "duration": 127.09,
+     "why": "name has \"drag\""
+    },
+    {
+     "ref": "gdc2020/13",
+     "path": "Sun-Smile-Island - Ice Hockey/ICE HOCKEY stick shot pass wrist shot drag x 3 BP4025 WIDE XY close.wav",
+     "title": "ICE HOCKEY stick shot pass wrist shot drag x 3 BP4025 WIDE XY close",
+     "publisher": "Sun-Smile-Island",
+     "category": "Weapons",
+     "score": 10.2,
+     "duration": 20.92,
+     "why": "name has \"drag\""
+    },
+    {
+     "ref": "gdc2020/14",
+     "path": "Wav Junction Sound Effects - Rocks/0093_Rock_Quick_Drag_On_Rock_003.wav",
+     "title": "0093 Rock Quick Drag On Rock 003",
+     "publisher": "Wav Junction Sound Effects",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 1.92,
+     "why": "name has \"drag\""
+    },
+    {
+     "ref": "gdc2020/14",
+     "path": "Wav Junction Sound Effects - Rocks/0119_Rock_Quick_Drag_On_Rock_029.wav",
+     "title": "0119 Rock Quick Drag On Rock 029",
+     "publisher": "Wav Junction Sound Effects",
+     "category": "Other",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"drag\""
+    },
+    {
+     "ref": "gdc2019/2",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 2of8/Eiravaein Works - Nocked/Nocked,archery,crossbow1,composite,string,functions,bolt,slideintorest,set,drag,nock,remove,clatter,alt.wav",
+     "title": "Nocked,archery,crossbow1,composite,string,functions,bolt,slideintorest,set,drag,nock,remove,clatter,alt",
+     "publisher": "Eiravaein Works",
+     "category": "Other",
+     "score": 10.2,
      "duration": null,
      "why": "name has \"drag\""
     }
@@ -27393,10 +27991,53 @@
   },
   "fanfare": {
    "slot": "fanfare",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Victory Vegas Motorcycle/Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Onboard,Start,Drive,Fast Speed,Punch It.wav",
+     "trim": [
+      0,
+      6
+     ],
+     "fade": 0.12,
+     "duration": 33.49,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Victory Vegas Motorcycle/Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Onboard,Start,Drive,Fast Speed,Punch It.wav",
+     "title": "Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Onboard,Start,Drive,Fast Speed,Punch It",
+     "publisher": "Airborne Sound",
+     "category": "Other",
+     "score": 9.4,
+     "duration": 33.49,
+     "why": "name has \"victory\""
+    },
+    {
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Victory Vegas Motorcycle/Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Start,Idle,Off.wav",
+     "title": "Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Start,Idle,Off",
+     "publisher": "Airborne Sound",
+     "category": "Other",
+     "score": 9.4,
+     "duration": 35.14,
+     "why": "name has \"victory\""
+    },
+    {
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Victory Vegas Motorcycle/Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Up,30 kph,By,Off,2.wav",
+     "title": "Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Up,30 kph,By,Off,2",
+     "publisher": "Airborne Sound",
+     "category": "Other",
+     "score": 4.4,
+     "duration": 12.26,
+     "why": "name has \"victory\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 3 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -28549,14 +29190,14 @@
    "slot": "volcano",
    "takes": [
     {
-     "ref": "gdc2018/4",
-     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 4of8/Olivier Girardot - Guns & Explosions/Volcano Eruption 1.wav",
+     "ref": "gdc2018/2",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 2of8/Discover Oregon - Lava from the Kilauea Volcano in Hawaii/Lava Lava Short Windy 10.WAV",
      "trim": [
-      0.753,
-      8.753
+      0,
+      8
      ],
      "fade": 0.12,
-     "duration": 26.95,
+     "duration": 20.7,
      "cutShort": true
     }
    ],
@@ -28567,18 +29208,8 @@
      "title": "ETH Volcano medium activity magma erupting continuously degassing and rock falling",
      "publisher": "Charlie Atanasyan",
      "category": "Other",
-     "score": 4.2,
+     "score": 10.2,
      "duration": 109.71,
-     "why": "name has \"volcano\""
-    },
-    {
-     "ref": "gdc2018/4",
-     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 4of8/Olivier Girardot - Guns & Explosions/Volcano Eruption 1.wav",
-     "title": "Volcano Eruption 1",
-     "publisher": "Olivier Girardot",
-     "category": "Weapons",
-     "score": 4.2,
-     "duration": 26.95,
      "why": "name has \"volcano\""
     },
     {
@@ -28587,7 +29218,7 @@
      "title": "Underwater Designed Lava Move Huge Medium Speed",
      "publisher": "Spectravelers",
      "category": "Other",
-     "score": 3.8,
+     "score": 9.8,
      "duration": 98.82,
      "why": "name has \"lava\""
     },
@@ -28597,7 +29228,7 @@
      "title": "Lava Lava Gets Close",
      "publisher": "Discover Oregon",
      "category": "Other",
-     "score": 3.8,
+     "score": 9.8,
      "duration": 100.95,
      "why": "name has \"lava\""
     },
@@ -28607,7 +29238,7 @@
      "title": "Lava Lava Short Windy 10",
      "publisher": "Discover Oregon",
      "category": "Wind",
-     "score": 3.8,
+     "score": 9.8,
      "duration": 20.7,
      "why": "name has \"lava\""
     },
@@ -28617,22 +29248,114 @@
      "title": "Lava Lava Short Windy Crackles",
      "publisher": "Discover Oregon",
      "category": "Wind",
-     "score": 3.8,
+     "score": 9.8,
      "duration": 22.37,
      "why": "name has \"lava\""
     }
    ],
    "notes": [
-    "Picked from 6 matching files; best name match with a clean take."
+    "Picked from 5 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
   "avalanche": {
    "slot": "avalanche",
-   "takes": [],
-   "candidates": [],
+   "takes": [
+    {
+     "ref": "gdc2018/1",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 1of8/Antisample - Rocks and Stones/Rock_Impact_Slide_Various_Garbage_MONO_09.wav",
+     "trim": [
+      0,
+      0.87
+     ],
+     "fade": 0.01,
+     "duration": 1.5
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2018/1",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 1of8/Antisample - Rocks and Stones/Rock_Impact_Slide_Various_Garbage_MONO_09.wav",
+     "title": "Rock Impact Slide Various Garbage MONO 09",
+     "publisher": "Antisample",
+     "category": "Other",
+     "score": 11,
+     "duration": 1.5,
+     "why": "name has \"rock slide\""
+    },
+    {
+     "ref": "gdc2018/1",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 1of8/Antisample - Rocks and Stones/Rock_Impact_Slide_Wood_Cave_MONO_04.wav",
+     "title": "Rock Impact Slide Wood Cave MONO 04",
+     "publisher": "Antisample",
+     "category": "Other",
+     "score": 11,
+     "duration": 3.5,
+     "why": "name has \"rock slide\""
+    },
+    {
+     "ref": "gdc2017/5",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 5of9/Mechanical Wave - Rock,Brick and Dirt - Part 02/Crumbling Rock Slide_RBDII 07.wav",
+     "title": "Crumbling Rock Slide RBDII 07",
+     "publisher": "Mechanical Wave",
+     "category": "Other",
+     "score": 11,
+     "duration": 4.53,
+     "why": "name has \"rock slide\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Cinematic Sound Design - Colossal Impacts/Woosh Debris.wav",
+     "title": "Woosh Debris",
+     "publisher": "Cinematic Sound Design",
+     "category": "Other",
+     "score": 8.6,
+     "duration": 2.38,
+     "why": "name has \"debris\""
+    },
+    {
+     "ref": "gdc2024/1",
+     "path": "BluezoneCorp - Alien Tripod/Bluezone_BC0292_alien_tripod_debris_glass_falling_003.wav",
+     "title": "Bluezone BC0292 alien tripod debris glass falling 003",
+     "publisher": "BluezoneCorp",
+     "category": "Other",
+     "score": 8.6,
+     "duration": 1.5,
+     "why": "name has \"debris\""
+    },
+    {
+     "ref": "gdc2024/1",
+     "path": "DavidDumais - Explosion SFX Pack/WOODCrsh_Designed Wood Crash And Debris 13_DDUMAIS_NONE.wav",
+     "title": "Designed Wood Crash And Debris 13",
+     "publisher": "DavidDumais",
+     "category": "Wood",
+     "score": 8.6,
+     "duration": 1.72,
+     "why": "name has \"debris\""
+    },
+    {
+     "ref": "gdc2024/8",
+     "path": "The Soundcatcher - Seismic Activities/Cabinet_Metal_Rumble_Rattle_Shake_Vibrate_Debris_Dpa4060_Seismic_Activities_21.Wav",
+     "title": "Cabinet Metal Rumble Rattle Shake Vibrate Debris Dpa4060 Seismic Activities 21",
+     "publisher": "The Soundcatcher",
+     "category": "Other",
+     "score": 8.6,
+     "duration": null,
+     "why": "name has \"debris\""
+    },
+    {
+     "ref": "gdc2024/8",
+     "path": "The Soundcatcher - Seismic Activities/Metal_Rails_Pack_Rumble_Rattle_Shake_Vibrate_Debris_Mkh8040_Seismic_Activities_03.Wav",
+     "title": "Metal Rails Pack Rumble Rattle Shake Vibrate Debris Mkh8040 Seismic Activities 03",
+     "publisher": "The Soundcatcher",
+     "category": "Other",
+     "score": 8.6,
+     "duration": null,
+     "why": "name has \"debris\""
+    }
+   ],
    "notes": [
-    "Nothing suitable in the index yet."
+    "Picked from 8 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   },
@@ -29140,6 +29863,1510 @@
    ],
    "notes": [
     "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "barn-door": {
+   "slot": "barn-door",
+   "takes": [
+    {
+     "ref": "gdc2018/6",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 6of8/UberDuo – The Kitchen Audio Play Set/Door,Cupboard,Large,Open.wav",
+     "trim": [
+      0,
+      0.434
+     ],
+     "fade": 0.01,
+     "duration": 1.88
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2018/6",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 6of8/UberDuo – The Kitchen Audio Play Set/Door,Cupboard,Large,Open.wav",
+     "title": "Door,Cupboard,Large,Open",
+     "publisher": "UberDuo – The Kitchen Audio Play Set",
+     "category": "Doors",
+     "score": 15.8,
+     "duration": 1.88,
+     "why": "name has \"large door\", Doors"
+    },
+    {
+     "ref": "gdc2017/8",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 8of9/The Sound Keeper - Normal Doors/door-industrial open close large 03.wav",
+     "title": "door industrial open close large 03",
+     "publisher": "The Sound Keeper",
+     "category": "Doors",
+     "score": 15.8,
+     "duration": 28.74,
+     "why": "name has \"large door\", Doors"
+    },
+    {
+     "ref": "gdc2016/1",
+     "path": "Bottle Rocket Fx - Cyborg Collection/Spacecraft_Bay Door_Lock Down_Large_01.wav",
+     "title": "Spacecraft Bay Door Lock Down Large 01",
+     "publisher": "Bottle Rocket Fx",
+     "category": "Doors",
+     "score": 15.8,
+     "duration": 5.12,
+     "why": "name has \"large door\", Doors"
+    }
+   ],
+   "notes": [
+    "Picked from 3 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "piglet": {
+   "slot": "piglet",
+   "takes": [
+    {
+     "ref": "gdc2024/2",
+     "path": "Mechanical Wave - Farm Animals/ANMLFarm_Pig Squeal and Snort-18_MWSFX_FA.wav",
+     "trim": [
+      0,
+      1.55
+     ],
+     "fade": 0.01,
+     "duration": 1.55
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2024/2",
+     "path": "Mechanical Wave - Farm Animals/ANMLFarm_Pig Squeal and Snort-18_MWSFX_FA.wav",
+     "title": "Pig Squeal and Snort 18",
+     "publisher": "Mechanical Wave",
+     "category": "Animals",
+     "score": 15.8,
+     "duration": 1.55,
+     "why": "name has \"pig squeal\", Animals"
+    },
+    {
+     "ref": "gdc2015/1",
+     "path": "Coll Anderson - Pig/EFX SD Pig 07 Squeal 08.wav",
+     "title": "EFX SD Pig 07 Squeal 08",
+     "publisher": "Coll Anderson",
+     "category": "Animals",
+     "score": 15.8,
+     "duration": 8.36,
+     "why": "name has \"pig squeal\", Animals"
+    },
+    {
+     "ref": "gdc2015/1",
+     "path": "__MACOSX/Coll Anderson - Pig/._EFX SD Pig 07 Squeal 08.wav",
+     "title": ". EFX SD Pig 07 Squeal 08",
+     "publisher": "Coll Anderson",
+     "category": "Animals",
+     "score": 15.8,
+     "duration": null,
+     "why": "name has \"pig squeal\", Animals"
+    },
+    {
+     "ref": "gdc2015/1",
+     "path": "Coll Anderson - Pig/EFX SD Pig 07 Squeal 20.wav",
+     "title": "EFX SD Pig 07 Squeal 20",
+     "publisher": "Coll Anderson",
+     "category": "Animals",
+     "score": 15.8,
+     "duration": 9.43,
+     "why": "name has \"pig squeal\", Animals"
+    },
+    {
+     "ref": "gdc2015/1",
+     "path": "__MACOSX/Coll Anderson - Pig/._EFX SD Pig 07 Squeal 20.wav",
+     "title": ". EFX SD Pig 07 Squeal 20",
+     "publisher": "Coll Anderson",
+     "category": "Animals",
+     "score": 15.8,
+     "duration": null,
+     "why": "name has \"pig squeal\", Animals"
+    },
+    {
+     "ref": "gdc2015/1",
+     "path": "Coll Anderson - Pig/EFX SD Pig 08 Squeal 03.wav",
+     "title": "EFX SD Pig 08 Squeal 03",
+     "publisher": "Coll Anderson",
+     "category": "Animals",
+     "score": 15.8,
+     "duration": 6.09,
+     "why": "name has \"pig squeal\", Animals"
+    },
+    {
+     "ref": "gdc2015/1",
+     "path": "__MACOSX/Coll Anderson - Pig/._EFX SD Pig 08 Squeal 03.wav",
+     "title": ". EFX SD Pig 08 Squeal 03",
+     "publisher": "Coll Anderson",
+     "category": "Animals",
+     "score": 15.8,
+     "duration": null,
+     "why": "name has \"pig squeal\", Animals"
+    }
+   ],
+   "notes": [
+    "Picked from 7 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "step-grass": {
+   "slot": "step-grass",
+   "takes": [
+    {
+     "ref": "gdc2020/5",
+     "path": "PMSFX - STEPS Dry Grass & Shrubs/PM_SDGS_213 Footstep Step Dry Grass Skid Drag.wav",
+     "trim": [
+      0.195,
+      1.159
+     ],
+     "fade": 0.01,
+     "duration": 1.47
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "RYK-Sounds - Footstep/grass 3 single step 3.wav",
+     "trim": [
+      0,
+      0.718
+     ],
+     "fade": 0.01,
+     "duration": 0.82
+    },
+    {
+     "ref": "gdc2020/5",
+     "path": "PMSFX - STEPS Dry Grass & Shrubs/PM_SDGS_113 Footstep Step Dry Grass Shrubs Pine Needles Meadow .wav",
+     "trim": [
+      0.153,
+      0.715
+     ],
+     "fade": 0.01,
+     "duration": 0.79
+    },
+    {
+     "ref": "gdc2020/5",
+     "path": "PMSFX - STEPS Dry Grass & Shrubs/PM_SDGS_14 Footstep Step Dry Grass Shrubs Pine Needles Meadow .wav",
+     "trim": [
+      0,
+      1.2
+     ],
+     "fade": 0.12,
+     "duration": 1.43,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2020/5",
+     "path": "PMSFX - STEPS Dry Grass & Shrubs/PM_SDGS_213 Footstep Step Dry Grass Skid Drag.wav",
+     "title": "PM SDGS 213 Footstep Step Dry Grass Skid Drag",
+     "publisher": "PMSFX",
+     "category": "Footsteps",
+     "score": 16.2,
+     "duration": 1.47,
+     "why": "name has \"footstep grass\", Footsteps"
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "RYK-Sounds - Footstep/grass 3 single step 3.wav",
+     "title": "grass 3 single step 3",
+     "publisher": "RYK-Sounds",
+     "category": "Footsteps",
+     "score": 15.4,
+     "duration": 0.82,
+     "why": "name has \"grass step\", Footsteps"
+    },
+    {
+     "ref": "gdc2020/5",
+     "path": "PMSFX - STEPS Dry Grass & Shrubs/PM_SDGS_113 Footstep Step Dry Grass Shrubs Pine Needles Meadow .wav",
+     "title": "PM SDGS 113 Footstep Step Dry Grass Shrubs Pine Needles Meadow",
+     "publisher": "PMSFX",
+     "category": "Ambience",
+     "score": 12.2,
+     "duration": 0.79,
+     "why": "name has \"footstep grass\""
+    },
+    {
+     "ref": "gdc2020/5",
+     "path": "PMSFX - STEPS Dry Grass & Shrubs/PM_SDGS_14 Footstep Step Dry Grass Shrubs Pine Needles Meadow .wav",
+     "title": "PM SDGS 14 Footstep Step Dry Grass Shrubs Pine Needles Meadow",
+     "publisher": "PMSFX",
+     "category": "Ambience",
+     "score": 12.2,
+     "duration": 1.43,
+     "why": "name has \"footstep grass\""
+    },
+    {
+     "ref": "gdc2017/8",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 8of9/Tovusound - Edward – Foleyart Collection Add-On Extended Footsteps/169_Foley_Footsteps_Grass_Sneaker_Walk_Fast_Run_Jog_Close.wav",
+     "title": "169 Foley Footsteps Grass Sneaker Walk Fast Run Jog Close",
+     "publisher": "Tovusound",
+     "category": "Other",
+     "score": 12.2,
+     "duration": 24.55,
+     "why": "name has \"footstep grass\""
+    },
+    {
+     "ref": "gdc2018/4",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 4of8/Ivo Vicic - Red Deer and Roe Deer - Roaring, barking and other sounds/32  Red Deer_walking_grass_XY.wav",
+     "title": "32 Red Deer walking grass XY",
+     "publisher": "Ivo Vicic",
+     "category": "Other",
+     "score": 11,
+     "duration": 12,
+     "why": "name has \"walk grass\""
+    },
+    {
+     "ref": "gdc2023/2",
+     "path": "Dramatic Cat - Horse Carriage - Draft Horse/FEETHors_Draft Horse Walk On On Grass And Dirt MONO_DRCA_HOCA_MKH416.wav",
+     "title": "Draft Horse Walk On On Grass And Dirt MONO",
+     "publisher": "Dramatic Cat",
+     "category": "Footsteps",
+     "score": 10,
+     "duration": null,
+     "why": "name has \"walk grass\", Footsteps"
+    }
+   ],
+   "notes": [
+    "Picked from 7 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "thunder": {
+   "slot": "thunder",
+   "takes": [
+    {
+     "ref": "gdc2026/3",
+     "path": "Jake Fielding - Interior Wind Rain and Storms/THUN_Interior Thunder Rumble_JF_INT Storm_01.wav",
+     "trim": [
+      0,
+      0.167
+     ],
+     "fade": 0.01,
+     "duration": 18.62
+    },
+    {
+     "ref": "gdc2026/3",
+     "path": "Jake Fielding - Interior Wind Rain and Storms/THUN_Interior Thunder Rumble_JF_INT Storm_01.wav",
+     "trim": [
+      0.228,
+      10.228
+     ],
+     "fade": 0.12,
+     "duration": 18.62,
+     "cutShort": true
+    },
+    {
+     "ref": "gdc2026/3",
+     "path": "Jake Fielding - Interior Wind Rain and Storms/THUN_Interior Thunder Rumble_JF_INT Storm_01.wav",
+     "trim": [
+      15.457,
+      15.938
+     ],
+     "fade": 0.01,
+     "duration": 18.62
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2026/2",
+     "path": "Epic Stock Media - Public Spaces - Storms Lakes Parks and Rural Nature Exteriors/STORM_Texas Rain Thunder Initial Crash Boom Storm 01 Clap Lightning_ESM_CPS.wav",
+     "title": "STORM Texas Rain Thunder Initial Crash Boom Storm 01 Clap Lightning ESM CPS",
+     "publisher": "Epic Stock Media",
+     "category": "Rain",
+     "score": 10.2,
+     "duration": 132.01,
+     "why": "name has \"thunder\""
+    },
+    {
+     "ref": "gdc2026/3",
+     "path": "Jake Fielding - Interior Wind Rain and Storms/THUN_Interior Thunder Rumble_JF_INT Storm_01.wav",
+     "title": "THUN Interior Thunder Rumble JF INT Storm 01",
+     "publisher": "Jake Fielding",
+     "category": "Rain",
+     "score": 10.2,
+     "duration": 18.62,
+     "why": "name has \"thunder\""
+    },
+    {
+     "ref": "gdc2024/8",
+     "path": "Sonik Sound Library - Spatial Rain & Thunders/THUN_Weather, Rain, Light Rain with Thuder Rumbles and Vehicles Passing on Wet Floor_KS_Spatial Rain & Thunders-Stereo_KSL_KS010.wav",
+     "title": "THUN Weather, Rain, Light Rain with Thuder Rumbles and Vehicles Passing on Wet Floor KS Spatial Rain & Thunders Stereo KSL KS010",
+     "publisher": "Sonik Sound Library",
+     "category": "Rain",
+     "score": 10.2,
+     "duration": 173.45,
+     "why": "name has \"thunder\""
+    },
+    {
+     "ref": "gdc2023/2",
+     "path": "InspectorJ - Essentials 01 Thunder/THUN_InsJ_Thunder_Distant_01_EQ.wav",
+     "title": "THUN InsJ Thunder Distant 01 EQ",
+     "publisher": "InspectorJ",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 40.44,
+     "why": "name has \"thunder\""
+    },
+    {
+     "ref": "gdc2023/2",
+     "path": "InspectorJ - Essentials 01 Thunder/THUN_InsJ_Thunder_Extremely-Close_03.wav",
+     "title": "THUN InsJ Thunder Extremely Close 03",
+     "publisher": "InspectorJ",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 24.82,
+     "why": "name has \"thunder\""
+    },
+    {
+     "ref": "gdc2023/2",
+     "path": "InspectorJ - Essentials 01 Thunder/THUN_InsJ_Thunder_Very-Close_Rain_03.wav",
+     "title": "THUN InsJ Thunder Very Close Rain 03",
+     "publisher": "InspectorJ",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 18,
+     "why": "name has \"thunder\""
+    },
+    {
+     "ref": "gdc2023/7",
+     "path": "Pole Position Production - The Cinematic Transformation Library/CINEMATIC - IMPACT - Hit - Upfront - 30 Warped Ripping Thundering Long Warbling tail.wav",
+     "title": "CINEMATIC IMPACT Hit Upfront 30 Warped Ripping Thundering Long Warbling tail",
+     "publisher": "Pole Position Production",
+     "category": "Other",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"thunder\""
+    },
+    {
+     "ref": "gdc2020/9",
+     "path": "SmartSoundFX - Asian Countrysides/AMBIENCE Weather Soft Rain Thunder 01.wav",
+     "title": "AMBIENCE Weather Soft Rain Thunder 01",
+     "publisher": "SmartSoundFX",
+     "category": "Ambience",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"thunder\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take.",
+    "The variants are separate takes from one recording, so they sound like a set."
+   ],
+   "date": "2026-10-22"
+  },
+  "page-turn": {
+   "slot": "page-turn",
+   "takes": [
+    {
+     "ref": "gdc2026/1",
+     "path": "344 Audio - Antique Books/PAPRMisc_Antique Books Slow Page Turns 6_344 Audio_Antiques - Books.wav",
+     "trim": [
+      0,
+      3
+     ],
+     "fade": 0.12,
+     "duration": 13.75,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2026/1",
+     "path": "344 Audio - Antique Books/PAPRMisc_Antique Books Slow Page Turns 6_344 Audio_Antiques - Books.wav",
+     "title": "Antique Books Slow Page Turns 6",
+     "publisher": "344 Audio",
+     "category": "Paper",
+     "score": 16.2,
+     "duration": 13.75,
+     "why": "name has \"page turn\", Paper"
+    },
+    {
+     "ref": "gdc2024/2",
+     "path": "Mechanical Wave - Cardboard and Paper/PAPRHndl_Large Book Squeak Page Turn_ 01_MWSFX_CDAP.wav",
+     "title": "Large Book Squeak Page Turn",
+     "publisher": "Mechanical Wave",
+     "category": "Paper",
+     "score": 16.2,
+     "duration": 2.45,
+     "why": "name has \"page turn\", Paper"
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Cinematic Sound Design - Paper Foley/A4 Printing Paper Rattle Page Turn Tail.wav",
+     "title": "A4 Printing Paper Rattle Page Turn Tail",
+     "publisher": "Cinematic Sound Design",
+     "category": "Other",
+     "score": 12.2,
+     "duration": 1.28,
+     "why": "name has \"page turn\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Cinematic Sound Design - Paper Foley/Encyclopedia Glossy Page Turn Muted.wav",
+     "title": "Encyclopedia Glossy Page Turn Muted",
+     "publisher": "Cinematic Sound Design",
+     "category": "Other",
+     "score": 12.2,
+     "duration": 0.55,
+     "why": "name has \"page turn\""
+    },
+    {
+     "ref": "gdc2020/2",
+     "path": "CB Sounddesign - Infographic SFX/Page_Turn_14.wav",
+     "title": "Page Turn 14",
+     "publisher": "CB Sounddesign",
+     "category": "Other",
+     "score": 12.2,
+     "duration": 1,
+     "why": "name has \"page turn\""
+    },
+    {
+     "ref": "gdc2020/9",
+     "path": "SmartSoundFX - User Interaction/ORGANIC Paper Book Page Turn Short 02.wav",
+     "title": "ORGANIC Paper Book Page Turn Short 02",
+     "publisher": "SmartSoundFX",
+     "category": "Other",
+     "score": 12.2,
+     "duration": 0.51,
+     "why": "name has \"page turn\""
+    },
+    {
+     "ref": "gdc2019/3",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 3of8/PMSFX - Books Alive/PM_BA_BOOK_2_6 Book, Paper, Page Turn.wav",
+     "title": "PM BA BOOK 2 6 Book, Paper, Page Turn",
+     "publisher": "PMSFX",
+     "category": "Other",
+     "score": 12.2,
+     "duration": null,
+     "why": "name has \"page turn\""
+    },
+    {
+     "ref": "gdc2019/3",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 3of8/PMSFX - Books Alive/PM_BA_BOOK_6_14 Book, Paper, Page Turn.wav",
+     "title": "PM BA BOOK 6 14 Book, Paper, Page Turn",
+     "publisher": "PMSFX",
+     "category": "Other",
+     "score": 12.2,
+     "duration": null,
+     "why": "name has \"page turn\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "bag": {
+   "slot": "bag",
+   "takes": [
+    {
+     "ref": "gdc2024/6",
+     "path": "Pole Position - The Plastic Textures Library/Plastic Bag Thick - TWIST - Burst - Low Intensity - Mono.wav",
+     "trim": [
+      0,
+      0.739
+     ],
+     "fade": 0.01,
+     "duration": 13.85
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2024/6",
+     "path": "Pole Position - The Plastic Textures Library/Plastic Bag Thick - TWIST - Burst - Low Intensity - Mono.wav",
+     "title": "Plastic Bag Thick TWIST Burst Low Intensity Mono",
+     "publisher": "Pole Position",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 13.85,
+     "why": "name has \"bag\""
+    },
+    {
+     "ref": "gdc2023/2",
+     "path": "Badlands Sound - Retro Vacuum/Retro Vacuum Cleaner Foley Grabbing Bag.wav",
+     "title": "Retro Vacuum Cleaner Foley Grabbing Bag",
+     "publisher": "Badlands Sound",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 9,
+     "why": "name has \"bag\""
+    },
+    {
+     "ref": "gdc2020/13",
+     "path": "The Sound Pack Tree - Money/263801 - Lift Coin Bag 01.wav",
+     "title": "263801 Lift Coin Bag 01",
+     "publisher": "The Sound Pack Tree",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 1.96,
+     "why": "name has \"bag\""
+    },
+    {
+     "ref": "gdc2020/13",
+     "path": "The Sound Pack Tree - Money/264604 - Stack Coin Bag 04.wav",
+     "title": "264604 Stack Coin Bag 04",
+     "publisher": "The Sound Pack Tree",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 0.97,
+     "why": "name has \"bag\""
+    },
+    {
+     "ref": "gdc2020/13",
+     "path": "Sun-Smile-Island - Shanghai Ambiences/SHANGHAI walla interior market vegetables meat fish lively close voices chinese plastic bags chopping.wav",
+     "title": "SHANGHAI walla interior market vegetables meat fish lively close voices chinese plastic bags chopping",
+     "publisher": "Sun-Smile-Island",
+     "category": "Ambience",
+     "score": 10.2,
+     "duration": 137.19,
+     "why": "name has \"bag\""
+    },
+    {
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Borg Sound - Bag Foley/Bag Foley_Canvas bag_Cotton_Grab.wav",
+     "title": "Bag Foley Canvas bag Cotton Grab",
+     "publisher": "Borg Sound",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 13.14,
+     "why": "name has \"bag\""
+    },
+    {
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Borg Sound - Bag Foley/Bag Foley_Backpack small,Ikea_Polyester_Prescence.wav",
+     "title": "Bag Foley Backpack small,Ikea Polyester Prescence",
+     "publisher": "Borg Sound",
+     "category": "Other",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"bag\""
+    },
+    {
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Borg Sound - Bag Foley/Bag Foley_Wallet_Leather_Grab.wav",
+     "title": "Bag Foley Wallet Leather Grab",
+     "publisher": "Borg Sound",
+     "category": "Other",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"bag\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "crunch": {
+   "slot": "crunch",
+   "takes": [
+    {
+     "ref": "gdc2015/3",
+     "path": "Mattia Cellotto - Crunch Mode/Bread,Curst,Bite,Mouth,Close,Chew,Crunch,Various21.wav",
+     "trim": [
+      0,
+      1.247
+     ],
+     "fade": 0.01,
+     "duration": 1.44
+    },
+    {
+     "ref": "gdc2015/3",
+     "path": "Mattia Cellotto - Crunch Mode/Celery,Bite,Crunch,Slow,Bone,Break,Stick,Creak,Various07.wav",
+     "trim": [
+      0,
+      0.657
+     ],
+     "fade": 0.01,
+     "duration": 0.94
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2015/3",
+     "path": "Mattia Cellotto - Crunch Mode/Bread,Curst,Bite,Mouth,Close,Chew,Crunch,Various21.wav",
+     "title": "Bread,Curst,Bite,Mouth,Close,Chew,Crunch,Various21",
+     "publisher": "Mattia Cellotto",
+     "category": "Other",
+     "score": 12.2,
+     "duration": 1.44,
+     "why": "name has \"crunch bite\""
+    },
+    {
+     "ref": "gdc2015/3",
+     "path": "__MACOSX/Mattia Cellotto - Crunch Mode/._Bread,Curst,Bite,Mouth,Close,Chew,Crunch,Various21.wav",
+     "title": ". Bread,Curst,Bite,Mouth,Close,Chew,Crunch,Various21",
+     "publisher": "Mattia Cellotto",
+     "category": "Other",
+     "score": 12.2,
+     "duration": null,
+     "why": "name has \"crunch bite\""
+    },
+    {
+     "ref": "gdc2015/3",
+     "path": "Mattia Cellotto - Crunch Mode/Celery,Bite,Crunch,Slow,Bone,Break,Stick,Creak,Various07.wav",
+     "title": "Celery,Bite,Crunch,Slow,Bone,Break,Stick,Creak,Various07",
+     "publisher": "Mattia Cellotto",
+     "category": "Wood",
+     "score": 12.2,
+     "duration": 0.94,
+     "why": "name has \"crunch bite\""
+    },
+    {
+     "ref": "gdc2015/3",
+     "path": "__MACOSX/Mattia Cellotto - Crunch Mode/._Celery,Bite,Crunch,Slow,Bone,Break,Stick,Creak,Various07.wav",
+     "title": ". Celery,Bite,Crunch,Slow,Bone,Break,Stick,Creak,Various07",
+     "publisher": "Mattia Cellotto",
+     "category": "Wood",
+     "score": 12.2,
+     "duration": null,
+     "why": "name has \"crunch bite\""
+    },
+    {
+     "ref": "gdc2018/4",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 4of8/Olivier Girardot - Monsters/Monster Bite 3.wav",
+     "title": "Monster Bite 3",
+     "publisher": "Olivier Girardot",
+     "category": "Creatures",
+     "score": 9.4,
+     "duration": 1.34,
+     "why": "name has \"bite\""
+    },
+    {
+     "ref": "gdc2016/6",
+     "path": "Soundreorganized - Everyday Actions 1/EatingApple,Bite,Enjoying,Chewing,Breath,SemiClose.wav",
+     "title": "EatingApple,Bite,Enjoying,Chewing,Breath,SemiClose",
+     "publisher": "Soundreorganized",
+     "category": "Voices",
+     "score": 9.4,
+     "duration": 14.43,
+     "why": "name has \"bite\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Epic Stock Media - Synthesized Nature Loops and Sounds/FIREBurn_Loop Elements Fire Crackling Crunchy Flame Burn 03_ESM_SNLS.wav",
+     "title": "Loop Elements Fire Crackling Crunchy Flame Burn 03",
+     "publisher": "Epic Stock Media",
+     "category": "Fire",
+     "score": 9,
+     "duration": null,
+     "why": "name has \"crunch\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Cinematic Sound Design - UI Interaction Elements/Accept Boing Crunch.wav",
+     "title": "Accept Boing Crunch",
+     "publisher": "Cinematic Sound Design",
+     "category": "User interface",
+     "score": 9,
+     "duration": null,
+     "why": "name has \"crunch\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "bike": {
+   "slot": "bike",
+   "takes": [
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - KTM 250 Enduro Motorbike/VEHMoto_Bike, Changing Gears _344 Audio_KTM 250 Enduro Motorbike.wav",
+     "trim": [
+      0.192,
+      0.665
+     ],
+     "fade": 0.01,
+     "duration": 8.46
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - KTM 250 Enduro Motorbike/VEHMoto_Bike, Changing Gears _344 Audio_KTM 250 Enduro Motorbike.wav",
+     "title": "Bike, Changing Gears",
+     "publisher": "344 Audio",
+     "category": "Vehicles",
+     "score": 13.8,
+     "duration": 8.46,
+     "why": "name has \"bike\", Vehicles"
+    },
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - KTM 250 Enduro Motorbike/VEHMoto_Starting Bike, Kickstart, Drive Away, Stereo_344 Audio_KTM 250 Enduro Motorbike.wav",
+     "title": "Starting Bike, Kickstart, Drive Away, Stereo",
+     "publisher": "344 Audio",
+     "category": "Vehicles",
+     "score": 13.8,
+     "duration": 12.13,
+     "why": "name has \"bike\", Vehicles"
+    },
+    {
+     "ref": "gdc2020/14",
+     "path": "Wav Junction Sound Effects - Bicycles/0004_Bicycle_pedaling_on_dirt.wav",
+     "title": "0004 Bicycle pedaling on dirt",
+     "publisher": "Wav Junction Sound Effects",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 49.58,
+     "why": "name has \"bicycle\""
+    },
+    {
+     "ref": "gdc2019/5",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 5of8/Rzpost - Ride on Bike/Bicycle,Approach,Gravel,Fast,Speed,Super,Skid_V4.wav",
+     "title": "Bicycle,Approach,Gravel,Fast,Speed,Super,Skid V4",
+     "publisher": "Rzpost",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 6.59,
+     "why": "name has \"bicycle\""
+    },
+    {
+     "ref": "gdc2019/5",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 5of8/Rzpost - Ride on Bike/Bicycle,Chain,Close,Prespective,Clean_V3.wav",
+     "title": "Bicycle,Chain,Close,Prespective,Clean V3",
+     "publisher": "Rzpost",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 27.44,
+     "why": "name has \"bicycle\""
+    },
+    {
+     "ref": "gdc2019/5",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 5of8/Rzpost - Ride on Bike/Bicycle,Wheel,Perspective,Gravel,Uphill,Slow,Speed,Skid_V2.wav",
+     "title": "Bicycle,Wheel,Perspective,Gravel,Uphill,Slow,Speed,Skid V2",
+     "publisher": "Rzpost",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 30.28,
+     "why": "name has \"bicycle\""
+    },
+    {
+     "ref": "gdc2019/6",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 6of8/Soundholder - Italy - Sicilian Ambients/ambient Italy Sicily Trapani old town people passing and talking walla bicycles car stereo M10.wav",
+     "title": "ambient Italy Sicily Trapani old town people passing and talking walla bicycles car stereo M10",
+     "publisher": "Soundholder",
+     "category": "Ambience",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"bicycle\""
+    },
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/RZ Post - The Bicycles SFX/Bicycle,Chain,Wheel,Spining,Accelerating,Deselerating.wav",
+     "title": "Bicycle,Chain,Wheel,Spining,Accelerating,Deselerating",
+     "publisher": "RZ Post",
+     "category": "Other",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"bicycle\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "drop": {
+   "slot": "drop",
+   "takes": [
+    {
+     "ref": "gdc2024/2",
+     "path": "Mechanical Wave - Torturing Metal/METLCrsh_Drop Fall Metal Rattle Scrap Debris_06_MWSFX_TM.wav",
+     "trim": [
+      0,
+      0.601
+     ],
+     "fade": 0.01,
+     "duration": 0.75
+    },
+    {
+     "ref": "gdc2024/6",
+     "path": "Pole Position - The Metal Hit Sweeteners Library/Toolbox - DROP.wav",
+     "trim": [
+      0,
+      0.508
+     ],
+     "fade": 0.01,
+     "duration": 16.62
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2024/2",
+     "path": "Mechanical Wave - Torturing Metal/METLCrsh_Drop Fall Metal Rattle Scrap Debris_06_MWSFX_TM.wav",
+     "title": "Drop Fall Metal Rattle Scrap Debris",
+     "publisher": "Mechanical Wave",
+     "category": "Metal",
+     "score": 9.4,
+     "duration": 0.75,
+     "why": "name has \"drop\""
+    },
+    {
+     "ref": "gdc2024/6",
+     "path": "Pole Position - The Metal Hit Sweeteners Library/Toolbox - DROP.wav",
+     "title": "Toolbox DROP",
+     "publisher": "Pole Position",
+     "category": "Tools",
+     "score": 9.4,
+     "duration": 16.62,
+     "why": "name has \"drop\""
+    },
+    {
+     "ref": "gdc2024/6",
+     "path": "Pole Position - The Plastic Textures Library/Flexible Sewer Pipe Big - Broken - DROP - Thump - Mono.wav",
+     "title": "Flexible Sewer Pipe Big Broken DROP Thump Mono",
+     "publisher": "Pole Position",
+     "category": "Other",
+     "score": 9.4,
+     "duration": 17.05,
+     "why": "name has \"drop\""
+    },
+    {
+     "ref": "gdc2023/5",
+     "path": "Pole Position Production - IKV91 1980/Ikv 91 - t13 - VAR SFX - Ammunition Drop on Wood - MS Decoded - RSM191.wav",
+     "title": "Ikv 91 t13 VAR SFX Ammunition Drop on Wood MS Decoded RSM191",
+     "publisher": "Pole Position Production",
+     "category": "Wood",
+     "score": 9.4,
+     "duration": 51.1,
+     "why": "name has \"drop\""
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "Pole Position Production - The Stone & Sand Library/Crushed Rock - DROP - Thick - Mono.wav",
+     "title": "Crushed Rock DROP Thick Mono",
+     "publisher": "Pole Position Production",
+     "category": "Other",
+     "score": 9.4,
+     "duration": 71.77,
+     "why": "name has \"drop\""
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "Pole Position Production - The Stone & Sand Library/Pebbles - DROP - Dense - Mono.wav",
+     "title": "Pebbles DROP Dense Mono",
+     "publisher": "Pole Position Production",
+     "category": "Other",
+     "score": 9.4,
+     "duration": 119.63,
+     "why": "name has \"drop\""
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "Pole Position Production - The Stone & Sand Library/Roof Tile - DROP - Several - Mono - 100k.wav",
+     "title": "Roof Tile DROP Several Mono 100k",
+     "publisher": "Pole Position Production",
+     "category": "Other",
+     "score": 9.4,
+     "duration": null,
+     "why": "name has \"drop\""
+    },
+    {
+     "ref": "gdc2020/1",
+     "path": "344 Audio - Trailer Instruments Designed/Sub Drop 2.wav",
+     "title": "Sub Drop 2",
+     "publisher": "344 Audio",
+     "category": "Other",
+     "score": 9.4,
+     "duration": null,
+     "why": "name has \"drop\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "laser-shot": {
+   "slot": "laser-shot",
+   "takes": [
+    {
+     "ref": "gdc2020/2",
+     "path": "Cali Crazed Beats - Alien Sound Effects/Laser_Cannon_Blast_2__calicrazed.com.wav",
+     "trim": [
+      0,
+      3
+     ],
+     "fade": 0.12,
+     "duration": 12.2,
+     "cutShort": true
+    },
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/Sound Spark LLC – Analog Synth Volume 1 Bleeps, Sweeps and Creeps/Laser-Like_Synth_Basic_Laser4_08.wav",
+     "trim": [
+      0,
+      1.05
+     ],
+     "fade": 0.01,
+     "duration": 2.72
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2020/2",
+     "path": "Cali Crazed Beats - Alien Sound Effects/Laser_Cannon_Blast_2__calicrazed.com.wav",
+     "title": "Laser Cannon Blast 2 calicrazed.com",
+     "publisher": "Cali Crazed Beats",
+     "category": "Sci-fi",
+     "score": 15.8,
+     "duration": 12.2,
+     "why": "name has \"laser blast\", Sci-fi"
+    },
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/Sound Spark LLC – Analog Synth Volume 1 Bleeps, Sweeps and Creeps/Laser-Like_Synth_Basic_Laser4_08.wav",
+     "title": "Laser Like Synth Basic Laser4 08",
+     "publisher": "Sound Spark LLC – Analog Synth Volume 1 Bleeps, Sweeps and Creeps",
+     "category": "Sci-fi",
+     "score": 13,
+     "duration": 2.72,
+     "why": "name has \"laser\", Sci-fi"
+    },
+    {
+     "ref": "gdc2020/2",
+     "path": "Async Audio - Sci-Fi Blaster/Blast Laser 2.wav",
+     "title": "Blast Laser 2",
+     "publisher": "Async Audio",
+     "category": "Explosions",
+     "score": 11.8,
+     "duration": 2.3,
+     "why": "name has \"laser blast\""
+    },
+    {
+     "ref": "gdc2020/2",
+     "path": "Async Audio - Sci-Fi Blaster/Blast Laser 4.wav",
+     "title": "Blast Laser 4",
+     "publisher": "Async Audio",
+     "category": "Explosions",
+     "score": 11.8,
+     "duration": 2.42,
+     "why": "name has \"laser blast\""
+    },
+    {
+     "ref": "gdc2018/3",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 3of8/Gamemaster Audio - Sci-Fi Sounds and Sci-Fi Weapons/sci-fi_weapon_blaster_laser_boom_zap_08.wav",
+     "title": "sci fi weapon blaster laser boom zap 08",
+     "publisher": "Gamemaster Audio",
+     "category": "Weapons",
+     "score": 11.8,
+     "duration": 1.3,
+     "why": "name has \"laser blast\""
+    },
+    {
+     "ref": "gdc2017/5",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 5of9/MatiasMacSD - THE WEAPONS - SCI-FI WEAPONS/Weapon Shot Blaster-06.wav",
+     "title": "Weapon Shot Blaster 06",
+     "publisher": "MatiasMacSD",
+     "category": "Weapons",
+     "score": 9.4,
+     "duration": 1.57,
+     "why": "name has \"blaster\""
+    },
+    {
+     "ref": "gdc2017/5",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 5of9/MatiasMacSD - THE WEAPONS - SCI-FI WEAPONS/Weapon Shot Spaceship Super Blaster-04.wav",
+     "title": "Weapon Shot Spaceship Super Blaster 04",
+     "publisher": "MatiasMacSD",
+     "category": "Weapons",
+     "score": 9.4,
+     "duration": null,
+     "why": "name has \"blaster\""
+    },
+    {
+     "ref": "gdc2016/2",
+     "path": "Digital Rain Lab - Lethal Energies/CK_Blaster_Shot-226.wav",
+     "title": "CK Blaster Shot 226",
+     "publisher": "Digital Rain Lab",
+     "category": "Rain",
+     "score": 9.4,
+     "duration": null,
+     "why": "name has \"blaster\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "potion": {
+   "slot": "potion",
+   "takes": [
+    {
+     "ref": "gdc2017/5",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 5of9/Mattia Cellotto - Water Volumes/Dry,Ice,Bubbling,Medium,Intensity,Liquid,Loop_01.wav",
+     "trim": [
+      0,
+      5
+     ],
+     "fade": 0.12,
+     "duration": 33.2,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2020/9",
+     "path": "SmartSoundFX - Asian Countrysides/AMBIENCE Water Soft Spring Small Bubbling.wav",
+     "title": "AMBIENCE Water Soft Spring Small Bubbling",
+     "publisher": "SmartSoundFX",
+     "category": "Ambience",
+     "score": 9.4,
+     "duration": 79.66,
+     "why": "name has \"bubbling\""
+    },
+    {
+     "ref": "gdc2019/1",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Articulated Sounds - 100 Fans, HVAC, & Mechanical Drones/FAN Watery Messy Bubbling HVAC Noise, LOOP.wav",
+     "title": "FAN Watery Messy Bubbling HVAC Noise, LOOP",
+     "publisher": "Articulated Sounds",
+     "category": "Water",
+     "score": 9.4,
+     "duration": 60.5,
+     "why": "name has \"bubbling\""
+    },
+    {
+     "ref": "gdc2019/6",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 6of8/The Sound Pack Tree - Sonic Seaside/057500 - Bubbling Creek - Loop.wav",
+     "title": "057500 Bubbling Creek Loop",
+     "publisher": "The Sound Pack Tree",
+     "category": "Water",
+     "score": 9.4,
+     "duration": 87.24,
+     "why": "name has \"bubbling\""
+    },
+    {
+     "ref": "gdc2017/5",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 5of9/Mattia Cellotto - Water Volumes/Dry,Ice,Bubbling,Medium,Intensity,Liquid,Loop_01.wav",
+     "title": "Dry,Ice,Bubbling,Medium,Intensity,Liquid,Loop 01",
+     "publisher": "Mattia Cellotto",
+     "category": "Water",
+     "score": 9.4,
+     "duration": 33.2,
+     "why": "name has \"bubbling\""
+    },
+    {
+     "ref": "gdc2016/2",
+     "path": "Eiravaein Sound - Vaeyan III/VaeyanIII,shockabsorber,broken,decompress,oil,bubbling,scuffing,flatulent.wav",
+     "title": "VaeyanIII,shockabsorber,broken,decompress,oil,bubbling,scuffing,flatulent",
+     "publisher": "Eiravaein Sound",
+     "category": "Other",
+     "score": 9.4,
+     "duration": 2.44,
+     "why": "name has \"bubbling\""
+    },
+    {
+     "ref": "gdc2026/2",
+     "path": "Epic Stock Media - Fantasy Game 2 - Sound Kit for Enchanted Realms/MAGAngl_Magic Light Spell Enchantment Potion Effect Tonal Bright 03_ESM_FG2.wav",
+     "title": "MAGAngl Magic Light Spell Enchantment Potion Effect Tonal Bright 03 ESM FG2",
+     "publisher": "Epic Stock Media",
+     "category": "Magic",
+     "score": 9.2,
+     "duration": 5.2,
+     "why": "name has \"potion\", Magic"
+    },
+    {
+     "ref": "gdc2026/1",
+     "path": "344 Audio - Haunting Ambiences Vol. 5/FIRECrkl_Fire Crackling, Popping, Witch's Cauldron_344 Audio_Haunting Ambiences Vol 5.wav",
+     "title": "Fire Crackling, Popping, Witch's Cauldron",
+     "publisher": "344 Audio",
+     "category": "Fire",
+     "score": 6.8,
+     "duration": null,
+     "why": "name has \"cauldron\""
+    },
+    {
+     "ref": "gdc2024/1",
+     "path": "Bolt - Immersive Creek -  Ambisonic Recordings of Undisturbed Creeks in Vermont/WATRFlow_Babbling Brook, Snow Melt, Calm, Constant, Bubbling_BOLT_Immersive Creek_RODE NTSF1 XY.wav",
+     "title": "Babbling Brook, Snow Melt, Calm, Constant, Bubbling",
+     "publisher": "Bolt",
+     "category": "Water",
+     "score": 6.4,
+     "duration": null,
+     "why": "name has \"bubbling\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "ambulance": {
+   "slot": "ambulance",
+   "takes": [
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/Pole Position - Volvo 122 Amazon 1970 Police Car/volvo_122_t18_ext_siren_RSM191.wav",
+     "trim": [
+      0.638,
+      6.638
+     ],
+     "fade": 0.12,
+     "duration": 20.86,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2023/8",
+     "path": "Pole Position Production - Volvo V70 2013/Volvo V70 Ambulance - t5 - ONBRD - STEADY RPMS - Start Drive - ENGINE - Left - MKH8020.wav",
+     "title": "Volvo V70 Ambulance t5 ONBRD STEADY RPMS Start Drive ENGINE Left MKH8020",
+     "publisher": "Pole Position Production",
+     "category": "Vehicles",
+     "score": 14.2,
+     "duration": 257.81,
+     "why": "name has \"ambulance\", Vehicles"
+    },
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/Pole Position - Volvo 122 Amazon 1970 Police Car/volvo_122_t18_ext_siren_RSM191.wav",
+     "title": "volvo 122 t18 ext siren RSM191",
+     "publisher": "Pole Position",
+     "category": "Vehicles",
+     "score": 13.8,
+     "duration": 20.86,
+     "why": "name has \"siren\", Vehicles"
+    },
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/Pole Position - Volvo V70 2006 Police Car/volvo_v70_t15_ext_fast_by_siren_twice_stop_CSS5.wav",
+     "title": "volvo v70 t15 ext fast by siren twice stop CSS5",
+     "publisher": "Pole Position",
+     "category": "Vehicles",
+     "score": 13.8,
+     "duration": 90.4,
+     "why": "name has \"siren\", Vehicles"
+    },
+    {
+     "ref": "gdc2017/7",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 7of9/Sonocaine - Quad City Berlin/SON_Quad_City_Berlin_002 - Large Main Road Junction, Cars And Heavy Trucks Passing Slowly, Ambulance Siren At Top, Occasional Car Horns, Big Rattling Truck At Tail (Neue Nationalgalerie) - Front Omni.wav",
+     "title": "SON Quad City Berlin 002 Large Main Road Junction, Cars And Heavy Trucks Passing Slowly, Ambulance Siren At Top, Occasional Car Horns, Big Rattling Truck At Tail (Neue Nationalgalerie) Front Omni",
+     "publisher": "Sonocaine",
+     "category": "Vehicles",
+     "score": 11.2,
+     "duration": null,
+     "why": "name has \"ambulance\", Vehicles"
+    },
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - UK Traffic & Vehicles/Sirens, Quiet Evening, Light taffic, Closer To Road.wav",
+     "title": "Sirens, Quiet Evening, Light taffic, Closer To Road",
+     "publisher": "344 Audio",
+     "category": "Vehicles",
+     "score": 10.8,
+     "duration": 180,
+     "why": "name has \"siren\", Vehicles"
+    },
+    {
+     "ref": "gdc2019/4",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 4of8/Pole Position - FSO Polonez 1500 Police Car 1984/polonez_1500_t10_onbrd_start_medium_drive_siren_stop_reverse_stop_drive_stop_off_mix_interior.wav",
+     "title": "polonez 1500 t10 onbrd start medium drive siren stop reverse stop drive stop off mix interior",
+     "publisher": "Pole Position",
+     "category": "Vehicles",
+     "score": 10.8,
+     "duration": 173.07,
+     "why": "name has \"siren\", Vehicles"
+    },
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/Pole Position - Volvo V70 2006 Police Car/volvo_v70_t2_onbrd_start_slow_drive_siren_stop_interior_trunk_DPA4061.wav",
+     "title": "volvo v70 t2 onbrd start slow drive siren stop interior trunk DPA4061",
+     "publisher": "Pole Position",
+     "category": "Vehicles",
+     "score": 10.8,
+     "duration": null,
+     "why": "name has \"siren\", Vehicles"
+    },
+    {
+     "ref": "gdc2023/8",
+     "path": "Pole Position Production - Volvo V70 2013/Volvo V70 Ambulance - t8 - VAR SFX - Siren Various - ORTF - MKH8040.wav",
+     "title": "Volvo V70 Ambulance t8 VAR SFX Siren Various ORTF MKH8040",
+     "publisher": "Pole Position Production",
+     "category": "Other",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"ambulance\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "applause": {
+   "slot": "applause",
+   "takes": [
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - UK Seaside Town & Theme Park/CRWDApls_INT British Rock Show Applause Guitar Clapping_344 Audio_UK Seaside Town & Theme Park_02.wav",
+     "trim": [
+      0,
+      6
+     ],
+     "fade": 0.12,
+     "duration": 25.57,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - UK Seaside Town & Theme Park/CRWDApls_INT British Rock Show Applause Guitar Clapping_344 Audio_UK Seaside Town & Theme Park_02.wav",
+     "title": "INT British Rock Show Applause Guitar Clapping",
+     "publisher": "344 Audio",
+     "category": "Crowds",
+     "score": 14.2,
+     "duration": 25.57,
+     "why": "name has \"applause\", Crowds"
+    },
+    {
+     "ref": "gdc2017/7",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 7of9/Sound Ex Machina -  BASKETBALL GAME ULTRA/International basketball game - boo, crowd clapping in unison and chanting, drum beat, shoe scraps.wav",
+     "title": "International basketball game boo, crowd clapping in unison and chanting, drum beat, shoe scraps",
+     "publisher": "Sound Ex Machina",
+     "category": "Birds",
+     "score": 11.8,
+     "duration": 52.5,
+     "why": "name has \"clapping crowd\""
+    },
+    {
+     "ref": "gdc2017/7",
+     "path": "Sonniss.com - GDC 2017 - Game Audio Bundle Part 7of9/Sound Ex Machina -  BASKETBALL GAME ULTRA/International basketball game - drum beat, excited crowd clapping in unison 03.wav",
+     "title": "International basketball game drum beat, excited crowd clapping in unison 03",
+     "publisher": "Sound Ex Machina",
+     "category": "Birds",
+     "score": 11.8,
+     "duration": 14.13,
+     "why": "name has \"clapping crowd\""
+    },
+    {
+     "ref": "gdc2020/1",
+     "path": "Articulated Sounds - Bali Ubud Village Ambiences/CROWD Reaction, Small Applause 03, 20 People, Bali, Indonesia.wav",
+     "title": "CROWD Reaction, Small Applause 03, 20 People, Bali, Indonesia",
+     "publisher": "Articulated Sounds",
+     "category": "Ambience",
+     "score": 10.2,
+     "duration": 12.27,
+     "why": "name has \"applause\""
+    },
+    {
+     "ref": "gdc2019/7",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 7of8/2496SoundEffects - Bits, Scraps and Pieces Super Pack/Cheer Clapping Small Group In Theater Applause sound effect.wav",
+     "title": "Cheer Clapping Small Group In Theater Applause sound effect",
+     "publisher": "2496SoundEffects",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 32.13,
+     "why": "name has \"applause\""
+    },
+    {
+     "ref": "gdc2019/7",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 7of8/2496SoundEffects - Surround At The Show 1 5.1 - 2/Crowd Cheering Exterior, Big Surge, Rose Bowl Stadium, Applause _5.1 LCRLsRsLf.wav",
+     "title": "Crowd Cheering Exterior, Big Surge, Rose Bowl Stadium, Applause 5.1 LCRLsRsLf",
+     "publisher": "2496SoundEffects",
+     "category": "Birds",
+     "score": 10.2,
+     "duration": 10.92,
+     "why": "name has \"applause\""
+    },
+    {
+     "ref": "gdc2019/7",
+     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 7of8/2496SoundEffects - Surround At The Show 1 5.1 - 2/Crowd Cheering Interior Short Swell 2, The Forum Stadium, Applause _STEREO.wav",
+     "title": "Crowd Cheering Interior Short Swell 2, The Forum Stadium, Applause STEREO",
+     "publisher": "2496SoundEffects",
+     "category": "Birds",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"applause\""
+    },
+    {
+     "ref": "gdc2018/5",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 5of8/Soundrangers - Audience Reactions/nightclub_audience_applause_cheers_07.wav",
+     "title": "nightclub audience applause cheers 07",
+     "publisher": "Soundrangers",
+     "category": "Other",
+     "score": 10.2,
+     "duration": null,
+     "why": "name has \"applause\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "sword-clash": {
+   "slot": "sword-clash",
+   "takes": [
+    {
+     "ref": "gdc2020/9",
+     "path": "SmartSoundFX – Medieval/SWORD Hit Metal 02.wav",
+     "trim": [
+      0,
+      0.676
+     ],
+     "fade": 0.01,
+     "duration": 0.88
+    },
+    {
+     "ref": "gdc2026/1",
+     "path": "344 Audio - Historical Weapons Vol. 2/WEAPSwrd_Sword Slide Cuts, Metallic, Impact CM4 2_344 Audio_Medieval Weapons Vol 2.wav",
+     "trim": [
+      0.134,
+      0.594
+     ],
+     "fade": 0.01,
+     "duration": 12.96
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2020/9",
+     "path": "SmartSoundFX – Medieval/SWORD Hit Metal 02.wav",
+     "title": "SWORD Hit Metal 02",
+     "publisher": "SmartSoundFX – Medieval",
+     "category": "Weapons",
+     "score": 15.8,
+     "duration": 0.88,
+     "why": "name has \"sword hit\", Weapons"
+    },
+    {
+     "ref": "gdc2026/1",
+     "path": "344 Audio - Historical Weapons Vol. 2/WEAPSwrd_Sword Slide Cuts, Metallic, Impact CM4 2_344 Audio_Medieval Weapons Vol 2.wav",
+     "title": "Sword Slide Cuts, Metallic, Impact CM4 2",
+     "publisher": "344 Audio",
+     "category": "Weapons",
+     "score": 15.4,
+     "duration": 12.96,
+     "why": "name has \"sword impact\", Weapons"
+    },
+    {
+     "ref": "gdc2023/2",
+     "path": "David Dumais Audio - Melee Weapons Sound Effects Pack 1/SWSH_Sword Slash Impact V2 Assorted 18_DDUMAIS_NONE.wav",
+     "title": "SWSH Sword Slash Impact V2 Assorted 18 DDUMAIS NONE",
+     "publisher": "David Dumais Audio",
+     "category": "Weapons",
+     "score": 15.4,
+     "duration": 1.01,
+     "why": "name has \"sword impact\", Weapons"
+    },
+    {
+     "ref": "gdc2016/6",
+     "path": "The AudioVille - Wooden Staffs and Sword Fight/WOODEN SWORD HIT-11.M.wav",
+     "title": "WOODEN SWORD HIT 11.M",
+     "publisher": "The AudioVille",
+     "category": "Wood",
+     "score": 11.8,
+     "duration": 0.27,
+     "why": "name has \"sword hit\""
+    },
+    {
+     "ref": "gdc2015/4",
+     "path": "Soundopolis - Blades/Knife_Sword_Hit_Multiple_Fienup_003.wav",
+     "title": "Knife Sword Hit Multiple Fienup 003",
+     "publisher": "Soundopolis",
+     "category": "Other",
+     "score": 11.8,
+     "duration": 1.29,
+     "why": "name has \"sword hit\""
+    },
+    {
+     "ref": "gdc2015/4",
+     "path": "__MACOSX/Soundopolis - Blades/._Knife_Sword_Hit_Multiple_Fienup_003.wav",
+     "title": ". Knife Sword Hit Multiple Fienup 003",
+     "publisher": "Soundopolis",
+     "category": "Other",
+     "score": 11.8,
+     "duration": null,
+     "why": "name has \"sword hit\""
+    },
+    {
+     "ref": "gdc2016/6",
+     "path": "The AudioVille - Wooden Staffs and Sword Fight/STICK HIT-07 - DEFEND.M.wav",
+     "title": "STICK HIT 07 DEFEND.M",
+     "publisher": "The AudioVille",
+     "category": "Wood",
+     "score": 6.8,
+     "duration": null,
+     "why": "name and folder have \"sword hit\""
+    },
+    {
+     "ref": "gdc2016/6",
+     "path": "The AudioVille - Wooden Staffs and Sword Fight/STICK HIT-13 - WILD.M.wav",
+     "title": "STICK HIT 13 WILD.M",
+     "publisher": "The AudioVille",
+     "category": "Wood",
+     "score": 6.8,
+     "duration": null,
+     "why": "name and folder have \"sword hit\""
+    }
+   ],
+   "notes": [
+    "Picked from 8 matching files; best name match with a clean take."
+   ],
+   "date": "2026-10-22"
+  },
+  "gong": {
+   "slot": "gong",
+   "takes": [
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - Cymbals From Hell Vol. 2/DSGNStngr_Gong, Distorted, Riser, Stinger 06_344 Audio_Cymbals From Hell Vol 2.wav",
+     "trim": [
+      0.154,
+      8.154
+     ],
+     "fade": 0.12,
+     "duration": 32.52,
+     "cutShort": true
+    }
+   ],
+   "candidates": [
+    {
+     "ref": "gdc2018/1",
+     "path": "Sonniss.com - GDC 2018 - Game Audio Bundle Part 1of8/Airborne Sound – Light and Dark Drones/Drone,Resonant,Bed,Solemn,Mystical with Ring,Accents,Prominent,Squeaky or Gong,Loop.wav",
+     "title": "Drone,Resonant,Bed,Solemn,Mystical with Ring,Accents,Prominent,Squeaky or Gong,Loop",
+     "publisher": "Airborne Sound – Light and Dark Drones",
+     "category": "Other",
+     "score": 10.2,
+     "duration": 61.87,
+     "why": "name has \"gong\""
+    },
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - Cymbals From Hell Vol. 2/DSGNBoom_Gong, Drone, Low End 25_344 Audio_Cymbals From Hell Vol 2.wav",
+     "title": "Gong, Drone, Low End 25",
+     "publisher": "344 Audio",
+     "category": "Designed",
+     "score": 9.2,
+     "duration": 60.89,
+     "why": "name has \"gong\""
+    },
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - Cymbals From Hell Vol. 2/DSGNDron_Gong, Drone, Stinger 28_344 Audio_Cymbals From Hell Vol 2.wav",
+     "title": "Gong, Drone, Stinger 28",
+     "publisher": "344 Audio",
+     "category": "Designed",
+     "score": 9.2,
+     "duration": 60.39,
+     "why": "name has \"gong\""
+    },
+    {
+     "ref": "gdc2023/1",
+     "path": "344 Audio - Cymbals From Hell Vol. 2/DSGNStngr_Gong, Distorted, Riser, Stinger 06_344 Audio_Cymbals From Hell Vol 2.wav",
+     "title": "Gong, Distorted, Riser, Stinger 06",
+     "publisher": "344 Audio",
+     "category": "Designed",
+     "score": 9.2,
+     "duration": 32.52,
+     "why": "name has \"gong\""
+    }
+   ],
+   "notes": [
+    "Picked from 4 matching files; best name match with a clean take."
    ],
    "date": "2026-10-22"
   }
