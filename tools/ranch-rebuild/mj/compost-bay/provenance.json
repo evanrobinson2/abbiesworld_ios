@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "compost-bay",
+  "group": "prop",
+  "replaces": "garden-assets/GF-019.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "80995128-6475-4e5e-b396-bc6f37c7c596",
+      "grid_url": "https://www.midjourney.com/jobs/80995128-6475-4e5e-b396-bc6f37c7c596?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "71ed9b82-ac07-4803-8f66-d990b731ce72",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:19:52.954Z",
+      "grid_done_at": "2026-10-22T23:20:10.960Z",
+      "upscale_clicked_at": "2026-10-22T23:20:21.836Z",
+      "downloaded_at": "2026-10-22T23:21:33.575Z",
+      "pick_reason": "dark compost clearly visible under green clippings, slatted sides, whole bay in frame. Every variant drew a closed four-sided box rather than a three-sided bay"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a three-sided wooden slatted compost bay full of dark compost with some green garden clippings on top, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "a04370ae-0dc5-48e6-9faa-df257a394c24",
+      "grid_url": "https://www.midjourney.com/jobs/a04370ae-0dc5-48e6-9faa-df257a394c24?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "802c6a62-f06c-4aef-bd46-a2310cfac76f",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:21:43.115Z",
+      "grid_done_at": "2026-10-22T23:22:01.122Z",
+      "upscale_clicked_at": "2026-10-22T23:22:11.084Z",
+      "downloaded_at": "2026-10-22T23:23:30.661Z",
+      "pick_reason": "largest views, well separated, including a straight-on view; still a four-sided box like every variant"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "c89308659602ce44a5fc38df958f01110a1e95ce21eda524abe576f927372a68",
+      "bytes": 4056797,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/71ed9b82-ac07-4803-8f66-d990b731ce72/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "78a61892dcb0d95346910627f95dcc686154799e3cd2abe37f5449e83ad2b2b7",
+      "bytes": 2720401,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/802c6a62-f06c-4aef-bd46-a2310cfac76f/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "9e11c95d45f08b76e77da205ca782ef36d6fd08356d5f333745e82a49f156b66",
+      "bytes": 1028078,
+      "pixels": [
+        982,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/compost-bay [('front', 93, 1075), ('side', 1075, 1958), ('back', 2001, 2784)]"
+    },
+    "view_side.png": {
+      "sha256": "4fbf708bb69b1dce300840a39cf0daf5ecdb072eb69dedc3e03f6e09ad5b3f47",
+      "bytes": 946807,
+      "pixels": [
+        883,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/compost-bay [('front', 93, 1075), ('side', 1075, 1958), ('back', 2001, 2784)]"
+    },
+    "view_back.png": {
+      "sha256": "4113966bdeb4a682276473ff10d0a7b3cd5ac1989c8d1e1fe208372de2997c89",
+      "bytes": 666956,
+      "pixels": [
+        783,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/compost-bay [('front', 93, 1075), ('side', 1075, 1958), ('back', 2001, 2784)]"
+    }
+  }
+}
