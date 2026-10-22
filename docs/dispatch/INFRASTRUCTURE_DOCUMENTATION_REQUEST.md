@@ -3,7 +3,7 @@
 Date: 2026-10-22
 Recipient: Claude working on Abbie's World iOS / Atelier
 Priority: High
-Status: **Acknowledged by Claude, 2026-10-22 21:35 UTC. Audit in progress.**
+Status: **Completed by Claude, 2026-10-22. See the completion report below.**
 
 ## Request
 Fully audit and document the **existing** infrastructure and architecture of Abbie's World, including the modeler, dispatch bridge, MCP servers, game client, asset pipeline, repositories, deployments, storage, authentication, and external integrations. This is to prevent agents from making incorrect assumptions or proposing redundant infrastructure.
@@ -40,3 +40,31 @@ What is already verified, from the code and the Vercel API:
 
 Deliverables (architecture doc, inventory, lifecycle diagram, CLAUDE.md link, completion report) will land in
 `docs/architecture/`. Each claim in them will be marked as verified, inferred, planned or unknown.
+
+## Completion report
+
+**Documents created** (all in `docs/architecture/`):
+- `README.md`: the index and the "read before proposing infrastructure" rule. CLAUDE.md now links to it.
+- `ARCHITECTURE.md`: components, data flows, deployment topology, environments, gaps.
+- `INVENTORY.md`: providers, Vercel projects, stores, secret locations (no values), MCP tools, background jobs.
+- `DISPATCH_LIFECYCLE.md`: create → attach → start → acknowledge → status/reply → complete, implemented vs proposed.
+
+**Evidence reviewed**:
+- Code on main and on `claude/live-snapshot-2026-10-22`: studio-mock, ranch-atelier `dist/api` and `vercel.json`,
+  `tools/model-store`, the iOS `ServerConfig.swift`, all four workflows, and `docs/current-state`.
+- The Vercel API: the project list, and env var names (not values) on studio-mock, abbies-ranch-atelier and story-forge.
+  Also the deployment of studio-mock 0.7.0.
+- Live requests: `studio-mock-iota.vercel.app/mcp` (tool list), and `abbies-ranch-atelier.vercel.app/api/models?paths=1`,
+  which returned 503 "R2 answered 404".
+- GitHub Actions history: all 5 model-store runs failed.
+
+**R2: verified.** It exists. Its keys are on story-forge, and its public URL answers. **It is not populated yet**,
+because the repo secrets `R2_*` and `POSTGRES_URL` are missing, so the model-store sync has never succeeded.
+
+**Unresolved gaps**:
+1. The R2 and Postgres GitHub secrets are missing. Evan needs to add them; after that, model-store syncs.
+2. The game server's source repo and deploy method are unknown, and so is story-forge's repo.
+3. The R2 bucket name is unknown. It is stored as a sensitive value and can't be read back.
+4. Dispatch records are in Vercel Blob, not R2. This is documented as an exception. Moving them is Evan's call.
+5. Signed uploads to R2 for dispatch attachments are proposed, not built.
+6. The dispatch bridge waits on the Claude scheduled task token before its end-to-end test can run.
