@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fritigern: the wagon</title>
+<script type="importmap">{"imports":{"three":"/vendor/three.module.js"}}</script>
+<style>
+  :root { --ink:#2c241d; --paper:#f4ecdc; --chip:#fbf6eaee; --line:#cdbf9f; }
+  html,body { margin:0; height:100%; background:#1c1813; color:var(--ink); font:14px/1.35 Georgia, "Iowan Old Style", serif; overflow:hidden; }
+  #stage { position:fixed; inset:0; }
+  #stage canvas { display:block; }
+  .title { position:fixed; top:16px; left:16px; color:var(--paper); text-shadow:0 1px 6px #0008; pointer-events:none; max-width:min(440px, calc(100vw - 32px)); }
+  .title small { letter-spacing:.14em; font-size:11px; opacity:.85; }
+  .title h1 { margin:2px 0 4px; font-size:24px; font-weight:normal; }
+  .title p { margin:0; font-size:13px; opacity:.9; }
+  .bar { position:fixed; left:16px; right:16px; bottom:max(14px, env(safe-area-inset-bottom)); display:grid; gap:8px; }
+  .row { display:flex; gap:6px; flex-wrap:wrap; align-items:center; }
+  button { font:inherit; font-size:13px; padding:9px 12px; min-height:40px; border-radius:20px; border:1px solid var(--line); background:var(--chip); color:var(--ink); cursor:pointer; }
+  button[aria-pressed="true"] { background:#5b3b2b; color:var(--paper); border-color:#5b3b2b; }
+  .time { display:grid; grid-template-columns:auto 1fr; gap:8px; align-items:center; background:var(--chip); border:1px solid var(--line); border-radius:22px; padding:6px 12px 6px 6px; }
+  .time .track { position:relative; height:34px; }
+  #strip { position:absolute; inset:0; width:100%; height:100%; }
+  #scrub { position:absolute; inset:0; width:100%; opacity:0; cursor:pointer; margin:0; }
+  #readout { font-size:13px; color:var(--paper); text-shadow:0 1px 5px #000a; min-height:18px; }
+  #shot-label { position:fixed; top:16px; right:16px; color:var(--paper); font-size:11px; letter-spacing:.14em; text-transform:uppercase; opacity:.8; }
+  .noui .bar, .noui .title, .noui #shot-label { display:none; }
+  @media (max-width:600px) { .title h1 { font-size:19px; } .title p { display:none; } button { padding:8px 10px; font-size:12px; } }
+</style>
+</head>
+<body>
+<div id="stage"></div>
+<div class="title"><small>FRITIGERN · SCENE 1 · BLOCKING STUDY</small><h1>The wagon</h1><p>Outside Marcianople, 376. Alaric waits in the wagon at the edge of the camp. His father comes back through the gate, wounded, carrying a Roman officer's helmet.</p></div>
+<span id="shot-label"></span>
+<div class="bar">
+  <div id="readout"></div>
+  <div class="row">
+    <button data-shot="director">Director</button>
+    <button data-shot="wide">Wide</button>
+    <button data-shot="alaric">Alaric's eyes</button>
+    <button data-shot="over">Over his shoulder</button>
+    <button data-shot="reverse">Reverse</button>
+    <button data-shot="follow">Follow Fritigern</button>
+    <button data-shot="orbit">Free look</button>
+    <button id="rays">Sightline</button>
+  </div>
+  <div class="time"><button id="play" aria-label="Play or pause">▶</button><div class="track"><canvas id="strip"></canvas><input id="scrub" type="range" min="0" value="0" aria-label="Scene time"></div></div>
+</div>
+<script type="module" src="./scene.js"></script>
+</body>
+</html>
