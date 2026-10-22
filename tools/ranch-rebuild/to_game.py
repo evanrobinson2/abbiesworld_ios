@@ -43,7 +43,7 @@ ROLE_PATTERNS = [('glass', r'glass'), ('water', r'^(?:water)(?:[. _-]|$)'), ('me
                  ('plaster', r'plaster|stucco|wall'), ('foliage', r'leaf|leaves|foliage|canopy|grass|moss|petal|flower|stem'),
                  ('ground', r'soil|earth|ground|terrain|sand|mud|compost'), ('roof', r'roof|shingle|thatch'),
                  ('timber', r'wood|timber|bark|plank|beam|post'), ('stone', r'stone|rock|slate|brick'), ('clay', r'clay|ceramic|terracotta'),
-                 ('fiber', r'rope|reed|straw|wicker|hay'), ('food', r'onion|bread|grain|fruit|apple|berry|vegetable|feed|nut'),
+                 ('fiber', r'rope|reed|straw|wicker|hay'), ('food', r'onion|bread|grain|fruit|apple|berry|vegetable|feed|(?<![a-z])nut'),
                  ('cloth', r'cloth|fabric|canvas|linen|wool'), ('skin', r'skin|fur|hide|hair|mane|leather|feather|horn|hoof|beak|comb')]
 
 

@@ -1,0 +1,489 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/horse",
+ "name": "horse",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "grazes, rests, walks the paddock",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "f9f2a420-a65f-4e04-94e8-4a1962e8dc9f",
+    "grid_url": "https://www.midjourney.com/jobs/f9f2a420-a65f-4e04-94e8-4a1962e8dc9f?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "0421b2f6-cc17-46bc-a474-a774532dfedf",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:40:15.976Z",
+    "grid_done_at": "2026-10-22T22:40:33.981Z",
+    "upscale_clicked_at": "2026-10-22T22:40:46.336Z",
+    "downloaded_at": "2026-10-22T22:41:58.118Z",
+    "pick_reason": "truest side view with cream blaze, dark mane and tail, dark hooves, whole horse in frame"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "d12367ca-9747-46aa-b74e-5dd589c5dbc7",
+    "grid_url": "https://www.midjourney.com/jobs/d12367ca-9747-46aa-b74e-5dd589c5dbc7?index=0",
+    "picked_index": 0,
+    "upscale_job_id": "3f4213ed-6d34-49ef-a928-f4abdd09387e",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T22:42:06.785Z",
+    "grid_done_at": "2026-10-22T22:42:24.790Z",
+    "upscale_clicked_at": "2026-10-22T22:42:38.358Z",
+    "downloaded_at": "2026-10-22T22:43:59.962Z",
+    "pick_reason": "straight front, true side profile and straight back of the same horse, well separated"
+   }
+  },
+  "files": {
+   "hero.png": "dc7fb0281ea78eacd19360bbbd5852b39fa7b3a24755f979905ae6bbe58cdf09",
+   "turnaround.png": "94bdedfd1194797349f073dac6220e802e6247765f5eeb10330524846137dca8",
+   "view_front.png": "30a3ab0272b687741defb480fbfde847142068c0267e393d06ac7ec6318a9b5b",
+   "view_side.png": "41f9bd9702a7d2d8d53fc9eeb8052768c435f5a4ebb3c2f47c38049ec740d58d",
+   "view_back.png": "1a05ba3ab1f436cf5189b763e05f96b89a0d8c7ea31ca808244c81cdf6403569"
+  },
+  "folder": "tools/ranch-rebuild/mj/horse"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/horse/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build from named parts: body, neck, head, muzzle, blaze, ears, eyes, mane, forelock, tail and four 3-part legs with socks; scored on the raw mj views.",
+    "mean_iou": 0.596
+   },
+   {
+    "round": 2,
+    "change": "Scored on views/ (cast-shadow streaks at the hooves removed); body 7 % shorter (YS 0.93), legs 15 % thicker and staggered, bigger mane, tail pulled in, neck pivot lowered so the feeding pose can reach the ground.",
+    "mean_iou": 0.818
+   },
+   {
+    "round": 3,
+    "change": "Front legs moved back and hind legs further back to match the sheet's leg positions, slimmer throat at the base of the neck, neck pivot lowered again (feeding neck 120 -> 100 deg).",
+    "mean_iou": 0.833
+   },
+   {
+    "round": 4,
+    "change": "Head 6 % bigger and longer, wider blaze, thicker tail, 16 longer mane locks along the whole crest, browner coat and tan cream; rest pose re-folded so the barrel rests on the ground instead of the hind hooves.",
+    "mean_iou": 0.84
+   },
+   {
+    "round": 5,
+    "change": "Tried stronger facet jitter (5 %): slightly worse on every view, reverted to 3.5 %.",
+    "mean_iou": 0.836
+   },
+   {
+    "round": 6,
+    "change": "Coat material renamed Fur_Sorrel for the game's skin role; final 768 px / 48 sample render and score.",
+    "mean_iou": 0.842
+   }
+  ],
+  "what_was_done": [
+   [
+    "Views",
+    "The sheet's labels are right (front = face, side = near/left side with the head on the left, back = rump). make_views.py copies them to views/ and only removes the soft cast shadows that streak sideways from the hooves: they survived the harness shadow filter and widened the front and back bounding boxes from 0.32 H to 0.36 H and pushed them off centre. Front and back are scored at full weight. The side view is slightly three-quarter (near and far legs are 0.3 m apart along the body, the far side of the chest shows), so I used it for heights (withers 0.76 H, belly 0.42 H, poll 0.95 H, muzzle 0.63 to 0.70 H) and the overall length, and only partly followed its leg spacing: the legs are staggered 0.22 m (near legs back), not the sheet's 0.3 m."
+   ],
+   [
+    "Massing",
+    "Withers 1.62 m, ear tips 2.14 m, 2.1 m nose to tail, 0.7 m across the barrel: a short, deep, stocky draught pony. Body is one 12-ring loft with a deep chest, a dipped back and a round croup; a thick crested neck; a long head with a big jowl; legs are 8-sided lofts with heavy forearms and thighs."
+   ],
+   [
+    "Parts and pivots",
+    "27 named parts in a hierarchy, each with its origin at its joint: body > neck (pivot low in the chest) > head (pivot at the throat latch) > muzzle, blaze, eyes, ear_l, ear_r, forelock; neck > mane; body > tail (pivot at the tail root); body > leg_<fl|fr|hl|hr>_upper (shoulder/hip) > _lower (knee/hock) > _hoof (fetlock) > _sock. Poses are only rotations of these parts plus a drop of the body."
+   ],
+   [
+    "Poses",
+    "idle: as the hero. feeding: the neck swings down about its chest pivot and the head nods back so the face ends 12 degrees nearer vertical than in idle; build.py searches the neck angle (97.7 deg) until the muzzle is 3 cm above the ground. rest: the body drops onto its barrel, the forearms fold forward with the cannons tucked back under them, the hind legs fold forward and out to the sides, the tail lies back along the ground, the neck dips 8 degrees and the head stays up."
+   ],
+   [
+    "Look",
+    "Faceted flat-shaded planes (low-sided lofts with 3.5 % vertex jitter), a cream blaze strip down the face into a cream muzzle, cream socks from fetlock to lower cannon over dark hooves, dark eyes and nostrils, upright pyramid ears, 16 jagged chunky locks falling on the near (+X) side with a short fringe over the far side and a forelock, and a long thick tail with ragged strands at the end."
+   ],
+   [
+    "Game readiness",
+    "2,318 triangles in every pose (budget 4k), one flat material per object: Fur_Sorrel (the chestnut coat), Fur_Cream, Hair_Dark, Horn_Hoof, Horn_Eye. Exported as horse.glb and variants/idle, feeding, rest.glb with export_animations=False; to_game.py horse ran clean and horse-idle.json has the muzzle at +X (x 0.97 m)."
+   ]
+  ],
+  "creative_additions": "A short fringe of mane over the far side and a forelock between the ears, dark nostrils, a slight stance with the near legs set back, and ragged strands at the end of the tail."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.7014691233634949,
+   2.1060352325439453,
+   2.1362242698669434
+  ],
+  "triangles": 2318,
+  "materials": [
+   "Fur_Cream",
+   "Horn_Hoof",
+   "Fur_Sorrel",
+   "Horn_Eye",
+   "Hair_Dark"
+  ],
+  "parts": [
+   {
+    "name": "body",
+    "materials": [
+     "Fur_Sorrel"
+    ],
+    "pivot": [
+     -0.0034,
+     1.2637,
+     -0.0819
+    ],
+    "children": [
+     {
+      "name": "leg_fl_upper",
+      "materials": [
+       "Fur_Sorrel"
+      ],
+      "pivot": [
+       0.19,
+       -0.25,
+       0.3348
+      ],
+      "children": [
+       {
+        "name": "leg_fl_lower",
+        "materials": [
+         "Fur_Sorrel"
+        ],
+        "pivot": [
+         0,
+         -0.47,
+         0.0186
+        ],
+        "children": [
+         {
+          "name": "leg_fl_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0,
+           -0.32,
+           0
+          ],
+          "children": [
+           {
+            "name": "leg_fl_sock",
+            "materials": [
+             "Fur_Cream"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_fr_upper",
+      "materials": [
+       "Fur_Sorrel"
+      ],
+      "pivot": [
+       -0.19,
+       -0.25,
+       0.5394
+      ],
+      "children": [
+       {
+        "name": "leg_fr_lower",
+        "materials": [
+         "Fur_Sorrel"
+        ],
+        "pivot": [
+         0,
+         -0.47,
+         0.0186
+        ],
+        "children": [
+         {
+          "name": "leg_fr_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0,
+           -0.32,
+           0
+          ],
+          "children": [
+           {
+            "name": "leg_fr_sock",
+            "materials": [
+             "Fur_Cream"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_hl_upper",
+      "materials": [
+       "Fur_Sorrel"
+      ],
+      "pivot": [
+       0.19,
+       -0.05,
+       -0.5859
+      ],
+      "children": [
+       {
+        "name": "leg_hl_lower",
+        "materials": [
+         "Fur_Sorrel"
+        ],
+        "pivot": [
+         0,
+         -0.61,
+         -0.1209
+        ],
+        "children": [
+         {
+          "name": "leg_hl_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0,
+           -0.38,
+           0.0651
+          ],
+          "children": [
+           {
+            "name": "leg_hl_sock",
+            "materials": [
+             "Fur_Cream"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "leg_hr_upper",
+      "materials": [
+       "Fur_Sorrel"
+      ],
+      "pivot": [
+       -0.19,
+       -0.05,
+       -0.3813
+      ],
+      "children": [
+       {
+        "name": "leg_hr_lower",
+        "materials": [
+         "Fur_Sorrel"
+        ],
+        "pivot": [
+         0,
+         -0.61,
+         -0.1209
+        ],
+        "children": [
+         {
+          "name": "leg_hr_hoof",
+          "materials": [
+           "Horn_Hoof"
+          ],
+          "pivot": [
+           0,
+           -0.38,
+           0.0651
+          ],
+          "children": [
+           {
+            "name": "leg_hr_sock",
+            "materials": [
+             "Fur_Cream"
+            ]
+           }
+          ]
+         }
+        ]
+       }
+      ]
+     },
+     {
+      "name": "neck",
+      "materials": [
+       "Fur_Sorrel"
+      ],
+      "pivot": [
+       0,
+       -0.27,
+       0.5115
+      ],
+      "children": [
+       {
+        "name": "head",
+        "materials": [
+         "Fur_Sorrel"
+        ],
+        "pivot": [
+         0,
+         0.88,
+         0.2976
+        ],
+        "children": [
+         {
+          "name": "blaze",
+          "materials": [
+           "Fur_Cream"
+          ]
+         },
+         {
+          "name": "ear_l",
+          "materials": [
+           "Fur_Sorrel"
+          ],
+          "pivot": [
+           0.085,
+           0.0984,
+           0.075
+          ]
+         },
+         {
+          "name": "ear_r",
+          "materials": [
+           "Fur_Sorrel"
+          ],
+          "pivot": [
+           -0.085,
+           0.0984,
+           0.075
+          ]
+         },
+         {
+          "name": "eyes",
+          "materials": [
+           "Horn_Eye"
+          ]
+         },
+         {
+          "name": "forelock",
+          "materials": [
+           "Hair_Dark"
+          ]
+         },
+         {
+          "name": "muzzle",
+          "materials": [
+           "Fur_Cream"
+          ]
+         }
+        ]
+       },
+       {
+        "name": "mane",
+        "materials": [
+         "Hair_Dark"
+        ]
+       }
+      ]
+     },
+     {
+      "name": "tail",
+      "materials": [
+       "Hair_Dark"
+      ],
+      "pivot": [
+       0,
+       0.19,
+       -0.7626
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ "states": [
+  "feeding",
+  "idle",
+  "rest"
+ ],
+ "validation": {
+  "outline_iou": 0.842,
+  "hero_iou": 0.532,
+  "per_view": {
+   "front": 0.889,
+   "side": 0.742,
+   "back": 0.895
+  },
+  "triangle_budget": 4000,
+  "within_budget": true,
+  "good": [
+   "Front 0.889 and back 0.895 IoU: barrel width, leg spacing, head width, ear spread and the tail showing between the legs all line up with the sheet.",
+   "Heights in the side view match the sheet within about 2 % of the height (withers, back line, belly, poll, muzzle).",
+   "It reads at tile size: chestnut block, dark mane on the near side, cream blaze and socks, dark hooves.",
+   "All three poses come from one build.py by rotating parts, and the feeding pose solves its own neck angle, so it stays right if the proportions change."
+  ],
+  "off": [
+   "Material name: the brief asked for Fur_Chestnut, but to_game.py's role patterns test 'food' (which contains 'nut') before 'skin', so Fur_Chestnut became role 'food' in the game JSON. I named the coat Fur_Sorrel (the horse word for a chestnut coat) so it gets the 'skin' role. If the art director prefers Fur_Chestnut, change the food pattern in to_game.py to a word match (\\bnut) and rename COL/mat in build.py.",
+   "Side IoU is 0.742: most of the difference is the sheet's three-quarter angle (its near and far legs are spread 0.3 m apart along the body and the far chest shows); my orthographic side has both pairs of legs overlapping more.",
+   "The socks use Fur_Cream as listed in the brief; the hero's socks are a little darker and more tan than its blaze.",
+   "The hero has more, smaller facets with strong light/shade contrast; mine are larger planes with flatter colour.",
+   "Hero check (hero_check.py, from the hero's own direction, about 35 deg off the side) is 0.53 and only a guide: the hero's target mask keeps a big part of its cast shadow on the ground.",
+   "No feathering at the fetlocks (the sheet draws a little); it would be under 3 % of the size in the tile.",
+   "In the rest pose the tail lies straight back as a stiff rod rather than curling on the ground."
+  ]
+ },
+ "exports": {
+  "runtime": "horse.glb",
+  "variants": {
+   "feeding": "variants/feeding.glb",
+   "idle": "variants/idle.glb",
+   "rest": "variants/rest.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/horse-idle.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/horse-feeding.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/organics/horse-rest.json"
+   ]
+  }
+ },
+ "files": {
+  "horse.glb": {
+   "sha256": "ec5323524d34d55846c276b922063efd9641c3318ce99da775963d3e85f50006",
+   "bytes": 144560
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "c1727ffca0f1c9da539a51b8ea57e7fbd054a1e2",
+  "path": "tools/ranch-rebuild/models/horse"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
