@@ -33,6 +33,14 @@
       "destination": "/simulations/index.html"
     },
     {
+      "source": "/teleport",
+      "destination": "/teleport/index.html"
+    },
+    {
+      "source": "/teleport/",
+      "destination": "/teleport/index.html"
+    },
+    {
       "source": "/moon",
       "destination": "/moon/index.html"
     },

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Family Teleport character sheet",
+  "description": "One person as a toy character. Private: lives only on the family's devices and in the git-ignored private folder.",
+  "type": "object",
+  "required": ["id", "name", "role", "skin", "hair", "hairStyle", "shirt", "pants"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9-]{1,32}$"},
+    "name": {"type": "string", "maxLength": 16},
+    "role": {"enum": ["adult", "kid"]},
+    "height": {"type": "number", "minimum": 0.4, "maximum": 1.2, "description": "Relative to an adult toy figure (1)"},
+    "skin": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+    "hair": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+    "hairStyle": {"enum": ["short", "long", "ponytail", "curly", "spiky", "bun", "bald"]},
+    "shirt": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+    "pants": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+    "shoes": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+    "glasses": {"type": "boolean"},
+    "beard": {"type": "boolean"},
+    "hat": {"type": "string", "pattern": "^#[0-9a-fA-F]{6}$"},
+    "signature": {"type": "string", "maxLength": 80, "description": "One detail that makes them them, e.g. 'the dinosaur hoodie'"},
+    "figure": {"type": "string", "description": "Path of the private modeled GLB, if one exists"}
+  }
+}

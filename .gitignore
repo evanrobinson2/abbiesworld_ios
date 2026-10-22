@@ -122,3 +122,6 @@ credentials*
 
 # Meshy spike intermediates (large binaries)
 experiments/meshy_actor/output/
+
+# Family Teleport: family photos, character sheets and figures stay private
+tools/family-teleport/private/
