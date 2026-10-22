@@ -70,6 +70,7 @@ import {
 import { summarize as summarizeExecutionCapacity } from "./lib/execution-capacity-store.js";
 import { authorizeDispatchCaller } from "./lib/dispatch-auth.js";
 import { createDispatchService, getDefaultStore as getDispatchStore } from "./lib/dispatch-service.js";
+import { ORACLE_TOOLS, ORACLE_TOOL_NAMES, callOracleTool } from "./lib/oracle.js";
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
@@ -85,6 +86,8 @@ const OAUTH_SCOPES = "openid profile email offline_access read:world write:world
 const COMMAND_CARD = `## Exposed commands (these ARE on this MCP)
 
 BUILD WITH CLAUDE (dispatch bridge): build(request) hands development work to Claude (code, models, scenes, mechanics, deploys) and returns a dispatch id immediately; it never waits. status(dispatch_id?) shows lifecycle submitted → acknowledged → running → blocked/completed/failed, plus branch, commits, PRs and whether completion was verified on GitHub. revise(dispatch_id, instructions) sends a change order or answers Claude's question. inbox() returns Claude's new messages (acks, progress, questions, completion reports) and marks them read. briefing() gives a project-wide status with item ids (W1…); ask(question, about) opens a threaded question about any dispatch or item, continued with ask(question, thread_id). "Submitted" only means stored: wait for an ack message before telling Evan Claude has it.
+
+GAME ORACLE: oracle_consult(idea, audience?, style?) turns a game, scene or story idea into a design plan (rules, beats, choices, presentation style, model/sound/voice/music factory requests). Call it first when Evan describes a game, then hand the plan to build(). oracle_search(q) searches game identity records and studies; oracle_steam(q?) reads Evan's Steam library.
 
 DELETE / REMOVE a POI: place_remove or place_delete (sceneId + placeId, instanceId, or name). Never rewrite a scene to drop a pin.
 DELETE a scene: scene_delete (scene.home is protected). Use this for accidental scene.mcp* objects.
@@ -747,6 +750,7 @@ const DISPATCH_TOOLS = [
 
 const TOOLS = [
   ...DISPATCH_TOOLS,
+  ...ORACLE_TOOLS,
   {
     name: "read_primer",
     description: "Dungeon-master primer plus how scenes and POIs show up on the iPad. Call this before authoring.",
@@ -2335,8 +2339,16 @@ async function callDispatchTool(name, args, request) {
   return { error: "unknown_dispatch_tool" };
 }
 
+// Oracle tools spend the Oracle's model budget, so they take the same caller check as dispatch.
+async function callOracleToolAuthed(name, args, request) {
+  const auth = await authorizeDispatchCaller(presentedToken(request, args)).catch(() => ({ ok: false }));
+  if (!auth.ok) return { error: "auth_required", hint: "Oracle tools need the ChatGPT OAuth (Auth0) token for this MCP." };
+  return callOracleTool(name, args);
+}
+
 async function callTool(name, args, request) {
   if (DISPATCH_TOOL_NAMES.has(name)) return callDispatchTool(name, args, request);
+  if (ORACLE_TOOL_NAMES.has(name)) return callOracleToolAuthed(name, args, request);
   if (name === "place_delete") name = "place_remove";
   if (name === "feedback_report" || name === "bug_report") name = "trouble_ticket_create";
   if (name === "read_primer") return { text: primerBody() };
@@ -2902,6 +2914,7 @@ export async function GET() {
       ingest: ["asset_ingest"],
       mjWorkersAlive: ["execution_capacity_status", "mj_workers_alive"],
       dispatch: ["build", "status", "revise", "inbox", "briefing", "ask"],
+      oracle: ["oracle_consult", "oracle_search", "oracle_steam"],
     },
   });
 }
