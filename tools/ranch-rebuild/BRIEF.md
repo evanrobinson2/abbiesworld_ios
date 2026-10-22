@@ -32,10 +32,10 @@ Order: buildings, animals, trees, props, supplies, plants (longest builds first)
 ## Game formats (the modeler must hit these)
 - Buildings, animals, the shade tree and supplies are loaded from `.json` mesh lists, one entry per part:
   `{name, positions, normals, color, role, defaultColor, materialName, surfaceName, roleSource}`. The game recolours parts
-  by `role` (timber, plaster, roof, bark, foliage, fur, hair, hay...). `tools/ranch-rebuild/to_game.py` converts a GLB to
-  that format, taking the role from each object's `role` custom property.
-- Buildings also have construction stages (`planned`, `foundation`, `frame`, `roof`, `complete`). Tag every object with
-  a `stage` custom property and the converter writes all five.
+  by `role` (timber, plaster, roof, stone, foliage, skin, fiber...). `tools/ranch-rebuild/to_game.py` converts a GLB to
+  that format, taking the role from each material's name (the same patterns as `simulations/material-policy.js`).
+- Buildings also have construction stages (`planned`, `foundation`, `frame`, `roof`, `complete`), animals have poses
+  and supplies have fill levels. The modeler exports one GLB per state in `variants/` and the converter writes them all.
 - Regional plants and trees and garden props are plain GLBs, scaled in game to a set height.
 
 ## Charming style (added 2026-10-22)
