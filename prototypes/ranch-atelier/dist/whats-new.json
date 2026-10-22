@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-22-sounds",
+      "date": "2026-10-22",
+      "title": "A sound library",
+      "line": "450 sounds for the ranch and beyond, picked and levelled by the sound engineer. Open Sounds from Settings to browse them; they start playing once storage is switched on.",
+      "image": "/whats-new/2026-10-22-sounds.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9qGUVvGpSmdcwZSzez8qgn",
+      "threadTitle": "Sound engineer and sound browser"
+    },
+    {
       "id": "2026-10-22-live-mode",
       "date": "2026-10-22",
       "title": "Talk to the world",
