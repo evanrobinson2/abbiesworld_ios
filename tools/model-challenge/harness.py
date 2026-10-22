@@ -9,7 +9,8 @@ usage:
 
 Conventions every model must follow: Blender Z up, metres, origin at the centre of the footprint on the ground,
 the object's front faces -Y (what Blender's Front view shows). Side view looks from +X (the object's left side), back from +Y.
-Masks: the render's alpha; the target is the pixels that differ from the sheet's border colour, small holes filled.
+Masks: the render's alpha; the target is the pixels that differ from the backdrop (estimated per row), minus
+cast shadows (backdrop darkened without a hue shift), small holes filled.
 IoU is computed after cropping both masks to their bounding boxes and fitting them into the same square, so
 scale and placement in the image don't count, only shape and proportions.
 """
@@ -83,9 +84,21 @@ def render(glb, out, px=512, samples=24):
 def target_mask(path, thresh=0.10):
     from scipy import ndimage
     a = np.asarray(Image.open(path).convert('RGB')).astype(float) / 255
-    border = np.concatenate([a[:4].reshape(-1, 3), a[-4:].reshape(-1, 3), a[:, :4].reshape(-1, 3), a[:, -4:].reshape(-1, 3)])
-    bg = np.median(border, 0)
+    # Midjourney backdrops are gradients, so the background is estimated per row from the left and right edges
+    # (rows where the object touches the edge are skipped and filled in from the rows above and below)
+    edge = np.concatenate([a[:, :6], a[:, -6:]], 1); top = np.median(a[:6].reshape(-1, 3), 0)
+    rowbg = np.median(edge, 1); ok = (np.linalg.norm(edge - top, axis=-1) < 0.15).mean(1) > 0.8
+    ys = np.arange(len(rowbg))
+    if ok.sum() > 10:
+        rowbg = np.stack([np.interp(ys, ys[ok], rowbg[ok, c]) for c in range(3)], 1)
+    else:
+        rowbg = np.repeat(top[None], len(rowbg), 0)
+    bg = ndimage.median_filter(rowbg, size=(25, 1))[:, None, :]
     m = np.linalg.norm(a - bg, axis=-1) > thresh
+    # cast shadows are the backdrop darkened without a change of hue: drop them, they aren't the object
+    r = a / np.maximum(bg, 1e-3); lum = r.mean(-1)
+    shadow = (lum > 0.35) & (lum < 0.97) & (r.std(-1) / np.maximum(lum, 1e-3) < 0.035)
+    m &= ~shadow
     m = ndimage.binary_opening(m, iterations=1)
     lab, k = ndimage.label(m)
     if k:
@@ -94,7 +107,7 @@ def target_mask(path, thresh=0.10):
     holes = ndimage.binary_fill_holes(m) & ~m          # fill only small holes (specks inside the object);
     hl, hk = ndimage.label(holes)                       # big ones are real gaps, e.g. between beam cords
     if hk:
-        hs = ndimage.sum(holes, hl, range(1, hk + 1)); m = m | np.isin(hl, np.where(hs < 0.002 * m.size)[0] + 1)
+        hs = ndimage.sum(holes, hl, range(1, hk + 1)); m = m | np.isin(hl, np.where(hs < 0.01 * m.size)[0] + 1)
     return m, a
 
 

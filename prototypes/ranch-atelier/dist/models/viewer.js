@@ -1,4 +1,5 @@
 // The model page's 3D view (mountViewer(figure)): the model on a soft shadow, framed from the reference camera, turned with the mouse or a finger.
+// A model with an animation clip (moving parts) plays it on a loop; the Motion button pauses it.
 import * as THREE from 'three';
 import {OrbitControls} from '/simulations/vendor/OrbitControls.js';
 import {GLTFLoader} from '/simulations/vendor/loaders/GLTFLoader.js';
@@ -25,7 +26,8 @@ export function mountViewer(v){
   const ground = new THREE.Mesh(new THREE.PlaneGeometry(20, 20), new THREE.ShadowMaterial({opacity:0.18}));
   ground.rotation.x = -Math.PI / 2; ground.receiveShadow = true; scene.add(ground);
   const controls = new OrbitControls(cam, canvas); controls.enableDamping = true; controls.enablePan = false; controls.autoRotateSpeed = 2.2;
-  let home = null, dirty = true;
+  let home = null, dirty = true, mixer = null, playing = !reduce;
+  const clock = new THREE.Clock(), motion = v.querySelector('.motion');
   const size = () => { const w = stage.clientWidth, h = stage.clientHeight; if (!w || !h) return; renderer.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix(); dirty = true; };
   new ResizeObserver(size).observe(stage);
   const reset = () => { if (!home) return; cam.position.copy(home.pos); controls.target.copy(home.tgt); controls.update(); dirty = true; };
@@ -39,13 +41,19 @@ export function mountViewer(v){
     home = {pos:new THREE.Vector3(d * Math.sin(ph) * Math.sin(th), tgt.y + d * Math.cos(ph), d * Math.sin(ph) * Math.cos(th)), tgt};
     Object.assign(key.shadow.camera, {left:-r, bottom:-r, right:r, top:r}); key.shadow.camera.updateProjectionMatrix();
     controls.minDistance = r * 0.8; controls.maxDistance = r * 6;
+    if (g.animations.length && motion){
+      mixer = new THREE.AnimationMixer(obj); g.animations.forEach(a => mixer.clipAction(a).play());
+      motion.hidden = false; motion.setAttribute('aria-pressed', String(playing));
+      if (!playing) mixer.update(0);
+    }
     reset(); msg.hidden = true; size();
   }, undefined, () => fail(v, 'the model file did not load'));
   v.querySelector('.reset').addEventListener('click', reset);
   const spin = v.querySelector('.spin');
   if (reduce) spin.hidden = true;
   spin.addEventListener('click', () => { controls.autoRotate = !controls.autoRotate; spin.setAttribute('aria-pressed', String(controls.autoRotate)); });
+  if (motion) motion.addEventListener('click', () => { playing = !playing; motion.setAttribute('aria-pressed', String(playing)); clock.getDelta(); });
   controls.addEventListener('change', () => { dirty = true; });
   let visible = true; new IntersectionObserver(es => { visible = es[0].isIntersecting; }).observe(stage);
-  (function loop(){ requestAnimationFrame(loop); if (!visible) return; if (controls.update() || controls.autoRotate) dirty = true; if (dirty){ renderer.render(scene, cam); dirty = false; } })();
+  (function loop(){ requestAnimationFrame(loop); if (!visible) return; const dt = clock.getDelta(); if (controls.update() || controls.autoRotate) dirty = true; if (mixer && playing){ mixer.update(dt); dirty = true; } if (dirty){ renderer.render(scene, cam); dirty = false; } })();
 }
