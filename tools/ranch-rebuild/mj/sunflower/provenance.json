@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "sunflower",
+  "group": "plant",
+  "replaces": "simulations/regional-assets/GF-567.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a single tall sunflower with a big yellow flower head and broad leaves on a sturdy stem, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "5a446795-909c-4550-9ac3-86e8cbe64313",
+      "grid_url": "https://www.midjourney.com/jobs/5a446795-909c-4550-9ac3-86e8cbe64313?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "fc756828-9db3-4549-a053-db630b16d678",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:51:17.889Z",
+      "grid_done_at": "2026-10-22T23:51:35.891Z",
+      "upscale_clicked_at": "2026-10-22T23:51:45.594Z",
+      "downloaded_at": "2026-10-22T23:52:54.273Z",
+      "pick_reason": "big face-on flower head, broad leaves on a sturdy stem, centered and whole"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "63bda55161c3ebb48681fbb6717a5d03010a6288aeb94e593bff6f3d873f749b",
+      "bytes": 2976873,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/fc756828-9db3-4549-a053-db630b16d678/0_0.png"
+    }
+  }
+}
