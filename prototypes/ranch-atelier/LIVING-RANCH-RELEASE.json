@@ -1,0 +1,707 @@
+[
+  {
+    "file": "vercel.json",
+    "sha256": "4655d5acf52b175d02e84b33291a332d39d1325b7884b8d6533e7224749de64f",
+    "bytes": 6708
+  },
+  {
+    "file": "simulations/ranch-ecology-state.mjs",
+    "sha256": "6027099dcf0a36c8e4caf356031d74ae5ba6a131a7f8bcf4f2083630825ec2ed",
+    "bytes": 1437
+  },
+  {
+    "file": "simulations/ranch-contours.js",
+    "sha256": "7a48c1fca4708a073c1c0a418111d039da64115b96ef794e8a086e23d1a06e66",
+    "bytes": 3051
+  },
+  {
+    "file": "simulations/garden-rendition.js",
+    "sha256": "1eac5e5160237b627b196102880608f4cedf1d3c39ad928590366ba93e0d3123",
+    "bytes": 454
+  },
+  {
+    "file": "simulations/ranch-seasons-state.mjs",
+    "sha256": "943967dbaa3cb929e28a60ea7374d96c17c918ca7449a68f3fc0300fae56e13b",
+    "bytes": 907
+  },
+  {
+    "file": "simulations/ranch-sound.mjs",
+    "sha256": "87fa719794430a95e4bd273c9fe5f6feab00ede2d0ad5b4dad9ad39e6a6fec8d",
+    "bytes": 1163
+  },
+  {
+    "file": "simulations/coastal-water.js",
+    "sha256": "7e0cd70f8d8701f4224264c07fe2ee2402afa20fe3ea5b07edce8274dfc944ec",
+    "bytes": 2297
+  },
+  {
+    "file": "simulations/ranch-play.mjs",
+    "sha256": "76804b0ed61021e2f42a16270a136e48fbfd7d90fceecba27b83bc27ebb1a78b",
+    "bytes": 2403
+  },
+  {
+    "file": "simulations/index.html",
+    "sha256": "7867271c9d84970b55c722f13bb929d39d749d6102b1d0a8c0b477ef25a22b15",
+    "bytes": 9743
+  },
+  {
+    "file": "simulations/dorf-materials-reference.js",
+    "sha256": "44b2ca504190477d537c50c1cc82419e9f25ef018fd71f4805ad71a03dff139b",
+    "bytes": 6190
+  },
+  {
+    "file": "simulations/coast-surface.js",
+    "sha256": "081dddfcd6f72e2c2e9df135c549604fb753321acce962bb807decaba46de079",
+    "bytes": 4168
+  },
+  {
+    "file": "simulations/ranch-names.mjs",
+    "sha256": "f41e5d24f1be623143e18f7160d567bfd31e45ecddbb8b40a9d83b66421d4458",
+    "bytes": 706
+  },
+  {
+    "file": "simulations/garden-art.js",
+    "sha256": "dc517f869793fdb98adb80ab411187b9810f05a9dbcbc3a313fd6afd0f940335",
+    "bytes": 5813
+  },
+  {
+    "file": "simulations/ranch-play-spec.mjs",
+    "sha256": "3f5116809d14c19f5ae14dbd69aa6f0b66b56906829753de5f193d3dd7cdfc4c",
+    "bytes": 353
+  },
+  {
+    "file": "simulations/tile-adapter.js",
+    "sha256": "88f88e238eed73dd32fbeda6682581c56df1b3576014f8f35f30f5dd31c6a484",
+    "bytes": 12733
+  },
+  {
+    "file": "simulations/ranch-thumbnail.svg",
+    "sha256": "2a791ca043cfc65e2084cc80e8e89734b9a3e3145c8351e6d48dea4d24b1a04e",
+    "bytes": 513
+  },
+  {
+    "file": "simulations/scene.js",
+    "sha256": "f2b59e63a9184f63c2ccceaa7838ffdaa48e1e6c0afc01b9bda0887302c7a348",
+    "bytes": 12933
+  },
+  {
+    "file": "simulations/microcosm-view.mjs",
+    "sha256": "ec7545e529caeda1adf981858873277bfe29f9d79a406da9b0fad45f8c0a1b9e",
+    "bytes": 2029
+  },
+  {
+    "file": "simulations/seaside-scenes.js",
+    "sha256": "50b3edecd756c85c7fdf3fbfe3e2c148fa6e25bf92df55f5287d89f21b7c884f",
+    "bytes": 5473
+  },
+  {
+    "file": "simulations/arrival-settings.mjs",
+    "sha256": "300706c6d68c4cd3d335632847d56a33b64cdfb5cc02da576ed6eae93c77c097",
+    "bytes": 1556
+  },
+  {
+    "file": "simulations/worksite-layout.mjs",
+    "sha256": "24550b92136f10909afcfa02c7edb38bf7757caa1549e2059fce08ba83d77570",
+    "bytes": 6845
+  },
+  {
+    "file": "simulations/ranch-story-adapter.mjs",
+    "sha256": "55fc3191fd878725093a20fc4699739deb0282f32c72c62e241f8f3dbf4d4186",
+    "bytes": 3612
+  },
+  {
+    "file": "simulations/facet-picker.mjs",
+    "sha256": "c8468e3640688f03c3fc5ba1edd9c0bf5603e9231a2b3e267320112956618ae3",
+    "bytes": 1650
+  },
+  {
+    "file": "simulations/ranch-composer.js",
+    "sha256": "300aba0888a1533163b08f35166d83cf61b4090c3cd6341a57b16a64b50408b2",
+    "bytes": 17932
+  },
+  {
+    "file": "simulations/ranch-renderer.js",
+    "sha256": "3a03a35028e35a89e581df9a591125e692e1f3545903944bc6c31abc489918af",
+    "bytes": 4386
+  },
+  {
+    "file": "simulations/dorf-ranch-materials.mjs",
+    "sha256": "341edff09e9ad8180b9cf5e7d8678768e4db29279ce8f9030be3390cbef2adb3",
+    "bytes": 2716
+  },
+  {
+    "file": "simulations/domestic-scenes.js",
+    "sha256": "18f61d3b5b67cb67697b058d380f789a669d5f9d1372de562d07b88bd5b1d6ab",
+    "bytes": 9554
+  },
+  {
+    "file": "simulations/ranch-ecology.mjs",
+    "sha256": "5193010c94717a9e7f7077422475947f3ac9da4b2498cbd0d68bdf3044cef319",
+    "bytes": 6162
+  },
+  {
+    "file": "simulations/domestic-assets.js",
+    "sha256": "b1a0d2f3707678dd0c3958b13bec0313cfc22ecd14c539a18d56525554b20e14",
+    "bytes": 1976
+  },
+  {
+    "file": "simulations/app-style.css",
+    "sha256": "94e982ab0239419d05547b96bc9c5dbea63b3df952f75ee4e1ae6eb57bdcce83",
+    "bytes": 7530
+  },
+  {
+    "file": "simulations/tile-landscape.js",
+    "sha256": "34623c2b4ac79cf58592b0ed447fe2f751e2bd54ffd0c01819dfcdc52cadd977",
+    "bytes": 2659
+  },
+  {
+    "file": "simulations/app-style-presets.mjs",
+    "sha256": "98e083db1245f2301990b6df7012a1cf3114519d8fa49f09db4d03311d4c8b8e",
+    "bytes": 14418
+  },
+  {
+    "file": "simulations/ranch-life-state.mjs",
+    "sha256": "e973828b5d18c25fc4c82bfb22c0eb331ff5f7a4fadea98299692df2e03055ec",
+    "bytes": 2826
+  },
+  {
+    "file": "simulations/npc-animation.js",
+    "sha256": "ba4197ec1ed9f0423cebbb989e9637cf8868abaef96412d9be8eefbc43c7089d",
+    "bytes": 5489
+  },
+  {
+    "file": "simulations/tile-board.js",
+    "sha256": "2ae175eb21c35606b994c1c6042c3750f648ac6b843b3ad46baa7f0e6b4e4153",
+    "bytes": 1665
+  },
+  {
+    "file": "simulations/ranch-spaces.mjs",
+    "sha256": "6fe216c943b6b073474ec525f5410501efb755021d6aa1b4f0f14c88dfe08d72",
+    "bytes": 2818
+  },
+  {
+    "file": "simulations/garden-farm.js",
+    "sha256": "b554a9c21cbf0950c4044669abaa3d3d4f08faefe12024f2936d3d133da4ad58",
+    "bytes": 13732
+  },
+  {
+    "file": "simulations/tile-metrics.js",
+    "sha256": "b2d18e4d96573a5339c1d52f03caaac7b76010a61731c1c84e12eb8e1f995d09",
+    "bytes": 485
+  },
+  {
+    "file": "simulations/lab.css",
+    "sha256": "c900d57bccc54c56f62908584024e7289432446c4088a8641c4727de38c771fc",
+    "bytes": 12401
+  },
+  {
+    "file": "simulations/ranch-habitat.mjs",
+    "sha256": "6cc89bd2b5319f4e8054d14e9dab0122de0eb33020d71d57109fb058a37d3640",
+    "bytes": 903
+  },
+  {
+    "file": "simulations/microcosm.mjs",
+    "sha256": "3b0d2ed5732b0cf19e57dc0d8b65b3a558ed9c751049a1af1b62575aa7a7f589",
+    "bytes": 816
+  },
+  {
+    "file": "simulations/terrain-presets.js",
+    "sha256": "75776c8113e563282947af66659b6f155d99093051ee8483a4fc3aa33405e0d6",
+    "bytes": 9940
+  },
+  {
+    "file": "simulations/ranch-shapes.mjs",
+    "sha256": "53c5e5c3f5fff620e699fdee56aeacc15f74b17d6687e56758a657b4767bc3df",
+    "bytes": 1581
+  },
+  {
+    "file": "simulations/garden-adapter.js",
+    "sha256": "cd46950840fc635803e49c0ed462f7ef9411f63df7b4e6d43d585f38b0b9f8be",
+    "bytes": 2768
+  },
+  {
+    "file": "simulations/app-appearance.js",
+    "sha256": "8dded3daee0d434de0a9c5aa67ae595ac5e7c1aebcc7ca52e23738fd85dad84c",
+    "bytes": 7096
+  },
+  {
+    "file": "simulations/livestock-animation.mjs",
+    "sha256": "ae36e13463d6df4363b0f34e39300750328234dc03fda0562d207067549e82a8",
+    "bytes": 4900
+  },
+  {
+    "file": "simulations/view-context.js",
+    "sha256": "8812205fa0d19a0219f1f8a7fbdf4c86c6b11e1f003d98f5ebeb6ef22ed10cda",
+    "bytes": 14637
+  },
+  {
+    "file": "simulations/ranch-arrivals.mjs",
+    "sha256": "03487335fb38df08805aca7dd09348c5d4ca7c5a2f106ae9945697b19901ca59",
+    "bytes": 7808
+  },
+  {
+    "file": "simulations/district-scenes.js",
+    "sha256": "ecdca96538167fa3366ae11843bd2af8cc71b4966dd8f7b1b3f3fff53b45d5fc",
+    "bytes": 7539
+  },
+  {
+    "file": "simulations/model-calibration.js",
+    "sha256": "88ac15e4f96ee2cefa6831dcc35a16c02d5f6c5b5ed866381f2158269da3fe06",
+    "bytes": 5217
+  },
+  {
+    "file": "simulations/ranch-life.mjs",
+    "sha256": "7954dfcce8ae9352af75d445966b7897e834f3845f237067427e576093807357",
+    "bytes": 34397
+  },
+  {
+    "file": "simulations/view-build.json",
+    "sha256": "7224b6f95db6d9f3487071862ace0c49ee8cdd588284ae2108f190678aa34711",
+    "bytes": 89
+  },
+  {
+    "file": "simulations/material-policy.js",
+    "sha256": "f1fdfc39445ba60e49eb27e4874f5e662436086540f09e6ce3a5ba97f6a11b04",
+    "bytes": 3455
+  },
+  {
+    "file": "simulations/ranch-rhythm.mjs",
+    "sha256": "b8cbb77741fe58dd8d7a999fcdbd8cf0cf35a0c346e4542380c73efbe733929d",
+    "bytes": 2744
+  },
+  {
+    "file": "simulations/style.css",
+    "sha256": "ef0b4a3dd69d44d7427207176d6195fea1987ff6602b4e01496f79cbf3baa126",
+    "bytes": 7744
+  },
+  {
+    "file": "simulations/lab.mjs",
+    "sha256": "a5873e49d3cadd945048752bf1769d2029f0f433561bafce8695c55f013d5716",
+    "bytes": 55469
+  },
+  {
+    "file": "simulations/ranch-weather.mjs",
+    "sha256": "1dc2d3b56d4b23220f899cd8c047e4f8e2d0652becda2b1494625f91a3be7f44",
+    "bytes": 4901
+  },
+  {
+    "file": "simulations/scene-semantics.js",
+    "sha256": "89195b0ec7dea2e3efb69028e77dbe0e2a3e0262d0fe259339604aa2b68b39e7",
+    "bytes": 4794
+  },
+  {
+    "file": "simulations/procedural-engine.js",
+    "sha256": "ac7510ddd9c17e47f0917ff8cbbe4893d9d8aa388d90e59bf704106887c14aaa",
+    "bytes": 10870
+  },
+  {
+    "file": "simulations/castle-scenes.js",
+    "sha256": "e6f379a2e38bbf2035a8a0b9ed5ef4876e3731da7715d06a9ed31183a2e9f43f",
+    "bytes": 1534
+  },
+  {
+    "file": "simulations/ranch-navigation.mjs",
+    "sha256": "344413e0fcff84476004ba6ebd14d82a49c040c16882fc0afa5253858cffcb57",
+    "bytes": 3593
+  },
+  {
+    "file": "simulations/ranch-seasons.mjs",
+    "sha256": "089b83dc3142b447e89998e18550db7f37be9695934a6f75e361774880c285e9",
+    "bytes": 2741
+  },
+  {
+    "file": "simulations/ranch-shelter.mjs",
+    "sha256": "0f7765f837482b3a279ef26beea7c301ab3e9bb660d2e0b648cde54ae0492680",
+    "bytes": 1371
+  },
+  {
+    "file": "simulations/storybook-arrival.mjs",
+    "sha256": "7e31798bdbe48576814915a38c24829a3c4f622ac33ec88ee4b1f3507466b78c",
+    "bytes": 3380
+  },
+  {
+    "file": "simulations/ranch-routes.mjs",
+    "sha256": "153ea2196a0cef327082cecd7d359a2468f20a9122d4bb30ee647639aea6eb78",
+    "bytes": 1596
+  },
+  {
+    "file": "simulations/ui-icons.mjs",
+    "sha256": "d532bd73358d3a60ade7a681b566b60cdee9032280a790d2e0153a966ebc544d",
+    "bytes": 2400
+  },
+  {
+    "file": "simulations/ranch-clock.mjs",
+    "sha256": "f8ebba3eb4c0080b09f08309852afbb0523010591005bf8c067627dccb73bd74",
+    "bytes": 440
+  },
+  {
+    "file": "simulations/workspace.css",
+    "sha256": "80a95c4143e48a271293ffd73446994a481b8dd395b5c557c673a9aeaea24f4e",
+    "bytes": 30489
+  },
+  {
+    "file": "simulations/tile-materials.js",
+    "sha256": "481a93de6f2577171ef6f13350ca9c9cbda354fd23d20ee1855148ff35a1e01f",
+    "bytes": 2650
+  },
+  {
+    "file": "simulations/ranch-generations.mjs",
+    "sha256": "9cd375c528bb3c3ba99d99d8c21e62898183551646ba523296ffdc27423eecdd",
+    "bytes": 4339
+  },
+  {
+    "file": "simulations/worksite-bounds.mjs",
+    "sha256": "831708081e7d3f451cb840afb3e5752b38adb4e8b95b76f02ce2ef05e2c17346",
+    "bytes": 4949
+  },
+  {
+    "file": "simulations/ranch-regional.mjs",
+    "sha256": "124a42e9a4d46ae5ca58bbaaadc9c542d9816af734f137dac566d16d45ddd54c",
+    "bytes": 2895
+  },
+  {
+    "file": "simulations/ranch-path-style.mjs",
+    "sha256": "09b71d49733e363ff96f1bebd653727df2f03c7e9c510e38b3f158d801d2513a",
+    "bytes": 1685
+  },
+  {
+    "file": "simulations/ranch-motion-ui.mjs",
+    "sha256": "36f54d2bd4f77882ab51594de1a74afb3ff67a8c8c35b0de2f19fd16b13ec7d2",
+    "bytes": 9820
+  },
+  {
+    "file": "simulations/ranch-advisors.mjs",
+    "sha256": "445c045692cb64eb787242845e8f5130789683a81513b85f222ce39579e15739",
+    "bytes": 1980
+  },
+  {
+    "file": "simulations/app-appearance.css",
+    "sha256": "a8b8eadec12c11db4bafb120445a7254bcb03f18928d4255e5392e95bc37f572",
+    "bytes": 3112
+  },
+  {
+    "file": "simulations/app.js",
+    "sha256": "d4a81ac2b7b72aacae6cc25bf29941b3c4d6f9defce6758c0e5f042a46b3e44d",
+    "bytes": 19313
+  },
+  {
+    "file": "simulations/tile-drag.mjs",
+    "sha256": "28e9e82a9454c9821914cd6ae30de0ff38f73c5ba9d353654df20536a1ef9888",
+    "bytes": 5538
+  },
+  {
+    "file": "simulations/ranch-lights.mjs",
+    "sha256": "c2dacffa8c8bae7b664e9462a6dcf310c6bf5e2f95c2731e438273824422ada8",
+    "bytes": 2534
+  },
+  {
+    "file": "simulations/town-life/tile-view.mjs",
+    "sha256": "59777c86e89de0bed77dc6d31645d36d27ab244f78be757fdcc828c759242d5d",
+    "bytes": 2567
+  },
+  {
+    "file": "simulations/town-life/layouts.mjs",
+    "sha256": "5cd27907567d6ae2a2df59d8ced45d92177b6301de1cb9785597252f41456113",
+    "bytes": 7903
+  },
+  {
+    "file": "simulations/town-life/economy.mjs",
+    "sha256": "e2ebd944bb825d4ebb8a4d2d2489a81b92d49a42c4f290092eb76a6ef8754412",
+    "bytes": 7524
+  },
+  {
+    "file": "simulations/town-life/tile-state.mjs",
+    "sha256": "46b3f7a20407a9efcf8cf15fb709192fa1d5fa07e66b4ee18a6b9add9303ab11",
+    "bytes": 1313
+  },
+  {
+    "file": "simulations/town-life/civics.mjs",
+    "sha256": "deed5dbe08be67e040b5dd1e86ec477220bfab1cefb3ef4275a9311fd88ee7b5",
+    "bytes": 4190
+  },
+  {
+    "file": "simulations/town-life/people/core.mjs",
+    "sha256": "86b66f46b3f74160bbe122b1927298fc2e705f2335e17c11cf729095a187218f",
+    "bytes": 11662
+  },
+  {
+    "file": "simulations/town-life/people/models.mjs",
+    "sha256": "7fe68b9fb7b33291553aa8090cc2524476ca15116fe779694d1108874fa64122",
+    "bytes": 6859
+  },
+  {
+    "file": "simulations/town-life/people/animation.mjs",
+    "sha256": "86fdd4b3c8a0a7ebd7d5bc08ff246656d073fe14f20b3b8d317f8b0d97a4861a",
+    "bytes": 1785
+  },
+  {
+    "file": "simulations/town-life/people/emotes.mjs",
+    "sha256": "3063ea828bcdeb11f7a8c6e3253bff866fa32169130cc1091d7c0eb73fda4587",
+    "bytes": 2175
+  },
+  {
+    "file": "simulations/tile-physics/glass-house.mjs",
+    "sha256": "b7dfeaa470003604e1a07a379e3761cb766416274a4f3ae2461fcb4c6b14033c",
+    "bytes": 2860
+  },
+  {
+    "file": "simulations/tile-physics/assembly.mjs",
+    "sha256": "3c01790b10e4245f100578af5c40d1892190dad007b680cd0fde2e49fe1ebbfc",
+    "bytes": 823
+  },
+  {
+    "file": "simulations/tile-physics/ranch-adapter.mjs",
+    "sha256": "9a0184849d4b861e595af16fe8ed3e9ea510c0c215e178937f426d42c3414576",
+    "bytes": 10706
+  },
+  {
+    "file": "simulations/tile-physics/world.mjs",
+    "sha256": "fb17248ac5deba45929e1af45b344bd11b735262aa2738bf89d2422c7caff81b",
+    "bytes": 13296
+  },
+  {
+    "file": "simulations/tile-physics/recovery.mjs",
+    "sha256": "4124cc18e3bcaaf1bfbbd27ae632b18f81d46c6def4441c2296a2687ecc3218a",
+    "bytes": 1379
+  },
+  {
+    "file": "simulations/tile-physics/collider.mjs",
+    "sha256": "08b173ffed99470d46182f57a79d3df5eac7c5cab93cf9a0645e54b5bd57f6d0",
+    "bytes": 1297
+  },
+  {
+    "file": "simulations/tile-physics/three.mjs",
+    "sha256": "9cd307f9ac626b6d886b6f34ed0f14552f87f4c112c3a7d758e5c9d1060a6188",
+    "bytes": 177
+  },
+  {
+    "file": "simulations/tile-physics/rigid-world.mjs",
+    "sha256": "8d0f7bb3d7b4f35c5160feb8cc01afdd16e04cf4c70b0fd9fce5f4ca4c14a2f2",
+    "bytes": 11752
+  },
+  {
+    "file": "simulations/tile-physics/vendor/RAPIER-LICENSE",
+    "sha256": "4c05555705e3efde601fb1252ae48f1d63992af8a8fb8947745b7fa834e8f519",
+    "bytes": 11343
+  },
+  {
+    "file": "simulations/tile-physics/vendor/rapier.mjs",
+    "sha256": "02dc6a4e2fffc013bab08fbb44fa68f501d8303615e9afe4c7d89ad4eedda0d0",
+    "bytes": 4340292
+  },
+  {
+    "file": "simulations/ranch-diorama-lab/vendor/three.module.js",
+    "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+    "bytes": 1314681
+  },
+  {
+    "file": "simulations/simulation/delivery-workflow.mjs",
+    "sha256": "827cd28820a54ee5ca507f1b740a168beca3721e3f72f934667bc44973c5356b",
+    "bytes": 1521
+  },
+  {
+    "file": "simulations/simulation/transaction-audit.mjs",
+    "sha256": "1a2620a676a7d2b6a8d477c30d270ad83040fc37dfecbe4d7d6f37d53be5c94d",
+    "bytes": 1899
+  },
+  {
+    "file": "simulations/simulation/resource-loop.mjs",
+    "sha256": "a0f32efc466153bbf6ff6e77bd7f55093dfa832d888201fff84b00b8aad25fcc",
+    "bytes": 3655
+  },
+  {
+    "file": "simulations/simulation/pose-ownership.mjs",
+    "sha256": "4e2bc456ef2ca70e398b116c1e5c1452ea6c0da78e0cad96f3ab45a5c8dd9c67",
+    "bytes": 1070
+  },
+  {
+    "file": "simulations/simulation/life-fidelity.mjs",
+    "sha256": "9b5dd9f36665a5487256165d0cefdd80319f6746731e505237acadad1701b30b",
+    "bytes": 427
+  },
+  {
+    "file": "simulations/simulation/animation-clock.mjs",
+    "sha256": "e5256b2e9ae8f586417a43361bb1d6b7d8fb0d45b61030fb62d32f0dc4d21c26",
+    "bytes": 385
+  },
+  {
+    "file": "simulations/simulation/spatial-bounds.mjs",
+    "sha256": "9ba13946bbe27bf01a3555c934881b861f30b595f52340fb8f562c709f06c947",
+    "bytes": 718
+  },
+  {
+    "file": "simulations/simulation/README.md",
+    "sha256": "04176c731a8d9449c1ee8c5a714678ef241e433e7642a2fb35a5de4af4b12c5a",
+    "bytes": 4586
+  },
+  {
+    "file": "simulations/simulation/life-story.mjs",
+    "sha256": "bdd2c0ea338baa2299b2eec7610a6edd71a11c2269167fafd2e81e4c0091075f",
+    "bytes": 6207
+  },
+  {
+    "file": "simulations/simulation/life-traits.mjs",
+    "sha256": "072139f9a1dfd59c4d82cbf7ff8b4041e690fbc6497804af213e06712ae7485b",
+    "bytes": 731
+  },
+  {
+    "file": "simulations/simulation/life-learning.mjs",
+    "sha256": "7b5d7c50697fd65a3c58370ff99b399926e159911a0e2594b983c121399da8b6",
+    "bytes": 1193
+  },
+  {
+    "file": "simulations/simulation/weather-state.mjs",
+    "sha256": "63c65a0474ecda00ceb2b210de07ed916b31e07dad82fa661c32f5e63d7eee8c",
+    "bytes": 910
+  },
+  {
+    "file": "simulations/simulation/solar-cycle.mjs",
+    "sha256": "5d9bef089f8fc45e2c9d5d0d2111b768973a7dfab6afad07b36ce6e1fa235472",
+    "bytes": 809
+  },
+  {
+    "file": "simulations/regional-assets/WW-046.glb",
+    "sha256": "f1edea333b9511edcd71eefa8f82e0ac5bd3265c42e7318ba8bcc6af339c7d00",
+    "bytes": 37156
+  },
+  {
+    "file": "simulations/regional-assets/GF-679.glb",
+    "sha256": "0ea97b8fedf07c9f129c241697a7d0841c5629163e400e8242fc16118a201704",
+    "bytes": 330824
+  },
+  {
+    "file": "simulations/regional-assets/UP-051.glb",
+    "sha256": "afee38979713e4826a241a31783318b74f2f6048e2ec9b4cf9d0dc6299e819e2",
+    "bytes": 50992
+  },
+  {
+    "file": "simulations/regional-assets/GF-250.glb",
+    "sha256": "a7244677c59bdf221dbdeb426533c866606254313241a9dec012c4c39d473651",
+    "bytes": 121012
+  },
+  {
+    "file": "simulations/regional-assets/WW-151.glb",
+    "sha256": "438937b7a5832bec167ceefa1f939657b0e8a76fa8236505a320c84635a6a2f1",
+    "bytes": 231108
+  },
+  {
+    "file": "simulations/regional-assets/WW-347.glb",
+    "sha256": "6128c8df6b3341c784df5fbaa8bf8b39fb836042886fbd7a9ea207e75f6b3a4a",
+    "bytes": 733660
+  },
+  {
+    "file": "simulations/regional-assets/WW-147.glb",
+    "sha256": "1cf908a7d6375def22d40536268f0fa94da2d2c036a34752bc4b853f5151bd7f",
+    "bytes": 683640
+  },
+  {
+    "file": "simulations/regional-assets/GF-235.glb",
+    "sha256": "3bb01f04bc0a51795a47cf3206a7d880b1eaae080b4c9e393f9bba4133c41f3b",
+    "bytes": 96284
+  },
+  {
+    "file": "simulations/regional-assets/GF-153.glb",
+    "sha256": "4369245ff65ace74e67a266e50a95f448af2df424b49a95b6a41bc903eb8a491",
+    "bytes": 184696
+  },
+  {
+    "file": "simulations/regional-assets/GF-634.glb",
+    "sha256": "86d5f2ed5c1e6fee2e7b2d61b650d43163e3819c398de7754cf04420ddbe936c",
+    "bytes": 189412
+  },
+  {
+    "file": "simulations/regional-assets/WW-140.glb",
+    "sha256": "537e2e6d45d9625d67ff6c5d974ddd27fe63e0d61b1b9309b4656911a9ad39c7",
+    "bytes": 253960
+  },
+  {
+    "file": "simulations/regional-assets/GF-567.glb",
+    "sha256": "87c5b23a9d4531b107be4f33a2222951fa406363d3534949d94e05c1825df3b4",
+    "bytes": 148756
+  },
+  {
+    "file": "simulations/regional-assets/GF-159.glb",
+    "sha256": "61f7dae5acef93d793b431a09a2add142ab533fcbd0d59fdcf36ce1b05c36e4b",
+    "bytes": 182648
+  },
+  {
+    "file": "simulations/regional-assets/WW-148.glb",
+    "sha256": "55bbb6a942a1517cf03de31d4771ecde640e92099969ecdb522b6e40cc49fe77",
+    "bytes": 258552
+  },
+  {
+    "file": "simulations/regional-assets/GF-010.glb",
+    "sha256": "e086496d1b90627ac8a565bb2d068e5b3d514be950555eeca9d4998391efd615",
+    "bytes": 36724
+  },
+  {
+    "file": "simulations/regional-assets/GF-158.glb",
+    "sha256": "c65b76a3a83aa8e9054aa8d45372bd0fd177fa7fb36a8643fb9a0d943ae6e8e6",
+    "bytes": 373544
+  },
+  {
+    "file": "simulations/regional-assets/GF-249.glb",
+    "sha256": "8c0e69238f4db58cd1a2d54c752dba9217473d21d3ab1f3e2e4ba3daea78466e",
+    "bytes": 40304
+  },
+  {
+    "file": "simulations/regional-assets/catalog.json",
+    "sha256": "7f0b2d85151fafa81e4f6b4b3d7c5c4ccb6a9a4524671c42addfe1ec508f9b9f",
+    "bytes": 2940
+  },
+  {
+    "file": "simulations/regional-assets/WW-139.glb",
+    "sha256": "f49640cfa1aca62ebb68279521625f3da8bd30b18065a95449380c3d9ae83a4c",
+    "bytes": 434940
+  },
+  {
+    "file": "simulations/regional-assets/WW-273.glb",
+    "sha256": "4cd3fac423a79efdcf365a991ed856e11f4c8143cabe0dded446d62fa5703273",
+    "bytes": 583324
+  },
+  {
+    "file": "simulations/regional-assets/WW-528.glb",
+    "sha256": "ebaf3b040c376a18c7dbf7ee52257594f3ce08dc81160d2952d03b818b112877",
+    "bytes": 115916
+  },
+  {
+    "file": "simulations/glass-house/inertia-layers.mjs",
+    "sha256": "f75abe1cc5c77eede83a5e6e92c12256ca4f77ddceca2ac7a17f2df9040cfc4d",
+    "bytes": 4004
+  },
+  {
+    "file": "simulations/glass-house/sandbox-inertia.mjs",
+    "sha256": "029119be228ab246cae4d6c637a176d4cc866c8eea3a8d1c816184fc38b714b4",
+    "bytes": 1103
+  },
+  {
+    "file": "simulations/glass-house/vendor/three.module.js",
+    "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+    "bytes": 1314681
+  },
+  {
+    "file": "simulations/vendor/three.module.js",
+    "sha256": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+    "bytes": 1314681
+  },
+  {
+    "file": "simulations/vendor/sandbox-camera.mjs",
+    "sha256": "323cd22e9f9662ba7b0d7d8ba3e9c36fb9a3f39226fd7f04fa287df5e43ad34b",
+    "bytes": 1114
+  },
+  {
+    "file": "simulations/vendor/OrbitControls.js",
+    "sha256": "80efaadea4f8a636a65fb0bd08bfef62f3d93a0bb94e2e7500f23176c5c07f4e",
+    "bytes": 32134
+  },
+  {
+    "file": "simulations/vendor/utils/BufferGeometryUtils.js",
+    "sha256": "c25b7930e570e9ec56173cd3b866ec8d2e10016630db3937efb439daf1cedbf6",
+    "bytes": 31768
+  },
+  {
+    "file": "simulations/vendor/loaders/GLTFLoader.js",
+    "sha256": "45139faddd5aaf48ed2d62203d976e5cbd703db1a592de40527f9f6cf58abd44",
+    "bytes": 110273
+  }
+]

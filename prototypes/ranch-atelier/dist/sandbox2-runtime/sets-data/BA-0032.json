@@ -1,0 +1,46 @@
+{
+  "id": "aw.ranch.asset.ba-0032",
+  "name": "Balance support stand",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 5,
+    "triangles": 200,
+    "bounds_min": [
+      -0.20999999344348907,
+      -0.1599999964237213,
+      0.0
+    ],
+    "bounds_max": [
+      0.28161635994911194,
+      0.1599999964237213,
+      0.8059999942779541
+    ],
+    "dimensions_m": [
+      0.4916,
+      0.32,
+      0.806
+    ],
+    "material_slots": [
+      "Timber",
+      "Bronze"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Timber",
+    "Bronze"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0032",
+  "intent": "A tabletop upright with a hook for the portable balance.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0032",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

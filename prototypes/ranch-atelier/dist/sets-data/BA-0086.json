@@ -1,0 +1,66 @@
+{
+  "id": "aw.ranch.asset.ba-0086",
+  "name": "River fish seller",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 219,
+    "triangles": 9178,
+    "bounds_min": [
+      -0.4614492356777191,
+      -0.48152223229408264,
+      0.0
+    ],
+    "bounds_max": [
+      0.4197799563407898,
+      0.20899999141693115,
+      1.6054999828338623
+    ],
+    "dimensions_m": [
+      0.8812,
+      0.6905,
+      1.6055
+    ],
+    "material_slots": [
+      "CharacterReed",
+      "CharacterWood",
+      "CharacterHair",
+      "CharacterSkinOchre",
+      "CharacterEye",
+      "CharacterFish",
+      "CharacterLeather",
+      "CharacterClay",
+      "CharacterSage",
+      "CharacterLinen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 10
+  },
+  "materials": [
+    "CharacterReed",
+    "CharacterWood",
+    "CharacterHair",
+    "CharacterSkinOchre",
+    "CharacterEye",
+    "CharacterFish",
+    "CharacterLeather",
+    "CharacterClay",
+    "CharacterSage",
+    "CharacterLinen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0086",
+  "intent": "River work clothing and net carrying accessories.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0086",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

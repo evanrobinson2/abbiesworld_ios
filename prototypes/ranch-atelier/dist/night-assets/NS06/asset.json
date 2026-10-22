@@ -1,0 +1,1483 @@
+{
+  "name": "Faded Stripe Corner Shop Frontage",
+  "rationale": "Full-scale modular shop frontage with narrow weathered brick piers, two genuinely glazed display openings, and an unobstructed central doorway. Recessed lower panels, metal kickplates, projecting sills, layered door framing, a blank framed sign and a deep striped awning provide readable construction detail. The frontage faces negative Y. No wall backs the glazing, and no floor, threshold slab or diorama base is included.",
+  "dimensionsM": {
+    "widthX": 4.2,
+    "depthY": 1.2,
+    "heightZ": 3.0,
+    "boundsMin": [
+      -2.1,
+      -0.9,
+      0.0
+    ],
+    "boundsMax": [
+      2.1,
+      0.3,
+      3.0
+    ],
+    "rotationUnits": "degrees"
+  },
+  "animation": {
+    "implemented": false,
+    "description": "Static architectural assembly with an open doorway and fixed awning.",
+    "partAxes": []
+  },
+  "parts": [
+    {
+      "name": "Brick_Pier_Outer_Left",
+      "primitive": "box",
+      "colorhex": "#806454",
+      "location": [
+        -2.015,
+        0.15,
+        1.15
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.3,
+        2.3
+      ]
+    },
+    {
+      "name": "Brick_Pier_Door_Left",
+      "primitive": "box",
+      "colorhex": "#896957",
+      "location": [
+        -0.605,
+        0.15,
+        1.15
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.3,
+        2.3
+      ]
+    },
+    {
+      "name": "Brick_Pier_Door_Right",
+      "primitive": "box",
+      "colorhex": "#82604F",
+      "location": [
+        0.605,
+        0.15,
+        1.15
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.3,
+        2.3
+      ]
+    },
+    {
+      "name": "Brick_Pier_Outer_Right",
+      "primitive": "box",
+      "colorhex": "#886B59",
+      "location": [
+        2.015,
+        0.15,
+        1.15
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.3,
+        2.3
+      ]
+    },
+    {
+      "name": "Outer_Left_Mortar_01",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        -2.015,
+        -0.004,
+        0.46
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Outer_Left_Mortar_02",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        -2.015,
+        -0.004,
+        0.92
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Outer_Left_Mortar_03",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        -2.015,
+        -0.004,
+        1.38
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Outer_Left_Mortar_04",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        -2.015,
+        -0.004,
+        1.84
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Door_Left_Mortar_01",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        -0.605,
+        -0.004,
+        0.46
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Door_Left_Mortar_02",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        -0.605,
+        -0.004,
+        0.92
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Door_Left_Mortar_03",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        -0.605,
+        -0.004,
+        1.38
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Door_Left_Mortar_04",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        -0.605,
+        -0.004,
+        1.84
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Door_Right_Mortar_01",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        0.605,
+        -0.004,
+        0.46
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Door_Right_Mortar_02",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        0.605,
+        -0.004,
+        0.92
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Door_Right_Mortar_03",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        0.605,
+        -0.004,
+        1.38
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Door_Right_Mortar_04",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        0.605,
+        -0.004,
+        1.84
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.15,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Outer_Right_Mortar_01",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        2.015,
+        -0.004,
+        0.46
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Outer_Right_Mortar_02",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        2.015,
+        -0.004,
+        0.92
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Outer_Right_Mortar_03",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        2.015,
+        -0.004,
+        1.38
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Outer_Right_Mortar_04",
+      "primitive": "box",
+      "colorhex": "#A09481",
+      "location": [
+        2.015,
+        -0.004,
+        1.84
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.17,
+        0.012,
+        0.016
+      ]
+    },
+    {
+      "name": "Left_Window_Lower_Timber_Panel",
+      "primitive": "box",
+      "colorhex": "#455650",
+      "location": [
+        -1.305,
+        0.145,
+        0.35
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.24,
+        0.58
+      ]
+    },
+    {
+      "name": "Right_Window_Lower_Timber_Panel",
+      "primitive": "box",
+      "colorhex": "#495A53",
+      "location": [
+        1.305,
+        0.145,
+        0.35
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.24,
+        0.58
+      ]
+    },
+    {
+      "name": "Left_Window_Outer_Jamb",
+      "primitive": "box",
+      "colorhex": "#526159",
+      "location": [
+        -1.895,
+        0.02,
+        1.475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.07,
+        0.14,
+        1.53
+      ]
+    },
+    {
+      "name": "Left_Window_Inner_Jamb",
+      "primitive": "box",
+      "colorhex": "#526159",
+      "location": [
+        -0.715,
+        0.02,
+        1.475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.07,
+        0.14,
+        1.53
+      ]
+    },
+    {
+      "name": "Left_Window_Head_Rail",
+      "primitive": "box",
+      "colorhex": "#526159",
+      "location": [
+        -1.305,
+        0.02,
+        2.24
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.14,
+        0.08
+      ]
+    },
+    {
+      "name": "Left_Window_Bottom_Rail",
+      "primitive": "box",
+      "colorhex": "#59675D",
+      "location": [
+        -1.305,
+        0.02,
+        0.73
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.14,
+        0.06
+      ]
+    },
+    {
+      "name": "Right_Window_Inner_Jamb",
+      "primitive": "box",
+      "colorhex": "#526159",
+      "location": [
+        0.715,
+        0.02,
+        1.475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.07,
+        0.14,
+        1.53
+      ]
+    },
+    {
+      "name": "Right_Window_Outer_Jamb",
+      "primitive": "box",
+      "colorhex": "#526159",
+      "location": [
+        1.895,
+        0.02,
+        1.475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.07,
+        0.14,
+        1.53
+      ]
+    },
+    {
+      "name": "Right_Window_Head_Rail",
+      "primitive": "box",
+      "colorhex": "#526159",
+      "location": [
+        1.305,
+        0.02,
+        2.24
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.14,
+        0.08
+      ]
+    },
+    {
+      "name": "Right_Window_Bottom_Rail",
+      "primitive": "box",
+      "colorhex": "#59675D",
+      "location": [
+        1.305,
+        0.02,
+        0.73
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.25,
+        0.14,
+        0.06
+      ]
+    },
+    {
+      "name": "Left_Display_Clear_Glass",
+      "primitive": "box",
+      "colorhex": "#D3DFDB",
+      "location": [
+        -1.305,
+        0.065,
+        1.475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.12,
+        0.012,
+        1.46
+      ],
+      "material": {
+        "metallic": 0.0,
+        "roughness": 0.09,
+        "transmission": 1.0,
+        "ior": 1.45
+      }
+    },
+    {
+      "name": "Right_Display_Clear_Glass",
+      "primitive": "box",
+      "colorhex": "#D3DFDB",
+      "location": [
+        1.305,
+        0.065,
+        1.475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.12,
+        0.012,
+        1.46
+      ],
+      "material": {
+        "metallic": 0.0,
+        "roughness": 0.09,
+        "transmission": 1.0,
+        "ior": 1.45
+      }
+    },
+    {
+      "name": "Left_Window_Center_Mullion",
+      "primitive": "box",
+      "colorhex": "#526159",
+      "location": [
+        -1.305,
+        0.015,
+        1.475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.035,
+        0.105,
+        1.46
+      ]
+    },
+    {
+      "name": "Right_Window_Center_Mullion",
+      "primitive": "box",
+      "colorhex": "#526159",
+      "location": [
+        1.305,
+        0.015,
+        1.475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.035,
+        0.105,
+        1.46
+      ]
+    },
+    {
+      "name": "Left_Window_Transom_Bar",
+      "primitive": "box",
+      "colorhex": "#59675D",
+      "location": [
+        -1.305,
+        0.012,
+        1.96
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.12,
+        0.11,
+        0.045
+      ]
+    },
+    {
+      "name": "Right_Window_Transom_Bar",
+      "primitive": "box",
+      "colorhex": "#59675D",
+      "location": [
+        1.305,
+        0.012,
+        1.96
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.12,
+        0.11,
+        0.045
+      ]
+    },
+    {
+      "name": "Left_Projecting_Stone_Sill",
+      "primitive": "box",
+      "colorhex": "#A49D8A",
+      "location": [
+        -1.305,
+        -0.015,
+        0.67
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.29,
+        0.34,
+        0.08
+      ]
+    },
+    {
+      "name": "Right_Projecting_Stone_Sill",
+      "primitive": "box",
+      "colorhex": "#A09986",
+      "location": [
+        1.305,
+        -0.015,
+        0.67
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.29,
+        0.34,
+        0.08
+      ]
+    },
+    {
+      "name": "Left_Window_Metal_Kickplate",
+      "primitive": "box",
+      "colorhex": "#686B63",
+      "location": [
+        -1.305,
+        0.019,
+        0.17
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.16,
+        0.018,
+        0.2
+      ],
+      "material": {
+        "metallic": 0.7,
+        "roughness": 0.58
+      }
+    },
+    {
+      "name": "Right_Window_Metal_Kickplate",
+      "primitive": "box",
+      "colorhex": "#707168",
+      "location": [
+        1.305,
+        0.019,
+        0.17
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.16,
+        0.018,
+        0.2
+      ],
+      "material": {
+        "metallic": 0.7,
+        "roughness": 0.58
+      }
+    },
+    {
+      "name": "Open_Doorway_Left_Jamb",
+      "primitive": "box",
+      "colorhex": "#4A5B53",
+      "location": [
+        -0.5025,
+        0.1,
+        1.13
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.055,
+        0.34,
+        2.26
+      ]
+    },
+    {
+      "name": "Open_Doorway_Right_Jamb",
+      "primitive": "box",
+      "colorhex": "#4A5B53",
+      "location": [
+        0.5025,
+        0.1,
+        1.13
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.055,
+        0.34,
+        2.26
+      ]
+    },
+    {
+      "name": "Open_Doorway_Header",
+      "primitive": "box",
+      "colorhex": "#4A5B53",
+      "location": [
+        0,
+        0.1,
+        2.27
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        1.06,
+        0.34,
+        0.1
+      ]
+    },
+    {
+      "name": "Door_Left_Rebate_Trim",
+      "primitive": "box",
+      "colorhex": "#6A7567",
+      "location": [
+        -0.483,
+        -0.075,
+        1.11
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.03,
+        0.045,
+        2.22
+      ]
+    },
+    {
+      "name": "Door_Right_Rebate_Trim",
+      "primitive": "box",
+      "colorhex": "#6A7567",
+      "location": [
+        0.483,
+        -0.075,
+        1.11
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.03,
+        0.045,
+        2.22
+      ]
+    },
+    {
+      "name": "Door_Header_Rebate_Trim",
+      "primitive": "box",
+      "colorhex": "#6A7567",
+      "location": [
+        0,
+        -0.075,
+        2.225
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.996,
+        0.045,
+        0.035
+      ]
+    },
+    {
+      "name": "Continuous_Structural_Lintel",
+      "primitive": "box",
+      "colorhex": "#797467",
+      "location": [
+        0,
+        0.15,
+        2.425
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        4.2,
+        0.3,
+        0.25
+      ]
+    },
+    {
+      "name": "Blank_Shop_Sign_Board",
+      "primitive": "box",
+      "colorhex": "#C2BBA3",
+      "location": [
+        0,
+        0.13,
+        2.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        4.08,
+        0.18,
+        0.5
+      ]
+    },
+    {
+      "name": "Sign_Frame_Top",
+      "primitive": "box",
+      "colorhex": "#46554E",
+      "location": [
+        0,
+        0.015,
+        2.97
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        4.2,
+        0.07,
+        0.06
+      ]
+    },
+    {
+      "name": "Sign_Frame_Bottom",
+      "primitive": "box",
+      "colorhex": "#46554E",
+      "location": [
+        0,
+        0.015,
+        2.53
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        4.2,
+        0.07,
+        0.06
+      ]
+    },
+    {
+      "name": "Sign_Frame_Left",
+      "primitive": "box",
+      "colorhex": "#46554E",
+      "location": [
+        -2.06,
+        0.015,
+        2.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.08,
+        0.07,
+        0.5
+      ]
+    },
+    {
+      "name": "Sign_Frame_Right",
+      "primitive": "box",
+      "colorhex": "#46554E",
+      "location": [
+        2.06,
+        0.015,
+        2.75
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.08,
+        0.07,
+        0.5
+      ]
+    },
+    {
+      "name": "Awning_Canvas_Stripe_01",
+      "primitive": "box",
+      "colorhex": "#778373",
+      "location": [
+        -1.8375,
+        -0.385,
+        2.43
+      ],
+      "rotation": [
+        17.879,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.9772,
+        0.045
+      ]
+    },
+    {
+      "name": "Awning_Canvas_Stripe_02",
+      "primitive": "box",
+      "colorhex": "#C7BFA5",
+      "location": [
+        -1.3125,
+        -0.385,
+        2.43
+      ],
+      "rotation": [
+        17.879,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.9772,
+        0.045
+      ]
+    },
+    {
+      "name": "Awning_Canvas_Stripe_03",
+      "primitive": "box",
+      "colorhex": "#7D8775",
+      "location": [
+        -0.7875,
+        -0.385,
+        2.43
+      ],
+      "rotation": [
+        17.879,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.9772,
+        0.045
+      ]
+    },
+    {
+      "name": "Awning_Canvas_Stripe_04",
+      "primitive": "box",
+      "colorhex": "#C2BAA1",
+      "location": [
+        -0.2625,
+        -0.385,
+        2.43
+      ],
+      "rotation": [
+        17.879,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.9772,
+        0.045
+      ]
+    },
+    {
+      "name": "Awning_Canvas_Stripe_05",
+      "primitive": "box",
+      "colorhex": "#75816F",
+      "location": [
+        0.2625,
+        -0.385,
+        2.43
+      ],
+      "rotation": [
+        17.879,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.9772,
+        0.045
+      ]
+    },
+    {
+      "name": "Awning_Canvas_Stripe_06",
+      "primitive": "box",
+      "colorhex": "#CBC2AA",
+      "location": [
+        0.7875,
+        -0.385,
+        2.43
+      ],
+      "rotation": [
+        17.879,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.9772,
+        0.045
+      ]
+    },
+    {
+      "name": "Awning_Canvas_Stripe_07",
+      "primitive": "box",
+      "colorhex": "#7A8473",
+      "location": [
+        1.3125,
+        -0.385,
+        2.43
+      ],
+      "rotation": [
+        17.879,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.9772,
+        0.045
+      ]
+    },
+    {
+      "name": "Awning_Canvas_Stripe_08",
+      "primitive": "box",
+      "colorhex": "#C5BCA3",
+      "location": [
+        1.8375,
+        -0.385,
+        2.43
+      ],
+      "rotation": [
+        17.879,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.9772,
+        0.045
+      ]
+    },
+    {
+      "name": "Awning_Hanging_Valance_01",
+      "primitive": "box",
+      "colorhex": "#6D7969",
+      "location": [
+        -1.8375,
+        -0.87,
+        2.185
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.06,
+        0.19
+      ]
+    },
+    {
+      "name": "Awning_Hanging_Valance_02",
+      "primitive": "box",
+      "colorhex": "#BEB59C",
+      "location": [
+        -1.3125,
+        -0.87,
+        2.185
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.06,
+        0.19
+      ]
+    },
+    {
+      "name": "Awning_Hanging_Valance_03",
+      "primitive": "box",
+      "colorhex": "#737D6B",
+      "location": [
+        -0.7875,
+        -0.87,
+        2.185
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.06,
+        0.19
+      ]
+    },
+    {
+      "name": "Awning_Hanging_Valance_04",
+      "primitive": "box",
+      "colorhex": "#BAB198",
+      "location": [
+        -0.2625,
+        -0.87,
+        2.185
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.06,
+        0.19
+      ]
+    },
+    {
+      "name": "Awning_Hanging_Valance_05",
+      "primitive": "box",
+      "colorhex": "#6B7765",
+      "location": [
+        0.2625,
+        -0.87,
+        2.185
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.06,
+        0.19
+      ]
+    },
+    {
+      "name": "Awning_Hanging_Valance_06",
+      "primitive": "box",
+      "colorhex": "#C1B89F",
+      "location": [
+        0.7875,
+        -0.87,
+        2.185
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.06,
+        0.19
+      ]
+    },
+    {
+      "name": "Awning_Hanging_Valance_07",
+      "primitive": "box",
+      "colorhex": "#707A69",
+      "location": [
+        1.3125,
+        -0.87,
+        2.185
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.06,
+        0.19
+      ]
+    },
+    {
+      "name": "Awning_Hanging_Valance_08",
+      "primitive": "box",
+      "colorhex": "#BBB299",
+      "location": [
+        1.8375,
+        -0.87,
+        2.185
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.525,
+        0.06,
+        0.19
+      ]
+    },
+    {
+      "name": "Awning_Left_Steel_Support_Arm",
+      "primitive": "beam",
+      "colorhex": "#4D514B",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -1.87,
+        -0.025,
+        2.18
+      ],
+      "end": [
+        -1.87,
+        -0.84,
+        2.285
+      ],
+      "radius": 0.018
+    },
+    {
+      "name": "Awning_Right_Steel_Support_Arm",
+      "primitive": "beam",
+      "colorhex": "#4D514B",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        1.87,
+        -0.025,
+        2.18
+      ],
+      "end": [
+        1.87,
+        -0.84,
+        2.285
+      ],
+      "radius": 0.018
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 126.94558000564575,
+    "usage": {
+      "prompt_tokens": 250,
+      "completion_tokens": 7960,
+      "total_tokens": 8210,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1536,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

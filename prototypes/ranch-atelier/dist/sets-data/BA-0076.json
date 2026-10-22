@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0076",
+  "name": "Pottery sherd ground scatter",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 12,
+    "triangles": 192,
+    "bounds_min": [
+      -0.6192684173583984,
+      -0.4145408272743225,
+      0.0
+    ],
+    "bounds_max": [
+      0.41257381439208984,
+      0.40009504556655884,
+      0.03761271387338638
+    ],
+    "dimensions_m": [
+      1.0318,
+      0.8146,
+      0.0376
+    ],
+    "material_slots": [
+      "ClayLight",
+      "Clay"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "ClayLight",
+    "Clay"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0076",
+  "intent": "A small nonblocking cluster near the pottery seller.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0076",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

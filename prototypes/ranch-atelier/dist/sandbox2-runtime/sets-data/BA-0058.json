@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0058",
+  "name": "Cart wheel seller display",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 20,
+    "triangles": 1336,
+    "bounds_min": [
+      -0.5600000023841858,
+      -0.4750000238418579,
+      0.0
+    ],
+    "bounds_max": [
+      0.8600000143051147,
+      0.375,
+      1.2000000476837158
+    ],
+    "dimensions_m": [
+      1.42,
+      0.85,
+      1.2
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Stone",
+      "Timber"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "TimberLight",
+    "Stone",
+    "Timber"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0058",
+  "intent": "A wheel on its stand with a hub blank and axle sample.",
+  "family": "Craft displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0058",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0037",
+  "name": "Merchant counting pebble tray",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 18,
+    "triangles": 1552,
+    "bounds_min": [
+      -0.2524999976158142,
+      -0.17249999940395355,
+      0.0
+    ],
+    "bounds_max": [
+      0.2524999976158142,
+      0.17249999940395355,
+      0.10999999940395355
+    ],
+    "dimensions_m": [
+      0.505,
+      0.345,
+      0.11
+    ],
+    "material_slots": [
+      "Stone",
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Stone",
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0037",
+  "intent": "A recessed tray with movable pebbles for a fictional counting practice.",
+  "family": "Measures and exchange",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0037",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,324 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RE-073",
+  "name": "Aurora large shell VTOL ferry",
+  "version": "0.1.2",
+  "auxiliary": true,
+  "set": "rocketship-exterior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Exactly twice RE-072 in each physical dimension; retains approved shell and four downward landing engines.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-exterior/re-073",
+  "biome": "rocketship-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 5,
+    "triangles": 38512,
+    "bounds_min": [
+      -6.377018928527832,
+      -6.568498611450195,
+      0.0
+    ],
+    "bounds_max": [
+      6.377018928527832,
+      6.525579929351807,
+      7.167777061462402
+    ],
+    "dimensions_m": [
+      12.754037857055664,
+      13.094078540802002,
+      7.167777061462402
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "Large Earth\u2013Moon ferry",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "land",
+      "depart"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "airlock.001",
+        "position_blender_m": [
+          4.61649227142334,
+          -1.3106143474578857,
+          1.4671056270599365
+        ],
+        "role": "airlock"
+      },
+      {
+        "id": "engine-port.001",
+        "position_blender_m": [
+          -4.636053562164307,
+          2.190877676010132,
+          3.9122815132141113
+        ],
+        "role": "engine-port"
+      },
+      {
+        "id": "engine-starboard.001",
+        "position_blender_m": [
+          4.636053562164307,
+          2.190877676010132,
+          3.9122815132141113
+        ],
+        "role": "engine-starboard"
+      },
+      {
+        "id": "landing-origin.001",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "role": "landing-origin"
+      },
+      {
+        "id": "thrust-aft-port.001",
+        "position_blender_m": [
+          -1.7605266571044922,
+          2.3473689556121826,
+          1.1932458877563477
+        ],
+        "role": "thrust-aft-port"
+      },
+      {
+        "id": "thrust-aft-starboard.001",
+        "position_blender_m": [
+          1.7605266571044922,
+          2.3473689556121826,
+          1.1932458877563477
+        ],
+        "role": "thrust-aft-starboard"
+      },
+      {
+        "id": "thrust-front-port.001",
+        "position_blender_m": [
+          -1.7605266571044922,
+          -2.3473689556121826,
+          1.1932458877563477
+        ],
+        "role": "thrust-front-port"
+      },
+      {
+        "id": "thrust-front-starboard.001",
+        "position_blender_m": [
+          1.7605266571044922,
+          -2.3473689556121826,
+          1.1932458877563477
+        ],
+        "role": "thrust-front-starboard"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "docked",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "in-flight",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Exactly twice RE-072 in each physical dimension; retains approved shell and four downward landing engines. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See ship(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-exterior/batch_shell_vtol.py",
+    "entry_point": "ship",
+    "source_sha256": "bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-exterior batch_shell_vtol.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RE-073",
+    "build_inputs_sha256": {
+      "rocketship-exterior/batch_shell_vtol.py": "bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650",
+      "production/build_scene_batch.py": "ee9388985dec24b324d75e81fb867e92abc6b13da47e412fd128ea824e2b1b4d",
+      "production/render_micro.py": "6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449",
+      "garden-farm/build_garden.py": "2917c0fe1f3e25850af16986dacde582013f4dfe4ab08018c78b6431864ca32b",
+      "market-village/build_market.py": "70c1bc50a2a77f6dcb69c02842a7e7901bd12aebcd7a66912f5308832178a420",
+      "market-village/asset_helpers.py": "113ec16c31b088557de6e6589c950f575dc37a2dd96577b3bba01415967ffd3e",
+      "market-village/architecture.py": "7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3"
+    },
+    "source_snapshots": {
+      "rocketship-exterior/batch_shell_vtol.py": "production/source-snapshots/bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650.py",
+      "production/build_scene_batch.py": "production/source-snapshots/ee9388985dec24b324d75e81fb867e92abc6b13da47e412fd128ea824e2b1b4d.py",
+      "production/render_micro.py": "production/source-snapshots/6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449.py",
+      "garden-farm/build_garden.py": "production/source-snapshots/2917c0fe1f3e25850af16986dacde582013f4dfe4ab08018c78b6431864ca32b.py",
+      "market-village/build_market.py": "production/source-snapshots/70c1bc50a2a77f6dcb69c02842a7e7901bd12aebcd7a66912f5308832178a420.py",
+      "market-village/asset_helpers.py": "production/source-snapshots/113ec16c31b088557de6e6589c950f575dc37a2dd96577b3bba01415967ffd3e.py",
+      "market-village/architecture.py": "production/source-snapshots/7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3.py"
+    },
+    "profile_evidence": "moon-vtol-release/profiles/20261021T054225Z-811d8e"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Approved visual 2x derivative of the reviewed rounded shell ferry. Inspected the exact asset card and front/rear assembly renders: the closed shell, cockpit, spherical shoulder pods and connected landing struts remain coherent; USS AURORA is fully spelled and legible in the close assembly view. All four feet visibly seat on the support rails, belly nozzle locations remain in the open central region, and the ship has a clear vertical lift path. Static appearance approval only; no propulsion, boarding or engineering certification is implied.",
+    "deployed": false,
+    "catalog_include": true,
+    "visual_review_passed": true,
+    "review_note": "Approved visual 2x derivative of the reviewed rounded shell ferry. Inspected the exact asset card and front/rear assembly renders: the closed shell, cockpit, spherical shoulder pods and connected landing struts remain coherent; USS AURORA is fully spelled and legible in the close assembly view. All four feet visibly seat on the support rails, belly nozzle locations remain in the open central region, and the ship has a clear vertical lift path. Static appearance approval only; no propulsion, boarding or engineering certification is implied."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    },
+    {
+      "version": "0.1.1",
+      "change": "Rebuilt authored geometry/metadata; review must be renewed.",
+      "createdAt": 1792561283.118227,
+      "previous_glb_sha256": "35548547496404916172614a1b27d910369b98b42f41e5a059485ff1cdd716a8",
+      "source_sha256": "85ac8ff5e111089bc1233e8536d7a50f669d7f859ada6926a2edafea50faf8fe"
+    },
+    {
+      "version": "0.1.2",
+      "change": "Rebuilt authored geometry/metadata; review must be renewed.",
+      "createdAt": 1792561347.33115,
+      "previous_glb_sha256": "a0ab136dc6659e0b6adf50ad50cc1039262656fd2312c66d7411163481e9fea4",
+      "source_sha256": "bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650"
+    }
+  ],
+  "authoredSpec": {
+    "id": "RE-073",
+    "name": "Aurora large shell VTOL ferry",
+    "category": "structure",
+    "intent": "Exactly twice RE-072 in each physical dimension; retains approved shell and four downward landing engines.",
+    "role": "Large Earth\u2013Moon ferry",
+    "actions": [
+      "inspect",
+      "land",
+      "depart"
+    ],
+    "anchors": [
+      [
+        "landing-origin",
+        [
+          0,
+          0,
+          0
+        ]
+      ],
+      [
+        "thrust-front-port",
+        [
+          -1.7605267,
+          -2.347369,
+          1.1932459000000002
+        ]
+      ],
+      [
+        "thrust-front-starboard",
+        [
+          1.7605267,
+          -2.347369,
+          1.1932459
+        ]
+      ],
+      [
+        "thrust-aft-port",
+        [
+          -1.7605267,
+          2.347369,
+          1.1932459
+        ]
+      ],
+      [
+        "thrust-aft-starboard",
+        [
+          1.7605267,
+          2.347369,
+          1.1932459
+        ]
+      ]
+    ],
+    "variants": [
+      "docked",
+      "in-flight"
+    ],
+    "base_increment": 0,
+    "canonical_base_id": "RE-072",
+    "lineage_reason": "User-requested exact 2x physical size derivative",
+    "intended_longest_dimension_range_m": [
+      13,
+      13.2
+    ],
+    "limitations": [
+      "Exterior only",
+      "No real propulsion physics"
+    ]
+  },
+  "baseIncrement": 0,
+  "derivation": {},
+  "lineage": {
+    "uniqueBaseIncrement": false,
+    "canonicalBaseId": "RE-072",
+    "relationship": "User-requested exact 2x physical size derivative"
+  },
+  "files": {
+    "glb": "RE-073.glb",
+    "sha256": "c012ace6894f297984baf1a157203dc18346ef27eaa4caa33fdec0cb4fac2796",
+    "bytes": 2229836
+  }
+}

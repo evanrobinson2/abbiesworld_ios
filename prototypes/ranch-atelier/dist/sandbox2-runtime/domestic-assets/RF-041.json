@@ -1,0 +1,162 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RF-041",
+  "name": "Overflow clay levigation chambers",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocky-foothills",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Separate settling and fine-clay receiving beds through an overflow wall.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocky-foothills/rf-041",
+  "biome": "rocky-foothills",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 14,
+    "triangles": 552,
+    "bounds_min": [
+      -1.0299999713897705,
+      -0.4099999964237213,
+      0.0
+    ],
+    "bounds_max": [
+      1.0299999713897705,
+      0.4099999964237213,
+      0.47999998927116394
+    ],
+    "dimensions_m": [
+      2.06,
+      0.82,
+      0.48
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "clay-refining",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "mix",
+      "settle",
+      "transfer",
+      "clear"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "work",
+        "position_blender_m": [
+          0.0,
+          -0.699999988079071,
+          0.0
+        ],
+        "role": "work"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocky-foothills",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "empty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "filled",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "settled",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "cleared",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Separate settling and fine-clay receiving beds through an overflow wall. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See levigate(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocky-foothills/batch_foothills_5.py",
+    "entry_point": "levigate",
+    "source_sha256": "c60c6a957b5de28c03a534e1f1fc38aae2bff80776b98f29bbc7495906e91856",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocky-foothills batch_foothills_5.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RF-041"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Passed rendered PNG contact-sheet inspection: intended functional silhouette, material separation and readable working detail.",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Passed rendered PNG contact-sheet inspection: intended functional silhouette, material separation and readable working detail."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RF-041.glb",
+    "sha256": "7fbd518576ba0feff29c32acfa350c4339e914a0fa0cbeb20a5826f81fbf279e",
+    "bytes": 38140
+  }
+}

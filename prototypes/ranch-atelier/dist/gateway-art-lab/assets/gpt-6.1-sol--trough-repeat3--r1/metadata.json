@@ -1,0 +1,10 @@
+{
+  "animationRanges": {
+    "water_state": [
+      1,
+      60
+    ]
+  },
+  "notes": "Hollow 1.8 m timber trough with continuous metal liner, grounded braced legs and bolted straps. Low-cost single-segment timber bevels and unbeveled small hardware keep geometry under 5000 triangles. Separate water drains inside the tapered cavity and is completely concealed beneath the opaque metal floor at frame 60.",
+  "blenderVersion": "5.2.1 LTS"
+}

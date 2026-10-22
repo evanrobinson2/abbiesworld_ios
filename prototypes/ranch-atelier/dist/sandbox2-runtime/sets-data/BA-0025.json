@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0025",
+  "name": "Small stoppered oil flask",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 4,
+    "triangles": 1092,
+    "bounds_min": [
+      -0.11999999731779099,
+      -0.11999999731779099,
+      0.0
+    ],
+    "bounds_max": [
+      0.2070000171661377,
+      0.11999999731779099,
+      0.34200000762939453
+    ],
+    "dimensions_m": [
+      0.327,
+      0.24,
+      0.342
+    ],
+    "material_slots": [
+      "ClayLight",
+      "TimberLight",
+      "Clay"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "ClayLight",
+    "TimberLight",
+    "Clay"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0025",
+  "intent": "A narrow necked ceramic vessel with a removable stopper.",
+  "family": "Trade containers",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0025",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

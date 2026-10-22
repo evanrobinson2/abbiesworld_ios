@@ -1,0 +1,10 @@
+{
+  "animationRanges": {
+    "water_state": [
+      1,
+      60
+    ]
+  },
+  "notes": "1.8 x 0.7 x 0.65 m timber trough, genuinely hollow galvanized pan, grounded braced trestles. water_state: full at frame 1, empty at 60; the separate water surface lowers and narrows inside the tapered pan, finishing below its floor.",
+  "blenderVersion": "5.2.1 LTS"
+}

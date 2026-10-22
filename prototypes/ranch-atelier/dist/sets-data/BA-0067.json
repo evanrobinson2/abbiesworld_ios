@@ -1,0 +1,53 @@
+{
+  "id": "aw.ranch.asset.ba-0067",
+  "name": "Market sweeping kit",
+  "dependencies": [
+    "BA-0021"
+  ],
+  "geometry": {
+    "mesh_objects": 82,
+    "triangles": 5212,
+    "bounds_min": [
+      -0.708193302154541,
+      -0.30000001192092896,
+      0.010799996554851532
+    ],
+    "bounds_max": [
+      0.6857500076293945,
+      0.40575000643730164,
+      1.2424119710922241
+    ],
+    "dimensions_m": [
+      1.3939,
+      0.7058,
+      1.2316
+    ],
+    "material_slots": [
+      "Reed",
+      "Rope",
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "Reed",
+    "Rope",
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0067",
+  "intent": "A bound twig broom, shallow scoop, and waste basket.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0067",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

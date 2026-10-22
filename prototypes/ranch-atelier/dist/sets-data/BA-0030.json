@@ -1,0 +1,50 @@
+{
+  "id": "aw.ranch.asset.ba-0030",
+  "name": "Shoulder carrying basket",
+  "dependencies": [
+    "BA-0021"
+  ],
+  "geometry": {
+    "mesh_objects": 65,
+    "triangles": 5200,
+    "bounds_min": [
+      -0.3009999990463257,
+      -0.3863694965839386,
+      0.005999998189508915
+    ],
+    "bounds_max": [
+      0.3009999990463257,
+      0.31792598962783813,
+      0.9770204424858093
+    ],
+    "dimensions_m": [
+      0.602,
+      0.7043,
+      0.971
+    ],
+    "material_slots": [
+      "Reed",
+      "Linen",
+      "Rope"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Reed",
+    "Linen",
+    "Rope"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0030",
+  "intent": "A basket and broad strap assembly worn by a market customer.",
+  "family": "Trade containers",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0030",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

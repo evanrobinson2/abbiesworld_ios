@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><title>Tile drag visual regression</title>
+<style>body{margin:0}iframe{width:100%;height:calc(100vh - 40px);border:0}button{height:40px}</style>
+<button id="preview">Hold Crop tile drag preview</button><button id="cancel">Cancel preview</button>
+<iframe src="/tile-editor.html"></iframe>
+<script type="module">
+import * as T from '/vendor/three.module.js';
+const frame=document.querySelector('iframe');
+document.querySelector('#preview').onclick=()=>{
+ const w=frame.contentWindow,canvas=w.document.querySelector('canvas'),b=canvas.getBoundingClientRect();
+ // Synthetic pointer fixture: no physical pointer exists to capture.
+ canvas.setPointerCapture=()=>{};
+ const camera=new T.PerspectiveCamera(36,b.width/b.height,.1,500),angle=Math.min(camera.fov*Math.PI/360,Math.atan(Math.tan(camera.fov*Math.PI/360)*camera.aspect));
+ camera.position.copy(new T.Vector3(1,1.15,1.35).normalize().multiplyScalar(5*2.95/Math.sin(angle)));camera.lookAt(0,0,0);camera.updateMatrixWorld();
+ function point(x,z){const p=new T.Vector3(x,0,z).project(camera);return {clientX:b.left+(p.x+1)/2*b.width,clientY:b.top+(1-p.y)/2*b.height};}
+ canvas.dispatchEvent(new w.PointerEvent('pointerdown',{...point(4.330127,7.5),pointerId:99,button:0,bubbles:true}));
+ canvas.dispatchEvent(new w.PointerEvent('pointermove',{...point(-4.330127,7.5),pointerId:99,buttons:1,bubbles:true}));
+};
+document.querySelector('#cancel').onclick=()=>frame.contentWindow.dispatchEvent(new frame.contentWindow.KeyboardEvent('keydown',{key:'Escape'}));
+</script>

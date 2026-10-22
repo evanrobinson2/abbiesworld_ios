@@ -1,0 +1,10 @@
+{
+  "animationRanges": {
+    "water_state": [
+      1,
+      60
+    ]
+  },
+  "notes": "Hollow timber basin with galvanized liner, rim caps, straps, bolts, braced legs; separate water mesh scales Z from full to empty over frames 1-60, staying inside liner.",
+  "blenderVersion": "5.2.1 LTS"
+}

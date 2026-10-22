@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0065",
+  "name": "Porter carrying pole",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 5,
+    "triangles": 128,
+    "bounds_min": [
+      -1.107412338256836,
+      -0.04300001263618469,
+      0.2984766960144043
+    ],
+    "bounds_max": [
+      1.107412338256836,
+      0.07152331620454788,
+      1.1229851245880127
+    ],
+    "dimensions_m": [
+      2.2148,
+      0.1145,
+      0.8245
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Rope"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "TimberLight",
+    "Rope"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Carrying pose intentionally elevated above ground; baskets and porter are separate.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0065",
+  "intent": "A shaped pole with suspended basket ties at both ends.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0065",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

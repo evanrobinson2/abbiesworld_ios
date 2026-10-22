@@ -1,0 +1,43 @@
+{
+  "id": "aw.ranch.asset.ba-0021",
+  "name": "Wide shallow produce basket",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 62,
+    "triangles": 4400,
+    "bounds_min": [
+      -0.38100001215934753,
+      -0.38100001215934753,
+      0.005999998189508915
+    ],
+    "bounds_max": [
+      0.38100001215934753,
+      0.38100001215934753,
+      0.210999995470047
+    ],
+    "dimensions_m": [
+      0.762,
+      0.762,
+      0.205
+    ],
+    "material_slots": [
+      "Reed"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 1
+  },
+  "materials": [
+    "Reed"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0021",
+  "intent": "An open woven basket whose contents can be swapped.",
+  "family": "Trade containers",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0021",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

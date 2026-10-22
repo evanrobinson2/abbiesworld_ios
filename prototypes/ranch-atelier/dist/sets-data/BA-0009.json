@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0009",
+  "name": "Stall post socket stone",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 6,
+    "triangles": 264,
+    "bounds_min": [
+      -0.28999999165534973,
+      -0.28999999165534973,
+      0.0
+    ],
+    "bounds_max": [
+      0.28999999165534973,
+      0.28999999165534973,
+      0.3050000071525574
+    ],
+    "dimensions_m": [
+      0.58,
+      0.58,
+      0.305
+    ],
+    "material_slots": [
+      "Stone",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Stone",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0009",
+  "intent": "A heavy stone footing with a fitted timber socket.",
+  "family": "Stall structures",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0009",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0016",
+  "name": "Tilted produce tray stand",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 10,
+    "triangles": 296,
+    "bounds_min": [
+      -0.6499999761581421,
+      -0.42750000953674316,
+      -0.008385004475712776
+    ],
+    "bounds_max": [
+      0.6499999761581421,
+      0.42500001192092896,
+      1.0250000953674316
+    ],
+    "dimensions_m": [
+      1.3,
+      0.8525,
+      1.0334
+    ],
+    "material_slots": [
+      "TimberLight",
+      "Timber"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "TimberLight",
+    "Timber"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0016",
+  "intent": "A shallow inclined frame for removable produce trays.",
+  "family": "Display furniture",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0016",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,299 @@
+[
+  {
+    "id": "MI-003",
+    "name": "Twin-filter air scrubber cabinet",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.84,
+      0.602,
+      1.86
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-004",
+    "name": "Paired-vessel water recovery unit",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      1.05,
+      0.704,
+      1.255
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-007",
+    "name": "Habitat maintenance technician",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.74338,
+      0.468,
+      1.615
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-009",
+    "name": "Sealed medical supply cabinet",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.82,
+      0.542,
+      1.6
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-012",
+    "name": "Restrained sanitation seat",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.81,
+      0.725,
+      1.055
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-017",
+    "name": "Open-frame replacement-part printer",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.8,
+      0.75,
+      0.945
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-024",
+    "name": "Bolted communal dining table",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      2.24,
+      2.24,
+      0.92
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-033",
+    "name": "Recovery shower cubicle",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      1.05,
+      1.05,
+      2.15
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-065",
+    "name": "Drinking-bottle refill station",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.45,
+      0.555,
+      1.3
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-076",
+    "name": "Circular crew lending library",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.86,
+      0.86,
+      1.56
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-077",
+    "name": "Shared tactile strategy board",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.7,
+      0.755,
+      0.172
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RI-001",
+    "name": "Wraparound cockpit console",
+    "source": "rocketship-interior",
+    "dimensions_m": [
+      1.95347,
+      0.88,
+      1.4
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RI-002",
+    "name": "Four-point restraint crew seat",
+    "source": "rocketship-interior",
+    "dimensions_m": [
+      0.74,
+      0.875,
+      1.69
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RI-003",
+    "name": "Restrained wall sleeping berth",
+    "source": "rocketship-interior",
+    "dimensions_m": [
+      0.88,
+      0.685,
+      2.1
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RI-004",
+    "name": "Strapped cargo case rack",
+    "source": "rocketship-interior",
+    "dimensions_m": [
+      1.4,
+      0.815,
+      1.85
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RI-005",
+    "name": "Open life-support service frame",
+    "source": "rocketship-interior",
+    "dimensions_m": [
+      0.98,
+      0.62,
+      1.76
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RI-006",
+    "name": "Restrained ship galley",
+    "source": "rocketship-interior",
+    "dimensions_m": [
+      0.94,
+      1.025,
+      1.7
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RI-007",
+    "name": "Ship systems engineer",
+    "source": "rocketship-interior",
+    "dimensions_m": [
+      0.79951,
+      0.47104,
+      1.6
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RI-028",
+    "name": "Individually celled battery cassette",
+    "source": "rocketship-interior",
+    "dimensions_m": [
+      0.55,
+      0.475,
+      0.3675
+    ],
+    "scale": 1
+  },
+  {
+    "id": "SI-001",
+    "name": "Restrained sample laboratory bench",
+    "source": "space-station-interior",
+    "dimensions_m": [
+      1.7,
+      0.875,
+      1.305
+    ],
+    "scale": 1
+  },
+  {
+    "id": "SI-004",
+    "name": "Cable resistance exercise station",
+    "source": "space-station-interior",
+    "dimensions_m": [
+      0.9,
+      1.3,
+      1.8
+    ],
+    "scale": 1
+  },
+  {
+    "id": "SI-006",
+    "name": "Floating-tool restraint board",
+    "source": "space-station-interior",
+    "dimensions_m": [
+      0.9,
+      0.72,
+      0.175
+    ],
+    "scale": 1
+  },
+  {
+    "id": "SI-007",
+    "name": "Tablet-holding station crewmember",
+    "source": "space-station-interior",
+    "dimensions_m": [
+      0.65563,
+      0.487,
+      1.645
+    ],
+    "scale": 1
+  },
+  {
+    "id": "SI-009",
+    "name": "Medical restraint and monitor station",
+    "source": "space-station-interior",
+    "dimensions_m": [
+      1.95,
+      0.785,
+      1.555
+    ],
+    "scale": 1
+  },
+  {
+    "id": "MI-075",
+    "name": "Open personal clothing locker",
+    "source": "moon-base-interior",
+    "dimensions_m": [
+      0.928,
+      0.625,
+      2.0
+    ],
+    "scale": 1
+  },
+  {
+    "id": "RE-005",
+    "name": "Three-segment radiator wing",
+    "source": "rocketship-exterior",
+    "dimensions_m": [
+      2.267,
+      1.25,
+      0.5
+    ],
+    "scale": 1
+  },
+  {
+    "id": "ME-066",
+    "name": "Shielded surface heat pipe power concept",
+    "source": "moon-base-exterior",
+    "dimensions_m": [
+      1.5,
+      1.399999976158142,
+      1.6679999828338623
+    ],
+    "scale": 1
+  }
+]

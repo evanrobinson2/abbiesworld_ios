@@ -1,0 +1,9 @@
+const test=require('node:test');const assert=require('node:assert/strict');
+test('compressed card storage preserves full geometry, seeds, pins and semantics',async()=>{
+ const {createCard,encodeStoredCard,decodeStoredCard}=await import('../card-library.js');
+ const card=createCard({id:'geometry',revision:4,name:'Garden',cells:[{q:0,r:0}],recipe:{seed:41},rendition:{meshes:[{positions:Array.from({length:30000},(_,i)=>i%21),indices:[0,1,2]}]},semantics:{purpose:'food',quantities:'undecided'}});
+ const row=await encodeStoredCard(card);assert.equal(row.encoding,'gzip-json-v1');assert(row.packed.byteLength<JSON.stringify(card).length/10);assert.deepEqual(await decodeStoredCard(row),card);assert.equal(row.key,'geometry@4');assert.equal((await encodeStoredCard(card)).fingerprint,row.fingerprint);assert.notEqual((await encodeStoredCard({...card,name:'Changed'})).fingerprint,row.fingerprint);assert.equal(await decodeStoredCard({key:row.key,card}),card);assert.equal(await decodeStoredCard(undefined),null);
+ await assert.rejects(decodeStoredCard({...row,fingerprint:'wrong'}),/checksum/);await assert.rejects(decodeStoredCard({...row,key:'wrong@4'}),/identity/);
+ await assert.rejects(decodeStoredCard({...row,packed:new Uint8Array([1,2,3])}));await assert.rejects(decodeStoredCard({encoding:'future'}),/Unknown/);
+});
+test('deck metadata excludes geometry while the saved rendition remains intact',async()=>{const {createCard,encodeStoredCard,decodeStoredCard,cardSummary}=await import('../card-library.js');const card=createCard({name:'Town',cells:[{q:0,r:0}],recipe:{type:'town',generator:'district-composer',version:1,tiles:[{id:'town'}]},rendition:{meshes:[{positions:[1,2,3]}]}});const row=await encodeStoredCard(card);assert.deepEqual(row.summary,cardSummary(card));assert.equal(row.summary.rendition,undefined);assert.equal(row.summary.recipe.tiles,undefined);assert.deepEqual((await decodeStoredCard(row)).rendition,card.rendition);});

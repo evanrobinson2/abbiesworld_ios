@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RF-001.loose-clay",
+  "name": "RF-001.loose-clay",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "domestic-contents",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Workable material contents derived from existing clay bank.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/domestic-contents/rf-001.loose-clay",
+  "biome": "domestic-contents",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 7,
+    "triangles": 800,
+    "bounds_min": [
+      -0.21328702569007874,
+      -0.16699999570846558,
+      0.0
+    ],
+    "bounds_max": [
+      0.2332870364189148,
+      0.13999998569488525,
+      0.11299999803304672
+    ],
+    "dimensions_m": [
+      0.44657,
+      0.307,
+      0.113
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "contents-state",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "display proposed contents state"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "contents_bottom.002",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "role": "contents_bottom"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for domestic-contents",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Workable material contents derived from existing clay bank. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See clay(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "domestic-contents/batch_contents.py",
+    "entry_point": "clay",
+    "source_sha256": "4615a2bc0a32947b8ede6fd3a5f7347d90e84fa731dd2d941bd5766a7d9db562",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- domestic-contents batch_contents.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RF-001.loose-clay"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Inspected rendered contact sheet: readable harvested/curing bulbs, pot contents surface, and worked clay. Static contents state; no new base asset. Container placement requires assembly review.",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Inspected rendered contact sheet: readable harvested/curing bulbs, pot contents surface, and worked clay. Static contents state; no new base asset. Container placement requires assembly review."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RF-001.loose-clay.glb",
+    "sha256": "3b474e17b370aeae0322f8c71f8a02a87c8a1f4950e481bec6a2ad9e5ada33f3",
+    "bytes": 67976
+  },
+  "baseIncrement": 0,
+  "lineage": {
+    "uniqueBaseIncrement": false,
+    "canonicalBaseId": "RF-001",
+    "relationship": "contents-state"
+  },
+  "authoredSpec": {
+    "id": "RF-001.loose-clay",
+    "name": "RF-001.loose-clay",
+    "category": "inanimate",
+    "intent": "Workable material contents derived from existing clay bank.",
+    "role": "contents-state",
+    "base_increment": 0,
+    "base_asset_id": "RF-001",
+    "canonical_id": "aw.ranch.asset.rf-001",
+    "placement_origin": "Bottom of clay at local z=0; place on work surface.",
+    "compatible_container_ids": [
+      "RF-041",
+      "RF-043",
+      "BA-0012"
+    ],
+    "actions": [
+      "display proposed contents state"
+    ],
+    "variants": [],
+    "anchors": [
+      [
+        "contents_bottom",
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    ]
+  }
+}

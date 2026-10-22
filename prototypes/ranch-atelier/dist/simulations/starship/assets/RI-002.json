@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RI-002",
+  "name": "Four-point restraint crew seat",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocketship-interior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Show a supported seated posture with visible restraint straps and latch.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-interior/ri-002",
+  "biome": "rocketship-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 14,
+    "triangles": 536,
+    "bounds_min": [
+      -0.3700000047683716,
+      -0.5049999952316284,
+      0.0
+    ],
+    "bounds_max": [
+      0.3700000047683716,
+      0.3700000047683716,
+      1.6899999380111694
+    ],
+    "dimensions_m": [
+      0.74,
+      0.875,
+      1.69
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "crew-seating",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "sit",
+      "secure",
+      "release",
+      "inspect"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "latch",
+        "position_blender_m": [
+          0.0,
+          -0.25,
+          0.6399999856948853
+        ],
+        "role": "latch"
+      },
+      {
+        "id": "sit",
+        "position_blender_m": [
+          0.0,
+          -0.07000000029802322,
+          0.6000000238418579
+        ],
+        "role": "sit"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "vacant",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "occupied",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "secured",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "released",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "service",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Show a supported seated posture with visible restraint straps and latch. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See seat(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-interior/batch_rocket_interior.py",
+    "entry_point": "seat",
+    "source_sha256": "1a50ca93954f9acebd495f308fa094a17f866c3ead457bda637408ac8b65e94c",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-interior batch_rocket_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RI-002"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Rendered card inspected: readable silhouette, materials and coherent parts; static prototype, no behavior or rig implied"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "RI-002.glb",
+    "sha256": "ada4ec259eb8eb29b590330df44fe4b2df9b1ac396c90862f8b060f7d1b3be37",
+    "bytes": 36776
+  }
+}

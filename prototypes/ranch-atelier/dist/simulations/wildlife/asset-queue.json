@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 1,
+  "sourceRoot": "../..",
+  "audit": "Local metadata and GLB headers verified; visual, rig and regional review remain required. No assets copied or generated.",
+  "assets": [
+    {
+      "id": "UP-016",
+      "name": "Antlered woodland-edge deer",
+      "role": "woodland-edge visitor",
+      "sourceMetadata": "bronze-age-world/upland-pasture/outputs/assets/UP-016.json",
+      "sourceModel": "bronze-age-world/upland-pasture/outputs/assets/UP-016.glb",
+      "bytes": 51456,
+      "status": "reuse-candidate-review-required",
+      "review": "Review antler/species silhouette before regional labeling",
+      "paidGeneration": false
+    },
+    {
+      "id": "GF-118",
+      "name": "Long eared garden rabbit",
+      "role": "hedgerow visitor",
+      "sourceMetadata": "bronze-age-world/garden-farm/outputs/assets/GF-118.json",
+      "sourceModel": "bronze-age-world/garden-farm/outputs/assets/GF-118.glb",
+      "bytes": 66304,
+      "status": "reuse-candidate-review-required",
+      "review": "Review rabbit proportions before regional labeling",
+      "paidGeneration": false
+    },
+    {
+      "id": "WW-450",
+      "name": "Masked ring tailed raccoon",
+      "role": "nocturnal woodland visitor",
+      "sourceMetadata": "bronze-age-world/working-woodland/outputs/assets/WW-450.json",
+      "sourceModel": "bronze-age-world/working-woodland/outputs/assets/WW-450.glb",
+      "bytes": 363128,
+      "status": "reuse-candidate-review-required",
+      "review": "Review scale and locomotion rig",
+      "paidGeneration": false
+    },
+    {
+      "id": "WW-588",
+      "name": "Patagium bearing flying squirrel",
+      "role": "rare canopy visitor",
+      "sourceMetadata": "bronze-age-world/working-woodland/outputs/assets/WW-588.json",
+      "sourceModel": "bronze-age-world/working-woodland/outputs/assets/WW-588.glb",
+      "bytes": 158444,
+      "status": "reuse-candidate-review-required",
+      "review": "Hold until canopy navigation exists",
+      "paidGeneration": false
+    },
+    {
+      "id": "UP-017",
+      "name": "Bushy-tailed upland fox",
+      "role": "occasional edge visitor",
+      "sourceMetadata": "bronze-age-world/upland-pasture/outputs/assets/UP-017.json",
+      "sourceModel": "bronze-age-world/upland-pasture/outputs/assets/UP-017.glb",
+      "bytes": 68332,
+      "status": "reuse-candidate-review-required",
+      "review": "Hold until separate fox behavior exists; no predation implied",
+      "paidGeneration": false
+    },
+    {
+      "id": "GF-180",
+      "name": "Forward eyed orchard owl",
+      "role": "orchard roost visitor",
+      "sourceMetadata": "bronze-age-world/garden-farm/outputs/assets/GF-180.json",
+      "sourceModel": "bronze-age-world/garden-farm/outputs/assets/GF-180.glb",
+      "bytes": 60240,
+      "status": "reuse-candidate-review-required",
+      "review": "Hold until perch navigation and species review",
+      "paidGeneration": false
+    },
+    {
+      "id": "GF-114",
+      "name": "Open wing garden butterfly",
+      "role": "flower visitor",
+      "sourceMetadata": "bronze-age-world/garden-farm/outputs/assets/GF-114.json",
+      "sourceModel": "bronze-age-world/garden-farm/outputs/assets/GF-114.glb",
+      "bytes": 14144,
+      "status": "reuse-candidate-review-required",
+      "review": "Presentation only until pollination is explicitly implemented",
+      "paidGeneration": false
+    },
+    {
+      "id": "WW-129",
+      "name": "Tuft eared red woodland squirrel",
+      "role": "woodland visitor candidate",
+      "sourceMetadata": "bronze-age-world/working-woodland/outputs/assets/WW-129.json",
+      "sourceModel": "bronze-age-world/working-woodland/outputs/assets/WW-129.glb",
+      "bytes": 138524,
+      "status": "reuse-candidate-review-required",
+      "review": "Hold: tuft-eared red squirrel is not an approved regional match",
+      "paidGeneration": false
+    },
+    {
+      "id": "WW-351",
+      "name": "Hollow cavity bird nesting box",
+      "role": "nesting box",
+      "sourceMetadata": "bronze-age-world/working-woodland/outputs/assets/WW-351.json",
+      "sourceModel": "bronze-age-world/working-woodland/outputs/assets/WW-351.glb",
+      "bytes": 40032,
+      "status": "reuse-candidate-review-required",
+      "review": "Habitat prop only; no nesting claim",
+      "paidGeneration": false
+    },
+    {
+      "id": "WW-075",
+      "name": "Fork-supported twig nest",
+      "role": "twig nest",
+      "sourceMetadata": "bronze-age-world/working-woodland/outputs/assets/WW-075.json",
+      "sourceModel": "bronze-age-world/working-woodland/outputs/assets/WW-075.glb",
+      "bytes": 108728,
+      "status": "reuse-candidate-review-required",
+      "review": "Habitat prop only; no reproduction claim",
+      "paidGeneration": false
+    },
+    {
+      "id": "WW-047",
+      "name": "Mossy woodland moisture stones",
+      "role": "moisture stones",
+      "sourceMetadata": "bronze-age-world/working-woodland/outputs/assets/WW-047.json",
+      "sourceModel": "bronze-age-world/working-woodland/outputs/assets/WW-047.glb",
+      "bytes": 42944,
+      "status": "reuse-candidate-review-required",
+      "review": "Refuge context; do not infer water simulation",
+      "paidGeneration": false
+    },
+    {
+      "id": "WW-071",
+      "name": "Fallen oak gall branch",
+      "role": "fallen oak branch",
+      "sourceMetadata": "bronze-age-world/working-woodland/outputs/assets/WW-071.json",
+      "sourceModel": "bronze-age-world/working-woodland/outputs/assets/WW-071.glb",
+      "bytes": 31736,
+      "status": "reuse-candidate-review-required",
+      "review": "Woodland floor structure; preserve access",
+      "paidGeneration": false
+    },
+    {
+      "id": "GF-061",
+      "name": "Sheltered hollow-reed nesting bundle",
+      "role": "hollow reed bundle",
+      "sourceMetadata": "bronze-age-world/garden-farm/outputs/assets/GF-061.json",
+      "sourceModel": "bronze-age-world/garden-farm/outputs/assets/GF-061.glb",
+      "bytes": 85076,
+      "status": "reuse-candidate-review-required",
+      "review": "Garden habitat prop; no population effect",
+      "paidGeneration": false
+    },
+    {
+      "id": "GF-169",
+      "name": "Hooded woven bird nesting cup",
+      "role": "woven nesting cup",
+      "sourceMetadata": "bronze-age-world/garden-farm/outputs/assets/GF-169.json",
+      "sourceModel": "bronze-age-world/garden-farm/outputs/assets/GF-169.glb",
+      "bytes": 216088,
+      "status": "reuse-candidate-review-required",
+      "review": "Managed garden prop; review regional appropriateness",
+      "paidGeneration": false
+    },
+    {
+      "id": "UP-498",
+      "name": "Wall attached mud swallow nest cup",
+      "role": "swallow nest cup",
+      "sourceMetadata": "bronze-age-world/upland-pasture/outputs/assets/UP-498.json",
+      "sourceModel": "bronze-age-world/upland-pasture/outputs/assets/UP-498.glb",
+      "bytes": 287636,
+      "status": "reuse-candidate-review-required",
+      "review": "Building attachment; no occupancy until implemented",
+      "paidGeneration": false
+    },
+    {
+      "id": "UP-499",
+      "name": "Compacted owl regurgitation pellet",
+      "role": "owl pellet",
+      "sourceMetadata": "bronze-age-world/upland-pasture/outputs/assets/UP-499.json",
+      "sourceModel": "bronze-age-world/upland-pasture/outputs/assets/UP-499.glb",
+      "bytes": 98404,
+      "status": "reuse-candidate-review-required",
+      "review": "Static trace; do not claim runtime predation",
+      "paidGeneration": false
+    },
+    {
+      "id": "WW-176",
+      "name": "Creeping scale leaved clubmoss",
+      "role": "clubmoss",
+      "sourceMetadata": "bronze-age-world/working-woodland/outputs/assets/WW-176.json",
+      "sourceModel": "bronze-age-world/working-woodland/outputs/assets/WW-176.glb",
+      "bytes": 173260,
+      "status": "reuse-candidate-review-required",
+      "review": "Review plant identification; moisture-context planting",
+      "paidGeneration": false
+    },
+    {
+      "id": "GF-523",
+      "name": "Fan tailed domestic turkey",
+      "role": "domestic turkey",
+      "sourceMetadata": "bronze-age-world/garden-farm/outputs/assets/GF-523.json",
+      "sourceModel": "bronze-age-world/garden-farm/outputs/assets/GF-523.glb",
+      "bytes": 94724,
+      "status": "reuse-candidate-review-required",
+      "review": "Domestic asset only; do not label wild turkey",
+      "paidGeneration": false
+    }
+  ]
+}

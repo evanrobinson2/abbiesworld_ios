@@ -1,0 +1,48 @@
+{
+  "id": "aw.ranch.asset.ba-0028",
+  "name": "Rope bound timber merchandise box",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 25,
+    "triangles": 1152,
+    "bounds_min": [
+      -0.32750001549720764,
+      -0.2598994970321655,
+      0.0
+    ],
+    "bounds_max": [
+      0.32750001549720764,
+      0.2598994970321655,
+      0.39500001072883606
+    ],
+    "dimensions_m": [
+      0.655,
+      0.5198,
+      0.395
+    ],
+    "material_slots": [
+      "Rope",
+      "Timber",
+      "TimberLight"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Rope",
+    "Timber",
+    "TimberLight"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0028",
+  "intent": "A plank box held closed by external cord bindings.",
+  "family": "Trade containers",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0028",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

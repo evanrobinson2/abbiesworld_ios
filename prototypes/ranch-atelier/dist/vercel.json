@@ -1,0 +1,379 @@
+{
+  "rewrites": [
+    {
+      "source": "/r2/:path*",
+      "destination": "https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev/:path*"
+    },
+    {
+      "source": "/models",
+      "destination": "/models/index.html"
+    },
+    {
+      "source": "/models/",
+      "destination": "/models/index.html"
+    },
+    {
+      "source": "/models/:id",
+      "destination": "/models/model.html"
+    },
+    {
+      "source": "/models/:id/",
+      "destination": "/models/model.html"
+    },
+    {
+      "source": "/sandbox/Claude",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/Claude/",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/claude",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/moon",
+      "destination": "/moon/index.html"
+    },
+    {
+      "source": "/moon/",
+      "destination": "/moon/index.html"
+    },
+    {
+      "source": "/cemetery/",
+      "destination": "/cemetery/index.html"
+    },
+    {
+      "source": "/cemetery",
+      "destination": "/cemetery/index.html"
+    },
+    {
+      "source": "/starship/",
+      "destination": "/starship/index.html"
+    },
+    {
+      "source": "/starship",
+      "destination": "/starship/index.html"
+    },
+    {
+      "source": "/simulations/",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/zombie-run",
+      "destination": "/zr.html"
+    },
+    {
+      "source": "/night-of-the-dead",
+      "destination": "/night-of-the-dead.html"
+    },
+    {
+      "source": "/tools",
+      "destination": "/tools.html"
+    },
+    {
+      "source": "/utilities",
+      "destination": "/tools.html"
+    },
+    {
+      "source": "/board3",
+      "destination": "/board3.html"
+    },
+    {
+      "source": "/board3/design",
+      "destination": "/board3-design.html"
+    },
+    {
+      "source": "/halloween",
+      "destination": "/halloween.html"
+    },
+    {
+      "source": "/halloween-town",
+      "destination": "/halloween-town.html"
+    },
+    {
+      "source": "/sandbox",
+      "destination": "/simulations/index.html"
+    },
+    {
+      "source": "/sandbox/outbreak",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/sandbox/wizard",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/sandbox/rabbits",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/sandbox/zombies",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/sandbox/brains",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/sandbox/:type",
+      "destination": "/board3.html"
+    },
+    {
+      "source": "/continuous-scale",
+      "destination": "/continuous-scale.html"
+    },
+    {
+      "source": "/procedural.html",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/terrain-editor",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/game",
+      "destination": "/tile-game.html"
+    },
+    {
+      "source": "/proportion-study",
+      "destination": "/proportion-study.html"
+    },
+    {
+      "source": "/tile-generator",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/tile-generator/:type",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/board",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/scene-generator",
+      "has": [
+        {
+          "type": "query",
+          "key": "scene",
+          "value": "woodland"
+        }
+      ],
+      "destination": "/working-woodland.html"
+    },
+    {
+      "source": "/scene-generator/woodland",
+      "destination": "/working-woodland.html"
+    },
+    {
+      "source": "/scene-generator",
+      "has": [
+        {
+          "type": "query",
+          "key": "scene",
+          "value": "garden"
+        }
+      ],
+      "destination": "/garden-farm.html"
+    },
+    {
+      "source": "/scene-generator/garden",
+      "destination": "/garden-farm.html"
+    },
+    {
+      "source": "/scene-generator",
+      "has": [
+        {
+          "type": "query",
+          "key": "scene",
+          "value": "market"
+        }
+      ],
+      "destination": "/market.html"
+    },
+    {
+      "source": "/scene-generator/market",
+      "destination": "/market.html"
+    },
+    {
+      "source": "/mood-board",
+      "destination": "/mood-board.html"
+    },
+    {
+      "source": "/3d",
+      "destination": "/3d.html"
+    },
+    {
+      "source": "/3d/barn-builder",
+      "destination": "/barn-builder.html"
+    },
+    {
+      "source": "/procedural",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/simulation",
+      "destination": "/simulation.html"
+    },
+    {
+      "source": "/3d/asset-studies",
+      "destination": "/asset-studies.html"
+    },
+    {
+      "source": "/3d/simulation-assets",
+      "destination": "/simulation-assets.html"
+    },
+    {
+      "source": "/themes",
+      "destination": "/themes.html"
+    },
+    {
+      "source": "/scene-generator",
+      "destination": "/board.html"
+    },
+    {
+      "source": "/market",
+      "destination": "/market.html"
+    },
+    {
+      "source": "/scene-generator/simulation",
+      "destination": "/scene-generator.html"
+    },
+    {
+      "source": "/sets",
+      "destination": "/sets.html"
+    },
+    {
+      "source": "/sets/:path*",
+      "destination": "/sets.html"
+    },
+    {
+      "source": "/scene-generator/prefabs",
+      "destination": "/sets.html"
+    },
+    {
+      "source": "/scene-generator/prefabs/:path*",
+      "destination": "/sets.html"
+    },
+    {
+      "source": "/units",
+      "destination": "/units.html"
+    }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "public-build",
+  "headers": [
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate"
+        }
+      ],
+      "source": "/view-context.js"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ],
+      "source": "/view-build.json"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/simulations",
+      "destination": "/simulations/",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/town-life",
+      "destination": "/tile-generator/town",
+      "permanent": false
+    },
+    {
+      "source": "/town-life/",
+      "destination": "/tile-generator/town",
+      "permanent": false
+    },
+    {
+      "source": "/town-life/index.html",
+      "destination": "/tile-generator/town",
+      "permanent": false
+    },
+    {
+      "source": "/generators",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/generators.html",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/sandbox2",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/Sandbox2",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/sandbox2.html",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/board2",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/board2.html",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/demonstrations",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/demonstrations.html",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/model-normalizer",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/model-normalizer.html",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/effect-browser",
+      "destination": "/sandbox",
+      "permanent": false
+    },
+    {
+      "source": "/effect-browser.html",
+      "destination": "/sandbox",
+      "permanent": false
+    }
+  ]
+}

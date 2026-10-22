@@ -1,0 +1,64 @@
+{
+  "id": "aw.ranch.asset.ba-0082",
+  "name": "Traveling wheel seller",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 77,
+    "triangles": 4568,
+    "bounds_min": [
+      -0.37302446365356445,
+      -0.38625001907348633,
+      0.0
+    ],
+    "bounds_max": [
+      0.37302446365356445,
+      0.189520001411438,
+      1.7407000064849854
+    ],
+    "dimensions_m": [
+      0.746,
+      0.5758,
+      1.7407
+    ],
+    "material_slots": [
+      "CharacterHair",
+      "CharacterSkinDeep",
+      "CharacterEye",
+      "CharacterOchre",
+      "CharacterLeather",
+      "CharacterClay",
+      "CharacterWood",
+      "CharacterSage",
+      "CharacterLinen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 9
+  },
+  "materials": [
+    "CharacterHair",
+    "CharacterSkinDeep",
+    "CharacterEye",
+    "CharacterOchre",
+    "CharacterLeather",
+    "CharacterClay",
+    "CharacterWood",
+    "CharacterSage",
+    "CharacterLinen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Unrigged",
+    "Unanimated",
+    "No skin weights",
+    "No gameplay or collision implementation",
+    "Fictional Bronze Age design, not historical reconstruction",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0082",
+  "intent": "Travel clothing with a wheel sample and woodworking belongings.",
+  "family": "Market characters",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0082",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

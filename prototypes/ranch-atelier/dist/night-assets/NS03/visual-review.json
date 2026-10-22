@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "reviewedAt": "2026-10-20T03:23:38.469388+00:00",
+  "method": "Rendered preview visually inspected after shared rotation-unit adapter correction",
+  "previewSha256": "44e304c0ec21e548aa1f9f134e9734b65c6d48eca5ad8d13c547f9c1af8f0809",
+  "notes": "Connected geometry and correct orientation verified; metre reimport passed."
+}

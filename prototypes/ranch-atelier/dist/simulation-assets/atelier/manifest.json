@@ -1,0 +1,113 @@
+{
+ "pack": "Ranch Atelier original pack",
+ "origin": "original",
+ "date": "2026-10-22",
+ "script": "prototypes/ranch-atelier/dist/scripts/atelier-pack/build_pack.py",
+ "scriptSha256": "f10b6f16e0e9b1df7ce2bbcc26ec2e5353ce69f553d7868885f53bab4fbf1322",
+ "models": [
+  {
+   "id": "atelier/oak-a",
+   "label": "Oak",
+   "kind": "tree",
+   "glb": "/simulation-assets/atelier/oak-a.glb",
+   "triangles": 240,
+   "gameHeightMetres": 6.5
+  },
+  {
+   "id": "atelier/oak-b",
+   "label": "Spreading oak",
+   "kind": "tree",
+   "glb": "/simulation-assets/atelier/oak-b.glb",
+   "triangles": 260,
+   "gameHeightMetres": 5.6
+  },
+  {
+   "id": "atelier/birch",
+   "label": "Birch",
+   "kind": "tree",
+   "glb": "/simulation-assets/atelier/birch.glb",
+   "triangles": 200,
+   "gameHeightMetres": 7.0
+  },
+  {
+   "id": "atelier/fir-a",
+   "label": "Tall fir",
+   "kind": "tree",
+   "glb": "/simulation-assets/atelier/fir-a.glb",
+   "triangles": 90,
+   "gameHeightMetres": 8.0
+  },
+  {
+   "id": "atelier/fir-b",
+   "label": "Stout fir",
+   "kind": "tree",
+   "glb": "/simulation-assets/atelier/fir-b.glb",
+   "triangles": 76,
+   "gameHeightMetres": 6.0
+  },
+  {
+   "id": "atelier/bush-a",
+   "label": "Round bush",
+   "kind": "bush",
+   "glb": "/simulation-assets/atelier/bush-a.glb",
+   "triangles": 80,
+   "gameHeightMetres": 1.1
+  },
+  {
+   "id": "atelier/bush-b",
+   "label": "Berry bush",
+   "kind": "bush",
+   "glb": "/simulation-assets/atelier/bush-b.glb",
+   "triangles": 280,
+   "gameHeightMetres": 0.85
+  },
+  {
+   "id": "atelier/boulder-a",
+   "label": "Flat boulder",
+   "kind": "rock",
+   "glb": "/simulation-assets/atelier/boulder-a.glb",
+   "triangles": 40,
+   "gameHeightMetres": 0.8
+  },
+  {
+   "id": "atelier/boulder-b",
+   "label": "Boulder group",
+   "kind": "rock",
+   "glb": "/simulation-assets/atelier/boulder-b.glb",
+   "triangles": 80,
+   "gameHeightMetres": 0.7
+  },
+  {
+   "id": "atelier/stump",
+   "label": "Stump",
+   "kind": "prop",
+   "glb": "/simulation-assets/atelier/stump.glb",
+   "triangles": 128,
+   "gameHeightMetres": 0.44
+  },
+  {
+   "id": "atelier/log-pile",
+   "label": "Log pile",
+   "kind": "prop",
+   "glb": "/simulation-assets/atelier/log-pile.glb",
+   "triangles": 568,
+   "gameHeightMetres": 0.76
+  },
+  {
+   "id": "atelier/rain-barrel",
+   "label": "Rain barrel",
+   "kind": "prop",
+   "glb": "/simulation-assets/atelier/rain-barrel.glb",
+   "triangles": 188,
+   "gameHeightMetres": 0.9
+  },
+  {
+   "id": "atelier/crate-stack",
+   "label": "Crate stack",
+   "kind": "prop",
+   "glb": "/simulation-assets/atelier/crate-stack.glb",
+   "triangles": 108,
+   "gameHeightMetres": 1.12
+  }
+ ]
+}

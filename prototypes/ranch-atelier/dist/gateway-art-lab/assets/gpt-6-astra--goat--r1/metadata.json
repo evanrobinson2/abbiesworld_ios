@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Cream ranch goat with chestnut saddle, lateral amber slit eyes, swept horns, leaf ears, beard and eight separated cloven toes. Baked two-segment leg articulation with flat planted stance feet; head and tail inherit body motion. Metres, front negative Y.",
+  "blenderVersion": "5.2.1 LTS"
+}

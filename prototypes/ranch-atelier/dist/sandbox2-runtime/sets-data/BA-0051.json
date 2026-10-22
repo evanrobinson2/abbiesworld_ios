@@ -1,0 +1,53 @@
+{
+  "id": "aw.ranch.asset.ba-0051",
+  "name": "Pottery merchant assortment",
+  "dependencies": [
+    "BA-0024",
+    "BA-0025"
+  ],
+  "geometry": {
+    "mesh_objects": 14,
+    "triangles": 3868,
+    "bounds_min": [
+      -0.5811295509338379,
+      -0.2800000011920929,
+      0.0
+    ],
+    "bounds_max": [
+      0.5656000375747681,
+      0.29499998688697815,
+      0.5047500133514404
+    ],
+    "dimensions_m": [
+      1.1467,
+      0.575,
+      0.5048
+    ],
+    "material_slots": [
+      "ClayLight",
+      "Clay",
+      "TimberLight",
+      "Timber"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 4
+  },
+  "materials": [
+    "ClayLight",
+    "Clay",
+    "TimberLight",
+    "Timber"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Stylized fictional Bronze Age interpretation; not a region-specific archaeological reconstruction.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0051",
+  "intent": "A coherent arrangement of cooking, storage, and serving vessels.",
+  "family": "Craft displays",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0051",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

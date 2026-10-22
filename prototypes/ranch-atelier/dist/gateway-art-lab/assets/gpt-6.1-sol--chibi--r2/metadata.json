@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "1.5 m modular ranch worker; optimized ellipsoid, bevel and tube tessellation. Articulated hip, knee, shoulder and head hierarchy. Removable straw hat under head_socket; separate hollow bucket under hand_socket. Front faces negative Y.",
+  "blenderVersion": "5.2.1 LTS"
+}

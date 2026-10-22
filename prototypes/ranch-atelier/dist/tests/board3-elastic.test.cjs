@@ -1,0 +1,4 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
+const source=fs.readFileSync(path.join(__dirname,'../board3-elastic.mjs'),'utf8');const settle=vm.runInNewContext(source.match(/export function settleAxis[^\n]+/)[0].replace('export ','')+';settleAxis');
+test('rubber-band release returns monotonically to its anchor without bouncing',()=>{let x=1,v=0;for(let i=0;i<240;i++){const next=settle(x,v,1/60);assert.ok(next.x>=0&&next.x<=x);x=next.x;v=next.v;}assert.ok(x<1e-7);});
+test('spring is stable across frame rates and preserves its anchor at rest',()=>{assert.equal(settle(0,0,.05).x,0);let a={x:1,v:0},b={x:1,v:0};for(let i=0;i<60;i++)a=settle(a.x,a.v,1/60);for(let i=0;i<20;i++)b=settle(b.x,b.v,.05);assert.ok(Math.abs(a.x-b.x)<1e-10);});

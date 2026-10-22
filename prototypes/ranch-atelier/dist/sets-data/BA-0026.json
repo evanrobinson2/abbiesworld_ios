@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0026",
+  "name": "Woven grain sack",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 51,
+    "triangles": 6448,
+    "bounds_min": [
+      -0.3304917812347412,
+      -0.28999999165534973,
+      0.0
+    ],
+    "bounds_max": [
+      0.29480141401290894,
+      0.28999999165534973,
+      0.6620000004768372
+    ],
+    "dimensions_m": [
+      0.6253,
+      0.58,
+      0.662
+    ],
+    "material_slots": [
+      "Grain",
+      "Rope",
+      "Linen"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 3
+  },
+  "materials": [
+    "Grain",
+    "Rope",
+    "Linen"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0026",
+  "intent": "A soft container with tied mouth and a readable grain filled silhouette.",
+  "family": "Trade containers",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0026",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

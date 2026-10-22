@@ -1,0 +1,14 @@
+{
+  "animationRanges": {
+    "walk": [
+      1,
+      25
+    ],
+    "idle": [
+      31,
+      79
+    ]
+  },
+  "notes": "Pivot-hierarchy goat; walk uses diagonal gait with knee flexion, idle has head/neck/tail motion.",
+  "blenderVersion": "5.2.1 LTS"
+}

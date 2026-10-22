@@ -1,0 +1,264 @@
+{
+  "schema_version": "1.1.0",
+  "id": "RE-075",
+  "name": "USS Aurora ferry under construction",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "rocketship-exterior",
+  "batch": 1,
+  "category": "structure",
+  "intent": "Parked large Aurora with central upper hull removed, exposed pressure frames and assembly scaffolds. Same physical scale as RE-073.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/rocketship-exterior/re-075",
+  "biome": "rocketship-exterior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 79,
+    "triangles": 36082,
+    "bounds_min": [
+      -6.377018928527832,
+      -6.568498611450195,
+      0.0
+    ],
+    "bounds_max": [
+      6.377018928527832,
+      6.525579929351807,
+      6.877530574798584
+    ],
+    "dimensions_m": [
+      12.754037857055664,
+      13.094078540802002,
+      6.877530574798584
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "Optional second-pad construction display",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "airlock.002",
+        "position_blender_m": [
+          4.61649227142334,
+          -1.3106143474578857,
+          1.4671056270599365
+        ],
+        "role": "airlock"
+      },
+      {
+        "id": "engine-port.002",
+        "position_blender_m": [
+          -4.636053562164307,
+          2.190877676010132,
+          3.9122815132141113
+        ],
+        "role": "engine-port"
+      },
+      {
+        "id": "engine-starboard.002",
+        "position_blender_m": [
+          4.636053562164307,
+          2.190877676010132,
+          3.9122815132141113
+        ],
+        "role": "engine-starboard"
+      },
+      {
+        "id": "landing-origin.004",
+        "position_blender_m": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "role": "landing-origin"
+      },
+      {
+        "id": "thrust-aft-port.002",
+        "position_blender_m": [
+          -1.7605266571044922,
+          2.3473689556121826,
+          1.1932458877563477
+        ],
+        "role": "thrust-aft-port"
+      },
+      {
+        "id": "thrust-aft-starboard.002",
+        "position_blender_m": [
+          1.7605266571044922,
+          2.3473689556121826,
+          1.1932458877563477
+        ],
+        "role": "thrust-aft-starboard"
+      },
+      {
+        "id": "thrust-front-port.002",
+        "position_blender_m": [
+          -1.7605266571044922,
+          -2.3473689556121826,
+          1.1932458877563477
+        ],
+        "role": "thrust-front-port"
+      },
+      {
+        "id": "thrust-front-starboard.002",
+        "position_blender_m": [
+          1.7605266571044922,
+          -2.3473689556121826,
+          1.1932458877563477
+        ],
+        "role": "thrust-front-starboard"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for rocketship-exterior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "under-construction",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified mission phase",
+    "implemented": false,
+    "rule": "Mission phase, illumination/eclipse and thermal conditions are separate contextual rules; no automatic terrestrial growing season or snow."
+  },
+  "design": {
+    "rationale": "Parked large Aurora with central upper hull removed, exposed pressure frames and assembly scaffolds. Same physical scale as RE-073. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See construction(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "rocketship-exterior/batch_shell_vtol.py",
+    "entry_point": "construction",
+    "source_sha256": "bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- rocketship-exterior batch_shell_vtol.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "RE-075",
+    "build_inputs_sha256": {
+      "rocketship-exterior/batch_shell_vtol.py": "bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650",
+      "production/build_scene_batch.py": "ee9388985dec24b324d75e81fb867e92abc6b13da47e412fd128ea824e2b1b4d",
+      "production/render_micro.py": "6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449",
+      "garden-farm/build_garden.py": "2917c0fe1f3e25850af16986dacde582013f4dfe4ab08018c78b6431864ca32b",
+      "market-village/build_market.py": "70c1bc50a2a77f6dcb69c02842a7e7901bd12aebcd7a66912f5308832178a420",
+      "market-village/asset_helpers.py": "113ec16c31b088557de6e6589c950f575dc37a2dd96577b3bba01415967ffd3e",
+      "market-village/architecture.py": "7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3"
+    },
+    "source_snapshots": {
+      "rocketship-exterior/batch_shell_vtol.py": "production/source-snapshots/bd9d870bc5af956ec2ccb70ce7bfeb0201fd9d7094e603e1791b73b033422650.py",
+      "production/build_scene_batch.py": "production/source-snapshots/ee9388985dec24b324d75e81fb867e92abc6b13da47e412fd128ea824e2b1b4d.py",
+      "production/render_micro.py": "production/source-snapshots/6ec76569f8ffd30ce0b56644aa202b148365402f9955e974b4710c66beaad449.py",
+      "garden-farm/build_garden.py": "production/source-snapshots/2917c0fe1f3e25850af16986dacde582013f4dfe4ab08018c78b6431864ca32b.py",
+      "market-village/build_market.py": "production/source-snapshots/70c1bc50a2a77f6dcb69c02842a7e7901bd12aebcd7a66912f5308832178a420.py",
+      "market-village/asset_helpers.py": "production/source-snapshots/113ec16c31b088557de6e6589c950f575dc37a2dd96577b3bba01415967ffd3e.py",
+      "market-village/architecture.py": "production/source-snapshots/7345804ef8f0f9aa802800be7bb7037769bbfe5540072655b54374256c4ddee3.py"
+    },
+    "profile_evidence": "moon-vtol-release/profiles/20261021T054225Z-811d8e"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Approved optional static construction derivative. Inspected the exact asset card: removed upper shell panels expose a clearly different ribbed pressure-body silhouette, and side working scaffolds visibly distinguish this from the completed ferry. The complete USS AURORA name is retained on the forward marking. Supports read as connected and grounded at card scale. Approval is for a parked visual construction state; it does not establish interior access, simulated construction progress or flight capability.",
+    "deployed": false,
+    "catalog_include": true,
+    "visual_review_passed": true,
+    "review_note": "Approved optional static construction derivative. Inspected the exact asset card: removed upper shell panels expose a clearly different ribbed pressure-body silhouette, and side working scaffolds visibly distinguish this from the completed ferry. The complete USS AURORA name is retained on the forward marking. Supports read as connected and grounded at card scale. Approval is for a parked visual construction state; it does not establish interior access, simulated construction progress or flight capability."
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "authoredSpec": {
+    "id": "RE-075",
+    "name": "USS Aurora ferry under construction",
+    "category": "structure",
+    "intent": "Parked large Aurora with central upper hull removed, exposed pressure frames and assembly scaffolds. Same physical scale as RE-073.",
+    "role": "Optional second-pad construction display",
+    "actions": [
+      "inspect"
+    ],
+    "anchors": [
+      [
+        "landing-origin",
+        [
+          0,
+          0,
+          0
+        ]
+      ]
+    ],
+    "variants": [
+      "under-construction"
+    ],
+    "base_increment": 0,
+    "canonical_base_id": "RE-073",
+    "lineage_reason": "Reviewed static construction state",
+    "limitations": [
+      "Static display, cannot fly",
+      "No simulated interior or construction progress"
+    ]
+  },
+  "baseIncrement": 0,
+  "derivation": {},
+  "lineage": {
+    "uniqueBaseIncrement": false,
+    "canonicalBaseId": "RE-073",
+    "relationship": "Reviewed static construction state"
+  },
+  "files": {
+    "glb": "RE-075.glb",
+    "sha256": "6698ecd2bcf7f4cac2eecb75cb53a68800bae5cd62742efde6d88ca9e84f2a1f",
+    "bytes": 2076260
+  }
+}

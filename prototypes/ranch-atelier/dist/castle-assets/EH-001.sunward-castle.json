@@ -1,0 +1,153 @@
+{
+  "assembly_id": "epic.castle.friendly",
+  "name": "Sunward Castle",
+  "counts_as_unique_base_asset": false,
+  "base_asset_count_added": 0,
+  "module_ids": [
+    "EH-001",
+    "EH-003",
+    "EH-004",
+    "EH-005",
+    "EH-006",
+    "EH-007",
+    "EH-008",
+    "EH-009",
+    "EH-010"
+  ],
+  "instance_count": 35,
+  "units": "metres",
+  "source_up": "Z",
+  "glb_up": "Y",
+  "bounds_min": [
+    -20.149160385131836,
+    -21.736753463745117,
+    -0.699999988079071
+  ],
+  "bounds_max": [
+    20.149160385131836,
+    21.736753463745117,
+    12.15999984741211
+  ],
+  "dimensions_m": [
+    40.29832077026367,
+    43.473506927490234,
+    12.85999983549118
+  ],
+  "footprint": {
+    "orientation": "flat-top",
+    "hex_circumradius_m": 7,
+    "axial_coordinate_system": "x=1.5*R*q; y=sqrt(3)*R*(r+q/2)",
+    "cells": [
+      {
+        "axial": [
+          0,
+          0
+        ],
+        "centre_m": [
+          0.0,
+          0.0,
+          0
+        ]
+      },
+      {
+        "axial": [
+          1,
+          0
+        ],
+        "centre_m": [
+          10.5,
+          6.062178,
+          0
+        ]
+      },
+      {
+        "axial": [
+          1,
+          -1
+        ],
+        "centre_m": [
+          10.5,
+          -6.062178,
+          0
+        ]
+      },
+      {
+        "axial": [
+          0,
+          -1
+        ],
+        "centre_m": [
+          0.0,
+          -12.124356,
+          0
+        ]
+      },
+      {
+        "axial": [
+          -1,
+          0
+        ],
+        "centre_m": [
+          -10.5,
+          -6.062178,
+          0
+        ]
+      },
+      {
+        "axial": [
+          -1,
+          1
+        ],
+        "centre_m": [
+          -10.5,
+          6.062178,
+          0
+        ]
+      },
+      {
+        "axial": [
+          0,
+          1
+        ],
+        "centre_m": [
+          0.0,
+          12.124356,
+          0
+        ]
+      }
+    ],
+    "cell_count": 7
+  },
+  "protected_instances": [
+    "friendly-013",
+    "friendly-035"
+  ],
+  "recipe_file": "../../assemblies.json",
+  "source_module_hashes": {
+    "EH-001": "38faa51a3902f6c8bd2afb1ba69fcfdb5e30c0014ed651cb2033d8315840e30e",
+    "EH-003": "a2c25f79ef50844ae80742a1211e456b940528097492314bf3eff909b1f46ba0",
+    "EH-004": "6eb2df95f031513ee8244269b9fd1770c7938b776876c7abf19d1e80decbdd6d",
+    "EH-005": "1461e8d6617fe2c2ac8d39ad94729b5c40679c212e6c771ed854cea7c13e8c2b",
+    "EH-006": "d8244a40420cd02bd4c386fb8ff1b508b4ec9ff1c58e1918b2df62f7596d3460",
+    "EH-007": "2bd78de973f8278cad1772dad1afc450f809e74ce3c565015a5070ff3380398f",
+    "EH-008": "2806fba2189bb62779a33e0cac96b1fad4b12aa227a05a61b4b6dd84be4ced53",
+    "EH-009": "53239031cc7e6c25aa7a772f7a9823dab3e4b833605bc9542beea8c7cb5e6e8f",
+    "EH-010": "901438615cbc8a2767bbab85d41928bcad1f2c37d15ac1a6ebf45e30092668ba"
+  },
+  "validation": {
+    "imported_bounds_match_sidecars": true,
+    "instance_count_matches_recipe": true,
+    "visual_review": "pending"
+  },
+  "limitations": [
+    "Static original fantasy castle; no simulation or historical authenticity claim.",
+    "Keeps are exterior masses without interior rooms.",
+    "Assemblies reuse the ten source modules; placement instances and faction material remaps are not additional bases.",
+    "No collision or navigation bake. Static rendering is not a gameplay validation."
+  ],
+  "files": {
+    "glb": "sunward-castle.glb",
+    "png": "sunward-castle.png",
+    "blend": "sunward-castle.blend"
+  }
+}

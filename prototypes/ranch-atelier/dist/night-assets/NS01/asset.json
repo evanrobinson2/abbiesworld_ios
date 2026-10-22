@@ -1,0 +1,970 @@
+{
+  "name": "Full-Scale Ash Baseball Bat",
+  "rationale": "A single rigid, upright baseball bat with a broad ash barrel, progressively stepped shoulder, slender handle, black wrapped grip, and rounded wooden retention knob. Closely adjoining cylinders establish the continuous wood silhouette; subdued grain strokes and raised tape seams add restrained construction detail. The knob rests at Z=0 and the rounded barrel tip reaches Z=0.86. All surfaces are non-emissive, with matte tape and satin-finished wood.",
+  "dimensionsM": {
+    "x": 0.065,
+    "y": 0.065,
+    "z": 0.86
+  },
+  "rotationUnits": "degrees",
+  "animation": {
+    "implemented": false,
+    "rigidAsset": true,
+    "articulatedParts": []
+  },
+  "parts": [
+    {
+      "name": "knob_bottom_round",
+      "primitive": "cylinder",
+      "colorhex": "#AE8B59",
+      "location": [
+        0,
+        0,
+        0.002
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0195,
+      "depth": 0.004
+    },
+    {
+      "name": "knob_lower_round",
+      "primitive": "cylinder",
+      "colorhex": "#B99663",
+      "location": [
+        0,
+        0,
+        0.007
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.022,
+      "depth": 0.006
+    },
+    {
+      "name": "knob_widest_section",
+      "primitive": "cylinder",
+      "colorhex": "#C3A16D",
+      "location": [
+        0,
+        0,
+        0.015
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.023,
+      "depth": 0.01
+    },
+    {
+      "name": "knob_upper_round",
+      "primitive": "cylinder",
+      "colorhex": "#C6A574",
+      "location": [
+        0,
+        0,
+        0.023
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.021,
+      "depth": 0.006
+    },
+    {
+      "name": "knob_neck",
+      "primitive": "cylinder",
+      "colorhex": "#C9A978",
+      "location": [
+        0,
+        0,
+        0.0285
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.017,
+      "depth": 0.005
+    },
+    {
+      "name": "continuous_handle_core",
+      "primitive": "cylinder",
+      "colorhex": "#C8A978",
+      "location": [
+        0,
+        0,
+        0.1505
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0122,
+      "depth": 0.239
+    },
+    {
+      "name": "black_taped_grip",
+      "primitive": "cylinder",
+      "colorhex": "#232426",
+      "location": [
+        0,
+        0,
+        0.1195
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0131,
+      "depth": 0.171
+    },
+    {
+      "name": "tape_bottom_binding",
+      "primitive": "cylinder",
+      "colorhex": "#191A1B",
+      "location": [
+        0,
+        0,
+        0.036
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0135,
+      "depth": 0.004
+    },
+    {
+      "name": "tape_wrap_seam_01",
+      "primitive": "torus",
+      "colorhex": "#303133",
+      "location": [
+        0,
+        0,
+        0.052
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_wrap_seam_02",
+      "primitive": "torus",
+      "colorhex": "#2D2E30",
+      "location": [
+        0,
+        0,
+        0.069
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_wrap_seam_03",
+      "primitive": "torus",
+      "colorhex": "#303133",
+      "location": [
+        0,
+        0,
+        0.086
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_wrap_seam_04",
+      "primitive": "torus",
+      "colorhex": "#343537",
+      "location": [
+        0,
+        0,
+        0.103
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_wrap_seam_05",
+      "primitive": "torus",
+      "colorhex": "#303133",
+      "location": [
+        0,
+        0,
+        0.12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_wrap_seam_06",
+      "primitive": "torus",
+      "colorhex": "#333436",
+      "location": [
+        0,
+        0,
+        0.137
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_wrap_seam_07",
+      "primitive": "torus",
+      "colorhex": "#2D2E30",
+      "location": [
+        0,
+        0,
+        0.154
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_wrap_seam_08",
+      "primitive": "torus",
+      "colorhex": "#303133",
+      "location": [
+        0,
+        0,
+        0.171
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_wrap_seam_09",
+      "primitive": "torus",
+      "colorhex": "#2D2E30",
+      "location": [
+        0,
+        0,
+        0.188
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.01295,
+      "minorRadius": 0.00045
+    },
+    {
+      "name": "tape_top_binding",
+      "primitive": "cylinder",
+      "colorhex": "#191A1B",
+      "location": [
+        0,
+        0,
+        0.203
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0135,
+      "depth": 0.004
+    },
+    {
+      "name": "upper_handle",
+      "primitive": "cylinder",
+      "colorhex": "#CAAB7C",
+      "location": [
+        0,
+        0,
+        0.29
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0126,
+      "depth": 0.04
+    },
+    {
+      "name": "shoulder_taper_01",
+      "primitive": "cylinder",
+      "colorhex": "#CAAB7C",
+      "location": [
+        0,
+        0,
+        0.3175
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.013,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_02",
+      "primitive": "cylinder",
+      "colorhex": "#CAAB7C",
+      "location": [
+        0,
+        0,
+        0.3325
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0136,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_03",
+      "primitive": "cylinder",
+      "colorhex": "#CBAC7D",
+      "location": [
+        0,
+        0,
+        0.3475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0143,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_04",
+      "primitive": "cylinder",
+      "colorhex": "#CBAC7D",
+      "location": [
+        0,
+        0,
+        0.3625
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0151,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_05",
+      "primitive": "cylinder",
+      "colorhex": "#CBAC7D",
+      "location": [
+        0,
+        0,
+        0.3775
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.016,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_06",
+      "primitive": "cylinder",
+      "colorhex": "#CCAD7E",
+      "location": [
+        0,
+        0,
+        0.3925
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.017,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_07",
+      "primitive": "cylinder",
+      "colorhex": "#CCAD7E",
+      "location": [
+        0,
+        0,
+        0.4075
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0181,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_08",
+      "primitive": "cylinder",
+      "colorhex": "#CCAD7E",
+      "location": [
+        0,
+        0,
+        0.4225
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0193,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_09",
+      "primitive": "cylinder",
+      "colorhex": "#CDAE7F",
+      "location": [
+        0,
+        0,
+        0.4375
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0206,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_10",
+      "primitive": "cylinder",
+      "colorhex": "#CDAE7F",
+      "location": [
+        0,
+        0,
+        0.4525
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0219,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_11",
+      "primitive": "cylinder",
+      "colorhex": "#CDAE7F",
+      "location": [
+        0,
+        0,
+        0.4675
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0232,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_12",
+      "primitive": "cylinder",
+      "colorhex": "#CEAF80",
+      "location": [
+        0,
+        0,
+        0.4825
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0245,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_13",
+      "primitive": "cylinder",
+      "colorhex": "#CEAF80",
+      "location": [
+        0,
+        0,
+        0.4975
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0258,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_14",
+      "primitive": "cylinder",
+      "colorhex": "#CEAF80",
+      "location": [
+        0,
+        0,
+        0.5125
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.027,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_15",
+      "primitive": "cylinder",
+      "colorhex": "#CFB081",
+      "location": [
+        0,
+        0,
+        0.5275
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0281,
+      "depth": 0.015
+    },
+    {
+      "name": "shoulder_taper_16",
+      "primitive": "cylinder",
+      "colorhex": "#CFB081",
+      "location": [
+        0,
+        0,
+        0.5425
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0291,
+      "depth": 0.015
+    },
+    {
+      "name": "barrel_lower_transition",
+      "primitive": "cylinder",
+      "colorhex": "#CFB081",
+      "location": [
+        0,
+        0,
+        0.56
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.03,
+      "depth": 0.02
+    },
+    {
+      "name": "barrel_transition_02",
+      "primitive": "cylinder",
+      "colorhex": "#CFB081",
+      "location": [
+        0,
+        0,
+        0.58
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0307,
+      "depth": 0.02
+    },
+    {
+      "name": "barrel_transition_03",
+      "primitive": "cylinder",
+      "colorhex": "#CFB081",
+      "location": [
+        0,
+        0,
+        0.6
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0314,
+      "depth": 0.02
+    },
+    {
+      "name": "barrel_transition_04",
+      "primitive": "cylinder",
+      "colorhex": "#CFB081",
+      "location": [
+        0,
+        0,
+        0.62
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.032,
+      "depth": 0.02
+    },
+    {
+      "name": "barrel_main",
+      "primitive": "cylinder",
+      "colorhex": "#CFB081",
+      "location": [
+        0,
+        0,
+        0.715
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0325,
+      "depth": 0.17
+    },
+    {
+      "name": "barrel_tip_round_01",
+      "primitive": "cylinder",
+      "colorhex": "#CFB081",
+      "location": [
+        0,
+        0,
+        0.815
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.032,
+      "depth": 0.03
+    },
+    {
+      "name": "barrel_tip_round_02",
+      "primitive": "cylinder",
+      "colorhex": "#CEAE7E",
+      "location": [
+        0,
+        0,
+        0.8365
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.0305,
+      "depth": 0.013
+    },
+    {
+      "name": "barrel_tip_round_03",
+      "primitive": "cylinder",
+      "colorhex": "#CBAB7A",
+      "location": [
+        0,
+        0,
+        0.8475
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.028,
+      "depth": 0.009
+    },
+    {
+      "name": "barrel_tip_round_04",
+      "primitive": "cylinder",
+      "colorhex": "#C8A776",
+      "location": [
+        0,
+        0,
+        0.854
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.024,
+      "depth": 0.004
+    },
+    {
+      "name": "barrel_tip_round_05",
+      "primitive": "cylinder",
+      "colorhex": "#C5A371",
+      "location": [
+        0,
+        0,
+        0.857
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.019,
+      "depth": 0.002
+    },
+    {
+      "name": "barrel_tip_round_06",
+      "primitive": "cylinder",
+      "colorhex": "#C2A06E",
+      "location": [
+        0,
+        0,
+        0.8585
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.013,
+      "depth": 0.001
+    },
+    {
+      "name": "barrel_tip_endgrain_center",
+      "primitive": "cylinder",
+      "colorhex": "#BF9D6B",
+      "location": [
+        0,
+        0,
+        0.8595
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.007,
+      "depth": 0.001
+    },
+    {
+      "name": "ash_grain_front_long",
+      "primitive": "beam",
+      "colorhex": "#B79869",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.0102,
+        -0.0308,
+        0.642
+      ],
+      "end": [
+        0.0108,
+        -0.0306,
+        0.791
+      ],
+      "radius": 0.00025
+    },
+    {
+      "name": "ash_grain_front_companion",
+      "primitive": "beam",
+      "colorhex": "#BE9F70",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.014,
+        -0.0292,
+        0.659
+      ],
+      "end": [
+        0.0146,
+        -0.0289,
+        0.781
+      ],
+      "radius": 0.00028
+    },
+    {
+      "name": "ash_grain_front_left",
+      "primitive": "beam",
+      "colorhex": "#B99A6B",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.018,
+        -0.027,
+        0.638
+      ],
+      "end": [
+        -0.0175,
+        -0.0273,
+        0.774
+      ],
+      "radius": 0.00024
+    },
+    {
+      "name": "ash_grain_back_long",
+      "primitive": "beam",
+      "colorhex": "#B79869",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.0102,
+        0.0308,
+        0.646
+      ],
+      "end": [
+        -0.0108,
+        0.0306,
+        0.789
+      ],
+      "radius": 0.00025
+    },
+    {
+      "name": "ash_grain_side_short",
+      "primitive": "beam",
+      "colorhex": "#BE9F70",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.0292,
+        0.014,
+        0.674
+      ],
+      "end": [
+        0.0289,
+        0.0146,
+        0.787
+      ],
+      "radius": 0.00028
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 88.5637698173523,
+    "usage": {
+      "prompt_tokens": 215,
+      "completion_tokens": 5385,
+      "total_tokens": 5600,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 778,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "held_equipment",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

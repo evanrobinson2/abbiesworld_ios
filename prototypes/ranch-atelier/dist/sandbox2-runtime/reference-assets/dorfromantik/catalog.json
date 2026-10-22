@@ -1,0 +1,6388 @@
+{
+  "models": [
+    {
+      "id": "771",
+      "name": "House_F_v002",
+      "category": "Houses",
+      "file": "771.obj",
+      "vertices": 148,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "771-attributes.json"
+    },
+    {
+      "id": "773",
+      "name": "Field_1A_v02",
+      "category": "Fields",
+      "file": "773.obj",
+      "vertices": 48,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "773-attributes.json"
+    },
+    {
+      "id": "794",
+      "name": "RiverTile_2A_v002",
+      "category": "Terrain",
+      "file": "794.obj",
+      "vertices": 104,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "794-attributes.json"
+    },
+    {
+      "id": "795",
+      "name": "House_B_Medieval",
+      "category": "Houses",
+      "file": "795.obj",
+      "vertices": 150,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "795-attributes.json"
+    },
+    {
+      "id": "797",
+      "name": "House_C_Medieval",
+      "category": "Houses",
+      "file": "797.obj",
+      "vertices": 153,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "797-attributes.json"
+    },
+    {
+      "id": "818",
+      "name": "House_E_v002",
+      "category": "Houses",
+      "file": "818.obj",
+      "vertices": 124,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "818-attributes.json"
+    },
+    {
+      "id": "852",
+      "name": "House_C_Sakura",
+      "category": "Houses",
+      "file": "852.obj",
+      "vertices": 70,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "852-attributes.json"
+    },
+    {
+      "id": "860",
+      "name": "Tree_C_Inverted_joined_v001",
+      "category": "Trees",
+      "file": "860.obj",
+      "vertices": 162,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "860-attributes.json"
+    },
+    {
+      "id": "869",
+      "name": "TerrainTile_B_v001",
+      "category": "Terrain",
+      "file": "869.obj",
+      "vertices": 30,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "869-attributes.json"
+    },
+    {
+      "id": "871",
+      "name": "House_A_Medieval",
+      "category": "Houses",
+      "file": "871.obj",
+      "vertices": 180,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "871-attributes.json"
+    },
+    {
+      "id": "874",
+      "name": "House_E_Sakura",
+      "category": "Houses",
+      "file": "874.obj",
+      "vertices": 66,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "874-attributes.json"
+    },
+    {
+      "id": "875",
+      "name": "House_B_simplified_v002",
+      "category": "Houses",
+      "file": "875.obj",
+      "vertices": 176,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "875-attributes.json"
+    },
+    {
+      "id": "894",
+      "name": "RiverTile_2A_v002_River",
+      "category": "Terrain",
+      "file": "894.obj",
+      "vertices": 14,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "894-attributes.json"
+    },
+    {
+      "id": "899",
+      "name": "Tree_B_Inverted_joined_v001",
+      "category": "Trees",
+      "file": "899.obj",
+      "vertices": 162,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "899-attributes.json"
+    },
+    {
+      "id": "902",
+      "name": "Field_2A",
+      "category": "Fields",
+      "file": "902.obj",
+      "vertices": 66,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "902-attributes.json"
+    },
+    {
+      "id": "957",
+      "name": "House_C_v002",
+      "category": "Houses",
+      "file": "957.obj",
+      "vertices": 156,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "957-attributes.json"
+    },
+    {
+      "id": "985",
+      "name": "House_D_v002",
+      "category": "Houses",
+      "file": "985.obj",
+      "vertices": 168,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "985-attributes.json"
+    },
+    {
+      "id": "994",
+      "name": "Tree_D",
+      "category": "Trees",
+      "file": "994.obj",
+      "vertices": 161,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "994-attributes.json"
+    },
+    {
+      "id": "1004",
+      "name": "House_D_Medieval",
+      "category": "Houses",
+      "file": "1004.obj",
+      "vertices": 212,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "1004-attributes.json"
+    },
+    {
+      "id": "1005",
+      "name": "Tree_A_Inverted_joined_v001",
+      "category": "Trees",
+      "file": "1005.obj",
+      "vertices": 156,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "1005-attributes.json"
+    },
+    {
+      "id": "1006",
+      "name": "Tree_E",
+      "category": "Trees",
+      "file": "1006.obj",
+      "vertices": 161,
+      "source": "sharedassets0.assets",
+      "texture": null,
+      "shaderData": "1006-attributes.json"
+    },
+    {
+      "id": "1021",
+      "name": "House_B_Sakura",
+      "category": "Houses",
+      "file": "1021.obj",
+      "vertices": 74,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "1021-attributes.json"
+    },
+    {
+      "id": "1022",
+      "name": "House_A_simplified_v002",
+      "category": "Houses",
+      "file": "1022.obj",
+      "vertices": 172,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "1022-attributes.json"
+    },
+    {
+      "id": "1042",
+      "name": "House_E_Medieval",
+      "category": "Houses",
+      "file": "1042.obj",
+      "vertices": 214,
+      "source": "sharedassets0.assets",
+      "texture": "TEX_HouseA_v002.png",
+      "shaderData": "1042-attributes.json"
+    }
+  ],
+  "prefabs": [
+    {
+      "id": "51215",
+      "name": "House_1A",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.028999999165534973,
+            0.0,
+            0.3100000023841858
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51214",
+      "name": "House_6A",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.3230000138282776,
+            0.0,
+            0.008999999612569809
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.164000004529953,
+            0.0,
+            0.25699999928474426
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.14100000262260437,
+            0.0,
+            0.2540000081062317
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.3179999887943268,
+            0.0,
+            0.008999999612569809
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.17900000512599945,
+            0.0,
+            -0.2409999966621399
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.11400000005960464,
+            0.0,
+            -0.2639999985694885
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.0020000000949949026,
+            0.0,
+            -0.0010000000474974513
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51213",
+      "name": "House_2A",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.24699999392032623,
+            0.0,
+            0.15399999916553497
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.007000000216066837,
+            0.0,
+            0.31200000643730164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51212",
+      "name": "House_2B",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.06300000101327896,
+            0.0,
+            0.05700000002980232
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.2630000114440918,
+            0.0,
+            -0.1469999998807907
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.012000000104308128,
+            0.0,
+            0.3109999895095825
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51211",
+      "name": "House_4A",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.029999999329447746,
+            0.0,
+            -0.3019999861717224
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.05299999937415123,
+            0.0,
+            0.003000000026077032
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.2840000092983246,
+            0.0,
+            0.10000000149011612
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.21699999272823334,
+            0.0,
+            -0.20100000500679016
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.020999999716877937,
+            0.0,
+            0.2849999964237213
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51210",
+      "name": "House_2C",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.01600000075995922,
+            0.0,
+            -0.30000001192092896
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.010999999940395355,
+            0.0,
+            0.2939999997615814
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51209",
+      "name": "House_4B",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.2529999911785126,
+            0.0,
+            -0.15800000727176666
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.028999999165534973,
+            0.0,
+            -0.05299999937415123
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.25699999928474426,
+            0.0,
+            -0.15600000321865082
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.2460000067949295,
+            0.0,
+            0.10599999874830246
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.03400000184774399,
+            0.0,
+            0.25099998712539673
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51208",
+      "name": "House_4C",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.23199999332427979,
+            0.0,
+            -0.13300000131130219
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.04100000113248825,
+            0.0,
+            -0.30300000309944153
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.0,
+            0.0,
+            0.012000000104308128
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.2549999952316284,
+            0.0,
+            0.1979999989271164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.00800000037997961,
+            0.0,
+            0.2879999876022339
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51207",
+      "name": "House_3C",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.039000000804662704,
+            0.0,
+            0.26600000262260437
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.24199999868869781,
+            0.0,
+            -0.1509999930858612
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.2639999985694885,
+            0.0,
+            0.1340000033378601
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.013000000268220901,
+            0.0,
+            -0.004999999888241291
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51206",
+      "name": "House_3D",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.25200000405311584,
+            0.0,
+            -0.12399999797344208
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.01600000075995922,
+            0.0,
+            -0.029999999329447746
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.012000000104308128,
+            0.0,
+            0.27399998903274536
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.2669999897480011,
+            0.0,
+            -0.14300000667572021
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51205",
+      "name": "House_3A",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.21400000154972076,
+            0.0,
+            0.15000000596046448
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.008999999612569809,
+            0.0,
+            0.3160000145435333
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.24699999392032623,
+            0.0,
+            -0.10899999737739563
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51204",
+      "name": "House_3B",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.0020000000949949026,
+            0.0,
+            -0.289000004529953
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.010999999940395355,
+            0.0,
+            0.29600000381469727
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.026000000536441803,
+            0.0,
+            -0.007000000216066837
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.24799999594688416,
+            0.0,
+            0.14300000667572021
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51203",
+      "name": "House_5A",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.25,
+            0.0,
+            -0.1550000011920929
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.20200000703334808,
+            0.0,
+            -0.23999999463558197
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.027000000700354576,
+            0.0,
+            -0.27000001072883606
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.2980000078678131,
+            0.0,
+            -0.004999999888241291
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.2240000069141388,
+            0.0,
+            0.23399999737739563
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            -0.004999999888241291,
+            0.0,
+            0.29499998688697815
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.006000000052154064,
+            0.0,
+            0.012000000104308128
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "51017",
+      "name": "Trees_1A",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.10899999737739563,
+            0.0,
+            0.38499999046325684
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.16099999845027924,
+            0.0,
+            0.39500001072883606
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.01600000075995922,
+            0.0,
+            0.34599998593330383
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.11999999731779099,
+            0.0,
+            0.2800000011920929
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "49926",
+      "name": "Trees_2A",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.10700000077486038,
+            0.0,
+            0.37299999594688416
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.019999999552965164,
+            0.0,
+            0.35499998927116394
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.16300000250339508,
+            0.0,
+            0.40400001406669617
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.27799999713897705,
+            0.0,
+            0.2809999883174896
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.11999999731779099,
+            0.0,
+            0.2759999930858612
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.4519999921321869,
+            0.0,
+            0.050999999046325684
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3700000047683716,
+            0.0,
+            0.12800000607967377
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.257999986410141,
+            0.0,
+            0.13500000536441803
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.023000000044703484,
+            0.0,
+            0.22699999809265137
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12800000607967377,
+            0.0,
+            0.15299999713897705
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "49782",
+      "name": "Trees_3A",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.10700000077486038,
+            0.0,
+            0.08500000089406967
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2460000067949295,
+            0.0,
+            0.07000000029802322
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3100000023841858,
+            0.0,
+            -0.0989999994635582
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.14100000262260437,
+            0.0,
+            -0.0689999982714653
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1940000057220459,
+            0.0,
+            -0.18700000643730164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.27900001406669617,
+            0.0,
+            -0.2939999997615814
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.4350000023841858,
+            0.0,
+            -0.07599999755620956
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3619999885559082,
+            0.0,
+            0.009999999776482582
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.38600000739097595,
+            0.0,
+            0.12800000607967377
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.23600000143051147,
+            0.0,
+            0.1899999976158142
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.34299999475479126,
+            0.0,
+            0.2370000034570694
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.25099998712539673,
+            0.0,
+            0.3140000104904175
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1589999943971634,
+            0.0,
+            0.414000004529953
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.13300000131130219,
+            0.0,
+            0.23000000417232513
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.01899999938905239,
+            0.0,
+            0.22200000286102295
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.019999999552965164,
+            0.0,
+            0.3630000054836273
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.10999999940395355,
+            0.0,
+            0.3799999952316284
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "48518",
+      "name": "1_2A_House",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.24699999392032623,
+            0.0,
+            0.15399999916553497
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        },
+        {
+          "position": [
+            0.007000000216066837,
+            0.0,
+            0.31200000643730164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "47240",
+      "name": "Trees_4A",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.02500000037252903,
+            0.0,
+            -0.05299999937415123
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.07199999690055847,
+            0.0,
+            -0.18000000715255737
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.017999999225139618,
+            0.0,
+            -0.2540000081062317
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.0560000017285347,
+            0.0,
+            -0.3930000066757202
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1379999965429306,
+            0.0,
+            -0.375
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.27300000190734863,
+            0.0,
+            -0.3240000009536743
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.30799999833106995,
+            0.0,
+            -0.17900000512599945
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.15000000596046448,
+            0.0,
+            -0.2160000056028366
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12800000607967377,
+            0.0,
+            -0.07900000363588333
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2549999952316284,
+            0.0,
+            -0.008999999612569809
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.39800000190734863,
+            0.0,
+            0.06700000166893005
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.4059999883174896,
+            0.0,
+            -0.07999999821186066
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2460000067949295,
+            0.0,
+            0.13500000536441803
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.289000004529953,
+            0.0,
+            0.29100000858306885
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.10499999672174454,
+            0.0,
+            0.07999999821186066
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12800000607967377,
+            0.0,
+            0.2290000021457672
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1589999943971634,
+            0.0,
+            0.39899998903274536
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.017999999225139618,
+            0.0,
+            0.3479999899864197
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.027000000700354576,
+            0.0,
+            0.22100000083446503
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.039000000804662704,
+            0.0,
+            0.07800000160932541
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.10899999737739563,
+            0.0,
+            0.3709999918937683
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "44008",
+      "name": "Trees_6A",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.11800000071525574,
+            0.0,
+            0.37700000405311584
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.020999999716877937,
+            0.0,
+            0.3529999852180481
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.16200000047683716,
+            0.0,
+            0.3970000147819519
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.28600001335144043,
+            0.0,
+            0.29899999499320984
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.20800000429153442,
+            0.0,
+            0.17499999701976776
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.023000000044703484,
+            0.0,
+            0.22699999809265137
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12399999797344208,
+            0.0,
+            0.23499999940395355
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2709999978542328,
+            0.0,
+            0.289000004529953
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24699999392032623,
+            0.0,
+            0.1379999965429306
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.39399999380111694,
+            0.0,
+            0.06599999964237213
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.10300000011920929,
+            0.0,
+            0.09200000017881393
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.041999999433755875,
+            0.0,
+            0.09000000357627869
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.40299999713897705,
+            0.0,
+            0.10599999874830246
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.3089999854564667,
+            0.0,
+            0.017999999225139618
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.42100000381469727,
+            0.0,
+            -0.07000000029802322
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.3190000057220459,
+            0.0,
+            -0.13600000739097595
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.1889999955892563,
+            0.0,
+            -0.035999998450279236
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.20499999821186066,
+            0.0,
+            -0.18299999833106995
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.2709999978542328,
+            0.0,
+            -0.3089999854564667
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.19499999284744263,
+            0.0,
+            -0.4169999957084656
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.02199999988079071,
+            0.0,
+            -0.4189999997615814
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.029999999329447746,
+            0.0,
+            -0.05000000074505806
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.125,
+            0.0,
+            -0.07599999755620956
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24899999797344208,
+            0.0,
+            -0.009999999776482582
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2770000100135803,
+            0.0,
+            -0.12999999523162842
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.39899998903274536,
+            0.0,
+            -0.09200000017881393
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.33899998664855957,
+            0.0,
+            -0.2370000034570694
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24899999797344208,
+            0.0,
+            -0.35100001096725464
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.17299999296665192,
+            0.0,
+            -0.20600000023841858
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.11699999868869781,
+            0.0,
+            -0.3970000147819519
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.1080000028014183,
+            0.0,
+            -0.31700000166893005
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.01600000075995922,
+            0.0,
+            -0.24899999797344208
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.07800000160932541,
+            0.0,
+            -0.18299999833106995
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "43790",
+      "name": "0_1A_House",
+      "category": "Houses",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            0.028999999165534973,
+            0.0,
+            0.3100000023841858
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41446
+        }
+      ]
+    },
+    {
+      "id": "43069",
+      "name": "Trees_4C",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.18799999356269836,
+            0.0,
+            -0.03500000014901161
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.03700000047683716,
+            0.0,
+            -0.04699999839067459
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.41499999165534973,
+            0.0,
+            -0.0689999982714653
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.32100000977516174,
+            0.0,
+            -0.14100000262260437
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.20600000023841858,
+            0.0,
+            -0.18400000035762787
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.26899999380111694,
+            0.0,
+            -0.3009999990463257
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.19499999284744263,
+            0.0,
+            -0.41499999165534973
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.10100000351667404,
+            0.0,
+            -0.3230000138282776
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.07599999755620956,
+            0.0,
+            -0.17599999904632568
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.014000000432133675,
+            0.0,
+            -0.257999986410141
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.01899999938905239,
+            0.0,
+            -0.41999998688697815
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.11999999731779099,
+            0.0,
+            -0.4020000100135803
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12800000607967377,
+            0.0,
+            -0.0729999989271164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.05000000074505806,
+            0.0,
+            0.09099999815225601
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.017000000923871994,
+            0.0,
+            0.2199999988079071
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.13199999928474426,
+            0.0,
+            0.2280000001192093
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.10700000077486038,
+            0.0,
+            0.08699999749660492
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.25200000405311584,
+            0.0,
+            0.1420000046491623
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24799999594688416,
+            0.0,
+            -0.004999999888241291
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.39100000262260437,
+            0.0,
+            0.0729999989271164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.28299999237060547,
+            0.0,
+            0.28200000524520874
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1679999977350235,
+            0.0,
+            0.4009999930858612
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.01899999938905239,
+            0.0,
+            0.35199999809265137
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.10999999940395355,
+            0.0,
+            0.37400001287460327
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "43067",
+      "name": "Trees_3C",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.028999999165534973,
+            0.0,
+            -0.04800000041723251
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.27799999713897705,
+            0.0,
+            -0.05999999865889549
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.41999998688697815,
+            0.0,
+            -0.08100000023841858
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.2759999930858612,
+            0.0,
+            -0.1979999989271164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.2590000033378601,
+            0.0,
+            -0.33899998664855957
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.10499999672174454,
+            0.0,
+            -0.19300000369548798
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.14100000262260437,
+            0.0,
+            0.008999999612569809
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12300000339746475,
+            0.0,
+            -0.0729999989271164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3919999897480011,
+            0.0,
+            0.1289999932050705
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2529999911785126,
+            0.0,
+            0.07199999690055847
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.10899999737739563,
+            0.0,
+            0.08699999749660492
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.041999999433755875,
+            0.0,
+            0.09000000357627869
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.020999999716877937,
+            0.0,
+            0.22200000286102295
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.10999999940395355,
+            0.0,
+            0.37599998712539673
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.01899999938905239,
+            0.0,
+            0.3569999933242798
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.15600000321865082,
+            0.0,
+            0.4050000011920929
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12999999523162842,
+            0.0,
+            0.2280000001192093
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24199999868869781,
+            0.0,
+            0.18700000643730164
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.34299999475479126,
+            0.0,
+            0.2370000034570694
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24899999797344208,
+            0.0,
+            0.3179999887943268
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "43065",
+      "name": "Trees_5A",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.18700000643730164,
+            0.0,
+            -0.035999998450279236
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.42399999499320984,
+            0.0,
+            -0.06800000369548798
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.3230000138282776,
+            0.0,
+            -0.13600000739097595
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.2750000059604645,
+            0.0,
+            -0.29899999499320984
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.20900000631809235,
+            0.0,
+            -0.1860000044107437
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.19099999964237213,
+            0.0,
+            -0.41499999165534973
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.10499999672174454,
+            0.0,
+            -0.3160000145435333
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.020999999716877937,
+            0.0,
+            -0.42899999022483826
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.11999999731779099,
+            0.0,
+            -0.4050000011920929
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24899999797344208,
+            0.0,
+            -0.3529999852180481
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.33799999952316284,
+            0.0,
+            -0.23399999737739563
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3959999978542328,
+            0.0,
+            -0.09700000286102295
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.26899999380111694,
+            0.0,
+            -0.125
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1679999977350235,
+            0.0,
+            -0.2070000022649765
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.010999999940395355,
+            0.0,
+            -0.25099998712539673
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.07800000160932541,
+            0.0,
+            -0.1850000023841858
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.035999998450279236,
+            0.0,
+            -0.052000001072883606
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.125,
+            0.0,
+            -0.07800000160932541
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24799999594688416,
+            0.0,
+            -0.009999999776482582
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3869999945163727,
+            0.0,
+            0.07000000029802322
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.25200000405311584,
+            0.0,
+            0.1420000046491623
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.0989999994635582,
+            0.0,
+            0.07999999821186066
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.05000000074505806,
+            0.0,
+            0.0860000029206276
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.02199999988079071,
+            0.0,
+            0.22300000488758087
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12700000405311584,
+            0.0,
+            0.22699999809265137
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2800000011920929,
+            0.0,
+            0.28700000047683716
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.17100000381469727,
+            0.0,
+            0.4020000100135803
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.017999999225139618,
+            0.0,
+            0.3440000116825104
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.11100000143051147,
+            0.0,
+            0.3779999911785126
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "43064",
+      "name": "Trees_3D",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.028999999165534973,
+            0.0,
+            -0.05000000074505806
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.10100000351667404,
+            0.0,
+            0.07800000160932541
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1340000033378601,
+            0.0,
+            0.22699999809265137
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.16300000250339508,
+            0.0,
+            0.4009999930858612
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.1120000034570694,
+            0.0,
+            0.3779999911785126
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.017999999225139618,
+            0.0,
+            0.35899999737739563
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.01899999938905239,
+            0.0,
+            0.2199999988079071
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.04399999976158142,
+            0.0,
+            0.0860000029206276
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.1469999998807907,
+            0.0,
+            -0.003000000026077032
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.09700000286102295,
+            0.0,
+            -0.19499999284744263
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.27900001406669617,
+            0.0,
+            -0.19499999284744263
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.2770000100135803,
+            0.0,
+            -0.057999998331069946
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.421999990940094,
+            0.0,
+            -0.07900000363588333
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.26100000739097595,
+            0.0,
+            -0.3400000035762787
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12999999523162842,
+            0.0,
+            -0.07699999958276749
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.24799999594688416,
+            0.0,
+            -0.010999999940395355
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.30000001192092896,
+            0.0,
+            -0.1770000010728836
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.40799999237060547,
+            0.0,
+            -0.07599999755620956
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.27300000190734863,
+            0.0,
+            -0.32600000500679016
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1509999930858612,
+            0.0,
+            -0.21400000154972076
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "43062",
+      "name": "Trees_2C",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.03400000184774399,
+            0.0,
+            -0.00800000037997961
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.0989999994635582,
+            0.0,
+            0.11699999868869781
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.01600000075995922,
+            0.0,
+            0.2240000069141388
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12300000339746475,
+            0.0,
+            0.11500000208616257
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12300000339746475,
+            0.0,
+            0.2809999883174896
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.16899999976158142,
+            0.0,
+            0.41200000047683716
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.017999999225139618,
+            0.0,
+            0.35899999737739563
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.11100000143051147,
+            0.0,
+            0.37299999594688416
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.125,
+            0.0,
+            -0.08299999684095383
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.07699999958276749,
+            0.0,
+            -0.06499999761581421
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.08100000023841858,
+            0.0,
+            -0.20600000023841858
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.1340000033378601,
+            0.0,
+            -0.37400001287460327
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.0010000000474974513,
+            0.0,
+            -0.29100000858306885
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.0430000014603138,
+            0.0,
+            -0.4059999883174896
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.18000000715255737,
+            0.0,
+            -0.3720000088214874
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12700000405311584,
+            0.0,
+            -0.2709999978542328
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1509999930858612,
+            0.0,
+            -0.15199999511241913
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "43061",
+      "name": "Trees_4B",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.03099999949336052,
+            0.0,
+            -0.04399999976158142
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.18700000643730164,
+            0.0,
+            -0.03200000151991844
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.4269999861717224,
+            0.0,
+            -0.07100000232458115
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.3160000145435333,
+            0.0,
+            -0.1379999965429306
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.19300000369548798,
+            0.0,
+            -0.17900000512599945
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.27000001072883606,
+            0.0,
+            -0.3019999861717224
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.06800000369548798,
+            0.0,
+            -0.18199999630451202
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.024000000208616257,
+            0.0,
+            -0.25600001215934753
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.14900000393390656,
+            0.0,
+            -0.21199999749660492
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.27900001406669617,
+            0.0,
+            -0.32199999690055847
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3059999942779541,
+            0.0,
+            -0.18199999630451202
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.40700000524520874,
+            0.0,
+            -0.07900000363588333
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3930000066757202,
+            0.0,
+            0.06499999761581421
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.25099998712539673,
+            0.0,
+            -0.014000000432133675
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.13099999725818634,
+            0.0,
+            -0.07699999958276749
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.10199999809265137,
+            0.0,
+            0.08399999886751175
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.0430000014603138,
+            0.0,
+            0.08399999886751175
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2529999911785126,
+            0.0,
+            0.14000000059604645
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2770000100135803,
+            0.0,
+            0.2840000092983246
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12300000339746475,
+            0.0,
+            0.2240000069141388
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.020999999716877937,
+            0.0,
+            0.21899999678134918
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.019999999552965164,
+            0.0,
+            0.35199999809265137
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.164000004529953,
+            0.0,
+            0.39800000190734863
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.11500000208616257,
+            0.0,
+            0.3790000081062317
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "43059",
+      "name": "Trees_2B",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.029999999329447746,
+            0.0,
+            -0.007000000216066837
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.11400000005960464,
+            0.0,
+            0.12700000405311584
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.10599999874830246,
+            0.0,
+            0.13199999928474426
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.024000000208616257,
+            0.0,
+            0.22100000083446503
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12200000137090683,
+            0.0,
+            0.27300000190734863
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.1420000046491623,
+            0.0,
+            0.4090000092983246
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.020999999716877937,
+            0.0,
+            0.35899999737739563
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.11500000208616257,
+            0.0,
+            0.37599998712539673
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.08299999684095383,
+            0.0,
+            -0.05999999865889549
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.21199999749660492,
+            0.0,
+            -0.029999999329447746
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.30399999022483826,
+            0.0,
+            -0.11400000005960464
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.3409999907016754,
+            0.0,
+            -0.24799999594688416
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.14300000667572021,
+            0.0,
+            -0.164000004529953
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2199999988079071,
+            0.0,
+            -0.257999986410141
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.42100000381469727,
+            0.0,
+            -0.07999999821186066
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    },
+    {
+      "id": "43058",
+      "name": "Trees_3B",
+      "category": "Trees",
+      "edges": [],
+      "source": "Recovered ElementGroupSegment placement data",
+      "items": [
+        {
+          "position": [
+            -0.028999999165534973,
+            0.0,
+            -0.04800000041723251
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.0949999988079071,
+            0.0,
+            -0.18299999833106995
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.004999999888241291,
+            0.0,
+            -0.2840000092983246
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.1080000028014183,
+            0.0,
+            -0.36899998784065247
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12800000607967377,
+            0.0,
+            -0.3959999978542328
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.12300000339746475,
+            0.0,
+            -0.26899999380111694
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.05700000002980232,
+            0.0,
+            -0.1679999977350235
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.13099999725818634,
+            0.0,
+            -0.07199999690055847
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.04399999976158142,
+            0.0,
+            0.09000000357627869
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.10199999809265137,
+            0.0,
+            0.07900000363588333
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.26100000739097595,
+            0.0,
+            0.06599999964237213
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.39899998903274536,
+            0.0,
+            0.13500000536441803
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.23999999463558197,
+            0.0,
+            0.3230000138282776
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.35100001096725464,
+            0.0,
+            0.24899999797344208
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.2290000021457672,
+            0.0,
+            0.19099999964237213
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.11800000071525574,
+            0.0,
+            0.23899999260902405
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.023000000044703484,
+            0.0,
+            0.21799999475479126
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            -0.11299999803304672,
+            0.0,
+            0.3799999952316284
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.019999999552965164,
+            0.0,
+            0.3529999852180481
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        },
+        {
+          "position": [
+            0.15299999713897705,
+            0.0,
+            0.4090000092983246
+          ],
+          "quaternion": [
+            0.0,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "scale": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "elementType": 41449
+        }
+      ]
+    }
+  ]
+}

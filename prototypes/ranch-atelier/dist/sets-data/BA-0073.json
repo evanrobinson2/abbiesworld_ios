@@ -1,0 +1,47 @@
+{
+  "id": "aw.ranch.asset.ba-0073",
+  "name": "Market drainage edge",
+  "dependencies": [],
+  "geometry": {
+    "mesh_objects": 23,
+    "triangles": 978,
+    "bounds_min": [
+      -0.38499999046325684,
+      -1.2599999904632568,
+      0.014999999664723873
+    ],
+    "bounds_max": [
+      0.38499999046325684,
+      1.25,
+      0.23000000417232513
+    ],
+    "dimensions_m": [
+      0.77,
+      2.51,
+      0.215
+    ],
+    "material_slots": [
+      "Stone",
+      "Clay"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 2
+  },
+  "materials": [
+    "Stone",
+    "Clay"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0073",
+  "intent": "A shallow sloped channel along the market perimeter.",
+  "family": "Market ground",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0073",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

@@ -1,0 +1,1 @@
+const test=require('node:test');const assert=require('node:assert/strict');const path=require('node:path');const {spawnSync}=require('node:child_process');test('Zombie Run deterministic combat and journey regression',()=>{const r=spawnSync(process.execPath,['--test',path.join(__dirname,'zr-engine.test.mjs')],{encoding:'utf8'});assert.equal(r.status,0,r.stdout+'\n'+r.stderr);});

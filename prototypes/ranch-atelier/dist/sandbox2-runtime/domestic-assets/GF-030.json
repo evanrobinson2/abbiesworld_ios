@@ -1,0 +1,169 @@
+{
+  "schema_version": "1.1.0",
+  "id": "GF-030",
+  "name": "Three basin harvest sorting station",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "garden-farm",
+  "batch": 3,
+  "category": "inanimate",
+  "intent": "Separate usable produce, seed stock and rejects at a reachable bench.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/garden-farm/gf-030",
+  "biome": "settled-river-valley",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 165,
+    "triangles": 5564,
+    "bounds_min": [
+      -0.800000011920929,
+      -0.39399999380111694,
+      -3.026798367500305e-09
+    ],
+    "bounds_max": [
+      1.0717741250991821,
+      0.39399999380111694,
+      0.8538725972175598
+    ],
+    "dimensions_m": [
+      1.87177,
+      0.788,
+      0.85387
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed asset affordances; map to canonical scene contract",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "harvest-sorting",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "sort",
+      "brush",
+      "transfer"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "collect",
+        "position_blender_m": [
+          1.2999999523162842,
+          -0.44999998807907104,
+          -0.016127433627843857
+        ],
+        "role": "collect"
+      },
+      {
+        "id": "work.005",
+        "position_blender_m": [
+          0.0,
+          -0.8999999761581421,
+          -0.016127433627843857
+        ],
+        "role": "work"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "the work it serves",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "empty",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "harvest-loaded",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "sorted",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "cleaned",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Separate usable produce, seed stock and rejects at a reachable bench. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See build_GF_030(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "garden-farm/batch_structures.py",
+    "entry_point": "build_GF_030",
+    "source_sha256": "740f27d7d04a6fdf5669d2677a244c12f6f27ade6b3c12f60f96893e7ed72c6e",
+    "rebuild": "blender --background --python garden-farm/build_remaining.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable base silhouette/materials at card size",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable base silhouette/materials at card size"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "GF-030.glb",
+    "sha256": "3174a555b33fe0a33a460ad61d5e18e4f4b439c5a255a5554b560992fe4b823b",
+    "bytes": 266568
+  }
+}

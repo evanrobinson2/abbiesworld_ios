@@ -1,0 +1,839 @@
+{
+  "name": "Neighborhood Street Lamp \u2014 4.2 m Galvanized Column",
+  "rationale": "Full-scale residential street lamp with an 86 mm galvanized column, a compact curved outreach arm assembled from overlapping round beam segments, and a downward-facing rectangular luminaire. The warm, non-emissive lens is recessed inside individually modeled housing walls. A grounded baseplate, four anchor assemblies, welded column socket, closed access hatch, and restrained service hardware provide readable construction detail without oversized ornament. Overall horizontal span remains below 1.0 m. Beam endpoints use asset-space metric coordinates with identity part transforms.",
+  "dimensionsM": {
+    "x": 0.95,
+    "y": 0.31,
+    "z": 4.2
+  },
+  "rotationUnits": "degrees",
+  "animation": {
+    "implemented": false,
+    "partAxes": [
+      {
+        "part": "access_hatch_cover",
+        "axis": [
+          0,
+          0,
+          1
+        ],
+        "pivot": [
+          -0.029,
+          -0.046,
+          0.52
+        ],
+        "purpose": "Vertical service-door hinge axis; hatch remains closed in the authored asset."
+      }
+    ]
+  },
+  "parts": [
+    {
+      "name": "galvanized_baseplate",
+      "primitive": "box",
+      "colorhex": "#858C8D",
+      "location": [
+        0,
+        0,
+        0.009
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.24,
+        0.24,
+        0.018
+      ]
+    },
+    {
+      "name": "column_weld_socket",
+      "primitive": "cylinder",
+      "colorhex": "#747D7F",
+      "location": [
+        0,
+        0,
+        0.053
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.055,
+      "depth": 0.07
+    },
+    {
+      "name": "socket_upper_weld_bead",
+      "primitive": "torus",
+      "colorhex": "#737B7C",
+      "location": [
+        0,
+        0,
+        0.088
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "majorRadius": 0.046,
+      "minorRadius": 0.004
+    },
+    {
+      "name": "main_galvanized_column",
+      "primitive": "cylinder",
+      "colorhex": "#929B9D",
+      "location": [
+        0,
+        0,
+        1.85
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.043,
+      "depth": 3.62
+    },
+    {
+      "name": "column_top_weather_cap",
+      "primitive": "cylinder",
+      "colorhex": "#838D8F",
+      "location": [
+        0,
+        0,
+        3.662
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.044,
+      "depth": 0.012
+    },
+    {
+      "name": "anchor_washer_front_left",
+      "primitive": "cylinder",
+      "colorhex": "#747C7D",
+      "location": [
+        -0.082,
+        -0.082,
+        0.0205
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.005
+    },
+    {
+      "name": "anchor_nut_front_left",
+      "primitive": "cylinder",
+      "colorhex": "#9AA1A1",
+      "location": [
+        -0.082,
+        -0.082,
+        0.03
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.014
+    },
+    {
+      "name": "anchor_stud_front_left",
+      "primitive": "cylinder",
+      "colorhex": "#727B7C",
+      "location": [
+        -0.082,
+        -0.082,
+        0.034
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.007,
+      "depth": 0.024
+    },
+    {
+      "name": "anchor_washer_front_right",
+      "primitive": "cylinder",
+      "colorhex": "#747C7D",
+      "location": [
+        0.082,
+        -0.082,
+        0.0205
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.005
+    },
+    {
+      "name": "anchor_nut_front_right",
+      "primitive": "cylinder",
+      "colorhex": "#9AA1A1",
+      "location": [
+        0.082,
+        -0.082,
+        0.03
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.014
+    },
+    {
+      "name": "anchor_stud_front_right",
+      "primitive": "cylinder",
+      "colorhex": "#727B7C",
+      "location": [
+        0.082,
+        -0.082,
+        0.034
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.007,
+      "depth": 0.024
+    },
+    {
+      "name": "anchor_washer_rear_left",
+      "primitive": "cylinder",
+      "colorhex": "#747C7D",
+      "location": [
+        -0.082,
+        0.082,
+        0.0205
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.005
+    },
+    {
+      "name": "anchor_nut_rear_left",
+      "primitive": "cylinder",
+      "colorhex": "#9AA1A1",
+      "location": [
+        -0.082,
+        0.082,
+        0.03
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.014
+    },
+    {
+      "name": "anchor_stud_rear_left",
+      "primitive": "cylinder",
+      "colorhex": "#727B7C",
+      "location": [
+        -0.082,
+        0.082,
+        0.034
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.007,
+      "depth": 0.024
+    },
+    {
+      "name": "anchor_washer_rear_right",
+      "primitive": "cylinder",
+      "colorhex": "#747C7D",
+      "location": [
+        0.082,
+        0.082,
+        0.0205
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.018,
+      "depth": 0.005
+    },
+    {
+      "name": "anchor_nut_rear_right",
+      "primitive": "cylinder",
+      "colorhex": "#9AA1A1",
+      "location": [
+        0.082,
+        0.082,
+        0.03
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.012,
+      "depth": 0.014
+    },
+    {
+      "name": "anchor_stud_rear_right",
+      "primitive": "cylinder",
+      "colorhex": "#727B7C",
+      "location": [
+        0.082,
+        0.082,
+        0.034
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.007,
+      "depth": 0.024
+    },
+    {
+      "name": "access_hatch_sealed_backing",
+      "primitive": "box",
+      "colorhex": "#444D4F",
+      "location": [
+        0,
+        -0.034,
+        0.52
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.064,
+        0.022,
+        0.294
+      ]
+    },
+    {
+      "name": "access_hatch_cover",
+      "primitive": "box",
+      "colorhex": "#838E90",
+      "location": [
+        0,
+        -0.045,
+        0.52
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.058,
+        0.006,
+        0.282
+      ]
+    },
+    {
+      "name": "access_hatch_upper_hinge",
+      "primitive": "cylinder",
+      "colorhex": "#727E80",
+      "location": [
+        -0.029,
+        -0.046,
+        0.605
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.005,
+      "depth": 0.034
+    },
+    {
+      "name": "access_hatch_lower_hinge",
+      "primitive": "cylinder",
+      "colorhex": "#727E80",
+      "location": [
+        -0.029,
+        -0.046,
+        0.435
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.005,
+      "depth": 0.034
+    },
+    {
+      "name": "access_hatch_captive_lock",
+      "primitive": "cylinder",
+      "colorhex": "#555F61",
+      "location": [
+        0.016,
+        -0.049,
+        0.52
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.006,
+      "depth": 0.004
+    },
+    {
+      "name": "outreach_arm_lower_rise",
+      "primitive": "beam",
+      "colorhex": "#8C9799",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0,
+        0,
+        3.61
+      ],
+      "end": [
+        0.025,
+        0,
+        3.86
+      ],
+      "radius": 0.03
+    },
+    {
+      "name": "outreach_arm_lower_curve",
+      "primitive": "beam",
+      "colorhex": "#8C9799",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.022,
+        0,
+        3.848
+      ],
+      "end": [
+        0.115,
+        0,
+        4.035
+      ],
+      "radius": 0.028
+    },
+    {
+      "name": "outreach_arm_middle_curve",
+      "primitive": "beam",
+      "colorhex": "#8C9799",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.108,
+        0,
+        4.026
+      ],
+      "end": [
+        0.265,
+        0,
+        4.14
+      ],
+      "radius": 0.027
+    },
+    {
+      "name": "outreach_arm_upper_curve",
+      "primitive": "beam",
+      "colorhex": "#8C9799",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.254,
+        0,
+        4.136
+      ],
+      "end": [
+        0.435,
+        0,
+        4.174
+      ],
+      "radius": 0.026
+    },
+    {
+      "name": "outreach_arm_horizontal_tip",
+      "primitive": "beam",
+      "colorhex": "#8C9799",
+      "location": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.425,
+        0,
+        4.174
+      ],
+      "end": [
+        0.56,
+        0,
+        4.174
+      ],
+      "radius": 0.026
+    },
+    {
+      "name": "luminaire_drop_connector",
+      "primitive": "cylinder",
+      "colorhex": "#6B7678",
+      "location": [
+        0.56,
+        0,
+        4.123
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.022,
+      "depth": 0.102
+    },
+    {
+      "name": "luminaire_mounting_boss",
+      "primitive": "cylinder",
+      "colorhex": "#606B6D",
+      "location": [
+        0.56,
+        0,
+        4.09
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "radius": 0.041,
+      "depth": 0.025
+    },
+    {
+      "name": "housing_top_shell",
+      "primitive": "box",
+      "colorhex": "#687375",
+      "location": [
+        0.56,
+        0,
+        4.07
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.54,
+        0.31,
+        0.035
+      ]
+    },
+    {
+      "name": "housing_front_sidewall",
+      "primitive": "box",
+      "colorhex": "#626D6F",
+      "location": [
+        0.56,
+        -0.1425,
+        4.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.54,
+        0.025,
+        0.105
+      ]
+    },
+    {
+      "name": "housing_rear_sidewall",
+      "primitive": "box",
+      "colorhex": "#626D6F",
+      "location": [
+        0.56,
+        0.1425,
+        4.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.54,
+        0.025,
+        0.105
+      ]
+    },
+    {
+      "name": "housing_pole_endwall",
+      "primitive": "box",
+      "colorhex": "#626D6F",
+      "location": [
+        0.3025,
+        0,
+        4.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.025,
+        0.26,
+        0.105
+      ]
+    },
+    {
+      "name": "housing_outer_endwall",
+      "primitive": "box",
+      "colorhex": "#626D6F",
+      "location": [
+        0.8175,
+        0,
+        4.0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.025,
+        0.26,
+        0.105
+      ]
+    },
+    {
+      "name": "lens_gasket_front",
+      "primitive": "box",
+      "colorhex": "#3F4748",
+      "location": [
+        0.56,
+        -0.126,
+        3.958
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.49,
+        0.008,
+        0.016
+      ]
+    },
+    {
+      "name": "lens_gasket_rear",
+      "primitive": "box",
+      "colorhex": "#3F4748",
+      "location": [
+        0.56,
+        0.126,
+        3.958
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.49,
+        0.008,
+        0.016
+      ]
+    },
+    {
+      "name": "lens_gasket_pole_end",
+      "primitive": "box",
+      "colorhex": "#3F4748",
+      "location": [
+        0.319,
+        0,
+        3.958
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.008,
+        0.244,
+        0.016
+      ]
+    },
+    {
+      "name": "lens_gasket_outer_end",
+      "primitive": "box",
+      "colorhex": "#3F4748",
+      "location": [
+        0.801,
+        0,
+        3.958
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.008,
+        0.244,
+        0.016
+      ]
+    },
+    {
+      "name": "warm_downward_diffuser_lens",
+      "primitive": "box",
+      "colorhex": "#D8C69E",
+      "location": [
+        0.56,
+        0,
+        3.957
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.475,
+        0.25,
+        0.012
+      ]
+    },
+    {
+      "name": "housing_service_latch",
+      "primitive": "box",
+      "colorhex": "#919A9B",
+      "location": [
+        0.56,
+        -0.153,
+        3.97
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.046,
+        0.004,
+        0.039
+      ]
+    },
+    {
+      "name": "housing_rear_service_hinge",
+      "primitive": "cylinder",
+      "colorhex": "#808B8D",
+      "location": [
+        0.56,
+        0.149,
+        3.969
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.006,
+      "depth": 0.1
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 84.15300297737122,
+    "usage": {
+      "prompt_tokens": 211,
+      "completion_tokens": 4674,
+      "total_tokens": 4885,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 882,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

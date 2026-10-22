@@ -1,0 +1,175 @@
+{
+  "schema_version": "1.1.0",
+  "id": "WW-002",
+  "name": "Fresh-cut hardwood log",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "working-woodland",
+  "batch": 1,
+  "category": "inanimate",
+  "intent": "Expose bark, cut ends and branch trimming on a transportable timber length.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/working-woodland/ww-002",
+  "biome": "working-woodland",
+  "era": "fictional-bronze-age",
+  "geometry": {
+    "mesh_objects": 107,
+    "triangles": 3044,
+    "bounds_min": [
+      -1.2230000495910645,
+      -0.45655760169029236,
+      0.0
+    ],
+    "bounds_max": [
+      1.2230000495910645,
+      0.31851884722709656,
+      0.7114065289497375
+    ],
+    "dimensions_m": [
+      2.446,
+      0.77508,
+      0.71141
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "timber-resource",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "inspect",
+      "roll",
+      "haul",
+      "split"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "grip-left",
+        "position_blender_m": [
+          -0.800000011920929,
+          0.0,
+          0.3199999928474426
+        ],
+        "role": "grip-left"
+      },
+      {
+        "id": "grip-right",
+        "position_blender_m": [
+          0.800000011920929,
+          0.0,
+          0.3199999928474426
+        ],
+        "role": "grip-right"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "the work it serves",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "fresh",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "seasoning",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "dry",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "split",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "decaying",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Expose bark, cut ends and branch trimming on a transportable timber length. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See log(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "working-woodland/batch_woodland.py",
+    "entry_point": "log",
+    "source_sha256": "56d872cea517e070d7f26f1a8e68d8dece3082a0992630ac46cfed46e52273b1",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- working-woodland batch_woodland.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ]
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable silhouette and material separation in rendered contact-sheet inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable silhouette and material separation in rendered contact-sheet inspection"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "WW-002.glb",
+    "sha256": "edd77c2c75ae4e7fe061a2378590a41b9fd3fbea59ce0299028e18e335d53e61",
+    "bytes": 151996
+  }
+}

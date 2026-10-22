@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.1.0",
+  "id": "MI-007",
+  "name": "Habitat maintenance technician",
+  "version": "0.1.0",
+  "auxiliary": true,
+  "set": "moon-base-interior",
+  "batch": 1,
+  "category": "animate",
+  "intent": "Give the habitat a crew member inspecting a diagnostic slate.",
+  "world": "abbies-world",
+  "project": "abbies-ranch",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/moon-base-interior/mi-007",
+  "biome": "moon-base-interior",
+  "era": "fictional-space-age",
+  "geometry": {
+    "mesh_objects": 21,
+    "triangles": 920,
+    "bounds_min": [
+      -0.3716886341571808,
+      -0.30799999833106995,
+      0.0
+    ],
+    "bounds_max": [
+      0.3716886341571808,
+      0.15999998152256012,
+      1.6150000095367432
+    ],
+    "dimensions_m": [
+      0.74338,
+      0.468,
+      1.615
+    ]
+  },
+  "semantic_owner": "Scene Generator",
+  "semantic_status": "proposed affordances only",
+  "coordinates": {
+    "units": "metres",
+    "source_up": "Z",
+    "export_up": "Y",
+    "scale_to_metres": 1,
+    "pivot": "grounded authored origin"
+  },
+  "simulation": {
+    "role": "crew-technician",
+    "implementation": "visual only; hooks are planned",
+    "actions": [
+      "walk",
+      "inspect",
+      "service",
+      "rest"
+    ],
+    "inputs": [],
+    "outputs": [],
+    "capacity": null,
+    "capacity_status": "unassigned; simulation design required",
+    "anchors": [
+      {
+        "id": "left-hand",
+        "position_blender_m": [
+          -0.23999999463558197,
+          -0.25999999046325684,
+          0.9399999976158142
+        ],
+        "role": "left-hand"
+      },
+      {
+        "id": "right-hand",
+        "position_blender_m": [
+          0.23999999463558197,
+          -0.25999999046325684,
+          0.9399999976158142
+        ],
+        "role": "right-hand"
+      }
+    ],
+    "decoration_reason": null
+  },
+  "mise_en_place": {
+    "belongs_near": "Work areas and connections defined by Scene Generator for moon-base-interior",
+    "access": "Keep interaction anchors and connecting paths clear.",
+    "placement": "ground/support surface",
+    "related_assets": []
+  },
+  "variants": {
+    "exported": [
+      "base"
+    ],
+    "planned": [
+      {
+        "id": "working",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "resting",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "assisting",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "injured",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      },
+      {
+        "id": "deceased",
+        "status": "planned",
+        "implementation": "requires design and export; not a shipped state"
+      }
+    ],
+    "policy": "up to 6 contextual variants; hero exceptions documented",
+    "hero": false
+  },
+  "seasonality": {
+    "base": "unspecified growing season",
+    "implemented": false,
+    "rule": "Climate and crop calendar determine growth/dormancy; weather separate, no unconditional winter snow."
+  },
+  "design": {
+    "rationale": "Give the habitat a crew member inspecting a diagnostic slate. Handworked detail and clear silhouette keep the function legible at card size.",
+    "historical_status": "fictional interpretation, not a certified reconstruction",
+    "scale_basis": "metre-authored practical proportions",
+    "editable_controls": "See crew(): dimensions, counts, locations and named material assignments.",
+    "preserve": [
+      "ID",
+      "functional silhouette",
+      "metre scale",
+      "mounting relationships"
+    ],
+    "seed": null
+  },
+  "authoring": {
+    "source": "moon-base-interior/batch_moon_interior.py",
+    "entry_point": "crew",
+    "source_sha256": "5b8ef3d697fe09872f7632915eef8593f41babb7d975c2c419d2f8a900130166",
+    "rebuild": "blender --background --python production/build_scene_batch.py -- moon-base-interior batch_moon_interior.py",
+    "cwd": "bronze-age-world",
+    "warning": "Rebuild overwrites batch outputs. Preserve prior revisions first.",
+    "blender": "5.2.1 LTS",
+    "dependencies": [
+      "market-village/build_market.py helpers",
+      "market-village/architecture.py beam helper",
+      "market-village/outputs/market-village.blend material palette"
+    ],
+    "entry_selector": "MI-007"
+  },
+  "production": {
+    "exported": true,
+    "normalized": true,
+    "visual_review": "passed: Readable silhouette and material separation in rendered contact-sheet inspection",
+    "deployed": false,
+    "visual_review_passed": true,
+    "review_note": "Readable silhouette and material separation in rendered contact-sheet inspection"
+  },
+  "limitations": [
+    "Static geometry; animate category is a character, not a rigged animation.",
+    "No collision mesh, LOD or runtime simulation yet."
+  ],
+  "revisions": [
+    {
+      "version": "0.1.0",
+      "change": "Initial auxiliary base model"
+    }
+  ],
+  "files": {
+    "glb": "MI-007.glb",
+    "sha256": "a6d5312ac12998e14edf08bfd52e3b2ce70b166c0795ad659c3964cead3da555",
+    "bytes": 70176
+  }
+}

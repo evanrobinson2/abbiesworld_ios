@@ -1,0 +1,39 @@
+// A small settlement-growth simulation: paths establish access, households bid for
+// clear frontage, and planting fills the residual space. Coordinates are metres.
+const definitions=[
+ ['market','Market meander','Medieval fair streets: a busy lane with little pockets for trade.',[[0,-24],[5,-5],[-7,17]],'ridge'],
+ ['civic','Common & court','Classical civic places: an off-center common with converging lanes.',[[-16,-12],[14,-8],[4,20]],'bowl'],
+ ['grid','Old crossroads','Roman crossroads after generations of informal infill.',[[-19,-14],[17,-12],[-12,17],[15,18]],'shoulder'],
+ ['green','Village green','Medieval village greens: loose clusters around open grazing ground.',[[-17,-14],[16,-15],[18,13],[-17,15]],'bowl'],
+ ['axial','Garden axis','Imperial Chinese quarters: a main approach opening into garden courts.',[[2,-25],[-18,-9],[17,9]],'ridge'],
+ ['post','Wayside hamlet','Japanese post towns: a wandering travel road with sheltered stopping places.',[[-13,-23],[4,-8],[13,14]],'valley'],
+ ['terrace','Terrace hamlet','Andean terraced settlements: lanes gathering along a gentle hillside.',[[-20,-12],[18,-4],[-15,17]],'terrace'],
+ ['hill','Hilltop lanes','Mediterranean hill towns: paths curling around a small rounded rise.',[[-19,-11],[4,-21],[19,-2],[9,18]],'hill'],
+ ['court','Courtyard weave','North African courtyard quarters: short winding lanes and intimate courts.',[[-17,-13],[14,-17],[-10,11],[17,13]],'shoulder'],
+ ['garden','Orchard crescent','Early garden towns: a crescent of homes and generous planted gaps.',[[-19,-10],[-9,-23],[13,-17],[20,4]],'rolling']
+];
+export const TOWN_LAYOUTS=Object.fromEntries(definitions.map(([id,label,inspiration,attractors,landform],index)=>[id,{id,label,inspiration,attractors,landform,index}]));
+export function random(seed){let n=seed>>>0||1;return ()=>{n=(Math.imul(n,1664525)+1013904223)>>>0;return n/4294967296;};}
+const distance=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
+export function project(p,a,b){const dx=b[0]-a[0],dz=b[1]-a[1],t=Math.max(0,Math.min(1,((p[0]-a[0])*dx+(p[1]-a[1])*dz)/(dx*dx+dz*dz||1)));return [a[0]+dx*t,a[1]+dz*t];}
+const smooth=t=>{t=Math.max(0,Math.min(1,t));return t*t*(3-2*t);};
+function land(d,seed,x,z){const a=(seed%31)*.021,u=x*Math.cos(a)+z*Math.sin(a),v=z*Math.cos(a)-x*Math.sin(a),r=(u*u+v*v)/450;switch(d.landform){case 'hill':return .25+1.1*Math.exp(-r);case 'bowl':return .35+.55*(1-Math.exp(-r));case 'valley':return .25+.8*(1-Math.exp(-u*u/240));case 'terrace':return .7+.45*Math.tanh(v/17)+.08*Math.sin(v/6);case 'ridge':return .35+.7*Math.exp(-u*u/280);case 'shoulder':return .7+.4*Math.tanh((u+v*.4)/24);default:return .65+.25*Math.sin(u/18)+.2*Math.cos(v/21);}}
+function growLane(a,b,rng,d,seed){const dx=b[0]-a[0],dz=b[1]-a[1],len=distance(a,b),bend=(rng()-.5)*8;const mid=[(a[0]+b[0])/2-dz/len*bend,(a[1]+b[1])/2+dx/len*bend];const gradient=[land(d,seed,mid[0]+1,mid[1])-land(d,seed,mid[0]-1,mid[1]),land(d,seed,mid[0],mid[1]+1)-land(d,seed,mid[0],mid[1]-1)];mid[0]-=gradient[0]*10;mid[1]-=gradient[1]*10;return Array.from({length:7},(_,i)=>{const t=i/6;return [(1-t)**2*a[0]+2*(1-t)*t*mid[0]+t*t*b[0],(1-t)**2*a[1]+2*(1-t)*t*mid[1]+t*t*b[1]];});}
+const cache=new Map();
+export function townLayout(preset,seed=41,stage=3){stage=Math.max(0,Math.min(3,Math.round(stage)));const key=`${preset}:${seed}:${stage}`;if(cache.has(key))return cache.get(key);const d=TOWN_LAYOUTS[preset];if(!d)throw Error('Unknown Town preset');const rng=random(seed+d.index*1009),heart=[(rng()-.5)*5,(rng()-.5)*5],entry=[0,34],paths=[growLane(entry,heart,rng,d,seed)],events=[{kind:'path',text:'A first approach reaches the shared clearing.'}];
+ const targets=d.attractors.map(p=>[p[0]+(rng()-.5)*3,p[1]+(rng()-.5)*3]);
+ for(const target of targets){const start=preset==='post'?paths.at(-1).at(-1):heart;paths.push(growLane(start,target,rng,d,seed));events.push({kind:'path',text:'A lane follows access and gentle ground.'});}
+ const north=targets.reduce((a,b)=>a[1]<b[1]?a:b);paths.push(growLane(north,[0,-33],rng,d,seed));
+ // Reserve a common: houses bid for frontage outside this clearing.
+ const segments=paths.flatMap(p=>p.slice(1).map((b,i)=>[p[i],b])),homes=[],wanted=preset==='civic'?6:8;
+ for(let attempt=0;attempt<8000&&homes.length<wanted;attempt++){const [a,b]=segments[Math.floor(rng()*segments.length)],t=.15+rng()*.7,road=[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t],len=distance(a,b),side=rng()<.5?-1:1,setback=6.8+rng()*3.1,center=[road[0]-(b[1]-a[1])/len*side*setback,road[1]+(b[0]-a[0])/len*side*setback];if(Math.hypot(...center)>27.5||distance(center,heart)<7.5||homes.some(h=>distance(h.center,center)<(attempt<3000?9.4:8.8))||segments.some(([p,q])=>distance(center,project(center,p,q))<5.3))continue;const angle=Math.atan2(road[0]-center[0],road[1]-center[1]),door=[center[0]+Math.sin(angle)*3,center[1]+Math.cos(angle)*3];homes.push({x:door[0],z:door[1],center,door,angle,junction:road,side,index:homes.length});events.push({kind:'home',text:'A household settles on clear frontage.'});}
+ if(homes.length!==wanted)throw Error('This settlement could not find enough clear frontage');
+ const active=homes.slice(0,Math.min(wanted,2+stage*2)),activePaths=[...paths,...active.map(h=>[h.junction,h.door])],planting=[];
+ for(let i=0;i<150&&planting.length<14;i++){const p=[(rng()-.5)*65,(rng()-.5)*65];if(Math.hypot(...p)>34||homes.some(h=>distance(h.center,p)<6)||segments.some(([a,b])=>distance(p,project(p,a,b))<3)||planting.some(q=>distance(p,q)<4))continue;planting.push(p);}
+ const result={...d,seed,stage,heart,spine:paths[0],lanes:paths,paths:activePaths,homes:active,allHomes:homes,planting,events:events.filter(e=>e.kind==='path').concat(events.filter(e=>e.kind==='home').slice(0,active.length)),targetHomes:wanted};if(cache.size>120)cache.clear();cache.set(key,result);return result;
+}
+export function layoutSites(preset,seed=41,stage=3){const d=townLayout(preset,seed,stage),stops=d.lanes.slice(1).map(p=>p.at(-1)),at=i=>stops[i%stops.length],sites={market:d.heart,park:d.heart,school:at(0),teacher:at(0),nurse:at(1),jail:at(2),farmer:at(1),woodland:at(2),baker:d.heart,craft:at(1),merchant:d.heart,road:at(2),water:d.heart,sanitation:at(2),police:at(2),delivery:[0,34]};d.homes.forEach((h,i)=>sites['home'+i]=h.door);return sites;}
+// Split segments at frontage junctions and route on the same network we draw.
+export function townRoute(preset,start,end,seed=41,stage=3){const {paths}=townLayout(preset,seed,stage),segments=paths.flatMap(p=>p.slice(1).map((b,i)=>[p[i],b]));const snap=p=>segments.map(([a,b])=>project(p,a,b)).sort((a,b)=>distance(a,p)-distance(b,p))[0],first=snap(start),last=snap(end),key=p=>p.map(v=>v.toFixed(5)).join(','),points=[...new Map([...paths.flat(),first,last].map(p=>[key(p),p])).values()],graph=new Map(points.map(p=>[key(p),[]]));for(const [a,b]of segments){const on=points.filter(p=>distance(p,project(p,a,b))<.0001).sort((p,q)=>distance(p,a)-distance(q,a));for(let i=1;i<on.length;i++){graph.get(key(on[i-1])).push(on[i]);graph.get(key(on[i])).push(on[i-1]);}}const queue=[first],prev=new Map([[key(first),null]]);for(const p of queue){if(key(p)===key(last))break;for(const n of graph.get(key(p))||[])if(!prev.has(key(n))){prev.set(key(n),p);queue.push(n);}}if(!prev.has(key(last)))return [first];const route=[];let p=last;while(p){route.unshift(p);p=prev.get(key(p));}return [...route,end];}
+export function townElevation(preset,seed,x,z){const d=townLayout(preset,seed),raw=(x,z)=>land(d,seed,x,z)*(1-smooth((Math.hypot(x,z)-29)/14));let h=raw(x,z);for(const home of d.allHomes){const [hx,hz]=home.center,dist=Math.hypot(x-hx,z-hz),w=1-smooth((dist-4.3)/5);h=h*(1-w)+raw(hx,hz)*w;}return h;}
+export function townSurface(plan,preset,seed,base=()=>0){const angle=(plan.rotation||0)*Math.PI/3,c=Math.cos(angle),s=Math.sin(angle);return (x,z)=>{const dx=x-plan.center.x,dz=z-plan.center.z;return base(x,z)+townElevation(preset,seed,dx*c-dz*s,dx*s+dz*c);};}

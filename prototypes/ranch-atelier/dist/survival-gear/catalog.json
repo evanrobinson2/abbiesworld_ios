@@ -1,0 +1,4429 @@
+{
+  "schemaVersion": 1,
+  "pack": "Zombie survival gear",
+  "targetCount": 50,
+  "reviewedCount": 50,
+  "count": 50,
+  "generationMethod": "Local Blender deterministic authored geometry; no model API calls",
+  "units": "metres",
+  "items": [
+    {
+      "id": "ZG001",
+      "name": "Scavenger backpack",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG001.glb",
+      "preview": "/survival-gear/output/ZG001.png",
+      "dimensions": {
+        "x": 0.51,
+        "y": 0.345,
+        "z": 0.53,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.5099999904632568,
+        0.3450000286102295,
+        0.5299999713897705
+      ],
+      "reimportDimensionsM": [
+        0.5099999904632568,
+        0.3450000286102295,
+        0.5299999713897705
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG001.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 1,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Boxy field rucksack with flap, front pouch, side pockets and shoulder straps.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.075404
+    },
+    {
+      "id": "ZG002",
+      "name": "Open carrier vest",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG002.glb",
+      "preview": "/survival-gear/output/ZG002.png",
+      "dimensions": {
+        "x": 0.4506,
+        "y": 0.365,
+        "z": 0.4275,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.4505999982357025,
+        0.36500000953674316,
+        0.4274999499320984
+      ],
+      "reimportDimensionsM": [
+        0.4505999982357025,
+        0.36500000953674316,
+        0.4274999499320984
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG002.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 2,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Empty wearable plate carrier with separated front/back panels, shoulder bridges and three utility pouches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.076232
+    },
+    {
+      "id": "ZG003",
+      "name": "Rimmed patrol helmet",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG003.glb",
+      "preview": "/survival-gear/output/ZG003.png",
+      "dimensions": {
+        "x": 0.324,
+        "y": 0.363,
+        "z": 0.1919,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3240000009536743,
+        0.3630000054836273,
+        0.1918560266494751
+      ],
+      "reimportDimensionsM": [
+        0.3240000009536743,
+        0.3630000054836273,
+        0.1918560266494751
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG003.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 3,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Hollow domed protective helmet with rim and front equipment mount.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.077354
+    },
+    {
+      "id": "ZG004",
+      "name": "Filter respirator",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG004.glb",
+      "preview": "/survival-gear/output/ZG004.png",
+      "dimensions": {
+        "x": 0.28,
+        "y": 0.201,
+        "z": 0.258,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2800000011920929,
+        0.20100000500679016,
+        0.2580000162124634
+      ],
+      "reimportDimensionsM": [
+        0.2800000011920929,
+        0.20100000500679016,
+        0.2580000162124634
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG004.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 4,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Empty respirator face cup with two cylindrical filters and head strap.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.077972
+    },
+    {
+      "id": "ZG005",
+      "name": "Utility waist belt",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG005.glb",
+      "preview": "/survival-gear/output/ZG005.png",
+      "dimensions": {
+        "x": 0.45,
+        "y": 0.41,
+        "z": 0.17,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.45000001788139343,
+        0.4100000262260437,
+        0.17000000178813934
+      ],
+      "reimportDimensionsM": [
+        0.45000001788139343,
+        0.4100000262260437,
+        0.17000000178813934
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG005.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 5,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Open waist belt with front buckle and twin equipment pouches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.078764
+    },
+    {
+      "id": "ZG006",
+      "name": "Shin guard pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG006.glb",
+      "preview": "/survival-gear/output/ZG006.png",
+      "dimensions": {
+        "x": 0.4167,
+        "y": 0.182,
+        "z": 0.4404,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.41669124364852905,
+        0.18200001120567322,
+        0.44044989347457886
+      ],
+      "reimportDimensionsM": [
+        0.41669124364852905,
+        0.18200001120567322,
+        0.44044989347457886
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG006.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 6,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Paired shin armor plates with knee protection and retention bands.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.079421
+    },
+    {
+      "id": "ZG007",
+      "name": "Field boot pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG007.glb",
+      "preview": "/survival-gear/output/ZG007.png",
+      "dimensions": {
+        "x": 0.4,
+        "y": 0.298,
+        "z": 0.291,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3999999761581421,
+        0.2979999780654907,
+        0.29100000858306885
+      ],
+      "reimportDimensionsM": [
+        0.3999999761581421,
+        0.2979999780654907,
+        0.29100000858306885
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG007.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 7,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 14,
+      "brief": "Paired ankle boots with soles, toe boxes, laces and visible empty shaft openings.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.079977
+    },
+    {
+      "id": "ZG008",
+      "name": "Armored glove pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG008.glb",
+      "preview": "/survival-gear/output/ZG008.png",
+      "dimensions": {
+        "x": 0.4383,
+        "y": 0.116,
+        "z": 0.2645,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.43828076124191284,
+        0.11599999666213989,
+        0.2644999921321869
+      ],
+      "reimportDimensionsM": [
+        0.43828076124191284,
+        0.11599999666213989,
+        0.2644999921321869
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG008.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 8,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 16,
+      "brief": "Paired protective gloves with individual fingers, wrist openings and knuckle plates.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.0806231
+    },
+    {
+      "id": "ZG009",
+      "name": "Headlamp harness",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG009.glb",
+      "preview": "/survival-gear/output/ZG009.png",
+      "dimensions": {
+        "x": 0.304,
+        "y": 0.332,
+        "z": 0.065,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.30399999022483826,
+        0.3319999873638153,
+        0.06499999761581421
+      ],
+      "reimportDimensionsM": [
+        0.30399999022483826,
+        0.3319999873638153,
+        0.06499999761581421
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG009.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 9,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Open elastic head harness with compact front lamp.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.081179
+    },
+    {
+      "id": "ZG010",
+      "name": "Rain poncho",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG010.glb",
+      "preview": "/survival-gear/output/ZG010.png",
+      "dimensions": {
+        "x": 0.86,
+        "y": 0.5,
+        "z": 0.662,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.8600000143051147,
+        0.5,
+        0.6620000004768372
+      ],
+      "reimportDimensionsM": [
+        0.8600000143051147,
+        0.5,
+        0.6620000004768372
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG010.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 10,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 2,
+      "brief": "Open-bottom rain poncho with open collar and draped tapered panels.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.0818849
+    },
+    {
+      "id": "ZG011",
+      "name": "Pry bar",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG011.glb",
+      "preview": "/survival-gear/output/ZG011.png",
+      "dimensions": {
+        "x": 0.133,
+        "y": 0.12,
+        "z": 0.6901,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.1330498456954956,
+        0.11999999731779099,
+        0.6900995969772339
+      ],
+      "reimportDimensionsM": [
+        0.1330498456954956,
+        0.11999999731779099,
+        0.6900995969772339
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG011.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 11,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Long pry bar with bent hook and broad flat foot.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3791318
+    },
+    {
+      "id": "ZG012",
+      "name": "Claw hammer",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG012.glb",
+      "preview": "/survival-gear/output/ZG012.png",
+      "dimensions": {
+        "x": 0.2227,
+        "y": 0.055,
+        "z": 0.3675,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2227279245853424,
+        0.054999999701976776,
+        0.3675000071525574
+      ],
+      "reimportDimensionsM": [
+        0.2227279394865036,
+        0.054999999701976776,
+        0.3675000071525574
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG012.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 12,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Wood-handled claw hammer with transverse steel head.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3794339
+    },
+    {
+      "id": "ZG013",
+      "name": "Compact hatchet",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG013.glb",
+      "preview": "/survival-gear/output/ZG013.png",
+      "dimensions": {
+        "x": 0.19,
+        "y": 0.06,
+        "z": 0.44,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.4399999976158142
+      ],
+      "reimportDimensionsM": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.4399999976158142
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG013.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 13,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 2,
+      "brief": "Short wood-handled hatchet with wedge-shaped steel head.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.37965
+    },
+    {
+      "id": "ZG014",
+      "name": "Folding shovel",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG014.glb",
+      "preview": "/survival-gear/output/ZG014.png",
+      "dimensions": {
+        "x": 0.22,
+        "y": 0.044,
+        "z": 0.804,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2199999988079071,
+        0.04400000721216202,
+        0.8040000200271606
+      ],
+      "reimportDimensionsM": [
+        0.2199999988079071,
+        0.04400000721216202,
+        0.8040000200271606
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG014.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 14,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Compact spade with D grip, shaft and broad blade.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.379841
+    },
+    {
+      "id": "ZG015",
+      "name": "Bolt cutters",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG015.glb",
+      "preview": "/survival-gear/output/ZG015.png",
+      "dimensions": {
+        "x": 0.2434,
+        "y": 0.055,
+        "z": 0.518,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.24343033134937286,
+        0.055000003427267075,
+        0.5180008411407471
+      ],
+      "reimportDimensionsM": [
+        0.24343034625053406,
+        0.05500001832842827,
+        0.5180008411407471
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG015.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 15,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Two-handled bolt cutter with pivot and separated jaws.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380029
+    },
+    {
+      "id": "ZG016",
+      "name": "Hand saw",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG016.glb",
+      "preview": "/survival-gear/output/ZG016.png",
+      "dimensions": {
+        "x": 0.6,
+        "y": 0.04,
+        "z": 0.17,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6000000238418579,
+        0.040000006556510925,
+        0.16999998688697815
+      ],
+      "reimportDimensionsM": [
+        0.6000000238418579,
+        0.04000002518296242,
+        0.17000001668930054
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG016.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 16,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 16,
+      "brief": "Hand saw with open circular grip and serrated blade.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380337
+    },
+    {
+      "id": "ZG017",
+      "name": "Wire spool",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG017.glb",
+      "preview": "/survival-gear/output/ZG017.png",
+      "dimensions": {
+        "x": 0.36,
+        "y": 0.36,
+        "z": 0.265,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.26499998569488525
+      ],
+      "reimportDimensionsM": [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.26499998569488525
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG017.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 17,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 15,
+      "brief": "Flanged cable spool with visible wound wire.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3806
+    },
+    {
+      "id": "ZG018",
+      "name": "Repair tool roll",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG018.glb",
+      "preview": "/survival-gear/output/ZG018.png",
+      "dimensions": {
+        "x": 0.48,
+        "y": 0.32,
+        "z": 0.056,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.47999998927116394,
+        0.3199999928474426,
+        0.056000012904405594
+      ],
+      "reimportDimensionsM": [
+        0.47999998927116394,
+        0.3199999928474426,
+        0.05600002035498619
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG018.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 18,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 11,
+      "brief": "Open canvas tool roll holding five repair tools.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380791
+    },
+    {
+      "id": "ZG019",
+      "name": "Crank radio",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG019.glb",
+      "preview": "/survival-gear/output/ZG019.png",
+      "dimensions": {
+        "x": 0.325,
+        "y": 0.113,
+        "z": 0.5306,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.32496365904808044,
+        0.11300000548362732,
+        0.5306016802787781
+      ],
+      "reimportDimensionsM": [
+        0.32496365904808044,
+        0.11300000548362732,
+        0.5306016802787781
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG019.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 19,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Portable crank radio with speaker, dial window and tall antenna.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380981
+    },
+    {
+      "id": "ZG020",
+      "name": "Signal lantern",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG020.glb",
+      "preview": "/survival-gear/output/ZG020.png",
+      "dimensions": {
+        "x": 0.18,
+        "y": 0.18,
+        "z": 0.414,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.414000004529953
+      ],
+      "reimportDimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.414000004529953
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG020.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 20,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Caged signal lantern with diffuser and hanging handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.381275
+    },
+    {
+      "id": "ZG021",
+      "name": "Trauma kit",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG021.glb",
+      "preview": "/survival-gear/output/ZG021.png",
+      "dimensions": {
+        "x": 0.326,
+        "y": 0.2,
+        "z": 0.346,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.32600000500679016,
+        0.20000000298023224,
+        0.3460000157356262
+      ],
+      "reimportDimensionsM": [
+        0.32600000500679016,
+        0.20000000298023224,
+        0.3460000157356262
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG021.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 21,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Red trauma pouch with medical cross and carrying loop.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.077754
+    },
+    {
+      "id": "ZG022",
+      "name": "Bandage tin",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG022.glb",
+      "preview": "/survival-gear/output/ZG022.png",
+      "dimensions": {
+        "x": 0.18,
+        "y": 0.18,
+        "z": 0.159,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.1589999943971634
+      ],
+      "reimportDimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.1589999943971634
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG022.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 22,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Round bandage tin with two visible rolled gauze dressings on removable lid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.078227
+    },
+    {
+      "id": "ZG023",
+      "name": "Water filter pump",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG023.glb",
+      "preview": "/survival-gear/output/ZG023.png",
+      "dimensions": {
+        "x": 0.305,
+        "y": 0.11,
+        "z": 0.4425,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3050000071525574,
+        0.10999999940395355,
+        0.4424999952316284
+      ],
+      "reimportDimensionsM": [
+        0.3050000071525574,
+        0.10999999940395355,
+        0.4424999952316284
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG023.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 23,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Hand water-filter pump with piston grip and intake hose.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.078687
+    },
+    {
+      "id": "ZG024",
+      "name": "Canteen cup set",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG024.glb",
+      "preview": "/survival-gear/output/ZG024.png",
+      "dimensions": {
+        "x": 0.231,
+        "y": 0.1,
+        "z": 0.2925,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.23100000619888306,
+        0.10000000149011612,
+        0.29250001907348633
+      ],
+      "reimportDimensionsM": [
+        0.23100000619888306,
+        0.10000000149011612,
+        0.29250001907348633
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG024.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 24,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Canteen seated in nesting metal cup with side loop.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079081
+    },
+    {
+      "id": "ZG025",
+      "name": "Medicine case",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG025.glb",
+      "preview": "/survival-gear/output/ZG025.png",
+      "dimensions": {
+        "x": 0.4,
+        "y": 0.2525,
+        "z": 0.36,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.4000000059604645,
+        0.2524999976158142,
+        0.36000001430511475
+      ],
+      "reimportDimensionsM": [
+        0.4000000059604645,
+        0.2524999976158142,
+        0.36000001430511475
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG025.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 25,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 19,
+      "brief": "Open medicine organizer with lid cross, separated vial compartments and capped medicine vials.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079484
+    },
+    {
+      "id": "ZG026",
+      "name": "Folded rescue stretcher",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG026.glb",
+      "preview": "/survival-gear/output/ZG026.png",
+      "dimensions": {
+        "x": 0.324,
+        "y": 0.1225,
+        "z": 0.98,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3240000009536743,
+        0.12250000238418579,
+        0.9800000190734863
+      ],
+      "reimportDimensionsM": [
+        0.3240000009536743,
+        0.12250000238418579,
+        0.9800000190734863
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG026.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 26,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Folded rescue stretcher with paired poles and secured canvas.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079836
+    },
+    {
+      "id": "ZG027",
+      "name": "Emergency blanket roll",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG027.glb",
+      "preview": "/survival-gear/output/ZG027.png",
+      "dimensions": {
+        "x": 0.38,
+        "y": 0.25,
+        "z": 0.25,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3799999952316284,
+        0.25,
+        0.25
+      ],
+      "reimportDimensionsM": [
+        0.3800000846385956,
+        0.25,
+        0.2500000298023224
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG027.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 27,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Rolled reflective emergency blanket secured by two straps.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.08018
+    },
+    {
+      "id": "ZG028",
+      "name": "Splint bundle",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG028.glb",
+      "preview": "/survival-gear/output/ZG028.png",
+      "dimensions": {
+        "x": 0.25,
+        "y": 0.0475,
+        "z": 0.64,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.25,
+        0.04749999940395355,
+        0.6399999856948853
+      ],
+      "reimportDimensionsM": [
+        0.25,
+        0.04749999940395355,
+        0.6399999856948853
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG028.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 28,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Three rigid splints bundled with two cloth ties.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.0806139
+    },
+    {
+      "id": "ZG029",
+      "name": "Wash station",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG029.glb",
+      "preview": "/survival-gear/output/ZG029.png",
+      "dimensions": {
+        "x": 0.62,
+        "y": 0.42,
+        "z": 1.3,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6200000047683716,
+        0.42000001668930054,
+        1.3000000715255737
+      ],
+      "reimportDimensionsM": [
+        0.6200000047683716,
+        0.42000001668930054,
+        1.3000000715255737
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG029.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 29,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Raised wash basin with gravity reservoir, tap and soap tray.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.080917
+    },
+    {
+      "id": "ZG030",
+      "name": "Medical supply chest",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG030.glb",
+      "preview": "/survival-gear/output/ZG030.png",
+      "dimensions": {
+        "x": 1.0,
+        "y": 0.58,
+        "z": 0.5875,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.0,
+        0.5799999833106995,
+        0.5874999761581421
+      ],
+      "reimportDimensionsM": [
+        1.0,
+        0.5800000429153442,
+        0.5874999761581421
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG030.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 30,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 14,
+      "brief": "Wide wheeled medical supply trunk with side handles, reinforced lid and front latches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.081292
+    },
+    {
+      "id": "ZG031",
+      "name": "A-frame shelter",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG031.glb",
+      "preview": "/survival-gear/output/ZG031.png",
+      "dimensions": {
+        "x": 2.0402,
+        "y": 2.05,
+        "z": 1.3798,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.040177822113037,
+        2.0500001907348633,
+        1.3797613382339478
+      ],
+      "reimportDimensionsM": [
+        2.040178060531616,
+        2.0500001907348633,
+        1.3797613382339478
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG031.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 31,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Open entrance A-frame field shelter with canopy, separate door flaps and support poles.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.270682
+    },
+    {
+      "id": "ZG032",
+      "name": "Camp stove",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG032.glb",
+      "preview": "/survival-gear/output/ZG032.png",
+      "dimensions": {
+        "x": 0.6,
+        "y": 0.3,
+        "z": 0.27,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.27000001072883606
+      ],
+      "reimportDimensionsM": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.27000001072883606
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG032.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 32,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Twin-burner camp stove with pot rails and fuel bottle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.2709918
+    },
+    {
+      "id": "ZG033",
+      "name": "Bedroll",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG033.glb",
+      "preview": "/survival-gear/output/ZG033.png",
+      "dimensions": {
+        "x": 0.65,
+        "y": 1.85,
+        "z": 0.251,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6499999761581421,
+        1.850000023841858,
+        0.2510000169277191
+      ],
+      "reimportDimensionsM": [
+        0.6499999761581421,
+        1.850000023841858,
+        0.2510000169277191
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement to distinguish bedroll silhouette from emergency blanket roll",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG033.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_bedroll.py",
+        "assetIndex": 33,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Unrolled sleeping bag on full length mat, with pillow, zipper rail and visible quilting.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271198
+    },
+    {
+      "id": "ZG034",
+      "name": "Water jerrycan",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG034.glb",
+      "preview": "/survival-gear/output/ZG034.png",
+      "dimensions": {
+        "x": 0.34,
+        "y": 0.176,
+        "z": 0.575,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3400000035762787,
+        0.17600001394748688,
+        0.5750000476837158
+      ],
+      "reimportDimensionsM": [
+        0.3400000035762787,
+        0.17600001394748688,
+        0.5750000476837158
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG034.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 34,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Water jerrycan with molded rib, screw cap and carry handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271394
+    },
+    {
+      "id": "ZG035",
+      "name": "Solar charging stand",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG035.glb",
+      "preview": "/survival-gear/output/ZG035.png",
+      "dimensions": {
+        "x": 0.85,
+        "y": 0.42,
+        "z": 1.0051,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.8500000238418579,
+        0.42000001668930054,
+        1.0051153898239136
+      ],
+      "reimportDimensionsM": [
+        0.8500000238418579,
+        0.42000001668930054,
+        1.0051153898239136
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG035.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 35,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 10,
+      "brief": "Solar panel on support stand with battery unit beneath.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271761
+    },
+    {
+      "id": "ZG036",
+      "name": "Supply crate",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG036.glb",
+      "preview": "/survival-gear/output/ZG036.png",
+      "dimensions": {
+        "x": 0.72,
+        "y": 0.5105,
+        "z": 0.5325,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.7200000286102295,
+        0.5104999542236328,
+        0.5324999690055847
+      ],
+      "reimportDimensionsM": [
+        0.7200000286102295,
+        0.5104999542236328,
+        0.5324999690055847
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG036.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 36,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Reinforced timber supply crate with separate lid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271987
+    },
+    {
+      "id": "ZG037",
+      "name": "Cooking tripod",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG037.glb",
+      "preview": "/survival-gear/output/ZG037.png",
+      "dimensions": {
+        "x": 0.7313,
+        "y": 0.8446,
+        "z": 1.1189,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.7312753200531006,
+        0.844630241394043,
+        1.1189316511154175
+      ],
+      "reimportDimensionsM": [
+        0.7312753200531006,
+        0.844630241394043,
+        1.1189316511154175
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG037.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 37,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Three-leg cooking tripod suspending a round pot.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272193
+    },
+    {
+      "id": "ZG038",
+      "name": "Folding camp chair",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG038.glb",
+      "preview": "/survival-gear/output/ZG038.png",
+      "dimensions": {
+        "x": 0.5,
+        "y": 0.5262,
+        "z": 0.9823,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.5,
+        0.5262305736541748,
+        0.9823284149169922
+      ],
+      "reimportDimensionsM": [
+        0.5,
+        0.5262306332588196,
+        0.9823284149169922
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG038.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 38,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Folding canvas chair with crossed metal legs and back frame.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272394
+    },
+    {
+      "id": "ZG039",
+      "name": "Rain collector",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG039.glb",
+      "preview": "/survival-gear/output/ZG039.png",
+      "dimensions": {
+        "x": 1.2,
+        "y": 1.2,
+        "z": 1.55,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.5499999523162842
+      ],
+      "reimportDimensionsM": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.5499999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG039.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 39,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Elevated funnel collector draining toward storage barrel.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272576
+    },
+    {
+      "id": "ZG040",
+      "name": "Portable workbench",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG040.glb",
+      "preview": "/survival-gear/output/ZG040.png",
+      "dimensions": {
+        "x": 1.35,
+        "y": 0.697,
+        "z": 1.08,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.350000023841858,
+        0.6970000267028809,
+        1.0800000429153442
+      ],
+      "reimportDimensionsM": [
+        1.350000023841858,
+        0.6970000267028809,
+        1.0800000429153442
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG040.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 40,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Portable wood workbench with lower shelf and mounted vice.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272814
+    },
+    {
+      "id": "ZG041",
+      "name": "Sandbag corner",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG041.glb",
+      "preview": "/survival-gear/output/ZG041.png",
+      "dimensions": {
+        "x": 2.15,
+        "y": 1.405,
+        "z": 0.7,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.1500000953674316,
+        1.4049999713897705,
+        0.699999988079071
+      ],
+      "reimportDimensionsM": [
+        2.1500000953674316,
+        1.4049999713897705,
+        0.699999988079071
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG041.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 41,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 21,
+      "brief": "L-shaped stacked sandbag cover in three staggered courses.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.127706
+    },
+    {
+      "id": "ZG042",
+      "name": "Timber barricade",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG042.glb",
+      "preview": "/survival-gear/output/ZG042.png",
+      "dimensions": {
+        "x": 2.0072,
+        "y": 0.8,
+        "z": 1.3,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.0071945190429688,
+        0.800000011920929,
+        1.2999999523162842
+      ],
+      "reimportDimensionsM": [
+        2.0071945190429688,
+        0.800000011920929,
+        1.2999999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG042.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 42,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 10,
+      "brief": "Freestanding timber barricade with horizontal planks and angled brace.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.127977
+    },
+    {
+      "id": "ZG043",
+      "name": "Wire fence panel",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG043.glb",
+      "preview": "/survival-gear/output/ZG043.png",
+      "dimensions": {
+        "x": 2.09,
+        "y": 0.09,
+        "z": 1.8,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.0899999141693115,
+        0.09000001847743988,
+        1.7999999523162842
+      ],
+      "reimportDimensionsM": [
+        2.0899999141693115,
+        0.09000001847743988,
+        1.7999999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG043.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 43,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 23,
+      "brief": "Wire fence panel with two posts, rails and fine square wire grid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.128181
+    },
+    {
+      "id": "ZG044",
+      "name": "Gate checkpoint",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG044.glb",
+      "preview": "/survival-gear/output/ZG044.png",
+      "dimensions": {
+        "x": 3.26,
+        "y": 0.47,
+        "z": 1.2,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        3.259999990463257,
+        0.4699999988079071,
+        1.2000000476837158
+      ],
+      "reimportDimensionsM": [
+        3.259999990463257,
+        0.4699999988079071,
+        1.2000000476837158
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG044.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 44,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 12,
+      "brief": "Checkpoint barrier with striped horizontal arm, pillars and control box.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.1283681
+    },
+    {
+      "id": "ZG045",
+      "name": "Watch platform",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG045.glb",
+      "preview": "/survival-gear/output/ZG045.png",
+      "dimensions": {
+        "x": 1.8,
+        "y": 2.1247,
+        "z": 3.2036,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.7999999523162842,
+        2.1247386932373047,
+        3.2036077976226807
+      ],
+      "reimportDimensionsM": [
+        1.7999999523162842,
+        2.1247386932373047,
+        3.2036077976226807
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG045.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 45,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 22,
+      "brief": "Raised timber watch platform with three-sided guardrail and access ladder.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.128557
+    },
+    {
+      "id": "ZG046",
+      "name": "Roadblock barrier",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG046.glb",
+      "preview": "/survival-gear/output/ZG046.png",
+      "dimensions": {
+        "x": 2.0,
+        "y": 0.55,
+        "z": 0.875,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.0,
+        0.550000011920929,
+        0.875
+      ],
+      "reimportDimensionsM": [
+        2.0,
+        0.550000011920929,
+        0.875
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG046.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 46,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Heavy roadblock with broad foot and contrasting warning markers.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.128742
+    },
+    {
+      "id": "ZG047",
+      "name": "Water tank stand",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG047.glb",
+      "preview": "/survival-gear/output/ZG047.png",
+      "dimensions": {
+        "x": 1.4,
+        "y": 1.6,
+        "z": 2.61,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.399999976158142,
+        1.5999999046325684,
+        2.609999895095825
+      ],
+      "reimportDimensionsM": [
+        1.399999976158142,
+        1.5999999046325684,
+        2.609999895095825
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG047.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 47,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Large elevated cylindrical water tank with lid and outlet pipe.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.1290271
+    },
+    {
+      "id": "ZG048",
+      "name": "Camp storage rack",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG048.glb",
+      "preview": "/survival-gear/output/ZG048.png",
+      "dimensions": {
+        "x": 1.8,
+        "y": 0.7,
+        "z": 1.8,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.7999999523162842,
+        0.699999988079071,
+        1.7999999523162842
+      ],
+      "reimportDimensionsM": [
+        1.7999999523162842,
+        0.699999988079071,
+        1.7999999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG048.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 48,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 18,
+      "brief": "Three-level supply rack with reinforced crates and metal cans.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.129298
+    },
+    {
+      "id": "ZG049",
+      "name": "Guard booth",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG049.glb",
+      "preview": "/survival-gear/output/ZG049.png",
+      "dimensions": {
+        "x": 1.75,
+        "y": 1.65,
+        "z": 2.11,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.75,
+        1.649999976158142,
+        2.109999895095825
+      ],
+      "reimportDimensionsM": [
+        1.75,
+        1.649999976158142,
+        2.109999895095825
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG049.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 49,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Open-front guard booth with side half-walls, counter and overhanging roof.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.129559
+    },
+    {
+      "id": "ZG050",
+      "name": "Generator cart",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG050.glb",
+      "preview": "/survival-gear/output/ZG050.png",
+      "dimensions": {
+        "x": 1.405,
+        "y": 0.78,
+        "z": 0.915,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.40500009059906,
+        0.7800000309944153,
+        0.9150000214576721
+      ],
+      "reimportDimensionsM": [
+        1.40500009059906,
+        0.7800000905990601,
+        0.9150000214576721
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG050.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 50,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 11,
+      "brief": "Four-wheel generator cart with engine, fuel tank, exhaust and push handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.129802
+    }
+  ],
+  "assets": [
+    {
+      "id": "ZG001",
+      "name": "Scavenger backpack",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG001.glb",
+      "preview": "/survival-gear/output/ZG001.png",
+      "dimensions": {
+        "x": 0.51,
+        "y": 0.345,
+        "z": 0.53,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.5099999904632568,
+        0.3450000286102295,
+        0.5299999713897705
+      ],
+      "reimportDimensionsM": [
+        0.5099999904632568,
+        0.3450000286102295,
+        0.5299999713897705
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG001.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 1,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Boxy field rucksack with flap, front pouch, side pockets and shoulder straps.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.075404
+    },
+    {
+      "id": "ZG002",
+      "name": "Open carrier vest",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG002.glb",
+      "preview": "/survival-gear/output/ZG002.png",
+      "dimensions": {
+        "x": 0.4506,
+        "y": 0.365,
+        "z": 0.4275,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.4505999982357025,
+        0.36500000953674316,
+        0.4274999499320984
+      ],
+      "reimportDimensionsM": [
+        0.4505999982357025,
+        0.36500000953674316,
+        0.4274999499320984
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG002.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 2,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Empty wearable plate carrier with separated front/back panels, shoulder bridges and three utility pouches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.076232
+    },
+    {
+      "id": "ZG003",
+      "name": "Rimmed patrol helmet",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG003.glb",
+      "preview": "/survival-gear/output/ZG003.png",
+      "dimensions": {
+        "x": 0.324,
+        "y": 0.363,
+        "z": 0.1919,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3240000009536743,
+        0.3630000054836273,
+        0.1918560266494751
+      ],
+      "reimportDimensionsM": [
+        0.3240000009536743,
+        0.3630000054836273,
+        0.1918560266494751
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG003.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 3,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Hollow domed protective helmet with rim and front equipment mount.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.077354
+    },
+    {
+      "id": "ZG004",
+      "name": "Filter respirator",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG004.glb",
+      "preview": "/survival-gear/output/ZG004.png",
+      "dimensions": {
+        "x": 0.28,
+        "y": 0.201,
+        "z": 0.258,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2800000011920929,
+        0.20100000500679016,
+        0.2580000162124634
+      ],
+      "reimportDimensionsM": [
+        0.2800000011920929,
+        0.20100000500679016,
+        0.2580000162124634
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG004.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 4,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Empty respirator face cup with two cylindrical filters and head strap.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.077972
+    },
+    {
+      "id": "ZG005",
+      "name": "Utility waist belt",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG005.glb",
+      "preview": "/survival-gear/output/ZG005.png",
+      "dimensions": {
+        "x": 0.45,
+        "y": 0.41,
+        "z": 0.17,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.45000001788139343,
+        0.4100000262260437,
+        0.17000000178813934
+      ],
+      "reimportDimensionsM": [
+        0.45000001788139343,
+        0.4100000262260437,
+        0.17000000178813934
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG005.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 5,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Open waist belt with front buckle and twin equipment pouches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.078764
+    },
+    {
+      "id": "ZG006",
+      "name": "Shin guard pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG006.glb",
+      "preview": "/survival-gear/output/ZG006.png",
+      "dimensions": {
+        "x": 0.4167,
+        "y": 0.182,
+        "z": 0.4404,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.41669124364852905,
+        0.18200001120567322,
+        0.44044989347457886
+      ],
+      "reimportDimensionsM": [
+        0.41669124364852905,
+        0.18200001120567322,
+        0.44044989347457886
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG006.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 6,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Paired shin armor plates with knee protection and retention bands.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.079421
+    },
+    {
+      "id": "ZG007",
+      "name": "Field boot pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG007.glb",
+      "preview": "/survival-gear/output/ZG007.png",
+      "dimensions": {
+        "x": 0.4,
+        "y": 0.298,
+        "z": 0.291,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3999999761581421,
+        0.2979999780654907,
+        0.29100000858306885
+      ],
+      "reimportDimensionsM": [
+        0.3999999761581421,
+        0.2979999780654907,
+        0.29100000858306885
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG007.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 7,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 14,
+      "brief": "Paired ankle boots with soles, toe boxes, laces and visible empty shaft openings.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.079977
+    },
+    {
+      "id": "ZG008",
+      "name": "Armored glove pair",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG008.glb",
+      "preview": "/survival-gear/output/ZG008.png",
+      "dimensions": {
+        "x": 0.4383,
+        "y": 0.116,
+        "z": 0.2645,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.43828076124191284,
+        0.11599999666213989,
+        0.2644999921321869
+      ],
+      "reimportDimensionsM": [
+        0.43828076124191284,
+        0.11599999666213989,
+        0.2644999921321869
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG008.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 8,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 16,
+      "brief": "Paired protective gloves with individual fingers, wrist openings and knuckle plates.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.0806231
+    },
+    {
+      "id": "ZG009",
+      "name": "Headlamp harness",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG009.glb",
+      "preview": "/survival-gear/output/ZG009.png",
+      "dimensions": {
+        "x": 0.304,
+        "y": 0.332,
+        "z": 0.065,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.30399999022483826,
+        0.3319999873638153,
+        0.06499999761581421
+      ],
+      "reimportDimensionsM": [
+        0.30399999022483826,
+        0.3319999873638153,
+        0.06499999761581421
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG009.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 9,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Open elastic head harness with compact front lamp.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.081179
+    },
+    {
+      "id": "ZG010",
+      "name": "Rain poncho",
+      "batch": 1,
+      "category": "Wearable and personal",
+      "glb": "/survival-gear/output/ZG010.glb",
+      "preview": "/survival-gear/output/ZG010.png",
+      "dimensions": {
+        "x": 0.86,
+        "y": 0.5,
+        "z": 0.662,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.8600000143051147,
+        0.5,
+        0.6620000004768372
+      ],
+      "reimportDimensionsM": [
+        0.8600000143051147,
+        0.5,
+        0.6620000004768372
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG010.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 10,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 2,
+      "brief": "Open-bottom rain poncho with open collar and draped tapered panels.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462021.0818849
+    },
+    {
+      "id": "ZG011",
+      "name": "Pry bar",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG011.glb",
+      "preview": "/survival-gear/output/ZG011.png",
+      "dimensions": {
+        "x": 0.133,
+        "y": 0.12,
+        "z": 0.6901,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.1330498456954956,
+        0.11999999731779099,
+        0.6900995969772339
+      ],
+      "reimportDimensionsM": [
+        0.1330498456954956,
+        0.11999999731779099,
+        0.6900995969772339
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG011.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 11,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Long pry bar with bent hook and broad flat foot.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3791318
+    },
+    {
+      "id": "ZG012",
+      "name": "Claw hammer",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG012.glb",
+      "preview": "/survival-gear/output/ZG012.png",
+      "dimensions": {
+        "x": 0.2227,
+        "y": 0.055,
+        "z": 0.3675,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2227279245853424,
+        0.054999999701976776,
+        0.3675000071525574
+      ],
+      "reimportDimensionsM": [
+        0.2227279394865036,
+        0.054999999701976776,
+        0.3675000071525574
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG012.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 12,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Wood-handled claw hammer with transverse steel head.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3794339
+    },
+    {
+      "id": "ZG013",
+      "name": "Compact hatchet",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG013.glb",
+      "preview": "/survival-gear/output/ZG013.png",
+      "dimensions": {
+        "x": 0.19,
+        "y": 0.06,
+        "z": 0.44,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.4399999976158142
+      ],
+      "reimportDimensionsM": [
+        0.1899999976158142,
+        0.05999999865889549,
+        0.4399999976158142
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG013.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 13,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 2,
+      "brief": "Short wood-handled hatchet with wedge-shaped steel head.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.37965
+    },
+    {
+      "id": "ZG014",
+      "name": "Folding shovel",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG014.glb",
+      "preview": "/survival-gear/output/ZG014.png",
+      "dimensions": {
+        "x": 0.22,
+        "y": 0.044,
+        "z": 0.804,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.2199999988079071,
+        0.04400000721216202,
+        0.8040000200271606
+      ],
+      "reimportDimensionsM": [
+        0.2199999988079071,
+        0.04400000721216202,
+        0.8040000200271606
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG014.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 14,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Compact spade with D grip, shaft and broad blade.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.379841
+    },
+    {
+      "id": "ZG015",
+      "name": "Bolt cutters",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG015.glb",
+      "preview": "/survival-gear/output/ZG015.png",
+      "dimensions": {
+        "x": 0.2434,
+        "y": 0.055,
+        "z": 0.518,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.24343033134937286,
+        0.055000003427267075,
+        0.5180008411407471
+      ],
+      "reimportDimensionsM": [
+        0.24343034625053406,
+        0.05500001832842827,
+        0.5180008411407471
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG015.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 15,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Two-handled bolt cutter with pivot and separated jaws.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380029
+    },
+    {
+      "id": "ZG016",
+      "name": "Hand saw",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG016.glb",
+      "preview": "/survival-gear/output/ZG016.png",
+      "dimensions": {
+        "x": 0.6,
+        "y": 0.04,
+        "z": 0.17,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6000000238418579,
+        0.040000006556510925,
+        0.16999998688697815
+      ],
+      "reimportDimensionsM": [
+        0.6000000238418579,
+        0.04000002518296242,
+        0.17000001668930054
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG016.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 16,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 16,
+      "brief": "Hand saw with open circular grip and serrated blade.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380337
+    },
+    {
+      "id": "ZG017",
+      "name": "Wire spool",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG017.glb",
+      "preview": "/survival-gear/output/ZG017.png",
+      "dimensions": {
+        "x": 0.36,
+        "y": 0.36,
+        "z": 0.265,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.26499998569488525
+      ],
+      "reimportDimensionsM": [
+        0.36000001430511475,
+        0.36000001430511475,
+        0.26499998569488525
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG017.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 17,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 15,
+      "brief": "Flanged cable spool with visible wound wire.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.3806
+    },
+    {
+      "id": "ZG018",
+      "name": "Repair tool roll",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG018.glb",
+      "preview": "/survival-gear/output/ZG018.png",
+      "dimensions": {
+        "x": 0.48,
+        "y": 0.32,
+        "z": 0.056,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.47999998927116394,
+        0.3199999928474426,
+        0.056000012904405594
+      ],
+      "reimportDimensionsM": [
+        0.47999998927116394,
+        0.3199999928474426,
+        0.05600002035498619
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG018.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 18,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 11,
+      "brief": "Open canvas tool roll holding five repair tools.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380791
+    },
+    {
+      "id": "ZG019",
+      "name": "Crank radio",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG019.glb",
+      "preview": "/survival-gear/output/ZG019.png",
+      "dimensions": {
+        "x": 0.325,
+        "y": 0.113,
+        "z": 0.5306,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.32496365904808044,
+        0.11300000548362732,
+        0.5306016802787781
+      ],
+      "reimportDimensionsM": [
+        0.32496365904808044,
+        0.11300000548362732,
+        0.5306016802787781
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG019.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 19,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Portable crank radio with speaker, dial window and tall antenna.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.380981
+    },
+    {
+      "id": "ZG020",
+      "name": "Signal lantern",
+      "batch": 2,
+      "category": "Tools and signaling",
+      "glb": "/survival-gear/output/ZG020.glb",
+      "preview": "/survival-gear/output/ZG020.png",
+      "dimensions": {
+        "x": 0.18,
+        "y": 0.18,
+        "z": 0.414,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.414000004529953
+      ],
+      "reimportDimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.414000004529953
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG020.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 20,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Caged signal lantern with diffuser and hanging handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462102.381275
+    },
+    {
+      "id": "ZG021",
+      "name": "Trauma kit",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG021.glb",
+      "preview": "/survival-gear/output/ZG021.png",
+      "dimensions": {
+        "x": 0.326,
+        "y": 0.2,
+        "z": 0.346,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.32600000500679016,
+        0.20000000298023224,
+        0.3460000157356262
+      ],
+      "reimportDimensionsM": [
+        0.32600000500679016,
+        0.20000000298023224,
+        0.3460000157356262
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG021.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 21,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Red trauma pouch with medical cross and carrying loop.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.077754
+    },
+    {
+      "id": "ZG022",
+      "name": "Bandage tin",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG022.glb",
+      "preview": "/survival-gear/output/ZG022.png",
+      "dimensions": {
+        "x": 0.18,
+        "y": 0.18,
+        "z": 0.159,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.1589999943971634
+      ],
+      "reimportDimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.1589999943971634
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG022.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 22,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Round bandage tin with two visible rolled gauze dressings on removable lid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.078227
+    },
+    {
+      "id": "ZG023",
+      "name": "Water filter pump",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG023.glb",
+      "preview": "/survival-gear/output/ZG023.png",
+      "dimensions": {
+        "x": 0.305,
+        "y": 0.11,
+        "z": 0.4425,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3050000071525574,
+        0.10999999940395355,
+        0.4424999952316284
+      ],
+      "reimportDimensionsM": [
+        0.3050000071525574,
+        0.10999999940395355,
+        0.4424999952316284
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG023.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 23,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Hand water-filter pump with piston grip and intake hose.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.078687
+    },
+    {
+      "id": "ZG024",
+      "name": "Canteen cup set",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG024.glb",
+      "preview": "/survival-gear/output/ZG024.png",
+      "dimensions": {
+        "x": 0.231,
+        "y": 0.1,
+        "z": 0.2925,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.23100000619888306,
+        0.10000000149011612,
+        0.29250001907348633
+      ],
+      "reimportDimensionsM": [
+        0.23100000619888306,
+        0.10000000149011612,
+        0.29250001907348633
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG024.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 24,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Canteen seated in nesting metal cup with side loop.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079081
+    },
+    {
+      "id": "ZG025",
+      "name": "Medicine case",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG025.glb",
+      "preview": "/survival-gear/output/ZG025.png",
+      "dimensions": {
+        "x": 0.4,
+        "y": 0.2525,
+        "z": 0.36,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.4000000059604645,
+        0.2524999976158142,
+        0.36000001430511475
+      ],
+      "reimportDimensionsM": [
+        0.4000000059604645,
+        0.2524999976158142,
+        0.36000001430511475
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG025.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 25,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 19,
+      "brief": "Open medicine organizer with lid cross, separated vial compartments and capped medicine vials.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079484
+    },
+    {
+      "id": "ZG026",
+      "name": "Folded rescue stretcher",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG026.glb",
+      "preview": "/survival-gear/output/ZG026.png",
+      "dimensions": {
+        "x": 0.324,
+        "y": 0.1225,
+        "z": 0.98,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3240000009536743,
+        0.12250000238418579,
+        0.9800000190734863
+      ],
+      "reimportDimensionsM": [
+        0.3240000009536743,
+        0.12250000238418579,
+        0.9800000190734863
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG026.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 26,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Folded rescue stretcher with paired poles and secured canvas.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079836
+    },
+    {
+      "id": "ZG027",
+      "name": "Emergency blanket roll",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG027.glb",
+      "preview": "/survival-gear/output/ZG027.png",
+      "dimensions": {
+        "x": 0.38,
+        "y": 0.25,
+        "z": 0.25,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3799999952316284,
+        0.25,
+        0.25
+      ],
+      "reimportDimensionsM": [
+        0.3800000846385956,
+        0.25,
+        0.2500000298023224
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG027.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 27,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Rolled reflective emergency blanket secured by two straps.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.08018
+    },
+    {
+      "id": "ZG028",
+      "name": "Splint bundle",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG028.glb",
+      "preview": "/survival-gear/output/ZG028.png",
+      "dimensions": {
+        "x": 0.25,
+        "y": 0.0475,
+        "z": 0.64,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.25,
+        0.04749999940395355,
+        0.6399999856948853
+      ],
+      "reimportDimensionsM": [
+        0.25,
+        0.04749999940395355,
+        0.6399999856948853
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG028.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 28,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Three rigid splints bundled with two cloth ties.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.0806139
+    },
+    {
+      "id": "ZG029",
+      "name": "Wash station",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG029.glb",
+      "preview": "/survival-gear/output/ZG029.png",
+      "dimensions": {
+        "x": 0.62,
+        "y": 0.42,
+        "z": 1.3,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6200000047683716,
+        0.42000001668930054,
+        1.3000000715255737
+      ],
+      "reimportDimensionsM": [
+        0.6200000047683716,
+        0.42000001668930054,
+        1.3000000715255737
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG029.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 29,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Raised wash basin with gravity reservoir, tap and soap tray.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.080917
+    },
+    {
+      "id": "ZG030",
+      "name": "Medical supply chest",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG030.glb",
+      "preview": "/survival-gear/output/ZG030.png",
+      "dimensions": {
+        "x": 1.0,
+        "y": 0.58,
+        "z": 0.5875,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.0,
+        0.5799999833106995,
+        0.5874999761581421
+      ],
+      "reimportDimensionsM": [
+        1.0,
+        0.5800000429153442,
+        0.5874999761581421
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG030.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 30,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 14,
+      "brief": "Wide wheeled medical supply trunk with side handles, reinforced lid and front latches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.081292
+    },
+    {
+      "id": "ZG031",
+      "name": "A-frame shelter",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG031.glb",
+      "preview": "/survival-gear/output/ZG031.png",
+      "dimensions": {
+        "x": 2.0402,
+        "y": 2.05,
+        "z": 1.3798,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.040177822113037,
+        2.0500001907348633,
+        1.3797613382339478
+      ],
+      "reimportDimensionsM": [
+        2.040178060531616,
+        2.0500001907348633,
+        1.3797613382339478
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG031.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 31,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Open entrance A-frame field shelter with canopy, separate door flaps and support poles.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.270682
+    },
+    {
+      "id": "ZG032",
+      "name": "Camp stove",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG032.glb",
+      "preview": "/survival-gear/output/ZG032.png",
+      "dimensions": {
+        "x": 0.6,
+        "y": 0.3,
+        "z": 0.27,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.27000001072883606
+      ],
+      "reimportDimensionsM": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.27000001072883606
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG032.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 32,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Twin-burner camp stove with pot rails and fuel bottle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.2709918
+    },
+    {
+      "id": "ZG033",
+      "name": "Bedroll",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG033.glb",
+      "preview": "/survival-gear/output/ZG033.png",
+      "dimensions": {
+        "x": 0.65,
+        "y": 1.85,
+        "z": 0.251,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6499999761581421,
+        1.850000023841858,
+        0.2510000169277191
+      ],
+      "reimportDimensionsM": [
+        0.6499999761581421,
+        1.850000023841858,
+        0.2510000169277191
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement to distinguish bedroll silhouette from emergency blanket roll",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG033.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_bedroll.py",
+        "assetIndex": 33,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 9,
+      "brief": "Unrolled sleeping bag on full length mat, with pillow, zipper rail and visible quilting.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271198
+    },
+    {
+      "id": "ZG034",
+      "name": "Water jerrycan",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG034.glb",
+      "preview": "/survival-gear/output/ZG034.png",
+      "dimensions": {
+        "x": 0.34,
+        "y": 0.176,
+        "z": 0.575,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3400000035762787,
+        0.17600001394748688,
+        0.5750000476837158
+      ],
+      "reimportDimensionsM": [
+        0.3400000035762787,
+        0.17600001394748688,
+        0.5750000476837158
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG034.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 34,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Water jerrycan with molded rib, screw cap and carry handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271394
+    },
+    {
+      "id": "ZG035",
+      "name": "Solar charging stand",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG035.glb",
+      "preview": "/survival-gear/output/ZG035.png",
+      "dimensions": {
+        "x": 0.85,
+        "y": 0.42,
+        "z": 1.0051,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.8500000238418579,
+        0.42000001668930054,
+        1.0051153898239136
+      ],
+      "reimportDimensionsM": [
+        0.8500000238418579,
+        0.42000001668930054,
+        1.0051153898239136
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG035.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 35,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 10,
+      "brief": "Solar panel on support stand with battery unit beneath.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271761
+    },
+    {
+      "id": "ZG036",
+      "name": "Supply crate",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG036.glb",
+      "preview": "/survival-gear/output/ZG036.png",
+      "dimensions": {
+        "x": 0.72,
+        "y": 0.5105,
+        "z": 0.5325,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.7200000286102295,
+        0.5104999542236328,
+        0.5324999690055847
+      ],
+      "reimportDimensionsM": [
+        0.7200000286102295,
+        0.5104999542236328,
+        0.5324999690055847
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG036.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 36,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Reinforced timber supply crate with separate lid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.271987
+    },
+    {
+      "id": "ZG037",
+      "name": "Cooking tripod",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG037.glb",
+      "preview": "/survival-gear/output/ZG037.png",
+      "dimensions": {
+        "x": 0.7313,
+        "y": 0.8446,
+        "z": 1.1189,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.7312753200531006,
+        0.844630241394043,
+        1.1189316511154175
+      ],
+      "reimportDimensionsM": [
+        0.7312753200531006,
+        0.844630241394043,
+        1.1189316511154175
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG037.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 37,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Three-leg cooking tripod suspending a round pot.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272193
+    },
+    {
+      "id": "ZG038",
+      "name": "Folding camp chair",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG038.glb",
+      "preview": "/survival-gear/output/ZG038.png",
+      "dimensions": {
+        "x": 0.5,
+        "y": 0.5262,
+        "z": 0.9823,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.5,
+        0.5262305736541748,
+        0.9823284149169922
+      ],
+      "reimportDimensionsM": [
+        0.5,
+        0.5262306332588196,
+        0.9823284149169922
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG038.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 38,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Folding canvas chair with crossed metal legs and back frame.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272394
+    },
+    {
+      "id": "ZG039",
+      "name": "Rain collector",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG039.glb",
+      "preview": "/survival-gear/output/ZG039.png",
+      "dimensions": {
+        "x": 1.2,
+        "y": 1.2,
+        "z": 1.55,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.5499999523162842
+      ],
+      "reimportDimensionsM": [
+        1.2000000476837158,
+        1.2000000476837158,
+        1.5499999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG039.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 39,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Elevated funnel collector draining toward storage barrel.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272576
+    },
+    {
+      "id": "ZG040",
+      "name": "Portable workbench",
+      "batch": 4,
+      "category": "Camp equipment",
+      "glb": "/survival-gear/output/ZG040.glb",
+      "preview": "/survival-gear/output/ZG040.png",
+      "dimensions": {
+        "x": 1.35,
+        "y": 0.697,
+        "z": 1.08,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.350000023841858,
+        0.6970000267028809,
+        1.0800000429153442
+      ],
+      "reimportDimensionsM": [
+        1.350000023841858,
+        0.6970000267028809,
+        1.0800000429153442
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG040.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 40,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Portable wood workbench with lower shelf and mounted vice.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462335.272814
+    },
+    {
+      "id": "ZG041",
+      "name": "Sandbag corner",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG041.glb",
+      "preview": "/survival-gear/output/ZG041.png",
+      "dimensions": {
+        "x": 2.15,
+        "y": 1.405,
+        "z": 0.7,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.1500000953674316,
+        1.4049999713897705,
+        0.699999988079071
+      ],
+      "reimportDimensionsM": [
+        2.1500000953674316,
+        1.4049999713897705,
+        0.699999988079071
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG041.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 41,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 21,
+      "brief": "L-shaped stacked sandbag cover in three staggered courses.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.127706
+    },
+    {
+      "id": "ZG042",
+      "name": "Timber barricade",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG042.glb",
+      "preview": "/survival-gear/output/ZG042.png",
+      "dimensions": {
+        "x": 2.0072,
+        "y": 0.8,
+        "z": 1.3,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.0071945190429688,
+        0.800000011920929,
+        1.2999999523162842
+      ],
+      "reimportDimensionsM": [
+        2.0071945190429688,
+        0.800000011920929,
+        1.2999999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG042.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 42,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 10,
+      "brief": "Freestanding timber barricade with horizontal planks and angled brace.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.127977
+    },
+    {
+      "id": "ZG043",
+      "name": "Wire fence panel",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG043.glb",
+      "preview": "/survival-gear/output/ZG043.png",
+      "dimensions": {
+        "x": 2.09,
+        "y": 0.09,
+        "z": 1.8,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.0899999141693115,
+        0.09000001847743988,
+        1.7999999523162842
+      ],
+      "reimportDimensionsM": [
+        2.0899999141693115,
+        0.09000001847743988,
+        1.7999999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG043.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 43,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 23,
+      "brief": "Wire fence panel with two posts, rails and fine square wire grid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.128181
+    },
+    {
+      "id": "ZG044",
+      "name": "Gate checkpoint",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG044.glb",
+      "preview": "/survival-gear/output/ZG044.png",
+      "dimensions": {
+        "x": 3.26,
+        "y": 0.47,
+        "z": 1.2,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        3.259999990463257,
+        0.4699999988079071,
+        1.2000000476837158
+      ],
+      "reimportDimensionsM": [
+        3.259999990463257,
+        0.4699999988079071,
+        1.2000000476837158
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG044.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 44,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 12,
+      "brief": "Checkpoint barrier with striped horizontal arm, pillars and control box.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.1283681
+    },
+    {
+      "id": "ZG045",
+      "name": "Watch platform",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG045.glb",
+      "preview": "/survival-gear/output/ZG045.png",
+      "dimensions": {
+        "x": 1.8,
+        "y": 2.1247,
+        "z": 3.2036,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.7999999523162842,
+        2.1247386932373047,
+        3.2036077976226807
+      ],
+      "reimportDimensionsM": [
+        1.7999999523162842,
+        2.1247386932373047,
+        3.2036077976226807
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG045.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 45,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 22,
+      "brief": "Raised timber watch platform with three-sided guardrail and access ladder.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.128557
+    },
+    {
+      "id": "ZG046",
+      "name": "Roadblock barrier",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG046.glb",
+      "preview": "/survival-gear/output/ZG046.png",
+      "dimensions": {
+        "x": 2.0,
+        "y": 0.55,
+        "z": 0.875,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        2.0,
+        0.550000011920929,
+        0.875
+      ],
+      "reimportDimensionsM": [
+        2.0,
+        0.550000011920929,
+        0.875
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG046.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 46,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Heavy roadblock with broad foot and contrasting warning markers.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.128742
+    },
+    {
+      "id": "ZG047",
+      "name": "Water tank stand",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG047.glb",
+      "preview": "/survival-gear/output/ZG047.png",
+      "dimensions": {
+        "x": 1.4,
+        "y": 1.6,
+        "z": 2.61,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.399999976158142,
+        1.5999999046325684,
+        2.609999895095825
+      ],
+      "reimportDimensionsM": [
+        1.399999976158142,
+        1.5999999046325684,
+        2.609999895095825
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG047.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 47,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Large elevated cylindrical water tank with lid and outlet pipe.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.1290271
+    },
+    {
+      "id": "ZG048",
+      "name": "Camp storage rack",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG048.glb",
+      "preview": "/survival-gear/output/ZG048.png",
+      "dimensions": {
+        "x": 1.8,
+        "y": 0.7,
+        "z": 1.8,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.7999999523162842,
+        0.699999988079071,
+        1.7999999523162842
+      ],
+      "reimportDimensionsM": [
+        1.7999999523162842,
+        0.699999988079071,
+        1.7999999523162842
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG048.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 48,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 18,
+      "brief": "Three-level supply rack with reinforced crates and metal cans.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.129298
+    },
+    {
+      "id": "ZG049",
+      "name": "Guard booth",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG049.glb",
+      "preview": "/survival-gear/output/ZG049.png",
+      "dimensions": {
+        "x": 1.75,
+        "y": 1.65,
+        "z": 2.11,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.75,
+        1.649999976158142,
+        2.109999895095825
+      ],
+      "reimportDimensionsM": [
+        1.75,
+        1.649999976158142,
+        2.109999895095825
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG049.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 49,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Open-front guard booth with side half-walls, counter and overhanging roof.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.129559
+    },
+    {
+      "id": "ZG050",
+      "name": "Generator cart",
+      "batch": 5,
+      "category": "Camp and defense structures",
+      "glb": "/survival-gear/output/ZG050.glb",
+      "preview": "/survival-gear/output/ZG050.png",
+      "dimensions": {
+        "x": 1.405,
+        "y": 0.78,
+        "z": 0.915,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.40500009059906,
+        0.7800000309944153,
+        0.9150000214576721
+      ],
+      "reimportDimensionsM": [
+        1.40500009059906,
+        0.7800000905990601,
+        0.9150000214576721
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG050.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 50,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 11,
+      "brief": "Four-wheel generator cart with engine, fuel tank, exhaust and push handle.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462357.129802
+    }
+  ]
+}

@@ -1,0 +1,577 @@
+{
+  "name": "Compact_Service_Pistol_Exterior_Prop",
+  "rationale": "A full-scale, nonfunctional exterior pistol prop with a squared charcoal slide, short recessed muzzle, dark polymer frame, angled textured grip, open trigger guard, and three-piece rear sight. Broad material breaks and substantial silhouette features keep the construction readable without emissive effects. The trigger guard and muzzle surround use separate connected pieces to preserve their openings. No internal mechanisms are modeled.",
+  "dimensionsM": {
+    "x": 0.19,
+    "y": 0.033,
+    "z": 0.14,
+    "rotationUnits": "degrees",
+    "coordinateSystem": "X longitudinal, Y lateral, Z up",
+    "forwardAxis": "+X",
+    "groundZ": 0
+  },
+  "animation": {
+    "implemented": false,
+    "partAxes": [
+      {
+        "part": "slide_main",
+        "axis": [
+          1,
+          0,
+          0
+        ],
+        "meaning": "Longitudinal slide alignment; static exterior geometry only."
+      },
+      {
+        "part": "trigger_exterior",
+        "axis": [
+          0,
+          1,
+          0
+        ],
+        "meaning": "Transverse trigger pivot orientation; no movement or mechanism implemented."
+      }
+    ]
+  },
+  "parts": [
+    {
+      "name": "slide_main",
+      "primitive": "box",
+      "colorhex": "#303337",
+      "location": [
+        -0.008,
+        0,
+        0.12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.174,
+        0.032,
+        0.027
+      ]
+    },
+    {
+      "name": "muzzle_surround_top",
+      "primitive": "box",
+      "colorhex": "#303337",
+      "location": [
+        0.087,
+        0,
+        0.1305
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.016,
+        0.033,
+        0.006
+      ]
+    },
+    {
+      "name": "muzzle_surround_bottom",
+      "primitive": "box",
+      "colorhex": "#292C30",
+      "location": [
+        0.087,
+        0,
+        0.1095
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.016,
+        0.033,
+        0.006
+      ]
+    },
+    {
+      "name": "muzzle_surround_left",
+      "primitive": "box",
+      "colorhex": "#303337",
+      "location": [
+        0.087,
+        0.013,
+        0.12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.016,
+        0.007,
+        0.015
+      ]
+    },
+    {
+      "name": "muzzle_surround_right",
+      "primitive": "box",
+      "colorhex": "#303337",
+      "location": [
+        0.087,
+        -0.013,
+        0.12
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.016,
+        0.007,
+        0.015
+      ]
+    },
+    {
+      "name": "short_barrel_muzzle_rim",
+      "primitive": "torus",
+      "colorhex": "#53565A",
+      "location": [
+        0.0935,
+        0,
+        0.12
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "majorRadius": 0.006,
+      "minorRadius": 0.0015
+    },
+    {
+      "name": "muzzle_shallow_recess_backing",
+      "primitive": "cylinder",
+      "colorhex": "#101214",
+      "location": [
+        0.0835,
+        0,
+        0.12
+      ],
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "radius": 0.0075,
+      "depth": 0.009
+    },
+    {
+      "name": "polymer_frame_upper_rail",
+      "primitive": "box",
+      "colorhex": "#222627",
+      "location": [
+        -0.007,
+        0,
+        0.1
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.158,
+        0.031,
+        0.013
+      ]
+    },
+    {
+      "name": "polymer_forward_dust_cover",
+      "primitive": "box",
+      "colorhex": "#25292A",
+      "location": [
+        0.038,
+        0,
+        0.088
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.065,
+        0.027,
+        0.013
+      ]
+    },
+    {
+      "name": "angled_polymer_grip_core",
+      "primitive": "box",
+      "colorhex": "#242827",
+      "location": [
+        -0.057,
+        0,
+        0.049
+      ],
+      "rotation": [
+        0,
+        16,
+        0
+      ],
+      "dimensions": [
+        0.04,
+        0.028,
+        0.09
+      ]
+    },
+    {
+      "name": "grip_left_textured_panel",
+      "primitive": "box",
+      "colorhex": "#353A36",
+      "location": [
+        -0.057,
+        0.0145,
+        0.047
+      ],
+      "rotation": [
+        0,
+        16,
+        0
+      ],
+      "dimensions": [
+        0.03,
+        0.0015,
+        0.071
+      ]
+    },
+    {
+      "name": "grip_right_textured_panel",
+      "primitive": "box",
+      "colorhex": "#353A36",
+      "location": [
+        -0.057,
+        -0.0145,
+        0.047
+      ],
+      "rotation": [
+        0,
+        16,
+        0
+      ],
+      "dimensions": [
+        0.03,
+        0.0015,
+        0.071
+      ]
+    },
+    {
+      "name": "grip_heel_exterior_base",
+      "primitive": "box",
+      "colorhex": "#191D1E",
+      "location": [
+        -0.068,
+        0,
+        0.004
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.042,
+        0.03,
+        0.008
+      ]
+    },
+    {
+      "name": "trigger_guard_front",
+      "primitive": "beam",
+      "colorhex": "#25292A",
+      "location": [
+        0.029,
+        0,
+        0.0705
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.033,
+        0,
+        0.084
+      ],
+      "end": [
+        0.025,
+        0,
+        0.057
+      ],
+      "radius": 0.004
+    },
+    {
+      "name": "trigger_guard_lower",
+      "primitive": "beam",
+      "colorhex": "#25292A",
+      "location": [
+        -0.0055,
+        0,
+        0.0545
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        0.025,
+        0,
+        0.057
+      ],
+      "end": [
+        -0.036,
+        0,
+        0.052
+      ],
+      "radius": 0.004
+    },
+    {
+      "name": "trigger_guard_rear_root",
+      "primitive": "beam",
+      "colorhex": "#242827",
+      "location": [
+        -0.036,
+        0,
+        0.0675
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.036,
+        0,
+        0.052
+      ],
+      "end": [
+        -0.036,
+        0,
+        0.083
+      ],
+      "radius": 0.0035
+    },
+    {
+      "name": "trigger_exterior",
+      "primitive": "beam",
+      "colorhex": "#3D4142",
+      "location": [
+        -0.0115,
+        0,
+        0.081
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "start": [
+        -0.008,
+        0,
+        0.094
+      ],
+      "end": [
+        -0.015,
+        0,
+        0.068
+      ],
+      "radius": 0.0025
+    },
+    {
+      "name": "rear_sight_base",
+      "primitive": "box",
+      "colorhex": "#171A1C",
+      "location": [
+        -0.078,
+        0,
+        0.1345
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.012,
+        0.019,
+        0.002
+      ]
+    },
+    {
+      "name": "rear_sight_left_ear",
+      "primitive": "box",
+      "colorhex": "#202426",
+      "location": [
+        -0.078,
+        0.0055,
+        0.1375
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.008,
+        0.004,
+        0.005
+      ]
+    },
+    {
+      "name": "rear_sight_right_ear",
+      "primitive": "box",
+      "colorhex": "#202426",
+      "location": [
+        -0.078,
+        -0.0055,
+        0.1375
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.008,
+        0.004,
+        0.005
+      ]
+    },
+    {
+      "name": "front_sight_blade",
+      "primitive": "box",
+      "colorhex": "#555951",
+      "location": [
+        0.075,
+        0,
+        0.13675
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.01,
+        0.004,
+        0.0065
+      ]
+    },
+    {
+      "name": "ejection_port_exterior_inset",
+      "primitive": "box",
+      "colorhex": "#171B1E",
+      "location": [
+        0.015,
+        -0.01625,
+        0.122
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "dimensions": [
+        0.033,
+        0.0005,
+        0.011
+      ]
+    },
+    {
+      "name": "frame_flush_control_pin",
+      "primitive": "cylinder",
+      "colorhex": "#464A4B",
+      "location": [
+        -0.018,
+        -0.0155,
+        0.1
+      ],
+      "rotation": [
+        90,
+        0,
+        0
+      ],
+      "radius": 0.003,
+      "depth": 0.001
+    },
+    {
+      "name": "rear_slide_left_traction_panel",
+      "primitive": "box",
+      "colorhex": "#42464A",
+      "location": [
+        -0.069,
+        0.01625,
+        0.12
+      ],
+      "rotation": [
+        0,
+        -12,
+        0
+      ],
+      "dimensions": [
+        0.019,
+        0.0005,
+        0.018
+      ]
+    },
+    {
+      "name": "rear_slide_right_traction_panel",
+      "primitive": "box",
+      "colorhex": "#42464A",
+      "location": [
+        -0.069,
+        -0.01625,
+        0.12
+      ],
+      "rotation": [
+        0,
+        -12,
+        0
+      ],
+      "dimensions": [
+        0.019,
+        0.0005,
+        0.018
+      ]
+    }
+  ],
+  "provenance": {
+    "model": "gpt-6-astra",
+    "reasoningEffort": "medium",
+    "seconds": 71.8086097240448,
+    "usage": {
+      "prompt_tokens": 235,
+      "completion_tokens": 4017,
+      "total_tokens": 4252,
+      "prompt_tokens_details": {
+        "cached_tokens": 0,
+        "cache_write_tokens": 0,
+        "audio_tokens": 0
+      },
+      "completion_tokens_details": {
+        "reasoning_tokens": 1536,
+        "audio_tokens": 0,
+        "accepted_prediction_tokens": 0,
+        "rejected_prediction_tokens": 0
+      }
+    },
+    "role": "decoration",
+    "source": "Original commissioned procedural game prop",
+    "context": "Night of the Dead 10m hex scenes,25m camera"
+  }
+}

@@ -1,0 +1,6 @@
+import {settlementDistrictEntries} from './settlement-districts.js';
+// A settlement is a saved collection of ordinary cards, never a baked backdrop.
+const working=[['home','courtyard',0,0],['garden','kitchen',1,0],['woodland','coppice',0,1],['pottery','kiln',-1,1],['preservation','roots',-1,0],['gathering','meal',0,-1],['animals','care',1,-1]];
+const entries=rows=>rows.map(([type,preset,q,r],index)=>({type,preset,q,r,seed:41+index*11}));
+export const SETTLEMENT_PRESETS={seaside:{label:'Seaside',description:'Dry working yards and shore households linked to inland services.',entries:settlementDistrictEntries('seaside')},neighborhood:{label:'Neighborhood',description:'A planted residential court beside shared daily work.',entries:settlementDistrictEntries('neighborhood')},town:{label:'Town',description:'Residential streets and a market core with connected workshops.',entries:settlementDistrictEntries('town')},hamlet:{label:'Hamlet',description:'Households and shared work around a common route.',entries:entries(working)},burg:{label:'Castle burg',description:'A castle precinct beside a working household settlement.',entries:[...entries(working),{type:'castle',preset:'sunward',q:0,r:-2,seed:118}]}};
+export function settlementPreset(id){const preset=SETTLEMENT_PRESETS[id];if(!preset)throw Error('Unknown settlement preset');return structuredClone(preset);}

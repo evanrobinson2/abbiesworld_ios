@@ -1,0 +1,55 @@
+{
+  "id": "aw.ranch.asset.ba-0061",
+  "name": "Communal drinking water station",
+  "dependencies": [
+    "BA-0024"
+  ],
+  "geometry": {
+    "mesh_objects": 23,
+    "triangles": 3072,
+    "bounds_min": [
+      -0.5992432236671448,
+      -0.5725557804107666,
+      -0.011515174061059952
+    ],
+    "bounds_max": [
+      0.6613137125968933,
+      0.5725557804107666,
+      1.091249942779541
+    ],
+    "dimensions_m": [
+      1.2606,
+      1.1451,
+      1.1028
+    ],
+    "material_slots": [
+      "Clay",
+      "ClayLight",
+      "TimberLight",
+      "Timber",
+      "Stone"
+    ],
+    "export_meshes": 1,
+    "export_material_groups": 5
+  },
+  "materials": [
+    "Clay",
+    "ClayLight",
+    "TimberLight",
+    "Timber",
+    "Stone"
+  ],
+  "taxonomy_version": "0.1.0",
+  "limitations": [
+    "Fictional Bronze Age art direction; not an archaeological reconstruction.",
+    "Static geometry; no collision, interaction or LOD authored.",
+    "Static diorama asset; no game interaction or historical certification."
+  ],
+  "catalog_id": "BA-0061",
+  "intent": "A large vessel, dipping cup, jar stand, and splash area.",
+  "family": "Market services",
+  "project_url": "https://abbies-ranch-atelier.vercel.app",
+  "prefab_url": "https://abbies-ranch-atelier.vercel.app/scene-generator/prefabs/market/ba-0061",
+  "source_library": "Original Market Village kit",
+  "interaction_state": "static"
+}

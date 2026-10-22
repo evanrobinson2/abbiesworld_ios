@@ -1,0 +1,3280 @@
+{
+  "date": "2026-10-21",
+  "summary": [
+    {
+      "animals": 100,
+      "before": 8.608775000000003,
+      "after": 8.372562500000006,
+      "peerReduction": 0.665494623655914
+    },
+    {
+      "animals": 395,
+      "before": 69.70934999999997,
+      "after": 69.8571125,
+      "peerReduction": 0.8144460276933182
+    },
+    {
+      "animals": 520,
+      "before": 28.710887500000002,
+      "after": 29.741075000000002,
+      "peerReduction": 0.6283058155665584
+    },
+    {
+      "animals": 1000,
+      "before": 56.19408750000006,
+      "after": 55.572199999999974,
+      "peerReduction": 0.6256229156080126
+    }
+  ],
+  "method": "Six interleaved sample pairs per saved scene, each40 fixed ticks from identical snapshots; median browser-thread CPU time (CDP threadTicks TaskDuration). Rendering suspended during CPU samples. Wall times retained separately. This is not an FPS measurement.",
+  "checks": {
+    "device": {
+      "cpu": "Apple M5",
+      "browser": "155.0.8059.85"
+    },
+    "manifest": {
+      "/simulations/": {
+        "hash": "34bcc9b6a9678b48d6c2f7a0aeaf73ea0be57de5abacf543defec096c7806ef3",
+        "status": 200
+      },
+      "/simulations/lab.mjs?compact=73": {
+        "hash": "ca5fcf26478a277154ba42cb505bfc262b4cfa13a89ddaf4b069148bde7cb351",
+        "status": 200
+      },
+      "/simulations/simulation-profiler.mjs": {
+        "hash": "56f81033a246d871b691966f80aab8fd3791ca09ff362cfc2917e6aabc625b64",
+        "status": 200
+      },
+      "/simulations/ranch-life.mjs?motion=37": {
+        "hash": "fbfe11c4bff2f1fc7eb2cbd4b07e7e671f5656e0f551055414c829673018ded4",
+        "status": 200
+      },
+      "/simulations/ranch-navigation.mjs?collision=2": {
+        "hash": "e1a5933e68b1646cd3da6763eb5569b14c82e83f2696937c9943ccee55532a34",
+        "status": 200
+      },
+      "/simulations/lab.css": {
+        "hash": "c900d57bccc54c56f62908584024e7289432446c4088a8641c4727de38c771fc",
+        "status": 200
+      },
+      "/simulations/workspace.css?compact=73": {
+        "hash": "15d0c8e2febd098b626f2da9ec7406027bcbbc968babae3ba070a7ed9eb5fe76",
+        "status": 200
+      },
+      "/simulations/moon/moon-board-terrain.mjs": {
+        "hash": "03a66b3a47fb0db7f714b36ae89d8306cc600e287150d12f5362b90434c068ed",
+        "status": 200
+      },
+      "/simulations/placement-settings.mjs": {
+        "hash": "ea0776a4d28959f638a579cf0564eb843443427834a295770765793c6235bf75",
+        "status": 200
+      },
+      "/simulations/scene-readouts.mjs": {
+        "hash": "d763eaec5a710ae5105ec790e72f25495f651031d77d3fba1d9f334eb55a8e94",
+        "status": 200
+      },
+      "/simulations/render-pool.mjs": {
+        "hash": "1afc3d5f645b9ee86295f246afb6b4fc7f25cb77d5d3f2c92750f60ef3d99be4",
+        "status": 200
+      },
+      "/simulations/camera-follow.mjs": {
+        "hash": "f4c6d9adbdfe7d8fc15b06c7e483d86fa043ad50fc265889a55c989f5a7f91b6",
+        "status": 200
+      },
+      "/simulations/tile-chooser.mjs": {
+        "hash": "f360b628e8a2854c6e543d9f19332c66f238143b386f07c79e6d3b52121d345c",
+        "status": 200
+      },
+      "/simulations/build-progress.mjs": {
+        "hash": "ae14da1f0a2e8548c4593ba9672af8143416da681e17cc3cc02ed6adde5e42fe",
+        "status": 200
+      },
+      "/simulations/simulation/runtime-scheduling.mjs": {
+        "hash": "6020caf00a62e4bd4a1d51e68f54c41a84143a7706ab9669bba99bb7e1087d19",
+        "status": 200
+      },
+      "/simulations/starship/starship-storage.mjs": {
+        "hash": "577babfa58296061a37dbd78d321d27114a95bdf6d9cd65870010912421d8543",
+        "status": 200
+      },
+      "/simulations/suburban/adapter.mjs": {
+        "hash": "27bb95a0103fafd1c3968a2081ce549b0a6c8c6f457eb1ee602159dbd3c7b39d",
+        "status": 200
+      },
+      "/simulations/moon/moon-board.mjs": {
+        "hash": "6239834b78f5f3b6dfea40b1c470432cba36b30e7c259d3b35219182b0f80101",
+        "status": 200
+      },
+      "/simulations/simulation-diagnostics.mjs": {
+        "hash": "48d9bdd862b01b81ffedffd6bc48a5ac2611e0f02bf4d6b74326a1dc4ed3478c",
+        "status": 200
+      },
+      "/simulations/moon/moon-terrain.mjs": {
+        "hash": "fec4b889f28adabd7e6c13a5dd10eff08489ffb78732b682bf72f6b6cb7c17dd",
+        "status": 200
+      },
+      "/simulations/garden-facets.mjs": {
+        "hash": "6068efed6f643e6b4d92522c4e80484a715d62f103460076de588c6814abb759",
+        "status": 200
+      },
+      "/simulations/starship/starship-adapter.mjs": {
+        "hash": "d14c64a1ef503fcf09ae70c3c7d4b400ee0b14b7aafbd8a0373e1bb0998df07f",
+        "status": 200
+      },
+      "/simulations/moon/moon-adapter.mjs": {
+        "hash": "a6338604893beef7caa6d8af82f2b5484eb04ef6def8b4d54ffc4530f8f6a7ce",
+        "status": 200
+      },
+      "/simulations/world-appearance.mjs": {
+        "hash": "63ddcba66e3abeab9cb5fecb07f987c68c56b69e7781436dcab0b46100e5bf76",
+        "status": 200
+      },
+      "/simulations/expansion-layout.mjs": {
+        "hash": "baf7efb27358dcb1873d729b6c45a9a66f50fdfe829b794677a3bc09c2982565",
+        "status": 200
+      },
+      "/simulations/cemetery/adapter.mjs": {
+        "hash": "a42c1579eb0867dbe7158f82e66ad0bdc8ada808d287abd3d7eed64ff94356f2",
+        "status": 200
+      },
+      "/simulations/ranch-navigation.mjs": {
+        "hash": "e1a5933e68b1646cd3da6763eb5569b14c82e83f2696937c9943ccee55532a34",
+        "status": 200
+      },
+      "/simulations/moon/moon-environment.mjs": {
+        "hash": "9821070f84c3d2cbad90b200eaabff99ffedc7fb2e99ab91fca43fbb98400613",
+        "status": 200
+      },
+      "/simulations/ranch-item-runtime.mjs": {
+        "hash": "503aad9f1233644c38b457a68a251050396df8336b76e01a865801dde27880b3",
+        "status": 200
+      },
+      "/simulations/ranch-sky.mjs": {
+        "hash": "67a170e24361923affeb878f32cb3da3542fcc3b309e05a3153eb9ed609ee439",
+        "status": 200
+      },
+      "/simulations/simulation/weather-control.mjs": {
+        "hash": "2336826ac5a4fae8a39f4c447d68a998863f15f045e783bfe8068858d95d6450",
+        "status": 200
+      },
+      "/simulations/moon/moon-port-layout.mjs": {
+        "hash": "9f0555f09041b2e6adedd9ae81369fb47b4d26fe2b3d0dc9b0bf93cad8f66ae9",
+        "status": 200
+      },
+      "/simulations/tile-drag.mjs?v=4": {
+        "hash": "526d700a873bf57dd76dbe4b9237ebfb3a016d7054927ac0d5edf9de34c2f167",
+        "status": 200
+      },
+      "/simulations/ranch-motion-ui.mjs?v=9": {
+        "hash": "36f54d2bd4f77882ab51594de1a74afb3ff67a8c8c35b0de2f19fd16b13ec7d2",
+        "status": 200
+      },
+      "/simulations/poi/sugar-shack-spec.mjs": {
+        "hash": "eb4a91af0f1825e2e0b772f9df3bde6ec2be850a5e904bc938ee498f2b23e4ee",
+        "status": 200
+      },
+      "/simulations/ranch-generation-client.mjs": {
+        "hash": "e08f7d8dbaf0eb2a7143dc4127f4a32f3fdc285ad1913c04c4ad0f88b33891c9",
+        "status": 200
+      },
+      "/simulations/ranch-names.mjs": {
+        "hash": "f41e5d24f1be623143e18f7160d567bfd31e45ecddbb8b40a9d83b66421d4458",
+        "status": 200
+      },
+      "/simulations/new-england-terrain.mjs": {
+        "hash": "de5b7e69b5932f4117342ff33a6f092fc08c85b5389960b1f521aece59d7c35d",
+        "status": 200
+      },
+      "/simulations/simulation/animation-clock.mjs": {
+        "hash": "e5256b2e9ae8f586417a43361bb1d6b7d8fb0d45b61030fb62d32f0dc4d21c26",
+        "status": 200
+      },
+      "/simulations/simulation/life-fidelity.mjs": {
+        "hash": "9b5dd9f36665a5487256165d0cefdd80319f6746731e505237acadad1701b30b",
+        "status": 200
+      },
+      "/simulations/ranch-regional.mjs?v=3": {
+        "hash": "124a42e9a4d46ae5ca58bbaaadc9c542d9816af734f137dac566d16d45ddd54c",
+        "status": 200
+      },
+      "/simulations/ranch-rhythm.mjs?v=3": {
+        "hash": "b8cbb77741fe58dd8d7a999fcdbd8cf0cf35a0c346e4542380c73efbe733929d",
+        "status": 200
+      },
+      "/simulations/facet-picker.mjs": {
+        "hash": "25a385ed731b946ae12d8308dea69906cea0cdbab5a79aad709129b9f143005c",
+        "status": 200
+      },
+      "/simulations/ranch-weather.mjs?v=2": {
+        "hash": "1dc2d3b56d4b23220f899cd8c047e4f8e2d0652becda2b1494625f91a3be7f44",
+        "status": 200
+      },
+      "/simulations/ranch-clock.mjs?v=2": {
+        "hash": "f8ebba3eb4c0080b09f08309852afbb0523010591005bf8c067627dccb73bd74",
+        "status": 200
+      },
+      "/simulations/board-terrain.mjs": {
+        "hash": "9b177edef9bd186d81dd99f27514616d71f078abe8fb689f057f1d9c40d42502",
+        "status": 200
+      },
+      "/simulations/ranch-seasons-state.mjs": {
+        "hash": "943967dbaa3cb929e28a60ea7374d96c17c918ca7449a68f3fc0300fae56e13b",
+        "status": 200
+      },
+      "/simulations/ui-icons.mjs?v=4": {
+        "hash": "8c22aae12aca57148bf7fef23489101a21074a2ae15c6b9df346b203d4c7fb9c",
+        "status": 200
+      },
+      "/simulations/simulation/life-story.mjs": {
+        "hash": "bdd2c0ea338baa2299b2eec7610a6edd71a11c2269167fafd2e81e4c0091075f",
+        "status": 200
+      },
+      "/simulations/live-tray-preview.mjs": {
+        "hash": "514f1e35647616af144a72441f30c42b85fb4b977bb004e920e2da1fc7f22e88",
+        "status": 200
+      },
+      "/simulations/item-pickup.mjs": {
+        "hash": "448b0ceeef918c770253e25f03de86537630208963988ccd40d8f561cd75094f",
+        "status": 200
+      },
+      "/simulations/scene-picking.mjs": {
+        "hash": "c680e08879f3180747d7008e4f7d6f5220b5b9f2591f397dd03f3c1c29eac557",
+        "status": 200
+      },
+      "/simulations/ranch-seasons.mjs?v=6": {
+        "hash": "089b83dc3142b447e89998e18550db7f37be9695934a6f75e361774880c285e9",
+        "status": 200
+      },
+      "/simulations/ranch-arrivals.mjs?timing=4": {
+        "hash": "03487335fb38df08805aca7dd09348c5d4ca7c5a2f106ae9945697b19901ca59",
+        "status": 200
+      },
+      "/simulations/tile-metrics.js": {
+        "hash": "b2d18e4d96573a5339c1d52f03caaac7b76010a61731c1c84e12eb8e1f995d09",
+        "status": 200
+      },
+      "/simulations/simulation/solar-cycle.mjs": {
+        "hash": "5d9bef089f8fc45e2c9d5d0d2111b768973a7dfab6afad07b36ce6e1fa235472",
+        "status": 200
+      },
+      "/simulations/domestic-scenes.js": {
+        "hash": "18f61d3b5b67cb67697b058d380f789a669d5f9d1372de562d07b88bd5b1d6ab",
+        "status": 200
+      },
+      "/simulations/dorf-ranch-materials.mjs": {
+        "hash": "8327231e5afc354f4ad4039bba644bf860e2698b617f3276a3bfd1d66c78c632",
+        "status": 200
+      },
+      "/simulations/ranch-path-style.mjs": {
+        "hash": "09b71d49733e363ff96f1bebd653727df2f03c7e9c510e38b3f158d801d2513a",
+        "status": 200
+      },
+      "/simulations/ranch-composer.js?paths=13": {
+        "hash": "be530f86c4de899acf4df157371e02d6876b88c912a66ec75d6050b1ccecd662",
+        "status": 200
+      },
+      "/simulations/ranch-shapes.mjs?icons=5": {
+        "hash": "53c5e5c3f5fff620e699fdee56aeacc15f74b17d6687e56758a657b4767bc3df",
+        "status": 200
+      },
+      "/simulations/moon/moon-rocket.mjs": {
+        "hash": "94ef5c4350b9979ae85aa8ca614bfcbac61ff51adc7375e3eca2e0d6a72657d4",
+        "status": 200
+      },
+      "/simulations/ranch-contours.js": {
+        "hash": "7a48c1fca4708a073c1c0a418111d039da64115b96ef794e8a086e23d1a06e66",
+        "status": 200
+      },
+      "/simulations/ranch-spaces.mjs?habitat=4": {
+        "hash": "67087c27b8d488319be1261b0a786d4a53ede5d8592fa5f607b785a16691ea81",
+        "status": 200
+      },
+      "/simulations/town-life/people/core.mjs": {
+        "hash": "86b66f46b3f74160bbe122b1927298fc2e705f2335e17c11cf729095a187218f",
+        "status": 200
+      },
+      "/simulations/arrival-settings.mjs?page=2": {
+        "hash": "300706c6d68c4cd3d335632847d56a33b64cdfb5cc02da576ed6eae93c77c097",
+        "status": 200
+      },
+      "/simulations/ranch-lights.mjs?clock=4": {
+        "hash": "d2d0422ba358bdac4828de9f768ec46c4ca780fed80fd9f15fdd2aa3cf361929",
+        "status": 200
+      },
+      "/simulations/tray-tooltips.mjs": {
+        "hash": "9ac5ef88a552b76de970907ab1597a75293c8d86cef17527d866b7b7e6c3b7f2",
+        "status": 200
+      },
+      "/simulations/moon/moon-simulation.mjs": {
+        "hash": "979b68b0e059b626266a1662209c7ee111f99d57cf11401bcb4aff60ff26b436",
+        "status": 200
+      },
+      "/simulations/simulation/life-learning.mjs": {
+        "hash": "7b5d7c50697fd65a3c58370ff99b399926e159911a0e2594b983c121399da8b6",
+        "status": 200
+      },
+      "/simulations/ranch-habitat.mjs?cows=1": {
+        "hash": "6cc89bd2b5319f4e8054d14e9dab0122de0eb33020d71d57109fb058a37d3640",
+        "status": 200
+      },
+      "/simulations/ranch-life-state.mjs?grazing=4": {
+        "hash": "e973828b5d18c25fc4c82bfb22c0eb331ff5f7a4fadea98299692df2e03055ec",
+        "status": 200
+      },
+      "/simulations/microcosm.mjs": {
+        "hash": "3b0d2ed5732b0cf19e57dc0d8b65b3a558ed9c751049a1af1b62575aa7a7f589",
+        "status": 200
+      },
+      "/simulations/ranch-story-adapter.mjs": {
+        "hash": "55fc3191fd878725093a20fc4699739deb0282f32c72c62e241f8f3dbf4d4186",
+        "status": 200
+      },
+      "/simulations/ranch-play.mjs": {
+        "hash": "76804b0ed61021e2f42a16270a136e48fbfd7d90fceecba27b83bc27ebb1a78b",
+        "status": 200
+      },
+      "/simulations/vendor/sandbox-camera.mjs": {
+        "hash": "323cd22e9f9662ba7b0d7d8ba3e9c36fb9a3f39226fd7f04fa287df5e43ad34b",
+        "status": 200
+      },
+      "/simulations/ranch-advisors.mjs": {
+        "hash": "445c045692cb64eb787242845e8f5130789683a81513b85f222ce39579e15739",
+        "status": 200
+      },
+      "/simulations/ranch-generations.mjs?v=6": {
+        "hash": "9cd375c528bb3c3ba99d99d8c21e62898183551646ba523296ffdc27423eecdd",
+        "status": 200
+      },
+      "/simulations/poi/poi-state.mjs": {
+        "hash": "3bceb620c2c92d72dc0b47958fda6abd9b3e42fc63517ce7087becd673a79e3a",
+        "status": 200
+      },
+      "/simulations/town-life/people/models.mjs": {
+        "hash": "7fe68b9fb7b33291553aa8090cc2524476ca15116fe779694d1108874fa64122",
+        "status": 200
+      },
+      "/simulations/tile-landscape.js?terrain=2": {
+        "hash": "a28375e31943d6e62821eace1f0c0a24b9cbf84169467dc45b4ff5b227969826",
+        "status": 200
+      },
+      "/simulations/simulation/spatial-bounds.mjs": {
+        "hash": "9ba13946bbe27bf01a3555c934881b861f30b595f52340fb8f562c709f06c947",
+        "status": 200
+      },
+      "/simulations/vendor/OrbitControls.js": {
+        "hash": "80efaadea4f8a636a65fb0bd08bfef62f3d93a0bb94e2e7500f23176c5c07f4e",
+        "status": 200
+      },
+      "/simulations/simulation/delivery-workflow.mjs": {
+        "hash": "827cd28820a54ee5ca507f1b740a168beca3721e3f72f934667bc44973c5356b",
+        "status": 200
+      },
+      "/simulations/ranch-ecology.mjs?v=6": {
+        "hash": "e602a9188613b3def65162a2aafe569c3402a81268ee287b9b1eb0ca5210f64b",
+        "status": 200
+      },
+      "/simulations/ranch-shelter.mjs": {
+        "hash": "0f7765f837482b3a279ef26beea7c301ab3e9bb660d2e0b648cde54ae0492680",
+        "status": 200
+      },
+      "/simulations/tile-adapter.js": {
+        "hash": "72f8a9a39975f6087046546f9efecf29ecb6549f2aa8e540ba1b17c02789360b",
+        "status": 200
+      },
+      "/simulations/moon/moon-astronaut.mjs": {
+        "hash": "6bbec769ad62fa57c0ec3a5aa6739c8177d735deae7c87163fae8c945d892187",
+        "status": 200
+      },
+      "/simulations/simulation/pose-ownership.mjs": {
+        "hash": "4e2bc456ef2ca70e398b116c1e5c1452ea6c0da78e0cad96f3ab45a5c8dd9c67",
+        "status": 200
+      },
+      "/simulations/landscape-parameters.mjs": {
+        "hash": "e7b6b9dc388a93d2f9412c1e64756d1f6dba5a8f99699f73949ab51cff8ed206",
+        "status": 200
+      },
+      "/simulations/livestock-animation.mjs?motion=3": {
+        "hash": "ae36e13463d6df4363b0f34e39300750328234dc03fda0562d207067549e82a8",
+        "status": 200
+      },
+      "/simulations/cemetery/event.mjs": {
+        "hash": "a030554be16f29c82aab836fd299af2f920f8faf87b3457b7bd5302d5654289f",
+        "status": 200
+      },
+      "/simulations/tile-adapter.js?paths=2": {
+        "hash": "72f8a9a39975f6087046546f9efecf29ecb6549f2aa8e540ba1b17c02789360b",
+        "status": 200
+      },
+      "/simulations/simulation/lunar-cycle.mjs": {
+        "hash": "88f43a434c2bfd91bf0c824c58b343902d3e5902f74fdca53ce2d63867e9ab91",
+        "status": 200
+      },
+      "/simulations/vendor/loaders/GLTFLoader.js": {
+        "hash": "45139faddd5aaf48ed2d62203d976e5cbd703db1a592de40527f9f6cf58abd44",
+        "status": 200
+      },
+      "/simulations/moon/moon-board-runtime.mjs": {
+        "hash": "899521ccee3b141dcd954ae2c8bbfb25110df3b5ea3b4e604f8dde95ce90e78a",
+        "status": 200
+      },
+      "/simulations/starship/starship-simulation.mjs": {
+        "hash": "f87a0c691c7a6dd019e7aa167d34269deb910cadd34483ac46affc6e64e9ffc8",
+        "status": 200
+      },
+      "/simulations/ranch-feelings.mjs": {
+        "hash": "90ba4700de5df28a8bbaa72b758ca01b33bd334bfa370be3ba1d12c2caf12804",
+        "status": 200
+      },
+      "/simulations/ranch-routes.mjs": {
+        "hash": "153ea2196a0cef327082cecd7d359a2468f20a9122d4bb30ee647639aea6eb78",
+        "status": 200
+      },
+      "/simulations/vendor/utils/BufferGeometryUtils.js": {
+        "hash": "c25b7930e570e9ec56173cd3b866ec8d2e10016630db3937efb439daf1cedbf6",
+        "status": 200
+      },
+      "/simulations/cemetery/plan.mjs": {
+        "hash": "2f4c31201cfddc12180afedb3d2804db6b1e7b4fad6bdd229e270929fcf57034",
+        "status": 200
+      },
+      "/simulations/tile-physics/glass-house.mjs": {
+        "hash": "b7dfeaa470003604e1a07a379e3761cb766416274a4f3ae2461fcb4c6b14033c",
+        "status": 200
+      },
+      "/simulations/ranch-rhythm.mjs?v=4": {
+        "hash": "b8cbb77741fe58dd8d7a999fcdbd8cf0cf35a0c346e4542380c73efbe733929d",
+        "status": 200
+      },
+      "/simulations/moon/moon-actions.mjs": {
+        "hash": "5154da0f3945d0b57db4b7f36429ebf9696df88d2e349782ca828ea94825987d",
+        "status": 200
+      },
+      "/simulations/ranch-composer.js": {
+        "hash": "be530f86c4de899acf4df157371e02d6876b88c912a66ec75d6050b1ccecd662",
+        "status": 200
+      },
+      "/simulations/ranch-terrain-planner.mjs": {
+        "hash": "d79954d45a3e407763b223ba1c324e6f60561974c15493c673efedb210514e1e",
+        "status": 200
+      },
+      "/simulations/tile-physics/world.mjs": {
+        "hash": "fb17248ac5deba45929e1af45b344bd11b735262aa2738bf89d2422c7caff81b",
+        "status": 200
+      },
+      "/simulations/tile-board.js": {
+        "hash": "2ae175eb21c35606b994c1c6042c3750f648ac6b843b3ad46baa7f0e6b4e4153",
+        "status": 200
+      },
+      "/simulations/simulation/transaction-audit.mjs": {
+        "hash": "1a2620a676a7d2b6a8d477c30d270ad83040fc37dfecbe4d7d6f37d53be5c94d",
+        "status": 200
+      },
+      "/simulations/tile-landscape.js?diversity=3": {
+        "hash": "a28375e31943d6e62821eace1f0c0a24b9cbf84169467dc45b4ff5b227969826",
+        "status": 200
+      },
+      "/simulations/moon/moon-flight-effects.mjs": {
+        "hash": "55e9315adde1ea1d5ab9f568ab55d83773bcd3362f47674ba49ccc94c9d9e9c0",
+        "status": 200
+      },
+      "/simulations/suburban/runtime.mjs": {
+        "hash": "f6c8e23118dfde1c2add92ffda2368a0e332e2a3528834ed32c22f50032bd2e7",
+        "status": 200
+      },
+      "/simulations/simulation/weather-state.mjs": {
+        "hash": "63c65a0474ecda00ceb2b210de07ed916b31e07dad82fa661c32f5e63d7eee8c",
+        "status": 200
+      },
+      "/simulations/tile-materials.js": {
+        "hash": "481a93de6f2577171ef6f13350ca9c9cbda354fd23d20ee1855148ff35a1e01f",
+        "status": 200
+      },
+      "/simulations/ranch-sound.mjs": {
+        "hash": "87fa719794430a95e4bd273c9fe5f6feab00ede2d0ad5b4dad9ad39e6a6fec8d",
+        "status": 200
+      },
+      "/simulations/item-flight.mjs": {
+        "hash": "dcbf503c599c3ae4710badf061fa7dbbab7905c47d3d9a3cadb41fb5d91de1a4",
+        "status": 200
+      },
+      "/simulations/new-england-terrain-v1.mjs": {
+        "hash": "155b0153b0fae13a5cd30630e5a767093b3f5f08539ff49975ff9445f558485f",
+        "status": 200
+      },
+      "/simulations/new-england-terrain-v2.mjs": {
+        "hash": "9d84a7273e0e5da622ad8e85d71ee25c0b5d9df5f41dc8267c9160b1b51bede6",
+        "status": 200
+      },
+      "/simulations/model-calibration.js": {
+        "hash": "88ac15e4f96ee2cefa6831dcc35a16c02d5f6c5b5ed866381f2158269da3fe06",
+        "status": 200
+      },
+      "/simulations/domestic-assets.js": {
+        "hash": "b1a0d2f3707678dd0c3958b13bec0313cfc22ecd14c539a18d56525554b20e14",
+        "status": 200
+      },
+      "/simulations/ranch-play-spec.mjs": {
+        "hash": "3f5116809d14c19f5ae14dbd69aa6f0b66b56906829753de5f193d3dd7cdfc4c",
+        "status": 200
+      },
+      "/simulations/coastal-water.js": {
+        "hash": "7e0cd70f8d8701f4224264c07fe2ee2402afa20fe3ea5b07edce8274dfc944ec",
+        "status": 200
+      },
+      "/simulations/poi/sugar-shack.mjs": {
+        "hash": "dc103f8a8cff4cee86d091b72217252f0a26e7421f8b0d59d79113e5db59ed7c",
+        "status": 200
+      },
+      "/simulations/glass-house/inertia-layers.mjs": {
+        "hash": "f75abe1cc5c77eede83a5e6e92c12256ca4f77ddceca2ac7a17f2df9040cfc4d",
+        "status": 200
+      },
+      "/simulations/garden-art.js": {
+        "hash": "dc517f869793fdb98adb80ab411187b9810f05a9dbcbc3a313fd6afd0f940335",
+        "status": 200
+      },
+      "/simulations/worksite-layout.mjs": {
+        "hash": "24550b92136f10909afcfa02c7edb38bf7757caa1549e2059fce08ba83d77570",
+        "status": 200
+      },
+      "/simulations/variants/dressing.mjs": {
+        "hash": "18bd8594fe53a5075e57abcfa1edb867596f909dad336f8a55e60eb5690355f2",
+        "status": 200
+      },
+      "/simulations/suburban/plan.mjs": {
+        "hash": "3402972b8a3236d68d27dd12d705fa99d10f9e9d0fc3c9512a3c9a4c9bde0232",
+        "status": 200
+      },
+      "/simulations/garden-rendition.js": {
+        "hash": "1eac5e5160237b627b196102880608f4cedf1d3c39ad928590366ba93e0d3123",
+        "status": 200
+      },
+      "/simulations/variants/new-england.mjs": {
+        "hash": "11e3ce3d213b5b9f71317942a1e805f506081fef4bb3e3a1866f0af46fc46380",
+        "status": 200
+      },
+      "/simulations/storybook-arrival.mjs": {
+        "hash": "7e31798bdbe48576814915a38c24829a3c4f622ac33ec88ee4b1f3507466b78c",
+        "status": 200
+      },
+      "/simulations/farm-light-layout.mjs": {
+        "hash": "1007c95c6cded84e1b4191c9efde83ce5609375ed9d1197bff2456e35a09c9b3",
+        "status": 200
+      },
+      "/simulations/simulation/life-traits.mjs": {
+        "hash": "072139f9a1dfd59c4d82cbf7ff8b4041e690fbc6497804af213e06712ae7485b",
+        "status": 200
+      },
+      "/simulations/ranch-rhythm.mjs": {
+        "hash": "b8cbb77741fe58dd8d7a999fcdbd8cf0cf35a0c346e4542380c73efbe733929d",
+        "status": 200
+      },
+      "/simulations/moon/moon-dispatch.mjs": {
+        "hash": "d1336c301c4044716b286015418b047cc154cfd6d376b67f1f9da67e6c1b9ef7",
+        "status": 200
+      },
+      "/simulations/moon/moon-colony.mjs": {
+        "hash": "c53029559e996e88f0f580c6360ce763df80233e7b3150463ce9a453518b9288",
+        "status": 200
+      },
+      "/simulations/moon/moon-production.mjs": {
+        "hash": "e2caf79d5f71463aea03964e82cee02ff3d231e7513e4a01622d7321b8535717",
+        "status": 200
+      },
+      "/simulations/simulation/simulation-pace.mjs": {
+        "hash": "7e60dc8a02fe02e0636140ebf6e35487e7a608a65a7288bfdb4f17590a5c971a",
+        "status": 200
+      },
+      "/simulations/simulation/resource-loop.mjs?pickups=1": {
+        "hash": "a0f32efc466153bbf6ff6e77bd7f55093dfa832d888201fff84b00b8aad25fcc",
+        "status": 200
+      },
+      "/simulations/tile-physics/ranch-adapter.mjs?v=3": {
+        "hash": "9a0184849d4b861e595af16fe8ed3e9ea510c0c215e178937f426d42c3414576",
+        "status": 200
+      },
+      "/simulations/vendor/three.module.js": {
+        "hash": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+        "status": 200
+      },
+      "/simulations/moon/moon-dust-motion.mjs": {
+        "hash": "b194b5351b421324125c45d1de7b60235e94939d831b4590a21814ab01cf77f5",
+        "status": 200
+      },
+      "/simulations/tile-expansion.mjs": {
+        "hash": "1fb7cec5454cc3d3406a3149c3436af755b430d8fade8d1acf720a5c18805754",
+        "status": 200
+      },
+      "/simulations/town-life/people/animation.mjs": {
+        "hash": "86fdd4b3c8a0a7ebd7d5bc08ff246656d073fe14f20b3b8d317f8b0d97a4861a",
+        "status": 200
+      },
+      "/simulations/tile-physics/collider.mjs": {
+        "hash": "08b173ffed99470d46182f57a79d3df5eac7c5cab93cf9a0645e54b5bd57f6d0",
+        "status": 200
+      },
+      "/simulations/town-life/people/emotes.mjs": {
+        "hash": "3063ea828bcdeb11f7a8c6e3253bff866fa32169130cc1091d7c0eb73fda4587",
+        "status": 200
+      },
+      "/simulations/starship/starship-plan.mjs": {
+        "hash": "236a633750e1c27dc528f567abe7ed6d8bbf6860c9c04012ae7b11c22d73fc16",
+        "status": 200
+      },
+      "/simulations/ranch-ecology-state.mjs?v=2": {
+        "hash": "6027099dcf0a36c8e4caf356031d74ae5ba6a131a7f8bcf4f2083630825ec2ed",
+        "status": 200
+      },
+      "/simulations/ranch-clock.mjs": {
+        "hash": "f8ebba3eb4c0080b09f08309852afbb0523010591005bf8c067627dccb73bd74",
+        "status": 200
+      },
+      "/simulations/simulation/resource-loop.mjs": {
+        "hash": "a0f32efc466153bbf6ff6e77bd7f55093dfa832d888201fff84b00b8aad25fcc",
+        "status": 200
+      },
+      "/simulations/worksite-bounds.mjs": {
+        "hash": "831708081e7d3f451cb840afb3e5752b38adb4e8b95b76f02ce2ef05e2c17346",
+        "status": 200
+      },
+      "/simulations/material-policy.js": {
+        "hash": "f1fdfc39445ba60e49eb27e4874f5e662436086540f09e6ce3a5ba97f6a11b04",
+        "status": 200
+      },
+      "/simulations/glass-house/sandbox-inertia.mjs": {
+        "hash": "029119be228ab246cae4d6c637a176d4cc866c8eea3a8d1c816184fc38b714b4",
+        "status": 200
+      },
+      "/simulations/tile-physics/three.mjs": {
+        "hash": "9cd307f9ac626b6d886b6f34ed0f14552f87f4c112c3a7d758e5c9d1060a6188",
+        "status": 200
+      },
+      "/simulations/garden-farm.js": {
+        "hash": "b554a9c21cbf0950c4044669abaa3d3d4f08faefe12024f2936d3d133da4ad58",
+        "status": 200
+      },
+      "/simulations/tile-physics/rigid-world.mjs": {
+        "hash": "8d0f7bb3d7b4f35c5160feb8cc01afdd16e04cf4c70b0fd9fce5f4ca4c14a2f2",
+        "status": 200
+      },
+      "/simulations/tile-physics/assembly.mjs": {
+        "hash": "3c01790b10e4245f100578af5c40d1892190dad007b680cd0fde2e49fe1ebbfc",
+        "status": 200
+      },
+      "/simulations/suburban/ui.mjs": {
+        "hash": "4af7cd95e46179d1a3dd2f79b1f6e41c4094dd6c6645f09a8db566edabca98a1",
+        "status": 200
+      },
+      "/simulations/tile-physics/recovery.mjs": {
+        "hash": "4124cc18e3bcaaf1bfbbd27ae632b18f81d46c6def4441c2296a2687ecc3218a",
+        "status": 200
+      },
+      "/simulations/procedural-engine.js": {
+        "hash": "ac7510ddd9c17e47f0917ff8cbbe4893d9d8aa388d90e59bf704106887c14aaa",
+        "status": 200
+      },
+      "/simulations/scene-semantics.js": {
+        "hash": "89195b0ec7dea2e3efb69028e77dbe0e2a3e0262d0fe259339604aa2b68b39e7",
+        "status": 200
+      },
+      "/simulations/terrain-presets.js": {
+        "hash": "75776c8113e563282947af66659b6f155d99093051ee8483a4fc3aa33405e0d6",
+        "status": 200
+      },
+      "/simulations/glass-house/vendor/three.module.js": {
+        "hash": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+        "status": 200
+      },
+      "/simulations/ranch-diorama-lab/vendor/three.module.js": {
+        "hash": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+        "status": 200
+      },
+      "/simulations/tile-physics/vendor/rapier.mjs": {
+        "hash": "02dc6a4e2fffc013bab08fbb44fa68f501d8303615e9afe4c7d89ad4eedda0d0",
+        "status": 200
+      },
+      "/simulations/suburban/ui.css": {
+        "hash": "db3465e893ab33428e66c5e6ffea643cd503ebba79ea32141274c0e3cc66e0b1",
+        "status": 200
+      }
+    },
+    "results": [
+      {
+        "fixture": "single-100",
+        "variant": "base",
+        "times": [
+          431.3999999985099,
+          813.2999999970198,
+          1665.7999999970198
+        ],
+        "meanMs": 970.1666666641831,
+        "day": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": 3.914376124747209,
+                "z": -3.89099225756897,
+                "phase": "to-pen",
+                "remaining": 4
+              },
+              {
+                "x": -1.2150005971378293,
+                "z": 0.1740948592229259,
+                "phase": "to-pen",
+                "remaining": 2
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.3594253280209375,
+                "z": 18.0086085672173,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.07586730521348384,
+                "z": 16.806124855599695,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": -0.8810008773326268,
+                "z": 19.07139307157165,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -1.363963790477161,
+                "z": 18.42434545881535,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.225989323554449,
+                "z": 17.94096579158493,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": -0.5968865134245737,
+                "z": 16.35631747358,
+                "phase": "to-source",
+                "remaining": 12
+              }
+            ],
+            "animals": 100
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1342,
+              "reused": 4048,
+              "scheduled": 11
+            },
+            "pens": 4
+          },
+          "hidden": 1
+        },
+        "night": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": -0.30330361869733957,
+                "z": 17.363685287035526,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.1525119181200174,
+                "z": 17.57513715939267,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.45992494895644154,
+                "z": 18.1630549736308,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": -4.522323809813631,
+                "z": 10.629129442313182,
+                "phase": "to-source",
+                "remaining": 7
+              },
+              {
+                "x": -0.2428186656327538,
+                "z": 0.41405204457933664,
+                "phase": "to-pen",
+                "remaining": 7
+              },
+              {
+                "x": -0.6395194207603597,
+                "z": 19.00668831029602,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -3.719409362343324,
+                "z": 13.097922028510684,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": 2.8930964471863807,
+                "z": -2.875813544139038,
+                "phase": "to-pen",
+                "remaining": 8
+              }
+            ],
+            "animals": 100
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1609,
+              "reused": 4881,
+              "scheduled": 11
+            },
+            "pens": 4
+          },
+          "hidden": 3
+        },
+        "exactReplay": true,
+        "exactBaseline": false,
+        "ownership": {
+          "held": true,
+          "released": true
+        },
+        "errors": [],
+        "load": [
+          9.1357421875,
+          21.4794921875,
+          22.52685546875
+        ]
+      },
+      {
+        "fixture": "single-100",
+        "variant": "candidate",
+        "times": [
+          1288.3000000044703,
+          1115.1000000014901,
+          1090.1999999955297
+        ],
+        "meanMs": 1164.5333333338301,
+        "day": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": 3.914376124747209,
+                "z": -3.89099225756897,
+                "phase": "to-pen",
+                "remaining": 4
+              },
+              {
+                "x": -1.2150005971378293,
+                "z": 0.1740948592229259,
+                "phase": "to-pen",
+                "remaining": 2
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.3594253280209375,
+                "z": 18.0086085672173,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.07586730521348384,
+                "z": 16.806124855599695,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": -0.8810008773326268,
+                "z": 19.07139307157165,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -1.363963790477161,
+                "z": 18.42434545881535,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.225989323554449,
+                "z": 17.94096579158493,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": -0.5968865134245737,
+                "z": 16.35631747358,
+                "phase": "to-source",
+                "remaining": 12
+              }
+            ],
+            "animals": 100
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1342,
+              "reused": 4048,
+              "scheduled": 11
+            },
+            "pens": 4
+          },
+          "hidden": 1
+        },
+        "night": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": -0.30330361869733957,
+                "z": 17.363685287035526,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.1525119181200174,
+                "z": 17.57513715939267,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.45992494895644154,
+                "z": 18.1630549736308,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": -4.522323809813631,
+                "z": 10.629129442313182,
+                "phase": "to-source",
+                "remaining": 7
+              },
+              {
+                "x": -0.2428186656327538,
+                "z": 0.41405204457933664,
+                "phase": "to-pen",
+                "remaining": 7
+              },
+              {
+                "x": -0.6395194207603597,
+                "z": 19.00668831029602,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -3.719409362343324,
+                "z": 13.097922028510684,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": 2.8930964471863807,
+                "z": -2.875813544139038,
+                "phase": "to-pen",
+                "remaining": 8
+              }
+            ],
+            "animals": 100
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1609,
+              "reused": 4881,
+              "scheduled": 11
+            },
+            "pens": 4
+          },
+          "hidden": 3
+        },
+        "exactReplay": true,
+        "exactBaseline": true,
+        "ownership": {
+          "held": true,
+          "released": true
+        },
+        "errors": [],
+        "load": [
+          17.97802734375,
+          22.87548828125,
+          23.0126953125
+        ]
+      },
+      {
+        "fixture": "single-1000",
+        "variant": "base",
+        "times": [
+          5471.80000000447,
+          5662,
+          3959
+        ],
+        "meanMs": 5030.933333334823,
+        "day": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": 3.914376124747209,
+                "z": -3.89099225756897,
+                "phase": "to-pen",
+                "remaining": 4
+              },
+              {
+                "x": -1.2150005971378293,
+                "z": 0.1740948592229259,
+                "phase": "to-pen",
+                "remaining": 2
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.3594253280209375,
+                "z": 18.0086085672173,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.07586730521348384,
+                "z": 16.806124855599695,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": -0.8810008773326268,
+                "z": 19.07139307157165,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -1.363963790477161,
+                "z": 18.42434545881535,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.225989323554449,
+                "z": 17.94096579158493,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": -0.5968865134245737,
+                "z": 16.35631747358,
+                "phase": "to-source",
+                "remaining": 12
+              }
+            ],
+            "animals": 395
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1342,
+              "reused": 4048,
+              "scheduled": 11
+            },
+            "pens": 4
+          },
+          "hidden": 1
+        },
+        "night": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": -0.30330361869733957,
+                "z": 17.363685287035526,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.1525119181200174,
+                "z": 17.57513715939267,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.45992494895644154,
+                "z": 18.1630549736308,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": -4.522323809813631,
+                "z": 10.629129442313182,
+                "phase": "to-source",
+                "remaining": 7
+              },
+              {
+                "x": -0.2428186656327538,
+                "z": 0.41405204457933664,
+                "phase": "to-pen",
+                "remaining": 7
+              },
+              {
+                "x": -0.6395194207603597,
+                "z": 19.00668831029602,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -3.719409362343324,
+                "z": 13.097922028510684,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": 2.8930964471863807,
+                "z": -2.875813544139038,
+                "phase": "to-pen",
+                "remaining": 8
+              }
+            ],
+            "animals": 395
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1609,
+              "reused": 4881,
+              "scheduled": 11
+            },
+            "pens": 4
+          },
+          "hidden": 3
+        },
+        "exactReplay": true,
+        "exactBaseline": false,
+        "ownership": {
+          "held": true,
+          "released": true
+        },
+        "errors": [],
+        "load": [
+          14.267578125,
+          21.45361328125,
+          22.490234375
+        ]
+      },
+      {
+        "fixture": "single-1000",
+        "variant": "candidate",
+        "times": [
+          5404.89999999851,
+          4638.30000000447,
+          4641.10000000149
+        ],
+        "meanMs": 4894.766666668157,
+        "day": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": 3.914376124747209,
+                "z": -3.89099225756897,
+                "phase": "to-pen",
+                "remaining": 4
+              },
+              {
+                "x": -1.2150005971378293,
+                "z": 0.1740948592229259,
+                "phase": "to-pen",
+                "remaining": 2
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.3594253280209375,
+                "z": 18.0086085672173,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.07586730521348384,
+                "z": 16.806124855599695,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": -0.8810008773326268,
+                "z": 19.07139307157165,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -1.363963790477161,
+                "z": 18.42434545881535,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.225989323554449,
+                "z": 17.94096579158493,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": -0.5968865134245737,
+                "z": 16.35631747358,
+                "phase": "to-source",
+                "remaining": 12
+              }
+            ],
+            "animals": 395
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1342,
+              "reused": 4048,
+              "scheduled": 11
+            },
+            "pens": 4
+          },
+          "hidden": 1
+        },
+        "night": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": -0.30330361869733957,
+                "z": 17.363685287035526,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.1525119181200174,
+                "z": 17.57513715939267,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.45992494895644154,
+                "z": 18.1630549736308,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": -4.522323809813631,
+                "z": 10.629129442313182,
+                "phase": "to-source",
+                "remaining": 7
+              },
+              {
+                "x": -0.2428186656327538,
+                "z": 0.41405204457933664,
+                "phase": "to-pen",
+                "remaining": 7
+              },
+              {
+                "x": -0.6395194207603597,
+                "z": 19.00668831029602,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -3.719409362343324,
+                "z": 13.097922028510684,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": 2.8930964471863807,
+                "z": -2.875813544139038,
+                "phase": "to-pen",
+                "remaining": 8
+              }
+            ],
+            "animals": 395
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1609,
+              "reused": 4881,
+              "scheduled": 11
+            },
+            "pens": 4
+          },
+          "hidden": 3
+        },
+        "exactReplay": true,
+        "exactBaseline": true,
+        "ownership": {
+          "held": true,
+          "released": true
+        },
+        "errors": [],
+        "load": [
+          27.09130859375,
+          24.1171875,
+          23.4296875
+        ]
+      },
+      {
+        "fixture": "expanded-520",
+        "variant": "base",
+        "times": [
+          2951.2000000029802,
+          2382.7000000029802,
+          2687.8000000044703
+        ],
+        "meanMs": 2673.900000003477,
+        "day": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": 3.914376124747209,
+                "z": -3.89099225756897,
+                "phase": "to-pen",
+                "remaining": 4
+              },
+              {
+                "x": -1.2150005971378293,
+                "z": 0.1740948592229259,
+                "phase": "to-pen",
+                "remaining": 2
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.3594253280209375,
+                "z": 18.0086085672173,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.07586730521348384,
+                "z": 16.806124855599695,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": -0.8810008773326268,
+                "z": 19.07139307157165,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -1.363963790477161,
+                "z": 18.42434545881535,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.225989323554449,
+                "z": 17.94096579158493,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": -0.5968865134245737,
+                "z": 16.35631747358,
+                "phase": "to-source",
+                "remaining": 12
+              }
+            ],
+            "animals": 520
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1342,
+              "reused": 4048,
+              "scheduled": 11
+            },
+            "pens": 28
+          },
+          "hidden": 1
+        },
+        "night": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": -0.30330361869733957,
+                "z": 17.363685287035526,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.1525119181200174,
+                "z": 17.57513715939267,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.45992494895644154,
+                "z": 18.1630549736308,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": -4.522323809813631,
+                "z": 10.629129442313182,
+                "phase": "to-source",
+                "remaining": 6
+              },
+              {
+                "x": 3.9715847474060513,
+                "z": -6.772030269598547,
+                "phase": "rest",
+                "remaining": -11
+              },
+              {
+                "x": -0.6395194207603597,
+                "z": 19.00668831029602,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -3.719409362343324,
+                "z": 13.097922028510684,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": 2.8930964471863807,
+                "z": -2.875813544139038,
+                "phase": "to-pen",
+                "remaining": 8
+              }
+            ],
+            "animals": 520
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1609,
+              "reused": 4881,
+              "scheduled": 11
+            },
+            "pens": 28
+          },
+          "hidden": 3
+        },
+        "exactReplay": true,
+        "exactBaseline": false,
+        "ownership": {
+          "held": true,
+          "released": true
+        },
+        "errors": [],
+        "load": [
+          22.51708984375,
+          23.3876953125,
+          23.19189453125
+        ]
+      },
+      {
+        "fixture": "expanded-520",
+        "variant": "candidate",
+        "times": [
+          4050.5999999940395,
+          4000.10000000149,
+          4314.10000000149
+        ],
+        "meanMs": 4121.599999999006,
+        "day": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": 3.914376124747209,
+                "z": -3.89099225756897,
+                "phase": "to-pen",
+                "remaining": 4
+              },
+              {
+                "x": -1.2150005971378293,
+                "z": 0.1740948592229259,
+                "phase": "to-pen",
+                "remaining": 2
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.3594253280209375,
+                "z": 18.0086085672173,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.07586730521348384,
+                "z": 16.806124855599695,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": -0.8810008773326268,
+                "z": 19.07139307157165,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -1.363963790477161,
+                "z": 18.42434545881535,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.225989323554449,
+                "z": 17.94096579158493,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": -0.5968865134245737,
+                "z": 16.35631747358,
+                "phase": "to-source",
+                "remaining": 12
+              }
+            ],
+            "animals": 520
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1342,
+              "reused": 4048,
+              "scheduled": 11
+            },
+            "pens": 28
+          },
+          "hidden": 1
+        },
+        "night": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": -0.30330361869733957,
+                "z": 17.363685287035526,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.1525119181200174,
+                "z": 17.57513715939267,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.45992494895644154,
+                "z": 18.1630549736308,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": -4.522323809813631,
+                "z": 10.629129442313182,
+                "phase": "to-source",
+                "remaining": 6
+              },
+              {
+                "x": 3.9715847474060513,
+                "z": -6.772030269598547,
+                "phase": "rest",
+                "remaining": -11
+              },
+              {
+                "x": -0.6395194207603597,
+                "z": 19.00668831029602,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -3.719409362343324,
+                "z": 13.097922028510684,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": 2.8930964471863807,
+                "z": -2.875813544139038,
+                "phase": "to-pen",
+                "remaining": 8
+              }
+            ],
+            "animals": 520
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1609,
+              "reused": 4881,
+              "scheduled": 11
+            },
+            "pens": 28
+          },
+          "hidden": 3
+        },
+        "exactReplay": true,
+        "exactBaseline": true,
+        "ownership": {
+          "held": true,
+          "released": true
+        },
+        "errors": [],
+        "load": [
+          28.69189453125,
+          24.77099609375,
+          23.7001953125
+        ]
+      },
+      {
+        "fixture": "expanded-1000",
+        "variant": "base",
+        "times": [
+          6875.10000000149,
+          7774.19999999553,
+          7540.60000000149
+        ],
+        "meanMs": 7396.633333332837,
+        "day": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": 3.914376124747209,
+                "z": -3.89099225756897,
+                "phase": "to-pen",
+                "remaining": 4
+              },
+              {
+                "x": -1.2150005971378293,
+                "z": 0.1740948592229259,
+                "phase": "to-pen",
+                "remaining": 2
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.3594253280209375,
+                "z": 18.0086085672173,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.07586730521348384,
+                "z": 16.806124855599695,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": -0.8810008773326268,
+                "z": 19.07139307157165,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -1.363963790477161,
+                "z": 18.42434545881535,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.225989323554449,
+                "z": 17.94096579158493,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": -0.5968865134245737,
+                "z": 16.35631747358,
+                "phase": "to-source",
+                "remaining": 12
+              }
+            ],
+            "animals": 1000
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1342,
+              "reused": 4048,
+              "scheduled": 11
+            },
+            "pens": 52
+          },
+          "hidden": 1
+        },
+        "night": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": -0.30330361869733957,
+                "z": 17.363685287035526,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.1525119181200174,
+                "z": 17.57513715939267,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.45992494895644154,
+                "z": 18.1630549736308,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": -4.522323809813631,
+                "z": 10.629129442313182,
+                "phase": "to-source",
+                "remaining": 6
+              },
+              {
+                "x": 3.9715847474060513,
+                "z": -6.772030269598547,
+                "phase": "rest",
+                "remaining": -11
+              },
+              {
+                "x": -0.6395194207603597,
+                "z": 19.00668831029602,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -3.719409362343324,
+                "z": 13.097922028510684,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": 2.8930964471863807,
+                "z": -2.875813544139038,
+                "phase": "to-pen",
+                "remaining": 8
+              }
+            ],
+            "animals": 1000
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1609,
+              "reused": 4881,
+              "scheduled": 11
+            },
+            "pens": 52
+          },
+          "hidden": 3
+        },
+        "exactReplay": true,
+        "exactBaseline": false,
+        "ownership": {
+          "held": true,
+          "released": true
+        },
+        "errors": [],
+        "load": [
+          376.99951171875,
+          253.619140625,
+          133.42138671875
+        ]
+      },
+      {
+        "fixture": "expanded-1000",
+        "variant": "candidate",
+        "times": [
+          6827.60000000149,
+          6826.89999999851,
+          8194.80000000447
+        ],
+        "meanMs": 7283.10000000149,
+        "day": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": 3.914376124747209,
+                "z": -3.89099225756897,
+                "phase": "to-pen",
+                "remaining": 4
+              },
+              {
+                "x": -1.2150005971378293,
+                "z": 0.1740948592229259,
+                "phase": "to-pen",
+                "remaining": 2
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.3594253280209375,
+                "z": 18.0086085672173,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.07586730521348384,
+                "z": 16.806124855599695,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": -0.8810008773326268,
+                "z": 19.07139307157165,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -1.363963790477161,
+                "z": 18.42434545881535,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.225989323554449,
+                "z": 17.94096579158493,
+                "phase": "to-rest",
+                "remaining": 1
+              },
+              {
+                "x": -0.5968865134245737,
+                "z": 16.35631747358,
+                "phase": "to-source",
+                "remaining": 12
+              }
+            ],
+            "animals": 1000
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1342,
+              "reused": 4048,
+              "scheduled": 11
+            },
+            "pens": 52
+          },
+          "hidden": 1
+        },
+        "night": {
+          "navigation": {
+            "collisions": 0,
+            "workers": [
+              {
+                "x": -0.30330361869733957,
+                "z": 17.363685287035526,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.1525119181200174,
+                "z": 17.57513715939267,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": -1.8258609199966256,
+                "z": 18.826150648879214,
+                "phase": "offsite",
+                "remaining": 0
+              },
+              {
+                "x": 0.45992494895644154,
+                "z": 18.1630549736308,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": -4.522323809813631,
+                "z": 10.629129442313182,
+                "phase": "to-source",
+                "remaining": 6
+              },
+              {
+                "x": 3.9715847474060513,
+                "z": -6.772030269598547,
+                "phase": "rest",
+                "remaining": -11
+              },
+              {
+                "x": -0.6395194207603597,
+                "z": 19.00668831029602,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": 1.0849249489564414,
+                "z": 18.81257402646913,
+                "phase": "idle",
+                "remaining": 0
+              },
+              {
+                "x": 0.3014312999025511,
+                "z": 18.93757402646913,
+                "phase": "rest",
+                "remaining": 0
+              },
+              {
+                "x": -3.719409362343324,
+                "z": 13.097922028510684,
+                "phase": "to-source",
+                "remaining": 10
+              },
+              {
+                "x": 2.8930964471863807,
+                "z": -2.875813544139038,
+                "phase": "to-pen",
+                "remaining": 8
+              }
+            ],
+            "animals": 1000
+          },
+          "scheduling": {
+            "decisions": {
+              "computed": 1609,
+              "reused": 4881,
+              "scheduled": 11
+            },
+            "pens": 52
+          },
+          "hidden": 3
+        },
+        "exactReplay": true,
+        "exactBaseline": true,
+        "ownership": {
+          "held": true,
+          "released": true
+        },
+        "errors": [],
+        "load": [
+          107.69384765625,
+          176.8994140625,
+          130.50732421875
+        ]
+      }
+    ]
+  },
+  "interleaved": {
+    "device": {
+      "cpu": "Apple M5",
+      "browser": "155.0.8059.85"
+    },
+    "manifest": {
+      "/simulations/": {
+        "hash": "34bcc9b6a9678b48d6c2f7a0aeaf73ea0be57de5abacf543defec096c7806ef3",
+        "status": 200
+      },
+      "/simulations/lab.mjs?compact=73": {
+        "hash": "ca5fcf26478a277154ba42cb505bfc262b4cfa13a89ddaf4b069148bde7cb351",
+        "status": 200
+      },
+      "/simulations/simulation-profiler.mjs": {
+        "hash": "56f81033a246d871b691966f80aab8fd3791ca09ff362cfc2917e6aabc625b64",
+        "status": 200
+      },
+      "/simulations/ranch-life.mjs?motion=37": {
+        "hash": "fbfe11c4bff2f1fc7eb2cbd4b07e7e671f5656e0f551055414c829673018ded4",
+        "status": 200
+      },
+      "/simulations/ranch-navigation.mjs?collision=2": {
+        "hash": "e1a5933e68b1646cd3da6763eb5569b14c82e83f2696937c9943ccee55532a34",
+        "status": 200
+      },
+      "/simulations/lab.css": {
+        "hash": "c900d57bccc54c56f62908584024e7289432446c4088a8641c4727de38c771fc",
+        "status": 200
+      },
+      "/simulations/simulation/simulation-pace.mjs": {
+        "hash": "7e60dc8a02fe02e0636140ebf6e35487e7a608a65a7288bfdb4f17590a5c971a",
+        "status": 200
+      },
+      "/simulations/simulation/life-fidelity.mjs": {
+        "hash": "9b5dd9f36665a5487256165d0cefdd80319f6746731e505237acadad1701b30b",
+        "status": 200
+      },
+      "/simulations/simulation/animation-clock.mjs": {
+        "hash": "e5256b2e9ae8f586417a43361bb1d6b7d8fb0d45b61030fb62d32f0dc4d21c26",
+        "status": 200
+      },
+      "/simulations/simulation/weather-control.mjs": {
+        "hash": "2336826ac5a4fae8a39f4c447d68a998863f15f045e783bfe8068858d95d6450",
+        "status": 200
+      },
+      "/simulations/scene-picking.mjs": {
+        "hash": "c680e08879f3180747d7008e4f7d6f5220b5b9f2591f397dd03f3c1c29eac557",
+        "status": 200
+      },
+      "/simulations/board-terrain.mjs": {
+        "hash": "9b177edef9bd186d81dd99f27514616d71f078abe8fb689f057f1d9c40d42502",
+        "status": 200
+      },
+      "/simulations/simulation/solar-cycle.mjs": {
+        "hash": "5d9bef089f8fc45e2c9d5d0d2111b768973a7dfab6afad07b36ce6e1fa235472",
+        "status": 200
+      },
+      "/simulations/poi/sugar-shack-spec.mjs": {
+        "hash": "eb4a91af0f1825e2e0b772f9df3bde6ec2be850a5e904bc938ee498f2b23e4ee",
+        "status": 200
+      },
+      "/simulations/moon/moon-board.mjs": {
+        "hash": "6239834b78f5f3b6dfea40b1c470432cba36b30e7c259d3b35219182b0f80101",
+        "status": 200
+      },
+      "/simulations/ranch-seasons-state.mjs": {
+        "hash": "943967dbaa3cb929e28a60ea7374d96c17c918ca7449a68f3fc0300fae56e13b",
+        "status": 200
+      },
+      "/simulations/tile-metrics.js": {
+        "hash": "b2d18e4d96573a5339c1d52f03caaac7b76010a61731c1c84e12eb8e1f995d09",
+        "status": 200
+      },
+      "/simulations/microcosm.mjs": {
+        "hash": "3b0d2ed5732b0cf19e57dc0d8b65b3a558ed9c751049a1af1b62575aa7a7f589",
+        "status": 200
+      },
+      "/simulations/ranch-clock.mjs?v=2": {
+        "hash": "f8ebba3eb4c0080b09f08309852afbb0523010591005bf8c067627dccb73bd74",
+        "status": 200
+      },
+      "/simulations/tile-landscape.js?terrain=2": {
+        "hash": "a28375e31943d6e62821eace1f0c0a24b9cbf84169467dc45b4ff5b227969826",
+        "status": 200
+      },
+      "/simulations/placement-settings.mjs": {
+        "hash": "ea0776a4d28959f638a579cf0564eb843443427834a295770765793c6235bf75",
+        "status": 200
+      },
+      "/simulations/garden-facets.mjs": {
+        "hash": "6068efed6f643e6b4d92522c4e80484a715d62f103460076de588c6814abb759",
+        "status": 200
+      },
+      "/simulations/tile-expansion.mjs": {
+        "hash": "1fb7cec5454cc3d3406a3149c3436af755b430d8fade8d1acf720a5c18805754",
+        "status": 200
+      },
+      "/simulations/ranch-sky.mjs": {
+        "hash": "67a170e24361923affeb878f32cb3da3542fcc3b309e05a3153eb9ed609ee439",
+        "status": 200
+      },
+      "/simulations/world-appearance.mjs": {
+        "hash": "63ddcba66e3abeab9cb5fecb07f987c68c56b69e7781436dcab0b46100e5bf76",
+        "status": 200
+      },
+      "/simulations/moon/moon-board-terrain.mjs": {
+        "hash": "03a66b3a47fb0db7f714b36ae89d8306cc600e287150d12f5362b90434c068ed",
+        "status": 200
+      },
+      "/simulations/moon/moon-environment.mjs": {
+        "hash": "9821070f84c3d2cbad90b200eaabff99ffedc7fb2e99ab91fca43fbb98400613",
+        "status": 200
+      },
+      "/simulations/build-progress.mjs": {
+        "hash": "ae14da1f0a2e8548c4593ba9672af8143416da681e17cc3cc02ed6adde5e42fe",
+        "status": 200
+      },
+      "/simulations/camera-follow.mjs": {
+        "hash": "f4c6d9adbdfe7d8fc15b06c7e483d86fa043ad50fc265889a55c989f5a7f91b6",
+        "status": 200
+      },
+      "/simulations/tile-drag.mjs?v=4": {
+        "hash": "526d700a873bf57dd76dbe4b9237ebfb3a016d7054927ac0d5edf9de34c2f167",
+        "status": 200
+      },
+      "/simulations/simulation/life-story.mjs": {
+        "hash": "bdd2c0ea338baa2299b2eec7610a6edd71a11c2269167fafd2e81e4c0091075f",
+        "status": 200
+      },
+      "/simulations/simulation-diagnostics.mjs": {
+        "hash": "48d9bdd862b01b81ffedffd6bc48a5ac2611e0f02bf4d6b74326a1dc4ed3478c",
+        "status": 200
+      },
+      "/simulations/starship/starship-storage.mjs": {
+        "hash": "577babfa58296061a37dbd78d321d27114a95bdf6d9cd65870010912421d8543",
+        "status": 200
+      },
+      "/simulations/scene-readouts.mjs": {
+        "hash": "d763eaec5a710ae5105ec790e72f25495f651031d77d3fba1d9f334eb55a8e94",
+        "status": 200
+      },
+      "/simulations/ranch-lights.mjs?clock=4": {
+        "hash": "d2d0422ba358bdac4828de9f768ec46c4ca780fed80fd9f15fdd2aa3cf361929",
+        "status": 200
+      },
+      "/simulations/facet-picker.mjs": {
+        "hash": "25a385ed731b946ae12d8308dea69906cea0cdbab5a79aad709129b9f143005c",
+        "status": 200
+      },
+      "/simulations/ranch-shapes.mjs?icons=5": {
+        "hash": "53c5e5c3f5fff620e699fdee56aeacc15f74b17d6687e56758a657b4767bc3df",
+        "status": 200
+      },
+      "/simulations/ranch-generation-client.mjs": {
+        "hash": "e08f7d8dbaf0eb2a7143dc4127f4a32f3fdc285ad1913c04c4ad0f88b33891c9",
+        "status": 200
+      },
+      "/simulations/ranch-rhythm.mjs?v=3": {
+        "hash": "b8cbb77741fe58dd8d7a999fcdbd8cf0cf35a0c346e4542380c73efbe733929d",
+        "status": 200
+      },
+      "/simulations/render-pool.mjs": {
+        "hash": "1afc3d5f645b9ee86295f246afb6b4fc7f25cb77d5d3f2c92750f60ef3d99be4",
+        "status": 200
+      },
+      "/simulations/expansion-layout.mjs": {
+        "hash": "baf7efb27358dcb1873d729b6c45a9a66f50fdfe829b794677a3bc09c2982565",
+        "status": 200
+      },
+      "/simulations/simulation/pose-ownership.mjs": {
+        "hash": "4e2bc456ef2ca70e398b116c1e5c1452ea6c0da78e0cad96f3ab45a5c8dd9c67",
+        "status": 200
+      },
+      "/simulations/ui-icons.mjs?v=4": {
+        "hash": "8c22aae12aca57148bf7fef23489101a21074a2ae15c6b9df346b203d4c7fb9c",
+        "status": 200
+      },
+      "/simulations/ranch-path-style.mjs": {
+        "hash": "09b71d49733e363ff96f1bebd653727df2f03c7e9c510e38b3f158d801d2513a",
+        "status": 200
+      },
+      "/simulations/ranch-terrain-planner.mjs": {
+        "hash": "d79954d45a3e407763b223ba1c324e6f60561974c15493c673efedb210514e1e",
+        "status": 200
+      },
+      "/simulations/poi/poi-state.mjs": {
+        "hash": "3bceb620c2c92d72dc0b47958fda6abd9b3e42fc63517ce7087becd673a79e3a",
+        "status": 200
+      },
+      "/simulations/vendor/sandbox-camera.mjs": {
+        "hash": "323cd22e9f9662ba7b0d7d8ba3e9c36fb9a3f39226fd7f04fa287df5e43ad34b",
+        "status": 200
+      },
+      "/simulations/ranch-shelter.mjs": {
+        "hash": "0f7765f837482b3a279ef26beea7c301ab3e9bb660d2e0b648cde54ae0492680",
+        "status": 200
+      },
+      "/simulations/ranch-seasons.mjs?v=6": {
+        "hash": "089b83dc3142b447e89998e18550db7f37be9695934a6f75e361774880c285e9",
+        "status": 200
+      },
+      "/simulations/ranch-story-adapter.mjs": {
+        "hash": "55fc3191fd878725093a20fc4699739deb0282f32c72c62e241f8f3dbf4d4186",
+        "status": 200
+      },
+      "/simulations/livestock-animation.mjs?motion=3": {
+        "hash": "ae36e13463d6df4363b0f34e39300750328234dc03fda0562d207067549e82a8",
+        "status": 200
+      },
+      "/simulations/simulation/life-learning.mjs": {
+        "hash": "7b5d7c50697fd65a3c58370ff99b399926e159911a0e2594b983c121399da8b6",
+        "status": 200
+      },
+      "/simulations/ranch-rhythm.mjs?v=4": {
+        "hash": "b8cbb77741fe58dd8d7a999fcdbd8cf0cf35a0c346e4542380c73efbe733929d",
+        "status": 200
+      },
+      "/simulations/cemetery/adapter.mjs": {
+        "hash": "a42c1579eb0867dbe7158f82e66ad0bdc8ada808d287abd3d7eed64ff94356f2",
+        "status": 200
+      },
+      "/simulations/suburban/adapter.mjs": {
+        "hash": "27bb95a0103fafd1c3968a2081ce549b0a6c8c6f457eb1ee602159dbd3c7b39d",
+        "status": 200
+      },
+      "/simulations/suburban/ui.mjs": {
+        "hash": "4af7cd95e46179d1a3dd2f79b1f6e41c4094dd6c6645f09a8db566edabca98a1",
+        "status": 200
+      },
+      "/simulations/item-pickup.mjs": {
+        "hash": "448b0ceeef918c770253e25f03de86537630208963988ccd40d8f561cd75094f",
+        "status": 200
+      },
+      "/simulations/ranch-item-runtime.mjs": {
+        "hash": "503aad9f1233644c38b457a68a251050396df8336b76e01a865801dde27880b3",
+        "status": 200
+      },
+      "/simulations/ranch-weather.mjs?v=2": {
+        "hash": "1dc2d3b56d4b23220f899cd8c047e4f8e2d0652becda2b1494625f91a3be7f44",
+        "status": 200
+      },
+      "/simulations/ranch-motion-ui.mjs?v=9": {
+        "hash": "36f54d2bd4f77882ab51594de1a74afb3ff67a8c8c35b0de2f19fd16b13ec7d2",
+        "status": 200
+      },
+      "/simulations/ranch-arrivals.mjs?timing=4": {
+        "hash": "03487335fb38df08805aca7dd09348c5d4ca7c5a2f106ae9945697b19901ca59",
+        "status": 200
+      },
+      "/simulations/ranch-ecology.mjs?v=6": {
+        "hash": "e602a9188613b3def65162a2aafe569c3402a81268ee287b9b1eb0ca5210f64b",
+        "status": 200
+      },
+      "/simulations/simulation/runtime-scheduling.mjs": {
+        "hash": "6020caf00a62e4bd4a1d51e68f54c41a84143a7706ab9669bba99bb7e1087d19",
+        "status": 200
+      },
+      "/simulations/arrival-settings.mjs?page=2": {
+        "hash": "300706c6d68c4cd3d335632847d56a33b64cdfb5cc02da576ed6eae93c77c097",
+        "status": 200
+      },
+      "/simulations/ranch-contours.js": {
+        "hash": "7a48c1fca4708a073c1c0a418111d039da64115b96ef794e8a086e23d1a06e66",
+        "status": 200
+      },
+      "/simulations/dorf-ranch-materials.mjs": {
+        "hash": "8327231e5afc354f4ad4039bba644bf860e2698b617f3276a3bfd1d66c78c632",
+        "status": 200
+      },
+      "/simulations/ranch-regional.mjs?v=3": {
+        "hash": "124a42e9a4d46ae5ca58bbaaadc9c542d9816af734f137dac566d16d45ddd54c",
+        "status": 200
+      },
+      "/simulations/ranch-sound.mjs": {
+        "hash": "87fa719794430a95e4bd273c9fe5f6feab00ede2d0ad5b4dad9ad39e6a6fec8d",
+        "status": 200
+      },
+      "/simulations/starship/starship-adapter.mjs": {
+        "hash": "d14c64a1ef503fcf09ae70c3c7d4b400ee0b14b7aafbd8a0373e1bb0998df07f",
+        "status": 200
+      },
+      "/simulations/moon/moon-adapter.mjs": {
+        "hash": "a6338604893beef7caa6d8af82f2b5484eb04ef6def8b4d54ffc4530f8f6a7ce",
+        "status": 200
+      },
+      "/simulations/tile-adapter.js?paths=2": {
+        "hash": "72f8a9a39975f6087046546f9efecf29ecb6549f2aa8e540ba1b17c02789360b",
+        "status": 200
+      },
+      "/simulations/town-life/people/models.mjs": {
+        "hash": "7fe68b9fb7b33291553aa8090cc2524476ca15116fe779694d1108874fa64122",
+        "status": 200
+      },
+      "/simulations/tile-chooser.mjs": {
+        "hash": "f360b628e8a2854c6e543d9f19332c66f238143b386f07c79e6d3b52121d345c",
+        "status": 200
+      },
+      "/simulations/vendor/OrbitControls.js": {
+        "hash": "80efaadea4f8a636a65fb0bd08bfef62f3d93a0bb94e2e7500f23176c5c07f4e",
+        "status": 200
+      },
+      "/simulations/ranch-composer.js?paths=13": {
+        "hash": "be530f86c4de899acf4df157371e02d6876b88c912a66ec75d6050b1ccecd662",
+        "status": 200
+      },
+      "/simulations/town-life/people/core.mjs": {
+        "hash": "86b66f46b3f74160bbe122b1927298fc2e705f2335e17c11cf729095a187218f",
+        "status": 200
+      },
+      "/simulations/ranch-habitat.mjs?cows=1": {
+        "hash": "6cc89bd2b5319f4e8054d14e9dab0122de0eb33020d71d57109fb058a37d3640",
+        "status": 200
+      },
+      "/simulations/ranch-names.mjs": {
+        "hash": "f41e5d24f1be623143e18f7160d567bfd31e45ecddbb8b40a9d83b66421d4458",
+        "status": 200
+      },
+      "/simulations/simulation/spatial-bounds.mjs": {
+        "hash": "9ba13946bbe27bf01a3555c934881b861f30b595f52340fb8f562c709f06c947",
+        "status": 200
+      },
+      "/simulations/ranch-navigation.mjs": {
+        "hash": "e1a5933e68b1646cd3da6763eb5569b14c82e83f2696937c9943ccee55532a34",
+        "status": 200
+      },
+      "/simulations/workspace.css?compact=73": {
+        "hash": "15d0c8e2febd098b626f2da9ec7406027bcbbc968babae3ba070a7ed9eb5fe76",
+        "status": 200
+      },
+      "/simulations/ranch-advisors.mjs": {
+        "hash": "445c045692cb64eb787242845e8f5130789683a81513b85f222ce39579e15739",
+        "status": 200
+      },
+      "/simulations/ranch-generations.mjs?v=6": {
+        "hash": "9cd375c528bb3c3ba99d99d8c21e62898183551646ba523296ffdc27423eecdd",
+        "status": 200
+      },
+      "/simulations/ranch-feelings.mjs": {
+        "hash": "90ba4700de5df28a8bbaa72b758ca01b33bd334bfa370be3ba1d12c2caf12804",
+        "status": 200
+      },
+      "/simulations/ranch-play.mjs": {
+        "hash": "76804b0ed61021e2f42a16270a136e48fbfd7d90fceecba27b83bc27ebb1a78b",
+        "status": 200
+      },
+      "/simulations/ranch-spaces.mjs?habitat=4": {
+        "hash": "67087c27b8d488319be1261b0a786d4a53ede5d8592fa5f607b785a16691ea81",
+        "status": 200
+      },
+      "/simulations/ranch-life-state.mjs?grazing=4": {
+        "hash": "e973828b5d18c25fc4c82bfb22c0eb331ff5f7a4fadea98299692df2e03055ec",
+        "status": 200
+      },
+      "/simulations/simulation/delivery-workflow.mjs": {
+        "hash": "827cd28820a54ee5ca507f1b740a168beca3721e3f72f934667bc44973c5356b",
+        "status": 200
+      },
+      "/simulations/ranch-routes.mjs": {
+        "hash": "153ea2196a0cef327082cecd7d359a2468f20a9122d4bb30ee647639aea6eb78",
+        "status": 200
+      },
+      "/simulations/domestic-scenes.js": {
+        "hash": "18f61d3b5b67cb67697b058d380f789a669d5f9d1372de562d07b88bd5b1d6ab",
+        "status": 200
+      },
+      "/simulations/tile-adapter.js": {
+        "hash": "72f8a9a39975f6087046546f9efecf29ecb6549f2aa8e540ba1b17c02789360b",
+        "status": 200
+      },
+      "/simulations/vendor/loaders/GLTFLoader.js": {
+        "hash": "45139faddd5aaf48ed2d62203d976e5cbd703db1a592de40527f9f6cf58abd44",
+        "status": 200
+      },
+      "/simulations/ranch-clock.mjs": {
+        "hash": "f8ebba3eb4c0080b09f08309852afbb0523010591005bf8c067627dccb73bd74",
+        "status": 200
+      },
+      "/simulations/landscape-parameters.mjs": {
+        "hash": "e7b6b9dc388a93d2f9412c1e64756d1f6dba5a8f99699f73949ab51cff8ed206",
+        "status": 200
+      },
+      "/simulations/ranch-rhythm.mjs": {
+        "hash": "b8cbb77741fe58dd8d7a999fcdbd8cf0cf35a0c346e4542380c73efbe733929d",
+        "status": 200
+      },
+      "/simulations/moon/moon-board-runtime.mjs": {
+        "hash": "899521ccee3b141dcd954ae2c8bbfb25110df3b5ea3b4e604f8dde95ce90e78a",
+        "status": 200
+      },
+      "/simulations/tile-board.js": {
+        "hash": "2ae175eb21c35606b994c1c6042c3750f648ac6b843b3ad46baa7f0e6b4e4153",
+        "status": 200
+      },
+      "/simulations/simulation/weather-state.mjs": {
+        "hash": "63c65a0474ecda00ceb2b210de07ed916b31e07dad82fa661c32f5e63d7eee8c",
+        "status": 200
+      },
+      "/simulations/simulation/lunar-cycle.mjs": {
+        "hash": "88f43a434c2bfd91bf0c824c58b343902d3e5902f74fdca53ce2d63867e9ab91",
+        "status": 200
+      },
+      "/simulations/new-england-terrain-v2.mjs": {
+        "hash": "9d84a7273e0e5da622ad8e85d71ee25c0b5d9df5f41dc8267c9160b1b51bede6",
+        "status": 200
+      },
+      "/simulations/new-england-terrain-v1.mjs": {
+        "hash": "155b0153b0fae13a5cd30630e5a767093b3f5f08539ff49975ff9445f558485f",
+        "status": 200
+      },
+      "/simulations/new-england-terrain.mjs": {
+        "hash": "de5b7e69b5932f4117342ff33a6f092fc08c85b5389960b1f521aece59d7c35d",
+        "status": 200
+      },
+      "/simulations/farm-light-layout.mjs": {
+        "hash": "1007c95c6cded84e1b4191c9efde83ce5609375ed9d1197bff2456e35a09c9b3",
+        "status": 200
+      },
+      "/simulations/cemetery/plan.mjs": {
+        "hash": "2f4c31201cfddc12180afedb3d2804db6b1e7b4fad6bdd229e270929fcf57034",
+        "status": 200
+      },
+      "/simulations/moon/moon-port-layout.mjs": {
+        "hash": "9f0555f09041b2e6adedd9ae81369fb47b4d26fe2b3d0dc9b0bf93cad8f66ae9",
+        "status": 200
+      },
+      "/simulations/moon/moon-rocket.mjs": {
+        "hash": "94ef5c4350b9979ae85aa8ca614bfcbac61ff51adc7375e3eca2e0d6a72657d4",
+        "status": 200
+      },
+      "/simulations/town-life/people/animation.mjs": {
+        "hash": "86fdd4b3c8a0a7ebd7d5bc08ff246656d073fe14f20b3b8d317f8b0d97a4861a",
+        "status": 200
+      },
+      "/simulations/starship/starship-simulation.mjs": {
+        "hash": "f87a0c691c7a6dd019e7aa167d34269deb910cadd34483ac46affc6e64e9ffc8",
+        "status": 200
+      },
+      "/simulations/tile-physics/ranch-adapter.mjs?v=3": {
+        "hash": "9a0184849d4b861e595af16fe8ed3e9ea510c0c215e178937f426d42c3414576",
+        "status": 200
+      },
+      "/simulations/moon/moon-simulation.mjs": {
+        "hash": "979b68b0e059b626266a1662209c7ee111f99d57cf11401bcb4aff60ff26b436",
+        "status": 200
+      },
+      "/simulations/suburban/plan.mjs": {
+        "hash": "3402972b8a3236d68d27dd12d705fa99d10f9e9d0fc3c9512a3c9a4c9bde0232",
+        "status": 200
+      },
+      "/simulations/tile-physics/glass-house.mjs": {
+        "hash": "b7dfeaa470003604e1a07a379e3761cb766416274a4f3ae2461fcb4c6b14033c",
+        "status": 200
+      },
+      "/simulations/tile-materials.js": {
+        "hash": "481a93de6f2577171ef6f13350ca9c9cbda354fd23d20ee1855148ff35a1e01f",
+        "status": 200
+      },
+      "/simulations/suburban/runtime.mjs": {
+        "hash": "f6c8e23118dfde1c2add92ffda2368a0e332e2a3528834ed32c22f50032bd2e7",
+        "status": 200
+      },
+      "/simulations/ranch-composer.js": {
+        "hash": "be530f86c4de899acf4df157371e02d6876b88c912a66ec75d6050b1ccecd662",
+        "status": 200
+      },
+      "/simulations/vendor/three.module.js": {
+        "hash": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+        "status": 200
+      },
+      "/simulations/tile-physics/world.mjs": {
+        "hash": "fb17248ac5deba45929e1af45b344bd11b735262aa2738bf89d2422c7caff81b",
+        "status": 200
+      },
+      "/simulations/simulation/life-traits.mjs": {
+        "hash": "072139f9a1dfd59c4d82cbf7ff8b4041e690fbc6497804af213e06712ae7485b",
+        "status": 200
+      },
+      "/simulations/garden-rendition.js": {
+        "hash": "1eac5e5160237b627b196102880608f4cedf1d3c39ad928590366ba93e0d3123",
+        "status": 200
+      },
+      "/simulations/moon/moon-actions.mjs": {
+        "hash": "5154da0f3945d0b57db4b7f36429ebf9696df88d2e349782ca828ea94825987d",
+        "status": 200
+      },
+      "/simulations/simulation/transaction-audit.mjs": {
+        "hash": "1a2620a676a7d2b6a8d477c30d270ad83040fc37dfecbe4d7d6f37d53be5c94d",
+        "status": 200
+      },
+      "/simulations/town-life/people/emotes.mjs": {
+        "hash": "3063ea828bcdeb11f7a8c6e3253bff866fa32169130cc1091d7c0eb73fda4587",
+        "status": 200
+      },
+      "/simulations/cemetery/event.mjs": {
+        "hash": "a030554be16f29c82aab836fd299af2f920f8faf87b3457b7bd5302d5654289f",
+        "status": 200
+      },
+      "/simulations/ranch-ecology-state.mjs?v=2": {
+        "hash": "6027099dcf0a36c8e4caf356031d74ae5ba6a131a7f8bcf4f2083630825ec2ed",
+        "status": 200
+      },
+      "/simulations/glass-house/inertia-layers.mjs": {
+        "hash": "f75abe1cc5c77eede83a5e6e92c12256ca4f77ddceca2ac7a17f2df9040cfc4d",
+        "status": 200
+      },
+      "/simulations/item-flight.mjs": {
+        "hash": "dcbf503c599c3ae4710badf061fa7dbbab7905c47d3d9a3cadb41fb5d91de1a4",
+        "status": 200
+      },
+      "/simulations/storybook-arrival.mjs": {
+        "hash": "7e31798bdbe48576814915a38c24829a3c4f622ac33ec88ee4b1f3507466b78c",
+        "status": 200
+      },
+      "/simulations/moon/moon-astronaut.mjs": {
+        "hash": "6bbec769ad62fa57c0ec3a5aa6739c8177d735deae7c87163fae8c945d892187",
+        "status": 200
+      },
+      "/simulations/moon/moon-terrain.mjs": {
+        "hash": "fec4b889f28adabd7e6c13a5dd10eff08489ffb78732b682bf72f6b6cb7c17dd",
+        "status": 200
+      },
+      "/simulations/live-tray-preview.mjs": {
+        "hash": "514f1e35647616af144a72441f30c42b85fb4b977bb004e920e2da1fc7f22e88",
+        "status": 200
+      },
+      "/simulations/model-calibration.js": {
+        "hash": "88ac15e4f96ee2cefa6831dcc35a16c02d5f6c5b5ed866381f2158269da3fe06",
+        "status": 200
+      },
+      "/simulations/variants/dressing.mjs": {
+        "hash": "18bd8594fe53a5075e57abcfa1edb867596f909dad336f8a55e60eb5690355f2",
+        "status": 200
+      },
+      "/simulations/tray-tooltips.mjs": {
+        "hash": "9ac5ef88a552b76de970907ab1597a75293c8d86cef17527d866b7b7e6c3b7f2",
+        "status": 200
+      },
+      "/simulations/poi/sugar-shack.mjs": {
+        "hash": "dc103f8a8cff4cee86d091b72217252f0a26e7421f8b0d59d79113e5db59ed7c",
+        "status": 200
+      },
+      "/simulations/variants/new-england.mjs": {
+        "hash": "11e3ce3d213b5b9f71317942a1e805f506081fef4bb3e3a1866f0af46fc46380",
+        "status": 200
+      },
+      "/simulations/garden-art.js": {
+        "hash": "dc517f869793fdb98adb80ab411187b9810f05a9dbcbc3a313fd6afd0f940335",
+        "status": 200
+      },
+      "/simulations/coastal-water.js": {
+        "hash": "7e0cd70f8d8701f4224264c07fe2ee2402afa20fe3ea5b07edce8274dfc944ec",
+        "status": 200
+      },
+      "/simulations/tile-landscape.js?diversity=3": {
+        "hash": "a28375e31943d6e62821eace1f0c0a24b9cbf84169467dc45b4ff5b227969826",
+        "status": 200
+      },
+      "/simulations/domestic-assets.js": {
+        "hash": "b1a0d2f3707678dd0c3958b13bec0313cfc22ecd14c539a18d56525554b20e14",
+        "status": 200
+      },
+      "/simulations/vendor/utils/BufferGeometryUtils.js": {
+        "hash": "c25b7930e570e9ec56173cd3b866ec8d2e10016630db3937efb439daf1cedbf6",
+        "status": 200
+      },
+      "/simulations/tile-physics/three.mjs": {
+        "hash": "9cd307f9ac626b6d886b6f34ed0f14552f87f4c112c3a7d758e5c9d1060a6188",
+        "status": 200
+      },
+      "/simulations/worksite-layout.mjs": {
+        "hash": "24550b92136f10909afcfa02c7edb38bf7757caa1549e2059fce08ba83d77570",
+        "status": 200
+      },
+      "/simulations/tile-physics/rigid-world.mjs": {
+        "hash": "8d0f7bb3d7b4f35c5160feb8cc01afdd16e04cf4c70b0fd9fce5f4ca4c14a2f2",
+        "status": 200
+      },
+      "/simulations/simulation/resource-loop.mjs?pickups=1": {
+        "hash": "a0f32efc466153bbf6ff6e77bd7f55093dfa832d888201fff84b00b8aad25fcc",
+        "status": 200
+      },
+      "/simulations/starship/starship-plan.mjs": {
+        "hash": "236a633750e1c27dc528f567abe7ed6d8bbf6860c9c04012ae7b11c22d73fc16",
+        "status": 200
+      },
+      "/simulations/simulation/resource-loop.mjs": {
+        "hash": "a0f32efc466153bbf6ff6e77bd7f55093dfa832d888201fff84b00b8aad25fcc",
+        "status": 200
+      },
+      "/simulations/moon/moon-production.mjs": {
+        "hash": "e2caf79d5f71463aea03964e82cee02ff3d231e7513e4a01622d7321b8535717",
+        "status": 200
+      },
+      "/simulations/ranch-play-spec.mjs": {
+        "hash": "3f5116809d14c19f5ae14dbd69aa6f0b66b56906829753de5f193d3dd7cdfc4c",
+        "status": 200
+      },
+      "/simulations/tile-physics/recovery.mjs": {
+        "hash": "4124cc18e3bcaaf1bfbbd27ae632b18f81d46c6def4441c2296a2687ecc3218a",
+        "status": 200
+      },
+      "/simulations/material-policy.js": {
+        "hash": "f1fdfc39445ba60e49eb27e4874f5e662436086540f09e6ce3a5ba97f6a11b04",
+        "status": 200
+      },
+      "/simulations/tile-physics/assembly.mjs": {
+        "hash": "3c01790b10e4245f100578af5c40d1892190dad007b680cd0fde2e49fe1ebbfc",
+        "status": 200
+      },
+      "/simulations/moon/moon-flight-effects.mjs": {
+        "hash": "55e9315adde1ea1d5ab9f568ab55d83773bcd3362f47674ba49ccc94c9d9e9c0",
+        "status": 200
+      },
+      "/simulations/moon/moon-colony.mjs": {
+        "hash": "c53029559e996e88f0f580c6360ce763df80233e7b3150463ce9a453518b9288",
+        "status": 200
+      },
+      "/simulations/moon/moon-dispatch.mjs": {
+        "hash": "d1336c301c4044716b286015418b047cc154cfd6d376b67f1f9da67e6c1b9ef7",
+        "status": 200
+      },
+      "/simulations/tile-physics/collider.mjs": {
+        "hash": "08b173ffed99470d46182f57a79d3df5eac7c5cab93cf9a0645e54b5bd57f6d0",
+        "status": 200
+      },
+      "/simulations/worksite-bounds.mjs": {
+        "hash": "831708081e7d3f451cb840afb3e5752b38adb4e8b95b76f02ce2ef05e2c17346",
+        "status": 200
+      },
+      "/simulations/garden-farm.js": {
+        "hash": "b554a9c21cbf0950c4044669abaa3d3d4f08faefe12024f2936d3d133da4ad58",
+        "status": 200
+      },
+      "/simulations/moon/moon-dust-motion.mjs": {
+        "hash": "b194b5351b421324125c45d1de7b60235e94939d831b4590a21814ab01cf77f5",
+        "status": 200
+      },
+      "/simulations/glass-house/sandbox-inertia.mjs": {
+        "hash": "029119be228ab246cae4d6c637a176d4cc866c8eea3a8d1c816184fc38b714b4",
+        "status": 200
+      },
+      "/simulations/ranch-diorama-lab/vendor/three.module.js": {
+        "hash": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+        "status": 200
+      },
+      "/simulations/terrain-presets.js": {
+        "hash": "75776c8113e563282947af66659b6f155d99093051ee8483a4fc3aa33405e0d6",
+        "status": 200
+      },
+      "/simulations/glass-house/vendor/three.module.js": {
+        "hash": "ce1fa418de16a19495a9f72495580e3015d7745c296d3ce0485897f902ddedfb",
+        "status": 200
+      },
+      "/simulations/scene-semantics.js": {
+        "hash": "89195b0ec7dea2e3efb69028e77dbe0e2a3e0262d0fe259339604aa2b68b39e7",
+        "status": 200
+      },
+      "/simulations/procedural-engine.js": {
+        "hash": "ac7510ddd9c17e47f0917ff8cbbe4893d9d8aa388d90e59bf704106887c14aaa",
+        "status": 200
+      },
+      "/simulations/tile-physics/vendor/rapier.mjs": {
+        "hash": "02dc6a4e2fffc013bab08fbb44fa68f501d8303615e9afe4c7d89ad4eedda0d0",
+        "status": 200
+      },
+      "/simulations/suburban/ui.css": {
+        "hash": "db3465e893ab33428e66c5e6ffea643cd503ebba79ea32141274c0e3cc66e0b1",
+        "status": 200
+      }
+    },
+    "results": [
+      {
+        "fixture": "single-100",
+        "timingDomain": "CDP Performance threadTicks TaskDuration; render loop suspended during CPU samples",
+        "samples": [
+          {
+            "base": 394.54599999999994,
+            "baseWall": 387.8999999985099,
+            "basePeers": {
+              "all": 93000,
+              "used": 93000
+            },
+            "candidate": 354.45699999999994,
+            "candidateWall": 358.90000000596046,
+            "candidatePeers": {
+              "all": 93000,
+              "used": 31109
+            }
+          },
+          {
+            "candidate": 337.9800000000002,
+            "candidateWall": 342,
+            "candidatePeers": {
+              "all": 93000,
+              "used": 31109
+            },
+            "base": 358.317,
+            "baseWall": 362.6000000014901,
+            "basePeers": {
+              "all": 93000,
+              "used": 93000
+            }
+          },
+          {
+            "base": 348.8799999999999,
+            "baseWall": 351.79999999701977,
+            "basePeers": {
+              "all": 93000,
+              "used": 93000
+            },
+            "candidate": 342.7769999999999,
+            "candidateWall": 345.29999999701977,
+            "candidatePeers": {
+              "all": 93000,
+              "used": 31109
+            }
+          },
+          {
+            "candidate": 294.86600000000027,
+            "candidateWall": 296.5,
+            "candidatePeers": {
+              "all": 93000,
+              "used": 31109
+            },
+            "base": 313.4459999999999,
+            "baseWall": 315.3999999985099,
+            "basePeers": {
+              "all": 93000,
+              "used": 93000
+            }
+          },
+          {
+            "base": 339.8220000000003,
+            "baseWall": 342.30000000447035,
+            "basePeers": {
+              "all": 93000,
+              "used": 93000
+            },
+            "candidate": 331.8250000000003,
+            "candidateWall": 338.6000000014901,
+            "candidatePeers": {
+              "all": 93000,
+              "used": 31109
+            }
+          },
+          {
+            "candidate": 278.96000000000055,
+            "candidateWall": 278.19999999552965,
+            "candidatePeers": {
+              "all": 93000,
+              "used": 31109
+            },
+            "base": 339.25800000000004,
+            "baseWall": 339.8999999985099,
+            "basePeers": {
+              "all": 93000,
+              "used": 93000
+            }
+          }
+        ],
+        "animals": 100,
+        "load": [
+          62.8291015625,
+          154.42529296875,
+          124.857421875
+        ],
+        "exactParity": true,
+        "errors": []
+      },
+      {
+        "fixture": "single-1000",
+        "timingDomain": "CDP Performance threadTicks TaskDuration; render loop suspended during CPU samples",
+        "samples": [
+          {
+            "base": 3433.3149999999996,
+            "baseWall": 4020.3000000044703,
+            "basePeers": {
+              "all": 2265384,
+              "used": 2265384
+            },
+            "candidate": 3083.3559999999993,
+            "candidateWall": 3463,
+            "candidatePeers": {
+              "all": 2265384,
+              "used": 420351
+            }
+          },
+          {
+            "candidate": 2763.178,
+            "candidateWall": 3706,
+            "candidatePeers": {
+              "all": 2265384,
+              "used": 420351
+            },
+            "base": 2716.9629999999997,
+            "baseWall": 3076.2000000029802,
+            "basePeers": {
+              "all": 2265384,
+              "used": 2265384
+            }
+          },
+          {
+            "base": 2859.7849999999985,
+            "baseWall": 3131.7000000029802,
+            "basePeers": {
+              "all": 2265384,
+              "used": 2265384
+            },
+            "candidate": 2825.3909999999996,
+            "candidateWall": 3480.39999999851,
+            "candidatePeers": {
+              "all": 2265384,
+              "used": 420351
+            }
+          },
+          {
+            "candidate": 3164.4269999999997,
+            "candidateWall": 3500.1999999955297,
+            "candidatePeers": {
+              "all": 2265384,
+              "used": 420351
+            },
+            "base": 3359.3039999999983,
+            "baseWall": 3728.7999999970198,
+            "basePeers": {
+              "all": 2265384,
+              "used": 2265384
+            }
+          },
+          {
+            "base": 2347.9619999999954,
+            "baseWall": 2623.39999999851,
+            "basePeers": {
+              "all": 2265384,
+              "used": 2265384
+            },
+            "candidate": 1592.8439999999996,
+            "candidateWall": 1623.3999999985099,
+            "candidatePeers": {
+              "all": 2265384,
+              "used": 420351
+            }
+          },
+          {
+            "candidate": 1626.3429999999985,
+            "candidateWall": 1647.5,
+            "candidatePeers": {
+              "all": 2265384,
+              "used": 420351
+            },
+            "base": 1789.1750000000002,
+            "baseWall": 1829.8000000044703,
+            "basePeers": {
+              "all": 2265384,
+              "used": 2265384
+            }
+          }
+        ],
+        "animals": 395,
+        "load": [
+          71.7587890625,
+          112.6005859375,
+          113.65576171875
+        ],
+        "exactParity": true,
+        "errors": []
+      },
+      {
+        "fixture": "expanded-520",
+        "timingDomain": "CDP Performance threadTicks TaskDuration; render loop suspended during CPU samples",
+        "samples": [
+          {
+            "base": 1288.4159999999997,
+            "baseWall": 1307.2999999970198,
+            "basePeers": {
+              "all": 359707,
+              "used": 359707
+            },
+            "candidate": 1214.992,
+            "candidateWall": 1230.2999999970198,
+            "candidatePeers": {
+              "all": 359707,
+              "used": 133701
+            }
+          },
+          {
+            "candidate": 1193.5230000000004,
+            "candidateWall": 1204.6999999955297,
+            "candidatePeers": {
+              "all": 359707,
+              "used": 133701
+            },
+            "base": 1170.669,
+            "baseWall": 1187.2999999970198,
+            "basePeers": {
+              "all": 359707,
+              "used": 359707
+            }
+          },
+          {
+            "base": 1136.195,
+            "baseWall": 1141.1000000014901,
+            "basePeers": {
+              "all": 359707,
+              "used": 359707
+            },
+            "candidate": 1185.7629999999997,
+            "candidateWall": 1234.6000000014901,
+            "candidatePeers": {
+              "all": 359707,
+              "used": 133701
+            }
+          },
+          {
+            "candidate": 1093.8859999999995,
+            "candidateWall": 1094.3000000044703,
+            "candidatePeers": {
+              "all": 359707,
+              "used": 133701
+            },
+            "base": 1128.959,
+            "baseWall": 1139,
+            "basePeers": {
+              "all": 359707,
+              "used": 359707
+            }
+          },
+          {
+            "base": 1160.6760000000004,
+            "baseWall": 1173,
+            "basePeers": {
+              "all": 359707,
+              "used": 359707
+            },
+            "candidate": 990.0079999999996,
+            "candidateWall": 990,
+            "candidatePeers": {
+              "all": 359707,
+              "used": 133701
+            }
+          },
+          {
+            "candidate": 1217.7000000000007,
+            "candidateWall": 1248.8999999985099,
+            "candidatePeers": {
+              "all": 359707,
+              "used": 133701
+            },
+            "base": 1071.5239999999983,
+            "baseWall": 1075.9000000059605,
+            "basePeers": {
+              "all": 359707,
+              "used": 359707
+            }
+          }
+        ],
+        "animals": 520,
+        "load": [
+          44.71435546875,
+          101.41748046875,
+          109.54248046875
+        ],
+        "exactParity": true,
+        "errors": []
+      },
+      {
+        "fixture": "expanded-1000",
+        "timingDomain": "CDP Performance threadTicks TaskDuration; render loop suspended during CPU samples",
+        "samples": [
+          {
+            "base": 2239.1769999999997,
+            "baseWall": 2256.39999999851,
+            "basePeers": {
+              "all": 702543,
+              "used": 702543
+            },
+            "candidate": 2189.598,
+            "candidateWall": 2224.7999999970198,
+            "candidatePeers": {
+              "all": 702543,
+              "used": 263016
+            }
+          },
+          {
+            "candidate": 1994.9270000000006,
+            "candidateWall": 2003.6000000014901,
+            "candidatePeers": {
+              "all": 702543,
+              "used": 263016
+            },
+            "base": 1981.750999999999,
+            "baseWall": 2000.7000000029802,
+            "basePeers": {
+              "all": 702543,
+              "used": 702543
+            }
+          },
+          {
+            "base": 2081.8740000000007,
+            "baseWall": 2099.89999999851,
+            "basePeers": {
+              "all": 702543,
+              "used": 702543
+            },
+            "candidate": 2075.4330000000004,
+            "candidateWall": 2097.39999999851,
+            "candidatePeers": {
+              "all": 702543,
+              "used": 263016
+            }
+          },
+          {
+            "candidate": 2336.704000000001,
+            "candidateWall": 2457,
+            "candidatePeers": {
+              "all": 702543,
+              "used": 263016
+            },
+            "base": 2367.7010000000005,
+            "baseWall": 2429.1999999955297,
+            "basePeers": {
+              "all": 702543,
+              "used": 702543
+            }
+          },
+          {
+            "base": 2316.704999999999,
+            "baseWall": 2351.39999999851,
+            "basePeers": {
+              "all": 702543,
+              "used": 702543
+            },
+            "candidate": 2387.4739999999974,
+            "candidateWall": 2461.10000000149,
+            "candidatePeers": {
+              "all": 702543,
+              "used": 263016
+            }
+          },
+          {
+            "candidate": 2256.1779999999985,
+            "candidateWall": 2305.2000000029802,
+            "candidatePeers": {
+              "all": 702543,
+              "used": 263016
+            },
+            "base": 2256.350000000005,
+            "baseWall": 2309.7999999970198,
+            "basePeers": {
+              "all": 702543,
+              "used": 702543
+            }
+          }
+        ],
+        "animals": 1000,
+        "load": [
+          24.58740234375,
+          84.31884765625,
+          102.50830078125
+        ],
+        "exactParity": true,
+        "errors": []
+      }
+    ]
+  },
+  "randomizedComparisons": 10000,
+  "rejectedExperiment": "Spatial grid preserved behavior but added maintenance/sorting overhead without reliable benefit; not deployed. Conservative ordered neighbor-list reuse was chosen instead.",
+  "sourceHashes": {
+    "ranch-life.mjs": "dae6e58c60052093d107113885de1c24e646fe916b5ec494a8a176f0078aebe0",
+    "ranch-navigation.mjs": "f9b45c2e0d4067aecc863786d016ad8f11721ab906bca4f9baffdc04855cacdf"
+  }
+}

@@ -1,0 +1,902 @@
+{
+  "schemaVersion": 1,
+  "pack": "Zombie survival gear",
+  "batch": 3,
+  "count": 10,
+  "items": [
+    {
+      "id": "ZG021",
+      "name": "Trauma kit",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG021.glb",
+      "preview": "/survival-gear/output/ZG021.png",
+      "dimensions": {
+        "x": 0.326,
+        "y": 0.2,
+        "z": 0.346,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.32600000500679016,
+        0.20000000298023224,
+        0.3460000157356262
+      ],
+      "reimportDimensionsM": [
+        0.32600000500679016,
+        0.20000000298023224,
+        0.3460000157356262
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG021.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 21,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Red trauma pouch with medical cross and carrying loop.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.077754
+    },
+    {
+      "id": "ZG022",
+      "name": "Bandage tin",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG022.glb",
+      "preview": "/survival-gear/output/ZG022.png",
+      "dimensions": {
+        "x": 0.18,
+        "y": 0.18,
+        "z": 0.159,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.1589999943971634
+      ],
+      "reimportDimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.1589999943971634
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG022.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 22,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Round bandage tin with two visible rolled gauze dressings on removable lid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.078227
+    },
+    {
+      "id": "ZG023",
+      "name": "Water filter pump",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG023.glb",
+      "preview": "/survival-gear/output/ZG023.png",
+      "dimensions": {
+        "x": 0.305,
+        "y": 0.11,
+        "z": 0.4425,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3050000071525574,
+        0.10999999940395355,
+        0.4424999952316284
+      ],
+      "reimportDimensionsM": [
+        0.3050000071525574,
+        0.10999999940395355,
+        0.4424999952316284
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG023.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 23,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Hand water-filter pump with piston grip and intake hose.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.078687
+    },
+    {
+      "id": "ZG024",
+      "name": "Canteen cup set",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG024.glb",
+      "preview": "/survival-gear/output/ZG024.png",
+      "dimensions": {
+        "x": 0.231,
+        "y": 0.1,
+        "z": 0.2925,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.23100000619888306,
+        0.10000000149011612,
+        0.29250001907348633
+      ],
+      "reimportDimensionsM": [
+        0.23100000619888306,
+        0.10000000149011612,
+        0.29250001907348633
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG024.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 24,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Canteen seated in nesting metal cup with side loop.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079081
+    },
+    {
+      "id": "ZG025",
+      "name": "Medicine case",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG025.glb",
+      "preview": "/survival-gear/output/ZG025.png",
+      "dimensions": {
+        "x": 0.4,
+        "y": 0.2525,
+        "z": 0.36,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.4000000059604645,
+        0.2524999976158142,
+        0.36000001430511475
+      ],
+      "reimportDimensionsM": [
+        0.4000000059604645,
+        0.2524999976158142,
+        0.36000001430511475
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG025.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 25,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 19,
+      "brief": "Open medicine organizer with lid cross, separated vial compartments and capped medicine vials.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079484
+    },
+    {
+      "id": "ZG026",
+      "name": "Folded rescue stretcher",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG026.glb",
+      "preview": "/survival-gear/output/ZG026.png",
+      "dimensions": {
+        "x": 0.324,
+        "y": 0.1225,
+        "z": 0.98,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3240000009536743,
+        0.12250000238418579,
+        0.9800000190734863
+      ],
+      "reimportDimensionsM": [
+        0.3240000009536743,
+        0.12250000238418579,
+        0.9800000190734863
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG026.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 26,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Folded rescue stretcher with paired poles and secured canvas.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079836
+    },
+    {
+      "id": "ZG027",
+      "name": "Emergency blanket roll",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG027.glb",
+      "preview": "/survival-gear/output/ZG027.png",
+      "dimensions": {
+        "x": 0.38,
+        "y": 0.25,
+        "z": 0.25,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3799999952316284,
+        0.25,
+        0.25
+      ],
+      "reimportDimensionsM": [
+        0.3800000846385956,
+        0.25,
+        0.2500000298023224
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG027.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 27,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Rolled reflective emergency blanket secured by two straps.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.08018
+    },
+    {
+      "id": "ZG028",
+      "name": "Splint bundle",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG028.glb",
+      "preview": "/survival-gear/output/ZG028.png",
+      "dimensions": {
+        "x": 0.25,
+        "y": 0.0475,
+        "z": 0.64,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.25,
+        0.04749999940395355,
+        0.6399999856948853
+      ],
+      "reimportDimensionsM": [
+        0.25,
+        0.04749999940395355,
+        0.6399999856948853
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG028.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 28,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Three rigid splints bundled with two cloth ties.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.0806139
+    },
+    {
+      "id": "ZG029",
+      "name": "Wash station",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG029.glb",
+      "preview": "/survival-gear/output/ZG029.png",
+      "dimensions": {
+        "x": 0.62,
+        "y": 0.42,
+        "z": 1.3,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6200000047683716,
+        0.42000001668930054,
+        1.3000000715255737
+      ],
+      "reimportDimensionsM": [
+        0.6200000047683716,
+        0.42000001668930054,
+        1.3000000715255737
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG029.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 29,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Raised wash basin with gravity reservoir, tap and soap tray.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.080917
+    },
+    {
+      "id": "ZG030",
+      "name": "Medical supply chest",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG030.glb",
+      "preview": "/survival-gear/output/ZG030.png",
+      "dimensions": {
+        "x": 1.0,
+        "y": 0.58,
+        "z": 0.5875,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.0,
+        0.5799999833106995,
+        0.5874999761581421
+      ],
+      "reimportDimensionsM": [
+        1.0,
+        0.5800000429153442,
+        0.5874999761581421
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG030.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 30,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 14,
+      "brief": "Wide wheeled medical supply trunk with side handles, reinforced lid and front latches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.081292
+    }
+  ],
+  "assets": [
+    {
+      "id": "ZG021",
+      "name": "Trauma kit",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG021.glb",
+      "preview": "/survival-gear/output/ZG021.png",
+      "dimensions": {
+        "x": 0.326,
+        "y": 0.2,
+        "z": 0.346,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.32600000500679016,
+        0.20000000298023224,
+        0.3460000157356262
+      ],
+      "reimportDimensionsM": [
+        0.32600000500679016,
+        0.20000000298023224,
+        0.3460000157356262
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG021.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 21,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Red trauma pouch with medical cross and carrying loop.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.077754
+    },
+    {
+      "id": "ZG022",
+      "name": "Bandage tin",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG022.glb",
+      "preview": "/survival-gear/output/ZG022.png",
+      "dimensions": {
+        "x": 0.18,
+        "y": 0.18,
+        "z": 0.159,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.1589999943971634
+      ],
+      "reimportDimensionsM": [
+        0.18000000715255737,
+        0.18000000715255737,
+        0.1589999943971634
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG022.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 22,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 6,
+      "brief": "Round bandage tin with two visible rolled gauze dressings on removable lid.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.078227
+    },
+    {
+      "id": "ZG023",
+      "name": "Water filter pump",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG023.glb",
+      "preview": "/survival-gear/output/ZG023.png",
+      "dimensions": {
+        "x": 0.305,
+        "y": 0.11,
+        "z": 0.4425,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3050000071525574,
+        0.10999999940395355,
+        0.4424999952316284
+      ],
+      "reimportDimensionsM": [
+        0.3050000071525574,
+        0.10999999940395355,
+        0.4424999952316284
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG023.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 23,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Hand water-filter pump with piston grip and intake hose.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.078687
+    },
+    {
+      "id": "ZG024",
+      "name": "Canteen cup set",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG024.glb",
+      "preview": "/survival-gear/output/ZG024.png",
+      "dimensions": {
+        "x": 0.231,
+        "y": 0.1,
+        "z": 0.2925,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.23100000619888306,
+        0.10000000149011612,
+        0.29250001907348633
+      ],
+      "reimportDimensionsM": [
+        0.23100000619888306,
+        0.10000000149011612,
+        0.29250001907348633
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG024.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 24,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Canteen seated in nesting metal cup with side loop.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079081
+    },
+    {
+      "id": "ZG025",
+      "name": "Medicine case",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG025.glb",
+      "preview": "/survival-gear/output/ZG025.png",
+      "dimensions": {
+        "x": 0.4,
+        "y": 0.2525,
+        "z": 0.36,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.4000000059604645,
+        0.2524999976158142,
+        0.36000001430511475
+      ],
+      "reimportDimensionsM": [
+        0.4000000059604645,
+        0.2524999976158142,
+        0.36000001430511475
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG025.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 25,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 19,
+      "brief": "Open medicine organizer with lid cross, separated vial compartments and capped medicine vials.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079484
+    },
+    {
+      "id": "ZG026",
+      "name": "Folded rescue stretcher",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG026.glb",
+      "preview": "/survival-gear/output/ZG026.png",
+      "dimensions": {
+        "x": 0.324,
+        "y": 0.1225,
+        "z": 0.98,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3240000009536743,
+        0.12250000238418579,
+        0.9800000190734863
+      ],
+      "reimportDimensionsM": [
+        0.3240000009536743,
+        0.12250000238418579,
+        0.9800000190734863
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG026.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 26,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 4,
+      "brief": "Folded rescue stretcher with paired poles and secured canvas.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.079836
+    },
+    {
+      "id": "ZG027",
+      "name": "Emergency blanket roll",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG027.glb",
+      "preview": "/survival-gear/output/ZG027.png",
+      "dimensions": {
+        "x": 0.38,
+        "y": 0.25,
+        "z": 0.25,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.3799999952316284,
+        0.25,
+        0.25
+      ],
+      "reimportDimensionsM": [
+        0.3800000846385956,
+        0.25,
+        0.2500000298023224
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG027.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 27,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 3,
+      "brief": "Rolled reflective emergency blanket secured by two straps.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.08018
+    },
+    {
+      "id": "ZG028",
+      "name": "Splint bundle",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG028.glb",
+      "preview": "/survival-gear/output/ZG028.png",
+      "dimensions": {
+        "x": 0.25,
+        "y": 0.0475,
+        "z": 0.64,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.25,
+        0.04749999940395355,
+        0.6399999856948853
+      ],
+      "reimportDimensionsM": [
+        0.25,
+        0.04749999940395355,
+        0.6399999856948853
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG028.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 28,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 5,
+      "brief": "Three rigid splints bundled with two cloth ties.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.0806139
+    },
+    {
+      "id": "ZG029",
+      "name": "Wash station",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG029.glb",
+      "preview": "/survival-gear/output/ZG029.png",
+      "dimensions": {
+        "x": 0.62,
+        "y": 0.42,
+        "z": 1.3,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        0.6200000047683716,
+        0.42000001668930054,
+        1.3000000715255737
+      ],
+      "reimportDimensionsM": [
+        0.6200000047683716,
+        0.42000001668930054,
+        1.3000000715255737
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG029.json",
+      "sourceParameters": {
+        "builder": "source/build.py",
+        "assetIndex": 29,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 8,
+      "brief": "Raised wash basin with gravity reservoir, tap and soap tray.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.080917
+    },
+    {
+      "id": "ZG030",
+      "name": "Medical supply chest",
+      "batch": 3,
+      "category": "Medical and water",
+      "glb": "/survival-gear/output/ZG030.glb",
+      "preview": "/survival-gear/output/ZG030.png",
+      "dimensions": {
+        "x": 1.0,
+        "y": 0.58,
+        "z": 0.5875,
+        "unit": "m"
+      },
+      "dimensionsM": [
+        1.0,
+        0.5799999833106995,
+        0.5874999761581421
+      ],
+      "reimportDimensionsM": [
+        1.0,
+        0.5800000429153442,
+        0.5874999761581421
+      ],
+      "scalePassed": true,
+      "reviewed": true,
+      "generationAttempt": 2,
+      "regenerationReason": "Independent replacement after first visual review found medical container silhouettes insufficiently distinct",
+      "animationMetadata": {
+        "clips": [],
+        "rigged": false,
+        "role": "static prop",
+        "gameplayImplemented": false
+      },
+      "source": "source/ZG030.json",
+      "sourceParameters": {
+        "builder": "source/regenerate_medical.py",
+        "assetIndex": 30,
+        "deterministic": true
+      },
+      "generator": "local Blender 5.2 procedural geometry",
+      "partCount": 14,
+      "brief": "Wide wheeled medical supply trunk with side handles, reinforced lid and front latches.",
+      "reviewStatus": "passed",
+      "reviewMethod": "Agent visual inspection of actual Blender render contact sheet plus metre GLB reimport",
+      "reviewedAt": 1792462298.081292
+    }
+  ]
+}

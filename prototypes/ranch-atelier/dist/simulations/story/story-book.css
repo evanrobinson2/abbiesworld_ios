@@ -1,0 +1,64 @@
+/* The storybook is an object on the table: a paper page that springs out from under a book.
+   No framed rectangles, no 1px borders. Motion is driven from story-book.mjs with springs. */
+#story-book-root{--paper:#fbf2d9;--paper-dark:#efe0b8;--ink:#4a3424;--ink-soft:#8a6d52;--cover:#b5462f;--cover-dark:#7e2c1d;--gold:#ffc93a;--line:#e3cfa3;font-family:RanchNunito,Nunito,ui-rounded,sans-serif;color:var(--ink);position:fixed;inset:0;pointer-events:none;z-index:46}
+body:not([data-family=ranch]) #story-book-root{display:none}
+#story-book-root button{font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+
+/* The closed book peeking in from the left edge. */
+#story-book-root .sb-tab{pointer-events:auto;position:absolute;left:-14px;top:42%;width:86px;height:92px;border:0;background:none;padding:0;filter:drop-shadow(0 6px 6px #2b1a0e55);transform-origin:20% 50%}
+#story-book-root .sb-tab svg{width:100%;height:100%;display:block}
+#story-book-root .sb-tab .sb-bubble{position:absolute;left:84px;top:6px;min-width:70px;padding:8px 12px;border-radius:999px;background:var(--paper);font-size:30px;line-height:1;white-space:nowrap;box-shadow:0 5px 0 var(--paper-dark),0 8px 14px #2b1a0e40;transform-origin:0 50%}
+#story-book-root .sb-tab .sb-bubble:empty{display:none}
+#story-book-root .sb-tab .sb-bubble::before{content:"";position:absolute;left:-9px;top:50%;margin-top:-8px;border:8px solid transparent;border-right-color:var(--paper);border-left:0}
+
+/* The open page. Its right edge is torn paper (clip-path set in JS), it casts a table shadow. */
+#story-book-root .sb-page{pointer-events:auto;position:absolute;left:0;top:58px;bottom:14px;width:min(400px,calc(100vw - 20px));transform-origin:0 60%;filter:drop-shadow(8px 10px 10px #2b1a0e45);will-change:transform}
+#story-book-root .sb-sheet{position:absolute;inset:0;background:radial-gradient(120% 80% at 30% 10%,#fffaf0 0,var(--paper) 55%,var(--paper-dark) 100%);padding:18px 30px 16px 22px;box-sizing:border-box;display:flex;flex-direction:column;gap:12px;overflow:hidden}
+#story-book-root .sb-ribbon{position:absolute;top:-6px;right:44px;width:30px;height:74px;border:0;padding:0;background:linear-gradient(90deg,#c2412d,#e0573f 50%,#c2412d);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%);transform-origin:50% 0;z-index:2}
+#story-book-root .sb-ribbon:active{transform:scaleY(1.12)}
+
+#story-book-root .sb-title{font-size:26px;font-weight:900;line-height:1.1;margin:4px 40px 0 0;letter-spacing:-.01em;min-height:28px}
+#story-book-root .sb-cast{display:flex;gap:10px;flex-wrap:wrap;min-height:0}
+#story-book-root .sb-cast:empty{display:none}
+#story-book-root .sb-sticker{position:relative;width:72px;border:0;background:none;padding:0;display:flex;flex-direction:column;align-items:center;gap:2px}
+#story-book-root .sb-sticker .face{width:64px;height:64px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:38px;box-shadow:0 4px 0 var(--line),0 6px 10px #2b1a0e30;transform:rotate(var(--tilt,0deg))}
+#story-book-root .sb-sticker .name{font-weight:900;font-size:15px;max-width:72px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#story-book-root .sb-sticker .star{position:absolute;right:0;top:-4px;font-size:22px;filter:drop-shadow(0 2px 0 #b97a00)}
+#story-book-root .sb-sticker.away .face{opacity:.45}
+
+#story-book-root .sb-words{flex:1;min-height:90px;position:relative}
+#story-book-root .sb-words textarea,#story-book-root .sb-words textarea:focus-visible{border-radius:0;box-shadow:none;position:absolute;inset:0;width:100%;height:100%;box-sizing:border-box;resize:none;border:0;outline:0;background:repeating-linear-gradient(transparent 0 37px,var(--line) 37px 39px);background-attachment:local;color:var(--ink);font:800 23px/39px RanchNunito,Nunito,ui-rounded,sans-serif;padding:0 2px;caret-color:var(--cover)}
+#story-book-root .sb-words textarea::placeholder{color:#b9a07c}
+#story-book-root .sb-words textarea[readonly]{cursor:default}
+
+#story-book-root .sb-beats{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+#story-book-root .sb-beats:empty{display:none}
+#story-book-root .sb-bead{width:26px;height:26px;border-radius:50%;background:#fff;box-shadow:inset 0 -3px 0 var(--line);display:grid;place-items:center;font-size:15px}
+#story-book-root .sb-bead.done{background:var(--gold);box-shadow:inset 0 -3px 0 #d79a00}
+#story-book-root .sb-bead.now{background:#ffe7a6}
+#story-book-root .sb-bead.skipped{background:#e8dcc4}
+
+#story-book-root .sb-wishes{display:flex;gap:6px;align-items:center;font-weight:900;font-size:15px;color:var(--ink-soft)}
+#story-book-root .sb-wishes:empty{display:none}
+#story-book-root .sb-wish{background:#fff;border-radius:6px;padding:3px 8px;transform:rotate(var(--tilt,0deg));box-shadow:0 2px 0 var(--line)}
+
+#story-book-root .sb-controls{display:flex;align-items:center;justify-content:center;gap:18px;padding-top:4px}
+#story-book-root .sb-mic{position:relative;width:96px;height:96px;border-radius:50%;border:0;background:radial-gradient(circle at 35% 30%,#ff7a5c,#d33a24 60%,#a3241a);box-shadow:0 7px 0 #7e1d12,0 12px 18px #2b1a0e55;display:grid;place-items:center}
+#story-book-root .sb-mic svg{width:44px;height:44px;fill:#fff}
+#story-book-root .sb-mic .ring{position:absolute;inset:-6px;border-radius:50%;border:5px solid #ff7a5c;opacity:0;pointer-events:none}
+#story-book-root .sb-mic.listening .ring{animation:sb-ring 1.4s ease-out infinite}
+#story-book-root .sb-mic.listening .ring:nth-child(2){animation-delay:.7s}
+@keyframes sb-ring{from{transform:scale(.9);opacity:.7}to{transform:scale(1.6);opacity:0}}
+#story-book-root .sb-go,#story-book-root .sb-small{border:0;border-radius:50%;display:grid;place-items:center}
+#story-book-root .sb-go{width:76px;height:76px;background:radial-gradient(circle at 35% 30%,#ffe08a,var(--gold) 55%,#d79a00);box-shadow:0 6px 0 #a87200,0 10px 16px #2b1a0e45;font-size:36px}
+#story-book-root .sb-go[hidden],#story-book-root .sb-small[hidden]{display:none}
+#story-book-root .sb-small{width:58px;height:58px;background:#fff;box-shadow:0 5px 0 var(--line),0 8px 12px #2b1a0e30;font-size:28px}
+#story-book-root .sb-thinking{display:flex;justify-content:center;align-items:center;gap:10px;font-size:40px;min-height:96px}
+#story-book-root .sb-thinking[hidden]{display:none}
+#story-book-root .sb-thinking span{display:inline-block;animation:sb-bob 0.9s ease-in-out infinite}
+#story-book-root .sb-thinking span:nth-child(2){animation-delay:.15s}#story-book-root .sb-thinking span:nth-child(3){animation-delay:.3s}
+@keyframes sb-bob{0%,100%{transform:translateY(0) rotate(-6deg)}50%{transform:translateY(-10px) rotate(6deg)}}
+#story-book-root .sb-footnote{font-size:11px;font-weight:700;color:#b29a78;text-align:center;min-height:13px}
+#story-book-root .sb-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media(max-width:600px){.sb-page{top:auto;height:62dvh;width:calc(100vw - 12px)}#story-book-root .sb-tab{top:auto;bottom:120px}}
+@media(prefers-reduced-motion:reduce){.sb-mic.listening .ring,#story-book-root .sb-thinking span{animation-duration:3s}}

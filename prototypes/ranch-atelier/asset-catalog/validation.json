@@ -1,0 +1,16 @@
+{
+  "assets": 2000,
+  "packs": 40,
+  "representations": 2000,
+  "model_statuses": {
+    "planned": 1998,
+    "study": 2
+  },
+  "mechanics_statuses": {
+    "proposed": 1986,
+    "source-supported": 14
+  },
+  "foreign_key_errors": 0,
+  "integrity": "ok",
+  "future_speculative": 153
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "WW-139",
+    "name": "White barked silver birch tree",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-139.glb"
+  },
+  {
+    "id": "WW-140",
+    "name": "Whorled needle crowned pine tree",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-140.glb"
+  },
+  {
+    "id": "WW-151",
+    "name": "Five lobed field maple sapling",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-151.glb"
+  },
+  {
+    "id": "WW-046",
+    "name": "Woodland fern crown",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-046.glb"
+  },
+  {
+    "id": "GF-153",
+    "name": "Spreading apple orchard tree",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-153.glb"
+  },
+  {
+    "id": "GF-010",
+    "name": "Flowered stone garden edge",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-010.glb"
+  },
+  {
+    "id": "UP-051",
+    "name": "Flowering three-leaf pasture clover",
+    "source": "bronze-age-world/upland-pasture/outputs/assets/UP-051.glb"
+  },
+  {
+    "id": "WW-147",
+    "name": "Lobed leaf pedunculate oak tree",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-147.glb"
+  },
+  {
+    "id": "WW-148",
+    "name": "Oval leaf smooth bark beech tree",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-148.glb"
+  },
+  {
+    "id": "WW-273",
+    "name": "Arching thorned blackberry bramble",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-273.glb"
+  },
+  {
+    "id": "WW-347",
+    "name": "Goldenrod branching plume stand",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-347.glb"
+  },
+  {
+    "id": "WW-528",
+    "name": "White bracted bunchberry colony",
+    "source": "bronze-age-world/working-woodland/outputs/assets/WW-528.glb"
+  },
+  {
+    "id": "GF-159",
+    "name": "Flat flowering elder shrub",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-159.glb"
+  },
+  {
+    "id": "GF-235",
+    "name": "Runner rooted strawberry patch",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-235.glb"
+  },
+  {
+    "id": "GF-567",
+    "name": "Large spiral seed sunflower",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-567.glb"
+  },
+  {
+    "id": "GF-679",
+    "name": "Echinacea flowering clump",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-679.glb"
+  },
+  {
+    "id": "GF-250",
+    "name": "Orange flowered pot marigold",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-250.glb"
+  },
+  {
+    "id": "GF-249",
+    "name": "Blue star flowered borage",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-249.glb"
+  },
+  {
+    "id": "GF-634",
+    "name": "Tall rose flower hollyhock",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-634.glb"
+  },
+  {
+    "id": "GF-158",
+    "name": "Coppiced hazel nut stool",
+    "source": "bronze-age-world/garden-farm/outputs/assets/GF-158.glb"
+  }
+]
