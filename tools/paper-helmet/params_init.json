@@ -1,0 +1,103 @@
+{
+ "shape": {
+  "dome": [
+   0.95,
+   1.1,
+   0.95
+  ],
+  "band_h": 0.18,
+  "lip": 0.09,
+  "lip_z": 0.0,
+  "lip_front": 0.05,
+  "front_drop": 0.05,
+  "low_h": 0.5,
+  "low_back": 0.3,
+  "taper": 0.12,
+  "open": 55,
+  "cheek_w": 45,
+  "cheek_len": 1.2,
+  "cheek_back_len": 0.6,
+  "cheek_tip_u": 0.3,
+  "cheek_in": 0.25,
+  "cheek_front": 1.0,
+  "neck_w": 35,
+  "neck_len": 0.55,
+  "neck_flare": 60,
+  "neck_off": 0,
+  "boss_th": 80,
+  "boss_r": 0.08,
+  "crest": {
+   "a0": -55,
+   "a1": 85,
+   "len": 0.75,
+   "w": 0.32,
+   "hold_h": 0.18,
+   "lift": 0.0,
+   "rake": 0,
+   "curl": 0.3,
+   "peak_at": 0.25,
+   "taper": 0.45,
+   "cap": 0.25,
+   "fill": 0.9,
+   "n_smooth": 16
+  },
+  "band_front": 0.25,
+  "eye_gap": 0.12,
+  "eye_w": 25
+ },
+ "grammar": {
+  "dome_u": 12,
+  "dome_v": 4,
+  "dome_twist": 0.0,
+  "band_u": 14,
+  "shell_u": 9,
+  "plate_fold": 0.08,
+  "hem_w": 0.22,
+  "hem_h": 0.035,
+  "blades": 11,
+  "blade_jitter": 0.06,
+  "ridge": 0.6,
+  "paper_t": 0.03
+ },
+ "place": {
+  "x": 0.0,
+  "z": 0.0,
+  "yaw": -50,
+  "pitch": 0,
+  "roll": 0,
+  "scale": 1.0,
+  "ground": -1.75
+ },
+ "cam": {
+  "dist": 14,
+  "el": 5,
+  "focal": 85,
+  "tx": 0.0,
+  "tz": 0.25
+ },
+ "light": {
+  "key_az": -45,
+  "key_el": 45,
+  "key_size": 5,
+  "key_power": 2500,
+  "fill_az": 40,
+  "fill_el": 20,
+  "fill_power": 400,
+  "world_color": [
+   0.8,
+   0.79,
+   0.76
+  ],
+  "world_strength": 0.6,
+  "bg_albedo": [
+   0.6,
+   0.57,
+   0.52
+  ],
+  "paper_albedo": 0.8,
+  "paper_warm": 0.03,
+  "paper_rough": 0.85,
+  "exposure": 0.0,
+  "agx": 1
+ }
+}
