@@ -1,10 +1,11 @@
 // Live mode server: the only place that holds AI credentials. See LIVE_MODE.md.
 //  GET  /api/live                  {enabled, model, version}
-//  POST /api/live {action:'session'}                       mints a single-use, 60 s realtime client secret
+//  POST /api/live {action:'session'}                       a 60 s ticket for the realtime relay (api/live-socket.js)
 //  POST /api/live {action:'guard', who, text}              PG and scope check of one spoken line
 //  POST /api/live {action:'order', description, for?}      files a workshop order for a proper model
 // Nothing a child says is stored: guard text is judged and dropped. Orders keep only the description.
 const {randomBytes}=require('node:crypto');
+const {issueTicket}=require('../lib/live-ticket.cjs');
 const GATEWAY='https://ai-gateway.vercel.sh';
 const GUARD_MODEL='openai/gpt-6-luna'; // the model ai-compose verified against the Gateway catalog
 const ORDERS='live-orders/v1/';
@@ -51,11 +52,10 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
 
  try{
   if(body.action==='session'){
-   const r=await fetcher(`${GATEWAY}/v1/realtime/client-secrets`,{method:'POST',headers,body:JSON.stringify({model:REALTIME_MODEL,expiresIn:60})});
-   if(!r.ok){const detail=await r.text().catch(()=>'');console.error('[live] client secret',r.status,detail.slice(0,300));return json(502,{error:r.status===402||r.status===429?'The AI budget is used up for now.':'Live mode could not start. Try again soon.'});}
-   const secret=await r.json();
-   const url=new URL(`${GATEWAY.replace(/^http/,'ws')}/v4/ai/realtime-model`);url.searchParams.set('ai-model-id',REALTIME_MODEL);
-   return json(200,{token:secret.token,expiresAt:secret.expiresAt??null,url:url.toString(),protocols:['ai-gateway-realtime.v1',`ai-gateway-auth.${secret.token}`],model:REALTIME_MODEL});
+   // The page connects to our relay (api/live-socket.js), which holds the credential and enforces
+   // the rules and tools server-side. The ticket is good for 60 seconds.
+   const ticket=issueTicket(env,at);if(!ticket)return json(503,{error:'Live mode is not set up yet.'});
+   return json(200,{url:`wss://${host}/api/live-socket?ticket=${encodeURIComponent(ticket)}`,protocols:['ai-gateway-realtime.v1'],model:REALTIME_MODEL,expiresAt:Math.floor((at+60000)/1000)});
   }
   if(body.action==='guard'){
    const who=body.who==='computer'?'COMPUTER':'CHILD',text=typeof body.text==='string'?body.text.trim().slice(0,600):'';
