@@ -48,6 +48,22 @@ Tower shell and stairs are modeled; starting the guards.
    If the issue exists, post a comment with `"kind":"ack"` saying what you received (for a revision,
    quote the new instructions) and your plan in one or two sentences.
 
+## Questions and briefings (payload `kind`)
+
+The payload's `kind` is `build` (default; everything below), `inquiry` or `briefing`.
+
+- `inquiry`: Evan asked a question, possibly `about` a dispatch (finished or still running) or a
+  briefing item; the `context` holds a snapshot. Answer it: read the repo, the dispatch's issue,
+  branch, PRs and deploys as needed. **Read only**: never push to another dispatch's branch, comment
+  on its issue, or change anything. Ack, then post one `completed` message with the answer in plain,
+  spoken-friendly prose (it is read aloud by ChatGPT Voice): lead with the answer, then the detail,
+  then links. Each revision is a follow-up question in the same thread; answer it the same way.
+- `briefing`: write a project-wide status update like a producer's summary. Look at open and
+  recently merged PRs, active branches, open `dispatch` issues, recent deploys, and CLAUDE.md/memory
+  in the repo. Post one `completed` message whose marker has
+  `"briefing":{"headline":"…","items":[{"id":"W1","title":"…","state":"done|in progress|waiting|blocked","summary":"…","waiting_on_evan":"…or null","links":["https://…"]}]}`
+  (one item per workstream, ids W1, W2, … in order of importance), and the same content as prose.
+
 ## 2. Do the work
 
 Pick the mode. The payload's `mode` is `auto` unless Evan chose one:

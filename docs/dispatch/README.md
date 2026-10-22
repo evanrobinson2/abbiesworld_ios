@@ -30,6 +30,8 @@ GitHub is the return channel because Claude's cloud sessions cannot reach `*.ver
 | `status(dispatch_id?)` | One dispatch, or all active ones: status, verified, delivery, last progress, last activity, branch, commits, PRs, links, errors, the question waiting for Evan. |
 | `revise(dispatch_id, instructions)` | Change order or answer. Idle dispatch: fires a new Claude run on the same branch/issue. Running: queued and sent when that run reports in. History is kept. |
 | `inbox(since?, unread_only?, acknowledge?, dispatch_id?)` | Claude's new messages; marks them read by default so ChatGPT doesn't repeat news. |
+| `briefing(refresh?)` | Project-wide status: one item per workstream (W1, W2, …) with done / in progress / waiting on Evan, plus live builds and open questions. Instant from the last briefing; refreshes in the background when over an hour old. |
+| `ask(question, about?, thread_id?)` | Threaded question about any dispatch (done or running), a briefing item, or anything. Answered by a separate read-only session; `thread_id` continues the thread. |
 
 ## Factory feed for the phone app
 

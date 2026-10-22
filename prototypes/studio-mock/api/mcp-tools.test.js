@@ -41,6 +41,8 @@ for (const required of [
   "status",
   "revise",
   "inbox",
+  "briefing",
+  "ask",
 ]) {
   assert(names.includes(required), `missing ${required}`);
 }

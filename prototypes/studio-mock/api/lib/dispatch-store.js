@@ -22,6 +22,8 @@
 import { createHash, randomBytes } from "node:crypto";
 
 export const MODES = ["auto", "quick", "standard", "bespoke"];
+// build: change the project. inquiry: answer a question (threaded follow-ups). briefing: project-wide status.
+export const KINDS = ["build", "inquiry", "briefing"];
 export const STATUSES = ["submitted", "acknowledged", "running", "blocked", "completed", "failed"];
 export const MESSAGE_KINDS = ["ack", "progress", "question", "completed", "failed", "note"];
 const TERMINAL = new Set(["completed", "failed"]);
@@ -90,13 +92,15 @@ function event(record, type, detail, now) {
   if (record.history.length > 400) record.history.splice(0, record.history.length - 400);
 }
 
-export function buildRecord({ request, context, requester, idemKey, now = Date.now(), id, mode, references }) {
+export function buildRecord({ request, context, requester, idemKey, now = Date.now(), id, mode, references, kind, about }) {
   const text = String(request || "").trim();
   if (!text) throw Object.assign(new Error("request is required"), { code: "request_required" });
   const dispatchId = id || newDispatchId(now);
   const record = {
     schema: "abbies-dispatch/v1",
     id: dispatchId,
+    kind: KINDS.includes(kind) ? kind : "build",
+    about: about ? clip(about, 120) : null,
     status: "submitted",
     verified: false,
     request: clip(text, LIMITS.requestChars),
@@ -142,6 +146,8 @@ export function firePayload(record, { reason = "new", now = Date.now() } = {}) {
   const payload = {
     protocol: "abbies-dispatch/v1",
     dispatch_id: record.id,
+    kind: record.kind || "build",
+    about: record.about || null,
     reason, // new | revision | retry | resume
     attempt: record.delivery.attempts + 1,
     revision: record.revision,
@@ -313,6 +319,19 @@ export function applyClaudeMessage(record, source, { now = Date.now() } = {}) {
     record.stages = record.stages || [];
     if (!record.stages.some((st) => st.name === msg.stage)) record.stages.push({ name: msg.stage, at });
   }
+  if (marker.briefing && typeof marker.briefing === "object" && Array.isArray(marker.briefing.items)) {
+    msg.briefing = {
+      headline: clip(marker.briefing.headline || "", 300),
+      items: marker.briefing.items.slice(0, 40).map((it, i) => ({
+        id: /^W\d{1,3}$/.test(String(it?.id || "")) ? String(it.id) : `W${i + 1}`,
+        title: clip(it?.title || "", 120),
+        state: clip(it?.state || "", 40),
+        summary: clip(it?.summary || "", 400),
+        waiting_on_evan: it?.waiting_on_evan ? clip(it.waiting_on_evan, 300) : null,
+        links: (Array.isArray(it?.links) ? it.links : []).map((l) => String(l?.url || l || "")).filter((u) => /^https:\/\//.test(u)).slice(0, 5),
+      })),
+    };
+  }
   if (typeof marker.job_kind === "string" && marker.job_kind.trim()) record.jobKind = clip(marker.job_kind.trim().toLowerCase(), 24);
   // Partial progress on long jobs: {"progress":{"done":3,"total":8,"unit":"parts","note":"…"}}
   const pr = marker.progress;
@@ -367,7 +386,8 @@ export function applyClaudeMessage(record, source, { now = Date.now() } = {}) {
       record.needsInput = null;
       record.lastProgress = clip(text, 600);
       const v = source.verification;
-      record.verified = Boolean(v && v.ok === true);
+      // Answers change nothing in the repo, so there is nothing to verify.
+      record.verified = (record.kind || "build") === "build" ? Boolean(v && v.ok === true) : null;
       record.verification = v ? { ok: Boolean(v.ok), checkedAt: v.checkedAt || nowIso(now), detail: v.detail || null } : null;
     }
   } else if (marker.kind === "failed") {
@@ -481,6 +501,8 @@ export function summarize(record) {
     dispatch_id: record.id,
     status: record.status,
     verified: record.verified,
+    kind: record.kind || "build",
+    about: record.about || null,
     request: clip(record.request, 280),
     mode: record.mode || "auto",
     revision: record.revision,
@@ -590,6 +612,7 @@ export function publicMessage(record, msg) {
     models: msg.models || undefined,
     stage: msg.stage || undefined,
     progress: msg.progress || undefined,
+    briefing: msg.briefing || undefined,
     acknowledged: msg.acknowledged,
   };
 }
@@ -723,5 +746,13 @@ export function createDispatchStore(storage) {
     return out;
   }
 
-  return { get, update, create, findByIdempotency, listRecords };
+  async function getMeta(name) {
+    const hit = await storage.read(`${PREFIX}meta/${name}.json`);
+    return hit ? hit.value : null;
+  }
+  async function putMeta(name, value) {
+    await storage.write(`${PREFIX}meta/${name}.json`, value, {});
+  }
+
+  return { get, update, create, findByIdempotency, listRecords, getMeta, putMeta };
 }

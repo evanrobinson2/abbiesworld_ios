@@ -84,10 +84,10 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
     return { record, result };
   }
 
-  async function build({ request, context, idempotency_key: explicitKey, requester, mode, references }) {
+  async function build({ request, context, idempotency_key: explicitKey, requester, mode, references, kind = "build", about }) {
     const text = String(request || "").trim();
     if (!text) return { error: "request_required", hint: "Describe what Claude should build, in plain words." };
-    const key = idempotencyKey(text, context, explicitKey);
+    const key = idempotencyKey(kind === "build" ? text : `${kind}:${about || ""}:${text}`, context, explicitKey);
     const existing = await store.findByIdempotency(key, now());
     if (existing && (explicitKey || existing.age < LIMITS.idempotencyWindowMs)) {
       return {
@@ -96,7 +96,7 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
         ...summarize(existing.record),
       };
     }
-    const record = buildRecord({ request: text, context, requester, idemKey: key, now: now(), mode, references });
+    const record = buildRecord({ request: text, context, requester, idemKey: key, now: now(), mode, references, kind, about });
     await store.create(record);
     const out = await deliver(record.id, "new");
     const current = out?.record || record;
@@ -272,6 +272,13 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
       return res;
     });
     if (out.notFound) return { ignored: "unknown_dispatch", id: marker.id };
+    if (out.result?.applied && out.result.message?.briefing && out.record.kind === "briefing") {
+      await store.putMeta("briefing", {
+        ...out.result.message.briefing,
+        generated_at: out.result.message.at,
+        dispatch_id: out.record.id,
+      });
+    }
     let alerted = null;
     if (notify && out.result?.applied) alerted = await notify(out.record, out.result.message).catch((e) => ({ error: String(e) }));
     // A queued revision goes out as soon as the running session reports a stopping point.
@@ -348,5 +355,73 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
     return { events: events.slice(0, Math.max(1, Math.min(500, Number(limit) || 100))), jobs, generated_at: new Date(now()).toISOString() };
   }
 
-  return { build, status, revise, inbox, relay, sweep, sweepOne, deliver, pendingIssuePosts, revisionPosted, feed, activity };
+  /**
+   * Project-wide status, like the coordinator's summaries: one item per workstream (W1, W2, …) with
+   * what's done and what's waiting on Evan. Returns the latest briefing at once, merged with live
+   * dispatch state; starts a fresh one (a short Claude session) when asked or when it's over an hour old.
+   */
+  async function briefing({ refresh = false, requester } = {}) {
+    const latest = await store.getMeta("briefing");
+    const ageMin = latest ? Math.round((now() - Date.parse(latest.generated_at)) / 60000) : null;
+    const records = await store.listRecords();
+    const inFlight = records.find((r) => r.kind === "briefing" && !["completed", "failed"].includes(r.status));
+    let refreshing = inFlight ? inFlight.id : null;
+    if (!inFlight && (refresh || !latest || ageMin > 60)) {
+      const started = await build({
+        kind: "briefing",
+        mode: "quick",
+        request:
+          "Write a project-wide status briefing for Evan: one item per active workstream, what is done, what is in progress, and what is waiting on him.",
+        idempotency_key: `briefing-${Math.floor(now() / (10 * 60 * 1000))}`,
+        requester,
+      });
+      refreshing = started.dispatch_id || null;
+    }
+    const waiting = records
+      .filter((r) => r.status === "blocked")
+      .map((r) => ({ dispatch_id: r.id, title: r.request.slice(0, 90), question: r.needsInput }));
+    const active = records
+      .filter((r) => (r.kind || "build") === "build" && !["completed", "failed"].includes(r.status))
+      .map((r) => ({ dispatch_id: r.id, title: r.request.slice(0, 90), status: r.status, stage: r.stage || null, last_progress: r.lastProgress }));
+    return {
+      briefing: latest
+        ? { headline: latest.headline, items: latest.items, generated_at: latest.generated_at, age_minutes: ageMin }
+        : null,
+      refreshing,
+      live: { dispatches_in_flight: active, waiting_on_evan: waiting },
+      how_to_follow_up: "Call ask(question, about: 'W3') to open a thread on an item; ask again with thread_id to continue it. Answers arrive in inbox().",
+      note: latest ? undefined : "No briefing yet; one is being written now. Check back in a few minutes (inbox() will have it).",
+    };
+  }
+
+  /** A question for Claude about a dispatch (done or running), a briefing item, or anything. thread_id continues a thread. */
+  async function ask({ question, about, thread_id: threadId, requester }) {
+    const q = String(question || "").trim();
+    if (!q) return { error: "question_required" };
+    if (threadId) {
+      const rec = await store.get(threadId);
+      if (!rec) return { error: "thread_not_found", thread_id: threadId };
+      const out = await revise({ dispatch_id: threadId, instructions: q, requester });
+      return { thread_id: threadId, ...out, meaning: "Follow-up added to the thread. The answer arrives in inbox() under this thread_id." };
+    }
+    let context = null;
+    if (about && isDispatchId(about)) {
+      // A question about a dispatch, finished or still running: a separate read-only session answers it,
+      // so a running build is never interrupted.
+      const target = await store.get(about);
+      if (!target) return { error: "not_found", about };
+      const snap = summarize(target);
+      snap.recent_messages = target.messages.slice(-12).map((m) => ({ at: m.at, kind: m.kind, stage: m.stage || null, text: m.text.slice(0, 400) }));
+      snap.revisions = target.revisions.map((r) => ({ n: r.n, instructions: r.instructions }));
+      context = `About dispatch ${about} (${target.status}). Do not modify its branch or interrupt its session; read only. Snapshot: ${JSON.stringify(snap).slice(0, 6000)}`;
+    } else if (about) {
+      const latest = await store.getMeta("briefing");
+      const item = latest?.items?.find((it) => it.id === about) || null;
+      context = item ? `About briefing item ${item.id} (${latest.generated_at}): ${JSON.stringify(item)}` : `About: ${about}`;
+    }
+    const out = await build({ kind: "inquiry", mode: "quick", request: q, context, about, requester });
+    return { thread_id: out.dispatch_id, ...out, meaning: "Question sent. The answer arrives in inbox() under this thread_id; use ask(question, thread_id) to follow up." };
+  }
+
+  return { build, status, revise, inbox, relay, sweep, sweepOne, deliver, pendingIssuePosts, revisionPosted, feed, activity, briefing, ask };
 }
