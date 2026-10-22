@@ -1,0 +1,87 @@
+{
+ "place": {
+  "x": 0,
+  "y": 0,
+  "z": 0,
+  "yaw": 0
+ },
+ "material": {
+  "albedo": 0.62,
+  "rough": 0.85,
+  "sheen": 0.2,
+  "fibre": 0.15
+ },
+ "exposure": -1.2,
+ "light": {
+  "key_az": 45,
+  "key_el": 40,
+  "key_dist": 6,
+  "key_size": 2.0,
+  "key_power": 1500,
+  "fill_az": -80,
+  "fill_el": 20,
+  "fill_power": 120,
+  "world_color": [
+   0.8,
+   0.8,
+   0.8
+  ],
+  "world_strength": 0.5
+ },
+ "prop": "sandals",
+ "bg": [
+  0.62,
+  0.62,
+  0.63
+ ],
+ "cam": {
+  "az": -30,
+  "el": 45,
+  "dist": 1.2,
+  "focal": 50,
+  "tx": 0,
+  "tz": 0.03
+ },
+ "shape": {
+  "len": 0.27,
+  "width": 0.1,
+  "sole_h": 0.025,
+  "lip": 0.008,
+  "strap_w": 0.025,
+  "straps": [
+   [
+    0.08,
+    25
+   ],
+   [
+    0.15,
+    -25
+   ],
+   [
+    0.2,
+    10
+   ]
+  ],
+  "thick": 0.006,
+  "edge": 0.03,
+  "crumple": 0.04,
+  "sep": 0.15,
+  "stagger": 0.03,
+  "toe_out": 8
+ },
+ "shape_steps": {
+  "shape.len": 0.01,
+  "shape.width": 0.006,
+  "shape.sep": 0.01,
+  "shape.stagger": 0.01,
+  "shape.toe_out": 3,
+  "shape.sole_h": 0.004
+ },
+ "iters": 300,
+ "light_iters": 20,
+ "az_starts": [
+  -60,
+  -30,
+  0
+ ]
+}
