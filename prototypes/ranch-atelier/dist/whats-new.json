@@ -1,0 +1,14 @@
+{
+  "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
+  "entries": [
+    {
+      "id": "2026-10-22-update-card",
+      "date": "2026-10-22",
+      "title": "Updates and feedback from your phone",
+      "line": "This card shows up when a new version is ready. Tap the speech bubble to send Claude a picture and a note.",
+      "image": "/whats-new/2026-10-22-update-card.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
+      "threadTitle": "iPhone update and feedback loop"
+    }
+  ]
+}

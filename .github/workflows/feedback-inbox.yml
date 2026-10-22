@@ -1,0 +1,31 @@
+# Copies feedback sent from the app's speech-bubble button into branch feedback-inbox and comments on the
+# open "Feedback inbox" PR, which wakes the Claude thread watching it. No secrets needed: it reads the public
+# /api/feedback list on abbies-ranch-atelier.vercel.app. See prototypes/ranch-atelier/dist/FEEDBACK.md (live branch).
+name: feedback-inbox
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '*/5 * * * *'
+concurrency:
+  group: feedback-inbox
+  cancel-in-progress: false
+permissions:
+  contents: write
+  pull-requests: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: claude/live-snapshot-2026-10-22, path: live }
+      - uses: actions/checkout@v4
+        with: { ref: main, path: inbox, fetch-depth: 0 }
+      - name: Open the inbox branch (created from main on the first run)
+        run: git -C inbox fetch origin feedback-inbox && git -C inbox checkout -B feedback-inbox origin/feedback-inbox || git -C inbox checkout -B feedback-inbox
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - name: Copy new feedback and notify
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node live/tools/feedback-inbox/sync.mjs inbox
