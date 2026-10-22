@@ -83,4 +83,4 @@ jobs:
           git add --ignore-errors "$SE/index" "$SE/picks.json" prototypes/ranch-atelier/dist/sounds/manifest.json
           git diff --cached --quiet && { echo "Nothing changed"; exit 0; }
           git commit -m "Sound engineer: index, picks and /sounds manifest from the sound-store run [skip ci]"
-          for i in 1 2 3; do git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
