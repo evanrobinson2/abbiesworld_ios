@@ -1,4 +1,4 @@
-# One-off reachability check for the Sonniss bundle hosts from a GitHub runner (headers, ranges, mirrors).
+# One-off check of where the Sonniss bundles can be read from a GitHub runner (archive.org copies).
 name: sound-probe
 on:
   push:
@@ -12,19 +12,18 @@ jobs:
     timeout-minutes: 10
     steps:
       - run: |
-          UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
-          for u in \
-            "https://downloads.sonniss.com/Sonniss.com-GDC2024-GameAudioBundle1of9.zip" \
-            "http://downloads.sonniss.com/Sonniss.com-GDC2024-GameAudioBundle1of9.zip" \
-            "https://hippolytus.feralhosting.com/sonniss/Sonniss.com-GDC2024-GameAudioBundle1of9.zip" \
-            "http://hippolytus.feralhosting.com/sonniss/Sonniss.com-GDC2024-GameAudioBundle1of9.zip" \
-            "https://ftpmirror.your.org/pub/misc/sonniss2019/Sonniss.com%20-%20GDC%202019%20-%20Game%20Audio%20Bundle%20Part%201of8.zip" \
-            "https://ftpmirror.your.org/pub/misc/sonniss/sonniss.zip" \
-            "https://sonniss.com/GameAudioGDCPart8.torrent"; do
-            echo "== $u"
-            curl -s -o /dev/null -m 20 -w 'plain  %{http_code} %{size_download}B %{time_total}s\n' -r 0-99 "$u" || echo "plain failed $?"
-            curl -s -o /dev/null -m 20 -w 'browser %{http_code} %{size_download}B %{time_total}s\n' -r 0-99 -A "$UA" -e 'https://sonniss.com/gameaudiogdc/' "$u" || echo "browser failed $?"
-            curl -sI -m 20 -A "$UA" -e 'https://sonniss.com/gameaudiogdc/' "$u" | head -12
+          for id in game-audio-gdcpart-6 game-audio-gdcpart-7 gdc-2023-game-audio-bundle sonniss-gdc-2024-game-audio-bundle-normalized sonniss-gdc-2023-game-audio-bundle-normalized sonniss-gdc-2020-game-audio-bundle-normalized sonniss-gdc-2020-game-audio-bundle sonniss.com-gdc-game-audio-bundles SonnissGameAudioGDCPart6; do
+            echo "== $id"
+            curl -s -m 30 "https://archive.org/metadata/$id" | python3 -c "
+          import json,sys
+          d=json.load(sys.stdin); m=d.get('metadata',{})
+          print('title:',m.get('title'),'| date:',m.get('date') or m.get('publicdate'),'| desc:',str(m.get('description',''))[:300].replace('\n',' '))
+          print('server:',d.get('d1'),d.get('dir'))
+          for f in d.get('files',[]):
+            n=f.get('name','')
+            if n.lower().endswith(('.zip','.torrent','.7z','.rar')) or f.get('format') in ('ZIP',):
+              print('  ',n,f.get('size'),f.get('source'),f.get('md5'))
+          "
           done
-          echo "== archive.org search"
-          curl -s -m 20 'https://archive.org/advancedsearch.php?q=sonniss+gdc&fl[]=identifier&fl[]=title&rows=50&output=json' | head -c 4000
+          echo "== range test"
+          curl -sL -o /dev/null -m 30 -w '%{http_code} %{size_download}B %{url_effective}\n' -r 0-99 "https://archive.org/download/game-audio-gdcpart-7/" || true
