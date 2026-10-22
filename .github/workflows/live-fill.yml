@@ -3,7 +3,6 @@ name: live-fill
 on:
   push:
     branches: [claude/live-snapshot-2026-10-22]
-  workflow_dispatch:
     paths: [.github/workflows/live-fill.yml]
 permissions:
   contents: write
