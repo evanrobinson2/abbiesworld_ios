@@ -1,0 +1,784 @@
+{
+ "dial": "high",
+ "cfg": {
+  "model": "opus",
+  "effort": "high",
+  "rounds": 6,
+  "level": 1,
+  "px": 256,
+  "samples": 24,
+  "max_edits": 16,
+  "es_iters": 300,
+  "es_groups": "pose,shield,radii,helmet,skirt"
+ },
+ "hist": [
+  {
+   "round": 0,
+   "accepted": true,
+   "loss": 0.47111862399850246,
+   "terms": {
+    "sil": 0.28844135397533455,
+    "cham": 0.019199082244577198,
+    "ssim": 0.30442074891016246,
+    "edge": 0.9919426886772913,
+    "tone": 0.12082216350081698,
+    "total": 0.47111862399850246,
+    "secs": 5.54
+   },
+   "edits": [],
+   "cost": 0.0
+  },
+  {
+   "round": 1,
+   "accepted": true,
+   "loss": 0.44459908859559816,
+   "terms": {
+    "sil": 0.3063885267275098,
+    "cham": 0.017550359097057062,
+    "ssim": 0.2887805504844906,
+    "edge": 0.9395695231321404,
+    "tone": 0.09432061887254901,
+    "total": 0.44459908859559816,
+    "secs": 3.08
+   },
+   "edits": [
+    {
+     "path": "cam.dist",
+     "old": 4.4050626578702525,
+     "new": 4.85,
+     "why": "shrink figure ~9% so the red rim goes and the feet fit in frame"
+    },
+    {
+     "path": "cam.target_z",
+     "old": 1.055499221105198,
+     "new": 1.0,
+     "why": "re-centre vertically after the zoom-out so the feet sit near the reference's foot line"
+    },
+    {
+     "path": "shield.h",
+     "old": 1.0,
+     "new": 0.86,
+     "why": "the reference shield is about 0.45 of figure height, not 0.54"
+    },
+    {
+     "path": "shield.w",
+     "old": 0.62,
+     "new": 0.56,
+     "why": "the reference shield is narrower in projection"
+    },
+    {
+     "path": "shield.yaw",
+     "old": 75,
+     "new": 80,
+     "why": "show the shield more edge-on, as in the reference"
+    },
+    {
+     "path": "fig.yaw",
+     "old": -11.687813182682065,
+     "new": -17,
+     "why": "the reference torso is turned a bit more to image-left"
+    },
+    {
+     "path": "joints.r_ankle",
+     "old": [
+      -0.17,
+      0.03,
+      0.09
+     ],
+     "new": [
+      -0.21,
+      0.03,
+      0.09
+     ],
+     "why": "the reference has a wider stance"
+    },
+    {
+     "path": "joints.r_toe",
+     "old": [
+      -0.19,
+      -0.13,
+      0.03
+     ],
+     "new": [
+      -0.24,
+      -0.13,
+      0.03
+     ],
+     "why": "follow the ankle"
+    },
+    {
+     "path": "joints.l_ankle",
+     "old": [
+      0.2,
+      0.02,
+      0.09
+     ],
+     "new": [
+      0.24,
+      0.02,
+      0.09
+     ],
+     "why": "the reference has a wider stance"
+    },
+    {
+     "path": "joints.l_toe",
+     "old": [
+      0.3,
+      -0.1,
+      0.03
+     ],
+     "new": [
+      0.34,
+      -0.1,
+      0.03
+     ],
+     "why": "follow the ankle"
+    },
+    {
+     "path": "joints.r_wrist",
+     "old": [
+      -0.34,
+      -0.04,
+      0.95
+     ],
+     "new": [
+      -0.38,
+      -0.04,
+      0.95
+     ],
+     "why": "the reference right arm hangs out from the body"
+    },
+    {
+     "path": "joints.r_hand",
+     "old": [
+      -0.36,
+      -0.07,
+      0.85
+     ],
+     "new": [
+      -0.41,
+      -0.07,
+      0.85
+     ],
+     "why": "follow the wrist"
+    },
+    {
+     "path": "crest.len",
+     "old": 0.2,
+     "new": 0.24,
+     "why": "the reference plume is bigger and fuller"
+    },
+    {
+     "path": "look.exposure",
+     "old": -1.3,
+     "new": -0.9,
+     "why": "the reference figure and background are brighter (tone error)"
+    },
+    {
+     "path": "light.key_size",
+     "old": 2.0,
+     "new": 1.5,
+     "why": "slightly crisper shading to bring out the facet edges"
+    }
+   ],
+   "cost": 0.3504115,
+   "llm_secs": 26.8,
+   "diagnosis": "The model fills too much of the frame. It is about 9% too tall, the feet are cut off at the bottom, and there is a red rim around the whole outline, so the camera needs to pull back. The shield is too tall and too face-on compared with the reference, and the render is darker and flatter in tone. The reference figure is also turned a little more toward image-left, with a wider stance, a right arm held further from the body and a bigger crest.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 37987,
+    "cache_read_input_tokens": 37198,
+    "output_tokens": 1928,
+    "output_tokens_details": {
+     "thinking_tokens": 982
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 37987,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1812,
+      "cache_read_input_tokens": 37198,
+      "cache_creation_input_tokens": 789,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 789
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": 0.40225188931910577,
+   "best_after": 0.40225188931910577
+  },
+  {
+   "round": 2,
+   "accepted": false,
+   "loss": 0.40380562653579377,
+   "terms": {
+    "sil": 0.18808777429467083,
+    "cham": 0.010747419057109762,
+    "ssim": 0.28998018669755266,
+    "edge": 0.9931765076250371,
+    "tone": 0.0997478809232026,
+    "total": 0.40380562653579377,
+    "secs": 1.98
+   },
+   "edits": [
+    {
+     "path": "shield.off",
+     "old": [
+      0.09582500421121343,
+      0.00486917726602944,
+      0.0
+     ],
+     "new": [
+      0.09582500421121343,
+      0.00486917726602944,
+      -0.06
+     ],
+     "why": "drop the shield so its top clears the red at the upper right and its bottom reaches the blue near the knee"
+    },
+    {
+     "path": "shield.roll",
+     "old": -2.0237102474319553,
+     "new": 8,
+     "why": "tilt the shield so the bottom swings in toward the leg and the top swings out, matching the reference lean"
+    },
+    {
+     "path": "joints.r_wrist",
+     "old": [
+      -0.39405850897871814,
+      -0.04,
+      0.95
+     ],
+     "new": [
+      -0.365,
+      -0.04,
+      0.95
+     ],
+     "why": "pull back last round's arm splay, which left a red rim along the outer arm"
+    },
+    {
+     "path": "joints.r_hand",
+     "old": [
+      -0.41,
+      -0.07,
+      0.85
+     ],
+     "new": [
+      -0.38,
+      -0.07,
+      0.85
+     ],
+     "why": "follow the wrist"
+    },
+    {
+     "path": "crest.a0",
+     "old": -29.884582119879525,
+     "new": -40,
+     "why": "start the plume further forward to fill the blue at the top-left of the helmet"
+    },
+    {
+     "path": "crest.curl",
+     "old": 0.020862552596917397,
+     "new": -0.01,
+     "why": "curl the plume tips slightly forward, as in the reference crest"
+    },
+    {
+     "path": "bands.sole_w",
+     "old": 0.1,
+     "new": 0.08,
+     "why": "the foot soles show red, so they are wider than in the reference"
+    },
+    {
+     "path": "look.crumple",
+     "old": 1.0,
+     "new": 1.3,
+     "why": "add more facet breakup to improve the edge correlation (edge loss is 0.96)"
+    }
+   ],
+   "cost": 0.1569615,
+   "llm_secs": 26.8,
+   "diagnosis": "The shield sits too high and too upright: there's red along its top-right rim and blue at its bottom-left, where the reference shield tilts its lower edge in toward the leg and hangs lower. The figure's right arm (image left) now sticks out too far, leaving a red rim along its outer edge, the plume needs more mass forward over the brow (blue at the top-left of the helmet), and the feet and soles are too wide (red at the feet).",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 13257,
+    "cache_read_input_tokens": 64505,
+    "output_tokens": 1868,
+    "output_tokens_details": {
+     "thinking_tokens": 1153
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 13257,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1751,
+      "cache_read_input_tokens": 38486,
+      "cache_creation_input_tokens": 790,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 790
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": 0.3943010746896573,
+   "best_after": 0.3943010746896573
+  },
+  {
+   "round": 3,
+   "accepted": false,
+   "loss": 0.39659779705820136,
+   "terms": {
+    "sil": 0.17406697152972417,
+    "cham": 0.010190878270327195,
+    "ssim": 0.2921309535154607,
+    "edge": 0.979580402142806,
+    "tone": 0.10158388225081699,
+    "total": 0.39659779705820136,
+    "secs": 3.27
+   },
+   "edits": [
+    {
+     "path": "shield.off",
+     "old": [
+      0.09373992968883797,
+      0.00486917726602944,
+      -0.012495837627565967
+     ],
+     "new": [
+      0.09373992968883797,
+      0.00486917726602944,
+      -0.05
+     ],
+     "why": "drop the shield about 4cm so its top clears the red at the upper right and its bottom reaches the blue at the lower right"
+    },
+    {
+     "path": "shield.roll",
+     "old": 0.482127866037096,
+     "new": 5,
+     "why": "a gentle lean so the bottom swings out to image-right like the reference"
+    },
+    {
+     "path": "crest.a0",
+     "old": -29.884582119879525,
+     "new": -38,
+     "why": "start the plume further forward to fill the blue at the front-left of the helmet"
+    },
+    {
+     "path": "crest.curl",
+     "old": 0.017781111880821647,
+     "new": 0.0,
+     "why": "neutral tips; the reference plume sweeps forward and doesn't curl back"
+    },
+    {
+     "path": "joints.r_wrist",
+     "old": [
+      -0.39405850897871814,
+      -0.04,
+      0.95
+     ],
+     "new": [
+      -0.38,
+      -0.04,
+      0.96
+     ],
+     "why": "pull the forearm in slightly to clear the red sliver on the outer arm"
+    },
+    {
+     "path": "joints.r_hand",
+     "old": [
+      -0.41,
+      -0.07,
+      0.85
+     ],
+     "new": [
+      -0.395,
+      -0.07,
+      0.87
+     ],
+     "why": "move the hand up and in to match the reference hand (blue above it, red below and outside)"
+    },
+    {
+     "path": "look.bg_albedo",
+     "old": [
+      0.14,
+      0.28,
+      0.33
+     ],
+     "new": [
+      0.16,
+      0.31,
+      0.36
+     ],
+     "why": "the reference background is a lighter teal, which cuts tone error"
+    },
+    {
+     "path": "look.paper_albedo",
+     "old": 0.6,
+     "new": 0.55,
+     "why": "the render's figure is blown out to white, while the reference paper is a light grey with visible shading"
+    },
+    {
+     "path": "look.crumple",
+     "old": 1.0,
+     "new": 1.15,
+     "why": "a modest increase in facet breakup to help the edge correlation, smaller than the step rejected in round 2"
+    }
+   ],
+   "cost": 0.18824649999999998,
+   "llm_secs": 42.0,
+   "diagnosis": "The shield sits too high and leans the wrong way: there is red along its top-right edge and blue at its lower-right bottom, so it needs to drop and rotate so the bottom swings out. The crest is missing its forward-sweeping front (blue at the top-left of the helmet), the right arm and hand hang slightly too far out and too low, and the figure renders brighter and softer than the reference's grey paper on a lighter teal background.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 14071,
+    "cache_read_input_tokens": 65211,
+    "output_tokens": 3096,
+    "output_tokens_details": {
+     "thinking_tokens": 2293
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 14071,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 2871,
+      "cache_read_input_tokens": 39192,
+      "cache_creation_input_tokens": 898,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 898
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": 0.3932088535864995,
+   "best_after": 0.3932088535864995
+  },
+  {
+   "round": 4,
+   "accepted": false,
+   "loss": 0.39473779902873485,
+   "terms": {
+    "sil": 0.18549207733682216,
+    "cham": 0.0109604556541115,
+    "ssim": 0.292573397027892,
+    "edge": 0.9444182885881698,
+    "tone": 0.10082720588235294,
+    "total": 0.39473779902873485,
+    "secs": 2.51
+   },
+   "edits": [
+    {
+     "path": "shield.off",
+     "old": [
+      0.09373992968883797,
+      0.00486917726602944,
+      -0.03592219498534057
+     ],
+     "new": [
+      0.105,
+      0.00486917726602944,
+      -0.078
+     ],
+     "why": "drop the shield about 4 cm and nudge it right to clear the red at its top-left and fill the blue at its bottom-right"
+    },
+    {
+     "path": "joints.r_elbow",
+     "old": [
+      -0.30686808048001213,
+      0.03,
+      1.2656385996661805
+     ],
+     "new": [
+      -0.29,
+      0.03,
+      1.2656385996661805
+     ],
+     "why": "pull in the upper arm to clear the red rim along the outer right arm"
+    },
+    {
+     "path": "joints.r_shoulder",
+     "old": [
+      -0.21,
+      0.01771205781280361,
+      1.47
+     ],
+     "new": [
+      -0.2,
+      0.01771205781280361,
+      1.46
+     ],
+     "why": "narrow and lower the shoulder slightly to clear the red at the top-left of the shoulder"
+    },
+    {
+     "path": "joints.l_shoulder",
+     "old": [
+      0.21,
+      0.013806771219892268,
+      1.4420660133082386
+     ],
+     "new": [
+      0.21,
+      0.013806771219892268,
+      1.425
+     ],
+     "why": "lower the left shoulder line to clear the red strip from the helmet down to the shield"
+    },
+    {
+     "path": "helmet.neck_flare",
+     "old": 0.25,
+     "new": 0.2,
+     "why": "the neck guard flares wider than the reference on image-right"
+    },
+    {
+     "path": "bands.sole_w",
+     "old": 0.1,
+     "new": 0.085,
+     "why": "red at both soles means the feet are too wide"
+    },
+    {
+     "path": "joints.l_toe",
+     "old": [
+      0.34,
+      -0.1,
+      0.03
+     ],
+     "new": [
+      0.31,
+      -0.1,
+      0.03
+     ],
+     "why": "the left foot reaches too far to image-right (red at its tip)"
+    },
+    {
+     "path": "crest.len",
+     "old": 0.24,
+     "new": 0.26,
+     "why": "fill the blue at the top-front of the plume without changing the start angle that was rejected before"
+    }
+   ],
+   "cost": 0.1956378,
+   "llm_secs": 39.2,
+   "diagnosis": "The shield sits about 5 cm too high and a little too far toward the head, which leaves a red band between the helmet and the shield top and blue below its bottom edge. The right upper arm, the helmet neck flare and the left shoulder line stick out past the reference (red rims), and the feet and soles are wider than the reference's. The rejected rounds bundled tone changes with geometry, so this round changes geometry only, to isolate the silhouette gains.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 14912,
+    "cache_read_input_tokens": 66022,
+    "output_tokens": 3117,
+    "output_tokens_details": {
+     "thinking_tokens": 2346
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 14912,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 2862,
+      "cache_read_input_tokens": 40003,
+      "cache_creation_input_tokens": 928,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 928
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": 0.3869555865349368,
+   "best_after": 0.3869555865349368
+  },
+  {
+   "round": 5,
+   "accepted": false,
+   "loss": 0.39038908125974714,
+   "terms": {
+    "sil": 0.16994185618606017,
+    "cham": 0.009948759935172937,
+    "ssim": 0.28767440751332596,
+    "edge": 0.9672559001889574,
+    "tone": 0.10004308363970588,
+    "total": 0.39038908125974714,
+    "secs": 2.49
+   },
+   "edits": [
+    {
+     "path": "shield.off",
+     "old": [
+      0.08193912759832986,
+      -0.0038583274859485227,
+      -0.039344080955416014
+     ],
+     "new": [
+      0.096,
+      -0.0038583274859485227,
+      -0.066
+     ],
+     "why": "move the shield about 2.7 cm down and 1.4 cm toward image-right, which removes red at its top-left and fills blue at its bottom-right; it continues the drop that was already accepted (0 to -0.039)"
+    },
+    {
+     "path": "shield.h",
+     "old": 0.8774259368868982,
+     "new": 0.86,
+     "why": "the reference shield is slightly shorter; trimming it pulls the top edge down further without pushing the bottom past the reference knee line"
+    }
+   ],
+   "cost": 0.21553510000000003,
+   "llm_secs": 50.5,
+   "diagnosis": "The shield sits too high and too far toward the body: there is red at its top-left by the left shoulder and blue along its lower-right rim toward the knee. The other mismatches are a thin red/blue strip on the outer right arm, the feet soles, and the plume tip, but all three earlier rejected bundles included the shield drop alongside other edits, so this round only moves the shield, to test that change on its own.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 15385,
+    "cache_read_input_tokens": 66467,
+    "output_tokens": 3916,
+    "output_tokens_details": {
+     "thinking_tokens": 3471
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 15385,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 3633,
+      "cache_read_input_tokens": 40448,
+      "cache_creation_input_tokens": 956,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 956
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": 0.3854561521605075,
+   "best_after": 0.3854561521605075
+  },
+  {
+   "round": 6,
+   "accepted": true,
+   "loss": 0.37500509099023693,
+   "terms": {
+    "sil": 0.1548104515934149,
+    "cham": 0.009031157949864706,
+    "ssim": 0.282010784277018,
+    "edge": 0.9358720021738084,
+    "tone": 0.09863759957107843,
+    "total": 0.37500509099023693,
+    "secs": 2.28
+   },
+   "edits": [
+    {
+     "path": "cam.dist",
+     "old": 4.85,
+     "new": 4.92,
+     "why": "pull the camera back about 1.4% to shrink the figure evenly about the frame centre. This trims the red at the crest top, the soles, the outer arm and the shoulder without moving the shield, since every shield move has been rejected"
+    },
+    {
+     "path": "look.exposure",
+     "old": -0.9,
+     "new": -1.05,
+     "why": "bring the blown-out white paper down toward the reference's light grey to cut tone error and recover facet contrast for SSIM and edge, without changing albedo or background in a bundle"
+    },
+    {
+     "path": "bands.sole_w",
+     "old": 0.1,
+     "new": 0.09,
+     "why": "small trim to the soles, which show red beyond the reference feet; half the step that was bundled into the rejected rounds"
+    }
+   ],
+   "cost": 0.1665273,
+   "llm_secs": 25.7,
+   "diagnosis": "The model's silhouette runs a few pixels past the reference at both ends: red sits above the crest tip and below both soles, and there is a thin red rim along the outer right arm and the left shoulder line, so the figure is slightly too large in frame. The render's paper is also blown out to near-white, while the reference is mid-grey paper with visible facet shading, and that drives most of the tone and SSIM error.",
+   "usage": {
+    "input_tokens": 4,
+    "cache_creation_input_tokens": 14788,
+    "cache_read_input_tokens": 66026,
+    "output_tokens": 1711,
+    "output_tokens_details": {
+     "thinking_tokens": 1198
+    },
+    "server_tool_use": {
+     "web_search_requests": 0,
+     "web_fetch_requests": 0
+    },
+    "service_tier": "standard",
+    "cache_creation": {
+     "ephemeral_1h_input_tokens": 14788,
+     "ephemeral_5m_input_tokens": 0
+    },
+    "inference_geo": "global",
+    "iterations": [
+     {
+      "input_tokens": 2,
+      "output_tokens": 1584,
+      "cache_read_input_tokens": 40007,
+      "cache_creation_input_tokens": 800,
+      "cache_creation": {
+       "ephemeral_5m_input_tokens": 0,
+       "ephemeral_1h_input_tokens": 800
+      },
+      "type": "message"
+     }
+    ],
+    "speed": "standard",
+    "fallback_credit": null
+   },
+   "es_loss": 0.37522127028490915,
+   "best_after": 0.37500509099023693
+  }
+ ]
+}

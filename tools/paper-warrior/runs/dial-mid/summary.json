@@ -1,0 +1,29 @@
+{
+ "dial": "mid",
+ "cfg": {
+  "model": "sonnet",
+  "effort": "medium",
+  "rounds": 6,
+  "level": 1,
+  "px": 256,
+  "samples": 16,
+  "max_edits": 10,
+  "es_iters": 150,
+  "es_groups": "pose,shield,radii"
+ },
+ "start_loss": 0.47162526328131815,
+ "final_loss": 0.4119614736387571,
+ "final_terms": {
+  "sil": 0.2237134909596662,
+  "cham": 0.014371000625364828,
+  "ssim": 0.303959237844053,
+  "edge": 0.9152081040710801,
+  "tone": 0.10181047028186274,
+  "total": 0.4119614736387571,
+  "secs": 2.25
+ },
+ "llm_cost_usd": 0.5113,
+ "llm_secs": 86.2,
+ "wall_secs": 197.6,
+ "best_prefix": "r06"
+}
