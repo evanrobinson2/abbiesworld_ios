@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "tree-standing",
+  "group": "tree",
+  "replaces": "simulation-assets/organics/tree-standing.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "f1e389fb-7da4-4fac-895e-dbf850b7e427",
+      "grid_url": "https://www.midjourney.com/jobs/f1e389fb-7da4-4fac-895e-dbf850b7e427?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "f19cd8e5-0c81-4952-a1e8-5444abc18050",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:55:56.312Z",
+      "grid_done_at": "2026-10-22T22:56:14.318Z",
+      "upscale_clicked_at": "2026-10-22T22:56:24.097Z",
+      "downloaded_at": "2026-10-22T22:57:34.731Z",
+      "pick_reason": "flared roots, full rounded crown of clustered leaf clumps in two greens, whole tree in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a broadleaf shade tree, a sturdy trunk with flared roots, a full rounded crown made of a few big clustered leaf clumps in two greens, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "f8eefa5f-43b2-4df8-90d3-0a3fa92d79cc",
+      "grid_url": "https://www.midjourney.com/jobs/f8eefa5f-43b2-4df8-90d3-0a3fa92d79cc?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "dfaf9e5f-3cfa-4d76-abd7-de070cc37402",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:57:44.154Z",
+      "grid_done_at": "2026-10-22T22:58:02.159Z",
+      "upscale_clicked_at": "2026-10-22T22:58:13.279Z",
+      "downloaded_at": "2026-10-22T22:59:37.123Z",
+      "pick_reason": "three views at the same scale and spacing, flared roots and clumped crown consistent across views"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "e01b8e4c8b276cd2f296ec8d8ed1646fdf8d4209d8a41189b6de1d18f16af174",
+      "bytes": 3096551,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/f19cd8e5-0c81-4952-a1e8-5444abc18050/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "d274ef01687df6d5fd3bde8f82534742266ea74f65feb51e9db9a0aa00c9fd85",
+      "bytes": 2508564,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/dfaf9e5f-3cfa-4d76-abd7-de070cc37402/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "f3bc84c23e2cc7a62dc6914607107e7b6f68e15c617e71c0237e65ce5275020e",
+      "bytes": 767033,
+      "pixels": [
+        995,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/tree-standing [('front', 79, 1074), ('side', 1074, 1967), ('back', 1967, 2841)]"
+    },
+    "view_side.png": {
+      "sha256": "58b325dc399f5490476e1c4cda2bdb60483bc43125be4dc5c76585d0a15e9b75",
+      "bytes": 984566,
+      "pixels": [
+        893,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/tree-standing [('front', 79, 1074), ('side', 1074, 1967), ('back', 1967, 2841)]"
+    },
+    "view_back.png": {
+      "sha256": "357baba586bc5d48e3b8b84202a6c1dc711e2a6b3834d19a5d63122706a995a4",
+      "bytes": 728349,
+      "pixels": [
+        874,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/tree-standing [('front', 79, 1074), ('side', 1074, 1967), ('back', 1967, 2841)]"
+    }
+  }
+}
