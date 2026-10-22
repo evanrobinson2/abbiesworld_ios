@@ -238,6 +238,7 @@
  ],
  "validation": {
   "outline_iou": null,
+  "hero_iou": 0.715,
   "per_view": {},
   "triangle_budget": 9000,
   "within_budget": true,
@@ -282,7 +283,7 @@
  },
  "source": {
   "repo": "evanrobinson2/abbiesworld_ios",
-  "commit": "9f0461dec6bef8c38ac64847508a5ec138e33471",
+  "commit": "7e7a576e61cf31fc0c2c40f801b9444e409ca2f4",
   "path": "tools/ranch-rebuild/models/water-point"
  },
  "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",

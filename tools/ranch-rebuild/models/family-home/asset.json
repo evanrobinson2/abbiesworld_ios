@@ -339,6 +339,7 @@
  ],
  "validation": {
   "outline_iou": 0.86,
+  "hero_iou": 0.872,
   "per_view": {
    "side": 0.853,
    "back": 0.867
@@ -386,7 +387,7 @@
  },
  "source": {
   "repo": "evanrobinson2/abbiesworld_ios",
-  "commit": "529d94969e803565ac06ab0e03fa870ac363540d",
+  "commit": "7e7a576e61cf31fc0c2c40f801b9444e409ca2f4",
   "path": "tools/ranch-rebuild/models/family-home"
  },
  "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",

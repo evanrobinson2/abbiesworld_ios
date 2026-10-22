@@ -49,6 +49,7 @@ def build(name):
     mj = load(os.path.join(HERE, 'mj', name, 'provenance.json'), {})
     notes = load(os.path.join(md, 'notes.json'), {})
     stats = load(os.path.join(md, 'r', 'stats.json'), {}); score = load(os.path.join(md, 'r', 'score.json'), {})
+    hero = score.get('hero_iou', load(os.path.join(md, 'r', 'hero_check.json'), {}).get('hero_iou'))
     old = load(os.path.join(md, 'asset.json'), {})
     h = sha(glb)
     version = old.get('version', 0) + (0 if old.get('files', {}).get(f'{name}.glb', {}).get('sha256') == h else 1)
@@ -88,7 +89,7 @@ def build(name):
                      'origin': 'centre of the footprint, on the ground', 'dimensions_m': stats.get('dimensions_m'),
                      'triangles': tris, 'materials': materials, 'parts': hierarchy},
         'states': variants,
-        'validation': {'outline_iou': score.get('mean_iou'), 'per_view': {k: v.get('iou') for k, v in score.items() if isinstance(v, dict) and 'iou' in v},
+        'validation': {'outline_iou': score.get('mean_iou'), 'hero_iou': hero, 'per_view': {k: v.get('iou') for k, v in score.items() if isinstance(v, dict) and 'iou' in v},
                        'triangle_budget': budget, 'within_budget': (tris <= budget) if tris else None,
                        'good': notes.get('good', []), 'off': notes.get('off', [])},
         'exports': exports,
@@ -107,4 +108,4 @@ if __name__ == '__main__':
     for n in names:
         m = build(n)
         json.dump(m, open(os.path.join(HERE, 'models', n, 'asset.json'), 'w'), indent=1, ensure_ascii=False)
-        print(n, 'v', m['version'], m['geometry']['triangles'], m['validation']['outline_iou'])
+        print(n, 'v', m['version'], m['geometry']['triangles'], m['validation']['outline_iou'], m['validation']['hero_iou'])

@@ -310,6 +310,7 @@
  ],
  "validation": {
   "outline_iou": 0.747,
+  "hero_iou": 0.73,
   "per_view": {
    "front": 0.717,
    "side": 0.767,
@@ -357,7 +358,7 @@
  },
  "source": {
   "repo": "evanrobinson2/abbiesworld_ios",
-  "commit": "cee1065df10a99e219a66190b7e9d8a42b9502d0",
+  "commit": "7e7a576e61cf31fc0c2c40f801b9444e409ca2f4",
   "path": "tools/ranch-rebuild/models/feed-store"
  },
  "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
