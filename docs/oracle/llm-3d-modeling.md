@@ -140,3 +140,7 @@ After each asset, look for edits that recur across parts (for example "hemmed pl
 - Which second judge family can we call from the cloud container? Without one, the "different family" de-bias step falls back to Haiku vs Sonnet, which is weaker.
 - Can DINOv2 run on CPU fast enough inside the ES loop, or only at accept/reject time? Likely accept/reject only.
 - How much do generated side views hallucinate for stylized papercraft? Needs one test on the helmet before trusting it.
+
+## Replay result (2026-10-22)
+
+We ran the replay test from section 2 (`tools/paper-helmet/lossv3.py`, results in `tools/paper-helmet/out/v3/RESULTS.md`). Loss v3 behaves as a critic should: Sonnet got all 9 clear-gap controls right and called identical renders "same", and Haiku got 8 of 9. Allowing a "same" answer and taking a majority of 3 checklist answers were both necessary. But v3 still accepted none of the Opus rounds, because the judges saw no visible improvement in them. Opus diagnoses correctly but sets parameters too timidly to produce the change it describes. So the next fix is LL3M's verifier step (check that the targeted checklist item flipped, and if not, scale the edit up) rather than more loss work. The developability term separated crumple and noise from clean folds cleanly and should replace the style term.
