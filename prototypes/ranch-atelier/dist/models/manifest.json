@@ -1,0 +1,238 @@
+{
+ "updated": "2026-10-22",
+ "models": [
+  {
+   "id": "cuirass",
+   "name": "Cuirass",
+   "group": "Paper warrior \u00b7 props",
+   "subject": "Segmented chest armour (lorica) with shoulder guards",
+   "orbit": [
+    -8,
+    65
+   ],
+   "outline": 0.915,
+   "status": "good",
+   "builder": "Six overlapping hoops for the torso bands, front and back chest plates with a neck scoop, and three stepped guard plates over each shoulder.",
+   "good": [
+    "Outline and height match closely: 91% of the outline overlaps.",
+    "The stacked hoops read as lorica bands."
+   ],
+   "off": [
+    "The chest plates split down the middle; your cuirass is closed at the front.",
+    "The shoulder guards are too flat and too square.",
+    "Your hoops are deeper and more stepped than mine."
+   ],
+   "loss_before": 0.292,
+   "loss_after": 0.277,
+   "terms": {
+    "silhouette": 0.08546103982008202,
+    "edge": 0.014100013760069469,
+    "ssim": 0.24333433035043295,
+    "colour": 0.07536625526223222,
+    "style": 0.37666355906903093
+   },
+   "triangles": 2768,
+   "size_m": [
+    0.438,
+    0.268,
+    0.568
+   ],
+   "minutes": 14,
+   "files": {
+    "ref": "ref.jpg",
+    "render": "render.jpg",
+    "overlay": "overlay.png",
+    "model": "model.glb"
+   },
+   "source": "tools/paper-warrior/viewer/cuirass.glb",
+   "made": "Blender 5.2 (bpy) in the cloud, procedural Python, no third-party meshes or textures",
+   "date": "2026-10-22"
+  },
+  {
+   "id": "pauldrons",
+   "name": "Pauldrons",
+   "group": "Paper warrior \u00b7 props",
+   "subject": "A pair of layered shoulder guards",
+   "orbit": [
+    -55,
+    78
+   ],
+   "outline": 0.722,
+   "status": "weak",
+   "builder": "Three nested arch plates per shoulder, each with a rolled rim, stacked down the arm.",
+   "good": [
+    "Three nested plates per side, as in your photo.",
+    "Rolled rims on each plate."
+   ],
+   "off": [
+    "One cap drifts away from its pair, so the outline only overlaps 72%.",
+    "The domes are too flat at the crown.",
+    "Mine are thinner sheets; yours look thicker and softer."
+   ],
+   "loss_before": 0.317,
+   "loss_after": 0.291,
+   "terms": {
+    "silhouette": 0.2778561996266108,
+    "edge": 0.020019724893728216,
+    "ssim": 0.23545227771886412,
+    "colour": 0.08316267424938725,
+    "style": 0.1487132507826441
+   },
+   "triangles": 808,
+   "size_m": [
+    0.673,
+    0.252,
+    0.171
+   ],
+   "minutes": 13,
+   "files": {
+    "ref": "ref.jpg",
+    "render": "render.jpg",
+    "overlay": "overlay.png",
+    "model": "model.glb"
+   },
+   "source": "tools/paper-warrior/viewer/pauldrons.glb",
+   "made": "Blender 5.2 (bpy) in the cloud, procedural Python, no third-party meshes or textures",
+   "date": "2026-10-22"
+  },
+  {
+   "id": "belt",
+   "name": "Belt",
+   "group": "Paper warrior \u00b7 props",
+   "subject": "A plain belt with a rectangular buckle",
+   "orbit": [
+    -24,
+    63
+   ],
+   "outline": 0.771,
+   "status": "partial",
+   "builder": "One faceted band in a loop, a buckle frame on the front and a short strap tail.",
+   "good": [
+    "The ring shape and colour are right.",
+    "Lowest colour error of the five."
+   ],
+   "off": [
+    "The band is too thin and tilted, so the outline overlaps 77%.",
+    "The buckle is an H shape, not a rectangle with a tongue.",
+    "The strap tail does not show."
+   ],
+   "loss_before": 0.313,
+   "loss_after": 0.309,
+   "terms": {
+    "silhouette": 0.2285178236397749,
+    "edge": 0.008200788269390092,
+    "ssim": 0.1275351570066937,
+    "colour": 0.036976693346609475,
+    "style": 0.530108905609263
+   },
+   "triangles": 376,
+   "size_m": [
+    0.437,
+    0.366,
+    0.045
+   ],
+   "minutes": 12,
+   "files": {
+    "ref": "ref.jpg",
+    "render": "render.jpg",
+    "overlay": "overlay.png",
+    "model": "model.glb"
+   },
+   "source": "tools/paper-warrior/viewer/belt.glb",
+   "made": "Blender 5.2 (bpy) in the cloud, procedural Python, no third-party meshes or textures",
+   "date": "2026-10-22"
+  },
+  {
+   "id": "sandals",
+   "name": "Sandals",
+   "group": "Paper warrior \u00b7 props",
+   "subject": "A pair of strappy sandals",
+   "orbit": [
+    -34,
+    55
+   ],
+   "outline": 0.86,
+   "status": "good",
+   "builder": "A sole outline (heel, ball and toe) with a raised lip, a heel loop and crossing straps over the forefoot.",
+   "good": [
+    "The layout is right: two sandals, heel loops and forefoot straps.",
+    "86% of the outline overlaps."
+   ],
+   "off": [
+    "The soles are too thick.",
+    "The straps are chunky and crumpled; yours are clean, smooth loops."
+   ],
+   "loss_before": 0.298,
+   "loss_after": 0.279,
+   "terms": {
+    "silhouette": 0.14033302881820442,
+    "edge": 0.016955625310635006,
+    "ssim": 0.3033127125347168,
+    "colour": 0.08458094157078341,
+    "style": 0.22984844873315133
+   },
+   "triangles": 500,
+   "size_m": [
+    0.261,
+    0.33,
+    0.089
+   ],
+   "minutes": 14,
+   "files": {
+    "ref": "ref.jpg",
+    "render": "render.jpg",
+    "overlay": "overlay.png",
+    "model": "model.glb"
+   },
+   "source": "tools/paper-warrior/viewer/sandals.glb",
+   "made": "Blender 5.2 (bpy) in the cloud, procedural Python, no third-party meshes or textures",
+   "date": "2026-10-22"
+  },
+  {
+   "id": "greaves",
+   "name": "Greaves",
+   "group": "Paper warrior \u00b7 props",
+   "subject": "A pair of faceted shin guards",
+   "orbit": [
+    -18,
+    72
+   ],
+   "outline": 0.845,
+   "status": "partial",
+   "builder": "A faceted front shell and a smaller back plate for each shin, tapering to the ankle with a calf swell.",
+   "good": [
+    "Closest of the five: right shape and facet size.",
+    "85% of the outline overlaps."
+   ],
+   "off": [
+    "The back plate edge does not show from your angle.",
+    "The colour is a little too white."
+   ],
+   "loss_before": 0.205,
+   "loss_after": 0.2,
+   "terms": {
+    "silhouette": 0.1546748561957687,
+    "edge": 0.013219654619745965,
+    "ssim": 0.1699655941372289,
+    "colour": 0.06569487350785222,
+    "style": 0.12553033016110157
+   },
+   "triangles": 1168,
+   "size_m": [
+    0.351,
+    0.144,
+    0.414
+   ],
+   "minutes": 14,
+   "files": {
+    "ref": "ref.jpg",
+    "render": "render.jpg",
+    "overlay": "overlay.png",
+    "model": "model.glb"
+   },
+   "source": "tools/paper-warrior/viewer/greaves.glb",
+   "made": "Blender 5.2 (bpy) in the cloud, procedural Python, no third-party meshes or textures",
+   "date": "2026-10-22"
+  }
+ ]
+}
