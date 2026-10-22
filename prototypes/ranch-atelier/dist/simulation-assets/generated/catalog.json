@@ -1,0 +1,226 @@
+[
+  {
+    "id": "kit-wheelbarrow-with-pumpkins",
+    "label": "Wheelbarrow with pumpkins",
+    "category": "supplies",
+    "subject": "kit-wheelbarrow-with-pumpkins",
+    "state": "complete",
+    "json": "/simulation-assets/generated/kit-wheelbarrow-with-pumpkins.json",
+    "glb": "/simulation-assets/generated/kit-wheelbarrow-with-pumpkins.glb",
+    "triangles": 652,
+    "simulationMapping": {
+      "anchors": [
+        {
+          "name": "work_spot",
+          "at": [
+            0,
+            -1,
+            0
+          ]
+        },
+        {
+          "name": "drop_off",
+          "at": [
+            0,
+            0,
+            0.8
+          ]
+        }
+      ],
+      "source": "asset-factory brick kit",
+      "note": "Anchors are Blender Z-up meters (x, y, z); the part JSON is Y-up (x, z, -y)."
+    }
+  },
+  {
+    "id": "kit-hay-bale-stack",
+    "label": "Hay bale stack",
+    "category": "supplies",
+    "subject": "kit-hay-bale-stack",
+    "state": "complete",
+    "json": "/simulation-assets/generated/kit-hay-bale-stack.json",
+    "glb": "/simulation-assets/generated/kit-hay-bale-stack.glb",
+    "triangles": 84,
+    "simulationMapping": {
+      "anchors": [
+        {
+          "name": "work_spot",
+          "at": [
+            0.7,
+            0,
+            0
+          ]
+        }
+      ],
+      "source": "asset-factory brick kit",
+      "note": "Anchors are Blender Z-up meters (x, y, z); the part JSON is Y-up (x, z, -y)."
+    }
+  },
+  {
+    "id": "kit-roadside-mailbox",
+    "label": "Roadside mailbox",
+    "category": "supplies",
+    "subject": "kit-roadside-mailbox",
+    "state": "complete",
+    "json": "/simulation-assets/generated/kit-roadside-mailbox.json",
+    "glb": "/simulation-assets/generated/kit-roadside-mailbox.glb",
+    "triangles": 108,
+    "simulationMapping": {
+      "anchors": [
+        {
+          "name": "drop_off",
+          "at": [
+            0,
+            0.4,
+            0
+          ]
+        },
+        {
+          "name": "mailbox_door",
+          "at": [
+            0,
+            0.12,
+            1.33
+          ]
+        }
+      ],
+      "source": "asset-factory brick kit",
+      "note": "Anchors are Blender Z-up meters (x, y, z); the part JSON is Y-up (x, z, -y)."
+    }
+  },
+  {
+    "id": "kit-beehive-box-on-stand",
+    "label": "Beehive box on stand",
+    "category": "supplies",
+    "subject": "kit-beehive-box-on-stand",
+    "state": "complete",
+    "json": "/simulation-assets/generated/kit-beehive-box-on-stand.json",
+    "glb": "/simulation-assets/generated/kit-beehive-box-on-stand.glb",
+    "triangles": 176,
+    "simulationMapping": {
+      "anchors": [
+        {
+          "name": "entrance",
+          "at": [
+            0,
+            0.37,
+            0.67
+          ]
+        },
+        {
+          "name": "work_spot",
+          "at": [
+            0,
+            0.7,
+            0
+          ]
+        }
+      ],
+      "source": "asset-factory brick kit",
+      "note": "Anchors are Blender Z-up meters (x, y, z); the part JSON is Y-up (x, z, -y)."
+    }
+  },
+  {
+    "id": "kit-stone-well-with-roof-and-bucket",
+    "label": "Stone well with roof and bucket",
+    "category": "supplies",
+    "subject": "kit-stone-well-with-roof-and-bucket",
+    "state": "complete",
+    "json": "/simulation-assets/generated/kit-stone-well-with-roof-and-bucket.json",
+    "glb": "/simulation-assets/generated/kit-stone-well-with-roof-and-bucket.glb",
+    "triangles": 268,
+    "simulationMapping": {
+      "anchors": [
+        {
+          "name": "water_surface",
+          "at": [
+            0,
+            0,
+            0.72
+          ]
+        },
+        {
+          "name": "work_spot",
+          "at": [
+            0,
+            -0.8,
+            0
+          ]
+        },
+        {
+          "name": "drop_off",
+          "at": [
+            0,
+            -0.95,
+            0.3
+          ]
+        }
+      ],
+      "source": "asset-factory brick kit",
+      "note": "Anchors are Blender Z-up meters (x, y, z); the part JSON is Y-up (x, z, -y)."
+    }
+  },
+  {
+    "id": "kit-farm-tractor",
+    "label": "Farm tractor",
+    "category": "supplies",
+    "subject": "kit-farm-tractor",
+    "state": "complete",
+    "json": "/simulation-assets/generated/kit-farm-tractor.json",
+    "glb": "/simulation-assets/generated/kit-farm-tractor.glb",
+    "triangles": 644,
+    "simulationMapping": {
+      "anchors": [
+        {
+          "name": "seat",
+          "at": [
+            0,
+            -0.2,
+            1.05
+          ]
+        },
+        {
+          "name": "hitch",
+          "at": [
+            0,
+            -1.15,
+            0.5
+          ]
+        }
+      ],
+      "source": "asset-factory brick kit",
+      "note": "Anchors are Blender Z-up meters (x, y, z); the part JSON is Y-up (x, z, -y)."
+    }
+  },
+  {
+    "id": "kit-water-trough",
+    "label": "Water trough",
+    "category": "supplies",
+    "subject": "kit-water-trough",
+    "state": "complete",
+    "json": "/simulation-assets/generated/kit-water-trough.json",
+    "glb": "/simulation-assets/generated/kit-water-trough.glb",
+    "triangles": 144,
+    "simulationMapping": {
+      "anchors": [
+        {
+          "name": "water_surface",
+          "at": [
+            0,
+            0,
+            0.6
+          ]
+        },
+        {
+          "name": "drink_spot",
+          "at": [
+            0,
+            0.6,
+            0
+          ]
+        }
+      ],
+      "source": "asset-factory brick kit",
+      "note": "Anchors are Blender Z-up meters (x, y, z); the part JSON is Y-up (x, z, -y)."
+    }
+  }
+]

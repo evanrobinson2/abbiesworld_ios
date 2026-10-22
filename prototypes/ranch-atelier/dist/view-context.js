@@ -100,7 +100,7 @@
       busy = false;
       if ((changed || !imageCapturedAt || Date.now() - Date.parse(imageCapturedAt) > 30000) && !paused && !document.hidden && !captureBusy && Date.now() - captureAttemptAt > 10000) {
         captureBusy = true; captureAttemptAt = Date.now();
-        capture().catch(() => { captureError = 'Image capture failed or timed out; structured context remains available'; lastImage = null; imageCapturedAt = null; captureLibrary = null; })
+        capture().catch(error => { captureError = 'Image capture failed or timed out; structured context remains available: ' + String(error?.message || 'unknown capture error').slice(0,160); lastImage = null; imageCapturedAt = null; captureLibrary = null; })
           .finally(() => { captureBusy = false; send(true); });
       }
       if (forcePending) { forcePending = false; dirty = true; send(true); }

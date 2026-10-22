@@ -14,7 +14,10 @@ class RouteQueue{
  pop(){const a=this.items,result=a[0],last=a.pop();if(a.length){let i=0;while(i*2+1<a.length){let c=i*2+1;if(c+1<a.length&&this.before(a[c+1],a[c]))c++;if(!this.before(a[c],last))break;a[i]=a[c];i=c;}a[i]=last;}return result;}
 }
 // A bounded visibility-checked grid repairs only obstructed stretches of the authored path.
-function detourImpl(a,b,r,obstacles,bounds){if(!clearPoint(a,r,obstacles,bounds)||!clearPoint(b,r,obstacles,bounds))return null;if(clearSegment(a,b,r,obstacles,bounds))return [b];const step=.7,key=(x,z)=>x+','+z,open=new RouteQueue(),seen=new Map([[key(0,0),0]]);let visits=0;open.push({x:0,z:0,g:0,f:distance(a,b)});
+// Every point the search can test lies within distance(a,b)+35 m of a, so obstacles
+// beyond that reach can never overlap and are dropped once per search.
+function nearObstacles(a,reach,r,obstacles){const limit=reach+r+1e-6;return obstacles.filter(o=>{const extent=o.radius!==undefined?o.radius:Math.hypot(o.w,o.d)/2;return Math.abs(o.x-a.x)<=limit+extent&&Math.abs(o.z-a.z)<=limit+extent;});}
+function detourImpl(a,b,r,obstacles,bounds){obstacles=nearObstacles(a,distance(a,b)+35+1,r,obstacles);if(!clearPoint(a,r,obstacles,bounds)||!clearPoint(b,r,obstacles,bounds))return null;if(clearSegment(a,b,r,obstacles,bounds))return [b];const step=.7,key=(x,z)=>x+','+z,open=new RouteQueue(),seen=new Map([[key(0,0),0]]);let visits=0;open.push({x:0,z:0,g:0,f:distance(a,b)});
  while(open.length&&visits++<6000){const n=open.pop(),p={x:a.x+n.x*step,z:a.z+n.z*step};if(distance(p,b)<step*1.5&&clearSegment(p,b,r,obstacles,bounds)){const route=[b];for(let q=n;q.parent;q=q.parent)route.unshift({x:a.x+q.x*step,z:a.z+q.z*step});return route;}
  for(const [dx,dz]of [[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]]){const x=n.x+dx,z=n.z+dz,q={x:a.x+x*step,z:a.z+z*step},g=n.g+Math.hypot(dx,dz)*step,k=key(x,z);if(g>distance(a,b)+35||g>=(seen.get(k)??Infinity)||!clearSegment(p,q,r,obstacles,bounds))continue;seen.set(k,g);open.push({x,z,g,f:g+distance(q,b),parent:n});}}
  return null;}
@@ -29,7 +32,17 @@ function avoidStepImpl(position,target,step,r,obstacles,peers=[],bounds=()=>true
 
 export function avoidStep(...args){return perf.measure('nav.avoidStep',()=>avoidStepImpl(...args));}
 
-export function detour(...args){return perf.measure('nav.detour',()=>detourImpl(...args));}
+// The same search with the same obstacles and bounds always fails the same way.
+// A walker that cannot route retries from the same spot every tick, so recent
+// failures are remembered (exact inputs only) instead of re-running the grid.
+const failedSearches=new WeakMap();let detourCalls=0;
+function failures(obstacles,bounds){let byBounds=failedSearches.get(obstacles);if(!byBounds)failedSearches.set(obstacles,byBounds=new WeakMap());let entry=byBounds.get(bounds);if(!entry||entry.count!==obstacles.length)byBounds.set(bounds,entry={count:obstacles.length,keys:new Map()});return entry.keys;}
+export function detour(a,b,r,obstacles,bounds=()=>true){
+ const known=failures(obstacles,bounds),key=a.x+','+a.z+','+b.x+','+b.z+','+r,seen=known.get(key);detourCalls++;
+ if(seen!==undefined&&detourCalls-seen<4000)return null;
+ const route=perf.measure('nav.detour',()=>detourImpl(a,b,r,obstacles,bounds));
+ if(route)known.delete(key);else{if(known.size>=512)known.delete(known.keys().next().value);known.set(key,detourCalls);}
+ return route;}
 
 
 
