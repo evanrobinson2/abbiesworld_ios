@@ -37,3 +37,10 @@ Order: buildings, animals, trees, props, supplies, plants (longest builds first)
 - Buildings also have construction stages (`planned`, `foundation`, `frame`, `roof`, `complete`). Tag every object with
   a `stage` custom property and the converter writes all five.
 - Regional plants and trees and garden props are plain GLBs, scaled in game to a set height.
+
+## Charming style (added 2026-10-22)
+Evan: "I LOVE THAT YOU ARE DOING NORMAL AND CHARMING MODE." Every asset also gets a charming version (the challenge's
+whimsical style B: storybook toy art, exaggerated soft proportions, a bit of tilt and lean, still clearly the same
+object and still a working game piece, no faces pasted on objects except the animals'). Prompts are in
+`prompts-charming.json`, named `<asset>-charming`, run after the normal set. The tile will get a style switch between
+the two sets.
