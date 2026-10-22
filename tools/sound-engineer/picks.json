@@ -1,7 +1,7 @@
 {
- "updated": "2026-10-22T22:15:13.848Z",
+ "updated": "2026-10-22T22:17:01.024Z",
  "slots": 379,
- "filled": 364,
+ "filled": 363,
  "picks": {
   "chicks": {
    "slot": "chicks",
@@ -27991,53 +27991,10 @@
   },
   "fanfare": {
    "slot": "fanfare",
-   "takes": [
-    {
-     "ref": "gdc2019/1",
-     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Victory Vegas Motorcycle/Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Onboard,Start,Drive,Fast Speed,Punch It.wav",
-     "trim": [
-      0,
-      6
-     ],
-     "fade": 0.12,
-     "duration": 33.49,
-     "cutShort": true
-    }
-   ],
-   "candidates": [
-    {
-     "ref": "gdc2019/1",
-     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Victory Vegas Motorcycle/Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Onboard,Start,Drive,Fast Speed,Punch It.wav",
-     "title": "Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Onboard,Start,Drive,Fast Speed,Punch It",
-     "publisher": "Airborne Sound",
-     "category": "Other",
-     "score": 9.4,
-     "duration": 33.49,
-     "why": "name has \"victory\""
-    },
-    {
-     "ref": "gdc2019/1",
-     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Victory Vegas Motorcycle/Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Start,Idle,Off.wav",
-     "title": "Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Start,Idle,Off",
-     "publisher": "Airborne Sound",
-     "category": "Other",
-     "score": 9.4,
-     "duration": 35.14,
-     "why": "name has \"victory\""
-    },
-    {
-     "ref": "gdc2019/1",
-     "path": "Sonniss.com - GDC 2019 - Game Audio Bundle Part 1of8/Airborne Sound - Victory Vegas Motorcycle/Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Up,30 kph,By,Off,2.wav",
-     "title": "Motorcycle,Victory Vegas,2004,96 Cubic Inch,1507 CC,Up,30 kph,By,Off,2",
-     "publisher": "Airborne Sound",
-     "category": "Other",
-     "score": 4.4,
-     "duration": 12.26,
-     "why": "name has \"victory\""
-    }
-   ],
+   "takes": [],
+   "candidates": [],
    "notes": [
-    "Picked from 3 matching files; best name match with a clean take."
+    "Nothing suitable in the index yet."
    ],
    "date": "2026-10-22"
   },
