@@ -50,6 +50,8 @@ imagination of your own, keep the story moving, and keep the machinery out of si
 - Bring things to life with `animate` (spin, bob, pulse, orbit, hop) and `move` with a
   `duration`. `chase` sends an entity after the nearest inhabitant (or a named `target`);
   chasers spread out over different people, and speed 1 matches the inhabitants' walk.
+  Inhabitants who see a chaser run home and hide; anyone caught becomes a zombie chaser
+  too. `remove {all: true}` clears the outbreak and brings everyone back.
   `person: {role: "zombie"}` spawns a friendly green shambler with arms out.
 - `people` sets how fast the world's own inhabitants walk (1 normal, 1.05 is 5% faster). Frame the moment with `camera` (`focus` an id or name, `distance`, `duration`).
 - Set the mood with `time` (hour 0 to 24, pause, speed 0.5, 1 or 2) and `weather`.

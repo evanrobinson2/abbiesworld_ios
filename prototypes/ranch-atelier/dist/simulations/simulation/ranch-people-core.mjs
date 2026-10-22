@@ -12,8 +12,12 @@ export function stepPeople(context,dt,animationStep,animationTime,needsDt=dt){
  const {state,workers,places,poiPlaces,poiNeighbors,poiOccupancy,decisions,layoutVersion,assembly,inside,obstacles,inBoard,heightAt,source,pens,network,outsideEntry,poseOwnership,bench}=context;
  const humanId=w=>'human:'+w.person.id;const claimedPlace=w=>['activity-route','activity-doing'].includes(w.phase)?w.agenda?.placeId:null;
  function moveHome(w,dt,activity){
-  if(w.phase!=='offsite-route'&&w.phase!=='offsite'){cancelJob(state,w.job);w.job=null;w.waterCarry.visible=w.feedCarry.visible=false;if(!setDestination(w,w.home?outsideEntry(w.home):w.position,'offsite-route'))return;}
-  if(w.phase==='offsite-route'){const target=w.path[w.index];if(target){const next=avoidStep(w.position,target,dt*4*(state.walkPace??1),.3,obstacles,workers.filter(q=>q!==w&&q.body.visible).map(q=>({...q.position,radius:.3})),inBoard);const dx=next.x-w.position.x,dz=next.z-w.position.z,moved=Math.hypot(dx,dz);w.position=next;if(moved)w.body.rotation.y=Math.atan2(dx,dz);animateCorePerson(w,{text:'Walking home'},moved,animationStep,heightAt);if(Math.hypot(target.x-next.x,target.z-next.z)<.1)w.index++;}if(w.index>=w.path.length||w.index===w.path.length-1&&Math.hypot(w.position.x-w.path.at(-1).x,w.position.z-w.path.at(-1).z)<.8){w.phase='offsite';w.body.visible=false;w.destination=null;}}
+  if(w.phase!=='offsite-route'&&w.phase!=='offsite'){cancelJob(state,w.job);w.job=null;w.waterCarry.visible=w.feedCarry.visible=false;w.homeStuck=0;if(!setDestination(w,w.home?outsideEntry(w.home):w.position,'offsite-route')){
+   // No free route to the door (often a crowd at it): someone already close just goes in.
+   const door=w.home?outsideEntry(w.home):w.position;if(Math.hypot(w.position.x-door.x,w.position.z-door.z)<3){w.phase='offsite';w.body.visible=false;w.destination=null;}return;}}
+  if(w.phase==='offsite-route'){const target=w.path[w.index];if(target){const next=avoidStep(w.position,target,dt*4*(state.walkPace??1),.3,obstacles,workers.filter(q=>q!==w&&q.body.visible).map(q=>({...q.position,radius:.3})),inBoard);const dx=next.x-w.position.x,dz=next.z-w.position.z,moved=Math.hypot(dx,dz);w.position=next;if(moved)w.body.rotation.y=Math.atan2(dx,dz);animateCorePerson(w,{text:'Walking home'},moved,animationStep,heightAt);if(Math.hypot(target.x-next.x,target.z-next.z)<.1)w.index++;
+   // Blocked at the doorstep by others heading in: after a moment, step inside anyway.
+   w.homeStuck=moved<dt*.2?(w.homeStuck||0)+dt:0;}if(w.homeStuck>2&&w.path.length&&Math.hypot(w.position.x-w.path.at(-1).x,w.position.z-w.path.at(-1).z)<3||w.index>=w.path.length||w.index===w.path.length-1&&Math.hypot(w.position.x-w.path.at(-1).x,w.position.z-w.path.at(-1).z)<.8){w.phase='offsite';w.body.visible=false;w.destination=null;}}
   w.body.userData.activity=w.phase==='offsite'?activity:'Heading home · '+activity.toLowerCase();
  }
  function setDestination(w,target,phase){
@@ -26,8 +30,10 @@ export function stepPeople(context,dt,animationStep,animationTime,needsDt=dt){
  }
  function chooseAgenda(w){
   const calendar=state.calendar??{day:1,hour:12};
-  const signature=JSON.stringify([calendar.day,agendaWindow(calendar.hour),state.weather,state.season?.index,w.person.age,w.person.alive,w.person.occupation,w.required,w.phase,w.activityDone,w.person.poiVisitDay,w.person.poiUnavailableDay,poiOccupancy.version,layoutVersion]);
+  const hiding=!!state.threats?.includes(w.person.id);
+  const signature=JSON.stringify([hiding,calendar.day,agendaWindow(calendar.hour),state.weather,state.season?.index,w.person.age,w.person.alive,w.person.occupation,w.required,w.phase,w.activityDone,w.person.poiVisitDay,w.person.poiUnavailableDay,poiOccupancy.version,layoutVersion]);
   return decisions.read(w.person.id,signature,state.seconds,1.5,()=>{
+   if(hiding)return {id:'cover',text:'Hiding indoors',indoors:true};
    let agenda=w.person.visiting?(w.required?{id:'care',text:'Caring for livestock'}:{id:'off-duty',text:'Off duty · visiting farmhand',indoors:true}):schedule(w.person,calendar,state.weather);
    if(agenda.id==='apples'&&state.season?.index!==2)agenda={id:'garden',text:state.season?.index===3?'Tending the compost':'Tending the kitchen garden',role:'field'};
    if(['activity-route','activity-doing'].includes(w.phase)&&!w.activityDone&&w.agenda&&!['rain','hail'].includes(state.weather)&&calendar.hour<21)agenda=w.agenda;
@@ -40,7 +46,10 @@ export function stepPeople(context,dt,animationStep,animationTime,needsDt=dt){
   });
  }
 
-for(const w of workers){if(poseOwnership.owns(humanId(w)))continue;try{let moved=0;
+for(const w of workers){if(poseOwnership.owns(humanId(w)))continue;
+  // Holodeck play: someone taken by a zombie leaves the scene until the play layer lets them go.
+  if(state.eaten?.includes(w.person.id)){if(w.job){cancelJob(state,w.job);w.job=null;}w.body.visible=false;continue;}
+  try{let moved=0;
    w.person.poiWellbeing=Math.max(0,(w.person.poiWellbeing||0)-needsDt*.0005);const agenda=chooseAgenda(w);w.agenda=agenda;const activity=agenda.id==='care'?'Ranch work':agenda.text;
    if(!agenda.indoors&&agenda.id!=='care'&&!w.job){const anchor=places.find(p=>agenda.placeId?p.id===agenda.placeId:agenda.species?p.species===agenda.species:p.role===agenda.role);if(anchor){if(w.activityKey!==agenda.id){w.phase='idle';w.activityKey=agenda.id;w.activityDone=false;}if(w.phase!=='activity-route'&&w.phase!=='activity-doing'){w.body.visible=true;const seat=agenda.id==='social'?bench:null;const activityPoint=seat?{x:seat.x,z:seat.z+1}:['playground','field'].includes(anchor.role)?{x:anchor.world.x-1,z:anchor.world.z+1.45}:outsideEntry(anchor);if(!setDestination(w,activityPoint,'activity-route')){if(agenda.id==='sightseeing')w.person.poiUnavailableDay=state.calendar?.day??1;w.body.userData.activity='Route blocked';continue;}}if(w.phase==='activity-route'){const target=w.path[w.index];if(target){const next=avoidStep(w.position,target,dt*1.6*(state.walkPace??1),.3,obstacles,workers.filter(q=>q!==w&&q.body.visible).map(q=>({...q.position,radius:.3})),inBoard);const dx=next.x-w.position.x,dz=next.z-w.position.z,d=Math.hypot(dx,dz);if(agenda.id==='sightseeing'){w.poiStuck=d<.001?(w.poiStuck||0)+dt:0;if(w.poiStuck>12){w.person.poiUnavailableDay=state.calendar?.day??1;w.phase='idle';w.activityKey=null;w.path=[];w.destination=null;w.poiStuck=0;continue;}}if(d)w.body.rotation.y=Math.atan2(dx,dz);w.position=next;animateCorePerson(w,{text:'Walking'},d,animationStep,heightAt);if(Math.hypot(target.x-next.x,target.z-next.z)<.1)w.index++;}if(w.index>=w.path.length){w.phase='activity-doing';w.activityTimer=0;}}else{w.activityTimer+=dt;animateCorePerson(w,{text:agenda.text,phase:'work'},0,animationStep,heightAt);if(['play','garden','eggs','groom','apples'].includes(agenda.id)){const beat=Math.sin(animationTime*2);w.workGesture={left:-.8+beat*.2,right:-.8-beat*.2,head:.25};}if(w.activityTimer>(agenda.id==='sightseeing'?POI_RULES.visitSeconds:6)&&!w.activityDone){if(agenda.id==='sightseeing'){completeSightseeing(state,w.person,state.calendar?.day??1,w.activityTimer,anchor.id);w.body.userData.routeVisits++;}w.activityDone=true;practice(w.person,agenda.id);if(w.person.storyId){experience(state.lifeStories,w.person.storyId,'practice',state.calendar?.year??0,{activity:agenda.id});state.lifeStories.entities[w.person.storyId].consequences.skills={...w.person.skills};}state.household[agenda.id]=(state.household[agenda.id]||0)+1;}}w.body.userData.activity=w.phase==='activity-route'?'Walking to '+anchor.label.toLowerCase():agenda.text;continue;}}
    if(['activity-route','activity-doing'].includes(w.phase)){w.phase='idle';w.activityKey=null;}

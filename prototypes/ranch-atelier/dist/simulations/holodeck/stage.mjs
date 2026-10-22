@@ -20,7 +20,7 @@ export function createStage(ctx,{room,relay}){
  let worldCache={at:0,list:[]};
  function worldThings(){
   if(performance.now()-worldCache.at<1000)return worldCache.list;
-  const people=(ctx.people?.()||[]).slice(0,40).map(p=>({name:p.name,kind:'person',doing:p.doing,position:arr(p.object.getWorldPosition(new T.Vector3())),object:p.object})),things=[],root=ctx.world();
+  const people=(ctx.people?.()||[]).slice(0,40).map(p=>({id:p.id,person:p.person,name:p.name,kind:'person',doing:p.doing,position:arr(p.object.getWorldPosition(new T.Vector3())),object:p.object})),things=[],root=ctx.world();
   root?.traverse(o=>{const d=o.userData;if(d?.person||!d?.inspect?.title||!o.visible||things.length>=40)return;things.push({name:String(d.inspect.title),kind:'thing',position:arr(o.getWorldPosition(new T.Vector3())),object:o});});
   return (worldCache={at:performance.now(),list:[...people,...things]}).list;
  }
@@ -62,6 +62,7 @@ export function createStage(ctx,{room,relay}){
  async function build(a){
   const unit=personHeight();
   if(a.shape){const m=new T.Mesh(GEO[a.shape](),new T.MeshStandardMaterial({color:a.color||'#f2b134',roughness:.55,metalness:.05}));m.castShadow=m.receiveShadow=true;const g=new T.Group();g.add(m);g.userData.baseScale=unit;return g;}
+  if(a.from){const z=structuredClone(a.from);z.appearance={...z.appearance,skin:'#9cbf7a'};const body=makePerson(z),g=new T.Group();g.add(body);g.userData.baseScale=a.fromScale;g.userData.rig=body.userData;const [l,,r]=body.userData.limbs;l.rotation.x=r.rotation.x=-1.45;return g;}
   if(a.person){const n=entities.size;const role=a.person.role,child=role==='child',zombie=role==='zombie';const person={index:n,appearance:{build:1,height:child?1.2:1.7,skin:zombie?['#9cbf7a','#8fb37f','#a7c48a'][n%3]:['#e8b98f','#c68c5e','#8d5a3b','#f3d0b0'][n%4],hair:zombie?'#4b4a3a':['#3b2a1e','#a0522d','#e2c16b','#222'][n%4],hairStyle:n%3},wardrobe:{top:a.color||(zombie?['#6f6a8a','#7a5b4a','#56706a'][n%3]:'#4f7cac'),bottom:zombie?'#4a4a3e':'#4a4036',hat:role==='rancher'?'brim':'none',accessory:'none'}};const body=makePerson(person),g=new T.Group();g.add(body);g.userData.baseScale=unit/1.75;g.userData.rig=body.userData;if(zombie){const [l,,r]=body.userData.limbs;l.rotation.x=r.rotation.x=-1.45;}return g;}
   const item=(await catalog).find(c=>c.id===a.asset);if(!item)throw Error('Unknown asset '+a.asset+'; use op catalog');
   const gltf=await loader.loadAsync(item.glb);const g=new T.Group();gltf.scene.traverse(o=>{if(o.isMesh)o.castShadow=o.receiveShadow=true;});g.add(gltf.scene);g.userData.baseScale=1;return g;
@@ -94,7 +95,7 @@ export function createStage(ctx,{room,relay}){
   async spawn(a){
    const id=a.id||(a.shape||a.asset||'person')+'-'+(entities.size+1);
    if(entities.has(id))OPS_RUN.remove({id});
-   const object=await build(a),e={id,kind:a.shape?'shape':a.asset?'asset':'person',type:a.shape||a.asset||a.person.role||'person',object,behavior:'none',phase:Math.random()*6};
+   const object=await build(a),e={id,kind:a.shape?'shape':a.asset?'asset':'person',type:a.shape||a.asset||a.person?.role||'zombie',object,behavior:'none',phase:Math.random()*6};
    object.name='holodeck:'+id;object.userData.holodeckId=id;
    object.position.copy(placement(a));e.base=object.position.clone();object.rotation.y=T.MathUtils.degToRad(a.rotationY||0);
    applyScale(e,a.scale);layer.add(object);entities.set(id,e);restyle(e,a);if(a.behavior)e.behavior=a.behavior;
@@ -102,7 +103,7 @@ export function createStage(ctx,{room,relay}){
    return {id,position:arr(object.position)};
   },
   async remove(a){
-   if(a.all){for(const id of [...entities.keys()])OPS_RUN.remove({id});return {removed:'all'};}
+   if(a.all){for(const id of [...entities.keys()])OPS_RUN.remove({id});eaten.length=0;ctx.playState?.('eaten',[]);ctx.playState?.('threats',[]);return {removed:'all'};}
    const e=get(a.id);layer.remove(e.object);e.object.traverse(o=>{if(o.isMesh&&o.userData.ownMaterial)o.material.dispose();});entities.delete(a.id);return {removed:a.id};
   },
   async move(a){const e=get(a.id),to=placement({...a,ground:a.ground??!a.to},e.object.position);const d=a.duration??1;
@@ -137,6 +138,7 @@ export function createStage(ctx,{room,relay}){
  function frame(dt){
   time+=dt;
   if(cameraTween){const c=cameraTween;c.t=Math.min(1,c.t+dt/c.d);const k=ease(c.t);camera.position.lerpVectors(c.p0,c.p1,k);orbit.target.lerpVectors(c.t0,c.t1,k);orbit.update();if(c.t>=1)cameraTween=null;}
+  updateThreats(dt);updateEffects(dt);
   for(const e of entities.values()){
    const o=e.object;
    if(e.appear){e.appear.t+=dt;const k=Math.min(1,e.appear.t/e.appear.duration),pop=1+Math.sin(k*Math.PI)*.18;const b=o.userData.baseScale,s=e.scale;o.scale.set(s[0]*b*k*pop,s[1]*b*k*pop,s[2]*b*k*pop);if(k>=1){e.appear=null;applyScale(e,e.scale);fixLabel(e);}}
@@ -146,35 +148,70 @@ export function createStage(ctx,{room,relay}){
     if(e.behavior==='bob')o.position.y=e.base.y+(Math.sin(t*2)+1)*h*.12;
     if(e.behavior==='hop')o.position.y=e.base.y+Math.abs(Math.sin(t*3))*h*.3;
     if(e.behavior==='pulse'&&!e.appear){const k=1+Math.sin(t*3)*.08,b=o.userData.baseScale;o.scale.set(e.scale[0]*b*k,e.scale[1]*b*k,e.scale[2]*b*k);}
-    if(e.behavior==='chase')chase(e,dt);
+    if(e.behavior==='chase'&&e.chase)chase(e,dt);
     if(e.behavior==='orbit'){const r=e.radius??h*2;o.position.set(e.base.x+Math.cos(t*.8)*r,e.base.y,e.base.z+Math.sin(t*.8)*r);o.rotation.y=-t*.8;}}
   }
  }
  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
 
  // Chase: walk toward the nearest visible inhabitant, spreading chasers across different people.
- // On a catch, a little hop of triumph and then someone new. Speed 1 matches the inhabitants' walk.
- const at=o=>o.getWorldPosition(new T.Vector3());
+ // Inhabitants who see a zombie close by run home and hide. A zombie that catches someone turns
+ // them into a zombie too (a cartoon chomp, nothing gory); with nobody in sight it shambles about.
+ // Speed 1 matches the inhabitants' walk. remove {all:true} brings everyone back.
+ const at=o=>o.getWorldPosition(new T.Vector3()),eaten=[],effects=[],seen=new Map();let threatClock=0;
+ const zombies=()=>[...entities.values()].filter(e=>e.behavior==='chase');
  function quarryFor(e){
-  const c=e.chase,people=worldThings().filter(w=>w.kind==='person'&&w.object.visible);
+  const c=e.chase,people=worldThings().filter(w=>w.kind==='person'&&w.object.visible&&!eaten.includes(w.id));
   if(c.target){const o=resolve(c.target);return o&&o.visible?o:null;}
-  const taken=new Set([...entities.values()].filter(x=>x!==e&&x.chase?.quarry).map(x=>x.chase.quarry)),here=e.object.position;
-  const ranked=people.filter(p=>p.object!==c.last||people.length===1).map(p=>({o:p.object,d:at(p.object).distanceTo(here)})).sort((x,y)=>x.d-y.d);
+  const taken=new Set(zombies().filter(x=>x!==e&&x.chase?.quarry).map(x=>x.chase.quarry)),here=e.object.position;
+  const ranked=people.map(p=>({o:p.object,d:at(p.object).distanceTo(here)})).sort((x,y)=>x.d-y.d);
   return (ranked.find(p=>!taken.has(p.o))||ranked[0])?.o||null;
+ }
+ function wanderPoint(e){
+  const spots=worldThings().filter(w=>w.kind==='thing');const s=spots[Math.floor(Math.random()*spots.length)];
+  const h=personHeight(),p=s?v(s.position):e.object.position.clone();p.x+=(Math.random()-.5)*h*8;p.z+=(Math.random()-.5)*h*8;return p;
+ }
+ function chomp(e,victim){
+  const who=worldThings().find(w=>w.object===victim);
+  if(!who?.id){e.chase.caught=.6;e.base=e.object.position.clone();return;}
+  eaten.push(who.id);ctx.playState?.('eaten',[...eaten]);
+  const spot=at(victim),scale=victim.getWorldScale(new T.Vector3()).x;victim.visible=false;
+  burst(spot);e.chase.caught=.6;e.base=e.object.position.clone();
+  const id='zombie-'+who.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').slice(0,36);
+  OPS_RUN.spawn({id,from:who.person,fromScale:scale,at:[spot.x,spot.y,spot.z]}).then(()=>{const z=entities.get(id);if(!z)return;z.type='zombie';z.behavior='chase';z.speed=e.speed;z.base=z.object.position.clone();z.chase={target:null,quarry:null,pick:1.2,ground:0,caught:.8};});
+  ui.caption(['Chomp! '+who.name.split(' ')[0]+' is a zombie now.',who.name.split(' ')[0]+' got zombified!','Oh no, '+who.name.split(' ')[0]+' joined the zombies!'][eaten.length%3],3.5);
+ }
+ function burst(p){
+  const h=personHeight(),ring=new T.Mesh(new T.RingGeometry(.3,.5,32).rotateX(-Math.PI/2),new T.MeshBasicMaterial({color:'#9be564',transparent:true,opacity:.9,depthWrite:false}));
+  ring.position.copy(p).add(new T.Vector3(0,h*.05,0));ring.scale.setScalar(h);layer.add(ring);effects.push({mesh:ring,t:0,h});
+ }
+ function updateEffects(dt){
+  for(const f of effects.splice(0)){f.t+=dt;const k=f.t/.7;if(k>=1){layer.remove(f.mesh);f.mesh.geometry.dispose();f.mesh.material.dispose();continue;}f.mesh.scale.setScalar(f.h*(1+k*3));f.mesh.material.opacity=.9*(1-k);effects.push(f);}
+ }
+ // People within sight of a zombie flee home; they come back out a few seconds after the coast is clear.
+ function updateThreats(dt){
+  if((threatClock-=dt)>0)return;threatClock=.25;
+  const z=zombies();if(!z.length&&!seen.size)return;
+  const now=performance.now(),reach=personHeight()*8;
+  for(const p of worldThings()){if(p.kind!=='person'||!p.object.visible||!p.id)continue;const here=at(p.object);if(z.some(e=>e.object.position.distanceTo(here)<reach))seen.set(p.id,now);}
+  for(const [id,t] of seen)if(now-t>15000)seen.delete(id);
+  ctx.playState?.('threats',[...seen.keys()]);
  }
  function chase(e,dt){
   const c=e.chase,o=e.object,h=personHeight();
   c.pick-=dt;c.ground-=dt;
   if(c.caught>0){c.caught-=dt;o.position.y=e.base.y+Math.sin(Math.max(0,c.caught)/.6*Math.PI)*h*.35;return;}
   if(!c.quarry?.visible||c.pick<=0){c.quarry=quarryFor(e);c.pick=1.5;}
-  const rig=o.userData.rig;
-  if(!c.quarry){if(rig)rig.limbs[1].rotation.x=rig.limbs[3].rotation.x=0;return;}
-  const goal=at(c.quarry),dx=goal.x-o.position.x,dz=goal.z-o.position.z,dist=Math.hypot(dx,dz);
-  if(dist<h*.45){c.last=c.quarry;c.quarry=null;c.pick=0;c.caught=.6;e.base=o.position.clone();return;}
-  const step=Math.min(dist,h*4.5*(e.speed??1)*dt);o.position.x+=dx/dist*step;o.position.z+=dz/dist*step;
+  let goal;
+  if(c.quarry)goal=at(c.quarry);
+  else{if(!c.wander||c.pick<=-6||c.wander.distanceTo(o.position)<h*.6){c.wander=wanderPoint(e);c.pick=0;}goal=c.wander;}
+  const dx=goal.x-o.position.x,dz=goal.z-o.position.z,dist=Math.hypot(dx,dz);
+  if(c.quarry&&dist<h*.45){chomp(e,c.quarry);c.quarry=null;c.pick=0;return;}
+  const pace=c.quarry?1:.55,step=Math.min(dist,h*4.5*(e.speed??1)*pace*dt);if(dist>1e-6){o.position.x+=dx/dist*step;o.position.z+=dz/dist*step;}
   if(c.ground<=0){c.ground=.25;c.y=groundAt(o.position.x,o.position.z);}
   o.position.y+=((c.y??o.position.y)-o.position.y)*Math.min(1,dt*10);e.base=o.position.clone();
   const turn=Math.atan2(dx,dz)-o.rotation.y;o.rotation.y+=Math.atan2(Math.sin(turn),Math.cos(turn))*Math.min(1,dt*6);
+  const rig=o.userData.rig;
   if(rig){const g=(c.gait=(c.gait||0)+step/h*3);rig.limbs[1].rotation.x=Math.sin(g)*.55;rig.limbs[3].rotation.x=-Math.sin(g)*.55;rig.limbs[0].rotation.x=-1.45+Math.sin(g)*.12;rig.limbs[2].rotation.x=-1.45-Math.sin(g)*.12;o.children[0].rotation.z=Math.sin(g*.5)*.08;}
  }
 
