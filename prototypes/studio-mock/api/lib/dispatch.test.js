@@ -200,6 +200,31 @@ const firstMine = act.events.find((e) => e.jobId === fid);
 assert(firstMine && firstMine.stage === "model" && firstMine.model === "https://example.com/tower.glb" && firstMine.status === "running", "activity shape, newest first");
 assert(act.events.some((e) => e.jobId === fid && e.image && e.checkpoint === "concept_art"), "concept art event in activity");
 
+// 15. briefing + threaded inquiries about any dispatch, done or running.
+let br = await svc2.briefing({});
+assert(br.briefing === null && br.refreshing && br.live.dispatches_in_flight.some((d) => d.dispatch_id === fid), "first briefing starts a refresh, shows live work");
+const bid = br.refreshing;
+assert((await store.get(bid)).kind === "briefing", "briefing dispatch kind");
+await svc2.relay(comment(bid, "completed", { cid: "h1", text: "Status", marker: { briefing: { headline: "3 workstreams", items: [
+  { id: "W1", title: "Dispatch bridge", state: "waiting", summary: "Built; needs deploy OK", waiting_on_evan: "Say deploy" },
+  { id: "bogus", title: "Ranch app", state: "running", summary: "tile fix" },
+] } } }));
+br = await svc2.briefing({});
+assert(br.briefing.items.length === 2 && br.briefing.items[1].id === "W2" && br.briefing.items[0].waiting_on_evan === "Say deploy" && !br.refreshing, "briefing stored with item ids");
+s = await svc2.status({ dispatch_id: bid });
+assert(s.status === "completed" && s.verified === null, "answers need no git verification");
+const q1 = await svc2.ask({ question: "What exactly is blocked?", about: "W1" });
+let qrec = await store.get(q1.thread_id);
+assert(qrec.kind === "inquiry" && /Say deploy/.test(qrec.context), "ask about a briefing item");
+const q2 = await svc2.ask({ question: "How far along is the tower?", about: fid });
+qrec = await store.get(q2.thread_id);
+assert(/read only/.test(qrec.context) && /Roman watchtower/.test(qrec.context) && fires[fires.length - 1].kind === "inquiry", "ask about a running dispatch");
+assert((await store.get(fid)).status === "running", "running build untouched by inquiry");
+await svc2.relay(comment(q2.thread_id, "completed", { cid: "h2", text: "It is at the model stage, 60%." }));
+const fu = await svc2.ask({ question: "And the soldiers?", thread_id: q2.thread_id });
+qrec = await store.get(q2.thread_id);
+assert(fu.thread_id === q2.thread_id && qrec.revisions.length === 1 && fires[fires.length - 1].reason === "revision", "threaded follow-up continues the same thread");
+
 /* auth */
 const { publicKey, privateKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const jwk = { ...publicKey.export({ format: "jwk" }), kid: "k1", alg: "RS256", use: "sig" };

@@ -84,7 +84,7 @@ const OAUTH_SCOPES = "openid profile email offline_access read:world write:world
 
 const COMMAND_CARD = `## Exposed commands (these ARE on this MCP)
 
-BUILD WITH CLAUDE (dispatch bridge): build(request) hands development work to Claude (code, models, scenes, mechanics, deploys) and returns a dispatch id immediately; it never waits. status(dispatch_id?) shows lifecycle submitted → acknowledged → running → blocked/completed/failed, plus branch, commits, PRs and whether completion was verified on GitHub. revise(dispatch_id, instructions) sends a change order or answers Claude's question. inbox() returns Claude's new messages (acks, progress, questions, completion reports) and marks them read. "Submitted" only means stored: wait for an ack message before telling Evan Claude has it.
+BUILD WITH CLAUDE (dispatch bridge): build(request) hands development work to Claude (code, models, scenes, mechanics, deploys) and returns a dispatch id immediately; it never waits. status(dispatch_id?) shows lifecycle submitted → acknowledged → running → blocked/completed/failed, plus branch, commits, PRs and whether completion was verified on GitHub. revise(dispatch_id, instructions) sends a change order or answers Claude's question. inbox() returns Claude's new messages (acks, progress, questions, completion reports) and marks them read. briefing() gives a project-wide status with item ids (W1…); ask(question, about) opens a threaded question about any dispatch or item, continued with ask(question, thread_id). "Submitted" only means stored: wait for an ack message before telling Evan Claude has it.
 
 DELETE / REMOVE a POI: place_remove or place_delete (sceneId + placeId, instanceId, or name). Never rewrite a scene to drop a pin.
 DELETE a scene: scene_delete (scene.home is protected). Use this for accidental scene.mcp* objects.
@@ -640,9 +640,36 @@ function applyEffects(doc, effects) {
   return applied;
 }
 
-const DISPATCH_TOOL_NAMES = new Set(["build", "status", "revise", "inbox"]);
+const DISPATCH_TOOL_NAMES = new Set(["build", "status", "revise", "inbox", "briefing", "ask"]);
 
 const DISPATCH_TOOLS = [
+  {
+    name: "briefing",
+    description:
+      "Project-wide status update for Evan, like a producer's summary: one item per workstream (ids W1, W2, …) with what's done, what's in progress and what's waiting on him, plus live builds in flight and open questions. Returns the latest briefing at once and refreshes it in the background when it's over an hour old (or refresh:true). To dig into an item, call ask(question, about: 'W2').",
+    inputSchema: {
+      type: "object",
+      properties: { refresh: { type: "boolean", description: "Write a fresh briefing now (takes a few minutes; arrives in inbox())." } },
+      additionalProperties: false,
+    },
+    annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true },
+  },
+  {
+    name: "ask",
+    description:
+      "Ask Claude a question and get a threaded answer: about any dispatch (finished or still running; pass its dispatch_id as about), a briefing item (about: 'W3'), or anything in the project. A separate read-only Claude session answers, so a running build is never interrupted. Returns a thread_id; the answer arrives in inbox(). To follow up in the same thread, call ask again with thread_id.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        question: { type: "string", description: "Evan's question, in his words." },
+        about: { type: "string", description: "Optional: a dispatch_id (D-…) or a briefing item id (W1…)." },
+        thread_id: { type: "string", description: "Continue an existing question thread." },
+      },
+      required: ["question"],
+      additionalProperties: false,
+    },
+    annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: true },
+  },
   {
     name: "build",
     description:
@@ -2303,6 +2330,8 @@ async function callDispatchTool(name, args, request) {
   if (name === "status") return dispatchService.status(args);
   if (name === "revise") return dispatchService.revise({ ...args, requester });
   if (name === "inbox") return dispatchService.inbox(args);
+  if (name === "briefing") return dispatchService.briefing({ ...args, requester });
+  if (name === "ask") return dispatchService.ask({ ...args, requester });
   return { error: "unknown_dispatch_tool" };
 }
 
@@ -2872,7 +2901,7 @@ export async function GET() {
       tickets: ["trouble_ticket_get", "trouble_ticket_list", "trouble_ticket_comment", "trouble_ticket_resolve"],
       ingest: ["asset_ingest"],
       mjWorkersAlive: ["execution_capacity_status", "mj_workers_alive"],
-      dispatch: ["build", "status", "revise", "inbox"],
+      dispatch: ["build", "status", "revise", "inbox", "briefing", "ask"],
     },
   });
 }
