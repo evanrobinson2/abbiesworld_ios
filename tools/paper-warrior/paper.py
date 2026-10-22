@@ -124,10 +124,10 @@ def stiffen(obj, thick=0.003, jitter_deg=4, seed=2):
     if thick:
         sol = obj.modifiers.new('sol', 'SOLIDIFY'); sol.thickness = thick; sol.offset = 0; _apply(obj)
 
-def paper_material(albedo=0.72, rough=0.88, sheen=0.25, fibre=0.15):
+def paper_material(albedo=0.72, rough=0.88, sheen=0.25, fibre=0.15, tint=(1.0, 0.985, 0.96)):
     m = bpy.data.materials.new('papercraft'); m.use_nodes = True
     nt = m.node_tree; b = nt.nodes['Principled BSDF']
-    b.inputs['Base Color'].default_value = (albedo, albedo * 0.985, albedo * 0.96, 1)
+    b.inputs['Base Color'].default_value = (albedo * tint[0], albedo * tint[1], albedo * tint[2], 1)
     b.inputs['Roughness'].default_value = rough
     if 'Sheen Weight' in b.inputs: b.inputs['Sheen Weight'].default_value = sheen
     if fibre:

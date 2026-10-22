@@ -45,6 +45,8 @@ def es(p, spec, iters, f, stage, seed, log=True):
         for _ in range(rng.choice([1, 1, 2])):
             path, step = rng.choice(spec)
             opt.setp(q, path, opt.getp(q, path) + rng.gauss(0, step * sigma))
+        for path, (lo, hi) in q.get('bounds', {}).items():   # keep the camera (or any dial) in a sensible range for this prop
+            opt.setp(q, path, min(hi, max(lo, opt.getp(q, path))))
         t = f(q)
         acc = bool(t['total'] < bl)
         if log: opt.log(dict(iter=opt.next_iter(), stage=stage, reviser='numeric-es', kind='eval', accepted=acc, **{a: b for a, b in t.items() if isinstance(b, float)}))
@@ -53,7 +55,7 @@ def es(p, spec, iters, f, stage, seed, log=True):
     return p, best
 
 CAM = [('cam.az', 4), ('cam.el', 3), ('cam.dist', 0.05), ('cam.tx', 0.01), ('cam.tz', 0.01), ('cam.focal', 3), ('place.yaw', 4)]
-LIGHT = [('light.key_az', 10), ('light.key_el', 6), ('light.key_power', 200), ('light.key_size', 0.3), ('light.fill_power', 30),
+LIGHT = [('material.tint.2', 0.02), ('light.key_az', 10), ('light.key_el', 6), ('light.key_power', 200), ('light.key_size', 0.3), ('light.fill_power', 30),
          ('light.world_strength', 0.08), ('material.albedo', 0.03), ('exposure', 0.15), ('bg.0', 0.015), ('bg.1', 0.015), ('bg.2', 0.015)]
 
 def main():
