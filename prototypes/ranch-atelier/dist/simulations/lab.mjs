@@ -43,7 +43,7 @@ import {extendTiles,frontier,tileCenter} from './tile-expansion.mjs';
 import {SUGAR_SHACK} from './poi/sugar-shack-spec.mjs';
 import {createRanchSky} from './ranch-sky.mjs';
 import {WEATHER_CHOICES,normalizeWeather,selectWeather,weatherIcon} from './simulation/weather-control.mjs';
-import {simulationPace,normalizeSpeed,speedLabel} from './simulation/simulation-pace.mjs';
+import {simulationPace,normalizeSpeed,SPEEDS,speedBadge,speedLabel} from './simulation/simulation-pace.mjs';
 import {firstVisibleHit} from './scene-picking.mjs';
 import {attachItemPickup} from './item-pickup.mjs';
 import {beginRanchItemPickup,pickupHit,restoreItemPlacements} from './ranch-item-runtime.mjs';
@@ -376,7 +376,7 @@ function setupWorkspace(){setupSiteWarning();const panel=$('#panel');$('#preset-
  facetPicker(seasonButton,{name:'Season',choices:[['2','Fall'],['0','Spring'],['1','Summer'],['3','Winter']],value:()=>seasonMode==='auto'?String(active?.life.state.season?.index??1):seasonMode,choose:id=>{seasonMode=id;$('#season-mode').value=id;updateSeason();persist();}});
 
  const speed=document.createElement('button');speed.id='simulation-speed';speed.innerHTML=uiIcon('speed')+'<span class=pace-badge>1×</span>';speed.title='Simulation speed';
- facetPicker(speed,{name:'Simulation speed',choices:[['realtime','Real time'],['0.5','0.5×'],['1','1×'],['2','2×']],render:(id,label)=>uiIcon(id==='realtime'?'time':id==='0.5'?'slow':id==='2'?'fast':'play')+'<span>'+label+'</span>',value:()=>String(simulationSpeed),choose:id=>{simulationSpeed=normalizeSpeed(id);syncSpeedControl();persist();}});
+ facetPicker(speed,{name:'Simulation speed',choices:SPEEDS.map(([v,label])=>[String(v),label]),render:(id,label)=>id==='realtime'||id==='8'?uiIcon(id==='realtime'?'time':'fast')+'<span>'+label+'</span>':'<span class=pace-steps aria-label="'+label+'">'+uiIcon('play').repeat(Math.log2(Number(id))+1)+'</span>',value:()=>String(simulationSpeed),choose:id=>{simulationSpeed=normalizeSpeed(id);syncSpeedControl();persist();}});
  const toolbar=$('header');toolbar.classList.add('grouped-toolbar');toolbar.prepend($('.live-status'));
  for(const [name,items] of [['playback',[$('#pause'),speed]],['calendar',[$('#lighting'),seasonButton,weatherButton]],['tools',[$('#generate')]]]){const group=document.createElement('div');group.className='toolbar-group';group.id='toolbar-'+name;group.append(...items);toolbar.append(group);}
  const noticeButton=document.createElement('button');noticeButton.id='notice-toggle';noticeButton.innerHTML=uiIcon('bell');noticeButton.setAttribute('aria-label','Simulation notices: all clear');noticeButton.setAttribute('popovertarget','ranch-notices');const noticeList=document.createElement('div');noticeList.id='ranch-notices';noticeList.setAttribute('popover','auto');noticeList.setAttribute('role','status');document.body.append(noticeList);$('#toolbar-tools').append(noticeButton);
@@ -392,7 +392,7 @@ function setupWorkspace(){setupSiteWarning();const panel=$('#panel');$('#preset-
  $('#complexity').type='range';$('#complexity').min='1';$('#complexity').max='4';$('#complexity').step='1';
  togglePanel(true);compactWorkspace({icon:uiIcon});window.addEventListener('pagehide',persist);document.addEventListener('visibilitychange',()=>{if(document.hidden)persist();});}
 // Retain the application's shared style selection and loader.
-import('/view-context.js').then(()=>{const move=()=>{const sharing=$('#ranch-view-sharing');if(sharing&&sharing.parentElement!==$('#help'))$('#help').append(sharing);const toggle=$('#app-settings-toggle');if(toggle){($('#toolbar-tools')||$('header')).append(toggle);toggle.setAttribute('aria-label','Appearance settings');toggle.innerHTML=uiIcon('settings');return true;}return false;};if(!move()){const watcher=new MutationObserver(()=>{if(move())watcher.disconnect();});watcher.observe(document.body,{childList:true});}}).catch(()=>{});
+import('/view-context.js').then(()=>{const move=()=>{const sharing=$('#ranch-view-sharing');if(sharing&&sharing.parentElement!==$('#help'))$('#help').append(sharing);const toggle=$('#app-settings-toggle');if(toggle){($('#toolbar-tools')||$('header')).append(toggle);toggle.setAttribute('aria-label','Settings');toggle.title='Settings';toggle.innerHTML=uiIcon('settings');return true;}return false;};if(!move()){const watcher=new MutationObserver(()=>{if(move())watcher.disconnect();});watcher.observe(document.body,{childList:true});}}).catch(()=>{});
 
 export function inspectWorkspace(){return structuredClone({family,currentId,busy,running,config:configuration(),camera:{position:camera.position.toArray(),target:orbit.target.toArray()},snapshot:active?.life.snapshot?.(),arrivalDone:active?.arrival?.done??true,selection:inspected?.title||null,following:cameraFollow.unit?.userData.inspect?.title||cameraFollow.unit?.userData.person?.id||null,cutaway:family==='starship'?active?.cutaway:null});}
 
@@ -476,7 +476,7 @@ function updateSiteWarning(){
  const text=label+'. Some activities may be blocked by terrain or space.';if(details.textContent!==text)details.textContent=text;
 }
 
-function syncSpeedControl(){const button=$('#simulation-speed');if(!button)return;const label=speedLabel(simulationSpeed);button.querySelector('span').textContent=simulationSpeed==='realtime'?'RT':label;button.title=button.ariaLabel='Simulation speed: '+label;}
+function syncSpeedControl(){const button=$('#simulation-speed');if(!button)return;const label=speedLabel(simulationSpeed);button.querySelector('span').textContent=speedBadge(simulationSpeed);button.title=button.ariaLabel='Simulation speed: '+label;}
 function applyWorldStyle(){const index=Number(document.documentElement.dataset.appStyle)-1;worldTheme.setTheme(themes[index]||themes[7]);worldTheme.attach(active?.group);ranchSky.setTheme(worldTheme.palette);updateSun();renderer.domElement.dataset.worldStyle=worldTheme.palette.name;}
 window.addEventListener('app-style-change',applyWorldStyle);applyWorldStyle();
 
@@ -544,7 +544,8 @@ installDeveloperMode({camera,orbit,getZoomCoverage:()=>{const span=2*camera.posi
 installShareControls({panel:document.getElementById('developer-overlay'),look,onLook:()=>{ink.setLook(look);updateSun();},getView:()=>{const config=configuration();if(JSON.stringify(config.terrain??null).length>20000)delete config.terrain;return {family,name:current()?.name||'',config,camera:{position:camera.position.toArray(),target:orbit.target.toArray()},running,style:Number(document.documentElement.dataset.appStyle)||8,styleName:worldTheme.palette.name};}});
 
 // Told stories stage onto the ranch through the same tile, weather and simulation paths as everything else.
-installStoryBook({
+// The storybook stays available behind ?story; Evan asked for it off by default (2026-10-22).
+if(new URLSearchParams(location.search).has('story'))installStoryBook({
  ready:()=>!!active?.life?.core&&!busy&&!pending&&family==='ranch'&&!aiBuilding&&!motionUI?.active&&!itemPickup?.active&&!(active.arrival&&!active.arrival.done),
  world:()=>({workers:active.life.workers,state:active.life.state,places:active.life.places,obstacles:active.life.obstacles,bounds:active.life.bounds}),
  core:()=>active.life.core,
