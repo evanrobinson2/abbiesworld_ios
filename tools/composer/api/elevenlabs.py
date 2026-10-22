@@ -14,6 +14,7 @@ import argparse, datetime, hashlib, json, os, subprocess, sys, urllib.error, url
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'out', 'api')
+TAKES = os.path.join(HERE, '..', 'takes')
 API = 'https://api.elevenlabs.io/v1/music'
 
 
@@ -43,9 +44,16 @@ def compose(key, body, fmt):
 
 
 def master(src, lufs):
-    """Loudness-match a take to the score's targets (beds -18, interludes -17, stings -16 LUFS, -1 dBTP)."""
+    """Loudness-match a take to the score's targets (beds -18, interludes -17, stings -16 LUFS, -1 dBTP).
+    Two-pass loudnorm in linear mode: measure, then one gain for the whole take, so dynamics are untouched."""
     dst = src.replace('.mp3', '.master.mp3')
-    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af', f'loudnorm=I={lufs}:TP=-1:LRA=11',
+    target = f'I={lufs}:TP=-1:LRA=20'
+    probe = subprocess.run(['ffmpeg', '-hide_banner', '-nostats', '-i', src, '-af', f'loudnorm={target}:print_format=json',
+                            '-f', 'null', '-'], capture_output=True, text=True, check=True).stderr
+    m = json.loads(probe[probe.rindex('{'):probe.rindex('}') + 1])
+    measured = (f":measured_I={m['input_i']}:measured_TP={m['input_tp']}:measured_LRA={m['input_lra']}"
+                f":measured_thresh={m['input_thresh']}:offset={m['target_offset']}:linear=true")
+    subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', src, '-af', f'loudnorm={target}{measured}',
                     '-ar', '48000', '-c:a', 'libmp3lame', '-b:a', '192k', dst], check=True)
     return dst
 
@@ -73,9 +81,18 @@ def main():
     for c in cues:
         folder = os.path.join(OUT, c['id'])
         os.makedirs(folder, exist_ok=True)
-        start = len([f for f in os.listdir(folder) if f.endswith('.json')])
+        # Number on from takes already reviewed in the repo, so a new run never overwrites one.
+        kept = os.path.join(TAKES, c['id'])
+        start = max([0] + [int(f.split('-')[1].split('.')[0]) for d in (folder, kept) if os.path.isdir(d)
+                           for f in os.listdir(d) if f.startswith('take-') and f.endswith('.json')])
         for n in range(start + 1, start + 1 + a.takes):
-            body = {'composition_plan': plan(c, briefs['palette']), 'model_id': a.model}
+            # music_v2* rejects v1 composition plans ("Invalid type of composition_plan"), so it gets the
+            # same sections written out as a prompt.
+            if a.model.startswith('music_v2'):
+                body = {'prompt': prompt(c, briefs['palette']), 'model_id': a.model, 'force_instrumental': True,
+                        'music_length_ms': sum(s[2] for s in c['sections'])}
+            else:
+                body = {'composition_plan': plan(c, briefs['palette']), 'model_id': a.model}
             try:
                 audio, song = compose(key, body, a.format)
             except urllib.error.HTTPError as e:
