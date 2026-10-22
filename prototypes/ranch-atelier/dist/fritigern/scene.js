@@ -274,8 +274,8 @@ function directorShot(t) {
   if (t < 17) return "reverse";
   if (t < 24) return "follow";
   if (t < 31) return "over";
-  if (t < 35) return "reverse";
-  return "over";
+  if (t < 36) return "reverse";
+  return "helmet";
 }
 function frame(t) {
   const s = shot === "director" ? directorShot(t) : shot;
@@ -366,6 +366,10 @@ addEventListener("resize", resize); resize();
 function tick(nowMs) {
   const dt = Math.min(0.05, (nowMs - last) / 1000); last = nowMs;
   if (playing) { t += dt; if (t > DUR) { t = DUR; playing = false; syncPlay(); } }
+  draw();
+  if (!MANUAL) requestAnimationFrame(tick);
+}
+function draw() {
   setTime(t);
   const s = frame(t);
   if (controls.enabled) controls.update();
@@ -379,7 +383,8 @@ function tick(nowMs) {
   drawStrip(t);
   renderer.render(scene, camera);
   window.__frameT = t;
-  requestAnimationFrame(tick);
 }
+const MANUAL = Q.get("manual") === "1";
 requestAnimationFrame(tick);
-window.__scene = { setT(v) { t = v; playing = false; }, setShot(v) { shot = v; }, report, ready: true };
+// manual=1 is for frame capture: nothing renders until renderAt(t) is called
+window.__scene = { setT(v) { t = v; playing = false; }, renderAt(v) { t = v; playing = false; draw(); }, setShot(v) { shot = v; }, report, ready: true };
