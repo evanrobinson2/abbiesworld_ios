@@ -1,0 +1,138 @@
+{
+ "name": "hamper-whimsical",
+ "asset": "hamper",
+ "style": "whimsical",
+ "stats": {
+  "triangles": 3982,
+  "meshes": 12,
+  "bounds_min": [
+   -0.3875032663345337,
+   -0.3875032663345337,
+   0.0
+  ],
+  "bounds_max": [
+   0.4274008870124817,
+   0.3875032663345337,
+   1.1307499408721924
+  ],
+  "dimensions_m": [
+   0.8149041533470154,
+   0.7750065326690674,
+   1.1307499408721924
+  ],
+  "animations": [
+   "Scene"
+  ]
+ },
+ "views_used": "models/hamper-whimsical/views",
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "score": {
+  "front": {
+   "iou": 0.664,
+   "aspect_target": 1.53,
+   "aspect_render": 1.388,
+   "mean_color_dist": 0.387
+  },
+  "side": {
+   "iou": 0.701,
+   "aspect_target": 1.612,
+   "aspect_render": 1.453,
+   "mean_color_dist": 0.273
+  },
+  "back": {
+   "iou": 0.756,
+   "aspect_target": 1.646,
+   "aspect_render": 1.388,
+   "mean_color_dist": 0.189
+  },
+  "mean_iou": 0.707
+ },
+ "hero_iou": 0.562,
+ "notes": {
+  "what_i_did": [
+   [
+    "Views",
+    "The sheet's labels were right (front | side | back as drawn), but the cast shadows ran to the crop edges and counted as object, so prep_views.py paints the low-saturation shadow band out into views/; scores are against views/ (the raw mj folder gives 0.739 for the final model)."
+   ],
+   [
+    "Silhouette",
+    "After the art director's round, the hero's proportions win over the sheet: a squat round pot whose belly is 0.77 m across (25% wider), about 15% lower, widest about 40% up, with a tucked-in foot. A small collar sits under a lid that overhangs it. The handle top is 1.13 m, about 0.47 of the total height above the lid top."
+   ],
+   [
+    "Weave as geometry",
+    "Every weft row is its own ring strip of 12 puffy blocks (4 vertex rings by 3 columns per block, grooves sunk, crests flat), offset half a block on alternate rows. Blocks alternate over/under puff depth and two straw shades, and are smooth shaded as soft pillows. The lid dome uses the same weave with a slight lumpy irregularity."
+   ],
+   [
+    "Handle and hardware",
+    "The lid is one plump, slightly lumpy pillow: a fat rolled edge overhangs the collar and the woven dome rises out of it. The fat plait handle is three twisted lobes that turn a third per segment, with 16 segment bulges, lashed to lugs on the lid. A big wooden toggle ring (0.25 m across) with a chunky peg sits on the front-right shoulder where the 3/4 view sees it, and rope lashings at the back act as the hinge."
+   ],
+   [
+    "Animation",
+    "lid_hinge (an empty on the back hinge line, axis X) carries the lid, brim, handle, lugs and sprout: it rests 3 degrees ajar, lifts to 38 degrees by frame 36, wobbles and holds, drops shut with a small bounce at frame 88-98 and settles ajar again at 110-120. The sprout bobs on its own origin (scale and sway, four bobs per loop). One 120-frame 24 fps clip."
+   ]
+  ],
+  "good": [
+   "Reads like the hero: a squat woven pot with a pillowy lid, a tall fat plait and a big wooden toggle (art director round).",
+   "The weave is chunky modelled blocks in staggered rows with alternating shades, at 3982 triangles, under the 4k budget.",
+   "Straw colour comes from the hero, not the darker sheet.",
+   "The lid opens without passing through anything because the handle rides with the lid."
+  ],
+  "off": [
+   "IoU against the sheet fell from 0.802 to 0.707. This is deliberate: the sheet draws a taller gourd, and the art director asked for the hero's squat pot. The front and side views lose most (0.66 and 0.70).",
+   "The handle is carried by the lid, not the body, so a hinged lid can open without passing through it.",
+   "The back view of the sheet shows a flat lid with no dome or sprout; the hero wins.",
+   "The plait is a lobed, bulging tube, not separate interleaved strands; it reads as chunky segments at game distance but not up close.",
+   "The model is 0.82 m across including the toggle peg, a little over the 0.7 m nominal hamper length, because of the wider belly.",
+   "Colour distance to the sheet views stays high by design: the sheet is dark brown, the model uses the hero's straw."
+  ],
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: lathe body with 8 rows x 14 puffy blocks, collar, brim, dome, handle on body lugs outside the lid, toggle, sprout.",
+    "mean_iou": 0.703
+   },
+   {
+    "round": 2,
+    "change": "Moved the handle onto the lid with legs inside the brim (as drawn), narrowed the arch, darker straw, bigger toggle, smaller ajar.",
+    "mean_iou": 0.746
+   },
+   {
+    "round": 3,
+    "change": "Body radius x0.95 to fix the too-wide aspect, toggle and peg pulled inside the body width, thicker collar and handle, 7 rows x 12 bigger blocks.",
+    "mean_iou": 0.802
+   },
+   {
+    "round": 4,
+    "change": "Four vertex rings per weave row for flat-topped blocks, closed the collar/brim seam, bigger sprout leaves.",
+    "mean_iou": 0.803
+   },
+   {
+    "round": 5,
+    "change": "Flat-shaded weave so blocks read as blocks rather than bubbles, taller handle peak.",
+    "mean_iou": 0.808
+   },
+   {
+    "round": 6,
+    "change": "Sprout moved front-left so the hero view shows it beside the handle (hero over side view), bigger toggle, paler hero straw.",
+    "mean_iou": 0.804
+   },
+   {
+    "round": 7,
+    "change": "Added rope hinge lashings, trimmed dome blocks and lug segments to stay under 4k triangles; final 768px/48-sample render.",
+    "mean_iou": 0.802
+   },
+   {
+    "round": 8,
+    "change": "Art director round, with the hero winning over the sheet: squat pot (belly +25% wider, -15% lower, widest ~40% up, tucked foot); the lid merged into one lumpy pillow with a fat overhanging rolled edge; a tall fat plait handle with segment bulges; a 0.25 m toggle ring with a chunky peg moved to the front-right shoulder; smooth-shaded puffs. Final 768px/48-sample render.",
+    "mean_iou": 0.707
+   }
+  ],
+  "moving_parts": "lid_hinge (empty on the back hinge line) rotates about X: 3 degrees ajar at rest, lifts to 38 degrees (frames 14-36), holds with a small wobble, drops shut with a bounce (88-98), settles ajar (110-120); the pillow lid, rolled edge, plait handle, lugs and sprout ride on it. The sprout bobs and sways on its own origin with four bobs per loop. Frames 1-120 at 24 fps, seamless, exported as one clip.",
+  "creative_additions": "Over/under weave with alternating straw shades and puff depths; a shadowed inside of the basket and lid underside that show when the lid opens; rope hinge lashings at the back; a little wooden latch loop opposite the big toggle; the lid's closing bounce."
+ },
+ "glb_bytes": 109680
+}

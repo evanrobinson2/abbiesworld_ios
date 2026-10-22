@@ -1,0 +1,151 @@
+{
+ "name": "hamper-upgrade",
+ "asset": "hamper",
+ "style": "upgrade",
+ "stats": {
+  "triangles": 4178,
+  "meshes": 5,
+  "bounds_min": [
+   -0.4385656416416168,
+   -0.22199998795986176,
+   0.0
+  ],
+  "bounds_max": [
+   0.4387100338935852,
+   0.20400001108646393,
+   0.43624231219291687
+  ],
+  "dimensions_m": [
+   0.8772757053375244,
+   0.4259999990463257,
+   0.43624231219291687
+  ],
+  "animations": [
+   "Scene"
+  ]
+ },
+ "views_used": "models/hamper-upgrade/views",
+ "views": [
+  "front",
+  "side",
+  "back"
+ ],
+ "score": {
+  "front": {
+   "iou": 0.958,
+   "aspect_target": 0.498,
+   "aspect_render": 0.498,
+   "mean_color_dist": 0.128
+  },
+  "side": {
+   "iou": 0.918,
+   "aspect_target": 1.074,
+   "aspect_render": 1.029,
+   "mean_color_dist": 0.108
+  },
+  "back": {
+   "iou": 0.958,
+   "aspect_target": 0.498,
+   "aspect_render": 0.498,
+   "mean_color_dist": 0.036
+  },
+  "mean_iou": 0.945
+ },
+ "hero_iou": 0.54,
+ "notes": {
+  "what_i_did": [
+   [
+    "Views relabelled",
+    "Midjourney drew end | long face | end, so views/ uses the long latch face as front (-Y), the left end as side (+X), and the long face mirrored as back (the sheet has no back view); prep_views.py also clips the cast shadows that touched the image edges and would have counted as object."
+   ],
+   [
+    "Woven geometry, not a texture",
+    "Every weft strand is a thin one-quad strip (1.5 cm tall, twice the rows of the first pass) whose depth goes over and under at each 5 cm stake, offset one stake per row and per face. The diving half of each cell is a ReedShade about 12% darker, and a mid-tone core behind the gaps keeps them as fine lines. The result reads as fine, even wicker rather than a checkerboard."
+   ],
+   [
+    "Lid on top, on a hinge",
+    "The lid is a separate pivot at the back edge of the rim. It has a fat rolled bottom band (3.1 cm) that overhangs the body, two stepped-in bands above it for a rounded shoulder, a domed woven top, a top roll and rope lashings at the hinge. A matching fat rolled band runs round the base."
+   ],
+   [
+    "Rims, handles, latch",
+    "The rope is laid-rope style: a 6-sided twisting profile with fat bulges and tight pinches. Handles are knotted through both ends. The latch is a loop tied to the lid front that drops over a wooden toggle, ending in a coiled knot and a tapering hanging tail."
+   ],
+   [
+    "Proportions",
+    "0.70 m long body (0.87 m with handles), 0.33 m deep, 0.44 m tall, slight inward taper to the base; measured from the turnaround and tuned on IoU."
+   ],
+   [
+    "Colour",
+    "Honey wicker #B9763F for the reed (the render's mean comes out at sRGB 183,118,72), with rims a little darker and a 12% darker under-shade."
+   ]
+  ],
+  "good": [
+   "Fine, even wicker on the walls and lid at 4,178 triangles: strands at twice the earlier density with soft over/under contrast.",
+   "The lid sits fitted on top and actually opens on its back hinge, which fixes the live version's bug where the lid lies flat beside the box.",
+   "The silhouette still matches the sheet: front/back IoU 0.958, end 0.918.",
+   "The body is hollow (dark interior and floor), so the open lid shows a real basket and not a solid block."
+  ],
+  "off": [
+   "The fatter overhanging lid band and base roll cost a little IoU on the end view (0.937 to 0.918), because the sheet's end view has a slimmer lid lip. I kept them because the art director asked for them and the hero shows them.",
+   "Only the lowest lid band carries wrap ridges; the other rims are smooth tubes.",
+   "On the lid top, the over/under steps leave small dark diamonds between rows, which read slightly more like openwork than the hero's dense lid weave.",
+   "Handles follow the turnaround (angled out and up from the end rims) more than the hero, where one handle stands upright above the lid.",
+   "The back view is the mirrored front because the sheet has none, so the 'back' IoU just repeats the front."
+  ],
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: woven panels (6.4 cm stakes, shallow over/under), 2 lid bands, 0.70 x 0.39 x 0.39 m. Too light and too flat, the weave read as stripes.",
+    "mean_iou": 0.798
+   },
+   {
+    "round": 2,
+    "change": "Colours converted from hero sRGB to linear (much darker), deeper and chunkier over/under with shaded under-strands, 3 lid bands, depth 0.36 m, height 0.30 m.",
+    "mean_iou": 0.911
+   },
+   {
+    "round": 3,
+    "change": "Proportions from the sheet: depth 0.33 m, body 0.31 m; handles raised; lid core plate dropped below the weave so it no longer pokes through.",
+    "mean_iou": 0.945
+   },
+   {
+    "round": 4,
+    "change": "Removed the profile twist on the rims (it pinched the lid bands and made the lid look ajar), made the body hollow, added ridged rims (4,224 tris, over budget).",
+    "mean_iou": 0.948
+   },
+   {
+    "round": 5,
+    "change": "Back under budget: wrap ridges and alternating shade only on the lowest lid band; core plate corners tucked inside the top roll.",
+    "mean_iou": 0.947
+   },
+   {
+    "round": 6,
+    "change": "Bigger lid overhang and taper, steeper handles: the end view improved but the front dropped because the handles stopped defining its width.",
+    "mean_iou": 0.929
+   },
+   {
+    "round": 7,
+    "change": "Handles reach 7.5 cm out again.",
+    "mean_iou": 0.943
+   },
+   {
+    "round": 8,
+    "change": "Overhang 1.6 cm, taper 1.0 cm, handles 8.5 cm out: overshot.",
+    "mean_iou": 0.921
+   },
+   {
+    "round": 9,
+    "change": "Handles 6.8 cm out (swept 6.2 / 6.8 cm); latch loop now swings on its own pivot; single scene clip. Final 768 px render: front 0.965, side 0.937, back 0.965.",
+    "mean_iou": 0.956
+   },
+   {
+    "round": 10,
+    "change": "Art director craft round. Thinner strands at twice the rows (1.5 cm) with the under-shade only about 12% darker and a mid-tone core. Fatter rolled lid band that overhangs the body, and a fatter base roll. Chunkier laid-rope handles and latch, with a knot and hanging tail. Honey #B9763F wicker with slightly darker rims. 4,178 tris; final 768 px render: front 0.958, side 0.918, back 0.958.",
+    "mean_iou": 0.945
+   }
+  ],
+  "moving_parts": "One 120-frame, 24 fps seamless clip ('Scene'). The lid rotates on a hinge at the back edge of the rim: it rests (1-18), lifts 72 degrees (18-44), holds open (44-76), closes (76-102) with a small landing bounce (102-112), and rests to 120. The latch loop hangs from a pivot at its knot on the lid front: it lags behind the lid, swings past plumb, settles hanging down while the lid is open, and drops back over the toggle peg as the lid closes.",
+  "creative_additions": "Real over/under strand geometry instead of a flat colour; a hollow interior; rope lashings at the hinge; a wrapped lid band; a latch knot with a hanging tail; the latch loop's lagging swing; a domed lid top."
+ },
+ "glb_bytes": 229288
+}

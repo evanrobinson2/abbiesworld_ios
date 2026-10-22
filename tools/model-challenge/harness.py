@@ -21,6 +21,7 @@ from PIL import Image, ImageDraw
 VIEWS = {'front': (0.0, -1.0, 0.0), 'side': (1.0, 0.0, 0.0), 'back': (0.0, 1.0, 0.0)}
 HERO_DIR = (0.62, -0.78, 0.42)
 BG = (0.93, 0.90, 0.84)
+LIGHT = (3.2, 0.9)            # sun strength, world strength
 
 
 def _scene(glb, px, samples):
@@ -34,8 +35,8 @@ def _scene(glb, px, samples):
     sc.render.film_transparent = True
     sc.view_settings.view_transform = 'Standard'
     w = bpy.data.worlds.new('w'); sc.world = w; w.use_nodes = True
-    w.node_tree.nodes['Background'].inputs[0].default_value = (*BG, 1); w.node_tree.nodes['Background'].inputs[1].default_value = 0.9
-    sun = bpy.data.objects.new('sun', bpy.data.lights.new('sun', 'SUN')); sun.data.energy = 3.2
+    w.node_tree.nodes['Background'].inputs[0].default_value = (*BG, 1); w.node_tree.nodes['Background'].inputs[1].default_value = LIGHT[1]
+    sun = bpy.data.objects.new('sun', bpy.data.lights.new('sun', 'SUN')); sun.data.energy = LIGHT[0]
     sun.rotation_euler = (math.radians(50), 0, math.radians(35)); sc.collection.objects.link(sun)
     meshes = [o for o in sc.objects if o.type == 'MESH']
     pts = []
