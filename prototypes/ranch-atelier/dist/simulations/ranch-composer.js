@@ -3,6 +3,7 @@ import {applyVariant} from './variants/new-england.mjs';
 import {dressingAsset,enclosureAsset} from './variants/dressing.mjs';
 import {sugarShack} from './poi/sugar-shack.mjs';
 import {regionalAsset,REGIONAL} from './ranch-regional.mjs?v=3';
+import {ATELIER,atelierModel,atelierStandIn,atelierYardProp,atelierRock} from './atelier-pack.mjs';
 import {playground} from './ranch-play.mjs';
 import {markNPC,isHumanAsset,installNPCAnimations} from '/npc-animation.js';
 import {gardenRenditionItems} from './garden-rendition.js';
@@ -88,12 +89,14 @@ async function content(tile,plan,options={}){
    const pick=pool=>pool[(n+Math.abs(Math.floor(d.x/7)))%Math.min(pool.length,Math.max(1,richness*3))];
    const id=d.kind==='tree'?(plan.placements.some(o=>o.role==='home'&&Math.hypot(o.x-d.x,o.z-d.z)<22)?'GF-153':pick(trees)):d.kind==='shrub'?pick(shrubs):pick(flowers);
    if(!plan.plantedAssets.includes(id))plan.plantedAssets.push(id);
-   const plant=await regionalAsset(id);plant.position.set(d.x*S,y,d.z*S);plant.rotation.y=d.angle;plant.scale.multiplyScalar(d.size*(richness===4?1.15:1));g.add(plant);continue;
+   const standIn=d.kind==='tree'&&ATELIER&&d.habitat==='edge'&&n%13===0?'stump':atelierStandIn(id,n),plant=standIn?await atelierModel(standIn):await regionalAsset(id);plant.position.set(d.x*S,y,d.z*S);plant.rotation.y=d.angle;plant.scale.multiplyScalar(d.size*(richness===4?1.15:1));g.add(plant);continue;
   }
+  if(ATELIER&&d.kind==='prop'){const prop=await atelierModel(atelierYardProp(d.role,d.slot));prop.position.set(d.x*S,y,d.z*S);prop.rotation.y=d.angle+d.slot*.7;g.add(prop);continue;}
+  if(ATELIER&&d.kind==='tree'){const n=plan.dressingCounts.tree,pool=d.habitat==='woodland'?['oak-a','fir-a','oak-b','fir-b']:['oak-a','birch','oak-b'],plant=await atelierModel(pool[(n+Math.abs(Math.floor(d.z/9)))%pool.length]);plant.position.set(d.x*S,y,d.z*S);plant.rotation.y=d.angle;plant.scale.multiplyScalar(d.size);g.add(plant);continue;}
   if(options.managed&&d.kind==='prop'&&d.model==='wood-partial'){const edge=await regionalAsset('GF-010');edge.position.set(d.x*S,y,d.z*S);edge.rotation.y=d.angle;g.add(edge);continue;}
   if(d.kind==='tree'||d.kind==='prop'){await asset(g,d.model||'tree-standing',d.x,d.z,5,d.angle);const wrapper=g.children.at(-1);wrapper.position.y+=y;if(d.kind==='tree')wrapper.scale.multiplyScalar(d.size);continue;}
   const tuft=new T.Group();tuft.userData.inspect={title:{shrub:'Low shrub',rock:'Field stone',grass:'Grass tuft'}[d.kind]||d.kind,kind:'Landscape',description:{shrub:'Low cover in open ground away from paths.',rock:'A small stone cluster in the ranch landscape.',grass:'Ground cover placed outside paths and building clearances.'}[d.kind]};tuft.position.set(d.x*S,y,d.z*S);tuft.rotation.y=d.angle;g.add(tuft);
-  const dressing=dressingAsset(d.kind,d.size);if(variants)applyVariant(dressing,d.kind,{seed:Math.floor(d.x*13+d.z*7),stage:variantStage});tuft.add(dressing);tuft.userData.variant=dressing.userData.variant;
+  const dressing=ATELIER&&d.kind==='rock'?await atelierModel(atelierRock(plan.dressingCounts.rock)):dressingAsset(d.kind,d.size);if(ATELIER&&d.kind==='rock')dressing.scale.multiplyScalar(.45+d.size*.3);if(variants&&!(ATELIER&&d.kind==='rock'))applyVariant(dressing,d.kind,{seed:Math.floor(d.x*13+d.z*7),stage:variantStage});tuft.add(dressing);tuft.userData.variant=dressing.userData.variant;
  }
  if(type==='ranch'&&!options.managed)for(const [i,id]of ['abbie-idle','ani-idle','daddy-idle'].entries()){const x=plan.hub.x-3+i*3,z=plan.hub.z+2;await asset(g,id,x,z,.6);g.children.at(-1).position.y+=ground(x,z);}
  // Keep a small set of semantic pieces; dense dressing remains sector-batched.
