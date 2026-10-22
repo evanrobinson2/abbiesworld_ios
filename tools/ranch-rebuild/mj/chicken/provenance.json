@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "chicken",
+  "group": "animal",
+  "replaces": "simulation-assets/organics/chicken-{idle,feeding,rest}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "2b6480e4-1ec6-417d-9081-747f1d6afae1",
+      "grid_url": "https://www.midjourney.com/jobs/2b6480e4-1ec6-417d-9081-747f1d6afae1?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "c8bb6471-c860-4527-8886-5454168ff689",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:51:59.951Z",
+      "grid_done_at": "2026-10-22T22:52:17.956Z",
+      "upscale_clicked_at": "2026-10-22T22:52:31.319Z",
+      "downloaded_at": "2026-10-22T22:53:42.932Z",
+      "pick_reason": "clean side view, white feathers with golden tips, red comb and wattle, yellow legs"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a plump farm hen, warm white feathers with golden tips, a red comb and wattle, a yellow beak and legs, standing in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "3eb97e8d-cc4e-4f53-91c2-ea1ccadb8e5d",
+      "grid_url": "https://www.midjourney.com/jobs/3eb97e8d-cc4e-4f53-91c2-ea1ccadb8e5d?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "9d9df114-4958-4691-9e58-c87ccd37c307",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:53:52.101Z",
+      "grid_done_at": "2026-10-22T22:54:10.107Z",
+      "upscale_clicked_at": "2026-10-22T22:54:20.959Z",
+      "downloaded_at": "2026-10-22T22:55:40.554Z",
+      "pick_reason": "front, side and back of one hen, evenly spaced; others overlapped or had only two views"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "cf0e58e48538bb99f2c67568e944f101480fdc17f8c7e954283b69f074419301",
+      "bytes": 1606163,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/c8bb6471-c860-4527-8886-5454168ff689/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "007e48f8575248249e2929d70d98d95a21d05baa3b5d1ad3592771d61751ee2b",
+      "bytes": 2392519,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/9d9df114-4958-4691-9e58-c87ccd37c307/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "ccca3260ab6868ea3ad84a262af66eaa0ec07a394374db88deda0de4dbf2278c",
+      "bytes": 659690,
+      "pixels": [
+        614,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken [('front', 260, 874), ('side', 1016, 1754), ('back', 2004, 2650)]"
+    },
+    "view_side.png": {
+      "sha256": "ca54b25c62d5d0a2ac3f8f433d8a4a7426a16abbac5bfe263f518f4e844e455f",
+      "bytes": 769046,
+      "pixels": [
+        738,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken [('front', 260, 874), ('side', 1016, 1754), ('back', 2004, 2650)]"
+    },
+    "view_back.png": {
+      "sha256": "ec06e5ed736339cd65e37c357863f172403304fe6598156b9a67e3f75b142fa1",
+      "bytes": 692420,
+      "pixels": [
+        646,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/chicken [('front', 260, 874), ('side', 1016, 1754), ('back', 2004, 2650)]"
+    }
+  }
+}
