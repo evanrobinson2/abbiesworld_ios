@@ -406,7 +406,7 @@ harp | Harp glissando | harp gliss, harp | len=5 cat=Musical
 xylophone | Xylophone | xylophone, glockenspiel, marimba | cat=Musical
 win-sting | Win stinger | win stinger, victory, stinger positive, win | len=6 cat=Musical
 lose-sting | Lose stinger | lose stinger, game over, fail stinger, lose | len=6 cat=Musical
-fanfare | Fanfare | fanfare, trumpet, victory, brass stinger | len=6 cat=Musical,Horns
+fanfare | Fanfare | fanfare, trumpet, victory stinger, victory jingle, brass stinger | len=6 cat=Musical,Horns not=motorcycle,engine,car
 
 ## Machines | effect
 windmill | Windmill creaking | windmill | len=8 cat=Wood,Mechanical
