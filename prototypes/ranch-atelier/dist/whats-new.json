@@ -2,6 +2,15 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
   "entries": [
     {
+      "id": "2026-10-22-live-mode",
+      "date": "2026-10-22",
+      "title": "Talk to the world",
+      "line": "Tap the microphone and just say what you want: the Computer builds it as you talk. It only plays the game, and it keeps things PG.",
+      "image": "/whats-new/2026-10-22-live-mode.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+      "threadTitle": "Live voice world control"
+    },
+    {
       "id": "2026-10-22-composer",
       "date": "2026-10-22",
       "title": "An orchestral score",
