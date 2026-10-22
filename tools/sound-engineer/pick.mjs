@@ -14,7 +14,7 @@ import { LIBRARY } from './library.mjs';
 import { partRef } from './bundles.mjs';
 import { wavInfo, sliceWav } from './wav.mjs';
 import { readEntry } from './remote-zip.mjs';
-import { rank } from './catalog.mjs';
+import { rank, scoreEntry } from './catalog.mjs';
 
 const args = process.argv.slice(2);
 const opt = k => { const i = args.indexOf(k); return i >= 0 ? args[i + 1] : null; };
@@ -113,7 +113,9 @@ async function pickSlot(slot) {
 }
 
 const stats = { ranked: 0, probed: 0, unmatched: [] };
-const slots = LIBRARY.filter(s => (!only || only.includes(s.id)) && !(args.includes('--keep') && old.picks[s.id]?.takes.length));
+// --keep still re-picks a slot whose takes the library now rules out (a new exclusion word, say).
+const stillFits = s => old.picks[s.id]?.takes.length && old.picks[s.id].takes.every(t => scoreEntry(s, t.path));
+const slots = LIBRARY.filter(s => (!only || only.includes(s.id)) && !(args.includes('--keep') && stillFits(s)));
 const picks = { ...old.picks };
 let i = 0, done = 0;
 await Promise.all(Array.from({ length: 6 }, async () => {

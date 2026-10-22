@@ -12,7 +12,7 @@ const SPEC = `
 ## Farm animals | animal
 rooster | Rooster crowing | rooster crow, rooster, cockerel | len=5 cat=Birds
 hen | Hen clucking | hen cluck, chicken cluck, hen, chicken | n=2 cat=Birds
-chicks | Chicks peeping | chick peep, chicks, baby chicken | cat=Birds
+chicks | Chicks peeping | chick peep, chicks, baby chicken, chick | cat=Birds
 cow | Cow mooing | cow moo, cow, cattle moo | n=2 cat=Animals
 calf | Calf calling | calf | cat=Animals
 horse-whinny | Horse whinny | horse whinny, horse neigh, whinny, neigh | n=2 cat=Animals
@@ -24,7 +24,7 @@ piglet | Piglet squeal | piglet, pig squeal | cat=Animals
 sheep | Sheep baa | sheep baa, sheep bleat, sheep | n=2 cat=Animals
 lamb | Lamb bleat | lamb | cat=Animals
 goat | Goat bleat | goat bleat, goat | n=2 cat=Animals
-donkey | Donkey bray | donkey bray, donkey | cat=Animals
+donkey | Donkey bray | donkey bray, donkey, bray, mule | cat=Animals
 duck | Duck quacking | duck quack, duck | n=2 cat=Birds
 goose | Goose honking | goose honk, goose | cat=Birds
 turkey | Turkey gobble | turkey gobble, turkey | cat=Birds
@@ -57,7 +57,7 @@ bear | Bear growl | bear growl, bear | cat=Animals
 lion | Lion roar | lion roar, lion | cat=Animals
 tiger | Tiger growl | tiger | cat=Animals
 elephant | Elephant trumpet | elephant | cat=Animals
-monkey | Monkey chatter | monkey, chimp, primate | cat=Animals
+monkey | Monkey chatter | monkey, chimp, primate, ape | cat=Animals
 gorilla | Gorilla | gorilla | cat=Animals
 snake | Snake hiss | snake hiss, snake, rattlesnake | cat=Animals
 whale | Whale song | whale | len=8 cat=Animals
@@ -76,8 +76,8 @@ dragon-roar | Dragon roar | dragon roar, dragon | len=6 cat=Creatures
 monster-growl | Monster growl | monster growl, monster, beast growl | n=2 cat=Creatures
 zombie | Zombie groan | zombie | n=2 cat=Creatures
 ghost | Ghost moan | ghost, spirit moan, phantom | len=6 cat=Creatures
-goblin | Goblin chatter | goblin, imp, gremlin | cat=Creatures
-giant-steps | Giant footsteps | giant footstep, giant step, stomp heavy | k=effect len=4 cat=Creatures
+goblin | Goblin chatter | goblin, imp, gremlin, small creature, critter | cat=Creatures
+giant-steps | Giant footsteps | giant footstep, giant step, stomp heavy, heavy footstep, stomp | k=effect len=4 cat=Creatures
 slime | Slime squelch | slime, goo, squelch | k=effect cat=Creatures
 swarm | Insect swarm | swarm, insects | len=5 cat=Creatures
 alien | Alien chatter | alien | cat=Creatures,Sci-fi
@@ -116,7 +116,7 @@ church | Church interior | church, cathedral | len=45 cat=Ambience
 library | Quiet library | library | len=45 cat=Ambience
 room-tone | House room tone | room tone, roomtone, house interior, interior quiet | len=45 cat=Ambience
 kitchen | Kitchen | kitchen | len=45 cat=Ambience
-fireplace | Fireplace | fireplace | len=45 cat=Fire
+fireplace | Fireplace | fireplace, fire crackle, campfire, hearth | len=45 cat=Fire
 campfire | Campfire | campfire, bonfire, fire crackle | len=45 cat=Fire
 spaceship | Spaceship hum | spaceship interior, spaceship, starship, space ship | len=45 cat=Sci-fi,Ambience
 space-station | Space station | space station, sci-fi ambience, scifi ambience | len=45 cat=Sci-fi,Ambience
@@ -127,7 +127,7 @@ airport | Airport | airport, terminal | len=45 cat=Ambience
 station | Train station | train station, railway station, station | len=45 cat=Ambience
 subway | Subway | subway, metro, underground train | len=45 cat=Ambience
 haunted | Haunted house | haunted, creepy, spooky, horror ambience | len=45 cat=Ambience,Designed
-graveyard | Graveyard at night | graveyard, cemetery | len=45 cat=Ambience
+graveyard | Graveyard at night | graveyard, cemetery, crypt, tomb | len=45 cat=Ambience
 carnival | Fairground | carnival, fairground, funfair, amusement | len=45 cat=Ambience,Crowds
 stadium | Stadium crowd | stadium, arena crowd | len=45 cat=Crowds
 office | Office | office | len=45 cat=Ambience
@@ -166,7 +166,7 @@ gulp | Gulping a drink | gulp, drink, slurp | cat=Food and drink,Human
 torch | Torch whoosh | torch, flame whoosh, fire whoosh | cat=Fire
 match | Match strike | match strike, match | cat=Fire
 ignite | Fire ignites | ignite, ignition, fire start | cat=Fire
-fireball | Fireball | fireball | cat=Fire,Magic
+fireball | Fireball | fireball, fire whoosh, flame burst, fire burst | cat=Fire,Magic
 extinguish | Fire put out | extinguish, sizzle, hiss steam | cat=Fire
 explosion-small | Small explosion | explosion small, small explosion, pop explosion | len=4 cat=Explosions
 explosion-big | Big explosion | explosion big, big explosion, explosion large, explosion | len=6 cat=Explosions
@@ -188,7 +188,7 @@ step-metal | Footsteps on metal | footstep metal, footsteps metal, metal step | 
 step-leaves | Footsteps in leaves | footstep leaves, footsteps leaves, leaves step | n=4 len=1.2 cat=Footsteps,Vegetation
 step-carpet | Footsteps on carpet | footstep carpet, footsteps carpet, carpet | n=4 len=1.2 cat=Footsteps
 run-grass | Running on grass | run grass, running grass, run dirt | len=4 cat=Footsteps
-hooves-cobble | Hooves on cobbles | hooves cobble, horse cobble, hoof stone | len=5 cat=Footsteps,Animals
+hooves-cobble | Hooves on cobbles | hooves cobble, horse cobble, hoof stone, hooves, horse walk | len=5 cat=Footsteps,Animals
 jump-land | Jump and land | jump land, landing, land jump | n=2 cat=Footsteps,Foley
 
 ## Doors and containers | effect
@@ -223,7 +223,7 @@ anvil | Anvil | anvil, blacksmith, forge hammer | n=2 cat=Metal,Tools
 broom | Sweeping | broom, sweep, sweeping | len=4 cat=Foley
 tree-fall | Tree falls | tree fall, tree falling, timber | len=6 cat=Wood,Destruction
 branch-snap | Branch snaps | branch snap, stick snap, twig snap, wood snap | cat=Wood,Vegetation
-build-complete | Building finished | construction complete, build complete, success fanfare, completion | k=ui len=3 cat=User interface,Musical
+build-complete | Building finished | construction complete, build complete, success fanfare, completion, success, level up | k=ui len=3 cat=User interface,Musical
 
 ## Objects | effect
 pickup | Pick something up | pickup, pick up, item pickup, grab | n=2 len=1 cat=Foley,User interface,Games
@@ -284,7 +284,7 @@ plane | Aeroplane flyby | airplane, aeroplane, plane flyby, jet | len=8 cat=Airc
 helicopter | Helicopter | helicopter | len=8 cat=Aircraft
 boat-motor | Motor boat | motor boat, motorboat, outboard | len=8 cat=Boats
 sailboat | Sailboat creaks | sailboat, sailing, ship creak, mast | len=8 cat=Boats
-oars | Rowing | rowing, oars, oar | len=5 cat=Boats
+oars | Rowing | rowing, oars, oar, paddle, row boat | len=5 cat=Boats
 rocket | Rocket launch | rocket launch, rocket, launch | len=8 cat=Sci-fi,Aircraft
 spaceship-flyby | Spaceship flyby | spaceship flyby, spaceship pass, ship flyby, sci-fi flyby | len=6 cat=Sci-fi
 ufo | UFO hover | ufo, flying saucer, hover | len=6 cat=Sci-fi
@@ -299,11 +299,11 @@ spell | Casting a spell | spell cast, cast spell, spell | n=2 cat=Magic
 sparkle | Sparkle | sparkle, shimmer, glitter, twinkle | n=2 cat=Magic
 magic-chime | Magic chime | magic chime, chime magic, enchant | cat=Magic,Bells
 teleport | Teleport | teleport | cat=Magic,Sci-fi
-heal | Healing | heal, healing | cat=Magic
+heal | Healing | heal, healing, restore, power up, buff | cat=Magic
 power-up | Power up | power up, powerup | cat=Magic,Games
 magic-whoosh | Magic whoosh | magic whoosh, magical whoosh | cat=Magic,Whooshes
 portal | Portal | portal, vortex | len=5 cat=Magic,Sci-fi
-fairy | Fairy dust | fairy, pixie | cat=Magic
+fairy | Fairy dust | fairy, pixie, sparkle, twinkle, shimmer | cat=Magic
 potion | Bubbling potion | potion, cauldron, bubbling | len=5 cat=Magic,Liquid and mud
 freeze | Freeze spell | freeze, frost, ice spell | cat=Magic,Ice
 lightning | Lightning zap | lightning, zap, electric zap | cat=Electricity,Magic
@@ -329,10 +329,10 @@ sword-swing | Sword swing | sword swing, sword whoosh, blade swing | n=2 cat=Wea
 sword-clash | Swords clash | sword clash, sword hit, sword impact, metal clash | n=2 cat=Weapons,Metal
 sword-draw | Sword drawn | sword draw, unsheathe, sword unsheath | cat=Weapons
 shield | Shield block | shield block, shield hit, shield | cat=Weapons,Metal
-bow | Bow shot | bow shot, bow release, arrow shot, bow | cat=Weapons
+bow | Bow shot | bow shot, bow release, arrow shot, bow | cat=Weapons not=bowed,bowl
 arrow-hit | Arrow hits | arrow hit, arrow impact, arrow | cat=Weapons
 armour | Armour clank | armor, armour, chainmail | cat=Metal,Foley
-catapult | Catapult | catapult, trebuchet | len=5 cat=Weapons,Wood
+catapult | Catapult | catapult, trebuchet, siege, wood launch | len=5 cat=Weapons,Wood
 punch | Cartoon punch | punch, hit body, impact punch | n=2 cat=Fight
 war-drum | War drums | war drum, drums, drum | k=music len=8 cat=Musical
 horn-call | Horn call | war horn, horn call, hunting horn, horn | len=5 cat=Horns,Musical
@@ -396,17 +396,17 @@ place | Drop into place | drop, place, snap | n=2 len=0.8 cat=User interface
 church-bell | Church bell | church bell, bell toll | len=8 cat=Bells
 school-bell | School bell | school bell, bell ring | len=5 cat=Bells
 cowbell | Cowbell | cowbell, cow bell | cat=Bells
-sleigh-bells | Sleigh bells | sleigh bells, jingle bells | len=5 cat=Bells
+sleigh-bells | Sleigh bells | sleigh bells, jingle bells, jingle | len=5 cat=Bells
 wind-chimes | Wind chimes | wind chimes, chimes | len=8 cat=Bells
 gong | Gong | gong | len=8 cat=Bells,Musical
 triangle | Triangle | triangle | cat=Musical
-drum-roll | Drum roll | drum roll, snare roll | len=5 cat=Musical
+drum-roll | Drum roll | drum roll, snare roll, snare | len=5 cat=Musical
 cymbal | Cymbal crash | cymbal crash, cymbal | len=5 cat=Musical
 harp | Harp glissando | harp gliss, harp | len=5 cat=Musical
 xylophone | Xylophone | xylophone, glockenspiel, marimba | cat=Musical
 win-sting | Win stinger | win stinger, victory, stinger positive, win | len=6 cat=Musical
 lose-sting | Lose stinger | lose stinger, game over, fail stinger, lose | len=6 cat=Musical
-fanfare | Fanfare | fanfare, trumpet | len=6 cat=Musical,Horns
+fanfare | Fanfare | fanfare, trumpet, victory, brass stinger | len=6 cat=Musical,Horns
 
 ## Machines | effect
 windmill | Windmill creaking | windmill | len=8 cat=Wood,Mechanical
@@ -426,10 +426,12 @@ pulley | Pulley and winch | pulley, winch, crank | len=5 cat=Mechanical
 gears | Gears turning | gears, cogs, gear mechanism | len=5 cat=Mechanical,Clocks
 earthquake | Earthquake rumble | earthquake, rumble | len=8 cat=Natural disaster,Designed
 volcano | Volcano | volcano, lava | len=8 cat=Natural disaster,Fire
-avalanche | Avalanche | avalanche, landslide | len=8 cat=Natural disaster,Snow
+avalanche | Avalanche | avalanche, landslide, rockfall, rock slide, debris | len=8 cat=Natural disaster,Snow
 `;
 
-const GLOBAL_NOT = ['gore', 'blood', 'gunshot', 'rifle', 'pistol', 'shotgun', 'machine gun', 'torture', 'kill', 'death', 'dying', 'corpse', 'scream', 'vomit', 'pain', 'execution', 'war crime', 'sex', 'moan female', 'drunk', 'beer'];
+const GLOBAL_NOT = ['gore', 'blood', 'gunshot', 'rifle', 'pistol', 'shotgun', 'machine gun', 'torture', 'kill', 'death', 'dying', 'corpse', 'scream', 'vomit', 'pain', 'execution', 'war crime', 'sex', 'moan female', 'drunk', 'beer',
+  // weapons and injury: a kids' world gets bows and cannons, never guns or wounds
+  'gun', 'firing', 'flesh', 'stab', 'gut', 'headshot', 'grenade', 'magazine', 'warfare', 'dragunov', 'ak 5', 'ak 47', 'm 16', 'bullet'];
 
 export function parseLibrary(text = SPEC) {
   const slots = [];

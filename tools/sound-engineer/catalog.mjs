@@ -143,7 +143,7 @@ export function scoreEntry(slot, entryPath, { bytes = 0, method = 0, category } 
   let s = best.s;
   if (category && slot.cats.includes(category)) { s += 4; best.why += `, ${category}`; }
   if (category === 'Designed' && !slot.cats.includes('Designed')) s -= 1;
-  if (!/\.wav$/i.test(entryPath) || method !== 0) s -= 6;
+  if (!/\.wav$/i.test(entryPath) || (method !== 0 && method !== 8)) s -= 6;
   if (slot.loop && bytes < 3e6) s -= 4;
   if (!slot.loop && bytes > 80e6) s -= 3;
   return { score: s, why: best.why };
