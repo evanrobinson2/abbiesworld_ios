@@ -173,7 +173,7 @@ function sound(list, id){
   root.innerHTML = `
   <article class="card">
     <header class="ch">
-      <div><div class="eyebrow">${esc(s.group)}${s.kind ? ' · ' + esc(s.kind) : ''}</div><h1>${esc(s.name)}</h1></div>
+      <div><div class="eyebrow">${esc(s.group)}</div><h1>${esc(s.name)}</h1></div>
       <div class="headline"><span class="tag ${st}">${STATE[st]}</span>${s.duration ? `<span class="big">${secs(s.duration)}</span>` : ''}</div>
     </header>
     <p>${esc(s.subject || '')}</p>

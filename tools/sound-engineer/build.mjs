@@ -92,16 +92,24 @@ async function buildTake(slot, pick, take, k) {
   return { file: `${id}.mp3`, row };
 }
 
+// Reuse takes built earlier with the same file, cut and builder (out/ is cached between Action runs).
+const BUILDER = createHash('sha256').update(readFileSync(new URL(import.meta.url))).digest('hex').slice(0, 12);
+const previous = new Map((() => { try { return JSON.parse(readFileSync(new URL('rows.json', OUT), 'utf8')); } catch { return []; } })().map(b => [b.row.id, b]));
+const sameTake = (b, take) => b && b.builder === BUILDER && b.row.source.path === take.path && JSON.stringify(b.row.recipe.trim) === JSON.stringify(take.trim) && existsSync(new URL(b.file, OUT));
+
 const jobs = LIBRARY.filter(s => (!only || only.includes(s.id)) && picks[s.id]?.takes?.length).flatMap(s => picks[s.id].takes.map((t, k) => [s, picks[s.id], t, k]));
 const rows = [], failures = [];
+let reused = 0;
 let i = 0;
 await Promise.all(Array.from({ length: 4 }, async () => {
   while (i < jobs.length) {
     const job = jobs[i++];
-    try { rows.push(await buildTake(...job)); }
+    const [slot, pick, take, k] = job, old = previous.get(takeId(slot, k));
+    if (sameTake(old, take)) { rows.push({ ...old, row: { ...old.row, candidates: pick.candidates.slice(0, 6), notes: pick.notes } }); reused++; continue; }
+    try { rows.push({ ...(await buildTake(...job)), builder: BUILDER }); }
     catch (e) { failures.push(takeId(job[0], job[3])); console.log(`::warning::${takeId(job[0], job[3])}: ${e.message}`); }
   }
 }));
 writeFileSync(new URL('rows.json', OUT), JSON.stringify(rows));
-console.log(`${rows.length} sounds built from ${new Set(jobs.map(j => j[0].id)).size} slots${failures.length ? `, ${failures.length} failed: ${failures.join(', ')}` : ''}`);
+console.log(`${rows.length} sounds ready (${reused} reused) from ${new Set(jobs.map(j => j[0].id)).size} slots${failures.length ? `, ${failures.length} failed: ${failures.join(', ')}` : ''}`);
 if (!rows.length) process.exit(1);

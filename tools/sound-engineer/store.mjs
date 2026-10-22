@@ -21,6 +21,18 @@ const live = !args.includes('--manifest-only') && ['R2_ACCOUNT_ID', 'R2_ACCESS_K
 const built = JSON.parse(readFileSync(path.join(OUT, 'rows.json'), 'utf8'));
 const rows = built.map(b => b.row);
 
+// The composer's music (dist/music/catalog.json, same record shape, our own audio kept in git) is stored and
+// catalogued alongside: every site-relative file it references (audio, stems, per-key stings) goes to R2 too.
+const SITE = new URL('../../prototypes/ranch-atelier/dist/', here);
+const music = (() => { try { return JSON.parse(readFileSync(new URL('music/catalog.json', SITE), 'utf8')).sounds || []; } catch { return []; } })();
+function musicFiles(rec) {
+  const out = [], add = (obj, key) => { const u = obj?.[key]; if (typeof u === 'string' && u.startsWith('/')) out.push({ obj, key, file: u, sha256: obj.sha256 }); };
+  add(rec.urls, 'audio');
+  for (const st of rec.urls?.stems || []) add(st, 'url');
+  for (const k of Object.values(rec.urls?.keys || {})) add(k, 'url');
+  return out;
+}
+
 if (live) {
   const S3 = await import('@aws-sdk/client-s3');
   const s3 = new S3.S3Client({ region: 'auto', endpoint: `https://${env.R2_ACCOUNT_ID}.r2.cloudflarestorage.com`, credentials: { accessKeyId: env.R2_ACCESS_KEY_ID, secretAccessKey: env.R2_SECRET_ACCESS_KEY } });
@@ -38,6 +50,20 @@ if (live) {
       b.row.status = 'stored';
     }
   }));
+  const { createHash } = await import('node:crypto');
+  let musicStored = 0;
+  for (const rec of music) {
+    for (const f of musicFiles(rec)) {
+      let body;
+      try { body = readFileSync(new URL('.' + f.file, SITE)); } catch { console.log(`::warning::music ${rec.id}: ${f.file} missing`); continue; }
+      const sha = createHash('sha256').update(body).digest('hex'), key = blobKey(sha, f.file);
+      try { await s3.send(new S3.HeadObjectCommand({ Bucket: env.R2_BUCKET, Key: key })); }
+      catch { await s3.send(new S3.PutObjectCommand({ Bucket: env.R2_BUCKET, Key: key, Body: body, ContentType: 'audio/mpeg', CacheControl: 'public, max-age=31536000, immutable', Metadata: { sha256: sha } })); musicStored++; }
+      f.obj[f.key] = `${PUBLIC_BASE}/${key}`;
+    }
+    rows.push({ ...rec, media: 'sound', slot: rec.slot || rec.id, status: 'stored' });
+  }
+  if (music.length) console.log(`R2: ${music.length} music records, ${musicStored} new files`);
   console.log(`R2: ${stored} sounds stored (${(bytes / 1e6).toFixed(1)} MB), ${skipped} already there`);
   if (env.POSTGRES_URL) {
     const { default: pg } = await import('pg');
@@ -51,8 +77,8 @@ if (live) {
           audio_url=excluded.audio_url, duration=excluded.duration, loudness=excluded.loudness, peak=excluded.peak, channels=excluded.channels,
           sha256=excluded.sha256, bytes=excluded.bytes, source_path=excluded.source_path, source_part=excluded.source_part, license=excluded.license,
           uses=excluded.uses, provenance=excluded.provenance, page=excluded.page, updated_at=now()`,
-        [r.id, r.slot, r.name, r.kind, r.group, r.loop, r.urls.audio || null, r.duration, r.loudness, r.peak, r.channels, r.sha256, r.bytes,
-         r.source.path, r.source.part, r.license, r.uses, { source: r.source, recipe: r.recipe, candidates: r.candidates, notes: r.notes }, r]);
+        [r.id, r.slot || r.id, r.name, r.kind, r.group, Boolean(r.loop), r.urls?.audio || null, r.duration, r.loudness, r.peak, r.channels, r.sha256 || '', r.bytes,
+         r.source?.path || null, r.source?.part || null, r.license || 'sonniss-gdc', r.uses || [], { source: r.source, recipe: r.recipe, candidates: r.candidates, notes: r.notes }, r]);
     }
     await db.end();
     console.log(`Postgres: ${rows.length} rows upserted into sound_assets`);
@@ -68,6 +94,6 @@ const site = u => typeof u === 'string' && PUBLIC_BASE && u.startsWith(PUBLIC_BA
 const short = p => Array.isArray(p) ? p.filter((_, i) => i % 2 === 0).map(v => +v.toFixed(2)) : p;
 const old = (() => { try { return JSON.parse(readFileSync(MANIFEST, 'utf8')); } catch { return { sounds: [] }; } })();
 const keep = (old.sounds || []).filter(s => s.status === 'bundled'); // sounds the site ships itself (e.g. the jukebox track)
-const sounds = [...keep, ...publicCatalog(rows).sounds.map(r => ({ ...r, status: r.urls?.audio ? 'stored' : 'picked', urls: r.urls?.audio ? { audio: site(r.urls.audio) } : {}, peaks: short(r.peaks), candidates: r.candidates.slice(0, 4) }))];
+const sounds = [...keep, ...publicCatalog(rows.filter(r => r.kind !== 'music' || !music.some(m => m.id === r.id))).sounds.map(r => ({ ...r, status: r.urls?.audio ? 'stored' : 'picked', urls: r.urls?.audio ? { audio: site(r.urls.audio) } : {}, peaks: short(r.peaks), candidates: (r.candidates || []).slice(0, 4) }))];
 writeFileSync(MANIFEST, JSON.stringify({ version: 1, updated: new Date().toISOString().slice(0, 10), r2: SITE_R2, count: sounds.length, sounds }) + '\n');
 console.log(`manifest: ${sounds.length} sounds (${sounds.filter(s => s.urls?.audio).length} playable)`);

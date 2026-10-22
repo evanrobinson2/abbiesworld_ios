@@ -91,7 +91,7 @@ export function soundRow({ cue, pick, take, measured, urls, sha256, bytes, sourc
     kind: cue.kind,                       // ambience | animal | effect | ui | music
     group: cue.group,
     subject: `${d.title}${d.publisher ? ' · ' + d.publisher : ''}`,
-    tags: [...new Set([d.category, cue.group].filter(Boolean))],
+    tags: [d.category, d.ucs].filter(t => t && t !== 'Other'),
     uses: GAME_USES[pick?.slot ?? cue.id] || [],
     loop: Boolean(cue.loop),
     status: 'stored',

@@ -90,7 +90,7 @@ async function pickSlot(slot) {
   }
   for (const t of takes) used.add(t.path);
   const notes = takes.length ? [
-    `Picked from ${candidates.length} matching files; best name match with ${slot.loop ? 'a long enough stretch to loop' : 'a clean take'}.`,
+    `Picked from ${candidates.length} matching file${candidates.length === 1 ? '' : 's'}; best name match with ${slot.loop ? 'a long enough stretch to loop' : 'a clean take'}.`,
     ...(new Set(takes.map(t => t.path)).size < takes.length ? ['The variants are separate takes from one recording, so they sound like a set.'] : []),
   ] : ['Nothing suitable in the index yet.'];
   return { slot: slot.id, takes, candidates, notes, date: new Date().toISOString().slice(0, 10) };
