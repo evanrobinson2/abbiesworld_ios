@@ -8,6 +8,26 @@
 > jukebox and Family Teleport hooks from commit 6abff0d. The director works with any audio files, so a future
 > API-generated score can reuse it.
 
+## API music (ElevenLabs)
+
+The replacement for the sample renderer. `api/briefs.json` holds one composition plan per cue (beds, stings,
+interludes) in a shared palette; `api/elevenlabs.py` sends them to the ElevenLabs Music API and writes takes plus a
+provenance sidecar to `out/api/<cue>/` (git-ignored), loudness-matched to the score's targets with ffmpeg.
+
+```
+python3 tools/composer/api/elevenlabs.py --dry-run                       # print the plans
+ELEVENLABS_API_KEY=... python3 tools/composer/api/elevenlabs.py --only wonder sting-arrival --takes 3
+```
+
+The cloud box cannot reach api.elevenlabs.io, so takes are made by the `music-takes` GitHub workflow (manual; secret
+`ELEVENLABS_API_KEY`), which commits mastered takes and provenance to `takes/<cue>/` for review.
+
+Licence (checked 2026-10-22): on any paid plan from Starter up, output may be used commercially, including in an
+indie game (under $500k revenue); "Studio Games" above that need Enterprise Music. No attribution from Starter up.
+Google Lyria is not usable: the Gemini API and Google Cloud (section 20(d)) terms ban apps likely to be used by
+under-18s. Takes stay out of the site until they clearly beat the old mock-up; then they go through the R2
+catalogue and the director in `runtime/`.
+
 Original music for Abbie's World: looping beds, interludes and stings, written as code and performed by a recorded
 chamber orchestra. Listen at `/music` on the Ranch Atelier site; the same records appear on `/sounds`.
 
