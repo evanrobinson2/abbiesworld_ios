@@ -36,9 +36,25 @@ Talk tap ─► /api/live {action:session}  (60 s HMAC ticket)
 
 `look` (scene summary and last tap), `change_world` (spawn, remove, move, transform, style,
 animate, camera, time, people, weather), `build` (one thing from up to 40 shape parts, hung on
-an invisible anchor so it moves as one: abacus, castle, rocket), `catalog` (registered models),
+an invisible anchor so it moves as one: abacus, castle, rocket), `catalog` (search by plain
+words across the 98 ranch models and the workshop model library; library models spawn as
+`lib-<id>`, normalised to one person tall), `control_app` (the app around the world, below),
 `order_model` (asks the workshop for a proper model; stored in Blob `live-orders/v1/`), and
 `goodbye`. No screenshots, no narration op, no web, no code, no URLs.
+
+`control_app` runs page-owned actions from `app-actions.js` (`RanchActions.run`), never DOM
+selectors. The `sandboxApp` provider in `simulations/lab.mjs` exposes: panel, library,
+simulation (ranch, Futurama, Halloween, Starship, Moon; the cemetery is not offered to the
+voice), ranch shape, herd and play areas, size and complexity, regenerate, fit, pause, arrival
+effect and replay, season and ambient sound. The voice also gets `add_tile` (Ranch, Garden,
+Meadow, Moonbase through `sandboxGenerators`) and list, save, open and new scenes through
+`sandboxScenes`. Deleting, renaming, importing and exporting scenes and the developer overlay
+are not reachable. The same `sandboxApp` provider is also visible to the action bridge.
+Tool calls run one at a time in the order the model made them.
+
+The instructions carry a "THE GAME WORLD" section (ranch, animals and ranges, buildings and
+build stages, supplies, the family figures, tiles, clock, seasons, weather, arrival effects,
+the other worlds), and the session brief adds the live app state.
 
 ### Safety layers
 

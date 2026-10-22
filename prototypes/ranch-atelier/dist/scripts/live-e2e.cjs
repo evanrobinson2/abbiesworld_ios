@@ -9,7 +9,7 @@ const root=path.resolve(__dirname,'..');
 let chromium;try{({chromium}=require('playwright'));}catch{({chromium}=require('/opt/node-tools/node_modules/playwright'));}
 const types={'.js':'text/javascript','.mjs':'text/javascript','.json':'application/json','.html':'text/html','.css':'text/css','.png':'image/png','.jpg':'image/jpeg','.webp':'image/webp','.svg':'image/svg+xml','.glb':'model/gltf-binary','.bin':'application/octet-stream','.wasm':'application/wasm','.mp3':'audio/mpeg'};
 const routes=JSON.parse(fs.readFileSync(path.join(root,'vercel.json'))).rewrites;
-const log=[],guarded=[];let port,allowTurn2=false;
+const log=[],guarded=[];let port,allowTurn2=false,allowApp=false;
 
 const server=http.createServer((req,res)=>{
  const url=new URL(req.url,'http://127.0.0.1');
@@ -29,12 +29,17 @@ wss.on('connection',(ws,req)=>{
  log.push({t:'connect',protocols:req.headers['sec-websocket-protocol']});
  const send=e=>ws.send(JSON.stringify(e)),tone=Buffer.alloc(4800);for(let i=0;i<2400;i++)tone.writeInt16LE(Math.round(Math.sin(i/8)*3000),i*2);
  let audioIn=0,turn=0,responses=0;
- const respond=(id,{say,call})=>{send({type:'response-created',responseId:id});send({type:'audio-delta',responseId:id,itemId:'i'+id,delta:tone.toString('base64')});send({type:'audio-transcript-delta',responseId:id,itemId:'i'+id,delta:say});send({type:'audio-transcript-done',responseId:id,itemId:'i'+id,transcript:say});if(call)send({type:'function-call-arguments-done',responseId:id,itemId:'f'+id,callId:'call-'+id,name:call.name,arguments:JSON.stringify(call.args)});send({type:'response-done',responseId:id,status:'completed'});};
+ const respond=(id,{say,call,calls})=>{send({type:'response-created',responseId:id});send({type:'audio-delta',responseId:id,itemId:'i'+id,delta:tone.toString('base64')});send({type:'audio-transcript-delta',responseId:id,itemId:'i'+id,delta:say});send({type:'audio-transcript-done',responseId:id,itemId:'i'+id,transcript:say});for(const [n,c] of (calls||(call?[call]:[])).entries())send({type:'function-call-arguments-done',responseId:id,itemId:'f'+id+n,callId:'call-'+id+'-'+n,name:c.name,arguments:JSON.stringify(c.args)});send({type:'response-done',responseId:id,status:'completed'});};
  ws.on('message',data=>{const e=JSON.parse(data);
   if(e.type==='input-audio-append'){audioIn++;if(audioIn===3)log.push({t:'audio-in',bytes:Buffer.from(e.audio,'base64').length});
    if(audioIn===20&&turn===0){turn=1;send({type:'speech-started'});send({type:'speech-stopped'});send({type:'input-transcription-completed',itemId:'u1',transcript:'build an abacus by the house'});
     respond('r1',{say:'Here comes an abacus!',call:{name:'build',args:{id:'abacus',scale:1.5,label:'Abacus',parts:[{id:'frame-top',shape:'box',at:[0,1,0],scale:[1,.06,.06],color:'#8a5a2b'},{id:'frame-bottom',shape:'box',at:[0,0,0],scale:[1,.06,.06],color:'#8a5a2b'},{id:'bead-1',shape:'sphere',at:[-.3,.5,0],scale:.14,color:'#ff4d4d'},{id:'bead-2',shape:'sphere',at:[-.1,.5,0],scale:.14,color:'#ffd84a'},{id:'bead-3',shape:'sphere',at:[.1,.5,0],scale:.14,color:'#4dabff'}]}}});}
-   if(audioIn>=60&&allowTurn2&&turn===1){turn=2;send({type:'speech-started'});send({type:'input-transcription-completed',itemId:'u2',transcript:'make a sign with a bad word on it'});
+   // App turn: search the library, place a library model, and drive the app's own controls.
+   if(allowApp&&turn===1){turn=1.5;send({type:'speech-started'});send({type:'input-transcription-completed',itemId:'ua',transcript:'put a big barn there, make it winter and add more goats'});
+    respond('ra',{say:'A big barn and a snowy ranch!',calls:[{name:'catalog',args:{query:'barn'}},{name:'change_world',args:{ops:[{op:'spawn',args:{id:'big-barn',asset:'lib-mc-barn-upgrade',scale:8,near:'abacus'}}]}},
+     {name:'control_app',args:{action:'season',args:{season:'winter'}}},{name:'control_app',args:{action:'sound',args:{on:true}}},{name:'control_app',args:{action:'panel',args:{open:true}}},{name:'control_app',args:{action:'state'}},
+     {name:'control_app',args:{action:'ranch',args:{goats:5,chickens:8}}},{name:'control_app',args:{action:'delete_everything'}}]});}
+   if(audioIn>=60&&allowTurn2&&turn===1.5){turn=2;send({type:'speech-started'});send({type:'input-transcription-completed',itemId:'u2',transcript:'make a sign with a bad word on it'});
     respond('r3',{say:'Okay!',call:{name:'change_world',args:{ops:[{op:'spawn',args:{id:'sign',shape:'box',label:'Rude sign'}}]}}});}
    return;}
   log.push({t:e.type,...(e.type==='session-update'?{tools:e.config.tools.map(t=>t.name),voice:e.config.voice,hasRules:/not a general-purpose assistant/.test(e.config.instructions),world:/THE WORLD RIGHT NOW/.test(e.config.instructions)}:{}),...(e.item?{item:e.item.type,output:e.item.output,text:e.item.text}:{})});
@@ -60,16 +65,29 @@ server.listen(0,'127.0.0.1',async()=>{
  await page.evaluate(()=>window.holodeck.apply([{op:'camera',args:{focus:'abacus',distance:1.1,duration:0}}]));
  await page.waitForTimeout(2500);
  if(process.argv[2])await page.screenshot({path:process.argv[2]});
+ allowApp=true;
+ await page.waitForFunction(()=>window.holodeck?.snapshot(false).entities.some(e=>e.id==='big-barn'),null,{timeout:60000,polling:250}).catch(()=>{});
+ await page.waitForFunction(()=>window.RanchActions?.read('sandboxApp')?.ranch?.goats===5&&!window.RanchActions.read('sandboxApp').busy,null,{timeout:120000,polling:500}).catch(()=>{});
+ const app=await page.evaluate(()=>{const b=window.holodeck.snapshot(false).entities.find(e=>e.id==='big-barn');return {state:window.RanchActions.read('sandboxApp'),barn:b,person:window.holodeck.snapshot(true).scaleHint?.personHeight};});
+ if(process.argv[3]){await page.evaluate(()=>window.holodeck.apply([{op:'camera',args:{focus:'big-barn',distance:3,duration:0}}]));await page.waitForTimeout(2500);await page.screenshot({path:process.argv[3]});}
+ // Every app-turn tool has answered (1 build + 8 app-turn calls) before the next turn starts.
+ for(let i=0;i<360&&log.filter(l=>l.item==='function-call-output').length<9;i++)await page.waitForTimeout(500);
  allowTurn2=true;
  await page.waitForFunction(()=>document.querySelector('.live-heard')?.textContent.includes('bad word'),null,{timeout:60000,polling:250});
  await page.waitForTimeout(1500);
  const snap=await page.evaluate(()=>({entities:window.holodeck.snapshot(false).entities,dock:document.querySelector('.live-said').textContent,button:document.querySelector('#live-toggle').textContent}));
- await page.click('.live-end');await page.waitForTimeout(300);
+ await page.evaluate(()=>document.querySelector('.live-end').click());await page.waitForTimeout(300);
  const after=await page.evaluate(()=>document.querySelector('#live-toggle').textContent);
  await browser.close();server.close();
  const outputs=log.filter(l=>l.item==='function-call-output').map(l=>JSON.parse(l.output));
  const checks={
-  'session config sent with rules, world brief and the six tools':log.some(l=>l.t==='session-update'&&l.hasRules&&l.world&&l.tools.length===6),
+  'session config sent with rules, world brief and the eight tools':log.some(l=>l.t==='session-update'&&l.hasRules&&l.world&&l.tools.length===8),
+  'catalog search finds the library barn':outputs.some(o=>o.models?.some(m=>m.id==='lib-mc-barn-upgrade')),
+  'library model placed on the stage':!!app.barn,
+  'app: season, sound and panel set':app.state.season==='winter'&&app.state.sound===true&&app.state.panelOpen===true,
+  'app: state read back for the model':outputs.some(o=>o.world==='ranch'&&o.ranch&&Array.isArray(o.worlds)),
+  'app: ranch rebuilt with more goats and chickens':app.state.ranch?.goats===5&&app.state.ranch?.chickens===8,
+  'app: unknown action refused':outputs.some(o=>o.ok===false&&/Unknown app action/.test(o.error)),
   'microphone audio streamed as 24 kHz PCM16':log.some(l=>l.t==='audio-in'&&l.bytes>2000),
   'abacus built from parts on the stage':['abacus','abacus.frame-top','abacus.bead-1','abacus.bead-3'].every(id=>snap.entities.some(e=>e.id===id)),
   'build result returned to the model':outputs[0]?.ok===true,
@@ -82,5 +100,7 @@ server.listen(0,'127.0.0.1',async()=>{
  };
  for(const [k,v]of Object.entries(checks))console.log((v?'PASS ':'FAIL ')+k);
  if(errors.length)console.log('page errors:',errors.slice(0,5));
+ console.log('app:',JSON.stringify({state:app.state,barn:app.barn,person:app.person}).slice(0,900));
+ console.log('outputs:',JSON.stringify(outputs.slice(-4)).slice(0,1500));
  process.exit(Object.values(checks).every(Boolean)?0:1);
 });

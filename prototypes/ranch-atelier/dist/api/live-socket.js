@@ -41,7 +41,7 @@ async function relay(client,token){
   if(e.type==='session-update'){
    // The rules and tools always come from the server. The page may add the scene brief it appends.
    const given=typeof e.config?.instructions==='string'?e.config.instructions:'';
-   const brief=given.startsWith(policy.INSTRUCTIONS)?given.slice(policy.INSTRUCTIONS.length,policy.INSTRUCTIONS.length+6000):'';
+   const brief=given.startsWith(policy.INSTRUCTIONS)?given.slice(policy.INSTRUCTIONS.length,policy.INSTRUCTIONS.length+8000):'';
    e={type:'session-update',config:{...e.config,instructions:policy.INSTRUCTIONS+brief,tools:policy.TOOLS,voice:policy.VOICE}};
   }
   if(e.type==='conversation-item-create'){

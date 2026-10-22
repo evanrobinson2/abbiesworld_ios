@@ -59,7 +59,18 @@
       receipts.set(command.id,{fingerprint,receipt}); if(receipts.size>100) receipts.delete(receipts.keys().next().value);
       return clone(receipt);
     }
-    return {register,describe,execute};
+    // In-page callers (live voice) run an action directly: same schema and availability checks, no transport.
+    async function run(name,args={}) {
+      const dot=name.indexOf('.'),p=providers.get(name.slice(0,dot)),d=p?.actions[name.slice(dot+1)];
+      if (!d) throw Error('Unsupported action');
+      const reason=p.unavailable?.(name.slice(dot+1)); if(reason) throw Error(reason);
+      validate(d.schema,args);
+      if (running) throw Error('Another action is running');
+      running=true; changed();
+      try { return clone((await d.run(clone(args))) ?? null); } finally { running=false; changed(); }
+    }
+    const read=name=>{const p=providers.get(name);return p?clone(p.read()):null;};
+    return {register,describe,execute,run,read};
   }
   if (typeof module !== 'undefined') module.exports={createRegistry,validate};
   if (typeof window !== 'undefined') window.RanchActions=createRegistry({identity:()=>window.RanchView?.actionTarget() || {},changed:()=>window.RanchView?.changed()});
