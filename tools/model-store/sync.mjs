@@ -149,7 +149,8 @@ for (const r of rows.sort((a, b) => a.source_path.localeCompare(b.source_path)))
 }
 
 // ---- 3. Catalogue: Postgres rows, then the published JSON in R2.
-if (!DRY && env.POSTGRES_URL) {
+// R2 is what the site reads, so a database failure warns and the catalogue still publishes.
+if (!DRY && env.POSTGRES_URL) try {
   const { default: pg } = await import('pg');
   const db = new pg.Client({ connectionString: env.POSTGRES_URL.replace(/([?&])sslmode=[^&]*&?/, '$1').replace(/[?&]$/, ''), ssl: /localhost|127\.0\.0\.1/.test(env.POSTGRES_URL) ? false : { rejectUnauthorized: false } });
   await db.connect();
@@ -170,6 +171,8 @@ if (!DRY && env.POSTGRES_URL) {
   }
   await db.end();
   console.log(`Postgres: ${rows.length} rows upserted into model_assets`);
+} catch (err) {
+  console.log(`::warning::Postgres skipped (${err.message}). Check the POSTGRES_URL secret; the catalogue is still published to R2`);
 } else if (!DRY) console.log('POSTGRES_URL not set: skipped the database, catalogue published to R2 only');
 
 const outputs = {
