@@ -1,0 +1,30 @@
+# One-off reachability check for the Sonniss bundle hosts from a GitHub runner (headers, ranges, mirrors).
+name: sound-probe
+on:
+  push:
+    branches: ['claude/project-thread-mzo2r5']
+    paths: ['.github/workflows/sound-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - run: |
+          UA='Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36'
+          for u in \
+            "https://downloads.sonniss.com/Sonniss.com-GDC2024-GameAudioBundle1of9.zip" \
+            "http://downloads.sonniss.com/Sonniss.com-GDC2024-GameAudioBundle1of9.zip" \
+            "https://hippolytus.feralhosting.com/sonniss/Sonniss.com-GDC2024-GameAudioBundle1of9.zip" \
+            "http://hippolytus.feralhosting.com/sonniss/Sonniss.com-GDC2024-GameAudioBundle1of9.zip" \
+            "https://ftpmirror.your.org/pub/misc/sonniss2019/Sonniss.com%20-%20GDC%202019%20-%20Game%20Audio%20Bundle%20Part%201of8.zip" \
+            "https://ftpmirror.your.org/pub/misc/sonniss/sonniss.zip" \
+            "https://sonniss.com/GameAudioGDCPart8.torrent"; do
+            echo "== $u"
+            curl -s -o /dev/null -m 20 -w 'plain  %{http_code} %{size_download}B %{time_total}s\n' -r 0-99 "$u" || echo "plain failed $?"
+            curl -s -o /dev/null -m 20 -w 'browser %{http_code} %{size_download}B %{time_total}s\n' -r 0-99 -A "$UA" -e 'https://sonniss.com/gameaudiogdc/' "$u" || echo "browser failed $?"
+            curl -sI -m 20 -A "$UA" -e 'https://sonniss.com/gameaudiogdc/' "$u" | head -12
+          done
+          echo "== archive.org search"
+          curl -s -m 20 'https://archive.org/advancedsearch.php?q=sonniss+gdc&fl[]=identifier&fl[]=title&rows=50&output=json' | head -c 4000
