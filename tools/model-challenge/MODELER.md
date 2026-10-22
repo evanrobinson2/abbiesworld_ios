@@ -18,7 +18,7 @@ its Midjourney illustration, then export a game-ready GLB.
 - `build.py`: a standalone builder. `python build.py` rebuilds the GLB from nothing (no hand edits). Keep
   shape numbers in a dict at the top so revisions are parameter edits.
 - `<name>.glb`: exported with `bpy.ops.export_scene.gltf(filepath=..., export_format='GLB', export_animations=True,
-  export_animation_mode='SCENE', export_apply=True)`.
+  export_animation_mode='SCENE', export_anim_scene_split_object=False, export_apply=True)` (the last flag makes it one clip, not one per object).
 - `notes.json`: `{"what_i_did": [[heading, sentence], ...], "good": [...], "off": [...], "rounds": [{"round": n,
   "change": "...", "mean_iou": x}], "moving_parts": "...", "creative_additions": "..."}`.
 - `r/` (renders and score from the harness, see below).
