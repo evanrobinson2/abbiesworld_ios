@@ -1,0 +1,268 @@
+/**
+ * Dispatch bridge operations shared by the MCP tools (build/status/revise/inbox)
+ * and the GitHub relay endpoint (Claude's replies, watchdog sweep).
+ */
+import {
+  addRevision,
+  applyClaudeMessage,
+  buildRecord,
+  createBlobStorage,
+  createDispatchStore,
+  firePayload,
+  giveUp,
+  idempotencyKey,
+  isDispatchId,
+  LIMITS,
+  noteRefire,
+  publicMessage,
+  recordFireResult,
+  summarize,
+  watchdogAction,
+} from "./dispatch-store.js";
+
+const FIRE_BASE = "https://api.anthropic.com/v1/claude_code/routines";
+
+/** Start a Claude Code cloud session through the dispatch scheduled task's API trigger. */
+export async function fireRoutine(text, { env = process.env, fetchImpl = fetch } = {}) {
+  const id = String(env.CLAUDE_DISPATCH_ROUTINE_ID || "").trim();
+  const token = String(env.CLAUDE_DISPATCH_ROUTINE_TOKEN || "").trim();
+  if (!/^trig_[A-Za-z0-9]+$/.test(id)) return { ok: false, error: "CLAUDE_DISPATCH_ROUTINE_ID not set" };
+  if (!token || token === "[SENSITIVE]") return { ok: false, error: "CLAUDE_DISPATCH_ROUTINE_TOKEN not set" };
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    const res = await fetchImpl(`${FIRE_BASE}/${id}/fire`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "anthropic-version": "2023-06-01",
+        "anthropic-beta": "experimental-cc-routine-2026-04-01",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ text }),
+      signal: controller.signal,
+    });
+    clearTimeout(timer);
+    const body = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      const retryAfter = res.headers.get("retry-after");
+      return {
+        ok: false,
+        status: res.status,
+        error: `fire_${res.status}: ${body?.error?.message || body?.error?.type || "error"}${retryAfter ? ` (retry after ${retryAfter}s)` : ""}`,
+      };
+    }
+    return { ok: true, sessionId: body.claude_code_session_id || null, sessionUrl: body.claude_code_session_url || null };
+  } catch (err) {
+    return { ok: false, error: `fire_exception: ${String(err?.message || err).slice(0, 200)}` };
+  }
+}
+
+let defaultStore = null;
+export async function getDefaultStore() {
+  if (!defaultStore) {
+    const blob = await import("@vercel/blob");
+    defaultStore = createDispatchStore(createBlobStorage(blob));
+  }
+  return defaultStore;
+}
+
+export function createDispatchService({ store, fire = fireRoutine, now = () => Date.now() } = {}) {
+  async function deliver(id, reason) {
+    // Persist the attempt first so a crash mid-fire is visible and retried, never silently lost.
+    const loaded = await store.get(id);
+    if (!loaded) return null;
+    const text = firePayload(loaded, { reason, now: now() });
+    const result = await fire(text);
+    const { record } = await store.update(id, (r) => {
+      recordFireResult(r, result, { now: now(), reason });
+    });
+    return { record, result };
+  }
+
+  async function build({ request, context, idempotency_key: explicitKey, requester }) {
+    const text = String(request || "").trim();
+    if (!text) return { error: "request_required", hint: "Describe what Claude should build, in plain words." };
+    const key = idempotencyKey(text, context, explicitKey);
+    const existing = await store.findByIdempotency(key, now());
+    if (existing && (explicitKey || existing.age < LIMITS.idempotencyWindowMs)) {
+      return {
+        duplicate: true,
+        note: "Same request was already submitted; returning the existing dispatch instead of starting a second build.",
+        ...summarize(existing.record),
+      };
+    }
+    const record = buildRecord({ request: text, context, requester, idemKey: key, now: now() });
+    await store.create(record);
+    const out = await deliver(record.id, "new");
+    const current = out?.record || record;
+    return {
+      duplicate: false,
+      ...summarize(current),
+      meaning:
+        current.delivery.state === "fired"
+          ? "Stored, and a Claude session was started. Not yet acknowledged: check inbox() or status() for Claude's receipt."
+          : "Stored durably, but starting Claude failed; the bridge retries automatically. See delivery.last_error.",
+    };
+  }
+
+  async function sweepOne(id) {
+    const rec = await store.get(id);
+    if (!rec) return null;
+    const action = watchdogAction(rec, now());
+    if (!action) return null;
+    if (action.reason === "give_up") {
+      await store.update(id, (r) => {
+        const again = watchdogAction(r, now());
+        if (!again || again.reason !== "give_up") return { __skipWrite: true };
+        giveUp(r, action.note, now());
+      });
+      return { id, action: "gave_up", note: action.note };
+    }
+    // Claim the re-fire inside a conditional write so two sweeps don't double-fire.
+    const claim = await store.update(id, (r) => {
+      const again = watchdogAction(r, now());
+      if (!again || again.reason !== action.reason) return { __skipWrite: true, value: false };
+      noteRefire(r, action.reason);
+      r.delivery.lastAttemptAt = new Date(now()).toISOString();
+      return true;
+    });
+    if (!claim.result) return null;
+    const out = await deliver(id, action.reason);
+    return { id, action: action.reason, ok: Boolean(out?.result?.ok), error: out?.result?.error || null };
+  }
+
+  async function sweep({ ids } = {}) {
+    const records = ids ? (await Promise.all(ids.map((id) => store.get(id)))).filter(Boolean) : await store.listRecords();
+    const results = [];
+    for (const rec of records) {
+      if (rec.status === "completed" && !rec.pendingRevision) continue;
+      if (rec.status === "failed" && !rec.pendingRevision) continue;
+      const r = await sweepOne(rec.id);
+      if (r) results.push(r);
+    }
+    return results;
+  }
+
+  async function status({ dispatch_id: id, include_messages } = {}) {
+    if (id) {
+      if (!isDispatchId(id)) return { error: "bad_dispatch_id", hint: "Dispatch ids look like D-261022-AB3CD." };
+      await sweepOne(id).catch(() => null);
+      const rec = await store.get(id);
+      if (!rec) return { error: "not_found", dispatch_id: id };
+      const out = summarize(rec);
+      if (include_messages) out.messages = rec.messages.slice(-20).map((m) => publicMessage(rec, m));
+      out.revisions = rec.revisions.map((r) => ({ n: r.n, at: r.at, instructions: r.instructions }));
+      out.original_request = rec.request;
+      out.context = rec.context;
+      return out;
+    }
+    const all = await store.listRecords();
+    const active = all.filter((r) => !["completed", "failed"].includes(r.status) || r.pendingRevision);
+    for (const r of active) await sweepOne(r.id).catch(() => null);
+    const fresh = active.length ? await Promise.all(active.map((r) => store.get(r.id))) : [];
+    const recent = all
+      .filter((r) => ["completed", "failed"].includes(r.status) && !r.pendingRevision)
+      .slice(0, 5)
+      .map(summarize);
+    return {
+      active: fresh.filter(Boolean).map(summarize),
+      recently_finished: recent,
+      counts: all.reduce((acc, r) => ((acc[r.status] = (acc[r.status] || 0) + 1), acc), {}),
+    };
+  }
+
+  async function revise({ dispatch_id: id, instructions, requester }) {
+    if (!isDispatchId(id)) return { error: "bad_dispatch_id" };
+    let plan;
+    try {
+      const out = await store.update(id, (r) => addRevision(r, instructions, { requester, now: now() }));
+      if (out.notFound) return { error: "not_found", dispatch_id: id };
+      plan = out.result;
+    } catch (err) {
+      return { error: err.code || "revise_failed", detail: err.message };
+    }
+    if (plan.deliverNow) {
+      const out = await deliver(id, "revision");
+      return {
+        ...summarize(out.record),
+        meaning: out.result.ok
+          ? "Revision recorded and a Claude session was started on the same branch and issue. Wait for its ack in inbox()."
+          : "Revision recorded; starting Claude failed and will be retried automatically.",
+      };
+    }
+    const rec = await store.get(id);
+    return {
+      ...summarize(rec),
+      meaning:
+        "Revision recorded. Claude is mid-run on this dispatch, so the revision is queued and goes out as soon as that run reports in (completed, blocked or failed).",
+    };
+  }
+
+  async function inbox({ since, unread_only: unreadOnly = true, acknowledge = true, dispatch_id: onlyId, limit = 30 } = {}) {
+    const sinceMs = since ? Date.parse(since) : null;
+    if (since && Number.isNaN(sinceMs)) return { error: "bad_since", hint: "Use an ISO timestamp, e.g. 2026-10-22T20:00:00Z" };
+    const records = onlyId ? [await store.get(onlyId)].filter(Boolean) : await store.listRecords({ sinceMs: sinceMs || undefined });
+    const picked = [];
+    for (const rec of records) {
+      for (const m of rec.messages) {
+        if (unreadOnly && m.acknowledged) continue;
+        if (sinceMs && Date.parse(m.at) < sinceMs) continue;
+        picked.push({ rec, m });
+      }
+    }
+    picked.sort((a, b) => Date.parse(a.m.at) - Date.parse(b.m.at));
+    const page = picked.slice(0, Math.max(1, Math.min(100, Number(limit) || 30)));
+    const messages = page.map(({ rec, m }) => publicMessage(rec, m));
+    if (acknowledge && page.length) {
+      const byId = new Map();
+      for (const { rec, m } of page) {
+        if (!byId.has(rec.id)) byId.set(rec.id, new Set());
+        byId.get(rec.id).add(m.id);
+      }
+      for (const [id, set] of byId) {
+        await store.update(id, (r) => {
+          let changed = false;
+          for (const m of r.messages) {
+            if (set.has(m.id) && !m.acknowledged) {
+              m.acknowledged = true;
+              m.acknowledgedAt = new Date(now()).toISOString();
+              changed = true;
+            }
+          }
+          if (!changed) return { __skipWrite: true };
+        });
+      }
+    }
+    return {
+      messages,
+      more: picked.length > page.length,
+      acknowledged: Boolean(acknowledge && page.length),
+      checked_at: new Date(now()).toISOString(),
+      hint: messages.length ? undefined : "No new messages from Claude.",
+    };
+  }
+
+  /** A GitHub issue or comment, relayed by the dispatch-relay workflow. */
+  async function relay(source) {
+    const { parseMarker } = await import("./dispatch-store.js");
+    const marker = parseMarker(source.body);
+    if (!marker) return { ignored: "no_marker" };
+    const out = await store.update(marker.id, (r) => {
+      const res = applyClaudeMessage(r, source, { now: now() });
+      if (!res.applied) return { __skipWrite: true, value: res };
+      return res;
+    });
+    if (out.notFound) return { ignored: "unknown_dispatch", id: marker.id };
+    // A queued revision goes out as soon as the running session reports a stopping point.
+    const after = out.record;
+    let delivered = null;
+    if (after.pendingRevision && ["completed", "failed", "blocked"].includes(after.status)) {
+      const swept = await sweepOne(after.id);
+      delivered = swept;
+    }
+    return { id: marker.id, kind: marker.kind, applied: Boolean(out.result?.applied), duplicate: Boolean(out.result?.duplicate), delivered };
+  }
+
+  return { build, status, revise, inbox, relay, sweep, sweepOne, deliver };
+}

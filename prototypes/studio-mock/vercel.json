@@ -94,6 +94,10 @@
     "api/trouble-tickets.js": {
       "maxDuration": 30,
       "includeFiles": "api/lib/**"
+    },
+    "api/dispatch-relay.js": {
+      "maxDuration": 60,
+      "includeFiles": "api/lib/**"
     }
   }
 }

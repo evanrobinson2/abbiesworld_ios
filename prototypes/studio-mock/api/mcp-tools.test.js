@@ -37,6 +37,10 @@ for (const required of [
   "asset_ingest",
   "execution_capacity_status",
   "mj_workers_alive",
+  "build",
+  "status",
+  "revise",
+  "inbox",
 ]) {
   assert(names.includes(required), `missing ${required}`);
 }

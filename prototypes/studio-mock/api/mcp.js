@@ -68,10 +68,12 @@ import {
   setTicketGithubUrl,
 } from "./lib/trouble-tickets.js";
 import { summarize as summarizeExecutionCapacity } from "./lib/execution-capacity-store.js";
+import { authorizeDispatchCaller } from "./lib/dispatch-auth.js";
+import { createDispatchService, getDefaultStore as getDispatchStore } from "./lib/dispatch-service.js";
 
 const ORIGIN = "http://abbies.world:8000";
 const PROTOCOL = "2025-03-26";
-const SERVER = { name: "abbies-world", version: "0.6.3" };
+const SERVER = { name: "abbies-world", version: "0.7.0" };
 const HOUSEHOLD_AUDIENCE = "https://api.abbies.world";
 const PLATE_BASE = "https://studio-mock-iota.vercel.app/api/plate";
 const REVIEW_BASE = "https://studio-mock-iota.vercel.app/review.html";
@@ -81,6 +83,8 @@ const OAUTH_RESOURCE_METADATA =
 const OAUTH_SCOPES = "openid profile email offline_access read:world write:world";
 
 const COMMAND_CARD = `## Exposed commands (these ARE on this MCP)
+
+BUILD WITH CLAUDE (dispatch bridge): build(request) hands development work to Claude (code, models, scenes, mechanics, deploys) and returns a dispatch id immediately; it never waits. status(dispatch_id?) shows lifecycle submitted → acknowledged → running → blocked/completed/failed, plus branch, commits, PRs and whether completion was verified on GitHub. revise(dispatch_id, instructions) sends a change order or answers Claude's question. inbox() returns Claude's new messages (acks, progress, questions, completion reports) and marks them read. "Submitted" only means stored: wait for an ack message before telling Evan Claude has it.
 
 DELETE / REMOVE a POI: place_remove or place_delete (sceneId + placeId, instanceId, or name). Never rewrite a scene to drop a pin.
 DELETE a scene: scene_delete (scene.home is protected). Use this for accidental scene.mcp* objects.
@@ -636,7 +640,75 @@ function applyEffects(doc, effects) {
   return applied;
 }
 
+const DISPATCH_TOOL_NAMES = new Set(["build", "status", "revise", "inbox"]);
+
+const DISPATCH_TOOLS = [
+  {
+    name: "build",
+    description:
+      "Hand a development request to Claude, the autonomous developer for Abbie's World (code, 3D models, scenes, game mechanics, animations, deploys). Returns at once with a dispatch_id and status 'submitted'; the work runs for minutes to hours in Claude's cloud session and commits to GitHub. 'submitted' means stored, not received: Claude's acknowledgment arrives later in inbox()/status(). Re-sending the same request within 15 minutes returns the existing dispatch instead of starting a duplicate.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        request: { type: "string", description: "What to build, in Evan's words. Be specific about the outcome he wants." },
+        context: { type: "string", description: "Optional extra context: which scene/asset/branch, constraints, links, prior decisions." },
+        idempotency_key: { type: "string", description: "Optional. Reuse the same key to guarantee one dispatch for one intent, even across retries." },
+      },
+      required: ["request"],
+      additionalProperties: false,
+    },
+    annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true, openWorldHint: true },
+  },
+  {
+    name: "status",
+    description:
+      "State of one dispatch (pass dispatch_id) or of all active dispatches. Shows status (submitted, acknowledged, running, blocked, completed, failed), whether completion was verified against GitHub, last progress, last activity time, branch, commits, PR links, errors, and any question waiting for Evan.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        dispatch_id: { type: "string", description: "e.g. D-261022-AB3CD. Omit for all active dispatches." },
+        include_messages: { type: "boolean", description: "Also return the last 20 messages for this dispatch." },
+      },
+      additionalProperties: false,
+    },
+    annotations: { readOnlyHint: true },
+  },
+  {
+    name: "revise",
+    description:
+      "Send a change order, feedback, or an answer to Claude's question for an existing dispatch. The original request and every earlier revision are kept. If Claude is idle (completed, failed or blocked) a new Claude session picks it up on the same branch; if Claude is mid-run the revision is queued and delivered when that run reports in.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        dispatch_id: { type: "string" },
+        instructions: { type: "string", description: "The change or answer, in Evan's words." },
+      },
+      required: ["dispatch_id", "instructions"],
+      additionalProperties: false,
+    },
+    annotations: { readOnlyHint: false, destructiveHint: false, openWorldHint: true },
+  },
+  {
+    name: "inbox",
+    description:
+      "New messages from Claude across dispatches: acknowledgments, progress reports, questions, failures and completion notices with commit/PR/deploy links. By default returns unread messages and marks them read, so the same news is not repeated. Pass acknowledge:false to peek, unread_only:false with since to re-read history.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        since: { type: "string", description: "ISO timestamp; only messages at or after it." },
+        unread_only: { type: "boolean", description: "Default true." },
+        acknowledge: { type: "boolean", description: "Mark returned messages as read. Default true." },
+        dispatch_id: { type: "string", description: "Only this dispatch." },
+        limit: { type: "integer", description: "Max messages, default 30." },
+      },
+      additionalProperties: false,
+    },
+    annotations: { readOnlyHint: false, destructiveHint: false, idempotentHint: true },
+  },
+];
+
 const TOOLS = [
+  ...DISPATCH_TOOLS,
   {
     name: "read_primer",
     description: "Dungeon-master primer plus how scenes and POIs show up on the iPad. Call this before authoring.",
@@ -2200,7 +2272,31 @@ async function runTroubleTool(name, auth, args) {
   return extra;
 }
 
+let dispatchService = null;
+
+async function callDispatchTool(name, args, request) {
+  const auth = await authorizeDispatchCaller(presentedToken(request, args)).catch((err) => ({
+    ok: false,
+    error: `auth_check_failed: ${String(err?.message || err).slice(0, 120)}`,
+  }));
+  if (!auth.ok) {
+    return {
+      error: "auth_required",
+      detail: auth.error,
+      hint: "Dispatch tools need the ChatGPT OAuth (Auth0) token for this MCP; the Studio fallback token is not accepted.",
+    };
+  }
+  if (!dispatchService) dispatchService = createDispatchService({ store: await getDispatchStore() });
+  const requester = auth.requester;
+  if (name === "build") return dispatchService.build({ ...args, requester });
+  if (name === "status") return dispatchService.status(args);
+  if (name === "revise") return dispatchService.revise({ ...args, requester });
+  if (name === "inbox") return dispatchService.inbox(args);
+  return { error: "unknown_dispatch_tool" };
+}
+
 async function callTool(name, args, request) {
+  if (DISPATCH_TOOL_NAMES.has(name)) return callDispatchTool(name, args, request);
   if (name === "place_delete") name = "place_remove";
   if (name === "feedback_report" || name === "bug_report") name = "trouble_ticket_create";
   if (name === "read_primer") return { text: primerBody() };
@@ -2765,6 +2861,7 @@ export async function GET() {
       tickets: ["trouble_ticket_get", "trouble_ticket_list", "trouble_ticket_comment", "trouble_ticket_resolve"],
       ingest: ["asset_ingest"],
       mjWorkersAlive: ["execution_capacity_status", "mj_workers_alive"],
+      dispatch: ["build", "status", "revise", "inbox"],
     },
   });
 }
