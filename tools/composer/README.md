@@ -19,6 +19,9 @@ python3 tools/composer/api/elevenlabs.py --dry-run                       # print
 ELEVENLABS_API_KEY=... python3 tools/composer/api/elevenlabs.py --only wonder sting-arrival --takes 3
 ```
 
+The cloud box cannot reach api.elevenlabs.io, so takes are made by the `music-takes` GitHub workflow (manual; secret
+`ELEVENLABS_API_KEY`), which commits mastered takes and provenance to `takes/<cue>/` for review.
+
 Licence (checked 2026-10-22): on any paid plan from Starter up, output may be used commercially, including in an
 indie game (under $500k revenue); "Studio Games" above that need Enterprise Music. No attribution from Starter up.
 Google Lyria is not usable: the Gemini API and Google Cloud (section 20(d)) terms ban apps likely to be used by
