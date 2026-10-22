@@ -7,10 +7,12 @@
  * secret), and also calls `sweep` on a schedule to retry or resume stuck dispatches.
  *
  * POST { op: "event", source: { kind, id, url, issueNumber, issueUrl, body, author, authorAssociation, createdAt, verification } }
- * POST { op: "sweep" }
+ * POST { op: "sweep" }  → also returns post_revisions: revisions to post on running sessions' issues
+ * POST { op: "revision_posted", dispatch_id, revision, comment_url }
  */
 import { authorizeRelay } from "./lib/dispatch-auth.js";
 import { createDispatchService, getDefaultStore } from "./lib/dispatch-service.js";
+import { notifyDispatchEvent } from "./lib/dispatch-notify.js";
 
 const TRUSTED_ASSOCIATIONS = new Set(["OWNER", "MEMBER", "COLLABORATOR"]);
 const TRUSTED_BOTS = new Set(["claude[bot]"]);
@@ -23,7 +25,7 @@ function json(body, status = 200) {
 }
 
 export async function GET() {
-  return json({ name: "abbies-dispatch-relay", accepts: ["event", "sweep"], auth: "GitHub Actions OIDC from evanrobinson2/abbiesworld_ios main" });
+  return json({ name: "abbies-dispatch-relay", accepts: ["event", "sweep", "revision_posted"], auth: "GitHub Actions OIDC from evanrobinson2/abbiesworld_ios main" });
 }
 
 export async function POST(request) {
@@ -38,11 +40,16 @@ export async function POST(request) {
   } catch {
     return json({ error: "bad_json" }, 400);
   }
-  const service = createDispatchService({ store: await getDefaultStore() });
+  const service = createDispatchService({ store: await getDefaultStore(), notify: notifyDispatchEvent });
 
   if (body?.op === "sweep") {
     const results = await service.sweep();
-    return json({ ok: true, swept: results });
+    const post = await service.pendingIssuePosts();
+    return json({ ok: true, swept: results, post_revisions: post });
+  }
+
+  if (body?.op === "revision_posted") {
+    return json({ ok: true, ...(await service.revisionPosted(body)) });
   }
 
   if (body?.op === "event") {

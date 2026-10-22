@@ -653,6 +653,17 @@ const DISPATCH_TOOLS = [
         request: { type: "string", description: "What to build, in Evan's words. Be specific about the outcome he wants." },
         context: { type: "string", description: "Optional extra context: which scene/asset/branch, constraints, links, prior decisions." },
         idempotency_key: { type: "string", description: "Optional. Reuse the same key to guarantee one dispatch for one intent, even across retries." },
+        mode: {
+          type: "string",
+          enum: ["auto", "quick", "standard", "bespoke"],
+          description:
+            "auto (default): Claude picks the mode from the request. quick: small change, fewest checkpoints. standard: concept art → model → in game, with checkpoints Evan can steer. bespoke: a faithful replica of a real object (e.g. the old bicycle from the yard) — works from Evan's reference photos, measures proportions, more checkpoints and stricter validation.",
+        },
+        references: {
+          type: "array",
+          items: { type: "string" },
+          description: "https URLs of reference photos (bespoke jobs especially).",
+        },
       },
       required: ["request"],
       additionalProperties: false,

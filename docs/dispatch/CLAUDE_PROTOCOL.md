@@ -19,6 +19,17 @@ Tower shell and stairs are modeled; starting the guards.
 - `kind`: one of `ack`, `progress`, `question`, `completed`, `failed`, `note`.
 - Optional: `branch`, `commits` (array of full SHAs), `prs` (array of PR numbers), `links`
   (array of `{"label","url"}` for deploys, artifacts, model pages).
+- Factory fields (they drive Evan's phone app, which shows every job as a work parcel moving
+  through the factory, with no Claude or ChatGPT on the phone):
+  - `stage`: where the parcel is now, e.g. `brief`, `concept`, `blockout`, `model`, `texture`,
+    `validate`, `export`, `in_game`, `deploy`.
+  - `checkpoint`: name of a reviewable moment, e.g. `concept_art`, `blockout`, `model_v1`.
+    A checkpoint with `images` or `models` pings Evan's phone.
+  - `images`: array of `{"label","url"}`; `models`: array of `{"label","url"}` pointing at GLBs.
+    URLs must be https and public: commit the file to your branch and use
+    `https://raw.githubusercontent.com/evanrobinson2/abbiesworld_ios/<full commit sha>/<path>`.
+  - `progress`: `{"done":3,"total":8,"unit":"parts","note":"cuirass done"}` for long jobs, so the
+    app can show partial progress.
 - The JSON must be valid and on one line. Post with the GitHub MCP tools (`issue_write`,
   `add_issue_comment`); the relay trusts only comments made with Evan's connected identity.
 
@@ -39,6 +50,16 @@ Tower shell and stairs are modeled; starting the guards.
 
 ## 2. Do the work
 
+Pick the mode. The payload's `mode` is `auto` unless Evan chose one:
+- `quick`: a small change. One progress message at most, then completion.
+- `standard`: the normal pipeline (concept art, then model, then in game), posting a checkpoint at each stage.
+- `bespoke`: a faithful replica of a real object (the old bicycle from the yard). Work from the
+  `references` photos (ask for photos with a `question` if there are none), record measurements and
+  proportions in the asset folder, post more checkpoints (concept/reference match, blockout, detail
+  pass, materials), and validate against the photos before completing.
+- `auto`: choose one of the above from the request and say which in your ack (a real object plus
+  photos means bespoke; a one-line tweak means quick). Default to standard.
+
 - Read `CLAUDE.md`, `VISION.md` and, for modeling, `docs/MODELER_VISION.md`. Follow the repo rules.
 - Work on the payload's `branch` (`claude/dispatch-<id>`). Create it from `main`, unless CLAUDE.md says
   that kind of work lives on another branch (Ranch Atelier work: start from and merge into
@@ -48,10 +69,21 @@ Tower shell and stairs are modeled; starting the guards.
   request implies it should be live.
 - Keep intent in the repo, not only in the issue: briefs, decisions and provenance go where CLAUDE.md says.
 
-## 3. Report progress, sparingly
+## 3. Report progress and checkpoints; never wait on Evan
 
-Post a `progress` message only at a meaningful milestone, at most one every 10 minutes, and never
-just to say nothing changed. One or two sentences: what is done, what is next.
+Post a `progress` message at each stage change and at meaningful milestones, at most one every
+10 minutes, never just to say nothing changed. One or two sentences plus the factory fields.
+
+Concept art is a checkpoint: as soon as it exists, commit the images, post `progress` with
+`"stage":"concept","checkpoint":"concept_art","images":[...]`, and **keep going**. Do not wait for a
+reply. Evan steers if he catches it in time; otherwise the work proceeds.
+
+**Before starting each new stage** (and at least every 20 minutes on long stages), re-read the issue's
+new comments. Evan's steering arrives there as a comment from `github-actions[bot]` beginning with
+`<!-- abbies-dispatch-revision:v1 {"id":…,"rev":N} -->`, or as a comment Evan wrote himself. Fold it
+in from that point, and post your next message with `"rev":N` so the bridge knows you took it
+(mention what you changed because of it). Do not use Claude's own phone notifications: Evan's phone
+gets alerts from the Abbie's World app.
 
 ## 4. Blocked? Ask once, then stop
 

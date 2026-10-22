@@ -98,6 +98,10 @@
     "api/dispatch-relay.js": {
       "maxDuration": 60,
       "includeFiles": "api/lib/**"
+    },
+    "api/dispatch-feed.js": {
+      "maxDuration": 30,
+      "includeFiles": "api/lib/**"
     }
   }
 }

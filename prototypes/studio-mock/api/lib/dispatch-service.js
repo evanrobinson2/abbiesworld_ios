@@ -13,7 +13,11 @@ import {
   idempotencyKey,
   isDispatchId,
   LIMITS,
+  markRevisionPosted,
+  revisionsToPost,
   noteRefire,
+  activityEvent,
+  parcelView,
   publicMessage,
   recordFireResult,
   summarize,
@@ -67,7 +71,7 @@ export async function getDefaultStore() {
   return defaultStore;
 }
 
-export function createDispatchService({ store, fire = fireRoutine, now = () => Date.now() } = {}) {
+export function createDispatchService({ store, fire = fireRoutine, now = () => Date.now(), notify = null, machinesExtra = null } = {}) {
   async function deliver(id, reason) {
     // Persist the attempt first so a crash mid-fire is visible and retried, never silently lost.
     const loaded = await store.get(id);
@@ -80,7 +84,7 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
     return { record, result };
   }
 
-  async function build({ request, context, idempotency_key: explicitKey, requester }) {
+  async function build({ request, context, idempotency_key: explicitKey, requester, mode, references }) {
     const text = String(request || "").trim();
     if (!text) return { error: "request_required", hint: "Describe what Claude should build, in plain words." };
     const key = idempotencyKey(text, context, explicitKey);
@@ -92,7 +96,7 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
         ...summarize(existing.record),
       };
     }
-    const record = buildRecord({ request: text, context, requester, idemKey: key, now: now() });
+    const record = buildRecord({ request: text, context, requester, idemKey: key, now: now(), mode, references });
     await store.create(record);
     const out = await deliver(record.id, "new");
     const current = out?.record || record;
@@ -130,6 +134,20 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
     if (!claim.result) return null;
     const out = await deliver(id, action.reason);
     return { id, action: action.reason, ok: Boolean(out?.result?.ok), error: out?.result?.error || null };
+  }
+
+  /** Revisions the relay workflow should post on running sessions' issues. */
+  async function pendingIssuePosts() {
+    const records = await store.listRecords();
+    return records.flatMap(revisionsToPost);
+  }
+
+  async function revisionPosted({ dispatch_id: id, revision, comment_url: url }) {
+    const out = await store.update(id, (r) => {
+      if (!markRevisionPosted(r, Number(revision), url, now())) return { __skipWrite: true, value: false };
+      return true;
+    });
+    return { id, revision, marked: Boolean(out.result) };
   }
 
   async function sweep({ ids } = {}) {
@@ -195,7 +213,7 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
     return {
       ...summarize(rec),
       meaning:
-        "Revision recorded. Claude is mid-run on this dispatch, so the revision is queued and goes out as soon as that run reports in (completed, blocked or failed).",
+        "Revision recorded. Claude is mid-run: the revision is posted on the dispatch's GitHub issue within ~10 minutes and Claude folds it in before its next step (it checks at each checkpoint, e.g. after concept art). If the run ends without taking it, a new run starts with it.",
     };
   }
 
@@ -254,6 +272,8 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
       return res;
     });
     if (out.notFound) return { ignored: "unknown_dispatch", id: marker.id };
+    let alerted = null;
+    if (notify && out.result?.applied) alerted = await notify(out.record, out.result.message).catch((e) => ({ error: String(e) }));
     // A queued revision goes out as soon as the running session reports a stopping point.
     const after = out.record;
     let delivered = null;
@@ -261,8 +281,72 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
       const swept = await sweepOne(after.id);
       delivered = swept;
     }
-    return { id: marker.id, kind: marker.kind, applied: Boolean(out.result?.applied), duplicate: Boolean(out.result?.duplicate), delivered };
+    return { id: marker.id, kind: marker.kind, applied: Boolean(out.result?.applied), duplicate: Boolean(out.result?.duplicate), delivered, alerted };
   }
 
-  return { build, status, revise, inbox, relay, sweep, sweepOne, deliver };
+  /**
+   * Event feed for the phone app: every Claude message (and bridge notice) across dispatches,
+   * oldest first, with images for checkpoints such as concept art. Read-only; does not touch
+   * ChatGPT's inbox read state.
+   */
+  async function feed({ since, dispatch_id: onlyId, limit = 50 } = {}) {
+    const sinceMs = since ? Date.parse(since) : null;
+    if (since && Number.isNaN(sinceMs)) return { error: "bad_since" };
+    const records = onlyId ? [await store.get(onlyId)].filter(Boolean) : await store.listRecords({ sinceMs: sinceMs || undefined });
+    const events = [];
+    for (const rec of records) {
+      for (const m of rec.messages) {
+        if (sinceMs && Date.parse(m.at) <= sinceMs) continue;
+        const pub = publicMessage(rec, m);
+        delete pub.acknowledged;
+        events.push({
+          event_id: m.id,
+          ...pub,
+          dispatch: { status: rec.status, verified: rec.verified, revision: rec.revision, request: rec.request.slice(0, 280) },
+        });
+      }
+    }
+    events.sort((a, b) => Date.parse(a.at) - Date.parse(b.at));
+    const page = events.slice(-Math.max(1, Math.min(200, Number(limit) || 50)));
+    // Parcels: everything active, plus anything that finished in the last 24h.
+    const all = onlyId ? records : sinceMs ? await store.listRecords() : records;
+    const dayAgo = now() - 24 * 3600 * 1000;
+    const parcels = all
+      .filter((r) => !["completed", "failed"].includes(r.status) || Date.parse(r.updatedAt) >= dayAgo)
+      .map((r) => parcelView(r, now()));
+    const machines = parcels.filter((p) => p.machine.state !== "idle").map((p) => ({ ...p.machine, parcel_id: p.parcel_id, title: p.title, stage: p.stage }));
+    if (machinesExtra) {
+      const extra = await machinesExtra().catch(() => []);
+      machines.push(...extra);
+    }
+    return {
+      events: page,
+      next_since: page.length ? page[page.length - 1].at : since || null,
+      parcels,
+      machines,
+    };
+  }
+
+  /** The activity-centre shape: events newest first, plus the latest state of each job. */
+  async function activity({ since, limit = 100 } = {}) {
+    const sinceMs = since ? Date.parse(since) : null;
+    if (since && Number.isNaN(sinceMs)) return { error: "bad_since" };
+    const records = await store.listRecords();
+    const events = [];
+    for (const rec of records) {
+      for (const m of rec.messages) {
+        if (sinceMs && Date.parse(m.at) <= sinceMs) continue;
+        events.push(activityEvent(rec, m));
+      }
+    }
+    const seq = (e) => Number(String(e.id).split(".m")[1] || 0);
+    events.sort((a, b) => Date.parse(b.at) - Date.parse(a.at) || seq(b) - seq(a));
+    const dayAgo = now() - 24 * 3600 * 1000;
+    const jobs = records
+      .filter((r) => !["completed", "failed"].includes(r.status) || Date.parse(r.updatedAt) >= dayAgo)
+      .map((r) => parcelView(r, now()));
+    return { events: events.slice(0, Math.max(1, Math.min(500, Number(limit) || 100))), jobs, generated_at: new Date(now()).toISOString() };
+  }
+
+  return { build, status, revise, inbox, relay, sweep, sweepOne, deliver, pendingIssuePosts, revisionPosted, feed, activity };
 }
