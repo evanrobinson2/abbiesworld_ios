@@ -2,7 +2,7 @@
 <div class="wrap">
 <div class="eyebrow">Imagination machine · test case 01 · updated 22 Oct 2026</div>
 <h1>Paper Warrior Studies</h1>
-<p class="lede">Can one Midjourney image become a game-ready model that is faithfully the same object, not just "inspired by" it? This test case is a folded-paper Roman legionary, taken through two rounds and then broken into parts. Every pass is rendered from the reference camera, scored against the image, and logged.</p>
+<p class="lede">Can one Midjourney image become a game-ready model that is faithfully the same object, not just "inspired by" it? This test case is a folded-paper Roman legionary, taken through three rounds and broken into parts. Every pass is rendered from the reference camera, scored against the image, and logged.</p>
 
 <div class="hero">
   <figure><img src="img/ref.jpg" alt="Reference image: faceted white paper Roman warrior with a crested helmet, a sash, a pleated skirt and a large curved shield, on a soft teal backdrop"><figcaption>Reference (Evan's upload, used only as the loss target)</figcaption></figure>
@@ -12,16 +12,17 @@
 <nav class="toc" aria-label="Rounds">
   <a href="#round1" class="r1"><b>Round 1 · Fit the image</b><span>One procedural builder, a numeric loss, and a fidelity dial of Haiku, Sonnet and Opus.</span><div class="st">Done · loss 0.469 → 0.267</div></a>
   <a href="#round2" class="r2"><b>Round 2 · Keep the style</b><span>Your feedback: silhouette over detail, deliberate folds, rules not models. Three competing experiments.</span><div class="st">Done · hybrid wins</div></a>
+  <a href="#round3" class="r4"><b>Round 3 · Three views</b><span>A Midjourney turnaround (front, side, back) as three targets at once, against a front-only control.</span><div class="st">Done · all-view loss halves</div></a>
   <a href="#offshoots" class="r3"><b>Offshoots · Parts and kit</b><span>The helmet study, five props fitted on their own, and a socketed kit.</span><div class="st">In progress</div></a>
 </nav>
 
 <div class="stats">
-  <div class="stat"><b>~21,600</b><span>scored evaluations logged, all rounds</span></div>
+  <div class="stat"><b>~27,500</b><span>scored evaluations logged, all rounds</span></div>
   <div class="stat"><b>0.447 → 0.306</b><span>round 2 judged loss, round 1 final to hybrid</span></div>
   <div class="stat"><b>5 / 5</b><span>props built, fitted twice and snapped onto the body</span></div>
   <div class="stat"><b>$4.42</b><span>reviser model spend so far, all in round 1</span></div>
 </div>
-<p class="note">Where it stands: the silhouette, camera, pose and light match well, and round 2 made the figure read as paper rather than clay. It is still a close cousin of the reference, not the same model. A person notices four gaps first: the shield is a flat slab, the crest goes dark from behind, the skirt is thin strips instead of wide tabs, and the face plate is weak (it now has its own study). The props show that the parts approach works, and that each part needs a second round.</p>
+<p class="note">Where it stands: the silhouette, camera, pose and light match well, and round 2 made the figure read as paper rather than clay. It is still a close cousin of the reference, not the same model. A person notices four gaps first: the shield is a flat slab, the crest goes dark from behind, the skirt is thin strips instead of wide tabs, and the face plate is weak (it now has its own study). The props show that the parts approach works, and that each part needs a second round. Round 3 showed that a turnaround sheet fixes shape errors no single view can catch, which makes it the most valuable input so far.</p>
 
 <!-- ============================================================ ROUND 1 -->
 <section class="round r1" id="round1">
@@ -102,6 +103,69 @@
 <h4>What I learned</h4>
 <div class="col">
 <p>A style is a set of construction rules plus a vocabulary of primitives, and the primitives set the ceiling. The grammar can only make the shapes it is allowed to make: a curved sheet, a wide tab, a single-layer crest. The cheapest next win is adding those primitives, not more optimisation. That's also why splitting the character into parts is the right next move: each part needs only a small, specific vocabulary.</p>
+</div>
+</section>
+
+<!-- ============================================================ ROUND 3 -->
+<section class="round r4" id="round3">
+<header>
+  <div class="eyebrow">Round 3 · 22 Oct, evening · Midjourney turnaround</div>
+  <h2>Three views</h2>
+  <div class="verdict"><span>All-view silhouette loss <b>0.237 → 0.107</b></span><span>Rendered, all views <b>0.375 → 0.281</b></span><span>Status <b>done</b></span></div>
+</header>
+<div class="col">
+<p>Round 1 ended with "one image leaves the back invented." A Midjourney turnaround sheet gave three targets of one figure: front, left side and back. It's a new design in the same paper style, not the original warrior. It's stockier, stands straight, carries a round-oval shield and a short sword, and has a transverse brush crest. So this round tests a different question: <b>what does a second and third view buy?</b></p>
+<p>Two caveats from the sheet itself. The views aren't true orthographic, and the side view is turned a little toward the camera. The fit is allowed to find that turn: it settled at 64° instead of 90°.</p>
+</div>
+<div class="wide"><img src="img/r3_targets.jpg" alt="Midjourney turnaround sheet: the same paper legionary from the front, the left side and the back on a teal backdrop"><figcaption>The three targets (Midjourney V8, cut from one upscaled sheet)</figcaption></div>
+
+<h3>The experiment</h3>
+<div class="col">
+<p>Two fits from the same start (round 2's hybrid, reset to a neutral standing pose), with the same budget of about 3,000 evaluations and the same stages: camera, a shield-turn sweep, pose, proportions, parts, then everything. <b>Front-only</b> sees only the front view. <b>Three-view</b> scores the mean of all three. Every candidate in both fits is scored on all three views and logged, so the front-only fit can be judged on views it never saw.</p>
+<p>Adding views is cheap. The figure is built once per candidate, and each view only re-aims the camera and rasters a silhouette. Both fits took about 12½ minutes.</p>
+</div>
+<div class="tbl"><table>
+<tr><th>Silhouette loss (lower is better)</th><th>Front</th><th>Side</th><th>Back</th><th>All three</th></tr>
+<tr><td>Start (neutral pose)</td><td class="n">0.224</td><td class="n">0.373</td><td class="n">0.226</td><td class="n">0.274</td></tr>
+<tr><td>Front-only fit</td><td class="n"><b>0.105</b></td><td class="n">0.407</td><td class="n">0.198</td><td class="n">0.237</td></tr>
+<tr class="best"><td>Three-view fit</td><td class="n">0.121</td><td class="n"><b>0.094</b></td><td class="n"><b>0.106</b></td><td class="n"><b>0.107</b></td></tr>
+</table></div>
+<div class="wide"><img src="img/r3_overlays.png" alt="Silhouette overlays for front, side and back: top row the front-only fit, bottom row the three-view fit"><figcaption>Top: front-only fit. Bottom: three-view fit. White matches, blue is in the reference only, red is in the model only.</figcaption></div>
+<div class="col" style="margin-top:12px">
+<p><b>The front-only fit overfits to its one view.</b> It scores best on the front, and its side view ends up worse than where it started (0.373 to 0.407). From the front a shield is just an outline, and turning it to 122° matched that outline. From the side, that same shield sticks out in front of the body like a tray. Depth, the shield's turn and the crest's direction are all invisible from one view, so the optimizer was free to get them wrong.</p>
+<p><b>The three-view fit gives up a little on the front to get everything else right.</b> It's 15% worse on the front view (0.121 against 0.105) and more than twice as good overall. The shield turned to 69° and sits on the left arm, facing out, as in the sheet. The camera search also found the side view's real turn by itself.</p>
+</div>
+
+<h3>Rendered and lit</h3>
+<div class="col"><p>Light, paper and backdrop were fitted on all three views at once (16 rounds of three renders each). The front-only model was rendered under the same light, so the comparison is about shape, not lighting.</p></div>
+<div class="wide"><img src="img/r3_mv_sheet.jpg" alt="Top: the three Midjourney targets. Bottom: the three-view fit rendered from the same three cameras"><figcaption>Three-view fit. Top: targets. Bottom: renders from the fitted cameras.</figcaption></div>
+<div class="wide" style="margin-top:12px"><img src="img/r3_front_sheet.jpg" alt="Top: the three targets. Bottom: the front-only fit rendered from the same cameras; the side view shows the shield on the wrong side"><figcaption>Front-only fit, same light. Look at the side view: the shield sits out in front of the body instead of on the arm.</figcaption></div>
+<div class="tbl"><table>
+<tr><th>Rendered judged loss</th><th>Front</th><th>Side</th><th>Back</th><th>Mean</th></tr>
+<tr><td>Start</td><td class="n">0.385</td><td class="n">0.503</td><td class="n">0.366</td><td class="n">0.418</td></tr>
+<tr><td>Front-only, lit</td><td class="n"><b>0.290</b></td><td class="n">0.492</td><td class="n">0.343</td><td class="n">0.375</td></tr>
+<tr class="best"><td>Three-view, lit</td><td class="n">0.307</td><td class="n"><b>0.259</b></td><td class="n"><b>0.276</b></td><td class="n"><b>0.281</b></td></tr>
+</table></div>
+<div class="col"><p class="muted" style="font-size:15px">Same terms as the props: silhouette, outline distance, structure (SSIM), colour and the style term, scored per view.</p></div>
+<div class="two" style="margin-top:12px">
+  <div class="wide"><img src="img/r3_spin.gif" alt="Turntable of the three-view fit"><figcaption>Three-view fit, turntable, eight angles</figcaption></div>
+  <div class="wide"><img src="img/r3_spin_sheet.jpg" alt="Eight turntable angles of the three-view fit"><figcaption>Every 45°. All of these angles now sit between two views the fit was scored on, rather than being invented.</figcaption></div>
+</div>
+
+<h3>Critique of round 3</h3>
+<h4>What multi-view changed</h4>
+<div class="col">
+<p>It fixed the class of error that cost the most in round 1. The biggest single gain in round 1 was a facing restart I had to make by eye. Here the side and back views settle facing, shield placement and depth by themselves, with no restart and no model call. That makes the turnaround sheet the most valuable input so far. It beats a better optimizer and it beats a more expensive reviser, because it removes a guess instead of searching harder around it.</p>
+</div>
+<h4>What it didn't change</h4>
+<div class="col">
+<p><b>The look.</b> The renders still show round 2's vocabulary on a new design: thin skirt strips, a crumpled body, and a smooth helmet where the target has a hinged face mask and brow ridge. The structure and style terms barely moved between the two fits (0.264 against 0.266, 0.165 against 0.173), because more views only constrain shape. The style gap is still a primitives gap: lorica bands, wide pteruges, a round shield with a raised rim and a sword all need builder parts that don't exist yet.</p>
+<p><b>Things that aren't in the model at all.</b> The target has a sword and a scaled apron in front. The builder has neither, so both stay blue in every overlay, and the optimizer leans the hand out to cover the sword. That's the same "fat limbs" failure as round 1, at a smaller scale.</p>
+<p><b>The sheet isn't perfectly consistent.</b> Midjourney draws the crest thinner from the back than from the side, and the side view is turned. The fit absorbs the turn as a camera angle, but it can't satisfy a crest that changes size between views. Some of the remaining side and back loss is the target disagreeing with itself.</p>
+</div>
+<h4>What I'd do next</h4>
+<div class="col">
+<p>Make the turnaround the default input for the machine: front, side and back, plus a three-quarter view when the design has an asymmetric part like a shield. Weight the views by how much each one can see. Then spend effort on the primitives the look needs. Geometry is now pinned down well enough that style is the bottleneck.</p>
 </div>
 </section>
 
