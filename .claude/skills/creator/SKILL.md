@@ -78,8 +78,8 @@ Each CLI call opens a fresh connection, so it is slower than the MCP tools.
 
 ## Environment
 
-- `HOLODECK_URL` picks the app (default https://abbies-ranch-atelier.vercel.app). Point it at
-  a preview deployment to try changes before production.
+- `HOLODECK_URL` picks the app. The default is the test deployment
+  https://abbies-holodeck-preview.vercel.app until the Creator ships to the live app.
 - `HOLODECK_ROOM` overrides the room key, which is otherwise kept in
   `~/.config/holodeck/room.json`.
 - Cloud sessions need the app's host allowed in the environment's network settings.

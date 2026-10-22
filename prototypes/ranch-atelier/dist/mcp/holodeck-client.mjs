@@ -8,7 +8,8 @@ import {randomBytes} from 'node:crypto';
 import WebSocket from 'ws';
 import {HttpsProxyAgent} from 'https-proxy-agent';
 
-export const DEFAULT_URL='https://abbies-ranch-atelier.vercel.app';
+// The test deployment until the Creator ships to the live app (a production deploy Evan approves).
+export const DEFAULT_URL='https://abbies-holodeck-preview.vercel.app';
 const roomFile=path.join(os.homedir(),'.config','holodeck','room.json');
 
 // The room key lives outside the repository. HOLODECK_ROOM overrides it.
