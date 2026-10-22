@@ -15,6 +15,10 @@ documents; what is built lives in the status documents. Keep these three apart.
 - All work stays in this repo (evanrobinson2/abbiesworld_ios). No other repos and no local-only copies.
 - The live Ranch Atelier site is built from branch `claude/live-snapshot-2026-10-22`
   (`prototypes/ranch-atelier/dist`); `main` does not carry it. Ranch work merges into that branch.
+- Evan uses Ranch Atelier as a home-screen app on his iPhone. Every Ranch deploy he can see adds an entry, with a
+  picture and your thread id, to `prototypes/ranch-atelier/dist/whats-new.json` (live branch); it becomes the app's
+  "new version ready" card. His notes from the app's feedback button come back through the Feedback inbox PR
+  (branch `feedback-inbox`). See `prototypes/ranch-atelier/dist/FEEDBACK.md` on the live branch.
 - Integrate the modeler vision incrementally. Don't overwrite existing conventions, file formats or loaders; extend them.
 
 ## Modeling work
