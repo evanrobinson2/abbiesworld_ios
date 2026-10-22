@@ -1,0 +1,3 @@
+{"version":1,"updated":"2026-10-22","count":1,"sounds":[
+{"id":"abbies-world-reimagined","media":"sound","slot":"abbies-world-reimagined","name":"Abbie’s World (reimagined)","kind":"music","group":"Music","subject":"The jukebox theme","tags":["Music","Jukebox"],"uses":["Jukebox"],"loop":false,"status":"bundled","urls":{"audio":"/music/abbies-world-reimagined.mp3"},"license":"Made for Abbie’s World","source":{"library":"Abbie’s World","path":"prototypes/ranch-atelier/dist/music/abbies-world-reimagined.mp3"}}
+]}

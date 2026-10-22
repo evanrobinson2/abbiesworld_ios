@@ -7,17 +7,17 @@ async function range(url, start, end, tries = 4) {
   for (let i = 0; ; i++) {
     try {
       const r = await fetch(url, { headers: { Range: `bytes=${start}-${end}` }, signal: AbortSignal.timeout(120000) });
-      if (r.status !== 206) throw new Error(`${url} answered ${r.status} to a range request`);
+      if (r.status !== 206) { r.body?.cancel(); throw Object.assign(new Error(`${url} answered ${r.status} to a range request`), { final: r.status >= 400 && r.status < 500 }); }
       return Buffer.from(await r.arrayBuffer());
     } catch (e) {
-      if (i + 1 >= tries) throw e;
+      if (e.final || i + 1 >= tries) throw e;
       await new Promise(res => setTimeout(res, 1000 * 2 ** i));
     }
   }
 }
 
 async function size(url) {
-  const r = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(30000) });
+  const r = await fetch(url, { method: 'HEAD', signal: AbortSignal.timeout(20000) });
   if (!r.ok) throw new Error(`${url} answered ${r.status}`);
   return Number(r.headers.get('content-length'));
 }
@@ -66,11 +66,25 @@ export async function listZip(url) {
   return { url, bytes: total, entries: out };
 }
 
-// The bytes of one entry. `limit` reads only the start of a stored entry (enough for a WAV header).
-export async function readEntry(url, entry, { limit } = {}) {
+// Where an entry's bytes start in the zip (after its local header).
+export async function entryStart(url, entry) {
+  if (entry.start) return entry.start;
   const head = await range(url, entry.offset, entry.offset + 29);
   if (head.readUInt32LE(0) !== 0x04034b50) throw new Error(`${entry.name}: bad local header`);
-  const start = entry.offset + 30 + head.readUInt16LE(26) + head.readUInt16LE(28);
+  return entry.start = entry.offset + 30 + head.readUInt16LE(26) + head.readUInt16LE(28);
+}
+
+// Bytes [from, to) of a stored (uncompressed) entry.
+export async function readStored(url, entry, from, to) {
+  if (entry.method !== 0) throw new Error(`${entry.name} is compressed`);
+  const start = await entryStart(url, entry);
+  const end = Math.min(entry.csize, to);
+  return from >= end ? Buffer.alloc(0) : range(url, start + from, start + end - 1);
+}
+
+// The bytes of one entry. `limit` reads only the start of a stored entry (enough for a WAV header).
+export async function readEntry(url, entry, { limit } = {}) {
+  const start = await entryStart(url, entry);
   if (entry.method === 0) {
     const n = limit ? Math.min(limit, entry.csize) : entry.csize;
     return range(url, start, start + n - 1);

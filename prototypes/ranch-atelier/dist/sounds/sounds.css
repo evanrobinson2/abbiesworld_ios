@@ -1,0 +1,35 @@
+/* Sounds: the landing list and the per-sound page. Shares the /models shell (models.css) and app tokens. */
+.mbar-link{margin-left:auto;color:var(--app-ink);font-weight:800;font-size:14px;text-decoration:none;padding:8px 14px;border:1px solid var(--app-border);border-radius:999px;background:var(--app-paper)}
+.mbar-link:hover{border-color:var(--app-accent)}
+.sbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.sbar input[type=search]{flex:1 1 220px;min-height:44px;box-sizing:border-box;padding:8px 14px;border:1px solid var(--app-border);border-radius:999px;background:var(--app-paper);color:var(--app-ink);font:inherit}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chips button{min-height:40px;padding:4px 14px;border:1px solid var(--app-border);border-radius:999px;background:var(--app-paper);color:var(--app-ink);font:inherit;font-weight:800;font-size:13px;cursor:pointer}
+.chips button[aria-pressed="true"]{background:var(--app-ink);border-color:var(--app-ink);color:var(--app-paper)}
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:48px minmax(0,1.1fr) minmax(0,1.6fr) auto;gap:12px;align-items:center;background:var(--app-paper);border:1px solid var(--app-border);border-radius:var(--app-radius,16px);padding:8px 12px 8px 8px}
+.row:hover{border-color:var(--app-accent)}
+.row .who{display:grid;gap:2px;min-width:0}
+.row .who a{font-family:var(--app-heading);font-size:17px;font-weight:900;color:var(--app-ink);text-decoration:none;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .who small{color:var(--app-muted);font-size:12.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.row .meta{display:flex;gap:6px;align-items:center;justify-content:flex-end;flex-wrap:wrap;font-size:12.5px;color:var(--app-muted);font-variant-numeric:tabular-nums}
+.play{width:44px;height:44px;border-radius:50%;border:0;background:var(--app-accent);color:var(--app-paper);display:grid;place-items:center;cursor:pointer;padding:0}
+.play svg{width:18px;height:18px}
+.play:disabled{background:var(--app-border);color:var(--app-muted);cursor:not-allowed}
+.wave{position:relative;height:44px;min-width:0;cursor:pointer;touch-action:none}
+.wave canvas{width:100%;height:100%;display:block}
+.wave.big{height:160px;background:var(--m-well);border-radius:14px}
+.wave.off{cursor:default}
+.wave .note{position:absolute;inset:0;display:grid;place-items:center;font-size:12.5px;color:var(--app-muted);text-align:center;padding:0 8px}
+.tag{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1.5px solid currentColor;white-space:nowrap}
+.tag.stored{color:var(--m-good)}.tag.picked{color:var(--m-warn)}.tag.bundled{color:var(--app-accent)}
+.uses{display:flex;gap:6px;flex-wrap:wrap}.uses span{font-size:12px;padding:3px 10px;border-radius:999px;background:var(--m-well);color:var(--app-ink)}
+.transport{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.transport .time{font-variant-numeric:tabular-nums;font-size:13px;color:var(--app-muted);min-width:90px}
+.transport label{display:flex;gap:8px;align-items:center;font-size:13px;color:var(--app-muted)}
+.transport input[type=range]{width:120px}
+.cands{margin:0;padding:0;list-style:none;display:grid;gap:6px;font-size:13.5px}
+.cands li{display:grid;gap:2px}.cands li small{color:var(--app-muted);overflow-wrap:anywhere}
+.cands li b.picked{color:var(--m-good)}
+.empty-filter{color:var(--app-muted);margin:8px 0}
+@media (max-width:760px){.row{grid-template-columns:44px minmax(0,1fr) auto}.row .wave{grid-column:1/-1;grid-row:2}.row .meta{justify-content:flex-start}}

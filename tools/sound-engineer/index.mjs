@@ -14,22 +14,23 @@ mkdirSync(dir, { recursive: true });
 const docs = {};
 const load = id => docs[id] ??= existsSync(new URL(`${id}.json`, dir)) ? JSON.parse(readFileSync(new URL(`${id}.json`, dir), 'utf8')) : { bundle: id, parts: {} };
 
-let failed = 0;
-for (const ref of want) {
+let failed = 0, next = 0;
+async function indexPart(ref) {
   const { bundle, part, file, urls } = partRef(ref);
-  let listing = null, error = null;
+  let listing = null;
   for (const url of urls) {
-    try { listing = await listZip(url); break; } catch (e) { error = e; console.log(`  ${ref} via ${new URL(url).host}: ${e.message}`); }
+    try { listing = await listZip(url); break; } catch (e) { console.log(`  ${ref} via ${new URL(url).host}: ${e.message}`); }
   }
-  if (!listing) { failed++; continue; }
+  if (!listing) { failed++; console.log(`::warning::${ref}: no host answered`); return; }
   const sounds = listing.entries.filter(e => /\.(wav|flac|aiff?|mp3|ogg)$/i.test(e.name));
   load(bundle.id).parts[part] = {
     file, url: listing.url, bytes: listing.bytes, count: sounds.length, methods: [...new Set(listing.entries.map(e => e.method))],
     // [path, bytes, method, offset, csize, publisher, category] - compact, so the whole bundle stays small
     entries: sounds.map(e => { const d = describe(e.name); return [e.name, e.size, e.method, e.offset, e.csize, d.publisher, d.category]; }),
   };
-  console.log(`${ref}: ${sounds.length} sounds of ${listing.entries.length} files, ${(listing.bytes / 1e9).toFixed(2)} GB`);
+  console.log(`${ref}: ${sounds.length} sounds of ${listing.entries.length} files, ${(listing.bytes / 1e9).toFixed(2)} GB via ${new URL(listing.url).host}`);
 }
+await Promise.all(Array.from({ length: 4 }, async () => { while (next < want.length) await indexPart(want[next++]); }));
 for (const [id, doc] of Object.entries(docs)) {
   const b = BUNDLES.find(x => x.id === id);
   doc.label = b.label || `GDC ${b.year}`; doc.year = b.year; doc.indexed = new Date().toISOString();
@@ -37,4 +38,5 @@ for (const [id, doc] of Object.entries(docs)) {
   writeFileSync(new URL(`${id}.json`, dir), JSON.stringify(doc));
   console.log(`index/${id}.json: ${doc.count} sounds in ${Object.keys(doc.parts).length} parts`);
 }
-if (failed) { console.error(`${failed} part(s) could not be read`); process.exit(1); }
+if (failed) console.log(`::warning::${failed} of ${want.length} part(s) could not be read; the rest are indexed`);
+if (failed === want.length) process.exit(1);

@@ -69,35 +69,45 @@ export function search(doc, query, { limit = 50, category } = {}) {
   return hits;
 }
 
+// Slot "hen" with two takes gives sounds "hen-1" and "hen-2"; a one-take slot keeps its own id.
+export const takeId = (slot, k) => slot.n > 1 ? `${slot.id}-${k + 1}` : slot.id;
+
+// Where the game plays a slot today (simulations/ranch-sound.mjs reads the same ids).
+export const GAME_USES = {
+  'farm-morning': ['Ranch at dawn'], 'farm-day': ['Ranch by day'], 'countryside-evening': ['Ranch at dusk'], 'night-insects': ['Ranch at night'],
+  'rain-light': ['Ranch in rain'], 'rain-heavy': ['Ranch in a storm'], 'wind-gentle': ['Ranch on windy days'], 'wind-strong': ['Ranch in hail and storms'], 'snowy': ['Ranch in snow'],
+  rooster: ['Ranch at dawn'], hen: ['Near the chickens'], cow: ['Near the cows'], goat: ['Near the goats'], 'horse-whinny': ['Near the horses'], 'horse-snort': ['Near the horses'],
+  songbird: ['Ranch by day'], owl: ['Ranch at night'], thunder: ['Ranch in a storm'], cricket: ['Ranch at dusk'],
+};
+
 // One catalogue row per processed sound, in the shape /sounds reads.
-export function soundRow({ cue, pick, measured, urls, sha256, bytes, sourceSha256 }) {
+export function soundRow({ cue, pick, take, measured, urls, sha256, bytes, sourceSha256 }) {
+  const d = describe(take.path);
   return {
     id: cue.id,
     media: 'sound',
+    slot: pick?.slot || cue.id,
     name: cue.name,
-    kind: cue.kind,                       // ambience | effect | ui | voice | music
+    kind: cue.kind,                       // ambience | animal | effect | ui | music
     group: cue.group,
-    subject: cue.brief,
-    tags: cue.tags || [],
-    uses: cue.uses || [],                 // where the game plays it
+    subject: `${d.title}${d.publisher ? ' · ' + d.publisher : ''}`,
+    tags: [...new Set([d.category, cue.group].filter(Boolean))],
+    uses: GAME_USES[pick?.slot ?? cue.id] || [],
     loop: Boolean(cue.loop),
-    status: cue.status || 'picked',
-    urls,                                 // audio (mp3), plus any extra formats
+    status: 'stored',
+    urls,                                 // { audio } once stored
     duration: measured.duration,
     loudness: measured.lufs,
     peak: measured.peak,
     channels: measured.channels,
-    peaks: measured.peaks,                // waveform, 0..1, ~120 points
+    peaks: measured.peaks,                // waveform, 0..1
     sha256, bytes,
-    source: {
-      library: 'Sonniss GDC Game Audio Bundle', bundle: pick.ref.split('/')[0], part: pick.ref, path: pick.path,
-      publisher: describe(pick.path).publisher, sha256: sourceSha256,
-    },
-    recipe: { trim: pick.trim || null, fade: pick.fade ?? null, gain: pick.gain ?? 0, target: measured.target, format: 'mp3' },
+    source: { library: 'Sonniss GDC Game Audio Bundle', bundle: take.ref.split('/')[0], part: take.ref, path: take.path, publisher: d.publisher, sha256: sourceSha256 },
+    recipe: { trim: take.trim, fade: take.fade ?? null, target: measured.target, mono: !cue.loop, format: 'mp3' },
     license: 'sonniss-gdc',
-    candidates: cue.candidates || [],
-    notes: cue.notes || [],
-    date: cue.date || null,
+    candidates: (pick?.candidates || []).slice(0, 6),
+    notes: pick?.notes || [],
+    date: pick?.date || null,
   };
 }
 
@@ -105,4 +115,58 @@ export function soundRow({ cue, pick, measured, urls, sha256, bytes, sourceSha25
 export function publicCatalog(rows) {
   const sounds = [...rows].sort((a, b) => String(a.group).localeCompare(String(b.group)) || a.name.localeCompare(b.name));
   return { version: 1, updated: new Date().toISOString(), count: sounds.length, sounds };
+}
+
+// ---- picking: how well an index entry fits a library slot (library.mjs)
+const norm = s => ' ' + String(s).toLowerCase().replace(/\.[a-z0-9]+$/, '').replace(/[_\-.,()[\]]+/g, ' ').replace(/([a-z])([0-9])/g, '$1 $2').replace(/\s+/g, ' ') + ' ';
+const wordRe = new Map();
+const has = (hay, w) => {
+  let re = wordRe.get(w);
+  if (!re) wordRe.set(w, re = new RegExp(`[^a-z]${w.replace(/[^a-z0-9 ]/g, '')}(s|es|ing|ed|er|y)?[^a-z]`));
+  return re.test(hay);
+};
+
+// Score one file for a slot, or null if it doesn't fit. why says what matched.
+export function scoreEntry(slot, entryPath, { bytes = 0, method = 0, category } = {}) {
+  const file = norm(entryPath.split('/').pop()), all = norm(entryPath);
+  if (slot.not.some(w => has(all, w))) return null;
+  let best = null;
+  slot.terms.forEach((words, i) => {
+    const inFile = words.filter(w => has(file, w)).length, inPath = words.filter(w => has(all, w)).length;
+    let s = null, why;
+    if (inFile === words.length) { s = 10 + 2 * (words.length - 1); why = `name has "${words.join(' ')}"`; }
+    else if (inPath === words.length && inFile > 0) { s = 6 + (words.length - 1); why = `name and folder have "${words.join(' ')}"`; }
+    else if (inPath === words.length) { s = 3; why = `folder has "${words.join(' ')}"`; }
+    if (s != null) { s -= i * 0.4; if (!best || s > best.s) best = { s, why }; }
+  });
+  if (!best) return null;
+  let s = best.s;
+  if (category && slot.cats.includes(category)) { s += 4; best.why += `, ${category}`; }
+  if (category === 'Designed' && !slot.cats.includes('Designed')) s -= 1;
+  if (!/\.wav$/i.test(entryPath) || method !== 0) s -= 6;
+  if (slot.loop && bytes < 3e6) s -= 4;
+  if (!slot.loop && bytes > 80e6) s -= 3;
+  return { score: s, why: best.why };
+}
+
+// The best files for a slot across every indexed bundle, highest score first.
+export function rank(docs, slot, { used = new Set(), limit = 8 } = {}) {
+  const hits = [];
+  for (const doc of docs) for (const [part, p] of Object.entries(doc.parts || {})) for (const [entryPath, bytes, method, offset, csize, publisher, category] of p.entries) {
+    const r = scoreEntry(slot, entryPath, { bytes, method, category });
+    if (!r) continue;
+    if (used.has(entryPath)) r.score -= 5;
+    r.score += (doc.year || 2015) / 10000; // newer bundles name files better (UCS); only breaks ties
+    hits.push({ ...r, bundle: doc.bundle, part, path: entryPath, bytes, method, offset, csize, publisher, category, title: describe(entryPath).title });
+  }
+  hits.sort((a, b) => b.score - a.score);
+  // Keep variety: at most three files from one folder in the shortlist.
+  const perDir = new Map(), out = [];
+  for (const h of hits) {
+    const dir = h.path.split('/').slice(0, -1).join('/'), k = perDir.get(dir) || 0;
+    if (k >= 3) continue;
+    perDir.set(dir, k + 1); out.push(h);
+    if (out.length >= limit) break;
+  }
+  return out;
 }
