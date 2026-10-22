@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "holodeck": {
+      "command": "node",
+      "args": ["prototypes/ranch-atelier/dist/mcp/holodeck-launch.cjs"]
+    }
+  }
+}
