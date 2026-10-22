@@ -63,6 +63,8 @@ export function createStage(ctx,{room,relay}){
   const unit=personHeight();
   if(a.shape){const m=new T.Mesh(GEO[a.shape](),new T.MeshStandardMaterial({color:a.color||'#f2b134',roughness:.55,metalness:.05}));m.castShadow=m.receiveShadow=true;const g=new T.Group();g.add(m);g.userData.baseScale=unit;return g;}
   if(a.person){const n=entities.size;const role=a.person.role,child=role==='child',zombie=role==='zombie';const person={index:n,appearance:{build:1,height:child?1.2:1.7,skin:zombie?['#9cbf7a','#8fb37f','#a7c48a'][n%3]:['#e8b98f','#c68c5e','#8d5a3b','#f3d0b0'][n%4],hair:zombie?'#4b4a3a':['#3b2a1e','#a0522d','#e2c16b','#222'][n%4],hairStyle:n%3},wardrobe:{top:a.color||(zombie?['#6f6a8a','#7a5b4a','#56706a'][n%3]:'#4f7cac'),bottom:zombie?'#4a4a3e':'#4a4036',hat:role==='rancher'?'brim':'none',accessory:'none'}};const body=makePerson(person),g=new T.Group();g.add(body);g.userData.baseScale=unit/1.75;g.userData.rig=body.userData;if(zombie){const [l,,r]=body.userData.limbs;l.rotation.x=r.rotation.x=-1.45;}return g;}
+  // Pages with a procedural kit (Family Teleport) build those ids locally, with no download.
+  if(ctx.kit?.has(a.asset)){const g=new T.Group();g.add(ctx.kit.build(a.asset));g.userData.baseScale=unit;return g;}
   const item=(await catalog).find(c=>c.id===a.asset);if(!item)throw Error('Unknown asset '+a.asset+'; use op catalog');
   const gltf=await loader.loadAsync(item.glb);const g=new T.Group();gltf.scene.traverse(o=>{if(o.isMesh)o.castShadow=o.receiveShadow=true;});g.add(gltf.scene);g.userData.baseScale=1;return g;
  }
@@ -90,7 +92,7 @@ export function createStage(ctx,{room,relay}){
  let cameraTween=null;
  const OPS_RUN={
   async state(a){return snapshot(a.world!==false);},
-  async catalog(){return (await catalog).map(c=>({id:c.id,label:c.label,category:c.category}));},
+  async catalog(){return [...(ctx.kit?.list()||[]),...(await catalog).map(c=>({id:c.id,label:c.label,category:c.category}))];},
   async spawn(a){
    const id=a.id||(a.shape||a.asset||'person')+'-'+(entities.size+1);
    if(entities.has(id))OPS_RUN.remove({id});
