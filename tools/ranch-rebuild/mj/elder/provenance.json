@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "elder",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/GF-159.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "2b978ec6-6f0a-46a2-b9de-31658b88ecc3",
+      "grid_url": "https://www.midjourney.com/jobs/2b978ec6-6f0a-46a2-b9de-31658b88ecc3?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "c82006a6-37fa-48e9-b722-d1494119c7fe",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:15:42.439Z",
+      "grid_done_at": "2026-10-22T23:16:00.443Z",
+      "upscale_clicked_at": "2026-10-22T23:16:10.381Z",
+      "downloaded_at": "2026-10-22T23:17:22.012Z",
+      "pick_reason": "arching branches with flat creamy umbels over dark leaflets, compact and whole in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, an elder shrub, arching branches, flat creamy white flower umbels, dark green leaflets, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "ad6aa586-5010-42e8-9f85-446b1c97ba8b",
+      "grid_url": "https://www.midjourney.com/jobs/ad6aa586-5010-42e8-9f85-446b1c97ba8b?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "385bdce9-2fa5-4d91-8076-7e76670e8a89",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:17:39.652Z",
+      "grid_done_at": "2026-10-22T23:17:57.655Z",
+      "upscale_clicked_at": "2026-10-22T23:18:10.864Z",
+      "downloaded_at": "2026-10-22T23:19:31.311Z",
+      "pick_reason": "three separated, matching shrubs at the same scale with arching branches and umbels"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "028387b15d4a14a73aa141ce1264284048d2de988e85bb519b4d833a6f7e2e1b",
+      "bytes": 3455008,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/c82006a6-37fa-48e9-b722-d1494119c7fe/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "74c148f68f2477b240d9c90b958846f8827c36612d830261fd5e60466d48c11c",
+      "bytes": 5079416,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/385bdce9-2fa5-4d91-8076-7e76670e8a89/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "dd2b2a764dc7a5a8b280b25a46312bbc9500cda22cfb3985b12368ccb073b486",
+      "bytes": 1696477,
+      "pixels": [
+        1012,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/elder [('front', 12, 1024), ('side', 1024, 1843), ('back', 1843, 2912)]"
+    },
+    "view_side.png": {
+      "sha256": "6f621d5623ea05b24bac4df4ccd1284df29909565797a2c4a6d484e40d964507",
+      "bytes": 1536996,
+      "pixels": [
+        819,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/elder [('front', 12, 1024), ('side', 1024, 1843), ('back', 1843, 2912)]"
+    },
+    "view_back.png": {
+      "sha256": "d14b4e99106ec8bee5abba0630f863a2842407a2661b405f0747f985b0778bd7",
+      "bytes": 1751004,
+      "pixels": [
+        1069,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/elder [('front', 12, 1024), ('side', 1024, 1843), ('back', 1843, 2912)]"
+    }
+  }
+}
