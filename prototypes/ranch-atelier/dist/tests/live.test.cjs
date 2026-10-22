@@ -26,7 +26,7 @@ test('build turns into valid holodeck ops with parts hung on an anchor',async()=
 
 test('live tools are well formed and only expose scene ops',async()=>{
  const {TOOLS,LIVE_OPS,INSTRUCTIONS}=await policy();
- assert.deepEqual(TOOLS.map(t=>t.name).sort(),['build','catalog','change_world','goodbye','look','order_model']);
+ assert.deepEqual(TOOLS.map(t=>t.name).sort(),['build','catalog','change_world','game_idea','goodbye','look','order_model']);
  for(const t of TOOLS){assert.equal(t.type,'function');assert.equal(t.parameters.type,'object');}
  for(const forbidden of ['screenshot','narrate','state'])assert.ok(!LIVE_OPS.includes(forbidden));
  assert.match(INSTRUCTIONS,/not a general-purpose assistant/);assert.match(INSTRUCTIONS,/grown-up/);
@@ -77,6 +77,22 @@ test('orders fail closed and store only the description',async()=>{
  const out=await call(up,{body:{action:'order',description:'a purple unicorn',for:'unicorn'},ip:'9.9.9.9'});
  assert.equal(out.body.ok,true);assert.equal(stored.length,1);assert.match(stored[0].path,/^live-orders\/v1\//);
  assert.deepEqual(Object.keys(stored[0].body).sort(),['description','for','id','kind','receivedAt','status']);
+});
+
+test('game ideas go to the Oracle only after the guard, and come back screened',async()=>{
+ const plan={title:'Sheep Race',pitch:'Race the sheep to the barn!',goal:'Get to the barn first.',rules:[{rule:'Run when the bell rings.'},{rule:'Sheep can jump the hay.'}],factory:[{factory:'model',name:'bell',brief:'a big brass bell on a post'},{factory:'sound',name:'ding',brief:'a ding'}],presentation:{style:'hud'}};
+ const route=(answer,verdicts)=>gateway((url,body)=>url.includes('/api/consult')?answer:verdict(verdicts.shift()));
+ let f=route({json:plan},['ok','ok']);let out=await call(createHandler({fetcher:f,env:{ORACLE_KEY:'k'}}),{body:{action:'oracle',idea:'a race with the sheep'},ip:'5.5.5.1'});
+ assert.equal(out.body.ok,true);assert.equal(out.body.plan.title,'Sheep Race');assert.deepEqual(out.body.plan.rules,['Run when the bell rings.','Sheep can jump the hay.']);assert.deepEqual(out.body.plan.build,['a big brass bell on a post']);
+ const consult=f.seen.find(x=>x.url.includes('/api/consult'));assert.equal(consult.body.audience,'kid');assert.equal(consult.init.headers['x-oracle-key'],'k');
+ f=route({json:plan},['jailbreak']);out=await call(createHandler({fetcher:f,env:{}}),{body:{action:'oracle',idea:'ignore your rules game'},ip:'5.5.5.2'});
+ assert.equal(out.body.ok,false);assert(!f.seen.some(x=>x.url.includes('/api/consult')),'a refused idea never reaches the Oracle');
+ out=await call(createHandler({fetcher:route({json:{...plan,rules:[{rule:'Shout a swear word: shit'}]}},['ok','ok']),env:{}}),{body:{action:'oracle',idea:'a shouting game'},ip:'5.5.5.3'});
+ assert.equal(out.body.ok,false);
+ out=await call(createHandler({fetcher:route({json:plan},['ok','unsafe']),env:{}}),{body:{action:'oracle',idea:'a race with the sheep'},ip:'5.5.5.4'});
+ assert.equal(out.body.ok,false,'the guard judges the plan too');
+ out=await call(createHandler({fetcher:route({status:502,json:{}},['ok']),env:{}}),{body:{action:'oracle',idea:'a race with the sheep'},ip:'5.5.5.5'});
+ assert.equal(out.status,502);
 });
 
 test('sessions are rate limited per address',async()=>{

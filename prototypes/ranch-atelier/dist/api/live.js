@@ -3,6 +3,7 @@
 //  POST /api/live {action:'session'}                       a 60 s ticket for the realtime relay (api/live-socket.js)
 //  POST /api/live {action:'guard', who, text}              PG and scope check of one spoken line
 //  POST /api/live {action:'order', description, for?}      files a workshop order for a proper model
+//  POST /api/live {action:'oracle', idea}                  a kid-sized game plan from the Game Oracle (guarded both ways)
 // Nothing a child says is stored: guard text is judged and dropped. Orders keep only the description.
 const {randomBytes}=require('node:crypto');
 const {issueTicket}=require('../lib/live-ticket.cjs');
@@ -44,7 +45,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
 
  // Burst control per address and action. The Gateway budget is the durable spend limit.
  const at=now(),ip=String(req.headers['x-vercel-forwarded-for']||req.headers['x-forwarded-for']||'unknown').split(',')[0];
- const limits={session:[12,3600000],guard:[240,60000],order:[10,3600000]},limit=limits[body.action];
+ const limits={session:[12,3600000],guard:[240,60000],order:[10,3600000],oracle:[20,3600000]},limit=limits[body.action];
  if(!limit)return json(400,{error:'Unknown action.'});
  for(const [key,v]of buckets)if(at-v.at>v.window)buckets.delete(key);
  const key=body.action+':'+ip,rate=buckets.get(key)||{at,n:0,window:limit[1]};
@@ -63,6 +64,21 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
    const local=screen(text,{level:who==='COMPUTER'?'speech':'all'});if(!local.ok)return json(200,{verdict:'unsafe',why:'blocked word',local:true});
    return json(200,await judge(fetcher,headers,who,text));
   }
+  if(body.action==='oracle'){
+   // Fails closed: the idea is screened and judged first, and every line of the plan is screened and judged
+   // again before the voice sees it. Nothing is stored.
+   const idea=typeof body.idea==='string'?body.idea.trim().slice(0,240):'';
+   if(idea.length<3)return json(400,{error:'Say the game idea.'});
+   if(!screen(idea).ok)return json(200,{ok:false,verdict:'unsafe'});
+   const asked=await judge(fetcher,headers,'CHILD',`Let's play a game: ${idea}`);
+   if(asked.verdict!=='ok')return json(200,{ok:false,verdict:asked.verdict});
+   const plan=kidPlan(await askOracle(fetcher,env,idea));
+   const lines=[plan.title,plan.goal,plan.say,...plan.rules,...plan.build].filter(Boolean);
+   if(!plan.title||!plan.rules.length||lines.some(l=>!screen(l).ok))return json(200,{ok:false,verdict:'unsafe'});
+   const said=await judge(fetcher,headers,'COMPUTER',lines.join(' / '));
+   if(said.verdict!=='ok')return json(200,{ok:false,verdict:said.verdict});
+   return json(200,{ok:true,plan});
+  }
   if(body.action==='order'){
    const description=typeof body.description==='string'?body.description.trim().slice(0,300):'';
    const forId=typeof body.for==='string'&&/^[a-z0-9.-]{1,48}$/.test(body.for)?body.for:null;
@@ -77,6 +93,26 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
   }
  }catch(error){console.error('[live]',body.action,error?.message);return json(502,{error:'Live mode hit a problem. Try again.'});}
 };}
+
+// The Game Oracle (abbies-game-oracle.vercel.app, prototypes/game-oracle on main). ORACLE_KEY lets its model run;
+// without it the Oracle answers from its studies alone.
+async function askOracle(fetcher,env,idea){
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),40000);
+ try{
+  const headers={'Content-Type':'application/json'};if(env.ORACLE_KEY)headers['x-oracle-key']=env.ORACLE_KEY;
+  const r=await fetcher(`${env.ORACLE_URL||'https://abbies-game-oracle.vercel.app'}/api/consult`,{method:'POST',signal:controller.signal,headers,body:JSON.stringify({idea,audience:'kid'})});
+  if(!r.ok)throw Error('oracle '+r.status);
+  return await r.json();
+ }finally{clearTimeout(timer);}
+}
+// Only what the voice needs, short enough to say out loud.
+function kidPlan(p){
+ const s=(v,n)=>typeof v==='string'?v.trim().slice(0,n):'';
+ return {title:s(p?.title,60),goal:s(p?.goal,160),say:s(p?.pitch,200),
+  rules:(Array.isArray(p?.rules)?p.rules:[]).map(r=>s(r?.rule,160)).filter(Boolean).slice(0,4),
+  build:(Array.isArray(p?.factory)?p.factory:[]).filter(f=>f?.factory==='model').map(f=>s(f.brief||f.name,120)).filter(Boolean).slice(0,4),
+  style:s(p?.presentation?.style,20)};
+}
 
 async function judge(fetcher,headers,who,text){
  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
