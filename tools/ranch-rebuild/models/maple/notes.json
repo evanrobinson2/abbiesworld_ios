@@ -1,0 +1,35 @@
+{
+ "what_i_did": [
+  ["Scoring", "The hero wins, per the AD. views/ holds the MJ hero and the three sheet views with the ground strip keyed out by make_views.py (copied from tree-standing). Mean IoU is the harness score against the sheet views; hero IoU is hero_check.py, which renders from the hero's own direction (front-on, 4 deg up, harness lens) and scores against views/hero.png. The sheet draws a different tree: a fuller, rounder, taller crown of soft clover leaves that hangs down to about half height on a shorter trunk. I used it for proportion only, so once the crown was fitted to the hero the sheet score dropped from 0.82 to 0.70. That drop is expected."],
+  ["Trunk", "A straight 8-sided loft, 6.1 m tree in total. Radius 0.25 m at the ground with a 4-lobed flare that fades out by 0.5 m, then 0.09 to 0.07 m up a bare trunk to the fork at 2.55 to 2.95 m. The leader carries on inside the crown. Bark_Brown is light brown (150, 100, 52)."],
+  ["Limbs", "5 thin limbs (r 0.058 to 0.02 m) fan out from the fork into the crown, plus 3 twigs. The lower ends of the limbs show under the crown edge, as they do in the hero."],
+  ["Crown", "A surface of revolution fitted row by row to the hero's mask. It is a bell-shaped dome, widest (2.2 m half-width) near its underside at z 3.7, with a narrowing, slightly flat top at 5.9 m. The crown sits 0.1 m left of the trunk, like the hero's. On the shell, 5 tiers of leaf clusters (8, 7, 7, 6 and 4 round the ring) plus a 3-cluster top cap. Cluster radius is jittered by +/-8 % to give a lumpy outline. Each cluster is a rosette: a centre plate faces out, and 5 plates radiate around it and droop. The droop goes from 44 deg at the bottom rim to 8 deg on top, so the plates step outward and down in tiers and the edge reads as jagged leaf tips."],
+  ["Leaf plates", "Each plate is a low-poly 5-lobed maple star (12 outline points, a raised centre, 12 triangles), 0.5 to 0.6 m in radius. The midrib is folded so the two halves catch the light differently. The material is double-sided (doubleSided true in the GLB). Colours are weighted by tier: Leaf_Light (150, 188, 92) on top, Leaf_Mid (104, 146, 50) and Leaf_Dark (64, 98, 28) lower down. A low dark body (crown_core, Leaf_Dark, 0.7 of the shell) sits inside, so gaps between plates show shadowed depth, not background."],
+  ["Game readiness", "2,983 triangles (budget 3k). 5 meshes, one material each: trunk Bark_Brown, leaves_light Leaf_Light, leaves_mid Leaf_Mid, leaves_dark Leaf_Dark, crown_core Leaf_Dark. Seasons recolour all four Leaf_ meshes. Flat base colours, no textures, no animation. Origin is at the trunk base on the ground. Exported with export_animations=False. to_game.py maple copies it over simulations/regional-assets/WW-151.glb."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.833. The row-by-row width profile of the crown matches the hero to within a few pixels from top to underside, and so does the length of the bare trunk.",
+  "It reads as a maple at tile size: a slender, flared light trunk, a dome of pointed star-shaped leaf plates stepping out in tiers, and a jagged leafy edge rather than a smooth ball.",
+  "It is on budget at 2,983 triangles, and four of the five meshes carry seasonal Leaf_ materials."
+ ],
+ "off": [
+  "The sheet views score about 0.70. The sheet's crown is fuller and hangs much lower (to about 45 % of the height), and its trunk is shorter. I followed the hero, as directed.",
+  "The hero's leaves are crisper, more deeply cut maple leaves, with many more of them in each clump. On a 3k budget I used about 220 plates of 12 triangles each, so up close the crown is coarser than the illustration.",
+  "The hero's underside opens up a little more and shows more limb. The bottom tier of plates hides most of the limb length.",
+  "The hero camera direction was chosen as front-on at 4 deg up, not searched for this model (the tree is close to rotationally symmetric). The hero number is a guide, not ground truth."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build: tiers of single star plates on a rounded shell, with a dark core.", "mean_iou": 0.733, "hero_iou": 0.798},
+  {"round": 2, "change": "Plates grouped into drooping rosette clusters (5 tiers plus top cap), broader lobes. 3.8k triangles, over budget.", "mean_iou": 0.77, "hero_iou": 0.815},
+  {"round": 3, "change": "Bigger plates and 5 per cluster (back under 3k), rounder dome profile, concave core underside.", "mean_iou": 0.822, "hero_iou": 0.748},
+  {"round": 4, "change": "Crown raised 0.3 m for a longer bare trunk; limbs raised with it.", "mean_iou": 0.762, "hero_iou": 0.763},
+  {"round": 5, "change": "Bell profile from the hero's row widths, widest near the underside; crown shifted left of the trunk.", "mean_iou": 0.765, "hero_iou": 0.804},
+  {"round": 6, "change": "Crown squashed by 0.86 toward its top, so the bare trunk reaches about 47 % of the height, as in the hero.", "mean_iou": 0.674, "hero_iou": 0.847},
+  {"round": 7, "change": "Broader upper crown, lower rim, more droop on the bottom tier.", "mean_iou": 0.694, "hero_iou": 0.831},
+  {"round": 8, "change": "Trimmed to budget (2,983 triangles): fewer top clusters, 4-sample limbs, 9-sided core.", "mean_iou": 0.691, "hero_iou": 0.822},
+  {"round": 9, "change": "Forks lowered and limbs thickened so they show under the crown; +/-8 % cluster jitter for a lumpy outline; crown offset -0.1.", "mean_iou": 0.704, "hero_iou": 0.821},
+  {"round": 10, "change": "Core shrunk to 0.7 of the shell, so the plates sit outside it and the crown reads leaf on leaf. Final 768 px / 48 samples.", "mean_iou": 0.702, "hero_iou": 0.833}
+ ],
+ "moving_parts": "None. The game poses and sways regional trees itself.",
+ "creative_additions": "Folded midribs on the leaf plates, so each leaf has two lit facets. Three small twigs off the limbs. A slight 4-lobed root flare that matches the hero's flared foot."
+}

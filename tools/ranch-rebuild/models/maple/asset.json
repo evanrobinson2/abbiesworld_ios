@@ -1,0 +1,252 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/maple",
+ "name": "maple",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "shade tree",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "eb243825-6201-45ed-bed2-561a2b4d5a03",
+    "grid_url": "https://www.midjourney.com/jobs/eb243825-6201-45ed-bed2-561a2b4d5a03?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "e02f7a38-dcf7-471b-bac9-2750cb0c2e22",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:03:45.160Z",
+    "grid_done_at": "2026-10-22T23:04:03.164Z",
+    "upscale_clicked_at": "2026-10-22T23:04:13.431Z",
+    "downloaded_at": "2026-10-22T23:05:24.979Z",
+    "pick_reason": "clearest lobed maple leaf clumps on a straight trunk, rounded crown, whole tree in frame"
+   },
+   "turnaround": {
+    "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a young maple tree, a straight trunk, a rounded dense crown of layered lobed leaf clumps in fresh green, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+    "grid_job_id": "38aae9df-fe52-43ff-af09-34c8c811965d",
+    "grid_url": "https://www.midjourney.com/jobs/38aae9df-fe52-43ff-af09-34c8c811965d?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "c35336e1-0a2c-4bbf-b352-608a7bf71b98",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:05:33.833Z",
+    "grid_done_at": "2026-10-22T23:05:51.835Z",
+    "upscale_clicked_at": "2026-10-22T23:06:01.998Z",
+    "downloaded_at": "2026-10-22T23:07:22.189Z",
+    "pick_reason": "three cleanly separated views, crowns not touching or cropped"
+   }
+  },
+  "files": {
+   "hero.png": "4b60b3ef901bbbbda68c6a7f295238336c1f6b232caabab8542838112173f83e",
+   "turnaround.png": "b2cf6434daf012df30eb02078109454714590abfc50c9fcec61d3f83c8cfb72c",
+   "view_front.png": "b33274598ca1796f510baa601c677e126697b7545a0a311e4936410fe7451687",
+   "view_side.png": "2534bcb1d0ff99807ac6ad059e1984035b941d0d0b80cfa297dfa4593ae3926e",
+   "view_back.png": "62f781c3ba5bbee19f08942d4423e02e0bebc6249cffc71c8dfb27e0bd17178f"
+  },
+  "folder": "tools/ranch-rebuild/mj/maple"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/maple/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: tiers of single star plates on a rounded shell, with a dark core.",
+    "mean_iou": 0.733,
+    "hero_iou": 0.798
+   },
+   {
+    "round": 2,
+    "change": "Plates grouped into drooping rosette clusters (5 tiers plus top cap), broader lobes. 3.8k triangles, over budget.",
+    "mean_iou": 0.77,
+    "hero_iou": 0.815
+   },
+   {
+    "round": 3,
+    "change": "Bigger plates and 5 per cluster (back under 3k), rounder dome profile, concave core underside.",
+    "mean_iou": 0.822,
+    "hero_iou": 0.748
+   },
+   {
+    "round": 4,
+    "change": "Crown raised 0.3 m for a longer bare trunk; limbs raised with it.",
+    "mean_iou": 0.762,
+    "hero_iou": 0.763
+   },
+   {
+    "round": 5,
+    "change": "Bell profile from the hero's row widths, widest near the underside; crown shifted left of the trunk.",
+    "mean_iou": 0.765,
+    "hero_iou": 0.804
+   },
+   {
+    "round": 6,
+    "change": "Crown squashed by 0.86 toward its top, so the bare trunk reaches about 47 % of the height, as in the hero.",
+    "mean_iou": 0.674,
+    "hero_iou": 0.847
+   },
+   {
+    "round": 7,
+    "change": "Broader upper crown, lower rim, more droop on the bottom tier.",
+    "mean_iou": 0.694,
+    "hero_iou": 0.831
+   },
+   {
+    "round": 8,
+    "change": "Trimmed to budget (2,983 triangles): fewer top clusters, 4-sample limbs, 9-sided core.",
+    "mean_iou": 0.691,
+    "hero_iou": 0.822
+   },
+   {
+    "round": 9,
+    "change": "Forks lowered and limbs thickened so they show under the crown; +/-8 % cluster jitter for a lumpy outline; crown offset -0.1.",
+    "mean_iou": 0.704,
+    "hero_iou": 0.821
+   },
+   {
+    "round": 10,
+    "change": "Core shrunk to 0.7 of the shell, so the plates sit outside it and the crown reads leaf on leaf. Final 768 px / 48 samples.",
+    "mean_iou": 0.702,
+    "hero_iou": 0.833
+   }
+  ],
+  "what_was_done": [
+   [
+    "Scoring",
+    "The hero wins, per the AD. views/ holds the MJ hero and the three sheet views with the ground strip keyed out by make_views.py (copied from tree-standing). Mean IoU is the harness score against the sheet views; hero IoU is hero_check.py, which renders from the hero's own direction (front-on, 4 deg up, harness lens) and scores against views/hero.png. The sheet draws a different tree: a fuller, rounder, taller crown of soft clover leaves that hangs down to about half height on a shorter trunk. I used it for proportion only, so once the crown was fitted to the hero the sheet score dropped from 0.82 to 0.70. That drop is expected."
+   ],
+   [
+    "Trunk",
+    "A straight 8-sided loft, 6.1 m tree in total. Radius 0.25 m at the ground with a 4-lobed flare that fades out by 0.5 m, then 0.09 to 0.07 m up a bare trunk to the fork at 2.55 to 2.95 m. The leader carries on inside the crown. Bark_Brown is light brown (150, 100, 52)."
+   ],
+   [
+    "Limbs",
+    "5 thin limbs (r 0.058 to 0.02 m) fan out from the fork into the crown, plus 3 twigs. The lower ends of the limbs show under the crown edge, as they do in the hero."
+   ],
+   [
+    "Crown",
+    "A surface of revolution fitted row by row to the hero's mask. It is a bell-shaped dome, widest (2.2 m half-width) near its underside at z 3.7, with a narrowing, slightly flat top at 5.9 m. The crown sits 0.1 m left of the trunk, like the hero's. On the shell, 5 tiers of leaf clusters (8, 7, 7, 6 and 4 round the ring) plus a 3-cluster top cap. Cluster radius is jittered by +/-8 % to give a lumpy outline. Each cluster is a rosette: a centre plate faces out, and 5 plates radiate around it and droop. The droop goes from 44 deg at the bottom rim to 8 deg on top, so the plates step outward and down in tiers and the edge reads as jagged leaf tips."
+   ],
+   [
+    "Leaf plates",
+    "Each plate is a low-poly 5-lobed maple star (12 outline points, a raised centre, 12 triangles), 0.5 to 0.6 m in radius. The midrib is folded so the two halves catch the light differently. The material is double-sided (doubleSided true in the GLB). Colours are weighted by tier: Leaf_Light (150, 188, 92) on top, Leaf_Mid (104, 146, 50) and Leaf_Dark (64, 98, 28) lower down. A low dark body (crown_core, Leaf_Dark, 0.7 of the shell) sits inside, so gaps between plates show shadowed depth, not background."
+   ],
+   [
+    "Game readiness",
+    "2,983 triangles (budget 3k). 5 meshes, one material each: trunk Bark_Brown, leaves_light Leaf_Light, leaves_mid Leaf_Mid, leaves_dark Leaf_Dark, crown_core Leaf_Dark. Seasons recolour all four Leaf_ meshes. Flat base colours, no textures, no animation. Origin is at the trunk base on the ground. Exported with export_animations=False. to_game.py maple copies it over simulations/regional-assets/WW-151.glb."
+   ]
+  ],
+  "creative_additions": "Folded midribs on the leaf plates, so each leaf has two lit facets. Three small twigs off the limbs. A slight 4-lobed root flare that matches the hero's flared foot."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   4.5245819091796875,
+   4.300069332122803,
+   6.084371566772461
+  ],
+  "triangles": 2983,
+  "materials": [
+   "Leaf_Dark",
+   "Leaf_Light",
+   "Leaf_Mid",
+   "Bark_Brown"
+  ],
+  "parts": [
+   {
+    "name": "crown_core",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_dark",
+    "materials": [
+     "Leaf_Dark"
+    ]
+   },
+   {
+    "name": "leaves_light",
+    "materials": [
+     "Leaf_Light"
+    ]
+   },
+   {
+    "name": "leaves_mid",
+    "materials": [
+     "Leaf_Mid"
+    ]
+   },
+   {
+    "name": "trunk",
+    "materials": [
+     "Bark_Brown"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": 0.702,
+  "hero_iou": 0.833,
+  "per_view": {
+   "front": 0.719,
+   "side": 0.686,
+   "back": 0.702
+  },
+  "triangle_budget": 3000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.833. The row-by-row width profile of the crown matches the hero to within a few pixels from top to underside, and so does the length of the bare trunk.",
+   "It reads as a maple at tile size: a slender, flared light trunk, a dome of pointed star-shaped leaf plates stepping out in tiers, and a jagged leafy edge rather than a smooth ball.",
+   "It is on budget at 2,983 triangles, and four of the five meshes carry seasonal Leaf_ materials."
+  ],
+  "off": [
+   "The sheet views score about 0.70. The sheet's crown is fuller and hangs much lower (to about 45 % of the height), and its trunk is shorter. I followed the hero, as directed.",
+   "The hero's leaves are crisper, more deeply cut maple leaves, with many more of them in each clump. On a 3k budget I used about 220 plates of 12 triangles each, so up close the crown is coarser than the illustration.",
+   "The hero's underside opens up a little more and shows more limb. The bottom tier of plates hides most of the limb length.",
+   "The hero camera direction was chosen as front-on at 4 deg up, not searched for this model (the tree is close to rotationally symmetric). The hero number is a guide, not ground truth."
+  ]
+ },
+ "exports": {
+  "runtime": "maple.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/WW-151.glb"
+   ]
+  }
+ },
+ "files": {
+  "maple.glb": {
+   "sha256": "93fe20ffb189c08485e2383adb608d7c483f5e1283bf2c56d99467944a68f159",
+   "bytes": 225344
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "a5aceb158bcd9c49343afb0a980597308b303933",
+  "path": "tools/ranch-rebuild/models/maple"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
