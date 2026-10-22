@@ -205,7 +205,7 @@ def build_skirt(p, lod):
     c = J(p, 'pelvis') + V(s['off'])
     rng = random.Random(7)
     rows = s['rows']
-    n = lod['skirt_strips']
+    n = s.get('n', lod['skirt_strips'])
     for ri, row in enumerate(rows):
         for i in range(n):
             a = 2 * math.pi * (i + 0.5 * ri) / n
@@ -367,11 +367,39 @@ def build_helmet(p, lod):
                 a0 = i * 3 + t
                 cf.append((a0, a0 + 3, a0 + 4, a0 + 1))
         acc.add(cv, cf)
+    # face plate (Corinthian-style mask) with a T-shaped eye and mouth slit
+    fp = h.get('face')
+    if fp:
+        nu_f, nv_f = 10, 7
+        A = math.radians(fp['a'])
+        fv, ff = [], []
+        for j in range(nv_f + 1):
+            t = j / nv_f
+            z = math.sin(lat0) * rz - t * fp['len']
+            inward = 1.0 - fp['chin_in'] * t * t
+            for i in range(nu_f + 1):
+                u = -1 + 2 * i / nu_f
+                a = u * A
+                fv.append(C + V((math.sin(a) * rx * fp['r'] * inward, -math.cos(a) * ry * fp['r'] * inward - fp['nose'] * max(0, 1 - abs(u) * 3) * (1 - abs(t - 0.45) * 2), z)))
+        for j in range(nv_f):
+            tc = (j + 0.5) / nv_f
+            for i in range(nu_f):
+                uc = -1 + 2 * (i + 0.5) / nu_f
+                eye = fp['eye_t0'] < tc < fp['eye_t1'] and abs(uc) > fp['nose_w']
+                mouth = tc > fp['eye_t1'] and abs(uc) < fp['mouth_w']
+                if eye or mouth:
+                    continue
+                a0 = j * (nu_f + 1) + i
+                ff.append((a0, a0 + 1, a0 + nu_f + 2, a0 + nu_f + 1))
+        acc.add(fv, ff)
     # crest: fan of folded blades along the sagittal arc, sweeping back
     c = p['crest']
-    nb = lod['crest_blades']
+    nb = lod['crest_blades'] * c.get('density', 1)
     rng = random.Random(11)
-    for i in range(nb):
+    layers = c.get('layers', [0.0])
+    for i in range(nb * len(layers)):
+        lay = layers[i % len(layers)]
+        i = i // len(layers)
         t = i / (nb - 1)
         ang = math.radians(c['a0'] + (c['a1'] - c['a0']) * t)   # 0 = straight up, + = towards back
         base = C + V((0, math.sin(ang) * ry * 0.98, math.cos(ang) * rz * 0.98)) + V((0, 0, c['lift']))
@@ -384,6 +412,7 @@ def build_helmet(p, lod):
         along = V((0, math.cos(ang), -math.sin(ang)))
         bv = [base - along * w / 2, base + side * c['fold'] * 0.3, base + along * w / 2,
               tip - along * w * 0.25 + side * c['fold'], tip + along * w * 0.25]
+        bv = [v + V((lay, 0, 0)) for v in bv]
         acc.add(bv, [(0, 1, 3), (1, 2, 4), (1, 4, 3)])
     # crest holder
     acc.add(*tube(C + V((0, -0.01, rz * 0.9)), C + V((0, 0.02, rz + c['lift'] + 0.02)), 0.012, 0.012, 5))
@@ -413,6 +442,29 @@ def build_shield(p, lod):
     ob = mesh_obj('shield', verts, faces)
     sol = ob.modifiers.new('sol', 'SOLIDIFY'); sol.thickness = s['thick']; sol.offset = 0
     apply_all_modifiers(ob)
+    extra = Acc()
+    if s.get('rim'):
+        right = [verts[j * (nu + 1) + nu] for j in range(nv + 1)]
+        left = [verts[j * (nu + 1)] for j in range(nv + 1)][::-1]
+        loop = right + left
+        for a_, b_ in zip(loop, loop[1:] + loop[:1]):
+            if (a_ - b_).length > 1e-5:
+                extra.add(*tube(a_ + V((0, -s['thick'], 0)), b_ + V((0, -s['thick'], 0)), s['rim'], s['rim'], 4))
+    if s.get('boss'):
+        bsz = s['boss']; nb_ = 8
+        bv = [V((0, -s['thick'] / 2 - bsz * 0.7, 0))]
+        for k in range(nb_):
+            a = 2 * math.pi * k / nb_
+            bv.append(V((math.cos(a) * bsz, -s['thick'] / 2 - bsz * 0.35, math.sin(a) * bsz * 1.1)))
+        for k in range(nb_):
+            a = 2 * math.pi * k / nb_
+            bv.append(V((math.cos(a) * bsz * 1.5, -s['thick'] / 2, math.sin(a) * bsz * 1.6)))
+        bf = [(0, 1 + k, 1 + (k + 1) % nb_) for k in range(nb_)] + [(1 + k, 1 + nb_ + k, 1 + nb_ + (k + 1) % nb_, 1 + (k + 1) % nb_) for k in range(nb_)]
+        extra.add(bv, bf)
+    if extra.v:
+        eo = extra.obj('shield_extra')
+        bm = bmesh.new(); bm.from_mesh(ob.data); bm.from_mesh(eo.data); bm.to_mesh(ob.data); bm.free()
+        bpy.data.objects.remove(eo)
     # merge collapsed vertices at the poles
     bm = bmesh.new(); bm.from_mesh(ob.data)
     bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1e-4)
@@ -496,6 +548,9 @@ def build_lights(p):
     bgn.inputs['Strength'].default_value = L['world_strength']
     sc.view_settings.view_transform = p['look'].get('view', 'Standard')
     sc.view_settings.exposure = p['look'].get('exposure', 0.0)
+    if p['look'].get('view_look'):
+        try: sc.view_settings.look = p['look']['view_look']
+        except TypeError: pass
 
 def build_camera(p, W=1024, H=1024):
     c = p['cam']
@@ -516,15 +571,17 @@ def lod_settings(level):
     return {
         0: dict(body_res=0, body_ratio=0.18, skirt_strips=12, strip_segs=1, ring_n=5, helm_u=8, helm_v=3, crest_blades=7, shield_u=6, shield_v=6, jitter=0.006),
         1: dict(body_res=1, body_ratio=0.22, skirt_strips=18, strip_segs=2, ring_n=7, helm_u=12, helm_v=4, crest_blades=12, shield_u=10, shield_v=10, jitter=0.005),
-        2: dict(body_res=2, body_ratio=0.30, skirt_strips=24, strip_segs=3, ring_n=9, helm_u=16, helm_v=6, crest_blades=18, shield_u=16, shield_v=14, jitter=0.004),
+        2: dict(body_res=2, body_ratio=0.30, skirt_strips=24, strip_segs=3, ring_n=9, helm_u=16, helm_v=6, crest_blades=18, shield_u=24, shield_v=24, jitter=0.004),
     }[level]
 
 def build_figure(p, level=1, with_stage=True):
     lod = lod_settings(level)
     mat = paper_material(p)
     body = build_body(p, lod)
-    decimate(body, p['look'].get('body_ratio', {}).get(str(level), lod['body_ratio']) if isinstance(p['look'].get('body_ratio'), dict) else lod['body_ratio'])
-    paper_jitter(body, lod['jitter'] * p['look']['crumple'], 1)
+    pc = p.get('papercraft')
+    if not pc:
+        decimate(body, p['look'].get('body_ratio', {}).get(str(level), lod['body_ratio']) if isinstance(p['look'].get('body_ratio'), dict) else lod['body_ratio'])
+        paper_jitter(body, lod['jitter'] * p['look']['crumple'], 1)
     parts = [body,
              build_skirt(p, lod), build_shoulder_guards(p, lod), build_bands(p, lod),
              build_helmet(p, lod), build_shield(p, lod), build_sash(p, body, lod)]
@@ -532,15 +589,29 @@ def build_figure(p, level=1, with_stage=True):
     if hy:
         Hc = J(p, 'head')
         parts[4].data.transform(Matrix.Translation(Hc) @ Matrix.Rotation(math.radians(hy), 4, 'Z') @ Matrix.Translation(-Hc))
-    for i, ob in enumerate(parts[1:]):
-        paper_jitter(ob, lod['jitter'] * 0.4 * p['look']['crumple'], 100 + i)
+    if pc:
+        import paper
+        sty = json.loads(json.dumps(pc))
+        sc_ = {0: 1.6, 1: 1.0, 2: 0.7}[level]  # detail level scales the facet edge length
+        sty['skin']['edge'] *= sc_; sty['trim']['edge'] *= sc_
+        pel, nk = J(p, 'pelvis'), J(p, 'neck')
+        tw = pc.get('torso_halfwidth', 0.2)
+        sty['_torso_region'] = lambda c: pel.z - 0.02 < c.z < nk.z - 0.03 and abs(c.x) < tw
+        body_dup = None
+        paper.facet(body, **sty['skin'])
+        paper.apply_style(dict(sty, skin={'edge': 1e9, 'crumple': 0}), {
+            'armour_body': [body], 'strips': [parts[1], parts[2]], 'trim': [parts[3], parts[4], parts[5], parts[6]]})
+    else:
+        for i, ob in enumerate(parts[1:]):
+            paper_jitter(ob, lod['jitter'] * 0.4 * p['look']['crumple'], 100 + i)
     # place whole figure: yaw about Z and ground offset
     f = p['fig']
     M = Matrix.Translation(V((f['x'], f['y'], 0))) @ Matrix.Rotation(math.radians(f['yaw']), 4, 'Z') @ Matrix.Scale(f['scale'], 4)
     for ob in parts:
         ob.data.transform(M)
         flat(ob)
-        ob.data.materials.clear(); ob.data.materials.append(mat)
+        if not pc:
+            ob.data.materials.clear(); ob.data.materials.append(mat)
     if with_stage:
         build_stage(p)
         build_lights(p)
