@@ -151,7 +151,7 @@ for (const r of rows.sort((a, b) => a.source_path.localeCompare(b.source_path)))
 // ---- 3. Catalogue: Postgres rows, then the published JSON in R2.
 if (!DRY && env.POSTGRES_URL) {
   const { default: pg } = await import('pg');
-  const db = new pg.Client({ connectionString: env.POSTGRES_URL, ssl: /localhost|127\.0\.0\.1/.test(env.POSTGRES_URL) ? false : { rejectUnauthorized: false } });
+  const db = new pg.Client({ connectionString: env.POSTGRES_URL.replace(/([?&])sslmode=[^&]*&?/, '$1').replace(/[?&]$/, ''), ssl: /localhost|127\.0\.0\.1/.test(env.POSTGRES_URL) ? false : { rejectUnauthorized: false } });
   await db.connect();
   await db.query(readFileSync(new URL('./schema.sql', import.meta.url), 'utf8'));
   for (const r of rows) {
