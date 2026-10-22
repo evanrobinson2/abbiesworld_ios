@@ -20,7 +20,7 @@ function collect(){
  if(!existsSync(docs)){console.log('docs/oracle not present; keeping the committed bundle.');process.exit(0);}
  const text=JSON.stringify(collect(),null,1)+'\n';
  if(process.argv.includes('--check')){
-  const current=existsSync(out)?readFileSync(out,'utf8'):'';
+  const current=existsSync(out)?readFileSync(out,'utf8').replace(/\r\n/g,'\n'):'';
   if(current!==text){console.error('data/repo-knowledge.json is stale. Run: node sync-repo-data.mjs');process.exit(1);}
   console.log('repo knowledge bundle is current');
  }else{writeFileSync(out,text);const d=JSON.parse(text);console.log(`wrote ${d.identities.length} identity records, ${d.profiles.length} Steam profiles, ${d.installed.length} installed games`);}
