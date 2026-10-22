@@ -65,9 +65,9 @@ if (live) {
   }
   if (music.length) console.log(`R2: ${music.length} music records, ${musicStored} new files`);
   console.log(`R2: ${stored} sounds stored (${(bytes / 1e6).toFixed(1)} MB), ${skipped} already there`);
-  if (env.POSTGRES_URL) {
+  if (env.POSTGRES_URL) try {
     const { default: pg } = await import('pg');
-    const db = new pg.Client({ connectionString: env.POSTGRES_URL, ssl: /localhost|127\.0\.0\.1/.test(env.POSTGRES_URL) ? false : { rejectUnauthorized: false } });
+    const db = new pg.Client({ connectionString: env.POSTGRES_URL.replace(/([?&])sslmode=[^&]*&?/, '$1').replace(/[?&]$/, ''), ssl: /localhost|127\.0\.0\.1/.test(env.POSTGRES_URL) ? false : { rejectUnauthorized: false } });
     await db.connect();
     await db.query(readFileSync(new URL('schema.sql', here), 'utf8'));
     for (const r of rows) {
@@ -82,7 +82,8 @@ if (live) {
     }
     await db.end();
     console.log(`Postgres: ${rows.length} rows upserted into sound_assets`);
-  } else console.log('POSTGRES_URL not set: skipped the database, catalogue published to R2 only');
+  } catch (e) { console.log(`::warning::Postgres skipped (${e.message}); the R2 catalogue is still published`); }
+  else console.log('POSTGRES_URL not set: skipped the database, catalogue published to R2 only');
   await s3.send(new S3.PutObjectCommand({ Bucket: env.R2_BUCKET, Key: 'sounds/catalog.json', Body: JSON.stringify(publicCatalog(rows)), ContentType: 'application/json', CacheControl: 'public, max-age=60' }));
   const check = await fetch(`${PUBLIC_BASE}/sounds/catalog.json`, { cache: 'no-store' });
   console.log(`Public read of sounds/catalog.json: HTTP ${check.status}`);
