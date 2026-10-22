@@ -39,8 +39,8 @@ JSON text frames over one WebSocket per party, at `/api/holodeck?room=<key>&role
 - Relay: `welcome` and `presence` (who is in the room), `ping`/`pong`.
 
 Ops: `state`, `catalog`, `spawn` (shape, registered asset or person), `remove`, `move`,
-`transform`, `style`, `animate` (spin, bob, pulse, orbit, hop), `camera` (focus, position,
-fit), `time` (hour, pause, speed), `weather`, `narrate` (caption, optional speech),
+`transform`, `style`, `animate` (spin, bob, pulse, orbit, hop, chase), `camera` (focus, position,
+fit), `time` (hour, pause, speed), `people` (inhabitants' walking speed), `weather`, `narrate` (caption, optional speech),
 `screenshot`. Schemas live in `protocol.mjs`; `node mcp/holodeck.mjs --tools` prints them as
 plain function-calling tools for other models.
 

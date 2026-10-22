@@ -62,7 +62,7 @@ export function createStage(ctx,{room,relay}){
  async function build(a){
   const unit=personHeight();
   if(a.shape){const m=new T.Mesh(GEO[a.shape](),new T.MeshStandardMaterial({color:a.color||'#f2b134',roughness:.55,metalness:.05}));m.castShadow=m.receiveShadow=true;const g=new T.Group();g.add(m);g.userData.baseScale=unit;return g;}
-  if(a.person){const n=entities.size;const child=a.person.role==='child';const person={index:n,appearance:{build:1,height:child?1.2:1.7,skin:['#e8b98f','#c68c5e','#8d5a3b','#f3d0b0'][n%4],hair:['#3b2a1e','#a0522d','#e2c16b','#222'][n%4],hairStyle:n%3},wardrobe:{top:a.color||'#4f7cac',bottom:'#4a4036',hat:a.person.role==='rancher'?'brim':'none',accessory:'none'}};const g=new T.Group();g.add(makePerson(person));g.userData.baseScale=unit/1.75;return g;}
+  if(a.person){const n=entities.size;const role=a.person.role,child=role==='child',zombie=role==='zombie';const person={index:n,appearance:{build:1,height:child?1.2:1.7,skin:zombie?['#9cbf7a','#8fb37f','#a7c48a'][n%3]:['#e8b98f','#c68c5e','#8d5a3b','#f3d0b0'][n%4],hair:zombie?'#4b4a3a':['#3b2a1e','#a0522d','#e2c16b','#222'][n%4],hairStyle:n%3},wardrobe:{top:a.color||(zombie?['#6f6a8a','#7a5b4a','#56706a'][n%3]:'#4f7cac'),bottom:zombie?'#4a4a3e':'#4a4036',hat:role==='rancher'?'brim':'none',accessory:'none'}};const body=makePerson(person),g=new T.Group();g.add(body);g.userData.baseScale=unit/1.75;g.userData.rig=body.userData;if(zombie){const [l,,r]=body.userData.limbs;l.rotation.x=r.rotation.x=-1.45;}return g;}
   const item=(await catalog).find(c=>c.id===a.asset);if(!item)throw Error('Unknown asset '+a.asset+'; use op catalog');
   const gltf=await loader.loadAsync(item.glb);const g=new T.Group();gltf.scene.traverse(o=>{if(o.isMesh)o.castShadow=o.receiveShadow=true;});g.add(gltf.scene);g.userData.baseScale=1;return g;
  }
@@ -112,7 +112,8 @@ export function createStage(ctx,{room,relay}){
    if(a.rotation)e.object.rotation.set(...a.rotation.map(T.MathUtils.degToRad));if(a.rotationY!==undefined)e.object.rotation.y=T.MathUtils.degToRad(a.rotationY);
    if(a.scale!==undefined){applyScale(e,a.scale);fixLabel(e);}return {id:a.id};},
   async style(a){restyle(get(a.id),a);return {id:a.id};},
-  async animate(a){const e=get(a.id);e.behavior=a.behavior;e.speed=a.speed??1;e.radius=a.radius;e.base=e.object.position.clone();return {id:a.id,behavior:a.behavior};},
+  async animate(a){const e=get(a.id);e.behavior=a.behavior;e.speed=a.speed??1;e.radius=a.radius;e.base=e.object.position.clone();e.chase=a.behavior==='chase'?{target:a.target??null,quarry:null,pick:0,ground:Math.random()*.25,caught:0}:null;return {id:a.id,behavior:a.behavior};},
+  async people(a){return {speed:ctx.walkPace(a.speed)};},
   async camera(a){
    if(a.fit){ctx.fit();return {fit:true};}
    ctx.stopFollow();
@@ -145,10 +146,37 @@ export function createStage(ctx,{room,relay}){
     if(e.behavior==='bob')o.position.y=e.base.y+(Math.sin(t*2)+1)*h*.12;
     if(e.behavior==='hop')o.position.y=e.base.y+Math.abs(Math.sin(t*3))*h*.3;
     if(e.behavior==='pulse'&&!e.appear){const k=1+Math.sin(t*3)*.08,b=o.userData.baseScale;o.scale.set(e.scale[0]*b*k,e.scale[1]*b*k,e.scale[2]*b*k);}
+    if(e.behavior==='chase')chase(e,dt);
     if(e.behavior==='orbit'){const r=e.radius??h*2;o.position.set(e.base.x+Math.cos(t*.8)*r,e.base.y,e.base.z+Math.sin(t*.8)*r);o.rotation.y=-t*.8;}}
   }
  }
  const ease=t=>t<.5?2*t*t:1-Math.pow(-2*t+2,2)/2;
+
+ // Chase: walk toward the nearest visible inhabitant, spreading chasers across different people.
+ // On a catch, a little hop of triumph and then someone new. Speed 1 matches the inhabitants' walk.
+ const at=o=>o.getWorldPosition(new T.Vector3());
+ function quarryFor(e){
+  const c=e.chase,people=worldThings().filter(w=>w.kind==='person'&&w.object.visible);
+  if(c.target){const o=resolve(c.target);return o&&o.visible?o:null;}
+  const taken=new Set([...entities.values()].filter(x=>x!==e&&x.chase?.quarry).map(x=>x.chase.quarry)),here=e.object.position;
+  const ranked=people.filter(p=>p.object!==c.last||people.length===1).map(p=>({o:p.object,d:at(p.object).distanceTo(here)})).sort((x,y)=>x.d-y.d);
+  return (ranked.find(p=>!taken.has(p.o))||ranked[0])?.o||null;
+ }
+ function chase(e,dt){
+  const c=e.chase,o=e.object,h=personHeight();
+  c.pick-=dt;c.ground-=dt;
+  if(c.caught>0){c.caught-=dt;o.position.y=e.base.y+Math.sin(Math.max(0,c.caught)/.6*Math.PI)*h*.35;return;}
+  if(!c.quarry?.visible||c.pick<=0){c.quarry=quarryFor(e);c.pick=1.5;}
+  const rig=o.userData.rig;
+  if(!c.quarry){if(rig)rig.limbs[1].rotation.x=rig.limbs[3].rotation.x=0;return;}
+  const goal=at(c.quarry),dx=goal.x-o.position.x,dz=goal.z-o.position.z,dist=Math.hypot(dx,dz);
+  if(dist<h*.45){c.last=c.quarry;c.quarry=null;c.pick=0;c.caught=.6;e.base=o.position.clone();return;}
+  const step=Math.min(dist,h*4.5*(e.speed??1)*dt);o.position.x+=dx/dist*step;o.position.z+=dz/dist*step;
+  if(c.ground<=0){c.ground=.25;c.y=groundAt(o.position.x,o.position.z);}
+  o.position.y+=((c.y??o.position.y)-o.position.y)*Math.min(1,dt*10);e.base=o.position.clone();
+  const turn=Math.atan2(dx,dz)-o.rotation.y;o.rotation.y+=Math.atan2(Math.sin(turn),Math.cos(turn))*Math.min(1,dt*6);
+  if(rig){const g=(c.gait=(c.gait||0)+step/h*3);rig.limbs[1].rotation.x=Math.sin(g)*.55;rig.limbs[3].rotation.x=-Math.sin(g)*.55;rig.limbs[0].rotation.x=-1.45+Math.sin(g)*.12;rig.limbs[2].rotation.x=-1.45-Math.sin(g)*.12;o.children[0].rotation.z=Math.sin(g*.5)*.08;}
+ }
 
  // Called right after the frame's draw call, while the drawing buffer is still readable.
  function rendered(){
@@ -165,7 +193,7 @@ export function createStage(ctx,{room,relay}){
  // ---- state stream ----------------------------------------------------------------------
  function snapshot(world=true){
   const c=ctx.clock();
-  return {protocol:PROTOCOL,rev,family:ctx.family(),name:ctx.name(),clock:{hour:round(c.hour),day:c.day,paused:c.paused,speed:c.speed},weather:c.weather,weatherMode:c.weatherMode,
+  return {protocol:PROTOCOL,rev,family:ctx.family(),name:ctx.name(),clock:{hour:round(c.hour),day:c.day,paused:c.paused,speed:c.speed},weather:c.weather,weatherMode:c.weatherMode,peopleSpeed:ctx.walkPace?.(),
    camera:{position:arr(camera.position),target:arr(orbit.target),fov:camera.fov},viewport:{width:innerWidth,height:innerHeight},scaleHint:{personHeight:round(personHeight())},
    entities:[...entities.values()].map(e=>({id:e.id,kind:e.kind,type:e.type,position:arr(e.object.position),scale:e.scale,color:e.color,label:e.label,behavior:e.behavior,visible:e.object.visible,moving:!!e.tween})),
    world:world?worldThings().map(({name,kind,doing,position})=>({name,kind,doing,position})):undefined,lastTap:tapped,selected,hidden:document.hidden};
