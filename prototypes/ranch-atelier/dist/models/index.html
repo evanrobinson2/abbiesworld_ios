@@ -5,41 +5,12 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Models</title>
 <link rel="stylesheet" href="/app-style.css?v=1">
-<link rel="stylesheet" href="/models/models.css?v=1">
-
+<link rel="stylesheet" href="/models/models.css?v=2">
+<script type="importmap">{"imports":{"three":"/simulations/vendor/three.module.js"}}</script>
 </head>
 <body>
-<header class="mbar"><a class="home" href="/sandbox" aria-label="Back to Ranch Atelier"><img src="/abbies-ranch-logo.png" alt=""></a><div class="crumb"><a href="/models">Models</a></div></header>
-<main class="wrap">
-  <div class="intro"><div class="eyebrow">Models</div><h1>Models made from your images</h1>
-  <p>Every model I build to match an image gets a page: your image beside the 3D model, how well it matches, what I did, and the file details. Pick one to open it.</p></div>
-  <section class="group"><h2>Paper warrior · props <small>5 models · outline match shown</small></h2><nav class="navigator" aria-label="Models"><a class="nv" href="/models/cuirass"><img src="/models/cuirass/ref.jpg" alt="" loading="lazy"><span>Cuirass</span><b class="good">92%</b></a><a class="nv" href="/models/pauldrons"><img src="/models/pauldrons/ref.jpg" alt="" loading="lazy"><span>Pauldrons</span><b class="weak">72%</b></a><a class="nv" href="/models/belt"><img src="/models/belt/ref.jpg" alt="" loading="lazy"><span>Belt</span><b class="partial">77%</b></a><a class="nv" href="/models/sandals"><img src="/models/sandals/ref.jpg" alt="" loading="lazy"><span>Sandals</span><b class="good">86%</b></a><a class="nv" href="/models/greaves"><img src="/models/greaves/ref.jpg" alt="" loading="lazy"><span>Greaves</span><b class="partial">84%</b></a></nav>
-  <div class="tiles">
-<a class="tile" href="/models/cuirass">
-  <div class="tp"><img src="/models/cuirass/ref.jpg" alt="Reference image" loading="lazy"><img src="/models/cuirass/render.jpg" alt="Fitted model" loading="lazy"></div>
-  <div class="tm"><strong>Cuirass</strong><span class="chip good">Close match</span></div>
-  <div class="tm sub"><span>Segmented chest armour (lorica) with shoulder guards</span><b>92%</b></div>
-</a>
-<a class="tile" href="/models/pauldrons">
-  <div class="tp"><img src="/models/pauldrons/ref.jpg" alt="Reference image" loading="lazy"><img src="/models/pauldrons/render.jpg" alt="Fitted model" loading="lazy"></div>
-  <div class="tm"><strong>Pauldrons</strong><span class="chip weak">Weak match</span></div>
-  <div class="tm sub"><span>A pair of layered shoulder guards</span><b>72%</b></div>
-</a>
-<a class="tile" href="/models/belt">
-  <div class="tp"><img src="/models/belt/ref.jpg" alt="Reference image" loading="lazy"><img src="/models/belt/render.jpg" alt="Fitted model" loading="lazy"></div>
-  <div class="tm"><strong>Belt</strong><span class="chip partial">Partial match</span></div>
-  <div class="tm sub"><span>A plain belt with a rectangular buckle</span><b>77%</b></div>
-</a>
-<a class="tile" href="/models/sandals">
-  <div class="tp"><img src="/models/sandals/ref.jpg" alt="Reference image" loading="lazy"><img src="/models/sandals/render.jpg" alt="Fitted model" loading="lazy"></div>
-  <div class="tm"><strong>Sandals</strong><span class="chip good">Close match</span></div>
-  <div class="tm sub"><span>A pair of strappy sandals</span><b>86%</b></div>
-</a>
-<a class="tile" href="/models/greaves">
-  <div class="tp"><img src="/models/greaves/ref.jpg" alt="Reference image" loading="lazy"><img src="/models/greaves/render.jpg" alt="Fitted model" loading="lazy"></div>
-  <div class="tm"><strong>Greaves</strong><span class="chip partial">Partial match</span></div>
-  <div class="tm sub"><span>A pair of faceted shin guards</span><b>84%</b></div>
-</a></div></section>
-</main>
+<header class="mbar"><a class="home" href="/sandbox" aria-label="Back to Ranch Atelier"><img src="/abbies-ranch-logo.png" alt=""></a><div class="crumb" id="crumb"><a href="/models">Models</a></div></header>
+<main class="wrap" id="root" data-view="landing"><p class="loading">Loading models…</p></main>
+<script type="module" src="/models/models.js?v=2"></script>
 </body>
 </html>

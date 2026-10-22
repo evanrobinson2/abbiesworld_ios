@@ -1,4 +1,4 @@
-// The model page's 3D view: the model on a soft shadow, framed from the reference camera, turned with the mouse or a finger.
+// The model page's 3D view (mountViewer(figure)): the model on a soft shadow, framed from the reference camera, turned with the mouse or a finger.
 import * as THREE from 'three';
 import {OrbitControls} from '/simulations/vendor/OrbitControls.js';
 import {GLTFLoader} from '/simulations/vendor/loaders/GLTFLoader.js';
@@ -11,10 +11,10 @@ function fail(v, why){
   m.textContent = 'The 3D model could not load (' + why + '). The render beside the overlay shows it from your camera.';
 }
 
-for (const v of document.querySelectorAll('.viewer')){
+export function mountViewer(v){
   const canvas = v.querySelector('canvas'), stage = v.querySelector('.stage'), msg = v.querySelector('.msg');
   let renderer;
-  try { renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true}); } catch(e){ fail(v, 'WebGL is unavailable'); continue; }
+  try { renderer = new THREE.WebGLRenderer({canvas, antialias:true, alpha:true}); } catch(e){ fail(v, 'WebGL is unavailable'); return; }
   renderer.setPixelRatio(Math.min(2, devicePixelRatio || 1));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;

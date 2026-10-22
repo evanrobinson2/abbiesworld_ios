@@ -10,11 +10,11 @@
     },
     {
       "source": "/models/:id",
-      "destination": "/models/:id/index.html"
+      "destination": "/models/model.html"
     },
     {
       "source": "/models/:id/",
-      "destination": "/models/:id/index.html"
+      "destination": "/models/model.html"
     },
     {
       "source": "/sandbox/Claude",
