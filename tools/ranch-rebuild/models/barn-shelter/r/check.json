@@ -1,0 +1,8 @@
+{
+ "front": 0.897,
+ "side": 0.816,
+ "back": 0.852,
+ "mean_iou": 0.855,
+ "hero_iou": 0.843,
+ "triangles": 6428
+}
