@@ -1,0 +1,37 @@
+{
+  "about": "Briefs for API-generated music. Each cue becomes an ElevenLabs composition plan: global styles shared by every section, then sections with their own styles and lengths. Keep Abbie's World one score: same palette, warm and cinematic, never cheesy.",
+  "palette": {
+    "positive": ["cinematic orchestral", "warm chamber orchestra", "intimate, hand-played acoustic instruments", "AAA game soundtrack", "gentle wonder", "clear melody", "instrumental"],
+    "negative": ["vocals", "lyrics", "choir words", "EDM", "trap", "dubstep", "heavy drums", "distorted guitar", "cheesy", "kazoo", "nursery rhyme", "8-bit", "lo-fi hiss"]
+  },
+  "cues": [
+    {"id": "ranch-morning", "kind": "bed", "title": "Ranch Morning", "lufs": -18,
+     "styles": ["pastoral", "D major", "76 bpm", "flowing harp arpeggios", "breathing strings", "solo flute melody", "french horn answer", "sunlit farm morning"],
+     "sections": [["Opening", ["harp and soft strings alone", "settling in"], 20000], ["Theme", ["flute carries the melody", "harp keeps moving"], 40000], ["Answer", ["horn answers the flute", "fuller strings"], 40000], ["Return", ["thins back to harp and strings", "ends where it began so it loops"], 20000]]},
+    {"id": "ranch-workday", "kind": "bed", "title": "Ranch Workday", "lufs": -18,
+     "styles": ["playful but not silly", "G major", "104 bpm", "pizzicato strings", "marimba ostinato", "clarinet melody", "staccato flute and bassoon", "busy farm chores"],
+     "sections": [["Groove", ["pizzicato and marimba set the pulse"], 20000], ["Tune", ["clarinet melody over the pulse"], 40000], ["Trade", ["flute and bassoon trade a light staccato figure", "glockenspiel sparkles"], 40000], ["Turnaround", ["back to the groove", "loops cleanly"], 20000]]},
+    {"id": "ranch-night", "kind": "bed", "title": "Ranch Night", "lufs": -18,
+     "styles": ["lullaby", "3/4 waltz", "B-flat major", "60 bpm", "soft felt piano ripples", "hushed strings", "clarinet then solo violin", "fireflies, safe and warm"],
+     "sections": [["Hush", ["piano alone, very soft"], 24000], ["Song", ["clarinet sings over piano and strings"], 36000], ["Violin", ["solo violin takes the tune", "a touch of harp"], 36000], ["Fade", ["back to piano", "loops cleanly"], 24000]]},
+    {"id": "wonder", "kind": "bed", "title": "Wonder", "lufs": -18,
+     "styles": ["adventure and discovery", "E lydian", "92 bpm", "shimmering harp", "celesta", "soaring strings", "light timpani swells", "exploring a magical new world"],
+     "sections": [["Arrival", ["harp and celesta shimmer", "sense of a new place"], 20000], ["Explore", ["strings lift", "woodwinds dart"], 40000], ["Soar", ["full orchestra, still gentle", "horn melody"], 40000], ["Settle", ["back to shimmer", "loops cleanly"], 20000]]},
+    {"id": "sting-arrival", "kind": "sting", "title": "Arrival", "lufs": -16,
+     "styles": ["harp glissando up into a warm major chord", "horn swell", "you have arrived somewhere wonderful"], "sections": [["Sting", ["short", "complete musical gesture", "ring out"], 5000]]},
+    {"id": "sting-teleport", "kind": "sting", "title": "Teleport", "lufs": -16,
+     "styles": ["rising shimmering strings and celesta", "magical whoosh made by the orchestra", "lifts off then resolves"], "sections": [["Sting", ["short", "complete musical gesture"], 4000]]},
+    {"id": "sting-reveal", "kind": "sting", "title": "Reveal", "lufs": -16,
+     "styles": ["held breath then a bright orchestral bloom", "glockenspiel sparkle", "ta-da without being cheesy"], "sections": [["Sting", ["short", "complete musical gesture"], 4000]]},
+    {"id": "sting-victory", "kind": "sting", "title": "Victory", "lufs": -16,
+     "styles": ["triumphant but warm", "brass and strings fanfare", "timpani roll", "big final major chord"], "sections": [["Sting", ["short fanfare", "complete musical gesture"], 6000]]},
+    {"id": "sting-discovery", "kind": "sting", "title": "Discovery", "lufs": -16,
+     "styles": ["curious", "pizzicato and celesta question then answer", "you found something"], "sections": [["Sting", ["very short", "complete musical gesture"], 3000]]},
+    {"id": "sting-small-win", "kind": "sting", "title": "Small Win", "lufs": -16,
+     "styles": ["tiny happy flourish", "flute and glockenspiel", "well done"], "sections": [["Sting", ["very short"], 3000]]},
+    {"id": "interlude-world-intro", "kind": "interlude", "title": "World Intro", "lufs": -17,
+     "styles": ["title-card theme", "full warm orchestra", "memorable melody", "builds then lands"], "sections": [["Intro", ["harp and strings"], 6000], ["Theme", ["full theme statement"], 14000], ["Cadence", ["clear ending"], 5000]]},
+    {"id": "interlude-night-falls", "kind": "interlude", "title": "Night Falls", "lufs": -17,
+     "styles": ["day turning to night", "strings descend", "piano enters", "warm and calm"], "sections": [["Dusk", ["from bright to hushed"], 10000], ["Night", ["settles on a soft chord"], 6000]]}
+  ]
+}

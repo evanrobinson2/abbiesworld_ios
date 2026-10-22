@@ -64,6 +64,11 @@ export async function startLive({stage,audio,button}){
    if(out.ok)ui.toast('Workshop order sent: '+a.description);
    return out.ok?{ok:true,status:'The workshop has the order. It will arrive later, not today.'}:{ok:false,error:out.verdict?'The workshop cannot make that one.':out.error||'The workshop is busy.'};
   },
+  game_idea:async a=>{
+   const r=await fetch('/api/live',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'oracle',idea:a.idea})});
+   const out=await r.json().catch(()=>({}));
+   return out.ok?out.plan:{ok:false,error:out.verdict?'Let us pick a different game.':'The game ideas book is closed right now. Make one up together!'};
+  },
   goodbye:async()=>{goodbye=true;return {ok:true};}
  };
  return live;

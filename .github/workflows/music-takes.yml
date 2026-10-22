@@ -1,0 +1,43 @@
+# Composer takes from the ElevenLabs Music API (tools/composer/README.md, "API music"). Runs on a runner because
+# the cloud box can't reach api.elevenlabs.io. Manual only, so it never spends credits on its own.
+# Secret: ELEVENLABS_API_KEY (Starter plan or higher). Mastered takes and their provenance are committed to
+# tools/composer/takes/ for review; nothing goes on the site from here.
+name: music-takes
+on:
+  workflow_dispatch:
+    inputs:
+      only: { description: 'Cue ids, space separated (empty = every cue in briefs.json)', default: '' }
+      takes: { description: 'Takes per cue', default: '2' }
+      model: { description: 'ElevenLabs model', default: 'music_v2_5' }
+concurrency:
+  group: music-takes-${{ github.ref }}
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  takes:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: '3.12' }
+      - uses: FedericoCarboni/setup-ffmpeg@v3
+      - name: Generate
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+        run: |
+          ONLY="${{ inputs.only }}"
+          python3 tools/composer/api/elevenlabs.py --takes "${{ inputs.takes }}" --model "${{ inputs.model }}" ${ONLY:+--only $ONLY}
+      - name: Commit takes
+        run: |
+          mkdir -p tools/composer/takes
+          for d in tools/composer/out/api/*/; do
+            id=$(basename "$d"); mkdir -p "tools/composer/takes/$id"
+            cp "$d"*.master.mp3 "$d"*.json "tools/composer/takes/$id/" 2>/dev/null || true
+          done
+          git config user.name "music-takes"; git config user.email "actions@users.noreply.github.com"
+          git add tools/composer/takes
+          git diff --cached --quiet && exit 0
+          git commit -m "Composer: ElevenLabs takes (${{ inputs.only || 'all cues' }}) [skip ci]"
+          git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}"

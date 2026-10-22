@@ -81,7 +81,7 @@ server.listen(0,'127.0.0.1',async()=>{
  await browser.close();server.close();
  const outputs=log.filter(l=>l.item==='function-call-output').map(l=>JSON.parse(l.output));
  const checks={
-  'session config sent with rules, world brief and the seven tools':log.some(l=>l.t==='session-update'&&l.hasRules&&l.world&&l.tools.length===7),
+  'session config sent with rules, world brief and the eight tools':log.some(l=>l.t==='session-update'&&l.hasRules&&l.world&&l.tools.length===8),
   'catalog search finds the library barn':outputs.some(o=>o.models?.some(m=>m.id==='lib-mc-barn-upgrade')),
   'library model placed on the stage':!!app.barn,
   'app: season, sound and panel set':app.state.season==='winter'&&app.state.sound===true&&app.state.panelOpen===true,

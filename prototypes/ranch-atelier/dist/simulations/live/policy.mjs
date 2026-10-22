@@ -47,6 +47,7 @@ THE WORLD
 - Give everything you make a short id ("rainbow-bridge") so you can change it later. Reusing an id replaces that thing.
 - Use build for anything made of several parts (a castle, a rocket, an abacus with beads that slide). Parts are positioned in the thing's own space: [0,1,0] is the top of a scale-1 thing and part scale 0.2 is a fifth of its size. Move a bead later with change_world move using the part's full id (thing-id.part-id) and a "to" in the same space.
 - Real models look nicer than shapes. Before building something from shapes, call catalog with a word or two ("barn", "goat", "tree") and spawn a match with change_world spawn {asset: id}. Ranch models arrive at their true ranch size (scale 1). Library models (ids starting "lib-") arrive one person tall, so scale them: a barn about 8, a tree about 6, a basket about 0.4.
+- When a child wants to play or make up a game (tag with the sheep, a treasure hunt, a race to the barn, hide and seek), call game_idea with their idea in a few words. It returns a small plan from the game's Oracle: a title, a goal, a few rules and things to build. Build those things with build or change_world, then explain the game in one or two short sentences and start playing. Don't read the plan out word for word.
 - When the family asks for something that needs a real new model (a detailed unicorn, a real red barn), build a quick version from shapes now and call order_model so the workshop makes a proper one later.
 - When someone says goodbye, stop, or that they are done, say a short goodbye and call goodbye.
 
@@ -128,6 +129,7 @@ export const TOOLS=[
  {type:'function',name:'control_app',description:'Control the app around the world. Actions:\n'+Object.entries(APP_ACTIONS).map(([k,v])=>'- '+k+': '+v).join('\n'),parameters:{type:'object',required:['action'],properties:{
   action:{type:'string',enum:Object.keys(APP_ACTIONS)},args:{type:'object',description:'Arguments for the action, as listed above'}}}},
  {type:'function',name:'order_model',description:'Ask the workshop to make a proper new 3D model of something for this world. It takes a while; build a quick shape version now.',parameters:{type:'object',required:['description'],properties:{description:{type:'string',minLength:3,maxLength:300,description:'What to make, in plain words, e.g. "a friendly purple unicorn with a rainbow mane"'},for:{type:'string',maxLength:32,description:'The id of the quick version it will replace'}}}},
+ {type:'function',name:'game_idea',description:'Ask the game Oracle to turn a child’s game idea into a small plan: title, goal, up to four rules, things to build, and one line to say. Use it when someone wants to play or invent a game.',parameters:{type:'object',required:['idea'],properties:{idea:{type:'string',minLength:3,maxLength:240,description:'The game idea in plain words, e.g. "a race to the barn with the sheep"'}}}},
  {type:'function',name:'goodbye',description:'End live mode, after saying goodbye.',parameters:{type:'object',properties:{}}}
 ];
 
@@ -160,7 +162,7 @@ export function screen(text,{level='all'}={}){
 export function toolTexts(name,args){
  const out=[];const add=v=>{if(typeof v==='string')out.push(v);};
  if(!args||typeof args!=='object')return out;
- add(args.id);add(args.label);add(args.description);add(args.near);add(args.args?.name);
+ add(args.id);add(args.label);add(args.description);add(args.near);add(args.idea);add(args.args?.name);
  for(const p of Array.isArray(args.parts)?args.parts:[])add(p?.id);
  for(const o of Array.isArray(args.ops)?args.ops:[]){const a=o?.args||{};add(a.id);add(a.label);add(a.near);add(a.focus);add(a.target);add(a.person?.name);}
  return out;
