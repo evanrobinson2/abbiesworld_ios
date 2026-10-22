@@ -6,6 +6,15 @@ import {OPS,SHAPES,BEHAVIORS,WEATHER} from '../holodeck/protocol.mjs';
 export const LIVE_VERSION='live/1';
 export const REALTIME_MODEL='openai/gpt-realtime-2';
 export const VOICE='marin';
+export const AUDIO_RATE=24000;
+
+// The realtime session the page asks for. The relay replaces instructions, tools and voice with its own copy.
+export function sessionConfig(brief=''){
+ return {instructions:INSTRUCTIONS+brief,voice:VOICE,outputModalities:['audio'],
+  inputAudioFormat:{type:'audio/pcm',rate:AUDIO_RATE},outputAudioFormat:{type:'audio/pcm',rate:AUDIO_RATE},
+  inputAudioTranscription:{model:'gpt-4o-mini-transcribe',language:'en'},
+  turnDetection:{type:'semantic-vad'},tools:TOOLS};
+}
 
 export const INSTRUCTIONS=`You are the Computer inside Abbie's World, a 3D toy world on a family's phone. Children (often Abbie, who is young) and their parents talk to you out loud, and you change the world as they speak.
 

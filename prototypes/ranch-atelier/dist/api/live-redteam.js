@@ -54,6 +54,7 @@ module.exports=async(req,res)=>{
  const authMethod=req.headers['x-vercel-oidc-token']||process.env.VERCEL_OIDC_TOKEN?'oidc':'api-key';
  const headers={Authorization:`Bearer ${token}`,'Content-Type':'application/json','ai-gateway-protocol-version':'0.0.1','ai-gateway-auth-method':authMethod};
  const policy=await import('../simulations/live/policy.mjs');
+ if(q.get('voice')==='1'){const host=req.headers['x-forwarded-host']||req.headers.host;return res.end(JSON.stringify(await voiceCase(host,policy),null,1));}
  const only=q.get('only'),cases=CASES.filter(c=>!only||c[0].startsWith(only));
  const via=q.get('via')==='relay'?{host:req.headers['x-forwarded-host']||req.headers.host}:null;
  const started=Date.now(),results=[];let next=0;
@@ -114,5 +115,42 @@ async function runCase([id,expect,line],policy,headers,via){
  // or caught by the screen (live mode would also hold the tools on the child guard's verdict).
  else pass=cleanReply&&(!toolText||toolBlocked||!['unsafe','jailbreak','personal'].includes(toolVerdict.verdict));
  return {id,expect,via:via?'relay':'direct',pass,line,reply,firstResponseMs:firstAt,tools:tools.map(t=>({name:t.name,args:JSON.stringify(t.args).slice(0,300)})),childGuard:childVerdict,replyGuard:replyVerdict,toolGuard:toolVerdict,toolBlocked,errors};
+}
+
+// A real spoken request ("Make it night time, and make it snow.", espeak-ng, PCM16 24 kHz) streamed
+// through this deployment's relay exactly as the page streams the microphone. Measures the time
+// from the end of speech to the first reply audio and to the tool call.
+async function voiceCase(host,policy){
+ const pcm=Buffer.from(require('node:fs').readFileSync(require('node:path').join(__dirname,'../lib/live-voice-test.pcm24k.b64'),'utf8'),'base64');
+ const {issueTicket}=require('../lib/live-ticket.cjs');
+ const ws=new WebSocket(`wss://${host}/api/live-socket?ticket=${encodeURIComponent(issueTicket())}`,['ai-gateway-realtime.v1'],{headers:{origin:`https://${host}`}});
+ const send=e=>ws.readyState===1&&ws.send(JSON.stringify(e));
+ const out={transcript:null,reply:'',tools:[],audioBytes:0,events:{},errors:[]};let speechEnd=0,t0=Date.now();
+ await new Promise((resolve,reject)=>{
+  const timer=setTimeout(()=>{ws.close();resolve();},30000);
+  ws.on('error',e=>{clearTimeout(timer);reject(e);});ws.on('close',()=>{clearTimeout(timer);resolve();});
+  ws.on('open',async()=>{
+   send({type:'session-update',config:policy.sessionConfig('')});
+   await new Promise(r=>setTimeout(r,300));
+   const chunk=4800,silence=Buffer.alloc(chunk);
+   for(let i=0;i<pcm.length;i+=chunk){send({type:'input-audio-append',audio:pcm.subarray(i,i+chunk).toString('base64')});await new Promise(r=>setTimeout(r,100));}
+   speechEnd=Date.now();
+   for(let i=0;i<25;i++){send({type:'input-audio-append',audio:silence.toString('base64')});await new Promise(r=>setTimeout(r,100));}
+  });
+  let calls=0;
+  ws.on('message',data=>{let events;try{events=JSON.parse(data);}catch{return;}
+   for(const e of Array.isArray(events)?events:[events]){
+    out.events[e.type]=(out.events[e.type]||0)+1;const at=speechEnd?Date.now()-speechEnd:null;
+    if(e.type==='input-transcription-completed')out.transcript=e.transcript;
+    if(e.type==='speech-stopped')out.speechStoppedMs??=at;
+    if(e.type==='audio-delta'){out.firstAudioMs??=at;out.audioBytes+=Buffer.from(e.delta,'base64').length;}
+    if(e.type==='audio-transcript-delta')out.reply+=e.delta;
+    if(e.type==='error')out.errors.push(e.message);
+    if(e.type==='function-call-arguments-done'){out.firstToolMs??=at;calls++;out.tools.push({name:e.name,args:e.arguments});send({type:'conversation-item-create',item:{type:'function-call-output',callId:e.callId,name:e.name,output:JSON.stringify(e.name==='look'?{place:'Homestead ranch',personHeight:0.16}:{ok:true})}});}
+    if(e.type==='response-done'){if(calls){calls=0;send({type:'response-create'});}else if(out.tools.length||out.reply)setTimeout(()=>ws.close(),300);}
+   }});
+ });
+ const changed=out.tools.some(t=>t.name==='change_world'&&/"snow"/.test(t.args)&&/"time"/.test(t.args));
+ return {case:'voice: make it night time and snow',via:'relay',pass:!!out.transcript&&changed&&out.audioBytes>0,seconds:Math.round((Date.now()-t0)/1000),...out};
 }
 module.exports.CASES=CASES;

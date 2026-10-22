@@ -4,9 +4,9 @@
 // Safety layers: the game-controller instructions (policy.mjs), a narrow tool set, the local PG screen
 // on every tool text, and the server guard on every line spoken by either side. Tool calls wait for
 // the guard's verdict on what the child just said, so an unsafe request never reaches the screen.
-import {INSTRUCTIONS,TOOLS,VOICE,LIVE_OPS,screen,toolTexts,buildOps,summarize} from './policy.mjs';
+import {AUDIO_RATE,LIVE_OPS,sessionConfig,screen,toolTexts,buildOps,summarize} from './policy.mjs';
 
-const RATE=24000,IDLE_MS=120000,MAX_MS=20*60000,MAX_CHAIN=6;
+const RATE=AUDIO_RATE,IDLE_MS=120000,MAX_MS=20*60000,MAX_CHAIN=6;
 const CONSENT_KEY='abbies-live-consent-v1';
 
 export async function startLive({stage,audio,button}){
@@ -30,10 +30,7 @@ export async function startLive({stage,audio,button}){
   stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true,autoGainControl:true,channelCount:1}});
   ws=new WebSocket(s.url,s.protocols);
   ws.onopen=()=>{
-   send({type:'session-update',config:{instructions:INSTRUCTIONS+brief(),voice:VOICE,outputModalities:['audio'],
-    inputAudioFormat:{type:'audio/pcm',rate:RATE},outputAudioFormat:{type:'audio/pcm',rate:RATE},
-    inputAudioTranscription:{model:'gpt-4o-mini-transcribe',language:'en'},
-    turnDetection:{type:'semantic-vad'},tools:TOOLS}});
+   send({type:'session-update',config:sessionConfig(brief())});
    startCapture();ui.state('listening','Say what you want to see!');
    // A short hello so the family knows it is listening.
    send({type:'response-create',options:{instructions:'Greet the family in one short, cheerful sentence and ask what they want to make in the world.'}});
