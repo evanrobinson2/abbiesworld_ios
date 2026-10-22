@@ -1,0 +1,9 @@
+{
+ "side": {
+  "iou": 0.557,
+  "aspect_target": 1.155,
+  "aspect_render": 0.853,
+  "mean_color_dist": 0.904
+ },
+ "mean_iou": 0.557
+}
