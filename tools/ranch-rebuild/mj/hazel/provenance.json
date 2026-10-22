@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "hazel",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/GF-158.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "5232b72e-954e-4095-95e4-3d2dbedbdd71",
+      "grid_url": "https://www.midjourney.com/jobs/5232b72e-954e-4095-95e4-3d2dbedbdd71?index=2",
+      "picked_index": 2,
+      "upscale_job_id": "cbe5c3d6-5dc1-4225-a7ec-3d459b9fa323",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:11:35.642Z",
+      "grid_done_at": "2026-10-22T23:11:53.645Z",
+      "upscale_clicked_at": "2026-10-22T23:12:03.457Z",
+      "downloaded_at": "2026-10-22T23:13:16.124Z",
+      "pick_reason": "clearest straight upright stems from the base with round leaves; no variant showed hazelnut clusters clearly"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a hazel shrub, many straight upright stems rising from the base, round soft green leaves, a few clusters of hazelnuts, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "adaea089-aefa-49aa-865f-3e0d2049962e",
+      "grid_url": "https://www.midjourney.com/jobs/adaea089-aefa-49aa-865f-3e0d2049962e?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "e2eccd8d-af66-432f-a0b1-db2f80553bc1",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:13:25.981Z",
+      "grid_done_at": "2026-10-22T23:13:43.984Z",
+      "upscale_clicked_at": "2026-10-22T23:13:54.131Z",
+      "downloaded_at": "2026-10-22T23:15:14.226Z",
+      "pick_reason": "three separated views of the shrub, the only sheet showing hazelnut clusters"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "666422d7068ddf5304d4f75d1a82ef5ea88ba4bfe6f5d93b59eae4390156f1aa",
+      "bytes": 2842008,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/cbe5c3d6-5dc1-4225-a7ec-3d459b9fa323/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "81c100f359fef08d1b8262d5a7265e9c79fa1b0d3fb7cd01429c486c72fb2125",
+      "bytes": 3153643,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/e2eccd8d-af66-432f-a0b1-db2f80553bc1/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "2237a966b91f2d6bab8c77dfb7720d8456d6cfce964ca2dc4817c849116f45e3",
+      "bytes": 1026683,
+      "pixels": [
+        840,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hazel [('front', 237, 1077), ('side', 1093, 1861), ('back', 1871, 2673)]"
+    },
+    "view_side.png": {
+      "sha256": "bcc9f1e1202eb5e1a6286fbbf3dc4057752b09dbc9efe3f2e456ef9f062ed35c",
+      "bytes": 981485,
+      "pixels": [
+        768,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hazel [('front', 237, 1077), ('side', 1093, 1861), ('back', 1871, 2673)]"
+    },
+    "view_back.png": {
+      "sha256": "7a0696358c2aa3906daf47a3c02c6adedbaef6c0be11e26c04fbdb15ca2a85f1",
+      "bytes": 982054,
+      "pixels": [
+        802,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/hazel [('front', 237, 1077), ('side', 1093, 1861), ('back', 1871, 2673)]"
+    }
+  }
+}

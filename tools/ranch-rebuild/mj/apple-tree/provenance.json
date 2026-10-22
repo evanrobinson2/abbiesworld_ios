@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "apple-tree",
+  "group": "tree",
+  "replaces": "simulations/regional-assets/GF-153.glb",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a small orchard apple tree, a short twisty trunk, a spreading rounded crown with clusters of red apples, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "5a896396-99c6-4f3f-8888-9bdb348d30ff",
+      "grid_url": "https://www.midjourney.com/jobs/5a896396-99c6-4f3f-8888-9bdb348d30ff?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "ab15723c-7356-4346-a157-42914526c679",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:07:40.408Z",
+      "grid_done_at": "2026-10-22T23:07:58.412Z",
+      "upscale_clicked_at": "2026-10-22T23:08:08.014Z",
+      "downloaded_at": "2026-10-22T23:09:22.105Z",
+      "pick_reason": "short twisty trunk, spreading rounded crown with red apple clusters, whole tree in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small orchard apple tree, a short twisty trunk, a spreading rounded crown with clusters of red apples, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "c9c736be-ff8d-4d70-9836-a226584e4ee0",
+      "grid_url": "https://www.midjourney.com/jobs/c9c736be-ff8d-4d70-9836-a226584e4ee0?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "7e98653a-73d5-4f73-bb55-21f05d1b9d82",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T23:09:31.611Z",
+      "grid_done_at": "2026-10-22T23:09:49.613Z",
+      "upscale_clicked_at": "2026-10-22T23:09:59.959Z",
+      "downloaded_at": "2026-10-22T23:11:19.758Z",
+      "pick_reason": "three separated views with matching twisty trunk and apple crown"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "56d858012f356d70541f1a7be31853b1ce3e6441544c5ee8c82de0dd4ea6e8a9",
+      "bytes": 2587463,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/ab15723c-7356-4346-a157-42914526c679/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "e00f109879c7852cccf453997b75575d9e94de093cfbed16edbd0f87361e3df5",
+      "bytes": 3270680,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/7e98653a-73d5-4f73-bb55-21f05d1b9d82/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "437a84d2218f67a5f6223272a43b6c30d795771445b926f3d8952df8acf56821",
+      "bytes": 1084609,
+      "pixels": [
+        907,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/apple-tree [('front', 182, 1089), ('side', 1089, 1918), ('back', 1918, 2729)]"
+    },
+    "view_side.png": {
+      "sha256": "95464a83f3edb9ae3d8388134d63e810e2814923b1b50d50d6abfaa34adf7643",
+      "bytes": 1049253,
+      "pixels": [
+        829,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/apple-tree [('front', 182, 1089), ('side', 1089, 1918), ('back', 1918, 2729)]"
+    },
+    "view_back.png": {
+      "sha256": "d01a9e9e432c66abec76376ca8cb3f726b1d9b999b62cbf5ef6447dd3d946bef",
+      "bytes": 960158,
+      "pixels": [
+        811,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/apple-tree [('front', 182, 1089), ('side', 1089, 1918), ('back', 1918, 2729)]"
+    }
+  }
+}
