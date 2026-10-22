@@ -30,6 +30,8 @@
   badge.style.cssText = 'position:fixed;right:12px;top:max(12px,env(safe-area-inset-top));z-index:10000;font:11px system-ui;padding:8px 10px;min-height:44px;border:1px solid #a7b59b;border-radius:22px;background:#fcf8ed;color:#354c3c;max-width:140px;cursor:pointer';
   function status(text) { badge.textContent = text; badge.setAttribute('aria-label', paused ? 'Resume sharing this app view with chat' : text + '. Pause sharing this app view with chat'); }
   status(!key ? 'Chat disconnected · pair browser' : paused ? 'View sharing paused' : 'Connecting to chat…');
+  // A home-screen install has its own storage and is never paired; keep the badge off the game controls there.
+  if (!key && window.matchMedia?.('(display-mode: standalone)').matches) badge.hidden = true;
   document.body.append(badge);
   const visible = el => {
     if (el.closest('[hidden],[inert],[data-context-private],#ranch-view-sharing') || !el.getClientRects().length || getComputedStyle(el).visibility === 'hidden') return false;
@@ -65,17 +67,27 @@
     let timer;
     return Promise.race([promise, new Promise((_, reject) => { timer = setTimeout(() => reject(new Error('Capture timed out')), milliseconds); })]).finally(() => clearTimeout(timer));
   }
-  async function capture() {
+  async function render(scale = Math.min(1, 1200 / innerWidth), timeout = 10000) {
     captureLibrary ||= new Promise((resolve, reject) => {
-      const script = document.createElement('script'); script.src = '/vendor/html2canvas.min.js'; script.onload = resolve; script.onerror = reject; document.head.append(script);
+      const script = document.createElement('script'); script.src = '/vendor/html2canvas-pro.min.js'; script.onload = resolve; script.onerror = reject; document.head.append(script);
     }).catch(error => { captureLibrary = null; throw error; });
     await bounded(captureLibrary, 8000);
     for (const p of providers.values()) p.prepareCapture?.();
+    return bounded(html2canvas(document.documentElement, { logging: false, useCORS: true, imageTimeout: 5000, width: innerWidth, height: innerHeight, x: scrollX, y: scrollY, windowWidth: innerWidth, windowHeight: innerHeight, scale,
+      onclone: doc => { for (const details of doc.querySelectorAll('details:not([open])')) for (const child of details.children) if (child.tagName !== 'SUMMARY') child.style.display = 'none'; },
+      ignoreElements: el => el.matches?.('input[type="password"],input[type="email"],input[type="tel"],input[type="text"],textarea:not(#feedback):not(#review-note),[contenteditable="true"],[data-context-private],[data-feedback-ui],#ranch-view-sharing') }), timeout);
+  }
+  // On-demand picture of the current view for the feedback button (app-feedback.js); works unpaired.
+  window.RanchView.snapshot = async (maxBytes = 1400000) => {
+    const canvas = await render(Math.max(1, Math.min(devicePixelRatio || 1, 2, 900 / innerWidth)), 25000);
+    let image = canvas.toDataURL('image/jpeg', 0.75);
+    if (image.length > maxBytes) image = canvas.toDataURL('image/jpeg', 0.4);
+    return image;
+  };
+  async function capture() {
     const actionRevisions = () => window.RanchActions?.describe().providers.map(p=>({name:p.name,revision:p.revision})) || [];
     const capturedRevisions = actionRevisions();
-    const canvas = await bounded(html2canvas(document.documentElement, { logging: false, useCORS: true, imageTimeout: 5000, width: innerWidth, height: innerHeight, x: scrollX, y: scrollY, windowWidth: innerWidth, windowHeight: innerHeight, scale: Math.min(1, 1200 / innerWidth),
-      onclone: doc => { for (const details of doc.querySelectorAll('details:not([open])')) for (const child of details.children) if (child.tagName !== 'SUMMARY') child.style.display = 'none'; },
-      ignoreElements: el => el.matches?.('input[type="password"],input[type="email"],input[type="tel"],input[type="text"],textarea:not(#feedback):not(#review-note),[contenteditable="true"],[data-context-private],#ranch-view-sharing') }), 10000);
+    const canvas = await render();
     if (paused || !key) return;
     if (JSON.stringify(capturedRevisions)!==JSON.stringify(actionRevisions())) { dirty=true; return; }
     imageActionRevisions = capturedRevisions;
@@ -184,3 +196,5 @@ if(typeof document!=='undefined'){const loadAppearance=()=>{if(document.querySel
 
 // Shared jukebox uses registered music assets and starts on user gesture.
 if(typeof document!=='undefined'){const loadJukebox=()=>{if(document.querySelector('script[data-app-jukebox]'))return;const s=document.createElement('script');s.type='module';s.src='/app-jukebox.js';s.dataset.appJukebox='true';document.head.append(s);};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',loadJukebox,{once:true});else loadJukebox();}
+// Home-screen install, "new version ready" card and the feedback button (see FEEDBACK.md).
+if(typeof document!=='undefined'&&!document.querySelector('script[data-app-feedback]')){const f=document.createElement('script');f.src='/app-feedback.js?v=1';f.dataset.appFeedback='true';document.head.append(f);}

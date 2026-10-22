@@ -13,5 +13,8 @@ for (const entry of fs.readdirSync(root, { withFileTypes: true })) {
   fs.cpSync(path.join(root, entry.name), path.join(output, entry.name), { recursive: true });
 }
 console.log('Public assets prepared; MCP scripts, tests and server credentials are not published.');
+// Release stamp for the app's "new version ready" card (app-feedback.js); Vercel fills these for Git deployments.
+const env = process.env;
+fs.writeFileSync(path.join(output, 'app-release.json'), JSON.stringify({ buildId: require('./check-mcp.cjs').manifest.buildId, sha: env.VERCEL_GIT_COMMIT_SHA || '', ref: env.VERCEL_GIT_COMMIT_REF || '', message: (env.VERCEL_GIT_COMMIT_MESSAGE || '').slice(0, 600), builtAt: new Date().toISOString() }));
 
 require('./build-tools.cjs').generate(root, output).catch(error => { console.error(error); process.exitCode=1; });

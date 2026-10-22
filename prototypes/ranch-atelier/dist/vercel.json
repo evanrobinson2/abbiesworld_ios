@@ -282,6 +282,37 @@
         }
       ],
       "source": "/view-build.json"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ],
+      "source": "/app-release.json"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-store"
+        }
+      ],
+      "source": "/whats-new.json"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/manifest+json"
+        }
+      ],
+      "source": "/manifest.webmanifest"
     }
   ],
   "redirects": [
