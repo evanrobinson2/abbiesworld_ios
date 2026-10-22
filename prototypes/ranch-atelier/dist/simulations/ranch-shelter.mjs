@@ -6,7 +6,8 @@ export async function createAccessibleShelter(model,p){
  const remove=[];shelter.updateMatrixWorld(true);
  shelter.traverse(o=>{if(!o.isMesh)return;const b=new T.Box3().setFromObject(o),size=b.getSize(new T.Vector3());
   const roof=b.min.y>bounds.min.y+height*.55,post=size.x<.65&&size.z<.65,floor=b.max.y<bounds.min.y+.3;
-  if(!roof&&!post&&!floor)remove.push(o);
+  // Rebuilt models tag each part for the shed (tools/ranch-rebuild/to_game.py); older ones fall back to the size test.
+  if(o.userData.shed?o.userData.shed==='drop':!roof&&!post&&!floor)remove.push(o);
  });
  for(const o of remove)o.removeFromParent();
  const obstacles=[];shelter.updateMatrixWorld(true);

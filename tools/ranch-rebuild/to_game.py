@@ -10,7 +10,7 @@ The tile loads two kinds of model:
 Each modeler exports `models/<name>/<name>.glb` and, where the game has states, `models/<name>/variants/<state>.glb`.
 This writes every file the game reads, keeping the old ids, and updates the triangle counts in the catalogues.
 """
-import sys, os, json, shutil, re
+import sys, os, json, shutil, re, subprocess
 import numpy as np
 HERE = os.path.dirname(os.path.abspath(__file__))
 DIST = os.path.join(HERE, '..', '..', 'prototypes', 'ranch-atelier', 'dist')
@@ -105,6 +105,79 @@ def mesh_list(glb, yaw=0.0):
     return parts, tris
 
 
+ORIGINAL = '831ec83a'   # the live tile before the rebuild: its models set each subject's game footprint
+
+
+def original_extent(target, state):
+    """Largest horizontal size of the model this one replaces, in the old file's own units.
+
+    The game multiplies every model by a per-family metres-per-unit factor (simulations/model-calibration.js) and
+    plans the ranch layout from the result, so a rebuilt model must keep its predecessor's footprint in file units or
+    the site planner finds no room for it."""
+    path = f'prototypes/ranch-atelier/dist/simulation-assets/{target}-{state}.json'
+    raw = subprocess.run(['git', 'show', f'{ORIGINAL}:{path}'], cwd=HERE, capture_output=True).stdout
+    if not raw:
+        return None
+    A = np.concatenate([np.array(p['positions']).reshape(-1, 3) for p in json.loads(raw)])
+    span = A.max(0) - A.min(0)
+    return float(max(span[0], span[2]))
+
+
+def rescale(parts, k):
+    for p in parts:
+        p['positions'] = [round(float(x) * k, 4) for x in p['positions']]
+
+
+def calibration(family):
+    """The game's metres-per-unit factor for a model family (simulations/model-calibration.js)."""
+    src = open(os.path.join(DIST, 'simulations', 'model-calibration.js')).read()
+    m = re.search(r"'%s':([0-9.]+)" % re.escape(family), src)
+    return float(m.group(1)) if m else 1.0
+
+
+def islands(P):
+    """Connected triangle groups of one (n, 3, 3) triangle array, joined where they share a vertex."""
+    keys = np.round(P.reshape(-1, 3), 3); _, vid = np.unique(keys, axis=0, return_inverse=True); vid = vid.reshape(-1, 3)
+    parent = list(range(vid.max() + 1))
+    def find(a):
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]; a = parent[a]
+        return a
+    for a, b, c in vid:
+        ra, rb, rc = find(a), find(b), find(c); parent[rb] = ra; parent[find(rc)] = ra
+    groups = {}
+    for t, (a, _, _) in enumerate(vid):
+        groups.setdefault(find(a), []).append(t)
+    return [np.array(g) for g in groups.values()]
+
+
+def shed_ready(parts, mpu):
+    """Tag a building's parts for simulations/ranch-shelter.mjs, which turns the complete building into an open shed.
+
+    Without tags that module keeps only meshes that look like roof, posts or floor by size, and parts merged by
+    material hide the posts and roof inside wall-sized meshes, so the whole shed disappears. Here each connected piece
+    is judged in game metres (mpu): roofing, anything above 55% of the height and the floor are kept, square posts
+    taller than 0.5 m are kept as their own meshes (the shed's collision obstacles), and walls and fittings are dropped."""
+    A = np.concatenate([np.array(p['positions']).reshape(-1, 3) for p in parts]) * mpu
+    y0, H = A[:, 1].min(), A[:, 1].max() - A[:, 1].min()
+    out = []
+    for p in parts:
+        P = np.array(p['positions']).reshape(-1, 3, 3); N = np.array(p['normals']).reshape(-1, 3, 3)
+        buckets = {}
+        for isl in islands(P):
+            Q = P[isl].reshape(-1, 3) * mpu; lo, hi = Q.min(0), Q.max(0); size = hi - lo
+            across = sorted([size[0], size[2]])
+            if p['role'] == 'roof' or lo[1] > y0 + H * .55: cls = 'roof'
+            elif hi[1] < y0 + .3: cls = 'floor'
+            elif across[1] < .65 and across[0] > across[1] * .5 and size[1] > .5: cls = 'post%d' % len(buckets)
+            else: cls = 'body'
+            buckets.setdefault(cls, []).append(isl)
+        for cls, isls in buckets.items():
+            idx = np.concatenate(isls)
+            q = dict(p); q['positions'] = [round(float(x), 4) for x in P[idx].ravel()]; q['normals'] = [round(float(x), 4) for x in N[idx].ravel()]
+            q['name'] = f"{p['name']}-{cls}"; q['shed'] = 'drop' if cls == 'body' else 'keep'; out.append(q)
+    return out
+
 def install(name):
     kind, target, *rest = TARGETS[name]
     md = os.path.join(HERE, 'models', name); main = os.path.join(md, f'{name}.glb'); out = []
@@ -115,8 +188,9 @@ def install(name):
             shutil.copy(main, mirror)
         return out, {}
     states = rest[0]; yaw = np.pi / 2 if target.startswith('organics/') and name != 'tree-standing' else 0.0   # animals face +X in game
-    tris = {}
-    for st in states:
+    tris = {}; k = None
+    ref = next(st for st in states if st in ('complete', 'standing', 'idle', 'full'))
+    for st in [ref] + [st for st in states if st != ref]:   # the reference state first: it sets one factor for all
         src = os.path.join(md, 'variants', f'{st}.glb')
         if not os.path.exists(src):
             if st in ('complete', 'standing', 'idle', 'full'):
@@ -125,6 +199,14 @@ def install(name):
                 print(f'  {name}: no {st} variant, keeping the old one'); continue
         gid = f'{os.path.basename(target)}-{st}'
         parts, n = mesh_list(src, yaw)
+        if k is None:
+            old = original_extent(target, ref)
+            A = np.concatenate([np.array(p['positions']).reshape(-1, 3) for p in parts]); span = A.max(0) - A.min(0)
+            k = old / max(span[0], span[2]) if old else 1.0
+            print(f'  {name}: scaled x{k:.3f} to keep the old footprint ({old and round(old, 2)} units)')
+        rescale(parts, k)
+        if target.startswith('buildings/'):
+            parts = shed_ready(parts, calibration(os.path.basename(target)))
         base = os.path.join(DIST, 'simulation-assets', os.path.dirname(target), gid)
         json.dump(parts, open(base + '.json', 'w'), separators=(',', ':'))
         shutil.copy(src, base + '.glb'); tris[gid] = n; out.append(gid)
