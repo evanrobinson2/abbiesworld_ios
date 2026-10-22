@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "goat-shelter",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/goat-shelter-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a small timber goat shelter, rose-pink plank walls, a teal shingled gable roof, a low open doorway with a wooden ramp, a raised plank platform beside it for goats to climb on, a small hay rack, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "5fcaa594-ada4-4fea-994a-94728d79a693",
+      "grid_url": "https://www.midjourney.com/jobs/5fcaa594-ada4-4fea-994a-94728d79a693?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "6f19d64c-6d6a-47c5-8c19-deabbfd8fa79",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:53:21.589Z",
+      "grid_done_at": "2026-10-22T20:53:39.593Z",
+      "upscale_clicked_at": "2026-10-22T20:53:50.687Z",
+      "downloaded_at": "2026-10-22T20:55:02.510Z",
+      "pick_reason": "low doorway with wooden ramp and raised plank platform, crisp shape"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a small timber goat shelter, rose-pink plank walls, a teal shingled gable roof, a low open doorway with a wooden ramp, a raised plank platform beside it for goats to climb on, a small hay rack, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "2f6821fb-040a-402c-b665-fca956e05a70",
+      "grid_url": "https://www.midjourney.com/jobs/2f6821fb-040a-402c-b665-fca956e05a70?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "fec4b412-c35a-4398-b69f-2782c06a0998",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:55:11.554Z",
+      "grid_done_at": "2026-10-22T20:55:29.558Z",
+      "upscale_clicked_at": "2026-10-22T20:55:40Z",
+      "downloaded_at": "2026-10-22T22:31:33.141Z",
+      "pick_reason": "front, three-quarter side and back of one shelter with ramp and platform, cleanly separated. upscale_clicked is approximate and the download was delayed about 95 minutes by a lost browser-extension connection, not by Midjourney"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "d6a3441581ca50566c85a12710da7cfa81afbaddbb79f030b71a48bf478b5cee",
+      "bytes": 2921709,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/6f19d64c-6d6a-47c5-8c19-deabbfd8fa79/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "65ad2c4ce7be91bac05e092b1d55e1103532c33b7d0ead738a50d6c757afa2da",
+      "bytes": 5180547,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/fec4b412-c35a-4398-b69f-2782c06a0998/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "3e3c9c8fe9284e96a4ad0b5da4c24cc1666d0861eec2952b34753a002bbad1da",
+      "bytes": 1611907,
+      "pixels": [
+        949,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-shelter [('front', 64, 1013), ('side', 1033, 2203), ('back', 2203, 2746)]"
+    },
+    "view_side.png": {
+      "sha256": "4a76e48b9672cd313385467bfa9ffc9e57b764e07b39bfffd771ba894905aea3",
+      "bytes": 2114260,
+      "pixels": [
+        1170,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-shelter [('front', 64, 1013), ('side', 1033, 2203), ('back', 2203, 2746)]"
+    },
+    "view_back.png": {
+      "sha256": "a677184bd25a310d0219dab70f800e382d3c7e00d4307bea8ce2c3cbbe54b674",
+      "bytes": 940663,
+      "pixels": [
+        543,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/goat-shelter [('front', 64, 1013), ('side', 1033, 2203), ('back', 2203, 2746)]"
+    }
+  }
+}

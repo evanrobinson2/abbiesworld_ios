@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "horse",
+  "group": "animal",
+  "replaces": "simulation-assets/organics/horse-{idle,feeding,rest}.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "f9f2a420-a65f-4e04-94e8-4a1962e8dc9f",
+      "grid_url": "https://www.midjourney.com/jobs/f9f2a420-a65f-4e04-94e8-4a1962e8dc9f?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "0421b2f6-cc17-46bc-a474-a774532dfedf",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:40:15.976Z",
+      "grid_done_at": "2026-10-22T22:40:33.981Z",
+      "upscale_clicked_at": "2026-10-22T22:40:46.336Z",
+      "downloaded_at": "2026-10-22T22:41:58.118Z",
+      "pick_reason": "truest side view with cream blaze, dark mane and tail, dark hooves, whole horse in frame"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a friendly chestnut farm horse with a cream blaze on its face, a dark brown mane and tail, sturdy legs with dark hooves, standing calmly in side view, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "d12367ca-9747-46aa-b74e-5dd589c5dbc7",
+      "grid_url": "https://www.midjourney.com/jobs/d12367ca-9747-46aa-b74e-5dd589c5dbc7?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "3f4213ed-6d34-49ef-a928-f4abdd09387e",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T22:42:06.785Z",
+      "grid_done_at": "2026-10-22T22:42:24.790Z",
+      "upscale_clicked_at": "2026-10-22T22:42:38.358Z",
+      "downloaded_at": "2026-10-22T22:43:59.962Z",
+      "pick_reason": "straight front, true side profile and straight back of the same horse, well separated"
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "dc7fb0281ea78eacd19360bbbd5852b39fa7b3a24755f979905ae6bbe58cdf09",
+      "bytes": 2926246,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/0421b2f6-cc17-46bc-a474-a774532dfedf/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "94bdedfd1194797349f073dac6220e802e6247765f5eeb10330524846137dca8",
+      "bytes": 2641460,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/3f4213ed-6d34-49ef-a928-f4abdd09387e/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "30a3ab0272b687741defb480fbfde847142068c0267e393d06ac7ec6318a9b5b",
+      "bytes": 527921,
+      "pixels": [
+        466,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse [('front', 188, 654), ('side', 813, 2000), ('back', 2176, 2725)]"
+    },
+    "view_side.png": {
+      "sha256": "41f9bd9702a7d2d8d53fc9eeb8052768c435f5a4ebb3c2f47c38049ec740d58d",
+      "bytes": 1253641,
+      "pixels": [
+        1187,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse [('front', 188, 654), ('side', 813, 2000), ('back', 2176, 2725)]"
+    },
+    "view_back.png": {
+      "sha256": "1a05ba3ab1f436cf5189b763e05f96b89a0d8c7ea31ca808244c81cdf6403569",
+      "bytes": 566143,
+      "pixels": [
+        549,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse [('front', 188, 654), ('side', 813, 2000), ('back', 2176, 2725)]"
+    }
+  }
+}
