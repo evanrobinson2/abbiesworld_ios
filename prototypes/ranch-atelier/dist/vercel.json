@@ -29,6 +29,22 @@
       "destination": "/models/model.html"
     },
     {
+      "source": "/sounds",
+      "destination": "/sounds/index.html"
+    },
+    {
+      "source": "/sounds/",
+      "destination": "/sounds/index.html"
+    },
+    {
+      "source": "/sounds/:id",
+      "destination": "/sounds/sound.html"
+    },
+    {
+      "source": "/sounds/:id/",
+      "destination": "/sounds/sound.html"
+    },
+    {
       "source": "/sandbox/Claude",
       "destination": "/simulations/index.html"
     },
