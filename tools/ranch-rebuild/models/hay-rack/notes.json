@@ -1,0 +1,32 @@
+{
+ "what_i_did": [
+  ["Orientation", "The long side (1.36 m over the top rails) faces the front (-Y). The MJ hero sees that long side on the left and the right-hand (+X) end frame, so it is matched from off the front-right corner."],
+  ["Views", "The hero wins. views/hero.png is the MJ hero keyed on B/G < 0.60 (timber and hay are saturated; the cream backdrop and most of the cast shadow are not), with the floor shadow between the near legs cut away, then closed, hole-filled and opened. The turnaround sheet drew a different, box-shaped rack with X-bracing (no V), so it is used only for the end proportions (legs about 40 % of the height, rail on top). Its left cut, a straight-on long side, is scored as views/view_front.png for reference only; the 3/4 middle view and the duplicate long side are dropped."],
+  ["Hero camera", "hero_check.py renders from the hero's own direction, 46 deg off the front towards +X and 18 deg up, orthographic. Calibrated over a yaw/elevation grid; it agrees with a hand measurement of the hero's edges (about 41-46 deg yaw, about 20 deg elevation)."],
+  ["Rack", "Timber_Pine, chamfered (11 mm) legs, V boards and top rails. Each end frame is a V of two angled boards (0.095 x 0.055 m) from a small block on the low cross-rail up to the top rails, on two straight legs (0.085 m square) at y = +-0.315 that rise to meet the V boards, joined outside by a low cross-rail. A top rail runs along each long edge, a bottom rail sits in the V, and each V face carries wide diagonal slats (0.11 m, leaning 42 deg, clipped to the end frames) with real gaps. Rack: 1.36 x 0.98 x 0.86 m (V boards poke 5 cm above the rails)."],
+  ["Hay", "Hay_Gold mound: a lumpy 8 x 6 grid heaped 0.24 m over a ragged rim at the rails, a skirt down to the V faces and a V-shaped underside just inside the slats, so gold shows through every slat gap and through the end V. Straw: clusters of 3-5 folded pointy cards (2 tris each) in Hay_Gold and Hay_Light: over the top (spread wide), along the rim pointing outward, out through the slat gaps and out through both end frames. Full stands 1.12 m to the tips."],
+  ["Variants", "One build.py with a STATE switch. full = the hero heap (also hay-rack.glb). partial = a low heap with its rim at 0.58 m, sitting in the bottom half of the V. empty = the bare rack with 16 strands in the bottom of the V and 6 caught in the slats. carried = an armful sheaf alone (0.61 x 0.43 x 0.28 m to the straw tips): a flattened lumpy ellipsoid with straw fanning from both ends and lying along the top, resting on the ground at the origin."],
+  ["Game", "Materials Timber_Pine (timber role), Hay_Gold and Hay_Light (fiber role), flat colours, one material per object: frame, slats, hay, straw_gold, straw_light. Triangles: full 1976 (budget 2k), partial 1242, empty 700, carried 436. No animation, export_animations=False."]
+ ],
+ "good": [
+  "Hero silhouette IoU 0.837 at 768 px from the calibrated hero camera (0.841 at 384 px).",
+  "Reads small as a pine V-feeder with a gold heap: the V end frames, leaning slats and spiky rim carry the silhouette.",
+  "Hay shows through the slat gaps and the end V, and straw pokes out of both, as in the hero."
+ ],
+ "off": [
+  "Height: the brief said about 0.95 m; the hero's proportions put the rails at about 0.8 m for a 1.3 m length, so the rack follows the hero (0.86 m to the V-board tips, 1.12 m with hay).",
+  "The sheet view scores 0.625: it drew a box rack with X-bracing, which the art director told us to ignore.",
+  "The hero's heap is a dense mass of fine strands; within 2k triangles it is a faceted mound with about 230 straw cards, so up close it reads coarser and spikier.",
+  "The hero's heap leans higher toward the back left; this one is a symmetric dome.",
+  "No wood grain: flat colours only, per the game rules."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build: 0.95 m rack, V from 0.285 m, legs outside the end boards, slats leaning 24 deg, 0.30 m mound with 88 straw clusters. Hero scored at a guessed 35/30 camera (0.578); the calibration grid then preferred 20/20 (0.724) because the rack was too tall.", "mean_iou": 0.677, "hero_iou": 0.578},
+  {"round": 2, "change": "Rack lowered to the hero's proportions (rails 0.80 m, V bottom 0.24 m, cross-rail 0.195 m), mound 0.24 m with shorter straw; camera recalibrated to 45/18.", "mean_iou": null, "hero_iou": 0.786},
+  {"round": 3, "change": "Slats widened and leaned 42 deg the hero's way on the front face, thicker legs, a block where the V boards meet (it hid a dark crossing artefact), hay and pine recoloured to the hero's tan.", "mean_iou": null, "hero_iou": 0.799},
+  {"round": 4, "change": "Legs moved into the end-frame plane with the cross-rail just outside, end frames at +-0.575 so the rack is 1.3 m long, V bottom lowered to 0.22 m; camera 46/18 (calibration best).", "mean_iou": null, "hero_iou": 0.842},
+  {"round": 5, "change": "Straw clusters out through both end frames, coarser mound grid to pay for 128 top clusters, muted hay colours; partial, empty and carried variants finished. Final 768 px / 48 samples render and sheet front view scored.", "mean_iou": 0.625, "hero_iou": 0.837}
+ ],
+ "moving_parts": "None: a static supply; the game swaps the fill variants itself.",
+ "creative_additions": "Straw poking out through the slat gaps and the end V, and a few strands left caught in the slats of the empty rack."
+}
