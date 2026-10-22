@@ -6,7 +6,6 @@ import {KIT,build,match,triangles,mat,list as kitList} from './kit.mjs';
 import {makeCharacter,animateCharacter,loadFamily,saveFamily,PLACEHOLDER_FAMILY,HAIR_STYLES,sampleColor} from './family.mjs';
 import {WORLDS,MAP,MADLIBS,SAMPLE_ANSWERS,REMIXES,modelOrder} from './worlds.mjs';
 import {parse} from './commands.mjs';
-import {music} from '../music/director.mjs';
 
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const params=new URLSearchParams(location.search);
@@ -79,17 +78,9 @@ function firework(at){
 function stepBursts(dt){for(let i=bursts.length-1;i>=0;i--){const b=bursts[i];b.t+=dt;const a=b.p.geometry.attributes.position;for(let k=0;k<b.vel.length;k++){b.vel[k].y-=2*dt;a.array[k*3]+=b.vel[k].x*dt;a.array[k*3+1]+=b.vel[k].y*dt;a.array[k*3+2]+=b.vel[k].z*dt;}a.needsUpdate=true;b.p.material.opacity=Math.max(0,1-b.t/1.8);if(b.t>1.8){scene.remove(b.p);b.p.geometry.dispose();b.p.material.dispose();bursts.splice(i,1);}}}
 
 // ---- sound (synthesised, no downloads) ---------------------------------------------------
-let ac=null,orchestra=false;
-// Score: the Composer's Wonder bed plays under the worlds; teleport, arrival and reveal are orchestral stings
-// (/music/director.mjs). The synth beam/whoosh/magic only play if the orchestra could not start.
-const score={
- level:.5,
- async start(){try{await music.unlock();music.mute(!S.sound);await music.play('wonder',{intensity:score.level});orchestra=true;}catch(e){console.warn('music',e);}},
- sting(id){if(orchestra&&S.sound)music.sting(id).catch(()=>{});},
- intensity(v){score.level=v;if(orchestra)music.intensity(v);},
-};
+let ac=null;
 function sfx(kind){
- if(!S.sound||!S.gesture)return;if(orchestra&&(kind==='beam'||kind==='whoosh'||kind==='magic'))return;try{ac??=new AudioContext();}catch{return;}
+ if(!S.sound||!S.gesture)return;try{ac??=new AudioContext();}catch{return;}
  const o=ac.createOscillator(),g=ac.createGain(),now=ac.currentTime;o.connect(g);g.connect(ac.destination);
  const set={beam:['sine',220,1400,1.4,.18],pop:['triangle',600,120,.25,.12],ding:['sine',880,1320,.3,.12],whoosh:['sawtooth',90,40,.6,.06],build:['sine',330,660,.12,.05],magic:['triangle',520,1560,.9,.14]}[kind];if(!set)return;
  o.type=set[0];o.frequency.setValueAtTime(set[1],now);o.frequency.exponentialRampToValueAtTime(set[2],now+set[3]);g.gain.setValueAtTime(set[4],now);g.gain.exponentialRampToValueAtTime(.001,now+set[3]);o.start(now);o.stop(now+set[3]);
@@ -334,7 +325,7 @@ async function enterWorld(index){
  if(S.busy)return;S.busy=true;
  const w=WORLDS[index];$('#map').hidden=true;
  if(S.worldIndex>=0&&people.length){beam(false);sfx('whoosh');await wait(1300);}
- score.sting('teleport');$('#flash').classList.add('on');await wait(350);
+ $('#flash').classList.add('on');await wait(350);
  S.worldIndex=index;S.visited.add(w.id);store.set('visited',[...S.visited]);if(index>=1){S.secretUnlocked=S.secretUnlocked||index>=1;store.set('secret',S.secretUnlocked);}
  buildWorld(w);placeFamily();people.forEach(p=>p.object.visible=false);
  S.showClock=0;S.showBeat=-1;S.showDone=false;$('#next').classList.remove('glow');
@@ -343,8 +334,7 @@ async function enterWorld(index){
  $('#world-name').textContent=w.name;$('#world-stop').textContent=w.secret?'Secret world':`Stop ${w.stop} of ${MAP.length}`;
  $('#title-card h1').textContent=w.name;$('#title-card p').textContent=w.blurb;$('#title-card').classList.add('show');setTimeout(()=>$('#title-card').classList.remove('show'),3200);
  $('#flash').classList.remove('on');
- score.intensity(show?.45:w.finale?1:.75);
- await wait(400);beam(true);score.sting(w.secret?'reveal':'arrival');await wait(1600);
+ await wait(400);beam(true);await wait(1600);
  setTimeout(startUpgrade,Math.max(1200,entities.length*15));
  if(!show){say(w.beats[0]);setTimeout(()=>w.beats[1]&&say(w.beats[1],{speak:false,seconds:6}),5200);chips(w);}
  if(w.finale)setTimeout(()=>{people.forEach(p=>{p.emote='cheer';p.emoteUntil=performance.now()+4000;});},3000);
@@ -359,7 +349,7 @@ function next(which){
 }
 async function secretReveal(i){
  openMap();await wait(900);
- const card=$('#map .stops');card.classList.add('glitch');sfx('magic');score.sting('discovery');say('Wait a second. There is a stop that is not on the map.');
+ const card=$('#map .stops');card.classList.add('glitch');sfx('magic');say('Wait a second. There is a stop that is not on the map.');
  await wait(2200);S.secretUnlocked=true;store.set('secret',true);renderMap();card.classList.remove('glitch');
  $('#map .secret')?.classList.add('arrive');await wait(2600);enterWorld(i);
 }
@@ -412,7 +402,7 @@ function toggleMic(){
 }
 $('#mic').onclick=toggleMic;
 $('#next').onclick=()=>next();$('#map-btn').onclick=openMap;
-$('#sound').onclick=()=>{S.sound=!S.sound;store.set('sound',S.sound);if(orchestra)music.mute(!S.sound);$('#sound').textContent=S.sound?'🔊':'🔇';if(!S.sound)speechSynthesis?.cancel();};$('#sound').textContent=S.sound?'🔊':'🔇';
+$('#sound').onclick=()=>{S.sound=!S.sound;store.set('sound',S.sound);$('#sound').textContent=S.sound?'🔊':'🔇';if(!S.sound)speechSynthesis?.cancel();};$('#sound').textContent=S.sound?'🔊':'🔇';
 $('#builder-btn').onclick=()=>$('#builder').classList.toggle('show');
 
 // ---- setup: the crew (family) -------------------------------------------------------------
@@ -468,7 +458,7 @@ function finishMadlibs(){
  screen('ready');
 }
 $('#sample-answers').onclick=()=>{S.answers={...SAMPLE_ANSWERS};store.set('answers',S.answers);finishMadlibs();};
-$('#teleport').onclick=()=>{try{ac??=new AudioContext();ac.resume();}catch{}score.start();enterWorld(0);};
+$('#teleport').onclick=()=>{try{ac??=new AudioContext();ac.resume();}catch{}enterWorld(0);};
 $('#download-order').onclick=()=>{
  const order=modelOrder(S.answers,match).map(o=>({...o,kit:!!o.id,detailPlan:['blockout on the map','full detail on arrival']}));
  const blob=new Blob([JSON.stringify({kind:'family-teleport/model-order',version:1,createdAt:new Date().toISOString(),madlibs:S.answers,newModels:S.orders,all:order},null,1)],{type:'application/json'});

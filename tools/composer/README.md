@@ -1,5 +1,13 @@
 # Composer
 
+> **Switched off (Evan, 2026-10-22).** The rendered music was taken out of the game, the jukebox, Family Teleport,
+> `/music` and `/sounds` until music of Suno quality or better is available through an API. Everything here is kept:
+> the scores, the renderer, and the runtime (`runtime/`: director, listening page). `render_all.py` now writes to
+> `out/` (git-ignored) instead of the site. To bring it back, move `runtime/*` to
+> `prototypes/ranch-atelier/dist/music/`, point `SITE` in `render_all.py` back at the site, re-render, and restore the
+> jukebox and Family Teleport hooks from commit 6abff0d. The director works with any audio files, so a future
+> API-generated score can reuse it.
+
 Original music for Abbie's World: looping beds, interludes and stings, written as code and performed by a recorded
 chamber orchestra. Listen at `/music` on the Ranch Atelier site; the same records appear on `/sounds`.
 
