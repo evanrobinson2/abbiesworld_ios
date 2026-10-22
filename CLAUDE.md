@@ -10,6 +10,8 @@ documents; what is built lives in the status documents. Keep these three apart.
   technology changes. Don't edit it to match the code; change the code toward it, or record the difference in the
   status doc.
 - `docs/MODELER_STATUS.md`: what the modeling pipeline does today against that vision, and what to build next.
+- `docs/architecture/`: the infrastructure that already exists (R2, Postgres, Vercel projects, MCP, auth, jobs).
+  Read it before proposing any new service, store or deployment, and update it in the PR that changes infrastructure.
 
 ## Ground rules
 - All work stays in this repo (evanrobinson2/abbiesworld_ios). No other repos and no local-only copies.
