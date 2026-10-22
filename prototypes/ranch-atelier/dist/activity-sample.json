@@ -1,0 +1,85 @@
+{
+  "source": "sample",
+  "about": "Demo data for the activity centre (open any page with ?activity=sample). Same shape as /api/activity.",
+  "generated_at": "2026-10-22T21:30:00Z",
+  "jobs": [
+    {
+      "parcel_id": "d-bicycle",
+      "title": "Old bicycle from the yard",
+      "mode": "bespoke",
+      "status": "running",
+      "stage": "Blockout",
+      "stages": [
+        { "name": "Photos", "at": "2026-10-22T20:40:00Z" },
+        { "name": "Measure", "at": "2026-10-22T20:55:00Z" },
+        { "name": "Concept art", "at": "2026-10-22T21:05:00Z" },
+        { "name": "Blockout", "at": "2026-10-22T21:20:00Z" },
+        { "name": "Detail" },
+        { "name": "Materials" },
+        { "name": "Review" }
+      ],
+      "progress": { "done": 9, "total": 22, "unit": "parts", "fraction": 0.41 },
+      "needs_input": false,
+      "artifacts": [
+        { "type": "image", "url": "/models/mc-balance-upgrade/ref.jpg", "stage": "Concept art" }
+      ],
+      "machine": { "kind": "claude", "state": "working" },
+      "links": {}
+    },
+    {
+      "parcel_id": "d-hamper",
+      "title": "Lidded reed hamper",
+      "mode": "standard",
+      "status": "blocked",
+      "stage": "Concept art",
+      "stages": [
+        { "name": "Brief", "at": "2026-10-22T21:00:00Z" },
+        { "name": "Concept art", "at": "2026-10-22T21:12:00Z" },
+        { "name": "Model" },
+        { "name": "Score" }
+      ],
+      "progress": { "done": 2, "total": 4, "unit": "pictures", "fraction": 0.5 },
+      "needs_input": true,
+      "artifacts": [
+        { "type": "image", "url": "/models/mc-hamper-whimsical/ref.jpg", "stage": "Concept art" },
+        { "type": "image", "url": "/models/mc-hamper-upgrade/ref.jpg", "stage": "Concept art" }
+      ],
+      "machine": { "kind": "claude", "state": "waiting_for_evan" },
+      "links": {}
+    },
+    {
+      "parcel_id": "d-barn",
+      "title": "Whimsical barn",
+      "mode": "standard",
+      "status": "done",
+      "stage": "Score",
+      "stages": [
+        { "name": "Brief", "at": "2026-10-22T19:10:00Z" },
+        { "name": "Concept art", "at": "2026-10-22T19:20:00Z" },
+        { "name": "Model", "at": "2026-10-22T19:40:00Z" },
+        { "name": "Score", "at": "2026-10-22T19:50:00Z" }
+      ],
+      "progress": { "done": 4, "total": 4, "unit": "stages", "fraction": 1 },
+      "needs_input": false,
+      "artifacts": [
+        { "type": "image", "url": "/models/mc-barn-whimsical/ref.jpg", "stage": "Concept art" },
+        { "type": "model", "url": "/models/mc-barn-whimsical/model.glb", "stage": "Model" }
+      ],
+      "machine": { "kind": "claude", "state": "idle" },
+      "links": {}
+    }
+  ],
+  "machines": [
+    { "kind": "claude", "id": "Claude · bicycle", "state": "working" },
+    { "kind": "claude", "id": "Claude · hamper", "state": "waiting_for_evan" },
+    { "kind": "midjourney", "id": "Midjourney · Mac", "state": "ready" },
+    { "kind": "midjourney", "id": "Midjourney · PC", "state": "offline" }
+  ],
+  "events": [
+    { "id": "e5", "jobId": "d-bicycle", "jobTitle": "Old bicycle from the yard", "jobKind": "serious", "mode": "bespoke", "stage": "Blockout", "progress": 0.41, "status": "running", "at": "2026-10-22T21:28:00Z", "message": "Frame tubes and both wheels blocked out; 9 of 22 parts.", "kind": "progress" },
+    { "id": "e4", "jobId": "d-hamper", "jobTitle": "Lidded reed hamper", "jobKind": "model", "mode": "standard", "stage": "Concept art", "progress": 0.5, "status": "blocked", "at": "2026-10-22T21:12:00Z", "message": "Two concept pictures ready. Which lid, flat or domed?", "kind": "question", "checkpoint": "concept_art", "image": "/models/mc-hamper-whimsical/ref.jpg", "images": ["/models/mc-hamper-whimsical/ref.jpg", "/models/mc-hamper-upgrade/ref.jpg"] },
+    { "id": "e3", "jobId": "d-bicycle", "jobTitle": "Old bicycle from the yard", "jobKind": "serious", "mode": "bespoke", "stage": "Concept art", "progress": 0.3, "status": "running", "at": "2026-10-22T21:05:00Z", "message": "Concept art matched to your photos.", "kind": "checkpoint", "checkpoint": "concept_art", "image": "/models/mc-balance-upgrade/ref.jpg" },
+    { "id": "e2", "jobId": "d-barn", "jobTitle": "Whimsical barn", "jobKind": "model", "mode": "standard", "stage": "Score", "progress": 1, "status": "done", "at": "2026-10-22T19:50:00Z", "message": "Barn model finished and scored.", "kind": "done", "image": "/models/mc-barn-whimsical/render.jpg", "model": "/models/mc-barn-whimsical/model.glb" },
+    { "id": "e1", "jobId": "d-barn", "jobTitle": "Whimsical barn", "jobKind": "model", "mode": "standard", "stage": "Concept art", "progress": 0.4, "status": "running", "at": "2026-10-22T19:20:00Z", "message": "Concept art is in.", "kind": "checkpoint", "checkpoint": "concept_art", "image": "/models/mc-barn-whimsical/ref.jpg" }
+  ]
+}

@@ -196,5 +196,5 @@ if(typeof document!=='undefined'){const loadAppearance=()=>{if(document.querySel
 
 // Shared jukebox uses registered music assets and starts on user gesture.
 if(typeof document!=='undefined'){const loadJukebox=()=>{if(document.querySelector('script[data-app-jukebox]'))return;const s=document.createElement('script');s.type='module';s.src='/app-jukebox.js';s.dataset.appJukebox='true';document.head.append(s);};if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',loadJukebox,{once:true});else loadJukebox();}
-// Home-screen install, "new version ready" card and the feedback button (see FEEDBACK.md).
-if(typeof document!=='undefined'&&!document.querySelector('script[data-app-feedback]')){const f=document.createElement('script');f.src='/app-feedback.js?v=1';f.dataset.appFeedback='true';document.head.append(f);}
+// Home-screen install, "new version ready" card, feedback button and the workshop activity centre (see FEEDBACK.md).
+if(typeof document!=='undefined'&&!document.querySelector('script[data-app-feedback]')){const f=document.createElement('script');f.src='/app-feedback.js?v=1';f.dataset.appFeedback='true';document.head.append(f);const a=document.createElement('script');a.src='/app-activity.js?v=1';document.head.append(a);}

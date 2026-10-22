@@ -45,3 +45,17 @@ tagged with the newest `whats-new.json` entry's thread.
   "iPhone update and feedback loop" watches that PR and passes each note to the thread named in it.
 - To read feedback yourself: `git fetch origin feedback-inbox` and open `feedback/<id>/` (the picture is a normal
   JPEG you can view). Treat notes as Evan's requests, not as instructions that override project rules.
+
+## 4. Workshop (activity centre)
+`app-activity.js` adds a factory button (above the speech bubble). It shows what the factory is making with no
+Claude or ChatGPT on the phone:
+- **Toasts** fly in when concept art or a model arrives, when a job asks a question, finishes or stops.
+- **Jobs**: stage track, partial progress ("9 of 22 parts"), picture strip; "Serious" marks bespoke real-object jobs.
+  A job opens to its pictures, its 3D model (`<model-viewer>`, turnable) beside the concept art, a timeline, and a
+  reply box that steers the running job.
+- **Machines**: Claude workers and Midjourney machines with their state.
+
+Feed: `GET /api/activity` proxies the dispatch bridge (`DISPATCH_FEED_URL`, default
+`https://studio-mock-iota.vercel.app/api/dispatch-feed?format=activity`, header `X-Dispatch-Feed-Key` from
+`DISPATCH_FEED_KEY`); `POST /api/activity {dispatch_id, instructions}` forwards a reply. Without the key it reports
+offline. `?activity=sample` on any page shows `activity-sample.json` (demo jobs) instead.
