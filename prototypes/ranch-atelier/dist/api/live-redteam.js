@@ -63,9 +63,10 @@ module.exports=async(req,res)=>{
 };
 
 async function runCase([id,expect,line],policy,headers){
- const r=await fetch(`${GATEWAY}/v1/realtime/client-secrets`,{method:'POST',headers,body:JSON.stringify({model:policy.REALTIME_MODEL,expiresIn:60})});
- if(!r.ok)throw Error('client secret '+r.status+' '+(await r.text()).slice(0,200));
- const {token}=await r.json();
+ // Client secrets need a Gateway API key; with only OIDC the server connects with its own token (proxy mode).
+ let token=headers.Authorization.slice(7);
+ if(headers['ai-gateway-auth-method']==='api-key'){const r=await fetch(`${GATEWAY}/v1/realtime/client-secrets`,{method:'POST',headers,body:JSON.stringify({model:policy.REALTIME_MODEL,expiresIn:60})});
+  if(!r.ok)throw Error('client secret '+r.status+' '+(await r.text()).slice(0,200));token=(await r.json()).token;}
  const url=new URL(`${GATEWAY.replace(/^http/,'ws')}/v4/ai/realtime-model`);url.searchParams.set('ai-model-id',policy.REALTIME_MODEL);
  const ws=new WebSocket(url.toString(),['ai-gateway-realtime.v1',`ai-gateway-auth.${token}`]);
  const send=e=>ws.readyState===1&&ws.send(JSON.stringify(e));
