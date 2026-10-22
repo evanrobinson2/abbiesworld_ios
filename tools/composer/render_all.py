@@ -16,7 +16,8 @@ from engine.core import SAMPLES
 from cues.common import STEM_ORDER
 
 REPO = os.path.abspath(os.path.join(HERE, '..', '..'))
-SITE = os.path.join(REPO, 'prototypes', 'ranch-atelier', 'dist')
+# Switched off in the game (Evan, 2026-10-22): renders go to tools/composer/out/ (git-ignored), not the site.
+SITE = os.path.join(HERE, 'out')
 OUT = os.path.join(SITE, 'music', 'composer')
 PREFIX = '/music/composer'
 CUES = ['ranch_morning', 'ranch_workday', 'ranch_night', 'wonder', 'interludes', 'stings']
