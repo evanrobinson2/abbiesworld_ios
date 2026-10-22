@@ -1,0 +1,242 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/water-bucket",
+ "name": "water-bucket",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "carried from the water point",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a wooden stave bucket with iron hoops and a rope handle, full of clear water",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a wooden stave bucket with iron hoops and a rope handle, full of clear water, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "44e292c8-f175-4a7c-92ed-154d4aa57ba8",
+    "grid_url": "https://www.midjourney.com/jobs/44e292c8-f175-4a7c-92ed-154d4aa57ba8?index=1",
+    "picked_index": 1,
+    "upscale_job_id": "a69c3882-7841-48a0-b83d-974eae2dded3",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:39:18.075Z",
+    "grid_done_at": "2026-10-22T23:39:36.079Z",
+    "upscale_clicked_at": "2026-10-22T23:39:48.266Z",
+    "downloaded_at": "2026-10-22T23:41:00.944Z",
+    "pick_reason": "stave bucket with two iron hoops, rope handle fully in frame, clear water"
+   }
+  },
+  "files": {
+   "hero.png": "9c649ffb22e4dfc028b29f765fcc480546155f1358809d5961ff82369e0df74b"
+  },
+  "folder": "tools/ranch-rebuild/mj/water-bucket"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/water-bucket/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 12 bevelled staves (H 0.32, r 0.17 to 0.135), two hoops, rivets, ear straps, twisted rope arc to 0.62 m, knots, water disk. Camera -12 / 30.",
+    "mean_iou": 0.69
+   },
+   {
+    "round": 2,
+    "change": "Body taller (H 0.35) with hoops and water raised to match, rope arc a half ellipse instead of square-shouldered.",
+    "mean_iou": 0.745
+   },
+   {
+    "round": 3,
+    "change": "Ear axis turned 20 deg so the right ear sits back as drawn; camera set from a sweep to -15 / 35.",
+    "mean_iou": 0.815
+   },
+   {
+    "round": 4,
+    "change": "Bucket wider (r 0.18 to 0.143), rope arc top lowered to 0.61 m (from a small parameter sweep).",
+    "mean_iou": 0.852
+   },
+   {
+    "round": 5,
+    "change": "Darker jute and iron, greyer water 10 mm lower, bigger knots, wider ears, bigger rivets.",
+    "mean_iou": 0.86
+   },
+   {
+    "round": 6,
+    "change": "Final 768 px / 48 sample render and score; to_game.py water-bucket (x1.587 footprint scale).",
+    "mean_iou": 0.859
+   }
+  ],
+  "what_was_done": [
+   [
+    "Target",
+    "Hero only (no turnaround). The harness mask kept the hero's big warm cast shadow, so make_views.py keys the hero itself: wood, iron and rope by saturation or darkness above the ground line, and below it only a hand-traced outline of the lower body. The water hole is filled; the loop under the handle stays open. Scored by hero_check.py against views/hero.png."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders 35 deg above and 15 deg round to the left of the front (the hero's right ear and knot sit higher in the picture than the left), with the harness lens and distance. The ear axis is turned 20 deg (ear_angle) so the right ear sits a little towards the back, as drawn. Both were set from a small yaw / elevation / ear-angle sweep, then held fixed."
+   ],
+   [
+    "Staves",
+    "12 chunky staves, 22 mm thick, each a 6-point bevelled section with a chamfered top, tapering from r 0.18 m at the rim to 0.143 m at the base over 0.35 m. Each stave's top is jittered +-10 mm and its radius +-2 mm, with a 4 mm gap between staves and a gap at the front centre as in the hero."
+   ],
+   [
+    "Hoops and rivets",
+    "Two wide conical iron bands (outer face, top and bottom), standing 8 mm proud, one just below the rim and one near the base, with slightly wobbly edges. Rivets are 4-sided nubs, 10 per hoop, staggered between hoops and left off where the ears cross the top hoop."
+   ],
+   [
+    "Ears",
+    "Two iron straps on +-X (turned 20 deg) running from the top hoop up to 65 mm above the rim, with a rounded tab top."
+   ],
+   [
+    "Handle",
+    "A twisted jute rope: a 6-sided tube whose section alternates 22 % in and out and turns 0.55 rad per step, which reads as a three-strand twist at no extra cost. It arcs as a half ellipse from ear to ear to 0.61 m (centreline, 0.26 m above the rim). A lumpy jittered knot wraps each ear top."
+   ],
+   [
+    "Water and fill states",
+    "Water is one 24-gon disk in a material named Water (to_game role water). full and carried: 50 mm below the rim (z 0.30); partial: z 0.18, about half; empty: no water, the wooden floor shows. All four come from build.py's state switch in variants/."
+   ],
+   [
+    "Game readiness",
+    "1,296 triangles full / carried / partial, 1,274 empty (budget 1.5k). 8 meshes, 4 materials (Wood_Stave timber, Metal_Iron metal, Rope_Jute fiber, Water water), flat colours, no textures, no animation. to_game.py scaled it x1.587 to keep the old footprint (0.66 units)."
+   ]
+  ],
+  "creative_additions": "A visible wooden floor inside so the empty state reads as an empty bucket rather than a hole, and staggered rivets between the two hoops."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   0.41349324584007263,
+   0.3709714412689209,
+   0.6240697503089905
+  ],
+  "triangles": 1296,
+  "materials": [
+   "Metal_Iron",
+   "Wood_Stave",
+   "Rope_Jute",
+   "Water"
+  ],
+  "parts": [
+   {
+    "name": "ears",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "floor",
+    "materials": [
+     "Wood_Stave"
+    ]
+   },
+   {
+    "name": "hoops",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "rivets",
+    "materials": [
+     "Metal_Iron"
+    ]
+   },
+   {
+    "name": "rope_handle",
+    "materials": [
+     "Rope_Jute"
+    ]
+   },
+   {
+    "name": "rope_knots",
+    "materials": [
+     "Rope_Jute"
+    ]
+   },
+   {
+    "name": "staves",
+    "materials": [
+     "Wood_Stave"
+    ]
+   },
+   {
+    "name": "water",
+    "materials": [
+     "Water"
+    ]
+   }
+  ]
+ },
+ "states": [
+  "carried",
+  "empty",
+  "full",
+  "partial"
+ ],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.859,
+  "per_view": {},
+  "triangle_budget": 2000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.859 from the hero's direction: the tapering body, the hoops standing proud and the high rope arc line up.",
+   "Reads at tile size as a wooden bucket of water: orange staves, two dark bands, blue disk and a dark rope loop are four bold colour blocks.",
+   "Under the 1.5k budget with chunky bevelled staves and a twisted rope."
+  ],
+  "off": [
+   "The hero's knots are big loose wraps that hang outside the ears; mine are smaller single lumps, so the shoulders of the silhouette are a little narrow.",
+   "The hero's rope arc leans slightly and is narrower at the top than a true half ellipse; mine is symmetric in its own plane.",
+   "The hero's staves have carved grain, chipped tops and painterly highlights; mine are flat-coloured with geometric bevels only.",
+   "The hero's water is a rippled translucent grey-teal; mine is a flat opaque blue disk.",
+   "The bucket is 0.36 m across and 0.35 m tall rather than the brief's 0.34 x 0.32: the hero reads that much taller and wider against the handle, and the game rescales to the old footprint anyway.",
+   "The camera sweep preferred 40 deg elevation and more yaw by a little; I held 35 / -15 to stay close to the art director's 'about 30 deg, nearly front-on'."
+  ]
+ },
+ "exports": {
+  "runtime": "water-bucket.glb",
+  "variants": {
+   "carried": "variants/carried.glb",
+   "empty": "variants/empty.glb",
+   "full": "variants/full.glb",
+   "partial": "variants/partial.glb"
+  },
+  "game": {
+   "kind": "mesh-list",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulation-assets/supplies/water-bucket-full.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/supplies/water-bucket-partial.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/supplies/water-bucket-empty.json",
+    "prototypes/ranch-atelier/dist/simulation-assets/supplies/water-bucket-carried.json"
+   ]
+  }
+ },
+ "files": {
+  "water-bucket.glb": {
+   "sha256": "6191c65c3daaa36fd4d4e15c0489400a5bdfa7e593ac231c02912354d09584b0",
+   "bytes": 71936
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "d2a3faea2579e61f136114ce4ac4577c597f2170",
+  "path": "tools/ranch-rebuild/models/water-bucket"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
