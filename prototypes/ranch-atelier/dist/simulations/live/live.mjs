@@ -83,7 +83,7 @@ export async function startLive({stage,audio,button}){
     guardChild=guard('child',text).then(v=>{if(['unsafe','jailbreak'].includes(v.verdict))redirect('rules');else if(v.verdict==='distress')ui.alert('Please go and find a grown-up you trust right now.');return v;});
     break;}
    case 'audio-delta':play(e.delta);ui.state('speaking');break;
-   case 'audio-transcript-delta':ui.said(e.delta,true);{const t=ui.saidText();if(!screen(t).ok)redirect('computer');}break;
+   case 'audio-transcript-delta':ui.said(e.delta,true);{const t=ui.saidText();if(!screen(t,{level:'speech'}).ok)redirect('computer');}break;
    case 'audio-transcript-done':{const t=e.transcript||ui.saidText();guard('computer',t).then(v=>{if(['unsafe','jailbreak','personal'].includes(v.verdict))redirect('computer');});break;}
    case 'function-call-arguments-done':runTool(e);break;
    case 'response-created':pending.set(e.responseId,{calls:0,outputs:0,done:false});ui.said('',false);break;
@@ -118,7 +118,7 @@ export async function startLive({stage,audio,button}){
 
  // ---- guard --------------------------------------------------------------------------------
  async function guard(who,text){
-  if(!screen(text).ok)return {verdict:'unsafe'};
+  if(!screen(text,{level:who==='computer'?'speech':'all'}).ok)return {verdict:'unsafe'};
   try{const r=await fetch('/api/live',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'guard',who,text})});return r.ok?await r.json():{verdict:'unknown'};}
   catch{return {verdict:'unknown'};}
  }

@@ -60,7 +60,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
   if(body.action==='guard'){
    const who=body.who==='computer'?'COMPUTER':'CHILD',text=typeof body.text==='string'?body.text.trim().slice(0,600):'';
    if(!text)return json(200,{verdict:'ok'});
-   const local=screen(text);if(!local.ok)return json(200,{verdict:'unsafe',why:'blocked word',local:true});
+   const local=screen(text,{level:who==='COMPUTER'?'speech':'all'});if(!local.ok)return json(200,{verdict:'unsafe',why:'blocked word',local:true});
    return json(200,await judge(fetcher,headers,who,text));
   }
   if(body.action==='order'){
@@ -79,7 +79,7 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now,put=(...a)=>r
 };}
 
 async function judge(fetcher,headers,who,text){
- const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),6000);
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);
  try{
   const r=await fetcher(`${GATEWAY}/v1/chat/completions`,{method:'POST',signal:controller.signal,headers,body:JSON.stringify({model:GUARD_MODEL,messages:[{role:'system',content:GUARD_PROMPT},{role:'user',content:`${who}: ${JSON.stringify(text)}`}],response_format:{type:'json_object'},max_tokens:80,reasoning:{effort:'none'},stream:false})});
   if(!r.ok)return {verdict:'unknown',why:'guard unavailable '+r.status};

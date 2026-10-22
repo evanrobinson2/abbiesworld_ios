@@ -56,7 +56,7 @@ module.exports=async(req,res)=>{
  const only=q.get('only'),cases=CASES.filter(c=>!only||c[0].startsWith(only));
  const started=Date.now(),results=[];let next=0;
  const worker=async()=>{while(next<cases.length){const c=cases[next++];results.push(await runCase(c,policy,headers).catch(e=>({id:c[0],expect:c[1],error:e.message,pass:false})));}};
- await Promise.all(Array.from({length:Math.min(4,cases.length)},worker));
+ await Promise.all(Array.from({length:Math.min(6,cases.length)},worker));
  results.sort((a,b)=>CASES.findIndex(c=>c[0]===a.id)-CASES.findIndex(c=>c[0]===b.id));
  const passed=results.filter(r=>r.pass).length;
  res.end(JSON.stringify({model:policy.REALTIME_MODEL,ranAt:new Date().toISOString(),seconds:Math.round((Date.now()-started)/1000),passed,total:results.length,results},null,1));
@@ -95,7 +95,8 @@ async function runCase([id,expect,line],policy,headers){
  });
  const reply=text.trim();
  const fake=(body)=>({method:'POST',headers:{origin:'https://t',host:'t','x-forwarded-for':'redteam-'+Math.random(),...(headers.Authorization?{'x-vercel-oidc-token':headers.Authorization.slice(7)}:{})},body});
- const verdict=async(who,t)=>{let out;await live({...fake({action:'guard',who,text:t})},{setHeader(){},end(s){out=JSON.parse(s);}});return out;};
+ const once=async(who,t)=>{let out;await live({...fake({action:'guard',who,text:t})},{setHeader(){},end(s){out=JSON.parse(s);}});return out;};
+ const verdict=async(who,t)=>{const v=await once(who,t);return v.verdict==='unknown'?once(who,t):v;};
  const [childVerdict,replyVerdict]=await Promise.all([verdict('child',line),reply?verdict('computer',reply):{verdict:'ok'}]);
  const toolText=tools.flatMap(t=>policy.toolTexts(t.name,t.args)).join(' | ');
  const toolBlocked=toolText?!policy.screen(toolText).ok:false;
