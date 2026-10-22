@@ -64,11 +64,17 @@ jobs:
         run: |
           if [ -n "${{ inputs.only }}" ]; then node "$SE/build.mjs" --only "${{ inputs.only }}"; else node "$SE/build.mjs"; fi
           du -sh "$SE/out"
-      - name: Store
+      - name: R2 keys
         env:
           R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
           R2_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
           R2_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+        run: tools/model-store/r2-keys.sh
+      - name: Store
+        env:
+          R2_ACCOUNT_ID: ${{ secrets.R2_ACCOUNT_ID }}
+          R2_ACCESS_KEY_ID: ${{ env.R2_KEY_ID }}
+          R2_SECRET_ACCESS_KEY: ${{ env.R2_KEY_SECRET }}
           R2_BUCKET: ${{ secrets.R2_BUCKET }}
           R2_PUBLIC_BASE_URL: ${{ secrets.R2_PUBLIC_BASE_URL }}
           POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
@@ -83,4 +89,4 @@ jobs:
           git add --ignore-errors "$SE/index" "$SE/picks.json" prototypes/ranch-atelier/dist/sounds/manifest.json
           git diff --cached --quiet && { echo "Nothing changed"; exit 0; }
           git commit -m "Sound engineer: index, picks and /sounds manifest from the sound-store run [skip ci]"
-          for i in 1 2 3; do git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
+          for i in 1 2 3; do git pull --rebase -X theirs origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
