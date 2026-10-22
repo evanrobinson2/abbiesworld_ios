@@ -7,6 +7,10 @@ its Midjourney illustration, then export a game-ready GLB.
 ## Inputs per job `<name>` (for example `barn-upgrade`)
 - `mj/<name>/hero.png`: the 3/4 illustration (the look to hit).
 - `mj/<name>/view_front.png`, `view_side.png`, `view_back.png`: the turnaround sheet split into views (the shapes to hit).
+  They are cut from the sheet by `split.py` and named by left-to-right order, but Midjourney doesn't always draw
+  front, side and back in that order (the hamper's "front" is its end; the barn's side view is a fantasy L-shaped
+  barn). Look at them, and if a view is mislabeled, re-crop or rename it in `models/<name>/views/` and score with
+  that folder. If a view contradicts the hero, the hero wins: drop that view and say so in notes.json.
 - `current/`: today's live version of the asset, for scale and to see what "upgrade" improves on.
 - BRIEF.md: the style definitions (upgrade versus whimsical) and the asset table.
 
@@ -44,7 +48,7 @@ Put the animation on the scene timeline, frames 1 to 120 at 24 fps, as a seamles
 1. Study the hero and the three views. Write down the 6 to 10 features that make the silhouette (the
    distinctive shapes), and build those first. Small details come last.
 2. Build, export, then render and score:
-   `python ../../harness.py render <name>.glb r --px 384 --samples 16 && python ../../harness.py score r ../../mj/<name>`
+   `python ../../harness.py render <name>.glb r --px 384 --samples 16 && python ../../harness.py score r ../../mj/<name>` (or `score r views` if you fixed the views)
    Look at `r/compare.jpg` (target | render | overlay) and `r/hero.png` next to `mj/<name>/hero.png`, with your own eyes.
 3. Revise. Fix the biggest shape and proportion errors first, then colour, then detail. Do at least 3 rounds,
    and record each round's change and mean IoU in notes.json. Stop when a round no longer helps.
