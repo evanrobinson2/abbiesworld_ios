@@ -143,7 +143,9 @@ def update_catalogs(tris):
         for r in c:
             if r['id'] in tris:
                 r['triangles'] = tris[r['id']]; r['source'] = 'tools/ranch-rebuild'
-        json.dump(c, open(p, 'w'), indent=2, ensure_ascii=False)
+        raw = open(p, 'rb').read(); nl = b'\r\n' if b'\r\n' in raw[:200] else b'\n'   # keep the file's own format
+        out = json.dumps(c, indent=2).encode().replace(b'\n', nl) + (nl if raw.endswith(nl) else b'')
+        open(p, 'wb').write(out)
 
 
 if __name__ == '__main__':

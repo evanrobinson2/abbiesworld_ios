@@ -1,0 +1,32 @@
+{
+ "what_i_did": [
+  ["Scoring", "Hero only, as the art director asked: the turnaround sheet drew three different designs (timber-rimmed trough, narrow pillar, gabled well), so no view_*.png is scored. views/hero.png is the MJ hero with its cast shadow flattened out (make_views.py); hero_check.py renders the model from the harness hero azimuth at the MJ hero's lower elevation, direction (0.62, -0.78, 0.34), and scores silhouette IoU against it. The sheet's right-hand view was only a hint for the back of the canopy (a symmetric back slope)."],
+  ["Basin", "1.5 m square, coping top at 0.79 m: a dark bottom course and two cream courses of chunky running-bond blocks, a 0.14 m timber band with iron bolt heads, and a ring of 12 coping slabs whose inner faces show above the turquoise water, which sits 6.5 cm below the coping."],
+  ["Canopy", "Two 15 cm posts, one on the left (-X) coping near the back and one on the back (+Y) coping, carrying a wall plate, tie beams, rafters, eave purlins, a ridge beam and knee braces both ways. Teal plank roof, two overlapping courses per slope (the upper course laps the lower), a chunky ridge board. The canopy is turned 14 degrees about Z and sits over the back-left of the basin, which is where the hero puts it."],
+  ["Pump", "Cast-iron pump on the back-right coping: base plate, flange, barrel with collars, upper column and cap, a spout that reaches over the water and turns down (with a vent knob), a pivot post and pump rod, and a long curved handle that rises over the pivot and sweeps down and out to screen-right ending in a wooden grip."],
+  ["Bucket and stream", "A 12-sided stave bucket with two iron hoops on the left coping, and a thin tapered water stream from the spout with a small splash ring."],
+  ["Construction stages", "One build.py with a STATE switch: planned (corner stakes, post pegs, string lines and a chalk outline), foundation (dark bottom course and basin floor), frame (plus posts, plate, ties, rafters, braces), roof (plus the plank roof and ridge board), complete (the stone walls, band, coping, water, pump, bucket, stream)."]
+ ],
+ "good": [
+  "The three silhouette pieces read at small size: the block basin, the teal canopy and the pump handle sweeping out to the right.",
+  "Light: 2406 triangles for the complete model against a 9k budget; 14 objects, one material each, flat colours.",
+  "Material names carry the game roles: Stone_Cream, Stone_Dark, Timber_Brown, Roof_Teal, Water_Clear, Metal_Iron, Plank_Bucket (plus Rope_Twine for the planned string lines)."
+ ],
+ "off": [
+  "The hero is not structurally consistent: its right post hangs behind the pump and stops in mid air, and its two posts would stand in the water if the ridge ran parallel to the basin. I put the posts on the coping and turned the canopy 14 degrees, so the canopy covers the back-left of the basin like the hero but is not square to it.",
+  "The pump stands at the back-right corner as the brief asks; the hero draws it nearer the middle of the back rim, so the handle tip sits a little further right than the hero's (handle shortened to compensate).",
+  "The left post stands just inside the left coping and runs down to the ground beside the stone face.",
+  "Stones are flat-coloured boxes with no painted cracks or wear; the hero's water ripples and splash spray are reduced to a flat slab and a small splash ring.",
+  "The remaining IoU gap is mostly the basin's lower-right corner and the top-left of the coping (the perspective of the render camera against the illustration), and the hero's slightly lower, wider roof."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build: basin, posts on the back corners, canopy with ridge along X over the back, pump at the back-right corner. Harness hero direction (0.62,-0.78,0.42).", "hero_iou": 0.624},
+  {"round": 2, "change": "Read the hero's geometry: canopy smaller and steeper (pitch 0.8, 1.5 m ridge), moved over the back-left and turned 28 degrees so both posts land on the coping; pump to the back rim; pump and handle heights from the hero.", "hero_iou": 0.676},
+  {"round": 3, "change": "Tried the canopy square to the basin (yaw 0) with a longer roof and taller basin: worse (0.641). Swept yaw 0/14/20/26 and settled on 14 degrees with the canopy centre at (-0.25, 0.58).", "hero_iou": 0.671},
+  {"round": 4, "change": "Measured the hero camera (about 19 degrees elevation) and set the check to that elevation; basin lowered to 0.79 m to the coping top; pump top to 1.33 m; handle reach shortened from 0.85 to 0.62 m so the grip ends just past the basin as in the hero.", "hero_iou": 0.714},
+  {"round": 5, "change": "Canopy centre to (-0.35, 0.55); posts to the ground; outward knee braces trimmed to stay under the roof; coping no longer hides the timber band; bucket stave teeth removed; pump rebuilt with barrel, collars and upper column; thicker handle; greyer stone.", "hero_iou": 0.717},
+  {"round": 6, "change": "Final render at 768 px, 48 samples. Hero IoU 0.715 with the measured-elevation check; 0.701 from the harness's own hero camera direction (0.62,-0.78,0.42).", "hero_iou": 0.715}
+ ],
+ "moving_parts": "None: the game poses buildings itself, so the GLB and variants are exported with export_animations=False. The pump handle is its own object path (pump) and could be keyed about its pivot later if wanted.",
+ "creative_additions": "Iron bolt heads on the timber band, a vent knob on the spout, a small splash ring where the stream meets the water, and post marker pegs plus a chalk outline in the planned stage."
+}
