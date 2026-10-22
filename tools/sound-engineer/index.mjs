@@ -28,7 +28,8 @@ async function indexPart(ref) {
     // [path, bytes, method, offset, csize, publisher, category] - compact, so the whole bundle stays small
     entries: sounds.map(e => { const d = describe(e.name); return [e.name, e.size, e.method, e.offset, e.csize, d.publisher, d.category]; }),
   };
-  console.log(`${ref}: ${sounds.length} sounds of ${listing.entries.length} files, ${(listing.bytes / 1e9).toFixed(2)} GB via ${new URL(listing.url).host}`);
+  const covered = listing.entries.reduce((n, e) => n + e.csize, 0) / listing.bytes;
+  console.log(`${ref}: ${sounds.length} sounds of ${listing.entries.length} files (methods ${[...new Set(sounds.map(e => e.method))].join('/')}, ${(covered * 100).toFixed(0)}% of the zip), ${(listing.bytes / 1e9).toFixed(2)} GB via ${new URL(listing.url).host}`);
 }
 await Promise.all(Array.from({ length: 4 }, async () => { while (next < want.length) await indexPart(want[next++]); }));
 for (const [id, doc] of Object.entries(docs)) {

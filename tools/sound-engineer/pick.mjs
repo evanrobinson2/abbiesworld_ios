@@ -13,6 +13,7 @@ import path from 'node:path';
 import { LIBRARY } from './library.mjs';
 import { partRef } from './bundles.mjs';
 import { wavInfo, sliceWav } from './wav.mjs';
+import { readEntry } from './remote-zip.mjs';
 import { rank } from './catalog.mjs';
 
 const args = process.argv.slice(2);
@@ -48,13 +49,26 @@ function events(file) {
   return out;
 }
 
+// Compressed (deflated) or non-WAV entries can't be range-read: download them whole (up to a cap) and ask ffprobe.
+const WHOLE_CAP = 160e6;
+async function wholeInfo(c) {
+  if (c.csize > WHOLE_CAP) throw new Error(`compressed and too big (${(c.csize / 1e6).toFixed(0)} MB)`);
+  const file = path.join(tmp, `whole-${c.bundle}-${c.part}-${c.offset}${path.extname(c.path).toLowerCase() || '.wav'}`);
+  if (!existsSync(file)) writeFileSync(file, await readEntry(urlOf(c), entryOf(c)));
+  const j = JSON.parse(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration:stream=sample_rate,channels', '-of', 'json', file]).toString());
+  return { duration: Number(j.format.duration), rate: Number(j.streams?.[0]?.sample_rate || 0), channels: j.streams?.[0]?.channels, file };
+}
+
 async function pickSlot(slot) {
   const ranked = rank(docs, slot, { used, limit: 8 });
   const probed = [];
   for (const c of ranked.slice(0, 6)) {
-    try { c.info = await wavInfo(urlOf(c), entryOf(c)); } catch (e) { c.info = null; c.err = e.message; }
-    if (c.info) probed.push(c);
+    try { c.info = await wavInfo(urlOf(c), entryOf(c)) || await wholeInfo(c); } catch (e) { c.info = null; c.err = e.message; }
+    if (c.info?.duration > 0) probed.push(c);
   }
+  stats.ranked += ranked.length; stats.probed += probed.length;
+  if (!probed.length && ranked[0]) console.log(`  ${slot.id}: ${ranked.length} ranked, none readable${ranked[0].err ? ` (${ranked[0].err})` : ''}; top ${ranked[0].path.split('/').pop()} method ${ranked[0].method}`);
+  if (!ranked.length) stats.unmatched.push(slot.id);
   // Prefer files long enough for the job and at least CD quality; ambiences need a long stretch to loop.
   const fit = c => {
     const d = c.info.duration;
@@ -79,15 +93,17 @@ async function pickSlot(slot) {
     }
     // One-shots: look at the first 20 s and keep up to n clean takes from it.
     const head = Math.min(d, 20);
-    const file = path.join(tmp, 'head.wav');
-    writeFileSync(file, (await sliceWav(urlOf(c), entryOf(c), 0, head, c.info)).body);
+    let file = c.info.file;
+    if (!file) { file = path.join(tmp, `head-${slot.id}.wav`); writeFileSync(file, (await sliceWav(urlOf(c), entryOf(c), 0, head, c.info)).body); }
     for (const [a, b] of events(file)) {
       if (takes.length >= slot.n) break;
+      if (a >= head) break;
       if (b - a < 0.05) continue;
       const s = Math.max(0, a - 0.02), e = Math.min(head, Math.min(b + 0.08, s + slot.len));
       takes.push({ ref, path: c.path, trim: [+s.toFixed(3), +e.toFixed(3)], fade: e < b ? 0.12 : 0.01, duration: +d.toFixed(2), cutShort: e < b || undefined });
     }
   }
+  for (const c of ranked) if (c.info?.file) rmSync(c.info.file, { force: true });
   for (const t of takes) used.add(t.path);
   const notes = takes.length ? [
     `Picked from ${candidates.length} matching file${candidates.length === 1 ? '' : 's'}; best name match with ${slot.loop ? 'a long enough stretch to loop' : 'a clean take'}.`,
@@ -96,6 +112,7 @@ async function pickSlot(slot) {
   return { slot: slot.id, takes, candidates, notes, date: new Date().toISOString().slice(0, 10) };
 }
 
+const stats = { ranked: 0, probed: 0, unmatched: [] };
 const slots = LIBRARY.filter(s => (!only || only.includes(s.id)) && !(args.includes('--keep') && old.picks[s.id]?.takes.length));
 const picks = { ...old.picks };
 let i = 0, done = 0;
@@ -109,6 +126,7 @@ await Promise.all(Array.from({ length: 6 }, async () => {
   }
 }));
 rmSync(tmp, { recursive: true, force: true });
+console.log(`${stats.ranked} files ranked, ${stats.probed} readable; no name match for ${stats.unmatched.length} slot(s)${stats.unmatched.length ? ': ' + stats.unmatched.slice(0, 40).join(', ') : ''}`);
 const filled = Object.values(picks).filter(p => p.takes.length).length;
 writeFileSync(OUT, JSON.stringify({ updated: new Date().toISOString(), slots: LIBRARY.length, filled, picks }, null, 1));
 console.log(`picks.json: ${filled} of ${LIBRARY.length} slots filled, ${Object.values(picks).reduce((n, p) => n + p.takes.length, 0)} takes`);

@@ -76,9 +76,11 @@ jobs:
           node "$SE/store.mjs"
           [ -n "$R2_BUCKET" ] || echo "::warning::R2 secrets are not set, so the sounds are built but not stored. Add them at https://github.com/${{ github.repository }}/settings/secrets/actions (see tools/model-store/README.md) and run sound-store again."
       - name: Commit index, picks and manifest (no audio)
+        # Also after a failed build, so the index and picks are not lost.
+        if: ${{ !cancelled() }}
         run: |
           git config user.name "sound-store[bot]"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$SE/index" "$SE/picks.json" prototypes/ranch-atelier/dist/sounds/manifest.json
+          git add --ignore-errors "$SE/index" "$SE/picks.json" prototypes/ranch-atelier/dist/sounds/manifest.json
           git diff --cached --quiet && { echo "Nothing changed"; exit 0; }
           git commit -m "Sound engineer: index, picks and /sounds manifest from the sound-store run [skip ci]"
           for i in 1 2 3; do git pull --rebase origin "${GITHUB_REF_NAME}" && git push origin "HEAD:${GITHUB_REF_NAME}" && break; sleep 5; done
