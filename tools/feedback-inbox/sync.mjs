@@ -28,6 +28,7 @@ if (!fs.existsSync(readme)) {
     '--body', 'Each comment here is one note Evan sent from the app, with its picture. The Claude thread "iPhone update and feedback loop" watches this PR and passes each note to the thread that made the change. Do not merge.'); } catch (error) { console.log('Could not open the inbox PR:', String(error.message).slice(0, 300)); }
 }
 const res = await fetch(`${SITE}/api/feedback${last ? `?since=${encodeURIComponent(last)}` : ''}`);
+if (res.status === 404) { console.log('The site has no /api/feedback yet (not deployed); nothing to copy.'); process.exit(0); }
 if (!res.ok) throw new Error(`Feedback list failed: ${res.status}`);
 const items = (await res.json()).items.filter(i => ID.test(i.id) && (!last || i.id > last)).sort((a, b) => a.id.localeCompare(b.id));
 if (!items.length) { console.log('No new feedback.'); process.exit(0); }

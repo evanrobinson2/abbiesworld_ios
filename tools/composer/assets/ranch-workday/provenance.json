@@ -1,0 +1,118 @@
+{
+ "id": "ranch-workday",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "4dc48f918d4e825406c0177ff888fc72a1b86922c01921052a1d656e7db93b12"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "14e3196b56dfc86d61ba7c4d8add6eb62de0bb6330beea8f450ffe6f5eda8747"
+  }
+ ],
+ "title": "Ranch Workday",
+ "kind": "music",
+ "brief": "Busy daytime bed for the Ranch: chores, deliveries, animals out in the field. Pizzicato and marimba motion under a clarinet tune built on Abbie's motif; light staccato woodwinds in the second half.",
+ "uses": [
+  "ranch busy day",
+  "simulation running at speed",
+  "deliveries and chores"
+ ],
+ "tags": [
+  "ranch",
+  "day",
+  "playful",
+  "pizzicato"
+ ],
+ "score": "tools/composer/cues/ranch_workday.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/ranch_workday.py",
+  "bpm": 104,
+  "meter": "4/4",
+  "key": "G major",
+  "bars": 16,
+  "instruments": [
+   "bass",
+   "bassoon_stac",
+   "cellos",
+   "cellos_pizz",
+   "clarinet",
+   "clarinet_stac",
+   "flute",
+   "glock",
+   "marimba",
+   "violas",
+   "violins",
+   "violins_pizz",
+   "xylo"
+  ],
+  "percussion": [
+   "triangle"
+  ],
+  "hall_seconds": 2.0,
+  "target_lufs": -18.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": "clarinet bars 1 and 5; flute high bars 9-10",
+ "files": {
+  "main": {
+   "audio": "/music/composer/ranch-workday.mp3",
+   "sha256": "14e3196b56dfc86d61ba7c4d8add6eb62de0bb6330beea8f450ffe6f5eda8747",
+   "bytes": 865197,
+   "duration": 37.323,
+   "loudness": -18.1,
+   "peak": -1.0,
+   "loopPoints": {
+    "start": 0.2,
+    "end": 37.123077
+   },
+   "stems": [
+    {
+     "name": "foundation",
+     "url": "/music/composer/ranch-workday.stem-foundation.mp3",
+     "sha256": "6b31c038924af87ea5875a5c73bc282e13e1307fd5aa1bdeadc92d5c0a5ff4ae",
+     "bytes": 609885,
+     "min": 0.0,
+     "role": "sustained strings and bass, always on"
+    },
+    {
+     "name": "pulse",
+     "url": "/music/composer/ranch-workday.stem-pulse.mp3",
+     "sha256": "554b78b71b088b5476b290c18f091d7cd996fabffa652f151d202435d33c8d00",
+     "bytes": 561309,
+     "min": 0.2,
+     "role": "harp, pizzicato and mallet motion"
+    },
+    {
+     "name": "melody",
+     "url": "/music/composer/ranch-workday.stem-melody.mp3",
+     "sha256": "a36f462c07930001c34e0bf81d9e1b395a36d7d621fce5e4bddc10bcc65d4b8c",
+     "bytes": 683373,
+     "min": 0.45,
+     "role": "the tune: woodwinds, horn, solo strings"
+    },
+    {
+     "name": "color",
+     "url": "/music/composer/ranch-workday.stem-color.mp3",
+     "sha256": "95da762b5c3ddca839eb7ad15356161b40925b3a37d81d0c923e19e5d16ec52e",
+     "bytes": 235653,
+     "min": 0.7,
+     "role": "bells, glockenspiel, triangle, high shimmer"
+    }
+   ]
+  }
+ }
+}
