@@ -1,0 +1,103 @@
+# Acceptance test for the ChatGPT → Claude dispatch bridge, playing ChatGPT's part.
+# Calls the live Abbie's World MCP exactly as ChatGPT does (JSON-RPC tools/call), authenticated
+# with this workflow's GitHub OIDC token, then waits for Claude to acknowledge, work, commit and
+# report completion. Fails unless the dispatch completes AND the relay verified it on GitHub.
+# Run from Actions > dispatch-e2e > Run workflow. See docs/dispatch/README.md.
+name: dispatch-e2e
+on:
+  workflow_dispatch:
+    inputs:
+      request:
+        description: What to ask Claude to build
+        default: >-
+          Dispatch bridge acceptance test: add one line to docs/dispatch/E2E_LOG.md recording this dispatch id
+          and the current UTC time, open a PR, and merge it.
+      wait_minutes:
+        description: How long to wait for completion
+        default: '45'
+permissions:
+  contents: read
+  id-token: write
+concurrency:
+  group: dispatch-e2e
+  cancel-in-progress: false
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 75
+    steps:
+      - uses: actions/github-script@v7
+        env:
+          MCP_URL: https://studio-mock-iota.vercel.app/mcp
+          REQUEST: ${{ inputs.request }}
+          WAIT_MINUTES: ${{ inputs.wait_minutes }}
+        with:
+          script: |
+            const MCP = process.env.MCP_URL;
+            let token = await core.getIDToken(MCP);
+            let tokenAt = Date.now();
+            let rpcId = 0;
+            const lines = [];
+            const log = (s) => { core.info(s); lines.push(s); };
+
+            async function rpc(method, params) {
+              if (Date.now() - tokenAt > 4 * 60 * 1000) { token = await core.getIDToken(MCP); tokenAt = Date.now(); }
+              const res = await fetch(MCP, {
+                method: 'POST',
+                headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json', Accept: 'application/json, text/event-stream' },
+                body: JSON.stringify({ jsonrpc: '2.0', id: ++rpcId, method, params }),
+              });
+              const body = await res.json();
+              if (body.error) throw new Error(`${method}: ${JSON.stringify(body.error)}`);
+              return body.result;
+            }
+            async function tool(name, args) {
+              const result = await rpc('tools/call', { name, arguments: args });
+              const text = result.content?.[0]?.text || '{}';
+              const value = JSON.parse(text.slice(text.indexOf('{')));
+              if (result.isError) throw new Error(`${name} failed: ${text.slice(0, 600)}`);
+              return value;
+            }
+
+            const init = await rpc('initialize', { protocolVersion: '2025-06-18', capabilities: {}, clientInfo: { name: 'dispatch-e2e', version: '1' } });
+            log(`MCP ${init.serverInfo.name} ${init.serverInfo.version}`);
+            const names = (await rpc('tools/list', {})).tools.map((t) => t.name);
+            for (const n of ['build', 'status', 'revise', 'inbox']) if (!names.includes(n)) throw new Error(`tool ${n} not advertised`);
+            log(`tools/list advertises build, status, revise, inbox (${names.length} tools total)`);
+
+            const key = `e2e-${context.runId}`;
+            const built = await tool('build', { request: process.env.REQUEST, context: `GitHub Actions run ${context.runId}`, idempotency_key: key });
+            const id = built.dispatch_id;
+            log(`build -> ${id} status=${built.status} delivery=${built.delivery.state} ${built.delivery.last_error || ''}`);
+            const again = await tool('build', { request: process.env.REQUEST, idempotency_key: key });
+            if (again.dispatch_id !== id || !again.duplicate) throw new Error('duplicate build was not deduplicated');
+            log(`duplicate build -> same ${again.dispatch_id} (duplicate=${again.duplicate})`);
+
+            const deadline = Date.now() + Number(process.env.WAIT_MINUTES || 45) * 60 * 1000;
+            const seen = new Set();
+            let s = built;
+            while (Date.now() < deadline) {
+              await new Promise((r) => setTimeout(r, 60 * 1000));
+              s = await tool('status', { dispatch_id: id });
+              const box = await tool('inbox', { dispatch_id: id, acknowledge: false, unread_only: false });
+              for (const m of box.messages) {
+                if (seen.has(m.message_id)) continue;
+                seen.add(m.message_id);
+                log(`[${m.at}] ${m.from}/${m.kind}: ${m.text.split('\n')[0].slice(0, 200)}`);
+              }
+              log(`status=${s.status} verified=${s.verified} delivery=${s.delivery.state} attempts=${s.delivery.attempts}`);
+              if (['completed', 'failed', 'blocked'].includes(s.status)) break;
+            }
+            const box = await tool('inbox', { dispatch_id: id });
+            log(`inbox (marked read): ${box.messages.length} messages`);
+            const box2 = await tool('inbox', { dispatch_id: id });
+            if (box2.messages.length) throw new Error('inbox returned the same messages twice');
+            log('inbox second read is empty (acknowledgment works)');
+
+            await core.summary
+              .addHeading(`Dispatch ${id}: ${s.status}${s.verified ? ' (verified)' : ''}`)
+              .addCodeBlock(lines.join('\n'))
+              .addCodeBlock(JSON.stringify(s, null, 2), 'json')
+              .write();
+            if (s.status !== 'completed') throw new Error(`dispatch ended ${s.status}: ${s.error || s.needs_input || ''}`);
+            if (!s.verified) throw new Error('completed but not verified against GitHub');

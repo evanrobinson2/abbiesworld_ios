@@ -33,3 +33,6 @@ documents; what is built lives in the status documents. Keep these three apart.
 - `tools/ranch-rebuild/`: the Ranch tile rebuild, `to_game.py` (GLB to the tile's mesh format) and `PROFILE.md`.
 - `tools/midjourney/`: driving Midjourney in Evan's browser. `tools/model-store/`: R2 and Postgres asset storage.
 - `tools/paper-warrior/`, `tools/paper-helmet/`: image-to-model fitting experiments and the papercraft grammar.
+- `prototypes/studio-mock/`: the Abbie's World MCP that ChatGPT connects to (studio-mock-iota.vercel.app/mcp).
+- `docs/dispatch/`: the ChatGPT → Claude dispatch bridge (build/status/revise/inbox). A session started by a
+  dispatch follows `docs/dispatch/CLAUDE_PROTOCOL.md`.
