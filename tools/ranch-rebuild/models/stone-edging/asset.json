@@ -1,0 +1,204 @@
+{
+ "schema": "abbies-world/asset-manifest",
+ "schemaVersion": 1,
+ "id": "ranch/stone-edging",
+ "name": "stone-edging",
+ "version": 1,
+ "created": "2026-10-22",
+ "updated": "2026-10-22",
+ "purpose": {
+  "world": "Abbie's World",
+  "scene": "Atelier Ranch, Ranch tile",
+  "role_in_scene": "path and bed edging",
+  "why": "Rebuilt on Evan's request (2026-10-22) to replace the Ranch tile's original model with a crafted one, keeping its game role.",
+  "audience": "children building and playing in a miniature ranch",
+  "style": "normal (upgrade: the same asset, built better)"
+ },
+ "brief": {
+  "prompt": "a short straight row of rounded garden edging stones with small white and yellow flowers growing between them",
+  "art_direction": "tools/ranch-rebuild/BRIEF.md",
+  "modeler_brief": "tools/ranch-rebuild/MODELER.md"
+ },
+ "concept": {
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+   "hero": {
+    "prompt": "a short straight row of rounded garden edging stones with small white and yellow flowers growing between them, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+    "grid_job_id": "86f3f28c-9054-4351-b5b0-9d7b617737bc",
+    "grid_url": "https://www.midjourney.com/jobs/86f3f28c-9054-4351-b5b0-9d7b617737bc?index=2",
+    "picked_index": 2,
+    "upscale_job_id": "8d314f0f-96a2-4fea-8fff-60dfaa638b9e",
+    "upscale_mode": "Upscale (Subtle)",
+    "submitted_at": "2026-10-22T23:45:43.105Z",
+    "grid_done_at": "2026-10-22T23:46:01.108Z",
+    "upscale_clicked_at": "2026-10-22T23:46:11.245Z",
+    "downloaded_at": "2026-10-22T23:47:20.599Z",
+    "pick_reason": "short straight row of rounded stones with white and yellow flowers between them, whole row in frame"
+   }
+  },
+  "files": {
+   "hero.png": "fb24a3e9c79b961d2784c4b28e2a0322c78858b72a996360001866e392869d54"
+  },
+  "folder": "tools/ranch-rebuild/mj/stone-edging"
+ },
+ "construction": {
+  "tool": "Blender 5.2 (bpy, Python) in the cloud",
+  "recipe": "tools/ranch-rebuild/models/stone-edging/build.py",
+  "by": "modeler agent, directed by the art director (Claude)",
+  "rounds": [
+   {
+    "round": 1,
+    "change": "First build: 8 jittered 7x4 dome boulders, 10 daisies and 7 marigolds on tall stems, 22 base tufts; camera -26/8 at dist 1.3 cropped the near end.",
+    "mean_iou": 0.609
+   },
+   {
+    "round": 2,
+    "change": "Rounder, rounded-box boulder profile (8 segments), flowers lowered with bigger heads, stems as 2-triangle ribbons; camera fixed at -16/8 with a shortened lens so the whole row stays in frame.",
+    "mean_iou": 0.807
+   },
+   {
+    "round": 3,
+    "change": "Bigger front daisies (r 0.044) low on the stone faces, tufts moved into the gaps, warmer stone and darker leaf colours; end tufts stuck out past the row (0.766).",
+    "mean_iou": 0.766
+   },
+   {
+    "round": 4,
+    "change": "Tufts only in the gaps, stone pitch fitted so the stones span exactly 1.25 m.",
+    "mean_iou": 0.812
+   },
+   {
+    "round": 5,
+    "change": "9-segment stones with rounder shoulders, bigger tuft leaves. Final render at 768 px / 48 samples scores 0.808.",
+    "mean_iou": 0.822
+   }
+  ],
+  "what_was_done": [
+   [
+    "Target",
+    "Per the art director, the hero is the only target (there is no turnaround). make_views.py keys the hero against a per-row backdrop estimate (the cream darkens down the frame), keeps the warm-white daisy petals with a brighter-and-bluer test, and drops the cast shadow left of the first stone. The result is views/hero_mask.png."
+   ],
+   [
+    "Hero camera",
+    "hero_check.py renders from the hero's direction: 16 deg off the front towards -X (the near end of the row is on the left), 8 deg up, at 1.0 x the bbox diagonal with the lens shortened in proportion (harness framing, stronger perspective). Calibrated over yaw/elevation/distance grids (flat at 0.78 to 0.82 around the pick), then held fixed."
+   ],
+   [
+    "Scale",
+    "The old GF-010 is 1.25 m long along X, 0.43 m deep and 0.22 m tall, and to_game copies the GLB as-is, so the row keeps the 1.25 m length along X. Eight stones at the brief's 0.30 x 0.25 x 0.22 m would make a 2.4 m row, so the stones keep those proportions scaled to 0.166 x 0.138 x 0.128 m (with +-7% size and +-12 deg yaw variation), touching at a 0.155 m pitch."
+   ],
+   [
+    "Stones",
+    "Each stone is a faceted squashed boulder: four staggered rings of 9 jittered vertices (widest a third of the way up, rounded shoulders) and a top point, with an open bottom on the ground, 63 triangles each. Six are Stone_Grey, two (3rd and 7th) Stone_Pale."
+   ],
+   [
+    "Flowers",
+    "Eight daisies (Petal_White star discs of 11 broad petals for the big ones, 7 for the small, with a domed Flower_Yellow centre) and seven marigolds (cupped 10-point Petal_Yellow stars), on 2-triangle Leaf_Green stem ribbons. Heads turn toward the hero camera. The big daisies sit low against the stone faces in the gaps, as in the hero; the small ones and the marigolds poke just above the stones from behind."
+   ],
+   [
+    "Game readiness",
+    "973 triangles (flower/ground plant budget 1k) in 6 meshes, one flat material each: Stone_Grey, Stone_Pale, Petal_White, Petal_Yellow, Flower_Yellow, Leaf_Green. Origin at the centre of the row on the ground, row along X, front -Y. No animation, no variants (plant). to_game.py stone-edging installs simulations/regional-assets/GF-010.glb."
+   ]
+  ],
+  "creative_additions": "Flower heads turned toward the viewer, cupped marigold heads for volume, and staggered facet rings so each stone looks chipped rather than turned."
+ },
+ "geometry": {
+  "units": "metres",
+  "up": "Z (Blender source); Y in GLB and game",
+  "front": "-Y (Blender source); +Z in GLB and game",
+  "origin": "centre of the footprint, on the ground",
+  "dimensions_m": [
+   1.2500274181365967,
+   0.26967471837997437,
+   0.18324275314807892
+  ],
+  "triangles": 973,
+  "materials": [
+   "Flower_Yellow",
+   "Petal_White",
+   "Petal_Yellow",
+   "Leaf_Green",
+   "Stone_Grey",
+   "Stone_Pale"
+  ],
+  "parts": [
+   {
+    "name": "daisy_centres",
+    "materials": [
+     "Flower_Yellow"
+    ]
+   },
+   {
+    "name": "daisy_petals",
+    "materials": [
+     "Petal_White"
+    ]
+   },
+   {
+    "name": "marigolds",
+    "materials": [
+     "Petal_Yellow"
+    ]
+   },
+   {
+    "name": "stems_leaves",
+    "materials": [
+     "Leaf_Green"
+    ]
+   },
+   {
+    "name": "stones",
+    "materials": [
+     "Stone_Grey"
+    ]
+   },
+   {
+    "name": "stones_pale",
+    "materials": [
+     "Stone_Pale"
+    ]
+   }
+  ]
+ },
+ "states": [],
+ "validation": {
+  "outline_iou": null,
+  "hero_iou": 0.808,
+  "per_view": {},
+  "triangle_budget": 1000,
+  "within_budget": true,
+  "good": [
+   "Hero silhouette IoU 0.808 at the final 768 px / 48 samples (0.822 at 384 px): the low row of eight rounded stones with flowers poking above and big daisies in the front gaps matches the hero's outline.",
+   "Chunky colour blocks: grey stones, white daisy stars with yellow eyes, yellow marigolds, green tufts all read at small size.",
+   "Same length (1.25 m) and orientation (along X) as the old GF-010, under the 1k budget at 973 triangles."
+  ],
+  "off": [
+   "Stones are 0.17 m long, not the brief's 0.30 m: eight 0.30 m stones cannot fit in the old 1.25 m row that the game uses unscaled. Proportions are kept. The row is 0.18 m tall (old 0.22 m) and 0.27 m deep (old 0.43 m, which was off-centre in depth).",
+   "The hero's stones carry many small facets; mine have 9 x 4 facets each to stay at 1k. The silhouette is right but they read a little smoother and boxier than the hero's.",
+   "The hero's dense leafy clumps at the base are thinner here (16 four-leaf tufts in the gaps), and the tiny base daisies in the hero are left out; both would be a few pixels in the tile.",
+   "Flower stems are flat ribbons turned to the hero camera, so they thin out when seen edge-on from other angles."
+  ]
+ },
+ "exports": {
+  "runtime": "stone-edging.glb",
+  "variants": {},
+  "game": {
+   "kind": "glb",
+   "files": [
+    "prototypes/ranch-atelier/dist/simulations/regional-assets/GF-010.glb"
+   ]
+  }
+ },
+ "files": {
+  "stone-edging.glb": {
+   "sha256": "883c3cb406f0c8a1efc81d6a0431159a634dbd895b2030b14326f256ebb5bc50",
+   "bytes": 74288
+  }
+ },
+ "source": {
+  "repo": "evanrobinson2/abbiesworld_ios",
+  "commit": "b4420e3c12efc48f37cd0461f449f6bd7a4a34e8",
+  "path": "tools/ranch-rebuild/models/stone-edging"
+ },
+ "rights": "Original work for Abbie's World. Concept art generated on Evan's Midjourney account; geometry generated procedurally, no third-party meshes or textures.",
+ "change_requests": [],
+ "lineage": []
+}
