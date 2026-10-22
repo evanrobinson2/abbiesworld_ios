@@ -1,0 +1,37 @@
+{
+ "what_i_did": [
+  ["Orientation", "Head faces -Y, origin at the footprint centre on the ground, 0.40 m tall to the comb (0.20 x 0.29 m footprint). to_game.py turns it to +X; the installed chicken-idle.json has the beak at +X and the tail at -X."],
+  ["Views", "The raw harness masks lost half the hen (warm white feathers on a cream backdrop) and kept the hero's long cast shadow, so make_views.py rebuilds them: a low colour threshold on a 5 px blur, a closing and hole fill above the belly, every column filled between its top and bottom object pixel above the belly (white hackles left side-facing notches), the shadow keyed out by hue below the belly and everything below the lowest toe cut. view_side.png is re-cropped from turnaround.png (split.py cut the breast off at the right edge) and mirrored: the sheet's side faces right and is slightly three-quarter, while the harness side camera at +X sees our hen facing left. Being three-quarter, it is foreshortened (W/H 0.53 against about 0.73 for a true side), so it scores low by design; the hero wins."],
+  ["Hero camera", "hero_check.py renders from the hero's direction, 75 deg off the front toward +X and 8 deg up (calibrated over a 6x4 yaw/elevation grid on the round-3 model, best 80/0; 75 keeps a little of the hero's three-quarter breast), and scores against views/hero.png."],
+  ["Massing", "A faceted 8-ring egg body (12 sides, jittered), deep breast in front and the back rising to the tail, widest low down, 0.18 m wide. Short hackle cone to a 7x8x7 cm head. Thin shanks with 0.03 m of leg showing, feet 0.06 m apart."],
+  ["Feathers", "Layered feather plates (kites with a raised midrib) lying on the surface: 13 breast and flank plates, two rings of 18 hackle plates over the shoulders with golden tips, a folded covert shell on each flank that hugs the body plus 3 cream flight plates trailing over the rump, and a fanned upright tail of 7 cream under-plates and 5 golden top plates."],
+  ["Head", "Red comb of five blunt blades on a base blade, red bare face patches with an orange eye and dark pupil on top, two hanging red wattles, a stout yellow four-sided beak drooping 14 deg."],
+  ["Parts and poses", "Named parts with pivots: body (pivot at the hips) > neck > head > comb, wattle, beak, face, eyes, pupils; body > tail_under > tail; body > wing_l/wing_r > plates; body > breast_plates; neck > hackles, hackle_tips. leg_l and leg_r are separate roots at the hip joints so the body can tip and sink without moving the feet. idle is the hero stance. feeding tips the body 48 deg and the neck 48 deg, raises the tail, and slides the head out along the neck (its top ring sits inside the head, so no gap opens) until the beak tip touches the ground. rest sinks the body 7 cm onto the ground, folds the legs back up inside it, and tucks the neck and tail slightly."],
+  ["Game readiness", "1,290 triangles in every pose (budget 1.5k), 20 meshes, one flat material each: Feather_White, Feather_Cream, Feather_Gold, Skin_Red, Horn_Yellow, Skin_Yellow, Skin_EyeOrange, Skin_EyeDark (all map to the game's skin role). No animation. to_game.py chicken wrote chicken-idle/feeding/rest .json and .glb without errors."]
+ ],
+ "good": [
+  "Front 0.808 and back 0.816 against the sheet: the egg-shaped upright body, the narrow neck and the legs line up.",
+  "Hero silhouette 0.826 from the hero direction: plump round body, upright golden tail, red comb, wattles and face, yellow beak and legs all read.",
+  "The three poses are clearly different at tile size: upright, nose to the ground with the tail up, and a round sitting lump with no legs.",
+  "Within budget at 1.29k triangles, most of them in the body and feather plates."
+ ],
+ "off": [
+  "The side view scores only 0.588: the sheet's side hen is three-quarter (foreshortened, W/H 0.53) with a lower tail. I kept the hero's longer side profile and high tail, as the hero wins.",
+  "The front and back sheet views are slimmer than the hero's plump hen. Body width is a compromise (BODY_W 0.92): the sheet wants it slimmer, the hero plumper.",
+  "The hero's feathers are soft, many-layered and golden-shaded across the back; mine are a few dozen flat plates on a faceted body, and the golden hackle tips read as small flecks rather than a continuous golden collar.",
+  "The hero's comb is rounded and fleshy; mine is five blunt blades.",
+  "The feeding pose stretches the neck by sliding the head 6 cm along it (a pure rotation cannot reach the ground with a short hen neck).",
+  "The hero camera direction was calibrated against this model, so the hero number is a guide, not ground truth."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First build: long body (0.36 m), feather plates sticking out, hero yaw guessed at 62 deg.", "mean_iou": 0.587, "hero_iou": 0.673},
+  {"round": 2, "change": "Compact body and tail (length 0.29 m), plates projected onto the body surface, narrower hackles.", "mean_iou": 0.671, "hero_iou": 0.598},
+  {"round": 3, "change": "Wings rebuilt as shells hugging the flanks, bigger head, higher body, bigger tail fan; hero camera calibrated to 75/8.", "mean_iou": 0.709, "hero_iou": 0.815},
+  {"round": 4, "change": "Body narrower at the top and widest lower down, wider tail plates.", "mean_iou": 0.718, "hero_iou": 0.836},
+  {"round": 5, "change": "Feeding reach (head slides along the neck), rest legs folded inside, chunky blunt comb, eye on a red face patch, bigger wattles, neck base lowered (removed a ledge), warmer whites.", "mean_iou": 0.742, "hero_iou": 0.814},
+  {"round": 6, "change": "Plumper body reaching lower, higher tail pivot, then body width x0.92 and flatter wings to keep the sheet's slimmer front. A more upright tail was tried and reverted (hero 0.829 -> 0.813).", "mean_iou": 0.735, "hero_iou": 0.829},
+  {"round": 7, "change": "Lighter gold; final 768 px / 48 sample render and score; to_game.py chicken.", "mean_iou": 0.737, "hero_iou": 0.826}
+ ],
+ "moving_parts": "No animation (the game poses models itself). The poses are rotations of named parts from build.py's POSE table: body at the hips, neck, head, tail, wings, plus a body drop for rest and the leg fold; exported as variants/idle.glb, feeding.glb and rest.glb.",
+ "creative_additions": "A cream under-layer behind the golden tail fan, a short back toe on each foot, and golden tips on the lower hackle ring and the back of the upper one."
+}
