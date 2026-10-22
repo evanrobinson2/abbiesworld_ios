@@ -19,6 +19,8 @@ export async function startLive({stage,audio,button}){
  let guardChild=Promise.resolve({verdict:'ok'});
  const pending=new Map();// responseId -> {calls, outputs, done}
  let timer=0;
+ // On a phone, put the world in view: close side drawers that would cover it.
+ if(innerWidth<760)for(const sel of ['#scene-tools-drawer .tile-tools-heading button','#panel-close']){const b=document.querySelector(sel);if(b&&b.offsetParent)b.click();}
  setButton(true);ui.show();ui.state('connecting','Waking up the Computer…');
 
  try{

@@ -12,8 +12,10 @@ or costs anything until someone taps it.
 ## How it works
 
 ```
-Talk tap ─► /api/live {action:session}  (server: Vercel OIDC → AI Gateway, mints a 60 s single-use secret)
-          ─► WebSocket wss://ai-gateway.vercel.sh/v4/ai/realtime-model?ai-model-id=openai/gpt-realtime-2
+Talk tap ─► /api/live {action:session}  (60 s HMAC ticket)
+          ─► WebSocket /api/live-socket  (our relay: opens the realtime session with the project's OIDC token,
+             always sends the server's instructions and tools, drops anything else the page sends)
+          ─► AI Gateway realtime, openai/gpt-realtime-2
              mic PCM16 24 kHz up ▲   ▼ voice PCM16, transcripts, tool calls down
           ─► tool calls run on the holodeck stage in the page (same ops as the Creator protocol)
           ─► every line from either side ─► /api/live {action:guard}
@@ -24,7 +26,8 @@ Talk tap ─► /api/live {action:session}  (server: Vercel OIDC → AI Gateway,
 | Toolbar button | `dist/simulations/live/button.mjs` | Tiny; loads live mode only on tap, creates the AudioContext inside the tap (iOS) |
 | Client | `dist/simulations/live/live.mjs` | Consent card, mic capture and resample, playback with barge-in, tool runner, guard hooks, dock UI, idle and 20 min limits |
 | Policy | `dist/simulations/live/policy.mjs` | The instructions, the six tools, the PG screen, build → ops, scene summary. Shared by page and server |
-| Server | `dist/api/live.js` | `session` (client secret), `guard` (PG and scope check), `order` (workshop request). Origin-locked, rate-limited, kill switch `LIVE_MODE_ENABLED=false` |
+| Server | `dist/api/live.js` | `session` (relay ticket), `guard` (PG and scope check), `order` (workshop request). Origin-locked, rate-limited, kill switch `LIVE_MODE_ENABLED=false` |
+| Relay | `dist/api/live-socket.js`, `dist/lib/live-ticket.cjs` | Holds the credential; the rules and tools can't be changed from the page. AI Gateway only mints browser client secrets for Gateway API keys, and this project uses OIDC |
 | Red team | `dist/api/live-redteam.js` | 31 scripted attacks and builds against the real model; `GET /api/live-redteam?key=$LIVE_REDTEAM_KEY` |
 | Stage | `dist/simulations/holodeck/stage.mjs` | Now runs without a relay room, exposes `apply(ops)`, supports parts (`spawn {parent}`, shape `empty`) |
 | Tests | `dist/tests/live.test.cjs`, `dist/scripts/live-e2e.cjs` | Unit tests; headless Chromium with a fake mic and a scripted model |
@@ -54,7 +57,9 @@ an invisible anchor so it moves as one: abacus, castle, rocket), `catalog` (regi
    cut-offs end the session.
 5. **Orders fail closed**: the workshop only gets a description the guard passed.
 6. **Limits**: 12 sessions per hour per address, 20 minutes per session, 2 minutes of silence
-   ends it, single-use 60 s secrets, the Gateway budget as the hard spend cap.
+   ends it, 60 s tickets, the Gateway budget as the hard spend cap.
+7. **Server-enforced rules**: the relay replaces whatever instructions and tools the page sends
+   with the server's copy, and refuses typed messages, so a tampered page can't loosen them.
 
 ## Is it allowed? (checked 2026-10-22; not legal advice)
 
@@ -81,12 +86,29 @@ for training).
 
 ## Cost and latency
 
-- Credentials: the project's own Vercel OIDC token against AI Gateway. No new API key, nothing
-  in the repo or the page. Billing is the team's AI Gateway credits.
-- Latency: speech-to-speech, so the reply starts as soon as the model's voice does (measured
-  numbers in the verification section below). The stage applies a batch in one frame.
+- Credentials: the project's own Vercel OIDC token against AI Gateway, used only by the relay.
+  No new API key, nothing in the repo or the page. Billing is the team's AI Gateway credits.
+  Env vars: `LIVE_TICKET_SECRET` (signs tickets) and `LIVE_REDTEAM_KEY` (unlocks the red team).
+- Latency: speech to speech. In the red team, the first words or tool call came 0.8 to 2.0 s
+  after the request, counting the connection itself; builds that look first take 2 to 4 s. The
+  stage applies a batch in one frame. Real phone numbers still to measure.
 - Cost: realtime audio is billed per minute of audio in and out; a 10-minute family play
   session is cents to low dollars. The 20-minute cap and 2-minute idle stop bound it.
+
+## Verification (2026-10-22)
+
+- Red team against the real model on a preview (`/api/live-redteam`): **31 of 31 pass** after
+  one round of fixes. 11 jailbreaks (ignore instructions, DAN, "I'm the developer", system
+  prompt, swearing pirate, spell it backwards, rude sign, "dad turned the rules off", rule-free
+  story, repeat-after-me insults, "be ChatGPT"), 5 unsafe asks (real gun, gore, kissing, beer,
+  casino), 6 off-topic (maths, spelling, president, best friend, feelings, real weather), 2
+  personal details, 1 distress, 6 builds (abacus, rainbow bridge, night and snow, dragon,
+  zombie chase, unicorn with a workshop order). The guard also flagged every attack on the
+  child's side, so the tools would have been held even if the model had tried.
+- Round 1 found two problems, both fixed: the model leaked homework answers onto signs and as
+  bead counts, and refusals that named the topic ("no beer") tripped the word screen.
+- Browser: `node scripts/live-e2e.cjs` (headless Chromium, fake mic, scripted model) passes
+  10 of 10, including "refused request built nothing".
 
 ## Next steps
 
