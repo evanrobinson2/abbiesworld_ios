@@ -1,0 +1,45 @@
+{
+  "id": "20260926-event-mystery-plate",
+  "semanticId": "plate.marbleVoyage.event.mystery",
+  "kind": "plate",
+  "priority": "normal",
+  "status": "in_review",
+  "placeholder": {
+    "type": "sf_symbol",
+    "detail": "eventPhase SF Symbol only for mystery / ?"
+  },
+  "keepStockIcon": false,
+  "surface": "Mystery / ? event resolve screen",
+  "brief": "4:3 encounter plate for a Mystery stop: sealed crate, swirling scrap fog, or surprise parcel \u2014 curious not scary. Space for outcome copy + Continue. No text in art.",
+  "aspect": "4:3",
+  "relatedPaths": [
+    "abbies.world.ios/abbies.world.ios/Views/World2/Plink/MarbleVoyageHostView.swift",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/fox-land.jpg",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/porcupine-boxer.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/index.html",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/README.md"
+  ],
+  "promptSeeds": [
+    "Comedic fantasy mystery encounter backdrop sealed glowing crate, 4:3 landscape, room for UI, no text --ar 4:3 --stylize 150"
+  ],
+  "requestedBy": "cursor",
+  "requestedAt": "2026-09-26T20:45:00Z",
+  "sessionNote": "Evan authorized production with iconic single-object compositions, restrained atmosphere and quiet UI space. Not elaborate scenic backgrounds.",
+  "fulfillment": null,
+  "createdAt": "2026-09-26T20:45:00Z",
+  "type": "plate",
+  "styleNotes": "Match Marble Voyage trail-scrap / porcupine cast language.",
+  "gameArea": "Marble Voyage \u2014 event resolve",
+  "usage": "4:3 backdrop for Mystery / ? nodes",
+  "targetPixelSize": "~2048\u00d71536 4:3",
+  "expectedBackground": "Painted scene; curious not scary",
+  "characterOrAssetName": "Mystery encounter plate",
+  "productionIntent": "runtime_bind",
+  "referenceRequestIds": [
+    "20260926-climb-mystery-tile"
+  ],
+  "acceptanceCriteria": [
+    "Sealed crate / scrap fog; no horror; no text",
+    "Space for outcome copy"
+  ]
+}

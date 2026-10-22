@@ -1,0 +1,12 @@
+{
+  "jobId": "5744902e-4fef-4fc9-b6d5-b91bcd3f0a13",
+  "candidateIndex": 3,
+  "sourceUrl": "https://cdn.midjourney.com/5744902e-4fef-4fc9-b6d5-b91bcd3f0a13/0_3.jpeg",
+  "sha256": "63049d091d46041ded2dbceb933eeec2542ad6eff3765856b209f0ec4d5a7ba6",
+  "approved": false,
+  "status": "animation_trial",
+  "animationJobId": "423da72f-2222-49cb-a2b4-4ccbb0f3324d",
+  "intendedSemanticId": "poi.carnival.fairground.exterior",
+  "animationStatus": "5-second loop generated and viewed in Midjourney; local video download timed out",
+  "animationReviewUrl": "https://www.midjourney.com/jobs/423da72f-2222-49cb-a2b4-4ccbb0f3324d?index=0"
+}

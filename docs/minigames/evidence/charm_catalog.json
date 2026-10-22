@@ -1,0 +1,77 @@
+{
+  "bloom": {
+    "asset": "ench_grows_flowers",
+    "base": 35,
+    "exemplars": [
+      "An Apple A Day",
+      "Gardener's Gloves"
+    ],
+    "role": "healing",
+    "title": "Bloom"
+  },
+  "cycle": {
+    "asset": "ench_changes_colour",
+    "base": 35,
+    "exemplars": [
+      "Lucky Penny",
+      "Strange Brew"
+    ],
+    "role": "crit_refresh_board",
+    "title": "Cycle"
+  },
+  "hover": {
+    "asset": "ench_floats_an_inch",
+    "base": 35,
+    "exemplars": [
+      "Super Boots"
+    ],
+    "role": "utility_bounce",
+    "title": "Hover"
+  },
+  "lullaby": {
+    "asset": "ench_sings_lullabies",
+    "base": 40,
+    "exemplars": [
+      "Roundrel status pool"
+    ],
+    "role": "status_debuff",
+    "title": "Lullaby"
+  },
+  "moonGleam": {
+    "asset": "ench_glows_at_night",
+    "base": 40,
+    "exemplars": [
+      "Molten Gold"
+    ],
+    "role": "gold",
+    "title": "Moon Gleam"
+  },
+  "prismBurst": {
+    "asset": "ench_burps_rainbows",
+    "base": 40,
+    "exemplars": [
+      "Adventurine"
+    ],
+    "role": "peg_damage",
+    "title": "Prism Burst"
+  },
+  "sockSnatch": {
+    "asset": "ench_hides_your_socks",
+    "base": 30,
+    "exemplars": [
+      "Short Fuse"
+    ],
+    "role": "bomb_payout",
+    "title": "Sock Snatch"
+  },
+  "softPurr": {
+    "asset": "ench_purrs_when_you_sit",
+    "base": 40,
+    "exemplars": [
+      "Round Guard",
+      "Refreshield"
+    ],
+    "role": "defensive",
+    "title": "Soft Purr"
+  }
+}

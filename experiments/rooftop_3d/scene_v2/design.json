@@ -1,0 +1,13 @@
+{
+  "revision": "B01",
+  "purpose": "Complete modular scene built around the user's beside-the-tree viewpoint",
+  "units": "Adopted scene metres; not a measured building",
+  "camera_intent": "Tree close on the left and overhead, couch leading to the door, open mountain view to the right. Tripod is a metaphor, not a measurement.",
+  "alcove": {"origin": [-2.5, 3.0, 0], "yaw_degrees": 6},
+  "deck": {"origin": [-0.75, 2.65, 0], "yaw_degrees": -45, "x_min": -4.0, "x_max": 6.8, "y_min": -6.8, "y_max": 0.13, "board_width": 0.23, "gap": 0.007, "thickness": 0.07},
+  "railing": {"start_u": 0, "end_u": 6.65, "v": 0, "height": 1.16},
+  "sofa": {"center": [-3.15,-0.5,0], "width": 1.15, "length": 3.4},
+  "tree": {"foreground_path": [[-4.65,-2.65,-1.1],[-4.55,-2.5,0],[-4.68,-2.0,1.15],[-4.35,-1.2,2.65],[-3.9,-0.3,3.75],[-2.8,0.8,4.7],[-1.4,1.6,4.9],[0.5,2.2,5.0],[3.0,2.7,5.05],[5.5,3.5,5.6]], "foreground_radii": [0.9,0.70,0.62,0.56,0.51,0.45,0.36,0.28,0.19,0.035]},
+  "camera": {"location": [-4.0,-8.0,3.0], "target": [0.3,3.0,1.0], "lens_mm": 32, "shift_x": 0, "shift_y": 0},
+  "rules": ["Geometry is defined in world coordinates, independently of cameras", "Boards and main railing share local X; joists cross at 90 degrees", "Timber, bark, cushions, blossoms, lanterns and environment remain separate", "Retain original architectural alcove bearing geometry through a rigid placement", "No literal tripod constraint", "Foreground platform boundary is the extent of this room study; adjacent circulation is unfinished"]
+}

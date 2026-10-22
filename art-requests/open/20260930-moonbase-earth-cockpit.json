@@ -1,0 +1,45 @@
+{
+  "id": "20260930-moonbase-earth-cockpit",
+  "semanticId": "plate.moonBase.earthCockpit",
+  "status": "open",
+  "priority": "high",
+  "type": "plate",
+  "brief": "Construction-blueprint / chalk-draw intentional plate of Earth-view cockpit: curved window framing chalk Earth, big-button control panel, chair outline. Labels EARTH COCKPIT (TBD), WINDOW TO EARTH. No faces.",
+  "aspect": "3:2",
+  "styleNotes": "Cyan blueprint paper with light cyan grid; white chalk outlines and chalk-dust labels; intentional unfinished construction plan look. No photorealism, no painted textures, no characters, no faces, no Daddy portraits.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/plate.moonBase.earthCockpit.png",
+    "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/provenance.json",
+    "AssetSources/MoonBase/blueprints-2026-09-30/mcp-registered/provenance.json",
+    "AssetSources/MoonBase/blueprints-2026-09-30/HANDOFF.md"
+  ],
+  "promptSeeds": [
+    "Cyan blueprint chalk sketch Earth cockpit window planet Earth control panel big buttons chair EARTH COCKPIT (TBD) construction plan not final no faces"
+  ],
+  "requestedBy": "Art callsign / Moon Base MVP",
+  "createdAt": "2026-09-30T20:06:00-04:00",
+  "requestedAt": "2026-09-30T20:06:00-04:00",
+  "productionIntent": "concept_only",
+  "gameArea": "moonBase",
+  "usage": "Earth cockpit interior plate for Moon Base MVP scaffolding",
+  "placeholder": {
+    "type": "temp_prototype",
+    "detail": "Local chalk PNG keyed to plate.*; MCP registered under poi.moonBase.earthCockpit.interior (plate.* invalid on MCP)."
+  },
+  "acceptanceCriteria": [
+    "Reads as chalk-on-blueprint construction plan, not polished final",
+    "Cockpit + Earth window readable without characters",
+    "No faces / no Daddy portraits"
+  ],
+  "existingAssetSemanticIds": [
+    "poi.moonBase.earthCockpit.interior"
+  ],
+  "fulfillment": {
+    "mcpJobId": "job_muorw69z_phdc7a",
+    "registrySemanticId": "poi.moonBase.earthCockpit.interior",
+    "registryRevision": 1,
+    "localChalk": "AssetSources/MoonBase/blueprints-2026-09-30/local-chalk-labeled/plate.moonBase.earthCockpit.png",
+    "note": "Stable forever ID plate.moonBase.earthCockpit; registry bridge poi.moonBase.earthCockpit.interior"
+  }
+}

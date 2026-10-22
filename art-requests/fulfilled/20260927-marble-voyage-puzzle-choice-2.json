@@ -1,0 +1,31 @@
+{
+  "id": "20260927-marble-voyage-puzzle-choice-2",
+  "semanticId": "plate.marbleVoyage.unlock.puzzleChoice2",
+  "status": "fulfilled",
+  "priority": "normal",
+  "type": "plate",
+  "brief": "Approved floating-island jigsaw picture choice 2: Ancient arches and waterfall. Use as one of four selectable puzzle images inside the book.",
+  "aspect": "4:3",
+  "styleNotes": "User-approved painterly cel-shaded floating-island sanctuary artwork; preserve exact original.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/unlock-puzzle-choices-2026-09-27/floating-island-choice-2.jpeg",
+    "AssetSources/MarbleVoyage/unlock-puzzle-choices-2026-09-27/provenance.json",
+    "AssetSources/MarbleVoyage/unlock-puzzle-choices-2026-09-27/HANDOFF.md"
+  ],
+  "promptSeeds": [],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-27T14:12:18.003933+00:00",
+  "productionIntent": "runtime_bind",
+  "referenceRequestIds": [
+    "20260927-marble-voyage-open-book-board",
+    "20260927-marble-voyage-world-book"
+  ],
+  "fulfillment": {
+    "completedAt": "2026-09-27T14:12:18.003933+00:00",
+    "completedBy": "Codex Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/unlock-puzzle-choices-2026-09-27/floating-island-choice-2.jpeg",
+    "sourceHashSha256": "b62086ea740ba8abb17e257a71547a68a095b412e4ee1bc920ac6468a9e4184f",
+    "notes": "Exact approved source delivered. Builder must expose as a selectable jigsaw picture, generate/mask separate movable pieces, fit within the approved book board and verify in app. No runtime binding performed."
+  }
+}

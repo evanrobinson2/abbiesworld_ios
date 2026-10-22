@@ -1,0 +1,65 @@
+{
+  "id": "20260926-power-icon-bubble",
+  "semanticId": "ui.plink.power.icon.bubble",
+  "status": "fulfilled",
+  "priority": "low",
+  "type": "ui_icon",
+  "kind": "ui",
+  "brief": "Future power-up proposal: Bubble. Proposed mechanic: Wrap the marble in a protective bubble that absorbs one hazard hit. Artwork: One mint marble inside a large pale aqua bubble with a single brass shield notch. Art request only; gameplay is not implemented or approved for shipping.",
+  "aspect": "1:1",
+  "styleNotes": "Match approved Tilt candidate 4: dark teal enamel disc, warm brass rim, bold dark contours, chunky hand-painted shapes, restrained cel shading, generous transparent corners. One readable central motif; no text, opaque square or checkerboard.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/PlinkPowerUp.swift",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/bubble-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/bubble-transparent.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/bubble-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md"
+  ],
+  "promptSeeds": [
+    "Single circular children game power emblem. One mint marble inside a large pale aqua bubble with a single brass shield notch. Dark teal enamel disc, warm brass rim, bold dark contours, chunky hand painted cel shading, minimal detail, readable at 56 pixels. Isolated on pure white for later alpha extraction. No text. --ar 1:1 --stylize 100 --sref https://cdn.midjourney.com/15015adc-6c98-4af7-8683-ae94c2830cd4/0_3.jpeg"
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-26T21:17:02.827781+00:00",
+  "gameArea": "Marble Voyage / future Plink powers",
+  "surface": "Future battle power tray",
+  "usage": "Proposed catalog world2_plink_power_icon_bubble; do not add runtime enum until gameplay work is authorized.",
+  "targetPixelSize": "1024px source; transparent master suitable for 56\u201372pt runtime",
+  "expectedBackground": "True RGBA transparency outside emblem",
+  "characterOrAssetName": "Bubble power icon",
+  "productionIntent": "concept_only",
+  "existingAssetSemanticIds": [
+    "ui.plink.power.icon.tilt"
+  ],
+  "referenceRequestIds": [
+    "20260926-power-icon-tilt"
+  ],
+  "acceptanceCriteria": [
+    "Match approved Tilt palette, rim and line weight",
+    "Distinct central motif at 56pt",
+    "No baked text or checkerboard",
+    "True transparent corners for production derivative",
+    "Remain proposal-only until mechanic is approved"
+  ],
+  "sessionNote": "Evan authorized icon artwork production. Gameplay remains an unimplemented proposal; do not add to runtime without separate gameplay authorization.",
+  "proposedGameplay": {
+    "summary": "Wrap the marble in a protective bubble that absorbs one hazard hit.",
+    "designRisk": "Protection consumes on one hazard, not immunity for the whole shot.",
+    "status": "proposal"
+  },
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:58:51.429719+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/bubble-transparent.png",
+    "sourceHashSha256": "ea86711ca30629cbca04bf1193c767d566589e6d2b5d329f08b64f51719feeaf",
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_bubble. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_bubble (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_bubble",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_bubble.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  }
+}

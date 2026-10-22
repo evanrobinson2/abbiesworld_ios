@@ -1,0 +1,202 @@
+{
+  "ui.plink.power.icon.tilt": {
+    "filename": "tilt-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      104,
+      104,
+      1148,
+      1149
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.fire": {
+    "filename": "fire-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      54,
+      49,
+      1201,
+      1203
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.refresh": {
+    "filename": "refresh-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      57,
+      61,
+      1188,
+      1200
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.split": {
+    "filename": "split-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      78,
+      77,
+      1177,
+      1177
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.magnet": {
+    "filename": "magnet-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      55,
+      51,
+      1196,
+      1183
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.bounce": {
+    "filename": "bounce-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      57,
+      47,
+      1194,
+      1177
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.bubble": {
+    "filename": "bubble-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      74,
+      74,
+      1170,
+      1171
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.spark": {
+    "filename": "spark-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      68,
+      65,
+      1184,
+      1181
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.ghost": {
+    "filename": "ghost-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      76,
+      72,
+      1174,
+      1171
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  },
+  "ui.plink.power.icon.giant": {
+    "filename": "giant-transparent.png",
+    "canvasPixels": [
+      1254,
+      1254
+    ],
+    "visibleBoundsAlpha16": [
+      53,
+      49,
+      1202,
+      1192
+    ],
+    "targetVisibleBoundsNormalized": [
+      0.085,
+      0.085,
+      0.915,
+      0.915
+    ],
+    "notes": "Builder placement guide, not a normalized raster export. Fit optical circle consistently; outer bounds can include motif protrusions in older icons. Painted rims are not pixel-identical."
+  }
+}

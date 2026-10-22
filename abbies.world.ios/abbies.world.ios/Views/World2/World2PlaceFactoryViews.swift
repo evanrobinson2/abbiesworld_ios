@@ -32,14 +32,6 @@ struct World2SelfReplicatingFactoryView: View {
 
             VStack(spacing: 20) {
                 HStack {
-                    Button(action: onExit) {
-                        Label("Blank Slate", systemImage: "arrow.left")
-                            .font(.system(size: 15, weight: .black, design: .rounded))
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.white.opacity(0.22))
-                    .accessibilityIdentifier("world2.poiFactory.exit")
-
                     Spacer()
 
                     VStack(spacing: 1) {
@@ -140,6 +132,10 @@ struct World2SelfReplicatingFactoryView: View {
         }
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.poiFactory")
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.poiFactory.exit",
+            onExit: onExit
+        )
         .onAppear {
             World2Diagnostics.log(
                 "place_factory_activity_opened",

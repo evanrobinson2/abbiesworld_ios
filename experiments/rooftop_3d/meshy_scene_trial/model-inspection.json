@@ -1,0 +1,17 @@
+{
+  "glb_version": 2,
+  "declared_size_matches": true,
+  "glb_MiB": 35.05,
+  "mesh_count": 1,
+  "vertices": 411658,
+  "triangles": 727956,
+  "materials": 1,
+  "embedded_images": 3,
+  "nodes": [
+    {
+      "name": null,
+      "mesh": 0
+    }
+  ],
+  "usdz_valid_zip": true
+}

@@ -1,0 +1,12 @@
+{
+  "data": [
+    {
+      "filename": "ambient_config.json",
+      "idiom": "universal"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}

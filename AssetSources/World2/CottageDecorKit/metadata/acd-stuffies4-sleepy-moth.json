@@ -1,0 +1,26 @@
+{
+  "cropBounds": [
+    680,
+    20,
+    1010,
+    500
+  ],
+  "derivativeSha256": "ff6f1ed65764025c34e260c5d583310399f3c217d8351f646c05d7cf5c4626a0",
+  "packSemanticId": "pack.abbieCottage.stuffies.sheet4",
+  "processing": "existing cottage pipeline component extraction; explicit object cells",
+  "reviewStatus": "pending_visual_review",
+  "semanticId": "decor.abbieCottage.acd-stuffies4-sleepy-moth",
+  "source": {
+    "approval": "Evan: great add #2 and 4 to the game",
+    "candidateIndex": 3,
+    "filename": "stuffies-sheet-4-approved.jpeg",
+    "jobId": "897e3259-3878-40c6-bcf0-ba2dad75a636",
+    "objectCount": 6,
+    "semanticId": "pack.abbieCottage.stuffies.sheet4",
+    "sha256": "3549431323cb7ead1978aa1b527833803500ef55fce70d0f0cde36e5a3d381fb",
+    "sourceProvider": "Midjourney",
+    "sourceUrl": "https://cdn.midjourney.com/897e3259-3878-40c6-bcf0-ba2dad75a636/0_3.jpeg",
+    "status": "approved_source"
+  },
+  "sourcePath": "AssetSources/World2/cottage-stuffies-2026-09-27/stuffies-sheet-4-approved.jpeg"
+}

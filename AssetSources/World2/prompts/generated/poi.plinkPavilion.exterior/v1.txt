@@ -1,0 +1,6 @@
+Kid-safe LEGO brick garden pavilion for Abbie's World Lego Citadel.
+Round glass-and-studs pavilion made of bright toy bricks (red, yellow, cyan, pink).
+A small pink marble fountain sits on the roof — flower-like, not a cannon or gun.
+Empty pad around the building, no people, no readable text, no logos, no PopCap/Peggle branding.
+Transparent or clean studio cutout suitable as a map POI exterior sprite.
+Orthographic-ish toy photography, soft daylight, cheerful, ages 5–8.

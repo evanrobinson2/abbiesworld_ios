@@ -1,0 +1,19 @@
+---
+description: Keep Mac and Windows execution-capacity workers in lockstep
+globs: prototypes/execution-capacity/**,scripts/execution_capacity*,docs/architecture/EXECUTION_CAPACITY.md,docs/architecture/MIDJOURNEY_LOCAL_BRIDGE.md
+alwaysApply: true
+---
+
+# Execution capacity — Mac and Windows together
+
+When you change the **Mac** Midjourney worker, change the **Windows** worker in the **same change set**. Do not ship Mac-only fill/submit/harvest, queue, tray, or operator-doc behavior.
+
+**Shared (edit once):** `prototypes/execution-capacity/js/*.js` — both drivers run this.
+
+**Pair the drivers:** `browser_mj.py` (Apple Events) and `browser_cdp.py` (Chrome DevTools). Same Create-only `/imagine` targeting, same JS, same timeouts/error shapes.
+
+**Pair the operators:** `scripts/execution_capacity.sh` and `scripts/execution_capacity.ps1` — start/stop/status/submit/open/login-install, port **8780** refuse-if-busy, token `~/.abbies_world_token`.
+
+**Pair the trays:** `tray_app.py` and `tray_app_win.py`.
+
+Never invent a Windows-only protocol. If CDP vs Apple Events must differ, keep the job contract identical and document the delta in `docs/architecture/EXECUTION_CAPACITY.md`.

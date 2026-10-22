@@ -1,0 +1,39 @@
+{
+  "job": "5ef6a98f-873b-44a1-b703-812280147f2a",
+  "status": "rejected",
+  "reason": "All four preserve relaxed smiles, upright ears and play pose. None communicates fear. Composite omni reference overconstrained expression; correction removes it.",
+  "sources": [
+    {
+      "contentType": "image/jpeg",
+      "id": "bc215b8ae8591798",
+      "kind": "image",
+      "name": "0_0.jpeg",
+      "path": "/var/folders/v6/6c8c4cts6vn05bsx382902mc0000gn/T/browser-use/assets/8afba841-3c64-4fdc-9196-06afaf8bde84/bc215b8ae8591798.jpeg",
+      "url": "https://cdn.midjourney.com/5ef6a98f-873b-44a1-b703-812280147f2a/0_0.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "7fb4676800c74b82",
+      "kind": "image",
+      "name": "0_3.jpeg",
+      "path": "/var/folders/v6/6c8c4cts6vn05bsx382902mc0000gn/T/browser-use/assets/8afba841-3c64-4fdc-9196-06afaf8bde84/7fb4676800c74b82.jpeg",
+      "url": "https://cdn.midjourney.com/5ef6a98f-873b-44a1-b703-812280147f2a/0_3.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "bbc24ca302720e0b",
+      "kind": "image",
+      "name": "0_2.jpeg",
+      "path": "/var/folders/v6/6c8c4cts6vn05bsx382902mc0000gn/T/browser-use/assets/8afba841-3c64-4fdc-9196-06afaf8bde84/bbc24ca302720e0b.jpeg",
+      "url": "https://cdn.midjourney.com/5ef6a98f-873b-44a1-b703-812280147f2a/0_2.jpeg"
+    },
+    {
+      "contentType": "image/jpeg",
+      "id": "705020cb56ebbbf5",
+      "kind": "image",
+      "name": "0_1.jpeg",
+      "path": "/var/folders/v6/6c8c4cts6vn05bsx382902mc0000gn/T/browser-use/assets/8afba841-3c64-4fdc-9196-06afaf8bde84/705020cb56ebbbf5.jpeg",
+      "url": "https://cdn.midjourney.com/5ef6a98f-873b-44a1-b703-812280147f2a/0_1.jpeg"
+    }
+  ]
+}

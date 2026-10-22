@@ -1,0 +1,298 @@
+{
+  "version": 1,
+  "sourceSHA256": "e442e7bcbff2fda56efa31c65208bbabe1baecf3afb3299b1c0e1b8d690e9e34",
+  "coordinates": "meters, Y up; converted from Blender (x,z,-y)",
+  "camera": {
+    "position": [
+      -3.1,
+      2.65,
+      5.8
+    ],
+    "target": [
+      0.7,
+      1.3,
+      -3
+    ],
+    "verticalFOV": 58.91932333166504,
+    "aspect": 1.3278008298755186
+  },
+  "lighting": "UV baked Cycles direct/indirect sunset and roof shade; no projected reference image, live shadows or volume",
+  "parts": [
+    {
+      "name": "architecture",
+      "texture": "rooftop-architecture.png",
+      "mesh": "rooftop-architecture.rtmesh",
+      "size": 2048,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 15296,
+      "triangles": 7989,
+      "bakeSeconds": 43.5
+    },
+    {
+      "name": "deck",
+      "texture": "rooftop-deck.png",
+      "mesh": "rooftop-deck.rtmesh",
+      "size": 2048,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 32251,
+      "triangles": 17198,
+      "bakeSeconds": 30.5
+    },
+    {
+      "name": "branches",
+      "texture": "rooftop-branches.png",
+      "mesh": "rooftop-branches.rtmesh",
+      "size": 1024,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 4234,
+      "triangles": 5292,
+      "bakeSeconds": 8.0
+    },
+    {
+      "name": "tree",
+      "texture": "rooftop-tree.png",
+      "mesh": "rooftop-tree.rtmesh",
+      "size": 2048,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 16367,
+      "triangles": 24883,
+      "bakeSeconds": 45.5
+    },
+    {
+      "name": "cushions",
+      "texture": "rooftop-cushions.png",
+      "mesh": "rooftop-cushions.rtmesh",
+      "size": 1024,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 3024,
+      "triangles": 1512,
+      "bakeSeconds": 14.3
+    },
+    {
+      "name": "lantern_0",
+      "texture": "rooftop-lantern_0.png",
+      "mesh": "rooftop-lantern_0.rtmesh",
+      "size": 256,
+      "motion": "lantern",
+      "pivot": [
+        0.75,
+        4.849999904632568,
+        -2.75
+      ],
+      "vertices": 2625,
+      "triangles": 2160,
+      "bakeSeconds": 0.5
+    },
+    {
+      "name": "lantern_1",
+      "texture": "rooftop-lantern_1.png",
+      "mesh": "rooftop-lantern_1.rtmesh",
+      "size": 256,
+      "motion": "lantern",
+      "pivot": [
+        1.850000023841858,
+        4.730000019073486,
+        -2.9000000953674316
+      ],
+      "vertices": 2407,
+      "triangles": 2162,
+      "bakeSeconds": 0.5
+    },
+    {
+      "name": "lantern_2",
+      "texture": "rooftop-lantern_2.png",
+      "mesh": "rooftop-lantern_2.rtmesh",
+      "size": 256,
+      "motion": "lantern",
+      "pivot": [
+        3.700000047683716,
+        4.300000190734863,
+        -2.9000000953674316
+      ],
+      "vertices": 2558,
+      "triangles": 2162,
+      "bakeSeconds": 0.6
+    },
+    {
+      "name": "lantern_3",
+      "texture": "rooftop-lantern_3.png",
+      "mesh": "rooftop-lantern_3.rtmesh",
+      "size": 256,
+      "motion": "lantern",
+      "pivot": [
+        5.0,
+        4.099999904632568,
+        -2.700000047683716
+      ],
+      "vertices": 2545,
+      "triangles": 2162,
+      "bakeSeconds": 0.6
+    },
+    {
+      "name": "distance",
+      "texture": "rooftop-distance.png",
+      "mesh": "rooftop-distance.rtmesh",
+      "size": 1024,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 13996,
+      "triangles": 8962,
+      "bakeSeconds": 4.5
+    },
+    {
+      "name": "fairylights",
+      "texture": "rooftop-fairylights.png",
+      "mesh": "rooftop-fairylights.rtmesh",
+      "size": 512,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 7589,
+      "triangles": 3672,
+      "bakeSeconds": 0.9
+    },
+    {
+      "name": "roof",
+      "texture": "rooftop-roof.png",
+      "mesh": "rooftop-roof.rtmesh",
+      "size": 1024,
+      "motion": "static",
+      "pivot": [
+        0.0,
+        0.0,
+        -0.0
+      ],
+      "vertices": 11231,
+      "triangles": 5688,
+      "bakeSeconds": 10.4
+    },
+    {
+      "name": "foliage_2",
+      "texture": "rooftop-foliage_2.png",
+      "mesh": "rooftop-foliage_2.rtmesh",
+      "size": 256,
+      "motion": "foliage",
+      "pivot": [
+        -3.756632089614868,
+        4.19830322265625,
+        -1.2179973125457764
+      ],
+      "shading": "whole-flower palette with baked directional tint; no tiny UV islands",
+      "vertices": 43680,
+      "triangles": 21840,
+      "bakeSeconds": 0.4
+    },
+    {
+      "name": "foliage_4",
+      "texture": "rooftop-foliage_4.png",
+      "mesh": "rooftop-foliage_4.rtmesh",
+      "size": 256,
+      "motion": "foliage",
+      "pivot": [
+        3.6287670135498047,
+        5.032290458679199,
+        -3.7550535202026367
+      ],
+      "shading": "whole-flower palette with baked directional tint; no tiny UV islands",
+      "vertices": 49280,
+      "triangles": 24640,
+      "bakeSeconds": 0.4
+    },
+    {
+      "name": "foliage_5",
+      "texture": "rooftop-foliage_5.png",
+      "mesh": "rooftop-foliage_5.rtmesh",
+      "size": 256,
+      "motion": "foliage",
+      "pivot": [
+        5.856186389923096,
+        5.039409160614014,
+        -3.7438557147979736
+      ],
+      "shading": "whole-flower palette with baked directional tint; no tiny UV islands",
+      "vertices": 22960,
+      "triangles": 11480,
+      "bakeSeconds": 0.2
+    },
+    {
+      "name": "foliage_3",
+      "texture": "rooftop-foliage_3.png",
+      "mesh": "rooftop-foliage_3.rtmesh",
+      "size": 256,
+      "motion": "foliage",
+      "pivot": [
+        0.44966137409210205,
+        4.5577898025512695,
+        -3.1962227821350098
+      ],
+      "shading": "whole-flower palette with baked directional tint; no tiny UV islands",
+      "vertices": 12880,
+      "triangles": 6440,
+      "bakeSeconds": 0.1
+    },
+    {
+      "name": "foliage_1",
+      "texture": "rooftop-foliage_1.png",
+      "mesh": "rooftop-foliage_1.rtmesh",
+      "size": 256,
+      "motion": "foliage",
+      "pivot": [
+        -2.194490671157837,
+        -0.05872329697012901,
+        1.2712314128875732
+      ],
+      "shading": "whole-flower palette with baked directional tint; no tiny UV islands",
+      "vertices": 28000,
+      "triangles": 14000,
+      "bakeSeconds": 0.2
+    },
+    {
+      "name": "foliage_0",
+      "texture": "rooftop-foliage_0.png",
+      "mesh": "rooftop-foliage_0.rtmesh",
+      "size": 256,
+      "motion": "foliage",
+      "pivot": [
+        -4.289999961853027,
+        0.10700000822544098,
+        2.759999990463257
+      ],
+      "shading": "whole-flower palette with baked directional tint; no tiny UV islands",
+      "vertices": 6265,
+      "triangles": 2555,
+      "bakeSeconds": 0.1
+    }
+  ]
+}

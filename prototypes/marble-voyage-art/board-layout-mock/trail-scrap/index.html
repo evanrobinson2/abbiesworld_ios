@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Campaign fight cards — layout mock</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #f4f7fb;
+      --muted: rgba(244, 247, 251, 0.7);
+      --panel: rgba(6, 14, 24, 0.78);
+      --stroke: rgba(255, 255, 255, 0.2);
+      --mint: #72ef9d;
+      --summit: #f23d66;
+      --land: #ff8a3d;
+      --scrap: #8ec5ff;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background:
+        radial-gradient(900px 420px at 80% 10%, rgba(90, 40, 70, 0.28), transparent 55%),
+        linear-gradient(165deg, #050b14 0%, #0a1628 50%, #071018 100%);
+      color: var(--ink);
+      font-family: "Nunito", system-ui, sans-serif;
+    }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 1.25rem clamp(1rem, 3vw, 2rem) 2.5rem;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 1rem;
+    }
+    .banner h1 {
+      margin: 0 0 0.35rem;
+      font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+      font-weight: 900;
+    }
+    .banner p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 40rem;
+      line-height: 1.45;
+    }
+    .stage {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 0;
+    }
+    .card {
+      width: min(420px, 100%);
+      padding: 1.15rem 1.25rem 1.2rem;
+      border-radius: 24px;
+      background: var(--panel);
+      border: 2px solid var(--accent, var(--scrap));
+      box-shadow: 0 24px 50px rgba(0,0,0,0.45);
+      display: grid;
+      gap: 0.85rem;
+    }
+    .role {
+      margin: 0;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent, var(--scrap));
+    }
+    .art {
+      margin: 0;
+      aspect-ratio: 1;
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% 30%, rgba(255,255,255,0.08), transparent 50%),
+        rgba(0,0,0,0.35);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .art img {
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.45));
+    }
+    .name {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .stage-title {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 800;
+      color: var(--muted);
+    }
+    .blurb {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.4;
+      color: rgba(255,255,255,0.92);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.55rem;
+    }
+    .stat {
+      padding: 0.55rem 0.65rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+    }
+    .stat .k {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--accent, var(--scrap));
+      opacity: 0.9;
+    }
+    .stat .v {
+      font-size: 1.25rem;
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+    .counter {
+      margin: 0;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--muted);
+    }
+    .transport {
+      justify-self: end;
+      display: inline-flex;
+      gap: 0.35rem;
+      padding: 0.35rem;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.55);
+      border: 1px solid var(--stroke);
+    }
+    .transport button {
+      width: 48px;
+      height: 48px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font: inherit;
+      font-weight: 900;
+      font-size: 1.05rem;
+      cursor: pointer;
+    }
+    .transport button:hover:not(:disabled) {
+      background: rgba(255,255,255,0.16);
+    }
+    .transport button:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+    .transport button.primary {
+      background: rgba(114, 239, 157, 0.22);
+      color: var(--mint);
+    }
+    .foot {
+      color: var(--muted);
+      font-size: 0.85rem;
+      line-height: 1.45;
+    }
+    .foot code {
+      font-size: 0.8rem;
+      background: rgba(255,255,255,0.08);
+      padding: 0.1rem 0.35rem;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="banner">
+      <h1>Campaign fight cards</h1>
+      <p>
+        Static cast cards for every climb fight (sample seed roster + real art).
+        Use <strong>previous / next / skip</strong> — design-only, not in the app.
+      </p>
+    </header>
+
+    <main class="stage">
+      <article class="card" id="card" aria-live="polite">
+        <p class="role" id="role">SUMMIT BOSS</p>
+        <figure class="art"><img id="art" src="assets/nib.png" alt="" /></figure>
+        <h2 class="name" id="name">NIB</h2>
+        <p class="stage-title" id="stageTitle">Summit · Nib</p>
+        <p class="blurb" id="blurb">…</p>
+        <div class="stats">
+          <div class="stat"><span class="k">HP</span><span class="v" id="hp">44</span></div>
+          <div class="stat"><span class="k">ATK</span><span class="v" id="atk">12</span></div>
+          <div class="stat"><span class="k">THREAT</span><span class="v" id="threat">1</span></div>
+        </div>
+        <p class="counter" id="counter">1 / 13</p>
+      </article>
+    </main>
+
+    <div class="transport" role="group" aria-label="Cast transport">
+      <button type="button" id="prev" aria-label="Previous fight">‹</button>
+      <button type="button" id="next" class="primary" aria-label="Next fight">›</button>
+      <button type="button" id="skip" aria-label="Skip to end">›|</button>
+    </div>
+
+    <p class="foot">
+      Open: <code>board-layout-mock/trail-scrap/index.html</code>
+      · Art under <code>assets/</code>
+      · Keep out of the Xcode target.
+    </p>
+  </div>
+
+  <script>
+    // Sample campaign cast (design order). Opening fight is always Porcupine.
+    const FIGHTS = [
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Porcupine",
+        stageTitle: "Trail scrap",
+        art: "assets/porcupine-boxer.png",
+        blurb: "First scrap on the trail. Quills up, gloves on, ready to bounce Abbie back.",
+        hp: 44, atk: 12, threat: 1,
+      },
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Coyote",
+        stageTitle: "Bridge scrap",
+        art: "assets/coyoteBruiser.png",
+        blurb: "A spike-shouldered coyote who loves a loud scrap.",
+        hp: 38, atk: 12, threat: 2,
+      },
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Punk",
+        stageTitle: "Cliff scrap",
+        art: "assets/gangFox.png",
+        blurb: "Punk fox with a smirk. Fast paws, faster getaways.",
+        hp: 38, atk: 12, threat: 3,
+      },
+      {
+        role: "LAND BOSS",
+        accent: "var(--land)",
+        name: "Raze",
+        stageTitle: "Raze’s gate",
+        art: "assets/raze.png",
+        blurb: "Lead bruiser of the crew. Hits hard, laughs louder, and never waits his turn.",
+        hp: 108, atk: 16, threat: 4,
+      },
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Hyena",
+        stageTitle: "Canal scrap",
+        art: "assets/hyena.png",
+        blurb: "Laughs while it lunges. Don’t let the giggle fool you.",
+        hp: 38, atk: 12, threat: 5,
+      },
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Liz",
+        stageTitle: "Market scrap",
+        art: "assets/lizard.png",
+        blurb: "Slippery fighter. Leaves a trail of trouble.",
+        hp: 38, atk: 12, threat: 6,
+      },
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Vulture",
+        stageTitle: "Rooftop scrap",
+        art: "assets/vulture.png",
+        blurb: "Circles overhead and dives when Abbie’s busy.",
+        hp: 32, atk: 12, threat: 7,
+      },
+      {
+        role: "LAND BOSS",
+        accent: "var(--land)",
+        name: "Vix",
+        stageTitle: "Vix’s gate",
+        art: "assets/vix.png",
+        blurb: "The lieutenant. Cool head, sharp plans, and sharper teeth.",
+        hp: 108, atk: 18, threat: 8,
+      },
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Coyote",
+        stageTitle: "Fog scrap",
+        art: "assets/coyoteBruiser.png",
+        blurb: "Another spike coyote in the fog — louder this time.",
+        hp: 38, atk: 13, threat: 9,
+      },
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Hyena",
+        stageTitle: "Ruin scrap",
+        art: "assets/hyena.png",
+        blurb: "Ruin-dwelling hyena. Same laugh, harder hit.",
+        hp: 38, atk: 13, threat: 10,
+      },
+      {
+        role: "FIGHT",
+        accent: "var(--scrap)",
+        name: "Punk",
+        stageTitle: "Spire scrap",
+        art: "assets/gangFox.png",
+        blurb: "Last scrap before the land gate. Smirk optional.",
+        hp: 38, atk: 13, threat: 11,
+      },
+      {
+        role: "LAND BOSS",
+        accent: "var(--land)",
+        name: "Morrow",
+        stageTitle: "Morrow’s gate",
+        art: "assets/morrow.png",
+        blurb: "Quartermaster of the climb. Counts every coin, then takes them.",
+        hp: 108, atk: 17, threat: 12,
+      },
+      {
+        role: "SUMMIT BOSS",
+        accent: "var(--summit)",
+        name: "Nib",
+        stageTitle: "Summit · Nib",
+        art: "assets/nib.png",
+        blurb: "Vix’s hanger-on. Small claws, big mouth — and somehow still at the top.",
+        hp: 128, atk: 20, threat: 14,
+      },
+    ];
+
+    let index = 0;
+
+    const els = {
+      card: document.getElementById("card"),
+      role: document.getElementById("role"),
+      art: document.getElementById("art"),
+      name: document.getElementById("name"),
+      stageTitle: document.getElementById("stageTitle"),
+      blurb: document.getElementById("blurb"),
+      hp: document.getElementById("hp"),
+      atk: document.getElementById("atk"),
+      threat: document.getElementById("threat"),
+      counter: document.getElementById("counter"),
+      prev: document.getElementById("prev"),
+      next: document.getElementById("next"),
+      skip: document.getElementById("skip"),
+    };
+
+    function render() {
+      const f = FIGHTS[index];
+      els.card.style.setProperty("--accent", f.accent);
+      els.role.textContent = f.role;
+      els.art.src = f.art;
+      els.art.alt = f.name;
+      els.name.textContent = f.name.toUpperCase();
+      els.stageTitle.textContent = f.stageTitle;
+      els.blurb.textContent = f.blurb;
+      els.hp.textContent = String(f.hp);
+      els.atk.textContent = String(f.atk);
+      els.threat.textContent = String(f.threat);
+      els.counter.textContent = `${index + 1} / ${FIGHTS.length}`;
+      els.prev.disabled = index <= 0;
+      els.next.textContent = index >= FIGHTS.length - 1 ? "✓" : "›";
+      els.next.setAttribute(
+        "aria-label",
+        index >= FIGHTS.length - 1 ? "End of cast" : "Next fight"
+      );
+      document.title = `${f.stageTitle} — fight cards (${index + 1}/${FIGHTS.length})`;
+    }
+
+    function step(delta) {
+      index = Math.max(0, Math.min(FIGHTS.length - 1, index + delta));
+      render();
+    }
+
+    els.prev.addEventListener("click", () => step(-1));
+    els.next.addEventListener("click", () => {
+      if (index >= FIGHTS.length - 1) return;
+      step(1);
+    });
+    els.skip.addEventListener("click", () => {
+      index = FIGHTS.length - 1;
+      render();
+    });
+
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") step(-1);
+      if (e.key === "ArrowRight") step(1);
+      if (e.key === "End") {
+        index = FIGHTS.length - 1;
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>

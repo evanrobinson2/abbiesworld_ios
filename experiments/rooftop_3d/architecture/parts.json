@@ -1,0 +1,1199 @@
+[
+  {
+    "id": "T01 Hollow living trunk",
+    "group": "tree",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "T01 Hollow living trunk"
+  },
+  {
+    "id": "T02 Foreground fork",
+    "group": "fork",
+    "role": "Living branch; independent from timber",
+    "attachment": null,
+    "object": "T02 Foreground fork"
+  },
+  {
+    "id": "T03 Lower front bearing limb",
+    "group": "fork",
+    "role": "Living branch; independent from timber",
+    "attachment": null,
+    "object": "T03 Lower front bearing limb"
+  },
+  {
+    "id": "T04 Lower rear bearing limb",
+    "group": "fork",
+    "role": "Living branch; independent from timber",
+    "attachment": null,
+    "object": "T04 Lower rear bearing limb"
+  },
+  {
+    "id": "T05 Middle bearing limb",
+    "group": "fork",
+    "role": "Living branch; independent from timber",
+    "attachment": null,
+    "object": "T05 Middle bearing limb"
+  },
+  {
+    "id": "D00 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D00 Deck board"
+  },
+  {
+    "id": "D01 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D01 Deck board"
+  },
+  {
+    "id": "D02 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D02 Deck board"
+  },
+  {
+    "id": "D03 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D03 Deck board"
+  },
+  {
+    "id": "D04 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D04 Deck board"
+  },
+  {
+    "id": "D05 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D05 Deck board"
+  },
+  {
+    "id": "D06 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D06 Deck board"
+  },
+  {
+    "id": "D07 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D07 Deck board"
+  },
+  {
+    "id": "D08 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D08 Deck board"
+  },
+  {
+    "id": "D09 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D09 Deck board"
+  },
+  {
+    "id": "D10 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D10 Deck board"
+  },
+  {
+    "id": "D11 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D11 Deck board"
+  },
+  {
+    "id": "D12 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D12 Deck board"
+  },
+  {
+    "id": "D13 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D13 Deck board"
+  },
+  {
+    "id": "D14 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D14 Deck board"
+  },
+  {
+    "id": "D15 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D15 Deck board"
+  },
+  {
+    "id": "D16 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D16 Deck board"
+  },
+  {
+    "id": "D17 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D17 Deck board"
+  },
+  {
+    "id": "D18 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D18 Deck board"
+  },
+  {
+    "id": "D19 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D19 Deck board"
+  },
+  {
+    "id": "D20 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D20 Deck board"
+  },
+  {
+    "id": "D21 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D21 Deck board"
+  },
+  {
+    "id": "D22 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D22 Deck board"
+  },
+  {
+    "id": "D23 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D23 Deck board"
+  },
+  {
+    "id": "D24 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D24 Deck board"
+  },
+  {
+    "id": "D25 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D25 Deck board"
+  },
+  {
+    "id": "D26 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D26 Deck board"
+  },
+  {
+    "id": "D27 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D27 Deck board"
+  },
+  {
+    "id": "D28 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D28 Deck board"
+  },
+  {
+    "id": "D29 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D29 Deck board"
+  },
+  {
+    "id": "D30 Deck board",
+    "group": "deck",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "D30 Deck board"
+  },
+  {
+    "id": "J00 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J00 Floor joist"
+  },
+  {
+    "id": "J01 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J01 Floor joist"
+  },
+  {
+    "id": "J02 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J02 Floor joist"
+  },
+  {
+    "id": "J03 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J03 Floor joist"
+  },
+  {
+    "id": "J05 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J05 Floor joist"
+  },
+  {
+    "id": "J06 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J06 Floor joist"
+  },
+  {
+    "id": "J07 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J07 Floor joist"
+  },
+  {
+    "id": "J08 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J08 Floor joist"
+  },
+  {
+    "id": "J09 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J09 Floor joist"
+  },
+  {
+    "id": "J10 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J10 Floor joist"
+  },
+  {
+    "id": "J11 Floor joist",
+    "group": "subfloor",
+    "role": "Crosswise bearing under longitudinal deck boards",
+    "attachment": null,
+    "object": "J11 Floor joist"
+  },
+  {
+    "id": "JH-1.0 Tree-opening trimmer",
+    "group": "subfloor",
+    "role": "Doubled transverse trimmer at tree opening",
+    "attachment": null,
+    "object": "JH-1.0 Tree-opening trimmer"
+  },
+  {
+    "id": "JH-1.1 Tree-opening trimmer",
+    "group": "subfloor",
+    "role": "Doubled transverse trimmer at tree opening",
+    "attachment": null,
+    "object": "JH-1.1 Tree-opening trimmer"
+  },
+  {
+    "id": "JH1.0 Tree-opening trimmer",
+    "group": "subfloor",
+    "role": "Doubled transverse trimmer at tree opening",
+    "attachment": null,
+    "object": "JH1.0 Tree-opening trimmer"
+  },
+  {
+    "id": "JH1.1 Tree-opening trimmer",
+    "group": "subfloor",
+    "role": "Doubled transverse trimmer at tree opening",
+    "attachment": null,
+    "object": "JH1.1 Tree-opening trimmer"
+  },
+  {
+    "id": "JH0 Tree-opening inner header",
+    "group": "subfloor",
+    "role": "Header receives interrupted joist ends",
+    "attachment": null,
+    "object": "JH0 Tree-opening inner header"
+  },
+  {
+    "id": "G01 Primary girder",
+    "group": "subfloor",
+    "role": "Longitudinal girder carrying transverse joists",
+    "attachment": "Tree bearing zones",
+    "object": "G01 Primary girder"
+  },
+  {
+    "id": "G02 Primary girder",
+    "group": "subfloor",
+    "role": "Longitudinal girder carrying transverse joists",
+    "attachment": "Tree bearing zones",
+    "object": "G02 Primary girder"
+  },
+  {
+    "id": "G03 Primary girder",
+    "group": "subfloor",
+    "role": "Longitudinal girder carrying transverse joists",
+    "attachment": "Tree bearing zones",
+    "object": "G03 Primary girder"
+  },
+  {
+    "id": "G04 Chamfer ledger",
+    "group": "subfloor",
+    "role": "timber member",
+    "attachment": "Tree bearing zones",
+    "object": "G04 Chamfer ledger"
+  },
+  {
+    "id": "P01 Alcove bearing post",
+    "group": "beams",
+    "role": "timber member",
+    "attachment": "G04 Chamfer ledger",
+    "object": "P01 Alcove bearing post"
+  },
+  {
+    "id": "P02 Alcove bearing post",
+    "group": "beams",
+    "role": "timber member",
+    "attachment": "G04 Chamfer ledger",
+    "object": "P02 Alcove bearing post"
+  },
+  {
+    "id": "B01 Rear canopy and alcove header",
+    "group": "beams",
+    "role": "timber member",
+    "attachment": "P01, P02",
+    "object": "B01 Rear canopy and alcove header"
+  },
+  {
+    "id": "W00 Recess side reveal -1.25",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W00 Recess side reveal -1.25"
+  },
+  {
+    "id": "W00 Recess side reveal 1.25",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W00 Recess side reveal 1.25"
+  },
+  {
+    "id": "W01 Lower rose wall",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W01 Lower rose wall"
+  },
+  {
+    "id": "W02 Round-window panel",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W02 Round-window panel"
+  },
+  {
+    "id": "W03 Flat window surround",
+    "group": "alcove",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "W03 Flat window surround"
+  },
+  {
+    "id": "W04.0 Vertical lattice",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W04.0 Vertical lattice"
+  },
+  {
+    "id": "W04.1 Vertical lattice",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W04.1 Vertical lattice"
+  },
+  {
+    "id": "W04.2 Vertical lattice",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W04.2 Vertical lattice"
+  },
+  {
+    "id": "W05.0 Horizontal lattice",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W05.0 Horizontal lattice"
+  },
+  {
+    "id": "W05.1 Horizontal lattice",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W05.1 Horizontal lattice"
+  },
+  {
+    "id": "W06 Recessed pane",
+    "group": "alcove",
+    "role": "Fixed window glazing",
+    "attachment": null,
+    "object": "W06 Recessed pane"
+  },
+  {
+    "id": "W07 Continuous sill",
+    "group": "alcove",
+    "role": "timber member",
+    "attachment": null,
+    "object": "W07 Continuous sill"
+  },
+  {
+    "id": "F01 Bench seat",
+    "group": "furniture",
+    "role": "timber member",
+    "attachment": null,
+    "object": "F01 Bench seat"
+  },
+  {
+    "id": "F02.0 Bench leg",
+    "group": "furniture",
+    "role": "timber member",
+    "attachment": null,
+    "object": "F02.0 Bench leg"
+  },
+  {
+    "id": "F02.1 Bench leg",
+    "group": "furniture",
+    "role": "timber member",
+    "attachment": null,
+    "object": "F02.1 Bench leg"
+  },
+  {
+    "id": "B02 Front canopy beam",
+    "group": "beams",
+    "role": "timber member",
+    "attachment": "K01, K02",
+    "object": "B02 Front canopy beam"
+  },
+  {
+    "id": "K01 Canopy knee brace",
+    "group": "beams",
+    "role": "timber member",
+    "attachment": "P01/B02",
+    "object": "K01 Canopy knee brace"
+  },
+  {
+    "id": "K02 Canopy knee brace",
+    "group": "beams",
+    "role": "timber member",
+    "attachment": "P02/B02",
+    "object": "K02 Canopy knee brace"
+  },
+  {
+    "id": "R00 Seated canopy rafter",
+    "group": "rafters",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "R00 Seated canopy rafter"
+  },
+  {
+    "id": "R01 Seated canopy rafter",
+    "group": "rafters",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "R01 Seated canopy rafter"
+  },
+  {
+    "id": "R02 Seated canopy rafter",
+    "group": "rafters",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "R02 Seated canopy rafter"
+  },
+  {
+    "id": "R03 Seated canopy rafter",
+    "group": "rafters",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "R03 Seated canopy rafter"
+  },
+  {
+    "id": "R04 Seated canopy rafter",
+    "group": "rafters",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "R04 Seated canopy rafter"
+  },
+  {
+    "id": "R05 Seated canopy rafter",
+    "group": "rafters",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "R05 Seated canopy rafter"
+  },
+  {
+    "id": "R06 Seated canopy rafter",
+    "group": "rafters",
+    "role": "modeled piece",
+    "attachment": null,
+    "object": "R06 Seated canopy rafter"
+  },
+  {
+    "id": "S00 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S00 Canopy board"
+  },
+  {
+    "id": "S01 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S01 Canopy board"
+  },
+  {
+    "id": "S02 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S02 Canopy board"
+  },
+  {
+    "id": "S03 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S03 Canopy board"
+  },
+  {
+    "id": "S04 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S04 Canopy board"
+  },
+  {
+    "id": "S05 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S05 Canopy board"
+  },
+  {
+    "id": "S06 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S06 Canopy board"
+  },
+  {
+    "id": "S07 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S07 Canopy board"
+  },
+  {
+    "id": "S08 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S08 Canopy board"
+  },
+  {
+    "id": "S09 Canopy board",
+    "group": "ceiling",
+    "role": "timber member",
+    "attachment": null,
+    "object": "S09 Canopy board"
+  },
+  {
+    "id": "L0.00 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.00 Rail post"
+  },
+  {
+    "id": "L0.01 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.01 Rail post"
+  },
+  {
+    "id": "L0.02 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.02 Rail post"
+  },
+  {
+    "id": "L0.03 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.03 Rail post"
+  },
+  {
+    "id": "L0.04 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.04 Rail post"
+  },
+  {
+    "id": "L0.05 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.05 Rail post"
+  },
+  {
+    "id": "L0 Top rail",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0 Top rail"
+  },
+  {
+    "id": "L0 Lower rail",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0 Lower rail"
+  },
+  {
+    "id": "L0.01 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.01 Baluster"
+  },
+  {
+    "id": "L0.02 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.02 Baluster"
+  },
+  {
+    "id": "L0.03 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.03 Baluster"
+  },
+  {
+    "id": "L0.04 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.04 Baluster"
+  },
+  {
+    "id": "L0.05 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.05 Baluster"
+  },
+  {
+    "id": "L0.06 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.06 Baluster"
+  },
+  {
+    "id": "L0.07 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.07 Baluster"
+  },
+  {
+    "id": "L0.08 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.08 Baluster"
+  },
+  {
+    "id": "L0.09 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.09 Baluster"
+  },
+  {
+    "id": "L0.10 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.10 Baluster"
+  },
+  {
+    "id": "L0.11 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.11 Baluster"
+  },
+  {
+    "id": "L0.12 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.12 Baluster"
+  },
+  {
+    "id": "L0.13 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.13 Baluster"
+  },
+  {
+    "id": "L0.14 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.14 Baluster"
+  },
+  {
+    "id": "L0.15 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.15 Baluster"
+  },
+  {
+    "id": "L0.16 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.16 Baluster"
+  },
+  {
+    "id": "L0.17 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.17 Baluster"
+  },
+  {
+    "id": "L0.18 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.18 Baluster"
+  },
+  {
+    "id": "L0.19 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.19 Baluster"
+  },
+  {
+    "id": "L0.20 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.20 Baluster"
+  },
+  {
+    "id": "L0.21 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.21 Baluster"
+  },
+  {
+    "id": "L0.22 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.22 Baluster"
+  },
+  {
+    "id": "L0.23 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L0.23 Baluster"
+  },
+  {
+    "id": "L1.01 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.01 Rail post"
+  },
+  {
+    "id": "L1.02 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.02 Rail post"
+  },
+  {
+    "id": "L1.03 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.03 Rail post"
+  },
+  {
+    "id": "L1.04 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.04 Rail post"
+  },
+  {
+    "id": "L1.05 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.05 Rail post"
+  },
+  {
+    "id": "L1.06 Rail post",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.06 Rail post"
+  },
+  {
+    "id": "L1 Top rail",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1 Top rail"
+  },
+  {
+    "id": "L1 Lower rail",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1 Lower rail"
+  },
+  {
+    "id": "L1.01 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.01 Baluster"
+  },
+  {
+    "id": "L1.02 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.02 Baluster"
+  },
+  {
+    "id": "L1.03 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.03 Baluster"
+  },
+  {
+    "id": "L1.04 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.04 Baluster"
+  },
+  {
+    "id": "L1.05 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.05 Baluster"
+  },
+  {
+    "id": "L1.06 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.06 Baluster"
+  },
+  {
+    "id": "L1.07 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.07 Baluster"
+  },
+  {
+    "id": "L1.08 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.08 Baluster"
+  },
+  {
+    "id": "L1.09 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.09 Baluster"
+  },
+  {
+    "id": "L1.10 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.10 Baluster"
+  },
+  {
+    "id": "L1.11 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.11 Baluster"
+  },
+  {
+    "id": "L1.12 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.12 Baluster"
+  },
+  {
+    "id": "L1.13 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.13 Baluster"
+  },
+  {
+    "id": "L1.14 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.14 Baluster"
+  },
+  {
+    "id": "L1.15 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.15 Baluster"
+  },
+  {
+    "id": "L1.16 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.16 Baluster"
+  },
+  {
+    "id": "L1.17 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.17 Baluster"
+  },
+  {
+    "id": "L1.18 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.18 Baluster"
+  },
+  {
+    "id": "L1.19 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.19 Baluster"
+  },
+  {
+    "id": "L1.20 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.20 Baluster"
+  },
+  {
+    "id": "L1.21 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.21 Baluster"
+  },
+  {
+    "id": "L1.22 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.22 Baluster"
+  },
+  {
+    "id": "L1.23 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.23 Baluster"
+  },
+  {
+    "id": "L1.24 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.24 Baluster"
+  },
+  {
+    "id": "L1.25 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.25 Baluster"
+  },
+  {
+    "id": "L1.26 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.26 Baluster"
+  },
+  {
+    "id": "L1.27 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.27 Baluster"
+  },
+  {
+    "id": "L1.28 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.28 Baluster"
+  },
+  {
+    "id": "L1.29 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.29 Baluster"
+  },
+  {
+    "id": "L1.30 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.30 Baluster"
+  },
+  {
+    "id": "L1.31 Baluster",
+    "group": "railing",
+    "role": "timber member",
+    "attachment": null,
+    "object": "L1.31 Baluster"
+  },
+  {
+    "id": "F03 Sofa base",
+    "group": "furniture",
+    "role": "timber member",
+    "attachment": null,
+    "object": "F03 Sofa base"
+  },
+  {
+    "id": "F04.0 Seat cushion",
+    "group": "furniture",
+    "role": "Independent removable cushion",
+    "attachment": null,
+    "object": "F04.0 Seat cushion"
+  },
+  {
+    "id": "F05.0 Back cushion",
+    "group": "furniture",
+    "role": "Independent removable cushion",
+    "attachment": null,
+    "object": "F05.0 Back cushion"
+  },
+  {
+    "id": "F04.1 Seat cushion",
+    "group": "furniture",
+    "role": "Independent removable cushion",
+    "attachment": null,
+    "object": "F04.1 Seat cushion"
+  },
+  {
+    "id": "F05.1 Back cushion",
+    "group": "furniture",
+    "role": "Independent removable cushion",
+    "attachment": null,
+    "object": "F05.1 Back cushion"
+  },
+  {
+    "id": "F04.2 Seat cushion",
+    "group": "furniture",
+    "role": "Independent removable cushion",
+    "attachment": null,
+    "object": "F04.2 Seat cushion"
+  },
+  {
+    "id": "F05.2 Back cushion",
+    "group": "furniture",
+    "role": "Independent removable cushion",
+    "attachment": null,
+    "object": "F05.2 Back cushion"
+  }
+]

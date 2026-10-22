@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-toys-06-open-dress-up-chest",
+  "latencyMs": 3578,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.99,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Open wooden dress-up trunk with gray-blue metal bands and corner fittings, filled with a golden crown, pale blue fairy wings, and star-tipped wands.",
+    "suggestedScale": 0.8
+  },
+  "pngSha256": "615b06de799a0534f81d3d1c7a5e8a98e432bc836e5c75fb44169f7cc3afb91b",
+  "responseId": "chatcmpl-ESoLySAfqsIAOpB5r8uCC4uSleey0",
+  "timestamp": "2026-09-27T18:57:33.366439+00:00"
+}

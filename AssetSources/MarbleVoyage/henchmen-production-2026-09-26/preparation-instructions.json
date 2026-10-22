@@ -1,0 +1,12 @@
+{
+  "tool": "OpenAI built-in imagegen",
+  "mode": "source-preserving targeted edits with transparent_background=true",
+  "instructions": {
+    "crab-pincher": "Preserve teal carapace, oversized coral cuffed claw and tiny opposing claw; clarify attachment and walking-leg separation. Remove white background, ground shadow and internal white gaps. Preserve left-oriented fighting stance, source colors and painted style.",
+    "grasshopper-kickboxer": "Preserve lime wedge head, two antennae, teal thorax/abdomen and folded wings, coral limbs, black vest and guards. Resolve exactly six limbs: four small fore/middle guarding limbs and two connected powerful hind legs. Place shin guards on hind shins; remove ambiguous extra booted-leg structure. Remove white background and shadow.",
+    "armadillo-blocker": "Preserve teal body, dusty rose segmented shell, coral/teal ears, black leather harness, cream wrist guards and ringed tail. Clarify exactly four limbs: two guarded forepaws and two grounded hind legs. Remove white background, ground shadow and internal white gaps. Preserve compact braced left-oriented pose.",
+    "bat-divekicker": "Preserve teal fuzzy body, oversized ears, coral wing membranes, violet finger bones, black patched vest and ankle cuffs. Clarify two shoulder-attached wings as forelimbs with no extra arms, plus two distinct clawed feet. Keep left-oriented airborne hover and clear wing/body gaps. Remove white background and ground shadow."
+  },
+  "canvasIntent": "Portrait 3:4, complete body, safe margins; generated ground baseline varies and is recorded per asset.",
+  "batPreparationNote": "First requested attachment clarification was rejected at output by the image service. Retried once as background-only extraction preserving original pose; final provenance and visual review determine delivered status."
+}

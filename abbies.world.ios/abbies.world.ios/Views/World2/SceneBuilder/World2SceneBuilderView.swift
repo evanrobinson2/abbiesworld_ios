@@ -25,7 +25,7 @@ struct World2SceneBuilderView: View {
                 World2SemanticImage(
                     semanticName: archetype.interiorAsset ?? "poi.sceneBuilder.interior",
                     fallbackIcon: "map.fill",
-                    fallbackLabel: "Scene Builder interior artwork is not bundled"
+                    fallbackLabel: "Scene Builder is under construction"
                 )
                 .scaledToFill()
                 .frame(width: geo.size.width, height: geo.size.height)
@@ -52,26 +52,23 @@ struct World2SceneBuilderView: View {
                 if cook.activeJob?.phase == .ready {
                     readyOverlay
                 }
+
+                if cook.activeJob?.phase == .failed {
+                    failedOverlay
+                }
             }
         }
         .ignoresSafeArea()
         .accessibilityElement(children: .contain)
         .accessibilityIdentifier("world2.sceneBuilder.interior")
+        .world2InteriorActions(
+            exitAccessibilityID: "world2.sceneBuilder.exit",
+            onExit: onExit
+        )
     }
 
     private var header: some View {
         HStack {
-            Button(action: onExit) {
-                Label("Leave Atelier", systemImage: "arrow.left")
-                    .font(.system(size: 15, weight: .bold, design: .rounded))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 9)
-                    .background(.black.opacity(0.72), in: Capsule())
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("world2.sceneBuilder.exit")
-
             Spacer()
 
             VStack(alignment: .trailing, spacing: 2) {
@@ -88,25 +85,23 @@ struct World2SceneBuilderView: View {
         }
     }
 
+    private var previewImage: UIImage? {
+        if let plate = cook.plateImage { return plate }
+        let name = cook.activeJob?.previewCatalogName ?? cook.lastReadyJob?.previewCatalogName
+        return name.flatMap { AssetBootstrapService.shared.image(for: $0) }
+    }
+
     private var previewStage: some View {
         ZStack {
-            if let frame = UIImage(named: "world2_scene_preview_frame") {
-                Image(uiImage: frame)
-                    .resizable()
-                    .scaledToFit()
-            } else {
-                RoundedRectangle(cornerRadius: 18)
-                    .fill(Color(red: 0.93, green: 0.86, blue: 0.70))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 18)
-                            .stroke(Color(red: 0.72, green: 0.55, blue: 0.22), lineWidth: 4)
-                    )
-            }
+            RoundedRectangle(cornerRadius: 18)
+                .fill(Color(red: 0.93, green: 0.86, blue: 0.70))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 18)
+                        .stroke(Color(red: 0.72, green: 0.55, blue: 0.22), lineWidth: 4)
+                )
 
             Group {
-                if let previewName = cook.activeJob?.previewCatalogName
-                    ?? cook.lastReadyJob?.previewCatalogName,
-                   let preview = UIImage(named: previewName) {
+                if let preview = previewImage {
                     Image(uiImage: preview)
                         .resizable()
                         .scaledToFill()
@@ -134,17 +129,14 @@ struct World2SceneBuilderView: View {
                         selectedSlot = slot
                     } label: {
                         VStack(spacing: 6) {
-                            if let art = UIImage(named: slot.assetCatalogName) {
-                                Image(uiImage: art)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 72, height: 72)
-                            } else {
-                                RoundedRectangle(cornerRadius: 14)
-                                    .fill(.orange.opacity(0.35))
-                                    .frame(width: 72, height: 72)
-                                    .overlay(Text(slot.title).font(.caption.bold()))
-                            }
+                            RoundedRectangle(cornerRadius: 14)
+                                .fill(.orange.opacity(0.35))
+                                .frame(width: 72, height: 72)
+                                .overlay(
+                                    Image(systemName: slot.systemIcon)
+                                        .font(.system(size: 28, weight: .bold))
+                                        .foregroundStyle(.white)
+                                )
                             Text(slot.title)
                                 .font(.system(size: 11, weight: .black, design: .rounded))
                                 .foregroundStyle(.white)
@@ -205,12 +197,6 @@ struct World2SceneBuilderView: View {
             cook.startCook(recipe: recipe)
         } label: {
             HStack(spacing: 14) {
-                if let art = UIImage(named: "world2_generate_scene_button") {
-                    Image(uiImage: art)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 64, height: 64)
-                }
                 VStack(alignment: .leading, spacing: 2) {
                     Text("COOK A LAND")
                         .font(.system(size: 20, weight: .black, design: .rounded))
@@ -239,36 +225,55 @@ struct World2SceneBuilderView: View {
         ZStack {
             Color.black.opacity(0.45).ignoresSafeArea()
             VStack(spacing: 16) {
-                if let badge = UIImage(named: "world2_scene_builder_cooking_badge") {
-                    Image(uiImage: badge)
+                Text("COOKING")
+                    .font(.system(size: 36, weight: .black, design: .rounded))
+                    .foregroundStyle(.orange)
+                    .accessibilityIdentifier("world2.sceneBuilder.cookingBadge")
+                Text("Generation in progress")
+                    .font(.system(size: 22, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                if let image = cook.plateImage {
+                    Image(uiImage: image)
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 220, height: 220)
-                        .accessibilityIdentifier("world2.sceneBuilder.cookingBadge")
-                } else {
-                    Text("COOKING")
-                        .font(.system(size: 36, weight: .black, design: .rounded))
-                        .foregroundStyle(.orange)
+                        .frame(maxWidth: 280, maxHeight: 140)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                        .accessibilityIdentifier("world2.sceneBuilder.cookingPlate")
                 }
-                Text("Go play. Come back when the sign says READY.")
+                Text("The watercolor stand-in stays until the land is ready.")
                     .font(.system(size: 16, weight: .semibold, design: .rounded))
                     .foregroundStyle(.white)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 24)
-
-                Button(action: onExit) {
-                    Label("Leave Atelier", systemImage: "arrow.left")
-                        .font(.system(size: 16, weight: .bold, design: .rounded))
-                        .foregroundStyle(.white)
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 10)
-                        .background(.black.opacity(0.72), in: Capsule())
-                }
-                .buttonStyle(.plain)
-                .accessibilityIdentifier("world2.sceneBuilder.cookingExit")
             }
         }
         .accessibilityIdentifier("world2.sceneBuilder.cookingOverlay")
+    }
+
+    private var failedOverlay: some View {
+        ZStack {
+            Color.black.opacity(0.55).ignoresSafeArea()
+            VStack(spacing: 16) {
+                Text(cook.statusMessage)
+                    .font(.system(size: 20, weight: .black, design: .rounded))
+                    .foregroundStyle(.white)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal, 24)
+                if let image = cook.plateImage {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(maxWidth: 320, maxHeight: 160)
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                }
+                Button("OK") { cook.dismissReady() }
+                    .buttonStyle(.borderedProminent)
+                    .tint(.orange)
+                    .accessibilityIdentifier("world2.sceneBuilder.cookFailed")
+            }
+            .padding(24)
+        }
+        .accessibilityIdentifier("world2.sceneBuilder.failedOverlay")
     }
 
     private var readyOverlay: some View {
@@ -279,8 +284,7 @@ struct World2SceneBuilderView: View {
                     .font(.system(size: 34, weight: .black, design: .rounded))
                     .foregroundStyle(.white)
 
-                if let name = cook.activeJob?.previewCatalogName,
-                   let preview = UIImage(named: name) {
+                if let preview = previewImage {
                     Image(uiImage: preview)
                         .resizable()
                         .scaledToFit()
@@ -292,12 +296,8 @@ struct World2SceneBuilderView: View {
                         )
                 }
 
-                if let deed = UIImage(named: "world2_deed_reward") {
-                    Image(uiImage: deed)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 120, height: 120)
-                }
+                World2PropertyDeedToken()
+                    .frame(width: 120, height: 120)
 
                 Text("Your property deed is ready.")
                     .font(.system(size: 16, weight: .bold, design: .rounded))

@@ -1,0 +1,57 @@
+{
+  "revision": "B09",
+  "roof_frame_origin": [
+    -2.5,
+    3.0,
+    0.0
+  ],
+  "roof_yaw_degrees": 6,
+  "roof_front_v": -4.0,
+  "roof_rear_v": 0.15,
+  "roof_projection_m": 4.15,
+  "front_width_m": 5.02,
+  "rear_width_m": 3.4000000000000004,
+  "pitch_degrees": 14.574216198038739,
+  "independent_boards": 17,
+  "seated_rafters": 10,
+  "camera_unchanged": true,
+  "lower_tree_original_vertices_retained": true,
+  "lower_tree_added_vertices_on_existing_surface": 9,
+  "lower_tree_max_surface_departure_m": 2.384185791015625e-07,
+  "preserved_deck_furniture_alcove_objects": 209,
+  "tree_components": 1,
+  "tree_boundary_edges": 0,
+  "bulbs_hidden_inside_roof": [
+    "B08 bark fairy bulb 27",
+    "B08 bark fairy bulb 28",
+    "B08 bark fairy bulb 29",
+    "B08 bark fairy bulb 30",
+    "B08 bark fairy bulb 31",
+    "B08 bark fairy bulb 32",
+    "B08 bark fairy bulb 33",
+    "B08 bark fairy bulb 34",
+    "B08 bark fairy bulb 35",
+    "B08 bark fairy bulb 36"
+  ],
+  "scope": "Architectural scene model, not a certified building design",
+  "saved_scene_reopened": true,
+  "boards_on_rafter_plane": 17,
+  "actual_rafter_seats_verified": 18,
+  "couch_contacts": [
+    {
+      "cushion": "B back cushion 0",
+      "contact_m": -0.012000083923339844,
+      "displacement_mask": 0.0
+    },
+    {
+      "cushion": "B back cushion 1",
+      "contact_m": -0.012000083923339844,
+      "displacement_mask": 0.0
+    },
+    {
+      "cushion": "B back cushion 2",
+      "contact_m": -0.012000083923339844,
+      "displacement_mask": 0.0
+    }
+  ]
+}

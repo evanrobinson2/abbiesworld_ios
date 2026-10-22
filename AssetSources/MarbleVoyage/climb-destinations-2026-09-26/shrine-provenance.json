@@ -1,0 +1,24 @@
+{
+  "semanticId": "token.marbleVoyage.climb.shrine",
+  "filename": "shrine-original.jpeg",
+  "sourceProvider": "Midjourney",
+  "jobId": "96da9863-5921-4312-97c8-2bc6d628ab6f",
+  "candidateIndex": 3,
+  "sourceUrl": "https://cdn.midjourney.com/96da9863-5921-4312-97c8-2bc6d628ab6f/0_3.jpeg",
+  "submittedAt": "2026-09-26T21:28:11Z",
+  "sha256": "ec539f374553184720eef46315b275d7b0566cb68fd95a99918d1de445803763",
+  "selection": "Art director selection under user-authorized queue production.",
+  "promptFile": "shrine-prompt.txt",
+  "derivative": {
+    "filename": "shrine-transparent.png",
+    "sourceProvider": "OpenAI imagegen background extraction",
+    "derivativeOf": "ec539f374553184720eef46315b275d7b0566cb68fd95a99918d1de445803763",
+    "sha256": "b51cef056ff14ff99d089bf702bc5108f6c9e5b12d72c81262990bd21d9d2a19",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "maxCornerAlpha": 0,
+    "notes": "Generated extraction is not pixel-identical; original preserved."
+  }
+}

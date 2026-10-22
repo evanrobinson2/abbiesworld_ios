@@ -1,0 +1,13 @@
+{
+  "images" : [
+    {
+      "filename" : "world2_plink_gang_morrow.png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

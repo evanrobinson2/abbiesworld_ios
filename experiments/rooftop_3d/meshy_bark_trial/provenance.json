@@ -1,0 +1,46 @@
+{
+  "provider": "Meshy",
+  "task_id": "01a0e8e7-e1fe-7049-9ee7-f3a250bac867",
+  "ai_model": "meshy-6",
+  "prompt": "Ancient living cherry tree bark, richly detailed natural bark over a sculptural twisted trunk, roots and branching limbs. Deep charcoal brown with dusky violet undertones and muted reddish rose wood on worn ridge tips. Strong irregular lengthwise fissures, layered fibrous bark ridges, small organic knots and scars; grain follows each bending branch and flows around forks. Rough dry matte surface, softly rounded by age, tactile and convincing, refined painterly fantasy realism. Broad readable bark structure plus delicate fine grain. Consistent bark on every side. No leaves, flowers, vines, moss, snow, mushrooms, faces, symbols, carved ornaments, metal or varnish. Neutral even illumination, no baked highlights or cast shadows. Warm inviting enchanted treehouse material.",
+  "consumed_credits": 10,
+  "files": [
+    {
+      "file": "tree-bark-textured.glb",
+      "sha256": "32bf111d590808a9f43485867130d5d905f4caa4662689f87d89685e88dcdbe4",
+      "bytes": 15931112,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8e7-e1fe-7049-9ee7-f3a250bac867/output/model.glb"
+    },
+    {
+      "file": "texture-0-base_color.png",
+      "sha256": "7e6c1fca28f3de26d9c26e0331defef3a0b9cadaa25501ba2956f430dbb47d4c",
+      "bytes": 16567070,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8e7-e1fe-7049-9ee7-f3a250bac867/output/texture_0.png"
+    },
+    {
+      "file": "texture-0-metallic.png",
+      "sha256": "ba0983db008344dac225de6c68a87e2bf6b97a9777387a5711418e2eca2782a5",
+      "bytes": 22841,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8e7-e1fe-7049-9ee7-f3a250bac867/output/texture_0_metallic.png"
+    },
+    {
+      "file": "texture-0-roughness.png",
+      "sha256": "30b854a4e7165d3f37e1256d10d2fbd3c715b67536dbce7f478ecbf53734ebef",
+      "bytes": 786172,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8e7-e1fe-7049-9ee7-f3a250bac867/output/texture_0_roughness.png"
+    },
+    {
+      "file": "texture-0-normal.png",
+      "sha256": "69266b369ab7d5471cd91bce17101d40a504dc4ac49c26f1c070b4a77436bc48",
+      "bytes": 11394369,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8e7-e1fe-7049-9ee7-f3a250bac867/output/texture_0_normal.png"
+    },
+    {
+      "file": "texture-0-emission.png",
+      "sha256": "682b8548167be5e57208163d659d10e14aceb4f15aa3fe4963c4acbe22e333d7",
+      "bytes": 71082,
+      "source": "https://assets.meshy.ai/google-oauth2%7C116496129178597412801/tasks/01a0e8e7-e1fe-7049-9ee7-f3a250bac867/output/texture_0_emission.png"
+    }
+  ],
+  "status": "Generated candidate; pending Blender visual review"
+}

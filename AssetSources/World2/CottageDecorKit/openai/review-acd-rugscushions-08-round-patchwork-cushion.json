@@ -1,0 +1,17 @@
+{
+  "assetId": "acd-rugscushions-08-round-patchwork-cushion",
+  "latencyMs": 2061,
+  "model": "gpt-5.6-sol",
+  "parsed": {
+    "anchor": "bottom-center",
+    "confidence": 0.99,
+    "issues": [],
+    "pass": true,
+    "placementLayer": "floor",
+    "refinedDescription": "Plump round floor cushion made from irregular stitched patchwork panels in varied greens, with muted mustard-yellow accents and visible dark seam stitching.",
+    "suggestedScale": 0.8
+  },
+  "responseId": "chatcmpl-ESoBTgSp35tNfg34HyyESgGJ1Ld5F",
+  "timestamp": "2026-09-27T18:46:40.984107+00:00",
+  "pngSha256": "5cf549aa671a1c97b348f32b7d7fa8b30f0b9e219426dc868f56a8e2b9d59768"
+}

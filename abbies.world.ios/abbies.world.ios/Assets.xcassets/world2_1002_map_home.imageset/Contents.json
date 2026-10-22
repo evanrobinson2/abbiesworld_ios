@@ -1,1 +1,21 @@
-{"images":[{"filename":"world2_1002_map_home-2b442538f3a3.png","idiom":"universal","scale":"1x"},{"idiom":"universal","scale":"2x"},{"idiom":"universal","scale":"3x"}],"info":{"author":"world2-assets-pipeline","version":1},"properties":{"preserves-vector-representation":false}}
+{
+  "images": [
+    {
+      "filename": "world2_1002_map_home-74ea48d86c17.png",
+      "idiom": "universal",
+      "scale": "1x"
+    },
+    {
+      "idiom": "universal",
+      "scale": "2x"
+    },
+    {
+      "idiom": "universal",
+      "scale": "3x"
+    }
+  ],
+  "info": {
+    "author": "xcode",
+    "version": 1
+  }
+}

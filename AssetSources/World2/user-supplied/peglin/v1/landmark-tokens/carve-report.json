@@ -1,0 +1,1238 @@
+{
+  "packs": [
+    {
+      "id": "packA_isometric_fantasy",
+      "source": "image-0018be39-cae2-4750-9218-9c8d53520f15.jpg",
+      "background": [
+        194,
+        225,
+        227
+      ],
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "count": 21,
+      "items": [
+        {
+          "id": "packA_isometric_fantasy.01",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_01.png",
+          "index": 1,
+          "bbox": [
+            572,
+            42,
+            779,
+            269
+          ],
+          "area": 23826,
+          "center": [
+            675.5,
+            155.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.02",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_02.png",
+          "index": 2,
+          "bbox": [
+            67,
+            62,
+            243,
+            277
+          ],
+          "area": 22176,
+          "center": [
+            155.0,
+            169.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.03",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_03.png",
+          "index": 3,
+          "bbox": [
+            267,
+            77,
+            362,
+            273
+          ],
+          "area": 10486,
+          "center": [
+            314.5,
+            175.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.04",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_04.png",
+          "index": 4,
+          "bbox": [
+            393,
+            59,
+            545,
+            290
+          ],
+          "area": 19469,
+          "center": [
+            469.0,
+            174.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.05",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_05.png",
+          "index": 5,
+          "bbox": [
+            791,
+            85,
+            968,
+            300
+          ],
+          "area": 23209,
+          "center": [
+            879.5,
+            192.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.06",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_06.png",
+          "index": 6,
+          "bbox": [
+            566,
+            297,
+            647,
+            379
+          ],
+          "area": 4246,
+          "center": [
+            606.5,
+            338.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.07",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_07.png",
+          "index": 7,
+          "bbox": [
+            59,
+            297,
+            242,
+            428
+          ],
+          "area": 15156,
+          "center": [
+            150.5,
+            362.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.08",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_08.png",
+          "index": 8,
+          "bbox": [
+            238,
+            284,
+            384,
+            458
+          ],
+          "area": 11308,
+          "center": [
+            311.0,
+            371.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.09",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_09.png",
+          "index": 9,
+          "bbox": [
+            633,
+            314,
+            805,
+            498
+          ],
+          "area": 18322,
+          "center": [
+            719.0,
+            406.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.10",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_10.png",
+          "index": 10,
+          "bbox": [
+            823,
+            324,
+            967,
+            469
+          ],
+          "area": 11543,
+          "center": [
+            895.0,
+            396.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.11",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_11.png",
+          "index": 11,
+          "bbox": [
+            348,
+            307,
+            600,
+            657
+          ],
+          "area": 46084,
+          "center": [
+            474.0,
+            482.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.12",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_12.png",
+          "index": 12,
+          "bbox": [
+            62,
+            445,
+            298,
+            636
+          ],
+          "area": 30035,
+          "center": [
+            180.0,
+            540.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.13",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_13.png",
+          "index": 13,
+          "bbox": [
+            702,
+            550,
+            786,
+            639
+          ],
+          "area": 3993,
+          "center": [
+            744.0,
+            594.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.14",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_14.png",
+          "index": 14,
+          "bbox": [
+            770,
+            516,
+            964,
+            771
+          ],
+          "area": 29179,
+          "center": [
+            867.0,
+            643.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.15",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_15.png",
+          "index": 15,
+          "bbox": [
+            536,
+            538,
+            719,
+            767
+          ],
+          "area": 18608,
+          "center": [
+            627.5,
+            652.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.16",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_16.png",
+          "index": 16,
+          "bbox": [
+            59,
+            655,
+            206,
+            793
+          ],
+          "area": 13564,
+          "center": [
+            132.5,
+            724.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.17",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_17.png",
+          "index": 17,
+          "bbox": [
+            224,
+            619,
+            373,
+            777
+          ],
+          "area": 14201,
+          "center": [
+            298.5,
+            698.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.18",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_18.png",
+          "index": 18,
+          "bbox": [
+            60,
+            775,
+            319,
+            973
+          ],
+          "area": 30672,
+          "center": [
+            189.5,
+            874.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.19",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_19.png",
+          "index": 19,
+          "bbox": [
+            349,
+            720,
+            549,
+            964
+          ],
+          "area": 32250,
+          "center": [
+            449.0,
+            842.0
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.20",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_20.png",
+          "index": 20,
+          "bbox": [
+            593,
+            792,
+            734,
+            959
+          ],
+          "area": 12584,
+          "center": [
+            663.5,
+            875.5
+          ]
+        },
+        {
+          "id": "packA_isometric_fantasy.21",
+          "file": "packA_isometric_fantasy/packA_isometric_fantasy_21.png",
+          "index": 21,
+          "bbox": [
+            752,
+            796,
+            959,
+            966
+          ],
+          "area": 18935,
+          "center": [
+            855.5,
+            881.0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "packB_teal_lowpoly",
+      "source": "image-fe33a001-6daf-43f5-9db5-6835601d25c4.jpg",
+      "background": [
+        81,
+        157,
+        157
+      ],
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "count": 16,
+      "items": [
+        {
+          "id": "packB_teal_lowpoly.01",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_01.png",
+          "index": 1,
+          "bbox": [
+            221,
+            192,
+            271,
+            242
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.02",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_02.png",
+          "index": 2,
+          "bbox": [
+            421,
+            171,
+            471,
+            221
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.03",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_03.png",
+          "index": 3,
+          "bbox": [
+            681,
+            188,
+            731,
+            238
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.04",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_04.png",
+          "index": 4,
+          "bbox": [
+            829,
+            193,
+            879,
+            243
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.05",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_05.png",
+          "index": 5,
+          "bbox": [
+            720,
+            261,
+            770,
+            305
+          ],
+          "area": 1226
+        },
+        {
+          "id": "packB_teal_lowpoly.06",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_06.png",
+          "index": 6,
+          "bbox": [
+            91,
+            317,
+            175,
+            382
+          ],
+          "area": 2570
+        },
+        {
+          "id": "packB_teal_lowpoly.07",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_07.png",
+          "index": 7,
+          "bbox": [
+            817,
+            321,
+            867,
+            371
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.08",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_08.png",
+          "index": 8,
+          "bbox": [
+            494,
+            493,
+            544,
+            543
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.09",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_09.png",
+          "index": 9,
+          "bbox": [
+            877,
+            479,
+            927,
+            529
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.10",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_10.png",
+          "index": 10,
+          "bbox": [
+            111,
+            538,
+            161,
+            588
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.11",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_11.png",
+          "index": 11,
+          "bbox": [
+            877,
+            665,
+            927,
+            715
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.12",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_12.png",
+          "index": 12,
+          "bbox": [
+            134,
+            726,
+            213,
+            779
+          ],
+          "area": 2364
+        },
+        {
+          "id": "packB_teal_lowpoly.13",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_13.png",
+          "index": 13,
+          "bbox": [
+            813,
+            802,
+            867,
+            899
+          ],
+          "area": 2602
+        },
+        {
+          "id": "packB_teal_lowpoly.14",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_14.png",
+          "index": 14,
+          "bbox": [
+            497,
+            870,
+            547,
+            920
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.15",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_15.png",
+          "index": 15,
+          "bbox": [
+            289,
+            877,
+            339,
+            927
+          ],
+          "area": 1301
+        },
+        {
+          "id": "packB_teal_lowpoly.16",
+          "file": "packB_teal_lowpoly/packB_teal_lowpoly_16.png",
+          "index": 16,
+          "bbox": [
+            669,
+            896,
+            719,
+            946
+          ],
+          "area": 1301
+        }
+      ],
+      "notes": "watershed on teal-keyed subject"
+    },
+    {
+      "id": "packC_teal_grid",
+      "source": "image-9d875113-59a0-4c3f-bd73-7598d1f65465.jpg",
+      "background": [
+        76,
+        191,
+        192
+      ],
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "count": 20,
+      "items": [
+        {
+          "id": "packC_teal_grid.01",
+          "file": "packC_teal_grid/packC_teal_grid_01.png",
+          "index": 1,
+          "bbox": [
+            48,
+            90,
+            255,
+            274
+          ],
+          "area": 24083,
+          "center": [
+            151.5,
+            182.0
+          ]
+        },
+        {
+          "id": "packC_teal_grid.02",
+          "file": "packC_teal_grid/packC_teal_grid_02.png",
+          "index": 2,
+          "bbox": [
+            287,
+            145,
+            371,
+            258
+          ],
+          "area": 5309,
+          "center": [
+            329.0,
+            201.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.03",
+          "file": "packC_teal_grid/packC_teal_grid_03.png",
+          "index": 3,
+          "bbox": [
+            381,
+            99,
+            576,
+            264
+          ],
+          "area": 19795,
+          "center": [
+            478.5,
+            181.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.04",
+          "file": "packC_teal_grid/packC_teal_grid_04.png",
+          "index": 4,
+          "bbox": [
+            599,
+            97,
+            784,
+            261
+          ],
+          "area": 19732,
+          "center": [
+            691.5,
+            179.0
+          ]
+        },
+        {
+          "id": "packC_teal_grid.05",
+          "file": "packC_teal_grid/packC_teal_grid_05.png",
+          "index": 5,
+          "bbox": [
+            809,
+            105,
+            974,
+            290
+          ],
+          "area": 18354,
+          "center": [
+            891.5,
+            197.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.06",
+          "file": "packC_teal_grid/packC_teal_grid_06.png",
+          "index": 6,
+          "bbox": [
+            48,
+            293,
+            226,
+            474
+          ],
+          "area": 18874,
+          "center": [
+            137.0,
+            383.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.07",
+          "file": "packC_teal_grid/packC_teal_grid_07.png",
+          "index": 7,
+          "bbox": [
+            269,
+            285,
+            399,
+            442
+          ],
+          "area": 14402,
+          "center": [
+            334.0,
+            363.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.08",
+          "file": "packC_teal_grid/packC_teal_grid_08.png",
+          "index": 8,
+          "bbox": [
+            434,
+            292,
+            575,
+            439
+          ],
+          "area": 8568,
+          "center": [
+            504.5,
+            365.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.09",
+          "file": "packC_teal_grid/packC_teal_grid_09.png",
+          "index": 9,
+          "bbox": [
+            609,
+            292,
+            770,
+            454
+          ],
+          "area": 15372,
+          "center": [
+            689.5,
+            373.0
+          ]
+        },
+        {
+          "id": "packC_teal_grid.10",
+          "file": "packC_teal_grid/packC_teal_grid_10.png",
+          "index": 10,
+          "bbox": [
+            815,
+            304,
+            955,
+            484
+          ],
+          "area": 14320,
+          "center": [
+            885.0,
+            394.0
+          ]
+        },
+        {
+          "id": "packC_teal_grid.11",
+          "file": "packC_teal_grid/packC_teal_grid_11.png",
+          "index": 11,
+          "bbox": [
+            292,
+            499,
+            436,
+            678
+          ],
+          "area": 14608,
+          "center": [
+            364.0,
+            588.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.12",
+          "file": "packC_teal_grid/packC_teal_grid_12.png",
+          "index": 12,
+          "bbox": [
+            466,
+            488,
+            566,
+            636
+          ],
+          "area": 7742,
+          "center": [
+            516.0,
+            562.0
+          ]
+        },
+        {
+          "id": "packC_teal_grid.13",
+          "file": "packC_teal_grid/packC_teal_grid_13.png",
+          "index": 13,
+          "bbox": [
+            573,
+            473,
+            770,
+            680
+          ],
+          "area": 22463,
+          "center": [
+            671.5,
+            576.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.14",
+          "file": "packC_teal_grid/packC_teal_grid_14.png",
+          "index": 14,
+          "bbox": [
+            22,
+            531,
+            246,
+            694
+          ],
+          "area": 21115,
+          "center": [
+            134.0,
+            612.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.15",
+          "file": "packC_teal_grid/packC_teal_grid_15.png",
+          "index": 15,
+          "bbox": [
+            792,
+            532,
+            987,
+            681
+          ],
+          "area": 13700,
+          "center": [
+            889.5,
+            606.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.16",
+          "file": "packC_teal_grid/packC_teal_grid_16.png",
+          "index": 16,
+          "bbox": [
+            404,
+            677,
+            594,
+            893
+          ],
+          "area": 23341,
+          "center": [
+            499.0,
+            785.0
+          ]
+        },
+        {
+          "id": "packC_teal_grid.17",
+          "file": "packC_teal_grid/packC_teal_grid_17.png",
+          "index": 17,
+          "bbox": [
+            6,
+            717,
+            235,
+            898
+          ],
+          "area": 19179,
+          "center": [
+            120.5,
+            807.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.18",
+          "file": "packC_teal_grid/packC_teal_grid_18.png",
+          "index": 18,
+          "bbox": [
+            261,
+            704,
+            398,
+            891
+          ],
+          "area": 15242,
+          "center": [
+            329.5,
+            797.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.19",
+          "file": "packC_teal_grid/packC_teal_grid_19.png",
+          "index": 19,
+          "bbox": [
+            613,
+            730,
+            813,
+            891
+          ],
+          "area": 15654,
+          "center": [
+            713.0,
+            810.5
+          ]
+        },
+        {
+          "id": "packC_teal_grid.20",
+          "file": "packC_teal_grid/packC_teal_grid_20.png",
+          "index": 20,
+          "bbox": [
+            830,
+            704,
+            983,
+            883
+          ],
+          "area": 15654,
+          "center": [
+            906.5,
+            793.5
+          ]
+        }
+      ]
+    },
+    {
+      "id": "packD_cyan_grid",
+      "source": "image-ed0cd512-b51e-45a4-8638-8acbbfe1b343.png",
+      "background": [
+        191,
+        227,
+        232
+      ],
+      "sourceSize": [
+        1024,
+        1024
+      ],
+      "count": 20,
+      "items": [
+        {
+          "id": "packD_cyan_grid.01",
+          "file": "packD_cyan_grid/packD_cyan_grid_01.png",
+          "index": 1,
+          "bbox": [
+            41,
+            69,
+            210,
+            260
+          ],
+          "area": 18641,
+          "center": [
+            125.5,
+            164.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.02",
+          "file": "packD_cyan_grid/packD_cyan_grid_02.png",
+          "index": 2,
+          "bbox": [
+            235,
+            85,
+            397,
+            246
+          ],
+          "area": 14800,
+          "center": [
+            316.0,
+            165.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.03",
+          "file": "packD_cyan_grid/packD_cyan_grid_03.png",
+          "index": 3,
+          "bbox": [
+            414,
+            60,
+            595,
+            257
+          ],
+          "area": 16520,
+          "center": [
+            504.5,
+            158.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.04",
+          "file": "packD_cyan_grid/packD_cyan_grid_04.png",
+          "index": 4,
+          "bbox": [
+            790,
+            71,
+            968,
+            249
+          ],
+          "area": 15805,
+          "center": [
+            879.0,
+            160.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.05",
+          "file": "packD_cyan_grid/packD_cyan_grid_05.png",
+          "index": 5,
+          "bbox": [
+            607,
+            145,
+            778,
+            245
+          ],
+          "area": 10830,
+          "center": [
+            692.5,
+            195.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.06",
+          "file": "packD_cyan_grid/packD_cyan_grid_06.png",
+          "index": 6,
+          "bbox": [
+            39,
+            337,
+            213,
+            479
+          ],
+          "area": 14999,
+          "center": [
+            126.0,
+            408.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.07",
+          "file": "packD_cyan_grid/packD_cyan_grid_07.png",
+          "index": 7,
+          "bbox": [
+            251,
+            330,
+            404,
+            473
+          ],
+          "area": 14865,
+          "center": [
+            327.5,
+            401.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.08",
+          "file": "packD_cyan_grid/packD_cyan_grid_08.png",
+          "index": 8,
+          "bbox": [
+            611,
+            327,
+            795,
+            473
+          ],
+          "area": 12240,
+          "center": [
+            703.0,
+            400.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.09",
+          "file": "packD_cyan_grid/packD_cyan_grid_09.png",
+          "index": 9,
+          "bbox": [
+            815,
+            286,
+            976,
+            482
+          ],
+          "area": 16249,
+          "center": [
+            895.5,
+            384.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.10",
+          "file": "packD_cyan_grid/packD_cyan_grid_10.png",
+          "index": 10,
+          "bbox": [
+            432,
+            358,
+            585,
+            469
+          ],
+          "area": 12205,
+          "center": [
+            508.5,
+            413.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.11",
+          "file": "packD_cyan_grid/packD_cyan_grid_11.png",
+          "index": 11,
+          "bbox": [
+            245,
+            526,
+            408,
+            718
+          ],
+          "area": 19853,
+          "center": [
+            326.5,
+            622.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.12",
+          "file": "packD_cyan_grid/packD_cyan_grid_12.png",
+          "index": 12,
+          "bbox": [
+            438,
+            533,
+            595,
+            722
+          ],
+          "area": 16900,
+          "center": [
+            516.5,
+            627.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.13",
+          "file": "packD_cyan_grid/packD_cyan_grid_13.png",
+          "index": 13,
+          "bbox": [
+            625,
+            512,
+            786,
+            723
+          ],
+          "area": 15888,
+          "center": [
+            705.5,
+            617.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.14",
+          "file": "packD_cyan_grid/packD_cyan_grid_14.png",
+          "index": 14,
+          "bbox": [
+            808,
+            520,
+            969,
+            718
+          ],
+          "area": 15519,
+          "center": [
+            888.5,
+            619.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.15",
+          "file": "packD_cyan_grid/packD_cyan_grid_15.png",
+          "index": 15,
+          "bbox": [
+            56,
+            596,
+            214,
+            721
+          ],
+          "area": 11779,
+          "center": [
+            135.0,
+            658.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.16",
+          "file": "packD_cyan_grid/packD_cyan_grid_16.png",
+          "index": 16,
+          "bbox": [
+            241,
+            778,
+            415,
+            949
+          ],
+          "area": 17382,
+          "center": [
+            328.0,
+            863.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.17",
+          "file": "packD_cyan_grid/packD_cyan_grid_17.png",
+          "index": 17,
+          "bbox": [
+            435,
+            770,
+            596,
+            942
+          ],
+          "area": 16033,
+          "center": [
+            515.5,
+            856.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.18",
+          "file": "packD_cyan_grid/packD_cyan_grid_18.png",
+          "index": 18,
+          "bbox": [
+            618,
+            770,
+            794,
+            949
+          ],
+          "area": 15098,
+          "center": [
+            706.0,
+            859.5
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.19",
+          "file": "packD_cyan_grid/packD_cyan_grid_19.png",
+          "index": 19,
+          "bbox": [
+            802,
+            803,
+            983,
+            951
+          ],
+          "area": 13975,
+          "center": [
+            892.5,
+            877.0
+          ]
+        },
+        {
+          "id": "packD_cyan_grid.20",
+          "file": "packD_cyan_grid/packD_cyan_grid_20.png",
+          "index": 20,
+          "bbox": [
+            0,
+            776,
+            1023,
+            1023
+          ],
+          "area": 76754,
+          "center": [
+            511.5,
+            899.5
+          ]
+        }
+      ]
+    }
+  ],
+  "total": 77
+}

@@ -23,13 +23,18 @@ struct World2AssetWorkbenchView: View {
     var body: some View {
         workbenchCanvas
             .overlay(alignment: .topLeading) {
-                exitButton
+                titleChrome
                     .padding(.top, 28)
                     .padding(.leading, 22)
             }
             .accessibilityElement(children: .contain)
             .accessibilityIdentifier("world2.assetWorkbench")
             .accessibilityValue(viewModel.diagnosticSummary)
+            .world2InteriorActions(
+                exitTitle: "Exit",
+                exitAccessibilityID: "world2.assetWorkbench.exit",
+                onExit: onExit
+            )
     }
 
     private var workbenchCanvas: some View {
@@ -85,19 +90,8 @@ struct World2AssetWorkbenchView: View {
         }
     }
 
-    private var exitButton: some View {
+    private var titleChrome: some View {
         HStack(spacing: 16) {
-            Button(action: onExit) {
-                Label("Work Land", systemImage: "arrow.left")
-                    .font(.system(size: 15, weight: .black, design: .rounded))
-                    .foregroundStyle(.white)
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 11)
-                    .background(.black.opacity(0.62), in: Capsule())
-            }
-            .buttonStyle(.plain)
-            .accessibilityIdentifier("world2.assetWorkbench.exit")
-
             Spacer()
 
             VStack(spacing: 1) {
@@ -240,6 +234,18 @@ struct World2AssetWorkbenchView: View {
                 .font(.system(size: 82, weight: .black))
                 .foregroundStyle(.yellow)
                 .symbolEffect(.bounce, options: .repeating)
+
+            if let plate = World2PlaceholderPack.image(for: .decoration) {
+                Image(uiImage: plate)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 140, height: 140)
+                    .accessibilityIdentifier("world2.assetWorkbench.placeholder")
+            }
+
+            Text("Generation in progress")
+                .font(.system(size: 18, weight: .black, design: .rounded))
+                .foregroundStyle(.white)
 
             Text(viewModel.job?.stage.displayName ?? "Starting the workbench")
                 .font(.system(size: 25, weight: .black, design: .rounded))

@@ -1,0 +1,85 @@
+{
+  "events": [
+    {
+      "dependsOn": [
+        "carve_transparent_sprites"
+      ],
+      "elapsedMs": 38300,
+      "node": "openai_multimodal_cutout_review",
+      "outputs": {
+        "reviewed": 21
+      },
+      "status": "ok",
+      "timestamp": "2026-09-27T18:57:33.367711+00:00"
+    },
+    {
+      "dependsOn": [
+        "openai_multimodal_cutout_review"
+      ],
+      "elapsedMs": 13,
+      "node": "deep_metadata_stamp",
+      "outputs": {
+        "stamped": 21
+      },
+      "status": "ok",
+      "timestamp": "2026-09-27T18:57:33.381210+00:00"
+    },
+    {
+      "dependsOn": [
+        "deep_metadata_stamp"
+      ],
+      "elapsedMs": 495,
+      "node": "ingest_registry_and_catalog",
+      "outputs": {
+        "integrated": 21,
+        "manifest": "AssetSources/World2/CottageDecorKit/manifest.json"
+      },
+      "status": "ok",
+      "timestamp": "2026-09-27T18:57:33.877049+00:00"
+    },
+    {
+      "dependsOn": [
+        "ingest_registry_and_catalog"
+      ],
+      "elapsedMs": 0,
+      "node": "bind_all_cottage_scenes",
+      "outputs": {
+        "assetsPerScene": 21,
+        "scenes": [
+          "poi.abbieTreehouse.interior",
+          "poi.abbieTreehouse.interior.cozyNook",
+          "poi.abbieTreehouse.interior.rooftopLookout",
+          "poi.abbieTreehouse.interior.fitnessCenter",
+          "poi.abbieTreehouse.interior.bedroom",
+          "poi.abbieTreehouse.interior.playroom"
+        ]
+      },
+      "status": "ok",
+      "timestamp": "2026-09-27T18:57:33.878481+00:00"
+    },
+    {
+      "dependsOn": [
+        "bind_all_cottage_scenes"
+      ],
+      "elapsedMs": 2,
+      "node": "runtime_verify_every_scene",
+      "outputs": {
+        "contactSheet": "AssetSources/World2/CottageDecorKit/review/contact-sheet.png",
+        "eligibleScenes": [
+          "poi.abbieTreehouse.interior",
+          "poi.abbieTreehouse.interior.cozyNook",
+          "poi.abbieTreehouse.interior.rooftopLookout",
+          "poi.abbieTreehouse.interior.fitnessCenter",
+          "poi.abbieTreehouse.interior.bedroom",
+          "poi.abbieTreehouse.interior.playroom"
+        ],
+        "imagesetsPresent": 21,
+        "manifestAssetCount": 21,
+        "status": "catalog_ready_awaiting_device_screenshots",
+        "timestamp": "2026-09-27T18:57:33.881197+00:00"
+      },
+      "status": "ok",
+      "timestamp": "2026-09-27T18:57:33.881796+00:00"
+    }
+  ]
+}

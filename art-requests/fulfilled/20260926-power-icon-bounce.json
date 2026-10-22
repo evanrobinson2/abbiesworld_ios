@@ -1,0 +1,65 @@
+{
+  "id": "20260926-power-icon-bounce",
+  "semanticId": "ui.plink.power.icon.bounce",
+  "status": "fulfilled",
+  "priority": "low",
+  "type": "ui_icon",
+  "kind": "ui",
+  "brief": "Bounce icon revision requested by Evan: faint ghost ball at start, descending trajectory to one bumper contact, solid marble taking off along ascending trajectory. Literal bounce, no spring.",
+  "aspect": "1:1",
+  "styleNotes": "Match approved Tilt candidate 4: dark teal enamel disc, warm brass rim, bold dark contours, chunky hand-painted shapes, restrained cel shading, generous transparent corners. One readable central motif; no text, opaque square or checkerboard.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/PlinkPowerUp.swift",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/bounce-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/bounce-transparent.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/bounce-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md"
+  ],
+  "promptSeeds": [
+    "Single circular children game power emblem. One mint marble rebounding from a coral spring pad, one broad upward arc. Dark teal enamel disc, warm brass rim, bold dark contours, chunky hand painted cel shading, minimal detail, readable at 56 pixels. Isolated on pure white for later alpha extraction. No text. --ar 1:1 --stylize 100 --sref https://cdn.midjourney.com/15015adc-6c98-4af7-8683-ae94c2830cd4/0_3.jpeg"
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-26T21:17:02.827781+00:00",
+  "gameArea": "Marble Voyage / future Plink powers",
+  "surface": "Future battle power tray",
+  "usage": "Proposed catalog world2_plink_power_icon_bounce; do not add runtime enum until gameplay work is authorized.",
+  "targetPixelSize": "1024px source; transparent master suitable for 56\u201372pt runtime",
+  "expectedBackground": "True RGBA transparency outside emblem",
+  "characterOrAssetName": "Bounce power icon",
+  "productionIntent": "concept_only",
+  "existingAssetSemanticIds": [
+    "ui.plink.power.icon.tilt"
+  ],
+  "referenceRequestIds": [
+    "20260926-power-icon-tilt"
+  ],
+  "acceptanceCriteria": [
+    "Match approved Tilt palette, rim and line weight",
+    "Distinct central motif at 56pt",
+    "No baked text or checkerboard",
+    "True transparent corners for production derivative",
+    "Remain proposal-only until mechanic is approved"
+  ],
+  "sessionNote": "Evan rejected spring metaphor. Preserve first concept as superseded. Produce literal single-bounce trajectory; gameplay proposal unchanged.",
+  "proposedGameplay": {
+    "summary": "Give the next marble one rescue bounce from the bottom edge.",
+    "designRisk": "Exactly one rescue bounce; distinguish from Split and extra-life effects.",
+    "status": "proposal"
+  },
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:59:47.869464+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/bounce-transparent.png",
+    "sourceHashSha256": "a573924be9e8e0956535d29f31adfb8b58cfc495f90ce525769ec4af03efd5d9",
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_bounce. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Final motif follows Evan correction: ghost starting ball, single V-shaped bounce off bumper, solid departing ball. Spring versions are superseded. Runtime catalog bound as world2_plink_power_icon_bounce (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_bounce",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_bounce.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  }
+}

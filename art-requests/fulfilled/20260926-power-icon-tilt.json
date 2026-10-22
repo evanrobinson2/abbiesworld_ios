@@ -1,0 +1,65 @@
+{
+  "status": "fulfilled",
+  "priority": "high",
+  "type": "ui_icon",
+  "kind": "ui",
+  "keepStockIcon": false,
+  "aspect": "1:1",
+  "requestedBy": "cursor",
+  "createdAt": "2026-09-26T21:10:00Z",
+  "requestedAt": "2026-09-26T21:10:00Z",
+  "gameArea": "Marble Voyage / Plink battle power tray",
+  "expectedBackground": "Transparent RGBA \u2014 clear corners required (design gate maxCornerAlpha \u2264 16)",
+  "targetPixelSize": "Circular chip ~128\u2013256px master; runtime ~56\u201372pt",
+  "productionIntent": "runtime_bind",
+  "fulfillment": {
+    "completedAt": "2026-09-26T21:17:30.492692+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-transparent.png",
+    "sourceHashSha256": "6d0caaa9aae844a790eae1c205284050e3fb2c342676781d0e6ccaf017f21ccd",
+    "notes": "User-approved source, transparent production derivative delivered. RGBA and corner-alpha check passed. Builder must bind world2_plink_power_icon_tilt / ui.plink.power.icon.tilt and verify actual 56pt UI. No runtime changes. Runtime catalog bound as world2_plink_power_icon_tilt (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_tilt",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_tilt.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  },
+  "styleNotes": "Approved Tilt style lock: dark teal enamel disc, warm brass rim, bold contours, chunky hand-painted forms, restrained cel shading. True transparent corners; no checkerboard or opaque square. Match motif weight at 56\u201372pt.",
+  "id": "20260926-power-icon-tilt",
+  "semanticId": "ui.plink.power.icon.tilt",
+  "characterOrAssetName": "Tilt power icon",
+  "surface": "Battle power tray \u2014 new Tilt (labyrinth) power-up",
+  "brief": "Brand-new circular power icon for TILT: kid-readable labyrinth / tipping-iPad / tilted board motif. Suggests tipping gravity, not a camera rotate. Pairs with Refresh / Fire / Split as a fourth tray chip. No text in art.",
+  "usage": "Catalog imageset world2_plink_power_icon_tilt; semantic ui.plink.power.icon.tilt",
+  "promptSeeds": [
+    "Circular kid game power icon, tipping marble labyrinth board or gyroscope tilt motif, bold cel shaded silhouette, centered on transparent background, no text logo UI, colorful comedic fantasy --ar 1:1 --stylize 150"
+  ],
+  "relatedPaths": [
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-refresh.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-fire.png",
+    "prototypes/marble-voyage-art/board-layout-mock/trail-scrap/assets/power-split.png",
+    "AssetSources/MarbleVoyage/henchmen-concepts-2026-09-26/porcupine-boxer.jpeg",
+    "art-requests/ART_DIRECTOR_AGENT.md",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/PlinkPowerUp.swift",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-transparent.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md"
+  ],
+  "existingAssetSemanticIds": [
+    "ui.plink.power.icon.refresh",
+    "ui.plink.power.icon.fire",
+    "ui.plink.power.icon.split"
+  ],
+  "acceptanceCriteria": [
+    "True transparent corners (passes MarbleVoyageDesignRules transparent UI gate)",
+    "Reads at 56pt as \u201ctilt / labyrinth\u201d",
+    "Matches visual weight of sibling power icons",
+    "No baked text"
+  ],
+  "sessionNote": "New power-up shipped with SF Symbol fallback (gyroscope) until this lands. Local builder work-in-progress references omitted from GitHub relatedPaths until that code is committed.",
+  "placeholder": {
+    "type": "missing_catalog",
+    "detail": "SF Symbol gyroscope fallback; no world2_plink_power_icon_tilt imageset yet"
+  }
+}

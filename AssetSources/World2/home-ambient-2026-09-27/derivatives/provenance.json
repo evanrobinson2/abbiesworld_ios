@@ -1,0 +1,22 @@
+{
+  "parent": "home-animation-source.jpeg",
+  "parentSha256": "a5ef522305e14c8c6655863cf58002416832f55cf6b681ba1a2643e71a38324a",
+  "generatedAt": "2026-09-27T15:40:00Z",
+  "files": [
+    "ambient_config.json",
+    "butterfly_0.png",
+    "butterfly_1.png",
+    "butterfly_2.png",
+    "butterfly_3.png",
+    "cloud_0.png",
+    "cloud_1.png",
+    "cloud_2.png",
+    "leaf.png",
+    "map_home_plate.jpeg",
+    "mask_sky.png",
+    "mask_waterfall.png",
+    "reed_cluster.png",
+    "terrain_cutout.png",
+    "water_flow_tile.png"
+  ]
+}

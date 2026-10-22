@@ -68,14 +68,63 @@ struct FurnitureItem: Identifiable {
         defaultScale: 0.95,
         placementLayer: .floor
     )
+    /// Gateway book on the Cozy Nook table — seeded placed, not catalog-stamped.
+    static let marbleVoyageWorldBook = FurnitureItem(
+        id: "furniture.marbleVoyage.worldBook",
+        name: "Marble Voyage Book",
+        category: "Decor",
+        assetName: "world2_marble_voyage_world_book",
+        description: "The messy antique book on Abbie's coffee table. Open it to unlock Marble Voyage.",
+        tags: ["marble-voyage", "world-book", "cozy-nook", "gateway"],
+        pixelWidth: 879,
+        pixelHeight: 762,
+        price: ingredientCost,
+        defaultScale: 0.58,
+        placementLayer: .floor
+    )
+    /// Full furniture store / legacy Cozy Room kit + cottage packs.
     static let storeCatalog: [FurnitureItem] =
-        [abbieStarterBed, aniStarterBed] + loadBundledCatalog()
+        [abbieStarterBed, aniStarterBed] + loadBundledCatalog() + loadCottageDecorCatalog()
+
+    /// Abbie cottage decorate tray only — CottageDecorKit + Abbie's starter bed.
+    /// Excludes Cozy Room kit and Ani's bed (not for this cottage).
+    static var abbieCottageDecorCatalog: [FurnitureItem] {
+        [abbieStarterBed] + loadCottageDecorCatalog()
+    }
+
+    /// True for CottageDecorKit props (and Abbie's starter bed).
+    static func isAbbieCottageDecor(_ item: FurnitureItem) -> Bool {
+        item.id == abbieStarterBed.id
+            || item.id.hasPrefix("acd-")
+            || item.tags.contains(where: { $0.lowercased() == "abbie-cottage" })
+    }
+
+    /// What Abbie's cottage "My drawer" may show — not invent leftovers, Peglin
+    /// salvage, or remote props that landed in the global furniture inventory.
+    static func isAbbieCottageDrawerDecoration(_ decorationId: String) -> Bool {
+        if decorationId == DecorationInstance.starterJukeboxID { return true }
+        if let item = item(id: decorationId) {
+            return isAbbieCottageDecor(item)
+        }
+        switch decorationId {
+        case World2StoryDecoration.daddyCandy.id,
+             World2StoryDecoration.daddyHug.id,
+             World2StoryDecoration.perfectPorridge.id,
+             World2StoryDecoration.worldTeleporter.id,
+             World2StoryDecoration.propertyDeed.id:
+            return true
+        default:
+            return false
+        }
+    }
+
     private static let placeableCategoryIDs: Set<String> = [
         "beds",
         "botanical-decor",
         "canopy-seating",
         "carts",
         "crafting",
+        "decor",
         "hanging-decor",
         "hanging-seating",
         "lighting",
@@ -84,6 +133,7 @@ struct FurnitureItem: Identifiable {
         "seating",
         "shelving",
         "storage",
+        "toys",
     ]
 
     private static let fallbackCatalog: [FurnitureItem] = [
@@ -198,7 +248,8 @@ struct FurnitureItem: Identifiable {
     ]
 
     static func item(id: String) -> FurnitureItem? {
-        storeCatalog.first { $0.id == id }
+        if id == marbleVoyageWorldBook.id { return marbleVoyageWorldBook }
+        return storeCatalog.first { $0.id == id }
     }
 
     private static func loadBundledCatalog() -> [FurnitureItem] {
@@ -231,6 +282,33 @@ struct FurnitureItem: Identifiable {
                 price: price(for: asset.category),
                 defaultScale: defaultScale(for: asset.category),
                 placementLayer: placementLayer(for: asset.category)
+            )
+        }
+    }
+
+    /// Midjourney cottage decor packs (lamps / rugs+cushions / toys) — every cottage room.
+    private static func loadCottageDecorCatalog() -> [FurnitureItem] {
+        guard let data = NSDataAsset(name: "cottage_decor_asset_manifest")?.data,
+              let manifest = try? JSONDecoder().decode(CottageDecorManifest.self, from: data),
+              manifest.assetCount == manifest.assets.count,
+              !manifest.assets.isEmpty else {
+            return []
+        }
+        return manifest.assets.map { asset in
+            FurnitureItem(
+                id: asset.id,
+                name: asset.label,
+                category: displayCategory(asset.category),
+                assetName: asset.assetCatalogName,
+                description: asset.description,
+                tags: asset.tags,
+                pixelWidth: asset.pixelSize.width,
+                pixelHeight: asset.pixelSize.height,
+                price: price(for: asset.category),
+                defaultScale: asset.defaultScale > 0
+                    ? asset.defaultScale
+                    : defaultScale(for: asset.category),
+                placementLayer: asset.placementLayer == "wall" ? .wall : .floor
             )
         }
     }
@@ -366,11 +444,30 @@ private struct CozyRoomManifestAsset: Decodable {
     }
 }
 
+private struct CottageDecorManifest: Decodable {
+    let assetCount: Int
+    let assets: [CottageDecorManifestAsset]
+}
+
+private struct CottageDecorManifestAsset: Decodable {
+    let id: String
+    let assetCatalogName: String
+    let category: String
+    let label: String
+    let description: String
+    let tags: [String]
+    let pixelSize: CozyRoomManifestAsset.PixelSize
+    let defaultScale: Double
+    let placementLayer: String
+}
+
 extension PlayerState {
     var furnitureInventory: [DecorationInstance] {
         let generatedIDs = Set(availableGeneratedDecorations.map(\.id))
+        let placedIDs = Set(homeLayout.placedDecorations.map(\.decorationInstanceId))
         return decorations.filter {
-            $0.decorationId == DecorationInstance.starterJukeboxID
+            placedIDs.contains($0.id)
+                || $0.decorationId == DecorationInstance.starterJukeboxID
                 || FurnitureItem.item(id: $0.decorationId) != nil
                 || World2StoryDecoration.isStoryDecoration($0.decorationId)
                 || generatedIDs.contains($0.decorationId)

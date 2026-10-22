@@ -1,0 +1,11 @@
+{
+  "semanticId": "poi.abbieTreehouse.exterior",
+  "sourceSha256": "39985e28a3e97cbbe32413b3ccb08bc30061a57382187a71cbb5dc489880cc2d",
+  "cutoutSha256": "df4a4ccd161361ad9bbb57114acdb355c5c10f5147a2aa66cf4215e9967ade49",
+  "dimensions": [
+    850,
+    939
+  ],
+  "approval": "Evan: that's her tree house middle hard point",
+  "retrievedAt": "2026-09-27T16:06:00Z"
+}

@@ -1,0 +1,24 @@
+{
+  "semanticId": "map.home",
+  "sceneId": "scene.home",
+  "filename": "home-plate-2026-09-27-evan.jpg",
+  "sourceProvider": "Midjourney",
+  "jobId": "2695686e-cb10-4a86-87ef-bd1ffd78118c",
+  "candidateIndex": 0,
+  "sourceUrl": "https://cdn.midjourney.com/2695686e-cb10-4a86-87ef-bd1ffd78118c/0_0.jpeg",
+  "sha256": "74ea48d86c1706c34efb322e7a1367bbd034d4fd700f09f2082e280c3eb7d473",
+  "dimensions": [
+    1024,
+    771
+  ],
+  "approval": "Evan: redo the home screen image to this",
+  "retrievedAt": "2026-09-27T15:30:03.129793+00:00",
+  "visiblePrompt": "redraw with a blank sky and blank waterfall so that I can animate these parts",
+  "notes": "Evan plate swap 2026-09-27; leaf palette retuned; interiors unchanged.",
+  "derivatives": "derivatives/",
+  "runtime": {
+    "catalogPlate": "world2_1002_map_home",
+    "ambientConfig": "world2_map_home_ambient_config",
+    "overlay": "World2HomeAmbientLayer"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "semanticId": "character.peglin.abbie.happy",
+  "catalogImageset": "world2_peglin_abbie_happy",
+  "filename": "abbie-portrait-canonical.jpeg",
+  "sourceHashSha256": "42bb6038fd9f8bce337e18fc081c93bc2645266cd4c50e803a2e47aeee78579e",
+  "pixelSize": "1024x1024",
+  "approvedAt": "2026-09-26T22:51:00Z",
+  "status": "superseded_rollback",
+  "supersededBy": "AssetSources/MarbleVoyage/abbie-regal-2026-09-26/midjourney-original.jpeg",
+  "supersededByHashSha256": "638f1f70f93415b2d52a43ba2eb86b2a36c36dccfb67763cb4604d4674962278",
+  "chore": "https://github.com/evanrobinson2/abbiesworld_ios/issues/25",
+  "notes": "Casual bust previously bound as happy/default. Kept for rollback only after regal Abbie (chore #25) took the happy catalog slot."
+}

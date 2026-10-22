@@ -1,0 +1,30 @@
+{
+  "id": "deck.moonBase.observation.20260930",
+  "title": "Moon Base · observation window",
+  "semanticId": "plate.moonBase.observation",
+  "missionId": null,
+  "proofId": null,
+  "requirementId": "req.art.observation",
+  "candidates": [
+    {
+      "index": 1,
+      "label": "Candidate 1",
+      "url": "../AssetSources/MoonBase/observation-review-2026-09-30/previews/candidate-1.jpg"
+    },
+    {
+      "index": 2,
+      "label": "Candidate 2",
+      "url": "../AssetSources/MoonBase/observation-review-2026-09-30/previews/candidate-2.jpg"
+    },
+    {
+      "index": 3,
+      "label": "Candidate 3",
+      "url": "../AssetSources/MoonBase/observation-review-2026-09-30/previews/candidate-3.jpg"
+    },
+    {
+      "index": 4,
+      "label": "Candidate 4",
+      "url": "../AssetSources/MoonBase/observation-review-2026-09-30/previews/candidate-4.jpg"
+    }
+  ]
+}

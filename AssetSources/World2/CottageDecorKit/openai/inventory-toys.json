@@ -1,0 +1,193 @@
+{
+  "latencyMs": 17120,
+  "model": "gpt-5.6-sol",
+  "packId": "pack.abbieCottage.toys",
+  "parsed": {
+    "confidence": 0.99,
+    "items": [
+      {
+        "category": "play-stages",
+        "colors": [
+          "golden brown",
+          "yellow",
+          "red",
+          "blue",
+          "green",
+          "orange"
+        ],
+        "detailedDescription": "Freestanding wooden puppet theater with an ornate scalloped frame, small stage ledge, and layered multicolored fabric curtains.",
+        "facing": "front three-quarter view, slightly facing right",
+        "index": 1,
+        "label": "Miniature puppet theater",
+        "materials": [
+          "painted wood",
+          "stitched fabric"
+        ],
+        "motifs": [
+          "scalloped trim",
+          "theater curtains",
+          "storybook carving"
+        ],
+        "notes": "One complete theater assembly; the curtains and frame are integral components.",
+        "placementHints": [
+          "floor",
+          "table"
+        ],
+        "subcategory": "puppet theater"
+      },
+      {
+        "category": "storage",
+        "colors": [
+          "dark brown",
+          "warm brown"
+        ],
+        "detailedDescription": "Walnut-shaped wooden cabinet with a pointed shell silhouette, two closed upper doors, and several closed drawers below.",
+        "facing": "front three-quarter view, slightly facing left",
+        "index": 2,
+        "label": "Closed walnut wardrobe",
+        "materials": [
+          "carved wood"
+        ],
+        "motifs": [
+          "walnut shell",
+          "wood grain",
+          "tiny drawers"
+        ],
+        "notes": "Closed storage piece; no furnished rooms or open dollhouse interior are visible.",
+        "placementHints": [
+          "floor",
+          "table"
+        ],
+        "subcategory": "miniature wardrobe"
+      },
+      {
+        "category": "seating",
+        "colors": [
+          "cream",
+          "turquoise",
+          "red",
+          "orange",
+          "yellow",
+          "green",
+          "blue"
+        ],
+        "detailedDescription": "Cheerful wooden unicorn mounted on a curved turquoise rocker, with a golden horn and a long rainbow-colored yarn-like mane and tail.",
+        "facing": "right-facing three-quarter view",
+        "index": 3,
+        "label": "Rocking unicorn",
+        "materials": [
+          "painted wood",
+          "yarn"
+        ],
+        "motifs": [
+          "unicorn",
+          "rainbow mane",
+          "curved rocker"
+        ],
+        "notes": "Counted as one complete rocking-toy assembly.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "rocking toy"
+      },
+      {
+        "category": "decor",
+        "colors": [
+          "orange",
+          "golden brown",
+          "blue",
+          "green",
+          "red",
+          "cream"
+        ],
+        "detailedDescription": "Handmade wooden toy train consisting of a warm orange locomotive and connected woodland-themed carriages, including a long illustrated animal car and a small animal-faced end car.",
+        "facing": "left-facing side and three-quarter view",
+        "index": 4,
+        "label": "Woodland animal train",
+        "materials": [
+          "painted wood"
+        ],
+        "motifs": [
+          "steam locomotive",
+          "woodland animals",
+          "elephant",
+          "animal-shaped carriage",
+          "wood grain"
+        ],
+        "notes": "The locomotive and connected carriages form one multi-part toy assembly and are counted as one item.",
+        "placementHints": [
+          "floor",
+          "table"
+        ],
+        "subcategory": "toy train"
+      },
+      {
+        "category": "play-stages",
+        "colors": [
+          "cream",
+          "tan",
+          "red",
+          "brown",
+          "gray-green"
+        ],
+        "detailedDescription": "Painted wooden fantasy castle with multiple rounded towers, red domed roofs, arched openings, a central doorway, and a small raised bridge between tower sections.",
+        "facing": "front three-quarter view, slightly facing right",
+        "index": 5,
+        "label": "Toy castle",
+        "materials": [
+          "painted wood"
+        ],
+        "motifs": [
+          "rounded turrets",
+          "arched doorway",
+          "bridge",
+          "storybook castle"
+        ],
+        "notes": "One complete castle assembly; the visible bridge and towers are integral parts.",
+        "placementHints": [
+          "floor",
+          "table"
+        ],
+        "subcategory": "toy castle"
+      },
+      {
+        "category": "storage",
+        "colors": [
+          "golden brown",
+          "gray-blue",
+          "gold",
+          "pale blue",
+          "pink",
+          "red"
+        ],
+        "detailedDescription": "Open wooden dress-up trunk with gray-blue metal corner fittings, containing a golden crown, pale blue fairy wings, and star-tipped wands.",
+        "facing": "front three-quarter view, slightly facing left",
+        "index": 6,
+        "label": "Open dress-up chest",
+        "materials": [
+          "wood",
+          "metal",
+          "painted wood",
+          "fabric"
+        ],
+        "motifs": [
+          "treasure chest",
+          "crown",
+          "fairy wings",
+          "stars",
+          "magic wand"
+        ],
+        "notes": "The chest and its contained dress-up accessories are treated as one complete toy set.",
+        "placementHints": [
+          "floor"
+        ],
+        "subcategory": "dress-up chest"
+      }
+    ],
+    "observedCount": 6
+  },
+  "responseId": "chatcmpl-ESo0fXnRAoWgsXReqWyWhTbGnaKKw",
+  "system": "You inventory Midjourney asset sheets for a children's game. Return JSON only. Count every visually distinct complete object. Pixels win over the prompt count. Do not invent physics or interactive behavior. If a walnut/seed wardrobe is closed, say closed — do not call it an open dollhouse. Keep multi-part toys that are one assembly as one item.",
+  "timestamp": "2026-09-27T18:35:45.747775+00:00",
+  "user": "Pack: pack.abbieCottage.toys\nExpected visual count hint: 6\nExact Midjourney prompt:\nmake. thebackground white and refine the shape and details of the toys\n\nOriginal creative brief (if different):\nSix enchanting handmade toys for a child's magical playroom: a miniature puppet theater with scalloped wooden trim and colorful curtains; a walnut shell dollhouse with tiny furnished rooms; a rocking unicorn with rainbow yarn mane; a wooden woodland train with three animal shaped carriages; a toy castle with rounded turrets and working drawbridge; a dress up chest with crown, fairy wings, and star wand inside. Sturdy, cheerful, expressive handmade details, painted wood and stitched fabric. Hand painted 2D storybook artwork, delicate ink contours, warm gouache textures, gentle front three quarter view. Strict two row three column asset sheet on pure white, one complete toy per cell. Wide margins and gutters. All components contained within their cell. Completely separate silhouettes, no touching or overlap, no cropping. Flat even illumination. No shadows, no floor, no background, no scenery, no people, no text, no labels, no borders.\n\nReturn JSON: {\n  \"observedCount\": int,\n  \"confidence\": 0-1,\n  \"items\": [{\n    \"index\": 1-based reading order left-to-right top-to-bottom,\n    \"label\": short name,\n    \"detailedDescription\": string,\n    \"category\": lighting|rugs|seating|play-stages|storage|decor,\n    \"subcategory\": string,\n    \"materials\": [string],\n    \"colors\": [string],\n    \"motifs\": [string],\n    \"placementHints\": [\"floor\"|\"wall\"|\"table\"],\n    \"facing\": string,\n    \"notes\": string\n  }]\n}"
+}

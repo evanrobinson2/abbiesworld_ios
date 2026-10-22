@@ -1,0 +1,15 @@
+---
+description: World/Studio assets must use the Game Asset API convention — never ad-hoc hosting
+alwaysApply: true
+---
+
+# Asset management convention
+
+When adding or wiring art for Abbie's World / Studio / World 2:
+
+- **Do** manage assets through the established **server Game Asset API** (`/api/v1/games/...`, semantic keys, `deliveryURL` / registry), following `docs/current-state/GAME_ASSET_REGISTRY_ADOPTION.md` and tools like `scripts/world2_assets/publish_registry.py` or Media Drop inbox upload.
+- **Do** reference assets by **stable semantic IDs** (e.g. `map.legoCitadel`, `poi.legoCitadel.exterior`, `poi.legoCitadel.interior`) in world documents and iPad code — not by dumping one-off CDN or deploy URLs as the source of truth.
+- **Do not** "host" new game content by copying files into `prototypes/studio-mock/plates/` (or similar static Vercel folders) and pointing scenes at those URLs, except for disposable Studio mock scaffolding that is not the live household world.
+- Midjourney / drops may land via the existing inbox → server asset pipeline; Studio may temporarily paste an https link while inventing, but durable world content should be registered and then bound by semantic key.
+
+If unsure which upload path to use, inspect the registry docs and existing World2 semantic maps (`maps/...`, `pois/.../exterior`) before inventing a new store.

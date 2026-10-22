@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>world.abbies.execution-capacity</string>
+  <key>WorkingDirectory</key>
+  <string>/Users/evanrobinson/abbies.world.ios/prototypes/execution-capacity</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/Users/evanrobinson/abbies.world.ios/prototypes/execution-capacity/.venv/bin/python</string>
+    <string>/Users/evanrobinson/abbies.world.ios/prototypes/execution-capacity/app.py</string>
+  </array>
+  <key>RunAtLoad</key>
+  <true/>
+  <key>KeepAlive</key>
+  <true/>
+  <key>ThrottleInterval</key>
+  <integer>5</integer>
+  <key>ProcessType</key>
+  <string>Interactive</string>
+  <key>EnvironmentVariables</key>
+  <dict>
+    <key>EXECUTION_CAPACITY_PORT</key>
+    <string>8780</string>
+    <key>EXECUTION_CAPACITY_TRAY</key>
+    <string>1</string>
+    <key>EXECUTION_CAPACITY_OPEN</key>
+    <string>0</string>
+    <key>EXECUTION_CAPACITY_RESUME_ON_START</key>
+    <string>1</string>
+    <key>EXECUTION_CAPACITY_HUMANIZE</key>
+    <string>1</string>
+    <key>EXECUTION_CAPACITY_CLOUD_PULL</key>
+    <string>1</string>
+    <key>EXECUTION_CAPACITY_CLOUD_URL</key>
+    <string>https://studio-mock-iota.vercel.app</string>
+    <key>PATH</key>
+    <string>/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin</string>
+  </dict>
+  <key>StandardOutPath</key>
+  <string>/Users/evanrobinson/Library/Logs/abbies-execution-capacity.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/evanrobinson/Library/Logs/abbies-execution-capacity.err.log</string>
+</dict>
+</plist>

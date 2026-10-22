@@ -1,0 +1,65 @@
+{
+  "id": "20260926-power-icon-ghost",
+  "semanticId": "ui.plink.power.icon.ghost",
+  "status": "fulfilled",
+  "priority": "low",
+  "type": "ui_icon",
+  "kind": "ui",
+  "brief": "Future power-up proposal: Ghost. Proposed mechanic: Let the marble pass through one solid obstacle before becoming solid again. Artwork: A pale mint marble passing halfway through a coral wall with one trailing wisp. Art request only; gameplay is not implemented or approved for shipping.",
+  "aspect": "1:1",
+  "styleNotes": "Match approved Tilt candidate 4: dark teal enamel disc, warm brass rim, bold dark contours, chunky hand-painted shapes, restrained cel shading, generous transparent corners. One readable central motif; no text, opaque square or checkerboard.",
+  "keepStockIcon": false,
+  "relatedPaths": [
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/tilt-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md",
+    "abbies.world.ios/abbies.world.ios/Models/World2/PeglinEdition/PlinkPowerUp.swift",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/ghost-original.jpeg",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/ghost-transparent.png",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/ghost-provenance.json",
+    "AssetSources/MarbleVoyage/power-icons-2026-09-26/STYLE.md"
+  ],
+  "promptSeeds": [
+    "Single circular children game power emblem. A pale mint marble passing halfway through a coral wall with one trailing wisp. Dark teal enamel disc, warm brass rim, bold dark contours, chunky hand painted cel shading, minimal detail, readable at 56 pixels. Isolated on pure white for later alpha extraction. No text. --ar 1:1 --stylize 100 --sref https://cdn.midjourney.com/15015adc-6c98-4af7-8683-ae94c2830cd4/0_3.jpeg"
+  ],
+  "requestedBy": "Evan via Codex Art Director",
+  "createdAt": "2026-09-26T21:17:02.827781+00:00",
+  "gameArea": "Marble Voyage / future Plink powers",
+  "surface": "Future battle power tray",
+  "usage": "Proposed catalog world2_plink_power_icon_ghost; do not add runtime enum until gameplay work is authorized.",
+  "targetPixelSize": "1024px source; transparent master suitable for 56\u201372pt runtime",
+  "expectedBackground": "True RGBA transparency outside emblem",
+  "characterOrAssetName": "Ghost power icon",
+  "productionIntent": "concept_only",
+  "existingAssetSemanticIds": [
+    "ui.plink.power.icon.tilt"
+  ],
+  "referenceRequestIds": [
+    "20260926-power-icon-tilt"
+  ],
+  "acceptanceCriteria": [
+    "Match approved Tilt palette, rim and line weight",
+    "Distinct central motif at 56pt",
+    "No baked text or checkerboard",
+    "True transparent corners for production derivative",
+    "Remain proposal-only until mechanic is approved"
+  ],
+  "sessionNote": "Evan authorized icon artwork production. Gameplay remains an unimplemented proposal; do not add to runtime without separate gameplay authorization.",
+  "proposedGameplay": {
+    "summary": "Let the marble pass through one solid obstacle before becoming solid again.",
+    "designRisk": "One obstacle only; ghost state must be visible and must not skip level boundaries.",
+    "status": "proposal"
+  },
+  "fulfillment": {
+    "completedAt": "2026-09-26T22:02:17.530015+00:00",
+    "completedBy": "Codex \u2014 Art Director",
+    "assetSourcePath": "AssetSources/MarbleVoyage/power-icons-2026-09-26/ghost-transparent.png",
+    "sourceHashSha256": "687c9a8610ab41c2bb6527deee1c223b907ce68cf813eafd45b9f2d90f6d8625",
+    "notes": "Transparent source delivery ready for builder binding as world2_plink_power_icon_ghost. RGBA/corner-alpha checks passed. Artwork only; proposed gameplay remains unimplemented and unapproved for shipping. Builder must normalize optical circle bounds across the family and verify in-app 56pt legibility. No Swift or catalog edits. Runtime catalog bound as world2_plink_power_icon_ghost (2026-09-26T23:28:16Z).",
+    "catalogImageset": "world2_plink_power_icon_ghost",
+    "runtimeBoundAt": "2026-09-26T23:28:16Z",
+    "catalogOrLibraryPath": "abbies.world.ios/abbies.world.ios/Assets.xcassets/world2_plink_power_icon_ghost.imageset",
+    "boundAt": "2026-09-27T00:25:58Z",
+    "boundBy": "cursor"
+  }
+}

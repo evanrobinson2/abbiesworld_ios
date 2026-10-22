@@ -24,3 +24,6 @@ Implementation plan for view mode selection system, allowing switching between d
 
 ### `VOICE_INTEGRATION_SUGGESTIONS.md`
 Approximately 20 different opportunities for voice narration, guidance, and audio feedback throughout the app, organized by app section and user flow.
+
+### `ACTOR_ANIMATION_REDO.md`
+Open chore. Regenerate Abbie and Daddy locomotion from scratch, one Meshy task per gait, and fix stick facing plus Daddy's side swap before the new clips are judged on the iPad.

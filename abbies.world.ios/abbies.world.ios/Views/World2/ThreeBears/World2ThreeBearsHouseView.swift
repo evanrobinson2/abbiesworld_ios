@@ -55,24 +55,17 @@ struct World2ThreeBearsHouseView: View {
                 ["rounds": "\(game.rounds.count)"]
             )
         }
+        .world2InteriorActions(
+            exitTitle: "Exit",
+            exitAccessibilityID: "world2.threeBears.exit",
+            onExit: onExit
+        )
     }
 
     // MARK: - Chrome
 
     private var topBar: some View {
         HStack(spacing: 12) {
-            Button(action: onExit) {
-                Image(systemName: "chevron.left")
-                    .font(.system(size: 22, weight: .black))
-                    .foregroundStyle(.white)
-                    .frame(width: 54, height: 54)
-                    .background(.brown.opacity(0.92), in: Circle())
-                    .overlay(Circle().stroke(.white.opacity(0.7), lineWidth: 2))
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("Leave the bears' house")
-            .accessibilityIdentifier("world2.threeBears.exit")
-
             VStack(alignment: .leading, spacing: 1) {
                 Text(archetype.name.uppercased())
                     .font(.system(size: 20, weight: .black, design: .rounded))

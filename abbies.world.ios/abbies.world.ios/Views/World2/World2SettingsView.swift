@@ -69,6 +69,7 @@ struct World2AccountSettingsSection: View {
 
 struct World2DeveloperSettingsSection: View {
     @ObservedObject private var developerSession = World2DeveloperSession.shared
+    @ObservedObject private var debugOverlay = World2DebugOverlaySettings.shared
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -91,6 +92,18 @@ struct World2DeveloperSettingsSection: View {
             }
             .tint(.orange)
             .accessibilityIdentifier("world2.settings.developerMode")
+
+            Toggle(isOn: $debugOverlay.isEnabled) {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("Screen QR")
+                        .font(.headline)
+                    Text("Off by default. Turn on for a corner code that names this build and page.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .tint(.orange)
+            .accessibilityIdentifier("world2.settings.debugQR")
 
             if developerSession.isEnabled {
                 Toggle(

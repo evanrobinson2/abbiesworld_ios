@@ -1,0 +1,14 @@
+{
+  "kind": "brambleSpirit",
+  "displayName": "Bramble Spirit",
+  "species": "rabbit_hare",
+  "states": {
+    "idle": "world2_peglin_bramble_idle",
+    "happy": "world2_peglin_bramble_happy",
+    "sneaky_wink": "world2_peglin_bramble_sneaky_wink",
+    "hurt": "world2_peglin_bramble_hurt",
+    "defeated": "world2_peglin_bramble_defeated"
+  },
+  "semanticPattern": "enemy.peglin.brambleSpirit.<state>",
+  "sourceDir": "AssetSources/World2/user-supplied/peglin/v1/enemies/brambleSpirit"
+}

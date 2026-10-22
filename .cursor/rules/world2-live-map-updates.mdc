@@ -1,0 +1,24 @@
+---
+description: Live world document updates auto-apply in place with a toast (no restart / Accept).
+globs: abbies.world.ios/**/World2WorldSync.swift,abbies.world.ios/**/World2RootView.swift,abbies.world.ios/**/World2WorldUpdate*.swift,abbies.world.ios/**/WorldMapView.swift,abbies.world.ios/**/World2PlayerMenuDrawer.swift,prototypes/studio-mock/**
+alwaysApply: false
+---
+
+# Live map updates
+
+A Studio / MCP Save writes `/api/v1/worlds/current` and bumps `revision`. The iPad polls (~15s + foreground), **auto-applies in place**, and shows a short **toast** (`liveUpdateToast` → `showToast`). No restart, no Accept card.
+
+- Keep the current scene when possible. Do not respawn.
+- Stamp unseen place/scene ids; overland **NEW** badges until seen once.
+- Player menu **Map everything seen** (`noticesSuppressed`) still mutes toast + badges.
+- First pull on a device is not What's New.
+- Players stay intact. Do not seed the compiled catalog over the live document.
+
+```swift
+// BAD
+restartPlay(); enterScene(.defaultSpawn)
+await confirmAcceptCard()
+
+// GOOD
+considerRemote → apply(.acceptedOffer) + liveUpdateToast = summary.headline
+```

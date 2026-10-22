@@ -1,0 +1,229 @@
+{
+  "base_url": "http://abbies.world:8000",
+  "conditions": {
+    "A_create": {
+      "analysis": {
+        "bicep_mean_rgb": [
+          198.8,
+          177.4,
+          162.9
+        ],
+        "edit_region": {
+          "changed_pct": 79.21,
+          "changed_pixels": 10212,
+          "mean_abs_diff": 0.49,
+          "pixels": 12893
+        },
+        "keep_region": {
+          "changed_pct": 98.08,
+          "changed_pixels": 1015837,
+          "mean_abs_diff": 81.89,
+          "pixels": 1035683
+        },
+        "threshold": 18
+      },
+      "api": "abbies.world /api/create",
+      "condition": "A_prompt_only",
+      "elapsed_sec": 32.08,
+      "http_status": 200,
+      "image_url": "/static/generated/4ddaa608-64b7-44b8-ba31-43c225f7f655.png",
+      "model_used": "gpt-image-2.5-sunburst",
+      "ok": true,
+      "output": "outputs/A_prompt_only_create.png",
+      "request": {
+        "freeTextDescription": "clay kid left bicep, knitted orange sweater sleeve",
+        "model": "gpt-image-2.5-flare",
+        "quality": "low",
+        "recipeItems": []
+      },
+      "response_excerpt": "data: {\"status\": \"generating_prompt\", \"message\": \"Creating your style recipe...\"}\n\ndata: {\"status\": \"prompt_generated\", \"message\": \"Style recipe ready!\", \"prompt\": \"clay kid left bicep, knitted orange sweater sleeve\"}\n\ndata: {\"status\": \"generating_image\", \"message\": \"Painting your picture...\"}\n\ndata: {\"status\": \"partial_image\", \"message\": \"Painting... (1/3)\", \"image_url\": \"/static/generated/2452ba20-1880-4c6e-92b0-62a52119193f_partial.png\", \"is_final\": false}\n\ndata: {\"status\": \"partial_image\", \"message\": \"Painting... (2/3)\", \"image_url\": \"/static/generated/89ff331b-36d0-4fc7-a887-e0e2ae877c04_partial.png\", \"is_final\": false}\n\ndata: {\"status\": \"partial_image\", \"message\": \"Painting... (3/3)\", \"image_url\": \"/static/generated/2011b0d5-5e20-4350-b650-c40f8fada3ce_partial.png\", \"is_final\": false}\n\ndata: {\"status\": \"done\", \"message\": \"Your picture is ready!\", \"image_url\": \"/static/generated/4ddaa608-64b7-44b8-ba31-43c225f7f655.png\", \"modelUsed\": \"gpt-image-2.5-sunburst\", \"fallbackUsed\": false, \"prompt_used\": \"clay kid left bicep, knitted orange sweater sleeve\"}\n\n",
+      "sse_event_keys": "REDACTED",
+      "sse_status": "done"
+    },
+    "A_prompt_only_openai": {
+      "analysis": {
+        "bicep_mean_rgb": [
+          169.9,
+          96.6,
+          59.9
+        ],
+        "edit_region": {
+          "changed_pct": 78.83,
+          "changed_pixels": 10163,
+          "mean_abs_diff": 0.7,
+          "pixels": 12893
+        },
+        "keep_region": {
+          "changed_pct": 96.77,
+          "changed_pixels": 1002193,
+          "mean_abs_diff": 92.36,
+          "pixels": 1035683
+        },
+        "threshold": 18
+      },
+      "api": "openai.images.generate",
+      "condition": "A_prompt_only",
+      "elapsed_sec": 10.17,
+      "images": [],
+      "mask": null,
+      "mask_convention": null,
+      "model": "gpt-image-2.5-flare",
+      "ok": true,
+      "output": "outputs/A_prompt_only_openai.png",
+      "prompt": "clay kid left bicep, knitted orange sweater sleeve",
+      "quality": "low",
+      "size": "1024x1024"
+    },
+    "B_mask_prompt_openai": {
+      "analysis": {
+        "bicep_mean_rgb": [
+          218.6,
+          97.4,
+          48.6
+        ],
+        "edit_region": {
+          "changed_pct": 77.65,
+          "changed_pixels": 10012,
+          "mean_abs_diff": 0.46,
+          "pixels": 12893
+        },
+        "keep_region": {
+          "changed_pct": 0.22,
+          "changed_pixels": 2295,
+          "mean_abs_diff": 1.97,
+          "pixels": 1035683
+        },
+        "threshold": 18
+      },
+      "api": "openai.images.edit",
+      "condition": "B_mask_prompt",
+      "elapsed_sec": 7.91,
+      "images": [
+        "inputs/humanoid.png"
+      ],
+      "mask": "inputs/mask_bicep.png",
+      "mask_convention": "alpha=0 edit / alpha=255 keep",
+      "model": "gpt-image-2.5-flare",
+      "ok": true,
+      "output": "outputs/B_mask_prompt_openai.png",
+      "prompt": "Fill ONLY the masked left-upper-arm / bicep region of this clay kid figure with a knitted orange sweater sleeve. Do not change the rest of the body, face, or background.",
+      "quality": "low",
+      "size": "1024x1024"
+    },
+    "C_mask_fabric_openai": {
+      "analysis": {
+        "bicep_mean_rgb": [
+          226.4,
+          106.2,
+          44.5
+        ],
+        "edit_region": {
+          "changed_pct": 82.01,
+          "changed_pixels": 10573,
+          "mean_abs_diff": 0.39,
+          "pixels": 12893
+        },
+        "keep_region": {
+          "changed_pct": 0.45,
+          "changed_pixels": 4671,
+          "mean_abs_diff": 2.25,
+          "pixels": 1035683
+        },
+        "threshold": 18
+      },
+      "api": "openai.images.edit",
+      "condition": "C_mask_fabric",
+      "elapsed_sec": 9.31,
+      "images": [
+        "inputs/humanoid.png",
+        "inputs/fabric.png"
+      ],
+      "mask": "inputs/mask_bicep.png",
+      "mask_convention": "alpha=0 edit / alpha=255 keep",
+      "model": "gpt-image-2.5-flare",
+      "ok": true,
+      "output": "outputs/C_mask_fabric_openai.png",
+      "prompt": "fill ONLY the white mask with this knitted fabric as the bicep / upper sleeve. Do not change the rest of the body.",
+      "quality": "low",
+      "size": "1024x1024"
+    },
+    "D_mask_character_fabric_openai": {
+      "analysis": {
+        "bicep_mean_rgb": [
+          224.2,
+          103.7,
+          45.2
+        ],
+        "edit_region": {
+          "changed_pct": 81.15,
+          "changed_pixels": 10463,
+          "mean_abs_diff": 0.4,
+          "pixels": 12893
+        },
+        "keep_region": {
+          "changed_pct": 0.34,
+          "changed_pixels": 3554,
+          "mean_abs_diff": 2.41,
+          "pixels": 1035683
+        },
+        "threshold": 18
+      },
+      "api": "openai.images.edit",
+      "condition": "D_mask_character_fabric",
+      "elapsed_sec": 9.99,
+      "images": [
+        "inputs/humanoid.png",
+        "inputs/character.png",
+        "inputs/fabric.png"
+      ],
+      "mask": "inputs/mask_bicep.png",
+      "mask_convention": "alpha=0 edit / alpha=255 keep",
+      "model": "gpt-image-2.5-flare",
+      "ok": true,
+      "output": "outputs/D_mask_character_fabric_openai.png",
+      "prompt": "fill ONLY the white mask with this knitted fabric as the bicep / upper sleeve. Do not change the rest of the body.",
+      "quality": "low",
+      "size": "1024x1024"
+    }
+  },
+  "create_mask_finding": "POST /api/create cannot take a pixel mask. Accepted generation fields are recipeItems, freeTextDescription, referenceImageIds, optional quality/model on the iOS client, plus pack + size fields. There is no image/mask multipart slot.",
+  "create_probe": {
+    "client_known_fields": [
+      "recipeItems",
+      "freeTextDescription",
+      "referenceImageIds",
+      "quality",
+      "model",
+      "imageWidth",
+      "imageHeight",
+      "packId",
+      "packVersion",
+      "packManifestChecksum",
+      "packSelections"
+    ],
+    "health_ok": true,
+    "health_status": 200,
+    "invalid_probe_body": "{\"error\":\"recipeItems must be an array\"}\n",
+    "invalid_probe_status": 400,
+    "pixel_mask_field_in_server_source": false,
+    "would_have_sent_fields": [
+      "freeTextDescription",
+      "image",
+      "mask",
+      "model",
+      "quality",
+      "recipeItems",
+      "referenceImageIds"
+    ]
+  },
+  "finishedAt": "2026-09-19T23:59:23.444777Z",
+  "has_openai_key": "REDACTED",
+  "has_server_key": "REDACTED",
+  "openai_model_preference": [
+    "gpt-image-2.5-flare",
+    "gpt-image-1.5",
+    "gpt-image-1"
+  ],
+  "startedAt": "2026-09-19T23:58:12.577892Z",
+  "stopped_early": false
+}
