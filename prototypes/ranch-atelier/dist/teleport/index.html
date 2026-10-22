@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Family Teleport</title>
+<meta name="robots" content="noindex">
+<link rel="stylesheet" href="/teleport/teleport.css">
+<script type="importmap">{"imports":{"three":"/simulations/vendor/three.module.js"}}</script>
+</head>
+<body data-mode="setup">
+<div id="stage"></div>
+<div id="flash"></div>
+<div class="letterbox top"></div><div class="letterbox bottom"></div>
+
+<!-- 1. The crew: who is teleporting. Kept only in this browser. -->
+<section class="panel" id="setup">
+ <h1>Family Teleport</h1>
+ <p class="lede">Who's going on the adventure? These are stand-in characters for now. Pick colours from a photo if you want, or set them by hand. The photo stays on this device and is never uploaded.</p>
+ <div id="crew-list"></div>
+ <div class="row">
+  <button id="add-member" class="ghost">+ Add someone</button>
+  <label class="ghost button">📷 Colours from a photo<input id="photo-input" type="file" accept="image/*" hidden></label>
+  <button id="reset-crew" class="ghost">Reset</button>
+  <span class="spacer"></span>
+  <button id="crew-next" class="primary">Next: imagine things →</button>
+ </div>
+</section>
+
+<!-- 2. Madlibs: the answers seed the model builder. -->
+<section class="panel" id="madlibs">
+ <p class="step" id="ml-step"></p>
+ <h2 id="ml-ask"></h2>
+ <form id="ml-form" class="row">
+  <input id="ml-input" autocomplete="off" maxlength="40">
+  <button type="button" id="ml-mic" class="ghost" title="Say it">🎤</button>
+  <button class="primary">Next →</button>
+ </form>
+ <p id="ml-match" class="match"></p>
+ <div class="row"><button id="ml-back" class="ghost">← Back</button><span class="spacer"></span><button id="sample-answers" class="ghost">Use sample answers</button></div>
+</section>
+
+<!-- 3. Ready: what the builder will make. -->
+<section class="panel" id="ready">
+ <h2>The builder is ready</h2>
+ <div id="order-summary"></div>
+ <div class="row"><button id="download-order" class="ghost">Download model order</button><span class="spacer"></span><button id="teleport" class="primary big">Teleport us! ✨</button></div>
+</section>
+
+<!-- Map of the adventure -->
+<section id="map" hidden>
+ <h2>The Adventure</h2>
+ <div class="stops"></div>
+</section>
+
+<!-- In-world HUD -->
+<header id="hud">
+ <div class="where"><b id="world-name"></b><small id="world-stop"></small></div>
+ <span class="spacer"></span>
+ <span id="live"><i></i>LIVE <span id="fps"></span></span>
+ <span id="reaction"></span>
+ <button id="builder-btn" class="icon" title="Builder (B)">🧱</button>
+ <button id="sound" class="icon" title="Sound">🔊</button>
+ <button id="map-btn" class="icon" title="Map (M)">🗺️</button>
+ <button id="next" class="icon wide" title="Next world (N)">Next ▶</button>
+</header>
+<aside id="builder"></aside>
+<aside id="orders-box"><b>New model orders</b><ul id="orders"></ul></aside>
+<div id="title-card"><h1></h1><p></p></div>
+<div id="caption" role="status" aria-live="polite"></div>
+<div id="heard"></div>
+<footer id="command">
+ <div id="chips"></div>
+ <form id="say-form" class="row">
+  <button type="button" id="mic" title="Hold space or tap to talk">🎤</button>
+  <input id="say" placeholder="Say or type anything: “make it snow”, “add a giant pizza”" autocomplete="off" maxlength="120">
+  <button class="primary">Go</button>
+ </form>
+</footer>
+
+<dialog id="photo-dialog">
+ <p id="photo-prompt"></p>
+ <canvas id="photo-canvas"></canvas>
+ <p class="tiny">This photo only lives in this browser tab. It is cleared when you close this box.</p>
+ <button id="photo-done" class="primary">Done</button>
+</dialog>
+<script type="module" src="/teleport/app.mjs"></script>
+</body>
+</html>
