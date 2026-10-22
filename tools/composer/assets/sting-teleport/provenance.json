@@ -1,0 +1,215 @@
+{
+ "id": "sting-teleport",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "a58ca72cd2c12bf3a63a5bee2dc1fd8703b7e367efda532a4116c0261203a1a4"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "f5f0cd6b70bf3ff818c1b2882f99a6112821463f579a0d6f799a3cdf6a819a7d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "814d3dd358c4e698edbb8b62892961ca5d68ba4f6943e4eaebd9ce7c9d12e0ec"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "0037258c60ab59aea53d293026a73cedbd707fa36c61dbea10f3da86b7358187"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "5b5196bdc289a4fee0d9f189192a880fbcc0c15be1a08b4e0cb73099977a5a99"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "aebb5d9731af9ede281b06ef535df300cfa81561e1925db2a3c73592de92059c"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "5767b4256a0386b9ec0acb6da74c49837a63574d2296115fddb961346696c561"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "84eafd411e389b7f2d2c81cea4a3b240addfe024545d0cde9deb12a07c79735e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "2096b94877277b33aa23e09dcdc967ae7c2fdf07761feccdb660aaa633b623b6"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "f503aacb41ddff00e67ecc2117fb5ad3944d865cd31bd14b6e4b4a6c94904210"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "db57478e807228619b9d04dca497435d33af9b0930c529fe43196dcf4046e179"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "384c75b90b5583abd68e4469dae69c31a08bbe2d1ee02264af60505c888b7124"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "2096b94877277b33aa23e09dcdc967ae7c2fdf07761feccdb660aaa633b623b6"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "f503aacb41ddff00e67ecc2117fb5ad3944d865cd31bd14b6e4b4a6c94904210"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "db57478e807228619b9d04dca497435d33af9b0930c529fe43196dcf4046e179"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "384c75b90b5583abd68e4469dae69c31a08bbe2d1ee02264af60505c888b7124"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "2096b94877277b33aa23e09dcdc967ae7c2fdf07761feccdb660aaa633b623b6"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "f503aacb41ddff00e67ecc2117fb5ad3944d865cd31bd14b6e4b4a6c94904210"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "db57478e807228619b9d04dca497435d33af9b0930c529fe43196dcf4046e179"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "384c75b90b5583abd68e4469dae69c31a08bbe2d1ee02264af60505c888b7124"
+  }
+ ],
+ "title": "Teleport",
+ "kind": "sting",
+ "brief": "Glockenspiel glissando and bell tree rise into a sparkling lydian harp chord.",
+ "uses": [
+  "teleport",
+  "portal",
+  "magic transition"
+ ],
+ "tags": [
+  "sting",
+  "teleport",
+  "magic",
+  "shimmer"
+ ],
+ "score": "tools/composer/cues/stings.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/stings.py",
+  "bpm": 120,
+  "meter": "4/4",
+  "key": "E major",
+  "bars": 2,
+  "instruments": [
+   "bass",
+   "cellos_trem",
+   "glock",
+   "harp",
+   "violas",
+   "violins_trem"
+  ],
+  "percussion": [
+   "bell_tree",
+   "cymbal_swell_short",
+   "glock_gliss_up"
+  ],
+  "hall_seconds": 3.0,
+  "target_lufs": -16.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "D": {
+   "audio": "/music/composer/sting-teleport.D.mp3",
+   "sha256": "2096b94877277b33aa23e09dcdc967ae7c2fdf07761feccdb660aaa633b623b6",
+   "bytes": 164349,
+   "duration": 7.913,
+   "loudness": -16.0,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "G": {
+   "audio": "/music/composer/sting-teleport.G.mp3",
+   "sha256": "f503aacb41ddff00e67ecc2117fb5ad3944d865cd31bd14b6e4b4a6c94904210",
+   "bytes": 153549,
+   "duration": 7.538,
+   "loudness": -16.0,
+   "peak": -1.1,
+   "loopPoints": null,
+   "stems": []
+  },
+  "Bb": {
+   "audio": "/music/composer/sting-teleport.Bb.mp3",
+   "sha256": "db57478e807228619b9d04dca497435d33af9b0930c529fe43196dcf4046e179",
+   "bytes": 166461,
+   "duration": 7.913,
+   "loudness": -16.1,
+   "peak": -1.0,
+   "loopPoints": null,
+   "stems": []
+  },
+  "E": {
+   "audio": "/music/composer/sting-teleport.E.mp3",
+   "sha256": "384c75b90b5583abd68e4469dae69c31a08bbe2d1ee02264af60505c888b7124",
+   "bytes": 163317,
+   "duration": 7.913,
+   "loudness": -16.0,
+   "peak": -1.3,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}

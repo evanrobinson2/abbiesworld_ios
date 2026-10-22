@@ -1,0 +1,114 @@
+{
+ "id": "ranch-night",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "bf0714d477d0387e116c2fcf741b5f190f4584089904859030d9d7a8b7f2e016"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "3b372f9ff122ce4357c20bac6920f5ccc6d22f6574609370f8d6a55ef6656ff5"
+  }
+ ],
+ "title": "Ranch Night",
+ "kind": "music",
+ "brief": "Night bed for the Ranch: a slow 3/4 lullaby. Piano ripples under muted-feeling strings; the clarinet and then a solo violin sing Abbie's motif. Warm and safe, made for winding down.",
+ "uses": [
+  "ranch night",
+  "bedtime",
+  "quiet building",
+  "end of a session"
+ ],
+ "tags": [
+  "ranch",
+  "night",
+  "lullaby",
+  "waltz",
+  "calm"
+ ],
+ "score": "tools/composer/cues/ranch_night.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/ranch_night.py",
+  "bpm": 60,
+  "meter": "3/4",
+  "key": "Bb major",
+  "bars": 16,
+  "instruments": [
+   "bass",
+   "cellos",
+   "clarinet",
+   "glock",
+   "harp",
+   "piano",
+   "solo_violin",
+   "violas",
+   "violins"
+  ],
+  "percussion": [],
+  "hall_seconds": 3.0,
+  "target_lufs": -18.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": "clarinet bars 1-2 and 5; solo violin in G minor bars 9-10",
+ "files": {
+  "main": {
+   "audio": "/music/composer/ranch-night.mp3",
+   "sha256": "3b372f9ff122ce4357c20bac6920f5ccc6d22f6574609370f8d6a55ef6656ff5",
+   "bytes": 1098477,
+   "duration": 48.4,
+   "loudness": -18.0,
+   "peak": -4.1,
+   "loopPoints": {
+    "start": 0.2,
+    "end": 48.2
+   },
+   "stems": [
+    {
+     "name": "foundation",
+     "url": "/music/composer/ranch-night.stem-foundation.mp3",
+     "sha256": "be2466eb565dcb8b30df46c33446d6f645e8a699fa7ec8a9b3ae57f1aa50aa5b",
+     "bytes": 830157,
+     "min": 0.0,
+     "role": "sustained strings and bass, always on"
+    },
+    {
+     "name": "pulse",
+     "url": "/music/composer/ranch-night.stem-pulse.mp3",
+     "sha256": "e1982c8b3b52902cf54c5eefbaca1d25900c639de72985ebc0c3e91cbb50d389",
+     "bytes": 734301,
+     "min": 0.2,
+     "role": "harp, pizzicato and mallet motion"
+    },
+    {
+     "name": "melody",
+     "url": "/music/composer/ranch-night.stem-melody.mp3",
+     "sha256": "a4a868b590a5fa49427ffe48c9cdd1d58ff09df6608fb73aca123b07ee6e0b60",
+     "bytes": 847005,
+     "min": 0.45,
+     "role": "the tune: woodwinds, horn, solo strings"
+    },
+    {
+     "name": "color",
+     "url": "/music/composer/ranch-night.stem-color.mp3",
+     "sha256": "37e57a4c052459ff32a5f602d6ab984fa0f417f35d8db22ecc46c0c6830c51ea",
+     "bytes": 381357,
+     "min": 0.7,
+     "role": "bells, glockenspiel, triangle, high shimmer"
+    }
+   ]
+  }
+ }
+}

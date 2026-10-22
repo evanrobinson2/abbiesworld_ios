@@ -1,0 +1,128 @@
+{
+ "id": "wonder",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "2cf06cab62114468819f4d2a158b951c7debc83c8c95cef9d396042aabe80d0e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "e318eefbe2cb643bd187cd67b704a8af22682e6be2c9a5cb78d44e971cf3fa68"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": null,
+   "sha256": "794bc13c96f1e3fc4890cc00eba112b1394877284b25cf09e491b76aa15c458f"
+  }
+ ],
+ "title": "Wonder",
+ "kind": "music",
+ "brief": "Adventure bed for the family teleport worlds and any new world being explored. E lydian: harp ripples and string tremolo under horns singing Abbie's motif, timpani swells into each phrase.",
+ "uses": [
+  "exploring a new world",
+  "family teleport adventure",
+  "holodeck reveal",
+  "world tour"
+ ],
+ "tags": [
+  "adventure",
+  "wonder",
+  "lydian",
+  "cinematic",
+  "teleport"
+ ],
+ "score": "tools/composer/cues/wonder.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/wonder.py",
+  "bpm": 92,
+  "meter": "4/4",
+  "key": "E lydian",
+  "bars": 16,
+  "instruments": [
+   "bass",
+   "cellos",
+   "cellos_pizz",
+   "clarinet",
+   "flute",
+   "glock",
+   "harp",
+   "horn",
+   "oboe",
+   "timpani",
+   "timpani_roll",
+   "trumpet",
+   "violas",
+   "violins",
+   "violins_trem"
+  ],
+  "percussion": [
+   "cymbal_swell"
+  ],
+  "hall_seconds": 2.8,
+  "target_lufs": -18.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": "horn bars 1-3 (with the lydian A# answer), horns in thirds bars 9-11",
+ "files": {
+  "main": {
+   "audio": "/music/composer/wonder.mp3",
+   "sha256": "794bc13c96f1e3fc4890cc00eba112b1394877284b25cf09e491b76aa15c458f",
+   "bytes": 986733,
+   "duration": 42.139,
+   "loudness": -18.0,
+   "peak": -4.4,
+   "loopPoints": {
+    "start": 0.2,
+    "end": 41.93913
+   },
+   "stems": [
+    {
+     "name": "foundation",
+     "url": "/music/composer/wonder.stem-foundation.mp3",
+     "sha256": "747d59b01d92a66049afa6316d5a6ab05afe0776ec70c34a5dcc65190aee0acc",
+     "bytes": 756141,
+     "min": 0.0,
+     "role": "sustained strings and bass, always on"
+    },
+    {
+     "name": "pulse",
+     "url": "/music/composer/wonder.stem-pulse.mp3",
+     "sha256": "7ba6347f285888e0d215f2782ba90861009a2bd824067122126411789148e41a",
+     "bytes": 714621,
+     "min": 0.2,
+     "role": "harp, pizzicato and mallet motion"
+    },
+    {
+     "name": "melody",
+     "url": "/music/composer/wonder.stem-melody.mp3",
+     "sha256": "cfd65d9fc88c6e5b44bc2d9c31b96ac5091f3b15a6663141872a164f715f8d64",
+     "bytes": 754797,
+     "min": 0.45,
+     "role": "the tune: woodwinds, horn, solo strings"
+    },
+    {
+     "name": "color",
+     "url": "/music/composer/wonder.stem-color.mp3",
+     "sha256": "e79088e826bb75faecdd3f06f2d6f0fdce26772f9536564932324efbfd37210e",
+     "bytes": 517725,
+     "min": 0.7,
+     "role": "bells, glockenspiel, triangle, high shimmer"
+    }
+   ]
+  }
+ }
+}

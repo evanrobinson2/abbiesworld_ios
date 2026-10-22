@@ -5,6 +5,14 @@
       "destination": "https://pub-07c8c8a2d9aa40db9fa739b28c65b3e2.r2.dev/:path*"
     },
     {
+      "source": "/music",
+      "destination": "/music/index.html"
+    },
+    {
+      "source": "/music/",
+      "destination": "/music/index.html"
+    },
+    {
       "source": "/models",
       "destination": "/models/index.html"
     },

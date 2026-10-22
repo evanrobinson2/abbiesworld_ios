@@ -1,0 +1,216 @@
+{
+ "id": "sting-arrival",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "7cbbc6c8d8570c1a871671580517ecf7fb90365a4d687dffbd93e588b5d7094f"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "7aeac57c8e11fd70d7be22867b1a923ef00938f50ea0f69320a0a92f7b0d77b9"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "59b531be0d46ce66865f4c861e8cf756e24c9f53adaa90a45d176cae7819a32c"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "f5e09e63ef310e33468b70a369cabdf330b54a93f22da70725983350c734affb"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "b43c864d4e50a9ff6d459871773aa5061cd65952f754bd4ba4f9e99b00ce99a4"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "2a59e241cd3ab403d64e1212f302d2135c13121b444e4fc801361460aa77a4d0"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "e0172d0ff2a6fa72f10c00c069162447b5979937d2637cf0f1be36d644fece98"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "e6b95294f89cc7b2b3972a913477ae986b62599c36964372a216a0faec587342"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "c9627e4dfc040f518f1a768bc9745413f3d657e91af240a24bb2741fef8006d5"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "53bfe78de823e6f8f60d216a29c362cbbf70b91ca6fc4f53df5e69e8bfaea5e2"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "b9e36d90f4db257e06d866e996f3e14b6d470026763c83e774037703ff83310e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "9e3a3ab8674c9c14e73514bd7e2e151c90a8cbe004eb178d5eac3d886c0ee1d4"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "c9627e4dfc040f518f1a768bc9745413f3d657e91af240a24bb2741fef8006d5"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "53bfe78de823e6f8f60d216a29c362cbbf70b91ca6fc4f53df5e69e8bfaea5e2"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "b9e36d90f4db257e06d866e996f3e14b6d470026763c83e774037703ff83310e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "9e3a3ab8674c9c14e73514bd7e2e151c90a8cbe004eb178d5eac3d886c0ee1d4"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "c9627e4dfc040f518f1a768bc9745413f3d657e91af240a24bb2741fef8006d5"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "53bfe78de823e6f8f60d216a29c362cbbf70b91ca6fc4f53df5e69e8bfaea5e2"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "b9e36d90f4db257e06d866e996f3e14b6d470026763c83e774037703ff83310e"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "9e3a3ab8674c9c14e73514bd7e2e151c90a8cbe004eb178d5eac3d886c0ee1d4"
+  }
+ ],
+ "title": "Arrival",
+ "kind": "sting",
+ "brief": "Harp sweep into the orchestra arriving on the home chord, horns quote Abbie's motif.",
+ "uses": [
+  "arriving in a world",
+  "teleport landing",
+  "opening a level"
+ ],
+ "tags": [
+  "sting",
+  "arrival",
+  "harp",
+  "horns"
+ ],
+ "score": "tools/composer/cues/stings.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/stings.py",
+  "bpm": 90,
+  "meter": "4/4",
+  "key": "E major",
+  "bars": 3,
+  "instruments": [
+   "bass",
+   "cellos",
+   "flute",
+   "harp",
+   "horn",
+   "timpani",
+   "violas",
+   "violins"
+  ],
+  "percussion": [
+   "glock_gliss_up_slow",
+   "triangle"
+  ],
+  "hall_seconds": 2.6,
+  "target_lufs": -16.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "D": {
+   "audio": "/music/composer/sting-arrival.D.mp3",
+   "sha256": "c9627e4dfc040f518f1a768bc9745413f3d657e91af240a24bb2741fef8006d5",
+   "bytes": 114693,
+   "duration": 5.393,
+   "loudness": -16.0,
+   "peak": -4.5,
+   "loopPoints": null,
+   "stems": []
+  },
+  "G": {
+   "audio": "/music/composer/sting-arrival.G.mp3",
+   "sha256": "53bfe78de823e6f8f60d216a29c362cbbf70b91ca6fc4f53df5e69e8bfaea5e2",
+   "bytes": 124221,
+   "duration": 5.696,
+   "loudness": -16.0,
+   "peak": -4.3,
+   "loopPoints": null,
+   "stems": []
+  },
+  "Bb": {
+   "audio": "/music/composer/sting-arrival.Bb.mp3",
+   "sha256": "b9e36d90f4db257e06d866e996f3e14b6d470026763c83e774037703ff83310e",
+   "bytes": 112869,
+   "duration": 5.331,
+   "loudness": -16.0,
+   "peak": -3.2,
+   "loopPoints": null,
+   "stems": []
+  },
+  "E": {
+   "audio": "/music/composer/sting-arrival.E.mp3",
+   "sha256": "9e3a3ab8674c9c14e73514bd7e2e151c90a8cbe004eb178d5eac3d886c0ee1d4",
+   "bytes": 119685,
+   "duration": 5.478,
+   "loudness": -16.0,
+   "peak": -4.6,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}
