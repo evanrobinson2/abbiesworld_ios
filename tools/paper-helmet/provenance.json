@@ -1,0 +1,59 @@
+{
+ "asset": "papercraft helmet study (Roman crested helmet) + late-Roman ridge helmet placeholder",
+ "created": "2026-10-22T16:47:46Z",
+ "requested_by": "Evan (Abbie's World project, Paper warrior helmet thread)",
+ "reference_image": {
+  "file": "ref/target.png",
+  "sha256_16": "68fbddcfeeb142c8",
+  "source": "Evan's Midjourney render, uploaded 2026-10-22 (project files paper-warrior/helmet-study/helmet-target.png)"
+ },
+ "mask": {
+  "file": "ref/mask.png",
+  "tool": "rembg 2.x, model isnet-general-use"
+ },
+ "landmarks": {
+  "file": "ref/landmarks.json",
+  "how": "6 points hand-clicked by Claude on a gridded copy of the reference"
+ },
+ "generator": "procedural Blender Python (helmet.py); no external meshes, textures or scans",
+ "software": {
+  "blender": "bpy 5.2.3 (pip), Cycles CPU",
+  "python": "numpy, scipy, scikit-image, Pillow"
+ },
+ "optimisation": "(1+1) evolution strategy, seeds in study.py; every evaluation in out/loss_log.jsonl",
+ "critic": {
+  "model": "Claude Opus via claude -p (Evan's Max login)",
+  "rounds": 5,
+  "cost_usd": 0.897,
+  "log": "out/critic_C3.json"
+ },
+ "outputs": {
+  "helmet_C_rules.glb": {
+   "sha256_16": "15b0a0a0d107604c",
+   "params": "out/params_C_rules.json"
+  },
+  "helmet_C.glb": {
+   "sha256_16": "04596db4d41e4d6c",
+   "params": "out/params_C.json"
+  },
+  "helmet_A.glb": {
+   "sha256_16": "a23ea2c95e3a552f",
+   "params": "out/params_A.json"
+  },
+  "ridge_helmet.glb": {
+   "sha256_16": "24c9250a100f660e",
+   "params": "out/params_ridge.json"
+  }
+ },
+ "judged_loss_768px": {
+  "start": 0.909,
+  "A_geom": 0.5352,
+  "A": 0.6187,
+  "B": 0.8811,
+  "C": 0.4314,
+  "C_eye": 0.576,
+  "C_rules": 0.4727
+ },
+ "results_page": "https://claude.ai/artifact/TXjyaZgNac1Q4cSb7aTUnP",
+ "license_note": "Derived from a Midjourney image owned by Evan under his Midjourney plan; the geometry is newly generated."
+}

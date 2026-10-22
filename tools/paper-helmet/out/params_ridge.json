@@ -1,0 +1,98 @@
+{
+ "shape": {
+  "dome": [
+   0.9,
+   1.02,
+   0.88
+  ],
+  "band_h": 0.12,
+  "lip": 0.035,
+  "lip_z": 0.0,
+  "lip_front": 0.0,
+  "front_drop": 0.0,
+  "low_h": 0.28,
+  "low_back": 0.12,
+  "taper": 0.05,
+  "open": 40,
+  "cheek_w": 52,
+  "cheek_len": 0.85,
+  "cheek_back_len": 0.75,
+  "cheek_tip_u": 0.35,
+  "cheek_in": 0.12,
+  "cheek_front": 1.0,
+  "neck_w": 55,
+  "neck_len": 0.32,
+  "neck_flare": 72,
+  "neck_off": 0,
+  "boss_th": 60,
+  "boss_r": 0.045,
+  "crest": null,
+  "band_front": 0.0,
+  "eye_gap": 0.0,
+  "eye_w": 35.508784929730005,
+  "ridge": {
+   "w": 0.16,
+   "h": 0.07
+  }
+ },
+ "grammar": {
+  "dome_u": 14,
+  "dome_v": 4,
+  "dome_twist": 0.04246724961476238,
+  "band_u": 12,
+  "shell_u": 9,
+  "plate_fold": 0.13,
+  "hem_w": 0.26,
+  "hem_h": 0.05,
+  "blades": 16,
+  "blade_jitter": 0.0482110912446142,
+  "ridge": 0.55,
+  "paper_t": 0.038228164868687305
+ },
+ "place": {
+  "x": 0.06139816410596794,
+  "z": -0.04245338909170228,
+  "yaw": -38.19685347679278,
+  "pitch": 1.3331755828619376,
+  "roll": -0.35285829216691267,
+  "scale": 1.0931190044838746,
+  "ground": -1.75
+ },
+ "cam": {
+  "dist": 14,
+  "el": 1.5218506545794748,
+  "focal": 85,
+  "tx": 0.0,
+  "tz": 0.00028875442978771107
+ },
+ "light": {
+  "key_az": -55.05315569128211,
+  "key_el": 49.57143254457391,
+  "key_size": 5,
+  "key_power": 3035.45895830905,
+  "fill_az": 40,
+  "fill_el": 20,
+  "fill_power": 520.162068629644,
+  "world_color": [
+   0.8,
+   0.79,
+   0.76
+  ],
+  "world_strength": 0.6,
+  "bg_albedo": [
+   0.6,
+   0.5376691040855489,
+   0.5142692379504353
+  ],
+  "paper_albedo": 0.7863844168514154,
+  "paper_warm": 0.025682582072880433,
+  "paper_rough": 0.8371811910106549,
+  "exposure": 0.0,
+  "agx": 1
+ },
+ "filter": {
+  "on": 0,
+  "edge": 0.14,
+  "crumple": 0.12
+ }
+}
