@@ -1,0 +1,94 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-22",
+  "name": "horse-shelter",
+  "group": "building",
+  "replaces": "simulation-assets/buildings/cattle-shelter-*.json",
+  "tool": "Midjourney web app (midjourney.com/imagine), driven in Evan's signed-in Chrome by Claude through the Claude in Chrome extension, one job at a time, text prompts only (no image reference)",
+  "jobs": {
+    "hero": {
+      "prompt": "a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 1:1",
+      "grid_job_id": "180a5241-07df-411d-980b-948ff73782d9",
+      "grid_url": "https://www.midjourney.com/jobs/180a5241-07df-411d-980b-948ff73782d9?index=0",
+      "picked_index": 0,
+      "upscale_job_id": "2e1c3827-2b0a-48f0-86ba-96b1137070f3",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:48:47.032Z",
+      "grid_done_at": "2026-10-22T20:49:05.036Z",
+      "upscale_clicked_at": "2026-10-22T20:49:17.322Z",
+      "downloaded_at": "2026-10-22T20:50:29.132Z",
+      "pick_reason": "stable door with top half open, hay rack on the wall, deep overhang, stone foundation"
+    },
+    "turnaround": {
+      "prompt": "orthographic turnaround sheet, front view, side view, back view, evenly spaced, same scale, a timber horse stable, rose-pink plank walls with timber posts, a teal shingled gable roof with a deep overhang, a wide half door (stable door) with the top half open, a hay rack on the wall, a low stone foundation, stylized 3D game asset, low-poly diorama style, flat painted colors, soft studio lighting, plain warm cream background, centered, full object visible, no text --ar 16:9",
+      "grid_job_id": "bce59b47-8e04-4d4c-a6ce-85b41e0c57b4",
+      "grid_url": "https://www.midjourney.com/jobs/bce59b47-8e04-4d4c-a6ce-85b41e0c57b4?index=1",
+      "picked_index": 1,
+      "upscale_job_id": "aee1f229-977d-45be-8edb-44890c8be8d4",
+      "upscale_mode": "Upscale (Subtle)",
+      "submitted_at": "2026-10-22T20:51:07.032Z",
+      "grid_done_at": "2026-10-22T20:51:25.033Z",
+      "upscale_clicked_at": "2026-10-22T20:51:38.423Z",
+      "downloaded_at": "2026-10-22T20:53:01.048Z",
+      "pick_reason": "only variant with three separate views (front, side, back)",
+      "rejected_grids": [
+        {
+          "grid_job_id": "2a78711d-32fb-4fc0-ba12-bcfa1e1dbb45",
+          "submitted_at": "2026-10-22T20:50:40.426Z",
+          "grid_done_at": "2026-10-22T20:50:58.430Z",
+          "reason": "no variant had three views (two-view sheets or a single building), so the same prompt was run again"
+        }
+      ]
+    }
+  },
+  "files": {
+    "hero.png": {
+      "sha256": "71440fa0d47bee688eaac397024692f17ca1625fe7190c6941ad78e88fb194dc",
+      "bytes": 4071482,
+      "pixels": [
+        2048,
+        2048
+      ],
+      "source": "https://cdn.midjourney.com/2e1c3827-2b0a-48f0-86ba-96b1137070f3/0_0.png"
+    },
+    "turnaround.png": {
+      "sha256": "160092897e51bcd64a5affae5c736ef877faa39725794d712e330ebc36ed9f78",
+      "bytes": 4279787,
+      "pixels": [
+        2912,
+        1632
+      ],
+      "source": "https://cdn.midjourney.com/aee1f229-977d-45be-8edb-44890c8be8d4/0_0.png"
+    },
+    "view_front.png": {
+      "sha256": "def2747dcd334cb83d55848c30c44cfe7864a39635982c88d2c6011a06f4dc2e",
+      "bytes": 1337054,
+      "pixels": [
+        929,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-shelter [('front', 59, 988), ('side', 988, 1984), ('back', 1984, 2803)]"
+    },
+    "view_side.png": {
+      "sha256": "7c8b52f7c45423d81414fdc091ccc07764e2d0142c9fa0bc937fc752575b5f47",
+      "bytes": 1555796,
+      "pixels": [
+        996,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-shelter [('front', 59, 988), ('side', 988, 1984), ('back', 1984, 2803)]"
+    },
+    "view_back.png": {
+      "sha256": "84f3e53af8d1291426084958d567b5b97ee23d3a689706ac3eea65b1a9b2a41e",
+      "bytes": 1164227,
+      "pixels": [
+        819,
+        1632
+      ],
+      "derived_from": "turnaround.png",
+      "method": "tools/model-challenge/split.py: /Users/evanrobinson/abbiesworld-midjourney/repo/tools/ranch-rebuild/mj/horse-shelter [('front', 59, 988), ('side', 988, 1984), ('back', 1984, 2803)]"
+    }
+  }
+}
