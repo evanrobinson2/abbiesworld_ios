@@ -313,6 +313,7 @@ export function applyClaudeMessage(record, source, { now = Date.now() } = {}) {
     record.stages = record.stages || [];
     if (!record.stages.some((st) => st.name === msg.stage)) record.stages.push({ name: msg.stage, at });
   }
+  if (typeof marker.job_kind === "string" && marker.job_kind.trim()) record.jobKind = clip(marker.job_kind.trim().toLowerCase(), 24);
   // Partial progress on long jobs: {"progress":{"done":3,"total":8,"unit":"parts","note":"…"}}
   const pr = marker.progress;
   if (pr && typeof pr === "object" && Number.isFinite(Number(pr.done)) && Number.isFinite(Number(pr.total)) && Number(pr.total) > 0) {
@@ -541,6 +542,35 @@ export function parcelView(record, now = Date.now()) {
       prs: record.git.prs.map((n) => `https://github.com/evanrobinson2/abbiesworld_ios/pull/${n}`),
       other: record.git.links.slice(-5),
     },
+  };
+}
+
+const ACTIVITY_STATUS = { submitted: "queued", acknowledged: "running", running: "running", blocked: "blocked", completed: "done", failed: "failed" };
+
+/** One message as an activity-centre event (the phone app's shape). */
+export function activityEvent(record, msg) {
+  const p = msg.progress || record.progress;
+  return {
+    id: msg.id,
+    jobId: record.id,
+    jobTitle: clip(record.request.split("\n")[0], 90),
+    jobKind: record.mode === "bespoke" ? "serious" : record.jobKind || "build",
+    mode: record.mode || "auto",
+    stages: (record.stages || []).map((st) => st.name),
+    stage: msg.stage || record.stage || null,
+    progress: p ? Math.round(p.fraction * 1000) / 1000 : record.status === "completed" ? 1 : null,
+    status: ACTIVITY_STATUS[record.status] || record.status,
+    at: msg.at,
+    message: clip(msg.text.split("\n")[0], 280),
+    kind: msg.kind,
+    checkpoint: msg.checkpoint || null,
+    image: msg.images?.[0]?.url || null,
+    images: msg.images || [],
+    model: msg.models?.[0]?.url || null,
+    models: msg.models || [],
+    worker: msg.from === "claude" ? "claude" : "bridge",
+    thread: record.git.issueUrl || null,
+    verified: record.verified,
   };
 }
 

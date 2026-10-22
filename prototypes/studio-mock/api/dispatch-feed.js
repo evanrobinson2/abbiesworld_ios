@@ -9,8 +9,12 @@
  * POST /api/dispatch-feed { dispatch_id, instructions } → revise(): steer a running build
  *      (delivered to the session at its next checkpoint) or answer a question.
  *
- * Auth: Bearer Auth0 token (household api.abbies.world or the MCP audience), signature-checked.
+ * GET  /api/dispatch-feed?format=activity[&since=ISO] → { events (newest first, activity-centre shape), jobs, machines }
+ *
+ * Auth: Bearer Auth0 token (household api.abbies.world or the MCP audience), signature-checked,
+ * or X-Dispatch-Feed-Key = DISPATCH_FEED_KEY for the Ranch Atelier server-side proxy.
  */
+import { timingSafeEqual } from "node:crypto";
 import { authorizeDispatchCaller } from "./lib/dispatch-auth.js";
 import { createDispatchService, getDefaultStore } from "./lib/dispatch-service.js";
 import { summarize as summarizeExecutionCapacity } from "./lib/execution-capacity-store.js";
@@ -46,7 +50,7 @@ async function midjourneyMachines() {
 function cors(extra = {}) {
   return {
     "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "authorization, content-type",
+    "Access-Control-Allow-Headers": "authorization, content-type, x-dispatch-feed-key",
     "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
     "Cache-Control": "no-store",
     ...extra,
@@ -57,7 +61,16 @@ function json(body, status = 200) {
   return new Response(JSON.stringify(body), { status, headers: cors({ "Content-Type": "application/json" }) });
 }
 
+/** Server-to-server key for the Ranch Atelier app's /api/activity proxy (DISPATCH_FEED_KEY on both projects). */
+function feedKeyOk(request) {
+  const want = String(process.env.DISPATCH_FEED_KEY || "");
+  const got = String(request.headers.get("x-dispatch-feed-key") || "");
+  if (want.length < 32 || got.length !== want.length) return false;
+  return timingSafeEqual(Buffer.from(want), Buffer.from(got));
+}
+
 async function authorize(request) {
+  if (feedKeyOk(request)) return { ok: true, requester: { kind: "app-proxy", sub: "ranch-atelier" } };
   const header = request.headers.get("authorization") || "";
   const token = header.startsWith("Bearer ") ? header.slice(7).trim() : "";
   return authorizeDispatchCaller(token).catch((err) => ({ ok: false, error: String(err?.message || err) }));
@@ -72,6 +85,11 @@ export async function GET(request) {
   if (!auth.ok) return json({ error: "unauthorized", detail: auth.error }, 401);
   const url = new URL(request.url);
   const service = createDispatchService({ store: await getDefaultStore(), machinesExtra: midjourneyMachines });
+  if (url.searchParams.get("format") === "activity") {
+    const act = await service.activity({ since: url.searchParams.get("since") || undefined, limit: url.searchParams.get("limit") || undefined });
+    if (!act.error) act.machines = (await service.feed({})).machines;
+    return json(act, act.error ? 400 : 200);
+  }
   const out = await service.feed({
     since: url.searchParams.get("since") || undefined,
     dispatch_id: url.searchParams.get("dispatch_id") || undefined,

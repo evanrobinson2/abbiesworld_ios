@@ -16,6 +16,7 @@ import {
   markRevisionPosted,
   revisionsToPost,
   noteRefire,
+  activityEvent,
   parcelView,
   publicMessage,
   recordFireResult,
@@ -326,5 +327,26 @@ export function createDispatchService({ store, fire = fireRoutine, now = () => D
     };
   }
 
-  return { build, status, revise, inbox, relay, sweep, sweepOne, deliver, pendingIssuePosts, revisionPosted, feed };
+  /** The activity-centre shape: events newest first, plus the latest state of each job. */
+  async function activity({ since, limit = 100 } = {}) {
+    const sinceMs = since ? Date.parse(since) : null;
+    if (since && Number.isNaN(sinceMs)) return { error: "bad_since" };
+    const records = await store.listRecords();
+    const events = [];
+    for (const rec of records) {
+      for (const m of rec.messages) {
+        if (sinceMs && Date.parse(m.at) <= sinceMs) continue;
+        events.push(activityEvent(rec, m));
+      }
+    }
+    const seq = (e) => Number(String(e.id).split(".m")[1] || 0);
+    events.sort((a, b) => Date.parse(b.at) - Date.parse(a.at) || seq(b) - seq(a));
+    const dayAgo = now() - 24 * 3600 * 1000;
+    const jobs = records
+      .filter((r) => !["completed", "failed"].includes(r.status) || Date.parse(r.updatedAt) >= dayAgo)
+      .map((r) => parcelView(r, now()));
+    return { events: events.slice(0, Math.max(1, Math.min(500, Number(limit) || 100))), jobs, generated_at: new Date(now()).toISOString() };
+  }
+
+  return { build, status, revise, inbox, relay, sweep, sweepOne, deliver, pendingIssuePosts, revisionPosted, feed, activity };
 }

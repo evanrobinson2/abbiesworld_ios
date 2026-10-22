@@ -195,6 +195,11 @@ assert(parcel.artifacts.some((a) => a.type === "model") && parcel.stages.map((x)
 const since = fd.next_since;
 assert((await svc2.feed({ since })).events.length === 0, "feed since cursor");
 
+const act = await svc2.activity({});
+const firstMine = act.events.find((e) => e.jobId === fid);
+assert(firstMine && firstMine.stage === "model" && firstMine.model === "https://example.com/tower.glb" && firstMine.status === "running", "activity shape, newest first");
+assert(act.events.some((e) => e.jobId === fid && e.image && e.checkpoint === "concept_art"), "concept art event in activity");
+
 /* auth */
 const { publicKey, privateKey } = generateKeyPairSync("rsa", { modulusLength: 2048 });
 const jwk = { ...publicKey.export({ format: "jwk" }), kid: "k1", alg: "RS256", use: "sig" };
