@@ -12,7 +12,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, '..', '..'))
 sys.path.insert(0, HERE)
 BUDGET = {'building': 9000, 'animal': 4000, 'tree': 3000, 'prop': 2000, 'supply': 2000, 'plant': 1000}
-BUDGET_BY_NAME = {'goat': 3000, 'chicken': 1500, 'tree-standing': 4000}
+BUDGET_BY_NAME = {'goat': 3000, 'chicken': 1500, 'tree-standing': 5000}
 
 
 def sha(p):
