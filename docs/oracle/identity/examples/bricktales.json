@@ -1,0 +1,273 @@
+{
+  "schema_version": "1.0",
+  "game": {
+    "title": "LEGO Bricktales",
+    "steam_appid": null,
+    "developer": "ClockStone",
+    "publisher": "Thunderful",
+    "release": "2022",
+    "engine": {
+      "value": "Unity",
+      "source": "estimate",
+      "confidence": 0.4,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    }
+  },
+  "core": {
+    "fantasy": "You are a builder who fixes a world brick by brick, solving each problem with your own construction.",
+    "pillars": [
+      "Real brick building, stud by stud",
+      "Every build is tested by physics",
+      "Diorama worlds to explore"
+    ],
+    "signature_moment": "Finishing a bridge in the build zone and watching a minifigure walk across it as it holds.",
+    "anti_goals": [
+      "no single correct answer",
+      "no combat"
+    ],
+    "signatures": [
+      {
+        "id": "build_zone_test",
+        "layer": "mechanics",
+        "description": "Puzzles are solved in a bounded build zone; a simulation checks stability and function.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "diorama_islands",
+        "layer": "art",
+        "description": "Each level is a small diorama island shot like a toy catalogue.",
+        "class": "style",
+        "confidence": 0.6
+      },
+      {
+        "id": "brick_look",
+        "layer": "art",
+        "description": "Licensed brick look and minifigures.",
+        "class": "expression",
+        "confidence": 0.9
+      }
+    ],
+    "recognisability": {
+      "value": 0.8,
+      "source": "estimate",
+      "confidence": 0.4,
+      "method": "prior knowledge of public footage and store page; to be measured"
+    }
+  },
+  "layers": {
+    "aesthetics": {
+      "fun_mix": {
+        "expression": 0.35,
+        "challenge": 0.3,
+        "narrative": 0.15,
+        "discovery": 0.2
+      },
+      "motivations": {
+        "creativity": 0.9,
+        "mastery": 0.5,
+        "immersion": 0.4,
+        "achievement": 0.5,
+        "action": 0.05,
+        "social": 0.1
+      }
+    },
+    "mechanics": {
+      "verbs": [
+        {
+          "verb": "place brick",
+          "input": "click on stud"
+        },
+        {
+          "verb": "rotate brick",
+          "input": "key/scroll"
+        },
+        {
+          "verb": "test build",
+          "input": "button"
+        },
+        {
+          "verb": "explore",
+          "input": "move minifig"
+        }
+      ],
+      "core_loop": {
+        "steps": [
+          "meet problem",
+          "build in zone",
+          "test",
+          "adjust"
+        ],
+        "period_s": {
+          "value": 300,
+          "source": "estimate",
+          "confidence": 0.3,
+          "method": "prior knowledge of public footage and store page; to be measured",
+          "unit": "s"
+        }
+      },
+      "rules": {
+        "failure_model": "retry_level",
+        "win": "build passes the simulation",
+        "resources": [
+          "limited brick palette per puzzle"
+        ]
+      },
+      "randomness": {
+        "amount": 0.0,
+        "kind": "none"
+      },
+      "information": "perfect",
+      "systems": [
+        "stud-grid building",
+        "stability and walkability simulation"
+      ]
+    },
+    "dynamics": {
+      "emergent_behaviours": [
+        "over-decorated solutions",
+        "minimal-brick solutions"
+      ],
+      "expression_space": 0.7
+    },
+    "interaction": {
+      "input": {
+        "devices": [
+          "mouse",
+          "gamepad"
+        ],
+        "mapping": "cursor"
+      },
+      "camera": {
+        "model": "orbit_diorama",
+        "constrained": true
+      },
+      "forgiveness": {
+        "snapping": "stud",
+        "undo": "yes",
+        "preview_before_commit": true,
+        "auto_repair": false
+      },
+      "juice": {
+        "scale_pop": 0.3,
+        "sound_on_action": 0.9,
+        "particles": 0.3,
+        "procedural_settle": 0.2
+      }
+    },
+    "art": {
+      "rendering": {
+        "style": "stylised_pbr",
+        "post": [
+          "tilt-shift depth of field"
+        ]
+      },
+      "palette": {
+        "value_key": "high"
+      },
+      "proportion_and_scale": {
+        "stylisation": 0.7,
+        "toyness": 1.0
+      },
+      "references": [
+        "toy catalogue photography",
+        "dioramas"
+      ]
+    },
+    "assets": {
+      "kit": "modular",
+      "geometry": {
+        "poly_class": "mid",
+        "edges": "rounded",
+        "surface": "clean"
+      },
+      "materials": {
+        "texture_strategy": "flat_colour",
+        "roughness_character": "glossy plastic"
+      }
+    },
+    "interface": {
+      "onboarding": "scripted_levels",
+      "feedback_language": [
+        "simulation pass/fail",
+        "minifig reactions"
+      ]
+    },
+    "audio": {
+      "sfx_character": "toy",
+      "action_coupling": 0.9,
+      "voice": "gibberish"
+    },
+    "narrative": {
+      "narrative_mode": {
+        "evoked": 0.2,
+        "enacted": 0.5,
+        "embedded": 0.2,
+        "emergent": 0.1
+      },
+      "tone": {
+        "cozy_tense": -0.6,
+        "whimsical_grounded": -0.7,
+        "earnest_ironic": 0.0
+      },
+      "themes": [
+        "helping",
+        "repair",
+        "ingenuity"
+      ],
+      "humour": "light comedic dialogue"
+    },
+    "pacing": {
+      "structure": "puzzle_levels",
+      "tension_curve": "sawtooth",
+      "failure_cost": "retry_level",
+      "unlocks": [
+        "biomes",
+        "sandbox mode for solved puzzles"
+      ]
+    },
+    "market": {
+      "steam_tags": [
+        "Building",
+        "Puzzle",
+        "LEGO",
+        "Family Friendly"
+      ]
+    }
+  },
+  "ledger": {
+    "style": [
+      "bounded build zone plus physics test as a mechanic",
+      "diorama-island level framing",
+      "toy plastic material character",
+      "tilt-shift miniature look"
+    ],
+    "expression": [
+      "LEGO brick designs, minifigures and trademarks",
+      "the game's characters, levels, dialogue, music"
+    ]
+  },
+  "assimilation": {
+    "take": [
+      {
+        "layer": "mechanics",
+        "target": "Oracle rules",
+        "setting": "Kid builds a fix in a glowing build zone; a friendly test animal walks it.",
+        "from_signature": "build_zone_test"
+      },
+      {
+        "layer": "art",
+        "target": "lighting preset",
+        "setting": "Optional tilt-shift miniature preset for Ranch screenshots.",
+        "from_signature": "diorama_islands"
+      }
+    ],
+    "leave": [
+      "anything resembling LEGO bricks or minifigures"
+    ]
+  },
+  "sources": [
+    "Steam store page",
+    "public gameplay footage"
+  ]
+}
