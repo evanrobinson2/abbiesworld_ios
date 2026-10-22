@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Music</title>
+<link rel="stylesheet" href="/app-style.css?v=1">
+<link rel="stylesheet" href="/music/music.css?v=1">
+</head>
+<body>
+<header class="mbar"><a class="home" href="/sandbox" aria-label="Back to Ranch Atelier"><img src="/abbies-ranch-logo.png" alt=""></a><div class="crumb"><a href="/music">Music</a><span>·</span><a href="/sounds">Sounds</a></div></header>
+<main class="wrap">
+  <section class="hero">
+    <div class="intro">
+      <p class="eyebrow">Abbie’s World Composer</p>
+      <h1>One score for every world</h1>
+      <p>Original music written as code and performed by a recorded chamber orchestra. Every piece quotes Abbie’s motif, beds open up in layers as play gets busier, and stings land on the beat in whatever key is playing.</p>
+    </div>
+    <div class="deck" id="deck" aria-live="polite">
+      <div class="now"><span class="label">Now playing</span><strong id="now-title">Nothing yet</strong><span id="now-meta" class="meta">Pick a bed below</span></div>
+      <div class="beats" id="beats" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <label class="slider"><span>Intensity <b id="int-val">35%</b></span><input id="intensity" type="range" min="0" max="1" step="0.01" value="0.35"></label>
+      <div class="stems" id="stems"></div>
+      <div class="deck-actions"><button type="button" id="stop">Stop</button><label class="slider vol"><span>Volume</span><input id="volume" type="range" min="0" max="1" step="0.01"></label></div>
+    </div>
+  </section>
+  <section class="group"><h2>Beds <small>loop forever, four layers each</small></h2><div class="beds" id="beds"><p class="loading">Loading…</p></div></section>
+  <section class="group"><h2>Stings <small>fire on the next beat, in the bed’s key</small></h2><div class="pads" id="stings"></div></section>
+  <section class="group"><h2>Interludes <small>title cards and bridges between beds</small></h2><div class="inters" id="interludes"></div></section>
+  <section class="group about"><h2>How it’s made</h2>
+    <p>Each cue is a score in <a href="https://github.com/evanrobinson2/abbiesworld_ios/tree/claude/live-snapshot-2026-10-22/tools/composer">tools/composer</a>: tempo, key, voicings and lines written note by note. A sampler performs it with the <a href="https://github.com/sgossner/VSCO-2-CE">VS Chamber Orchestra Community Edition</a> (CC0) in a synthetic concert hall, then it is mixed to stems, mastered to a loudness target and folded into a seamless loop. Every cue keeps its brief, score, recipe and file hashes in its provenance.</p>
+    <p id="motif" class="meta"></p>
+  </section>
+</main>
+<script type="module" src="/music/page.mjs?v=1"></script>
+</body>
+</html>

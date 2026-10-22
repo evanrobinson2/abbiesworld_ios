@@ -1,0 +1,212 @@
+{
+ "id": "sting-discovery",
+ "history": [
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "e0cc8ae763f3babd00d6b567909bac86021de7fda6f326c5ce102710b1c566b7"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "bda087fe773533fb8f9c81511a99a198e3b787647bfc87c9060c1ee0e0d3078b"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "2054e441237f35745f09a690b7153385db17255a05d828a92ae8fd83c6035dad"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "30cb5770774d68f05ed6cd70b8ec8fbda0f8d94fefc2ac63b8ed242dcbfe4a42"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "25cb1c8679ca041d92d1f7ba65af9a97cc1611e4448452ed7f02e38fe2215cf2"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "6dedb59ae95391c2224d32adb3a56e685089a4cb193dbf599e69edb137673e8d"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "6478f173fdb0ded32a434f974871f06695b43e845b2b074103223caec2ecc939"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "5900588d25c84e4f4efc2b5b9ec121ace24d17854065a6c49a2f6d11a35373ba"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "ab85810ed655622731e489fa4b6ce91a67b2dce333a881fc0b68275e9773d776"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "bca7ef36d3bd6d63de53eeee41c833f90899665140fd776ce06490cb1531e415"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "e28c58316511bdf00f12990907dca5aad93e3b2c423af912c5ab4b8029a1b6a8"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "017bf24003477ce68bb493a8c9e884429b06a5599f807062e5aabda61379c313"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "ab85810ed655622731e489fa4b6ce91a67b2dce333a881fc0b68275e9773d776"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "bca7ef36d3bd6d63de53eeee41c833f90899665140fd776ce06490cb1531e415"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "e28c58316511bdf00f12990907dca5aad93e3b2c423af912c5ab4b8029a1b6a8"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "017bf24003477ce68bb493a8c9e884429b06a5599f807062e5aabda61379c313"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "D",
+   "sha256": "ab85810ed655622731e489fa4b6ce91a67b2dce333a881fc0b68275e9773d776"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "G",
+   "sha256": "bca7ef36d3bd6d63de53eeee41c833f90899665140fd776ce06490cb1531e415"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "Bb",
+   "sha256": "e28c58316511bdf00f12990907dca5aad93e3b2c423af912c5ab4b8029a1b6a8"
+  },
+  {
+   "date": "2026-10-22",
+   "renderer": "composer-1",
+   "variant": "E",
+   "sha256": "017bf24003477ce68bb493a8c9e884429b06a5599f807062e5aabda61379c313"
+  }
+ ],
+ "title": "Discovery",
+ "kind": "sting",
+ "brief": "Flute asks a question with the lydian fourth; harp and bells answer.",
+ "uses": [
+  "finding something",
+  "new item",
+  "curiosity"
+ ],
+ "tags": [
+  "sting",
+  "discovery",
+  "flute",
+  "magic"
+ ],
+ "score": "tools/composer/cues/stings.py",
+ "composer": "Claude (Abbie's World Composer thread)",
+ "source_image": null,
+ "reference_audio": null,
+ "recipe": {
+  "renderer": "composer-1",
+  "score": "tools/composer/cues/stings.py",
+  "bpm": 100,
+  "meter": "4/4",
+  "key": "E major",
+  "bars": 2,
+  "instruments": [
+   "bass",
+   "cellos",
+   "flute",
+   "glock",
+   "harp",
+   "violas",
+   "violins"
+  ],
+  "percussion": [],
+  "hall_seconds": 2.6,
+  "target_lufs": -16.0,
+  "samples": {
+   "library": "VS Chamber Orchestra: Community Edition",
+   "license": "CC0-1.0",
+   "repo": "https://github.com/sgossner/VSCO-2-CE",
+   "commit": "440300901dfe9275fd84e0b7763af1f8443ae62e"
+  }
+ },
+ "motif": null,
+ "files": {
+  "D": {
+   "audio": "/music/composer/sting-discovery.D.mp3",
+   "sha256": "ab85810ed655622731e489fa4b6ce91a67b2dce333a881fc0b68275e9773d776",
+   "bytes": 86685,
+   "duration": 4.093,
+   "loudness": -16.0,
+   "peak": -3.2,
+   "loopPoints": null,
+   "stems": []
+  },
+  "G": {
+   "audio": "/music/composer/sting-discovery.G.mp3",
+   "sha256": "bca7ef36d3bd6d63de53eeee41c833f90899665140fd776ce06490cb1531e415",
+   "bytes": 89589,
+   "duration": 4.029,
+   "loudness": -16.2,
+   "peak": -4.9,
+   "loopPoints": null,
+   "stems": []
+  },
+  "Bb": {
+   "audio": "/music/composer/sting-discovery.Bb.mp3",
+   "sha256": "e28c58316511bdf00f12990907dca5aad93e3b2c423af912c5ab4b8029a1b6a8",
+   "bytes": 88461,
+   "duration": 4.124,
+   "loudness": -16.2,
+   "peak": -5.5,
+   "loopPoints": null,
+   "stems": []
+  },
+  "E": {
+   "audio": "/music/composer/sting-discovery.E.mp3",
+   "sha256": "017bf24003477ce68bb493a8c9e884429b06a5599f807062e5aabda61379c313",
+   "bytes": 88917,
+   "duration": 4.086,
+   "loudness": -16.2,
+   "peak": -4.7,
+   "loopPoints": null,
+   "stems": []
+  }
+ }
+}
