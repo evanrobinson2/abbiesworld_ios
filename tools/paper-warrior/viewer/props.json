@@ -1,0 +1,52 @@
+{
+ "cuirass": {
+  "file": "cuirass.glb",
+  "triangles": 2768,
+  "size_m": [
+   0.438,
+   0.268,
+   0.568
+  ],
+  "sha256": "b7bf11e1f25d7b031885062c7db812c0af3e9376c8f41b1c2210bad67b5b94f3"
+ },
+ "pauldrons": {
+  "file": "pauldrons.glb",
+  "triangles": 808,
+  "size_m": [
+   0.673,
+   0.252,
+   0.171
+  ],
+  "sha256": "37886058a8e27cb204b71755b355158502c6574e4e38eeab4e937d27a48b4d2f"
+ },
+ "belt": {
+  "file": "belt.glb",
+  "triangles": 376,
+  "size_m": [
+   0.437,
+   0.366,
+   0.045
+  ],
+  "sha256": "6558496d99321aae1369ece39fdb69f248d2a129962fe92f373c09422a2af24d"
+ },
+ "sandals": {
+  "file": "sandals.glb",
+  "triangles": 500,
+  "size_m": [
+   0.261,
+   0.33,
+   0.089
+  ],
+  "sha256": "530cb59fbe7444363bae9f915c574defa81998a4adafd73522fedfafa7b05297"
+ },
+ "greaves": {
+  "file": "greaves.glb",
+  "triangles": 1168,
+  "size_m": [
+   0.351,
+   0.144,
+   0.414
+  ],
+  "sha256": "de6e6854db30f01a20917749ea26b6c9b7d358102346319a819d7072f631be72"
+ }
+}
