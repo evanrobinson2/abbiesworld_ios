@@ -1,0 +1,29 @@
+# One-shot: copy the live Ranch Atelier files into this branch, then remove itself.
+name: live-snapshot
+on:
+  push:
+    branches: [claude/live-snapshot-2026-10-22]
+    paths: [.github/workflows/live-snapshot.yml]
+permissions:
+  contents: write
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download live files
+        run: |
+          fail=0
+          while read -r p; do
+            [ -z "$p" ] && continue
+            mkdir -p "prototypes/ranch-atelier/dist/$(dirname "$p")"
+            curl -fsSL --retry 3 "https://abbies-ranch-atelier.vercel.app/$p" -o "prototypes/ranch-atelier/dist/$p" || { echo "FAILED $p"; fail=$((fail+1)); }
+          done < .github/live-snapshot-paths.txt
+          echo "failures: $fail"
+          [ "$fail" -eq 0 ]
+      - name: Commit and remove this workflow
+        run: |
+          git rm -q .github/workflows/live-snapshot.yml .github/live-snapshot-paths.txt
+          git add -A prototypes/ranch-atelier/dist
+          git -c user.name="github-actions[bot]" -c user.email="41898583+github-actions[bot]@users.noreply.github.com" commit -m "Snapshot live Ranch Atelier (abbies-ranch-atelier.vercel.app, deploy dpl_4SXMXzpbN4N8wAnH4Ds3VK84qCGe)"
+          git push
