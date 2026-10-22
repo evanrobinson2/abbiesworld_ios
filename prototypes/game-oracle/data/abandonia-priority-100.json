@@ -1,0 +1,2557 @@
+[
+  {
+    "rank": 1,
+    "title": "Widelands",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Trace workers, roads, goods and production bottlenecks in a growing settlement",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Settlers II, The - Gold Edition",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/57/Settlers%20II,%20The%20-%20Gold%20Edition.html",
+    "sourceUrl": "https://www.widelands.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.widelands.org/",
+      "bytes": 458701881,
+      "sha256": "ed1d147a3034b5aa400a2123751eb21ed4676131f75efe9e78cebc159a27a46f",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Settlers II, The - Gold Edition. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/widelands/widelands/releases/download/v1.3.1/Widelands-1.3.1-x64.exe",
+          "bytes": 458701881,
+          "sha256": "c8f335006c2900ef4943f91f5d51ea35d048a08d741631e518c5f42323aa68c6",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 2,
+    "title": "Sim Farm",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Connect seasons, crops, storage and sales",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/45/Sim%20Farm.html",
+    "archiveTimestamp": "20080402072622",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/sim-farm-204",
+      "bytes": 1180784,
+      "sha256": "7ff228a6fbbf93770cf54b87250e8aecbe77fac9863d39f01587f52f28888916",
+      "archiveFiles": 64
+    }
+  },
+  {
+    "rank": 3,
+    "title": "OpenClonk",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study mining, construction and cooperative interactions in a physical world",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Theme Hospital",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/30869/Theme%20Hospital.html",
+    "sourceUrl": "https://www.openclonk.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.openclonk.org/",
+      "bytes": 123862846,
+      "sha256": "2fabded5358ecd2d9d6b4e37cf49346ac415130e5c2622682981c16475f003cf",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Theme Hospital. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://www.openclonk.org/builds/release/8.1/openclonk-8.1-x64.exe",
+          "bytes": 123862846,
+          "sha256": "cb595b8b7495b9c68cb21db01c852ff3c12f20de51d72dfc99009aa1093f0b01",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 4,
+    "title": "OpenTTD",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Follow cargo from industry to destination; inspect routes, capacity and vehicle feedback",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Transport Tycoon Deluxe",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/240/Transport%20Tycoon%20Deluxe.html",
+    "sourceUrl": "https://www.openttd.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.openttd.org/",
+      "bytes": 22107313,
+      "sha256": "1ec5c69a679ca5efba75d10878706b0520c3ec9de6e441a9fb462f097f5de1ea",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Transport Tycoon Deluxe. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Game engine and required free graphics/content pack are included as separate downloads."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://cdn.openttd.org/openttd-releases/15.3/openttd-15.3-windows-win64.zip",
+          "bytes": 11250350,
+          "sha256": "61c0a6a43d81008c7ff4330fb56351bbf66a980cdad041f1d0e08b51f2eeb34c",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        },
+        {
+          "url": "https://cdn.openttd.org/opengfx2_classic-nightlies/20260709-main-g7a17fb3704/opengfx2_classic-20260709-main-g7a17fb3704-all.zip",
+          "bytes": 10856963,
+          "sha256": "2b30fbcab8d6c115a1b89e3a3372a5123acf533eca8885a06ee69a70e1c05aab",
+          "verification": "source manifest sha256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 5,
+    "title": "Simutrans",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Trace passenger and freight destinations through a transport network",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Caesar II",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/141/Caesar%20II.html",
+    "sourceUrl": "https://www.simutrans.com/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.simutrans.com/",
+      "bytes": 13711634,
+      "sha256": "c35043e2bc038bea77273b10bf9c47dffc82850f0362fbe8b3ab77e653e146a1",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Caesar II. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Game engine and required free graphics/content pack are included as separate downloads."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.sourceforge.net/project/simutrans/simutrans/125-0/simuwin-sdl-125-0.zip",
+          "bytes": 8478588,
+          "sha256": "0ef0ff32626ceafdbeef214ff3fe3f6e6aec455a3fd1c773665c74d60fa0cf53",
+          "verification": "source manifest sha1 and ZIP CRC"
+        },
+        {
+          "url": "https://sourceforge.net/projects/simutrans/files/pak64/125-0/simupak64-125-0.zip/download",
+          "bytes": 5233046,
+          "sha256": "850108b76505ca306822b88c22a1829c7102a6c9d7390c057f533ba70d9ecdad",
+          "verification": "source manifest sha256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 6,
+    "title": "Dwarf Fortress Classic",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study jobs, stockpiles, needs and how a dense simulation exposes its state",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Pharaoh",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/887/Pharaoh.html",
+    "sourceUrl": "http://www.bay12games.com/dwarves",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "http://www.bay12games.com/dwarves",
+      "bytes": 16131602,
+      "sha256": "7335714c5708d7440f645d046a827188b63235cd10d170ddb1d7b97a23312301",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Pharaoh. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "http://www.bay12games.com/dwarves/df_53_16_win.zip",
+          "bytes": 16131602,
+          "sha256": "8ca0a5ba25f47a6ffce448ca9c1de4afef539ca7d89e8473fb930f7c2b13443a",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 7,
+    "title": "Unciv",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study turn-by-turn city growth, resources and policy feedback",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "SimCity 2000",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/15649/SimCity+2000.html",
+    "sourceUrl": "https://github.com/yairm210/UnCiv",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://github.com/yairm210/UnCiv",
+      "bytes": 104808662,
+      "sha256": "16ce213c43ca825c6529a181633b3900ccbed0e15403daa58e023870a2e1f8fd",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for SimCity 2000. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/yairm210/Unciv/releases/download/4.22.12/Unciv-Windows64.zip",
+          "bytes": 104808662,
+          "sha256": "0214416934ac0fb7d02931cc9701d31472a2e4bac22b844f06b8c849add94deb",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 8,
+    "title": "Sim Tower",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Follow people through a vertical building",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/341/Sim%20Tower.html",
+    "archiveTimestamp": "20080105151932",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/simtower-the-vertical-empire-3f2",
+      "bytes": 2879421,
+      "sha256": "a0d203989c52fdaf1816d38d550d6d0de1d22c6d3c1287ea106f3975365d03c7",
+      "platform": "Windows 3.x",
+      "archiveFiles": 31
+    }
+  },
+  {
+    "rank": 9,
+    "title": "Tabletop Club",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study manipulation, camera framing and shared tabletop interaction",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Theme Park",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/29757/Theme+Park.html",
+    "sourceUrl": "https://github.com/drwhut/tabletop-club",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://github.com/drwhut/tabletop-club",
+      "bytes": 87171733,
+      "sha256": "c196e11ca52f8b466d9def43ac45c17ae9ea850d0c87a2b228d66af754d32760",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Theme Park. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/drwhut/tabletop-club/releases/download/v0.1.5/TabletopClub_v0.1.5_Windows_64.zip",
+          "bytes": 87171733,
+          "sha256": "8f95510b8329a8c2ce01f7266e210855ec6f71473414b77e103889d904a6d95f",
+          "verification": "source manifest sha512 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 10,
+    "title": "Freeciv",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study settlement expansion, production and empire information",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Colonization",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/29077/Colonization.html",
+    "sourceUrl": "http://www.freeciv.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "http://www.freeciv.org/",
+      "bytes": 54221884,
+      "sha256": "99d9d95b7ddabe77ffdfad76dcbc801798c5f15efde0570fe8a7a11d340647fc",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Colonization. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "http://prdownloads.sourceforge.net/freeciv/Freeciv-3.2.6-msys2-win64-gtk3.22-setup.exe?download",
+          "bytes": 54221884,
+          "sha256": "3a06c7c9a083a34140b561de69ae705b46d744b01b721d05e159789d8486787a",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 11,
+    "title": "Mindustry",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Trace material flow through factories, conveyors and defenses",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Pizza Tycoon",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/14897/Pizza+Tycoon.html",
+    "sourceUrl": "https://mindustrygame.github.io/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://mindustrygame.github.io/",
+      "bytes": 88677884,
+      "sha256": "87d9db1fe1c4e53f2e5a10873167200089341fd0cbc30c8e4361ab60f26d5ae5",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Pizza Tycoon. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires a compatible Java runtime; not installed or launched."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/Anuken/Mindustry/releases/download/v160.7/Mindustry.jar",
+          "bytes": 88677884,
+          "sha256": "36d94941a1639478ad1d9be25a9d802c6f77552f400c6da0338b7b019f63a0d1",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 12,
+    "title": "Pioneer",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Follow space trade, station economies and travel navigation",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Patrician, The",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/14755/Patrician%2C+The.html",
+    "sourceUrl": "https://pioneerspacesim.net/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://pioneerspacesim.net/",
+      "bytes": 569216250,
+      "sha256": "2bf07becb14d7c789f5d84254830405390a653a9322227a2742b62e0c60abea9",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Patrician, The. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/pioneerspacesim/pioneer/releases/download/20260907/pioneer-20260907-win.exe",
+          "bytes": 569216250,
+          "sha256": "ac3a158ccc5acc47dca536e633e1fc24ad38e4bb6b9663f5be936a9c045ab68b",
+          "verification": "source manifest sha256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 13,
+    "title": "A-Train",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Study the relationship between transport and urban growth",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/9757/A-Train.html",
+    "archiveTimestamp": "20120804233117",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/a-train-1bn",
+      "bytes": 1968230,
+      "sha256": "8a28c6ccd9ea380fdbe702cd23f9de3bce296e1edaad865ef4e773f4dd7b1b02",
+      "platform": "DOS",
+      "archiveFiles": 12
+    }
+  },
+  {
+    "rank": 14,
+    "title": "Railroad Tycoon Deluxe",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Compare network planning with financial feedback",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/15217/Railroad+Tycoon+Deluxe.html",
+    "archiveTimestamp": "20120730121028",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/sid-meier-s-railroad-tycoon-deluxe-22z",
+      "bytes": 9308413,
+      "sha256": "1d40d7f44a0c40deb3e42c0263b78de3a18cd8316267a85ccbdcbea74e0af07e",
+      "platform": "DOS",
+      "archiveFiles": 248
+    }
+  },
+  {
+    "rank": 15,
+    "title": "MegaGlest",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study harvesting, construction and readable unit orders",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Constructor",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/29079/Constructor.html",
+    "sourceUrl": "https://megaglest.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://megaglest.org/",
+      "bytes": 258303241,
+      "sha256": "3d835361a154257459491485da006150bf840c3e9f9be3ef1b2d78495665122e",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Constructor. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/MegaGlest/megaglest-source/releases/download/3.13.0/MegaGlest-Installer-3.13.0_windows_64bit.exe",
+          "bytes": 258303241,
+          "sha256": "d08d6248b1d9edadb5709d84eb39af61fbcd2fbb8edd649ccebe3e96541e3847",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 16,
+    "title": "Dinopark Tycoon",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Connect enclosures, operating costs and visitors",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/11961/Dinopark+Tycoon.html",
+    "archiveTimestamp": "20120730144921",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/dinopark-tycoon-1ps",
+      "bytes": 1639930,
+      "sha256": "39fde1f16c74a3f199ecf57d410fed5ada1536cc70553bf0a3e2e68832a1b0cf",
+      "platform": "DOS",
+      "archiveFiles": 185
+    }
+  },
+  {
+    "rank": 17,
+    "title": "Free Enterprise",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Study factory layout and workforce management",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/538/Free%20Enterprise.html",
+    "archiveTimestamp": "20080324022900",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/free-enterprise-w0d",
+      "bytes": 464801090,
+      "sha256": "839483bcbaad4d5099f46551762104a04effdba0c43219abb145c6130fe12b4f",
+      "platform": "Windows",
+      "archiveFiles": 1
+    }
+  },
+  {
+    "rank": 18,
+    "title": "Detroit",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Trace design decisions into manufacturing and sales",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/11909/Detroit.html",
+    "archiveTimestamp": "20120730123835",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/detroit-1ln",
+      "bytes": 2866552,
+      "sha256": "395492fd680de2644c195fe2df02924c307e258b708424ac790f6eb7403d6e0b",
+      "platform": "DOS",
+      "archiveFiles": 790
+    }
+  },
+  {
+    "rank": 19,
+    "title": "Settlers, The",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Compare the original logistics presentation with its sequel",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/288/Settlers,%20The.html",
+    "archiveTimestamp": "20090816185105",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/serf-city-life-is-feudal-21o",
+      "bytes": 1535093,
+      "sha256": "451c8d654c0a64f4ff69f246b655948f42afa55f12ebb8fdd37080e1a9401a64",
+      "platform": "DOS",
+      "archiveFiles": 56,
+      "editionNote": "Downloaded as Serf City: Life Is Feudal, the US title of The Settlers."
+    }
+  },
+  {
+    "rank": 20,
+    "title": "SimCity Classic",
+    "group": "Society, production and readable simulation",
+    "researchQuestion": "Find the minimum readable city-simulation interface",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/30763/SimCity+Classic.html",
+    "archiveTimestamp": "20121005190329",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/simcity-ri",
+      "bytes": 382464,
+      "sha256": "e9ff78624223df1384d525bf995f0ff2b1f8f3dd44c85cb4f651d38d86da0393",
+      "platform": "DOS",
+      "archiveFiles": 20,
+      "editionNote": "DOS version 1.02."
+    }
+  },
+  {
+    "rank": 21,
+    "title": "Sim Ant",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Observe colony-scale work through individual agents",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/250/Sim%20Ant.html",
+    "archiveTimestamp": "20080110070023",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/simant-197",
+      "bytes": 722967,
+      "sha256": "01a0f1c90368d6af754fe93b8fc7170168c279c5c2f1a28660d433217c71225b",
+      "platform": "DOS",
+      "archiveFiles": 17
+    }
+  },
+  {
+    "rank": 22,
+    "title": "SimLife",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Study how ecological relationships can be exposed",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/29827/SimLife.html",
+    "archiveTimestamp": "20250823095015",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/simlife-1ib",
+      "bytes": 1035848,
+      "sha256": "526588ee5858ba8f2c5cd0ef3501755c6bb3a55ea06fd4286958fda476067d98",
+      "platform": "DOS",
+      "archiveFiles": 140
+    }
+  },
+  {
+    "rank": 23,
+    "title": "SimEarth - The Living Planet",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Compare local interventions with planetary consequences",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/185/SimEarth%20-%20The%20Living%20Planet.html",
+    "archiveTimestamp": "20080430172542",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/simearth-the-living-planet-10c",
+      "bytes": 1242472,
+      "sha256": "b524c43cb62e4befe80deb863fcb10aaba35edb9c604d3bca4df730254a13ec6",
+      "platform": "DOS",
+      "archiveFiles": 31
+    }
+  },
+  {
+    "rank": 24,
+    "title": "The Powder Toy",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study A free physics sandbox game, capable of simulating many interactions; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Populous",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/465/Populous.html",
+    "sourceUrl": "https://powdertoy.co.uk/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://powdertoy.co.uk/",
+      "bytes": 4063458,
+      "sha256": "380495f74dd4bb6957b0baa70a808a5281709d596838fd880877e8f3c44c3ff7",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Populous. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://powdertoy.co.uk/Download/powder.zip",
+          "bytes": 4063458,
+          "sha256": "c96094e9f5ebb416cf1f1385830fbfb77792f89354af00880f7ebfdd8daa0dc0",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 25,
+    "title": "Augmentinel",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study A re-skinned version of the Geoff Crammond classic: The Sentinel; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Populous II - Trials of the Olympian Gods",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/15001/Populous+II+-+Trials+of+the+Olympian+Gods.html",
+    "sourceUrl": "https://simonowen.com/spectrum/augmentinel/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://simonowen.com/spectrum/augmentinel/",
+      "bytes": 12639733,
+      "sha256": "607bbaae4498bc8b46dd328fd92aedd2a2dae59f396625829f5e01b80a818e24",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Populous II - Trials of the Olympian Gods. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "If you get an error about missing XAudio DLLs, try installing the DirectX End-User Runtime: https://www.microsoft.com/en-us/download/confirmation.aspx?id=8109"
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://simonowen.com/spectrum/augmentinel/Augmentinel-15.zip",
+          "bytes": 12639733,
+          "sha256": "5ff6173f7c1813dbd8618b824eb4120a115ce447622126445cec94cd8dd2dd2f",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 26,
+    "title": "Powermonger",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Observe settlements and armies in a shared landscape",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/444/Powermonger.html",
+    "archiveTimestamp": "20071214083832",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/powermonger-1hk",
+      "bytes": 1889534,
+      "sha256": "2b0fe4edca5398f368f4d87300edee8007275c8157e1cfbd48febe0aac215294",
+      "platform": "DOS",
+      "archiveFiles": 48
+    }
+  },
+  {
+    "rank": 27,
+    "title": "Utopia - The Creation of a Nation",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Study colony needs and administrative feedback",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/314/Utopia%20-%20The%20Creation%20of%20a%20Nation.html",
+    "archiveTimestamp": "20090104030600",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/utopia-the-creation-of-a-nation-1ao",
+      "bytes": 897895,
+      "sha256": "291a8840feba57a68312d94c16eab010c7c47ca09df842061e894bd41820c3f4",
+      "platform": "DOS",
+      "archiveFiles": 165
+    }
+  },
+  {
+    "rank": 28,
+    "title": "Genesia (aka Ultimate Domain)",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Study settlement growth and resource allocation",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/734/Genesia%20(aka%20Ultimate%20Domain).html",
+    "archiveTimestamp": "20080110070109",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/ultimate-domain-1nk",
+      "bytes": 843339,
+      "sha256": "ecf30714ad8881da978cae7b9a8d1dc2b6aee1e88c92d4719cae718b9fd68a76",
+      "platform": "DOS",
+      "archiveFiles": 138
+    }
+  },
+  {
+    "rank": 29,
+    "title": "Burntime",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Connect survival outposts through scarce supplies",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/28937/Burntime.html",
+    "archiveTimestamp": "20120512034522",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/burntime-1yv",
+      "bytes": 2179322,
+      "sha256": "1cc8959d555a70a4237daaa752bf508f95ee39d6f937500c31b1d712527b4371",
+      "platform": "DOS",
+      "archiveFiles": 292
+    }
+  },
+  {
+    "rank": 30,
+    "title": "Cataclysm: Dark Days Ahead",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Roguelike in a post-apocalyptic world (with sprite-based graphics); document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Robinsons Requiem",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/568/Robinsons%20Requiem.html",
+    "sourceUrl": "https://cataclysmdda.org",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://cataclysmdda.org",
+      "bytes": 335606477,
+      "sha256": "ea0ffdcb35ac776f9748c76c03a24347aedd8885415afd8d08adef9d567c7af6",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Robinsons Requiem. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/CleverRaven/Cataclysm-DDA/releases/download/0.I-1/cdda-windows-with-graphics-and-sounds-x64-2026-09-19-2324.zip",
+          "bytes": 335606477,
+          "sha256": "35eef993e969a5dfa08019d43b95944fc5fd4299a962a8e7e62580163175f7aa",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 31,
+    "title": "Wolf",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Study animal needs and ecological perspective",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/531/Wolf.html",
+    "archiveTimestamp": "20071212235818",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/wolf-2ao",
+      "bytes": 8594470,
+      "sha256": "062a34c3e501c6e8d0e735520255891b2c1633d57b3db5e2837fc60271d11c9d",
+      "platform": "DOS",
+      "archiveFiles": 253
+    }
+  },
+  {
+    "rank": 32,
+    "title": "Oregon Trail, The (1992)",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Expose travel preparation, setbacks and recovery",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/23786/Oregon+Trail,+The+(1992).html",
+    "archiveTimestamp": "20080323152503",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/oregon-trail-deluxe-1h9",
+      "bytes": 1905176,
+      "sha256": "66868e0668b5380a0285eb04bff22bc50eb64e62a09eae40620a688b43e1ff6d",
+      "platform": "DOS",
+      "archiveFiles": 16,
+      "editionNote": "Oregon Trail Deluxe (1992)."
+    }
+  },
+  {
+    "rank": 33,
+    "title": "Endless Sky",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study 2D space trading and combat game similar to the classic Escape Velocity series; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Seven Cities of Gold",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/318/Seven%20Cities%20of%20Gold.html",
+    "sourceUrl": "https://github.com/endless-sky/endless-sky",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://github.com/endless-sky/endless-sky",
+      "bytes": 369748978,
+      "sha256": "dc3aaceb470f962246099f22508f8f9dc37ee853f0edc5039e17cb7ea5d13146",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Seven Cities of Gold. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/endless-sky/endless-sky/releases/download/v0.11.2/EndlessSky-win64-v0.11.2.zip",
+          "bytes": 369748978,
+          "sha256": "28c7069175923b345308b1bc74b1a853b5bdc9e125888f6d38f33fc2c500a4f7",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 34,
+    "title": "Uncharted Waters 2 - New Horizons",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Connect ports, voyages, trade and discovery",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/276/Uncharted%20Waters%202%20-%20New%20Horizons.html",
+    "archiveTimestamp": "20080403184027",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/new-horizons-1nb",
+      "bytes": 2790976,
+      "sha256": "97f9ab9ebfd3e249e705707c81f320bc02474cf30c2a951291769825c68bb5a0",
+      "platform": "DOS",
+      "archiveFiles": 67
+    }
+  },
+  {
+    "rank": 35,
+    "title": "Ports of Call",
+    "group": "Ecology, terrain and survival",
+    "researchQuestion": "Study shipping decisions and operational interruptions",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/15006/Ports+of+Call.html",
+    "archiveTimestamp": "20120730154842",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/ports-of-call-ql",
+      "bytes": 1065103,
+      "sha256": "75877949e4ff806e2a9fe396b9632d4c8376233dfb19dd5f742c5524c5d36272",
+      "platform": "DOS",
+      "archiveFiles": 24
+    }
+  },
+  {
+    "rank": 36,
+    "title": "Alien Legacy",
+    "group": "Space, colonies and layered worlds",
+    "researchQuestion": "Connect planetary bases to a wider expedition",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/27242/Alien+Legacy.html",
+    "archiveTimestamp": "20120804212050",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/alien-legacy-21h",
+      "bytes": 10224059,
+      "sha256": "540d11bf0678a23f874fa99505be53e37788578df8ace1e9c7dd504c5ebd0ed3",
+      "platform": "DOS",
+      "archiveFiles": 355
+    }
+  },
+  {
+    "rank": 37,
+    "title": "Reunion",
+    "group": "Space, colonies and layered worlds",
+    "researchQuestion": "Study interplanetary production and colony dependencies",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/150/Reunion.html",
+    "archiveTimestamp": "20071213213433",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/reunion-24t",
+      "bytes": 11562513,
+      "sha256": "258ee501f2bbdeea6d0865c2e063959fd2a8c02da42f2d0be4313de6456ec375",
+      "platform": "DOS",
+      "archiveFiles": 906
+    }
+  },
+  {
+    "rank": 38,
+    "title": "OpenHV",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study 90s pixelart science-fiction real-time strategy game; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Fragile Allegiance",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/24546/Fragile%20Allegiance.html",
+    "sourceUrl": "https://www.openhv.net/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.openhv.net/",
+      "bytes": 151927007,
+      "sha256": "5747a3d3997ae8a2c78bafa5bb4e08382f6be8648d69b4bb3dd21b51ef3a6cdc",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Fragile Allegiance. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/OpenHV/OpenHV/releases/download/20250725/OpenHV-20250725-x64-winportable.zip",
+          "bytes": 151927007,
+          "sha256": "857275bb6343213a4638735920cba9b9b2fe708f756bc0667f07d6fc598259f1",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 39,
+    "title": "Ascendancy",
+    "group": "Space, colonies and layered worlds",
+    "researchQuestion": "Compare colony management with strategic navigation",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/10322/Ascendancy.html",
+    "archiveTimestamp": "20120730110239",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/ascendancy-2qs",
+      "bytes": 42648482,
+      "sha256": "e9f1159c15fd50b9455f817470e13cbc6b17e70551793774b4a7b074859ce987",
+      "platform": "DOS",
+      "archiveFiles": 25
+    }
+  },
+  {
+    "rank": 40,
+    "title": "FreeOrion",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Turn-based space empire and galactic conquest (4X) game; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Master of Orion",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/27845/Master+of+Orion.html",
+    "sourceUrl": "https://freeorion.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://freeorion.org/",
+      "bytes": 191777564,
+      "sha256": "7395d0214efad693af3ac41362a50c6891ee27b6f5b12406b319bfba4d4c5fda",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Master of Orion. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/freeorion/freeorion/releases/download/v0.5.1.2/FreeOrion_v0.5.1.2_Win32_Setup.exe",
+          "bytes": 191777564,
+          "sha256": "2788f7283bd04987d4bb27984e3a1c24ff5455146b66ee77b89d2aca71cd0907",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 41,
+    "title": "Stars!",
+    "group": "Space, colonies and layered worlds",
+    "researchQuestion": "Study colony allocation and strategic information density",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/27002/Stars%21.html",
+    "archiveTimestamp": "20100223061324",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/stars-9zc",
+      "bytes": 1618056,
+      "sha256": "aa7d62b22a49ba0145a9cf566fd37515405ce44df8acf3967a73cf37e7109439",
+      "platform": "Windows",
+      "archiveFiles": 3
+    }
+  },
+  {
+    "rank": 42,
+    "title": "The Battle for Wesnoth",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Turn-based singleplayer and multiplayer strategy game with a high fantasy theme; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Master of Magic",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/14158/Master+of+Magic.html",
+    "sourceUrl": "https://www.wesnoth.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.wesnoth.org/",
+      "bytes": 440965176,
+      "sha256": "59073519181f9e0f630cae904348aad62cfaa7d4b8d85583a3011fe998a40aac",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Master of Magic. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://sourceforge.net/projects/wesnoth/files/wesnoth-1.18/wesnoth-1.18.8/wesnoth-1.18.8-win64.exe/download",
+          "bytes": 440965176,
+          "sha256": "464a2edfce8a0fe08e9956a363785938970254ee385672388bb8ba3556d8a09c",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 43,
+    "title": "Naev",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study 2D action/RPG space game that combines elements from the action, RPG and simulation; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Starflight",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/23478/Starflight.html",
+    "sourceUrl": "https://naev.org",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://naev.org",
+      "bytes": 478253661,
+      "sha256": "b0a01b2318a2c54051809ec825b2660e4aca11b104bd32f4ee72061ff3a445c7",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Starflight. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/naev/naev/releases/download/v0.12.6/naev-0.12.6-win64.exe",
+          "bytes": 478253661,
+          "sha256": "5ea2debb5b05c854ddb425db99a1b65c289e71c3b6de39a57360b07c1c3e92d8",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 44,
+    "title": "OpenTyrian 2000",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Fork of OpenTyrian with support for Tyrian 2000; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Starflight 2: Trade Routes of the Cloud Nebula",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/26345/Starflight+2%3A+Trade+Routes+of+the+Cloud+Nebula.html",
+    "sourceUrl": "https://github.com/KScl/opentyrian2000",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://github.com/KScl/opentyrian2000",
+      "bytes": 5908825,
+      "sha256": "27ba01fb3f66c9d3804cef9c4f156159f3dbc68a1d6d00b5c85abef0a2380441",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Starflight 2: Trade Routes of the Cloud Nebula. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/KScl/opentyrian2000/releases/download/v2000.20250408/opentyrian2000-x64-Release.zip",
+          "bytes": 857462,
+          "sha256": "108fb40369598c2632af43baf7d8a2d8a08703840e07dc0cfa700cbee0d7f56c",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        },
+        {
+          "url": "https://www.camanis.net/tyrian/tyrian2000.zip",
+          "bytes": 5051363,
+          "sha256": "348bc76e73514e452279b8730cf217daf0f70a282f07b6b94af653d87e921667",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 45,
+    "title": "The Ur-Quan Masters",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Space exploration, trade, diplomacy and combat; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Star Control II",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/144/Star%20Control%20II.html",
+    "sourceUrl": "https://sc2.sourceforge.net/downloads.php",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://sc2.sourceforge.net/downloads.php",
+      "bytes": 13821866,
+      "sha256": "0831a04cd0873817b3bbc215d55c30f55400d46f517d2d618f264bd06e8d8108",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Star Control II. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Windows installer and required game content included; optional voice and remix packs not included."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://sourceforge.net/projects/sc2/files/UQM/0.8/uqm-0.8-win32.exe/download",
+          "bytes": 2274513,
+          "sha256": "ac32d9b2e2ea4e7578aef58fafd3daba105cf96230da7430ebfaca4f13b9bc5a",
+          "verification": "File header; locally recorded SHA-256"
+        },
+        {
+          "url": "https://sourceforge.net/projects/sc2/files/UQM/0.8/uqm-0.8.0-content.uqm/download",
+          "bytes": 11547353,
+          "sha256": "77d75ac25e6fb755a33c4ba3b38a7b7bc41fcbc02896891b0cc9ac9214b72eef",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 46,
+    "title": "Elite",
+    "group": "Space, colonies and layered worlds",
+    "researchQuestion": "Study how compact instruments explain a broad simulation",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/113/Elite.html",
+    "archiveTimestamp": "20071213002059",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/elite-ao",
+      "bytes": 50514,
+      "sha256": "5b419c90cb603b1a1d3e9c357293b8f20360af165056207e26cb5154f7a2855b",
+      "platform": "DOS",
+      "archiveFiles": 2
+    }
+  },
+  {
+    "rank": 47,
+    "title": "Frontier - First Encounters",
+    "group": "Space, colonies and layered worlds",
+    "researchQuestion": "Compare travel scale with cockpit information",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/709/Frontier%20-%20First%20Encounters.html",
+    "archiveTimestamp": "20080324050744",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/frontier-first-encounters-2b2",
+      "bytes": 2431160,
+      "sha256": "f085c7cecaac3e047b4aa325869874c32c779f48d9e4692f8c47040f7e0e557c",
+      "platform": "DOS",
+      "archiveFiles": 73
+    }
+  },
+  {
+    "rank": 48,
+    "title": "Supremacy - Your Will Be Done",
+    "group": "Space, colonies and layered worlds",
+    "researchQuestion": "Study colony investment and resource allocation",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/27849/Supremacy+-+Your+Will+Be+Done.html",
+    "archiveTimestamp": "20100828221855",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/overlord-1vv",
+      "bytes": 1222614,
+      "sha256": "764271de5c624de6970f012be06b26d0486bc646fa511c1a2c6d502dc8c9ddc6",
+      "platform": "DOS",
+      "archiveFiles": 35
+    }
+  },
+  {
+    "rank": 49,
+    "title": "Warzone 2100",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Real-time strategy game set in a futuristic universe; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Deadlock: Planetary Conquest",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/6166/Deadlock%3A+Planetary+Conquest.html",
+    "sourceUrl": "https://wz2100.net/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://wz2100.net/",
+      "bytes": 392936210,
+      "sha256": "f93f71e80d6ddcdda5434c459d46361c3c35dfdc712c9fde5677ef46c570f816",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Deadlock: Planetary Conquest. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/Warzone2100/warzone2100/releases/download/4.7.0/warzone2100_win_x64_archive.zip",
+          "bytes": 392936210,
+          "sha256": "2deed0a8cfe30a188681f1fea11d75fdcdef30075254b1cd90799868ce1c6104",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 50,
+    "title": "Armagetron Advanced",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study 3D multiplayer game with Tron-style lightcycles; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Space Rogue",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/25004/Space%20Rogue.html",
+    "sourceUrl": "http://www.armagetronad.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "http://www.armagetronad.org/",
+      "bytes": 2968326,
+      "sha256": "2eada2f3993b916a5c82739cf6cd2201556b824fe11ead95ac6f90279c4f33b2",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Space Rogue. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "User data are stored in C:\\Users\\[USERNAME]\\AppData\\Roaming\\Armagetron"
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://launchpad.net/armagetronad/0.2.9/0.2.9.3.1/+download/armagetronad-0.2.9.3.1.win32.exe",
+          "bytes": 2968326,
+          "sha256": "c4124711021fd421f32e12ae963132ff0a48e90c92df3a426d44c2678ef14f32",
+          "verification": "source manifest md5"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 51,
+    "title": "Advanced Strategic Command",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Turn-based tactics, unit positioning, supplies and campaign progression; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "UFO - Enemy Unknown",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/38/UFO%20-%20Enemy%20Unknown.html",
+    "sourceUrl": "https://sourceforge.net/projects/asc-hq/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://sourceforge.net/projects/asc-hq/",
+      "bytes": 38608996,
+      "sha256": "568bcfea1bf62b9a796553ed99aa20467fc4cab0375302bf21c61a4b56cbb1c2",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for UFO - Enemy Unknown. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://sourceforge.net/projects/asc-hq/files/ASC%20Win32/2.6.1/ASC-2.6.1.0-Install.exe/download",
+          "bytes": 38608996,
+          "sha256": "8669ace22c5d23c55ebdc523540cfa7c7c0672d93b24525d7806bf8addad6148",
+          "verification": "source manifest sha256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 52,
+    "title": "MegaMek",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Free turn-based strategy game based on the classic BattleTech/MechWarrior universe; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "X-Com - Apocalypse",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/307/X-Com%20-%20Apocalypse.html",
+    "sourceUrl": "https://megamek.org",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://megamek.org",
+      "bytes": 638913922,
+      "sha256": "f50f11b15575fa192375ffdbcd733f5d92bc0e77ddc1ce15e942dc71b1cf48df",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for X-Com - Apocalypse. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires a compatible Java runtime; not installed or launched."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/MegaMek/megamek/releases/download/v0.51.0/megamek-0.51.0.tar.gz",
+          "bytes": 638913922,
+          "sha256": "5d673cdaca0ead0e58d6e74db5b2d1e06bc25ccb5caaf332dad71624f6487b85",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 53,
+    "title": "Dune II - The Building of a Dynasty",
+    "group": "Strategy, agents and tactical readability",
+    "researchQuestion": "Study readable harvesting, construction and unit orders",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/12164/Dune+II+-+The+Building+of+a+Dynasty.html",
+    "archiveTimestamp": "20120730170708",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/dune-ii-the-building-of-a-dynasty-1e7",
+      "bytes": 4007747,
+      "sha256": "dc609ef7b613b2c42a7c1efb8dd0b9f017d150cb4182fcf2a0a2b3214db5e6dc",
+      "platform": "DOS",
+      "archiveFiles": 22
+    }
+  },
+  {
+    "rank": 54,
+    "title": "Wyrmsun",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Real-time strategy game with retro graphics; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Warcraft II",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/30996/Warcraft%20II.html",
+    "sourceUrl": "https://andrettin.github.io/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://andrettin.github.io/",
+      "bytes": 459886938,
+      "sha256": "f9d1a43cbb54c218fc890d7a9c33226d117565dd17d372c47c93248a9f0fbc9b",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Warcraft II. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Game data, Windows dependencies and executable downloaded separately; not installed or launched."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://codeload.github.com/Andrettin/Wyrmsun/zip/refs/tags/v5.3.6",
+          "bytes": 414025437,
+          "sha256": "91d54b7137aff5368cd3a74feadb58cbadf3d63e7db1d7e3d3741d8a93337f76",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        },
+        {
+          "url": "https://github.com/Andrettin/Wyrmsun/releases/download/2021.09.19/dependencies.zip",
+          "bytes": 35723389,
+          "sha256": "22e64575b7129b8bd17b6f3e26421a9ece57238423e1ac316aa835ca4177b7e9",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        },
+        {
+          "url": "https://github.com/Andrettin/Wyrmsun/releases/download/v5.3.6/wyrmsun.exe",
+          "bytes": 10138112,
+          "sha256": "5eb82e02c166f5c620915e0d7ab13e80dc7586cc08579159f9ea360d99da9d43",
+          "verification": "File header; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 55,
+    "title": "TripleA",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study Turn-based free and open-source strategy game based on the Axis & Allies board game; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Command & Conquer",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/378/Command%20&%20Conquer.html",
+    "sourceUrl": "https://triplea-game.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://triplea-game.org/",
+      "bytes": 63516160,
+      "sha256": "5d0407de2b7c5984f92b8369670672389de83b63b420a38cc52fc9486f7ee38b",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Command & Conquer. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Installer downloaded; additional maps may be selected and downloaded in-game. Not installed or launched."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/triplea-game/triplea/releases/download/2.5.22294/TripleA_2.5.22294_windows-64bit.exe",
+          "bytes": 63516160,
+          "sha256": "0eddc4e13bff3a1bfcad6a1d5f2429557552076d0c70f5fcd1aaf8f1cf889dea",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 56,
+    "title": "Hedgewars",
+    "group": "Free games \u00b7 simulation and strategy",
+    "researchQuestion": "Study 2D turn-based artillery game featuring fighting hedgehogs; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "War Wind",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/27538/War%20Wind.html",
+    "sourceUrl": "https://www.hedgewars.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.hedgewars.org/",
+      "bytes": 177491490,
+      "sha256": "2797f48a339693f07fcd2550256eb26eb867fece44fb0de8c181bb3f96625c23",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for War Wind. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://www.hedgewars.org/download/releases/Hedgewars-1.0.0.exe",
+          "bytes": 177491490,
+          "sha256": "cbbdbfcc560313234d08c8d445a8e81137e958dc7b4a67802671aa6407b5ba83",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 57,
+    "title": "Angband",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study A free single-player dungeon exploration Roguelike; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Warlords II",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/554/Warlords%20II.html",
+    "sourceUrl": "https://rephial.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://rephial.org/",
+      "bytes": 24575817,
+      "sha256": "3b8df2fc3cbfbd0dc1b52ad7d04c7335c614d4a5ff22a43b50c561a04967a1a5",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Warlords II. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Configuration files cannot be persisted, but will be retained during package updates."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/angband/angband/releases/download/4.2.6/angband-4.2.6-win.zip",
+          "bytes": 24575817,
+          "sha256": "83f9f92354c02093ec660dda67fedee281e2cb1455207ed1170e32ce8e1c9d60",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 58,
+    "title": "FreedroidRPG",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Isometric RPG influenced by Paradroid; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Heroes of Might and Magic",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/191/Heroes%20of%20Might%20and%20Magic.html",
+    "sourceUrl": "http://www.freedroid.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "http://www.freedroid.org/",
+      "bytes": 238060410,
+      "sha256": "4c86fda289154672a202e631a9492c404cffdf1b49331cf283b98730e8488f2b",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Heroes of Might and Magic. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://ftp.osuosl.org/pub/freedroid/freedroidRPG-1.0/freedroidRPG-1.0-win32-x86-64.exe",
+          "bytes": 238060410,
+          "sha256": "61309cd399f4d7a6c671a2dea5d1e5d13b2ac8bea8d5e0e2f0d76ba9fb1bf449",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 59,
+    "title": "NetHack",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Single player rogue-like videogame; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Fantasy General",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/12441/Fantasy+General.html",
+    "sourceUrl": "https://www.nethack.org",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.nethack.org",
+      "bytes": 4718108,
+      "sha256": "fc260517964f72999579c39ca8d1c250394a7e076ba5d7d23262970afb5b7928",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Fantasy General. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://www.nethack.org/download/3.6.7/nethack-367-win-x86.zip",
+          "bytes": 4718108,
+          "sha256": "eed14e4a8f2cdc5bed6d220602b1649bcf9f89c3916330b298ef947d2539cb69",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 60,
+    "title": "Shattered Pixel Dungeon",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Traditional roguelike game with pixel-art graphics and simple interface; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Age of Wonders",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/30794/Age%20of%20Wonders.html",
+    "sourceUrl": "https://shatteredpixel.com/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://shatteredpixel.com/",
+      "bytes": 54253547,
+      "sha256": "29eb5aeb44fd285d814efc07ad6d07eed46dcfd8686942ef20aa96782d548862",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Age of Wonders. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires a compatible Java runtime; not installed or launched."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/00-Evan/shattered-pixel-dungeon/releases/download/v4.0.2/ShatteredPD-v4.0.2-Java.jar",
+          "bytes": 54253547,
+          "sha256": "bcefd52a9c14f69c69d3ccc08a212cdd3830b2dc60d78d80895cd803fa1ec602",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 61,
+    "title": "Civilization",
+    "group": "Strategy, agents and tactical readability",
+    "researchQuestion": "Study technology, settlement and production feedback",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/11402/Civilization.html",
+    "archiveTimestamp": "20120730130303",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/sid-meier-s-civilization-1nj",
+      "bytes": 3702050,
+      "sha256": "0a7ed4a46f02e1f28dc22e16b679328f3db460a417e7d1a673af90e98f8f503d",
+      "platform": "DOS",
+      "archiveFiles": 9
+    }
+  },
+  {
+    "rank": 62,
+    "title": "IVAN",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Iter Vehemens ad Necem - a continuation of the graphical roguelike by members of http://attnam.com; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Civilization II",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/29076/Civilization+II.html",
+    "sourceUrl": "https://github.com/Attnam/ivan",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://github.com/Attnam/ivan",
+      "bytes": 28935642,
+      "sha256": "98410ee6a1a731078e2a03e5c81604f4eb69e9cd076dcee92d3925fd53ca6f0d",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Civilization II. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/Attnam/ivan/releases/download/v059/IVAN-v059-win.zip",
+          "bytes": 28935642,
+          "sha256": "ebd59c7a7cc36cf910a0ef9c26fce8e6dba4557aea26307c8009646dcd6c1972",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 63,
+    "title": "Advanced Civilization",
+    "group": "Strategy, agents and tactical readability",
+    "researchQuestion": "Study trade and societal development as board-game systems",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/9840/Advanced%20Civilization.html",
+    "archiveTimestamp": "20230308124031",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/advanced-civilization-249",
+      "bytes": 13766073,
+      "sha256": "6e11c6a1ff0edcf11a141ddc3d32ce53bc18ab8723a2abdc43fbe1106afacf15",
+      "platform": "DOS",
+      "archiveFiles": 69
+    }
+  },
+  {
+    "rank": 64,
+    "title": "Enigma",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study A puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Battle Isle 2",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/10608/Battle+Isle+2.html",
+    "sourceUrl": "https://www.nongnu.org/enigma/index.html",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.nongnu.org/enigma/index.html",
+      "bytes": 108245487,
+      "sha256": "6c62584433458c291b82c4e2efec2f1504dacb949df1a1bd45a534eeb369f93a",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Battle Isle 2. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/Enigma-Game/Enigma/releases/download/1.30/Enigma-1.30-windows10.zip",
+          "bytes": 108245487,
+          "sha256": "caab7ec85f126acfc84434366544722b1adb809d4cf109fbed8a092cf5fd99d4",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 65,
+    "title": "Panzer General",
+    "group": "Strategy, agents and tactical readability",
+    "researchQuestion": "Study compact hex-map unit communication",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/258/Panzer%20General.html",
+    "archiveTimestamp": "20080209215536",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/panzer-general-2as",
+      "bytes": 6520615,
+      "sha256": "f4c8e56d281a1a2b4dfe198148d6dfee4ff968d37bfbc073122153bd2a32a708",
+      "platform": "DOS",
+      "archiveFiles": 893
+    }
+  },
+  {
+    "rank": 66,
+    "title": "Bombermaaan",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Classic bomberman game; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Battle Bugs",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/10569/Battle+Bugs.html",
+    "sourceUrl": "http://bombermaaan.sourceforge.net/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "http://bombermaaan.sourceforge.net/",
+      "bytes": 1809309,
+      "sha256": "6f6f69fe8173bc3960fa1bbac1b5c00408bd002953afa7cef42181b0f44f2291",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Battle Bugs. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.sourceforge.net/project/bombermaaan/1%20-%20Bombermaaan%20Stable/1.4/Bombermaaan_1.4.0.627_setup.exe",
+          "bytes": 1809309,
+          "sha256": "4e8bdc5362623e6f7712c7fb2442339de3ea494ff51562f8ed86af2239ec4745",
+          "verification": "source manifest SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 67,
+    "title": "C-Dogs SDL",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Classic overhead run-and-gun game; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Syndicate",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/90/Syndicate.html",
+    "sourceUrl": "https://cxong.github.io/cdogs-sdl/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://cxong.github.io/cdogs-sdl/",
+      "bytes": 34071179,
+      "sha256": "e670bb2096d338671903e250ab9287beebc0d80b62e0c6f4c4c03c975f41c39e",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Syndicate. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/cxong/cdogs-sdl/releases/download/2.5.0/C-Dogs.SDL-2.5.0-win32.zip",
+          "bytes": 34071179,
+          "sha256": "448409739c4409cc188f5342fdcb95aa1beea10c9cb87d3021fc471a47e8e5fc",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 68,
+    "title": "Teeworlds",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study 2D retro multiplayer shooter; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Cannon Fodder",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/11188/Cannon+Fodder.html",
+    "sourceUrl": "https://teeworlds.com/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://teeworlds.com/",
+      "bytes": 10255484,
+      "sha256": "8334d31927959fc30952dd8d45399b2beaf3ad7b121f8d228e93adf9e144fe0c",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Cannon Fodder. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/teeworlds/teeworlds/releases/download/0.7.5/teeworlds-0.7.5-win64.zip",
+          "bytes": 10255484,
+          "sha256": "83cd75884a0e8339b4910da1bfe4d737af794d35600cd065e7c2222750b37585",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 69,
+    "title": "Dungeon Master",
+    "group": "Strategy, agents and tactical readability",
+    "researchQuestion": "Study spatial interaction and real-time party feedback",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/28563/Dungeon+Master.html",
+    "archiveTimestamp": "20101231185245",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/dungeon-master-n0",
+      "bytes": 896553,
+      "sha256": "aeb5a47f3b753206e474185f2c08b5e884dc8ddf4bd5cb82e2f28f9b7617f275",
+      "platform": "DOS",
+      "archiveFiles": 19
+    }
+  },
+  {
+    "rank": 70,
+    "title": "Tales of Maj\u2019Eyal",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Tales of Maj\u2019Eyal (ToME) is a free, open source roguelike RPG, featuring tactical turn-based combat and advanced character building; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Stronghold",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/642/Stronghold.html",
+    "sourceUrl": "https://te4.org",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://te4.org",
+      "bytes": 537674117,
+      "sha256": "ab4244002bd39a5d41b8fedff939da4908b11480bcb2f62d7384de1061926cb2",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Stronghold. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://te4.org/dl/t-engine/t-engine4-windows-1.7.6.zip",
+          "bytes": 537674117,
+          "sha256": "38dddcf9a09e3640b1195372763ade25187d0a840556614b72d9223d3fe97c8c",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 71,
+    "title": "LambdaHack",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Haskell game engine library for roguelike dungeon crawlers; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Ultima VII - Part 1 - The Black Gate",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/27189/Ultima+VII+-+Part+1+-+The+Black+Gate.html",
+    "sourceUrl": "https://github.com/LambdaHack/LambdaHack",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://github.com/LambdaHack/LambdaHack",
+      "bytes": 13701126,
+      "sha256": "e60cd986506f93562456439b4d236e54625ccc763de3f99202f0490f4260c9ab",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Ultima VII - Part 1 - The Black Gate. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/LambdaHack/LambdaHack/releases/download/v0.11.0.0/LambdaHack_0.11.0.0_windows-x86_64.zip",
+          "bytes": 13701126,
+          "sha256": "7588920ac3987e4fbea80980e14854aadc8983783bc5ce1e50edb6b16d25003c",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 72,
+    "title": "Infra Arcana",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study A roguelike game set in the early 20th century; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Ultima VI - The False Prophet",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/28710/Ultima+VI+-+The+False+Prophet.html",
+    "sourceUrl": "https://sites.google.com/site/infraarcana/home",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://sites.google.com/site/infraarcana/home",
+      "bytes": 45868534,
+      "sha256": "4c9b42942739d5f225ed6413419a4d97a523ef321cd25d28ff792b0eb979f23f",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Ultima VI - The False Prophet. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "User data are stored in C:\\Users\\[USERNAME]\\AppData\\Roaming\\infra_arcana"
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://gitlab.com/martin-tornqvist/ia/-/jobs/artifacts/v23.0.0/download?job=build-windows",
+          "bytes": 45868534,
+          "sha256": "d11b5cb2c9afea6c2ae849c7d81f73f8d4a2f50ef5f7f4360a9e93f320aa1253",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 73,
+    "title": "Umoria",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study A single player roguelike based on Lord of the Rings; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Ultima V - Warriors of Destiny",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/843/Ultima+V+-+Warriors+of+Destiny.html",
+    "sourceUrl": "https://umoria.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://umoria.org/",
+      "bytes": 1146540,
+      "sha256": "c8db2ee2693b62ba7a58c98d659543950e3fb508c22c7eb21d3c972dde432286",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Ultima V - Warriors of Destiny. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "To run umoria in the console, use: 'Push-Location $(scoop which umoria | Split-Path); umoria.exe; Pop-Location'."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/dungeons-of-moria/umoria/releases/download/v5.7.15/umoria-5-7-15-win64.zip",
+          "bytes": 1146540,
+          "sha256": "21385709f5df60f1dd2c4a944ad8fcb7c4ea613c1948a4034e6cc15170e4ea59",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 74,
+    "title": "Sil",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study A roguelike in the first age of Middle-earth, variant of Angband; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Ultima IV Quest of  the Avatar",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/25548/Ultima+IV+Quest+of++the+Avatar.html",
+    "sourceUrl": "http://www.amirrorclear.net/flowers/game/sil/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "http://www.amirrorclear.net/flowers/game/sil/",
+      "bytes": 16303666,
+      "sha256": "05f92ef245c9d4f2c1dc025677c484cfeb90b9606943221edbf48b7701ce8a91",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Ultima IV Quest of  the Avatar. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Configuration files cannot be persisted, but will be retained during the update"
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "http://www.amirrorclear.net/flowers/game/sil/Sil-130-Win.zip",
+          "bytes": 16303666,
+          "sha256": "613a9bbd6dc9869fe6fd352f6e3af21060421ab5c56cf27db3f1c2ce49b5a908",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 75,
+    "title": "Witch Blast",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Roguelite dungeon crawl shooter similar to The Binding of Isaac; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Ultima Underworld - The Stygian Abyss",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/30917/Ultima+Underworld+-+The+Stygian+Abyss.html",
+    "sourceUrl": "https://github.com/Cirrus-Minor/witchblast",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://github.com/Cirrus-Minor/witchblast",
+      "bytes": 47633597,
+      "sha256": "5b22ad28f34ab40b447745975091d855a161dd81573553f336a604f8211d42a6",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Ultima Underworld - The Stygian Abyss. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://github.com/Cirrus-Minor/witchblast/releases/download/v0.7.5/Witch.Blast.v0.7.5.zip",
+          "bytes": 47633597,
+          "sha256": "2ed55f51f5a7a1a59d45175242bd62ae602361fc70d337ef7406d5b516398661",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 76,
+    "title": "Neverball",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study 3D roll-the-ball puzzle game (includes Neverputt); document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Darklands",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/29576/Darklands.html",
+    "sourceUrl": "https://neverball.org/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://neverball.org/",
+      "bytes": 75802818,
+      "sha256": "5d34771e3ae1aa52268ae02c4884482e802c0a653ff212345700329aa987f27c",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Darklands. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://neverball.org/neverball-1.6.0.zip",
+          "bytes": 75802818,
+          "sha256": "865391cc041208e526401a8eb1f14fba44323f17d7e818c5e65e82393ff747fb",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 77,
+    "title": "Fish Fillets NG",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Port of the puzzle game Fish Fillets from ALTAR interactive; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Wasteland",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/16892/Wasteland.html",
+    "sourceUrl": "http://fillets.sourceforge.net/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "http://fillets.sourceforge.net/",
+      "bytes": 158776777,
+      "sha256": "985382bb3160480e4aa6ea6b94b1f9749bb140dc5cf59f9fd70403d50ebfa7ad",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Wasteland. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.sourceforge.net/project/fillets/Fish%20Fillets%20-%20Next%20Generation/1.0.1/fillets-ng-all-win32-1.0.1.zip",
+          "bytes": 158776777,
+          "sha256": "65440c2d4148aebf2d6aed8ed7103e52ce9d82051bd362fc49adfe7694436930",
+          "verification": "source manifest SHA-256 and ZIP CRC"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 78,
+    "title": "The Griffon Legend",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Betrayal at Krondor",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/208/Betrayal+at+Krondor.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 9552316,
+      "sha256": "8b5ab074826059bfbd78231747fd00e65bd5e5be76b46288175c58c6dfc93cdb",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Betrayal at Krondor. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Griffon%20Legend/griffon-1.0.zip",
+          "bytes": 9552316,
+          "sha256": "0aad5fb10f51afb5c121cf04cc86539a6f0d89db85809f9e1767dfdc8d3191a4",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 79,
+    "title": "God of Thunder",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Albion",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/27705/Albion.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 1059686,
+      "sha256": "22de9f76d6ed5bcb4d56ebb7e8ce568aafa86abc347cc333dbe1e0512710f289",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Albion. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/God%20of%20Thunder/gotfree.zip",
+          "bytes": 1059686,
+          "sha256": "94962e6fcbc6d547debda11224d00fdec7a0d03bacdf7d82d08ed8ea289c0c5e",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 80,
+    "title": "Sfinx",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Quest for Glory IV - Shadows of Darkness",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/26923/Quest%20for%20Glory%20IV%20-%20Shadows%20of%20Darkness.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 16549117,
+      "sha256": "359c85faff383e74c96da834a384200d49b1a37894b62cb8d7c545b258111a31",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Quest for Glory IV - Shadows of Darkness. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Sfinx/sfinx-en-v1.1.zip",
+          "bytes": 16549117,
+          "sha256": "f516b30a046526f78cbc923d8f907d267ab964ccd9b770afc72350e8d467ec4d",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 81,
+    "title": "Life Flashes By",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Princess Maker 2",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/15092/Princess+Maker+2.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 156473936,
+      "sha256": "8a323f9cb67ccd26fcdded5b9a94c59e10e4e072e4470616ba5a8f976e200c29",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Princess Maker 2. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/SLUDGE/lifeflashesby.zip",
+          "bytes": 156473936,
+          "sha256": "04d5058429f7354fe7b9305a5bc35ad6ebc2a0bac461140ed1a7309604c5dc7b",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 82,
+    "title": "Alter Ego",
+    "group": "Inhabited worlds, characters and narrative",
+    "researchQuestion": "Study life events and consequence presentation",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/10088/Alter+Ego.html",
+    "archiveTimestamp": "20081122114233",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/alter-ego-male-1s",
+      "bytes": 589069,
+      "sha256": "294e235cd6493d12a66c63acd191adf5a54abaf72ed65031dfdea544593aa511",
+      "platform": "DOS",
+      "archiveFiles": 432,
+      "editionNote": "Male edition."
+    }
+  },
+  {
+    "rank": 83,
+    "title": "Nippon Safes Inc.",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Pirates!",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/27738/Pirates%21.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 1977894,
+      "sha256": "adcfd45b10d9ba7747377109633aeebf8364d0687599ae2925e30af5294e6434",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Pirates!. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Nippon%20Safes/nippon-1.0.zip",
+          "bytes": 1977894,
+          "sha256": "53e7e2c60065e4aed193169bbcdcfd1113fa68d3efe1c8240ba073c0e20d613f",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 84,
+    "title": "DreamWeb",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Covert Action",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/11583/Covert+Action.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 226067188,
+      "sha256": "b2e9ed16215db9eb10c6a91faa4cab010fb006671e934586a7b267bf96fe6591",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Covert Action. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Dreamweb/dreamweb-cd-uk-1.1.zip",
+          "bytes": 226067188,
+          "sha256": "4a6f13911ce67d62c526e41048ec067b279f1b378c9210f39e0ce8d3f2b80142",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 85,
+    "title": "Flight of the Amazon Queen",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "The Secret of Monkey Island",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/19/The%20Secret%20of%20Monkey%20Island.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 112625523,
+      "sha256": "3b3fc77cf6820db46f850a18a9d47d53af19c88f5639c420359b90c0a4df756d",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for The Secret of Monkey Island. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Flight%20of%20the%20Amazon%20Queen/FOTAQ_Talkie-original.zip",
+          "bytes": 112625523,
+          "sha256": "a298e68243f18a741d4816ef636a5a77a1593816fb2c9e23a09124c35a95dfec",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 86,
+    "title": "Broken Sword 2.5",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Day of the Tentacle",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/27540/Day+of+the+Tentacle.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 901436443,
+      "sha256": "f05e0b3f6816bfa16f16325770121799fa22a8cf6bea57d677c6c2222646a529",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Day of the Tentacle. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Broken%20Sword%202.5/sword25-v1.0.zip",
+          "bytes": 901436443,
+          "sha256": "ff63f910fbb5aa7ba61bca8fcadd398d688496aa022455f42a305e47dd0e7247",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 87,
+    "title": "Beneath a Steel Sky",
+    "group": "Inhabited worlds, characters and narrative",
+    "researchQuestion": "Study environmental clues and character presentation",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/29361/Beneath+a+Steel+Sky.html",
+    "archiveTimestamp": "20120801073118",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 69377781,
+      "sha256": "53209b9400eab6fd7fa71518b2f357c8de75cfeaa5ba57024575ab79cc974593",
+      "platform": "DOS / ScummVM",
+      "archiveFiles": 5,
+      "editionNote": "Official ScummVM CD archive; matches the published SHA-256.",
+      "integrity": "Matches publisher-distributed SHA-256 and passes ZIP CRC"
+    }
+  },
+  {
+    "rank": 88,
+    "title": "Lure of the Temptress",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Loom",
+    "originalSourceUrl": "http://www.abandonia.com:80/en/games/21/Loom.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 5678861,
+      "sha256": "bf34c80b1f00ac4db557e2db6f7f57497809425459dae68ce3faaeb7b58cd656",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Loom. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Lure%20of%20the%20Temptress/lure-1.1.zip",
+          "bytes": 5678861,
+          "sha256": "f3178245a1483da1168c3a11e70b65d33c389f1f5df63d4f3a356886c1890108",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 89,
+    "title": "Drascula: The Vampire Strikes Back",
+    "group": "Free games \u00b7 tactics, role-playing and interaction",
+    "researchQuestion": "Study Adventure game: interactions, narrative state, puzzles and readable feedback; document actions, feedback and failure/recovery",
+    "catalogEvidence": "Free replacement; original proposal retained in originalTitle",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "originalTitle": "Another World",
+    "originalSourceUrl": "http://www.abandonia.com/en/games/10226/Another+World.html",
+    "sourceUrl": "https://www.scummvm.org/games/",
+    "replacementReason": "No-cost replacement; study scope revised for this game.",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.scummvm.org/games/",
+      "bytes": 69374697,
+      "sha256": "93ee4703bf5d1297c7c45a85085bcc05a9c45c54297e4d23b555f1827f32ce5d",
+      "platform": "Windows / required runtime noted",
+      "editionNote": "Free replacement for Another World. Downloaded packages are not installed or play-tested.",
+      "runtimeNotes": [
+        "Requires ScummVM; game content downloaded separately."
+      ],
+      "integrity": "Individual package checksums recorded; aggregate SHA-256 identifies the package set.",
+      "packages": [
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Drascula_%20The%20Vampire%20Strikes%20Back/drascula-1.0.zip",
+          "bytes": 32842993,
+          "sha256": "b731f6cb5a22ba8b4c3b3362f570b9a10a67b6cb0b395394b19a94b36e4e42de",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        },
+        {
+          "url": "https://downloads.scummvm.org/frs/extras/Drascula_%20The%20Vampire%20Strikes%20Back/drascula-audio-2.0.zip",
+          "bytes": 36531704,
+          "sha256": "7e6afba36eed13dd02e0360119e9a6a8d0e7b334ddc11d7c46ab7faceb8fe401",
+          "verification": "ZIP CRC; locally recorded SHA-256"
+        }
+      ]
+    }
+  },
+  {
+    "rank": 90,
+    "title": "Prince of Persia",
+    "group": "Inhabited worlds, characters and narrative",
+    "researchQuestion": "Study animation anticipation and spatial readability",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/15067/Prince+of+Persia.html",
+    "archiveTimestamp": "20160906201157",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/prince-of-persia-pd",
+      "bytes": 345030,
+      "sha256": "4daa393f524fff21908e76db1729d2563675e99a047dc8e34234467a75adf70f",
+      "platform": "DOS",
+      "archiveFiles": 27
+    }
+  },
+  {
+    "rank": 91,
+    "title": "The Incredible Machine",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study cause-and-effect construction and experimentation",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/25/The%20Incredible%20Machine.html",
+    "archiveTimestamp": "20071226023325",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/the-incredible-machine-1mg",
+      "bytes": 460276,
+      "sha256": "6351ae0db7736fb18deb65176d681d3dc271190c0a749f9c440d8352dc1f2f29",
+      "platform": "DOS",
+      "archiveFiles": 15
+    }
+  },
+  {
+    "rank": 92,
+    "title": "Sid & Als Incredible Toons",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study animated mechanisms and visual feedback",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/30820/Sid%20&%20Als%20Incredible%20Toons.html",
+    "archiveTimestamp": "20130622235603",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/sid-al-s-incredible-toons-1md",
+      "bytes": 2186799,
+      "sha256": "a0a88f94c6cba07b5b40ced2ec0ed51590563e02ee2037bdab2a125a045c327d",
+      "platform": "DOS",
+      "archiveFiles": 24
+    }
+  },
+  {
+    "rank": 93,
+    "title": "Lemmings",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study indirect control over many moving agents",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://abandonia.com:80/en/games/37/Lemmings.html",
+    "archiveTimestamp": "20071213010231",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/lemmings-16x",
+      "bytes": 684095,
+      "sha256": "b79610a6bde5e03609a20e91aea3fd0db3bad74daea7c762140e3a750720ffba",
+      "platform": "DOS",
+      "archiveFiles": 69
+    }
+  },
+  {
+    "rank": 94,
+    "title": "Lemmings 2 - The Tribes",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study a larger job vocabulary without losing readability",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/29665/Lemmings+2+-+The+Tribes.html",
+    "archiveTimestamp": "20120713065041",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/lemmings-2-the-tribes-1zn",
+      "bytes": 2245762,
+      "sha256": "aeb105eb43f23573ded361e2eb206c9a52ce900123a5cef02f4221ca1a4e58fe",
+      "platform": "DOS",
+      "archiveFiles": 9
+    }
+  },
+  {
+    "rank": 95,
+    "title": "Lost Vikings, The",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study complementary character abilities",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/12/Lost%20Vikings,%20The.html",
+    "archiveTimestamp": "20071225210722",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/the-lost-vikings-1mi",
+      "bytes": 1278557,
+      "sha256": "144fe2ed5c6eb34514ac053a7dd1cc67a8ab6ed286a8bbead705a8e82ee36e6d",
+      "platform": "DOS",
+      "archiveFiles": 5
+    }
+  },
+  {
+    "rank": 96,
+    "title": "Robot Odyssey",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study programmable behavior and visible debugging",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://abandonia.com:80/en/games/828/Robot%20Odyssey.html",
+    "archiveTimestamp": "20090208235107",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/robot-odyssey-6g",
+      "bytes": 195085,
+      "sha256": "ed4cc45e56c4004d225049f850b0e07327e479aa8b8234f930be9a1bf042f8fc",
+      "platform": "DOS",
+      "archiveFiles": 60
+    }
+  },
+  {
+    "rank": 97,
+    "title": "Rockys Boots",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study teaching logic through interactive construction",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/831/Rockys%20Boots.html",
+    "archiveTimestamp": "20090106042626",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/rocky-s-boots-cp",
+      "bytes": 92390,
+      "sha256": "da6980fc17c48ff9138dbb6ba678fc42c1063f78efee9e113fa37dc2ac44e68b",
+      "platform": "DOS",
+      "archiveFiles": 23
+    }
+  },
+  {
+    "rank": 98,
+    "title": "Stunt Island",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study camera placement and authored sequences",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/287/Stunt%20Island.html",
+    "archiveTimestamp": "20080105104836",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/stunt-island-1is",
+      "bytes": 7720047,
+      "sha256": "7d55ab398229708bca81a67205784e0e05b3648bfb2e9784e795dbc41fea55e1",
+      "platform": "DOS",
+      "archiveFiles": 119
+    }
+  },
+  {
+    "rank": 99,
+    "title": "Rampart",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study building, simulation and rebuilding phases",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com/en/games/15241/Rampart.html",
+    "archiveTimestamp": "20120730152543",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/rampart-1hq",
+      "bytes": 912401,
+      "sha256": "0933767b92f127e55a54b02fbc680f3364d3e7ccfc57c892188120d53ac2e002",
+      "platform": "DOS",
+      "archiveFiles": 22
+    }
+  },
+  {
+    "rank": 100,
+    "title": "Sokoban",
+    "group": "Construction, puzzles and scenario authoring",
+    "researchQuestion": "Study minimal spatial rules and reversible mistakes",
+    "catalogEvidence": "archived-title-url",
+    "sourceUrl": "http://www.abandonia.com:80/en/games/28044/Sokoban.html",
+    "archiveTimestamp": "20101029161626",
+    "researchStatus": "proposed; gameplay not yet analyzed",
+    "acquisition": {
+      "status": "downloaded",
+      "source": "https://www.myabandonware.com/game/soko-ban-4t",
+      "bytes": 86910,
+      "sha256": "93ee13d70168357b96d31c4eab1cf53d1fbde873c932db8e84a4ec52f4de8286",
+      "platform": "DOS",
+      "archiveFiles": 83
+    }
+  }
+]

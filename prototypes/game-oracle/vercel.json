@@ -1,0 +1,1 @@
+{"buildCommand": "npm run build", "outputDirectory": "public", "cleanUrls": true, "redirects": [{"source": "/library", "destination": "/steam", "permanent": false}]}

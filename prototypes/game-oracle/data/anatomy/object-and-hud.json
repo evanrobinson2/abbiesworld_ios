@@ -1,0 +1,70 @@
+{
+  "id": "object-and-hud",
+  "files": [],
+  "analysis": {
+    "imageFileCount": 0
+  },
+  "sources": [
+    {
+      "title": "Beyond the HUD — Fagerholt & Lorentzon (2009), sections 7.1–7.2 and 10.1.1",
+      "url": "https://publications.lib.chalmers.se/records/fulltext/111921.pdf",
+      "finding": "The thesis separates whether information belongs to the fiction from where it is drawn. A spatial cue can sit in 3D without being an object in the fiction; conventional HUD information is presented as an overlay. Its research concerns FPS immersion, so application to this coffee game is a design inference."
+    },
+    {
+      "title": "Signifiers, not affordances — Don Norman (2008)",
+      "url": "https://jnd.org/signifiers-not-affordances/",
+      "finding": "Norman distinguishes possible actions from perceivable clues that help people understand them. Our application: an interaction cue must communicate what the player can do without implying a misleading physical feature."
+    }
+  ],
+  "projectDecision": "The asset represents the object itself: cup, handle, saucer, machine casing, buttons, spout and tray. Next-action prompts, selection, recipe progress and teaching hints belong to a separate presentation layer addressed to the player. The HUD is a conduit for information beyond what the player can infer by seeing and hearing the world. This is Evan’s project requirement, recorded 2026-10-21.",
+  "caseStudy": "The supplied screenshot shows a thick yellow ring around the cup that reads as another physical component. Inspected coffee-station source creates a lit TorusGeometry, follows the current action target and pulses its scale. It is a runtime guidance mesh, not evidence that a downloaded asset contains the ring. The error is the visual and architectural mixing of guidance with the world object.",
+  "acceptanceCriteria": [
+    {
+      "domain": "assets",
+      "title": "Asset, world feedback and interface are distinct responsibilities",
+      "finding": "Author and export clean physical assets. Keep interaction anchors and target IDs as metadata. World feedback may include coffee flowing, steam, liquid level or a plausible machine indicator, driven by actual state. Keep selection, step hints and progress in a separately removable interface layer; these must not alter asset geometry, collision, physical bounds or exported models. A deliberately world-anchored cue remains interface and must read that way.",
+      "basis": "original implementation guidance; proposed, not shipped",
+      "evidence": {
+        "url": "/data/anatomy/object-and-hud.json",
+        "path": "acceptanceCriteria"
+      }
+    },
+    {
+      "domain": "ui",
+      "title": "Coffee correction and review criteria",
+      "finding": "Remove the yellow guidance torus. Use a concise next-action label and progress in the right drawer, with optional narration and an equivalent visible cue when muted. If a target needs locating, use restrained screen-space focus treatment tied to its stable ID, clearly distinct from material. Preserve left navigation. Review every recipe step at desktop and phone size with guidance on/off, narration muted, and drawers closed; keep the cup silhouette intact and ensure the next valid action remains discoverable.",
+      "basis": "project-specific design inference; correction remains unimplemented in this research update",
+      "evidence": {
+        "url": "/data/anatomy/object-and-hud.json",
+        "path": "acceptanceCriteria"
+      }
+    }
+  ],
+  "relatedStudies": [
+    "/game-anatomy?game=black-white",
+    "/game-anatomy?game=mindustry"
+  ],
+  "verification": "Research published; coffee fix not implemented or verified.",
+  "manufacturedConstruction": [
+    {
+      "domain": "models",
+      "title": "Manufactured construction: inset gauges, fitted parts",
+      "finding": "Evan rejects the clay-like espresso machine. Build the fascia around a gauge recess: dial face behind glass, thin bezel at the opening, a shallow shadow gap, and a body seated into the casing. Knobs project from defined shafts or mounts; they are not gauge faces. Use controlled edge radii, panel thickness, seams and material differences between painted metal, stainless steel, glass and ceramic. Friendly stylization must preserve these assembly relationships.",
+      "basis": "Evan’s art direction and original construction proposal; geometry not yet corrected",
+      "evidence": {
+        "url": "/data/anatomy/object-and-hud.json",
+        "path": "manufacturedConstruction"
+      }
+    },
+    {
+      "domain": "assets",
+      "title": "Use manufacturer references to establish what each part does",
+      "finding": "La Marzocco’s Linea Mini manual identifies separate brew-group and steam-boiler pressure gauges. This supports modeling gauges as functional instruments. Inset depth, glass, bezel proportions and panel construction are this project’s proposed treatment, not dimensions recovered from the manual. Do not imply accurate pressure simulation from an animated needle.",
+      "basis": "manufacturer documentation; functional reference, not engineering reconstruction",
+      "evidence": {
+        "url": "https://www.lamarzocco.com/ie/en/wp-content/uploads/2023/06/MAN.12.0.1_LINEAMINI.pdf",
+        "path": "Linea Mini operating manual, gauge identification"
+      }
+    }
+  ]
+}

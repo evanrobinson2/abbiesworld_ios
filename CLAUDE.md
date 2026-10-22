@@ -40,5 +40,7 @@ documents; what is built lives in the status documents. Keep these three apart.
 - `tools/midjourney/`: driving Midjourney in Evan's browser. `tools/model-store/`: R2 and Postgres asset storage.
 - `tools/paper-warrior/`, `tools/paper-helmet/`: image-to-model fitting experiments and the papercraft grammar.
 - `prototypes/studio-mock/`: the Abbie's World MCP that ChatGPT connects to (studio-mock-iota.vercel.app/mcp).
+- `prototypes/game-oracle/`: the Game Oracle (abbies-game-oracle.vercel.app): Steam library index, game identity records,
+  game studies and the `consult` director (idea to rules, beats, choices, style and factory requests). Notes in `docs/oracle/`.
 - `docs/dispatch/`: the ChatGPT → Claude dispatch bridge (build/status/revise/inbox). A session started by a
   dispatch follows `docs/dispatch/CLAUDE_PROTOCOL.md`.

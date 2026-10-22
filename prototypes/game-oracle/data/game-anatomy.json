@@ -1,0 +1,2276 @@
+{
+  "schemaVersion": 1,
+  "revision": "anatomy-2026-10-21-freeciv-food-transitions",
+  "updatedAt": "2026-10-21T20:12:49.022348+00:00",
+  "scope": "Fourteen partial game studies including packaged-source Alpha Zoo research; gameplay remains unobserved.",
+  "counts": {
+    "games": 15,
+    "extractedPackages": 14,
+    "files": 62515,
+    "imageFiles": 39516,
+    "findings": 90,
+    "runtimeObserved": 0,
+    "sourceFilesFetched": 54,
+    "selectedClassesDecompiled": 5
+  },
+  "method": [
+    "Package extraction and file-level inventory",
+    "Image-header inspection; not unique-sprite counting",
+    "Version-tagged upstream source snapshots with Git blob verification",
+    "Selected Java bytecode decompilation using CFR",
+    "Bounded executable entry-point disassembly; not recovered gameplay routines",
+    "Prince of Persia DAT resource-directory decoding with bounds checks",
+    "SimFarm resource-directory decoding and exact round-trip validation of 22 planar bitmap payloads",
+    "Fixed-record decoding of authored guidance in all 24 SimFarm crop files",
+    "Black & White supplied-disc inventory and gesture-focused primary documentation study",
+    "Black & White InstallShield extraction, complete gesture-template metadata decoding and isolated x86 recognizer probes",
+    "Alpha Zoo ASAR application extraction with bounds and declared integrity checks; packaged JavaScript inspection"
+  ],
+  "limitations": [
+    "Original binary behavior is not proven by reading upstream source or a modern reimplementation.",
+    "No game has been play-tested in this pilot; UI findings are code-level and UX remains unobserved.",
+    "Unrecognized or packed formats can conceal sprites, audio and models. Zero loose model files does not establish no models.",
+    "Widelands package extraction remains blocked; source evidence is available."
+  ],
+  "games": [
+    {
+      "id": "widelands",
+      "title": "Widelands",
+      "genre": "Settlement RTS",
+      "rank": 1,
+      "status": "partial static study",
+      "version": "v1.3.1",
+      "sourceBasis": "release source",
+      "fileCount": 0,
+      "imageFileCount": 0,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {},
+      "commonImageDimensions": {},
+      "claims": [
+        {
+          "domain": "systems",
+          "title": "Requests become physical transfers",
+          "finding": "The economy pairs open requests with available supplies, checks that each is still valid, and starts transfers. Lowest-priority requests are deferred when higher-priority work exists.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/economy/economy.cc",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/economy/economy.cc#L949-L984",
+            "blobSha": "4aed07fbcb3c3c0313b1c9253832360db935cdb9",
+            "lines": [
+              949,
+              984
+            ]
+          },
+          "flow": {
+            "trigger": "Economy balancing timer",
+            "state": "Requests, supplies, priority queue",
+            "output": "Transfer started or request deferred",
+            "failure": "Missing request or exhausted supply is skipped and reconsidered later."
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Routes belong to an economy",
+          "finding": "Route lookup requires both endpoint flags to belong to this economy and passes a cost cutoff to its router.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/economy/economy.cc",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/economy/economy.cc#L222-L227",
+            "blobSha": "4aed07fbcb3c3c0313b1c9253832360db935cdb9",
+            "lines": [
+              222,
+              227
+            ]
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Separate seeded generation fields",
+          "finding": "The map generator seeds a private RNG with the map number and builds separate random fields for elevation, terrain, resources and other map contents.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/editor/map_generator.cc",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/editor/map_generator.cc#L591-L627",
+            "blobSha": "66b2926105b777576236a96f8ffd4897b0cc750e",
+            "lines": [
+              591,
+              627
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Stopping respects production-cycle boundaries",
+          "finding": "program_act honors the stopped flag when the program instruction pointer is zero, unless the program explicitly ignores stopping. The source explains that interrupting later could consume inputs without producing output. set_stopped also rebalances ware and worker supply and publishes a building-change notification.",
+          "basis": "pinned original release-source inspection; no gameplay observation",
+          "evidence": {
+            "path": "src/logic/map_objects/tribes/productionsite.cc",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/productionsite.cc#L906-L947",
+            "blobSha": "8daed7da59e8706ea7d6cafc0f637b6ca06b78ac",
+            "lines": [
+              906,
+              947
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Output handling precedes the next production work",
+          "finding": "Pending produced wares are instantiated and assigned to a worker drop-off task before program work continues. Outstanding worker requests prevent normal production work from starting and put the worker into an idle retry. Basic unloading can still begin while staffing is incomplete.",
+          "basis": "pinned original release-source inspection; no gameplay observation",
+          "evidence": {
+            "path": "src/logic/map_objects/tribes/productionsite.cc",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/productionsite.cc#L959-L1089",
+            "blobSha": "8daed7da59e8706ea7d6cafc0f637b6ca06b78ac",
+            "lines": [
+              959,
+              1089
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Failed and skipped programs carry retry state",
+          "finding": "program_start consults the previous failure/skip timestamp and delays a restart until that timestamp plus Duration(10000). program_end records failed or skipped outcomes as nonproductive, while completion clears retry state, trains workers and records productive time. Nested program results propagate to the parent phase. This is static control-flow evidence, not an observed recovery scenario.",
+          "basis": "pinned original release-source inspection; no gameplay observation",
+          "evidence": {
+            "path": "src/logic/map_objects/tribes/productionsite.cc",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/productionsite.cc#L1095-L1189",
+            "blobSha": "8daed7da59e8706ea7d6cafc0f637b6ca06b78ac",
+            "lines": [
+              1095,
+              1189
+            ]
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Bakery recipe links demand, inputs and two outputs",
+          "finding": "The Barbarian bakery defines one baker and input queues of six water and six wheat. Its main program skips when bread is not needed, consumes three of each input, sleeps for 20.8 seconds, then performs two 20-second working stages, each followed by a bread output. These are authored action durations; delivery overhead and observed throughput are not established.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "data/tribes/buildings/productionsites/barbarians/bakery/init.lua",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/data/tribes/buildings/productionsites/barbarians/bakery/init.lua#L43-L66",
+            "blobSha": "ae664d3965ea4f61e833c956638dbd1c4234bae3",
+            "lines": [
+              43,
+              66
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Missing ingredients fail before input removal",
+          "finding": "ActConsume computes proposed consumption using local quantities. If required groups remain unmet, it builds ingredient-specific feedback and ends the program as failed before changing queue contents. Only the successful branch subtracts inputs and updates consumption statistics. ActProduce then hands pending output to the building worker; transport remains a separate step.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "src/logic/map_objects/tribes/production_program.cc",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/logic/map_objects/tribes/production_program.cc#L1231-L1392",
+            "blobSha": "b13bfa2950195ba0b99fd197449ea0a39676d4f4",
+            "lines": [
+              1231,
+              1392
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Demand combines district stock, storage policy and open requests",
+          "finding": "With a positive permanent target and at least one warehouse, the economy compares warehouse stock against the global target and a district share rounded upward. Local shortages can justify production even when global stock is sufficient, but local storage policy and preferred warehouses elsewhere can suppress that local need. Outside this branch, matching open requests determine demand, including when no warehouses exist. The production-site infinite-production setting bypasses the ware demand predicate.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "src/economy/economy.cc",
+            "url": "https://github.com/widelands/widelands/blob/1cbe8aa45b3b3e5626b36257944184aad6af5da5/src/economy/economy.cc#L513-L594",
+            "blobSha": "4aed07fbcb3c3c0313b1c9253832360db935cdb9",
+            "lines": [
+              513,
+              594
+            ]
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "partial static evidence",
+        "systems": "partial static evidence",
+        "simulation": "partial static evidence",
+        "procedural-generation": "partial static evidence",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "not yet studied",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/widelands.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Treat a stop as a defined boundary, preserve pending output handling, and expose staffing shortages and delayed retries as distinct states. This is a design inference from source, not implemented Ranch behavior."
+      },
+      "nextPass": "Demand predicate, bakery recipe and input-failure branches are now source-traced. Delivery completion, demand-target UI, runtime throughput and recovery remain unobserved. Installer remains unextracted. Advance to the next pilot subsystem while retaining these gaps.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "simfarm",
+      "title": "Sim Farm",
+      "genre": "Farm management",
+      "rank": 2,
+      "status": "partial static study",
+      "version": "Acquired DOS package; exact build not established",
+      "sourceBasis": "Original package inspection; no recovered gameplay source",
+      "fileCount": 61,
+      "imageFileCount": 0,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".crp": 24,
+        ".adv": 15,
+        ".ssm": 8,
+        ".exe": 4,
+        ".cim": 2,
+        ".txt": 2,
+        ".mxs": 1,
+        ".eea": 1,
+        ".idx": 1,
+        ".cfg": 1,
+        ".ad": 1,
+        ".opl": 1
+      },
+      "commonImageDimensions": {},
+      "claims": [
+        {
+          "domain": "assets",
+          "title": "Main archive decoded into 151 resources",
+          "finding": "MEGADATA.IDX contains 152 fixed 20-byte records: 151 named payloads and an EOF boundary marker. Sixteen-byte name fields precede little-endian offsets; adjacent offsets delimit payloads. All payloads partition the 2,213,377-byte EEA archive exactly. Guidance sections in all 24 crop files are now decoded; their binary parameters remain unresolved.",
+          "basis": "direct binary format analysis",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "MEGADATA resource decoding / package inspection"
+          }
+        },
+        {
+          "domain": "audio",
+          "title": "Voice resources are separate from drivers",
+          "finding": "The archive contains 25 .VOC resources with Creative Voice File signatures and eight .XMI-named resources. README.TXT separately identifies the 15 loose .ADV files as Miles sound-card drivers. Audio playback and XMI event decoding remain untested.",
+          "basis": "resource signature verification + bundled documentation",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "MEGADATA resource decoding / package inspection"
+          }
+        },
+        {
+          "domain": "binary",
+          "title": "Original executable entry inspected",
+          "finding": "The DOS MZ header and a bounded entry-point instruction listing are recorded for SIMFARM.EXE. This is disassembly of startup code, not recovered crop simulation code.",
+          "basis": "binary disassembly",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "MEGADATA resource decoding / package inspection"
+          }
+        },
+        {
+          "domain": "rendering",
+          "title": "22 planar interface images decoded",
+          "finding": "All 22 .BMP-named resources fit an eight-byte header followed by four contiguous bitplanes. Width is the stored row-byte count multiplied by eight. Decoding and repacking every image reproduces the original payload exactly. A visual inspection of weather.bmp confirms legible labels and aligned borders; these are static assets, not captured gameplay.",
+          "basis": "binary decoding + round-trip validation + visual inspection",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "MEGADATA resource decoding / package inspection"
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Weather data is stored in twelve numeric tables",
+          "finding": "Four rain, four temperature and four wind resources each contain 60 rows of four integer values. Their structure and ranges are recorded. Units, calendar mapping, randomness and the game routines consuming these values have not been established.",
+          "basis": "parsed packaged data; runtime interpretation unresolved",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "MEGADATA resource decoding / package inspection"
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "Weather has a dedicated comparison panel",
+          "finding": "The decoded weather panel reserves areas for temperature, rainfall, wind direction/speed, evaporation, current weather and a five-day forecast. This verifies an authored information layout; dynamic values and interactive behavior were not observed.",
+          "basis": "visual inspection of decoded interface artwork",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "MEGADATA resource decoding / package inspection"
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Messages distinguish blocked farm actions",
+          "finding": "The packaged message table includes separate feedback for insufficient operating funds, occupied fields, invalid placement and unmet plowing/planting prerequisites. This establishes authored failure feedback, not proof that the corresponding simulation branches execute correctly.",
+          "basis": "bundled message-table inspection",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "MEGADATA resource decoding / package inspection"
+          }
+        },
+        {
+          "domain": "assets",
+          "title": "Crop files combine binary data and framed guidance",
+          "finding": "All 24 CRP files are 5,890 bytes. A crop name begins at offset 5,376; an unmapped parameter region precedes two fixed-record text sections. Their line endings, padding and seven detailed guidance fields decode consistently across every file. The binary prefix and parameter meanings remain unresolved.",
+          "basis": "static decoding of authored crop guidance; runtime unverified",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "cropDecoding: file hashes, byte offsets, text framing and derived guidance"
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Crop guidance distinguishes recurring harvests from replanting",
+          "finding": "Authored guidance says almonds, apples, grapes and oranges do not need replanting after each harvest; the other 20 crops do. Each crop also has separate pest, weed and disease resistance labels, rain-day guidance, a temperature criterion and storage guidance. These are packaged descriptions, not verified executable rules. Temperature guidance uses chill hours, degree days or freeze avoidance; rain labels span 2 to 14 days, with their runtime interpretation unresolved.",
+          "basis": "static decoding of authored crop guidance; runtime unverified",
+          "evidence": {
+            "url": "/data/anatomy/simfarm.json",
+            "path": "cropDecoding: file hashes, byte offsets, text framing and derived guidance"
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "not yet studied",
+        "systems": "partial static evidence",
+        "simulation": "partial static evidence",
+        "procedural-generation": "not yet studied",
+        "ui": "partial static evidence",
+        "ux": "not yet studied",
+        "rendering": "partial static evidence",
+        "assets": "partial static evidence",
+        "audio": "partial static evidence",
+        "models": "not yet studied",
+        "binary": "partial static evidence"
+      },
+      "inventoryUrl": "/data/anatomy/simfarm.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Explain blocked actions by their specific prerequisite, and compare current conditions with a near-term forecast. These lessons come from packaged presentation assets; simulation execution remains unverified."
+      },
+      "nextPass": "Map CRP binary parameters and artwork framing; trace executable consumers of weather and crop guidance. Crop text is decoded, but actual growth, harvest, storage and replanting behavior remains unverified. Resolve Widelands extraction independently.",
+      "runtimeObserved": false,
+      "packedResourceCount": 151,
+      "decodedBitmapCount": 22,
+      "cropGuidanceCount": 24
+    },
+    {
+      "id": "openttd",
+      "title": "OpenTTD",
+      "genre": "Transport simulation",
+      "rank": 4,
+      "status": "partial static study",
+      "version": "15.3",
+      "sourceBasis": "release source",
+      "fileCount": 145,
+      "imageFileCount": 1,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".lng": 66,
+        ".nut": 29,
+        ".md": 18,
+        ".example": 8,
+        ".obm": 4,
+        ".ttf": 4,
+        ".txt": 4,
+        ".obs": 3,
+        ".obg": 3,
+        ".grf": 2,
+        ".exe": 1,
+        ".bmp": 1,
+        ".dat": 1,
+        ".tar": 1
+      },
+      "commonImageDimensions": {
+        "32×32": 1
+      },
+      "claims": [
+        {
+          "domain": "mechanics",
+          "title": "Cargo payment depends on time and distance",
+          "finding": "The default delivery calculation combines cargo quantity, distance, the cargo payment rate and a time factor. Cargo-specific callbacks can override it. The default time factor declines after cargo-specific transit thresholds.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/economy.cpp",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp#L965-L1024",
+            "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+            "lines": [
+              965,
+              1024
+            ]
+          },
+          "flow": {
+            "trigger": "Cargo delivery income calculation",
+            "state": "Quantity, distance, transit periods, cargo type",
+            "output": "Payment amount",
+            "failure": "An invalid cargo specification returns zero."
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Seed before world construction",
+          "finding": "World generation sets the RNG seed before landscape generation, then builds world contents including industries, objects and trees. An explicitly requested new seed is obtained separately.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/genworld.cpp",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/genworld.cpp#L106-L158",
+            "blobSha": "ce1e212d2ee73d47715ea4cf8cba8bc3e6c012bf",
+            "lines": [
+              106,
+              158
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Delivery needs an accepting destination",
+          "finding": "Delivery checks industries near the station, skips the source industry, and looks for matching accepted cargo. Being physically near an industry is not sufficient by itself.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/economy.cpp",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp#L1039-L1058",
+            "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+            "lines": [
+              1039,
+              1058
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Acceptance limits how much delivery earns",
+          "finding": "Industry delivery skips temporary refusals and stations that do not satisfy an exclusive-supplier restriction. Incoming stock is capped at 65,535 units per accepted-cargo slot. DeliverGoods uses accepted quantity for statistics and transport income, with a station always-accepted flag able to accept the full amount independently of industry acceptance. Eligible subsidies then modify the calculated income.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "src/economy.cpp",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp#L1060-L1134",
+            "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+            "lines": [
+              1060,
+              1134
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Cargo arrival and production are separate stages",
+          "finding": "TriggerIndustryProduction distinguishes callback-driven industries from default conversion. An arrival callback runs when supported; a periodic-production callback instead leaves this branch to mark the industry view dirty. The default path converts waiting inputs with configured input/output multipliers divided by 256, clamps output stock to uint16, and clears processed input stock. Cargo-received randomisation and animation triggers follow. This is source control flow, not observed production timing.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "src/economy.cpp",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp#L1137-L1170",
+            "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+            "lines": [
+              1137,
+              1170
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Lost station acceptance changes unloading by order",
+          "finding": "When station acceptance disappears while delivery-marked cargo is unloading, explicit Transfer or Unload orders reassign that cargo to transfer. Other orders reassign it to keep aboard; reserved cargo may be returned to prevent exceeding capacity. That keep branch sets an internal activity flag so loading is retried next cycle, even if nothing physically unloaded. This is a station-acceptance recovery branch, not proof of how every industry-level refusal is handled.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "src/economy.cpp",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp#L1668-L1696",
+            "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+            "lines": [
+              1668,
+              1696
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Transfer credit is distinct from company income",
+          "finding": "PayTransfer computes journey income minus previous feeder shares, scales it by the feeder-payment percentage, and accumulates virtual transfer profit without adding route income. PayFinalDelivery adds delivery income to route profit but subtracts prior feeder shares from the final vehicle's visual profit. CargoPayment finalization applies route profit to company money, combines visual delivery and transfer amounts for vehicle profit, and chooses transfer-specific or ordinary income animation. These are source accounting paths, not observed balances or UI.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "src/economy.cpp",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/economy.cpp#L1182-L1249",
+            "blobSha": "a82ccc1468a7827b80be508c0c006b343545d8e4",
+            "lines": [
+              1182,
+              1249
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Packet splits preserve allocated feeder credit",
+          "finding": "CargoPacket::Split first checks allocation availability and returns null before modifying the original if no packet can be allocated. On success it assigns GetFeederShare(new_size) to the new packet and subtracts that exact amount and cargo count from the original. The new packet retains transit age, source, travelled distance and routing fields. Merge adds both count and feeder share before deleting the merged packet; Reduce subtracts the removed portion's share. Call-site validity and rounding inside GetFeederShare remain separate questions.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "src/cargopacket.cpp",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/cargopacket.cpp#L73-L125",
+            "blobSha": "2fbd3f2f2905473925768f25d3e9c65bf7cd9500",
+            "lines": [
+              73,
+              125
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Cargo merging checks identity and packet capacity",
+          "finding": "Both vehicle and station cargo lists compare source coordinates, transit age, first station and source identity for merge compatibility. TryMerge additionally requires the combined count to stay within MAX_COUNT, defined as UINT16_MAX (65,535). The partial feeder-share accessor computes stored share multiplied by the selected count divided by packet count. These source checks constrain merging; list grouping, all call-site preconditions and extreme arithmetic behavior are not established by this inspection.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "src/cargopacket.h",
+            "url": "https://github.com/OpenTTD/OpenTTD/blob/14ec60f248547d4d062a1160f0fc26d742319888/src/cargopacket.h#L504-L509",
+            "blobSha": "39174cdb95c643b72572ffe5d911670dcb5561a7",
+            "lines": [
+              504,
+              509
+            ]
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "partial static evidence",
+        "systems": "partial static evidence",
+        "simulation": "partial static evidence",
+        "procedural-generation": "partial static evidence",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "not yet studied",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/openttd.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Show route profitability as the consequence of quantity, travel time and acceptance, rather than as an unexplained money increment."
+      },
+      "nextPass": "Packet sharing formula and merge guards are source-traced. All caller constraints, arithmetic extremes and industry-refusal packet handling remain open. Move to another pilot subsystem next; runtime balances and visuals remain unverified.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "freeciv",
+      "title": "Freeciv",
+      "genre": "4X strategy",
+      "rank": 10,
+      "status": "partial static study",
+      "version": "R3_2_6",
+      "sourceBasis": "release source",
+      "fileCount": 5322,
+      "imageFileCount": 2753,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".png": 2752,
+        ".svg": 1302,
+        ".ruleset": 676,
+        ".mo": 154,
+        ".spec": 133,
+        ".dll": 97,
+        ".cur": 32,
+        ".ogg": 22,
+        ".lua": 18,
+        ".a": 16,
+        ".6": 16,
+        ".sav": 12,
+        "(none)": 11,
+        ".tilespec": 10,
+        ".modpack": 8,
+        ".exe": 5,
+        ".xml": 4,
+        ".cmd": 3,
+        ".txt": 3,
+        ".desktop": 3,
+        ".css": 2,
+        ".cache": 2,
+        ".ani": 2,
+        ".url": 1,
+        ".bmp": 1,
+        ".musicspec": 1,
+        ".soundspec": 1,
+        ".alien": 1,
+        ".civ2civ3": 1,
+        ".classic": 1,
+        ".multiplayer": 1,
+        ".sandbox": 1,
+        ".gz": 1,
+        ".cygwin": 1,
+        ".meson": 1,
+        ".2": 1,
+        ".achievements": 1,
+        ".actions": 1,
+        ".agents": 1,
+        ".ai": 1,
+        ".ai_modules": 1,
+        ".attributes": 1,
+        ".crosser": 1,
+        ".delta": 1,
+        ".effects": 1,
+        ".fcdb": 1,
+        ".governor": 1,
+        ".graphics": 1,
+        ".modpack_installer": 1,
+        ".msys2": 1,
+        ".nations": 1,
+        ".packaging": 1,
+        ".rulesets": 1,
+        ".scenarios": 1,
+        ".scorelog": 1,
+        ".sound": 1,
+        ".tilesets": 1,
+        ".installer": 1,
+        ".conf": 1,
+        ".compiled": 1,
+        ".theme": 1,
+        ".crt": 1
+      },
+      "commonImageDimensions": {
+        "19×19": 582,
+        "14×14": 582,
+        "44×30": 575,
+        "29×20": 575,
+        "64×48": 249,
+        "16×16": 55,
+        "1017×586": 6,
+        "128×128": 5
+      },
+      "claims": [
+        {
+          "domain": "simulation",
+          "title": "Food reserves drive growth and famine",
+          "finding": "city_populate adds food surplus to reserves. Reaching the growth threshold can increase size, with a recent-plague check. Negative reserves first consider food-upkeep units; otherwise famine reduces population. Player notices and script signals are part of these branches.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "server/cityturn.c",
+            "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/cityturn.c#L1080-L1148",
+            "blobSha": "efdf8ff5601c88f18eab4bf265ea5db86408ac78",
+            "lines": [
+              1080,
+              1148
+            ]
+          },
+          "flow": {
+            "trigger": "City population update",
+            "state": "Food reserve, surplus, granary size, supported units",
+            "output": "Growth, upkeep-unit loss or population loss",
+            "failure": "Recent plague can prevent growth; negative food triggers famine handling."
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Unbuildable work has explicit policy",
+          "finding": "The worklist code distinguishes postponing an unavailable target from purging it, and checks different requirement vectors for units and improvements.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "server/cityturn.c",
+            "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/cityturn.c#L1151-L1191",
+            "blobSha": "efdf8ff5601c88f18eab4bf265ea5db86408ac78",
+            "lines": [
+              1151,
+              1191
+            ]
+          }
+        },
+        {
+          "domain": "assets",
+          "title": "Rules are exposed as data files",
+          "finding": "The installed-content extraction contains 676 .ruleset files, 133 .spec files, 2,752 PNG files and 1,302 SVG files. These are file counts across the package, not unique gameplay entity counts.",
+          "basis": "package inspection",
+          "evidence": {
+            "url": "/data/anatomy/freeciv.json",
+            "path": "package inventory / static analysis"
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Blocked work can wait, signal scripts or be removed",
+          "finding": "The always-postpone policy returns before requirement-specific removal logic. Otherwise, missing required technology emits need_tech feedback/signals and is postponed, while a failed negative technology requirement marks the item for removal. The requirement evaluator checks whether scripts removed the city before proceeding. If it cannot identify a blocking requirement, it defaults to removal. Worklist scanning also rechecks city existence after script-sensitive work. These are source branches, not observed queue recovery.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "server/cityturn.c",
+            "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/cityturn.c#L1199-L1243",
+            "blobSha": "efdf8ff5601c88f18eab4bf265ea5db86408ac78",
+            "lines": [
+              1199,
+              1243
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Worklist selection upgrades and removes entries explicitly",
+          "finding": "The worklist scanner can replace a target with its unit or building upgrade and notifies the player. Purged entries emit a never-buildable signal, recheck city existence, decrement the scan index and remove the entry. After a successful selection, it calls change_build_target and removes the selected entry at index i-1. This distinguishes consuming a selected queue entry from discarding an unavailable one; it does not establish runtime behavior for every ruleset or script.",
+          "basis": "pinned original release-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "server/cityturn.c",
+            "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/cityturn.c#L2264-L2367",
+            "blobSha": "efdf8ff5601c88f18eab4bf265ea5db86408ac78",
+            "lines": [
+              2264,
+              2367
+            ]
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Classic Granary separates prerequisites from food effects",
+          "finding": "In the pinned classic ruleset, the Granary requires player technology Pottery, declares build_cost 40 and upkeep 1, and separately contributes 50 to Growth_Food and 50 to Shrink_Food when present in the city. The engine obtains each combined city bonus and clamps its savings percentage to 0–100. The building contribution is not necessarily the total city effect: other effects can contribute. This is configuration and source evidence, not confirmation that every game uses the classic ruleset.",
+          "basis": "pinned ruleset plus original engine-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "data/classic/effects.ruleset",
+            "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/data/classic/effects.ruleset#L1084-L1098",
+            "blobSha": "15d19ff489a750158218804ef870e87ebc6652c8",
+            "lines": [
+              1084,
+              1098
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Growth caps reserves; famine resets them",
+          "finding": "After adding food surplus, city_populate checks the growth threshold or celebration growth before checking negative reserves. Recent plague caps food at the current threshold and blocks this growth attempt. Successful ordinary growth caps existing food at the new-size granary capacity times the combined savings percentage; celebration instead caps it at full new-size capacity. Blocked growth uses an aqueduct-loss formula and does not increase reserves. On negative reserves, the first supported unit with positive food upkeep is passed to upkeep_kill_unit; if the city still exists, food is reset for its current size, then the function returns even if the helper reported no kill. With no such unit, food resets for size minus one and city_reduce_size handles famine population loss. Shrink resets assign capacity times savings, rather than taking a minimum. Helper internals and runtime outcomes remain unverified.",
+          "basis": "pinned original engine-source inspection; runtime unobserved",
+          "evidence": {
+            "path": "server/cityturn.c",
+            "url": "https://github.com/freeciv/freeciv/blob/2c4304c742aa81f1d73a5d604ed83237d57804a1/server/cityturn.c#L900-L1147",
+            "blobSha": "efdf8ff5601c88f18eab4bf265ea5db86408ac78",
+            "lines": [
+              900,
+              1147
+            ]
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "partial static evidence",
+        "systems": "partial static evidence",
+        "simulation": "partial static evidence",
+        "procedural-generation": "not yet studied",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "partial static evidence",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/freeciv.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Keep growth, shortages and blocked production explainable through explicit state and reason-specific messages."
+      },
+      "nextPass": "Trace upkeep_kill_unit and city_reduce_size, including size-one destruction and script callbacks. Food-update branches are source-verified; helper outcomes, active rulesets and runtime remain unexamined.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "mindustry",
+      "title": "Mindustry",
+      "genre": "Factory / tower defense",
+      "rank": 11,
+      "status": "partial static study",
+      "version": "v160.7",
+      "sourceBasis": "release source",
+      "fileCount": 5237,
+      "imageFileCount": 40,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".class": 4486,
+        ".ogg": 221,
+        ".msch": 210,
+        ".msav": 114,
+        ".frag": 53,
+        ".properties": 40,
+        ".png": 40,
+        ".vert": 17,
+        ".so": 16,
+        ".dylib": 13,
+        ".dll": 8,
+        "(none)": 3,
+        ".woff": 3,
+        ".ttf": 3,
+        ".js": 2,
+        ".aatls": 2,
+        ".dat": 1,
+        ".icns": 1,
+        ".mf": 1,
+        ".json": 1,
+        ".xml": 1,
+        ".html": 1
+      },
+      "commonImageDimensions": {
+        "2048×2048": 11,
+        "64×64": 7,
+        "1024×1024": 6,
+        "256×256": 4,
+        "128×128": 3,
+        "512×512": 3,
+        "447×1": 1,
+        "48×48": 1
+      },
+      "claims": [
+        {
+          "domain": "simulation",
+          "title": "Capacity constrains production",
+          "finding": "GenericCrafter advances progress when efficient, emits liquids within remaining capacity, crafts at completed progress and attempts to dump outputs. Liquid fullness can limit progress; options alter how excess output is treated. The inspected method also appears in the decompiled downloaded class.",
+          "basis": "source inspection + bytecode decompilation",
+          "evidence": {
+            "path": "core/src/mindustry/world/blocks/production/GenericCrafter.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/world/blocks/production/GenericCrafter.java#L237-L286",
+            "blobSha": "1f73d69156893b800d9af6741573c3fd1731e3d3",
+            "lines": [
+              237,
+              286
+            ]
+          },
+          "flow": {
+            "trigger": "Building update",
+            "state": "Efficiency, progress, warmup, output capacity",
+            "output": "Crafted items and liquid output",
+            "failure": "Insufficient output capacity can limit progress; behavior depends on liquid-output options."
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Sector identity controls seeded generation",
+          "finding": "PlanetGenerator seeds its random generator from sector ID, seed offset and base seed. Its noise helper projects sector coordinates into 3D before sampling simplex noise.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/maps/generators/PlanetGenerator.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/maps/generators/PlanetGenerator.java#L166-L190",
+            "blobSha": "11821a77a0894fedefac385cb38a12a49cb05e71",
+            "lines": [
+              166,
+              190
+            ]
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "Favorites are persistent selection state",
+          "finding": "The HUD toggles named block favorites, saves them in settings and builds the selection list with favorites first. This establishes implementation behavior, not an observed usability result.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "core/src/mindustry/ui/fragments/HudFragment.java",
+            "url": "https://github.com/Anuken/Mindustry/blob/17012d61d9e4c3cbd9820d87e81c24495486ac53/core/src/mindustry/ui/fragments/HudFragment.java#L115-L143",
+            "blobSha": "51f20bcc24954275f749eefb4d100cdbe45194ac",
+            "lines": [
+              115,
+              143
+            ]
+          }
+        },
+        {
+          "domain": "assets",
+          "title": "Bytecode, schematics and maps are distinct",
+          "finding": "The extracted JAR contains 4,486 .class files, 210 .msch files and 114 .msav files. Five selected top-level classes were decompiled with CFR 0.152; this is not decompilation of every class.",
+          "basis": "package inspection + bytecode decompilation",
+          "evidence": {
+            "url": "/data/anatomy/mindustry.json",
+            "path": "package inventory / static analysis"
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "not yet studied",
+        "systems": "not yet studied",
+        "simulation": "partial static evidence",
+        "procedural-generation": "partial static evidence",
+        "ui": "partial static evidence",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "partial static evidence",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/mindustry.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Tie visible machine activity to simulated warmup and blocked outputs; save quick-choice preferences independently of world state."
+      },
+      "nextPass": "Validate conveyor/crafter behavior in a running scenario. Atlas-region counts, schematic semantics, actual HUD flows and subclass-specific planet rules need further analysis.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "powder-toy",
+      "title": "The Powder Toy",
+      "genre": "Physics sandbox",
+      "rank": 24,
+      "status": "partial static study",
+      "version": "v100.1.400",
+      "sourceBasis": "release source",
+      "fileCount": 3,
+      "imageFileCount": 0,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".txt": 2,
+        ".exe": 1
+      },
+      "commonImageDimensions": {},
+      "claims": [
+        {
+          "domain": "simulation",
+          "title": "Material definitions specify physical behavior",
+          "finding": "The WATR element declares advection, air loss, gravity, weight and temperature transitions. Its high-temperature transition is configured at internal temperature 373.0 to WTRV. These are game parameters, not a claim of scientific accuracy.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/simulation/elements/WATR.cpp",
+            "url": "https://github.com/The-Powder-Toy/The-Powder-Toy/blob/d768aeb89acad986bd252d7e904bf44bb374545f/src/simulation/elements/WATR.cpp#L14-L44",
+            "blobSha": "fc777cce870ac9b5935c2d6a7c83285c57528a60",
+            "lines": [
+              14,
+              44
+            ]
+          }
+        },
+        {
+          "domain": "rendering",
+          "title": "Visuals are computed from particle properties",
+          "finding": "The particle renderer starts from each element’s color and a flat pixel mode, then supports glow, blur and fire modes with fallback behavior based on enabled rendering modes.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/graphics/Renderer.cpp",
+            "url": "https://github.com/The-Powder-Toy/The-Powder-Toy/blob/d768aeb89acad986bd252d7e904bf44bb374545f/src/graphics/Renderer.cpp#L242-L368",
+            "blobSha": "d3b9bac09a9d32a37960563b4cce368e078ea229",
+            "lines": [
+              242,
+              368
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Air is a separate field",
+          "finding": "The inspected air update works over a grid of heat and velocity values and samples neighboring cells through a kernel, with blocked-neighbor handling.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/simulation/Air.cpp",
+            "url": "https://github.com/The-Powder-Toy/The-Powder-Toy/blob/d768aeb89acad986bd252d7e904bf44bb374545f/src/simulation/Air.cpp#L98-L122",
+            "blobSha": "42353735b57d9183980a5f71eb9dd92dfb24dcf1",
+            "lines": [
+              98,
+              122
+            ]
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "not yet studied",
+        "systems": "not yet studied",
+        "simulation": "partial static evidence",
+        "procedural-generation": "not yet studied",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "partial static evidence",
+        "assets": "not yet studied",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/powder-toy.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Distinguish simulated material state from its rendering mode; a rich procedural image can come from a compact set of rules."
+      },
+      "nextPass": "Trace brush input, element update ordering and save format. Observe how overlays explain temperature/pressure. The three-file package is not proof that no art is embedded.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "endless-sky",
+      "title": "Endless Sky",
+      "genre": "Space trading",
+      "rank": 33,
+      "status": "partial static study",
+      "version": "v0.11.2",
+      "sourceBasis": "release source",
+      "fileCount": 7367,
+      "imageFileCount": 6879,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".png": 6221,
+        ".jpg": 657,
+        ".wav": 243,
+        ".txt": 202,
+        ".dll": 15,
+        ".frag": 11,
+        ".vert": 11,
+        ".mp3": 3,
+        "(none)": 2,
+        ".exe": 1,
+        ".jpeg": 1
+      },
+      "commonImageDimensions": {
+        "720×360": 572,
+        "100×100": 390,
+        "80×80": 357,
+        "40×40": 240,
+        "60×60": 215,
+        "120×120": 215,
+        "90×90": 206,
+        "70×70": 193
+      },
+      "claims": [
+        {
+          "domain": "rendering",
+          "title": "Ships are composed from layered sprites",
+          "finding": "The engine draws a ship as a stack that can include hardpoints, engine flares and externally carried fighters. Cloaking affects sprite composition. This is a source-level rendering finding, not evidence that original art was authored in 2D.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Engine.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Engine.cpp#L2880-L2900",
+            "blobSha": "a382c6bec13294821379f0caa358304d81363c99",
+            "lines": [
+              2880,
+              2900
+            ]
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "The map changes meaning with the selected metric",
+          "finding": "Map nodes are filtered by knowledge/access and colored from the selected criterion. In the commodity branch, prices are normalized against the commodity’s low and high values.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/MapPanel.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/MapPanel.cpp#L916-L947",
+            "blobSha": "ff9f7ca912263a341e22bdb4996c95283c3aef0d",
+            "lines": [
+              916,
+              947
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Calculation and drawing have separate paths",
+          "finding": "Go queues CalculateStep and changes the calculation buffer; Draw separately advances its UI counter and draws the background with camera velocity. Paused simulation time is explicitly checked.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "source/Engine.cpp",
+            "url": "https://github.com/endless-sky/endless-sky/blob/3b92d7944523ec8d040d39f0f44bc831e33a59f6/source/Engine.cpp#L1175-L1227",
+            "blobSha": "a382c6bec13294821379f0caa358304d81363c99",
+            "lines": [
+              1175,
+              1227
+            ]
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "not yet studied",
+        "systems": "not yet studied",
+        "simulation": "partial static evidence",
+        "procedural-generation": "not yet studied",
+        "ui": "partial static evidence",
+        "ux": "not yet studied",
+        "rendering": "partial static evidence",
+        "assets": "not yet studied",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/endless-sky.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Use one map with task-specific overlays, and let simulation entities supply the data that drives their rendered parts."
+      },
+      "nextPass": "Investigate economy updates, mission generation and AI scheduling next. Determine which content is authored versus generated; asset file counts alone cannot answer this.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "wesnoth",
+      "title": "The Battle for Wesnoth",
+      "genre": "Turn-based tactics",
+      "rank": 42,
+      "status": "partial static study",
+      "version": "1.18.8",
+      "sourceBasis": "release source",
+      "fileCount": 22670,
+      "imageFileCount": 17583,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".png": 16748,
+        ".cfg": 2067,
+        ".mo": 1740,
+        ".webp": 777,
+        ".map": 344,
+        ".ogg": 296,
+        ".lua": 271,
+        ".dll": 76,
+        ".wav": 57,
+        ".jpg": 54,
+        ".py": 37,
+        ".html": 34,
+        ".txt": 32,
+        "(none)": 29,
+        ".ttf": 25,
+        ".mask": 23,
+        ".md": 14,
+        ".fai": 14,
+        ".otf": 4,
+        ".exe": 3,
+        ".gif": 3,
+        ".js": 3,
+        ".el": 3,
+        ".vim": 3,
+        ".pyw": 2,
+        ".css": 2,
+        ".cmd": 1,
+        ".ico": 1,
+        ".bmp": 1,
+        ".conf": 1,
+        ".4": 1,
+        ".tmpl": 1,
+        ".bin": 1,
+        ".texi": 1,
+        ".xcf": 1
+      },
+      "commonImageDimensions": {
+        "72×72": 9571,
+        "126×180": 760,
+        "126×144": 742,
+        "30×30": 584,
+        "144×144": 469,
+        "25×25": 325,
+        "60×60": 304,
+        "400×400": 272
+      },
+      "claims": [
+        {
+          "domain": "mechanics",
+          "title": "Combat prediction tracks distributions",
+          "finding": "The inspected combat predictor includes an exact probability matrix with both combatants’ hit points, damage, slow and drain parameters. Its code warns that very complex cases are expensive; this does not mean every fight always uses this exact path.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/attack_prediction.cpp",
+            "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/attack_prediction.cpp#L1201-L1234",
+            "blobSha": "9cf5d5a4041e7f641b63e50a1fe709db2e377d1e",
+            "lines": [
+              1201,
+              1234
+            ]
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Generate from a copied recipe",
+          "finding": "The default map generator accepts an optional seed, copies its settings for the generation job, normalizes odd widths and scales village count by area. It sets up retries for generation failure.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/generators/default_map_generator.cpp",
+            "url": "https://github.com/wesnoth/wesnoth/blob/9f54f6a4f65b0d942a70436372e7cf28c4ba14d0/src/generators/default_map_generator.cpp#L81-L140",
+            "blobSha": "562d1087150d95a9cb7eee6392a85ed71f3de927",
+            "lines": [
+              81,
+              140
+            ]
+          },
+          "flow": {
+            "trigger": "Default map generation",
+            "state": "Seed, dimensions, settings copy",
+            "output": "Map string and optional labels",
+            "failure": "Generator can fail; retry setup is explicit."
+          }
+        },
+        {
+          "domain": "assets",
+          "title": "Campaign data and artwork are separately inspectable",
+          "finding": "The package contains 2,067 .cfg files, 344 .map files, 271 Lua files and 16,748 PNG files. A configuration file may define multiple objects; a PNG may be a portrait, UI element or animation frame.",
+          "basis": "package inspection",
+          "evidence": {
+            "url": "/data/anatomy/wesnoth.json",
+            "path": "package inventory / static analysis"
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "partial static evidence",
+        "systems": "not yet studied",
+        "simulation": "not yet studied",
+        "procedural-generation": "partial static evidence",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "partial static evidence",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/wesnoth.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Preserve the original recipe while generating variations, and expose uncertainty rather than presenting a random outcome as guaranteed."
+      },
+      "nextPass": "Trace prediction into the combat dialog, inspect animation frame references, and observe a tactical encounter. No playthrough-based UI/UX findings yet.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "nethack",
+      "title": "NetHack",
+      "genre": "Roguelike",
+      "rank": 59,
+      "status": "partial static study",
+      "version": "NetHack-3.6.7_Released",
+      "sourceBasis": "release source",
+      "fileCount": 12,
+      "imageFileCount": 0,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        "(none)": 4,
+        ".template": 3,
+        ".txt": 2,
+        ".exe": 2,
+        ".pdf": 1
+      },
+      "commonImageDimensions": {},
+      "claims": [
+        {
+          "domain": "procedural-generation",
+          "title": "Dungeon generation branches by context",
+          "finding": "makelevel chooses special, mine, quest or other branch-specific generation before falling through to regular rooms. For regular levels it sorts rooms, places stairs, builds corridors and adds niches.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mklev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c#L650-L732",
+            "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+            "lines": [
+              650,
+              732
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Connections are constructed deliberately",
+          "finding": "Up and down stairs are placed in different rooms when possible. The upstairs location is resampled while occupied, and branch levels affect the threshold for random special rooms.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/mklev.c",
+            "url": "https://github.com/NetHack/NetHack/blob/ed600d9f0f3c37677418f0150f59363ca641f3dc/src/mklev.c#L706-L732",
+            "blobSha": "749304267024131073f1d5cf9703370df2fd1117",
+            "lines": [
+              706,
+              732
+            ]
+          }
+        },
+        {
+          "domain": "binary",
+          "title": "Small package does not imply little content",
+          "finding": "The downloaded archive exposes only 12 files and no loose PNG/JPEG artwork. Executable analysis is recorded, but embedded resources are not yet decoded; this is not proof of an asset-free renderer.",
+          "basis": "package inspection + binary disassembly",
+          "evidence": {
+            "url": "/data/anatomy/nethack.json",
+            "path": "package inventory / static analysis"
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "not yet studied",
+        "systems": "partial static evidence",
+        "simulation": "not yet studied",
+        "procedural-generation": "partial static evidence",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "not yet studied",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "partial static evidence"
+      },
+      "inventoryUrl": "/data/anatomy/nethack.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Generate connectivity and progression requirements before filling a location with incidental content."
+      },
+      "nextPass": "Decode packed data, trace turn cost and monster scheduling, and observe inventory, visibility and failure feedback. Do not infer the full ruleset from generation code.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "enigma",
+      "title": "Enigma",
+      "genre": "Puzzle",
+      "rank": 64,
+      "status": "partial static study",
+      "version": "1.30",
+      "sourceBasis": "release source",
+      "fileCount": 13159,
+      "imageFileCount": 11324,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".png": 11311,
+        ".xml": 1621,
+        ".txt": 43,
+        ".dll": 38,
+        ".wav": 36,
+        ".lua": 32,
+        ".po": 24,
+        ".jpg": 9,
+        ".ogg": 9,
+        ".html": 7,
+        ".xsd": 7,
+        "(none)": 6,
+        ".gif": 3,
+        ".ttf": 2,
+        ".bmf": 2,
+        ".nsh": 1,
+        ".ini": 1,
+        ".bmp": 1,
+        ".exe": 1,
+        ".nsi": 1,
+        ".css": 1,
+        ".md": 1,
+        ".ttc": 1,
+        ".s3m": 1
+      },
+      "commonImageDimensions": {
+        "120×78": 2664,
+        "160×104": 2663,
+        "60×39": 2663,
+        "48×48": 764,
+        "32×32": 476,
+        "40×40": 173,
+        "64×64": 117,
+        "16×16": 103
+      },
+      "claims": [
+        {
+          "domain": "simulation",
+          "title": "Fixed simulation steps, separate presentation updates",
+          "finding": "The server accumulates time and advances the world in 10ms increments. It caps accumulated time at one second, then updates the move counter and sends player positions to the client.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/server.cc",
+            "url": "https://github.com/Enigma-Game/Enigma/blob/2d10fcaa984f017750f4bdcf44dcd07742db2111/src/server.cc#L203-L219",
+            "blobSha": "c058ad05b4d29dd6f7f3e84fb751a7b4a1857f8d",
+            "lines": [
+              203,
+              219
+            ]
+          },
+          "flow": {
+            "trigger": "Server game tick",
+            "state": "Accumulated time and level time",
+            "output": "Fixed-step world updates, counter and positions",
+            "failure": "Excess accumulated time is capped after an overload notice."
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "World updates coordinate interacting subsystems",
+          "finding": "A world tick moves actors, notifies floors/items about changed stones, advances forces and timers, recalculates lasers when needed and performs pending actions.",
+          "basis": "source inspection",
+          "evidence": {
+            "path": "src/world.cc",
+            "url": "https://github.com/Enigma-Game/Enigma/blob/2d10fcaa984f017750f4bdcf44dcd07742db2111/src/world.cc#L459-L477",
+            "blobSha": "5981c677cd85d9582ae1ac0fab2d3ad583b94894",
+            "lines": [
+              459,
+              477
+            ]
+          }
+        },
+        {
+          "domain": "assets",
+          "title": "Puzzle content includes scripts and level documents",
+          "finding": "The package contains 1,621 XML files, 32 Lua files and 11,311 PNG files. These need content-level classification before they can be reported as unique levels or sprites.",
+          "basis": "package inspection",
+          "evidence": {
+            "url": "/data/anatomy/enigma.json",
+            "path": "package inventory / static analysis"
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "not yet studied",
+        "systems": "partial static evidence",
+        "simulation": "partial static evidence",
+        "procedural-generation": "not yet studied",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "partial static evidence",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/enigma.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Separate stable simulation stepping from presentation, while processing object changes through explicit notifications."
+      },
+      "nextPass": "Inspect representative level XML/Lua and trace object definitions, procedural level construction, camera movement and puzzle failure/restart UX.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "lure",
+      "title": "Lure of the Temptress",
+      "genre": "Adventure",
+      "rank": 88,
+      "status": "partial static study",
+      "version": "master",
+      "sourceBasis": "Modern ScummVM reimplementation; not original Lure executable source",
+      "fileCount": 14,
+      "imageFileCount": 0,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".ega": 4,
+        ".vga": 4,
+        ".txt": 2,
+        ".pdf": 2,
+        ".exe": 1,
+        "(none)": 1
+      },
+      "commonImageDimensions": {},
+      "claims": [
+        {
+          "domain": "systems",
+          "title": "Actions carry targets and support data",
+          "finding": "The ScummVM engine selects action targets from queued support data and sets active/use hotspot fields before dispatch. USE, GIVE and ASK select their argument fields differently. This is a modern engine reimplementation, not recovered original source.",
+          "basis": "reimplementation source inspection",
+          "evidence": {
+            "path": "engines/lure/hotspots.cpp",
+            "url": "https://github.com/scummvm/scummvm/blob/5e44c1d40fb49bd5db39e1a439c2e5d9081b9049/engines/lure/hotspots.cpp#L1252-L1282",
+            "blobSha": "989d9a5af0d8608d19ffe0c5ff7c684314b9a8df",
+            "lines": [
+              1252,
+              1282
+            ]
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "Pathfinding has a busy-cursor branch",
+          "finding": "walkTo can show the clock cursor for the player while pathfinding is pending, then records destination coordinates and queues START_WALKING.",
+          "basis": "reimplementation source inspection",
+          "evidence": {
+            "path": "engines/lure/hotspots.cpp",
+            "url": "https://github.com/scummvm/scummvm/blob/5e44c1d40fb49bd5db39e1a439c2e5d9081b9049/engines/lure/hotspots.cpp#L488-L499",
+            "blobSha": "989d9a5af0d8608d19ffe0c5ff7c684314b9a8df",
+            "lines": [
+              488,
+              499
+            ]
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Interactions have preconditions",
+          "finding": "doGet waits when actionPrecheck returns PC_WAIT, ends other non-executable outcomes, and only then faces the target and resolves the GET action.",
+          "basis": "reimplementation source inspection",
+          "evidence": {
+            "path": "engines/lure/hotspots.cpp",
+            "url": "https://github.com/scummvm/scummvm/blob/5e44c1d40fb49bd5db39e1a439c2e5d9081b9049/engines/lure/hotspots.cpp#L1409-L1426",
+            "blobSha": "989d9a5af0d8608d19ffe0c5ff7c684314b9a8df",
+            "lines": [
+              1409,
+              1426
+            ]
+          },
+          "flow": {
+            "trigger": "GET action",
+            "state": "Hotspot and precheck result",
+            "output": "Wait, end action, or resolve action",
+            "failure": "Non-executable precheck ends the action."
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "partial static evidence",
+        "systems": "partial static evidence",
+        "simulation": "not yet studied",
+        "procedural-generation": "not yet studied",
+        "ui": "partial static evidence",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "not yet studied",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/lure.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Make interaction preconditions and queued intentions explicit, including visible feedback when pathfinding delays an action."
+      },
+      "nextPass": "Decode the VGA/EGA resource containers, map NPC schedules and scripts, and observe a real interaction. ScummVM behavior must not be mislabeled as original-binary verification.",
+      "runtimeObserved": false,
+      "packedResourceCount": null
+    },
+    {
+      "id": "prince-of-persia",
+      "title": "Prince of Persia",
+      "genre": "Platformer",
+      "rank": 90,
+      "status": "partial static study",
+      "version": "Acquired DOS package; exact build not established",
+      "sourceBasis": "SDLPoP reimplementation plus original package inspection",
+      "fileCount": 26,
+      "imageFileCount": 0,
+      "modelCandidates": 0,
+      "assetNote": "File-level inventory. Image files are not a count of unique sprites. Models and images may also be embedded in containers.",
+      "extensions": {
+        ".dat": 25,
+        ".exe": 1
+      },
+      "commonImageDimensions": {},
+      "claims": [
+        {
+          "domain": "rendering",
+          "title": "Animation sequences can move the character",
+          "finding": "SDLPoP’s sequence interpreter handles x/y displacement, facing changes, jumps within the sequence and action-state changes. This connects animation playback to motion rather than treating animation as a purely decorative layer.",
+          "basis": "reimplementation source inspection",
+          "evidence": {
+            "path": "seg006.c",
+            "url": "https://github.com/NagyD/SDLPoP/blob/3c5add5fb7f83d4ceb542823ab66d00146c4271b/src/seg006.c#L570-L619",
+            "lines": [
+              570,
+              619
+            ]
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Tile interaction depends on pose and action",
+          "finding": "The inspected pressure-check routine chooses the tile above or beneath the character according to hanging/climbing frames and action state, then handles opener/closer buttons or loose floors. SDLPoP also contains optional fixes.",
+          "basis": "reimplementation source inspection",
+          "evidence": {
+            "path": "seg006.c",
+            "url": "https://github.com/NagyD/SDLPoP/blob/3c5add5fb7f83d4ceb542823ab66d00146c4271b/src/seg006.c#L1683-L1716",
+            "lines": [
+              1683,
+              1716
+            ]
+          }
+        },
+        {
+          "domain": "assets",
+          "title": "Packed directories have stable resource IDs",
+          "finding": "DAT headers supply a table offset and size; each entry stores an ID, offset and length. I applied this structure to the acquired DAT files and checked table and payload bounds. Resource types still require decoding.",
+          "basis": "reimplementation source inspection",
+          "evidence": {
+            "path": "types.h",
+            "url": "https://github.com/NagyD/SDLPoP/blob/3c5add5fb7f83d4ceb542823ab66d00146c4271b/src/types.h#L424-L442",
+            "lines": [
+              424,
+              442
+            ]
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "partial static evidence",
+        "systems": "not yet studied",
+        "simulation": "not yet studied",
+        "procedural-generation": "not yet studied",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "partial static evidence",
+        "assets": "partial static evidence",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/prince-of-persia.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Treat pose, collision and world interaction as connected state; keep sprite frames and semantic actions distinguishable in the inventory."
+      },
+      "nextPass": "Individual compressed images, palettes and sound resources still need decoding. Compare reimplementation behavior against the acquired original; bounded original entry disassembly is not full decompilation.",
+      "runtimeObserved": false,
+      "packedResourceCount": 2029
+    },
+    {
+      "id": "black-white",
+      "title": "Black & White",
+      "genre": "God game / gesture interaction",
+      "rank": 13,
+      "status": "partial binary and documentary study",
+      "version": "Windows English disc image; exact original build unverified",
+      "sourceBasis": "Original installer data decoded. Selected recognition routines tested in the archive’s modified alternate executable under emulation. Community reconstruction used as a pinned guide; pristine retail equivalence and full gameplay remain unverified.",
+      "fileCount": 1134,
+      "imageFileCount": 0,
+      "modelCandidates": 0,
+      "assetNote": "122 disc files plus 1,012 extracted installer-group files. These are files, not unique asset counts. Image headers and model formats remain unexamined.",
+      "extensions": {
+        ".l3d": 228,
+        ".zzz": 186,
+        ".raw": 174,
+        ".sad": 112,
+        "(none)": 46,
+        ".dan": 35,
+        ".cam": 34,
+        ".dll": 32,
+        ".gif": 28,
+        ".txt": 27,
+        ".bmp": 18,
+        ".cbn": 17,
+        ".hnd": 16,
+        ".exe": 14,
+        ".anm": 13,
+        ".16b": 12,
+        ".fot": 11,
+        ".lnd": 10,
+        ".555": 9,
+        ".exc": 9,
+        ".scc": 7,
+        ".ico": 7,
+        ".glw": 7,
+        ".cps": 6,
+        ".h": 5,
+        ".bik": 5,
+        ".cab": 3,
+        ".fnt": 3,
+        ".met": 3,
+        ".map": 3,
+        ".thm": 3,
+        ".srf": 3,
+        ".fff": 3,
+        ".tmp": 2,
+        ".inf": 2,
+        ".bin": 2,
+        ".ini": 2,
+        ".shl": 2,
+        ".lhw": 2,
+        ".dat": 2,
+        ".hd": 2,
+        ".ifr": 2,
+        ".16": 1,
+        ".256": 1,
+        ".cfg": 1,
+        ".hdr": 1,
+        ".hlp": 1,
+        ".ex_": 1,
+        ".inx": 1,
+        ".back": 1,
+        ".pal": 1,
+        ".hbn": 1,
+        ".tmpl": 1,
+        ".chl": 1,
+        ".aux": 1,
+        ".ban": 1,
+        ".grt": 1,
+        ".swp": 1,
+        ".trn": 1,
+        ".g3d": 1,
+        ".edt": 1,
+        ".scp": 1,
+        ".jty": 1,
+        ".wav": 1,
+        ".sas": 1,
+        ".sys": 1,
+        ".cm2": 1,
+        ".cnv": 1,
+        ".clut": 1
+      },
+      "commonImageDimensions": {},
+      "claims": [
+        {
+          "domain": "mechanics",
+          "title": "81 gesture templates decoded; matcher tested in isolation",
+          "finding": "InstallShield extraction recovered 1,012 files. Gestures.jty contains 81 templates across all IDs 1–23, with 6–26 active points each. A bounded emulator ran the supplied alternate executable’s MatchGesture routine on 324 template-based cases: all 81 self-matches passed, opposite starting directions passed only the nine direction-insensitive templates, and adding 90 degrees to each interior turn rejected all 81. These are synthetic keypoint tests, not measured mouse accuracy or a game playthrough.",
+          "basis": "direct original-data decoding + isolated archive-binary execution",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "gestureDecoding: formatValidation, templates, binaryProbe"
+          }
+        },
+        {
+          "domain": "binary",
+          "title": "Evidence is stronger than reconstruction alone, but version-qualified",
+          "finding": "The installer executable has a high-entropy protected code section. The ISO also supplies a modified alternate executable whose readable matcher is at VA 0x00545e80. That image was never launched as a Windows process: selected routines ran in Unicorn memory with a 100,000-instruction call limit and synthetic 800×600 screen state. Its SHA-256 and per-function hashes are recorded. The community BW1W100 symbol map locates the routines, but the modified image cannot be certified as untouched retail.",
+          "basis": "PE inspection, disassembly, pinned address map and bounded emulation",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "gestureDecoding.binaryProbe: provenance, sha256, functions; reconstructionSources"
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Recognition reduces the stroke to turns and starting direction",
+          "finding": "The traced design retains screen-space positions alongside world positions in an 80-sample ring, derives junctions and signed turns, and encodes direction in eight sectors. Matching scans possible start positions and compares the turn sequence; small neighboring turns can be skipped when that reduces accumulated error. This explains tolerance to drawing detail without treating every outline as an exact pixel match. The matcher was executed locally; the sampler’s complete live-input path was inspected through the pinned reconstruction, not replayed end-to-end.",
+          "basis": "matcher disassembly and emulation; sampling reconstruction inspected separately",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "gestureDecoding.binaryProbe; reconstructionSources: GestureSystemSamples.cpp, GestureSystemMatch.cpp"
+          },
+          "flow": {
+            "trigger": "Screen and world samples enter the bounded history",
+            "state": "Keypoints, signed turns, eight-sector start direction and per-template flags",
+            "output": "Matching gesture ID, matched sample span and inverse flag",
+            "failure": "Direction, turn-error or aspect tests can reject a candidate; downstream action authorization is separate."
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Tolerance is explicit; inverse does not mean drawing backwards",
+          "finding": "The executable’s own initializer routines produce approximately 16.875° junction tolerance, 29.53125° skip tolerance and 33.75° accumulated-turn-error limit. Seventy-two templates check starting direction; only three enable the inverse path. That path negates turns while advancing through the samples in their existing order. All three opted-in templates return the inverse flag for negated-turn inputs; four other templates accept those inputs through the ordinary path. Do not promise arbitrary rotation or backward-stroke support.",
+          "basis": "decoded template flags, disassembled branches and controlled machine-code probes",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "gestureDecoding: flags; binaryProbe: toleranceDegrees, tests"
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Shape proportions are a coarse gate with an asymmetric edge case",
+          "finding": "Seventy-four templates enable aspect checks. The routine uses thresholds near 0.15 and 4.0 rather than a precise ratio-distance score. An isolated wide-input test accepts an ordinary 0.8-ratio template, while a thin-input test rejects it and accepts a 0.05-ratio template. The wide branch compares the stored ratio against the thin threshold. Preserve this as an observed compatibility quirk, not a rule to copy into Abbie’s World.",
+          "basis": "direct CheckForGestureRatio execution with synthetic regions",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "gestureDecoding.binaryProbe.aspectRatioCases"
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "The original tutorial separates selecting, sizing and cancelling",
+          "finding": "Extracted InfoScript2.txt documents spiral activation, shortcut reminders, repeating and powering down a miracle, and a shield circle that chooses position and size. The reconstruction also carries a gesture packet with world position and size. This supports a useful distinction: some gestures choose an action; others supply spatial parameters. Packaged tutorial text is evidence of authored behavior, not proof that every described action executes correctly.",
+          "basis": "extracted tutorial text and pinned packet reconstruction; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "installed/TextScript_-_USA/InfoScript2.txt: lines 4237, 4606, 6108, 6960; reconstructionSources: GestureSystemMatch.cpp"
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Abbie’s World: adapt the small recognizer, not its hidden assumptions",
+          "finding": "Proposed implementation: separate screen-space recognition from world-space targeting; keep bounded, distance-resampled strokes; allow multiple examples per action; declare orientation and inverse policy explicitly. Use a small vocabulary of well-separated gestures with ordinary right-drawer controls. Avoid copying fixed 4/12-pixel sampler distances or a 70-repeat reset directly: touch density, device scale and event rate differ. Commit only a supported typed action with a target, revision, preview and undo. No LLM is required to classify this small vocabulary. These are recommendations, not features added to Abbie’s World.",
+          "basis": "design inference from decoded data and tested code; proposed only",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "gestureDecoding; reconstructionSources: GestureSystemSamples.cpp"
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "Guard against partial matches and measure confusion before release",
+          "finding": "Because the matcher tries multiple starting positions, a sub-pattern can satisfy a template. For Abbie’s World, require an explicit drawing mode and a deliberate stroke-end decision; compare competing candidates and reject ambiguous ones. Test zoom, different screen sizes, extra leading/trailing strokes, tremor, slow input, camera motion and touch interruption. Track wrong-action rate separately from rejection rate. Never treat the 81/81 self-match result as human usability evidence.",
+          "basis": "design inference and evaluation plan; no human testing performed",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "gestureDecoding.binaryProbe: tests and limits; reconstructionSources: GestureSystemMatch.cpp"
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "The hand makes interaction part of the world",
+          "finding": "The packaged readme presents the hand as an extension of the player and describes an interface built around familiar physical interactions. Its novelty for this study is the coherent combination of embodied control, gesture commands and feedback, rather than a claim that Black & White invented mouse gestures.",
+          "basis": "packaged documentation; historical interpretation explicitly qualified",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "sources: disc-readme, gdc"
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Gestures select powers through a small movement vocabulary",
+          "finding": "The official guide describes a clockwise spiral to access miracles and a W to summon water. The making-of account describes drawing shapes to bring a miracle into the hand ready for casting. Selection and application are separate conceptual steps; recognition is not proof that a target is valid or an effect has happened.",
+          "basis": "published instructions and developer account; runtime unobserved",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "sources: guide, making"
+          },
+          "flow": {
+            "trigger": "Enter miracle selection and draw the requested shape",
+            "state": "Selected miracle ready in the hand",
+            "output": "A subsequent casting action applies it",
+            "failure": "The matcher is now partially traced and tested in isolation; complete resource checks, cancellation dispatch and live-input behavior remain unverified."
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "The designers simplified recognition to protect the shortcut",
+          "finding": "Jonty Barnes recalls difficulty with 3D drawing, overlapping shapes, direction and individual drawing styles. An early approach considered speed, accuracy and angle; the team moved to simpler patterns because deliberate precision slowed play. This is development testimony, not a recovered description of the final recognition algorithm.",
+          "basis": "developer testimony in making-of book, read through OCR mirror",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "sources: making"
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "Equivalent controls make gestures optional shortcuts",
+          "finding": "The bundled readme explicitly maps M to miracle selection and R to repeating a miracle, identifying both as equivalents of gestures. It also documents holding Ctrl+Shift to inspect the hand closely and releasing to restore the previous view. Gesture input and an ordinary command can share meaning.",
+          "basis": "direct inspection of packaged Controller Notes, lines 130–141",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "sources: disc-readme"
+          }
+        },
+        {
+          "domain": "mechanics",
+          "title": "Physical actions have distinct sensory feedback",
+          "finding": "The readme associates tactile effects with extracting trees, charging powers, and stroking or slapping the creature. It distinguishes three TouchSense support levels. These are authored descriptions of supported interaction, not measurements of recognition thresholds, learning rules or force output on current hardware.",
+          "basis": "packaged documentation, lines 144–167; no game execution",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "sources: disc-readme, gdc"
+          }
+        },
+        {
+          "domain": "assets",
+          "title": "InstallShield payload extracted successfully",
+          "finding": "Unshield 1.6.2 extracted all 1,012 installer entries without running Setup. The combined inventory now includes 122 disc files and 1,012 installer-group files. Game binaries and assets remain outside the hosted site; only metadata, hashes and research findings are published.",
+          "basis": "archive listing, extraction and SHA-256 inventory",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "extraction and files"
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "Abbie’s World: preserve the physical metaphor and make mode visible",
+          "finding": "Proposed adaptation: grab and place movable props directly; give eligible objects a clear contact highlight and a placement ghost. Separate camera movement, object dragging and command drawing with an explicit gesture mode. On phones, retain normal navigation outside that mode and cancel a stroke when a second touch begins. Keep navigation on the left and gesture presets, practice and fallback commands in the right drawer. These controls are a design proposal, not shipped functionality.",
+          "basis": "original design inference from this study and Evan’s interaction requirements",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "sources: disc-readme, making"
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Abbie’s World: recognize intent, then validate a typed action",
+          "finding": "Proposed flow: collect a stroke, show a candidate, validate a supported action against object capabilities and world state, preview its effect, then commit with an undo record. UI, gestures, voice and MCP should call the same action function. Send the resolved intent, stable target IDs and revision through MCP, not raw pointer movement or arbitrary code. Reject ambiguous strokes without changing the world. Add a repeat shortcut only when repeating the action is valid.",
+          "basis": "original architecture proposal; not recovered Lionhead code and not implemented",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "sources: disc-readme, making"
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "Test ease of use rather than rewarding accurate drawing",
+          "finding": "Proposed first experiment: one reversible placement interaction and one gesture-selected existing action, each with a normal button alternative. Measure first-attempt success, wrong-action rate, cancellation, completion time and undo use across mouse and touch. Include camera movement, clutter, slow strokes and interrupted input. Recognition thresholds and the gesture alphabet need testing; do not copy an assumed algorithm or add unimplemented water, terrain or creature-learning powers.",
+          "basis": "original evaluation proposal; no user testing performed",
+          "evidence": {
+            "url": "/data/anatomy/black-white.json",
+            "path": "sources: making, disc-readme"
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "partial static evidence",
+        "systems": "partial code evidence",
+        "simulation": "not yet studied",
+        "procedural-generation": "not yet studied",
+        "ui": "partial static evidence",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "partial static evidence",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "partial disassembly and isolated execution"
+      },
+      "inventoryUrl": "/data/anatomy/black-white.json",
+      "lesson": {
+        "status": "design inference; not implemented in Abbie’s World or Ranch Atelier",
+        "text": "A bounded turn-based recognizer can make interaction feel physical without an LLM. Keep recognition separate from target/effect validation, declare directional policy per action, tolerate varied drawing, and expose cancellation plus ordinary controls. Avoid reproducing legacy aspect-ratio quirks or event-rate-dependent thresholds."
+      },
+      "nextPass": "Trace full input scheduling, active-template selection and action dispatch; compare the selected function bytes with a verified original release image. Replay raw strokes through sampling and recognition, then measure touch/mouse confusion in an Abbie’s World prototype. Full gameplay has not been observed.",
+      "runtimeObserved": false,
+      "binaryRoutineObserved": true,
+      "gestureTemplateCount": 81
+    },
+    {
+      "id": "alpha-zoo",
+      "title": "Alpha Zoo",
+      "genre": "Educational zoo exploration",
+      "rank": 14,
+      "status": "partial packaged-source study",
+      "version": "1.4.0 (packaged application metadata)",
+      "sourceBasis": "Steam installation: ASAR bounds-checked extraction, file hashes and direct inspection of packaged JavaScript. No game playthrough.",
+      "fileCount": 689,
+      "imageFileCount": 345,
+      "modelCandidates": 0,
+      "assetNote": "689 application files extracted; dependency and unpacked native files excluded. PNG dimensions inspected; spritesheet frames are not unique-species counts.",
+      "extensions": {
+        ".png": 345,
+        ".mp3": 154,
+        ".json": 131,
+        ".js": 26,
+        ".wav": 26,
+        ".ttf": 2,
+        ".woff2": 1,
+        ".plist": 1,
+        ".html": 1,
+        ".icns": 1,
+        ".ico": 1
+      },
+      "commonImageDimensions": {
+        "256x256": 84,
+        "400x400": 19,
+        "1024x256": 19,
+        "512x512": 14,
+        "100x50": 11,
+        "150x50": 11,
+        "50x50": 11,
+        "300x50": 9,
+        "100x100": 9,
+        "128x128": 8
+      },
+      "claims": [
+        {
+          "domain": "mechanics",
+          "title": "Spelling turns a grey exhibit into an inhabited reward",
+          "finding": "The core scene compares typed text with the current target word. A completed match schedules exhibit recoloring, a land shake, build sound and smoke. Animal exhibits increment the obtained-animal count and award two coins. Train completion recolors all four stations and the trains. This is an educational exploration loop in the inspected code, not evidence of a zoo profitability simulator.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/screen_zoo.js",
+            "lines": [
+              969,
+              1036
+            ],
+            "sha256": "f5c1244171fa156a4883c98e48ec6d7e7c4426491d5be0377115a762c8a5bb5e"
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Feeding has a visible journey and consumption stages",
+          "finding": "feedAnimal chooses food from the species diet and creates a thrown food sprite with a target enclosure and animal type. Animal updates select grounded food matching their type; the nearby consumption loop advances the food frame at intervals over 500ms, then hides the finished item and awards one coin. The nearby loop itself does not repeat the species-type filter, an implementation detail to review before reusing this pattern.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/animals.js",
+            "lines": [
+              818,
+              890
+            ],
+            "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1"
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Currency rewards interaction and buys personal items",
+          "finding": "The zoo initializes the player with six coins, awards two for revealing an animal exhibit and one when food is consumed. The gift-shop UI uses item prices, marks unaffordable items and selects only affordable slots; purchase completion subtracts the price. These inspected paths establish an interaction-reward/shop loop, not admission, payroll or welfare economics.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/screen_gift_shop.js",
+            "lines": [
+              337,
+              815
+            ],
+            "sha256": "fbf1cf93bde880d945fd83f8e86381bd81cdca45e9db99dc0e04a965241c069f"
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Paths follow boundaries between generated groups",
+          "finding": "makeMapPath compares neighboring cell group IDs. A difference marks both facing edges, labels both cells reachable and activates matching path flags on shared vertices. These local flags guide exhibit placement; they are not by themselves proof that every exhibit has a continuous route from the entrance.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/land.js",
+            "lines": [
+              268,
+              303
+            ],
+            "sha256": "b36ecb5b7798b5652748f938bcd42336ed0d2b901cef6406eb94fb5cfd90a883"
+          }
+        },
+        {
+          "domain": "procedural-generation",
+          "title": "Exhibit placement reserves water and attractions",
+          "finding": "The pen builder checks reachable cells and excludes river tiles and reserved attraction footprints. Separate tests handle the Ferris wheel, café, gift shop and marimba. This provides a useful spatial separation between animal pens and visitor attractions, but this static pass has not validated generated maps end to end.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/land.js",
+            "lines": [
+              305,
+              480
+            ],
+            "sha256": "b36ecb5b7798b5652748f938bcd42336ed0d2b901cef6406eb94fb5cfd90a883"
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Trees have species-specific interaction points",
+          "finding": "Arboreal animals search nearby tree decorations for contact points belonging to their species. A jump chooses a reachable contact point, sets the in-tree state, animates toward it, shakes the tree and switches sprite presentation. The source also gives species different tree durations. This is direct evidence that a decoration can carry a behavioral affordance.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/animals.js",
+            "lines": [
+              1341,
+              1400
+            ],
+            "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1"
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Food changes movement intent without removing variation",
+          "finding": "maybeChangeDirection chooses a random heading on some branches. With an eating target, another branch aims toward its position. The result is bounded probabilistic steering toward food, rather than every animal making an immediate identical turn. Collision behavior and full movement timing remain untested.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/animals.js",
+            "lines": [
+              1329,
+              1340
+            ],
+            "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1"
+          }
+        },
+        {
+          "domain": "ui",
+          "title": "Silly repeatable actions are deliberate content",
+          "finding": "The displayed-action dispatcher supports FEED and POOP. The poop action chooses an animal, plays a sound and emits timed falling particles that are removed after a few seconds. This is authored playful feedback, not an inspected sanitation or disease system.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/screen_zoo.js",
+            "lines": [
+              1816,
+              1920
+            ],
+            "sha256": "f5c1244171fa156a4883c98e48ec6d7e7c4426491d5be0377115a762c8a5bb5e"
+          }
+        },
+        {
+          "domain": "rendering",
+          "title": "The game ships sprite rendering and tween libraries",
+          "finding": "The package includes PixiJS, tween and Howler libraries, alongside individual animal images, sprite-sheet JSON, spoken words, animal sounds and musical notes. The source instantiates animated sprites and tweened movement. Asset counts are file counts, not independent characters, and no full runtime was observed.",
+          "basis": "direct packaged JavaScript inspection; gameplay unobserved",
+          "evidence": {
+            "url": "/data/anatomy/alpha-zoo.json",
+            "path": "Source/animals.js",
+            "lines": [
+              610,
+              715
+            ],
+            "sha256": "8a812cd34bc6354a5b0eb3b1d932e2f3bcd9c6c61795eee8dc773879bb4cd9a1"
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "partial static evidence",
+        "systems": "partial static evidence",
+        "simulation": "partial static evidence",
+        "procedural-generation": "partial static evidence",
+        "ui": "partial static evidence",
+        "ux": "not yet studied",
+        "rendering": "partial static evidence",
+        "assets": "not yet studied",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/alpha-zoo.json",
+      "lesson": {
+        "status": "design inference; not implemented in Abbie’s World",
+        "text": "Make small interventions immediately visible: revealing an exhibit, throwing food and watching an animal respond. Give trees and other props explicit behavioral contact points. For our zoo, add an independent planner and needs/economy model; this study does not establish those management systems in Alpha Zoo."
+      },
+      "nextPass": "Observe the installed game to test reveal, feeding, shop purchases and tree behavior; verify route connectivity from the entrance on generated maps. Keep learning-game rewards distinct from proposed zoo operating economics.",
+      "runtimeObserved": false
+    },
+    {
+      "id": "company-of-heroes",
+      "title": "Company of Heroes",
+      "genre": "Real-time strategy / tactical warfare",
+      "rank": 91,
+      "status": "partial installed-package study",
+      "version": "Steam app 228200, build 1647830",
+      "sourceBasis": "Installed file hashing; bundled Relic Archive.exe directory listing and extraction; direct script inspection. No decompilation or gameplay observation.",
+      "fileCount": 6676,
+      "imageFileCount": 591,
+      "modelCandidates": 0,
+      "assetNote": "Image counts are validated TGA headers, not unique sprites or visual quality checks. RGT textures and RGD attribute internals are undecoded. Model discovery remains incomplete.",
+      "extensions": {
+        ".rgd": 5268,
+        ".tga": 591,
+        ".scar": 201,
+        ".nis": 104,
+        ".info": 91,
+        ".sgb": 90,
+        ".lua": 69,
+        ".ai": 63,
+        ".xml": 59,
+        ".squadai": 35,
+        ".options": 33,
+        ".events": 22,
+        ".txt": 15,
+        ".rgt": 14,
+        ".bak": 12,
+        ".psd": 5,
+        ".scenref": 2,
+        ".camp": 1,
+        "": 1
+      },
+      "commonImageDimensions": {
+        "768x768": 210,
+        "2134x1200": 65,
+        "256x256": 63,
+        "256x144": 61,
+        "384x768": 17,
+        "658x768": 13,
+        "1024x768": 13,
+        "64x64": 12,
+        "768x624": 9,
+        "768x472": 7,
+        "768x531": 7,
+        "682x768": 6,
+        "768x480": 6,
+        "704x768": 6,
+        "128x128": 6,
+        "768x614": 5,
+        "460x768": 5,
+        "768x384": 5,
+        "768x292": 5,
+        "624x768": 5,
+        "768x192": 5,
+        "768x528": 4,
+        "768x597": 3,
+        "768x590": 3,
+        "558x768": 3,
+        "768x563": 3,
+        "768x658": 3,
+        "768x672": 3,
+        "768x704": 3,
+        "768x512": 3,
+        "548x768": 3,
+        "409x768": 3,
+        "768x708": 3,
+        "312x234": 2,
+        "768x698": 2,
+        "283x149": 2,
+        "512x512": 2,
+        "768x432": 2,
+        "288x768": 2,
+        "426x768": 2,
+        "1280x1024": 2,
+        "193x144": 1,
+        "2094x1200": 1,
+        "1920x1080": 1,
+        "796x796": 1,
+        "1541x807": 1,
+        "768x477": 1,
+        "392x768": 1
+      },
+      "claims": [
+        {
+          "domain": "systems",
+          "title": "Capture demand accounts for territory and pending tasks",
+          "finding": "CreateCaptureTasks counts owned points plus tasks already in its group, limits desired territory to a personality-controlled fraction of map capture points, and caps demand by max_num_capturers. It clears inactive tasks when demand falls, recounts, and issues one capture request when demand exceeds the remaining task count. Native task execution and pathfinding remain unexamined.",
+          "basis": "direct installed-package script/configuration inspection; runtime unobserved",
+          "evidence": {
+            "url": "/data/anatomy/company-of-heroes.json",
+            "path": "WW2Data/ai/strategy_resourcing.ai",
+            "sha256": "58ddda9b528cd3dcad9e549b3cb5590782f350b4c7b1c96977eb04618733cf05",
+            "lines": [
+              80,
+              148
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Territory ambition grows with elapsed game time",
+          "finding": "CalcCurrentMaxCapturePercentage starts from the personality default. When both growth settings are positive, it adds growth_per_min multiplied by elapsed seconds after the configured start, divided by 60, and clamps to max_percentage_to_capture. This traces the script formula; actual difficulty values and live territory outcomes have not been tested.",
+          "basis": "direct installed-package script/configuration inspection; runtime unobserved",
+          "evidence": {
+            "url": "/data/anatomy/company-of-heroes.json",
+            "path": "WW2Data/ai/strategy_resourcing.ai",
+            "sha256": "58ddda9b528cd3dcad9e549b3cb5590782f350b4c7b1c96977eb04618733cf05",
+            "lines": [
+              51,
+              78
+            ]
+          }
+        },
+        {
+          "domain": "simulation",
+          "title": "Priority calculations use separate game-time timers",
+          "finding": "The default AI initializes capture-priority and military-target intervals to 5 and 2.75 seconds. AI_Analyze3 and AI_Analyze4 compare game time with their next-run times, call the relevant calculation, then advance each timer. This establishes script scheduling gates, not a measured engine tick rate or frame-time budget.",
+          "basis": "direct installed-package script/configuration inspection; runtime unobserved",
+          "evidence": {
+            "url": "/data/anatomy/company-of-heroes.json",
+            "path": "WW2Data/ai/default.ai",
+            "sha256": "3046d299e4e710f78e2cc1a35e0347b5012169e684fef8b93f19e092da15f9b4",
+            "lines": [
+              305,
+              325
+            ],
+            "additionalLines": [
+              [
+                57,
+                60
+              ]
+            ]
+          }
+        },
+        {
+          "domain": "systems",
+          "title": "Build-order completion switches purchasing strategy",
+          "finding": "AI_Think2 runs the build order until strategy_buildorder.is_done returns true, then clears inactive build-order tasks. The later dynamic branch runs resourcing and separate timed regular-resource and munition purchases. The completion predicate and native purchase execution are not established by this finding.",
+          "basis": "direct installed-package script/configuration inspection; runtime unobserved",
+          "evidence": {
+            "url": "/data/anatomy/company-of-heroes.json",
+            "path": "WW2Data/ai/default.ai",
+            "sha256": "3046d299e4e710f78e2cc1a35e0347b5012169e684fef8b93f19e092da15f9b4",
+            "lines": [
+              329,
+              378
+            ]
+          }
+        },
+        {
+          "domain": "assets",
+          "title": "Module configuration separates attributes, art, sound and locales",
+          "finding": "RelicCoH.module mounts a dedicated attribute archive, common data/art/sound archives, separate low/high art and sound groups, and language-specific speech archives. It declares WW2Mod as the game DLL and AI takeover for dropped players. Configuration is verified; successful runtime loading and drop recovery are not observed.",
+          "basis": "direct installed-package script/configuration inspection; runtime unobserved",
+          "evidence": {
+            "url": "/data/anatomy/company-of-heroes.json",
+            "path": "RelicCoH.module",
+            "sha256": "8b18c62b14edfe5230f987e319d264bfa875c99169c412d493667e85b7b2aff3",
+            "lines": [
+              8,
+              92
+            ]
+          }
+        }
+      ],
+      "coverage": {
+        "mechanics": "not yet studied",
+        "systems": "partial static evidence",
+        "simulation": "partial static evidence",
+        "procedural-generation": "not yet studied",
+        "ui": "not yet studied",
+        "ux": "not yet studied",
+        "rendering": "not yet studied",
+        "assets": "partial static evidence",
+        "audio": "not yet studied",
+        "models": "not yet studied",
+        "binary": "not yet studied"
+      },
+      "inventoryUrl": "/data/anatomy/company-of-heroes.json",
+      "lesson": {
+        "status": "design inference; not implemented in Ranch Atelier",
+        "text": "Separate strategic demand from task execution: account for outstanding tasks, cap expansion by policy, and schedule expensive priority calculations independently. Treat scripted opening plans and adaptive purchasing as distinct phases."
+      },
+      "nextPass": "Decode selected RGD unit and weapon attributes; trace capture-request execution and build-order completion; inspect tactical cover, suppression and retreat scripts. Native pathfinding, rendering and gameplay behavior remain unverified.",
+      "runtimeObserved": false,
+      "packedResourceCount": 194504
+    }
+  ]
+}
