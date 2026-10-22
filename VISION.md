@@ -571,6 +571,4 @@ It should be capable of displaying rich, structured, interactive content.
 
 The drawer is not merely a chat box.
 
-It is a window into the creative process
-
-<!-- The source text was cut off here, mid-sentence, in section 10. The rest is pending from Evan. -->
+It is a window into the creative process.
