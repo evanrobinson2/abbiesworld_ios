@@ -49,13 +49,16 @@ body.l-off #left,body.r-off #right{visibility:hidden;border:0}
 .grip:hover::after,.grip:focus-visible::after,body.drag .grip.on::after{content:"";position:absolute;top:0;bottom:0;left:-1.5px;width:3px;background:var(--aw-accent);border-radius:2px}
 .grip:focus-visible{outline:none}
 body.l-off #gl,body.r-off #gr{pointer-events:none}
-main{position:relative;min-width:0;min-height:0}
+main{position:relative;min-width:0;min-height:0;box-sizing:border-box}
+/* the show buttons sit in gutters beside the study, never over it */
+body.l-off main{padding-left:60px}body.r-off main{padding-right:60px}
+body.l-off #home{left:60px}body.r-off #home{right:60px}
 iframe{border:0;width:100%;height:100%;display:block;background:var(--aw-bg)}
 iframe[hidden]{display:none}
 .float{position:absolute;top:12px;z-index:4;display:none;gap:6px;padding:4px;border-radius:16px;border:1px solid var(--aw-rim);
   background:linear-gradient(160deg,rgba(255,255,255,.25),transparent 50%),var(--aw-glass);-webkit-backdrop-filter:blur(12px) saturate(1.6);backdrop-filter:blur(12px) saturate(1.6);
   box-shadow:inset 0 1px 0 rgba(255,255,255,.6),0 8px 20px -10px rgba(0,0,0,.4)}
-#fl{left:12px}#fr{right:12px}
+#fl{left:6px}#fr{right:6px}
 body.l-off #fl,body.r-off #fr{display:flex}
 /* home */
 #home{position:absolute;inset:0;z-index:1;background:var(--aw-bg);overflow:auto;padding:36px clamp(16px,4vw,48px) 60px}
@@ -116,7 +119,9 @@ body.l-off #fl,body.r-off #fr{display:flex}
  .grip{display:none}
  .side{position:fixed;top:0;bottom:0;z-index:20;width:min(86vw,340px);box-shadow:0 0 40px rgba(0,0,0,.3)}
  #left{left:0}#right{right:0}
- main{grid-column:1;grid-row:1;height:100dvh}
+ main{grid-column:1;grid-row:1;height:100dvh;padding:52px 0 0!important}
+ #home{left:0!important;right:0!important;top:52px}
+ .float{top:4px}#fl{left:8px}#fr{right:8px}
  body.l-off #fl,body.r-off #fr{display:flex}
 }
 </style>
@@ -185,9 +190,10 @@ const store = (k, v) => { try { if (v === undefined) return JSON.parse(localStor
 const body = document.body, P = Object.assign({l: 280, r: 300, lOff: false, rOff: false}, store('aw-studies-panels') || {});
 const phone = matchMedia('(max-width:760px)');
 function layout(){
- body.style.setProperty('--l', P.l + 'px'); body.style.setProperty('--r', P.r + 'px');
- body.classList.toggle('l-off', phone.matches ? !P.lPhone : P.lOff);
- body.classList.toggle('r-off', phone.matches ? !P.rPhone : P.rOff);
+ // A hidden panel gives its width back to the middle; only a slim gutter for its show button stays.
+ const lOff = phone.matches ? !P.lPhone : P.lOff, rOff = phone.matches ? !P.rPhone : P.rOff;
+ body.style.setProperty('--l', (lOff ? 0 : P.l) + 'px'); body.style.setProperty('--r', (rOff ? 0 : P.r) + 'px');
+ body.classList.toggle('l-off', lOff); body.classList.toggle('r-off', rOff);
 }
 const keep = () => store('aw-studies-panels', {l: P.l, r: P.r, lOff: P.lOff, rOff: P.rOff});
 function toggle(side, on){
