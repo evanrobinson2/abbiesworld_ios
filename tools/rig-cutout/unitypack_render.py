@@ -101,9 +101,9 @@ def render(tm, size=(700, 800), origin=(350, 640)):
         if sr and a and sr["enabled"] and sr["guid"]: items.append((sr["order"], f, M, sr))
     for _, f, M, sr in sorted(items, key=lambda q: q[0]):
         img, ppu, pv = sprite(sr["guid"]); h, w = img.shape[:2]
-        # sprite pixel (u,v down) -> unit coords: x=(u-pv.x*w)/ppu ; y=(pv.y*h-v)/ppu  (pv.y measured from bottom)
+        # sprite pixel (u,v down) -> unit coords: x=(u-pv.x*w)/ppu ; y=((1-pv.y)*h-v)/ppu  (pivot measured from the bottom)
         sx = -1 if sr["flipx"] else 1
-        A = np.array([[sx/ppu, 0, -sx*pv[0]*w/ppu], [0, -1/ppu, pv[1]*h/ppu], [0, 0, 1]])
+        A = np.array([[sx/ppu, 0, -sx*pv[0]*w/ppu], [0, -1/ppu, (1-pv[1])*h/ppu], [0, 0, 1]])
         W = np.array([[S, 0, origin[0]], [0, -S, origin[1]], [0, 0, 1]]) @ M @ A
         wr = cv2.warpAffine(img.astype(np.float32), W[:2], size, flags=cv2.INTER_AREA if False else cv2.INTER_LINEAR, borderValue=(0, 0, 0, 0)); a_ = wr[..., 3:4] / 255.0
         can = can * (1 - a_) + wr[..., :3][..., ::-1] * a_
