@@ -193,3 +193,26 @@ Evan's copy when we fix a direction.
 "typical 3D game" options (outside #2, inside #2) letter "Abbie's Cafe" on the sign despite `--no text`. Midjourney's
 Draft Mode was on in the account for the first try and was switched off; the draft batch was not used. Evan picked
 `interior-party_0` (the cup DJ booth room) on 2026-10-23 at 05:41Z.
+
+## Round 2 (Evan, 2026-10-23 07:05Z and 07:16Z)
+
+- **Café by day, party by night: yes.**
+- **The map hex in nano view is the whimsical bubbly café** (`tile-party_0`), made a true hex.
+- **Manifest:** every item in the locked reference, the floors and the outer walls: `room-manifest.json` in this
+  folder (53 entries, each with where it is, its shading-role materials and a tier: hero, support or dressing). Page:
+  Studies site, `studies/cafe/manifest.html`.
+- **Back bar:** designed next, locked to the reference (Midjourney `--sref` of the pick): a smoothie machine, an
+  espresso maker, the coffee house counter behind the bar, and star decorations.
+- **Style mock-ups before any model:** five pieces (cup DJ booth, espresso maker, smoothie machine, bar stool,
+  beanbag) in three distinct styles: generic toy bricks (not LEGO), a soft vinyl toy, and charming styled low poly.
+  Prompts: `tools/midjourney/prompts/coffee-shop-0013-r2.json`. Page: `studies/cafe/round2.html`.
+
+### The café's roadmap, in Evan's order
+
+1. Ultra-finely modelled coffee maker and espresso maker (hero props, close-up quality).
+2. Two maker games (making coffee and making a smoothie or milkshake; the existing six-step recipe in
+   `coffee-recipe.mjs` is the start, done with the hands on the machine).
+3. A mini game for dance-party mode.
+4. Decorating the café.
+5. Stylus painting on the walls (Abbie asked for it).
+6. An art auction game (her wall paintings sold to customers).

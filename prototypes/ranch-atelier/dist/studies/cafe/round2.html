@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Back bar and styles</title>
+<link rel="stylesheet" href="/app-style.css?v=1">
+<style>
+/* AW-STUDY-0013 round 2: back bar designs locked to Evan's pick, and five assets in three styles. Reads r2.json. */
+body{margin:0;background:var(--app-canvas,#f4edcf);color:var(--app-ink);font:15px/1.45 system-ui,-apple-system,sans-serif;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:18px 48px}
+.wrap{max-width:1280px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+.id{font-size:12px;letter-spacing:.1em;color:var(--app-muted)}h1{margin:2px 0 0;font-size:26px}h2{margin:0 0 10px;font-size:19px}
+.bb{display:grid;grid-template-columns:1fr 3fr;gap:10px;align-items:start}
+.ref{margin:0;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:14px;overflow:hidden}
+.ref img{display:block;width:100%}.ref figcaption{padding:6px 10px;font-size:13px;color:var(--app-muted)}
+.cells{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.grid{display:grid;grid-template-columns:96px repeat(3,minmax(0,1fr));gap:10px}
+.lab{font-weight:700;font-size:14px;align-self:center}
+.cell{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--app-paper,#fffdf4);border:1px solid var(--app-border);border-radius:14px;padding:4px;min-height:80px}
+.cell img{width:100%;height:auto;border-radius:10px;display:block;cursor:zoom-in}
+.wait{grid-column:1/-1;display:grid;place-items:center;color:var(--app-muted);font-size:13px}
+dialog{border:0;padding:0;background:transparent;max-width:96vw;max-height:94vh}dialog::backdrop{background:#000c}
+dialog img{max-width:96vw;max-height:94vh;display:block;border-radius:12px}
+@media (max-width:760px){.bb{grid-template-columns:1fr}.cells{grid-template-columns:1fr}.grid{grid-template-columns:minmax(0,1fr)}.colhead,.corner{display:none}
+ .lab{margin-top:10px;font-size:16px}.cell::before{content:attr(data-style);grid-column:1/-1;font-size:12px;font-weight:700;color:var(--app-muted);padding:2px 4px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <header><div class="id">AW-STUDY-0013</div><h1>Back bar and styles</h1></header>
+ <section><h2>The back bar</h2>
+  <div class="bb"><figure class="ref"><img src="img/interior-party_0.jpg" alt="Locked reference"><figcaption>Locked reference</figcaption></figure><div class="cells" id="bb"></div></div>
+ </section>
+ <section><h2>Five pieces, three styles</h2><div class="grid" id="grid"></div></section>
+</div>
+<dialog id="big"><img alt=""></dialog>
+<script>
+const BB=[['backbar-front','Straight on'],['backbar-wide','From the floor'],['backbar-machines','The machines']];
+const ST=[['bricks','Toy bricks'],['vinyl','Vinyl toy'],['lowpoly','Low poly']];
+const AS=[['cup-booth','Cup DJ booth'],['espresso','Espresso maker'],['smoothie','Smoothie machine'],['stool','Bar stool'],['beanbag','Beanbag']];
+const big=document.getElementById('big');big.onclick=()=>big.close();
+function cell(key,label,n){const c=document.createElement('div');c.className='cell';c.dataset.style=label;
+ if(!n)c.innerHTML='<div class="wait">On the way</div>';
+ for(let i=0;i<n;i++){const im=new Image();im.loading='lazy';im.src='img/r2/'+key+'_'+i+'.jpg';im.alt=label+' '+(i+1);im.onclick=()=>{big.querySelector('img').src=im.src;big.showModal()};c.appendChild(im);}
+ return c;}
+fetch('r2.json',{cache:'no-store'}).then(r=>r.ok?r.json():{}).catch(()=>({})).then(have=>{
+ const bb=document.getElementById('bb');for(const [k,l] of BB){const w=document.createElement('div');w.innerHTML='<div class="lab" style="margin-bottom:4px">'+l+'</div>';w.appendChild(cell(k,l,have[k]||0));bb.appendChild(w);}
+ const g=document.getElementById('grid');g.insertAdjacentHTML('beforeend','<div class="corner"></div>'+ST.map(s=>'<div class="lab colhead">'+s[1]+'</div>').join(''));
+ for(const [a,al] of AS){g.insertAdjacentHTML('beforeend','<div class="lab">'+al+'</div>');for(const [s,sl] of ST)g.appendChild(cell('asset-'+a+'-'+s,sl,have['asset-'+a+'-'+s]||0));}
+});
+</script>
+</body>
+</html>
