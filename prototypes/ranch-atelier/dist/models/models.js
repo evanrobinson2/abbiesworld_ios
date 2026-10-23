@@ -13,7 +13,7 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;', '<':'&l
 const pct = x => Math.round(100 * x) + '%';
 const LS = 'models-reviews-v1';
 
-let list = [], reviews = {}, cur = null, view = 'review', filter = 'todo', handsFree = false, pending = null;
+let list = [], reviews = {}, cur = null, view = 'review', filter = 'todo', handsFree = false, pending = null, voiceLine = '', voiceKind = '', gridShow = 'art', flipped = new Set(), pane = 'review';
 try { reviews = JSON.parse(localStorage.getItem(LS) || '{}'); } catch {}
 const keep = () => { try { localStorage.setItem(LS, JSON.stringify(reviews)); } catch {} };
 
@@ -57,9 +57,14 @@ function grid(){
   document.title = 'Models';
   crumb.innerHTML = '<a href="/models">Models</a>';
   const ms = shown();
-  root.innerHTML = chips() + (ms.length ? `<div class="tiles">${ms.map(m => { const r = reviews[m.id]; return `
+  // Each tile shows the concept art or the 3D model; the switch flips them all, the small button flips one.
+  const showSwitch = `<div class="seg show" role="group" aria-label="Tiles show">${[['art','Concept art'],['model','3D models']].map(([k, l]) =>
+    `<button type="button" data-show="${k}" aria-pressed="${gridShow === k}">${l}</button>`).join('')}</div>`;
+  root.innerHTML = chips() + showSwitch + (ms.length ? `<div class="tiles">${ms.map(m => { const r = reviews[m.id], as3d = (gridShow === 'model') !== flipped.has(m.id); return `
     <a class="tile" href="/models/${encodeURIComponent(m.id)}" data-open="${esc(m.id)}">
-      <img src="${esc(m.urls.ref)}" alt="" loading="lazy"><i class="dot ${r ? r.verdict : ''}" title="${r ? LABEL[r.verdict] : 'To review'}"></i>
+      ${as3d ? `<model-viewer src="${esc(m.urls.glb)}" alt="3D model of the ${esc(m.name.toLowerCase())}" loading="lazy" camera-orbit="${+(m.orbit || [-30])[0]}deg ${+(m.orbit || [0, 72])[1]}deg auto" camera-controls touch-action="pan-y" interaction-prompt="none" environment-image="neutral" shadow-intensity="0.8"></model-viewer>`
+        : `<img src="${esc(m.urls.ref)}" alt="" loading="lazy">`}<i class="dot ${r ? r.verdict : ''}" title="${r ? LABEL[r.verdict] : 'To review'}"></i>
+      <button type="button" class="flip" data-flip="${esc(m.id)}" aria-label="Show the ${as3d ? 'concept art' : '3D model'}">${as3d ? 'Art' : '3D'}</button>
       <span class="tn"><strong>${esc(m.name)}</strong><small>${esc(m.style || m.group || '')}</small></span></a>`; }).join('')}</div>`
     : `<p class="empty">Nothing here yet.</p>`);
 }
@@ -78,6 +83,8 @@ function review(){
       <div class="dt"><h1>${esc(m.name)}</h1><span class="where">${m.style ? `<span class="style ${esc(m.style)}">${esc(m.style)}</span>` : ''}${i + 1} of ${seq.length}</span></div>
       <button type="button" class="arrow" data-step="1" aria-label="Next model" ${i >= seq.length - 1 ? 'disabled' : ''}>›</button>
     </div>
+    <div class="seg tabs" role="tablist">${[['review','Review'],['details','Details']].map(([k, l]) => `<button type="button" role="tab" data-pane="${k}" aria-selected="${pane === k}" aria-pressed="${pane === k}">${l}</button>`).join('')}</div>
+    <div class="pane-review"${pane === 'review' ? '' : ' hidden'}>
     <div class="duo">
       <figure class="asked"><span class="k">You asked for</span><img src="${esc(m.urls.ref)}" alt="The concept art for the ${esc(m.name.toLowerCase())}">
         ${m.ask ? `<figcaption class="ask">“${esc(m.ask)}”</figcaption>` : m.subject ? `<figcaption class="ask">${esc(m.subject)}</figcaption>` : ''}</figure>
@@ -94,10 +101,11 @@ function review(){
         <button type="button" class="act accept" data-verdict="accept">Accept</button>
       </div>
       <textarea id="notes" rows="1" placeholder="Notes in your own words: roof steeper, love the colour…">${esc(r?.notes || '')}</textarea>
-      <div class="voice"><span class="heard" id="heard" aria-live="polite">${speech ? 'Tap the mic and talk: “accept”, “reject”, or what to change.' : 'Type notes, or use your keyboard’s dictation.'}</span>
+      <div class="voice"><span class="heard ${voiceKind}" id="heard" aria-live="polite">${esc(voiceLine || (speech ? 'Tap the mic and talk: “accept”, “reject”, or what to change.' : 'Voice isn’t available in this browser. Type notes, or use your keyboard’s dictation.'))}</span>
         ${speech ? `<label class="hf"><input type="checkbox" id="hf" ${handsFree ? 'checked' : ''}> Hands-free</label>` : ''}</div>
     </section>
-    <details class="more"><summary>Learn more</summary>
+    </div>
+    <div class="pane-details"${pane === 'details' ? '' : ' hidden'}>
       <div class="mgrid">
         <section><h2>How close it is</h2>
           <div class="bars">${(m.scores || [{label:'Outline match', value:m.outline}]).map(s => `<div class="bar"><span class="bl" title="${esc(s.help || '')}">${esc(s.label)}</span><span class="track"><i style="width:${Math.max(2, Math.round(s.value * 100))}%"></i></span><span class="bv">${pct(s.value)}</span></div>`).join('')}</div>
@@ -106,8 +114,10 @@ function review(){
         <section>${(m.good || []).length ? `<h2>What matches</h2><ul class="ticks good">${m.good.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
           ${(m.off || []).length ? `<h2>What is off</h2><ul class="ticks off">${m.off.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</section>
         ${(m.steps || []).length ? `<section><h2>How it was made</h2><ol class="steps">${m.steps.map(([h, t]) => `<li><b>${esc(h)}</b> ${esc(t)}</li>`).join('')}</ol></section>` : ''}
-      </div></details>
+      </div></div>
+    <nav class="strip" aria-label="All models in this list">${seq.map(x => { const rv = reviews[x.id]; return `<a href="/models/${encodeURIComponent(x.id)}" data-open="${esc(x.id)}" class="sq${x.id === m.id ? ' on' : ''}"${x.id === m.id ? ' aria-current="true"' : ''} title="${esc(x.name)}${x.style ? ' · ' + esc(x.style) : ''}"><img src="${esc(x.urls.ref)}" alt="" loading="lazy"><i class="dot ${rv ? rv.verdict : ''}"></i></a>`; }).join('')}</nav>
   </article>`;
+  const on = root.querySelector('.strip .on'); if (on){ const st = on.parentElement; st.scrollLeft = on.offsetLeft - st.clientWidth / 2 + on.clientWidth / 2; }
   if (listening) setMic(true);
 }
 
@@ -134,15 +144,21 @@ async function decide(verdict, notes, via){
   reviews[m.id] = {id:m.id, verdict, notes, via, at:new Date().toISOString(), name:m.name}; keep();
   const nxt = filter === 'todo' ? nextAfter(m.id) : null;
   toast(`${LABEL[verdict]}: ${m.name}${nxt ? '. Next up.' : ''}`, () => { if (prev) reviews[m.id] = prev; else delete reviews[m.id]; keep(); send(m, prev ? prev.verdict : 'clear', prev?.notes || '', 'tap'); cur = m.id; render(true); });
-  send(m, verdict, notes, via);
+  const saving = send(m, verdict, notes, via);
+  const said = `${LABEL[verdict]}${notes ? ': ' + notes : ''}`, next = nxt && list.find(x => x.id === nxt), full = x => `${x.style === 'charming' ? 'charming ' : ''}${x.name.toLowerCase()}`;
+  hear(`Saving ${said} (${full(m)})…`, 'saving');
   if (nxt) cur = nxt; else if (filter === 'todo'){ view = 'grid'; filter = 'all'; }
   render(true); scrollTo({top:0, behavior:'smooth'});
+  const ok = await saving;
+  hear(`${ok ? '✓ Saved' : 'Saved on this device'}: ${said} (${full(m)}).${next ? ` Now: ${full(next)}.` : ''}`, ok ? 'saved' : 'error');
+  if (via === 'voice') say(next ? `Next, the ${full(next)}.` : filter === 'todo' ? 'That was the last one.' : 'Saved.');
 }
 async function send(m, verdict, notes, via){
   try {
     const r = await fetch('/api/model-reviews', {method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({id:m.id, name:`${m.name}${m.style ? ' (' + m.style + ')' : ''}`, verdict, notes, via})});
     if (!r.ok) throw new Error(r.status);
-  } catch { toast('Saved on this device. It will reach the modeler when the connection is back.'); }
+    return true;
+  } catch { toast('Saved on this device. It will reach the modeler when the connection is back.'); return false; }
 }
 
 let tt;
@@ -158,7 +174,21 @@ function toast(msg, undo){
 const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
 const speech = !!Rec;
 let rec = null, listening = false;
-const hear = s => { const h = document.getElementById('heard'); if (h) h.textContent = s; };
+// The status line survives re-renders, so what was heard and saved stays on screen after the page moves on.
+const hear = (s, kind = '') => { voiceLine = s; voiceKind = kind; const h = document.getElementById('heard'); if (h){ h.textContent = s; h.className = `heard ${kind}`; } };
+// Spoken replies use the device's own voice: instant, free, and nothing leaves the phone. Recognition pauses while it talks
+// so it does not hear itself.
+let talking = false;
+function say(text, then){
+  const synth = window.speechSynthesis;
+  if (!synth || !window.SpeechSynthesisUtterance){ then?.(); return; }
+  const u = new SpeechSynthesisUtterance(text); u.lang = 'en-US'; u.rate = 1.05;
+  const v = synth.getVoices().find(v => /en(-|_)US/.test(v.lang) && /Samantha|Google US|Aria|Jenny|Natural/i.test(v.name)); if (v) u.voice = v;
+  let done = false; const fin = () => { if (done) return; done = true; talking = false; if (listening && handsFree && rec) try { rec.start(); } catch {} then?.(); };
+  u.onend = fin; u.onerror = fin; setTimeout(fin, 1500 + text.length * 80);
+  talking = true; if (rec) try { rec.stop(); } catch {}
+  synth.cancel(); synth.speak(u);
+}
 function setMic(on){ const b = document.getElementById('mic'); if (b){ b.setAttribute('aria-pressed', String(on)); b.classList.toggle('live', on); } }
 
 // "accept", "ship it", "reject", "start over", or anything else said with adjust/change words. "next" and "back" move.
@@ -180,9 +210,11 @@ function act(said){
   const p = parse(said), notes = document.getElementById('notes');
   if (p.move){ hear(p.move > 0 ? 'Next model.' : 'Previous model.'); go(p.move); return; }
   if (notes && p.notes) notes.value = p.notes;
-  if (!p.verdict){ hear(`Heard “${said}”. Say accept, adjust or reject, or tap one.`); return; }
-  hear(`Heard “${said}” → ${LABEL[p.verdict]}`);
-  clearTimeout(pending); pending = setTimeout(() => decide(p.verdict, p.notes, 'voice'), 900);
+  if (!p.verdict){ hear(`You said “${said}”. Now say accept, adjust or reject, or tap one.`, 'heard-it'); say('Got it. Accept, adjust, or reject?'); return; }
+  if (p.verdict === 'adjust' && !p.notes){ hear('Adjust what? Say what should change.', 'heard-it'); say('What should change?'); return; }
+  hear(`You said “${said}” → ${LABEL[p.verdict]}${p.notes ? ': ' + p.notes : ''}`, 'heard-it');
+  clearTimeout(pending);
+  say(`Got it. ${LABEL[p.verdict]}${p.notes ? ': ' + p.notes : ''}.`, () => { pending = setTimeout(() => decide(p.verdict, p.notes, 'voice'), 250); });
 }
 
 function startListening(){
@@ -193,19 +225,35 @@ function startListening(){
   rec.onresult = e => {
     let interim = '';
     for (let k = e.resultIndex; k < e.results.length; k++){ const r = e.results[k]; if (r.isFinal) finalText += r[0].transcript + ' '; else interim += r[0].transcript; }
-    if (interim) hear('… ' + interim);
+    if (interim) hear('“' + interim + '…”', 'listening');
     if (finalText.trim()){ const s = finalText.trim(); finalText = ''; act(s); }
   };
-  rec.onerror = e => { if (e.error === 'not-allowed' || e.error === 'service-not-allowed'){ handsFree = false; stopListening(); hear('The microphone is blocked for this page. Allow it in the browser settings, or type your notes.'); } };
-  rec.onend = () => { if (listening && handsFree) { try { rec.start(); return; } catch {} } listening = false; setMic(false); };
-  try { rec.start(); listening = true; setMic(true); hear('Listening…'); } catch { hear('The microphone could not start. Tap it again.'); }
+  rec.onerror = e => {
+    const why = {'not-allowed':'The microphone is blocked for this page. Allow it in the browser settings, or type your notes.',
+      'service-not-allowed':'Speech recognition is switched off on this device (on iPhone: Settings › Siri, turn on Siri or Dictation). Or type your notes.',
+      'audio-capture':'No microphone found. Type your notes instead.',
+      'network':'The speech service could not be reached. Check the connection and tap the mic again.',
+      'no-speech':'I didn’t hear anything. Tap the mic and talk.'}[e.error];
+    if (e.error === 'not-allowed' || e.error === 'service-not-allowed' || e.error === 'audio-capture'){ handsFree = false; stopListening(); }
+    if (why && !(e.error === 'no-speech' && handsFree)) hear(why, 'error');
+  };
+  rec.onend = () => {
+    if (talking && handsFree) return;
+    if (listening && handsFree) { try { rec.start(); return; } catch {} }
+    listening = false; setMic(false);
+    if (voiceKind === 'listening') hear('I didn’t catch anything. Tap the mic and talk.', 'error');
+  };
+  try { rec.start(); listening = true; setMic(true); hear('Listening… speak now', 'listening'); } catch { hear('The microphone could not start. Tap it again.', 'error'); }
 }
 function stopListening(){ listening = false; setMic(false); if (rec) try { rec.stop(); } catch {} }
 
 // ---------- events ----------
 document.addEventListener('click', e => {
   const t = e.target.closest('button, a[data-open]'); if (!t) return;
-  if (t.dataset.open){ e.preventDefault(); cur = t.dataset.open; view = 'review'; render(true); scrollTo({top:0}); }
+  if (t.dataset.flip){ e.preventDefault(); flipped.has(t.dataset.flip) ? flipped.delete(t.dataset.flip) : flipped.add(t.dataset.flip); render(); }
+  else if (t.dataset.pane){ pane = t.dataset.pane; render(); }
+  else if (t.dataset.show){ gridShow = t.dataset.show; flipped.clear(); render(); }
+  else if (t.dataset.open){ e.preventDefault(); cur = t.dataset.open; view = 'review'; render(true); scrollTo({top:0}); }
   else if (t.dataset.filter){ filter = t.dataset.filter; if (view === 'review' && filter !== 'all' && !shown().some(m => m.id === cur)) cur = shown()[0]?.id || cur; render(true); }
   else if (t.dataset.view){ view = t.dataset.view; render(true); }
   else if (t.dataset.step) go(+t.dataset.step);
