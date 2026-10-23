@@ -235,7 +235,11 @@ grinder, the portafilter, the steam knob, the blender jar), and the world answer
 
 ### The main loop: run the shop for the day (Evan, 07:23Z)
 
-Evan: "of course the main loop is you run the shop for the day." Everything above hangs off one day:
+Evan: "of course the main loop is you run the shop for the day." Everything above hangs off one day. **The rule of the day: you can do anything or nothing** (Evan: "you can
+serve customers or someone on staff will for you", "you can do anything or nothing"). Every job in the shop has a crew
+member who does it when Abbie doesn't: the shop runs itself, and she steps in wherever it's fun. Stepping in means
+doing it better or sillier, never that the shop fails without her.
+
 
 1. **Morning: open up.** The café is calm (day mode). **Your crew arrives** (Evan: "your workers come, take the
    chairs, setup"): they walk in, take the chairs down off the tables, wipe the bar and switch on the machines, so
