@@ -84,11 +84,21 @@ td:first-child{font-family:var(--mono);font-size:13px;white-space:nowrap;color:v
 .gal figure{margin:0;min-width:0}.gal img{border-radius:12px;width:100%;display:block;background:#fff}
 .gal figcaption{font-size:13px;color:var(--dim);margin-top:6px}
 .drift{color:var(--dim);font-size:14.5px;margin:10px 0 0;max-width:68ch}
+.layout{display:grid;gap:28px;max-width:1220px;margin:0 auto}
+@media (min-width:1180px){.layout{grid-template-columns:minmax(0,860px) 300px;justify-content:center}.ctx{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));align-self:start;max-height:calc(100vh - 32px);overflow:auto;margin-top:48px}}
+.wrap{min-width:0}
+.ctx{background:#0a0f1f;border:1px solid var(--line);border-radius:16px;padding:16px;font-size:14px;line-height:1.45;min-width:0}
+.ctx h2{font:800 22px/1 var(--display);text-transform:uppercase;letter-spacing:.03em;margin:0 0 4px;border:0;padding:0}
+.ctx h3{font:600 11px/1.2 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--dawn);margin:16px 0 6px}
+.ctx ul{margin:0;padding-left:16px;display:grid;gap:6px}
+.ctx a{color:var(--rocket)}
+.cx-note{color:var(--dim);margin:0}
+.cx-gap{color:var(--dim);font-style:italic}
 footer{margin-top:56px;color:var(--dim);font-size:14px;border-top:1px solid var(--line);padding-top:16px}
 @media (max-width:520px){.keys{gap:6px}.key{border-radius:9px}}
 @media (prefers-reduced-motion:reduce){.key{transition:none}}
 </style></head><body style="margin:0">
-<div class="wrap">
+<div class="layout"><div class="wrap">
 <header>
   <div class="eyebrow">AW-STUDY-0036 · Game study and identity · Part 1 tonight</div>
   <h1>Moon Mission</h1>
@@ -1107,12 +1117,77 @@ playthrough (from the speed reviews).</p>
 <li>Family cast voices (<code>tools/voice-cast/cast.json</code>), Moon Heroes refs (<code>tools/moon-heroes/</code>), the accessorize kit
   (<code>tools/bruiser-study/scale/accessorize.py</code>), the trek minigames for Act 2.</li>
 </ul>
-<h2>15. How it was made, and how to be faster next time</h2>
+<h2>15. Context engineering</h2>
+<p>Evan (13:55Z, org-wide): every study lists the context it was built from. This is what fed Moon Mission, and what
+each source changed.</p>
+<p><strong>Oracle consultation</strong> (Game Oracle knowledge search, 2026-10-23 13:56Z, queries "couch co-op launch countdown family
+voice" and "space moon first person cockpit lander"):
+- <em>Bluey: The Videogame</em> (studied profile: "gentle, co-op, no fail; for preschoolers and parents together"). This
+  confirmed the no-fail, parent-plus-kids model and the low challenge setting (0.11) for Act 1.
+- <em>Overcooked! 2</em> (owned, installed): couch co-op where talking is the game. Kept: shared, shouted jobs. Left out:
+  the time-pressure stress.
+- <em>Deliver Us The Moon</em> (owned, studied): KeokeN's earlier Moon game, with an atmospheric, slow tempo (0.22). It
+  confirmed the calm cutscenes between scenes.
+- <em>Kerbal Space Program</em> (owned, studied): real launch vocabulary can be funny and educational at once.
+- The Abbie's World identity record: no fail screens, nothing masks the world, the world is the HUD.
+- Not run: the Oracle's model-written <code>consult</code> plan (it needs the server key from this session). It should be the
+  first step of the next study.</p>
+<p><strong>Our canon:</strong> <code>docs/oracle/identity/GAME_IDENTITY.md</code> and its schema, <code>docs/oracle/hud/HUD_STUDY.md</code>,
+<code>docs/design/INTERACTION_GRAMMAR.md</code>, <code>GAME_FEEL.md</code>, the school and basement speed reviews, AW-STUDY-0029 Faceted
+Hero, AW-STUDY-0030 Family cast, AW-STUDY-0031 Moon Base Kit, and Evan's trek pack.</p>
+<p><strong>Game dev blogs and interviews:</strong>
+- <a href="https://www.thesixthaxis.com/2022/05/06/first-deliver-us-mars-dev-diary-journeys-to-the-red-planet/">First Deliver Us Mars dev diary</a>
+  and <a href="https://gamingtrend.com/interviews/we-interview-koen-deetman-game-director-for-deliver-us-mars/">the interview with game director Koen Deetman</a>.
+  These gave the reference rhythm for the launch day (style only).
+- <a href="https://episodiccontentmag.com/2016/01/29/everybodyshake2/">Everybody Shake! The Making of Spaceteam, chapter 2</a>:
+  split the panel so one person's instruction is another's job, teach less and let players discover, make teamwork the
+  only way through, and let rising chaos make people shout. This became <strong>jobs, not turns</strong> and "PLUG IN OUR OXYGEN!!!".
+- <a href="https://builtin.com/media-gaming/jackbox-games-design-party-pack">The design principles behind Jackbox</a>: minimal
+  inputs, one task at a time, and pacing like a TV show with a host. This became Houston as host, one key per child,
+  and the mission cards.
+- <a href="https://www.nintendolife.com/features/interview-were-not-making-a-party-game-now-its-more-of-an-evening-thing-ghost-town-is-moving-on-from-overcooked">Ghost Town Games on Overcooked as "an evening thing"</a>:
+  one act per evening.</p>
+<p><strong>Game design talks and tutorials:</strong>
+- <a href="https://gdcvault.com/play/1023113/Designing-Asymmetric-Gameplay-For-Keep">GDC: Designing Asymmetric Gameplay for Keep Talking and Nobody Explodes</a>:
+  the information on the TV, the job pictures on the panel, and talking across the gap. This became the lander's
+  spotters (the girls see the PIP camera, Daddy flies).
+- <a href="https://en.wikipedia.org/wiki/Built-in_hold">Built-in hold</a> and
+  <a href="https://www.scientificamerican.com/article/shuttle-countdown-clock/">Why the shuttle countdown has so many stops and starts</a>:
+  real countdowns pause on purpose. This became the always-ticking launch clock with planned holds, so nobody fails.</p>
+<h2>16. How it was made, and how to be faster next time</h2>
 <p>To be written when Part 1 ships (CLAUDE.md speed-review rule). Speedups applied from the school and basement reviews:
 the reference art is frozen first (section 9), the couch kit goes into <code>simulations/</code>, tests run by state, the
 <code>whats-new.json</code> re-insert script, concept art in parallel.</p>
 </main>
 <footer>Source: docs/oracle/moonmission/MOON_MISSION_STUDY.md and moon-mission.identity.json. Reference games are studied for style only; the story, cast, rocket and music are Abbie's World's own.</footer>
+</div>
+<aside class="ctx" aria-label="Context engineering">
+<h2>Context engineering</h2>
+<p class="cx-note">What this study was built from, and what each source changed.</p>
+<h3>Oracle consultation</h3>
+<ul>
+<li><b>Bluey: The Videogame</b>: gentle, no-fail co-op for parents and kids, so Act 1 stays low-challenge.</li>
+<li><b>Overcooked! 2</b>: talking is the game. We keep the shouted jobs and drop the time stress.</li>
+<li><b>Deliver Us The Moon</b>: a slow, atmospheric tempo, so there's a calm cutscene between scenes.</li>
+<li><b>Kerbal Space Program</b>: real launch words can be funny and teach at the same time.</li>
+<li><b>Abbie's World identity</b>: no fail screens, and the world is the HUD.</li>
+<li class="cx-gap">Not run yet: the Oracle's written consult plan. It's first on the list for the next study.</li>
+</ul>
+<h3>Game dev blogs</h3>
+<ul>
+<li><a href="https://episodiccontentmag.com/2016/01/29/everybodyshake2/" target="_blank" rel="noopener">The Making of Spaceteam</a>: one person's instruction is another person's job. That's where "PLUG IN OUR OXYGEN!!!" comes from.</li>
+<li><a href="https://builtin.com/media-gaming/jackbox-games-design-party-pack" target="_blank" rel="noopener">Jackbox design principles</a>: one task at a time, paced like a TV show. Houston is the host.</li>
+<li><a href="https://www.thesixthaxis.com/2022/05/06/first-deliver-us-mars-dev-diary-journeys-to-the-red-planet/" target="_blank" rel="noopener">Deliver Us Mars dev diary</a> and <a href="https://gamingtrend.com/interviews/we-interview-koen-deetman-game-director-for-deliver-us-mars/" target="_blank" rel="noopener">Koen Deetman interview</a>: the rhythm of launch day. We take the style only.</li>
+<li><a href="https://www.nintendolife.com/features/interview-were-not-making-a-party-game-now-its-more-of-an-evening-thing-ghost-town-is-moving-on-from-overcooked" target="_blank" rel="noopener">Ghost Town Games interview</a>: "an evening thing", so it's one act per evening.</li>
+</ul>
+<h3>Game design talks and tutorials</h3>
+<ul>
+<li><a href="https://gdcvault.com/play/1023113/Designing-Asymmetric-Gameplay-For-Keep" target="_blank" rel="noopener">GDC: asymmetric design in Keep Talking</a>: the girls spot on the PIP camera while Daddy flies.</li>
+<li><a href="https://en.wikipedia.org/wiki/Built-in_hold" target="_blank" rel="noopener">Built-in holds</a> and <a href="https://www.scientificamerican.com/article/shuttle-countdown-clock/" target="_blank" rel="noopener">Scientific American on countdowns</a>: the clock always ticks, and planned holds mean nobody fails.</li>
+</ul>
+<h3>Our canon</h3>
+<p class="cx-note">Game identity schema, the HUD study, the interaction grammar, GAME_FEEL, the school and basement speed reviews, Faceted Hero, Family cast, the Moon Base Kit, and the trek pack.</p>
+</aside>
 </div>
 <script>
 (()=>{
