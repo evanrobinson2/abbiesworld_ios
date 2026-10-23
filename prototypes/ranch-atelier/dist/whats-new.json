@@ -1,458 +1,469 @@
 {
-  "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
-  "entries": [
-    {
-      "id": "2026-10-23-grace-basement-4",
-      "date": "2026-10-23",
-      "title": "Feet on the stairs",
-      "line": "In Grace's basement the girl now steps down each stair, with her feet on the treads instead of through them. And if you go back up, \"I have to know\" brings you back to the start to choose again.",
-      "image": "/whats-new/2026-10-23-grace-basement-4.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
-      "threadTitle": "Coffee shop office basement",
-      "tour": false,
-      "link": "/studies/basement/play.html"
-    },
-    {
-      "id": "2026-10-23-moon-base-kit",
-      "date": "2026-10-23",
-      "title": "Moon base kit: 20 pieces to walk through",
-      "line": "The first 20 of 200 pieces for the Moon shooter: hatch doors with light rings, oxygen canisters, gauges, bunks, a jump pad and more. Spin each one and see it from Abbie's eye height.",
-      "image": "/whats-new/2026-10-23-moon-base-kit.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYNtqXxwWeYiUhSxEPUykrHL",
-      "threadTitle": "Moon base FPS assets",
-      "tour": false,
-      "link": "/studies/moon-base-kit/"
-    },
-    {
-      "id": "2026-10-23-storybook-light",
-      "date": "2026-10-23",
-      "title": "Storybook light",
-      "line": "Your animated-film picture, rebuilt as live light: soft wrap light, warm rim, glowing ears and cheeks, green haze, round background blur and glow. Slide to compare with plain three.js and switch each part on or off.",
-      "image": "/whats-new/2026-10-23-storybook-light.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVpjNTFq7FTi7Mn7kjELEVf",
-      "threadTitle": "AW-STUDY-0028 - Storybook Light",
-      "tour": false,
-      "link": "/studies/storybook/"
-    },
-    {
-      "id": "2026-10-23-family-cast",
-      "date": "2026-10-23",
-      "title": "The family cast",
-      "line": "Everyone in Daddy's memory places, then and now, each with a storybook sheet and designed voices. Tap a voice, tick the one that sounds right, and send your picks.",
-      "image": "/whats-new/2026-10-23-family-cast.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh",
-      "threadTitle": "Family cast",
-      "tour": false,
-      "link": "/studies/family-cast/"
-    },
-    {
-      "id": "2026-10-23-school-jump-3",
-      "date": "2026-10-23",
-      "title": "The school jump: chalk targets and a secret",
-      "line": "Hold and let go to throw: hit the two chalk targets and bub wants it further, then the third one sails onto the roof. The big jump is your choice now, and there is a secret ending if you dawdle.",
-      "image": "/whats-new/2026-10-23-school-jump-3.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
-      "threadTitle": "The school jump",
-      "tour": false,
-      "link": "/studies/school/play.html"
-    },
-    {
-      "id": "2026-10-23-brute-fight",
-      "date": "2026-10-23",
-      "title": "Brute Fight",
-      "line": "Two painted brutes brawl in a ranch ring. They fight on their own until you touch the screen, then you're the red one: jab, heavy, uppercut and the two-fisted hammer.",
-      "image": "/whats-new/2026-10-23-brute-fight.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVHnrFbDNwMLBxPEstAPnP7",
-      "threadTitle": "Brute fight study",
-      "tour": false,
-      "link": "/studies/brute-fight/play.html"
-    },
-    {
-      "id": "2026-10-23-school-jump-2",
-      "date": "2026-10-23",
-      "title": "The school jump, at golden dusk",
-      "line": "Walk your dog, throw the ball until it lands on the roof, then climb the long wall side-on, one hand at a time. Slow station wagons sweep the roof with their lights. Hide behind the two big walls, because getting caught burns.",
-      "image": "/whats-new/2026-10-23-school-jump-2.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
-      "threadTitle": "The school jump",
-      "tour": false,
-      "link": "/studies/school/play.html"
-    },
-    {
-      "id": "2026-10-23-grace-basement-3",
-      "date": "2026-10-23",
-      "title": "Grace's basement, warmed up",
-      "line": "The basement now warms up like an old TV. A little lamp shows you the switches, and the girl has a proper kid's face. She walks carefully down the stairs, and her thoughts appear at the bottom in pixel letters with > choices. Every memory coin gets the golden reward.",
-      "image": "/whats-new/2026-10-23-grace-basement-3.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
-      "threadTitle": "Coffee shop office basement",
-      "tour": false,
-      "link": "/studies/basement/play.html"
-    },
-    {
-      "id": "2026-10-23-bruiser-postmortem",
-      "date": "2026-10-23",
-      "title": "Why the brute came out boxy",
-      "line": "The Bruiser study's post-mortem: his picture is turned about 23 degrees, every hand-built body was too thin front to back, and the five rules that fix it.",
-      "image": "/whats-new/2026-10-23-bruiser-postmortem.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
-      "threadTitle": "AW-STUDY-0021 - Bruiser Study",
-      "tour": false,
-      "link": "/studies/bruiser/"
-    },
-    {
-      "id": "2026-10-23-photo-booth",
-      "date": "2026-10-23",
-      "title": "The café photo booth",
-      "line": "Step into the photo booth with a friend. The booth shows a pose, the bulbs count down, strike it before the flash. After four flashes your strip drops out of the slot.",
-      "image": "/whats-new/2026-10-23-photo-booth.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9",
-      "threadTitle": "AW-STUDY-0013 - The Coffee Shop",
-      "tour": false,
-      "link": "/studies/cafe/photobooth.html"
-    },
-    {
-      "id": "2026-10-23-cafe-built",
-      "date": "2026-10-23",
-      "title": "The café, built",
-      "line": "Your dance-party café is built, low poly, with every piece weighed like the real thing. The bar is shorter now, a cash register hides a brass key, and an old door behind the bar leads somewhere secret.",
-      "image": "/whats-new/2026-10-23-cafe-built.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9",
-      "threadTitle": "AW-STUDY-0013 - The Coffee Shop",
-      "tour": false,
-      "link": "/models/"
-    },
-    {
-      "id": "2026-10-23-pocket",
-      "date": "2026-10-23",
-      "title": "Abbie's pocket",
-      "line": "Things Abbie picks up go in her pocket on the top bubble, and she says what she thinks in her own small voice. The first thing to find is the café's brass key.",
-      "image": "/whats-new/2026-10-23-pocket.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead",
-      "tour": false,
-      "link": "/sandbox"
-    },
-    {
-      "id": "2026-10-23-info-card-right",
-      "date": "2026-10-23",
-      "title": "Tap cards on the right",
-      "line": "Tap a building and its card waits on the far right without covering it. If it would, the view slides over. One short line, with the whole picture.",
-      "image": "/whats-new/2026-10-23-info-card-right.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead",
-      "tour": false,
-      "link": "/sandbox"
-    },
-    {
-      "id": "2026-10-23-school-jump",
-      "date": "2026-10-23",
-      "title": "The school jump",
-      "line": "Climb the old school's wall at dusk, hand over hand, then sneak across the roof past the headlights. Toss all 31 tennis balls down to your dog, hang-drop to the canopy and find a gold memory coin.",
-      "image": "/whats-new/2026-10-23-school-jump.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
-      "threadTitle": "The school jump",
-      "tour": false,
-      "link": "/studies/school/play.html"
-    },
-    {
-      "id": "2026-10-23-grace-basement-2",
-      "date": "2026-10-23",
-      "title": "Grace's basement, for real",
-      "line": "The basement starts dark: find the right switches (there are three). Then do Grace's list on her clipboard: plug the computer in, wash and dry the screen, switch it on and put in a disk. It runs real DOS now, and every gold coin is one of Daddy's memories.",
-      "image": "/whats-new/2026-10-23-grace-basement-2.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
-      "threadTitle": "Coffee shop office basement",
-      "tour": false,
-      "link": "/studies/basement/play.html"
-    },
-    {
-      "id": "2026-10-23-tile-pull",
-      "date": "2026-10-23",
-      "title": "Pull a tile off its card",
-      "line": "Every card's tile is ready before you touch it. Drag a card onto the board and it rolls like a die into place. Tap a card to turn it over and make the tile yours; Accept prints it.",
-      "image": "/whats-new/2026-10-23-tile-pull.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
-      "threadTitle": "Tile pull and print",
-      "tour": true,
-      "link": "/sandbox"
-    },
-    {
-      "id": "2026-10-23-anatomy",
-      "date": "2026-10-23",
-      "title": "The body, Gray's Anatomy deep",
-      "line": "The Bodies study now has a real skeleton and the muscles front, side and back, drawn from where Gray's Anatomy says each one attaches. Tap a muscle to read it. Joints, fat, measurements and the modelers' checklist are there too.",
-      "image": "/whats-new/2026-10-23-anatomy.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1oLKTSHLevi7mbEMgD3h3v",
-      "threadTitle": "Bodies and Creatures",
-      "tour": false,
-      "link": "/studies/#bodies-study"
-    },
-    {
-      "id": "2026-10-23-grace-basement",
-      "date": "2026-10-23",
-      "title": "Grace's basement",
-      "line": "Under the café is Aunt Grace's basement. Turn on the light, walk down the stairs and sit at her 1986 computer. Play KEYSTORM, try her disks, and find the ten gold coins.",
-      "image": "/whats-new/2026-10-23-grace-basement.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
-      "threadTitle": "Coffee shop office basement",
-      "tour": false,
-      "link": "/studies/basement/play.html"
-    },
-    {
-      "id": "2026-10-23-welcome",
-      "date": "2026-10-23",
-      "title": "Welcome to Abbie’s World",
-      "line": "New players meet a tour guide: take the grand tour (the world builds itself, then a narrated tour of the live ranch), get a few chalk tips, or just play. Call it back any time from the toy box: Welcome tour.",
-      "image": "/whats-new/2026-10-23-welcome.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYW3oVJ5iRfHfiFPSwzDx1a9",
-      "threadTitle": "Welcome to Abbie's World intro",
-      "tour": true
-    },
-    {
-      "id": "2026-10-23-billing",
-      "date": "2026-10-23",
-      "title": "See every cent of your magic",
-      "line": "Signed in, your account now has a billing page: every talk, build and safety check, what it cost, and what's left this month. Support now comes in $5, $45 or $80 a month, almost all of it back as magic. The Kickstarter is gone.",
-      "image": "/whats-new/2026-10-23-front-door.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
-      "threadTitle": "Front door, sign-in and donations",
-      "tour": false
-    },
-    {
-      "id": "2026-10-23-notices",
-      "date": "2026-10-23",
-      "title": "New things wait for you",
-      "line": "Each new thing now stays until you dismiss it. Dismiss shows the next one, Later keeps them all, and every one waits under Notices in Profile and settings.",
-      "image": "/whats-new/2026-10-23-notices.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead",
-      "tour": true
-    },
-    {
-      "id": "2026-10-23-front-door",
-      "date": "2026-10-23",
-      "title": "A front door for Abbie's World",
-      "line": "abbies.world now opens on a front door: what Abbie's World is, how it works, the PG promise, Play and Sign in, and support from $5 a month. Your home-screen app still goes straight to the ranch.",
-      "image": "/whats-new/2026-10-23-front-door.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
-      "threadTitle": "Front door, sign-in and donations"
-    },
-    {
-      "id": "2026-10-23-models-one-screen",
-      "date": "2026-10-23",
-      "title": "Models fit on one screen",
-      "line": "Each model now fits on one screen: a hero bar with its name, the picture and the model side by side, and your feedback in its own panel on the right that you can hide. A menu on the left folds away. Profile and settings now open from your avatar, with 20 styles that change the whole app, and Studies has a home page.",
-      "image": "/whats-new/2026-10-23-models-one-screen.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead"
-    },
-    {
-      "id": "2026-10-23-cel-hand-cards",
-      "date": "2026-10-23",
-      "title": "Hand cards show each place's cartoon",
-      "line": "Your hand cards now show the cartoon of each place in clean cel shading with ink lines: the barn and silo, the kitchen garden, a wildflower meadow with a bee skep, and the moon dome. Tap anything in the world and its card opens right beside it.",
-      "image": "/whats-new/2026-10-23-cel-hand-cards.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
-      "threadTitle": "Sandbox v2 interface"
-    },
-    {
-      "id": "2026-10-23-low-clouds",
-      "date": "2026-10-23",
-      "title": "Clouds over the ranch",
-      "line": "Clouds now sail low over the tiles, about 20 m up, and their shadows slide across the fields beneath them.",
-      "image": "/whats-new/2026-10-23-low-clouds.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
-      "threadTitle": "Weather and clouds"
-    },
-    {
-      "id": "2026-10-23-cel-cards",
-      "date": "2026-10-23",
-      "title": "Cards in clean cel shading",
-      "line": "The cards dropped the fake wood, brass and parchment. Every card now shows the real in-game model, cel-shaded with ink lines, in a flat frame with a quiet pattern for its place: barn boards on the ranch, sprout rows in the garden, flowers in the meadow, stars on the moon. Any card that isn't ready says PRELIMINARY · idea only.",
-      "image": "/whats-new/2026-10-23-cel-cards.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
-      "threadTitle": "Card generator"
-    },
-    {
-      "id": "2026-10-23-models-browser",
-      "date": "2026-10-23",
-      "title": "All the models, and Game mode",
-      "line": "See them all shows every model as a small card: the picture in its frame and the model beside it. Switch between one at a time and all at once. The gear now has App and Game: Game puts the page under the sky with seven styles, from Gallery to Candy party.",
-      "image": "/whats-new/2026-10-23-models-browser.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead"
-    },
-    {
-      "id": "2026-10-23-models-tighter",
-      "date": "2026-10-23",
-      "title": "Models come alive",
-      "line": "Your picture and its words sit together in one frame, and the model stands free beside it, printing itself in with a half-second laser. Labels and names are in Title Case, and Reject, Chat and Keep sit right under the pair.",
-      "image": "/whats-new/2026-10-23-models-tighter.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead"
-    },
-    {
-      "id": "2026-10-23-moon-remaster",
-      "date": "2026-10-23",
-      "title": "The Moon from Abbie's story",
-      "line": "The Moon is grey-blue now, with craters you can see, rocks thrown out round their rims, and tracks that stay in the dust. A glass dome with an orange band, a charcoal moon buggy that drives out to the geology field, and something new: a dark meteorite in a fresh crater, glowing cyan like a slow heartbeat.",
-      "image": "/whats-new/2026-10-23-moon-remaster.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1",
-      "threadTitle": "Moon remaster build"
-    },
-    {
-      "id": "2026-10-23-models-new-look",
-      "date": "2026-10-23",
-      "title": "Models get the new look",
-      "line": "Model pages are simpler: AW in the corner, wordless counters, and your picture and the 3D model the same size. Numbered points show what matters on your picture and whether the model gets each one right. Reject, Chat (talk or type) and Keep sit under your right thumb. The gear switches between Default, Rome and Efficient, and the cart asks for more, with a camera. Every order starts as concept art.",
-      "image": "/whats-new/2026-10-23-models-new-look.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
-      "threadTitle": "Design lead"
-    },
-    {
-      "id": "2026-10-23-weather-fronts",
-      "date": "2026-10-23",
-      "title": "Weather you can watch coming",
-      "line": "Weather now arrives in fronts: the wind picks up, clouds gather and the animals settle before the rain, then the sky breaks up as it clears. Soft clouds float around your ranch and their shadows drift across the fields. Storms grey the sky, dim the sun and light the lamps, and a gentle flash brings thunder. The light is new too: a paper sky by day, a gold sunset, an ink-blue moonlit night with lamps that come on one by one at dusk, and Earthshine with lit windows on the Moon at night.",
-      "image": "/whats-new/2026-10-23-weather-fronts.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
-      "threadTitle": "Weather and clouds"
-    },
-    {
-      "id": "2026-10-23-model-review-row",
-      "date": "2026-10-23",
-      "title": "Model pages are one review row",
-      "line": "Each model page is now your picture, the 3D model, and your notes with Reject, Adjust and Accept on the right. Name and score sit above, details below. Your verdict comes straight to Claude.",
-      "image": "/whats-new/2026-10-23-model-review-row.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa",
-      "threadTitle": "Models review"
-    },
-    {
-      "id": "2026-10-23-sign-in",
-      "date": "2026-10-23",
-      "title": "Anyone can sign in and play",
-      "line": "Sign in is in the toy box now. Anyone can sign in with Google and play the ranch as their own copy, and their worlds follow them to any device. It's free, and we ask nothing of them. Talking to the Computer needs a sign-in, and everyone's AI spending has a cap: $1 a person, $100 for all players together, and $1000 for you.",
-      "image": "/whats-new/2026-10-23-sign-in.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
-      "threadTitle": "Sign-in to play the ranch"
-    },
-    {
-      "id": "2026-10-23-no-masks",
-      "date": "2026-10-23",
-      "title": "The world stays in view",
-      "line": "Opening a panel no longer dims or blurs the ranch, the teleport map floats over the world on a glass tray, and teleporting is a sparkle on the pad instead of a white-out.",
-      "image": "/whats-new/2026-10-23-no-masks.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
-      "threadTitle": "Design knowledge into practice"
-    },
-    {
-      "id": "2026-10-23-sandbox-chronograph",
-      "date": "2026-10-23",
-      "title": "A glass chronograph for your ranch",
-      "line": "Time of day, pause, speed, weather and season are back in one glass dial at the top. Pin any dial you like, such as friends on the way or hungry animals, and keep your own to-dos there. The ranch suggests dials, and you can pin them or wave them off. The cards in your hand now have proper card faces.",
-      "image": "/whats-new/2026-10-23-sandbox-chronograph.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
-      "threadTitle": "Sandbox v2 interface"
-    },
-    {
-      "id": "2026-10-23-selection-ring",
-      "date": "2026-10-23",
-      "title": "A soft ring, not a box",
-      "line": "Tap a building and a warm ring now glows on the ground around it, instead of the red debug box. Only you see the ring: the people on the ranch and the voice see just the ranch.",
-      "image": "/whats-new/2026-10-23-selection-ring.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
-      "threadTitle": "Design knowledge into practice"
-    },
-    {
-      "id": "2026-10-23-game-sense",
-      "date": "2026-10-23",
-      "title": "The voice gets game sense",
-      "line": "Ask the voice for something that fights the game, like a timer floating in the sky, and it suggests a better version first (a bell that rings faster) and asks. Say no and it does it your way. A giant monkey stomping the town? You get it, and the townsfolk run and grumble.",
-      "image": "/whats-new/2026-10-23-game-sense.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
-      "threadTitle": "Live voice world control"
-    },
-    {
-      "id": "2026-10-23-sandbox-v2",
-      "date": "2026-10-23",
-      "title": "The world, edge to edge",
-      "line": "The sandbox lost its toolbar and side panel. Three glass toys remain: a sun dial at the top (tap to pause, hold for time and weather), your tile cards at the bottom, and a toy box with everything else. No more haze over the world. Classic layout is in the toy box.",
-      "image": "/whats-new/2026-10-23-sandbox-v2.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
-      "threadTitle": "Sandbox v2 interface"
-    },
-    {
-      "id": "2026-10-23-card-forge",
-      "date": "2026-10-23",
-      "title": "Ranch cards you can hold",
-      "line": "Open a pack of 15 Ranch cards made from the game's animals and buildings. Tilt them in the light, browse the binder, and print the whole set at studio quality. Settings, Studies, Cards.",
-      "image": "/whats-new/2026-10-23-card-forge.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
-      "threadTitle": "Card generator"
-    },
-    {
-      "id": "2026-10-23-ranch-rebuild",
-      "date": "2026-10-23",
-      "title": "A rebuilt ranch",
-      "line": "Every building, animal, tree, prop and plant on the ranch was redrawn as concept art and rebuilt from it. The pen sheds, the cows and the goats are all new.",
-      "image": "/whats-new/2026-10-23-ranch-rebuild.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJJwV5vW99BgS3tVwgdy9Q5",
-      "threadTitle": "Ranch tile rebuild"
-    },
-    {
-      "id": "2026-10-23-live-voice-settings",
-      "date": "2026-10-23",
-      "title": "Pick the Computer's voice",
-      "line": "Settings → Voice opens Live voice: choose OpenAI or ElevenLabs, the voice, speed, personality, reply length and how long it waits for little ones. Safety stays locked.",
-      "image": "/whats-new/2026-10-23-live-voice-settings.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
-      "threadTitle": "Live voice world control"
-    },
-    {
-      "id": "2026-10-22-voice-app-control",
-      "date": "2026-10-22",
-      "title": "The voice runs the whole app",
-      "line": "The Computer now knows the ranch, its animals and the other worlds. Ask for a real barn, more goats, winter, a new tile or the moon base, and it does it.",
-      "image": "/whats-new/2026-10-22-voice-app-control.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
-      "threadTitle": "Live voice world control"
-    },
-    {
-      "id": "2026-10-22-sounds",
-      "date": "2026-10-22",
-      "title": "A sound library",
-      "line": "450 sounds for the ranch and beyond, picked and levelled by the sound engineer. Open Sounds from Settings to browse them; they start playing once storage is switched on.",
-      "image": "/whats-new/2026-10-22-sounds.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9qGUVvGpSmdcwZSzez8qgn",
-      "threadTitle": "Sound engineer and sound browser"
-    },
-    {
-      "id": "2026-10-22-live-mode",
-      "date": "2026-10-22",
-      "title": "Talk to the world",
-      "line": "Tap the microphone and just say what you want: the Computer builds it as you talk. It only plays the game, and it keeps things PG.",
-      "image": "/whats-new/2026-10-22-live-mode.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
-      "threadTitle": "Live voice world control"
-    },
-    {
-      "id": "2026-10-22-workshop",
-      "date": "2026-10-22",
-      "title": "The workshop",
-      "line": "Concept art and models fly in as they're made. Tap the factory button to see every job, its progress and the machines.",
-      "image": "/whats-new/2026-10-22-workshop.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
-      "threadTitle": "iPhone update and feedback loop"
-    },
-    {
-      "id": "2026-10-22-update-card",
-      "date": "2026-10-22",
-      "title": "Updates and feedback from your phone",
-      "line": "This card shows up when a new version is ready. Tap the speech bubble to send Claude a picture and a note.",
-      "image": "/whats-new/2026-10-22-update-card.jpg",
-      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
-      "threadTitle": "iPhone update and feedback loop"
-    }
-  ]
+ "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md.",
+ "entries": [
+  {
+   "id": "2026-10-23-figure-fidelity",
+   "date": "2026-10-23",
+   "title": "Young Daddy, bub and the basement girl, rebuilt",
+   "line": "The kids and the dog in Daddy's memory places are now smooth, skinned figures with real cloth, hair and fur, so the storybook light makes their ears glow and their outlines shine. See them before and after.",
+   "image": "/whats-new/2026-10-23-figure-fidelity.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYSz4GuRXSQnywro62U9WRKG",
+   "threadTitle": "AW-STUDY-0034 - Low-Poly Figure Fidelity",
+   "tour": false,
+   "link": "/studies/figures/"
+  },
+  {
+   "id": "2026-10-23-grace-basement-4",
+   "date": "2026-10-23",
+   "title": "Feet on the stairs",
+   "line": "In Grace's basement the girl now steps down each stair, with her feet on the treads instead of through them. And if you go back up, \"I have to know\" brings you back to the start to choose again.",
+   "image": "/whats-new/2026-10-23-grace-basement-4.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+   "threadTitle": "Coffee shop office basement",
+   "tour": false,
+   "link": "/studies/basement/play.html"
+  },
+  {
+   "id": "2026-10-23-moon-base-kit",
+   "date": "2026-10-23",
+   "title": "Moon base kit: 20 pieces to walk through",
+   "line": "The first 20 of 200 pieces for the Moon shooter: hatch doors with light rings, oxygen canisters, gauges, bunks, a jump pad and more. Spin each one and see it from Abbie's eye height.",
+   "image": "/whats-new/2026-10-23-moon-base-kit.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYNtqXxwWeYiUhSxEPUykrHL",
+   "threadTitle": "Moon base FPS assets",
+   "tour": false,
+   "link": "/studies/moon-base-kit/"
+  },
+  {
+   "id": "2026-10-23-storybook-light",
+   "date": "2026-10-23",
+   "title": "Storybook light",
+   "line": "Your animated-film picture, rebuilt as live light: soft wrap light, warm rim, glowing ears and cheeks, green haze, round background blur and glow. Slide to compare with plain three.js and switch each part on or off.",
+   "image": "/whats-new/2026-10-23-storybook-light.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVpjNTFq7FTi7Mn7kjELEVf",
+   "threadTitle": "AW-STUDY-0028 - Storybook Light",
+   "tour": false,
+   "link": "/studies/storybook/"
+  },
+  {
+   "id": "2026-10-23-family-cast",
+   "date": "2026-10-23",
+   "title": "The family cast",
+   "line": "Everyone in Daddy's memory places, then and now, each with a storybook sheet and designed voices. Tap a voice, tick the one that sounds right, and send your picks.",
+   "image": "/whats-new/2026-10-23-family-cast.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1UfMgP7b9qf7Xm3W6Teeyh",
+   "threadTitle": "Family cast",
+   "tour": false,
+   "link": "/studies/family-cast/"
+  },
+  {
+   "id": "2026-10-23-school-jump-3",
+   "date": "2026-10-23",
+   "title": "The school jump: chalk targets and a secret",
+   "line": "Hold and let go to throw: hit the two chalk targets and bub wants it further, then the third one sails onto the roof. The big jump is your choice now, and there is a secret ending if you dawdle.",
+   "image": "/whats-new/2026-10-23-school-jump-3.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+   "threadTitle": "The school jump",
+   "tour": false,
+   "link": "/studies/school/play.html"
+  },
+  {
+   "id": "2026-10-23-brute-fight",
+   "date": "2026-10-23",
+   "title": "Brute Fight",
+   "line": "Two painted brutes brawl in a ranch ring. They fight on their own until you touch the screen, then you're the red one: jab, heavy, uppercut and the two-fisted hammer.",
+   "image": "/whats-new/2026-10-23-brute-fight.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYVHnrFbDNwMLBxPEstAPnP7",
+   "threadTitle": "Brute fight study",
+   "tour": false,
+   "link": "/studies/brute-fight/play.html"
+  },
+  {
+   "id": "2026-10-23-school-jump-2",
+   "date": "2026-10-23",
+   "title": "The school jump, at golden dusk",
+   "line": "Walk your dog, throw the ball until it lands on the roof, then climb the long wall side-on, one hand at a time. Slow station wagons sweep the roof with their lights. Hide behind the two big walls, because getting caught burns.",
+   "image": "/whats-new/2026-10-23-school-jump-2.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+   "threadTitle": "The school jump",
+   "tour": false,
+   "link": "/studies/school/play.html"
+  },
+  {
+   "id": "2026-10-23-grace-basement-3",
+   "date": "2026-10-23",
+   "title": "Grace's basement, warmed up",
+   "line": "The basement now warms up like an old TV. A little lamp shows you the switches, and the girl has a proper kid's face. She walks carefully down the stairs, and her thoughts appear at the bottom in pixel letters with > choices. Every memory coin gets the golden reward.",
+   "image": "/whats-new/2026-10-23-grace-basement-3.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+   "threadTitle": "Coffee shop office basement",
+   "tour": false,
+   "link": "/studies/basement/play.html"
+  },
+  {
+   "id": "2026-10-23-bruiser-postmortem",
+   "date": "2026-10-23",
+   "title": "Why the brute came out boxy",
+   "line": "The Bruiser study's post-mortem: his picture is turned about 23 degrees, every hand-built body was too thin front to back, and the five rules that fix it.",
+   "image": "/whats-new/2026-10-23-bruiser-postmortem.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY66JizXPE3ekvj2u253ZbLa",
+   "threadTitle": "AW-STUDY-0021 - Bruiser Study",
+   "tour": false,
+   "link": "/studies/bruiser/"
+  },
+  {
+   "id": "2026-10-23-photo-booth",
+   "date": "2026-10-23",
+   "title": "The café photo booth",
+   "line": "Step into the photo booth with a friend. The booth shows a pose, the bulbs count down, strike it before the flash. After four flashes your strip drops out of the slot.",
+   "image": "/whats-new/2026-10-23-photo-booth.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9",
+   "threadTitle": "AW-STUDY-0013 - The Coffee Shop",
+   "tour": false,
+   "link": "/studies/cafe/photobooth.html"
+  },
+  {
+   "id": "2026-10-23-cafe-built",
+   "date": "2026-10-23",
+   "title": "The café, built",
+   "line": "Your dance-party café is built, low poly, with every piece weighed like the real thing. The bar is shorter now, a cash register hides a brass key, and an old door behind the bar leads somewhere secret.",
+   "image": "/whats-new/2026-10-23-cafe-built.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2AeiSPdmMRPB8fib4jGGE9",
+   "threadTitle": "AW-STUDY-0013 - The Coffee Shop",
+   "tour": false,
+   "link": "/models/"
+  },
+  {
+   "id": "2026-10-23-pocket",
+   "date": "2026-10-23",
+   "title": "Abbie's pocket",
+   "line": "Things Abbie picks up go in her pocket on the top bubble, and she says what she thinks in her own small voice. The first thing to find is the café's brass key.",
+   "image": "/whats-new/2026-10-23-pocket.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+   "threadTitle": "Design lead",
+   "tour": false,
+   "link": "/sandbox"
+  },
+  {
+   "id": "2026-10-23-info-card-right",
+   "date": "2026-10-23",
+   "title": "Tap cards on the right",
+   "line": "Tap a building and its card waits on the far right without covering it. If it would, the view slides over. One short line, with the whole picture.",
+   "image": "/whats-new/2026-10-23-info-card-right.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+   "threadTitle": "Design lead",
+   "tour": false,
+   "link": "/sandbox"
+  },
+  {
+   "id": "2026-10-23-school-jump",
+   "date": "2026-10-23",
+   "title": "The school jump",
+   "line": "Climb the old school's wall at dusk, hand over hand, then sneak across the roof past the headlights. Toss all 31 tennis balls down to your dog, hang-drop to the canopy and find a gold memory coin.",
+   "image": "/whats-new/2026-10-23-school-jump.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYD4AB7bF51Lehf6y55LJh6N",
+   "threadTitle": "The school jump",
+   "tour": false,
+   "link": "/studies/school/play.html"
+  },
+  {
+   "id": "2026-10-23-grace-basement-2",
+   "date": "2026-10-23",
+   "title": "Grace's basement, for real",
+   "line": "The basement starts dark: find the right switches (there are three). Then do Grace's list on her clipboard: plug the computer in, wash and dry the screen, switch it on and put in a disk. It runs real DOS now, and every gold coin is one of Daddy's memories.",
+   "image": "/whats-new/2026-10-23-grace-basement-2.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+   "threadTitle": "Coffee shop office basement",
+   "tour": false,
+   "link": "/studies/basement/play.html"
+  },
+  {
+   "id": "2026-10-23-tile-pull",
+   "date": "2026-10-23",
+   "title": "Pull a tile off its card",
+   "line": "Every card's tile is ready before you touch it. Drag a card onto the board and it rolls like a die into place. Tap a card to turn it over and make the tile yours; Accept prints it.",
+   "image": "/whats-new/2026-10-23-tile-pull.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYH2XopfdXJ5CW8CsbawBDSw",
+   "threadTitle": "Tile pull and print",
+   "tour": true,
+   "link": "/sandbox"
+  },
+  {
+   "id": "2026-10-23-anatomy",
+   "date": "2026-10-23",
+   "title": "The body, Gray's Anatomy deep",
+   "line": "The Bodies study now has a real skeleton and the muscles front, side and back, drawn from where Gray's Anatomy says each one attaches. Tap a muscle to read it. Joints, fat, measurements and the modelers' checklist are there too.",
+   "image": "/whats-new/2026-10-23-anatomy.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY1oLKTSHLevi7mbEMgD3h3v",
+   "threadTitle": "Bodies and Creatures",
+   "tour": false,
+   "link": "/studies/#bodies-study"
+  },
+  {
+   "id": "2026-10-23-grace-basement",
+   "date": "2026-10-23",
+   "title": "Grace's basement",
+   "line": "Under the café is Aunt Grace's basement. Turn on the light, walk down the stairs and sit at her 1986 computer. Play KEYSTORM, try her disks, and find the ten gold coins.",
+   "image": "/whats-new/2026-10-23-grace-basement.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+   "threadTitle": "Coffee shop office basement",
+   "tour": false,
+   "link": "/studies/basement/play.html"
+  },
+  {
+   "id": "2026-10-23-welcome",
+   "date": "2026-10-23",
+   "title": "Welcome to Abbie’s World",
+   "line": "New players meet a tour guide: take the grand tour (the world builds itself, then a narrated tour of the live ranch), get a few chalk tips, or just play. Call it back any time from the toy box: Welcome tour.",
+   "image": "/whats-new/2026-10-23-welcome.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYW3oVJ5iRfHfiFPSwzDx1a9",
+   "threadTitle": "Welcome to Abbie's World intro",
+   "tour": true
+  },
+  {
+   "id": "2026-10-23-billing",
+   "date": "2026-10-23",
+   "title": "See every cent of your magic",
+   "line": "Signed in, your account now has a billing page: every talk, build and safety check, what it cost, and what's left this month. Support now comes in $5, $45 or $80 a month, almost all of it back as magic. The Kickstarter is gone.",
+   "image": "/whats-new/2026-10-23-front-door.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+   "threadTitle": "Front door, sign-in and donations",
+   "tour": false
+  },
+  {
+   "id": "2026-10-23-notices",
+   "date": "2026-10-23",
+   "title": "New things wait for you",
+   "line": "Each new thing now stays until you dismiss it. Dismiss shows the next one, Later keeps them all, and every one waits under Notices in Profile and settings.",
+   "image": "/whats-new/2026-10-23-notices.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+   "threadTitle": "Design lead",
+   "tour": true
+  },
+  {
+   "id": "2026-10-23-front-door",
+   "date": "2026-10-23",
+   "title": "A front door for Abbie's World",
+   "line": "abbies.world now opens on a front door: what Abbie's World is, how it works, the PG promise, Play and Sign in, and support from $5 a month. Your home-screen app still goes straight to the ranch.",
+   "image": "/whats-new/2026-10-23-front-door.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+   "threadTitle": "Front door, sign-in and donations"
+  },
+  {
+   "id": "2026-10-23-models-one-screen",
+   "date": "2026-10-23",
+   "title": "Models fit on one screen",
+   "line": "Each model now fits on one screen: a hero bar with its name, the picture and the model side by side, and your feedback in its own panel on the right that you can hide. A menu on the left folds away. Profile and settings now open from your avatar, with 20 styles that change the whole app, and Studies has a home page.",
+   "image": "/whats-new/2026-10-23-models-one-screen.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+   "threadTitle": "Design lead"
+  },
+  {
+   "id": "2026-10-23-cel-hand-cards",
+   "date": "2026-10-23",
+   "title": "Hand cards show each place's cartoon",
+   "line": "Your hand cards now show the cartoon of each place in clean cel shading with ink lines: the barn and silo, the kitchen garden, a wildflower meadow with a bee skep, and the moon dome. Tap anything in the world and its card opens right beside it.",
+   "image": "/whats-new/2026-10-23-cel-hand-cards.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
+   "threadTitle": "Sandbox v2 interface"
+  },
+  {
+   "id": "2026-10-23-low-clouds",
+   "date": "2026-10-23",
+   "title": "Clouds over the ranch",
+   "line": "Clouds now sail low over the tiles, about 20 m up, and their shadows slide across the fields beneath them.",
+   "image": "/whats-new/2026-10-23-low-clouds.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
+   "threadTitle": "Weather and clouds"
+  },
+  {
+   "id": "2026-10-23-cel-cards",
+   "date": "2026-10-23",
+   "title": "Cards in clean cel shading",
+   "line": "The cards dropped the fake wood, brass and parchment. Every card now shows the real in-game model, cel-shaded with ink lines, in a flat frame with a quiet pattern for its place: barn boards on the ranch, sprout rows in the garden, flowers in the meadow, stars on the moon. Any card that isn't ready says PRELIMINARY · idea only.",
+   "image": "/whats-new/2026-10-23-cel-cards.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
+   "threadTitle": "Card generator"
+  },
+  {
+   "id": "2026-10-23-models-browser",
+   "date": "2026-10-23",
+   "title": "All the models, and Game mode",
+   "line": "See them all shows every model as a small card: the picture in its frame and the model beside it. Switch between one at a time and all at once. The gear now has App and Game: Game puts the page under the sky with seven styles, from Gallery to Candy party.",
+   "image": "/whats-new/2026-10-23-models-browser.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+   "threadTitle": "Design lead"
+  },
+  {
+   "id": "2026-10-23-models-tighter",
+   "date": "2026-10-23",
+   "title": "Models come alive",
+   "line": "Your picture and its words sit together in one frame, and the model stands free beside it, printing itself in with a half-second laser. Labels and names are in Title Case, and Reject, Chat and Keep sit right under the pair.",
+   "image": "/whats-new/2026-10-23-models-tighter.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+   "threadTitle": "Design lead"
+  },
+  {
+   "id": "2026-10-23-moon-remaster",
+   "date": "2026-10-23",
+   "title": "The Moon from Abbie's story",
+   "line": "The Moon is grey-blue now, with craters you can see, rocks thrown out round their rims, and tracks that stay in the dust. A glass dome with an orange band, a charcoal moon buggy that drives out to the geology field, and something new: a dark meteorite in a fresh crater, glowing cyan like a slow heartbeat.",
+   "image": "/whats-new/2026-10-23-moon-remaster.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYDScAk27PpBxCDd533GMVx1",
+   "threadTitle": "Moon remaster build"
+  },
+  {
+   "id": "2026-10-23-models-new-look",
+   "date": "2026-10-23",
+   "title": "Models get the new look",
+   "line": "Model pages are simpler: AW in the corner, wordless counters, and your picture and the 3D model the same size. Numbered points show what matters on your picture and whether the model gets each one right. Reject, Chat (talk or type) and Keep sit under your right thumb. The gear switches between Default, Rome and Efficient, and the cart asks for more, with a camera. Every order starts as concept art.",
+   "image": "/whats-new/2026-10-23-models-new-look.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYWAmCZ4eJRjLcASeQDHST9i",
+   "threadTitle": "Design lead"
+  },
+  {
+   "id": "2026-10-23-weather-fronts",
+   "date": "2026-10-23",
+   "title": "Weather you can watch coming",
+   "line": "Weather now arrives in fronts: the wind picks up, clouds gather and the animals settle before the rain, then the sky breaks up as it clears. Soft clouds float around your ranch and their shadows drift across the fields. Storms grey the sky, dim the sun and light the lamps, and a gentle flash brings thunder. The light is new too: a paper sky by day, a gold sunset, an ink-blue moonlit night with lamps that come on one by one at dusk, and Earthshine with lit windows on the Moon at night.",
+   "image": "/whats-new/2026-10-23-weather-fronts.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY2o1yntAb243rZyduYiwvLR",
+   "threadTitle": "Weather and clouds"
+  },
+  {
+   "id": "2026-10-23-model-review-row",
+   "date": "2026-10-23",
+   "title": "Model pages are one review row",
+   "line": "Each model page is now your picture, the 3D model, and your notes with Reject, Adjust and Accept on the right. Name and score sit above, details below. Your verdict comes straight to Claude.",
+   "image": "/whats-new/2026-10-23-model-review-row.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa",
+   "threadTitle": "Models review"
+  },
+  {
+   "id": "2026-10-23-sign-in",
+   "date": "2026-10-23",
+   "title": "Anyone can sign in and play",
+   "line": "Sign in is in the toy box now. Anyone can sign in with Google and play the ranch as their own copy, and their worlds follow them to any device. It's free, and we ask nothing of them. Talking to the Computer needs a sign-in, and everyone's AI spending has a cap: $1 a person, $100 for all players together, and $1000 for you.",
+   "image": "/whats-new/2026-10-23-sign-in.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY6EinSPrJRb8SkhY9brXTDw",
+   "threadTitle": "Sign-in to play the ranch"
+  },
+  {
+   "id": "2026-10-23-no-masks",
+   "date": "2026-10-23",
+   "title": "The world stays in view",
+   "line": "Opening a panel no longer dims or blurs the ranch, the teleport map floats over the world on a glass tray, and teleporting is a sparkle on the pad instead of a white-out.",
+   "image": "/whats-new/2026-10-23-no-masks.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
+   "threadTitle": "Design knowledge into practice"
+  },
+  {
+   "id": "2026-10-23-sandbox-chronograph",
+   "date": "2026-10-23",
+   "title": "A glass chronograph for your ranch",
+   "line": "Time of day, pause, speed, weather and season are back in one glass dial at the top. Pin any dial you like, such as friends on the way or hungry animals, and keep your own to-dos there. The ranch suggests dials, and you can pin them or wave them off. The cards in your hand now have proper card faces.",
+   "image": "/whats-new/2026-10-23-sandbox-chronograph.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
+   "threadTitle": "Sandbox v2 interface"
+  },
+  {
+   "id": "2026-10-23-selection-ring",
+   "date": "2026-10-23",
+   "title": "A soft ring, not a box",
+   "line": "Tap a building and a warm ring now glows on the ground around it, instead of the red debug box. Only you see the ring: the people on the ranch and the voice see just the ranch.",
+   "image": "/whats-new/2026-10-23-selection-ring.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCYaXLmRmTXFs2pPXDNaugF",
+   "threadTitle": "Design knowledge into practice"
+  },
+  {
+   "id": "2026-10-23-game-sense",
+   "date": "2026-10-23",
+   "title": "The voice gets game sense",
+   "line": "Ask the voice for something that fights the game, like a timer floating in the sky, and it suggests a better version first (a bell that rings faster) and asks. Say no and it does it your way. A giant monkey stomping the town? You get it, and the townsfolk run and grumble.",
+   "image": "/whats-new/2026-10-23-game-sense.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+   "threadTitle": "Live voice world control"
+  },
+  {
+   "id": "2026-10-23-sandbox-v2",
+   "date": "2026-10-23",
+   "title": "The world, edge to edge",
+   "line": "The sandbox lost its toolbar and side panel. Three glass toys remain: a sun dial at the top (tap to pause, hold for time and weather), your tile cards at the bottom, and a toy box with everything else. No more haze over the world. Classic layout is in the toy box.",
+   "image": "/whats-new/2026-10-23-sandbox-v2.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYCQRRWRXZDTGn9wuUKKF9r9",
+   "threadTitle": "Sandbox v2 interface"
+  },
+  {
+   "id": "2026-10-23-card-forge",
+   "date": "2026-10-23",
+   "title": "Ranch cards you can hold",
+   "line": "Open a pack of 15 Ranch cards made from the game's animals and buildings. Tilt them in the light, browse the binder, and print the whole set at studio quality. Settings, Studies, Cards.",
+   "image": "/whats-new/2026-10-23-card-forge.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYHeRomr8wwHEpwnLNnNaAJp",
+   "threadTitle": "Card generator"
+  },
+  {
+   "id": "2026-10-23-ranch-rebuild",
+   "date": "2026-10-23",
+   "title": "A rebuilt ranch",
+   "line": "Every building, animal, tree, prop and plant on the ranch was redrawn as concept art and rebuilt from it. The pen sheds, the cows and the goats are all new.",
+   "image": "/whats-new/2026-10-23-ranch-rebuild.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYJJwV5vW99BgS3tVwgdy9Q5",
+   "threadTitle": "Ranch tile rebuild"
+  },
+  {
+   "id": "2026-10-23-live-voice-settings",
+   "date": "2026-10-23",
+   "title": "Pick the Computer's voice",
+   "line": "Settings → Voice opens Live voice: choose OpenAI or ElevenLabs, the voice, speed, personality, reply length and how long it waits for little ones. Safety stays locked.",
+   "image": "/whats-new/2026-10-23-live-voice-settings.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+   "threadTitle": "Live voice world control"
+  },
+  {
+   "id": "2026-10-22-voice-app-control",
+   "date": "2026-10-22",
+   "title": "The voice runs the whole app",
+   "line": "The Computer now knows the ranch, its animals and the other worlds. Ask for a real barn, more goats, winter, a new tile or the moon base, and it does it.",
+   "image": "/whats-new/2026-10-22-voice-app-control.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+   "threadTitle": "Live voice world control"
+  },
+  {
+   "id": "2026-10-22-sounds",
+   "date": "2026-10-22",
+   "title": "A sound library",
+   "line": "450 sounds for the ranch and beyond, picked and levelled by the sound engineer. Open Sounds from Settings to browse them; they start playing once storage is switched on.",
+   "image": "/whats-new/2026-10-22-sounds.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY9qGUVvGpSmdcwZSzez8qgn",
+   "threadTitle": "Sound engineer and sound browser"
+  },
+  {
+   "id": "2026-10-22-live-mode",
+   "date": "2026-10-22",
+   "title": "Talk to the world",
+   "line": "Tap the microphone and just say what you want: the Computer builds it as you talk. It only plays the game, and it keeps things PG.",
+   "image": "/whats-new/2026-10-22-live-mode.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYUCijk5kXzRSfjhVAMJMUj2",
+   "threadTitle": "Live voice world control"
+  },
+  {
+   "id": "2026-10-22-workshop",
+   "date": "2026-10-22",
+   "title": "The workshop",
+   "line": "Concept art and models fly in as they're made. Tap the factory button to see every job, its progress and the machines.",
+   "image": "/whats-new/2026-10-22-workshop.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
+   "threadTitle": "iPhone update and feedback loop"
+  },
+  {
+   "id": "2026-10-22-update-card",
+   "date": "2026-10-22",
+   "title": "Updates and feedback from your phone",
+   "line": "This card shows up when a new version is ready. Tap the speech bubble to send Claude a picture and a note.",
+   "image": "/whats-new/2026-10-22-update-card.jpg",
+   "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eY5DKGerKDqwVjwd2t5WTXHp",
+   "threadTitle": "iPhone update and feedback loop"
+  }
+ ]
 }
