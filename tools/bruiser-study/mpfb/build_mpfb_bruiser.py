@@ -1,14 +1,19 @@
 """AW-STUDY-0021: an MPFB (MakeHuman) body tuned to the bruiser, used as the anatomy reference.
 
 Run: Blender -b -P tools/bruiser-study/mpfb/build_mpfb_bruiser.py
-Writes bruiser_mpfb.glb (full body), bruiser_mpfb_lowpoly.glb (decimated, flat shaded)
-and front/side orthographic renders next to this file.
+Rigs the body with MPFB's Rigify human (toes) meta-rig, generates the Rigify rig and poses the arms
+down into the bruiser's relaxed stance. Writes bruiser_mpfb_rigged.blend (rest A-pose, Rigify
+controls), bruiser_mpfb.glb (posed, smooth), bruiser_mpfb_lowpoly.glb (posed, decimated, flat
+shaded) and front/side orthographic renders next to this file.
 """
 import math
 import os
 import bpy
+import addon_utils
+from mathutils import Matrix, Vector
 from bl_ext.blender_org.mpfb.services.humanservice import HumanService
 from bl_ext.blender_org.mpfb.services.targetservice import TargetService
+from bl_ext.blender_org.mpfb.services.rigservice import RigService
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,7 +39,17 @@ TARGETS = {
     "neck/measure-neck-circ-incr": 1.0,
     "neck/neck-scale-horiz-incr": 1.0,
     "neck/measure-neck-height-decr": 0.6,
+    # He wears shorts: smooth, closed groin, no genital geometry (it decimates into a spike).
+    "genitals/penis-length-decr": 1.0,
+    "genitals/penis-circ-decr": 1.0,
+    "genitals/penis-testicles-decr": 1.0,
+    "pelvis/bulge-decr": 1.0,
 }
+
+# Relaxed stance: arms hang about 15 degrees off vertical (his lats push them out),
+# with a slight forward bend at the elbow.
+ARM_DROP_FROM_VERTICAL = 15
+ELBOW_BEND = 12
 
 LOWPOLY_RATIO = 0.06
 
@@ -52,6 +67,58 @@ def build_body():
         TargetService.load_target(body, path, weight=w, name=os.path.basename(rel))
     body.name = "bruiser_mpfb"
     return body
+
+
+def rig_and_pose(body):
+    addon_utils.enable("rigify", default_set=True)
+    meta = HumanService.add_builtin_rig(body, "rigify.human_toes", import_weights=True)
+    rig = RigService.generate_rigify_rig(meta, name="bruiser_rig", meta_rig_action="delete")
+    bpy.context.view_layer.objects.active = rig
+    bpy.ops.object.mode_set(mode="POSE")
+    for side, sx in (("L", 1), ("R", -1)):
+        parent = rig.pose.bones.get(f"upper_arm_parent.{side}")
+        if parent is not None and "IK_FK" in parent:
+            parent["IK_FK"] = 1.0  # FK
+        a = math.radians(ARM_DROP_FROM_VERTICAL)
+        aim(rig, f"upper_arm_fk.{side}", Vector((sx * math.sin(a), 0, -math.cos(a))))
+        b = math.radians(ARM_DROP_FROM_VERTICAL - 5)
+        e = math.radians(ELBOW_BEND)
+        aim(rig, f"forearm_fk.{side}", Vector((sx * math.sin(b), -math.sin(e), -math.cos(b))))
+    bpy.ops.object.mode_set(mode="OBJECT")
+    return rig
+
+
+def aim(rig, bone_name, direction):
+    """Rotate a pose bone about its head so it points along `direction` (armature space)."""
+    pb = rig.pose.bones[bone_name]
+    bpy.context.view_layer.update()
+    head = pb.head.copy()
+    current = (pb.tail - pb.head).normalized()
+    rot = current.rotation_difference(direction.normalized()).to_matrix().to_4x4()
+    pb.matrix = Matrix.Translation(head) @ rot @ Matrix.Translation(-head) @ pb.matrix
+    bpy.context.view_layer.update()
+
+
+def posed_copy(src):
+    """Freeze the posed body into a plain mesh exactly as the rig deforms it.
+
+    MPFB stacks two armature modifiers that blend together ("Armature" and "Armature PV"),
+    so applying them one at a time is wrong; take the evaluated mesh instead. The helper mask
+    is switched off first so vertex indices (and vertex groups) still match the source.
+    """
+    mask = [m for m in src.modifiers if m.type == "MASK"]
+    for m in mask:
+        m.show_viewport = m.show_render = False
+    dg = bpy.context.evaluated_depsgraph_get()
+    mesh = bpy.data.meshes.new_from_object(src.evaluated_get(dg), preserve_all_data_layers=True, depsgraph=dg)
+    for m in mask:
+        m.show_viewport = m.show_render = True
+    obj = bpy.data.objects.new("bruiser_mpfb", mesh)
+    obj.matrix_world = src.matrix_world.copy()
+    for g in src.vertex_groups:
+        obj.vertex_groups.new(name=g.name)
+    bpy.context.scene.collection.objects.link(obj)
+    return obj
 
 
 def bake(obj):
@@ -117,8 +184,12 @@ def render(obj, name):
 
 
 clear_scene()
-body = build_body()
-bake(body)
+src = build_body()
+rig = rig_and_pose(src)
+bpy.ops.wm.save_as_mainfile(filepath=os.path.join(HERE, "bruiser_mpfb_rigged.blend"))
+body = posed_copy(src)
+src.hide_render = True
+rig.hide_render = True
 strip_helpers(body)
 for p in body.data.polygons:
     p.use_smooth = True
