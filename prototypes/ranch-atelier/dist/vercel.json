@@ -456,7 +456,18 @@
     },
     {
       "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.abbies.world"
+        }
+      ],
       "destination": "/welcome",
+      "permanent": false
+    },
+    {
+      "source": "/",
+      "destination": "/sandbox",
       "permanent": false,
       "missing": [
         {
@@ -466,6 +477,10 @@
         {
           "type": "host",
           "value": "app.abbies.world"
+        },
+        {
+          "type": "host",
+          "value": "www.abbies.world"
         }
       ]
     },
