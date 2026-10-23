@@ -31,3 +31,13 @@ test('the manifest counts down to the soccer ball', () => {
  assert.ok(ball && ball.size <= .22 && ball.town > 0 && ball.real > ball.town);
  assert.ok(rows.every(r => Number.isFinite(r.town) && Number.isFinite(r.real)));
 });
+
+test('the coffee shop anchors sit on land, kerbside and clear of the shop, for other studies', async () => {
+  const {anchors, growTown, makeLand} = await import('../abbietown/town.mjs');
+  const {readFileSync} = await import('node:fs');
+  const land = makeLand(JSON.parse(readFileSync(new URL('../abbietown/land.json', import.meta.url))));
+  const a = anchors(land, growTown(land, {charm: 1})).cafe;
+  for (const k of ['at', 'door', 'curb', 'street', 'rocketPort']) assert.ok(Number.isFinite(a[k].x + a[k].y + a[k].z), k);
+  const d = (p, q) => Math.hypot(p.x - q.x, p.y - q.y);
+  assert.ok(d(a.door, a.at) > 5 && d(a.curb, a.street) > 1 && d(a.rocketPort, a.street) < 3);
+});

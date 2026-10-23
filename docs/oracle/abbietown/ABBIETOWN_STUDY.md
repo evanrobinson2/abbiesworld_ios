@@ -109,6 +109,12 @@ the town stays the charming grown version.
   shapes only, laid over the land in a second skin that follows every hill. The map button steps off, faint, strong.
 - Privacy: homes are placed loosely on their real streets, with no house numbers or street names in the code.
 
+## Anchors for other studies
+`anchors(land, town)` in `simulations/abbietown/town.mjs` (also `window.AbbieTown.anchors` on the page) returns the coffee
+shop's `door`, `curb`, `street` (middle line, direction `along`, width) and `rocketPort` (a clear spot in the street),
+all in local metres (x east, y north, z up; three.js world X = x - W/2, Z = -(y - D/2)), and the event name. Tapping
+the shop dispatches `abbietown:cafe-door` on `window`. The anchors follow the shop, so they stay valid if it moves.
+
 ## Still to do
 
 - Where the coffee shop, Comella's and Frozen Hoagies really are on Main Street.

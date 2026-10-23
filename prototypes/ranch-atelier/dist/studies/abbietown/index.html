@@ -503,6 +503,26 @@ function growTown(land, {charm = 1, seed = ASSUMPTIONS.seed} = {}) {
 }
 function projectOn(p, x, y) { let best = Infinity, at = 0, run = 0; for (let i = 1; i < p.length; i++) { const [ax, ay] = p[i - 1], [bx, by] = p[i], dx = bx - ax, dy = by - ay, l = Math.hypot(dx, dy) || 1, t = Math.max(0, Math.min(1, ((x - ax) * dx + (y - ay) * dy) / (l * l))), d = Math.hypot(ax + dx * t - x, ay + dy * t - y); if (d < best) { best = d; at = run + t * l; } run += l; } return at; }
 
+// Named anchors for other studies (Moon Mission's opening starts at the coffee shop). Local metres: x east, y north, z up,
+// from the south-west corner of the 6.8 x 4.8 km land; three.js world = (x - W/2, z, -(y - D/2)). Angles are radians
+// counter-clockwise from east. The anchors follow the coffee shop, so they stay put if the shop moves.
+function anchors(land, town) {
+ const s = town.spots.find(p => p.id === 'cafe'), n = nearestOn(town.roads, s.x, s.y), len = Math.hypot(n.x - s.x, n.y - s.y) || 1;
+ const ux = (n.x - s.x) / len, uy = (n.y - s.y) / len, rw = roadWidth(n.road.c), at = (x, y) => ({x, y, z: land.heightAt(x, y)});
+ const along = Math.atan2(n.ty, n.tx);
+ return {
+  coords: {W: land.W, D: land.D, world: 'X = x - W/2, Y = z, Z = -(y - D/2)'},
+  cafe: {
+   at: at(s.x, s.y), // the middle of the shop
+   door: {...at(s.x + ux * 7.4, s.y + uy * 7.4), facing: Math.atan2(uy, ux)}, // the door, facing the street
+   curb: {...at(n.x - ux * rw / 2, n.y - uy * rw / 2), facing: Math.atan2(uy, ux)}, // the kerb in front of the shop
+   street: {...at(n.x, n.y), along, width: rw}, // the street's middle line there; `along` is the direction of travel one way
+   rocketPort: {...at(n.x + ux * rw * .1, n.y + uy * rw * .1), radius: rw * 1.1}, // a clear spot in the street for the launch port
+  },
+  event: 'abbietown:cafe-door', // dispatched on window with detail {id: 'cafe'} when the shop's door is tapped
+ };
+}
+
 function summary(land, town) {
  const fam = {}; for (const h of town.houses) fam[h.fam] = (fam[h.fam] || 0) + 1;
  const laneM = town.lanes.reduce((s, l) => s + polyLen(l.p), 0), roadM = town.roads.reduce((s, r) => s + polyLen(r.p), 0);
@@ -1032,6 +1052,7 @@ canvas.addEventListener('pointerdown', e => { down = [e.clientX, e.clientY]; });
 canvas.addEventListener('pointerup', e => {
  if (!down || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 6) return; const r = canvas.getBoundingClientRect();
  ndc.set((e.clientX - r.left) / r.width * 2 - 1, -(e.clientY - r.top) / r.height * 2 + 1); ray.setFromCamera(ndc, camera);
+ if (spotByID.cafe && ray.intersectObject(spotByID.cafe.g, true)[0]) window.dispatchEvent(new CustomEvent('abbietown:cafe-door', {detail: {id: 'cafe', signedIn}}));
  const hit = ray.intersectObjects(beakers, true)[0]; if (!hit) return;
  let o = hit.object; while (o && !o.userData.link) o = o.parent; if (o) location.href = o.userData.link;
 });
@@ -1089,6 +1110,7 @@ document.querySelectorAll('.place').forEach(b => b.onclick = () => { stage.scrol
 // ---------- go ----------
 buildTown(1);
 const {train, line} = placeSpots(); makePins();
+window.AbbieTown = {anchors: anchors(land, town), land, town, spots: spotByID}; // for other studies; the anchors are in simulations/abbietown/town.mjs
 { const c = spotByID.common; controls.target.set(X(c.x), 20, Z(c.y)); camera.position.set(X(c.x) + 900, 3200, Z(c.y) + 4200); }
 const lineLen = (() => { let s = 0; for (let i = 1; i < line.length; i++) s += Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); return s; })();
 function onLine(d) { d = ((d % lineLen) + lineLen) % lineLen; for (let i = 1; i < line.length; i++) { const l = Math.hypot(line[i][0] - line[i - 1][0], line[i][1] - line[i - 1][1]); if (d <= l) { const t = d / l; return [line[i - 1][0] + (line[i][0] - line[i - 1][0]) * t, line[i - 1][1] + (line[i][1] - line[i - 1][1]) * t]; } d -= l; } return line[line.length - 1]; }
