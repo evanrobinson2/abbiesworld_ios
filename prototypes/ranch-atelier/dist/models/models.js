@@ -41,52 +41,66 @@ function landing(list){
       </a>`).join('')}</div></section>`; }).join('');
 }
 
+// Verdicts go to the same inbox as the app's feedback button, tagged with the thread that owns the models review.
+const REVIEW_THREAD = 'cmsg_01USVJqCbJruSGtaP4zsE2eYAb48x2DmDDA14qSKHaFgpa';
+const VERDICT = {reject:'Rejected', adjust:'Adjust', accept:'Accepted'};
+const saved = id => { try { return JSON.parse(localStorage.getItem('model-verdict:' + id) || 'null'); } catch { return null; } };
+
 function model(list, id){
   const i = list.findIndex(m => m.id === id);
   if (i < 0){ root.innerHTML = `<p class="empty">There is no model called “${esc(id)}”. <a href="/models">See all models</a>.</p>`; return; }
   const m = list[i], prev = list[(i - 1 + list.length) % list.length], next = list[(i + 1) % list.length], st = status(m), nm = esc(m.name.toLowerCase());
   document.title = m.name + ' · Models';
   crumb.innerHTML = `<a href="/models">Models</a><span>/</span><span>${esc(m.name)}</span>`;
-  const [theta, phi] = m.orbit || [-20, 65];
-  root.innerHTML = navigator(list, m.id) + `
-  <article class="card">
-    <header class="ch">
-      <div><div class="eyebrow">${esc(m.group)}${m.subject ? ' · ' + esc(m.subject) : ''}</div><h1>${esc(m.name)}</h1></div>
+  const [theta, phi] = m.orbit || [-20, 65], v = saved(m.id);
+  const cell = (h, body) => `<section class="cell"><h2>${h}</h2>${body}</section>`;
+  root.innerHTML = `
+  <article class="card slim">
+    <header class="dbar">
+      <a class="step" href="/models/${encodeURIComponent(prev.id)}" aria-label="Previous: ${esc(prev.name)}">←</a>
+      <div class="dname"><div class="eyebrow">${esc(m.group)}${m.subject ? ' · ' + esc(m.subject) : ''}</div><h1>${esc(m.name)}</h1></div>
       <div class="headline"><span class="chip ${st}">${LABEL[st]}</span><span class="big">${pct(m.outline)}</span><span class="small">outline match</span></div>
+      <a class="step" href="/models/${encodeURIComponent(next.id)}" aria-label="Next: ${esc(next.name)}">→</a>
     </header>
-    <div class="pair">
+    <div class="row3">
       <figure class="pane"><img src="${esc(m.urls.ref)}" alt="Your reference image of the ${nm}"><figcaption>Your image</figcaption></figure>
       <figure class="pane viewer" data-src="${esc(m.urls.glb)}" data-theta="${+theta}" data-phi="${+phi}">
         <div class="stage"><canvas aria-label="Interactive 3D model of the ${nm}"></canvas><div class="msg">Loading 3D model…</div></div>
-        <figcaption><span>My 3D model · drag to turn, scroll or pinch to zoom</span><span class="btns"><button type="button" class="reset">Reset view</button><button type="button" class="motion" aria-pressed="true" hidden>Motion</button><button type="button" class="spin" aria-pressed="false">Spin</button></span></figcaption>
+        <figcaption><span>My 3D model · drag to turn</span><span class="btns"><button type="button" class="reset">Reset view</button><button type="button" class="motion" aria-pressed="true" hidden>Motion</button><button type="button" class="spin" aria-pressed="false">Spin</button></span></figcaption>
       </figure>
+      <aside class="verdict">
+        <label for="vnote">Your notes</label>
+        <textarea id="vnote" maxlength="4000" placeholder="What should change?">${esc(v?.note || '')}</textarea>
+        <button type="button" class="vb reject" data-v="reject">Reject<small>start over</small></button>
+        <button type="button" class="vb adjust" data-v="adjust">Adjust<small>use my notes</small></button>
+        <button type="button" class="vb accept" data-v="accept">Accept<small>ship it</small></button>
+        <p class="vstate" id="vstate">${v ? `${VERDICT[v.verdict]} · sent to Claude` : ''}</p>
+      </aside>
     </div>
-    <div class="grid3">
-      <section class="block">
-        <h2>How well it matches</h2>
-        ${m.urls.render || m.urls.overlay ? `<div class="thumbs">
-          ${m.urls.render ? `<figure><img src="${esc(m.urls.render)}" alt="My model rendered from your camera" loading="lazy"><figcaption>My model from your camera</figcaption></figure>` : ''}
-          ${m.urls.overlay ? `<figure><img src="${esc(m.urls.overlay)}" alt="Silhouette overlay" loading="lazy"><figcaption>Overlay: white both · <b class="k-blue">blue</b> yours only · <b class="k-red">red</b> mine only</figcaption></figure>` : ''}
-        </div>` : ''}
-        <div class="bars">${(m.scores || []).map(s => `<div class="bar"><span class="bl" title="${esc(s.help)}">${esc(s.label)}</span><span class="track"><i style="width:${Math.max(2, Math.round(s.value * 100))}%"></i></span><span class="bv">${pct(s.value)}</span></div>`).join('')}</div>
-        ${m.loss ? `<p class="score">Overall loss <b>${(+m.loss.before).toFixed(3)} → ${(+m.loss.after).toFixed(3)}</b> ${esc(m.loss.note || '')}.</p>` : ''}
-      </section>
-      <section class="block">
-        <h2>What matches</h2><ul class="ticks good">${(m.good || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-        <h2>What is off</h2><ul class="ticks off">${(m.off || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul>
-      </section>
-      <section class="block">
-        <h2>What I did</h2>
-        <ol class="steps">${(m.steps || []).map(([h, t]) => `<li><b>${esc(h)}</b> ${esc(t)}</li>`).join('')}</ol>
-      </section>
-    </div>
-    <section class="block details"><h2>Details</h2>
-      <dl>${(m.details || []).map(([k, v]) => `<dt>${esc(k)}</dt><dd>${esc(v)}</dd>`).join('')}
-        <dt>Download</dt><dd><a href="${esc(m.urls.glb)}" download="${esc(m.id)}.glb">${esc(m.id)}.glb</a></dd></dl>
-    </section>
-    <nav class="pn"><a href="/models/${encodeURIComponent(prev.id)}">← ${esc(prev.name)}</a><a href="/models">All models</a><a href="/models/${encodeURIComponent(next.id)}">${esc(next.name)} →</a></nav>
+    <footer class="dbar bottom">
+      ${m.urls.render || m.urls.overlay ? cell('Match', `<div class="minis">${m.urls.render ? `<img src="${esc(m.urls.render)}" alt="My model rendered from your camera" title="My model from your camera" loading="lazy">` : ''}${m.urls.overlay ? `<img src="${esc(m.urls.overlay)}" alt="Silhouette overlay" title="White both · blue yours only · red mine only" loading="lazy">` : ''}</div>`) : ''}
+      ${(m.scores || []).length ? cell('Scores', `<div class="bars">${m.scores.map(s => `<div class="bar"><span class="bl" title="${esc(s.help)}">${esc(s.label)}</span><span class="track"><i style="width:${Math.max(2, Math.round(s.value * 100))}%"></i></span><span class="bv">${pct(s.value)}</span></div>`).join('')}</div>${m.loss ? `<p class="score">Loss <b>${(+m.loss.before).toFixed(3)} → ${(+m.loss.after).toFixed(3)}</b></p>` : ''}`) : ''}
+      ${cell('What matches', `<ul class="ticks good">${(m.good || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul>`)}
+      ${cell('What is off', `<ul class="ticks off">${(m.off || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul>`)}
+      ${cell('What I did', `<ol class="steps">${(m.steps || []).map(([h, t]) => `<li><b>${esc(h)}</b> ${esc(t)}</li>`).join('')}</ol>`)}
+      ${cell('Details', `<dl>${(m.details || []).map(([k, val]) => `<dt>${esc(k)}</dt><dd>${esc(val)}</dd>`).join('')}<dt>File</dt><dd><a href="${esc(m.urls.glb)}" download="${esc(m.id)}.glb">${esc(m.id)}.glb</a></dd></dl>`)}
+    </footer>
   </article>`;
   mountViewer(root.querySelector('.viewer'));
+  root.querySelectorAll('.cell').forEach(c => c.addEventListener('click', e => { if (!e.target.closest('a')) c.classList.toggle('open'); }));
+  const note = root.querySelector('#vnote'), state = root.querySelector('#vstate');
+  root.querySelectorAll('.vb').forEach(b => b.addEventListener('click', async () => {
+    const verdict = b.dataset.v, text = note.value.trim();
+    if (verdict === 'adjust' && !text){ note.focus(); note.placeholder = 'Say what to change, then press Adjust'; return; }
+    try { localStorage.setItem('model-verdict:' + m.id, JSON.stringify({verdict, note: text, at: new Date().toISOString()})); } catch {}
+    state.textContent = 'Sending…';
+    const ok = await fetch('/api/feedback', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({
+      note: `[${VERDICT[verdict]}] ${m.name} (/models/${m.id})${text ? ': ' + text : ''}`, page: location.pathname, title: document.title,
+      thread: REVIEW_THREAD, threadTitle: 'Models review', viewport: `${innerWidth}x${innerHeight}@${devicePixelRatio}`})}).then(r => r.ok).catch(() => false);
+    state.textContent = ok ? `${VERDICT[verdict]} · sent to Claude` : `${VERDICT[verdict]} · saved here, not sent (try again)`;
+    root.querySelectorAll('.vb').forEach(x => x.setAttribute('aria-pressed', x === b));
+  }));
+  if (v) root.querySelector(`.vb.${v.verdict}`)?.setAttribute('aria-pressed', 'true');
 }
 
 const list = await catalogue();

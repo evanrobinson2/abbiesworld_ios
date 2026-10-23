@@ -26,14 +26,16 @@ BUILD = dict(
     average=dict(h=1.0, sh=1.0, ch=1.0, wa=1.0, be=0.0, hi=1.0, li=1.0, ne=1.0),
     heroic=dict(h=1.05, sh=1.22, ch=1.18, wa=0.96, be=0.0, hi=1.0, li=1.28, ne=1.35),
     skinny=dict(h=1.0, sh=0.88, ch=0.84, wa=0.82, be=0.0, hi=0.88, li=0.72, ne=0.85),
+    toned=dict(h=1.02, sh=1.12, ch=1.08, wa=0.92, be=0.0, hi=0.98, li=1.12, ne=1.15, tone=1.0),
     fat=dict(h=0.98, sh=1.12, ch=1.25, wa=1.45, be=1.0, hi=1.28, li=1.38, ne=1.35),
 )
 PAPER = kit.mat('PaperBody', (236, 230, 216), 0.85)
+CLOTH = kit.mat('Cloth', (176, 184, 196), 0.9)
 
 
 def params(sex, build):
     s, b = SEX[sex], BUILD[build]
-    return {k: s.get(k, 1.0) * b.get(k, 1.0) for k in ('h', 'sh', 'ch', 'wa', 'hi', 'li', 'ne', 'head')} | dict(be=b['be'], bust=s['bust'])
+    return {k: s.get(k, 1.0) * b.get(k, 1.0) for k in ('h', 'sh', 'ch', 'wa', 'hi', 'li', 'ne', 'head')} | dict(be=b['be'], bust=s['bust'], tone=b.get('tone', 0.0) * (1 - 0.35 * s['bust']))
 
 
 def torso(m, H):
@@ -47,13 +49,53 @@ def torso(m, H):
         if i in (2, 3): fw -= 0.05 * m['be'] * (1 if i == 3 else 0.7)
         r = kit.ring(rx * k, ry * kd, z * H, BASE['n'], cy=fw)
         bump = {4: 0.55, 5: 0.2}.get(i, 0.0) * m['bust']          # two bust lobes on the front of the chest rings
-        if bump:
-            front = r[:, 1] < fw
-            r[front, 1] = fw + (r[front, 1] - fw) * (1 + bump * np.exp(-((np.abs(r[front, 0]) - 0.085 * k) / 0.06) ** 2))
+        pec = {4: 0.22, 5: 0.16}.get(i, 0.0) * m['tone'] * (1 - m['bust'])           # flatter, wider pectoral shelf
+        for amt, cx, wd in ((bump, 0.085, 0.06), (pec, 0.08, 0.075)):
+            if amt:
+                front = r[:, 1] < fw
+                r[front, 1] = fw + (r[front, 1] - fw) * (1 + amt * np.exp(-((np.abs(r[front, 0]) - cx * k) / wd) ** 2))
         rings.append(r)
         meas[('crotch', 'hips', 'waist', 'belly', 'chest', 'armpit', 'shoulders', 'neck_base')[i]] = dict(z=round(z * H, 3), half_width=round(rx * k, 3), half_depth=round(ry * kd, 3), forward=round(fw, 3))
     o = kit.loft('torso', rings, PAPER, cap_start=True, cap_end=True)
+    if m['tone']:
+        abs_(rings, H)
+    briefs(rings, H)
+    if m['bust']:
+        top(rings, H)
     return o, meas
+
+
+def front_y(rings, z):
+    zs = [r[0, 2] for r in rings]; ys = [r[:, 1].min() for r in rings]
+    return float(np.interp(z, zs, ys))
+
+
+def abs_(rings, H):
+    """Six low paper plates on the belly, two columns of three, for a toned stomach."""
+    for row, zf in enumerate((0.585, 0.625, 0.665)):
+        z = zf * H; y = front_y(rings, z)
+        for sx in (-1, 1):
+            o = kit.box(f'abs_{row}{"l" if sx < 0 else "r"}', (0.05, 0.006, 0.04), (sx * 0.029, y + 0.004, z), PAPER)
+            o.rotation_euler = (0, 0, math.radians(-6 * sx)); kit.bevel(o, 0.004)
+
+
+def briefs(rings, H):
+    """Paper briefs: a band hugging the pelvis rings, a little proud of the skin."""
+    sel = [r for r in rings if r[0, 2] <= 0.548 * H]
+    top = rings[1] * [1, 1, 0] + [0, 0, 0.545 * H]
+    band = [np.c_[r[:, 0] * 1.03, r[:, 1] * 1.04, r[:, 2]] for r in sel + [top]]
+    b0 = band[0]; rx = np.abs(b0[:, 0]).max()
+    b0[:, 2] += 0.035 * H * (np.abs(b0[:, 0]) / rx) ** 2 - 0.006 * H   # brief cut: high at the hips, low at the middle
+    kit.loft('briefs', band, CLOTH, cap_start=True)
+
+
+def top(rings, H):
+    """Paper sports top: a band over the chest rings, from under the bust to the armpits."""
+    z0, z1 = 0.685 * H, 0.79 * H
+    sel = [r for r in rings if z0 <= r[0, 2] <= z1]
+    lo = rings[3] + (rings[4] - rings[3]) * ((z0 - rings[3][0, 2]) / (rings[4][0, 2] - rings[3][0, 2]))
+    band = [np.c_[r[:, 0] * 1.04, r[:, 1] * 1.05, r[:, 2]] for r in [lo] + sel]
+    kit.loft('sports_top', band, CLOTH)
 
 
 def head_neck(m, H):
@@ -75,6 +117,8 @@ def limbs(m, H):
         d = np.array([side * math.sin(a), 0, -math.cos(a)])
         p1 = p0 + d * ua * H; p2 = p1 + d * fa * H
         kit.tube(f'arm_upper_{tag}', [p0, p1], [r0, r1 * 1.05], 7, PAPER)
+        if m['tone']:  # deltoid cap over the shoulder joint
+            kit.tube(f'deltoid_{tag}', [p0 + [0, 0, 0.03], p0 + d * 0.11], [r0 * 1.32, r0 * 0.95], 7, PAPER)
         kit.tube(f'arm_lower_{tag}', [p1, p2], [r1, r2], 7, PAPER)
         hl, hw, ht = BASE['hand']; ph = p2 + d * hl * H * 0.5
         kit.tube(f'hand_{tag}', [p2, p2 + d * hl], [hw * m['li'] ** 0.5, hw * 0.6], 6, PAPER).scale = (1, 1, 1)
@@ -84,7 +128,9 @@ def limbs(m, H):
         p0 = np.array([side * hx * m['hi'], 0, hz * H]); p1 = np.array([side * hx * m['hi'] * 0.85, -0.005, (hz - th) * H])
         p2 = np.array([side * hx * m['hi'] * 0.8, 0.01, 0.045 * H])
         kit.tube(f'leg_upper_{tag}', [p0 + [0, 0, 0.03], (p0 * 0.6 + p1 * 0.4), p1], [l0 * 0.95, l0 * 0.92, l1 * 1.05], 7, PAPER)
-        kit.tube(f'leg_lower_{tag}', [p1, p1 * 0.7 + p2 * 0.3, p2], [l1, l1 * 1.08, l2], 7, PAPER)
+        top = p0 + [0, 0, 0.03]; cuff = top + (p1 - top) * 0.16
+        kit.tube(f'briefs_leg_{tag}', [top, cuff], [l0 * 1.02, l0 * 0.99], 7, CLOTH)
+        kit.tube(f'leg_lower_{tag}', [p1, p1 * 0.7 + p2 * 0.3, p2], [l1, l1 * (1.08 + 0.12 * m['tone']), l2], 7, PAPER)
         fl, fw, fh = BASE['foot']; fw *= m['li'] ** 0.4
         heel = p2 + [0, 0.03, -0.045 * H + 0.0]; toe = heel + [0, -fl, 0]
         kit.loft(f'foot_{tag}', [kit.ring(fw * 0.4, fw * 0.5, 0, 6, cx=heel[0], cy=heel[1]) + [0, 0, 0],
