@@ -18,6 +18,7 @@ function start(){
   workshop:svg('<path d="M3 21V10l5 3V10l5 3V6l8 4v11z"/><path d="M7 17h2M12 17h2M17 17h2"/>'),
   feedback:svg('<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.7A8 8 0 1 1 21 12z"/>'),
   explore:svg('<path d="M4 20V5a2 2 0 0 1 2-2h12v18H6a2 2 0 0 1-2-2z"/><path d="M8 7h6M8 11h6"/>'),
+  account:svg('<circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 4.5-6 8-6s6.5 2 8 6"/>'),
   settings:svg('<path d="M4 7h10M18 7h2M4 17h4M12 17h8"/><circle cx="16" cy="7" r="2"/><circle cx="10" cy="17" r="2"/>'),
   developer:svg('<path d="m8 8-5 4 5 4M16 8l5 4-5 4M14 4l-4 16"/>'),
   classic:svg('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M15 9v11"/>'),
@@ -65,10 +66,10 @@ function start(){
   ['talk','Talk',()=>press('#live-toggle'),'talk'],['scenes','Scenes',()=>press('#compact-scene-title')||press('#library-open')],['tiles','Tile options',()=>toggleSheet(true)],
   ['music','Music',()=>press('#app-jukebox-toggle')],['workshop','Workshop',()=>press('.aw-fab')],['feedback','Feedback',()=>press('.afb-fab')],
   null,
-  ['explore','Library',()=>press('.ex-door')],['settings','Settings',()=>press('#app-settings-toggle')],['developer','Developer',()=>press('#developer-toggle')],
+  ['explore','Library',()=>press('.ex-door')],['account','Sign in',()=>press('#account-chip')],['settings','Settings',()=>press('#app-settings-toggle')],['developer','Developer',()=>press('#developer-toggle')],
   ['classic','Classic layout',()=>{try{localStorage.setItem('sandbox-ui','v1');}catch{}location.reload();}]];
  for(const item of items){if(!item){shelf.append(make('hr'));continue;}const [icon,label,run,tone]=item;
-  const b=make('button',{type:'button'},`<span class="v2-btn v2-glass">${I[icon]}</span><span>${label}</span>`);b.setAttribute('role','menuitem');if(tone)b.dataset.tone=tone;
+  const b=make('button',{type:'button'},`<span class="v2-btn v2-glass">${I[icon]}</span><span>${label}</span>`);b.setAttribute('role','menuitem');b.dataset.item=icon;if(tone)b.dataset.tone=tone;
   b.onclick=e=>{e.stopPropagation();shelf.hidden=true;run();};shelf.append(b);}
  hold(box,{tap:()=>{closeAll('shelf');shelf.hidden=!shelf.hidden;},long:()=>{closeAll();press('#app-settings-toggle');}});
 
@@ -87,7 +88,10 @@ function start(){
  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();});
 
  // Keep in step with the v1 controls as the app builds them.
- const sync=()=>{adoptCards();chrono.sync();box.classList.toggle('busy',!!$('.aw-fab.working'));};
+ const sync=()=>{adoptCards();chrono.sync();
+  // Sign in (account.js) shows on the shelf once the site can sign people in, and says whether you are.
+  const chip=$('#account-chip'),acct=shelf.querySelector('[data-item=account]');if(acct){acct.hidden=!chip;const t=chip?.textContent||'Sign in',label=acct.lastElementChild;if(label.textContent!==t)label.textContent=t;}
+  box.classList.toggle('busy',!!$('.aw-fab.working'));};
  let queued=false;new MutationObserver(()=>{if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;sync();});}).observe(document.body,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['hidden','class','aria-pressed']});
  sync();
 }

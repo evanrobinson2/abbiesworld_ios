@@ -4,13 +4,15 @@
 //  POST /api/live-voice {preview:true, voice, speed}   the same, for one fixed hello line (settings page)
 // Only the Computer's own words come here, never anything a child said, and nothing is stored.
 // The brain, tools and guard stay on the realtime session (api/live-socket.js); this is a mouth.
-const {checkTicket}=require('../lib/live-ticket.cjs');
+const {checkTicket,ticketAccount}=require('../lib/live-ticket.cjs');
+const {account}=require('../lib/account.cjs');
+const {wallet,PRICES}=require('../lib/wallet.cjs');
 const API='https://api.elevenlabs.io';
 const MODEL='eleven_flash_v2_5'; // ElevenLabs' lowest-latency voice model
 const PREVIEW="Hi! I'm the Computer. What shall we build today?";
 const buckets=new Map();let voiceCache=null;
 
-function createHandler({fetcher=fetch,env=process.env,now=Date.now}={}){return async(req,res)=>{
+function createHandler({fetcher=fetch,env=process.env,now=Date.now,who=account,purse=wallet}={}){return async(req,res)=>{
  res.setHeader('Cache-Control','no-store');res.setHeader('X-Content-Type-Options','nosniff');
  const json=(code,body)=>{res.statusCode=code;res.setHeader('Content-Type','application/json');res.end(JSON.stringify(body));};
  const {screen,ELEVEN_VOICES,ELEVEN_VOICE_PATTERN}=await import('../simulations/live/policy.mjs');
@@ -46,6 +48,10 @@ function createHandler({fetcher=fetch,env=process.env,now=Date.now}={}){return a
  const text=preview?PREVIEW:typeof body.text==='string'?body.text.replace(/\s+/g,' ').trim().slice(0,400):'';
  if(!text)return json(400,{error:'Nothing to say.'});
  if(!screen(text,{level:'speech'}).ok)return json(422,{error:'Not said.'});
+ // Every spoken character is charged to the player first: the ticket's for a session, the cookie's for a preview.
+ const me=preview?who(req,env):ticketAccount(body.ticket);
+ if(!me)return json(401,{error:'Sign in to hear the voices.'});
+ if(!await purse().charge(me,text.length*PRICES.elevenChar))return json(402,{error:'The voice has used up its magic for now.',budget:true});
  const speed=Number.isFinite(body.speed)?Math.min(1.2,Math.max(0.7,body.speed)):1;
  try{
   const r=await fetcher(`${API}/v1/text-to-speech/${voice}/stream?output_format=pcm_24000`,{method:'POST',signal:AbortSignal.timeout(15000),
