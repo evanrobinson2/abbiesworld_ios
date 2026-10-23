@@ -1,0 +1,41 @@
+{
+  "model": "01-buggy",
+  "set": "Moon Base low-gravity FPS heroes (AW moon-heroes)",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, Attach to prompt",
+  "attach": "01-buggy/ref/trek_cut.png (cut from trek/outputs/images/moon_buggy_reference.png, top-left view)",
+  "prompt": "this four-wheeled moon buggy quad bike, the whole vehicle, empty, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+  "job_id": "99757873-2365-4d54-b309-7395ee2a9e2f",
+  "images": [
+    {
+      "file": "mj_99757873-2365-4d54-b309-7395ee2a9e2f_0.png",
+      "index": 0,
+      "source_url": "https://cdn.midjourney.com/99757873-2365-4d54-b309-7395ee2a9e2f/0_0.png",
+      "sha256": "9b8b032134ef4f8a2fa0de62605aefbc55349e0eb2f9cae70518318922a0488c"
+    },
+    {
+      "file": "mj_99757873-2365-4d54-b309-7395ee2a9e2f_1.png",
+      "index": 1,
+      "source_url": "https://cdn.midjourney.com/99757873-2365-4d54-b309-7395ee2a9e2f/0_1.png",
+      "sha256": "c36d5d834ed07b7de0dadf1deb9d24c8e591def7963f76155a36889f7985a663"
+    },
+    {
+      "file": "mj_99757873-2365-4d54-b309-7395ee2a9e2f_2.png",
+      "index": 2,
+      "source_url": "https://cdn.midjourney.com/99757873-2365-4d54-b309-7395ee2a9e2f/0_2.png",
+      "sha256": "77dac59edbf76cead374936f134fd16e96aeb13ee387b3b49e6003f528b7e667"
+    },
+    {
+      "file": "mj_99757873-2365-4d54-b309-7395ee2a9e2f_3.png",
+      "index": 3,
+      "source_url": "https://cdn.midjourney.com/99757873-2365-4d54-b309-7395ee2a9e2f/0_3.png",
+      "sha256": "f648dc9ccc127acc6aa06086e56cb108f369107ca8a4920636bf45a14fa80384"
+    }
+  ],
+  "pick": {
+    "index": 0,
+    "file": "ref.png",
+    "camera": "orthographic three-quarter, about 35 degrees turn, slightly above"
+  }
+}

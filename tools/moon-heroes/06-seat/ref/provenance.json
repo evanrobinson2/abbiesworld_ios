@@ -1,0 +1,41 @@
+{
+  "model": "06-seat",
+  "set": "Moon Base low-gravity FPS heroes (AW moon-heroes)",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, Attach to prompt",
+  "attach": "01-buggy/ref/trek_cut.png (cut from trek/outputs/images/moon_buggy_reference.png, top-left view)",
+  "prompt": "the padded saddle seat of this moon buggy, the seat alone, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+  "job_id": "343290d5-016a-4ec9-8585-e386a9250233",
+  "images": [
+    {
+      "file": "mj_343290d5-016a-4ec9-8585-e386a9250233_0.png",
+      "index": 0,
+      "source_url": "https://cdn.midjourney.com/343290d5-016a-4ec9-8585-e386a9250233/0_0.png",
+      "sha256": "69db76e1a74576621c020bdb69bcc4cd0b7163048a9527566307ba1f034dfd11"
+    },
+    {
+      "file": "mj_343290d5-016a-4ec9-8585-e386a9250233_1.png",
+      "index": 1,
+      "source_url": "https://cdn.midjourney.com/343290d5-016a-4ec9-8585-e386a9250233/0_1.png",
+      "sha256": "8e89302c0b96c5a09dd13d2707c3ecbe544f50ac9076b8f9e6645942d40c07d4"
+    },
+    {
+      "file": "mj_343290d5-016a-4ec9-8585-e386a9250233_2.png",
+      "index": 2,
+      "source_url": "https://cdn.midjourney.com/343290d5-016a-4ec9-8585-e386a9250233/0_2.png",
+      "sha256": "5bce3ee2079c06171d8e3f73d0bed42629fb98cd35f64c7790780fd917142edc"
+    },
+    {
+      "file": "mj_343290d5-016a-4ec9-8585-e386a9250233_3.png",
+      "index": 3,
+      "source_url": "https://cdn.midjourney.com/343290d5-016a-4ec9-8585-e386a9250233/0_3.png",
+      "sha256": "607b3f9ff0eb54ed24e939d826970574a057c8eece12554a2bfd4f7a5b561d21"
+    }
+  ],
+  "pick": {
+    "index": 1,
+    "file": "ref.png",
+    "camera": "orthographic three-quarter, about 35 degrees turn, slightly above"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "model": "07-handlebars",
+  "set": "Moon Base low-gravity FPS heroes (AW moon-heroes)",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2, Attach to prompt",
+  "attach": "01-buggy/ref/trek_cut.png (cut from trek/outputs/images/moon_buggy_reference.png, top-left view)",
+  "prompt": "the handlebars with grips and a small display of this moon buggy, the handlebars alone, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+  "job_id": "2ed5efee-a338-4782-b85f-92ea7f9daa45",
+  "images": [
+    {
+      "file": "mj_2ed5efee-a338-4782-b85f-92ea7f9daa45_0.png",
+      "index": 0,
+      "source_url": "https://cdn.midjourney.com/2ed5efee-a338-4782-b85f-92ea7f9daa45/0_0.png",
+      "sha256": "d1f4338c9634aca806ed46fda8fa88a7ffafa682988aa2d795e9d0ad2e07b392"
+    },
+    {
+      "file": "mj_2ed5efee-a338-4782-b85f-92ea7f9daa45_1.png",
+      "index": 1,
+      "source_url": "https://cdn.midjourney.com/2ed5efee-a338-4782-b85f-92ea7f9daa45/0_1.png",
+      "sha256": "d86c30d47926e07eb0af68166c77dce6b00664e16fbcf9d62e6b52c39e75ef5b"
+    },
+    {
+      "file": "mj_2ed5efee-a338-4782-b85f-92ea7f9daa45_2.png",
+      "index": 2,
+      "source_url": "https://cdn.midjourney.com/2ed5efee-a338-4782-b85f-92ea7f9daa45/0_2.png",
+      "sha256": "54b3e121b4e890b5ab678ced3d4ff18b3d5c9a93dcd16aa2ebbe41fc23c06f50"
+    },
+    {
+      "file": "mj_2ed5efee-a338-4782-b85f-92ea7f9daa45_3.png",
+      "index": 3,
+      "source_url": "https://cdn.midjourney.com/2ed5efee-a338-4782-b85f-92ea7f9daa45/0_3.png",
+      "sha256": "249b5fa478ebd0db69cd1f4f77912d993e83a5ea99c73c4188da6ba35ae73681"
+    }
+  ],
+  "pick": {
+    "index": 1,
+    "file": "ref.png",
+    "camera": "orthographic three-quarter, about 35 degrees turn, slightly above"
+  }
+}
