@@ -1,0 +1,35 @@
+{
+ "what_i_did": [
+  ["Kit", "Seven GLBs from one build.py: bed, stake, watering-can, and crop-sprout, crop-growing, crop-ripe and crop-thirsty. All shape numbers are in P at the top."],
+  ["Bed", "A raised bed, 1.21 x 0.91 m outside and 0.30 m planks (0.35 m to the mound tops). It has two chamfered planks a side, square corner posts standing proud of the corners, 6-sided dark iron bolts (two on each outer face of each post, and a pair mid-span on the long sides), a soil fill and six soil mounds in a 3 x 2 grid. Empties crop_slot_1..6 sit on the mound centres at z 0.245, numbered back row left to right, then front row."],
+  ["Crop kit", "Each stage is one plant in its own soil mound. The mound is the same in all four stages (same seed), with its root origin at the mound's base centre on z = 0, so the game can swap stages in place. The crop mound is 1.05 x the bed's mounds, so a crop dropped on a crop_slot covers the bed mound under it."],
+  ["Stages", "Sprout is a short stem with a seed leaf and a large upright first leaf. Growing has 7 alternate leaves on short petioles plus a crown pair. Ripe is taller, with 9 broader leaves and two gold fruits (#DEAC32) hanging in front of the stem. Thirsty is as tall as ripe but leans and nods over. Its leaves hang down with curled, nibbled edges in brown #968241, with only the top leaf still green, as on the sheet. You can tell it apart by shape as well as colour."],
+  ["Stake and can", "The stake is a 1.2 m round pole with three twine wraps, a knot and two loose tails. The can is a 10-sided zinc body with rim bands, a domed top deck with the filler hole set back, an arched top handle, a back handle, and a tapered spout with a rose and a thin stay."],
+  ["Normals", "Everything is smooth-shaded. The chamfered planks, posts, bolts and can body get a weighted-normal pass, so flat faces stay flat and the chamfers catch light. Leaves are folded along the midrib and smooth across it. Colours are flat Principled base colours with no textures. Leaf, Wilted and Rope materials are double-sided; everything else culls back faces."],
+  ["Scoring", "make_views.py cuts each piece from the 2912 px sheet and keys it against the line between the backdrop colour and the sheet's olive cast-shadow colour, which removes the shadows. The pale can has a hand-set ground line instead. score.py renders each piece with the harness lens from a direction calibrated per piece (r/view.json) and scores IoU as the harness does. The crop stages share one camera."]
+ ],
+ "good": [
+  "The bed reads like the sheet at tile size: warm plank box, posts at the corners, dark bolts, six dark mounds. IoU 0.88.",
+  "The crop stages read as a progression and swap in place: same mound and origin, and heights of 0.35 / 0.69 / 0.97 / 0.87 m.",
+  "Thirsty works without colour: the leaves hang and curl and the stem leans.",
+  "Triangle counts: crops 115 / 247 / 391 / 273 (all under 400), bed 1240, stake 458, can 416."
+ ],
+ "off": [
+  "Crop IoUs are low (0.35 to 0.42 for the leafy stages). The sheet's leaves are larger, broader and more faceted, and its plants are drawn slightly from above. The leaves are flat 10-triangle blades to stay under budget, so the masks overlap only partly. Sprout scores 0.65.",
+  "The sheet's mounds are rough, faceted heaps, peaked in the bed and flatter under the crops. These are smooth domes because the brief asks for no faceted look, and one shared shape because the stages must swap in place.",
+  "The brown #968241 renders as a pale tan under the harness's bright sun. The sheet's thirsty leaves look darker because of its painted shading.",
+  "The sheet's bed planks have knot holes and a split-cleat look at the corners. I left these out (under 3 % of the object's size).",
+  "The can's best-scoring camera is from the handle side. I used yaw 10 to keep the spout read, so IoU is 0.54. The sheet's can is also a little squatter, with a taller top handle."
+ ],
+ "rounds": [
+  {"round": 1, "change": "first build; harness default directions", "mean_iou": 0.439},
+  {"round": 2, "change": "calibrated cameras per piece, bigger leaves rolled to face the front, can top deck and bigger body", "mean_iou": 0.542},
+  {"round": 3, "change": "leaves alternate left and right like the sheet, darker wood and soil, smaller mound", "mean_iou": 0.533},
+  {"round": 4, "change": "petioles so the leaves join the stem, bigger leaves and sprout", "mean_iou": 0.555},
+  {"round": 5, "change": "thirsty leaves hang and curl, deeper green, taller can handle, ripe fruit trimmed to fit 400 tris", "mean_iou": 0.550},
+  {"round": 6, "change": "broader leaves and bigger fruit, bed resized to 1.21 x 0.91 m outside, back faces culled on solid parts; final 768 px / 48 samples", "mean_iou": 0.556}
+ ],
+ "footprint": "The old kitchen garden in the tile is simulation-assets/buildings/kitchen-garden-*.json: two plank beds on a stone footing with a trellis, 3.16 x 2.46 file units and 1.7 high. At the game's 'kitchen-garden' calibration of 2 m/unit that is 6.3 x 4.9 m, which matches the 6 x 5 m 'field' place in ranch-spaces.mjs. The garden-farm bed GF-002 is 2.67 x 1.53 x 0.43 units at 1 m/unit. The new bed is 1.21 x 0.91 x 0.35 m, the real-world size the brief asks for. That is 0.61 x 0.46 units at 2 m/unit, about a fifth of the old footprint. Scaled uniformly by 2.61 it would fill the old 3.16-unit length (3.16 x 2.38 units, aspect 1.33 against 1.28), which is what to_game.py would do for a 'mesh' target. Alternatively, a 2 x 3 or 3 x 3 grid of beds with 0.5 m paths fills the 6.3 x 4.9 m plot at true scale. This is the art director's call, since to_game.py has no entry for these pieces yet.",
+ "moving_parts": "None. The game swaps the crop stages in place on the bed's crop_slot empties.",
+ "creative_additions": "crop_slot empties in the bed GLB so the game knows where crops go. Petioles on the leaves. A thin stay from the spout to the can body. The thirsty stage also leans and nods, so it reads without colour."
+}

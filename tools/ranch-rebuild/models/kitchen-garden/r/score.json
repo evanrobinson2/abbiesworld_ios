@@ -1,0 +1,44 @@
+{
+ "bed": {
+  "iou": 0.877,
+  "triangles": 1240,
+  "yaw": -50,
+  "elev": 15
+ },
+ "stake": {
+  "iou": 0.68,
+  "triangles": 458,
+  "yaw": -20,
+  "elev": 20
+ },
+ "watering-can": {
+  "iou": 0.536,
+  "triangles": 416,
+  "yaw": 10,
+  "elev": 15
+ },
+ "crop-sprout": {
+  "iou": 0.653,
+  "triangles": 115,
+  "yaw": -10,
+  "elev": 20
+ },
+ "crop-growing": {
+  "iou": 0.379,
+  "triangles": 247,
+  "yaw": -10,
+  "elev": 20
+ },
+ "crop-ripe": {
+  "iou": 0.419,
+  "triangles": 391,
+  "yaw": -10,
+  "elev": 20
+ },
+ "crop-thirsty": {
+  "iou": 0.346,
+  "triangles": 273,
+  "yaw": -10,
+  "elev": 20
+ }
+}
