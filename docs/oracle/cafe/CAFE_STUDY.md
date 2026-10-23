@@ -327,7 +327,15 @@ Evan: "there's a computer terminal behind the counter with an old CRT and the or
   regulars.
 - **In the day:** typing the orders into the terminal is an optional job, like the others (the crew does it if
   Abbie doesn't), and a quiet-morning drill is something to do at the counter.
-- Added to the manifest's back bar as `crt_terminal`.
+- **You can actually operate it** (Evan, 07:28Z): tap the screen and the camera leans in to a working DOS-style
+  prompt on the CRT (rendered as a live texture). It has a small made-up command set: `DIR`, `CLS`, `TYPE`, `HELP`,
+  run the typing tutor, open the day's orders, look at the till tape, and a few harmless secrets to find. PG and
+  offline: it's a toy computer with nothing outside the game behind it.
+- **The manual beside it** (Evan, 07:28Z: "a book with the actual manual you can actually read"): a spiral-bound
+  1980s-style manual for our tutor. Open it and turn real pages: getting started, the home row, lessons, a
+  troubleshooting page and a dog-eared corner. We write it ourselves in that period voice, and its text is in the repo
+  (`docs/oracle/cafe/typing-tutor-manual.md` when we build it).
+- Added to the manifest's back bar as `crt_terminal` and `tutor_manual`.
 
 ### The café pets (Evan, 2026-10-23 07:26Z)
 

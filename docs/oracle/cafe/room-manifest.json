@@ -496,7 +496,16 @@
    "where": "back counter, by the till",
    "material": "plastic_beige, crt_glass (green or amber glow), keyboard_beige",
    "tier": "hero",
-   "notes": "Runs our own old-DOS-style typing tutor (style yes, expression never)"
+   "notes": "Operable: a working DOS-style prompt and our own typing tutor (style yes, expression never)"
+  },
+  {
+   "id": "tutor_manual",
+   "name": "The typing tutor manual",
+   "kind": "prop",
+   "where": "beside the computer",
+   "material": "paper_cover, spiral_wire, paper_pages",
+   "tier": "support",
+   "notes": "Opens; real pages you can read (our own text)"
   }
  ],
  "map_hex": {
