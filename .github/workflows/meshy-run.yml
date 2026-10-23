@@ -23,6 +23,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           JOBS: ${{ inputs.jobs }}
           RIG_ONLY: ${{ inputs.rig_only }}
+          MESHY_BRANCH: ${{ github.ref_name }}
         run: |
           set -eu
           if [ -z "$MESHY_API_KEY" ]; then

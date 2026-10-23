@@ -102,7 +102,7 @@ def views_for(job, tmp):
 
 def git(msg, paths):
     """Commit outputs, rebase onto the branch, then add this run's ledger entries to the branch's credits.json."""
-    br = "claude/project-thread-4a30bd"
+    br = os.environ.get("MESHY_BRANCH", "claude/project-thread-4a30bd")
     sh = lambda *a: subprocess.run(["git", *a], cwd=ROOT, capture_output=True, text=True)
     with lock:
         sh("add", "-f", *[str(p) for p in paths if Path(p) != CREDITS])
@@ -196,7 +196,7 @@ def run(job):
     textured = job.get("should_texture", True)
     n = len(views)
     body = {"ai_model": "latest", "should_texture": textured, "enable_pbr": textured,
-            "should_remesh": True, "topology": "triangle", "target_polycount": job.get("target_polycount", 30000), "symmetry_mode": "auto"}
+            "should_remesh": True, "topology": "triangle", "target_polycount": job.get("target_polycount", 30000), "symmetry_mode": job.get("symmetry_mode", "auto")}
     if kind == "multi-image-to-3d" and n >= 2:
         ep, body["image_urls"] = "/v1/multi-image-to-3d", [data_uri(v) for v in views]
     else:
