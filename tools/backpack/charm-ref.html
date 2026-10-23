@@ -1,6 +1,6 @@
 <!doctype html><meta charset=utf-8><body style="margin:0;background:#f1e7d6"><canvas id=c width=1024 height=1024 style="width:512px;height:512px"></canvas>
 <script type=module>
-import {charmModel, three} from '/simulations/backpack.mjs?v=4';
+import {charmModel, three} from '/simulations/backpack.mjs?v=5';
 const T = await three(), q = new URLSearchParams(location.search);
 const r = new T.WebGLRenderer({canvas: c, antialias: true, preserveDrawingBuffer: true}); r.setPixelRatio(1); r.setSize(1024, 1024, false);
 r.outputColorSpace = T.SRGBColorSpace; r.toneMapping = T.ACESFilmicToneMapping; r.setClearColor('#f1e7d6');

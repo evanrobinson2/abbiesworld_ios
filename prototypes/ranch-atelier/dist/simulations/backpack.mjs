@@ -70,7 +70,9 @@ export const CHARMS = [
  {id: 'all-memories', name: 'Heart', icon: '💛', quest: "Find every one of Daddy's core memories", when: s => s.coins >= CORE_MEMORIES},
  {id: 'bub', name: 'Bub', icon: '🐕', quest: 'Play fetch with bub'},
  {id: 'barista', name: 'Coffee cup', icon: '☕', quest: 'Serve your first coffee in the café'},
- {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'}
+ {id: 'rocket', name: 'Rocket', icon: '🚀', quest: 'Finish the Moon Mission'},
+ // Repeatable (Moon Mission): every three cheeses mined at the Moon kiosk wins another; up to two hang on the keychain.
+ {id: 'moon-cheese', name: 'Moon cheese', icon: '🧀', quest: 'Mine three moon cheeses at the Moon kiosk', repeat: true, hang: 2}
 ];
 
 // ---------- saved look and charms ----------
@@ -106,16 +108,26 @@ export function earnedCharms() {
  return CHARMS.filter(c => given[c.id] || (c.when && c.when(s))).map(c => c.id);
 }
 export const coinCount = () => progress().coins;
+// How many of a charm she owns (0 or 1, or the count for a repeatable one).
+export function charmCount(id) { const v = saved(), c = CHARMS.find(x => x.id === id); if (!c) return 0; if (c.repeat) return v.counts?.[id] || (v.charms?.[id] ? 1 : 0); return earnedCharms().includes(id) ? 1 : 0; }
+// What hangs on the backpack: each charm she has, a repeatable one up to its hang limit (moon cheese: two).
+export function keychain() { return earnedCharms().flatMap(id => { const c = CHARMS.find(x => x.id === id); return Array(Math.max(1, Math.min(charmCount(id), c.hang || 1))).fill(id); }); }
+// A charm she can win again (repeat: true) counts up instead; earnCharm then returns how many she has.
 export function earnCharm(id) {
- if (!CHARMS.some(c => c.id === id)) return false;
- const v = saved(); v.charms = {...(v.charms || {})}; if (v.charms[id]) return false;
+ const c = CHARMS.find(x => x.id === id); if (!c) return false;
+ const v = saved(); v.charms = {...(v.charms || {})};
+ if (c.repeat) { v.counts = {...(v.counts || {})}; v.counts[id] = (v.counts[id] || (v.charms[id] ? 1 : 0)) + 1; v.charms[id] ||= new Date().toISOString(); save(v); return v.counts[id]; }
+ if (v.charms[id]) return false;
  v.charms[id] = new Date().toISOString(); save(v); return true;
 }
 // Charms she has earned but not yet seen arrive: returns them once, then remembers they were seen.
 export function newCharms() {
  const v = saved(), seen = new Set(v.seen || []), earned = earnedCharms(), fresh = earned.filter(id => !seen.has(id));
- if (fresh.length) { v.seen = [...seen, ...fresh]; try { localStorage.setItem(STORE, JSON.stringify(v)); } catch {} }
- return fresh.map(id => CHARMS.find(c => c.id === id));
+ // A repeatable charm arrives again each time its count goes up.
+ const seenN = {...(v.seenCounts || {})}, again = earned.filter(id => CHARMS.find(c => c.id === id).repeat && seen.has(id) && charmCount(id) > (seenN[id] || 1));
+ earned.forEach(id => { if (CHARMS.find(c => c.id === id).repeat) seenN[id] = charmCount(id); });
+ if (fresh.length || again.length) { v.seen = [...seen, ...fresh]; v.seenCounts = seenN; try { localStorage.setItem(STORE, JSON.stringify(v)); } catch {} }
+ return [...fresh, ...again].map(id => CHARMS.find(c => c.id === id));
 }
 
 // A small flat backpack for the chronograph register, in her colours.
@@ -305,6 +317,12 @@ function charmMesh(id, m) {
   add(new T.BoxGeometry(.016, .022, .018), M('ink dark', '#26304f'), 'shutter window', .012, .031, 0);
   add(new T.BoxGeometry(.072, .042, .016), M('paper label', '#fbf7ee', {roughness: .8}), 'floppy label', 0, -.022, 0);
   add(new T.BoxGeometry(.05, .004, .017), M('ink label line', '#e8334f'), 'label line', 0, -.012, 0);
+ } else if (id === 'moon-cheese') { // a wedge of moon cheese: pale gold, faceted, with crater holes on its faces
+  const cheese = M('enamel moon cheese', '#f0bf2a', {roughness: .4, emissive: '#4a3200', emissiveIntensity: .12}), hole = M('enamel cheese hole', '#b97a10', {roughness: .6});
+  const w = new T.Shape(); w.moveTo(-.05, -.03); w.lineTo(.05, -.03); w.lineTo(-.05, .045); w.closePath();
+  add(new T.ExtrudeGeometry(w, {depth: .03, bevelEnabled: true, bevelThickness: .004, bevelSize: .004, bevelSegments: 1}), cheese, 'cheese wedge', 0, 0, -.015);
+  for (const [x, y, r, z] of [[-.03, -.012, .008, .0195], [-.012, .008, .006, .0195], [.012, -.016, .007, .0195], [-.035, .02, .005, .0195], [-.022, -.018, .006, -.0195], [0, -.008, .007, -.0195]]) {
+   const h = add(new T.CircleGeometry(r, 7), hole, 'cheese hole', x, y, z); if (z < 0) h.rotation.y = Math.PI; }
  } else if (id === 'tardigrade') { // a water bear: a plump segmented body on four pairs of stubby legs, in pink enamel (to match the cell game's water bear) with gold claws
   const skin = M('enamel tardigrade pink', '#f6a8c4', {roughness: .3, emissive: '#5a1f38', emissiveIntensity: .2}), fold = M('enamel tardigrade fold', '#e889ab', {roughness: .3});
   [-.03, -.01, .01, .03].forEach((x, i) => { const seg = add(new T.IcosahedronGeometry(.024, 1), i % 2 ? fold : skin, 'tardigrade segment', x, .002 * (i % 2), 0); seg.scale.set(.95, .82 - Math.abs(x) * 2, .8); });

@@ -16,7 +16,7 @@
 // opens the backpack in 3D, cleaved into two half shells, with what she carries in both halves and her charms hanging
 // from the side; the brush orb turns it to dress-up (styles and facets). The voice controller and directors
 // read what she carries through the 'abbie' information manifest, never from the DOM.
-import {glyph, look as bagLook, earnedCharms, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=4';
+import {glyph, look as bagLook, earnedCharms, keychain, newCharms, coinCount, CHARMS, setLook} from './backpack.mjs?v=5';
 const KEY = 'aw-inventory', EVENT = 'aw-inventory-change';
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
 const read = () => { try { const v = JSON.parse(localStorage.getItem(KEY) || '[]'); return Array.isArray(v) ? v : []; } catch { return []; } };
@@ -79,7 +79,7 @@ function drawPocket(bump = false) {
   p.innerHTML = `<span class="ch-g">${glyph(bagLook())}</span>${list.length > 1 ? `<span class="aw-pocket-n">${list.length}</span>` : ''}`;
   p.title = (list.length ? "Abbie's backpack: " + list.map(i => i.name).join(', ') : "Abbie's backpack") + ' (B)';
   if (bump) { p.classList.remove('bump'); void p.offsetWidth; p.classList.add('bump'); }
-  if (pop && !pop.hidden && !pop.classList.contains('dressing') && view) view.setContents({items: list, coins: coinCount(), charms: earnedCharms()});
+  if (pop && !pop.hidden && !pop.classList.contains('dressing') && view) view.setContents({items: list, coins: coinCount(), charms: keychain()});
 }
 // Tapping the backpack opens it: the 3D half shell drops in under the register, nothing behind it is dimmed or blurred.
 let view = null;
@@ -96,11 +96,11 @@ async function openPop() {
   document.body.append(pop); pop.hidden = false;
   const w = Math.min(360, innerWidth - 16), h = Math.min(520, innerHeight - r.bottom - 18);
   Object.assign(pop.style, {width: w + 'px', height: Math.max(300, h) + 'px', left: Math.max(8, Math.min(innerWidth - w - 8, r.left + r.width / 2 - w / 2)) + 'px', top: (r.bottom + 10) + 'px'});
-  const contents = {items: list, coins: coinCount(), charms: earnedCharms()};
+  const contents = {items: list, coins: coinCount(), charms: keychain()};
   pop.querySelector('.aw-bp-charmcam').hidden = !contents.charms.length;
   try {
     if (!view) {
-      const {backpackView} = await import('./backpack.mjs?v=4');
+      const {backpackView} = await import('./backpack.mjs?v=5');
       view = await backpackView(pop.querySelector('.aw-bp-stage'), {...contents, look: bagLook(), spin: false, onChange: l => setLook(l)});
     } else { view.setLook(bagLook()); view.setContents(contents); }
     if (!pop.classList.contains('dressing')) setTimeout(() => view.open(), 120);
