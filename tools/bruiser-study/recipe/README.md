@@ -1,5 +1,10 @@
 # Bruiser recipe: from words to Blender and back (AW-STUDY-0021)
 
+**Status (2026-10-23): stopped, kept on record.** The scaling route for the study moved to `tools/bruiser-study/scale/`
+(a cage of per-part rings learned from the Meshy mesh that drives Meshy's own vertices, 97-99.7% silhouette match at
+900 to 9,000 faces, language edits via `edit.py`). This MPFB route reached 0.83 and is kept for its rigged MPFB body,
+Rigify posing and the anatomy check. Results page: https://claude.ai/artifact/SdZ1jB1tQCCL3Nhn2dbi2H
+
 This folder builds the bruiser as an engineered, rigged, low-poly character from a recipe, using the Meshy model as
 the picture of "perfect". It's meant to scale: a new character is a new card, not new code.
 
