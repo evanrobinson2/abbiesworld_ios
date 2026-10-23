@@ -1,0 +1,34 @@
+{
+ "what_i_did": [
+  ["Start", "Copied models/feed-store/build.py (and run.sh, hero_iou.py; hero_check.py from family-home-charming) and kept its structure: the same 5 construction states from one STATE switch, origin at the footprint centre, door gable facing -Y, ridge along Y, and the same material names and roles. New material: Glass_Window (window panes); Timber_Ink is now teal paint for the FEED letters."],
+  ["Toy warp", "Everything is built straight from segmented vertical planks and posts, then warp() bends every vertex: walls bulge out about 5.5% at mid height and flare at the foot, the whole shed leans 3 cm per metre toward +X, and the roof is tipped so the front of the ridge sits higher than the back (the crooked roofline). Props are not warped."],
+  ["Massing", "2.3 x 2.0 m walls (W/D 1.15 vs 1.24 normal; overall bounds 3.64 x 3.66 m vs 3.15 x 3.11, both about square), lower 2.1 m eaves and a 1.35 m rise for chubbier proportions, 0.45 m eave and 0.28 m gable overhangs. The roof is a bell curve: steeper at the ridge, kicked out at the eaves."],
+  ["Roof", "Five staggered courses of 11 to 12 long, thick single shakes per slope in two teal tones, each with a ragged butt, a little skew and lift, over a dark-teal underboard; a lumpy teal ridge roll on top; a big pink ridge log that sags slightly and curls up into flared ends with pale end grain, the front one bigger."],
+  ["Walls and details", "Vertical rose planks (gable planks run up to the bell roof line), bowed chunky corner posts, tie beams with poking-out ends, knee braces, a 4-plank door with two ledges and a Z brace, a lintel log overhanging the jambs, two dark-paned windows with cross muntins and chunky sill and head on each eave wall, and a crooked wooden sign with big teal FEED letters nailed on the gable."],
+  ["Props", "Three plump tied burlap sacks left of the door, an oversized dark scoop leaning right of the door, a little spilled grain. Round lumpy olive footing stones all round."],
+  ["Views", "make_views.py writes views/: hero.png is the MJ hero with its ground band keyed out (the harness mask kept it), view_front.png is the sheet front, and the sheet's 'back' (actually the plain eave wall square-on) is used as view_side.png. The sheet's 'side' is a 3/4 view, so it is dropped; there is no back target. The sheet's ogee spire roof and arched door contradict the hero; the hero wins, so the sheet only guides the silhouette."],
+  ["Scoring", "hero_iou.py: harness hero camera vs views/hero.png. hero_check.py: same lens from the MJ hero's own direction (0.70, -0.70, 0.15), lower than the harness's."],
+  ["Game", "Triangles per state: planned 352, foundation 1300, frame 2492, roof 4198, complete 7496 (budget 9k). to_game.py feed-store-charming ran cleanly and installed into simulation-assets-charming/buildings/feed-store-*.{json,glb} with the intended roles (timber, roof, stone, cloth, fiber, food, metal, glass)."]
+ ],
+ "good": [
+  "Reads as the same feed store gone storybook: bulging rose walls, a crooked bell roof of chunky teal shakes, curled ridge-log ends, FEED sign, door with Z brace, windows, sacks and scoop.",
+  "Drop-in: same states, conventions, material names and roughly square overall footprint as the normal model.",
+  "Hero IoU from the MJ direction 0.815; harness hero 0.727 (normal model 0.730)."
+ ],
+ "off": [
+  "Harness hero IoU is 0.727: the harness camera is higher than the illustration's, so it sees much more roof.",
+  "Sheet IoUs are about 0.70: the sheet draws a much taller, narrower spire roof (front aspect 1.39 vs 1.18) and its 'back' eave view has a very tall roof slab; I followed the hero.",
+  "The hero's sculpted wood grain, sack folds and lumpy hand-made shingle edges are flat-shaded low-poly here; the sacks read a little like jars up close.",
+  "The hero has a second line 'STORE' on the sign; left out (too small to read in the tile)."
+ ],
+ "rounds": [
+  {"round": 1, "change": "First charming build from the normal builder: toy warp (bulge, flare, lean, tilted ridge), bell roof of single shakes, vertical planks, windows, curled ridge log, ridge roll, three sacks. Hero (MJ dir) 0.734, harness hero 0.695.", "mean_iou": 0.784},
+  {"round": 2, "change": "Swept proportions and the MJ camera: depth 2.0, eaves 2.1, rise 1.35, eave overhang 0.45; MJ direction set to 9 degrees up. Hero (MJ dir) 0.83, harness hero 0.732; sheet scores fell (its roof is a spire).", "mean_iou": 0.703},
+  {"round": 3, "change": "Long thin shakes (11 per course), bigger sign, greyer burlap. Hero (MJ dir) 0.827.", "mean_iou": 0.703},
+  {"round": 4, "change": "Bigger ridge roll, flared ridge ends, darker teal and scoop, taller sacks. The ends curled too high: hero (MJ dir) 0.794.", "mean_iou": 0.724},
+  {"round": 5, "change": "Ridge ends curl lower, ridge roll raised, ragged shakes (random drop, skew, lift). Hero (MJ dir) 0.816.", "mean_iou": 0.708},
+  {"round": 6, "change": "Sign moved inside the gable so FEED reads, slumpier tied sacks, pinker planks. Final render 768 px, 48 samples: front 0.697, side 0.712, harness hero 0.727, hero (MJ dir) 0.815.", "mean_iou": 0.704}
+ ],
+ "moving_parts": "None. The game poses buildings itself; the construction states are the 5 static variants in variants/.",
+ "creative_additions": "Curled flared ridge-log ends with pale end grain, lumpy ridge roll, windows on both eave walls (the hero shows one side), chubby round-topped stakes in the planned stage."
+}
