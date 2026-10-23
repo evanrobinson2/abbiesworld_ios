@@ -5,6 +5,7 @@
 import {BEATS} from './script.mjs';
 import {ZONES} from './zones.mjs';
 import {newLander, stepLander} from './lander.mjs';
+import {GAMES} from './games.mjs';
 
 export const PLAYERS = [
  {id: 'daddy', name: 'Daddy', color: '#6f9bff'},
@@ -59,6 +60,7 @@ export function createMission({players = PLAYERS, start = null} = {}) {
    case 'poll': S.cur.ci = 0; S.cur.said = new Set(); callPoll(); return true;
    case 'count': S.cur.n = st.from; S.cur.tick = 0; emit({fx: 'count', n: st.from}); S.clock = -st.from; return true;
    case 'lander': S.cur.L = newLander(S.beat + 1); S.cur.input = {thrust: 0, tilt: 0}; S.lander = S.cur.L; emit({fx: 'lander-start'}); return true;
+   case 'game': S.cur.G = GAMES[st.game](ids, S.beat + 7); S.cur.age = 0; emit({fx: 'game-start', game: st.game}); return true;
    case 'fx': emit(st.name ? {fx: st.name, ...st} : st); return false;
    case 'set': Object.assign(S.flags, st.flags); return false;
    case 'startClock': S.running = true; emit({fx: 'clock-start'}); return false;
@@ -141,11 +143,16 @@ export function createMission({players = PLAYERS, start = null} = {}) {
    c.tick += dt; while (c.tick >= 1 && c.n > 0) { c.tick -= 1; c.n--; S.clock = -c.n; emit({fx: 'count', n: c.n}); }
    if (c.n === 0) { S.clock = 0; return unlock(); }
   }
+  if (c.k === 'game') {
+   for (const k of c.G.step(dt)) emit({fx: 'speak', who: k.who, text: k.text});
+   if (c.G.done) { emit({fx: 'game-done', game: c.game}); return unlock(); }
+  }
   if (c.k === 'lander') {
    const L = c.L, calls = stepLander(L, c.input, dt); for (const k of calls) emit({fx: 'speak', who: k.who, text: k.text});
    if (L.landed) { emit({fx: 'landed', soft: L.soft, bounces: L.bounces}); return unlock(); }
   }
  }
+ function game(ev) { const c = S.cur; if (!c || c.k !== 'game') return; for (const k of c.G.input(ev) || []) emit({fx: 'speak', who: k.who, text: k.text}); }
  function skip(pl) { const c = S.cur; if (!c || c.k !== 'cutscene') return; c.skips.add(pl); if (c.skips.size >= ids.length) unlock(); }
  function fly(input) { if (S.cur && S.cur.k === 'lander') Object.assign(S.cur.input, input); }
  function lights(on) { if (S.cur && S.cur.k === 'lander') S.cur.L.lights = on; }
@@ -164,6 +171,7 @@ export function createMission({players = PLAYERS, start = null} = {}) {
     case 'fly': fly(ev); break;
     case 'lights': lights(ev.on); break;
     case 'feet': feet(ev.on); break;
+    case 'game': game(ev); break;
    }
    return this.drain();
   },
@@ -171,7 +179,7 @@ export function createMission({players = PLAYERS, start = null} = {}) {
   view() {
    const c = S.cur, b = BEATS[S.beat];
    return {beat: b && b.id, zone: b && b.zone, clock: fmtClock(S.clock), held: S.held, hat: S.hat, items: S.items, flags: S.flags, done: S.done,
-    step: c && {k: c.k, text: c.text, who: c.who, options: c.options && c.options.map(o => o.text), votes: c.votes, yes: c.yes && [...c.yes], jobs: c.k === 'jobs' ? activeJobs().map(j => ({key: j.key, owner: j.owner})) : null, n: c.n, lander: c.L}};
+    step: c && {k: c.k, text: c.text, who: c.who, options: c.options && c.options.map(o => o.text), votes: c.votes, yes: c.yes && [...c.yes], jobs: c.k === 'jobs' ? activeJobs().map(j => ({key: j.key, owner: j.owner})) : null, n: c.n, lander: c.L, game: c.k === 'game' ? {name: c.game, ...c.G.view()} : null}};
   },
  };
 }

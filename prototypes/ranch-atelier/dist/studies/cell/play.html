@@ -54,6 +54,24 @@ html,body{margin:0;height:100%;background:#0b2a24;overflow:hidden;touch-action:n
 #back{right:max(12px,env(safe-area-inset-right));top:max(12px,env(safe-area-inset-top));width:40px;height:40px;border-radius:50%;padding:0;cursor:pointer;display:grid;place-items:center}
 #back svg{width:20px;height:20px}
 /* the part picker: two or three glass lenses, each magnifying a part on Abbie's cell. Summoned, never in play. */
+#maker{left:50%;top:50%;transform:translate(-50%,-48%) scale(.9);width:min(86vw,400px);padding:12px 14px 14px;display:grid;gap:10px;opacity:0;pointer-events:none;z-index:6;transition:opacity .3s,transform .45s cubic-bezier(.2,1.4,.4,1);max-height:96dvh}
+#maker.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
+#mkSvg{width:min(54vw,38dvh,240px);aspect-ratio:6/5;justify-self:center;overflow:visible}
+#maker .row{display:flex;justify-content:center;gap:10px;align-items:center}
+#maker .row button{width:46px;height:46px;border-radius:50%;border:2px solid rgba(255,255,255,.55);background:rgba(255,255,255,.12);padding:4px;cursor:pointer;display:grid;place-items:center;transition:transform .15s,border-color .15s,background .15s}
+#maker .row button svg{width:100%;height:100%;overflow:visible}
+#maker .row button.sw{width:30px;height:30px;padding:0;background:var(--c);box-shadow:inset 0 -3px 5px rgba(0,0,0,.25),inset 0 2px 3px rgba(255,255,255,.7)}
+#maker .row button[aria-pressed=true]{border-color:#fff;background:rgba(255,255,255,.4);transform:scale(1.14);box-shadow:0 0 14px rgba(190,255,235,.8)}
+#maker .row button.sw[aria-pressed=true]{background:var(--c)}
+#maker .stats{display:flex;justify-content:center;gap:16px}
+#maker .stat{display:flex;gap:2px;align-items:center}
+#maker .stat svg{width:16px;height:16px;margin-right:3px}
+#maker .stat i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.25)}
+#maker .stat i.on{background:#bfffe9;box-shadow:0 0 6px #8ff7e8}
+#maker .go{width:78px;height:78px;border-radius:50% 50% 50% 50%/62% 62% 38% 38%;border:2px solid #fff;background:radial-gradient(circle at 35% 30%,#fff,#b6ff6a 40%,#3fae46);box-shadow:0 8px 22px rgba(0,60,30,.5),inset 0 -6px 10px rgba(0,80,30,.35);cursor:pointer;padding:0;display:grid;place-items:center}
+#maker .go:active{transform:scale(.93)}
+#maker .go svg{width:36px;height:36px}
+#maker .row button.dice{width:40px;height:40px}
 #picker{position:fixed;left:50%;top:70%;transform:translate(-50%,-50%) scale(.6);display:flex;gap:18px;z-index:6;opacity:0;pointer-events:none;transition:opacity .3s,transform .45s cubic-bezier(.2,1.4,.4,1)}
 #picker.on{opacity:1;pointer-events:auto;transform:translate(-50%,-50%) scale(1)}
 #picker button{width:min(34vw,150px);aspect-ratio:1;border-radius:50%;padding:10px;cursor:pointer;position:relative}
@@ -88,6 +106,12 @@ html,body{margin:0;height:100%;background:#0b2a24;overflow:hidden;touch-action:n
 <div id="huds"></div>
 <button id="back" class="glass" aria-label="Back to the lab"><svg viewBox="0 0 20 20"><path d="M12.5 4 6.5 10l6 6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
 <div id="picker" aria-label="Choose a part"></div>
+<div id="maker" class="glass" aria-label="Build your cell"><svg id="mkSvg" viewBox="-120 -100 240 200"><g id="mkLayer"></g></svg>
+ <div class="row" data-row="colour" role="group" aria-label="Colour"></div><div class="row" data-row="mouth" role="group" aria-label="Mouth"></div>
+ <div class="row" data-row="move" role="group" aria-label="How it swims"></div><div class="row" data-row="eyes" role="group" aria-label="Eyes"></div>
+ <div class="stats" aria-hidden="true"></div>
+ <div class="row"><button class="dice" type="button" aria-label="Surprise me"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="4"/><circle cx="9" cy="9" r="1.3" fill="#fff"/><circle cx="15" cy="15" r="1.3" fill="#fff"/><circle cx="15" cy="9" r="1.3" fill="#fff"/><circle cx="9" cy="15" r="1.3" fill="#fff"/></svg></button>
+  <button class="go" type="button" aria-label="Drop in"><svg viewBox="0 0 24 24" fill="#17612a"><path d="M12 3c3.5 4.6 6 7.8 6 11a6 6 0 0 1-12 0c0-3.2 2.5-6.4 6-11z"/></svg></button></div></div>
 <div id="win" aria-label="Off the slide"><svg class="scope" viewBox="0 0 120 200" aria-hidden="true"><path d="M20 190h80M60 190V80M60 80l30-50M84 14l18 24" stroke="#c9c2dd" stroke-width="12" stroke-linecap="round" fill="none"/><circle cx="96" cy="26" r="16" fill="#9ee8ff" stroke="#fff" stroke-width="4"/><rect x="28" y="140" width="64" height="9" rx="3" fill="#e6e1f2"/></svg><div class="glow"></div><div class="bench"></div><div class="slide"><i></i></div><div class="bear"></div></div>
 <div id="lab">
  <svg viewBox="0 0 400 700" preserveAspectRatio="xMidYMid meet" aria-label="The science lab bench">
@@ -253,6 +277,19 @@ Object.assign(LOOKS, {
  p4: {body: '#7ff0c8', deep: '#1fa37a', ink: '#0a3a2a', rim: '#ffb0e0', eye: '#062a1e', nucleus: '#dcfff2'},
 });
 const COLOURS = ['p1', 'p2', 'p3', 'p4'];
+// the creator (Evan 2:15 PM, "creator builder in spore"): eight colours, a mouth, how it swims, and eyes. The choice is
+// kept on this device and with the account (aw-cell-creation), so the next run starts as the cell you built.
+const HUES = [330, 275, 48, 160, 205, 18, 95, 0];
+const hex = (h, sat, lum) => { const a = sat * Math.min(lum, 1 - lum), f = n => { const k = (n + h / 30) % 12, c = lum - a * Math.max(-1, Math.min(k - 3, 9 - k, 1)); return Math.round(255 * c).toString(16).padStart(2, '0'); }; return '#' + f(0) + f(8) + f(4); };
+const lookOf = (h, eyes = 2) => ({body: hex(h, .95, .78), deep: hex(h, .62, .46), ink: hex(h, .6, .16), rim: hex((h + 160) % 360, 1, .8), eye: hex(h, .6, .1), nucleus: hex(h, 1, .9), eyes});
+let creation = {hue: 0, mouth: 'filter', move: 'flagellum', eyes: 2};
+try { Object.assign(creation, JSON.parse(localStorage.getItem('aw-cell-creation') || '{}')); } catch {}
+function applyCreation(C = creation) {
+ LOOKS.p1 = lookOf(HUES[C.hue], C.eyes);
+ const others = HUES.map((h, i) => i).filter(i => i !== C.hue); // rivals take other colours, spread round the wheel
+ [2, 3, 4].forEach((slot, k) => { LOOKS['p' + slot] = lookOf(HUES[others[(k * 2 + 1) % others.length]]); });
+}
+applyCreation();
 const cells = [], food = [], clouds = [], fx = [], players = [];
 let hitStop = 0, camX = 0, camY = 0, zoom = 1.4, mood = 0, time = 0, playing = false, ended = false, giant = null, shake = 0, exit = null, popT = 0;
 
@@ -278,6 +315,14 @@ function burst(x, y, r, color = '#ffffff') {
  const g = document.createElementNS(NS, 'circle'); g.setAttribute('fill', 'none'); g.setAttribute('stroke', color); fxL.append(g);
  fx.push({g, x, y, r, t: 0, life: .45});
 }
+// glints thrown out of a cell (a pop, an evolution, a win): small glass beads that fly, slow and fade
+function sparks(x, y, r, color, n = 10, life = .7) {
+ for (let i = 0; i < n; i++) {
+  const g = document.createElementNS(NS, 'circle'), a = rnd(0, TAU), v = rnd(.8, 2.2) * r * 1.6;
+  g.setAttribute('fill', Math.random() < .3 ? '#fff' : color); fxL.append(g);
+  fx.push({g, x, y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, r: r * rnd(.04, .1), t: 0, life: life * rnd(.6, 1.2), spark: true});
+ }
+}
 function puff(owner) {
  const g = document.createElementNS(NS, 'g'); cloudsL.append(g);
  g.innerHTML = [0, 1, 2, 3, 4].map(i => `<circle cx="${Math.cos(i * 1.3) * .5}" cy="${Math.sin(i * 1.3) * .5}" r=".6" fill="#c6ff5a" fill-opacity=".35"/>`).join('');
@@ -288,7 +333,7 @@ function puff(owner) {
 // ---- players: humans on their devices, rivals played by the goo -------------------------------------------------
 const hudL = $('#huds');
 function makePlayer(slot, device, bot, mouth) {
- const P = {slot, device, bot, look: COLOURS[slot], level: 0, eaten: 0, parts: new Set([mouth || (slot % 2 ? 'jaw' : 'filter')]), hand: [], focus: 0,
+ const P = {slot, device, bot, look: COLOURS[slot], level: 0, eaten: 0, parts: new Set(slot === 0 && mouth ? [mouth.mouth, mouth.move] : [slot % 2 ? 'jaw' : 'filter']), hand: [], focus: 0,
   found: new Set(), dmg: 0, stage: 'cell', ko: 0, c: null, think: {t: 0, goal: null}, won: false};
  P.hud = document.createElement('div'); P.hud.className = 'phud glass ' + ['tl', 'tr', 'bl', 'br'][slot] + (bot ? ' bot' : '');
  P.hud.innerHTML = `<span class="me" style="--c:${LOOKS[P.look].body};--d:${LOOKS[P.look].deep}"></span>` + '<span class="bead"><i></i></span>'.repeat(5) + (slot === 0 ? '<span class="coin"></span><b class="coins">0</b>' : '');
@@ -327,7 +372,7 @@ function feed(P, type, n) {
 
 function levelUp(P) {
  P.level++; P.eaten = 0; P.c.bits = [];
- burst(P.c.x, P.c.y, P.c.r * 2.2, '#fff6a8'); if (!P.bot) sound.grow();
+ burst(P.c.x, P.c.y, P.c.r * 2.2, '#fff6a8'); sparks(P.c.x, P.c.y, P.c.r * 1.4, '#ffd84a', 20, .9); if (!P.bot) sound.grow(); // a golden glint each growth step
  draw1(P);
  if (P.level === 4) { evolve(P); renderHud(P); return; }
  P.c.grow = STAGES[P.level].r;
@@ -339,7 +384,7 @@ function levelUp(P) {
  renderHud(P);
 }
 function givePart(P, p) {
- P.parts.add(p); P.found.delete(p); burst(P.c.x, P.c.y, P.c.r * 1.6, '#8ff7e8');
+ P.parts.add(p); P.found.delete(p); burst(P.c.x, P.c.y, P.c.r * 1.6, '#8ff7e8'); sparks(P.c.x, P.c.y, P.c.r, '#8ff7e8', 12);
  if (!P.bot && P.slot === 0) voice.once('part-' + p, {filter: 'A leaf mouth! Now I can munch the green stuff.', jaw: 'Chompers! Now I can eat the orange bits.', spike: 'A pointy spike. Bump things to poke them!', flagellum: 'A wiggly tail! Zoom zoom.', cilia: 'Tiny hairs all round. I can turn so fast!', poison: 'A stinky sac... dash and I leave a green cloud!'}[p]);
 }
 let pickTimer = 0, pickFor = null;
@@ -362,7 +407,7 @@ function finishEvolve(P) {
  const {x, y, heading} = P.c; P.stage = 'bear';
  P.c.view.remove(); cells.splice(cells.indexOf(P.c), 1);
  const c = makeBear(P, x, y); c.heading = heading; c.player = P; c.shield = 1.2; P.c = c;
- burst(x, y, c.r * 3, '#ffd84a'); burst(x, y, c.r * 2, '#ff8fd0'); if (!P.bot) sound.coin();
+ burst(x, y, c.r * 3, '#ffd84a'); burst(x, y, c.r * 2, '#ff8fd0'); sparks(x, y, c.r * 2, '#ffd84a', 34, 1.1); shake = Math.max(shake, .25); if (!P.bot) sound.coin();
  openExit();
  if (!P.bot) { if (P.slot === 0) voice.say("I'm a water bear! A tardigrade! Look, the edge is glowing... walk off the slide!"); }
  else if (humans().every(h => h.stage === 'cell')) voice.once('rival-bear-' + P.slot, 'Uh oh, a rival turned into a water bear! Hurry and grow!');
@@ -416,7 +461,7 @@ function damage(c, amount, from) {
  if (c.hp <= 0) popCell(c);
 }
 function popCell(c) {
- burst(c.x, c.y, c.r * 1.6, LOOKS[c.kind]?.body || '#fff'); sound.pop();
+ burst(c.x, c.y, c.r * 1.6, LOOKS[c.kind]?.body || '#fff'); sparks(c.x, c.y, c.r, LOOKS[c.kind]?.body || '#fff', 14); sound.pop();
  const n = 2 + Math.round(c.r / 12), pr = avgR();
  for (let i = 0; i < n; i++) { const f = makeFood('meat', c.x + rnd(-c.r, c.r) * .6, c.y + rnd(-c.r, c.r) * .6, pr * rnd(.3, .42)); f.vx = rnd(-60, 60); f.vy = rnd(-60, 60); }
  if (c === giant) { giant = null; makeFood('card', c.x, c.y, pr * .7, 'chomp'); makeFood('card', c.x + 20, c.y, pr * .7, 'bubble'); }
@@ -529,7 +574,7 @@ function control(dt) {
 // drop-in: a new device takes over a rival's seat, Brawlhalla style
 function takeOver(P, device) {
  P.bot = false; P.device = device; P.hud.classList.remove('bot'); P.handEl.style.display = ''; P.H.set(P.hand, P.focus);
- burst(P.c?.x || 0, P.c?.y || 0, 60, LOOKS[P.look].body); sound.grow(); renderHud(P);
+ burst(P.c?.x || 0, P.c?.y || 0, 60, LOOKS[P.look].body); sparks(P.c?.x || 0, P.c?.y || 0, 40, LOOKS[P.look].body, 16); sound.grow(); renderHud(P);
  return P;
 }
 
@@ -623,6 +668,7 @@ function win(P) {
  P.won = true; ended = true; playing = false;
  const c = P.c, a = Math.atan2(c.y, c.x); c.vx = Math.cos(a) * 60; c.vy = Math.sin(a) * 60; c.heading = a;
  sound.grow(); setTimeout(() => sound.coin(), 400);
+ for (let k = 0; k < 5; k++) setTimeout(() => { sparks(c.x, c.y, 80, ['#ffd84a', '#fff', LOOKS[P.look].body][k % 3], 22, 1.4); burst(c.x, c.y, 80 + k * 30, '#ffd84a'); }, k * 260);
  if (!P.bot) {
   voice.say(humans().length > 1 ? 'A water bear made it off the slide! We did it!' : 'I did it! I walked right off the slide!', {hold: 4000});
   setTimeout(() => winScene(P), 2200);
@@ -637,9 +683,10 @@ function winScene(P) {
  import('/simulations/backpack.mjs?v=3').then(m => m.earnCharm?.('tardigrade')).catch(() => {});
  let first = false; try { first = giveMemoryCoin('science-lab:off-the-slide', 'The science lab'); } catch {}
  setTimeout(() => voice.say((first ? "A gold coin too, one of Daddy's core memories! He showed me pond water under a microscope once. " : '') + 'And a tardigrade charm for my backpack!',
-  {choices: [{label: 'Play again', go: () => location.reload()}, {label: 'Back to the lab', go: () => leave()}]}), 900);
+  {choices: [{label: 'Again', go: () => { location.search = `?level=${level5}&again=1${again()}`; }}, ...(level5 < 5 ? [{label: 'Harder goo', go: () => { location.search = `?level=${level5 + 1}&again=1${again()}`; }}] : []), {label: 'Back to town', go: () => leave()}]}), 900);
  renderHud(players[0]);
 }
+const again = () => (Q.get('from') ? '&from=' + encodeURIComponent(Q.get('from')) : ''); // the way back to the town survives Again and Harder goo
 const leave = () => { location.href = Q.get('from') || '/town'; };
 
 // ---- drawing -----------------------------------------------------------------------------------------------------
@@ -675,7 +722,8 @@ function draw(dt) {
  for (const f of food) f.g.setAttribute('transform', `translate(${f.x.toFixed(1)} ${f.y.toFixed(1)}) rotate(${(f.type === 'card' ? Math.sin(f.spin * 3) * 15 : f.spin * 57.3).toFixed(0)}) scale(${(f.s * (f.type === 'card' || f.type === 'shell' ? 1 + .1 * Math.sin(time * 6) : 1)).toFixed(2)})`);
  const step = Math.floor(time * 12) / 12;
  for (const cl of clouds) { const k = cl.t / cl.life, s = cl.r * (.5 + .7 * Math.min(1, cl.t * 3)) * (1 + .06 * Math.sin(step * 40)); cl.g.setAttribute('transform', `translate(${cl.x.toFixed(1)} ${cl.y.toFixed(1)}) scale(${s.toFixed(1)}) rotate(${(step * 30 % 360).toFixed(0)})`); cl.g.style.opacity = (1 - k).toFixed(2); }
- for (const e of [...fx]) { e.t += dt; const k = e.t / e.life; if (k >= 1) { e.g.remove(); fx.splice(fx.indexOf(e), 1); continue; } e.g.setAttribute('cx', e.x); e.g.setAttribute('cy', e.y); e.g.setAttribute('r', (e.r * (.4 + k)).toFixed(1)); e.g.setAttribute('stroke-width', (e.r * .12 * (1 - k)).toFixed(2)); e.g.setAttribute('stroke-opacity', (1 - k).toFixed(2)); }
+ for (const e of [...fx]) { e.t += dt; const k = e.t / e.life; if (k >= 1) { e.g.remove(); fx.splice(fx.indexOf(e), 1); continue; }
+  if (e.spark) { e.x += e.vx * dt; e.y += e.vy * dt; e.vx *= .94; e.vy *= .94; e.g.setAttribute('cx', e.x.toFixed(1)); e.g.setAttribute('cy', e.y.toFixed(1)); e.g.setAttribute('r', (e.r * (1 - k * .6)).toFixed(2)); e.g.setAttribute('fill-opacity', (1 - k).toFixed(2)); continue; } e.g.setAttribute('cx', e.x); e.g.setAttribute('cy', e.y); e.g.setAttribute('r', (e.r * (.4 + k)).toFixed(1)); e.g.setAttribute('stroke-width', (e.r * .12 * (1 - k)).toFixed(2)); e.g.setAttribute('stroke-opacity', (1 - k).toFixed(2)); }
  const S = (x, y) => [(x - camX) * zoom + W / 2 + sx, (y - camY) * zoom + H / 2 + sy];
  const lenses = cells.filter(c => !c.dead && !c.bear).map(c => [...S(c.x, c.y), c.r * zoom * 1.02, c.player && !c.player.bot ? 1 : .4])
   .filter(l => l[0] > -l[2] && l[0] < W + l[2] && l[1] > -l[2] && l[1] < H + l[2]).sort((a, b) => b[2] - a[2]);
@@ -708,25 +756,50 @@ volunteer('cell-brawl', {place: 'science lab: a drop of green goo on a slide', d
 ]});
 
 // ---- the lab: five beakers of goo, the lens, and in -----------------------------------------------------------------
-function startGame(mouth) {
+function startGame(C) {
+ const mouth = C.mouth;
  playing = true; $('#huds').classList.add('on'); document.documentElement.style.setProperty('--hand-h', '84px');
  if (!input.devices.length) input.join('touch');
  const me = input.devices[0];
- makePlayer(0, me, false, mouth);
+ makePlayer(0, me, false, C);
  for (let s = 1; s < 4; s++) { const d = input.devices[s]; makePlayer(s, d || 'bot', !d); }
  populate();
- setTimeout(() => voice.say(mouth === 'jaw' ? "I'm the pink cell with chompers! Eat, grow, and bump the others off the drop." : "I'm the pink cell! Munch the green stuff, grow, and bump the others off the drop."), 500);
+ setTimeout(() => voice.say(mouth === 'jaw' ? "I'm the cell I built, with chompers! Eat, grow, and bump the others off the drop." : "I'm the cell I built! Munch the green stuff, grow, and bump the others off the drop."), 500);
  requestAnimationFrame(t => { last = t; });
 }
-function chooseMouth() {
- const box = $('#picker'); box.innerHTML = '';
- for (const p of ['filter', 'jaw']) {
-  const b = document.createElement('button'); b.className = 'glass'; b.innerHTML = partIcon(p); b.setAttribute('aria-label', p === 'filter' ? 'leaf mouth' : 'chompers'); b.dataset.part = p;
-  b.addEventListener('pointerdown', e => { e.stopPropagation(); sound.unlock(); box.classList.remove('on'); sound.grow(); startGame(p); });
-  box.append(b);
- }
- box.classList.add('on');
- voice.say('Leaves or chompers? What should my first mouth be?');
+// ---- the creator: build the cell, then drop in ---------------------------------------------------------------------
+const eyeIcon = n => `<svg viewBox="-2 -1.5 4 3"><circle r="1.15" fill="#fff" fill-opacity=".25" stroke="#fff" stroke-width=".12"/>${(n === 1 ? [[0, 0, .5]] : n === 2 ? [[.3, -.45, .32], [.3, .45, .32]] : [[.35, -.7, .24], [.5, 0, .24], [.35, .7, .24]]).map(([x, y, r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="#fff"/><circle cx="${x + r * .25}" cy="${y}" r="${r * .5}" fill="#1c2a30"/>`).join('')}</svg>`;
+const STATS = {speed: c => (c.move === 'flagellum' ? 3 : 2), turn: c => (c.move === 'cilia' ? 3 : 1) + (c.eyes === 3 ? 1 : 0), bite: c => (c.mouth === 'jaw' ? 3 : 1), graze: c => (c.mouth === 'filter' ? 3 : 1)};
+const STAT_ICON = {speed: '<path d="M3 12h14M12 6l6 6-6 6" />', turn: '<path d="M5 12a7 7 0 1 1 7 7M5 12l-2-3M5 12l3-2" />', bite: '<path d="M4 8l4 8 4-8 4 8 4-8" />', graze: '<path d="M12 21V8M12 12c-5 0-7-4-7-8 5 0 7 3 7 8zM12 15c4 0 6-3 6-6-4 0-6 2-6 6z" />'};
+async function openMaker() {
+ // a player signed in on a new device gets the cell they built before (account-keep.js fetches it), if it answers quickly
+ await Promise.race([window.AbbiesKeep?.ready, new Promise(r => setTimeout(r, 1200))]);
+ try { Object.assign(creation, JSON.parse(localStorage.getItem('aw-cell-creation') || '{}')); } catch {}
+ const box = $('#maker'), mk = $('#mkLayer'); let view = null, t = 0, running = true, mc = null;
+ const row = k => box.querySelector(`[data-row=${k}]`);
+ const build = () => {
+  applyCreation(); view?.remove(); mk.innerHTML = '';
+  view = cellView(mk, LOOKS.p1, {name: 'mk' + Math.random().toString(36).slice(2, 6)});
+  mc = {x: 0, y: 0, r: 62, heading: 0, speed: 0, parts: new Set([creation.mouth, creation.move]), hp: 1, maxHp: 1, jaw: 0, hurt: 0, bits: [], heat: 0, shield: 0, look: [200, 0]};
+ };
+ const buttons = (k, items, make) => { row(k).innerHTML = ''; for (const it of items) { const b = document.createElement('button'); b.type = 'button'; b.innerHTML = make(it); b.setAttribute('aria-pressed', String(it.on)); b.setAttribute('aria-label', it.label); b.addEventListener('pointerdown', e => { e.stopPropagation(); sound.unlock(); sound.plop(); it.set(); refresh(); }); if (it.c) { b.className = 'sw'; b.style.setProperty('--c', it.c); b.innerHTML = ''; } row(k).append(b); } };
+ const refresh = () => {
+  buttons('colour', HUES.map((h, i) => ({label: 'colour ' + (i + 1), on: creation.hue === i, c: hex(h, .95, .72), set: () => { creation.hue = i; }})), () => '');
+  buttons('mouth', ['filter', 'jaw'].map(m => ({label: m === 'filter' ? 'leaf mouth' : 'chompers', on: creation.mouth === m, set: () => { creation.mouth = m; }})), it => partIcon(it.label === 'leaf mouth' ? 'filter' : 'jaw', LOOKS.p1));
+  buttons('move', ['flagellum', 'cilia'].map(m => ({label: m === 'flagellum' ? 'tail' : 'fuzzy edge', on: creation.move === m, set: () => { creation.move = m; }})), it => partIcon(it.label === 'tail' ? 'flagellum' : 'cilia', LOOKS.p1));
+  buttons('eyes', [1, 2, 3].map(n => ({label: n + ' eyes', on: creation.eyes === n, set: () => { creation.eyes = n; }})), it => eyeIcon(+it.label[0]));
+  box.querySelector('.stats').innerHTML = Object.entries(STATS).map(([k, f]) => `<span class="stat"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">${STAT_ICON[k]}</svg>${[1, 2, 3].map(i => `<i class="${i <= f(creation) ? 'on' : ''}"></i>`).join('')}</span>`).join('');
+  build();
+ };
+ const spin = now => { if (!running) return; const dt = Math.min(.05, (now - (spin.l || now)) / 1000); spin.l = now; t += dt;
+  mc.heading = Math.sin(t * .8) * .5; mc.speed = creation.move === 'flagellum' ? 70 : 40; mc.jaw = .5 + .5 * Math.sin(t * 2.2); mc.look = [Math.cos(t) * 200, Math.sin(t * 1.3) * 120];
+  view.draw(mc, t, dt); requestAnimationFrame(spin); };
+ box.querySelector('.dice').onpointerdown = e => { e.stopPropagation(); sound.unlock(); sound.pop(); creation = {hue: Math.floor(Math.random() * 8), mouth: Math.random() < .5 ? 'jaw' : 'filter', move: Math.random() < .5 ? 'cilia' : 'flagellum', eyes: 1 + Math.floor(Math.random() * 3)}; refresh(); };
+ box.querySelector('.go').onpointerdown = e => { e.stopPropagation(); sound.unlock(); running = false; box.classList.remove('on'); sound.grow();
+  try { localStorage.setItem('aw-cell-creation', JSON.stringify(creation)); window.AbbiesKeep?.keep(); } catch {}
+  applyCreation(); setTimeout(() => { view.remove(); startGame(creation); }, 250); };
+ refresh(); box.classList.add('on'); requestAnimationFrame(spin);
+ voice.say('Let\'s build me! Pick my colour, my mouth, how I swim, and my eyes.', {hold: 5000});
 }
 function openLens() {
  const ring = $('#lensRing'), cx = W / 2, cy = H / 2, R = Math.hypot(W, H) / 2 + 40;
@@ -736,7 +809,7 @@ function openLens() {
   const k = Math.min(1, (now - t0) / 1300), e = 1 - (1 - k) ** 3, r = 10 + e * R;
   lc.setAttribute('r', r); lc.setAttribute('stroke-width', 10 + 20 * e);
   lab.style.clipPath = `path(evenodd, "M0 0H${W}V${H}H0Z M${cx - r} ${cy}a${r} ${r} 0 1 0 ${2 * r} 0a${r} ${r} 0 1 0 ${-2 * r} 0Z")`;
-  if (k < 1) requestAnimationFrame(grow); else { lab.classList.add('gone'); ring.innerHTML = ''; chooseMouth(); }
+  if (k < 1) requestAnimationFrame(grow); else { lab.classList.add('gone'); ring.innerHTML = ''; openMaker(); }
  };
  requestAnimationFrame(grow);
 }
@@ -750,10 +823,11 @@ document.querySelectorAll('.beaker').forEach(bk => bk.addEventListener('pointerd
 for (const b of document.querySelectorAll('.bub')) b.animate([{transform: 'translateY(0)', opacity: 1}, {transform: 'translateY(-40px)', opacity: 0}], {duration: 1200 + Math.random() * 900, iterations: Infinity, delay: Math.random() * 900});
 $('#back').addEventListener('pointerdown', e => { e.stopPropagation(); leave(); });
 requestAnimationFrame(loop);
-if (Q.has('play')) { $('#lab').classList.add('gone'); startGame(Q.get('play') === 'jaw' ? 'jaw' : 'filter'); }
+if (Q.has('play')) { $('#lab').classList.add('gone'); creation.mouth = Q.get('play') === 'jaw' ? 'jaw' : 'filter'; startGame(creation); }
+else if (Q.has('again')) { $('#lab').classList.add('gone'); openMaker(); } // the destiny loop: from the win straight back to the creator
 else voice.say('Five beakers of strange green goo... the darker ones are bubbling like crazy. Which one should I look at?', {hold: 7000});
 window.__cell = {get time() { return time; }, get exit() { return exit; }, get ended() { return ended; }, players, cells, food, levelUp, evolve, playCard, draw1, win, ringOut, startGame,
- pick: p => document.querySelector(`#picker [data-part="${p}"]`)?.dispatchEvent(new PointerEvent('pointerdown', {bubbles: true}))};
+ pick: p => document.querySelector(`#picker [data-part="${p}"]`)?.dispatchEvent(new PointerEvent('pointerdown', {bubbles: true})), openMaker, get creation() { return creation; }};
 </script>
 </body>
 </html>

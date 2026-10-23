@@ -159,3 +159,10 @@ the shop dispatches `abbietown:cafe-door` on `window`. The anchors follow the sh
 - Dress houses from the manifest; open the coffee shop into the café study's room and basement; put the school jump
   in Muraco; a first-person walk at street level.
 - The meta layer: the school bell, the train horn, music by the centre.
+
+## The town as a hub (entrances and the stage)
+The town is the in-game hub the café, basement, science lab and Moon Mission plug into.
+- `simulations/abbietown/entrances.mjs`: `ENTRANCES`, keyed by the gate ids of `simulations/worlds/worlds.mjs` (`town:cafe-door`, `town:cafe-cellar`, `town:lab-door`, `town:truck`, `town:launch`, `town:school-door`, `town:ranch-gate`). Each has a kind (`door`, `ride`, or `stage`, which plays inside the town), a region, a scene, a url, what it needs, and its owner.
+- Coming back: a game opened from the town gets `?from=<url>`; the url is `/town?at=<gate id>`, and the town flies to that gate's scene. The older `?from=cafe` also lands Downtown.
+- `window.AbbieTown`: `entrances`, `go(gate, state)`, `scenes`, `enterScene(id, {look, fov, dist, azimuth, pitch, lock})`, `exitScene()`, `registerScene({id, region, anchor, facing, bounds, look})` (region null parks it off-map), `mount(id, {onFrame, onExit})` returning `{group, setMood, dispose}`, and `stage` (THREE, scene, camera, controls, renderer, clock, dioGroup, farGroup, tiles with spots, `frame(fn)`, `flyTo`, `setLook`, `hideChrome`). Events: `abbietown:scene-enter`, `abbietown:scene-exit`, `abbietown:enter`, `abbietown:cafe-door`.
+- Scenes on the tiles: `cafe-curb`, `lab-door`, `abbie-kitchen`, `treehouse`, `anis-kitchen`, `launch-pad`, `school-door`, and `dio-<region>`.

@@ -5,6 +5,7 @@ import {readFileSync} from 'node:fs';
 import {createMission, PLAYERS, fmtClock} from '../moonmission/mission.mjs';
 import {BEATS} from '../moonmission/script.mjs';
 import {ZONES, REGIONS, hexFlower, regionAt, resolveZones, startCoordinate} from '../moonmission/zones.mjs';
+import {botMoves} from '../moonmission/games.mjs';
 import {newLander, stepLander, SOFT} from '../moonmission/lander.mjs';
 import {makeLand, growTown, anchors} from '../abbietown/town.mjs';
 
@@ -18,10 +19,17 @@ function play(m, {maxS = 4000, choice = () => 0, onFx = () => {}} = {}) {
   else if (st.k === 'accept') for (const p of PLAYERS) push(m.dispatch({type: 'press', player: p.id, key: 'yes'}));
   else if (st.k === 'jobs') for (const j of st.jobs) push(m.dispatch({type: 'press', player: j.owner === 'any' ? 'daddy' : j.owner, key: j.key}));
   else if (st.k === 'poll') for (const p of PLAYERS) push(m.dispatch({type: 'press', player: p.id, key: 'go'}));
+  else if (st.k === 'game') for (const e of botMoves(st.game)) push(m.dispatch({type: 'game', ...e}));
   else if (st.k === 'lander') { const L = st.lander; m.dispatch({type: 'lights', on: true}); m.dispatch({type: 'feet', on: true}); m.dispatch({type: 'fly', thrust: L.vy < -2 && L.alt < 60 ? 1 : L.vy < -5 ? .8 : 0, tilt: 0}); }
  }
  return out;
 }
+
+test('the four moon-base games are played to the end by a bot family', () => {
+ const m = createMission(), fx = play(m), done = fx.filter(e => e.fx === 'game-done').map(e => e.game);
+ assert.deepEqual(done, ['wire', 'zapper', 'harmonizer', 'buggy']);
+ for (const id of ['airlock-badge', 'gem-shard', 'star-seed']) assert.ok(m.state.items.some(i => i.id === id), id);
+});
 
 test('Part 1 plays through from the black truck to the Moon base pad', () => {
  const m = createMission(), fx = play(m);

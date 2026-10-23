@@ -128,3 +128,18 @@ Speedups for the next game:
 - `tools/minigame-test/cell-flow.cjs` plays lab to win by game state, with a second keyboard player dropping in. Copy it.
 - Start from the Oracle identity records (Spore, Smash, Brawlhalla) for the HUD table before drawing anything.
 - A `tools/merge-json-entries.mjs` helper for the two shared JSON files.
+
+## Round 3: the creator and the full loop (Evan, 2026-10-23 3:15 PM, production-ready goal 1)
+- **Creator** (`openMaker` in `play.html`): after the lens opens, the player builds their cell in a glass panel with a live
+  preview: eight colours, a mouth (leaf or chompers, required), how it swims (tail or fuzzy edge), one to three eyes, and
+  three-dot stats (speed, turn, bite, graze). A dice button surprises them. It follows the Spore study
+  (`docs/oracle/spore/SPORE_CREATOR_STUDY.md`): mouth required, eyes optional, paint never changes performance, make
+  something cool in three taps. Style only; no Spore expression is used.
+- **Kept**: the creation is saved as `aw-cell-creation` on the device and, when signed in, with the account
+  (`account-keep.js`, `api/me.js`), so the next run, or a new device, starts as the cell they built.
+- **Loop**: lab beaker, creator, slide (eat and defend, a part each growth step), evolve to a tardigrade, walk off the slide,
+  win (charm and coin), then Again, Harder goo (next beaker) or Back to town. Again and Harder skip the lab and land in the creator.
+- **Effects**: glass-bead glints on every pop, growth step, evolution (with a shake) and win; rings as before.
+- **Still missing** (honest list): the mate-call way into the editor, drag-to-place and scale of parts (the creator picks
+  from fixed choices), paint patterns, a complexity "wobble" meter (there is no budget yet), the escape-timeline diet,
+  and sharing a creature. Part cards at each growth step are still the older picker.
