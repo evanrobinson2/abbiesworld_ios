@@ -106,6 +106,16 @@ def do_rig(job, out, prov, tid, rig, rig_credits):
     jid = job["id"]
     if rig_credits:
         spend(rig["credits"], f"{jid} rig")
+    if prov["tasks"][0].get("params", {}).get("should_remesh") is not True:
+        spend(5, f"{jid} remesh")
+        mb = {"input_task_id": tid, "target_formats": ["glb"], "topology": "triangle", "target_polycount": 30000}
+        mid = call("POST", "/v1/remesh", mb)["result"]
+        prov["tasks"].append({"stage": "remesh", "task_id": mid, "credits": 5, "params": mb})
+        prov["credits"] += 5
+        (out / "provenance.json").write_text(json.dumps(prov, indent=1))
+        mr = poll("/v1/remesh", mid, jid + " remesh")
+        fetch((mr.get("model_urls") or {})["glb"], out / f"{jid}_remesh30k.glb")
+        tid = mid
     rb = {"input_task_id": tid, "height_meters": rig.get("height_meters", 1.7)}
     rid = call("POST", "/v1/rigging", rb)["result"]
     prov["tasks"].append({"stage": "rig", "task_id": rid, "credits": rig["credits"], "params": rb})
@@ -136,7 +146,7 @@ def run(job):
     textured = job.get("should_texture", True)
     n = len(views)
     body = {"ai_model": "latest", "should_texture": textured, "enable_pbr": textured,
-            "topology": "triangle", "target_polycount": 12000, "symmetry_mode": "auto"}
+            "should_remesh": True, "topology": "triangle", "target_polycount": 30000, "symmetry_mode": "auto"}
     if kind == "multi-image-to-3d" and n >= 2:
         ep, body["image_urls"] = "/v1/multi-image-to-3d", [data_uri(v) for v in views]
     else:
@@ -178,6 +188,7 @@ if __name__ == "__main__":
             job = queue[i]; out = ROOT / job["save_to"]
             prov = json.loads((out / "provenance.json").read_text())
             tid = prov["tasks"][0]["task_id"]
+            prov["tasks"] = prov["tasks"][:1]; prov["credits"] = prov["tasks"][0]["credits"]
             charged = any(t["stage"] == "rig" for t in prov["tasks"])
             try:
                 do_rig(job, out, prov, tid, job["then"]["rigging"], rig_credits=True)
