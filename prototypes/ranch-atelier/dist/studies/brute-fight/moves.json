@@ -3,79 +3,103 @@
  "clips": {
   "idle": {
    "loop": true,
-   "length": 1.1
+   "length": 1.1,
+   "peak": 0.55
   },
   "walk_fwd": {
    "loop": true,
-   "length": 0.8
+   "length": 0.8,
+   "peak": 0.2
   },
   "walk_back": {
    "loop": true,
-   "length": 0.8
+   "length": 0.8,
+   "peak": 0.2
   },
   "jump": {
    "loop": false,
-   "length": 0.95
+   "length": 0.95,
+   "peak": 0.12
   },
   "block": {
    "loop": false,
-   "length": 0.5
+   "length": 0.5,
+   "peak": 0.12
   },
   "jab": {
    "loop": false,
-   "length": 0.45
+   "length": 0.45,
+   "peak": 0.06
   },
   "heavy": {
    "loop": false,
-   "length": 0.82
+   "length": 0.82,
+   "peak": 0.18
   },
   "uppercut": {
    "loop": false,
-   "length": 0.82
+   "length": 0.82,
+   "peak": 0.16
   },
   "axe": {
    "loop": false,
-   "length": 1.12
+   "length": 1.12,
+   "peak": 0.32
   },
   "hit_jab": {
    "loop": false,
-   "length": 0.45
+   "length": 0.45,
+   "peak": 0.07
   },
   "hit_heavy": {
    "loop": false,
-   "length": 0.72
+   "length": 0.72,
+   "peak": 0.1
   },
   "hit_uppercut": {
    "loop": false,
-   "length": 0.92
+   "length": 0.92,
+   "peak": 0.1
   },
   "hit_axe": {
    "loop": false,
-   "length": 1.1
+   "length": 1.1,
+   "peak": 0.1
   },
   "block_hit": {
    "loop": false,
-   "length": 0.35
+   "length": 0.35,
+   "peak": 0.07
   },
   "block_heavy": {
    "loop": false,
-   "length": 0.6
+   "length": 0.6,
+   "peak": 0.1
+  },
+  "block_overhead": {
+   "loop": false,
+   "length": 0.65,
+   "peak": 0.1
   },
   "hurt": {
    "loop": false,
-   "length": 0.5
+   "length": 0.5,
+   "peak": 0.08
   },
   "fall": {
    "loop": false,
-   "length": 1.3
+   "length": 1.3,
+   "peak": 0.14
   },
   "getup": {
    "loop": false,
-   "length": 1.25
+   "length": 1.25,
+   "peak": 0.4
   },
   "victory": {
    "loop": true,
-   "length": 2.0
+   "length": 2.0,
+   "peak": 0.5
   }
  },
  "moves": {
@@ -108,7 +132,7 @@
    "reach": 1.4,
    "damage": 22,
    "react": "hit_axe",
-   "blocked": "block_heavy",
+   "blocked": "block_overhead",
    "push": 0.25,
    "knockdown": true
   }
