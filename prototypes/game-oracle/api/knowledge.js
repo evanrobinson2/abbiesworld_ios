@@ -7,7 +7,7 @@ export default function handler(req,res){
  res.setHeader('Access-Control-Allow-Origin','*');res.setHeader('Cache-Control','public, s-maxage=600');
  if(req.method!=='GET')return res.status(405).json({error:'GET only'});
  const p=new URL(req.url,'https://oracle.invalid').searchParams;
- for(const k of p.keys())if(!['q','kinds','limit','identity'].includes(k))return res.status(400).json({error:'Unknown parameter: '+k});
+ for(const k of p.keys())if(!k.startsWith('_vercel')&&!['q','kinds','limit','identity'].includes(k))return res.status(400).json({error:'Unknown parameter: '+k});
  if(p.has('identity')){const r=getIdentity(p.get('identity'));return res.status(r?200:404).json(r||{error:'No identity record or Steam profile for that game yet.'});}
  const kinds=p.has('kinds')?p.get('kinds').split(','):KINDS;
  if(kinds.some(k=>!KINDS.includes(k)))return res.status(400).json({error:'kinds must be from '+KINDS.join(', ')});

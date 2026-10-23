@@ -31,3 +31,7 @@ diegetic, spatial, meta, overlay and none, plus HUD share), art, audio, a lesson
 review. `python study_games.py` writes them into the profiles; then `node sync-repo-data.mjs` in
 prototypes/game-oracle. Values are estimates from public knowledge, marked with their confidence; games released
 too recently to know are marked "needs play session".
+
+`owned_notes.py` (added overnight 2026-10-23) studies the games in the owned snapshot that aren't installed, in
+waves ordered by what they can teach Abbie's World. Those profiles carry `study.set: "owned"` and `installed: false`.
+The Oracle shows any profile as a page at `/game?id=<appid or slug>`.

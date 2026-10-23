@@ -1,0 +1,70 @@
+{
+  "appid": 281990,
+  "name": "Stellaris",
+  "store_url": "https://store.steampowered.com/app/281990/",
+  "genres": [
+    "Strategy",
+    "4X",
+    "Space"
+  ],
+  "short_description": "Grand strategy across a galaxy of empires.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "4X",
+    "Space"
+  ],
+  "summary": "Grand strategy across a galaxy of empires.",
+  "identity": {
+    "core_loop": "Explore, colonise, manage, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Huge.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "spatial": 0.2,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay everywhere.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Space opera.",
+    "palette": null,
+    "audio_mood": "Epic.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Shows how deep a story generator can go; nothing for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.78,
+      "expression": 0.78,
+      "structure": 0.78,
+      "social": 0.67,
+      "systems": 1.0,
+      "chance": 0.44,
+      "session": 1.0
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

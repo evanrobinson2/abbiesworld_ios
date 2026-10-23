@@ -1,0 +1,67 @@
+{
+  "appid": 774461,
+  "name": "The Jackbox Party Pack 5",
+  "store_url": "https://store.steampowered.com/app/774461/",
+  "genres": [
+    "Party",
+    "Trivia"
+  ],
+  "short_description": "Five party games played on one screen with everyone's phones as controllers.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Party",
+    "Trivia"
+  ],
+  "summary": "Five party games played on one screen with everyone's phones as controllers.",
+  "identity": {
+    "core_loop": "Join on your phone, answer, draw or bluff, vote, laugh.",
+    "mechanics": null,
+    "ui_and_game_feel": "Funny, social, loud.",
+    "information_grammar": {
+      "overall_mix": {
+        "overlay": 0.7,
+        "none": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Phones are the private overlay; the TV is the shared stage.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Bold cartoon game show.",
+    "palette": null,
+    "audio_mood": "Host voice and stings.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Phones as controllers for a shared screen: a strong family play pattern for Abbie's World."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.44,
+      "expression": 0.78,
+      "structure": 0.22,
+      "social": 0.89,
+      "systems": 0.11,
+      "chance": 0.44,
+      "session": 0.44
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

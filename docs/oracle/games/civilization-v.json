@@ -1,0 +1,70 @@
+{
+  "appid": 8930,
+  "name": "Sid Meier's Civilization V",
+  "store_url": "https://store.steampowered.com/app/8930/",
+  "genres": [
+    "Strategy",
+    "4X",
+    "Hex"
+  ],
+  "short_description": "Lead a civilisation from the stone age to space on a hex map.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "4X",
+    "Hex"
+  ],
+  "summary": "Lead a civilisation from the stone age to space on a hex map.",
+  "identity": {
+    "core_loop": "Explore, expand, build, trade, research, win.",
+    "mechanics": null,
+    "ui_and_game_feel": "One more turn.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.16,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Hex tiles show yields; heavy overlay panels.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Painted board.",
+    "palette": null,
+    "audio_mood": "Wonderful world music.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Hex tiles with readable resources, our hex canon."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.67,
+      "expression": 0.78,
+      "structure": 0.67,
+      "social": 0.67,
+      "systems": 0.78,
+      "chance": 0.44,
+      "session": 0.89
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

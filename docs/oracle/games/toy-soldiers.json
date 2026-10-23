@@ -1,0 +1,68 @@
+{
+  "appid": 98300,
+  "name": "Toy Soldiers",
+  "store_url": "https://store.steampowered.com/app/98300/",
+  "genres": [
+    "Tower defense",
+    "Toy"
+  ],
+  "short_description": "WWI tower defence played with toy soldiers on a toy-box diorama.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Tower defense",
+    "Toy"
+  ],
+  "summary": "WWI tower defence played with toy soldiers on a toy-box diorama.",
+  "identity": {
+    "core_loop": "Place turrets, take control of one, survive waves.",
+    "mechanics": null,
+    "ui_and_game_feel": "Toy-box charm.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "A diorama of toys; overlay wave count.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Toy-box realism.",
+    "palette": null,
+    "audio_mood": "Brass band.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A toy diorama as the world is our exact look (toy box)."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.44,
+      "expression": 0.44,
+      "structure": 0.22,
+      "social": 0.44,
+      "systems": 0.44,
+      "chance": 0.44,
+      "session": 0.22
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

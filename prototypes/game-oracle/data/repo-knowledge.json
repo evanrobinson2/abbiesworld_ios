@@ -4161,6 +4161,150 @@
    }
   },
   {
+   "id": "astroneer",
+   "file": "docs/oracle/games/astroneer.json",
+   "appid": 361420,
+   "name": "ASTRONEER",
+   "store_url": "https://store.steampowered.com/app/361420/",
+   "genres": [
+    "Exploration",
+    "Building",
+    "Co-op"
+   ],
+   "short_description": "Reshape planets with a terrain tool, build bases from modules and explore with friends.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Exploration",
+    "Building",
+    "Co-op"
+   ],
+   "summary": "Reshape planets with a terrain tool, build bases from modules and explore with friends.",
+   "identity": {
+    "core_loop": "Dig with the terrain tool, gather, build, connect, fly to new planets.",
+    "mechanics": null,
+    "ui_and_game_feel": "Playful, tactile, colourful.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Backpack shows items physically; oxygen tether lines in the world; very low HUD.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright pastel low-poly planets.",
+    "palette": null,
+    "audio_mood": "Soft synth.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Diegetic backpack inventory and terrain sculpting are kid-friendly toys; one of the best low-HUD references."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.67,
+     "structure": 0.44,
+     "social": 0.67,
+     "systems": 0.56,
+     "chance": 0.44,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "bad-north",
+   "file": "docs/oracle/games/bad-north.json",
+   "appid": 688420,
+   "name": "Bad North: Jotunn Edition",
+   "store_url": "https://store.steampowered.com/app/688420/",
+   "genres": [
+    "Strategy",
+    "Roguelite",
+    "Tactics"
+   ],
+   "short_description": "Defend tiny island kingdoms from Viking longships with a handful of squads.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "Roguelite",
+    "Tactics"
+   ],
+   "summary": "Defend tiny island kingdoms from Viking longships with a handful of squads.",
+   "identity": {
+    "core_loop": "See boats coming, move squads to the shore, hold, retreat, upgrade, sail to the next island.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm, tense, tidy; a whole battle on a toy island.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Boats are visible on the sea before they land; squads are banners on the island; almost no numbers. Islands go red with blood, sparingly.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Minimal pastel islands, tiny soldiers, soft fog.",
+    "palette": null,
+    "audio_mood": "Sparse strings and waves.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "A small floating island diorama with almost no HUD is exactly our tile look; threats arrive where you can see them."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.44,
+     "structure": 0.56,
+     "social": 0.33,
+     "systems": 0.56,
+     "chance": 0.44,
+     "session": 0.56
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "bastion",
    "file": "docs/oracle/games/bastion.json",
    "appid": 107100,
@@ -4225,6 +4369,147 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "before-your-eyes",
+   "file": "docs/oracle/games/before-your-eyes.json",
+   "appid": 1082430,
+   "name": "Before Your Eyes",
+   "store_url": "https://store.steampowered.com/app/1082430/",
+   "genres": [
+    "Narrative",
+    "Webcam"
+   ],
+   "short_description": "A story you control by blinking, through your webcam.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Narrative",
+    "Webcam"
+   ],
+   "summary": "A story you control by blinking, through your webcam.",
+   "identity": {
+    "core_loop": "Watch, blink to move on, feel time slipping.",
+    "mechanics": null,
+    "ui_and_game_feel": "Moving and intimate.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.8,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Blinking is the controller; no HUD.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Painted 3D memories.",
+    "palette": null,
+    "audio_mood": "Gentle score.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A body signal (blinking) as the controller; new input is a powerful idea."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.33,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0.11,
+     "chance": 0.22,
+     "session": 0
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "besiege",
+   "file": "docs/oracle/games/besiege.json",
+   "appid": 346010,
+   "name": "Besiege",
+   "store_url": "https://store.steampowered.com/app/346010/",
+   "genres": [
+    "Building",
+    "Physics",
+    "Sandbox"
+   ],
+   "short_description": "Build medieval siege machines from blocks and hinges, then send them to wreck castles and armies.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Building",
+    "Physics",
+    "Sandbox"
+   ],
+   "summary": "Build medieval siege machines from blocks and hinges, then send them to wreck castles and armies.",
+   "identity": {
+    "core_loop": "Bolt parts together, bind keys, test, watch it fall apart, rebuild better.",
+    "mechanics": null,
+    "ui_and_game_feel": "Joyful trial and error; physics is honest, failure is funny.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.2,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The machine is the readout: it wobbles, snaps and tips over in the world. Very little screen interface beyond the parts bar.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Clean stylised low-poly fields and castles.",
+    "palette": null,
+    "audio_mood": "Light medieval tunes, creaks and crashes.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Let kids build, then test it in the world right away; the physics is the teacher. Evan's own reference."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 1,
+     "structure": 0.33,
+     "social": 0.44,
+     "systems": 0.89,
+     "chance": 0.44,
+     "session": 0.56
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -5000,6 +5285,148 @@
    }
   },
   {
+   "id": "cities-skylines",
+   "file": "docs/oracle/games/cities-skylines.json",
+   "appid": 255710,
+   "name": "Cities: Skylines",
+   "store_url": "https://store.steampowered.com/app/255710/",
+   "genres": [
+    "City builder",
+    "Simulation"
+   ],
+   "short_description": "Build a modern city: roads, zones, power, water, transit.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "City builder",
+    "Simulation"
+   ],
+   "summary": "Build a modern city: roads, zones, power, water, transit.",
+   "identity": {
+    "core_loop": "Lay roads, zone land, connect services, fix traffic, grow.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deep and calm; traffic is the eternal puzzle.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "spatial": 0.3,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Info view overlays recolour the whole city; citizens' chirps; buildings show icons when unhappy.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Realistic-toy city.",
+    "palette": null,
+    "audio_mood": "Calm radio-like music.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Colour the whole world by one question (water, happiness) instead of panels. Info views are a good grown-up layer."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.78,
+     "expression": 0.78,
+     "structure": 0.89,
+     "social": 0.67,
+     "systems": 0.89,
+     "chance": 0.33,
+     "session": 1
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "civilization-v",
+   "file": "docs/oracle/games/civilization-v.json",
+   "appid": 8930,
+   "name": "Sid Meier's Civilization V",
+   "store_url": "https://store.steampowered.com/app/8930/",
+   "genres": [
+    "Strategy",
+    "4X",
+    "Hex"
+   ],
+   "short_description": "Lead a civilisation from the stone age to space on a hex map.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "4X",
+    "Hex"
+   ],
+   "summary": "Lead a civilisation from the stone age to space on a hex map.",
+   "identity": {
+    "core_loop": "Explore, expand, build, trade, research, win.",
+    "mechanics": null,
+    "ui_and_game_feel": "One more turn.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.16,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Hex tiles show yields; heavy overlay panels.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Painted board.",
+    "palette": null,
+    "audio_mood": "Wonderful world music.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Hex tiles with readable resources, our hex canon."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.67,
+     "expression": 0.78,
+     "structure": 0.67,
+     "social": 0.67,
+     "systems": 0.78,
+     "chance": 0.44,
+     "session": 0.89
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "coffee-shop-tycoon",
    "file": "docs/oracle/games/coffee-shop-tycoon.json",
    "appid": 370060,
@@ -5641,6 +6068,77 @@
    }
   },
   {
+   "id": "deliver-us-the-moon",
+   "file": "docs/oracle/games/deliver-us-the-moon.json",
+   "appid": 428660,
+   "name": "Deliver Us The Moon",
+   "store_url": "https://store.steampowered.com/app/428660/",
+   "genres": [
+    "Adventure",
+    "Sci-fi",
+    "Puzzle"
+   ],
+   "short_description": "An astronaut travels to the Moon to restore Earth's power.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Adventure",
+    "Sci-fi",
+    "Puzzle"
+   ],
+   "summary": "An astronaut travels to the Moon to restore Earth's power.",
+   "identity": {
+    "core_loop": "Explore, solve, fly, read logs.",
+    "mechanics": null,
+    "ui_and_game_feel": "Atmospheric.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Wrist display and holograms (diegetic).",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic sci-fi.",
+    "palette": null,
+    "audio_mood": "Moody.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A moon mission with holograms as diegetic UI; good for the Moonbase dialect."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0.22,
+     "chance": 0.22,
+     "session": 0.22
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "desktop-dungeons-rewind",
    "file": "docs/oracle/games/desktop-dungeons-rewind.json",
    "appid": 1976950,
@@ -5778,6 +6276,78 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "disney-dreamlight-valley",
+   "file": "docs/oracle/games/disney-dreamlight-valley.json",
+   "appid": 1401590,
+   "name": "Disney Dreamlight Valley",
+   "store_url": "https://store.steampowered.com/app/1401590/",
+   "genres": [
+    "Life sim",
+    "Cosy",
+    "Adventure"
+   ],
+   "short_description": "Restore a village with Disney and Pixar friends: garden, fish, cook, decorate, befriend.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Life sim",
+    "Cosy",
+    "Adventure"
+   ],
+   "summary": "Restore a village with Disney and Pixar friends: garden, fish, cook, decorate, befriend.",
+   "identity": {
+    "core_loop": "Do chores for friends, garden, cook, earn, unlock biomes, decorate.",
+    "mechanics": null,
+    "ui_and_game_feel": "Comfy, soft, endless small tasks.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.4,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Friendship hearts and quest marks over characters (spatial); a busy quest overlay.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright Disney 3D.",
+    "palette": null,
+    "audio_mood": "Gentle themes.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Characters you know make chores feel like visits. The social layer belongs on the characters, like the hearts."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.56,
+     "structure": 0.56,
+     "social": 0.44,
+     "systems": 0.33,
+     "chance": 0.22,
+     "session": 0.44
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -6048,6 +6618,77 @@
    }
   },
   {
+   "id": "dont-starve-together",
+   "file": "docs/oracle/games/dont-starve-together.json",
+   "appid": 322330,
+   "name": "Don't Starve Together",
+   "store_url": "https://store.steampowered.com/app/322330/",
+   "genres": [
+    "Survival",
+    "Co-op"
+   ],
+   "short_description": "Survive a strange, gothic wilderness with friends: gather, craft, eat, stay sane.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival",
+    "Co-op"
+   ],
+   "summary": "Survive a strange, gothic wilderness with friends: gather, craft, eat, stay sane.",
+   "identity": {
+    "core_loop": "Gather by day, light a fire by night, craft, prepare for winter.",
+    "mechanics": null,
+    "ui_and_game_feel": "Moody, funny, demanding.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.4,
+      "meta": 0.1,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Darkness kills: the night is the gauge. Sanity changes how the world looks (meta). Three small dial gauges.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Hand-drawn Tim Burton-ish cut paper.",
+    "palette": null,
+    "audio_mood": "Jaunty eerie tunes, chattering voices.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "The world going strange as a feeling (meta) rather than a number; but keep night gentle for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.67,
+     "structure": 0.78,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.44
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "dont-starve",
    "file": "docs/oracle/games/dont-starve.json",
    "appid": 219740,
@@ -6114,6 +6755,77 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "donut-county",
+   "file": "docs/oracle/games/donut-county.json",
+   "appid": 702670,
+   "name": "Donut County",
+   "store_url": "https://store.steampowered.com/app/702670/",
+   "genres": [
+    "Puzzle",
+    "Physics",
+    "Story"
+   ],
+   "short_description": "Play a growing hole in the ground that swallows a town, one funny story scene at a time.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Physics",
+    "Story"
+   ],
+   "summary": "Play a growing hole in the ground that swallows a town, one funny story scene at a time.",
+   "identity": {
+    "core_loop": "Move the hole, swallow small things, grow, swallow bigger things.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly, short, delightful.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.8,
+      "none": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.02,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "No HUD to speak of: the hole's size is the gauge.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Flat pastel low-poly.",
+    "palette": null,
+    "audio_mood": "Chill tunes.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "One verb, made toy-like, carries a whole game. The world is the progress bar."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.22,
+     "expression": 0.33,
+     "structure": 0.33,
+     "social": 0.33,
+     "systems": 0.22,
+     "chance": 0.22,
+     "session": 0.11
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -6366,6 +7078,221 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dredge",
+   "file": "docs/oracle/games/dredge.json",
+   "appid": 1562430,
+   "name": "DREDGE",
+   "store_url": "https://store.steampowered.com/app/1562430/",
+   "genres": [
+    "Fishing",
+    "Adventure",
+    "Horror"
+   ],
+   "short_description": "A fishing boat captain sells catches around islands that grow stranger after dark.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Fishing",
+    "Adventure",
+    "Horror"
+   ],
+   "summary": "A fishing boat captain sells catches around islands that grow stranger after dark.",
+   "identity": {
+    "core_loop": "Sail out, fish with timing mini games, pack the hold, sell, upgrade, get home before night.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cosy by day, uneasy at night.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "meta": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Panic shows as an eye and visual distortion (meta); the hold is a packing grid overlay; night fog is the warning.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Stylised painterly coast.",
+    "palette": null,
+    "audio_mood": "Melancholy sea-shanty mood.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A packing-grid inventory is fun on its own; night as the danger signal. Our version stays gentle."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.56,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.44,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dungeon-defenders",
+   "file": "docs/oracle/games/dungeon-defenders.json",
+   "appid": 65800,
+   "name": "Dungeon Defenders",
+   "store_url": "https://store.steampowered.com/app/65800/",
+   "genres": [
+    "Tower defense",
+    "Action RPG",
+    "Co-op"
+   ],
+   "short_description": "Heroes build defences and fight beside them to protect crystals.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Tower defense",
+    "Action RPG",
+    "Co-op"
+   ],
+   "summary": "Heroes build defences and fight beside them to protect crystals.",
+   "identity": {
+    "core_loop": "Build towers, fight waves, loot, level.",
+    "mechanics": null,
+    "ui_and_game_feel": "Co-op, cartoony, grindy.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.18,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy with loot numbers.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Chibi cartoon.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Co-op defence with friends is great; the loot numbers are not."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.67,
+     "systems": 0.78,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "dyson-sphere-program",
+   "file": "docs/oracle/games/dyson-sphere-program.json",
+   "appid": 1366540,
+   "name": "Dyson Sphere Program",
+   "store_url": "https://store.steampowered.com/app/1366540/",
+   "genres": [
+    "Factory",
+    "Space"
+   ],
+   "short_description": "Build factories across planets and a Dyson sphere around a star.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Factory",
+    "Space"
+   ],
+   "summary": "Build factories across planets and a Dyson sphere around a star.",
+   "identity": {
+    "core_loop": "Mine, build, belt, scale to the stars.",
+    "mechanics": null,
+    "ui_and_game_feel": "Mesmerising scale.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Machines visible; overlay heavy menus.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Glossy sci-fi.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Scale you build yourself is awe-inspiring."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.67,
+     "expression": 0.78,
+     "structure": 0.33,
+     "social": 0.89,
+     "systems": 0.89,
+     "chance": 0.33,
+     "session": 0.89
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -6794,6 +7721,147 @@
    }
   },
   {
+   "id": "from-dust",
+   "file": "docs/oracle/games/from-dust.json",
+   "appid": 33460,
+   "name": "From Dust",
+   "store_url": "https://store.steampowered.com/app/33460/",
+   "genres": [
+    "God game",
+    "Puzzle"
+   ],
+   "short_description": "Guide a tribe across islands by reshaping the land, water and lava with a godly hand.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "God game",
+    "Puzzle"
+   ],
+   "summary": "Guide a tribe across islands by reshaping the land, water and lava with a godly hand.",
+   "identity": {
+    "core_loop": "Pick up sand, water or lava, reshape, protect villages, reach the totems.",
+    "mechanics": null,
+    "ui_and_game_feel": "Elemental, mesmerising.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.2,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The land is the information: rivers and lava flow live.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Natural painterly islands.",
+    "palette": null,
+    "audio_mood": "Tribal chants.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Moving sand and water with a hand is pure toy play; living terrain is magic for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.33,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.44,
+     "systems": 0.56,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "frostpunk",
+   "file": "docs/oracle/games/frostpunk.json",
+   "appid": 323190,
+   "name": "Frostpunk",
+   "store_url": "https://store.steampowered.com/app/323190/",
+   "genres": [
+    "City builder",
+    "Survival"
+   ],
+   "short_description": "Keep the last city alive around a giant heat generator in a frozen world.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "City builder",
+    "Survival"
+   ],
+   "summary": "Keep the last city alive around a giant heat generator in a frozen world.",
+   "identity": {
+    "core_loop": "Gather, heat, make hard laws, survive the storm.",
+    "mechanics": null,
+    "ui_and_game_feel": "Grim and tense.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Heat and cold are coloured into the city (diegetic); the temperature dial is the main gauge.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Snowy steampunk.",
+    "palette": null,
+    "audio_mood": "Mournful strings.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "One temperature signal driving everything is the whole-game-adapts rule; never as grim for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.89,
+     "social": 0.44,
+     "systems": 0.78,
+     "chance": 0.44,
+     "session": 0.56
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "ftl-faster-than-light",
    "file": "docs/oracle/games/ftl-faster-than-light.json",
    "appid": 212680,
@@ -6866,6 +7934,426 @@
    }
   },
   {
+   "id": "garrys-mod",
+   "file": "docs/oracle/games/garrys-mod.json",
+   "appid": 4000,
+   "name": "Garry's Mod",
+   "store_url": "https://store.steampowered.com/app/4000/",
+   "genres": [
+    "Sandbox",
+    "Physics"
+   ],
+   "short_description": "A physics sandbox for spawning props and building contraptions and game modes.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Sandbox",
+    "Physics"
+   ],
+   "summary": "A physics sandbox for spawning props and building contraptions and game modes.",
+   "identity": {
+    "core_loop": "Spawn things, weld, pose, play community modes.",
+    "mechanics": null,
+    "ui_and_game_feel": "Unbounded creativity.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Tool gun and spawn menus; the world is the canvas.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Source-engine props.",
+    "palette": null,
+    "audio_mood": "None of its own.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Proof that tools and props let players invent their own games; also how messy that can be."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.33,
+     "expression": 1,
+     "structure": 0.22,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "goat-simulator",
+   "file": "docs/oracle/games/goat-simulator.json",
+   "appid": 265930,
+   "name": "Goat Simulator",
+   "store_url": "https://store.steampowered.com/app/265930/",
+   "genres": [
+    "Sandbox",
+    "Comedy"
+   ],
+   "short_description": "Be a goat, cause chaos in a small town, licking and headbutting everything.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Sandbox",
+    "Comedy"
+   ],
+   "summary": "Be a goat, cause chaos in a small town, licking and headbutting everything.",
+   "identity": {
+    "core_loop": "Run, headbutt, lick things, find secrets, score points for chaos.",
+    "mechanics": null,
+    "ui_and_game_feel": "Glitchy on purpose; slapstick.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Points pop up as overlay text; the joy is in the world going wrong.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic-ish small town.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Being an animal is a fantasy kids want; but keep the slapstick kind, not destructive."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.22,
+     "expression": 0.89,
+     "structure": 0.11,
+     "social": 0.56,
+     "systems": 0.22,
+     "chance": 0.22,
+     "session": 0
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "graveyard-keeper",
+   "file": "docs/oracle/games/graveyard-keeper.json",
+   "appid": 599140,
+   "name": "Graveyard Keeper",
+   "store_url": "https://store.steampowered.com/app/599140/",
+   "genres": [
+    "Management",
+    "Crafting"
+   ],
+   "short_description": "Run a medieval graveyard and grow a business with dark humour.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Management",
+    "Crafting"
+   ],
+   "summary": "Run a medieval graveyard and grow a business with dark humour.",
+   "identity": {
+    "core_loop": "Do chores, craft, rate graves, grow the business.",
+    "mechanics": null,
+    "ui_and_game_feel": "Grindy and morbid-funny.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.3,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Quality stars over graves; tech tree overlays.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Pixel-art medieval.",
+    "palette": null,
+    "audio_mood": "Light folk.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Rating things in the world; the theme is not for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.56,
+     "social": 0.67,
+     "systems": 0.78,
+     "chance": 0.44,
+     "session": 0.33
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "green-hell",
+   "file": "docs/oracle/games/green-hell.json",
+   "appid": 815370,
+   "name": "Green Hell",
+   "store_url": "https://store.steampowered.com/app/815370/",
+   "genres": [
+    "Survival"
+   ],
+   "short_description": "Survive the Amazon jungle.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival"
+   ],
+   "summary": "Survive the Amazon jungle.",
+   "identity": {
+    "core_loop": "Gather, treat wounds, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hard.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Wrist watch shows stats (diegetic).",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic jungle.",
+    "palette": null,
+    "audio_mood": "Jungle ambience.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A smartwatch as diegetic UI; theme is harsh."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.67,
+     "expression": 0.44,
+     "structure": 0.78,
+     "social": 0.44,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.22
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "gris",
+   "file": "docs/oracle/games/gris.json",
+   "appid": 683320,
+   "name": "GRIS",
+   "store_url": "https://store.steampowered.com/app/683320/",
+   "genres": [
+    "Platformer",
+    "Art"
+   ],
+   "short_description": "A girl walks through a watercolour world that gains colour as she heals.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Platformer",
+    "Art"
+   ],
+   "summary": "A girl walks through a watercolour world that gains colour as she heals.",
+   "identity": {
+    "core_loop": "Walk, gain abilities, colour returns, the world opens.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm and beautiful; no fail state.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "meta": 0.1,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "No HUD at all: colour coming back is the progress.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Watercolour art.",
+    "palette": null,
+    "audio_mood": "Lush piano and choir.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Colour returning to the world as the progress bar; feeling first."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.44,
+     "structure": 0.11,
+     "social": 0.56,
+     "systems": 0.11,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "hades",
+   "file": "docs/oracle/games/hades.json",
+   "appid": 1145360,
+   "name": "Hades",
+   "store_url": "https://store.steampowered.com/app/1145360/",
+   "genres": [
+    "Action",
+    "Roguelite"
+   ],
+   "short_description": "Escape the underworld room by room as the son of Hades, dying and returning with the story moving forward each time.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Roguelite"
+   ],
+   "summary": "Escape the underworld room by room as the son of Hades, dying and returning with the story moving forward each time.",
+   "identity": {
+    "core_loop": "Fight a room, pick a god's boon, push deeper, die, return home, talk, upgrade, try again.",
+    "mechanics": null,
+    "ui_and_game_feel": "Fast, generous, beautifully reactive; failure moves the story on.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.3,
+      "overlay": 0.2,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Doors show the reward behind them; enemy wind-ups are readable shapes; characters comment on what just happened. Moderate HUD.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Painted comic-book underworld.",
+    "palette": null,
+    "audio_mood": "Rock-mythic score, deep voice work for every character.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Make failure part of the story: every return home has new talk. Characters remember what the player did."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.67,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.78,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "highfleet",
    "file": "docs/oracle/games/highfleet.json",
    "appid": 1434950,
@@ -6931,6 +8419,75 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "human-resource-machine",
+   "file": "docs/oracle/games/human-resource-machine.json",
+   "appid": 375820,
+   "name": "Human Resource Machine",
+   "store_url": "https://store.steampowered.com/app/375820/",
+   "genres": [
+    "Puzzle",
+    "Programming"
+   ],
+   "short_description": "Program a little office worker to move boxes; programming puzzles in disguise.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Programming"
+   ],
+   "summary": "Program a little office worker to move boxes; programming puzzles in disguise.",
+   "identity": {
+    "core_loop": "Arrange instructions, run, watch the worker, optimise.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clever and funny.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "overlay": 0.7
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.3,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The program list is overlay; the worker shows it running.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Cartoon office.",
+    "palette": null,
+    "audio_mood": "Quirky.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Seeing a little character run your program teaches coding; good for older kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.44,
+     "expression": 0.33,
+     "structure": 0.11,
+     "social": 0.56,
+     "systems": 0.89,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -7059,6 +8616,217 @@
    }
   },
   {
+   "id": "ixion",
+   "file": "docs/oracle/games/ixion.json",
+   "appid": 1113120,
+   "name": "IXION",
+   "store_url": "https://store.steampowered.com/app/1113120/",
+   "genres": [
+    "City builder",
+    "Survival",
+    "Space"
+   ],
+   "short_description": "Run a space station travelling to a new home.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "City builder",
+    "Survival",
+    "Space"
+   ],
+   "summary": "Run a space station travelling to a new home.",
+   "identity": {
+    "core_loop": "Manage sectors, travel, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.18,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy; station sections.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Retro sci-fi.",
+    "palette": null,
+    "audio_mood": "Atmospheric.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "A ring-shaped station on a journey; useful shape for a Moonbase story."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.78,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.33,
+     "session": 0.67
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "jackbox-party-pack-5",
+   "file": "docs/oracle/games/jackbox-party-pack-5.json",
+   "appid": 774461,
+   "name": "The Jackbox Party Pack 5",
+   "store_url": "https://store.steampowered.com/app/774461/",
+   "genres": [
+    "Party",
+    "Trivia"
+   ],
+   "short_description": "Five party games played on one screen with everyone's phones as controllers.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Party",
+    "Trivia"
+   ],
+   "summary": "Five party games played on one screen with everyone's phones as controllers.",
+   "identity": {
+    "core_loop": "Join on your phone, answer, draw or bluff, vote, laugh.",
+    "mechanics": null,
+    "ui_and_game_feel": "Funny, social, loud.",
+    "information_grammar": {
+     "overall_mix": {
+      "overlay": 0.7,
+      "none": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.3,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Phones are the private overlay; the TV is the shared stage.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Bold cartoon game show.",
+    "palette": null,
+    "audio_mood": "Host voice and stings.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Phones as controllers for a shared screen: a strong family play pattern for Abbie's World."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.44,
+     "expression": 0.78,
+     "structure": 0.22,
+     "social": 0.89,
+     "systems": 0.11,
+     "chance": 0.44,
+     "session": 0.44
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "jotun",
+   "file": "docs/oracle/games/jotun.json",
+   "appid": 323580,
+   "name": "Jotun: Valhalla Edition",
+   "store_url": "https://store.steampowered.com/app/323580/",
+   "genres": [
+    "Action",
+    "Exploration"
+   ],
+   "short_description": "A Viking warrior faces giant bosses in hand-drawn Norse myth.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Exploration"
+   ],
+   "summary": "A Viking warrior faces giant bosses in hand-drawn Norse myth.",
+   "identity": {
+    "core_loop": "Explore, find runes, fight giants.",
+    "mechanics": null,
+    "ui_and_game_feel": "Grand scale.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "meta": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Little HUD; scale and art carry it.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Hand-drawn animation.",
+    "palette": null,
+    "audio_mood": "Norse choral.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Giants drawn huge against a tiny hero make scale feel epic."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 0.22,
+     "chance": 0.22,
+     "session": 0.11
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "jotunnslayer-hordes-of-hel",
    "file": "docs/oracle/games/jotunnslayer-hordes-of-hel.json",
    "appid": 2820820,
@@ -7127,6 +8895,78 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "kerbal-space-program",
+   "file": "docs/oracle/games/kerbal-space-program.json",
+   "appid": 220200,
+   "name": "Kerbal Space Program",
+   "store_url": "https://store.steampowered.com/app/220200/",
+   "genres": [
+    "Simulation",
+    "Building",
+    "Space"
+   ],
+   "short_description": "Build rockets from parts and fly little green Kerbals to space with real orbital physics.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Simulation",
+    "Building",
+    "Space"
+   ],
+   "summary": "Build rockets from parts and fly little green Kerbals to space with real orbital physics.",
+   "identity": {
+    "core_loop": "Build a rocket, launch, crash, learn, reach orbit, land on the Mun.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hard, hilarious, deeply educational.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.18,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Navball and orbit map are precise overlays; the Kerbals' faces show fear and joy (spatial).",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Clean NASA-toy look.",
+    "palette": null,
+    "audio_mood": "Calm space music.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Learning real physics by building and failing. Kerbals' faces are a perfect wordless gauge."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.89,
+     "expression": 1,
+     "structure": 0.44,
+     "social": 0.67,
+     "systems": 0.89,
+     "chance": 0.33,
+     "session": 0.44
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -7382,6 +9222,76 @@
    "review": "Gorgeous combat drowned in pop-ups and currencies. The spectacle is fun for a minute; the systems are a second job."
   },
   {
+   "id": "lyne",
+   "file": "docs/oracle/games/lyne.json",
+   "appid": 266010,
+   "name": "LYNE",
+   "store_url": "https://store.steampowered.com/app/266010/",
+   "genres": [
+    "Puzzle",
+    "Minimalist"
+   ],
+   "short_description": "Connect shapes into paths in minimalist puzzles.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Minimalist"
+   ],
+   "summary": "Connect shapes into paths in minimalist puzzles.",
+   "identity": {
+    "core_loop": "Draw a line through all shapes of one kind.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm, pure.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.2,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The board is everything.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Flat minimal shapes.",
+    "palette": null,
+    "audio_mood": "Soft tones.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Pure minimal puzzles; a good model for a calm kids' mini game."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.33,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0.11,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "magic-the-gathering-arena",
    "file": "docs/oracle/games/magic-the-gathering-arena.json",
    "appid": 2141910,
@@ -7452,6 +9362,78 @@
     "family": "card"
    },
    "review": "The most polished digital card table around. Its card frames, foils and readable stats are good study for Card Forge. Too many rules for kids."
+  },
+  {
+   "id": "magicka",
+   "file": "docs/oracle/games/magicka.json",
+   "appid": 42910,
+   "name": "Magicka",
+   "store_url": "https://store.steampowered.com/app/42910/",
+   "genres": [
+    "Action",
+    "Co-op",
+    "Comedy"
+   ],
+   "short_description": "Wizards combine elements to cast spells, often blowing up their friends.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Co-op",
+    "Comedy"
+   ],
+   "summary": "Wizards combine elements to cast spells, often blowing up their friends.",
+   "identity": {
+    "core_loop": "Combine element keys, cast, survive, laugh.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic, funny co-op.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Spell queue is a small overlay; the spells are the show.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Comedic fantasy.",
+    "palette": null,
+    "audio_mood": "Silly.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Combining elements to make spells is a deep toy; friendly fire is the joke."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.67,
+     "expression": 0.89,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.44,
+     "session": 0.22
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
   },
   {
    "id": "manor-lords",
@@ -7737,6 +9719,78 @@
    }
   },
   {
+   "id": "no-mans-sky",
+   "file": "docs/oracle/games/no-mans-sky.json",
+   "appid": 275850,
+   "name": "No Man's Sky",
+   "store_url": "https://store.steampowered.com/app/275850/",
+   "genres": [
+    "Exploration",
+    "Survival",
+    "Space"
+   ],
+   "short_description": "Explore endless procedurally generated planets, build bases and fly between stars.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Exploration",
+    "Survival",
+    "Space"
+   ],
+   "summary": "Explore endless procedurally generated planets, build bases and fly between stars.",
+   "identity": {
+    "core_loop": "Land, scan, gather, build, fly on.",
+    "mechanics": null,
+    "ui_and_game_feel": "Wonder and colour.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.4,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Scanner pings and markers on things; many menus.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Bright sci-fi paperback covers.",
+    "palette": null,
+    "audio_mood": "Ambient electronic.",
+    "pacing": "slow, medium sessions",
+    "lessons_for_abbies_world": "Procedural worlds can feel magical; the scanner names creatures you find."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.67,
+     "structure": 0.56,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.44,
+     "session": 0.44
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "no-more-room-in-hell-2",
    "file": "docs/oracle/games/no-more-room-in-hell-2.json",
    "appid": 292000,
@@ -7802,6 +9856,78 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "noita",
+   "file": "docs/oracle/games/noita.json",
+   "appid": 881100,
+   "name": "Noita",
+   "store_url": "https://store.steampowered.com/app/881100/",
+   "genres": [
+    "Roguelite",
+    "Action",
+    "Physics"
+   ],
+   "short_description": "Every pixel is simulated: fire spreads, liquids flow, and you craft your own magic wands.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Roguelite",
+    "Action",
+    "Physics"
+   ],
+   "summary": "Every pixel is simulated: fire spreads, liquids flow, and you craft your own magic wands.",
+   "identity": {
+    "core_loop": "Descend, build wands, survive the simulated chaos.",
+    "mechanics": null,
+    "ui_and_game_feel": "Wildly emergent and hard.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "meta": 0.1,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The world itself is the information: everything burns, melts and flows.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel simulation.",
+    "palette": null,
+    "audio_mood": "Moody.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A world where every material is simulated is endlessly playful; ruthless for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.89,
+     "expression": 0.56,
+     "structure": 0.22,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.89,
+     "session": 0.22
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -8017,6 +10143,145 @@
    }
   },
   {
+   "id": "orcs-must-die-2",
+   "file": "docs/oracle/games/orcs-must-die-2.json",
+   "appid": 201790,
+   "name": "Orcs Must Die! 2",
+   "store_url": "https://store.steampowered.com/app/201790/",
+   "genres": [
+    "Tower defense",
+    "Action"
+   ],
+   "short_description": "Place traps and fight as a war mage to stop hordes of orcs.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Tower defense",
+    "Action"
+   ],
+   "summary": "Place traps and fight as a war mage to stop hordes of orcs.",
+   "identity": {
+    "core_loop": "Set traps, fight, watch the traps work, upgrade.",
+    "mechanics": null,
+    "ui_and_game_feel": "Funny and satisfying.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.3,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Traps in the world; wave count overlay.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Cartoon fantasy.",
+    "palette": null,
+    "audio_mood": "Upbeat.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Watching traps you placed do their job is a great payoff."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.78,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.44,
+     "systems": 0.56,
+     "chance": 0.44,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "outer-wilds",
+   "file": "docs/oracle/games/outer-wilds.json",
+   "appid": 753640,
+   "name": "Outer Wilds",
+   "store_url": "https://store.steampowered.com/app/753640/",
+   "genres": [
+    "Exploration",
+    "Mystery"
+   ],
+   "short_description": "A tiny solar system loops every 22 minutes; learn its secrets by exploring.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Exploration",
+    "Mystery"
+   ],
+   "summary": "A tiny solar system loops every 22 minutes; learn its secrets by exploring.",
+   "identity": {
+    "core_loop": "Fly to a planet, explore, read, the sun explodes, wake up knowing more.",
+    "mechanics": null,
+    "ui_and_game_feel": "Wonder and curiosity; knowledge is the only upgrade.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Almost everything is in the world: the planets change over the loop; the ship log is the one overlay map of what you know.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Handmade cosy space, campfires and marshmallows.",
+    "palette": null,
+    "audio_mood": "Banjo by the fire; instruments you can find in space.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Knowledge as progress, and a tiny world that changes on a clock. A campfire and banjo can make space feel safe."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.89,
+     "social": 0.44,
+     "systems": 0.33,
+     "chance": 0.67,
+     "session": 0.22
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "overcooked-2",
    "file": "docs/oracle/games/overcooked-2.json",
    "appid": 728880,
@@ -8082,6 +10347,218 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "oxygen-not-included",
+   "file": "docs/oracle/games/oxygen-not-included.json",
+   "appid": 457140,
+   "name": "Oxygen Not Included",
+   "store_url": "https://store.steampowered.com/app/457140/",
+   "genres": [
+    "Colony sim",
+    "Survival"
+   ],
+   "short_description": "Keep a colony of duplicants alive inside an asteroid by managing air, water, heat and food.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Colony sim",
+    "Survival"
+   ],
+   "summary": "Keep a colony of duplicants alive inside an asteroid by managing air, water, heat and food.",
+   "identity": {
+    "core_loop": "Dig, build, plumb, manage gases, keep everyone breathing.",
+    "mechanics": null,
+    "ui_and_game_feel": "Cute but brutal systems.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "spatial": 0.3,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.2,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay modes for oxygen, heat and power; duplicants' faces and bubbles.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Cartoon cutaway.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "A cutaway side view makes invisible systems readable; overlays are for grown-ups."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.67,
+     "expression": 0.67,
+     "structure": 0.89,
+     "social": 0.89,
+     "systems": 0.89,
+     "chance": 0.33,
+     "session": 1
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "panorama-prologue",
+   "file": "docs/oracle/games/panorama-prologue.json",
+   "appid": 2231790,
+   "name": "Pan'orama: Prologue",
+   "store_url": "https://store.steampowered.com/app/2231790/",
+   "genres": [
+    "City builder",
+    "Cosy",
+    "Puzzle"
+   ],
+   "short_description": "A cosy little city builder about placing buildings on a hilly panorama.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "City builder",
+    "Cosy",
+    "Puzzle"
+   ],
+   "summary": "A cosy little city builder about placing buildings on a hilly panorama.",
+   "identity": {
+    "core_loop": "Place buildings, fit them to the land, grow a pretty town.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm and sweet.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Mostly in the world; small card-like overlays.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Soft stylised diorama.",
+    "palette": null,
+    "audio_mood": "Gentle.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Tiny cosy placement games are our genre; terrain-aware placement looks great."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.67,
+     "structure": 0.22,
+     "social": 0.44,
+     "systems": 0.44,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "papers-please",
+   "file": "docs/oracle/games/papers-please.json",
+   "appid": 239030,
+   "name": "Papers, Please",
+   "store_url": "https://store.steampowered.com/app/239030/",
+   "genres": [
+    "Puzzle",
+    "Simulation"
+   ],
+   "short_description": "A border inspector checks documents for a grim fictional state.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Simulation"
+   ],
+   "summary": "A border inspector checks documents for a grim fictional state.",
+   "identity": {
+    "core_loop": "Check papers, spot errors, stamp, feed your family.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense, moral, clever.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "meta": 0.1,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The desk is the interface: papers are physical objects (diegetic).",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Pixel-art drab.",
+    "palette": null,
+    "audio_mood": "Stark.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A desk of physical papers as the whole UI; diegetic paperwork. The theme is not for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.67,
+     "structure": 0.11,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.33,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -8351,6 +10828,217 @@
    }
   },
   {
+   "id": "pikuniku",
+   "file": "docs/oracle/games/pikuniku.json",
+   "appid": 572890,
+   "name": "Pikuniku",
+   "store_url": "https://store.steampowered.com/app/572890/",
+   "genres": [
+    "Platformer",
+    "Puzzle",
+    "Comedy"
+   ],
+   "short_description": "A cheerful little red creature helps a village resist a suspicious corporation.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Platformer",
+    "Puzzle",
+    "Comedy"
+   ],
+   "summary": "A cheerful little red creature helps a village resist a suspicious corporation.",
+   "identity": {
+    "core_loop": "Walk, kick, roll, talk to odd villagers, solve tiny puzzles.",
+    "mechanics": null,
+    "ui_and_game_feel": "Sweet, absurd, short.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "overlay": 0.1,
+      "none": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.02,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Almost no HUD; villagers talk in bubbles.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Bold flat shapes and primary colours.",
+    "palette": null,
+    "audio_mood": "Bouncy electronic.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Simple shapes and silly friendly characters are enough. Speech bubbles on characters, not panels."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.33,
+     "expression": 0.67,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 0.11,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "plague-inc-evolved",
+   "file": "docs/oracle/games/plague-inc-evolved.json",
+   "appid": 246620,
+   "name": "Plague Inc: Evolved",
+   "store_url": "https://store.steampowered.com/app/246620/",
+   "genres": [
+    "Strategy",
+    "Simulation"
+   ],
+   "short_description": "Evolve a disease to infect the world before humanity finds a cure.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "Simulation"
+   ],
+   "summary": "Evolve a disease to infect the world before humanity finds a cure.",
+   "identity": {
+    "core_loop": "Pick traits, spread, adapt, race the cure.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clever, dark.",
+    "information_grammar": {
+     "overall_mix": {
+      "meta": 0.1,
+      "overlay": 0.9
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.6,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "World map overlay with red spreading; news headlines.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Clean map UI.",
+    "palette": null,
+    "audio_mood": "Tense.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "A spreading colour on a map is a powerful visual; the theme is not for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.22,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.67,
+     "chance": 0.33,
+     "session": 0.78
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "plan-b-terraform",
+   "file": "docs/oracle/games/plan-b-terraform.json",
+   "appid": 1894430,
+   "name": "Plan B: Terraform",
+   "store_url": "https://store.steampowered.com/app/1894430/",
+   "genres": [
+    "Factory",
+    "Terraform"
+   ],
+   "short_description": "Terraform a planet by building industry and watching it turn green.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Factory",
+    "Terraform"
+   ],
+   "summary": "Terraform a planet by building industry and watching it turn green.",
+   "identity": {
+    "core_loop": "Build mines and cities, raise the temperature, bring water and plants.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm and satisfying.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.3,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The planet changes colour as you terraform.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Clean.",
+    "palette": null,
+    "audio_mood": "Calm.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A world turning green as progress, like GRIS for planets."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.56,
+     "systems": 0.78,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "planet-zoo",
    "file": "docs/oracle/games/planet-zoo.json",
    "appid": 703080,
@@ -8488,6 +11176,147 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "portal",
+   "file": "docs/oracle/games/portal.json",
+   "appid": 400,
+   "name": "Portal",
+   "store_url": "https://store.steampowered.com/app/400/",
+   "genres": [
+    "Puzzle",
+    "First person"
+   ],
+   "short_description": "Solve test chambers with a gun that makes linked portals.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "First person"
+   ],
+   "summary": "Solve test chambers with a gun that makes linked portals.",
+   "identity": {
+    "core_loop": "Place two portals, think in momentum, reach the exit.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clever and short; a sly AI narrator.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.8,
+      "overlay": 0.1,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.02,
+       "source": "estimate",
+       "confidence": 0.63,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Almost no HUD; the narrator's voice gives information diegetically.",
+     "confidence": 0.9,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Clean white test labs.",
+    "palette": null,
+    "audio_mood": "Narrator and one famous song.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "One tool, many puzzles; a voice in the world teaching you."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 0.44,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.9
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "postmouse",
+   "file": "docs/oracle/games/postmouse.json",
+   "appid": 2273550,
+   "name": "Postmouse",
+   "store_url": "https://store.steampowered.com/app/2273550/",
+   "genres": [
+    "Cosy",
+    "Delivery"
+   ],
+   "short_description": "A little mouse delivers the post around a cosy world.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Cosy",
+    "Delivery"
+   ],
+   "summary": "A little mouse delivers the post around a cosy world.",
+   "identity": {
+    "core_loop": "Collect letters, deliver to friends, explore.",
+    "mechanics": null,
+    "ui_and_game_feel": "Sweet.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.2,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.28,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Letters and friends in the world; light HUD.",
+     "confidence": 0.4,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Soft cute 3D.",
+    "palette": null,
+    "audio_mood": "Gentle.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A small animal doing a job for friends is a perfect kid fantasy (like Space Mail)."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.22,
+     "expression": 0.44,
+     "structure": 0.22,
+     "social": 0.44,
+     "systems": 0.44,
+     "chance": 0.22,
+     "session": 0.22
+    },
+    "confidence": 0.4
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -8708,6 +11537,221 @@
    "review": "Kids build games for each other with a pen they hold in the world. The 'make your own room' idea is close to the Holodeck."
   },
   {
+   "id": "rimworld",
+   "file": "docs/oracle/games/rimworld.json",
+   "appid": 294100,
+   "name": "RimWorld",
+   "store_url": "https://store.steampowered.com/app/294100/",
+   "genres": [
+    "Colony sim",
+    "Management"
+   ],
+   "short_description": "A colony sim where a story generator throws events at a handful of survivors on a rim planet.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Colony sim",
+    "Management"
+   ],
+   "summary": "A colony sim where a story generator throws events at a handful of survivors on a rim planet.",
+   "identity": {
+    "core_loop": "Give orders, build, farm, survive raids, disease and weather, watch stories happen.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deep, emergent, often harsh.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "spatial": 0.2,
+      "meta": 0.1,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.22,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Characters' moods are bubbles and needs lists; lots of overlay tabs; the storyteller picks events.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Simple top-down sprites.",
+    "palette": null,
+    "audio_mood": "Quiet guitar.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "An AI storyteller that paces events is a director we want, kid-friendly; but keep the needs on the characters, not in tabs."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.67,
+     "expression": 0.67,
+     "structure": 1,
+     "social": 0.78,
+     "systems": 0.78,
+     "chance": 0.44,
+     "session": 0.89
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "risk-of-rain-2",
+   "file": "docs/oracle/games/risk-of-rain-2.json",
+   "appid": 632360,
+   "name": "Risk of Rain 2",
+   "store_url": "https://store.steampowered.com/app/632360/",
+   "genres": [
+    "Action",
+    "Roguelite",
+    "Co-op"
+   ],
+   "short_description": "Survive alien planets that grow harder the longer you stay.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Roguelite",
+    "Co-op"
+   ],
+   "summary": "Survive alien planets that grow harder the longer you stay.",
+   "identity": {
+    "core_loop": "Collect items, stack effects, beat the teleporter boss.",
+    "mechanics": null,
+    "ui_and_game_feel": "Frantic.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Difficulty bar overlay; items stack visibly.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Stylised.",
+    "palette": null,
+    "audio_mood": "Rock.",
+    "pacing": "fast, medium sessions",
+    "lessons_for_abbies_world": "Difficulty that rises with time is a clear tension engine; too chaotic for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.89,
+     "challenge": 0.67,
+     "expression": 0.56,
+     "structure": 0.56,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.67,
+     "session": 0.44
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "rock-of-ages",
+   "file": "docs/oracle/games/rock-of-ages.json",
+   "appid": 22230,
+   "name": "Rock of Ages",
+   "store_url": "https://store.steampowered.com/app/22230/",
+   "genres": [
+    "Tower defense",
+    "Racing",
+    "Comedy"
+   ],
+   "short_description": "Roll a giant boulder through art-history levels to crush castle gates.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Tower defense",
+    "Racing",
+    "Comedy"
+   ],
+   "summary": "Roll a giant boulder through art-history levels to crush castle gates.",
+   "identity": {
+    "core_loop": "Build defences, then roll your boulder down the course.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly and physical.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Low HUD; the boulder is the hero.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Monty Python-style art history.",
+    "palette": null,
+    "audio_mood": "Classical music.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Rolling a giant ball is a kid-perfect verb."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.22,
+     "social": 0.44,
+     "systems": 0.44,
+     "chance": 0.44,
+     "session": 0.22
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "rust",
    "file": "docs/oracle/games/rust.json",
    "appid": 252490,
@@ -8844,6 +11888,78 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "satisfactory",
+   "file": "docs/oracle/games/satisfactory.json",
+   "appid": 526870,
+   "name": "Satisfactory",
+   "store_url": "https://store.steampowered.com/app/526870/",
+   "genres": [
+    "Factory",
+    "Building",
+    "Exploration"
+   ],
+   "short_description": "Build huge factories on an alien planet in first person.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Factory",
+    "Building",
+    "Exploration"
+   ],
+   "summary": "Build huge factories on an alien planet in first person.",
+   "identity": {
+    "core_loop": "Mine, build machines, connect belts, automate, expand.",
+    "mechanics": null,
+    "ui_and_game_feel": "Satisfying flow and scale.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Machines show working or blocked in the world; build menu overlay.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Bright industrial sci-fi.",
+    "palette": null,
+    "audio_mood": "Calm ambient, machine hum.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Seeing your machines run and connect is the reward; blocked machines should show it in the world."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.67,
+     "expression": 0.89,
+     "structure": 0.33,
+     "social": 0.78,
+     "systems": 0.89,
+     "chance": 0.22,
+     "session": 1
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -9040,6 +12156,76 @@
    }
   },
   {
+   "id": "smalland",
+   "file": "docs/oracle/games/smalland.json",
+   "appid": 768200,
+   "name": "Smalland: Survive the Wilds",
+   "store_url": "https://store.steampowered.com/app/768200/",
+   "genres": [
+    "Survival",
+    "Crafting"
+   ],
+   "short_description": "Survive as tiny people in a giant world of insects.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival",
+    "Crafting"
+   ],
+   "summary": "Survive as tiny people in a giant world of insects.",
+   "identity": {
+    "core_loop": "Gather, craft, tame bugs, explore.",
+    "mechanics": null,
+    "ui_and_game_feel": "Giant world wonder.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.12,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Survival gauges overlay.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Realistic-giant.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Being tiny in a big ordinary world is a great kids' fantasy."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.56,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.22
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "songs-of-syx",
    "file": "docs/oracle/games/songs-of-syx.json",
    "appid": 1162750,
@@ -9175,6 +12361,218 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "spacechem",
+   "file": "docs/oracle/games/spacechem.json",
+   "appid": 92800,
+   "name": "SpaceChem",
+   "store_url": "https://store.steampowered.com/app/92800/",
+   "genres": [
+    "Puzzle",
+    "Programming"
+   ],
+   "short_description": "Design chemical reactors with two waldos to build molecules.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Programming"
+   ],
+   "summary": "Design chemical reactors with two waldos to build molecules.",
+   "identity": {
+    "core_loop": "Place instructions, run the reactor, optimise.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hard and elegant.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "overlay": 0.8
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.4,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The reactor grid is the whole display.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Clean schematic.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Expert puzzle design; far too hard for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.78,
+     "expression": 0.22,
+     "structure": 0.11,
+     "social": 0.56,
+     "systems": 0.89,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "stacking",
+   "file": "docs/oracle/games/stacking.json",
+   "appid": 115110,
+   "name": "Stacking",
+   "store_url": "https://store.steampowered.com/app/115110/",
+   "genres": [
+    "Puzzle",
+    "Adventure"
+   ],
+   "short_description": "A Russian-doll boy hops into bigger dolls, each with a special trick, to free his family.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Adventure"
+   ],
+   "summary": "A Russian-doll boy hops into bigger dolls, each with a special trick, to free his family.",
+   "identity": {
+    "core_loop": "Find a doll, jump inside, use its ability, solve each puzzle several ways.",
+    "mechanics": null,
+    "ui_and_game_feel": "Charming, playful, many answers.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.6,
+      "spatial": 0.2,
+      "overlay": 0.1,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.04,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Abilities are the dolls themselves (diegetic); silent-film title cards for talk.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Handmade toy world of wood and paint.",
+    "palette": null,
+    "audio_mood": "Silent-film piano.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Toys with one ability each, and many solutions per puzzle. Very Abbie's World."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.78,
+     "structure": 0.11,
+     "social": 0.44,
+     "systems": 0.11,
+     "chance": 0.33,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "starbound",
+   "file": "docs/oracle/games/starbound.json",
+   "appid": 211820,
+   "name": "Starbound",
+   "store_url": "https://store.steampowered.com/app/211820/",
+   "genres": [
+    "Sandbox",
+    "Exploration",
+    "Crafting"
+   ],
+   "short_description": "A 2D space sandbox: explore planets, build, craft and quest.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Sandbox",
+    "Exploration",
+    "Crafting"
+   ],
+   "summary": "A 2D space sandbox: explore planets, build, craft and quest.",
+   "identity": {
+    "core_loop": "Explore, mine, build, craft, quest.",
+    "mechanics": null,
+    "ui_and_game_feel": "Huge, charming, sprawling.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Moderate HUD; the world shows most things.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Pixel art.",
+    "palette": null,
+    "audio_mood": "Lovely ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A 2D side-view world can be cosy and vast at once."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.56,
+     "expression": 0.78,
+     "structure": 0.33,
+     "social": 0.67,
+     "systems": 0.67,
+     "chance": 0.56,
+     "session": 0.33
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -9323,6 +12721,78 @@
    }
   },
   {
+   "id": "station-to-station",
+   "file": "docs/oracle/games/station-to-station.json",
+   "appid": 2272400,
+   "name": "Station to Station",
+   "store_url": "https://store.steampowered.com/app/2272400/",
+   "genres": [
+    "Puzzle",
+    "Building",
+    "Cosy"
+   ],
+   "short_description": "Connect stations with railways across voxel landscapes and watch trains bring the land to life.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Puzzle",
+    "Building",
+    "Cosy"
+   ],
+   "summary": "Connect stations with railways across voxel landscapes and watch trains bring the land to life.",
+   "identity": {
+    "core_loop": "Place stations, connect them with track, earn, unlock cards, see the world bloom.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm, cosy, pretty.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.3,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Trains and blooming land show success; a card overlay for bonuses.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Bright voxel dioramas.",
+    "palette": null,
+    "audio_mood": "Soft.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Connections that make the land bloom; a diorama that rewards you with life. Like Dorfromantik."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.44,
+     "systems": 0.56,
+     "chance": 0.56,
+     "session": 0.22
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "steam-engine-simulator",
    "file": "docs/oracle/games/steam-engine-simulator.json",
    "appid": 2381620,
@@ -9386,6 +12856,78 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "stellaris",
+   "file": "docs/oracle/games/stellaris.json",
+   "appid": 281990,
+   "name": "Stellaris",
+   "store_url": "https://store.steampowered.com/app/281990/",
+   "genres": [
+    "Strategy",
+    "4X",
+    "Space"
+   ],
+   "short_description": "Grand strategy across a galaxy of empires.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "4X",
+    "Space"
+   ],
+   "summary": "Grand strategy across a galaxy of empires.",
+   "identity": {
+    "core_loop": "Explore, colonise, manage, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Huge.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.1,
+      "spatial": 0.2,
+      "overlay": 0.7
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.3,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay everywhere.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Space opera.",
+    "palette": null,
+    "audio_mood": "Epic.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Shows how deep a story generator can go; nothing for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.78,
+     "expression": 0.78,
+     "structure": 0.78,
+     "social": 0.67,
+     "systems": 1,
+     "chance": 0.44,
+     "session": 1
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -9666,6 +13208,146 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "superhot",
+   "file": "docs/oracle/games/superhot.json",
+   "appid": 322500,
+   "name": "SUPERHOT",
+   "store_url": "https://store.steampowered.com/app/322500/",
+   "genres": [
+    "Action",
+    "Puzzle"
+   ],
+   "short_description": "Time moves only when you move.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Puzzle"
+   ],
+   "summary": "Time moves only when you move.",
+   "identity": {
+    "core_loop": "Move, time moves, dodge bullets, clear the room.",
+    "mechanics": null,
+    "ui_and_game_feel": "Stylish, clever.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.7,
+      "meta": 0.1,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "No HUD; red enemies on white rooms.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Minimal white and red.",
+    "palette": null,
+    "audio_mood": "Silence.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Time that moves only when you move gives kids time to think."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.56,
+     "expression": 0.33,
+     "structure": 0.11,
+     "social": 0.33,
+     "systems": 0.22,
+     "chance": 0.11,
+     "session": 0.11
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "surviving-mars",
+   "file": "docs/oracle/games/surviving-mars.json",
+   "appid": 464920,
+   "name": "Surviving Mars",
+   "store_url": "https://store.steampowered.com/app/464920/",
+   "genres": [
+    "City builder",
+    "Space"
+   ],
+   "short_description": "Build domes and keep colonists alive on Mars.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "City builder",
+    "Space"
+   ],
+   "summary": "Build domes and keep colonists alive on Mars.",
+   "identity": {
+    "core_loop": "Drop supplies, build domes, settle colonists, research.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm and complex.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.2,
+      "spatial": 0.2,
+      "overlay": 0.6
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.16,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy; drones and domes show activity.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Clean retro-future.",
+    "palette": null,
+    "audio_mood": "Retro radio.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Little domes on a red planet could suit the Moonbase."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.67,
+     "expression": 0.67,
+     "structure": 1,
+     "social": 0.67,
+     "systems": 0.89,
+     "chance": 0.33,
+     "session": 0.89
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -10079,6 +13761,75 @@
    }
   },
   {
+   "id": "the-long-dark",
+   "file": "docs/oracle/games/the-long-dark.json",
+   "appid": 305620,
+   "name": "The Long Dark",
+   "store_url": "https://store.steampowered.com/app/305620/",
+   "genres": [
+    "Survival"
+   ],
+   "short_description": "Survive alone in a frozen Canadian wilderness.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Survival"
+   ],
+   "summary": "Survive alone in a frozen Canadian wilderness.",
+   "identity": {
+    "core_loop": "Gather, keep warm, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Quiet, beautiful.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.3,
+      "meta": 0.1,
+      "overlay": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Few gauges; sounds and breath show cold.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Painterly.",
+    "palette": null,
+    "audio_mood": "Sparse.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Survival shown through feeling (breath, sound) more than numbers."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.67,
+     "expression": 0.33,
+     "structure": 0.67,
+     "social": 0.33,
+     "systems": 0.44,
+     "chance": 0.67,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "the-pale-beyond",
    "file": "docs/oracle/games/the-pale-beyond.json",
    "appid": 1266030,
@@ -10145,6 +13896,76 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "they-are-billions",
+   "file": "docs/oracle/games/they-are-billions.json",
+   "appid": 644930,
+   "name": "They Are Billions",
+   "store_url": "https://store.steampowered.com/app/644930/",
+   "genres": [
+    "Strategy",
+    "Survival"
+   ],
+   "short_description": "Defend a steampunk colony from zombie hordes.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "Survival"
+   ],
+   "summary": "Defend a steampunk colony from zombie hordes.",
+   "identity": {
+    "core_loop": "Build, wall off, survive the horde waves.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense, punishing.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "spatial": 0.2,
+      "overlay": 0.5
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.14,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Overlay heavy; huge hordes in the world.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Steampunk.",
+    "palette": null,
+    "audio_mood": "Grim.",
+    "pacing": "brisk, long sessions",
+    "lessons_for_abbies_world": "Not for kids; the wall-building tension is notable."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.89,
+     "expression": 0.33,
+     "structure": 0.78,
+     "social": 0.67,
+     "systems": 0.78,
+     "chance": 0.44,
+     "session": 0.78
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -10221,6 +14042,78 @@
    }
   },
   {
+   "id": "thronefall",
+   "file": "docs/oracle/games/thronefall.json",
+   "appid": 2239150,
+   "name": "Thronefall",
+   "store_url": "https://store.steampowered.com/app/2239150/",
+   "genres": [
+    "Strategy",
+    "Tower defense",
+    "Minimalist"
+   ],
+   "short_description": "A minimalist kingdom builder: build by day, defend by night as a mounted king.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Strategy",
+    "Tower defense",
+    "Minimalist"
+   ],
+   "summary": "A minimalist kingdom builder: build by day, defend by night as a mounted king.",
+   "identity": {
+    "core_loop": "Day: spend coins on buildings. Night: ride out and fight beside your towers. Morning: collect and grow.",
+    "mechanics": null,
+    "ui_and_game_feel": "Gentle, crisp, short; the day and night swap is the heartbeat.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.3,
+      "overlay": 0.2
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.56,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Coins drop and float in the world; build spots glow on the ground; night light tells you danger is coming. Tiny HUD.",
+     "confidence": 0.8,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Flat-shaded pastel low-poly.",
+    "palette": null,
+    "audio_mood": "Calm day music, drums at night.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Day and night as the one signal that changes light, music and play. Very close to the Ranch's rhythm."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.56,
+     "expression": 0.56,
+     "structure": 0.44,
+     "social": 0.44,
+     "systems": 0.44,
+     "chance": 0.67,
+     "session": 0.33
+    },
+    "confidence": 0.8
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "thunder-tier-one",
    "file": "docs/oracle/games/thunder-tier-one.json",
    "appid": 377300,
@@ -10287,6 +14180,75 @@
     "set": "library",
     "owned": true,
     "installed": true,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "ticket-to-ride",
+   "file": "docs/oracle/games/ticket-to-ride.json",
+   "appid": 108200,
+   "name": "Ticket to Ride",
+   "store_url": "https://store.steampowered.com/app/108200/",
+   "genres": [
+    "Board game",
+    "Strategy"
+   ],
+   "short_description": "The digital version of the train-route board game.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Board game",
+    "Strategy"
+   ],
+   "summary": "The digital version of the train-route board game.",
+   "identity": {
+    "core_loop": "Draw coloured train cards, claim routes, finish tickets.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm and family friendly.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.3,
+      "overlay": 0.7
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.3,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "The map is the board; cards in hand are overlay.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Board-game illustration.",
+    "palette": null,
+    "audio_mood": "Train sounds.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A family board game shows how few rules make a good shared table game."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.22,
+     "challenge": 0.33,
+     "expression": 0.22,
+     "structure": 0.56,
+     "social": 0.56,
+     "systems": 0.44,
+     "chance": 0.44,
+     "session": 0.22
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
     "status": "studied",
     "date": "2026-10-23"
    }
@@ -10548,6 +14510,76 @@
    }
   },
   {
+   "id": "toy-soldiers",
+   "file": "docs/oracle/games/toy-soldiers.json",
+   "appid": 98300,
+   "name": "Toy Soldiers",
+   "store_url": "https://store.steampowered.com/app/98300/",
+   "genres": [
+    "Tower defense",
+    "Toy"
+   ],
+   "short_description": "WWI tower defence played with toy soldiers on a toy-box diorama.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Tower defense",
+    "Toy"
+   ],
+   "summary": "WWI tower defence played with toy soldiers on a toy-box diorama.",
+   "identity": {
+    "core_loop": "Place turrets, take control of one, survive waves.",
+    "mechanics": null,
+    "ui_and_game_feel": "Toy-box charm.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.2,
+      "overlay": 0.4
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.1,
+       "source": "estimate",
+       "confidence": 0.42,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "A diorama of toys; overlay wave count.",
+     "confidence": 0.6,
+     "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Toy-box realism.",
+    "palette": null,
+    "audio_mood": "Brass band.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A toy diorama as the world is our exact look (toy box)."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.56,
+     "challenge": 0.44,
+     "expression": 0.44,
+     "structure": 0.22,
+     "social": 0.44,
+     "systems": 0.44,
+     "chance": 0.44,
+     "session": 0.22
+    },
+    "confidence": 0.6
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
+  },
+  {
    "id": "trackmania",
    "file": "docs/oracle/games/trackmania.json",
    "appid": 2225070,
@@ -10618,6 +14650,79 @@
     "family": "racing"
    },
    "review": "One button resets you to the start in a blink, so failing never hurts. Ghosts of your best run race next to you. Both ideas suit kids perfectly."
+  },
+  {
+   "id": "trine",
+   "file": "docs/oracle/games/trine.json",
+   "appid": 35700,
+   "name": "Trine",
+   "store_url": "https://store.steampowered.com/app/35700/",
+   "genres": [
+    "Platformer",
+    "Puzzle",
+    "Co-op"
+   ],
+   "short_description": "A wizard, a thief and a knight share one body to solve physics puzzles in a fairy-tale world.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Platformer",
+    "Puzzle",
+    "Co-op"
+   ],
+   "summary": "A wizard, a thief and a knight share one body to solve physics puzzles in a fairy-tale world.",
+   "identity": {
+    "core_loop": "Swap heroes, conjure boxes, swing, fight, solve.",
+    "mechanics": null,
+    "ui_and_game_feel": "Pretty and co-operative.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.2,
+      "none": 0.1
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Little HUD; physics objects and light tell the story.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "side",
+    "art_direction": "Lush storybook fantasy.",
+    "palette": null,
+    "audio_mood": "Fairy-tale orchestral.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Swap between characters with different powers; co-op physics puzzles suit families."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.33,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.44,
+     "systems": 0.33,
+     "chance": 0.33,
+     "session": 0.22
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
   },
   {
    "id": "trove",
@@ -10692,6 +14797,76 @@
     "family": "mmo"
    },
    "review": "Looks like a toy, plays like a grind. The personal home plot you carry between worlds is a nice idea."
+  },
+  {
+   "id": "undead-horde",
+   "file": "docs/oracle/games/undead-horde.json",
+   "appid": 790850,
+   "name": "Undead Horde",
+   "store_url": "https://store.steampowered.com/app/790850/",
+   "genres": [
+    "Action",
+    "Strategy"
+   ],
+   "short_description": "Raise an army of undead as a necromancer.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Action",
+    "Strategy"
+   ],
+   "summary": "Raise an army of undead as a necromancer.",
+   "identity": {
+    "core_loop": "Raise followers, conquer.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.5,
+      "spatial": 0.2,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.08,
+       "source": "estimate",
+       "confidence": 0.35,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Mostly world.",
+     "confidence": 0.5,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Cartoon.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "A growing crowd of followers is a fun fantasy; theme not for kids."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.67,
+     "challenge": 0.44,
+     "expression": 0.56,
+     "structure": 0.33,
+     "social": 0.44,
+     "systems": 0.56,
+     "chance": 0.44,
+     "session": 0.22
+    },
+    "confidence": 0.5
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+   }
   },
   {
    "id": "unturned",
@@ -11299,6 +15474,78 @@
     "owned": true,
     "installed": true,
     "status": "needs play session",
+    "date": "2026-10-23"
+   }
+  },
+  {
+   "id": "wobbly-life",
+   "file": "docs/oracle/games/wobbly-life.json",
+   "appid": 1211020,
+   "name": "Wobbly Life",
+   "store_url": "https://store.steampowered.com/app/1211020/",
+   "genres": [
+    "Sandbox",
+    "Open world",
+    "Co-op"
+   ],
+   "short_description": "A wobbly physics open world full of silly jobs, vehicles and secrets, playable with friends.",
+   "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+   ],
+   "study_genres": [
+    "Sandbox",
+    "Open world",
+    "Co-op"
+   ],
+   "summary": "A wobbly physics open world full of silly jobs, vehicles and secrets, playable with friends.",
+   "identity": {
+    "core_loop": "Do odd jobs, earn money, buy houses and clothes, mess about with friends.",
+    "mechanics": null,
+    "ui_and_game_feel": "Floppy and funny; kids love it.",
+    "information_grammar": {
+     "overall_mix": {
+      "diegetic": 0.4,
+      "spatial": 0.3,
+      "overlay": 0.3
+     },
+     "screen_budget": {
+      "hud_coverage": {
+       "value": 0.06,
+       "source": "estimate",
+       "confidence": 0.49,
+       "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+      }
+     },
+     "note": "Job markers float over places; a small money counter.",
+     "confidence": 0.7,
+     "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Bright toy town with jelly people.",
+    "palette": null,
+    "audio_mood": "Cheerful.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Wobbly physics characters make any task funny for kids; a toy town full of jobs is a great play pattern."
+   },
+   "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+     "tempo": 0.44,
+     "challenge": 0.33,
+     "expression": 0.78,
+     "structure": 0.22,
+     "social": 0.56,
+     "systems": 0.33,
+     "chance": 0.44,
+     "session": 0.11
+    },
+    "confidence": 0.7
+   },
+   "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
     "date": "2026-10-23"
    }
   },

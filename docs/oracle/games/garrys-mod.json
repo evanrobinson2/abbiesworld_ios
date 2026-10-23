@@ -1,0 +1,68 @@
+{
+  "appid": 4000,
+  "name": "Garry's Mod",
+  "store_url": "https://store.steampowered.com/app/4000/",
+  "genres": [
+    "Sandbox",
+    "Physics"
+  ],
+  "short_description": "A physics sandbox for spawning props and building contraptions and game modes.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Sandbox",
+    "Physics"
+  ],
+  "summary": "A physics sandbox for spawning props and building contraptions and game modes.",
+  "identity": {
+    "core_loop": "Spawn things, weld, pose, play community modes.",
+    "mechanics": null,
+    "ui_and_game_feel": "Unbounded creativity.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Tool gun and spawn menus; the world is the canvas.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Source-engine props.",
+    "palette": null,
+    "audio_mood": "None of its own.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Proof that tools and props let players invent their own games; also how messy that can be."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.33,
+      "expression": 1.0,
+      "structure": 0.22,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

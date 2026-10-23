@@ -1,0 +1,67 @@
+{
+  "appid": 108200,
+  "name": "Ticket to Ride",
+  "store_url": "https://store.steampowered.com/app/108200/",
+  "genres": [
+    "Board game",
+    "Strategy"
+  ],
+  "short_description": "The digital version of the train-route board game.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Board game",
+    "Strategy"
+  ],
+  "summary": "The digital version of the train-route board game.",
+  "identity": {
+    "core_loop": "Draw coloured train cards, claim routes, finish tickets.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm and family friendly.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The map is the board; cards in hand are overlay.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Board-game illustration.",
+    "palette": null,
+    "audio_mood": "Train sounds.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "A family board game shows how few rules make a good shared table game."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.22,
+      "structure": 0.56,
+      "social": 0.56,
+      "systems": 0.44,
+      "chance": 0.44,
+      "session": 0.22
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "appid": 400,
+  "name": "Portal",
+  "store_url": "https://store.steampowered.com/app/400/",
+  "genres": [
+    "Puzzle",
+    "First person"
+  ],
+  "short_description": "Solve test chambers with a gun that makes linked portals.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "First person"
+  ],
+  "summary": "Solve test chambers with a gun that makes linked portals.",
+  "identity": {
+    "core_loop": "Place two portals, think in momentum, reach the exit.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clever and short; a sly AI narrator.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.8,
+        "overlay": 0.1,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.63,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Almost no HUD; the narrator's voice gives information diegetically.",
+      "confidence": 0.9,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Clean white test labs.",
+    "palette": null,
+    "audio_mood": "Narrator and one famous song.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "One tool, many puzzles; a voice in the world teaching you."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.11,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.9
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

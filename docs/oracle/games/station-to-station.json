@@ -1,0 +1,70 @@
+{
+  "appid": 2272400,
+  "name": "Station to Station",
+  "store_url": "https://store.steampowered.com/app/2272400/",
+  "genres": [
+    "Puzzle",
+    "Building",
+    "Cosy"
+  ],
+  "short_description": "Connect stations with railways across voxel landscapes and watch trains bring the land to life.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Building",
+    "Cosy"
+  ],
+  "summary": "Connect stations with railways across voxel landscapes and watch trains bring the land to life.",
+  "identity": {
+    "core_loop": "Place stations, connect them with track, earn, unlock cards, see the world bloom.",
+    "mechanics": null,
+    "ui_and_game_feel": "Calm, cosy, pretty.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Trains and blooming land show success; a card overlay for bonuses.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Bright voxel dioramas.",
+    "palette": null,
+    "audio_mood": "Soft.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Connections that make the land bloom; a diorama that rewards you with life. Like Dorfromantik."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.44,
+      "systems": 0.56,
+      "chance": 0.56,
+      "session": 0.22
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
