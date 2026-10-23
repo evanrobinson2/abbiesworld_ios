@@ -1,0 +1,30 @@
+{
+  "part": "shoulders",
+  "date": "2026-10-23",
+  "concept": {
+    "source": "Midjourney",
+    "job_id": "b767ad24-f814-4666-aee6-bdda30ecb239",
+    "image_index": 1,
+    "file": "concept.png",
+    "prompt": "A matched pair of Roman shoulder armor pieces only, separate left and right curved overlapping segmented shoulder plates, hollow empty undersides, stylized low-poly strategy-game equipment asset, elegant ivory-white monochromatic material, clean angular faceted polygonal geometry, strong readable silhouette, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, figure, mannequin, anatomy, skin, head, face, body, pedestal, text, scenery, helmet --ar 1:1 --v 8.2",
+    "created": "2026-10-22T15:54:54.830208+00:00",
+    "picked_by": "Evan"
+  },
+  "mask": {
+    "tool": "rembg isnet-general-use",
+    "file": "concept_mask.png"
+  },
+  "construction": {
+    "recipe": "build.py",
+    "tool": "Blender 5.2 (bpy) headless",
+    "output": "shoulders.glb"
+  },
+  "scoring": {
+    "tool": "../../score.py",
+    "outputs": [
+      "r/score.json",
+      "r/compare.jpg",
+      "r/hero.png"
+    ]
+  }
+}

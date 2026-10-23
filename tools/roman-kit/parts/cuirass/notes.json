@@ -1,0 +1,46 @@
+{
+  "part": "cuirass",
+  "name": "Cuirass",
+  "role": "torso: segmented body armour (lorica segmentata)",
+  "what_i_did": "Lorica segmentata as hoops and plates: 7 overlapping girth hoops, chest and yoke plates round a neck opening, breast and back plates, 3 shoulder lames per side, and the front seam.",
+  "good": [
+    "Outline match 0.92, the best of the six: the stacked girth hoops, the shoulder lames and the neck opening all line up.",
+    "Hollow, with open neck and arm holes, so it can sit on a body.",
+    "Each hoop is its own piece, so the armour can flex or be dented hoop by hoop later."
+  ],
+  "off": [
+    "The concept's hoops have a stronger downward overlap and soft folded edges; mine are cleaner, stiffer bands.",
+    "At about 6.8k triangles it is the heaviest part; the hoops could share geometry if the budget gets tight."
+  ],
+  "creative_additions": "A centre seam down the front where the two halves meet, as on real segmentata.",
+  "rounds": [
+    {
+      "n": 1,
+      "t": "First build: 7 hoops, chest and yoke, breast and back plates."
+    },
+    {
+      "n": 2,
+      "t": "Shoulder lames, 3 per side, stacked over the yoke; neck opening widened."
+    },
+    {
+      "n": 3,
+      "t": "Seams and facet pass; final render and score."
+    }
+  ],
+  "score": {
+    "iou": 0.923,
+    "camera": {
+      "yaw": -8.0,
+      "pitch": 9.0,
+      "lens": 62.5,
+      "roll": 0.0
+    },
+    "triangles": 6784,
+    "dimensions_m": [
+      0.511,
+      0.31,
+      0.605
+    ],
+    "method": "silhouette IoU after bounding-box normalising both masks; camera found by grid search on the model, so a guide"
+  }
+}

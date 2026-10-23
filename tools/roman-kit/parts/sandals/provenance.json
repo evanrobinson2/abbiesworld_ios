@@ -1,0 +1,30 @@
+{
+  "part": "sandals",
+  "date": "2026-10-23",
+  "concept": {
+    "source": "Midjourney",
+    "job_id": "5756e8ae-95c4-418f-afc7-3b9743e671da",
+    "image_index": 2,
+    "file": "concept.png",
+    "prompt": "A matched pair of Roman military sandals only, left and right caligae, thick soles and broad simplified open lattice straps, visibly empty foot openings, stylized low-poly strategy-game equipment asset, elegant ivory-white monochromatic material, clean angular faceted polygonal geometry, strong readable silhouette, three-quarter orthographic product view, centered and entirely visible, soft studio lighting and subtle ambient occlusion, isolated plain light gray background, suitable as reference for a game-ready 3D mesh --no person, figure, mannequin, anatomy, skin, head, face, body, pedestal, text, scenery, helmet --ar 1:1 --v 8.2",
+    "created": "2026-10-22T15:54:59.992781+00:00",
+    "picked_by": "Evan"
+  },
+  "mask": {
+    "tool": "rembg isnet-general-use",
+    "file": "concept_mask.png"
+  },
+  "construction": {
+    "recipe": "build.py",
+    "tool": "Blender 5.2 (bpy) headless",
+    "output": "sandals.glb"
+  },
+  "scoring": {
+    "tool": "../../score.py",
+    "outputs": [
+      "r/score.json",
+      "r/compare.jpg",
+      "r/hero.png"
+    ]
+  }
+}

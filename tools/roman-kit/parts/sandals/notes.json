@@ -1,0 +1,47 @@
+{
+  "part": "sandals",
+  "name": "Sandals",
+  "role": "feet: a left and right pair of caligae",
+  "what_i_did": "A left and right pair: bevelled sole plates, a cage of 5 strap arches over the foot, 3 long straps from toe to ankle, and a heel loop that rises behind the ankle.",
+  "good": [
+    "Outline match 0.78: the thick soles, the lattice cage and the heel loops all read as the concept's caligae.",
+    "A true left and right, toes turned out a little, as the concept stands.",
+    "About 2.1k triangles for the pair."
+  ],
+  "off": [
+    "The concept's cage is denser and wraps further down the sides of the sole.",
+    "The heel loops are a little taller than the concept's.",
+    "The concept stands the pair side by side facing the camera; mine is staggered slightly, which costs some overlap in the score."
+  ],
+  "creative_additions": "The heel loop, so the sandal reads as strapped on rather than a slipper.",
+  "rounds": [
+    {
+      "n": 1,
+      "t": "First build: heel outline made a spike."
+    },
+    {
+      "n": 2,
+      "t": "Heel arc reversed; cage arches and long straps tuned."
+    },
+    {
+      "n": 3,
+      "t": "Final render and score."
+    }
+  ],
+  "score": {
+    "iou": 0.783,
+    "camera": {
+      "yaw": -48.0,
+      "pitch": 34.0,
+      "lens": 106.25,
+      "roll": 0.0
+    },
+    "triangles": 2120,
+    "dimensions_m": [
+      0.286,
+      0.355,
+      0.114
+    ],
+    "method": "silhouette IoU after bounding-box normalising both masks; camera found by grid search on the model, so a guide"
+  }
+}
