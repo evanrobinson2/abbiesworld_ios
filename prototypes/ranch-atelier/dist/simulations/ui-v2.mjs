@@ -76,7 +76,13 @@ function start(){
 
  // Touching the world puts summoned things away; idle tucks the hand so the world gets the bottom edge back.
  let idle=0;const wake=()=>{hand.classList.remove('tucked');clearTimeout(idle);idle=setTimeout(()=>{if(!root.classList.contains('v2-sheet')&&!hand.matches(':hover'))hand.classList.add('tucked');},6000);};
- addEventListener('pointerdown',e=>{wake();if(e.target.closest?.('#v2-chrono,#v2-chrono-pop,#v2-box,#v2-shelf,#v2-hand,#scene-tools-drawer,.facet-picker,dialog,[popover]'))return;if(e.target.tagName==='CANVAS')closeAll();},true);
+ addEventListener('pointerdown',e=>{wake();
+  // The tile sheet closes on any tap outside it (not only on the world), so it can never trap the player.
+  if(root.classList.contains('v2-sheet')&&!e.target.closest?.('#scene-tools-drawer,#v2-hand,.facet-picker,dialog,[popover]'))root.classList.remove('v2-sheet');
+  if(e.target.closest?.('#v2-chrono,#v2-chrono-pop,#v2-box,#v2-shelf,#v2-hand,#scene-tools-drawer,.facet-picker,dialog,[popover]'))return;if(e.target.tagName==='CANVAS')closeAll();},true);
+ // The sheet's × belongs to v1's drawer and toggles the v1 dropper, which left the v2 sheet open and re-toggling (Evan, 2026-10-23:
+ // "caught in a loop that wouldn't close"). In v2 it just puts the sheet away.
+ addEventListener('click',e=>{if(e.target.closest?.('#scene-tools-drawer .tile-tools-heading button')){e.preventDefault();e.stopPropagation();root.classList.remove('v2-sheet');}},true);
  addEventListener('pointermove',e=>{if(e.clientY>innerHeight-160)wake();},{passive:true});wake();
  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeAll();});
 
