@@ -1893,6 +1893,114 @@
      "note": "Nothing masks the world: the open backpack floats over the scene with no dimming or blur."
     }
    ]
+  },
+  "cell": {
+   "items": [
+    {
+     "k": "oracle",
+     "t": "Spore (Cell Stage), identity record and profile",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=spore",
+     "note": "Ingested for this study; size is the rule, parts found in the world, diet by mouth, parallax water layers. Style only"
+    },
+    {
+     "k": "oracle",
+     "t": "Oracle consult: a single-cell top-down battler in a beaker of green goo",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/examples/spore.json",
+     "note": "Ranked Spore first; four size classes as the threat grammar"
+    },
+    {
+     "k": "oracle",
+     "t": "Super Smash Bros. Ultimate, identity record",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/identity/examples/super-smash-bros-ultimate.json",
+     "note": "Push off the edge, not drain a bar; further when hotter; the finishing freeze"
+    },
+    {
+     "k": "oracle",
+     "t": "Brawlhalla, profile",
+     "href": "https://abbies-game-oracle.vercel.app/game?id=brawlhalla",
+     "note": "Damage shown as the fighter changing colour: our heat"
+    },
+    {
+     "k": "devblog",
+     "t": "Chris Hecker, How to Animate a Character You've Never Seen Before (GDC 2007)",
+     "href": "https://chrishecker.com/How_To_Animate_a_Character_You%27ve_Never_Seen_Before",
+     "note": "Procedural animation of any creation: our parts animate themselves from the cell's speed"
+    },
+    {
+     "k": "devblog",
+     "t": "Chris Hecker, Spore liner notes (Venus Patrol)",
+     "href": "https://venuspatrol.com/2009/04/checker-spore-liner-notes/"
+    },
+    {
+     "k": "devblog",
+     "t": "CGW, Evolutionary Chain (Spore's art pipeline, 2008)",
+     "href": "https://www.cgw.com/Publications/CGW/2008/Volume-31-Issue-10-Oct-2008-/Evolutionary-Chain.aspx"
+    },
+    {
+     "k": "design",
+     "t": "Superjump, That Time Will Wright Put You in Charles Darwin's Shoes",
+     "href": "https://superjumpmagazine.com/that-time-will-wright-put-you-in-charles-darwins-shoes"
+    },
+    {
+     "k": "design",
+     "t": "StrategyWiki, Spore Cell Stage",
+     "href": "https://strategywiki.org/wiki/Spore/Cell_Stage",
+     "note": "Growth steps, parts and diet, for pacing"
+    },
+    {
+     "k": "tutorial",
+     "t": "LogRocket, How to create liquid glass effects with CSS and SVG",
+     "href": "https://blog.logrocket.com/how-create-liquid-glass-effects-css-and-svg/",
+     "note": "Displacement-map refraction, which our shader does per cell"
+    },
+    {
+     "k": "tutorial",
+     "t": "Cowboy Programming, blob physics",
+     "href": "https://cowboyprogramming.com/?p=35",
+     "note": "Soft bodies from springs on a ring of points"
+    },
+    {
+     "k": "canon",
+     "t": "Liquid glass lens (lensMap)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/liquid-glass.mjs"
+    },
+    {
+     "k": "canon",
+     "t": "Inspiring Shaders (AW-STUDY-0045): Tiny Glade soft light and Painted Brush",
+     "href": "https://claude.ai/artifact/X5e4wt4hrrSE1zZeVpWZTU"
+    },
+    {
+     "k": "canon",
+     "t": "2D Mannequin Puppet (AW-STUDY-0038): bones, follow-through overlap",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/puppet/PUPPET_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Inner voice captions and memory coins",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/memory-kit/inner-voice.mjs"
+    },
+    {
+     "k": "canon",
+     "t": "Speed reviews of Grace's Basement and the School Jump",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/school/SCHOOL_READY_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "HUD and information study",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/hud/HUD_STUDY.md"
+    },
+    {
+     "k": "canon",
+     "t": "Cards v3 faces (die-cut), reused for boost cards",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/cards/v3/face.mjs"
+    },
+    {
+     "k": "canon",
+     "t": "Gamepad mapping (A, X, LB/RB) kept for couch play",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/gamepad.mjs"
+    }
+   ],
+   "recorded": "2026-10-23, as the study was built"
   }
  }
 }
