@@ -327,7 +327,7 @@ Full detail and thresholds are in `card-rubric.json`. In short:
 | Hierarchy | 12 | Saliency peak in art; reading-order judge; words on face |
 | Art crop and subject | 12 | Centring, subject height share, silhouette test, calm text zones |
 | Rarity signalling | 10 | Gem colour distance (OKLab deltaE at least 15 between neighbours, also under deuteranopia), distinct shapes, finish present for Bloom and up |
-| Frame and material | 10 | "Crafted object, not web UI" pairwise judge; frame share 15 to 30 per cent; bevel/texture value range |
+| Frame and material | 10 | "Crafted object, not web UI" pairwise judge; frame share 15 to 35 per cent; bevel/texture value range |
 | Typography | 8 | Two families or fewer, numeral outline, no text on raw art |
 | Collectibility metadata | 8 | Set mark, number/total, maker line, variant code, stable card id |
 | Juice | 12 | Draw, hover, reveal and play timings within the table above; sound per motion; reduced-motion path |

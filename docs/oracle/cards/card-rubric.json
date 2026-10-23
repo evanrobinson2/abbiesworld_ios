@@ -1,5 +1,5 @@
 {
-  "rubric_version": "1.1",
+  "rubric_version": "1.2",
   "name": "Abbie's World collectible card rubric",
   "date": "2026-10-22",
   "doc": "docs/oracle/cards/CARD_STUDY.md",
@@ -349,7 +349,7 @@
         },
         {
           "id": "frame_share",
-          "check": "Frame (non-art, non-plate) area is 15 to 30% of the face.",
+          "check": "Frame area (face minus the art window and the name and text plates; tokens, gem and collector line count as frame) is 15 to 35% of the face. Overlay and Sun cards are exempt.",
           "source": "footage_cv",
           "auto": true
         },
@@ -539,7 +539,7 @@
         "id": "popout",
         "depth": "in_front",
         "checks": [
-          "subject crosses the window edge by 5-15% of trim height",
+          "subject crosses the window edge (art.window_bbox when the art covers the face) by 5-15% of trim height, on any side",
           "crossing part is the focal part",
           "subject bbox does not intersect cost or stat tokens",
           "cast shadow on frame present"
@@ -625,7 +625,8 @@
       "art.mode": "one or more mode ids, e.g. ['overlay','popout','living']",
       "art.layers": "list of layer files: bg, mid, subject, fg, shadow, depth",
       "art.subject_bbox": "[x,y,w,h] canvas px",
-      "art.focal_point": "[x,y] canvas px"
+      "art.focal_point": "[x,y] canvas px",
+      "art.window_bbox": "[x,y,w,h] canvas px of the framed window; required for popout when art.bbox covers the face"
     },
     "house_mapping": {
       "seed": "specimen",
