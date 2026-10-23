@@ -1,6 +1,6 @@
 {
  "cap": 2000,
- "total": 885,
+ "total": 945,
  "log": [
   {
    "what": "A1-clay-suit 3d",
@@ -341,6 +341,16 @@
    "what": "cs-3-stick-man rig",
    "credits": 5,
    "at": "2026-10-23T21:12:44Z"
+  },
+  {
+   "what": "cs-4-80s-action-hero 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:12:57Z"
+  },
+  {
+   "what": "A3-clay-tee 3d",
+   "credits": 30,
+   "at": "2026-10-23T21:12:58Z"
   }
  ]
 }
