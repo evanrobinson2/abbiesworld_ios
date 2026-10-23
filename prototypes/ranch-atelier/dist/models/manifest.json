@@ -3445,6 +3445,96 @@
    ]
   },
   {
+   "id": "ranch-goldenrod-charming",
+   "name": "Goldenrod",
+   "style": "charming",
+   "base": "goldenrod",
+   "group": "Ranch tile · charming",
+   "subject": "meadow flower",
+   "ask": "a whimsical storybook version of a clump of goldenrod, upright stems topped with plumes of yellow flowers, oversized plump petals and leaves, bouncy rounded toy-like shapes",
+   "outline": 0.763,
+   "orbit": [
+    -30,
+    72
+   ],
+   "date": "2026-10-23",
+   "urls": {
+    "ref": "/models/ranch-goldenrod-charming/ref.jpg",
+    "glb": "/models/ranch-goldenrod-charming/model.glb"
+   },
+   "scores": [
+    {
+     "label": "Outline match",
+     "value": 0.763,
+     "help": "Share of the concept silhouette and the model silhouette that coincide"
+    }
+   ],
+   "good": [
+    "Hero silhouette IoU 0.763 at 768 px from the matched camera: a tall flame-shaped clump, tallest plume in the centre and leaning left, with a broad leafy foot.",
+    "Reads as the same goldenrod as the normal set, but chubbier: fat golden bottle-brush plumes and big oversized leaves, with a lean and bowed stems for the toy feel.",
+    "Under budget at 984 triangles, same height, same material names."
+   ],
+   "off": [
+    "The hero's plumes are many small rounded petals; with 1k triangles the petals are 9 big faceted teardrops per plume, which read a little crystalline up close (fine at tile size).",
+    "The lower half is less solid than the hero's dense leaf mound (fill 0.30-0.37 against 0.41-0.48 per row band), and the very bottom row is narrower: the hero's foot touches the ground across about a third of the height.",
+    "Stems keep the material name Stem_Rust for drop-in compatibility but are coloured olive green, as the hero draws them.",
+    "Width/depth 1.40 against the normal's 1.53 (the charming hero is narrower relative to its height); the game scales plants to a set height, so this only changes the plan slightly.",
+    "The IoU moves by about +-0.02 with the random seed alone; seed 3 kept."
+   ],
+   "steps": [
+    [
+     "Round 1.",
+     "First build from the normal model: 8 stems from the hero, 10 small teardrop petals per plume, 3 oval leaves per stem, 22-leaf rosette, lean 3 deg right. Far too sparse."
+    ],
+    [
+     "Round 2.",
+     "Petals 1.4x longer and plumper (9 per plume), leaves much bigger, rosette taller."
+    ],
+    [
+     "Round 3.",
+     "Lean flipped to 3 deg left (the hero leans left), left plumes moved out, stem leaves longer and flatter."
+    ],
+    [
+     "Round 4.",
+     "Row-by-row check: wider stem feet and rosette, foot shifted left, 4 leaves per stem starting lower."
+    ],
+    [
+     "Round 5.",
+     "Oversized leaves (wider), rosette lower and more splayed, front-back squash 0.72 towards the normal's plan ratio."
+    ],
+    [
+     "Round 6.",
+     "Rosette from the ground up at 22-55 deg and wider; seed sweep 1-8 (0.72-0.765), seed 3 kept."
+    ],
+    [
+     "Round 7.",
+     "Longer stem leaves; final 768 px / 48 sample render and hero score; to_game.py goldenrod-charming."
+    ]
+   ],
+   "details": [
+    [
+     "Style",
+     "Charming"
+    ],
+    [
+     "Role in the ranch",
+     "meadow flower"
+    ],
+    [
+     "Triangles",
+     "984"
+    ],
+    [
+     "Size",
+     "0.48 × 0.34 × 0.84 m"
+    ],
+    [
+     "Little extras",
+     "Bowed stems and a slight lean for the storybook bounce; the top petals of every plume in the light gold, as if sunlit."
+    ]
+   ]
+  },
+  {
    "id": "ranch-hay-rack",
    "name": "Hay rack",
    "style": "normal",
