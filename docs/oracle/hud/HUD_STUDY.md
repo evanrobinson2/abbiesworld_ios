@@ -31,6 +31,44 @@ Dorfromantik, Bricktales and 9 Kings are in Evan's installed list; Sons of the F
 when profiles land, their `ui_and_game_feel` fields should be checked against this file. Nothing here copies any
 game's UI art, icons, fonts or layout; the ledger says what is style and what is expression.
 
+## The core rule: the whole game adapts
+
+Evan's framing (2026-10-23): every HUD choice fits on a 2x2, plus "none".
+
+| | In the world | On the screen |
+|---|---|---|
+| **Characters know** | **Diegetic**: feeling through the world, shared with everyone in it | **Meta**: feeling in your body, what the hero feels painted on the lens |
+| **Only you know** | **Spatial**: where and which, attention without words | **Overlay**: information and precision only |
+
+**None**: the world simply behaves differently, and you feel unease before you know why.
+
+**Overlays convey information; meta conveys feeling; diegetic conveys feeling through the world.** One fact, "8 minutes
+until the horde arrives", shown each way:
+
+| Kind | How it shows | What the player feels |
+|---|---|---|
+| Overlay | A timer in the corner counting down | Information. You plan; your heart rate doesn't change |
+| Spatial | An orange glow on the horizon where it will come from, a marker on the gate | Attention. You know where, not how it feels |
+| Meta | The screen edges close in, a heartbeat rises from 62 to 132 bpm | Dread in your body, without a number |
+| Diegetic | The bell rings faster, villagers run inside, the gate closes, dusk falls | The village is afraid with you |
+| None | Crows lift off the fence, dogs bark, then silence | Unease, before you know what is wrong |
+
+**That is how you create feelings.** The best games don't pick one: **the whole game adapts.** A single game-state
+signal (threat, time of day, mood) drives every channel together:
+
+- **Light**: the sky and sun move toward night; windows light up.
+- **Music**: the adaptive score (world, place, situation, then a mood: Mysterious, Intense, Epic; the composer
+  thread's `docs/music/MUSIC_BIBLE.md` when it lands) crossfades its layers on the same signal.
+- **NPCs**: residents stop wandering, hurry, go inside, close the gate.
+- **Animals**: crows lift, dogs bark, sheep and cows head for the barn.
+- **Sound**: the bell's interval shrinks; the ambient bed thins to silence before the arrival.
+- **Lens**: only at the very end, a light meta vignette.
+
+The world becomes the HUD, and no timer is needed. For Abbie's World the threat becomes friendly ("a storm in 8
+minutes", "night is coming", "the festival starts soon"); the mechanism is the same. The rubric checks it as
+`one_signal_many_channels` (D3): each timed or threatening state drives at least three world channels. The study page
+opens with this demo, all five modes and the adaptive version on one scene.
+
 ## The short version
 
 1. **The best HUD is the one you stop seeing.** Every game in this study either moves information into the world

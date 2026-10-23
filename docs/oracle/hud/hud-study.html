@@ -136,14 +136,90 @@ td.num { font-variant-numeric: tabular-nums; }
 .ledger ul { margin: 0; padding-left: 1.1em; display: grid; gap: 6px; font-size: 0.93rem; }
 .ledger h3 { margin-bottom: 8px; }
 footer { margin-top: 56px; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--rule); padding-top: 20px; }
+/* Horde 2x2 */
+.core { display: grid; gap: 22px; padding-block: 8px 8px; }
+.core .lede b { color: var(--ink); }
+.adapt { display: grid; grid-template-columns: minmax(0, 330px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 820px) { .adapt { grid-template-columns: minmax(0, 1fr); } }
+.matrix { display: grid; grid-template-columns: 64px minmax(0, 1fr) minmax(0, 1fr); gap: 8px; align-items: stretch; }
+.matrix .ax { font: 500 0.72rem/1.25 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; }
+.matrix .ax.top { justify-content: center; text-align: center; padding-bottom: 2px; }
+.matrix .ax.side { writing-mode: vertical-rl; transform: rotate(180deg); justify-content: center; }
+.q { font: inherit; color: var(--ink); text-align: left; background: var(--dusk-lift); border: 0; border-radius: 14px; padding: 12px; cursor: pointer; display: grid; gap: 4px; box-shadow: inset 0 0 0 1.5px var(--rule); min-height: 92px; align-content: start; }
+.q b { font: 600 1.08rem/1.1 var(--display); }
+.q span { font-size: 0.84rem; color: var(--muted); line-height: 1.35; }
+.q[aria-pressed="true"] { box-shadow: inset 0 0 0 2.5px var(--qc, var(--sun)); background: #2c335a; }
+.q.wide { grid-column: 2 / 4; min-height: 0; }
+.q.all { background: linear-gradient(#3b3424, #2b2a33); }
+.q.all b { color: var(--sun); }
+#horde { width: 100%; aspect-ratio: 16 / 9; max-width: 100%; display: block; border-radius: 18px; background: var(--dusk-deep); }
+.hctl { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center; }
+.hctl label { font: 500 0.85rem/1 var(--mono); color: var(--muted); display: flex; gap: 10px; align-items: center; }
+.hctl input[type=range] { width: min(260px, 60vw); accent-color: var(--sun); }
+.feel { display: grid; gap: 6px; }
+.feel .kind { font: 600 1.4rem/1.1 var(--display); }
+.channels { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); gap: 10px 16px; }
+.ch { display: grid; gap: 5px; font: 500 0.78rem/1.2 var(--mono); color: var(--muted); }
+.ch .bar { height: 8px; border-radius: 4px; background: var(--dusk-lift); overflow: hidden; }
+.ch .bar span { display: block; height: 100%; width: 0; background: var(--sun); border-radius: 4px; transition: width 120ms linear; }
+.ch.off { opacity: 0.35; }
+.score { font: 500 0.85rem/1.5 var(--mono); color: var(--muted); }
+.score b { color: var(--ink); font-weight: 500; }
+.carries { overflow-x: auto; }
 </style>
 
 <div class="wrap">
 <header class="hero">
   <span class="eyebrow">Oracle study · 2026-10-23 · Abbie's World</span>
   <h1>What makes a great game HUD</h1>
-  <p class="lede">Ten games, five ways to show information, and a measurable rubric, applied to the Ranch. The short answer is that the best HUD is the one a child stops seeing: three toys on the table, and everything else on the thing it is about.</p>
+  <p class="lede">Ten games, five ways to show information, and a measurable rubric, applied to the Ranch. The short answer: overlays convey information, meta and diegetic convey feeling, and the best games let the whole world adapt, so a child never reads a timer. For the Ranch that means three toys on the table and everything else on the thing it is about.</p>
 </header>
+
+<section class="core" style="border-top:0;margin-top:8px">
+  <span class="eyebrow">The core rule</span>
+  <h2>The whole game adapts</h2>
+  <p class="lede read">Every HUD choice fits on a 2x2. Is the information <b>in the world or on the screen</b>? Do the <b>characters know it, or only you</b>? Add a fifth option, none, where the world simply behaves differently. <b>Overlays convey information. Meta conveys feeling. Diegetic conveys feeling through the world, shared with the characters.</b> Below, one fact is shown all five ways: 8 minutes until the horde arrives. Then press the gold button: one signal drives the light, the music, the villagers, the animals and the sound together, and the world becomes the HUD.</p>
+  <div class="adapt">
+    <div style="display:grid;gap:14px">
+      <div class="matrix" role="group" aria-label="Five ways to show 8 minutes until the horde">
+        <span></span><span class="ax top">In the world</span><span class="ax top">On the screen</span>
+        <span class="ax side">Characters know</span>
+        <button class="q" id="h-diegetic" style="--qc:var(--k-diegetic)" aria-pressed="false"><b style="color:var(--k-diegetic)">Diegetic</b><span>The bell rings, villagers run, dusk falls. Feeling through the world.</span></button>
+        <button class="q" id="h-meta" style="--qc:var(--k-meta)" aria-pressed="false"><b style="color:var(--k-meta)">Meta</b><span>The edges close in and a heartbeat rises. Feeling in your body.</span></button>
+        <span class="ax side">Only you know</span>
+        <button class="q" id="h-spatial" style="--qc:var(--k-spatial)" aria-pressed="false"><b style="color:var(--k-spatial)">Spatial</b><span>A glow on the horizon and a marker on the gate. Tells you where.</span></button>
+        <button class="q" id="h-overlay" style="--qc:var(--k-overlay)" aria-pressed="true"><b style="color:var(--k-overlay)">Overlay</b><span>A timer in the corner. Precise information, no feeling.</span></button>
+        <span></span>
+        <button class="q wide" id="h-none" style="--qc:var(--k-none)" aria-pressed="false"><b style="color:var(--k-none)">None</b><span>Crows lift off, dogs bark, then it goes quiet. Unease before you know why.</span></button>
+        <span></span>
+        <button class="q wide all" id="h-all" aria-pressed="false"><b>Everything at once: the whole game adapts</b><span>One signal drives light, music, villagers, animals and sound. No timer needed.</span></button>
+      </div>
+    </div>
+    <div style="display:grid;gap:14px;min-width:0">
+      <canvas id="horde" aria-label="A village at dusk with a horde coming in 8 minutes, shown in the selected presentation"></canvas>
+      <div class="hctl">
+        <button class="chip" id="h-sound">Turn sound on</button>
+        <button class="chip ghost" id="h-play" aria-pressed="true">Pause</button>
+        <label for="h-min">minutes left <input type="range" id="h-min" min="0" max="8" step="0.01" value="8"> <span id="h-minv" class="mono">8:00</span></label>
+      </div>
+      <div class="feel" id="h-feel" aria-live="polite"></div>
+      <div class="channels" id="h-ch"></div>
+      <div class="score" id="h-score"></div>
+    </div>
+  </div>
+  <div class="carries">
+    <table>
+      <thead><tr><th></th><th>In the world</th><th>On the screen</th></tr></thead>
+      <tbody>
+        <tr><th>Characters know</th><td><span class="dot" style="background:var(--k-diegetic)"></span><b>Diegetic</b>: feeling through the world, shared with everyone in it</td><td><span class="dot" style="background:var(--k-meta)"></span><b>Meta</b>: feeling in your body; what the hero feels, painted on the lens</td></tr>
+        <tr><th>Only you know</th><td><span class="dot" style="background:var(--k-spatial)"></span><b>Spatial</b>: where and which; attention without words</td><td><span class="dot" style="background:var(--k-overlay)"></span><b>Overlay</b>: information and precision only</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="read muted">For the Ranch the threat becomes friendly: "a storm in 8 minutes". The sky greys, the music moves from Mysterious to Intense to Epic, the sheep head for the barn, residents pull washing in, the café lights its lanterns. A child never reads a timer; they feel the storm coming and race to finish the fence.</p>
+</section>
+
+<div style="height:40px"></div>
 
 <div class="stage">
   <div class="phone"><canvas id="ranch" aria-label="A playable toy ranch with the proposed HUD: a sun dial, a hand of cards and a toy box"></canvas></div>
@@ -1078,7 +1154,7 @@ const CHECKS = [
   ['G1 chrome budget', 'pass', '7.6% both orientations', 'fail', '42.9%'], ['G2 words', 'pass', '0', 'fail', '173 always on, 57 summoned'],
   ['G3 targets and edges', 'pass', 'all 64 px, inside safe area', 'fail', '36 px toolbar buttons, 24 px sliders'], ['G4 no hover-only', 'pass', '', 'fail', 'button title tooltips'],
   ['G5 numerals', 'pass', 'sizes ok', 'pass', 'needs captures'], ['Always-on count', 'pass', '3', 'fail', '5'],
-  ['State on things', 'pass', '9 of 10 readouts', 'fail', '0 of 5'], ['World echo', 'pass', 'sun dial and light', 'fail', '4 meters with none'],
+  ['State on things', 'pass', '9 of 10 readouts', 'fail', '0 of 5'], ['World echo', 'pass', 'sun dial and light', 'fail', '4 meters with none'], ['One signal, many channels', 'pass', 'time, storm, festival each drive 4+', 'fail', 'no signals'],
   ['Fade rules declared', 'pass', 'focus, change, idle, threshold, summon', 'fail', 'none'], ['Web red flags (CSS)', 'pass', 'n/a', 'fail', '31 1px borders, system font, 5 hover-only colours']];
 document.getElementById('checks').innerHTML = CHECKS.map(([n, a, at, b, bt]) => `<tr><td>${n}</td><td><span class="verdict ${a}">${a}</span> <span class="muted">${at}</span></td><td><span class="verdict ${b}">${b}</span> <span class="muted">${bt}</span></td></tr>`).join('');
 
@@ -1088,4 +1164,134 @@ const st = [], ex = []; for (const [g, list] of Object.entries(SIGS.games)) for 
 document.getElementById('ledger').innerHTML = `<div><h3 style="color:var(--meadow)">Style we learn</h3><ul>${st.join('')}</ul></div><div><h3 style="color:var(--bad)">Expression we never copy</h3><ul>${ex.join('')}</ul></div>`;
 
 addEventListener('resize', () => { cx = fit(cv, W, H); tx = fit(trace, 600, 150); fc = fit(fcv, 360, 240); jfc = fit(jf, 320, 180); jjc = fit(jj, 320, 180); tc = fit(tcv, W, H); drawTouch(); });
+
+/* ---------- the horde: one signal, five ways, then the whole game adapts ---------- */
+(() => {
+  const HW = 960, HH = 540, cvh = document.getElementById('horde'); let hc = fit(cvh, HW, HH);
+  addEventListener('resize', () => { hc = fit(cvh, HW, HH); });
+  const MODES = {
+    overlay: { label: 'Overlay', col: K.overlay, feel: 'Information. You know exactly how long you have, and you plan. Your heart rate does not change.', ch: ['hud'] },
+    spatial: { label: 'Spatial', col: K.spatial, feel: 'Attention. Your eyes go to the glow on the right; you know where it comes from, not how it feels.', ch: ['hud', 'light'] },
+    meta: { label: 'Meta', col: K.meta, feel: 'Feeling in your body. The edges close in and the heartbeat rises; dread without a number.', ch: ['lens', 'sound'] },
+    diegetic: { label: 'Diegetic', col: K.diegetic, feel: 'Feeling through the world. The village is afraid with you: the bell, the running, the gate closing.', ch: ['light', 'villagers', 'sound'] },
+    none: { label: 'None', col: K.none, feel: "Unease. Crows lift, dogs bark, then silence. You feel something is wrong before you know what.", ch: ['animals', 'sound', 'light'] },
+    all: { label: 'The whole game adapts', col: css('--sun'), feel: 'One signal, threat, drives every channel at once. Nobody reads anything, and everybody knows.', ch: ['light', 'music', 'villagers', 'animals', 'sound', 'lens'] }
+  };
+  const CH = [['light', 'Light'], ['music', 'Music'], ['villagers', 'Villagers'], ['animals', 'Animals'], ['sound', 'Sound'], ['lens', 'Lens'], ['hud', 'Screen HUD']];
+  document.getElementById('h-ch').innerHTML = CH.map(([id, l]) => `<div class="ch" id="ch-${id}"><span>${l}</span><span class="bar"><span></span></span></div>`).join('');
+  const H = { mode: 'overlay', min: 8, play: true, sound: false, hold: 0, bellT: 0, beatT: 0, crowT: 0, dogT: 0, pulseT: 0, drumT: 0, swing: 0, beat: 0, bark: 0, crows: [] };
+  for (let i = 0; i < 6; i++) H.crows.push({ x0: 560 + i * 34, y0: 318, fx: 0, fy: 0, flown: false, t: 0 });
+  const vill = [[300, 430], [380, 455], [600, 440], [700, 470], [800, 445]].map(([x, y], i) => ({ x0: x, y0: y, ph: i * 1.3 }));
+  const sheep = [[200, 470], [250, 490], [720, 495], [770, 480], [840, 500]].map(([x, y], i) => ({ x0: x, y0: y, ph: i }));
+  const setMode = m => { H.mode = m; for (const k of Object.keys(MODES)) document.getElementById('h-' + k).setAttribute('aria-pressed', k === m); const M = MODES[m];
+    document.getElementById('h-feel').innerHTML = `<div class="kind" style="color:${M.col}">${M.label}</div><p>${M.feel}</p>`; if (m !== 'all') stopMusic(); else if (H.sound) startMusic(); };
+  for (const k of Object.keys(MODES)) document.getElementById('h-' + k).onclick = () => { audio(); setMode(k); };
+  const mv = document.getElementById('h-min'), mvv = document.getElementById('h-minv');
+  mv.oninput = () => { H.min = +mv.value; H.hold = 0; };
+  const pb = document.getElementById('h-play'); pb.onclick = () => { H.play = !H.play; pb.textContent = H.play ? 'Pause' : 'Play'; pb.setAttribute('aria-pressed', H.play); };
+  const sb = document.getElementById('h-sound'); sb.onclick = () => { audio(); H.sound = !H.sound; sb.textContent = H.sound ? 'Turn sound off' : 'Turn sound on'; if (H.sound && H.mode === 'all') startMusic(); if (!H.sound) stopMusic(); };
+
+  /* music: three layers from the adaptive score, Mysterious, Intense, Epic, crossfaded by threat */
+  let MU = null;
+  function startMusic() { const a = AC; if (!a || MU) return; const out = a.createGain(); out.gain.value = 0.0001; out.connect(a.destination);
+    const mk = (f, type, g) => { const o = a.createOscillator(), gg = a.createGain(); o.type = type; o.frequency.value = f; gg.gain.value = g; o.connect(gg).connect(out); o.start(); return { o, gg }; };
+    const drone = [mk(110, 'sine', 0.0), mk(164.8, 'sine', 0.0), mk(220.5, 'triangle', 0.0)];
+    MU = { out, drone, step: 0 }; out.gain.exponentialRampToValueAtTime(0.5, a.currentTime + 1.2); }
+  function stopMusic() { if (!MU || !AC) { MU = null; return; } const m = MU; MU = null; m.out.gain.setTargetAtTime(0.0001, AC.currentTime, 0.3); setTimeout(() => m.drone.forEach(d => d.o.stop()), 1500); }
+  function noiseHit(dur, freq, g, type = 'lowpass') { const a = AC; if (!a) return; const b = a.createBuffer(1, a.sampleRate * dur, a.sampleRate), d = b.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 2);
+    const s = a.createBufferSource(), f = a.createBiquadFilter(), gg = a.createGain(); f.type = type; f.frequency.value = freq; gg.gain.value = g; s.buffer = b; s.connect(f).connect(gg).connect(a.destination); s.start(); }
+  const bell = () => { tone(784, 1.6, 'sine', 0.09); tone(1568 * 1.01, 1.0, 'sine', 0.03); tone(392, 1.8, 'sine', 0.05); };
+  const heart = () => { tone(55, 0.14, 'sine', 0.35); tone(52, 0.14, 'sine', 0.25, 0.17); };
+  const caw = () => { tone(900, 0.12, 'sawtooth', 0.03); tone(760, 0.16, 'sawtooth', 0.03, 0.14); };
+  const bark = () => { tone(330, 0.08, 'square', 0.04); tone(260, 0.1, 'square', 0.04, 0.12); };
+
+  const clamp = v => Math.max(0, Math.min(1, v)), mix = (a, b, t) => a.map((v, i) => Math.round(v + (b[i] - v) * t)), rgb = c => `rgb(${c[0]},${c[1]},${c[2]})`;
+  let lastT = performance.now();
+  function frame(now) {
+    const dt = Math.min(0.05, (now - lastT) / 1000); lastT = now;
+    if (H.play) { if (H.min > 0) H.min = Math.max(0, H.min - dt / 8); else { H.hold += dt; if (H.hold > 4) { H.min = 8; H.hold = 0; H.crows.forEach(c => { c.flown = false; c.t = 0; }); } } mv.value = H.min; }
+    const k = 1 - H.min / 8, m = H.mode, all = m === 'all';
+    const mm = Math.floor(H.min), ss = Math.floor((H.min - mm) * 60); mvv.textContent = `${mm}:${String(ss).padStart(2, '0')}`;
+    const adaptLight = all || m === 'diegetic' || m === 'none', moves = all || m === 'diegetic', animals = all || m === 'none';
+    const lk = adaptLight ? k : 0.15;
+    // channel values
+    const val = { light: adaptLight ? k : m === 'spatial' ? k * 0.6 : 0, music: all ? k : 0, villagers: moves ? clamp(k * 1.4) : 0, animals: animals ? clamp(k * 1.6) : 0,
+      sound: (all || m === 'diegetic' || m === 'none' || m === 'meta') ? k : 0, lens: (m === 'meta' || all) ? (all ? clamp((k - 0.7) / 0.3) : k) : 0, hud: (m === 'overlay' || m === 'spatial') ? 1 : 0 };
+    for (const [id] of CH) { const el = document.getElementById('ch-' + id); el.classList.toggle('off', !MODES[m].ch.includes(id)); el.querySelector('.bar span').style.width = (val[id] * 100).toFixed(0) + '%'; }
+    const mood = k < 0.4 ? 'Mysterious' : k < 0.8 ? 'Intense' : 'Epic';
+    document.getElementById('h-score').innerHTML = all ? `Adaptive score: <b>world</b> Abbie's World · <b>place</b> village gate · <b>situation</b> horde coming · <b>mood</b> ${mood}` : `Adaptive score: off in this mode (only "the whole game adapts" drives the music)`;
+
+    // sounds
+    if (H.sound && AC && H.play) {
+      if (m === 'diegetic' || all) { H.bellT -= dt; const gap = lerp(5, 0.7, k); if (H.bellT <= 0 && H.min > 0) { bell(); H.swing = 1; H.bellT = gap; } }
+      if (m === 'meta' || (all && k > 0.75)) { H.beatT -= dt; const bpm = lerp(62, 132, k); if (H.beatT <= 0) { heart(); H.beat = 1; H.beatT = 60 / bpm; } }
+      if (m === 'none' || all) { H.crowT -= dt; if (k > 0.25 && k < 0.55 && H.crowT <= 0) { caw(); H.crowT = 1.6 + Math.random(); } H.dogT -= dt; if (k > 0.45 && k < 0.85 && H.dogT <= 0) { bark(); H.bark = 1; H.dogT = 0.9 + Math.random() * 0.8; } }
+      if (m === 'overlay' && Math.floor(H.min * 60) !== H.lastSec) { H.lastSec = Math.floor(H.min * 60); if (H.lastSec % 60 === 0) tone(1046, 0.08, 'sine', 0.05); }
+      if (all && MU) { const a = AC, t = a.currentTime, mys = clamp(1 - Math.abs(k - 0.2) / 0.5), inten = clamp(1 - Math.abs(k - 0.6) / 0.35), epic = clamp((k - 0.7) / 0.25);
+        MU.drone[0].gg.gain.setTargetAtTime(0.10 * Math.max(mys, 0.4), t, 0.3); MU.drone[1].gg.gain.setTargetAtTime(0.06 * mys, t, 0.3); MU.drone[2].gg.gain.setTargetAtTime(0.05 * epic, t, 0.3);
+        H.pulseT -= dt; const tempo = lerp(0.42, 0.21, k); if (H.pulseT <= 0 && inten + epic > 0.05) { const seq = [220, 220, 261.6, 220, 293.7, 220, 261.6, 196]; tone(seq[MU.step++ % 8], 0.16, 'triangle', 0.05 * Math.max(inten, epic)); H.pulseT = tempo; }
+        H.drumT -= dt; if (H.drumT <= 0 && epic > 0.05) { tone(60, 0.25, 'sine', 0.3 * epic); noiseHit(0.12, 2400, 0.05 * epic, 'highpass'); H.drumT = tempo * 2; } }
+    } else { H.bellT = Math.min(H.bellT, 0.3); }
+    H.swing = Math.max(0, H.swing - dt * 0.8); H.beat = Math.max(0, H.beat - dt * 4); H.bark = Math.max(0, H.bark - dt * 4);
+    if (!H.sound && (m === 'diegetic' || all)) { H.bellT -= dt; if (H.bellT <= 0 && H.min > 0) { H.swing = 1; H.bellT = lerp(5, 0.7, k); } }
+    if (!H.sound && (m === 'meta' || all)) { H.beatT -= dt; if (H.beatT <= 0) { H.beat = 1; H.beatT = 60 / lerp(62, 132, k); } }
+    if (!H.sound && (m === 'none' || all) && k > 0.45 && k < 0.85) { H.dogT -= dt; if (H.dogT <= 0) { H.bark = 1; H.dogT = 1.2; } }
+    draw(k, lk, m, now / 1000, dt);
+    requestAnimationFrame(frame);
+  }
+  function person(c, x, y, s, run, t, col) {
+    const bob = Math.abs(Math.sin(t * (run ? 14 : 5))) * (run ? 4 : 1.5);
+    c.fillStyle = 'rgba(0,0,0,0.22)'; c.beginPath(); c.ellipse(x, y + 2, 8 * s, 2.5 * s, 0, 0, Math.PI * 2); c.fill();
+    c.fillStyle = col; rr(c, x - 6 * s, y - 24 * s - bob, 12 * s, 20 * s, 5 * s); c.fill();
+    c.fillStyle = '#f2c9a0'; c.beginPath(); c.arc(x, y - 30 * s - bob, 6 * s, 0, Math.PI * 2); c.fill();
+    c.strokeStyle = '#3b2b22'; c.lineWidth = 3 * s; const sw = run ? Math.sin(t * 14) * 6 : Math.sin(t * 5) * 2; c.beginPath(); c.moveTo(x - 3 * s, y - 5 * s - bob); c.lineTo(x - 3 * s - sw * s, y); c.moveTo(x + 3 * s, y - 5 * s - bob); c.lineTo(x + 3 * s + sw * s, y); c.stroke();
+  }
+  function sheepDraw(c, x, y, t, run) { const bob = run ? Math.abs(Math.sin(t * 12)) * 3 : 0; c.fillStyle = 'rgba(0,0,0,0.2)'; c.beginPath(); c.ellipse(x, y + 3, 12, 3, 0, 0, Math.PI * 2); c.fill(); c.fillStyle = '#f4efe6'; for (const [dx, dy] of [[-6, -8], [0, -11], [6, -8], [0, -5]]) { c.beginPath(); c.arc(x + dx, y + dy - bob, 6, 0, Math.PI * 2); c.fill(); } c.fillStyle = '#3b2b22'; c.beginPath(); c.ellipse(x + 11, y - 9 - bob, 4, 3.5, 0, 0, Math.PI * 2); c.fill(); }
+  function draw(k, lk, m, t, dt) {
+    const c = hc, all = m === 'all';
+    const skyT = mix([246, 196, 120], [34, 30, 78], lk), skyB = mix([250, 222, 168], [92, 60, 98], lk);
+    const g = c.createLinearGradient(0, 0, 0, 330); g.addColorStop(0, rgb(skyT)); g.addColorStop(1, rgb(skyB)); c.fillStyle = g; c.fillRect(0, 0, HW, HH);
+    const sunY = lerp(170, 360, lk); c.fillStyle = rgb(mix([255, 236, 170], [240, 120, 80], lk)); c.beginPath(); c.arc(160, sunY, 34, 0, Math.PI * 2); c.fill();
+    if (lk > 0.6) { c.fillStyle = `rgba(255,255,240,${(lk - 0.6) * 2})`; for (let i = 0; i < 24; i++) { c.beginPath(); c.arc((i * 137) % HW, (i * 61) % 200 + 10, 1.4, 0, Math.PI * 2); c.fill(); } }
+    if (m === 'spatial' || all) { const gg = c.createRadialGradient(930, 320, 10, 930, 320, 420); gg.addColorStop(0, `rgba(255,110,60,${0.25 + 0.55 * k})`); gg.addColorStop(1, 'rgba(255,110,60,0)'); c.fillStyle = gg; c.fillRect(0, 0, HW, HH); }
+    c.fillStyle = rgb(mix([126, 152, 104], [52, 64, 70], lk)); c.beginPath(); c.moveTo(0, 330); c.quadraticCurveTo(240, 270, 480, 316); c.quadraticCurveTo(720, 280, 960, 300); c.lineTo(960, 360); c.lineTo(0, 360); c.fill();
+    if (k >= 0.999) { c.fillStyle = '#1c1830'; for (let i = 0; i < 14; i++) { const x = 760 + i * 14, y = 302 + Math.sin(i) * 3; c.beginPath(); c.arc(x, y, 7, Math.PI, 0); c.fill(); c.fillStyle = '#ffd84a'; c.fillRect(x - 3, y - 4, 2, 2); c.fillRect(x + 1, y - 4, 2, 2); c.fillStyle = '#1c1830'; } }
+    c.fillStyle = rgb(mix([124, 176, 96], [50, 78, 62], lk)); c.fillRect(0, 350, HW, 190);
+    // houses
+    for (const [x, w] of [[70, 90], [800, 100]]) { c.fillStyle = rgb(mix([236, 214, 176], [96, 84, 96], lk)); c.fillRect(x, 270, w, 70); c.fillStyle = rgb(mix([186, 84, 60], [70, 40, 50], lk)); c.beginPath(); c.moveTo(x - 8, 272); c.lineTo(x + w / 2, 236); c.lineTo(x + w + 8, 272); c.fill();
+      const lit = clamp((lk - 0.3) * 2); c.fillStyle = lit > 0 ? `rgba(255,214,120,${0.3 + lit * 0.7})` : 'rgba(60,70,90,0.6)'; c.fillRect(x + 14, 290, 18, 16); c.fillRect(x + w - 32, 290, 18, 16); }
+    // palisade and gate
+    c.fillStyle = rgb(mix([150, 104, 62], [74, 54, 44], lk)); for (let x = 200; x < 760; x += 16) { if (x > 444 && x < 516) continue; c.fillRect(x, 318, 13, 46); c.beginPath(); c.moveTo(x, 318); c.lineTo(x + 6.5, 308); c.lineTo(x + 13, 318); c.fill(); }
+    const close = (m === 'diegetic' || all) ? clamp((k - 0.55) / 0.3) : 0; c.fillStyle = rgb(mix([120, 82, 48], [64, 46, 38], lk));
+    const gw = 34 * Math.max(0.15, close); c.fillRect(446, 316, gw, 50); c.fillRect(514 - gw, 316, gw, 50);
+    // bell tower
+    c.fillStyle = rgb(mix([168, 122, 80], [80, 60, 52], lk)); c.fillRect(300, 210, 40, 110); c.beginPath(); c.moveTo(292, 212); c.lineTo(320, 180); c.lineTo(348, 212); c.fill(); c.fillStyle = rgb(mix([60, 40, 30], [20, 16, 24], lk)); c.fillRect(308, 220, 24, 28);
+    c.save(); c.translate(320, 222); c.rotate(Math.sin(t * 9) * 0.5 * H.swing); c.fillStyle = '#e0b04a'; c.beginPath(); c.moveTo(-9, 18); c.quadraticCurveTo(-9, 2, 0, 2); c.quadraticCurveTo(9, 2, 9, 18); c.closePath(); c.fill(); c.restore();
+    if (H.swing > 0.05) { c.strokeStyle = `rgba(255,236,170,${H.swing * 0.8})`; c.lineWidth = 2.5; for (let i = 1; i <= 2; i++) { c.beginPath(); c.arc(320, 236, 22 + i * 12 + (1 - H.swing) * 20, -0.9, 0.9); c.stroke(); c.beginPath(); c.arc(320, 236, 22 + i * 12 + (1 - H.swing) * 20, Math.PI - 0.9, Math.PI + 0.9); c.stroke(); } }
+    // fence posts for crows
+    c.fillStyle = rgb(mix([150, 104, 62], [74, 54, 44], lk)); c.fillRect(540, 324, 230, 5);
+    for (const cr of H.crows) { const fly = (m === 'none' || all) && k > 0.3; if (fly && !cr.flown) { cr.flown = true; cr.t = 0; } if (!fly) { cr.flown = false; cr.t = 0; } if (cr.flown) cr.t += dt;
+      const x = cr.x0 + cr.t * 120, y = cr.y0 - cr.t * 80 - Math.sin(cr.t * 6) * 4; if (y < -20) continue; c.fillStyle = '#1e1a24';
+      if (cr.flown) { const f = Math.sin(t * 20 + cr.x0) * 5; c.beginPath(); c.moveTo(x - 10, y - f); c.quadraticCurveTo(x - 4, y - 4, x, y); c.quadraticCurveTo(x + 4, y - 4, x + 10, y - f); c.lineTo(x, y + 2); c.fill(); }
+      else { c.beginPath(); c.ellipse(x, y, 6, 5, 0, 0, Math.PI * 2); c.fill(); c.beginPath(); c.arc(x + 5, y - 4, 3, 0, Math.PI * 2); c.fill(); } }
+    // dog
+    const bk = (m === 'none' || all) ? H.bark : 0; c.save(); c.translate(860, 372 - bk * 3); c.fillStyle = '#9a6a3c'; rr(c, -14, -10, 26, 12, 6); c.fill(); c.beginPath(); c.arc(14, -14, 7, 0, Math.PI * 2); c.fill(); c.fillStyle = '#6b4a26'; c.fillRect(-12, 0, 4, 8); c.fillRect(6, 0, 4, 8); c.restore();
+    if (bk > 0.05) { c.strokeStyle = `rgba(255,255,255,${bk})`; c.lineWidth = 2.5; for (let i = 0; i < 3; i++) { c.beginPath(); c.moveTo(886 + i * 3, 352 - i * 7); c.lineTo(898 + i * 6, 348 - i * 10); c.stroke(); } }
+    // sheep and villagers
+    const ak = (m === 'none' || all) ? clamp(k * 1.6) : 0;
+    for (const s of sheep) { const tx = s.x0 < 480 ? 230 : 740, ty = 400; const x = lerp(s.x0 + Math.sin(t * 0.4 + s.ph) * 6, tx + s.ph * 6, ak), y = lerp(s.y0, ty + s.ph * 3, ak); sheepDraw(c, x, y, t, ak > 0.05 && ak < 0.99); }
+    const vk = (m === 'diegetic' || all) ? clamp((k - 0.1) * 1.6) : 0;
+    vill.forEach((v, i) => { if (vk >= 0.98) return; const x = lerp(v.x0 + Math.sin(t * 0.3 + v.ph) * 10, 480, vk), y = lerp(v.y0, 372, vk); person(c, x, y, 1.15, vk > 0.02, t + v.ph, ['#5b7fc4', '#c4553b', '#6aa05a', '#b07bc4', '#e0a943'][i]); });
+    // spatial marker on the gate
+    if (m === 'spatial') { const bob = Math.sin(t * 3) * 3; c.fillStyle = '#fffaf0'; c.strokeStyle = '#2a1c08'; c.lineWidth = 3; c.beginPath(); c.arc(480, 270 + bob, 22, 0, Math.PI * 2); c.fill(); c.stroke(); outlined(c, String(Math.ceil(H.min)), 480, 272 + bob, 22, '#fff2b8'); c.fillStyle = '#ff7a4a'; c.beginPath(); c.moveTo(508, 262 + bob); c.lineTo(526, 270 + bob); c.lineTo(508, 278 + bob); c.fill(); }
+    // meta lens
+    if (m === 'meta' || (all && k > 0.7)) { const s2 = m === 'meta' ? k : clamp((k - 0.7) / 0.3) * 0.7, inner = lerp(520, 200, s2) - H.beat * 30 * s2; const vg = c.createRadialGradient(480, 270, inner, 480, 270, 620); vg.addColorStop(0, 'rgba(40,10,60,0)'); vg.addColorStop(1, `rgba(40,10,60,${0.35 + 0.5 * s2})`); c.fillStyle = vg; c.fillRect(0, 0, HW, HH);
+      if (m === 'meta') { c.fillStyle = `rgba(30,20,50,${0.25 * k})`; c.fillRect(0, 0, HW, HH); } }
+    // overlay timer
+    if (m === 'overlay') { const mm = Math.floor(H.min), ss = Math.floor((H.min - mm) * 60); c.fillStyle = 'rgba(14,16,30,0.82)'; rr(c, 760, 22, 178, 64, 12); c.fill();
+      c.strokeStyle = '#e8eefc'; c.lineWidth = 3; c.beginPath(); c.moveTo(784, 36); c.lineTo(804, 36); c.lineTo(784, 72); c.lineTo(804, 72); c.closePath(); c.stroke();
+      c.font = '600 34px "IBM Plex Mono", monospace'; c.fillStyle = '#e8eefc'; c.textAlign = 'left'; c.textBaseline = 'middle'; c.fillText(`${mm}:${String(ss).padStart(2, '0')}`, 818, 56); }
+  }
+  setMode('overlay'); requestAnimationFrame(frame);
+})();
 </script>

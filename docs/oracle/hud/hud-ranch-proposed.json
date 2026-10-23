@@ -242,5 +242,37 @@
   "max_flash_hz": 0,
   "fail_screen": false
  },
- "captures": []
+ "captures": [],
+ "signals": [
+  {
+   "id": "time_of_day",
+   "drives": [
+    "light",
+    "music",
+    "npcs",
+    "animals",
+    "sound"
+   ]
+  },
+  {
+   "id": "storm_coming",
+   "drives": [
+    "light",
+    "music",
+    "npcs",
+    "animals",
+    "sound",
+    "lens"
+   ]
+  },
+  {
+   "id": "festival_soon",
+   "drives": [
+    "light",
+    "music",
+    "npcs",
+    "sound"
+   ]
+  }
+ ]
 }
