@@ -1,0 +1,126 @@
+{
+ "study": "AW-STUDY-0043",
+ "status": "waits on Evan's Meshy key on the clipboard and his 'go' (one go runs every job here)",
+ "key": "read with pbpaste at run time only; never saved, logged, committed or echoed",
+ "jobs": [
+  {
+   "id": "A1-clay",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A1-clay/pick.png",
+   "should_texture": false,
+   "credits": 20,
+   "save_to": "tools/meshy-heroes/meshy/A1-clay/"
+  },
+  {
+   "id": "A1-paint",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A1-paint/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A1-paint/"
+  },
+  {
+   "id": "A2-clay",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A2-clay/pick.png",
+   "should_texture": false,
+   "credits": 20,
+   "save_to": "tools/meshy-heroes/meshy/A2-clay/"
+  },
+  {
+   "id": "A2-paint",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A2-paint/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A2-paint/"
+  },
+  {
+   "id": "A3-clay",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A3-clay/pick.png",
+   "should_texture": false,
+   "credits": 20,
+   "save_to": "tools/meshy-heroes/meshy/A3-clay/"
+  },
+  {
+   "id": "A3-paint",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A3-paint/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A3-paint/"
+  },
+  {
+   "id": "A4-clay",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A4-clay/pick.png",
+   "should_texture": false,
+   "credits": 20,
+   "save_to": "tools/meshy-heroes/meshy/A4-clay/"
+  },
+  {
+   "id": "A4-paint",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A4-paint/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A4-paint/"
+  },
+  {
+   "id": "A5-clay",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A5-clay/pick.png",
+   "should_texture": false,
+   "credits": 20,
+   "save_to": "tools/meshy-heroes/meshy/A5-clay/"
+  },
+  {
+   "id": "A5-paint",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A5-paint/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A5-paint/"
+  },
+  {
+   "id": "A6-clay",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A6-clay/pick.png",
+   "should_texture": false,
+   "credits": 20,
+   "save_to": "tools/meshy-heroes/meshy/A6-clay/"
+  },
+  {
+   "id": "A6-paint",
+   "kind": "image-to-3d",
+   "image": "tools/meshy-heroes/refs/A6-paint/pick.png",
+   "should_texture": true,
+   "credits": 30,
+   "save_to": "tools/meshy-heroes/meshy/A6-paint/"
+  },
+  {
+   "id": "brute1-retexture",
+   "kind": "retexture",
+   "input_task_id": "01a167ca-e56f-7279-8a8a-45d952e01751",
+   "model": "prototypes/ranch-atelier/dist/studies/brute-fight/red/fighter.glb",
+   "enable_original_uv": true,
+   "enable_pbr": true,
+   "credits": 10,
+   "save_to": "tools/character-studio/meshy/brute1/",
+   "for": "Character Studio, then Texture Studio weight transfer"
+  },
+  {
+   "id": "brute2-retexture",
+   "kind": "retexture",
+   "input_task_id": "01a16806-f882-743e-ae4e-ec866c693b4d",
+   "model": "prototypes/ranch-atelier/dist/studies/brute-fight/blue/fighter.glb",
+   "enable_original_uv": true,
+   "enable_pbr": true,
+   "credits": 10,
+   "save_to": "tools/character-studio/meshy/brute2/",
+   "for": "Character Studio, then Texture Studio weight transfer"
+  }
+ ],
+ "total_credits": 320
+}
