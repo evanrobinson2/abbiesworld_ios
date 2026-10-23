@@ -2,6 +2,17 @@
   "about": "Newest first. Every deploy of a visible change adds one entry with a picture; see FEEDBACK.md. Every shipped study gets one too (backfilled ones carry \"backfill\": true).",
   "entries": [
     {
+      "id": "2026-10-23-grace-basement-6",
+      "date": "2026-10-23",
+      "title": "Up the stairs into the café",
+      "line": "Leaving Grace's basement, by the door or at the end, now takes you up into the café. Daddy's call in the ending is written as a script that the Moon Mission will reuse.",
+      "image": "/whats-new/2026-10-23-basement-ending.jpg",
+      "thread": "cmsg_01USVJqCbJruSGtaP4zsE2eYFaCujnPX2YigsAYuPKmL9D",
+      "threadTitle": "Coffee shop office basement",
+      "tour": false,
+      "link": "/studies/basement/play.html"
+    },
+    {
       "id": "2026-10-23-figures-pencil",
       "date": "2026-10-23",
       "title": "Male and female figures, pencil drawn",
