@@ -1,0 +1,67 @@
+{
+  "appid": 434730,
+  "name": "Half dead",
+  "store_url": "https://store.steampowered.com/app/434730/",
+  "genres": [
+    "Puzzle",
+    "Horror"
+  ],
+  "short_description": "Escape a deadly room maze.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Horror"
+  ],
+  "summary": "Escape a deadly room maze.",
+  "identity": {
+    "core_loop": "Try rooms, avoid traps.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.21,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "None.",
+      "confidence": 0.3,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Simple.",
+    "palette": null,
+    "audio_mood": "None.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Nothing for us."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.67,
+      "systems": 0.44,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.3
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

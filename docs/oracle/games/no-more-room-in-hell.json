@@ -1,0 +1,68 @@
+{
+  "appid": 224260,
+  "name": "No More Room in Hell",
+  "store_url": "https://store.steampowered.com/app/224260/",
+  "genres": [
+    "Shooter",
+    "Zombies"
+  ],
+  "short_description": "Free co-op zombie survival.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Zombies"
+  ],
+  "summary": "Free co-op zombie survival.",
+  "identity": {
+    "core_loop": "Survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Grim.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Little HUD.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Gritty.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Nothing for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.56,
+      "expression": 0.44,
+      "structure": 0.22,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.67,
+      "session": 0.33
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

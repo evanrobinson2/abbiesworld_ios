@@ -1,0 +1,68 @@
+{
+  "appid": 544550,
+  "name": "Stationeers",
+  "store_url": "https://store.steampowered.com/app/544550/",
+  "genres": [
+    "Simulation",
+    "Space"
+  ],
+  "short_description": "Hardcore space station engineering.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Simulation",
+    "Space"
+  ],
+  "summary": "Hardcore space station engineering.",
+  "identity": {
+    "core_loop": "Build, plumb, manage atmosphere.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hard.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Devices in the world.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Nothing for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.89,
+      "expression": 0.78,
+      "structure": 0.33,
+      "social": 0.67,
+      "systems": 0.89,
+      "chance": 0.78,
+      "session": 0.22
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

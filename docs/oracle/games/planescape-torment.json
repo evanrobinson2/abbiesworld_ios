@@ -1,0 +1,67 @@
+{
+  "appid": 466300,
+  "name": "Planescape: Torment: Enhanced Edition",
+  "store_url": "https://store.steampowered.com/app/466300/",
+  "genres": [
+    "RPG",
+    "Story"
+  ],
+  "short_description": "A story-heavy CRPG about an immortal.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "RPG",
+    "Story"
+  ],
+  "summary": "A story-heavy CRPG about an immortal.",
+  "identity": {
+    "core_loop": "Talk, explore, discover.",
+    "mechanics": null,
+    "ui_and_game_feel": "Wordy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "overlay": 0.8
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Text heavy.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "isometric",
+    "art_direction": "Painted fantasy.",
+    "palette": null,
+    "audio_mood": "Moody.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Story choices matter; far too wordy for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.11,
+      "challenge": 0.56,
+      "expression": 0.67,
+      "structure": 0.22,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.56,
+      "session": 0.11
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

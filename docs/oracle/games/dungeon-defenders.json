@@ -1,0 +1,70 @@
+{
+  "appid": 65800,
+  "name": "Dungeon Defenders",
+  "store_url": "https://store.steampowered.com/app/65800/",
+  "genres": [
+    "Tower defense",
+    "Action RPG",
+    "Co-op"
+  ],
+  "short_description": "Heroes build defences and fight beside them to protect crystals.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Tower defense",
+    "Action RPG",
+    "Co-op"
+  ],
+  "summary": "Heroes build defences and fight beside them to protect crystals.",
+  "identity": {
+    "core_loop": "Build towers, fight waves, loot, level.",
+    "mechanics": null,
+    "ui_and_game_feel": "Co-op, cartoony, grindy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "spatial": 0.2,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.18,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay heavy with loot numbers.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Chibi cartoon.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Co-op defence with friends is great; the loot numbers are not."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.44,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.67,
+      "systems": 0.78,
+      "chance": 0.56,
+      "session": 0.33
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

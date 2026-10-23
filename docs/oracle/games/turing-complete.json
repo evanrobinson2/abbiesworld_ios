@@ -1,0 +1,67 @@
+{
+  "appid": 1444480,
+  "name": "Turing Complete",
+  "store_url": "https://store.steampowered.com/app/1444480/",
+  "genres": [
+    "Puzzle",
+    "Programming"
+  ],
+  "short_description": "Build a computer from logic gates.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Programming"
+  ],
+  "summary": "Build a computer from logic gates.",
+  "identity": {
+    "core_loop": "Wire gates, pass tests.",
+    "mechanics": null,
+    "ui_and_game_feel": "Brainy.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "overlay": 0.7
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.3,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Circuit board.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Clean.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Too hard for kids, but building things from simple parts is our way."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.56,
+      "expression": 0.33,
+      "structure": 0.11,
+      "social": 0.56,
+      "systems": 0.89,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

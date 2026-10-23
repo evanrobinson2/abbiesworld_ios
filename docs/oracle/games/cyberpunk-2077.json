@@ -1,0 +1,68 @@
+{
+  "appid": 1091500,
+  "name": "Cyberpunk 2077",
+  "store_url": "https://store.steampowered.com/app/1091500/",
+  "genres": [
+    "RPG",
+    "Open world"
+  ],
+  "short_description": "A dense neon city RPG.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "RPG",
+    "Open world"
+  ],
+  "summary": "A dense neon city RPG.",
+  "identity": {
+    "core_loop": "Quest, fight, hack, drive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Dense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay heavy plus in-world ads.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Neon.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "brisk, medium sessions",
+    "lessons_for_abbies_world": "Dense cities feel alive with crowds and signs; nothing else for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.67,
+      "expression": 0.67,
+      "structure": 0.33,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.78,
+      "session": 0.67
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

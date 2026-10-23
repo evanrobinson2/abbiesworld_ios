@@ -1,0 +1,70 @@
+{
+  "appid": 949730,
+  "name": "ΔV: Rings of Saturn Demo",
+  "store_url": "https://store.steampowered.com/app/949730/",
+  "genres": [
+    "Space",
+    "Mining",
+    "Simulation"
+  ],
+  "short_description": "Newtonian mining in Saturn's rings.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Space",
+    "Mining",
+    "Simulation"
+  ],
+  "summary": "Newtonian mining in Saturn's rings.",
+  "identity": {
+    "core_loop": "Fly with real physics, mine, sell.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hard and beautiful.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Physics in the world.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Real momentum flying is a hard skill; the rings are gorgeous."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.33,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.67,
+      "session": 0.22
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

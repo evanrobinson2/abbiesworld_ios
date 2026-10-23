@@ -1,0 +1,67 @@
+{
+  "appid": 731040,
+  "name": "The Invincible",
+  "store_url": "https://store.steampowered.com/app/731040/",
+  "genres": [
+    "Adventure",
+    "Sci-fi"
+  ],
+  "short_description": "A retro-future astronaut explores a strange planet.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Sci-fi"
+  ],
+  "summary": "A retro-future astronaut explores a strange planet.",
+  "identity": {
+    "core_loop": "Walk, talk by radio, discover.",
+    "mechanics": null,
+    "ui_and_game_feel": "Slow and beautiful.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.02,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Retro devices in the world (diegetic).",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Retro-future.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Physical retro gadgets as UI; a radio voice as companion. Good for the Moonbase dialect."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.44,
+      "expression": 0.44,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.11,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "appid": 2239150,
+  "name": "Thronefall",
+  "store_url": "https://store.steampowered.com/app/2239150/",
+  "genres": [
+    "Strategy",
+    "Tower defense",
+    "Minimalist"
+  ],
+  "short_description": "A minimalist kingdom builder: build by day, defend by night as a mounted king.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Tower defense",
+    "Minimalist"
+  ],
+  "summary": "A minimalist kingdom builder: build by day, defend by night as a mounted king.",
+  "identity": {
+    "core_loop": "Day: spend coins on buildings. Night: ride out and fight beside your towers. Morning: collect and grow.",
+    "mechanics": null,
+    "ui_and_game_feel": "Gentle, crisp, short; the day and night swap is the heartbeat.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "overlay": 0.2
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Coins drop and float in the world; build spots glow on the ground; night light tells you danger is coming. Tiny HUD.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Flat-shaded pastel low-poly.",
+    "palette": null,
+    "audio_mood": "Calm day music, drums at night.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Day and night as the one signal that changes light, music and play. Very close to the Ranch's rhythm."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.56,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.44,
+      "systems": 0.44,
+      "chance": 0.67,
+      "session": 0.33
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

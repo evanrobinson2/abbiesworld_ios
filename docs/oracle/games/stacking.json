@@ -1,0 +1,69 @@
+{
+  "appid": 115110,
+  "name": "Stacking",
+  "store_url": "https://store.steampowered.com/app/115110/",
+  "genres": [
+    "Puzzle",
+    "Adventure"
+  ],
+  "short_description": "A Russian-doll boy hops into bigger dolls, each with a special trick, to free his family.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Adventure"
+  ],
+  "summary": "A Russian-doll boy hops into bigger dolls, each with a special trick, to free his family.",
+  "identity": {
+    "core_loop": "Find a doll, jump inside, use its ability, solve each puzzle several ways.",
+    "mechanics": null,
+    "ui_and_game_feel": "Charming, playful, many answers.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.6,
+        "spatial": 0.2,
+        "overlay": 0.1,
+        "none": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Abilities are the dolls themselves (diegetic); silent-film title cards for talk.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Handmade toy world of wood and paint.",
+    "palette": null,
+    "audio_mood": "Silent-film piano.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Toys with one ability each, and many solutions per puzzle. Very Abbie's World."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.33,
+      "expression": 0.78,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.11,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

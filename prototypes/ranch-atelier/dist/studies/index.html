@@ -152,7 +152,8 @@ for (const b of document.querySelectorAll('.ib')) b.innerHTML = b.innerHTML.repl
 // 0-5, with the reason). Newest first on Home comes from `at`.
 const S = [
  {id:'space-mail', t:'Space Mail', s:'Low-gravity letter romp, playable', src:'spacemail/index.html', img:'spacemail/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0012', at:'2026-10-23T05:03Z', st:'Playable', impact:2, why:'A whole mini game designed from our identity; waiting on your go to build it.'},
- {id:'cafe', t:'The café', s:'Proofs by view and style', src:'cafe/index.html', img:'cafe/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T05:12Z', st:'Proofs', impact:1, why:'Picks a style for Abbie’s café before anything is built.'},
+ {id:'cafe-study', t:'The café', s:'The study: map, town, front, inside', src:'cafe/study.html', img:'cafe/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T05:50Z', st:'Your call', impact:2, why:'Decides what Abbie’s café is at every distance before anything is built.'},
+ {id:'cafe', t:'The café proofs', s:'48 pictures by view and style', src:'cafe/index.html', img:'cafe/img/tile-party_0.jpg', g:'Oracle studies', n:'AW-STUDY-0013', at:'2026-10-23T05:12Z', st:'Proofs', impact:1, why:'You picked the dance-party room from these.'},
  {id:'bodies-study', t:'Bodies', s:'The normal human: proportions, muscles, scorecard', src:'bodies-study/index.html', img:'bodies-study/img/thumb.jpg', g:'Oracle studies', n:'AW-STUDY-0016', at:'2026-10-23T05:40Z', st:'Done', impact:4, why:'The canon of a normal human body every figure is measured against.'},
  {id:'bodies', t:'Papercraft figures', s:'Paper bodies from your picks, in 3D', src:'bodies/index.html', img:'bodies/thumb.jpg', g:'Roman paper warrior', n:'AW-STUDY-0017', at:'2026-10-23T05:15Z', st:'In progress', impact:3, why:'Body types the Roman kit and every later figure stand on.'},
  {id:'overview', t:'Paper warrior', s:'Where the warrior stands', src:'warrior/index.html', img:'warrior/img/proof_c.jpg', g:'Roman paper warrior', at:'2026-10-23T04:42Z', st:'Done', impact:5, why:'Set the parts-first rule: each piece is modelled and fitted on its own.'},
@@ -326,6 +327,6 @@ me.style.cursor = 'pointer';
 const who = () => { const p = getProfile(); document.getElementById('me-name').textContent = p.name || 'You'; document.getElementById('me-style').textContent = 'Profile and settings · ' + currentTheme().name; };
 who(); for (const ev of ['aw-look-change', 'aw-profile-change', 'storage']) addEventListener(ev, who);
 </script>
-<script src="/version-chip.js?v=1" defer></script>
+<script src="/version-chip.js?v=2" defer></script>
 </body>
 </html>

@@ -26,6 +26,7 @@ Files:
 - `scores.json`: the ten paper bodies scored against the canon.
 - `tools/bodies/figure.py`: draws the sheets (front, side, back), the eight-type lineup and the toy comparison as SVG
   into `prototypes/ranch-atelier/dist/studies/bodies-study/img/`. Layers: landmarks, construction, muscles, bones.
+- `tools/bodies/head_hand.py`: draws the head and hand sheets.
 - `tools/bodies/score_body.py`: the scorer. Scores a paper-body measurement file or a plain landmarks file.
 - The page: `prototypes/ranch-atelier/dist/studies/bodies-study/`, https://app.abbies.world/studies/#bodies-study
 
@@ -111,6 +112,16 @@ Stay anatomically true; push readability, not anatomy.
 10. PG: base layer always on (briefs, and a fitted top on women).
 
 Checks 1 to 6 are automatic: `python tools/bodies/score_body.py <body.json>`.
+
+### Head and hand (added 2026-10-23, canon 1.1)
+
+`human-canon.json` now has `head` (Loomis thirds, feature lines, widths and depths for man and woman) and `hand`
+(palm, finger lengths relative to the middle finger, bone ratios, knuckle arc, thumb). The page draws both
+(`tools/bodies/head_hand.py`), and the scorer checks them when a model reports `face` and `hand` measurements.
+
+Head: The face is three equal parts: hairline to brow, brow to nose, nose to chin (Loomis). The eyes sit halfway down the head, not two thirds up; the head is five eyes wide. The space between the eyes is one eye; the nose is about as wide as that space. The mouth is a third of the way from the nose to the chin; its corners line up under the pupils. The ear runs from the brow to the nose, behind the middle of the head in profile; the jaw angle sits under its front edge. Men: heavier brow ridge, wider square jaw, bigger nose. Women: smoother brow, narrower jaw, rounder chin, more upright forehead.
+
+Hand: The palm and the middle finger are about the same length; the whole hand is about the face, chin to hairline. Each finger bone is about 0.6 to 0.7 of the one before it (Bridgman: segments grow by definite proportions). The knuckles form an arc, highest at the middle finger; the little finger's knuckle sits lowest. The index tip reaches the middle of the middle finger's last segment; the little finger's tip reaches the ring finger's last joint. The thumb's tip reaches the index finger's base knuckle when the hand is relaxed; the thumb dominates the hand (Bridgman). On a woman the hand is narrower and the fingers taper more; the proportions along the fingers are the same.
 
 ### Our paper bodies, scored
 

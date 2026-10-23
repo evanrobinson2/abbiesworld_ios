@@ -1,0 +1,43 @@
+{
+ "name": "female-heroic-2 round 2",
+ "sex": "female",
+ "build": "heroic",
+ "stature": 1.72,
+ "head": 0.2369,
+ "source": "tools/paper-body/figures/female-heroic-2: landmarks in concept pixels (896x1344) as built by build.py, converted at 1.72 m crown to sole",
+ "landmarks_px": {
+  "chin": 235,
+  "pit": 272,
+  "acromion": 290,
+  "nipple": 362,
+  "waist": 467,
+  "troch": 600,
+  "crotch": 668,
+  "elbow": 487,
+  "wrist": 668,
+  "fingertip": 781,
+  "knee": 925,
+  "ankle": 1268
+ },
+ "heights": {
+  "chin": 1.4831,
+  "pit": 1.4324,
+  "acromion": 1.4078,
+  "nipple": 1.3092,
+  "waist": 1.1654,
+  "troch": 0.9832,
+  "crotch": 0.8901,
+  "elbow": 1.138,
+  "wrist": 0.8901,
+  "fingertip": 0.7354,
+  "knee": 0.5382,
+  "ankle": 0.0685
+ },
+ "widths": {
+  "shoulders": 0.5253,
+  "chest": 0.2684,
+  "waist": 0.1725,
+  "hips": 0.3068,
+  "head": 0.1397
+ }
+}

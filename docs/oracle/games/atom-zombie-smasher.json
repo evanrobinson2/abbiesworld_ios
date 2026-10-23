@@ -1,0 +1,67 @@
+{
+  "appid": 55040,
+  "name": "Atom Zombie Smasher",
+  "store_url": "https://store.steampowered.com/app/55040/",
+  "genres": [
+    "Strategy",
+    "Tactics"
+  ],
+  "short_description": "Evacuate a city from zombies with artillery and barricades.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Strategy",
+    "Tactics"
+  ],
+  "summary": "Evacuate a city from zombies with artillery and barricades.",
+  "identity": {
+    "core_loop": "Pick a district, place units, rescue civilians.",
+    "mechanics": null,
+    "ui_and_game_feel": "Quick and quirky.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Dots on a city map.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Minimal colours.",
+    "palette": null,
+    "audio_mood": "Surf rock.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Rescue as the goal is kinder than combat; abstract dots can read clearly."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.67,
+      "challenge": 0.44,
+      "expression": 0.56,
+      "structure": 0.11,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.33,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "appid": 102600,
+  "name": "Orcs Must Die!",
+  "store_url": "https://store.steampowered.com/app/102600/",
+  "genres": [
+    "Tower defense",
+    "Action"
+  ],
+  "short_description": "Place traps and fight orcs.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Tower defense",
+    "Action"
+  ],
+  "summary": "Place traps and fight orcs.",
+  "identity": {
+    "core_loop": "Trap, fight.",
+    "mechanics": null,
+    "ui_and_game_feel": "Funny.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.3,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Traps in world.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Cartoon.",
+    "palette": null,
+    "audio_mood": "Upbeat.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Same as Orcs Must Die! 2."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.33,
+      "social": 0.44,
+      "systems": 0.56,
+      "chance": 0.44,
+      "session": 0.33
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

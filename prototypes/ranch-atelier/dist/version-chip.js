@@ -1,4 +1,4 @@
-// Version label for Evan: plain small text in the bottom-right corner with the live version
+// Version label for Evan: plain small text (white with a crisp dark outline, so it reads on any background) in the bottom-right corner with the live version
 // (v1.<PR>.<date>.<time>, local time). Tapping it opens the build queue: changes merged into main that wait for the
 // next 10-minute deploy batch (docs/architecture/DEPLOYS.md). Presentation layer only; hidden from snapshots.
 (() => {
@@ -20,8 +20,7 @@
   const title = message => { const lines = String(message || '').split('\n'); return (/^Merge pull request/.test(lines[0]) && lines[2]) || lines[0]; };
 
   const css = `
-  .vchip{position:fixed;z-index:10005;right:max(10px,env(safe-area-inset-right));bottom:max(6px,env(safe-area-inset-bottom));padding:2px 0;border:0;background:none;color:#3d3627b3;font:600 10px/16px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.02em;text-shadow:0 0 3px #fffcf0,0 0 6px #fffcf0cc;cursor:pointer;opacity:.85;transition:opacity .15s}
-  .vchip:hover,.vchip[aria-expanded=true]{opacity:1}
+  .vchip{position:fixed;z-index:10005;right:max(10px,env(safe-area-inset-right));bottom:max(6px,env(safe-area-inset-bottom));padding:2px 0;border:0;background:none;color:#fff;font:700 12px/16px ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.03em;-webkit-font-smoothing:antialiased;text-shadow:1px 0 #111,-1px 0 #111,0 1px #111,0 -1px #111,1px 1px #111,-1px -1px #111,1px -1px #111,-1px 1px #111;cursor:pointer}
   .vchip-pop{position:fixed;z-index:10006;right:max(10px,env(safe-area-inset-right));bottom:calc(max(8px,env(safe-area-inset-bottom)) + 30px);width:min(86vw,320px);max-height:50vh;overflow:auto;padding:12px 14px;border-radius:18px;border:1px solid #ffffff80;background:color-mix(in srgb,var(--app-paper,#fffcf0) 90%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 14px 36px #2b281f40;color:var(--app-ink,#4c4330);font:13px/1.35 var(--app-font,system-ui,sans-serif);animation:vchip-up .2s ease-out}
   @keyframes vchip-up{from{opacity:0;transform:translateY(8px)}}
   .vchip-pop b{display:block;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--app-muted,#797058);margin:8px 0 4px}

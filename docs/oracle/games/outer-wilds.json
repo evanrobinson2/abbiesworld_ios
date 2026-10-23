@@ -1,0 +1,67 @@
+{
+  "appid": 753640,
+  "name": "Outer Wilds",
+  "store_url": "https://store.steampowered.com/app/753640/",
+  "genres": [
+    "Exploration",
+    "Mystery"
+  ],
+  "short_description": "A tiny solar system loops every 22 minutes; learn its secrets by exploring.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Exploration",
+    "Mystery"
+  ],
+  "summary": "A tiny solar system loops every 22 minutes; learn its secrets by exploring.",
+  "identity": {
+    "core_loop": "Fly to a planet, explore, read, the sun explodes, wake up knowing more.",
+    "mechanics": null,
+    "ui_and_game_feel": "Wonder and curiosity; knowledge is the only upgrade.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.7,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.04,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Almost everything is in the world: the planets change over the loop; the ship log is the one overlay map of what you know.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Handmade cosy space, campfires and marshmallows.",
+    "palette": null,
+    "audio_mood": "Banjo by the fire; instruments you can find in space.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Knowledge as progress, and a tiny world that changes on a clock. A campfire and banjo can make space feel safe."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.44,
+      "expression": 0.44,
+      "structure": 0.89,
+      "social": 0.44,
+      "systems": 0.33,
+      "chance": 0.67,
+      "session": 0.22
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

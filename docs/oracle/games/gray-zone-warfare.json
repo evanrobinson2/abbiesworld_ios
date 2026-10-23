@@ -1,0 +1,68 @@
+{
+  "appid": 2479810,
+  "name": "Gray Zone Warfare",
+  "store_url": "https://store.steampowered.com/app/2479810/",
+  "genres": [
+    "Shooter",
+    "Extraction"
+  ],
+  "short_description": "A realistic extraction shooter in a jungle.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Extraction"
+  ],
+  "summary": "A realistic extraction shooter in a jungle.",
+  "identity": {
+    "core_loop": "Deploy, fight, extract.",
+    "mechanics": null,
+    "ui_and_game_feel": "Tense.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.2,
+        "overlay": 0.3
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Little HUD.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Nothing for us."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.78,
+      "expression": 0.44,
+      "structure": 0.33,
+      "social": 0.67,
+      "systems": 0.78,
+      "chance": 0.78,
+      "session": 0.33
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

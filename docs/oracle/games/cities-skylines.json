@@ -1,0 +1,68 @@
+{
+  "appid": 255710,
+  "name": "Cities: Skylines",
+  "store_url": "https://store.steampowered.com/app/255710/",
+  "genres": [
+    "City builder",
+    "Simulation"
+  ],
+  "short_description": "Build a modern city: roads, zones, power, water, transit.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "City builder",
+    "Simulation"
+  ],
+  "summary": "Build a modern city: roads, zones, power, water, transit.",
+  "identity": {
+    "core_loop": "Lay roads, zone land, connect services, fix traffic, grow.",
+    "mechanics": null,
+    "ui_and_game_feel": "Deep and calm; traffic is the eternal puzzle.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.1,
+        "spatial": 0.3,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.14,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Info view overlays recolour the whole city; citizens' chirps; buildings show icons when unhappy.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "orbit_diorama",
+    "art_direction": "Realistic-toy city.",
+    "palette": null,
+    "audio_mood": "Calm radio-like music.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Colour the whole world by one question (water, happiness) instead of panels. Info views are a good grown-up layer."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.78,
+      "expression": 0.78,
+      "structure": 0.89,
+      "social": 0.67,
+      "systems": 0.89,
+      "chance": 0.33,
+      "session": 1.0
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

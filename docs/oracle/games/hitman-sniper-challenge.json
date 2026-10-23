@@ -1,0 +1,67 @@
+{
+  "appid": 205930,
+  "name": "Hitman: Sniper Challenge",
+  "store_url": "https://store.steampowered.com/app/205930/",
+  "genres": [
+    "Stealth",
+    "Sniper"
+  ],
+  "short_description": "A sniper score-attack mini game.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Stealth",
+    "Sniper"
+  ],
+  "summary": "A sniper score-attack mini game.",
+  "identity": {
+    "core_loop": "Watch, take shots, score.",
+    "mechanics": null,
+    "ui_and_game_feel": "Short.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.08,
+          "source": "estimate",
+          "confidence": 0.28,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay score.",
+      "confidence": 0.4,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Realistic.",
+    "palette": null,
+    "audio_mood": "Ambient.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Nothing for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.44,
+      "expression": 0.22,
+      "structure": 0.11,
+      "social": 0.67,
+      "systems": 0.44,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.4
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

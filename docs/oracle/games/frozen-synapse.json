@@ -1,0 +1,67 @@
+{
+  "appid": 98200,
+  "name": "Frozen Synapse",
+  "store_url": "https://store.steampowered.com/app/98200/",
+  "genres": [
+    "Tactics",
+    "Simultaneous turns"
+  ],
+  "short_description": "Plan squad moves, then watch both sides' plans play out.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Tactics",
+    "Simultaneous turns"
+  ],
+  "summary": "Plan squad moves, then watch both sides' plans play out.",
+  "identity": {
+    "core_loop": "Plan, preview, commit, watch.",
+    "mechanics": null,
+    "ui_and_game_feel": "Clever.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "overlay": 0.6
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Plans drawn on the map (spatial).",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "top_down",
+    "art_direction": "Neon blueprint.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Planning then watching play out, like 9 Kings."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.44,
+      "expression": 0.56,
+      "structure": 0.11,
+      "social": 0.44,
+      "systems": 0.89,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

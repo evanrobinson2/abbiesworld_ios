@@ -1,0 +1,67 @@
+{
+  "appid": 92800,
+  "name": "SpaceChem",
+  "store_url": "https://store.steampowered.com/app/92800/",
+  "genres": [
+    "Puzzle",
+    "Programming"
+  ],
+  "short_description": "Design chemical reactors with two waldos to build molecules.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Puzzle",
+    "Programming"
+  ],
+  "summary": "Design chemical reactors with two waldos to build molecules.",
+  "identity": {
+    "core_loop": "Place instructions, run the reactor, optimise.",
+    "mechanics": null,
+    "ui_and_game_feel": "Hard and elegant.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.2,
+        "overlay": 0.8
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.4,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "The reactor grid is the whole display.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Clean schematic.",
+    "palette": null,
+    "audio_mood": "Electronic.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Expert puzzle design; far too hard for kids."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.78,
+      "expression": 0.22,
+      "structure": 0.11,
+      "social": 0.56,
+      "systems": 0.89,
+      "chance": 0.11,
+      "session": 0.11
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

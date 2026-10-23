@@ -20,6 +20,21 @@
         "r2": "r/shot.png",
         "side_by_side": "r/before-after.jpg"
       }
+    },
+    {
+      "round": 3,
+      "date": "2026-10-23",
+      "score_iou": 0.897,
+      "triangles": 3042,
+      "request": "Evan, 05:37Z, on the paper figures: \"It looks like the modeler just got lazy and did not try to model this charcter, but instead created an inspired character? I wanted THIS character, and the modeler got laze and didn't bother with hands. or  a real facial outline or nose\"",
+      "notes": "Parts first. Head: the pick's folded mask, a crown plateau, a forehead overhanging a recessed face panel with a nose ridge down its middle, cheek planes turned to the side, a jaw closing to a chin flap. Narrow neck column with two neck cords and a throat strip; the traps rise to it. Hands: palm, four three-joint fingers and a thumb, relaxed and curled toward the thigh, under a flared wrist cuff cut into flaps. Limbs carry a raised front keel and a slow twist so the folds run diagonally; the kneecap is a keeled band sitting in a V notch cut into the top of the shin shell; stronger pec planes; keeled deltoids.",
+      "proportions": "Measured on the pick (crown 55, sole 1312 px): 7.3 heads. Knee centre ~947 px against the canon's ~956 (halfway between the front hip point ~600 and the sole): within 0.05 head, so the knee follows the pick. Elbow ~475 at the waist (~480) and wrist ~700 at the crotch (~705): on canon. Fingertips ~805 px against the canon's mid-thigh ~828: 0.13 head high, kept near the pick (which stops at ~800) rather than stretched.",
+      "shots": {
+        "pick": "concept.png",
+        "r2": "rounds/r2/shot.png",
+        "r3": "r/shot.png",
+        "side_by_side": "r/before-after.jpg"
+      }
     }
   ]
 }

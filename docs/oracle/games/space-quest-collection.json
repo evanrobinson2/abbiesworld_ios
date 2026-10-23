@@ -1,0 +1,68 @@
+{
+  "appid": 10110,
+  "name": "Space Quest Collection",
+  "store_url": "https://store.steampowered.com/app/10110/",
+  "genres": [
+    "Adventure",
+    "Comedy"
+  ],
+  "short_description": "The classic Sierra space comedy adventures.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Adventure",
+    "Comedy"
+  ],
+  "summary": "The classic Sierra space comedy adventures.",
+  "identity": {
+    "core_loop": "Explore, use items, laugh.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "meta": 0.1,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.2,
+          "source": "estimate",
+          "confidence": 0.42,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Text parser and menus.",
+      "confidence": 0.6,
+      "source": "estimate"
+    },
+    "camera": "fixed",
+    "art_direction": "Retro pixel.",
+    "palette": null,
+    "audio_mood": "Chiptune.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Comedy adventure about a janitor hero; old parser design."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.11,
+      "social": 0.67,
+      "systems": 0.33,
+      "chance": 0.22,
+      "session": 0.11
+    },
+    "confidence": 0.6
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

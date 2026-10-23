@@ -1,0 +1,67 @@
+{
+  "appid": 305620,
+  "name": "The Long Dark",
+  "store_url": "https://store.steampowered.com/app/305620/",
+  "genres": [
+    "Survival"
+  ],
+  "short_description": "Survive alone in a frozen Canadian wilderness.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival"
+  ],
+  "summary": "Survive alone in a frozen Canadian wilderness.",
+  "identity": {
+    "core_loop": "Gather, keep warm, survive.",
+    "mechanics": null,
+    "ui_and_game_feel": "Quiet, beautiful.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.5,
+        "spatial": 0.3,
+        "meta": 0.1,
+        "overlay": 0.1
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.06,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Few gauges; sounds and breath show cold.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Painterly.",
+    "palette": null,
+    "audio_mood": "Sparse.",
+    "pacing": "slow, short sessions",
+    "lessons_for_abbies_world": "Survival shown through feeling (breath, sound) more than numbers."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.22,
+      "challenge": 0.67,
+      "expression": 0.33,
+      "structure": 0.67,
+      "social": 0.33,
+      "systems": 0.44,
+      "chance": 0.67,
+      "session": 0.11
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

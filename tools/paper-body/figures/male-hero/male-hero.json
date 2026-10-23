@@ -1,9 +1,9 @@
 {
   "figure": "male-hero",
-  "round": 2,
+  "round": 3,
   "concept": "male-base-toned_0",
   "height_m": 1.85,
-  "triangles": 2594,
+  "triangles": 3042,
   "sockets": {
     "shoulder_l": [
       -0.237,

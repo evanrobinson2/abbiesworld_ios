@@ -1,0 +1,70 @@
+{
+  "appid": 738520,
+  "name": "Breathedge",
+  "store_url": "https://store.steampowered.com/app/738520/",
+  "genres": [
+    "Survival",
+    "Space",
+    "Comedy"
+  ],
+  "short_description": "Survive in space after a funeral ship crash, with jokes.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Survival",
+    "Space",
+    "Comedy"
+  ],
+  "summary": "Survive in space after a funeral ship crash, with jokes.",
+  "identity": {
+    "core_loop": "Gather, craft, survive in a suit.",
+    "mechanics": null,
+    "ui_and_game_feel": "Silly.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.3,
+        "spatial": 0.2,
+        "overlay": 0.5
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.12,
+          "source": "estimate",
+          "confidence": 0.35,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Overlay gauges.",
+      "confidence": 0.5,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Sci-fi.",
+    "palette": null,
+    "audio_mood": "Light.",
+    "pacing": "brisk, short sessions",
+    "lessons_for_abbies_world": "Comedy helps survival feel less stressful."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.44,
+      "challenge": 0.56,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.56,
+      "systems": 0.56,
+      "chance": 0.67,
+      "session": 0.22
+    },
+    "confidence": 0.5
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

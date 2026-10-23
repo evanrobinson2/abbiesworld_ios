@@ -1,0 +1,70 @@
+{
+  "appid": 526870,
+  "name": "Satisfactory",
+  "store_url": "https://store.steampowered.com/app/526870/",
+  "genres": [
+    "Factory",
+    "Building",
+    "Exploration"
+  ],
+  "short_description": "Build huge factories on an alien planet in first person.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Factory",
+    "Building",
+    "Exploration"
+  ],
+  "summary": "Build huge factories on an alien planet in first person.",
+  "identity": {
+    "core_loop": "Mine, build machines, connect belts, automate, expand.",
+    "mechanics": null,
+    "ui_and_game_feel": "Satisfying flow and scale.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.56,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Machines show working or blocked in the world; build menu overlay.",
+      "confidence": 0.8,
+      "source": "estimate"
+    },
+    "camera": "first_person",
+    "art_direction": "Bright industrial sci-fi.",
+    "palette": null,
+    "audio_mood": "Calm ambient, machine hum.",
+    "pacing": "slow, long sessions",
+    "lessons_for_abbies_world": "Seeing your machines run and connect is the reward; blocked machines should show it in the world."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.33,
+      "challenge": 0.67,
+      "expression": 0.89,
+      "structure": 0.33,
+      "social": 0.78,
+      "systems": 0.89,
+      "chance": 0.22,
+      "session": 1.0
+    },
+    "confidence": 0.8
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}

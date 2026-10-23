@@ -1,0 +1,68 @@
+{
+  "appid": 553850,
+  "name": "HELLDIVERS 2",
+  "store_url": "https://store.steampowered.com/app/553850/",
+  "genres": [
+    "Shooter",
+    "Co-op"
+  ],
+  "short_description": "Co-op soldiers fight bugs and robots, calling in strikes with arrow-key codes.",
+  "sources": [
+    "oracle study 2026-10-23 (public knowledge, no store fetch, no game files)"
+  ],
+  "study_genres": [
+    "Shooter",
+    "Co-op"
+  ],
+  "summary": "Co-op soldiers fight bugs and robots, calling in strikes with arrow-key codes.",
+  "identity": {
+    "core_loop": "Drop, complete objectives, call strategems, extract.",
+    "mechanics": null,
+    "ui_and_game_feel": "Chaotic and funny.",
+    "information_grammar": {
+      "overall_mix": {
+        "diegetic": 0.4,
+        "spatial": 0.2,
+        "overlay": 0.4
+      },
+      "screen_budget": {
+        "hud_coverage": {
+          "value": 0.1,
+          "source": "estimate",
+          "confidence": 0.49,
+          "method": "Oracle study from public knowledge of the game, in our own words; not yet measured on capture"
+        }
+      },
+      "note": "Strategem codes on a wrist device; markers.",
+      "confidence": 0.7,
+      "source": "estimate"
+    },
+    "camera": "third_person",
+    "art_direction": "Glossy sci-fi.",
+    "palette": null,
+    "audio_mood": "Bombastic.",
+    "pacing": "fast, short sessions",
+    "lessons_for_abbies_world": "Calling help with a little code dance is a fun physical input."
+  },
+  "dna": {
+    "schema": "oracle.dna.v1",
+    "axes": {
+      "tempo": 0.78,
+      "challenge": 0.67,
+      "expression": 0.56,
+      "structure": 0.44,
+      "social": 0.67,
+      "systems": 0.67,
+      "chance": 0.89,
+      "session": 0.33
+    },
+    "confidence": 0.7
+  },
+  "study": {
+    "set": "owned",
+    "owned": true,
+    "installed": false,
+    "status": "studied",
+    "date": "2026-10-23"
+  }
+}
