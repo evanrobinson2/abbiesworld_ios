@@ -1568,6 +1568,18 @@
      "t": "Winchester history: railway 1835, incorporated 1850",
      "href": "https://en.wikipedia.org/wiki/Winchester,_Massachusetts",
      "note": "the two marks on the year slider"
+    },
+    {
+     "k": "canon",
+     "t": "Evan's dioramas brief (2026-10-23, 2:43 PM)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/docs/oracle/abbietown/ABBIETOWN_STUDY.md",
+     "note": "three modelled dioramas, one per region, at cartoon scale, each with its own opinion about the pulled-back view"
+    },
+    {
+     "k": "canon",
+     "t": "Open-land camera (AW-STUDY-0018)",
+     "href": "https://github.com/evanrobinson2/abbiesworld_ios/blob/main/prototypes/ranch-atelier/dist/simulations/land-camera.mjs",
+     "note": "the tilt-by-zoom curve, tuned for each region"
     }
    ]
   },

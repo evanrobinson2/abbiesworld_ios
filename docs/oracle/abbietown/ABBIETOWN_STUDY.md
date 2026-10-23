@@ -126,6 +126,27 @@ each." Then: "ani has her side, abbie and I have ours ... then there's a downtow
   Field, the road to Launch. Sub-area: School Hill.
 - Region ids (stable, for the changing-worlds study AW-STUDY-0048): `downtown`, `anis-side`, `abbie-daddy-side`.
 
+## The three dioramas (Evan, 2026-10-23 2:43 and 2:44 PM)
+"Actually model three distinct dioramas that are indicative of the actual regions, but diorama and cartoon scale ... and
+each zone should have its own opinion about zoomed out overland view." Built into the page (`dioramas.block.js`, inlined
+by `build_page.py`); /town opens on them, the three-hex button switches between them and the real town.
+- Each is a pointy hex tile of the real land: the real heights squeezed to a fifth of a mile across and exaggerated
+  (2.4 to 3.4 times), the real lakes, the real main roads, the real mix of houses thinned and set along the streets, and
+  the real places pushed together and built big. The three tiles sit as a honeycomb trio, in the same compass directions
+  as the regions of the seven-hex structure (Downtown south, Ani's side north-west, Abbie and Daddy's side north-east).
+- **Downtown:** the church park and common, Main Street with brick pavements, the coffee shop, Comella's, Frozen Hoagies
+  and the lab lined up along it, with lamps, yellow trees in pits, a red call box, a blue mailbox, a bench, a crosswalk
+  and parked cars (from Evan's photograph of Main Street, never shown or stored); Ginn Field and the train park; the lake.
+  Look: late-afternoon brass, a tight 32 degree lens, low tilt.
+- **Ani's side:** her house and treehouse, Horn Pond with the dock and splash pad, and the hill beside the pond (the
+  highest ground of the tile) with a cairn, a flag and a bench. Look: cool bright morning, a wide 48 degree lens, high tilt.
+- **Abbie and Daddy's side:** her house, treehouse and Daddy's hideaway door, Muraco, Leonard Field, and a small rocket
+  and signpost on the road north to Launch. Look: a sunset hill, 40 degree lens, almost top-down.
+- Each region's pulled-back view is its own: palette, sun colour and direction, sky, lens, distance, azimuth and tilt.
+  The pitch-by-zoom curve is the open-land camera's (`land-camera.mjs`, AW-STUDY-0018), tuned per region.
+- Still to do: a tilt-shift blur pass, cobbles on Main Street, hi-fi building types in three wealth tiers, the decorator,
+  and moving the coffee shop to its exact Main Street spot.
+
 ## Anchors for other studies
 `anchors(land, town)` in `simulations/abbietown/town.mjs` (also `window.AbbieTown.anchors` on the page) returns the coffee
 shop's `door`, `curb`, `street` (middle line, direction `along`, width) and `rocketPort` (a clear spot in the street),
