@@ -133,6 +133,34 @@ def do_rig(job, out, prov, tid, rig, rig_credits):
             fetch(u, out / "basic_animations" / f"{k.replace('_url','')}.glb")
 
 
+def retexture(job, out, prov):
+    """POST /v1/retexture on an earlier Meshy task (or a hero's 3d task), keeping its UVs; 10 credits."""
+    jid = job["id"]
+    tid = job.get("input_task_id")
+    if not tid and job.get("from_hero"):
+        hero = json.loads((ROOT / job["from_hero"] / "provenance.json").read_text())
+        tid = hero["tasks"][0]["task_id"]
+    body = {"input_task_id": tid, "enable_original_uv": True, "enable_pbr": True}
+    if job.get("image_style"):
+        body["image_style_url"] = data_uri(ROOT / job["image_style"])
+    if job.get("text_style_prompt"):
+        body["text_style_prompt"] = job["text_style_prompt"]
+    cost = job.get("credits", 10)
+    spend(cost, f"{jid} retexture")
+    rid = call("POST", "/v1/retexture", body)["result"]
+    prov["tasks"].append({"stage": "retexture", "task_id": rid, "credits": cost,
+                          "params": {k: v for k, v in body.items() if k != "image_style_url"},
+                          "image_style": job.get("image_style")})
+    prov["credits"] += cost
+    (out / "provenance.json").write_text(json.dumps(prov, indent=1))
+    r = poll("/v1/retexture", rid, jid)
+    fetch(r["model_urls"]["glb"], out / "model.glb")
+    for name, u in (r.get("texture_urls") or [{}])[0].items():
+        if u: fetch(u, out / f"tex_{name}.png")
+    git(f"Meshy retexture {jid}: {cost} credits", [out, CREDITS])
+    print("done", jid, cost, flush=True)
+
+
 def run(job):
     jid = job["id"]
     out = ROOT / job["save_to"]
@@ -141,7 +169,7 @@ def run(job):
     tmp = out / "views"
     kind = job["kind"]
     if kind == "retexture":
-        raise RuntimeError("retexture not wired")
+        return retexture(job, out, prov)
     views = views_for(job, tmp)
     textured = job.get("should_texture", True)
     n = len(views)

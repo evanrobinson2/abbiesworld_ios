@@ -556,6 +556,33 @@
    "credits": 30,
    "save_to": "tools/meshy-heroes/meshy/charm-rocket/",
    "for": "Backpack thread (cmsg_01USVJqCbJruSGtaP4zsE2eYTRh8LFMzTmfEp2zXLFhWCz); not rigged; low-poly faceted; run tardigrade first"
+  },
+  {
+   "id": "A3-paint-suit-paint-base",
+   "kind": "retexture",
+   "from_hero": "tools/meshy-heroes/meshy/A3-paint-suit",
+   "credits": 10,
+   "save_to": "tools/meshy-heroes/meshy/A3-paint-suit/paint-base/",
+   "image_style": "tools/meshy-heroes/refs/A3-paint-suit/pick.png",
+   "for": "Texture Studio (cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A)"
+  },
+  {
+   "id": "A3-paint-suit-paint-flair",
+   "kind": "retexture",
+   "from_hero": "tools/meshy-heroes/meshy/A3-paint-suit",
+   "credits": 10,
+   "save_to": "tools/meshy-heroes/meshy/A3-paint-suit/paint-flair/",
+   "text_style_prompt": "same uniform, hand-painted, scuffed Moon dust on the knees and boots, stitched mission patch on the shoulder, painted orange piping",
+   "for": "Texture Studio (cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A)"
+  },
+  {
+   "id": "A3-paint-suit-paint-clay",
+   "kind": "retexture",
+   "from_hero": "tools/meshy-heroes/meshy/A3-paint-suit",
+   "credits": 10,
+   "save_to": "tools/meshy-heroes/meshy/A3-paint-suit/paint-clay/",
+   "text_style_prompt": "same uniform as handmade plasticine, flat bright clay colours with faint thumbprints",
+   "for": "Texture Studio (cmsg_01USVJqCbJruSGtaP4zsE2eYHvKg5RqENi9MUvGfBA4t3A)"
   }
  ],
  "total_credits": 620,
@@ -575,7 +602,7 @@
  "total_credits_before_anims": 1330,
  "texture_paint_test": {
   "asked": "Evan 16:58Z: 'after clean up, we can also paint textures with meshy too ... test the texture painting? ... one way we could ensure a base costume, but another way we could add our own flair beyond simple shading and svg decals'",
-  "when": "after our Blender cleanup of the first astronaut (A3 Daddy, uniform, painterly), on the cleaned GLB with our own UVs",
+  "when": "on Meshy's own A3-paint-suit model (Meshy UVs) first; on our cleaned GLB later",
   "api": "POST /openapi/v1/retexture with model_url = our cleaned GLB, enable_original_uv true, enable_pbr true; 10 credits each",
   "runs": [
    {
