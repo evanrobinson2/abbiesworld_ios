@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<base href="/review/">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#1b1430">
+<title>Review Inbox</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
+<style>
+:root{
+  --bg1:#1b1430; --bg2:#2a1d4a; --bg3:#3b2147;
+  --ink:#fff8ec; --soft:#d9cdea; --dim:#a495bd;
+  --gold:#ffcf5a; --rose:#ff8fa3; --mint:#7fe0c0;
+  --glass:rgba(255,255,255,.09); --edge:rgba(255,255,255,.22);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{min-height:100%;background-color:var(--bg1);
+  background-image:radial-gradient(1200px 700px at 15% -10%,#5b2f7a 0,transparent 60%),
+             radial-gradient(900px 600px at 110% 10%,#1f5a6b 0,transparent 55%),
+             linear-gradient(170deg,var(--bg2),var(--bg1) 55%,var(--bg3));}
+body{color:var(--ink); font:500 16px/1.4 Nunito,system-ui,sans-serif;
+  padding:max(18px,env(safe-area-inset-top)) 16px 48px;
+}
+header{max-width:980px;margin:0 auto 18px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+h1{font:800 clamp(28px,6vw,40px)/1 Fraunces,serif;margin:0;letter-spacing:-.01em}
+.count{font-weight:800;color:var(--bg1);background:var(--gold);border-radius:999px;padding:3px 12px;font-size:15px;box-shadow:0 3px 0 #b8862a}
+.toggle{margin-left:auto;background:none;border:0;color:var(--dim);font:700 14px Nunito;cursor:pointer;padding:6px}
+main{max-width:980px;margin:0 auto;display:grid;gap:16px}
+.card{
+  position:relative;border-radius:22px;padding:14px;
+  background:linear-gradient(160deg,rgba(255,255,255,.16),rgba(255,255,255,.05));
+  border:1px solid var(--edge);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.35),inset 0 -10px 24px rgba(0,0,0,.18),0 14px 30px rgba(8,4,20,.45);
+  display:grid;grid-template-columns:minmax(0,200px) 1fr;gap:16px;align-items:center;cursor:pointer;
+  transition:transform .15s ease;
+}
+.card:active{transform:scale(.99)}
+.card.coming{opacity:.62;cursor:default}
+.thumb{display:flex;gap:4px;border-radius:14px;overflow:hidden;aspect-ratio:4/3;background:#efe6d6}
+.thumb img{flex:1;min-width:0;height:100%;object-fit:contain;background:#efe6d6}
+.thumb.single img{object-fit:cover}
+.thumb.empty{background:linear-gradient(135deg,#ffcf5a,#ff8fa3);align-items:center;justify-content:center;font:800 40px Fraunces,serif;color:#3b2147}
+.thumb.pending{background:repeating-linear-gradient(135deg,rgba(255,255,255,.08) 0 10px,rgba(255,255,255,.03) 10px 20px)}
+.meta h2{font:800 21px/1.15 Fraunces,serif;margin:0 0 6px}
+.ask{color:var(--soft);margin:0 0 8px;font-size:16px}
+.when{color:var(--dim);font-size:13px;font-weight:700}
+.badge{display:inline-block;font-size:12px;font-weight:800;border-radius:999px;padding:2px 9px;margin-right:6px;background:rgba(127,224,192,.18);color:var(--mint)}
+.badge.coming{background:rgba(255,207,90,.16);color:var(--gold)}
+.detail{display:none;grid-column:1/-1}
+.card.open .detail{display:block}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px}
+.pair figure{margin:0;border-radius:16px;overflow:hidden;background:#efe6d6;position:relative}
+.pair img{width:100%;height:min(62vh,520px);object-fit:contain;display:block}
+.pair figcaption{position:absolute;left:10px;top:10px;font-weight:800;font-size:13px;color:#3b2147;background:rgba(255,255,255,.8);border-radius:999px;padding:2px 10px}
+.single-big{width:100%;border-radius:16px;display:block;margin-top:4px;background:#efe6d6}
+model-viewer{width:100%;height:min(60vh,480px);margin-top:10px;border-radius:16px;background:radial-gradient(circle at 50% 40%,#fff8ec,#e3d6c2)}
+.acts{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+.btn{
+  font:800 16px Nunito;border:0;border-radius:999px;padding:11px 20px;cursor:pointer;text-decoration:none;
+  color:#3b2147;background:linear-gradient(180deg,#ffe08f,var(--gold));box-shadow:0 4px 0 #b8862a,inset 0 1px 0 #fff6d6
+}
+.btn.ghost{color:var(--ink);background:rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 4px 0 rgba(0,0,0,.25)}
+.empty-all{text-align:center;color:var(--soft);padding:60px 0;font:700 20px Fraunces,serif}
+@media (max-width:620px){
+  .card{grid-template-columns:1fr}
+  .pair img{height:44vh}
+}
+</style>
+</head>
+<body>
+<header>
+  <h1>For you to look at</h1>
+  <span class="count" id="count">…</span>
+  <button class="toggle" id="toggle">Show done</button>
+</header>
+<main id="list"></main>
+<script>
+const KEY = 'aw-review-done';
+let done = {};
+try { done = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) {}
+let showDone = false;
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch (e) {} };
+
+function ago(iso) {
+  const m = Math.round((Date.now() - new Date(iso)) / 60000);
+  if (m < 60) return m <= 1 ? 'just now' : m + ' min ago';
+  const h = Math.round(m / 60);
+  if (h < 24) return h + ' h ago';
+  return new Date(iso).toLocaleDateString(undefined, { month: 'short', day: 'numeric' });
+}
+const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+function card(it) {
+  const el = document.createElement('article');
+  const coming = it.status === 'coming';
+  el.className = 'card' + (coming ? ' coming' : '');
+  let thumb;
+  if (it.before && it.after) thumb = `<div class="thumb"><img src="${esc(it.before)}" alt="" loading="lazy"><img src="${esc(it.after)}" alt="" loading="lazy"></div>`;
+  else if (it.image) thumb = `<div class="thumb single"><img src="${esc(it.image)}" alt="" loading="lazy"></div>`;
+  else thumb = `<div class="thumb ${coming ? 'pending' : 'empty'}">${coming ? '' : esc((it.title || '?')[0])}</div>`;
+  let big = '';
+  if (it.before && it.after) big = `<div class="pair"><figure><img src="${esc(it.before)}" alt=""><figcaption>Your pick</figcaption></figure><figure><img src="${esc(it.after)}" alt=""><figcaption>${esc(it.afterLabel || 'Ours')}</figcaption></figure></div>`;
+  else if (it.image) big = `<img class="single-big" src="${esc(it.image)}" alt="">`;
+  if (it.glb) big += `<model-viewer src="${esc(it.glb)}" camera-controls auto-rotate touch-action="pan-y" shadow-intensity="1" exposure="1.1" loading="lazy"></model-viewer>`;
+  const acts = `<div class="acts">${it.link ? `<a class="btn" href="${esc(it.link)}" target="_blank" rel="noopener">Open ${esc(it.linkLabel || '')}</a>` : ''}<button class="btn ghost" data-done>${done[it.id] ? 'Bring back' : 'Done'}</button></div>`;
+  el.innerHTML = `${thumb}<div class="meta"><h2>${esc(it.title)}</h2><p class="ask">${esc(it.ask)}</p><div class="when"><span class="badge ${coming ? 'coming' : ''}">${coming ? 'on the way' : 'needs you'}</span>${ago(it.at)}</div></div>${coming ? '' : `<div class="detail">${big}${acts}</div>`}`;
+  if (!coming) {
+    el.addEventListener('click', e => {
+      if (e.target.closest('a,model-viewer')) return;
+      if (e.target.closest('[data-done]')) {
+        if (done[it.id]) delete done[it.id]; else done[it.id] = Date.now();
+        save(); render(); return;
+      }
+      el.classList.toggle('open');
+    });
+  }
+  return el;
+}
+
+let items = [];
+function render() {
+  const list = document.getElementById('list');
+  list.innerHTML = '';
+  const live = items.filter(i => i.status !== 'done' && (showDone ? done[i.id] : !done[i.id]));
+  live.sort((a, b) => new Date(b.at) - new Date(a.at));
+  live.forEach((it, n) => { const c = card(it); if (n === 0 && !showDone && it.status !== 'coming') c.classList.add('open'); list.append(c); });
+  if (!live.length) list.innerHTML = `<p class="empty-all">${showDone ? 'Nothing marked done yet.' : 'All caught up.'}</p>`;
+  const waiting = items.filter(i => i.status === 'waiting' && !done[i.id]).length;
+  document.getElementById('count').textContent = waiting;
+  document.getElementById('toggle').textContent = showDone ? 'Show waiting' : 'Show done';
+}
+document.getElementById('toggle').onclick = () => { showDone = !showDone; render(); };
+fetch('feed.json', { cache: 'no-cache' }).then(r => r.json()).then(f => { items = f.items || []; render(); })
+  .catch(() => { document.getElementById('list').innerHTML = '<p class="empty-all">Inbox did not load. Pull to refresh.</p>'; });
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+{
+  "about": "Evan's review inbox (app.abbies.world/review). Every thread appends one item when something needs Evan's eyes, newest first by `at`. Fields: id (unique slug), at (ISO time), title, ask (one plain line: what Evan decides), thread (thread title), link (where he acts), before/after (images, his pick then our result, same camera) or image, glb (optional 3D viewer of the result), status (waiting | coming | done). See README.md.",
+  "items": [
+    {
+      "id": "ranch-remaster-wave-1",
+      "at": "2026-10-23T04:35:00Z",
+      "title": "Ranch remaster, wave 1",
+      "ask": "The new goat house, garden beds and lamps are in the Ranch. Keep them, or say what's off.",
+      "thread": "Model challenge",
+      "before": "img/ranch-remaster-before.jpg",
+      "after": "img/ranch-remaster-after.jpg",
+      "link": "https://ranch.abbies.world/",
+      "linkLabel": "The Ranch",
+      "status": "waiting"
+    },
+    {
+      "id": "shoulder-study",
+      "at": "2026-10-23T04:30:30Z",
+      "title": "Over-the-shoulder play",
+      "ask": "Pick which of the five ideas to build first (I'd start with the soft shoulder and the dive).",
+      "thread": "AW-STUDY-0011 - Over-the-Shoulder Play",
+      "image": "img/shoulder-study.jpg",
+      "link": "https://claude.ai/artifact/F8HG8LMckTjCwQzDsHDsoz",
+      "linkLabel": "The study",
+      "status": "waiting"
+    },
+    {
+      "id": "paper-man-1",
+      "at": "2026-10-23T04:30:00Z",
+      "title": "Paper man #1",
+      "ask": "Does the paper man match your pick? Keep it, or say what's off.",
+      "thread": "Roman model study",
+      "before": "img/paper-man-1-pick.jpg",
+      "after": "img/paper-man-1-model.jpg",
+      "glb": "3d/paper-man-1.glb",
+      "link": "https://claude.ai/artifact/MJ7asT8iPXEmhtHfELHbMc",
+      "linkLabel": "Figure picks",
+      "status": "waiting"
+    },
+    {
+      "id": "park-proofs",
+      "at": "2026-10-23T04:24:00Z",
+      "title": "The park, Midjourney proofs",
+      "ask": "Proofs are on the way once your Mac is back on.",
+      "thread": "The park from photos",
+      "status": "coming"
+    },
+    {
+      "id": "heroic-female-pick",
+      "at": "2026-10-23T04:00:00Z",
+      "title": "Heroic woman, pick one",
+      "ask": "Pick the heroic woman from the grid, so she can be built next.",
+      "thread": "Roman model study",
+      "image": "img/paper-bodies.jpg",
+      "link": "https://claude.ai/artifact/MJ7asT8iPXEmhtHfELHbMc",
+      "linkLabel": "Figure picks",
+      "status": "waiting"
+    },
+    {
+      "id": "abbies-world-score",
+      "at": "2026-10-23T03:44:00Z",
+      "title": "Abbie's World Score",
+      "ask": "Melody A or B? Then name the world versions you'd keep.",
+      "thread": "AW-STUDY-0010 - Abbie's World Score",
+      "link": "https://claude.ai/artifact/5Es88srv8cG13XiYU6FFCW",
+      "linkLabel": "Listen",
+      "status": "waiting",
+      "image": "img/abbies-world-score.jpg"
+    },
+    {
+      "id": "ranch-remaster-concepts",
+      "at": "2026-10-23T03:42:00Z",
+      "title": "Ranch remaster concepts",
+      "ask": "Pick the Ranch remaster concepts you want built.",
+      "thread": "AW-STUDY-0007 - Ranch and Moon Remaster",
+      "image": "img/remaster-goat-house.jpg",
+      "link": "https://claude.ai/artifact/9Yj6GjBsrZ9qyjb9si7oGc",
+      "linkLabel": "Concepts",
+      "status": "waiting"
+    },
+    {
+      "id": "moon-remaster-wave-1",
+      "at": "2026-10-23T03:18:00Z",
+      "title": "Moon remaster, wave 1",
+      "ask": "Accept or redo the dome, buggy, craters and meteorite.",
+      "thread": "Moon remaster build",
+      "before": "img/moon-dome-pick.jpg",
+      "after": "img/moon-dome-model.jpg",
+      "link": "https://claude.ai/artifact/97nD2NM8crDv7pruh9iBNS",
+      "linkLabel": "Moon desk",
+      "status": "waiting"
+    },
+    {
+      "id": "ranch-models",
+      "at": "2026-10-23T03:00:00Z",
+      "title": "Rebuilt Ranch models",
+      "ask": "Accept, adjust or reject each rebuilt Ranch model.",
+      "thread": "Model challenge",
+      "before": "img/ranch-barn-pick.jpg",
+      "after": "img/ranch-barn-model.jpg",
+      "link": "https://ranch.abbies.world/models",
+      "linkLabel": "Models",
+      "status": "waiting"
+    },
+    {
+      "id": "sandbox-hand-cards",
+      "at": "2026-10-23T02:40:00Z",
+      "title": "Sandbox hand cards",
+      "ask": "Check the new place cards in your hand.",
+      "thread": "Sandbox v2 interface",
+      "image": "img/hand-cards.jpg",
+      "link": "https://ranch.abbies.world/sandbox",
+      "linkLabel": "Sandbox",
+      "status": "waiting"
+    },
+    {
+      "id": "roman-parts",
+      "at": "2026-10-23T02:18:00Z",
+      "title": "Roman parts",
+      "ask": "Accept or redo each of the six Roman parts.",
+      "thread": "Roman model study",
+      "before": "img/roman-helmet-pick.jpg",
+      "after": "img/roman-helmet-model.jpg",
+      "link": "https://claude.ai/artifact/Hf5MLkWn3ZUcng7D7uk6C5",
+      "linkLabel": "Roman desk",
+      "status": "waiting"
+    }
+  ]
+}
