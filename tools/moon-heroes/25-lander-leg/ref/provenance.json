@@ -1,0 +1,45 @@
+{
+  "model": "25-lander-leg",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "ref",
+      "job_id": "435fdd64-79f1-4bf9-aee3-c85765ae2f8e",
+      "prompt": "one lunar lander landing leg with shock strut and round footpad standing next to one rocket engine bell nozzle, two separate parts, low-poly faceted 3D game asset, flat-shaded planes, gold foil and matte gunmetal, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": null,
+      "images": [
+        {
+          "file": "mj_435fdd64-79f1-4bf9-aee3-c85765ae2f8e_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/435fdd64-79f1-4bf9-aee3-c85765ae2f8e/0_0.png",
+          "sha256": "a18a1827cbf6f1e180dde9da33644f9ab2be456277c37bec4bca5431d277fb52"
+        },
+        {
+          "file": "mj_435fdd64-79f1-4bf9-aee3-c85765ae2f8e_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/435fdd64-79f1-4bf9-aee3-c85765ae2f8e/0_1.png",
+          "sha256": "9b7c1e51025331a6b1a13bf9544da1feb7b50cc82496e3f469cac97b954caad0"
+        },
+        {
+          "file": "mj_435fdd64-79f1-4bf9-aee3-c85765ae2f8e_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/435fdd64-79f1-4bf9-aee3-c85765ae2f8e/0_2.png",
+          "sha256": "cbf7ecc0362ae8021106e8e5772583a388918b7fb5e32fdb2ee1e436e5707903"
+        },
+        {
+          "file": "mj_435fdd64-79f1-4bf9-aee3-c85765ae2f8e_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/435fdd64-79f1-4bf9-aee3-c85765ae2f8e/0_3.png",
+          "sha256": "ff187af07e16e9b59ce0043d422f4fe7eaed328c3c516b30c2a29377d5f2c175"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "ref.png"
+      }
+    }
+  ]
+}

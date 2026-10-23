@@ -1,0 +1,45 @@
+{
+  "model": "10-daddy-helmet",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "ref",
+      "job_id": "cbf1804a-b41f-463f-8fd5-537c9010c8a0",
+      "prompt": "the space helmet that goes with this man's armored explorer suit, the empty helmet alone, dark glass visor, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": "09-daddy-suit/ref/trek_cut.png, locked",
+      "images": [
+        {
+          "file": "mj_cbf1804a-b41f-463f-8fd5-537c9010c8a0_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/cbf1804a-b41f-463f-8fd5-537c9010c8a0/0_0.png",
+          "sha256": "5107be0ddb5ab03a03d832f5b986d8efe8fbf3afb73621e5feab8d1793049f90"
+        },
+        {
+          "file": "mj_cbf1804a-b41f-463f-8fd5-537c9010c8a0_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/cbf1804a-b41f-463f-8fd5-537c9010c8a0/0_1.png",
+          "sha256": "adcdd8efe3a09c9a77f5ae4220de7320165f64d810f833e891182f0ee404be3c"
+        },
+        {
+          "file": "mj_cbf1804a-b41f-463f-8fd5-537c9010c8a0_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/cbf1804a-b41f-463f-8fd5-537c9010c8a0/0_2.png",
+          "sha256": "bf32b05782c8fb99cda9360540490c7a56eeac68a98f47c5f452c35c9f535e4f"
+        },
+        {
+          "file": "mj_cbf1804a-b41f-463f-8fd5-537c9010c8a0_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/cbf1804a-b41f-463f-8fd5-537c9010c8a0/0_3.png",
+          "sha256": "59c9b7b838f65f65b2d440361f5903a5e7dfa78a06f09d82e6dc9244ef0a3135"
+        }
+      ],
+      "pick": {
+        "index": 2,
+        "file": "ref.png"
+      }
+    }
+  ]
+}

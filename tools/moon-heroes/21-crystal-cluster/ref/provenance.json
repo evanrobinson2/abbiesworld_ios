@@ -1,0 +1,45 @@
+{
+  "model": "21-crystal-cluster",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "ref",
+      "job_id": "c1028962-f19a-4ae4-affa-72f35f7a89fc",
+      "prompt": "a cluster of glowing cyan glass moon crystals like this creature's crystal, growing from a small grey moon rock, a collectible pickup, low-poly faceted 3D game asset, flat-shaded planes, real clear glass crystals, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": "13-star-child/ref/trek_cut.png, locked",
+      "images": [
+        {
+          "file": "mj_c1028962-f19a-4ae4-affa-72f35f7a89fc_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/c1028962-f19a-4ae4-affa-72f35f7a89fc/0_0.png",
+          "sha256": "0d6df4175927357eb47d63cadbe56680df4083c3cae4d282635477399696e8e1"
+        },
+        {
+          "file": "mj_c1028962-f19a-4ae4-affa-72f35f7a89fc_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/c1028962-f19a-4ae4-affa-72f35f7a89fc/0_1.png",
+          "sha256": "4f8e607df72df1f3dd96d9c1c85d6d8e878804fe3da238ae46f3629d51c1eb90"
+        },
+        {
+          "file": "mj_c1028962-f19a-4ae4-affa-72f35f7a89fc_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/c1028962-f19a-4ae4-affa-72f35f7a89fc/0_2.png",
+          "sha256": "18c42a631c36bc50e50750f1efdded973ed9919962370340a997dfe5cd2afa50"
+        },
+        {
+          "file": "mj_c1028962-f19a-4ae4-affa-72f35f7a89fc_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/c1028962-f19a-4ae4-affa-72f35f7a89fc/0_3.png",
+          "sha256": "8c05df67d11bbbe5077214047818325914ad242b08bd9587c8186ef7d4a20b39"
+        }
+      ],
+      "pick": {
+        "index": 0,
+        "file": "ref.png"
+      }
+    }
+  ]
+}

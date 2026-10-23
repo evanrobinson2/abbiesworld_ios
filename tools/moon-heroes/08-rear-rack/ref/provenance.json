@@ -4,38 +4,80 @@
   "art_direction": "Faceted Hero",
   "date": "2026-10-23",
   "tool": "Midjourney web v8.2, Attach to prompt",
-  "attach": "01-buggy/ref/trek_cut.png (cut from trek/outputs/images/moon_buggy_reference.png, top-left view)",
-  "prompt": "the rear cargo rack with a battery pod of this moon buggy, the rack alone, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
-  "job_id": "8d526118-ae26-474d-a1fc-e49560ae2d45",
-  "images": [
+  "jobs": [
     {
-      "file": "mj_8d526118-ae26-474d-a1fc-e49560ae2d45_0.png",
-      "index": 0,
-      "source_url": "https://cdn.midjourney.com/8d526118-ae26-474d-a1fc-e49560ae2d45/0_0.png",
-      "sha256": "7e21b577291e1cac1a514f82b38a7c7ab3d58d269ae5e18a43e0c0e95daf7ab4"
+      "role": "round1",
+      "job_id": "8d526118-ae26-474d-a1fc-e49560ae2d45",
+      "prompt": "the rear cargo rack with a battery pod of this moon buggy, the rack alone, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "images": [
+        {
+          "file": "mj_8d526118-ae26-474d-a1fc-e49560ae2d45_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/8d526118-ae26-474d-a1fc-e49560ae2d45/0_0.png",
+          "sha256": "7e21b577291e1cac1a514f82b38a7c7ab3d58d269ae5e18a43e0c0e95daf7ab4"
+        },
+        {
+          "file": "mj_8d526118-ae26-474d-a1fc-e49560ae2d45_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/8d526118-ae26-474d-a1fc-e49560ae2d45/0_1.png",
+          "sha256": "81177e6984e3c6dbe98fd58c6d8a1172d2e3c95313fba02da13ad153a4173426"
+        },
+        {
+          "file": "mj_8d526118-ae26-474d-a1fc-e49560ae2d45_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/8d526118-ae26-474d-a1fc-e49560ae2d45/0_2.png",
+          "sha256": "e17347c33ae03e590de0f48902df7da40bf6a129bddc065cef522aa2ae0459ce"
+        },
+        {
+          "file": "mj_8d526118-ae26-474d-a1fc-e49560ae2d45_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/8d526118-ae26-474d-a1fc-e49560ae2d45/0_3.png",
+          "sha256": "8d4af1fe1c92921ac29791b5f0587de21d35f957e30d305e6340a9c16c4c209f"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "ref.png",
+        "camera": "orthographic three-quarter, about 35 degrees turn, slightly above"
+      },
+      "attach": "01-buggy/ref/trek_cut.png (cut from trek/outputs/images/moon_buggy_reference.png, top-left view)",
+      "verdict": "superseded: made from the round-1 buggy design"
     },
     {
-      "file": "mj_8d526118-ae26-474d-a1fc-e49560ae2d45_1.png",
-      "index": 1,
-      "source_url": "https://cdn.midjourney.com/8d526118-ae26-474d-a1fc-e49560ae2d45/0_1.png",
-      "sha256": "81177e6984e3c6dbe98fd58c6d8a1172d2e3c95313fba02da13ad153a4173426"
-    },
-    {
-      "file": "mj_8d526118-ae26-474d-a1fc-e49560ae2d45_2.png",
-      "index": 2,
-      "source_url": "https://cdn.midjourney.com/8d526118-ae26-474d-a1fc-e49560ae2d45/0_2.png",
-      "sha256": "e17347c33ae03e590de0f48902df7da40bf6a129bddc065cef522aa2ae0459ce"
-    },
-    {
-      "file": "mj_8d526118-ae26-474d-a1fc-e49560ae2d45_3.png",
-      "index": 3,
-      "source_url": "https://cdn.midjourney.com/8d526118-ae26-474d-a1fc-e49560ae2d45/0_3.png",
-      "sha256": "8d4af1fe1c92921ac29791b5f0587de21d35f957e30d305e6340a9c16c4c209f"
+      "role": "ref",
+      "job_id": "29f09d18-de68-469f-873f-974268f2f3ae",
+      "prompt": "the rear cargo rack with a battery pod of this moon buggy, the rack alone, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": "01-buggy/ref/ref.png (round-2 buggy, MJ 4f215d67 #3), locked attachment",
+      "images": [
+        {
+          "file": "mj_29f09d18-de68-469f-873f-974268f2f3ae_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/29f09d18-de68-469f-873f-974268f2f3ae/0_0.png",
+          "sha256": "a646950006a833d08849d69e8cf66b18b73b10b8641ead39b56dabd322bce16b"
+        },
+        {
+          "file": "mj_29f09d18-de68-469f-873f-974268f2f3ae_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/29f09d18-de68-469f-873f-974268f2f3ae/0_1.png",
+          "sha256": "ba5495a1b37f77e64b27d7b9af6569042dfdb55cb8b5cfb057cbf65977aa3d8c"
+        },
+        {
+          "file": "mj_29f09d18-de68-469f-873f-974268f2f3ae_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/29f09d18-de68-469f-873f-974268f2f3ae/0_2.png",
+          "sha256": "756c88b126301c3fa1211308b1f81d14da514153a082820daeedc08253f54c1f"
+        },
+        {
+          "file": "mj_29f09d18-de68-469f-873f-974268f2f3ae_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/29f09d18-de68-469f-873f-974268f2f3ae/0_3.png",
+          "sha256": "a4b7c4cdfd59db0f883a2ade57a1d35b4fe2b552f7c82092dd79ca7d8e4186b1"
+        }
+      ],
+      "pick": {
+        "index": 0,
+        "file": "ref.png"
+      }
     }
-  ],
-  "pick": {
-    "index": 1,
-    "file": "ref.png",
-    "camera": "orthographic three-quarter, about 35 degrees turn, slightly above"
-  }
+  ]
 }

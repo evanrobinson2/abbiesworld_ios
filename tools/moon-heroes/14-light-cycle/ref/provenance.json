@@ -1,0 +1,45 @@
+{
+  "model": "14-light-cycle",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "ref",
+      "job_id": "34e67416-ef38-4294-bab1-96509bf7e2ca",
+      "prompt": "this glowing light cycle motorbike with blue light rings in its wheels, empty, no rider, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing cyan light strips, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": "14-light-cycle/ref/trek_cut.png (cut from trek daddy_light_cycle_rescue.png)",
+      "images": [
+        {
+          "file": "mj_34e67416-ef38-4294-bab1-96509bf7e2ca_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/34e67416-ef38-4294-bab1-96509bf7e2ca/0_0.png",
+          "sha256": "a7995658ff8ebf72ee6e5d444eb2264d75e33d6d67b5f54feae5087f44398208"
+        },
+        {
+          "file": "mj_34e67416-ef38-4294-bab1-96509bf7e2ca_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/34e67416-ef38-4294-bab1-96509bf7e2ca/0_1.png",
+          "sha256": "8b74bd20cfecf08e4be83f140647fcd41b5e4140d6c4fa78a0f2ee4851350566"
+        },
+        {
+          "file": "mj_34e67416-ef38-4294-bab1-96509bf7e2ca_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/34e67416-ef38-4294-bab1-96509bf7e2ca/0_2.png",
+          "sha256": "f12e05199d60969f622c1c98f13424bcca6aa0bf6d792d9893db945bf1ee56a1"
+        },
+        {
+          "file": "mj_34e67416-ef38-4294-bab1-96509bf7e2ca_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/34e67416-ef38-4294-bab1-96509bf7e2ca/0_3.png",
+          "sha256": "9be070d9ab40df5c0afb32fa4df19989d96d6da16fc6aea22db8ce31b7199625"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "ref.png"
+      }
+    }
+  ]
+}

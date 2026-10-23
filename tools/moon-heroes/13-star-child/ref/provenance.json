@@ -1,0 +1,81 @@
+{
+  "model": "13-star-child",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "front_color",
+      "job_id": "ba4f6946-82c2-4d61-adac-3f8eec9c4ee5",
+      "prompt": "low-poly faceted 3D game character, flat-shaded planes, this creature: small friendly crystal spirit made of real clear glass with a soft cyan glow inside, big dark eyes, gentle smile, crystal petal arms held a little out, full body, front view, square to camera, orthographic, plain light grey background --ar 2:3",
+      "attach": "13-star-child/ref/trek_cut.png (from trek alien-a.png), locked",
+      "images": [
+        {
+          "file": "mj_ba4f6946-82c2-4d61-adac-3f8eec9c4ee5_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/ba4f6946-82c2-4d61-adac-3f8eec9c4ee5/0_0.png",
+          "sha256": "059aa44bf5fe59e0ffcb7d4ef6f26ac1787134f7645c14cced13404e390ba284"
+        },
+        {
+          "file": "mj_ba4f6946-82c2-4d61-adac-3f8eec9c4ee5_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/ba4f6946-82c2-4d61-adac-3f8eec9c4ee5/0_1.png",
+          "sha256": "d3103848d85047c73ee87d27c523576cead28f1cbb4bc47cf31fe6d1c0f0fc0a"
+        },
+        {
+          "file": "mj_ba4f6946-82c2-4d61-adac-3f8eec9c4ee5_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/ba4f6946-82c2-4d61-adac-3f8eec9c4ee5/0_2.png",
+          "sha256": "ac8e70ad31bcf6a56390402b55064221b6a3265328ba942a3ef9e5b9a4441c08"
+        },
+        {
+          "file": "mj_ba4f6946-82c2-4d61-adac-3f8eec9c4ee5_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/ba4f6946-82c2-4d61-adac-3f8eec9c4ee5/0_3.png",
+          "sha256": "d401fbf2fd585fc7a3b1cde0823fad7bfdac9165c485ff34d1aad6963a7b7a2b"
+        }
+      ],
+      "pick": {
+        "index": 2,
+        "file": "front_color.png"
+      }
+    },
+    {
+      "role": "turnaround",
+      "job_id": "cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1",
+      "prompt": "low-poly faceted 3D game character turnaround sheet, front view, side view, back view, evenly spaced, same scale, flat-shaded planes, this creature: small friendly crystal spirit made of real clear glass with a soft cyan glow inside, big dark eyes, gentle smile, crystal petal arms held a little out, full body, orthographic, plain light grey background --ar 16:9",
+      "attach": "13-star-child/ref/trek_cut.png, locked",
+      "images": [
+        {
+          "file": "mj_cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1/0_0.png",
+          "sha256": "0e8a77797fd1556814166c35291b3dc7f85418cf8f94111238149dd14989c389"
+        },
+        {
+          "file": "mj_cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1/0_1.png",
+          "sha256": "4a4608dbceed9653946bebf5e7b8de334139c04bb59ac65625526dd3cefcc94e"
+        },
+        {
+          "file": "mj_cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1/0_2.png",
+          "sha256": "9c4bf2bf7896e96163381deb837f162f0c61100a3a851553bb0f14fd2a284fa5"
+        },
+        {
+          "file": "mj_cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/cdb90fe6-a632-47ed-b7b6-9d88dfbb1bf1/0_3.png",
+          "sha256": "f40d4c5ce475a8c57c895c99e75aea53c06cd3ec818cea20c3999e2f4f981288"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "turnaround.png"
+      }
+    }
+  ]
+}

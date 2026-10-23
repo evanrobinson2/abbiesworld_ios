@@ -4,38 +4,80 @@
   "art_direction": "Faceted Hero",
   "date": "2026-10-23",
   "tool": "Midjourney web v8.2, Attach to prompt",
-  "attach": "01-buggy/ref/trek_cut.png (cut from trek/outputs/images/moon_buggy_reference.png, top-left view)",
-  "prompt": "the bare chassis frame with a flat belly skid plate of this moon buggy, no wheels, no bodywork, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
-  "job_id": "5c0b9cc2-f607-48db-9b25-dce950fc8b9c",
-  "images": [
+  "jobs": [
     {
-      "file": "mj_5c0b9cc2-f607-48db-9b25-dce950fc8b9c_0.png",
-      "index": 0,
-      "source_url": "https://cdn.midjourney.com/5c0b9cc2-f607-48db-9b25-dce950fc8b9c/0_0.png",
-      "sha256": "fbc7d5d6c039215ed3299d60b1e859b8f540aef7e0df0c57d124d2629a310f09"
+      "role": "round1",
+      "job_id": "5c0b9cc2-f607-48db-9b25-dce950fc8b9c",
+      "prompt": "the bare chassis frame with a flat belly skid plate of this moon buggy, no wheels, no bodywork, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "images": [
+        {
+          "file": "mj_5c0b9cc2-f607-48db-9b25-dce950fc8b9c_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/5c0b9cc2-f607-48db-9b25-dce950fc8b9c/0_0.png",
+          "sha256": "fbc7d5d6c039215ed3299d60b1e859b8f540aef7e0df0c57d124d2629a310f09"
+        },
+        {
+          "file": "mj_5c0b9cc2-f607-48db-9b25-dce950fc8b9c_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/5c0b9cc2-f607-48db-9b25-dce950fc8b9c/0_1.png",
+          "sha256": "e08d02b254d88330de8880eb5329820cad530e5ff001d6c29459908c3d1a277b"
+        },
+        {
+          "file": "mj_5c0b9cc2-f607-48db-9b25-dce950fc8b9c_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/5c0b9cc2-f607-48db-9b25-dce950fc8b9c/0_2.png",
+          "sha256": "bf7bf5470dcfb973d37e803a90f362d4760acdfda6752426b7c7791ba6107ed5"
+        },
+        {
+          "file": "mj_5c0b9cc2-f607-48db-9b25-dce950fc8b9c_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/5c0b9cc2-f607-48db-9b25-dce950fc8b9c/0_3.png",
+          "sha256": "04d4758e4e220a3d14502c0ac6ba3aa2f51d256cb0996c2cf68e869c05ac9e89"
+        }
+      ],
+      "pick": {
+        "index": 0,
+        "file": "ref.png",
+        "camera": "orthographic three-quarter, about 35 degrees turn, slightly above"
+      },
+      "attach": "01-buggy/ref/trek_cut.png (cut from trek/outputs/images/moon_buggy_reference.png, top-left view)",
+      "verdict": "superseded: made from the round-1 buggy design"
     },
     {
-      "file": "mj_5c0b9cc2-f607-48db-9b25-dce950fc8b9c_1.png",
-      "index": 1,
-      "source_url": "https://cdn.midjourney.com/5c0b9cc2-f607-48db-9b25-dce950fc8b9c/0_1.png",
-      "sha256": "e08d02b254d88330de8880eb5329820cad530e5ff001d6c29459908c3d1a277b"
-    },
-    {
-      "file": "mj_5c0b9cc2-f607-48db-9b25-dce950fc8b9c_2.png",
-      "index": 2,
-      "source_url": "https://cdn.midjourney.com/5c0b9cc2-f607-48db-9b25-dce950fc8b9c/0_2.png",
-      "sha256": "bf7bf5470dcfb973d37e803a90f362d4760acdfda6752426b7c7791ba6107ed5"
-    },
-    {
-      "file": "mj_5c0b9cc2-f607-48db-9b25-dce950fc8b9c_3.png",
-      "index": 3,
-      "source_url": "https://cdn.midjourney.com/5c0b9cc2-f607-48db-9b25-dce950fc8b9c/0_3.png",
-      "sha256": "04d4758e4e220a3d14502c0ac6ba3aa2f51d256cb0996c2cf68e869c05ac9e89"
+      "role": "ref",
+      "job_id": "f4fd61a6-6188-4315-934c-e7c069384375",
+      "prompt": "the bare chassis frame with a flat belly skid plate of this moon buggy, no wheels, no bodywork, low-poly faceted 3D game asset, flat-shaded planes, no textures, matte gunmetal sci-fi metal with glowing orange light strips and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": "01-buggy/ref/ref.png (round-2 buggy, MJ 4f215d67 #3), locked attachment",
+      "images": [
+        {
+          "file": "mj_f4fd61a6-6188-4315-934c-e7c069384375_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/f4fd61a6-6188-4315-934c-e7c069384375/0_0.png",
+          "sha256": "9cd34febef327fa0dd7f73fcb94e6437b5aa1b9cc7b3aaf92809ba6f8d774af4"
+        },
+        {
+          "file": "mj_f4fd61a6-6188-4315-934c-e7c069384375_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/f4fd61a6-6188-4315-934c-e7c069384375/0_1.png",
+          "sha256": "a14ee8edea0b032a2709b6e8181050527b86d026f05df6bdd33e843f8045a099"
+        },
+        {
+          "file": "mj_f4fd61a6-6188-4315-934c-e7c069384375_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/f4fd61a6-6188-4315-934c-e7c069384375/0_2.png",
+          "sha256": "d8ad77f52dedd29a0a59b4afdf5ae95e64a01432f7845da197215c9be93c03f2"
+        },
+        {
+          "file": "mj_f4fd61a6-6188-4315-934c-e7c069384375_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/f4fd61a6-6188-4315-934c-e7c069384375/0_3.png",
+          "sha256": "efe829eb16402e846f0fdc429ec91b08b52654035c7f46d639114f031d37c5bf"
+        }
+      ],
+      "pick": {
+        "index": 3,
+        "file": "ref.png"
+      }
     }
-  ],
-  "pick": {
-    "index": 0,
-    "file": "ref.png",
-    "camera": "orthographic three-quarter, about 35 degrees turn, slightly above"
-  }
+  ]
 }

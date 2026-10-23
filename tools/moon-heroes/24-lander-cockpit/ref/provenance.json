@@ -1,0 +1,45 @@
+{
+  "model": "24-lander-cockpit",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "ref",
+      "job_id": "49c7e554-3862-4edf-9e32-13587a786be0",
+      "prompt": "the cockpit of a small lunar lander as a self-contained cutaway capsule, two seats, control panel with screens, small triangular windows, low-poly faceted 3D game asset, flat-shaded planes, matte gunmetal with glowing orange and cyan lights, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": null,
+      "images": [
+        {
+          "file": "mj_49c7e554-3862-4edf-9e32-13587a786be0_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/49c7e554-3862-4edf-9e32-13587a786be0/0_0.png",
+          "sha256": "784bb78c5127e8e519dffef52b101ca88bb25ba92feb2e5fa84722644254323a"
+        },
+        {
+          "file": "mj_49c7e554-3862-4edf-9e32-13587a786be0_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/49c7e554-3862-4edf-9e32-13587a786be0/0_1.png",
+          "sha256": "613a9ba7bf3a40f8da866f64887c2a0b9c20a6ef1af38b5f50673fc8b250e3dd"
+        },
+        {
+          "file": "mj_49c7e554-3862-4edf-9e32-13587a786be0_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/49c7e554-3862-4edf-9e32-13587a786be0/0_2.png",
+          "sha256": "b3b3ff53ac8c0be01b49c2c814611e1ed719a3f0947d8443e84500b3288eab5f"
+        },
+        {
+          "file": "mj_49c7e554-3862-4edf-9e32-13587a786be0_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/49c7e554-3862-4edf-9e32-13587a786be0/0_3.png",
+          "sha256": "d29f3b9244ca53a11b3589486f2d9766a43e75af5e1a7bb47ea2cf3307fb4f20"
+        }
+      ],
+      "pick": {
+        "index": 2,
+        "file": "ref.png"
+      }
+    }
+  ]
+}

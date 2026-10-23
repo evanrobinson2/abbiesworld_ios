@@ -1,0 +1,45 @@
+{
+  "model": "23-lander",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "ref",
+      "job_id": "3c6166fd-af82-40b9-9a47-197e178d27cf",
+      "prompt": "a lunar lander spacecraft, four landing legs, boxy crew cabin with a hatch door and ladder, gold foil and gunmetal panels with orange and cyan lights, medium detail, low-poly faceted 3D game asset, flat-shaded planes, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": null,
+      "images": [
+        {
+          "file": "mj_3c6166fd-af82-40b9-9a47-197e178d27cf_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/3c6166fd-af82-40b9-9a47-197e178d27cf/0_0.png",
+          "sha256": "ad7a7ca894e73c150daeee0796235da3b90ba4ba21c3b5bae6b19e4289a3efad"
+        },
+        {
+          "file": "mj_3c6166fd-af82-40b9-9a47-197e178d27cf_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/3c6166fd-af82-40b9-9a47-197e178d27cf/0_1.png",
+          "sha256": "224f587727a17410c13ab4e5ec49840b34c8dc001d63edf7bbdf625d75f75cfa"
+        },
+        {
+          "file": "mj_3c6166fd-af82-40b9-9a47-197e178d27cf_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/3c6166fd-af82-40b9-9a47-197e178d27cf/0_2.png",
+          "sha256": "9b5deba9685f70c24897eb71cf47d1809fea942084754624add77d1c742a3ca4"
+        },
+        {
+          "file": "mj_3c6166fd-af82-40b9-9a47-197e178d27cf_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/3c6166fd-af82-40b9-9a47-197e178d27cf/0_3.png",
+          "sha256": "43fe946abb74501c01fd37c3ce2b412d17cea4192d9792590901efd882c6ccd2"
+        }
+      ],
+      "pick": {
+        "index": 3,
+        "file": "ref.png"
+      }
+    }
+  ]
+}

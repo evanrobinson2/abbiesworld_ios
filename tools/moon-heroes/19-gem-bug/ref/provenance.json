@@ -1,0 +1,45 @@
+{
+  "model": "19-gem-bug",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "ref",
+      "job_id": "7b26f1d0-dcb9-48dc-9919-76ae42ddea8c",
+      "prompt": "a cute but cheeky crystal gem bug alien for a kids game, six crystal legs, glowing cyan glass gem shell, big friendly eyes, PG enemy creature, low-poly faceted 3D game asset, flat-shaded planes, real clear glass crystal, single object, whole object in frame, orthographic three-quarter view, plain light grey background --ar 1:1",
+      "attach": null,
+      "images": [
+        {
+          "file": "mj_7b26f1d0-dcb9-48dc-9919-76ae42ddea8c_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/7b26f1d0-dcb9-48dc-9919-76ae42ddea8c/0_0.png",
+          "sha256": "ec1d6b080bfb04eb6d40fc771a390b5b0c5a708079613c4e5f8fae1b9bc3f73e"
+        },
+        {
+          "file": "mj_7b26f1d0-dcb9-48dc-9919-76ae42ddea8c_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/7b26f1d0-dcb9-48dc-9919-76ae42ddea8c/0_1.png",
+          "sha256": "9f97622f75a5f4c6a3cec4629214e907e2186f5e802b878568a427496a0e3400"
+        },
+        {
+          "file": "mj_7b26f1d0-dcb9-48dc-9919-76ae42ddea8c_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/7b26f1d0-dcb9-48dc-9919-76ae42ddea8c/0_2.png",
+          "sha256": "09fd5631cd51cbc5472dd5161dfc29102b7880588d5d4764ad7164fee58a5538"
+        },
+        {
+          "file": "mj_7b26f1d0-dcb9-48dc-9919-76ae42ddea8c_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/7b26f1d0-dcb9-48dc-9919-76ae42ddea8c/0_3.png",
+          "sha256": "a5a4dc27baee7902624945bc4b6cf081d7ef44f1f4054a09e0a12cea8af1f5fd"
+        }
+      ],
+      "pick": {
+        "index": 1,
+        "file": "ref.png"
+      }
+    }
+  ]
+}

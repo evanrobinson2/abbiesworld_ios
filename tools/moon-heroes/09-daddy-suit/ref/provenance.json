@@ -1,0 +1,81 @@
+{
+  "model": "09-daddy-suit",
+  "set": "Moon Base low-gravity FPS heroes",
+  "art_direction": "Faceted Hero",
+  "date": "2026-10-23",
+  "tool": "Midjourney web v8.2",
+  "jobs": [
+    {
+      "role": "front_color",
+      "job_id": "4fef9cca-c22c-46a8-a16d-8afb85324bd3",
+      "prompt": "low-poly faceted 3D game character, flat-shaded planes, matte gunmetal sci-fi armour with glowing orange light strips, this man: heroic broad adult man about 7.5 heads tall, bald with a short dark beard, kind face, A-pose with arms a little away from the body, full body, front view, square to camera, orthographic, plain light grey background, no helmet --ar 2:3",
+      "attach": "09-daddy-suit/ref/trek_cut.png (from trek daddy_explorer.png), locked",
+      "images": [
+        {
+          "file": "mj_4fef9cca-c22c-46a8-a16d-8afb85324bd3_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/4fef9cca-c22c-46a8-a16d-8afb85324bd3/0_0.png",
+          "sha256": "2f1cd5feccf82b152759ee3152c11ee86a3d643318fdcf92bd11a88d0a1d18fe"
+        },
+        {
+          "file": "mj_4fef9cca-c22c-46a8-a16d-8afb85324bd3_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/4fef9cca-c22c-46a8-a16d-8afb85324bd3/0_1.png",
+          "sha256": "a6e5f7aae378da68957ef4c45372bdd18b5ab74e5685dbcc54a0ad8c23682dae"
+        },
+        {
+          "file": "mj_4fef9cca-c22c-46a8-a16d-8afb85324bd3_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/4fef9cca-c22c-46a8-a16d-8afb85324bd3/0_2.png",
+          "sha256": "e6bd63ac644a721e3748ad18a58e28cf439357740363d30ee2fe75c4a0238beb"
+        },
+        {
+          "file": "mj_4fef9cca-c22c-46a8-a16d-8afb85324bd3_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/4fef9cca-c22c-46a8-a16d-8afb85324bd3/0_3.png",
+          "sha256": "c950c7f614a623218ffdcf27923bc68bd0a031acf4fff1a4ac873b6e783f891a"
+        }
+      ],
+      "pick": {
+        "index": 2,
+        "file": "front_color.png"
+      }
+    },
+    {
+      "role": "turnaround",
+      "job_id": "2fb0b6fe-4647-4c6d-b643-39b578d628e8",
+      "prompt": "low-poly faceted 3D game character turnaround sheet, front view, side view, back view, evenly spaced, same scale, flat-shaded planes, matte gunmetal sci-fi armour with glowing orange light strips, this man: heroic broad adult man about 7.5 heads tall, bald with a short dark beard, kind face, A-pose with arms a little away from the body, full body, orthographic, plain light grey background, no helmet --ar 16:9",
+      "attach": "09-daddy-suit/ref/trek_cut.png, locked",
+      "images": [
+        {
+          "file": "mj_2fb0b6fe-4647-4c6d-b643-39b578d628e8_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/2fb0b6fe-4647-4c6d-b643-39b578d628e8/0_0.png",
+          "sha256": "926cc97874f69dc36c51e4129e9f983f67d325480d2627b4bebeb43f1d127a37"
+        },
+        {
+          "file": "mj_2fb0b6fe-4647-4c6d-b643-39b578d628e8_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/2fb0b6fe-4647-4c6d-b643-39b578d628e8/0_1.png",
+          "sha256": "e27e5fbf4ca3267e72483fe60c426e950f13847efa8128cc06f1a2a3d99d840e"
+        },
+        {
+          "file": "mj_2fb0b6fe-4647-4c6d-b643-39b578d628e8_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/2fb0b6fe-4647-4c6d-b643-39b578d628e8/0_2.png",
+          "sha256": "2ede4ffa0513c9ac0ae9fe65bbbae4c28bad0da0cf2b1e9b5e63b36bde80a5fb"
+        },
+        {
+          "file": "mj_2fb0b6fe-4647-4c6d-b643-39b578d628e8_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/2fb0b6fe-4647-4c6d-b643-39b578d628e8/0_3.png",
+          "sha256": "c49cb1f117387a952289f223abd955e16ff6081db0d44a2bf0300fd0b3f9f526"
+        }
+      ],
+      "pick": {
+        "index": 2,
+        "file": "turnaround.png"
+      }
+    }
+  ]
+}
