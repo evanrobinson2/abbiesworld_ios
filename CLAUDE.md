@@ -66,6 +66,19 @@ Follow these principles; they matter more than any UI grammar. The full study is
   source or ask Evan to upload a reference, and record which one was used.
 - Change requests make a new version of an asset with the request recorded; never silently replace history.
 
+## Every minigame ends with a speed review
+Evan (2026-10-23 09:20Z): "after every natural minigame created you have to analyze the process and look for ways to
+get faster." A story told in words became a playable game in about the time it took to tell (Grace's Basement, the
+School Jump). The speed came from engineered context, not from vibing: the Oracle's game studies and identity records,
+the HUD and information grammar, `GAME_FEEL.md`, `docs/design/INTERACTION_GRAMMAR.md` and the design card.
+- When a thread ships a minigame made from a spoken or written story, it adds a "How it was made, and how to be faster
+  next time" section to the study doc (`docs/oracle/<study>/`): the timeline from Evan's first words to playable and to
+  live (local time, UTC-4), where the time went, what slowed it down, and concrete speedups.
+- Before building the next minigame, read the last two reviews and apply their speedups. Put anything reusable in the
+  shared kit (`simulations/`), not in one study's `play.html`.
+- When a game teaches us a new rule of design or interaction, write it into the canon it belongs to (the grammar,
+  the identity schema, `GAME_FEEL.md`) so the next game starts with it. Examples: `docs/oracle/school/SCHOOL_STUDY.md`.
+
 ## Where things are
 - `prototypes/ranch-atelier/dist/`: the live Ranch Atelier site (abbies-ranch-atelier.vercel.app, ranch.abbies.world).
 - `tools/model-challenge/`: brief, modeler brief, scoring harness (`harness.py`), turnaround splitter, publisher.
