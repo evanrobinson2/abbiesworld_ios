@@ -1,0 +1,51 @@
+{
+  "study": "AW-STUDY-0021 Bruiser Study",
+  "tool": "Midjourney web (v8.2, Standard, Fast), driven in Evan's Chrome",
+  "date": "2026-10-23",
+  "prompt": "character turnaround sheet of this exact low-poly bruiser: front view, side view, back view, three-quarter view, full body, standing relaxed with arms hanging, bald blocky head, heavy brow, grey tank top and grey shorts, barefoot, faceted low-poly clay render, flat grey studio background, orthographic, evenly spaced, same scale --ar 16:9",
+  "reference": {
+    "image": "tools/bruiser-study/ref/bruiser.png",
+    "mode": "Attach to prompt (the site offered no --cref/--oref option on v8.2)"
+  },
+  "jobs": [
+    {
+      "job_id": "632f773e-78a8-439b-95bb-90ef434313b6",
+      "kind": "grid",
+      "images": [
+        {
+          "file": "mj_632f773e-78a8-439b-95bb-90ef434313b6_0.png",
+          "index": 0,
+          "source_url": "https://cdn.midjourney.com/632f773e-78a8-439b-95bb-90ef434313b6/0_0.png",
+          "bytes": 1203462,
+          "sha256": "46e7303e930b41ba514ad57f3a0614c194e6521c4fb098cd0fb89e6d8f8337c6",
+          "size": "1456x816"
+        },
+        {
+          "file": "mj_632f773e-78a8-439b-95bb-90ef434313b6_1.png",
+          "index": 1,
+          "source_url": "https://cdn.midjourney.com/632f773e-78a8-439b-95bb-90ef434313b6/0_1.png",
+          "bytes": 1198017,
+          "sha256": "e1189b37b42c9ec7378a52bb5d39a65378e44a3bbf7d8a2f39fc248828698586",
+          "size": "1456x816"
+        },
+        {
+          "file": "mj_632f773e-78a8-439b-95bb-90ef434313b6_2.png",
+          "index": 2,
+          "source_url": "https://cdn.midjourney.com/632f773e-78a8-439b-95bb-90ef434313b6/0_2.png",
+          "bytes": 1143876,
+          "sha256": "aa9b691f820651848ff99137f46a1d3e6c5c6d6f0bb8d699c0dd1bcdc94e5129",
+          "size": "1456x816"
+        },
+        {
+          "file": "mj_632f773e-78a8-439b-95bb-90ef434313b6_3.png",
+          "index": 3,
+          "source_url": "https://cdn.midjourney.com/632f773e-78a8-439b-95bb-90ef434313b6/0_3.png",
+          "bytes": 1273220,
+          "sha256": "68639af109e68a37ac2d1fa0ebb09b30ba1222a0031ee75bb947eab69dc7a8c6",
+          "size": "1456x816"
+        }
+      ]
+    }
+  ],
+  "notes": "One run only: all four images hold the character (bald blocky head, heavy brow, tank top, shorts, barefoot) and show front, side, back and three-quarter views. Shorts read slightly longer and tighter than the reference."
+}
