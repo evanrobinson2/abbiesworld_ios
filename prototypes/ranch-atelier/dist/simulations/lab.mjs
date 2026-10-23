@@ -87,6 +87,7 @@ import {OrbitControls} from './vendor/OrbitControls.js';
 import {cameraOwnsPointer,sandboxWheel} from './vendor/sandbox-camera.mjs';
 import {installFirstPerson} from './first-person.mjs?v=1';
 import {installGamepad} from './gamepad.mjs?v=1';
+import {installRanchGate} from './worlds/ranch-gate.mjs';
 import {createRanchComposer} from './ranch-composer.js?paths=15';
 import {planAssembly} from './tile-adapter.js?paths=2';
 import {terrainSampler} from './tile-landscape.js?terrain=2';
@@ -332,7 +333,7 @@ pickCanvas.addEventListener('pointerup',e=>{const g=gesture;gesture=null;if(!g||
 // Gamepad and other non-pointer inputs pick through the same path (gamepad.mjs: A taps what is under the screen centre).
 window.RanchPickAt=pickAt;window.RanchCamera={T,camera,orbit,canvas:pickCanvas,stopFollow:()=>cameraFollow.stop(),fit:()=>fit(),world:()=>active?.group||null,bounds:()=>active?(active.fitBounds?.clone()||new T.Box3().setFromObject(active.group)):null,ready:()=>!!active&&!busy&&!(active.arrival&&!active.arrival.done),scene,
  // For the welcome tour: replay the arrival with its own effect, and set the hour for the time-lapse shot.
- arrive:(effect,duration)=>beginArrival({effect,duration}),hour:h=>{if(h==null||!Number.isFinite(h))return farmClock.hour;farmClock={...farmClock,hour:((h%24)+24)%24};updateClock(0);return farmClock.hour;}};installGamepad();
+ arrive:(effect,duration)=>beginArrival({effect,duration}),hour:h=>{if(h==null||!Number.isFinite(h))return farmClock.hour;farmClock={...farmClock,hour:((h%24)+24)%24};updateClock(0);return farmClock.hour;}};installGamepad();installRanchGate({T,scene,camera,orbit,canvas:renderer.domElement,ready:()=>window.RanchCamera.ready(),bounds:()=>window.RanchCamera.bounds(),world:()=>window.RanchCamera.world(),stopFollow:()=>window.RanchCamera.stopFollow()});
 pickCanvas.addEventListener('dblclick',e=>{
  if(cameraOwnsPointer(e)||e.altKey||busy||!active||active.arrival&&!active.arrival.done||itemPickup?.active||motionUI?.active)return;
  const rect=pickCanvas.getBoundingClientRect();pickPointer.set((e.clientX-rect.left)/rect.width*2-1,-(e.clientY-rect.top)/rect.height*2+1);pickRay.setFromCamera(pickPointer,camera);
